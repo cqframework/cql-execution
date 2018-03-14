@@ -17,9 +17,9 @@ build = (src, dest, watch = false) ->
     console.log "Completed transpiling #{src} to #{dest}, exit code #{code}"
 
 buildTestData = (watch = false) ->
-  args = if watch then [':cql-to-elm:watchTestData'] else [':cql-to-elm:generateTestData']
+  args = if watch then ['watchTestData'] else ['generateTestData']
 
-  gradle = spawn './gradlew', args, cwd: "../../java/"
+  gradle = spawn './gradlew', args, cwd: "./test/generator"
   gradle.stderr.on 'data', (data) ->
     process.stderr.write data.toString()
   gradle.stdout.on 'data', (data) ->

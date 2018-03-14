@@ -1,0 +1,24 @@
+apply plugin:'java'
+
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'info.cqframework', name: 'cql-to-elm', version: '1.2.18'
+    compile group: 'net.sf.jopt-simple', name: 'jopt-simple', version: '4.7'
+}
+
+task generateTestData (dependsOn: 'classes', type: JavaExec) {
+    main = 'CoffeeScriptTestDataGenerator'
+    classpath = sourceSets.main.runtimeClasspath
+    args = ["-r", "-i", "${projectDir}/../elm"]
+}
+
+task watchTestData (dependsOn: 'classes', type: JavaExec) {
+    main = 'CoffeeScriptTestDataGenerator'
+    classpath = sourceSets.main.runtimeClasspath
+    args = ["-r", "-w", "-i", "${projectDir}/../elm"]
+}
