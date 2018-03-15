@@ -1,8 +1,7 @@
 # CQL Execution Framework
 
 The CQL Execution Framework is a set of [CoffeeScript](http://coffeescript.org/) libraries that
-can execute CQL artifacts expressed as JSON ELM. At this point, only a small subset of
-functionality has been implemented (and a very simple JSON-based patient format is used).
+can execute CQL artifacts expressed as JSON ELM.
 
 For more information, see the [CQL Execution Framework Overview](OVERVIEW.md).
 
@@ -11,8 +10,9 @@ For more information, see the [CQL Execution Framework Overview](OVERVIEW.md).
 To use this project, you should perform the following steps:
 
 1. Install [Node.js](http://nodejs.org/)
-2. Install [CoffeeScript](http://coffeescript.org/)
-3. Execute the following from the _cql-execution_ directory: `npm install`
+2. Install [Yarn](https://yarnpkg.com)
+3. Install [CoffeeScript](http://coffeescript.org/)
+4. Execute the following from the root directory: `yarn install`
 
 # To Execute Your CQL
 
@@ -24,11 +24,12 @@ There are several steps involved to execture CQL.  First, you must create a JSON
 For easiest integration, we will generate a coffee file using cql-to-elm:
 
 1. Install the [Java 8 SDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-2. `cd ${branch}/Src/java` (replacing `${branch}` with the path to your git branch)
+2. Clone the [clinical_quality_language](https://github.com/cqframework/clinical_quality_language) repository to a location of your choice
+2. `cd ${path_to_clinical_quality_language}/Src/java` (replacing `${path_to_clinical_quality_language}` with the path to the local clone)
 3. `./gradlew :cql-to-elm:installDist`
-4. `./cql-to-elm/build/install/cql-to-elm/bin/cql-to-elm --format=COFFEE --input ${path_to_cql} --output ${branch}/Src/coffeescript/cql-execution/src/`
+4. `./cql-to-elm/build/install/cql-to-elm/bin/cql-to-elm --format=COFFEE --input ${path_to_cql} --output ${path_to_cql-execution}/src/`
 
-The above example put the example CQL into the coffeescript src directory to make things easy, but it
+The above example puts the example CQL into the src directory to make things easy, but it
 doesn't _have_ to go there.  If you put it elsewhere, you'll need to compile it to javascript and
 modify the examples below with the new path (where applicable).
 
@@ -51,7 +52,7 @@ define InDemographic:
 Next, create a coffeescript file to execute the measure.  This file will need to contain (or
 `require`) JSON patient representations for testing as well.  Since our example CQL uses the QUICK
 data model, each patient is represented using a FHIR bundle.  For ease of use, let's put the file
-in the `coffeescript/cql-execution/src` directory:
+in the `src` directory:
 
 ```coffee
 cql = require './cql'
@@ -109,22 +110,22 @@ In the above file, we've assumed the JSON ELM coffeescript file for the measure 
 also assumed a couple of very simple patients.  Let's call the file we just created
 `age-exec.coffee`.
 
-Now we must compile it to javascript in the `${branch}/Src/coffeescript/cql-execution/lib`
-directory.  There is a simple Cakefile build script for this (cake is installed with coffeescript):
+Now we must compile it to javascript in the `lib` directory.  There is a simple Cakefile
+build script for this (cake is installed with coffeescript):
 
-1. `cd ${build}/Src/coffeescript/cql-execution`
+1. `cd ${path_to_cql-execution}`
 2. `cake build`
 
 Now we can execute the measure using Node.js:
 
-1. `cd ${build}/Src/coffeescript/cql-execution/lib`
+1. `cd ${path_to_cql-execution}/lib`
 2. `node age-exec`
 
 If all is well, it should print the result object to standard out.
 
 # To Run the CQL Execution Unit Tests
 
-Execute `npm test` or `cake test`.
+Execute `yarn test` or `cake test`.
 
 # To Develop Tests
 

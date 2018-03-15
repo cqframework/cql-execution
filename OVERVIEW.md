@@ -1,9 +1,9 @@
 CQL Execution Framework Reference Implementation
 ================================================
 
-The reference implementation for executing CQL is currently under development. The reference implementation is intended to be used in CQF pilots and eventually integrated into production eCQM tools such as Bonnie and Cypress.
+The reference implementation for executing CQL is currently under development. The reference implementation is intended to be used in CQF pilots and integrated into production eCQM tools such as Bonnie and Cypress.
 
-The CQL execution framework is licensed under the open source [Apache Version 2.0](../../../LICENSE) license, and available as part of the [clinical_quality_language](https://github.com/cqframework/clinical_quality_language) project on GitHub.
+The CQL execution framework is licensed under the open source [Apache Version 2.0](../../../LICENSE) license.
 
 Technologies
 ------------
@@ -19,7 +19,7 @@ Approach
 
 ### JSON ELM
 
-Despite its name, the CQL execution framework does not execute CQL directly. Instead, it executes a JSON representation of the ELM. The [cql-to-elm](../../java/cql-to-elm) project is a reference implementation for translating CQL to ELM in XML or JSON.
+Despite its name, the CQL execution framework does not execute CQL directly. Instead, it executes a JSON representation of the ELM. The [cql-to-elm](https://github.com/cqframework/clinical_quality_language/tree/master/Src/java/cql-to-elm) project is a reference implementation for translating CQL to ELM in XML or JSON.
 
 Consider the following CQL:
 
@@ -124,4 +124,4 @@ Besides the `exec(patient_source)` method, the Executor class contains a couple 
 Current Status
 --------------
 
-The CQL execution framework is still evolving and is not yet complete. The patient API, code service API, and format of results are likely to change quite a bit as implementation matures. In addition, there are still CQL/ELM operators not yet implemented in the execution framework.
+The CQL execution framework is still evolving and is not yet complete. The patient API, code service API, and format of results may change as implementation matures. In addition, there may be CQL/ELM operators not yet implemented in the execution framework.
