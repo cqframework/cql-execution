@@ -70,8 +70,10 @@ module.exports.CodeRef = class CodeRef extends Expression
   constructor: (json) ->
     super
     @name = json.name
+    @library = json.libraryName
 
   exec: (ctx) ->
+    ctx = if @library then ctx.getLibraryContext(@library) else ctx
     ctx.getCode(@name)?.execute(ctx)
 
 module.exports.ConceptDef = class ConceptDef extends Expression

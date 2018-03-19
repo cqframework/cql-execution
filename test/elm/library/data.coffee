@@ -240,6 +240,10 @@ module.exports['In Age Demographic'] = {
 ### CommonLib
 library Common
 using QUICK
+
+codesystem "SNOMEDCT": '2.16.840.1.113883.6.96'
+code "directReferenceCode": '428371000124100' from "SNOMEDCT" display 'directReferenceCode'
+
 parameter MeasurementPeriod default Interval[DateTime(2013, 1, 1), DateTime(2014, 1, 1))
 
 context Patient
@@ -272,58 +276,79 @@ module.exports['CommonLib'] = {
       },
       "parameters" : {
          "def" : [ {
-            "localId" : "11",
+            "localId" : "14",
             "name" : "MeasurementPeriod",
             "accessLevel" : "Public",
             "default" : {
-               "localId" : "10",
+               "localId" : "13",
                "lowClosed" : true,
                "highClosed" : false,
                "type" : "Interval",
                "low" : {
-                  "localId" : "5",
+                  "localId" : "8",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "2",
+                     "localId" : "5",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2013",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "3",
+                     "localId" : "6",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "4",
+                     "localId" : "7",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }
                },
                "high" : {
-                  "localId" : "9",
+                  "localId" : "12",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "6",
+                     "localId" : "9",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2014",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "7",
+                     "localId" : "10",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "8",
+                     "localId" : "11",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }
                }
+            }
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "localId" : "2",
+            "name" : "SNOMEDCT",
+            "id" : "2.16.840.1.113883.6.96",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "codes" : {
+         "def" : [ {
+            "localId" : "4",
+            "name" : "directReferenceCode",
+            "id" : "428371000124100",
+            "display" : "directReferenceCode",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "localId" : "3",
+               "name" : "SNOMEDCT"
             }
          } ]
       },
@@ -340,30 +365,30 @@ module.exports['CommonLib'] = {
                }
             }
          }, {
-            "localId" : "23",
+            "localId" : "26",
             "name" : "InDemographic",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "23",
+                  "r" : "26",
                   "s" : [ {
                      "value" : [ "define ","InDemographic",":\n" ]
                   }, {
-                     "r" : "22",
+                     "r" : "25",
                      "s" : [ {
-                        "r" : "16",
+                        "r" : "19",
                         "s" : [ {
-                           "r" : "14",
+                           "r" : "17",
                            "s" : [ {
                               "value" : [ "AgeInYearsAt","(" ]
                            }, {
-                              "r" : "13",
+                              "r" : "16",
                               "s" : [ {
                                  "value" : [ "start of " ]
                               }, {
-                                 "r" : "12",
+                                 "r" : "15",
                                  "s" : [ {
                                     "value" : [ "MeasurementPeriod" ]
                                  } ]
@@ -377,17 +402,17 @@ module.exports['CommonLib'] = {
                      }, {
                         "value" : [ " and " ]
                      }, {
-                        "r" : "21",
+                        "r" : "24",
                         "s" : [ {
-                           "r" : "19",
+                           "r" : "22",
                            "s" : [ {
                               "value" : [ "AgeInYearsAt","(" ]
                            }, {
-                              "r" : "18",
+                              "r" : "21",
                               "s" : [ {
                                  "value" : [ "start of " ]
                               }, {
-                                 "r" : "17",
+                                 "r" : "20",
                                  "s" : [ {
                                     "value" : [ "MeasurementPeriod" ]
                                  } ]
@@ -403,13 +428,13 @@ module.exports['CommonLib'] = {
                }
             } ],
             "expression" : {
-               "localId" : "22",
+               "localId" : "25",
                "type" : "And",
                "operand" : [ {
-                  "localId" : "16",
+                  "localId" : "19",
                   "type" : "GreaterOrEqual",
                   "operand" : [ {
-                     "localId" : "14",
+                     "localId" : "17",
                      "precision" : "Year",
                      "type" : "CalculateAgeAt",
                      "operand" : [ {
@@ -420,25 +445,25 @@ module.exports['CommonLib'] = {
                            "type" : "ExpressionRef"
                         }
                      }, {
-                        "localId" : "13",
+                        "localId" : "16",
                         "type" : "Start",
                         "operand" : {
-                           "localId" : "12",
+                           "localId" : "15",
                            "name" : "MeasurementPeriod",
                            "type" : "ParameterRef"
                         }
                      } ]
                   }, {
-                     "localId" : "15",
+                     "localId" : "18",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   } ]
                }, {
-                  "localId" : "21",
+                  "localId" : "24",
                   "type" : "Less",
                   "operand" : [ {
-                     "localId" : "19",
+                     "localId" : "22",
                      "precision" : "Year",
                      "type" : "CalculateAgeAt",
                      "operand" : [ {
@@ -449,16 +474,16 @@ module.exports['CommonLib'] = {
                            "type" : "ExpressionRef"
                         }
                      }, {
-                        "localId" : "18",
+                        "localId" : "21",
                         "type" : "Start",
                         "operand" : {
-                           "localId" : "17",
+                           "localId" : "20",
                            "name" : "MeasurementPeriod",
                            "type" : "ParameterRef"
                         }
                      } ]
                   }, {
-                     "localId" : "20",
+                     "localId" : "23",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "18",
                      "type" : "Literal"
@@ -466,7 +491,7 @@ module.exports['CommonLib'] = {
                } ]
             }
          }, {
-            "localId" : "29",
+            "localId" : "32",
             "name" : "foo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -474,36 +499,36 @@ module.exports['CommonLib'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "29",
+                  "r" : "32",
                   "s" : [ {
                      "value" : [ "define function ","foo"," (","a"," " ]
                   }, {
-                     "r" : "24",
+                     "r" : "27",
                      "s" : [ {
                         "value" : [ "Integer" ]
                      } ]
                   }, {
                      "value" : [ ", ","b"," " ]
                   }, {
-                     "r" : "25",
+                     "r" : "28",
                      "s" : [ {
                         "value" : [ "Integer" ]
                      } ]
                   }, {
                      "value" : [ ") :\n  " ]
                   }, {
-                     "r" : "28",
+                     "r" : "31",
                      "s" : [ {
-                        "r" : "28",
+                        "r" : "31",
                         "s" : [ {
-                           "r" : "26",
+                           "r" : "29",
                            "s" : [ {
                               "value" : [ "a" ]
                            } ]
                         }, {
                            "value" : [ " + " ]
                         }, {
-                           "r" : "27",
+                           "r" : "30",
                            "s" : [ {
                               "value" : [ "b" ]
                            } ]
@@ -513,14 +538,14 @@ module.exports['CommonLib'] = {
                }
             } ],
             "expression" : {
-               "localId" : "28",
+               "localId" : "31",
                "type" : "Add",
                "operand" : [ {
-                  "localId" : "26",
+                  "localId" : "29",
                   "name" : "a",
                   "type" : "OperandRef"
                }, {
-                  "localId" : "27",
+                  "localId" : "30",
                   "name" : "b",
                   "type" : "OperandRef"
                } ]
@@ -528,14 +553,14 @@ module.exports['CommonLib'] = {
             "operand" : [ {
                "name" : "a",
                "operandTypeSpecifier" : {
-                  "localId" : "24",
+                  "localId" : "27",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }, {
                "name" : "b",
                "operandTypeSpecifier" : {
-                  "localId" : "25",
+                  "localId" : "28",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
@@ -557,6 +582,7 @@ define ID: common.InDemographic
 
 define L : Length(Patient.name[0].given[0])
 define FuncTest : common.foo(2, 5)
+define supportLibCode: common."directReferenceCode"
 ###
 
 module.exports['Using CommonLib'] = {
@@ -828,6 +854,41 @@ module.exports['Using CommonLib'] = {
                   "value" : "5",
                   "type" : "Literal"
                } ]
+            }
+         }, {
+            "localId" : "32",
+            "name" : "supportLibCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "32",
+                  "s" : [ {
+                     "value" : [ "define ","supportLibCode",": " ]
+                  }, {
+                     "r" : "31",
+                     "s" : [ {
+                        "r" : "30",
+                        "s" : [ {
+                           "value" : [ "common" ]
+                        } ]
+                     }, {
+                        "value" : [ "." ]
+                     }, {
+                        "r" : "31",
+                        "s" : [ {
+                           "value" : [ "\"directReferenceCode\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "31",
+               "name" : "directReferenceCode",
+               "libraryName" : "common",
+               "type" : "CodeRef"
             }
          } ]
       }
