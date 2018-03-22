@@ -1,20 +1,22 @@
 { Library } = require '../elm/library'
 { Exception } = require '../datatypes/exception'
 { typeIsArray } = require '../util/util'
+dt = require '../datatypes/datatypes'
+
 util = require 'util'
 Function::property = (prop, desc) ->
   Object.defineProperty @prototype, prop, desc
 
 module.exports.Context = class Context
 
-  constructor: (@parent, @_codeService = null, _parameters = {}) ->
+  constructor: (@parent, @_codeService = null, _parameters = {}, @executionDateTime = dt.DateTime.fromDate(new Date())) ->
     @context_values = {}
     @library_context = {}
     @localId_context = {}
     # TODO: If there is an issue with number of parameters look into cql4browsers fix: 387ea77538182833283af65e6341e7a05192304c
     @checkParameters(_parameters) # not crazy about possibly throwing an error in a constructor, but...
     @_parameters = _parameters
-
+    
   @property "parameters" ,
     get: ->
       @_parameters || @parent?.parameters
@@ -61,6 +63,22 @@ module.exports.Context = class Context
       @parent.parameters[name]
     else if @parent?
       @parent.getParentParameter name
+
+  getTimezoneOffset: ->
+    if @executionDateTime?
+      @executionDateTime.timezoneOffset
+    else if  @parent?.getTimezoneOffset?
+      @parent.getTimezoneOffset()
+    else
+      null
+
+  getExecutionDateTime: ->
+    if @executionDateTime?
+      @executionDateTime
+    else if @parent?.getExecutionDateTime?
+      @parent.getExecutionDateTime()
+    else
+      null
 
   getValueSet: (name) ->
     @parent?.getValueSet(name)
@@ -193,26 +211,24 @@ module.exports.Context = class Context
       ((! val.high?) || @matchesInstanceType(val.high, pointType))
 
 module.exports.PatientContext = class PatientContext extends Context
-  constructor: (@library,@patient,codeService,parameters) ->
-    super(@library,codeService,parameters)
+  constructor: (@library, @patient, codeService, parameters, @executionDateTime) ->
+    super(@library, codeService, parameters, @executionDateTime)
 
   rootContext:  -> @
 
   getLibraryContext: (library) ->
-    @library_context[library] ||= new PatientContext(@get(library),@patient,@codeService,@parameters)
+    @library_context[library] ||= new PatientContext(@get(library),@patient,@codeService,@parameters,@executionDateTime)
 
   getLocalIdContext: (localId) ->
-    @localId_context[localId] ||= new PatientContext(@get(library),@patient,@codeService,@parameters)
+    @localId_context[localId] ||= new PatientContext(@get(library),@patient,@codeService,@parameters,@executionDateTime)
 
   findRecords: ( profile) ->
     @patient?.findRecords(profile)
 
-
-
 module.exports.PopulationContext = class PopulationContext extends Context
 
-  constructor: (@library, @results, codeService, parameters) ->
-    super(@library,codeService,parameters)
+  constructor: (@library, @results, codeService, parameters, @executionDateTime) ->
+    super(@library, codeService, parameters, @executionDateTime)
 
   rootContext:  -> @
 
