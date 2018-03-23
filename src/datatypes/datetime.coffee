@@ -24,16 +24,19 @@ module.exports.DateTime = class DateTime
 
   @fromDate: (date, timezoneOffset) ->
     if timezoneOffset?
-      date = new Date(date.getTime() + (timezoneOffset * 60 * 60 * 1000))
-      new DateTime(
-        date.getUTCFullYear(),
-        date.getUTCMonth() + 1,
-        date.getUTCDate(),
-        date.getUTCHours(),
-        date.getUTCMinutes(),
-        date.getUTCSeconds(),
-        date.getUTCMilliseconds(),
-        timezoneOffset)
+      if date instanceof DateTime
+        date
+      else
+        date = new Date(date.getTime() + (timezoneOffset * 60 * 60 * 1000))
+        new DateTime(
+          date.getUTCFullYear(),
+          date.getUTCMonth() + 1,
+          date.getUTCDate(),
+          date.getUTCHours(),
+          date.getUTCMinutes(),
+          date.getUTCSeconds(),
+          date.getUTCMilliseconds(),
+          timezoneOffset)
     else
       new DateTime(
         date.getFullYear(),

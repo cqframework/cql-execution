@@ -9,7 +9,7 @@ Function::property = (prop, desc) ->
 
 module.exports.Context = class Context
 
-  constructor: (@parent, @_codeService = null, _parameters = {}, @executionDateTime = dt.DateTime.fromDate(new Date())) ->
+  constructor: (@parent, @_codeService = null, _parameters = {}) ->
     @context_values = {}
     @library_context = {}
     @localId_context = {}
@@ -67,7 +67,7 @@ module.exports.Context = class Context
   getTimezoneOffset: ->
     if @executionDateTime?
       @executionDateTime.timezoneOffset
-    else if  @parent?.getTimezoneOffset?
+    else if @parent?.getTimezoneOffset?
       @parent.getTimezoneOffset()
     else
       null
@@ -211,8 +211,8 @@ module.exports.Context = class Context
       ((! val.high?) || @matchesInstanceType(val.high, pointType))
 
 module.exports.PatientContext = class PatientContext extends Context
-  constructor: (@library, @patient, codeService, parameters, @executionDateTime) ->
-    super(@library, codeService, parameters, @executionDateTime)
+  constructor: (@library, @patient, codeService, parameters, @executionDateTime = dt.DateTime.fromDate(new Date())) ->
+    super(@library, codeService, parameters)
 
   rootContext:  -> @
 
@@ -227,8 +227,8 @@ module.exports.PatientContext = class PatientContext extends Context
 
 module.exports.PopulationContext = class PopulationContext extends Context
 
-  constructor: (@library, @results, codeService, parameters, @executionDateTime) ->
-    super(@library, codeService, parameters, @executionDateTime)
+  constructor: (@library, @results, codeService, parameters,, @executionDateTime = dt.DateTime.fromDate(new Date())) ->
+    super(@library, codeService, parameters)
 
   rootContext:  -> @
 
