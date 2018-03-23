@@ -2,7 +2,6 @@
 { Exception } = require '../datatypes/exception'
 { typeIsArray } = require '../util/util'
 dt = require '../datatypes/datatypes'
-
 util = require 'util'
 Function::property = (prop, desc) ->
   Object.defineProperty @prototype, prop, desc
@@ -16,7 +15,7 @@ module.exports.Context = class Context
     # TODO: If there is an issue with number of parameters look into cql4browsers fix: 387ea77538182833283af65e6341e7a05192304c
     @checkParameters(_parameters) # not crazy about possibly throwing an error in a constructor, but...
     @_parameters = _parameters
-    
+ 
   @property "parameters" ,
     get: ->
       @_parameters || @parent?.parameters
@@ -227,7 +226,7 @@ module.exports.PatientContext = class PatientContext extends Context
 
 module.exports.PopulationContext = class PopulationContext extends Context
 
-  constructor: (@library, @results, codeService, parameters,, @executionDateTime = dt.DateTime.fromDate(new Date())) ->
+  constructor: (@library, @results, codeService, parameters, @executionDateTime = dt.DateTime.fromDate(new Date())) ->
     super(@library, codeService, parameters)
 
   rootContext:  -> @
