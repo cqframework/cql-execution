@@ -116,7 +116,7 @@ module.exports.CalculateAge = class CalculateAge extends Expression
 
   exec: (ctx) ->
     date1 = @execArgs(ctx)
-    date2 = dt.DateTime.fromDate(ctx.getExecutionDateTime(), ctx.getTimezoneOffset())
+    date2 = dt.DateTime.fromDate(ctx.getExecutionDateTime())
     result = date1?.durationBetween(date2, @precision.toLowerCase())
     if result? && result.isPoint() then result.low else result
 
