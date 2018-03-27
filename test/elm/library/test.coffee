@@ -1,7 +1,8 @@
 should = require 'should'
 setup = require '../../setup'
 data = require './data'
-{Repository} = require '../../../lib/cql'
+{equivalent}= require '../../../lib/util/comparison'
+{Repository, Code} = require '../../../lib/cql'
 
 { p1, p2 } = require './patients'
 
@@ -35,6 +36,10 @@ describe 'Using CommonLib', ->
     @results.patientResults['2'].ID.should.equal true
     @results.patientResults['2'].FuncTest.should.equal 7
     @results.patientResults['1'].FuncTest.should.equal 7
+
+  it "should find the code defined in the included library", ->
+    @supportLibCode.exec(@ctx).should.exist
+    equivalent(@supportLibCode.exec(@ctx), new Code('428371000124100', '2.16.840.1.113883.6.96', 'foo', 'directReferenceCode')).should.be.true()
 
 describe 'Using CommonLib2', ->
   @beforeEach ->

@@ -2691,10 +2691,12 @@
     function CodeRef(json) {
       CodeRef.__super__.constructor.apply(this, arguments);
       this.name = json.name;
+      this.library = json.libraryName;
     }
 
     CodeRef.prototype.exec = function(ctx) {
       var ref;
+      ctx = this.library ? ctx.getLibraryContext(this.library) : ctx;
       return (ref = ctx.getCode(this.name)) != null ? ref.execute(ctx) : void 0;
     };
 
