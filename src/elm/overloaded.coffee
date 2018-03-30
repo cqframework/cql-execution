@@ -86,8 +86,6 @@ module.exports.Intersect = class Intersect extends Expression
       else IVL
     lib.doIntersect(a, b)
 
-module.exports.ArrayIndexOutOfBoundsException = ArrayIndexOutOfBoundsException = class ArrayIndexOutOfBoundsException extends Exception
-
 module.exports.Indexer = class Indexer extends Expression
   constructor: (json) ->
     super
@@ -95,7 +93,7 @@ module.exports.Indexer = class Indexer extends Expression
   exec: (ctx) ->
     [operand, index] = @execArgs ctx
     if not operand? or not index? then return null
-    if index < 0 or index >= operand.length then throw new ArrayIndexOutOfBoundsException()
+    if index < 0 or index >= operand.length then return null
     operand[index]
 
 module.exports.In = class In extends Expression
