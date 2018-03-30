@@ -207,6 +207,21 @@ describe 'Now', ->
     now.millisecond.should.exist
     now.timezoneOffset.should.equal "0"
 
+  it 'should return all date components representing now using a passed in timezone using a child context', ->
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
+    @child_ctx = @ctx.childContext()
+    now = @nowVar.exec @child_ctx
+    now.isTime().should.be.false()
+    now.year.should.equal @child_ctx.getExecutionDateTime().year
+    now.month.should.equal @child_ctx.getExecutionDateTime().month
+    now.day.should.equal @child_ctx.getExecutionDateTime().day
+    now.hour.should.equal @child_ctx.getExecutionDateTime().hour
+    now.minute.should.exist
+    now.second.should.exist
+    now.millisecond.should.exist
+    now.timezoneOffset.should.equal @child_ctx.getTimezoneOffset()
+    now.timezoneOffset.should.equal "0"
+
 describe 'TimeOfDay', ->
   @beforeEach ->
     setup @, data

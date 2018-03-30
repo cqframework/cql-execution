@@ -15,7 +15,7 @@ module.exports.Context = class Context
     # TODO: If there is an issue with number of parameters look into cql4browsers fix: 387ea77538182833283af65e6341e7a05192304c
     @checkParameters(_parameters) # not crazy about possibly throwing an error in a constructor, but...
     @_parameters = _parameters
- 
+
   @property "parameters" ,
     get: ->
       @_parameters || @parent?.parameters
