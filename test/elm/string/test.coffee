@@ -121,7 +121,7 @@ describe 'Indexer', ->
   it 'should get letter at index', ->
     @helloWorldSix.exec(@ctx).should.equal 'o'
 
-  it 'should not return null on index 0', ->
+  it 'should not return null on index 0 (no longer out of bounds)', ->
     should(() => @helloWorldZero.exec(@ctx)).not.be.null
 
   it 'should return null on index 20 (out of bounds)', ->
