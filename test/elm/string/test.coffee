@@ -2,7 +2,6 @@ should = require 'should'
 setup = require '../../setup'
 data = require './data'
 str = require '../../../lib/elm/string'
-{ArrayIndexOutOfBoundsException} = require '../../../lib/elm/overloaded'
 
 describe 'Concat', ->
   @beforeEach ->
@@ -122,11 +121,11 @@ describe 'Indexer', ->
   it 'should get letter at index', ->
     @helloWorldSix.exec(@ctx).should.equal 'o'
 
-  it 'should not error on index 0 (no longer out of bounds)', ->
-    should(() => @helloWorldZero.exec(@ctx)).not.throw(ArrayIndexOutOfBoundsException)
+  it 'should not return null on index 0 (no longer out of bounds)', ->
+    should(() => @helloWorldZero.exec(@ctx)).not.be.null
 
-  it 'should error on index 20 (out of bounds)', ->
-    should(() => @helloWorldTwenty.exec(@ctx)).throw(ArrayIndexOutOfBoundsException)
+  it 'should return null on index 20 (out of bounds)', ->
+    should(() => @helloWorldTwenty.exec(@ctx)).be.null
 
   it 'should return null when string is null', ->
     should(@nullString.exec(@ctx)).be.null

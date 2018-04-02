@@ -1,7 +1,6 @@
 should = require 'should'
 setup = require '../../setup'
 data = require './data'
-{ArrayIndexOutOfBoundsException} = require '../../../lib/elm/overloaded'
 
 describe 'List', ->
   @beforeEach ->
@@ -184,11 +183,11 @@ describe 'Indexer', ->
   it 'should return the correct item based on the 0-based index', ->
     @secondItem.exec(@ctx).should.equal 'b'
 
-  it 'should NOT throw ArrayIndexOutOfBoundsException when accessing index 0', ->
-    should(() => @zeroIndex.exec(@ctx)).not.throw(ArrayIndexOutOfBoundsException)
+  it 'should NOT return null when accessing index 0', ->
+    should(() => @zeroIndex.exec(@ctx)).not.be.null
 
-  it 'should throw ArrayIndexOutOfBoundsException when accessing out of bounds index', ->
-    should(() => @outOfBounds.exec(@ctx)).throw(ArrayIndexOutOfBoundsException)
+  it 'should return null when accessing out of bounds index', ->
+    should(() => @outOfBounds.exec(@ctx)).be.null
 
   it 'should return null if either arg is null', ->
     should(@nullList.exec(@ctx)).be.null
