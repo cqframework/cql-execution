@@ -43136,7 +43136,7 @@
       } else if (((ref = this.parent) != null ? ref.getTimezoneOffset : void 0) != null) {
         return this.parent.getTimezoneOffset();
       } else {
-        return null;
+        throw new Exception("No Timezone Offset has been set");
       }
     };
 
@@ -43147,7 +43147,7 @@
       } else if (((ref = this.parent) != null ? ref.getExecutionDateTime : void 0) != null) {
         return this.parent.getExecutionDateTime();
       } else {
-        return null;
+        throw new Exception("No Execution DateTime has been set");
       }
     };
 

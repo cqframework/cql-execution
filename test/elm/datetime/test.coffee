@@ -177,6 +177,13 @@ describe 'Today', ->
     today.timezoneOffset.should.equal "0"
     should.not.exist(today[field]) for field in [ 'hour', 'minute', 'second', 'millisecond' ]
 
+  it 'should throw an exception because no execution datetime has been set', ->
+    try
+      @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
+      @ctx.executionDateTime = @ctx.executionDateTime = null
+      @todayVar.exec(@ctx).should.equal "No Execution DateTime has been set"
+    catch
+
 describe 'Now', ->
   @beforeEach ->
     setup @, data

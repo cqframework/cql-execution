@@ -69,7 +69,7 @@ module.exports.Context = class Context
     else if @parent?.getTimezoneOffset?
       @parent.getTimezoneOffset()
     else
-      null
+      throw new Exception("No Timezone Offset has been set")
 
   getExecutionDateTime: ->
     if @executionDateTime?
@@ -77,7 +77,7 @@ module.exports.Context = class Context
     else if @parent?.getExecutionDateTime?
       @parent.getExecutionDateTime()
     else
-      null
+      throw new Exception("No Execution DateTime has been set")
 
   getValueSet: (name) ->
     @parent?.getValueSet(name)
