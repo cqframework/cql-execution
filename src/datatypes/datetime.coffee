@@ -23,6 +23,7 @@ module.exports.DateTime = class DateTime
       null
 
   @fromDate: (date, timezoneOffset) ->
+    if (date instanceof DateTime) then return date
     if timezoneOffset?
       date = new Date(date.getTime() + (timezoneOffset * 60 * 60 * 1000))
       new DateTime(

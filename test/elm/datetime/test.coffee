@@ -1,6 +1,8 @@
 should = require 'should'
 setup = require '../../setup'
 data = require './data'
+DT = require '../../../lib/datatypes/datatypes'
+{ PatientContext } =  require '../../../lib/cql'
 { Uncertainty } = require '../../../lib/datatypes/uncertainty'
 
 describe 'DateTime', ->
@@ -154,33 +156,78 @@ describe 'Time', ->
 describe 'Today', ->
   @beforeEach ->
     setup @, data
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters)
 
   it 'should return only day components and timezone of today', ->
-    jsDate = new Date()
     today = @todayVar.exec @ctx
     today.isTime().should.be.false()
-    today.year.should.equal jsDate.getFullYear()
-    today.month.should.equal jsDate.getMonth() + 1
-    today.day.should.equal jsDate.getDate()
-    today.timezoneOffset.should.equal jsDate.getTimezoneOffset() / 60 * -1
+    today.year.should.equal @ctx.getExecutionDateTime().year
+    today.month.should.equal @ctx.getExecutionDateTime().month
+    today.day.should.equal @ctx.getExecutionDateTime().day
+    today.timezoneOffset.should.equal @ctx.getTimezoneOffset()
     should.not.exist(today[field]) for field in [ 'hour', 'minute', 'second', 'millisecond' ]
+
+  it 'should return only day components and timezone of today using the passed in timezone', ->
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
+    today = @todayVar.exec @ctx
+    today.isTime().should.be.false()
+    today.year.should.equal @ctx.getExecutionDateTime().year
+    today.month.should.equal @ctx.getExecutionDateTime().month
+    today.day.should.equal @ctx.getExecutionDateTime().day
+    today.timezoneOffset.should.equal "0"
+    should.not.exist(today[field]) for field in [ 'hour', 'minute', 'second', 'millisecond' ]
+
+  it 'should throw an exception because no execution datetime has been set', ->
+    try
+      @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
+      @ctx.executionDateTime = @ctx.executionDateTime = null
+      @todayVar.exec(@ctx).should.equal "No Execution DateTime has been set"
+    catch
 
 describe 'Now', ->
   @beforeEach ->
     setup @, data
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters)
 
   it 'should return all date components representing now', ->
-    jsDate = new Date()
     now = @nowVar.exec @ctx
     now.isTime().should.be.false()
-    now.year.should.equal jsDate.getFullYear()
-    now.month.should.equal jsDate.getMonth() + 1
-    now.day.should.equal jsDate.getDate()
-    now.hour.should.equal jsDate.getHours()
+    now.year.should.equal @ctx.getExecutionDateTime().year
+    now.month.should.equal @ctx.getExecutionDateTime().month
+    now.day.should.equal @ctx.getExecutionDateTime().day
+    now.hour.should.equal @ctx.getExecutionDateTime().hour
     now.minute.should.exist
     now.second.should.exist
     now.millisecond.should.exist
-    now.timezoneOffset.should.equal jsDate.getTimezoneOffset() / 60 * -1
+    now.timezoneOffset.should.equal @ctx.getTimezoneOffset()
+
+  it 'should return all date components representing now using a passed in timezone', ->
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
+    now = @nowVar.exec @ctx
+    now.isTime().should.be.false()
+    now.year.should.equal @ctx.getExecutionDateTime().year
+    now.month.should.equal @ctx.getExecutionDateTime().month
+    now.day.should.equal @ctx.getExecutionDateTime().day
+    now.hour.should.equal @ctx.getExecutionDateTime().hour
+    now.minute.should.exist
+    now.second.should.exist
+    now.millisecond.should.exist
+    now.timezoneOffset.should.equal "0"
+
+  it 'should return all date components representing now using a passed in timezone using a child context', ->
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
+    @child_ctx = @ctx.childContext()
+    now = @nowVar.exec @child_ctx
+    now.isTime().should.be.false()
+    now.year.should.equal @child_ctx.getExecutionDateTime().year
+    now.month.should.equal @child_ctx.getExecutionDateTime().month
+    now.day.should.equal @child_ctx.getExecutionDateTime().day
+    now.hour.should.equal @child_ctx.getExecutionDateTime().hour
+    now.minute.should.exist
+    now.second.should.exist
+    now.millisecond.should.exist
+    now.timezoneOffset.should.equal @child_ctx.getTimezoneOffset()
+    now.timezoneOffset.should.equal "0"
 
 describe 'TimeOfDay', ->
   @beforeEach ->

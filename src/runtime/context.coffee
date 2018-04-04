@@ -1,6 +1,7 @@
 { Library } = require '../elm/library'
 { Exception } = require '../datatypes/exception'
 { typeIsArray } = require '../util/util'
+dt = require '../datatypes/datatypes'
 util = require 'util'
 Function::property = (prop, desc) ->
   Object.defineProperty @prototype, prop, desc
@@ -61,6 +62,22 @@ module.exports.Context = class Context
       @parent.parameters[name]
     else if @parent?
       @parent.getParentParameter name
+
+  getTimezoneOffset: ->
+    if @executionDateTime?
+      @executionDateTime.timezoneOffset
+    else if @parent?.getTimezoneOffset?
+      @parent.getTimezoneOffset()
+    else
+      throw new Exception("No Timezone Offset has been set")
+
+  getExecutionDateTime: ->
+    if @executionDateTime?
+      @executionDateTime
+    else if @parent?.getExecutionDateTime?
+      @parent.getExecutionDateTime()
+    else
+      throw new Exception("No Execution DateTime has been set")
 
   getValueSet: (name) ->
     @parent?.getValueSet(name)
@@ -193,26 +210,24 @@ module.exports.Context = class Context
       ((! val.high?) || @matchesInstanceType(val.high, pointType))
 
 module.exports.PatientContext = class PatientContext extends Context
-  constructor: (@library,@patient,codeService,parameters) ->
-    super(@library,codeService,parameters)
+  constructor: (@library, @patient, codeService, parameters, @executionDateTime = dt.DateTime.fromDate(new Date())) ->
+    super(@library, codeService, parameters)
 
   rootContext:  -> @
 
   getLibraryContext: (library) ->
-    @library_context[library] ||= new PatientContext(@get(library),@patient,@codeService,@parameters)
+    @library_context[library] ||= new PatientContext(@get(library),@patient,@codeService,@parameters,@executionDateTime)
 
   getLocalIdContext: (localId) ->
-    @localId_context[localId] ||= new PatientContext(@get(library),@patient,@codeService,@parameters)
+    @localId_context[localId] ||= new PatientContext(@get(library),@patient,@codeService,@parameters,@executionDateTime)
 
   findRecords: ( profile) ->
     @patient?.findRecords(profile)
 
-
-
 module.exports.PopulationContext = class PopulationContext extends Context
 
-  constructor: (@library, @results, codeService, parameters) ->
-    super(@library,codeService,parameters)
+  constructor: (@library, @results, codeService, parameters, @executionDateTime = dt.DateTime.fromDate(new Date())) ->
+    super(@library, codeService, parameters)
 
   rootContext:  -> @
 

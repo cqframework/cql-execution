@@ -2,6 +2,8 @@ should = require 'should'
 setup = require '../../setup'
 data = require './data'
 vsets = require './valuesets'
+DT = require '../../../lib/datatypes/datatypes'
+{ PatientContext } =  require '../../../lib/cql'
 { Uncertainty } = require '../../../lib/datatypes/uncertainty'
 { p1, p2 } = require './patients'
 { PatientSource} = require '../../../lib/cql-patient'
@@ -158,17 +160,20 @@ describe 'CalculateAge', ->
     # Note, tests are inexact (otherwise test needs to repeat exact logic we're testing)
     # p1 birth date is 1980-06-17
     @bday = new Date(1980, 5, 17)
-    @today = new Date()
+    @bdayPlus20 = new Date(2000, 5, 18)
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(@bdayPlus20))
+
+    @today = @ctx.getExecutionDateTime()
     # according to spec, dates without timezones are in *current* time offset, so need to adjust
-    offsetDiff = @today.getTimezoneOffset() - @bday.getTimezoneOffset()
+    offsetDiff = @today.toJSDate().getTimezoneOffset() - @bday.getTimezoneOffset()
     @bday.setMinutes(@bday.getMinutes() + offsetDiff)
 
     # this is getting the possible number of months in years with the addtion of an offset
     # to get the correct number of months
-    month_offset = if @today.getMonth() == 5 && @today.getDate() < 17 then 6 else 5
-    @full_months = ((@today.getFullYear() - 1980) * 12) + (@today.getMonth() - month_offset)
+    month_offset = if @today.month == 5 && @today.getDate() < 17 then 6 else 5
+    @full_months = ((@today.year - 1980) * 12) + (@today.month - month_offset)
 
-    @timediff = @today - @bday # diff in milliseconds
+    @timediff = @today.toJSDate() - @bday # diff in milliseconds
 
   it 'should execute age in years', ->
     @years.exec(@ctx).should.equal @full_months // 12

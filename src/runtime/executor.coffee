@@ -23,17 +23,17 @@ module.exports.Executor = class Executor
       patientSource.nextPatient()
     r
 
-  exec: (patientSource) ->
-    Results r = @exec_patient_context(patientSource)
+  exec: (patientSource, executionDateTime) ->
+    Results r = @exec_patient_context(patientSource, executionDateTime)
     popContext = new PopulationContext(@library,r,@codeService,@parameters)
     for key,expr of @library.expressions when expr.context is "Population"
        r.recordPopulationResult( key, expr.exec(popContext))
     r
 
-  exec_patient_context: (patientSource) ->
+  exec_patient_context: (patientSource, executionDateTime) ->
     Results r = new Results()
     while p = patientSource.currentPatient()
-      patient_ctx = new PatientContext(@library,p,@codeService,@parameters)
+      patient_ctx = new PatientContext(@library,p,@codeService,@parameters,executionDateTime)
       for key,expr of @library.expressions when expr.context is "Patient"
         r.recordPatientResult(patient_ctx, key, expr.execute(patient_ctx))
       patientSource.nextPatient()

@@ -1,6 +1,6 @@
 window.cql = require '../../cql'
 
-window.executeSimpleELM = (elm, patientSource, valueSets, libraryName, version, parameters = {}) ->
+window.executeSimpleELM = (elm, patientSource, valueSets, libraryName, version, executionDateTime, parameters = {}) ->
   if Array.isArray(elm)
     if elm.length > 1
       rep = new cql.Repository(elm)
@@ -12,4 +12,4 @@ window.executeSimpleELM = (elm, patientSource, valueSets, libraryName, version, 
     
   codeService = new cql.CodeService(valueSets)
   executor = new cql.Executor(lib, codeService, parameters);
-  executor.exec(patientSource)
+  executor.exec(patientSource, executionDateTime)

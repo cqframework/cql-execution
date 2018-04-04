@@ -1,15 +1,20 @@
 { Expression } = require './expression'
 { build } = require './builder'
+{ Literal } = require './literal'
 DT = require '../datatypes/datatypes'
 
 module.exports.DateTime = class DateTime extends Expression
   @PROPERTIES = ['year', 'month', 'day', 'hour', 'minute', 'second', 'millisecond', 'timezoneOffset']
-  constructor: (json) ->
+  constructor: (@json) ->
     super
-    for property in DateTime.PROPERTIES
-      if json[property]? then @[property] = build json[property]
 
   exec: (ctx) ->
+    for property in DateTime.PROPERTIES
+      # if json does not contain 'timezoneOffset' set it to the executionDateTime from the context
+      if @json[property]?
+        @[property] = build @json[property]
+      else if property == 'timezoneOffset' and ctx.getTimezoneOffset()?
+        @[property] = Literal.from({"type": "Literal", "value": ctx.getTimezoneOffset(), "valueType": "{urn:hl7-org:elm-types:r1}Integer"})
     args = ((if @[p]? then @[p].execute(ctx)) for p in DateTime.PROPERTIES)
     new DT.DateTime(args...)
 
@@ -24,29 +29,26 @@ module.exports.Time = class Time extends Expression
     args = ((if @[p]? then @[p].execute(ctx)) for p in Time.PROPERTIES)
     (new DT.DateTime(0, 1, 1, args...)).getTime()
 
-# TODO: Update to use timestamp of request, per the spec
 module.exports.Today = class Today extends Expression
   constructor: (json) ->
     super
 
   exec: (ctx) ->
-    DT.DateTime.fromDate(new Date()).getDate()
+    ctx.getExecutionDateTime().getDate()
 
-# TODO: Update to use timestamp of request, per the spec
 module.exports.Now = class Now extends Expression
   constructor: (json) ->
     super
 
   exec: (ctx) ->
-    DT.DateTime.fromDate(new Date())
+    ctx.getExecutionDateTime()
 
-# TODO: Update to use timestamp of request, per the spec
 module.exports.TimeOfDay = class TimeOfDay extends Expression
   constructor: (json) ->
     super
 
   exec: (ctx) ->
-    DT.DateTime.fromDate(new Date()).getTime()
+    ctx.getExecutionDateTime().getTime()
 
 module.exports.DateTimeComponentFrom = class DateTimeComponentFrom extends Expression
   constructor: (json) ->
