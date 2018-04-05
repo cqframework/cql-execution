@@ -49,8 +49,8 @@ describe 'InValueSet', ->
   it 'should find string code in versioned value set', ->
     @stringInVersionedValueSet.exec(@ctx).should.be.true()
 
-  it 'should find short code in value set', ->
-    @shortCode.exec(@ctx).should.be.true()
+  it 'should not find short code in value set (missing code system)', ->
+    @shortCode.exec(@ctx).should.be.false()
 
   it 'should find medium code in value set', ->
     @mediumCode.exec(@ctx).should.be.true()
@@ -64,7 +64,7 @@ describe 'InValueSet', ->
   it 'should not find string code in versioned value set', ->
     @wrongStringInVersionedValueSet.exec(@ctx).should.be.false()
 
-  it 'should not find short code in value set', ->
+  it 'should not find short code in value set (missing code system)', ->
     @wrongShortCode.exec(@ctx).should.be.false()
 
   it 'should not find medium code in value set', ->

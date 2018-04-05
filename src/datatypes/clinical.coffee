@@ -4,7 +4,11 @@ module.exports.Code = class Code
   constructor: (@code, @system, @version, @display) ->
 
   hasMatch: (code) ->
-    codesInList(toCodeList(code), [@])
+    if typeof code is 'string'
+      # the specific behavior for this is not in the specification
+      false
+    else
+      codesInList(toCodeList(code), [@])
 
 module.exports.Concept = class Concept
   constructor: (@codes = [], @display) ->
@@ -28,18 +32,22 @@ toCodeList = (c) ->
     list
   else if typeIsArray c.codes
     c.codes
-  else if typeof c is 'string'
-    [new Code(c)]
   else
     [c]
 
 
 codesInList = (cl1, cl2) ->
-  cl1.some (c1) -> (cl2.some (c2) -> codesMatch(c1, c2))
+  cl1.some (c1) -> (cl2.some (c2) ->
+    if typeof c1 is 'string'
+      # for "string in codesystem" or "string in valueset" this should compare the string to
+      # the code's "code" field according to the specification.
+      c1 == c2.code
+    else
+      codesMatch(c1, c2))
 
 codesMatch = (code1, code2) ->
   return false if code1.code != code2.code
-  return false if code1.system? and code2.system? and code1.system != code2.system
+  return false if code1.system != code2.system
   return true
 
 module.exports.CodeSystem = class CodeSystem
