@@ -5,8 +5,8 @@ module.exports.Code = class Code
 
   hasMatch: (code) ->
     if typeof code is 'string'
-      # the specific behavior for this is not in the specification
-      false
+      # the specific behavior for this is not in the specification. Matching valueset/codesystem behavior.
+      code == @.code
     else
       codesInList(toCodeList(code), [@])
 
