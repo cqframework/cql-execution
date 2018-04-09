@@ -103,7 +103,7 @@ module.exports.In = class In extends Expression
 
   exec: (ctx) ->
     [item, container] = @execArgs ctx
-    if not item? or not container? then return null
+    if not container? then return null
     lib = switch
       when typeIsArray(container) then LIST
       else IVL

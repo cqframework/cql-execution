@@ -34,10 +34,9 @@ module.exports.InValueSet = class InValueSet extends Expression
     @valueset = new ValueSetRef json.valueset
 
   exec: (ctx) ->
-    # Bonnie-633 Added null check
-    # spec indicates to return null if code is null, false is value set is null
-    return null unless @code?
-    return false unless @valueset?
+    # If the code argument is null, the result is false
+    return false unless @code?
+    throw new Error("ValueSet must be provided to InValueSet function") unless @valueset?
     code = @code.execute(ctx)
     # spec indicates to return null if code is null, false is value set is null
     return null unless code?
