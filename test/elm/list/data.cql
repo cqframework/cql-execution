@@ -78,8 +78,9 @@ define IsIn: 4 in { 3, 4, 5 }
 define IsNotIn: 4 in { 3, 5, 6 }
 define TupleIsIn: Tuple{a: 1, b: 'c'} in {Tuple{a:1, b:'d'}, Tuple{a:1, b:'c'}, Tuple{a:2, b:'c'}}
 define TupleIsNotIn: Tuple{a: 1, b: 'c'} in {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
-define NullIn: null in {1, 2, 3}
+define NullIn: null in {1, 2, null, 3}
 define InNull: 1 in null
+define NullNotIn: null in {1, 2, 3}
 
 // @Test: Contains
 define IsIn: { 3, 4, 5 } contains 4
@@ -87,7 +88,8 @@ define IsNotIn: { 3, 5, 6 } contains 4
 define TupleIsIn: {Tuple{a:1, b:'d'}, Tuple{a:1, b:'c'}, Tuple{a:2, b:'c'}} contains Tuple{a: 1, b: 'c'}
 define TupleIsNotIn: {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} contains Tuple{a: 1, b: 'c'}
 define InNull: (null as List<Integer>) contains 1
-define NullIn: {1, 2, 3} contains null
+define NullIn: {1, 2, null, 3} contains null
+define NullNotIn: {1, 2, 3} contains null
 
 // @Test: Includes
 define IsIncluded: {1, 2, 3, 4, 5} includes {2, 3, 4}

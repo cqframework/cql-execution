@@ -209,9 +209,14 @@ describe 'In', ->
   it 'should execute to false when tuple is not in list', ->
     @tupleIsNotIn.exec(@ctx).should.be.false()
 
-  it 'should return null if either arg is null', ->
-    should(@nullIn.exec(@ctx)).be.null
+  it 'should return null if list is null', ->
     should(@inNull.exec(@ctx)).be.null
+
+  it 'should return true if null is in list', ->
+    should(@nullIn.exec(@ctx)).be.true()
+
+  it 'should return false if null is not in list', ->
+    should(@nullNotIn.exec(@ctx)).be.false()
 
 describe 'Contains', ->
   @beforeEach ->
@@ -229,8 +234,13 @@ describe 'Contains', ->
   it 'should execute to false when tuple is not in list', ->
     @tupleIsNotIn.exec(@ctx).should.be.false()
 
-  it 'should return null if either arg is null', ->
-    should(@nullIn.exec(@ctx)).be.null
+  it 'should return true if null is contained in the list', ->
+    should(@nullIn.exec(@ctx)).be.true()
+
+  it 'should return false if null is not contained in the list', ->
+    should(@nullNotIn.exec(@ctx)).be.false()
+
+  it 'should return null if list is null', ->
     should(@inNull.exec(@ctx)).be.null
 
 describe 'Includes', ->

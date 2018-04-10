@@ -116,7 +116,7 @@ module.exports.Contains = class Contains extends Expression
 
   exec: (ctx) ->
     [container, item] = @execArgs ctx
-    if not item? or not container? then return null
+    if not container? then return null
     lib = switch
       when typeIsArray(container) then LIST
       else IVL
