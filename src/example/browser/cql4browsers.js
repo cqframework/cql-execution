@@ -490,13 +490,7 @@
   };
 
   codesMatch = function(code1, code2) {
-    if (code1.code !== code2.code) {
-      return false;
-    }
-    if (code1.system !== code2.system) {
-      return false;
-    }
-    return true;
+    return code1.code === code2.code && code1.system === code2.system;
   };
 
   module.exports.CodeSystem = CodeSystem = (function() {

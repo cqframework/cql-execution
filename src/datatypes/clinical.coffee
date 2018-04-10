@@ -46,9 +46,7 @@ codesInList = (cl1, cl2) ->
       codesMatch(c1, c2))
 
 codesMatch = (code1, code2) ->
-  return false if code1.code != code2.code
-  return false if code1.system != code2.system
-  return true
+  code1.code == code2.code and code1.system == code2.system
 
 module.exports.CodeSystem = class CodeSystem
   constructor: (@id, @version) ->

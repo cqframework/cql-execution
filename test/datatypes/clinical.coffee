@@ -30,7 +30,7 @@ describe 'Code', ->
   it 'should match code with no version', ->
     @code.hasMatch(new Code('ABC', '5.4.3.2.1')).should.be.true()
 
-  it 'should match code with different version if does not have version', ->
+  it 'should match code with version if does not have version', ->
     @code_no_version.hasMatch(new Code('ABC', '5.4.3.2.1', '3')).should.be.true()
 
   it 'should match code with no version if does not have version', ->
@@ -47,6 +47,9 @@ describe 'Code', ->
 
   it 'should match code with no code system if does not have code system', ->
     @code_no_codesystem.hasMatch(new Code('ABC')).should.be.true()
+
+  it 'should not match different code with no code system if does not have code system', ->
+    @code_no_codesystem.hasMatch(new Code('CBA')).should.be.false()
 
   it 'should match code with Concept object with different versions', ->
     @code.hasMatch(new Concept([new Code('ABC', '5.4.3.2.1', '9'), new Code('ABC', '5.4.3.2.1', '8')])).should.be.true()
