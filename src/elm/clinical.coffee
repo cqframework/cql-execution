@@ -38,8 +38,8 @@ module.exports.InValueSet = class InValueSet extends Expression
     return false unless @code?
     throw new Error("ValueSet must be provided to InValueSet function") unless @valueset?
     code = @code.execute(ctx)
-    # spec indicates to return null if code is null, false is value set is null
-    return null unless code?
+    # spec indicates to return false if code is null, false if value set is null
+    return false unless code?
     valueset = @valueset.execute(ctx)
     if valueset? then valueset.hasMatch code else false
 
