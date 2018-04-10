@@ -130,6 +130,18 @@ describe 'DateTime', ->
 
   it 'should not parse invalid strings', ->
     should.not.exist DateTime.parse '20121025'
+  it 'should throw runtime error when parsing non-string', ->
+    should(() => DateTime.parse 20121025).throw(/.*Invalid DateTime String.*/)
+
+  it 'should throw runtime error when parsing invalid string format', ->
+    should(() => DateTime.parse '20121025').throw(/.*Invalid DateTime String.*/)
+
+  it 'should throw runtime error when parsing invalid date/time values', ->
+    should(() => DateTime.parse '0000-00-00').throw(/.*Invalid DateTime String.*/)
+    should(() => DateTime.parse '2000-11-31T23:59:59.999').throw(/.*Invalid DateTime String.*/)
+
+  it 'should not parse null input', ->
+    should.not.exist DateTime.parse null
 
   it 'should construct from a javascript date', ->
     DateTime.fromDate(new Date(1999, 1, 16, 13, 56, 24, 123)).should.eql DateTime.parse('1999-02-16T13:56:24.123')
@@ -1296,7 +1308,7 @@ describe 'DateTime.before', ->
     DateTime.parse('2000-12-31T23:58:59.999').before(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
     DateTime.parse('2000-12-31T22:59:59.999').before(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
     DateTime.parse('2000-12-30T23:59:59.999').before(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
-    DateTime.parse('2000-11-31T23:59:59.999').before(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
+    DateTime.parse('2000-11-30T23:59:59.999').before(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
     DateTime.parse('1999-12-31T23:59:59.999').before(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
 
   it 'should reject cases where a is after b', ->
@@ -1414,7 +1426,7 @@ describe 'DateTime.sameOrBefore', ->
     DateTime.parse('2000-12-31T23:58:59.999').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
     DateTime.parse('2000-12-31T22:59:59.999').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
     DateTime.parse('2000-12-30T23:59:59.999').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
-    DateTime.parse('2000-11-31T23:59:59.999').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
+    DateTime.parse('2000-11-30T23:59:59.999').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
     DateTime.parse('1999-12-31T23:59:59.999').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
 
   it 'should reject cases where a is after b', ->
@@ -1559,7 +1571,7 @@ describe 'DateTime.after', ->
     DateTime.parse('2000-12-31T23:58:59.999').after(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
     DateTime.parse('2000-12-31T22:59:59.999').after(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
     DateTime.parse('2000-12-30T23:59:59.999').after(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
-    DateTime.parse('2000-11-31T23:59:59.999').after(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
+    DateTime.parse('2000-11-30T23:59:59.999').after(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
     DateTime.parse('1999-12-31T23:59:59.999').after(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
 
   it 'should reject cases where a is b', ->
@@ -1677,7 +1689,7 @@ describe 'DateTime.sameOrAfter', ->
     DateTime.parse('2000-12-31T23:58:59.999').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
     DateTime.parse('2000-12-31T22:59:59.999').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
     DateTime.parse('2000-12-30T23:59:59.999').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
-    DateTime.parse('2000-11-31T23:59:59.999').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
+    DateTime.parse('2000-11-30T23:59:59.999').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
     DateTime.parse('1999-12-31T23:59:59.999').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
 
   it 'should accept cases where a is b', ->

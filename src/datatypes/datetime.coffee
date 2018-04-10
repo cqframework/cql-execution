@@ -6,23 +6,32 @@ module.exports.DateTime = class DateTime
   @FIELDS: [@Unit.YEAR, @Unit.MONTH, @Unit.DAY, @Unit.HOUR, @Unit.MINUTE, @Unit.SECOND, @Unit.MILLISECOND]
 
   @parse: (string) ->
-    match = regex = /(\d{4})(-(\d{2}))?(-(\d{2}))?(T((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(\:?(\d{2}))?))?)?/.exec string
+    return null if string is null
 
-    if match?[0] is string
-      args = [match[1], match[3], match[5], match[8], match[10], match[12], match[14]]
-      # fix up milliseconds by padding zeros and/or truncating (5 --> 500, 50 --> 500, 54321 --> 543, etc.)
-      if args[6]? then args[6] = (args[6] + "00").substring(0, 3)
-      # convert them all to integers
-      args = ((if arg? then parseInt(arg,10)) for arg in args)
-      # convert timezone offset to decimal and add it to arguments
-      if match[18]?
-        num = parseInt(match[18],10) + (if match[20]? then parseInt(match[20],10) / 60 else 0)
-        args.push(if match[17] is '+' then num else num * -1)
-      else if match[15] == 'Z'
-        args.push(0)
-      new DateTime(args...)
-    else
-      null
+    matches = /(\d{4})(-(\d{2}))?(-(\d{2}))?(T((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(\:?(\d{2}))?))?)?/.exec string
+    years= matches[1]
+    months= matches[3]
+    days= matches[5]
+    hours= matches[8]
+    minutes= matches[10]
+    seconds= matches[12]
+    milliseconds= matches[14]
+    milliseconds= normalizeMillisecondsField(milliseconds) if milliseconds?
+    string = normalizeMillisecondsFieldInString(string, matches) if milliseconds?
+
+    beforeString = string
+    throw new Error('Invalid DateTime String' + ' ' + string + '\n' + beforeString) if !isValidDateTimeStringFormat(string)
+
+    args = [years, months, days, hours, minutes, seconds, milliseconds]
+    # convert them all to integers
+    args = ((if arg? then parseInt(arg,10)) for arg in args)
+    # convert timezone offset to decimal and add it to arguments
+    if match[18]?
+      num = parseInt(match[18],10) + (if match[20]? then parseInt(match[20],10) / 60 else 0)
+      args.push(if match[17] is '+' then num else num * -1)
+    else if match[15] == 'Z'
+      args.push(0)
+    new DateTime(args...)
 
   @fromDate: (date, timezoneOffset) ->
     if (date instanceof DateTime) then return date
@@ -391,3 +400,73 @@ module.exports.DateTime = class DateTime
       fieldsToRemove = DateTime.FIELDS.slice(fieldIndex + 1)
       reduced[field] = null for field in fieldsToRemove
     reduced
+
+normalizeMillisecondsFieldInString = (string, matches) ->
+  msString = matches[14]
+  # TODO: verify we are only removing numeral digits
+  msString = normalizeMillisecondsField(msString)
+  [beforeMs, msAndAfter] = string.split('.')
+  timezoneSeparator = getTimezoneSeparatorFromString(msAndAfter)
+
+  timezoneField = msAndAfter?.split(timezoneSeparator)[1] if !!timezoneSeparator
+  timezoneField = '' if !timezoneField?
+  string = beforeMs + '.' + msString + timezoneSeparator + timezoneField
+
+normalizeMillisecondsField = (msString) ->
+  # fix up milliseconds by padding zeros and/or truncating (5 --> 500, 50 --> 500, 54321 --> 543, etc.)
+  msString = (msString + "00").substring(0, 3)
+
+isValidDateTimeStringFormat = (string) ->
+  return false if typeof string isnt 'string'
+  cqlFormats = ['YYYY',
+                'YYYY-MM',
+                'YYYY-MM-DD',
+                'YYYY-MM-DDT+hh',
+                'YYYY-MM-DDT-hh',
+                'YYYY-MM-DDThh',
+                'YYYY-MM-DDThh:mm',
+                'YYYY-MM-DDThh:mm:ss',
+                'YYYY-MM-DDThh:mm:ss+hh',
+                'YYYY-MM-DDThh:mm:ss+hh:mm',
+                'YYYY-MM-DDThh:mm:ss-hh',
+                'YYYY-MM-DDThh:mm:ss-hh:mm',
+                'YYYY-MM-DDThh:mm:ss.fff',
+                'YYYY-MM-DDThh:mm:ss.fff+hh',
+                'YYYY-MM-DDThh:mm:ss.fff+hh:mm',
+                'YYYY-MM-DDThh:mm:ss.fff-hh',
+                'YYYY-MM-DDThh:mm:ss.fff-hh:mm']
+
+  cqlFormatStringWithLength = {}
+  cqlFormatStringWithLength[format.length] = format for format in cqlFormats
+
+  return false if !cqlFormatStringWithLength[string.length]?
+  strict = false
+  moment(string, cqlFormatStringToMomentFormatString(cqlFormatStringWithLength[string.length]), strict).isValid()
+
+cqlFormatStringToMomentFormatString = (string) ->
+  # CQL: 'YYYY-MM-DDThh:mm:ss.fff-hh:mm', Moment: 'YYYY-MM-DD[T]hh:mm:ss.SSS[Z]'
+  [yearMonthDay, timeAndTimeZoneOffset] = string.split('T')
+
+  if timeAndTimeZoneOffset?
+    timezoneSeparator = getTimezoneSeparatorFromString(timeAndTimeZoneOffset)
+
+  momentString = yearMonthDay
+  momentString += '[T]' if string.match(/T/)?
+  if !!timezoneSeparator
+    momentString += timeAndTimeZoneOffset.substring(0, timeAndTimeZoneOffset.search(timezoneSeparator)) + '[Z]'
+  else
+    momentString += timeAndTimeZoneOffset
+
+  momentString = momentString.replace /f/g, 'S'
+
+convertTimezoneOffset = (matches) ->
+  num = parseInt(matches[17],10) + (if matches[19]? then parseInt(matches[19],10) / 60 else 0)
+  if matches[16] is '+' then num else num * -1
+
+getTimezoneSeparatorFromString = (string) ->
+  if msAndAfter?.match(/-/)?.length == 1
+    timezoneSeparator = '-'
+  else if msAndAfter?.match(/\+/)?.length == 1
+    timezoneSeparator = '+'
+  else
+    timezoneSeparator = ''
