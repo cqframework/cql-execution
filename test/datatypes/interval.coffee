@@ -87,6 +87,10 @@ describe 'DateTimeInterval.contains', ->
 
     @all2012.closed.contains(@mid2012.toYear).should.be.true()
 
+  it 'should return null when checking if interval contains null point', ->
+    date = DateTime.parse('2012-01-01T00:00:00.0')
+    should(new Interval(date,null,true,false).contains(null)).be.null
+
   it 'should throw when the argument is an interval', ->
     should(() => @all2012.closed.contains @all2012.open).throw(Error)
 
