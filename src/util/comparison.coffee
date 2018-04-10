@@ -44,6 +44,8 @@ module.exports.greaterThanOrEquals = (a, b, precision = DateTime.Unit.MILLISECON
 
 module.exports.equivalent = equivalent = (a, b) ->
   return a.hasMatch b if typeof a.hasMatch is 'function'
+  if a == null && b == null
+    return true
   return equals a, b
 
 module.exports.equals = equals = (a, b) ->

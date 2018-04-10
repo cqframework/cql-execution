@@ -101,6 +101,9 @@ describe 'equals', ->
     should.not.exist(equals({}.undef, null))
 
 describe 'equivalent', ->
+  it 'should consider two null values to be equivalent', ->
+    equivalent(null, null).should.be.true()
+
   it 'should detect equivalent and non-equivalent codes', ->
     equivalent(new Code('12345', 'Code System', '2016', 'Display Name'), new Code('12345', 'Code System', undefined, undefined)).should.be.true()
     equivalent(new Code('1234', 'First Code System', '2016', 'Display Name'), new Code('1234', 'Different Code System', undefined, undefined)).should.be.false()
