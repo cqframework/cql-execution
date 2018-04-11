@@ -279,6 +279,8 @@ define MillisecondsBetweenUncertainty: difference in milliseconds between NewYea
 define MillisecondsBetweenReversedUncertainty: difference in milliseconds between January2014 and NewYear2014
 define HoursBetween1and3CrossingSpringDST: difference in hours between DateTime(2017, 3, 12, 1, 0, 0, 0, -5.0) and DateTime(2017, 3, 12, 3, 0, 0, 0, -4.0)
 define HoursBetween1and3CrossingFallDST: difference in hours between DateTime(2017, 11, 5, 1, 0, 0, 0, -4.0) and DateTime(2017, 11, 5, 3, 0, 0, 0, -5.0)
+define FirstArgNull: difference in hours between (null as DateTime) and DateTime(2017, 11, 5, 1, 0, 0, 0, -4.0)
+define SecondArgNull: difference in hours between DateTime(2017, 11, 5, 1, 0, 0, 0, -4.0) and (null as DateTime)
 
 // @Test: DifferenceBetween Comparisons
 define NewYear2014: DateTime(2014, 1, 1, 0, 0, 0, 0)

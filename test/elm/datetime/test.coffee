@@ -755,6 +755,11 @@ describe 'DifferenceBetween', ->
   it 'should properly execute hours between when falling back for DST', ->
     @hoursBetween1and3CrossingFallDST.exec(@ctx).should.equal 3
 
+  it 'should return null if first arg is null', ->
+    should(@firstArgNull.exec(@ctx)).be.null
+
+  it 'should return null if second arg is null', ->
+    should(@secondArgNull.exec(@ctx)).be.null
 
 describe 'DifferenceBetween Comparisons', ->
   @beforeEach ->
