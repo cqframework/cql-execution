@@ -955,6 +955,7 @@ define ImpreciseComponentTuple: Tuple {
   Second: second from ImpreciseIdesOfMarch,
   Millisecond: millisecond from ImpreciseIdesOfMarch
 }
+define Timezone: timezone from IdesOfMarch
 define NullDate: year from (null as DateTime)
 ###
 
@@ -1568,31 +1569,64 @@ module.exports['DateTimeComponentFrom'] = {
                } ]
             }
          }, {
-            "localId" : "58",
+            "localId" : "56",
+            "name" : "Timezone",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "56",
+                  "s" : [ {
+                     "value" : [ "define ","Timezone",": " ]
+                  }, {
+                     "r" : "55",
+                     "s" : [ {
+                        "value" : [ "timezone from " ]
+                     }, {
+                        "r" : "54",
+                        "s" : [ {
+                           "value" : [ "IdesOfMarch" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "55",
+               "type" : "TimezoneFrom",
+               "operand" : {
+                  "localId" : "54",
+                  "name" : "IdesOfMarch",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "localId" : "61",
             "name" : "NullDate",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "58",
+                  "r" : "61",
                   "s" : [ {
                      "value" : [ "define ","NullDate",": " ]
                   }, {
-                     "r" : "57",
+                     "r" : "60",
                      "s" : [ {
                         "value" : [ "year from " ]
                      }, {
-                        "r" : "56",
+                        "r" : "59",
                         "s" : [ {
                            "value" : [ "(" ]
                         }, {
-                           "r" : "56",
+                           "r" : "59",
                            "s" : [ {
-                              "r" : "54",
+                              "r" : "57",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "55",
+                              "r" : "58",
                               "s" : [ {
                                  "value" : [ "DateTime" ]
                               } ]
@@ -1605,20 +1639,537 @@ module.exports['DateTimeComponentFrom'] = {
                }
             } ],
             "expression" : {
-               "localId" : "57",
+               "localId" : "60",
                "precision" : "Year",
                "type" : "DateTimeComponentFrom",
                "operand" : {
-                  "localId" : "56",
+                  "localId" : "59",
                   "strict" : false,
                   "type" : "As",
                   "operand" : {
-                     "localId" : "54",
+                     "localId" : "57",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "55",
+                     "localId" : "58",
                      "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+
+### TimeComponentFrom
+library TestSnippet version '1'
+using QUICK
+context Patient
+define FullyDefinedTime: Time(12, 10, 59, 456, -8.0)
+define Hour: hour from FullyDefinedTime
+define Minute: minute from FullyDefinedTime
+define Second: second from FullyDefinedTime
+define Millisecond: millisecond from FullyDefinedTime
+define Timezone: timezone from FullyDefinedTime
+define ImpreciseTime: Time(12, 10)
+define ImpreciseTimeComponentTuple: Tuple {
+  Hour: hour from ImpreciseTime,
+  Minute: minute from ImpreciseTime,
+  Second: second from ImpreciseTime,
+  Millisecond: millisecond from ImpreciseTime
+}
+define NullTime: hour from (null as Time)
+###
+
+module.exports['TimeComponentFrom'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "9",
+            "name" : "FullyDefinedTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "define ","FullyDefinedTime",": " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "Time","(","12",", ","10",", ","59",", ","456",", " ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "-","8.0" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "type" : "Time",
+               "hour" : {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "12",
+                  "type" : "Literal"
+               },
+               "minute" : {
+                  "localId" : "3",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "10",
+                  "type" : "Literal"
+               },
+               "second" : {
+                  "localId" : "4",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "59",
+                  "type" : "Literal"
+               },
+               "millisecond" : {
+                  "localId" : "5",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "456",
+                  "type" : "Literal"
+               },
+               "timezoneOffset" : {
+                  "localId" : "7",
+                  "type" : "Negate",
+                  "operand" : {
+                     "localId" : "6",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "8.0",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         }, {
+            "localId" : "12",
+            "name" : "Hour",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "value" : [ "define ","Hour",": " ]
+                  }, {
+                     "r" : "11",
+                     "s" : [ {
+                        "value" : [ "hour from " ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "value" : [ "FullyDefinedTime" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "11",
+               "precision" : "Hour",
+               "type" : "DateTimeComponentFrom",
+               "operand" : {
+                  "localId" : "10",
+                  "name" : "FullyDefinedTime",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "localId" : "15",
+            "name" : "Minute",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "15",
+                  "s" : [ {
+                     "value" : [ "define ","Minute",": " ]
+                  }, {
+                     "r" : "14",
+                     "s" : [ {
+                        "value" : [ "minute from " ]
+                     }, {
+                        "r" : "13",
+                        "s" : [ {
+                           "value" : [ "FullyDefinedTime" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "14",
+               "precision" : "Minute",
+               "type" : "DateTimeComponentFrom",
+               "operand" : {
+                  "localId" : "13",
+                  "name" : "FullyDefinedTime",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "localId" : "18",
+            "name" : "Second",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "18",
+                  "s" : [ {
+                     "value" : [ "define ","Second",": " ]
+                  }, {
+                     "r" : "17",
+                     "s" : [ {
+                        "value" : [ "second from " ]
+                     }, {
+                        "r" : "16",
+                        "s" : [ {
+                           "value" : [ "FullyDefinedTime" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "17",
+               "precision" : "Second",
+               "type" : "DateTimeComponentFrom",
+               "operand" : {
+                  "localId" : "16",
+                  "name" : "FullyDefinedTime",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "localId" : "21",
+            "name" : "Millisecond",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "21",
+                  "s" : [ {
+                     "value" : [ "define ","Millisecond",": " ]
+                  }, {
+                     "r" : "20",
+                     "s" : [ {
+                        "value" : [ "millisecond from " ]
+                     }, {
+                        "r" : "19",
+                        "s" : [ {
+                           "value" : [ "FullyDefinedTime" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "20",
+               "precision" : "Millisecond",
+               "type" : "DateTimeComponentFrom",
+               "operand" : {
+                  "localId" : "19",
+                  "name" : "FullyDefinedTime",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "localId" : "24",
+            "name" : "Timezone",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "24",
+                  "s" : [ {
+                     "value" : [ "define ","Timezone",": " ]
+                  }, {
+                     "r" : "23",
+                     "s" : [ {
+                        "value" : [ "timezone from " ]
+                     }, {
+                        "r" : "22",
+                        "s" : [ {
+                           "value" : [ "FullyDefinedTime" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "23",
+               "type" : "TimezoneFrom",
+               "operand" : {
+                  "localId" : "22",
+                  "name" : "FullyDefinedTime",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "localId" : "28",
+            "name" : "ImpreciseTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "28",
+                  "s" : [ {
+                     "value" : [ "define ","ImpreciseTime",": " ]
+                  }, {
+                     "r" : "27",
+                     "s" : [ {
+                        "value" : [ "Time","(","12",", ","10",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "27",
+               "type" : "Time",
+               "hour" : {
+                  "localId" : "25",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "12",
+                  "type" : "Literal"
+               },
+               "minute" : {
+                  "localId" : "26",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "10",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "38",
+            "name" : "ImpreciseTimeComponentTuple",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "38",
+                  "s" : [ {
+                     "value" : [ "define ","ImpreciseTimeComponentTuple",": " ]
+                  }, {
+                     "r" : "37",
+                     "s" : [ {
+                        "value" : [ "Tuple {\n  " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "Hour",": " ]
+                        }, {
+                           "r" : "30",
+                           "s" : [ {
+                              "value" : [ "hour from " ]
+                           }, {
+                              "r" : "29",
+                              "s" : [ {
+                                 "value" : [ "ImpreciseTime" ]
+                              } ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ",\n  " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "Minute",": " ]
+                        }, {
+                           "r" : "32",
+                           "s" : [ {
+                              "value" : [ "minute from " ]
+                           }, {
+                              "r" : "31",
+                              "s" : [ {
+                                 "value" : [ "ImpreciseTime" ]
+                              } ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ",\n  " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "Second",": " ]
+                        }, {
+                           "r" : "34",
+                           "s" : [ {
+                              "value" : [ "second from " ]
+                           }, {
+                              "r" : "33",
+                              "s" : [ {
+                                 "value" : [ "ImpreciseTime" ]
+                              } ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ",\n  " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "Millisecond",": " ]
+                        }, {
+                           "r" : "36",
+                           "s" : [ {
+                              "value" : [ "millisecond from " ]
+                           }, {
+                              "r" : "35",
+                              "s" : [ {
+                                 "value" : [ "ImpreciseTime" ]
+                              } ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n}" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "37",
+               "type" : "Tuple",
+               "element" : [ {
+                  "name" : "Hour",
+                  "value" : {
+                     "localId" : "30",
+                     "precision" : "Hour",
+                     "type" : "DateTimeComponentFrom",
+                     "operand" : {
+                        "localId" : "29",
+                        "name" : "ImpreciseTime",
+                        "type" : "ExpressionRef"
+                     }
+                  }
+               }, {
+                  "name" : "Minute",
+                  "value" : {
+                     "localId" : "32",
+                     "precision" : "Minute",
+                     "type" : "DateTimeComponentFrom",
+                     "operand" : {
+                        "localId" : "31",
+                        "name" : "ImpreciseTime",
+                        "type" : "ExpressionRef"
+                     }
+                  }
+               }, {
+                  "name" : "Second",
+                  "value" : {
+                     "localId" : "34",
+                     "precision" : "Second",
+                     "type" : "DateTimeComponentFrom",
+                     "operand" : {
+                        "localId" : "33",
+                        "name" : "ImpreciseTime",
+                        "type" : "ExpressionRef"
+                     }
+                  }
+               }, {
+                  "name" : "Millisecond",
+                  "value" : {
+                     "localId" : "36",
+                     "precision" : "Millisecond",
+                     "type" : "DateTimeComponentFrom",
+                     "operand" : {
+                        "localId" : "35",
+                        "name" : "ImpreciseTime",
+                        "type" : "ExpressionRef"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "43",
+            "name" : "NullTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "43",
+                  "s" : [ {
+                     "value" : [ "define ","NullTime",": " ]
+                  }, {
+                     "r" : "42",
+                     "s" : [ {
+                        "value" : [ "hour from " ]
+                     }, {
+                        "r" : "41",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "41",
+                           "s" : [ {
+                              "r" : "39",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "40",
+                              "s" : [ {
+                                 "value" : [ "Time" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "42",
+               "precision" : "Hour",
+               "type" : "DateTimeComponentFrom",
+               "operand" : {
+                  "localId" : "41",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "39",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "40",
+                     "name" : "{urn:hl7-org:elm-types:r1}Time",
                      "type" : "NamedTypeSpecifier"
                   }
                }

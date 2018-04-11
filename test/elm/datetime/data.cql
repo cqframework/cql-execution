@@ -43,7 +43,24 @@ define ImpreciseComponentTuple: Tuple {
   Second: second from ImpreciseIdesOfMarch,
   Millisecond: millisecond from ImpreciseIdesOfMarch
 }
+define Timezone: timezone from IdesOfMarch
 define NullDate: year from (null as DateTime)
+
+// @Test: TimeComponentFrom
+define FullyDefinedTime: Time(12, 10, 59, 456, -8.0)
+define Hour: hour from FullyDefinedTime
+define Minute: minute from FullyDefinedTime
+define Second: second from FullyDefinedTime
+define Millisecond: millisecond from FullyDefinedTime
+define Timezone: timezone from FullyDefinedTime
+define ImpreciseTime: Time(12, 10)
+define ImpreciseTimeComponentTuple: Tuple {
+  Hour: hour from ImpreciseTime,
+  Minute: minute from ImpreciseTime,
+  Second: second from ImpreciseTime,
+  Millisecond: millisecond from ImpreciseTime
+}
+define NullTime: hour from (null as Time)
 
 // @Test: DateFrom
 define Date: date from DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)

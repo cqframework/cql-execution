@@ -283,8 +283,42 @@ describe 'DateTimeComponentFrom', ->
       Millisecond: null
     }
 
+  it 'should return timezoneOffset from the DateTime', ->
+    @timezone.exec(@ctx).should.equal 1
+
   it 'should return null for null date', ->
     should(@nullDate.exec(@ctx)).be.null
+
+describe 'TimeComponentFrom', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'should return the hour from the date', ->
+    @hour.exec(@ctx).should.equal 12
+
+  it 'should return the minute from the date', ->
+    @minute.exec(@ctx).should.equal 10
+
+  it 'should return the second from the date', ->
+    @second.exec(@ctx).should.equal 59
+
+  it 'should return the millisecond from the date', ->
+    @millisecond.exec(@ctx).should.equal 456
+
+  it 'should return timezoneOffset from the DateTime', ->
+    @timezone.exec(@ctx).should.equal -8
+
+  it 'should return null for imprecise components', ->
+    result = @impreciseTimeComponentTuple.exec(@ctx)
+    result.should.eql {
+      Hour: 12,
+      Minute: 10,
+      Second: null,
+      Millisecond: null
+    }
+
+  it 'should return null for null time', ->
+    should(@nullTime.exec(@ctx)).be.null
 
 describe 'DateFrom', ->
   @beforeEach ->
