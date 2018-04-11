@@ -30592,8 +30592,28 @@ module.exports['DurationBetween'] = {
 library TestSnippet version '1'
 using QUICK
 context Patient
+define Year: DateTime(2014)
+define YearPlus24Months: Year + 24 months
+define YearMinus24Months: Year - 24 months
+define YearAndMonth: DateTime(2014, 1)
+define YearAndMonthPlus8Weeks: YearAndMonth + 8 weeks
+define YearAndMonthMinus8Weeks: YearAndMonth - 8 weeks
+define YearMonthAndDay: DateTime(2014, 2, 4)
+define YearMonthAndDayPlus48Hours: YearMonthAndDay + 48 hours
+define YearMonthAndDayMinus48Hours: YearMonthAndDay - 48 hours
+define YearMonthDayAndHour: DateTime(2014, 2, 4, 11)
+define YearMonthDayAndHourPlus120Minutes: YearMonthDayAndHour + 120 minutes
+define YearMonthDayAndHourMinus120Minutes: YearMonthDayAndHour - 120 minutes
+define YearMonthDayHourAndMinute: DateTime(2014, 2, 4, 11, 50)
+define YearMonthDayHourAndMinutePlus120Seconds: YearMonthDayHourAndMinute + 120 seconds
+define YearMonthDayHourAndMinuteMinus120Seconds: YearMonthDayHourAndMinute - 120 seconds
+define YearMonthDayHourMinuteAndSecond: DateTime(2014, 2, 4, 11, 50, 23)
+define YearMonthDayHourMinuteAndSecondPlus2000Milliseconds: YearMonthDayHourMinuteAndSecond + 2000 milliseconds
+define YearMonthDayHourMinuteAndSecondMinus2000Milliseconds: YearMonthDayHourMinuteAndSecond - 2000 milliseconds
 define June15th2013: DateTime(2013, 6, 15, 0, 0, 0, 0)
 define PlusThreeYears: June15th2013 + 3 years
+define PlusThreeYearsWithFraction: June15th2013 + 3.9 years
+define MinusThreeYearsWithFraction: June15th2013 - 3.9 years
 define MinusThreeYears: June15th2013 - 3 years
 define PlusEightMonths: June15th2013 + 8 months
 define MinusEightMonths: June15th2013 - 8 months
@@ -30609,6 +30629,12 @@ define PlusThreeSeconds: June15th2013 + 3 seconds
 define MinusThreeSeconds: June15th2013 - 3 seconds
 define PlusThreeMilliseconds: June15th2013 + 3 milliseconds
 define MinusThreeMilliseconds: June15th2013 - 3 milliseconds
+define NullDateTime: (null as DateTime)
+define NullDateTimePlusQuantity: NullDateTime + 5 years
+define NullDateTimeMinusQuantity: NullDateTime - 5 years
+define NullQuantity: (null as Quantity)
+define PlusNullQuantity: June15th2013 + NullQuantity
+define MinusNullQuantity: June15th2013 - NullQuantity
 ###
 
 module.exports['DateMath'] = {
@@ -30644,546 +30670,504 @@ module.exports['DateMath'] = {
                }
             }
          }, {
-            "localId" : "10",
-            "name" : "June15th2013",
+            "localId" : "4",
+            "name" : "Year",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "10",
+                  "r" : "4",
                   "s" : [ {
-                     "value" : [ "define ","June15th2013",": " ]
+                     "value" : [ "define ","Year",": " ]
                   }, {
-                     "r" : "9",
+                     "r" : "3",
                      "s" : [ {
-                        "value" : [ "DateTime","(","2013",", ","6",", ","15",", ","0",", ","0",", ","0",", ","0",")" ]
+                        "value" : [ "DateTime","(","2014",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "9",
+               "localId" : "3",
                "type" : "DateTime",
                "year" : {
                   "localId" : "2",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "2013",
+                  "value" : "2014",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "8",
+            "name" : "YearPlus24Months",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "8",
+                  "s" : [ {
+                     "value" : [ "define ","YearPlus24Months",": " ]
+                  }, {
+                     "r" : "7",
+                     "s" : [ {
+                        "r" : "5",
+                        "s" : [ {
+                           "value" : [ "Year" ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "value" : [ "24 ","months" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "7",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "5",
+                  "name" : "Year",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "6",
+                  "value" : 24,
+                  "unit" : "months",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "12",
+            "name" : "YearMinus24Months",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "value" : [ "define ","YearMinus24Months",": " ]
+                  }, {
+                     "r" : "11",
+                     "s" : [ {
+                        "r" : "9",
+                        "s" : [ {
+                           "value" : [ "Year" ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "value" : [ "24 ","months" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "11",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "9",
+                  "name" : "Year",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "10",
+                  "value" : 24,
+                  "unit" : "months",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "16",
+            "name" : "YearAndMonth",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "16",
+                  "s" : [ {
+                     "value" : [ "define ","YearAndMonth",": " ]
+                  }, {
+                     "r" : "15",
+                     "s" : [ {
+                        "value" : [ "DateTime","(","2014",", ","1",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "15",
+               "type" : "DateTime",
+               "year" : {
+                  "localId" : "13",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2014",
                   "type" : "Literal"
                },
                "month" : {
-                  "localId" : "3",
+                  "localId" : "14",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "6",
+                  "value" : "1",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "20",
+            "name" : "YearAndMonthPlus8Weeks",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "20",
+                  "s" : [ {
+                     "value" : [ "define ","YearAndMonthPlus8Weeks",": " ]
+                  }, {
+                     "r" : "19",
+                     "s" : [ {
+                        "r" : "17",
+                        "s" : [ {
+                           "value" : [ "YearAndMonth" ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "18",
+                        "s" : [ {
+                           "value" : [ "8 ","weeks" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "19",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "17",
+                  "name" : "YearAndMonth",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "18",
+                  "value" : 8,
+                  "unit" : "weeks",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "24",
+            "name" : "YearAndMonthMinus8Weeks",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "24",
+                  "s" : [ {
+                     "value" : [ "define ","YearAndMonthMinus8Weeks",": " ]
+                  }, {
+                     "r" : "23",
+                     "s" : [ {
+                        "r" : "21",
+                        "s" : [ {
+                           "value" : [ "YearAndMonth" ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
+                     }, {
+                        "r" : "22",
+                        "s" : [ {
+                           "value" : [ "8 ","weeks" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "23",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "21",
+                  "name" : "YearAndMonth",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "22",
+                  "value" : 8,
+                  "unit" : "weeks",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "29",
+            "name" : "YearMonthAndDay",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "29",
+                  "s" : [ {
+                     "value" : [ "define ","YearMonthAndDay",": " ]
+                  }, {
+                     "r" : "28",
+                     "s" : [ {
+                        "value" : [ "DateTime","(","2014",", ","2",", ","4",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "28",
+               "type" : "DateTime",
+               "year" : {
+                  "localId" : "25",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2014",
+                  "type" : "Literal"
+               },
+               "month" : {
+                  "localId" : "26",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
                   "type" : "Literal"
                },
                "day" : {
-                  "localId" : "4",
+                  "localId" : "27",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "15",
+                  "value" : "4",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "33",
+            "name" : "YearMonthAndDayPlus48Hours",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "33",
+                  "s" : [ {
+                     "value" : [ "define ","YearMonthAndDayPlus48Hours",": " ]
+                  }, {
+                     "r" : "32",
+                     "s" : [ {
+                        "r" : "30",
+                        "s" : [ {
+                           "value" : [ "YearMonthAndDay" ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "31",
+                        "s" : [ {
+                           "value" : [ "48 ","hours" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "32",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "30",
+                  "name" : "YearMonthAndDay",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "31",
+                  "value" : 48,
+                  "unit" : "hours",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "37",
+            "name" : "YearMonthAndDayMinus48Hours",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "37",
+                  "s" : [ {
+                     "value" : [ "define ","YearMonthAndDayMinus48Hours",": " ]
+                  }, {
+                     "r" : "36",
+                     "s" : [ {
+                        "r" : "34",
+                        "s" : [ {
+                           "value" : [ "YearMonthAndDay" ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
+                     }, {
+                        "r" : "35",
+                        "s" : [ {
+                           "value" : [ "48 ","hours" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "36",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "34",
+                  "name" : "YearMonthAndDay",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "35",
+                  "value" : 48,
+                  "unit" : "hours",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "43",
+            "name" : "YearMonthDayAndHour",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "43",
+                  "s" : [ {
+                     "value" : [ "define ","YearMonthDayAndHour",": " ]
+                  }, {
+                     "r" : "42",
+                     "s" : [ {
+                        "value" : [ "DateTime","(","2014",", ","2",", ","4",", ","11",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "42",
+               "type" : "DateTime",
+               "year" : {
+                  "localId" : "38",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2014",
+                  "type" : "Literal"
+               },
+               "month" : {
+                  "localId" : "39",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
+                  "type" : "Literal"
+               },
+               "day" : {
+                  "localId" : "40",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "4",
                   "type" : "Literal"
                },
                "hour" : {
-                  "localId" : "5",
+                  "localId" : "41",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "0",
-                  "type" : "Literal"
-               },
-               "minute" : {
-                  "localId" : "6",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "0",
-                  "type" : "Literal"
-               },
-               "second" : {
-                  "localId" : "7",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "0",
-                  "type" : "Literal"
-               },
-               "millisecond" : {
-                  "localId" : "8",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "0",
+                  "value" : "11",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "14",
-            "name" : "PlusThreeYears",
+            "localId" : "47",
+            "name" : "YearMonthDayAndHourPlus120Minutes",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "14",
+                  "r" : "47",
                   "s" : [ {
-                     "value" : [ "define ","PlusThreeYears",": " ]
+                     "value" : [ "define ","YearMonthDayAndHourPlus120Minutes",": " ]
                   }, {
-                     "r" : "13",
+                     "r" : "46",
                      "s" : [ {
-                        "r" : "11",
-                        "s" : [ {
-                           "value" : [ "June15th2013" ]
-                        } ]
-                     }, {
-                        "value" : [ " + " ]
-                     }, {
-                        "r" : "12",
-                        "s" : [ {
-                           "value" : [ "3 ","years" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "13",
-               "type" : "Add",
-               "operand" : [ {
-                  "localId" : "11",
-                  "name" : "June15th2013",
-                  "type" : "ExpressionRef"
-               }, {
-                  "localId" : "12",
-                  "value" : 3,
-                  "unit" : "years",
-                  "type" : "Quantity"
-               } ]
-            }
-         }, {
-            "localId" : "18",
-            "name" : "MinusThreeYears",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "18",
-                  "s" : [ {
-                     "value" : [ "define ","MinusThreeYears",": " ]
-                  }, {
-                     "r" : "17",
-                     "s" : [ {
-                        "r" : "15",
-                        "s" : [ {
-                           "value" : [ "June15th2013" ]
-                        } ]
-                     }, {
-                        "value" : [ " - " ]
-                     }, {
-                        "r" : "16",
-                        "s" : [ {
-                           "value" : [ "3 ","years" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "17",
-               "type" : "Subtract",
-               "operand" : [ {
-                  "localId" : "15",
-                  "name" : "June15th2013",
-                  "type" : "ExpressionRef"
-               }, {
-                  "localId" : "16",
-                  "value" : 3,
-                  "unit" : "years",
-                  "type" : "Quantity"
-               } ]
-            }
-         }, {
-            "localId" : "22",
-            "name" : "PlusEightMonths",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "22",
-                  "s" : [ {
-                     "value" : [ "define ","PlusEightMonths",": " ]
-                  }, {
-                     "r" : "21",
-                     "s" : [ {
-                        "r" : "19",
-                        "s" : [ {
-                           "value" : [ "June15th2013" ]
-                        } ]
-                     }, {
-                        "value" : [ " + " ]
-                     }, {
-                        "r" : "20",
-                        "s" : [ {
-                           "value" : [ "8 ","months" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "21",
-               "type" : "Add",
-               "operand" : [ {
-                  "localId" : "19",
-                  "name" : "June15th2013",
-                  "type" : "ExpressionRef"
-               }, {
-                  "localId" : "20",
-                  "value" : 8,
-                  "unit" : "months",
-                  "type" : "Quantity"
-               } ]
-            }
-         }, {
-            "localId" : "26",
-            "name" : "MinusEightMonths",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "26",
-                  "s" : [ {
-                     "value" : [ "define ","MinusEightMonths",": " ]
-                  }, {
-                     "r" : "25",
-                     "s" : [ {
-                        "r" : "23",
-                        "s" : [ {
-                           "value" : [ "June15th2013" ]
-                        } ]
-                     }, {
-                        "value" : [ " - " ]
-                     }, {
-                        "r" : "24",
-                        "s" : [ {
-                           "value" : [ "8 ","months" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "25",
-               "type" : "Subtract",
-               "operand" : [ {
-                  "localId" : "23",
-                  "name" : "June15th2013",
-                  "type" : "ExpressionRef"
-               }, {
-                  "localId" : "24",
-                  "value" : 8,
-                  "unit" : "months",
-                  "type" : "Quantity"
-               } ]
-            }
-         }, {
-            "localId" : "30",
-            "name" : "PlusThreeWeeks",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "30",
-                  "s" : [ {
-                     "value" : [ "define ","PlusThreeWeeks",": " ]
-                  }, {
-                     "r" : "29",
-                     "s" : [ {
-                        "r" : "27",
-                        "s" : [ {
-                           "value" : [ "June15th2013" ]
-                        } ]
-                     }, {
-                        "value" : [ " + " ]
-                     }, {
-                        "r" : "28",
-                        "s" : [ {
-                           "value" : [ "3 ","weeks" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "29",
-               "type" : "Add",
-               "operand" : [ {
-                  "localId" : "27",
-                  "name" : "June15th2013",
-                  "type" : "ExpressionRef"
-               }, {
-                  "localId" : "28",
-                  "value" : 3,
-                  "unit" : "weeks",
-                  "type" : "Quantity"
-               } ]
-            }
-         }, {
-            "localId" : "34",
-            "name" : "MinusThreeWeeks",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "34",
-                  "s" : [ {
-                     "value" : [ "define ","MinusThreeWeeks",": " ]
-                  }, {
-                     "r" : "33",
-                     "s" : [ {
-                        "r" : "31",
-                        "s" : [ {
-                           "value" : [ "June15th2013" ]
-                        } ]
-                     }, {
-                        "value" : [ " - " ]
-                     }, {
-                        "r" : "32",
-                        "s" : [ {
-                           "value" : [ "3 ","weeks" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "33",
-               "type" : "Subtract",
-               "operand" : [ {
-                  "localId" : "31",
-                  "name" : "June15th2013",
-                  "type" : "ExpressionRef"
-               }, {
-                  "localId" : "32",
-                  "value" : 3,
-                  "unit" : "weeks",
-                  "type" : "Quantity"
-               } ]
-            }
-         }, {
-            "localId" : "38",
-            "name" : "PlusTwentyDays",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "38",
-                  "s" : [ {
-                     "value" : [ "define ","PlusTwentyDays",": " ]
-                  }, {
-                     "r" : "37",
-                     "s" : [ {
-                        "r" : "35",
-                        "s" : [ {
-                           "value" : [ "June15th2013" ]
-                        } ]
-                     }, {
-                        "value" : [ " + " ]
-                     }, {
-                        "r" : "36",
-                        "s" : [ {
-                           "value" : [ "20 ","days" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "37",
-               "type" : "Add",
-               "operand" : [ {
-                  "localId" : "35",
-                  "name" : "June15th2013",
-                  "type" : "ExpressionRef"
-               }, {
-                  "localId" : "36",
-                  "value" : 20,
-                  "unit" : "days",
-                  "type" : "Quantity"
-               } ]
-            }
-         }, {
-            "localId" : "42",
-            "name" : "MinusTwentyDays",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "42",
-                  "s" : [ {
-                     "value" : [ "define ","MinusTwentyDays",": " ]
-                  }, {
-                     "r" : "41",
-                     "s" : [ {
-                        "r" : "39",
-                        "s" : [ {
-                           "value" : [ "June15th2013" ]
-                        } ]
-                     }, {
-                        "value" : [ " - " ]
-                     }, {
-                        "r" : "40",
-                        "s" : [ {
-                           "value" : [ "20 ","days" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "41",
-               "type" : "Subtract",
-               "operand" : [ {
-                  "localId" : "39",
-                  "name" : "June15th2013",
-                  "type" : "ExpressionRef"
-               }, {
-                  "localId" : "40",
-                  "value" : 20,
-                  "unit" : "days",
-                  "type" : "Quantity"
-               } ]
-            }
-         }, {
-            "localId" : "46",
-            "name" : "PlusThreeHours",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "46",
-                  "s" : [ {
-                     "value" : [ "define ","PlusThreeHours",": " ]
-                  }, {
-                     "r" : "45",
-                     "s" : [ {
-                        "r" : "43",
-                        "s" : [ {
-                           "value" : [ "June15th2013" ]
-                        } ]
-                     }, {
-                        "value" : [ " + " ]
-                     }, {
                         "r" : "44",
                         "s" : [ {
-                           "value" : [ "3 ","hours" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "45",
-               "type" : "Add",
-               "operand" : [ {
-                  "localId" : "43",
-                  "name" : "June15th2013",
-                  "type" : "ExpressionRef"
-               }, {
-                  "localId" : "44",
-                  "value" : 3,
-                  "unit" : "hours",
-                  "type" : "Quantity"
-               } ]
-            }
-         }, {
-            "localId" : "50",
-            "name" : "MinusThreeHours",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "50",
-                  "s" : [ {
-                     "value" : [ "define ","MinusThreeHours",": " ]
-                  }, {
-                     "r" : "49",
-                     "s" : [ {
-                        "r" : "47",
-                        "s" : [ {
-                           "value" : [ "June15th2013" ]
-                        } ]
-                     }, {
-                        "value" : [ " - " ]
-                     }, {
-                        "r" : "48",
-                        "s" : [ {
-                           "value" : [ "3 ","hours" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "49",
-               "type" : "Subtract",
-               "operand" : [ {
-                  "localId" : "47",
-                  "name" : "June15th2013",
-                  "type" : "ExpressionRef"
-               }, {
-                  "localId" : "48",
-                  "value" : 3,
-                  "unit" : "hours",
-                  "type" : "Quantity"
-               } ]
-            }
-         }, {
-            "localId" : "54",
-            "name" : "PlusThreeMinutes",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "54",
-                  "s" : [ {
-                     "value" : [ "define ","PlusThreeMinutes",": " ]
-                  }, {
-                     "r" : "53",
-                     "s" : [ {
-                        "r" : "51",
-                        "s" : [ {
-                           "value" : [ "June15th2013" ]
+                           "value" : [ "YearMonthDayAndHour" ]
                         } ]
                      }, {
                         "value" : [ " + " ]
                      }, {
-                        "r" : "52",
+                        "r" : "45",
                         "s" : [ {
-                           "value" : [ "3 ","minutes" ]
+                           "value" : [ "120 ","minutes" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "53",
+               "localId" : "46",
                "type" : "Add",
                "operand" : [ {
-                  "localId" : "51",
-                  "name" : "June15th2013",
+                  "localId" : "44",
+                  "name" : "YearMonthDayAndHour",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "52",
-                  "value" : 3,
+                  "localId" : "45",
+                  "value" : 120,
+                  "unit" : "minutes",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "51",
+            "name" : "YearMonthDayAndHourMinus120Minutes",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "51",
+                  "s" : [ {
+                     "value" : [ "define ","YearMonthDayAndHourMinus120Minutes",": " ]
+                  }, {
+                     "r" : "50",
+                     "s" : [ {
+                        "r" : "48",
+                        "s" : [ {
+                           "value" : [ "YearMonthDayAndHour" ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
+                     }, {
+                        "r" : "49",
+                        "s" : [ {
+                           "value" : [ "120 ","minutes" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "50",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "48",
+                  "name" : "YearMonthDayAndHour",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "49",
+                  "value" : 120,
                   "unit" : "minutes",
                   "type" : "Quantity"
                } ]
             }
          }, {
             "localId" : "58",
-            "name" : "MinusThreeMinutes",
+            "name" : "YearMonthDayHourAndMinute",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -31191,42 +31175,52 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "58",
                   "s" : [ {
-                     "value" : [ "define ","MinusThreeMinutes",": " ]
+                     "value" : [ "define ","YearMonthDayHourAndMinute",": " ]
                   }, {
                      "r" : "57",
                      "s" : [ {
-                        "r" : "55",
-                        "s" : [ {
-                           "value" : [ "June15th2013" ]
-                        } ]
-                     }, {
-                        "value" : [ " - " ]
-                     }, {
-                        "r" : "56",
-                        "s" : [ {
-                           "value" : [ "3 ","minutes" ]
-                        } ]
+                        "value" : [ "DateTime","(","2014",", ","2",", ","4",", ","11",", ","50",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
                "localId" : "57",
-               "type" : "Subtract",
-               "operand" : [ {
+               "type" : "DateTime",
+               "year" : {
+                  "localId" : "52",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2014",
+                  "type" : "Literal"
+               },
+               "month" : {
+                  "localId" : "53",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
+                  "type" : "Literal"
+               },
+               "day" : {
+                  "localId" : "54",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "4",
+                  "type" : "Literal"
+               },
+               "hour" : {
                   "localId" : "55",
-                  "name" : "June15th2013",
-                  "type" : "ExpressionRef"
-               }, {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "11",
+                  "type" : "Literal"
+               },
+               "minute" : {
                   "localId" : "56",
-                  "value" : 3,
-                  "unit" : "minutes",
-                  "type" : "Quantity"
-               } ]
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "50",
+                  "type" : "Literal"
+               }
             }
          }, {
             "localId" : "62",
-            "name" : "PlusThreeSeconds",
+            "name" : "YearMonthDayHourAndMinutePlus120Seconds",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -31234,20 +31228,20 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "62",
                   "s" : [ {
-                     "value" : [ "define ","PlusThreeSeconds",": " ]
+                     "value" : [ "define ","YearMonthDayHourAndMinutePlus120Seconds",": " ]
                   }, {
                      "r" : "61",
                      "s" : [ {
                         "r" : "59",
                         "s" : [ {
-                           "value" : [ "June15th2013" ]
+                           "value" : [ "YearMonthDayHourAndMinute" ]
                         } ]
                      }, {
                         "value" : [ " + " ]
                      }, {
                         "r" : "60",
                         "s" : [ {
-                           "value" : [ "3 ","seconds" ]
+                           "value" : [ "120 ","seconds" ]
                         } ]
                      } ]
                   } ]
@@ -31258,18 +31252,18 @@ module.exports['DateMath'] = {
                "type" : "Add",
                "operand" : [ {
                   "localId" : "59",
-                  "name" : "June15th2013",
+                  "name" : "YearMonthDayHourAndMinute",
                   "type" : "ExpressionRef"
                }, {
                   "localId" : "60",
-                  "value" : 3,
+                  "value" : 120,
                   "unit" : "seconds",
                   "type" : "Quantity"
                } ]
             }
          }, {
             "localId" : "66",
-            "name" : "MinusThreeSeconds",
+            "name" : "YearMonthDayHourAndMinuteMinus120Seconds",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -31277,20 +31271,20 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "66",
                   "s" : [ {
-                     "value" : [ "define ","MinusThreeSeconds",": " ]
+                     "value" : [ "define ","YearMonthDayHourAndMinuteMinus120Seconds",": " ]
                   }, {
                      "r" : "65",
                      "s" : [ {
                         "r" : "63",
                         "s" : [ {
-                           "value" : [ "June15th2013" ]
+                           "value" : [ "YearMonthDayHourAndMinute" ]
                         } ]
                      }, {
                         "value" : [ " - " ]
                      }, {
                         "r" : "64",
                         "s" : [ {
-                           "value" : [ "3 ","seconds" ]
+                           "value" : [ "120 ","seconds" ]
                         } ]
                      } ]
                   } ]
@@ -31301,61 +31295,18 @@ module.exports['DateMath'] = {
                "type" : "Subtract",
                "operand" : [ {
                   "localId" : "63",
-                  "name" : "June15th2013",
+                  "name" : "YearMonthDayHourAndMinute",
                   "type" : "ExpressionRef"
                }, {
                   "localId" : "64",
-                  "value" : 3,
+                  "value" : 120,
                   "unit" : "seconds",
                   "type" : "Quantity"
                } ]
             }
          }, {
-            "localId" : "70",
-            "name" : "PlusThreeMilliseconds",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "70",
-                  "s" : [ {
-                     "value" : [ "define ","PlusThreeMilliseconds",": " ]
-                  }, {
-                     "r" : "69",
-                     "s" : [ {
-                        "r" : "67",
-                        "s" : [ {
-                           "value" : [ "June15th2013" ]
-                        } ]
-                     }, {
-                        "value" : [ " + " ]
-                     }, {
-                        "r" : "68",
-                        "s" : [ {
-                           "value" : [ "3 ","milliseconds" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "69",
-               "type" : "Add",
-               "operand" : [ {
-                  "localId" : "67",
-                  "name" : "June15th2013",
-                  "type" : "ExpressionRef"
-               }, {
-                  "localId" : "68",
-                  "value" : 3,
-                  "unit" : "milliseconds",
-                  "type" : "Quantity"
-               } ]
-            }
-         }, {
             "localId" : "74",
-            "name" : "MinusThreeMilliseconds",
+            "name" : "YearMonthDayHourMinuteAndSecond",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -31363,18 +31314,916 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "74",
                   "s" : [ {
-                     "value" : [ "define ","MinusThreeMilliseconds",": " ]
+                     "value" : [ "define ","YearMonthDayHourMinuteAndSecond",": " ]
                   }, {
                      "r" : "73",
                      "s" : [ {
-                        "r" : "71",
+                        "value" : [ "DateTime","(","2014",", ","2",", ","4",", ","11",", ","50",", ","23",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "73",
+               "type" : "DateTime",
+               "year" : {
+                  "localId" : "67",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2014",
+                  "type" : "Literal"
+               },
+               "month" : {
+                  "localId" : "68",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
+                  "type" : "Literal"
+               },
+               "day" : {
+                  "localId" : "69",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "4",
+                  "type" : "Literal"
+               },
+               "hour" : {
+                  "localId" : "70",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "11",
+                  "type" : "Literal"
+               },
+               "minute" : {
+                  "localId" : "71",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "50",
+                  "type" : "Literal"
+               },
+               "second" : {
+                  "localId" : "72",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "23",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "78",
+            "name" : "YearMonthDayHourMinuteAndSecondPlus2000Milliseconds",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "78",
+                  "s" : [ {
+                     "value" : [ "define ","YearMonthDayHourMinuteAndSecondPlus2000Milliseconds",": " ]
+                  }, {
+                     "r" : "77",
+                     "s" : [ {
+                        "r" : "75",
+                        "s" : [ {
+                           "value" : [ "YearMonthDayHourMinuteAndSecond" ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "76",
+                        "s" : [ {
+                           "value" : [ "2000 ","milliseconds" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "77",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "75",
+                  "name" : "YearMonthDayHourMinuteAndSecond",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "76",
+                  "value" : 2000,
+                  "unit" : "milliseconds",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "82",
+            "name" : "YearMonthDayHourMinuteAndSecondMinus2000Milliseconds",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "82",
+                  "s" : [ {
+                     "value" : [ "define ","YearMonthDayHourMinuteAndSecondMinus2000Milliseconds",": " ]
+                  }, {
+                     "r" : "81",
+                     "s" : [ {
+                        "r" : "79",
+                        "s" : [ {
+                           "value" : [ "YearMonthDayHourMinuteAndSecond" ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
+                     }, {
+                        "r" : "80",
+                        "s" : [ {
+                           "value" : [ "2000 ","milliseconds" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "81",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "79",
+                  "name" : "YearMonthDayHourMinuteAndSecond",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "80",
+                  "value" : 2000,
+                  "unit" : "milliseconds",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "91",
+            "name" : "June15th2013",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "91",
+                  "s" : [ {
+                     "value" : [ "define ","June15th2013",": " ]
+                  }, {
+                     "r" : "90",
+                     "s" : [ {
+                        "value" : [ "DateTime","(","2013",", ","6",", ","15",", ","0",", ","0",", ","0",", ","0",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "90",
+               "type" : "DateTime",
+               "year" : {
+                  "localId" : "83",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2013",
+                  "type" : "Literal"
+               },
+               "month" : {
+                  "localId" : "84",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "6",
+                  "type" : "Literal"
+               },
+               "day" : {
+                  "localId" : "85",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "15",
+                  "type" : "Literal"
+               },
+               "hour" : {
+                  "localId" : "86",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "type" : "Literal"
+               },
+               "minute" : {
+                  "localId" : "87",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "type" : "Literal"
+               },
+               "second" : {
+                  "localId" : "88",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "type" : "Literal"
+               },
+               "millisecond" : {
+                  "localId" : "89",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "95",
+            "name" : "PlusThreeYears",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "95",
+                  "s" : [ {
+                     "value" : [ "define ","PlusThreeYears",": " ]
+                  }, {
+                     "r" : "94",
+                     "s" : [ {
+                        "r" : "92",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "93",
+                        "s" : [ {
+                           "value" : [ "3 ","years" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "94",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "92",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "93",
+                  "value" : 3,
+                  "unit" : "years",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "99",
+            "name" : "PlusThreeYearsWithFraction",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "99",
+                  "s" : [ {
+                     "value" : [ "define ","PlusThreeYearsWithFraction",": " ]
+                  }, {
+                     "r" : "98",
+                     "s" : [ {
+                        "r" : "96",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "97",
+                        "s" : [ {
+                           "value" : [ "3.9 ","years" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "98",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "96",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "97",
+                  "value" : 3.9,
+                  "unit" : "years",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "103",
+            "name" : "MinusThreeYearsWithFraction",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "103",
+                  "s" : [ {
+                     "value" : [ "define ","MinusThreeYearsWithFraction",": " ]
+                  }, {
+                     "r" : "102",
+                     "s" : [ {
+                        "r" : "100",
                         "s" : [ {
                            "value" : [ "June15th2013" ]
                         } ]
                      }, {
                         "value" : [ " - " ]
                      }, {
-                        "r" : "72",
+                        "r" : "101",
+                        "s" : [ {
+                           "value" : [ "3.9 ","years" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "102",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "100",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "101",
+                  "value" : 3.9,
+                  "unit" : "years",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "107",
+            "name" : "MinusThreeYears",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "107",
+                  "s" : [ {
+                     "value" : [ "define ","MinusThreeYears",": " ]
+                  }, {
+                     "r" : "106",
+                     "s" : [ {
+                        "r" : "104",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
+                     }, {
+                        "r" : "105",
+                        "s" : [ {
+                           "value" : [ "3 ","years" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "106",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "104",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "105",
+                  "value" : 3,
+                  "unit" : "years",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "111",
+            "name" : "PlusEightMonths",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "111",
+                  "s" : [ {
+                     "value" : [ "define ","PlusEightMonths",": " ]
+                  }, {
+                     "r" : "110",
+                     "s" : [ {
+                        "r" : "108",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "109",
+                        "s" : [ {
+                           "value" : [ "8 ","months" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "110",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "108",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "109",
+                  "value" : 8,
+                  "unit" : "months",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "115",
+            "name" : "MinusEightMonths",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "115",
+                  "s" : [ {
+                     "value" : [ "define ","MinusEightMonths",": " ]
+                  }, {
+                     "r" : "114",
+                     "s" : [ {
+                        "r" : "112",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
+                     }, {
+                        "r" : "113",
+                        "s" : [ {
+                           "value" : [ "8 ","months" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "114",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "112",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "113",
+                  "value" : 8,
+                  "unit" : "months",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "119",
+            "name" : "PlusThreeWeeks",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "119",
+                  "s" : [ {
+                     "value" : [ "define ","PlusThreeWeeks",": " ]
+                  }, {
+                     "r" : "118",
+                     "s" : [ {
+                        "r" : "116",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "117",
+                        "s" : [ {
+                           "value" : [ "3 ","weeks" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "118",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "116",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "117",
+                  "value" : 3,
+                  "unit" : "weeks",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "123",
+            "name" : "MinusThreeWeeks",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "123",
+                  "s" : [ {
+                     "value" : [ "define ","MinusThreeWeeks",": " ]
+                  }, {
+                     "r" : "122",
+                     "s" : [ {
+                        "r" : "120",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
+                     }, {
+                        "r" : "121",
+                        "s" : [ {
+                           "value" : [ "3 ","weeks" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "122",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "120",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "121",
+                  "value" : 3,
+                  "unit" : "weeks",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "127",
+            "name" : "PlusTwentyDays",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "127",
+                  "s" : [ {
+                     "value" : [ "define ","PlusTwentyDays",": " ]
+                  }, {
+                     "r" : "126",
+                     "s" : [ {
+                        "r" : "124",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "125",
+                        "s" : [ {
+                           "value" : [ "20 ","days" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "126",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "124",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "125",
+                  "value" : 20,
+                  "unit" : "days",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "131",
+            "name" : "MinusTwentyDays",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "131",
+                  "s" : [ {
+                     "value" : [ "define ","MinusTwentyDays",": " ]
+                  }, {
+                     "r" : "130",
+                     "s" : [ {
+                        "r" : "128",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
+                     }, {
+                        "r" : "129",
+                        "s" : [ {
+                           "value" : [ "20 ","days" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "130",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "128",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "129",
+                  "value" : 20,
+                  "unit" : "days",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "135",
+            "name" : "PlusThreeHours",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "135",
+                  "s" : [ {
+                     "value" : [ "define ","PlusThreeHours",": " ]
+                  }, {
+                     "r" : "134",
+                     "s" : [ {
+                        "r" : "132",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "133",
+                        "s" : [ {
+                           "value" : [ "3 ","hours" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "134",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "132",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "133",
+                  "value" : 3,
+                  "unit" : "hours",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "139",
+            "name" : "MinusThreeHours",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "139",
+                  "s" : [ {
+                     "value" : [ "define ","MinusThreeHours",": " ]
+                  }, {
+                     "r" : "138",
+                     "s" : [ {
+                        "r" : "136",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
+                     }, {
+                        "r" : "137",
+                        "s" : [ {
+                           "value" : [ "3 ","hours" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "138",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "136",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "137",
+                  "value" : 3,
+                  "unit" : "hours",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "143",
+            "name" : "PlusThreeMinutes",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "143",
+                  "s" : [ {
+                     "value" : [ "define ","PlusThreeMinutes",": " ]
+                  }, {
+                     "r" : "142",
+                     "s" : [ {
+                        "r" : "140",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "141",
+                        "s" : [ {
+                           "value" : [ "3 ","minutes" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "142",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "140",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "141",
+                  "value" : 3,
+                  "unit" : "minutes",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "147",
+            "name" : "MinusThreeMinutes",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "147",
+                  "s" : [ {
+                     "value" : [ "define ","MinusThreeMinutes",": " ]
+                  }, {
+                     "r" : "146",
+                     "s" : [ {
+                        "r" : "144",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
+                     }, {
+                        "r" : "145",
+                        "s" : [ {
+                           "value" : [ "3 ","minutes" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "146",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "144",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "145",
+                  "value" : 3,
+                  "unit" : "minutes",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "151",
+            "name" : "PlusThreeSeconds",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "151",
+                  "s" : [ {
+                     "value" : [ "define ","PlusThreeSeconds",": " ]
+                  }, {
+                     "r" : "150",
+                     "s" : [ {
+                        "r" : "148",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "149",
+                        "s" : [ {
+                           "value" : [ "3 ","seconds" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "150",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "148",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "149",
+                  "value" : 3,
+                  "unit" : "seconds",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "155",
+            "name" : "MinusThreeSeconds",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "155",
+                  "s" : [ {
+                     "value" : [ "define ","MinusThreeSeconds",": " ]
+                  }, {
+                     "r" : "154",
+                     "s" : [ {
+                        "r" : "152",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
+                     }, {
+                        "r" : "153",
+                        "s" : [ {
+                           "value" : [ "3 ","seconds" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "154",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "152",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "153",
+                  "value" : 3,
+                  "unit" : "seconds",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "159",
+            "name" : "PlusThreeMilliseconds",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "159",
+                  "s" : [ {
+                     "value" : [ "define ","PlusThreeMilliseconds",": " ]
+                  }, {
+                     "r" : "158",
+                     "s" : [ {
+                        "r" : "156",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "157",
                         "s" : [ {
                            "value" : [ "3 ","milliseconds" ]
                         } ]
@@ -31383,17 +32232,322 @@ module.exports['DateMath'] = {
                }
             } ],
             "expression" : {
-               "localId" : "73",
-               "type" : "Subtract",
+               "localId" : "158",
+               "type" : "Add",
                "operand" : [ {
-                  "localId" : "71",
+                  "localId" : "156",
                   "name" : "June15th2013",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "72",
+                  "localId" : "157",
                   "value" : 3,
                   "unit" : "milliseconds",
                   "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "163",
+            "name" : "MinusThreeMilliseconds",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "163",
+                  "s" : [ {
+                     "value" : [ "define ","MinusThreeMilliseconds",": " ]
+                  }, {
+                     "r" : "162",
+                     "s" : [ {
+                        "r" : "160",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
+                     }, {
+                        "r" : "161",
+                        "s" : [ {
+                           "value" : [ "3 ","milliseconds" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "162",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "160",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "161",
+                  "value" : 3,
+                  "unit" : "milliseconds",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "167",
+            "name" : "NullDateTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "167",
+                  "s" : [ {
+                     "value" : [ "define ","NullDateTime",": " ]
+                  }, {
+                     "r" : "166",
+                     "s" : [ {
+                        "value" : [ "(" ]
+                     }, {
+                        "r" : "166",
+                        "s" : [ {
+                           "r" : "164",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "165",
+                           "s" : [ {
+                              "value" : [ "DateTime" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "166",
+               "strict" : false,
+               "type" : "As",
+               "operand" : {
+                  "localId" : "164",
+                  "type" : "Null"
+               },
+               "asTypeSpecifier" : {
+                  "localId" : "165",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "171",
+            "name" : "NullDateTimePlusQuantity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "171",
+                  "s" : [ {
+                     "value" : [ "define ","NullDateTimePlusQuantity",": " ]
+                  }, {
+                     "r" : "170",
+                     "s" : [ {
+                        "r" : "168",
+                        "s" : [ {
+                           "value" : [ "NullDateTime" ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "169",
+                        "s" : [ {
+                           "value" : [ "5 ","years" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "170",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "168",
+                  "name" : "NullDateTime",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "169",
+                  "value" : 5,
+                  "unit" : "years",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "175",
+            "name" : "NullDateTimeMinusQuantity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "175",
+                  "s" : [ {
+                     "value" : [ "define ","NullDateTimeMinusQuantity",": " ]
+                  }, {
+                     "r" : "174",
+                     "s" : [ {
+                        "r" : "172",
+                        "s" : [ {
+                           "value" : [ "NullDateTime" ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
+                     }, {
+                        "r" : "173",
+                        "s" : [ {
+                           "value" : [ "5 ","years" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "174",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "172",
+                  "name" : "NullDateTime",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "173",
+                  "value" : 5,
+                  "unit" : "years",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "179",
+            "name" : "NullQuantity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "179",
+                  "s" : [ {
+                     "value" : [ "define ","NullQuantity",": " ]
+                  }, {
+                     "r" : "178",
+                     "s" : [ {
+                        "value" : [ "(" ]
+                     }, {
+                        "r" : "178",
+                        "s" : [ {
+                           "r" : "176",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "177",
+                           "s" : [ {
+                              "value" : [ "Quantity" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "178",
+               "strict" : false,
+               "type" : "As",
+               "operand" : {
+                  "localId" : "176",
+                  "type" : "Null"
+               },
+               "asTypeSpecifier" : {
+                  "localId" : "177",
+                  "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "183",
+            "name" : "PlusNullQuantity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "183",
+                  "s" : [ {
+                     "value" : [ "define ","PlusNullQuantity",": " ]
+                  }, {
+                     "r" : "182",
+                     "s" : [ {
+                        "r" : "180",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "181",
+                        "s" : [ {
+                           "value" : [ "NullQuantity" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "182",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "180",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "181",
+                  "name" : "NullQuantity",
+                  "type" : "ExpressionRef"
+               } ]
+            }
+         }, {
+            "localId" : "187",
+            "name" : "MinusNullQuantity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "187",
+                  "s" : [ {
+                     "value" : [ "define ","MinusNullQuantity",": " ]
+                  }, {
+                     "r" : "186",
+                     "s" : [ {
+                        "r" : "184",
+                        "s" : [ {
+                           "value" : [ "June15th2013" ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
+                     }, {
+                        "r" : "185",
+                        "s" : [ {
+                           "value" : [ "NullQuantity" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "186",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "184",
+                  "name" : "June15th2013",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "185",
+                  "name" : "NullQuantity",
+                  "type" : "ExpressionRef"
                } ]
             }
          } ]

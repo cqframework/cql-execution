@@ -879,6 +879,76 @@ describe 'DateMath', ->
     d = @minusThreeMilliseconds.exec(@ctx)
     dateCheck(d, 2013, 6, 14, 23, 59, 59, 997)
 
+  it 'should ignore fractional value when adding', ->
+    d = @plusThreeYearsWithFraction.exec(@ctx)
+    dateCheck(d, 2016, 6, 15, 0, 0, 0, 0)
+
+  it.skip 'should ignore fractional value when subtracting', ->
+    d = @minusThreeYearsWithFraction.exec(@ctx)
+    dateCheck(d, 2010, 6, 15, 0, 0, 0, 0)
+
+  it.skip 'should handle adding lower precision to year', ->
+    d = @yearPlus24Months.exec(@ctx)
+    dateCheck(d, 2016, 0, 0, 0, 0, 0, 0)
+
+  it.skip 'should handle subtracting lower precision to year', ->
+    d = @yearMinus24Months.exec(@ctx)
+    dateCheck(d, 2010, 0, 0, 0, 0, 0, 0)
+
+  it.skip 'should handle adding lower precision to year/month', ->
+    d = @yearAndMonthPlus8Weeks.exec(@ctx)
+    # TODO: Not entirely sure if 8 weeks == 2 months, testing as if it is for now
+    dateCheck(d, 2014, 3, 0, 0, 0, 0, 0)
+
+  it.skip 'should handle subtracting lower precision to year/month', ->
+    d = @yearAndMonthMinus8Weeks.exec(@ctx)
+    dateCheck(d, 2013, 11, 0, 0, 0, 0, 0)
+
+  it.skip 'should handle adding lower precision to year/month/day', ->
+    d = @yearMonthAndDayPlus48Hours.exec(@ctx)
+    dateCheck(d, 2014, 2, 6, 0, 0, 0, 0)
+
+  it.skip 'should handle subtracting lower precision to year/month/day', ->
+    d = @yearMonthAndDayMinus48Hours.exec(@ctx)
+    dateCheck(d, 2014, 2, 2, 0, 0, 0, 0)
+
+  it.skip 'should handle adding lower precision to year/month/day/hour', ->
+    d = @yearMonthDayAndHourPlus120Minutes.exec(@ctx)
+    dateCheck(d, 2014, 2, 4, 13, 0, 0, 0)
+
+  it.skip 'should handle subtracting lower precision to year/month/day/hour', ->
+    d = @yearMonthDayAndHourMinus120Minutes.exec(@ctx)
+    dateCheck(d, 2014, 2, 4, 9, 0, 0, 0)
+
+  it.skip 'should handle adding lower precision to year/month/day/hour/minute', ->
+    d = @yearMonthDayHourAndMinutePlus120Seconds.exec(@ctx)
+    dateCheck(d, 2014, 2, 4, 11, 52, 0, 0)
+
+  it.skip 'should handle subtracting lower precision to year/month/day/hour/minute', ->
+    d = @yearMonthDayHourAndMinuteMinus120Seconds.exec(@ctx)
+    dateCheck(d, 2014, 2, 4, 13, 48, 0, 0)
+
+  it.skip 'should handle adding lower precision to year/month/day/hour/minute/second', ->
+    d = @yearMonthDayHourMinuteAndSecondPlus2000Milliseconds.exec(@ctx)
+    dateCheck(d, 2014, 2, 4, 11, 50, 25, 0)
+
+  it.skip 'should handle subtracting lower precision to year/month/day/hour/minute/second', ->
+    d = @yearMonthDayHourMinuteAndSecondMinus2000Milliseconds.exec(@ctx)
+    dateCheck(d, 2014, 2, 4, 13, 48, 21, 0)
+
+  it 'should return null when adding if DateTime is null', ->
+    should.not.exist @nullDateTimePlusQuantity.exec(@ctx)
+
+  it 'should return null when subtracting if DateTime is null', ->
+    should.not.exist @nullDateTimeMinusQuantity.exec(@ctx)
+
+  it 'should return null when adding if Quantity is null', ->
+    should.not.exist @plusNullQuantity.exec(@ctx)
+
+  it 'should return null when subtracting if Quantity is null', ->
+    should.not.exist @minusNullQuantity.exec(@ctx)
+
+
 dateCheck = (date, year, month, day, hour, minute, second, millisecond) ->
   date.year.should.equal year
   date.month.should.equal month

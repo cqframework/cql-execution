@@ -313,8 +313,28 @@ define HoursBetween1and3CrossingSpringDST: hours between DateTime(2017, 3, 12, 1
 define HoursBetween1and3CrossingFallDST: hours between DateTime(2017, 11, 5, 1, 0, 0, 0, -4.0) and DateTime(2017, 11, 5, 3, 0, 0, 0, -5.0)
 
 // @Test: DateMath
+define Year: DateTime(2014)
+define YearPlus24Months: Year + 24 months
+define YearMinus24Months: Year - 24 months
+define YearAndMonth: DateTime(2014, 1)
+define YearAndMonthPlus8Weeks: YearAndMonth + 8 weeks
+define YearAndMonthMinus8Weeks: YearAndMonth - 8 weeks
+define YearMonthAndDay: DateTime(2014, 2, 4)
+define YearMonthAndDayPlus48Hours: YearMonthAndDay + 48 hours
+define YearMonthAndDayMinus48Hours: YearMonthAndDay - 48 hours
+define YearMonthDayAndHour: DateTime(2014, 2, 4, 11)
+define YearMonthDayAndHourPlus120Minutes: YearMonthDayAndHour + 120 minutes
+define YearMonthDayAndHourMinus120Minutes: YearMonthDayAndHour - 120 minutes
+define YearMonthDayHourAndMinute: DateTime(2014, 2, 4, 11, 50)
+define YearMonthDayHourAndMinutePlus120Seconds: YearMonthDayHourAndMinute + 120 seconds
+define YearMonthDayHourAndMinuteMinus120Seconds: YearMonthDayHourAndMinute - 120 seconds
+define YearMonthDayHourMinuteAndSecond: DateTime(2014, 2, 4, 11, 50, 23)
+define YearMonthDayHourMinuteAndSecondPlus2000Milliseconds: YearMonthDayHourMinuteAndSecond + 2000 milliseconds
+define YearMonthDayHourMinuteAndSecondMinus2000Milliseconds: YearMonthDayHourMinuteAndSecond - 2000 milliseconds
 define June15th2013: DateTime(2013, 6, 15, 0, 0, 0, 0)
 define PlusThreeYears: June15th2013 + 3 years
+define PlusThreeYearsWithFraction: June15th2013 + 3.9 years
+define MinusThreeYearsWithFraction: June15th2013 - 3.9 years
 define MinusThreeYears: June15th2013 - 3 years
 define PlusEightMonths: June15th2013 + 8 months
 define MinusEightMonths: June15th2013 - 8 months
@@ -330,3 +350,9 @@ define PlusThreeSeconds: June15th2013 + 3 seconds
 define MinusThreeSeconds: June15th2013 - 3 seconds
 define PlusThreeMilliseconds: June15th2013 + 3 milliseconds
 define MinusThreeMilliseconds: June15th2013 - 3 milliseconds
+define NullDateTime: (null as DateTime)
+define NullDateTimePlusQuantity: NullDateTime + 5 years
+define NullDateTimeMinusQuantity: NullDateTime - 5 years
+define NullQuantity: (null as Quantity)
+define PlusNullQuantity: June15th2013 + NullQuantity
+define MinusNullQuantity: June15th2013 - NullQuantity
