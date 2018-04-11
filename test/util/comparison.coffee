@@ -107,7 +107,7 @@ describe 'equivalent', ->
     equivalent(new Code('123', 'test', '2016'), new Code('12', 'test', '2016')).should.be.false()
     equivalent(new Code('123', undefined, undefined, undefined), new Code('123', undefined, undefined, undefined)).should.be.true()
 
-  it 'should detect if second parameter is not a code and still result to true', ->
+  it 'should detect if second parameter is not a code and should result to true (not defined in the specification - matches "in ValueSet" and "in CodeSystem")', ->
     equivalent(new Code('123', 'test', '2016'), '123').should.be.true()
 
   it 'should detect if parameters are not codes and return using equals', ->

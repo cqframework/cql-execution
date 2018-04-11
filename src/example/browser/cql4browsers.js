@@ -419,7 +419,11 @@
     }
 
     Code.prototype.hasMatch = function(code) {
-      return codesInList(toCodeList(code), [this]);
+      if (typeof code === 'string') {
+        return code === this.code;
+      } else {
+        return codesInList(toCodeList(code), [this]);
+      }
     };
 
     return Code;
@@ -468,8 +472,6 @@
       return list;
     } else if (typeIsArray(c.codes)) {
       return c.codes;
-    } else if (typeof c === 'string') {
-      return [new Code(c)];
     } else {
       return [c];
     }
@@ -478,19 +480,17 @@
   codesInList = function(cl1, cl2) {
     return cl1.some(function(c1) {
       return cl2.some(function(c2) {
-        return codesMatch(c1, c2);
+        if (typeof c1 === 'string') {
+          return c1 === c2.code;
+        } else {
+          return codesMatch(c1, c2);
+        }
       });
     });
   };
 
   codesMatch = function(code1, code2) {
-    if (code1.code !== code2.code) {
-      return false;
-    }
-    if ((code1.system != null) && (code2.system != null) && code1.system !== code2.system) {
-      return false;
-    }
-    return true;
+    return code1.code === code2.code && code1.system === code2.system;
   };
 
   module.exports.CodeSystem = CodeSystem = (function() {

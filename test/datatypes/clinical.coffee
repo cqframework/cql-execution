@@ -4,6 +4,8 @@ should = require 'should'
 describe 'Code', ->
   @beforeEach ->
     @code = new Code('ABC', '5.4.3.2.1', '1')
+    @code_no_version = new Code('ABC', '5.4.3.2.1')
+    @code_no_codesystem = new Code('ABC')
 
   it 'should properly represent the code, system, and version', ->
     @code.code.should.equal 'ABC'
@@ -24,6 +26,30 @@ describe 'Code', ->
 
   it 'should match code with different version', ->
     @code.hasMatch(new Code('ABC', '5.4.3.2.1', '3')).should.be.true()
+
+  it 'should match code with no version', ->
+    @code.hasMatch(new Code('ABC', '5.4.3.2.1')).should.be.true()
+
+  it 'should match code with version if does not have version', ->
+    @code_no_version.hasMatch(new Code('ABC', '5.4.3.2.1', '3')).should.be.true()
+
+  it 'should match code with no version if does not have version', ->
+    @code_no_version.hasMatch(new Code('ABC', '5.4.3.2.1')).should.be.true()
+
+  it 'should not match code with different code system', ->
+    @code.hasMatch(new Code('ABC', '5.4.3.2.2')).should.be.false()
+
+  it 'should not match code with no code system', ->
+    @code.hasMatch(new Code('ABC')).should.be.false()
+
+  it 'should not match code with code system if does not have code system', ->
+    @code_no_codesystem.hasMatch(new Code('ABC', '5.4.3.2.1')).should.be.false()
+
+  it 'should match code with no code system if does not have code system', ->
+    @code_no_codesystem.hasMatch(new Code('ABC')).should.be.true()
+
+  it 'should not match different code with no code system if does not have code system', ->
+    @code_no_codesystem.hasMatch(new Code('CBA')).should.be.false()
 
   it 'should match code with Concept object with different versions', ->
     @code.hasMatch(new Concept([new Code('ABC', '5.4.3.2.1', '9'), new Code('ABC', '5.4.3.2.1', '8')])).should.be.true()
