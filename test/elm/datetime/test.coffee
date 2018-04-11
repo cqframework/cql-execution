@@ -234,17 +234,17 @@ describe 'TimeOfDay', ->
     setup @, data
 
   it 'should return all date components representing now', ->
-    jsDate = new Date()
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
     tod = @timeOfDayVar.exec @ctx
     tod.isTime().should.be.true()
     tod.year.should.equal 0
     tod.month.should.equal 1
     tod.day.should.equal 1
-    tod.hour.should.equal jsDate.getHours()
+    tod.hour.should.equal @ctx.getExecutionDateTime().hour
     tod.minute.should.exist
     tod.second.should.exist
     tod.millisecond.should.exist
-    tod.timezoneOffset.should.equal jsDate.getTimezoneOffset() / 60 * -1
+    tod.timezoneOffset.should.equal "0"
 
 describe 'DateTimeComponentFrom', ->
   @beforeEach ->
