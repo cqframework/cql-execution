@@ -2,6 +2,7 @@
 define not_null: Count({1,2,3,4,5})
 define has_null: Count({1,null,null,null,2})
 define empty: Count({})
+define CountNullSource: Count((null as List<Integer>))
 
 // @Test: Sum
 define not_null: Sum({1,2,3,4,5})
@@ -41,6 +42,7 @@ define has_null_q: Avg({1 'ml',null,null,2 'ml'})
 define empty: Avg(List<Integer>{})
 define q_diff_units: Avg({1 'ml',0.002 'l',0.03 'dl',4 'ml',5 'ml'})
 define q_throw1: Avg({1 'ml',0.002 'm',0.03 'dl',4 'ml',5 'ml'})
+define AvgNullSource: Avg((null as List<Decimal>))
 
 // @Test: Median
 define odd: Median({5,1,2,3,4})
@@ -101,9 +103,17 @@ define atwn: AllTrue({true,true,null,null,true,true})
 define atf: AllTrue({true,true,true,false})
 define atfwn: AllTrue({true,true,null,null,true,false})
 
+define AllTrueAllNull: AllTrue({null,null,null,null})
+define AllTrueNullSource: AllTrue((null as List<Boolean>))
+define AllTrueEmptyList: AllTrue({})
+
 // @Test: AnyTrue
 define at: AnyTrue({true,false,false,true})
 define atwn: AnyTrue({true,false,null,null,false,true})
 
 define atf: AnyTrue({false,false,false,false})
 define atfwn: AnyTrue({false,false,null,null,false,false})
+
+define AnyTrueAllNull: AnyTrue({null,null,null,null})
+define AnyTrueNullSource: AnyTrue((null as List<Boolean>))
+define AnyTrueEmptyList: AnyTrue({})

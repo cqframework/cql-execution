@@ -2268,6 +2268,7 @@ define has_null_q: Avg({1 'ml',null,null,2 'ml'})
 define empty: Avg(List<Integer>{})
 define q_diff_units: Avg({1 'ml',0.002 'l',0.03 'dl',4 'ml',5 'ml'})
 define q_throw1: Avg({1 'ml',0.002 'm',0.03 'dl',4 'ml',5 'ml'})
+define AvgNullSource: Avg((null as List<Decimal>))
 ###
 
 module.exports['Avg'] = {
@@ -2866,6 +2867,74 @@ module.exports['Avg'] = {
                      "unit" : "ml",
                      "type" : "Quantity"
                   } ]
+               }
+            }
+         }, {
+            "localId" : "57",
+            "name" : "AvgNullSource",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "57",
+                  "s" : [ {
+                     "value" : [ "define ","AvgNullSource",": " ]
+                  }, {
+                     "r" : "56",
+                     "s" : [ {
+                        "value" : [ "Avg","(" ]
+                     }, {
+                        "r" : "55",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "55",
+                           "s" : [ {
+                              "r" : "52",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "54",
+                              "s" : [ {
+                                 "value" : [ "List<" ]
+                              }, {
+                                 "r" : "53",
+                                 "s" : [ {
+                                    "value" : [ "Decimal" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ">" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "56",
+               "type" : "Avg",
+               "source" : {
+                  "localId" : "55",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "52",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "54",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "53",
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
                }
             }
          } ]
@@ -6481,6 +6550,10 @@ define atwn: AllTrue({true,true,null,null,true,true})
 
 define atf: AllTrue({true,true,true,false})
 define atfwn: AllTrue({true,true,null,null,true,false})
+
+define AllTrueAllNull: AllTrue({null,null,null,null})
+define AllTrueNullSource: AllTrue((null as List<Boolean>))
+define AllTrueEmptyList: AllTrue({})
 ###
 
 module.exports['AllTrue'] = {
@@ -6763,6 +6836,182 @@ module.exports['AllTrue'] = {
                   } ]
                }
             }
+         }, {
+            "localId" : "40",
+            "name" : "AllTrueAllNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "40",
+                  "s" : [ {
+                     "value" : [ "define ","AllTrueAllNull",": " ]
+                  }, {
+                     "r" : "39",
+                     "s" : [ {
+                        "value" : [ "AllTrue","(" ]
+                     }, {
+                        "r" : "38",
+                        "s" : [ {
+                           "value" : [ "{","null",",","null",",","null",",","null","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "39",
+               "type" : "AllTrue",
+               "source" : {
+                  "type" : "Query",
+                  "source" : [ {
+                     "alias" : "X",
+                     "expression" : {
+                        "localId" : "38",
+                        "type" : "List",
+                        "element" : [ {
+                           "localId" : "34",
+                           "type" : "Null"
+                        }, {
+                           "localId" : "35",
+                           "type" : "Null"
+                        }, {
+                           "localId" : "36",
+                           "type" : "Null"
+                        }, {
+                           "localId" : "37",
+                           "type" : "Null"
+                        } ]
+                     }
+                  } ],
+                  "return" : {
+                     "distinct" : false,
+                     "expression" : {
+                        "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "As",
+                        "operand" : {
+                           "name" : "X",
+                           "type" : "AliasRef"
+                        }
+                     }
+                  }
+               }
+            }
+         }, {
+            "localId" : "46",
+            "name" : "AllTrueNullSource",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "46",
+                  "s" : [ {
+                     "value" : [ "define ","AllTrueNullSource",": " ]
+                  }, {
+                     "r" : "45",
+                     "s" : [ {
+                        "value" : [ "AllTrue","(" ]
+                     }, {
+                        "r" : "44",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "44",
+                           "s" : [ {
+                              "r" : "41",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "43",
+                              "s" : [ {
+                                 "value" : [ "List<" ]
+                              }, {
+                                 "r" : "42",
+                                 "s" : [ {
+                                    "value" : [ "Boolean" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ">" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "45",
+               "type" : "AllTrue",
+               "source" : {
+                  "localId" : "44",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "41",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "43",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "42",
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }
+            }
+         }, {
+            "localId" : "49",
+            "name" : "AllTrueEmptyList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "49",
+                  "s" : [ {
+                     "value" : [ "define ","AllTrueEmptyList",": " ]
+                  }, {
+                     "r" : "48",
+                     "s" : [ {
+                        "value" : [ "AllTrue","(","{}",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "48",
+               "type" : "AllTrue",
+               "source" : {
+                  "type" : "Query",
+                  "source" : [ {
+                     "alias" : "X",
+                     "expression" : {
+                        "localId" : "47",
+                        "type" : "List"
+                     }
+                  } ],
+                  "return" : {
+                     "distinct" : false,
+                     "expression" : {
+                        "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "As",
+                        "operand" : {
+                           "name" : "X",
+                           "type" : "AliasRef"
+                        }
+                     }
+                  }
+               }
+            }
          } ]
       }
    }
@@ -6777,6 +7026,10 @@ define atwn: AnyTrue({true,false,null,null,false,true})
 
 define atf: AnyTrue({false,false,false,false})
 define atfwn: AnyTrue({false,false,null,null,false,false})
+
+define AnyTrueAllNull: AnyTrue({null,null,null,null})
+define AnyTrueNullSource: AnyTrue((null as List<Boolean>))
+define AnyTrueEmptyList: AnyTrue({})
 ###
 
 module.exports['AnyTrue'] = {
@@ -7057,6 +7310,182 @@ module.exports['AnyTrue'] = {
                      "value" : "false",
                      "type" : "Literal"
                   } ]
+               }
+            }
+         }, {
+            "localId" : "40",
+            "name" : "AnyTrueAllNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "40",
+                  "s" : [ {
+                     "value" : [ "define ","AnyTrueAllNull",": " ]
+                  }, {
+                     "r" : "39",
+                     "s" : [ {
+                        "value" : [ "AnyTrue","(" ]
+                     }, {
+                        "r" : "38",
+                        "s" : [ {
+                           "value" : [ "{","null",",","null",",","null",",","null","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "39",
+               "type" : "AnyTrue",
+               "source" : {
+                  "type" : "Query",
+                  "source" : [ {
+                     "alias" : "X",
+                     "expression" : {
+                        "localId" : "38",
+                        "type" : "List",
+                        "element" : [ {
+                           "localId" : "34",
+                           "type" : "Null"
+                        }, {
+                           "localId" : "35",
+                           "type" : "Null"
+                        }, {
+                           "localId" : "36",
+                           "type" : "Null"
+                        }, {
+                           "localId" : "37",
+                           "type" : "Null"
+                        } ]
+                     }
+                  } ],
+                  "return" : {
+                     "distinct" : false,
+                     "expression" : {
+                        "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "As",
+                        "operand" : {
+                           "name" : "X",
+                           "type" : "AliasRef"
+                        }
+                     }
+                  }
+               }
+            }
+         }, {
+            "localId" : "46",
+            "name" : "AnyTrueNullSource",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "46",
+                  "s" : [ {
+                     "value" : [ "define ","AnyTrueNullSource",": " ]
+                  }, {
+                     "r" : "45",
+                     "s" : [ {
+                        "value" : [ "AnyTrue","(" ]
+                     }, {
+                        "r" : "44",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "44",
+                           "s" : [ {
+                              "r" : "41",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "43",
+                              "s" : [ {
+                                 "value" : [ "List<" ]
+                              }, {
+                                 "r" : "42",
+                                 "s" : [ {
+                                    "value" : [ "Boolean" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ">" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "45",
+               "type" : "AnyTrue",
+               "source" : {
+                  "localId" : "44",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "41",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "43",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "42",
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }
+            }
+         }, {
+            "localId" : "49",
+            "name" : "AnyTrueEmptyList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "49",
+                  "s" : [ {
+                     "value" : [ "define ","AnyTrueEmptyList",": " ]
+                  }, {
+                     "r" : "48",
+                     "s" : [ {
+                        "value" : [ "AnyTrue","(","{}",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "48",
+               "type" : "AnyTrue",
+               "source" : {
+                  "type" : "Query",
+                  "source" : [ {
+                     "alias" : "X",
+                     "expression" : {
+                        "localId" : "47",
+                        "type" : "List"
+                     }
+                  } ],
+                  "return" : {
+                     "distinct" : false,
+                     "expression" : {
+                        "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "As",
+                        "operand" : {
+                           "name" : "X",
+                           "type" : "AliasRef"
+                        }
+                     }
+                  }
                }
             }
          } ]

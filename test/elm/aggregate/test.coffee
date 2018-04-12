@@ -17,6 +17,8 @@ describe 'Count', ->
     @has_null.exec(@ctx).should.equal 2
   it 'should be able to count empty list', ->
     @empty.exec(@ctx).should.equal 0
+  it 'should return 0 if list is null', ->
+    @countNullSource.exec(@ctx).should.equal 0
 
 describe 'Sum', ->
   @beforeEach ->
@@ -79,14 +81,16 @@ describe 'Avg', ->
   it 'should be able to find average for lists with nulls', ->
     @has_null.exec(@ctx).should.equal 1.5
   it 'should be return null for empty list', ->
-    @empty.exec(@ctx) == null
+    # NOTE: Spec is not clear, assuming null to match null source
+    should(@empty.exec(@ctx)).be.null
   it 'should be able to find average for lists of quantiies without nulls', ->
     validateQuantity @not_null_q.exec(@ctx), 3, 'ml'
   it 'should be able to find average for lists of quantiies with nulls', ->
     validateQuantity @has_null_q.exec(@ctx), 1.5 , 'ml'
   it 'should be able to find average for lists of quantiies with related units', ->
     validateQuantity @q_diff_units.exec(@ctx), 3, 'ml'
-
+  it 'should return null if souce is null', ->
+    should(@avgNullSource.exec(@ctx)).be.null
 
 describe 'Median', ->
   @beforeEach ->
@@ -216,6 +220,18 @@ describe 'AllTrue', ->
     @atf.exec(@ctx).should.equal false
     @atfwn.exec(@ctx).should.equal false
 
+  it.skip 'should return true if source is null', ->
+    # TODO: We currently return null instead of true, spec is clear to return true
+    @allTrueNullSource.exec(@ctx).should.equal true
+
+  it.skip 'should return true if no non-null elements', ->
+    # TODO: We currently return false, spec is clear to return true
+    @allTrueAllNull.exec(@ctx).should.equal true
+
+  it 'should return true if empty list', ->
+    # NOTE: The spec does not say what to do for empty list, assuming true to match null source
+    @allTrueEmptyList.exec(@ctx).should.equal true
+
 describe 'AnyTrue', ->
   @beforeEach ->
     setup @, data
@@ -225,3 +241,14 @@ describe 'AnyTrue', ->
     @atwn.exec(@ctx).should.equal true
     @atf.exec(@ctx).should.equal false
     @atfwn.exec(@ctx).should.equal false
+
+  it.skip 'should return false if source is null', ->
+    # TODO: We currently return null instead of false, spec is clear to return false
+    @anyTrueNullSource.exec(@ctx).should.equal false
+
+  it 'should return false if no non-null elements', ->
+    @anyTrueAllNull.exec(@ctx).should.equal false
+
+  it 'should return false if empty list', ->
+    # NOTE: The spec does not say what to do for empty list, assuming false to match null source
+    @anyTrueEmptyList.exec(@ctx).should.equal false
