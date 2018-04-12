@@ -41,7 +41,9 @@ module.exports.InValueSet = class InValueSet extends Expression
     # spec indicates to return false if code is null, false if value set is null
     return false unless code?
     valueset = @valueset.execute(ctx)
-    if valueset? then valueset.hasMatch code else false
+    throw new Error("ValueSet must be provided to InValueSet function") unless valueset?
+    # If there is a code and valueset return whether or not the valueset has the code
+    return valueset.hasMatch code
 
 module.exports.CodeSystemDef = class CodeSystemDef extends Expression
   constructor: (json) ->
