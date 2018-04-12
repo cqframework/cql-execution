@@ -13,6 +13,7 @@ context Patient
 define not_null: Count({1,2,3,4,5})
 define has_null: Count({1,null,null,null,2})
 define empty: Count({})
+define CountNullSource: Count((null as List<Integer>))
 ###
 
 module.exports['Count'] = {
@@ -198,6 +199,74 @@ module.exports['Count'] = {
                "source" : {
                   "localId" : "18",
                   "type" : "List"
+               }
+            }
+         }, {
+            "localId" : "26",
+            "name" : "CountNullSource",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "26",
+                  "s" : [ {
+                     "value" : [ "define ","CountNullSource",": " ]
+                  }, {
+                     "r" : "25",
+                     "s" : [ {
+                        "value" : [ "Count","(" ]
+                     }, {
+                        "r" : "24",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "24",
+                           "s" : [ {
+                              "r" : "21",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "23",
+                              "s" : [ {
+                                 "value" : [ "List<" ]
+                              }, {
+                                 "r" : "22",
+                                 "s" : [ {
+                                    "value" : [ "Integer" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ">" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "25",
+               "type" : "Count",
+               "source" : {
+                  "localId" : "24",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "21",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "23",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "22",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
                }
             }
          } ]
@@ -811,6 +880,8 @@ define has_null_q: Min({1 'ml',null,-1 'ml',null,2 'ml'})
 define q_diff_units: Min({1 'ml',2 'dl',3 'l',4 'l',5 'l',0 'ml'})
 define q_throw1: Min({1 'ml',2 'm',3 'ml',4 'ml',5 'ml',0 'ml'})
 define q_throw2: Min({1 ,2 'ml',3 'ml',4 'ml',5 'ml',0 'ml'})
+define MinNullList: Min((null as List<Integer>))
+define MinAllNull: Min(List<Integer>{null, null, null, null})
 ###
 
 module.exports['Min'] = {
@@ -1541,6 +1612,144 @@ module.exports['Min'] = {
                   } ]
                }
             }
+         }, {
+            "localId" : "74",
+            "name" : "MinNullList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "74",
+                  "s" : [ {
+                     "value" : [ "define ","MinNullList",": " ]
+                  }, {
+                     "r" : "73",
+                     "s" : [ {
+                        "value" : [ "Min","(" ]
+                     }, {
+                        "r" : "72",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "72",
+                           "s" : [ {
+                              "r" : "69",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "71",
+                              "s" : [ {
+                                 "value" : [ "List<" ]
+                              }, {
+                                 "r" : "70",
+                                 "s" : [ {
+                                    "value" : [ "Integer" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ">" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "73",
+               "type" : "Min",
+               "source" : {
+                  "localId" : "72",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "69",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "71",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "70",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }
+            }
+         }, {
+            "localId" : "82",
+            "name" : "MinAllNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "82",
+                  "s" : [ {
+                     "value" : [ "define ","MinAllNull",": " ]
+                  }, {
+                     "r" : "81",
+                     "s" : [ {
+                        "value" : [ "Min","(" ]
+                     }, {
+                        "r" : "80",
+                        "s" : [ {
+                           "value" : [ "List<" ]
+                        }, {
+                           "r" : "75",
+                           "s" : [ {
+                              "value" : [ "Integer" ]
+                           } ]
+                        }, {
+                           "value" : [ ">{","null",", ","null",", ","null",", ","null","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "81",
+               "type" : "Min",
+               "source" : {
+                  "localId" : "80",
+                  "type" : "List",
+                  "element" : [ {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "76",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "77",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "78",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "79",
+                        "type" : "Null"
+                     }
+                  } ]
+               }
+            }
          } ]
       }
    }
@@ -1559,6 +1768,8 @@ define q_throw1: Max({10 'ml',1 'm',2 'ml',3 'ml',4 'ml',5 'ml'})
 define q_throw2: Max({10 ,1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 
 define empty: Max(List<Integer>{})
+define MaxNullList: Max((null as List<Integer>))
+define MaxAllNull: Max(List<Integer>{null, null, null, null})
 ###
 
 module.exports['Max'] = {
@@ -2250,6 +2461,144 @@ module.exports['Max'] = {
                "source" : {
                   "localId" : "62",
                   "type" : "List"
+               }
+            }
+         }, {
+            "localId" : "70",
+            "name" : "MaxNullList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "70",
+                  "s" : [ {
+                     "value" : [ "define ","MaxNullList",": " ]
+                  }, {
+                     "r" : "69",
+                     "s" : [ {
+                        "value" : [ "Max","(" ]
+                     }, {
+                        "r" : "68",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "68",
+                           "s" : [ {
+                              "r" : "65",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "67",
+                              "s" : [ {
+                                 "value" : [ "List<" ]
+                              }, {
+                                 "r" : "66",
+                                 "s" : [ {
+                                    "value" : [ "Integer" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ">" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "69",
+               "type" : "Max",
+               "source" : {
+                  "localId" : "68",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "65",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "67",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "66",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }
+            }
+         }, {
+            "localId" : "78",
+            "name" : "MaxAllNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "78",
+                  "s" : [ {
+                     "value" : [ "define ","MaxAllNull",": " ]
+                  }, {
+                     "r" : "77",
+                     "s" : [ {
+                        "value" : [ "Max","(" ]
+                     }, {
+                        "r" : "76",
+                        "s" : [ {
+                           "value" : [ "List<" ]
+                        }, {
+                           "r" : "71",
+                           "s" : [ {
+                              "value" : [ "Integer" ]
+                           } ]
+                        }, {
+                           "value" : [ ">{","null",", ","null",", ","null",", ","null","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "77",
+               "type" : "Max",
+               "source" : {
+                  "localId" : "76",
+                  "type" : "List",
+                  "element" : [ {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "72",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "73",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "74",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "75",
+                        "type" : "Null"
+                     }
+                  } ]
                }
             }
          } ]
@@ -2961,6 +3310,9 @@ define dup_vals_odd:  Median({3,1,2,2,2,3,4,5,6})
 define has_null_q: Median({1 'ml',null,null,2 'ml'})
 define dup_vals_even_q: Median({3 'ml',1 'ml',2 'ml',2 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 define dup_vals_odd_q:  Median({3 'ml',1 'ml',2 'ml',2 'ml',2 'ml',3 'ml',4 'ml',5 'ml',6 'ml'})
+
+define MedianAllNull: Median(List<Decimal>{null, null, null})
+define MedianNullSource: Median((null as List<Decimal>))
 ###
 
 module.exports['Median'] = {
@@ -4313,6 +4665,137 @@ module.exports['Median'] = {
                   } ]
                }
             }
+         }, {
+            "localId" : "133",
+            "name" : "MedianAllNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "133",
+                  "s" : [ {
+                     "value" : [ "define ","MedianAllNull",": " ]
+                  }, {
+                     "r" : "132",
+                     "s" : [ {
+                        "value" : [ "Median","(" ]
+                     }, {
+                        "r" : "131",
+                        "s" : [ {
+                           "value" : [ "List<" ]
+                        }, {
+                           "r" : "127",
+                           "s" : [ {
+                              "value" : [ "Decimal" ]
+                           } ]
+                        }, {
+                           "value" : [ ">{","null",", ","null",", ","null","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "132",
+               "type" : "Median",
+               "source" : {
+                  "localId" : "131",
+                  "type" : "List",
+                  "element" : [ {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "128",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "129",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "130",
+                        "type" : "Null"
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "139",
+            "name" : "MedianNullSource",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "139",
+                  "s" : [ {
+                     "value" : [ "define ","MedianNullSource",": " ]
+                  }, {
+                     "r" : "138",
+                     "s" : [ {
+                        "value" : [ "Median","(" ]
+                     }, {
+                        "r" : "137",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "137",
+                           "s" : [ {
+                              "r" : "134",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "136",
+                              "s" : [ {
+                                 "value" : [ "List<" ]
+                              }, {
+                                 "r" : "135",
+                                 "s" : [ {
+                                    "value" : [ "Decimal" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ">" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "138",
+               "type" : "Median",
+               "source" : {
+                  "localId" : "137",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "134",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "136",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "135",
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }
+            }
          } ]
       }
    }
@@ -4327,6 +4810,9 @@ define has_null: Mode({1,null,null,2,2})
 define empty: Mode({})
 
 define bi_modal: Mode({1,2,2,2,3,3,3,4,5})
+
+define ModeAllNull: Mode(List<Integer>{null, null, null})
+define ModeNullSource: Mode((null as List<Integer>))
 ###
 
 module.exports['Mode'] = {
@@ -4600,6 +5086,137 @@ module.exports['Mode'] = {
                      "value" : "5",
                      "type" : "Literal"
                   } ]
+               }
+            }
+         }, {
+            "localId" : "41",
+            "name" : "ModeAllNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "41",
+                  "s" : [ {
+                     "value" : [ "define ","ModeAllNull",": " ]
+                  }, {
+                     "r" : "40",
+                     "s" : [ {
+                        "value" : [ "Mode","(" ]
+                     }, {
+                        "r" : "39",
+                        "s" : [ {
+                           "value" : [ "List<" ]
+                        }, {
+                           "r" : "35",
+                           "s" : [ {
+                              "value" : [ "Integer" ]
+                           } ]
+                        }, {
+                           "value" : [ ">{","null",", ","null",", ","null","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "40",
+               "type" : "Mode",
+               "source" : {
+                  "localId" : "39",
+                  "type" : "List",
+                  "element" : [ {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "36",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "37",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "38",
+                        "type" : "Null"
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "47",
+            "name" : "ModeNullSource",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "47",
+                  "s" : [ {
+                     "value" : [ "define ","ModeNullSource",": " ]
+                  }, {
+                     "r" : "46",
+                     "s" : [ {
+                        "value" : [ "Mode","(" ]
+                     }, {
+                        "r" : "45",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "45",
+                           "s" : [ {
+                              "r" : "42",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "44",
+                              "s" : [ {
+                                 "value" : [ "List<" ]
+                              }, {
+                                 "r" : "43",
+                                 "s" : [ {
+                                    "value" : [ "Integer" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ">" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "46",
+               "type" : "Mode",
+               "source" : {
+                  "localId" : "45",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "42",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "44",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "43",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
                }
             }
          } ]
@@ -6058,6 +6675,8 @@ define dev_q: PopulationStdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 define q_diff_units: PopulationStdDev({1 'ml', 0.002 'l',3 'ml',4 'ml', 0.05 'dl'})
 define q_throw1: PopulationStdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'm'})
 define q_throw2: PopulationStdDev({1 ,2 ,3 ,4 'ml',5 })
+define PopulationStdDevNullSource:  PopulationStdDev((null as List<Decimal>))
+define PopulationStdDevAllNull: PopulationStdDev(List<Decimal>{null, null, null})
 ###
 
 module.exports['PopulationStdDev'] = {
@@ -6534,6 +7153,137 @@ module.exports['PopulationStdDev'] = {
                         }
                      }
                   }
+               }
+            }
+         }, {
+            "localId" : "47",
+            "name" : "PopulationStdDevNullSource",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "47",
+                  "s" : [ {
+                     "value" : [ "define ","PopulationStdDevNullSource",":  " ]
+                  }, {
+                     "r" : "46",
+                     "s" : [ {
+                        "value" : [ "PopulationStdDev","(" ]
+                     }, {
+                        "r" : "45",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "45",
+                           "s" : [ {
+                              "r" : "42",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "44",
+                              "s" : [ {
+                                 "value" : [ "List<" ]
+                              }, {
+                                 "r" : "43",
+                                 "s" : [ {
+                                    "value" : [ "Decimal" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ">" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "46",
+               "type" : "PopulationStdDev",
+               "source" : {
+                  "localId" : "45",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "42",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "44",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "43",
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }
+            }
+         }, {
+            "localId" : "54",
+            "name" : "PopulationStdDevAllNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "54",
+                  "s" : [ {
+                     "value" : [ "define ","PopulationStdDevAllNull",": " ]
+                  }, {
+                     "r" : "53",
+                     "s" : [ {
+                        "value" : [ "PopulationStdDev","(" ]
+                     }, {
+                        "r" : "52",
+                        "s" : [ {
+                           "value" : [ "List<" ]
+                        }, {
+                           "r" : "48",
+                           "s" : [ {
+                              "value" : [ "Decimal" ]
+                           } ]
+                        }, {
+                           "value" : [ ">{","null",", ","null",", ","null","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "53",
+               "type" : "PopulationStdDev",
+               "source" : {
+                  "localId" : "52",
+                  "type" : "List",
+                  "element" : [ {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "49",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "50",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "51",
+                        "type" : "Null"
+                     }
+                  } ]
                }
             }
          } ]

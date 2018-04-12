@@ -22,6 +22,8 @@ define has_null_q: Min({1 'ml',null,-1 'ml',null,2 'ml'})
 define q_diff_units: Min({1 'ml',2 'dl',3 'l',4 'l',5 'l',0 'ml'})
 define q_throw1: Min({1 'ml',2 'm',3 'ml',4 'ml',5 'ml',0 'ml'})
 define q_throw2: Min({1 ,2 'ml',3 'ml',4 'ml',5 'ml',0 'ml'})
+define MinNullList: Min((null as List<Integer>))
+define MinAllNull: Min(List<Integer>{null, null, null, null})
 
 // @Test: Max
 define not_null: Max({10,1,2,3,4,5})
@@ -33,6 +35,8 @@ define q_throw1: Max({10 'ml',1 'm',2 'ml',3 'ml',4 'ml',5 'ml'})
 define q_throw2: Max({10 ,1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 
 define empty: Max(List<Integer>{})
+define MaxNullList: Max((null as List<Integer>))
+define MaxAllNull: Max(List<Integer>{null, null, null, null})
 
 // @Test: Avg
 define not_null: Avg({1,2,3,4,5})
@@ -61,12 +65,18 @@ define has_null_q: Median({1 'ml',null,null,2 'ml'})
 define dup_vals_even_q: Median({3 'ml',1 'ml',2 'ml',2 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 define dup_vals_odd_q:  Median({3 'ml',1 'ml',2 'ml',2 'ml',2 'ml',3 'ml',4 'ml',5 'ml',6 'ml'})
 
+define MedianAllNull: Median(List<Decimal>{null, null, null})
+define MedianNullSource: Median((null as List<Decimal>))
+
 // @Test: Mode
 define not_null: Mode({1,2,2,2,3,4,5})
 define has_null: Mode({1,null,null,2,2})
 define empty: Mode({})
 
 define bi_modal: Mode({1,2,2,2,3,3,3,4,5})
+
+define ModeAllNull: Mode(List<Integer>{null, null, null})
+define ModeNullSource: Mode((null as List<Integer>))
 
 // @Test: Variance
 define v: Variance({1,2,3,4,5})
@@ -95,6 +105,8 @@ define dev_q: PopulationStdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 define q_diff_units: PopulationStdDev({1 'ml', 0.002 'l',3 'ml',4 'ml', 0.05 'dl'})
 define q_throw1: PopulationStdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'm'})
 define q_throw2: PopulationStdDev({1 ,2 ,3 ,4 'ml',5 })
+define PopulationStdDevNullSource:  PopulationStdDev((null as List<Decimal>))
+define PopulationStdDevAllNull: PopulationStdDev(List<Decimal>{null, null, null})
 
 // @Test: AllTrue
 define at: AllTrue({true,true,true,true})
