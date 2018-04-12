@@ -43734,11 +43734,11 @@
   };
 
   module.exports.equivalent = equivalent = function(a, b) {
-    if (typeof a.hasMatch === 'function') {
-      return a.hasMatch(b);
-    }
     if (a === null && b === null) {
       return true;
+    }
+    if (typeof a.hasMatch === 'function') {
+      return a.hasMatch(b);
     }
     return equals(a, b);
   };
