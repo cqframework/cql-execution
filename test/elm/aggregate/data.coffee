@@ -285,6 +285,8 @@ define has_null_q: Sum({1 'ml',null,null,null,2 'ml'})
 define unmatched_units_q: Min({1 'ml',2 'L',3 'ml',4 'ml',5 'ml',0 'ml'})
 define empty: Sum(List<Integer>{})
 define q_diff_units: Sum({1 'ml',0.002 'l',0.03 'dl',4 'ml',0.005 'l'})
+define SumNullSource: Sum((null as List<Integer>))
+define SumAllNull: Sum((List<Integer>{null, null, null}))
 ###
 
 module.exports['Sum'] = {
@@ -860,6 +862,144 @@ module.exports['Sum'] = {
                      "value" : 0.005,
                      "unit" : "l",
                      "type" : "Quantity"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "60",
+            "name" : "SumNullSource",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "60",
+                  "s" : [ {
+                     "value" : [ "define ","SumNullSource",": " ]
+                  }, {
+                     "r" : "59",
+                     "s" : [ {
+                        "value" : [ "Sum","(" ]
+                     }, {
+                        "r" : "58",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "58",
+                           "s" : [ {
+                              "r" : "55",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "57",
+                              "s" : [ {
+                                 "value" : [ "List<" ]
+                              }, {
+                                 "r" : "56",
+                                 "s" : [ {
+                                    "value" : [ "Integer" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ">" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "59",
+               "type" : "Sum",
+               "source" : {
+                  "localId" : "58",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "55",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "57",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "56",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }
+            }
+         }, {
+            "localId" : "67",
+            "name" : "SumAllNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "67",
+                  "s" : [ {
+                     "value" : [ "define ","SumAllNull",": " ]
+                  }, {
+                     "r" : "66",
+                     "s" : [ {
+                        "value" : [ "Sum","(" ]
+                     }, {
+                        "r" : "65",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "65",
+                           "s" : [ {
+                              "value" : [ "List<" ]
+                           }, {
+                              "r" : "61",
+                              "s" : [ {
+                                 "value" : [ "Integer" ]
+                              } ]
+                           }, {
+                              "value" : [ ">{","null",", ","null",", ","null","}" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "66",
+               "type" : "Sum",
+               "source" : {
+                  "localId" : "65",
+                  "type" : "List",
+                  "element" : [ {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "62",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "63",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "64",
+                        "type" : "Null"
+                     }
                   } ]
                }
             }
@@ -5233,6 +5373,8 @@ define v_q: Variance({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 define q_diff_units: Variance({1.0 'ml',0.002 'l',0.003 'l',0.04 'dl',5.0 'ml'})
 define q_throw1: Variance({1.0 'm',2.0 'l',3.0 'h',4.0 'ml',5.0 'ml'})
 define q_throw2: Variance({1.0 ,2.0 ,3.0 ,4.0 'ml',5.0 'ml'})
+define VarianceNullSource:  Variance((null as List<Decimal>))
+define VarianceAllNull: Variance(List<Decimal>{null, null, null})
 ###
 
 module.exports['Variance'] = {
@@ -5702,6 +5844,137 @@ module.exports['Variance'] = {
                   } ]
                }
             }
+         }, {
+            "localId" : "47",
+            "name" : "VarianceNullSource",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "47",
+                  "s" : [ {
+                     "value" : [ "define ","VarianceNullSource",":  " ]
+                  }, {
+                     "r" : "46",
+                     "s" : [ {
+                        "value" : [ "Variance","(" ]
+                     }, {
+                        "r" : "45",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "45",
+                           "s" : [ {
+                              "r" : "42",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "44",
+                              "s" : [ {
+                                 "value" : [ "List<" ]
+                              }, {
+                                 "r" : "43",
+                                 "s" : [ {
+                                    "value" : [ "Decimal" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ">" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "46",
+               "type" : "Variance",
+               "source" : {
+                  "localId" : "45",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "42",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "44",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "43",
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }
+            }
+         }, {
+            "localId" : "54",
+            "name" : "VarianceAllNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "54",
+                  "s" : [ {
+                     "value" : [ "define ","VarianceAllNull",": " ]
+                  }, {
+                     "r" : "53",
+                     "s" : [ {
+                        "value" : [ "Variance","(" ]
+                     }, {
+                        "r" : "52",
+                        "s" : [ {
+                           "value" : [ "List<" ]
+                        }, {
+                           "r" : "48",
+                           "s" : [ {
+                              "value" : [ "Decimal" ]
+                           } ]
+                        }, {
+                           "value" : [ ">{","null",", ","null",", ","null","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "53",
+               "type" : "Variance",
+               "source" : {
+                  "localId" : "52",
+                  "type" : "List",
+                  "element" : [ {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "49",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "50",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "51",
+                        "type" : "Null"
+                     }
+                  } ]
+               }
+            }
          } ]
       }
    }
@@ -5716,6 +5989,8 @@ define v_q: PopulationVariance({1.0 'ml',2.0 'ml',3.0 'ml',4.0 'ml',5.0 'ml'})
 define q_diff_units: PopulationVariance({1.0 'ml',0.002 'l',0.003 'l',0.04 'dl',5.0 'ml'})
 define q_throw1: PopulationVariance({1.0 'm',2.0 'l',3.0 'h',4.0 'ml',5.0 'ml'})
 define q_throw2: PopulationVariance({1.0 ,2.0 ,3.0 ,4.0 'ml',5.0 'ml'})
+define PopulationVarianceNullSource:  PopulationVariance((null as List<Decimal>))
+define PopulationVarianceAllNull: PopulationVariance(List<Decimal>{null, null, null})
 ###
 
 module.exports['PopulationVariance'] = {
@@ -6169,6 +6444,137 @@ module.exports['PopulationVariance'] = {
                   } ]
                }
             }
+         }, {
+            "localId" : "47",
+            "name" : "PopulationVarianceNullSource",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "47",
+                  "s" : [ {
+                     "value" : [ "define ","PopulationVarianceNullSource",":  " ]
+                  }, {
+                     "r" : "46",
+                     "s" : [ {
+                        "value" : [ "PopulationVariance","(" ]
+                     }, {
+                        "r" : "45",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "45",
+                           "s" : [ {
+                              "r" : "42",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "44",
+                              "s" : [ {
+                                 "value" : [ "List<" ]
+                              }, {
+                                 "r" : "43",
+                                 "s" : [ {
+                                    "value" : [ "Decimal" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ">" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "46",
+               "type" : "PopulationVariance",
+               "source" : {
+                  "localId" : "45",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "42",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "44",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "43",
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }
+            }
+         }, {
+            "localId" : "54",
+            "name" : "PopulationVarianceAllNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "54",
+                  "s" : [ {
+                     "value" : [ "define ","PopulationVarianceAllNull",": " ]
+                  }, {
+                     "r" : "53",
+                     "s" : [ {
+                        "value" : [ "PopulationVariance","(" ]
+                     }, {
+                        "r" : "52",
+                        "s" : [ {
+                           "value" : [ "List<" ]
+                        }, {
+                           "r" : "48",
+                           "s" : [ {
+                              "value" : [ "Decimal" ]
+                           } ]
+                        }, {
+                           "value" : [ ">{","null",", ","null",", ","null","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "53",
+               "type" : "PopulationVariance",
+               "source" : {
+                  "localId" : "52",
+                  "type" : "List",
+                  "element" : [ {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "49",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "50",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "51",
+                        "type" : "Null"
+                     }
+                  } ]
+               }
+            }
          } ]
       }
    }
@@ -6183,6 +6589,8 @@ define std_q: StdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 define q_diff_units: StdDev({1 'ml', 0.002 'l',3 'ml',4 'ml', 0.05 'dl'})
 define sq_throw1: StdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'm'})
 define q_throw2: StdDev({1 ,2 ,3 ,4 'ml',5 })
+define StdDevNullSource:  StdDev((null as List<Decimal>))
+define StdDevAllNull: StdDev(List<Decimal>{null, null, null})
 ###
 
 module.exports['StdDev'] = {
@@ -6659,6 +7067,137 @@ module.exports['StdDev'] = {
                         }
                      }
                   }
+               }
+            }
+         }, {
+            "localId" : "47",
+            "name" : "StdDevNullSource",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "47",
+                  "s" : [ {
+                     "value" : [ "define ","StdDevNullSource",":  " ]
+                  }, {
+                     "r" : "46",
+                     "s" : [ {
+                        "value" : [ "StdDev","(" ]
+                     }, {
+                        "r" : "45",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "45",
+                           "s" : [ {
+                              "r" : "42",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "44",
+                              "s" : [ {
+                                 "value" : [ "List<" ]
+                              }, {
+                                 "r" : "43",
+                                 "s" : [ {
+                                    "value" : [ "Decimal" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ">" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "46",
+               "type" : "StdDev",
+               "source" : {
+                  "localId" : "45",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "42",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "44",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "43",
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }
+            }
+         }, {
+            "localId" : "54",
+            "name" : "StdDevAllNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "54",
+                  "s" : [ {
+                     "value" : [ "define ","StdDevAllNull",": " ]
+                  }, {
+                     "r" : "53",
+                     "s" : [ {
+                        "value" : [ "StdDev","(" ]
+                     }, {
+                        "r" : "52",
+                        "s" : [ {
+                           "value" : [ "List<" ]
+                        }, {
+                           "r" : "48",
+                           "s" : [ {
+                              "value" : [ "Decimal" ]
+                           } ]
+                        }, {
+                           "value" : [ ">{","null",", ","null",", ","null","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "53",
+               "type" : "StdDev",
+               "source" : {
+                  "localId" : "52",
+                  "type" : "List",
+                  "element" : [ {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "49",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "50",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "51",
+                        "type" : "Null"
+                     }
+                  } ]
                }
             }
          } ]

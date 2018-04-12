@@ -30,15 +30,19 @@ describe 'Sum', ->
   it 'should be able to sum lists with nulls', ->
     @has_null.exec(@ctx).should.equal 3
   it 'should be able to sum empty list', ->
-    @empty.exec(@ctx) == null
+    should(@empty.exec(@ctx)).be.null
   it 'should be able to sum quantity lists without nulls', ->
     validateQuantity @not_null_q.exec(@ctx), 15, 'ml'
   it 'should be able to sum  quantity lists with nulls', ->
     validateQuantity @has_null_q.exec(@ctx), 3, 'ml'
   it 'should return null for unmatched units in a list of quantiies', ->
-    @unmatched_units_q.exec(@ctx) == null
+    should(@unmatched_units_q.exec(@ctx)).be.null
   it 'should be able to sum quantity lists with related units', ->
     validateQuantity @q_diff_units.exec(@ctx), 15, 'ml'
+  it 'should return null if all elements null', ->
+    should(@sumAllNull.exec(@ctx)).be.null
+  it 'should return null for null souce', ->
+    should(@sumNullSource.exec(@ctx)).be.null
 
 describe 'Min', ->
   @beforeEach ->
@@ -165,6 +169,11 @@ describe 'PopulationVariance', ->
       @q_throw2.exec(@ctx)
       false.should.be.true("Incompatible Quantities should throw an error")
     catch
+  it 'should return null if source null', ->
+    should(@populationVarianceNullSource.exec(@ctx)).be.null
+
+  it 'should return null if all elements null', ->
+    should(@populationVarianceAllNull.exec(@ctx)).be.null
 
 describe 'Variance', ->
   @beforeEach ->
@@ -185,6 +194,11 @@ describe 'Variance', ->
       @q_throw2.exec(@ctx)
       false.should.be.true("Incompatible Quantities should throw an error")
     catch
+  it 'should return null if source null', ->
+    should(@varianceNullSource.exec(@ctx)).be.null
+
+  it 'should return null if all elements null', ->
+    should(@varianceAllNull.exec(@ctx)).be.null
 
 describe 'StdDev', ->
   @beforeEach ->
@@ -205,6 +219,11 @@ describe 'StdDev', ->
       @q_throw2.exec(@ctx)
       false.should.be.true("Incompatible Quantities should throw an error")
     catch
+  it 'should return null if source null', ->
+    should(@stdDevNullSource.exec(@ctx)).be.null
+
+  it 'should return null if all elements null', ->
+    should(@stdDevAllNull.exec(@ctx)).be.null
 
 describe 'PopulationStdDev', ->
   @beforeEach ->
