@@ -48,6 +48,28 @@ define ADefined_BNull: 5 ~ null
 define ANull_BNull: null ~ null
 define ADefined_BDefined: 3 ~ 3
 
+// define EmptyTuples: { : } ~ { : }
+define SameTuples: Tuple{a: 'a', b: 'b'} ~ Tuple{a: 'a', b: 'b'}
+define SameTuplesNull: Tuple{a: null} ~ Tuple{a : null}
+define DifferentTuples: Tuple{a: 'a', b: 'b'} ~ Tuple{a: 'x', b: 'b'}
+define SameNestedTuples: Tuple{a: 'a', b: Tuple{c: 'c'}} ~ Tuple{a: 'a', b: Tuple{c: 'c'}}
+define SameNestedTuplesNull: Tuple{a: 'a', b: Tuple{c: null}} ~ Tuple{a: 'a', b: Tuple{c: null}}
+
+define EmptyLists: { } ~ { }
+define DifferentTypesLists: {'1', '2', '3'} ~ {1, 2, 3}
+define DifferentLengthLists: {'a'} ~ {'a', 'a'}
+define DifferentOrderLists: {'a', 'b'} ~ {'b', 'a'}
+define SameLists: {'a', 'b', 'c'} ~ {'a', 'b', 'c'}
+define SameListsNull: {null, null, null} ~ {null, null, null}
+define SameNestedLists: {{'a','d'}, {'b', 'c'}} ~ {{'a','d'}, {'b', 'c'}}
+define SameNestedListsNull: {null, {null, null}} ~ {null, {null, null}}
+
+define EmptyInterval: Interval(null, null) ~ Interval(null, null)
+define IntervalDifferentPointTypes:  Interval[1, 5] ~ Interval[1.0, 5.0]
+define IntervalDifferentStarts: Interval[1,3] ~ Interval[2,3]
+define IntervalDifferentEndings: Interval[1,3] ~ Interval[1,4]
+define SameIntervals: Interval[1,3] ~ Interval[1,3]
+
 // @Test: Less
 define AGtB_Int: 5 < 4
 define AEqB_Int: 5 < 5
