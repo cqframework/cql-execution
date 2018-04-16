@@ -10,8 +10,8 @@ quantitiesOrArg = (arr) ->
   if arr.length == 0
     return arr
 
-  allQs = arr.every (x) -> x.constructor.name == "Quantity"
-  someQs = arr.some (x) -> x.constructor.name == "Quantity"
+  allQs = arr.every (x) -> x.isQuantity
+  someQs = arr.some (x) -> x.isQuantity
   if allQs
     unit = arr[0].unit
     values = []

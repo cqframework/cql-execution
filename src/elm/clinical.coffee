@@ -102,6 +102,12 @@ module.exports.Concept = class Concept extends Expression
     @codes = json.code
     @display = json.display
 
+  # Define a simple getter to allow type-checking of this class without instanceof
+  # and in a way that survives minification (as opposed to checking constructor.name)
+  Object.defineProperties @prototype,
+    isConcept:
+      get: -> true
+
   toCode: (ctx, code) ->
     system = ctx.getCodeSystem(code.system.name)?.id
     return new dt.Code(code.code, system, code.version, code.display)

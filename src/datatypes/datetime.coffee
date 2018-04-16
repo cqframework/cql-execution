@@ -50,6 +50,12 @@ module.exports.DateTime = class DateTime
     if not @timezoneOffset?
       @timezoneOffset = (new Date()).getTimezoneOffset() / 60 * -1
 
+  # Define a simple getter to allow type-checking of this class without instanceof
+  # and in a way that survives minification (as opposed to checking constructor.name)
+  Object.defineProperties @prototype,
+    isDateTime:
+      get: -> true
+
   copy: () ->
     new DateTime(@year, @month, @day, @hour, @minute, @second, @millisecond, @timezoneOffset)
 
