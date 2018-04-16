@@ -2628,21 +2628,20 @@
     InValueSet.prototype.exec = function(ctx) {
       var code, valueset;
       if (this.code == null) {
-        return null;
+        return false;
       }
       if (this.valueset == null) {
-        return false;
+        throw new Error("ValueSet must be provided to InValueSet function");
       }
       code = this.code.execute(ctx);
       if (code == null) {
-        return null;
-      }
-      valueset = this.valueset.execute(ctx);
-      if (valueset != null) {
-        return valueset.hasMatch(code);
-      } else {
         return false;
       }
+      valueset = this.valueset.execute(ctx);
+      if (valueset == null) {
+        throw new Error("ValueSet must be provided to InValueSet function");
+      }
+      return valueset.hasMatch(code);
     };
 
     return InValueSet;
@@ -5093,7 +5092,7 @@
     In.prototype.exec = function(ctx) {
       var container, item, lib, ref1;
       ref1 = this.execArgs(ctx), item = ref1[0], container = ref1[1];
-      if ((item == null) || (container == null)) {
+      if (container == null) {
         return null;
       }
       lib = (function() {
@@ -5123,7 +5122,7 @@
     Contains.prototype.exec = function(ctx) {
       var container, item, lib, ref1;
       ref1 = this.execArgs(ctx), container = ref1[0], item = ref1[1];
-      if ((item == null) || (container == null)) {
+      if (container == null) {
         return null;
       }
       lib = (function() {
@@ -43735,6 +43734,9 @@
   };
 
   module.exports.equivalent = equivalent = function(a, b) {
+    if (a === null && b === null) {
+      return true;
+    }
     if (typeof a.hasMatch === 'function') {
       return a.hasMatch(b);
     }

@@ -34,15 +34,16 @@ module.exports.InValueSet = class InValueSet extends Expression
     @valueset = new ValueSetRef json.valueset
 
   exec: (ctx) ->
-    # Bonnie-633 Added null check
-    # spec indicates to return null if code is null, false is value set is null
-    return null unless @code?
-    return false unless @valueset?
+    # If the code argument is null, the result is false
+    return false unless @code?
+    throw new Error("ValueSet must be provided to InValueSet function") unless @valueset?
     code = @code.execute(ctx)
-    # spec indicates to return null if code is null, false is value set is null
-    return null unless code?
+    # spec indicates to return false if code is null, throw error if value set cannot be resolved
+    return false unless code?
     valueset = @valueset.execute(ctx)
-    if valueset? then valueset.hasMatch code else false
+    throw new Error("ValueSet must be provided to InValueSet function") unless valueset?
+    # If there is a code and valueset return whether or not the valueset has the code
+    return valueset.hasMatch code
 
 module.exports.CodeSystemDef = class CodeSystemDef extends Expression
   constructor: (json) ->

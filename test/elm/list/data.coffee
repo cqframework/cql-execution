@@ -6018,8 +6018,9 @@ define IsIn: 4 in { 3, 4, 5 }
 define IsNotIn: 4 in { 3, 5, 6 }
 define TupleIsIn: Tuple{a: 1, b: 'c'} in {Tuple{a:1, b:'d'}, Tuple{a:1, b:'c'}, Tuple{a:2, b:'c'}}
 define TupleIsNotIn: Tuple{a: 1, b: 'c'} in {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
-define NullIn: null in {1, 2, 3}
+define NullIn: null in {1, 2, null, 3}
 define InNull: 1 in null
+define NullNotIn: null in {1, 2, 3}
 ###
 
 module.exports['In'] = {
@@ -6577,32 +6578,32 @@ module.exports['In'] = {
                } ]
             }
          }, {
-            "localId" : "52",
+            "localId" : "53",
             "name" : "NullIn",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "52",
+                  "r" : "53",
                   "s" : [ {
                      "value" : [ "define ","NullIn",": " ]
                   }, {
-                     "r" : "51",
+                     "r" : "52",
                      "s" : [ {
                         "r" : "46",
                         "value" : [ "null"," in " ]
                      }, {
-                        "r" : "50",
+                        "r" : "51",
                         "s" : [ {
-                           "value" : [ "{","1",", ","2",", ","3","}" ]
+                           "value" : [ "{","1",", ","2",", ","null",", ","3","}" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "51",
+               "localId" : "52",
                "type" : "In",
                "operand" : [ {
                   "asType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -6612,7 +6613,7 @@ module.exports['In'] = {
                      "type" : "Null"
                   }
                }, {
-                  "localId" : "50",
+                  "localId" : "51",
                   "type" : "List",
                   "element" : [ {
                      "localId" : "47",
@@ -6625,7 +6626,14 @@ module.exports['In'] = {
                      "value" : "2",
                      "type" : "Literal"
                   }, {
-                     "localId" : "49",
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "49",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "50",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
@@ -6633,37 +6641,37 @@ module.exports['In'] = {
                } ]
             }
          }, {
-            "localId" : "56",
+            "localId" : "57",
             "name" : "InNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "56",
+                  "r" : "57",
                   "s" : [ {
                      "value" : [ "define ","InNull",": " ]
                   }, {
-                     "r" : "55",
+                     "r" : "56",
                      "s" : [ {
-                        "r" : "53",
+                        "r" : "54",
                         "value" : [ "1"," in ","null" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "55",
+               "localId" : "56",
                "type" : "In",
                "operand" : [ {
-                  "localId" : "53",
+                  "localId" : "54",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "type" : "Literal"
                }, {
                   "type" : "As",
                   "operand" : {
-                     "localId" : "54",
+                     "localId" : "55",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
@@ -6673,6 +6681,62 @@ module.exports['In'] = {
                         "type" : "NamedTypeSpecifier"
                      }
                   }
+               } ]
+            }
+         }, {
+            "localId" : "64",
+            "name" : "NullNotIn",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "64",
+                  "s" : [ {
+                     "value" : [ "define ","NullNotIn",": " ]
+                  }, {
+                     "r" : "63",
+                     "s" : [ {
+                        "r" : "58",
+                        "value" : [ "null"," in " ]
+                     }, {
+                        "r" : "62",
+                        "s" : [ {
+                           "value" : [ "{","1",", ","2",", ","3","}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "63",
+               "type" : "In",
+               "operand" : [ {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "58",
+                     "type" : "Null"
+                  }
+               }, {
+                  "localId" : "62",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "59",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "60",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "61",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  } ]
                } ]
             }
          } ]
@@ -6689,7 +6753,8 @@ define IsNotIn: { 3, 5, 6 } contains 4
 define TupleIsIn: {Tuple{a:1, b:'d'}, Tuple{a:1, b:'c'}, Tuple{a:2, b:'c'}} contains Tuple{a: 1, b: 'c'}
 define TupleIsNotIn: {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} contains Tuple{a: 1, b: 'c'}
 define InNull: (null as List<Integer>) contains 1
-define NullIn: {1, 2, 3} contains null
+define NullIn: {1, 2, null, 3} contains null
+define NullNotIn: {1, 2, 3} contains null
 ###
 
 module.exports['Contains'] = {
@@ -7316,22 +7381,22 @@ module.exports['Contains'] = {
                } ]
             }
          }, {
-            "localId" : "59",
+            "localId" : "60",
             "name" : "NullIn",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "59",
+                  "r" : "60",
                   "s" : [ {
                      "value" : [ "define ","NullIn",": " ]
                   }, {
-                     "r" : "58",
+                     "r" : "59",
                      "s" : [ {
-                        "r" : "56",
+                        "r" : "57",
                         "s" : [ {
-                           "value" : [ "{","1",", ","2",", ","3","}" ]
+                           "value" : [ "{","1",", ","2",", ","null",", ","3","}" ]
                         } ]
                      }, {
                         "value" : [ " contains ","null" ]
@@ -7340,10 +7405,10 @@ module.exports['Contains'] = {
                }
             } ],
             "expression" : {
-               "localId" : "58",
+               "localId" : "59",
                "type" : "Contains",
                "operand" : [ {
-                  "localId" : "56",
+                  "localId" : "57",
                   "type" : "List",
                   "element" : [ {
                      "localId" : "53",
@@ -7356,7 +7421,14 @@ module.exports['Contains'] = {
                      "value" : "2",
                      "type" : "Literal"
                   }, {
-                     "localId" : "55",
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "55",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "56",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
@@ -7365,7 +7437,62 @@ module.exports['Contains'] = {
                   "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "As",
                   "operand" : {
-                     "localId" : "57",
+                     "localId" : "58",
+                     "type" : "Null"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "67",
+            "name" : "NullNotIn",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "67",
+                  "s" : [ {
+                     "value" : [ "define ","NullNotIn",": " ]
+                  }, {
+                     "r" : "66",
+                     "s" : [ {
+                        "r" : "64",
+                        "s" : [ {
+                           "value" : [ "{","1",", ","2",", ","3","}" ]
+                        } ]
+                     }, {
+                        "value" : [ " contains ","null" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "66",
+               "type" : "Contains",
+               "operand" : [ {
+                  "localId" : "64",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "61",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "62",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "63",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  } ]
+               }, {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "65",
                      "type" : "Null"
                   }
                } ]
