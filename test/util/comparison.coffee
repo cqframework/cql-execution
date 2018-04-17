@@ -104,6 +104,15 @@ describe 'equivalent', ->
   it 'should consider two null values to be equivalent', ->
     equivalent(null, null).should.be.true()
 
+  it 'should consider two undefined values to be equivalent', ->
+    equivalent(undefined, undefined).should.be.true()
+
+  describe 'should consider one null code to not be equivalent to a code', ->
+    it '', ->
+      equivalent(null, new Code('123')).should.be.false()
+    it 'if null comes second', ->
+      equivalent(new Code('123'), null).should.be.false()
+
   it 'should detect equivalent and non-equivalent codes', ->
     equivalent(new Code('12345', 'Code System', '2016', 'Display Name'), new Code('12345', 'Code System', undefined, undefined)).should.be.true()
     equivalent(new Code('1234', 'First Code System', '2016', 'Display Name'), new Code('1234', 'Different Code System', undefined, undefined)).should.be.false()
