@@ -67417,6 +67417,1305 @@ module.exports['End'] = {
    }
 }
 
+### Starts
+library TestSnippet version '1'
+using QUICK
+context Patient
+define TestStartsNull: Interval[null, null] starts Interval[1, 10]
+define IntegerIntervalStartsTrue: Interval[4,10] starts Interval[4, 15]
+define IntegerIntervalStartsFalse: Interval[1, 10] starts Interval[4, 10]
+define IntegerIntervalStartEndsFalse: Interval[4, 10] starts Interval[4, 9]
+define DecimalIntervalStartsTrue: Interval[4.0, 10.0] starts Interval[4.0, 15.0]
+define DecimalIntervalStartsFalse: Interval[1.0, 10.0] starts Interval[4.0, 10.0]
+define DecimalIntervalStartsEndsFalse: Interval[4.0, 10.0] starts Interval[4.0, 9.0]
+define QuantityIntervalStartsTrue: Interval[5.0 'g', 10.0 'g'] starts Interval[5.0 'g', 15.0 'g']
+define QuantityIntervalStartsFalse: Interval[1.0 'g', 10.0 'g'] starts Interval[5.0 'g', 10.0 'g']
+define QuantityIntervalStartsEndsFalse: Interval[5.0 'g', 10.0 'g'] starts Interval[5.0 'g', 9.9 'g']
+define DateTimeIntervalStartsTrue: Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] starts day of Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 27)]
+define DateTimeIntervalStartsFalse: Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] starts day of Interval[DateTime(2012, 1, 6), DateTime(2012, 1, 27)]
+define DateTimeIntervalStartsEndsFalse: Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] starts day of Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 24)]
+###
+
+module.exports['Starts'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "9",
+            "name" : "TestStartsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "define ","TestStartsNull",": " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "r" : "4",
+                        "s" : [ {
+                           "value" : [ "Interval[","null",", ","null","]" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","starts"," " ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "Interval[","1",", ","10","]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "type" : "Starts",
+               "operand" : [ {
+                  "localId" : "4",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "2",
+                     "type" : "Null"
+                  },
+                  "high" : {
+                     "localId" : "3",
+                     "type" : "Null"
+                  }
+               }, {
+                  "localId" : "7",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "5",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "6",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "10",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "17",
+            "name" : "IntegerIntervalStartsTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "17",
+                  "s" : [ {
+                     "value" : [ "define ","IntegerIntervalStartsTrue",": " ]
+                  }, {
+                     "r" : "16",
+                     "s" : [ {
+                        "r" : "12",
+                        "s" : [ {
+                           "value" : [ "Interval[","4",",","10","]" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","starts"," " ]
+                     }, {
+                        "r" : "15",
+                        "s" : [ {
+                           "value" : [ "Interval[","4",", ","15","]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "16",
+               "type" : "Starts",
+               "operand" : [ {
+                  "localId" : "12",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "10",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "11",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "10",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "15",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "13",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "14",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "15",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "25",
+            "name" : "IntegerIntervalStartsFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "25",
+                  "s" : [ {
+                     "value" : [ "define ","IntegerIntervalStartsFalse",": " ]
+                  }, {
+                     "r" : "24",
+                     "s" : [ {
+                        "r" : "20",
+                        "s" : [ {
+                           "value" : [ "Interval[","1",", ","10","]" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","starts"," " ]
+                     }, {
+                        "r" : "23",
+                        "s" : [ {
+                           "value" : [ "Interval[","4",", ","10","]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "24",
+               "type" : "Starts",
+               "operand" : [ {
+                  "localId" : "20",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "18",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "19",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "10",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "23",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "21",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "22",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "10",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "33",
+            "name" : "IntegerIntervalStartEndsFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "33",
+                  "s" : [ {
+                     "value" : [ "define ","IntegerIntervalStartEndsFalse",": " ]
+                  }, {
+                     "r" : "32",
+                     "s" : [ {
+                        "r" : "28",
+                        "s" : [ {
+                           "value" : [ "Interval[","4",", ","10","]" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","starts"," " ]
+                     }, {
+                        "r" : "31",
+                        "s" : [ {
+                           "value" : [ "Interval[","4",", ","9","]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "32",
+               "type" : "Starts",
+               "operand" : [ {
+                  "localId" : "28",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "26",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "27",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "10",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "31",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "29",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "30",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "9",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "41",
+            "name" : "DecimalIntervalStartsTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "41",
+                  "s" : [ {
+                     "value" : [ "define ","DecimalIntervalStartsTrue",": " ]
+                  }, {
+                     "r" : "40",
+                     "s" : [ {
+                        "r" : "36",
+                        "s" : [ {
+                           "value" : [ "Interval[","4.0",", ","10.0","]" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","starts"," " ]
+                     }, {
+                        "r" : "39",
+                        "s" : [ {
+                           "value" : [ "Interval[","4.0",", ","15.0","]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "40",
+               "type" : "Starts",
+               "operand" : [ {
+                  "localId" : "36",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "34",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "4.0",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "35",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "10.0",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "39",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "37",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "4.0",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "38",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "15.0",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "49",
+            "name" : "DecimalIntervalStartsFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "49",
+                  "s" : [ {
+                     "value" : [ "define ","DecimalIntervalStartsFalse",": " ]
+                  }, {
+                     "r" : "48",
+                     "s" : [ {
+                        "r" : "44",
+                        "s" : [ {
+                           "value" : [ "Interval[","1.0",", ","10.0","]" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","starts"," " ]
+                     }, {
+                        "r" : "47",
+                        "s" : [ {
+                           "value" : [ "Interval[","4.0",", ","10.0","]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "48",
+               "type" : "Starts",
+               "operand" : [ {
+                  "localId" : "44",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "42",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "1.0",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "43",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "10.0",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "47",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "45",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "4.0",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "46",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "10.0",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "57",
+            "name" : "DecimalIntervalStartsEndsFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "57",
+                  "s" : [ {
+                     "value" : [ "define ","DecimalIntervalStartsEndsFalse",": " ]
+                  }, {
+                     "r" : "56",
+                     "s" : [ {
+                        "r" : "52",
+                        "s" : [ {
+                           "value" : [ "Interval[","4.0",", ","10.0","]" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","starts"," " ]
+                     }, {
+                        "r" : "55",
+                        "s" : [ {
+                           "value" : [ "Interval[","4.0",", ","9.0","]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "56",
+               "type" : "Starts",
+               "operand" : [ {
+                  "localId" : "52",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "50",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "4.0",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "51",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "10.0",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "55",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "53",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "4.0",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "54",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "9.0",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "65",
+            "name" : "QuantityIntervalStartsTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "65",
+                  "s" : [ {
+                     "value" : [ "define ","QuantityIntervalStartsTrue",": " ]
+                  }, {
+                     "r" : "64",
+                     "s" : [ {
+                        "r" : "60",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "58",
+                           "s" : [ {
+                              "value" : [ "5.0 ","'g'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "59",
+                           "s" : [ {
+                              "value" : [ "10.0 ","'g'" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","starts"," " ]
+                     }, {
+                        "r" : "63",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "61",
+                           "s" : [ {
+                              "value" : [ "5.0 ","'g'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "62",
+                           "s" : [ {
+                              "value" : [ "15.0 ","'g'" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "64",
+               "type" : "Starts",
+               "operand" : [ {
+                  "localId" : "60",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "58",
+                     "value" : 5.0,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  },
+                  "high" : {
+                     "localId" : "59",
+                     "value" : 10.0,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  }
+               }, {
+                  "localId" : "63",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "61",
+                     "value" : 5.0,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  },
+                  "high" : {
+                     "localId" : "62",
+                     "value" : 15.0,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "73",
+            "name" : "QuantityIntervalStartsFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "73",
+                  "s" : [ {
+                     "value" : [ "define ","QuantityIntervalStartsFalse",": " ]
+                  }, {
+                     "r" : "72",
+                     "s" : [ {
+                        "r" : "68",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "66",
+                           "s" : [ {
+                              "value" : [ "1.0 ","'g'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "67",
+                           "s" : [ {
+                              "value" : [ "10.0 ","'g'" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","starts"," " ]
+                     }, {
+                        "r" : "71",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "69",
+                           "s" : [ {
+                              "value" : [ "5.0 ","'g'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "70",
+                           "s" : [ {
+                              "value" : [ "10.0 ","'g'" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "72",
+               "type" : "Starts",
+               "operand" : [ {
+                  "localId" : "68",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "66",
+                     "value" : 1.0,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  },
+                  "high" : {
+                     "localId" : "67",
+                     "value" : 10.0,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  }
+               }, {
+                  "localId" : "71",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "69",
+                     "value" : 5.0,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  },
+                  "high" : {
+                     "localId" : "70",
+                     "value" : 10.0,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "81",
+            "name" : "QuantityIntervalStartsEndsFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "81",
+                  "s" : [ {
+                     "value" : [ "define ","QuantityIntervalStartsEndsFalse",": " ]
+                  }, {
+                     "r" : "80",
+                     "s" : [ {
+                        "r" : "76",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "74",
+                           "s" : [ {
+                              "value" : [ "5.0 ","'g'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "75",
+                           "s" : [ {
+                              "value" : [ "10.0 ","'g'" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","starts"," " ]
+                     }, {
+                        "r" : "79",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "77",
+                           "s" : [ {
+                              "value" : [ "5.0 ","'g'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "78",
+                           "s" : [ {
+                              "value" : [ "9.9 ","'g'" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "80",
+               "type" : "Starts",
+               "operand" : [ {
+                  "localId" : "76",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "74",
+                     "value" : 5.0,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  },
+                  "high" : {
+                     "localId" : "75",
+                     "value" : 10.0,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  }
+               }, {
+                  "localId" : "79",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "77",
+                     "value" : 5.0,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  },
+                  "high" : {
+                     "localId" : "78",
+                     "value" : 9.9,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "101",
+            "name" : "DateTimeIntervalStartsTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "101",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimeIntervalStartsTrue",": " ]
+                  }, {
+                     "r" : "100",
+                     "s" : [ {
+                        "r" : "90",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "85",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","5",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "89",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","25",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","starts day of"," " ]
+                     }, {
+                        "r" : "99",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "94",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","5",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "98",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","27",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "100",
+               "precision" : "Day",
+               "type" : "Starts",
+               "operand" : [ {
+                  "localId" : "90",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "85",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "82",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "83",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "84",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "89",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "86",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "87",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "88",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "25",
+                        "type" : "Literal"
+                     }
+                  }
+               }, {
+                  "localId" : "99",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "94",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "91",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "92",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "93",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "98",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "95",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "96",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "97",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "27",
+                        "type" : "Literal"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "121",
+            "name" : "DateTimeIntervalStartsFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "121",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimeIntervalStartsFalse",": " ]
+                  }, {
+                     "r" : "120",
+                     "s" : [ {
+                        "r" : "110",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "105",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","5",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "109",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","25",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","starts day of"," " ]
+                     }, {
+                        "r" : "119",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "114",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","6",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "118",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","27",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "120",
+               "precision" : "Day",
+               "type" : "Starts",
+               "operand" : [ {
+                  "localId" : "110",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "105",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "102",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "103",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "104",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "109",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "106",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "107",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "108",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "25",
+                        "type" : "Literal"
+                     }
+                  }
+               }, {
+                  "localId" : "119",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "114",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "111",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "112",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "113",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "6",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "118",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "115",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "116",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "117",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "27",
+                        "type" : "Literal"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "141",
+            "name" : "DateTimeIntervalStartsEndsFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "141",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimeIntervalStartsEndsFalse",": " ]
+                  }, {
+                     "r" : "140",
+                     "s" : [ {
+                        "r" : "130",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "125",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","5",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "129",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","25",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","starts day of"," " ]
+                     }, {
+                        "r" : "139",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "134",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","5",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "138",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","24",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "140",
+               "precision" : "Day",
+               "type" : "Starts",
+               "operand" : [ {
+                  "localId" : "130",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "125",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "122",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "123",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "124",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "129",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "126",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "127",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "128",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "25",
+                        "type" : "Literal"
+                     }
+                  }
+               }, {
+                  "localId" : "139",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "134",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "131",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "132",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "133",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "138",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "135",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "136",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "137",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "24",
+                        "type" : "Literal"
+                     }
+                  }
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
 ### IntegerIntervalUnion
 library TestSnippet version '1'
 using QUICK

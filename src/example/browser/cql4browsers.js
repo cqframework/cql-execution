@@ -1409,6 +1409,17 @@
       }
     };
 
+    Interval.prototype.starts = function(other, precision) {
+      var lessThanOrEqual, startEqual;
+      if ((precision != null) && this.low instanceof DateTime) {
+        startEqual = this.low.sameAs(other.low, precision);
+      } else {
+        startEqual = cmp.equals(this.low, other.low);
+      }
+      lessThanOrEqual = cmp.lessThanOrEquals(this.high, other.high, precision);
+      return startEqual && lessThanOrEqual;
+    };
+
     Interval.prototype.width = function() {
       var closed, diff;
       if (this.low instanceof DateTime || this.high instanceof DateTime) {
@@ -4053,13 +4064,25 @@
   module.exports.Starts = Starts = (function(superClass) {
     extend(Starts, superClass);
 
-    function Starts() {
-      return Starts.__super__.constructor.apply(this, arguments);
+    function Starts(json) {
+      var ref1;
+      Starts.__super__.constructor.apply(this, arguments);
+      this.precision = (ref1 = json.precision) != null ? ref1.toLowerCase() : void 0;
     }
+
+    Starts.prototype.exec = function(ctx) {
+      var a, b, ref1;
+      ref1 = this.execArgs(ctx), a = ref1[0], b = ref1[1];
+      if ((a != null) && (b != null)) {
+        return a.starts(b, this.precision);
+      } else {
+        return null;
+      }
+    };
 
     return Starts;
 
-  })(UnimplementedExpression);
+  })(Expression);
 
   module.exports.Ends = Ends = (function(superClass) {
     extend(Ends, superClass);

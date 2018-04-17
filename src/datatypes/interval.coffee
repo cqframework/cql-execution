@@ -197,6 +197,14 @@ module.exports.Interval = class Interval
     catch
       false
 
+  starts: (other, precision) ->
+    if precision? and @low instanceof DateTime
+      startEqual = @low.sameAs(other.low, precision)
+    else
+      startEqual = cmp.equals(@low, other.low)
+    lessThanOrEqual = cmp.lessThanOrEquals(@high, other.high, precision)
+    startEqual and lessThanOrEqual
+
   width: () ->
     if @low instanceof DateTime or @high instanceof DateTime
       throw new Error("Width of DateTime intervals is not supported")

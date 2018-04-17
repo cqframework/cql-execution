@@ -920,6 +920,33 @@ describe 'End', ->
   it 'should execute as the end of the interval', ->
     @foo.exec(@ctx).should.eql new DateTime(2013, 1, 1)
 
+describe 'Starts', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'should calculate to null', ->
+    should(@testStartsNull.exec(@ctx)).be.null
+
+  it 'should calculate integer intervals properly', ->
+    @integerIntervalStartsTrue.exec(@ctx).should.be.true()
+    @integerIntervalStartsFalse.exec(@ctx).should.be.false()
+    @integerIntervalStartEndsFalse.exec(@ctx).should.be.false()
+
+  it 'should calculate decimal intervals properly', ->
+    @decimalIntervalStartsTrue.exec(@ctx).should.be.true()
+    @decimalIntervalStartsFalse.exec(@ctx).should.be.false()
+    @decimalIntervalStartsEndsFalse.exec(@ctx).should.be.false()
+
+  it 'should calculate quantity intervals properly', ->
+    @quantityIntervalStartsTrue.exec(@ctx).should.be.true()
+    @quantityIntervalStartsFalse.exec(@ctx).should.be.false()
+    @quantityIntervalStartsEndsFalse.exec(@ctx).should.be.false()
+
+  it 'should calculate datetime intervals properly', ->
+    @dateTimeIntervalStartsTrue.exec(@ctx).should.be.true()
+    @dateTimeIntervalStartsFalse.exec(@ctx).should.be.false()
+    @dateTimeIntervalStartsEndsFalse.exec(@ctx).should.be.false()
+
 describe 'IntegerIntervalUnion', ->
   @beforeEach ->
     setup @, data
