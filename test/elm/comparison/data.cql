@@ -65,7 +65,7 @@ define SameNestedLists: {{'a','d'}, {'b', 'c'}} ~ {{'a','d'}, {'b', 'c'}}
 define SameNestedListsNull: {null, {null, null}} ~ {null, {null, null}}
 
 define EmptyInterval: Interval(null, null) ~ Interval(null, null)
-define IntervalDifferentPointTypes:  Interval[1, 5] ~ Interval[1.0, 5.0]
+define IntervalDifferentPointTypes:  Interval[1, 5] ~ Interval['1', '5']
 define IntervalDifferentStarts: Interval[1,3] ~ Interval[2,3]
 define IntervalDifferentEndings: Interval[1,3] ~ Interval[1,4]
 define SameIntervals: Interval[1,3] ~ Interval[1,3]

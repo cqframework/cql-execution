@@ -3242,7 +3242,7 @@ define SameNestedLists: {{'a','d'}, {'b', 'c'}} ~ {{'a','d'}, {'b', 'c'}}
 define SameNestedListsNull: {null, {null, null}} ~ {null, {null, null}}
 
 define EmptyInterval: Interval(null, null) ~ Interval(null, null)
-define IntervalDifferentPointTypes:  Interval[1, 5] ~ Interval[1.0, 5.0]
+define IntervalDifferentPointTypes:  Interval[1, 5] ~ Interval['1', '5']
 define IntervalDifferentStarts: Interval[1,3] ~ Interval[2,3]
 define IntervalDifferentEndings: Interval[1,3] ~ Interval[1,4]
 define SameIntervals: Interval[1,3] ~ Interval[1,3]
@@ -4841,7 +4841,21 @@ module.exports['Equivalent'] = {
                      }, {
                         "r" : "150",
                         "s" : [ {
-                           "value" : [ "Interval[","1.0",", ","5.0","]" ]
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "148",
+                           "s" : [ {
+                              "value" : [ "'1'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "149",
+                           "s" : [ {
+                              "value" : [ "'5'" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
                         } ]
                      } ]
                   } ]
@@ -4874,14 +4888,14 @@ module.exports['Equivalent'] = {
                   "type" : "Interval",
                   "low" : {
                      "localId" : "148",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                     "value" : "1.0",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "1",
                      "type" : "Literal"
                   },
                   "high" : {
                      "localId" : "149",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                     "value" : "5.0",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "5",
                      "type" : "Literal"
                   }
                } ]
