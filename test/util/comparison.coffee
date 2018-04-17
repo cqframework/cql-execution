@@ -108,7 +108,7 @@ describe 'equivalent', ->
     equivalent(undefined, undefined).should.be.true()
 
   describe 'should consider one null code to not be equivalent to a code', ->
-    it '', ->
+    it 'if null comes first', ->
       equivalent(null, new Code('123')).should.be.false()
     it 'if null comes second', ->
       equivalent(new Code('123'), null).should.be.false()

@@ -48,7 +48,7 @@ define ADefined_BNull: 5 ~ null
 define ANull_BNull: null ~ null
 define ADefined_BDefined: 3 ~ 3
 
-// define EmptyTuples: { : } ~ { : }
+// define EmptyTuples: { : } ~ { : } // TODO: We don't seem to support this format
 define SameTuples: Tuple{a: 'a', b: 'b'} ~ Tuple{a: 'a', b: 'b'}
 define SameTuplesNull: Tuple{a: null} ~ Tuple{a : null}
 define DifferentTuples: Tuple{a: 'a', b: 'b'} ~ Tuple{a: 'x', b: 'b'}

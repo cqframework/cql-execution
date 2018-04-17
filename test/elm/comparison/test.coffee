@@ -135,7 +135,6 @@ describe 'Equivalent', ->
   describe 'Tuples', ->
     it.skip 'should return true for empty tuples', ->
       # Note: the spec doesn't explicitly define this, expecting behavior to match null ~ null
-      # Note: It doesn't seem that we support { : }
       @emptyTuples.exec(@ctx).should.be.true()
 
     it.skip 'should return false if Tuples are not of the same type', ->
