@@ -43,13 +43,12 @@ module.exports.greaterThanOrEquals = (a, b, precision = DateTime.Unit.MILLISECON
     else null
 
 module.exports.equivalent = equivalent = (a, b) ->
-  if a == null && b == null
-    return true
+  return true if not a? and not b?
+  return false unless a?
+  return false unless b?
 
-  # Code Equivalency
-  return a.hasMatch b if typeof a.hasMatch is 'function'
+  return codesAreEquivalent(a, b) if isCode(a)
 
-  # List and Tuple Equivalency
   [aClass, bClass] = getClassOfObjects(a, b)
   switch aClass
     when '[object Array]'
@@ -58,6 +57,33 @@ module.exports.equivalent = equivalent = (a, b) ->
       return compareObjects(a, b, equivalent)
 
   return equals a, b
+
+isCode = (object) ->
+  object.hasMatch and typeof object.hasMatch is 'function'
+
+codesAreEquivalent = (code1, code2) ->
+  code1.hasMatch(code2)
+
+getClassOfObjects = (object1, object2) ->
+  return ({}.toString.call(obj) for obj in [object1, object2])
+
+compareEveryItemInArrays = (array1, array2, comparisonFunction) ->
+  return array1.length is array2.length and array1.every (item, i) -> comparisonFunction(item, array2[i])
+
+compareObjects = (a, b, comparisonFunction) ->
+  return false unless classesEqual(a, b)
+  return deepCompareKeysAndValues(a, b, comparisonFunction)
+
+classesEqual = (object1, object2) ->
+  return object2 instanceof object1.constructor and object1 instanceof object2.constructor
+
+deepCompareKeysAndValues = (a, b, comparisonFunction) ->
+  aKeys = getKeysFromObject(a)
+  bKeys = getKeysFromObject(b)
+  return aKeys.length is bKeys.length and aKeys.every (key) -> comparisonFunction(a[key], b[key])
+
+getKeysFromObject = (object) ->
+  return (key for key of object unless typeof(key) is 'function')
 
 module.exports.equals = equals = (a, b) ->
   # Handle null cases first: spec says if either is null, return null
@@ -94,24 +120,3 @@ module.exports.equals = equals = (a, b) ->
 
   # If we made it this far, we can't handle it
   return false
-
-getClassOfObjects = (object1, object2) ->
-  return ({}.toString.call(obj) for obj in [object1, object2])
-
-getKeysFromObject = (object) ->
-  return (key for key of object unless typeof(key) is 'function')
-
-compareEveryItemInArrays = (array1, array2, comparisonFunction) ->
-  return array1.length is array2.length and array1.every (item, i) -> comparisonFunction(item, array2[i])
-
-compareObjects = (a, b, comparisonFunction) ->
-  return false unless classesEqual(a, b)
-  return deepCompareKeysAndValues(a, b, comparisonFunction)
-
-deepCompareKeysAndValues = (a, b, comparisonFunction) ->
-  aKeys = getKeysFromObject(a)
-  bKeys = getKeysFromObject(b)
-  return aKeys.length is bKeys.length and aKeys.every (key) -> comparisonFunction(a[key], b[key])
-
-classesEqual = (object1, object2) ->
-  return object2 instanceof object1.constructor and object1 instanceof object2.constructor
