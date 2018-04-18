@@ -44,8 +44,7 @@ module.exports.greaterThanOrEquals = (a, b, precision = DateTime.Unit.MILLISECON
 
 module.exports.equivalent = equivalent = (a, b) ->
   return true if not a? and not b?
-  return false unless a?
-  return false unless b?
+  return false unless a? and b?
 
   return codesAreEquivalent(a, b) if isCode(a)
 
