@@ -18,6 +18,9 @@ define EqualStringList: {'hello', 'world'} = {'hello', 'world'}
 define UnequalStringList: {'hello', 'world'} = {'foo', 'bar'}
 define EqualTupleList: List<Any>{ Tuple{a: 1, b: Tuple{c: 1}}, Tuple{x: 'y', z: 2} } = List<Any>{ Tuple{a: 1, b: Tuple{c: 1}}, Tuple{x: 'y', z: 2} }
 define UnequalTupleList: List<Any>{ Tuple{a: 1, b: Tuple{c: 1}}, Tuple{x: 'y', z: 2} } = List<Any>{ Tuple{a: 1, b: Tuple{c: -1}}, Tuple{x: 'y', z: 2} }
+define FirstListHasNull: {'hello', 'world', (null as String)} = {'hello', 'world'}
+define SecondListHasNull: {'hello', 'world'} = {'hello', 'world', (null as String)}
+define BothListsHaveNull: List<Integer>{(null as Integer)} = List<Integer>{(null as Integer)}
 
 // @Test: NotEqual
 define EqualIntList: {1, 2, 3} != {1, 2, 3}
