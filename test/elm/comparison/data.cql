@@ -70,6 +70,11 @@ define IntervalDifferentStarts: Interval[1,3] ~ Interval[2,3]
 define IntervalDifferentEndings: Interval[1,3] ~ Interval[1,4]
 define SameIntervals: Interval[1,3] ~ Interval[1,3]
 
+define TupleAndList: {a: '1'} ~ {'1'}
+define ListAndTuple: {'1'} ~ {a: '1'}
+define TupleAndNullList: {a: '1'} ~ {null}
+define NullListAndTuple: {null} ~ {a: '1'}
+
 // @Test: Less
 define AGtB_Int: 5 < 4
 define AEqB_Int: 5 < 5

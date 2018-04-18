@@ -3246,6 +3246,11 @@ define IntervalDifferentPointTypes:  Interval[1, 5] ~ Interval['1', '5']
 define IntervalDifferentStarts: Interval[1,3] ~ Interval[2,3]
 define IntervalDifferentEndings: Interval[1,3] ~ Interval[1,4]
 define SameIntervals: Interval[1,3] ~ Interval[1,3]
+
+define TupleAndList: {a: '1'} ~ {'1'}
+define ListAndTuple: {'1'} ~ {a: '1'}
+define TupleAndNullList: {a: '1'} ~ {null}
+define NullListAndTuple: {null} ~ {a: '1'}
 ###
 
 module.exports['Equivalent'] = {
@@ -5102,6 +5107,280 @@ module.exports['Equivalent'] = {
                      "value" : "3",
                      "type" : "Literal"
                   }
+               } ]
+            }
+         }, {
+            "localId" : "182",
+            "name" : "TupleAndList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "182",
+                  "s" : [ {
+                     "value" : [ "define ","TupleAndList",": " ]
+                  }, {
+                     "r" : "181",
+                     "s" : [ {
+                        "r" : "178",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "a",": " ]
+                           }, {
+                              "r" : "177",
+                              "s" : [ {
+                                 "value" : [ "'1'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","~"," " ]
+                     }, {
+                        "r" : "180",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "179",
+                           "s" : [ {
+                              "value" : [ "'1'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "181",
+               "type" : "Equivalent",
+               "operand" : [ {
+                  "localId" : "178",
+                  "type" : "Tuple",
+                  "element" : [ {
+                     "name" : "a",
+                     "value" : {
+                        "localId" : "177",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }, {
+                  "localId" : "180",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "179",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "1",
+                     "type" : "Literal"
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "188",
+            "name" : "ListAndTuple",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "188",
+                  "s" : [ {
+                     "value" : [ "define ","ListAndTuple",": " ]
+                  }, {
+                     "r" : "187",
+                     "s" : [ {
+                        "r" : "184",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "183",
+                           "s" : [ {
+                              "value" : [ "'1'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","~"," " ]
+                     }, {
+                        "r" : "186",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "a",": " ]
+                           }, {
+                              "r" : "185",
+                              "s" : [ {
+                                 "value" : [ "'1'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "187",
+               "type" : "Equivalent",
+               "operand" : [ {
+                  "localId" : "184",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "183",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "1",
+                     "type" : "Literal"
+                  } ]
+               }, {
+                  "localId" : "186",
+                  "type" : "Tuple",
+                  "element" : [ {
+                     "name" : "a",
+                     "value" : {
+                        "localId" : "185",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "194",
+            "name" : "TupleAndNullList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "194",
+                  "s" : [ {
+                     "value" : [ "define ","TupleAndNullList",": " ]
+                  }, {
+                     "r" : "193",
+                     "s" : [ {
+                        "r" : "190",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "a",": " ]
+                           }, {
+                              "r" : "189",
+                              "s" : [ {
+                                 "value" : [ "'1'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","~"," " ]
+                     }, {
+                        "r" : "192",
+                        "s" : [ {
+                           "value" : [ "{","null","}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "193",
+               "type" : "Equivalent",
+               "operand" : [ {
+                  "localId" : "190",
+                  "type" : "Tuple",
+                  "element" : [ {
+                     "name" : "a",
+                     "value" : {
+                        "localId" : "189",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }, {
+                  "localId" : "192",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "191",
+                     "type" : "Null"
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "200",
+            "name" : "NullListAndTuple",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "200",
+                  "s" : [ {
+                     "value" : [ "define ","NullListAndTuple",": " ]
+                  }, {
+                     "r" : "199",
+                     "s" : [ {
+                        "r" : "196",
+                        "s" : [ {
+                           "value" : [ "{","null","}" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","~"," " ]
+                     }, {
+                        "r" : "198",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "a",": " ]
+                           }, {
+                              "r" : "197",
+                              "s" : [ {
+                                 "value" : [ "'1'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "199",
+               "type" : "Equivalent",
+               "operand" : [ {
+                  "localId" : "196",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "195",
+                     "type" : "Null"
+                  } ]
+               }, {
+                  "localId" : "198",
+                  "type" : "Tuple",
+                  "element" : [ {
+                     "name" : "a",
+                     "value" : {
+                        "localId" : "197",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }
+                  } ]
                } ]
             }
          } ]

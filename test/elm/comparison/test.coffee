@@ -196,6 +196,20 @@ describe 'Equivalent', ->
     it 'should return true for identical Intervals', ->
       @sameIntervals.exec(@ctx).should.be.true()
 
+  it 'should return false for List ~ Tuple', ->
+    @listAndTuple.exec(@ctx).should.be.false()
+
+  it 'should return false for Tuple ~ List', ->
+    @tupleAndList.exec(@ctx).should.be.false()
+
+  it 'should return false for List ~ Tuple with null', ->
+    @nullListAndTuple.exec(@ctx).should.be.false()
+
+  it 'should return false for Tuple with null ~ List', ->
+    @tupleAndNullList.exec(@ctx).should.be.false()
+
+
+
 describe 'Less', ->
   @beforeEach ->
     setup @, data
