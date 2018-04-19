@@ -4930,6 +4930,8 @@ define ItemNotFound: IndexOf({'a', 'b', 'c'}, 'd')
 define NullList: IndexOf(null, 'a')
 define NullItem: IndexOf({'a', 'b', 'c'}, null)
 define ListCode: IndexOf({Code{code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5'}}, Code{code: 'F', system: '2.16.840.1.113883.18.2', version: 'foo'})
+define ListWrongCode: IndexOf({Code{code: 'M', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5'}}, Code{code: 'F', system: '2.16.840.1.113883.18.2', version: 'foo'})
+define ListWrongCodeSystem: IndexOf({Code{code: 'F', system: '1.16.840.1.113883.18.2', version: 'HL7V2.5'}}, Code{code: 'F', system: '2.16.840.1.113883.18.2', version: 'foo'})
 ###
 
 module.exports['IndexOf'] = {
@@ -5708,6 +5710,354 @@ module.exports['IndexOf'] = {
                      "name" : "version",
                      "value" : {
                         "localId" : "57",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "foo",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "71",
+            "name" : "ListWrongCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "71",
+                  "s" : [ {
+                     "value" : [ "define ","ListWrongCode",": " ]
+                  }, {
+                     "r" : "70",
+                     "s" : [ {
+                        "value" : [ "IndexOf","(" ]
+                     }, {
+                        "r" : "65",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "64",
+                           "s" : [ {
+                              "value" : [ "Code","{" ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "code",": " ]
+                              }, {
+                                 "r" : "61",
+                                 "s" : [ {
+                                    "value" : [ "'M'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "system",": " ]
+                              }, {
+                                 "r" : "62",
+                                 "s" : [ {
+                                    "value" : [ "'2.16.840.1.113883.18.2'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "version",": " ]
+                              }, {
+                                 "r" : "63",
+                                 "s" : [ {
+                                    "value" : [ "'HL7V2.5'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "}" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "69",
+                        "s" : [ {
+                           "value" : [ "Code","{" ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "code",": " ]
+                           }, {
+                              "r" : "66",
+                              "s" : [ {
+                                 "value" : [ "'F'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "system",": " ]
+                           }, {
+                              "r" : "67",
+                              "s" : [ {
+                                 "value" : [ "'2.16.840.1.113883.18.2'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "version",": " ]
+                           }, {
+                              "r" : "68",
+                              "s" : [ {
+                                 "value" : [ "'foo'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "70",
+               "type" : "IndexOf",
+               "source" : {
+                  "localId" : "65",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "64",
+                     "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "Instance",
+                     "element" : [ {
+                        "name" : "code",
+                        "value" : {
+                           "localId" : "61",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "M",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "system",
+                        "value" : {
+                           "localId" : "62",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "2.16.840.1.113883.18.2",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "version",
+                        "value" : {
+                           "localId" : "63",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "HL7V2.5",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  } ]
+               },
+               "element" : {
+                  "localId" : "69",
+                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "Instance",
+                  "element" : [ {
+                     "name" : "code",
+                     "value" : {
+                        "localId" : "66",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "F",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "system",
+                     "value" : {
+                        "localId" : "67",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "2.16.840.1.113883.18.2",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "version",
+                     "value" : {
+                        "localId" : "68",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "foo",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "82",
+            "name" : "ListWrongCodeSystem",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "82",
+                  "s" : [ {
+                     "value" : [ "define ","ListWrongCodeSystem",": " ]
+                  }, {
+                     "r" : "81",
+                     "s" : [ {
+                        "value" : [ "IndexOf","(" ]
+                     }, {
+                        "r" : "76",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "75",
+                           "s" : [ {
+                              "value" : [ "Code","{" ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "code",": " ]
+                              }, {
+                                 "r" : "72",
+                                 "s" : [ {
+                                    "value" : [ "'F'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "system",": " ]
+                              }, {
+                                 "r" : "73",
+                                 "s" : [ {
+                                    "value" : [ "'1.16.840.1.113883.18.2'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "version",": " ]
+                              }, {
+                                 "r" : "74",
+                                 "s" : [ {
+                                    "value" : [ "'HL7V2.5'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "}" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "80",
+                        "s" : [ {
+                           "value" : [ "Code","{" ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "code",": " ]
+                           }, {
+                              "r" : "77",
+                              "s" : [ {
+                                 "value" : [ "'F'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "system",": " ]
+                           }, {
+                              "r" : "78",
+                              "s" : [ {
+                                 "value" : [ "'2.16.840.1.113883.18.2'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "version",": " ]
+                           }, {
+                              "r" : "79",
+                              "s" : [ {
+                                 "value" : [ "'foo'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "81",
+               "type" : "IndexOf",
+               "source" : {
+                  "localId" : "76",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "75",
+                     "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "Instance",
+                     "element" : [ {
+                        "name" : "code",
+                        "value" : {
+                           "localId" : "72",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "F",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "system",
+                        "value" : {
+                           "localId" : "73",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "1.16.840.1.113883.18.2",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "version",
+                        "value" : {
+                           "localId" : "74",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "HL7V2.5",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  } ]
+               },
+               "element" : {
+                  "localId" : "80",
+                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "Instance",
+                  "element" : [ {
+                     "name" : "code",
+                     "value" : {
+                        "localId" : "77",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "F",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "system",
+                     "value" : {
+                        "localId" : "78",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "2.16.840.1.113883.18.2",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "version",
+                     "value" : {
+                        "localId" : "79",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "foo",
                         "type" : "Literal"
