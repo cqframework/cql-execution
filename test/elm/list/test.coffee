@@ -176,6 +176,9 @@ describe 'IndexOf', ->
     should(@nullList.exec(@ctx)).be.null
     should(@nullItem.exec(@ctx)).be.null
 
+  it 'should use equivalence to determine presence in List', ->
+    @listCode.exec(@ctx).should.equal 0
+
 describe 'Indexer', ->
   @beforeEach ->
     setup @, data

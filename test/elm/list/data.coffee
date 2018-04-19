@@ -4929,6 +4929,7 @@ define MultipleMatches: IndexOf({'a', 'b', 'c', 'd', 'd', 'e', 'd'}, 'd')
 define ItemNotFound: IndexOf({'a', 'b', 'c'}, 'd')
 define NullList: IndexOf(null, 'a')
 define NullItem: IndexOf({'a', 'b', 'c'}, null)
+define ListCode: IndexOf({Code{code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5'}}, Code{code: 'F', system: '2.16.840.1.113883.18.2', version: 'foo'})
 ###
 
 module.exports['IndexOf'] = {
@@ -5538,6 +5539,180 @@ module.exports['IndexOf'] = {
                      "localId" : "47",
                      "type" : "Null"
                   }
+               }
+            }
+         }, {
+            "localId" : "60",
+            "name" : "ListCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "60",
+                  "s" : [ {
+                     "value" : [ "define ","ListCode",": " ]
+                  }, {
+                     "r" : "59",
+                     "s" : [ {
+                        "value" : [ "IndexOf","(" ]
+                     }, {
+                        "r" : "54",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "53",
+                           "s" : [ {
+                              "value" : [ "Code","{" ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "code",": " ]
+                              }, {
+                                 "r" : "50",
+                                 "s" : [ {
+                                    "value" : [ "'F'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "system",": " ]
+                              }, {
+                                 "r" : "51",
+                                 "s" : [ {
+                                    "value" : [ "'2.16.840.1.113883.18.2'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "version",": " ]
+                              }, {
+                                 "r" : "52",
+                                 "s" : [ {
+                                    "value" : [ "'HL7V2.5'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "}" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "58",
+                        "s" : [ {
+                           "value" : [ "Code","{" ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "code",": " ]
+                           }, {
+                              "r" : "55",
+                              "s" : [ {
+                                 "value" : [ "'F'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "system",": " ]
+                           }, {
+                              "r" : "56",
+                              "s" : [ {
+                                 "value" : [ "'2.16.840.1.113883.18.2'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "version",": " ]
+                           }, {
+                              "r" : "57",
+                              "s" : [ {
+                                 "value" : [ "'foo'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "59",
+               "type" : "IndexOf",
+               "source" : {
+                  "localId" : "54",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "53",
+                     "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "Instance",
+                     "element" : [ {
+                        "name" : "code",
+                        "value" : {
+                           "localId" : "50",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "F",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "system",
+                        "value" : {
+                           "localId" : "51",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "2.16.840.1.113883.18.2",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "version",
+                        "value" : {
+                           "localId" : "52",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "HL7V2.5",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  } ]
+               },
+               "element" : {
+                  "localId" : "58",
+                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "Instance",
+                  "element" : [ {
+                     "name" : "code",
+                     "value" : {
+                        "localId" : "55",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "F",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "system",
+                     "value" : {
+                        "localId" : "56",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "2.16.840.1.113883.18.2",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "version",
+                     "value" : {
+                        "localId" : "57",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "foo",
+                        "type" : "Literal"
+                     }
+                  } ]
                }
             }
          } ]
