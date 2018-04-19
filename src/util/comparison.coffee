@@ -49,7 +49,6 @@ module.exports.equivalent = equivalent = (a, b) ->
   return codesAreEquivalent(a, b) if isCode(a)
 
   [aClass, bClass] = getClassOfObjects(a, b)
-  # return false if aClass isnt bClass
 
   switch aClass
     when '[object Array]'
