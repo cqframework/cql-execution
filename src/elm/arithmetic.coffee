@@ -194,28 +194,38 @@ module.exports.Power = class Power extends Expression
       args.reduce (x,y) -> Math.pow(x , y)
 
 module.exports.MinValue = class MinValue extends Expression
-  MIN_VALUES: "Integer" : MathUtil.MIN_INT_VALUE, "Real" : MathUtil.MIN_FLOAT_VALUE, "DateTime" : MathUtil.MIN_DATE_VALUE
+  MIN_VALUES = {}
+  MIN_VALUES['{urn:hl7-org:elm-types:r1}Integer'] = MathUtil.MIN_INT_VALUE
+  MIN_VALUES['{urn:hl7-org:elm-types:r1}Decimal'] = MathUtil.MIN_FLOAT_VALUE
+  MIN_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MIN_DATE_VALUE
+  MIN_VALUES['{urn:hl7-org:elm-types:r1}Time'] = MathUtil.MIN_TIME_VALUE
+
   constructor: (json) ->
     super
+    @valueType = json.valueType
 
   exec: (ctx) ->
-    arg = @execArgs(ctx)
-    if (not arg?)
-      null
+    if MIN_VALUES[@valueType]
+      MIN_VALUES[@valueType]
     else
-      MIN_VALUES[arg]
+      throw new Error("Minimum not supported for #{@valueType}")
 
 module.exports.MaxValue = class MaxValue extends Expression
-  MAX_VALUES: "Integer" : MathUtil.MAX_INT_VALUE, "Real" :MathUtil. MAX_FLOAT_VALUE, "DateTime" : MathUtil.MAX_DATE_VALUE
+  MAX_VALUES = {}
+  MAX_VALUES['{urn:hl7-org:elm-types:r1}Integer'] = MathUtil.MAX_INT_VALUE
+  MAX_VALUES['{urn:hl7-org:elm-types:r1}Decimal'] = MathUtil.MAX_FLOAT_VALUE
+  MAX_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MAX_DATE_VALUE
+  MAX_VALUES['{urn:hl7-org:elm-types:r1}Time'] = MathUtil.MAX_TIME_VALUE
+
   constructor: (json) ->
     super
+    @valueType = json.valueType
 
   exec: (ctx) ->
-    arg = @execArgs(ctx)
-    if (not arg?)
-      null
+    if MAX_VALUES[@valueType]?
+      MAX_VALUES[@valueType]
     else
-      MAX_VALUES[arg]
+      throw new Error("Maximum not supported for #{@valueType}")
 
 module.exports.Successor = class Successor extends Expression
   constructor: (json) ->
