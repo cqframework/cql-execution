@@ -72,7 +72,7 @@ module.exports.IndexOf = class IndexOf extends Expression
     src = @source.exec ctx
     el = @element.exec ctx
     if not src? or not el? then return null
-    (index = i; break) for itm, i in src when equals itm, el
+    (index = i; break) for itm, i in src when equivalent itm, el
     if index? then return index else return -1
 
 # Indexer is completely handled by overloaded#Indexer
