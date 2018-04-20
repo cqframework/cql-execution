@@ -947,6 +947,33 @@ describe 'Starts', ->
     @dateTimeIntervalStartsFalse.exec(@ctx).should.be.false()
     @dateTimeIntervalStartsEndsFalse.exec(@ctx).should.be.false()
 
+describe 'Ends', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'should calculate to null', ->
+    should(@testEndsNull.exec(@ctx)).be.null
+
+  it 'should calculate integer intervals properly', ->
+    @integerIntervalEndsTrue.exec(@ctx).should.be.true()
+    @integerIntervalEndsFalse.exec(@ctx).should.be.false()
+    @integerIntervalEndsStartsFalse.exec(@ctx).should.be.false()
+
+  it 'should calculate decimal intervals properly', ->
+    @decimalIntervalEndsTrue.exec(@ctx).should.be.true()
+    @decimalIntervalEndsFalse.exec(@ctx).should.be.false()
+    @decimalIntervalEndsStartsFalse.exec(@ctx).should.be.false()
+
+  it 'should calculate quantity intervals properly', ->
+    @quantityIntervalEndsTrue.exec(@ctx).should.be.true()
+    @quantityIntervalEndsFalse.exec(@ctx).should.be.false()
+    @quantityIntervalEndsStartsFalse.exec(@ctx).should.be.false()
+
+  it 'should calculate datetime intervals properly', ->
+    @dateTimeIntervalEndsTrue.exec(@ctx).should.be.true()
+    @dateTimeIntervalEndsFalse.exec(@ctx).should.be.false()
+    @dateTimeIntervalEndsStartsFalse.exec(@ctx).should.be.false()
+
 describe 'IntegerIntervalUnion', ->
   @beforeEach ->
     setup @, data

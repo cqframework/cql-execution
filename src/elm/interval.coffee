@@ -137,7 +137,14 @@ module.exports.Starts = class Starts extends Expression
     [a, b] = @execArgs ctx
     if a? and b? then a.starts(b, @precision) else null
 
-module.exports.Ends = class Ends extends UnimplementedExpression
+module.exports.Ends = class Ends extends Expression
+  constructor: (json) ->
+    super
+    @precision = json.precision?.toLowerCase()
+
+  exec: (ctx) ->
+    [a, b] = @execArgs ctx
+    if a? and b? then a.ends(b, @precision) else null
 
 module.exports.Collapse = class Collapse extends Expression
   constructor: (json) ->

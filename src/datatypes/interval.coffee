@@ -205,6 +205,14 @@ module.exports.Interval = class Interval
     lessThanOrEqual = cmp.lessThanOrEquals(@high, other.high, precision)
     startEqual and lessThanOrEqual
 
+  ends: (other, precision) ->
+    startGreaterThanOrEqual = cmp.greaterThanOrEquals(@low, other.low, precision)
+    if precision? and @low instanceof DateTime
+      endEqual = @high.sameAs(other.high, precision)
+    else
+      endEqual = cmp.equals(@high, other.high)
+    startGreaterThanOrEqual && endEqual
+
   width: () ->
     if @low instanceof DateTime or @high instanceof DateTime
       throw new Error("Width of DateTime intervals is not supported")
