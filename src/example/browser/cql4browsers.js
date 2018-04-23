@@ -43734,9 +43734,10 @@
   };
 
   module.exports.equivalent = equivalent = function(a, b) {
-    if (a === null && b === null) {
+    if ((a == null) && (b == null)) {
       return true;
-    } else if (a === null || b === null) {
+    }
+    if (!((a != null) && (b != null))) {
       return false;
     }
     if (typeof a.hasMatch === 'function') {

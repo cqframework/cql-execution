@@ -87,7 +87,7 @@ describe 'Union', ->
 
   it 'should remove duplicate elements (according to CQL 1.2 spec)', ->
     @oneToFiveOverlapped.exec(@ctx).should.eql [1, 2, 3, 4, 5]
-        
+
   it 'should remove duplicate null elements', ->
     @oneToFiveOverlappedWithNulls.exec(@ctx).should.eql [1, null, 2, 3, 4, 5]
 
@@ -387,7 +387,7 @@ describe 'Distinct', ->
 
   it 'should do nothing to an array of distinct tuples', ->
     @noDupsTuples.exec(@ctx).should.eql [{ hello: 'world' }, { hello: 'cleveland' }]
-    
+
   it 'should remove duplicate null values', ->
     @duplicateNulls.exec(@ctx).should.eql [null, 1, 2, 3, 4, 5]
 
