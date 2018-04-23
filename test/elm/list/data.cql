@@ -31,6 +31,7 @@ define UnequalTupleList: List<Any>{ Tuple{a: 1, b: Tuple{c: 1}}, Tuple{x: 'y', z
 // @Test: Union
 define OneToTen: {1, 2, 3, 4, 5} union {6, 7, 8, 9, 10}
 define OneToFiveOverlapped: {1, 2, 3, 4} union {3, 4, 5}
+define OneToFiveOverlappedWithNulls: {1, null, 2, 3, 4} union {3, 4, 5, null}
 define Disjoint: {1, 2} union {4, 5}
 define NestedToFifteen: {1, 2, 3} union {4, 5, 6} union {7 ,8 , 9} union {10, 11, 12} union {13, 14, 15}
 define NullUnion: null union {1, 2, 3}
@@ -143,6 +144,7 @@ define LotsOfDups: distinct {1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 4, 3, 
 define NoDups: distinct {2, 4, 6, 8, 10}
 define DupsTuples: distinct { Tuple{ hello: 'world' }, Tuple{ hello: 'cleveland' }, Tuple{ hello: 'world' }, Tuple{ hello: 'dolly' } }
 define NoDupsTuples: distinct { Tuple{ hello: 'world' }, Tuple{ hello: 'cleveland' } }
+define DuplicateNulls: distinct {null, 1, 2, null, 3, 4, 5, null}
 
 // @Test: First
 define Numbers: First({1, 2, 3, 4})
