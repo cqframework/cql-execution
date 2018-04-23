@@ -4474,7 +4474,7 @@
       }
       for (i = j = 0, len = src.length; j < len; i = ++j) {
         itm = src[i];
-        if (equals(itm, el)) {
+        if (equivalent(itm, el)) {
           index = i;
           break;
         }
