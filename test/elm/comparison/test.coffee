@@ -132,6 +132,84 @@ describe 'Equivalent', ->
   it 'should be true for 3 ~ 3', ->
     @aDefined_BDefined.exec(@ctx).should.be.true()
 
+  describe 'Tuples', ->
+    it.skip 'should return true for empty tuples', ->
+      # Note: the spec doesn't explicitly define this, expecting behavior to match null ~ null
+      @emptyTuples.exec(@ctx).should.be.true()
+
+    it.skip 'should return false if Tuples are not of the same type', ->
+      # Note: There is currently no way to tell the type of Tuples as they are all treated as Objects
+
+    it 'should return true if Tuples are elementwise identical', ->
+      @sameTuples.exec(@ctx).should.be.true()
+
+    it 'should return true if Tuples are elementwise identical and null', ->
+      @sameTuplesNull.exec(@ctx).should.be.true()
+
+    it 'should return false if Tuples are not elementwise identical', ->
+      @differentTuples.exec(@ctx).should.be.false()
+
+    it 'should return true for nested tuples', ->
+      @sameNestedTuples.exec(@ctx).should.be.true()
+
+    it 'should return true for nested tuples', ->
+      @sameNestedTuplesNull.exec(@ctx).should.be.true()
+
+  describe 'Lists', ->
+    it 'should return true for empty lists', ->
+      @emptyLists.exec(@ctx).should.be.true()
+
+    it 'should return false for lists with different types', ->
+      @differentTypesLists.exec(@ctx).should.be.false()
+
+    it 'should return false for lists with different number of elements', ->
+      @differentLengthLists.exec(@ctx).should.be.false()
+
+    it 'should return false for lists with same elements in different order', ->
+      @differentOrderLists.exec(@ctx).should.be.false()
+
+    it 'should return true for lists with same elements in same order', ->
+      @sameLists.exec(@ctx).should.be.true()
+
+    it 'should return true for lists with same elements in same order including nulls', ->
+      @sameListsNull.exec(@ctx).should.be.true()
+
+    it 'should return true for nested lists with same elements in same order', ->
+      @sameNestedLists.exec(@ctx).should.be.true()
+
+    it 'should return true for nested lists with same elements in same order including nulls', ->
+      @sameNestedListsNull.exec(@ctx).should.be.true()
+
+  describe 'Intervals', ->
+    it 'should return true for null low/high', ->
+      @emptyInterval.exec(@ctx).should.be.true()
+
+    it 'should return false for different Interval point types', ->
+      @intervalDifferentPointTypes.exec(@ctx).should.be.false()
+
+    it 'should return false if different starting points', ->
+      @intervalDifferentStarts.exec(@ctx).should.be.false()
+
+    it 'should return false if different ending points', ->
+      @intervalDifferentEndings.exec(@ctx).should.be.false()
+
+    it 'should return true for identical Intervals', ->
+      @sameIntervals.exec(@ctx).should.be.true()
+
+  it 'should return false for List ~ Tuple', ->
+    @listAndTuple.exec(@ctx).should.be.false()
+
+  it 'should return false for Tuple ~ List', ->
+    @tupleAndList.exec(@ctx).should.be.false()
+
+  it 'should return false for List ~ Tuple with null', ->
+    @nullListAndTuple.exec(@ctx).should.be.false()
+
+  it 'should return false for Tuple with null ~ List', ->
+    @tupleAndNullList.exec(@ctx).should.be.false()
+
+
+
 describe 'Less', ->
   @beforeEach ->
     setup @, data

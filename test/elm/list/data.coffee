@@ -434,6 +434,9 @@ define EqualStringList: {'hello', 'world'} = {'hello', 'world'}
 define UnequalStringList: {'hello', 'world'} = {'foo', 'bar'}
 define EqualTupleList: List<Any>{ Tuple{a: 1, b: Tuple{c: 1}}, Tuple{x: 'y', z: 2} } = List<Any>{ Tuple{a: 1, b: Tuple{c: 1}}, Tuple{x: 'y', z: 2} }
 define UnequalTupleList: List<Any>{ Tuple{a: 1, b: Tuple{c: 1}}, Tuple{x: 'y', z: 2} } = List<Any>{ Tuple{a: 1, b: Tuple{c: -1}}, Tuple{x: 'y', z: 2} }
+define FirstListHasNull: {'hello', 'world', (null as String)} = {'hello', 'world'}
+define SecondListHasNull: {'hello', 'world'} = {'hello', 'world', (null as String)}
+define BothListsHaveNull: List<Integer>{(null as Integer)} = List<Integer>{(null as Integer)}
 ###
 
 module.exports['Equal'] = {
@@ -1381,6 +1384,374 @@ module.exports['Equal'] = {
                            "type" : "Literal"
                         }
                      } ]
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "98",
+            "name" : "FirstListHasNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "98",
+                  "s" : [ {
+                     "value" : [ "define ","FirstListHasNull",": " ]
+                  }, {
+                     "r" : "97",
+                     "s" : [ {
+                        "r" : "93",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "88",
+                           "s" : [ {
+                              "value" : [ "'hello'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "89",
+                           "s" : [ {
+                              "value" : [ "'world'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "92",
+                           "s" : [ {
+                              "value" : [ "(" ]
+                           }, {
+                              "r" : "92",
+                              "s" : [ {
+                                 "r" : "90",
+                                 "value" : [ "null"," as " ]
+                              }, {
+                                 "r" : "91",
+                                 "s" : [ {
+                                    "value" : [ "String" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","="," " ]
+                     }, {
+                        "r" : "96",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "94",
+                           "s" : [ {
+                              "value" : [ "'hello'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "95",
+                           "s" : [ {
+                              "value" : [ "'world'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "97",
+               "type" : "Equal",
+               "operand" : [ {
+                  "localId" : "93",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "88",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "hello",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "89",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "world",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "92",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "90",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "91",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }, {
+                  "localId" : "96",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "94",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "hello",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "95",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "world",
+                     "type" : "Literal"
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "109",
+            "name" : "SecondListHasNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "109",
+                  "s" : [ {
+                     "value" : [ "define ","SecondListHasNull",": " ]
+                  }, {
+                     "r" : "108",
+                     "s" : [ {
+                        "r" : "101",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "99",
+                           "s" : [ {
+                              "value" : [ "'hello'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "100",
+                           "s" : [ {
+                              "value" : [ "'world'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","="," " ]
+                     }, {
+                        "r" : "107",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "102",
+                           "s" : [ {
+                              "value" : [ "'hello'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "103",
+                           "s" : [ {
+                              "value" : [ "'world'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "106",
+                           "s" : [ {
+                              "value" : [ "(" ]
+                           }, {
+                              "r" : "106",
+                              "s" : [ {
+                                 "r" : "104",
+                                 "value" : [ "null"," as " ]
+                              }, {
+                                 "r" : "105",
+                                 "s" : [ {
+                                    "value" : [ "String" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "108",
+               "type" : "Equal",
+               "operand" : [ {
+                  "localId" : "101",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "99",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "hello",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "100",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "world",
+                     "type" : "Literal"
+                  } ]
+               }, {
+                  "localId" : "107",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "102",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "hello",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "103",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "world",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "106",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "104",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "105",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "121",
+            "name" : "BothListsHaveNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "121",
+                  "s" : [ {
+                     "value" : [ "define ","BothListsHaveNull",": " ]
+                  }, {
+                     "r" : "120",
+                     "s" : [ {
+                        "r" : "114",
+                        "s" : [ {
+                           "value" : [ "List<" ]
+                        }, {
+                           "r" : "110",
+                           "s" : [ {
+                              "value" : [ "Integer" ]
+                           } ]
+                        }, {
+                           "value" : [ ">{" ]
+                        }, {
+                           "r" : "113",
+                           "s" : [ {
+                              "value" : [ "(" ]
+                           }, {
+                              "r" : "113",
+                              "s" : [ {
+                                 "r" : "111",
+                                 "value" : [ "null"," as " ]
+                              }, {
+                                 "r" : "112",
+                                 "s" : [ {
+                                    "value" : [ "Integer" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","="," " ]
+                     }, {
+                        "r" : "119",
+                        "s" : [ {
+                           "value" : [ "List<" ]
+                        }, {
+                           "r" : "115",
+                           "s" : [ {
+                              "value" : [ "Integer" ]
+                           } ]
+                        }, {
+                           "value" : [ ">{" ]
+                        }, {
+                           "r" : "118",
+                           "s" : [ {
+                              "value" : [ "(" ]
+                           }, {
+                              "r" : "118",
+                              "s" : [ {
+                                 "r" : "116",
+                                 "value" : [ "null"," as " ]
+                              }, {
+                                 "r" : "117",
+                                 "s" : [ {
+                                    "value" : [ "Integer" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "120",
+               "type" : "Equal",
+               "operand" : [ {
+                  "localId" : "114",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "113",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "111",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "112",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }, {
+                  "localId" : "119",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "118",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "116",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "117",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
                   } ]
                } ]
             }

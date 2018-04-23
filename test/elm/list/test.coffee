@@ -53,6 +53,16 @@ describe 'Equal', ->
   it 'should identify unequal lists of tuples', ->
     @unequalTupleList.exec(@ctx).should.be.false()
 
+  describe 'should return null', ->
+    it 'when first list has a null element', ->
+      should(@firstListHasNull.exec(@ctx)).be.null()
+
+    it 'when second list has a null element', ->
+      should(@secondListHasNull.exec(@ctx)).be.null()
+
+    it 'when both lists have only null elements', ->
+      should(@bothListsHaveNull.exec(@ctx)).be.null()
+
 describe 'NotEqual', ->
   @beforeEach ->
     setup @, data

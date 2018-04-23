@@ -45,8 +45,45 @@ module.exports.greaterThanOrEquals = (a, b, precision = DateTime.Unit.MILLISECON
 module.exports.equivalent = equivalent = (a, b) ->
   return true if not a? and not b?
   return false unless a? and b?
-  return a.hasMatch b if typeof a.hasMatch is 'function'
+
+  return codesAreEquivalent(a, b) if isCode(a)
+
+  [aClass, bClass] = getClassOfObjects(a, b)
+
+  switch aClass
+    when '[object Array]'
+      return compareEveryItemInArrays(a, b, equivalent)
+    when '[object Object]'
+      return compareObjects(a, b, equivalent)
+
   return equals a, b
+
+isCode = (object) ->
+  object.hasMatch and typeof object.hasMatch is 'function'
+
+codesAreEquivalent = (code1, code2) ->
+  code1.hasMatch(code2)
+
+getClassOfObjects = (object1, object2) ->
+  return ({}.toString.call(obj) for obj in [object1, object2])
+
+compareEveryItemInArrays = (array1, array2, comparisonFunction) ->
+  return array1.length is array2.length and array1.every (item, i) -> comparisonFunction(item, array2[i])
+
+compareObjects = (a, b, comparisonFunction) ->
+  return false unless classesEqual(a, b)
+  return deepCompareKeysAndValues(a, b, comparisonFunction)
+
+classesEqual = (object1, object2) ->
+  return object2 instanceof object1.constructor and object1 instanceof object2.constructor
+
+deepCompareKeysAndValues = (a, b, comparisonFunction) ->
+  aKeys = getKeysFromObject(a)
+  bKeys = getKeysFromObject(b)
+  return aKeys.length is bKeys.length and aKeys.every (key) -> comparisonFunction(a[key], b[key])
+
+getKeysFromObject = (object) ->
+  return (key for key of object unless typeof(key) is 'function')
 
 module.exports.equals = equals = (a, b) ->
   # Handle null cases first: spec says if either is null, return null
@@ -66,7 +103,7 @@ module.exports.equals = equals = (a, b) ->
   return true if a is b
 
   # Return false if they are instances of different classes
-  [aClass, bClass] = ({}.toString.call(obj) for obj in [a, b])
+  [aClass, bClass] = getClassOfObjects(a, b)
   return false if aClass isnt bClass
 
   switch aClass
@@ -77,15 +114,10 @@ module.exports.equals = equals = (a, b) ->
       # Compare the components of the regular expression
       return ['source', 'global', 'ignoreCase', 'multiline'].every (p) -> a[p] is b[p]
     when '[object Array]'
-      # Compare every item in the array
-      return a.length is b.length and a.every (item, i) -> equals(item, b[i])
+      return null if a.includes(null) or a.includes(undefined) or b.includes(null) or b.includes(undefined)
+      return compareEveryItemInArrays(a, b, equals)
     when '[object Object]'
-      # Return false if they are instances of different classes
-      return false unless b instanceof a.constructor and a instanceof b.constructor
-      # Do deep comparison of keys and values
-      aKeys = (key for key of a unless typeof(key) is 'function')
-      bKeys = (key for key of b unless typeof(key) is 'function')
-      return aKeys.length is bKeys.length and aKeys.every (key) -> equals(a[key], b[key])
+      return compareObjects(a, b, equals)
 
   # If we made it this far, we can't handle it
   return false
