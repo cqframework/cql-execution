@@ -202,8 +202,8 @@ module.exports.Interval = class Interval
       startEqual = @low.sameAs(other.low, precision)
     else
       startEqual = cmp.equals(@low, other.low)
-    lessThanOrEqual = cmp.lessThanOrEquals(@high, other.high, precision)
-    startEqual and lessThanOrEqual
+    endLessThanOrEqual = cmp.lessThanOrEquals(@high, other.high, precision)
+    startEqual and endLessThanOrEqual
 
   ends: (other, precision) ->
     startGreaterThanOrEqual = cmp.greaterThanOrEquals(@low, other.low, precision)

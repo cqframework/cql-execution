@@ -67433,6 +67433,7 @@ define QuantityIntervalStartsFalse: Interval[1.0 'g', 10.0 'g'] starts Interval[
 define QuantityIntervalStartsEndsFalse: Interval[5.0 'g', 10.0 'g'] starts Interval[5.0 'g', 9.9 'g']
 define DateTimeIntervalStartsTrue: Interval[DateTime(2012, 1, 5, 0, 0, 0, 0), DateTime(2012, 1, 25, 0, 0, 0, 0)] starts Interval[DateTime(2012, 1, 5, 0, 0, 0, 0), DateTime(2012, 1, 27, 0, 0, 0, 0)]
 define DateTimeIntervalStartsFalse: Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] starts day of Interval[DateTime(2012, 1, 6), DateTime(2012, 1, 27)]
+define DateTimeIntervalStartsDayOfTrue: Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] starts day of Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 27)]
 define DateTimeIntervalStartsEndsFalse: Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] starts day of Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 24)]
 ###
 
@@ -68647,7 +68648,7 @@ module.exports['Starts'] = {
             }
          }, {
             "localId" : "157",
-            "name" : "DateTimeIntervalStartsEndsFalse",
+            "name" : "DateTimeIntervalStartsDayOfTrue",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -68655,7 +68656,7 @@ module.exports['Starts'] = {
                "s" : {
                   "r" : "157",
                   "s" : [ {
-                     "value" : [ "define ","DateTimeIntervalStartsEndsFalse",": " ]
+                     "value" : [ "define ","DateTimeIntervalStartsDayOfTrue",": " ]
                   }, {
                      "r" : "156",
                      "s" : [ {
@@ -68693,7 +68694,7 @@ module.exports['Starts'] = {
                         }, {
                            "r" : "154",
                            "s" : [ {
-                              "value" : [ "DateTime","(","2012",", ","1",", ","24",")" ]
+                              "value" : [ "DateTime","(","2012",", ","1",", ","27",")" ]
                            } ]
                         }, {
                            "value" : [ "]" ]
@@ -68800,6 +68801,167 @@ module.exports['Starts'] = {
                      "day" : {
                         "localId" : "153",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "27",
+                        "type" : "Literal"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "177",
+            "name" : "DateTimeIntervalStartsEndsFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "177",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimeIntervalStartsEndsFalse",": " ]
+                  }, {
+                     "r" : "176",
+                     "s" : [ {
+                        "r" : "166",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "161",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","5",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "165",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","25",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","starts day of"," " ]
+                     }, {
+                        "r" : "175",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "170",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","5",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "174",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","24",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "176",
+               "precision" : "Day",
+               "type" : "Starts",
+               "operand" : [ {
+                  "localId" : "166",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "161",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "158",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "159",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "160",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "165",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "162",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "163",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "164",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "25",
+                        "type" : "Literal"
+                     }
+                  }
+               }, {
+                  "localId" : "175",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "170",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "167",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "168",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "169",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "174",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "171",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "172",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "173",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "24",
                         "type" : "Literal"
                      }
@@ -68827,6 +68989,7 @@ define QuantityIntervalEndsFalse: Interval[5.0 'g', 10.0 'g'] ends Interval[1.0 
 define QuantityIntervalEndsStartsFalse: Interval[4.0 'g', 10.0 'g'] ends Interval[5.0 'g', 10.0 'g']
 define DateTimeIntervalEndsTrue: Interval[DateTime(2012, 1, 5, 0, 0, 0, 0), DateTime(2012, 1, 15, 0, 0, 0, 0)] ends Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 15, 0, 0, 0, 0)]
 define DateTimeIntervalEndsFalse: Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 15)] ends day of Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 16)]
+define DateTimeIntervalEndsDayOfTrue: Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 15)] ends day of Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 15)]
 define DateTimeIntervalEndsStartsFalse: Interval[DateTime(2012, 1, 5), DateTime(2012, 2, 16)] ends day of Interval[DateTime(2012, 2, 1), DateTime(2012, 2, 16)]
 ###
 
@@ -70110,7 +70273,7 @@ module.exports['Ends'] = {
             }
          }, {
             "localId" : "157",
-            "name" : "DateTimeIntervalEndsStartsFalse",
+            "name" : "DateTimeIntervalEndsDayOfTrue",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -70118,7 +70281,7 @@ module.exports['Ends'] = {
                "s" : {
                   "r" : "157",
                   "s" : [ {
-                     "value" : [ "define ","DateTimeIntervalEndsStartsFalse",": " ]
+                     "value" : [ "define ","DateTimeIntervalEndsDayOfTrue",": " ]
                   }, {
                      "r" : "156",
                      "s" : [ {
@@ -70135,7 +70298,7 @@ module.exports['Ends'] = {
                         }, {
                            "r" : "145",
                            "s" : [ {
-                              "value" : [ "DateTime","(","2012",", ","2",", ","16",")" ]
+                              "value" : [ "DateTime","(","2012",", ","1",", ","15",")" ]
                            } ]
                         }, {
                            "value" : [ "]" ]
@@ -70149,14 +70312,14 @@ module.exports['Ends'] = {
                         }, {
                            "r" : "150",
                            "s" : [ {
-                              "value" : [ "DateTime","(","2012",", ","2",", ","1",")" ]
+                              "value" : [ "DateTime","(","2012",", ","1",", ","1",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
                            "r" : "154",
                            "s" : [ {
-                              "value" : [ "DateTime","(","2012",", ","2",", ","16",")" ]
+                              "value" : [ "DateTime","(","2012",", ","1",", ","15",")" ]
                            } ]
                         }, {
                            "value" : [ "]" ]
@@ -70208,13 +70371,13 @@ module.exports['Ends'] = {
                      "month" : {
                         "localId" : "143",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2",
+                        "value" : "1",
                         "type" : "Literal"
                      },
                      "day" : {
                         "localId" : "144",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "16",
+                        "value" : "15",
                         "type" : "Literal"
                      }
                   }
@@ -70235,7 +70398,7 @@ module.exports['Ends'] = {
                      "month" : {
                         "localId" : "148",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2",
+                        "value" : "1",
                         "type" : "Literal"
                      },
                      "day" : {
@@ -70257,11 +70420,172 @@ module.exports['Ends'] = {
                      "month" : {
                         "localId" : "152",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2",
+                        "value" : "1",
                         "type" : "Literal"
                      },
                      "day" : {
                         "localId" : "153",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "15",
+                        "type" : "Literal"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "177",
+            "name" : "DateTimeIntervalEndsStartsFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "177",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimeIntervalEndsStartsFalse",": " ]
+                  }, {
+                     "r" : "176",
+                     "s" : [ {
+                        "r" : "166",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "161",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","5",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "165",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","2",", ","16",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","ends day of"," " ]
+                     }, {
+                        "r" : "175",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "170",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","2",", ","1",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "174",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","2",", ","16",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "176",
+               "precision" : "Day",
+               "type" : "Ends",
+               "operand" : [ {
+                  "localId" : "166",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "161",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "158",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "159",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "160",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "165",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "162",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "163",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "164",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "16",
+                        "type" : "Literal"
+                     }
+                  }
+               }, {
+                  "localId" : "175",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "170",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "167",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "168",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "169",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "174",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "171",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "172",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "173",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "16",
                         "type" : "Literal"

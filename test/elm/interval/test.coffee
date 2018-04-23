@@ -945,6 +945,7 @@ describe 'Starts', ->
   it 'should calculate datetime intervals properly', ->
     @dateTimeIntervalStartsTrue.exec(@ctx).should.be.true()
     @dateTimeIntervalStartsFalse.exec(@ctx).should.be.false()
+    @dateTimeIntervalStartsDayOfTrue.exec(@ctx).should.be.true()
     @dateTimeIntervalStartsEndsFalse.exec(@ctx).should.be.false()
 
 describe 'Ends', ->
@@ -972,6 +973,7 @@ describe 'Ends', ->
   it 'should calculate datetime intervals properly', ->
     @dateTimeIntervalEndsTrue.exec(@ctx).should.be.true()
     @dateTimeIntervalEndsFalse.exec(@ctx).should.be.false()
+    @dateTimeIntervalEndsDayOfTrue.exec(@ctx).should.be.true()
     @dateTimeIntervalEndsStartsFalse.exec(@ctx).should.be.false()
 
 describe 'IntegerIntervalUnion', ->

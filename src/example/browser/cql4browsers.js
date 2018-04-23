@@ -1410,14 +1410,14 @@
     };
 
     Interval.prototype.starts = function(other, precision) {
-      var lessThanOrEqual, startEqual;
+      var endLessThanOrEqual, startEqual;
       if ((precision != null) && this.low instanceof DateTime) {
         startEqual = this.low.sameAs(other.low, precision);
       } else {
         startEqual = cmp.equals(this.low, other.low);
       }
-      lessThanOrEqual = cmp.lessThanOrEquals(this.high, other.high, precision);
-      return startEqual && lessThanOrEqual;
+      endLessThanOrEqual = cmp.lessThanOrEquals(this.high, other.high, precision);
+      return startEqual && endLessThanOrEqual;
     };
 
     Interval.prototype.ends = function(other, precision) {
