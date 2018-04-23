@@ -114,7 +114,7 @@ module.exports.Distinct = class Distinct extends Expression
 doDistinct = (list) ->
   seen = []
   list.filter (item) ->
-    isNew = seen.every (seenItem) -> !equals(item, seenItem)
+    isNew = seen.every (seenItem) -> !equivalent(item, seenItem)
     seen.push item if isNew
     isNew
 

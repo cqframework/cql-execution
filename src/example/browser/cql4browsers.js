@@ -4522,7 +4522,7 @@
     return list.filter(function(item) {
       var isNew;
       isNew = seen.every(function(seenItem) {
-        return !equals(item, seenItem);
+        return !equivalent(item, seenItem);
       });
       if (isNew) {
         seen.push(item);
@@ -43744,8 +43744,11 @@
   };
 
   module.exports.equivalent = equivalent = function(a, b) {
-    if (a === null && b === null) {
+    if ((a == null) && (b == null)) {
       return true;
+    }
+    if (!((a != null) && (b != null))) {
+      return false;
     }
     if (typeof a.hasMatch === 'function') {
       return a.hasMatch(b);
