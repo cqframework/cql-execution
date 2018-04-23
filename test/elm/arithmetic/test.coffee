@@ -3,6 +3,7 @@ setup = require '../../setup'
 data = require './data'
 Q = require '../../../lib/elm/quantity'
 
+
 validateQuantity = (object,expectedValue,expectedUnit) ->
   object.constructor.name.should.equal "Quantity"
   q = Q.createQuantity(expectedValue,expectedUnit)
@@ -105,6 +106,70 @@ describe  'Power', ->
 
   it "should be able to calculate the power of a number" , ->
     @pow.exec(@ctx).should.equal 81
+
+describe 'MinValue', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'of Integer should return minimum representable Integer value', ->
+    minIntegerValue = -2147483648
+    @minInteger.exec(@ctx).should.equal(minIntegerValue)
+
+  it 'of Decimal should return minimum representable Decimal value', ->
+    minDecimalValue = -99999999999999999999999999999.99999999
+    @minDecimal.exec(@ctx).should.be.approximately(minDecimalValue, 0.000000001)
+
+  it 'of DateTime should return minimum representable DateTime value', ->
+    dateTimeResult = @minDateTime.exec(@ctx)
+    dateTimeResult.year.should.equal(1)
+    dateTimeResult.month.should.equal(1)
+    dateTimeResult.day.should.equal(1)
+    dateTimeResult.hour.should.equal(0)
+    dateTimeResult.minute.should.equal(0)
+    dateTimeResult.second.should.equal(0)
+    dateTimeResult.millisecond.should.equal(0)
+
+  it 'of Time should return minimum representable Time value', ->
+    timeResult = @minTime.exec(@ctx)
+    timeResult.hour.should.equal(0)
+    timeResult.minute.should.equal(0)
+    timeResult.second.should.equal(0)
+    timeResult.millisecond.should.equal(0)
+
+  it 'of types other than Integer/Decimal/DateTime/Time should throw an error', ->
+    should(() => @minWrongType.exec(@ctx)).throw()
+
+describe 'MaxValue', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'of Integer should return maximum representable Integer value', ->
+    maxIntegerValue = 2147483647
+    @maxInteger.exec(@ctx).should.equal(maxIntegerValue)
+
+  it 'of Decimal should return maximum representable Decimal value', ->
+    maxDecimalValue = 99999999999999999999999999999.99999999
+    @maxDecimal.exec(@ctx).should.be.approximately(maxDecimalValue, 0.000000001)
+
+  it 'of DateTime should return maximum representable DateTime value', ->
+    dateTimeResult = @maxDateTime.exec(@ctx)
+    dateTimeResult.year.should.equal(9999)
+    dateTimeResult.month.should.equal(12)
+    dateTimeResult.day.should.equal(31)
+    dateTimeResult.hour.should.equal(23)
+    dateTimeResult.minute.should.equal(59)
+    dateTimeResult.second.should.equal(59)
+    dateTimeResult.millisecond.should.equal(999)
+
+  it 'of Time should return maximum representable Time value', ->
+    timeResult = @maxTime.exec(@ctx)
+    timeResult.hour.should.equal(23)
+    timeResult.minute.should.equal(59)
+    timeResult.second.should.equal(59)
+    timeResult.millisecond.should.equal(999)
+
+  it 'of types other than Integer/Decimal/DateTime/Time should throw an error', ->
+    should(() => @maxWrongType.exec(@ctx)).throw()
 
 describe 'TruncatedDivide', ->
   @beforeEach ->
