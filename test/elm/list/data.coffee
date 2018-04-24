@@ -2753,6 +2753,7 @@ using QUICK
 context Patient
 define OneToTen: {1, 2, 3, 4, 5} union {6, 7, 8, 9, 10}
 define OneToFiveOverlapped: {1, 2, 3, 4} union {3, 4, 5}
+define OneToFiveOverlappedWithNulls: {1, null, 2, 3, 4} union {3, 4, 5, null}
 define Disjoint: {1, 2} union {4, 5}
 define NestedToFifteen: {1, 2, 3} union {4, 5, 6} union {7 ,8 , 9} union {10, 11, 12} union {13, 14, 15}
 define NullUnion: null union {1, 2, 3}
@@ -2961,27 +2962,118 @@ module.exports['Union'] = {
                } ]
             }
          }, {
-            "localId" : "34",
+            "localId" : "39",
+            "name" : "OneToFiveOverlappedWithNulls",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "39",
+                  "s" : [ {
+                     "value" : [ "define ","OneToFiveOverlappedWithNulls",": " ]
+                  }, {
+                     "r" : "38",
+                     "s" : [ {
+                        "r" : "32",
+                        "s" : [ {
+                           "value" : [ "{","1",", ","null",", ","2",", ","3",", ","4","}" ]
+                        } ]
+                     }, {
+                        "value" : [ " union " ]
+                     }, {
+                        "r" : "37",
+                        "s" : [ {
+                           "value" : [ "{","3",", ","4",", ","5",", ","null","}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "38",
+               "type" : "Union",
+               "operand" : [ {
+                  "localId" : "32",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "27",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "28",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "29",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "30",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "31",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  } ]
+               }, {
+                  "localId" : "37",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "33",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "34",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "35",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "36",
+                        "type" : "Null"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "47",
             "name" : "Disjoint",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "34",
+                  "r" : "47",
                   "s" : [ {
                      "value" : [ "define ","Disjoint",": " ]
                   }, {
-                     "r" : "33",
+                     "r" : "46",
                      "s" : [ {
-                        "r" : "29",
+                        "r" : "42",
                         "s" : [ {
                            "value" : [ "{","1",", ","2","}" ]
                         } ]
                      }, {
                         "value" : [ " union " ]
                      }, {
-                        "r" : "32",
+                        "r" : "45",
                         "s" : [ {
                            "value" : [ "{","4",", ","5","}" ]
                         } ]
@@ -2990,32 +3082,32 @@ module.exports['Union'] = {
                }
             } ],
             "expression" : {
-               "localId" : "33",
+               "localId" : "46",
                "type" : "Union",
                "operand" : [ {
-                  "localId" : "29",
+                  "localId" : "42",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "27",
+                     "localId" : "40",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "28",
+                     "localId" : "41",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   } ]
                }, {
-                  "localId" : "32",
+                  "localId" : "45",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "30",
+                     "localId" : "43",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "4",
                      "type" : "Literal"
                   }, {
-                     "localId" : "31",
+                     "localId" : "44",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
@@ -3023,33 +3115,33 @@ module.exports['Union'] = {
                } ]
             }
          }, {
-            "localId" : "59",
+            "localId" : "72",
             "name" : "NestedToFifteen",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "59",
+                  "r" : "72",
                   "s" : [ {
                      "value" : [ "define ","NestedToFifteen",": " ]
                   }, {
-                     "r" : "58",
+                     "r" : "71",
                      "s" : [ {
-                        "r" : "53",
+                        "r" : "66",
                         "s" : [ {
-                           "r" : "48",
+                           "r" : "61",
                            "s" : [ {
-                              "r" : "43",
+                              "r" : "56",
                               "s" : [ {
-                                 "r" : "38",
+                                 "r" : "51",
                                  "s" : [ {
                                     "value" : [ "{","1",", ","2",", ","3","}" ]
                                  } ]
                               }, {
                                  "value" : [ " union " ]
                               }, {
-                                 "r" : "42",
+                                 "r" : "55",
                                  "s" : [ {
                                     "value" : [ "{","4",", ","5",", ","6","}" ]
                                  } ]
@@ -3057,7 +3149,7 @@ module.exports['Union'] = {
                            }, {
                               "value" : [ " union " ]
                            }, {
-                              "r" : "47",
+                              "r" : "60",
                               "s" : [ {
                                  "value" : [ "{","7"," ,","8"," , ","9","}" ]
                               } ]
@@ -3065,7 +3157,7 @@ module.exports['Union'] = {
                         }, {
                            "value" : [ " union " ]
                         }, {
-                           "r" : "52",
+                           "r" : "65",
                            "s" : [ {
                               "value" : [ "{","10",", ","11",", ","12","}" ]
                            } ]
@@ -3073,7 +3165,7 @@ module.exports['Union'] = {
                      }, {
                         "value" : [ " union " ]
                      }, {
-                        "r" : "57",
+                        "r" : "70",
                         "s" : [ {
                            "value" : [ "{","13",", ","14",", ","15","}" ]
                         } ]
@@ -3082,111 +3174,111 @@ module.exports['Union'] = {
                }
             } ],
             "expression" : {
-               "localId" : "58",
+               "localId" : "71",
                "type" : "Union",
                "operand" : [ {
-                  "localId" : "53",
+                  "localId" : "66",
                   "type" : "Union",
                   "operand" : [ {
-                     "localId" : "48",
+                     "localId" : "61",
                      "type" : "Union",
                      "operand" : [ {
-                        "localId" : "43",
+                        "localId" : "56",
                         "type" : "Union",
                         "operand" : [ {
-                           "localId" : "38",
+                           "localId" : "51",
                            "type" : "List",
                            "element" : [ {
-                              "localId" : "35",
+                              "localId" : "48",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
                               "type" : "Literal"
                            }, {
-                              "localId" : "36",
+                              "localId" : "49",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2",
                               "type" : "Literal"
                            }, {
-                              "localId" : "37",
+                              "localId" : "50",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "3",
                               "type" : "Literal"
                            } ]
                         }, {
-                           "localId" : "42",
+                           "localId" : "55",
                            "type" : "List",
                            "element" : [ {
-                              "localId" : "39",
+                              "localId" : "52",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "4",
                               "type" : "Literal"
                            }, {
-                              "localId" : "40",
+                              "localId" : "53",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "5",
                               "type" : "Literal"
                            }, {
-                              "localId" : "41",
+                              "localId" : "54",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "6",
                               "type" : "Literal"
                            } ]
                         } ]
                      }, {
-                        "localId" : "47",
+                        "localId" : "60",
                         "type" : "List",
                         "element" : [ {
-                           "localId" : "44",
+                           "localId" : "57",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "7",
                            "type" : "Literal"
                         }, {
-                           "localId" : "45",
+                           "localId" : "58",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "8",
                            "type" : "Literal"
                         }, {
-                           "localId" : "46",
+                           "localId" : "59",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "9",
                            "type" : "Literal"
                         } ]
                      } ]
                   }, {
-                     "localId" : "52",
+                     "localId" : "65",
                      "type" : "List",
                      "element" : [ {
-                        "localId" : "49",
+                        "localId" : "62",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "10",
                         "type" : "Literal"
                      }, {
-                        "localId" : "50",
+                        "localId" : "63",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "11",
                         "type" : "Literal"
                      }, {
-                        "localId" : "51",
+                        "localId" : "64",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "12",
                         "type" : "Literal"
                      } ]
                   } ]
                }, {
-                  "localId" : "57",
+                  "localId" : "70",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "54",
+                     "localId" : "67",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "13",
                      "type" : "Literal"
                   }, {
-                     "localId" : "55",
+                     "localId" : "68",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "14",
                      "type" : "Literal"
                   }, {
-                     "localId" : "56",
+                     "localId" : "69",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "15",
                      "type" : "Literal"
@@ -3194,23 +3286,23 @@ module.exports['Union'] = {
                } ]
             }
          }, {
-            "localId" : "66",
+            "localId" : "79",
             "name" : "NullUnion",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "66",
+                  "r" : "79",
                   "s" : [ {
                      "value" : [ "define ","NullUnion",": " ]
                   }, {
-                     "r" : "65",
+                     "r" : "78",
                      "s" : [ {
-                        "r" : "60",
+                        "r" : "73",
                         "value" : [ "null"," union " ]
                      }, {
-                        "r" : "64",
+                        "r" : "77",
                         "s" : [ {
                            "value" : [ "{","1",", ","2",", ","3","}" ]
                         } ]
@@ -3219,12 +3311,12 @@ module.exports['Union'] = {
                }
             } ],
             "expression" : {
-               "localId" : "65",
+               "localId" : "78",
                "type" : "Union",
                "operand" : [ {
                   "type" : "As",
                   "operand" : {
-                     "localId" : "60",
+                     "localId" : "73",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
@@ -3235,20 +3327,20 @@ module.exports['Union'] = {
                      }
                   }
                }, {
-                  "localId" : "64",
+                  "localId" : "77",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "61",
+                     "localId" : "74",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "62",
+                     "localId" : "75",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   }, {
-                     "localId" : "63",
+                     "localId" : "76",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
@@ -3256,20 +3348,20 @@ module.exports['Union'] = {
                } ]
             }
          }, {
-            "localId" : "73",
+            "localId" : "86",
             "name" : "UnionNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "73",
+                  "r" : "86",
                   "s" : [ {
                      "value" : [ "define ","UnionNull",": " ]
                   }, {
-                     "r" : "72",
+                     "r" : "85",
                      "s" : [ {
-                        "r" : "70",
+                        "r" : "83",
                         "s" : [ {
                            "value" : [ "{","1",", ","2",", ","3","}" ]
                         } ]
@@ -3280,23 +3372,23 @@ module.exports['Union'] = {
                }
             } ],
             "expression" : {
-               "localId" : "72",
+               "localId" : "85",
                "type" : "Union",
                "operand" : [ {
-                  "localId" : "70",
+                  "localId" : "83",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "67",
+                     "localId" : "80",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "68",
+                     "localId" : "81",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   }, {
-                     "localId" : "69",
+                     "localId" : "82",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
@@ -3304,7 +3396,7 @@ module.exports['Union'] = {
                }, {
                   "type" : "As",
                   "operand" : {
-                     "localId" : "71",
+                     "localId" : "84",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
@@ -5300,6 +5392,9 @@ define MultipleMatches: IndexOf({'a', 'b', 'c', 'd', 'd', 'e', 'd'}, 'd')
 define ItemNotFound: IndexOf({'a', 'b', 'c'}, 'd')
 define NullList: IndexOf(null, 'a')
 define NullItem: IndexOf({'a', 'b', 'c'}, null)
+define ListCode: IndexOf({Code{code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5'}}, Code{code: 'F', system: '2.16.840.1.113883.18.2', version: 'foo'})
+define ListWrongCode: IndexOf({Code{code: 'M', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5'}}, Code{code: 'F', system: '2.16.840.1.113883.18.2', version: 'foo'})
+define ListWrongCodeSystem: IndexOf({Code{code: 'F', system: '1.16.840.1.113883.18.2', version: 'HL7V2.5'}}, Code{code: 'F', system: '2.16.840.1.113883.18.2', version: 'foo'})
 ###
 
 module.exports['IndexOf'] = {
@@ -5909,6 +6004,528 @@ module.exports['IndexOf'] = {
                      "localId" : "47",
                      "type" : "Null"
                   }
+               }
+            }
+         }, {
+            "localId" : "60",
+            "name" : "ListCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "60",
+                  "s" : [ {
+                     "value" : [ "define ","ListCode",": " ]
+                  }, {
+                     "r" : "59",
+                     "s" : [ {
+                        "value" : [ "IndexOf","(" ]
+                     }, {
+                        "r" : "54",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "53",
+                           "s" : [ {
+                              "value" : [ "Code","{" ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "code",": " ]
+                              }, {
+                                 "r" : "50",
+                                 "s" : [ {
+                                    "value" : [ "'F'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "system",": " ]
+                              }, {
+                                 "r" : "51",
+                                 "s" : [ {
+                                    "value" : [ "'2.16.840.1.113883.18.2'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "version",": " ]
+                              }, {
+                                 "r" : "52",
+                                 "s" : [ {
+                                    "value" : [ "'HL7V2.5'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "}" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "58",
+                        "s" : [ {
+                           "value" : [ "Code","{" ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "code",": " ]
+                           }, {
+                              "r" : "55",
+                              "s" : [ {
+                                 "value" : [ "'F'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "system",": " ]
+                           }, {
+                              "r" : "56",
+                              "s" : [ {
+                                 "value" : [ "'2.16.840.1.113883.18.2'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "version",": " ]
+                           }, {
+                              "r" : "57",
+                              "s" : [ {
+                                 "value" : [ "'foo'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "59",
+               "type" : "IndexOf",
+               "source" : {
+                  "localId" : "54",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "53",
+                     "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "Instance",
+                     "element" : [ {
+                        "name" : "code",
+                        "value" : {
+                           "localId" : "50",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "F",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "system",
+                        "value" : {
+                           "localId" : "51",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "2.16.840.1.113883.18.2",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "version",
+                        "value" : {
+                           "localId" : "52",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "HL7V2.5",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  } ]
+               },
+               "element" : {
+                  "localId" : "58",
+                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "Instance",
+                  "element" : [ {
+                     "name" : "code",
+                     "value" : {
+                        "localId" : "55",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "F",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "system",
+                     "value" : {
+                        "localId" : "56",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "2.16.840.1.113883.18.2",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "version",
+                     "value" : {
+                        "localId" : "57",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "foo",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "71",
+            "name" : "ListWrongCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "71",
+                  "s" : [ {
+                     "value" : [ "define ","ListWrongCode",": " ]
+                  }, {
+                     "r" : "70",
+                     "s" : [ {
+                        "value" : [ "IndexOf","(" ]
+                     }, {
+                        "r" : "65",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "64",
+                           "s" : [ {
+                              "value" : [ "Code","{" ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "code",": " ]
+                              }, {
+                                 "r" : "61",
+                                 "s" : [ {
+                                    "value" : [ "'M'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "system",": " ]
+                              }, {
+                                 "r" : "62",
+                                 "s" : [ {
+                                    "value" : [ "'2.16.840.1.113883.18.2'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "version",": " ]
+                              }, {
+                                 "r" : "63",
+                                 "s" : [ {
+                                    "value" : [ "'HL7V2.5'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "}" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "69",
+                        "s" : [ {
+                           "value" : [ "Code","{" ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "code",": " ]
+                           }, {
+                              "r" : "66",
+                              "s" : [ {
+                                 "value" : [ "'F'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "system",": " ]
+                           }, {
+                              "r" : "67",
+                              "s" : [ {
+                                 "value" : [ "'2.16.840.1.113883.18.2'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "version",": " ]
+                           }, {
+                              "r" : "68",
+                              "s" : [ {
+                                 "value" : [ "'foo'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "70",
+               "type" : "IndexOf",
+               "source" : {
+                  "localId" : "65",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "64",
+                     "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "Instance",
+                     "element" : [ {
+                        "name" : "code",
+                        "value" : {
+                           "localId" : "61",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "M",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "system",
+                        "value" : {
+                           "localId" : "62",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "2.16.840.1.113883.18.2",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "version",
+                        "value" : {
+                           "localId" : "63",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "HL7V2.5",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  } ]
+               },
+               "element" : {
+                  "localId" : "69",
+                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "Instance",
+                  "element" : [ {
+                     "name" : "code",
+                     "value" : {
+                        "localId" : "66",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "F",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "system",
+                     "value" : {
+                        "localId" : "67",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "2.16.840.1.113883.18.2",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "version",
+                     "value" : {
+                        "localId" : "68",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "foo",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "82",
+            "name" : "ListWrongCodeSystem",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "82",
+                  "s" : [ {
+                     "value" : [ "define ","ListWrongCodeSystem",": " ]
+                  }, {
+                     "r" : "81",
+                     "s" : [ {
+                        "value" : [ "IndexOf","(" ]
+                     }, {
+                        "r" : "76",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "75",
+                           "s" : [ {
+                              "value" : [ "Code","{" ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "code",": " ]
+                              }, {
+                                 "r" : "72",
+                                 "s" : [ {
+                                    "value" : [ "'F'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "system",": " ]
+                              }, {
+                                 "r" : "73",
+                                 "s" : [ {
+                                    "value" : [ "'1.16.840.1.113883.18.2'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "version",": " ]
+                              }, {
+                                 "r" : "74",
+                                 "s" : [ {
+                                    "value" : [ "'HL7V2.5'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "}" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "80",
+                        "s" : [ {
+                           "value" : [ "Code","{" ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "code",": " ]
+                           }, {
+                              "r" : "77",
+                              "s" : [ {
+                                 "value" : [ "'F'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "system",": " ]
+                           }, {
+                              "r" : "78",
+                              "s" : [ {
+                                 "value" : [ "'2.16.840.1.113883.18.2'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "version",": " ]
+                           }, {
+                              "r" : "79",
+                              "s" : [ {
+                                 "value" : [ "'foo'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "81",
+               "type" : "IndexOf",
+               "source" : {
+                  "localId" : "76",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "75",
+                     "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "Instance",
+                     "element" : [ {
+                        "name" : "code",
+                        "value" : {
+                           "localId" : "72",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "F",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "system",
+                        "value" : {
+                           "localId" : "73",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "1.16.840.1.113883.18.2",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "version",
+                        "value" : {
+                           "localId" : "74",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "HL7V2.5",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  } ]
+               },
+               "element" : {
+                  "localId" : "80",
+                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "Instance",
+                  "element" : [ {
+                     "name" : "code",
+                     "value" : {
+                        "localId" : "77",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "F",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "system",
+                     "value" : {
+                        "localId" : "78",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "2.16.840.1.113883.18.2",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "version",
+                     "value" : {
+                        "localId" : "79",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "foo",
+                        "type" : "Literal"
+                     }
+                  } ]
                }
             }
          } ]
@@ -12400,6 +13017,7 @@ define LotsOfDups: distinct {1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 4, 3, 
 define NoDups: distinct {2, 4, 6, 8, 10}
 define DupsTuples: distinct { Tuple{ hello: 'world' }, Tuple{ hello: 'cleveland' }, Tuple{ hello: 'world' }, Tuple{ hello: 'dolly' } }
 define NoDupsTuples: distinct { Tuple{ hello: 'world' }, Tuple{ hello: 'cleveland' } }
+define DuplicateNulls: distinct {null, 1, 2, null, 3, 4, 5, null}
 ###
 
 module.exports['Distinct'] = {
@@ -12863,6 +13481,85 @@ module.exports['Distinct'] = {
                            "type" : "Literal"
                         }
                      } ]
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "60",
+            "name" : "DuplicateNulls",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "60",
+                  "s" : [ {
+                     "value" : [ "define ","DuplicateNulls",": " ]
+                  }, {
+                     "r" : "59",
+                     "s" : [ {
+                        "value" : [ "distinct " ]
+                     }, {
+                        "r" : "58",
+                        "s" : [ {
+                           "value" : [ "{","null",", ","1",", ","2",", ","null",", ","3",", ","4",", ","5",", ","null","}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "59",
+               "type" : "Distinct",
+               "operand" : {
+                  "localId" : "58",
+                  "type" : "List",
+                  "element" : [ {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "50",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "51",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "52",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "53",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "54",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "55",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "56",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "57",
+                        "type" : "Null"
+                     }
                   } ]
                }
             }

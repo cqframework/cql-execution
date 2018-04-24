@@ -1465,6 +1465,392 @@ module.exports['Power'] = {
    }
 }
 
+### MinValue
+library TestSnippet version '1'
+using QUICK
+context Patient
+define MinInteger: minimum Integer
+define MinDecimal: minimum Decimal
+define MinDateTime: minimum  DateTime
+define MinTime: minimum Time
+define MinWrongType: minimum Quantity
+###
+
+module.exports['MinValue'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "4",
+            "name" : "MinInteger",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "define ","MinInteger",": " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "minimum"," " ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "Integer" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "3",
+               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+               "type" : "MinValue"
+            }
+         }, {
+            "localId" : "7",
+            "name" : "MinDecimal",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "define ","MinDecimal",": " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "minimum"," " ]
+                     }, {
+                        "r" : "5",
+                        "s" : [ {
+                           "value" : [ "Decimal" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "6",
+               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+               "type" : "MinValue"
+            }
+         }, {
+            "localId" : "10",
+            "name" : "MinDateTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "10",
+                  "s" : [ {
+                     "value" : [ "define ","MinDateTime",": " ]
+                  }, {
+                     "r" : "9",
+                     "s" : [ {
+                        "value" : [ "minimum","  " ]
+                     }, {
+                        "r" : "8",
+                        "s" : [ {
+                           "value" : [ "DateTime" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "9",
+               "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
+               "type" : "MinValue"
+            }
+         }, {
+            "localId" : "13",
+            "name" : "MinTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "define ","MinTime",": " ]
+                  }, {
+                     "r" : "12",
+                     "s" : [ {
+                        "value" : [ "minimum"," " ]
+                     }, {
+                        "r" : "11",
+                        "s" : [ {
+                           "value" : [ "Time" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "12",
+               "valueType" : "{urn:hl7-org:elm-types:r1}Time",
+               "type" : "MinValue"
+            }
+         }, {
+            "localId" : "16",
+            "name" : "MinWrongType",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "16",
+                  "s" : [ {
+                     "value" : [ "define ","MinWrongType",": " ]
+                  }, {
+                     "r" : "15",
+                     "s" : [ {
+                        "value" : [ "minimum"," " ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "Quantity" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "15",
+               "valueType" : "{urn:hl7-org:elm-types:r1}Quantity",
+               "type" : "MinValue"
+            }
+         } ]
+      }
+   }
+}
+
+### MaxValue
+library TestSnippet version '1'
+using QUICK
+context Patient
+define MaxInteger: maximum Integer
+define MaxDecimal: maximum Decimal
+define MaxDateTime: maximum DateTime
+define MaxTime: maximum Time
+define MaxWrongType: maximum Quantity
+###
+
+module.exports['MaxValue'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "4",
+            "name" : "MaxInteger",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "define ","MaxInteger",": " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "maximum"," " ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "Integer" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "3",
+               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+               "type" : "MaxValue"
+            }
+         }, {
+            "localId" : "7",
+            "name" : "MaxDecimal",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "define ","MaxDecimal",": " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "maximum"," " ]
+                     }, {
+                        "r" : "5",
+                        "s" : [ {
+                           "value" : [ "Decimal" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "6",
+               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+               "type" : "MaxValue"
+            }
+         }, {
+            "localId" : "10",
+            "name" : "MaxDateTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "10",
+                  "s" : [ {
+                     "value" : [ "define ","MaxDateTime",": " ]
+                  }, {
+                     "r" : "9",
+                     "s" : [ {
+                        "value" : [ "maximum"," " ]
+                     }, {
+                        "r" : "8",
+                        "s" : [ {
+                           "value" : [ "DateTime" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "9",
+               "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
+               "type" : "MaxValue"
+            }
+         }, {
+            "localId" : "13",
+            "name" : "MaxTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "define ","MaxTime",": " ]
+                  }, {
+                     "r" : "12",
+                     "s" : [ {
+                        "value" : [ "maximum"," " ]
+                     }, {
+                        "r" : "11",
+                        "s" : [ {
+                           "value" : [ "Time" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "12",
+               "valueType" : "{urn:hl7-org:elm-types:r1}Time",
+               "type" : "MaxValue"
+            }
+         }, {
+            "localId" : "16",
+            "name" : "MaxWrongType",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "16",
+                  "s" : [ {
+                     "value" : [ "define ","MaxWrongType",": " ]
+                  }, {
+                     "r" : "15",
+                     "s" : [ {
+                        "value" : [ "maximum"," " ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "Quantity" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "15",
+               "valueType" : "{urn:hl7-org:elm-types:r1}Quantity",
+               "type" : "MaxValue"
+            }
+         } ]
+      }
+   }
+}
+
 ### TruncatedDivide
 library TestSnippet version '1'
 using QUICK

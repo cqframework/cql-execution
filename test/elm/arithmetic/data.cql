@@ -37,6 +37,20 @@ define Parenthetical: (1 + 5) * (10 - 15) / 3
 // @Test: Power
 define Pow: 3 ^ 4
 
+// @Test: MinValue
+define MinInteger: minimum Integer
+define MinDecimal: minimum Decimal
+define MinDateTime: minimum  DateTime
+define MinTime: minimum Time
+define MinWrongType: minimum Quantity
+
+// @Test: MaxValue
+define MaxInteger: maximum Integer
+define MaxDecimal: maximum Decimal
+define MaxDateTime: maximum DateTime
+define MaxTime: maximum Time
+define MaxWrongType: maximum Quantity
+
 // @Test: TruncatedDivide
 define Trunc: 10 div 3
 define Even: 9 div 3

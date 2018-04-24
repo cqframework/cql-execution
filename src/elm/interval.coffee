@@ -128,10 +128,23 @@ module.exports.End = class End  extends Expression
   exec: (ctx) ->
     @arg.execute(ctx)?.high
 
-# TODO: Spec has "Begins" defined, but shouldn't it be "Starts"?
-module.exports.Starts = class Starts extends UnimplementedExpression
+module.exports.Starts = class Starts extends Expression
+  constructor: (json) ->
+    super
+    @precision = json.precision?.toLowerCase()
 
-module.exports.Ends = class Ends extends UnimplementedExpression
+  exec: (ctx) ->
+    [a, b] = @execArgs ctx
+    if a? and b? then a.starts(b, @precision) else null
+
+module.exports.Ends = class Ends extends Expression
+  constructor: (json) ->
+    super
+    @precision = json.precision?.toLowerCase()
+
+  exec: (ctx) ->
+    [a, b] = @execArgs ctx
+    if a? and b? then a.ends(b, @precision) else null
 
 module.exports.Collapse = class Collapse extends Expression
   constructor: (json) ->

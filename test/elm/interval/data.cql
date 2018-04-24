@@ -654,6 +654,38 @@ define Foo: start of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
 // @Test: End
 define Foo: end of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
 
+// @Test: Starts
+define TestStartsNull: Interval[null, null] starts Interval[1, 10]
+define IntegerIntervalStartsTrue: Interval[4,10] starts Interval[4, 15]
+define IntegerIntervalStartsFalse: Interval[1, 10] starts Interval[4, 10]
+define IntegerIntervalStartEndsFalse: Interval[4, 10] starts Interval[4, 9]
+define DecimalIntervalStartsTrue: Interval[4.0, 10.0] starts Interval[4.0, 15.0]
+define DecimalIntervalStartsFalse: Interval[1.0, 10.0] starts Interval[4.0, 10.0]
+define DecimalIntervalStartsEndsFalse: Interval[4.0, 10.0] starts Interval[4.0, 9.0]
+define QuantityIntervalStartsTrue: Interval[5.0 'g', 10.0 'g'] starts Interval[5.0 'g', 15.0 'g']
+define QuantityIntervalStartsFalse: Interval[1.0 'g', 10.0 'g'] starts Interval[5.0 'g', 10.0 'g']
+define QuantityIntervalStartsEndsFalse: Interval[5.0 'g', 10.0 'g'] starts Interval[5.0 'g', 9.9 'g']
+define DateTimeIntervalStartsTrue: Interval[DateTime(2012, 1, 5, 0, 0, 0, 0), DateTime(2012, 1, 25, 0, 0, 0, 0)] starts Interval[DateTime(2012, 1, 5, 0, 0, 0, 0), DateTime(2012, 1, 27, 0, 0, 0, 0)]
+define DateTimeIntervalStartsFalse: Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] starts day of Interval[DateTime(2012, 1, 6), DateTime(2012, 1, 27)]
+define DateTimeIntervalStartsDayOfTrue: Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] starts day of Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 27)]
+define DateTimeIntervalStartsEndsFalse: Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] starts day of Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 24)]
+
+// @Test: Ends
+define TestEndsNull: Interval[1, 10] ends Interval[null, null]
+define IntegerIntervalEndsTrue: Interval[4,10] ends Interval[1,10]
+define IntegerIntervalEndsFalse: Interval[4, 9] ends Interval[1,10]
+define IntegerIntervalEndsStartsFalse: Interval[0, 10] ends Interval[1,10]
+define DecimalIntervalEndsTrue: Interval[4.0,10.0] ends Interval[1.0,10.0]
+define DecimalIntervalEndsFalse: Interval[11.0, 20.0] ends Interval[1.0,10.0]
+define DecimalIntervalEndsStartsFalse: Interval[0.0, 10.0] ends Interval[1.0, 10.0]
+define QuantityIntervalEndsTrue: Interval[5.0 'g', 10.0 'g'] ends Interval[1.0 'g', 10.0 'g']
+define QuantityIntervalEndsFalse: Interval[5.0 'g', 10.0 'g'] ends Interval[1.0 'g', 10.5 'g']
+define QuantityIntervalEndsStartsFalse: Interval[4.0 'g', 10.0 'g'] ends Interval[5.0 'g', 10.0 'g']
+define DateTimeIntervalEndsTrue: Interval[DateTime(2012, 1, 5, 0, 0, 0, 0), DateTime(2012, 1, 15, 0, 0, 0, 0)] ends Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 15, 0, 0, 0, 0)]
+define DateTimeIntervalEndsFalse: Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 15)] ends day of Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 16)]
+define DateTimeIntervalEndsDayOfTrue: Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 15)] ends day of Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 15)]
+define DateTimeIntervalEndsStartsFalse: Interval[DateTime(2012, 1, 5), DateTime(2012, 2, 16)] ends day of Interval[DateTime(2012, 2, 1), DateTime(2012, 2, 16)]
+
 // @Test: IntegerIntervalUnion
 define IntFullInterval: Interval[0,10]
 define IntClosedUnionClosed: Interval[0,5] union Interval[5,10]

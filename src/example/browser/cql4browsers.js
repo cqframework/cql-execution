@@ -1409,6 +1409,28 @@
       }
     };
 
+    Interval.prototype.starts = function(other, precision) {
+      var endLessThanOrEqual, startEqual;
+      if ((precision != null) && this.low instanceof DateTime) {
+        startEqual = this.low.sameAs(other.low, precision);
+      } else {
+        startEqual = cmp.equals(this.low, other.low);
+      }
+      endLessThanOrEqual = cmp.lessThanOrEquals(this.high, other.high, precision);
+      return startEqual && endLessThanOrEqual;
+    };
+
+    Interval.prototype.ends = function(other, precision) {
+      var endEqual, startGreaterThanOrEqual;
+      startGreaterThanOrEqual = cmp.greaterThanOrEquals(this.low, other.low, precision);
+      if ((precision != null) && this.low instanceof DateTime) {
+        endEqual = this.high.sameAs(other.high, precision);
+      } else {
+        endEqual = cmp.equals(this.high, other.high);
+      }
+      return startGreaterThanOrEqual && endEqual;
+    };
+
     Interval.prototype.width = function() {
       var closed, diff;
       if (this.low instanceof DateTime || this.high instanceof DateTime) {
@@ -2414,25 +2436,30 @@
   })(Expression);
 
   module.exports.MinValue = MinValue = (function(superClass) {
+    var MIN_VALUES;
+
     extend(MinValue, superClass);
 
-    MinValue.prototype.MIN_VALUES = {
-      "Integer": MathUtil.MIN_INT_VALUE,
-      "Real": MathUtil.MIN_FLOAT_VALUE,
-      "DateTime": MathUtil.MIN_DATE_VALUE
-    };
+    MIN_VALUES = {};
+
+    MIN_VALUES['{urn:hl7-org:elm-types:r1}Integer'] = MathUtil.MIN_INT_VALUE;
+
+    MIN_VALUES['{urn:hl7-org:elm-types:r1}Decimal'] = MathUtil.MIN_FLOAT_VALUE;
+
+    MIN_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MIN_DATE_VALUE;
+
+    MIN_VALUES['{urn:hl7-org:elm-types:r1}Time'] = MathUtil.MIN_TIME_VALUE;
 
     function MinValue(json) {
       MinValue.__super__.constructor.apply(this, arguments);
+      this.valueType = json.valueType;
     }
 
     MinValue.prototype.exec = function(ctx) {
-      var arg;
-      arg = this.execArgs(ctx);
-      if (arg == null) {
-        return null;
+      if (MIN_VALUES[this.valueType]) {
+        return MIN_VALUES[this.valueType];
       } else {
-        return MIN_VALUES[arg];
+        throw new Error("Minimum not supported for " + this.valueType);
       }
     };
 
@@ -2441,25 +2468,30 @@
   })(Expression);
 
   module.exports.MaxValue = MaxValue = (function(superClass) {
+    var MAX_VALUES;
+
     extend(MaxValue, superClass);
 
-    MaxValue.prototype.MAX_VALUES = {
-      "Integer": MathUtil.MAX_INT_VALUE,
-      "Real": MathUtil.MAX_FLOAT_VALUE,
-      "DateTime": MathUtil.MAX_DATE_VALUE
-    };
+    MAX_VALUES = {};
+
+    MAX_VALUES['{urn:hl7-org:elm-types:r1}Integer'] = MathUtil.MAX_INT_VALUE;
+
+    MAX_VALUES['{urn:hl7-org:elm-types:r1}Decimal'] = MathUtil.MAX_FLOAT_VALUE;
+
+    MAX_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MAX_DATE_VALUE;
+
+    MAX_VALUES['{urn:hl7-org:elm-types:r1}Time'] = MathUtil.MAX_TIME_VALUE;
 
     function MaxValue(json) {
       MaxValue.__super__.constructor.apply(this, arguments);
+      this.valueType = json.valueType;
     }
 
     MaxValue.prototype.exec = function(ctx) {
-      var arg;
-      arg = this.execArgs(ctx);
-      if (arg == null) {
-        return null;
+      if (MAX_VALUES[this.valueType] != null) {
+        return MAX_VALUES[this.valueType];
       } else {
-        return MAX_VALUES[arg];
+        throw new Error("Maximum not supported for " + this.valueType);
       }
     };
 
@@ -4053,24 +4085,48 @@
   module.exports.Starts = Starts = (function(superClass) {
     extend(Starts, superClass);
 
-    function Starts() {
-      return Starts.__super__.constructor.apply(this, arguments);
+    function Starts(json) {
+      var ref1;
+      Starts.__super__.constructor.apply(this, arguments);
+      this.precision = (ref1 = json.precision) != null ? ref1.toLowerCase() : void 0;
     }
+
+    Starts.prototype.exec = function(ctx) {
+      var a, b, ref1;
+      ref1 = this.execArgs(ctx), a = ref1[0], b = ref1[1];
+      if ((a != null) && (b != null)) {
+        return a.starts(b, this.precision);
+      } else {
+        return null;
+      }
+    };
 
     return Starts;
 
-  })(UnimplementedExpression);
+  })(Expression);
 
   module.exports.Ends = Ends = (function(superClass) {
     extend(Ends, superClass);
 
-    function Ends() {
-      return Ends.__super__.constructor.apply(this, arguments);
+    function Ends(json) {
+      var ref1;
+      Ends.__super__.constructor.apply(this, arguments);
+      this.precision = (ref1 = json.precision) != null ? ref1.toLowerCase() : void 0;
     }
+
+    Ends.prototype.exec = function(ctx) {
+      var a, b, ref1;
+      ref1 = this.execArgs(ctx), a = ref1[0], b = ref1[1];
+      if ((a != null) && (b != null)) {
+        return a.ends(b, this.precision);
+      } else {
+        return null;
+      }
+    };
 
     return Ends;
 
-  })(UnimplementedExpression);
+  })(Expression);
 
   module.exports.Collapse = Collapse = (function(superClass) {
     extend(Collapse, superClass);
@@ -4418,7 +4474,7 @@
       }
       for (i = j = 0, len = src.length; j < len; i = ++j) {
         itm = src[i];
-        if (equals(itm, el)) {
+        if (equivalent(itm, el)) {
           index = i;
           break;
         }
@@ -4512,7 +4568,7 @@
     return list.filter(function(item) {
       var isNew;
       isNew = seen.every(function(seenItem) {
-        return !equals(item, seenItem);
+        return !equivalent(item, seenItem);
       });
       if (isNew) {
         seen.push(item);
@@ -43864,7 +43920,7 @@
 },{"../datatypes/datetime":7,"../datatypes/uncertainty":11}],134:[function(require,module,exports){
 // Generated by CoffeeScript 1.12.7
 (function() {
-  var DateTime, Exception, MAX_DATE_VALUE, MAX_FLOAT_VALUE, MAX_INT_VALUE, MIN_DATE_VALUE, MIN_FLOAT_PRECISION_VALUE, MIN_FLOAT_VALUE, MIN_INT_VALUE, OverFlowException, Uncertainty, predecessor, successor,
+  var DateTime, Exception, MAX_DATE_VALUE, MAX_FLOAT_VALUE, MAX_INT_VALUE, MAX_TIME_VALUE, MIN_DATE_VALUE, MIN_FLOAT_PRECISION_VALUE, MIN_FLOAT_VALUE, MIN_INT_VALUE, OverFlowException, Uncertainty, predecessor, successor,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
@@ -43878,15 +43934,19 @@
 
   module.exports.MIN_INT_VALUE = MIN_INT_VALUE = Math.pow(-2, 31);
 
-  module.exports.MAX_FLOAT_VALUE = MAX_FLOAT_VALUE = (Math.pow(10, 37) - 1) / Math.pow(10, 8);
+  module.exports.MAX_FLOAT_VALUE = MAX_FLOAT_VALUE = 99999999999999999999999999999.99999999;
 
-  module.exports.MIN_FLOAT_VALUE = MIN_FLOAT_VALUE = (Math.pow(-10, 37) + 1) / Math.pow(10, 8);
+  module.exports.MIN_FLOAT_VALUE = MIN_FLOAT_VALUE = -99999999999999999999999999999.99999999;
 
   module.exports.MIN_FLOAT_PRECISION_VALUE = MIN_FLOAT_PRECISION_VALUE = Math.pow(10, -8);
 
   module.exports.MIN_DATE_VALUE = MIN_DATE_VALUE = DateTime.parse("0001-01-01T00:00:00.000");
 
   module.exports.MAX_DATE_VALUE = MAX_DATE_VALUE = DateTime.parse("9999-12-31T23:59:59.999");
+
+  module.exports.MIN_TIME_VALUE = MAX_TIME_VALUE = DateTime.parse("0000-01-01T00:00:00.000");
+
+  module.exports.MAX_TIME_VALUE = MAX_TIME_VALUE = DateTime.parse("0000-01-01T23:59:59.999");
 
   module.exports.OverFlowException = OverFlowException = OverFlowException = (function(superClass) {
     extend(OverFlowException, superClass);

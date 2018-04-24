@@ -98,6 +98,9 @@ describe 'Union', ->
   it 'should remove duplicate elements (according to CQL 1.2 spec)', ->
     @oneToFiveOverlapped.exec(@ctx).should.eql [1, 2, 3, 4, 5]
 
+  it 'should remove duplicate null elements', ->
+    @oneToFiveOverlappedWithNulls.exec(@ctx).should.eql [1, null, 2, 3, 4, 5]
+
   it 'should not fill in values in a disjoint union', ->
     @disjoint.exec(@ctx).should.eql [1, 2, 4, 5]
 
@@ -185,6 +188,17 @@ describe 'IndexOf', ->
   it 'should return null if either arg is null', ->
     should(@nullList.exec(@ctx)).be.null
     should(@nullItem.exec(@ctx)).be.null
+
+  describe 'should use equivalence to determine presence in List', ->
+    it 'when code is in list', ->
+      @listCode.exec(@ctx).should.equal 0
+
+    it 'when code is not in list', ->
+      @listWrongCode.exec(@ctx).should.equal -1
+
+    it 'when code system is not in list', ->
+      @listWrongCodeSystem.exec(@ctx).should.equal -1
+
 
 describe 'Indexer', ->
   @beforeEach ->
@@ -383,6 +397,9 @@ describe 'Distinct', ->
 
   it 'should do nothing to an array of distinct tuples', ->
     @noDupsTuples.exec(@ctx).should.eql [{ hello: 'world' }, { hello: 'cleveland' }]
+
+  it 'should remove duplicate null values', ->
+    @duplicateNulls.exec(@ctx).should.eql [null, 1, 2, 3, 4, 5]
 
 describe 'First', ->
   @beforeEach ->
