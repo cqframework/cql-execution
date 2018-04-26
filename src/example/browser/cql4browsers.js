@@ -436,6 +436,14 @@
       this.display = display;
     }
 
+    Object.defineProperties(Concept.prototype, {
+      isConcept: {
+        get: function() {
+          return true;
+        }
+      }
+    });
+
     Concept.prototype.hasMatch = function(code) {
       return codesInList(toCodeList(code), this.codes);
     };
@@ -562,7 +570,7 @@
 
     DateTime.parse = function(string) {
       var arg, args, match, num, regex;
-      match = regex = /(\d{4})(-(\d{2}))?(-(\d{2}))?(T((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?(([+-])(\d{2})(\:?(\d{2}))?)?)?/.exec(string);
+      match = regex = /(\d{4})(-(\d{2}))?(-(\d{2}))?(T((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(\:?(\d{2}))?))?)?/.exec(string);
       if ((match != null ? match[0] : void 0) === string) {
         args = [match[1], match[3], match[5], match[8], match[10], match[12], match[14]];
         if (args[6] != null) {
@@ -577,9 +585,11 @@
           }
           return results;
         })();
-        if (match[17] != null) {
-          num = parseInt(match[17], 10) + (match[19] != null ? parseInt(match[19], 10) / 60 : 0);
-          args.push(match[16] === '+' ? num : num * -1);
+        if (match[18] != null) {
+          num = parseInt(match[18], 10) + (match[20] != null ? parseInt(match[20], 10) / 60 : 0);
+          args.push(match[17] === '+' ? num : num * -1);
+        } else if (match[15] === 'Z') {
+          args.push(0);
         }
         return (function(func, args, ctor) {
           ctor.prototype = func.prototype;
@@ -616,6 +626,14 @@
         this.timezoneOffset = (new Date()).getTimezoneOffset() / 60 * -1;
       }
     }
+
+    Object.defineProperties(DateTime.prototype, {
+      isDateTime: {
+        get: function() {
+          return true;
+        }
+      }
+    });
 
     DateTime.prototype.copy = function() {
       return new DateTime(this.year, this.month, this.day, this.hour, this.minute, this.second, this.millisecond, this.timezoneOffset);
@@ -1042,7 +1060,7 @@
                 if (this.second != null) {
                   str += ':' + this._pad(this.second);
                   if (this.millisecond != null) {
-                    str += '.' + this._pad(this.millisecond);
+                    str += '.' + String("00" + this.millisecond).slice(-3);
                   }
                 }
               }
@@ -1055,7 +1073,7 @@
         offsetHours = Math.floor(Math.abs(this.timezoneOffset));
         str += this._pad(offsetHours);
         offsetMin = (Math.abs(this.timezoneOffset) - offsetHours) * 60;
-        str += this._pad(offsetMin);
+        str += ':' + this._pad(offsetMin);
       }
       return str;
     };
@@ -1140,6 +1158,14 @@
       this.lowClosed = lowClosed != null ? lowClosed : true;
       this.highClosed = highClosed != null ? highClosed : true;
     }
+
+    Object.defineProperties(Interval.prototype, {
+      isInterval: {
+        get: function() {
+          return true;
+        }
+      }
+    });
 
     Interval.prototype.contains = function(item, precision) {
       var closed;
@@ -1446,9 +1472,9 @@
     };
 
     Interval.prototype.toClosed = function() {
-      var high, low, point, ref1, ref2;
+      var high, low, point, ref1;
       point = (ref1 = this.low) != null ? ref1 : this.high;
-      if (typeof point === 'number' || point instanceof DateTime || (point != null ? (ref2 = point.constructor) != null ? ref2.name : void 0 : void 0) === 'Quantity') {
+      if (typeof point === 'number' || point instanceof DateTime || (point != null ? point.isQuantity : void 0)) {
         low = (function() {
           switch (false) {
             case !(this.lowClosed && (this.low == null)):
@@ -1689,10 +1715,10 @@
       return arr;
     }
     allQs = arr.every(function(x) {
-      return x.constructor.name === "Quantity";
+      return x.isQuantity;
     });
     someQs = arr.some(function(x) {
-      return x.constructor.name === "Quantity";
+      return x.isQuantity;
     });
     if (allQs) {
       unit = arr[0].unit;
@@ -2071,7 +2097,7 @@
         return null;
       } else {
         return args != null ? args.reduce(function(x, y) {
-          if (x.constructor.name === 'Quantity' || x.constructor.name === 'DateTime') {
+          if (x.isQuantity || x.isDateTime) {
             return Quantity.doAddition(x, y);
           } else {
             return x + y;
@@ -2100,7 +2126,7 @@
         return null;
       } else {
         return args.reduce(function(x, y) {
-          if (x.constructor.name === 'Quantity' || x.constructor.name === 'DateTime') {
+          if (x.isQuantity || x.isDateTime) {
             return Quantity.doSubtraction(x, y);
           } else {
             return x - y;
@@ -2129,7 +2155,7 @@
         return null;
       } else {
         return args != null ? args.reduce(function(x, y) {
-          if (x.constructor.name === 'Quantity' || y.constructor.name === 'Quantity') {
+          if (x.isQuantity || y.isQuantity) {
             return Quantity.doMultiplication(x, y);
           } else {
             return x * y;
@@ -2158,7 +2184,7 @@
         return null;
       } else {
         return args != null ? args.reduce(function(x, y) {
-          if (x.constructor.name === 'Quantity') {
+          if (x.isQuantity) {
             return Quantity.doDivision(x, y);
           } else {
             return x / y;
@@ -2286,7 +2312,7 @@
       arg = this.execArgs(ctx);
       if (arg == null) {
         return null;
-      } else if (arg.constructor.name === 'Quantity') {
+      } else if (arg.isQuantity) {
         return Quantity.createQuantity(Math.abs(arg.value), arg.unit);
       } else {
         return Math.abs(arg);
@@ -2309,7 +2335,7 @@
       arg = this.execArgs(ctx);
       if (arg == null) {
         return null;
-      } else if (arg.constructor.name === 'Quantity') {
+      } else if (arg.isQuantity) {
         return Quantity.createQuantity(arg.value * -1, arg.unit);
       } else {
         return arg * -1;
@@ -2793,6 +2819,14 @@
       this.display = json.display;
     }
 
+    Object.defineProperties(Concept.prototype, {
+      isConcept: {
+        get: function() {
+          return true;
+        }
+      }
+    });
+
     Concept.prototype.toCode = function(ctx, code) {
       var ref, system;
       system = (ref = ctx.getCodeSystem(code.system.name)) != null ? ref.id : void 0;
@@ -3134,6 +3168,14 @@
       DateTime.__super__.constructor.apply(this, arguments);
     }
 
+    Object.defineProperties(DateTime.prototype, {
+      isDateTime: {
+        get: function() {
+          return true;
+        }
+      }
+    });
+
     DateTime.prototype.exec = function(ctx) {
       var args, i, len, p, property, ref;
       ref = DateTime.PROPERTIES;
@@ -3186,6 +3228,14 @@
         }
       }
     }
+
+    Object.defineProperties(Time.prototype, {
+      isTime: {
+        get: function() {
+          return true;
+        }
+      }
+    });
 
     Time.prototype.exec = function(ctx) {
       var args, p;
@@ -3848,6 +3898,14 @@
       this.high = build(json.high);
     }
 
+    Object.defineProperties(Interval.prototype, {
+      isInterval: {
+        get: function() {
+          return true;
+        }
+      }
+    });
+
     Interval.prototype.exec = function(ctx) {
       return new dtivl.Interval(this.low.execute(ctx), this.high.execute(ctx), this.lowClosed, this.highClosed);
     };
@@ -4331,6 +4389,14 @@
       this.elements = (ref2 = build(json.element)) != null ? ref2 : [];
     }
 
+    Object.defineProperties(List.prototype, {
+      isList: {
+        get: function() {
+          return true;
+        }
+      }
+    });
+
     List.prototype.exec = function(ctx) {
       var item, j, len, ref2, results;
       ref2 = this.elements;
@@ -4685,6 +4751,14 @@
       this.value = this.value === 'true';
     }
 
+    Object.defineProperties(BooleanLiteral.prototype, {
+      isBooleanLiteral: {
+        get: function() {
+          return true;
+        }
+      }
+    });
+
     BooleanLiteral.prototype.exec = function(ctx) {
       return this.value;
     };
@@ -4700,6 +4774,14 @@
       IntegerLiteral.__super__.constructor.apply(this, arguments);
       this.value = parseInt(this.value, 10);
     }
+
+    Object.defineProperties(IntegerLiteral.prototype, {
+      isIntegerLiteral: {
+        get: function() {
+          return true;
+        }
+      }
+    });
 
     IntegerLiteral.prototype.exec = function(ctx) {
       return this.value;
@@ -4717,6 +4799,14 @@
       this.value = parseFloat(this.value);
     }
 
+    Object.defineProperties(DecimalLiteral.prototype, {
+      isDecimalLiteral: {
+        get: function() {
+          return true;
+        }
+      }
+    });
+
     DecimalLiteral.prototype.exec = function(ctx) {
       return this.value;
     };
@@ -4731,6 +4821,14 @@
     function StringLiteral(json) {
       StringLiteral.__super__.constructor.apply(this, arguments);
     }
+
+    Object.defineProperties(StringLiteral.prototype, {
+      isStringLiteral: {
+        get: function() {
+          return true;
+        }
+      }
+    });
 
     StringLiteral.prototype.exec = function(ctx) {
       return this.value.replace(/\\'/g, "'").replace(/\\"/g, "\"");
@@ -5505,6 +5603,14 @@
         throw new Error("\'" + this.unit + "\' is not a valid UCUM unit.");
       }
     }
+
+    Object.defineProperties(Quantity.prototype, {
+      isQuantity: {
+        get: function() {
+          return true;
+        }
+      }
+    });
 
     Quantity.prototype.clone = function() {
       return new Quantity({
@@ -6640,6 +6746,14 @@
         return results;
       })();
     }
+
+    Object.defineProperties(Tuple.prototype, {
+      isTuple: {
+        get: function() {
+          return true;
+        }
+      }
+    });
 
     Tuple.prototype.exec = function(ctx) {
       var el, i, len, ref1, ref2, val;
@@ -43373,12 +43487,10 @@
     };
 
     Context.prototype.matchesIntervalTypeSpecifier = function(val, spec) {
-      var ref;
-      return ((ref = val.constructor) != null ? ref.name : void 0) === "Interval" && ((val.low == null) || this.matchesTypeSpecifier(val.low, spec.pointType)) && ((val.high == null) || this.matchesTypeSpecifier(val.high, spec.pointType));
+      return val.isInterval && ((val.low == null) || this.matchesTypeSpecifier(val.low, spec.pointType)) && ((val.high == null) || this.matchesTypeSpecifier(val.high, spec.pointType));
     };
 
     Context.prototype.matchesNamedTypeSpecifier = function(val, spec) {
-      var ref, ref1, ref2, ref3;
       switch (spec.name) {
         case "{urn:hl7-org:elm-types:r1}Boolean":
           return typeof val === "boolean";
@@ -43389,42 +43501,41 @@
         case "{urn:hl7-org:elm-types:r1}String":
           return typeof val === "string";
         case "{urn:hl7-org:elm-types:r1}Concept":
-          return (val != null ? (ref = val.constructor) != null ? ref.name : void 0 : void 0) === 'Concept';
+          return val != null ? val.isConcept : void 0;
         case "{urn:hl7-org:elm-types:r1}DateTime":
-          return (val != null ? (ref1 = val.constructor) != null ? ref1.name : void 0 : void 0) === 'DateTime';
+          return val != null ? val.isDateTime : void 0;
         case "{urn:hl7-org:elm-types:r1}Quantity":
-          return (val != null ? (ref2 = val.constructor) != null ? ref2.name : void 0 : void 0) === 'Quantity';
+          return val != null ? val.isQuantity : void 0;
         case "{urn:hl7-org:elm-types:r1}Time":
-          return (val != null ? (ref3 = val.constructor) != null ? ref3.name : void 0 : void 0) === 'DateTime' && val.isTime();
+          return (val != null ? val.isDateTime : void 0) && val.isTime();
         default:
           return true;
       }
     };
 
     Context.prototype.matchesInstanceType = function(val, inst) {
-      var ref, ref1, ref2, ref3, ref4;
-      switch ((ref = inst.constructor) != null ? ref.name : void 0) {
-        case "BooleanLiteral":
+      switch (false) {
+        case !inst.isBooleanLiteral:
           return typeof val === "boolean";
-        case "DecimalLiteral":
+        case !inst.isDecimalLiteral:
           return typeof val === "number";
-        case "IntegerLiteral":
+        case !inst.isIntegerLiteral:
           return typeof val === "number" && Math.floor(val) === val;
-        case "StringLiteral":
+        case !inst.isStringLiteral:
           return typeof val === "string";
-        case "Concept":
-          return (val != null ? (ref1 = val.constructor) != null ? ref1.name : void 0 : void 0) === "Concept";
-        case "DateTime":
-          return (val != null ? (ref2 = val.constructor) != null ? ref2.name : void 0 : void 0) === "DateTime";
-        case "Quantity":
-          return (val != null ? (ref3 = val.constructor) != null ? ref3.name : void 0 : void 0) === "Quantity";
-        case "Time":
-          return (val != null ? (ref4 = val.constructor) != null ? ref4.name : void 0 : void 0) === "DateTime" && val.isTime();
-        case "List":
+        case !inst.isConcept:
+          return val != null ? val.isConcept : void 0;
+        case !inst.isDateTime:
+          return val != null ? val.isDateTime : void 0;
+        case !inst.isQuantity:
+          return val != null ? val.isQuantity : void 0;
+        case !inst.isTime:
+          return (val != null ? val.isDateTime : void 0) && val.isTime();
+        case !inst.isList:
           return this.matchesListInstanceType(val, inst);
-        case "Tuple":
+        case !inst.isTuple:
           return this.matchesTupleInstanceType(val, inst);
-        case "Interval":
+        case !inst.isInterval:
           return this.matchesIntervalInstanceType(val, inst);
         default:
           return true;
@@ -43448,9 +43559,9 @@
     };
 
     Context.prototype.matchesIntervalInstanceType = function(val, ivl) {
-      var pointType, ref, ref1;
+      var pointType, ref;
       pointType = (ref = ivl.low) != null ? ref : ivl.high;
-      return ((ref1 = val.constructor) != null ? ref1.name : void 0) === "Interval" && ((val.low == null) || this.matchesInstanceType(val.low, pointType)) && ((val.high == null) || this.matchesInstanceType(val.high, pointType));
+      return val.isInterval && ((val.low == null) || this.matchesInstanceType(val.low, pointType)) && ((val.high == null) || this.matchesInstanceType(val.high, pointType));
     };
 
     return Context;
@@ -43709,8 +43820,7 @@
   };
 
   areDateTimesOrQuantities = function(a, b) {
-    var ref, ref1;
-    return (a instanceof DateTime && b instanceof DateTime) || ((a != null ? (ref = a.constructor) != null ? ref.name : void 0 : void 0) === 'Quantity' && (b != null ? (ref1 = b.constructor) != null ? ref1.name : void 0 : void 0) === 'Quantity');
+    return (a instanceof DateTime && b instanceof DateTime) || ((a != null ? a.isQuantity : void 0) && (b != null ? b.isQuantity : void 0));
   };
 
   isUncertainty = function(x) {
@@ -43873,11 +43983,11 @@
   };
 
   module.exports.equals = equals = function(a, b) {
-    var aClass, bClass, ref, ref1;
+    var aClass, bClass, ref;
     if (!((a != null) && (b != null))) {
       return null;
     }
-    if ((a != null ? (ref = a.constructor) != null ? ref.name : void 0 : void 0) === 'Quantity') {
+    if (a != null ? a.isQuantity : void 0) {
       return a.equals(b);
     }
     if (a instanceof Uncertainty) {
@@ -43891,7 +44001,7 @@
     if (a === b) {
       return true;
     }
-    ref1 = getClassOfObjects(a, b), aClass = ref1[0], bClass = ref1[1];
+    ref = getClassOfObjects(a, b), aClass = ref[0], bClass = ref[1];
     if (aClass !== bClass) {
       return false;
     }
@@ -43960,7 +44070,7 @@
   })(Exception);
 
   module.exports.successor = successor = function(val) {
-    var e, high, ref, succ;
+    var e, high, succ;
     if (typeof val === "number") {
       if (parseInt(val) === val) {
         if (val === MAX_INT_VALUE) {
@@ -43987,7 +44097,7 @@
         }
       })();
       return new Uncertainty(successor(val.low), high);
-    } else if ((val != null ? (ref = val.constructor) != null ? ref.name : void 0 : void 0) === 'Quantity') {
+    } else if (val != null ? val.isQuantity : void 0) {
       succ = val.clone();
       succ.value = successor(val.value);
       return succ;
@@ -43997,7 +44107,7 @@
   };
 
   module.exports.predecessor = predecessor = function(val) {
-    var e, low, pred, ref;
+    var e, low, pred;
     if (typeof val === "number") {
       if (parseInt(val) === val) {
         if (val === MIN_INT_VALUE) {
@@ -44024,7 +44134,7 @@
         }
       })();
       return new Uncertainty(low, predecessor(val.high));
-    } else if ((val != null ? (ref = val.constructor) != null ? ref.name : void 0 : void 0) === 'Quantity') {
+    } else if (val != null ? val.isQuantity : void 0) {
       pred = val.clone();
       pred.value = predecessor(val.value);
       return pred;
@@ -44034,7 +44144,7 @@
   };
 
   module.exports.maxValueForInstance = function(val) {
-    var ref, val2;
+    var val2;
     if (typeof val === "number") {
       if (parseInt(val) === val) {
         return MAX_INT_VALUE;
@@ -44043,7 +44153,7 @@
       }
     } else if (val instanceof DateTime) {
       return MAX_DATE_VALUE;
-    } else if ((val != null ? (ref = val.constructor) != null ? ref.name : void 0 : void 0) === 'Quantity') {
+    } else if (val != null ? val.isQuantity : void 0) {
       val2 = val.clone();
       val2.value = maxValueForInstance(val2.value);
       return val2;
@@ -44053,7 +44163,7 @@
   };
 
   module.exports.minValueForInstance = function(val) {
-    var ref, val2;
+    var val2;
     if (typeof val === "number") {
       if (parseInt(val) === val) {
         return MIN_INT_VALUE;
@@ -44062,7 +44172,7 @@
       }
     } else if (val instanceof DateTime) {
       return MIN_DATE_VALUE;
-    } else if ((val != null ? (ref = val.constructor) != null ? ref.name : void 0 : void 0) === 'Quantity') {
+    } else if (val != null ? val.isQuantity : void 0) {
       val2 = val.clone();
       val2.value = minValueForInstance(val2.value);
       return val2;
