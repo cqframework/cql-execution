@@ -45,3 +45,19 @@ define timeTime: convert @T11:57 to Time
 // define codeConcept: convert hepB to Concept
 // define codeCode: convert hepB to Code
 define foo: 'bar'
+
+// @Test: ToDecimal
+define NoSign: ToDecimal('0.0')
+define PositiveSign: ToDecimal('+1.1')
+define NegativeSign: ToDecimal('-1.1')
+define TooPrecise: ToDecimal('.444444444')
+define TooLarge: ToDecimal('444444444444444444444444444444')
+define NullDecimal: ToDecimal((null as String))
+define WrongFormat: ToDecimal('+.1')
+
+// @Test: ToInteger
+define NoSign: ToInteger('12345')
+define PositiveSign: ToInteger('+12345')
+define NegativeSign: ToInteger('-12345')
+define TooLarge: ToInteger('2147483648')
+define TooSmall: ToInteger('-2147483649')

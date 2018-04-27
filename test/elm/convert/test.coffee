@@ -22,8 +22,8 @@ describe 'FromString', ->
   it "should convert '10.2' to Decimal", ->
     @decimalValid.exec(@ctx).should.equal 10.2
 
-  it "should convert 'abc' to Decimal NaN", ->
-    isNaN(@decimalInvalid.exec(@ctx)).should.equal true
+  it "should throw error trying to convert 'abc' to Decimal", ->
+    should(() => @decimalInvalid.exec(@ctx)).throw("Unable to parse abc as Decimal")
 
   it "should convert '10' to Integer", ->
     @integerValid.exec(@ctx).should.equal 10
@@ -31,8 +31,8 @@ describe 'FromString', ->
   it "should convert '10.2' to Integer 10", ->
     @integerDropDecimal.exec(@ctx).should.equal 10
 
-  it "should convert 'abc' to Integer NaN", ->
-    isNaN(@integerInvalid.exec(@ctx)).should.equal true
+  it "should throw error trying to convert 'abc' to Integer", ->
+    should(() => @integerInvalid.exec(@ctx)).throw("Unable to parse abc as Integer")
 
   it "should convert \"10 'A'\" to Quantity", ->
     quantity = @quantityStr.exec(@ctx)
@@ -144,3 +144,48 @@ describe 'FromCode', ->
 
   it.skip "should convert hepB to a code", ->
     code = @codeCode.exec(@ctx)
+
+describe 'ToDecimal', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should convert '0.0' to 0.0", ->
+    @noSign.exec(@ctx).should.equal(0.0)
+
+  it "should convert '+1.1' to 1.1", ->
+    @positiveSign.exec(@ctx).should.equal(1.1)
+
+  it "should convert '-1.1' to -1.1", ->
+    @negativeSign .exec(@ctx).should.equal(-1.1)
+
+  it "should not return decimal that is too precise", ->
+    should(() => @tooPrecise.exec(@ctx)).throw(".444444444 exceeds maximum Decimal precision")
+
+  it "should not return decimal that is above max decimal value", ->
+    should(() => @tooLarge.exec(@ctx)).throw("444444444444444444444444444444 exceeds maximum Decimal value")
+
+  it "should convert null to null", ->
+    should(@nullDecimal.exec(@ctx)).not.exist
+
+  it.skip "should throw runtime error if wrong format (+.1)", ->
+    # TODO: parseFloat is more forgiving than the CQL spec, so this does get converted
+    should(() => @wrongFormat.exec(@ctx)).throw()
+
+describe 'ToInteger', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return positive integer without polarity sign", ->
+    @noSign.exec(@ctx).should.equal(12345)
+
+  it "should return positive integer with polarity sign", ->
+    @positiveSign.exec(@ctx).should.equal(12345)
+
+  it "should return negative integer", ->
+    @negativeSign.exec(@ctx).should.equal(-12345)
+
+  it "should not return integer larger than max", ->
+    should(() => @tooLarge.exec(@ctx)).throw("2147483648 exceeds maximum Integer value")
+
+  it "should not return integer smaller than min", ->
+    should(() => @tooSmall.exec(@ctx)).throw("-2147483649 exceeds minimum Integer value")

@@ -3,6 +3,7 @@
 { DateTime } = require '../datatypes/datetime'
 { Concept } = require '../datatypes/clinical'
 { parseQuantity } = require './quantity'
+MathUtil = require('../util/math')
 
 # TODO: Casting and Conversion needs unit tests!
 
@@ -56,7 +57,22 @@ module.exports.ToDecimal = class ToDecimal extends Expression
 
   exec: (ctx) ->
     arg = @execArgs(ctx)
-    if arg? and typeof arg != 'undefined' then parseFloat(arg.toString()) else null
+    if arg? and typeof arg != 'undefined'
+      decimal = parseFloat(arg.toString())
+      throw new Error("Unable to parse #{arg.toString()} as Decimal") if isNaN(decimal)
+      throw new Error("#{arg.toString()} exceeds maximum Decimal value") if decimal > MathUtil.MAX_FLOAT_VALUE
+      throw new Error("#{arg.toString()} exceeds minimum Decimal value") if decimal < MathUtil.MIN_FLOAT_VALUE
+      throw new Error("#{arg.toString()} exceeds maximum Decimal precision") if getDecimalPrecision(arg.toString()) > 8
+      return decimal
+     else
+      return null
+
+getDecimalPrecision = (decimalString) ->
+  decimalPoints = decimalString.split('.')[1]
+  if decimalPoints?
+    return decimalPoints.length
+  else
+    return 0
 
 module.exports.ToInteger = class ToInteger extends Expression
   constructor: (json) ->
@@ -64,7 +80,14 @@ module.exports.ToInteger = class ToInteger extends Expression
 
   exec: (ctx) ->
     arg = @execArgs(ctx)
-    if arg? and typeof arg != 'undefined' then parseInt(arg.toString()) else null
+    if arg? and typeof arg != 'undefined'
+      integer = parseInt(arg.toString())
+      throw new Error("Unable to parse #{arg.toString()} as Integer") if isNaN(integer)
+      throw new Error("#{arg.toString()} exceeds maximum Integer value") if integer > MathUtil.MAX_INT_VALUE
+      throw new Error("#{arg.toString()} exceeds minimum Integer value") if integer < MathUtil.MIN_INT_VALUE
+      return integer
+    else
+      return null
 
 module.exports.ToQuantity = class ToQuantity extends Expression
   constructor: (json) ->
