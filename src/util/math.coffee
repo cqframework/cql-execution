@@ -12,6 +12,28 @@ module.exports.MAX_DATE_VALUE = MAX_DATE_VALUE = DateTime.parse("9999-12-31T23:5
 module.exports.MIN_TIME_VALUE = MAX_TIME_VALUE = DateTime.parse("0000-01-01T00:00:00.000")
 module.exports.MAX_TIME_VALUE = MAX_TIME_VALUE = DateTime.parse("0000-01-01T23:59:59.999")
 
+
+module.exports.isValidInteger = isValidInteger = (integer) ->
+  throw new Error("Unable to parse Integer") if isNaN(integer)
+  throw new Error("Maximum Integer value exceeded") if integer > MAX_INT_VALUE
+  throw new Error("Minimum Integer value exceeded") if integer < MIN_INT_VALUE
+  return true
+
+module.exports.isValidDecimal = isValidDecimal = (decimal) ->
+  throw new Error("Unable to parse Decimal") if isNaN(decimal)
+  throw new Error("Maximum Decimal value exceeded") if decimal > MAX_FLOAT_VALUE
+  throw new Error("Minimum Decimal value exceeded") if decimal < MIN_FLOAT_VALUE
+  throw new Error("Maximum Decimal precision") if getDecimalPrecision(decimal) > 8
+  return true
+
+getDecimalPrecision = (decimal) ->
+  decimalString = decimal.toString()
+  decimalPoints = decimalString.split('.')[1]
+  if decimalPoints?
+    return decimalPoints.length
+  else
+    return 0
+
 module.exports.OverFlowException = OverFlowException = class OverFlowException extends Exception
 
 module.exports.successor = successor = (val) ->

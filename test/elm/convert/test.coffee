@@ -23,7 +23,7 @@ describe 'FromString', ->
     @decimalValid.exec(@ctx).should.equal 10.2
 
   it "should throw error trying to convert 'abc' to Decimal", ->
-    should(() => @decimalInvalid.exec(@ctx)).throw("Unable to parse abc as Decimal")
+    should(() => @decimalInvalid.exec(@ctx)).throw("Unable to parse Decimal")
 
   it "should convert '10' to Integer", ->
     @integerValid.exec(@ctx).should.equal 10
@@ -32,7 +32,7 @@ describe 'FromString', ->
     @integerDropDecimal.exec(@ctx).should.equal 10
 
   it "should throw error trying to convert 'abc' to Integer", ->
-    should(() => @integerInvalid.exec(@ctx)).throw("Unable to parse abc as Integer")
+    should(() => @integerInvalid.exec(@ctx)).throw("Unable to parse Integer")
 
   it "should convert \"10 'A'\" to Quantity", ->
     quantity = @quantityStr.exec(@ctx)
@@ -159,10 +159,13 @@ describe 'ToDecimal', ->
     @negativeSign .exec(@ctx).should.equal(-1.1)
 
   it "should not return decimal that is too precise", ->
-    should(() => @tooPrecise.exec(@ctx)).throw(".444444444 exceeds maximum Decimal precision")
+    should(() => @tooPrecise.exec(@ctx)).throw("Maximum Decimal precision")
 
   it "should not return decimal that is above max decimal value", ->
-    should(() => @tooLarge.exec(@ctx)).throw("444444444444444444444444444444 exceeds maximum Decimal value")
+    should(() => @tooLargeDec.exec(@ctx)).throw("Maximum Decimal value exceeded")
+
+  it "should not return decimal that is below min decimal value", ->
+    should(() => @tooSmallDec.exec(@ctx)).throw("Minimum Decimal value exceeded")
 
   it "should convert null to null", ->
     should(@nullDecimal.exec(@ctx)).not.exist
@@ -185,7 +188,23 @@ describe 'ToInteger', ->
     @negativeSign.exec(@ctx).should.equal(-12345)
 
   it "should not return integer larger than max", ->
-    should(() => @tooLarge.exec(@ctx)).throw("2147483648 exceeds maximum Integer value")
+    should(() => @tooLargeInt.exec(@ctx)).throw("Maximum Integer value exceeded")
 
   it "should not return integer smaller than min", ->
-    should(() => @tooSmall.exec(@ctx)).throw("-2147483649 exceeds minimum Integer value")
+    should(() => @tooSmallInt.exec(@ctx)).throw("Minimum Integer value exceeded")
+
+describe 'ToQuantity', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should throw runtime error checkValidCqlDecimal", ->
+    should(() => @wrongFormatQuantity.exec(@ctx)).throw("Unable to parse Quantity")
+
+  it "should throw runtime error if invalid positive Quantity", ->
+    should(() => @tooLargeQuantity.exec(@ctx)).throw("Maximum Decimal value exceeded")
+
+  it "should throw runtime error if invalid negative Quantity", ->
+    should(() => @tooSmallQuantity.exec(@ctx)).throw("Minimum Decimal value exceeded")
+
+  it "should return null for null argument", ->
+    should(@nullArg.exec(@ctx)).not.exist
