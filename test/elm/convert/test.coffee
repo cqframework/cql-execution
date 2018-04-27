@@ -197,7 +197,7 @@ describe 'ToQuantity', ->
   @beforeEach ->
     setup @, data
 
-  it "should throw runtime error checkValidCqlDecimal", ->
+  it "should throw runtime error if string is not formatted properly", ->
     should(() => @wrongFormatQuantity.exec(@ctx)).throw("Unable to parse Quantity")
 
   it "should throw runtime error if invalid positive Quantity", ->
@@ -208,3 +208,18 @@ describe 'ToQuantity', ->
 
   it "should return null for null argument", ->
     should(@nullArg.exec(@ctx)).not.exist
+
+describe 'ToTime', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return null if arg is null", ->
+    should(@nullArgTime.exec(@ctx)).not.exist
+
+  it "should throw runtime error for incorrect format", ->
+    should(() => @IncorrectFormatTime.exec(@ctx)).throw()
+
+  it "should throw runtime error for invalid time-of-day", ->
+    should(() => @InvalidTime.exec(@ctx)).throw()
+
+
