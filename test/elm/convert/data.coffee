@@ -2334,6 +2334,10 @@ module.exports['ToQuantity'] = {
 ### ToTime
 library TestSnippet version '1'
 using QUICK
+context Patient
+define NullArgTime: ToTime((null as String))
+define IncorrectFormatTime: ToTime('10:00PM')
+define InvalidTime: ToTime('25:99.000+00.00')
 ###
 
 module.exports['ToTime'] = {
@@ -2354,6 +2358,149 @@ module.exports['ToTime'] = {
             "localId" : "1",
             "localIdentifier" : "QUICK",
             "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "6",
+            "name" : "NullArgTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "6",
+                  "s" : [ {
+                     "value" : [ "define ","NullArgTime",": " ]
+                  }, {
+                     "r" : "5",
+                     "s" : [ {
+                        "value" : [ "ToTime","(" ]
+                     }, {
+                        "r" : "4",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "4",
+                           "s" : [ {
+                              "r" : "2",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "3",
+                              "s" : [ {
+                                 "value" : [ "String" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "5",
+               "type" : "ToTime",
+               "operand" : {
+                  "localId" : "4",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "2",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "3",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            }
+         }, {
+            "localId" : "9",
+            "name" : "IncorrectFormatTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "define ","IncorrectFormatTime",": " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "ToTime","(" ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "'10:00PM'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "type" : "ToTime",
+               "operand" : {
+                  "localId" : "7",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "10:00PM",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "12",
+            "name" : "InvalidTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "value" : [ "define ","InvalidTime",": " ]
+                  }, {
+                     "r" : "11",
+                     "s" : [ {
+                        "value" : [ "ToTime","(" ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "value" : [ "'25:99.000+00.00'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "11",
+               "type" : "ToTime",
+               "operand" : {
+                  "localId" : "10",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "25:99.000+00.00",
+                  "type" : "Literal"
+               }
+            }
          } ]
       }
    }

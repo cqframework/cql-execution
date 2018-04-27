@@ -70,3 +70,6 @@ define TooSmallQuantity: ToQuantity('-444444444444444444444444444444 \'\'')
 define NullArg: ToQuantity((null as String))
 
 // @Test: ToTime
+define NullArgTime: ToTime((null as String))
+define IncorrectFormatTime: ToTime('10:00PM')
+define InvalidTime: ToTime('25:99.000+00.00')
