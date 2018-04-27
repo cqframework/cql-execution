@@ -2937,9 +2937,9 @@
       } catch (error1) {
         error = error1;
         if (error instanceof IncompatibleTypesException) {
-          return null;
-        } else {
           throw error;
+        } else {
+          return null;
         }
       }
     };
@@ -2965,9 +2965,9 @@
       } catch (error1) {
         error = error1;
         if (error instanceof IncompatibleTypesException) {
-          return null;
-        } else {
           throw error;
+        } else {
+          return null;
         }
       }
     };
@@ -2993,9 +2993,9 @@
       } catch (error1) {
         error = error1;
         if (error instanceof IncompatibleTypesException) {
-          return null;
-        } else {
           throw error;
+        } else {
+          return null;
         }
       }
     };
@@ -3021,9 +3021,9 @@
       } catch (error1) {
         error = error1;
         if (error instanceof IncompatibleTypesException) {
-          return null;
-        } else {
           throw error;
+        } else {
+          return null;
         }
       }
     };
@@ -5068,9 +5068,9 @@
       } catch (error1) {
         error = error1;
         if (error instanceof IncompatibleTypesException) {
-          return null;
-        } else {
           throw error;
+        } else {
+          return null;
         }
       }
     };
@@ -5116,9 +5116,9 @@
       } catch (error1) {
         error = error1;
         if (error instanceof IncompatibleTypesException) {
-          return null;
-        } else {
           throw error;
+        } else {
+          return null;
         }
       }
     };
