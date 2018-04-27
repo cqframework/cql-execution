@@ -2637,3 +2637,733 @@ module.exports['Substring'] = {
    }
 }
 
+### StartsWith
+library TestSnippet version '1'
+using QUICK
+context Patient
+define FooBarStartsWithFoo: StartsWith('FooBar', 'Foo')
+define FooBarStartsWithBar: StartsWith('FooBar', 'Bar')
+define FooBarStartsWithBlank: StartsWith('FooBar', '')
+define BlankStartsWithFoo: StartsWith('', 'Foo')
+define StartsWithNull: StartsWith('FooBar', null as String)
+define NullStartsWith: StartsWith(null as String, 'Foo')
+###
+
+module.exports['StartsWith'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "5",
+            "name" : "FooBarStartsWithFoo",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "define ","FooBarStartsWithFoo",": " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "StartsWith","(" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "'FooBar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "3",
+                        "s" : [ {
+                           "value" : [ "'Foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "4",
+               "type" : "StartsWith",
+               "operand" : [ {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "FooBar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "3",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "9",
+            "name" : "FooBarStartsWithBar",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "define ","FooBarStartsWithBar",": " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "StartsWith","(" ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "value" : [ "'FooBar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "'Bar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "type" : "StartsWith",
+               "operand" : [ {
+                  "localId" : "6",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "FooBar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "7",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Bar",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "13",
+            "name" : "FooBarStartsWithBlank",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "define ","FooBarStartsWithBlank",": " ]
+                  }, {
+                     "r" : "12",
+                     "s" : [ {
+                        "value" : [ "StartsWith","(" ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "value" : [ "'FooBar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "11",
+                        "s" : [ {
+                           "value" : [ "''" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "12",
+               "type" : "StartsWith",
+               "operand" : [ {
+                  "localId" : "10",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "FooBar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "11",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "17",
+            "name" : "BlankStartsWithFoo",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "17",
+                  "s" : [ {
+                     "value" : [ "define ","BlankStartsWithFoo",": " ]
+                  }, {
+                     "r" : "16",
+                     "s" : [ {
+                        "value" : [ "StartsWith","(" ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "''" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "15",
+                        "s" : [ {
+                           "value" : [ "'Foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "16",
+               "type" : "StartsWith",
+               "operand" : [ {
+                  "localId" : "14",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "15",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "23",
+            "name" : "StartsWithNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "23",
+                  "s" : [ {
+                     "value" : [ "define ","StartsWithNull",": " ]
+                  }, {
+                     "r" : "22",
+                     "s" : [ {
+                        "value" : [ "StartsWith","(" ]
+                     }, {
+                        "r" : "18",
+                        "s" : [ {
+                           "value" : [ "'FooBar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "21",
+                        "s" : [ {
+                           "r" : "19",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "20",
+                           "s" : [ {
+                              "value" : [ "String" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "22",
+               "type" : "StartsWith",
+               "operand" : [ {
+                  "localId" : "18",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "FooBar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "21",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "19",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "20",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "29",
+            "name" : "NullStartsWith",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "29",
+                  "s" : [ {
+                     "value" : [ "define ","NullStartsWith",": " ]
+                  }, {
+                     "r" : "28",
+                     "s" : [ {
+                        "value" : [ "StartsWith","(" ]
+                     }, {
+                        "r" : "26",
+                        "s" : [ {
+                           "r" : "24",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "25",
+                           "s" : [ {
+                              "value" : [ "String" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "27",
+                        "s" : [ {
+                           "value" : [ "'Foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "28",
+               "type" : "StartsWith",
+               "operand" : [ {
+                  "localId" : "26",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "24",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "25",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "27",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
+### EndsWith
+library TestSnippet version '1'
+using QUICK
+context Patient
+define FooBarEndsWithBar: EndsWith('FooBar', 'Bar')
+define FooBarEndsWithFoo: EndsWith('FooBar', 'Foo')
+define FooBarEndsWithBlank: EndsWith('FooBar', '')
+define BlankEndsWithFoo: EndsWith('', 'Foo')
+define EndsWithNull: EndsWith('FooBar', null as String)
+define NullEndsWith: EndsWith(null as String, 'Foo')
+###
+
+module.exports['EndsWith'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "5",
+            "name" : "FooBarEndsWithBar",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "define ","FooBarEndsWithBar",": " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "EndsWith","(" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "'FooBar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "3",
+                        "s" : [ {
+                           "value" : [ "'Bar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "4",
+               "type" : "EndsWith",
+               "operand" : [ {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "FooBar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "3",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Bar",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "9",
+            "name" : "FooBarEndsWithFoo",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "define ","FooBarEndsWithFoo",": " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "EndsWith","(" ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "value" : [ "'FooBar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "'Foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "type" : "EndsWith",
+               "operand" : [ {
+                  "localId" : "6",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "FooBar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "7",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "13",
+            "name" : "FooBarEndsWithBlank",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "define ","FooBarEndsWithBlank",": " ]
+                  }, {
+                     "r" : "12",
+                     "s" : [ {
+                        "value" : [ "EndsWith","(" ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "value" : [ "'FooBar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "11",
+                        "s" : [ {
+                           "value" : [ "''" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "12",
+               "type" : "EndsWith",
+               "operand" : [ {
+                  "localId" : "10",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "FooBar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "11",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "17",
+            "name" : "BlankEndsWithFoo",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "17",
+                  "s" : [ {
+                     "value" : [ "define ","BlankEndsWithFoo",": " ]
+                  }, {
+                     "r" : "16",
+                     "s" : [ {
+                        "value" : [ "EndsWith","(" ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "''" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "15",
+                        "s" : [ {
+                           "value" : [ "'Foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "16",
+               "type" : "EndsWith",
+               "operand" : [ {
+                  "localId" : "14",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "15",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "23",
+            "name" : "EndsWithNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "23",
+                  "s" : [ {
+                     "value" : [ "define ","EndsWithNull",": " ]
+                  }, {
+                     "r" : "22",
+                     "s" : [ {
+                        "value" : [ "EndsWith","(" ]
+                     }, {
+                        "r" : "18",
+                        "s" : [ {
+                           "value" : [ "'FooBar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "21",
+                        "s" : [ {
+                           "r" : "19",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "20",
+                           "s" : [ {
+                              "value" : [ "String" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "22",
+               "type" : "EndsWith",
+               "operand" : [ {
+                  "localId" : "18",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "FooBar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "21",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "19",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "20",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "29",
+            "name" : "NullEndsWith",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "29",
+                  "s" : [ {
+                     "value" : [ "define ","NullEndsWith",": " ]
+                  }, {
+                     "r" : "28",
+                     "s" : [ {
+                        "value" : [ "EndsWith","(" ]
+                     }, {
+                        "r" : "26",
+                        "s" : [ {
+                           "r" : "24",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "25",
+                           "s" : [ {
+                              "value" : [ "String" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "27",
+                        "s" : [ {
+                           "value" : [ "'Foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "28",
+               "type" : "EndsWith",
+               "operand" : [ {
+                  "localId" : "26",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "24",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "25",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "27",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+

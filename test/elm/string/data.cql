@@ -58,3 +58,19 @@ define TooMuchLength: Substring('HelloWorld', 7, 25)
 define NegativeLength: Substring('HelloWorld', 7, -1)
 define NullString: Substring(null, 5)
 define NullStart: Substring('HelloWorld', null)
+
+// @Test: StartsWith
+define FooBarStartsWithFoo: StartsWith('FooBar', 'Foo')
+define FooBarStartsWithBar: StartsWith('FooBar', 'Bar')
+define FooBarStartsWithBlank: StartsWith('FooBar', '')
+define BlankStartsWithFoo: StartsWith('', 'Foo')
+define StartsWithNull: StartsWith('FooBar', null as String)
+define NullStartsWith: StartsWith(null as String, 'Foo')
+
+// @Test: EndsWith
+define FooBarEndsWithBar: EndsWith('FooBar', 'Bar')
+define FooBarEndsWithFoo: EndsWith('FooBar', 'Foo')
+define FooBarEndsWithBlank: EndsWith('FooBar', '')
+define BlankEndsWithFoo: EndsWith('', 'Foo')
+define EndsWithNull: EndsWith('FooBar', null as String)
+define NullEndsWith: EndsWith(null as String, 'Foo')

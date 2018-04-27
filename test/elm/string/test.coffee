@@ -185,3 +185,43 @@ describe 'Substring', ->
 
   it 'should return null when start is null', ->
     should(@nullStart.exec(@ctx)).be.null
+
+describe 'StartsWith', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'should be true when it does start with', ->
+    @fooBarStartsWithFoo.exec(@ctx).should.be.true()
+
+  it 'should be false when it does not start with', ->
+    @fooBarStartsWithBar.exec(@ctx).should.be.false()
+
+  it 'should be true for starts with blank', ->
+    @fooBarStartsWithBlank.exec(@ctx).should.be.true()
+
+  it 'should be false for blank starts with', ->
+    @blankStartsWithFoo.exec(@ctx).should.be.false()
+
+  it 'should be null when either arg is null', ->
+    should(@startsWithNull.exec(@ctx)).be.null()
+    should(@nullStartsWith.exec(@ctx)).be.null()
+
+describe 'EndsWith', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'should be true when it does end with', ->
+    @fooBarEndsWithBar.exec(@ctx).should.be.true()
+
+  it 'should be false when it does not end with', ->
+    @fooBarEndsWithFoo.exec(@ctx).should.be.false()
+
+  it 'should be true for ends with blank', ->
+    @fooBarEndsWithBlank.exec(@ctx).should.be.true()
+
+  it 'should be false for blank ends with', ->
+    @blankEndsWithFoo.exec(@ctx).should.be.false()
+
+  it 'should be null when either arg is null', ->
+    should(@endsWithNull.exec(@ctx)).be.null()
+    should(@nullEndsWith.exec(@ctx)).be.null()
