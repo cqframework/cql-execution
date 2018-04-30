@@ -7,6 +7,12 @@ cmp = require '../util/comparison'
 module.exports.Interval = class Interval
   constructor: (@low, @high, @lowClosed = true, @highClosed = true) ->
 
+  # Define a simple getter to allow type-checking of this class without instanceof
+  # and in a way that survives minification (as opposed to checking constructor.name)
+  Object.defineProperties @prototype,
+    isInterval:
+      get: -> true
+
   contains: (item, precision) ->
     if item instanceof Interval then throw new Error("Argument to contains must be a point")
     closed = @toClosed()
@@ -228,7 +234,7 @@ module.exports.Interval = class Interval
 
   toClosed: () ->
     point = @low ? @high
-    if typeof(point) is 'number' or point instanceof DateTime or point?.constructor?.name == 'Quantity'
+    if typeof(point) is 'number' or point instanceof DateTime or point?.isQuantity
       low = switch
         when @lowClosed and not @low? then minValueForInstance point
         when not @lowClosed and @low? then successor @low

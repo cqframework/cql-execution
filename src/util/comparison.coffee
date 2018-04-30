@@ -5,7 +5,7 @@ areNumbers = (a, b) ->
   typeof a is 'number' and typeof b is 'number'
 
 areDateTimesOrQuantities = (a, b) ->
-  (a instanceof DateTime and b instanceof DateTime) or (a?.constructor?.name == 'Quantity' and b?.constructor?.name == 'Quantity')
+  (a instanceof DateTime and b instanceof DateTime) or (a?.isQuantity and b?.isQuantity)
 
 isUncertainty = (x) ->
   x instanceof Uncertainty
@@ -90,7 +90,7 @@ module.exports.equals = equals = (a, b) ->
   return null unless a? and b?
 
   # If one is a Quantity, use the Quantity equals function
-  return a.equals b if a?.constructor?.name == 'Quantity'
+  return a.equals b if a?.isQuantity
 
   # If one is an Uncertainty, convert the other to an Uncertainty
   if a instanceof Uncertainty then b = Uncertainty.from(b)

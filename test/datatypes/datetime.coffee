@@ -47,18 +47,30 @@ describe 'DateTime', ->
     d.should.eql new DateTime(2012, 10, 25, 12)
     d = DateTime.parse '2012-10-25T12-05'
     d.should.eql new DateTime(2012, 10, 25, 12, null, null, null, -5)
+    d = DateTime.parse '2012-10-25T12-05:30'
+    d.should.eql new DateTime(2012, 10, 25, 12, null, null, null, -5.5)
+    d = DateTime.parse '2012-10-25T12Z'
+    d.should.eql new DateTime(2012, 10, 25, 12, null, null, null, 0)
 
   it 'should parse yyyy-mm-ddThh:mm with and without timezone offset', ->
     d = DateTime.parse '2012-10-25T12:55'
     d.should.eql new DateTime(2012, 10, 25, 12, 55)
+    d = DateTime.parse '2012-10-25T12:55+05'
+    d.should.eql new DateTime(2012, 10, 25, 12, 55, null, null, 5)
     d = DateTime.parse '2012-10-25T12:55+05:30'
     d.should.eql new DateTime(2012, 10, 25, 12, 55, null, null, 5.5)
+    d = DateTime.parse '2012-10-25T12:55Z'
+    d.should.eql new DateTime(2012, 10, 25, 12, 55, null, null, 0)
 
   it 'should parse yyyy-mm-ddThh:mm:ss with and without timezone offset', ->
     d = DateTime.parse '2012-10-25T12:55:14'
     d.should.eql new DateTime(2012, 10, 25, 12, 55, 14)
     d = DateTime.parse '2012-10-25T12:55:14+01'
     d.should.eql new DateTime(2012, 10, 25, 12, 55, 14, null, 1)
+    d = DateTime.parse '2012-10-25T12:55:14+01:30'
+    d.should.eql new DateTime(2012, 10, 25, 12, 55, 14, null, 1.5)
+    d = DateTime.parse '2012-10-25T12:55:14Z'
+    d.should.eql new DateTime(2012, 10, 25, 12, 55, 14, null, 0)
 
   it 'should parse yyyy-mm-ddThh:mm:ss.s with and without timezone offset', ->
     d = DateTime.parse '2012-10-25T12:55:14.9'
@@ -76,8 +88,60 @@ describe 'DateTime', ->
     d = DateTime.parse '2012-10-25T12:55:14.953-01'
     d.should.eql new DateTime(2012, 10, 25, 12, 55, 14, 953, -1)
 
+    d = DateTime.parse '2012-10-25T12:55:14.953-01:30'
+    d.should.eql new DateTime(2012, 10, 25, 12, 55, 14, 953, -1.5)
+
+    d = DateTime.parse '2012-10-25T12:55:14.953Z'
+    d.should.eql new DateTime(2012, 10, 25, 12, 55, 14, 953, 0)
+
+  it 'should toString yyyy', ->
+    d = new DateTime(2012)
+    d.toString().should.eql '2012'
+
+  it 'should toString yyyy-mm', ->
+    d = new DateTime(2012, 10)
+    d.toString().should.eql '2012-10'
+
+  it 'should toString yyyy-mm-dd', ->
+    d = new DateTime(2012, 10, 25)
+    d.toString().should.eql '2012-10-25'
+
+  it 'should toString yyyy-mm-ddThh', ->
+    d = new DateTime(2012, 10, 25, 12, null, null, null, -5)
+    d.toString().should.eql '2012-10-25T12-05:00'
+
+  it 'should toString yyyy-mm-ddThh:mm', ->
+    d = new DateTime(2012, 10, 25, 12, 55, null, null, -5)
+    d.toString().should.eql '2012-10-25T12:55-05:00'
+
+  it 'should toString yyyy-mm-ddThh:mm:ss', ->
+    d = new DateTime(2012, 10, 25, 12, 55, 14, null, -5)
+    d.toString().should.eql '2012-10-25T12:55:14-05:00'
+
+  it 'should toString yyyy-mm-ddThh:mm:ss.sss', ->
+    d = new DateTime(2012, 10, 25, 12, 55, 14, 9, -5)
+    d.toString().should.eql '2012-10-25T12:55:14.009-05:00'
+
+    d = new DateTime(2012, 10, 25, 12, 55, 14, 95, -5)
+    d.toString().should.eql '2012-10-25T12:55:14.095-05:00'
+
+    d = new DateTime(2012, 10, 25, 12, 55, 14, 953, -5)
+    d.toString().should.eql '2012-10-25T12:55:14.953-05:00'
+
   it 'should not parse invalid strings', ->
     should.not.exist DateTime.parse '20121025'
+  it 'should throw runtime error when parsing non-string', ->
+    should(() => DateTime.parse 20121025).throw(/.*Invalid DateTime String.*/)
+
+  it 'should throw runtime error when parsing invalid string format', ->
+    should(() => DateTime.parse '20121025').throw(/.*Invalid DateTime String.*/)
+
+  it 'should throw runtime error when parsing invalid date/time values', ->
+    should(() => DateTime.parse '0000-00-00').throw(/.*Invalid DateTime String.*/)
+    should(() => DateTime.parse '2000-11-31T23:59:59.999').throw(/.*Invalid DateTime String.*/)
+
+  it 'should not parse null input', ->
+    should.not.exist DateTime.parse null
 
   it 'should construct from a javascript date', ->
     DateTime.fromDate(new Date(1999, 1, 16, 13, 56, 24, 123)).should.eql DateTime.parse('1999-02-16T13:56:24.123')
@@ -1244,7 +1308,7 @@ describe 'DateTime.before', ->
     DateTime.parse('2000-12-31T23:58:59.999').before(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
     DateTime.parse('2000-12-31T22:59:59.999').before(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
     DateTime.parse('2000-12-30T23:59:59.999').before(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
-    DateTime.parse('2000-11-31T23:59:59.999').before(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
+    DateTime.parse('2000-11-30T23:59:59.999').before(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
     DateTime.parse('1999-12-31T23:59:59.999').before(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
 
   it 'should reject cases where a is after b', ->
@@ -1362,7 +1426,7 @@ describe 'DateTime.sameOrBefore', ->
     DateTime.parse('2000-12-31T23:58:59.999').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
     DateTime.parse('2000-12-31T22:59:59.999').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
     DateTime.parse('2000-12-30T23:59:59.999').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
-    DateTime.parse('2000-11-31T23:59:59.999').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
+    DateTime.parse('2000-11-30T23:59:59.999').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
     DateTime.parse('1999-12-31T23:59:59.999').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
 
   it 'should reject cases where a is after b', ->
@@ -1507,7 +1571,7 @@ describe 'DateTime.after', ->
     DateTime.parse('2000-12-31T23:58:59.999').after(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
     DateTime.parse('2000-12-31T22:59:59.999').after(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
     DateTime.parse('2000-12-30T23:59:59.999').after(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
-    DateTime.parse('2000-11-31T23:59:59.999').after(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
+    DateTime.parse('2000-11-30T23:59:59.999').after(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
     DateTime.parse('1999-12-31T23:59:59.999').after(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
 
   it 'should reject cases where a is b', ->
@@ -1625,7 +1689,7 @@ describe 'DateTime.sameOrAfter', ->
     DateTime.parse('2000-12-31T23:58:59.999').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
     DateTime.parse('2000-12-31T22:59:59.999').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
     DateTime.parse('2000-12-30T23:59:59.999').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
-    DateTime.parse('2000-11-31T23:59:59.999').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
+    DateTime.parse('2000-11-30T23:59:59.999').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
     DateTime.parse('1999-12-31T23:59:59.999').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
 
   it 'should accept cases where a is b', ->

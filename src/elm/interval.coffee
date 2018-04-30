@@ -13,6 +13,12 @@ module.exports.Interval = class Interval extends Expression
     @low = build(json.low)
     @high = build(json.high)
 
+  # Define a simple getter to allow type-checking of this class without instanceof
+  # and in a way that survives minification (as opposed to checking constructor.name)
+  Object.defineProperties @prototype,
+    isInterval:
+      get: -> true
+
   exec: (ctx) ->
     new dtivl.Interval(@low.execute(ctx), @high.execute(ctx), @lowClosed, @highClosed)
 

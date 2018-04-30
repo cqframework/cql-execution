@@ -164,7 +164,7 @@ module.exports.Context = class Context
       spec.element.every (x) => (typeof val[x.name] is "undefined" || @matchesTypeSpecifier(val[x.name], x.type))
 
   matchesIntervalTypeSpecifier: (val, spec) ->
-    val.constructor?.name is "Interval" &&
+    val.isInterval &&
       ((! val.low?) || @matchesTypeSpecifier(val.low, spec.pointType)) &&
       ((! val.high?) || @matchesTypeSpecifier(val.high, spec.pointType))
 
@@ -174,25 +174,25 @@ module.exports.Context = class Context
       when "{urn:hl7-org:elm-types:r1}Decimal" then typeof val is "number"
       when "{urn:hl7-org:elm-types:r1}Integer" then typeof val is "number" && Math.floor(val) == val
       when "{urn:hl7-org:elm-types:r1}String" then typeof val is "string"
-      when "{urn:hl7-org:elm-types:r1}Concept" then val?.constructor?.name is 'Concept'
-      when "{urn:hl7-org:elm-types:r1}DateTime" then val?.constructor?.name is 'DateTime'
-      when "{urn:hl7-org:elm-types:r1}Quantity" then val?.constructor?.name is 'Quantity'
-      when "{urn:hl7-org:elm-types:r1}Time" then val?.constructor?.name is 'DateTime' && val.isTime()
+      when "{urn:hl7-org:elm-types:r1}Concept" then val?.isConcept
+      when "{urn:hl7-org:elm-types:r1}DateTime" then val?.isDateTime
+      when "{urn:hl7-org:elm-types:r1}Quantity" then val?.isQuantity
+      when "{urn:hl7-org:elm-types:r1}Time" then val?.isDateTime && val.isTime()
       else true # TODO: Better checking of custom or complex types
 
   matchesInstanceType: (val, inst) ->
-    switch inst.constructor?.name
-      when "BooleanLiteral" then typeof val is "boolean"
-      when "DecimalLiteral" then typeof val is "number"
-      when "IntegerLiteral" then typeof val is "number" && Math.floor(val) == val
-      when "StringLiteral" then typeof val is "string"
-      when "Concept" then val?.constructor?.name is "Concept"
-      when "DateTime" then val?.constructor?.name is "DateTime"
-      when "Quantity" then val?.constructor?.name is "Quantity"
-      when "Time" then val?.constructor?.name is "DateTime" && val.isTime()
-      when "List" then @matchesListInstanceType(val, inst)
-      when "Tuple" then @matchesTupleInstanceType(val, inst)
-      when "Interval" then @matchesIntervalInstanceType(val, inst)
+    switch
+      when inst.isBooleanLiteral then typeof val is "boolean"
+      when inst.isDecimalLiteral then typeof val is "number"
+      when inst.isIntegerLiteral then typeof val is "number" && Math.floor(val) == val
+      when inst.isStringLiteral then typeof val is "string"
+      when inst.isConcept then val?.isConcept
+      when inst.isDateTime then val?.isDateTime
+      when inst.isQuantity then val?.isQuantity
+      when inst.isTime then val?.isDateTime && val.isTime()
+      when inst.isList then @matchesListInstanceType(val, inst)
+      when inst.isTuple then @matchesTupleInstanceType(val, inst)
+      when inst.isInterval then @matchesIntervalInstanceType(val, inst)
       else true # default to true when we don't know for sure
 
   matchesListInstanceType: (val, list) ->
@@ -205,7 +205,7 @@ module.exports.Context = class Context
 
   matchesIntervalInstanceType: (val, ivl) ->
     pointType = ivl.low ? ivl.high
-    val.constructor?.name is "Interval" &&
+    val.isInterval &&
       ((! val.low?) || @matchesInstanceType(val.low, pointType)) &&
       ((! val.high?) || @matchesInstanceType(val.high, pointType))
 

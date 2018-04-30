@@ -13,6 +13,12 @@ module.exports.Code = class Code
 module.exports.Concept = class Concept
   constructor: (@codes = [], @display) ->
 
+  # Define a simple getter to allow type-checking of this class without instanceof
+  # and in a way that survives minification (as opposed to checking constructor.name)
+  Object.defineProperties @prototype,
+    isConcept:
+      get: -> true
+
   hasMatch: (code) ->
     codesInList(toCodeList(code), @codes)
 

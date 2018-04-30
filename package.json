@@ -76,7 +76,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "prepublish": "./node_modules/.bin/cake build",
+    "prepublish": "./node_modules/.bin/cake build && ./node_modules/.bin/cake build-cql4browsers",
     "test": "./node_modules/.bin/cake test"
   },
   "license": "Apache-2.0"

@@ -30,6 +30,12 @@ module.exports.Tuple = class Tuple extends Expression
       name: el.name
       value: build el.value
 
+  # Define a simple getter to allow type-checking of this class without instanceof
+  # and in a way that survives minification (as opposed to checking constructor.name)
+  Object.defineProperties @prototype,
+    isTuple:
+      get: -> true
+
   exec: (ctx) ->
     val = {}
     for el in @elements
