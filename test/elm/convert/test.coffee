@@ -172,7 +172,7 @@ describe 'ToDecimal', ->
 
   it.skip "should throw runtime error if wrong format (+.1)", ->
     # TODO: parseFloat is more forgiving than the CQL spec, so this does get converted
-    should(() => @wrongFormat.exec(@ctx)).throw()
+    should(() => @wrongFormat.exec(@ctx)).throw("FOO")
 
 describe 'ToInteger', ->
   @beforeEach ->
@@ -217,9 +217,7 @@ describe 'ToTime', ->
     should(@nullArgTime.exec(@ctx)).not.exist
 
   it "should throw runtime error for incorrect format", ->
-    should(() => @IncorrectFormatTime.exec(@ctx)).throw()
+    should(() => @incorrectFormatTime.exec(@ctx)).throw("Invalid DateTime String: 10:00PM")
 
   it "should throw runtime error for invalid time-of-day", ->
-    should(() => @InvalidTime.exec(@ctx)).throw()
-
-
+    should(() => @invalidTime.exec(@ctx)).throw("Invalid DateTime String: 25:99.000+00.00")

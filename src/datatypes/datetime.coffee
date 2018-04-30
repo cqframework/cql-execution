@@ -9,6 +9,8 @@ module.exports.DateTime = class DateTime
     return null if string is null
 
     matches = /(\d{4})(-(\d{2}))?(-(\d{2}))?(T((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(\:?(\d{2}))?))?)?/.exec string
+
+    throw new Error('Invalid DateTime String: ' + string) unless matches?
     years= matches[1]
     months= matches[3]
     days= matches[5]
@@ -19,8 +21,7 @@ module.exports.DateTime = class DateTime
     milliseconds= normalizeMillisecondsField(milliseconds) if milliseconds?
     string = normalizeMillisecondsFieldInString(string, matches) if milliseconds?
 
-    beforeString = string
-    throw new Error('Invalid DateTime String' + ' ' + string + '\n' + beforeString) if !isValidDateTimeStringFormat(string)
+    throw new Error('Invalid DateTime String: ' + string) if !isValidDateTimeStringFormat(string)
 
     args = [years, months, days, hours, minutes, seconds, milliseconds]
     # convert them all to integers
