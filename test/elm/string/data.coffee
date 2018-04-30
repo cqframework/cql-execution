@@ -2645,8 +2645,10 @@ define FooBarStartsWithFoo: StartsWith('FooBar', 'Foo')
 define FooBarStartsWithBar: StartsWith('FooBar', 'Bar')
 define FooBarStartsWithBlank: StartsWith('FooBar', '')
 define BlankStartsWithFoo: StartsWith('', 'Foo')
-define StartsWithNull: StartsWith('FooBar', null as String)
-define NullStartsWith: StartsWith(null as String, 'Foo')
+define StartsWithNull: StartsWith('FooBar', null)
+define StartsWithNullAsString: StartsWith('FooBar', null as String)
+define NullStartsWith: StartsWith(null, 'Foo')
+define NullAsStringStartsWith: StartsWith(null as String, 'Foo')
 ###
 
 module.exports['StartsWith'] = {
@@ -2874,18 +2876,18 @@ module.exports['StartsWith'] = {
                } ]
             }
          }, {
-            "localId" : "23",
+            "localId" : "21",
             "name" : "StartsWithNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "23",
+                  "r" : "21",
                   "s" : [ {
                      "value" : [ "define ","StartsWithNull",": " ]
                   }, {
-                     "r" : "22",
+                     "r" : "20",
                      "s" : [ {
                         "value" : [ "StartsWith","(" ]
                      }, {
@@ -2894,14 +2896,57 @@ module.exports['StartsWith'] = {
                            "value" : [ "'FooBar'" ]
                         } ]
                      }, {
+                        "value" : [ ", ","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "20",
+               "type" : "StartsWith",
+               "operand" : [ {
+                  "localId" : "18",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "FooBar",
+                  "type" : "Literal"
+               }, {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "19",
+                     "type" : "Null"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "27",
+            "name" : "StartsWithNullAsString",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "27",
+                  "s" : [ {
+                     "value" : [ "define ","StartsWithNullAsString",": " ]
+                  }, {
+                     "r" : "26",
+                     "s" : [ {
+                        "value" : [ "StartsWith","(" ]
+                     }, {
+                        "r" : "22",
+                        "s" : [ {
+                           "value" : [ "'FooBar'" ]
+                        } ]
+                     }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "21",
+                        "r" : "25",
                         "s" : [ {
-                           "r" : "19",
+                           "r" : "23",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "20",
+                           "r" : "24",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -2913,58 +2958,45 @@ module.exports['StartsWith'] = {
                }
             } ],
             "expression" : {
-               "localId" : "22",
+               "localId" : "26",
                "type" : "StartsWith",
                "operand" : [ {
-                  "localId" : "18",
+                  "localId" : "22",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "FooBar",
                   "type" : "Literal"
                }, {
-                  "localId" : "21",
+                  "localId" : "25",
                   "strict" : false,
                   "type" : "As",
                   "operand" : {
-                     "localId" : "19",
+                     "localId" : "23",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "20",
+                     "localId" : "24",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                } ]
             }
          }, {
-            "localId" : "29",
+            "localId" : "31",
             "name" : "NullStartsWith",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "29",
+                  "r" : "31",
                   "s" : [ {
                      "value" : [ "define ","NullStartsWith",": " ]
                   }, {
-                     "r" : "28",
+                     "r" : "30",
                      "s" : [ {
-                        "value" : [ "StartsWith","(" ]
+                        "value" : [ "StartsWith","(","null",", " ]
                      }, {
-                        "r" : "26",
-                        "s" : [ {
-                           "r" : "24",
-                           "value" : [ "null"," as " ]
-                        }, {
-                           "r" : "25",
-                           "s" : [ {
-                              "value" : [ "String" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "27",
+                        "r" : "29",
                         "s" : [ {
                            "value" : [ "'Foo'" ]
                         } ]
@@ -2975,23 +3007,79 @@ module.exports['StartsWith'] = {
                }
             } ],
             "expression" : {
-               "localId" : "28",
+               "localId" : "30",
                "type" : "StartsWith",
                "operand" : [ {
-                  "localId" : "26",
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "28",
+                     "type" : "Null"
+                  }
+               }, {
+                  "localId" : "29",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "37",
+            "name" : "NullAsStringStartsWith",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "37",
+                  "s" : [ {
+                     "value" : [ "define ","NullAsStringStartsWith",": " ]
+                  }, {
+                     "r" : "36",
+                     "s" : [ {
+                        "value" : [ "StartsWith","(" ]
+                     }, {
+                        "r" : "34",
+                        "s" : [ {
+                           "r" : "32",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "33",
+                           "s" : [ {
+                              "value" : [ "String" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "35",
+                        "s" : [ {
+                           "value" : [ "'Foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "36",
+               "type" : "StartsWith",
+               "operand" : [ {
+                  "localId" : "34",
                   "strict" : false,
                   "type" : "As",
                   "operand" : {
-                     "localId" : "24",
+                     "localId" : "32",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "25",
+                     "localId" : "33",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                }, {
-                  "localId" : "27",
+                  "localId" : "35",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Foo",
                   "type" : "Literal"
@@ -3010,8 +3098,10 @@ define FooBarEndsWithBar: EndsWith('FooBar', 'Bar')
 define FooBarEndsWithFoo: EndsWith('FooBar', 'Foo')
 define FooBarEndsWithBlank: EndsWith('FooBar', '')
 define BlankEndsWithFoo: EndsWith('', 'Foo')
-define EndsWithNull: EndsWith('FooBar', null as String)
+define EndsWithNull: EndsWith('FooBar', null)
+define EndsWithNullAsString: EndsWith('FooBar', null as String)
 define NullEndsWith: EndsWith(null as String, 'Foo')
+define NullAsStringEndsWith: EndsWith(null as String, 'Foo')
 ###
 
 module.exports['EndsWith'] = {
@@ -3239,18 +3329,18 @@ module.exports['EndsWith'] = {
                } ]
             }
          }, {
-            "localId" : "23",
+            "localId" : "21",
             "name" : "EndsWithNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "23",
+                  "r" : "21",
                   "s" : [ {
                      "value" : [ "define ","EndsWithNull",": " ]
                   }, {
-                     "r" : "22",
+                     "r" : "20",
                      "s" : [ {
                         "value" : [ "EndsWith","(" ]
                      }, {
@@ -3259,14 +3349,57 @@ module.exports['EndsWith'] = {
                            "value" : [ "'FooBar'" ]
                         } ]
                      }, {
+                        "value" : [ ", ","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "20",
+               "type" : "EndsWith",
+               "operand" : [ {
+                  "localId" : "18",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "FooBar",
+                  "type" : "Literal"
+               }, {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "19",
+                     "type" : "Null"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "27",
+            "name" : "EndsWithNullAsString",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "27",
+                  "s" : [ {
+                     "value" : [ "define ","EndsWithNullAsString",": " ]
+                  }, {
+                     "r" : "26",
+                     "s" : [ {
+                        "value" : [ "EndsWith","(" ]
+                     }, {
+                        "r" : "22",
+                        "s" : [ {
+                           "value" : [ "'FooBar'" ]
+                        } ]
+                     }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "21",
+                        "r" : "25",
                         "s" : [ {
-                           "r" : "19",
+                           "r" : "23",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "20",
+                           "r" : "24",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -3278,50 +3411,50 @@ module.exports['EndsWith'] = {
                }
             } ],
             "expression" : {
-               "localId" : "22",
+               "localId" : "26",
                "type" : "EndsWith",
                "operand" : [ {
-                  "localId" : "18",
+                  "localId" : "22",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "FooBar",
                   "type" : "Literal"
                }, {
-                  "localId" : "21",
+                  "localId" : "25",
                   "strict" : false,
                   "type" : "As",
                   "operand" : {
-                     "localId" : "19",
+                     "localId" : "23",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "20",
+                     "localId" : "24",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                } ]
             }
          }, {
-            "localId" : "29",
+            "localId" : "33",
             "name" : "NullEndsWith",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "29",
+                  "r" : "33",
                   "s" : [ {
                      "value" : [ "define ","NullEndsWith",": " ]
                   }, {
-                     "r" : "28",
+                     "r" : "32",
                      "s" : [ {
                         "value" : [ "EndsWith","(" ]
                      }, {
-                        "r" : "26",
+                        "r" : "30",
                         "s" : [ {
-                           "r" : "24",
+                           "r" : "28",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "25",
+                           "r" : "29",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -3329,7 +3462,7 @@ module.exports['EndsWith'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "27",
+                        "r" : "31",
                         "s" : [ {
                            "value" : [ "'Foo'" ]
                         } ]
@@ -3340,23 +3473,85 @@ module.exports['EndsWith'] = {
                }
             } ],
             "expression" : {
-               "localId" : "28",
+               "localId" : "32",
                "type" : "EndsWith",
                "operand" : [ {
-                  "localId" : "26",
+                  "localId" : "30",
                   "strict" : false,
                   "type" : "As",
                   "operand" : {
-                     "localId" : "24",
+                     "localId" : "28",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "25",
+                     "localId" : "29",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                }, {
-                  "localId" : "27",
+                  "localId" : "31",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "39",
+            "name" : "NullAsStringEndsWith",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "39",
+                  "s" : [ {
+                     "value" : [ "define ","NullAsStringEndsWith",": " ]
+                  }, {
+                     "r" : "38",
+                     "s" : [ {
+                        "value" : [ "EndsWith","(" ]
+                     }, {
+                        "r" : "36",
+                        "s" : [ {
+                           "r" : "34",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "35",
+                           "s" : [ {
+                              "value" : [ "String" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "37",
+                        "s" : [ {
+                           "value" : [ "'Foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "38",
+               "type" : "EndsWith",
+               "operand" : [ {
+                  "localId" : "36",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "34",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "35",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "37",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Foo",
                   "type" : "Literal"

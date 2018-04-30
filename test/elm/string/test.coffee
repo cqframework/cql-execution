@@ -204,7 +204,9 @@ describe 'StartsWith', ->
 
   it 'should be null when either arg is null', ->
     should(@startsWithNull.exec(@ctx)).be.null()
+    should(@startsWithNullAsString.exec(@ctx)).be.null()
     should(@nullStartsWith.exec(@ctx)).be.null()
+    should(@nullAsStringStartsWith.exec(@ctx)).be.null()
 
 describe 'EndsWith', ->
   @beforeEach ->
@@ -224,4 +226,6 @@ describe 'EndsWith', ->
 
   it 'should be null when either arg is null', ->
     should(@endsWithNull.exec(@ctx)).be.null()
+    should(@endsWithNullAsString.exec(@ctx)).be.null()
     should(@nullEndsWith.exec(@ctx)).be.null()
+    should(@nullAsStringEndsWith.exec(@ctx)).be.null()
