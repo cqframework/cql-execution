@@ -47,18 +47,30 @@ describe 'DateTime', ->
     d.should.eql new DateTime(2012, 10, 25, 12)
     d = DateTime.parse '2012-10-25T12-05'
     d.should.eql new DateTime(2012, 10, 25, 12, null, null, null, -5)
+    d = DateTime.parse '2012-10-25T12-05:30'
+    d.should.eql new DateTime(2012, 10, 25, 12, null, null, null, -5.5)
+    d = DateTime.parse '2012-10-25T12Z'
+    d.should.eql new DateTime(2012, 10, 25, 12, null, null, null, 0)
 
   it 'should parse yyyy-mm-ddThh:mm with and without timezone offset', ->
     d = DateTime.parse '2012-10-25T12:55'
     d.should.eql new DateTime(2012, 10, 25, 12, 55)
+    d = DateTime.parse '2012-10-25T12:55+05'
+    d.should.eql new DateTime(2012, 10, 25, 12, 55, null, null, 5)
     d = DateTime.parse '2012-10-25T12:55+05:30'
     d.should.eql new DateTime(2012, 10, 25, 12, 55, null, null, 5.5)
+    d = DateTime.parse '2012-10-25T12:55Z'
+    d.should.eql new DateTime(2012, 10, 25, 12, 55, null, null, 0)
 
   it 'should parse yyyy-mm-ddThh:mm:ss with and without timezone offset', ->
     d = DateTime.parse '2012-10-25T12:55:14'
     d.should.eql new DateTime(2012, 10, 25, 12, 55, 14)
     d = DateTime.parse '2012-10-25T12:55:14+01'
     d.should.eql new DateTime(2012, 10, 25, 12, 55, 14, null, 1)
+    d = DateTime.parse '2012-10-25T12:55:14+01:30'
+    d.should.eql new DateTime(2012, 10, 25, 12, 55, 14, null, 1.5)
+    d = DateTime.parse '2012-10-25T12:55:14Z'
+    d.should.eql new DateTime(2012, 10, 25, 12, 55, 14, null, 0)
 
   it 'should parse yyyy-mm-ddThh:mm:ss.s with and without timezone offset', ->
     d = DateTime.parse '2012-10-25T12:55:14.9'
@@ -75,6 +87,46 @@ describe 'DateTime', ->
 
     d = DateTime.parse '2012-10-25T12:55:14.953-01'
     d.should.eql new DateTime(2012, 10, 25, 12, 55, 14, 953, -1)
+
+    d = DateTime.parse '2012-10-25T12:55:14.953-01:30'
+    d.should.eql new DateTime(2012, 10, 25, 12, 55, 14, 953, -1.5)
+
+    d = DateTime.parse '2012-10-25T12:55:14.953Z'
+    d.should.eql new DateTime(2012, 10, 25, 12, 55, 14, 953, 0)
+
+  it 'should toString yyyy', ->
+    d = new DateTime(2012)
+    d.toString().should.eql '2012'
+
+  it 'should toString yyyy-mm', ->
+    d = new DateTime(2012, 10)
+    d.toString().should.eql '2012-10'
+
+  it 'should toString yyyy-mm-dd', ->
+    d = new DateTime(2012, 10, 25)
+    d.toString().should.eql '2012-10-25'
+
+  it 'should toString yyyy-mm-ddThh', ->
+    d = new DateTime(2012, 10, 25, 12, null, null, null, -5)
+    d.toString().should.eql '2012-10-25T12-05:00'
+
+  it 'should toString yyyy-mm-ddThh:mm', ->
+    d = new DateTime(2012, 10, 25, 12, 55, null, null, -5)
+    d.toString().should.eql '2012-10-25T12:55-05:00'
+
+  it 'should toString yyyy-mm-ddThh:mm:ss', ->
+    d = new DateTime(2012, 10, 25, 12, 55, 14, null, -5)
+    d.toString().should.eql '2012-10-25T12:55:14-05:00'
+
+  it 'should toString yyyy-mm-ddThh:mm:ss.sss', ->
+    d = new DateTime(2012, 10, 25, 12, 55, 14, 9, -5)
+    d.toString().should.eql '2012-10-25T12:55:14.009-05:00'
+
+    d = new DateTime(2012, 10, 25, 12, 55, 14, 95, -5)
+    d.toString().should.eql '2012-10-25T12:55:14.095-05:00'
+
+    d = new DateTime(2012, 10, 25, 12, 55, 14, 953, -5)
+    d.toString().should.eql '2012-10-25T12:55:14.953-05:00'
 
   it 'should not parse invalid strings', ->
     should.not.exist DateTime.parse '20121025'

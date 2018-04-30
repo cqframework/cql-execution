@@ -23,6 +23,12 @@ module.exports.Quantity = class Quantity extends Expression
     if !is_valid_ucum_unit(@unit)
       throw new Error("\'#{@unit}\' is not a valid UCUM unit.")
 
+  # Define a simple getter to allow type-checking of this class without instanceof
+  # and in a way that survives minification (as opposed to checking constructor.name)
+  Object.defineProperties @prototype,
+    isQuantity:
+      get: -> true
+
   clone: () ->
     new Quantity({value: @value, unit: @unit})
 

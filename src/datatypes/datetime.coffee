@@ -6,7 +6,7 @@ module.exports.DateTime = class DateTime
   @FIELDS: [@Unit.YEAR, @Unit.MONTH, @Unit.DAY, @Unit.HOUR, @Unit.MINUTE, @Unit.SECOND, @Unit.MILLISECOND]
 
   @parse: (string) ->
-    match = regex = /(\d{4})(-(\d{2}))?(-(\d{2}))?(T((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?(([+-])(\d{2})(\:?(\d{2}))?)?)?/.exec string
+    match = regex = /(\d{4})(-(\d{2}))?(-(\d{2}))?(T((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(\:?(\d{2}))?))?)?/.exec string
 
     if match?[0] is string
       args = [match[1], match[3], match[5], match[8], match[10], match[12], match[14]]
@@ -15,9 +15,11 @@ module.exports.DateTime = class DateTime
       # convert them all to integers
       args = ((if arg? then parseInt(arg,10)) for arg in args)
       # convert timezone offset to decimal and add it to arguments
-      if match[17]?
-        num = parseInt(match[17],10) + (if match[19]? then parseInt(match[19],10) / 60 else 0)
-        args.push(if match[16] is '+' then num else num * -1)
+      if match[18]?
+        num = parseInt(match[18],10) + (if match[20]? then parseInt(match[20],10) / 60 else 0)
+        args.push(if match[17] is '+' then num else num * -1)
+      else if match[15] == 'Z'
+        args.push(0)
       new DateTime(args...)
     else
       null
@@ -49,6 +51,12 @@ module.exports.DateTime = class DateTime
     # from the spec: If no timezone is specified, the timezone of the evaluation request timestamp is used.
     if not @timezoneOffset?
       @timezoneOffset = (new Date()).getTimezoneOffset() / 60 * -1
+
+  # Define a simple getter to allow type-checking of this class without instanceof
+  # and in a way that survives minification (as opposed to checking constructor.name)
+  Object.defineProperties @prototype,
+    isDateTime:
+      get: -> true
 
   copy: () ->
     new DateTime(@year, @month, @day, @hour, @minute, @second, @millisecond, @timezoneOffset)
@@ -341,7 +349,6 @@ module.exports.DateTime = class DateTime
   _pad: (num) ->
     String("0" + num).slice(-2)
 
-  # TODO: Needs unit tests!
   toString: () ->
     str = ''
     if @year?
@@ -357,14 +364,14 @@ module.exports.DateTime = class DateTime
               if @second?
                 str += ':' + @_pad(@second)
                 if @millisecond?
-                  str += '.' + @_pad(@millisecond)
+                  str += '.' + String("00" + @millisecond).slice(-3)
 
     if str.indexOf('T') != -1 and @timezoneOffset?
       str += if @timezoneOffset < 0 then '-' else '+'
       offsetHours = Math.floor(Math.abs(@timezoneOffset))
       str += @_pad(offsetHours)
       offsetMin = (Math.abs(@timezoneOffset) - offsetHours) * 60
-      str += @_pad(offsetMin)
+      str += ':' + @_pad(offsetMin)
 
     str
 

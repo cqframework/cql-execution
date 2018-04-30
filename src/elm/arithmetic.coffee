@@ -14,7 +14,7 @@ module.exports.Add = class Add extends Expression
       null
     else
       args?.reduce (x,y) ->
-        if x.constructor.name == 'Quantity'  or x.constructor.name == 'DateTime'
+        if x.isQuantity  or x.isDateTime
           Quantity.doAddition(x,y)
         else
           x + y
@@ -29,7 +29,7 @@ module.exports.Subtract = class Subtract extends Expression
       null
     else
       args.reduce (x,y) ->
-        if x.constructor.name == 'Quantity' or x.constructor.name == 'DateTime'
+        if x.isQuantity or x.isDateTime
           Quantity.doSubtraction(x,y)
         else
           x - y
@@ -44,7 +44,7 @@ module.exports.Multiply = class Multiply extends Expression
       null
     else
       args?.reduce (x,y) ->
-        if x.constructor.name == 'Quantity' or y.constructor.name == 'Quantity'
+        if x.isQuantity or y.isQuantity
           Quantity.doMultiplication(x,y)
         else
           x * y
@@ -59,7 +59,7 @@ module.exports.Divide = class Divide extends Expression
       null
     else
       args?.reduce (x,y) ->
-        if x.constructor.name == 'Quantity'
+        if x.isQuantity
           Quantity.doDivision(x,y)
         else
           x / y
@@ -118,7 +118,7 @@ module.exports.Abs = class Abs extends  Expression
     arg = @execArgs(ctx)
     if (not arg?)
       null
-    else if arg.constructor.name == 'Quantity'
+    else if arg.isQuantity
       Quantity.createQuantity( Math.abs(arg.value), arg.unit)
     else
       Math.abs arg
@@ -131,7 +131,7 @@ module.exports.Negate = class Negate extends Expression
     arg = @execArgs(ctx)
     if (not arg?)
       null
-    else if arg.constructor.name == 'Quantity'
+    else if arg.isQuantity
       Quantity.createQuantity(arg.value * -1, arg.unit)
     else
       arg * -1

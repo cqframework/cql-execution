@@ -2,7 +2,7 @@ should = require 'should'
 setup = require '../../setup'
 data = require './data'
 validateQuantity = (object,expectedValue,expectedUnit) ->
-  object.constructor.name.should.equal "Quantity"
+  object.isQuantity.should.be.true()
   object.value.should.equal expectedValue
   object.unit.should.equal expectedUnit
 

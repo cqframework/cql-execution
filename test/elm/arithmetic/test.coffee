@@ -5,10 +5,10 @@ Q = require '../../../lib/elm/quantity'
 
 
 validateQuantity = (object,expectedValue,expectedUnit) ->
-  object.constructor.name.should.equal "Quantity"
+  object.isQuantity.should.be.true()
   q = Q.createQuantity(expectedValue,expectedUnit)
   q.equals(object).should.be.true("Expected "+ object + " to equal " + q)
-  
+
 doQuantityMathTests = (tests, operator) ->
   func = switch operator
            when "*" then Q.doMultiplication
@@ -420,7 +420,7 @@ describe 'Quantity', ->
   it "should be able to perform Quantity Addition", ->
     validateQuantity @add_q_q.exec(@ctx), 20 , 'days'
     adq = @add_d_q.exec(@ctx)
-    adq.constructor.name.should.equal "DateTime"
+    adq.isDateTime.should.be.true()
     adq.year.should.equal 2000
     adq.month.should.equal 1
     adq.day.should.equal 11
@@ -431,7 +431,7 @@ describe 'Quantity', ->
   it "should be able to perform Quantity Subtraction", ->
     validateQuantity @sub_q_q.exec(@ctx), 0, 'days'
     sdq = @sub_d_q.exec(@ctx)
-    sdq.constructor.name.should.equal "DateTime"
+    sdq.isDateTime.should.be.true()
     sdq.year.should.equal 1999
     sdq.month.should.equal 12
     sdq.day.should.equal 22
