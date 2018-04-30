@@ -569,11 +569,14 @@
     DateTime.FIELDS = [DateTime.Unit.YEAR, DateTime.Unit.MONTH, DateTime.Unit.DAY, DateTime.Unit.HOUR, DateTime.Unit.MINUTE, DateTime.Unit.SECOND, DateTime.Unit.MILLISECOND];
 
     DateTime.parse = function(string) {
-      var arg, args, beforeString, days, hours, matches, milliseconds, minutes, months, num, seconds, years;
+      var arg, args, days, hours, matches, milliseconds, minutes, months, num, seconds, years;
       if (string === null) {
         return null;
       }
       matches = /(\d{4})(-(\d{2}))?(-(\d{2}))?(T((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(\:?(\d{2}))?))?)?/.exec(string);
+      if (matches == null) {
+        throw new Error('Invalid DateTime String: ' + string);
+      }
       years = matches[1];
       months = matches[3];
       days = matches[5];
@@ -587,9 +590,8 @@
       if (milliseconds != null) {
         string = normalizeMillisecondsFieldInString(string, matches);
       }
-      beforeString = string;
       if (!isValidDateTimeStringFormat(string)) {
-        throw new Error('Invalid DateTime String' + ' ' + string + '\n' + beforeString);
+        throw new Error('Invalid DateTime String: ' + string);
       }
       args = [years, months, days, hours, minutes, seconds, milliseconds];
       args = (function() {
