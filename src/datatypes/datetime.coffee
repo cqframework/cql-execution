@@ -27,10 +27,10 @@ module.exports.DateTime = class DateTime
     # convert them all to integers
     args = ((if arg? then parseInt(arg,10)) for arg in args)
     # convert timezone offset to decimal and add it to arguments
-    if match[18]?
-      num = parseInt(match[18],10) + (if match[20]? then parseInt(match[20],10) / 60 else 0)
-      args.push(if match[17] is '+' then num else num * -1)
-    else if match[15] == 'Z'
+    if matches[18]?
+      num = parseInt(matches[18],10) + (if matches[20]? then parseInt(matches[20],10) / 60 else 0)
+      args.push(if matches[17] is '+' then num else num * -1)
+    else if matches[15] == 'Z'
       args.push(0)
     new DateTime(args...)
 

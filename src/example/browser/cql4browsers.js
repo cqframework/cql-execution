@@ -595,10 +595,10 @@
         }
         return results;
       })();
-      if (match[18] != null) {
-        num = parseInt(match[18], 10) + (match[20] != null ? parseInt(match[20], 10) / 60 : 0);
-        args.push(match[17] === '+' ? num : num * -1);
-      } else if (match[15] === 'Z') {
+      if (matches[18] != null) {
+        num = parseInt(matches[18], 10) + (matches[20] != null ? parseInt(matches[20], 10) / 60 : 0);
+        args.push(matches[17] === '+' ? num : num * -1);
+      } else if (matches[15] === 'Z') {
         args.push(0);
       }
       return (function(func, args, ctor) {

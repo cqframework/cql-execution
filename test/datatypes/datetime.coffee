@@ -128,8 +128,6 @@ describe 'DateTime', ->
     d = new DateTime(2012, 10, 25, 12, 55, 14, 953, -5)
     d.toString().should.eql '2012-10-25T12:55:14.953-05:00'
 
-  it 'should not parse invalid strings', ->
-    should.not.exist DateTime.parse '20121025'
   it 'should throw runtime error when parsing non-string', ->
     should(() => DateTime.parse 20121025).throw(/.*Invalid DateTime String.*/)
 
