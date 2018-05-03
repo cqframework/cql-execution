@@ -43831,8 +43831,9 @@
     }
 
     Results.prototype.recordPatientResult = function(patient_ctx, resultName, result) {
-      var base, patientId;
-      patientId = patient_ctx.patient.id();
+      var base, p, patientId;
+      p = patient_ctx.patient;
+      patientId = typeof p.getId === 'function' ? p.getId() : p.id();
       if ((base = this.patientResults)[patientId] == null) {
         base[patientId] = {};
       }
