@@ -80,3 +80,19 @@ module.exports.Substring = class Substring extends Expression
       stringToSub.substr(startIndex, length)
     else
       stringToSub.substr(startIndex)
+
+module.exports.StartsWith = class StartsWith extends Expression
+  constructor: (json) ->
+    super
+
+  exec: (ctx) ->
+    args = @execArgs ctx
+    if (args.some (x) -> not x?) then null else args[0].slice(0, args[1].length) == args[1]
+
+module.exports.EndsWith = class EndsWith extends Expression
+  constructor: (json) ->
+    super
+
+  exec: (ctx) ->
+    args = @execArgs ctx
+    if (args.some (x) -> not x?) then null else args[1] is '' or args[0].slice(-args[1].length) == args[1]
