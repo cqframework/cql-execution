@@ -138,6 +138,9 @@ describe 'DateTime', ->
     should(() => DateTime.parse '0000-00-00').throw(/.*Invalid DateTime String.*/)
     should(() => DateTime.parse '2000-11-31T23:59:59.999').throw(/.*Invalid DateTime String.*/)
 
+  it.skip 'should throw when ms field contains non-numeric characters after thousandths place', ->
+    should(() => DateTime.parse '2000-11-30T23:59:59.999abc').throw(/.*Invalid DateTime String.*/)
+
   it 'should not parse null input', ->
     should.not.exist DateTime.parse null
 
