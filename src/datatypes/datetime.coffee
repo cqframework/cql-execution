@@ -439,6 +439,10 @@ isValidDateTimeStringFormat = (string) ->
   cqlFormatStringWithLength[format.length] = format for format in cqlFormats
 
   return false if !cqlFormatStringWithLength[string.length]?
+
+  # Moment.js has 2 options for parsing, strict or forgiving.
+  # Strict parsing requires that the format and input match exactly, including delimeters.
+  # Due to CQL using slightly different delimiters than moment, we need to use forgiving.
   strict = false
   moment(string, cqlFormatStringToMomentFormatString(cqlFormatStringWithLength[string.length]), strict).isValid()
 
