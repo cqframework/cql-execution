@@ -44079,7 +44079,7 @@
           return a[p] === b[p];
         });
       case '[object Array]':
-        if (a.includes(null) || a.includes(void 0) || b.includes(null) || b.includes(void 0)) {
+        if (a.indexOf(null) >= 0 || a.indexOf(void 0) >= 0 || b.indexOf(null) >= 0 || b.indexOf(void 0) >= 0) {
           return null;
         }
         return compareEveryItemInArrays(a, b, equals);
