@@ -16,9 +16,9 @@ module.exports.Less = class Less extends Expression
       args[0].lessThan args[1]
     catch error
       if error instanceof IncompatibleTypesException
-        return null
-      else
         throw error
+      else
+        return null
 
 module.exports.LessOrEqual = class LessOrEqual extends Expression
   constructor: (json) ->
@@ -30,9 +30,9 @@ module.exports.LessOrEqual = class LessOrEqual extends Expression
       args[0].lessThanOrEquals args[1]
     catch error
       if error instanceof IncompatibleTypesException
-        return null
-      else
         throw error
+      else
+        return null
 
 module.exports.Greater = class Greater extends Expression
   constructor: (json) ->
@@ -44,9 +44,9 @@ module.exports.Greater = class Greater extends Expression
       args[0].greaterThan args[1]
     catch error
       if error instanceof IncompatibleTypesException
-        return null
-      else
         throw error
+      else
+        return null
 
 module.exports.GreaterOrEqual = class GreaterOrEqual extends Expression
   constructor: (json) ->
@@ -58,6 +58,6 @@ module.exports.GreaterOrEqual = class GreaterOrEqual extends Expression
       args[0].greaterThanOrEquals args[1]
     catch error
       if error instanceof IncompatibleTypesException
-        return null
-      else
         throw error
+      else
+        return null
