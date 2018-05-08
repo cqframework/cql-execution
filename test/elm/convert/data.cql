@@ -45,3 +45,31 @@ define timeTime: convert @T11:57 to Time
 // define codeConcept: convert hepB to Concept
 // define codeCode: convert hepB to Code
 define foo: 'bar'
+
+// @Test: ToDecimal
+define NoSign: ToDecimal('0.0')
+define PositiveSign: ToDecimal('+1.1')
+define NegativeSign: ToDecimal('-1.1')
+define TooPrecise: ToDecimal('.444444444')
+define TooLargeDec: ToDecimal('444444444444444444444444444444')
+define TooSmallDec: ToDecimal('-444444444444444444444444444444')
+define NullDecimal: ToDecimal((null as String))
+define WrongFormat: ToDecimal('+.1')
+
+// @Test: ToInteger
+define NoSign: ToInteger('12345')
+define PositiveSign: ToInteger('+12345')
+define NegativeSign: ToInteger('-12345')
+define TooLargeInt: ToInteger('2147483648')
+define TooSmallInt: ToInteger('-2147483649')
+
+// @Test: ToQuantity
+define WrongFormatQuantity: ToQuantity('abc')
+define TooLargeQuantity: ToQuantity('444444444444444444444444444444 \'\'')
+define TooSmallQuantity: ToQuantity('-444444444444444444444444444444 \'\'')
+define NullArg: ToQuantity((null as String))
+
+// @Test: ToTime
+define NullArgTime: ToTime((null as String))
+define IncorrectFormatTime: ToTime('10:00PM')
+define InvalidTime: ToTime('25:99.000+00.00')
