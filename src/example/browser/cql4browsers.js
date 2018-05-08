@@ -43472,12 +43472,31 @@
 
     Context.prototype.supportLibraryLocalIds = function(lib, localIdResults) {
       var ref, results, supportLib, supportLibName;
-      localIdResults[lib.library.source.library.identifier.id] = lib.localId_context;
+      if (localIdResults[lib.library.source.library.identifier.id] != null) {
+        this.mergeLibraryLocalIdResults(localIdResults, lib.library.source.library.identifier.id, lib.localId_context);
+      } else {
+        localIdResults[lib.library.source.library.identifier.id] = lib.localId_context;
+      }
       ref = lib.library_context;
       results = [];
       for (supportLibName in ref) {
         supportLib = ref[supportLibName];
         results.push(this.supportLibraryLocalIds(supportLib, localIdResults));
+      }
+      return results;
+    };
+
+    Context.prototype.mergeLibraryLocalIdResults = function(localIdResults, libraryId, libraryResults) {
+      var existingResult, localId, localIdResult, results;
+      results = [];
+      for (localId in libraryResults) {
+        localIdResult = libraryResults[localId];
+        existingResult = localIdResults[libraryId][localId];
+        if (existingResult === false || existingResult === null || existingResult === void 0 || existingResult.length === 0) {
+          results.push(localIdResults[libraryId][localId] = localIdResult);
+        } else {
+          results.push(void 0);
+        }
       }
       return results;
     };
