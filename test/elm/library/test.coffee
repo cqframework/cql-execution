@@ -74,3 +74,30 @@ describe 'Using CommonLib2', ->
 
   it "should execute function from included library that uses expression", ->
     @exprSortsOnFunc.exec(@ctx).should.eql [{N: 1}, {N: 2}, {N: 3}, {N: 4}, {N: 5}]
+
+describe 'Using CommonLib and CommonLib2', ->
+  @beforeEach ->
+    setup @, data, [p1], {}, {}, new Repository(data)
+    @results = @executor.withLibrary(@lib).exec_patient_context(@patientSource)
+    @commonLocalIdObject = @results.localIdPatientResultsMap['1'].Common
+    @common2LocalIdObject = @results.localIdPatientResultsMap['1'].Common2
+
+  it "should contain TheParameter localId in the localIdMap", ->
+    theParameterLocalId = @lib.includes.common2.expressions.TheParameter.localId
+    @common2LocalIdObject[theParameterLocalId].should.exist
+
+  it "should contain TwoPlusOne localId in the localIdMap", ->
+    twoPlusOneLocalId = @lib.includes.common2.expressions.TwoPlusOne.localId
+    @common2LocalIdObject[twoPlusOneLocalId].should.exist
+
+  it "should contian TwoTimesThree localId in the localIdMap", ->
+    twoTimesThreeLocalId = @lib.includes.common2.expressions.TwoTimesThree.localId
+    @common2LocalIdObject[twoTimesThreeLocalId].should.exist
+
+  it "should contain SupportLibDef localId in the localIdMap", ->
+    supportLibDefLocalId = @lib.includes.common.expressions.SupportLibDef.localId
+    @commonLocalIdObject[supportLibDefLocalId].should.exist
+
+  it "should contain SortUsingFunction localId in the localIdMap", ->
+    sortUsingFunctionLocalId = @lib.includes.common2.expressions.SortUsingFunction.localId
+    @common2LocalIdObject[sortUsingFunctionLocalId].should.exists
