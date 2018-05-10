@@ -1150,7 +1150,7 @@
     if (typeof string !== 'string') {
       return false;
     }
-    cqlFormats = ['YYYY', 'YYYY-MM', 'YYYY-MM-DD', 'YYYY-MM-DDZ', 'YYYY-MM-DDT+hh', 'YYYY-MM-DDT-hh', 'YYYY-MM-DDThh', 'YYYY-MM-DDThh:mm', 'YYYY-MM-DDThh:mmZ', 'YYYY-MM-DDThh:mm:ss', 'YYYY-MM-DDThh:mm:ssZ', 'YYYY-MM-DDThh:mm:ss+hh', 'YYYY-MM-DDThh:mm:ss+hh:mm', 'YYYY-MM-DDThh:mm:ss-hh', 'YYYY-MM-DDThh:mm:ss-hh:mm', 'YYYY-MM-DDThh:mm:ss.fff', 'YYYY-MM-DDThh:mm:ss.fffZ', 'YYYY-MM-DDThh:mm:ss.fff+hh', 'YYYY-MM-DDThh:mm:ss.fff+hh:mm', 'YYYY-MM-DDThh:mm:ss.fff-hh', 'YYYY-MM-DDThh:mm:ss.fff-hh:mm'];
+    cqlFormats = ['YYYY', 'YYYY-MM', 'YYYY-MM-DD', 'YYYY-MM-DDTZ', 'YYYY-MM-DDT+hh', 'YYYY-MM-DDT+hh:mm', 'YYYY-MM-DDT-hh', 'YYYY-MM-DDT-hh:mm', 'YYYY-MM-DDThh', 'YYYY-MM-DDThhZ', 'YYYY-MM-DDThh+hh', 'YYYY-MM-DDThh+hh:mm', 'YYYY-MM-DDThh-hh', 'YYYY-MM-DDThh-hh:mm', 'YYYY-MM-DDThh:mm', 'YYYY-MM-DDThh:mmZ', 'YYYY-MM-DDThh:mm+hh', 'YYYY-MM-DDThh:mm+hh:mm', 'YYYY-MM-DDThh:mm-hh', 'YYYY-MM-DDThh:mm-hh:mm', 'YYYY-MM-DDThh:mm:ss', 'YYYY-MM-DDThh:mm:ssZ', 'YYYY-MM-DDThh:mm:ss+hh', 'YYYY-MM-DDThh:mm:ss+hh:mm', 'YYYY-MM-DDThh:mm:ss-hh', 'YYYY-MM-DDThh:mm:ss-hh:mm', 'YYYY-MM-DDThh:mm:ss.fff', 'YYYY-MM-DDThh:mm:ss.fffZ', 'YYYY-MM-DDThh:mm:ss.fff+hh', 'YYYY-MM-DDThh:mm:ss.fff+hh:mm', 'YYYY-MM-DDThh:mm:ss.fff-hh', 'YYYY-MM-DDThh:mm:ss.fff-hh:mm'];
     cqlFormatStringWithLength = {};
     for (i = 0, len = cqlFormats.length; i < len; i++) {
       format = cqlFormats[i];
