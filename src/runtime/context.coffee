@@ -129,10 +129,23 @@ module.exports.Context = class Context
   # Recursive function that will grab nested support library localId results
   supportLibraryLocalIds: (lib, localIdResults) ->
     # Set library identifier name as the key and the object of localIds with their results as the value
-    localIdResults[lib.library.source.library.identifier.id] = lib.localId_context
+    # if it already exists then we need to merge the results instead of overwriting
+    if localIdResults[lib.library.source.library.identifier.id]?
+      @mergeLibraryLocalIdResults localIdResults, lib.library.source.library.identifier.id, lib.localId_context
+    else
+      localIdResults[lib.library.source.library.identifier.id] = lib.localId_context
     # Iterate over any support libraries in the current support library
     for supportLibName, supportLib of lib.library_context
       @supportLibraryLocalIds supportLib, localIdResults
+
+  # Merges the localId results for a library into the already collected results. The logic used for which result
+  # to keep is the same as the logic used above in setLocalIdWithResult, "falsey" results are always replaced.
+  mergeLibraryLocalIdResults: (localIdResults, libraryId, libraryResults) ->
+    for localId, localIdResult of libraryResults
+      existingResult = localIdResults[libraryId][localId]
+      # overwite this localid result if the existing result is "falsey". future work could track all results for each localid
+      if (existingResult == false || existingResult == null || existingResult == undefined || existingResult.length == 0)
+        localIdResults[libraryId][localId] = localIdResult
 
   checkParameters: (params) ->
     for pName, pVal of params
@@ -246,4 +259,3 @@ module.exports.PopulationContext = class PopulationContext extends Context
     # should this compact null values before return ?
     for pid,res of @results.patientResults
       res[identifier]
-

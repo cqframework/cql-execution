@@ -38,7 +38,7 @@ describe 'Using CommonLib', ->
     @results.patientResults['1'].FuncTest.should.equal 7
 
   it "should find the code defined in the included library", ->
-    @supportLibCode.exec(@ctx).should.exist
+    should.exist(@supportLibCode.exec(@ctx))
     equivalent(@supportLibCode.exec(@ctx), new Code('428371000124100', '2.16.840.1.113883.6.96', 'foo', 'directReferenceCode')).should.be.true()
 
 describe 'Using CommonLib2', ->
@@ -74,3 +74,30 @@ describe 'Using CommonLib2', ->
 
   it "should execute function from included library that uses expression", ->
     @exprSortsOnFunc.exec(@ctx).should.eql [{N: 1}, {N: 2}, {N: 3}, {N: 4}, {N: 5}]
+
+describe 'Using CommonLib and CommonLib2', ->
+  @beforeEach ->
+    setup @, data, [p1], {}, {}, new Repository(data)
+    @results = @executor.withLibrary(@lib).exec_patient_context(@patientSource)
+    @commonLocalIdObject = @results.localIdPatientResultsMap['1'].Common
+    @common2LocalIdObject = @results.localIdPatientResultsMap['1'].Common2
+
+  it "should contain TheParameter localId in the localIdMap", ->
+    theParameterLocalId = @lib.includes.common2.expressions.TheParameter.localId
+    should.exist(@common2LocalIdObject[theParameterLocalId])
+
+  it "should contain TwoPlusOne localId in the localIdMap", ->
+    twoPlusOneLocalId = @lib.includes.common2.expressions.TwoPlusOne.localId
+    should.exist(@common2LocalIdObject[twoPlusOneLocalId])
+
+  it "should contian TwoTimesThree localId in the localIdMap", ->
+    twoTimesThreeLocalId = @lib.includes.common2.expressions.TwoTimesThree.localId
+    should.exist(@common2LocalIdObject[twoTimesThreeLocalId])
+
+  it "should contain SupportLibDef localId in the localIdMap", ->
+    supportLibDefLocalId = @lib.includes.common.expressions.SupportLibDef.localId
+    should.exist(@commonLocalIdObject[supportLibDefLocalId])
+
+  it "should contain SortUsingFunction localId in the localIdMap", ->
+    sortUsingFunctionLocalId = @lib.includes.common2.expressions.SortUsingFunction.localId
+    should.exist(@common2LocalIdObject[sortUsingFunctionLocalId])

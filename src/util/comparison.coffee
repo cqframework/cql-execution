@@ -114,7 +114,7 @@ module.exports.equals = equals = (a, b) ->
       # Compare the components of the regular expression
       return ['source', 'global', 'ignoreCase', 'multiline'].every (p) -> a[p] is b[p]
     when '[object Array]'
-      return null if a.includes(null) or a.includes(undefined) or b.includes(null) or b.includes(undefined)
+      return null if a.indexOf(null) >= 0 or a.indexOf(undefined) >= 0 or b.indexOf(null) >= 0 or b.indexOf(undefined) >= 0
       return compareEveryItemInArrays(a, b, equals)
     when '[object Object]'
       return compareObjects(a, b, equals)

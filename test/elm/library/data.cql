@@ -9,6 +9,7 @@ AgeInYearsAt(start of MeasurementPeriod) >= 2 and AgeInYearsAt(start of Measurem
 // @Test: CommonLib
 library Common
 using QUICK
+include Common2 called common2
 
 codesystem "SNOMEDCT": '2.16.840.1.113883.6.96'
 code "directReferenceCode": '428371000124100' from "SNOMEDCT" display 'directReferenceCode'
@@ -22,6 +23,9 @@ AgeInYearsAt(start of MeasurementPeriod) >= 2 and AgeInYearsAt(start of Measurem
 
 define function foo (a Integer, b Integer) :
   a + b
+
+define SupportLibDef:
+  common2.TheParameter + common2.TwoPlusOne + common2.TwoTimesThree
 
 // @Test: Using CommonLib
 using QUICK
@@ -84,3 +88,14 @@ define FuncCallsFunc: common2.square(5)
 define ExprUsesExpr: common2.TwoPlusOne
 define FuncUsesExpr: common2.addTwo(5)
 define ExprSortsOnFunc: common2.SortUsingFunction
+
+
+// @Test: Using CommonLib and CommonLib2
+using QUICK
+include Common2 called common2
+include Common called common
+
+context Patient
+
+define testCommonLib: common.SupportLibDef
+define testCommon2Lib: common2.SortUsingFunction
