@@ -159,7 +159,7 @@ describe 'ToDecimal', ->
     @negativeSign .exec(@ctx).should.equal(-1.1)
 
   it "should not return decimal that is too precise", ->
-    should(() => @tooPrecise.exec(@ctx)).throw("Maximum Decimal precision")
+    @tooPrecise.exec(@ctx).should.equal(0.44444444)
 
   it "should not return decimal that is above max decimal value", ->
     should(() => @tooLargeDec.exec(@ctx)).throw("Maximum Decimal value exceeded")

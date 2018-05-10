@@ -23,16 +23,21 @@ module.exports.isValidDecimal = isValidDecimal = (decimal) ->
   throw new Error("Unable to parse Decimal") if isNaN(decimal)
   throw new Error("Maximum Decimal value exceeded") if decimal > MAX_FLOAT_VALUE
   throw new Error("Minimum Decimal value exceeded") if decimal < MIN_FLOAT_VALUE
-  throw new Error("Maximum Decimal precision") if getDecimalPrecision(decimal) > 8
   return true
 
-getDecimalPrecision = (decimal) ->
+module.exports.limitDecimalPrecision = (decimal) ->
   decimalString = decimal.toString()
-  decimalPoints = decimalString.split('.')[1]
-  if decimalPoints?
-    return decimalPoints.length
-  else
-    return 0
+  # For decimals so large that they are represented in scientific notation, javascript has already limited
+  # the decimal to its own constraints, so we can't determine the original precision.  Leave as-is unless
+  # this becomes problematic, in which case we would need our own parseFloat.
+  if decimalString.includes('e')
+    return decimal
+
+  splitDecimalString = decimalString.split('.')
+  decimalPoints = splitDecimalString[1]
+  if decimalPoints? and decimalPoints.length > 8
+    decimalString = splitDecimalString[0] + '.' + splitDecimalString[1].substring(0,8)
+  return parseFloat(decimalString)
 
 module.exports.OverFlowException = OverFlowException = class OverFlowException extends Exception
 

@@ -3,7 +3,7 @@
 { DateTime } = require '../datatypes/datetime'
 { Concept } = require '../datatypes/clinical'
 { parseQuantity } = require './quantity'
-{ isValidDecimal, isValidInteger } = require('../util/math')
+{ isValidDecimal, isValidInteger, limitDecimalPrecision } = require('../util/math')
 
 # TODO: Casting and Conversion needs unit tests!
 
@@ -59,6 +59,7 @@ module.exports.ToDecimal = class ToDecimal extends Expression
     arg = @execArgs(ctx)
     if arg? and typeof arg != 'undefined'
       decimal = parseFloat(arg.toString())
+      decimal = limitDecimalPrecision(decimal)
       return decimal if isValidDecimal(decimal)
      else
       return null
