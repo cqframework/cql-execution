@@ -38,7 +38,7 @@ describe 'Using CommonLib', ->
     @results.patientResults['1'].FuncTest.should.equal 7
 
   it "should find the code defined in the included library", ->
-    @supportLibCode.exec(@ctx).should.exist
+    should.exist(@supportLibCode.exec(@ctx))
     equivalent(@supportLibCode.exec(@ctx), new Code('428371000124100', '2.16.840.1.113883.6.96', 'foo', 'directReferenceCode')).should.be.true()
 
 describe 'Using CommonLib2', ->
@@ -84,20 +84,20 @@ describe 'Using CommonLib and CommonLib2', ->
 
   it "should contain TheParameter localId in the localIdMap", ->
     theParameterLocalId = @lib.includes.common2.expressions.TheParameter.localId
-    @common2LocalIdObject[theParameterLocalId].should.exist
+    should.exist(@common2LocalIdObject[theParameterLocalId])
 
   it "should contain TwoPlusOne localId in the localIdMap", ->
     twoPlusOneLocalId = @lib.includes.common2.expressions.TwoPlusOne.localId
-    @common2LocalIdObject[twoPlusOneLocalId].should.exist
+    should.exist(@common2LocalIdObject[twoPlusOneLocalId])
 
   it "should contian TwoTimesThree localId in the localIdMap", ->
     twoTimesThreeLocalId = @lib.includes.common2.expressions.TwoTimesThree.localId
-    @common2LocalIdObject[twoTimesThreeLocalId].should.exist
+    should.exist(@common2LocalIdObject[twoTimesThreeLocalId])
 
   it "should contain SupportLibDef localId in the localIdMap", ->
     supportLibDefLocalId = @lib.includes.common.expressions.SupportLibDef.localId
-    @commonLocalIdObject[supportLibDefLocalId].should.exist
+    should.exist(@commonLocalIdObject[supportLibDefLocalId])
 
   it "should contain SortUsingFunction localId in the localIdMap", ->
     sortUsingFunctionLocalId = @lib.includes.common2.expressions.SortUsingFunction.localId
-    @common2LocalIdObject[sortUsingFunctionLocalId].should.exists
+    should.exist(@common2LocalIdObject[sortUsingFunctionLocalId])

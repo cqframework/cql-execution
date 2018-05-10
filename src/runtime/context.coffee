@@ -138,6 +138,8 @@ module.exports.Context = class Context
     for supportLibName, supportLib of lib.library_context
       @supportLibraryLocalIds supportLib, localIdResults
 
+  # Merges the localId results for a library into the already collected results. The logic used for which result
+  # to keep is the same as the logic used above in setLocalIdWithResult, "falsey" results are always replaced.
   mergeLibraryLocalIdResults: (localIdResults, libraryId, libraryResults) ->
     for localId, localIdResult of libraryResults
       existingResult = localIdResults[libraryId][localId]
