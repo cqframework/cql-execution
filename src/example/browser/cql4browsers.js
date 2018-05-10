@@ -3019,20 +3019,14 @@
     }
 
     Less.prototype.exec = function(ctx) {
-      var args, error;
+      var args;
       args = this.execArgs(ctx).map(function(x) {
         return Uncertainty.from(x);
       });
-      try {
-        return args[0].lessThan(args[1]);
-      } catch (error1) {
-        error = error1;
-        if (error instanceof IncompatibleTypesException) {
-          throw error;
-        } else {
-          return null;
-        }
+      if (!((args[0] != null) && (args[1] != null))) {
+        return null;
       }
+      return args[0].lessThan(args[1]);
     };
 
     return Less;
@@ -3047,20 +3041,14 @@
     }
 
     LessOrEqual.prototype.exec = function(ctx) {
-      var args, error;
+      var args;
       args = this.execArgs(ctx).map(function(x) {
         return Uncertainty.from(x);
       });
-      try {
-        return args[0].lessThanOrEquals(args[1]);
-      } catch (error1) {
-        error = error1;
-        if (error instanceof IncompatibleTypesException) {
-          throw error;
-        } else {
-          return null;
-        }
+      if (!((args[0] != null) && (args[1] != null))) {
+        return null;
       }
+      return args[0].lessThanOrEquals(args[1]);
     };
 
     return LessOrEqual;
@@ -3075,20 +3063,14 @@
     }
 
     Greater.prototype.exec = function(ctx) {
-      var args, error;
+      var args;
       args = this.execArgs(ctx).map(function(x) {
         return Uncertainty.from(x);
       });
-      try {
-        return args[0].greaterThan(args[1]);
-      } catch (error1) {
-        error = error1;
-        if (error instanceof IncompatibleTypesException) {
-          throw error;
-        } else {
-          return null;
-        }
+      if (!((args[0] != null) && (args[1] != null))) {
+        return null;
       }
+      return args[0].greaterThan(args[1]);
     };
 
     return Greater;
@@ -3103,20 +3085,14 @@
     }
 
     GreaterOrEqual.prototype.exec = function(ctx) {
-      var args, error;
+      var args;
       args = this.execArgs(ctx).map(function(x) {
         return Uncertainty.from(x);
       });
-      try {
-        return args[0].greaterThanOrEquals(args[1]);
-      } catch (error1) {
-        error = error1;
-        if (error instanceof IncompatibleTypesException) {
-          throw error;
-        } else {
-          return null;
-        }
+      if (!((args[0] != null) && (args[1] != null))) {
+        return null;
       }
+      return args[0].greaterThanOrEquals(args[1]);
     };
 
     return GreaterOrEqual;
@@ -5153,17 +5129,12 @@
     }
 
     Equal.prototype.exec = function(ctx) {
-      var error;
-      try {
-        return equals.apply(null, this.execArgs(ctx));
-      } catch (error1) {
-        error = error1;
-        if (error instanceof IncompatibleTypesException) {
-          throw error;
-        } else {
-          return null;
-        }
+      var args;
+      args = this.execArgs(ctx);
+      if (!((args[0] != null) && (args[1] != null))) {
+        return null;
       }
+      return equals.apply(null, this.execArgs(ctx));
     };
 
     return Equal;
@@ -5201,17 +5172,12 @@
     }
 
     NotEqual.prototype.exec = function(ctx) {
-      var error;
-      try {
-        return ThreeValuedLogic.not(equals.apply(null, this.execArgs(ctx)));
-      } catch (error1) {
-        error = error1;
-        if (error instanceof IncompatibleTypesException) {
-          throw error;
-        } else {
-          return null;
-        }
+      var args;
+      args = this.execArgs(ctx);
+      if (!((args[0] != null) && (args[1] != null))) {
+        return null;
       }
+      return ThreeValuedLogic.not(equals.apply(null, this.execArgs(ctx)));
     };
 
     return NotEqual;

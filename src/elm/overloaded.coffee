@@ -16,13 +16,9 @@ module.exports.Equal = class Equal extends Expression
     super
 
   exec: (ctx) ->
-    try
-      equals @execArgs(ctx)...
-    catch error
-      if error instanceof IncompatibleTypesException
-        throw error
-      else
-        return null
+    args = @execArgs(ctx)
+    return null unless args[0]? and args[1]?
+    equals @execArgs(ctx)...
 
 module.exports.Equivalent = class Equivalent extends Expression
   constructor: (json) ->
@@ -42,13 +38,9 @@ module.exports.NotEqual = class NotEqual extends Expression
     super
 
   exec: (ctx) ->
-    try
-      ThreeValuedLogic.not equals @execArgs(ctx)...
-    catch error
-      if error instanceof IncompatibleTypesException
-        throw error
-      else
-        return null
+    args = @execArgs(ctx)
+    return null unless args[0]? and args[1]?
+    ThreeValuedLogic.not equals @execArgs(ctx)...
 
 module.exports.Union = class Union extends Expression
   constructor: (json) ->
