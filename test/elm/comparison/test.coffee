@@ -51,13 +51,13 @@ describe 'Equal', ->
   it 'should be false for 5 m = 5 km', ->
     @aLtB_Quantity_diff.exec(@ctx).should.be.false()
 
-  it 'should throw error for 5 Cel = 4 m', ->
+  it 'should throw IncompatibleTypesException for 5 Cel = 4 m', ->
     should(() => @aGtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
 
-  it 'should throw error for 5 Cel = 5 m', ->
+  it 'should throw IncompatibleTypesException for 5 Cel = 5 m', ->
     should(() => @aEqB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
 
-  it 'should throw error for 5 Cel = 40 m', ->
+  it 'should throw IncompatibleTypesException for 5 Cel = 40 m', ->
     should(() => @aLtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
 
 describe 'NotEqual', ->
@@ -107,13 +107,13 @@ describe 'NotEqual', ->
   it 'should be true for 5 m != 5 km', ->
     @aLtB_Quantity_diff.exec(@ctx).should.be.true()
 
-  it 'should be null for 5 Cel != 4 m', ->
+  it 'should throw IncompatibleTypesException for 5 Cel != 4 m', ->
     should(() => @aGtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
 
-  it 'should be null for 5 Cel != 5 m', ->
+  it 'should throw IncompatibleTypesException for 5 Cel != 5 m', ->
     should(() => @aEqB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
 
-  it 'should be null for 5 Cel != 40 m', ->
+  it 'should throw IncompatibleTypesException for 5 Cel != 40 m', ->
     should(() => @aLtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
 
 describe 'Equivalent', ->
@@ -241,13 +241,13 @@ describe 'Less', ->
   it 'should be false for 5 m < 5 km', ->
     @aLtB_Quantity_diff.exec(@ctx).should.be.true()
 
-  it 'should be null for 5 Cel < 4 m', ->
+  it 'should throw IncompatibleTypesException for 5 Cel < 4 m', ->
     should(() => @aGtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
 
-  it 'should be null for 5 Cel < 5 m', ->
+  it 'should throw IncompatibleTypesException for 5 Cel < 5 m', ->
     should(() => @aEqB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
 
-  it 'should be null for 5 Cel < 40 m', ->
+  it 'should throw IncompatibleTypesException for 5 Cel < 40 m', ->
     should(() => @aLtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
 
 describe 'LessOrEqual', ->
@@ -281,13 +281,13 @@ describe 'LessOrEqual', ->
   it 'should be false for 5 m <= 5 km', ->
     @aLtB_Quantity_diff.exec(@ctx).should.be.true()
 
-  it 'should be null for 5 Cel <= 4 m', ->
+  it 'should throw IncompatibleTypesException for 5 Cel <= 4 m', ->
     should(() => @aGtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'Cel' and 'm'")
 
-  it 'should be null for 5 Cel <= 5 m', ->
+  it 'should throw IncompatibleTypesException for 5 Cel <= 5 m', ->
     should(() => @aEqB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'Cel' and 'm'")
 
-  it 'should be null for 5 Cel <= 40 m', ->
+  it 'should throw IncompatibleTypesException for 5 Cel <= 40 m', ->
     should(() => @aLtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'Cel' and 'm'")
 
 describe 'Greater', ->
@@ -321,13 +321,13 @@ describe 'Greater', ->
   it 'should be false for 5 m > 5 km', ->
     @aLtB_Quantity_diff.exec(@ctx).should.be.false()
 
-  it 'should be null for 5 Cel > 4 m', ->
+  it 'should throw IncompatibleTypesException for 5 Cel > 4 m', ->
     should(() => @aGtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'Cel' and 'm'")
 
-  it 'should be null for 5 Cel > 5 m', ->
+  it 'should throw IncompatibleTypesException for 5 Cel > 5 m', ->
     should(() => @aEqB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'Cel' and 'm'")
 
-  it 'should be null for 5 Cel > 40 m', ->
+  it 'should throw IncompatibleTypesException for 5 Cel > 40 m', ->
     should(() => @aLtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'Cel' and 'm'")
 
 describe 'GreaterOrEqual', ->
@@ -361,16 +361,16 @@ describe 'GreaterOrEqual', ->
   it 'should be false for 5 m  >=5 km', ->
     @aLtB_Quantity_diff.exec(@ctx).should.be.false()
 
-  it 'should be null for 5 Cel >= 4 m', ->
+  it 'should throw IncompatibleTypesException for 5 Cel >= 4 m', ->
     should(() => @aGtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
 
-  it 'should be null for 5 Cel >= 5 m', ->
+  it 'should throw IncompatibleTypesException for 5 Cel >= 5 m', ->
     should(() => @aEqB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
 
-  it 'should be null for 5 Cel >= 40 m', ->
+  it 'should throw IncompatibleTypesException for 5 Cel >= 40 m', ->
     should(() => @aLtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
 
-  it 'should be null for 100 [nmi_i] / 2 h > 49 mg/[lb_av]', ->
+  it 'should throw IncompatibleTypesException for 100 [nmi_i] / 2 h > 49 mg/[lb_av]', ->
     should(() => @divideUcum_incompatible.exec(@ctx)).throw("Incompatible Types '[nmi_i]/h' and 'mg/[lb_av]'")
 
   it 'should be true for 100 mg / 2 [lb_av]  > 49 mg/[lb_av]', ->
