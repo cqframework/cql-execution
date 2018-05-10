@@ -83,7 +83,6 @@ module.exports.ToQuantity = class ToQuantity extends Expression
     arg = @execArgs(ctx)
     if arg? and typeof arg != 'undefined'
       quantity = parseQuantity(arg.toString())
-      return null if !quantity?
       return quantity
     else
       return null

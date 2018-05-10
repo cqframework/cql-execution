@@ -7074,9 +7074,6 @@
       arg = this.execArgs(ctx);
       if ((arg != null) && typeof arg !== 'undefined') {
         quantity = parseQuantity(arg.toString());
-        if (quantity == null) {
-          return null;
-        }
         return quantity;
       } else {
         return null;
