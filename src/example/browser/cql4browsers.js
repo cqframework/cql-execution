@@ -44227,7 +44227,7 @@
   module.exports.limitDecimalPrecision = function(decimal) {
     var decimalPoints, decimalString, splitDecimalString;
     decimalString = decimal.toString();
-    if (decimalString.includes('e')) {
+    if (decimalString.indexOf('e') !== -1) {
       return decimal;
     }
     splitDecimalString = decimalString.split('.');

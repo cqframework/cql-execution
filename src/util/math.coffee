@@ -30,7 +30,7 @@ module.exports.limitDecimalPrecision = (decimal) ->
   # For decimals so large that they are represented in scientific notation, javascript has already limited
   # the decimal to its own constraints, so we can't determine the original precision.  Leave as-is unless
   # this becomes problematic, in which case we would need our own parseFloat.
-  if decimalString.includes('e')
+  if decimalString.indexOf('e') != -1
     return decimal
 
   splitDecimalString = decimalString.split('.')
