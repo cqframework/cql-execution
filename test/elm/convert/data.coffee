@@ -1531,3 +1531,978 @@ module.exports['FromCode'] = {
    }
 }
 
+### ToDecimal
+library TestSnippet version '1'
+using QUICK
+context Patient
+define NoSign: ToDecimal('0.0')
+define PositiveSign: ToDecimal('+1.1')
+define NegativeSign: ToDecimal('-1.1')
+define TooPrecise: ToDecimal('.444444444')
+define TooLargeDec: ToDecimal('444444444444444444444444444444')
+define TooSmallDec: ToDecimal('-444444444444444444444444444444')
+define NullDecimal: ToDecimal((null as String))
+define WrongFormat: ToDecimal('+.1')
+###
+
+module.exports['ToDecimal'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "4",
+            "name" : "NoSign",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "define ","NoSign",": " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "ToDecimal","(" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "'0.0'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "3",
+               "type" : "ToDecimal",
+               "operand" : {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "0.0",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "7",
+            "name" : "PositiveSign",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "define ","PositiveSign",": " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "ToDecimal","(" ]
+                     }, {
+                        "r" : "5",
+                        "s" : [ {
+                           "value" : [ "'+1.1'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "6",
+               "type" : "ToDecimal",
+               "operand" : {
+                  "localId" : "5",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "+1.1",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "10",
+            "name" : "NegativeSign",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "10",
+                  "s" : [ {
+                     "value" : [ "define ","NegativeSign",": " ]
+                  }, {
+                     "r" : "9",
+                     "s" : [ {
+                        "value" : [ "ToDecimal","(" ]
+                     }, {
+                        "r" : "8",
+                        "s" : [ {
+                           "value" : [ "'-1.1'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "9",
+               "type" : "ToDecimal",
+               "operand" : {
+                  "localId" : "8",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "-1.1",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "13",
+            "name" : "TooPrecise",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "define ","TooPrecise",": " ]
+                  }, {
+                     "r" : "12",
+                     "s" : [ {
+                        "value" : [ "ToDecimal","(" ]
+                     }, {
+                        "r" : "11",
+                        "s" : [ {
+                           "value" : [ "'.444444444'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "12",
+               "type" : "ToDecimal",
+               "operand" : {
+                  "localId" : "11",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : ".444444444",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "16",
+            "name" : "TooLargeDec",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "16",
+                  "s" : [ {
+                     "value" : [ "define ","TooLargeDec",": " ]
+                  }, {
+                     "r" : "15",
+                     "s" : [ {
+                        "value" : [ "ToDecimal","(" ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "'444444444444444444444444444444'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "15",
+               "type" : "ToDecimal",
+               "operand" : {
+                  "localId" : "14",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "444444444444444444444444444444",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "19",
+            "name" : "TooSmallDec",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "19",
+                  "s" : [ {
+                     "value" : [ "define ","TooSmallDec",": " ]
+                  }, {
+                     "r" : "18",
+                     "s" : [ {
+                        "value" : [ "ToDecimal","(" ]
+                     }, {
+                        "r" : "17",
+                        "s" : [ {
+                           "value" : [ "'-444444444444444444444444444444'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "18",
+               "type" : "ToDecimal",
+               "operand" : {
+                  "localId" : "17",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "-444444444444444444444444444444",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "24",
+            "name" : "NullDecimal",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "24",
+                  "s" : [ {
+                     "value" : [ "define ","NullDecimal",": " ]
+                  }, {
+                     "r" : "23",
+                     "s" : [ {
+                        "value" : [ "ToDecimal","(" ]
+                     }, {
+                        "r" : "22",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "22",
+                           "s" : [ {
+                              "r" : "20",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "21",
+                              "s" : [ {
+                                 "value" : [ "String" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "23",
+               "type" : "ToDecimal",
+               "operand" : {
+                  "localId" : "22",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "20",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "21",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            }
+         }, {
+            "localId" : "27",
+            "name" : "WrongFormat",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "27",
+                  "s" : [ {
+                     "value" : [ "define ","WrongFormat",": " ]
+                  }, {
+                     "r" : "26",
+                     "s" : [ {
+                        "value" : [ "ToDecimal","(" ]
+                     }, {
+                        "r" : "25",
+                        "s" : [ {
+                           "value" : [ "'+.1'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "26",
+               "type" : "ToDecimal",
+               "operand" : {
+                  "localId" : "25",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "+.1",
+                  "type" : "Literal"
+               }
+            }
+         } ]
+      }
+   }
+}
+
+### ToInteger
+library TestSnippet version '1'
+using QUICK
+context Patient
+define NoSign: ToInteger('12345')
+define PositiveSign: ToInteger('+12345')
+define NegativeSign: ToInteger('-12345')
+define TooLargeInt: ToInteger('2147483648')
+define TooSmallInt: ToInteger('-2147483649')
+###
+
+module.exports['ToInteger'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "4",
+            "name" : "NoSign",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "define ","NoSign",": " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "ToInteger","(" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "'12345'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "3",
+               "type" : "ToInteger",
+               "operand" : {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "12345",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "7",
+            "name" : "PositiveSign",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "define ","PositiveSign",": " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "ToInteger","(" ]
+                     }, {
+                        "r" : "5",
+                        "s" : [ {
+                           "value" : [ "'+12345'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "6",
+               "type" : "ToInteger",
+               "operand" : {
+                  "localId" : "5",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "+12345",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "10",
+            "name" : "NegativeSign",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "10",
+                  "s" : [ {
+                     "value" : [ "define ","NegativeSign",": " ]
+                  }, {
+                     "r" : "9",
+                     "s" : [ {
+                        "value" : [ "ToInteger","(" ]
+                     }, {
+                        "r" : "8",
+                        "s" : [ {
+                           "value" : [ "'-12345'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "9",
+               "type" : "ToInteger",
+               "operand" : {
+                  "localId" : "8",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "-12345",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "13",
+            "name" : "TooLargeInt",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "define ","TooLargeInt",": " ]
+                  }, {
+                     "r" : "12",
+                     "s" : [ {
+                        "value" : [ "ToInteger","(" ]
+                     }, {
+                        "r" : "11",
+                        "s" : [ {
+                           "value" : [ "'2147483648'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "12",
+               "type" : "ToInteger",
+               "operand" : {
+                  "localId" : "11",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "2147483648",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "16",
+            "name" : "TooSmallInt",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "16",
+                  "s" : [ {
+                     "value" : [ "define ","TooSmallInt",": " ]
+                  }, {
+                     "r" : "15",
+                     "s" : [ {
+                        "value" : [ "ToInteger","(" ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "'-2147483649'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "15",
+               "type" : "ToInteger",
+               "operand" : {
+                  "localId" : "14",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "-2147483649",
+                  "type" : "Literal"
+               }
+            }
+         } ]
+      }
+   }
+}
+
+### ToQuantity
+library TestSnippet version '1'
+using QUICK
+context Patient
+define WrongFormatQuantity: ToQuantity('abc')
+define TooLargeQuantity: ToQuantity('444444444444444444444444444444 \'\'')
+define TooSmallQuantity: ToQuantity('-444444444444444444444444444444 \'\'')
+define NullArg: ToQuantity((null as String))
+###
+
+module.exports['ToQuantity'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "4",
+            "name" : "WrongFormatQuantity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "define ","WrongFormatQuantity",": " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "ToQuantity","(" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "'abc'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "3",
+               "type" : "ToQuantity",
+               "operand" : {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "abc",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "7",
+            "name" : "TooLargeQuantity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "define ","TooLargeQuantity",": " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "ToQuantity","(" ]
+                     }, {
+                        "r" : "5",
+                        "s" : [ {
+                           "value" : [ "'444444444444444444444444444444 \\'\\''" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "6",
+               "type" : "ToQuantity",
+               "operand" : {
+                  "localId" : "5",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "444444444444444444444444444444 ''",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "10",
+            "name" : "TooSmallQuantity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "10",
+                  "s" : [ {
+                     "value" : [ "define ","TooSmallQuantity",": " ]
+                  }, {
+                     "r" : "9",
+                     "s" : [ {
+                        "value" : [ "ToQuantity","(" ]
+                     }, {
+                        "r" : "8",
+                        "s" : [ {
+                           "value" : [ "'-444444444444444444444444444444 \\'\\''" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "9",
+               "type" : "ToQuantity",
+               "operand" : {
+                  "localId" : "8",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "-444444444444444444444444444444 ''",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "15",
+            "name" : "NullArg",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "15",
+                  "s" : [ {
+                     "value" : [ "define ","NullArg",": " ]
+                  }, {
+                     "r" : "14",
+                     "s" : [ {
+                        "value" : [ "ToQuantity","(" ]
+                     }, {
+                        "r" : "13",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "13",
+                           "s" : [ {
+                              "r" : "11",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "12",
+                              "s" : [ {
+                                 "value" : [ "String" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "14",
+               "type" : "ToQuantity",
+               "operand" : {
+                  "localId" : "13",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "11",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "12",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+
+### ToTime
+library TestSnippet version '1'
+using QUICK
+context Patient
+define NullArgTime: ToTime((null as String))
+define IncorrectFormatTime: ToTime('10:00PM')
+define InvalidTime: ToTime('25:99.000+00.00')
+###
+
+module.exports['ToTime'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "6",
+            "name" : "NullArgTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "6",
+                  "s" : [ {
+                     "value" : [ "define ","NullArgTime",": " ]
+                  }, {
+                     "r" : "5",
+                     "s" : [ {
+                        "value" : [ "ToTime","(" ]
+                     }, {
+                        "r" : "4",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "4",
+                           "s" : [ {
+                              "r" : "2",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "3",
+                              "s" : [ {
+                                 "value" : [ "String" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "5",
+               "type" : "ToTime",
+               "operand" : {
+                  "localId" : "4",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "2",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "3",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            }
+         }, {
+            "localId" : "9",
+            "name" : "IncorrectFormatTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "define ","IncorrectFormatTime",": " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "ToTime","(" ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "'10:00PM'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "type" : "ToTime",
+               "operand" : {
+                  "localId" : "7",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "10:00PM",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "12",
+            "name" : "InvalidTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "value" : [ "define ","InvalidTime",": " ]
+                  }, {
+                     "r" : "11",
+                     "s" : [ {
+                        "value" : [ "ToTime","(" ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "value" : [ "'25:99.000+00.00'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "11",
+               "type" : "ToTime",
+               "operand" : {
+                  "localId" : "10",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "25:99.000+00.00",
+                  "type" : "Literal"
+               }
+            }
+         } ]
+      }
+   }
+}
+

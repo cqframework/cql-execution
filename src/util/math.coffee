@@ -12,6 +12,33 @@ module.exports.MAX_DATE_VALUE = MAX_DATE_VALUE = DateTime.parse("9999-12-31T23:5
 module.exports.MIN_TIME_VALUE = MAX_TIME_VALUE = DateTime.parse("0000-01-01T00:00:00.000")
 module.exports.MAX_TIME_VALUE = MAX_TIME_VALUE = DateTime.parse("0000-01-01T23:59:59.999")
 
+
+module.exports.isValidInteger = isValidInteger = (integer) ->
+  throw new Error("Unable to parse Integer") if isNaN(integer)
+  throw new Error("Maximum Integer value exceeded") if integer > MAX_INT_VALUE
+  throw new Error("Minimum Integer value exceeded") if integer < MIN_INT_VALUE
+  return true
+
+module.exports.isValidDecimal = isValidDecimal = (decimal) ->
+  throw new Error("Unable to parse Decimal") if isNaN(decimal)
+  throw new Error("Maximum Decimal value exceeded") if decimal > MAX_FLOAT_VALUE
+  throw new Error("Minimum Decimal value exceeded") if decimal < MIN_FLOAT_VALUE
+  return true
+
+module.exports.limitDecimalPrecision = (decimal) ->
+  decimalString = decimal.toString()
+  # For decimals so large that they are represented in scientific notation, javascript has already limited
+  # the decimal to its own constraints, so we can't determine the original precision.  Leave as-is unless
+  # this becomes problematic, in which case we would need our own parseFloat.
+  if decimalString.indexOf('e') != -1
+    return decimal
+
+  splitDecimalString = decimalString.split('.')
+  decimalPoints = splitDecimalString[1]
+  if decimalPoints? and decimalPoints.length > 8
+    decimalString = splitDecimalString[0] + '.' + splitDecimalString[1].substring(0,8)
+  return parseFloat(decimalString)
+
 module.exports.OverFlowException = OverFlowException = class OverFlowException extends Exception
 
 module.exports.successor = successor = (val) ->

@@ -1,6 +1,6 @@
 { Expression } = require './expression'
 { FunctionRef } = require './reusable'
-{ decimalAdjust } = require '../util/math'
+{ decimalAdjust, isValidDecimal } = require '../util/math'
 { ValueSet, Code } = require '../datatypes/datatypes'
 { Exception } = require '../datatypes/exception'
 { build } = require './builder'
@@ -20,7 +20,7 @@ module.exports.Quantity = class Quantity extends Expression
     @value = parseFloat json.value
 
     # Attempt to parse the unit with UCUM. If it fails, throw a friendly error.
-    if !is_valid_ucum_unit(@unit)
+    if @unit? and !is_valid_ucum_unit(@unit)
       throw new Error("\'#{@unit}\' is not a valid UCUM unit.")
 
   # Define a simple getter to allow type-checking of this class without instanceof
@@ -209,13 +209,17 @@ module.exports.createQuantity = createQuantity = (value,unit) ->
   new Quantity({value: value, unit: unit})
 
 module.exports.parseQuantity = (str) ->
-  components = /([+|-]?\d+\.?\d*)\s*'(.+)'/.exec str
-  if components? and components[1]? and components[2]?
+  components = /([+|-]?\d+\.?\d*)\s*('(.+)')?/.exec str
+  if components? and components[1]?
     value = parseFloat(components[1])
-    unit = components[2].trim()
+    return null unless isValidDecimal(value)
+    if components[3]?
+      unit = components[3].trim()
+    else
+      unit = ""
     new Quantity({value: value, unit: unit})
   else
-    null
+    throw new Error("Unable to parse Quantity")
 
 module.exports.doAddition = (a,b) ->
   if a instanceof Quantity and b instanceof Quantity

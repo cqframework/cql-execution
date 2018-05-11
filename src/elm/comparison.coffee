@@ -12,13 +12,8 @@ module.exports.Less = class Less extends Expression
 
   exec: (ctx) ->
     args = @execArgs(ctx).map (x) -> Uncertainty.from x
-    try
-      args[0].lessThan args[1]
-    catch error
-      if error instanceof IncompatibleTypesException
-        return null
-      else
-        throw error
+    return null unless args[0]? and args[1]?
+    args[0].lessThan args[1]
 
 module.exports.LessOrEqual = class LessOrEqual extends Expression
   constructor: (json) ->
@@ -26,13 +21,8 @@ module.exports.LessOrEqual = class LessOrEqual extends Expression
 
   exec: (ctx) ->
     args = @execArgs(ctx).map (x) -> Uncertainty.from x
-    try
-      args[0].lessThanOrEquals args[1]
-    catch error
-      if error instanceof IncompatibleTypesException
-        return null
-      else
-        throw error
+    return null unless args[0]? and args[1]?
+    args[0].lessThanOrEquals args[1]
 
 module.exports.Greater = class Greater extends Expression
   constructor: (json) ->
@@ -40,13 +30,8 @@ module.exports.Greater = class Greater extends Expression
 
   exec: (ctx) ->
     args = @execArgs(ctx).map (x) -> Uncertainty.from x
-    try
-      args[0].greaterThan args[1]
-    catch error
-      if error instanceof IncompatibleTypesException
-        return null
-      else
-        throw error
+    return null unless args[0]? and args[1]?
+    args[0].greaterThan args[1]
 
 module.exports.GreaterOrEqual = class GreaterOrEqual extends Expression
   constructor: (json) ->
@@ -54,10 +39,5 @@ module.exports.GreaterOrEqual = class GreaterOrEqual extends Expression
 
   exec: (ctx) ->
     args = @execArgs(ctx).map (x) -> Uncertainty.from x
-    try
-      args[0].greaterThanOrEquals args[1]
-    catch error
-      if error instanceof IncompatibleTypesException
-        return null
-      else
-        throw error
+    return null unless args[0]? and args[1]?
+    args[0].greaterThanOrEquals args[1]

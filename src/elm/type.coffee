@@ -3,6 +3,7 @@
 { DateTime } = require '../datatypes/datetime'
 { Concept } = require '../datatypes/clinical'
 { parseQuantity } = require './quantity'
+{ isValidDecimal, isValidInteger, limitDecimalPrecision } = require('../util/math')
 
 # TODO: Casting and Conversion needs unit tests!
 
@@ -56,7 +57,12 @@ module.exports.ToDecimal = class ToDecimal extends Expression
 
   exec: (ctx) ->
     arg = @execArgs(ctx)
-    if arg? and typeof arg != 'undefined' then parseFloat(arg.toString()) else null
+    if arg? and typeof arg != 'undefined'
+      decimal = parseFloat(arg.toString())
+      decimal = limitDecimalPrecision(decimal)
+      return decimal if isValidDecimal(decimal)
+     else
+      return null
 
 module.exports.ToInteger = class ToInteger extends Expression
   constructor: (json) ->
@@ -64,7 +70,11 @@ module.exports.ToInteger = class ToInteger extends Expression
 
   exec: (ctx) ->
     arg = @execArgs(ctx)
-    if arg? and typeof arg != 'undefined' then parseInt(arg.toString()) else null
+    if arg? and typeof arg != 'undefined'
+      integer = parseInt(arg.toString())
+      return integer if isValidInteger(integer)
+    else
+      return null
 
 module.exports.ToQuantity = class ToQuantity extends Expression
   constructor: (json) ->
@@ -72,7 +82,11 @@ module.exports.ToQuantity = class ToQuantity extends Expression
 
   exec: (ctx) ->
     arg = @execArgs(ctx)
-    if arg? and typeof arg != 'undefined' then parseQuantity(arg.toString()) else null
+    if arg? and typeof arg != 'undefined'
+      quantity = parseQuantity(arg.toString())
+      return quantity
+    else
+      return null
 
 module.exports.ToString = class ToString extends Expression
   constructor: (json) ->
