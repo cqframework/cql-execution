@@ -39,6 +39,15 @@ describe 'Quantity', ->
       q = new Quantity({unit: "mg", value: null})
       should.equal(q.value, null)
 
+  it 'should convert undefined values to null', ->
+    should.doesNotThrow ->
+      q = new Quantity({unit: "mg", value: undefined})
+      should.equal(q.value, null)
+
   it 'should throw an error if value is a string that is not a number', ->
     should.throws ->
       new Quantity({unit: "mg", value: "twenty"})
+
+  it 'should throw an error if value is NaN', ->
+    should.throws ->
+      new Quantity({unit: "mg", value: NaN})
