@@ -479,14 +479,10 @@ cqlFormatStringToMomentFormatString = (string) ->
 
   momentString = momentString.replace /f/g, 'S'
 
-convertTimezoneOffset = (matches) ->
-  num = parseInt(matches[17],10) + (if matches[19]? then parseInt(matches[19],10) / 60 else 0)
-  if matches[16] is '+' then num else num * -1
-
 getTimezoneSeparatorFromString = (string) ->
-  if msAndAfter?.match(/-/)?.length == 1
+  if string?.match(/-/)?.length == 1
     timezoneSeparator = '-'
-  else if msAndAfter?.match(/\+/)?.length == 1
+  else if string?.match(/\+/)?.length == 1
     timezoneSeparator = '+'
   else
     timezoneSeparator = ''
