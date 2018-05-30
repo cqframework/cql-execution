@@ -33,3 +33,12 @@ describe 'Quantity', ->
   it 'should allow creation of Quantity with empty string unit', ->
     should.doesNotThrow ->
       new Quantity({unit: "", value: 9})
+
+  it 'should allow for the value of the quantity to be null', ->
+    should.doesNotThrow ->
+      q = new Quantity({unit: "mg", value: null})
+      should.equal(q.value, null)
+
+  it 'should throw an error if value is a string that is not a number', ->
+    should.throws ->
+      new Quantity({unit: "mg", value: "twenty"})

@@ -17,7 +17,13 @@ module.exports.Quantity = class Quantity extends Expression
   constructor: (json) ->
     super
     @unit = json.unit
-    @value = parseFloat json.value
+
+    if !json.value?
+      @value = null
+    else
+      @value = parseFloat json.value
+      # isValidDecimal will throw an error if the parsed value is NaN or otherwise invalid.
+      isValidDecimal(@value)
 
     # Attempt to parse the unit with UCUM. If it fails, throw a friendly error.
     if @unit? and !is_valid_ucum_unit(@unit)
