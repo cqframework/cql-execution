@@ -5655,7 +5655,12 @@
     function Quantity(json) {
       Quantity.__super__.constructor.apply(this, arguments);
       this.unit = json.unit;
-      this.value = parseFloat(json.value);
+      if (json.value == null) {
+        this.value = null;
+      } else {
+        this.value = parseFloat(json.value);
+        isValidDecimal(this.value);
+      }
       if ((this.unit != null) && !is_valid_ucum_unit(this.unit)) {
         throw new Error("\'" + this.unit + "\' is not a valid UCUM unit.");
       }
