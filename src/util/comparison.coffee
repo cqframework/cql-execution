@@ -83,7 +83,11 @@ deepCompareKeysAndValues = (a, b, comparisonFunction) ->
   return aKeys.length is bKeys.length and aKeys.every (key) -> comparisonFunction(a[key], b[key])
 
 getKeysFromObject = (object) ->
-  return (key for key of object unless typeof(key) is 'function')
+  objectClass = {}.toString.call(object)
+  return (key for key of object unless isFunction(key))
+
+isFunction = (input) ->
+  return input instanceof Function || {}.toString.call(input) == '[object Function]'
 
 module.exports.equals = equals = (a, b) ->
   # Handle null cases first: spec says if either is null, return null
@@ -99,8 +103,9 @@ module.exports.equals = equals = (a, b) ->
   # Use overloaded 'equals' function if it is available
   return a.equals(b) if typeof a.equals is 'function'
 
-  # Return true of the objects are strictly equal
-  return true if a is b
+  # Return true of the objects are primitives and are strictly equal
+  if typeof a is typeof b and typeof a is 'string' or typeof a is 'number' or typeof a is 'boolean'
+    return a is b
 
   # Return false if they are instances of different classes
   [aClass, bClass] = getClassOfObjects(a, b)
@@ -118,6 +123,8 @@ module.exports.equals = equals = (a, b) ->
       return compareEveryItemInArrays(a, b, equals)
     when '[object Object]'
       return compareObjects(a, b, equals)
+    when '[object Function]'
+      return a is b
 
   # If we made it this far, we can't handle it
   return false
