@@ -44133,9 +44133,6 @@
     if (typeof a.equals === 'function') {
       return a.equals(b);
     }
-    if (a === b) {
-      return true;
-    }
     ref = getClassOfObjects(a, b), aClass = ref[0], bClass = ref[1];
     if (aClass !== bClass) {
       return false;

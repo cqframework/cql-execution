@@ -100,7 +100,7 @@ module.exports.equals = equals = (a, b) ->
   return a.equals(b) if typeof a.equals is 'function'
 
   # Return true of the objects are strictly equal
-  return true if a is b
+  # NOPE! NOT DOING THIS! # return true if a is b
 
   # Return false if they are instances of different classes
   [aClass, bClass] = getClassOfObjects(a, b)
