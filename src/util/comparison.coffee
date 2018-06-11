@@ -80,7 +80,15 @@ classesEqual = (object1, object2) ->
 deepCompareKeysAndValues = (a, b, comparisonFunction) ->
   aKeys = getKeysFromObject(a)
   bKeys = getKeysFromObject(b)
-  return aKeys.length is bKeys.length and aKeys.every (key) -> comparisonFunction(a[key], b[key])
+  # Array.every() will only return true or false, so set a flag for if we should return null
+  shouldReturnNull = false
+  finalComparisonResult = aKeys.length is bKeys.length and aKeys.every (key) ->
+    comparisonResult = comparisonFunction(a[key], b[key])
+    shouldReturnNull = true if comparisonResult == null
+    return comparisonResult
+
+  return null if shouldReturnNull
+  return finalComparisonResult
 
 getKeysFromObject = (object) ->
   objectClass = {}.toString.call(object)

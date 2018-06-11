@@ -44095,12 +44095,22 @@
   };
 
   deepCompareKeysAndValues = function(a, b, comparisonFunction) {
-    var aKeys, bKeys;
+    var aKeys, bKeys, finalComparisonResult, shouldReturnNull;
     aKeys = getKeysFromObject(a);
     bKeys = getKeysFromObject(b);
-    return aKeys.length === bKeys.length && aKeys.every(function(key) {
-      return comparisonFunction(a[key], b[key]);
+    shouldReturnNull = false;
+    finalComparisonResult = aKeys.length === bKeys.length && aKeys.every(function(key) {
+      var comparisonResult;
+      comparisonResult = comparisonFunction(a[key], b[key]);
+      if (comparisonResult === null) {
+        shouldReturnNull = true;
+      }
+      return comparisonResult;
     });
+    if (shouldReturnNull) {
+      return null;
+    }
+    return finalComparisonResult;
   };
 
   getKeysFromObject = function(object) {
