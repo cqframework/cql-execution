@@ -52,10 +52,17 @@ describe 'equals', ->
     equals(new Foo('abc', [1,2,3]), new Foo('abc', [1,2,3])).should.be.true()
     equals(new Foo('abc', [1,2,3]), new Foo('abcd', [1,2,3])).should.be.false()
     equals(new Foo('abc', new Bar('xyz', [1,2,3])), new Foo('abc', new Bar('xyz', [1,2,3]))).should.be.true()
-    equals(new Foo('abc', new Bar('xyz')), new Foo('abc', new Bar('xyz'))).should.be.false() # because Bar is missing components
-    equals(new Foo('abc', new Bar('xyz')), new Foo('abc', new Bar('xyz',999))).should.be.false()
+    should.not.exist(equals(new Foo('abc', new Bar('xyz')), new Foo('abc', new Bar('xyz')))) # because Bar is missing components
+    should.not.exist(equals(new Foo('abc', new Bar('xyz')), new Foo('abc', new Bar('xyz',999))))
     equals(new Foo('abc', [1,2,3]), new Bar('abc', [1,2,3])).should.be.false()
     equals(new Bar('abc', [1,2,3]), new Foo('abc', [1,2,3])).should.be.false()
+
+  it 'should not consider an instance equal to itself if it has null values', ->
+    class Foo
+      constructor: (@prop1, @prop2) ->
+
+    containsNull = new Foo('abc', null)
+    should.not.exist(equals(containsNull, containsNull))
 
   it 'should delegate to equals method when available', ->
     class Int
