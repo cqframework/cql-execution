@@ -10,10 +10,10 @@ describe 'Uncertainty', ->
 
     oneToPInf = new Uncertainty(1, null)
     oneToPInf.low.should.equal 1
-    should(oneToPInf.high).be.null
+    should(oneToPInf.high).be.null()
 
     nInfToFive = new Uncertainty(null, 5)
-    should(nInfToFive.low).be.null
+    should(nInfToFive.low).be.null()
     nInfToFive.high.should.equal 5
 
     two = new Uncertainty(2)
@@ -21,8 +21,8 @@ describe 'Uncertainty', ->
     two.high.should.equal 2
 
     everything = new Uncertainty()
-    should(everything.low).be.null
-    should(everything.high).be.null
+    should(everything.low).be.null()
+    should(everything.high).be.null()
 
     differentTypes = new Uncertainty(1, "1")
     differentTypes.low.should.eql 1

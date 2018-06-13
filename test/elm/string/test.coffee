@@ -18,7 +18,7 @@ describe 'Concat', ->
     @sentence.exec(@ctx).should.equal 'The quick brown fox jumps over the lazy dog.'
 
   it 'should return null when an arg is null', ->
-    should(@concatNull.exec(@ctx)).be.null
+    should(@concatNull.exec(@ctx)).be.null()
 
   it 'should concat variables', ->
     @helloWorldVariables.exec(@ctx).should.equal 'HelloWorld'
@@ -37,10 +37,10 @@ describe 'Combine', ->
     @separator.exec(@ctx).should.equal 'abc;def;ghi;jkl'
 
   it 'should return null when the list is null', ->
-    should(@combineNull.exec(@ctx)).be.null
+    should(@combineNull.exec(@ctx)).be.null()
 
   it 'should return null when an item in the list is null', ->
-    should(@combineNullItem.exec(@ctx)).be.null
+    should(@combineNullItem.exec(@ctx)).be.null()
 
 describe 'Split', ->
   @beforeEach ->
@@ -56,11 +56,11 @@ describe 'Split', ->
     @separatorNotUsed.exec(@ctx).should.eql ['a,b,c,,1,2,3']
 
   it 'should return null when separating null', ->
-    should(@separateNull.exec(@ctx)).be.null
+    should(@separateNull.exec(@ctx)).be.null()
 
   # TODO: Verify this assumption
   it 'should return null when the separator is null', ->
-    should(@separateUsingNull.exec(@ctx)).be.null
+    should(@separateUsingNull.exec(@ctx)).be.null()
 
 describe 'Length', ->
   @beforeEach ->
@@ -73,7 +73,7 @@ describe 'Length', ->
     @elevenLetters.exec(@ctx).should.equal 11
 
   it 'should return null when string is null', ->
-    should(@nullString.exec(@ctx)).be.null
+    should(@nullString.exec(@ctx)).be.null()
 
 describe 'Upper', ->
   @beforeEach ->
@@ -92,7 +92,7 @@ describe 'Upper', ->
     @camelC.exec(@ctx).should.equal 'ABCDEFG123'
 
   it 'should return null when uppering null', ->
-    should(@nullString.exec(@ctx)).be.null
+    should(@nullString.exec(@ctx)).be.null()
 
 describe 'Lower', ->
   @beforeEach ->
@@ -111,7 +111,7 @@ describe 'Lower', ->
     @camelC.exec(@ctx).should.equal 'abcdefg123'
 
   it 'should return null when lowering null', ->
-    should(@nullString.exec(@ctx)).be.null
+    should(@nullString.exec(@ctx)).be.null()
 
 # TODO: Verify behavior since its different than JS
 describe 'Indexer', ->
@@ -122,16 +122,16 @@ describe 'Indexer', ->
     @helloWorldSix.exec(@ctx).should.equal 'o'
 
   it 'should not return null on index 0 (no longer out of bounds)', ->
-    should(() => @helloWorldZero.exec(@ctx)).not.be.null
+    should(() => @helloWorldZero.exec(@ctx)).not.be.null()
 
   it 'should return null on index 20 (out of bounds)', ->
-    should(() => @helloWorldTwenty.exec(@ctx)).be.null
+    should(() => @helloWorldTwenty.exec(@ctx)).be.null()
 
   it 'should return null when string is null', ->
-    should(@nullString.exec(@ctx)).be.null
+    should(@nullString.exec(@ctx)).be.null()
 
   it 'should return null when index is null', ->
-    should(@nullIndex.exec(@ctx)).be.null
+    should(@nullIndex.exec(@ctx)).be.null()
 
 describe 'PositionOf', ->
   @beforeEach ->
@@ -147,10 +147,10 @@ describe 'PositionOf', ->
     @notFound.exec(@ctx).should.equal -1
 
   it 'should return null when pattern is null', ->
-    should(@nullPattern.exec(@ctx)).be.null
+    should(@nullPattern.exec(@ctx)).be.null()
 
   it 'should return null when string is null', ->
-    should(@nullString.exec(@ctx)).be.null
+    should(@nullString.exec(@ctx)).be.null()
 
 describe 'Substring', ->
   @beforeEach ->
@@ -181,10 +181,10 @@ describe 'Substring', ->
     @negativeLength.exec(@ctx).should.equal ''
 
   it 'should return null when string is null', ->
-    should(@nullString.exec(@ctx)).be.null
+    should(@nullString.exec(@ctx)).be.null()
 
   it 'should return null when start is null', ->
-    should(@nullStart.exec(@ctx)).be.null
+    should(@nullStart.exec(@ctx)).be.null()
 
 describe 'StartsWith', ->
   @beforeEach ->
