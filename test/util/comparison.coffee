@@ -52,8 +52,8 @@ describe 'equals', ->
     equals(new Foo('abc', [1,2,3]), new Foo('abc', [1,2,3])).should.be.true()
     equals(new Foo('abc', [1,2,3]), new Foo('abcd', [1,2,3])).should.be.false()
     equals(new Foo('abc', new Bar('xyz', [1,2,3])), new Foo('abc', new Bar('xyz', [1,2,3]))).should.be.true()
-    should.not.exist(equals(new Foo('abc', new Bar('xyz')), new Foo('abc', new Bar('xyz')))) # because Bar is missing components
-    should.not.exist(equals(new Foo('abc', new Bar('xyz')), new Foo('abc', new Bar('xyz',999))))
+    should(equals(new Foo('abc', new Bar('xyz')), new Foo('abc', new Bar('xyz')))).be.null() # because Bar is missing components
+    should(equals(new Foo('abc', new Bar('xyz')), new Foo('abc', new Bar('xyz',999)))).be.null()
     equals(new Foo('abc', [1,2,3]), new Bar('abc', [1,2,3])).should.be.false()
     equals(new Bar('abc', [1,2,3]), new Foo('abc', [1,2,3])).should.be.false()
 
@@ -62,7 +62,7 @@ describe 'equals', ->
       constructor: (@prop1, @prop2) ->
 
     containsNull = new Foo('abc', null)
-    should.not.exist(equals(containsNull, containsNull))
+    should(equals(containsNull, containsNull)).be.null()
 
   it 'should delegate to equals method when available', ->
     class Int
