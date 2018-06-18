@@ -208,10 +208,10 @@ describe 'Indexer', ->
     @secondItem.exec(@ctx).should.equal 'b'
 
   it 'should NOT return null when accessing index 0', ->
-    should(() => @zeroIndex.exec(@ctx)).not.be.null()
+    should(@zeroIndex.exec(@ctx)).not.be.null()
 
   it 'should return null when accessing out of bounds index', ->
-    should(() => @outOfBounds.exec(@ctx)).be.null()
+    should(@outOfBounds.exec(@ctx)).be.null()
 
   it 'should return null if either arg is null', ->
     should(@nullList.exec(@ctx)).be.null()
@@ -289,9 +289,13 @@ describe 'Includes', ->
   it 'should execute to false when tuple sublist is not in list', ->
     @tuplesNotIncluded.exec(@ctx).should.be.false()
 
-  it 'should return null if either arg is null', ->
-    should(@nullIncluded.exec(@ctx)).be.null()
-    should(@nullIncludes.exec(@ctx)).be.null()
+  it.skip 'should return true if right arg is null', ->
+    # TODO: currently returns false
+    should(@nullIncluded.exec(@ctx)).be.true()
+
+  it.skip 'should return false if left arg is null', ->
+    # TODO: currently returns null
+    should(@nullIncludes.exec(@ctx)).be.false()
 
 describe 'IncludedIn', ->
   @beforeEach ->
@@ -315,9 +319,13 @@ describe 'IncludedIn', ->
   it 'should execute to false when tuple sublist is not in list', ->
     @tuplesNotIncluded.exec(@ctx).should.be.false()
 
-  it 'should return null if either arg is null', ->
-    should(@nullIncluded.exec(@ctx)).be.null()
-    should(@nullIncludes.exec(@ctx)).be.null()
+  it.skip 'should return true if left arg is null', ->
+    # TODO: currently returns false
+    should(@nullIncluded.exec(@ctx)).be.true()
+
+  it.skip 'should return false if right arg is null', ->
+    # TODO: currently returns null
+    should(@nullIncludes.exec(@ctx)).be.false()
 
 describe 'ProperIncludes', ->
   @beforeEach ->

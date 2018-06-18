@@ -122,10 +122,10 @@ describe 'Indexer', ->
     @helloWorldSix.exec(@ctx).should.equal 'o'
 
   it 'should not return null on index 0 (no longer out of bounds)', ->
-    should(() => @helloWorldZero.exec(@ctx)).not.be.null()
+    should(@helloWorldZero.exec(@ctx)).not.be.null()
 
   it 'should return null on index 20 (out of bounds)', ->
-    should(() => @helloWorldTwenty.exec(@ctx)).be.null()
+    should(@helloWorldTwenty.exec(@ctx)).be.null()
 
   it 'should return null when string is null', ->
     should(@nullString.exec(@ctx)).be.null()
