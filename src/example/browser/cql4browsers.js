@@ -44170,7 +44170,7 @@
       case '[object Object]':
         return compareObjects(a, b, equals);
       case '[object Function]':
-        return a === b;
+        return a.toString() === b.toString();
     }
     return false;
   };
