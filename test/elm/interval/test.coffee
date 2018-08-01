@@ -1284,3 +1284,4 @@ describe 'DateTimeIntervalCollapse', ->
 
   it 'throws collapsing imprecise interval', ->
     should(() => @dateTimeCollapseImpreciseBoundary.exec(@ctx)).throw("Collapse does not support imprecise dates at this time.")
+
