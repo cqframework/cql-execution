@@ -14,6 +14,16 @@ module.exports.Uncertainty = class Uncertainty
     if typeof @high is 'undefined' then @high = @low
     if @low? and @high? and gt(@low, @high) then [@low, @high] = [@high, @low]
 
+   copy: ->
+    newLow = @low
+    newHigh = @high
+    if typeof @low.copy == 'function'
+      newLow = @low.copy()
+    if typeof @high.copy == 'function'
+      newHigh = @high.copy();
+
+    new Uncertainty(newLow, newHigh)
+
   isPoint: () ->
     # Note: Can't use normal equality, as that fails for Javascript dates
     # TODO: Fix after we don't need to support Javascript date uncertainties anymore

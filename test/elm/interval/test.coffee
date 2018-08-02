@@ -1284,3 +1284,12 @@ describe 'DateTimeIntervalCollapse', ->
 
   it 'throws collapsing imprecise interval', ->
     should(() => @dateTimeCollapseImpreciseBoundary.exec(@ctx)).throw("Collapse does not support imprecise dates at this time.")
+
+  it 'should not modify collapse parameters', ->
+    interval1CopyString = @dateTime1_6Interval.toString()
+    interval2CopyString = @dateTime5_12Interval.toString()
+    interval3CopyString = @dateTime10_15Interval.toString()
+    @dateTimeCollapseOverlapMultipleCombine.exec(@ctx)
+    @dateTime1_6Interval.toString().should.eql interval1CopyString
+    @dateTime5_12Interval.toString().should.eql interval2CopyString
+    @dateTime10_15Interval.toString().should.eql interval3CopyString

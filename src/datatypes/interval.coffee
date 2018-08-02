@@ -13,6 +13,16 @@ module.exports.Interval = class Interval
     isInterval:
       get: -> true
 
+  copy: ->
+    newLow = @low
+    newHigh = @high
+    if typeof @low.copy == 'function'
+      newLow = @low.copy()
+    if typeof @high.copy == 'function'
+      newHigh = @high.copy();
+
+    new Interval(newLow, newHigh, @lowClosed, @highClosed)
+
   contains: (item, precision) ->
     if item instanceof Interval then throw new Error("Argument to contains must be a point")
     closed = @toClosed()
