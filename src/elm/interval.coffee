@@ -180,10 +180,10 @@ module.exports.Collapse = class Collapse extends Expression
       collapsedIntervals = []
       a = intervals.shift()
       b = intervals.shift()
-      if a.copy?()
-        a = a.copy()
-      if b.copy?()
-        b = b.copy()
+      if typeof a.copy == 'function'
+       a = a.copy()
+      if typeof b.copy == 'function'
+       b = b.copy()
 
       while b
         if typeof b.low.sameOrBefore == 'function'

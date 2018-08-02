@@ -17,9 +17,9 @@ module.exports.Uncertainty = class Uncertainty
    copy: ->
     newLow = @low
     newHigh = @high
-    if @low.copy?()
+    if typeof @low.copy == 'function'
       newLow = @low.copy()
-    if @high.copy?()
+    if typeof @high.copy == 'function'
       newHigh = @high.copy();
 
     new Uncertainty(newLow, newHigh)

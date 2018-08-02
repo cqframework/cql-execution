@@ -1249,13 +1249,13 @@
     });
 
     Interval.prototype.copy = function() {
-      var base, base1, newHigh, newLow;
+      var newHigh, newLow;
       newLow = this.low;
       newHigh = this.high;
-      if (typeof (base = this.low).copy === "function" ? base.copy() : void 0) {
+      if (typeof this.low.copy === 'function') {
         newLow = this.low.copy();
       }
-      if (typeof (base1 = this.high).copy === "function" ? base1.copy() : void 0) {
+      if (typeof this.high.copy === 'function') {
         newHigh = this.high.copy();
       }
       return new Interval(newLow, newHigh, this.lowClosed, this.highClosed);
@@ -1710,13 +1710,13 @@
     }
 
     Uncertainty.prototype.copy = function() {
-      var base, base1, newHigh, newLow;
+      var newHigh, newLow;
       newLow = this.low;
       newHigh = this.high;
-      if (typeof (base = this.low).copy === "function" ? base.copy() : void 0) {
+      if (typeof this.low.copy === 'function') {
         newLow = this.low.copy();
       }
-      if (typeof (base1 = this.high).copy === "function" ? base1.copy() : void 0) {
+      if (typeof this.high.copy === 'function') {
         newHigh = this.high.copy();
       }
       return new Uncertainty(newLow, newHigh);
@@ -4309,10 +4309,10 @@
         collapsedIntervals = [];
         a = intervals.shift();
         b = intervals.shift();
-        if (typeof a.copy === "function" ? a.copy() : void 0) {
+        if (typeof a.copy === 'function') {
           a = a.copy();
         }
-        if (typeof b.copy === "function" ? b.copy() : void 0) {
+        if (typeof b.copy === 'function') {
           b = b.copy();
         }
         while (b) {
