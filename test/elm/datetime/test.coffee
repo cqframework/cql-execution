@@ -284,7 +284,7 @@ describe 'DateTimeComponentFrom', ->
     }
 
   it 'should return null for null date', ->
-    should(@nullDate.exec(@ctx)).be.null
+    should(@nullDate.exec(@ctx)).be.null()
 
 describe 'DateFrom', ->
   @beforeEach ->
@@ -312,7 +312,7 @@ describe 'DateFrom', ->
     should.not.exist date.millisecond
 
   it 'should return null for null date', ->
-    should(@nullDate.exec(@ctx)).be.null
+    should(@nullDate.exec(@ctx)).be.null()
 
 describe 'TimeFrom', ->
   @beforeEach ->
@@ -340,7 +340,7 @@ describe 'TimeFrom', ->
     should.not.exist noTime.millisecond
 
   it 'should return null for null date', ->
-    should(@nullDate.exec(@ctx)).be.null
+    should(@nullDate.exec(@ctx)).be.null()
 
 describe 'TimezoneFrom', ->
   @beforeEach ->
@@ -354,7 +354,7 @@ describe 'TimezoneFrom', ->
     @defaultTimezone.exec(@ctx).should.equal (new Date()).getTimezoneOffset() / 60 * -1
 
   it 'should return null for null date', ->
-    should(@nullDate.exec(@ctx)).be.null
+    should(@nullDate.exec(@ctx)).be.null()
 
 describe 'SameAs', ->
   @beforeEach ->
@@ -403,13 +403,13 @@ describe 'SameAs', ->
     @sameHourWrongTimezone.exec(@ctx).should.be.false()
 
   it 'should handle imprecision', ->
-    should(@impreciseHour.exec(@ctx)).be.null
+    should(@impreciseHour.exec(@ctx)).be.null()
     @impreciseHourWrongDay.exec(@ctx).should.be.false()
 
   it 'should return null when either argument is null', ->
-    should(@nullLeft.exec(@ctx)).be.null
-    should(@nullRight.exec(@ctx)).be.null
-    should(@nullBoth.exec(@ctx)).be.null
+    should(@nullLeft.exec(@ctx)).be.null()
+    should(@nullRight.exec(@ctx)).be.null()
+    should(@nullBoth.exec(@ctx)).be.null()
 
 describe 'SameOrAfter', ->
   @beforeEach ->
@@ -461,7 +461,7 @@ describe 'SameOrAfter', ->
     @dayBeforeMonthAfter.exec(@ctx).should.be.true()
 
   it 'should handle imprecision', ->
-    should(@impreciseDay.exec(@ctx)).be.null
+    should(@impreciseDay.exec(@ctx)).be.null()
     @impreciseDayMonthAfter.exec(@ctx).should.be.true()
     @impreciseDayMonthBefore.exec(@ctx).should.be.false()
 
@@ -471,9 +471,9 @@ describe 'SameOrAfter', ->
     @hourBeforeNormalizeZones.exec(@ctx).should.be.false()
 
   it 'should return null when either argument is null', ->
-    should(@nullLeft.exec(@ctx)).be.null
-    should(@nullRight.exec(@ctx)).be.null
-    should(@nullBoth.exec(@ctx)).be.null
+    should(@nullLeft.exec(@ctx)).be.null()
+    should(@nullRight.exec(@ctx)).be.null()
+    should(@nullBoth.exec(@ctx)).be.null()
 
 describe 'SameOrBefore', ->
   @beforeEach ->
@@ -525,7 +525,7 @@ describe 'SameOrBefore', ->
     @dayBeforeMonthAfter.exec(@ctx).should.be.false()
 
   it 'should handle imprecision', ->
-    should(@impreciseDay.exec(@ctx)).be.null
+    should(@impreciseDay.exec(@ctx)).be.null()
     @impreciseDayMonthAfter.exec(@ctx).should.be.false()
     @impreciseDayMonthBefore.exec(@ctx).should.be.true()
 
@@ -535,9 +535,9 @@ describe 'SameOrBefore', ->
     @hourBeforeNormalizeZones.exec(@ctx).should.be.true()
 
   it 'should return null when either argument is null', ->
-    should(@nullLeft.exec(@ctx)).be.null
-    should(@nullRight.exec(@ctx)).be.null
-    should(@nullBoth.exec(@ctx)).be.null
+    should(@nullLeft.exec(@ctx)).be.null()
+    should(@nullRight.exec(@ctx)).be.null()
+    should(@nullBoth.exec(@ctx)).be.null()
 
 describe 'After', ->
   @beforeEach ->
@@ -584,7 +584,7 @@ describe 'After', ->
     @before.exec(@ctx).should.be.false()
 
   it 'should handle imprecision', ->
-    should(@impreciseDay.exec(@ctx)).be.null
+    should(@impreciseDay.exec(@ctx)).be.null()
     @impreciseDayMonthAfter.exec(@ctx).should.be.true()
     @impreciseDayMonthBefore.exec(@ctx).should.be.false()
 
@@ -594,9 +594,9 @@ describe 'After', ->
     @hourBeforeNormalizeZones.exec(@ctx).should.be.false()
 
   it 'should return null when either argument is null', ->
-    should(@nullLeft.exec(@ctx)).be.null
-    should(@nullRight.exec(@ctx)).be.null
-    should(@nullBoth.exec(@ctx)).be.null
+    should(@nullLeft.exec(@ctx)).be.null()
+    should(@nullRight.exec(@ctx)).be.null()
+    should(@nullBoth.exec(@ctx)).be.null()
 
 describe 'Before', ->
   @beforeEach ->
@@ -643,7 +643,7 @@ describe 'Before', ->
     @before.exec(@ctx).should.be.true()
 
   it 'should handle imprecision', ->
-    should(@impreciseDay.exec(@ctx)).be.null
+    should(@impreciseDay.exec(@ctx)).be.null()
     @impreciseDayMonthAfter.exec(@ctx).should.be.false()
     @impreciseDayMonthBefore.exec(@ctx).should.be.true()
 
@@ -653,9 +653,9 @@ describe 'Before', ->
     @hourBeforeNormalizeZones.exec(@ctx).should.be.true()
 
   it 'should return null when either argument is null', ->
-    should(@nullLeft.exec(@ctx)).be.null
-    should(@nullRight.exec(@ctx)).be.null
-    should(@nullBoth.exec(@ctx)).be.null
+    should(@nullLeft.exec(@ctx)).be.null()
+    should(@nullRight.exec(@ctx)).be.null()
+    should(@nullBoth.exec(@ctx)).be.null()
 
 describe 'DifferenceBetween', ->
   @beforeEach ->
@@ -728,32 +728,32 @@ describe 'DifferenceBetween Comparisons', ->
 
   it 'should calculate days between > x', ->
     @greaterThan25DaysAfter.exec(@ctx).should.be.true()
-    should(@greaterThan40DaysAfter.exec(@ctx)).be.null
+    should(@greaterThan40DaysAfter.exec(@ctx)).be.null()
     @greaterThan80DaysAfter.exec(@ctx).should.be.false()
 
   it 'should calculate days between >= x', ->
     @greaterOrEqualTo25DaysAfter.exec(@ctx).should.be.true()
-    should(@greaterOrEqualTo40DaysAfter.exec(@ctx)).be.null
+    should(@greaterOrEqualTo40DaysAfter.exec(@ctx)).be.null()
     @greaterOrEqualTo80DaysAfter.exec(@ctx).should.be.false()
 
   it 'should calculate days between = x', ->
     @equalTo25DaysAfter.exec(@ctx).should.be.false()
-    should(@equalTo40DaysAfter.exec(@ctx)).be.null
+    should(@equalTo40DaysAfter.exec(@ctx)).be.null()
     @equalTo80DaysAfter.exec(@ctx).should.be.false()
 
   it 'should calculate days between <= x', ->
     @lessOrEqualTo25DaysAfter.exec(@ctx).should.be.false()
-    should(@lessOrEqualTo40DaysAfter.exec(@ctx)).be.null
+    should(@lessOrEqualTo40DaysAfter.exec(@ctx)).be.null()
     @lessOrEqualTo80DaysAfter.exec(@ctx).should.be.true()
 
   it 'should calculate days between < x', ->
     @lessThan25DaysAfter.exec(@ctx).should.be.false()
-    should(@lessThan40DaysAfter.exec(@ctx)).be.null
+    should(@lessThan40DaysAfter.exec(@ctx)).be.null()
     @lessThan80DaysAfter.exec(@ctx).should.be.true()
 
   it 'should calculate other way too', ->
     @twentyFiveDaysLessThanDaysBetween.exec(@ctx).should.be.true()
-    should(@fortyDaysEqualToDaysBetween.exec(@ctx)).be.null
+    should(@fortyDaysEqualToDaysBetween.exec(@ctx)).be.null()
     @twentyFiveDaysGreaterThanDaysBetween.exec(@ctx).should.be.false()
 
   it 'should properly determine that Sep to Dec is NOT <= 2 months', ->

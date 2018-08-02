@@ -58,12 +58,12 @@ describe 'DateTimeInterval.contains', ->
     new Interval(null, date).contains(early).should.be.true()
     new Interval(null, date).contains(late).should.be.false()
     new Interval(null,date,false,true).contains(date).should.be.true()
-    should(new Interval(null,date,false,true).contains(early)).be.null
+    should(new Interval(null,date,false,true).contains(early)).be.null()
     new Interval(null,date,false,true).contains(late).should.be.false()
     new Interval(date,null).contains(late).should.be.true()
     new Interval(date,null).contains(early).should.be.false()
     new Interval(date,null,true,false).contains(date).should.be.true()
-    should(new Interval(date,null,true,false).contains(late)).be.null
+    should(new Interval(date,null,true,false).contains(late)).be.null()
     new Interval(date,null,true,false).contains(early).should.be.false()
 
   it 'should properly handle imprecision', ->
@@ -89,7 +89,7 @@ describe 'DateTimeInterval.contains', ->
 
   it 'should return null when checking if interval contains null point', ->
     date = DateTime.parse('2012-01-01T00:00:00.0')
-    should(new Interval(date,null,true,false).contains(null)).be.null
+    should(new Interval(date,null,true,false).contains(null)).be.null()
 
   it 'should throw when the argument is an interval', ->
     should(() => @all2012.closed.contains @all2012.open).throw(Error)
@@ -586,33 +586,33 @@ describe 'DateTimeInterval.equals', ->
 
   it 'should properly handle imprecision', ->
     [x, y] = xy @dIvl.sameAs
-    should(x.closed.equals(y.toMinute)).be.null
-    should(x.toHour.equals(y.toMinute)).be.null
+    should(x.closed.equals(y.toMinute)).be.null()
+    should(x.toHour.equals(y.toMinute)).be.null()
 
     [x, y] = xy @dIvl.before
     x.toMonth.equals(y.toMonth).should.be.false()
-    should(x.toYear.equals(y.closed)).be.null
+    should(x.toYear.equals(y.closed)).be.null()
 
     [x, y] = xy @dIvl.meets
     x.toMonth.equals(y.toMonth).should.be.false()
-    should(x.toYear.equals(y.closed)).be.null
+    should(x.toYear.equals(y.closed)).be.null()
 
     [x, y] = xy @dIvl.overlaps
     x.toMonth.equals(y.toMonth).should.be.false()
-    should(x.toYear.equals(y.closed)).be.null
+    should(x.toYear.equals(y.closed)).be.null()
 
     [x, y] = xy @dIvl.begins
     x.toMinute.equals(y.toMinute).should.be.false()
-    should(x.toYear.equals(y.closed)).be.null
+    should(x.toYear.equals(y.closed)).be.null()
 
     [x, y] = xy @dIvl.during
     x.toMonth.equals(y.toMonth).should.be.false()
     y.toMonth.equals(x.toMonth).should.be.false()
-    should(x.toYear.equals(y.closed)).be.null
+    should(x.toYear.equals(y.closed)).be.null()
 
     [x, y] = xy @dIvl.ends
     x.toMinute.equals(y.toMinute).should.be.false()
-    should(x.toYear.equals(y.closed)).be.null
+    should(x.toYear.equals(y.closed)).be.null()
 
   it 'should be false for equality with points', ->
     point = DateTime.parse('2012-01-01T00:00:00.0+00')
@@ -637,26 +637,26 @@ describe 'DateTimeInterval.union', ->
 
   it 'should properly calculate before/after unions', ->
     [x, y] = xy @dIvl.before
-    should(x.closed.union(y.closed)).be.null
-    should(x.closed.union(y.open)).be.null
-    should(x.open.union(y.closed)).be.null
-    should(x.open.union(y.open)).be.null
-    should(y.closed.union(x.closed)).be.null
-    should(y.closed.union(x.open)).be.null
-    should(y.open.union(x.closed)).be.null
-    should(y.open.union(x.open)).be.null
+    should(x.closed.union(y.closed)).be.null()
+    should(x.closed.union(y.open)).be.null()
+    should(x.open.union(y.closed)).be.null()
+    should(x.open.union(y.open)).be.null()
+    should(y.closed.union(x.closed)).be.null()
+    should(y.closed.union(x.open)).be.null()
+    should(y.open.union(x.closed)).be.null()
+    should(y.open.union(x.open)).be.null()
 
   it 'should properly calculate meets unions', ->
     [x, y] = xy @dIvl.meets
     z = @all2012
     x.closed.union(y.closed).equals(z.closed).should.be.true()
-    should(x.closed.union(y.open)).be.null
-    should(x.open.union(y.closed)).be.null
-    should(x.open.union(y.open)).be.null
+    should(x.closed.union(y.open)).be.null()
+    should(x.open.union(y.closed)).be.null()
+    should(x.open.union(y.open)).be.null()
     y.closed.union(x.closed).equals(z.closed).should.be.true()
-    should(y.closed.union(x.open)).be.null
-    should(y.open.union(x.closed)).be.null
-    should(y.open.union(x.open)).be.null
+    should(y.closed.union(x.open)).be.null()
+    should(y.open.union(x.closed)).be.null()
+    should(y.open.union(x.open)).be.null()
 
   it 'should properly calculate left/right overlapping unions', ->
     [x, y] = xy @dIvl.overlaps
@@ -1616,12 +1616,12 @@ describe 'IntegerInterval.contains', ->
     new Interval(null, 0).contains(-123456789).should.be.true()
     new Interval(null, 0).contains(1).should.be.false()
     new Interval(null,0,false,true).contains(0).should.be.true()
-    should(new Interval(null,0,false,true).contains(-123456789)).be.null
+    should(new Interval(null,0,false,true).contains(-123456789)).be.null()
     new Interval(null,0,false,true).contains(1).should.be.false()
     new Interval(0,null).contains(123456789).should.be.true()
     new Interval(0,null).contains(-1).should.be.false()
     new Interval(0,null,true,false).contains(0).should.be.true()
-    should(new Interval(0,null,true,false).contains(123456789)).be.null
+    should(new Interval(0,null,true,false).contains(123456789)).be.null()
     new Interval(0,null,true,false).contains(-1).should.be.false()
 
   it 'should properly handle imprecision', ->
@@ -2131,14 +2131,14 @@ describe 'IntegerInterval.equals', ->
     uIvl.equals(ivl).should.be.false()
 
     ivl = new Interval(10, 15)
-    should(ivl.equals(uIvl)).be.null
-    should(uIvl.equals(ivl)).be.null
+    should(ivl.equals(uIvl)).be.null()
+    should(uIvl.equals(ivl)).be.null()
 
     ivl = new Interval(5, 20)
-    should(ivl.equals(uIvl)).be.null
-    should(uIvl.equals(ivl)).be.null
+    should(ivl.equals(uIvl)).be.null()
+    should(uIvl.equals(ivl)).be.null()
 
-    should(uIvl.equals(uIvl)).be.null
+    should(uIvl.equals(uIvl)).be.null()
 
   it 'should be false for equality with points', ->
     point = 3
@@ -2163,26 +2163,26 @@ describe 'IntegerInterval.union', ->
 
   it 'should properly calculate before/after unions', ->
     [x, y] = xy @iIvl.before
-    should(x.closed.union(y.closed)).be.null
-    should(x.closed.union(y.open)).be.null
-    should(x.open.union(y.closed)).be.null
-    should(x.open.union(y.open)).be.null
-    should(y.closed.union(x.closed)).be.null
-    should(y.closed.union(x.open)).be.null
-    should(y.open.union(x.closed)).be.null
-    should(y.open.union(x.open)).be.null
+    should(x.closed.union(y.closed)).be.null()
+    should(x.closed.union(y.open)).be.null()
+    should(x.open.union(y.closed)).be.null()
+    should(x.open.union(y.open)).be.null()
+    should(y.closed.union(x.closed)).be.null()
+    should(y.closed.union(x.open)).be.null()
+    should(y.open.union(x.closed)).be.null()
+    should(y.open.union(x.open)).be.null()
 
   it 'should properly calculate meets unions', ->
     [x, y] = xy @iIvl.meets
     z = @zeroToHundred
     x.closed.union(y.closed).equals(z.closed).should.be.true()
-    should(x.closed.union(y.open)).be.null
-    should(x.open.union(y.closed)).be.null
-    should(x.open.union(y.open)).be.null
+    should(x.closed.union(y.open)).be.null()
+    should(x.open.union(y.closed)).be.null()
+    should(x.open.union(y.open)).be.null()
     y.closed.union(x.closed).equals(z.closed).should.be.true()
-    should(y.closed.union(x.open)).be.null
-    should(y.open.union(x.closed)).be.null
-    should(y.open.union(x.open)).be.null
+    should(y.closed.union(x.open)).be.null()
+    should(y.open.union(x.closed)).be.null()
+    should(y.open.union(x.open)).be.null()
 
   it 'should properly calculate left/right overlapping unions', ->
     [x, y] = xy @iIvl.overlaps
@@ -2237,8 +2237,8 @@ describe 'IntegerInterval.union', ->
     uIvl.union(ivl).equals(ivl).should.be.true()
 
     ivl = new Interval(-100, 0)
-    should(ivl.union(uIvl)).be.null
-    should(uIvl.union(ivl)).be.null
+    should(ivl.union(uIvl)).be.null()
+    should(uIvl.union(ivl)).be.null()
 
     ivl = new Interval(8, 17)
     i = ivl.union(uIvl)

@@ -7,7 +7,7 @@ describe 'Nil', ->
     setup @, data
 
   it 'should execute as null', ->
-    should(@nil.exec(@ctx)).be.null
+    should(@nil.exec(@ctx)).be.null()
 
 describe 'IsNull', ->
   @beforeEach ->
@@ -36,19 +36,19 @@ describe 'Coalesce', ->
     @fooNullNullBar.exec(@ctx).should.equal 'Foo'
 
   it 'should return null when they are all null', ->
-    should(@allNull.exec(@ctx)).be.null
+    should(@allNull.exec(@ctx)).be.null()
 
   it 'should return first non-null in array', ->
     @listArgStartsWithNull.exec(@ctx).should.equal 'One'
 
   it 'should return null for all-null array', ->
-    should(@listArgAllNull.exec(@ctx)).be.null
+    should(@listArgAllNull.exec(@ctx)).be.null()
 
   it 'should be able to handle ExpressionRef with list', ->
     @listExpressionRef.exec(@ctx).should.equal 'One'
 
   it 'should be able to handle Retrieve as list', ->
-    should(@retrieveAsList.exec(@ctx)).be.null
+    should(@retrieveAsList.exec(@ctx)).be.null()
 
   it 'should be able to handle Union as list', ->
     @unionAsList.exec(@ctx).should.equal 3

@@ -69,7 +69,7 @@ describe 'Equal', ->
     @equalDatesOpenClosed.exec(@ctx).should.be.true()
 
   it 'should operate correctly with imprecision', ->
-    should(@sameDays.exec(@ctx)).be.null
+    should(@sameDays.exec(@ctx)).be.null()
     @differentDays.exec(@ctx).should.be.false()
 
 describe 'NotEqual', ->
@@ -101,7 +101,7 @@ describe 'NotEqual', ->
     @equalDatesOpenClosed.exec(@ctx).should.be.false()
 
   it 'should operate correctly with imprecision', ->
-    should(@sameDays.exec(@ctx)).be.null
+    should(@sameDays.exec(@ctx)).be.null()
     @differentDays.exec(@ctx).should.be.true()
 
 describe 'Contains', ->
@@ -126,33 +126,33 @@ describe 'Contains', ->
     @negInfBegContainsInt.exec(@ctx).should.be.true()
     @negInfBegNotContainsInt.exec(@ctx).should.be.false()
     @unknownBegContainsInt.exec(@ctx).should.be.true()
-    should(@unknownBegMayContainInt.exec(@ctx)).be.null
+    should(@unknownBegMayContainInt.exec(@ctx)).be.null()
     @unknownBegNotContainsInt.exec(@ctx).should.be.false()
     @posInfEndContainsInt.exec(@ctx).should.be.true()
     @posInfEndNotContainsInt.exec(@ctx).should.be.false()
     @unknownEndContainsInt.exec(@ctx).should.be.true()
-    should(@unknownEndMayContainInt.exec(@ctx)).be.null
+    should(@unknownEndMayContainInt.exec(@ctx)).be.null()
     @unknownEndNotContainsInt.exec(@ctx).should.be.false()
 
   it 'should correctly handle null endpoints (date)', ->
     @negInfBegContainsDate.exec(@ctx).should.be.true()
     @negInfBegNotContainsDate.exec(@ctx).should.be.false()
     @unknownBegContainsDate.exec(@ctx).should.be.true()
-    should(@unknownBegMayContainDate.exec(@ctx)).be.null
+    should(@unknownBegMayContainDate.exec(@ctx)).be.null()
     @unknownBegNotContainsDate.exec(@ctx).should.be.false()
     @posInfEndContainsDate.exec(@ctx).should.be.true()
     @posInfEndNotContainsDate.exec(@ctx).should.be.false()
     @unknownEndContainsDate.exec(@ctx).should.be.true()
-    should(@unknownEndMayContainDate.exec(@ctx)).be.null
+    should(@unknownEndMayContainDate.exec(@ctx)).be.null()
     @unknownEndNotContainsDate.exec(@ctx).should.be.false()
 
   it 'should correctly handle imprecision', ->
     @containsImpreciseDate.exec(@ctx).should.be.true()
     @notContainsImpreciseDate.exec(@ctx).should.be.false()
-    should(@mayContainImpreciseDate.exec(@ctx)).be.null
+    should(@mayContainImpreciseDate.exec(@ctx)).be.null()
     @impreciseContainsDate.exec(@ctx).should.be.true()
     @impreciseNotContainsDate.exec(@ctx).should.be.false()
-    should(@impreciseMayContainDate.exec(@ctx)).be.null
+    should(@impreciseMayContainDate.exec(@ctx)).be.null()
 
   it 'should correctly compare using the requested precision', ->
     @containsDayOfDateLowEdge.exec(@ctx).should.be.true()
@@ -190,33 +190,33 @@ describe 'In', ->
     @negInfBegContainsInt.exec(@ctx).should.be.true()
     @negInfBegNotContainsInt.exec(@ctx).should.be.false()
     @unknownBegContainsInt.exec(@ctx).should.be.true()
-    should(@unknownBegMayContainInt.exec(@ctx)).be.null
+    should(@unknownBegMayContainInt.exec(@ctx)).be.null()
     @unknownBegNotContainsInt.exec(@ctx).should.be.false()
     @posInfEndContainsInt.exec(@ctx).should.be.true()
     @posInfEndNotContainsInt.exec(@ctx).should.be.false()
     @unknownEndContainsInt.exec(@ctx).should.be.true()
-    should(@unknownEndMayContainInt.exec(@ctx)).be.null
+    should(@unknownEndMayContainInt.exec(@ctx)).be.null()
     @unknownEndNotContainsInt.exec(@ctx).should.be.false()
 
   it 'should correctly handle null endpoints (date)', ->
     @negInfBegContainsDate.exec(@ctx).should.be.true()
     @negInfBegNotContainsDate.exec(@ctx).should.be.false()
     @unknownBegContainsDate.exec(@ctx).should.be.true()
-    should(@unknownBegMayContainDate.exec(@ctx)).be.null
+    should(@unknownBegMayContainDate.exec(@ctx)).be.null()
     @unknownBegNotContainsDate.exec(@ctx).should.be.false()
     @posInfEndContainsDate.exec(@ctx).should.be.true()
     @posInfEndNotContainsDate.exec(@ctx).should.be.false()
     @unknownEndContainsDate.exec(@ctx).should.be.true()
-    should(@unknownEndMayContainDate.exec(@ctx)).be.null
+    should(@unknownEndMayContainDate.exec(@ctx)).be.null()
     @unknownEndNotContainsDate.exec(@ctx).should.be.false()
 
   it 'should correctly handle imprecision', ->
     @containsImpreciseDate.exec(@ctx).should.be.true()
     @notContainsImpreciseDate.exec(@ctx).should.be.false()
-    should(@mayContainImpreciseDate.exec(@ctx)).be.null
+    should(@mayContainImpreciseDate.exec(@ctx)).be.null()
     @impreciseContainsDate.exec(@ctx).should.be.true()
     @impreciseNotContainsDate.exec(@ctx).should.be.false()
-    should(@impreciseMayContainDate.exec(@ctx)).be.null
+    should(@impreciseMayContainDate.exec(@ctx)).be.null()
 
   it 'should correctly compare using the requested precision', ->
     @containsDayOfDateLowEdge.exec(@ctx).should.be.true()
@@ -250,33 +250,33 @@ describe 'Includes', ->
     @negInfBegIncludesIntIvl.exec(@ctx).should.be.true()
     @negInfBegNotIncludesIntIvl.exec(@ctx).should.be.false()
     @unknownBegIncludesIntIvl.exec(@ctx).should.be.true()
-    should(@unknownBegMayIncludeIntIvl.exec(@ctx)).be.null
+    should(@unknownBegMayIncludeIntIvl.exec(@ctx)).be.null()
     @unknownBegNotIncludesIntIvl.exec(@ctx).should.be.false()
     @posInfEndIncludesIntIvl.exec(@ctx).should.be.true()
     @posInfEndNotIncludesIntIvl.exec(@ctx).should.be.false()
     @unknownEndIncludesIntIvl.exec(@ctx).should.be.true()
-    should(@unknownEndMayIncludeIntIvl.exec(@ctx)).be.null
+    should(@unknownEndMayIncludeIntIvl.exec(@ctx)).be.null()
     @unknownEndNotIncludesIntIvl.exec(@ctx).should.be.false()
 
   it 'should correctly handle null endpoints (date)', ->
     @negInfBegIncludesDateIvl.exec(@ctx).should.be.true()
     @negInfBegNotIncludesDateIvl.exec(@ctx).should.be.false()
     @unknownBegIncludesDateIvl.exec(@ctx).should.be.true()
-    should(@unknownBegMayIncludeDateIvl.exec(@ctx)).be.null
+    should(@unknownBegMayIncludeDateIvl.exec(@ctx)).be.null()
     @unknownBegNotIncludesDateIvl.exec(@ctx).should.be.false()
     @posInfEndIncludesDateIvl.exec(@ctx).should.be.true()
     @posInfEndNotIncludesDateIvl.exec(@ctx).should.be.false()
     @unknownEndIncludesDateIvl.exec(@ctx).should.be.true()
-    should(@unknownEndMayIncludeDateIvl.exec(@ctx)).be.null
+    should(@unknownEndMayIncludeDateIvl.exec(@ctx)).be.null()
     @unknownEndNotIncludesDateIvl.exec(@ctx).should.be.false()
 
   it 'should correctly handle imprecision', ->
     @includesImpreciseDateIvl.exec(@ctx).should.be.true()
     @notIncludesImpreciseDateIvl.exec(@ctx).should.be.false()
-    should(@mayIncludeImpreciseDateIvl.exec(@ctx)).be.null
+    should(@mayIncludeImpreciseDateIvl.exec(@ctx)).be.null()
     @impreciseIncludesDateIvl.exec(@ctx).should.be.true()
     @impreciseNotIncludesDateIvl.exec(@ctx).should.be.false()
-    should(@impreciseMayIncludeDateIvl.exec(@ctx)).be.null
+    should(@impreciseMayIncludeDateIvl.exec(@ctx)).be.null()
 
   it 'should correctly compare using the requested precision', ->
     @includesDayOfIvlLowEdge.exec(@ctx).should.be.true()
@@ -311,7 +311,7 @@ describe 'ProperlyIncludes', ->
   it 'should correctly handle null endpoints (int)', ->
     @posInfEndProperlyIncludesIntIvl.exec(@ctx).should.be.true()
     @posInfEndNotProperlyIncludesIntIvl.exec(@ctx).should.be.false()
-    should(@unknownEndMayProperlyIncludeIntIvl.exec(@ctx)).be.null
+    should(@unknownEndMayProperlyIncludeIntIvl.exec(@ctx)).be.null()
 
   it 'should correctly compare using the requested precision', ->
     @properlyIncludesDayOfIvlLowEdge.exec(@ctx).should.be.true()
@@ -341,33 +341,33 @@ describe 'IncludedIn', ->
     @negInfBegIncludedInIntIvl.exec(@ctx).should.be.true()
     @negInfBegNotIncludedInIntIvl.exec(@ctx).should.be.false()
     @unknownBegIncludedInIntIvl.exec(@ctx).should.be.true()
-    should(@unknownBegMayBeIncludedInIntIvl.exec(@ctx)).be.null
+    should(@unknownBegMayBeIncludedInIntIvl.exec(@ctx)).be.null()
     @unknownBegNotIncludedInIntIvl.exec(@ctx).should.be.false()
     @posInfEndIncludedInIntIvl.exec(@ctx).should.be.true()
     @posInfEndNotIncludedInIntIvl.exec(@ctx).should.be.false()
     @unknownEndIncludedInIntIvl.exec(@ctx).should.be.true()
-    should(@unknownEndMayBeIncludedInIntIvl.exec(@ctx)).be.null
+    should(@unknownEndMayBeIncludedInIntIvl.exec(@ctx)).be.null()
     @unknownEndNotIncludedInIntIvl.exec(@ctx).should.be.false()
 
   it 'should correctly handle null endpoints (date)', ->
     @negInfBegIncludedInDateIvl.exec(@ctx).should.be.true()
     @negInfBegNotIncludedInDateIvl.exec(@ctx).should.be.false()
     @unknownBegIncludedInDateIvl.exec(@ctx).should.be.true()
-    should(@unknownBegMayBeIncludedInDateIvl.exec(@ctx)).be.null
+    should(@unknownBegMayBeIncludedInDateIvl.exec(@ctx)).be.null()
     @unknownBegNotIncludedInDateIvl.exec(@ctx).should.be.false()
     @posInfEndIncludedInDateIvl.exec(@ctx).should.be.true()
     @posInfEndNotIncludedInDateIvl.exec(@ctx).should.be.false()
     @unknownEndIncludedInDateIvl.exec(@ctx).should.be.true()
-    should(@unknownEndMayBeIncludedInDateIvl.exec(@ctx)).be.null
+    should(@unknownEndMayBeIncludedInDateIvl.exec(@ctx)).be.null()
     @unknownEndNotIncludedInDateIvl.exec(@ctx).should.be.false()
 
   it 'should correctly handle imprecision', ->
     @includesImpreciseDateIvl.exec(@ctx).should.be.true()
     @notIncludesImpreciseDateIvl.exec(@ctx).should.be.false()
-    should(@mayIncludeImpreciseDateIvl.exec(@ctx)).be.null
+    should(@mayIncludeImpreciseDateIvl.exec(@ctx)).be.null()
     @impreciseIncludesDateIvl.exec(@ctx).should.be.true()
     @impreciseNotIncludesDateIvl.exec(@ctx).should.be.false()
-    should(@impreciseMayIncludeDateIvl.exec(@ctx)).be.null
+    should(@impreciseMayIncludeDateIvl.exec(@ctx)).be.null()
 
   it 'should correctly compare using the requested precision', ->
     @includesDayOfIvlLowEdge.exec(@ctx).should.be.true()
@@ -402,7 +402,7 @@ describe 'ProperlyIncludedIn', ->
   it 'should correctly handle null endpoints (int)', ->
     @posInfEndProperlyIncludedInDateIvl.exec(@ctx).should.be.true()
     @posInfEndNotProperlyIncludedInDateIvl.exec(@ctx).should.be.false()
-    should(@unknownEndMayBeProperlyIncludedInDateIvl.exec(@ctx)).be.null
+    should(@unknownEndMayBeProperlyIncludedInDateIvl.exec(@ctx)).be.null()
 
   it 'should correctly compare using the requested precision', ->
     @properlyIncludesDayOfIvlLowEdge.exec(@ctx).should.be.true()
@@ -430,7 +430,7 @@ describe 'After', ->
 
   it 'should correctly handle null endpoints (int)', ->
     @negInfBegNotAfterIntIvl.exec(@ctx).should.be.false()
-    should(@unknownBegMayBeAfterIntIvl.exec(@ctx)).be.null
+    should(@unknownBegMayBeAfterIntIvl.exec(@ctx)).be.null()
     @unknownBegNotAfterIntIvl.exec(@ctx).should.be.false()
     @posInfEndAfterIntIvl.exec(@ctx).should.be.true()
     @posInfEndNotAfterIntIvl.exec(@ctx).should.be.false()
@@ -439,7 +439,7 @@ describe 'After', ->
 
   it 'should correctly handle null endpoints (date)', ->
     @negInfBegNotAfterDateIvl.exec(@ctx).should.be.false()
-    should(@unknownBegMayBeAfterDateIvl.exec(@ctx)).be.null
+    should(@unknownBegMayBeAfterDateIvl.exec(@ctx)).be.null()
     @unknownBegNotAfterDateIvl.exec(@ctx).should.be.false()
     @posInfEndAfterDateIvl.exec(@ctx).should.be.true()
     @posInfEndNotAfterDateIvl.exec(@ctx).should.be.false()
@@ -449,10 +449,10 @@ describe 'After', ->
   it 'should correctly handle imprecision', ->
     @afterImpreciseDateIvl.exec(@ctx).should.be.true()
     @notAfterImpreciseDateIvl.exec(@ctx).should.be.false()
-    should(@mayBeAfterImpreciseDateIvl.exec(@ctx)).be.null
+    should(@mayBeAfterImpreciseDateIvl.exec(@ctx)).be.null()
     @impreciseAfterDateIvl.exec(@ctx).should.be.true()
     @impreciseNotAfterDateIvl.exec(@ctx).should.be.false()
-    should(@impreciseMayBeAfterDateIvl.exec(@ctx)).be.null
+    should(@impreciseMayBeAfterDateIvl.exec(@ctx)).be.null()
 
   it 'should correctly compare using the requested precision', ->
     @afterDayOfIvl.exec(@ctx).should.be.true()
@@ -482,7 +482,7 @@ describe 'Before', ->
     @unknownBegBeforeIntIvl.exec(@ctx).should.be.true()
     @unknownBegNotBeforeIntIvl.exec(@ctx).should.be.false()
     @posInfEndNotBeforeIntIvl.exec(@ctx).should.be.false()
-    should(@unknownEndMayBeBeforeIntIvl.exec(@ctx)).be.null
+    should(@unknownEndMayBeBeforeIntIvl.exec(@ctx)).be.null()
     @unknownEndNotBeforeIntIvl.exec(@ctx).should.be.false()
 
   it 'should correctly handle null endpoints (date)', ->
@@ -491,16 +491,16 @@ describe 'Before', ->
     @unknownBegBeforeDateIvl.exec(@ctx).should.be.true()
     @unknownBegNotBeforeDateIvl.exec(@ctx).should.be.false()
     @posInfEndNotBeforeDateIvl.exec(@ctx).should.be.false()
-    should(@unknownEndMayBeBeforeDateIvl.exec(@ctx)).be.null
+    should(@unknownEndMayBeBeforeDateIvl.exec(@ctx)).be.null()
     @unknownEndNotBeforeDateIvl.exec(@ctx).should.be.false()
 
   it 'should correctly handle imprecision', ->
     @beforeImpreciseDateIvl.exec(@ctx).should.be.true()
     @notBeforeImpreciseDateIvl.exec(@ctx).should.be.false()
-    should(@mayBeBeforeImpreciseDateIvl.exec(@ctx)).be.null
+    should(@mayBeBeforeImpreciseDateIvl.exec(@ctx)).be.null()
     @impreciseBeforeDateIvl.exec(@ctx).should.be.true()
     @impreciseNotBeforeDateIvl.exec(@ctx).should.be.false()
-    should(@impreciseMayBeBeforeDateIvl.exec(@ctx)).be.null
+    should(@impreciseMayBeBeforeDateIvl.exec(@ctx)).be.null()
 
   it 'should correctly compare using the requested precision', ->
     @afterDayOfIvl.exec(@ctx).should.be.false()
@@ -534,39 +534,39 @@ describe 'Meets', ->
     @negInfBegNotMeetsIntIvl.exec(@ctx).should.be.false()
     @intIvlNotMeetsNegInfBeg.exec(@ctx).should.be.false()
     @unknownBegMeetsBeforeIntIvl.exec(@ctx).should.be.true()
-    should(@unknownBegMayMeetAfterIntIvl.exec(@ctx)).be.null
+    should(@unknownBegMayMeetAfterIntIvl.exec(@ctx)).be.null()
     @unknownBegNotMeetsIntIvl.exec(@ctx).should.be.false()
-    should(@intIvlMayMeetBeforeUnknownBeg.exec(@ctx)).be.null
+    should(@intIvlMayMeetBeforeUnknownBeg.exec(@ctx)).be.null()
     @posInfEndMeetsAfterIntIvl.exec(@ctx).should.be.true()
     @posInfEndNotMeetsIntIvl.exec(@ctx).should.be.false()
     @intIvlNotMeetsPosInfEnd.exec(@ctx).should.be.false()
     @unknownEndMeetsAfterIntIvl.exec(@ctx).should.be.true()
-    should(@unknownEndMayMeetBeforeIntIvl.exec(@ctx)).be.null
+    should(@unknownEndMayMeetBeforeIntIvl.exec(@ctx)).be.null()
     @unknownEndNotMeetsIntIvl.exec(@ctx).should.be.false()
-    should(@intIvlMayMeetAfterUnknownEnd.exec(@ctx)).be.null
+    should(@intIvlMayMeetAfterUnknownEnd.exec(@ctx)).be.null()
 
   it 'should correctly handle null endpoints (date)', ->
     @negInfBegMeetsBeforeDateIvl.exec(@ctx).should.be.true()
     @negInfBegNotMeetsDateIvl.exec(@ctx).should.be.false()
     @dateIvlNotMeetsNegInfBeg.exec(@ctx).should.be.false()
     @unknownBegMeetsBeforeDateIvl.exec(@ctx).should.be.true()
-    should(@unknownBegMayMeetAfterDateIvl.exec(@ctx)).be.null
+    should(@unknownBegMayMeetAfterDateIvl.exec(@ctx)).be.null()
     @unknownBegNotMeetsDateIvl.exec(@ctx).should.be.false()
-    should(@dateIvlMayMeetBeforeUnknownBeg.exec(@ctx)).be.null
+    should(@dateIvlMayMeetBeforeUnknownBeg.exec(@ctx)).be.null()
     @posInfEndMeetsAfterDateIvl.exec(@ctx).should.be.true()
     @posInfEndNotMeetsDateIvl.exec(@ctx).should.be.false()
     @dateIvlNotMeetsPosInfEnd.exec(@ctx).should.be.false()
     @unknownEndMeetsAfterDateIvl.exec(@ctx).should.be.true()
-    should(@unknownEndMayMeetBeforeDateIvl.exec(@ctx)).be.null
+    should(@unknownEndMayMeetBeforeDateIvl.exec(@ctx)).be.null()
     @unknownEndNotMeetsDateIvl.exec(@ctx).should.be.false()
-    should(@dateIvlMayMeetAfterUnknownEnd.exec(@ctx)).be.null
+    should(@dateIvlMayMeetAfterUnknownEnd.exec(@ctx)).be.null()
 
   it 'should correctly handle imprecision', ->
-    should(@mayMeetAfterImpreciseDateIvl.exec(@ctx)).be.null
-    should(@mayMeetBeforeImpreciseDateIvl.exec(@ctx)).be.null
+    should(@mayMeetAfterImpreciseDateIvl.exec(@ctx)).be.null()
+    should(@mayMeetBeforeImpreciseDateIvl.exec(@ctx)).be.null()
     @notMeetsImpreciseDateIvl.exec(@ctx).should.be.false()
-    should(@impreciseMayMeetAfterDateIvl.exec(@ctx)).be.null
-    should(@impreciseMayMeetBeforeDateIvl.exec(@ctx)).be.null
+    should(@impreciseMayMeetAfterDateIvl.exec(@ctx)).be.null()
+    should(@impreciseMayMeetBeforeDateIvl.exec(@ctx)).be.null()
     @impreciseNotMeetsDateIvl.exec(@ctx).should.be.false()
 
   it 'should correctly compare using the requested precision', ->
@@ -601,7 +601,7 @@ describe 'MeetsAfter', ->
     @negInfBegNotMeetsIntIvl.exec(@ctx).should.be.false()
     @intIvlNotMeetsNegInfBeg.exec(@ctx).should.be.false()
     @unknownBegMeetsBeforeIntIvl.exec(@ctx).should.be.false()
-    should(@unknownBegMayMeetAfterIntIvl.exec(@ctx)).be.null
+    should(@unknownBegMayMeetAfterIntIvl.exec(@ctx)).be.null()
     @unknownBegNotMeetsIntIvl.exec(@ctx).should.be.false()
     @intIvlMayMeetBeforeUnknownBeg.exec(@ctx).should.be.false()
     @posInfEndMeetsAfterIntIvl.exec(@ctx).should.be.true()
@@ -610,14 +610,14 @@ describe 'MeetsAfter', ->
     @unknownEndMeetsAfterIntIvl.exec(@ctx).should.be.true()
     @unknownEndMayMeetBeforeIntIvl.exec(@ctx).should.be.false()
     @unknownEndNotMeetsIntIvl.exec(@ctx).should.be.false()
-    should(@intIvlMayMeetAfterUnknownEnd.exec(@ctx)).be.null
+    should(@intIvlMayMeetAfterUnknownEnd.exec(@ctx)).be.null()
 
   it 'should correctly handle null endpoints (date)', ->
     @negInfBegMeetsBeforeDateIvl.exec(@ctx).should.be.false()
     @negInfBegNotMeetsDateIvl.exec(@ctx).should.be.false()
     @dateIvlNotMeetsNegInfBeg.exec(@ctx).should.be.false()
     @unknownBegMeetsBeforeDateIvl.exec(@ctx).should.be.false()
-    should(@unknownBegMayMeetAfterDateIvl.exec(@ctx)).be.null
+    should(@unknownBegMayMeetAfterDateIvl.exec(@ctx)).be.null()
     @unknownBegNotMeetsDateIvl.exec(@ctx).should.be.false()
     @dateIvlMayMeetBeforeUnknownBeg.exec(@ctx).should.be.false()
     @posInfEndMeetsAfterDateIvl.exec(@ctx).should.be.true()
@@ -626,13 +626,13 @@ describe 'MeetsAfter', ->
     @unknownEndMeetsAfterDateIvl.exec(@ctx).should.be.true()
     @unknownEndMayMeetBeforeDateIvl.exec(@ctx).should.be.false()
     @unknownEndNotMeetsDateIvl.exec(@ctx).should.be.false()
-    should(@dateIvlMayMeetAfterUnknownEnd.exec(@ctx)).be.null
+    should(@dateIvlMayMeetAfterUnknownEnd.exec(@ctx)).be.null()
 
   it 'should correctly handle imprecision', ->
-    should(@mayMeetAfterImpreciseDateIvl.exec(@ctx)).be.null
+    should(@mayMeetAfterImpreciseDateIvl.exec(@ctx)).be.null()
     @mayMeetBeforeImpreciseDateIvl.exec(@ctx).should.be.false()
     @notMeetsImpreciseDateIvl.exec(@ctx).should.be.false()
-    should(@impreciseMayMeetAfterDateIvl.exec(@ctx)).be.null
+    should(@impreciseMayMeetAfterDateIvl.exec(@ctx)).be.null()
     @impreciseMayMeetBeforeDateIvl.exec(@ctx).should.be.false()
     @impreciseNotMeetsDateIvl.exec(@ctx).should.be.false()
 
@@ -670,12 +670,12 @@ describe 'MeetsBefore', ->
     @unknownBegMeetsBeforeIntIvl.exec(@ctx).should.be.true()
     @unknownBegMayMeetAfterIntIvl.exec(@ctx).should.be.false()
     @unknownBegNotMeetsIntIvl.exec(@ctx).should.be.false()
-    should(@intIvlMayMeetBeforeUnknownBeg.exec(@ctx)).be.null
+    should(@intIvlMayMeetBeforeUnknownBeg.exec(@ctx)).be.null()
     @posInfEndMeetsAfterIntIvl.exec(@ctx).should.be.false()
     @posInfEndNotMeetsIntIvl.exec(@ctx).should.be.false()
     @intIvlNotMeetsPosInfEnd.exec(@ctx).should.be.false()
     @unknownEndMeetsAfterIntIvl.exec(@ctx).should.be.false()
-    should(@unknownEndMayMeetBeforeIntIvl.exec(@ctx)).be.null
+    should(@unknownEndMayMeetBeforeIntIvl.exec(@ctx)).be.null()
     @unknownEndNotMeetsIntIvl.exec(@ctx).should.be.false()
     @intIvlMayMeetAfterUnknownEnd.exec(@ctx).should.be.false()
 
@@ -686,21 +686,21 @@ describe 'MeetsBefore', ->
     @unknownBegMeetsBeforeDateIvl.exec(@ctx).should.be.true()
     @unknownBegMayMeetAfterDateIvl.exec(@ctx).should.be.false()
     @unknownBegNotMeetsDateIvl.exec(@ctx).should.be.false()
-    should(@dateIvlMayMeetBeforeUnknownBeg.exec(@ctx)).be.null
+    should(@dateIvlMayMeetBeforeUnknownBeg.exec(@ctx)).be.null()
     @posInfEndMeetsAfterDateIvl.exec(@ctx).should.be.false()
     @posInfEndNotMeetsDateIvl.exec(@ctx).should.be.false()
     @dateIvlNotMeetsPosInfEnd.exec(@ctx).should.be.false()
     @unknownEndMeetsAfterDateIvl.exec(@ctx).should.be.false()
-    should(@unknownEndMayMeetBeforeDateIvl.exec(@ctx)).be.null
+    should(@unknownEndMayMeetBeforeDateIvl.exec(@ctx)).be.null()
     @unknownEndNotMeetsDateIvl.exec(@ctx).should.be.false()
     @dateIvlMayMeetAfterUnknownEnd.exec(@ctx).should.be.false()
 
   it 'should correctly handle imprecision', ->
     @mayMeetAfterImpreciseDateIvl.exec(@ctx).should.be.false()
-    should(@mayMeetBeforeImpreciseDateIvl.exec(@ctx)).be.null
+    should(@mayMeetBeforeImpreciseDateIvl.exec(@ctx)).be.null()
     @notMeetsImpreciseDateIvl.exec(@ctx).should.be.false()
     @impreciseMayMeetAfterDateIvl.exec(@ctx).should.be.false()
-    should(@impreciseMayMeetBeforeDateIvl.exec(@ctx)).be.null
+    should(@impreciseMayMeetBeforeDateIvl.exec(@ctx)).be.null()
     @impreciseNotMeetsDateIvl.exec(@ctx).should.be.false()
 
   it 'should correctly compare using the requested precision', ->
@@ -751,7 +751,7 @@ describe 'OverlapsDateTime', ->
     @noImpreciseOverlap.exec(@ctx).should.be.false()
 
   it 'should return null for imprecise overlaps that are unknown', ->
-    should(@unknownOverlap.exec(@ctx)).be.null
+    should(@unknownOverlap.exec(@ctx)).be.null()
 
   it 'should correctly compare using the requested precision', ->
     # NOTE: Some assertions commented out because cql-to-elm is WRONGLY translating 'overlaps' to 'OverlapsAfter'!
@@ -813,7 +813,7 @@ describe 'OverlapsAfterDateTime', ->
     @noImpreciseOverlap.exec(@ctx).should.be.false()
 
   it 'should return null for imprecise overlaps that are unknown', ->
-    should(@unknownOverlap.exec(@ctx)).be.null
+    should(@unknownOverlap.exec(@ctx)).be.null()
 
   it 'should correctly compare using the requested precision', ->
     @overlapsBeforeDayOfIvlEdge.exec(@ctx).should.be.false()
@@ -874,7 +874,7 @@ describe 'OverlapsBeforeDateTime', ->
     @noImpreciseOverlap.exec(@ctx).should.be.false()
 
   it 'should return null for imprecise overlaps that are unknown', ->
-    should(@unknownOverlap.exec(@ctx)).be.null
+    should(@unknownOverlap.exec(@ctx)).be.null()
 
   it 'should correctly compare using the requested precision', ->
     @overlapsBeforeDayOfIvlEdge.exec(@ctx).should.be.true()
@@ -903,8 +903,8 @@ describe 'Width', ->
     @intWidthMinToThree.exec(@ctx).should.equal Math.pow(2,31)+3
 
   it 'should calculate the width of infinite intervals', ->
-    should(@intWidthThreeToUnknown.exec(@ctx)).be.null
-    should(@intWidthUnknownToThree.exec(@ctx)).be.null
+    should(@intWidthThreeToUnknown.exec(@ctx)).be.null()
+    should(@intWidthUnknownToThree.exec(@ctx)).be.null()
 
 describe 'Start', ->
   @beforeEach ->
@@ -925,7 +925,7 @@ describe 'Starts', ->
     setup @, data
 
   it 'should calculate to null', ->
-    should(@testStartsNull.exec(@ctx)).be.null
+    should(@testStartsNull.exec(@ctx)).be.null()
 
   it 'should calculate integer intervals properly', ->
     @integerIntervalStartsTrue.exec(@ctx).should.be.true()
@@ -953,7 +953,7 @@ describe 'Ends', ->
     setup @, data
 
   it 'should calculate to null', ->
-    should(@testEndsNull.exec(@ctx)).be.null
+    should(@testEndsNull.exec(@ctx)).be.null()
 
   it 'should calculate integer intervals properly', ->
     @integerIntervalEndsTrue.exec(@ctx).should.be.true()
@@ -1003,7 +1003,7 @@ describe 'IntegerIntervalUnion', ->
     y.equals(x).should.be.true()
 
   it 'should properly calculate before/after unions', ->
-    should(@intBeforeUnion.exec(@ctx)).be.null
+    should(@intBeforeUnion.exec(@ctx)).be.null()
 
   it 'should properly calculate meets unions', ->
     x = @intFullInterval.exec(@ctx)
@@ -1063,7 +1063,7 @@ describe 'DateTimeIntervalUnion', ->
     y.equals(x).should.be.true()
 
   it 'should properly calculate before/after unions', ->
-    should(@dateTimeBeforeUnion.exec(@ctx)).be.null
+    should(@dateTimeBeforeUnion.exec(@ctx)).be.null()
 
   it 'should properly calculate meets unions', ->
     x = @dateTimeFullInterval.exec(@ctx)
@@ -1098,7 +1098,7 @@ describe 'IntegerIntervalExcept', ->
     setup @, data
 
    it 'should properly calculate sameAs except', ->
-    should(@intSameAsExcept.exec(@ctx)).be.null
+    should(@intSameAsExcept.exec(@ctx)).be.null()
 
   it 'should properly calculate before/after except', ->
     @intBeforeExcept.exec(@ctx).should.eql new Interval(0,4)
@@ -1114,13 +1114,13 @@ describe 'IntegerIntervalExcept', ->
     y.equals(x).should.be.true()
 
   it 'should properly calculate begins/begun by except', ->
-    should(@intBeginsExcept.exec(@ctx)).be.null
+    should(@intBeginsExcept.exec(@ctx)).be.null()
 
   it 'should properly calculate includes/included by except', ->
-    should(@intDuringExcept.exec(@ctx)).be.null
+    should(@intDuringExcept.exec(@ctx)).be.null()
 
   it 'should properly calculate ends/ended by except', ->
-    should(@intEndsExcept.exec(@ctx)).be.null
+    should(@intEndsExcept.exec(@ctx)).be.null()
 
 # TODO
 # it 'should properly handle imprecision', ->
@@ -1130,7 +1130,7 @@ describe 'DateTimeIntervalExcept', ->
     setup @, data
 
   it 'should properly calculate sameAs except', ->
-    should(@dateTimeSameAsExcept.exec(@ctx)).be.null
+    should(@dateTimeSameAsExcept.exec(@ctx)).be.null()
 
   it 'should properly calculate before/after except', ->
     @dateTimeBeforeExcept.exec(@ctx).should.eql new Interval(new DateTime(2012, 1, 1, 0, 0, 0, 0), new DateTime(2012, 4, 1, 0, 0, 0, 0))
@@ -1146,13 +1146,13 @@ describe 'DateTimeIntervalExcept', ->
     y.equals(x).should.be.true()
 
   it 'should properly calculate begins/begun by except', ->
-    should(@dateTimeBeginsExcept.exec(@ctx)).be.null
+    should(@dateTimeBeginsExcept.exec(@ctx)).be.null()
 
   it 'should properly calculate includes/included by except', ->
-    should(@dateTimeDuringExcept.exec(@ctx)).be.null
+    should(@dateTimeDuringExcept.exec(@ctx)).be.null()
 
   it 'should properly calculate ends/ended by except', ->
-    should(@dateTimeEndsExcept.exec(@ctx)).be.null
+    should(@dateTimeEndsExcept.exec(@ctx)).be.null()
 
 # TODO
 # it 'should properly handle imprecision', ->
@@ -1167,7 +1167,7 @@ describe 'IntegerIntervalIntersect', ->
     x.equals(y).should.be.true()
 
   it 'should properly calculate before/after intersect', ->
-    should(@intBeforeIntersect.exec(@ctx)).be.null
+    should(@intBeforeIntersect.exec(@ctx)).be.null()
 
   it 'should properly calculate meets intersect', ->
     x = @intMeetsInterval.exec(@ctx)
@@ -1204,7 +1204,7 @@ describe 'DateTimeIntervalIntersect', ->
     x.equals(y).should.be.true()
 
   it 'should properly calculate before/after intersect', ->
-    should(@dateTimeBeforeIntersect.exec(@ctx)).be.null
+    should(@dateTimeBeforeIntersect.exec(@ctx)).be.null()
 
   it 'should properly calculate meets intersect', ->
     x = @dateTimeMeetsInterval.exec(@ctx)
