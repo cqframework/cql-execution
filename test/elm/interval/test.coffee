@@ -1,7 +1,6 @@
 should = require 'should'
 setup = require '../../setup'
 data = require './data'
-helpers = require '../../helpers'
 { Interval } = require '../../../lib/datatypes/interval'
 { DateTime } = require '../../../lib/datatypes/datetime'
 
