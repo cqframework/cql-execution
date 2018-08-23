@@ -3180,51 +3180,50 @@ module.exports['Union'] = {
                   "localId" : "66",
                   "type" : "Union",
                   "operand" : [ {
-                     "localId" : "61",
+                     "localId" : "56",
                      "type" : "Union",
                      "operand" : [ {
-                        "localId" : "56",
-                        "type" : "Union",
-                        "operand" : [ {
-                           "localId" : "51",
-                           "type" : "List",
-                           "element" : [ {
-                              "localId" : "48",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "1",
-                              "type" : "Literal"
-                           }, {
-                              "localId" : "49",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "2",
-                              "type" : "Literal"
-                           }, {
-                              "localId" : "50",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "3",
-                              "type" : "Literal"
-                           } ]
+                        "localId" : "51",
+                        "type" : "List",
+                        "element" : [ {
+                           "localId" : "48",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
                         }, {
-                           "localId" : "55",
-                           "type" : "List",
-                           "element" : [ {
-                              "localId" : "52",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "4",
-                              "type" : "Literal"
-                           }, {
-                              "localId" : "53",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "5",
-                              "type" : "Literal"
-                           }, {
-                              "localId" : "54",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "6",
-                              "type" : "Literal"
-                           } ]
+                           "localId" : "49",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2",
+                           "type" : "Literal"
+                        }, {
+                           "localId" : "50",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "3",
+                           "type" : "Literal"
                         } ]
                      }, {
+                        "localId" : "55",
+                        "type" : "List",
+                        "element" : [ {
+                           "localId" : "52",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "4",
+                           "type" : "Literal"
+                        }, {
+                           "localId" : "53",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "5",
+                           "type" : "Literal"
+                        }, {
+                           "localId" : "54",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "6",
+                           "type" : "Literal"
+                        } ]
+                     } ]
+                  }, {
+                     "type" : "Union",
+                     "operand" : [ {
                         "localId" : "60",
                         "type" : "List",
                         "element" : [ {
@@ -3243,25 +3242,25 @@ module.exports['Union'] = {
                            "value" : "9",
                            "type" : "Literal"
                         } ]
-                     } ]
-                  }, {
-                     "localId" : "65",
-                     "type" : "List",
-                     "element" : [ {
-                        "localId" : "62",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "10",
-                        "type" : "Literal"
                      }, {
-                        "localId" : "63",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "11",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "64",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "12",
-                        "type" : "Literal"
+                        "localId" : "65",
+                        "type" : "List",
+                        "element" : [ {
+                           "localId" : "62",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "10",
+                           "type" : "Literal"
+                        }, {
+                           "localId" : "63",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        }, {
+                           "localId" : "64",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        } ]
                      } ]
                   } ]
                }, {
@@ -4779,71 +4778,70 @@ module.exports['Intersect'] = {
                "localId" : "84",
                "type" : "Intersect",
                "operand" : [ {
-                  "localId" : "77",
+                  "localId" : "70",
                   "type" : "Intersect",
                   "operand" : [ {
-                     "localId" : "70",
-                     "type" : "Intersect",
-                     "operand" : [ {
-                        "localId" : "63",
-                        "type" : "List",
-                        "element" : [ {
-                           "localId" : "58",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
-                           "type" : "Literal"
-                        }, {
-                           "localId" : "59",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2",
-                           "type" : "Literal"
-                        }, {
-                           "localId" : "60",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "3",
-                           "type" : "Literal"
-                        }, {
-                           "localId" : "61",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "4",
-                           "type" : "Literal"
-                        }, {
-                           "localId" : "62",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "5",
-                           "type" : "Literal"
-                        } ]
+                     "localId" : "63",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "58",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
                      }, {
-                        "localId" : "69",
-                        "type" : "List",
-                        "element" : [ {
-                           "localId" : "64",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2",
-                           "type" : "Literal"
-                        }, {
-                           "localId" : "65",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "3",
-                           "type" : "Literal"
-                        }, {
-                           "localId" : "66",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "4",
-                           "type" : "Literal"
-                        }, {
-                           "localId" : "67",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "5",
-                           "type" : "Literal"
-                        }, {
-                           "localId" : "68",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "6",
-                           "type" : "Literal"
-                        } ]
+                        "localId" : "59",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "60",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "61",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "62",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
                      } ]
                   }, {
+                     "localId" : "69",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "64",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "65",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "66",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "67",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "68",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "6",
+                        "type" : "Literal"
+                     } ]
+                  } ]
+               }, {
+                  "type" : "Intersect",
+                  "operand" : [ {
                      "localId" : "76",
                      "type" : "List",
                      "element" : [ {
@@ -4872,35 +4870,35 @@ module.exports['Intersect'] = {
                         "value" : "7",
                         "type" : "Literal"
                      } ]
-                  } ]
-               }, {
-                  "localId" : "83",
-                  "type" : "List",
-                  "element" : [ {
-                     "localId" : "78",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "4",
-                     "type" : "Literal"
                   }, {
-                     "localId" : "79",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "5",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "80",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "6",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "81",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "7",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "82",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "8",
-                     "type" : "Literal"
+                     "localId" : "83",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "78",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "79",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "80",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "6",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "81",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "7",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "82",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "8",
+                        "type" : "Literal"
+                     } ]
                   } ]
                } ]
             }
@@ -9424,7 +9422,7 @@ module.exports['Includes'] = {
             } ],
             "expression" : {
                "localId" : "97",
-               "type" : "Contains",
+               "type" : "Includes",
                "operand" : [ {
                   "localId" : "95",
                   "type" : "List",
@@ -9455,11 +9453,17 @@ module.exports['Includes'] = {
                      "type" : "Literal"
                   } ]
                }, {
-                  "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "As",
                   "operand" : {
                      "localId" : "96",
                      "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
                   }
                } ]
             }
@@ -10546,10 +10550,20 @@ module.exports['IncludedIn'] = {
             } ],
             "expression" : {
                "localId" : "106",
-               "type" : "In",
+               "type" : "IncludedIn",
                "operand" : [ {
-                  "localId" : "99",
-                  "type" : "Null"
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "99",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
                }, {
                   "localId" : "105",
                   "type" : "List",
@@ -11535,7 +11549,7 @@ module.exports['ProperIncludes'] = {
             } ],
             "expression" : {
                "localId" : "100",
-               "type" : "ProperContains",
+               "type" : "ProperIncludes",
                "operand" : [ {
                   "localId" : "98",
                   "type" : "List",
@@ -11566,11 +11580,17 @@ module.exports['ProperIncludes'] = {
                      "type" : "Literal"
                   } ]
                }, {
-                  "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "As",
                   "operand" : {
                      "localId" : "99",
                      "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
                   }
                } ]
             }
@@ -15334,8 +15354,16 @@ module.exports['ToList'] = {
                   "value" : "5",
                   "type" : "Literal"
                }, {
-                  "type" : "ToList",
-                  "operand" : {
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "3",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  },
+                  "high" : {
                      "localId" : "3",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
@@ -15372,8 +15400,16 @@ module.exports['ToList'] = {
                   "value" : "4",
                   "type" : "Literal"
                }, {
-                  "type" : "ToList",
-                  "operand" : {
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "7",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  },
+                  "high" : {
                      "localId" : "7",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",

@@ -1509,10 +1509,13 @@ module.exports['Min'] = {
                   "localId" : "66",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "60",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
-                     "type" : "Literal"
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "60",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }
                   }, {
                      "localId" : "61",
                      "value" : 2,
@@ -2179,10 +2182,13 @@ module.exports['Max'] = {
                   "localId" : "58",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "52",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "10",
-                     "type" : "Literal"
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "52",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "10",
+                        "type" : "Literal"
+                     }
                   }, {
                      "localId" : "53",
                      "value" : 1,
@@ -3546,25 +3552,37 @@ module.exports['Median'] = {
                   "localId" : "60",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "54",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "5",
-                     "type" : "Literal"
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "54",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }
                   }, {
-                     "localId" : "55",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
-                     "type" : "Literal"
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "55",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }
                   }, {
-                     "localId" : "56",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2",
-                     "type" : "Literal"
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "56",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }
                   }, {
-                     "localId" : "57",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "3",
-                     "type" : "Literal"
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "57",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }
                   }, {
                      "localId" : "58",
                      "value" : 4,
@@ -4989,20 +5007,29 @@ module.exports['Variance'] = {
                   "localId" : "39",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "34",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                     "value" : "1.0",
-                     "type" : "Literal"
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "34",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "value" : "1.0",
+                        "type" : "Literal"
+                     }
                   }, {
-                     "localId" : "35",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                     "value" : "2.0",
-                     "type" : "Literal"
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "35",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "value" : "2.0",
+                        "type" : "Literal"
+                     }
                   }, {
-                     "localId" : "36",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                     "value" : "3.0",
-                     "type" : "Literal"
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "36",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "value" : "3.0",
+                        "type" : "Literal"
+                     }
                   }, {
                      "localId" : "37",
                      "value" : 4.0,
@@ -5456,20 +5483,29 @@ module.exports['PopulationVariance'] = {
                   "localId" : "39",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "34",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                     "value" : "1.0",
-                     "type" : "Literal"
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "34",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "value" : "1.0",
+                        "type" : "Literal"
+                     }
                   }, {
-                     "localId" : "35",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                     "value" : "2.0",
-                     "type" : "Literal"
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "35",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "value" : "2.0",
+                        "type" : "Literal"
+                     }
                   }, {
-                     "localId" : "36",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                     "value" : "3.0",
-                     "type" : "Literal"
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "36",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "value" : "3.0",
+                        "type" : "Literal"
+                     }
                   }, {
                      "localId" : "37",
                      "value" : 4.0,
@@ -5929,50 +5965,46 @@ module.exports['StdDev'] = {
                "localId" : "40",
                "type" : "StdDev",
                "source" : {
-                  "type" : "Query",
-                  "source" : [ {
-                     "alias" : "X",
-                     "expression" : {
-                        "localId" : "39",
-                        "type" : "List",
-                        "element" : [ {
-                           "localId" : "34",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
-                           "type" : "Literal"
-                        }, {
-                           "localId" : "35",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2",
-                           "type" : "Literal"
-                        }, {
-                           "localId" : "36",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "3",
-                           "type" : "Literal"
-                        }, {
-                           "localId" : "37",
-                           "value" : 4,
-                           "unit" : "ml",
-                           "type" : "Quantity"
-                        }, {
-                           "localId" : "38",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "5",
-                           "type" : "Literal"
-                        } ]
+                  "localId" : "39",
+                  "type" : "List",
+                  "element" : [ {
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "34",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
                      }
-                  } ],
-                  "return" : {
-                     "distinct" : false,
-                     "expression" : {
-                        "type" : "ToDecimal",
-                        "operand" : {
-                           "name" : "X",
-                           "type" : "AliasRef"
-                        }
+                  }, {
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "35",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
                      }
-                  }
+                  }, {
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "36",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "37",
+                     "value" : 4,
+                     "unit" : "ml",
+                     "type" : "Quantity"
+                  }, {
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "38",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }
+                  } ]
                }
             }
          } ]
@@ -6421,50 +6453,46 @@ module.exports['PopulationStdDev'] = {
                "localId" : "40",
                "type" : "PopulationStdDev",
                "source" : {
-                  "type" : "Query",
-                  "source" : [ {
-                     "alias" : "X",
-                     "expression" : {
-                        "localId" : "39",
-                        "type" : "List",
-                        "element" : [ {
-                           "localId" : "34",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
-                           "type" : "Literal"
-                        }, {
-                           "localId" : "35",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2",
-                           "type" : "Literal"
-                        }, {
-                           "localId" : "36",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "3",
-                           "type" : "Literal"
-                        }, {
-                           "localId" : "37",
-                           "value" : 4,
-                           "unit" : "ml",
-                           "type" : "Quantity"
-                        }, {
-                           "localId" : "38",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "5",
-                           "type" : "Literal"
-                        } ]
+                  "localId" : "39",
+                  "type" : "List",
+                  "element" : [ {
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "34",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
                      }
-                  } ],
-                  "return" : {
-                     "distinct" : false,
-                     "expression" : {
-                        "type" : "ToDecimal",
-                        "operand" : {
-                           "name" : "X",
-                           "type" : "AliasRef"
-                        }
+                  }, {
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "35",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
                      }
-                  }
+                  }, {
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "36",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "37",
+                     "value" : 4,
+                     "unit" : "ml",
+                     "type" : "Quantity"
+                  }, {
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "38",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }
+                  } ]
                }
             }
          } ]

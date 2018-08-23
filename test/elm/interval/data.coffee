@@ -81108,11 +81108,14 @@ module.exports['IntegerIntervalCollapse'] = {
             "expression" : {
                "localId" : "52",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "51",
                   "name" : "IntEmptyIntervalList",
                   "type" : "ExpressionRef"
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "56",
@@ -81141,11 +81144,14 @@ module.exports['IntegerIntervalCollapse'] = {
             "expression" : {
                "localId" : "55",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "54",
                   "name" : "Int1_10IntervalList",
                   "type" : "ExpressionRef"
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "59",
@@ -81174,11 +81180,14 @@ module.exports['IntegerIntervalCollapse'] = {
             "expression" : {
                "localId" : "58",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "57",
                   "name" : "IntTwoItemDisjointList",
                   "type" : "ExpressionRef"
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "64",
@@ -81221,7 +81230,7 @@ module.exports['IntegerIntervalCollapse'] = {
             "expression" : {
                "localId" : "63",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "62",
                   "type" : "List",
                   "element" : [ {
@@ -81233,7 +81242,10 @@ module.exports['IntegerIntervalCollapse'] = {
                      "name" : "Int1_10Interval",
                      "type" : "ExpressionRef"
                   } ]
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "69",
@@ -81276,7 +81288,7 @@ module.exports['IntegerIntervalCollapse'] = {
             "expression" : {
                "localId" : "68",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "67",
                   "type" : "List",
                   "element" : [ {
@@ -81288,7 +81300,10 @@ module.exports['IntegerIntervalCollapse'] = {
                      "name" : "Int10_15Interval",
                      "type" : "ExpressionRef"
                   } ]
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "74",
@@ -81331,7 +81346,7 @@ module.exports['IntegerIntervalCollapse'] = {
             "expression" : {
                "localId" : "73",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "72",
                   "type" : "List",
                   "element" : [ {
@@ -81343,7 +81358,10 @@ module.exports['IntegerIntervalCollapse'] = {
                      "name" : "Int5_12Interval",
                      "type" : "ExpressionRef"
                   } ]
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "79",
@@ -81386,7 +81404,7 @@ module.exports['IntegerIntervalCollapse'] = {
             "expression" : {
                "localId" : "78",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "77",
                   "type" : "List",
                   "element" : [ {
@@ -81398,7 +81416,10 @@ module.exports['IntegerIntervalCollapse'] = {
                      "name" : "Int5_12Interval",
                      "type" : "ExpressionRef"
                   } ]
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "84",
@@ -81441,7 +81462,7 @@ module.exports['IntegerIntervalCollapse'] = {
             "expression" : {
                "localId" : "83",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "82",
                   "type" : "List",
                   "element" : [ {
@@ -81453,7 +81474,10 @@ module.exports['IntegerIntervalCollapse'] = {
                      "name" : "Int5_10Interval",
                      "type" : "ExpressionRef"
                   } ]
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "89",
@@ -81496,7 +81520,7 @@ module.exports['IntegerIntervalCollapse'] = {
             "expression" : {
                "localId" : "88",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "87",
                   "type" : "List",
                   "element" : [ {
@@ -81508,7 +81532,10 @@ module.exports['IntegerIntervalCollapse'] = {
                      "name" : "Int1_10Interval",
                      "type" : "ExpressionRef"
                   } ]
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "95",
@@ -81558,7 +81585,7 @@ module.exports['IntegerIntervalCollapse'] = {
             "expression" : {
                "localId" : "94",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "93",
                   "type" : "List",
                   "element" : [ {
@@ -81574,7 +81601,10 @@ module.exports['IntegerIntervalCollapse'] = {
                      "name" : "Int10_15Interval",
                      "type" : "ExpressionRef"
                   } ]
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          } ]
       }
@@ -83014,11 +83044,14 @@ module.exports['DateTimeIntervalCollapse'] = {
             "expression" : {
                "localId" : "178",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "177",
                   "name" : "DateTimeEmptyIntervalList",
                   "type" : "ExpressionRef"
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "182",
@@ -83047,11 +83080,14 @@ module.exports['DateTimeIntervalCollapse'] = {
             "expression" : {
                "localId" : "181",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "180",
                   "name" : "DateTime1_10IntervalList",
                   "type" : "ExpressionRef"
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "185",
@@ -83080,11 +83116,14 @@ module.exports['DateTimeIntervalCollapse'] = {
             "expression" : {
                "localId" : "184",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "183",
                   "name" : "DateTimeTwoItemDisjointList",
                   "type" : "ExpressionRef"
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "190",
@@ -83127,7 +83166,7 @@ module.exports['DateTimeIntervalCollapse'] = {
             "expression" : {
                "localId" : "189",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "188",
                   "type" : "List",
                   "element" : [ {
@@ -83139,7 +83178,10 @@ module.exports['DateTimeIntervalCollapse'] = {
                      "name" : "DateTime1_10Interval",
                      "type" : "ExpressionRef"
                   } ]
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "195",
@@ -83182,7 +83224,7 @@ module.exports['DateTimeIntervalCollapse'] = {
             "expression" : {
                "localId" : "194",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "193",
                   "type" : "List",
                   "element" : [ {
@@ -83194,7 +83236,10 @@ module.exports['DateTimeIntervalCollapse'] = {
                      "name" : "DateTime10_15Interval",
                      "type" : "ExpressionRef"
                   } ]
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "200",
@@ -83237,7 +83282,7 @@ module.exports['DateTimeIntervalCollapse'] = {
             "expression" : {
                "localId" : "199",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "198",
                   "type" : "List",
                   "element" : [ {
@@ -83249,7 +83294,10 @@ module.exports['DateTimeIntervalCollapse'] = {
                      "name" : "DateTime5_12Interval",
                      "type" : "ExpressionRef"
                   } ]
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "205",
@@ -83292,7 +83340,7 @@ module.exports['DateTimeIntervalCollapse'] = {
             "expression" : {
                "localId" : "204",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "203",
                   "type" : "List",
                   "element" : [ {
@@ -83304,7 +83352,10 @@ module.exports['DateTimeIntervalCollapse'] = {
                      "name" : "DateTime5_12Interval",
                      "type" : "ExpressionRef"
                   } ]
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "210",
@@ -83347,7 +83398,7 @@ module.exports['DateTimeIntervalCollapse'] = {
             "expression" : {
                "localId" : "209",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "208",
                   "type" : "List",
                   "element" : [ {
@@ -83359,7 +83410,10 @@ module.exports['DateTimeIntervalCollapse'] = {
                      "name" : "DateTime5_10Interval",
                      "type" : "ExpressionRef"
                   } ]
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "215",
@@ -83402,7 +83456,7 @@ module.exports['DateTimeIntervalCollapse'] = {
             "expression" : {
                "localId" : "214",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "213",
                   "type" : "List",
                   "element" : [ {
@@ -83414,7 +83468,10 @@ module.exports['DateTimeIntervalCollapse'] = {
                      "name" : "DateTime1_10Interval",
                      "type" : "ExpressionRef"
                   } ]
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "221",
@@ -83464,7 +83521,7 @@ module.exports['DateTimeIntervalCollapse'] = {
             "expression" : {
                "localId" : "220",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "219",
                   "type" : "List",
                   "element" : [ {
@@ -83480,7 +83537,10 @@ module.exports['DateTimeIntervalCollapse'] = {
                      "name" : "DateTime10_15Interval",
                      "type" : "ExpressionRef"
                   } ]
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          }, {
             "localId" : "226",
@@ -83523,7 +83583,7 @@ module.exports['DateTimeIntervalCollapse'] = {
             "expression" : {
                "localId" : "225",
                "type" : "Collapse",
-               "operand" : {
+               "operand" : [ {
                   "localId" : "224",
                   "type" : "List",
                   "element" : [ {
@@ -83535,7 +83595,10 @@ module.exports['DateTimeIntervalCollapse'] = {
                      "name" : "DateTime1_10Interval",
                      "type" : "ExpressionRef"
                   } ]
-               }
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
             }
          } ]
       }

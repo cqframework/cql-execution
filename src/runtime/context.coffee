@@ -174,7 +174,7 @@ module.exports.Context = class Context
   matchesTupleTypeSpecifier: (val, spec) ->
     typeof val is "object" &&
       ! typeIsArray(val) &&
-      spec.element.every (x) => (typeof val[x.name] is "undefined" || @matchesTypeSpecifier(val[x.name], x.type))
+      spec.element.every (x) => (typeof val[x.name] is "undefined" || @matchesTypeSpecifier(val[x.name], x.elementType))
 
   matchesIntervalTypeSpecifier: (val, spec) ->
     val.isInterval &&

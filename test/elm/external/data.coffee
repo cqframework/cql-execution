@@ -385,11 +385,8 @@ module.exports['Retrieve'] = {
                "codes" : {
                   "type" : "ToList",
                   "operand" : {
-                     "type" : "ToConcept",
-                     "operand" : {
-                        "name" : "Viral pharyngitis code",
-                        "type" : "CodeRef"
-                     }
+                     "name" : "Viral pharyngitis code",
+                     "type" : "CodeRef"
                   }
                }
             }

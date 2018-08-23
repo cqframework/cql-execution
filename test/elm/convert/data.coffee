@@ -1268,7 +1268,7 @@ module.exports['FromDateTime'] = {
                "type" : "ToString",
                "operand" : {
                   "localId" : "3",
-                  "type" : "DateTime",
+                  "type" : "Date",
                   "year" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2015",
@@ -1287,18 +1287,18 @@ module.exports['FromDateTime'] = {
                }
             }
          }, {
-            "localId" : "8",
+            "localId" : "9",
             "name" : "dateDate",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "8",
+                  "r" : "9",
                   "s" : [ {
                      "value" : [ "define ","dateDate",": " ]
                   }, {
-                     "r" : "7",
+                     "r" : "8",
                      "s" : [ {
                         "value" : [ "convert ","@2015-01-02"," to " ]
                      }, {
@@ -1311,22 +1311,26 @@ module.exports['FromDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "7",
-               "type" : "DateTime",
-               "year" : {
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "2015",
-                  "type" : "Literal"
-               },
-               "month" : {
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "1",
-                  "type" : "Literal"
-               },
-               "day" : {
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "2",
-                  "type" : "Literal"
+               "localId" : "8",
+               "type" : "ToDateTime",
+               "operand" : {
+                  "localId" : "7",
+                  "type" : "Date",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2015",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }
                }
             }
          } ]

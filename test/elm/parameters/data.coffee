@@ -80,7 +80,7 @@ module.exports['ParameterDef'] = {
                "element" : [ {
                   "localId" : "10",
                   "name" : "a",
-                  "type" : {
+                  "elementType" : {
                      "localId" : "9",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
@@ -88,7 +88,7 @@ module.exports['ParameterDef'] = {
                }, {
                   "localId" : "12",
                   "name" : "b",
-                  "type" : {
+                  "elementType" : {
                      "localId" : "11",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
@@ -96,7 +96,7 @@ module.exports['ParameterDef'] = {
                }, {
                   "localId" : "14",
                   "name" : "c",
-                  "type" : {
+                  "elementType" : {
                      "localId" : "13",
                      "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "NamedTypeSpecifier"
@@ -104,7 +104,7 @@ module.exports['ParameterDef'] = {
                }, {
                   "localId" : "17",
                   "name" : "d",
-                  "type" : {
+                  "elementType" : {
                      "localId" : "16",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
@@ -116,13 +116,13 @@ module.exports['ParameterDef'] = {
                }, {
                   "localId" : "23",
                   "name" : "e",
-                  "type" : {
+                  "elementType" : {
                      "localId" : "22",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
                         "localId" : "19",
                         "name" : "f",
-                        "type" : {
+                        "elementType" : {
                            "localId" : "18",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
@@ -130,7 +130,7 @@ module.exports['ParameterDef'] = {
                      }, {
                         "localId" : "21",
                         "name" : "g",
-                        "type" : {
+                        "elementType" : {
                            "localId" : "20",
                            "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "NamedTypeSpecifier"
@@ -912,7 +912,7 @@ module.exports['DateTimeParameterTypes'] = {
             "accessLevel" : "Public",
             "default" : {
                "localId" : "4",
-               "type" : "DateTime",
+               "type" : "Date",
                "year" : {
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2012",
@@ -1552,7 +1552,7 @@ module.exports['TupleParameterTypes'] = {
                "element" : [ {
                   "localId" : "3",
                   "name" : "Hello",
-                  "type" : {
+                  "elementType" : {
                      "localId" : "2",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
@@ -1560,7 +1560,7 @@ module.exports['TupleParameterTypes'] = {
                }, {
                   "localId" : "5",
                   "name" : "MeaningOfLife",
-                  "type" : {
+                  "elementType" : {
                      "localId" : "4",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
