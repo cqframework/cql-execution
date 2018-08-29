@@ -3,7 +3,6 @@ setup = require '../../setup'
 data = require './data'
 {Code, Concept} = require '../../../lib/datatypes/clinical'
 {DateTime} = require '../../../lib/datatypes/datetime'
-{Date} = require '../../../lib/datatypes/date'
 {Interval} = require '../../../lib/datatypes/interval'
 {Quantity} = require '../../../lib/elm/quantity'
 
