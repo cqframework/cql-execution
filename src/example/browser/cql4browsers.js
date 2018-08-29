@@ -43647,7 +43647,7 @@
     Context.prototype.matchesTupleTypeSpecifier = function(val, spec) {
       return typeof val === "object" && !typeIsArray(val) && spec.element.every((function(_this) {
         return function(x) {
-          return typeof val[x.name] === "undefined" || _this.matchesTypeSpecifier(val[x.name], x.type);
+          return typeof val[x.name] === "undefined" || _this.matchesTypeSpecifier(val[x.name], x.elementType);
         };
       })(this));
     };
