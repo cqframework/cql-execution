@@ -15293,8 +15293,32 @@ define FourInFive: 4 in 5 // CQL-to-ELM will promote the 5 to a list via ToList
 define LengthOfNull: Length(null as Integer) // CQL-to-ELM will promote the null to a list via ToList
 ###
 
+###
+Translation Error(s):
+[4:20, 4:25] Could not resolve call to operator In with signature (System.Integer,System.Integer).
+[5:20, 5:25] Could not resolve call to operator In with signature (System.Integer,System.Integer).
+###
 module.exports['ToList'] = {
    "library" : {
+      "annotation" : [ {
+         "startLine" : 4,
+         "startChar" : 20,
+         "endLine" : 4,
+         "endChar" : 25,
+         "message" : "Could not resolve call to operator In with signature (System.Integer,System.Integer).",
+         "errorType" : "semantic",
+         "errorSeverity" : "error",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 5,
+         "startChar" : 20,
+         "endLine" : 5,
+         "endChar" : 25,
+         "message" : "Could not resolve call to operator In with signature (System.Integer,System.Integer).",
+         "errorType" : "semantic",
+         "errorSeverity" : "error",
+         "type" : "CqlToElmError"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -15347,29 +15371,7 @@ module.exports['ToList'] = {
             } ],
             "expression" : {
                "localId" : "4",
-               "type" : "In",
-               "operand" : [ {
-                  "localId" : "2",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "5",
-                  "type" : "Literal"
-               }, {
-                  "lowClosed" : true,
-                  "highClosed" : true,
-                  "type" : "Interval",
-                  "low" : {
-                     "localId" : "3",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "5",
-                     "type" : "Literal"
-                  },
-                  "high" : {
-                     "localId" : "3",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "5",
-                     "type" : "Literal"
-                  }
-               } ]
+               "type" : "Null"
             }
          }, {
             "localId" : "9",
@@ -15393,29 +15395,7 @@ module.exports['ToList'] = {
             } ],
             "expression" : {
                "localId" : "8",
-               "type" : "In",
-               "operand" : [ {
-                  "localId" : "6",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "4",
-                  "type" : "Literal"
-               }, {
-                  "lowClosed" : true,
-                  "highClosed" : true,
-                  "type" : "Interval",
-                  "low" : {
-                     "localId" : "7",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "5",
-                     "type" : "Literal"
-                  },
-                  "high" : {
-                     "localId" : "7",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "5",
-                     "type" : "Literal"
-                  }
-               } ]
+               "type" : "Null"
             }
          }, {
             "localId" : "14",
