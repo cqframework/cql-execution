@@ -28,6 +28,18 @@ describe 'Exists', ->
   it 'should return true for full list', ->
     @fullList.exec(@ctx).should.be.true()
 
+  it 'should return false for list with only one null', ->
+    @listWithOneNull.exec(@ctx).should.be.false()
+
+  it 'should return false for list with only two nulls', ->
+    @listWithTwoNulls.exec(@ctx).should.be.false()
+
+  it 'should return true for list starting with null and with non-null elements', ->
+    @listStartingWithNull.exec(@ctx).should.be.true()
+
+  it 'should return true for list with null and non-null elements', ->
+    @listWithNull.exec(@ctx).should.be.true()
+
 describe 'Equal', ->
   @beforeEach ->
     setup @, data

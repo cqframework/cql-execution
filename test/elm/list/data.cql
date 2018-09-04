@@ -9,6 +9,10 @@ define EmptyList: List<Integer>{}
 // @Test: Exists
 define EmptyList: exists (List<Integer>{})
 define FullList: exists ({ 1, 2, 3 })
+define ListWithOneNull: exists ({ null })
+define ListWithTwoNulls: exists ({ null, null })
+define ListStartingWithNull: exists ({ null, 3, 4 })
+define ListWithNull: exists ({ 3, null, 5 })
 
 // @Test: Equal
 define EqualIntList: {1, 2, 3} = {1, 2, 3}
