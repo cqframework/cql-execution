@@ -23,7 +23,16 @@ module.exports.Exists = class Exists extends Expression
     super
 
   exec: (ctx) ->
-    @execArgs(ctx)?.length > 0
+    list = @execArgs(ctx)
+    # if list exists and has non empty length we need to make sure it isnt just full of nulls
+    if list?.length > 0
+      for item in list
+        # return true if we found an item that isnt null.
+        return true if item != null
+      false
+    else
+      false
+
 
 # Equal is completely handled by overloaded#Equal
 

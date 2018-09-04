@@ -4509,8 +4509,19 @@
     }
 
     Exists.prototype.exec = function(ctx) {
-      var ref2;
-      return ((ref2 = this.execArgs(ctx)) != null ? ref2.length : void 0) > 0;
+      var item, j, len, list;
+      list = this.execArgs(ctx);
+      if ((list != null ? list.length : void 0) > 0) {
+        for (j = 0, len = list.length; j < len; j++) {
+          item = list[j];
+          if (item !== null) {
+            return true;
+          }
+        }
+        return false;
+      } else {
+        return false;
+      }
     };
 
     return Exists;
