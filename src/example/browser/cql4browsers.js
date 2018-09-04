@@ -4518,10 +4518,8 @@
             return true;
           }
         }
-        return false;
-      } else {
-        return false;
       }
+      return false;
     };
 
     return Exists;

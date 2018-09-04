@@ -29,9 +29,7 @@ module.exports.Exists = class Exists extends Expression
       for item in list
         # return true if we found an item that isnt null.
         return true if item != null
-      false
-    else
-      false
+    false
 
 
 # Equal is completely handled by overloaded#Equal
