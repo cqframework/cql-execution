@@ -287,6 +287,7 @@ define ListWithOneNull: exists ({ null })
 define ListWithTwoNulls: exists ({ null, null })
 define ListStartingWithNull: exists ({ null, 3, 4 })
 define ListWithNull: exists ({ 3, null, 5 })
+define NullExists: exists (null)
 ###
 
 module.exports['Exists'] = {
@@ -623,6 +624,48 @@ module.exports['Exists'] = {
                      "value" : "5",
                      "type" : "Literal"
                   } ]
+               }
+            }
+         }, {
+            "localId" : "35",
+            "name" : "NullExists",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "35",
+                  "s" : [ {
+                     "value" : [ "define ","NullExists",": " ]
+                  }, {
+                     "r" : "34",
+                     "s" : [ {
+                        "value" : [ "exists " ]
+                     }, {
+                        "r" : "33",
+                        "s" : [ {
+                           "value" : [ "(","null",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "34",
+               "type" : "Exists",
+               "operand" : {
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "33",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
                }
             }
          } ]

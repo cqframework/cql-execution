@@ -13,6 +13,7 @@ define ListWithOneNull: exists ({ null })
 define ListWithTwoNulls: exists ({ null, null })
 define ListStartingWithNull: exists ({ null, 3, 4 })
 define ListWithNull: exists ({ 3, null, 5 })
+define NullExists: exists (null)
 
 // @Test: Equal
 define EqualIntList: {1, 2, 3} = {1, 2, 3}
