@@ -28,6 +28,24 @@ describe 'Exists', ->
   it 'should return true for full list', ->
     @fullList.exec(@ctx).should.be.true()
 
+  it 'should return false for list with only one null', ->
+    @listWithOneNull.exec(@ctx).should.be.false()
+
+  it 'should return false for list with only two nulls', ->
+    @listWithTwoNulls.exec(@ctx).should.be.false()
+
+  it 'should return true for list starting with null and with non-null elements', ->
+    @listStartingWithNull.exec(@ctx).should.be.true()
+
+  it 'should return true for list with null and non-null elements', ->
+    @listWithNull.exec(@ctx).should.be.true()
+
+  # NOTE: This test is misleading due to list promotion of the null to a list with null.
+  # Test will remain as it still tests a different list creation method. Additionally, it
+  # will be useful if list promotion is disabled.
+  it 'should return false for null argument', ->
+    @nullExists.exec(@ctx).should.be.false()
+
 describe 'Equal', ->
   @beforeEach ->
     setup @, data

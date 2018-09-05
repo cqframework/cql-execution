@@ -283,6 +283,11 @@ using QUICK
 context Patient
 define EmptyList: exists (List<Integer>{})
 define FullList: exists ({ 1, 2, 3 })
+define ListWithOneNull: exists ({ null })
+define ListWithTwoNulls: exists ({ null, null })
+define ListStartingWithNull: exists ({ null, 3, 4 })
+define ListWithNull: exists ({ 3, null, 5 })
+define NullExists: exists (null)
 ###
 
 module.exports['Exists'] = {
@@ -416,6 +421,251 @@ module.exports['Exists'] = {
                      "value" : "3",
                      "type" : "Literal"
                   } ]
+               }
+            }
+         }, {
+            "localId" : "15",
+            "name" : "ListWithOneNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "15",
+                  "s" : [ {
+                     "value" : [ "define ","ListWithOneNull",": " ]
+                  }, {
+                     "r" : "14",
+                     "s" : [ {
+                        "value" : [ "exists " ]
+                     }, {
+                        "r" : "13",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "13",
+                           "s" : [ {
+                              "value" : [ "{ ","null"," }" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "14",
+               "type" : "Exists",
+               "operand" : {
+                  "localId" : "13",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "12",
+                     "type" : "Null"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "20",
+            "name" : "ListWithTwoNulls",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "20",
+                  "s" : [ {
+                     "value" : [ "define ","ListWithTwoNulls",": " ]
+                  }, {
+                     "r" : "19",
+                     "s" : [ {
+                        "value" : [ "exists " ]
+                     }, {
+                        "r" : "18",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "18",
+                           "s" : [ {
+                              "value" : [ "{ ","null",", ","null"," }" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "19",
+               "type" : "Exists",
+               "operand" : {
+                  "localId" : "18",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "16",
+                     "type" : "Null"
+                  }, {
+                     "localId" : "17",
+                     "type" : "Null"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "26",
+            "name" : "ListStartingWithNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "26",
+                  "s" : [ {
+                     "value" : [ "define ","ListStartingWithNull",": " ]
+                  }, {
+                     "r" : "25",
+                     "s" : [ {
+                        "value" : [ "exists " ]
+                     }, {
+                        "r" : "24",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "24",
+                           "s" : [ {
+                              "value" : [ "{ ","null",", ","3",", ","4"," }" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "25",
+               "type" : "Exists",
+               "operand" : {
+                  "localId" : "24",
+                  "type" : "List",
+                  "element" : [ {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "21",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "22",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "23",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "32",
+            "name" : "ListWithNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "32",
+                  "s" : [ {
+                     "value" : [ "define ","ListWithNull",": " ]
+                  }, {
+                     "r" : "31",
+                     "s" : [ {
+                        "value" : [ "exists " ]
+                     }, {
+                        "r" : "30",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "30",
+                           "s" : [ {
+                              "value" : [ "{ ","3",", ","null",", ","5"," }" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "31",
+               "type" : "Exists",
+               "operand" : {
+                  "localId" : "30",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "27",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "28",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "29",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "35",
+            "name" : "NullExists",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "35",
+                  "s" : [ {
+                     "value" : [ "define ","NullExists",": " ]
+                  }, {
+                     "r" : "34",
+                     "s" : [ {
+                        "value" : [ "exists " ]
+                     }, {
+                        "r" : "33",
+                        "s" : [ {
+                           "value" : [ "(","null",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "34",
+               "type" : "Exists",
+               "operand" : {
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "33",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
                }
             }
          } ]
