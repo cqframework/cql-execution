@@ -153,6 +153,9 @@ describe 'Intersect', ->
   it 'should intersect two lists with a single common element', ->
     @intersectOnFive.exec(@ctx).should.eql [5]
 
+  it 'should intersect two lists with a single common element even with duplicates', ->
+    @intersectionOnFourDuplicates.exec(@ctx).should.eql [4]
+
   it 'should intersect two lists with several common elements', ->
     @intersectOnEvens.exec(@ctx).should.eql [2, 4, 6, 8, 10]
 

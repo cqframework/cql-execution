@@ -35,11 +35,13 @@ module.exports.doUnion = (a, b) ->
 
 # Delegated to by overloaded#Except
 module.exports.doExcept = (a, b) ->
-  (itm for itm in a when not doContains(b, itm))
+  setList = doDistinct(a)
+  (itm for itm in setList when not doContains(b, itm))
 
 # Delegated to by overloaded#Intersect
 module.exports.doIntersect = (a, b) ->
-  (itm for itm in a when doContains(b, itm))
+  setList = doDistinct(a)
+  (itm for itm in setList when doContains(b, itm))
 
 # ELM-only, not a product of CQL
 module.exports.Times = class Times extends UnimplementedExpression

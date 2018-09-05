@@ -4522,10 +4522,11 @@
   };
 
   module.exports.doExcept = function(a, b) {
-    var itm, j, len, results;
+    var itm, j, len, results, setList;
+    setList = doDistinct(a);
     results = [];
-    for (j = 0, len = a.length; j < len; j++) {
-      itm = a[j];
+    for (j = 0, len = setList.length; j < len; j++) {
+      itm = setList[j];
       if (!doContains(b, itm)) {
         results.push(itm);
       }
@@ -4534,10 +4535,11 @@
   };
 
   module.exports.doIntersect = function(a, b) {
-    var itm, j, len, results;
+    var itm, j, len, results, setList;
+    setList = doDistinct(a);
     results = [];
-    for (j = 0, len = a.length; j < len; j++) {
-      itm = a[j];
+    for (j = 0, len = setList.length; j < len; j++) {
+      itm = setList[j];
       if (doContains(b, itm)) {
         results.push(itm);
       }
