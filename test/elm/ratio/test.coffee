@@ -53,3 +53,17 @@ describe 'Ratio', ->
       denominator = {unit: "mm", value: 33.3333}
       ratio = new Ratio({numerator: numerator, denominator: denominator})
       ratio.toString().should.equal "42.424242 'mm' : 33.3333 'mm'"
+
+ it 'should return false for non equal ratios', ->
+      numerator = new Quantity({unit: "mm", value: 42.424242})
+      denominator = new Quantity({unit: "mm", value: 33.3333})
+      ratio1 = new Ratio({numerator: numerator, denominator: denominator})
+      ratio2 = new Ratio({numerator: numerator, denominator: denominator})
+      ratio1.equals(ratio2).should.equal false
+
+ it 'should return true for equal ratios', ->
+      numerator = new Quantity({unit: "mm", value: 33.3333})
+      denominator = new Quantity({unit: "mm", value: 33.3333})
+      ratio1 = new Ratio({numerator: numerator, denominator: denominator})
+      ratio2 = new Ratio({numerator: numerator, denominator: denominator})
+      ratio1.equals(ratio2).should.equal true
