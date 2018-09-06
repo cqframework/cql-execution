@@ -6488,7 +6488,7 @@
 
     Ratio.prototype.equals = function(other) {
       if (other instanceof Ratio) {
-        if ((this.numerator === other.numerator) && (this.denominator === other.denominator)) {
+        if (this.numerator.equals(other.numerator) && this.denominator.equals(other.denominator)) {
           return true;
         } else {
           return false;

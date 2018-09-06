@@ -34,7 +34,7 @@ module.exports.Ratio = class Ratio extends Expression
 
   equals: (other) ->
     if other instanceof Ratio
-      if (@numerator.equals(other.numerator) && (@denominator.equals(other.denominator))
+      if (@numerator.equals(other.numerator) && @denominator.equals(other.denominator))
         true
       else
         false
