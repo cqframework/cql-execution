@@ -87,14 +87,14 @@ module.exports.IndexOf = class IndexOf extends Expression
     src = @source.exec ctx
     el = @element.exec ctx
     if not src? or not el? then return null
-    (index = i; break) for itm, i in src when equivalent itm, el
+    (index = i; break) for itm, i in src when equals itm, el
     if index? then return index else return -1
 
 # Indexer is completely handled by overloaded#Indexer
 
 # Delegated to by overloaded#Contains and overloaded#In
 module.exports.doContains = doContains = (container, item) ->
-  return true for element in container when equivalent element, item
+  return true for element in container when equals element, item
   return false
 
 # Delegated to by overloaded#Includes and overloaded@IncludedIn
@@ -129,9 +129,19 @@ module.exports.Distinct = class Distinct extends Expression
 doDistinct = (list) ->
   seen = []
   list.filter (item) ->
-    isNew = seen.every (seenItem) -> !equivalent(item, seenItem)
+    isNew = seen.every (seenItem) -> !equals(item, seenItem)
     seen.push item if isNew
     isNew
+
+  # Remove duplicate null elements
+  firstNullFound = false
+  setList = []
+  for item in seen
+    setList.push item if item != null
+    if item == null && !firstNullFound
+      setList.push item
+      firstNullFound = true
+  setList
 
 # ELM-only, not a product of CQL
 module.exports.Current = class Current extends UnimplementedExpression

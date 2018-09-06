@@ -5915,7 +5915,7 @@ define MultipleMatches: IndexOf({'a', 'b', 'c', 'd', 'd', 'e', 'd'}, 'd')
 define ItemNotFound: IndexOf({'a', 'b', 'c'}, 'd')
 define NullList: IndexOf(null, 'a')
 define NullItem: IndexOf({'a', 'b', 'c'}, null)
-define ListCode: IndexOf({Code{code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5'}}, Code{code: 'F', system: '2.16.840.1.113883.18.2', version: 'foo'})
+define ListCode: IndexOf({Code{code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5'}}, Code{code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5'})
 define ListWrongCode: IndexOf({Code{code: 'M', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5'}}, Code{code: 'F', system: '2.16.840.1.113883.18.2', version: 'foo'})
 define ListWrongCodeSystem: IndexOf({Code{code: 'F', system: '1.16.840.1.113883.18.2', version: 'HL7V2.5'}}, Code{code: 'F', system: '2.16.840.1.113883.18.2', version: 'foo'})
 ###
@@ -6623,7 +6623,7 @@ module.exports['IndexOf'] = {
                            }, {
                               "r" : "57",
                               "s" : [ {
-                                 "value" : [ "'foo'" ]
+                                 "value" : [ "'HL7V2.5'" ]
                               } ]
                            } ]
                         }, {
@@ -6697,7 +6697,7 @@ module.exports['IndexOf'] = {
                      "value" : {
                         "localId" : "57",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "foo",
+                        "value" : "HL7V2.5",
                         "type" : "Literal"
                      }
                   } ]
