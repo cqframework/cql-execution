@@ -5286,7 +5286,7 @@
       }
       for (i = j = 0, len = src.length; j < len; i = ++j) {
         itm = src[i];
-        if (equivalent(itm, el)) {
+        if (equals(itm, el)) {
           index = i;
           break;
         }
@@ -5306,7 +5306,7 @@
     var element, j, len;
     for (j = 0, len = container.length; j < len; j++) {
       element = container[j];
-      if (equivalent(element, item)) {
+      if (equals(element, item)) {
         return true;
       }
     }
@@ -5375,18 +5375,31 @@
   })(Expression);
 
   doDistinct = function(list) {
-    var seen;
+    var firstNullFound, item, j, len, seen, setList;
     seen = [];
-    return list.filter(function(item) {
+    list.filter(function(item) {
       var isNew;
       isNew = seen.every(function(seenItem) {
-        return !equivalent(item, seenItem);
+        return !equals(item, seenItem);
       });
       if (isNew) {
         seen.push(item);
       }
       return isNew;
     });
+    firstNullFound = false;
+    setList = [];
+    for (j = 0, len = seen.length; j < len; j++) {
+      item = seen[j];
+      if (item !== null) {
+        setList.push(item);
+      }
+      if (item === null && !firstNullFound) {
+        setList.push(item);
+        firstNullFound = true;
+      }
+    }
+    return setList;
   };
 
   module.exports.Current = Current = (function(superClass) {
