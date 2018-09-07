@@ -387,7 +387,7 @@
 
   module.exports.Quantity = quantity.Quantity;
 
-  module.exports.ratio = ratio.Ratio;
+  module.exports.Ratio = ratio.Ratioc;
 
   module.exports.Expression = expression.Expression;
 
@@ -6481,12 +6481,11 @@
     };
 
     Ratio.prototype.equals = function(other) {
+      var divided_other, divided_this;
       if (other instanceof Ratio) {
-        if (this.numerator.equals(other.numerator) && this.denominator.equals(other.denominator)) {
-          return true;
-        } else {
-          return false;
-        }
+        divided_this = this.numerator.dividedBy(this.denominator);
+        divided_other = other.numerator.dividedBy(other.denominator);
+        return divided_this.equals(divided_other);
       }
     };
 

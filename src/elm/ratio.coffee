@@ -31,10 +31,9 @@ module.exports.Ratio = class Ratio extends Expression
 
   equals: (other) ->
     if other instanceof Ratio
-      if (@numerator.equals(other.numerator) && @denominator.equals(other.denominator))
-        true
-      else
-        false
+      divided_this = @numerator.dividedBy(@denominator)
+      divided_other = other.numerator.dividedBy(other.denominator)
+      divided_this.equals(divided_other)
 
 module.exports.createRatio = createRatio = (numerator, denominator) ->
   new Ratio({numerator: numerator, denominator: denominator})
