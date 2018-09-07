@@ -3421,6 +3421,8 @@ define ThreeFourExcept: {3, 4} except {1, 2, 3, 4, 5}
 define ExceptFiveThree: {1, 2, 3, 4, 5} except {5, 3}
 define ExceptNoOp: {1, 2, 3, 3, 4, 5} except {6, 7, 8, 9, 10}
 define ExceptEverything: {1, 2, 3, 3, 4, 5} except {1, 2, 3, 4, 5}
+define MultipleNullExcept: {1, 3, 5, 7, null, null} except {null, 3}
+
 define SomethingExceptNothing: {1, 2, 3, 4, 5} except List<Integer>{}
 define NothingExceptSomething: List<Integer>{} except {1, 2, 3, 4, 5}
 define ExceptTuples: {Tuple{a: 1}, Tuple{a: 2}, Tuple{a: 3}} except {Tuple{a: 2}}
@@ -3886,46 +3888,39 @@ module.exports['Except'] = {
                } ]
             }
          }, {
-            "localId" : "74",
-            "name" : "SomethingExceptNothing",
+            "localId" : "76",
+            "name" : "MultipleNullExcept",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "74",
+                  "r" : "76",
                   "s" : [ {
-                     "value" : [ "define ","SomethingExceptNothing",": " ]
+                     "value" : [ "define ","MultipleNullExcept",": " ]
                   }, {
-                     "r" : "73",
+                     "r" : "75",
                      "s" : [ {
-                        "r" : "70",
+                        "r" : "71",
                         "s" : [ {
-                           "value" : [ "{","1",", ","2",", ","3",", ","4",", ","5","}" ]
+                           "value" : [ "{","1",", ","3",", ","5",", ","7",", ","null",", ","null","}" ]
                         } ]
                      }, {
                         "value" : [ " except " ]
                      }, {
-                        "r" : "72",
+                        "r" : "74",
                         "s" : [ {
-                           "value" : [ "List<" ]
-                        }, {
-                           "r" : "71",
-                           "s" : [ {
-                              "value" : [ "Integer" ]
-                           } ]
-                        }, {
-                           "value" : [ ">{}" ]
+                           "value" : [ "{","null",", ","3","}" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "73",
+               "localId" : "75",
                "type" : "Except",
                "operand" : [ {
-                  "localId" : "70",
+                  "localId" : "71",
                   "type" : "List",
                   "element" : [ {
                      "localId" : "65",
@@ -3935,72 +3930,91 @@ module.exports['Except'] = {
                   }, {
                      "localId" : "66",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2",
+                     "value" : "3",
                      "type" : "Literal"
                   }, {
                      "localId" : "67",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "3",
+                     "value" : "5",
                      "type" : "Literal"
                   }, {
                      "localId" : "68",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "4",
+                     "value" : "7",
                      "type" : "Literal"
                   }, {
-                     "localId" : "69",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "5",
-                     "type" : "Literal"
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "69",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "70",
+                        "type" : "Null"
+                     }
                   } ]
                }, {
-                  "localId" : "72",
-                  "type" : "List"
+                  "localId" : "74",
+                  "type" : "List",
+                  "element" : [ {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "72",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "73",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  } ]
                } ]
             }
          }, {
-            "localId" : "84",
-            "name" : "NothingExceptSomething",
+            "localId" : "86",
+            "name" : "SomethingExceptNothing",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "84",
+                  "r" : "86",
                   "s" : [ {
-                     "value" : [ "define ","NothingExceptSomething",": " ]
+                     "value" : [ "define ","SomethingExceptNothing",": " ]
                   }, {
-                     "r" : "83",
+                     "r" : "85",
                      "s" : [ {
-                        "r" : "76",
+                        "r" : "82",
+                        "s" : [ {
+                           "value" : [ "{","1",", ","2",", ","3",", ","4",", ","5","}" ]
+                        } ]
+                     }, {
+                        "value" : [ " except " ]
+                     }, {
+                        "r" : "84",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "75",
+                           "r" : "83",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
                         }, {
                            "value" : [ ">{}" ]
                         } ]
-                     }, {
-                        "value" : [ " except " ]
-                     }, {
-                        "r" : "82",
-                        "s" : [ {
-                           "value" : [ "{","1",", ","2",", ","3",", ","4",", ","5","}" ]
-                        } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "83",
+               "localId" : "85",
                "type" : "Except",
                "operand" : [ {
-                  "localId" : "76",
-                  "type" : "List"
-               }, {
                   "localId" : "82",
                   "type" : "List",
                   "element" : [ {
@@ -4029,11 +4043,14 @@ module.exports['Except'] = {
                      "value" : "5",
                      "type" : "Literal"
                   } ]
+               }, {
+                  "localId" : "84",
+                  "type" : "List"
                } ]
             }
          }, {
             "localId" : "96",
-            "name" : "ExceptTuples",
+            "name" : "NothingExceptSomething",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -4041,15 +4058,88 @@ module.exports['Except'] = {
                "s" : {
                   "r" : "96",
                   "s" : [ {
-                     "value" : [ "define ","ExceptTuples",": " ]
+                     "value" : [ "define ","NothingExceptSomething",": " ]
                   }, {
                      "r" : "95",
                      "s" : [ {
-                        "r" : "91",
+                        "r" : "88",
+                        "s" : [ {
+                           "value" : [ "List<" ]
+                        }, {
+                           "r" : "87",
+                           "s" : [ {
+                              "value" : [ "Integer" ]
+                           } ]
+                        }, {
+                           "value" : [ ">{}" ]
+                        } ]
+                     }, {
+                        "value" : [ " except " ]
+                     }, {
+                        "r" : "94",
+                        "s" : [ {
+                           "value" : [ "{","1",", ","2",", ","3",", ","4",", ","5","}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "95",
+               "type" : "Except",
+               "operand" : [ {
+                  "localId" : "88",
+                  "type" : "List"
+               }, {
+                  "localId" : "94",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "89",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "90",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "91",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "92",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "93",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "108",
+            "name" : "ExceptTuples",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "108",
+                  "s" : [ {
+                     "value" : [ "define ","ExceptTuples",": " ]
+                  }, {
+                     "r" : "107",
+                     "s" : [ {
+                        "r" : "103",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "86",
+                           "r" : "98",
                            "s" : [ {
                               "value" : [ "Tuple{" ]
                            }, {
@@ -4062,7 +4152,7 @@ module.exports['Except'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "88",
+                           "r" : "100",
                            "s" : [ {
                               "value" : [ "Tuple{" ]
                            }, {
@@ -4075,7 +4165,7 @@ module.exports['Except'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "90",
+                           "r" : "102",
                            "s" : [ {
                               "value" : [ "Tuple{" ]
                            }, {
@@ -4091,11 +4181,11 @@ module.exports['Except'] = {
                      }, {
                         "value" : [ " except " ]
                      }, {
-                        "r" : "94",
+                        "r" : "106",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "93",
+                           "r" : "105",
                            "s" : [ {
                               "value" : [ "Tuple{" ]
                            }, {
@@ -4113,42 +4203,42 @@ module.exports['Except'] = {
                }
             } ],
             "expression" : {
-               "localId" : "95",
+               "localId" : "107",
                "type" : "Except",
                "operand" : [ {
-                  "localId" : "91",
+                  "localId" : "103",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "86",
+                     "localId" : "98",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "a",
                         "value" : {
-                           "localId" : "85",
+                           "localId" : "97",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
                         }
                      } ]
                   }, {
-                     "localId" : "88",
+                     "localId" : "100",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "a",
                         "value" : {
-                           "localId" : "87",
+                           "localId" : "99",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
                            "type" : "Literal"
                         }
                      } ]
                   }, {
-                     "localId" : "90",
+                     "localId" : "102",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "a",
                         "value" : {
-                           "localId" : "89",
+                           "localId" : "101",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "3",
                            "type" : "Literal"
@@ -4156,15 +4246,15 @@ module.exports['Except'] = {
                      } ]
                   } ]
                }, {
-                  "localId" : "94",
+                  "localId" : "106",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "93",
+                     "localId" : "105",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "a",
                         "value" : {
-                           "localId" : "92",
+                           "localId" : "104",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
                            "type" : "Literal"
@@ -4174,20 +4264,20 @@ module.exports['Except'] = {
                } ]
             }
          }, {
-            "localId" : "105",
+            "localId" : "117",
             "name" : "ExceptNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "105",
+                  "r" : "117",
                   "s" : [ {
                      "value" : [ "define ","ExceptNull",": " ]
                   }, {
-                     "r" : "104",
+                     "r" : "116",
                      "s" : [ {
-                        "r" : "102",
+                        "r" : "114",
                         "s" : [ {
                            "value" : [ "{","1",", ","2",", ","3",", ","4",", ","5","}" ]
                         } ]
@@ -4198,33 +4288,33 @@ module.exports['Except'] = {
                }
             } ],
             "expression" : {
-               "localId" : "104",
+               "localId" : "116",
                "type" : "Except",
                "operand" : [ {
-                  "localId" : "102",
+                  "localId" : "114",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "97",
+                     "localId" : "109",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "98",
+                     "localId" : "110",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   }, {
-                     "localId" : "99",
+                     "localId" : "111",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   }, {
-                     "localId" : "100",
+                     "localId" : "112",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "4",
                      "type" : "Literal"
                   }, {
-                     "localId" : "101",
+                     "localId" : "113",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
@@ -4232,7 +4322,7 @@ module.exports['Except'] = {
                }, {
                   "type" : "As",
                   "operand" : {
-                     "localId" : "103",
+                     "localId" : "115",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
@@ -4245,23 +4335,23 @@ module.exports['Except'] = {
                } ]
             }
          }, {
-            "localId" : "114",
+            "localId" : "126",
             "name" : "NullExcept",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "114",
+                  "r" : "126",
                   "s" : [ {
                      "value" : [ "define ","NullExcept",": " ]
                   }, {
-                     "r" : "113",
+                     "r" : "125",
                      "s" : [ {
-                        "r" : "106",
+                        "r" : "118",
                         "value" : [ "null"," except " ]
                      }, {
-                        "r" : "112",
+                        "r" : "124",
                         "s" : [ {
                            "value" : [ "{","1",", ","2",", ","3",", ","4",", ","5","}" ]
                         } ]
@@ -4270,12 +4360,12 @@ module.exports['Except'] = {
                }
             } ],
             "expression" : {
-               "localId" : "113",
+               "localId" : "125",
                "type" : "Except",
                "operand" : [ {
                   "type" : "As",
                   "operand" : {
-                     "localId" : "106",
+                     "localId" : "118",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
@@ -4286,30 +4376,30 @@ module.exports['Except'] = {
                      }
                   }
                }, {
-                  "localId" : "112",
+                  "localId" : "124",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "107",
+                     "localId" : "119",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "108",
+                     "localId" : "120",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   }, {
-                     "localId" : "109",
+                     "localId" : "121",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   }, {
-                     "localId" : "110",
+                     "localId" : "122",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "4",
                      "type" : "Literal"
                   }, {
-                     "localId" : "111",
+                     "localId" : "123",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
@@ -4334,6 +4424,7 @@ define NestedIntersects: {1, 2, 3, 4, 5} intersect {2, 3, 4, 5, 6} intersect {3,
 define IntersectTuples: {Tuple{a:1, b:'d'}, Tuple{a:1, b:'c'}, Tuple{a:2, b:'c'}} intersect {Tuple{a:2, b:'d'}, Tuple{a:1, b:'c'}, Tuple{a:2, b:'c'}, Tuple{a:5, b:'e'}}
 define NullIntersect: null intersect {1, 2, 3}
 define IntersectNull: {1, 2, 3} intersect null
+define MultipleNullInListIntersect: {1, 2, 3, null} intersect {null, 3}
 ###
 
 module.exports['Intersect'] = {
@@ -5481,6 +5572,82 @@ module.exports['Intersect'] = {
                         "type" : "NamedTypeSpecifier"
                      }
                   }
+               } ]
+            }
+         }, {
+            "localId" : "149",
+            "name" : "MultipleNullInListIntersect",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "149",
+                  "s" : [ {
+                     "value" : [ "define ","MultipleNullInListIntersect",": " ]
+                  }, {
+                     "r" : "148",
+                     "s" : [ {
+                        "r" : "144",
+                        "s" : [ {
+                           "value" : [ "{","1",", ","2",", ","3",", ","null","}" ]
+                        } ]
+                     }, {
+                        "value" : [ " intersect " ]
+                     }, {
+                        "r" : "147",
+                        "s" : [ {
+                           "value" : [ "{","null",", ","3","}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "148",
+               "type" : "Intersect",
+               "operand" : [ {
+                  "localId" : "144",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "140",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "141",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "142",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "143",
+                        "type" : "Null"
+                     }
+                  } ]
+               }, {
+                  "localId" : "147",
+                  "type" : "List",
+                  "element" : [ {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "145",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "146",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  } ]
                } ]
             }
          } ]

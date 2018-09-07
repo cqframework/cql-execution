@@ -46,6 +46,8 @@ define ThreeFourExcept: {3, 4} except {1, 2, 3, 4, 5}
 define ExceptFiveThree: {1, 2, 3, 4, 5} except {5, 3}
 define ExceptNoOp: {1, 2, 3, 3, 4, 5} except {6, 7, 8, 9, 10}
 define ExceptEverything: {1, 2, 3, 3, 4, 5} except {1, 2, 3, 4, 5}
+define MultipleNullExcept: {1, 3, 5, 7, null, null} except {null, 3}
+
 define SomethingExceptNothing: {1, 2, 3, 4, 5} except List<Integer>{}
 define NothingExceptSomething: List<Integer>{} except {1, 2, 3, 4, 5}
 define ExceptTuples: {Tuple{a: 1}, Tuple{a: 2}, Tuple{a: 3}} except {Tuple{a: 2}}
@@ -62,6 +64,7 @@ define NestedIntersects: {1, 2, 3, 4, 5} intersect {2, 3, 4, 5, 6} intersect {3,
 define IntersectTuples: {Tuple{a:1, b:'d'}, Tuple{a:1, b:'c'}, Tuple{a:2, b:'c'}} intersect {Tuple{a:2, b:'d'}, Tuple{a:1, b:'c'}, Tuple{a:2, b:'c'}, Tuple{a:5, b:'e'}}
 define NullIntersect: null intersect {1, 2, 3}
 define IntersectNull: {1, 2, 3} intersect null
+define MultipleNullInListIntersect: {1, 2, 3, null} intersect {null, 3}
 
 // @Test: IndexOf
 define IndexOfSecond: IndexOf({'a', 'b', 'c', 'd'}, 'b')
