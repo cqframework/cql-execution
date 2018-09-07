@@ -819,9 +819,36 @@ define DateTimeCollapseOverlapMultipleCombine: collapse { DateTime1_6Interval, D
 define DateTimeCollapseImpreciseBoundary: collapse { DateTime1_3ImpreciseInterval, DateTime1_10Interval }
 
 // @Test: Collapse
+// Numeric Intervals
 define IntIntervalList: { Interval[1, 4], Interval[4, 8], Interval[7, 9] }
 define IntCollapsePerUnit1: collapse IntIntervalList per ToQuantity(1)
 define IntCollapseNoPer: collapse IntIntervalList
 define IntIntervalSeparatedList: { Interval[3, 5], Interval[8, 10] }
 define ExpectedIntervalList: { Interval[3,10] }
 define IntCollapseSeparatedListPer3: collapse IntIntervalSeparatedList per 3
+
+// DateTime Intervals
+define DateTime1_12Interval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 12, 0, 0, 0, 0)]
+define DateTime3_15Interval: Interval[DateTime(2012, 1, 3, 0, 0, 0, 0), DateTime(2012, 1, 15, 0, 0, 0, 0)]
+define DateTime1_15Interval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 15, 0, 0, 0, 0)]
+define DateTime1_15IntervalList: { DateTime1_15Interval }
+define DateTimeCollapseNoPer: collapse { DateTime1_12Interval, DateTime3_15Interval}
+define DateTimeCollapsePerMs: collapse { DateTime1_12Interval, DateTime3_15Interval} per millisecond
+define DateTimeCollapsePerDay: collapse { DateTime1_12Interval, DateTime3_15Interval} per day
+
+// Quantity Intervals with default units
+define QuantityIntervalList: { Interval[ToQuantity(1), ToQuantity(4)], Interval[ToQuantity(4), ToQuantity(8)] }
+define ExpectedQuantityList: { Interval[ToQuantity(1), ToQuantity(8)] }
+define QuantityIntervalCollapseNoPer: collapse QuantityIntervalList
+define QuantityIntervalCollapsePerUnit1: collapse QuantityIntervalList per ToQuantity(1)
+define QuantitySeparatedBy3: { Interval[ToQuantity(3), ToQuantity(5)], Interval[ToQuantity(8), ToQuantity(10)]}
+define CollapseSeparatedQuantity: collapse QuantitySeparatedBy3
+define ExpectedSeparatedQuantity: { Interval[ToQuantity(3), ToQuantity(10)] }
+define CollapseSeparatedQuantityPer3: collapse QuantitySeparatedBy3 per 3
+
+// Quantity Intervals with units
+define QuantityMeterIntervalList: { Interval[ToQuantity('1 \'m\''), ToQuantity('1.995 \'m\'')], Interval[ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')] }
+define CollapseDisjointQuantityUnits: collapse QuantityMeterIntervalList
+define ExpectedQuantityUnitsCollapse: { Interval[ToQuantity('1 \'m\''), ToQuantity('3 \'m\'')] }
+define CollapseQuantityUnitsWithinPer: collapse QuantityMeterIntervalList per ToQuantity('1 \'cm\'')
+define CollapseQuantityUnitsNotWithinPer: collapse QuantityMeterIntervalList per ToQuantity('1 \'mm\'')

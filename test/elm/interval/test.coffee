@@ -1270,6 +1270,8 @@ describe 'DateTimeIntervalCollapse', ->
 
   it 'disjoint intervals list collapses to ordered self', ->
     @dateTimeCollapseDisjoint.exec(@ctx).should.eql @dateTimeTwoItemDisjointList.exec(@ctx)
+
+  it 'reversed disjoint intervals list collapses to ordered self', ->
     @dateTimeCollapseDisjointReversed.exec(@ctx).should.eql @dateTimeTwoItemDisjointList.exec(@ctx)
 
   it 'adjacent intervals list combines', ->
@@ -1303,3 +1305,31 @@ describe 'Collapse', ->
 
   it 'combines intervals separated by less than per unit', ->
     @intCollapseSeparatedListPer3.exec(@ctx).should.eql @expectedIntervalList.exec(@ctx)
+
+  it 'DateTime collapse uses 1 ms as default per unit', ->
+    # TODO: spec says to determine this based on width of successor, but Bonnie
+    # will only ever have fully-defined dates. Implement successor way if time.
+    @dateTimeCollapseNoPer.exec(@ctx).should.eql @dateTimeCollapsePerMs.exec(@ctx)
+
+  it 'combines DateTime intervals separated by less than per unit', ->
+    @dateTimeCollapsePerDay.exec(@ctx).should.eql @dateTime1_15IntervalList.exec(@ctx)
+
+  it 'Quantity collapse uses default per unit', ->
+    quantity_collapse = @quantityIntervalCollapseNoPer.exec(@ctx)
+    quantity_collapse.should.eql @expectedQuantityList.exec(@ctx)
+    quantity_collapse.should.eql @quantityIntervalCollapsePerUnit1.exec(@ctx)
+
+  it 'Quantity collapse with separated intervals', ->
+    @collapseSeparatedQuantity.exec(@ctx).should.eql @quantitySeparatedBy3.exec(@ctx)
+
+  it 'Quantity collapse combines disjoint intervals that are within per width', ->
+    @collapseSeparatedQuantityPer3.exec(@ctx).should.eql @expectedSeparatedQuantity.exec(@ctx)
+
+  it 'Quantity collapse with units uses point type as default per value', ->
+    @collapseDisjointQuantityUnits.exec(@ctx).should.eql @expectedQuantityUnitsCollapse.exec(@ctx)
+
+  it 'Quantity collapse with units disjoint but within per', ->
+    @collapseQuantityUnitsWithinPer.exec(@ctx).should.eql @expectedQuantityUnitsCollapse.exec(@ctx)
+
+  it 'Quantity collapse with units disjoint and not within per', ->
+    @collapseQuantityUnitsNotWithinPer.exec(@ctx).should.eql @quantityMeterIntervalList.exec(@ctx)

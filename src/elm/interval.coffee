@@ -1,7 +1,7 @@
 { Expression, UnimplementedExpression } = require './expression'
 { ThreeValuedLogic } = require '../datatypes/logic'
 { build } = require './builder'
-{ Quantity, doAddition } = require './quantity'
+{ Quantity, doAddition, doSubtraction} = require './quantity'
 { successor } = require '../util/math'
 dtivl = require '../datatypes/interval'
 cmp = require '../util/comparison'
@@ -173,11 +173,11 @@ module.exports.Collapse = class Collapse extends Expression
           if intervals[0].low.constructor.name == 'DateTime'
             # Bonnie will always use milliseconds
             # TODO determine this dynamically using duration between low and successor
-            perWidth = new Quantity(value: 1, unit: 'ms')
+            perWidth = new Quantity(value: 1, unit: 'millisecond')
+          else if intervals[0].low.isQuantity
+            perWidth = doSubtraction(successor(intervals[0].low), intervals[0].low)
           else
-            perWidth = successor(intervals[0].low) - intervals[0].low
-        else if intervals[0].high?
-          perWidth = successor(intervals[0].high) - intervals[0].high
+            perWidth = successor(intervals[0].low)- intervals[0].low
         else
           throw new Error("Point type of intervals provided to collapse cannot be determined.")
 
@@ -189,8 +189,13 @@ module.exports.Collapse = class Collapse extends Expression
         if a.low.isImprecise?() || a.high.isImprecise?()
           throw new Error("Collapse does not support imprecise dates at this time.")
 
-      # sort intervals by start
-      intervals.sort (a,b)->
+      # Clone intervals so this function remains idempotent
+      intervalsClone = []
+      for interval in intervals
+        intervalsClone.push interval.copy()
+
+      # sort intervalsClone by start
+      intervalsClone.sort (a,b)->
         if typeof a.low.before == 'function'
           return -1 if a.low.before b.low
           return 1 if a.low.after b.low
@@ -199,10 +204,7 @@ module.exports.Collapse = class Collapse extends Expression
           return 1 if a.low > b.low
         0
 
-      # Clone intervals so this function remains idempotent
-      intervalsClone = []
-      for interval in intervals
-        intervalsClone.push interval.copy()
+
 
       # collapse intervals as necessary
       collapsedIntervals = []
@@ -212,10 +214,15 @@ module.exports.Collapse = class Collapse extends Expression
       while b
         if typeof b.low.durationBetween == 'function'
           # handle DateTimes using durationBetween
-          if durationBetween(a.high, b.low)
-            a.high = b.high if b.high after a.high
-        if typeof b.low.sameOrBefore == 'function'
-          if b.low.sameOrBefore doAddition(a.high, perWidth.value)
+          if a.high.after b.low # overlap
+            a.high = b.high if b.high.after a.high
+          else if a.high.durationBetween(b.low, perWidth.unit).high <= perWidth.value
+            a.high = b.high
+          else
+            collapsedIntervals.push a
+            a = b
+        else if typeof b.low.sameOrBefore == 'function'
+          if b.low.sameOrBefore doAddition(a.high, perWidth)
             a.high = b.high if b.high.after a.high
           else
             collapsedIntervals.push a
