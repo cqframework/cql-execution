@@ -1,3 +1,4 @@
+{ Exception } = require '../datatypes/exception'
 { Expression } = require './expression'
 { Quantity } = require('./quantity')
 
@@ -7,12 +8,14 @@ module.exports.Ratio = class Ratio extends Expression
     @denominator = json.denominator
 
     if !json.numerator?
-      @numerator = null
-    @numerator = new Quantity(json.numerator)
+      throw new Error("Cannot create a ratio with an undefined numerator value")
+    else
+      @numerator = new Quantity(json.numerator)
 
     if !json.denominator?
-      @denominator = null
-    @denominator = new Quantity(json.denominator)
+      throw new Error("Cannot create a ratio with an undefined denominator value")
+    else
+      @denominator = new Quantity(json.denominator)
 
   # Define a simple getter to allow type-checking of this class without instanceof
   # and in a way that survives minification (as opposed to checking constructor.name)

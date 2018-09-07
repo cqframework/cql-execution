@@ -28,6 +28,18 @@ describe 'Ratio', ->
       denominator = {unit: "mm", value: "NOT_A_NUMBER"}
       new Ratio({numerator: numerator, denominator: denominator})
 
+  it 'should throw error when creating ratio with null denominator', ->
+    should.throws ->
+      numerator = null
+      denominator = new Quantity({unit: "mm", value: 33.3333})
+      new Ratio({numerator: numerator, denominator: denominator})
+
+  it 'should throw error when creating ratio with null numerator', ->
+    should.throws ->
+      numerator = new Quantity({unit: "mm", value: 42.424242})
+      denominator = null
+      new Ratio({numerator: numerator, denominator: denominator})
+
   it 'should return a properly formatted string representing a ratio', ->
       numerator = new Quantity({unit: "mm", value: 42.424242})
       denominator = new Quantity({unit: "mm", value: 33.3333})
