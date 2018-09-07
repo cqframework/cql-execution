@@ -1293,3 +1293,13 @@ describe 'DateTimeIntervalCollapse', ->
     @dateTime1_6Interval.toString().should.eql interval1CopyString
     @dateTime5_12Interval.toString().should.eql interval2CopyString
     @dateTime10_15Interval.toString().should.eql interval3CopyString
+
+describe 'Collapse', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'numeric collapse uses "1" as default per unit', ->
+    @intCollapseNoPer.exec(@ctx).should.eql @intCollapsePerUnit1.exec(@ctx)
+
+  it 'combines intervals separated by less than per unit', ->
+    @intCollapseSeparatedListPer3.exec(@ctx).should.eql @expectedIntervalList.exec(@ctx)
