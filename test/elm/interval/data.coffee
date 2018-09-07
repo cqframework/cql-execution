@@ -83642,6 +83642,10 @@ define CollapseDisjointQuantityUnits: collapse QuantityMeterIntervalList
 define ExpectedQuantityUnitsCollapse: { Interval[ToQuantity('1 \'m\''), ToQuantity('3 \'m\'')] }
 define CollapseQuantityUnitsWithinPer: collapse QuantityMeterIntervalList per ToQuantity('1 \'cm\'')
 define CollapseQuantityUnitsNotWithinPer: collapse QuantityMeterIntervalList per ToQuantity('1 \'mm\'')
+
+// Interval with null
+define NullIntervalList: { Interval[null, 3], Interval[3, 5] }
+define CollapseNullIntervalList: collapse NullIntervalList
 ###
 
 module.exports['Collapse'] = {
@@ -85538,6 +85542,116 @@ module.exports['Collapse'] = {
                      "value" : "1 'mm'",
                      "type" : "Literal"
                   }
+               } ]
+            }
+         }, {
+            "localId" : "202",
+            "name" : "NullIntervalList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "202",
+                  "s" : [ {
+                     "value" : [ "define ","NullIntervalList",": " ]
+                  }, {
+                     "r" : "201",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "197",
+                        "s" : [ {
+                           "value" : [ "Interval[","null",", ","3","]" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "200",
+                        "s" : [ {
+                           "value" : [ "Interval[","3",", ","5","]" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "201",
+               "type" : "List",
+               "element" : [ {
+                  "localId" : "197",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "195",
+                        "type" : "Null"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "196",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "200",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "198",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "199",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "205",
+            "name" : "CollapseNullIntervalList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "205",
+                  "s" : [ {
+                     "value" : [ "define ","CollapseNullIntervalList",": " ]
+                  }, {
+                     "r" : "204",
+                     "s" : [ {
+                        "value" : [ "collapse " ]
+                     }, {
+                        "r" : "203",
+                        "s" : [ {
+                           "value" : [ "NullIntervalList" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "204",
+               "type" : "Collapse",
+               "operand" : [ {
+                  "localId" : "203",
+                  "name" : "NullIntervalList",
+                  "type" : "ExpressionRef"
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
                } ]
             }
          } ]

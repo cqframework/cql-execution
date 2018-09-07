@@ -852,3 +852,7 @@ define CollapseDisjointQuantityUnits: collapse QuantityMeterIntervalList
 define ExpectedQuantityUnitsCollapse: { Interval[ToQuantity('1 \'m\''), ToQuantity('3 \'m\'')] }
 define CollapseQuantityUnitsWithinPer: collapse QuantityMeterIntervalList per ToQuantity('1 \'cm\'')
 define CollapseQuantityUnitsNotWithinPer: collapse QuantityMeterIntervalList per ToQuantity('1 \'mm\'')
+
+// Interval with null
+define NullIntervalList: { Interval[null, 3], Interval[3, 5] }
+define CollapseNullIntervalList: collapse NullIntervalList

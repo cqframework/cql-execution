@@ -1333,3 +1333,6 @@ describe 'Collapse', ->
 
   it 'Quantity collapse with units disjoint and not within per', ->
     @collapseQuantityUnitsNotWithinPer.exec(@ctx).should.eql @quantityMeterIntervalList.exec(@ctx)
+
+  it 'Collapse with Interval that has null throws', ->
+    should(() => @collapseNullIntervalList.exec(@ctx)).throw("Point type of intervals provided to collapse cannot be determined.")
