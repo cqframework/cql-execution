@@ -83605,3 +83605,396 @@ module.exports['DateTimeIntervalCollapse'] = {
    }
 }
 
+### Collapse
+library TestSnippet version '1'
+using QUICK
+context Patient
+define IntIntervalList: { Interval[1, 4], Interval[4, 8], Interval[7, 9] }
+define IntCollapsePerUnit1: collapse IntIntervalList per ToQuantity(1)
+define IntCollapseNoPer: collapse IntIntervalList
+define IntIntervalSeparatedList: { Interval[3, 5], Interval[8, 10] }
+define ExpectedIntervalList: { Interval[3,10] }
+define IntCollapseSeparatedListPer3: collapse IntIntervalSeparatedList per 3
+###
+
+module.exports['Collapse'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "12",
+            "name" : "IntIntervalList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "value" : [ "define ","IntIntervalList",": " ]
+                  }, {
+                     "r" : "11",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "4",
+                        "s" : [ {
+                           "value" : [ "Interval[","1",", ","4","]" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "Interval[","4",", ","8","]" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "value" : [ "Interval[","7",", ","9","]" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "11",
+               "type" : "List",
+               "element" : [ {
+                  "localId" : "4",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "2",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "3",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "7",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "5",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "6",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "8",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "10",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "8",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "7",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "9",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "9",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "17",
+            "name" : "IntCollapsePerUnit1",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "17",
+                  "s" : [ {
+                     "value" : [ "define ","IntCollapsePerUnit1",": " ]
+                  }, {
+                     "r" : "16",
+                     "s" : [ {
+                        "value" : [ "collapse " ]
+                     }, {
+                        "r" : "13",
+                        "s" : [ {
+                           "value" : [ "IntIntervalList" ]
+                        } ]
+                     }, {
+                        "value" : [ " per " ]
+                     }, {
+                        "r" : "15",
+                        "s" : [ {
+                           "value" : [ "ToQuantity","(","1",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "16",
+               "type" : "Collapse",
+               "operand" : [ {
+                  "localId" : "13",
+                  "name" : "IntIntervalList",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "15",
+                  "type" : "ToQuantity",
+                  "operand" : {
+                     "localId" : "14",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "20",
+            "name" : "IntCollapseNoPer",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "20",
+                  "s" : [ {
+                     "value" : [ "define ","IntCollapseNoPer",": " ]
+                  }, {
+                     "r" : "19",
+                     "s" : [ {
+                        "value" : [ "collapse " ]
+                     }, {
+                        "r" : "18",
+                        "s" : [ {
+                           "value" : [ "IntIntervalList" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "19",
+               "type" : "Collapse",
+               "operand" : [ {
+                  "localId" : "18",
+                  "name" : "IntIntervalList",
+                  "type" : "ExpressionRef"
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
+            }
+         }, {
+            "localId" : "28",
+            "name" : "IntIntervalSeparatedList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "28",
+                  "s" : [ {
+                     "value" : [ "define ","IntIntervalSeparatedList",": " ]
+                  }, {
+                     "r" : "27",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "23",
+                        "s" : [ {
+                           "value" : [ "Interval[","3",", ","5","]" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "26",
+                        "s" : [ {
+                           "value" : [ "Interval[","8",", ","10","]" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "27",
+               "type" : "List",
+               "element" : [ {
+                  "localId" : "23",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "21",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "22",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "26",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "24",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "8",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "25",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "10",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "33",
+            "name" : "ExpectedIntervalList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "33",
+                  "s" : [ {
+                     "value" : [ "define ","ExpectedIntervalList",": " ]
+                  }, {
+                     "r" : "32",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "31",
+                        "s" : [ {
+                           "value" : [ "Interval[","3",",","10","]" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "32",
+               "type" : "List",
+               "element" : [ {
+                  "localId" : "31",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "29",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "30",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "10",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "37",
+            "name" : "IntCollapseSeparatedListPer3",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "37",
+                  "s" : [ {
+                     "value" : [ "define ","IntCollapseSeparatedListPer3",": " ]
+                  }, {
+                     "r" : "36",
+                     "s" : [ {
+                        "value" : [ "collapse " ]
+                     }, {
+                        "r" : "34",
+                        "s" : [ {
+                           "value" : [ "IntIntervalSeparatedList" ]
+                        } ]
+                     }, {
+                        "value" : [ " per ","3" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "36",
+               "type" : "Collapse",
+               "operand" : [ {
+                  "localId" : "34",
+                  "name" : "IntIntervalSeparatedList",
+                  "type" : "ExpressionRef"
+               }, {
+                  "type" : "ToQuantity",
+                  "operand" : {
+                     "localId" : "35",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         } ]
+      }
+   }
+}
+

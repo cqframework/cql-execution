@@ -817,3 +817,11 @@ define DateTimeCollapseOverlapContainedEdge: collapse { DateTime1_10Interval, Da
 define DateTimeCollapseOverlapContainedEdge2: collapse { DateTime1_15Interval, DateTime1_10Interval }
 define DateTimeCollapseOverlapMultipleCombine: collapse { DateTime1_6Interval, DateTime5_12Interval, DateTime10_15Interval }
 define DateTimeCollapseImpreciseBoundary: collapse { DateTime1_3ImpreciseInterval, DateTime1_10Interval }
+
+// @Test: Collapse
+define IntIntervalList: { Interval[1, 4], Interval[4, 8], Interval[7, 9] }
+define IntCollapsePerUnit1: collapse IntIntervalList per ToQuantity(1)
+define IntCollapseNoPer: collapse IntIntervalList
+define IntIntervalSeparatedList: { Interval[3, 5], Interval[8, 10] }
+define ExpectedIntervalList: { Interval[3,10] }
+define IntCollapseSeparatedListPer3: collapse IntIntervalSeparatedList per 3
