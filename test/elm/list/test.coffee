@@ -148,6 +148,9 @@ describe 'Except', ->
   it 'should remove all items when lists are the same', ->
     @exceptEverything.exec(@ctx).should.eql []
 
+  it 'should return items in first list without null or 3', ->
+    @multipleNullExcept.exec(@ctx).should.eql [1, 5, 7]
+
   it 'should be a no-op when second list is empty', ->
     @somethingExceptNothing.exec(@ctx).should.eql [1, 2, 3, 4, 5]
 
@@ -171,6 +174,9 @@ describe 'Intersect', ->
   it 'should intersect two lists with a single common element', ->
     @intersectOnFive.exec(@ctx).should.eql [5]
 
+  it 'should intersect two lists with a single common element even with duplicates', ->
+    @intersectionOnFourDuplicates.exec(@ctx).should.eql [4]
+
   it 'should intersect two lists with several common elements', ->
     @intersectOnEvens.exec(@ctx).should.eql [2, 4, 6, 8, 10]
 
@@ -186,6 +192,9 @@ describe 'Intersect', ->
   it 'should return null if either arg is null', ->
     should(@intersectNull.exec(@ctx)).be.null()
     should(@nullIntersect.exec(@ctx)).be.null()
+
+  it 'should intersect on 3', ->
+    @multipleNullInListIntersect.exec(@ctx).should.eql [3]
 
 describe 'IndexOf', ->
   @beforeEach ->

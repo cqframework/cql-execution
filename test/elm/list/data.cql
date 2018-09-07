@@ -49,8 +49,10 @@ define UnionNull: {1, 2, 3} union null
 define ExceptThreeFour: {1, 2, 3, 4, 5} except {3, 4}
 define ThreeFourExcept: {3, 4} except {1, 2, 3, 4, 5}
 define ExceptFiveThree: {1, 2, 3, 4, 5} except {5, 3}
-define ExceptNoOp: {1, 2, 3, 4, 5} except {6, 7, 8, 9, 10}
-define ExceptEverything: {1, 2, 3, 4, 5} except {1, 2, 3, 4, 5}
+define ExceptNoOp: {1, 2, 3, 3, 4, 5} except {6, 7, 8, 9, 10}
+define ExceptEverything: {1, 2, 3, 3, 4, 5} except {1, 2, 3, 4, 5}
+define MultipleNullExcept: {1, 3, 5, 7, null, null} except {null, 3}
+
 define SomethingExceptNothing: {1, 2, 3, 4, 5} except List<Integer>{}
 define NothingExceptSomething: List<Integer>{} except {1, 2, 3, 4, 5}
 define ExceptTuples: {Tuple{a: 1}, Tuple{a: 2}, Tuple{a: 3}} except {Tuple{a: 2}}
@@ -58,14 +60,16 @@ define ExceptNull: {1, 2, 3, 4, 5} except null
 define NullExcept: null except {1, 2, 3, 4, 5}
 
 // @Test: Intersect
-define NoIntersection: {1, 2, 3} intersect {4, 5, 6}
-define IntersectOnFive: {4, 5, 6} intersect {1, 3, 5, 7}
+define NoIntersection: {1, 2, 2, 3} intersect {4, 5, 6}
+define IntersectOnFive: {4, 5, 5, 6} intersect {1, 3, 5, 7}
+define IntersectionOnFourDuplicates: {4, 4, 1, 1, 2} intersect {4, 4, 3, 9}
 define IntersectOnEvens: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10} intersect {0, 2, 4, 6, 8, 10, 12}
 define IntersectOnAll: {1, 2, 3, 4, 5} intersect {5, 4, 3, 2, 1}
 define NestedIntersects: {1, 2, 3, 4, 5} intersect {2, 3, 4, 5, 6} intersect {3, 4, 5, 6, 7} intersect {4, 5, 6, 7, 8}
 define IntersectTuples: {Tuple{a:1, b:'d'}, Tuple{a:1, b:'c'}, Tuple{a:2, b:'c'}} intersect {Tuple{a:2, b:'d'}, Tuple{a:1, b:'c'}, Tuple{a:2, b:'c'}, Tuple{a:5, b:'e'}}
 define NullIntersect: null intersect {1, 2, 3}
 define IntersectNull: {1, 2, 3} intersect null
+define MultipleNullInListIntersect: {1, 2, 3, null} intersect {null, 3}
 
 // @Test: IndexOf
 define IndexOfSecond: IndexOf({'a', 'b', 'c', 'd'}, 'b')
