@@ -51,3 +51,8 @@ describe 'Quantity', ->
   it 'should throw an error if value is NaN', ->
     should.throws ->
       new Quantity({unit: "mg", value: NaN})
+
+  it 'should handle cql temporal keywords with ucum units', ->
+      a = new Quantity({unit: "d", value: 1})
+      b = new Quantity({unit: "day", value: 1})
+      a.equals(b).should.equal(true)
