@@ -76,6 +76,12 @@ describe 'InValueSet', ->
   it 'should not find code if it is null', ->
     @nullCode.exec(@ctx).should.be.false()
 
+  it 'should return true if code in list is equivalent', ->
+    @inListOfCodes.exec(@ctx).should.be.true()
+
+  it 'should return false if no code in list is equivalent', ->
+    @inWrongListofCodes.exec(@ctx).should.be.false()
+
 describe 'Patient Property In ValueSet', ->
   @beforeEach ->
     setup @, data, [], vsets
