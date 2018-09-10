@@ -44904,6 +44904,9 @@
     shouldReturnNull = false;
     finalComparisonResult = aKeys.length === bKeys.length && aKeys.every(function(key) {
       var comparisonResult;
+      if (a[key] === null && b[key] === null) {
+        return true;
+      }
       comparisonResult = comparisonFunction(a[key], b[key]);
       if (comparisonResult === null) {
         shouldReturnNull = true;
