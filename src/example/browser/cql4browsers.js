@@ -387,7 +387,7 @@
 
   module.exports.Quantity = quantity.Quantity;
 
-  module.exports.Ratio = ratio.Ratioc;
+  module.exports.Ratio = ratio.Ratio;
 
   module.exports.Expression = expression.Expression;
 
