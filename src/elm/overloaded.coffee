@@ -1,5 +1,4 @@
 { Expression } = require './expression'
-{ IncompatibleTypesException } = require './quantity'
 { ThreeValuedLogic } = require '../datatypes/logic'
 { DateTime } = require '../datatypes/datetime'
 { Exception } = require '../datatypes/exception'
