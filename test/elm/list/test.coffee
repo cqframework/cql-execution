@@ -289,10 +289,10 @@ describe 'Contains', ->
     @tupleIsNotIn.exec(@ctx).should.be.false()
 
   it 'should return false if null is contained in the list', ->
-    should(@nullIn.exec(@ctx)).be.false()
+    should(@nullIn.exec(@ctx)).be.null()
 
   it 'should return false if null is not contained in the list', ->
-    should(@nullNotIn.exec(@ctx)).be.false()
+    should(@nullNotIn.exec(@ctx)).be.null()
 
   it 'should return null if list is null', ->
     should(@inNull.exec(@ctx)).be.null()

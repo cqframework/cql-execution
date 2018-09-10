@@ -2,7 +2,7 @@
 { ValueSet } = require '../datatypes/datatypes'
 { build } = require './builder'
 { typeIsArray } = require '../util/util'
-{ equals, equivalent } = require '../util/comparison'
+{ equals } = require '../util/comparison'
 
 module.exports.List = class List extends Expression
   constructor: (json) ->
@@ -124,7 +124,9 @@ module.exports.Distinct = class Distinct extends Expression
     super
 
   exec: (ctx) ->
-    doDistinct(@execArgs ctx)
+    result = @execArgs ctx
+    if not result? then return null
+    doDistinct(result)
 
 doDistinct = (list) ->
   seen = []
