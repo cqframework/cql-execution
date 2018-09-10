@@ -6,10 +6,6 @@
 { build } = require './builder'
 ucum = require  'ucum'
 
-module.exports.IncompatibleTypesException = IncompatibleTypesException = class IncompatibleTypesException extends Exception
-  constructor: (@a , @b , e) ->
-    super("Incompatible Types '#{@a}' and '#{@b}'", e)
-
 # Unit conversation is currently implemented on for time duration comparison operations
 # TODO: Implement unit conversation for time duration mathematical operations
 # TODO: Quantity should probably be available as a datatype (not just ELM expression)
@@ -47,22 +43,34 @@ module.exports.Quantity = class Quantity extends Expression
   sameOrBefore: (other) ->
     if other instanceof Quantity
       other_v = convert_value(other.value,ucum_unit(other.unit),ucum_unit(@unit))
-      @value <= other_v
+      if(!other_v?)
+        null
+      else
+        @value <= other_v
 
   sameOrAfter: (other) ->
     if other instanceof Quantity
       other_v = convert_value(other.value,ucum_unit(other.unit),ucum_unit(@unit))
-      @value >= other_v
+      if(!other_v?)
+        null
+      else
+        @value >= other_v
 
   after: (other) ->
     if other instanceof Quantity
       other_v = convert_value(other.value,ucum_unit(other.unit),ucum_unit(@unit))
-      @value > other_v
+      if(!other_v?)
+        null
+      else
+        @value > other_v
 
   before: (other) ->
     if other instanceof Quantity
       other_v = convert_value(other.value,ucum_unit(other.unit),ucum_unit(@unit))
-      @value < other_v
+      if(!other_v?)
+        null
+      else
+        @value < other_v
 
   equals: (other) ->
     if other instanceof Quantity
@@ -72,7 +80,10 @@ module.exports.Quantity = class Quantity extends Expression
         @value == other.value
       else
         other_v = convert_value(other.value,ucum_unit(other.unit),ucum_unit(@unit))
-        decimalAdjust("round", @value, -8)  == decimalAdjust("round", other_v, -8)
+        if(!other_v?)
+          null
+        else
+          decimalAdjust("round", @value, -8)  == decimalAdjust("round", other_v, -8)
 
   convertUnits: (to_units) ->
     convert_value(@value,@unit,to_units)
@@ -147,8 +158,9 @@ convert_value = (value, from, to) ->
       value
     else
       decimalAdjust("round", ucum.convert(value,ucum_unit(from),ucum_unit(to)), -8)
+  # If the units could not be alignied ie: incompareable, exception will be thrown, return null
   catch e
-    throw new IncompatibleTypesException(from, to, e)
+    return null
 
 # Cache for unit validity results so we dont have to go to ucum.js for every check.
 # Is a map of unit string to boolean validity

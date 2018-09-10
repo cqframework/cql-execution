@@ -1,6 +1,5 @@
 { Expression } = require './expression'
 { Uncertainty } = require '../datatypes/datatypes'
-{ IncompatibleTypesException } = require './quantity'
 
 # Equal is completely handled by overloaded#Equal
 
