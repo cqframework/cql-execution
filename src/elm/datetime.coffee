@@ -24,6 +24,24 @@ module.exports.DateTime = class DateTime extends Expression
     args = ((if @[p]? then @[p].execute(ctx)) for p in DateTime.PROPERTIES)
     new DT.DateTime(args...)
 
+module.exports.Date = class Date extends Expression
+  @PROPERTIES = ['year', 'month', 'day']
+  constructor: (@json) ->
+    super
+
+  # Define a simple getter to allow type-checking of this class without instanceof
+  # and in a way that survives minification (as opposed to checking constructor.name)
+  Object.defineProperties @prototype,
+    isDate:
+      get: -> true
+
+  exec: (ctx) ->
+    for property in Date.PROPERTIES
+      if @json[property]?
+        @[property] = build @json[property]
+    args = ((if @[p]? then @[p].execute(ctx)) for p in Date.PROPERTIES)
+    new DT.Date(args...)
+
 module.exports.Time = class Time extends Expression
   @PROPERTIES = ['hour', 'minute', 'second', 'millisecond', 'timezoneOffset']
   constructor: (json) ->

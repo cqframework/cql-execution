@@ -55,10 +55,18 @@ describe 'FromString', ->
     quantity.unit.should.equal "mA"
 
   it "should convert '2015-01-02' to DateTime", ->
+    date = @dateTimeStr.exec(@ctx)
+    date.year.should.equal 2015
+    date.month.should.equal 1
+    date.day.should.equal 2
+    date.isDateTime.should.equal.true
+
+  it "should convert '2015-01-02' to Date", ->
     date = @dateStr.exec(@ctx)
     date.year.should.equal 2015
     date.month.should.equal 1
     date.day.should.equal 2
+    date.isDate.should.equal.true
 
 describe 'FromInteger', ->
   @beforeEach ->
@@ -122,6 +130,27 @@ describe 'FromDateTime', ->
     date.year.should.equal 2015
     date.month.should.equal 1
     date.day.should.equal 2
+
+describe 'FromDate', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should convert ToDate('2015-01-01') to DateTime", ->
+    dateTime = @dateDateTime.exec(@ctx)
+    dateTime.year.should.equal 2015
+    dateTime.month.should.equal 1
+    dateTime.day.should.equal 1
+    dateTime.isDateTime.should.equal.true
+
+  it "should convert ToDate('2015-01-01') to Date", ->
+    date = @dateDate.exec(@ctx)
+    date.year.should.equal 2015
+    date.month.should.equal 1
+    date.day.should.equal 1
+    date.isDate.should.equal.true
+
+  it "should convert ToDate('2015-01-01') to '2015-01-01'", ->
+    @dateStr.exec(@ctx).should.equal "2015-01-01"
 
 describe 'FromTime', ->
   @beforeEach ->

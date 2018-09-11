@@ -46,6 +46,12 @@ parameter FooDP default @2012-04-01
 define Foo: FooP
 define Foo2: FooDP
 
+// @Test: DateParameterTypes
+parameter FooP Date
+parameter FooDP default @2012-04-01
+define Foo: FooP
+define Foo2: FooDP
+
 // @Test: QuantityParameterTypes
 parameter FooP Quantity
 parameter FooDP default 10 'dL'

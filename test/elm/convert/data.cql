@@ -12,7 +12,8 @@ define quantityStr: convert '10 \'A\'' to Quantity
 define posQuantityStr: convert '+10 \'A\'' to Quantity
 define negQuantityStr: convert '-10 \'A\'' to Quantity
 define quantityStrDecimal: convert '10.0 \'mA\'' to Quantity
-define dateStr: convert '2015-01-02' to DateTime
+define dateTimeStr: convert '2015-01-02' to DateTime
+define dateStr: convert '2015-01-02' to Date
 
 // @Test: FromInteger
 define string10: convert 10 to String
@@ -35,6 +36,11 @@ define booleanFalseBool: convert false to Boolean
 // @Test: FromDateTime
 define dateStr: convert @2015-01-02 to String
 define dateDate: convert @2015-01-02 to DateTime
+
+// @Test: FromDate
+define dateDateTime: convert ToDate('2015-01-01') to DateTime
+define dateDate: convert ToDate('2015-01-01') to Date
+define dateStr: convert ToDate('2015-01-01') to String
 
 // @Test: FromTime
 define timeStr: convert @T11:57 to String
