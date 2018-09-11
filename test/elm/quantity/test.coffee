@@ -35,12 +35,12 @@ describe 'Quantity', ->
       new Quantity({unit: "", value: 9})
 
   it 'should allow for the value of the quantity to be null', ->
-    should.doesNotThrow ->
+    should.throws ->
       q = new Quantity({unit: "mg", value: null})
       should.equal(q.value, null)
 
   it 'should convert undefined values to null', ->
-    should.doesNotThrow ->
+    should.throws ->
       q = new Quantity({unit: "mg", value: undefined})
       should.equal(q.value, null)
 

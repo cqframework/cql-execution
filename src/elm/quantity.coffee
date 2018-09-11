@@ -15,7 +15,7 @@ module.exports.Quantity = class Quantity extends Expression
     @unit = json.unit
 
     if !json.value?
-      @value = null
+      throw new Error("Cannot create a quantity with an undefined value")
     else
       @value = parseFloat json.value
       # isValidDecimal will throw an error if the parsed value is NaN or otherwise invalid.
