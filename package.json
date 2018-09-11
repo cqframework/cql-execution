@@ -77,7 +77,9 @@
   },
   "scripts": {
     "prepublish": "./node_modules/.bin/cake build && ./node_modules/.bin/cake build-cql4browsers",
-    "test": "./node_modules/.bin/cake test"
+    "test": "./node_modules/.bin/cake test",
+    "build": "./node_modules/.bin/cake build",
+    "build-test-data": "./node_modules/.bin/cake build-test-data"
   },
   "license": "Apache-2.0"
 }
