@@ -56,3 +56,10 @@ describe 'Quantity', ->
       a = new Quantity({unit: "d", value: 1})
       b = new Quantity({unit: "day", value: 1})
       a.equals(b).should.equal(true)
+
+  it 'dividing identical units should result in default unit', ->
+    numerator = new Quantity({unit: "mg", value: -5.5})
+    denominator = new Quantity({unit: "mg", value: 2.0})
+    result = numerator.dividedBy(denominator)
+    result.unit.should.equal "1"
+    result.value.should.equal -2.75
