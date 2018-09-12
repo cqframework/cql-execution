@@ -189,6 +189,7 @@ module.exports.Context = class Context
       when "{urn:hl7-org:elm-types:r1}String" then typeof val is "string"
       when "{urn:hl7-org:elm-types:r1}Concept" then val?.isConcept
       when "{urn:hl7-org:elm-types:r1}DateTime" then val?.isDateTime
+      when "{urn:hl7-org:elm-types:r1}Date" then val?.isDate
       when "{urn:hl7-org:elm-types:r1}Quantity" then val?.isQuantity
       when "{urn:hl7-org:elm-types:r1}Time" then val?.isDateTime && val.isTime()
       else true # TODO: Better checking of custom or complex types
