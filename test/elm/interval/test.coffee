@@ -1270,6 +1270,8 @@ describe 'DateTimeIntervalCollapse', ->
 
   it 'disjoint intervals list collapses to ordered self', ->
     @dateTimeCollapseDisjoint.exec(@ctx).should.eql @dateTimeTwoItemDisjointList.exec(@ctx)
+
+  it 'reversed disjoint intervals list collapses to ordered self', ->
     @dateTimeCollapseDisjointReversed.exec(@ctx).should.eql @dateTimeTwoItemDisjointList.exec(@ctx)
 
   it 'adjacent intervals list combines', ->
@@ -1293,3 +1295,54 @@ describe 'DateTimeIntervalCollapse', ->
     @dateTime1_6Interval.toString().should.eql interval1CopyString
     @dateTime5_12Interval.toString().should.eql interval2CopyString
     @dateTime10_15Interval.toString().should.eql interval3CopyString
+
+describe 'Collapse', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'numeric collapse uses "1" as default per unit', ->
+    @intCollapseNoPer.exec(@ctx).should.eql @intCollapsePerUnit1.exec(@ctx)
+
+  it 'combines intervals separated by less than per unit', ->
+    @intCollapseSeparatedListPer3.exec(@ctx).should.eql @expectedIntervalList.exec(@ctx)
+
+  it 'DateTime collapse uses 1 ms as default per unit', ->
+    # TODO: spec says to determine this based on width of successor, but Bonnie
+    # will only ever have fully-defined dates. Implement successor way if time.
+    @dateTimeCollapseNoPer.exec(@ctx).should.eql @dateTimeCollapsePerMs.exec(@ctx)
+
+  it 'combines DateTime intervals separated by less than per unit', ->
+    @dateTimeCollapsePerDay.exec(@ctx).should.eql @dateTime1_15IntervalList.exec(@ctx)
+
+  it 'Quantity uses default per unit', ->
+    quantity_collapse = @quantityIntervalCollapseNoPer.exec(@ctx)
+    quantity_collapse.should.eql @expectedQuantityList.exec(@ctx)
+    quantity_collapse.should.eql @quantityIntervalCollapsePerUnit1.exec(@ctx)
+
+  it 'Quantity with separated intervals', ->
+    @collapseSeparatedQuantity.exec(@ctx).should.eql @quantitySeparatedBy3.exec(@ctx)
+
+  it 'Quantity combines disjoint intervals that are within per width', ->
+    @collapseSeparatedQuantityPer3.exec(@ctx).should.eql @expectedSeparatedQuantity.exec(@ctx)
+
+  it 'Quantity with units uses point type as default per value', ->
+    @collapseDisjointQuantityUnits.exec(@ctx).should.eql @expectedQuantityUnitsCollapse.exec(@ctx)
+
+  it 'Quantity with units disjoint but within per', ->
+    @collapseQuantityUnitsWithinPer.exec(@ctx).should.eql @expectedQuantityUnitsCollapse.exec(@ctx)
+
+  it 'Quantity with units disjoint and not within per', ->
+    @collapseQuantityUnitsNotWithinPer.exec(@ctx).should.eql @quantityMeterIntervalList.exec(@ctx)
+
+  it 'with Interval that has null throws', ->
+    should(() => @collapseNullIntervalList.exec(@ctx)).throw("Point type of intervals provided to collapse cannot be determined.")
+
+  it 'should ignore nulls in list of Intervals', ->
+    @nullInCollapse.exec(@ctx).should.eql @expectedResultWithNull.exec(@ctx)
+
+  it.skip 'should return null if list is null', ->
+    # TODO: Translation Error
+    should.not.exist @nullCollapse.exec(@ctx)
+
+  it 'should use default per unit if per is expicitly null', ->
+    @nullPerCollapse.exec(@ctx).should.eql @expectedResultNullPer.exec(@ctx)

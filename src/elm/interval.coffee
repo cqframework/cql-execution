@@ -1,6 +1,8 @@
 { Expression, UnimplementedExpression } = require './expression'
 { ThreeValuedLogic } = require '../datatypes/logic'
 { build } = require './builder'
+{ Quantity, doAddition, doSubtraction} = require './quantity'
+{ successor } = require '../util/math'
 dtivl = require '../datatypes/interval'
 cmp = require '../util/comparison'
 
@@ -157,17 +159,49 @@ module.exports.Collapse = class Collapse extends Expression
     super
 
   exec: (ctx) ->
-    intervals = @execArgs ctx
-    if intervals?.length <= 1
-      intervals
+    # collapse(argument List<Interval<T>>, per Quantity) List<Interval<T>>
+    [intervals, perWidth] = @execArgs ctx
+
+    # Clone intervals so this function remains idempotent
+    intervalsClone = []
+    for interval in intervals
+      # The spec says to ignore null intervals
+      if interval?
+        intervalsClone.push interval.copy()
+
+    # If the list is null, return null
+    if !intervals?
+      null
+    else if intervalsClone?.length <= 1
+      intervalsClone
     else
+      # If the per argument is null, the default unit interval for the point type
+      # of the intervals involved will be used (i.e. the interval that has a
+      # width equal to the result of the successor function for the point type).
+      if !perWidth?
+        if intervalsClone[0].low?
+          if intervalsClone[0].low.constructor.name == 'DateTime'
+            # Bonnie will always use milliseconds
+            # TODO determine this dynamically using duration between low and successor
+            perWidth = new Quantity(value: 1, unit: 'millisecond')
+          else if intervalsClone[0].low.isQuantity
+            perWidth = doSubtraction(successor(intervalsClone[0].low), intervalsClone[0].low)
+          else
+            perWidth = successor(intervalsClone[0].low) - intervalsClone[0].low
+        else
+          throw new Error("Point type of intervals provided to collapse cannot be determined.")
+
+        if typeof perWidth is 'number'
+          perWidth = new Quantity(value: perWidth, unit: '1')
+
       # we don't handle imprecise intervals at this time
-      for a in intervals
+      for a in intervalsClone
         if a.low.isImprecise?() || a.high.isImprecise?()
           throw new Error("Collapse does not support imprecise dates at this time.")
 
-      # sort intervals by start
-      intervals.sort (a,b)->
+
+      # sort intervalsClone by start
+      intervalsClone.sort (a,b)->
         if typeof a.low.before == 'function'
           return -1 if a.low.before b.low
           return 1 if a.low.after b.low
@@ -178,27 +212,32 @@ module.exports.Collapse = class Collapse extends Expression
 
       # collapse intervals as necessary
       collapsedIntervals = []
-      a = intervals.shift()
-      b = intervals.shift()
-      if typeof a.copy == 'function'
-       a = a.copy()
-      if typeof b.copy == 'function'
-       b = b.copy()
+      a = intervalsClone.shift()
+      b = intervalsClone.shift()
 
       while b
-        if typeof b.low.sameOrBefore == 'function'
-          if b.low.sameOrBefore a.high
+        if typeof b.low.durationBetween == 'function'
+          # handle DateTimes using durationBetween
+          if a.high.after b.low # overlap
+            a.high = b.high if b.high.after a.high
+          else if a.high.durationBetween(b.low, perWidth.unit).high <= perWidth.value
+            a.high = b.high
+          else
+            collapsedIntervals.push a
+            a = b
+        else if typeof b.low.sameOrBefore == 'function'
+          if b.low.sameOrBefore doAddition(a.high, perWidth)
             a.high = b.high if b.high.after a.high
           else
             collapsedIntervals.push a
             a = b
         else
-          if b.low <= a.high
+          if (b.low - a.high) <= perWidth.value
             a.high = b.high if b.high > a.high
           else
             collapsedIntervals.push a
             a = b
-        b = intervals.shift()
+        b = intervalsClone.shift()
       collapsedIntervals.push a
       collapsedIntervals
 
