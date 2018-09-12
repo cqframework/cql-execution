@@ -1256,10 +1256,10 @@
       var newHigh, newLow;
       newLow = this.low;
       newHigh = this.high;
-      if (typeof this.low.copy === 'function') {
+      if ((this.low != null) && typeof this.low.copy === 'function') {
         newLow = this.low.copy();
       }
-      if (typeof this.high.copy === 'function') {
+      if ((this.high != null) && typeof this.high.copy === 'function') {
         newHigh = this.high.copy();
       }
       return new Interval(newLow, newHigh, this.lowClosed, this.highClosed);
@@ -4287,20 +4287,29 @@
     Collapse.prototype.exec = function(ctx) {
       var a, b, base, base1, collapsedIntervals, i, interval, intervals, intervalsClone, j, len, len1, perWidth, ref2;
       ref2 = this.execArgs(ctx), intervals = ref2[0], perWidth = ref2[1];
-      if ((intervals != null ? intervals.length : void 0) <= 1) {
-        return intervals;
+      intervalsClone = [];
+      for (i = 0, len = intervals.length; i < len; i++) {
+        interval = intervals[i];
+        if (interval != null) {
+          intervalsClone.push(interval.copy());
+        }
+      }
+      if (intervals == null) {
+        return null;
+      } else if ((intervalsClone != null ? intervalsClone.length : void 0) <= 1) {
+        return intervalsClone;
       } else {
         if (perWidth == null) {
-          if (intervals[0].low != null) {
-            if (intervals[0].low.constructor.name === 'DateTime') {
+          if (intervalsClone[0].low != null) {
+            if (intervalsClone[0].low.constructor.name === 'DateTime') {
               perWidth = new Quantity({
                 value: 1,
                 unit: 'millisecond'
               });
-            } else if (intervals[0].low.isQuantity) {
-              perWidth = doSubtraction(successor(intervals[0].low), intervals[0].low);
+            } else if (intervalsClone[0].low.isQuantity) {
+              perWidth = doSubtraction(successor(intervalsClone[0].low), intervalsClone[0].low);
             } else {
-              perWidth = successor(intervals[0].low) - intervals[0].low;
+              perWidth = successor(intervalsClone[0].low) - intervalsClone[0].low;
             }
           } else {
             throw new Error("Point type of intervals provided to collapse cannot be determined.");
@@ -4312,16 +4321,11 @@
             });
           }
         }
-        for (i = 0, len = intervals.length; i < len; i++) {
-          a = intervals[i];
+        for (j = 0, len1 = intervalsClone.length; j < len1; j++) {
+          a = intervalsClone[j];
           if ((typeof (base = a.low).isImprecise === "function" ? base.isImprecise() : void 0) || (typeof (base1 = a.high).isImprecise === "function" ? base1.isImprecise() : void 0)) {
             throw new Error("Collapse does not support imprecise dates at this time.");
           }
-        }
-        intervalsClone = [];
-        for (j = 0, len1 = intervals.length; j < len1; j++) {
-          interval = intervals[j];
-          intervalsClone.push(interval.copy());
         }
         intervalsClone.sort(function(a, b) {
           if (typeof a.low.before === 'function') {

@@ -16,9 +16,9 @@ module.exports.Interval = class Interval
   copy: ->
     newLow = @low
     newHigh = @high
-    if typeof @low.copy == 'function'
+    if @low? and typeof @low.copy == 'function'
       newLow = @low.copy()
-    if typeof @high.copy == 'function'
+    if @high? and typeof @high.copy == 'function'
       newHigh = @high.copy();
 
     new Interval(newLow, newHigh, @lowClosed, @highClosed)

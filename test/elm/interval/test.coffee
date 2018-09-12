@@ -1314,25 +1314,35 @@ describe 'Collapse', ->
   it 'combines DateTime intervals separated by less than per unit', ->
     @dateTimeCollapsePerDay.exec(@ctx).should.eql @dateTime1_15IntervalList.exec(@ctx)
 
-  it 'Quantity collapse uses default per unit', ->
+  it 'Quantity uses default per unit', ->
     quantity_collapse = @quantityIntervalCollapseNoPer.exec(@ctx)
     quantity_collapse.should.eql @expectedQuantityList.exec(@ctx)
     quantity_collapse.should.eql @quantityIntervalCollapsePerUnit1.exec(@ctx)
 
-  it 'Quantity collapse with separated intervals', ->
+  it 'Quantity with separated intervals', ->
     @collapseSeparatedQuantity.exec(@ctx).should.eql @quantitySeparatedBy3.exec(@ctx)
 
-  it 'Quantity collapse combines disjoint intervals that are within per width', ->
+  it 'Quantity combines disjoint intervals that are within per width', ->
     @collapseSeparatedQuantityPer3.exec(@ctx).should.eql @expectedSeparatedQuantity.exec(@ctx)
 
-  it 'Quantity collapse with units uses point type as default per value', ->
+  it 'Quantity with units uses point type as default per value', ->
     @collapseDisjointQuantityUnits.exec(@ctx).should.eql @expectedQuantityUnitsCollapse.exec(@ctx)
 
-  it 'Quantity collapse with units disjoint but within per', ->
+  it 'Quantity with units disjoint but within per', ->
     @collapseQuantityUnitsWithinPer.exec(@ctx).should.eql @expectedQuantityUnitsCollapse.exec(@ctx)
 
-  it 'Quantity collapse with units disjoint and not within per', ->
+  it 'Quantity with units disjoint and not within per', ->
     @collapseQuantityUnitsNotWithinPer.exec(@ctx).should.eql @quantityMeterIntervalList.exec(@ctx)
 
-  it 'Collapse with Interval that has null throws', ->
+  it 'with Interval that has null throws', ->
     should(() => @collapseNullIntervalList.exec(@ctx)).throw("Point type of intervals provided to collapse cannot be determined.")
+
+  it 'should ignore nulls in list of Intervals', ->
+    @nullInCollapse.exec(@ctx).should.eql @expectedResultWithNull.exec(@ctx)
+
+  it.skip 'should return null if list is null', ->
+    # TODO: Translation Error
+    should.not.exist @nullCollapse.exec(@ctx)
+
+  it 'should use default per unit if per is expicitly null', ->
+    @nullPerCollapse.exec(@ctx).should.eql @expectedResultNullPer.exec(@ctx)

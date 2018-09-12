@@ -162,22 +162,32 @@ module.exports.Collapse = class Collapse extends Expression
     # collapse(argument List<Interval<T>>, per Quantity) List<Interval<T>>
     [intervals, perWidth] = @execArgs ctx
 
-    if intervals?.length <= 1
-      intervals
+    # Clone intervals so this function remains idempotent
+    intervalsClone = []
+    for interval in intervals
+      # The spec says to ignore null intervals
+      if interval?
+        intervalsClone.push interval.copy()
+
+    # If the list is null, return null
+    if !intervals?
+      null
+    else if intervalsClone?.length <= 1
+      intervalsClone
     else
       # If the per argument is null, the default unit interval for the point type
       # of the intervals involved will be used (i.e. the interval that has a
       # width equal to the result of the successor function for the point type).
       if !perWidth?
-        if intervals[0].low?
-          if intervals[0].low.constructor.name == 'DateTime'
+        if intervalsClone[0].low?
+          if intervalsClone[0].low.constructor.name == 'DateTime'
             # Bonnie will always use milliseconds
             # TODO determine this dynamically using duration between low and successor
             perWidth = new Quantity(value: 1, unit: 'millisecond')
-          else if intervals[0].low.isQuantity
-            perWidth = doSubtraction(successor(intervals[0].low), intervals[0].low)
+          else if intervalsClone[0].low.isQuantity
+            perWidth = doSubtraction(successor(intervalsClone[0].low), intervalsClone[0].low)
           else
-            perWidth = successor(intervals[0].low) - intervals[0].low
+            perWidth = successor(intervalsClone[0].low) - intervalsClone[0].low
         else
           throw new Error("Point type of intervals provided to collapse cannot be determined.")
 
@@ -185,14 +195,10 @@ module.exports.Collapse = class Collapse extends Expression
           perWidth = new Quantity(value: perWidth, unit: '1')
 
       # we don't handle imprecise intervals at this time
-      for a in intervals
+      for a in intervalsClone
         if a.low.isImprecise?() || a.high.isImprecise?()
           throw new Error("Collapse does not support imprecise dates at this time.")
 
-      # Clone intervals so this function remains idempotent
-      intervalsClone = []
-      for interval in intervals
-        intervalsClone.push interval.copy()
 
       # sort intervalsClone by start
       intervalsClone.sort (a,b)->
@@ -203,8 +209,6 @@ module.exports.Collapse = class Collapse extends Expression
           return -1 if a.low < b.low
           return 1 if a.low > b.low
         0
-
-
 
       # collapse intervals as necessary
       collapsedIntervals = []

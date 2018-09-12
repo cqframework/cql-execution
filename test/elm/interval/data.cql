@@ -853,6 +853,11 @@ define ExpectedQuantityUnitsCollapse: { Interval[ToQuantity('1 \'m\''), ToQuanti
 define CollapseQuantityUnitsWithinPer: collapse QuantityMeterIntervalList per ToQuantity('1 \'cm\'')
 define CollapseQuantityUnitsNotWithinPer: collapse QuantityMeterIntervalList per ToQuantity('1 \'mm\'')
 
-// Interval with null
+// Null test cases
 define NullIntervalList: { Interval[null, 3], Interval[3, 5] }
 define CollapseNullIntervalList: collapse NullIntervalList
+define NullInCollapse: collapse { Interval[1,3], null }
+define ExpectedResultWithNull: { Interval[1,3] }
+// define NullCollapse: collapse null // Translation Error
+define NullPerCollapse: collapse { Interval[1,4], Interval[4,7] } per null
+define ExpectedResultNullPer: { Interval[1,7] }
