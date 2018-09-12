@@ -177,7 +177,7 @@ module.exports.Collapse = class Collapse extends Expression
           else if intervals[0].low.isQuantity
             perWidth = doSubtraction(successor(intervals[0].low), intervals[0].low)
           else
-            perWidth = successor(intervals[0].low)- intervals[0].low
+            perWidth = successor(intervals[0].low) - intervals[0].low
         else
           throw new Error("Point type of intervals provided to collapse cannot be determined.")
 
