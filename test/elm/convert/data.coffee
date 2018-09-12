@@ -654,15 +654,13 @@ module.exports['FromString'] = {
             } ],
             "expression" : {
                "localId" : "59",
-               "name" : "ToDate",
-               "libraryName" : "System",
-               "type" : "FunctionRef",
-               "operand" : [ {
+               "type" : "ToDate",
+               "operand" : {
                   "localId" : "58",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "2015-01-02",
                   "type" : "Literal"
-               } ]
+               }
             }
          } ]
       }
@@ -1466,14 +1464,13 @@ module.exports['FromDate'] = {
                "type" : "ToDateTime",
                "operand" : {
                   "localId" : "4",
-                  "name" : "ToDate",
-                  "type" : "FunctionRef",
-                  "operand" : [ {
+                  "type" : "ToDate",
+                  "operand" : {
                      "localId" : "3",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "2015-01-01",
                      "type" : "Literal"
-                  } ]
+                  }
                }
             }
          }, {
@@ -1516,14 +1513,13 @@ module.exports['FromDate'] = {
             } ],
             "expression" : {
                "localId" : "9",
-               "name" : "ToDate",
-               "type" : "FunctionRef",
-               "operand" : [ {
+               "type" : "ToDate",
+               "operand" : {
                   "localId" : "8",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "2015-01-01",
                   "type" : "Literal"
-               } ]
+               }
             }
          }, {
             "localId" : "15",
@@ -1568,14 +1564,13 @@ module.exports['FromDate'] = {
                "type" : "ToString",
                "operand" : {
                   "localId" : "13",
-                  "name" : "ToDate",
-                  "type" : "FunctionRef",
-                  "operand" : [ {
+                  "type" : "ToDate",
+                  "operand" : {
                      "localId" : "12",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "2015-01-01",
                      "type" : "Literal"
-                  } ]
+                  }
                }
             }
          } ]
