@@ -119,6 +119,16 @@ describe 'NotEqual', ->
     @eqDateTimesTZ.exec(@ctx).should.be.false()
     @uneqDateTimesTZ.exec(@ctx).should.be.true()
 
+  it 'should identify equal/unequal date times specified to only date level', ->
+    should(@eqDateTimesOnlyDate.exec(@ctx)).be.false()
+    should(@uneqDateTimesOnlyDate.exec(@ctx)).be.true()
+
+  it 'should identify case of a possibly equal date times with differing precisions', ->
+    should(@possiblyEqDateTimesOnlyDateOnOne.exec(@ctx)).be.null()
+
+  it 'should identify unequal date times with differing precisions', ->
+    should(@uneqDateTimesOnlyDateOnOne.exec(@ctx)).be.true()
+
   it 'should identify uncertain/unequal DateTimes when there is imprecision', ->
     should(@possiblyEqualDateTimes.exec(@ctx)).be.null()
     @impossiblyEqualDateTimes.exec(@ctx).should.be.true()
