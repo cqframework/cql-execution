@@ -1118,10 +1118,6 @@
       return this.reducedPrecision(DateTime.Unit.DAY);
     };
 
-    DateTime.prototype.isDateFmt = function() {
-      return (this.hours === null || this.hours === void 0) && (this.minutes === null || this.minutes === void 0) && (this.seconds === null || this.seconds === void 0) && (this.milliseconds === null || this.milliseconds === void 0);
-    };
-
     DateTime.prototype.getTime = function() {
       return new DateTime(0, 1, 1, this.hour, this.minute, this.second, this.millisecond, this.timezoneOffset);
     };
@@ -1375,7 +1371,7 @@
     };
 
     Date.prototype.differenceBetween = function(other, unitField) {
-      var a, aHighMoment, aLowMoment, aUncertainty, b, bHighMoment, bLowMoment, bUncertainty;
+      var a, b;
       if (other instanceof DateTime) {
         return this.getDateTime().differenceBetween(other, unitField);
       }
@@ -1394,17 +1390,7 @@
         a = this._floorWeek(a);
         b = this._floorWeek(b);
       }
-      if (unitField === Date.Unit.YEAR || unitField === Date.Unit.MONTH) {
-        return a.durationBetween(b, unitField);
-      } else {
-        aUncertainty = a.toUncertainty();
-        bUncertainty = b.toUncertainty();
-        aLowMoment = moment(aUncertainty.low).utc();
-        aHighMoment = moment(aUncertainty.high).utc();
-        bLowMoment = moment(bUncertainty.low).utc();
-        bHighMoment = moment(bUncertainty.high).utc();
-        return new Uncertainty(bLowMoment.diff(aHighMoment, unitField + 's'), bHighMoment.diff(aLowMoment, unitField + 's'));
-      }
+      return a.durationBetween(b, unitField);
     };
 
     Date.prototype._floorWeek = function(d) {

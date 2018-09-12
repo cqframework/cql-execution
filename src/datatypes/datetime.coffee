@@ -190,7 +190,6 @@ class DateTime
     b = other.copy()
     # Use moment.js for day or finer granularity due to the daylight savings time fall back/spring forward
     if unitField == DateTime.Unit.MONTH || unitField == DateTime.Unit.YEAR || unitField == DateTime.Unit.WEEK || unitField == DateTime.Unit.DAY
-    # if true
       # The dates need to agree on where the boundaries are, so we must normalize to the same time zone
       if a.timezoneOffset isnt b.timezoneOffset
         b = b.convertToTimezoneOffset(a.timezoneOffset)
@@ -397,10 +396,6 @@ class DateTime
   getDate: () ->
     @reducedPrecision DateTime.Unit.DAY
 
-  isDateFmt: () ->
-    (@hours == null || @hours == undefined) && (@minutes == null || @minutes == undefined) && 
-    (@seconds == null || @seconds == undefined) && (@milliseconds == null || @milliseconds == undefined)
-
   getTime: () ->
     new DateTime(0, 1, 1, @hour, @minute, @second, @millisecond, @timezoneOffset)
 
@@ -562,20 +557,7 @@ class Date
       a = @_floorWeek(a)
       b = @_floorWeek(b)
 
-    #TODO: is he moment stuff needed??????
-    # Because moment.js handles years and months differently, use the existing durationBetween for those
-    # Finer granularity times can be handled by the DST-aware moment.js library.
-    if unitField == Date.Unit.YEAR || unitField == Date.Unit.MONTH
-      a.durationBetween(b, unitField)
-    else
-      aUncertainty = a.toUncertainty()
-      bUncertainty = b.toUncertainty()
-      aLowMoment = moment(aUncertainty.low).utc()
-      aHighMoment = moment(aUncertainty.high).utc()
-      bLowMoment = moment(bUncertainty.low).utc()
-      bHighMoment = moment(bUncertainty.high).utc()
-      # moment uses the plural form of the unitField
-      new Uncertainty(bLowMoment.diff(aHighMoment, unitField + 's'), bHighMoment.diff(aLowMoment, unitField + 's'))
+    a.durationBetween(b, unitField)
 
   _floorWeek: (d) ->
     # To "floor" a week, we need to go back to the last Sunday (that's when getDay() == 0 in javascript)
