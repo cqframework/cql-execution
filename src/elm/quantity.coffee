@@ -200,7 +200,7 @@ units_to_string = (units = {}) ->
   unit_string += numer.join(".")
   if denom.length > 0
     unit_string += "/" + denom.join("/")
-  if unit_string == "" then null else unit_string
+  if unit_string == "" then "1" else unit_string
 
 
 # this method is taken from the ucum.js library which it does not  export

@@ -5985,7 +5985,7 @@
       unit_string += "/" + denom.join("/");
     }
     if (unit_string === "") {
-      return null;
+      return "1";
     } else {
       return unit_string;
     }
