@@ -292,6 +292,12 @@ describe 'Includes', ->
     should(@mayIncludeDayOfIvlVeryImpreciseHigh.exec(@ctx)).be.null()
     should(@mayIncludeDayOfIvlVeryImpreciseSurrounding.exec(@ctx)).be.null()
 
+  it 'should correctly handle point inclusion', ->
+    @impreciseIncludesDate.exec(@ctx).should.be.true()
+    @impreciseDoesntIncludeDate.exec(@ctx).should.be.false()
+    @intervalIncludesQuantity.exec(@ctx).should.be.true()
+    @intervalDoesntIncludeQuantity.exec(@ctx).should.be.false()
+
 describe 'ProperlyIncludes', ->
   @beforeEach ->
     setup @, data
@@ -382,6 +388,13 @@ describe 'IncludedIn', ->
     should(@mayIncludeDayOfIvlVeryImpreciseLow.exec(@ctx)).be.null()
     should(@mayIncludeDayOfIvlVeryImpreciseHigh.exec(@ctx)).be.null()
     should(@mayIncludeDayOfIvlVeryImpreciseSurrounding.exec(@ctx)).be.null()
+
+  it 'should correctly handle point comparisons', ->
+    @includesDayInInterval.exec(@ctx).should.be.true()
+    @doesNotIncludeDayInInterval.exec(@ctx).should.be.false()
+    @quantityIncludedInterval.exec(@ctx).should.be.true()
+    @quantityNotIncludedInterval.exec(@ctx).should.be.false()
+
 
 describe 'ProperlyIncludedIn', ->
   @beforeEach ->

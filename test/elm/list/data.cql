@@ -116,6 +116,12 @@ define TuplesIncluded: {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
 define TuplesNotIncluded: {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} includes {Tuple{a:2, b:'d'}, Tuple{a:3, b:'c'}}
 define NullIncluded: {1, 2, 3, 4, 5} includes null
 define NullIncludes: null includes {1, 2, 3, 4, 5}
+define DayIncluded: {DateTime(2012, 3, 2), DateTime(2012, 3, 3), DateTime(2012, 3, 4)} includes DateTime(2012, 3, 3)
+define DayNotIncluded: {DateTime(2012, 3, 2), DateTime(2012, 3, 3), DateTime(2012, 3, 4)} includes DateTime(2014, 3, 3)
+define IntegerIncluded: {1, 2, 3, 4, 5} includes 3
+define IntegerNotIncluded: {1, 2, 3, 4, 5} includes 33
+define QuantityInList: { ToQuantity('1 \'m\''), ToQuantity('1.995 \'m\''), ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')} includes ToQuantity('1 \'m\'') 
+define QuantityNotInList: { ToQuantity('100 \'m\''), ToQuantity('1.995 \'m\''), ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')} includes ToQuantity('1 \'m\'')
 
 // @Test: IncludedIn
 define IsIncluded: {2, 3, 4} included in {1, 2, 3, 4, 5}
@@ -126,6 +132,12 @@ define TuplesIncluded: {Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} included in {Tuple
 define TuplesNotIncluded: {Tuple{a:2, b:'d'}, Tuple{a:3, b:'c'}} included in {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
 define NullIncludes: {1, 2, 3, 4, 5} included in null
 define NullIncluded: null included in {1, 2, 3, 4, 5}
+define DayIncluded: DateTime(2012, 3, 3) included in {DateTime(2012, 3, 2), DateTime(2012, 3, 3), DateTime(2012, 3, 4)}
+define DayNotIncluded: DateTime(2014, 3, 3) included in {DateTime(2012, 3, 2), DateTime(2012, 3, 3), DateTime(2012, 3, 4)}
+define IntegerIncluded: 3 included in {1, 2, 3, 4, 5}
+define IntegerNotIncluded: 33 included in {1, 2, 3, 4, 5}
+define QuantityInList: ToQuantity('1 \'m\'') included in { ToQuantity('1 \'m\''), ToQuantity('1.995 \'m\''), ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')}
+define QuantityNotInList: ToQuantity('100 \'m\'') included in { ToQuantity('1 \'m\''), ToQuantity('1.995 \'m\''), ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')}
 
 // @Test: ProperIncludes
 define IsIncluded: {1, 2, 3, 4, 5} properly includes {2, 3, 4, 5}

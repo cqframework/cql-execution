@@ -324,6 +324,14 @@ describe 'Includes', ->
     # TODO: currently returns null
     should(@nullIncludes.exec(@ctx)).be.false()
 
+  it 'should correctly handle point comparisons', ->
+    @dayIncluded.exec(@ctx).should.be.true()
+    @dayNotIncluded.exec(@ctx).should.be.false()
+    @integerIncluded.exec(@ctx).should.be.true()
+    @integerNotIncluded.exec(@ctx).should.be.false()
+    @quantityInList.exec(@ctx).should.be.true()
+    @quantityNotInList.exec(@ctx).should.be.false()
+
 describe 'IncludedIn', ->
   @beforeEach ->
     setup @, data
@@ -353,6 +361,14 @@ describe 'IncludedIn', ->
   it 'should return false if right arg is null', ->
     # TODO: currently returns null
     should(@nullIncludes.exec(@ctx)).be.false()
+
+  it 'should correctly handle point comparisons', ->
+    @dayIncluded.exec(@ctx).should.be.true()
+    @dayNotIncluded.exec(@ctx).should.be.false()
+    @integerIncluded.exec(@ctx).should.be.true()
+    @integerNotIncluded.exec(@ctx).should.be.false()
+    @quantityInList.exec(@ctx).should.be.true()
+    @quantityNotInList.exec(@ctx).should.be.false()
 
 describe 'ProperIncludes', ->
   @beforeEach ->
