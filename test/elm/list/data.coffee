@@ -9029,6 +9029,70 @@ define NullIncludes: null includes {1, 2, 3, 4, 5}
 
 module.exports['Includes'] = {
    "library" : {
+      "annotation" : [ {
+         "startLine" : 4,
+         "startChar" : 45,
+         "endLine" : 4,
+         "endChar" : 53,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 5,
+         "startChar" : 53,
+         "endLine" : 5,
+         "endChar" : 61,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 6,
+         "startChar" : 41,
+         "endLine" : 6,
+         "endChar" : 55,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 7,
+         "startChar" : 48,
+         "endLine" : 7,
+         "endChar" : 56,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 8,
+         "startChar" : 91,
+         "endLine" : 8,
+         "endChar" : 128,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 9,
+         "startChar" : 94,
+         "endLine" : 9,
+         "endChar" : 131,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 11,
+         "startChar" : 36,
+         "endLine" : 11,
+         "endChar" : 50,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -10085,6 +10149,61 @@ define NullIncluded: null included in {1, 2, 3, 4, 5}
 
 module.exports['IncludedIn'] = {
    "library" : {
+      "annotation" : [ {
+         "startLine" : 4,
+         "startChar" : 20,
+         "endLine" : 4,
+         "endChar" : 28,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 5,
+         "startChar" : 28,
+         "endLine" : 5,
+         "endChar" : 36,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 6,
+         "startChar" : 16,
+         "endLine" : 6,
+         "endChar" : 30,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 7,
+         "startChar" : 23,
+         "endLine" : 7,
+         "endChar" : 31,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 8,
+         "startChar" : 24,
+         "endLine" : 8,
+         "endChar" : 61,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 9,
+         "startChar" : 27,
+         "endLine" : 9,
+         "endChar" : 64,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -11141,6 +11260,70 @@ define NullIncludes: null properly includes {1, 2, 3, 4, 5}
 
 module.exports['ProperIncludes'] = {
    "library" : {
+      "annotation" : [ {
+         "startLine" : 4,
+         "startChar" : 54,
+         "endLine" : 4,
+         "endChar" : 65,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 5,
+         "startChar" : 62,
+         "endLine" : 5,
+         "endChar" : 73,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 6,
+         "startChar" : 50,
+         "endLine" : 6,
+         "endChar" : 64,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 7,
+         "startChar" : 57,
+         "endLine" : 7,
+         "endChar" : 68,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 8,
+         "startChar" : 100,
+         "endLine" : 8,
+         "endChar" : 137,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 9,
+         "startChar" : 103,
+         "endLine" : 9,
+         "endChar" : 140,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 11,
+         "startChar" : 45,
+         "endLine" : 11,
+         "endChar" : 59,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -12212,6 +12395,70 @@ define NullIncluded: (null as List<Integer>) properly included in {1, 2, 3, 4, 5
 
 module.exports['ProperIncludedIn'] = {
    "library" : {
+      "annotation" : [ {
+         "startLine" : 4,
+         "startChar" : 20,
+         "endLine" : 4,
+         "endChar" : 28,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 5,
+         "startChar" : 28,
+         "endLine" : 5,
+         "endChar" : 36,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 6,
+         "startChar" : 16,
+         "endLine" : 6,
+         "endChar" : 30,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 7,
+         "startChar" : 23,
+         "endLine" : 7,
+         "endChar" : 31,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 8,
+         "startChar" : 24,
+         "endLine" : 8,
+         "endChar" : 61,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 9,
+         "startChar" : 27,
+         "endLine" : 9,
+         "endChar" : 64,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 11,
+         "startChar" : 23,
+         "endLine" : 11,
+         "endChar" : 43,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -15818,32 +16065,8 @@ define FourInFive: 4 in 5 // CQL-to-ELM will promote the 5 to a list via ToList
 define LengthOfNull: Length(null as Integer) // CQL-to-ELM will promote the null to a list via ToList
 ###
 
-###
-Translation Error(s):
-[4:20, 4:25] Could not resolve call to operator In with signature (System.Integer,System.Integer).
-[5:20, 5:25] Could not resolve call to operator In with signature (System.Integer,System.Integer).
-###
 module.exports['ToList'] = {
    "library" : {
-      "annotation" : [ {
-         "startLine" : 4,
-         "startChar" : 20,
-         "endLine" : 4,
-         "endChar" : 25,
-         "message" : "Could not resolve call to operator In with signature (System.Integer,System.Integer).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 5,
-         "startChar" : 20,
-         "endLine" : 5,
-         "endChar" : 25,
-         "message" : "Could not resolve call to operator In with signature (System.Integer,System.Integer).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -15896,7 +16119,21 @@ module.exports['ToList'] = {
             } ],
             "expression" : {
                "localId" : "4",
-               "type" : "Null"
+               "type" : "In",
+               "operand" : [ {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "5",
+                  "type" : "Literal"
+               }, {
+                  "type" : "ToList",
+                  "operand" : {
+                     "localId" : "3",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  }
+               } ]
             }
          }, {
             "localId" : "9",
@@ -15920,7 +16157,21 @@ module.exports['ToList'] = {
             } ],
             "expression" : {
                "localId" : "8",
-               "type" : "Null"
+               "type" : "In",
+               "operand" : [ {
+                  "localId" : "6",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "4",
+                  "type" : "Literal"
+               }, {
+                  "type" : "ToList",
+                  "operand" : {
+                     "localId" : "7",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  }
+               } ]
             }
          }, {
             "localId" : "14",
