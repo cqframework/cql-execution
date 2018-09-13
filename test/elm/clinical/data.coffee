@@ -1571,17 +1571,15 @@ module.exports['CalculateAge'] = {
                "precision" : "Year",
                "type" : "CalculateAge",
                "operand" : {
-                  "name" : "ToDate",
-                  "libraryName" : "System",
-                  "type" : "FunctionRef",
-                  "operand" : [ {
+                  "type" : "ToDate",
+                  "operand" : {
                      "path" : "birthDate",
                      "type" : "Property",
                      "source" : {
                         "name" : "Patient",
                         "type" : "ExpressionRef"
                      }
-                  } ]
+                  }
                }
             }
          }, {
@@ -1608,17 +1606,15 @@ module.exports['CalculateAge'] = {
                "precision" : "Month",
                "type" : "CalculateAge",
                "operand" : {
-                  "name" : "ToDate",
-                  "libraryName" : "System",
-                  "type" : "FunctionRef",
-                  "operand" : [ {
+                  "type" : "ToDate",
+                  "operand" : {
                      "path" : "birthDate",
                      "type" : "Property",
                      "source" : {
                         "name" : "Patient",
                         "type" : "ExpressionRef"
                      }
-                  } ]
+                  }
                }
             }
          }, {
