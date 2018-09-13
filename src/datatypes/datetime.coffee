@@ -35,7 +35,7 @@ class DateTime
       args.push(0)
     new DateTime(args...)
 
-  @fromDate: (date, timezoneOffset) -> #This is from a JS Date, not a CQL Date
+  @fromJsDate: (date, timezoneOffset) -> #This is from a JS Date, not a CQL Date
     if (date instanceof DateTime) then return date
     if timezoneOffset?
       date = makeJsDate(date.getTime() + (timezoneOffset * 60 * 60 * 1000))
@@ -105,7 +105,7 @@ class DateTime
       @add(-1,DateTime.Unit.YEAR)
 
   convertToTimezoneOffset: (timezoneOffset = 0) ->
-    d = DateTime.fromDate(@toJSDate(), timezoneOffset)
+    d = DateTime.fromJsDate(@toJSDate(), timezoneOffset)
     d.reducedPrecision(@getPrecision())
 
   sameAs: (other, precision = DateTime.Unit.MILLISECOND) ->
@@ -174,7 +174,7 @@ class DateTime
     if result[field]?
       # Increment the field, then round-trip to JS date and back for calendar math
       result[field] = result[field] + offset
-      normalized = DateTime.fromDate(result.toJSDate(), @timezoneOffset)
+      normalized = DateTime.fromJsDate(result.toJSDate(), @timezoneOffset)
       for field in DateTime.FIELDS when result[field]?
         result[field] = normalized[field]
 
