@@ -206,7 +206,7 @@ describe 'DateTimeInterval.includes', ->
     x.toMinute.includes(y.toMinute).should.be.false()
     should.not.exist x.toYear.includes(y.closed)
 
-  it 'should throw when the argument is a point', ->
+  it 'should include a point date', ->
     @all2012.closed.includes(@mid2012.full).should.be.true()
 
 describe 'DateTimeInterval.includedIn', ->
@@ -321,7 +321,7 @@ describe 'DateTimeInterval.includedIn', ->
     should.not.exist x.toMinute.includedIn(y.toMinute)
     x.toYear.includedIn(y.closed).should.be.true()
 
-  it 'should throw when the argument is a point', ->
+  it 'should include a point date', ->
     @all2012.closed.includedIn(@mid2012.full).should.be.true()
 
 describe 'DateTimeInterval.overlaps(DateTimeInterval)', ->
