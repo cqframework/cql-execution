@@ -475,6 +475,22 @@ describe 'SameOrAfter', ->
     should(@nullRight.exec(@ctx)).be.null()
     should(@nullBoth.exec(@ctx)).be.null()
 
+  it 'should properly treat "on or after" the same as "same or after"', ->
+    @sameOOA.exec(@ctx).should.be.true()
+    @afterOOA.exec(@ctx).should.be.true()
+    @beforeOOA.exec(@ctx).should.be.false()
+    should(@nullLeftOOA.exec(@ctx)).be.null()
+    should(@nullRightOOA.exec(@ctx)).be.null()
+    should(@nullBothOOA.exec(@ctx)).be.null()
+
+  it 'should properly treat "after or on" the same as "same or after"', ->
+    @sameAOO.exec(@ctx).should.be.true()
+    @afterAOO.exec(@ctx).should.be.true()
+    @beforeAOO.exec(@ctx).should.be.false()
+    should(@nullLeftAOO.exec(@ctx)).be.null()
+    should(@nullRightAOO.exec(@ctx)).be.null()
+    should(@nullBothAOO.exec(@ctx)).be.null()
+
 describe 'SameOrBefore', ->
   @beforeEach ->
     setup @, data
@@ -538,6 +554,22 @@ describe 'SameOrBefore', ->
     should(@nullLeft.exec(@ctx)).be.null()
     should(@nullRight.exec(@ctx)).be.null()
     should(@nullBoth.exec(@ctx)).be.null()
+
+  it 'should properly treat "on or before" the same as "same or before"', ->
+    @sameOOB.exec(@ctx).should.be.true()
+    @afterOOB.exec(@ctx).should.be.false()
+    @beforeOOB.exec(@ctx).should.be.true()
+    should(@nullLeftOOB.exec(@ctx)).be.null()
+    should(@nullRightOOB.exec(@ctx)).be.null()
+    should(@nullBothOOB.exec(@ctx)).be.null()
+
+  it 'should properly treat "before or on" the same as "same or before"', ->
+    @sameBOO.exec(@ctx).should.be.true()
+    @afterBOO.exec(@ctx).should.be.false()
+    @beforeBOO.exec(@ctx).should.be.true()
+    should(@nullLeftBOO.exec(@ctx)).be.null()
+    should(@nullRightBOO.exec(@ctx)).be.null()
+    should(@nullBothBOO.exec(@ctx)).be.null()
 
 describe 'After', ->
   @beforeEach ->
