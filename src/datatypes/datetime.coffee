@@ -119,7 +119,28 @@ class DateTime
       else false
 
   equals: (other) ->
-    @sameAs(other, DateTime.Unit.MILLISECOND)
+    return null if not(other instanceof DateTime)
+
+    # make a copy of other in the correct timezone offset if they don't match.
+    if (@timezoneOffset != other.timezoneOffset)
+      other = other.convertToTimezoneOffset(@timezoneOffset)
+
+    for field in DateTime.FIELDS
+      # if both have this precision defined
+      if @[field]? and other[field]?
+        # if they are different then return with false
+        if @[field] != other[field]
+          return false
+
+      # if both dont have this precision, return true
+      else if !@[field]? and !other[field]?
+        return true
+
+      # otherwise they have inconclusive precision, return null
+      else
+        return null
+    # if we made it here, then all fields matched.
+    true
 
   sameOrBefore: (other, precision = DateTime.Unit.MILLISECOND) ->
     other = @_implicitlyConvert(other)

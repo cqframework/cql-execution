@@ -755,7 +755,27 @@
     };
 
     DateTime.prototype.equals = function(other) {
-      return this.sameAs(other, DateTime.Unit.MILLISECOND);
+      var field, i, len, ref;
+      if (!(other instanceof DateTime)) {
+        return null;
+      }
+      if (this.timezoneOffset !== other.timezoneOffset) {
+        other = other.convertToTimezoneOffset(this.timezoneOffset);
+      }
+      ref = DateTime.FIELDS;
+      for (i = 0, len = ref.length; i < len; i++) {
+        field = ref[i];
+        if ((this[field] != null) && (other[field] != null)) {
+          if (this[field] !== other[field]) {
+            return false;
+          }
+        } else if ((this[field] == null) && (other[field] == null)) {
+          return true;
+        } else {
+          return null;
+        }
+      }
+      return true;
     };
 
     DateTime.prototype.sameOrBefore = function(other, precision) {

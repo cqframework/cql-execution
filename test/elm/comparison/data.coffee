@@ -24,7 +24,7 @@ define UneqDateTimes: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) = DateTime(20
 define EqDateTimesTZ: DateTime(2000, 3, 15, 23, 30, 25, 200, +1.0) = DateTime(2000, 3, 16, 2, 30, 25, 200, +4.0)
 define UneqDateTimesTZ: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) = DateTime(2000, 3, 15, 13, 30, 25, 200, +2.0)
 define EqDateTimesOnlyDate: DateTime(2000, 3, 15) = DateTime(2000, 3, 15)
-define UnqDateTimesOnlyDate: DateTime(2000, 3, 14) = DateTime(2000, 3, 15)
+define UneqDateTimesOnlyDate: DateTime(2000, 3, 14) = DateTime(2000, 3, 15)
 define PossiblyEqDateTimesOnlyDateOnOne: DateTime(2000, 3, 13) = DateTime(2000, 3, 13, 13, 43, 32)
 define UneqDateTimesOnlyDateOnOne: DateTime(2000, 4, 13, 12, 43, 32) = DateTime(2000, 3, 13)
 define PossiblyEqualDateTimes: DateTime(2000, 3, 15) = DateTime(2000)
@@ -1555,7 +1555,7 @@ module.exports['Equal'] = {
             }
          }, {
             "localId" : "166",
-            "name" : "UnqDateTimesOnlyDate",
+            "name" : "UneqDateTimesOnlyDate",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -1563,7 +1563,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "166",
                   "s" : [ {
-                     "value" : [ "define ","UnqDateTimesOnlyDate",": " ]
+                     "value" : [ "define ","UneqDateTimesOnlyDate",": " ]
                   }, {
                      "r" : "165",
                      "s" : [ {
@@ -2370,7 +2370,7 @@ define UneqDateTimes: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) != DateTime(2
 define EqDateTimesTZ: DateTime(2000, 3, 15, 23, 30, 25, 200, +1.0) != DateTime(2000, 3, 16, 2, 30, 25, 200, +4.0)
 define UneqDateTimesTZ: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) != DateTime(2000, 3, 15, 13, 30, 25, 200, +2.0)
 define EqDateTimesOnlyDate: DateTime(2000, 3, 15) != DateTime(2000, 3, 15)
-define UnqDateTimesOnlyDate: DateTime(2000, 3, 14) != DateTime(2000, 3, 15)
+define UneqDateTimesOnlyDate: DateTime(2000, 3, 14) != DateTime(2000, 3, 15)
 define PossiblyEqDateTimesOnlyDateOnOne: DateTime(2000, 3, 13) != DateTime(2000, 3, 13, 13, 43, 32)
 define UneqDateTimesOnlyDateOnOne: DateTime(2000, 4, 13, 12, 43, 32) != DateTime(2000, 3, 13)
 define PossiblyEqualDateTimes: DateTime(2000, 3, 15) != DateTime(2000)
@@ -3943,7 +3943,7 @@ module.exports['NotEqual'] = {
             }
          }, {
             "localId" : "166",
-            "name" : "UnqDateTimesOnlyDate",
+            "name" : "UneqDateTimesOnlyDate",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -3951,7 +3951,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "166",
                   "s" : [ {
-                     "value" : [ "define ","UnqDateTimesOnlyDate",": " ]
+                     "value" : [ "define ","UneqDateTimesOnlyDate",": " ]
                   }, {
                      "r" : "165",
                      "s" : [ {
