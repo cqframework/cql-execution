@@ -27,6 +27,24 @@ module.exports.ValueSetRef = class ValueSetRef extends Expression
       valueset = valueset.execute(ctx)
     valueset
 
+module.exports.AnyInValueSet = class AnyInValueSet extends Expression
+  constructor: (json) ->
+    super
+    @codes = build json.codes
+    @valueset = new ValueSetRef json.valueset
+
+  exec: (ctx) ->
+    valueset = @valueset.execute(ctx)
+    # If the value set reference cannot be resolved, a run-time error is thrown.
+    throw new Error("ValueSet must be provided to InValueSet function") unless valueset? and valueset.isValueSet
+
+    codes = @codes.exec(ctx)
+    for code in codes
+      # If the code argument is null, the result is false.
+      return false unless code?
+      return true if valueset.hasMatch(code)
+    return false
+
 module.exports.InValueSet = class InValueSet extends Expression
   constructor: (json) ->
     super
@@ -41,7 +59,7 @@ module.exports.InValueSet = class InValueSet extends Expression
     # spec indicates to return false if code is null, throw error if value set cannot be resolved
     return false unless code?
     valueset = @valueset.execute(ctx)
-    throw new Error("ValueSet must be provided to InValueSet function") unless valueset?
+    throw new Error("ValueSet must be provided to InValueSet function") unless valueset? and valueset.isValueSet
     # If there is a code and valueset return whether or not the valueset has the code
     return valueset.hasMatch code
 

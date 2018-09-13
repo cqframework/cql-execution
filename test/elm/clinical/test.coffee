@@ -79,8 +79,14 @@ describe 'InValueSet', ->
   it 'should return true if code in list is equivalent', ->
     @inListOfCodes.exec(@ctx).should.be.true()
 
+  it 'should return true if code in list is equivalent using ExpressionRef', ->
+    @inListOfCodesExpressionRef.exec(@ctx).should.be.true()
+
   it 'should return false if no code in list is equivalent', ->
-    @inWrongListofCodes.exec(@ctx).should.be.false()
+    @inWrongListOfCodes.exec(@ctx).should.be.false()
+
+  it 'should return false if code in list is null', ->
+    @nullListOfCodes.exec(@ctx).should.be.false()
 
 describe 'Patient Property In ValueSet', ->
   @beforeEach ->

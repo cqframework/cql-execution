@@ -22,10 +22,12 @@ define WrongShortCode: Code { code: 'M' } in "Female"
 define WrongMediumCode: Code { code: 'F', system: '3.16.840.1.113883.18.2' } in "Female"
 define LongCodeDifferentVersion: Code { code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.6' } in "Female"
 define NullCode: Code { code: null, system: '2.16.840.1.113883.18.2', version: 'HL7V2.6' } in "Female"
+define InListOfCodes: { Code { code: 'M' } , Code { code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5' } } in "Female"
 define ListOfCodes: { Code { code: 'M' } , Code { code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5' } }
 define WrongListOfCodes: { Code { code: 'M' }, Code { code: 'F', system: '3.16.840.1.113883.18.2' } }
-define InListOfCodes: ListOfCodes in "Female"
+define InListOfCodesExpressionRef: ListOfCodes in "Female"
 define InWrongListOfCodes: WrongListOfCodes in "Female"
+define NullListOfCodes: { (null as Code), (null as Code) } in "Female"
 
 // @Test: Patient Property In ValueSet
 valueset "Female": '2.16.840.1.113883.3.560.100.2'
