@@ -129,6 +129,20 @@ define HourBeforeNormalizeZones: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) sa
 define NullLeft: null same or after DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
 define NullRight: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) same or after null
 define NullBoth: (null as DateTime) same or after null
+// On Or After:
+define SameOOA: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) on or after DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
+define AfterOOA: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) on or after DateTime(2000, 3, 15, 13, 30, 25, 199, +1.0)
+define BeforeOOA: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) on or after DateTime(2000, 3, 15, 13, 30, 25, 201, +1.0)
+define NullLeftOOA: null on or after DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
+define NullRightOOA: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) on or after null
+define NullBothOOA: (null as DateTime) on or after null
+// After Or On:
+define SameAOO: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) after or on DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
+define AfterAOO: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) after or on DateTime(2000, 3, 15, 13, 30, 25, 199, +1.0)
+define BeforeAOO: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) after or on DateTime(2000, 3, 15, 13, 30, 25, 201, +1.0)
+define NullLeftAOO: null after or on DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
+define NullRightAOO: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) after or on null
+define NullBothAOO: (null as DateTime) after or on null
 
 // @Test: SameOrBefore
 define SameYear: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) same year or before DateTime(2000, 11, 23, 8, 14, 47, 500, +1.0)
@@ -167,6 +181,20 @@ define HourBeforeNormalizeZones: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) sa
 define NullLeft: null same or before DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
 define NullRight: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) same or before null
 define NullBoth: (null as DateTime) same or before null
+// On Or Before:
+define SameOOB: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) on or before DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
+define AfterOOB: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) on or before DateTime(2000, 3, 15, 13, 30, 25, 199, +1.0)
+define BeforeOOB: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) on or before DateTime(2000, 3, 15, 13, 30, 25, 201, +1.0)
+define NullLeftOOB: null on or before DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
+define NullRightOOB: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) on or before null
+define NullBothOOB: (null as DateTime) on or before null
+// Before Or On:
+define SameBOO: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) before or on DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
+define AfterBOO: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) before or on DateTime(2000, 3, 15, 13, 30, 25, 199, +1.0)
+define BeforeBOO: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) before or on DateTime(2000, 3, 15, 13, 30, 25, 201, +1.0)
+define NullLeftBOO: null before or on DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
+define NullRightBOO: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) before or on null
+define NullBothBOO: (null as DateTime) before or on null
 
 // @Test: After
 define SameYear: DateTime(2000, 12, 15, 13, 30, 25, 200, +1.0) after year of DateTime(2000, 11, 23, 8, 14, 47, 500, +1.0)
