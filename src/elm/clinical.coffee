@@ -40,8 +40,6 @@ module.exports.AnyInValueSet = class AnyInValueSet extends Expression
 
     codes = @codes.exec(ctx)
     for code in codes
-      # If the code argument is null, the result is false.
-      return false unless code?
       return true if valueset.hasMatch(code)
     return false
 

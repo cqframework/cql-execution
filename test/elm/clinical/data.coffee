@@ -196,7 +196,7 @@ define ListOfCodes: { Code { code: 'M' } , Code { code: 'F', system: '2.16.840.1
 define WrongListOfCodes: { Code { code: 'M' }, Code { code: 'F', system: '3.16.840.1.113883.18.2' } }
 define InListOfCodesExpressionRef: ListOfCodes in "Female"
 define InWrongListOfCodes: WrongListOfCodes in "Female"
-define NullListOfCodes: { (null as Code), (null as Code) } in "Female"
+define ListOfCodesWithNull: { Code { code: 'M' }, (null as Code), Code { code: 'F', system: '2.16.840.1.113883.18.2' } } in "Female"
 ###
 
 module.exports['InValueSet'] = {
@@ -1456,33 +1456,51 @@ module.exports['InValueSet'] = {
                }
             }
          }, {
-            "localId" : "105",
-            "name" : "NullListOfCodes",
+            "localId" : "107",
+            "name" : "ListOfCodesWithNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "105",
+                  "r" : "107",
                   "s" : [ {
-                     "value" : [ "define ","NullListOfCodes",": " ]
+                     "value" : [ "define ","ListOfCodesWithNull",": " ]
                   }, {
-                     "r" : "104",
+                     "r" : "106",
                      "s" : [ {
-                        "r" : "102",
+                        "r" : "104",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "98",
+                           "r" : "97",
+                           "s" : [ {
+                              "value" : [ "Code"," { " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "code",": " ]
+                              }, {
+                                 "r" : "96",
+                                 "s" : [ {
+                                    "value" : [ "'M'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " }" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "100",
                            "s" : [ {
                               "value" : [ "(" ]
                            }, {
-                              "r" : "98",
+                              "r" : "100",
                               "s" : [ {
-                                 "r" : "96",
+                                 "r" : "98",
                                  "value" : [ "null"," as " ]
                               }, {
-                                 "r" : "97",
+                                 "r" : "99",
                                  "s" : [ {
                                     "value" : [ "Code" ]
                                  } ]
@@ -1493,22 +1511,31 @@ module.exports['InValueSet'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "101",
+                           "r" : "103",
                            "s" : [ {
-                              "value" : [ "(" ]
+                              "value" : [ "Code"," { " ]
                            }, {
-                              "r" : "101",
                               "s" : [ {
-                                 "r" : "99",
-                                 "value" : [ "null"," as " ]
+                                 "value" : [ "code",": " ]
                               }, {
-                                 "r" : "100",
+                                 "r" : "101",
                                  "s" : [ {
-                                    "value" : [ "Code" ]
+                                    "value" : [ "'F'" ]
                                  } ]
                               } ]
                            }, {
-                              "value" : [ ")" ]
+                              "value" : [ ", " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "system",": " ]
+                              }, {
+                                 "r" : "102",
+                                 "s" : [ {
+                                    "value" : [ "'2.16.840.1.113883.18.2'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " }" ]
                            } ]
                         }, {
                            "value" : [ " }" ]
@@ -1516,7 +1543,7 @@ module.exports['InValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "103",
+                        "r" : "105",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -1525,41 +1552,62 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "104",
+               "localId" : "106",
                "type" : "AnyInValueSet",
                "codes" : {
-                  "localId" : "102",
+                  "localId" : "104",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "98",
+                     "localId" : "97",
+                     "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "Instance",
+                     "element" : [ {
+                        "name" : "code",
+                        "value" : {
+                           "localId" : "96",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "M",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }, {
+                     "localId" : "100",
                      "strict" : false,
                      "type" : "As",
                      "operand" : {
-                        "localId" : "96",
+                        "localId" : "98",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "97",
+                        "localId" : "99",
                         "name" : "{urn:hl7-org:elm-types:r1}Code",
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "localId" : "101",
-                     "strict" : false,
-                     "type" : "As",
-                     "operand" : {
-                        "localId" : "99",
-                        "type" : "Null"
-                     },
-                     "asTypeSpecifier" : {
-                        "localId" : "100",
-                        "name" : "{urn:hl7-org:elm-types:r1}Code",
-                        "type" : "NamedTypeSpecifier"
-                     }
+                     "localId" : "103",
+                     "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "Instance",
+                     "element" : [ {
+                        "name" : "code",
+                        "value" : {
+                           "localId" : "101",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "F",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "system",
+                        "value" : {
+                           "localId" : "102",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "2.16.840.1.113883.18.2",
+                           "type" : "Literal"
+                        }
+                     } ]
                   } ]
                },
                "valueset" : {
-                  "localId" : "103",
+                  "localId" : "105",
                   "name" : "Female"
                }
             }

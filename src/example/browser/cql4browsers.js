@@ -2811,9 +2811,6 @@
       codes = this.codes.exec(ctx);
       for (i = 0, len = codes.length; i < len; i++) {
         code = codes[i];
-        if (code == null) {
-          return false;
-        }
         if (valueset.hasMatch(code)) {
           return true;
         }
