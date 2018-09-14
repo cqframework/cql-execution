@@ -25,6 +25,10 @@ module.exports.Concept = class Concept
 module.exports.ValueSet = class ValueSet
   constructor: (@oid, @version, @codes = []) ->
 
+  Object.defineProperties @prototype,
+    isValueSet:
+      get: -> true
+
   hasMatch: (code) ->
     codesInList(toCodeList(code), @codes)
 
