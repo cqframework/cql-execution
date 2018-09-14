@@ -743,7 +743,10 @@ describe 'DateTimeInterval.union', ->
     should.not.exist y.toYear.union(x.toYear)
 
     [x, y] = xy @dIvl.meets
-    should.not.exist x.toMonth.union(y.toMonth)
+    i =  x.toMonth.union(y.toMonth)
+    should(i).not.be.null()
+    i.low.equals(x.toMonth.low)
+    i.high.equals(y.toMonth.high)
 
     [x, y] = xy @dIvl.overlaps
     i = x.toMonth.union(y.toMonth)
@@ -1254,6 +1257,7 @@ describe 'DateTimeInterval.before', ->
     should.not.exist y.toYear.before(x.closed)
     x.toYear.before(y.closed).should.be.false()
 
+# TODO Add tests that pass in precision parameters
 describe 'DateTimeInterval.meets', ->
   @beforeEach ->
     setup @
@@ -1345,7 +1349,7 @@ describe 'DateTimeInterval.meets', ->
     should.not.exist x.toYear.meets(y.closed)
 
     [x, y] = xy @dIvl.meets
-    should.not.exist x.toMonth.meets(y.toMonth)
+    x.toMonth.meets(y.toMonth).should.be.true()
     should.not.exist x.toYear.meets(y.closed)
 
     [x, y] = xy @dIvl.overlaps
@@ -1365,6 +1369,7 @@ describe 'DateTimeInterval.meets', ->
     x.toMinute.meets(y.toMinute).should.be.false()
     x.toYear.meets(y.closed).should.be.false()
 
+# TODO Add tests that pass in precision parameter
 describe 'DateTimeInterval.meetsAfter', ->
   @beforeEach ->
     setup @
@@ -1458,7 +1463,8 @@ describe 'DateTimeInterval.meetsAfter', ->
 
     [x, y] = xy @dIvl.meets
     x.toMonth.meetsAfter(y.toMonth).should.be.false()
-    should.not.exist y.toMonth.meetsAfter(x.toMonth)
+    y.toMonth.meetsAfter(x.toMonth).should.be.true()
+    should.not.exist y.toDay.meetsAfter(x.toMonth)
     x.toYear.meetsAfter(y.closed).should.be.false()
     should.not.exist y.toYear.meetsAfter(x.closed)
 
@@ -1480,6 +1486,7 @@ describe 'DateTimeInterval.meetsAfter', ->
     x.toMinute.meetsAfter(y.toMinute).should.be.false()
     x.toYear.meetsAfter(y.closed).should.be.false()
 
+# TODO Add tests that pass in precision parameter
 describe 'DateTimeInterval.meetsBefore', ->
   @beforeEach ->
     setup @
@@ -1571,7 +1578,8 @@ describe 'DateTimeInterval.meetsBefore', ->
     should.not.exist x.toYear.meetsBefore(y.closed)
 
     [x, y] = xy @dIvl.meets
-    should.not.exist x.toMonth.meetsBefore(y.toMonth)
+    x.toMonth.meetsBefore(y.toMonth).should.be.true()
+    should.not.exist x.toMonth.meetsBefore(y.toDay)
     should.not.exist x.toYear.meetsBefore(y.closed)
 
     [x, y] = xy @dIvl.overlaps

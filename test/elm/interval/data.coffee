@@ -405,6 +405,7 @@ define EqualDates: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 
 define EqualDatesOpenClosed: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 1, 0, 0, 0, 0)) = Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 12, 31, 23, 59, 59, 999)]
 define SameDays: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)) = Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1))
 define DifferentDays: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)) = Interval[DateTime(2012, 1, 1), DateTime(2012, 7, 1))
+define DifferingPrecision: Interval[DateTime(2012, 1, 1, 12, 30, 21), DateTime(2013, 1, 1, 12, 30, 21)) = Interval[DateTime(2012, 1, 1, 12, 30), DateTime(2013, 1, 1, 12, 30))
 ###
 
 module.exports['Equal'] = {
@@ -2255,6 +2256,226 @@ module.exports['Equal'] = {
                   }
                } ]
             }
+         }, {
+            "localId" : "239",
+            "name" : "DifferingPrecision",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "239",
+                  "s" : [ {
+                     "value" : [ "define ","DifferingPrecision",": " ]
+                  }, {
+                     "r" : "238",
+                     "s" : [ {
+                        "r" : "224",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "216",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","1",", ","12",", ","30",", ","21",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "223",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2013",", ","1",", ","1",", ","12",", ","30",", ","21",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","="," " ]
+                     }, {
+                        "r" : "237",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "230",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","1",", ","12",", ","30",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "236",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2013",", ","1",", ","1",", ","12",", ","30",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "238",
+               "type" : "Equal",
+               "operand" : [ {
+                  "localId" : "224",
+                  "lowClosed" : true,
+                  "highClosed" : false,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "216",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "210",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "211",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "212",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "hour" : {
+                        "localId" : "213",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "12",
+                        "type" : "Literal"
+                     },
+                     "minute" : {
+                        "localId" : "214",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "30",
+                        "type" : "Literal"
+                     },
+                     "second" : {
+                        "localId" : "215",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "21",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "223",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "217",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2013",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "218",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "219",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "hour" : {
+                        "localId" : "220",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "12",
+                        "type" : "Literal"
+                     },
+                     "minute" : {
+                        "localId" : "221",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "30",
+                        "type" : "Literal"
+                     },
+                     "second" : {
+                        "localId" : "222",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "21",
+                        "type" : "Literal"
+                     }
+                  }
+               }, {
+                  "localId" : "237",
+                  "lowClosed" : true,
+                  "highClosed" : false,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "230",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "225",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "226",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "227",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "hour" : {
+                        "localId" : "228",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "12",
+                        "type" : "Literal"
+                     },
+                     "minute" : {
+                        "localId" : "229",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "30",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "236",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "231",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2013",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "232",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "233",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "hour" : {
+                        "localId" : "234",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "12",
+                        "type" : "Literal"
+                     },
+                     "minute" : {
+                        "localId" : "235",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "30",
+                        "type" : "Literal"
+                     }
+                  }
+               } ]
+            }
          } ]
       }
    }
@@ -2280,6 +2501,7 @@ define EqualDates: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 
 define EqualDatesOpenClosed: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 1, 0, 0, 0, 0)) != Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 12, 31, 23, 59, 59, 999)]
 define SameDays: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)) != Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1))
 define DifferentDays: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)) != Interval[DateTime(2012, 1, 1), DateTime(2012, 7, 1))
+define DifferingPrecision: Interval[DateTime(2012, 1, 1, 12, 30, 21), DateTime(2013, 1, 1, 12, 30, 21)) != Interval[DateTime(2012, 1, 1, 12, 30), DateTime(2013, 1, 1, 12, 30))
 ###
 
 module.exports['NotEqual'] = {
@@ -4172,6 +4394,229 @@ module.exports['NotEqual'] = {
                            "localId" : "205",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
+                           "type" : "Literal"
+                        }
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "239",
+            "name" : "DifferingPrecision",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "239",
+                  "s" : [ {
+                     "value" : [ "define ","DifferingPrecision",": " ]
+                  }, {
+                     "r" : "238",
+                     "s" : [ {
+                        "r" : "224",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "216",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","1",", ","12",", ","30",", ","21",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "223",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2013",", ","1",", ","1",", ","12",", ","30",", ","21",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","!="," " ]
+                     }, {
+                        "r" : "237",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "230",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","1",", ","12",", ","30",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "236",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2013",", ","1",", ","1",", ","12",", ","30",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "238",
+               "type" : "Not",
+               "operand" : {
+                  "type" : "Equal",
+                  "operand" : [ {
+                     "localId" : "224",
+                     "lowClosed" : true,
+                     "highClosed" : false,
+                     "type" : "Interval",
+                     "low" : {
+                        "localId" : "216",
+                        "type" : "DateTime",
+                        "year" : {
+                           "localId" : "210",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2012",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "211",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "212",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "213",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "214",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "30",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "215",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "21",
+                           "type" : "Literal"
+                        }
+                     },
+                     "high" : {
+                        "localId" : "223",
+                        "type" : "DateTime",
+                        "year" : {
+                           "localId" : "217",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2013",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "218",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "219",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "220",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "221",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "30",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "222",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "21",
+                           "type" : "Literal"
+                        }
+                     }
+                  }, {
+                     "localId" : "237",
+                     "lowClosed" : true,
+                     "highClosed" : false,
+                     "type" : "Interval",
+                     "low" : {
+                        "localId" : "230",
+                        "type" : "DateTime",
+                        "year" : {
+                           "localId" : "225",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2012",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "226",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "227",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "228",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "229",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "30",
+                           "type" : "Literal"
+                        }
+                     },
+                     "high" : {
+                        "localId" : "236",
+                        "type" : "DateTime",
+                        "year" : {
+                           "localId" : "231",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2013",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "232",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "233",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "234",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "235",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "30",
                            "type" : "Literal"
                         }
                      }

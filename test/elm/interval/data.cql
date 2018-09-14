@@ -21,6 +21,7 @@ define EqualDates: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 
 define EqualDatesOpenClosed: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 1, 0, 0, 0, 0)) = Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 12, 31, 23, 59, 59, 999)]
 define SameDays: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)) = Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1))
 define DifferentDays: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)) = Interval[DateTime(2012, 1, 1), DateTime(2012, 7, 1))
+define DifferingPrecision: Interval[DateTime(2012, 1, 1, 12, 30, 21), DateTime(2013, 1, 1, 12, 30, 21)) = Interval[DateTime(2012, 1, 1, 12, 30), DateTime(2013, 1, 1, 12, 30))
 
 // @Test: NotEqual
 define EqualClosed: Interval[1, 5] != Interval[1, 5]
@@ -39,6 +40,7 @@ define EqualDates: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 
 define EqualDatesOpenClosed: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 1, 0, 0, 0, 0)) != Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 12, 31, 23, 59, 59, 999)]
 define SameDays: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)) != Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1))
 define DifferentDays: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)) != Interval[DateTime(2012, 1, 1), DateTime(2012, 7, 1))
+define DifferingPrecision: Interval[DateTime(2012, 1, 1, 12, 30, 21), DateTime(2013, 1, 1, 12, 30, 21)) != Interval[DateTime(2012, 1, 1, 12, 30), DateTime(2013, 1, 1, 12, 30))
 
 // @Test: Contains
 define ContainsInt: Interval[1, 5] contains 3

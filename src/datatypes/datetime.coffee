@@ -108,15 +108,39 @@ class DateTime
     d = DateTime.fromJsDate(@toJSDate(), timezoneOffset)
     d.reducedPrecision(@getPrecision())
 
-  sameAs: (other, precision = DateTime.Unit.MILLISECOND) ->
+  sameAs: (other, precision) ->
     other = @_implicitlyConvert(other)
-    if not(other instanceof DateTime) then null
+    return null if not(other instanceof DateTime)
+    if precision? && DateTime.FIELDS.indexOf(precision) < 0
+      throw new Error("Invalid precision: #{precision}")
 
-    diff = @differenceBetween(other, precision)
-    switch
-      when (diff.low == 0 and diff.high == 0) then true
-      when (diff.low <= 0 and diff.high >= 0) then null
-      else false
+    # make a copy of other in the correct timezone offset if they don't match.
+    if (@timezoneOffset != other.timezoneOffset)
+      other = other.convertToTimezoneOffset(@timezoneOffset)
+
+    for field in DateTime.FIELDS
+      # if both have this precision defined
+      if @[field]? and other[field]?
+        # if they are different then return with false
+        if @[field] != other[field]
+          return false
+
+      # if both dont have this precision, return true of precision is not defined
+      else if !@[field]? and !other[field]?
+        if !precision?
+          return true
+        else # we havent met precision yet
+          return null
+
+      # otherwise they have inconclusive precision, return null
+      else
+        return null
+
+      # if precision is defined and we have reached expected precision, we can leave the loop
+      break if precision? and precision is field
+
+    # if we made it here, then all fields matched.
+    true
 
   equals: (other) ->
     return null if not(other instanceof DateTime)

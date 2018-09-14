@@ -69,8 +69,9 @@ describe 'Equal', ->
     @equalDatesOpenClosed.exec(@ctx).should.be.true()
 
   it 'should operate correctly with imprecision', ->
-    should(@sameDays.exec(@ctx)).be.null()
+    @sameDays.exec(@ctx).should.be.true()
     @differentDays.exec(@ctx).should.be.false()
+    should(@differingPrecision.exec(@ctx)).be.null()
 
 describe 'NotEqual', ->
   @beforeEach ->
@@ -101,8 +102,9 @@ describe 'NotEqual', ->
     @equalDatesOpenClosed.exec(@ctx).should.be.false()
 
   it 'should operate correctly with imprecision', ->
-    should(@sameDays.exec(@ctx)).be.null()
+    @sameDays.exec(@ctx).should.be.false()
     @differentDays.exec(@ctx).should.be.true()
+    should(@differingPrecision.exec(@ctx)).be.null()
 
 describe 'Contains', ->
   @beforeEach ->
