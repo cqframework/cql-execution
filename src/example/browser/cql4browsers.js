@@ -1284,7 +1284,7 @@
     Interval.prototype.includes = function(other, precision) {
       var a, b;
       if (!(other instanceof Interval)) {
-        throw new Error("Argument to includes must be an interval");
+        other = new Interval(other, other, true, true);
       }
       a = this.toClosed();
       b = other.toClosed();
@@ -1293,9 +1293,10 @@
 
     Interval.prototype.includedIn = function(other) {
       if (!(other instanceof Interval)) {
-        throw new Error("Argument to includedIn must be an interval");
+        return this.contains(other);
+      } else {
+        return other.includes(this);
       }
-      return other.includes(this);
     };
 
     Interval.prototype.overlaps = function(item, precision) {

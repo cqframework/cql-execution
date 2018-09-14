@@ -9025,6 +9025,12 @@ define TuplesIncluded: {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
 define TuplesNotIncluded: {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} includes {Tuple{a:2, b:'d'}, Tuple{a:3, b:'c'}}
 define NullIncluded: {1, 2, 3, 4, 5} includes null
 define NullIncludes: null includes {1, 2, 3, 4, 5}
+define DayIncluded: {DateTime(2012, 3, 2), DateTime(2012, 3, 3), DateTime(2012, 3, 4)} includes DateTime(2012, 3, 3)
+define DayNotIncluded: {DateTime(2012, 3, 2), DateTime(2012, 3, 3), DateTime(2012, 3, 4)} includes DateTime(2014, 3, 3)
+define IntegerIncluded: {1, 2, 3, 4, 5} includes 3
+define IntegerNotIncluded: {1, 2, 3, 4, 5} includes 33
+define QuantityInList: { ToQuantity('1 \'m\''), ToQuantity('1.995 \'m\''), ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')} includes ToQuantity('1 \'m\'') 
+define QuantityNotInList: { ToQuantity('100 \'m\''), ToQuantity('1.995 \'m\''), ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')} includes ToQuantity('1 \'m\'')
 ###
 
 module.exports['Includes'] = {
@@ -10128,6 +10134,710 @@ module.exports['Includes'] = {
                   } ]
                } ]
             }
+         }, {
+            "localId" : "126",
+            "name" : "DayIncluded",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "126",
+                  "s" : [ {
+                     "value" : [ "define ","DayIncluded",": " ]
+                  }, {
+                     "r" : "125",
+                     "s" : [ {
+                        "r" : "120",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "111",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","3",", ","2",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "115",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","3",", ","3",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "119",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","3",", ","4",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","includes"," " ]
+                     }, {
+                        "r" : "124",
+                        "s" : [ {
+                           "value" : [ "DateTime","(","2012",", ","3",", ","3",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "125",
+               "type" : "Contains",
+               "operand" : [ {
+                  "localId" : "120",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "111",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "108",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "109",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "110",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "115",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "112",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "113",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "114",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "119",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "116",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "117",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "118",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }, {
+                  "localId" : "124",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "121",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2012",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "122",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "123",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "145",
+            "name" : "DayNotIncluded",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "145",
+                  "s" : [ {
+                     "value" : [ "define ","DayNotIncluded",": " ]
+                  }, {
+                     "r" : "144",
+                     "s" : [ {
+                        "r" : "139",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "130",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","3",", ","2",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "134",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","3",", ","3",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "138",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","3",", ","4",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","includes"," " ]
+                     }, {
+                        "r" : "143",
+                        "s" : [ {
+                           "value" : [ "DateTime","(","2014",", ","3",", ","3",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "144",
+               "type" : "Contains",
+               "operand" : [ {
+                  "localId" : "139",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "130",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "127",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "128",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "129",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "134",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "131",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "132",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "133",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "138",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "135",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "136",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "137",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }, {
+                  "localId" : "143",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "140",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2014",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "141",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "142",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "154",
+            "name" : "IntegerIncluded",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "154",
+                  "s" : [ {
+                     "value" : [ "define ","IntegerIncluded",": " ]
+                  }, {
+                     "r" : "153",
+                     "s" : [ {
+                        "r" : "151",
+                        "s" : [ {
+                           "value" : [ "{","1",", ","2",", ","3",", ","4",", ","5","}" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","includes"," ","3" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "153",
+               "type" : "Contains",
+               "operand" : [ {
+                  "localId" : "151",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "146",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "147",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "148",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "149",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "150",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  } ]
+               }, {
+                  "localId" : "152",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "3",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "163",
+            "name" : "IntegerNotIncluded",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "163",
+                  "s" : [ {
+                     "value" : [ "define ","IntegerNotIncluded",": " ]
+                  }, {
+                     "r" : "162",
+                     "s" : [ {
+                        "r" : "160",
+                        "s" : [ {
+                           "value" : [ "{","1",", ","2",", ","3",", ","4",", ","5","}" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","includes"," ","33" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "162",
+               "type" : "Contains",
+               "operand" : [ {
+                  "localId" : "160",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "155",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "156",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "157",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "158",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "159",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  } ]
+               }, {
+                  "localId" : "161",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "33",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "176",
+            "name" : "QuantityInList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "176",
+                  "s" : [ {
+                     "value" : [ "define ","QuantityInList",": " ]
+                  }, {
+                     "r" : "175",
+                     "s" : [ {
+                        "r" : "172",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "165",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(" ]
+                           }, {
+                              "r" : "164",
+                              "s" : [ {
+                                 "value" : [ "'1 \\'m\\''" ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "167",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(" ]
+                           }, {
+                              "r" : "166",
+                              "s" : [ {
+                                 "value" : [ "'1.995 \\'m\\''" ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "169",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(" ]
+                           }, {
+                              "r" : "168",
+                              "s" : [ {
+                                 "value" : [ "'2 \\'m\\''" ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "171",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(" ]
+                           }, {
+                              "r" : "170",
+                              "s" : [ {
+                                 "value" : [ "'3 \\'m\\''" ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","includes"," " ]
+                     }, {
+                        "r" : "174",
+                        "s" : [ {
+                           "value" : [ "ToQuantity","(" ]
+                        }, {
+                           "r" : "173",
+                           "s" : [ {
+                              "value" : [ "'1 \\'m\\''" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "175",
+               "type" : "Contains",
+               "operand" : [ {
+                  "localId" : "172",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "165",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "164",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "1 'm'",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "167",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "166",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "1.995 'm'",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "169",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "168",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "2 'm'",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "171",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "170",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "3 'm'",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }, {
+                  "localId" : "174",
+                  "type" : "ToQuantity",
+                  "operand" : {
+                     "localId" : "173",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "1 'm'",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "189",
+            "name" : "QuantityNotInList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "189",
+                  "s" : [ {
+                     "value" : [ "define ","QuantityNotInList",": " ]
+                  }, {
+                     "r" : "188",
+                     "s" : [ {
+                        "r" : "185",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "178",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(" ]
+                           }, {
+                              "r" : "177",
+                              "s" : [ {
+                                 "value" : [ "'100 \\'m\\''" ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "180",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(" ]
+                           }, {
+                              "r" : "179",
+                              "s" : [ {
+                                 "value" : [ "'1.995 \\'m\\''" ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "182",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(" ]
+                           }, {
+                              "r" : "181",
+                              "s" : [ {
+                                 "value" : [ "'2 \\'m\\''" ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "184",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(" ]
+                           }, {
+                              "r" : "183",
+                              "s" : [ {
+                                 "value" : [ "'3 \\'m\\''" ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","includes"," " ]
+                     }, {
+                        "r" : "187",
+                        "s" : [ {
+                           "value" : [ "ToQuantity","(" ]
+                        }, {
+                           "r" : "186",
+                           "s" : [ {
+                              "value" : [ "'1 \\'m\\''" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "188",
+               "type" : "Contains",
+               "operand" : [ {
+                  "localId" : "185",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "178",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "177",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "100 'm'",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "180",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "179",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "1.995 'm'",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "182",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "181",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "2 'm'",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "184",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "183",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "3 'm'",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }, {
+                  "localId" : "187",
+                  "type" : "ToQuantity",
+                  "operand" : {
+                     "localId" : "186",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "1 'm'",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
          } ]
       }
    }
@@ -10145,6 +10855,12 @@ define TuplesIncluded: {Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} included in {Tuple
 define TuplesNotIncluded: {Tuple{a:2, b:'d'}, Tuple{a:3, b:'c'}} included in {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
 define NullIncludes: {1, 2, 3, 4, 5} included in null
 define NullIncluded: null included in {1, 2, 3, 4, 5}
+define DayIncluded: DateTime(2012, 3, 3) included in {DateTime(2012, 3, 2), DateTime(2012, 3, 3), DateTime(2012, 3, 4)}
+define DayNotIncluded: DateTime(2014, 3, 3) included in {DateTime(2012, 3, 2), DateTime(2012, 3, 3), DateTime(2012, 3, 4)}
+define IntegerIncluded: 3 included in {1, 2, 3, 4, 5}
+define IntegerNotIncluded: 33 included in {1, 2, 3, 4, 5}
+define QuantityInList: ToQuantity('1 \'m\'') included in { ToQuantity('1 \'m\''), ToQuantity('1.995 \'m\''), ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')}
+define QuantityNotInList: ToQuantity('100 \'m\'') included in { ToQuantity('1 \'m\''), ToQuantity('1.995 \'m\''), ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')}
 ###
 
 module.exports['IncludedIn'] = {
@@ -11236,6 +11952,712 @@ module.exports['IncludedIn'] = {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "126",
+            "name" : "DayIncluded",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "126",
+                  "s" : [ {
+                     "value" : [ "define ","DayIncluded",": " ]
+                  }, {
+                     "r" : "125",
+                     "s" : [ {
+                        "r" : "111",
+                        "s" : [ {
+                           "value" : [ "DateTime","(","2012",", ","3",", ","3",")" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","included in"," " ]
+                     }, {
+                        "r" : "124",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "115",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","3",", ","2",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "119",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","3",", ","3",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "123",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","3",", ","4",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "125",
+               "type" : "In",
+               "operand" : [ {
+                  "localId" : "111",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "108",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2012",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "109",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "110",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "124",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "115",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "112",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "113",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "114",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "119",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "116",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "117",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "118",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "123",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "120",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "121",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "122",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "145",
+            "name" : "DayNotIncluded",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "145",
+                  "s" : [ {
+                     "value" : [ "define ","DayNotIncluded",": " ]
+                  }, {
+                     "r" : "144",
+                     "s" : [ {
+                        "r" : "130",
+                        "s" : [ {
+                           "value" : [ "DateTime","(","2014",", ","3",", ","3",")" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","included in"," " ]
+                     }, {
+                        "r" : "143",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "134",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","3",", ","2",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "138",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","3",", ","3",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "142",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","3",", ","4",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "144",
+               "type" : "In",
+               "operand" : [ {
+                  "localId" : "130",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "127",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2014",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "128",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "129",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "143",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "134",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "131",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "132",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "133",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "138",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "135",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "136",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "137",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "142",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "139",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "140",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "141",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "154",
+            "name" : "IntegerIncluded",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "154",
+                  "s" : [ {
+                     "value" : [ "define ","IntegerIncluded",": " ]
+                  }, {
+                     "r" : "153",
+                     "s" : [ {
+                        "r" : "146",
+                        "value" : [ "3"," ","included in"," " ]
+                     }, {
+                        "r" : "152",
+                        "s" : [ {
+                           "value" : [ "{","1",", ","2",", ","3",", ","4",", ","5","}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "153",
+               "type" : "In",
+               "operand" : [ {
+                  "localId" : "146",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "3",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "152",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "147",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "148",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "149",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "150",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "151",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "163",
+            "name" : "IntegerNotIncluded",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "163",
+                  "s" : [ {
+                     "value" : [ "define ","IntegerNotIncluded",": " ]
+                  }, {
+                     "r" : "162",
+                     "s" : [ {
+                        "r" : "155",
+                        "value" : [ "33"," ","included in"," " ]
+                     }, {
+                        "r" : "161",
+                        "s" : [ {
+                           "value" : [ "{","1",", ","2",", ","3",", ","4",", ","5","}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "162",
+               "type" : "In",
+               "operand" : [ {
+                  "localId" : "155",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "33",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "161",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "156",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "157",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "158",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "159",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "160",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "176",
+            "name" : "QuantityInList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "176",
+                  "s" : [ {
+                     "value" : [ "define ","QuantityInList",": " ]
+                  }, {
+                     "r" : "175",
+                     "s" : [ {
+                        "r" : "165",
+                        "s" : [ {
+                           "value" : [ "ToQuantity","(" ]
+                        }, {
+                           "r" : "164",
+                           "s" : [ {
+                              "value" : [ "'1 \\'m\\''" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","included in"," " ]
+                     }, {
+                        "r" : "174",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "167",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(" ]
+                           }, {
+                              "r" : "166",
+                              "s" : [ {
+                                 "value" : [ "'1 \\'m\\''" ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "169",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(" ]
+                           }, {
+                              "r" : "168",
+                              "s" : [ {
+                                 "value" : [ "'1.995 \\'m\\''" ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "171",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(" ]
+                           }, {
+                              "r" : "170",
+                              "s" : [ {
+                                 "value" : [ "'2 \\'m\\''" ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "173",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(" ]
+                           }, {
+                              "r" : "172",
+                              "s" : [ {
+                                 "value" : [ "'3 \\'m\\''" ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "175",
+               "type" : "In",
+               "operand" : [ {
+                  "localId" : "165",
+                  "type" : "ToQuantity",
+                  "operand" : {
+                     "localId" : "164",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "1 'm'",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "174",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "167",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "166",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "1 'm'",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "169",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "168",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "1.995 'm'",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "171",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "170",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "2 'm'",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "173",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "172",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "3 'm'",
+                        "type" : "Literal"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "189",
+            "name" : "QuantityNotInList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "189",
+                  "s" : [ {
+                     "value" : [ "define ","QuantityNotInList",": " ]
+                  }, {
+                     "r" : "188",
+                     "s" : [ {
+                        "r" : "178",
+                        "s" : [ {
+                           "value" : [ "ToQuantity","(" ]
+                        }, {
+                           "r" : "177",
+                           "s" : [ {
+                              "value" : [ "'100 \\'m\\''" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","included in"," " ]
+                     }, {
+                        "r" : "187",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "180",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(" ]
+                           }, {
+                              "r" : "179",
+                              "s" : [ {
+                                 "value" : [ "'1 \\'m\\''" ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "182",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(" ]
+                           }, {
+                              "r" : "181",
+                              "s" : [ {
+                                 "value" : [ "'1.995 \\'m\\''" ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "184",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(" ]
+                           }, {
+                              "r" : "183",
+                              "s" : [ {
+                                 "value" : [ "'2 \\'m\\''" ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "186",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(" ]
+                           }, {
+                              "r" : "185",
+                              "s" : [ {
+                                 "value" : [ "'3 \\'m\\''" ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "188",
+               "type" : "In",
+               "operand" : [ {
+                  "localId" : "178",
+                  "type" : "ToQuantity",
+                  "operand" : {
+                     "localId" : "177",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "100 'm'",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "187",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "180",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "179",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "1 'm'",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "182",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "181",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "1.995 'm'",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "184",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "183",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "2 'm'",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "186",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "185",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "3 'm'",
+                        "type" : "Literal"
+                     }
                   } ]
                } ]
             }

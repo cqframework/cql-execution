@@ -39,7 +39,8 @@ module.exports.Interval = class Interval
     )
 
   includes: (other, precision) ->
-    if not (other instanceof Interval) then throw new Error("Argument to includes must be an interval")
+    if not (other instanceof Interval)
+      other = new Interval(other, other, true, true)
     a = @toClosed()
     b = other.toClosed()
     ThreeValuedLogic.and(
@@ -48,8 +49,11 @@ module.exports.Interval = class Interval
     )
 
   includedIn: (other) ->
-    if not (other instanceof Interval) then throw new Error("Argument to includedIn must be an interval")
-    other.includes @
+    # For the point overload, this operator is a synonym for the in operator
+    if not (other instanceof Interval)
+      @.contains other
+    else
+      other.includes @
 
   overlaps: (item, precision) ->
     closed = @toClosed()

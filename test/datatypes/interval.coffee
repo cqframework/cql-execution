@@ -206,8 +206,8 @@ describe 'DateTimeInterval.includes', ->
     x.toMinute.includes(y.toMinute).should.be.false()
     should.not.exist x.toYear.includes(y.closed)
 
-  it 'should throw when the argument is a point', ->
-    should(() => @all2012.closed.includes @mid2012.closed).throw(Error)
+  it 'should include a point date', ->
+    @all2012.closed.includes(@mid2012.full).should.be.true()
 
 describe 'DateTimeInterval.includedIn', ->
   @beforeEach ->
@@ -321,8 +321,8 @@ describe 'DateTimeInterval.includedIn', ->
     should.not.exist x.toMinute.includedIn(y.toMinute)
     x.toYear.includedIn(y.closed).should.be.true()
 
-  it 'should throw when the argument is a point', ->
-    should(() => @all2012.closed.includedIn @mid2012.closed).throw(Error)
+  it 'should include a point date', ->
+    @all2012.closed.includedIn(@mid2012.full).should.be.true()
 
 describe 'DateTimeInterval.overlaps(DateTimeInterval)', ->
   @beforeEach ->
@@ -1757,8 +1757,8 @@ describe 'IntegerInterval.includes', ->
 
     should.not.exist uIvl.includes(uIvl)
 
-  it 'should throw when the argument is a point', ->
-    should(() => @zeroToHundred.closed.includes 50).throw(Error)
+  it 'should include a point Integer', ->
+    @zeroToHundred.closed.includes(50).should.be.true()
 
 describe 'IntegerInterval.includedIn', ->
   @beforeEach ->
@@ -1863,8 +1863,9 @@ describe 'IntegerInterval.includedIn', ->
 
     should.not.exist uIvl.includedIn(uIvl)
 
-  it 'should throw when the argument is a point', ->
-    should(() => @zeroToHundred.closed.includedIn 50).throw(Error)
+  it 'should include a point integer', ->
+    @zeroToHundred.closed.includedIn(50).should.be.true()
+    @zeroToHundred.closed.includedIn(500).should.be.false()
 
 describe 'IntegerInterval.overlaps(IntegerInterval)', ->
   @beforeEach ->
