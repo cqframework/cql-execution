@@ -168,7 +168,7 @@ describe 'Today', ->
     should.not.exist(today[field]) for field in [ 'hour', 'minute', 'second', 'millisecond' ]
 
   it 'should return only day components and timezone of today using the passed in timezone', ->
-    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromJsDate(new Date(), '0'))
     today = @todayVar.exec @ctx
     today.isTime().should.be.false()
     today.year.should.equal @ctx.getExecutionDateTime().year
@@ -179,7 +179,7 @@ describe 'Today', ->
 
   it 'should throw an exception because no execution datetime has been set', ->
     try
-      @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
+      @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromJsDate(new Date(), '0'))
       @ctx.executionDateTime = @ctx.executionDateTime = null
       @todayVar.exec(@ctx).should.equal "No Execution DateTime has been set"
     catch
@@ -202,7 +202,7 @@ describe 'Now', ->
     now.timezoneOffset.should.equal @ctx.getTimezoneOffset()
 
   it 'should return all date components representing now using a passed in timezone', ->
-    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromJsDate(new Date(), '0'))
     now = @nowVar.exec @ctx
     now.isTime().should.be.false()
     now.year.should.equal @ctx.getExecutionDateTime().year
@@ -215,7 +215,7 @@ describe 'Now', ->
     now.timezoneOffset.should.equal "0"
 
   it 'should return all date components representing now using a passed in timezone using a child context', ->
-    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromJsDate(new Date(), '0'))
     @child_ctx = @ctx.childContext()
     now = @nowVar.exec @child_ctx
     now.isTime().should.be.false()

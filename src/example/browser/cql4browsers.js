@@ -3429,7 +3429,7 @@
     CalculateAge.prototype.exec = function(ctx) {
       var date1, date2, result;
       date1 = this.execArgs(ctx);
-      date2 = dt.DateTime.fromDate(ctx.getExecutionDateTime());
+      date2 = dt.DateTime.fromJsDate(ctx.getExecutionDateTime());
       result = date1 != null ? date1.durationBetween(date2, this.precision.toLowerCase()) : void 0;
       if ((result != null) && result.isPoint()) {
         return result.low;
