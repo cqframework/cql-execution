@@ -1376,7 +1376,9 @@
     };
 
     Date.prototype._durationBetweenDates = function(a, b, unitField) {
-      var aInMonth, months, msDiff, truncFunc;
+      var aInMonth, months, msDiff, truncFunc, tzdiff;
+      tzdiff = a.getTimezoneOffset() - b.getTimezoneOffset();
+      b.setTime(b.getTime() + (tzdiff * 60 * 1000));
       msDiff = b.getTime() - a.getTime();
       if (msDiff === 0) {
         return 0;
@@ -1388,8 +1390,7 @@
         return truncFunc(msDiff / (7 * 24 * 60 * 60 * 1000));
       } else if (unitField === Date.Unit.MONTH || unitField === Date.Unit.YEAR) {
         months = (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth());
-        aInMonth = makeJsDate(a.getTime());
-        aInMonth.setMonth(a.getMonth() + months);
+        aInMonth = moment(a).add(months, 'month').toDate();
         if (msDiff > 0 && aInMonth > b) {
           months = months - 1;
         } else if (msDiff < 0 && aInMonth < b) {
@@ -1429,7 +1430,7 @@
     Date.prototype.toUncertainty = function() {
       var high, low, ref1, ref2, ref3;
       low = this.toJSDate();
-      high = (new Date(this.year, (ref1 = this.month) != null ? ref1 : 12, (ref2 = this.day) != null ? ref2 : (makeJsDate(this.year, (ref3 = this.month) != null ? ref3 : 12, 0)).getDate())).toJSDate();
+      high = new Date(this.year, (ref1 = this.month) != null ? ref1 : 12, (ref2 = this.day) != null ? ref2 : (makeJsDate(this.year, (ref3 = this.month) != null ? ref3 : 12, 0)).getDate()).toJSDate();
       return new Uncertainty(low, high);
     };
 

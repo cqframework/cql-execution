@@ -266,7 +266,7 @@ describe 'Date.durationBetween', ->
     b = new Date 2011, 9, 29
     a.durationBetween(b, Date.Unit.YEAR).should.eql new Uncertainty(0)
     a.durationBetween(b, Date.Unit.MONTH).should.eql new Uncertainty(8)
-    a.durationBetween(b, Date.Unit.DAY).should.eql new Uncertainty(269)
+    a.durationBetween(b, Date.Unit.DAY).should.eql new Uncertainty(270)
 
   it 'should handle leap year', ->
     a = Date.parse '1999-02-01'
@@ -288,7 +288,7 @@ describe 'Date.durationBetween', ->
     a = Date.parse '2000-06-15'
     b = Date.parse '2009'
     a.differenceBetween(b, Date.Unit.YEAR).should.eql new Uncertainty(9)
-    a.differenceBetween(b, Date.Unit.MONTH).should.eql new Uncertainty(103, 114)
+    a.differenceBetween(b, Date.Unit.MONTH).should.eql new Uncertainty(102, 113)
     a.differenceBetween(b, Date.Unit.DAY).should.eql new Uncertainty(3122, 3486)
 
   it 'should return negative values for going backwards', ->

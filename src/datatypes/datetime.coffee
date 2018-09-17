@@ -549,12 +549,17 @@ class Date
   durationBetween: (other, unitField) ->
     if (other instanceof DateTime) then return this.getDateTime().durationBetween(other, unitField)
     if not(other instanceof Date) then return null
+
     a = @toUncertainty()
     b = other.toUncertainty()
     new Uncertainty(@_durationBetweenDates(a.high, b.low, unitField), @_durationBetweenDates(a.low, b.high, unitField))
 
   # NOTE: a and b are real JS dates -- not DateTimes
   _durationBetweenDates: (a, b, unitField) ->
+    #we need to fix offsets to match so we dont get any JS DST interference
+    tzdiff = a.getTimezoneOffset() - b.getTimezoneOffset()
+    b.setTime(b.getTime() + (tzdiff*60*1000)); 
+
     # DurationBetween is different than DifferenceBetween in that DurationBetween counts whole elapsed time periods, but
     # DifferenceBetween counts boundaries.  For example:
     # difference in days between @2012-01-01T23:59:59.999 and @2012-01-02T00:00:00.0 calculates to 1 (since it crosses day boundary)
@@ -576,8 +581,7 @@ class Date
       # Now we need to look at the smaller units to see how they compare.  Since we only care about comparing
       # days and below at this point, it's much easier to bring a up to b so it's in the same month, then
       # we can compare on just the remaining units.
-      aInMonth = makeJsDate(a.getTime())
-      aInMonth.setMonth(a.getMonth() + months)
+      aInMonth = moment(a).add(months,'month').toDate() #use moment so we dont roll over month if day is last day of month
       # When a is before b, then if a's smaller units are greater than b's, a whole month hasn't elapsed, so adjust
       if msDiff > 0 and aInMonth > b then months = months - 1
       # When b is before a, then if a's smaller units are less than b's, a whole month hasn't elaspsed backwards, so adjust
@@ -599,11 +603,13 @@ class Date
 
   toUncertainty: () ->
     low = @toJSDate()
-    high = (new Date(
+    high = new Date(
       @year,
       @month ? 12,
       # see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/setDate
-      @day ? (makeJsDate(@year, @month ? 12, 0)).getDate())).toJSDate()
+      @day ? (makeJsDate(@year, @month ? 12, 0)).getDate()
+    ).toJSDate()
+
     new Uncertainty(low, high)
 
   toJSDate: () ->
@@ -763,7 +769,6 @@ getTimezoneSeparatorFromString = (string) ->
     timezoneSeparator = '+'
   else
     timezoneSeparator = ''
-
 
 module.exports.DateTime = DateTime
 module.exports.Date = Date
