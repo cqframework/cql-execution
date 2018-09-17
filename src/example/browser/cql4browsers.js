@@ -1376,7 +1376,9 @@
     };
 
     Date.prototype._durationBetweenDates = function(a, b, unitField) {
-      var aInMonth, months, msDiff, truncFunc, tzdiff;
+      var aInMonth, aInMonthOriginalOffset, months, msDiff, truncFunc, tzdiff;
+      a.setTime(a.getTime() + (12 * 60 * 60 * 1000));
+      b.setTime(b.getTime() + (12 * 60 * 60 * 1000));
       tzdiff = a.getTimezoneOffset() - b.getTimezoneOffset();
       b.setTime(b.getTime() + (tzdiff * 60 * 1000));
       msDiff = b.getTime() - a.getTime();
@@ -1390,7 +1392,12 @@
         return truncFunc(msDiff / (7 * 24 * 60 * 60 * 1000));
       } else if (unitField === Date.Unit.MONTH || unitField === Date.Unit.YEAR) {
         months = (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth());
-        aInMonth = moment(a).add(months, 'month').toDate();
+        aInMonth = makeJsDate(a.getTime());
+        aInMonthOriginalOffset = aInMonth.getTimezoneOffset();
+        aInMonth.setMonth(a.getMonth() + months);
+        if (aInMonthOriginalOffset !== aInMonth.getTimezoneOffset()) {
+          aInMonth.setMinutes(aInMonth.getMinutes() + (aInMonthOriginalOffset - aInMonth.getTimezoneOffset()));
+        }
         if (msDiff > 0 && aInMonth > b) {
           months = months - 1;
         } else if (msDiff < 0 && aInMonth < b) {
