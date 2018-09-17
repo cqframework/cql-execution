@@ -145,11 +145,11 @@ describe 'DateTime', ->
     should.not.exist DateTime.parse null
 
   it 'should construct from a javascript date', ->
-    DateTime.fromDate(new Date(1999, 1, 16, 13, 56, 24, 123)).should.eql DateTime.parse('1999-02-16T13:56:24.123')
+    DateTime.fromJsDate(new Date(1999, 1, 16, 13, 56, 24, 123)).should.eql DateTime.parse('1999-02-16T13:56:24.123')
 
   it 'should construct from a javascript date into a target timezone', ->
-    DateTime.fromDate(new Date(Date.UTC(1999, 1, 16, 13, 56, 24, 123)), -5).should.eql DateTime.parse('1999-02-16T08:56:24.123-05:00')
-    DateTime.fromDate(new Date(Date.UTC(1999, 1, 16, 13, 56, 24, 123)), +4.5).should.eql DateTime.parse('1999-02-16T18:26:24.123+04:30')
+    DateTime.fromJsDate(new Date(Date.UTC(1999, 1, 16, 13, 56, 24, 123)), -5).should.eql DateTime.parse('1999-02-16T08:56:24.123-05:00')
+    DateTime.fromJsDate(new Date(Date.UTC(1999, 1, 16, 13, 56, 24, 123)), +4.5).should.eql DateTime.parse('1999-02-16T18:26:24.123+04:30')
 
   it 'should copy a fully define DateTime', ->
     original = DateTime.parse('1999-02-16T13:56:24.123+04:30')

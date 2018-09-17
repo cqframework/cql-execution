@@ -630,7 +630,7 @@
       })(DateTime, args, function(){});
     };
 
-    DateTime.fromDate = function(date, timezoneOffset) {
+    DateTime.fromJsDate = function(date, timezoneOffset) {
       if (date instanceof DateTime) {
         return date;
       }
@@ -709,7 +709,7 @@
       if (timezoneOffset == null) {
         timezoneOffset = 0;
       }
-      d = DateTime.fromDate(this.toJSDate(), timezoneOffset);
+      d = DateTime.fromJsDate(this.toJSDate(), timezoneOffset);
       return d.reducedPrecision(this.getPrecision());
     };
 
@@ -826,7 +826,7 @@
       }
       if (result[field] != null) {
         result[field] = result[field] + offset;
-        normalized = DateTime.fromDate(result.toJSDate(), this.timezoneOffset);
+        normalized = DateTime.fromJsDate(result.toJSDate(), this.timezoneOffset);
         ref1 = DateTime.FIELDS;
         for (i = 0, len = ref1.length; i < len; i++) {
           field = ref1[i];
@@ -961,49 +961,6 @@
       } else {
         return null;
       }
-    };
-
-    DateTime.prototype.isPrecise = function() {
-      return DateTime.FIELDS.every((function(_this) {
-        return function(field) {
-          return _this[field] != null;
-        };
-      })(this));
-    };
-
-    DateTime.prototype.isImprecise = function() {
-      return !this.isPrecise();
-    };
-
-    DateTime.prototype.isMorePrecise = function(other) {
-      var field, i, len, ref1;
-      ref1 = DateTime.FIELDS;
-      for (i = 0, len = ref1.length; i < len; i++) {
-        field = ref1[i];
-        if ((other[field] != null) && (this[field] == null)) {
-          return false;
-        }
-      }
-      return !this.isSamePrecision(other);
-    };
-
-    DateTime.prototype.isLessPrecise = function(other) {
-      return !this.isSamePrecision(other) && !this.isMorePrecise(other);
-    };
-
-    DateTime.prototype.isSamePrecision = function(other) {
-      var field, i, len, ref1;
-      ref1 = DateTime.FIELDS;
-      for (i = 0, len = ref1.length; i < len; i++) {
-        field = ref1[i];
-        if ((this[field] != null) && (other[field] == null)) {
-          return false;
-        }
-        if ((this[field] == null) && (other[field] != null)) {
-          return false;
-        }
-      }
-      return true;
     };
 
     DateTime.prototype.isUTC = function() {
@@ -1448,49 +1405,6 @@
       }
     };
 
-    Date.prototype.isPrecise = function() {
-      return Date.FIELDS.every((function(_this) {
-        return function(field) {
-          return _this[field] != null;
-        };
-      })(this));
-    };
-
-    Date.prototype.isImprecise = function() {
-      return !this.isPrecise();
-    };
-
-    Date.prototype.isMorePrecise = function(other) {
-      var field, i, len, ref1;
-      ref1 = Date.FIELDS;
-      for (i = 0, len = ref1.length; i < len; i++) {
-        field = ref1[i];
-        if ((other[field] != null) && (this[field] == null)) {
-          return false;
-        }
-      }
-      return !this.isSamePrecision(other);
-    };
-
-    Date.prototype.isLessPrecise = function(other) {
-      return !this.isSamePrecision(other) && !this.isMorePrecise(other);
-    };
-
-    Date.prototype.isSamePrecision = function(other) {
-      var field, i, len, ref1;
-      ref1 = Date.FIELDS;
-      for (i = 0, len = ref1.length; i < len; i++) {
-        field = ref1[i];
-        if ((this[field] != null) && (other[field] == null)) {
-          return false;
-        }
-        if ((this[field] == null) && (other[field] != null)) {
-          return false;
-        }
-      }
-      return true;
-    };
-
     Date.prototype.getPrecision = function() {
       var result;
       result = null;
@@ -1575,6 +1489,49 @@
     return Date;
 
   })();
+
+  DateTime.prototype.isPrecise = Date.prototype.isPrecise = function() {
+    return this.constructor.FIELDS.every((function(_this) {
+      return function(field) {
+        return _this[field] != null;
+      };
+    })(this));
+  };
+
+  DateTime.prototype.isImprecise = Date.prototype.isImprecise = function() {
+    return !this.isPrecise();
+  };
+
+  DateTime.prototype.isMorePrecise = Date.prototype.isMorePrecise = function(other) {
+    var field, i, len, ref1;
+    ref1 = this.constructor.FIELDS;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      field = ref1[i];
+      if ((other[field] != null) && (this[field] == null)) {
+        return false;
+      }
+    }
+    return !this.isSamePrecision(other);
+  };
+
+  DateTime.prototype.isLessPrecise = Date.prototype.isLessPrecise = function(other) {
+    return !this.isSamePrecision(other) && !this.isMorePrecise(other);
+  };
+
+  DateTime.prototype.isSamePrecision = Date.prototype.isSamePrecision = function(other) {
+    var field, i, len, ref1;
+    ref1 = this.constructor.FIELDS;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      field = ref1[i];
+      if ((this[field] != null) && (other[field] == null)) {
+        return false;
+      }
+      if ((this[field] == null) && (other[field] != null)) {
+        return false;
+      }
+    }
+    return true;
+  };
 
   normalizeMillisecondsFieldInString = function(string, matches) {
     var beforeMs, msAndAfter, msString, ref1, timezoneField, timezoneSeparator;
@@ -44454,7 +44411,7 @@
     function PatientContext(library1, patient, codeService, parameters, executionDateTime) {
       this.library = library1;
       this.patient = patient;
-      this.executionDateTime = executionDateTime != null ? executionDateTime : dt.DateTime.fromDate(new Date());
+      this.executionDateTime = executionDateTime != null ? executionDateTime : dt.DateTime.fromJsDate(new Date());
       PatientContext.__super__.constructor.call(this, this.library, codeService, parameters);
     }
 
@@ -44487,7 +44444,7 @@
     function PopulationContext(library1, results, codeService, parameters, executionDateTime) {
       this.library = library1;
       this.results = results;
-      this.executionDateTime = executionDateTime != null ? executionDateTime : dt.DateTime.fromDate(new Date());
+      this.executionDateTime = executionDateTime != null ? executionDateTime : dt.DateTime.fromJsDate(new Date());
       PopulationContext.__super__.constructor.call(this, this.library, codeService, parameters);
     }
 

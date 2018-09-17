@@ -304,27 +304,6 @@ class DateTime
     else
       null
 
-
-  isPrecise: () ->
-    DateTime.FIELDS.every (field) => @[field]?
-
-  isImprecise: () ->
-    not @isPrecise()
-
-  isMorePrecise: (other) ->
-    for field in DateTime.FIELDS
-      if (other[field]? and not @[field]?) then return false
-    not @isSamePrecision(other)
-
-  isLessPrecise: (other) ->
-    not @isSamePrecision(other) and not @isMorePrecise(other)
-
-  isSamePrecision: (other) ->
-    for field in DateTime.FIELDS
-      if (@[field]? and not other[field]?) then return false
-      if (not @[field]? and other[field]?) then return false
-    true
-
   isUTC: () ->
     # A timezoneOffset of 0 indicates UTC time.
     !@timezoneOffset
@@ -611,27 +590,6 @@ class Date
     else
       null
 
-
-  isPrecise: () ->
-    Date.FIELDS.every (field) => @[field]?
-
-  isImprecise: () ->
-    not @isPrecise()
-
-  isMorePrecise: (other) ->
-    for field in Date.FIELDS
-      if (other[field]? and not @[field]?) then return false
-    not @isSamePrecision(other)
-
-  isLessPrecise: (other) ->
-    not @isSamePrecision(other) and not @isMorePrecise(other)
-
-  isSamePrecision: (other) ->
-    for field in Date.FIELDS
-      if (@[field]? and not other[field]?) then return false
-      if (not @[field]? and other[field]?) then return false
-    true
-
   getPrecision: () ->
     result = null
     if @year? then result = Date.Unit.YEAR else return result
@@ -682,6 +640,30 @@ class Date
       fieldsToRemove = Date.FIELDS.slice(fieldIndex + 1)
       reduced[field] = null for field in fieldsToRemove
     reduced
+
+
+##Shared Funtions For Date and DateTime
+DateTime.prototype.isPrecise = Date.prototype.isPrecise = () ->
+    @constructor.FIELDS.every (field) => @[field]?
+
+DateTime.prototype.isImprecise = Date.prototype.isImprecise = () ->
+    not @isPrecise()
+
+DateTime.prototype.isMorePrecise = Date.prototype.isMorePrecise = (other) ->
+    for field in @constructor.FIELDS
+      if (other[field]? and not @[field]?) then return false
+    not @isSamePrecision(other)
+
+DateTime.prototype.isLessPrecise = Date.prototype.isLessPrecise = (other) ->
+    not @isSamePrecision(other) and not @isMorePrecise(other)
+
+DateTime.prototype.isSamePrecision = Date.prototype.isSamePrecision = (other) ->
+    for field in @constructor.FIELDS
+      if (@[field]? and not other[field]?) then return false
+      if (not @[field]? and other[field]?) then return false
+    true
+
+
 
 normalizeMillisecondsFieldInString = (string, matches) ->
   msString = matches[14]
@@ -781,7 +763,6 @@ getTimezoneSeparatorFromString = (string) ->
     timezoneSeparator = '+'
   else
     timezoneSeparator = ''
-
 
 
 module.exports.DateTime = DateTime

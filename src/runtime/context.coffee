@@ -224,7 +224,7 @@ module.exports.Context = class Context
       ((! val.high?) || @matchesInstanceType(val.high, pointType))
 
 module.exports.PatientContext = class PatientContext extends Context
-  constructor: (@library, @patient, codeService, parameters, @executionDateTime = dt.DateTime.fromDate(new Date())) ->
+  constructor: (@library, @patient, codeService, parameters, @executionDateTime = dt.DateTime.fromJsDate(new Date())) ->
     super(@library, codeService, parameters)
 
   rootContext:  -> @
@@ -240,7 +240,7 @@ module.exports.PatientContext = class PatientContext extends Context
 
 module.exports.PopulationContext = class PopulationContext extends Context
 
-  constructor: (@library, @results, codeService, parameters, @executionDateTime = dt.DateTime.fromDate(new Date())) ->
+  constructor: (@library, @results, codeService, parameters, @executionDateTime = dt.DateTime.fromJsDate(new Date())) ->
     super(@library, codeService, parameters)
 
   rootContext:  -> @
