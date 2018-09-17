@@ -6500,6 +6500,923 @@ module.exports['PopulationStdDev'] = {
    }
 }
 
+### Product
+library TestSnippet version '1'
+using QUICK
+context Patient
+define decimal_product: Product({1.0, 2.0, 3.0, 4.0})
+define integer_product: Product({5, 4, 5})
+define zero_product: Product({0, 5, 10})
+define quantity_product: Product({1.0 'mg', 2.0 'mg', 3.0 'mg', 4.0 'mg'})
+define quantity_zero_product: Product({1.0 'mg', 2.0 'mg', 0 'mg'})
+define product_with_null: Product({5, 4, null})
+define product_of_nulls: Product({null, null, null})
+define product_null: Product(null as List<Decimal>)
+define product_quantity_null: Product({null as Quantity, null as Quantity, null as Quantity})
+###
+
+###
+Translation Error(s):
+[7:26, 7:74] Could not resolve call to operator Product with signature (list<System.Quantity>).
+[8:31, 8:67] Could not resolve call to operator Product with signature (list<System.Quantity>).
+[10:26, 10:52] Call to operator Product(list<System.Any>) is ambiguous with: 
+  - Product(list<System.Decimal>)
+  - Product(list<System.Integer>)
+[12:31, 12:93] Could not resolve call to operator Product with signature (list<System.Quantity>).
+###
+module.exports['Product'] = {
+   "library" : {
+      "annotation" : [ {
+         "startLine" : 7,
+         "startChar" : 26,
+         "endLine" : 7,
+         "endChar" : 74,
+         "message" : "Could not resolve call to operator Product with signature (list<System.Quantity>).",
+         "errorType" : "semantic",
+         "errorSeverity" : "error",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 8,
+         "startChar" : 31,
+         "endLine" : 8,
+         "endChar" : 67,
+         "message" : "Could not resolve call to operator Product with signature (list<System.Quantity>).",
+         "errorType" : "semantic",
+         "errorSeverity" : "error",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 10,
+         "startChar" : 26,
+         "endLine" : 10,
+         "endChar" : 52,
+         "message" : "Call to operator Product(list<System.Any>) is ambiguous with: \n  - Product(list<System.Decimal>)\n  - Product(list<System.Integer>)",
+         "errorType" : "semantic",
+         "errorSeverity" : "error",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 12,
+         "startChar" : 31,
+         "endLine" : 12,
+         "endChar" : 93,
+         "message" : "Could not resolve call to operator Product with signature (list<System.Quantity>).",
+         "errorType" : "semantic",
+         "errorSeverity" : "error",
+         "type" : "CqlToElmError"
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "8",
+            "name" : "decimal_product",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "8",
+                  "s" : [ {
+                     "value" : [ "define ","decimal_product",": " ]
+                  }, {
+                     "r" : "7",
+                     "s" : [ {
+                        "value" : [ "Product","(" ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "value" : [ "{","1.0",", ","2.0",", ","3.0",", ","4.0","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "7",
+               "type" : "Product",
+               "source" : {
+                  "localId" : "6",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "2",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "1.0",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "3",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "2.0",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "4",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "3.0",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "5",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "4.0",
+                     "type" : "Literal"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "14",
+            "name" : "integer_product",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "14",
+                  "s" : [ {
+                     "value" : [ "define ","integer_product",": " ]
+                  }, {
+                     "r" : "13",
+                     "s" : [ {
+                        "value" : [ "Product","(" ]
+                     }, {
+                        "r" : "12",
+                        "s" : [ {
+                           "value" : [ "{","5",", ","4",", ","5","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "13",
+               "type" : "Product",
+               "source" : {
+                  "localId" : "12",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "9",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "10",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "11",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "20",
+            "name" : "zero_product",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "20",
+                  "s" : [ {
+                     "value" : [ "define ","zero_product",": " ]
+                  }, {
+                     "r" : "19",
+                     "s" : [ {
+                        "value" : [ "Product","(" ]
+                     }, {
+                        "r" : "18",
+                        "s" : [ {
+                           "value" : [ "{","0",", ","5",", ","10","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "19",
+               "type" : "Product",
+               "source" : {
+                  "localId" : "18",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "15",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "16",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "17",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "10",
+                     "type" : "Literal"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "27",
+            "name" : "quantity_product",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "27",
+                  "s" : [ {
+                     "value" : [ "define ","quantity_product",": " ]
+                  }, {
+                     "r" : "26",
+                     "s" : [ {
+                        "value" : [ "Product","(" ]
+                     }, {
+                        "r" : "25",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "21",
+                           "s" : [ {
+                              "value" : [ "1.0 ","'mg'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "22",
+                           "s" : [ {
+                              "value" : [ "2.0 ","'mg'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "23",
+                           "s" : [ {
+                              "value" : [ "3.0 ","'mg'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "24",
+                           "s" : [ {
+                              "value" : [ "4.0 ","'mg'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "26",
+               "type" : "Null"
+            }
+         }, {
+            "localId" : "33",
+            "name" : "quantity_zero_product",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "33",
+                  "s" : [ {
+                     "value" : [ "define ","quantity_zero_product",": " ]
+                  }, {
+                     "r" : "32",
+                     "s" : [ {
+                        "value" : [ "Product","(" ]
+                     }, {
+                        "r" : "31",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "28",
+                           "s" : [ {
+                              "value" : [ "1.0 ","'mg'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "29",
+                           "s" : [ {
+                              "value" : [ "2.0 ","'mg'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "30",
+                           "s" : [ {
+                              "value" : [ "0 ","'mg'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "32",
+               "type" : "Null"
+            }
+         }, {
+            "localId" : "39",
+            "name" : "product_with_null",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "39",
+                  "s" : [ {
+                     "value" : [ "define ","product_with_null",": " ]
+                  }, {
+                     "r" : "38",
+                     "s" : [ {
+                        "value" : [ "Product","(" ]
+                     }, {
+                        "r" : "37",
+                        "s" : [ {
+                           "value" : [ "{","5",", ","4",", ","null","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "38",
+               "type" : "Product",
+               "source" : {
+                  "localId" : "37",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "34",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "35",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "36",
+                        "type" : "Null"
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "45",
+            "name" : "product_of_nulls",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "45",
+                  "s" : [ {
+                     "value" : [ "define ","product_of_nulls",": " ]
+                  }, {
+                     "r" : "44",
+                     "s" : [ {
+                        "value" : [ "Product","(" ]
+                     }, {
+                        "r" : "43",
+                        "s" : [ {
+                           "value" : [ "{","null",", ","null",", ","null","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "44",
+               "type" : "Null"
+            }
+         }, {
+            "localId" : "51",
+            "name" : "product_null",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "51",
+                  "s" : [ {
+                     "value" : [ "define ","product_null",": " ]
+                  }, {
+                     "r" : "50",
+                     "s" : [ {
+                        "value" : [ "Product","(" ]
+                     }, {
+                        "r" : "49",
+                        "s" : [ {
+                           "r" : "46",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "48",
+                           "s" : [ {
+                              "value" : [ "List<" ]
+                           }, {
+                              "r" : "47",
+                              "s" : [ {
+                                 "value" : [ "Decimal" ]
+                              } ]
+                           }, {
+                              "value" : [ ">" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "50",
+               "type" : "Product",
+               "source" : {
+                  "localId" : "49",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "46",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "48",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "47",
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }
+            }
+         }, {
+            "localId" : "63",
+            "name" : "product_quantity_null",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "63",
+                  "s" : [ {
+                     "value" : [ "define ","product_quantity_null",": " ]
+                  }, {
+                     "r" : "62",
+                     "s" : [ {
+                        "value" : [ "Product","(" ]
+                     }, {
+                        "r" : "61",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "54",
+                           "s" : [ {
+                              "r" : "52",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "53",
+                              "s" : [ {
+                                 "value" : [ "Quantity" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "57",
+                           "s" : [ {
+                              "r" : "55",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "56",
+                              "s" : [ {
+                                 "value" : [ "Quantity" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "60",
+                           "s" : [ {
+                              "r" : "58",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "59",
+                              "s" : [ {
+                                 "value" : [ "Quantity" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "62",
+               "type" : "Null"
+            }
+         } ]
+      }
+   }
+}
+
+### GeometricMean
+library TestSnippet version '1'
+using QUICK
+context Patient
+define decimal_geometric_mean: GeometricMean({2.0, 8.0, null})
+define zero_geometric_mean: GeometricMean({2.0, 8.0, 0})
+define null_geometric_mean: GeometricMean({1, 2, null})
+define all_nulls: GeometricMean({null, null, null})
+define also_null_geometric_mean: GeometricMean(null as List<Decimal>)
+###
+
+module.exports['GeometricMean'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "7",
+            "name" : "decimal_geometric_mean",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "define ","decimal_geometric_mean",": " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "GeometricMean","(" ]
+                     }, {
+                        "r" : "5",
+                        "s" : [ {
+                           "value" : [ "{","2.0",", ","8.0",", ","null","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "6",
+               "type" : "GeometricMean",
+               "source" : {
+                  "localId" : "5",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "2",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "2.0",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "3",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "8.0",
+                     "type" : "Literal"
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "4",
+                        "type" : "Null"
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "13",
+            "name" : "zero_geometric_mean",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "define ","zero_geometric_mean",": " ]
+                  }, {
+                     "r" : "12",
+                     "s" : [ {
+                        "value" : [ "GeometricMean","(" ]
+                     }, {
+                        "r" : "11",
+                        "s" : [ {
+                           "value" : [ "{","2.0",", ","8.0",", ","0","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "12",
+               "type" : "GeometricMean",
+               "source" : {
+                  "localId" : "11",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "8",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "2.0",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "9",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "8.0",
+                     "type" : "Literal"
+                  }, {
+                     "type" : "ToDecimal",
+                     "operand" : {
+                        "localId" : "10",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "19",
+            "name" : "null_geometric_mean",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "19",
+                  "s" : [ {
+                     "value" : [ "define ","null_geometric_mean",": " ]
+                  }, {
+                     "r" : "18",
+                     "s" : [ {
+                        "value" : [ "GeometricMean","(" ]
+                     }, {
+                        "r" : "17",
+                        "s" : [ {
+                           "value" : [ "{","1",", ","2",", ","null","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "18",
+               "type" : "GeometricMean",
+               "source" : {
+                  "type" : "Query",
+                  "source" : [ {
+                     "alias" : "X",
+                     "expression" : {
+                        "localId" : "17",
+                        "type" : "List",
+                        "element" : [ {
+                           "localId" : "14",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
+                        }, {
+                           "localId" : "15",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2",
+                           "type" : "Literal"
+                        }, {
+                           "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "As",
+                           "operand" : {
+                              "localId" : "16",
+                              "type" : "Null"
+                           }
+                        } ]
+                     }
+                  } ],
+                  "return" : {
+                     "distinct" : false,
+                     "expression" : {
+                        "type" : "ToDecimal",
+                        "operand" : {
+                           "name" : "X",
+                           "type" : "AliasRef"
+                        }
+                     }
+                  }
+               }
+            }
+         }, {
+            "localId" : "25",
+            "name" : "all_nulls",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "25",
+                  "s" : [ {
+                     "value" : [ "define ","all_nulls",": " ]
+                  }, {
+                     "r" : "24",
+                     "s" : [ {
+                        "value" : [ "GeometricMean","(" ]
+                     }, {
+                        "r" : "23",
+                        "s" : [ {
+                           "value" : [ "{","null",", ","null",", ","null","}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "24",
+               "type" : "GeometricMean",
+               "source" : {
+                  "type" : "Query",
+                  "source" : [ {
+                     "alias" : "X",
+                     "expression" : {
+                        "localId" : "23",
+                        "type" : "List",
+                        "element" : [ {
+                           "localId" : "20",
+                           "type" : "Null"
+                        }, {
+                           "localId" : "21",
+                           "type" : "Null"
+                        }, {
+                           "localId" : "22",
+                           "type" : "Null"
+                        } ]
+                     }
+                  } ],
+                  "return" : {
+                     "distinct" : false,
+                     "expression" : {
+                        "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "As",
+                        "operand" : {
+                           "name" : "X",
+                           "type" : "AliasRef"
+                        }
+                     }
+                  }
+               }
+            }
+         }, {
+            "localId" : "31",
+            "name" : "also_null_geometric_mean",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "31",
+                  "s" : [ {
+                     "value" : [ "define ","also_null_geometric_mean",": " ]
+                  }, {
+                     "r" : "30",
+                     "s" : [ {
+                        "value" : [ "GeometricMean","(" ]
+                     }, {
+                        "r" : "29",
+                        "s" : [ {
+                           "r" : "26",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "28",
+                           "s" : [ {
+                              "value" : [ "List<" ]
+                           }, {
+                              "r" : "27",
+                              "s" : [ {
+                                 "value" : [ "Decimal" ]
+                              } ]
+                           }, {
+                              "value" : [ ">" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "30",
+               "type" : "GeometricMean",
+               "source" : {
+                  "localId" : "29",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "26",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "28",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "27",
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+
 ### AllTrue
 library TestSnippet version '1'
 using QUICK

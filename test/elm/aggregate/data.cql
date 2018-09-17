@@ -94,6 +94,24 @@ define q_diff_units: PopulationStdDev({1 'ml', 0.002 'l',3 'ml',4 'ml', 0.05 'dl
 define q_throw1: PopulationStdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'm'})
 define q_throw2: PopulationStdDev({1 ,2 ,3 ,4 'ml',5 })
 
+// @Test: Product
+define decimal_product: Product({1.0, 2.0, 3.0, 4.0})
+define integer_product: Product({5, 4, 5})
+define zero_product: Product({0, 5, 10})
+define quantity_product: Product({1.0 'mg', 2.0 'mg', 3.0 'mg', 4.0 'mg'})
+define quantity_zero_product: Product({1.0 'mg', 2.0 'mg', 0 'mg'})
+define product_with_null: Product({5, 4, null})
+define product_of_nulls: Product({null, null, null})
+define product_null: Product(null as List<Decimal>)
+define product_quantity_null: Product({null as Quantity, null as Quantity, null as Quantity})
+
+// @Test: GeometricMean
+define decimal_geometric_mean: GeometricMean({2.0, 8.0, null})
+define zero_geometric_mean: GeometricMean({2.0, 8.0, 0})
+define null_geometric_mean: GeometricMean({1, 2, null})
+define all_nulls: GeometricMean({null, null, null})
+define also_null_geometric_mean: GeometricMean(null as List<Decimal>)
+
 // @Test: AllTrue
 define at: AllTrue({true,true,true,true})
 define atwn: AllTrue({true,true,null,null,true,true})
