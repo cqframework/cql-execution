@@ -765,8 +765,11 @@ describe 'OverlapsDateTime', ->
   it 'should reject imprecise non-overlaps', ->
     @noImpreciseOverlap.exec(@ctx).should.be.false()
 
-  it 'should return null for imprecise overlaps that are unknown', ->
+  it 'should return null for imprecise overlaps with differing precision', ->
     should(@unknownOverlap.exec(@ctx)).be.null()
+
+  it 'should return true for imprecise overlaps with matching precision', ->
+    @matchingPrecisionOverlap.exec(@ctx).should.be.true()
 
   it 'should correctly compare using the requested precision', ->
     # NOTE: Some assertions commented out because cql-to-elm is WRONGLY translating 'overlaps' to 'OverlapsAfter'!
@@ -826,6 +829,9 @@ describe 'OverlapsAfterDateTime', ->
 
   it 'should reject imprecise non-overlaps', ->
     @noImpreciseOverlap.exec(@ctx).should.be.false()
+
+  it 'should return true for imprecise overlaps with matching precision', ->
+    @matchingPrecisionOverlap.exec(@ctx).should.be.true()
 
   it 'should return null for imprecise overlaps that are unknown', ->
     should(@unknownOverlap.exec(@ctx)).be.null()
@@ -887,6 +893,9 @@ describe 'OverlapsBeforeDateTime', ->
 
   it 'should reject imprecise non-overlaps', ->
     @noImpreciseOverlap.exec(@ctx).should.be.false()
+
+  it 'should return true for imprecise overlaps with matching precision', ->
+    @matchingPrecisionOverlap.exec(@ctx).should.be.true()
 
   it 'should return null for imprecise overlaps that are unknown', ->
     should(@unknownOverlap.exec(@ctx)).be.null()

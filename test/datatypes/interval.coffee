@@ -68,15 +68,15 @@ describe 'DateTimeInterval.contains', ->
 
   it 'should properly handle imprecision', ->
     @all2012.closed.contains(@bef2012.toMonth).should.be.false()
-    @all2012.closed.contains(@beg2012.toMonth).should.be.true()
+    should.not.exist @all2012.closed.contains(@beg2012.toMonth)
     @all2012.closed.contains(@mid2012.toMonth).should.be.true()
-    @all2012.closed.contains(@end2012.toMonth).should.be.true()
+    should.not.exist @all2012.closed.contains(@end2012.toMonth)
     @all2012.closed.contains(@aft2012.toMonth).should.be.false()
 
     @all2012.toMonth.contains(@bef2012.toMonth).should.be.false()
-    should.not.exist @all2012.toMonth.contains(@beg2012.toMonth)
+    @all2012.toMonth.contains(@beg2012.toMonth).should.be.true()
     @all2012.toMonth.contains(@mid2012.toMonth).should.be.true()
-    should.not.exist @all2012.toMonth.contains(@end2012.toMonth)
+    @all2012.toMonth.contains(@end2012.toMonth).should.be.true()
     @all2012.toMonth.contains(@aft2012.toMonth).should.be.false()
 
     @all2012.toMonth.contains(@bef2012.full).should.be.false()
@@ -85,7 +85,7 @@ describe 'DateTimeInterval.contains', ->
     should.not.exist @all2012.toMonth.contains(@end2012.full)
     @all2012.toMonth.contains(@aft2012.full).should.be.false()
 
-    @all2012.closed.contains(@mid2012.toYear).should.be.true()
+    should.not.exist @all2012.closed.contains(@mid2012.toYear)
 
   it 'should return null when checking if interval contains null point', ->
     date = DateTime.parse('2012-01-01T00:00:00.0')
@@ -178,7 +178,7 @@ describe 'DateTimeInterval.includes', ->
   it 'should properly handle imprecision', ->
 
     [x, y] = xy @dIvl.sameAs
-    x.closed.includes(y.toMinute).should.be.true()
+    should.not.exist x.closed.includes(y.toMinute)
     should.not.exist x.toHour.includes(y.toMinute)
 
     [x, y] = xy @dIvl.before
@@ -309,17 +309,17 @@ describe 'DateTimeInterval.includedIn', ->
     should.not.exist x.toYear.includedIn(y.closed)
 
     [x, y] = xy @dIvl.begins
-    should.not.exist x.toMinute.includedIn(y.toMinute)
-    x.toYear.includedIn(y.closed).should.be.true()
+    x.toMinute.includedIn(y.toMinute).should.be.true()
+    should.not.exist x.toYear.includedIn(y.closed)
 
     [x, y] = xy @dIvl.during
     x.toMonth.includedIn(y.toMonth).should.be.true()
     y.toMonth.includedIn(x.toMonth).should.be.false()
-    x.toYear.includedIn(y.closed).should.be.true()
+    should.not.exist x.toYear.includedIn(y.closed)
 
     [x, y] = xy @dIvl.ends
-    should.not.exist x.toMinute.includedIn(y.toMinute)
-    x.toYear.includedIn(y.closed).should.be.true()
+    x.toMinute.includedIn(y.toMinute).should.be.true()
+    should.not.exist x.toYear.includedIn(y.closed)
 
   it 'should include a point date', ->
     @all2012.closed.includedIn(@mid2012.full).should.be.true()
@@ -424,16 +424,16 @@ describe 'DateTimeInterval.overlaps(DateTimeInterval)', ->
 
     [x, y] = xy @dIvl.begins
     x.toMinute.overlaps(y.toMinute).should.be.true()
-    x.toYear.overlaps(y.closed).should.be.true()
+    should.not.exist x.toYear.overlaps(y.closed)
 
     [x, y] = xy @dIvl.during
     x.toMonth.overlaps(y.toMonth).should.be.true()
     y.toMonth.overlaps(x.toMonth).should.be.true()
-    x.toYear.overlaps(y.closed).should.be.true()
+    should.not.exist x.toYear.overlaps(y.closed)
 
     [x, y] = xy @dIvl.ends
     x.toMinute.overlaps(y.toMinute).should.be.true()
-    x.toYear.overlaps(y.closed).should.be.true()
+    should.not.exist x.toYear.overlaps(y.closed)
 
 describe 'DateTimeInterval.overlaps(DateTime)', ->
   @beforeEach ->
@@ -458,15 +458,15 @@ describe 'DateTimeInterval.overlaps(DateTime)', ->
 
   it 'should properly handle imprecision', ->
     @all2012.closed.overlaps(@bef2012.toMonth).should.be.false()
-    @all2012.closed.overlaps(@beg2012.toMonth).should.be.true()
+    should.not.exist @all2012.closed.overlaps(@beg2012.toMonth)
     @all2012.closed.overlaps(@mid2012.toMonth).should.be.true()
-    @all2012.closed.overlaps(@end2012.toMonth).should.be.true()
+    should.not.exist @all2012.closed.overlaps(@end2012.toMonth)
     @all2012.closed.overlaps(@aft2012.toMonth).should.be.false()
 
     @all2012.toMonth.overlaps(@bef2012.toMonth).should.be.false()
-    should.not.exist @all2012.toMonth.overlaps(@beg2012.toMonth)
+    @all2012.toMonth.overlaps(@beg2012.toMonth).should.be.true()
     @all2012.toMonth.overlaps(@mid2012.toMonth).should.be.true()
-    should.not.exist @all2012.toMonth.overlaps(@end2012.toMonth)
+    @all2012.toMonth.overlaps(@end2012.toMonth).should.be.true()
     @all2012.toMonth.overlaps(@aft2012.toMonth).should.be.false()
 
     @all2012.toMonth.overlaps(@bef2012.full).should.be.false()
@@ -475,7 +475,7 @@ describe 'DateTimeInterval.overlaps(DateTime)', ->
     should.not.exist @all2012.toMonth.overlaps(@end2012.full)
     @all2012.toMonth.overlaps(@aft2012.full).should.be.false()
 
-    @all2012.closed.overlaps(@mid2012.toYear).should.be.true()
+    should.not.exist @all2012.closed.overlaps(@mid2012.toYear)
 
 describe 'DateTimeInterval.equals', ->
   @beforeEach ->
@@ -739,8 +739,13 @@ describe 'DateTimeInterval.union', ->
 
     [x, y] = xy @dIvl.before
     # TODO: I don't know about these tests... doesn't make sense to me.
-    should.not.exist x.toYear.union(y.toYear)
-    should.not.exist y.toYear.union(x.toYear)
+    i = x.toYear.union(y.toYear)
+    should(i).not.be.null()
+    i.low.equals(y.toYear.low)
+    i.high.equals(y.toYear.high)
+    j = y.toYear.union(x.toYear)
+    should(j).not.be.null()
+    j.equals(i).should.be.true()
 
     [x, y] = xy @dIvl.meets
     i =  x.toMonth.union(y.toMonth)

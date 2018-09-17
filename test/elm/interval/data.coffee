@@ -59684,14 +59684,16 @@ define ivlD: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), DateTime(2014, 1, 1, 0, 
 define ivlE: Interval[DateTime(2013), DateTime(2015)]
 define ivlF: Interval[DateTime(2014), DateTime(2016)]
 define ivlG: Interval[DateTime(2016), DateTime(2017)]
+define ivlH: Interval[DateTime(2012, 2, 3), DateTime(2013, 3)]
 define OverlapsBefore: ivlA overlaps ivlB
 define OverlapsAfter: ivlB overlaps ivlA
 define OverlapsContained: ivlB overlaps ivlC
 define OverlapsContains: ivlC overlaps ivlB
-define ImpreciseOverlap: ivlD overlaps ivlE
+define ImpreciseOverlap: ivlD overlaps ivlH
 define NoOverlap: ivlC overlaps ivlD
 define NoImpreciseOverlap: ivlE overlaps ivlG
-define UnknownOverlap: ivlF overlaps ivlG
+define UnknownOverlap: ivlE overlaps ivlH
+define MatchingPrecisionOverlap: ivlF overlaps ivlG
 define PrecisionDateIvl: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
 // NOTE: There appears to be a bug in cql-to-elm that translates these 'overlaps' to 'OverlapsAfter'!
 define OverlapsBeforeDayOfIvlEdge: PrecisionDateIvl overlaps day of Interval[DateTime(2012, 9, 2, 23, 59, 59, 999), DateTime(2012, 10, 1, 0, 0, 0, 0)]
@@ -60438,27 +60440,104 @@ module.exports['OverlapsDateTime'] = {
                }
             }
          }, {
-            "localId" : "95",
+            "localId" : "100",
+            "name" : "ivlH",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "100",
+                  "s" : [ {
+                     "value" : [ "define ","ivlH",": " ]
+                  }, {
+                     "r" : "99",
+                     "s" : [ {
+                        "value" : [ "Interval[" ]
+                     }, {
+                        "r" : "95",
+                        "s" : [ {
+                           "value" : [ "DateTime","(","2012",", ","2",", ","3",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "98",
+                        "s" : [ {
+                           "value" : [ "DateTime","(","2013",", ","3",")" ]
+                        } ]
+                     }, {
+                        "value" : [ "]" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "99",
+               "lowClosed" : true,
+               "highClosed" : true,
+               "type" : "Interval",
+               "low" : {
+                  "localId" : "95",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "92",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2012",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "93",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "94",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }
+               },
+               "high" : {
+                  "localId" : "98",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "96",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2013",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "97",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         }, {
+            "localId" : "104",
             "name" : "OverlapsBefore",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "95",
+                  "r" : "104",
                   "s" : [ {
                      "value" : [ "define ","OverlapsBefore",": " ]
                   }, {
-                     "r" : "94",
+                     "r" : "103",
                      "s" : [ {
-                        "r" : "92",
+                        "r" : "101",
                         "s" : [ {
                            "value" : [ "ivlA" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps"," " ]
                      }, {
-                        "r" : "93",
+                        "r" : "102",
                         "s" : [ {
                            "value" : [ "ivlB" ]
                         } ]
@@ -60467,40 +60546,40 @@ module.exports['OverlapsDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "94",
+               "localId" : "103",
                "type" : "Overlaps",
                "operand" : [ {
-                  "localId" : "92",
+                  "localId" : "101",
                   "name" : "ivlA",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "93",
+                  "localId" : "102",
                   "name" : "ivlB",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "99",
+            "localId" : "108",
             "name" : "OverlapsAfter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "99",
+                  "r" : "108",
                   "s" : [ {
                      "value" : [ "define ","OverlapsAfter",": " ]
                   }, {
-                     "r" : "98",
+                     "r" : "107",
                      "s" : [ {
-                        "r" : "96",
+                        "r" : "105",
                         "s" : [ {
                            "value" : [ "ivlB" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps"," " ]
                      }, {
-                        "r" : "97",
+                        "r" : "106",
                         "s" : [ {
                            "value" : [ "ivlA" ]
                         } ]
@@ -60509,40 +60588,40 @@ module.exports['OverlapsDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "98",
+               "localId" : "107",
                "type" : "Overlaps",
                "operand" : [ {
-                  "localId" : "96",
+                  "localId" : "105",
                   "name" : "ivlB",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "97",
+                  "localId" : "106",
                   "name" : "ivlA",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "103",
+            "localId" : "112",
             "name" : "OverlapsContained",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "103",
+                  "r" : "112",
                   "s" : [ {
                      "value" : [ "define ","OverlapsContained",": " ]
                   }, {
-                     "r" : "102",
+                     "r" : "111",
                      "s" : [ {
-                        "r" : "100",
+                        "r" : "109",
                         "s" : [ {
                            "value" : [ "ivlB" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps"," " ]
                      }, {
-                        "r" : "101",
+                        "r" : "110",
                         "s" : [ {
                            "value" : [ "ivlC" ]
                         } ]
@@ -60551,40 +60630,40 @@ module.exports['OverlapsDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "102",
+               "localId" : "111",
                "type" : "Overlaps",
                "operand" : [ {
-                  "localId" : "100",
+                  "localId" : "109",
                   "name" : "ivlB",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "101",
+                  "localId" : "110",
                   "name" : "ivlC",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "107",
+            "localId" : "116",
             "name" : "OverlapsContains",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "107",
+                  "r" : "116",
                   "s" : [ {
                      "value" : [ "define ","OverlapsContains",": " ]
                   }, {
-                     "r" : "106",
+                     "r" : "115",
                      "s" : [ {
-                        "r" : "104",
+                        "r" : "113",
                         "s" : [ {
                            "value" : [ "ivlC" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps"," " ]
                      }, {
-                        "r" : "105",
+                        "r" : "114",
                         "s" : [ {
                            "value" : [ "ivlB" ]
                         } ]
@@ -60593,82 +60672,82 @@ module.exports['OverlapsDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "106",
+               "localId" : "115",
                "type" : "Overlaps",
                "operand" : [ {
-                  "localId" : "104",
+                  "localId" : "113",
                   "name" : "ivlC",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "105",
+                  "localId" : "114",
                   "name" : "ivlB",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "111",
+            "localId" : "120",
             "name" : "ImpreciseOverlap",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "111",
+                  "r" : "120",
                   "s" : [ {
                      "value" : [ "define ","ImpreciseOverlap",": " ]
                   }, {
-                     "r" : "110",
+                     "r" : "119",
                      "s" : [ {
-                        "r" : "108",
+                        "r" : "117",
                         "s" : [ {
                            "value" : [ "ivlD" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps"," " ]
                      }, {
-                        "r" : "109",
+                        "r" : "118",
                         "s" : [ {
-                           "value" : [ "ivlE" ]
+                           "value" : [ "ivlH" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "110",
+               "localId" : "119",
                "type" : "Overlaps",
                "operand" : [ {
-                  "localId" : "108",
+                  "localId" : "117",
                   "name" : "ivlD",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "109",
-                  "name" : "ivlE",
+                  "localId" : "118",
+                  "name" : "ivlH",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "115",
+            "localId" : "124",
             "name" : "NoOverlap",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "115",
+                  "r" : "124",
                   "s" : [ {
                      "value" : [ "define ","NoOverlap",": " ]
                   }, {
-                     "r" : "114",
+                     "r" : "123",
                      "s" : [ {
-                        "r" : "112",
+                        "r" : "121",
                         "s" : [ {
                            "value" : [ "ivlC" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps"," " ]
                      }, {
-                        "r" : "113",
+                        "r" : "122",
                         "s" : [ {
                            "value" : [ "ivlD" ]
                         } ]
@@ -60677,40 +60756,40 @@ module.exports['OverlapsDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "114",
+               "localId" : "123",
                "type" : "Overlaps",
                "operand" : [ {
-                  "localId" : "112",
+                  "localId" : "121",
                   "name" : "ivlC",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "113",
+                  "localId" : "122",
                   "name" : "ivlD",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "119",
+            "localId" : "128",
             "name" : "NoImpreciseOverlap",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "119",
+                  "r" : "128",
                   "s" : [ {
                      "value" : [ "define ","NoImpreciseOverlap",": " ]
                   }, {
-                     "r" : "118",
+                     "r" : "127",
                      "s" : [ {
-                        "r" : "116",
+                        "r" : "125",
                         "s" : [ {
                            "value" : [ "ivlE" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps"," " ]
                      }, {
-                        "r" : "117",
+                        "r" : "126",
                         "s" : [ {
                            "value" : [ "ivlG" ]
                         } ]
@@ -60719,40 +60798,82 @@ module.exports['OverlapsDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "118",
+               "localId" : "127",
                "type" : "Overlaps",
                "operand" : [ {
-                  "localId" : "116",
+                  "localId" : "125",
                   "name" : "ivlE",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "117",
+                  "localId" : "126",
                   "name" : "ivlG",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "123",
+            "localId" : "132",
             "name" : "UnknownOverlap",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "123",
+                  "r" : "132",
                   "s" : [ {
                      "value" : [ "define ","UnknownOverlap",": " ]
                   }, {
-                     "r" : "122",
+                     "r" : "131",
                      "s" : [ {
-                        "r" : "120",
+                        "r" : "129",
+                        "s" : [ {
+                           "value" : [ "ivlE" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","overlaps"," " ]
+                     }, {
+                        "r" : "130",
+                        "s" : [ {
+                           "value" : [ "ivlH" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "131",
+               "type" : "Overlaps",
+               "operand" : [ {
+                  "localId" : "129",
+                  "name" : "ivlE",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "130",
+                  "name" : "ivlH",
+                  "type" : "ExpressionRef"
+               } ]
+            }
+         }, {
+            "localId" : "136",
+            "name" : "MatchingPrecisionOverlap",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "136",
+                  "s" : [ {
+                     "value" : [ "define ","MatchingPrecisionOverlap",": " ]
+                  }, {
+                     "r" : "135",
+                     "s" : [ {
+                        "r" : "133",
                         "s" : [ {
                            "value" : [ "ivlF" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps"," " ]
                      }, {
-                        "r" : "121",
+                        "r" : "134",
                         "s" : [ {
                            "value" : [ "ivlG" ]
                         } ]
@@ -60761,42 +60882,42 @@ module.exports['OverlapsDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "122",
+               "localId" : "135",
                "type" : "Overlaps",
                "operand" : [ {
-                  "localId" : "120",
+                  "localId" : "133",
                   "name" : "ivlF",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "121",
+                  "localId" : "134",
                   "name" : "ivlG",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "141",
+            "localId" : "154",
             "name" : "PrecisionDateIvl",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "141",
+                  "r" : "154",
                   "s" : [ {
                      "value" : [ "define ","PrecisionDateIvl",": " ]
                   }, {
-                     "r" : "140",
+                     "r" : "153",
                      "s" : [ {
                         "value" : [ "Interval[" ]
                      }, {
-                        "r" : "131",
+                        "r" : "144",
                         "s" : [ {
                            "value" : [ "DateTime","(","2012",", ","3",", ","2",", ","12",", ","34",", ","56",", ","789",")" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "139",
+                        "r" : "152",
                         "s" : [ {
                            "value" : [ "DateTime","(","2012",", ","9",", ","2",", ","1",", ","23",", ","45",", ","678",")" ]
                         } ]
@@ -60807,97 +60928,97 @@ module.exports['OverlapsDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "140",
+               "localId" : "153",
                "lowClosed" : true,
                "highClosed" : false,
                "type" : "Interval",
                "low" : {
-                  "localId" : "131",
+                  "localId" : "144",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "124",
+                     "localId" : "137",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2012",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "125",
+                     "localId" : "138",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "126",
+                     "localId" : "139",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "127",
+                     "localId" : "140",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "12",
                      "type" : "Literal"
                   },
                   "minute" : {
-                     "localId" : "128",
+                     "localId" : "141",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "34",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "129",
+                     "localId" : "142",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "56",
                      "type" : "Literal"
                   },
                   "millisecond" : {
-                     "localId" : "130",
+                     "localId" : "143",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "789",
                      "type" : "Literal"
                   }
                },
                "high" : {
-                  "localId" : "139",
+                  "localId" : "152",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "132",
+                     "localId" : "145",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2012",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "133",
+                     "localId" : "146",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "9",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "134",
+                     "localId" : "147",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "135",
+                     "localId" : "148",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "minute" : {
-                     "localId" : "136",
+                     "localId" : "149",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "23",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "137",
+                     "localId" : "150",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "45",
                      "type" : "Literal"
                   },
                   "millisecond" : {
-                     "localId" : "138",
+                     "localId" : "151",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "678",
                      "type" : "Literal"
@@ -60905,38 +61026,38 @@ module.exports['OverlapsDateTime'] = {
                }
             }
          }, {
-            "localId" : "161",
+            "localId" : "174",
             "name" : "OverlapsBeforeDayOfIvlEdge",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "161",
+                  "r" : "174",
                   "s" : [ {
                      "value" : [ "define ","OverlapsBeforeDayOfIvlEdge",": " ]
                   }, {
-                     "r" : "160",
+                     "r" : "173",
                      "s" : [ {
-                        "r" : "142",
+                        "r" : "155",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps day of"," " ]
                      }, {
-                        "r" : "159",
+                        "r" : "172",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "150",
+                           "r" : "163",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","9",", ","2",", ","23",", ","59",", ","59",", ","999",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "158",
+                           "r" : "171",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","10",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
@@ -60948,105 +61069,105 @@ module.exports['OverlapsDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "160",
+               "localId" : "173",
                "precision" : "Day",
                "type" : "Overlaps",
                "operand" : [ {
-                  "localId" : "142",
+                  "localId" : "155",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "159",
+                  "localId" : "172",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "150",
+                     "localId" : "163",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "143",
+                        "localId" : "156",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "144",
+                        "localId" : "157",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "9",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "145",
+                        "localId" : "158",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "146",
+                        "localId" : "159",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "23",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "147",
+                        "localId" : "160",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "59",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "148",
+                        "localId" : "161",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "59",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "149",
+                        "localId" : "162",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "999",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "158",
+                     "localId" : "171",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "151",
+                        "localId" : "164",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "152",
+                        "localId" : "165",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "10",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "153",
+                        "localId" : "166",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "154",
+                        "localId" : "167",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "155",
+                        "localId" : "168",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "156",
+                        "localId" : "169",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "157",
+                        "localId" : "170",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
@@ -61055,38 +61176,38 @@ module.exports['OverlapsDateTime'] = {
                } ]
             }
          }, {
-            "localId" : "181",
+            "localId" : "194",
             "name" : "OverlapsAfterDayOfIvlEdge",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "181",
+                  "r" : "194",
                   "s" : [ {
                      "value" : [ "define ","OverlapsAfterDayOfIvlEdge",": " ]
                   }, {
-                     "r" : "180",
+                     "r" : "193",
                      "s" : [ {
-                        "r" : "162",
+                        "r" : "175",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps day of"," " ]
                      }, {
-                        "r" : "179",
+                        "r" : "192",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "170",
+                           "r" : "183",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","1",", ","2",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "178",
+                           "r" : "191",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","3",", ","2",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
@@ -61098,105 +61219,105 @@ module.exports['OverlapsDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "180",
+               "localId" : "193",
                "precision" : "Day",
                "type" : "Overlaps",
                "operand" : [ {
-                  "localId" : "162",
+                  "localId" : "175",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "179",
+                  "localId" : "192",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "170",
+                     "localId" : "183",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "163",
+                        "localId" : "176",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "164",
+                        "localId" : "177",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "165",
+                        "localId" : "178",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "166",
+                        "localId" : "179",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "167",
+                        "localId" : "180",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "168",
+                        "localId" : "181",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "169",
+                        "localId" : "182",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "178",
+                     "localId" : "191",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "171",
+                        "localId" : "184",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "172",
+                        "localId" : "185",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "173",
+                        "localId" : "186",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "174",
+                        "localId" : "187",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "175",
+                        "localId" : "188",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "176",
+                        "localId" : "189",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "177",
+                        "localId" : "190",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
@@ -61205,38 +61326,38 @@ module.exports['OverlapsDateTime'] = {
                } ]
             }
          }, {
-            "localId" : "201",
+            "localId" : "214",
             "name" : "OverlapsContainsDayOfIvl",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "201",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "define ","OverlapsContainsDayOfIvl",": " ]
                   }, {
-                     "r" : "200",
+                     "r" : "213",
                      "s" : [ {
-                        "r" : "182",
+                        "r" : "195",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps day of"," " ]
                      }, {
-                        "r" : "199",
+                        "r" : "212",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "190",
+                           "r" : "203",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","5",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "198",
+                           "r" : "211",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","6",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
@@ -61248,105 +61369,105 @@ module.exports['OverlapsDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "200",
+               "localId" : "213",
                "precision" : "Day",
                "type" : "Overlaps",
                "operand" : [ {
-                  "localId" : "182",
+                  "localId" : "195",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "199",
+                  "localId" : "212",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "190",
+                     "localId" : "203",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "183",
+                        "localId" : "196",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "184",
+                        "localId" : "197",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "185",
+                        "localId" : "198",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "186",
+                        "localId" : "199",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "187",
+                        "localId" : "200",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "188",
+                        "localId" : "201",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "189",
+                        "localId" : "202",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "198",
+                     "localId" : "211",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "191",
+                        "localId" : "204",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "192",
+                        "localId" : "205",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "6",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "193",
+                        "localId" : "206",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "194",
+                        "localId" : "207",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "195",
+                        "localId" : "208",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "196",
+                        "localId" : "209",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "197",
+                        "localId" : "210",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
@@ -61355,38 +61476,38 @@ module.exports['OverlapsDateTime'] = {
                } ]
             }
          }, {
-            "localId" : "221",
+            "localId" : "234",
             "name" : "OverlapsContainedByDayOfIvl",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "221",
+                  "r" : "234",
                   "s" : [ {
                      "value" : [ "define ","OverlapsContainedByDayOfIvl",": " ]
                   }, {
-                     "r" : "220",
+                     "r" : "233",
                      "s" : [ {
-                        "r" : "202",
+                        "r" : "215",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps day of"," " ]
                      }, {
-                        "r" : "219",
+                        "r" : "232",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "210",
+                           "r" : "223",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","1",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "218",
+                           "r" : "231",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","12",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
@@ -61398,105 +61519,105 @@ module.exports['OverlapsDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "220",
+               "localId" : "233",
                "precision" : "Day",
                "type" : "Overlaps",
                "operand" : [ {
-                  "localId" : "202",
+                  "localId" : "215",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "219",
+                  "localId" : "232",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "210",
+                     "localId" : "223",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "203",
+                        "localId" : "216",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "204",
+                        "localId" : "217",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "205",
+                        "localId" : "218",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "206",
+                        "localId" : "219",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "207",
+                        "localId" : "220",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "208",
+                        "localId" : "221",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "209",
+                        "localId" : "222",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "218",
+                     "localId" : "231",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "211",
+                        "localId" : "224",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "212",
+                        "localId" : "225",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "12",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "213",
+                        "localId" : "226",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "214",
+                        "localId" : "227",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "215",
+                        "localId" : "228",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "216",
+                        "localId" : "229",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "217",
+                        "localId" : "230",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
@@ -61505,38 +61626,38 @@ module.exports['OverlapsDateTime'] = {
                } ]
             }
          }, {
-            "localId" : "241",
+            "localId" : "254",
             "name" : "NotOverlapsDayOfIvl",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "241",
+                  "r" : "254",
                   "s" : [ {
                      "value" : [ "define ","NotOverlapsDayOfIvl",": " ]
                   }, {
-                     "r" : "240",
+                     "r" : "253",
                      "s" : [ {
-                        "r" : "222",
+                        "r" : "235",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps day of"," " ]
                      }, {
-                        "r" : "239",
+                        "r" : "252",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "230",
+                           "r" : "243",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","1",", ","2",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "238",
+                           "r" : "251",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","3",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
@@ -61548,105 +61669,105 @@ module.exports['OverlapsDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "240",
+               "localId" : "253",
                "precision" : "Day",
                "type" : "Overlaps",
                "operand" : [ {
-                  "localId" : "222",
+                  "localId" : "235",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "239",
+                  "localId" : "252",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "230",
+                     "localId" : "243",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "223",
+                        "localId" : "236",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "224",
+                        "localId" : "237",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "225",
+                        "localId" : "238",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "226",
+                        "localId" : "239",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "227",
+                        "localId" : "240",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "228",
+                        "localId" : "241",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "229",
+                        "localId" : "242",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "238",
+                     "localId" : "251",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "231",
+                        "localId" : "244",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "232",
+                        "localId" : "245",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "233",
+                        "localId" : "246",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "234",
+                        "localId" : "247",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "235",
+                        "localId" : "248",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "236",
+                        "localId" : "249",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "237",
+                        "localId" : "250",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
@@ -61655,38 +61776,38 @@ module.exports['OverlapsDateTime'] = {
                } ]
             }
          }, {
-            "localId" : "251",
+            "localId" : "264",
             "name" : "OverlapsAfterDayOfImpreciseInterval",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "251",
+                  "r" : "264",
                   "s" : [ {
                      "value" : [ "define ","OverlapsAfterDayOfImpreciseInterval",": " ]
                   }, {
-                     "r" : "250",
+                     "r" : "263",
                      "s" : [ {
-                        "r" : "242",
+                        "r" : "255",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps day of"," " ]
                      }, {
-                        "r" : "249",
+                        "r" : "262",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "245",
+                           "r" : "258",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","1",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "248",
+                           "r" : "261",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","4",")" ]
                            } ]
@@ -61698,125 +61819,19 @@ module.exports['OverlapsDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "250",
+               "localId" : "263",
                "precision" : "Day",
                "type" : "Overlaps",
                "operand" : [ {
-                  "localId" : "242",
+                  "localId" : "255",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "249",
+                  "localId" : "262",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "245",
-                     "type" : "DateTime",
-                     "year" : {
-                        "localId" : "243",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2012",
-                        "type" : "Literal"
-                     },
-                     "month" : {
-                        "localId" : "244",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "1",
-                        "type" : "Literal"
-                     }
-                  },
-                  "high" : {
-                     "localId" : "248",
-                     "type" : "DateTime",
-                     "year" : {
-                        "localId" : "246",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2012",
-                        "type" : "Literal"
-                     },
-                     "month" : {
-                        "localId" : "247",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "4",
-                        "type" : "Literal"
-                     }
-                  }
-               } ]
-            }
-         }, {
-            "localId" : "261",
-            "name" : "MayOverlapBeforeDayOfImpreciseIvl",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "261",
-                  "s" : [ {
-                     "value" : [ "define ","MayOverlapBeforeDayOfImpreciseIvl",": " ]
-                  }, {
-                     "r" : "260",
-                     "s" : [ {
-                        "r" : "252",
-                        "s" : [ {
-                           "value" : [ "PrecisionDateIvl" ]
-                        } ]
-                     }, {
-                        "value" : [ " ","overlaps day of"," " ]
-                     }, {
-                        "r" : "259",
-                        "s" : [ {
-                           "value" : [ "Interval[" ]
-                        }, {
-                           "r" : "255",
-                           "s" : [ {
-                              "value" : [ "DateTime","(","2012",", ","9",")" ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "258",
-                           "s" : [ {
-                              "value" : [ "DateTime","(","2012",", ","10",")" ]
-                           } ]
-                        }, {
-                           "value" : [ "]" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "260",
-               "precision" : "Day",
-               "type" : "Overlaps",
-               "operand" : [ {
-                  "localId" : "252",
-                  "name" : "PrecisionDateIvl",
-                  "type" : "ExpressionRef"
-               }, {
-                  "localId" : "259",
-                  "lowClosed" : true,
-                  "highClosed" : true,
-                  "type" : "Interval",
-                  "low" : {
-                     "localId" : "255",
-                     "type" : "DateTime",
-                     "year" : {
-                        "localId" : "253",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2012",
-                        "type" : "Literal"
-                     },
-                     "month" : {
-                        "localId" : "254",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "9",
-                        "type" : "Literal"
-                     }
-                  },
-                  "high" : {
                      "localId" : "258",
                      "type" : "DateTime",
                      "year" : {
@@ -61828,6 +61843,112 @@ module.exports['OverlapsDateTime'] = {
                      "month" : {
                         "localId" : "257",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "261",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "259",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "260",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "274",
+            "name" : "MayOverlapBeforeDayOfImpreciseIvl",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "274",
+                  "s" : [ {
+                     "value" : [ "define ","MayOverlapBeforeDayOfImpreciseIvl",": " ]
+                  }, {
+                     "r" : "273",
+                     "s" : [ {
+                        "r" : "265",
+                        "s" : [ {
+                           "value" : [ "PrecisionDateIvl" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","overlaps day of"," " ]
+                     }, {
+                        "r" : "272",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "268",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","9",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "271",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","10",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "273",
+               "precision" : "Day",
+               "type" : "Overlaps",
+               "operand" : [ {
+                  "localId" : "265",
+                  "name" : "PrecisionDateIvl",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "272",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "268",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "266",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "267",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "9",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "271",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "269",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "270",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "10",
                         "type" : "Literal"
                      }
@@ -61835,38 +61956,38 @@ module.exports['OverlapsDateTime'] = {
                } ]
             }
          }, {
-            "localId" : "271",
+            "localId" : "284",
             "name" : "MayOverlapAfterDayOfImpreciseIvl",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "271",
+                  "r" : "284",
                   "s" : [ {
                      "value" : [ "define ","MayOverlapAfterDayOfImpreciseIvl",": " ]
                   }, {
-                     "r" : "270",
+                     "r" : "283",
                      "s" : [ {
-                        "r" : "262",
+                        "r" : "275",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps day of"," " ]
                      }, {
-                        "r" : "269",
+                        "r" : "282",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "265",
+                           "r" : "278",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","1",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "268",
+                           "r" : "281",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","3",")" ]
                            } ]
@@ -61878,45 +61999,45 @@ module.exports['OverlapsDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "270",
+               "localId" : "283",
                "precision" : "Day",
                "type" : "Overlaps",
                "operand" : [ {
-                  "localId" : "262",
+                  "localId" : "275",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "269",
+                  "localId" : "282",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "265",
+                     "localId" : "278",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "263",
+                        "localId" : "276",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "264",
+                        "localId" : "277",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "268",
+                     "localId" : "281",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "266",
+                        "localId" : "279",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "267",
+                        "localId" : "280",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
@@ -62535,6 +62656,7 @@ define ivlD: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), DateTime(2014, 1, 1, 0, 
 define ivlE: Interval[DateTime(2013), DateTime(2015)]
 define ivlF: Interval[DateTime(2014), DateTime(2016)]
 define ivlG: Interval[DateTime(2016), DateTime(2017)]
+define ivlH: Interval[DateTime(2013,1), DateTime(2014)]
 define OverlapsBefore: ivlA overlaps after ivlB
 define OverlapsAfter: ivlB overlaps after ivlA
 define OverlapsContained: ivlB overlaps after ivlC
@@ -62543,7 +62665,8 @@ define ImpreciseOverlapBefore: ivlE overlaps after ivlF
 define ImpreciseOverlapAfter: ivlF overlaps after ivlE
 define NoOverlap: ivlC overlaps after ivlD
 define NoImpreciseOverlap: ivlE overlaps after ivlG
-define UnknownOverlap: ivlG overlaps after ivlF
+define MatchingPrecisionOverlap: ivlG overlaps after ivlF
+define UnknownOverlap: ivlH overlaps after ivlC
 define PrecisionDateIvl: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
 define OverlapsBeforeDayOfIvlEdge: PrecisionDateIvl overlaps after day of Interval[DateTime(2012, 9, 2, 23, 59, 59, 999), DateTime(2012, 10, 1, 0, 0, 0, 0)]
 define OverlapsAfterDayOfIvlEdge: PrecisionDateIvl overlaps after day of Interval[DateTime(2012, 1, 2, 0, 0, 0, 0), DateTime(2012, 3, 2, 0, 0, 0, 0)]
@@ -63289,27 +63412,92 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             }
          }, {
-            "localId" : "95",
+            "localId" : "98",
+            "name" : "ivlH",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "98",
+                  "s" : [ {
+                     "value" : [ "define ","ivlH",": " ]
+                  }, {
+                     "r" : "97",
+                     "s" : [ {
+                        "value" : [ "Interval[" ]
+                     }, {
+                        "r" : "94",
+                        "s" : [ {
+                           "value" : [ "DateTime","(","2013",",","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "96",
+                        "s" : [ {
+                           "value" : [ "DateTime","(","2014",")" ]
+                        } ]
+                     }, {
+                        "value" : [ "]" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "97",
+               "lowClosed" : true,
+               "highClosed" : true,
+               "type" : "Interval",
+               "low" : {
+                  "localId" : "94",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "92",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2013",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "93",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }
+               },
+               "high" : {
+                  "localId" : "96",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "95",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2014",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         }, {
+            "localId" : "102",
             "name" : "OverlapsBefore",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "95",
+                  "r" : "102",
                   "s" : [ {
                      "value" : [ "define ","OverlapsBefore",": " ]
                   }, {
-                     "r" : "94",
+                     "r" : "101",
                      "s" : [ {
-                        "r" : "92",
+                        "r" : "99",
                         "s" : [ {
                            "value" : [ "ivlA" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps after"," " ]
                      }, {
-                        "r" : "93",
+                        "r" : "100",
                         "s" : [ {
                            "value" : [ "ivlB" ]
                         } ]
@@ -63318,40 +63506,40 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "94",
+               "localId" : "101",
                "type" : "OverlapsAfter",
                "operand" : [ {
-                  "localId" : "92",
+                  "localId" : "99",
                   "name" : "ivlA",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "93",
+                  "localId" : "100",
                   "name" : "ivlB",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "99",
+            "localId" : "106",
             "name" : "OverlapsAfter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "99",
+                  "r" : "106",
                   "s" : [ {
                      "value" : [ "define ","OverlapsAfter",": " ]
                   }, {
-                     "r" : "98",
+                     "r" : "105",
                      "s" : [ {
-                        "r" : "96",
+                        "r" : "103",
                         "s" : [ {
                            "value" : [ "ivlB" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps after"," " ]
                      }, {
-                        "r" : "97",
+                        "r" : "104",
                         "s" : [ {
                            "value" : [ "ivlA" ]
                         } ]
@@ -63360,40 +63548,40 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "98",
+               "localId" : "105",
                "type" : "OverlapsAfter",
                "operand" : [ {
-                  "localId" : "96",
+                  "localId" : "103",
                   "name" : "ivlB",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "97",
+                  "localId" : "104",
                   "name" : "ivlA",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "103",
+            "localId" : "110",
             "name" : "OverlapsContained",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "103",
+                  "r" : "110",
                   "s" : [ {
                      "value" : [ "define ","OverlapsContained",": " ]
                   }, {
-                     "r" : "102",
+                     "r" : "109",
                      "s" : [ {
-                        "r" : "100",
+                        "r" : "107",
                         "s" : [ {
                            "value" : [ "ivlB" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps after"," " ]
                      }, {
-                        "r" : "101",
+                        "r" : "108",
                         "s" : [ {
                            "value" : [ "ivlC" ]
                         } ]
@@ -63402,40 +63590,40 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "102",
+               "localId" : "109",
                "type" : "OverlapsAfter",
                "operand" : [ {
-                  "localId" : "100",
+                  "localId" : "107",
                   "name" : "ivlB",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "101",
+                  "localId" : "108",
                   "name" : "ivlC",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "107",
+            "localId" : "114",
             "name" : "OverlapsContains",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "107",
+                  "r" : "114",
                   "s" : [ {
                      "value" : [ "define ","OverlapsContains",": " ]
                   }, {
-                     "r" : "106",
+                     "r" : "113",
                      "s" : [ {
-                        "r" : "104",
+                        "r" : "111",
                         "s" : [ {
                            "value" : [ "ivlC" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps after"," " ]
                      }, {
-                        "r" : "105",
+                        "r" : "112",
                         "s" : [ {
                            "value" : [ "ivlB" ]
                         } ]
@@ -63444,40 +63632,40 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "106",
+               "localId" : "113",
                "type" : "OverlapsAfter",
                "operand" : [ {
-                  "localId" : "104",
+                  "localId" : "111",
                   "name" : "ivlC",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "105",
+                  "localId" : "112",
                   "name" : "ivlB",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "111",
+            "localId" : "118",
             "name" : "ImpreciseOverlapBefore",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "111",
+                  "r" : "118",
                   "s" : [ {
                      "value" : [ "define ","ImpreciseOverlapBefore",": " ]
                   }, {
-                     "r" : "110",
+                     "r" : "117",
                      "s" : [ {
-                        "r" : "108",
+                        "r" : "115",
                         "s" : [ {
                            "value" : [ "ivlE" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps after"," " ]
                      }, {
-                        "r" : "109",
+                        "r" : "116",
                         "s" : [ {
                            "value" : [ "ivlF" ]
                         } ]
@@ -63486,40 +63674,40 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "110",
+               "localId" : "117",
                "type" : "OverlapsAfter",
                "operand" : [ {
-                  "localId" : "108",
+                  "localId" : "115",
                   "name" : "ivlE",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "109",
+                  "localId" : "116",
                   "name" : "ivlF",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "115",
+            "localId" : "122",
             "name" : "ImpreciseOverlapAfter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "115",
+                  "r" : "122",
                   "s" : [ {
                      "value" : [ "define ","ImpreciseOverlapAfter",": " ]
                   }, {
-                     "r" : "114",
+                     "r" : "121",
                      "s" : [ {
-                        "r" : "112",
+                        "r" : "119",
                         "s" : [ {
                            "value" : [ "ivlF" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps after"," " ]
                      }, {
-                        "r" : "113",
+                        "r" : "120",
                         "s" : [ {
                            "value" : [ "ivlE" ]
                         } ]
@@ -63528,40 +63716,40 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "114",
+               "localId" : "121",
                "type" : "OverlapsAfter",
                "operand" : [ {
-                  "localId" : "112",
+                  "localId" : "119",
                   "name" : "ivlF",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "113",
+                  "localId" : "120",
                   "name" : "ivlE",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "119",
+            "localId" : "126",
             "name" : "NoOverlap",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "119",
+                  "r" : "126",
                   "s" : [ {
                      "value" : [ "define ","NoOverlap",": " ]
                   }, {
-                     "r" : "118",
+                     "r" : "125",
                      "s" : [ {
-                        "r" : "116",
+                        "r" : "123",
                         "s" : [ {
                            "value" : [ "ivlC" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps after"," " ]
                      }, {
-                        "r" : "117",
+                        "r" : "124",
                         "s" : [ {
                            "value" : [ "ivlD" ]
                         } ]
@@ -63570,40 +63758,40 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "118",
+               "localId" : "125",
                "type" : "OverlapsAfter",
                "operand" : [ {
-                  "localId" : "116",
+                  "localId" : "123",
                   "name" : "ivlC",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "117",
+                  "localId" : "124",
                   "name" : "ivlD",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "123",
+            "localId" : "130",
             "name" : "NoImpreciseOverlap",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "123",
+                  "r" : "130",
                   "s" : [ {
                      "value" : [ "define ","NoImpreciseOverlap",": " ]
                   }, {
-                     "r" : "122",
+                     "r" : "129",
                      "s" : [ {
-                        "r" : "120",
+                        "r" : "127",
                         "s" : [ {
                            "value" : [ "ivlE" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps after"," " ]
                      }, {
-                        "r" : "121",
+                        "r" : "128",
                         "s" : [ {
                            "value" : [ "ivlG" ]
                         } ]
@@ -63612,40 +63800,40 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "122",
+               "localId" : "129",
                "type" : "OverlapsAfter",
                "operand" : [ {
-                  "localId" : "120",
+                  "localId" : "127",
                   "name" : "ivlE",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "121",
+                  "localId" : "128",
                   "name" : "ivlG",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "127",
-            "name" : "UnknownOverlap",
+            "localId" : "134",
+            "name" : "MatchingPrecisionOverlap",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "127",
+                  "r" : "134",
                   "s" : [ {
-                     "value" : [ "define ","UnknownOverlap",": " ]
+                     "value" : [ "define ","MatchingPrecisionOverlap",": " ]
                   }, {
-                     "r" : "126",
+                     "r" : "133",
                      "s" : [ {
-                        "r" : "124",
+                        "r" : "131",
                         "s" : [ {
                            "value" : [ "ivlG" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps after"," " ]
                      }, {
-                        "r" : "125",
+                        "r" : "132",
                         "s" : [ {
                            "value" : [ "ivlF" ]
                         } ]
@@ -63654,42 +63842,84 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "126",
+               "localId" : "133",
                "type" : "OverlapsAfter",
                "operand" : [ {
-                  "localId" : "124",
+                  "localId" : "131",
                   "name" : "ivlG",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "125",
+                  "localId" : "132",
                   "name" : "ivlF",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "145",
+            "localId" : "138",
+            "name" : "UnknownOverlap",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "138",
+                  "s" : [ {
+                     "value" : [ "define ","UnknownOverlap",": " ]
+                  }, {
+                     "r" : "137",
+                     "s" : [ {
+                        "r" : "135",
+                        "s" : [ {
+                           "value" : [ "ivlH" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","overlaps after"," " ]
+                     }, {
+                        "r" : "136",
+                        "s" : [ {
+                           "value" : [ "ivlC" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "137",
+               "type" : "OverlapsAfter",
+               "operand" : [ {
+                  "localId" : "135",
+                  "name" : "ivlH",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "136",
+                  "name" : "ivlC",
+                  "type" : "ExpressionRef"
+               } ]
+            }
+         }, {
+            "localId" : "156",
             "name" : "PrecisionDateIvl",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "145",
+                  "r" : "156",
                   "s" : [ {
                      "value" : [ "define ","PrecisionDateIvl",": " ]
                   }, {
-                     "r" : "144",
+                     "r" : "155",
                      "s" : [ {
                         "value" : [ "Interval[" ]
                      }, {
-                        "r" : "135",
+                        "r" : "146",
                         "s" : [ {
                            "value" : [ "DateTime","(","2012",", ","3",", ","2",", ","12",", ","34",", ","56",", ","789",")" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "143",
+                        "r" : "154",
                         "s" : [ {
                            "value" : [ "DateTime","(","2012",", ","9",", ","2",", ","1",", ","23",", ","45",", ","678",")" ]
                         } ]
@@ -63700,97 +63930,97 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "144",
+               "localId" : "155",
                "lowClosed" : true,
                "highClosed" : false,
                "type" : "Interval",
                "low" : {
-                  "localId" : "135",
+                  "localId" : "146",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "128",
+                     "localId" : "139",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2012",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "129",
+                     "localId" : "140",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "130",
+                     "localId" : "141",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "131",
+                     "localId" : "142",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "12",
                      "type" : "Literal"
                   },
                   "minute" : {
-                     "localId" : "132",
+                     "localId" : "143",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "34",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "133",
+                     "localId" : "144",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "56",
                      "type" : "Literal"
                   },
                   "millisecond" : {
-                     "localId" : "134",
+                     "localId" : "145",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "789",
                      "type" : "Literal"
                   }
                },
                "high" : {
-                  "localId" : "143",
+                  "localId" : "154",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "136",
+                     "localId" : "147",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2012",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "137",
+                     "localId" : "148",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "9",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "138",
+                     "localId" : "149",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "139",
+                     "localId" : "150",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "minute" : {
-                     "localId" : "140",
+                     "localId" : "151",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "23",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "141",
+                     "localId" : "152",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "45",
                      "type" : "Literal"
                   },
                   "millisecond" : {
-                     "localId" : "142",
+                     "localId" : "153",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "678",
                      "type" : "Literal"
@@ -63798,38 +64028,38 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             }
          }, {
-            "localId" : "165",
+            "localId" : "176",
             "name" : "OverlapsBeforeDayOfIvlEdge",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "165",
+                  "r" : "176",
                   "s" : [ {
                      "value" : [ "define ","OverlapsBeforeDayOfIvlEdge",": " ]
                   }, {
-                     "r" : "164",
+                     "r" : "175",
                      "s" : [ {
-                        "r" : "146",
+                        "r" : "157",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps after day of"," " ]
                      }, {
-                        "r" : "163",
+                        "r" : "174",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "154",
+                           "r" : "165",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","9",", ","2",", ","23",", ","59",", ","59",", ","999",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "162",
+                           "r" : "173",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","10",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
@@ -63841,105 +64071,105 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "164",
+               "localId" : "175",
                "precision" : "Day",
                "type" : "OverlapsAfter",
                "operand" : [ {
-                  "localId" : "146",
+                  "localId" : "157",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "163",
+                  "localId" : "174",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "154",
+                     "localId" : "165",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "147",
+                        "localId" : "158",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "148",
+                        "localId" : "159",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "9",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "149",
+                        "localId" : "160",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "150",
+                        "localId" : "161",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "23",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "151",
+                        "localId" : "162",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "59",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "152",
+                        "localId" : "163",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "59",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "153",
+                        "localId" : "164",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "999",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "162",
+                     "localId" : "173",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "155",
+                        "localId" : "166",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "156",
+                        "localId" : "167",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "10",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "157",
+                        "localId" : "168",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "158",
+                        "localId" : "169",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "159",
+                        "localId" : "170",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "160",
+                        "localId" : "171",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "161",
+                        "localId" : "172",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
@@ -63948,38 +64178,38 @@ module.exports['OverlapsAfterDateTime'] = {
                } ]
             }
          }, {
-            "localId" : "185",
+            "localId" : "196",
             "name" : "OverlapsAfterDayOfIvlEdge",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "185",
+                  "r" : "196",
                   "s" : [ {
                      "value" : [ "define ","OverlapsAfterDayOfIvlEdge",": " ]
                   }, {
-                     "r" : "184",
+                     "r" : "195",
                      "s" : [ {
-                        "r" : "166",
+                        "r" : "177",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps after day of"," " ]
                      }, {
-                        "r" : "183",
+                        "r" : "194",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "174",
+                           "r" : "185",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","1",", ","2",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "182",
+                           "r" : "193",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","3",", ","2",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
@@ -63991,105 +64221,105 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "184",
+               "localId" : "195",
                "precision" : "Day",
                "type" : "OverlapsAfter",
                "operand" : [ {
-                  "localId" : "166",
+                  "localId" : "177",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "183",
+                  "localId" : "194",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "174",
+                     "localId" : "185",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "167",
+                        "localId" : "178",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "168",
+                        "localId" : "179",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "169",
+                        "localId" : "180",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "170",
+                        "localId" : "181",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "171",
+                        "localId" : "182",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "172",
+                        "localId" : "183",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "173",
+                        "localId" : "184",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "182",
+                     "localId" : "193",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "175",
+                        "localId" : "186",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "176",
+                        "localId" : "187",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "177",
+                        "localId" : "188",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "178",
+                        "localId" : "189",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "179",
+                        "localId" : "190",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "180",
+                        "localId" : "191",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "181",
+                        "localId" : "192",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
@@ -64098,38 +64328,38 @@ module.exports['OverlapsAfterDateTime'] = {
                } ]
             }
          }, {
-            "localId" : "205",
+            "localId" : "216",
             "name" : "OverlapsContainsDayOfIvl",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "205",
+                  "r" : "216",
                   "s" : [ {
                      "value" : [ "define ","OverlapsContainsDayOfIvl",": " ]
                   }, {
-                     "r" : "204",
+                     "r" : "215",
                      "s" : [ {
-                        "r" : "186",
+                        "r" : "197",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps after day of"," " ]
                      }, {
-                        "r" : "203",
+                        "r" : "214",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "194",
+                           "r" : "205",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","5",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "202",
+                           "r" : "213",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","6",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
@@ -64141,105 +64371,105 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "204",
+               "localId" : "215",
                "precision" : "Day",
                "type" : "OverlapsAfter",
                "operand" : [ {
-                  "localId" : "186",
+                  "localId" : "197",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "203",
+                  "localId" : "214",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "194",
+                     "localId" : "205",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "187",
+                        "localId" : "198",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "188",
+                        "localId" : "199",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "189",
+                        "localId" : "200",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "190",
+                        "localId" : "201",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "191",
+                        "localId" : "202",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "192",
+                        "localId" : "203",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "193",
+                        "localId" : "204",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "202",
+                     "localId" : "213",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "195",
+                        "localId" : "206",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "196",
+                        "localId" : "207",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "6",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "197",
+                        "localId" : "208",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "198",
+                        "localId" : "209",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "199",
+                        "localId" : "210",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "200",
+                        "localId" : "211",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "201",
+                        "localId" : "212",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
@@ -64248,38 +64478,38 @@ module.exports['OverlapsAfterDateTime'] = {
                } ]
             }
          }, {
-            "localId" : "225",
+            "localId" : "236",
             "name" : "OverlapsContainedByDayOfIvl",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "225",
+                  "r" : "236",
                   "s" : [ {
                      "value" : [ "define ","OverlapsContainedByDayOfIvl",": " ]
                   }, {
-                     "r" : "224",
+                     "r" : "235",
                      "s" : [ {
-                        "r" : "206",
+                        "r" : "217",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps after day of"," " ]
                      }, {
-                        "r" : "223",
+                        "r" : "234",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "214",
+                           "r" : "225",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","1",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "222",
+                           "r" : "233",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","12",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
@@ -64291,105 +64521,105 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "224",
+               "localId" : "235",
                "precision" : "Day",
                "type" : "OverlapsAfter",
                "operand" : [ {
-                  "localId" : "206",
+                  "localId" : "217",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "223",
+                  "localId" : "234",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "214",
+                     "localId" : "225",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "207",
+                        "localId" : "218",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "208",
+                        "localId" : "219",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "209",
+                        "localId" : "220",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "210",
+                        "localId" : "221",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "211",
+                        "localId" : "222",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "212",
+                        "localId" : "223",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "213",
+                        "localId" : "224",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "222",
+                     "localId" : "233",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "215",
+                        "localId" : "226",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "216",
+                        "localId" : "227",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "12",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "217",
+                        "localId" : "228",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "218",
+                        "localId" : "229",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "219",
+                        "localId" : "230",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "220",
+                        "localId" : "231",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "221",
+                        "localId" : "232",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
@@ -64398,38 +64628,38 @@ module.exports['OverlapsAfterDateTime'] = {
                } ]
             }
          }, {
-            "localId" : "245",
+            "localId" : "256",
             "name" : "NotOverlapsDayOfIvl",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "245",
+                  "r" : "256",
                   "s" : [ {
                      "value" : [ "define ","NotOverlapsDayOfIvl",": " ]
                   }, {
-                     "r" : "244",
+                     "r" : "255",
                      "s" : [ {
-                        "r" : "226",
+                        "r" : "237",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps after day of"," " ]
                      }, {
-                        "r" : "243",
+                        "r" : "254",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "234",
+                           "r" : "245",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","1",", ","2",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "242",
+                           "r" : "253",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","3",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
@@ -64441,105 +64671,105 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "244",
+               "localId" : "255",
                "precision" : "Day",
                "type" : "OverlapsAfter",
                "operand" : [ {
-                  "localId" : "226",
+                  "localId" : "237",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "243",
+                  "localId" : "254",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "234",
+                     "localId" : "245",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "227",
+                        "localId" : "238",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "228",
+                        "localId" : "239",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "229",
+                        "localId" : "240",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "230",
+                        "localId" : "241",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "231",
+                        "localId" : "242",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "232",
+                        "localId" : "243",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "233",
+                        "localId" : "244",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "242",
+                     "localId" : "253",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "235",
+                        "localId" : "246",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "236",
+                        "localId" : "247",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "237",
+                        "localId" : "248",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "238",
+                        "localId" : "249",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "239",
+                        "localId" : "250",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "240",
+                        "localId" : "251",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "241",
+                        "localId" : "252",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
@@ -64548,38 +64778,38 @@ module.exports['OverlapsAfterDateTime'] = {
                } ]
             }
          }, {
-            "localId" : "255",
+            "localId" : "266",
             "name" : "OverlapsAfterDayOfImpreciseInterval",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "255",
+                  "r" : "266",
                   "s" : [ {
                      "value" : [ "define ","OverlapsAfterDayOfImpreciseInterval",": " ]
                   }, {
-                     "r" : "254",
+                     "r" : "265",
                      "s" : [ {
-                        "r" : "246",
+                        "r" : "257",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps after day of"," " ]
                      }, {
-                        "r" : "253",
+                        "r" : "264",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "249",
+                           "r" : "260",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","1",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "252",
+                           "r" : "263",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","4",")" ]
                            } ]
@@ -64591,45 +64821,45 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "254",
+               "localId" : "265",
                "precision" : "Day",
                "type" : "OverlapsAfter",
                "operand" : [ {
-                  "localId" : "246",
+                  "localId" : "257",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "253",
+                  "localId" : "264",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "249",
+                     "localId" : "260",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "247",
+                        "localId" : "258",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "248",
+                        "localId" : "259",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "252",
+                     "localId" : "263",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "250",
+                        "localId" : "261",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "251",
+                        "localId" : "262",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
@@ -64638,38 +64868,38 @@ module.exports['OverlapsAfterDateTime'] = {
                } ]
             }
          }, {
-            "localId" : "265",
+            "localId" : "276",
             "name" : "MayOverlapBeforeDayOfImpreciseIvl",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "265",
+                  "r" : "276",
                   "s" : [ {
                      "value" : [ "define ","MayOverlapBeforeDayOfImpreciseIvl",": " ]
                   }, {
-                     "r" : "264",
+                     "r" : "275",
                      "s" : [ {
-                        "r" : "256",
+                        "r" : "267",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps after day of"," " ]
                      }, {
-                        "r" : "263",
+                        "r" : "274",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "259",
+                           "r" : "270",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","9",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "262",
+                           "r" : "273",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","10",")" ]
                            } ]
@@ -64681,45 +64911,45 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "264",
+               "localId" : "275",
                "precision" : "Day",
                "type" : "OverlapsAfter",
                "operand" : [ {
-                  "localId" : "256",
+                  "localId" : "267",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "263",
+                  "localId" : "274",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "259",
+                     "localId" : "270",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "257",
+                        "localId" : "268",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "258",
+                        "localId" : "269",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "9",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "262",
+                     "localId" : "273",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "260",
+                        "localId" : "271",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "261",
+                        "localId" : "272",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "10",
                         "type" : "Literal"
@@ -64728,38 +64958,38 @@ module.exports['OverlapsAfterDateTime'] = {
                } ]
             }
          }, {
-            "localId" : "275",
+            "localId" : "286",
             "name" : "MayOverlapAfterDayOfImpreciseIvl",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "275",
+                  "r" : "286",
                   "s" : [ {
                      "value" : [ "define ","MayOverlapAfterDayOfImpreciseIvl",": " ]
                   }, {
-                     "r" : "274",
+                     "r" : "285",
                      "s" : [ {
-                        "r" : "266",
+                        "r" : "277",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps after day of"," " ]
                      }, {
-                        "r" : "273",
+                        "r" : "284",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "269",
+                           "r" : "280",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","1",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "272",
+                           "r" : "283",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","3",")" ]
                            } ]
@@ -64771,45 +65001,45 @@ module.exports['OverlapsAfterDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "274",
+               "localId" : "285",
                "precision" : "Day",
                "type" : "OverlapsAfter",
                "operand" : [ {
-                  "localId" : "266",
+                  "localId" : "277",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "273",
+                  "localId" : "284",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "269",
+                     "localId" : "280",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "267",
+                        "localId" : "278",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "268",
+                        "localId" : "279",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "272",
+                     "localId" : "283",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "270",
+                        "localId" : "281",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "271",
+                        "localId" : "282",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
@@ -65428,6 +65658,7 @@ define ivlD: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), DateTime(2014, 1, 1, 0, 
 define ivlE: Interval[DateTime(2013), DateTime(2015)]
 define ivlF: Interval[DateTime(2014), DateTime(2016)]
 define ivlG: Interval[DateTime(2016), DateTime(2017)]
+define ivlH: Interval[DateTime(2011, 3), DateTime(2013, 3)]
 define OverlapsBefore: ivlA overlaps before ivlB
 define OverlapsAfter: ivlB overlaps before ivlA
 define OverlapsContained: ivlB overlaps before ivlC
@@ -65436,7 +65667,8 @@ define ImpreciseOverlapBefore: ivlE overlaps before ivlF
 define ImpreciseOverlapAfter: ivlF overlaps before ivlE
 define NoOverlap: ivlC overlaps before ivlD
 define NoImpreciseOverlap: ivlE overlaps before ivlG
-define UnknownOverlap: ivlF overlaps before ivlG
+define MatchingPrecisionOverlap: ivlF overlaps before ivlG
+define UnknownOverlap: ivlH overlaps before ivlE
 define PrecisionDateIvl: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
 define OverlapsBeforeDayOfIvlEdge: PrecisionDateIvl overlaps before day of Interval[DateTime(2012, 9, 2, 23, 59, 59, 999), DateTime(2012, 10, 1, 0, 0, 0, 0)]
 define OverlapsAfterDayOfIvlEdge: PrecisionDateIvl overlaps before day of Interval[DateTime(2012, 1, 2, 0, 0, 0, 0), DateTime(2012, 3, 2, 0, 0, 0, 0)]
@@ -66182,50 +66414,8 @@ module.exports['OverlapsBeforeDateTime'] = {
                }
             }
          }, {
-            "localId" : "95",
-            "name" : "OverlapsBefore",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "95",
-                  "s" : [ {
-                     "value" : [ "define ","OverlapsBefore",": " ]
-                  }, {
-                     "r" : "94",
-                     "s" : [ {
-                        "r" : "92",
-                        "s" : [ {
-                           "value" : [ "ivlA" ]
-                        } ]
-                     }, {
-                        "value" : [ " ","overlaps before"," " ]
-                     }, {
-                        "r" : "93",
-                        "s" : [ {
-                           "value" : [ "ivlB" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "94",
-               "type" : "OverlapsBefore",
-               "operand" : [ {
-                  "localId" : "92",
-                  "name" : "ivlA",
-                  "type" : "ExpressionRef"
-               }, {
-                  "localId" : "93",
-                  "name" : "ivlB",
-                  "type" : "ExpressionRef"
-               } ]
-            }
-         }, {
             "localId" : "99",
-            "name" : "OverlapsAfter",
+            "name" : "ivlH",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -66233,41 +66423,70 @@ module.exports['OverlapsBeforeDateTime'] = {
                "s" : {
                   "r" : "99",
                   "s" : [ {
-                     "value" : [ "define ","OverlapsAfter",": " ]
+                     "value" : [ "define ","ivlH",": " ]
                   }, {
                      "r" : "98",
                      "s" : [ {
-                        "r" : "96",
+                        "value" : [ "Interval[" ]
+                     }, {
+                        "r" : "94",
                         "s" : [ {
-                           "value" : [ "ivlB" ]
+                           "value" : [ "DateTime","(","2011",", ","3",")" ]
                         } ]
                      }, {
-                        "value" : [ " ","overlaps before"," " ]
+                        "value" : [ ", " ]
                      }, {
                         "r" : "97",
                         "s" : [ {
-                           "value" : [ "ivlA" ]
+                           "value" : [ "DateTime","(","2013",", ","3",")" ]
                         } ]
+                     }, {
+                        "value" : [ "]" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
                "localId" : "98",
-               "type" : "OverlapsBefore",
-               "operand" : [ {
-                  "localId" : "96",
-                  "name" : "ivlB",
-                  "type" : "ExpressionRef"
-               }, {
+               "lowClosed" : true,
+               "highClosed" : true,
+               "type" : "Interval",
+               "low" : {
+                  "localId" : "94",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "92",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2011",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "93",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }
+               },
+               "high" : {
                   "localId" : "97",
-                  "name" : "ivlA",
-                  "type" : "ExpressionRef"
-               } ]
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "95",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2013",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "96",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }
+               }
             }
          }, {
             "localId" : "103",
-            "name" : "OverlapsContained",
+            "name" : "OverlapsBefore",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -66275,20 +66494,20 @@ module.exports['OverlapsBeforeDateTime'] = {
                "s" : {
                   "r" : "103",
                   "s" : [ {
-                     "value" : [ "define ","OverlapsContained",": " ]
+                     "value" : [ "define ","OverlapsBefore",": " ]
                   }, {
                      "r" : "102",
                      "s" : [ {
                         "r" : "100",
                         "s" : [ {
-                           "value" : [ "ivlB" ]
+                           "value" : [ "ivlA" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps before"," " ]
                      }, {
                         "r" : "101",
                         "s" : [ {
-                           "value" : [ "ivlC" ]
+                           "value" : [ "ivlB" ]
                         } ]
                      } ]
                   } ]
@@ -66299,17 +66518,17 @@ module.exports['OverlapsBeforeDateTime'] = {
                "type" : "OverlapsBefore",
                "operand" : [ {
                   "localId" : "100",
-                  "name" : "ivlB",
+                  "name" : "ivlA",
                   "type" : "ExpressionRef"
                }, {
                   "localId" : "101",
-                  "name" : "ivlC",
+                  "name" : "ivlB",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
             "localId" : "107",
-            "name" : "OverlapsContains",
+            "name" : "OverlapsAfter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -66317,20 +66536,20 @@ module.exports['OverlapsBeforeDateTime'] = {
                "s" : {
                   "r" : "107",
                   "s" : [ {
-                     "value" : [ "define ","OverlapsContains",": " ]
+                     "value" : [ "define ","OverlapsAfter",": " ]
                   }, {
                      "r" : "106",
                      "s" : [ {
                         "r" : "104",
                         "s" : [ {
-                           "value" : [ "ivlC" ]
+                           "value" : [ "ivlB" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps before"," " ]
                      }, {
                         "r" : "105",
                         "s" : [ {
-                           "value" : [ "ivlB" ]
+                           "value" : [ "ivlA" ]
                         } ]
                      } ]
                   } ]
@@ -66341,17 +66560,17 @@ module.exports['OverlapsBeforeDateTime'] = {
                "type" : "OverlapsBefore",
                "operand" : [ {
                   "localId" : "104",
-                  "name" : "ivlC",
+                  "name" : "ivlB",
                   "type" : "ExpressionRef"
                }, {
                   "localId" : "105",
-                  "name" : "ivlB",
+                  "name" : "ivlA",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
             "localId" : "111",
-            "name" : "ImpreciseOverlapBefore",
+            "name" : "OverlapsContained",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -66359,20 +66578,20 @@ module.exports['OverlapsBeforeDateTime'] = {
                "s" : {
                   "r" : "111",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseOverlapBefore",": " ]
+                     "value" : [ "define ","OverlapsContained",": " ]
                   }, {
                      "r" : "110",
                      "s" : [ {
                         "r" : "108",
                         "s" : [ {
-                           "value" : [ "ivlE" ]
+                           "value" : [ "ivlB" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps before"," " ]
                      }, {
                         "r" : "109",
                         "s" : [ {
-                           "value" : [ "ivlF" ]
+                           "value" : [ "ivlC" ]
                         } ]
                      } ]
                   } ]
@@ -66383,17 +66602,17 @@ module.exports['OverlapsBeforeDateTime'] = {
                "type" : "OverlapsBefore",
                "operand" : [ {
                   "localId" : "108",
-                  "name" : "ivlE",
+                  "name" : "ivlB",
                   "type" : "ExpressionRef"
                }, {
                   "localId" : "109",
-                  "name" : "ivlF",
+                  "name" : "ivlC",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
             "localId" : "115",
-            "name" : "ImpreciseOverlapAfter",
+            "name" : "OverlapsContains",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -66401,20 +66620,20 @@ module.exports['OverlapsBeforeDateTime'] = {
                "s" : {
                   "r" : "115",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseOverlapAfter",": " ]
+                     "value" : [ "define ","OverlapsContains",": " ]
                   }, {
                      "r" : "114",
                      "s" : [ {
                         "r" : "112",
                         "s" : [ {
-                           "value" : [ "ivlF" ]
+                           "value" : [ "ivlC" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps before"," " ]
                      }, {
                         "r" : "113",
                         "s" : [ {
-                           "value" : [ "ivlE" ]
+                           "value" : [ "ivlB" ]
                         } ]
                      } ]
                   } ]
@@ -66425,17 +66644,17 @@ module.exports['OverlapsBeforeDateTime'] = {
                "type" : "OverlapsBefore",
                "operand" : [ {
                   "localId" : "112",
-                  "name" : "ivlF",
+                  "name" : "ivlC",
                   "type" : "ExpressionRef"
                }, {
                   "localId" : "113",
-                  "name" : "ivlE",
+                  "name" : "ivlB",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
             "localId" : "119",
-            "name" : "NoOverlap",
+            "name" : "ImpreciseOverlapBefore",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -66443,20 +66662,20 @@ module.exports['OverlapsBeforeDateTime'] = {
                "s" : {
                   "r" : "119",
                   "s" : [ {
-                     "value" : [ "define ","NoOverlap",": " ]
+                     "value" : [ "define ","ImpreciseOverlapBefore",": " ]
                   }, {
                      "r" : "118",
                      "s" : [ {
                         "r" : "116",
                         "s" : [ {
-                           "value" : [ "ivlC" ]
+                           "value" : [ "ivlE" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps before"," " ]
                      }, {
                         "r" : "117",
                         "s" : [ {
-                           "value" : [ "ivlD" ]
+                           "value" : [ "ivlF" ]
                         } ]
                      } ]
                   } ]
@@ -66467,17 +66686,17 @@ module.exports['OverlapsBeforeDateTime'] = {
                "type" : "OverlapsBefore",
                "operand" : [ {
                   "localId" : "116",
-                  "name" : "ivlC",
+                  "name" : "ivlE",
                   "type" : "ExpressionRef"
                }, {
                   "localId" : "117",
-                  "name" : "ivlD",
+                  "name" : "ivlF",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
             "localId" : "123",
-            "name" : "NoImpreciseOverlap",
+            "name" : "ImpreciseOverlapAfter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -66485,20 +66704,20 @@ module.exports['OverlapsBeforeDateTime'] = {
                "s" : {
                   "r" : "123",
                   "s" : [ {
-                     "value" : [ "define ","NoImpreciseOverlap",": " ]
+                     "value" : [ "define ","ImpreciseOverlapAfter",": " ]
                   }, {
                      "r" : "122",
                      "s" : [ {
                         "r" : "120",
                         "s" : [ {
-                           "value" : [ "ivlE" ]
+                           "value" : [ "ivlF" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps before"," " ]
                      }, {
                         "r" : "121",
                         "s" : [ {
-                           "value" : [ "ivlG" ]
+                           "value" : [ "ivlE" ]
                         } ]
                      } ]
                   } ]
@@ -66509,17 +66728,17 @@ module.exports['OverlapsBeforeDateTime'] = {
                "type" : "OverlapsBefore",
                "operand" : [ {
                   "localId" : "120",
-                  "name" : "ivlE",
+                  "name" : "ivlF",
                   "type" : "ExpressionRef"
                }, {
                   "localId" : "121",
-                  "name" : "ivlG",
+                  "name" : "ivlE",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
             "localId" : "127",
-            "name" : "UnknownOverlap",
+            "name" : "NoOverlap",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -66527,20 +66746,20 @@ module.exports['OverlapsBeforeDateTime'] = {
                "s" : {
                   "r" : "127",
                   "s" : [ {
-                     "value" : [ "define ","UnknownOverlap",": " ]
+                     "value" : [ "define ","NoOverlap",": " ]
                   }, {
                      "r" : "126",
                      "s" : [ {
                         "r" : "124",
                         "s" : [ {
-                           "value" : [ "ivlF" ]
+                           "value" : [ "ivlC" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps before"," " ]
                      }, {
                         "r" : "125",
                         "s" : [ {
-                           "value" : [ "ivlG" ]
+                           "value" : [ "ivlD" ]
                         } ]
                      } ]
                   } ]
@@ -66551,38 +66770,164 @@ module.exports['OverlapsBeforeDateTime'] = {
                "type" : "OverlapsBefore",
                "operand" : [ {
                   "localId" : "124",
-                  "name" : "ivlF",
+                  "name" : "ivlC",
                   "type" : "ExpressionRef"
                }, {
                   "localId" : "125",
+                  "name" : "ivlD",
+                  "type" : "ExpressionRef"
+               } ]
+            }
+         }, {
+            "localId" : "131",
+            "name" : "NoImpreciseOverlap",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "131",
+                  "s" : [ {
+                     "value" : [ "define ","NoImpreciseOverlap",": " ]
+                  }, {
+                     "r" : "130",
+                     "s" : [ {
+                        "r" : "128",
+                        "s" : [ {
+                           "value" : [ "ivlE" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","overlaps before"," " ]
+                     }, {
+                        "r" : "129",
+                        "s" : [ {
+                           "value" : [ "ivlG" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "130",
+               "type" : "OverlapsBefore",
+               "operand" : [ {
+                  "localId" : "128",
+                  "name" : "ivlE",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "129",
                   "name" : "ivlG",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "145",
+            "localId" : "135",
+            "name" : "MatchingPrecisionOverlap",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "135",
+                  "s" : [ {
+                     "value" : [ "define ","MatchingPrecisionOverlap",": " ]
+                  }, {
+                     "r" : "134",
+                     "s" : [ {
+                        "r" : "132",
+                        "s" : [ {
+                           "value" : [ "ivlF" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","overlaps before"," " ]
+                     }, {
+                        "r" : "133",
+                        "s" : [ {
+                           "value" : [ "ivlG" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "134",
+               "type" : "OverlapsBefore",
+               "operand" : [ {
+                  "localId" : "132",
+                  "name" : "ivlF",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "133",
+                  "name" : "ivlG",
+                  "type" : "ExpressionRef"
+               } ]
+            }
+         }, {
+            "localId" : "139",
+            "name" : "UnknownOverlap",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "139",
+                  "s" : [ {
+                     "value" : [ "define ","UnknownOverlap",": " ]
+                  }, {
+                     "r" : "138",
+                     "s" : [ {
+                        "r" : "136",
+                        "s" : [ {
+                           "value" : [ "ivlH" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","overlaps before"," " ]
+                     }, {
+                        "r" : "137",
+                        "s" : [ {
+                           "value" : [ "ivlE" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "138",
+               "type" : "OverlapsBefore",
+               "operand" : [ {
+                  "localId" : "136",
+                  "name" : "ivlH",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "137",
+                  "name" : "ivlE",
+                  "type" : "ExpressionRef"
+               } ]
+            }
+         }, {
+            "localId" : "157",
             "name" : "PrecisionDateIvl",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "145",
+                  "r" : "157",
                   "s" : [ {
                      "value" : [ "define ","PrecisionDateIvl",": " ]
                   }, {
-                     "r" : "144",
+                     "r" : "156",
                      "s" : [ {
                         "value" : [ "Interval[" ]
                      }, {
-                        "r" : "135",
+                        "r" : "147",
                         "s" : [ {
                            "value" : [ "DateTime","(","2012",", ","3",", ","2",", ","12",", ","34",", ","56",", ","789",")" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "143",
+                        "r" : "155",
                         "s" : [ {
                            "value" : [ "DateTime","(","2012",", ","9",", ","2",", ","1",", ","23",", ","45",", ","678",")" ]
                         } ]
@@ -66593,97 +66938,97 @@ module.exports['OverlapsBeforeDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "144",
+               "localId" : "156",
                "lowClosed" : true,
                "highClosed" : false,
                "type" : "Interval",
                "low" : {
-                  "localId" : "135",
+                  "localId" : "147",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "128",
+                     "localId" : "140",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2012",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "129",
+                     "localId" : "141",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "130",
+                     "localId" : "142",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "131",
+                     "localId" : "143",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "12",
                      "type" : "Literal"
                   },
                   "minute" : {
-                     "localId" : "132",
+                     "localId" : "144",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "34",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "133",
+                     "localId" : "145",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "56",
                      "type" : "Literal"
                   },
                   "millisecond" : {
-                     "localId" : "134",
+                     "localId" : "146",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "789",
                      "type" : "Literal"
                   }
                },
                "high" : {
-                  "localId" : "143",
+                  "localId" : "155",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "136",
+                     "localId" : "148",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2012",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "137",
+                     "localId" : "149",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "9",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "138",
+                     "localId" : "150",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "139",
+                     "localId" : "151",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "minute" : {
-                     "localId" : "140",
+                     "localId" : "152",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "23",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "141",
+                     "localId" : "153",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "45",
                      "type" : "Literal"
                   },
                   "millisecond" : {
-                     "localId" : "142",
+                     "localId" : "154",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "678",
                      "type" : "Literal"
@@ -66691,38 +67036,38 @@ module.exports['OverlapsBeforeDateTime'] = {
                }
             }
          }, {
-            "localId" : "165",
+            "localId" : "177",
             "name" : "OverlapsBeforeDayOfIvlEdge",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "165",
+                  "r" : "177",
                   "s" : [ {
                      "value" : [ "define ","OverlapsBeforeDayOfIvlEdge",": " ]
                   }, {
-                     "r" : "164",
+                     "r" : "176",
                      "s" : [ {
-                        "r" : "146",
+                        "r" : "158",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps before day of"," " ]
                      }, {
-                        "r" : "163",
+                        "r" : "175",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "154",
+                           "r" : "166",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","9",", ","2",", ","23",", ","59",", ","59",", ","999",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "162",
+                           "r" : "174",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","10",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
@@ -66734,169 +67079,65 @@ module.exports['OverlapsBeforeDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "164",
+               "localId" : "176",
                "precision" : "Day",
                "type" : "OverlapsBefore",
                "operand" : [ {
-                  "localId" : "146",
+                  "localId" : "158",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "163",
+                  "localId" : "175",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "154",
+                     "localId" : "166",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "147",
+                        "localId" : "159",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "148",
+                        "localId" : "160",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "9",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "149",
+                        "localId" : "161",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "150",
+                        "localId" : "162",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "23",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "151",
+                        "localId" : "163",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "59",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "152",
+                        "localId" : "164",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "59",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "153",
+                        "localId" : "165",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "999",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "162",
-                     "type" : "DateTime",
-                     "year" : {
-                        "localId" : "155",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2012",
-                        "type" : "Literal"
-                     },
-                     "month" : {
-                        "localId" : "156",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "10",
-                        "type" : "Literal"
-                     },
-                     "day" : {
-                        "localId" : "157",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "1",
-                        "type" : "Literal"
-                     },
-                     "hour" : {
-                        "localId" : "158",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     },
-                     "minute" : {
-                        "localId" : "159",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     },
-                     "second" : {
-                        "localId" : "160",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     },
-                     "millisecond" : {
-                        "localId" : "161",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     }
-                  }
-               } ]
-            }
-         }, {
-            "localId" : "185",
-            "name" : "OverlapsAfterDayOfIvlEdge",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "185",
-                  "s" : [ {
-                     "value" : [ "define ","OverlapsAfterDayOfIvlEdge",": " ]
-                  }, {
-                     "r" : "184",
-                     "s" : [ {
-                        "r" : "166",
-                        "s" : [ {
-                           "value" : [ "PrecisionDateIvl" ]
-                        } ]
-                     }, {
-                        "value" : [ " ","overlaps before day of"," " ]
-                     }, {
-                        "r" : "183",
-                        "s" : [ {
-                           "value" : [ "Interval[" ]
-                        }, {
-                           "r" : "174",
-                           "s" : [ {
-                              "value" : [ "DateTime","(","2012",", ","1",", ","2",", ","0",", ","0",", ","0",", ","0",")" ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "182",
-                           "s" : [ {
-                              "value" : [ "DateTime","(","2012",", ","3",", ","2",", ","0",", ","0",", ","0",", ","0",")" ]
-                           } ]
-                        }, {
-                           "value" : [ "]" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "184",
-               "precision" : "Day",
-               "type" : "OverlapsBefore",
-               "operand" : [ {
-                  "localId" : "166",
-                  "name" : "PrecisionDateIvl",
-                  "type" : "ExpressionRef"
-               }, {
-                  "localId" : "183",
-                  "lowClosed" : true,
-                  "highClosed" : true,
-                  "type" : "Interval",
-                  "low" : {
                      "localId" : "174",
                      "type" : "DateTime",
                      "year" : {
@@ -66908,13 +67149,13 @@ module.exports['OverlapsBeforeDateTime'] = {
                      "month" : {
                         "localId" : "168",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "1",
+                        "value" : "10",
                         "type" : "Literal"
                      },
                      "day" : {
                         "localId" : "169",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2",
+                        "value" : "1",
                         "type" : "Literal"
                      },
                      "hour" : {
@@ -66941,90 +67182,44 @@ module.exports['OverlapsBeforeDateTime'] = {
                         "value" : "0",
                         "type" : "Literal"
                      }
-                  },
-                  "high" : {
-                     "localId" : "182",
-                     "type" : "DateTime",
-                     "year" : {
-                        "localId" : "175",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2012",
-                        "type" : "Literal"
-                     },
-                     "month" : {
-                        "localId" : "176",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "3",
-                        "type" : "Literal"
-                     },
-                     "day" : {
-                        "localId" : "177",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2",
-                        "type" : "Literal"
-                     },
-                     "hour" : {
-                        "localId" : "178",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     },
-                     "minute" : {
-                        "localId" : "179",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     },
-                     "second" : {
-                        "localId" : "180",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     },
-                     "millisecond" : {
-                        "localId" : "181",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     }
                   }
                } ]
             }
          }, {
-            "localId" : "205",
-            "name" : "OverlapsContainsDayOfIvl",
+            "localId" : "197",
+            "name" : "OverlapsAfterDayOfIvlEdge",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "205",
+                  "r" : "197",
                   "s" : [ {
-                     "value" : [ "define ","OverlapsContainsDayOfIvl",": " ]
+                     "value" : [ "define ","OverlapsAfterDayOfIvlEdge",": " ]
                   }, {
-                     "r" : "204",
+                     "r" : "196",
                      "s" : [ {
-                        "r" : "186",
+                        "r" : "178",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps before day of"," " ]
                      }, {
-                        "r" : "203",
+                        "r" : "195",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "194",
+                           "r" : "186",
                            "s" : [ {
-                              "value" : [ "DateTime","(","2012",", ","5",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
+                              "value" : [ "DateTime","(","2012",", ","1",", ","2",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "202",
+                           "r" : "194",
                            "s" : [ {
-                              "value" : [ "DateTime","(","2012",", ","6",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
+                              "value" : [ "DateTime","(","2012",", ","3",", ","2",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
                         }, {
                            "value" : [ "]" ]
@@ -67034,19 +67229,65 @@ module.exports['OverlapsBeforeDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "204",
+               "localId" : "196",
                "precision" : "Day",
                "type" : "OverlapsBefore",
                "operand" : [ {
-                  "localId" : "186",
+                  "localId" : "178",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "203",
+                  "localId" : "195",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
+                     "localId" : "186",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "179",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "180",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "181",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     },
+                     "hour" : {
+                        "localId" : "182",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     },
+                     "minute" : {
+                        "localId" : "183",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     },
+                     "second" : {
+                        "localId" : "184",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     },
+                     "millisecond" : {
+                        "localId" : "185",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
                      "localId" : "194",
                      "type" : "DateTime",
                      "year" : {
@@ -67058,13 +67299,13 @@ module.exports['OverlapsBeforeDateTime'] = {
                      "month" : {
                         "localId" : "188",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "5",
+                        "value" : "3",
                         "type" : "Literal"
                      },
                      "day" : {
                         "localId" : "189",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "1",
+                        "value" : "2",
                         "type" : "Literal"
                      },
                      "hour" : {
@@ -67091,90 +67332,44 @@ module.exports['OverlapsBeforeDateTime'] = {
                         "value" : "0",
                         "type" : "Literal"
                      }
-                  },
-                  "high" : {
-                     "localId" : "202",
-                     "type" : "DateTime",
-                     "year" : {
-                        "localId" : "195",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2012",
-                        "type" : "Literal"
-                     },
-                     "month" : {
-                        "localId" : "196",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "6",
-                        "type" : "Literal"
-                     },
-                     "day" : {
-                        "localId" : "197",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "1",
-                        "type" : "Literal"
-                     },
-                     "hour" : {
-                        "localId" : "198",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     },
-                     "minute" : {
-                        "localId" : "199",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     },
-                     "second" : {
-                        "localId" : "200",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     },
-                     "millisecond" : {
-                        "localId" : "201",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     }
                   }
                } ]
             }
          }, {
-            "localId" : "225",
-            "name" : "OverlapsContainedByDayOfIvl",
+            "localId" : "217",
+            "name" : "OverlapsContainsDayOfIvl",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "225",
+                  "r" : "217",
                   "s" : [ {
-                     "value" : [ "define ","OverlapsContainedByDayOfIvl",": " ]
+                     "value" : [ "define ","OverlapsContainsDayOfIvl",": " ]
                   }, {
-                     "r" : "224",
+                     "r" : "216",
                      "s" : [ {
-                        "r" : "206",
+                        "r" : "198",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps before day of"," " ]
                      }, {
-                        "r" : "223",
+                        "r" : "215",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "214",
+                           "r" : "206",
                            "s" : [ {
-                              "value" : [ "DateTime","(","2012",", ","1",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
+                              "value" : [ "DateTime","(","2012",", ","5",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "222",
+                           "r" : "214",
                            "s" : [ {
-                              "value" : [ "DateTime","(","2012",", ","12",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
+                              "value" : [ "DateTime","(","2012",", ","6",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
                         }, {
                            "value" : [ "]" ]
@@ -67184,19 +67379,65 @@ module.exports['OverlapsBeforeDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "224",
+               "localId" : "216",
                "precision" : "Day",
                "type" : "OverlapsBefore",
                "operand" : [ {
-                  "localId" : "206",
+                  "localId" : "198",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "223",
+                  "localId" : "215",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
+                     "localId" : "206",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "199",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "200",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "201",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "hour" : {
+                        "localId" : "202",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     },
+                     "minute" : {
+                        "localId" : "203",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     },
+                     "second" : {
+                        "localId" : "204",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     },
+                     "millisecond" : {
+                        "localId" : "205",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
                      "localId" : "214",
                      "type" : "DateTime",
                      "year" : {
@@ -67208,7 +67449,7 @@ module.exports['OverlapsBeforeDateTime'] = {
                      "month" : {
                         "localId" : "208",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "1",
+                        "value" : "6",
                         "type" : "Literal"
                      },
                      "day" : {
@@ -67241,90 +67482,44 @@ module.exports['OverlapsBeforeDateTime'] = {
                         "value" : "0",
                         "type" : "Literal"
                      }
-                  },
-                  "high" : {
-                     "localId" : "222",
-                     "type" : "DateTime",
-                     "year" : {
-                        "localId" : "215",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2012",
-                        "type" : "Literal"
-                     },
-                     "month" : {
-                        "localId" : "216",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "12",
-                        "type" : "Literal"
-                     },
-                     "day" : {
-                        "localId" : "217",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "1",
-                        "type" : "Literal"
-                     },
-                     "hour" : {
-                        "localId" : "218",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     },
-                     "minute" : {
-                        "localId" : "219",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     },
-                     "second" : {
-                        "localId" : "220",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     },
-                     "millisecond" : {
-                        "localId" : "221",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     }
                   }
                } ]
             }
          }, {
-            "localId" : "245",
-            "name" : "NotOverlapsDayOfIvl",
+            "localId" : "237",
+            "name" : "OverlapsContainedByDayOfIvl",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "245",
+                  "r" : "237",
                   "s" : [ {
-                     "value" : [ "define ","NotOverlapsDayOfIvl",": " ]
+                     "value" : [ "define ","OverlapsContainedByDayOfIvl",": " ]
                   }, {
-                     "r" : "244",
+                     "r" : "236",
                      "s" : [ {
-                        "r" : "226",
+                        "r" : "218",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps before day of"," " ]
                      }, {
-                        "r" : "243",
+                        "r" : "235",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "234",
+                           "r" : "226",
                            "s" : [ {
-                              "value" : [ "DateTime","(","2012",", ","1",", ","2",", ","0",", ","0",", ","0",", ","0",")" ]
+                              "value" : [ "DateTime","(","2012",", ","1",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "242",
+                           "r" : "234",
                            "s" : [ {
-                              "value" : [ "DateTime","(","2012",", ","3",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
+                              "value" : [ "DateTime","(","2012",", ","12",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
                         }, {
                            "value" : [ "]" ]
@@ -67334,19 +67529,65 @@ module.exports['OverlapsBeforeDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "244",
+               "localId" : "236",
                "precision" : "Day",
                "type" : "OverlapsBefore",
                "operand" : [ {
-                  "localId" : "226",
+                  "localId" : "218",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "243",
+                  "localId" : "235",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
+                     "localId" : "226",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "219",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "220",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "221",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "hour" : {
+                        "localId" : "222",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     },
+                     "minute" : {
+                        "localId" : "223",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     },
+                     "second" : {
+                        "localId" : "224",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     },
+                     "millisecond" : {
+                        "localId" : "225",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
                      "localId" : "234",
                      "type" : "DateTime",
                      "year" : {
@@ -67358,13 +67599,13 @@ module.exports['OverlapsBeforeDateTime'] = {
                      "month" : {
                         "localId" : "228",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "1",
+                        "value" : "12",
                         "type" : "Literal"
                      },
                      "day" : {
                         "localId" : "229",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2",
+                        "value" : "1",
                         "type" : "Literal"
                      },
                      "hour" : {
@@ -67391,48 +67632,152 @@ module.exports['OverlapsBeforeDateTime'] = {
                         "value" : "0",
                         "type" : "Literal"
                      }
-                  },
-                  "high" : {
-                     "localId" : "242",
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "257",
+            "name" : "NotOverlapsDayOfIvl",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "257",
+                  "s" : [ {
+                     "value" : [ "define ","NotOverlapsDayOfIvl",": " ]
+                  }, {
+                     "r" : "256",
+                     "s" : [ {
+                        "r" : "238",
+                        "s" : [ {
+                           "value" : [ "PrecisionDateIvl" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","overlaps before day of"," " ]
+                     }, {
+                        "r" : "255",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "246",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","2",", ","0",", ","0",", ","0",", ","0",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "254",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","3",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "256",
+               "precision" : "Day",
+               "type" : "OverlapsBefore",
+               "operand" : [ {
+                  "localId" : "238",
+                  "name" : "PrecisionDateIvl",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "255",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "246",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "235",
+                        "localId" : "239",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "236",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "3",
-                        "type" : "Literal"
-                     },
-                     "day" : {
-                        "localId" : "237",
+                        "localId" : "240",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
+                     "day" : {
+                        "localId" : "241",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     },
                      "hour" : {
-                        "localId" : "238",
+                        "localId" : "242",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "239",
+                        "localId" : "243",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "240",
+                        "localId" : "244",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "241",
+                        "localId" : "245",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "254",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "247",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "248",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "249",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "hour" : {
+                        "localId" : "250",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     },
+                     "minute" : {
+                        "localId" : "251",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     },
+                     "second" : {
+                        "localId" : "252",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     },
+                     "millisecond" : {
+                        "localId" : "253",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
@@ -67441,38 +67786,38 @@ module.exports['OverlapsBeforeDateTime'] = {
                } ]
             }
          }, {
-            "localId" : "255",
+            "localId" : "267",
             "name" : "OverlapsAfterDayOfImpreciseInterval",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "255",
+                  "r" : "267",
                   "s" : [ {
                      "value" : [ "define ","OverlapsAfterDayOfImpreciseInterval",": " ]
                   }, {
-                     "r" : "254",
+                     "r" : "266",
                      "s" : [ {
-                        "r" : "246",
+                        "r" : "258",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps before day of"," " ]
                      }, {
-                        "r" : "253",
+                        "r" : "265",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "249",
+                           "r" : "261",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","1",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "252",
+                           "r" : "264",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","4",")" ]
                            } ]
@@ -67484,45 +67829,45 @@ module.exports['OverlapsBeforeDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "254",
+               "localId" : "266",
                "precision" : "Day",
                "type" : "OverlapsBefore",
                "operand" : [ {
-                  "localId" : "246",
+                  "localId" : "258",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "253",
+                  "localId" : "265",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "249",
+                     "localId" : "261",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "247",
+                        "localId" : "259",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "248",
+                        "localId" : "260",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "252",
+                     "localId" : "264",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "250",
+                        "localId" : "262",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "251",
+                        "localId" : "263",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
@@ -67531,38 +67876,38 @@ module.exports['OverlapsBeforeDateTime'] = {
                } ]
             }
          }, {
-            "localId" : "265",
+            "localId" : "277",
             "name" : "MayOverlapBeforeDayOfImpreciseIvl",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "265",
+                  "r" : "277",
                   "s" : [ {
                      "value" : [ "define ","MayOverlapBeforeDayOfImpreciseIvl",": " ]
                   }, {
-                     "r" : "264",
+                     "r" : "276",
                      "s" : [ {
-                        "r" : "256",
+                        "r" : "268",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps before day of"," " ]
                      }, {
-                        "r" : "263",
+                        "r" : "275",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "259",
+                           "r" : "271",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","9",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "262",
+                           "r" : "274",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","10",")" ]
                            } ]
@@ -67574,45 +67919,45 @@ module.exports['OverlapsBeforeDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "264",
+               "localId" : "276",
                "precision" : "Day",
                "type" : "OverlapsBefore",
                "operand" : [ {
-                  "localId" : "256",
+                  "localId" : "268",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "263",
+                  "localId" : "275",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "259",
+                     "localId" : "271",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "257",
+                        "localId" : "269",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "258",
+                        "localId" : "270",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "9",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "262",
+                     "localId" : "274",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "260",
+                        "localId" : "272",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "261",
+                        "localId" : "273",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "10",
                         "type" : "Literal"
@@ -67621,38 +67966,38 @@ module.exports['OverlapsBeforeDateTime'] = {
                } ]
             }
          }, {
-            "localId" : "275",
+            "localId" : "287",
             "name" : "MayOverlapAfterDayOfImpreciseIvl",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "275",
+                  "r" : "287",
                   "s" : [ {
                      "value" : [ "define ","MayOverlapAfterDayOfImpreciseIvl",": " ]
                   }, {
-                     "r" : "274",
+                     "r" : "286",
                      "s" : [ {
-                        "r" : "266",
+                        "r" : "278",
                         "s" : [ {
                            "value" : [ "PrecisionDateIvl" ]
                         } ]
                      }, {
                         "value" : [ " ","overlaps before day of"," " ]
                      }, {
-                        "r" : "273",
+                        "r" : "285",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "269",
+                           "r" : "281",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","1",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "272",
+                           "r" : "284",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","3",")" ]
                            } ]
@@ -67664,45 +68009,45 @@ module.exports['OverlapsBeforeDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "274",
+               "localId" : "286",
                "precision" : "Day",
                "type" : "OverlapsBefore",
                "operand" : [ {
-                  "localId" : "266",
+                  "localId" : "278",
                   "name" : "PrecisionDateIvl",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "273",
+                  "localId" : "285",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "269",
+                     "localId" : "281",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "267",
+                        "localId" : "279",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "268",
+                        "localId" : "280",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "272",
+                     "localId" : "284",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "270",
+                        "localId" : "282",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "271",
+                        "localId" : "283",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"

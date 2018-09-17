@@ -18,7 +18,7 @@ module.exports.lessThan = (a, b, precision = DateTime.Unit.MILLISECOND) ->
     when isUncertainty b then Uncertainty.from(a).lessThan b
     else null
 
-module.exports.lessThanOrEquals = (a, b, precision = DateTime.Unit.MILLISECOND) ->
+module.exports.lessThanOrEquals = (a, b, precision) ->
   switch
     when areNumbers a, b then a <= b
     when areDateTimesOrQuantities a, b then a.sameOrBefore(b, precision)
@@ -34,7 +34,7 @@ module.exports.greaterThan = (a, b, precision = DateTime.Unit.MILLISECOND) ->
     when isUncertainty b then Uncertainty.from(a).greaterThan b
     else null
 
-module.exports.greaterThanOrEquals = (a, b, precision = DateTime.Unit.MILLISECOND) ->
+module.exports.greaterThanOrEquals = (a, b, precision) ->
   switch
     when areNumbers a, b then a >= b
     when areDateTimesOrQuantities a, b then a.sameOrAfter(b, precision)
