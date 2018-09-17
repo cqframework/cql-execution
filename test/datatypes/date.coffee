@@ -3,26 +3,6 @@ should = require 'should'
 { Date } = require '../../lib/datatypes/datetime'
 { Uncertainty } = require '../../lib/datatypes/uncertainty'
 
-
-# should = require 'should'
-# { makeJsDate } = require '../../lib/util/util'
-# { Date } = require '../../lib/datatypes/datetime'
-# { Uncertainty } = require '../../lib/datatypes/uncertainty'
-# describe 'Date', ->
-#   it 'should handle imprecision', ->
-#     a = Date.parse '2000-06-15'
-#     b = Date.parse '2009'
-#     a.differenceBetween(b, Date.Unit.MONTH).should.eql new Uncertainty(103, 114)
-#     c = (a.differenceBetween(b, Date.Unit.MONTH))
-    
-#     a = new Date 2011, 1, 2
-#     b = new Date 2011, 9, 29
-#     d = (a.durationBetween(b, Date.Unit.DAY))
-#     a.durationBetween(b, Date.Unit.DAY).should.eql new Uncertainty(270)
-
-#     console.log("")
-
-
 describe 'Date', ->
 
   it 'should properly set all properties when constructed', ->
