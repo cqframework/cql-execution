@@ -61,3 +61,7 @@ codesMatch = (code1, code2) ->
 
 module.exports.CodeSystem = class CodeSystem
   constructor: (@id, @version) ->
+
+  Object.defineProperties @prototype,
+    isCodeSystem:
+      get: -> true

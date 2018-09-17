@@ -8,6 +8,27 @@ define Foo: 'Bar'
 valueset "Acute Pharyngitis": '2.16.840.1.113883.3.464.1003.101.12.1001'
 define Foo: "Acute Pharyngitis"
 
+// @Test: InCodeSystem
+codesystem "LOINC": 'http://loinc.org'
+codesystem "SNOMED:2014": 'http://snomed.info/sct'
+define StringInCodesystem: '12345678' in "SNOMED:2014"
+define CodeInCodesystem: Code { system: 'http://snomed.info/sct', code: '12345678' } in "SNOMED:2014"
+define NullStringInCodesystem: null as String in "SNOMED:2014"
+define RightCode: Code { system: 'http://snomed.info/sct', code: '12345678' }
+define WrongSystem: Code { system: 'http://loinc.org', code: 'WrongCode' }
+define ListOfCodesInCodesystem: { RightCode } in "SNOMED:2014"
+define ListOfCodesNotInCodesystem: { WrongSystem } in "SNOMED:2014"
+define ConceptWithCode: Concept {
+  codes: { Code { system: 'http://snomed.info/sct', code: '12345678' } },
+  display: 'Test Concept'
+}
+define ConceptWithWrongCode: Concept {
+  codes: { Code { system: 'http://loinc.org', code: '12345678' } },
+  display: 'Test Concept'
+}
+define ConceptInCodesystem: ConceptWithCode in "SNOMED:2014"
+define ConceptNotInCodesystem: ConceptWithWrongCode in "SNOMED:2014"
+
 // @Test: InValueSet
 valueset "Female": '2.16.840.1.113883.3.560.100.2'
 valueset "Versioned Female": '2.16.840.1.113883.3.560.100.2' version '20121025'
@@ -28,6 +49,16 @@ define WrongListOfCodes: { Code { code: 'M' }, Code { code: 'F', system: '3.16.8
 define InListOfCodesExpressionRef: ListOfCodes in "Female"
 define InWrongListOfCodes: WrongListOfCodes in "Female"
 define ListOfCodesWithNull: { Code { code: 'M' }, (null as Code), Code { code: 'F', system: '2.16.840.1.113883.18.2' } } in "Female"
+define ConceptWithCode: Concept {
+  codes: { Code { code: 'M' }, Code { code: 'F', system: '2.16.840.1.113883.18.2' } },
+  display: 'Test Concept'
+}
+define ConceptWithWrongCode: Concept {
+  codes: { Code { code: 'M' } },
+  display: 'Test Concept'
+}
+define ConceptInValueSet: ConceptWithCode in "Female"
+define ConceptNotInValueSet: ConceptWithWrongCode in "Female"
 
 // @Test: Patient Property In ValueSet
 valueset "Female": '2.16.840.1.113883.3.560.100.2'

@@ -174,6 +174,802 @@ module.exports['ValueSetRef'] = {
    }
 }
 
+### InCodeSystem
+library TestSnippet version '1'
+using QUICK
+codesystem "LOINC": 'http://loinc.org'
+codesystem "SNOMED:2014": 'http://snomed.info/sct'
+context Patient
+define StringInCodesystem: '12345678' in "SNOMED:2014"
+define CodeInCodesystem: Code { system: 'http://snomed.info/sct', code: '12345678' } in "SNOMED:2014"
+define NullStringInCodesystem: null as String in "SNOMED:2014"
+define RightCode: Code { system: 'http://snomed.info/sct', code: '12345678' }
+define WrongSystem: Code { system: 'http://loinc.org', code: 'WrongCode' }
+define ListOfCodesInCodesystem: { RightCode } in "SNOMED:2014"
+define ListOfCodesNotInCodesystem: { WrongSystem } in "SNOMED:2014"
+define ConceptWithCode: Concept {
+  codes: { Code { system: 'http://snomed.info/sct', code: '12345678' } },
+  display: 'Test Concept'
+}
+define ConceptWithWrongCode: Concept {
+  codes: { Code { system: 'http://loinc.org', code: '12345678' } },
+  display: 'Test Concept'
+}
+define ConceptInCodesystem: ConceptWithCode in "SNOMED:2014"
+define ConceptNotInCodesystem: ConceptWithWrongCode in "SNOMED:2014"
+###
+
+module.exports['InCodeSystem'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "localId" : "2",
+            "name" : "LOINC",
+            "id" : "http://loinc.org",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "3",
+            "name" : "SNOMED:2014",
+            "id" : "http://snomed.info/sct",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "7",
+            "name" : "StringInCodesystem",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "define ","StringInCodesystem",": " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "r" : "4",
+                        "s" : [ {
+                           "value" : [ "'12345678'" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "5",
+                        "s" : [ {
+                           "value" : [ "\"SNOMED:2014\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "6",
+               "type" : "InCodeSystem",
+               "code" : {
+                  "localId" : "4",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "12345678",
+                  "type" : "Literal"
+               },
+               "codesystem" : {
+                  "localId" : "5",
+                  "name" : "SNOMED:2014"
+               }
+            }
+         }, {
+            "localId" : "13",
+            "name" : "CodeInCodesystem",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "define ","CodeInCodesystem",": " ]
+                  }, {
+                     "r" : "12",
+                     "s" : [ {
+                        "r" : "10",
+                        "s" : [ {
+                           "value" : [ "Code"," { " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "system",": " ]
+                           }, {
+                              "r" : "8",
+                              "s" : [ {
+                                 "value" : [ "'http://snomed.info/sct'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "code",": " ]
+                           }, {
+                              "r" : "9",
+                              "s" : [ {
+                                 "value" : [ "'12345678'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "11",
+                        "s" : [ {
+                           "value" : [ "\"SNOMED:2014\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "12",
+               "type" : "InCodeSystem",
+               "code" : {
+                  "localId" : "10",
+                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "Instance",
+                  "element" : [ {
+                     "name" : "system",
+                     "value" : {
+                        "localId" : "8",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "http://snomed.info/sct",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "code",
+                     "value" : {
+                        "localId" : "9",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "12345678",
+                        "type" : "Literal"
+                     }
+                  } ]
+               },
+               "codesystem" : {
+                  "localId" : "11",
+                  "name" : "SNOMED:2014"
+               }
+            }
+         }, {
+            "localId" : "19",
+            "name" : "NullStringInCodesystem",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "19",
+                  "s" : [ {
+                     "value" : [ "define ","NullStringInCodesystem",": " ]
+                  }, {
+                     "r" : "18",
+                     "s" : [ {
+                        "r" : "16",
+                        "s" : [ {
+                           "r" : "14",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "15",
+                           "s" : [ {
+                              "value" : [ "String" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "17",
+                        "s" : [ {
+                           "value" : [ "\"SNOMED:2014\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "18",
+               "type" : "InCodeSystem",
+               "code" : {
+                  "localId" : "16",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "14",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "15",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "codesystem" : {
+                  "localId" : "17",
+                  "name" : "SNOMED:2014"
+               }
+            }
+         }, {
+            "localId" : "23",
+            "name" : "RightCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "23",
+                  "s" : [ {
+                     "value" : [ "define ","RightCode",": " ]
+                  }, {
+                     "r" : "22",
+                     "s" : [ {
+                        "value" : [ "Code"," { " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "system",": " ]
+                        }, {
+                           "r" : "20",
+                           "s" : [ {
+                              "value" : [ "'http://snomed.info/sct'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "code",": " ]
+                        }, {
+                           "r" : "21",
+                           "s" : [ {
+                              "value" : [ "'12345678'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "22",
+               "classType" : "{urn:hl7-org:elm-types:r1}Code",
+               "type" : "Instance",
+               "element" : [ {
+                  "name" : "system",
+                  "value" : {
+                     "localId" : "20",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "http://snomed.info/sct",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "name" : "code",
+                  "value" : {
+                     "localId" : "21",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "12345678",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "27",
+            "name" : "WrongSystem",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "27",
+                  "s" : [ {
+                     "value" : [ "define ","WrongSystem",": " ]
+                  }, {
+                     "r" : "26",
+                     "s" : [ {
+                        "value" : [ "Code"," { " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "system",": " ]
+                        }, {
+                           "r" : "24",
+                           "s" : [ {
+                              "value" : [ "'http://loinc.org'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "code",": " ]
+                        }, {
+                           "r" : "25",
+                           "s" : [ {
+                              "value" : [ "'WrongCode'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "26",
+               "classType" : "{urn:hl7-org:elm-types:r1}Code",
+               "type" : "Instance",
+               "element" : [ {
+                  "name" : "system",
+                  "value" : {
+                     "localId" : "24",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "http://loinc.org",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "name" : "code",
+                  "value" : {
+                     "localId" : "25",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "WrongCode",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "32",
+            "name" : "ListOfCodesInCodesystem",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "32",
+                  "s" : [ {
+                     "value" : [ "define ","ListOfCodesInCodesystem",": " ]
+                  }, {
+                     "r" : "31",
+                     "s" : [ {
+                        "r" : "29",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "28",
+                           "s" : [ {
+                              "value" : [ "RightCode" ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "30",
+                        "s" : [ {
+                           "value" : [ "\"SNOMED:2014\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "31",
+               "type" : "AnyInCodeSystem",
+               "codes" : {
+                  "localId" : "29",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "28",
+                     "name" : "RightCode",
+                     "type" : "ExpressionRef"
+                  } ]
+               },
+               "codesystem" : {
+                  "localId" : "30",
+                  "name" : "SNOMED:2014"
+               }
+            }
+         }, {
+            "localId" : "37",
+            "name" : "ListOfCodesNotInCodesystem",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "37",
+                  "s" : [ {
+                     "value" : [ "define ","ListOfCodesNotInCodesystem",": " ]
+                  }, {
+                     "r" : "36",
+                     "s" : [ {
+                        "r" : "34",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "33",
+                           "s" : [ {
+                              "value" : [ "WrongSystem" ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "35",
+                        "s" : [ {
+                           "value" : [ "\"SNOMED:2014\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "36",
+               "type" : "AnyInCodeSystem",
+               "codes" : {
+                  "localId" : "34",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "33",
+                     "name" : "WrongSystem",
+                     "type" : "ExpressionRef"
+                  } ]
+               },
+               "codesystem" : {
+                  "localId" : "35",
+                  "name" : "SNOMED:2014"
+               }
+            }
+         }, {
+            "localId" : "44",
+            "name" : "ConceptWithCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "44",
+                  "s" : [ {
+                     "value" : [ "define ","ConceptWithCode",": " ]
+                  }, {
+                     "r" : "43",
+                     "s" : [ {
+                        "value" : [ "Concept"," {\n  " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "codes",": " ]
+                        }, {
+                           "r" : "41",
+                           "s" : [ {
+                              "value" : [ "{ " ]
+                           }, {
+                              "r" : "40",
+                              "s" : [ {
+                                 "value" : [ "Code"," { " ]
+                              }, {
+                                 "s" : [ {
+                                    "value" : [ "system",": " ]
+                                 }, {
+                                    "r" : "38",
+                                    "s" : [ {
+                                       "value" : [ "'http://snomed.info/sct'" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ ", " ]
+                              }, {
+                                 "s" : [ {
+                                    "value" : [ "code",": " ]
+                                 }, {
+                                    "r" : "39",
+                                    "s" : [ {
+                                       "value" : [ "'12345678'" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " }" ]
+                              } ]
+                           }, {
+                              "value" : [ " }" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ",\n  " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "display",": " ]
+                        }, {
+                           "r" : "42",
+                           "s" : [ {
+                              "value" : [ "'Test Concept'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n}" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "43",
+               "classType" : "{urn:hl7-org:elm-types:r1}Concept",
+               "type" : "Instance",
+               "element" : [ {
+                  "name" : "codes",
+                  "value" : {
+                     "localId" : "41",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "40",
+                        "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                        "type" : "Instance",
+                        "element" : [ {
+                           "name" : "system",
+                           "value" : {
+                              "localId" : "38",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "http://snomed.info/sct",
+                              "type" : "Literal"
+                           }
+                        }, {
+                           "name" : "code",
+                           "value" : {
+                              "localId" : "39",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "12345678",
+                              "type" : "Literal"
+                           }
+                        } ]
+                     } ]
+                  }
+               }, {
+                  "name" : "display",
+                  "value" : {
+                     "localId" : "42",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Test Concept",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "51",
+            "name" : "ConceptWithWrongCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "51",
+                  "s" : [ {
+                     "value" : [ "define ","ConceptWithWrongCode",": " ]
+                  }, {
+                     "r" : "50",
+                     "s" : [ {
+                        "value" : [ "Concept"," {\n  " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "codes",": " ]
+                        }, {
+                           "r" : "48",
+                           "s" : [ {
+                              "value" : [ "{ " ]
+                           }, {
+                              "r" : "47",
+                              "s" : [ {
+                                 "value" : [ "Code"," { " ]
+                              }, {
+                                 "s" : [ {
+                                    "value" : [ "system",": " ]
+                                 }, {
+                                    "r" : "45",
+                                    "s" : [ {
+                                       "value" : [ "'http://loinc.org'" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ ", " ]
+                              }, {
+                                 "s" : [ {
+                                    "value" : [ "code",": " ]
+                                 }, {
+                                    "r" : "46",
+                                    "s" : [ {
+                                       "value" : [ "'12345678'" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " }" ]
+                              } ]
+                           }, {
+                              "value" : [ " }" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ",\n  " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "display",": " ]
+                        }, {
+                           "r" : "49",
+                           "s" : [ {
+                              "value" : [ "'Test Concept'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n}" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "50",
+               "classType" : "{urn:hl7-org:elm-types:r1}Concept",
+               "type" : "Instance",
+               "element" : [ {
+                  "name" : "codes",
+                  "value" : {
+                     "localId" : "48",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "47",
+                        "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                        "type" : "Instance",
+                        "element" : [ {
+                           "name" : "system",
+                           "value" : {
+                              "localId" : "45",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "http://loinc.org",
+                              "type" : "Literal"
+                           }
+                        }, {
+                           "name" : "code",
+                           "value" : {
+                              "localId" : "46",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "12345678",
+                              "type" : "Literal"
+                           }
+                        } ]
+                     } ]
+                  }
+               }, {
+                  "name" : "display",
+                  "value" : {
+                     "localId" : "49",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Test Concept",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "55",
+            "name" : "ConceptInCodesystem",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "55",
+                  "s" : [ {
+                     "value" : [ "define ","ConceptInCodesystem",": " ]
+                  }, {
+                     "r" : "54",
+                     "s" : [ {
+                        "r" : "52",
+                        "s" : [ {
+                           "value" : [ "ConceptWithCode" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "53",
+                        "s" : [ {
+                           "value" : [ "\"SNOMED:2014\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "54",
+               "type" : "InCodeSystem",
+               "code" : {
+                  "localId" : "52",
+                  "name" : "ConceptWithCode",
+                  "type" : "ExpressionRef"
+               },
+               "codesystem" : {
+                  "localId" : "53",
+                  "name" : "SNOMED:2014"
+               }
+            }
+         }, {
+            "localId" : "59",
+            "name" : "ConceptNotInCodesystem",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "59",
+                  "s" : [ {
+                     "value" : [ "define ","ConceptNotInCodesystem",": " ]
+                  }, {
+                     "r" : "58",
+                     "s" : [ {
+                        "r" : "56",
+                        "s" : [ {
+                           "value" : [ "ConceptWithWrongCode" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "57",
+                        "s" : [ {
+                           "value" : [ "\"SNOMED:2014\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "58",
+               "type" : "InCodeSystem",
+               "code" : {
+                  "localId" : "56",
+                  "name" : "ConceptWithWrongCode",
+                  "type" : "ExpressionRef"
+               },
+               "codesystem" : {
+                  "localId" : "57",
+                  "name" : "SNOMED:2014"
+               }
+            }
+         } ]
+      }
+   }
+}
+
 ### InValueSet
 library TestSnippet version '1'
 using QUICK
@@ -197,6 +993,16 @@ define WrongListOfCodes: { Code { code: 'M' }, Code { code: 'F', system: '3.16.8
 define InListOfCodesExpressionRef: ListOfCodes in "Female"
 define InWrongListOfCodes: WrongListOfCodes in "Female"
 define ListOfCodesWithNull: { Code { code: 'M' }, (null as Code), Code { code: 'F', system: '2.16.840.1.113883.18.2' } } in "Female"
+define ConceptWithCode: Concept {
+  codes: { Code { code: 'M' }, Code { code: 'F', system: '2.16.840.1.113883.18.2' } },
+  display: 'Test Concept'
+}
+define ConceptWithWrongCode: Concept {
+  codes: { Code { code: 'M' } },
+  display: 'Test Concept'
+}
+define ConceptInValueSet: ConceptWithCode in "Female"
+define ConceptNotInValueSet: ConceptWithWrongCode in "Female"
 ###
 
 module.exports['InValueSet'] = {
@@ -1608,6 +2414,326 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "105",
+                  "name" : "Female"
+               }
+            }
+         }, {
+            "localId" : "116",
+            "name" : "ConceptWithCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "116",
+                  "s" : [ {
+                     "value" : [ "define ","ConceptWithCode",": " ]
+                  }, {
+                     "r" : "115",
+                     "s" : [ {
+                        "value" : [ "Concept"," {\n  " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "codes",": " ]
+                        }, {
+                           "r" : "113",
+                           "s" : [ {
+                              "value" : [ "{ " ]
+                           }, {
+                              "r" : "109",
+                              "s" : [ {
+                                 "value" : [ "Code"," { " ]
+                              }, {
+                                 "s" : [ {
+                                    "value" : [ "code",": " ]
+                                 }, {
+                                    "r" : "108",
+                                    "s" : [ {
+                                       "value" : [ "'M'" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " }" ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "r" : "112",
+                              "s" : [ {
+                                 "value" : [ "Code"," { " ]
+                              }, {
+                                 "s" : [ {
+                                    "value" : [ "code",": " ]
+                                 }, {
+                                    "r" : "110",
+                                    "s" : [ {
+                                       "value" : [ "'F'" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ ", " ]
+                              }, {
+                                 "s" : [ {
+                                    "value" : [ "system",": " ]
+                                 }, {
+                                    "r" : "111",
+                                    "s" : [ {
+                                       "value" : [ "'2.16.840.1.113883.18.2'" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " }" ]
+                              } ]
+                           }, {
+                              "value" : [ " }" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ",\n  " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "display",": " ]
+                        }, {
+                           "r" : "114",
+                           "s" : [ {
+                              "value" : [ "'Test Concept'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n}" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "115",
+               "classType" : "{urn:hl7-org:elm-types:r1}Concept",
+               "type" : "Instance",
+               "element" : [ {
+                  "name" : "codes",
+                  "value" : {
+                     "localId" : "113",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "109",
+                        "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                        "type" : "Instance",
+                        "element" : [ {
+                           "name" : "code",
+                           "value" : {
+                              "localId" : "108",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "M",
+                              "type" : "Literal"
+                           }
+                        } ]
+                     }, {
+                        "localId" : "112",
+                        "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                        "type" : "Instance",
+                        "element" : [ {
+                           "name" : "code",
+                           "value" : {
+                              "localId" : "110",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "F",
+                              "type" : "Literal"
+                           }
+                        }, {
+                           "name" : "system",
+                           "value" : {
+                              "localId" : "111",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "2.16.840.1.113883.18.2",
+                              "type" : "Literal"
+                           }
+                        } ]
+                     } ]
+                  }
+               }, {
+                  "name" : "display",
+                  "value" : {
+                     "localId" : "114",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Test Concept",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "122",
+            "name" : "ConceptWithWrongCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "122",
+                  "s" : [ {
+                     "value" : [ "define ","ConceptWithWrongCode",": " ]
+                  }, {
+                     "r" : "121",
+                     "s" : [ {
+                        "value" : [ "Concept"," {\n  " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "codes",": " ]
+                        }, {
+                           "r" : "119",
+                           "s" : [ {
+                              "value" : [ "{ " ]
+                           }, {
+                              "r" : "118",
+                              "s" : [ {
+                                 "value" : [ "Code"," { " ]
+                              }, {
+                                 "s" : [ {
+                                    "value" : [ "code",": " ]
+                                 }, {
+                                    "r" : "117",
+                                    "s" : [ {
+                                       "value" : [ "'M'" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " }" ]
+                              } ]
+                           }, {
+                              "value" : [ " }" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ",\n  " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "display",": " ]
+                        }, {
+                           "r" : "120",
+                           "s" : [ {
+                              "value" : [ "'Test Concept'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n}" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "121",
+               "classType" : "{urn:hl7-org:elm-types:r1}Concept",
+               "type" : "Instance",
+               "element" : [ {
+                  "name" : "codes",
+                  "value" : {
+                     "localId" : "119",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "118",
+                        "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                        "type" : "Instance",
+                        "element" : [ {
+                           "name" : "code",
+                           "value" : {
+                              "localId" : "117",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "M",
+                              "type" : "Literal"
+                           }
+                        } ]
+                     } ]
+                  }
+               }, {
+                  "name" : "display",
+                  "value" : {
+                     "localId" : "120",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Test Concept",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "126",
+            "name" : "ConceptInValueSet",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "126",
+                  "s" : [ {
+                     "value" : [ "define ","ConceptInValueSet",": " ]
+                  }, {
+                     "r" : "125",
+                     "s" : [ {
+                        "r" : "123",
+                        "s" : [ {
+                           "value" : [ "ConceptWithCode" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "124",
+                        "s" : [ {
+                           "value" : [ "\"Female\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "125",
+               "type" : "InValueSet",
+               "code" : {
+                  "localId" : "123",
+                  "name" : "ConceptWithCode",
+                  "type" : "ExpressionRef"
+               },
+               "valueset" : {
+                  "localId" : "124",
+                  "name" : "Female"
+               }
+            }
+         }, {
+            "localId" : "130",
+            "name" : "ConceptNotInValueSet",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "130",
+                  "s" : [ {
+                     "value" : [ "define ","ConceptNotInValueSet",": " ]
+                  }, {
+                     "r" : "129",
+                     "s" : [ {
+                        "r" : "127",
+                        "s" : [ {
+                           "value" : [ "ConceptWithWrongCode" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "128",
+                        "s" : [ {
+                           "value" : [ "\"Female\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "129",
+               "type" : "InValueSet",
+               "code" : {
+                  "localId" : "127",
+                  "name" : "ConceptWithWrongCode",
+                  "type" : "ExpressionRef"
+               },
+               "valueset" : {
+                  "localId" : "128",
                   "name" : "Female"
                }
             }

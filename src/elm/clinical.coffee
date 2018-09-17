@@ -27,6 +27,57 @@ module.exports.ValueSetRef = class ValueSetRef extends Expression
       valueset = valueset.execute(ctx)
     valueset
 
+module.exports.AnyInCodeSystem = class AnyInCodeSystem extends Expression
+  constructor: (json) ->
+    super
+    @codes = build json.codes
+    @codesystem = new dt.CodeSystem json.codesystem
+
+  exec: (ctx) ->
+    codesystem = @codesystem.execute(ctx)
+    # If the code system reference cannot be resolved, a run-time error is thrown.
+    throw new Error("CodeSystem must be provided to InCodeSystem function") unless codesystem? and codesystem.isCodeSystem
+
+    codes = @codes.exec(ctx)
+    for code in codes
+      return true if codesystem.hasMatch(code)
+    return false
+
+# module.exports.StringInCodesystem = class StringInCodesystem extends Expression
+#   constructor: (json) ->
+#     super
+#     @code = build json.code
+#     @codesystem = json.codesystem
+
+#   exec: (ctx) ->
+#     return false unless @code?
+#     code = @code.execute(ctx)
+#     return false unless code?
+#     throw new Error("CodeSystem must be provided to InCodeSystem function") unless @codesystem?
+#     codesystem = ctx.getCodeSystem(@codesystem.name)?.execute(ctx)
+#     # codesystem = @codesystem.exec(ctx)
+#     throw new Error("CodeSystem must be provided to InCodeSystem function") unless codesystem? and codesystem.isCodeSystem
+
+#     return codesystem.hasMatch code
+
+module.exports.InCodeSystem = class InCodeSystem extends Expression
+  constructor: (json) ->
+    super
+    @code = build json.code
+    @codesystem = json.codesystem
+
+  exec: (ctx) ->
+    return false unless @code?
+    code = @code.execute(ctx)
+    return false unless code? and code.system?
+    throw new Error("CodeSystem must be provided to InCodeSystem function") unless @codesystem?
+    codesystem = ctx.getCodeSystem(@codesystem.name)?.execute(ctx)
+    codesystemFromCode = ctx.getCodeSystem(code.system)?.execute(ctx)
+    throw new Error("CodeSystem must be provided to InCodeSystem function") unless codesystem? and codesystem.isCodeSystem
+
+    return @codesystem.id is codesystemFromCode.id
+
+
 module.exports.AnyInValueSet = class AnyInValueSet extends Expression
   constructor: (json) ->
     super
@@ -42,6 +93,7 @@ module.exports.AnyInValueSet = class AnyInValueSet extends Expression
     for code in codes
       return true if valueset.hasMatch(code)
     return false
+
 
 module.exports.InValueSet = class InValueSet extends Expression
   constructor: (json) ->

@@ -2,6 +2,7 @@ should = require 'should'
 setup = require '../../setup'
 data = require './data'
 vsets = require './valuesets'
+codesystems = require
 DT = require '../../../lib/datatypes/datatypes'
 { PatientContext } =  require '../../../lib/cql'
 { Uncertainty } = require '../../../lib/datatypes/uncertainty'
@@ -38,6 +39,31 @@ describe 'ValueSetRef', ->
 
   it 'should execute to the defined value set', ->
     @foo.exec(@ctx).oid.should.equal '2.16.840.1.113883.3.464.1003.101.12.1001'
+
+describe 'InCodeSystem', ->
+  @beforeEach ->
+    setup @, data, []
+
+  it 'should be true if string has code with equivalent code element', ->
+    @stringInCodesystem.exec(@ctx).should.be.true()
+
+  it 'should be true if code has equivalent code', ->
+    @codeInCodesystem.exec(@ctx).should.be.true()
+
+  it 'should be true if concept contains an equivalent code', ->
+    @conceptInCodesystem.exec(@ctx).should.be.true()
+
+  it 'should be false if concept contains no equivalent code', ->
+    @conceptNotInCodesystem.exec(@ctx).should.be.false()
+
+  it 'should be true if list<code> contains an equivalent code', ->
+    @listOfCodesInCodesystem.exec(@ctx).should.be.true()
+
+  it 'should be false if list<code> contains no equivalent code', ->
+    @listOfCodesNotInCodesystem.exec(@ctx).should.be.true()
+
+  it 'should be false if code argument is null', ->
+    @nullStringInCodesystem.exec(@ctx).should.be.false()
 
 describe 'InValueSet', ->
   @beforeEach ->
@@ -87,6 +113,11 @@ describe 'InValueSet', ->
 
   it 'should ignore null codes in list', ->
     @listOfCodesWithNull.exec(@ctx).should.be.true()
+  it 'should be true if concept contains an equivalent code', ->
+    @conceptInValueSet.exec(@ctx).should.be.true()
+
+  it 'should be false if concept contains no equivalent code', ->
+    @conceptNotInValueSet.exec(@ctx).should.be.false()
 
 describe 'Patient Property In ValueSet', ->
   @beforeEach ->
