@@ -655,8 +655,7 @@ class Date
       reduced[field] = null for field in fieldsToRemove
     reduced
 
-
-##Shared Funtions For Date and DateTime
+# Shared Funtions For Date and DateTime
 DateTime.prototype.isPrecise = Date.prototype.isPrecise = () ->
     @constructor.FIELDS.every (field) => @[field]?
 
@@ -676,8 +675,6 @@ DateTime.prototype.isSamePrecision = Date.prototype.isSamePrecision = (other) ->
       if (@[field]? and not other[field]?) then return false
       if (not @[field]? and other[field]?) then return false
     true
-
-
 
 normalizeMillisecondsFieldInString = (string, matches) ->
   msString = matches[14]
