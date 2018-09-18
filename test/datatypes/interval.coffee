@@ -1012,18 +1012,17 @@ describe 'DateTimeInterval.except', ->
     should.not.exist x.toDay.except(y.toDay)
     # x: ['2012-07-01', '2012-12-31']
     # y: ['2012-01-01', '2012-12-31']
-    # This is a tricky one, but it really is null because of the imprecision on
-    # the interval highs.  Interval y might properly include interval x.
-    should.not.exist y.toDay.except(x.toDay)
+    y.toDay.except(x.toDay).should.eql(new Interval(y.toDay.low, x.toDay.low, true, false))
+    should.not.exist y.toDay.except(x.toMinute)
 
     [x, y] = xy @dIvl.begins
     should.not.exist x.toDay.except(y.toDay)
     should.not.exist x.toDay.except(y.toDay)
     # x: ['2012-01-01', '2012-07-01']
     # y: ['2012-01-01', '2012-12-31']
-    # This is a tricky one, but it really is null because of the imprecision on
-    # the interval lows.  Interval y might properly include interval x.
-    should.not.exist y.toDay.except(x.toDay)
+    y.toDay.except(x.toDay).should.eql(new Interval(x.toDay.high, y.toDay.high, false, true))
+    should.not.exist y.toDay.except(x.toMinute)
+
 
   it 'should throw when the argument is a point', ->
     should(() => @all2012.closed.except DateTime.parse('2012-07-01T00:00:00.0')).throw(Error)
@@ -1116,34 +1115,39 @@ describe 'DateTimeInterval.after', ->
 
     [x, y] = xy @dIvl.before
     x.toMonth.after(y.toMonth).should.be.false()
-    x.toYear.after(y.closed).should.be.false()
+    x.toMonth.after(y.toDay).should.be.false()
+    should.not.exist x.toYear.after(y.closed)
     should.not.exist y.toYear.after(x.closed)
 
     [x, y] = xy @dIvl.meets
     x.toMonth.after(y.toMonth).should.be.false()
-    x.toYear.after(y.closed).should.be.false()
+    y.toDay.after(x.toMonth).should.be.true()
+    should.not.exist x.toYear.after(y.closed)
     should.not.exist y.toYear.after(x.closed)
 
     [x, y] = xy @dIvl.overlaps
     x.toMonth.after(y.toMonth).should.be.false()
-    x.toYear.after(y.closed).should.be.false()
+    should.not.exist x.toYear.after(y.closed)
     should.not.exist y.toYear.after(x.closed)
 
     [x, y] = xy @dIvl.begins
     x.toMinute.after(y.toMinute).should.be.false()
-    x.toYear.after(y.closed).should.be.false()
+    x.toMinute.after(y.toDay).should.be.false()
+    should.not.exist x.toYear.after(y.closed)
     should.not.exist y.toYear.after(x.closed)
 
     [x, y] = xy @dIvl.during
     x.toMonth.after(y.toMonth).should.be.false()
     y.toMonth.after(x.toMonth).should.be.false()
-    x.toYear.after(y.closed).should.be.false()
+    x.toDay.after(y.toMonth).should.be.false()
+    should.not.exist x.toYear.after(y.closed)
     should.not.exist y.toYear.after(x.closed)
 
     [x, y] = xy @dIvl.ends
     x.toMinute.after(y.toMinute).should.be.false()
-    x.toYear.after(y.closed).should.be.false()
-    x.toYear.after(x.closed).should.be.false()
+    x.toMinute.after(y.toMonth).should.be.false()
+    should.not.exist x.toYear.after(y.closed)
+    should.not.exist x.toYear.after(x.closed)
 
 describe 'DateTimeInterval.before', ->
   @beforeEach ->
@@ -1233,34 +1237,38 @@ describe 'DateTimeInterval.before', ->
 
     [x, y] = xy @dIvl.before
     x.toMonth.before(y.toMonth).should.be.true()
-    y.toYear.before(x.closed).should.be.false()
+    x.toMonth.before(y.toDay).should.be.true()
+    should.not.exist y.toYear.before(x.closed)
     should.not.exist x.toYear.before(y.closed)
 
     [x, y] = xy @dIvl.meets
     x.toMonth.before(y.toMonth).should.be.true()
-    y.toYear.before(x.closed).should.be.false()
+    x.toDay.before(y.toMonth).should.be.true()
+    should.not.exist y.toYear.before(x.closed)
     should.not.exist x.toYear.before(y.closed)
 
     [x, y] = xy @dIvl.overlaps
     x.toMonth.before(y.toMonth).should.be.false()
-    y.toYear.before(x.closed).should.be.false()
+    x.toMonth.before(y.toMinute).should.be.false()
+    should.not.exist y.toYear.before(x.closed)
     should.not.exist x.toYear.before(y.closed)
 
     [x, y] = xy @dIvl.begins
     x.toMinute.before(y.toMinute).should.be.false()
-    y.toYear.before(x.closed).should.be.false()
-    x.toYear.before(y.closed).should.be.false()
+    should.not.exist y.toYear.before(x.closed)
+    should.not.exist x.toYear.before(y.closed)
 
     [x, y] = xy @dIvl.during
     x.toMonth.before(y.toMonth).should.be.false()
     y.toMonth.before(x.toMonth).should.be.false()
+    y.toMonth.before(x.toDay).should.be.false()
     should.not.exist y.toYear.before(x.closed)
-    x.toYear.before(y.closed).should.be.false()
+    should.not.exist x.toYear.before(y.closed)
 
     [x, y] = xy @dIvl.ends
     x.toMinute.before(y.toMinute).should.be.false()
     should.not.exist y.toYear.before(x.closed)
-    x.toYear.before(y.closed).should.be.false()
+    should.not.exist x.toYear.before(y.closed)
 
 # TODO Add tests that pass in precision parameters
 describe 'DateTimeInterval.meets', ->

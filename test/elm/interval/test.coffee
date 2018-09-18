@@ -463,10 +463,11 @@ describe 'After', ->
 
   it 'should correctly handle imprecision', ->
     @afterImpreciseDateIvl.exec(@ctx).should.be.true()
-    @notAfterImpreciseDateIvl.exec(@ctx).should.be.false()
+    should(@notAfterImpreciseDateIvl.exec(@ctx)).be.null()
     should(@mayBeAfterImpreciseDateIvl.exec(@ctx)).be.null()
     @impreciseAfterDateIvl.exec(@ctx).should.be.true()
-    @impreciseNotAfterDateIvl.exec(@ctx).should.be.false()
+    # meets with uncertainty due to toClose
+    should(@impreciseNotAfterDateIvl.exec(@ctx)).be.null()
     should(@impreciseMayBeAfterDateIvl.exec(@ctx)).be.null()
 
   it 'should correctly compare using the requested precision', ->
@@ -511,10 +512,11 @@ describe 'Before', ->
 
   it 'should correctly handle imprecision', ->
     @beforeImpreciseDateIvl.exec(@ctx).should.be.true()
-    @notBeforeImpreciseDateIvl.exec(@ctx).should.be.false()
+    # meets with uncertaintity due to toClose
+    should(@notBeforeImpreciseDateIvl.exec(@ctx)).be.null()
     should(@mayBeBeforeImpreciseDateIvl.exec(@ctx)).be.null()
     @impreciseBeforeDateIvl.exec(@ctx).should.be.true()
-    @impreciseNotBeforeDateIvl.exec(@ctx).should.be.false()
+    should(@impreciseNotBeforeDateIvl.exec(@ctx)).be.null()
     should(@impreciseMayBeBeforeDateIvl.exec(@ctx)).be.null()
 
   it 'should correctly compare using the requested precision', ->

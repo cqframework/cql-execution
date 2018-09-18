@@ -871,43 +871,77 @@
     };
 
     DateTime.prototype.before = function(other, precision) {
-      var diff;
-      if (precision == null) {
-        precision = DateTime.Unit.MILLISECOND;
-      }
+      var field, i, len, ref1;
       other = this._implicitlyConvert(other);
       if (!(other instanceof DateTime)) {
-        return false;
+        return null;
       }
-      diff = this.differenceBetween(other, precision);
-      switch (false) {
-        case !(diff.low > 0 && diff.high > 0):
-          return true;
-        case !(diff.low <= 0 && diff.high <= 0):
-          return false;
-        default:
+      if ((precision != null) && DateTime.FIELDS.indexOf(precision) < 0) {
+        throw new Error("Invalid precision: " + precision);
+      }
+      if (this.timezoneOffset !== other.timezoneOffset) {
+        other = other.convertToTimezoneOffset(this.timezoneOffset);
+      }
+      ref1 = DateTime.FIELDS;
+      for (i = 0, len = ref1.length; i < len; i++) {
+        field = ref1[i];
+        if ((this[field] != null) && (other[field] != null)) {
+          if (this[field] < other[field]) {
+            return true;
+          } else if (this[field] > other[field]) {
+            return false;
+          }
+        } else if ((this[field] == null) && (other[field] == null)) {
+          if (precision == null) {
+            return false;
+          } else {
+            return null;
+          }
+        } else {
           return null;
+        }
+        if ((precision != null) && precision === field) {
+          break;
+        }
       }
+      return false;
     };
 
     DateTime.prototype.after = function(other, precision) {
-      var diff;
-      if (precision == null) {
-        precision = DateTime.Unit.MILLISECOND;
-      }
+      var field, i, len, ref1;
       other = this._implicitlyConvert(other);
       if (!(other instanceof DateTime)) {
-        return false;
+        return null;
       }
-      diff = this.differenceBetween(other, precision);
-      switch (false) {
-        case !(diff.low < 0 && diff.high < 0):
-          return true;
-        case !(diff.low >= 0 && diff.high >= 0):
-          return false;
-        default:
+      if ((precision != null) && DateTime.FIELDS.indexOf(precision) < 0) {
+        throw new Error("Invalid precision: " + precision);
+      }
+      if (this.timezoneOffset !== other.timezoneOffset) {
+        other = other.convertToTimezoneOffset(this.timezoneOffset);
+      }
+      ref1 = DateTime.FIELDS;
+      for (i = 0, len = ref1.length; i < len; i++) {
+        field = ref1[i];
+        if ((this[field] != null) && (other[field] != null)) {
+          if (this[field] > other[field]) {
+            return true;
+          } else if (this[field] < other[field]) {
+            return false;
+          }
+        } else if ((this[field] == null) && (other[field] == null)) {
+          if (precision == null) {
+            return false;
+          } else {
+            return null;
+          }
+        } else {
           return null;
+        }
+        if ((precision != null) && precision === field) {
+          break;
+        }
       }
+      return false;
     };
 
     DateTime.prototype.add = function(offset, field) {
@@ -44838,9 +44872,6 @@
   };
 
   module.exports.lessThan = function(a, b, precision) {
-    if (precision == null) {
-      precision = DateTime.Unit.MILLISECOND;
-    }
     switch (false) {
       case !areNumbers(a, b):
         return a < b;
@@ -44871,9 +44902,6 @@
   };
 
   module.exports.greaterThan = function(a, b, precision) {
-    if (precision == null) {
-      precision = DateTime.Unit.MILLISECOND;
-    }
     switch (false) {
       case !areNumbers(a, b):
         return a > b;

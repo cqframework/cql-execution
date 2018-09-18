@@ -10,7 +10,7 @@ areDateTimesOrQuantities = (a, b) ->
 isUncertainty = (x) ->
   x instanceof Uncertainty
 
-module.exports.lessThan = (a, b, precision = DateTime.Unit.MILLISECOND) ->
+module.exports.lessThan = (a, b, precision) ->
   switch
     when areNumbers a, b then a < b
     when areDateTimesOrQuantities a, b then a.before(b, precision)
@@ -26,7 +26,7 @@ module.exports.lessThanOrEquals = (a, b, precision) ->
     when isUncertainty b then Uncertainty.from(a).lessThanOrEquals b
     else null
 
-module.exports.greaterThan = (a, b, precision = DateTime.Unit.MILLISECOND) ->
+module.exports.greaterThan = (a, b, precision) ->
   switch
     when areNumbers a, b then a > b
     when areDateTimesOrQuantities a, b then a.after(b, precision)

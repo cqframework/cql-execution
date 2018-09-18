@@ -1363,13 +1363,13 @@ describe 'DateTime.before', ->
     DateTime.parse('2000-02-15T12:30:30.0+00').before(DateTime.parse('2000-02-15T12:30:30.500+00')).should.be.true()
     DateTime.parse('2000-02-15T12:30:30.0+00').before(DateTime.parse('2000-02-15T12:30:30.500+00'), DateTime.Unit.MILLISECOND).should.be.true()
 
-  it 'should return null in cases where a is b but there are unknown values', ->
-    should.not.exist DateTime.parse('2000-01-01T00:00:00').before(DateTime.parse('2000-01-01T00:00:00'))
-    should.not.exist DateTime.parse('2000-01-01T00:00').before(DateTime.parse('2000-01-01T00:00'))
-    should.not.exist DateTime.parse('2000-01-01T00').before(DateTime.parse('2000-01-01T00'))
-    should.not.exist DateTime.parse('2000-01-01').before(DateTime.parse('2000-01-01'))
-    should.not.exist DateTime.parse('2000-01').before(DateTime.parse('2000-01'))
-    should.not.exist DateTime.parse('2000').before(DateTime.parse('2000'))
+  it 'should return false in cases where a is b but there are unknown values', ->
+    DateTime.parse('2000-01-01T00:00:00').before(DateTime.parse('2000-01-01T00:00:00')).should.be.false()
+    DateTime.parse('2000-01-01T00:00').before(DateTime.parse('2000-01-01T00:00')).should.be.false()
+    DateTime.parse('2000-01-01T00').before(DateTime.parse('2000-01-01T00')).should.be.false()
+    DateTime.parse('2000-01-01').before(DateTime.parse('2000-01-01')).should.be.false()
+    DateTime.parse('2000-01').before(DateTime.parse('2000-01')).should.be.false()
+    DateTime.parse('2000').before(DateTime.parse('2000')).should.be.false()
 
   it 'should return null in cases where a has unknown values that prevent deterministic result', ->
     should.not.exist DateTime.parse('2000-01-01T00:00:00').before(DateTime.parse('2000-01-01T00:00:00.999'))
@@ -1618,12 +1618,12 @@ describe 'DateTime.after', ->
     DateTime.parse('2000-02-15T12:30:30.500+00').after(DateTime.parse('2000-02-15T12:30:30.0+00'), DateTime.Unit.MILLISECOND).should.be.true()
 
   it 'should return null in cases where a is b but there are unknown values', ->
-    should.not.exist DateTime.parse('2000-01-01T00:00:00').after(DateTime.parse('2000-01-01T00:00:00'))
-    should.not.exist DateTime.parse('2000-01-01T00:00').after(DateTime.parse('2000-01-01T00:00'))
-    should.not.exist DateTime.parse('2000-01-01T00').after(DateTime.parse('2000-01-01T00'))
-    should.not.exist DateTime.parse('2000-01-01').after(DateTime.parse('2000-01-01'))
-    should.not.exist DateTime.parse('2000-01').after(DateTime.parse('2000-01'))
-    should.not.exist DateTime.parse('2000').after(DateTime.parse('2000'))
+    DateTime.parse('2000-01-01T00:00:00').after(DateTime.parse('2000-01-01T00:00:00')).should.be.false()
+    DateTime.parse('2000-01-01T00:00').after(DateTime.parse('2000-01-01T00:00')).should.be.false()
+    DateTime.parse('2000-01-01T00').after(DateTime.parse('2000-01-01T00')).should.be.false()
+    DateTime.parse('2000-01-01').after(DateTime.parse('2000-01-01')).should.be.false()
+    DateTime.parse('2000-01').after(DateTime.parse('2000-01')).should.be.false()
+    DateTime.parse('2000').after(DateTime.parse('2000')).should.be.false()
 
   it 'should return null in cases where a has unknown values that prevent deterministic result', ->
     should.not.exist DateTime.parse('2000-01-01T00:00:00').after(DateTime.parse('2000-01-01T00:00:00.0'))

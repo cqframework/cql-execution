@@ -594,7 +594,7 @@ define ivlD: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), DateTime(2014, 1, 1, 0, 
 define ivlE: Interval[DateTime(2013), DateTime(2015)]
 define ivlF: Interval[DateTime(2014), DateTime(2016)]
 define ivlG: Interval[DateTime(2016), DateTime(2017)]
-define ivlH: Interval[DateTime(2013,1), DateTime(2014)]
+define ivlH: Interval[DateTime(2013,1), DateTime(2015,1)]
 define OverlapsBefore: ivlA overlaps after ivlB
 define OverlapsAfter: ivlB overlaps after ivlA
 define OverlapsContained: ivlB overlaps after ivlC
@@ -604,7 +604,7 @@ define ImpreciseOverlapAfter: ivlF overlaps after ivlE
 define NoOverlap: ivlC overlaps after ivlD
 define NoImpreciseOverlap: ivlE overlaps after ivlG
 define MatchingPrecisionOverlap: ivlG overlaps after ivlF
-define UnknownOverlap: ivlH overlaps after ivlC
+define UnknownOverlap: ivlH overlaps after ivlE
 define PrecisionDateIvl: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
 define OverlapsBeforeDayOfIvlEdge: PrecisionDateIvl overlaps after day of Interval[DateTime(2012, 9, 2, 23, 59, 59, 999), DateTime(2012, 10, 1, 0, 0, 0, 0)]
 define OverlapsAfterDayOfIvlEdge: PrecisionDateIvl overlaps after day of Interval[DateTime(2012, 1, 2, 0, 0, 0, 0), DateTime(2012, 3, 2, 0, 0, 0, 0)]
