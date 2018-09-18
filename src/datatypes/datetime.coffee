@@ -144,8 +144,6 @@ class DateTime
 
   equals: (other) ->
     return null if not(other instanceof DateTime)
-    if precision? && DateTime.FIELDS.indexOf(precision) < 0
-      throw new Error("Invalid precision: #{precision}")
 
     # make a copy of other in the correct timezone offset if they don't match.
     if (@timezoneOffset != other.timezoneOffset)

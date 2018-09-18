@@ -774,9 +774,6 @@
       if (!(other instanceof DateTime)) {
         return null;
       }
-      if ((typeof precision !== "undefined" && precision !== null) && DateTime.FIELDS.indexOf(precision) < 0) {
-        throw new Error("Invalid precision: " + precision);
-      }
       if (this.timezoneOffset !== other.timezoneOffset) {
         other = other.convertToTimezoneOffset(this.timezoneOffset);
       }

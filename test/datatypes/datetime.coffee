@@ -1301,6 +1301,9 @@ describe 'DateTime.sameAs', ->
     DateTime.parse('2000').sameAs(DateTime.parse('2001'), DateTime.Unit.MONTH).should.be.false()
     DateTime.parse('2000').sameAs(DateTime.parse('2001'), DateTime.Unit.YEAR).should.be.false()
 
+  it 'should return null when something other than a DateTime is passed in', ->
+    should.not.exist DateTime.parse('2000').sameAs({test: 'im not a DateTime'})
+
 describe 'DateTime.before', ->
 
   it 'should accept cases where a is before b', ->
@@ -1418,6 +1421,16 @@ describe 'DateTime.before', ->
     DateTime.parse('2000-01-02T00:00:00.0').before(DateTime.parse('2000-01-01')).should.be.false()
     DateTime.parse('2000-02-01T00:00:00.0').before(DateTime.parse('2000-01')).should.be.false()
     DateTime.parse('2001-01-01T00:00:00.0').before(DateTime.parse('2000')).should.be.false()
+
+  it 'should return null if not enough precision exists for comparison', ->
+    should.not.exist DateTime.parse('2000-01-01').before(DateTime.parse('2000-01-01'), DateTime.Unit.MINUTE)
+
+  it 'should return null when something other than a DateTime is passed in', ->
+    should.not.exist DateTime.parse('2000').before({test: 'im not a DateTime'})
+
+  it 'should throw an error if an invalid precision is passed in', ->
+    should.throws ->
+      DateTime.parse('2001-01-01T00:00:00').before(DateTime.parse('2000'), DateTime.Unit.WEEK)
 
 describe 'DateTime.sameOrBefore', ->
 
@@ -1555,6 +1568,16 @@ describe 'DateTime.sameOrBefore', ->
     DateTime.parse('2000-02-01T00:00:00').sameOrBefore(DateTime.parse('2000-01')).should.be.false()
     DateTime.parse('2001-01-01T00:00:00').sameOrBefore(DateTime.parse('2000')).should.be.false()
 
+  it 'should return null if not enough precision exists for comparison', ->
+    should.not.exist DateTime.parse('2000-01-01').sameOrBefore(DateTime.parse('2000-01-01'), DateTime.Unit.MINUTE)
+
+  it 'should return null when something other than a DateTime is passed in', ->
+    should.not.exist DateTime.parse('2000').sameOrBefore({test: 'im not a DateTime'})
+
+  it 'should throw an error if an invalid precision is passed in', ->
+    should.throws ->
+      DateTime.parse('2001-01-01T00:00:00').sameOrBefore(DateTime.parse('2000'), DateTime.Unit.WEEK)
+
 describe 'DateTime.after', ->
 
   it 'should accept cases where a is after b', ->
@@ -1672,6 +1695,16 @@ describe 'DateTime.after', ->
     DateTime.parse('2000-01-01T00:00:00.0').after(DateTime.parse('2000-01-02')).should.be.false()
     DateTime.parse('2000-01-01T00:00:00.0').after(DateTime.parse('2000-02')).should.be.false()
     DateTime.parse('2000-01-01T00:00:00.0').after(DateTime.parse('2001')).should.be.false()
+
+  it 'should return null if not enough precision exists for comparison', ->
+    should.not.exist DateTime.parse('2000-01-01').after(DateTime.parse('2000-01-01'), DateTime.Unit.MINUTE)
+
+  it 'should return null when something other than a DateTime is passed in', ->
+    should.not.exist DateTime.parse('2000').after({test: 'im not a DateTime'})
+
+  it 'should throw an error if an invalid precision is passed in', ->
+    should.throws ->
+      DateTime.parse('2001-01-01T00:00:00').after(DateTime.parse('2000'), DateTime.Unit.WEEK)
 
 describe 'DateTime.sameOrAfter', ->
 
@@ -1808,6 +1841,16 @@ describe 'DateTime.sameOrAfter', ->
     DateTime.parse('2000-01-01T23:59:59.999').sameOrAfter(DateTime.parse('2000-01-02')).should.be.false()
     DateTime.parse('2000-01-31T23:59:59.999').sameOrAfter(DateTime.parse('2000-02')).should.be.false()
     DateTime.parse('2000-12-31T23:59:59.999').sameOrAfter(DateTime.parse('2001')).should.be.false()
+
+  it 'should return null if not enough precision exists for comparison', ->
+    should.not.exist DateTime.parse('2000-01-01').sameOrAfter(DateTime.parse('2000-01-01'), DateTime.Unit.MINUTE)
+
+  it 'should return null when something other than a DateTime is passed in', ->
+    should.not.exist DateTime.parse('2000').sameOrAfter({test: 'im not a DateTime'})
+
+  it 'should throw an error if an invalid precision is passed in', ->
+    should.throws ->
+      DateTime.parse('2001-01-01T00:00:00').sameOrAfter(DateTime.parse('2000'), DateTime.Unit.WEEK)
 
 describe 'DateTime.getDate', ->
 
