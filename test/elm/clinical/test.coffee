@@ -46,6 +46,12 @@ describe 'InValueSet', ->
   it 'should find string code in value set', ->
     @string.exec(@ctx).should.be.true()
 
+  it 'should throw an error when codes are in several codesystems', ->
+    should(() => @sharedCodesFoo.exec(@ctx)).throw('Duplicate codes in different code systems in same valueset')
+
+  it 'should find string code in valueset and not error', ->
+    @properSharedCodes.exec(@ctx).should.be.true()
+
   it 'should find string code in versioned value set', ->
     @stringInVersionedValueSet.exec(@ctx).should.be.true()
 

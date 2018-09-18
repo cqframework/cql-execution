@@ -30,7 +30,22 @@ module.exports.ValueSet = class ValueSet
       get: -> true
 
   hasMatch: (code) ->
-    codesInList(toCodeList(code), @codes)
+    codesList = toCodeList(code)
+    # InValueSet String Overload
+    if codesList.length == 1 and typeof codesList[0] is 'string'
+      codes_codeSystem = {}
+      for c2 in @codes
+        if codesList[0] == c2.code
+          # Check if code exists but with different codesystem,
+          if codes_codeSystem[c2.code]? and codes_codeSystem[c2.code] != c2.system
+            throw new Error('Duplicate codes in different code systems in same valueset')
+          else
+            codes_codeSystem[c2.code] = c2.system
+      # Return true if there is a match (atleast one key exists in the hash)
+      return true if Object.keys(codes_codeSystem).length > 0
+      return false
+    else
+      codesInList(codesList, @codes)
 
 toCodeList = (c) ->
   if not c?
