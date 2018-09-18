@@ -499,7 +499,7 @@ class Date
 
   add: (offset, field) ->
     # TODO: According to spec, 2/29/2000 + 1 year is 2/28/2001
-    # Currently, it evaluates to 3/1/2001.  Doh.
+    # Currently, it evaluates to 3/1/2001.
     result = @copy()
 
     # If weeks, convert to days

@@ -870,7 +870,7 @@ module.exports['ConceptParameterTypes'] = {
 library TestSnippet version '1'
 using QUICK
 parameter FooP DateTime
-parameter FooDP default @2012-04-01
+parameter FooDP default @2012-04-01T12:11:10
 context Patient
 define Foo: FooP
 define Foo2: FooDP
@@ -912,7 +912,7 @@ module.exports['DateTimeParameterTypes'] = {
             "accessLevel" : "Public",
             "default" : {
                "localId" : "4",
-               "type" : "Date",
+               "type" : "DateTime",
                "year" : {
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2012",
@@ -926,6 +926,21 @@ module.exports['DateTimeParameterTypes'] = {
                "day" : {
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
+                  "type" : "Literal"
+               },
+               "hour" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "12",
+                  "type" : "Literal"
+               },
+               "minute" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "11",
+                  "type" : "Literal"
+               },
+               "second" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "10",
                   "type" : "Literal"
                }
             }

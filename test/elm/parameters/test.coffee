@@ -161,7 +161,7 @@ describe 'DateTimeParameterTypes', ->
     should(() => @foo.exec(@ctx.withParameters { FooP: d })).throw(/.*wrong type.*/)
 
   it 'should execute to default value', ->
-    @foo2.exec(@ctx).should.eql DateTime.parse('2012-04-01')
+    @foo2.exec(@ctx).should.eql DateTime.parse('2012-04-01T12:11:10')
 
   it 'should execute to overriding valid value', ->
     d = DateTime.parse('2012-10-25T12:55:14.456+00')
