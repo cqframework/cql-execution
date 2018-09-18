@@ -38,7 +38,7 @@ module.exports.ValueSet = class ValueSet
         if codesList[0] == c2.code
           # Check if code exists but with different codesystem,
           if codes_codeSystem[c2.code]? and codes_codeSystem[c2.code] != c2.system
-            throw new Error('Duplicate codes in different code systems in same valueset')
+            throw new Error('In (valueset) is ambiguous -- multiple matches for ' + c2.code + ' found in value set with different code systems.')
           else
             codes_codeSystem[c2.code] = c2.system
       # Return true if there is a match (atleast one key exists in the hash)

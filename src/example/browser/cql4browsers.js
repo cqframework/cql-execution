@@ -481,7 +481,7 @@
           c2 = ref[i];
           if (codesList[0] === c2.code) {
             if ((codes_codeSystem[c2.code] != null) && codes_codeSystem[c2.code] !== c2.system) {
-              throw new Error('Duplicate codes in different code systems in same valueset');
+              throw new Error('In (valueset) is ambiguous -- multiple matches for ' + c2.code + ' found in value set with different code systems.');
             } else {
               codes_codeSystem[c2.code] = c2.system;
             }
