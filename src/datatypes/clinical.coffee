@@ -5,7 +5,7 @@ module.exports.Code = class Code
 
   hasMatch: (code) ->
     if typeof code is 'string'
-      # the specific behavior for this is not in the specification. Matching valueset/codesystem behavior.
+      # the specific behavior for this is not in the specification. Matching codesystem behavior.
       code == @.code
     else
       codesInList(toCodeList(code), [@])
@@ -65,7 +65,7 @@ codesInList = (cl1, cl2) ->
   cl1.some (c1) -> (cl2.some (c2) ->
     # only the left argument (cl1) can contain strings. cl2 will only contain codes.
     if typeof c1 is 'string'
-      # for "string in codesystem" or "string in valueset" this should compare the string to
+      # for "string in codesystem" this should compare the string to
       # the code's "code" field according to the specification.
       c1 == c2.code
     else
