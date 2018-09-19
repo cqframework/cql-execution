@@ -108,40 +108,6 @@ class DateTime
     d = DateTime.fromJsDate(@toJSDate(), timezoneOffset)
     d.reducedPrecision(@getPrecision())
 
-  sameAs: (other, precision) ->
-    other = @_implicitlyConvert(other)
-    return null if not(other instanceof DateTime)
-    if precision? && DateTime.FIELDS.indexOf(precision) < 0
-      throw new Error("Invalid precision: #{precision}")
-
-    # make a copy of other in the correct timezone offset if they don't match.
-    if (@timezoneOffset != other.timezoneOffset)
-      other = other.convertToTimezoneOffset(@timezoneOffset)
-
-    for field in DateTime.FIELDS
-      # if both have this precision defined
-      if @[field]? and other[field]?
-        # if they are different then return with false
-        if @[field] != other[field]
-          return false
-
-      # if both dont have this precision, return true of precision is not defined
-      else if !@[field]? and !other[field]?
-        if !precision?
-          return true
-        else # we havent met precision yet
-          return null
-
-      # otherwise they have inconclusive precision, return null
-      else
-        return null
-
-      # if precision is defined and we have reached expected precision, we can leave the loop
-      break if precision? and precision is field
-
-    # if we made it here, then all fields matched.
-    true
-
   equals: (other) ->
     return null if not(other instanceof DateTime)
 
@@ -601,16 +567,6 @@ class Date
     else if @year?
       @add(-1,Date.Unit.YEAR)
 
-  sameAs: (other, precision = Date.Unit.DAY) ->
-    if (other instanceof DateTime) then return this.getDateTime().sameAs(other, precision)
-    if not(other instanceof Date) then null
-
-    diff = @differenceBetween(other, precision)
-    switch
-      when (diff.low == 0 and diff.high == 0) then true
-      when (diff.low <= 0 and diff.high >= 0) then null
-      else false
-
   equals: (other) ->
     @sameAs(other, Date.Unit.DAY)
 
@@ -832,6 +788,45 @@ DateTime.prototype.isSamePrecision = Date.prototype.isSamePrecision = (other) ->
       if (@[field]? and not other[field]?) then return false
       if (not @[field]? and other[field]?) then return false
     true
+
+DateTime.prototype.sameAs = Date.prototype.sameAs = (other, precision) ->
+  if not((other.isDate) or (other.isDateTime))
+    return null
+  else if @.isDate and other.isDateTime
+    return @_implicitlyConvert(@).sameAs(other)
+  else if @.isDateTime and other.isDate
+    other = @_implicitlyConvert(other)
+
+  if precision? && @constructor.FIELDS.indexOf(precision) < 0
+    throw new Error("Invalid precision: #{precision}")
+
+  # make a copy of other in the correct timezone offset if they don't match.
+  if (@timezoneOffset != other.timezoneOffset)
+    other = other.convertToTimezoneOffset(@timezoneOffset)
+
+  for field in @constructor.FIELDS
+    # if both have this precision defined
+    if @[field]? and other[field]?
+      # if they are different then return with false
+      if @[field] != other[field]
+        return false
+
+    # if both dont have this precision, return true of precision is not defined
+    else if !@[field]? and !other[field]?
+      if !precision?
+        return true
+      else # we havent met precision yet
+        return null
+
+    # otherwise they have inconclusive precision, return null
+    else
+      return null
+
+    # if precision is defined and we have reached expected precision, we can leave the loop
+    break if precision? and precision is field
+
+  # if we made it here, then all fields matched.
+  true
 
 normalizeMillisecondsFieldInString = (string, matches) ->
   msString = matches[14]

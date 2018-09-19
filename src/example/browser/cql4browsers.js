@@ -734,41 +734,6 @@
       return d.reducedPrecision(this.getPrecision());
     };
 
-    DateTime.prototype.sameAs = function(other, precision) {
-      var field, i, len, ref1;
-      other = this._implicitlyConvert(other);
-      if (!(other instanceof DateTime)) {
-        return null;
-      }
-      if ((precision != null) && DateTime.FIELDS.indexOf(precision) < 0) {
-        throw new Error("Invalid precision: " + precision);
-      }
-      if (this.timezoneOffset !== other.timezoneOffset) {
-        other = other.convertToTimezoneOffset(this.timezoneOffset);
-      }
-      ref1 = DateTime.FIELDS;
-      for (i = 0, len = ref1.length; i < len; i++) {
-        field = ref1[i];
-        if ((this[field] != null) && (other[field] != null)) {
-          if (this[field] !== other[field]) {
-            return false;
-          }
-        } else if ((this[field] == null) && (other[field] == null)) {
-          if (precision == null) {
-            return true;
-          } else {
-            return null;
-          }
-        } else {
-          return null;
-        }
-        if ((precision != null) && precision === field) {
-          break;
-        }
-      }
-      return true;
-    };
-
     DateTime.prototype.equals = function(other) {
       var field, i, len, ref1;
       if (!(other instanceof DateTime)) {
@@ -1316,28 +1281,6 @@
       }
     };
 
-    Date.prototype.sameAs = function(other, precision) {
-      var diff;
-      if (precision == null) {
-        precision = Date.Unit.DAY;
-      }
-      if (other instanceof DateTime) {
-        return this.getDateTime().sameAs(other, precision);
-      }
-      if (!(other instanceof Date)) {
-        null;
-      }
-      diff = this.differenceBetween(other, precision);
-      switch (false) {
-        case !(diff.low === 0 && diff.high === 0):
-          return true;
-        case !(diff.low <= 0 && diff.high >= 0):
-          return null;
-        default:
-          return false;
-      }
-    };
-
     Date.prototype.equals = function(other) {
       return this.sameAs(other, Date.Unit.DAY);
     };
@@ -1660,6 +1603,44 @@
       }
       if ((this[field] == null) && (other[field] != null)) {
         return false;
+      }
+    }
+    return true;
+  };
+
+  DateTime.prototype.sameAs = Date.prototype.sameAs = function(other, precision) {
+    var field, i, len, ref1;
+    if (!(other.isDate || other.isDateTime)) {
+      return null;
+    } else if (this.isDate && other.isDateTime) {
+      return this._implicitlyConvert(this).sameAs(other);
+    } else if (this.isDateTime && other.isDate) {
+      other = this._implicitlyConvert(other);
+    }
+    if ((precision != null) && this.constructor.FIELDS.indexOf(precision) < 0) {
+      throw new Error("Invalid precision: " + precision);
+    }
+    if (this.timezoneOffset !== other.timezoneOffset) {
+      other = other.convertToTimezoneOffset(this.timezoneOffset);
+    }
+    ref1 = this.constructor.FIELDS;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      field = ref1[i];
+      if ((this[field] != null) && (other[field] != null)) {
+        if (this[field] !== other[field]) {
+          return false;
+        }
+      } else if ((this[field] == null) && (other[field] == null)) {
+        if (precision == null) {
+          return true;
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+      if ((precision != null) && precision === field) {
+        break;
       }
     }
     return true;
