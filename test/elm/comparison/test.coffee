@@ -135,7 +135,6 @@ describe 'Equivalent', ->
   it 'should be true for FOO ~ foo', ->
     @caseInsensitiveStrings.exec(@ctx).should.be.true()
   
-
   describe 'Tuples', ->
     it.skip 'should return true for empty tuples', ->
       # Note: the spec doesn't explicitly define this, expecting behavior to match null ~ null
