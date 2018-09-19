@@ -166,6 +166,7 @@ module.exports.Product = class Product extends AggregateExpression
 
   exec: (ctx) ->
     arg = @source.execute(ctx)
+    return null if arg is null
     [value, filtered] = productValue(arg)
     return null if value is null
     return quantityOrValue(value, arg)
@@ -176,6 +177,7 @@ module.exports.GeometricMean = class GeometricMean extends AggregateExpression
 
   exec: (ctx) ->
     arg = @source.execute(ctx)
+    return null if arg is null
     [value, filtered] = productValue(arg)
     return null if value is null
     geoMean = Math.pow(value, 1.0 / filtered.length)
@@ -183,12 +185,17 @@ module.exports.GeometricMean = class GeometricMean extends AggregateExpression
 
 productValue = (list) ->
   product = 1
-  return null if list is null
   if typeIsArray(list)
     filtered = compact(list)
-    return null if filtered.length == 0
-    product = filtered.reduce (x,y) -> x*y
+    return [null, null] if filtered.length == 0
+    for item in filtered
+      if item.isQuantity
+        product = Quantity.doMultiplication(product,item)
+      else
+        product = product * item
     return [product, filtered]
+  else
+    [null, null]
 
 module.exports.PopulationStdDev = class PopulationStdDev extends StdDev
   constructor:(json) ->

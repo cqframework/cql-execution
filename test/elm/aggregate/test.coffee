@@ -222,19 +222,19 @@ describe 'Product', ->
     @product_with_null.exec(@ctx).should.equal 20
 
   it 'should return a quantity product', ->
-    @quantity_product.exec(@ctx).should.equal "24.0 'mg'"
+    validateQuantity @quantity_product.exec(@ctx), 24, 'g'
 
   it 'should return a 0 quantity product', ->
-    @quantity_zero_product.exec(@ctx).should.equal "0 'mg'"
-
-  it 'should return null when list is all null', ->
-    should(@product_of_nulls.exec(@ctx)).be.null()
+    validateQuantity @quantity_zero_product.exec(@ctx), 0, 'g'
 
   it 'should return null when null list is passed in', ->
     should(@product_null.exec(@ctx)).be.null()
 
   it 'should return null when passed in list of null quantities', ->
     should(@product_quantity_null.exec(@ctx)).be.null()
+
+  it 'should return null when list is all null', ->
+    should(@product_of_nulls.exec(@ctx)).be.null()
 
 describe 'GeometricMean', ->
   @beforeEach ->

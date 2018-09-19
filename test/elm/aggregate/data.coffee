@@ -6507,62 +6507,16 @@ context Patient
 define decimal_product: Product({1.0, 2.0, 3.0, 4.0})
 define integer_product: Product({5, 4, 5})
 define zero_product: Product({0, 5, 10})
-define quantity_product: Product({1.0 'mg', 2.0 'mg', 3.0 'mg', 4.0 'mg'})
-define quantity_zero_product: Product({1.0 'mg', 2.0 'mg', 0 'mg'})
+define quantity_product: Product({1.0 'g', 2.0 'g', 3.0 'g', 4.0 'g'})
+define quantity_zero_product: Product({1.0 'g', 2.0 'g', 0 'g'})
 define product_with_null: Product({5, 4, null})
-define product_of_nulls: Product({null, null, null})
+define product_of_nulls: Product({null as Integer, null, null})
 define product_null: Product(null as List<Decimal>)
 define product_quantity_null: Product({null as Quantity, null as Quantity, null as Quantity})
 ###
 
-###
-Translation Error(s):
-[7:26, 7:74] Could not resolve call to operator Product with signature (list<System.Quantity>).
-[8:31, 8:67] Could not resolve call to operator Product with signature (list<System.Quantity>).
-[10:26, 10:52] Call to operator Product(list<System.Any>) is ambiguous with: 
-  - Product(list<System.Decimal>)
-  - Product(list<System.Integer>)
-[12:31, 12:93] Could not resolve call to operator Product with signature (list<System.Quantity>).
-###
 module.exports['Product'] = {
    "library" : {
-      "annotation" : [ {
-         "startLine" : 7,
-         "startChar" : 26,
-         "endLine" : 7,
-         "endChar" : 74,
-         "message" : "Could not resolve call to operator Product with signature (list<System.Quantity>).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 8,
-         "startChar" : 31,
-         "endLine" : 8,
-         "endChar" : 67,
-         "message" : "Could not resolve call to operator Product with signature (list<System.Quantity>).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 10,
-         "startChar" : 26,
-         "endLine" : 10,
-         "endChar" : 52,
-         "message" : "Call to operator Product(list<System.Any>) is ambiguous with: \n  - Product(list<System.Decimal>)\n  - Product(list<System.Integer>)",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 12,
-         "startChar" : 31,
-         "endLine" : 12,
-         "endChar" : 93,
-         "message" : "Could not resolve call to operator Product with signature (list<System.Quantity>).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -6770,28 +6724,28 @@ module.exports['Product'] = {
                         }, {
                            "r" : "21",
                            "s" : [ {
-                              "value" : [ "1.0 ","'mg'" ]
+                              "value" : [ "1.0 ","'g'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
                            "r" : "22",
                            "s" : [ {
-                              "value" : [ "2.0 ","'mg'" ]
+                              "value" : [ "2.0 ","'g'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
                            "r" : "23",
                            "s" : [ {
-                              "value" : [ "3.0 ","'mg'" ]
+                              "value" : [ "3.0 ","'g'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
                            "r" : "24",
                            "s" : [ {
-                              "value" : [ "4.0 ","'mg'" ]
+                              "value" : [ "4.0 ","'g'" ]
                            } ]
                         }, {
                            "value" : [ "}" ]
@@ -6804,7 +6758,32 @@ module.exports['Product'] = {
             } ],
             "expression" : {
                "localId" : "26",
-               "type" : "Null"
+               "type" : "Product",
+               "source" : {
+                  "localId" : "25",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "21",
+                     "value" : 1.0,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "22",
+                     "value" : 2.0,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "23",
+                     "value" : 3.0,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "24",
+                     "value" : 4.0,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  } ]
+               }
             }
          }, {
             "localId" : "33",
@@ -6828,21 +6807,21 @@ module.exports['Product'] = {
                         }, {
                            "r" : "28",
                            "s" : [ {
-                              "value" : [ "1.0 ","'mg'" ]
+                              "value" : [ "1.0 ","'g'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
                            "r" : "29",
                            "s" : [ {
-                              "value" : [ "2.0 ","'mg'" ]
+                              "value" : [ "2.0 ","'g'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
                            "r" : "30",
                            "s" : [ {
-                              "value" : [ "0 ","'mg'" ]
+                              "value" : [ "0 ","'g'" ]
                            } ]
                         }, {
                            "value" : [ "}" ]
@@ -6855,7 +6834,27 @@ module.exports['Product'] = {
             } ],
             "expression" : {
                "localId" : "32",
-               "type" : "Null"
+               "type" : "Product",
+               "source" : {
+                  "localId" : "31",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "28",
+                     "value" : 1.0,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "29",
+                     "value" : 2.0,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "30",
+                     "value" : 0,
+                     "unit" : "g",
+                     "type" : "Quantity"
+                  } ]
+               }
             }
          }, {
             "localId" : "39",
@@ -6910,24 +6909,37 @@ module.exports['Product'] = {
                }
             }
          }, {
-            "localId" : "45",
+            "localId" : "47",
             "name" : "product_of_nulls",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "45",
+                  "r" : "47",
                   "s" : [ {
                      "value" : [ "define ","product_of_nulls",": " ]
                   }, {
-                     "r" : "44",
+                     "r" : "46",
                      "s" : [ {
                         "value" : [ "Product","(" ]
                      }, {
-                        "r" : "43",
+                        "r" : "45",
                         "s" : [ {
-                           "value" : [ "{","null",", ","null",", ","null","}" ]
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "42",
+                           "s" : [ {
+                              "r" : "40",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "41",
+                              "s" : [ {
+                                 "value" : [ "Integer" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", ","null",", ","null","}" ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -6936,35 +6948,67 @@ module.exports['Product'] = {
                }
             } ],
             "expression" : {
-               "localId" : "44",
-               "type" : "Null"
+               "localId" : "46",
+               "type" : "Product",
+               "source" : {
+                  "localId" : "45",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "42",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "40",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "41",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "43",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "44",
+                        "type" : "Null"
+                     }
+                  } ]
+               }
             }
          }, {
-            "localId" : "51",
+            "localId" : "53",
             "name" : "product_null",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "51",
+                  "r" : "53",
                   "s" : [ {
                      "value" : [ "define ","product_null",": " ]
                   }, {
-                     "r" : "50",
+                     "r" : "52",
                      "s" : [ {
                         "value" : [ "Product","(" ]
                      }, {
-                        "r" : "49",
+                        "r" : "51",
                         "s" : [ {
-                           "r" : "46",
+                           "r" : "48",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "48",
+                           "r" : "50",
                            "s" : [ {
                               "value" : [ "List<" ]
                            }, {
-                              "r" : "47",
+                              "r" : "49",
                               "s" : [ {
                                  "value" : [ "Decimal" ]
                               } ]
@@ -6979,21 +7023,21 @@ module.exports['Product'] = {
                }
             } ],
             "expression" : {
-               "localId" : "50",
+               "localId" : "52",
                "type" : "Product",
                "source" : {
-                  "localId" : "49",
+                  "localId" : "51",
                   "strict" : false,
                   "type" : "As",
                   "operand" : {
-                     "localId" : "46",
+                     "localId" : "48",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "48",
+                     "localId" : "50",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "47",
+                        "localId" : "49",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -7001,44 +7045,31 @@ module.exports['Product'] = {
                }
             }
          }, {
-            "localId" : "63",
+            "localId" : "65",
             "name" : "product_quantity_null",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "63",
+                  "r" : "65",
                   "s" : [ {
                      "value" : [ "define ","product_quantity_null",": " ]
                   }, {
-                     "r" : "62",
+                     "r" : "64",
                      "s" : [ {
                         "value" : [ "Product","(" ]
                      }, {
-                        "r" : "61",
+                        "r" : "63",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "54",
+                           "r" : "56",
                            "s" : [ {
-                              "r" : "52",
+                              "r" : "54",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "53",
-                              "s" : [ {
-                                 "value" : [ "Quantity" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "57",
-                           "s" : [ {
                               "r" : "55",
-                              "value" : [ "null"," as " ]
-                           }, {
-                              "r" : "56",
                               "s" : [ {
                                  "value" : [ "Quantity" ]
                               } ]
@@ -7046,12 +7077,25 @@ module.exports['Product'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "60",
+                           "r" : "59",
                            "s" : [ {
-                              "r" : "58",
+                              "r" : "57",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "59",
+                              "r" : "58",
+                              "s" : [ {
+                                 "value" : [ "Quantity" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "62",
+                           "s" : [ {
+                              "r" : "60",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "61",
                               "s" : [ {
                                  "value" : [ "Quantity" ]
                               } ]
@@ -7066,8 +7110,52 @@ module.exports['Product'] = {
                }
             } ],
             "expression" : {
-               "localId" : "62",
-               "type" : "Null"
+               "localId" : "64",
+               "type" : "Product",
+               "source" : {
+                  "localId" : "63",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "56",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "54",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "55",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "59",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "57",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "58",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "62",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "60",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "61",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
             }
          } ]
       }
