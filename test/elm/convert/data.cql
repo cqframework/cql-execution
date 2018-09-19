@@ -79,3 +79,13 @@ define NullArg: ToQuantity((null as String))
 define NullArgTime: ToTime((null as String))
 define IncorrectFormatTime: ToTime('10:00PM')
 define InvalidTime: ToTime('25:99.000+00.00')
+
+// @Test: ToBoolean
+define UpperCaseTrue: ToBoolean('TRUE')
+define UpperCaseFalse: ToBoolean('FALSE')
+define LowerCaseTrue: ToBoolean('true')
+define LowerCaseFalse: ToBoolean('false')
+define UpperCaseT: ToBoolean('T')
+define UpperCaseF: ToBoolean('F')
+define LowerCaseT: ToBoolean('t')
+define LowerCaseF: ToBoolean('f')

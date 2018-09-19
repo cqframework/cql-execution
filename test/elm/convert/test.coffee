@@ -250,3 +250,25 @@ describe 'ToTime', ->
 
   it "should throw runtime error for invalid time-of-day", ->
     should(() => @invalidTime.exec(@ctx)).throw("Invalid DateTime String: 25:99.000+00.00")
+
+describe 'ToBoolean', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for TRUE", ->
+    should(@upperCaseTrue.exec(@ctx)).be.true
+
+  it "should return true for FALSE", ->
+    should(@upperCaseFalse.exec(@ctx)).be.false
+
+  it "should return true for true", ->
+    should(@lowerCaseT.exec(@ctx)).be.true
+
+  it "should return true for false", ->
+    should(@lowerCaseF.exec(@ctx)).be.false
+
+  it "should return true for T", ->
+    should(@upperCaseT.exec(@ctx)).be.true
+
+  it "should return true for F", ->
+    should(@upperCaseF.exec(@ctx)).be.false

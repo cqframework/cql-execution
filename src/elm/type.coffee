@@ -25,7 +25,7 @@ module.exports.ToBoolean = class ToBoolean extends Expression
   exec: (ctx) ->
     arg = @execArgs(ctx)
     if arg? and typeof arg != 'undefined'
-      strArg = arg.toString()
+      strArg = arg.toString().toLowerCase()
       if strArg in ["true", "t", "yes", "y", "1"]
         true
       else if strArg in ["false", "f", "no", "n", "0"]
