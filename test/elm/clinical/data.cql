@@ -11,7 +11,11 @@ define Foo: "Acute Pharyngitis"
 // @Test: InValueSet
 valueset "Female": '2.16.840.1.113883.3.560.100.2'
 valueset "Versioned Female": '2.16.840.1.113883.3.560.100.2' version '20121025'
+valueset "SharedCodes": '2.16.840.1.113883.3.000.000.0'
+valueset "ProperSharedCodes": '2.16.840.1.113883.3.000.000.1'
 define String: 'F' in "Female"
+define SharedCodesFoo: 'foo' in "SharedCodes"
+define ProperSharedCodes: 'codeValue' in "ProperSharedCodes"
 define StringInVersionedValueSet: 'F' in "Versioned Female"
 define ShortCode: Code { code: 'F' } in "Female"
 define MediumCode: Code { code: 'F', system: '2.16.840.1.113883.18.2' } in "Female"

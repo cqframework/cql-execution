@@ -472,7 +472,28 @@
     });
 
     ValueSet.prototype.hasMatch = function(code) {
-      return codesInList(toCodeList(code), this.codes);
+      var c2, codesList, codes_codeSystem, i, len, ref;
+      codesList = toCodeList(code);
+      if (codesList.length === 1 && typeof codesList[0] === 'string') {
+        codes_codeSystem = {};
+        ref = this.codes;
+        for (i = 0, len = ref.length; i < len; i++) {
+          c2 = ref[i];
+          if (codesList[0] === c2.code) {
+            if ((codes_codeSystem[c2.code] != null) && codes_codeSystem[c2.code] !== c2.system) {
+              throw new Error('In (valueset) is ambiguous -- multiple matches for ' + c2.code + ' found in value set with different code systems.');
+            } else {
+              codes_codeSystem[c2.code] = c2.system;
+            }
+          }
+        }
+        if (Object.keys(codes_codeSystem).length > 0) {
+          return true;
+        }
+        return false;
+      } else {
+        return codesInList(codesList, this.codes);
+      }
     };
 
     return ValueSet;

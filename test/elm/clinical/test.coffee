@@ -46,6 +46,12 @@ describe 'InValueSet', ->
   it 'should find string code in value set', ->
     @string.exec(@ctx).should.be.true()
 
+  it 'should throw an error when codes are in several codesystems', ->
+    should(() => @sharedCodesFoo.exec(@ctx)).throw('In (valueset) is ambiguous -- multiple matches for foo found in value set with different code systems.')
+
+  it 'should find string code in valueset and not error', ->
+    @properSharedCodes.exec(@ctx).should.be.true()
+
   it 'should find string code in versioned value set', ->
     @stringInVersionedValueSet.exec(@ctx).should.be.true()
 
