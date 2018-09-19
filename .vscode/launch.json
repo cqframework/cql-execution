@@ -21,6 +21,22 @@
         "internalConsoleOptions": "openOnSessionStart"
     },
     {
+      "type": "node",
+      "request": "launch",
+      "name": "Mocha Coffee Test Current File",
+      "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+      "args": [
+          "--compilers",
+          "coffee:coffeescript/register",
+          "--require",
+          "coffeescript",
+          "--recursive",
+          "--colors",
+          "${file}"
+      ],
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
         "type": "node",
         "request": "launch",
         "name": "Mocha Coffee Tests",

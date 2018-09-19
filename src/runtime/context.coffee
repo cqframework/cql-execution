@@ -189,6 +189,7 @@ module.exports.Context = class Context
       when "{urn:hl7-org:elm-types:r1}String" then typeof val is "string"
       when "{urn:hl7-org:elm-types:r1}Concept" then val?.isConcept
       when "{urn:hl7-org:elm-types:r1}DateTime" then val?.isDateTime
+      when "{urn:hl7-org:elm-types:r1}Date" then val?.isDate
       when "{urn:hl7-org:elm-types:r1}Quantity" then val?.isQuantity
       when "{urn:hl7-org:elm-types:r1}Time" then val?.isDateTime && val.isTime()
       else true # TODO: Better checking of custom or complex types
@@ -223,7 +224,7 @@ module.exports.Context = class Context
       ((! val.high?) || @matchesInstanceType(val.high, pointType))
 
 module.exports.PatientContext = class PatientContext extends Context
-  constructor: (@library, @patient, codeService, parameters, @executionDateTime = dt.DateTime.fromDate(new Date())) ->
+  constructor: (@library, @patient, codeService, parameters, @executionDateTime = dt.DateTime.fromJsDate(new Date())) ->
     super(@library, codeService, parameters)
 
   rootContext:  -> @
@@ -239,7 +240,7 @@ module.exports.PatientContext = class PatientContext extends Context
 
 module.exports.PopulationContext = class PopulationContext extends Context
 
-  constructor: (@library, @results, codeService, parameters, @executionDateTime = dt.DateTime.fromDate(new Date())) ->
+  constructor: (@library, @results, codeService, parameters, @executionDateTime = dt.DateTime.fromJsDate(new Date())) ->
     super(@library, codeService, parameters)
 
   rootContext:  -> @

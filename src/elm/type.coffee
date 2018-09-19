@@ -1,6 +1,6 @@
 { Expression, UnimplementedExpression } = require './expression'
 { FunctionRef } = require './reusable'
-{ DateTime } = require '../datatypes/datetime'
+{ DateTime, Date } = require '../datatypes/datetime'
 { Concept } = require '../datatypes/clinical'
 { parseQuantity } = require './quantity'
 { isValidDecimal, isValidInteger, limitDecimalPrecision } = require('../util/math')
@@ -43,13 +43,26 @@ module.exports.ToConcept = class ToConcept extends Expression
     arg = @execArgs(ctx)
     if arg? and typeof arg != 'undefined' then new Concept([arg], arg.display) else null
 
+module.exports.ToDate = class ToDate extends Expression
+  constructor: (json) ->
+    super
+
+  exec: (ctx) ->
+    arg = @execArgs(ctx)
+    if arg? and typeof arg != 'undefined' then Date.parse(arg.toString()) else null
+
 module.exports.ToDateTime = class ToDateTime extends Expression
   constructor: (json) ->
     super
 
   exec: (ctx) ->
     arg = @execArgs(ctx)
-    if arg? and typeof arg != 'undefined' then DateTime.parse(arg.toString()) else null
+    if (not arg?) or (arg == undefined)
+      return null
+    else if arg.isDate
+      return arg.getDateTime()
+    else
+      return DateTime.parse(arg.toString())
 
 module.exports.ToDecimal = class ToDecimal extends Expression
   constructor: (json) ->
@@ -130,6 +143,8 @@ module.exports.Convert = class Convert extends Expression
         new ToQuantity({"type": "ToQuantity", "operand": @operand}).execute(ctx)
       when "{urn:hl7-org:elm-types:r1}DateTime"
         new ToDateTime({"type": "ToDateTime", "operand": @operand}).execute(ctx)
+      when "{urn:hl7-org:elm-types:r1}Date"
+        new ToDate({"type": "ToDate", "operand": @operand}).execute(ctx)
       when "{urn:hl7-org:elm-types:r1}Time"
         new ToTime({"type": "ToTime", "operand": @operand}).execute(ctx)
       else

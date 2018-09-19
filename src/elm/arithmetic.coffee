@@ -14,7 +14,7 @@ module.exports.Add = class Add extends Expression
       null
     else
       args?.reduce (x,y) ->
-        if x.isQuantity  or x.isDateTime
+        if x.isQuantity  or x.isDateTime or x.isDate
           Quantity.doAddition(x,y)
         else
           x + y
@@ -29,7 +29,7 @@ module.exports.Subtract = class Subtract extends Expression
       null
     else
       args.reduce (x,y) ->
-        if x.isQuantity or x.isDateTime
+        if x.isQuantity or x.isDateTime or x.isDate
           Quantity.doSubtraction(x,y)
         else
           x - y

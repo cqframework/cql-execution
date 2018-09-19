@@ -870,7 +870,7 @@ module.exports['ConceptParameterTypes'] = {
 library TestSnippet version '1'
 using QUICK
 parameter FooP DateTime
-parameter FooDP default @2012-04-01
+parameter FooDP default @2012-04-01T12:11:10
 context Patient
 define Foo: FooP
 define Foo2: FooDP
@@ -904,6 +904,151 @@ module.exports['DateTimeParameterTypes'] = {
             "parameterTypeSpecifier" : {
                "localId" : "2",
                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+               "type" : "NamedTypeSpecifier"
+            }
+         }, {
+            "localId" : "5",
+            "name" : "FooDP",
+            "accessLevel" : "Public",
+            "default" : {
+               "localId" : "4",
+               "type" : "DateTime",
+               "year" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2012",
+                  "type" : "Literal"
+               },
+               "month" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "4",
+                  "type" : "Literal"
+               },
+               "day" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "type" : "Literal"
+               },
+               "hour" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "12",
+                  "type" : "Literal"
+               },
+               "minute" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "11",
+                  "type" : "Literal"
+               },
+               "second" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "10",
+                  "type" : "Literal"
+               }
+            }
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "7",
+            "name" : "Foo",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "define ","Foo",": " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "FooP" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "6",
+               "name" : "FooP",
+               "type" : "ParameterRef"
+            }
+         }, {
+            "localId" : "9",
+            "name" : "Foo2",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "define ","Foo2",": " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "FooDP" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "name" : "FooDP",
+               "type" : "ParameterRef"
+            }
+         } ]
+      }
+   }
+}
+
+### DateParameterTypes
+library TestSnippet version '1'
+using QUICK
+parameter FooP Date
+parameter FooDP default @2012-04-01
+context Patient
+define Foo: FooP
+define Foo2: FooDP
+###
+
+module.exports['DateParameterTypes'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "parameters" : {
+         "def" : [ {
+            "localId" : "3",
+            "name" : "FooP",
+            "accessLevel" : "Public",
+            "parameterTypeSpecifier" : {
+               "localId" : "2",
+               "name" : "{urn:hl7-org:elm-types:r1}Date",
                "type" : "NamedTypeSpecifier"
             }
          }, {

@@ -23,7 +23,8 @@ define quantityStr: convert '10 \'A\'' to Quantity
 define posQuantityStr: convert '+10 \'A\'' to Quantity
 define negQuantityStr: convert '-10 \'A\'' to Quantity
 define quantityStrDecimal: convert '10.0 \'mA\'' to Quantity
-define dateStr: convert '2015-01-02' to DateTime
+define dateTimeStr: convert '2015-01-02' to DateTime
+define dateStr: convert '2015-01-02' to Date
 ###
 
 module.exports['FromString'] = {
@@ -581,7 +582,7 @@ module.exports['FromString'] = {
             }
          }, {
             "localId" : "56",
-            "name" : "dateStr",
+            "name" : "dateTimeStr",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -589,7 +590,7 @@ module.exports['FromString'] = {
                "s" : {
                   "r" : "56",
                   "s" : [ {
-                     "value" : [ "define ","dateStr",": " ]
+                     "value" : [ "define ","dateTimeStr",": " ]
                   }, {
                      "r" : "55",
                      "s" : [ {
@@ -615,6 +616,47 @@ module.exports['FromString'] = {
                "type" : "ToDateTime",
                "operand" : {
                   "localId" : "54",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "2015-01-02",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "60",
+            "name" : "dateStr",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "60",
+                  "s" : [ {
+                     "value" : [ "define ","dateStr",": " ]
+                  }, {
+                     "r" : "59",
+                     "s" : [ {
+                        "value" : [ "convert " ]
+                     }, {
+                        "r" : "58",
+                        "s" : [ {
+                           "value" : [ "'2015-01-02'" ]
+                        } ]
+                     }, {
+                        "value" : [ " to " ]
+                     }, {
+                        "r" : "57",
+                        "s" : [ {
+                           "value" : [ "Date" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "59",
+               "type" : "ToDate",
+               "operand" : {
+                  "localId" : "58",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "2015-01-02",
                   "type" : "Literal"
@@ -1329,6 +1371,204 @@ module.exports['FromDateTime'] = {
                   "day" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+
+### FromDate
+library TestSnippet version '1'
+using QUICK
+context Patient
+define dateDateTime: convert ToDate('2015-01-01') to DateTime
+define dateDate: convert ToDate('2015-01-01') to Date
+define dateStr: convert ToDate('2015-01-01') to String
+###
+
+module.exports['FromDate'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "6",
+            "name" : "dateDateTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "6",
+                  "s" : [ {
+                     "value" : [ "define ","dateDateTime",": " ]
+                  }, {
+                     "r" : "5",
+                     "s" : [ {
+                        "value" : [ "convert " ]
+                     }, {
+                        "r" : "4",
+                        "s" : [ {
+                           "value" : [ "ToDate","(" ]
+                        }, {
+                           "r" : "3",
+                           "s" : [ {
+                              "value" : [ "'2015-01-01'" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ " to " ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "DateTime" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "5",
+               "type" : "ToDateTime",
+               "operand" : {
+                  "localId" : "4",
+                  "type" : "ToDate",
+                  "operand" : {
+                     "localId" : "3",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "2015-01-01",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         }, {
+            "localId" : "10",
+            "name" : "dateDate",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "10",
+                  "s" : [ {
+                     "value" : [ "define ","dateDate",": " ]
+                  }, {
+                     "r" : "9",
+                     "s" : [ {
+                        "value" : [ "convert " ]
+                     }, {
+                        "r" : "9",
+                        "s" : [ {
+                           "value" : [ "ToDate","(" ]
+                        }, {
+                           "r" : "8",
+                           "s" : [ {
+                              "value" : [ "'2015-01-01'" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ " to " ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "Date" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "9",
+               "type" : "ToDate",
+               "operand" : {
+                  "localId" : "8",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "2015-01-01",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "15",
+            "name" : "dateStr",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "15",
+                  "s" : [ {
+                     "value" : [ "define ","dateStr",": " ]
+                  }, {
+                     "r" : "14",
+                     "s" : [ {
+                        "value" : [ "convert " ]
+                     }, {
+                        "r" : "13",
+                        "s" : [ {
+                           "value" : [ "ToDate","(" ]
+                        }, {
+                           "r" : "12",
+                           "s" : [ {
+                              "value" : [ "'2015-01-01'" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ " to " ]
+                     }, {
+                        "r" : "11",
+                        "s" : [ {
+                           "value" : [ "String" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "14",
+               "type" : "ToString",
+               "operand" : {
+                  "localId" : "13",
+                  "type" : "ToDate",
+                  "operand" : {
+                     "localId" : "12",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "2015-01-01",
                      "type" : "Literal"
                   }
                }
