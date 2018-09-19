@@ -184,7 +184,7 @@ valueset "ProperSharedCodes": '2.16.840.1.113883.3.000.000.1'
 context Patient
 define String: 'F' in "Female"
 define SharedCodesFoo: 'foo' in "SharedCodes"
-define ProperSharedCodes: 'codeValue' in "ProperSharedCodes"
+define ProperSharedCodesCodeValue: 'codeValue' in "ProperSharedCodes"
 define StringInVersionedValueSet: 'F' in "Versioned Female"
 define ShortCode: Code { code: 'F' } in "Female"
 define MediumCode: Code { code: 'F', system: '2.16.840.1.113883.18.2' } in "Female"
@@ -203,22 +203,8 @@ define InWrongListOfCodes: WrongListOfCodes in "Female"
 define ListOfCodesWithNull: { Code { code: 'M' }, (null as Code), Code { code: 'F', system: '2.16.840.1.113883.18.2' } } in "Female"
 ###
 
-###
-Translation Error(s):
-[10:1, 10:60] Identifier ProperSharedCodes is already in use in this library.
-###
 module.exports['InValueSet'] = {
    "library" : {
-      "annotation" : [ {
-         "startLine" : 10,
-         "startChar" : 1,
-         "endLine" : 10,
-         "endChar" : 60,
-         "message" : "Identifier ProperSharedCodes is already in use in this library.",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -360,9 +346,34 @@ module.exports['InValueSet'] = {
                }
             }
          }, {
-            "name" : "ProperSharedCodes",
+            "localId" : "17",
+            "name" : "ProperSharedCodesCodeValue",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "17",
+                  "s" : [ {
+                     "value" : [ "define ","ProperSharedCodesCodeValue",": " ]
+                  }, {
+                     "r" : "16",
+                     "s" : [ {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "'codeValue'" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "15",
+                        "s" : [ {
+                           "value" : [ "\"ProperSharedCodes\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
             "expression" : {
                "localId" : "16",
                "type" : "InValueSet",
