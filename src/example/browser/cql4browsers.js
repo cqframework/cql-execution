@@ -44785,8 +44785,9 @@
         return compareObjects(a, b, equivalent);
       case '[object String]':
         if (bClass === '[object String]') {
-          a = a.toLowerCase();
-          b = b.toLowerCase();
+          return (a.localeCompare(b, 'en', {
+            sensitivity: 'base'
+          })) === 0;
         }
     }
     return equals(a, b);

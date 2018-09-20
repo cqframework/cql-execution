@@ -58,9 +58,8 @@ module.exports.equivalent = equivalent = (a, b) ->
     when '[object String]'
       # Make sure b is also a string
       if bClass == '[object String]'
-        # String equivalence is case-insensitive
-        a = a.toLowerCase()
-        b = b.toLowerCase()
+        # String equivalence is case- and locale insensitive
+        return (a.localeCompare(b, 'en', {sensitivity: 'base'})) == 0
 
   return equals a, b
 

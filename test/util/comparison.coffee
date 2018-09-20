@@ -148,3 +148,11 @@ describe 'equivalent', ->
     equivalent(new Code('1234', 'System', 'version2016', 'Display Name'), new Concept([new Code('1111', 'System', 'version2016', undefined), new Code('1','2','3', undefined)])).should.be.false()
     equivalent(new Code('1234', 'System', 'version2016', 'Display Name'), new Concept([new Code('1234', 'System', 'version2017', undefined), new Code('1','2','3', undefined)])).should.be.true()
     equivalent(new Code('1234', 'System', 'version2016', 'Display Name'), new Concept([new Code('1111', 'System', 'version2017', undefined), new Code('1','2','3', undefined)])).should.be.false()
+
+  it 'should detect equivalence/inequivalence for strings', ->
+    equivalent('', '').should.be.true()
+    equivalent('a', 'a').should.be.true()
+    equivalent('réservé', 'RESERVE').should.be.true()
+    equivalent('a', 'A').should.be.true()
+    equivalent('abc', 'ab' + 'c').should.be.true()
+    equivalent('abc', 'abcd').should.be.false()
