@@ -385,9 +385,9 @@ describe 'Date.before', ->
     Date.parse('2000-02-15').before(Date.parse('2000-02-15'), Date.Unit.DAY).should.be.false()
     Date.parse('2000-02-14').before(Date.parse('2000-02-15'), Date.Unit.DAY).should.be.true()
 
-  it 'should return null in cases where a is b but there are unknown values', ->
-    should.not.exist Date.parse('2000-01').before(Date.parse('2000-01'))
-    should.not.exist Date.parse('2000').before(Date.parse('2000'))
+  it 'should return false in cases where a is b but there are unknown values and precision matches', ->
+    Date.parse('2000-01').before(Date.parse('2000-01')).should.be.false()
+    Date.parse('2000').before(Date.parse('2000')).should.be.false()
 
   it 'should return null in cases where a has unknown values that prevent deterministic result', ->
     should.not.exist Date.parse('2000-01').before(Date.parse('2000-01-02'))

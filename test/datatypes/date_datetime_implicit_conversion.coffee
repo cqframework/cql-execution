@@ -265,9 +265,9 @@ describe 'DateTime.before with implicit conversion of first variable', ->
     Date.parse('2000-02-15').before(DateTime.parse('2000-02-15T12:00:00.0+00'), DateTime.Unit.DAY).should.be.false()
     Date.parse('2000-02-14').before(DateTime.parse('2000-02-15T23:00:00.0+00'), DateTime.Unit.DAY).should.be.true()
 
-  it 'should return null in cases where a is b but there are unknown values', ->
-    should.not.exist Date.parse('2000-01').before(DateTime.parse('2000-01'))
-    should.not.exist Date.parse('2000').before(DateTime.parse('2000'))
+  it 'should return false in cases where a is b but there are unknown values and precision matches', ->
+    Date.parse('2000-01').before(DateTime.parse('2000-01')).should.be.false()
+    Date.parse('2000').before(DateTime.parse('2000')).should.be.false()
 
   it 'should return null in cases where b has unknown values that prevent deterministic result', ->
     should.not.exist Date.parse('2000-01-01').before(DateTime.parse('2000-01-01T00:00:00'))
