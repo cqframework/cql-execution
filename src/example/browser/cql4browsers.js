@@ -734,30 +734,6 @@
       return d.reducedPrecision(this.getPrecision());
     };
 
-    DateTime.prototype.equals = function(other) {
-      var field, i, len, ref1;
-      if (!(other instanceof DateTime)) {
-        return null;
-      }
-      if (this.timezoneOffset !== other.timezoneOffset) {
-        other = other.convertToTimezoneOffset(this.timezoneOffset);
-      }
-      ref1 = DateTime.FIELDS;
-      for (i = 0, len = ref1.length; i < len; i++) {
-        field = ref1[i];
-        if ((this[field] != null) && (other[field] != null)) {
-          if (this[field] !== other[field]) {
-            return false;
-          }
-        } else if ((this[field] == null) && (other[field] == null)) {
-          return true;
-        } else {
-          return null;
-        }
-      }
-      return true;
-    };
-
     DateTime.prototype.sameOrBefore = function(other, precision) {
       var field, i, len, ref1;
       other = this._implicitlyConvert(other);
@@ -1281,10 +1257,6 @@
       }
     };
 
-    Date.prototype.equals = function(other) {
-      return this.sameAs(other, Date.Unit.DAY);
-    };
-
     Date.prototype.sameOrBefore = function(other, precision) {
       var diff;
       if (precision == null) {
@@ -1603,6 +1575,34 @@
       }
       if ((this[field] == null) && (other[field] != null)) {
         return false;
+      }
+    }
+    return true;
+  };
+
+  DateTime.prototype.equals = Date.prototype.equals = function(other) {
+    var field, i, len, ref1;
+    if (!(other.isDate || other.isDateTime)) {
+      return null;
+    } else if (this.isDate && other.isDateTime) {
+      return this.getDateTime().equals(other);
+    } else if (this.isDateTime && other.isDate) {
+      other = other.getDateTime();
+    }
+    if (this.timezoneOffset !== other.timezoneOffset) {
+      other = other.convertToTimezoneOffset(this.timezoneOffset);
+    }
+    ref1 = this.constructor.FIELDS;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      field = ref1[i];
+      if ((this[field] != null) && (other[field] != null)) {
+        if (this[field] !== other[field]) {
+          return false;
+        }
+      } else if ((this[field] == null) && (other[field] == null)) {
+        return true;
+      } else {
+        return null;
       }
     }
     return true;
