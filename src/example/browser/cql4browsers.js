@@ -585,7 +585,7 @@
 
   Uncertainty = require('./uncertainty').Uncertainty;
 
-  ref = require('../util/util'), makeJsDate = ref.makeJsDate, jsDate = ref.jsDate;
+  ref = require('../util/util'), makeJsDate = ref.makeJsDate, jsDate = ref.jsDate, normalizeMillisecondsField = ref.normalizeMillisecondsField, normalizeMillisecondsFieldInString = ref.normalizeMillisecondsFieldInString, getTimezoneSeparatorFromString = ref.getTimezoneSeparatorFromString;
 
   moment = require('moment');
 
@@ -610,7 +610,7 @@
       }
       matches = /(\d{4})(-(\d{2}))?(-(\d{2}))?(T((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(\:?(\d{2}))?))?)?/.exec(string);
       if (matches == null) {
-        throw new Error('Invalid DateTime String: ' + string);
+        return null;
       }
       years = matches[1];
       months = matches[3];
@@ -626,7 +626,7 @@
         string = normalizeMillisecondsFieldInString(string, matches);
       }
       if (!isValidDateTimeStringFormat(string)) {
-        throw new Error('Invalid DateTime String: ' + string);
+        return null;
       }
       args = [years, months, days, hours, minutes, seconds, milliseconds];
       args = (function() {
@@ -1149,13 +1149,13 @@
       }
       matches = /(\d{4})(-(\d{2}))?(-(\d{2}))?/.exec(string);
       if (matches == null) {
-        throw new Error('Invalid Date String: ' + string);
+        return null;
       }
       years = matches[1];
       months = matches[3];
       days = matches[5];
       if (!isValidDateStringFormat(string)) {
-        throw new Error('Invalid Date String: ' + string);
+        return null;
       }
       args = [years, months, days];
       args = (function() {
@@ -1562,25 +1562,6 @@
     return true;
   };
 
-  normalizeMillisecondsFieldInString = function(string, matches) {
-    var beforeMs, msAndAfter, msString, ref1, timezoneField, timezoneSeparator;
-    msString = matches[14];
-    msString = normalizeMillisecondsField(msString);
-    ref1 = string.split('.'), beforeMs = ref1[0], msAndAfter = ref1[1];
-    timezoneSeparator = getTimezoneSeparatorFromString(msAndAfter);
-    if (!!timezoneSeparator) {
-      timezoneField = msAndAfter != null ? msAndAfter.split(timezoneSeparator)[1] : void 0;
-    }
-    if (timezoneField == null) {
-      timezoneField = '';
-    }
-    return string = beforeMs + '.' + msString + timezoneSeparator + timezoneField;
-  };
-
-  normalizeMillisecondsField = function(msString) {
-    return msString = (msString + "00").substring(0, 3);
-  };
-
   isValidDateStringFormat = function(string) {
     var cqlFormatStringWithLength, cqlFormats, format, i, len, strict;
     if (typeof string !== 'string') {
@@ -1633,17 +1614,6 @@
       momentString += timeAndTimeZoneOffset;
     }
     return momentString = momentString.replace(/f/g, 'S');
-  };
-
-  getTimezoneSeparatorFromString = function(string) {
-    var ref1, ref2, timezoneSeparator;
-    if ((string != null ? (ref1 = string.match(/-/)) != null ? ref1.length : void 0 : void 0) === 1) {
-      return timezoneSeparator = '-';
-    } else if ((string != null ? (ref2 = string.match(/\+/)) != null ? ref2.length : void 0 : void 0) === 1) {
-      return timezoneSeparator = '+';
-    } else {
-      return timezoneSeparator = '';
-    }
   };
 
   module.exports.DateTime = DateTime;
@@ -6253,7 +6223,9 @@
         throw new Error("Cannot create a quantity with an undefined value");
       } else {
         this.value = parseFloat(json.value);
-        isValidDecimal(this.value);
+        if (!isValidDecimal(this.value)) {
+          throw new Error("Cannot create a quantity with an invalid decimal value");
+        }
       }
       if ((this.unit != null) && !is_valid_ucum_unit(this.unit)) {
         throw new Error("\'" + this.unit + "\' is not a valid UCUM unit.");
@@ -6368,15 +6340,27 @@
           can_val = this.to_ucum();
           other_can_value = other.to_ucum();
           ucum_value = ucum_multiply(can_val, [[operator, other_can_value]]);
-          return createQuantity(ucum_value.value, units_to_string(ucum_value.units));
+          try {
+            return createQuantity(ucum_value.value, units_to_string(ucum_value.units));
+          } catch (error) {
+            return null;
+          }
         } else {
           value = operator === "/" ? this.value / other.value : this.value * other.value;
           unit = this.unit || other.unit;
-          return createQuantity(decimalAdjust("round", value, -8), unit);
+          try {
+            return createQuantity(decimalAdjust("round", value, -8), unit);
+          } catch (error) {
+            return null;
+          }
         }
       } else {
         value = operator === "/" ? this.value / other : this.value * other;
-        return createQuantity(decimalAdjust("round", value, -8), this.unit);
+        try {
+          return createQuantity(decimalAdjust("round", value, -8), this.unit);
+        } catch (error) {
+          return null;
+        }
       }
     };
 
@@ -6575,7 +6559,7 @@
         unit: unit
       });
     } else {
-      throw new Error("Unable to parse Quantity");
+      return null;
     }
   };
 
@@ -6583,6 +6567,9 @@
     var base, val;
     if (a instanceof Quantity && b instanceof Quantity) {
       val = convert_value(b.value, b.unit, a.unit);
+      if (val == null) {
+        return null;
+      }
       return new Quantity({
         unit: a.unit,
         value: a.value + val
@@ -6596,6 +6583,9 @@
     var base, val;
     if (a instanceof Quantity && b instanceof Quantity) {
       val = convert_value(b.value, b.unit, a.unit);
+      if (val == null) {
+        return null;
+      }
       return new Quantity({
         unit: a.unit,
         value: a.value - val
@@ -7606,7 +7596,7 @@
 },{"./builder":14,"./expression":20}],38:[function(require,module,exports){
 // Generated by CoffeeScript 1.12.7
 (function() {
-  var As, Concept, Convert, Date, DateTime, Expression, FunctionRef, IntervalTypeSpecifier, Is, ListTypeSpecifier, NamedTypeSpecifier, ToBoolean, ToConcept, ToDate, ToDateTime, ToDecimal, ToInteger, ToQuantity, ToString, ToTime, TupleTypeSpecifier, UnimplementedExpression, isValidDecimal, isValidInteger, limitDecimalPrecision, parseQuantity, ref, ref1, ref2,
+  var As, Concept, Convert, Date, DateTime, Expression, FunctionRef, IntervalTypeSpecifier, Is, ListTypeSpecifier, NamedTypeSpecifier, ToBoolean, ToConcept, ToDate, ToDateTime, ToDecimal, ToInteger, ToQuantity, ToString, ToTime, TupleTypeSpecifier, UnimplementedExpression, isValidDecimal, isValidInteger, limitDecimalPrecision, normalizeMillisecondsField, normalizeMillisecondsFieldInString, parseQuantity, ref, ref1, ref2, ref3,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
@@ -7622,15 +7612,17 @@
 
   ref2 = require('../util/math'), isValidDecimal = ref2.isValidDecimal, isValidInteger = ref2.isValidInteger, limitDecimalPrecision = ref2.limitDecimalPrecision;
 
+  ref3 = require('../util/util'), normalizeMillisecondsField = ref3.normalizeMillisecondsField, normalizeMillisecondsFieldInString = ref3.normalizeMillisecondsFieldInString;
+
   module.exports.As = As = (function(superClass) {
     extend(As, superClass);
 
     function As(json) {
-      var ref3;
+      var ref4;
       As.__super__.constructor.apply(this, arguments);
       this.asType = json.asType;
       this.asTypeSpecifier = json.asTypeSpecifier;
-      this.strict = (ref3 = json.strict) != null ? ref3 : false;
+      this.strict = (ref4 = json.strict) != null ? ref4 : false;
     }
 
     As.prototype.exec = function(ctx) {
@@ -7750,9 +7742,8 @@
         if (isValidDecimal(decimal)) {
           return decimal;
         }
-      } else {
-        return null;
       }
+      return null;
     };
 
     return ToDecimal;
@@ -7774,9 +7765,8 @@
         if (isValidInteger(integer)) {
           return integer;
         }
-      } else {
-        return null;
       }
+      return null;
     };
 
     return ToInteger;
@@ -7834,15 +7824,46 @@
     }
 
     ToTime.prototype.exec = function(ctx) {
-      var arg, dt;
+      var arg, hours, matches, milliseconds, minutes, seconds, timeString, timezoneOffset, tz;
       arg = this.execArgs(ctx);
       if ((arg != null) && typeof arg !== 'undefined') {
-        dt = DateTime.parse(arg.toString());
-        if ((dt != null) && typeof dt !== 'undefined') {
-          return dt.getTime();
-        } else {
+        timeString = arg.toString();
+        matches = /T((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(\:?(\d{2}))?))?/.exec(timeString);
+        if (matches == null) {
           return null;
         }
+        hours = matches[2];
+        minutes = matches[4];
+        seconds = matches[6];
+        if (hours != null) {
+          if (!(hours >= 0 && hours <= 23)) {
+            return null;
+          }
+          hours = parseInt(hours, 10);
+        }
+        if (minutes != null) {
+          if (!(minutes >= 0 && minutes <= 59)) {
+            return null;
+          }
+          minutes = parseInt(minutes, 10);
+        }
+        if (seconds != null) {
+          if (!(seconds >= 0 && seconds <= 59)) {
+            return null;
+          }
+          seconds = parseInt(seconds, 10);
+        }
+        milliseconds = matches[8];
+        if (milliseconds != null) {
+          milliseconds = parseInt(normalizeMillisecondsField(milliseconds));
+        }
+        if (matches[11] != null) {
+          tz = parseInt(matches[12], 10) + (matches[14] != null ? parseInt(matches[14], 10) / 60 : 0);
+          timezoneOffset = matches[11] === '+' ? tz : tz * -1;
+        } else if (matches[9] === 'Z') {
+          timezoneOffset = 0;
+        }
+        return new DateTime(0, 1, 1, hours, minutes, seconds, milliseconds, timezoneOffset);
       } else {
         return null;
       }
@@ -7920,13 +7941,17 @@
   module.exports.Is = Is = (function(superClass) {
     extend(Is, superClass);
 
-    function Is() {
-      return Is.__super__.constructor.apply(this, arguments);
+    function Is(json) {
+      Is.__super__.constructor.apply(this, arguments);
+      this.operand = json.operand;
+      this.toType = json.toType;
     }
+
+    Is.prototype.exec = function(ctx) {};
 
     return Is;
 
-  })(UnimplementedExpression);
+  })(Expression);
 
   module.exports.IntervalTypeSpecifier = IntervalTypeSpecifier = (function(superClass) {
     extend(IntervalTypeSpecifier, superClass);
@@ -7976,7 +8001,7 @@
 
 
 
-},{"../datatypes/clinical":5,"../datatypes/datetime":7,"../util/math":135,"./expression":20,"./quantity":32,"./reusable":35}],39:[function(require,module,exports){
+},{"../datatypes/clinical":5,"../datatypes/datetime":7,"../util/math":135,"../util/util":136,"./expression":20,"./quantity":32,"./reusable":35}],39:[function(require,module,exports){
 // Generated by CoffeeScript 1.12.7
 (function() {
   window.cql = require('../../cql');
@@ -44944,26 +44969,26 @@
 
   module.exports.isValidInteger = isValidInteger = function(integer) {
     if (isNaN(integer)) {
-      throw new Error("Unable to parse Integer");
+      return false;
     }
     if (integer > MAX_INT_VALUE) {
-      throw new Error("Maximum Integer value exceeded");
+      return false;
     }
     if (integer < MIN_INT_VALUE) {
-      throw new Error("Minimum Integer value exceeded");
+      return false;
     }
     return true;
   };
 
   module.exports.isValidDecimal = isValidDecimal = function(decimal) {
     if (isNaN(decimal)) {
-      throw new Error("Unable to parse Decimal");
+      return false;
     }
     if (decimal > MAX_FLOAT_VALUE) {
-      throw new Error("Maximum Decimal value exceeded");
+      return false;
     }
     if (decimal < MIN_FLOAT_VALUE) {
-      throw new Error("Minimum Decimal value exceeded");
+      return false;
     }
     return true;
   };
@@ -45130,7 +45155,7 @@
 },{"../datatypes/datetime":7,"../datatypes/exception":8,"../datatypes/uncertainty":11}],136:[function(require,module,exports){
 // Generated by CoffeeScript 1.12.7
 (function() {
-  var typeIsArray;
+  var getTimezoneSeparatorFromString, normalizeMillisecondsField, normalizeMillisecondsFieldInString, typeIsArray;
 
   module.exports.compact = function(things) {
     return things.filter(function(x) {
@@ -45184,6 +45209,36 @@
   };
 
   module.exports.jsDate = Date;
+
+  module.exports.normalizeMillisecondsFieldInString = normalizeMillisecondsFieldInString = function(string, matches) {
+    var beforeMs, msAndAfter, msString, ref, timezoneField, timezoneSeparator;
+    msString = matches[14];
+    msString = normalizeMillisecondsField(msString);
+    ref = string.split('.'), beforeMs = ref[0], msAndAfter = ref[1];
+    timezoneSeparator = getTimezoneSeparatorFromString(msAndAfter);
+    if (!!timezoneSeparator) {
+      timezoneField = msAndAfter != null ? msAndAfter.split(timezoneSeparator)[1] : void 0;
+    }
+    if (timezoneField == null) {
+      timezoneField = '';
+    }
+    return string = beforeMs + '.' + msString + timezoneSeparator + timezoneField;
+  };
+
+  module.exports.normalizeMillisecondsField = normalizeMillisecondsField = function(msString) {
+    return msString = (msString + "00").substring(0, 3);
+  };
+
+  module.exports.getTimezoneSeparatorFromString = getTimezoneSeparatorFromString = function(string) {
+    var ref, ref1, timezoneSeparator;
+    if ((string != null ? (ref = string.match(/-/)) != null ? ref.length : void 0 : void 0) === 1) {
+      return timezoneSeparator = '-';
+    } else if ((string != null ? (ref1 = string.match(/\+/)) != null ? ref1.length : void 0 : void 0) === 1) {
+      return timezoneSeparator = '+';
+    } else {
+      return timezoneSeparator = '';
+    }
+  };
 
 }).call(this);
 
