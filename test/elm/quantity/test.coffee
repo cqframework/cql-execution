@@ -63,3 +63,19 @@ describe 'Quantity', ->
     result = numerator.dividedBy(denominator)
     result.unit.should.equal "1"
     result.value.should.equal -2.75
+
+  it 'should allow for singular time units', ->
+    year = new Quantity({unit: "year", value: 4})
+    month = new Quantity({unit: "month", value: 4})
+    day = new Quantity({unit: "day", value: 4})
+    hour = new Quantity({unit: "hour", value: 4})
+    minute = new Quantity({unit: "minute", value: 4})
+    second = new Quantity({unit: "second", value: 4})
+    millisecond = new Quantity({unit: "millisecond", value: 4})
+    year.equals(new Quantity({unit: "years", value: 4})).should.be.true()
+    month.equals(new Quantity({unit: "months", value: 4})).should.be.true()
+    day.equals(new Quantity({unit: "days", value: 4})).should.be.true()
+    hour.equals(new Quantity({unit: "hours", value: 4})).should.be.true()
+    minute.equals(new Quantity({unit: "minutes", value: 4})).should.be.true()
+    second.equals(new Quantity({unit: "seconds", value: 4})).should.be.true()
+    millisecond.equals(new Quantity({unit: "milliseconds", value: 4})).should.be.true()
