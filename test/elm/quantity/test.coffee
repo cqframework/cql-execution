@@ -1,6 +1,6 @@
 should = require 'should'
 setup = require '../../setup'
-{Quantity} = require '../../../lib/elm/quantity'
+{ Quantity, doAddition, doSubtraction, doMultiplication, doDivision } = require '../../../lib/elm/quantity'
 
 describe 'Quantity', ->
   it 'should allow creation of Quantity with valid ucum units', ->
@@ -79,3 +79,27 @@ describe 'Quantity', ->
     minute.equals(new Quantity({unit: "minutes", value: 4})).should.be.true()
     second.equals(new Quantity({unit: "seconds", value: 4})).should.be.true()
     millisecond.equals(new Quantity({unit: "milliseconds", value: 4})).should.be.true()
+  it 'added to Quantity with invalid ucum units results in null', ->
+    quantity1 = new Quantity({unit:"m", value: 2})
+    quantity2 = new Quantity({unit: "m", value: 2})
+    quantity2.unit = "fakeUnit"
+    should(doAddition(quantity1, quantity2)).be.null()
+
+  it 'subtracted from Quantity with invalid ucum units results in null', ->
+    quantity1 = new Quantity({unit:"m", value: 2})
+    quantity2 = new Quantity({unit: "m", value: 2})
+    quantity2.unit = "fakeUnit"
+    should(doSubtraction(quantity1, quantity2)).be.null()
+
+  it 'multiplied by Quantity with invalid ucum units results in null', ->
+    quantity1 = new Quantity({unit:"m", value: 2})
+    quantity2 = new Quantity({unit: "m", value: 2})
+    quantity2.unit = "fakeUnit"
+    should(doMultiplication(quantity1, ".")).be.null()
+
+  it 'divided by Quantity with invalid ucum units results in null', ->
+    quantity1 = new Quantity({unit:"m", value: 2})
+    quantity2 = new Quantity({unit: "m", value: 2})
+    quantity2.unit = "fakeUnit"
+    should(doDivision(quantity1, "/")).be.null()
+
