@@ -41,15 +41,15 @@ describe 'Date', ->
     d = new Date(2012, 10, 25)
     d.toString().should.eql '2012-10-25'
 
-  it 'should throw runtime error when parsing non-string', ->
-    should(() => Date.parse 20121025).throw(/.*Invalid Date String.*/)
+  it 'should return null when parsing non-string', ->
+    should(Date.parse 20121025).be.null()
 
-  it 'should throw runtime error when parsing invalid string format', ->
-    should(() => Date.parse '20121025').throw(/.*Invalid Date String.*/)
+  it 'should return null when parsing invalid string format', ->
+    should(Date.parse '20121025').be.null()
 
-  it 'should throw runtime error when parsing invalid date/time values', ->
-    should(() => Date.parse '0000-00-00').throw(/.*Invalid Date String.*/)
-    should(() => Date.parse '2000-11-31').throw(/.*Invalid Date String.*/)
+  it 'should return null when parsing invalid date/time values', ->
+    should(Date.parse '0000-00-00').be.null()
+    should(Date.parse '2000-11-31').be.null()
 
   it 'should not parse null input', ->
     should.not.exist Date.parse null
