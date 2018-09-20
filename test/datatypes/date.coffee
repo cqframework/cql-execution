@@ -567,9 +567,9 @@ describe 'Date.sameOrAfter', ->
     Date.parse('2000-02-15').sameOrAfter(Date.parse('2000-02-15'), Date.Unit.DAY).should.be.true()
     Date.parse('2000-02-14').sameOrAfter(Date.parse('2000-02-15'), Date.Unit.DAY).should.be.false()
 
-  it 'should return null in cases where a is b but there and b have unknown values', ->
-    should.not.exist Date.parse('2000-01').sameOrAfter(Date.parse('2000-01'))
-    should.not.exist Date.parse('2000').sameOrAfter(Date.parse('2000'))
+  it 'should return true in cases where a is b but there and b have unknown values but matching precision', ->
+    Date.parse('2000-01').sameOrAfter(Date.parse('2000-01')).should.be.true()
+    Date.parse('2000').sameOrAfter(Date.parse('2000')).should.be.true()
 
   it 'should return null in cases where a has unknown values that prevent deterministic result', ->
     should.not.exist Date.parse('2000-01').sameOrAfter(Date.parse('2000-01-31'))
@@ -583,17 +583,17 @@ describe 'Date.sameOrAfter', ->
     Date.parse('2000-02').sameOrAfter(Date.parse('2000-01-31')).should.be.true()
     Date.parse('2001').sameOrAfter(Date.parse('2000-12-31')).should.be.true()
 
-  it 'should accept cases where a has unknown values but is still deterministicly after or same as b', ->
-    Date.parse('2000-01').sameOrAfter(Date.parse('2000-01-01')).should.be.true()
-    Date.parse('2000').sameOrAfter(Date.parse('2000-01-01')).should.be.true()
+  it 'should accept cases where a has unknown values but is not deterministicly after or same as b', ->
+    should.not.exist Date.parse('2000-01').sameOrAfter(Date.parse('2000-01-01'))
+    should.not.exist Date.parse('2000').sameOrAfter(Date.parse('2000-01-01'))
 
   it 'should accept cases where b has unknown values but a is still deterministicly after or same as b', ->
     Date.parse('2000-02-01').sameOrAfter(Date.parse('2000-01')).should.be.true()
     Date.parse('2001-01-01').sameOrAfter(Date.parse('2000')).should.be.true()
 
-  it 'should accept cases where b has unknown values but a is still deterministicly same as or after b', ->
-    Date.parse('2000-01-31').sameOrAfter(Date.parse('2000-01')).should.be.true()
-    Date.parse('2000-12-31').sameOrAfter(Date.parse('2000')).should.be.true()
+  it 'should return null where b has unknown values but a is not deterministicly same as or after b', ->
+    should.not.exist Date.parse('2000-01-31').sameOrAfter(Date.parse('2000-01'))
+    should.not.exist Date.parse('2000-12-31').sameOrAfter(Date.parse('2000'))
 
   it 'should reject cases where a has unknown values but is still deterministicly before b', ->
     Date.parse('2000-01').sameOrAfter(Date.parse('2000-02-01')).should.be.false()
