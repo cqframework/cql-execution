@@ -2,6 +2,7 @@ should = require 'should'
 setup = require '../../setup'
 data = require './data'
 {isNull} = require '../../../lib/util/util'
+{DateTime} = require '../../../lib/datatypes/datetime'
 
 describe 'FromString', ->
   @beforeEach ->
@@ -22,8 +23,8 @@ describe 'FromString', ->
   it "should convert '10.2' to Decimal", ->
     @decimalValid.exec(@ctx).should.equal 10.2
 
-  it "should throw error trying to convert 'abc' to Decimal", ->
-    should(() => @decimalInvalid.exec(@ctx)).throw("Unable to parse Decimal")
+  it "should be null trying to convert 'abc' to Decimal", ->
+    should(@decimalInvalid.exec(@ctx)).be.null()
 
   it "should convert '10' to Integer", ->
     @integerValid.exec(@ctx).should.equal 10
@@ -31,8 +32,8 @@ describe 'FromString', ->
   it "should convert '10.2' to Integer 10", ->
     @integerDropDecimal.exec(@ctx).should.equal 10
 
-  it "should throw error trying to convert 'abc' to Integer", ->
-    should(() => @integerInvalid.exec(@ctx)).throw("Unable to parse Integer")
+  it "should be null trying to convert 'abc' to Integer", ->
+    should(@integerInvalid.exec(@ctx)).be.null()
 
   it "should convert \"10 'A'\" to Quantity", ->
     quantity = @quantityStr.exec(@ctx)
@@ -67,6 +68,25 @@ describe 'FromString', ->
     date.month.should.equal 1
     date.day.should.equal 2
     date.isDate.should.equal.true
+
+  it 'should be null if cannot convert', ->
+    should(@nullConvert.exec(@ctx)).be.null()
+
+  it 'should convert DateTime string with Z', ->
+    expectedDateTime = new DateTime(2014, 1, 1, 14, 30, 0, 0, 0)
+    @zDateTime.exec(@ctx).equals(expectedDateTime).should.be.true()
+
+  it 'should convert DateTime string with timezone offset', ->
+    expectedDateTime = new DateTime(2014, 1, 1, 14, 30, 0, 0, -7)
+    @timezoneDateTime.exec(@ctx).equals(expectedDateTime).should.be.true()
+
+  it 'should convert Time string with Z', ->
+    expectedTime = new DateTime(0, 1, 1, 14, 30, 0, 0, 0)
+    @zTime.exec(@ctx).equals(expectedTime).should.be.true()
+
+  it 'should convert Time string with timezone offset', ->
+    expectedTime = new DateTime(0, 1, 1, 14, 30, 0, 0, -7)
+    @timezoneTime.exec(@ctx).equals(expectedTime).should.be.true()
 
 describe 'FromInteger', ->
   @beforeEach ->
@@ -190,18 +210,18 @@ describe 'ToDecimal', ->
   it "should truncate decimal to 8 digits after decimal point", ->
     @tooPrecise.exec(@ctx).should.equal(0.44444444)
 
-  it "should not return decimal that is above max decimal value", ->
-    should(() => @tooLargeDec.exec(@ctx)).throw("Maximum Decimal value exceeded")
+  it "should be null for decimal that is above max decimal value", ->
+    should(@tooLargeDec.exec(@ctx)).be.null()
 
-  it "should not return decimal that is below min decimal value", ->
-    should(() => @tooSmallDec.exec(@ctx)).throw("Minimum Decimal value exceeded")
+  it "should return null for decimal that is below min decimal value", ->
+    should(@tooSmallDec.exec(@ctx)).be.null()
 
   it "should convert null to null", ->
     should(@nullDecimal.exec(@ctx)).not.exist
 
-  it.skip "should throw runtime error if wrong format (+.1)", ->
+  it.skip "should be null if wrong format (+.1)", ->
     # TODO: parseFloat is more forgiving than the CQL spec, so this does get converted
-    should(() => @wrongFormat.exec(@ctx)).throw("FOO")
+    should(@wrongFormat.exec(@ctx)).be.null()
 
 describe 'ToInteger', ->
   @beforeEach ->
@@ -216,24 +236,24 @@ describe 'ToInteger', ->
   it "should return negative integer", ->
     @negativeSign.exec(@ctx).should.equal(-12345)
 
-  it "should not return integer larger than max", ->
-    should(() => @tooLargeInt.exec(@ctx)).throw("Maximum Integer value exceeded")
+  it "should return null if integer larger than max", ->
+    should(@tooLargeInt.exec(@ctx)).be.null()
 
-  it "should not return integer smaller than min", ->
-    should(() => @tooSmallInt.exec(@ctx)).throw("Minimum Integer value exceeded")
+  it "should return null if integer smaller than min", ->
+    should(@tooSmallInt.exec(@ctx)).be.null()
 
 describe 'ToQuantity', ->
   @beforeEach ->
     setup @, data
 
-  it "should throw runtime error if string is not formatted properly", ->
-    should(() => @wrongFormatQuantity.exec(@ctx)).throw("Unable to parse Quantity")
+  it "should be null if string is not formatted properly", ->
+    should(@wrongFormatQuantity.exec(@ctx)).be.null()
 
-  it "should throw runtime error if invalid positive Quantity", ->
-    should(() => @tooLargeQuantity.exec(@ctx)).throw("Maximum Decimal value exceeded")
+  it "should be null if invalid positive Quantity", ->
+    should(@tooLargeQuantity.exec(@ctx)).be.null()
 
-  it "should throw runtime error if invalid negative Quantity", ->
-    should(() => @tooSmallQuantity.exec(@ctx)).throw("Minimum Decimal value exceeded")
+  it "should be null if invalid negative Quantity", ->
+    should(@tooSmallQuantity.exec(@ctx)).be.null()
 
   it "should return null for null argument", ->
     should(@nullArg.exec(@ctx)).not.exist
@@ -245,8 +265,45 @@ describe 'ToTime', ->
   it "should return null if arg is null", ->
     should(@nullArgTime.exec(@ctx)).not.exist
 
-  it "should throw runtime error for incorrect format", ->
-    should(() => @incorrectFormatTime.exec(@ctx)).throw("Invalid DateTime String: 10:00PM")
+  it "should be null for incorrect format", ->
+    should(@incorrectFormatTime.exec(@ctx)).be.null()
 
-  it "should throw runtime error for invalid time-of-day", ->
-    should(() => @invalidTime.exec(@ctx)).throw("Invalid DateTime String: 25:99.000+00.00")
+  it "should be null for invalid time-of-day", ->
+    should(@invalidTime.exec(@ctx)).be.null()
+
+  it "should work with for Thh", ->
+    expectedDateTime = new DateTime(0,1,1,2)
+    @timeH.exec(@ctx).equals(expectedDateTime).should.be.true()
+
+  it "should work with for Thh:mm", ->
+    expectedDateTime = new DateTime(0,1,1,2,4)
+    @timeHM.exec(@ctx).equals(expectedDateTime).should.be.true()
+
+  it "should work with for Thh:mm:ss", ->
+    expectedDateTime = new DateTime(0,1,1,2,4,59)
+    @timeHMS.exec(@ctx).equals(expectedDateTime).should.be.true()
+
+  it "should work with for Thh:mm:ss.fff", ->
+    expectedDateTime = new DateTime(0,1,1,2,4,59,123)
+    @timeHMSMs.exec(@ctx).equals(expectedDateTime).should.be.true()
+
+  it "should work with for Thh:mm:ss.fffZ", ->
+    expectedDateTime = new DateTime(0,1,1,2,4,59,123,0)
+    @timeHMSMsZ.exec(@ctx).equals(expectedDateTime).should.be.true()
+
+  it "should work with for Thh:mm:ss.fff+hh:mm", ->
+    expectedDateTime = new DateTime(0,1,1,2,4,59,123,1)
+    @timeHMSMsTimezone.exec(@ctx).equals(expectedDateTime).should.be.true()
+
+  it "should work with for Thh:mm:ss.fff+hh", ->
+    expectedDateTime = new DateTime(0,1,1,2,4,59,123,1)
+    @timeHMSMsFullTimezone.exec(@ctx).equals(expectedDateTime).should.be.true()
+
+  it "should be null for hour over 24", ->
+    should(@hourTooHigh.exec(@ctx)).be.null()
+
+  it "should be null for minute over 59", ->
+    should(@minuteTooHigh.exec(@ctx)).be.null()
+
+  it "should be null for second over 59", ->
+    should(@secondTooHigh.exec(@ctx)).be.null()

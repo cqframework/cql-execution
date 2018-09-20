@@ -14,6 +14,11 @@ define negQuantityStr: convert '-10 \'A\'' to Quantity
 define quantityStrDecimal: convert '10.0 \'mA\'' to Quantity
 define dateTimeStr: convert '2015-01-02' to DateTime
 define dateStr: convert '2015-01-02' to Date
+define NullConvert: convert 'foo' to DateTime
+define ZDateTime: convert '2014-01-01T14:30:00.0Z' to DateTime // January 1st, 2014, 2:30PM UTC
+define TimezoneDateTime: convert '2014-01-01T14:30:00.0-07:00' to DateTime // January 1st, 2014, 2:30PM Mountain Standard (GMT-7:00)
+define ZTime: convert 'T14:30:00.0Z' to Time // 2:30PM UTC
+define TimezoneTime: convert 'T14:30:00.0-07:00' to Time // 2:30PM Mountain Standard (GMT-7:00)
 
 // @Test: FromInteger
 define string10: convert 10 to String
@@ -79,3 +84,22 @@ define NullArg: ToQuantity((null as String))
 define NullArgTime: ToTime((null as String))
 define IncorrectFormatTime: ToTime('10:00PM')
 define InvalidTime: ToTime('25:99.000+00.00')
+define TimeH: ToTime('T02')
+define TimeHM: ToTime('T02:04')
+define TimeHMS: ToTime('T02:04:59')
+define TimeHMSMs: ToTime('T02:04:59.123')
+define TimeHMSMsZ: ToTime('T02:04:59.123Z')
+define TimeHMSMsTimezone: ToTime('T02:04:59.123+01')
+define TimeHMSMsFullTimezone: ToTime('T02:04:59.123+01:00')
+define HourTooHigh: ToTime('T24')
+define MinuteTooHigh: ToTime('T23:60')
+define SecondTooHigh: ToTime('T23:59:60')
+
+// @Test: ToBoolean
+define IsTrue: ToBoolean('y')
+define IsFalse: ToBoolean('0')
+define IsNull: ToBoolean('falsetto')
+
+// @Test: ToConcept
+define IsValid: ToConcept(Code { system: 'http://loinc.org', code: '8480-6' }) // Concept { codes: { Code { system: 'http://loinc.org', code: '8480-6' } } }
+define IsNull: ToConcept(null as Code)
