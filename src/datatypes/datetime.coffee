@@ -793,9 +793,9 @@ DateTime.prototype.sameAs = Date.prototype.sameAs = (other, precision) ->
   if not((other.isDate) or (other.isDateTime))
     return null
   else if @.isDate and other.isDateTime
-    return @_implicitlyConvert(@).sameAs(other)
+    return @getDateTime().sameAs(other, precision)
   else if @.isDateTime and other.isDate
-    other = @_implicitlyConvert(other)
+    other = other.getDateTime()
 
   if precision? && @constructor.FIELDS.indexOf(precision) < 0
     throw new Error("Invalid precision: #{precision}")

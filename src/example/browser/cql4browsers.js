@@ -1613,9 +1613,9 @@
     if (!(other.isDate || other.isDateTime)) {
       return null;
     } else if (this.isDate && other.isDateTime) {
-      return this._implicitlyConvert(this).sameAs(other);
+      return this.getDateTime().sameAs(other, precision);
     } else if (this.isDateTime && other.isDate) {
-      other = this._implicitlyConvert(other);
+      other = other.getDateTime();
     }
     if ((precision != null) && this.constructor.FIELDS.indexOf(precision) < 0) {
       throw new Error("Invalid precision: " + precision);

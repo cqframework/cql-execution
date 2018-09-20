@@ -302,40 +302,40 @@ describe 'Date.sameAs', ->
   it 'should always accept cases where a is same as b', ->
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15')).should.be.true()
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15'), Date.Unit.DAY).should.be.true()
-    Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15'), Date.Unit.WEEK).should.be.true()
+    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw("Invalid precision: week")
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15'), Date.Unit.MONTH).should.be.true()
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15'), Date.Unit.YEAR).should.be.true()
 
   it 'should properly calculate cases where the day is different', ->
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-16')).should.be.false()
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-16'), Date.Unit.DAY).should.be.false()
-    Date.parse('2000-05-15').sameAs(Date.parse('2000-05-16'), Date.Unit.WEEK).should.be.true()
+    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-05-16'), Date.Unit.WEEK).should.be.true()).throw("Invalid precision: week")
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-16'), Date.Unit.MONTH).should.be.true()
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-16'), Date.Unit.YEAR).should.be.true()
 
   it 'should properly calculate cases where the week is different', ->
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-21')).should.be.false()
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-21'), Date.Unit.DAY).should.be.false()
-    Date.parse('2000-05-15').sameAs(Date.parse('2000-05-21'), Date.Unit.WEEK).should.be.false()
+    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-05-21'), Date.Unit.WEEK).should.be.false()).throw("Invalid precision: week")
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-21'), Date.Unit.MONTH).should.be.true()
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-21'), Date.Unit.YEAR).should.be.true()
 
   it 'should properly calculate cases where the month is different', ->
     Date.parse('2000-05-15').sameAs(Date.parse('2000-06-15')).should.be.false()
     Date.parse('2000-05-15').sameAs(Date.parse('2000-06-15'), Date.Unit.DAY).should.be.false()
-    Date.parse('2000-05-15').sameAs(Date.parse('2000-06-15'), Date.Unit.WEEK).should.be.false()
+    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-06-15'), Date.Unit.WEEK).should.be.false()).throw("Invalid precision: week")
     Date.parse('2000-05-15').sameAs(Date.parse('2000-06-15'), Date.Unit.MONTH).should.be.false()
     Date.parse('2000-05-15').sameAs(Date.parse('2000-06-15'), Date.Unit.YEAR).should.be.true()
 
   it 'should properly calculate cases where the year is different', ->
     Date.parse('2000-05-15').sameAs(Date.parse('2001-05-15')).should.be.false()
     Date.parse('2000-05-15').sameAs(Date.parse('2001-05-15'), Date.Unit.DAY).should.be.false()
-    Date.parse('2000-05-15').sameAs(Date.parse('2001-05-15'), Date.Unit.WEEK).should.be.false()
+    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2001-05-15'), Date.Unit.WEEK).should.be.false()).throw("Invalid precision: week")
     Date.parse('2000-05-15').sameAs(Date.parse('2001-05-15'), Date.Unit.MONTH).should.be.false()
     Date.parse('2000-05-15').sameAs(Date.parse('2001-05-15'), Date.Unit.YEAR).should.be.false()
 
   it 'should handle imprecision correctly with missing days', ->
-    should.not.exist Date.parse('2000-05').sameAs(Date.parse('2000-05'))
+    Date.parse('2000-05').sameAs(Date.parse('2000-05')).should.be.true()
     should.not.exist Date.parse('2000-05').sameAs(Date.parse('2000-05'), Date.Unit.DAY)
     Date.parse('2000-05').sameAs(Date.parse('2000-05'), Date.Unit.MONTH).should.be.true()
     Date.parse('2000-05').sameAs(Date.parse('2000-05'), Date.Unit.YEAR).should.be.true()
@@ -346,7 +346,7 @@ describe 'Date.sameAs', ->
     Date.parse('2000-05').sameAs(Date.parse('2000-06'), Date.Unit.YEAR).should.be.true()
 
   it 'should handle imprecision correctly with missing months', ->
-    should.not.exist Date.parse('2000').sameAs(Date.parse('2000'))
+    Date.parse('2000').sameAs(Date.parse('2000')).should.be.true()
     should.not.exist Date.parse('2000').sameAs(Date.parse('2000'), Date.Unit.DAY)
     should.not.exist Date.parse('2000').sameAs(Date.parse('2000'), Date.Unit.MONTH)
     Date.parse('2000').sameAs(Date.parse('2000'), Date.Unit.YEAR).should.be.true()
