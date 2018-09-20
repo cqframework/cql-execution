@@ -18,8 +18,8 @@ module.exports.Quantity = class Quantity extends Expression
       throw new Error("Cannot create a quantity with an undefined value")
     else
       @value = parseFloat json.value
-      # isValidDecimal will throw an error if the parsed value is NaN or otherwise invalid.
-      isValidDecimal(@value)
+      if !isValidDecimal(@value)
+        throw new Error("Cannot create a quantity with an invalid decimal value")
 
     # Attempt to parse the unit with UCUM. If it fails, throw a friendly error.
     if @unit? and !is_valid_ucum_unit(@unit)
@@ -100,14 +100,23 @@ module.exports.Quantity = class Quantity extends Expression
         can_val = @to_ucum()
         other_can_value = other.to_ucum()
         ucum_value = ucum_multiply(can_val,[[operator,other_can_value]])
-        createQuantity(ucum_value.value, units_to_string(ucum_value.units))
+        try
+          createQuantity(ucum_value.value, units_to_string(ucum_value.units))
+        catch
+          null
       else
         value = if operator == "/" then @value / other.value  else @value * other.value
         unit = @unit || other.unit
-        createQuantity(decimalAdjust("round",value,-8), unit)
+        try
+          createQuantity(decimalAdjust("round",value,-8), unit)
+        catch
+          null
     else
       value = if operator == "/" then @value / other  else @value * other
-      createQuantity( decimalAdjust("round",value,-8), @unit)
+      try
+        createQuantity( decimalAdjust("round",value,-8), @unit)
+      catch
+        null
 
   to_ucum: ->
     u = ucum.parse(ucum_unit(@unit))
@@ -237,19 +246,23 @@ module.exports.parseQuantity = (str) ->
       unit = ""
     new Quantity({value: value, unit: unit})
   else
-    throw new Error("Unable to parse Quantity")
+    null
 
 module.exports.doAddition = (a,b) ->
   if a instanceof Quantity and b instanceof Quantity
+    # The units don't have to match (m and m^2), but must be convertable
     # we will choose the unit of a to be the unit we return
     val = convert_value(b.value, b.unit, a.unit)
+    return null unless val?
     new Quantity({unit: a.unit, value: a.value + val})
   else
     a.copy?().add?(b.value, clean_unit(b.unit))
 
 module.exports.doSubtraction = (a,b) ->
   if a instanceof Quantity and b instanceof Quantity
+    # The units don't have to match (m and m^2), but must be convertable
     val = convert_value(b.value, b.unit, a.unit)
+    return null unless val?
     new Quantity({unit: a.unit, value: a.value - val})
   else
     a.copy?().add?(b.value * -1 , clean_unit(b.unit))
