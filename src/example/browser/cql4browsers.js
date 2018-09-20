@@ -1346,12 +1346,8 @@
 
   DateTime.prototype.equals = Date.prototype.equals = function(other) {
     var field, i, len, ref1;
-    if (!(other.isDate || other.isDateTime)) {
-      return null;
-    } else if (this.isDate && other.isDateTime) {
-      return this.getDateTime().equals(other);
-    } else if (this.isDateTime && other.isDate) {
-      other = other.getDateTime();
+    if (!((this.isDate && other.isDate) || (this.isDateTime && other.isDateTime))) {
+      return false;
     }
     if (this.timezoneOffset !== other.timezoneOffset) {
       other = other.convertToTimezoneOffset(this.timezoneOffset);

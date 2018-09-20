@@ -571,12 +571,9 @@ DateTime.prototype.isSamePrecision = Date.prototype.isSamePrecision = (other) ->
     true
 
 DateTime.prototype.equals = Date.prototype.equals = (other) ->
-  if not((other.isDate) or (other.isDateTime))
-    return null
-  else if @.isDate and other.isDateTime
-    return @getDateTime().equals(other)
-  else if @.isDateTime and other.isDate
-    other = other.getDateTime()
+  # leave with false there is a type mismatch
+  unless (@isDate and other.isDate) or (@isDateTime and other.isDateTime)
+    return false
 
   # make a copy of other in the correct timezone offset if they don't match.
   if (@timezoneOffset != other.timezoneOffset)

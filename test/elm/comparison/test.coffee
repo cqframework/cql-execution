@@ -55,6 +55,14 @@ describe 'Equal', ->
     should(@possiblyEqualDateTimes.exec(@ctx)).be.null()
     @impossiblyEqualDateTimes.exec(@ctx).should.be.false()
 
+  it 'should be false for all Date and DateTime equality', ->
+    @dateAndDateTimeEqual.exec(@ctx).should.be.false()
+    @dateAndDateTimeNotEqual.exec(@ctx).should.be.false()
+    @dateAndDateTimeUncertainEqual.exec(@ctx).should.be.false()
+    @dateTimeAndDateEqual.exec(@ctx).should.be.false()
+    @dateTimeAndDateNotEqual.exec(@ctx).should.be.false()
+    @dateTimeAndDateUncertainEqual.exec(@ctx).should.be.false()
+
   it 'should be false for 5 m = 4 m', ->
     @aGtB_Quantity.exec(@ctx).should.be.false()
 
@@ -132,6 +140,14 @@ describe 'NotEqual', ->
   it 'should identify uncertain/unequal DateTimes when there is imprecision', ->
     should(@possiblyEqualDateTimes.exec(@ctx)).be.null()
     @impossiblyEqualDateTimes.exec(@ctx).should.be.true()
+
+  it 'should be true for all Date and DateTime equality', ->
+    @dateAndDateTimeEqual.exec(@ctx).should.be.true()
+    @dateAndDateTimeNotEqual.exec(@ctx).should.be.true()
+    @dateAndDateTimeUncertainEqual.exec(@ctx).should.be.true()
+    @dateTimeAndDateEqual.exec(@ctx).should.be.true()
+    @dateTimeAndDateNotEqual.exec(@ctx).should.be.true()
+    @dateTimeAndDateUncertainEqual.exec(@ctx).should.be.true()
 
   it 'should be true for 5 m != 4 m', ->
     @aGtB_Quantity.exec(@ctx).should.be.true()
