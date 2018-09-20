@@ -160,6 +160,43 @@ module.exports.StdDev = class StdDev extends AggregateExpression
     pop_dev = Math.sqrt pop_var
     {standard_variance: std_var, population_variance: pop_var, standard_deviation: std_dev, population_deviation: pop_dev}
 
+module.exports.Product = class Product extends AggregateExpression
+  constructor:(json) ->
+    super
+
+  exec: (ctx) ->
+    listOfValues = @source.execute(ctx)
+    return null if listOfValues is null
+    [product, filtered] = productValue(listOfValues)
+    return null if product is null
+    return quantityOrValue(product, listOfValues)
+
+module.exports.GeometricMean = class GeometricMean extends AggregateExpression
+  constructor:(json) ->
+    super
+
+  exec: (ctx) ->
+    listOfValues = @source.execute(ctx)
+    return null if listOfValues is null
+    [product, filtered] = productValue(listOfValues)
+    return null if product is null
+    geoMean = Math.pow(product, 1.0 / filtered.length)
+    return geoMean
+
+productValue = (list) ->
+  product = 1
+  if typeIsArray(list)
+    filtered = compact(list)
+    return [null, null] if filtered.length == 0
+    for item in filtered
+      if item.isQuantity
+        product = Quantity.doMultiplication(product,item)
+      else
+        product = product * item
+    return [product, filtered]
+  else
+    [null, null]
+
 module.exports.PopulationStdDev = class PopulationStdDev extends StdDev
   constructor:(json) ->
     super
