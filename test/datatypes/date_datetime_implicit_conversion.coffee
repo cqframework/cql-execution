@@ -320,9 +320,9 @@ describe 'DateTime.sameOrBefore with implicit conversion of first variable', ->
     Date.parse('2000-02-15').sameOrBefore(DateTime.parse('2000-02-15T23:59:59.999+00'), DateTime.Unit.DAY).should.be.true()
     Date.parse('2000-02-15').sameOrBefore(DateTime.parse('2000-02-14T23:59:59.999+00'), DateTime.Unit.DAY).should.be.false()
 
-  it 'should return null in cases where a is b but there and b have unknown values', ->
-    should.not.exist Date.parse('2000-01').sameOrBefore(DateTime.parse('2000-01'))
-    should.not.exist Date.parse('2000').sameOrBefore(DateTime.parse('2000'))
+  it 'should return true in cases where a is b but there and b have unknown values with matching precision', ->
+    Date.parse('2000-01').sameOrBefore(DateTime.parse('2000-01')).should.be.true()
+    Date.parse('2000').sameOrBefore(DateTime.parse('2000')).should.be.true()
 
   it 'should return null in cases where b has unknown values that prevent deterministic result', ->
     should.not.exist Date.parse('2000-01-31').sameOrBefore(DateTime.parse('2000-01'))

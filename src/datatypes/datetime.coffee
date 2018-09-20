@@ -108,46 +108,6 @@ class DateTime
     d = DateTime.fromJsDate(@toJSDate(), timezoneOffset)
     d.reducedPrecision(@getPrecision())
 
-
-
-  sameOrBefore: (other, precision) ->
-    other = @_implicitlyConvert(other)
-    return null if not(other instanceof DateTime)
-    if precision? && DateTime.FIELDS.indexOf(precision) < 0
-      throw new Error("Invalid precision: #{precision}")
-
-    # make a copy of other in the correct timezone offset if they don't match.
-    if (@timezoneOffset != other.timezoneOffset)
-      other = other.convertToTimezoneOffset(@timezoneOffset)
-
-    for field in DateTime.FIELDS
-      # if both have this precision defined
-      if @[field]? and other[field]?
-        # if this value is less than the other return with true. this is before other
-        if @[field] < other[field]
-          return true
-        # if this value is greater than the other return with false. this is after
-        else if @[field] > other[field]
-          return false
-        # execution continues if the values are the same
-
-      # if both dont have this precision, return true if precision is not defined
-      else if !@[field]? and !other[field]?
-        if !precision?
-          return true
-        else # we havent met precision yet
-          return null
-
-      # otherwise they have inconclusive precision, return null
-      else
-        return null
-
-      # if precision is defined and we have reached expected precision, we can leave the loop
-      break if precision? and precision is field
-
-    # if we made it here, then all fields matched and they are same
-    true
-
   sameOrAfter: (other, precision) ->
     other = @_implicitlyConvert(other)
     return null if not(other instanceof DateTime)
@@ -545,16 +505,6 @@ class Date
     else if @year?
       @add(-1,Date.Unit.YEAR)
 
-  sameOrBefore: (other, precision = Date.Unit.DAY) ->
-    if (other instanceof DateTime) then return this.getDateTime().sameOrBefore(other, precision)
-    if not(other instanceof Date) then return false
-
-    diff = @differenceBetween(other, precision)
-    switch
-      when (diff.low >= 0 and diff.high >= 0) then true
-      when (diff.low < 0 and diff.high < 0) then false
-      else null
-
   sameOrAfter: (other, precision = Date.Unit.DAY) ->
     if (other instanceof DateTime) then return this.getDateTime().sameOrAfter(other, precision)
     if not(other instanceof Date) then return false
@@ -830,6 +780,49 @@ DateTime.prototype.sameAs = Date.prototype.sameAs = (other, precision) ->
     break if precision? and precision is field
 
   # if we made it here, then all fields matched.
+  true
+
+DateTime.prototype.sameOrBefore = Date.prototype.sameOrBefore = (other, precision) ->
+  if not((other.isDate) or (other.isDateTime))
+    return null
+  else if @.isDate and other.isDateTime
+    return @getDateTime().sameOrBefore(other, precision)
+  else if @.isDateTime and other.isDate
+    other = other.getDateTime()
+
+  if precision? && @constructor.FIELDS.indexOf(precision) < 0
+    throw new Error("Invalid precision: #{precision}")
+
+  # make a copy of other in the correct timezone offset if they don't match.
+  if (@timezoneOffset != other.timezoneOffset)
+    other = other.convertToTimezoneOffset(@timezoneOffset)
+
+  for field in @constructor.FIELDS
+    # if both have this precision defined
+    if @[field]? and other[field]?
+      # if this value is less than the other return with true. this is before other
+      if @[field] < other[field]
+        return true
+      # if this value is greater than the other return with false. this is after
+      else if @[field] > other[field]
+        return false
+      # execution continues if the values are the same
+
+    # if both dont have this precision, return true if precision is not defined
+    else if !@[field]? and !other[field]?
+      if !precision?
+        return true
+      else # we havent met precision yet
+        return null
+
+    # otherwise they have inconclusive precision, return null
+    else
+      return null
+
+    # if precision is defined and we have reached expected precision, we can leave the loop
+    break if precision? and precision is field
+
+  # if we made it here, then all fields matched and they are same
   true
 
 normalizeMillisecondsFieldInString = (string, matches) ->
