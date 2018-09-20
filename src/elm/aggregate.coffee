@@ -165,22 +165,22 @@ module.exports.Product = class Product extends AggregateExpression
     super
 
   exec: (ctx) ->
-    arg = @source.execute(ctx)
-    return null if arg is null
-    [value, filtered] = productValue(arg)
-    return null if value is null
-    return quantityOrValue(value, arg)
+    listOfValues = @source.execute(ctx)
+    return null if listOfValues is null
+    [product, filtered] = productValue(listOfValues)
+    return null if product is null
+    return quantityOrValue(product, listOfValues)
 
 module.exports.GeometricMean = class GeometricMean extends AggregateExpression
   constructor:(json) ->
     super
 
   exec: (ctx) ->
-    arg = @source.execute(ctx)
-    return null if arg is null
-    [value, filtered] = productValue(arg)
-    return null if value is null
-    geoMean = Math.pow(value, 1.0 / filtered.length)
+    listOfValues = @source.execute(ctx)
+    return null if listOfValues is null
+    [product, filtered] = productValue(listOfValues)
+    return null if product is null
+    geoMean = Math.pow(product, 1.0 / filtered.length)
     return geoMean
 
 productValue = (list) ->

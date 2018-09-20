@@ -2564,16 +2564,16 @@
     }
 
     Product.prototype.exec = function(ctx) {
-      var arg, filtered, ref1, value;
-      arg = this.source.execute(ctx);
-      if (arg === null) {
+      var filtered, listOfValues, product, ref1;
+      listOfValues = this.source.execute(ctx);
+      if (listOfValues === null) {
         return null;
       }
-      ref1 = productValue(arg), value = ref1[0], filtered = ref1[1];
-      if (value === null) {
+      ref1 = productValue(listOfValues), product = ref1[0], filtered = ref1[1];
+      if (product === null) {
         return null;
       }
-      return quantityOrValue(value, arg);
+      return quantityOrValue(product, listOfValues);
     };
 
     return Product;
@@ -2588,16 +2588,16 @@
     }
 
     GeometricMean.prototype.exec = function(ctx) {
-      var arg, filtered, geoMean, ref1, value;
-      arg = this.source.execute(ctx);
-      if (arg === null) {
+      var filtered, geoMean, listOfValues, product, ref1;
+      listOfValues = this.source.execute(ctx);
+      if (listOfValues === null) {
         return null;
       }
-      ref1 = productValue(arg), value = ref1[0], filtered = ref1[1];
-      if (value === null) {
+      ref1 = productValue(listOfValues), product = ref1[0], filtered = ref1[1];
+      if (product === null) {
         return null;
       }
-      geoMean = Math.pow(value, 1.0 / filtered.length);
+      geoMean = Math.pow(product, 1.0 / filtered.length);
       return geoMean;
     };
 
