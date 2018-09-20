@@ -8152,17 +8152,13 @@
   module.exports.Is = Is = (function(superClass) {
     extend(Is, superClass);
 
-    function Is(json) {
-      Is.__super__.constructor.apply(this, arguments);
-      this.operand = json.operand;
-      this.toType = json.toType;
+    function Is() {
+      return Is.__super__.constructor.apply(this, arguments);
     }
-
-    Is.prototype.exec = function(ctx) {};
 
     return Is;
 
-  })(Expression);
+  })(UnimplementedExpression);
 
   module.exports.IntervalTypeSpecifier = IntervalTypeSpecifier = (function(superClass) {
     extend(IntervalTypeSpecifier, superClass);
