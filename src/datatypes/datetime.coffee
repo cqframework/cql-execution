@@ -1,5 +1,5 @@
 { Uncertainty } = require './uncertainty'
-{ makeJsDate, jsDate } = require '../util/util'
+{ jsDate } = require '../util/util'
 moment = require 'moment'
 
 class DateTime
@@ -35,10 +35,10 @@ class DateTime
       args.push(0)
     new DateTime(args...)
 
-  @fromJsDate: (date, timezoneOffset) -> #This is from a JS Date, not a CQL Date
+  @fromJSDate: (date, timezoneOffset) -> #This is from a JS Date, not a CQL Date
     if (date instanceof DateTime) then return date
     if timezoneOffset?
-      date = makeJsDate(date.getTime() + (timezoneOffset * 60 * 60 * 1000))
+      date = new jsDate(date.getTime() + (timezoneOffset * 60 * 60 * 1000))
       new DateTime(
         date.getUTCFullYear(),
         date.getUTCMonth() + 1,
@@ -61,7 +61,7 @@ class DateTime
   constructor: (@year=null, @month=null, @day=null, @hour=null, @minute=null, @second=null, @millisecond=null, @timezoneOffset) ->
     # from the spec: If no timezone is specified, the timezone of the evaluation request timestamp is used.
     if not @timezoneOffset?
-      @timezoneOffset = (makeJsDate()).getTimezoneOffset() / 60 * -1
+      @timezoneOffset = (new jsDate()).getTimezoneOffset() / 60 * -1
 
   # Define a simple getter to allow type-checking of this class without instanceof
   # and in a way that survives minification (as opposed to checking constructor.name)
@@ -105,7 +105,7 @@ class DateTime
       @add(-1,DateTime.Unit.YEAR)
 
   convertToTimezoneOffset: (timezoneOffset = 0) ->
-    d = DateTime.fromJsDate(@toJSDate(), timezoneOffset)
+    d = DateTime.fromJSDate(@toJSDate(), timezoneOffset)
     d.reducedPrecision(@getPrecision())
 
   sameAs: (other, precision = DateTime.Unit.MILLISECOND) ->
@@ -174,7 +174,7 @@ class DateTime
     if result[field]?
       # Increment the field, then round-trip to JS date and back for calendar math
       result[field] = result[field] + offset
-      normalized = DateTime.fromJsDate(result.toJSDate(), @timezoneOffset)
+      normalized = DateTime.fromJSDate(result.toJSDate(), @timezoneOffset)
       for field in DateTime.FIELDS when result[field]?
         result[field] = normalized[field]
 
@@ -248,7 +248,7 @@ class DateTime
     # To "floor" a week, we need to go back to the last Sunday (that's when getDay() == 0 in javascript)
     # But if we don't know the day, then just return it as-is
     if (not d.day?) then return d
-    floored = makeJsDate(d.year, d.month-1, d.day)
+    floored = new jsDate(d.year, d.month-1, d.day)
     floored.setDate(floored.getDate() - 1) while floored.getDay() > 0
     new DateTime(floored.getFullYear(), floored.getMonth()+1, floored.getDate(), 12, 0, 0, 0, d.timezoneOffset)
 
@@ -286,7 +286,7 @@ class DateTime
       # Now we need to look at the smaller units to see how they compare.  Since we only care about comparing
       # days and below at this point, it's much easier to bring a up to b so it's in the same month, then
       # we can compare on just the remaining units.
-      aInMonth = makeJsDate(a.getTime())
+      aInMonth = new jsDate(a.getTime())
       # Remember the original timezone offset because if it changes when we bring it up a month, we need to fix it
       aInMonthOriginalOffset = aInMonth.getTimezoneOffset()
       aInMonth.setMonth(a.getMonth() + months)
@@ -325,7 +325,7 @@ class DateTime
       @year,
       @month ? 12,
       # see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/setDate
-      @day ? (makeJsDate(@year, @month ? 12, 0)).getDate(),
+      @day ? (new jsDate(@year, @month ? 12, 0)).getDate(),
       @hour ? 23,
       @minute ? 59,
       @second ? 59,
@@ -336,9 +336,9 @@ class DateTime
   toJSDate: (ignoreTimezone = false) ->
     [y, mo, d, h, mi, s, ms] = [ @year, (if @month? then @month-1 else 0), @day ? 1, @hour ? 0, @minute ? 0, @second ? 0, @millisecond ? 0 ]
     if @timezoneOffset? and not ignoreTimezone
-      makeJsDate(jsDate.UTC(y, mo, d, h, mi, s, ms) - (@timezoneOffset * 60 * 60 * 1000))
+      new jsDate(jsDate.UTC(y, mo, d, h, mi, s, ms) - (@timezoneOffset * 60 * 60 * 1000))
     else
-      makeJsDate(y, mo, d, h, mi, s, ms)
+      new jsDate(y, mo, d, h, mi, s, ms)
 
   toJSON: () ->
     @toString()
@@ -510,7 +510,7 @@ class Date
     if result[field]?
       # Increment the field, then round-trip to JS date and back for calendar math
       result[field] = result[field] + offset
-      normalized = Date.fromJsDate(result.toJSDate())
+      normalized = Date.fromJSDate(result.toJSDate())
       for field in Date.FIELDS when result[field]?
         result[field] = normalized[field]
 
@@ -542,7 +542,7 @@ class Date
     # To "floor" a week, we need to go back to the last Sunday (that's when getDay() == 0 in javascript)
     # But if we don't know the day, then just return it as-is
     if (not d.day?) then return d
-    floored = makeJsDate(d.year, d.month-1, d.day)
+    floored = new jsDate(d.year, d.month-1, d.day)
     floored.setDate(floored.getDate() - 1) while floored.getDay() > 0
     new Date(floored.getFullYear(), floored.getMonth()+1, floored.getDate())
 
@@ -584,7 +584,7 @@ class Date
       # Now we need to look at the smaller units to see how they compare.  Since we only care about comparing
       # days and below at this point, it's much easier to bring a up to b so it's in the same month, then
       # we can compare on just the remaining units.
-      aInMonth = makeJsDate(a.getTime())
+      aInMonth = new jsDate(a.getTime())
       # Remember the original timezone offset because if it changes when we bring it up a month, we need to fix it
       aInMonthOriginalOffset = aInMonth.getTimezoneOffset()
       aInMonth.setMonth(a.getMonth() + months)
@@ -615,16 +615,16 @@ class Date
       @year,
       @month ? 12,
       # see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/setDate
-      @day ? (makeJsDate(@year, @month ? 12, 0)).getDate()
+      @day ? (new jsDate(@year, @month ? 12, 0)).getDate()
     ).toJSDate()
 
     new Uncertainty(low, high)
 
   toJSDate: () ->
     [y, mo, d] = [ @year, (if @month? then @month-1 else 0), @day ? 1 ]
-    makeJsDate(y, mo, d)
+    new jsDate(y, mo, d)
 
-  @fromJsDate: (date) ->
+  @fromJSDate: (date) ->
     if (date instanceof Date) then return date
     new Date(
       date.getFullYear(),

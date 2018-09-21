@@ -179,7 +179,7 @@ describe 'CalculateAge', ->
     # p1 birth date is 1980-06-17
     @bday = new Date(1980, 5, 17)
     @bdayPlus20 = new Date(2000, 5, 18)
-    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromJsDate(@bdayPlus20))
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromJSDate(@bdayPlus20))
 
     @today = @ctx.getExecutionDateTime()
     # according to spec, dates without timezones are in *current* time offset, so need to adjust

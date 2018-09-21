@@ -1,5 +1,5 @@
 should = require 'should'
-{ makeJsDate } = require '../../lib/util/util'
+{ jsDate } = require '../../lib/util/util'
 { Date } = require '../../lib/datatypes/datetime'
 { Uncertainty } = require '../../lib/datatypes/uncertainty'
 
@@ -55,7 +55,7 @@ describe 'Date', ->
     should.not.exist Date.parse null
 
   it 'should construct from a javascript date', ->
-    Date.fromJsDate(makeJsDate(1999, 1, 16)).should.eql Date.parse('1999-02-16')
+    Date.fromJSDate(new jsDate(1999, 1, 16)).should.eql Date.parse('1999-02-16')
 
   it 'should copy a fully define Date', ->
     original = Date.parse('1999-02-16')
@@ -82,29 +82,29 @@ describe 'Date', ->
   it 'should correctly convert to uncertainties with JavaScript dates', ->
     preciseUncertainty = Date.parse('2000-02-25').toUncertainty()
     preciseUncertainty.isPoint().should.be.true()
-    preciseUncertainty.low.should.eql makeJsDate(2000, 1, 25)
-    preciseUncertainty.high.should.eql makeJsDate(2000, 1, 25)
+    preciseUncertainty.low.should.eql new jsDate(2000, 1, 25)
+    preciseUncertainty.high.should.eql new jsDate(2000, 1, 25)
 
     toMonthLeapYear = Date.parse('2000-02').toUncertainty()
     toMonthLeapYear.isPoint().should.be.false()
-    toMonthLeapYear.low.should.eql makeJsDate(2000, 1, 1)
-    toMonthLeapYear.high.should.eql makeJsDate(2000, 1, 29)
+    toMonthLeapYear.low.should.eql new jsDate(2000, 1, 1)
+    toMonthLeapYear.high.should.eql new jsDate(2000, 1, 29)
 
     toMonthNonLeapYear = Date.parse('1999-02').toUncertainty()
     toMonthNonLeapYear.isPoint().should.be.false()
-    toMonthNonLeapYear.low.should.eql makeJsDate(1999, 1, 1)
-    toMonthNonLeapYear.high.should.eql makeJsDate(1999, 1, 28)
+    toMonthNonLeapYear.low.should.eql new jsDate(1999, 1, 1)
+    toMonthNonLeapYear.high.should.eql new jsDate(1999, 1, 28)
 
     toYear = Date.parse('2000').toUncertainty()
     toYear.isPoint().should.be.false()
-    toYear.low.should.eql makeJsDate(2000, 0, 1)
-    toYear.high.should.eql makeJsDate(2000, 11, 31)
+    toYear.low.should.eql new jsDate(2000, 0, 1)
+    toYear.high.should.eql new jsDate(2000, 11, 31)
 
   it 'should convert to javascript Date', ->
-    Date.parse('2012-02-25').toJSDate().should.eql makeJsDate(2012, 1, 25)
+    Date.parse('2012-02-25').toJSDate().should.eql new jsDate(2012, 1, 25)
 
   it 'should floor unknown values when it converts to javascript Date', ->
-    Date.parse('2012').toJSDate().should.eql makeJsDate(2012, 0, 1)
+    Date.parse('2012').toJSDate().should.eql new jsDate(2012, 0, 1)
 
 describe 'Date.add', ->
   it 'should add units for simple cases', ->
