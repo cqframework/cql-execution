@@ -70,8 +70,8 @@ task "test", "run tests", ->
     --recursive
     --colors
   ", {maxBuffer: 2048 * 1024 }, (err, output) ->
-    throw err if err
     console.log output
+    throw err if err
 
 task "debug-test", "run tests", ->
   invoke 'build'
@@ -89,5 +89,5 @@ task "debug-test", "run tests", ->
     --debug-brk
     ./lib-test/
   ", { maxBuffer: 2048 * 1024 }, (err, output) ->
-    throw err if err
     console.log output
+    throw err if err

@@ -79,6 +79,7 @@ describe 'Quantity', ->
     minute.equals(new Quantity({unit: "minutes", value: 4})).should.be.true()
     second.equals(new Quantity({unit: "seconds", value: 4})).should.be.true()
     millisecond.equals(new Quantity({unit: "milliseconds", value: 4})).should.be.true()
+    
   it 'added to Quantity with invalid ucum units results in null', ->
     quantity1 = new Quantity({unit:"m", value: 2})
     quantity2 = new Quantity({unit: "m", value: 2})
@@ -103,3 +104,46 @@ describe 'Quantity', ->
     quantity2.unit = "fakeUnit"
     should(doDivision(quantity1, "/")).be.null()
 
+
+  it 'should treat unit:null the same as a unit:"1" in calculations', ->
+    divideWithOneOnRight = new Quantity({unit: "m", value: 8}).dividedBy(new Quantity({unit: "1", value: 2}))
+    divideWithNullOnRight = new Quantity({unit: "m", value: 8}).dividedBy(new Quantity({value: 2}))
+    divideWithOneOnRight.should.deepEqual(divideWithNullOnRight)
+    multiplyWithOneOnRight = new Quantity({unit: "m", value: 8}).multiplyBy(new Quantity({unit: "1", value: 2}))
+    multiplyWithNullOnRight = new Quantity({unit: "m", value: 8}).multiplyBy(new Quantity({value: 2}))
+    multiplyWithOneOnRight.should.deepEqual(multiplyWithNullOnRight)
+    addWithOneOnRight = doAddition(new Quantity({unit: "1", value: 8}), new Quantity({unit: "1", value: 2}))
+    addWithNullOnRight = doAddition(new Quantity({unit: "1", value: 8}), new Quantity({value: 2}))
+    addWithOneOnRight.should.deepEqual(addWithNullOnRight)
+    subtractWithOneOnRight = doSubtraction(new Quantity({unit: "1", value: 8}), new Quantity({unit: "1", value: 2}))
+    subtractWithNullOnRight = doSubtraction(new Quantity({unit: "1", value: 8}), new Quantity({value: 2}))
+    subtractWithOneOnRight.should.deepEqual(subtractWithNullOnRight)
+
+    divideWithOneOnLeft = new Quantity({unit: "1", value: 8}).dividedBy(new Quantity({unit: "m", value: 2}))
+    divideWithNullOnLeft = new Quantity({value: 8}).dividedBy(new Quantity({unit: "m", value: 2}))
+    divideWithOneOnLeft.should.deepEqual(divideWithNullOnLeft)
+    multiplyWithOneOnLeft = new Quantity({unit: "1", value: 8}).multiplyBy(new Quantity({unit: "m", value: 2}))
+    multiplyWithNullOnLeft = new Quantity({value: 8}).multiplyBy(new Quantity({unit: "m", value: 2}))
+    multiplyWithOneOnLeft.should.deepEqual(multiplyWithNullOnLeft)
+    addWithOneOnLeft = doAddition(new Quantity({unit: "1", value: 8}), new Quantity({unit: "1", value: 2}))
+    addWithNullOnLeft = doAddition(new Quantity({value: 8}), new Quantity({unit: "1", value: 2}))
+    addWithOneOnLeft.should.deepEqual(addWithNullOnLeft)
+    subtractWithOneOnLeft = doSubtraction(new Quantity({unit: "1", value: 8}), new Quantity({unit: "1", value: 2}))
+    subtractWithNullOnLeft = doSubtraction(new Quantity({value: 8}), new Quantity({unit: "1", value: 2}))
+    subtractWithOneOnLeft.should.deepEqual(subtractWithNullOnLeft)
+
+  it 'should convert units when possible to perform arithmetic', ->
+    divide = new Quantity({unit: "m", value: 8}).dividedBy(new Quantity({unit: "cm", value: 50}))
+    divide.equals(new Quantity({unit: "1", value: 16})).should.be.true()
+    multiply = new Quantity({unit: "cm", value: 8}).multiplyBy(new Quantity({unit: "m", value: 2}))
+    multiply.equals(new Quantity({unit: "m2", value: 0.16})).should.be.true()
+    add = doAddition(new Quantity({unit: "cm", value: 8}), new Quantity({unit: "m", value: 2}))
+    add.equals(new Quantity({unit: "m", value: 2.08})).should.be.true()
+    subtract = doSubtraction(new Quantity({unit: "cm", value: 150}), new Quantity({unit: "m", value: 1}))
+    subtract.equals(new Quantity({unit: "m", value: 0.5})).should.be.true()
+
+  it 'should return null when units are mismatched and cannot be converted', ->
+    add = doAddition(new Quantity({unit: "cm", value: 8}), new Quantity({unit: "g", value: 2}))
+    should.not.exist(add)
+    subtract = doSubtraction(new Quantity({unit: "cm", value: 150}), new Quantity({unit: "mg", value: 1}))
+    should.not.exist(subtract)

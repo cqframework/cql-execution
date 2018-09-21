@@ -96,17 +96,19 @@ module.exports.Quantity = class Quantity extends Expression
 
   multiplyDivide: (other, operator) ->
     if other instanceof Quantity
-      if @unit and other.unit
-        can_val = @to_ucum()
-        other_can_value = other.to_ucum()
+      a = if this.unit? then this else new Quantity({value: this.value, unit: "1"})
+      b = if other.unit? then other else new Quantity({value: other.value, unit: "1"})
+      if a.unit and b.unit
+        can_val = a.to_ucum()
+        other_can_value = b.to_ucum()
         ucum_value = ucum_multiply(can_val,[[operator,other_can_value]])
         try
           createQuantity(ucum_value.value, units_to_string(ucum_value.units))
         catch
           null
       else
-        value = if operator == "/" then @value / other.value  else @value * other.value
-        unit = @unit || other.unit
+        value = if operator == "/" then a.value / b.value  else a.value * b.value
+        unit = a.unit || b.unit
         try
           createQuantity(decimalAdjust("round",value,-8), unit)
         catch
@@ -114,7 +116,7 @@ module.exports.Quantity = class Quantity extends Expression
     else
       value = if operator == "/" then @value / other  else @value * other
       try
-        createQuantity( decimalAdjust("round",value,-8), @unit)
+        createQuantity( decimalAdjust("round",value,-8), coalesceToOne(@unit) )
       catch
         null
 
@@ -250,22 +252,26 @@ module.exports.parseQuantity = (str) ->
 
 module.exports.doAddition = (a,b) ->
   if a instanceof Quantity and b instanceof Quantity
+    [a_unit, b_unit] = [coalesceToOne(a.unit), coalesceToOne(b.unit)]
     # The units don't have to match (m and m^2), but must be convertable
     # we will choose the unit of a to be the unit we return
-    val = convert_value(b.value, b.unit, a.unit)
+    val = convert_value(b.value, b_unit, a_unit)
     return null unless val?
-    new Quantity({unit: a.unit, value: a.value + val})
+    new Quantity({unit: a_unit, value: a.value + val})
   else
-    a.copy?().add?(b.value, clean_unit(b.unit))
+    b_unit = if b instanceof Quantity then coalesceToOne(b.unit) else b.unit
+    a.copy?().add?(b.value, clean_unit(b_unit))
 
 module.exports.doSubtraction = (a,b) ->
   if a instanceof Quantity and b instanceof Quantity
+    [a_unit, b_unit] = [coalesceToOne(a.unit), coalesceToOne(b.unit)]
     # The units don't have to match (m and m^2), but must be convertable
-    val = convert_value(b.value, b.unit, a.unit)
+    val = convert_value(b.value, b_unit, a_unit)
     return null unless val?
-    new Quantity({unit: a.unit, value: a.value - val})
+    new Quantity({unit: a_unit, value: a.value - val})
   else
-    a.copy?().add?(b.value * -1 , clean_unit(b.unit))
+    b_unit = if b instanceof Quantity then coalesceToOne(b.unit) else b.unit
+    a.copy?().add?(b.value * -1 , clean_unit(b_unit))
 
 
 module.exports.doDivision = (a,b) ->
@@ -274,3 +280,6 @@ module.exports.doDivision = (a,b) ->
 
 module.exports.doMultiplication = (a,b) ->
   if a instanceof Quantity then a.multiplyBy(b) else b.multiplyBy(a)
+
+coalesceToOne = (o) ->
+  if o? then o else '1'
