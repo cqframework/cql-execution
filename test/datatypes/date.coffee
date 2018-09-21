@@ -1,6 +1,6 @@
 should = require 'should'
 { makeJsDate } = require '../../lib/util/util'
-{ Date } = require '../../lib/datatypes/datetime'
+{ Date, DateTime } = require '../../lib/datatypes/datetime'
 { Uncertainty } = require '../../lib/datatypes/uncertainty'
 
 describe 'Date', ->
@@ -356,6 +356,10 @@ describe 'Date.sameAs', ->
     Date.parse('2000').sameAs(Date.parse('2001'), Date.Unit.MONTH).should.be.false()
     Date.parse('2000').sameAs(Date.parse('2001'), Date.Unit.YEAR).should.be.false()
 
+  it 'should error on incorrect precisions', ->
+    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw("Invalid precision: week")
+    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15'), DateTime.Unit.MINUTE)).throw("Invalid precision: minute")
+
 describe 'Date.before', ->
 
   it 'should accept cases where a is before b', ->
@@ -412,6 +416,10 @@ describe 'Date.before', ->
   it 'should reject cases where b has unknown values but a is still deterministicly after b', ->
     Date.parse('2000-02-01').before(Date.parse('2000-01')).should.be.false()
     Date.parse('2001-01-01').before(Date.parse('2000')).should.be.false()
+
+  it 'should error on incorrect precisions', ->
+    should(() => Date.parse('2000-05-15').before(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw("Invalid precision: week")
+    should(() => Date.parse('2000-05-15').before(Date.parse('2000-05-15'), DateTime.Unit.MINUTE)).throw("Invalid precision: minute")
 
 describe 'Date.sameOrBefore', ->
 
@@ -479,6 +487,10 @@ describe 'Date.sameOrBefore', ->
     Date.parse('2000-02-01').sameOrBefore(Date.parse('2000-01')).should.be.false()
     Date.parse('2001-01-01').sameOrBefore(Date.parse('2000')).should.be.false()
 
+  it 'should error on incorrect precisions', ->
+    should(() => Date.parse('2000-05-15').sameOrBefore(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw("Invalid precision: week")
+    should(() => Date.parse('2000-05-15').sameOrBefore(Date.parse('2000-05-15'), DateTime.Unit.MINUTE)).throw("Invalid precision: minute")
+
 describe 'Date.after', ->
 
   it 'should accept cases where a is after b', ->
@@ -536,6 +548,10 @@ describe 'Date.after', ->
   it 'should reject cases where b has unknown values but a is still deterministicly before b', ->
     Date.parse('2000-01-01').after(Date.parse('2000-02')).should.be.false()
     Date.parse('2000-01-01').after(Date.parse('2001')).should.be.false()
+
+  it 'should error on incorrect precisions', ->
+    should(() => Date.parse('2000-05-15').after(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw("Invalid precision: week")
+    should(() => Date.parse('2000-05-15').after(Date.parse('2000-05-15'), DateTime.Unit.MINUTE)).throw("Invalid precision: minute")
 
 describe 'Date.sameOrAfter', ->
 
@@ -602,6 +618,10 @@ describe 'Date.sameOrAfter', ->
   it 'should reject cases where b has unknown values but a is still deterministicly before b', ->
     Date.parse('2000-01-31').sameOrAfter(Date.parse('2000-02')).should.be.false()
     Date.parse('2000-12-31').sameOrAfter(Date.parse('2001')).should.be.false()
+
+  it 'should error on incorrect precisions', ->
+    should(() => Date.parse('2000-05-15').sameOrAfter(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw("Invalid precision: week")
+    should(() => Date.parse('2000-05-15').sameOrAfter(Date.parse('2000-05-15'), DateTime.Unit.MINUTE)).throw("Invalid precision: minute")
 
 describe 'Date.reducedPrecision', ->
 

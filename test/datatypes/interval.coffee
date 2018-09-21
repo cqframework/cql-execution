@@ -738,7 +738,6 @@ describe 'DateTimeInterval.union', ->
     i.high.isSamePrecision(j.high).should.be.true()
 
     [x, y] = xy @dIvl.before
-    # TODO: I don't know about these tests... doesn't make sense to me.
     i = x.toYear.union(y.toYear)
     should(i).not.be.null()
     i.low.equals(y.toYear.low)

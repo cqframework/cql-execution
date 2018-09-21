@@ -140,6 +140,16 @@ describe 'DateTime.sameAs with implicit conversion of first variable', ->
     Date.parse('2001').sameAs(DateTime.parse('2000'), DateTime.Unit.MONTH).should.be.false()
     Date.parse('2001').sameAs(DateTime.parse('2000'), DateTime.Unit.YEAR).should.be.false()
 
+  it 'should allow DateTime precisions when a is a Date', ->
+    should(() -> Date.parse('2000-05-15').sameAs(DateTime.parse('2001'), DateTime.Unit.HOUR)).not.throw()
+    should(() -> Date.parse('2000-05-15').sameAs(DateTime.parse('2001'), DateTime.Unit.MINUTE)).not.throw()
+    should(() -> Date.parse('2000-05-15').sameAs(DateTime.parse('2001'), DateTime.Unit.SECOND)).not.throw()
+    should(() -> Date.parse('2000-05-15').sameAs(DateTime.parse('2001'), DateTime.Unit.MILLISECOND)).not.throw()
+
+  it 'should throw an error for invalid precisions', ->
+    should(() -> Date.parse('2000-05-15').sameAs(DateTime.parse('2001'), DateTime.Unit.WEEK)).throw("Invalid precision: week")
+    should(() -> Date.parse('2000-05-15').sameAs(DateTime.parse('2001'), 'femtosecond')).throw("Invalid precision: femtosecond")
+
 describe 'DateTime.after with implicit conversion of first variable', ->
   it 'should use year precision when requested', ->
     Date.parse('2000-06-01').after(DateTime.parse('2000-01-01T12:00:00.0+00'), DateTime.Unit.YEAR).should.be.false()
@@ -188,6 +198,16 @@ describe 'DateTime.after with implicit conversion of first variable', ->
   it 'should reject cases where a has unknown values but b is still deterministicly before a', ->
     Date.parse('2000-01').after(DateTime.parse('2000-02-01T00:00:00.0')).should.be.false()
     Date.parse('2000').after(DateTime.parse('2001-01-01T00:00:00.0')).should.be.false()
+
+  it 'should allow DateTime precisions when a is a Date', ->
+    should(() -> Date.parse('2000-05-15').after(DateTime.parse('2001'), DateTime.Unit.HOUR)).not.throw()
+    should(() -> Date.parse('2000-05-15').after(DateTime.parse('2001'), DateTime.Unit.MINUTE)).not.throw()
+    should(() -> Date.parse('2000-05-15').after(DateTime.parse('2001'), DateTime.Unit.SECOND)).not.throw()
+    should(() -> Date.parse('2000-05-15').after(DateTime.parse('2001'), DateTime.Unit.MILLISECOND)).not.throw()
+
+  it 'should throw an error for invalid precisions', ->
+    should(() -> Date.parse('2000-05-15').after(DateTime.parse('2001'), DateTime.Unit.WEEK)).throw("Invalid precision: week")
+    should(() -> Date.parse('2000-05-15').after(DateTime.parse('2001'), 'femtosecond')).throw("Invalid precision: femtosecond")
 
 describe 'DateTime.sameOrAfter with implicit conversion of first variable', ->
   it 'should use year precision when requested', ->
@@ -252,6 +272,16 @@ describe 'DateTime.sameOrAfter with implicit conversion of first variable', ->
     Date.parse('2000-01').sameOrAfter(DateTime.parse('2000-02-01T00:00:00')).should.be.false()
     Date.parse('2000').sameOrAfter(DateTime.parse('2001-01-01T00:00:00')).should.be.false()
 
+  it 'should allow DateTime precisions when a is a Date', ->
+    should(() -> Date.parse('2000-05-15').sameOrAfter(DateTime.parse('2001'), DateTime.Unit.HOUR)).not.throw()
+    should(() -> Date.parse('2000-05-15').sameOrAfter(DateTime.parse('2001'), DateTime.Unit.MINUTE)).not.throw()
+    should(() -> Date.parse('2000-05-15').sameOrAfter(DateTime.parse('2001'), DateTime.Unit.SECOND)).not.throw()
+    should(() -> Date.parse('2000-05-15').sameOrAfter(DateTime.parse('2001'), DateTime.Unit.MILLISECOND)).not.throw()
+
+  it 'should throw an error for invalid precisions', ->
+    should(() -> Date.parse('2000-05-15').sameOrAfter(DateTime.parse('2001'), DateTime.Unit.WEEK)).throw("Invalid precision: week")
+    should(() -> Date.parse('2000-05-15').sameOrAfter(DateTime.parse('2001'), 'femtosecond')).throw("Invalid precision: femtosecond")
+
 describe 'DateTime.before with implicit conversion of first variable', ->
   it 'should use year precision when requested', ->
     Date.parse('2000-01-01').before(DateTime.parse('2000-06-01T00:00:00.0+00'), DateTime.Unit.YEAR).should.be.false()
@@ -306,6 +336,16 @@ describe 'DateTime.before with implicit conversion of first variable', ->
     Date.parse('2000-01-02').before(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false()
     Date.parse('2000-02').before(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false()
     Date.parse('2001').before(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false()
+
+  it 'should allow DateTime precisions when a is a Date', ->
+    should(() -> Date.parse('2000-05-15').before(DateTime.parse('2001'), DateTime.Unit.HOUR)).not.throw()
+    should(() -> Date.parse('2000-05-15').before(DateTime.parse('2001'), DateTime.Unit.MINUTE)).not.throw()
+    should(() -> Date.parse('2000-05-15').before(DateTime.parse('2001'), DateTime.Unit.SECOND)).not.throw()
+    should(() -> Date.parse('2000-05-15').before(DateTime.parse('2001'), DateTime.Unit.MILLISECOND)).not.throw()
+
+  it 'should throw an error for invalid precisions', ->
+    should(() -> Date.parse('2000-05-15').before(DateTime.parse('2001'), DateTime.Unit.WEEK)).throw("Invalid precision: week")
+    should(() -> Date.parse('2000-05-15').before(DateTime.parse('2001'), 'femtosecond')).throw("Invalid precision: femtosecond")
 
 describe 'DateTime.sameOrBefore with implicit conversion of first variable', ->
   it 'should use year precision when requested', ->
@@ -368,6 +408,15 @@ describe 'DateTime.sameOrBefore with implicit conversion of first variable', ->
     Date.parse('2000-02').sameOrBefore(DateTime.parse('2000-01-31T23:59:59.999')).should.be.false()
     Date.parse('2001').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false()
 
+  it 'should allow DateTime precisions when a is a Date', ->
+    should(() -> Date.parse('2000-05-15').sameOrBefore(DateTime.parse('2001'), DateTime.Unit.HOUR)).not.throw()
+    should(() -> Date.parse('2000-05-15').sameOrBefore(DateTime.parse('2001'), DateTime.Unit.MINUTE)).not.throw()
+    should(() -> Date.parse('2000-05-15').sameOrBefore(DateTime.parse('2001'), DateTime.Unit.SECOND)).not.throw()
+    should(() -> Date.parse('2000-05-15').sameOrBefore(DateTime.parse('2001'), DateTime.Unit.MILLISECOND)).not.throw()
+
+  it 'should throw an error for invalid precisions', ->
+    should(() -> Date.parse('2000-05-15').sameOrBefore(DateTime.parse('2001'), DateTime.Unit.WEEK)).throw("Invalid precision: week")
+    should(() -> Date.parse('2000-05-15').sameOrBefore(DateTime.parse('2001'), 'femtosecond')).throw("Invalid precision: femtosecond")
 
 ## Implicit Conversion Of Second Variable
 

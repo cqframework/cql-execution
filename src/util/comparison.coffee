@@ -83,7 +83,7 @@ deepCompareKeysAndValues = (a, b, comparisonFunction) ->
   # Array.every() will only return true or false, so set a flag for if we should return null
   shouldReturnNull = false
   finalComparisonResult = aKeys.length is bKeys.length and aKeys.every (key) ->
-    # if both are null we should return true to satsify ignoring empty values in tuples
+    # if both are null we should return true to satisfy ignoring empty values in tuples
     return true if a[key] is null and b[key] is null
     comparisonResult = comparisonFunction(a[key], b[key])
     shouldReturnNull = true if comparisonResult == null
