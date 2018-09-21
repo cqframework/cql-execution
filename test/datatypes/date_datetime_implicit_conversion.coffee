@@ -57,7 +57,7 @@ describe 'DateTime.sameAs with implicit conversion of first variable', ->
     should.not.exist Date.parse('2000-05-15').sameAs(DateTime.parse('2000-05'), DateTime.Unit.DAY)
     Date.parse('2000-05-15').sameAs(DateTime.parse('2000-05'), DateTime.Unit.MONTH).should.be.true()
     Date.parse('2000-05-15').sameAs(DateTime.parse('2000-05'), DateTime.Unit.YEAR).should.be.true()
-    should.not.exist Date.parse('2000-05').sameAs(DateTime.parse('2000-05'))
+    Date.parse('2000-05').sameAs(DateTime.parse('2000-05')).should.be.true()
     should.not.exist Date.parse('2000-05').sameAs(DateTime.parse('2000-05'), DateTime.Unit.MILLISECOND)
     should.not.exist Date.parse('2000-05').sameAs(DateTime.parse('2000-05'), DateTime.Unit.SECOND)
     should.not.exist Date.parse('2000-05').sameAs(DateTime.parse('2000-05'), DateTime.Unit.MINUTE)
@@ -107,7 +107,7 @@ describe 'DateTime.sameAs with implicit conversion of first variable', ->
     should.not.exist Date.parse('2000-05-15').sameAs(DateTime.parse('2000'), DateTime.Unit.DAY)
     should.not.exist Date.parse('2000-05-15').sameAs(DateTime.parse('2000'), DateTime.Unit.MONTH)
     Date.parse('2000-05-15').sameAs(DateTime.parse('2000'), DateTime.Unit.YEAR).should.be.true()
-    should.not.exist Date.parse('2000').sameAs(DateTime.parse('2000'))
+    Date.parse('2000').sameAs(DateTime.parse('2000')).should.be.true()
     should.not.exist Date.parse('2000').sameAs(DateTime.parse('2000'), DateTime.Unit.MILLISECOND)
     should.not.exist Date.parse('2000').sameAs(DateTime.parse('2000'), DateTime.Unit.SECOND)
     should.not.exist Date.parse('2000').sameAs(DateTime.parse('2000'), DateTime.Unit.MINUTE)
@@ -153,9 +153,9 @@ describe 'DateTime.after with implicit conversion of first variable', ->
     Date.parse('2000-02-15').after(DateTime.parse('2000-02-15T12:00:00.0+00'), DateTime.Unit.DAY).should.be.false()
     Date.parse('2000-02-15').after(DateTime.parse('2000-02-14T23:59:59.999+00'), DateTime.Unit.DAY).should.be.true()
 
-  it 'should return null in cases where a is b but there are unknown values', ->
-    should.not.exist Date.parse('2000-01').after(DateTime.parse('2000-01'))
-    should.not.exist Date.parse('2000').after(DateTime.parse('2000'))
+  it 'should return false in cases where a is b but there are unknown values with matching precision', ->
+    Date.parse('2000-01').after(DateTime.parse('2000-01')).should.be.false()
+    Date.parse('2000').after(DateTime.parse('2000')).should.be.false()
 
   it 'should return null in cases where b has unknown values that prevent deterministic result', ->
     should.not.exist Date.parse('2000-01-02').after(DateTime.parse('2000-01'))
@@ -194,7 +194,7 @@ describe 'DateTime.sameOrAfter with implicit conversion of first variable', ->
     Date.parse('2000-01-01').sameOrAfter(DateTime.parse('2000-06-01T00:00:00.0+00'), DateTime.Unit.YEAR).should.be.true()
     Date.parse('1999-12-31').sameOrAfter(DateTime.parse('2000-06-01T00:00:00.0+00'), DateTime.Unit.YEAR).should.be.false()
 
- it 'should use month precision when requested', ->
+  it 'should use month precision when requested', ->
     Date.parse('2000-02-01').sameOrAfter(DateTime.parse('2000-02-15T00:00:00.0+00'), DateTime.Unit.MONTH).should.be.true()
     Date.parse('2000-01-31').sameOrAfter(DateTime.parse('2000-02-15T00:00:00.0+00'), DateTime.Unit.MONTH).should.be.false()
 
@@ -202,11 +202,11 @@ describe 'DateTime.sameOrAfter with implicit conversion of first variable', ->
     Date.parse('2000-02-15').sameOrAfter(DateTime.parse('2000-02-15T12:00:00.0+00'), DateTime.Unit.DAY).should.be.true()
     Date.parse('2000-02-14').sameOrAfter(DateTime.parse('2000-02-15T12:00:00.0+00'), DateTime.Unit.DAY).should.be.false()
 
-  it 'should return null in cases where a is b but there are unknown values in a and b', ->
-    should.not.exist Date.parse('2000-01').sameOrAfter(DateTime.parse('2000-01'))
-    should.not.exist Date.parse('2000').sameOrAfter(DateTime.parse('2000'))
+  it 'should return true in cases where a is b but there are unknown values in a and b but precision matches', ->
+    Date.parse('2000-01').sameOrAfter(DateTime.parse('2000-01')).should.be.true()
+    Date.parse('2000').sameOrAfter(DateTime.parse('2000')).should.be.true()
 
- it 'should return null in cases where b has unknown values that prevent deterministic result', ->
+  it 'should return null in cases where b has unknown values that prevent deterministic result', ->
     should.not.exist Date.parse('2000-01-01').sameOrAfter(DateTime.parse('2000-01'))
     should.not.exist Date.parse('2000-01-01').sameOrAfter(DateTime.parse('2000'))
 
@@ -214,7 +214,7 @@ describe 'DateTime.sameOrAfter with implicit conversion of first variable', ->
     should.not.exist Date.parse('2000-01').sameOrAfter(DateTime.parse('2000-01-02T12:00:00.001'))
     should.not.exist Date.parse('2000').sameOrAfter(DateTime.parse('2000-01-02T12:00:00.001'))
 
- it 'should accept cases where b has unknown values but is still deterministicly after a', ->
+  it 'should accept cases where b has unknown values but is still deterministicly after a', ->
     Date.parse('2000-01-02').sameOrAfter(DateTime.parse('2000-01-01T00:00:00')).should.be.true()
     Date.parse('2000-01-02').sameOrAfter(DateTime.parse('2000-01-01T00:00')).should.be.true()
     Date.parse('2000-01-02').sameOrAfter(DateTime.parse('2000-01-01T00')).should.be.true()
@@ -222,7 +222,7 @@ describe 'DateTime.sameOrAfter with implicit conversion of first variable', ->
     Date.parse('2000-02-01').sameOrAfter(DateTime.parse('2000-01')).should.be.true()
     Date.parse('2001-01-01').sameOrAfter(DateTime.parse('2000')).should.be.true()
 
- it 'should accept cases where b has unknown values but is still deterministicly after or same as a', ->
+  it 'should accept cases where b has unknown values but is still deterministicly after or same as a', ->
     Date.parse('2000-01-02').sameOrAfter(DateTime.parse('2000-01-01T00:00:00')).should.be.true()
     Date.parse('2000-01-02').sameOrAfter(DateTime.parse('2000-01-01T00:00')).should.be.true()
     Date.parse('2000-01-02').sameOrAfter(DateTime.parse('2000-01-01T00')).should.be.true()
@@ -235,10 +235,10 @@ describe 'DateTime.sameOrAfter with implicit conversion of first variable', ->
     Date.parse('2000-02').sameOrAfter(DateTime.parse('2000-01-31T23:59:59.999')).should.be.true()
     Date.parse('2001').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
 
-  it 'should accept cases where a has unknown values but b is still deterministicly after or same as a', ->
-    Date.parse('2000-01-01').sameOrAfter(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true()
-    Date.parse('2000-01').sameOrAfter(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true()
-    Date.parse('2000').sameOrAfter(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true()
+  it 'should handle cases where a has unknown values but b is not deterministicly after or same as a', ->
+    should.not.exist Date.parse('2000-01-01').sameOrAfter(DateTime.parse('2000-01-01T00:00:00.0'))
+    should.not.exist Date.parse('2000-01').sameOrAfter(DateTime.parse('2000-01-01T00:00:00.0'))
+    should.not.exist Date.parse('2000').sameOrAfter(DateTime.parse('2000-01-01T00:00:00.0'))
 
   it 'should reject cases where b has unknown values but is still deterministicly before a', ->
     Date.parse('2000-01-01').sameOrAfter(DateTime.parse('2000-01-02T00:00:01')).should.be.false()
@@ -265,19 +265,20 @@ describe 'DateTime.before with implicit conversion of first variable', ->
     Date.parse('2000-02-15').before(DateTime.parse('2000-02-15T12:00:00.0+00'), DateTime.Unit.DAY).should.be.false()
     Date.parse('2000-02-14').before(DateTime.parse('2000-02-15T23:00:00.0+00'), DateTime.Unit.DAY).should.be.true()
 
-  it 'should return null in cases where a is b but there are unknown values', ->
-    should.not.exist Date.parse('2000-01').before(DateTime.parse('2000-01'))
-    should.not.exist Date.parse('2000').before(DateTime.parse('2000'))
+  it 'should return false in cases where a is b but there are unknown values and precision matches', ->
+    Date.parse('2000-01').before(DateTime.parse('2000-01')).should.be.false()
+    Date.parse('2000').before(DateTime.parse('2000')).should.be.false()
 
-  it.skip 'should return null in cases where b has unknown values that prevent deterministic result', ->
+  it 'should return null in cases where b has unknown values that prevent deterministic result', ->
     should.not.exist Date.parse('2000-01-01').before(DateTime.parse('2000-01-01T00:00:00'))
     should.not.exist Date.parse('2000-01-01').before(DateTime.parse('2000-01-01T00:00'))
     should.not.exist Date.parse('2000-01-01').before(DateTime.parse('2000-01-01T00'))
-    should.not.exist Date.parse('2000-01-01').before(DateTime.parse('2000-01-01'))
+    # this case has the same precision and can give determinate result
+    Date.parse('2000-01-01').before(DateTime.parse('2000-01-01')).should.be.false()
     should.not.exist Date.parse('2000-01-01').before(DateTime.parse('2000-01'))
     should.not.exist Date.parse('2000-01-01').before(DateTime.parse('2000'))
 
-  it.skip 'should return null in cases where a has unknown values that prevent deterministic result', ->
+  it 'should return null in cases where a has unknown values that prevent deterministic result', ->
     should.not.exist Date.parse('2000-01').before(DateTime.parse('2000-01-01T00:00:00.001'))
     should.not.exist Date.parse('2000').before(DateTime.parse('2000-01-01T00:00:00.001'))
 
@@ -319,9 +320,9 @@ describe 'DateTime.sameOrBefore with implicit conversion of first variable', ->
     Date.parse('2000-02-15').sameOrBefore(DateTime.parse('2000-02-15T23:59:59.999+00'), DateTime.Unit.DAY).should.be.true()
     Date.parse('2000-02-15').sameOrBefore(DateTime.parse('2000-02-14T23:59:59.999+00'), DateTime.Unit.DAY).should.be.false()
 
-  it 'should return null in cases where a is b but there and b have unknown values', ->
-    should.not.exist Date.parse('2000-01').sameOrBefore(DateTime.parse('2000-01'))
-    should.not.exist Date.parse('2000').sameOrBefore(DateTime.parse('2000'))
+  it 'should return true in cases where a is b but there and b have unknown values with matching precision', ->
+    Date.parse('2000-01').sameOrBefore(DateTime.parse('2000-01')).should.be.true()
+    Date.parse('2000').sameOrBefore(DateTime.parse('2000')).should.be.true()
 
   it 'should return null in cases where b has unknown values that prevent deterministic result', ->
     should.not.exist Date.parse('2000-01-31').sameOrBefore(DateTime.parse('2000-01'))
@@ -351,9 +352,9 @@ describe 'DateTime.sameOrBefore with implicit conversion of first variable', ->
     Date.parse('2000-01').sameOrBefore(DateTime.parse('2000-02-01T00:00:00.0')).should.be.true()
     Date.parse('2000').sameOrBefore(DateTime.parse('2001-01-01T00:00:00.0')).should.be.true()
 
-  it 'should accept cases where a has unknown values but b is still deterministicly same as or before a', ->
-    Date.parse('2000-01').sameOrBefore(DateTime.parse('2000-01-31T23:59:59.999')).should.be.true()
-    Date.parse('2000').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true()
+  it 'should accept cases where a has unknown values but b is not deterministicly same as or before a', ->
+    should.not.exist Date.parse('2000-01').sameOrBefore(DateTime.parse('2000-01-31T23:59:59.999'))
+    should.not.exist Date.parse('2000').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999'))
 
   it 'should reject cases where b has unknown values but is still deterministicly after a', ->
     Date.parse('2000-01-02').sameOrBefore(DateTime.parse('2000-01-01T00:00:00')).should.be.false()
@@ -413,7 +414,7 @@ describe 'DateTime.sameAs with implicit conversion of second variable', ->
     should.not.exist DateTime.parse('2000-05').sameAs(Date.parse('2000-05-15'), DateTime.Unit.DAY)
     DateTime.parse('2000-05').sameAs(Date.parse('2000-05-15'), DateTime.Unit.MONTH).should.be.true()
     DateTime.parse('2000-05').sameAs(Date.parse('2000-05-15'), DateTime.Unit.YEAR).should.be.true()
-    should.not.exist DateTime.parse('2000-05').sameAs(Date.parse('2000-05'))
+    DateTime.parse('2000-05').sameAs(Date.parse('2000-05')).should.be.true()
     should.not.exist DateTime.parse('2000-05').sameAs(Date.parse('2000-05'), DateTime.Unit.MILLISECOND)
     should.not.exist DateTime.parse('2000-05').sameAs(Date.parse('2000-05'), DateTime.Unit.SECOND)
     should.not.exist DateTime.parse('2000-05').sameAs(Date.parse('2000-05'), DateTime.Unit.MINUTE)
@@ -463,7 +464,7 @@ describe 'DateTime.sameAs with implicit conversion of second variable', ->
     should.not.exist DateTime.parse('2000').sameAs(Date.parse('2000-05-15'), DateTime.Unit.DAY)
     should.not.exist DateTime.parse('2000').sameAs(Date.parse('2000-05-15'), DateTime.Unit.MONTH)
     DateTime.parse('2000').sameAs(Date.parse('2000-05-15'), DateTime.Unit.YEAR).should.be.true()
-    should.not.exist DateTime.parse('2000').sameAs(Date.parse('2000'))
+    DateTime.parse('2000').sameAs(Date.parse('2000')).should.be.true()
     should.not.exist DateTime.parse('2000').sameAs(Date.parse('2000'), DateTime.Unit.MILLISECOND)
     should.not.exist DateTime.parse('2000').sameAs(Date.parse('2000'), DateTime.Unit.SECOND)
     should.not.exist DateTime.parse('2000').sameAs(Date.parse('2000'), DateTime.Unit.MINUTE)
@@ -509,16 +510,16 @@ describe 'DateTime.before with implicit conversion of second variable', ->
     DateTime.parse('2000-02-15T00:00:00.0+00').before(Date.parse('2000-02-15'), DateTime.Unit.DAY).should.be.false()
     DateTime.parse('2000-02-14T23:59:59.999+00').before(Date.parse('2000-02-15'), DateTime.Unit.DAY).should.be.true()
 
-  it 'should return null in cases where a is b but there are unknown values', ->
-    should.not.exist DateTime.parse('2000-01-01').before(Date.parse('2000-01-01'))
-    should.not.exist DateTime.parse('2000-01').before(Date.parse('2000-01'))
-    should.not.exist DateTime.parse('2000').before(Date.parse('2000'))
+  it 'should return false in cases where a is b but there are unknown values with matching precision', ->
+    DateTime.parse('2000-01-01').before(Date.parse('2000-01-01')).should.be.false()
+    DateTime.parse('2000-01').before(Date.parse('2000-01')).should.be.false()
+    DateTime.parse('2000').before(Date.parse('2000')).should.be.false()
 
   it 'should return null in cases where a has unknown values that prevent deterministic result', ->
     should.not.exist DateTime.parse('2000-01-01T00:00:00').before(Date.parse('2000-01-01'))
     should.not.exist DateTime.parse('2000-01-01T00:00').before(Date.parse('2000-01-01'))
     should.not.exist DateTime.parse('2000-01-01T00').before(Date.parse('2000-01-01'))
-    should.not.exist DateTime.parse('2000-01-01').before(Date.parse('2000-01-01'))
+    DateTime.parse('2000-01-01').before(Date.parse('2000-01-01')).should.be.false()
     should.not.exist DateTime.parse('2000-01').before(Date.parse('2000-01-01'))
     should.not.exist DateTime.parse('2000').before(Date.parse('2000-01-01'))
 
@@ -566,16 +567,17 @@ describe 'DateTime.sameOrBefore with implicit conversion of second variable', ->
     DateTime.parse('2000-02-15T12:00:00.0+00').sameOrBefore(Date.parse('2000-02-15'), DateTime.Unit.DAY).should.be.true()
     DateTime.parse('2000-02-15T12:00:00.0+00').sameOrBefore(Date.parse('2000-02-14'), DateTime.Unit.DAY).should.be.false()
 
-  it 'should return null in cases where a is b but there are unknown values in a and b', ->
-    should.not.exist DateTime.parse('2000-01-01').sameOrBefore(Date.parse('2000-01-01'))
-    should.not.exist DateTime.parse('2000-01').sameOrBefore(Date.parse('2000-01'))
-    should.not.exist DateTime.parse('2000').sameOrBefore(Date.parse('2000'))
+  it 'should return true in cases where a is b but there are unknown values in a and b with matching precision', ->
+    DateTime.parse('2000-01-01').sameOrBefore(Date.parse('2000-01-01')).should.be.true()
+    DateTime.parse('2000-01').sameOrBefore(Date.parse('2000-01')).should.be.true()
+    DateTime.parse('2000').sameOrBefore(Date.parse('2000')).should.be.true()
 
   it 'should return null in cases where a has unknown values that prevent deterministic result', ->
     should.not.exist DateTime.parse('2000-01-01T00:00:00').sameOrBefore(Date.parse('2000-01-01'))
     should.not.exist DateTime.parse('2000-01-01T00:00').sameOrBefore(Date.parse('2000-01-01'))
     should.not.exist DateTime.parse('2000-01-01T00').sameOrBefore(Date.parse('2000-01-01'))
-    should.not.exist DateTime.parse('2000-01-01').sameOrBefore(Date.parse('2000-01-01'))
+    # Same precision therefore true.
+    DateTime.parse('2000-01-01').sameOrBefore(Date.parse('2000-01-01')).should.be.true()
     should.not.exist DateTime.parse('2000-01').sameOrBefore(Date.parse('2000-01-01'))
     should.not.exist DateTime.parse('2000').sameOrBefore(Date.parse('2000-01-01'))
 
@@ -605,10 +607,10 @@ describe 'DateTime.sameOrBefore with implicit conversion of second variable', ->
     DateTime.parse('2000-01-31T23:59:59.999').sameOrBefore(Date.parse('2000-02')).should.be.true()
     DateTime.parse('2000-12-31T23:59:59.999').sameOrBefore(Date.parse('2001')).should.be.true()
 
-  it 'should accept cases where b has unknown values but a is still deterministicly before or same as b', ->
-    DateTime.parse('2000-01-01T00:00:00.0').sameOrBefore(Date.parse('2000-01-01')).should.be.true()
-    DateTime.parse('2000-01-01T00:00:00.0').sameOrBefore(Date.parse('2000-01')).should.be.true()
-    DateTime.parse('2000-01-01T00:00:00.0').sameOrBefore(Date.parse('2000')).should.be.true()
+  it 'should return null for cases where b has unknown values but a is not deterministicly before or same as b', ->
+    should.not.exist DateTime.parse('2000-01-01T00:00:00.0').sameOrBefore(Date.parse('2000-01-01'))
+    should.not.exist DateTime.parse('2000-01-01T00:00:00.0').sameOrBefore(Date.parse('2000-01'))
+    should.not.exist DateTime.parse('2000-01-01T00:00:00.0').sameOrBefore(Date.parse('2000'))
 
   it 'should reject cases where a has unknown values but is still deterministicly after b', ->
     DateTime.parse('2000-01-02T00:00:01').sameOrBefore(Date.parse('2000-01-01')).should.be.false()
@@ -636,16 +638,17 @@ describe 'DateTime.after with implicit conversion of second variable', ->
     DateTime.parse('2000-02-15T12:00:00.0+00').after(Date.parse('2000-02-15'), DateTime.Unit.DAY).should.be.false()
     DateTime.parse('2000-02-15T12:00:00.0+00').after(Date.parse('2000-02-14'), DateTime.Unit.DAY).should.be.true()
 
-  it 'should return null in cases where a is b but there are unknown values', ->
-    should.not.exist DateTime.parse('2000-01-01').after(Date.parse('2000-01-01'))
-    should.not.exist DateTime.parse('2000-01').after(Date.parse('2000-01'))
-    should.not.exist DateTime.parse('2000').after(Date.parse('2000'))
+  it 'should return true in cases where a is b but there are unknown values but precision matches', ->
+    DateTime.parse('2000-01-01').after(Date.parse('2000-01-01')).should.be.false()
+    DateTime.parse('2000-01').after(Date.parse('2000-01')).should.be.false()
+    DateTime.parse('2000').after(Date.parse('2000')).should.be.false()
 
-  it 'should return null in cases where a has unknown values that prevent deterministic result', ->
+  it 'should handle cases where a has unknown values that prevent deterministic result', ->
     should.not.exist DateTime.parse('2000-01-01T00:00:00').after(Date.parse('2000-01-01'))
     should.not.exist DateTime.parse('2000-01-01T00:00').after(Date.parse('2000-01-01'))
     should.not.exist DateTime.parse('2000-01-01T00').after(Date.parse('2000-01-01'))
-    should.not.exist DateTime.parse('2000-01-01').after(Date.parse('2000-01-01'))
+    # matching precisions should be false
+    DateTime.parse('2000-01-01').after(Date.parse('2000-01-01')).should.be.false()
     should.not.exist DateTime.parse('2000-01').after(Date.parse('2000-01-01'))
     should.not.exist DateTime.parse('2000').after(Date.parse('2000-01-01'))
 
@@ -696,19 +699,21 @@ describe 'DateTime.sameOrAfter with implicit conversion of second variable', ->
     DateTime.parse('2000-02-15T00:00:00.0+00').sameOrAfter(Date.parse('2000-02-15'), DateTime.Unit.DAY).should.be.true()
     DateTime.parse('2000-02-14T23:59:59.999+00').sameOrAfter(Date.parse('2000-02-15'), DateTime.Unit.DAY).should.be.false()
 
-  it 'should return null in cases where a is b but there and b have unknown values', ->
+  it 'should handle cases where a is b but there and b have unknown values', ->
     should.not.exist DateTime.parse('2000-01-01T00:00:00').sameOrAfter(Date.parse('2000-01-01'))
     should.not.exist DateTime.parse('2000-01-01T00:00').sameOrAfter(Date.parse('2000-01-01'))
     should.not.exist DateTime.parse('2000-01-01T00').sameOrAfter(Date.parse('2000-01-01'))
-    should.not.exist DateTime.parse('2000-01-01').sameOrAfter(Date.parse('2000-01-01'))
-    should.not.exist DateTime.parse('2000-01').sameOrAfter(Date.parse('2000-01'))
-    should.not.exist DateTime.parse('2000').sameOrAfter(Date.parse('2000'))
+    # matching precision, therefore true
+    DateTime.parse('2000-01-01').sameOrAfter(Date.parse('2000-01-01')).should.be.true()
+    DateTime.parse('2000-01').sameOrAfter(Date.parse('2000-01')).should.be.true()
+    DateTime.parse('2000').sameOrAfter(Date.parse('2000')).should.be.true()
 
   it 'should return null in cases where a has unknown values that prevent deterministic result', ->
     should.not.exist DateTime.parse('2000-01-01T00:00:00').sameOrAfter(Date.parse('2000-01-01'))
     should.not.exist DateTime.parse('2000-01-01T00:00').sameOrAfter(Date.parse('2000-01-01'))
     should.not.exist DateTime.parse('2000-01-01T00').sameOrAfter(Date.parse('2000-01-01'))
-    should.not.exist DateTime.parse('2000-01-01').sameOrAfter(Date.parse('2000-01-01'))
+    # matching precision, therefore true
+    DateTime.parse('2000-01-01').sameOrAfter(Date.parse('2000-01-01')).should.be.true()
     should.not.exist DateTime.parse('2000-01').sameOrAfter(Date.parse('2000-01-31'))
     should.not.exist DateTime.parse('2000').sameOrAfter(Date.parse('2000-12-31'))
 
@@ -738,10 +743,10 @@ describe 'DateTime.sameOrAfter with implicit conversion of second variable', ->
     DateTime.parse('2000-02-01T00:00:00.0').sameOrAfter(Date.parse('2000-01')).should.be.true()
     DateTime.parse('2001-01-01T00:00:00.0').sameOrAfter(Date.parse('2000')).should.be.true()
 
-  it 'should accept cases where b has unknown values but a is still deterministicly same as or after b', ->
-    DateTime.parse('2000-01-01T23:59:59.999').sameOrAfter(Date.parse('2000-01-01')).should.be.true()
-    DateTime.parse('2000-01-31T23:59:59.999').sameOrAfter(Date.parse('2000-01')).should.be.true()
-    DateTime.parse('2000-12-31T23:59:59.999').sameOrAfter(Date.parse('2000')).should.be.true()
+  it 'should accept cases where b has unknown values but a is not deterministicly same as or after b', ->
+    should.not.exist DateTime.parse('2000-01-01T23:59:59.999').sameOrAfter(Date.parse('2000-01-01'))
+    should.not.exist DateTime.parse('2000-01-31T23:59:59.999').sameOrAfter(Date.parse('2000-01'))
+    should.not.exist DateTime.parse('2000-12-31T23:59:59.999').sameOrAfter(Date.parse('2000'))
 
   it 'should reject cases where a has unknown values but is still deterministicly before b', ->
     DateTime.parse('2000-01-01T00:00:00').sameOrAfter(Date.parse('2000-01-02')).should.be.false()

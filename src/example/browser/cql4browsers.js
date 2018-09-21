@@ -734,110 +734,6 @@
       return d.reducedPrecision(this.getPrecision());
     };
 
-    DateTime.prototype.sameAs = function(other, precision) {
-      var diff;
-      if (precision == null) {
-        precision = DateTime.Unit.MILLISECOND;
-      }
-      other = this._implicitlyConvert(other);
-      if (!(other instanceof DateTime)) {
-        null;
-      }
-      diff = this.differenceBetween(other, precision);
-      switch (false) {
-        case !(diff.low === 0 && diff.high === 0):
-          return true;
-        case !(diff.low <= 0 && diff.high >= 0):
-          return null;
-        default:
-          return false;
-      }
-    };
-
-    DateTime.prototype.equals = function(other) {
-      return this.sameAs(other, DateTime.Unit.MILLISECOND);
-    };
-
-    DateTime.prototype.sameOrBefore = function(other, precision) {
-      var diff;
-      if (precision == null) {
-        precision = DateTime.Unit.MILLISECOND;
-      }
-      other = this._implicitlyConvert(other);
-      if (!(other instanceof DateTime)) {
-        return false;
-      }
-      diff = this.differenceBetween(other, precision);
-      switch (false) {
-        case !(diff.low >= 0 && diff.high >= 0):
-          return true;
-        case !(diff.low < 0 && diff.high < 0):
-          return false;
-        default:
-          return null;
-      }
-    };
-
-    DateTime.prototype.sameOrAfter = function(other, precision) {
-      var diff;
-      if (precision == null) {
-        precision = DateTime.Unit.MILLISECOND;
-      }
-      other = this._implicitlyConvert(other);
-      if (!(other instanceof DateTime)) {
-        return false;
-      }
-      diff = this.differenceBetween(other, precision);
-      switch (false) {
-        case !(diff.low <= 0 && diff.high <= 0):
-          return true;
-        case !(diff.low > 0 && diff.high > 0):
-          return false;
-        default:
-          return null;
-      }
-    };
-
-    DateTime.prototype.before = function(other, precision) {
-      var diff;
-      if (precision == null) {
-        precision = DateTime.Unit.MILLISECOND;
-      }
-      other = this._implicitlyConvert(other);
-      if (!(other instanceof DateTime)) {
-        return false;
-      }
-      diff = this.differenceBetween(other, precision);
-      switch (false) {
-        case !(diff.low > 0 && diff.high > 0):
-          return true;
-        case !(diff.low <= 0 && diff.high <= 0):
-          return false;
-        default:
-          return null;
-      }
-    };
-
-    DateTime.prototype.after = function(other, precision) {
-      var diff;
-      if (precision == null) {
-        precision = DateTime.Unit.MILLISECOND;
-      }
-      other = this._implicitlyConvert(other);
-      if (!(other instanceof DateTime)) {
-        return false;
-      }
-      diff = this.differenceBetween(other, precision);
-      switch (false) {
-        case !(diff.low < 0 && diff.high < 0):
-          return true;
-        case !(diff.low >= 0 && diff.high >= 0):
-          return false;
-        default:
-          return null;
-      }
-    };
-
     DateTime.prototype.add = function(offset, field) {
       var i, len, normalized, ref1, result;
       result = this.copy();
@@ -1213,120 +1109,6 @@
       }
     };
 
-    Date.prototype.sameAs = function(other, precision) {
-      var diff;
-      if (precision == null) {
-        precision = Date.Unit.DAY;
-      }
-      if (other instanceof DateTime) {
-        return this.getDateTime().sameAs(other, precision);
-      }
-      if (!(other instanceof Date)) {
-        null;
-      }
-      diff = this.differenceBetween(other, precision);
-      switch (false) {
-        case !(diff.low === 0 && diff.high === 0):
-          return true;
-        case !(diff.low <= 0 && diff.high >= 0):
-          return null;
-        default:
-          return false;
-      }
-    };
-
-    Date.prototype.equals = function(other) {
-      return this.sameAs(other, Date.Unit.DAY);
-    };
-
-    Date.prototype.sameOrBefore = function(other, precision) {
-      var diff;
-      if (precision == null) {
-        precision = Date.Unit.DAY;
-      }
-      if (other instanceof DateTime) {
-        return this.getDateTime().sameOrBefore(other, precision);
-      }
-      if (!(other instanceof Date)) {
-        return false;
-      }
-      diff = this.differenceBetween(other, precision);
-      switch (false) {
-        case !(diff.low >= 0 && diff.high >= 0):
-          return true;
-        case !(diff.low < 0 && diff.high < 0):
-          return false;
-        default:
-          return null;
-      }
-    };
-
-    Date.prototype.sameOrAfter = function(other, precision) {
-      var diff;
-      if (precision == null) {
-        precision = Date.Unit.DAY;
-      }
-      if (other instanceof DateTime) {
-        return this.getDateTime().sameOrAfter(other, precision);
-      }
-      if (!(other instanceof Date)) {
-        return false;
-      }
-      diff = this.differenceBetween(other, precision);
-      switch (false) {
-        case !(diff.low <= 0 && diff.high <= 0):
-          return true;
-        case !(diff.low > 0 && diff.high > 0):
-          return false;
-        default:
-          return null;
-      }
-    };
-
-    Date.prototype.before = function(other, precision) {
-      var diff;
-      if (precision == null) {
-        precision = Date.Unit.DAY;
-      }
-      if (other instanceof DateTime) {
-        return this.getDateTime().before(other, precision);
-      }
-      if (!(other instanceof Date)) {
-        return false;
-      }
-      diff = this.differenceBetween(other, precision);
-      switch (false) {
-        case !(diff.low > 0 && diff.high > 0):
-          return true;
-        case !(diff.low <= 0 && diff.high <= 0):
-          return false;
-        default:
-          return null;
-      }
-    };
-
-    Date.prototype.after = function(other, precision) {
-      var diff;
-      if (precision == null) {
-        precision = Date.Unit.DAY;
-      }
-      if (other instanceof DateTime) {
-        return this.getDateTime().after(other, precision);
-      }
-      if (!(other instanceof Date)) {
-        return false;
-      }
-      diff = this.differenceBetween(other, precision);
-      switch (false) {
-        case !(diff.low < 0 && diff.high < 0):
-          return true;
-        case !(diff.low >= 0 && diff.high >= 0):
-          return false;
-        default:
-          return null;
-      }
-    };
-
     Date.prototype.add = function(offset, field) {
       var i, len, normalized, ref1, result;
       result = this.copy();
@@ -1560,6 +1342,228 @@
       }
     }
     return true;
+  };
+
+  DateTime.prototype.equals = Date.prototype.equals = function(other) {
+    var field, i, len, ref1;
+    if (!((this.isDate && other.isDate) || (this.isDateTime && other.isDateTime))) {
+      return false;
+    }
+    if (this.timezoneOffset !== other.timezoneOffset) {
+      other = other.convertToTimezoneOffset(this.timezoneOffset);
+    }
+    ref1 = this.constructor.FIELDS;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      field = ref1[i];
+      if ((this[field] != null) && (other[field] != null)) {
+        if (this[field] !== other[field]) {
+          return false;
+        }
+      } else if ((this[field] == null) && (other[field] == null)) {
+        return true;
+      } else {
+        return null;
+      }
+    }
+    return true;
+  };
+
+  DateTime.prototype.sameAs = Date.prototype.sameAs = function(other, precision) {
+    var field, i, len, ref1;
+    if (!(other.isDate || other.isDateTime)) {
+      return null;
+    } else if (this.isDate && other.isDateTime) {
+      return this.getDateTime().sameAs(other, precision);
+    } else if (this.isDateTime && other.isDate) {
+      other = other.getDateTime();
+    }
+    if ((precision != null) && this.constructor.FIELDS.indexOf(precision) < 0) {
+      throw new Error("Invalid precision: " + precision);
+    }
+    if (this.timezoneOffset !== other.timezoneOffset) {
+      other = other.convertToTimezoneOffset(this.timezoneOffset);
+    }
+    ref1 = this.constructor.FIELDS;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      field = ref1[i];
+      if ((this[field] != null) && (other[field] != null)) {
+        if (this[field] !== other[field]) {
+          return false;
+        }
+      } else if ((this[field] == null) && (other[field] == null)) {
+        if (precision == null) {
+          return true;
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+      if ((precision != null) && precision === field) {
+        break;
+      }
+    }
+    return true;
+  };
+
+  DateTime.prototype.sameOrBefore = Date.prototype.sameOrBefore = function(other, precision) {
+    var field, i, len, ref1;
+    if (!(other.isDate || other.isDateTime)) {
+      return null;
+    } else if (this.isDate && other.isDateTime) {
+      return this.getDateTime().sameOrBefore(other, precision);
+    } else if (this.isDateTime && other.isDate) {
+      other = other.getDateTime();
+    }
+    if ((precision != null) && this.constructor.FIELDS.indexOf(precision) < 0) {
+      throw new Error("Invalid precision: " + precision);
+    }
+    if (this.timezoneOffset !== other.timezoneOffset) {
+      other = other.convertToTimezoneOffset(this.timezoneOffset);
+    }
+    ref1 = this.constructor.FIELDS;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      field = ref1[i];
+      if ((this[field] != null) && (other[field] != null)) {
+        if (this[field] < other[field]) {
+          return true;
+        } else if (this[field] > other[field]) {
+          return false;
+        }
+      } else if ((this[field] == null) && (other[field] == null)) {
+        if (precision == null) {
+          return true;
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+      if ((precision != null) && precision === field) {
+        break;
+      }
+    }
+    return true;
+  };
+
+  DateTime.prototype.sameOrAfter = Date.prototype.sameOrAfter = function(other, precision) {
+    var field, i, len, ref1;
+    if (!(other.isDate || other.isDateTime)) {
+      return null;
+    } else if (this.isDate && other.isDateTime) {
+      return this.getDateTime().sameOrAfter(other, precision);
+    } else if (this.isDateTime && other.isDate) {
+      other = other.getDateTime();
+    }
+    if ((precision != null) && this.constructor.FIELDS.indexOf(precision) < 0) {
+      throw new Error("Invalid precision: " + precision);
+    }
+    if (this.timezoneOffset !== other.timezoneOffset) {
+      other = other.convertToTimezoneOffset(this.timezoneOffset);
+    }
+    ref1 = this.constructor.FIELDS;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      field = ref1[i];
+      if ((this[field] != null) && (other[field] != null)) {
+        if (this[field] > other[field]) {
+          return true;
+        } else if (this[field] < other[field]) {
+          return false;
+        }
+      } else if ((this[field] == null) && (other[field] == null)) {
+        if (precision == null) {
+          return true;
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+      if ((precision != null) && precision === field) {
+        break;
+      }
+    }
+    return true;
+  };
+
+  DateTime.prototype.before = Date.prototype.before = function(other, precision) {
+    var field, i, len, ref1;
+    if (!(other.isDate || other.isDateTime)) {
+      return null;
+    } else if (this.isDate && other.isDateTime) {
+      return this.getDateTime().before(other, precision);
+    } else if (this.isDateTime && other.isDate) {
+      other = other.getDateTime();
+    }
+    if ((precision != null) && this.constructor.FIELDS.indexOf(precision) < 0) {
+      throw new Error("Invalid precision: " + precision);
+    }
+    if (this.timezoneOffset !== other.timezoneOffset) {
+      other = other.convertToTimezoneOffset(this.timezoneOffset);
+    }
+    ref1 = this.constructor.FIELDS;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      field = ref1[i];
+      if ((this[field] != null) && (other[field] != null)) {
+        if (this[field] < other[field]) {
+          return true;
+        } else if (this[field] > other[field]) {
+          return false;
+        }
+      } else if ((this[field] == null) && (other[field] == null)) {
+        if (precision == null) {
+          return false;
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+      if ((precision != null) && precision === field) {
+        break;
+      }
+    }
+    return false;
+  };
+
+  DateTime.prototype.after = Date.prototype.after = function(other, precision) {
+    var field, i, len, ref1;
+    if (!(other.isDate || other.isDateTime)) {
+      return null;
+    } else if (this.isDate && other.isDateTime) {
+      return this.getDateTime().after(other, precision);
+    } else if (this.isDateTime && other.isDate) {
+      other = other.getDateTime();
+    }
+    if ((precision != null) && this.constructor.FIELDS.indexOf(precision) < 0) {
+      throw new Error("Invalid precision: " + precision);
+    }
+    if (this.timezoneOffset !== other.timezoneOffset) {
+      other = other.convertToTimezoneOffset(this.timezoneOffset);
+    }
+    ref1 = this.constructor.FIELDS;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      field = ref1[i];
+      if ((this[field] != null) && (other[field] != null)) {
+        if (this[field] > other[field]) {
+          return true;
+        } else if (this[field] < other[field]) {
+          return false;
+        }
+      } else if ((this[field] == null) && (other[field] == null)) {
+        if (precision == null) {
+          return false;
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+      if ((precision != null) && precision === field) {
+        break;
+      }
+    }
+    return false;
   };
 
   normalizeMillisecondsFieldInString = function(string, matches) {
@@ -5102,7 +5106,7 @@
 },{"../runtime/results":133,"./expressions":21}],26:[function(require,module,exports){
 // Generated by CoffeeScript 1.12.7
 (function() {
-  var Current, Distinct, Exists, Expression, Filter, First, Flatten, ForEach, IndexOf, Last, List, SingletonFrom, Times, ToList, UnimplementedExpression, ValueSet, build, doContains, doDistinct, doIncludes, equals, equivalent, ref, ref1, typeIsArray,
+  var Current, Distinct, Exists, Expression, Filter, First, Flatten, ForEach, IndexOf, Last, List, SingletonFrom, Times, ToList, UnimplementedExpression, ValueSet, build, doContains, doDistinct, doIncludes, equals, ref, typeIsArray,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
@@ -5114,15 +5118,15 @@
 
   typeIsArray = require('../util/util').typeIsArray;
 
-  ref1 = require('../util/comparison'), equals = ref1.equals, equivalent = ref1.equivalent;
+  equals = require('../util/comparison').equals;
 
   module.exports.List = List = (function(superClass) {
     extend(List, superClass);
 
     function List(json) {
-      var ref2;
+      var ref1;
       List.__super__.constructor.apply(this, arguments);
-      this.elements = (ref2 = build(json.element)) != null ? ref2 : [];
+      this.elements = (ref1 = build(json.element)) != null ? ref1 : [];
     }
 
     Object.defineProperties(List.prototype, {
@@ -5134,11 +5138,11 @@
     });
 
     List.prototype.exec = function(ctx) {
-      var item, j, len, ref2, results;
-      ref2 = this.elements;
+      var item, j, len, ref1, results;
+      ref1 = this.elements;
       results = [];
-      for (j = 0, len = ref2.length; j < len; j++) {
-        item = ref2[j];
+      for (j = 0, len = ref1.length; j < len; j++) {
+        item = ref1[j];
         results.push(item.execute(ctx));
       }
       return results;
@@ -5287,7 +5291,7 @@
       }
       for (i = j = 0, len = src.length; j < len; i = ++j) {
         itm = src[i];
-        if (equivalent(itm, el)) {
+        if (equals(itm, el)) {
           index = i;
           break;
         }
@@ -5307,7 +5311,7 @@
     var element, j, len;
     for (j = 0, len = container.length; j < len; j++) {
       element = container[j];
-      if (equivalent(element, item)) {
+      if (equals(element, item)) {
         return true;
       }
     }
@@ -5368,7 +5372,12 @@
     }
 
     Distinct.prototype.exec = function(ctx) {
-      return doDistinct(this.execArgs(ctx));
+      var result;
+      result = this.execArgs(ctx);
+      if (result == null) {
+        return null;
+      }
+      return doDistinct(result);
     };
 
     return Distinct;
@@ -5376,18 +5385,31 @@
   })(Expression);
 
   doDistinct = function(list) {
-    var seen;
+    var firstNullFound, item, j, len, seen, setList;
     seen = [];
-    return list.filter(function(item) {
+    list.filter(function(item) {
       var isNew;
       isNew = seen.every(function(seenItem) {
-        return !equivalent(item, seenItem);
+        return !equals(item, seenItem);
       });
       if (isNew) {
         seen.push(item);
       }
       return isNew;
     });
+    firstNullFound = false;
+    setList = [];
+    for (j = 0, len = seen.length; j < len; j++) {
+      item = seen[j];
+      if (item !== null) {
+        setList.push(item);
+      }
+      if (item === null && !firstNullFound) {
+        setList.push(item);
+        firstNullFound = true;
+      }
+    }
+    return setList;
   };
 
   module.exports.Current = Current = (function(superClass) {
@@ -6011,7 +6033,7 @@
     Contains.prototype.exec = function(ctx) {
       var container, item, lib, ref1;
       ref1 = this.execArgs(ctx), container = ref1[0], item = ref1[1];
-      if (container == null) {
+      if ((container == null) || (item == null)) {
         return null;
       }
       lib = (function() {
@@ -44766,9 +44788,6 @@
   };
 
   module.exports.lessThan = function(a, b, precision) {
-    if (precision == null) {
-      precision = DateTime.Unit.MILLISECOND;
-    }
     switch (false) {
       case !areNumbers(a, b):
         return a < b;
@@ -44784,9 +44803,6 @@
   };
 
   module.exports.lessThanOrEquals = function(a, b, precision) {
-    if (precision == null) {
-      precision = DateTime.Unit.MILLISECOND;
-    }
     switch (false) {
       case !areNumbers(a, b):
         return a <= b;
@@ -44802,9 +44818,6 @@
   };
 
   module.exports.greaterThan = function(a, b, precision) {
-    if (precision == null) {
-      precision = DateTime.Unit.MILLISECOND;
-    }
     switch (false) {
       case !areNumbers(a, b):
         return a > b;
@@ -44820,9 +44833,6 @@
   };
 
   module.exports.greaterThanOrEquals = function(a, b, precision) {
-    if (precision == null) {
-      precision = DateTime.Unit.MILLISECOND;
-    }
     switch (false) {
       case !areNumbers(a, b):
         return a >= b;
@@ -44904,6 +44914,9 @@
     shouldReturnNull = false;
     finalComparisonResult = aKeys.length === bKeys.length && aKeys.every(function(key) {
       var comparisonResult;
+      if (a[key] === null && b[key] === null) {
+        return true;
+      }
       comparisonResult = comparisonFunction(a[key], b[key]);
       if (comparisonResult === null) {
         shouldReturnNull = true;

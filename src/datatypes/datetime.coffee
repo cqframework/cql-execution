@@ -108,59 +108,6 @@ class DateTime
     d = DateTime.fromJsDate(@toJSDate(), timezoneOffset)
     d.reducedPrecision(@getPrecision())
 
-  sameAs: (other, precision = DateTime.Unit.MILLISECOND) ->
-    other = @_implicitlyConvert(other)
-    if not(other instanceof DateTime) then null
-
-    diff = @differenceBetween(other, precision)
-    switch
-      when (diff.low == 0 and diff.high == 0) then true
-      when (diff.low <= 0 and diff.high >= 0) then null
-      else false
-
-  equals: (other) ->
-    @sameAs(other, DateTime.Unit.MILLISECOND)
-
-  sameOrBefore: (other, precision = DateTime.Unit.MILLISECOND) ->
-    other = @_implicitlyConvert(other)
-    if not(other instanceof DateTime) then return false
-
-    diff = @differenceBetween(other, precision)
-    switch
-      when (diff.low >= 0 and diff.high >= 0) then true
-      when (diff.low < 0 and diff.high < 0) then false
-      else null
-
-  sameOrAfter: (other, precision = DateTime.Unit.MILLISECOND) ->
-    other = @_implicitlyConvert(other)
-    if not(other instanceof DateTime) then return false
-
-    diff = @differenceBetween(other, precision)
-    switch
-      when (diff.low <= 0 and diff.high <= 0) then true
-      when (diff.low > 0 and diff.high > 0) then false
-      else null
-
-  before: (other, precision = DateTime.Unit.MILLISECOND) ->
-    other = @_implicitlyConvert(other)
-    if not(other instanceof DateTime) then return false
-
-    diff = @differenceBetween(other, precision)
-    switch
-      when (diff.low > 0 and diff.high > 0) then true
-      when (diff.low <= 0 and diff.high <= 0) then false
-      else null
-
-  after: (other, precision = DateTime.Unit.MILLISECOND) ->
-    other = @_implicitlyConvert(other)
-    if not(other instanceof DateTime) then return false
-
-    diff = @differenceBetween(other, precision)
-    switch
-      when (diff.low < 0 and diff.high < 0) then true
-      when (diff.low >= 0 and diff.high >= 0) then false
-      else null
-
   add: (offset, field) ->
     # TODO: According to spec, 2/29/2000 + 1 year is 2/28/2001
     # Currently, it evaluates to 3/1/2001.  Doh.
@@ -444,59 +391,6 @@ class Date
     else if @year?
       @add(-1,Date.Unit.YEAR)
 
-  sameAs: (other, precision = Date.Unit.DAY) ->
-    if (other instanceof DateTime) then return this.getDateTime().sameAs(other, precision)
-    if not(other instanceof Date) then null
-
-    diff = @differenceBetween(other, precision)
-    switch
-      when (diff.low == 0 and diff.high == 0) then true
-      when (diff.low <= 0 and diff.high >= 0) then null
-      else false
-
-  equals: (other) ->
-    @sameAs(other, Date.Unit.DAY)
-
-  sameOrBefore: (other, precision = Date.Unit.DAY) ->
-    if (other instanceof DateTime) then return this.getDateTime().sameOrBefore(other, precision)
-    if not(other instanceof Date) then return false
-
-    diff = @differenceBetween(other, precision)
-    switch
-      when (diff.low >= 0 and diff.high >= 0) then true
-      when (diff.low < 0 and diff.high < 0) then false
-      else null
-
-  sameOrAfter: (other, precision = Date.Unit.DAY) ->
-    if (other instanceof DateTime) then return this.getDateTime().sameOrAfter(other, precision)
-    if not(other instanceof Date) then return false
-
-    diff = @differenceBetween(other, precision)
-    switch
-      when (diff.low <= 0 and diff.high <= 0) then true
-      when (diff.low > 0 and diff.high > 0) then false
-      else null
-
-  before: (other, precision = Date.Unit.DAY) ->
-    if (other instanceof DateTime) then return this.getDateTime().before(other, precision)
-    if not(other instanceof Date) then return false
-
-    diff = @differenceBetween(other, precision)
-    switch
-      when (diff.low > 0 and diff.high > 0) then true
-      when (diff.low <= 0 and diff.high <= 0) then false
-      else null
-
-  after: (other, precision = Date.Unit.DAY) ->
-    if (other instanceof DateTime) then return this.getDateTime().after(other, precision)
-    if not(other instanceof Date) then return false
-
-    diff = @differenceBetween(other, precision)
-    switch
-      when (diff.low < 0 and diff.high < 0) then true
-      when (diff.low >= 0 and diff.high >= 0) then false
-      else null
-
   add: (offset, field) ->
     # TODO: According to spec, 2/29/2000 + 1 year is 2/28/2001
     # Currently, it evaluates to 3/1/2001.
@@ -675,6 +569,243 @@ DateTime.prototype.isSamePrecision = Date.prototype.isSamePrecision = (other) ->
       if (@[field]? and not other[field]?) then return false
       if (not @[field]? and other[field]?) then return false
     true
+
+DateTime.prototype.equals = Date.prototype.equals = (other) ->
+  # leave with false there is a type mismatch
+  unless (@isDate and other.isDate) or (@isDateTime and other.isDateTime)
+    return false
+
+  # make a copy of other in the correct timezone offset if they don't match.
+  if (@timezoneOffset != other.timezoneOffset)
+    other = other.convertToTimezoneOffset(@timezoneOffset)
+
+  for field in @constructor.FIELDS
+    # if both have this precision defined
+    if @[field]? and other[field]?
+      # if they are different then return with false
+      if @[field] != other[field]
+        return false
+
+    # if both dont have this precision, return true
+    else if !@[field]? and !other[field]?
+      return true
+
+    # otherwise they have inconclusive precision, return null
+    else
+      return null
+  # if we made it here, then all fields matched.
+  true
+
+DateTime.prototype.sameAs = Date.prototype.sameAs = (other, precision) ->
+  if not((other.isDate) or (other.isDateTime))
+    return null
+  else if @.isDate and other.isDateTime
+    return @getDateTime().sameAs(other, precision)
+  else if @.isDateTime and other.isDate
+    other = other.getDateTime()
+
+  if precision? && @constructor.FIELDS.indexOf(precision) < 0
+    throw new Error("Invalid precision: #{precision}")
+
+  # make a copy of other in the correct timezone offset if they don't match.
+  if (@timezoneOffset != other.timezoneOffset)
+    other = other.convertToTimezoneOffset(@timezoneOffset)
+
+  for field in @constructor.FIELDS
+    # if both have this precision defined
+    if @[field]? and other[field]?
+      # if they are different then return with false
+      if @[field] != other[field]
+        return false
+
+    # if both dont have this precision, return true of precision is not defined
+    else if !@[field]? and !other[field]?
+      if !precision?
+        return true
+      else # we havent met precision yet
+        return null
+
+    # otherwise they have inconclusive precision, return null
+    else
+      return null
+
+    # if precision is defined and we have reached expected precision, we can leave the loop
+    break if precision? and precision is field
+
+  # if we made it here, then all fields matched.
+  true
+
+DateTime.prototype.sameOrBefore = Date.prototype.sameOrBefore = (other, precision) ->
+  if not((other.isDate) or (other.isDateTime))
+    return null
+  else if @.isDate and other.isDateTime
+    return @getDateTime().sameOrBefore(other, precision)
+  else if @.isDateTime and other.isDate
+    other = other.getDateTime()
+
+  if precision? && @constructor.FIELDS.indexOf(precision) < 0
+    throw new Error("Invalid precision: #{precision}")
+
+  # make a copy of other in the correct timezone offset if they don't match.
+  if (@timezoneOffset != other.timezoneOffset)
+    other = other.convertToTimezoneOffset(@timezoneOffset)
+
+  for field in @constructor.FIELDS
+    # if both have this precision defined
+    if @[field]? and other[field]?
+      # if this value is less than the other return with true. this is before other
+      if @[field] < other[field]
+        return true
+      # if this value is greater than the other return with false. this is after
+      else if @[field] > other[field]
+        return false
+      # execution continues if the values are the same
+
+    # if both dont have this precision, return true if precision is not defined
+    else if !@[field]? and !other[field]?
+      if !precision?
+        return true
+      else # we havent met precision yet
+        return null
+
+    # otherwise they have inconclusive precision, return null
+    else
+      return null
+
+    # if precision is defined and we have reached expected precision, we can leave the loop
+    break if precision? and precision is field
+
+  # if we made it here, then all fields matched and they are same
+  true
+
+DateTime.prototype.sameOrAfter = Date.prototype.sameOrAfter = (other, precision) ->
+  if not((other.isDate) or (other.isDateTime))
+    return null
+  else if @.isDate and other.isDateTime
+    return @getDateTime().sameOrAfter(other, precision)
+  else if @.isDateTime and other.isDate
+    other = other.getDateTime()
+
+  if precision? && @constructor.FIELDS.indexOf(precision) < 0
+    throw new Error("Invalid precision: #{precision}")
+
+  # make a copy of other in the correct timezone offset if they don't match.
+  if (@timezoneOffset != other.timezoneOffset)
+    other = other.convertToTimezoneOffset(@timezoneOffset)
+
+  for field in @constructor.FIELDS
+    # if both have this precision defined
+    if @[field]? and other[field]?
+      # if this value is greater than the other return with true. this is after other
+      if @[field] > other[field]
+        return true
+      # if this value is greater than the other return with false. this is before
+      else if @[field] < other[field]
+        return false
+      # execution continues if the values are the same
+
+    # if both dont have this precision, return true if precision is not defined
+    else if !@[field]? and !other[field]?
+      if !precision?
+        return true
+      else # we havent met precision yet
+        return null
+
+    # otherwise they have inconclusive precision, return null
+    else
+      return null
+
+    # if precision is defined and we have reached expected precision, we can leave the loop
+    break if precision? and precision is field
+
+  # if we made it here, then all fields matched and they are same
+  true
+
+DateTime.prototype.before = Date.prototype.before = (other, precision) ->
+  if not((other.isDate) or (other.isDateTime))
+    return null
+  else if @.isDate and other.isDateTime
+    return @getDateTime().before(other, precision)
+  else if @.isDateTime and other.isDate
+    other = other.getDateTime()
+
+  if precision? && @constructor.FIELDS.indexOf(precision) < 0
+    throw new Error("Invalid precision: #{precision}")
+
+  # make a copy of other in the correct timezone offset if they don't match.
+  if (@timezoneOffset != other.timezoneOffset)
+    other = other.convertToTimezoneOffset(@timezoneOffset)
+
+  for field in @constructor.FIELDS
+    # if both have this precision defined
+    if @[field]? and other[field]?
+      # if this value is less than the other return with true. this is before other
+      if @[field] < other[field]
+        return true
+      # if this value is greater than the other return with false. this is after
+      else if @[field] > other[field]
+        return false
+      # execution continues if the values are the same
+
+    # if both dont have this precision, return false if precision is not defined
+    else if !@[field]? and !other[field]?
+      if !precision?
+        return false
+      else # we havent met precision yet
+        return null
+
+    # otherwise they have inconclusive precision, return null
+    else
+      return null
+
+    # if precision is defined and we have reached expected precision, we can leave the loop
+    break if precision? and precision is field
+
+  # if we made it here, then all fields matched and they are same
+  false
+
+DateTime.prototype.after = Date.prototype.after = (other, precision) ->
+  if not((other.isDate) or (other.isDateTime))
+    return null
+  else if @.isDate and other.isDateTime
+    return @getDateTime().after(other, precision)
+  else if @.isDateTime and other.isDate
+    other = other.getDateTime()
+
+  if precision? && @constructor.FIELDS.indexOf(precision) < 0
+    throw new Error("Invalid precision: #{precision}")
+
+  # make a copy of other in the correct timezone offset if they don't match.
+  if (@timezoneOffset != other.timezoneOffset)
+    other = other.convertToTimezoneOffset(@timezoneOffset)
+
+  for field in @constructor.FIELDS
+    # if both have this precision defined
+    if @[field]? and other[field]?
+      # if this value is greater than the other return with true. this is after other
+      if @[field] > other[field]
+        return true
+      # if this value is greater than the other return with false. this is before
+      else if @[field] < other[field]
+        return false
+      # execution continues if the values are the same
+
+    # if both dont have this precision, return false if precision is not defined
+    else if !@[field]? and !other[field]?
+      if !precision?
+        return false
+      else # we havent met precision yet
+        return null
+
+    # otherwise they have inconclusive precision, return null
+    else
+      return null
+
+    # if precision is defined and we have reached expected precision, we can leave the loop
+    break if precision? and precision is field
+
+  # if we made it here, then all fields matched and they are same
+  false
 
 normalizeMillisecondsFieldInString = (string, matches) ->
   msString = matches[14]
