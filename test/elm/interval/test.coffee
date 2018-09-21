@@ -69,8 +69,9 @@ describe 'Equal', ->
     @equalDatesOpenClosed.exec(@ctx).should.be.true()
 
   it 'should operate correctly with imprecision', ->
-    should(@sameDays.exec(@ctx)).be.null()
+    @sameDays.exec(@ctx).should.be.true()
     @differentDays.exec(@ctx).should.be.false()
+    should(@differingPrecision.exec(@ctx)).be.null()
 
 describe 'NotEqual', ->
   @beforeEach ->
@@ -101,8 +102,9 @@ describe 'NotEqual', ->
     @equalDatesOpenClosed.exec(@ctx).should.be.false()
 
   it 'should operate correctly with imprecision', ->
-    should(@sameDays.exec(@ctx)).be.null()
+    @sameDays.exec(@ctx).should.be.false()
     @differentDays.exec(@ctx).should.be.true()
+    should(@differingPrecision.exec(@ctx)).be.null()
 
 describe 'Contains', ->
   @beforeEach ->
@@ -461,10 +463,11 @@ describe 'After', ->
 
   it 'should correctly handle imprecision', ->
     @afterImpreciseDateIvl.exec(@ctx).should.be.true()
-    @notAfterImpreciseDateIvl.exec(@ctx).should.be.false()
+    should(@notAfterImpreciseDateIvl.exec(@ctx)).be.null()
     should(@mayBeAfterImpreciseDateIvl.exec(@ctx)).be.null()
     @impreciseAfterDateIvl.exec(@ctx).should.be.true()
-    @impreciseNotAfterDateIvl.exec(@ctx).should.be.false()
+    # meets with uncertainty due to toClose
+    should(@impreciseNotAfterDateIvl.exec(@ctx)).be.null()
     should(@impreciseMayBeAfterDateIvl.exec(@ctx)).be.null()
 
   it 'should correctly compare using the requested precision', ->
@@ -509,10 +512,11 @@ describe 'Before', ->
 
   it 'should correctly handle imprecision', ->
     @beforeImpreciseDateIvl.exec(@ctx).should.be.true()
-    @notBeforeImpreciseDateIvl.exec(@ctx).should.be.false()
+    # meets with uncertaintity due to toClose
+    should(@notBeforeImpreciseDateIvl.exec(@ctx)).be.null()
     should(@mayBeBeforeImpreciseDateIvl.exec(@ctx)).be.null()
     @impreciseBeforeDateIvl.exec(@ctx).should.be.true()
-    @impreciseNotBeforeDateIvl.exec(@ctx).should.be.false()
+    should(@impreciseNotBeforeDateIvl.exec(@ctx)).be.null()
     should(@impreciseMayBeBeforeDateIvl.exec(@ctx)).be.null()
 
   it 'should correctly compare using the requested precision', ->
@@ -763,8 +767,11 @@ describe 'OverlapsDateTime', ->
   it 'should reject imprecise non-overlaps', ->
     @noImpreciseOverlap.exec(@ctx).should.be.false()
 
-  it 'should return null for imprecise overlaps that are unknown', ->
+  it 'should return null for imprecise overlaps with differing precision', ->
     should(@unknownOverlap.exec(@ctx)).be.null()
+
+  it 'should return true for imprecise overlaps with matching precision', ->
+    @matchingPrecisionOverlap.exec(@ctx).should.be.true()
 
   it 'should correctly compare using the requested precision', ->
     # NOTE: Some assertions commented out because cql-to-elm is WRONGLY translating 'overlaps' to 'OverlapsAfter'!
@@ -824,6 +831,9 @@ describe 'OverlapsAfterDateTime', ->
 
   it 'should reject imprecise non-overlaps', ->
     @noImpreciseOverlap.exec(@ctx).should.be.false()
+
+  it 'should return true for imprecise overlaps with matching precision', ->
+    @matchingPrecisionOverlap.exec(@ctx).should.be.true()
 
   it 'should return null for imprecise overlaps that are unknown', ->
     should(@unknownOverlap.exec(@ctx)).be.null()
@@ -885,6 +895,9 @@ describe 'OverlapsBeforeDateTime', ->
 
   it 'should reject imprecise non-overlaps', ->
     @noImpreciseOverlap.exec(@ctx).should.be.false()
+
+  it 'should return true for imprecise overlaps with matching precision', ->
+    @matchingPrecisionOverlap.exec(@ctx).should.be.true()
 
   it 'should return null for imprecise overlaps that are unknown', ->
     should(@unknownOverlap.exec(@ctx)).be.null()

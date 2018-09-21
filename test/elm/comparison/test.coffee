@@ -21,6 +21,18 @@ describe 'Equal', ->
     @eqTuples.exec(@ctx).should.be.true()
     @uneqTuples.exec(@ctx).should.be.false()
 
+  it 'should identify equal tuples with same fields null', ->
+    should(@eqTuplesWithNullFields.exec(@ctx)).be.true()
+
+  it 'should identify unequal tuples with same fields null', ->
+    should(@uneqTuplesWithNullFields.exec(@ctx)).be.false()
+
+  it 'should identify uncertian tuples with same fields but one has a null field', ->
+    should(@uncertTuplesWithNullFieldOnOne.exec(@ctx)).be.null()
+
+  it 'should identify uncertian tuples with different fields null', ->
+    should(@uncertTuplesWithDiffNullFields.exec(@ctx)).be.null()
+
   it 'should identify equal/unequal DateTimes in same timezone', ->
     @eqDateTimes.exec(@ctx).should.be.true()
     @uneqDateTimes.exec(@ctx).should.be.false()
@@ -29,9 +41,27 @@ describe 'Equal', ->
     @eqDateTimesTZ.exec(@ctx).should.be.true()
     @uneqDateTimesTZ.exec(@ctx).should.be.false()
 
+  it 'should identify equal/unequal date times specified to only date level', ->
+    should(@eqDateTimesOnlyDate.exec(@ctx)).be.true()
+    should(@uneqDateTimesOnlyDate.exec(@ctx)).be.false()
+
+  it 'should identify case of a possibly equal date times with differing precisions', ->
+    should(@possiblyEqDateTimesOnlyDateOnOne.exec(@ctx)).be.null()
+
+  it 'should identify unequal date times with differing precisions', ->
+    should(@uneqDateTimesOnlyDateOnOne.exec(@ctx)).be.false()
+
   it 'should identify uncertain/unequal DateTimes when there is imprecision', ->
     should(@possiblyEqualDateTimes.exec(@ctx)).be.null()
     @impossiblyEqualDateTimes.exec(@ctx).should.be.false()
+
+  it 'should be false for all Date and DateTime equality', ->
+    @dateAndDateTimeEqual.exec(@ctx).should.be.false()
+    @dateAndDateTimeNotEqual.exec(@ctx).should.be.false()
+    @dateAndDateTimeUncertainEqual.exec(@ctx).should.be.false()
+    @dateTimeAndDateEqual.exec(@ctx).should.be.false()
+    @dateTimeAndDateNotEqual.exec(@ctx).should.be.false()
+    @dateTimeAndDateUncertainEqual.exec(@ctx).should.be.false()
 
   it 'should be false for 5 m = 4 m', ->
     @aGtB_Quantity.exec(@ctx).should.be.false()
@@ -77,6 +107,18 @@ describe 'NotEqual', ->
     @eqTuples.exec(@ctx).should.be.false()
     @uneqTuples.exec(@ctx).should.be.true()
 
+  it 'should identify equal tuples with same fields null', ->
+    should(@eqTuplesWithNullFields.exec(@ctx)).be.false()
+
+  it 'should identify unequal tuples with same fields null', ->
+    should(@uneqTuplesWithNullFields.exec(@ctx)).be.true()
+
+  it 'should identify uncertian tuples with same fields but one has a null field', ->
+    should(@uncertTuplesWithNullFieldOnOne.exec(@ctx)).be.null()
+
+  it 'should identify uncertian tuples with different fields null', ->
+    should(@uncertTuplesWithDiffNullFields.exec(@ctx)).be.null()
+
   it 'should identify equal/unequal DateTimes in same timezone', ->
     @eqDateTimes.exec(@ctx).should.be.false()
     @uneqDateTimes.exec(@ctx).should.be.true()
@@ -85,9 +127,27 @@ describe 'NotEqual', ->
     @eqDateTimesTZ.exec(@ctx).should.be.false()
     @uneqDateTimesTZ.exec(@ctx).should.be.true()
 
+  it 'should identify equal/unequal date times specified to only date level', ->
+    should(@eqDateTimesOnlyDate.exec(@ctx)).be.false()
+    should(@uneqDateTimesOnlyDate.exec(@ctx)).be.true()
+
+  it 'should identify case of a possibly equal date times with differing precisions', ->
+    should(@possiblyEqDateTimesOnlyDateOnOne.exec(@ctx)).be.null()
+
+  it 'should identify unequal date times with differing precisions', ->
+    should(@uneqDateTimesOnlyDateOnOne.exec(@ctx)).be.true()
+
   it 'should identify uncertain/unequal DateTimes when there is imprecision', ->
     should(@possiblyEqualDateTimes.exec(@ctx)).be.null()
     @impossiblyEqualDateTimes.exec(@ctx).should.be.true()
+
+  it 'should be true for all Date and DateTime equality', ->
+    @dateAndDateTimeEqual.exec(@ctx).should.be.true()
+    @dateAndDateTimeNotEqual.exec(@ctx).should.be.true()
+    @dateAndDateTimeUncertainEqual.exec(@ctx).should.be.true()
+    @dateTimeAndDateEqual.exec(@ctx).should.be.true()
+    @dateTimeAndDateNotEqual.exec(@ctx).should.be.true()
+    @dateTimeAndDateUncertainEqual.exec(@ctx).should.be.true()
 
   it 'should be true for 5 m != 4 m', ->
     @aGtB_Quantity.exec(@ctx).should.be.true()
