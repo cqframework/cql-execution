@@ -7727,7 +7727,7 @@
       var arg, strArg;
       arg = this.execArgs(ctx);
       if ((arg != null) && typeof arg !== 'undefined') {
-        strArg = arg.toString();
+        strArg = arg.toString().toLowerCase();
         if (strArg === "true" || strArg === "t" || strArg === "yes" || strArg === "y" || strArg === "1") {
           return true;
         } else if (strArg === "false" || strArg === "f" || strArg === "no" || strArg === "n" || strArg === "0") {
@@ -44846,6 +44846,12 @@
         return compareEveryItemInArrays(a, b, equivalent);
       case '[object Object]':
         return compareObjects(a, b, equivalent);
+      case '[object String]':
+        if (bClass === '[object String]') {
+          return (a.localeCompare(b, 'en', {
+            sensitivity: 'base'
+          })) === 0;
+        }
     }
     return equals(a, b);
   };

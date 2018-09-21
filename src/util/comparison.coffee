@@ -55,6 +55,11 @@ module.exports.equivalent = equivalent = (a, b) ->
       return compareEveryItemInArrays(a, b, equivalent)
     when '[object Object]'
       return compareObjects(a, b, equivalent)
+    when '[object String]'
+      # Make sure b is also a string
+      if bClass == '[object String]'
+        # String equivalence is case- and locale insensitive
+        return (a.localeCompare(b, 'en', {sensitivity: 'base'})) == 0
 
   return equals a, b
 
