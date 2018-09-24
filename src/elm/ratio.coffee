@@ -5,8 +5,6 @@
 module.exports.Ratio = class Ratio extends Expression
   constructor: (json) ->
     super
-    @denominator = json.denominator
-
     if !json.numerator?
       throw new Error("Cannot create a ratio with an undefined numerator value")
     else
@@ -24,7 +22,7 @@ module.exports.Ratio = class Ratio extends Expression
       get: -> true
 
   clone: () ->
-    new Ratio({numerator: @numerator, denominator: @denominator})
+    new Ratio({numerator: @numerator.clone(), denominator: @denominator.clone()})
 
   exec: (ctx) ->
     @

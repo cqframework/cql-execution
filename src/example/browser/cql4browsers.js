@@ -7109,7 +7109,6 @@
 
     function Ratio(json) {
       Ratio.__super__.constructor.apply(this, arguments);
-      this.denominator = json.denominator;
       if (json.numerator == null) {
         throw new Error("Cannot create a ratio with an undefined numerator value");
       } else {
@@ -7132,8 +7131,8 @@
 
     Ratio.prototype.clone = function() {
       return new Ratio({
-        numerator: this.numerator,
-        denominator: this.denominator
+        numerator: this.numerator.clone(),
+        denominator: this.denominator.clone()
       });
     };
 
