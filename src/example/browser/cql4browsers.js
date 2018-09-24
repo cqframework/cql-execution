@@ -1742,16 +1742,16 @@
     Interval.prototype.includes = function(other, precision) {
       var a, b;
       if (!(other instanceof Interval)) {
-        other = new Interval(other, other, true, true);
+        return this.contains(other, precision);
       }
       a = this.toClosed();
       b = other.toClosed();
       return ThreeValuedLogic.and(cmp.lessThanOrEquals(a.low, b.low, precision), cmp.greaterThanOrEquals(a.high, b.high, precision));
     };
 
-    Interval.prototype.includedIn = function(other) {
+    Interval.prototype.includedIn = function(other, precision) {
       if (!(other instanceof Interval)) {
-        return this.contains(other);
+        return this.contains(other, precision);
       } else {
         return other.includes(this);
       }

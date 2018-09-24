@@ -40,7 +40,7 @@ module.exports.Interval = class Interval
 
   includes: (other, precision) ->
     if not (other instanceof Interval)
-      other = new Interval(other, other, true, true)
+      return @.contains(other,precision)
     a = @toClosed()
     b = other.toClosed()
     ThreeValuedLogic.and(
@@ -48,10 +48,10 @@ module.exports.Interval = class Interval
       cmp.greaterThanOrEquals(a.high, b.high, precision)
     )
 
-  includedIn: (other) ->
+  includedIn: (other, precision) ->
     # For the point overload, this operator is a synonym for the in operator
     if not (other instanceof Interval)
-      @.contains other
+      @.contains(other, precision)
     else
       other.includes @
 
