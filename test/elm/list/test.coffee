@@ -218,7 +218,7 @@ describe 'IndexOf', ->
 
   describe 'should use equality to determine presence in List', ->
     it 'when code is in list but have undefined values', ->
-      @listCodeUndefined.exec(@ctx).should.equal -1
+      @listCodeUndefined.exec(@ctx).should.equal 0
 
     it 'when code is in list', ->
       @listCode.exec(@ctx).should.equal 0

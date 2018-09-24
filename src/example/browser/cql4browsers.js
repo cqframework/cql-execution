@@ -1133,8 +1133,8 @@
       if (!(other instanceof Date)) {
         return null;
       }
-      a = this.copy();
-      b = other.copy();
+      a = this;
+      b = other;
       if (unitField === Date.Unit.YEAR) {
         a = new Date(a.year, 1, 1);
         b = new Date(b.year, 1, 1);
