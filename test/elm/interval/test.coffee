@@ -1372,7 +1372,7 @@ describe 'Collapse', ->
   it 'with Date Interval that has null high values', ->
     @dateTimeNullEndCollapse.exec(@ctx).should.eql @dateTimeNullEndCollapseExpected.exec(@ctx)
 
-  it 'with Date Interval that has null hith and low values', ->
+  it 'with Date Interval that has null high and low values', ->
     @dateTimeNullStartEndCollapse.exec(@ctx).should.eql @dateTimeNullStartEndCollapseExpected.exec(@ctx)
 
   it 'should ignore nulls in list of Intervals', ->
