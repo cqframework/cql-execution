@@ -27,11 +27,14 @@ describe 'Equal', ->
   it 'should identify unequal tuples with same fields null', ->
     should(@uneqTuplesWithNullFields.exec(@ctx)).be.false()
 
+  it 'should identify unequal tuples with different key names', ->
+    @tupleDifferentKeys.exec(@ctx).should.be.false()
+
   it 'should identify uncertian tuples with same fields but one has a null field', ->
     should(@uncertTuplesWithNullFieldOnOne.exec(@ctx)).be.null()
 
-  it 'should identify uncertian tuples with different fields null', ->
-    should(@uncertTuplesWithDiffNullFields.exec(@ctx)).be.null()
+  it 'should identify unequal tuples with different fields null', ->
+    @uncertTuplesWithDiffNullFields.exec(@ctx).should.be.false()
 
   it 'should identify equal/unequal DateTimes in same timezone', ->
     @eqDateTimes.exec(@ctx).should.be.true()
@@ -116,8 +119,8 @@ describe 'NotEqual', ->
   it 'should identify uncertian tuples with same fields but one has a null field', ->
     should(@uncertTuplesWithNullFieldOnOne.exec(@ctx)).be.null()
 
-  it 'should identify uncertian tuples with different fields null', ->
-    should(@uncertTuplesWithDiffNullFields.exec(@ctx)).be.null()
+  it 'should identify unequal tuples with different fields null', ->
+    @uncertTuplesWithDiffNullFields.exec(@ctx).should.be.true()
 
   it 'should identify equal/unequal DateTimes in same timezone', ->
     @eqDateTimes.exec(@ctx).should.be.false()
