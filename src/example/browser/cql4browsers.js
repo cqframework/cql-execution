@@ -472,25 +472,20 @@
     });
 
     ValueSet.prototype.hasMatch = function(code) {
-      var c2, codesList, codes_codeSystem, i, len, ref;
+      var codeItem, codesList, i, len, matchFound, ref;
       codesList = toCodeList(code);
       if (codesList.length === 1 && typeof codesList[0] === 'string') {
-        codes_codeSystem = {};
+        matchFound = false;
         ref = this.codes;
         for (i = 0, len = ref.length; i < len; i++) {
-          c2 = ref[i];
-          if (codesList[0] === c2.code) {
-            if ((codes_codeSystem[c2.code] != null) && codes_codeSystem[c2.code] !== c2.system) {
-              throw new Error('In (valueset) is ambiguous -- multiple matches for ' + c2.code + ' found in value set with different code systems.');
-            } else {
-              codes_codeSystem[c2.code] = c2.system;
-            }
+          codeItem = ref[i];
+          if (codeItem.system !== this.codes[0].system) {
+            throw new Error('In (valueset) is ambiguous -- multiple matches for ' + codeItem.code + ' found in value set with different code systems.');
+          } else if (codeItem.code === codesList[0]) {
+            matchFound = true;
           }
         }
-        if (Object.keys(codes_codeSystem).length > 0) {
-          return true;
-        }
-        return false;
+        return matchFound;
       } else {
         return codesInList(codesList, this.codes);
       }
@@ -1138,8 +1133,8 @@
       if (!(other instanceof Date)) {
         return null;
       }
-      a = this.copy();
-      b = other.copy();
+      a = this;
+      b = other;
       if (unitField === Date.Unit.YEAR) {
         a = new Date(a.year, 1, 1);
         b = new Date(b.year, 1, 1);

@@ -109,8 +109,6 @@ class DateTime
     d.reducedPrecision(@getPrecision())
 
   add: (offset, field) ->
-    # TODO: According to spec, 2/29/2000 + 1 year is 2/28/2001
-    # Currently, it evaluates to 3/1/2001.  Doh.
     result = @copy()
 
     # If weeks, convert to days
@@ -392,8 +390,6 @@ class Date
       @add(-1,Date.Unit.YEAR)
 
   add: (offset, field) ->
-    # TODO: According to spec, 2/29/2000 + 1 year is 2/28/2001
-    # Currently, it evaluates to 3/1/2001.
     result = @copy()
 
     # If weeks, convert to days
@@ -414,12 +410,9 @@ class Date
     if (other instanceof DateTime) then return this.getDateTime().differenceBetween(other, unitField)
     if not(other instanceof Date) then return null
 
+    a = @
+    b = other
     # According to CQL spec, to calculate difference, you can just floor lesser precisions and do a duration
-    # Make copies since we'll be flooring values and mucking with timezones
-    a = @copy()
-    b = other.copy()
-
-    # Now floor lesser precisions before we go on to calculate duration
     if unitField == Date.Unit.YEAR
       a = new Date(a.year, 1, 1)
       b = new Date(b.year, 1, 1)
