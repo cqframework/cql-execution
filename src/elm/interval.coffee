@@ -2,7 +2,7 @@
 { ThreeValuedLogic } = require '../datatypes/logic'
 { build } = require './builder'
 { Quantity, doAddition, doSubtraction} = require './quantity'
-{ successor } = require '../util/math'
+{ successor, predecessor } = require '../util/math'
 dtivl = require '../datatypes/interval'
 cmp = require '../util/comparison'
 
@@ -180,14 +180,21 @@ module.exports.Collapse = class Collapse extends Expression
       # width equal to the result of the successor function for the point type).
       if !perWidth?
         if intervalsClone[0].low?
-          if intervalsClone[0].low.constructor.name == 'DateTime'
-            # Bonnie will always use milliseconds
-            # TODO determine this dynamically using duration between low and successor
-            perWidth = new Quantity(value: 1, unit: 'millisecond')
+          if intervalsClone[0].low.isDateTime
+            precisionUnits = intervalsClone[0].low.getPrecision()
+            perWidth = new Quantity(value: 1, unit: precisionUnits)
           else if intervalsClone[0].low.isQuantity
             perWidth = doSubtraction(successor(intervalsClone[0].low), intervalsClone[0].low)
           else
             perWidth = successor(intervalsClone[0].low) - intervalsClone[0].low
+        else if intervalsClone[0].high?
+          if intervalsClone[0].high.isDateTime
+            precisionUnits = intervalsClone[0].high.getPrecision()
+            perWidth = new Quantity(value: 1, unit: precisionUnits)
+          else if intervalsClone[0].high.isQuantity
+            perWidth = doSubtraction(predecessor(intervalsClone[0].high), intervalsClone[0].high)
+          else
+            perWidth = predecessor(intervalsClone[0].high) - intervalsClone[0].high
         else
           throw new Error("Point type of intervals provided to collapse cannot be determined.")
 
@@ -196,18 +203,33 @@ module.exports.Collapse = class Collapse extends Expression
 
       # we don't handle imprecise intervals at this time
       for a in intervalsClone
-        if a.low.isImprecise?() || a.high.isImprecise?()
+        if a.low?.isImprecise?() || a.high?.isImprecise?()
           throw new Error("Collapse does not support imprecise dates at this time.")
 
 
       # sort intervalsClone by start
       intervalsClone.sort (a,b)->
-        if typeof a.low.before == 'function'
-          return -1 if a.low.before b.low
-          return 1 if a.low.after b.low
-        else
+        if typeof a.low?.before == 'function'
+          return -1 if b.low? and a.low.before b.low
+          return 1 if !b.low? or a.low.after b.low
+        else if a.low? and b.low?
           return -1 if a.low < b.low
           return 1 if a.low > b.low
+        else if a.low? and !b.low?
+          return 1
+        else if !a.low? and b.low?
+          return -1
+        # if both lows are undefined, sort by high
+        if typeof a.high?.before == 'function'
+          return -1 if !b.high? or a.high.before b.high
+          return 1 if a.high.after b.high
+        else if a.high? and b.high?
+          return -1 if a.high < b.high
+          return 1 if a.high > b.high
+        else if a.high? and !b.high?
+          return -1
+        else if !a.high? and b.high?
+          return 1
         0
 
       # collapse intervals as necessary
@@ -216,24 +238,28 @@ module.exports.Collapse = class Collapse extends Expression
       b = intervalsClone.shift()
 
       while b
-        if typeof b.low.durationBetween == 'function'
+        if typeof b.low?.durationBetween == 'function'
           # handle DateTimes using durationBetween
-          if a.high.after b.low # overlap
-            a.high = b.high if b.high.after a.high
-          else if a.high.durationBetween(b.low, perWidth.unit).high <= perWidth.value
+          if a.high?.after b.low # overlap
+            a.high = b.high if !b.high? or b.high.after a.high
+          else if a.high?.durationBetween(b.low, perWidth.unit).high <= perWidth.value
+            a.high = b.high
+          else if a.high? and !b.high?
             a.high = b.high
           else
             collapsedIntervals.push a
             a = b
-        else if typeof b.low.sameOrBefore == 'function'
-          if b.low.sameOrBefore doAddition(a.high, perWidth)
+        else if typeof b.low?.sameOrBefore == 'function'
+          if a.high? and b.low.sameOrBefore doAddition(a.high, perWidth)
             a.high = b.high if b.high.after a.high
+          else if a.high? and !b.high?
+            a.high = b.high
           else
             collapsedIntervals.push a
             a = b
         else
           if (b.low - a.high) <= perWidth.value
-            a.high = b.high if b.high > a.high
+            a.high = b.high if b.high > a.high || !b.high?
           else
             collapsedIntervals.push a
             a = b

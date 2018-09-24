@@ -1360,8 +1360,20 @@ describe 'Collapse', ->
   it 'Quantity with units disjoint and not within per', ->
     @collapseQuantityUnitsNotWithinPer.exec(@ctx).should.eql @quantityMeterIntervalList.exec(@ctx)
 
-  it 'with Interval that has null throws', ->
-    should(() => @collapseNullIntervalList.exec(@ctx)).throw("Point type of intervals provided to collapse cannot be determined.")
+  it 'with Interval that has null low values', ->
+    @collapseNullLowIntervalList.exec(@ctx).should.eql @expectedNullLowIntervalCollapse.exec(@ctx)
+
+  it 'with Interval that has null high values', ->
+    @collapseNullHighIntervalList.exec(@ctx).should.eql @expectedNullHighIntervalCollapse.exec(@ctx)
+
+  it 'with Date Interval that has null start values', ->
+    @dateTimeNullStartCollapse.exec(@ctx).should.eql @dateTimeNullStartCollapseExpected.exec(@ctx)
+
+  it 'with Date Interval that has null high values', ->
+    @dateTimeNullEndCollapse.exec(@ctx).should.eql @dateTimeNullEndCollapseExpected.exec(@ctx)
+
+  it 'with Date Interval that has null hith and low values', ->
+    @dateTimeNullStartEndCollapse.exec(@ctx).should.eql @dateTimeNullStartEndCollapseExpected.exec(@ctx)
 
   it 'should ignore nulls in list of Intervals', ->
     @nullInCollapse.exec(@ctx).should.eql @expectedResultWithNull.exec(@ctx)

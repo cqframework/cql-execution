@@ -85014,13 +85014,26 @@ define CollapseQuantityUnitsWithinPer: collapse QuantityMeterIntervalList per To
 define CollapseQuantityUnitsNotWithinPer: collapse QuantityMeterIntervalList per ToQuantity('1 \'mm\'')
 
 // Null test cases
-define NullIntervalList: { Interval[null, 3], Interval[3, 5] }
-define CollapseNullIntervalList: collapse NullIntervalList
+define NullLowIntervalList: { Interval[null, 4], Interval[3, 5] }
+define CollapseNullLowIntervalList: collapse NullLowIntervalList
+define ExpectedNullLowIntervalCollapse: { Interval[null, 5] }
+define NullHighIntervalList: { Interval[1, 4], Interval[3, null] }
+define CollapseNullHighIntervalList: collapse NullHighIntervalList
+define ExpectedNullHighIntervalCollapse: { Interval[1, null] }
 define NullInCollapse: collapse { Interval[1,3], null }
 define ExpectedResultWithNull: { Interval[1,3] }
 // define NullCollapse: collapse null // Translation Error
 define NullPerCollapse: collapse { Interval[1,4], Interval[4,7] } per null
 define ExpectedResultNullPer: { Interval[1,7] }
+define DateTime5_NullInterval: Interval[DateTime(2012, 1, 5, 0, 0, 0, 0), null]
+define DateTimeNull_5Interval: Interval[null, DateTime(2012, 1, 5, 0, 0, 0, 0)]
+define DateTime1_10Interval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 10, 0, 0, 0, 0)]
+define DateTimeNullStartCollapse: collapse { DateTime1_10Interval, DateTimeNull_5Interval }
+define DateTimeNullStartCollapseExpected: { Interval[null, DateTime(2012, 1, 10, 0, 0, 0, 0)] }
+define DateTimeNullEndCollapse: collapse { DateTime1_10Interval, DateTime5_NullInterval }
+define DateTimeNullEndCollapseExpected: { Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), null] }
+define DateTimeNullStartEndCollapse: collapse { DateTimeNull_5Interval, DateTime1_10Interval, DateTime5_NullInterval }
+define DateTimeNullStartEndCollapseExpected: { Interval[null, null] }
 ###
 
 module.exports['Collapse'] = {
@@ -86921,7 +86934,7 @@ module.exports['Collapse'] = {
             }
          }, {
             "localId" : "202",
-            "name" : "NullIntervalList",
+            "name" : "NullLowIntervalList",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -86929,7 +86942,7 @@ module.exports['Collapse'] = {
                "s" : {
                   "r" : "202",
                   "s" : [ {
-                     "value" : [ "define ","NullIntervalList",": " ]
+                     "value" : [ "define ","NullLowIntervalList",": " ]
                   }, {
                      "r" : "201",
                      "s" : [ {
@@ -86937,7 +86950,7 @@ module.exports['Collapse'] = {
                      }, {
                         "r" : "197",
                         "s" : [ {
-                           "value" : [ "Interval[","null",", ","3","]" ]
+                           "value" : [ "Interval[","null",", ","4","]" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
@@ -86971,7 +86984,7 @@ module.exports['Collapse'] = {
                   "high" : {
                      "localId" : "196",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "3",
+                     "value" : "4",
                      "type" : "Literal"
                   }
                }, {
@@ -86995,7 +87008,7 @@ module.exports['Collapse'] = {
             }
          }, {
             "localId" : "205",
-            "name" : "CollapseNullIntervalList",
+            "name" : "CollapseNullLowIntervalList",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -87003,7 +87016,7 @@ module.exports['Collapse'] = {
                "s" : {
                   "r" : "205",
                   "s" : [ {
-                     "value" : [ "define ","CollapseNullIntervalList",": " ]
+                     "value" : [ "define ","CollapseNullLowIntervalList",": " ]
                   }, {
                      "r" : "204",
                      "s" : [ {
@@ -87011,7 +87024,7 @@ module.exports['Collapse'] = {
                      }, {
                         "r" : "203",
                         "s" : [ {
-                           "value" : [ "NullIntervalList" ]
+                           "value" : [ "NullLowIntervalList" ]
                         } ]
                      } ]
                   } ]
@@ -87022,7 +87035,7 @@ module.exports['Collapse'] = {
                "type" : "Collapse",
                "operand" : [ {
                   "localId" : "203",
-                  "name" : "NullIntervalList",
+                  "name" : "NullLowIntervalList",
                   "type" : "ExpressionRef"
                }, {
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
@@ -87030,26 +87043,236 @@ module.exports['Collapse'] = {
                } ]
             }
          }, {
-            "localId" : "212",
+            "localId" : "210",
+            "name" : "ExpectedNullLowIntervalCollapse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "210",
+                  "s" : [ {
+                     "value" : [ "define ","ExpectedNullLowIntervalCollapse",": " ]
+                  }, {
+                     "r" : "209",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "208",
+                        "s" : [ {
+                           "value" : [ "Interval[","null",", ","5","]" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "209",
+               "type" : "List",
+               "element" : [ {
+                  "localId" : "208",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "206",
+                        "type" : "Null"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "207",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "218",
+            "name" : "NullHighIntervalList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "218",
+                  "s" : [ {
+                     "value" : [ "define ","NullHighIntervalList",": " ]
+                  }, {
+                     "r" : "217",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "213",
+                        "s" : [ {
+                           "value" : [ "Interval[","1",", ","4","]" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "216",
+                        "s" : [ {
+                           "value" : [ "Interval[","3",", ","null","]" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "217",
+               "type" : "List",
+               "element" : [ {
+                  "localId" : "213",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "211",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "212",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "216",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "214",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "215",
+                        "type" : "Null"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "221",
+            "name" : "CollapseNullHighIntervalList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "221",
+                  "s" : [ {
+                     "value" : [ "define ","CollapseNullHighIntervalList",": " ]
+                  }, {
+                     "r" : "220",
+                     "s" : [ {
+                        "value" : [ "collapse " ]
+                     }, {
+                        "r" : "219",
+                        "s" : [ {
+                           "value" : [ "NullHighIntervalList" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "220",
+               "type" : "Collapse",
+               "operand" : [ {
+                  "localId" : "219",
+                  "name" : "NullHighIntervalList",
+                  "type" : "ExpressionRef"
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
+            }
+         }, {
+            "localId" : "226",
+            "name" : "ExpectedNullHighIntervalCollapse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "226",
+                  "s" : [ {
+                     "value" : [ "define ","ExpectedNullHighIntervalCollapse",": " ]
+                  }, {
+                     "r" : "225",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "224",
+                        "s" : [ {
+                           "value" : [ "Interval[","1",", ","null","]" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "225",
+               "type" : "List",
+               "element" : [ {
+                  "localId" : "224",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "222",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "223",
+                        "type" : "Null"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "233",
             "name" : "NullInCollapse",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "233",
                   "s" : [ {
                      "value" : [ "define ","NullInCollapse",": " ]
                   }, {
-                     "r" : "211",
+                     "r" : "232",
                      "s" : [ {
                         "value" : [ "collapse " ]
                      }, {
-                        "r" : "210",
+                        "r" : "231",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "208",
+                           "r" : "229",
                            "s" : [ {
                               "value" : [ "Interval[","1",",","3","]" ]
                            } ]
@@ -87061,24 +87284,24 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "211",
+               "localId" : "232",
                "type" : "Collapse",
                "operand" : [ {
-                  "localId" : "210",
+                  "localId" : "231",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "208",
+                     "localId" : "229",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "206",
+                        "localId" : "227",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "high" : {
-                        "localId" : "207",
+                        "localId" : "228",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
@@ -87086,7 +87309,7 @@ module.exports['Collapse'] = {
                   }, {
                      "type" : "As",
                      "operand" : {
-                        "localId" : "209",
+                        "localId" : "230",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
@@ -87103,22 +87326,22 @@ module.exports['Collapse'] = {
                } ]
             }
          }, {
-            "localId" : "217",
+            "localId" : "238",
             "name" : "ExpectedResultWithNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "217",
+                  "r" : "238",
                   "s" : [ {
                      "value" : [ "define ","ExpectedResultWithNull",": " ]
                   }, {
-                     "r" : "216",
+                     "r" : "237",
                      "s" : [ {
                         "value" : [ "{ " ]
                      }, {
-                        "r" : "215",
+                        "r" : "236",
                         "s" : [ {
                            "value" : [ "Interval[","1",",","3","]" ]
                         } ]
@@ -87129,21 +87352,21 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "216",
+               "localId" : "237",
                "type" : "List",
                "element" : [ {
-                  "localId" : "215",
+                  "localId" : "236",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "213",
+                     "localId" : "234",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "high" : {
-                     "localId" : "214",
+                     "localId" : "235",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
@@ -87151,33 +87374,33 @@ module.exports['Collapse'] = {
                } ]
             }
          }, {
-            "localId" : "227",
+            "localId" : "248",
             "name" : "NullPerCollapse",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "227",
+                  "r" : "248",
                   "s" : [ {
                      "value" : [ "define ","NullPerCollapse",": " ]
                   }, {
-                     "r" : "226",
+                     "r" : "247",
                      "s" : [ {
                         "value" : [ "collapse " ]
                      }, {
-                        "r" : "224",
+                        "r" : "245",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "220",
+                           "r" : "241",
                            "s" : [ {
                               "value" : [ "Interval[","1",",","4","]" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "223",
+                           "r" : "244",
                            "s" : [ {
                               "value" : [ "Interval[","4",",","7","]" ]
                            } ]
@@ -87191,41 +87414,41 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "226",
+               "localId" : "247",
                "type" : "Collapse",
                "operand" : [ {
-                  "localId" : "224",
+                  "localId" : "245",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "220",
+                     "localId" : "241",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "218",
+                        "localId" : "239",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "high" : {
-                        "localId" : "219",
+                        "localId" : "240",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "223",
+                     "localId" : "244",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "221",
+                        "localId" : "242",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      },
                      "high" : {
-                        "localId" : "222",
+                        "localId" : "243",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "7",
                         "type" : "Literal"
@@ -87235,28 +87458,28 @@ module.exports['Collapse'] = {
                   "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                   "type" : "As",
                   "operand" : {
-                     "localId" : "225",
+                     "localId" : "246",
                      "type" : "Null"
                   }
                } ]
             }
          }, {
-            "localId" : "232",
+            "localId" : "253",
             "name" : "ExpectedResultNullPer",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "232",
+                  "r" : "253",
                   "s" : [ {
                      "value" : [ "define ","ExpectedResultNullPer",": " ]
                   }, {
-                     "r" : "231",
+                     "r" : "252",
                      "s" : [ {
                         "value" : [ "{ " ]
                      }, {
-                        "r" : "230",
+                        "r" : "251",
                         "s" : [ {
                            "value" : [ "Interval[","1",",","7","]" ]
                         } ]
@@ -87267,24 +87490,750 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "231",
+               "localId" : "252",
                "type" : "List",
                "element" : [ {
-                  "localId" : "230",
+                  "localId" : "251",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "228",
+                     "localId" : "249",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "high" : {
-                     "localId" : "229",
+                     "localId" : "250",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "7",
                      "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "264",
+            "name" : "DateTime5_NullInterval",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "264",
+                  "s" : [ {
+                     "value" : [ "define ","DateTime5_NullInterval",": " ]
+                  }, {
+                     "r" : "263",
+                     "s" : [ {
+                        "value" : [ "Interval[" ]
+                     }, {
+                        "r" : "261",
+                        "s" : [ {
+                           "value" : [ "DateTime","(","2012",", ","1",", ","5",", ","0",", ","0",", ","0",", ","0",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ", ","null","]" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "263",
+               "lowClosed" : true,
+               "highClosed" : true,
+               "type" : "Interval",
+               "low" : {
+                  "localId" : "261",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "254",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2012",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "255",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "256",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "localId" : "257",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "localId" : "258",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "localId" : "259",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "localId" : "260",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               },
+               "high" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "262",
+                     "type" : "Null"
+                  }
+               }
+            }
+         }, {
+            "localId" : "275",
+            "name" : "DateTimeNull_5Interval",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "275",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimeNull_5Interval",": " ]
+                  }, {
+                     "r" : "274",
+                     "s" : [ {
+                        "value" : [ "Interval[","null",", " ]
+                     }, {
+                        "r" : "273",
+                        "s" : [ {
+                           "value" : [ "DateTime","(","2012",", ","1",", ","5",", ","0",", ","0",", ","0",", ","0",")" ]
+                        } ]
+                     }, {
+                        "value" : [ "]" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "274",
+               "lowClosed" : true,
+               "highClosed" : true,
+               "type" : "Interval",
+               "low" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "265",
+                     "type" : "Null"
+                  }
+               },
+               "high" : {
+                  "localId" : "273",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "266",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2012",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "267",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "268",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "localId" : "269",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "localId" : "270",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "localId" : "271",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "localId" : "272",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         }, {
+            "localId" : "293",
+            "name" : "DateTime1_10Interval",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "293",
+                  "s" : [ {
+                     "value" : [ "define ","DateTime1_10Interval",": " ]
+                  }, {
+                     "r" : "292",
+                     "s" : [ {
+                        "value" : [ "Interval[" ]
+                     }, {
+                        "r" : "283",
+                        "s" : [ {
+                           "value" : [ "DateTime","(","2012",", ","1",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "291",
+                        "s" : [ {
+                           "value" : [ "DateTime","(","2012",", ","1",", ","10",", ","0",", ","0",", ","0",", ","0",")" ]
+                        } ]
+                     }, {
+                        "value" : [ "]" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "292",
+               "lowClosed" : true,
+               "highClosed" : true,
+               "type" : "Interval",
+               "low" : {
+                  "localId" : "283",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "276",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2012",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "277",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "278",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "localId" : "279",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "localId" : "280",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "localId" : "281",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "localId" : "282",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               },
+               "high" : {
+                  "localId" : "291",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "284",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2012",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "285",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "286",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "10",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "localId" : "287",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "localId" : "288",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "localId" : "289",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "localId" : "290",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         }, {
+            "localId" : "298",
+            "name" : "DateTimeNullStartCollapse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "298",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimeNullStartCollapse",": " ]
+                  }, {
+                     "r" : "297",
+                     "s" : [ {
+                        "value" : [ "collapse " ]
+                     }, {
+                        "r" : "296",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "294",
+                           "s" : [ {
+                              "value" : [ "DateTime1_10Interval" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "295",
+                           "s" : [ {
+                              "value" : [ "DateTimeNull_5Interval" ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "297",
+               "type" : "Collapse",
+               "operand" : [ {
+                  "localId" : "296",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "294",
+                     "name" : "DateTime1_10Interval",
+                     "type" : "ExpressionRef"
+                  }, {
+                     "localId" : "295",
+                     "name" : "DateTimeNull_5Interval",
+                     "type" : "ExpressionRef"
+                  } ]
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
+            }
+         }, {
+            "localId" : "310",
+            "name" : "DateTimeNullStartCollapseExpected",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "310",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimeNullStartCollapseExpected",": " ]
+                  }, {
+                     "r" : "309",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "308",
+                        "s" : [ {
+                           "value" : [ "Interval[","null",", " ]
+                        }, {
+                           "r" : "307",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","10",", ","0",", ","0",", ","0",", ","0",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "309",
+               "type" : "List",
+               "element" : [ {
+                  "localId" : "308",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "299",
+                        "type" : "Null"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "307",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "300",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "301",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "302",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "10",
+                        "type" : "Literal"
+                     },
+                     "hour" : {
+                        "localId" : "303",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     },
+                     "minute" : {
+                        "localId" : "304",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     },
+                     "second" : {
+                        "localId" : "305",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     },
+                     "millisecond" : {
+                        "localId" : "306",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "315",
+            "name" : "DateTimeNullEndCollapse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "315",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimeNullEndCollapse",": " ]
+                  }, {
+                     "r" : "314",
+                     "s" : [ {
+                        "value" : [ "collapse " ]
+                     }, {
+                        "r" : "313",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "311",
+                           "s" : [ {
+                              "value" : [ "DateTime1_10Interval" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "312",
+                           "s" : [ {
+                              "value" : [ "DateTime5_NullInterval" ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "314",
+               "type" : "Collapse",
+               "operand" : [ {
+                  "localId" : "313",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "311",
+                     "name" : "DateTime1_10Interval",
+                     "type" : "ExpressionRef"
+                  }, {
+                     "localId" : "312",
+                     "name" : "DateTime5_NullInterval",
+                     "type" : "ExpressionRef"
+                  } ]
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
+            }
+         }, {
+            "localId" : "327",
+            "name" : "DateTimeNullEndCollapseExpected",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "327",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimeNullEndCollapseExpected",": " ]
+                  }, {
+                     "r" : "326",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "325",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "323",
+                           "s" : [ {
+                              "value" : [ "DateTime","(","2012",", ","1",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", ","null","]" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "326",
+               "type" : "List",
+               "element" : [ {
+                  "localId" : "325",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "323",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "316",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "317",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "318",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "hour" : {
+                        "localId" : "319",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     },
+                     "minute" : {
+                        "localId" : "320",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     },
+                     "second" : {
+                        "localId" : "321",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     },
+                     "millisecond" : {
+                        "localId" : "322",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "324",
+                        "type" : "Null"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "333",
+            "name" : "DateTimeNullStartEndCollapse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "333",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimeNullStartEndCollapse",": " ]
+                  }, {
+                     "r" : "332",
+                     "s" : [ {
+                        "value" : [ "collapse " ]
+                     }, {
+                        "r" : "331",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "328",
+                           "s" : [ {
+                              "value" : [ "DateTimeNull_5Interval" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "329",
+                           "s" : [ {
+                              "value" : [ "DateTime1_10Interval" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "330",
+                           "s" : [ {
+                              "value" : [ "DateTime5_NullInterval" ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "332",
+               "type" : "Collapse",
+               "operand" : [ {
+                  "localId" : "331",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "328",
+                     "name" : "DateTimeNull_5Interval",
+                     "type" : "ExpressionRef"
+                  }, {
+                     "localId" : "329",
+                     "name" : "DateTime1_10Interval",
+                     "type" : "ExpressionRef"
+                  }, {
+                     "localId" : "330",
+                     "name" : "DateTime5_NullInterval",
+                     "type" : "ExpressionRef"
+                  } ]
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
+            }
+         }, {
+            "localId" : "338",
+            "name" : "DateTimeNullStartEndCollapseExpected",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "338",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimeNullStartEndCollapseExpected",": " ]
+                  }, {
+                     "r" : "337",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "336",
+                        "s" : [ {
+                           "value" : [ "Interval[","null",", ","null","]" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "337",
+               "type" : "List",
+               "element" : [ {
+                  "localId" : "336",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "334",
+                     "type" : "Null"
+                  },
+                  "high" : {
+                     "localId" : "335",
+                     "type" : "Null"
                   }
                } ]
             }
