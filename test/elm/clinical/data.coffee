@@ -180,11 +180,11 @@ using QUICK
 valueset "Female": '2.16.840.1.113883.3.560.100.2'
 valueset "Versioned Female": '2.16.840.1.113883.3.560.100.2' version '20121025'
 valueset "SharedCodes": '2.16.840.1.113883.3.000.000.0'
-valueset "ProperSharedCodes": '2.16.840.1.113883.3.000.000.1'
+valueset "ImproperSharedCodes": '2.16.840.1.113883.3.000.000.1'
 context Patient
 define String: 'F' in "Female"
 define SharedCodesFoo: 'foo' in "SharedCodes"
-define ProperSharedCodesCodeValue: 'codeValue' in "ProperSharedCodes"
+define ImproperSharedCodesCodeValue: 'codeValue' in "ImproperSharedCodes"
 define StringInVersionedValueSet: 'F' in "Versioned Female"
 define ShortCode: Code { code: 'F' } in "Female"
 define MediumCode: Code { code: 'F', system: '2.16.840.1.113883.18.2' } in "Female"
@@ -242,7 +242,7 @@ module.exports['InValueSet'] = {
             "accessLevel" : "Public"
          }, {
             "localId" : "5",
-            "name" : "ProperSharedCodes",
+            "name" : "ImproperSharedCodes",
             "id" : "2.16.840.1.113883.3.000.000.1",
             "accessLevel" : "Public"
          } ]
@@ -347,7 +347,7 @@ module.exports['InValueSet'] = {
             }
          }, {
             "localId" : "17",
-            "name" : "ProperSharedCodesCodeValue",
+            "name" : "ImproperSharedCodesCodeValue",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -355,7 +355,7 @@ module.exports['InValueSet'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","ProperSharedCodesCodeValue",": " ]
+                     "value" : [ "define ","ImproperSharedCodesCodeValue",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -368,7 +368,7 @@ module.exports['InValueSet'] = {
                      }, {
                         "r" : "15",
                         "s" : [ {
-                           "value" : [ "\"ProperSharedCodes\"" ]
+                           "value" : [ "\"ImproperSharedCodes\"" ]
                         } ]
                      } ]
                   } ]
@@ -385,7 +385,7 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "15",
-                  "name" : "ProperSharedCodes"
+                  "name" : "ImproperSharedCodes"
                }
             }
          }, {

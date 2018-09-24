@@ -33,17 +33,14 @@ module.exports.ValueSet = class ValueSet
     codesList = toCodeList(code)
     # InValueSet String Overload
     if codesList.length == 1 and typeof codesList[0] is 'string'
-      codes_codeSystem = {}
-      for c2 in @codes
-        if codesList[0] == c2.code
-          # Check if code exists but with different codesystem,
-          if codes_codeSystem[c2.code]? and codes_codeSystem[c2.code] != c2.system
-            throw new Error('In (valueset) is ambiguous -- multiple matches for ' + c2.code + ' found in value set with different code systems.')
-          else
-            codes_codeSystem[c2.code] = c2.system
-      # Return true if there is a match (atleast one key exists in the hash)
-      return true if Object.keys(codes_codeSystem).length > 0
-      return false
+      matchFound = false
+      for codeItem in @codes
+        # Confirm all code systems match
+        if codeItem.system != @codes[0].system
+          throw new Error('In (valueset) is ambiguous -- multiple matches for ' + codeItem.code + ' found in value set with different code systems.')
+        else if codeItem.code == codesList[0]
+          matchFound = true
+      return matchFound
     else
       codesInList(codesList, @codes)
 
