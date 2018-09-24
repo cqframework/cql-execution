@@ -52,7 +52,7 @@ describe 'equals', ->
     equals(new Foo('abc', [1,2,3]), new Foo('abc', [1,2,3])).should.be.true()
     equals(new Foo('abc', [1,2,3]), new Foo('abcd', [1,2,3])).should.be.false()
     equals(new Foo('abc', new Bar('xyz', [1,2,3])), new Foo('abc', new Bar('xyz', [1,2,3]))).should.be.true()
-    should(equals(new Foo('abc', new Bar('xyz')), new Foo('abc', new Bar('xyz')))).be.null() # because Bar is missing components
+    equals(new Foo('abc', new Bar('xyz')), new Foo('abc', new Bar('xyz'))).should.be.true()
     should(equals(new Foo('abc', new Bar('xyz')), new Foo('abc', new Bar('xyz',999)))).be.null()
     equals(new Foo('abc', [1,2,3]), new Bar('abc', [1,2,3])).should.be.false()
     equals(new Bar('abc', [1,2,3]), new Foo('abc', [1,2,3])).should.be.false()

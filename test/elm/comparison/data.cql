@@ -4,6 +4,9 @@ define AEqB_Int: 5 = 5
 define ALtB_Int: 5 = 6
 define EqTuples: Tuple{a: 1, b: Tuple{c: 1}} = Tuple{a: 1, b: Tuple{c: 1}}
 define UneqTuples: Tuple{a: 1, b: Tuple{c: 1}} = Tuple{a: 1, b: Tuple{c: -1}}
+define TupleA: Tuple{ Foo: null }
+define TupleB: Tuple{ Bar: null }
+define TupleDifferentKeys: TupleA = TupleB
 define EqTuplesWithNullFields: Tuple{a: 'Hello', b: null} = Tuple{a: 'Hello', b: null}
 define UneqTuplesWithNullFields: Tuple{a: 'Hello', b: null} = Tuple{a: 'Goodbye', b: null}
 define UncertTuplesWithNullFieldOnOne: Tuple{a: 'Hello', b: null} = Tuple{a: 'Hello', b: 'null'}

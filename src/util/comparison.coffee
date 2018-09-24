@@ -83,16 +83,20 @@ classesEqual = (object1, object2) ->
   return object2 instanceof object1.constructor and object1 instanceof object2.constructor
 
 deepCompareKeysAndValues = (a, b, comparisonFunction) ->
-  aKeys = getKeysFromObject(a)
-  bKeys = getKeysFromObject(b)
+  aKeys = getKeysFromObject(a).sort()
+  bKeys = getKeysFromObject(b).sort()
   # Array.every() will only return true or false, so set a flag for if we should return null
   shouldReturnNull = false
-  finalComparisonResult = aKeys.length is bKeys.length and aKeys.every (key) ->
-    # if both are null we should return true to satisfy ignoring empty values in tuples
-    return true if a[key] is null and b[key] is null
-    comparisonResult = comparisonFunction(a[key], b[key])
-    shouldReturnNull = true if comparisonResult == null
-    return comparisonResult
+  # Check if both arrays of keys are the same length and key names match
+  if aKeys.length is bKeys.length and aKeys.every((value, index) => value == bKeys[index])
+    finalComparisonResult = aKeys.every (key) ->
+      # if both are null we should return true to satisfy ignoring empty values in tuples
+      return true if not a[key]? and not b[key]?
+      comparisonResult = comparisonFunction(a[key], b[key])
+      shouldReturnNull = true if comparisonResult == null
+      return comparisonResult
+  else
+    finalComparisonResult = false
 
   return null if shouldReturnNull
   return finalComparisonResult

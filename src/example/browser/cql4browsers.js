@@ -1133,8 +1133,8 @@
       if (!(other instanceof Date)) {
         return null;
       }
-      a = this;
-      b = other;
+      a = this.copy();
+      b = other.copy();
       if (unitField === Date.Unit.YEAR) {
         a = new Date(a.year, 1, 1);
         b = new Date(b.year, 1, 1);
@@ -44891,20 +44891,28 @@
 
   deepCompareKeysAndValues = function(a, b, comparisonFunction) {
     var aKeys, bKeys, finalComparisonResult, shouldReturnNull;
-    aKeys = getKeysFromObject(a);
-    bKeys = getKeysFromObject(b);
+    aKeys = getKeysFromObject(a).sort();
+    bKeys = getKeysFromObject(b).sort();
     shouldReturnNull = false;
-    finalComparisonResult = aKeys.length === bKeys.length && aKeys.every(function(key) {
-      var comparisonResult;
-      if (a[key] === null && b[key] === null) {
-        return true;
-      }
-      comparisonResult = comparisonFunction(a[key], b[key]);
-      if (comparisonResult === null) {
-        shouldReturnNull = true;
-      }
-      return comparisonResult;
-    });
+    if (aKeys.length === bKeys.length && aKeys.every((function(_this) {
+      return function(value, index) {
+        return value === bKeys[index];
+      };
+    })(this))) {
+      finalComparisonResult = aKeys.every(function(key) {
+        var comparisonResult;
+        if ((a[key] == null) && (b[key] == null)) {
+          return true;
+        }
+        comparisonResult = comparisonFunction(a[key], b[key]);
+        if (comparisonResult === null) {
+          shouldReturnNull = true;
+        }
+        return comparisonResult;
+      });
+    } else {
+      finalComparisonResult = false;
+    }
     if (shouldReturnNull) {
       return null;
     }
