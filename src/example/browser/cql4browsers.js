@@ -4947,7 +4947,7 @@
     }
 
     Collapse.prototype.exec = function(ctx) {
-      var a, b, collapsedIntervals, i, interval, intervals, intervalsClone, j, len, len1, perWidth, precisionUnits, ref3, ref4, ref5, ref6, ref7, ref8, ref9;
+      var a, b, collapsedIntervals, i, interval, intervals, intervalsClone, len, perWidth, precisionUnits, ref3, ref4, ref5, ref6, ref7;
       ref3 = this.execArgs(ctx), intervals = ref3[0], perWidth = ref3[1];
       intervalsClone = [];
       for (i = 0, len = intervals.length; i < len; i++) {
@@ -4982,9 +4982,9 @@
                 unit: precisionUnits
               });
             } else if (intervalsClone[0].high.isQuantity) {
-              perWidth = doSubtraction(predecessor(intervalsClone[0].high), intervalsClone[0].high);
+              perWidth = doSubtraction(successor(intervalsClone[0].high), intervalsClone[0].high);
             } else {
-              perWidth = predecessor(intervalsClone[0].high) - intervalsClone[0].high;
+              perWidth = successor(intervalsClone[0].high) - intervalsClone[0].high;
             }
           } else {
             throw new Error("Point type of intervals provided to collapse cannot be determined.");
@@ -4996,15 +4996,9 @@
             });
           }
         }
-        for (j = 0, len1 = intervalsClone.length; j < len1; j++) {
-          a = intervalsClone[j];
-          if (((ref4 = a.low) != null ? typeof ref4.isImprecise === "function" ? ref4.isImprecise() : void 0 : void 0) || ((ref5 = a.high) != null ? typeof ref5.isImprecise === "function" ? ref5.isImprecise() : void 0 : void 0)) {
-            throw new Error("Collapse does not support imprecise dates at this time.");
-          }
-        }
         intervalsClone.sort(function(a, b) {
-          var ref6, ref7;
-          if (typeof ((ref6 = a.low) != null ? ref6.before : void 0) === 'function') {
+          var ref4, ref5;
+          if (typeof ((ref4 = a.low) != null ? ref4.before : void 0) === 'function') {
             if ((b.low != null) && a.low.before(b.low)) {
               return -1;
             }
@@ -5023,7 +5017,7 @@
           } else if ((a.low == null) && (b.low != null)) {
             return -1;
           }
-          if (typeof ((ref7 = a.high) != null ? ref7.before : void 0) === 'function') {
+          if (typeof ((ref5 = a.high) != null ? ref5.before : void 0) === 'function') {
             if ((b.high == null) || a.high.before(b.high)) {
               return -1;
             }
@@ -5048,12 +5042,12 @@
         a = intervalsClone.shift();
         b = intervalsClone.shift();
         while (b) {
-          if (typeof ((ref6 = b.low) != null ? ref6.durationBetween : void 0) === 'function') {
-            if ((ref7 = a.high) != null ? ref7.after(b.low) : void 0) {
+          if (typeof ((ref4 = b.low) != null ? ref4.durationBetween : void 0) === 'function') {
+            if ((ref5 = a.high) != null ? ref5.after(b.low) : void 0) {
               if ((b.high == null) || b.high.after(a.high)) {
                 a.high = b.high;
               }
-            } else if (((ref8 = a.high) != null ? ref8.durationBetween(b.low, perWidth.unit).high : void 0) <= perWidth.value) {
+            } else if (((ref6 = a.high) != null ? ref6.durationBetween(b.low, perWidth.unit).high : void 0) <= perWidth.value) {
               a.high = b.high;
             } else if ((a.high != null) && (b.high == null)) {
               a.high = b.high;
@@ -5061,9 +5055,9 @@
               collapsedIntervals.push(a);
               a = b;
             }
-          } else if (typeof ((ref9 = b.low) != null ? ref9.sameOrBefore : void 0) === 'function') {
+          } else if (typeof ((ref7 = b.low) != null ? ref7.sameOrBefore : void 0) === 'function') {
             if ((a.high != null) && b.low.sameOrBefore(doAddition(a.high, perWidth))) {
-              if (b.high.after(a.high)) {
+              if ((b.high == null) || b.high.after(a.high)) {
                 a.high = b.high;
               }
             } else if ((a.high != null) && (b.high == null)) {

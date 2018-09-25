@@ -192,20 +192,14 @@ module.exports.Collapse = class Collapse extends Expression
             precisionUnits = intervalsClone[0].high.getPrecision()
             perWidth = new Quantity(value: 1, unit: precisionUnits)
           else if intervalsClone[0].high.isQuantity
-            perWidth = doSubtraction(predecessor(intervalsClone[0].high), intervalsClone[0].high)
+            perWidth = doSubtraction(successor(intervalsClone[0].high), intervalsClone[0].high)
           else
-            perWidth = predecessor(intervalsClone[0].high) - intervalsClone[0].high
+            perWidth = successor(intervalsClone[0].high) - intervalsClone[0].high
         else
           throw new Error("Point type of intervals provided to collapse cannot be determined.")
 
         if typeof perWidth is 'number'
           perWidth = new Quantity(value: perWidth, unit: '1')
-
-      # we don't handle imprecise intervals at this time
-      for a in intervalsClone
-        if a.low?.isImprecise?() || a.high?.isImprecise?()
-          throw new Error("Collapse does not support imprecise dates at this time.")
-
 
       # sort intervalsClone by start
       intervalsClone.sort (a,b)->
@@ -251,7 +245,7 @@ module.exports.Collapse = class Collapse extends Expression
             a = b
         else if typeof b.low?.sameOrBefore == 'function'
           if a.high? and b.low.sameOrBefore doAddition(a.high, perWidth)
-            a.high = b.high if b.high.after a.high
+            a.high = b.high if !b.high? or b.high.after a.high
           else if a.high? and !b.high?
             a.high = b.high
           else

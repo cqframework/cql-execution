@@ -1311,7 +1311,7 @@ describe 'DateTimeIntervalCollapse', ->
     @dateTimeCollapseOverlapMultipleCombine.exec(@ctx).should.eql @dateTime1_15IntervalList.exec(@ctx)
 
   it 'throws collapsing imprecise interval', ->
-    should(() => @dateTimeCollapseImpreciseBoundary.exec(@ctx)).throw("Collapse does not support imprecise dates at this time.")
+    @dateTimeCollapseImpreciseBoundary.exec(@ctx).should.eql @dateTime1_10IntervalList.exec(@ctx)
 
   it 'should not modify collapse parameters', ->
     interval1CopyString = @dateTime1_6Interval.toString()
@@ -1359,6 +1359,15 @@ describe 'Collapse', ->
 
   it 'Quantity with units disjoint and not within per', ->
     @collapseQuantityUnitsNotWithinPer.exec(@ctx).should.eql @quantityMeterIntervalList.exec(@ctx)
+
+  it 'Quantity with units with null low value', ->
+    @collapseQuantityNullLowUnitsWithinPer.exec(@ctx).should.eql @collapseQuantityNullLowUnitsWithinPerExpected.exec(@ctx)
+
+  it 'Quantity with units with null low and high values', ->
+    @collapseQuantityIntervalListWithNulls.exec(@ctx).should.eql @collapseQuantityIntervalListWithNullsExpected.exec(@ctx)
+
+  it 'Quantity with units with null high value', ->
+    @collapseQuantityNullHighUnitsWithinPer.exec(@ctx).should.eql @collapseQuantityNullHighUnitsWithinPerExpected.exec(@ctx)
 
   it 'with Interval that has null low values', ->
     @collapseNullLowIntervalList.exec(@ctx).should.eql @expectedNullLowIntervalCollapse.exec(@ctx)
