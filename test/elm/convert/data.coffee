@@ -3334,329 +3334,6 @@ module.exports['ToTime'] = {
 library TestSnippet version '1'
 using QUICK
 context Patient
-define IsTrue: ToBoolean('y')
-define IsFalse: ToBoolean('0')
-define IsNull: ToBoolean('falsetto')
-###
-
-module.exports['ToBoolean'] = {
-   "library" : {
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "type" : "SingletonFrom",
-               "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
-                  "type" : "Retrieve"
-               }
-            }
-         }, {
-            "localId" : "4",
-            "name" : "IsTrue",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "4",
-                  "s" : [ {
-                     "value" : [ "define ","IsTrue",": " ]
-                  }, {
-                     "r" : "3",
-                     "s" : [ {
-                        "value" : [ "ToBoolean","(" ]
-                     }, {
-                        "r" : "2",
-                        "s" : [ {
-                           "value" : [ "'y'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "3",
-               "type" : "ToBoolean",
-               "operand" : {
-                  "localId" : "2",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "y",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "7",
-            "name" : "IsFalse",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "7",
-                  "s" : [ {
-                     "value" : [ "define ","IsFalse",": " ]
-                  }, {
-                     "r" : "6",
-                     "s" : [ {
-                        "value" : [ "ToBoolean","(" ]
-                     }, {
-                        "r" : "5",
-                        "s" : [ {
-                           "value" : [ "'0'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "6",
-               "type" : "ToBoolean",
-               "operand" : {
-                  "localId" : "5",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "0",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "10",
-            "name" : "IsNull",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "10",
-                  "s" : [ {
-                     "value" : [ "define ","IsNull",": " ]
-                  }, {
-                     "r" : "9",
-                     "s" : [ {
-                        "value" : [ "ToBoolean","(" ]
-                     }, {
-                        "r" : "8",
-                        "s" : [ {
-                           "value" : [ "'falsetto'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "9",
-               "type" : "ToBoolean",
-               "operand" : {
-                  "localId" : "8",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "falsetto",
-                  "type" : "Literal"
-               }
-            }
-         } ]
-      }
-   }
-}
-
-### ToConcept
-library TestSnippet version '1'
-using QUICK
-context Patient
-define IsValid: ToConcept(Code { system: 'http://loinc.org', code: '8480-6' }) // Concept { codes: { Code { system: 'http://loinc.org', code: '8480-6' } } }
-define IsNull: ToConcept(null as Code)
-###
-
-module.exports['ToConcept'] = {
-   "library" : {
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "type" : "SingletonFrom",
-               "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
-                  "type" : "Retrieve"
-               }
-            }
-         }, {
-            "localId" : "6",
-            "name" : "IsValid",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "6",
-                  "s" : [ {
-                     "value" : [ "define ","IsValid",": " ]
-                  }, {
-                     "r" : "5",
-                     "s" : [ {
-                        "value" : [ "ToConcept","(" ]
-                     }, {
-                        "r" : "4",
-                        "s" : [ {
-                           "value" : [ "Code"," { " ]
-                        }, {
-                           "s" : [ {
-                              "value" : [ "system",": " ]
-                           }, {
-                              "r" : "2",
-                              "s" : [ {
-                                 "value" : [ "'http://loinc.org'" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "s" : [ {
-                              "value" : [ "code",": " ]
-                           }, {
-                              "r" : "3",
-                              "s" : [ {
-                                 "value" : [ "'8480-6'" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ " }" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "5",
-               "type" : "ToConcept",
-               "operand" : {
-                  "localId" : "4",
-                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
-                  "type" : "Instance",
-                  "element" : [ {
-                     "name" : "system",
-                     "value" : {
-                        "localId" : "2",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "http://loinc.org",
-                        "type" : "Literal"
-                     }
-                  }, {
-                     "name" : "code",
-                     "value" : {
-                        "localId" : "3",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "8480-6",
-                        "type" : "Literal"
-                     }
-                  } ]
-               }
-            }
-         }, {
-            "localId" : "11",
-            "name" : "IsNull",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "11",
-                  "s" : [ {
-                     "value" : [ "define ","IsNull",": " ]
-                  }, {
-                     "r" : "10",
-                     "s" : [ {
-                        "value" : [ "ToConcept","(" ]
-                     }, {
-                        "r" : "9",
-                        "s" : [ {
-                           "r" : "7",
-                           "value" : [ "null"," as " ]
-                        }, {
-                           "r" : "8",
-                           "s" : [ {
-                              "value" : [ "Code" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "10",
-               "type" : "ToConcept",
-               "operand" : {
-                  "localId" : "9",
-                  "strict" : false,
-                  "type" : "As",
-                  "operand" : {
-                     "localId" : "7",
-                     "type" : "Null"
-                  },
-                  "asTypeSpecifier" : {
-                     "localId" : "8",
-                     "name" : "{urn:hl7-org:elm-types:r1}Code",
-                     "type" : "NamedTypeSpecifier"
-                  }
-               }
-            }
-         } ]
-      }
-   }
-}
-
-### ToBoolean
-library TestSnippet version '1'
-using QUICK
-context Patient
 define UpperCaseTrue: ToBoolean('TRUE')
 define UpperCaseFalse: ToBoolean('FALSE')
 define LowerCaseTrue: ToBoolean('true')
@@ -3665,6 +3342,9 @@ define UpperCaseT: ToBoolean('T')
 define UpperCaseF: ToBoolean('F')
 define LowerCaseT: ToBoolean('t')
 define LowerCaseF: ToBoolean('f')
+define IsTrue: ToBoolean('y')
+define IsFalse: ToBoolean('0')
+define IsNull: ToBoolean('falsetto')
 ###
 
 module.exports['ToBoolean'] = {
@@ -3985,6 +3665,283 @@ module.exports['ToBoolean'] = {
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "f",
                   "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "28",
+            "name" : "IsTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "28",
+                  "s" : [ {
+                     "value" : [ "define ","IsTrue",": " ]
+                  }, {
+                     "r" : "27",
+                     "s" : [ {
+                        "value" : [ "ToBoolean","(" ]
+                     }, {
+                        "r" : "26",
+                        "s" : [ {
+                           "value" : [ "'y'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "27",
+               "type" : "ToBoolean",
+               "operand" : {
+                  "localId" : "26",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "y",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "31",
+            "name" : "IsFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "31",
+                  "s" : [ {
+                     "value" : [ "define ","IsFalse",": " ]
+                  }, {
+                     "r" : "30",
+                     "s" : [ {
+                        "value" : [ "ToBoolean","(" ]
+                     }, {
+                        "r" : "29",
+                        "s" : [ {
+                           "value" : [ "'0'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "30",
+               "type" : "ToBoolean",
+               "operand" : {
+                  "localId" : "29",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "0",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "34",
+            "name" : "IsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "34",
+                  "s" : [ {
+                     "value" : [ "define ","IsNull",": " ]
+                  }, {
+                     "r" : "33",
+                     "s" : [ {
+                        "value" : [ "ToBoolean","(" ]
+                     }, {
+                        "r" : "32",
+                        "s" : [ {
+                           "value" : [ "'falsetto'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "33",
+               "type" : "ToBoolean",
+               "operand" : {
+                  "localId" : "32",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "falsetto",
+                  "type" : "Literal"
+               }
+            }
+         } ]
+      }
+   }
+}
+
+### ToConcept
+library TestSnippet version '1'
+using QUICK
+context Patient
+define IsValid: ToConcept(Code { system: 'http://loinc.org', code: '8480-6' }) // Concept { codes: { Code { system: 'http://loinc.org', code: '8480-6' } } }
+define IsNull: ToConcept(null as Code)
+###
+
+module.exports['ToConcept'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "6",
+            "name" : "IsValid",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "6",
+                  "s" : [ {
+                     "value" : [ "define ","IsValid",": " ]
+                  }, {
+                     "r" : "5",
+                     "s" : [ {
+                        "value" : [ "ToConcept","(" ]
+                     }, {
+                        "r" : "4",
+                        "s" : [ {
+                           "value" : [ "Code"," { " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "system",": " ]
+                           }, {
+                              "r" : "2",
+                              "s" : [ {
+                                 "value" : [ "'http://loinc.org'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "code",": " ]
+                           }, {
+                              "r" : "3",
+                              "s" : [ {
+                                 "value" : [ "'8480-6'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "5",
+               "type" : "ToConcept",
+               "operand" : {
+                  "localId" : "4",
+                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "Instance",
+                  "element" : [ {
+                     "name" : "system",
+                     "value" : {
+                        "localId" : "2",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "http://loinc.org",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "code",
+                     "value" : {
+                        "localId" : "3",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "8480-6",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "11",
+            "name" : "IsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "11",
+                  "s" : [ {
+                     "value" : [ "define ","IsNull",": " ]
+                  }, {
+                     "r" : "10",
+                     "s" : [ {
+                        "value" : [ "ToConcept","(" ]
+                     }, {
+                        "r" : "9",
+                        "s" : [ {
+                           "r" : "7",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "8",
+                           "s" : [ {
+                              "value" : [ "Code" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "10",
+               "type" : "ToConcept",
+               "operand" : {
+                  "localId" : "9",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "7",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "8",
+                     "name" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "NamedTypeSpecifier"
+                  }
                }
             }
          } ]
