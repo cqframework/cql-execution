@@ -327,5 +327,5 @@ describe 'ToBoolean', ->
   it "should return true for T", ->
     should(@upperCaseT.exec(@ctx)).be.true
 
-  it "should return true for F", ->
+  it "should return false for F", ->
     should(@upperCaseF.exec(@ctx)).be.false

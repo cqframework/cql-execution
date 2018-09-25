@@ -4,7 +4,7 @@
 { Concept } = require '../datatypes/clinical'
 { parseQuantity } = require './quantity'
 { isValidDecimal, isValidInteger, limitDecimalPrecision } = require('../util/math')
-{ normalizeMillisecondsField, normalizeMillisecondsFieldInString } = require '../util/util'
+{ normalizeMillisecondsField } = require '../util/util'
 
 # TODO: Casting and Conversion needs unit tests!
 

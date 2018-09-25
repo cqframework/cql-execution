@@ -23,7 +23,7 @@ class DateTime
     seconds= matches[12]
     milliseconds= matches[14]
     milliseconds= normalizeMillisecondsField(milliseconds) if milliseconds?
-    string = normalizeMillisecondsFieldInString(string, matches) if milliseconds?
+    string = normalizeMillisecondsFieldInString(string, matches[14]) if milliseconds?
 
     return null if !isValidDateTimeStringFormat(string)
 
@@ -841,18 +841,6 @@ daysInMonth = (year, month) ->
     throw new Error('daysInMonth requires year and month as arguments')
   # Month is 1-indexed here because of the 0 day
   return new jsDate(year, month, 0).getDate();
-
-
-normalizeMillisecondsFieldInString = (string, matches) ->
-  msString = matches[14]
-  # TODO: verify we are only removing numeral digits
-  msString = normalizeMillisecondsField(msString)
-  [beforeMs, msAndAfter] = string.split('.')
-  timezoneSeparator = getTimezoneSeparatorFromString(msAndAfter)
-
-  timezoneField = msAndAfter?.split(timezoneSeparator)[1] if !!timezoneSeparator
-  timezoneField = '' if !timezoneField?
-  string = beforeMs + '.' + msString + timezoneSeparator + timezoneField
 
 normalizeMillisecondsField = (msString) ->
   # fix up milliseconds by padding zeros and/or truncating (5 --> 500, 50 --> 500, 54321 --> 543, etc.)
