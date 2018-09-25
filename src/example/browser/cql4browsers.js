@@ -1562,7 +1562,7 @@
       ref4 = this.constructor.FIELDS;
       for (k = 0, len2 = ref4.length; k < len2; k++) {
         f = ref4[k];
-        if (!this[f]) {
+        if (this[f] == null) {
           result[f] = null;
         }
       }

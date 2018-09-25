@@ -120,7 +120,6 @@ describe 'Date.add', ->
     simple.add(-1, Date.Unit.DAY).should.eql Date.parse('2000-06-14')
 
   it 'should still work for imprecise numbers, when adding to a defined field', ->
-    Date.parse('2000-06-15').add(30, Date.Unit.DAY).should.eql Date.parse('2000-07-15')
     Date.parse('2000-06').add(8, Date.Unit.MONTH).should.eql Date.parse('2001-02')
     Date.parse('2000').add(5, Date.Unit.YEAR).should.eql Date.parse('2005')
 
@@ -351,22 +350,48 @@ describe 'Date.sameAs', ->
     should.not.exist Date.parse('2000-05').sameAs(Date.parse('2000-05'), Date.Unit.DAY)
     Date.parse('2000-05').sameAs(Date.parse('2000-05'), Date.Unit.MONTH).should.be.true()
     Date.parse('2000-05').sameAs(Date.parse('2000-05'), Date.Unit.YEAR).should.be.true()
+    should.not.exist Date.parse('2000-05').sameAs(Date.parse('2000-05-01'), Date.Unit.DAY)
+    Date.parse('2000-05').sameAs(Date.parse('2000-05-01'), Date.Unit.MONTH).should.be.true()
+    Date.parse('2000-05').sameAs(Date.parse('2000-05-01'), Date.Unit.YEAR).should.be.true()
+    should.not.exist Date.parse('2000-05-01').sameAs(Date.parse('2000-05'), Date.Unit.DAY)
+    Date.parse('2000-05-01').sameAs(Date.parse('2000-05'), Date.Unit.MONTH).should.be.true()
+    Date.parse('2000-05-01').sameAs(Date.parse('2000-05'), Date.Unit.YEAR).should.be.true()
 
     Date.parse('2000-05').sameAs(Date.parse('2000-06')).should.be.false()
     Date.parse('2000-05').sameAs(Date.parse('2000-06'), Date.Unit.DAY).should.be.false()
     Date.parse('2000-05').sameAs(Date.parse('2000-06'), Date.Unit.MONTH).should.be.false()
     Date.parse('2000-05').sameAs(Date.parse('2000-06'), Date.Unit.YEAR).should.be.true()
+    Date.parse('2001-05').sameAs(Date.parse('2000-06'), Date.Unit.YEAR).should.be.false()
+    Date.parse('2000-05').sameAs(Date.parse('2000-06-01'), Date.Unit.DAY).should.be.false()
+    Date.parse('2000-05').sameAs(Date.parse('2000-06-01'), Date.Unit.MONTH).should.be.false()
+    Date.parse('2000-05').sameAs(Date.parse('2001-06-01'), Date.Unit.YEAR).should.be.false()
+    Date.parse('2000-05-01').sameAs(Date.parse('2000-06'), Date.Unit.DAY).should.be.false()
+    Date.parse('2000-05-01').sameAs(Date.parse('2000-06'), Date.Unit.MONTH).should.be.false()
+    Date.parse('2000-05-01').sameAs(Date.parse('2001-06'), Date.Unit.YEAR).should.be.false()
 
   it 'should handle imprecision correctly with missing months', ->
     Date.parse('2000').sameAs(Date.parse('2000')).should.be.true()
     should.not.exist Date.parse('2000').sameAs(Date.parse('2000'), Date.Unit.DAY)
     should.not.exist Date.parse('2000').sameAs(Date.parse('2000'), Date.Unit.MONTH)
     Date.parse('2000').sameAs(Date.parse('2000'), Date.Unit.YEAR).should.be.true()
+    should.not.exist Date.parse('2000').sameAs(Date.parse('2000-05-01'), Date.Unit.DAY)
+    should.not.exist Date.parse('2000').sameAs(Date.parse('2000-05-01'), Date.Unit.MONTH)
+    Date.parse('2000').sameAs(Date.parse('2000-05-01'), Date.Unit.YEAR).should.be.true()
+    should.not.exist Date.parse('2000-05-01').sameAs(Date.parse('2000'), Date.Unit.DAY)
+    should.not.exist Date.parse('2000-05-01').sameAs(Date.parse('2000'), Date.Unit.MONTH)
+    Date.parse('2000-05-01').sameAs(Date.parse('2000-05'), Date.Unit.YEAR).should.be.true()
 
     Date.parse('2000').sameAs(Date.parse('2001')).should.be.false()
     Date.parse('2000').sameAs(Date.parse('2001'), Date.Unit.DAY).should.be.false()
     Date.parse('2000').sameAs(Date.parse('2001'), Date.Unit.MONTH).should.be.false()
     Date.parse('2000').sameAs(Date.parse('2001'), Date.Unit.YEAR).should.be.false()
+
+    Date.parse('2001').sameAs(Date.parse('2000-06-01'), Date.Unit.DAY).should.be.false()
+    Date.parse('2001').sameAs(Date.parse('2000-06-01'), Date.Unit.MONTH).should.be.false()
+    Date.parse('2000').sameAs(Date.parse('2001-06-01'), Date.Unit.YEAR).should.be.false()
+    Date.parse('2000-05-01').sameAs(Date.parse('2001'), Date.Unit.DAY).should.be.false()
+    Date.parse('2000-05-01').sameAs(Date.parse('2001'), Date.Unit.MONTH).should.be.false()
+    Date.parse('2000-05-01').sameAs(Date.parse('2001'), Date.Unit.YEAR).should.be.false()
 
   it 'should error on incorrect precisions', ->
     should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw("Invalid precision: week")
@@ -377,11 +402,6 @@ describe 'Date.before', ->
   it 'should accept cases where a is before b', ->
     Date.parse('2000-11-30').before(Date.parse('2000-12-31')).should.be.true()
     Date.parse('1999-12-31').before(Date.parse('2000-12-31')).should.be.true()
-
-  it 'should reject cases where a is after b', ->
-    Date.parse('2000-01-02').before(Date.parse('2000-01-01')).should.be.false()
-    Date.parse('2000-02-01').before(Date.parse('2000-01-01')).should.be.false()
-    Date.parse('2001-01-01').before(Date.parse('2000-01-01')).should.be.false()
 
   it 'should reject cases where a is b', ->
     Date.parse('2000-01-01').before(Date.parse('2000-01-01')).should.be.false()
@@ -439,11 +459,6 @@ describe 'Date.sameOrBefore', ->
     Date.parse('2000-12-30').sameOrBefore(Date.parse('2000-12-31')).should.be.true()
     Date.parse('2000-11-30').sameOrBefore(Date.parse('2000-12-31')).should.be.true()
     Date.parse('1999-12-31').sameOrBefore(Date.parse('2000-12-31')).should.be.true()
-
-  it 'should reject cases where a is after b', ->
-    Date.parse('2000-01-02').sameOrBefore(Date.parse('2000-01-01')).should.be.false()
-    Date.parse('2000-02-01').sameOrBefore(Date.parse('2000-01-01')).should.be.false()
-    Date.parse('2001-01-01').sameOrBefore(Date.parse('2000-01-01')).should.be.false()
 
   it 'should accept cases where a is b', ->
     Date.parse('2000-01-01').sameOrBefore(Date.parse('2000-01-01')).should.be.true()
