@@ -308,9 +308,6 @@ describe 'ToTime', ->
   it "should be null for second over 59", ->
     should(@secondTooHigh.exec(@ctx)).be.null()
 
-  it "should throw runtime error for invalid time-of-day", ->
-    should(() => @invalidTime.exec(@ctx)).throw("Invalid DateTime String: 25:99.000+00.00")
-
 describe 'ToBoolean', ->
   @beforeEach ->
     setup @, data
