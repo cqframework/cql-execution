@@ -1,6 +1,6 @@
 should = require 'should'
 { DateTime, Date } = require '../../lib/datatypes/datetime'
-{ makeJsDate, jsDate } = require '../../lib/util/util'
+{ jsDate } = require '../../lib/util/util'
 { Uncertainty } = require '../../lib/datatypes/uncertainty'
 
 

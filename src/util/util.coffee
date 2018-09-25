@@ -25,10 +25,5 @@ module.exports.anyTrue = (things) ->
   else
     things
 
-#The two exports below are to make it easier if js Date is overwritten with CQL Date
-module.exports.makeJsDate = () ->
-  # It looks like coffeescripts implementation of the spread operator might be causing issues with new date,
-  # so using regular js here
-  `new Date(...arguments)`
-
+#The export below is to make it easier if js Date is overwritten with CQL Date
 module.exports.jsDate = Date
