@@ -7251,6 +7251,12 @@
       }
     };
 
+    Ratio.prototype.equivalent = function(other) {
+      if (other instanceof Ratio) {
+        return this.equals(other);
+      }
+    };
+
     return Ratio;
 
   })(Expression);
@@ -44968,6 +44974,9 @@
     if (isCode(a)) {
       return codesAreEquivalent(a, b);
     }
+    if (a != null ? a.isRatio : void 0) {
+      return a.equivalent(b);
+    }
     ref = getClassOfObjects(a, b), aClass = ref[0], bClass = ref[1];
     switch (aClass) {
       case '[object Array]':
@@ -45078,6 +45087,9 @@
       return null;
     }
     if (a != null ? a.isQuantity : void 0) {
+      return a.equals(b);
+    }
+    if (a != null ? a.isRatio : void 0) {
       return a.equals(b);
     }
     if (a instanceof Uncertainty) {
