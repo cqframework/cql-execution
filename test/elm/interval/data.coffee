@@ -85027,10 +85027,16 @@ define NullPerCollapse: collapse { Interval[1,4], Interval[4,7] } per null
 define ExpectedResultNullPer: { Interval[1,7] }
 define DateTime5_NullInterval: Interval[DateTime(2012, 1, 5, 0, 0, 0, 0), null]
 define DateTimeNull_5Interval: Interval[null, DateTime(2012, 1, 5, 0, 0, 0, 0)]
-define DateTime1_10Interval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 10, 0, 0, 0, 0)]
+define DateTime1_10Interval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 10, 0, 0, 0, 0)]\
+define DateTime9_10Interval: Interval[DateTime(2012, 1, 9, 0, 0, 0, 0), DateTime(2012, 1, 10, 0, 0, 0, 0)]
+define DateTime1_2Interval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 2, 0, 0, 0, 0)]
 define DateTimeNullStartCollapse: collapse { DateTime1_10Interval, DateTimeNull_5Interval }
 define DateTimeNullStartCollapseExpected: { Interval[null, DateTime(2012, 1, 10, 0, 0, 0, 0)] }
 define DateTimeNullEndCollapse: collapse { DateTime1_10Interval, DateTime5_NullInterval }
+define DateTimeNullEndCollapseNoOverlap: collapse { DateTime1_2Interval, DateTime5_NullInterval }
+define DateTimeNullEndCollapseNoOverlapExpected: { DateTime1_2Interval, DateTime5_NullInterval }
+define DateTimeNullStartCollapseNoOverlap: collapse { DateTime9_10Interval, DateTimeNull_5Interval }
+define DateTimeNullStartCollapseNoOverlapExpected: { DateTimeNull_5Interval, DateTime9_10Interval }
 define DateTimeNullEndCollapseExpected: { Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), null] }
 define DateTimeNullStartEndCollapse: collapse { DateTimeNull_5Interval, DateTime1_10Interval, DateTime5_NullInterval }
 define DateTimeNullStartEndCollapseExpected: { Interval[null, null] }
@@ -85043,6 +85049,12 @@ define CollapseQuantityNullHighUnitsWithinPerExpected : { Interval[ToQuantity('1
 define QuantityIntervalListWithNulls: { Interval[ToQuantity(4), ToQuantity(8)], Interval[null, ToQuantity(2)], Interval[ToQuantity(1), ToQuantity(4)], Interval[ToQuantity(7), null] }
 define CollapseQuantityIntervalListWithNulls: collapse QuantityIntervalListWithNulls
 define CollapseQuantityIntervalListWithNullsExpected: { Interval[null, null] }
+define QuantityIntervalListWithNullLowNoOverlap: { Interval[ToQuantity(4), ToQuantity(8)], Interval[null, ToQuantity(2)] }
+define CollapseQuantityIntervalListWithNullLowNoOverlap: collapse QuantityIntervalListWithNullLowNoOverlap
+define CollapseQuantityIntervalListWithNullLowNoOverlapExpected: { Interval[null, ToQuantity(2)], Interval[ToQuantity(4), ToQuantity(8)]}
+define QuantityIntervalListWithNullHighNoOverlap: { Interval[ToQuantity(4), null], Interval[ToQuantity(1), ToQuantity(2)] }
+define CollapseQuantityIntervalListWithNullHighNoOverlap: collapse QuantityIntervalListWithNullHighNoOverlap
+define CollapseQuantityIntervalListWithNullHighNoOverlapExpected: { Interval[ToQuantity(1), ToQuantity(2)], Interval[ToQuantity(4), null]}
 ###
 
 module.exports['Collapse'] = {
@@ -87824,33 +87836,295 @@ module.exports['Collapse'] = {
                }
             }
          }, {
-            "localId" : "298",
+            "localId" : "311",
+            "name" : "DateTime9_10Interval",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "311",
+                  "s" : [ {
+                     "value" : [ "define ","DateTime9_10Interval",": " ]
+                  }, {
+                     "r" : "310",
+                     "s" : [ {
+                        "value" : [ "Interval[" ]
+                     }, {
+                        "r" : "301",
+                        "s" : [ {
+                           "value" : [ "DateTime","(","2012",", ","1",", ","9",", ","0",", ","0",", ","0",", ","0",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "309",
+                        "s" : [ {
+                           "value" : [ "DateTime","(","2012",", ","1",", ","10",", ","0",", ","0",", ","0",", ","0",")" ]
+                        } ]
+                     }, {
+                        "value" : [ "]" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "310",
+               "lowClosed" : true,
+               "highClosed" : true,
+               "type" : "Interval",
+               "low" : {
+                  "localId" : "301",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "294",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2012",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "295",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "296",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "9",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "localId" : "297",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "localId" : "298",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "localId" : "299",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "localId" : "300",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               },
+               "high" : {
+                  "localId" : "309",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "302",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2012",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "303",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "304",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "10",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "localId" : "305",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "localId" : "306",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "localId" : "307",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "localId" : "308",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         }, {
+            "localId" : "329",
+            "name" : "DateTime1_2Interval",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "329",
+                  "s" : [ {
+                     "value" : [ "define ","DateTime1_2Interval",": " ]
+                  }, {
+                     "r" : "328",
+                     "s" : [ {
+                        "value" : [ "Interval[" ]
+                     }, {
+                        "r" : "319",
+                        "s" : [ {
+                           "value" : [ "DateTime","(","2012",", ","1",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "327",
+                        "s" : [ {
+                           "value" : [ "DateTime","(","2012",", ","1",", ","2",", ","0",", ","0",", ","0",", ","0",")" ]
+                        } ]
+                     }, {
+                        "value" : [ "]" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "328",
+               "lowClosed" : true,
+               "highClosed" : true,
+               "type" : "Interval",
+               "low" : {
+                  "localId" : "319",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "312",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2012",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "313",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "314",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "localId" : "315",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "localId" : "316",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "localId" : "317",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "localId" : "318",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               },
+               "high" : {
+                  "localId" : "327",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "320",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2012",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "321",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "322",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "localId" : "323",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "localId" : "324",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "localId" : "325",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "localId" : "326",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         }, {
+            "localId" : "334",
             "name" : "DateTimeNullStartCollapse",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "298",
+                  "r" : "334",
                   "s" : [ {
                      "value" : [ "define ","DateTimeNullStartCollapse",": " ]
                   }, {
-                     "r" : "297",
+                     "r" : "333",
                      "s" : [ {
                         "value" : [ "collapse " ]
                      }, {
-                        "r" : "296",
+                        "r" : "332",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "294",
+                           "r" : "330",
                            "s" : [ {
                               "value" : [ "DateTime1_10Interval" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "295",
+                           "r" : "331",
                            "s" : [ {
                               "value" : [ "DateTimeNull_5Interval" ]
                            } ]
@@ -87862,17 +88136,17 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "297",
+               "localId" : "333",
                "type" : "Collapse",
                "operand" : [ {
-                  "localId" : "296",
+                  "localId" : "332",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "294",
+                     "localId" : "330",
                      "name" : "DateTime1_10Interval",
                      "type" : "ExpressionRef"
                   }, {
-                     "localId" : "295",
+                     "localId" : "331",
                      "name" : "DateTimeNull_5Interval",
                      "type" : "ExpressionRef"
                   } ]
@@ -87882,26 +88156,26 @@ module.exports['Collapse'] = {
                } ]
             }
          }, {
-            "localId" : "310",
+            "localId" : "346",
             "name" : "DateTimeNullStartCollapseExpected",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "310",
+                  "r" : "346",
                   "s" : [ {
                      "value" : [ "define ","DateTimeNullStartCollapseExpected",": " ]
                   }, {
-                     "r" : "309",
+                     "r" : "345",
                      "s" : [ {
                         "value" : [ "{ " ]
                      }, {
-                        "r" : "308",
+                        "r" : "344",
                         "s" : [ {
                            "value" : [ "Interval[","null",", " ]
                         }, {
-                           "r" : "307",
+                           "r" : "343",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","1",", ","10",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
@@ -87915,10 +88189,10 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "309",
+               "localId" : "345",
                "type" : "List",
                "element" : [ {
-                  "localId" : "308",
+                  "localId" : "344",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
@@ -87926,51 +88200,51 @@ module.exports['Collapse'] = {
                      "asType" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "As",
                      "operand" : {
-                        "localId" : "299",
+                        "localId" : "335",
                         "type" : "Null"
                      }
                   },
                   "high" : {
-                     "localId" : "307",
+                     "localId" : "343",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "300",
+                        "localId" : "336",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "301",
+                        "localId" : "337",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "302",
+                        "localId" : "338",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "10",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "303",
+                        "localId" : "339",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "304",
+                        "localId" : "340",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "305",
+                        "localId" : "341",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "306",
+                        "localId" : "342",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
@@ -87979,33 +88253,33 @@ module.exports['Collapse'] = {
                } ]
             }
          }, {
-            "localId" : "315",
+            "localId" : "351",
             "name" : "DateTimeNullEndCollapse",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "315",
+                  "r" : "351",
                   "s" : [ {
                      "value" : [ "define ","DateTimeNullEndCollapse",": " ]
                   }, {
-                     "r" : "314",
+                     "r" : "350",
                      "s" : [ {
                         "value" : [ "collapse " ]
                      }, {
-                        "r" : "313",
+                        "r" : "349",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "311",
+                           "r" : "347",
                            "s" : [ {
                               "value" : [ "DateTime1_10Interval" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "312",
+                           "r" : "348",
                            "s" : [ {
                               "value" : [ "DateTime5_NullInterval" ]
                            } ]
@@ -88017,17 +88291,17 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "314",
+               "localId" : "350",
                "type" : "Collapse",
                "operand" : [ {
-                  "localId" : "313",
+                  "localId" : "349",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "311",
+                     "localId" : "347",
                      "name" : "DateTime1_10Interval",
                      "type" : "ExpressionRef"
                   }, {
-                     "localId" : "312",
+                     "localId" : "348",
                      "name" : "DateTime5_NullInterval",
                      "type" : "ExpressionRef"
                   } ]
@@ -88037,26 +88311,234 @@ module.exports['Collapse'] = {
                } ]
             }
          }, {
-            "localId" : "327",
+            "localId" : "356",
+            "name" : "DateTimeNullEndCollapseNoOverlap",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "356",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimeNullEndCollapseNoOverlap",": " ]
+                  }, {
+                     "r" : "355",
+                     "s" : [ {
+                        "value" : [ "collapse " ]
+                     }, {
+                        "r" : "354",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "352",
+                           "s" : [ {
+                              "value" : [ "DateTime1_2Interval" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "353",
+                           "s" : [ {
+                              "value" : [ "DateTime5_NullInterval" ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "355",
+               "type" : "Collapse",
+               "operand" : [ {
+                  "localId" : "354",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "352",
+                     "name" : "DateTime1_2Interval",
+                     "type" : "ExpressionRef"
+                  }, {
+                     "localId" : "353",
+                     "name" : "DateTime5_NullInterval",
+                     "type" : "ExpressionRef"
+                  } ]
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
+            }
+         }, {
+            "localId" : "360",
+            "name" : "DateTimeNullEndCollapseNoOverlapExpected",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "360",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimeNullEndCollapseNoOverlapExpected",": " ]
+                  }, {
+                     "r" : "359",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "357",
+                        "s" : [ {
+                           "value" : [ "DateTime1_2Interval" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "358",
+                        "s" : [ {
+                           "value" : [ "DateTime5_NullInterval" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "359",
+               "type" : "List",
+               "element" : [ {
+                  "localId" : "357",
+                  "name" : "DateTime1_2Interval",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "358",
+                  "name" : "DateTime5_NullInterval",
+                  "type" : "ExpressionRef"
+               } ]
+            }
+         }, {
+            "localId" : "365",
+            "name" : "DateTimeNullStartCollapseNoOverlap",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "365",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimeNullStartCollapseNoOverlap",": " ]
+                  }, {
+                     "r" : "364",
+                     "s" : [ {
+                        "value" : [ "collapse " ]
+                     }, {
+                        "r" : "363",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "361",
+                           "s" : [ {
+                              "value" : [ "DateTime9_10Interval" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "362",
+                           "s" : [ {
+                              "value" : [ "DateTimeNull_5Interval" ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "364",
+               "type" : "Collapse",
+               "operand" : [ {
+                  "localId" : "363",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "361",
+                     "name" : "DateTime9_10Interval",
+                     "type" : "ExpressionRef"
+                  }, {
+                     "localId" : "362",
+                     "name" : "DateTimeNull_5Interval",
+                     "type" : "ExpressionRef"
+                  } ]
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
+            }
+         }, {
+            "localId" : "369",
+            "name" : "DateTimeNullStartCollapseNoOverlapExpected",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "369",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimeNullStartCollapseNoOverlapExpected",": " ]
+                  }, {
+                     "r" : "368",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "366",
+                        "s" : [ {
+                           "value" : [ "DateTimeNull_5Interval" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "367",
+                        "s" : [ {
+                           "value" : [ "DateTime9_10Interval" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "368",
+               "type" : "List",
+               "element" : [ {
+                  "localId" : "366",
+                  "name" : "DateTimeNull_5Interval",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "367",
+                  "name" : "DateTime9_10Interval",
+                  "type" : "ExpressionRef"
+               } ]
+            }
+         }, {
+            "localId" : "381",
             "name" : "DateTimeNullEndCollapseExpected",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "327",
+                  "r" : "381",
                   "s" : [ {
                      "value" : [ "define ","DateTimeNullEndCollapseExpected",": " ]
                   }, {
-                     "r" : "326",
+                     "r" : "380",
                      "s" : [ {
                         "value" : [ "{ " ]
                      }, {
-                        "r" : "325",
+                        "r" : "379",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "323",
+                           "r" : "377",
                            "s" : [ {
                               "value" : [ "DateTime","(","2012",", ","1",", ","1",", ","0",", ","0",", ","0",", ","0",")" ]
                            } ]
@@ -88070,54 +88552,54 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "326",
+               "localId" : "380",
                "type" : "List",
                "element" : [ {
-                  "localId" : "325",
+                  "localId" : "379",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "323",
+                     "localId" : "377",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "316",
+                        "localId" : "370",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "317",
+                        "localId" : "371",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "318",
+                        "localId" : "372",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "hour" : {
-                        "localId" : "319",
+                        "localId" : "373",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "320",
+                        "localId" : "374",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "321",
+                        "localId" : "375",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      },
                      "millisecond" : {
-                        "localId" : "322",
+                        "localId" : "376",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
@@ -88127,47 +88609,47 @@ module.exports['Collapse'] = {
                      "asType" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "As",
                      "operand" : {
-                        "localId" : "324",
+                        "localId" : "378",
                         "type" : "Null"
                      }
                   }
                } ]
             }
          }, {
-            "localId" : "333",
+            "localId" : "387",
             "name" : "DateTimeNullStartEndCollapse",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "333",
+                  "r" : "387",
                   "s" : [ {
                      "value" : [ "define ","DateTimeNullStartEndCollapse",": " ]
                   }, {
-                     "r" : "332",
+                     "r" : "386",
                      "s" : [ {
                         "value" : [ "collapse " ]
                      }, {
-                        "r" : "331",
+                        "r" : "385",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "328",
+                           "r" : "382",
                            "s" : [ {
                               "value" : [ "DateTimeNull_5Interval" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "329",
+                           "r" : "383",
                            "s" : [ {
                               "value" : [ "DateTime1_10Interval" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "330",
+                           "r" : "384",
                            "s" : [ {
                               "value" : [ "DateTime5_NullInterval" ]
                            } ]
@@ -88179,21 +88661,21 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "332",
+               "localId" : "386",
                "type" : "Collapse",
                "operand" : [ {
-                  "localId" : "331",
+                  "localId" : "385",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "328",
+                     "localId" : "382",
                      "name" : "DateTimeNull_5Interval",
                      "type" : "ExpressionRef"
                   }, {
-                     "localId" : "329",
+                     "localId" : "383",
                      "name" : "DateTime1_10Interval",
                      "type" : "ExpressionRef"
                   }, {
-                     "localId" : "330",
+                     "localId" : "384",
                      "name" : "DateTime5_NullInterval",
                      "type" : "ExpressionRef"
                   } ]
@@ -88203,22 +88685,22 @@ module.exports['Collapse'] = {
                } ]
             }
          }, {
-            "localId" : "338",
+            "localId" : "392",
             "name" : "DateTimeNullStartEndCollapseExpected",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "338",
+                  "r" : "392",
                   "s" : [ {
                      "value" : [ "define ","DateTimeNullStartEndCollapseExpected",": " ]
                   }, {
-                     "r" : "337",
+                     "r" : "391",
                      "s" : [ {
                         "value" : [ "{ " ]
                      }, {
-                        "r" : "336",
+                        "r" : "390",
                         "s" : [ {
                            "value" : [ "Interval[","null",", ","null","]" ]
                         } ]
@@ -88229,48 +88711,48 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "337",
+               "localId" : "391",
                "type" : "List",
                "element" : [ {
-                  "localId" : "336",
+                  "localId" : "390",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "334",
+                     "localId" : "388",
                      "type" : "Null"
                   },
                   "high" : {
-                     "localId" : "335",
+                     "localId" : "389",
                      "type" : "Null"
                   }
                } ]
             }
          }, {
-            "localId" : "349",
+            "localId" : "403",
             "name" : "QuantityMeterNullLowIntervalList",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "349",
+                  "r" : "403",
                   "s" : [ {
                      "value" : [ "define ","QuantityMeterNullLowIntervalList",": " ]
                   }, {
-                     "r" : "348",
+                     "r" : "402",
                      "s" : [ {
                         "value" : [ "{ " ]
                      }, {
-                        "r" : "342",
+                        "r" : "396",
                         "s" : [ {
                            "value" : [ "Interval[","null",", " ]
                         }, {
-                           "r" : "341",
+                           "r" : "395",
                            "s" : [ {
                               "value" : [ "ToQuantity","(" ]
                            }, {
-                              "r" : "340",
+                              "r" : "394",
                               "s" : [ {
                                  "value" : [ "'1.995 \\'m\\''" ]
                               } ]
@@ -88283,15 +88765,15 @@ module.exports['Collapse'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "347",
+                        "r" : "401",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "344",
+                           "r" : "398",
                            "s" : [ {
                               "value" : [ "ToQuantity","(" ]
                            }, {
-                              "r" : "343",
+                              "r" : "397",
                               "s" : [ {
                                  "value" : [ "'2 \\'m\\''" ]
                               } ]
@@ -88301,11 +88783,11 @@ module.exports['Collapse'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "346",
+                           "r" : "400",
                            "s" : [ {
                               "value" : [ "ToQuantity","(" ]
                            }, {
-                              "r" : "345",
+                              "r" : "399",
                               "s" : [ {
                                  "value" : [ "'3 \\'m\\''" ]
                               } ]
@@ -88322,10 +88804,10 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "348",
+               "localId" : "402",
                "type" : "List",
                "element" : [ {
-                  "localId" : "342",
+                  "localId" : "396",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
@@ -88333,40 +88815,40 @@ module.exports['Collapse'] = {
                      "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "As",
                      "operand" : {
-                        "localId" : "339",
+                        "localId" : "393",
                         "type" : "Null"
                      }
                   },
                   "high" : {
-                     "localId" : "341",
+                     "localId" : "395",
                      "type" : "ToQuantity",
                      "operand" : {
-                        "localId" : "340",
+                        "localId" : "394",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "1.995 'm'",
                         "type" : "Literal"
                      }
                   }
                }, {
-                  "localId" : "347",
+                  "localId" : "401",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "344",
+                     "localId" : "398",
                      "type" : "ToQuantity",
                      "operand" : {
-                        "localId" : "343",
+                        "localId" : "397",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "2 'm'",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "346",
+                     "localId" : "400",
                      "type" : "ToQuantity",
                      "operand" : {
-                        "localId" : "345",
+                        "localId" : "399",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "3 'm'",
                         "type" : "Literal"
@@ -88375,33 +88857,33 @@ module.exports['Collapse'] = {
                } ]
             }
          }, {
-            "localId" : "354",
+            "localId" : "408",
             "name" : "CollapseQuantityNullLowUnitsWithinPer",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "354",
+                  "r" : "408",
                   "s" : [ {
                      "value" : [ "define ","CollapseQuantityNullLowUnitsWithinPer",": " ]
                   }, {
-                     "r" : "353",
+                     "r" : "407",
                      "s" : [ {
                         "value" : [ "collapse " ]
                      }, {
-                        "r" : "350",
+                        "r" : "404",
                         "s" : [ {
                            "value" : [ "QuantityMeterNullLowIntervalList" ]
                         } ]
                      }, {
                         "value" : [ " per " ]
                      }, {
-                        "r" : "352",
+                        "r" : "406",
                         "s" : [ {
                            "value" : [ "ToQuantity","(" ]
                         }, {
-                           "r" : "351",
+                           "r" : "405",
                            "s" : [ {
                               "value" : [ "'1 \\'cm\\''" ]
                            } ]
@@ -88413,17 +88895,17 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "353",
+               "localId" : "407",
                "type" : "Collapse",
                "operand" : [ {
-                  "localId" : "350",
+                  "localId" : "404",
                   "name" : "QuantityMeterNullLowIntervalList",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "352",
+                  "localId" : "406",
                   "type" : "ToQuantity",
                   "operand" : {
-                     "localId" : "351",
+                     "localId" : "405",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "1 'cm'",
                      "type" : "Literal"
@@ -88431,30 +88913,30 @@ module.exports['Collapse'] = {
                } ]
             }
          }, {
-            "localId" : "360",
+            "localId" : "414",
             "name" : "CollapseQuantityNullLowUnitsWithinPerExpected",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "360",
+                  "r" : "414",
                   "s" : [ {
                      "value" : [ "define ","CollapseQuantityNullLowUnitsWithinPerExpected"," : " ]
                   }, {
-                     "r" : "359",
+                     "r" : "413",
                      "s" : [ {
                         "value" : [ "{ " ]
                      }, {
-                        "r" : "358",
+                        "r" : "412",
                         "s" : [ {
                            "value" : [ "Interval[","null",", " ]
                         }, {
-                           "r" : "357",
+                           "r" : "411",
                            "s" : [ {
                               "value" : [ "ToQuantity","(" ]
                            }, {
-                              "r" : "356",
+                              "r" : "410",
                               "s" : [ {
                                  "value" : [ "'3 \\'m\\''" ]
                               } ]
@@ -88471,10 +88953,10 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "359",
+               "localId" : "413",
                "type" : "List",
                "element" : [ {
-                  "localId" : "358",
+                  "localId" : "412",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
@@ -88482,15 +88964,15 @@ module.exports['Collapse'] = {
                      "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "As",
                      "operand" : {
-                        "localId" : "355",
+                        "localId" : "409",
                         "type" : "Null"
                      }
                   },
                   "high" : {
-                     "localId" : "357",
+                     "localId" : "411",
                      "type" : "ToQuantity",
                      "operand" : {
-                        "localId" : "356",
+                        "localId" : "410",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "3 'm'",
                         "type" : "Literal"
@@ -88499,30 +88981,30 @@ module.exports['Collapse'] = {
                } ]
             }
          }, {
-            "localId" : "371",
+            "localId" : "425",
             "name" : "QuantityMeterNullHighIntervalList",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "371",
+                  "r" : "425",
                   "s" : [ {
                      "value" : [ "define ","QuantityMeterNullHighIntervalList",": " ]
                   }, {
-                     "r" : "370",
+                     "r" : "424",
                      "s" : [ {
                         "value" : [ "{ " ]
                      }, {
-                        "r" : "365",
+                        "r" : "419",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "362",
+                           "r" : "416",
                            "s" : [ {
                               "value" : [ "ToQuantity","(" ]
                            }, {
-                              "r" : "361",
+                              "r" : "415",
                               "s" : [ {
                                  "value" : [ "'1 \\'m\\''" ]
                               } ]
@@ -88532,11 +89014,11 @@ module.exports['Collapse'] = {
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "364",
+                           "r" : "418",
                            "s" : [ {
                               "value" : [ "ToQuantity","(" ]
                            }, {
-                              "r" : "363",
+                              "r" : "417",
                               "s" : [ {
                                  "value" : [ "'1.995 \\'m\\''" ]
                               } ]
@@ -88549,15 +89031,15 @@ module.exports['Collapse'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "369",
+                        "r" : "423",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "367",
+                           "r" : "421",
                            "s" : [ {
                               "value" : [ "ToQuantity","(" ]
                            }, {
-                              "r" : "366",
+                              "r" : "420",
                               "s" : [ {
                                  "value" : [ "'2 \\'m\\''" ]
                               } ]
@@ -88574,43 +89056,43 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "370",
+               "localId" : "424",
                "type" : "List",
                "element" : [ {
-                  "localId" : "365",
+                  "localId" : "419",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "362",
+                     "localId" : "416",
                      "type" : "ToQuantity",
                      "operand" : {
-                        "localId" : "361",
+                        "localId" : "415",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "1 'm'",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "364",
+                     "localId" : "418",
                      "type" : "ToQuantity",
                      "operand" : {
-                        "localId" : "363",
+                        "localId" : "417",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "1.995 'm'",
                         "type" : "Literal"
                      }
                   }
                }, {
-                  "localId" : "369",
+                  "localId" : "423",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "367",
+                     "localId" : "421",
                      "type" : "ToQuantity",
                      "operand" : {
-                        "localId" : "366",
+                        "localId" : "420",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "2 'm'",
                         "type" : "Literal"
@@ -88620,40 +89102,40 @@ module.exports['Collapse'] = {
                      "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "As",
                      "operand" : {
-                        "localId" : "368",
+                        "localId" : "422",
                         "type" : "Null"
                      }
                   }
                } ]
             }
          }, {
-            "localId" : "376",
+            "localId" : "430",
             "name" : "CollapseQuantityNullHighUnitsWithinPer",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "376",
+                  "r" : "430",
                   "s" : [ {
                      "value" : [ "define ","CollapseQuantityNullHighUnitsWithinPer",": " ]
                   }, {
-                     "r" : "375",
+                     "r" : "429",
                      "s" : [ {
                         "value" : [ "collapse " ]
                      }, {
-                        "r" : "372",
+                        "r" : "426",
                         "s" : [ {
                            "value" : [ "QuantityMeterNullHighIntervalList" ]
                         } ]
                      }, {
                         "value" : [ " per " ]
                      }, {
-                        "r" : "374",
+                        "r" : "428",
                         "s" : [ {
                            "value" : [ "ToQuantity","(" ]
                         }, {
-                           "r" : "373",
+                           "r" : "427",
                            "s" : [ {
                               "value" : [ "'1 \\'cm\\''" ]
                            } ]
@@ -88665,17 +89147,17 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "375",
+               "localId" : "429",
                "type" : "Collapse",
                "operand" : [ {
-                  "localId" : "372",
+                  "localId" : "426",
                   "name" : "QuantityMeterNullHighIntervalList",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "374",
+                  "localId" : "428",
                   "type" : "ToQuantity",
                   "operand" : {
-                     "localId" : "373",
+                     "localId" : "427",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "1 'cm'",
                      "type" : "Literal"
@@ -88683,30 +89165,30 @@ module.exports['Collapse'] = {
                } ]
             }
          }, {
-            "localId" : "382",
+            "localId" : "436",
             "name" : "CollapseQuantityNullHighUnitsWithinPerExpected",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "382",
+                  "r" : "436",
                   "s" : [ {
                      "value" : [ "define ","CollapseQuantityNullHighUnitsWithinPerExpected"," : " ]
                   }, {
-                     "r" : "381",
+                     "r" : "435",
                      "s" : [ {
                         "value" : [ "{ " ]
                      }, {
-                        "r" : "380",
+                        "r" : "434",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "378",
+                           "r" : "432",
                            "s" : [ {
                               "value" : [ "ToQuantity","(" ]
                            }, {
-                              "r" : "377",
+                              "r" : "431",
                               "s" : [ {
                                  "value" : [ "'1 \\'m\\''" ]
                               } ]
@@ -88723,18 +89205,18 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "381",
+               "localId" : "435",
                "type" : "List",
                "element" : [ {
-                  "localId" : "380",
+                  "localId" : "434",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "378",
+                     "localId" : "432",
                      "type" : "ToQuantity",
                      "operand" : {
-                        "localId" : "377",
+                        "localId" : "431",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "1 'm'",
                         "type" : "Literal"
@@ -88744,40 +89226,40 @@ module.exports['Collapse'] = {
                      "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "As",
                      "operand" : {
-                        "localId" : "379",
+                        "localId" : "433",
                         "type" : "Null"
                      }
                   }
                } ]
             }
          }, {
-            "localId" : "402",
+            "localId" : "456",
             "name" : "QuantityIntervalListWithNulls",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "402",
+                  "r" : "456",
                   "s" : [ {
                      "value" : [ "define ","QuantityIntervalListWithNulls",": " ]
                   }, {
-                     "r" : "401",
+                     "r" : "455",
                      "s" : [ {
                         "value" : [ "{ " ]
                      }, {
-                        "r" : "387",
+                        "r" : "441",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "384",
+                           "r" : "438",
                            "s" : [ {
                               "value" : [ "ToQuantity","(","4",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "386",
+                           "r" : "440",
                            "s" : [ {
                               "value" : [ "ToQuantity","(","8",")" ]
                            } ]
@@ -88787,11 +89269,11 @@ module.exports['Collapse'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "391",
+                        "r" : "445",
                         "s" : [ {
                            "value" : [ "Interval[","null",", " ]
                         }, {
-                           "r" : "390",
+                           "r" : "444",
                            "s" : [ {
                               "value" : [ "ToQuantity","(","2",")" ]
                            } ]
@@ -88801,18 +89283,18 @@ module.exports['Collapse'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "396",
+                        "r" : "450",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "393",
+                           "r" : "447",
                            "s" : [ {
                               "value" : [ "ToQuantity","(","1",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "395",
+                           "r" : "449",
                            "s" : [ {
                               "value" : [ "ToQuantity","(","4",")" ]
                            } ]
@@ -88822,11 +89304,11 @@ module.exports['Collapse'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "400",
+                        "r" : "454",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "398",
+                           "r" : "452",
                            "s" : [ {
                               "value" : [ "ToQuantity","(","7",")" ]
                            } ]
@@ -88840,35 +89322,35 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "401",
+               "localId" : "455",
                "type" : "List",
                "element" : [ {
-                  "localId" : "387",
+                  "localId" : "441",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "384",
+                     "localId" : "438",
                      "type" : "ToQuantity",
                      "operand" : {
-                        "localId" : "383",
+                        "localId" : "437",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "386",
+                     "localId" : "440",
                      "type" : "ToQuantity",
                      "operand" : {
-                        "localId" : "385",
+                        "localId" : "439",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "8",
                         "type" : "Literal"
                      }
                   }
                }, {
-                  "localId" : "391",
+                  "localId" : "445",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
@@ -88876,55 +89358,55 @@ module.exports['Collapse'] = {
                      "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "As",
                      "operand" : {
-                        "localId" : "388",
+                        "localId" : "442",
                         "type" : "Null"
                      }
                   },
                   "high" : {
-                     "localId" : "390",
+                     "localId" : "444",
                      "type" : "ToQuantity",
                      "operand" : {
-                        "localId" : "389",
+                        "localId" : "443",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }
                   }
                }, {
-                  "localId" : "396",
+                  "localId" : "450",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "393",
+                     "localId" : "447",
                      "type" : "ToQuantity",
                      "operand" : {
-                        "localId" : "392",
+                        "localId" : "446",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "395",
+                     "localId" : "449",
                      "type" : "ToQuantity",
                      "operand" : {
-                        "localId" : "394",
+                        "localId" : "448",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }
                   }
                }, {
-                  "localId" : "400",
+                  "localId" : "454",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "398",
+                     "localId" : "452",
                      "type" : "ToQuantity",
                      "operand" : {
-                        "localId" : "397",
+                        "localId" : "451",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "7",
                         "type" : "Literal"
@@ -88934,29 +89416,29 @@ module.exports['Collapse'] = {
                      "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "As",
                      "operand" : {
-                        "localId" : "399",
+                        "localId" : "453",
                         "type" : "Null"
                      }
                   }
                } ]
             }
          }, {
-            "localId" : "405",
+            "localId" : "459",
             "name" : "CollapseQuantityIntervalListWithNulls",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "405",
+                  "r" : "459",
                   "s" : [ {
                      "value" : [ "define ","CollapseQuantityIntervalListWithNulls",": " ]
                   }, {
-                     "r" : "404",
+                     "r" : "458",
                      "s" : [ {
                         "value" : [ "collapse " ]
                      }, {
-                        "r" : "403",
+                        "r" : "457",
                         "s" : [ {
                            "value" : [ "QuantityIntervalListWithNulls" ]
                         } ]
@@ -88965,10 +89447,10 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "404",
+               "localId" : "458",
                "type" : "Collapse",
                "operand" : [ {
-                  "localId" : "403",
+                  "localId" : "457",
                   "name" : "QuantityIntervalListWithNulls",
                   "type" : "ExpressionRef"
                }, {
@@ -88977,22 +89459,22 @@ module.exports['Collapse'] = {
                } ]
             }
          }, {
-            "localId" : "410",
+            "localId" : "464",
             "name" : "CollapseQuantityIntervalListWithNullsExpected",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "410",
+                  "r" : "464",
                   "s" : [ {
                      "value" : [ "define ","CollapseQuantityIntervalListWithNullsExpected",": " ]
                   }, {
-                     "r" : "409",
+                     "r" : "463",
                      "s" : [ {
                         "value" : [ "{ " ]
                      }, {
-                        "r" : "408",
+                        "r" : "462",
                         "s" : [ {
                            "value" : [ "Interval[","null",", ","null","]" ]
                         } ]
@@ -89003,20 +89485,520 @@ module.exports['Collapse'] = {
                }
             } ],
             "expression" : {
-               "localId" : "409",
+               "localId" : "463",
                "type" : "List",
                "element" : [ {
-                  "localId" : "408",
+                  "localId" : "462",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "406",
+                     "localId" : "460",
                      "type" : "Null"
                   },
                   "high" : {
-                     "localId" : "407",
+                     "localId" : "461",
                      "type" : "Null"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "475",
+            "name" : "QuantityIntervalListWithNullLowNoOverlap",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "475",
+                  "s" : [ {
+                     "value" : [ "define ","QuantityIntervalListWithNullLowNoOverlap",": " ]
+                  }, {
+                     "r" : "474",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "469",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "466",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(","4",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "468",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(","8",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "473",
+                        "s" : [ {
+                           "value" : [ "Interval[","null",", " ]
+                        }, {
+                           "r" : "472",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(","2",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "474",
+               "type" : "List",
+               "element" : [ {
+                  "localId" : "469",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "466",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "465",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "468",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "467",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "8",
+                        "type" : "Literal"
+                     }
+                  }
+               }, {
+                  "localId" : "473",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "470",
+                        "type" : "Null"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "472",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "471",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "478",
+            "name" : "CollapseQuantityIntervalListWithNullLowNoOverlap",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "478",
+                  "s" : [ {
+                     "value" : [ "define ","CollapseQuantityIntervalListWithNullLowNoOverlap",": " ]
+                  }, {
+                     "r" : "477",
+                     "s" : [ {
+                        "value" : [ "collapse " ]
+                     }, {
+                        "r" : "476",
+                        "s" : [ {
+                           "value" : [ "QuantityIntervalListWithNullLowNoOverlap" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "477",
+               "type" : "Collapse",
+               "operand" : [ {
+                  "localId" : "476",
+                  "name" : "QuantityIntervalListWithNullLowNoOverlap",
+                  "type" : "ExpressionRef"
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
+            }
+         }, {
+            "localId" : "489",
+            "name" : "CollapseQuantityIntervalListWithNullLowNoOverlapExpected",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "489",
+                  "s" : [ {
+                     "value" : [ "define ","CollapseQuantityIntervalListWithNullLowNoOverlapExpected",": " ]
+                  }, {
+                     "r" : "488",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "482",
+                        "s" : [ {
+                           "value" : [ "Interval[","null",", " ]
+                        }, {
+                           "r" : "481",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(","2",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "487",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "484",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(","4",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "486",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(","8",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     }, {
+                        "value" : [ "}" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "488",
+               "type" : "List",
+               "element" : [ {
+                  "localId" : "482",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "479",
+                        "type" : "Null"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "481",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "480",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }
+                  }
+               }, {
+                  "localId" : "487",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "484",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "483",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "486",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "485",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "8",
+                        "type" : "Literal"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "500",
+            "name" : "QuantityIntervalListWithNullHighNoOverlap",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "500",
+                  "s" : [ {
+                     "value" : [ "define ","QuantityIntervalListWithNullHighNoOverlap",": " ]
+                  }, {
+                     "r" : "499",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "493",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "491",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(","4",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", ","null","]" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "498",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "495",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(","1",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "497",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(","2",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "499",
+               "type" : "List",
+               "element" : [ {
+                  "localId" : "493",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "491",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "490",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "492",
+                        "type" : "Null"
+                     }
+                  }
+               }, {
+                  "localId" : "498",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "495",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "494",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "497",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "496",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "503",
+            "name" : "CollapseQuantityIntervalListWithNullHighNoOverlap",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "503",
+                  "s" : [ {
+                     "value" : [ "define ","CollapseQuantityIntervalListWithNullHighNoOverlap",": " ]
+                  }, {
+                     "r" : "502",
+                     "s" : [ {
+                        "value" : [ "collapse " ]
+                     }, {
+                        "r" : "501",
+                        "s" : [ {
+                           "value" : [ "QuantityIntervalListWithNullHighNoOverlap" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "502",
+               "type" : "Collapse",
+               "operand" : [ {
+                  "localId" : "501",
+                  "name" : "QuantityIntervalListWithNullHighNoOverlap",
+                  "type" : "ExpressionRef"
+               }, {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
+               } ]
+            }
+         }, {
+            "localId" : "514",
+            "name" : "CollapseQuantityIntervalListWithNullHighNoOverlapExpected",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "514",
+                  "s" : [ {
+                     "value" : [ "define ","CollapseQuantityIntervalListWithNullHighNoOverlapExpected",": " ]
+                  }, {
+                     "r" : "513",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "508",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "505",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(","1",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "507",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(","2",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "512",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "510",
+                           "s" : [ {
+                              "value" : [ "ToQuantity","(","4",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", ","null","]" ]
+                        } ]
+                     }, {
+                        "value" : [ "}" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "513",
+               "type" : "List",
+               "element" : [ {
+                  "localId" : "508",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "505",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "504",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "localId" : "507",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "506",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }
+                  }
+               }, {
+                  "localId" : "512",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "510",
+                     "type" : "ToQuantity",
+                     "operand" : {
+                        "localId" : "509",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "511",
+                        "type" : "Null"
+                     }
                   }
                } ]
             }

@@ -1337,6 +1337,12 @@ describe 'Collapse', ->
     # will only ever have fully-defined dates. Implement successor way if time.
     @dateTimeCollapseNoPer.exec(@ctx).should.eql @dateTimeCollapsePerMs.exec(@ctx)
 
+  it 'DateTime with null end collapse with no overlap', ->
+    @dateTimeNullEndCollapseNoOverlap.exec(@ctx).should.eql @dateTimeNullEndCollapseNoOverlapExpected.exec(@ctx)
+
+  it 'DateTime with null start collapse with no overlap', ->
+    @dateTimeNullStartCollapseNoOverlap.exec(@ctx).should.eql @dateTimeNullStartCollapseNoOverlapExpected.exec(@ctx)
+
   it 'combines DateTime intervals separated by less than per unit', ->
     @dateTimeCollapsePerDay.exec(@ctx).should.eql @dateTime1_15IntervalList.exec(@ctx)
 
@@ -1368,6 +1374,12 @@ describe 'Collapse', ->
 
   it 'Quantity with units with null high value', ->
     @collapseQuantityNullHighUnitsWithinPer.exec(@ctx).should.eql @collapseQuantityNullHighUnitsWithinPerExpected.exec(@ctx)
+
+  it 'Quantity Intervals no overlap with null low', ->
+    @collapseQuantityIntervalListWithNullLowNoOverlap.exec(@ctx).should.eql @collapseQuantityIntervalListWithNullLowNoOverlapExpected.exec(@ctx)
+
+  it 'Quantity Intervals no overlap with null high', ->
+    @collapseQuantityIntervalListWithNullHighNoOverlap.exec(@ctx).should.eql @collapseQuantityIntervalListWithNullHighNoOverlapExpected.exec(@ctx)
 
   it 'with Interval that has null low values', ->
     @collapseNullLowIntervalList.exec(@ctx).should.eql @expectedNullLowIntervalCollapse.exec(@ctx)
