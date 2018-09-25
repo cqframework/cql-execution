@@ -124,9 +124,21 @@ describe 'Date.add', ->
     Date.parse('2000-06').add(8, Date.Unit.MONTH).should.eql Date.parse('2001-02')
     Date.parse('2000').add(5, Date.Unit.YEAR).should.eql Date.parse('2005')
 
-  it 'should not add anything on undefined fields', ->
-    Date.parse('2000-06').add(100, Date.Unit.DAY).should.eql Date.parse('2000-06')
-    Date.parse('2000').add(100, Date.Unit.MONTH).should.eql Date.parse('2000')
+  it 'should handle adding to undefined fields', ->
+    Date.parse('2000-06').add(10, Date.Unit.DAY).should.eql Date.parse('2000-06')
+    Date.parse('2000-06').add(100, Date.Unit.DAY).should.eql Date.parse('2000-09')
+    Date.parse('2000').add(200, Date.Unit.DAY).should.eql Date.parse('2000')
+    Date.parse('2000').add(800, Date.Unit.DAY).should.eql Date.parse('2002')
+    Date.parse('2000').add(10, Date.Unit.MONTH).should.eql Date.parse('2000')
+    Date.parse('2000').add(100, Date.Unit.MONTH).should.eql Date.parse('2008')
+
+  it 'should handle subtracting from undefined fields', ->
+    Date.parse('2000-06').add(-10, Date.Unit.DAY).should.eql Date.parse('2000-06')
+    Date.parse('2000-06').add(-100, Date.Unit.DAY).should.eql Date.parse('2000-03')
+    Date.parse('2000').add(-200, Date.Unit.DAY).should.eql Date.parse('2000')
+    Date.parse('2000').add(-800, Date.Unit.DAY).should.eql Date.parse('1998')
+    Date.parse('2000').add(-10, Date.Unit.MONTH).should.eql Date.parse('2000')
+    Date.parse('2000').add(-100, Date.Unit.MONTH).should.eql Date.parse('1992')
 
   it 'should not mutate the original object', ->
     date1 = Date.parse('2000-06-15')

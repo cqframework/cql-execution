@@ -108,23 +108,6 @@ class DateTime
     d = DateTime.fromJsDate(@toJSDate(), timezoneOffset)
     d.reducedPrecision(@getPrecision())
 
-  add: (offset, field) ->
-    result = @copy()
-
-    # If weeks, convert to days
-    if field == DateTime.Unit.WEEK
-      offset = offset * 7
-      field = DateTime.Unit.DAY
-
-    if result[field]?
-      # Increment the field, then round-trip to JS date and back for calendar math
-      result[field] = result[field] + offset
-      normalized = DateTime.fromJsDate(result.toJSDate(), @timezoneOffset)
-      for field in DateTime.FIELDS when result[field]?
-        result[field] = normalized[field]
-
-    result
-
   differenceBetween: (other, unitField) ->
     other = @_implicitlyConvert(other)
     if not(other instanceof DateTime) then return null
@@ -388,23 +371,6 @@ class Date
       @add(-1,Date.Unit.MONTH)
     else if @year?
       @add(-1,Date.Unit.YEAR)
-
-  add: (offset, field) ->
-    result = @copy()
-
-    # If weeks, convert to days
-    if field == Date.Unit.WEEK
-      offset = offset * 7
-      field = Date.Unit.DAY
-
-    if result[field]?
-      # Increment the field, then round-trip to JS date and back for calendar math
-      result[field] = result[field] + offset
-      normalized = Date.fromJsDate(result.toJSDate())
-      for field in Date.FIELDS when result[field]?
-        result[field] = normalized[field]
-
-    result
 
   differenceBetween: (other, unitField) ->
     if (other instanceof DateTime) then return this.getDateTime().differenceBetween(other, unitField)
@@ -799,6 +765,80 @@ DateTime.prototype.after = Date.prototype.after = (other, precision) ->
 
   # if we made it here, then all fields matched and they are same
   false
+
+DateTime.prototype.add = Date.prototype.add = (offset, field) ->
+  result = @copy()
+  return result if offset == 0
+
+  # If weeks, convert to days
+  if field == @constructor.Unit.WEEK
+    offset = offset * 7
+    field = @constructor.Unit.DAY
+
+
+  offsetIsMorePrecise = not result[field]? #whether the quantity we are adding is more precise than @
+  # From the spec: "The operation is performed by converting the time-based quantity to the most precise value
+  # specified in the date/time (truncating any resulting decimal portion) and then adding it to the date/time value."
+  # However, since you can't really convert e.g. days to months,  if @ is less precise than the field being added, we can
+  # "floor" UP to the incoming field precision, then add the offset, then reduce back down to original precision.
+  # For negative offsets, we use the cieling
+  if offsetIsMorePrecise
+    result.year = new jsDate().getFullYear() if not @year #in case there is no year, proceed as if in this year, year will be nullified later
+    fieldFloorOrCiel = if offset >= 0 then @getFieldFloor else @getFieldCieling
+    for f in @constructor.FIELDS # this relies on FIELDS being sorted least to most precise
+      result[f] = result[f] ? fieldFloorOrCiel.call(result,f)
+      break if result[field]?
+
+  # Increment the field, then round-trip to JS date and back for calendar math
+  result[field] = result[field] + offset
+  normalized = @constructor.fromJsDate(result.toJSDate(), @timezoneOffset)
+  for field in @constructor.FIELDS when result[field]?
+    result[field] = normalized[field]
+
+  # remove any fields we added (go back to original precision)
+  if offsetIsMorePrecise
+    for f in @constructor.FIELDS
+      result[f] = null if not @[f]
+
+  result
+
+DateTime.prototype.getFieldFloor = Date.prototype.getFieldFloor = (field) ->
+  if field == 'month'
+    return 1
+  if field == 'day'
+    return 1
+  if field == 'hour'
+    return 0
+  if field == 'minute'
+    return 0
+  if field == 'second'
+    return 0
+  if field == 'millisecond'
+    return 0
+  throw new Error('Tried to floor a field that has no floor value: ' + field)
+
+
+DateTime.prototype.getFieldCieling = Date.prototype.getFieldCieling = (field) ->
+  if field == 'month'
+    return 12
+  if field == 'day'
+    return daysInMonth(@year, @month)
+  if field == 'hour'
+    return 23
+  if field == 'minute'
+    return 59
+  if field == 'second'
+    return 59
+  if field == 'millisecond'
+    return 999
+  throw new Error('Tried to clieling a field that has no cieling value: ' + field)
+
+daysInMonth = (year, month) ->
+  if not (year? and month?)
+    throw new Error('daysInMonth requires year and month as arguments')
+  # Month is 1-indexed here because of the 0 day
+  return new jsDate(year, month, 0).getDate();
+
 
 normalizeMillisecondsFieldInString = (string, matches) ->
   msString = matches[14]
