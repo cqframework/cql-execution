@@ -1,5 +1,8 @@
 { Uncertainty } = require './uncertainty'
-{ jsDate } = require '../util/util'
+{ jsDate,
+  normalizeMillisecondsField,
+  normalizeMillisecondsFieldInString,
+  getTimezoneSeparatorFromString } = require '../util/util'
 moment = require 'moment'
 
 class DateTime
@@ -11,7 +14,7 @@ class DateTime
 
     matches = /(\d{4})(-(\d{2}))?(-(\d{2}))?(T((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(\:?(\d{2}))?))?)?/.exec string
 
-    throw new Error('Invalid DateTime String: ' + string) unless matches?
+    return null unless matches?
     years= matches[1]
     months= matches[3]
     days= matches[5]
@@ -20,9 +23,9 @@ class DateTime
     seconds= matches[12]
     milliseconds= matches[14]
     milliseconds= normalizeMillisecondsField(milliseconds) if milliseconds?
-    string = normalizeMillisecondsFieldInString(string, matches) if milliseconds?
+    string = normalizeMillisecondsFieldInString(string, matches[14]) if milliseconds?
 
-    throw new Error('Invalid DateTime String: ' + string) if !isValidDateTimeStringFormat(string)
+    return null if !isValidDateTimeStringFormat(string)
 
     args = [years, months, days, hours, minutes, seconds, milliseconds]
     # convert them all to integers
@@ -332,12 +335,12 @@ class Date
 
     matches = /(\d{4})(-(\d{2}))?(-(\d{2}))?/.exec string
 
-    throw new Error('Invalid Date String: ' + string) unless matches?
+    return null unless matches?
     years= matches[1]
     months= matches[3]
     days= matches[5]
 
-    throw new Error('Invalid Date String: ' + string) if !isValidDateStringFormat(string)
+    return null if !isValidDateStringFormat(string)
 
     args = [years, months, days]
     # convert them all to integers
@@ -839,18 +842,6 @@ daysInMonth = (year, month) ->
   # Month is 1-indexed here because of the 0 day
   return new jsDate(year, month, 0).getDate();
 
-
-normalizeMillisecondsFieldInString = (string, matches) ->
-  msString = matches[14]
-  # TODO: verify we are only removing numeral digits
-  msString = normalizeMillisecondsField(msString)
-  [beforeMs, msAndAfter] = string.split('.')
-  timezoneSeparator = getTimezoneSeparatorFromString(msAndAfter)
-
-  timezoneField = msAndAfter?.split(timezoneSeparator)[1] if !!timezoneSeparator
-  timezoneField = '' if !timezoneField?
-  string = beforeMs + '.' + msString + timezoneSeparator + timezoneField
-
 normalizeMillisecondsField = (msString) ->
   # fix up milliseconds by padding zeros and/or truncating (5 --> 500, 50 --> 500, 54321 --> 543, etc.)
   msString = (msString + "00").substring(0, 3)
@@ -931,13 +922,6 @@ cqlFormatStringToMomentFormatString = (string) ->
 
   momentString = momentString.replace /f/g, 'S'
 
-getTimezoneSeparatorFromString = (string) ->
-  if string?.match(/-/)?.length == 1
-    timezoneSeparator = '-'
-  else if string?.match(/\+/)?.length == 1
-    timezoneSeparator = '+'
-  else
-    timezoneSeparator = ''
 
 module.exports.DateTime = DateTime
 module.exports.Date = Date
