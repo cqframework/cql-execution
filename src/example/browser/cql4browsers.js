@@ -5043,13 +5043,11 @@
         b = intervalsClone.shift();
         while (b) {
           if (typeof ((ref4 = b.low) != null ? ref4.durationBetween : void 0) === 'function') {
-            if ((ref5 = a.high) != null ? ref5.after(b.low) : void 0) {
-              if (((b.high == null) && b.low.before(a.high)) || b.high.after(a.high)) {
+            if ((ref5 = a.high) != null ? ref5.sameOrAfter(b.low) : void 0) {
+              if ((b.high == null) || b.high.after(a.high)) {
                 a.high = b.high;
               }
             } else if (((ref6 = a.high) != null ? ref6.durationBetween(b.low, perWidth.unit).high : void 0) <= perWidth.value) {
-              a.high = b.high;
-            } else if (((a.high != null) && (b.high == null)) && (b.low.before(a.high))) {
               a.high = b.high;
             } else {
               collapsedIntervals.push(a);
@@ -5060,8 +5058,6 @@
               if ((b.high == null) || b.high.after(a.high)) {
                 a.high = b.high;
               }
-            } else if ((a.high != null) && (b.high == null) && b.low.sameOrBefore(doAddition(a.high, perWidth))) {
-              a.high = b.high;
             } else {
               collapsedIntervals.push(a);
               a = b;

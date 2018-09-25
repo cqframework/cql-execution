@@ -234,11 +234,9 @@ module.exports.Collapse = class Collapse extends Expression
       while b
         if typeof b.low?.durationBetween == 'function'
           # handle DateTimes using durationBetween
-          if a.high?.after b.low # overlap
-            a.high = b.high if (!b.high? and b.low.before a.high) or b.high.after a.high
+          if a.high?.sameOrAfter b.low # overlap
+            a.high = b.high if !b.high? or b.high.after a.high
           else if a.high?.durationBetween(b.low, perWidth.unit).high <= perWidth.value
-            a.high = b.high
-          else if (a.high? and !b.high?) and (b.low.before a.high)
             a.high = b.high
           else
             collapsedIntervals.push a
@@ -246,8 +244,6 @@ module.exports.Collapse = class Collapse extends Expression
         else if typeof b.low?.sameOrBefore == 'function'
           if a.high? and b.low.sameOrBefore doAddition(a.high, perWidth)
             a.high = b.high if !b.high? or b.high.after a.high
-          else if a.high? and !b.high? and b.low.sameOrBefore doAddition(a.high, perWidth)
-            a.high = b.high
           else
             collapsedIntervals.push a
             a = b
