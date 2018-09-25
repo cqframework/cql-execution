@@ -6537,8 +6537,8 @@
             return null;
           }
         } else {
-          value = operator === "/" ? this.value / other.value : this.value * other.value;
-          unit = this.unit || other.unit;
+          value = operator === "/" ? a.value / b.value : a.value * b.value;
+          unit = a.unit || b.unit;
           try {
             return createQuantity(decimalAdjust("round", value, -8), unit);
           } catch (error) {
@@ -6548,7 +6548,7 @@
       } else {
         value = operator === "/" ? this.value / other : this.value * other;
         try {
-          return createQuantity(decimalAdjust("round", value, -8), this.unit);
+          return createQuantity(decimalAdjust("round", value, -8), coalesceToOne(this.unit));
         } catch (error) {
           return null;
         }
@@ -6757,7 +6757,8 @@
   module.exports.doAddition = function(a, b) {
     var a_unit, b_unit, base, ref2, val;
     if (a instanceof Quantity && b instanceof Quantity) {
-      val = convert_value(b.value, b.unit, a.unit);
+      ref2 = [coalesceToOne(a.unit), coalesceToOne(b.unit)], a_unit = ref2[0], b_unit = ref2[1];
+      val = convert_value(b.value, b_unit, a_unit);
       if (val == null) {
         return null;
       }
@@ -6774,7 +6775,8 @@
   module.exports.doSubtraction = function(a, b) {
     var a_unit, b_unit, base, ref2, val;
     if (a instanceof Quantity && b instanceof Quantity) {
-      val = convert_value(b.value, b.unit, a.unit);
+      ref2 = [coalesceToOne(a.unit), coalesceToOne(b.unit)], a_unit = ref2[0], b_unit = ref2[1];
+      val = convert_value(b.value, b_unit, a_unit);
       if (val == null) {
         return null;
       }
