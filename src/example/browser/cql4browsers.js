@@ -472,17 +472,22 @@
     });
 
     ValueSet.prototype.hasMatch = function(code) {
-      var codeItem, codesList, i, len, matchFound, ref;
+      var codeItem, codesList, i, len, matchFound, multipleCodeSystemsExist, ref;
       codesList = toCodeList(code);
       if (codesList.length === 1 && typeof codesList[0] === 'string') {
         matchFound = false;
+        multipleCodeSystemsExist = false;
         ref = this.codes;
         for (i = 0, len = ref.length; i < len; i++) {
           codeItem = ref[i];
           if (codeItem.system !== this.codes[0].system) {
-            throw new Error('In (valueset) is ambiguous -- multiple matches for ' + codeItem.code + ' found in value set with different code systems.');
-          } else if (codeItem.code === codesList[0]) {
+            multipleCodeSystemsExist = true;
+          }
+          if (codeItem.code === codesList[0]) {
             matchFound = true;
+          }
+          if (multipleCodeSystemsExist && matchFound) {
+            throw new Error('In (valueset) is ambiguous -- multiple codes with multiple code systems exist in value set.');
           }
         }
         return matchFound;
@@ -6094,7 +6099,7 @@
     In.prototype.exec = function(ctx) {
       var container, item, lib, ref1;
       ref1 = this.execArgs(ctx), item = ref1[0], container = ref1[1];
-      if (container == null) {
+      if ((container == null) || (item == null)) {
         return null;
       }
       lib = (function() {

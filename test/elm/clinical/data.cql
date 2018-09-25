@@ -15,6 +15,7 @@ valueset "SharedCodes": '2.16.840.1.113883.3.000.000.0'
 valueset "ImproperSharedCodes": '2.16.840.1.113883.3.000.000.1'
 define String: 'F' in "Female"
 define SharedCodesFoo: 'foo' in "SharedCodes"
+define SharedCodesNoMatch: 'baz' in "SharedCodes"
 define ImproperSharedCodesCodeValue: 'codeValue' in "ImproperSharedCodes"
 define StringInVersionedValueSet: 'F' in "Versioned Female"
 define ShortCode: Code { code: 'F' } in "Female"

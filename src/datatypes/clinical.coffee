@@ -34,12 +34,15 @@ module.exports.ValueSet = class ValueSet
     # InValueSet String Overload
     if codesList.length == 1 and typeof codesList[0] is 'string'
       matchFound = false
+      multipleCodeSystemsExist = false
       for codeItem in @codes
         # Confirm all code systems match
         if codeItem.system != @codes[0].system
-          throw new Error('In (valueset) is ambiguous -- multiple matches for ' + codeItem.code + ' found in value set with different code systems.')
-        else if codeItem.code == codesList[0]
+          multipleCodeSystemsExist = true
+        if codeItem.code == codesList[0]
           matchFound = true
+        if multipleCodeSystemsExist and matchFound
+          throw new Error('In (valueset) is ambiguous -- multiple codes with multiple code systems exist in value set.')
       return matchFound
     else
       codesInList(codesList, @codes)

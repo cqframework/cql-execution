@@ -217,7 +217,7 @@ describe 'IndexOf', ->
     should(@nullItem.exec(@ctx)).be.null()
 
   describe 'should use equality to determine presence in List', ->
-    it 'when code is in list but have undefined values', ->
+    it 'when code is in list but have undefined displays', ->
       @listCodeUndefined.exec(@ctx).should.equal 0
 
     it 'when code is in list', ->
@@ -266,11 +266,11 @@ describe 'In', ->
   it 'should return null if list is null', ->
     should(@inNull.exec(@ctx)).be.null()
 
-  it 'should return false if null is in list', ->
-    should(@nullIn.exec(@ctx)).be.false()
+  it 'should return null if null is in list', ->
+    should(@nullIn.exec(@ctx)).be.null()
 
-  it 'should return false if null is not in list', ->
-    should(@nullNotIn.exec(@ctx)).be.false()
+  it 'should return null if null is not in list', ->
+    should(@nullNotIn.exec(@ctx)).be.null()
 
 describe 'Contains', ->
   @beforeEach ->
@@ -288,10 +288,10 @@ describe 'Contains', ->
   it 'should execute to false when tuple is not in list', ->
     @tupleIsNotIn.exec(@ctx).should.be.false()
 
-  it 'should return false if null is contained in the list', ->
+  it 'should return null if null is contained in the list', ->
     should(@nullIn.exec(@ctx)).be.null()
 
-  it 'should return false if null is not contained in the list', ->
+  it 'should return null if null is not contained in the list', ->
     should(@nullNotIn.exec(@ctx)).be.null()
 
   it 'should return null if list is null', ->
