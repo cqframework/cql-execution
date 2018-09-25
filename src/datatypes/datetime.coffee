@@ -798,7 +798,7 @@ DateTime.prototype.add = Date.prototype.add = (offset, field) ->
   # remove any fields we added (go back to original precision)
   if offsetIsMorePrecise
     for f in @constructor.FIELDS
-      result[f] = null if not @[f]
+      result[f] = null if not @[f]?
 
   result
 
