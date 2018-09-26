@@ -7248,6 +7248,8 @@
         divided_this = this.numerator.dividedBy(this.denominator);
         divided_other = other.numerator.dividedBy(other.denominator);
         return divided_this.equals(divided_other);
+      } else {
+        return false;
       }
     };
 
