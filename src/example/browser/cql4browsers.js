@@ -6517,7 +6517,7 @@
     };
 
     Quantity.prototype.multiplyDivide = function(other, operator) {
-      var a, b, can_val, other_can_value, ucum_value, unit, value;
+      var a, b, can_val, other_can_value, ucum_value, value;
       if (other instanceof Quantity) {
         a = this.unit != null ? this : new Quantity({
           value: this.value,
@@ -6527,23 +6527,13 @@
           value: other.value,
           unit: "1"
         });
-        if (a.unit && b.unit) {
-          can_val = a.to_ucum();
-          other_can_value = b.to_ucum();
-          ucum_value = ucum_multiply(can_val, [[operator, other_can_value]]);
-          try {
-            return createQuantity(ucum_value.value, units_to_string(ucum_value.units));
-          } catch (error) {
-            return null;
-          }
-        } else {
-          value = operator === "/" ? a.value / b.value : a.value * b.value;
-          unit = a.unit || b.unit;
-          try {
-            return createQuantity(decimalAdjust("round", value, -8), unit);
-          } catch (error) {
-            return null;
-          }
+        can_val = a.to_ucum();
+        other_can_value = b.to_ucum();
+        ucum_value = ucum_multiply(can_val, [[operator, other_can_value]]);
+        try {
+          return createQuantity(ucum_value.value, units_to_string(ucum_value.units));
+        } catch (error) {
+          return null;
         }
       } else {
         value = operator === "/" ? this.value / other : this.value * other;
@@ -6754,11 +6744,11 @@
     }
   };
 
-  module.exports.doAddition = function(a, b) {
-    var a_unit, b_unit, base, ref2, val;
+  module.exports.doScaledAddition = function(a, b, scaleForB) {
+    var a_unit, b_unit, ref2, val;
     if (a instanceof Quantity && b instanceof Quantity) {
       ref2 = [coalesceToOne(a.unit), coalesceToOne(b.unit)], a_unit = ref2[0], b_unit = ref2[1];
-      val = convert_value(b.value, b_unit, a_unit);
+      val = convert_value(b.value * scaleForB, b_unit, a_unit);
       if (val == null) {
         return null;
       }
@@ -6766,28 +6756,20 @@
         unit: a_unit,
         value: a.value + val
       });
-    } else {
+    } else if (a.copy && a.add) {
       b_unit = b instanceof Quantity ? coalesceToOne(b.unit) : b.unit;
-      return typeof a.copy === "function" ? typeof (base = a.copy()).add === "function" ? base.add(b.value, clean_unit(b_unit)) : void 0 : void 0;
+      return a.copy().add(b.value * scaleForB, clean_unit(b_unit));
+    } else {
+      throw new Error("Unsupported argument types.");
     }
   };
 
+  module.exports.doAddition = function(a, b) {
+    return module.exports.doScaledAddition(a, b, 1);
+  };
+
   module.exports.doSubtraction = function(a, b) {
-    var a_unit, b_unit, base, ref2, val;
-    if (a instanceof Quantity && b instanceof Quantity) {
-      ref2 = [coalesceToOne(a.unit), coalesceToOne(b.unit)], a_unit = ref2[0], b_unit = ref2[1];
-      val = convert_value(b.value, b_unit, a_unit);
-      if (val == null) {
-        return null;
-      }
-      return new Quantity({
-        unit: a_unit,
-        value: a.value - val
-      });
-    } else {
-      b_unit = b instanceof Quantity ? coalesceToOne(b.unit) : b.unit;
-      return typeof a.copy === "function" ? typeof (base = a.copy()).add === "function" ? base.add(b.value * -1, clean_unit(b_unit)) : void 0 : void 0;
-    }
+    return module.exports.doScaledAddition(a, b, -1);
   };
 
   module.exports.doDivision = function(a, b) {
@@ -6805,10 +6787,10 @@
   };
 
   coalesceToOne = function(o) {
-    if (o != null) {
-      return o;
-    } else {
+    if ((o == null) || !(typeof o.trim === "function" ? o.trim() : void 0)) {
       return '1';
+    } else {
+      return o;
     }
   };
 
