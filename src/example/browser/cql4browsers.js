@@ -7250,7 +7250,18 @@
         divided_this = this.numerator.dividedBy(this.denominator);
         divided_other = other.numerator.dividedBy(other.denominator);
         return divided_this.equals(divided_other);
+      } else {
+        return false;
       }
+    };
+
+    Ratio.prototype.equivalent = function(other) {
+      var equal;
+      equal = this.equals(other);
+      if (equal == null) {
+        return false;
+      }
+      return equal;
     };
 
     return Ratio;
@@ -44970,6 +44981,9 @@
     if (isCode(a)) {
       return codesAreEquivalent(a, b);
     }
+    if (a != null ? a.isRatio : void 0) {
+      return a.equivalent(b);
+    }
     ref = getClassOfObjects(a, b), aClass = ref[0], bClass = ref[1];
     switch (aClass) {
       case '[object Array]':
@@ -45080,6 +45094,9 @@
       return null;
     }
     if (a != null ? a.isQuantity : void 0) {
+      return a.equals(b);
+    }
+    if (a != null ? a.isRatio : void 0) {
       return a.equals(b);
     }
     if (a instanceof Uncertainty) {

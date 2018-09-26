@@ -48,6 +48,9 @@ module.exports.equivalent = equivalent = (a, b) ->
 
   return codesAreEquivalent(a, b) if isCode(a)
 
+  # Use ratio equivalent function if a is ratio
+  return a.equivalent(b) if a?.isRatio
+
   [aClass, bClass] = getClassOfObjects(a, b)
 
   switch aClass
@@ -114,6 +117,9 @@ module.exports.equals = equals = (a, b) ->
 
   # If one is a Quantity, use the Quantity equals function
   return a.equals b if a?.isQuantity
+
+  # If one is a Ratio, use the ratio equals function
+  return a.equals b if a?.isRatio
 
   # If one is an Uncertainty, convert the other to an Uncertainty
   if a instanceof Uncertainty then b = Uncertainty.from(b)

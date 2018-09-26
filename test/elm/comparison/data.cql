@@ -36,6 +36,8 @@ define ALtB_Quantity_diff: 5 'm' = 5 'km'
 define AGtB_Quantity_incompatible: 5 'Cel' = 4 'm'
 define AEqB_Quantity_incompatible: 5 'Cel' = 5 'm'
 define ALtB_Quantity_incompatible: 5 'Cel' = 40 'm'
+define EqRatios: 10 'mg' : 2 'dL' = 15 'mg' : 3 'dL'
+define UneqRatios: 10 'mg' : 2 'dL' = 15 'mg' : 4 'dL'
 
 // @Test: NotEqual
 define AGtB_Int: 5 != 4
@@ -73,12 +75,17 @@ define AGtB_Quantity_incompatible: 5 'Cel' != 4 'm'
 define AEqB_Quantity_incompatible: 5 'Cel' != 5 'm'
 define ALtB_Quantity_incompatible: 5 'Cel' != 40 'm'
 
+
 // @Test: Equivalent
 define ANull_BDefined: null ~ 4
 define ADefined_BNull: 5 ~ null
 define ANull_BNull: null ~ null
 define ADefined_BDefined: 3 ~ 3
 define CaseInsensitiveStrings: 'FOO' ~ 'foo'
+define EqRatios: 10 'mg' : 2 'dL' ~ 15 'mg' : 3 'dL'
+define UneqRatios: 10 'mg' : 2 'dL' ~ 15 'mg' : 4 'dL'
+define UneqRatioTypes: 10 'mg' : 2 'dL' ~ DateTime(2000, 3, 13, 2, 4, 23) 
+
 
 // define EmptyTuples: { : } ~ { : } // TODO: We don't seem to support this format
 define SameTuples: Tuple{a: 'a', b: 'b'} ~ Tuple{a: 'a', b: 'b'}
