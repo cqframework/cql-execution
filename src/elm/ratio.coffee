@@ -37,7 +37,10 @@ module.exports.Ratio = class Ratio extends Expression
       divided_this.equals(divided_other)
 
   equivalent: (other) ->
-    @equals(other)
+    equal = @equals(other)
+    if !equal?
+      return false
+    equal
 
 module.exports.createRatio = createRatio = (numerator, denominator) ->
   new Ratio({numerator: numerator, denominator: denominator})

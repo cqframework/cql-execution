@@ -192,6 +192,9 @@ describe 'Equivalent', ->
   it 'should be false for null ~ 4', ->
     @aNull_BDefined.exec(@ctx).should.be.false()
 
+  it 'should be false for ratio compared to date', ->
+    @uneqRatioTypes.exec(@ctx).should.be.false()
+
   it 'should be false for 5 ~ null', ->
     @aDefined_BNull.exec(@ctx).should.be.false()
 

@@ -84,6 +84,8 @@ define ADefined_BDefined: 3 ~ 3
 define CaseInsensitiveStrings: 'FOO' ~ 'foo'
 define EqRatios: 10 'mg' : 2 'dL' ~ 15 'mg' : 3 'dL'
 define UneqRatios: 10 'mg' : 2 'dL' ~ 15 'mg' : 4 'dL'
+define UneqRatioTypes: 10 'mg' : 2 'dL' ~ DateTime(2000, 3, 13, 2, 4, 23) 
+
 
 // define EmptyTuples: { : } ~ { : } // TODO: We don't seem to support this format
 define SameTuples: Tuple{a: 'a', b: 'b'} ~ Tuple{a: 'a', b: 'b'}

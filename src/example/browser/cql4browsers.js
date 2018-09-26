@@ -7252,7 +7252,12 @@
     };
 
     Ratio.prototype.equivalent = function(other) {
-      return this.equals(other);
+      var equal;
+      equal = this.equals(other);
+      if (equal == null) {
+        return false;
+      }
+      return equal;
     };
 
     return Ratio;
