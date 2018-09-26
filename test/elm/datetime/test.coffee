@@ -158,24 +158,13 @@ describe 'Today', ->
     setup @, data
     @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters)
 
-  it 'should return only day components and timezone of today', ->
+  it 'should return date of today', ->
     today = @todayVar.exec @ctx
-    today.isTime().should.be.false()
+    today.isDate.should.be.true()
     today.year.should.equal @ctx.getExecutionDateTime().year
     today.month.should.equal @ctx.getExecutionDateTime().month
     today.day.should.equal @ctx.getExecutionDateTime().day
-    today.timezoneOffset.should.equal @ctx.getTimezoneOffset()
-    should.not.exist(today[field]) for field in [ 'hour', 'minute', 'second', 'millisecond' ]
-
-  it 'should return only day components and timezone of today using the passed in timezone', ->
-    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromJSDate(new Date(), '0'))
-    today = @todayVar.exec @ctx
-    today.isTime().should.be.false()
-    today.year.should.equal @ctx.getExecutionDateTime().year
-    today.month.should.equal @ctx.getExecutionDateTime().month
-    today.day.should.equal @ctx.getExecutionDateTime().day
-    today.timezoneOffset.should.equal "0"
-    should.not.exist(today[field]) for field in [ 'hour', 'minute', 'second', 'millisecond' ]
+    should.not.exist(today[field]) for field in [ 'hour', 'minute', 'second', 'millisecond', 'timezoneOffset' ]
 
   it 'should throw an exception because no execution datetime has been set', ->
     try
@@ -295,7 +284,7 @@ describe 'DateFrom', ->
     date.year.should.equal 2000
     date.month.should.equal 3
     date.day.should.equal 15
-    date.timezoneOffset.should.equal 1
+    should.not.exist date.timezoneOffset
     should.not.exist date.hour
     should.not.exist date.minute
     should.not.exist date.second

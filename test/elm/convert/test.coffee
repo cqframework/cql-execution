@@ -142,34 +142,45 @@ describe 'FromDateTime', ->
   @beforeEach ->
     setup @, data
 
-  it "should convert @2015-01-02 to '2015-01-02'", ->
-    @dateStr.exec(@ctx).should.equal "2015-01-02"
+  it "should convert @2015-01-02T12:01:02.321-06:00 to '2015-01-02T12:01:02.321-06:00'", ->
+    @dateTimeToStr.exec(@ctx).should.equal "2015-01-02T12:01:02.321-06:00"
 
-  it "should convert @2015-01-02 to @2015-01-02", ->
-    date = @dateDate.exec(@ctx)
+  it "should convert @2015-01-02T12:01:02.321-06:00 to Date", ->
+    date = @dateTimeToDate.exec(@ctx)
     date.year.should.equal 2015
     date.month.should.equal 1
     date.day.should.equal 2
+
+  it "should convert @2015-01-02T12:01:02.321-06:00 to DateTime", ->
+    dateTime = @dateTimeToDateTime.exec(@ctx)
+    dateTime.year.should.equal 2015
+    dateTime.month.should.equal 1
+    dateTime.day.should.equal 2
+    dateTime.hour.should.equal 12
+    dateTime.minute.should.equal 1
+    dateTime.second.should.equal 2
+    dateTime.millisecond.should.equal 321
+    dateTime.timezoneOffset.should.equal -6
 
 describe 'FromDate', ->
   @beforeEach ->
     setup @, data
 
-  it "should convert ToDate('2015-01-01') to DateTime", ->
+  it "should convert @2015-01-01 to DateTime", ->
     dateTime = @dateDateTime.exec(@ctx)
     dateTime.year.should.equal 2015
     dateTime.month.should.equal 1
     dateTime.day.should.equal 1
     dateTime.isDateTime.should.equal.true
 
-  it "should convert ToDate('2015-01-01') to Date", ->
+  it "should convert @2015-01-01 to Date", ->
     date = @dateDate.exec(@ctx)
     date.year.should.equal 2015
     date.month.should.equal 1
     date.day.should.equal 1
     date.isDate.should.equal.true
 
-  it "should convert ToDate('2015-01-01') to '2015-01-01'", ->
+  it "should convert @2015-01-01 to '2015-01-01'", ->
     @dateStr.exec(@ctx).should.equal "2015-01-01"
 
 describe 'FromTime', ->

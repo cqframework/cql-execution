@@ -304,7 +304,7 @@ class DateTime
     str
 
   getDate: () ->
-    @reducedPrecision DateTime.Unit.DAY
+    new Date(@year, @month, @day)
 
   getTime: () ->
     new DateTime(0, 1, 1, @hour, @minute, @second, @millisecond, @timezoneOffset)

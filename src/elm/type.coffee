@@ -50,7 +50,12 @@ module.exports.ToDate = class ToDate extends Expression
 
   exec: (ctx) ->
     arg = @execArgs(ctx)
-    if arg? and typeof arg != 'undefined' then Date.parse(arg.toString()) else null
+    if (not arg?) or (arg == undefined)
+      return null
+    else if arg.isDateTime
+      return arg.getDate()
+    else
+      return Date.parse(arg.toString())
 
 module.exports.ToDateTime = class ToDateTime extends Expression
   constructor: (json) ->
