@@ -96,7 +96,7 @@ describe 'Equal', ->
   it 'should be true for 10mg:2dL = 15mg:3dL', ->
     @eqRatios.exec(@ctx).should.be.true()
   
-  it 'should be true for 10mg:2dL = 15mg:4dL', ->
+  it 'should be false for 10mg:2dL = 15mg:4dL', ->
     @uneqRatios.exec(@ctx).should.be.false()
 
 describe 'NotEqual', ->
@@ -210,7 +210,7 @@ describe 'Equivalent', ->
   it 'should be true for 10mg:2dL ~ 15mg:3dL', ->
     @eqRatios.exec(@ctx).should.be.true()
   
-  it 'should be true for 10mg:2dL ~ 15mg:4dL', ->
+  it 'should be false for 10mg:2dL ~ 15mg:4dL', ->
     @uneqRatios.exec(@ctx).should.be.false()
 
   describe 'Tuples', ->
