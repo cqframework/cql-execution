@@ -7252,9 +7252,7 @@
     };
 
     Ratio.prototype.equivalent = function(other) {
-      if (other instanceof Ratio) {
-        return this.equals(other);
-      }
+      return this.equals(other);
     };
 
     return Ratio;
