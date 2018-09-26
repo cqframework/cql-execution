@@ -242,7 +242,7 @@ module.exports.parseQuantity = (str) ->
   else
     null
 
-module.exports.doScaledAddition = (a,b,scaleForB) ->
+doScaledAddition = (a,b,scaleForB) ->
   if a instanceof Quantity and b instanceof Quantity
     [a_unit, b_unit] = [coalesceToOne(a.unit), coalesceToOne(b.unit)]
     # The units don't have to match (m and m^2), but must be convertable
@@ -257,10 +257,10 @@ module.exports.doScaledAddition = (a,b,scaleForB) ->
     throw new Error("Unsupported argument types.")
 
 module.exports.doAddition = (a,b) ->
-  module.exports.doScaledAddition(a,b,1)
+  doScaledAddition(a,b,1)
 
 module.exports.doSubtraction = (a,b) ->
-  module.exports.doScaledAddition(a,b,-1)
+  doScaledAddition(a,b,-1)
 
 module.exports.doDivision = (a,b) ->
   if a instanceof Quantity
@@ -270,4 +270,4 @@ module.exports.doMultiplication = (a,b) ->
   if a instanceof Quantity then a.multiplyBy(b) else b.multiplyBy(a)
 
 coalesceToOne = (o) ->
-  if !o? or !o.trim?() then '1' else o
+  if !o? or (o.trim? and !o.trim()) then '1' else o
