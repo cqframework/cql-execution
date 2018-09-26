@@ -93,6 +93,12 @@ describe 'Equal', ->
   it 'should be null for 5 Cel = 40 m', ->
     should(@aLtB_Quantity_incompatible.exec(@ctx)).be.null()
 
+  it 'should be true for 10mg:2dL = 15mg:3dL', ->
+    @eqRatios.exec(@ctx).should.be.true()
+  
+  it 'should be true for 10mg:2dL = 15mg:4dL', ->
+    @uneqRatios.exec(@ctx).should.be.false()
+
 describe 'NotEqual', ->
   @beforeEach ->
     setup @, data
@@ -197,7 +203,13 @@ describe 'Equivalent', ->
 
   it 'should be true for FOO ~ foo', ->
     @caseInsensitiveStrings.exec(@ctx).should.be.true()
+
+  it 'should be true for 10mg:2dL ~ 15mg:3dL', ->
+    @eqRatios.exec(@ctx).should.be.true()
   
+  it 'should be true for 10mg:2dL ~ 15mg:4dL', ->
+    @uneqRatios.exec(@ctx).should.be.false()
+
   describe 'Tuples', ->
     it.skip 'should return true for empty tuples', ->
       # Note: the spec doesn't explicitly define this, expecting behavior to match null ~ null

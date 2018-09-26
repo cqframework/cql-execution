@@ -47,6 +47,7 @@ module.exports.equivalent = equivalent = (a, b) ->
   return false unless a? and b?
 
   return codesAreEquivalent(a, b) if isCode(a)
+
   # Use ratio equivalent function if a is ratio
   return a.equivalent(b) if a?.isRatio
 
