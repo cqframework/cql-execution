@@ -1,6 +1,8 @@
 { Expression, UnimplementedExpression } = require './expression'
 { ThreeValuedLogic } = require '../datatypes/logic'
 { build } = require './builder'
+{ Quantity, doAddition, doSubtraction} = require './quantity'
+{ successor, predecessor } = require '../util/math'
 dtivl = require '../datatypes/interval'
 cmp = require '../util/comparison'
 
@@ -157,48 +159,101 @@ module.exports.Collapse = class Collapse extends Expression
     super
 
   exec: (ctx) ->
-    intervals = @execArgs ctx
-    if intervals?.length <= 1
-      intervals
-    else
-      # we don't handle imprecise intervals at this time
-      for a in intervals
-        if a.low.isImprecise?() || a.high.isImprecise?()
-          throw new Error("Collapse does not support imprecise dates at this time.")
+    # collapse(argument List<Interval<T>>, per Quantity) List<Interval<T>>
+    [intervals, perWidth] = @execArgs ctx
 
-      # sort intervals by start
-      intervals.sort (a,b)->
-        if typeof a.low.before == 'function'
-          return -1 if a.low.before b.low
-          return 1 if a.low.after b.low
+    # Clone intervals so this function remains idempotent
+    intervalsClone = []
+    for interval in intervals
+      # The spec says to ignore null intervals
+      if interval?
+        intervalsClone.push interval.copy()
+
+    # If the list is null, return null
+    if !intervals?
+      null
+    else if intervalsClone?.length <= 1
+      intervalsClone
+    else
+      # If the per argument is null, the default unit interval for the point type
+      # of the intervals involved will be used (i.e. the interval that has a
+      # width equal to the result of the successor function for the point type).
+      if !perWidth?
+        if intervalsClone[0].low?
+          if intervalsClone[0].low.isDateTime
+            precisionUnits = intervalsClone[0].low.getPrecision()
+            perWidth = new Quantity(value: 1, unit: precisionUnits)
+          else if intervalsClone[0].low.isQuantity
+            perWidth = doSubtraction(successor(intervalsClone[0].low), intervalsClone[0].low)
+          else
+            perWidth = successor(intervalsClone[0].low) - intervalsClone[0].low
+        else if intervalsClone[0].high?
+          if intervalsClone[0].high.isDateTime
+            precisionUnits = intervalsClone[0].high.getPrecision()
+            perWidth = new Quantity(value: 1, unit: precisionUnits)
+          else if intervalsClone[0].high.isQuantity
+            perWidth = doSubtraction(successor(intervalsClone[0].high), intervalsClone[0].high)
+          else
+            perWidth = successor(intervalsClone[0].high) - intervalsClone[0].high
         else
+          throw new Error("Point type of intervals provided to collapse cannot be determined.")
+
+        if typeof perWidth is 'number'
+          perWidth = new Quantity(value: perWidth, unit: '1')
+
+      # sort intervalsClone by start
+      intervalsClone.sort (a,b)->
+        if typeof a.low?.before == 'function'
+          return -1 if b.low? and a.low.before b.low
+          return 1 if !b.low? or a.low.after b.low
+        else if a.low? and b.low?
           return -1 if a.low < b.low
           return 1 if a.low > b.low
+        else if a.low? and !b.low?
+          return 1
+        else if !a.low? and b.low?
+          return -1
+        # if both lows are undefined, sort by high
+        if typeof a.high?.before == 'function'
+          return -1 if !b.high? or a.high.before b.high
+          return 1 if a.high.after b.high
+        else if a.high? and b.high?
+          return -1 if a.high < b.high
+          return 1 if a.high > b.high
+        else if a.high? and !b.high?
+          return -1
+        else if !a.high? and b.high?
+          return 1
         0
 
       # collapse intervals as necessary
       collapsedIntervals = []
-      a = intervals.shift()
-      b = intervals.shift()
-      if typeof a.copy == 'function'
-       a = a.copy()
-      if typeof b.copy == 'function'
-       b = b.copy()
+      a = intervalsClone.shift()
+      b = intervalsClone.shift()
 
       while b
-        if typeof b.low.sameOrBefore == 'function'
-          if b.low.sameOrBefore a.high
-            a.high = b.high if b.high.after a.high
+        if typeof b.low?.durationBetween == 'function'
+          # handle DateTimes using durationBetween
+          if a.high?.sameOrAfter b.low # overlap
+            a.high = b.high if !b.high? or b.high.after a.high
+          else if a.high?.durationBetween(b.low, perWidth.unit).high <= perWidth.value
+            a.high = b.high
+          else
+            collapsedIntervals.push a
+            a = b
+        else if typeof b.low?.sameOrBefore == 'function'
+          if a.high? and b.low.sameOrBefore doAddition(a.high, perWidth)
+            a.high = b.high if !b.high? or b.high.after a.high
           else
             collapsedIntervals.push a
             a = b
         else
-          if b.low <= a.high
-            a.high = b.high if b.high > a.high
+          if (b.low - a.high) <= perWidth.value
+            a.high = b.high if b.high > a.high || !b.high?
           else
             collapsedIntervals.push a
             a = b
-        b = intervals.shift()
+        b = intervalsClone.shift()
       collapsedIntervals.push a
       collapsedIntervals
 

@@ -2,7 +2,7 @@
 { ValueSet } = require '../datatypes/datatypes'
 { build } = require './builder'
 { typeIsArray } = require '../util/util'
-{ equals, equivalent } = require '../util/comparison'
+{ equals } = require '../util/comparison'
 
 module.exports.List = class List extends Expression
   constructor: (json) ->
@@ -23,7 +23,14 @@ module.exports.Exists = class Exists extends Expression
     super
 
   exec: (ctx) ->
-    @execArgs(ctx)?.length > 0
+    list = @execArgs(ctx)
+    # if list exists and has non empty length we need to make sure it isnt just full of nulls
+    if list?.length > 0
+      for item in list
+        # return true if we found an item that isnt null.
+        return true if item != null
+    false
+
 
 # Equal is completely handled by overloaded#Equal
 
@@ -35,11 +42,13 @@ module.exports.doUnion = (a, b) ->
 
 # Delegated to by overloaded#Except
 module.exports.doExcept = (a, b) ->
-  (itm for itm in a when not doContains(b, itm))
+  setList = doDistinct(a)
+  (itm for itm in setList when not doContains(b, itm))
 
 # Delegated to by overloaded#Intersect
 module.exports.doIntersect = (a, b) ->
-  (itm for itm in a when doContains(b, itm))
+  setList = doDistinct(a)
+  (itm for itm in setList when doContains(b, itm))
 
 # ELM-only, not a product of CQL
 module.exports.Times = class Times extends UnimplementedExpression
@@ -78,14 +87,14 @@ module.exports.IndexOf = class IndexOf extends Expression
     src = @source.exec ctx
     el = @element.exec ctx
     if not src? or not el? then return null
-    (index = i; break) for itm, i in src when equivalent itm, el
+    (index = i; break) for itm, i in src when equals itm, el
     if index? then return index else return -1
 
 # Indexer is completely handled by overloaded#Indexer
 
 # Delegated to by overloaded#Contains and overloaded#In
 module.exports.doContains = doContains = (container, item) ->
-  return true for element in container when equivalent element, item
+  return true for element in container when equals element, item
   return false
 
 # Delegated to by overloaded#Includes and overloaded@IncludedIn
@@ -115,14 +124,26 @@ module.exports.Distinct = class Distinct extends Expression
     super
 
   exec: (ctx) ->
-    doDistinct(@execArgs ctx)
+    result = @execArgs ctx
+    if not result? then return null
+    doDistinct(result)
 
 doDistinct = (list) ->
   seen = []
   list.filter (item) ->
-    isNew = seen.every (seenItem) -> !equivalent(item, seenItem)
+    isNew = seen.every (seenItem) -> !equals(item, seenItem)
     seen.push item if isNew
     isNew
+
+  # Remove duplicate null elements
+  firstNullFound = false
+  setList = []
+  for item in seen
+    setList.push item if item != null
+    if item == null && !firstNullFound
+      setList.push item
+      firstNullFound = true
+  setList
 
 # ELM-only, not a product of CQL
 module.exports.Current = class Current extends UnimplementedExpression

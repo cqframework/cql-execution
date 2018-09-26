@@ -21,6 +21,7 @@ define EqualDates: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 
 define EqualDatesOpenClosed: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 1, 0, 0, 0, 0)) = Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 12, 31, 23, 59, 59, 999)]
 define SameDays: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)) = Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1))
 define DifferentDays: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)) = Interval[DateTime(2012, 1, 1), DateTime(2012, 7, 1))
+define DifferingPrecision: Interval[DateTime(2012, 1, 1, 12, 30, 21), DateTime(2013, 1, 1, 12, 30, 21)] = Interval[DateTime(2012, 1, 1, 12, 30), DateTime(2013, 1, 1, 12, 30)]
 
 // @Test: NotEqual
 define EqualClosed: Interval[1, 5] != Interval[1, 5]
@@ -39,6 +40,7 @@ define EqualDates: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 
 define EqualDatesOpenClosed: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 1, 0, 0, 0, 0)) != Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 12, 31, 23, 59, 59, 999)]
 define SameDays: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)) != Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1))
 define DifferentDays: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)) != Interval[DateTime(2012, 1, 1), DateTime(2012, 7, 1))
+define DifferingPrecision: Interval[DateTime(2012, 1, 1, 12, 30, 21), DateTime(2013, 1, 1, 12, 30, 21)] != Interval[DateTime(2012, 1, 1, 12, 30), DateTime(2013, 1, 1, 12, 30)]
 
 // @Test: Contains
 define ContainsInt: Interval[1, 5] contains 3
@@ -172,6 +174,10 @@ define MayIncludeDayOfIvlVeryImpreciseHigh: PrecisionDateIvl includes day of Int
 define MayIncludeDayOfIvlVeryImpreciseSurrounding: PrecisionDateIvl includes day of Interval[DateTime(2012), DateTime(2012)]
 define ImpDateIvl: Interval[DateTime(2012, 3), DateTime(2012, 8)]
 define ImpreciseIncludesDateIvl: ImpDateIvl includes Interval[DateTime(2012, 4, 1, 0, 0, 0, 0), DateTime(2012, 6, 1, 0, 0, 0, 0))
+define ImpreciseIncludesDate: ImpDateIvl includes DateTime(2012, 4, 1, 0, 0, 0, 0)
+define ImpreciseDoesntIncludeDate: ImpDateIvl includes DateTime(2016, 4, 1, 0, 0, 0, 0)
+define IntervalIncludesQuantity: Interval[4 'mg', 6 'mg'] includes 5 'mg'
+define IntervalDoesntIncludeQuantity: Interval[4 'mg', 6 'mg'] includes 50 'mg'
 define ImpreciseNotIncludesDateIvl: ImpDateIvl includes Interval[DateTime(2012, 2, 1, 0, 0, 0, 0), DateTime(2012, 6, 1, 0, 0, 0, 0))
 define ImpreciseMayIncludeDateIvl: ImpDateIvl includes Interval[DateTime(2012, 3, 15, 0, 0, 0, 0), DateTime(2012, 6, 1, 0, 0, 0, 0))
 define NegInfBegIncludesIntIvl: Interval[null, 5] includes Interval[-7, 2]
@@ -235,6 +241,10 @@ define IncludesDayOfIvlHighEdge: Interval[DateTime(2012, 6, 1, 0, 0, 0, 0), Date
 define NotIncludesDayOfIvlLowEdge: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 6, 1, 0, 0, 0, 0)] included in day of PrecisionDateIvl
 define NotIncludesDayOfIvlHighEdge: Interval[DateTime(2012, 6, 1, 0, 0, 0, 0), DateTime(2012, 9, 3, 0, 0, 0, 0)] included in day of PrecisionDateIvl
 define IncludesDayOfIvlImpreciseLowEdge: Interval[DateTime(2012, 3, 2), DateTime(2012, 6, 1)] included in day of PrecisionDateIvl
+define IncludesDayInInterval: DateTime(2012, 3, 3) included in day of PrecisionDateIvl
+define DoesNotIncludeDayInInterval: DateTime(2014, 3, 3) included in day of PrecisionDateIvl
+define QuantityIncludedInterval: 5 'mg' included in Interval[4 'mg', 6 'mg']
+define QuantityNotIncludedInterval: 50 'mg' included in Interval[4 'mg', 6 'mg']
 define IncludesDayOfIvlImpreciseHighEdge: Interval[DateTime(2012, 6, 1), DateTime(2012, 9, 2)] included in day of PrecisionDateIvl
 define IncludesDayOfIvlVeryImpreciseMiddle: Interval[DateTime(2012, 5), DateTime(2012, 6)] included in day of PrecisionDateIvl
 define NotIncludesDayOfIvlVeryImpreciseLow: Interval[DateTime(2012, 2), DateTime(2012, 6)] included in day of PrecisionDateIvl
@@ -545,14 +555,16 @@ define ivlD: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), DateTime(2014, 1, 1, 0, 
 define ivlE: Interval[DateTime(2013), DateTime(2015)]
 define ivlF: Interval[DateTime(2014), DateTime(2016)]
 define ivlG: Interval[DateTime(2016), DateTime(2017)]
+define ivlH: Interval[DateTime(2012, 2, 3), DateTime(2013, 3)]
 define OverlapsBefore: ivlA overlaps ivlB
 define OverlapsAfter: ivlB overlaps ivlA
 define OverlapsContained: ivlB overlaps ivlC
 define OverlapsContains: ivlC overlaps ivlB
-define ImpreciseOverlap: ivlD overlaps ivlE
+define ImpreciseOverlap: ivlD overlaps ivlH
 define NoOverlap: ivlC overlaps ivlD
 define NoImpreciseOverlap: ivlE overlaps ivlG
-define UnknownOverlap: ivlF overlaps ivlG
+define UnknownOverlap: ivlE overlaps ivlH
+define MatchingPrecisionOverlap: ivlF overlaps ivlG
 define PrecisionDateIvl: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
 // NOTE: There appears to be a bug in cql-to-elm that translates these 'overlaps' to 'OverlapsAfter'!
 define OverlapsBeforeDayOfIvlEdge: PrecisionDateIvl overlaps day of Interval[DateTime(2012, 9, 2, 23, 59, 59, 999), DateTime(2012, 10, 1, 0, 0, 0, 0)]
@@ -582,6 +594,7 @@ define ivlD: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), DateTime(2014, 1, 1, 0, 
 define ivlE: Interval[DateTime(2013), DateTime(2015)]
 define ivlF: Interval[DateTime(2014), DateTime(2016)]
 define ivlG: Interval[DateTime(2016), DateTime(2017)]
+define ivlH: Interval[DateTime(2013,1), DateTime(2015,1)]
 define OverlapsBefore: ivlA overlaps after ivlB
 define OverlapsAfter: ivlB overlaps after ivlA
 define OverlapsContained: ivlB overlaps after ivlC
@@ -590,7 +603,8 @@ define ImpreciseOverlapBefore: ivlE overlaps after ivlF
 define ImpreciseOverlapAfter: ivlF overlaps after ivlE
 define NoOverlap: ivlC overlaps after ivlD
 define NoImpreciseOverlap: ivlE overlaps after ivlG
-define UnknownOverlap: ivlG overlaps after ivlF
+define MatchingPrecisionOverlap: ivlG overlaps after ivlF
+define UnknownOverlap: ivlH overlaps after ivlE
 define PrecisionDateIvl: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
 define OverlapsBeforeDayOfIvlEdge: PrecisionDateIvl overlaps after day of Interval[DateTime(2012, 9, 2, 23, 59, 59, 999), DateTime(2012, 10, 1, 0, 0, 0, 0)]
 define OverlapsAfterDayOfIvlEdge: PrecisionDateIvl overlaps after day of Interval[DateTime(2012, 1, 2, 0, 0, 0, 0), DateTime(2012, 3, 2, 0, 0, 0, 0)]
@@ -619,6 +633,7 @@ define ivlD: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), DateTime(2014, 1, 1, 0, 
 define ivlE: Interval[DateTime(2013), DateTime(2015)]
 define ivlF: Interval[DateTime(2014), DateTime(2016)]
 define ivlG: Interval[DateTime(2016), DateTime(2017)]
+define ivlH: Interval[DateTime(2011, 3), DateTime(2013, 3)]
 define OverlapsBefore: ivlA overlaps before ivlB
 define OverlapsAfter: ivlB overlaps before ivlA
 define OverlapsContained: ivlB overlaps before ivlC
@@ -627,7 +642,8 @@ define ImpreciseOverlapBefore: ivlE overlaps before ivlF
 define ImpreciseOverlapAfter: ivlF overlaps before ivlE
 define NoOverlap: ivlC overlaps before ivlD
 define NoImpreciseOverlap: ivlE overlaps before ivlG
-define UnknownOverlap: ivlF overlaps before ivlG
+define MatchingPrecisionOverlap: ivlF overlaps before ivlG
+define UnknownOverlap: ivlH overlaps before ivlE
 define PrecisionDateIvl: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
 define OverlapsBeforeDayOfIvlEdge: PrecisionDateIvl overlaps before day of Interval[DateTime(2012, 9, 2, 23, 59, 59, 999), DateTime(2012, 10, 1, 0, 0, 0, 0)]
 define OverlapsAfterDayOfIvlEdge: PrecisionDateIvl overlaps before day of Interval[DateTime(2012, 1, 2, 0, 0, 0, 0), DateTime(2012, 3, 2, 0, 0, 0, 0)]
@@ -817,3 +833,81 @@ define DateTimeCollapseOverlapContainedEdge: collapse { DateTime1_10Interval, Da
 define DateTimeCollapseOverlapContainedEdge2: collapse { DateTime1_15Interval, DateTime1_10Interval }
 define DateTimeCollapseOverlapMultipleCombine: collapse { DateTime1_6Interval, DateTime5_12Interval, DateTime10_15Interval }
 define DateTimeCollapseImpreciseBoundary: collapse { DateTime1_3ImpreciseInterval, DateTime1_10Interval }
+
+// @Test: Collapse
+// Numeric Intervals
+define IntIntervalList: { Interval[1, 4], Interval[4, 8], Interval[7, 9] }
+define IntCollapsePerUnit1: collapse IntIntervalList per ToQuantity(1)
+define IntCollapseNoPer: collapse IntIntervalList
+define IntIntervalSeparatedList: { Interval[3, 5], Interval[8, 10] }
+define ExpectedIntervalList: { Interval[3,10] }
+define IntCollapseSeparatedListPer3: collapse IntIntervalSeparatedList per 3
+
+// DateTime Intervals
+define DateTime1_12Interval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 12, 0, 0, 0, 0)]
+define DateTime3_15Interval: Interval[DateTime(2012, 1, 3, 0, 0, 0, 0), DateTime(2012, 1, 15, 0, 0, 0, 0)]
+define DateTime1_15Interval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 15, 0, 0, 0, 0)]
+define DateTime1_15IntervalList: { DateTime1_15Interval }
+define DateTimeCollapseNoPer: collapse { DateTime1_12Interval, DateTime3_15Interval}
+define DateTimeCollapsePerMs: collapse { DateTime1_12Interval, DateTime3_15Interval} per millisecond
+define DateTimeCollapsePerDay: collapse { DateTime1_12Interval, DateTime3_15Interval} per day
+
+// Quantity Intervals with default units
+define QuantityIntervalList: { Interval[ToQuantity(1), ToQuantity(4)], Interval[ToQuantity(4), ToQuantity(8)] }
+define ExpectedQuantityList: { Interval[ToQuantity(1), ToQuantity(8)] }
+define QuantityIntervalCollapseNoPer: collapse QuantityIntervalList
+define QuantityIntervalCollapsePerUnit1: collapse QuantityIntervalList per ToQuantity(1)
+define QuantitySeparatedBy3: { Interval[ToQuantity(3), ToQuantity(5)], Interval[ToQuantity(8), ToQuantity(10)]}
+define CollapseSeparatedQuantity: collapse QuantitySeparatedBy3
+define ExpectedSeparatedQuantity: { Interval[ToQuantity(3), ToQuantity(10)] }
+define CollapseSeparatedQuantityPer3: collapse QuantitySeparatedBy3 per 3
+
+// Quantity Intervals with units
+define QuantityMeterIntervalList: { Interval[ToQuantity('1 \'m\''), ToQuantity('1.995 \'m\'')], Interval[ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')] }
+define CollapseDisjointQuantityUnits: collapse QuantityMeterIntervalList
+define ExpectedQuantityUnitsCollapse: { Interval[ToQuantity('1 \'m\''), ToQuantity('3 \'m\'')] }
+define CollapseQuantityUnitsWithinPer: collapse QuantityMeterIntervalList per ToQuantity('1 \'cm\'')
+define CollapseQuantityUnitsNotWithinPer: collapse QuantityMeterIntervalList per ToQuantity('1 \'mm\'')
+
+// Null test cases
+define NullLowIntervalList: { Interval[null, 4], Interval[3, 5] }
+define CollapseNullLowIntervalList: collapse NullLowIntervalList
+define ExpectedNullLowIntervalCollapse: { Interval[null, 5] }
+define NullHighIntervalList: { Interval[1, 4], Interval[3, null] }
+define CollapseNullHighIntervalList: collapse NullHighIntervalList
+define ExpectedNullHighIntervalCollapse: { Interval[1, null] }
+define NullInCollapse: collapse { Interval[1,3], null }
+define ExpectedResultWithNull: { Interval[1,3] }
+// define NullCollapse: collapse null // Translation Error
+define NullPerCollapse: collapse { Interval[1,4], Interval[4,7] } per null
+define ExpectedResultNullPer: { Interval[1,7] }
+define DateTime5_NullInterval: Interval[DateTime(2012, 1, 5, 0, 0, 0, 0), null]
+define DateTimeNull_5Interval: Interval[null, DateTime(2012, 1, 5, 0, 0, 0, 0)]
+define DateTime1_10Interval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 10, 0, 0, 0, 0)]
+define DateTime9_10Interval: Interval[DateTime(2012, 1, 9, 0, 0, 0, 0), DateTime(2012, 1, 10, 0, 0, 0, 0)]
+define DateTime1_2Interval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 2, 0, 0, 0, 0)]
+define DateTimeNullStartCollapse: collapse { DateTime1_10Interval, DateTimeNull_5Interval }
+define DateTimeNullStartCollapseExpected: { Interval[null, DateTime(2012, 1, 10, 0, 0, 0, 0)] }
+define DateTimeNullEndCollapse: collapse { DateTime1_10Interval, DateTime5_NullInterval }
+define DateTimeNullEndCollapseNoOverlap: collapse { DateTime1_2Interval, DateTime5_NullInterval }
+define DateTimeNullEndCollapseNoOverlapExpected: { DateTime1_2Interval, DateTime5_NullInterval }
+define DateTimeNullStartCollapseNoOverlap: collapse { DateTime9_10Interval, DateTimeNull_5Interval }
+define DateTimeNullStartCollapseNoOverlapExpected: { DateTimeNull_5Interval, DateTime9_10Interval }
+define DateTimeNullEndCollapseExpected: { Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), null] }
+define DateTimeNullStartEndCollapse: collapse { DateTimeNull_5Interval, DateTime1_10Interval, DateTime5_NullInterval }
+define DateTimeNullStartEndCollapseExpected: { Interval[null, null] }
+define QuantityMeterNullLowIntervalList: { Interval[null, ToQuantity('1.995 \'m\'')], Interval[ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')] }
+define CollapseQuantityNullLowUnitsWithinPer: collapse QuantityMeterNullLowIntervalList per ToQuantity('1 \'cm\'')
+define CollapseQuantityNullLowUnitsWithinPerExpected : { Interval[null, ToQuantity('3 \'m\'')] }
+define QuantityMeterNullHighIntervalList: { Interval[ToQuantity('1 \'m\''),ToQuantity('1.995 \'m\'')], Interval[ToQuantity('2 \'m\''), null] }
+define CollapseQuantityNullHighUnitsWithinPer: collapse QuantityMeterNullHighIntervalList per ToQuantity('1 \'cm\'')
+define CollapseQuantityNullHighUnitsWithinPerExpected : { Interval[ToQuantity('1 \'m\''), null] }
+define QuantityIntervalListWithNulls: { Interval[ToQuantity(4), ToQuantity(8)], Interval[null, ToQuantity(2)], Interval[ToQuantity(1), ToQuantity(4)], Interval[ToQuantity(7), null] }
+define CollapseQuantityIntervalListWithNulls: collapse QuantityIntervalListWithNulls
+define CollapseQuantityIntervalListWithNullsExpected: { Interval[null, null] }
+define QuantityIntervalListWithNullLowNoOverlap: { Interval[ToQuantity(4), ToQuantity(8)], Interval[null, ToQuantity(2)] }
+define CollapseQuantityIntervalListWithNullLowNoOverlap: collapse QuantityIntervalListWithNullLowNoOverlap
+define CollapseQuantityIntervalListWithNullLowNoOverlapExpected: { Interval[null, ToQuantity(2)], Interval[ToQuantity(4), ToQuantity(8)]}
+define QuantityIntervalListWithNullHighNoOverlap: { Interval[ToQuantity(4), null], Interval[ToQuantity(1), ToQuantity(2)] }
+define CollapseQuantityIntervalListWithNullHighNoOverlap: collapse QuantityIntervalListWithNullHighNoOverlap
+define CollapseQuantityIntervalListWithNullHighNoOverlapExpected: { Interval[ToQuantity(1), ToQuantity(2)], Interval[ToQuantity(4), null]}

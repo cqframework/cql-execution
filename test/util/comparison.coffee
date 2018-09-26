@@ -52,17 +52,17 @@ describe 'equals', ->
     equals(new Foo('abc', [1,2,3]), new Foo('abc', [1,2,3])).should.be.true()
     equals(new Foo('abc', [1,2,3]), new Foo('abcd', [1,2,3])).should.be.false()
     equals(new Foo('abc', new Bar('xyz', [1,2,3])), new Foo('abc', new Bar('xyz', [1,2,3]))).should.be.true()
-    should(equals(new Foo('abc', new Bar('xyz')), new Foo('abc', new Bar('xyz')))).be.null() # because Bar is missing components
+    equals(new Foo('abc', new Bar('xyz')), new Foo('abc', new Bar('xyz'))).should.be.true()
     should(equals(new Foo('abc', new Bar('xyz')), new Foo('abc', new Bar('xyz',999)))).be.null()
     equals(new Foo('abc', [1,2,3]), new Bar('abc', [1,2,3])).should.be.false()
     equals(new Bar('abc', [1,2,3]), new Foo('abc', [1,2,3])).should.be.false()
 
-  it 'should not consider an instance equal to itself if it has null values', ->
+  it 'should consider an instance equal to itself even if it has null values', ->
     class Foo
       constructor: (@prop1, @prop2) ->
 
     containsNull = new Foo('abc', null)
-    should(equals(containsNull, containsNull)).be.null()
+    should(equals(containsNull, containsNull)).be.true()
 
   it 'should delegate to equals method when available', ->
     class Int
@@ -148,3 +148,11 @@ describe 'equivalent', ->
     equivalent(new Code('1234', 'System', 'version2016', 'Display Name'), new Concept([new Code('1111', 'System', 'version2016', undefined), new Code('1','2','3', undefined)])).should.be.false()
     equivalent(new Code('1234', 'System', 'version2016', 'Display Name'), new Concept([new Code('1234', 'System', 'version2017', undefined), new Code('1','2','3', undefined)])).should.be.true()
     equivalent(new Code('1234', 'System', 'version2016', 'Display Name'), new Concept([new Code('1111', 'System', 'version2017', undefined), new Code('1','2','3', undefined)])).should.be.false()
+
+  it 'should detect equivalence/inequivalence for strings', ->
+    equivalent('', '').should.be.true()
+    equivalent('a', 'a').should.be.true()
+    equivalent('réservé', 'RESERVE').should.be.true()
+    equivalent('a', 'A').should.be.true()
+    equivalent('abc', 'ab' + 'c').should.be.true()
+    equivalent('abc', 'abcd').should.be.false()

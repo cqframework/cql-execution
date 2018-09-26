@@ -16,9 +16,9 @@ module.exports.Interval = class Interval
   copy: ->
     newLow = @low
     newHigh = @high
-    if typeof @low.copy == 'function'
+    if @low? and typeof @low.copy == 'function'
       newLow = @low.copy()
-    if typeof @high.copy == 'function'
+    if @high? and typeof @high.copy == 'function'
       newHigh = @high.copy();
 
     new Interval(newLow, newHigh, @lowClosed, @highClosed)
@@ -39,7 +39,8 @@ module.exports.Interval = class Interval
     )
 
   includes: (other, precision) ->
-    if not (other instanceof Interval) then throw new Error("Argument to includes must be an interval")
+    if not (other instanceof Interval)
+      return @.contains(other,precision)
     a = @toClosed()
     b = other.toClosed()
     ThreeValuedLogic.and(
@@ -47,9 +48,12 @@ module.exports.Interval = class Interval
       cmp.greaterThanOrEquals(a.high, b.high, precision)
     )
 
-  includedIn: (other) ->
-    if not (other instanceof Interval) then throw new Error("Argument to includedIn must be an interval")
-    other.includes @
+  includedIn: (other, precision) ->
+    # For the point overload, this operator is a synonym for the in operator
+    if not (other instanceof Interval)
+      @.contains(other, precision)
+    else
+      other.includes @
 
   overlaps: (item, precision) ->
     closed = @toClosed()

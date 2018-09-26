@@ -69,8 +69,9 @@ describe 'Equal', ->
     @equalDatesOpenClosed.exec(@ctx).should.be.true()
 
   it 'should operate correctly with imprecision', ->
-    should(@sameDays.exec(@ctx)).be.null()
+    @sameDays.exec(@ctx).should.be.true()
     @differentDays.exec(@ctx).should.be.false()
+    should(@differingPrecision.exec(@ctx)).be.null()
 
 describe 'NotEqual', ->
   @beforeEach ->
@@ -101,8 +102,9 @@ describe 'NotEqual', ->
     @equalDatesOpenClosed.exec(@ctx).should.be.false()
 
   it 'should operate correctly with imprecision', ->
-    should(@sameDays.exec(@ctx)).be.null()
+    @sameDays.exec(@ctx).should.be.false()
     @differentDays.exec(@ctx).should.be.true()
+    should(@differingPrecision.exec(@ctx)).be.null()
 
 describe 'Contains', ->
   @beforeEach ->
@@ -292,6 +294,12 @@ describe 'Includes', ->
     should(@mayIncludeDayOfIvlVeryImpreciseHigh.exec(@ctx)).be.null()
     should(@mayIncludeDayOfIvlVeryImpreciseSurrounding.exec(@ctx)).be.null()
 
+  it 'should correctly handle point inclusion', ->
+    @impreciseIncludesDate.exec(@ctx).should.be.true()
+    @impreciseDoesntIncludeDate.exec(@ctx).should.be.false()
+    @intervalIncludesQuantity.exec(@ctx).should.be.true()
+    @intervalDoesntIncludeQuantity.exec(@ctx).should.be.false()
+
 describe 'ProperlyIncludes', ->
   @beforeEach ->
     setup @, data
@@ -383,6 +391,13 @@ describe 'IncludedIn', ->
     should(@mayIncludeDayOfIvlVeryImpreciseHigh.exec(@ctx)).be.null()
     should(@mayIncludeDayOfIvlVeryImpreciseSurrounding.exec(@ctx)).be.null()
 
+  it 'should correctly handle point comparisons', ->
+    @includesDayInInterval.exec(@ctx).should.be.true()
+    @doesNotIncludeDayInInterval.exec(@ctx).should.be.false()
+    @quantityIncludedInterval.exec(@ctx).should.be.true()
+    @quantityNotIncludedInterval.exec(@ctx).should.be.false()
+
+
 describe 'ProperlyIncludedIn', ->
   @beforeEach ->
     setup @, data
@@ -448,10 +463,11 @@ describe 'After', ->
 
   it 'should correctly handle imprecision', ->
     @afterImpreciseDateIvl.exec(@ctx).should.be.true()
-    @notAfterImpreciseDateIvl.exec(@ctx).should.be.false()
+    should(@notAfterImpreciseDateIvl.exec(@ctx)).be.null()
     should(@mayBeAfterImpreciseDateIvl.exec(@ctx)).be.null()
     @impreciseAfterDateIvl.exec(@ctx).should.be.true()
-    @impreciseNotAfterDateIvl.exec(@ctx).should.be.false()
+    # meets with uncertainty due to toClose
+    should(@impreciseNotAfterDateIvl.exec(@ctx)).be.null()
     should(@impreciseMayBeAfterDateIvl.exec(@ctx)).be.null()
 
   it 'should correctly compare using the requested precision', ->
@@ -496,10 +512,11 @@ describe 'Before', ->
 
   it 'should correctly handle imprecision', ->
     @beforeImpreciseDateIvl.exec(@ctx).should.be.true()
-    @notBeforeImpreciseDateIvl.exec(@ctx).should.be.false()
+    # meets with uncertaintity due to toClose
+    should(@notBeforeImpreciseDateIvl.exec(@ctx)).be.null()
     should(@mayBeBeforeImpreciseDateIvl.exec(@ctx)).be.null()
     @impreciseBeforeDateIvl.exec(@ctx).should.be.true()
-    @impreciseNotBeforeDateIvl.exec(@ctx).should.be.false()
+    should(@impreciseNotBeforeDateIvl.exec(@ctx)).be.null()
     should(@impreciseMayBeBeforeDateIvl.exec(@ctx)).be.null()
 
   it 'should correctly compare using the requested precision', ->
@@ -750,8 +767,11 @@ describe 'OverlapsDateTime', ->
   it 'should reject imprecise non-overlaps', ->
     @noImpreciseOverlap.exec(@ctx).should.be.false()
 
-  it 'should return null for imprecise overlaps that are unknown', ->
+  it 'should return null for imprecise overlaps with differing precision', ->
     should(@unknownOverlap.exec(@ctx)).be.null()
+
+  it 'should return true for imprecise overlaps with matching precision', ->
+    @matchingPrecisionOverlap.exec(@ctx).should.be.true()
 
   it 'should correctly compare using the requested precision', ->
     # NOTE: Some assertions commented out because cql-to-elm is WRONGLY translating 'overlaps' to 'OverlapsAfter'!
@@ -811,6 +831,9 @@ describe 'OverlapsAfterDateTime', ->
 
   it 'should reject imprecise non-overlaps', ->
     @noImpreciseOverlap.exec(@ctx).should.be.false()
+
+  it 'should return true for imprecise overlaps with matching precision', ->
+    @matchingPrecisionOverlap.exec(@ctx).should.be.true()
 
   it 'should return null for imprecise overlaps that are unknown', ->
     should(@unknownOverlap.exec(@ctx)).be.null()
@@ -872,6 +895,9 @@ describe 'OverlapsBeforeDateTime', ->
 
   it 'should reject imprecise non-overlaps', ->
     @noImpreciseOverlap.exec(@ctx).should.be.false()
+
+  it 'should return true for imprecise overlaps with matching precision', ->
+    @matchingPrecisionOverlap.exec(@ctx).should.be.true()
 
   it 'should return null for imprecise overlaps that are unknown', ->
     should(@unknownOverlap.exec(@ctx)).be.null()
@@ -1270,6 +1296,8 @@ describe 'DateTimeIntervalCollapse', ->
 
   it 'disjoint intervals list collapses to ordered self', ->
     @dateTimeCollapseDisjoint.exec(@ctx).should.eql @dateTimeTwoItemDisjointList.exec(@ctx)
+
+  it 'reversed disjoint intervals list collapses to ordered self', ->
     @dateTimeCollapseDisjointReversed.exec(@ctx).should.eql @dateTimeTwoItemDisjointList.exec(@ctx)
 
   it 'adjacent intervals list combines', ->
@@ -1283,7 +1311,7 @@ describe 'DateTimeIntervalCollapse', ->
     @dateTimeCollapseOverlapMultipleCombine.exec(@ctx).should.eql @dateTime1_15IntervalList.exec(@ctx)
 
   it 'throws collapsing imprecise interval', ->
-    should(() => @dateTimeCollapseImpreciseBoundary.exec(@ctx)).throw("Collapse does not support imprecise dates at this time.")
+    @dateTimeCollapseImpreciseBoundary.exec(@ctx).should.eql @dateTime1_10IntervalList.exec(@ctx)
 
   it 'should not modify collapse parameters', ->
     interval1CopyString = @dateTime1_6Interval.toString()
@@ -1293,3 +1321,87 @@ describe 'DateTimeIntervalCollapse', ->
     @dateTime1_6Interval.toString().should.eql interval1CopyString
     @dateTime5_12Interval.toString().should.eql interval2CopyString
     @dateTime10_15Interval.toString().should.eql interval3CopyString
+
+describe 'Collapse', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'numeric collapse uses "1" as default per unit', ->
+    @intCollapseNoPer.exec(@ctx).should.eql @intCollapsePerUnit1.exec(@ctx)
+
+  it 'combines intervals separated by less than per unit', ->
+    @intCollapseSeparatedListPer3.exec(@ctx).should.eql @expectedIntervalList.exec(@ctx)
+
+  it 'DateTime collapse uses 1 ms as default per unit', ->
+    # TODO: spec says to determine this based on width of successor, but Bonnie
+    # will only ever have fully-defined dates. Implement successor way if time.
+    @dateTimeCollapseNoPer.exec(@ctx).should.eql @dateTimeCollapsePerMs.exec(@ctx)
+
+  it 'DateTime with null end collapse with no overlap', ->
+    @dateTimeNullEndCollapseNoOverlap.exec(@ctx).should.eql @dateTimeNullEndCollapseNoOverlapExpected.exec(@ctx)
+
+  it 'DateTime with null start collapse with no overlap', ->
+    @dateTimeNullStartCollapseNoOverlap.exec(@ctx).should.eql @dateTimeNullStartCollapseNoOverlapExpected.exec(@ctx)
+
+  it 'combines DateTime intervals separated by less than per unit', ->
+    @dateTimeCollapsePerDay.exec(@ctx).should.eql @dateTime1_15IntervalList.exec(@ctx)
+
+  it 'Quantity uses default per unit', ->
+    quantity_collapse = @quantityIntervalCollapseNoPer.exec(@ctx)
+    quantity_collapse.should.eql @expectedQuantityList.exec(@ctx)
+    quantity_collapse.should.eql @quantityIntervalCollapsePerUnit1.exec(@ctx)
+
+  it 'Quantity with separated intervals', ->
+    @collapseSeparatedQuantity.exec(@ctx).should.eql @quantitySeparatedBy3.exec(@ctx)
+
+  it 'Quantity combines disjoint intervals that are within per width', ->
+    @collapseSeparatedQuantityPer3.exec(@ctx).should.eql @expectedSeparatedQuantity.exec(@ctx)
+
+  it 'Quantity with units uses point type as default per value', ->
+    @collapseDisjointQuantityUnits.exec(@ctx).should.eql @expectedQuantityUnitsCollapse.exec(@ctx)
+
+  it 'Quantity with units disjoint but within per', ->
+    @collapseQuantityUnitsWithinPer.exec(@ctx).should.eql @expectedQuantityUnitsCollapse.exec(@ctx)
+
+  it 'Quantity with units disjoint and not within per', ->
+    @collapseQuantityUnitsNotWithinPer.exec(@ctx).should.eql @quantityMeterIntervalList.exec(@ctx)
+
+  it 'Quantity with units with null low value', ->
+    @collapseQuantityNullLowUnitsWithinPer.exec(@ctx).should.eql @collapseQuantityNullLowUnitsWithinPerExpected.exec(@ctx)
+
+  it 'Quantity with units with null low and high values', ->
+    @collapseQuantityIntervalListWithNulls.exec(@ctx).should.eql @collapseQuantityIntervalListWithNullsExpected.exec(@ctx)
+
+  it 'Quantity with units with null high value', ->
+    @collapseQuantityNullHighUnitsWithinPer.exec(@ctx).should.eql @collapseQuantityNullHighUnitsWithinPerExpected.exec(@ctx)
+
+  it 'Quantity Intervals no overlap with null low', ->
+    @collapseQuantityIntervalListWithNullLowNoOverlap.exec(@ctx).should.eql @collapseQuantityIntervalListWithNullLowNoOverlapExpected.exec(@ctx)
+
+  it 'Quantity Intervals no overlap with null high', ->
+    @collapseQuantityIntervalListWithNullHighNoOverlap.exec(@ctx).should.eql @collapseQuantityIntervalListWithNullHighNoOverlapExpected.exec(@ctx)
+
+  it 'with Interval that has null low values', ->
+    @collapseNullLowIntervalList.exec(@ctx).should.eql @expectedNullLowIntervalCollapse.exec(@ctx)
+
+  it 'with Interval that has null high values', ->
+    @collapseNullHighIntervalList.exec(@ctx).should.eql @expectedNullHighIntervalCollapse.exec(@ctx)
+
+  it 'with Date Interval that has null start values', ->
+    @dateTimeNullStartCollapse.exec(@ctx).should.eql @dateTimeNullStartCollapseExpected.exec(@ctx)
+
+  it 'with Date Interval that has null high values', ->
+    @dateTimeNullEndCollapse.exec(@ctx).should.eql @dateTimeNullEndCollapseExpected.exec(@ctx)
+
+  it 'with Date Interval that has null high and low values', ->
+    @dateTimeNullStartEndCollapse.exec(@ctx).should.eql @dateTimeNullStartEndCollapseExpected.exec(@ctx)
+
+  it 'should ignore nulls in list of Intervals', ->
+    @nullInCollapse.exec(@ctx).should.eql @expectedResultWithNull.exec(@ctx)
+
+  it.skip 'should return null if list is null', ->
+    # TODO: Translation Error
+    should.not.exist @nullCollapse.exec(@ctx)
+
+  it 'should use default per unit if per is expicitly null', ->
+    @nullPerCollapse.exec(@ctx).should.eql @expectedResultNullPer.exec(@ctx)

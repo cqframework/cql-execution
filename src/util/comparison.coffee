@@ -10,7 +10,7 @@ areDateTimesOrQuantities = (a, b) ->
 isUncertainty = (x) ->
   x instanceof Uncertainty
 
-module.exports.lessThan = (a, b, precision = DateTime.Unit.MILLISECOND) ->
+module.exports.lessThan = (a, b, precision) ->
   switch
     when areNumbers a, b then a < b
     when areDateTimesOrQuantities a, b then a.before(b, precision)
@@ -18,7 +18,7 @@ module.exports.lessThan = (a, b, precision = DateTime.Unit.MILLISECOND) ->
     when isUncertainty b then Uncertainty.from(a).lessThan b
     else null
 
-module.exports.lessThanOrEquals = (a, b, precision = DateTime.Unit.MILLISECOND) ->
+module.exports.lessThanOrEquals = (a, b, precision) ->
   switch
     when areNumbers a, b then a <= b
     when areDateTimesOrQuantities a, b then a.sameOrBefore(b, precision)
@@ -26,7 +26,7 @@ module.exports.lessThanOrEquals = (a, b, precision = DateTime.Unit.MILLISECOND) 
     when isUncertainty b then Uncertainty.from(a).lessThanOrEquals b
     else null
 
-module.exports.greaterThan = (a, b, precision = DateTime.Unit.MILLISECOND) ->
+module.exports.greaterThan = (a, b, precision) ->
   switch
     when areNumbers a, b then a > b
     when areDateTimesOrQuantities a, b then a.after(b, precision)
@@ -34,7 +34,7 @@ module.exports.greaterThan = (a, b, precision = DateTime.Unit.MILLISECOND) ->
     when isUncertainty b then Uncertainty.from(a).greaterThan b
     else null
 
-module.exports.greaterThanOrEquals = (a, b, precision = DateTime.Unit.MILLISECOND) ->
+module.exports.greaterThanOrEquals = (a, b, precision) ->
   switch
     when areNumbers a, b then a >= b
     when areDateTimesOrQuantities a, b then a.sameOrAfter(b, precision)
@@ -48,6 +48,9 @@ module.exports.equivalent = equivalent = (a, b) ->
 
   return codesAreEquivalent(a, b) if isCode(a)
 
+  # Use ratio equivalent function if a is ratio
+  return a.equivalent(b) if a?.isRatio
+
   [aClass, bClass] = getClassOfObjects(a, b)
 
   switch aClass
@@ -55,6 +58,11 @@ module.exports.equivalent = equivalent = (a, b) ->
       return compareEveryItemInArrays(a, b, equivalent)
     when '[object Object]'
       return compareObjects(a, b, equivalent)
+    when '[object String]'
+      # Make sure b is also a string
+      if bClass == '[object String]'
+        # String equivalence is case- and locale insensitive
+        return (a.localeCompare(b, 'en', {sensitivity: 'base'})) == 0
 
   return equals a, b
 
@@ -78,14 +86,20 @@ classesEqual = (object1, object2) ->
   return object2 instanceof object1.constructor and object1 instanceof object2.constructor
 
 deepCompareKeysAndValues = (a, b, comparisonFunction) ->
-  aKeys = getKeysFromObject(a)
-  bKeys = getKeysFromObject(b)
+  aKeys = getKeysFromObject(a).sort()
+  bKeys = getKeysFromObject(b).sort()
   # Array.every() will only return true or false, so set a flag for if we should return null
   shouldReturnNull = false
-  finalComparisonResult = aKeys.length is bKeys.length and aKeys.every (key) ->
-    comparisonResult = comparisonFunction(a[key], b[key])
-    shouldReturnNull = true if comparisonResult == null
-    return comparisonResult
+  # Check if both arrays of keys are the same length and key names match
+  if aKeys.length is bKeys.length and aKeys.every((value, index) => value == bKeys[index])
+    finalComparisonResult = aKeys.every (key) ->
+      # if both are null we should return true to satisfy ignoring empty values in tuples
+      return true if not a[key]? and not b[key]?
+      comparisonResult = comparisonFunction(a[key], b[key])
+      shouldReturnNull = true if comparisonResult == null
+      return comparisonResult
+  else
+    finalComparisonResult = false
 
   return null if shouldReturnNull
   return finalComparisonResult
@@ -103,6 +117,9 @@ module.exports.equals = equals = (a, b) ->
 
   # If one is a Quantity, use the Quantity equals function
   return a.equals b if a?.isQuantity
+
+  # If one is a Ratio, use the ratio equals function
+  return a.equals b if a?.isRatio
 
   # If one is an Uncertainty, convert the other to an Uncertainty
   if a instanceof Uncertainty then b = Uncertainty.from(b)

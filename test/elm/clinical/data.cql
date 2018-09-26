@@ -11,7 +11,12 @@ define Foo: "Acute Pharyngitis"
 // @Test: InValueSet
 valueset "Female": '2.16.840.1.113883.3.560.100.2'
 valueset "Versioned Female": '2.16.840.1.113883.3.560.100.2' version '20121025'
+valueset "SharedCodes": '2.16.840.1.113883.3.000.000.0'
+valueset "ImproperSharedCodes": '2.16.840.1.113883.3.000.000.1'
 define String: 'F' in "Female"
+define SharedCodesFoo: 'foo' in "SharedCodes"
+define SharedCodesNoMatch: 'baz' in "SharedCodes"
+define ImproperSharedCodesCodeValue: 'codeValue' in "ImproperSharedCodes"
 define StringInVersionedValueSet: 'F' in "Versioned Female"
 define ShortCode: Code { code: 'F' } in "Female"
 define MediumCode: Code { code: 'F', system: '2.16.840.1.113883.18.2' } in "Female"
@@ -22,6 +27,12 @@ define WrongShortCode: Code { code: 'M' } in "Female"
 define WrongMediumCode: Code { code: 'F', system: '3.16.840.1.113883.18.2' } in "Female"
 define LongCodeDifferentVersion: Code { code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.6' } in "Female"
 define NullCode: Code { code: null, system: '2.16.840.1.113883.18.2', version: 'HL7V2.6' } in "Female"
+define InListOfCodes: { Code { code: 'M' } , Code { code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5' } } in "Female"
+define ListOfCodes: { Code { code: 'M' } , Code { code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5' } }
+define WrongListOfCodes: { Code { code: 'M' }, Code { code: 'F', system: '3.16.840.1.113883.18.2' } }
+define InListOfCodesExpressionRef: ListOfCodes in "Female"
+define InWrongListOfCodes: WrongListOfCodes in "Female"
+define ListOfCodesWithNull: { Code { code: 'M' }, (null as Code), Code { code: 'F', system: '2.16.840.1.113883.18.2' } } in "Female"
 
 // @Test: Patient Property In ValueSet
 valueset "Female": '2.16.840.1.113883.3.560.100.2'

@@ -42,6 +42,12 @@ define Foo2: FooDP
 
 // @Test: DateTimeParameterTypes
 parameter FooP DateTime
+parameter FooDP default @2012-04-01T12:11:10
+define Foo: FooP
+define Foo2: FooDP
+
+// @Test: DateParameterTypes
+parameter FooP Date
 parameter FooDP default @2012-04-01
 define Foo: FooP
 define Foo2: FooDP

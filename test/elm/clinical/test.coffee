@@ -46,6 +46,15 @@ describe 'InValueSet', ->
   it 'should find string code in value set', ->
     @string.exec(@ctx).should.be.true()
 
+  it 'should throw an error when codes are in several codesystems', ->
+    should(() => @sharedCodesFoo.exec(@ctx)).throw('In (valueset) is ambiguous -- multiple codes with multiple code systems exist in value set.')
+
+  it 'should return false when there are multiple codesystems in a valueset but the string does not match any codes in valueset', ->
+    @sharedCodesNoMatch.exec(@ctx).should.be.false()
+
+  it 'should throw an error if not all codes have the same codesystem', ->
+    should(() => @improperSharedCodesCodeValue.exec(@ctx)).throw('In (valueset) is ambiguous -- multiple codes with multiple code systems exist in value set.')
+
   it 'should find string code in versioned value set', ->
     @stringInVersionedValueSet.exec(@ctx).should.be.true()
 
@@ -75,6 +84,18 @@ describe 'InValueSet', ->
 
   it 'should not find code if it is null', ->
     @nullCode.exec(@ctx).should.be.false()
+
+  it 'should return true if code in list is equivalent', ->
+    @inListOfCodes.exec(@ctx).should.be.true()
+
+  it 'should return true if code in list is equivalent using ExpressionRef', ->
+    @inListOfCodesExpressionRef.exec(@ctx).should.be.true()
+
+  it 'should return false if no code in list is equivalent', ->
+    @inWrongListOfCodes.exec(@ctx).should.be.false()
+
+  it 'should ignore null codes in list', ->
+    @listOfCodesWithNull.exec(@ctx).should.be.true()
 
 describe 'Patient Property In ValueSet', ->
   @beforeEach ->
@@ -161,7 +182,7 @@ describe 'CalculateAge', ->
     # p1 birth date is 1980-06-17
     @bday = new Date(1980, 5, 17)
     @bdayPlus20 = new Date(2000, 5, 18)
-    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(@bdayPlus20))
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromJSDate(@bdayPlus20))
 
     @today = @ctx.getExecutionDateTime()
     # according to spec, dates without timezones are in *current* time offset, so need to adjust

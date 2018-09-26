@@ -1,5 +1,4 @@
 { Expression } = require './expression'
-{ IncompatibleTypesException } = require './quantity'
 { ThreeValuedLogic } = require '../datatypes/logic'
 { DateTime } = require '../datatypes/datetime'
 { Exception } = require '../datatypes/exception'
@@ -95,7 +94,7 @@ module.exports.In = class In extends Expression
 
   exec: (ctx) ->
     [item, container] = @execArgs ctx
-    if not container? then return null
+    if not container? or not item? then return null
     lib = switch
       when typeIsArray(container) then LIST
       else IVL
@@ -108,7 +107,7 @@ module.exports.Contains = class Contains extends Expression
 
   exec: (ctx) ->
     [container, item] = @execArgs ctx
-    if not container? then return null
+    if not container? or not item? then return null
     lib = switch
       when typeIsArray(container) then LIST
       else IVL

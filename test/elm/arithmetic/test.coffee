@@ -439,7 +439,7 @@ describe 'Quantity', ->
 
   it "should be able to perform Quantity Division", ->
     validateQuantity @div_q_d.exec(@ctx), 5, 'days'
-    validateQuantity @div_q_q.exec(@ctx), 1 , null
+    validateQuantity @div_q_q.exec(@ctx), 1 , '1'
 
   it "should be able to perform Quantity Multiplication", ->
     # decilmal to quantity multiplication results in decimal value only
@@ -480,11 +480,16 @@ describe 'Quantity', ->
 
   it "should be able to perform ucum division", ->
     tests = [
+      ["10 'cm2'", "5 'cm'", "2 'cm'"],
       ["10 'm2'", "5 'm'", "2 'm'"],
-      ["25 'km'", "5 'm'", "5000"],
-      ["100 'm'", "2 'h'", "0.01388889 'm/s' "],
-      ["100 'mg'", "2 '[lb_av]'", "50 'mg/[lb_av]' "]
+      ["25 'km'", "5 'm'", "5000 '1'"],
+      ["25 'mg'", "5 'mg'", "5 '1'"],
+      ["25 'mg'", "5 '1'", "5 'mg'"],
+      ["100 'm'", "2 'h'", "0.01388889 'm/s'"],
+      ["100 'mg'", "2 '[lb_av]'", "50 'mg/[lb_av]'"]
     ]
+    # Note that these tests check for equality but not that the result
+    # has any particular unit.  12 cm^2 / 4 cm = 0.03 m rather than 3 cm.
     doQuantityMathTests(tests, "/")
   it "should be able to perform ucum addition", ->
     tests = [

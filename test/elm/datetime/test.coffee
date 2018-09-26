@@ -168,7 +168,7 @@ describe 'Today', ->
     should.not.exist(today[field]) for field in [ 'hour', 'minute', 'second', 'millisecond' ]
 
   it 'should return only day components and timezone of today using the passed in timezone', ->
-    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromJSDate(new Date(), '0'))
     today = @todayVar.exec @ctx
     today.isTime().should.be.false()
     today.year.should.equal @ctx.getExecutionDateTime().year
@@ -179,7 +179,7 @@ describe 'Today', ->
 
   it 'should throw an exception because no execution datetime has been set', ->
     try
-      @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
+      @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromJSDate(new Date(), '0'))
       @ctx.executionDateTime = @ctx.executionDateTime = null
       @todayVar.exec(@ctx).should.equal "No Execution DateTime has been set"
     catch
@@ -202,7 +202,7 @@ describe 'Now', ->
     now.timezoneOffset.should.equal @ctx.getTimezoneOffset()
 
   it 'should return all date components representing now using a passed in timezone', ->
-    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromJSDate(new Date(), '0'))
     now = @nowVar.exec @ctx
     now.isTime().should.be.false()
     now.year.should.equal @ctx.getExecutionDateTime().year
@@ -215,7 +215,7 @@ describe 'Now', ->
     now.timezoneOffset.should.equal "0"
 
   it 'should return all date components representing now using a passed in timezone using a child context', ->
-    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromJSDate(new Date(), '0'))
     @child_ctx = @ctx.childContext()
     now = @nowVar.exec @child_ctx
     now.isTime().should.be.false()
@@ -475,6 +475,22 @@ describe 'SameOrAfter', ->
     should(@nullRight.exec(@ctx)).be.null()
     should(@nullBoth.exec(@ctx)).be.null()
 
+  it 'should properly treat "on or after" the same as "same or after"', ->
+    @sameOOA.exec(@ctx).should.be.true()
+    @afterOOA.exec(@ctx).should.be.true()
+    @beforeOOA.exec(@ctx).should.be.false()
+    should(@nullLeftOOA.exec(@ctx)).be.null()
+    should(@nullRightOOA.exec(@ctx)).be.null()
+    should(@nullBothOOA.exec(@ctx)).be.null()
+
+  it 'should properly treat "after or on" the same as "same or after"', ->
+    @sameAOO.exec(@ctx).should.be.true()
+    @afterAOO.exec(@ctx).should.be.true()
+    @beforeAOO.exec(@ctx).should.be.false()
+    should(@nullLeftAOO.exec(@ctx)).be.null()
+    should(@nullRightAOO.exec(@ctx)).be.null()
+    should(@nullBothAOO.exec(@ctx)).be.null()
+
 describe 'SameOrBefore', ->
   @beforeEach ->
     setup @, data
@@ -538,6 +554,22 @@ describe 'SameOrBefore', ->
     should(@nullLeft.exec(@ctx)).be.null()
     should(@nullRight.exec(@ctx)).be.null()
     should(@nullBoth.exec(@ctx)).be.null()
+
+  it 'should properly treat "on or before" the same as "same or before"', ->
+    @sameOOB.exec(@ctx).should.be.true()
+    @afterOOB.exec(@ctx).should.be.false()
+    @beforeOOB.exec(@ctx).should.be.true()
+    should(@nullLeftOOB.exec(@ctx)).be.null()
+    should(@nullRightOOB.exec(@ctx)).be.null()
+    should(@nullBothOOB.exec(@ctx)).be.null()
+
+  it 'should properly treat "before or on" the same as "same or before"', ->
+    @sameBOO.exec(@ctx).should.be.true()
+    @afterBOO.exec(@ctx).should.be.false()
+    @beforeBOO.exec(@ctx).should.be.true()
+    should(@nullLeftBOO.exec(@ctx)).be.null()
+    should(@nullRightBOO.exec(@ctx)).be.null()
+    should(@nullBothBOO.exec(@ctx)).be.null()
 
 describe 'After', ->
   @beforeEach ->

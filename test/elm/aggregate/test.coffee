@@ -205,6 +205,55 @@ describe 'PopulationStdDev', ->
       false.should.be.true("Incompatible Quantities should throw an error")
     catch
 
+describe 'Product', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'should return a decimal product', ->
+    @decimal_product.exec(@ctx).should.equal 24.0
+
+  it 'should return a integer product', ->
+    @integer_product.exec(@ctx).should.equal 100
+
+  it 'should return 0', ->
+    @zero_product.exec(@ctx).should.equal 0
+
+  it 'should return product of non-null items', ->
+    @product_with_null.exec(@ctx).should.equal 20
+
+  it 'should return a quantity product', ->
+    validateQuantity @quantity_product.exec(@ctx), 24, 'g'
+
+  it 'should return a 0 quantity product', ->
+    validateQuantity @quantity_zero_product.exec(@ctx), 0, 'g'
+
+  it 'should return null when null list is passed in', ->
+    should(@product_null.exec(@ctx)).be.null()
+
+  it 'should return null when passed in list of null quantities', ->
+    should(@product_quantity_null.exec(@ctx)).be.null()
+
+  it 'should return null when list is all null', ->
+    should(@product_of_nulls.exec(@ctx)).be.null()
+
+describe 'GeometricMean', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'should return decimal geometric mean', ->
+    @decimal_geometric_mean.exec(@ctx).should.equal 4.0
+
+  it 'should retun 0 as a geometric mean', ->
+    @zero_geometric_mean.exec(@ctx).should.equal 0
+
+  it 'should return value when pass in list that contains nulls', ->
+    @null_geometric_mean.exec(@ctx).should.equal 1.4142135623730951
+
+  it 'should return null when list is all null', ->
+    should(@all_nulls.exec(@ctx)).be.null()
+
+  it 'should return null when pass in list as null', ->
+    should(@also_null_geometric_mean.exec(@ctx)).be.null()
 
 describe 'AllTrue', ->
   @beforeEach ->
