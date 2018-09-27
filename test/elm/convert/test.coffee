@@ -147,12 +147,15 @@ describe 'FromDateTime', ->
 
   it "should convert @2015-01-02T12:01:02.321-06:00 to Date", ->
     date = @dateTimeToDate.exec(@ctx)
+    date.isDate.should.be.true
     date.year.should.equal 2015
     date.month.should.equal 1
     date.day.should.equal 2
+    should.not.exist(date[field]) for field in [ 'hour', 'minute', 'second', 'millisecond', 'timezoneOffset' ]
 
   it "should convert @2015-01-02T12:01:02.321-06:00 to DateTime", ->
     dateTime = @dateTimeToDateTime.exec(@ctx)
+    dateTime.isDateTime.should.be.true
     dateTime.year.should.equal 2015
     dateTime.month.should.equal 1
     dateTime.day.should.equal 2
@@ -171,6 +174,7 @@ describe 'FromDate', ->
     dateTime.year.should.equal 2015
     dateTime.month.should.equal 1
     dateTime.day.should.equal 1
+    dateTime.timezoneOffset.should.equal @ctx.getTimezoneOffset()
     dateTime.isDateTime.should.equal.true
 
   it "should convert @2015-01-01 to Date", ->
