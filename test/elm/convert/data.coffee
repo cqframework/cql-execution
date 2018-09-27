@@ -1713,9 +1713,11 @@ module.exports['FromDateTime'] = {
 library TestSnippet version '1'
 using QUICK
 context Patient
-define dateDateTime: convert @2015-01-01 to DateTime
-define dateDate: convert @2015-01-01 to Date
-define dateStr: convert @2015-01-01 to String
+define dateYMDToDateTime: convert @2015-01-01 to DateTime
+define dateYMToDateTime: convert @2015-01 to DateTime
+define dateYToDateTime: convert @2015 to DateTime
+define dateToDate: convert @2015-01-01 to Date
+define dateToStr: convert @2015-01-01 to String
 ###
 
 module.exports['FromDate'] = {
@@ -1752,7 +1754,7 @@ module.exports['FromDate'] = {
             }
          }, {
             "localId" : "5",
-            "name" : "dateDateTime",
+            "name" : "dateYMDToDateTime",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -1760,7 +1762,7 @@ module.exports['FromDate'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","dateDateTime",": " ]
+                     "value" : [ "define ","dateYMDToDateTime",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -1798,22 +1800,101 @@ module.exports['FromDate'] = {
                }
             }
          }, {
-            "localId" : "8",
-            "name" : "dateDate",
+            "localId" : "9",
+            "name" : "dateYMToDateTime",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "8",
+                  "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","dateDate",": " ]
+                     "value" : [ "define ","dateYMToDateTime",": " ]
                   }, {
-                     "r" : "7",
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "convert ","@2015-01"," to " ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "value" : [ "DateTime" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "type" : "ToDateTime",
+               "operand" : {
+                  "localId" : "7",
+                  "type" : "Date",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2015",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         }, {
+            "localId" : "13",
+            "name" : "dateYToDateTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "define ","dateYToDateTime",": " ]
+                  }, {
+                     "r" : "12",
+                     "s" : [ {
+                        "value" : [ "convert ","@2015"," to " ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "value" : [ "DateTime" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "12",
+               "type" : "ToDateTime",
+               "operand" : {
+                  "localId" : "11",
+                  "type" : "Date",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2015",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         }, {
+            "localId" : "16",
+            "name" : "dateToDate",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "16",
+                  "s" : [ {
+                     "value" : [ "define ","dateToDate",": " ]
+                  }, {
+                     "r" : "15",
                      "s" : [ {
                         "value" : [ "convert ","@2015-01-01"," to " ]
                      }, {
-                        "r" : "6",
+                        "r" : "14",
                         "s" : [ {
                            "value" : [ "Date" ]
                         } ]
@@ -1822,7 +1903,7 @@ module.exports['FromDate'] = {
                }
             } ],
             "expression" : {
-               "localId" : "7",
+               "localId" : "15",
                "type" : "Date",
                "year" : {
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1841,22 +1922,22 @@ module.exports['FromDate'] = {
                }
             }
          }, {
-            "localId" : "12",
-            "name" : "dateStr",
+            "localId" : "20",
+            "name" : "dateToStr",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "12",
+                  "r" : "20",
                   "s" : [ {
-                     "value" : [ "define ","dateStr",": " ]
+                     "value" : [ "define ","dateToStr",": " ]
                   }, {
-                     "r" : "11",
+                     "r" : "19",
                      "s" : [ {
                         "value" : [ "convert ","@2015-01-01"," to " ]
                      }, {
-                        "r" : "9",
+                        "r" : "17",
                         "s" : [ {
                            "value" : [ "String" ]
                         } ]
@@ -1865,10 +1946,10 @@ module.exports['FromDate'] = {
                }
             } ],
             "expression" : {
-               "localId" : "11",
+               "localId" : "19",
                "type" : "ToString",
                "operand" : {
-                  "localId" : "10",
+                  "localId" : "18",
                   "type" : "Date",
                   "year" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",

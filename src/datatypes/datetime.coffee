@@ -504,7 +504,12 @@ class Date
     # from the spec: the result will be a DateTime with the time components set to zero, 
     # except for the timezone offset, which will be set to the timezone offset of the evaluation
     # request timestamp. (this last part is acheived by just not passing in timezone offset)
-    new DateTime(@year, @month, @day, 0, 0, 0, 0)
+    if @year? and @month? and @day?
+      new DateTime(@year, @month, @day, 0, 0, 0, 0)
+    # from spec: no component may be specified at a precision below an unspecified precision.
+    # For example, hour may be null, but if it is, minute, second, and millisecond must all be null as well.
+    else
+      new DateTime(@year, @month, @day)
 
   reducedPrecision: (unitField = Date.Unit.DAY) ->
     reduced = @copy()

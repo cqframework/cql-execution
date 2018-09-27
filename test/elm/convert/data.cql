@@ -45,9 +45,11 @@ define dateTimeToDateTime: convert @2015-01-02T12:01:02.321-06:00 to DateTime
 
 
 // @Test: FromDate
-define dateDateTime: convert @2015-01-01 to DateTime
-define dateDate: convert @2015-01-01 to Date
-define dateStr: convert @2015-01-01 to String
+define dateYMDToDateTime: convert @2015-01-01 to DateTime
+define dateYMToDateTime: convert @2015-01 to DateTime
+define dateYToDateTime: convert @2015 to DateTime
+define dateToDate: convert @2015-01-01 to Date
+define dateToStr: convert @2015-01-01 to String
 
 // @Test: FromTime
 define timeStr: convert @T11:57 to String

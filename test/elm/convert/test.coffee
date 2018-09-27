@@ -169,8 +169,8 @@ describe 'FromDate', ->
   @beforeEach ->
     setup @, data
 
-  it "should convert @2015-01-01 to DateTime", ->
-    dateTime = @dateDateTime.exec(@ctx)
+  it "should convert @2015-01-01 to DateTime with 0 for time components", ->
+    dateTime = @dateYMDToDateTime.exec(@ctx)
     dateTime.year.should.equal 2015
     dateTime.month.should.equal 1
     dateTime.day.should.equal 1
@@ -181,8 +181,26 @@ describe 'FromDate', ->
     dateTime.timezoneOffset.should.equal @ctx.getTimezoneOffset()
     dateTime.isDateTime.should.equal.true
 
+  it "should convert @2015-01 to DateTime with null for day and time components", ->
+    dateTime = @dateYMToDateTime.exec(@ctx)
+    dateTime.year.should.equal 2015
+    dateTime.month.should.equal 1
+    should.not.exist dateTime.day
+    should.not.exist(dateTime[field]) for field in [ 'hour', 'minute', 'second', 'millisecond' ]
+    dateTime.timezoneOffset.should.equal @ctx.getTimezoneOffset()
+    dateTime.isDateTime.should.equal.true
+
+    it "should convert @2015-01 to DateTime with null for day, month, and time components", ->
+    dateTime = @dateYToDateTime.exec(@ctx)
+    dateTime.year.should.equal 2015
+    should.not.exist dateTime.month
+    should.not.exist dateTime.day
+    should.not.exist(dateTime[field]) for field in [ 'hour', 'minute', 'second', 'millisecond' ]
+    dateTime.timezoneOffset.should.equal @ctx.getTimezoneOffset()
+    dateTime.isDateTime.should.equal.true
+
   it "should convert @2015-01-01 to Date", ->
-    date = @dateDate.exec(@ctx)
+    date = @dateToDate.exec(@ctx)
     date.year.should.equal 2015
     date.month.should.equal 1
     date.day.should.equal 1
@@ -190,7 +208,7 @@ describe 'FromDate', ->
     date.isDate.should.equal.true
 
   it "should convert @2015-01-01 to '2015-01-01'", ->
-    @dateStr.exec(@ctx).should.equal "2015-01-01"
+    @dateToStr.exec(@ctx).should.equal "2015-01-01"
 
 describe 'FromTime', ->
   @beforeEach ->
