@@ -1942,7 +1942,7 @@ describe 'DateTime.getDate', ->
     should.not.exist d.minute
     should.not.exist d.second
     should.not.exist d.millisecond
-    d.timezoneOffset.should.equal 0
+    should.not.exist d.timezoneOffset
 
   it 'should properly extract the date from datetime without time', ->
     d = DateTime.parse('2012-10-25').getDate()

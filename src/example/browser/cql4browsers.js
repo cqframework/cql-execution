@@ -968,7 +968,7 @@
     };
 
     DateTime.prototype.getDate = function() {
-      return this.reducedPrecision(DateTime.Unit.DAY);
+      return new Date(this.year, this.month, this.day);
     };
 
     DateTime.prototype.getTime = function() {
@@ -1235,7 +1235,11 @@
     };
 
     Date.prototype.getDateTime = function() {
-      return new DateTime(this.year, this.month, this.day);
+      if ((this.year != null) && (this.month != null) && (this.day != null)) {
+        return new DateTime(this.year, this.month, this.day, 0, 0, 0, 0);
+      } else {
+        return new DateTime(this.year, this.month, this.day);
+      }
     };
 
     Date.prototype.reducedPrecision = function(unitField) {
@@ -7887,10 +7891,12 @@
     ToDate.prototype.exec = function(ctx) {
       var arg;
       arg = this.execArgs(ctx);
-      if ((arg != null) && typeof arg !== 'undefined') {
-        return Date.parse(arg.toString());
-      } else {
+      if (arg == null) {
         return null;
+      } else if (arg.isDateTime) {
+        return arg.getDate();
+      } else {
+        return Date.parse(arg.toString());
       }
     };
 
@@ -7908,7 +7914,7 @@
     ToDateTime.prototype.exec = function(ctx) {
       var arg;
       arg = this.execArgs(ctx);
-      if ((arg == null) || (arg === void 0)) {
+      if (arg == null) {
         return null;
       } else if (arg.isDate) {
         return arg.getDateTime();
