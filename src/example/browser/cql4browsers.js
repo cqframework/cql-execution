@@ -1235,7 +1235,11 @@
     };
 
     Date.prototype.getDateTime = function() {
-      return new DateTime(this.year, this.month, this.day, 0, 0, 0, 0);
+      if ((this.year != null) && (this.month != null) && (this.day != null)) {
+        return new DateTime(this.year, this.month, this.day, 0, 0, 0, 0);
+      } else {
+        return new DateTime(this.year, this.month, this.day);
+      }
     };
 
     Date.prototype.reducedPrecision = function(unitField) {
