@@ -968,7 +968,7 @@
     };
 
     DateTime.prototype.getDate = function() {
-      return this.reducedPrecision(DateTime.Unit.DAY);
+      return new Date(this.year, this.month, this.day);
     };
 
     DateTime.prototype.getTime = function() {
@@ -7887,10 +7887,12 @@
     ToDate.prototype.exec = function(ctx) {
       var arg;
       arg = this.execArgs(ctx);
-      if ((arg != null) && typeof arg !== 'undefined') {
-        return Date.parse(arg.toString());
-      } else {
+      if ((arg == null) || (arg === void 0)) {
         return null;
+      } else if (arg.isDateTime) {
+        return arg.getDate();
+      } else {
+        return Date.parse(arg.toString());
       }
     };
 
