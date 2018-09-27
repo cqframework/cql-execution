@@ -501,7 +501,10 @@ class Date
     str
 
   getDateTime: () ->
-    new DateTime(@year, @month, @day)
+    # from the spec: the result will be a DateTime with the time components set to zero, 
+    # except for the timezone offset, which will be set to the timezone offset of the evaluation
+    # request timestamp. (this last part is acheived by just not passing in timezone offset)
+    new DateTime(@year, @month, @day, 0, 0, 0, 0)
 
   reducedPrecision: (unitField = Date.Unit.DAY) ->
     reduced = @copy()

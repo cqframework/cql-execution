@@ -1235,7 +1235,7 @@
     };
 
     Date.prototype.getDateTime = function() {
-      return new DateTime(this.year, this.month, this.day);
+      return new DateTime(this.year, this.month, this.day, 0, 0, 0, 0);
     };
 
     Date.prototype.reducedPrecision = function(unitField) {
@@ -7887,7 +7887,7 @@
     ToDate.prototype.exec = function(ctx) {
       var arg;
       arg = this.execArgs(ctx);
-      if ((arg == null) || (arg === void 0)) {
+      if (arg == null) {
         return null;
       } else if (arg.isDateTime) {
         return arg.getDate();
@@ -7910,7 +7910,7 @@
     ToDateTime.prototype.exec = function(ctx) {
       var arg;
       arg = this.execArgs(ctx);
-      if ((arg == null) || (arg === void 0)) {
+      if (arg == null) {
         return null;
       } else if (arg.isDate) {
         return arg.getDateTime();

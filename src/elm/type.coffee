@@ -50,7 +50,7 @@ module.exports.ToDate = class ToDate extends Expression
 
   exec: (ctx) ->
     arg = @execArgs(ctx)
-    if (not arg?) or (arg == undefined)
+    if (not arg?)
       return null
     else if arg.isDateTime
       return arg.getDate()
@@ -63,7 +63,7 @@ module.exports.ToDateTime = class ToDateTime extends Expression
 
   exec: (ctx) ->
     arg = @execArgs(ctx)
-    if (not arg?) or (arg == undefined)
+    if (not arg?)
       return null
     else if arg.isDate
       return arg.getDateTime()

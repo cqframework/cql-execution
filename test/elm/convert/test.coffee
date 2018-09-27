@@ -174,6 +174,10 @@ describe 'FromDate', ->
     dateTime.year.should.equal 2015
     dateTime.month.should.equal 1
     dateTime.day.should.equal 1
+    dateTime.hour.should.equal 0
+    dateTime.minute.should.equal 0
+    dateTime.second.should.equal 0
+    dateTime.millisecond.should.equal 0
     dateTime.timezoneOffset.should.equal @ctx.getTimezoneOffset()
     dateTime.isDateTime.should.equal.true
 
@@ -182,6 +186,7 @@ describe 'FromDate', ->
     date.year.should.equal 2015
     date.month.should.equal 1
     date.day.should.equal 1
+    should.not.exist(date[field]) for field in [ 'hour', 'minute', 'second', 'millisecond', 'timezoneOffset' ]
     date.isDate.should.equal.true
 
   it "should convert @2015-01-01 to '2015-01-01'", ->
