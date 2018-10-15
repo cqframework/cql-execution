@@ -271,6 +271,7 @@ class DateTime
     else
       new jsDate(y, mo, d, h, mi, s, ms)
 
+
   toJSON: () ->
     @toString()
 
@@ -278,6 +279,22 @@ class DateTime
     String("0" + num).slice(-2)
 
   toString: () ->
+    if @isTime() then @toStringTime() else @toStringDateTime() 
+
+  toStringTime: () ->
+    str = 'T'
+    if @hour?
+      str += + @_pad(@hour)
+      if @minute?
+        str += ':' + @_pad(@minute)
+        if @second?
+          str += ':' + @_pad(@second)
+          if @millisecond?
+            str += '.' + String("00" + @millisecond).slice(-3)
+
+    str
+
+  toStringDateTime: () ->
     str = ''
     if @year?
       str += @year
@@ -302,6 +319,9 @@ class DateTime
       str += ':' + @_pad(offsetMin)
 
     str
+
+  getDateTime: () ->
+    @
 
   getDate: () ->
     new Date(@year, @month, @day)
@@ -478,7 +498,10 @@ class Date
 
   toJSDate: () ->
     [y, mo, d] = [ @year, (if @month? then @month-1 else 0), @day ? 1 ]
-    new jsDate(y, mo, d)
+    d = new jsDate(y, mo, d)
+    d = new jsDate(d.setFullYear(y)) if (y >= 0 and y <= 99)
+    return d
+
 
   @fromJSDate: (date) ->
     if (date instanceof Date) then return date
@@ -526,15 +549,26 @@ DateTime.prototype.isPrecise = Date.prototype.isPrecise = () ->
 DateTime.prototype.isImprecise = Date.prototype.isImprecise = () ->
     not @isPrecise()
 
+# This function can take another Date-ish object, or a precision string (e.g. 'month')
 DateTime.prototype.isMorePrecise = Date.prototype.isMorePrecise = (other) ->
-    for field in @constructor.FIELDS
-      if (other[field]? and not @[field]?) then return false
+    if typeof other is 'string' and other in @constructor.FIELDS
+      return @[other]?
+
+    else
+      for field in @constructor.FIELDS
+        if (other[field]? and not @[field]?) then return false
+    
     not @isSamePrecision(other)
 
+# This function can take another Date-ish object, or a precision string (e.g. 'month')
 DateTime.prototype.isLessPrecise = Date.prototype.isLessPrecise = (other) ->
     not @isSamePrecision(other) and not @isMorePrecise(other)
 
+# This function can take another Date-ish object, or a precision string (e.g. 'month')
 DateTime.prototype.isSamePrecision = Date.prototype.isSamePrecision = (other) ->
+    if typeof other is 'string' and other in @constructor.FIELDS
+      return other == @getPrecision()
+    
     for field in @constructor.FIELDS
       if (@[field]? and not other[field]?) then return false
       if (not @[field]? and other[field]?) then return false

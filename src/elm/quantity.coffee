@@ -271,3 +271,12 @@ module.exports.doMultiplication = (a,b) ->
 
 coalesceToOne = (o) ->
   if !o? or (o.trim? and !o.trim()) then '1' else o
+
+module.exports.compare_units = (unit_a, unit_b) ->
+  try
+    c = ucum.convert(1,ucum_unit(unit_a),ucum_unit(unit_b))
+    return 1 if c > 1 # unit_a is bigger (less precise)
+    return -1 if c < 1 # unit_a is smaller
+    return 0  #units are the same
+  catch e
+    return null

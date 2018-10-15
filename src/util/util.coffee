@@ -48,3 +48,8 @@ module.exports.getTimezoneSeparatorFromString = getTimezoneSeparatorFromString =
     timezoneSeparator = '+'
   else
     timezoneSeparator = ''
+
+# modify the original array by adding all the elements from the second argument
+module.exports.pushOntoArray = (array, elementsToPush) ->
+  for e in elementsToPush
+    array.push(e)
