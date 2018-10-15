@@ -911,3 +911,222 @@ define CollapseQuantityIntervalListWithNullLowNoOverlapExpected: { Interval[null
 define QuantityIntervalListWithNullHighNoOverlap: { Interval[ToQuantity(4), null], Interval[ToQuantity(1), ToQuantity(2)] }
 define CollapseQuantityIntervalListWithNullHighNoOverlap: collapse QuantityIntervalListWithNullHighNoOverlap
 define CollapseQuantityIntervalListWithNullHighNoOverlapExpected: { Interval[ToQuantity(1), ToQuantity(2)], Interval[ToQuantity(4), null]}
+
+// @Test: DateIntervalExpand 
+define ClosedSinglePerDay: expand { Interval[@2018-01-01, @2018-01-03] } per day
+define ClosedSinglePerWeek: expand { Interval[@2018-01-01, @2018-01-21] } per week
+define ClosedSinglePerMonth: expand { Interval[@2018-01-01, @2018-03-31] } per month
+define ClosedSinglePerMonthTrunc: expand { Interval[@2018-01-01, @2018-04-29] } per month
+define ClosedSinglePerYear: expand { Interval[@2016-01-01, @2018-12-31] } per year
+define ClosedSinglePerYearTrunc: expand { Interval[@2016-01-01, @2019-12-30] } per year
+
+define MidBoundariesPerDay: expand { Interval[@2017-12-30, @2018-01-01] } per day
+define MidBoundariesPerMonth: expand { Interval[@2017-11-14, @2018-01-18] } per month
+define MidBoundariesPerYear: expand { Interval[@2016-04-06, @2018-04-06] } per year
+
+define NullInList: expand { Interval[@2018-01-01, @2018-01-03], null } per day
+define Overlapping: expand { Interval[@2018-01-01, @2018-01-03], Interval[@2018-01-02, @2018-01-04] } per day
+define NonOverlapping: expand { Interval[@2018-01-01, @2018-01-03], Interval[@2018-01-08, @2018-01-08] } per day
+
+define NoPerDefaultDay: expand { Interval[@2018-01-01, @2018-01-03] }
+define NoPerDefaultMonth: expand { Interval[@2018-01, @2018-03] }
+define NoPerDefaultYear: expand { Interval[@2016, @2018] }
+
+define OpenStart: expand { Interval(@2018-01-01, @2018-01-03] } per day
+define OpenEnd: expand { Interval[@2018-01-01, @2018-01-03) } per day
+define OpenBoth: expand { Interval(@2018-01-01, @2018-01-03) } per day
+
+define EmptyList: List<Interval<Date>>{}
+define NullOpen: expand { Interval[null, @2018-01-03] } per day
+define NullClose: expand { Interval[@2018-01-01, null] } per day
+define NullBoth: expand { Interval[null, null] } per day
+define MismatchPrecision: expand { Interval[@2018-01-01, @2018-02] } per day
+define MonthDayPer: expand { Interval[@2018-01, @2018-03] } per day
+define YearMonthPer: expand { Interval[@2016, @2018] } per month
+define YearDayPer: expand { Interval[@2016, @2018] } per day
+define BadPerMinute: expand { Interval[@2018-01-01, @2018-01-04] } per minute
+define BadPerGram: expand { Interval[@2018-01-01, @2018-01-04] } per 1 'g'
+
+
+// @Test: DateTimeIntervalExpand 
+define MsPrecPerYear: expand { Interval[@2016-01-01T00:00:00.000+00:00, @2018-01-01T00:00:00.000+00:00] } per year
+define MsPrecPerMonth: expand { Interval[@2018-01-01T00:00:00.000+00:00, @2018-03-01T00:00:00.000+00:00] } per month
+define MsPrecPerWeek: expand { Interval[@2018-01-01T00:00:00.000+00:00, @2018-01-21T00:00:00.000+00:00] } per week
+define MsPrecPerDay: expand { Interval[@2018-01-01T00:00:00.000+00:00, @2018-01-03T00:00:00.000+00:00] } per day
+define MsPrecPerHour: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T03:00:00.000+00:00] } per hour
+define MsPrecPerMinute: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:02:00.000+00:00] } per minute
+define MsPrecPerSecond: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:00:02.000+00:00] } per second
+define MsPrecPerMillisecond: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:00:00.001+00:00] } per millisecond
+
+define SecPrecPerYear: expand { Interval[@2016-01-01T00:00:00+00:00, @2018-01-01T00:00:00+00:00] } per year
+define SecPrecPerMonth: expand { Interval[@2018-01-01T00:00:00+00:00, @2018-03-01T00:00:00+00:00] } per month
+define SecPrecPerWeek: expand { Interval[@2018-01-01T00:00:00+00:00, @2018-01-21T00:00:00+00:00] } per week
+define SecPrecPerDay: expand { Interval[@2018-01-01T00:00:00+00:00, @2018-01-03T00:00:00+00:00] } per day
+define SecPrecPerHour: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T03:00:00+00:00] } per hour
+define SecPrecPerMinute: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T01:02:00+00:00] } per minute
+define SecPrecPerSecond: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T01:00:01+00:00] } per second
+define SecPrecPerMillisecond: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T01:00:00+00:00] } per millisecond
+
+define MinPrecPerYear: expand { Interval[@2016-01-01T00:00+00:00, @2018-01-01T00:00+00:00] } per year
+define MinPrecPerMonth: expand { Interval[@2018-01-01T00:00+00:00, @2018-03-01T00:00+00:00] } per month
+define MinPrecPerWeek: expand { Interval[@2018-01-01T00:00+00:00, @2018-01-21T00:00+00:00] } per week
+define MinPrecPerDay: expand { Interval[@2018-01-01T00:00+00:00, @2018-01-03T00:00+00:00] } per day
+define MinPrecPerHour: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T03:00+00:00] } per hour
+define MinPrecPerMinute: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T01:01+00:00] } per minute
+define MinPrecPerSecond: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T01:00+00:00] } per second
+define MinPrecPerMillisecond: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T01:00+00:00] } per millisecond
+
+define HourPrecPerYear: expand { Interval[@2016-01-01T00+00:00, @2018-01-01T00+00:00] } per year
+define HourPrecPerMonth: expand { Interval[@2018-01-01T00+00:00, @2018-03-01T00+00:00] } per month
+define HourPrecPerWeek: expand { Interval[@2018-01-01T00+00:00, @2018-01-21T00+00:00] } per week
+define HourPrecPerDay: expand { Interval[@2018-01-01T00+00:00, @2018-01-03T00+00:00] } per day
+define HourPrecPerHour: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T02+00:00] } per hour
+define HourPrecPerMinute: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T01+00:00] } per minute
+define HourPrecPerSecond: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T01+00:00] } per second
+define HourPrecPerMillisecond: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T01+00:00] } per millisecond
+
+define DayPrecPerYear: expand { Interval[DateTime(2016,01,01), DateTime(2018,01,01)] } per year
+define DayPrecPerMonth: expand { Interval[DateTime(2018,01,01), DateTime(2018,03,01)] } per month
+define DayPrecPerWeek: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,14)] } per week
+define DayPrecPerDay: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,02)] } per day
+define DayPrecPerHour: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,01)] } per hour
+define DayPrecPerMinute: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,01)] } per minute
+define DayPrecPerSecond: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,01)] } per second
+define DayPrecPerMillisecond: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,01)] } per millisecond
+
+define MonthPrecPerYear: expand { Interval[DateTime(2016,01), DateTime(2018,01)] } per year
+define MonthPrecPerMonth: expand { Interval[DateTime(2018,01), DateTime(2018,02)] } per month
+define MonthPrecPerWeek: expand { Interval[DateTime(2018,01), DateTime(2018,01)] } per week
+define MonthPrecPerDay: expand { Interval[DateTime(2018,01), DateTime(2018,01)] } per day
+define MonthPrecPerHour: expand { Interval[DateTime(2018,01), DateTime(2018,01)] } per hour
+define MonthPrecPerMinute: expand { Interval[DateTime(2018,01), DateTime(2018,01)] } per minute
+define MonthPrecPerSecond: expand { Interval[DateTime(2018,01), DateTime(2018,01)] } per second
+define MonthPrecPerMillisecond: expand { Interval[DateTime(2018,01), DateTime(2018,01)] } per millisecond
+
+define YearPrecPerYear: expand { Interval[DateTime(2016), DateTime(2018)] } per year
+define YearPrecPerMonth: expand { Interval[DateTime(2018), DateTime(2018)] } per month
+define YearPrecPerWeek: expand { Interval[DateTime(2018), DateTime(2018)] } per week
+define YearPrecPerDay: expand { Interval[DateTime(2018), DateTime(2018)] } per day
+define YearPrecPerHour: expand { Interval[DateTime(2018), DateTime(2018)] } per hour
+define YearPrecPerMinute: expand { Interval[DateTime(2018), DateTime(2018)] } per minute
+define YearPrecPerSecond: expand { Interval[DateTime(2018), DateTime(2018)] } per second
+define YearPrecPerMillisecond: expand { Interval[DateTime(2018), DateTime(2018)] } per millisecond
+
+define NullInList: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T01+00:00], null } per hour
+define Overlapping: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T03+00:00], Interval[@2018-01-01T02+00:00, @2018-01-01T04+00:00] } per hour
+define NonOverlapping: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T02+00:00], Interval[@2018-01-01T05+00:00, @2018-01-01T05+00:00] } per hour
+
+define NoPerDefaultMS: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:00:00.001+00:00] }
+define NoPerDefaultSec: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T01:00:01+00:00] }
+define NoPerDefaultMin: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T01:01+00:00] }
+define NoPerDefaultHour: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T01+00:00] }
+define NoPerDefaultDay: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,01)] }
+define NoPerDefaultMonth: expand { Interval[DateTime(2018,01), DateTime(2018,01)]  }
+define NoPerDefaultYear: expand { Interval[DateTime(2018), DateTime(2018)]  }
+
+define OpenStart: expand { Interval(@2018-01-01T01+00:00, @2018-01-03T01+00:00] } per day
+define OpenEnd: expand { Interval[@2018-01-01T01+00:00, @2018-01-03T01+00:00) } per day
+define OpenBoth: expand { Interval(@2018-01-01T01+00:00, @2018-01-03T01+00:00) } per day
+
+define EmptyList: List<Interval<Date>>{}
+define NullOpen: expand { Interval[null, @2018-01-03T01+00:00] } per day
+define NullClose: expand { Interval[@2018-01-01T01+00:00, null] } per day
+define NullBoth: expand { Interval[null, null] } per day
+define MismatchPrecision: expand { Interval[@2018-01-01T01+00:00, @2018-02-01T01:01+00:00] } per day
+define BadPerGram: expand { Interval[@2018-01-01T01+00:00, @2018-01-04T01+00:00] } per 1 'g'
+
+// @Test: TimeIntervalExpand 
+define MsPrecPerHour: expand { Interval[@T01:00:00.000+00:00, @T03:00:00.000+00:00] } per hour
+define MsPrecPerMinute: expand { Interval[@T01:00:00.000+00:00, @T01:02:00.000+00:00] } per minute
+define MsPrecPerSecond: expand { Interval[@T01:00:00.000+00:00, @T01:00:02.000+00:00] } per second
+define MsPrecPerMillisecond: expand { Interval[@T01:00:00.000+00:00, @T01:00:00.001+00:00] } per millisecond
+
+define SecPrecPerHour: expand { Interval[@T01:00:00+00:00, @T03:00:00+00:00] } per hour
+define SecPrecPerMinute: expand { Interval[@T01:00:00+00:00, @T01:02:00+00:00] } per minute
+define SecPrecPerSecond: expand { Interval[@T01:00:00+00:00, @T01:00:01+00:00] } per second
+define SecPrecPerMillisecond: expand { Interval[@T01:00:00+00:00, @T01:00:00+00:00] } per millisecond
+
+define MinPrecPerHour: expand { Interval[@T01:00+00:00, @T03:00+00:00] } per hour
+define MinPrecPerMinute: expand { Interval[@T01:00+00:00, @T01:01+00:00] } per minute
+define MinPrecPerSecond: expand { Interval[@T01:00+00:00, @T01:00+00:00] } per second
+define MinPrecPerMillisecond: expand { Interval[@T01:00+00:00, @T01:00+00:00] } per millisecond
+
+define HourPrecPerHour: expand { Interval[@T01+00:00, @T02+00:00] } per hour
+define HourPrecPerMinute: expand { Interval[@T01+00:00, @T01+00:00] } per minute
+define HourPrecPerSecond: expand { Interval[@T01+00:00, @T01+00:00] } per second
+define HourPrecPerMillisecond: expand { Interval[@T01+00:00, @T01+00:00] } per millisecond
+
+
+// @Test: QuantityIntervalExpand 
+define ClosedSingleGPerG: expand { Interval[2 'g', 4 'g'] } per 1 'g'
+define ClosedSingleGPerGDecimal: expand { Interval[2.1 'g', 4.1 'g'] } per 1 'g'
+define ClosedSingleGPerMG: expand { Interval[2 'g', 2.003 'g'] } per 1 'mg'
+define ClosedSingleMGPerGTrunc: expand { Interval[2999 'mg', 4200 'mg'] } per 1 'g'
+define ClosedSingleMGPerMGTrunc: expand { Interval[2000 'mg', 4500 'mg'] } per 800 'mg'
+define ClosedSingleMGPerMGDecimal: expand { Interval[2000.01 'mg', 4500 'mg'] } per 800 'mg'
+
+define NullInList: expand { Interval[2 'g', 4 'g'], null } per 1 'g'
+define Overlapping: expand { Interval[2 'g', 4 'g'], Interval[3 'g', 5 'g'] } per 1 'g'
+define NonOverlapping: expand { Interval[2 'g', 4 'g'], Interval[6 'g', 6 'g'] } per 1 'g'
+
+define NoPerDefaultM: expand { Interval[2 'm', 400 'cm'] }
+define NoPerDefaultG: expand { Interval[2 'g', 4 'g'] }
+
+define OpenStart: expand { Interval(2 'g', 4 'g'] } per 1 'g'
+define OpenEnd: expand { Interval[2 'g', 4 'g') } per 1 'g'
+define OpenBoth: expand { Interval(2 'g', 4 'g') } per 1 'g'
+define OpenBothDecimal: expand { Interval(2.1 'g', 4.1 'g') } per 1 'g'
+define OpenBothDecimalTrunc: expand { Interval(2.1 'g', 4.101 'g') } per 1 'g'
+
+define EmptyList: List<Interval<Date>>{}
+define PerTooBig: expand { Interval[2 'g', 4 'g'], null } per 5 'g'
+define NullOpen: expand { Interval[null, 4 'g'] } per 1 'g'
+define NullClose: expand { Interval[2 'g', null] } per 1 'g'
+define NullBoth: expand { Interval[null, null] } per 1 'g'
+define BadPerMinute: expand { Interval(2 'g', 4 'g'] } per 1 minute
+define BadPerGram: expand { Interval(2 'km', 4 'km'] }  per 1 'g'
+
+
+// @Test: IntegerIntervalExpand
+define ClosedSinglePer1: expand { Interval[2, 4] } per 1 '1'
+define ClosedSinglePer3: expand { Interval[2, 10] } per 3 '1'
+define ClosedSinglePer3NoteTheWidth: expand { Interval[2, 4] } per 3 '1'
+
+define NullInList: expand { Interval[2, 4], null } per 1 '1'
+define Overlapping: expand { Interval[2, 4], Interval[3, 5] } per 1 '1'
+define NonOverlapping: expand { Interval[2, 4], Interval[6, 6] } per 1 '1'
+
+define NoPer: expand { Interval[2, 4] }
+
+define OpenStart: expand { Interval(2, 4] } per 1 '1'
+define OpenEnd: expand { Interval[2, 4) } per 1 '1'
+define OpenBoth: expand { Interval(2, 4) } per 1 '1'
+
+define EmptyList: List<Interval<Integer>>{}
+define PerTooBig: expand { Interval[2, 4], null } per 5 '1'
+define NullOpen: expand { Interval[null, 4] } per 1 '1'
+define NullClose: expand { Interval[2, null] } per 1 '1'
+define NullBoth: expand { Interval[null, null] } per 1 '1'
+define BadPerMinute: expand { Interval(2, 4] } per 1 minute
+
+// @Test: DecimalIntervalExpand
+define ClosedSingle: expand { Interval[2, 5] } per 1.5 '1'
+define ClosedSingle1: expand { Interval[2.5, 10] } per 2 '1'
+define ClosedSingle2: expand { Interval[2, 4.5] } per 0.5 '1'
+
+define NullInList: expand { Interval[2, 5], null } per 1.5 '1'
+define Overlapping: expand { Interval[2, 5], Interval[4, 7] } per 1.5 '1'
+define NonOverlapping: expand { Interval[2, 4], Interval[6, 8] } per 1.5 '1'
+
+define NoPer: expand { Interval[2.5, 4.5] }
+
+define OpenStart: expand { Interval(2, 5] } per 1.5 '1'
+define OpenEnd: expand { Interval[2, 5) } per 1.5 '1'
+define OpenBoth: expand { Interval(2, 5) } per 1.5 '1'
+
+define EmptyList: List<Interval<Decimal>>{}
+define PerTooBig: expand { Interval[2, 4], null } per 5.5 '1'
+define NullOpen: expand { Interval[null, 4] } per 1.5 '1'
+define NullClose: expand { Interval[2, null] } per 1.5 '1'
+define NullBoth: expand { Interval[null, null] } per 1.5 '1'
+define BadPerMinute: expand { Interval(2.1, 4.1] } per 0.5 minute
