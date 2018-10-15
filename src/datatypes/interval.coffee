@@ -267,3 +267,4 @@ module.exports.Interval = class Interval
     start = if @lowClosed then '[' else '('
     end = if @highClosed then ']' else ')'
     return start + @low.toString() + ', ' + @high.toString() + end
+    

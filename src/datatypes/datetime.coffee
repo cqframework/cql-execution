@@ -271,7 +271,6 @@ class DateTime
     else
       new jsDate(y, mo, d, h, mi, s, ms)
 
-
   toJSON: () ->
     @toString()
 
@@ -498,10 +497,7 @@ class Date
 
   toJSDate: () ->
     [y, mo, d] = [ @year, (if @month? then @month-1 else 0), @day ? 1 ]
-    d = new jsDate(y, mo, d)
-    d = new jsDate(d.setFullYear(y)) if (y >= 0 and y <= 99)
-    return d
-
+    new jsDate(y, mo, d)
 
   @fromJSDate: (date) ->
     if (date instanceof Date) then return date
