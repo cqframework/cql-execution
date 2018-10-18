@@ -90029,16 +90029,19 @@ define NonOverlapping: expand { Interval[@2018-01-01, @2018-01-03], Interval[@20
 define NoPerDefaultDay: expand { Interval[@2018-01-01, @2018-01-03] }
 define NoPerDefaultMonth: expand { Interval[@2018-01, @2018-03] }
 define NoPerDefaultYear: expand { Interval[@2016, @2018] }
+define NoPerDefaultMonthWithMismatch: expand { Interval[@2016, @2018-03] }
 
 define OpenStart: expand { Interval(@2018-01-01, @2018-01-03] } per day
 define OpenEnd: expand { Interval[@2018-01-01, @2018-01-03) } per day
 define OpenBoth: expand { Interval(@2018-01-01, @2018-01-03) } per day
 
+define MismatchPrecision: expand { Interval[@2018-01-01, @2018-03] } per month
+define MismatchPrecisionEmpty: expand { Interval[@2018-01, @2018-02-28] } per month
+
 define EmptyList: List<Interval<Date>>{}
 define NullOpen: expand { Interval[null, @2018-01-03] } per day
 define NullClose: expand { Interval[@2018-01-01, null] } per day
 define NullBoth: expand { Interval[null, null] } per day
-define MismatchPrecision: expand { Interval[@2018-01-01, @2018-02] } per day
 define MonthDayPer: expand { Interval[@2018-01, @2018-03] } per day
 define YearMonthPer: expand { Interval[@2016, @2018] } per month
 define YearDayPer: expand { Interval[@2016, @2018] } per day
@@ -91489,7 +91492,7 @@ module.exports['DateIntervalExpand'] = {
             }
          }, {
             "localId" : "104",
-            "name" : "OpenStart",
+            "name" : "NoPerDefaultMonthWithMismatch",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -91497,7 +91500,7 @@ module.exports['DateIntervalExpand'] = {
                "s" : {
                   "r" : "104",
                   "s" : [ {
-                     "value" : [ "define ","OpenStart",": " ]
+                     "value" : [ "define ","NoPerDefaultMonthWithMismatch",": " ]
                   }, {
                      "r" : "103",
                      "s" : [ {
@@ -91509,13 +91512,11 @@ module.exports['DateIntervalExpand'] = {
                         }, {
                            "r" : "101",
                            "s" : [ {
-                              "value" : [ "Interval(","@2018-01-01",", ","@2018-01-03","]" ]
+                              "value" : [ "Interval[","@2016",", ","@2018-03","]" ]
                            } ]
                         }, {
                            "value" : [ " }" ]
                         } ]
-                     }, {
-                        "value" : [ " per ","day" ]
                      } ]
                   } ]
                }
@@ -91528,7 +91529,7 @@ module.exports['DateIntervalExpand'] = {
                   "type" : "List",
                   "element" : [ {
                      "localId" : "101",
-                     "lowClosed" : false,
+                     "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
@@ -91536,17 +91537,7 @@ module.exports['DateIntervalExpand'] = {
                         "type" : "Date",
                         "year" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2018",
-                           "type" : "Literal"
-                        },
-                        "month" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
-                           "type" : "Literal"
-                        },
-                        "day" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
+                           "value" : "2016",
                            "type" : "Literal"
                         }
                      },
@@ -91560,25 +91551,19 @@ module.exports['DateIntervalExpand'] = {
                         },
                         "month" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
-                           "type" : "Literal"
-                        },
-                        "day" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "3",
                            "type" : "Literal"
                         }
                      }
                   } ]
                }, {
-                  "value" : 1.0,
-                  "unit" : "day",
-                  "type" : "Quantity"
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Null"
                } ]
             }
          }, {
             "localId" : "110",
-            "name" : "OpenEnd",
+            "name" : "OpenStart",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -91586,7 +91571,7 @@ module.exports['DateIntervalExpand'] = {
                "s" : {
                   "r" : "110",
                   "s" : [ {
-                     "value" : [ "define ","OpenEnd",": " ]
+                     "value" : [ "define ","OpenStart",": " ]
                   }, {
                      "r" : "109",
                      "s" : [ {
@@ -91598,7 +91583,7 @@ module.exports['DateIntervalExpand'] = {
                         }, {
                            "r" : "107",
                            "s" : [ {
-                              "value" : [ "Interval[","@2018-01-01",", ","@2018-01-03",")" ]
+                              "value" : [ "Interval(","@2018-01-01",", ","@2018-01-03","]" ]
                            } ]
                         }, {
                            "value" : [ " }" ]
@@ -91617,8 +91602,8 @@ module.exports['DateIntervalExpand'] = {
                   "type" : "List",
                   "element" : [ {
                      "localId" : "107",
-                     "lowClosed" : true,
-                     "highClosed" : false,
+                     "lowClosed" : false,
+                     "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
                         "localId" : "105",
@@ -91667,7 +91652,7 @@ module.exports['DateIntervalExpand'] = {
             }
          }, {
             "localId" : "116",
-            "name" : "OpenBoth",
+            "name" : "OpenEnd",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -91675,7 +91660,7 @@ module.exports['DateIntervalExpand'] = {
                "s" : {
                   "r" : "116",
                   "s" : [ {
-                     "value" : [ "define ","OpenBoth",": " ]
+                     "value" : [ "define ","OpenEnd",": " ]
                   }, {
                      "r" : "115",
                      "s" : [ {
@@ -91687,7 +91672,7 @@ module.exports['DateIntervalExpand'] = {
                         }, {
                            "r" : "113",
                            "s" : [ {
-                              "value" : [ "Interval(","@2018-01-01",", ","@2018-01-03",")" ]
+                              "value" : [ "Interval[","@2018-01-01",", ","@2018-01-03",")" ]
                            } ]
                         }, {
                            "value" : [ " }" ]
@@ -91706,7 +91691,7 @@ module.exports['DateIntervalExpand'] = {
                   "type" : "List",
                   "element" : [ {
                      "localId" : "113",
-                     "lowClosed" : false,
+                     "lowClosed" : true,
                      "highClosed" : false,
                      "type" : "Interval",
                      "low" : {
@@ -91755,65 +91740,28 @@ module.exports['DateIntervalExpand'] = {
                } ]
             }
          }, {
-            "localId" : "120",
-            "name" : "EmptyList",
+            "localId" : "122",
+            "name" : "OpenBoth",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "120",
+                  "r" : "122",
                   "s" : [ {
-                     "value" : [ "define ","EmptyList",": " ]
+                     "value" : [ "define ","OpenBoth",": " ]
                   }, {
-                     "r" : "119",
-                     "s" : [ {
-                        "value" : [ "List<" ]
-                     }, {
-                        "r" : "118",
-                        "s" : [ {
-                           "value" : [ "Interval<" ]
-                        }, {
-                           "r" : "117",
-                           "s" : [ {
-                              "value" : [ "Date" ]
-                           } ]
-                        }, {
-                           "value" : [ ">" ]
-                        } ]
-                     }, {
-                        "value" : [ ">{}" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "119",
-               "type" : "List"
-            }
-         }, {
-            "localId" : "126",
-            "name" : "NullOpen",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "126",
-                  "s" : [ {
-                     "value" : [ "define ","NullOpen",": " ]
-                  }, {
-                     "r" : "125",
+                     "r" : "121",
                      "s" : [ {
                         "value" : [ "expand " ]
                      }, {
-                        "r" : "124",
+                        "r" : "120",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "123",
+                           "r" : "119",
                            "s" : [ {
-                              "value" : [ "Interval[","null",", ","@2018-01-03","]" ]
+                              "value" : [ "Interval(","@2018-01-01",", ","@2018-01-03",")" ]
                            } ]
                         }, {
                            "value" : [ " }" ]
@@ -91825,26 +91773,37 @@ module.exports['DateIntervalExpand'] = {
                }
             } ],
             "expression" : {
-               "localId" : "125",
+               "localId" : "121",
                "type" : "Expand",
                "operand" : [ {
-                  "localId" : "124",
+                  "localId" : "120",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "123",
-                     "lowClosed" : true,
-                     "highClosed" : true,
+                     "localId" : "119",
+                     "lowClosed" : false,
+                     "highClosed" : false,
                      "type" : "Interval",
                      "low" : {
-                        "asType" : "{urn:hl7-org:elm-types:r1}Date",
-                        "type" : "As",
-                        "operand" : {
-                           "localId" : "121",
-                           "type" : "Null"
+                        "localId" : "117",
+                        "type" : "Date",
+                        "year" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2018",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
                         }
                      },
                      "high" : {
-                        "localId" : "122",
+                        "localId" : "118",
                         "type" : "Date",
                         "year" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -91870,51 +91829,51 @@ module.exports['DateIntervalExpand'] = {
                } ]
             }
          }, {
-            "localId" : "132",
-            "name" : "NullClose",
+            "localId" : "128",
+            "name" : "MismatchPrecision",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "132",
+                  "r" : "128",
                   "s" : [ {
-                     "value" : [ "define ","NullClose",": " ]
+                     "value" : [ "define ","MismatchPrecision",": " ]
                   }, {
-                     "r" : "131",
+                     "r" : "127",
                      "s" : [ {
                         "value" : [ "expand " ]
                      }, {
-                        "r" : "130",
+                        "r" : "126",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "129",
+                           "r" : "125",
                            "s" : [ {
-                              "value" : [ "Interval[","@2018-01-01",", ","null","]" ]
+                              "value" : [ "Interval[","@2018-01-01",", ","@2018-03","]" ]
                            } ]
                         }, {
                            "value" : [ " }" ]
                         } ]
                      }, {
-                        "value" : [ " per ","day" ]
+                        "value" : [ " per ","month" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "131",
+               "localId" : "127",
                "type" : "Expand",
                "operand" : [ {
-                  "localId" : "130",
+                  "localId" : "126",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "129",
+                     "localId" : "125",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "127",
+                        "localId" : "123",
                         "type" : "Date",
                         "year" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -91933,23 +91892,113 @@ module.exports['DateIntervalExpand'] = {
                         }
                      },
                      "high" : {
-                        "asType" : "{urn:hl7-org:elm-types:r1}Date",
-                        "type" : "As",
-                        "operand" : {
-                           "localId" : "128",
-                           "type" : "Null"
+                        "localId" : "124",
+                        "type" : "Date",
+                        "year" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2018",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "3",
+                           "type" : "Literal"
                         }
                      }
                   } ]
                }, {
                   "value" : 1.0,
-                  "unit" : "day",
+                  "unit" : "month",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "134",
+            "name" : "MismatchPrecisionEmpty",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "134",
+                  "s" : [ {
+                     "value" : [ "define ","MismatchPrecisionEmpty",": " ]
+                  }, {
+                     "r" : "133",
+                     "s" : [ {
+                        "value" : [ "expand " ]
+                     }, {
+                        "r" : "132",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "131",
+                           "s" : [ {
+                              "value" : [ "Interval[","@2018-01",", ","@2018-02-28","]" ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " per ","month" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "133",
+               "type" : "Expand",
+               "operand" : [ {
+                  "localId" : "132",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "131",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "low" : {
+                        "localId" : "129",
+                        "type" : "Date",
+                        "year" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2018",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
+                        }
+                     },
+                     "high" : {
+                        "localId" : "130",
+                        "type" : "Date",
+                        "year" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2018",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "28",
+                           "type" : "Literal"
+                        }
+                     }
+                  } ]
+               }, {
+                  "value" : 1.0,
+                  "unit" : "month",
                   "type" : "Quantity"
                } ]
             }
          }, {
             "localId" : "138",
-            "name" : "NullBoth",
+            "name" : "EmptyList",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -91957,58 +92006,36 @@ module.exports['DateIntervalExpand'] = {
                "s" : {
                   "r" : "138",
                   "s" : [ {
-                     "value" : [ "define ","NullBoth",": " ]
+                     "value" : [ "define ","EmptyList",": " ]
                   }, {
                      "r" : "137",
                      "s" : [ {
-                        "value" : [ "expand " ]
+                        "value" : [ "List<" ]
                      }, {
                         "r" : "136",
                         "s" : [ {
-                           "value" : [ "{ " ]
+                           "value" : [ "Interval<" ]
                         }, {
                            "r" : "135",
                            "s" : [ {
-                              "value" : [ "Interval[","null",", ","null","]" ]
+                              "value" : [ "Date" ]
                            } ]
                         }, {
-                           "value" : [ " }" ]
+                           "value" : [ ">" ]
                         } ]
                      }, {
-                        "value" : [ " per ","day" ]
+                        "value" : [ ">{}" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
                "localId" : "137",
-               "type" : "Expand",
-               "operand" : [ {
-                  "localId" : "136",
-                  "type" : "List",
-                  "element" : [ {
-                     "localId" : "135",
-                     "lowClosed" : true,
-                     "highClosed" : true,
-                     "type" : "Interval",
-                     "low" : {
-                        "localId" : "133",
-                        "type" : "Null"
-                     },
-                     "high" : {
-                        "localId" : "134",
-                        "type" : "Null"
-                     }
-                  } ]
-               }, {
-                  "value" : 1.0,
-                  "unit" : "day",
-                  "type" : "Quantity"
-               } ]
+               "type" : "List"
             }
          }, {
             "localId" : "144",
-            "name" : "MismatchPrecision",
+            "name" : "NullOpen",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -92016,7 +92043,7 @@ module.exports['DateIntervalExpand'] = {
                "s" : {
                   "r" : "144",
                   "s" : [ {
-                     "value" : [ "define ","MismatchPrecision",": " ]
+                     "value" : [ "define ","NullOpen",": " ]
                   }, {
                      "r" : "143",
                      "s" : [ {
@@ -92028,7 +92055,7 @@ module.exports['DateIntervalExpand'] = {
                         }, {
                            "r" : "141",
                            "s" : [ {
-                              "value" : [ "Interval[","@2018-01-01",", ","@2018-02","]" ]
+                              "value" : [ "Interval[","null",", ","@2018-01-03","]" ]
                            } ]
                         }, {
                            "value" : [ " }" ]
@@ -92051,7 +92078,15 @@ module.exports['DateIntervalExpand'] = {
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "139",
+                        "asType" : "{urn:hl7-org:elm-types:r1}Date",
+                        "type" : "As",
+                        "operand" : {
+                           "localId" : "139",
+                           "type" : "Null"
+                        }
+                     },
+                     "high" : {
+                        "localId" : "140",
                         "type" : "Date",
                         "year" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -92065,21 +92100,7 @@ module.exports['DateIntervalExpand'] = {
                         },
                         "day" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
-                           "type" : "Literal"
-                        }
-                     },
-                     "high" : {
-                        "localId" : "140",
-                        "type" : "Date",
-                        "year" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2018",
-                           "type" : "Literal"
-                        },
-                        "month" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2",
+                           "value" : "3",
                            "type" : "Literal"
                         }
                      }
@@ -92092,7 +92113,7 @@ module.exports['DateIntervalExpand'] = {
             }
          }, {
             "localId" : "150",
-            "name" : "MonthDayPer",
+            "name" : "NullClose",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -92100,7 +92121,7 @@ module.exports['DateIntervalExpand'] = {
                "s" : {
                   "r" : "150",
                   "s" : [ {
-                     "value" : [ "define ","MonthDayPer",": " ]
+                     "value" : [ "define ","NullClose",": " ]
                   }, {
                      "r" : "149",
                      "s" : [ {
@@ -92112,7 +92133,7 @@ module.exports['DateIntervalExpand'] = {
                         }, {
                            "r" : "147",
                            "s" : [ {
-                              "value" : [ "Interval[","@2018-01",", ","@2018-03","]" ]
+                              "value" : [ "Interval[","@2018-01-01",", ","null","]" ]
                            } ]
                         }, {
                            "value" : [ " }" ]
@@ -92146,20 +92167,19 @@ module.exports['DateIntervalExpand'] = {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
+                        },
+                        "day" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
                         }
                      },
                      "high" : {
-                        "localId" : "146",
-                        "type" : "Date",
-                        "year" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2018",
-                           "type" : "Literal"
-                        },
-                        "month" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "3",
-                           "type" : "Literal"
+                        "asType" : "{urn:hl7-org:elm-types:r1}Date",
+                        "type" : "As",
+                        "operand" : {
+                           "localId" : "146",
+                           "type" : "Null"
                         }
                      }
                   } ]
@@ -92171,7 +92191,7 @@ module.exports['DateIntervalExpand'] = {
             }
          }, {
             "localId" : "156",
-            "name" : "YearMonthPer",
+            "name" : "NullBoth",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -92179,7 +92199,7 @@ module.exports['DateIntervalExpand'] = {
                "s" : {
                   "r" : "156",
                   "s" : [ {
-                     "value" : [ "define ","YearMonthPer",": " ]
+                     "value" : [ "define ","NullBoth",": " ]
                   }, {
                      "r" : "155",
                      "s" : [ {
@@ -92191,13 +92211,13 @@ module.exports['DateIntervalExpand'] = {
                         }, {
                            "r" : "153",
                            "s" : [ {
-                              "value" : [ "Interval[","@2016",", ","@2018","]" ]
+                              "value" : [ "Interval[","null",", ","null","]" ]
                            } ]
                         }, {
                            "value" : [ " }" ]
                         } ]
                      }, {
-                        "value" : [ " per ","month" ]
+                        "value" : [ " per ","day" ]
                      } ]
                   } ]
                }
@@ -92215,32 +92235,22 @@ module.exports['DateIntervalExpand'] = {
                      "type" : "Interval",
                      "low" : {
                         "localId" : "151",
-                        "type" : "Date",
-                        "year" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2016",
-                           "type" : "Literal"
-                        }
+                        "type" : "Null"
                      },
                      "high" : {
                         "localId" : "152",
-                        "type" : "Date",
-                        "year" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2018",
-                           "type" : "Literal"
-                        }
+                        "type" : "Null"
                      }
                   } ]
                }, {
                   "value" : 1.0,
-                  "unit" : "month",
+                  "unit" : "day",
                   "type" : "Quantity"
                } ]
             }
          }, {
             "localId" : "162",
-            "name" : "YearDayPer",
+            "name" : "MonthDayPer",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -92248,7 +92258,7 @@ module.exports['DateIntervalExpand'] = {
                "s" : {
                   "r" : "162",
                   "s" : [ {
-                     "value" : [ "define ","YearDayPer",": " ]
+                     "value" : [ "define ","MonthDayPer",": " ]
                   }, {
                      "r" : "161",
                      "s" : [ {
@@ -92260,7 +92270,7 @@ module.exports['DateIntervalExpand'] = {
                         }, {
                            "r" : "159",
                            "s" : [ {
-                              "value" : [ "Interval[","@2016",", ","@2018","]" ]
+                              "value" : [ "Interval[","@2018-01",", ","@2018-03","]" ]
                            } ]
                         }, {
                            "value" : [ " }" ]
@@ -92287,7 +92297,12 @@ module.exports['DateIntervalExpand'] = {
                         "type" : "Date",
                         "year" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2016",
+                           "value" : "2018",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
                            "type" : "Literal"
                         }
                      },
@@ -92297,6 +92312,11 @@ module.exports['DateIntervalExpand'] = {
                         "year" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2018",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "3",
                            "type" : "Literal"
                         }
                      }
@@ -92309,7 +92329,7 @@ module.exports['DateIntervalExpand'] = {
             }
          }, {
             "localId" : "168",
-            "name" : "BadPerMinute",
+            "name" : "YearMonthPer",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -92317,7 +92337,7 @@ module.exports['DateIntervalExpand'] = {
                "s" : {
                   "r" : "168",
                   "s" : [ {
-                     "value" : [ "define ","BadPerMinute",": " ]
+                     "value" : [ "define ","YearMonthPer",": " ]
                   }, {
                      "r" : "167",
                      "s" : [ {
@@ -92329,13 +92349,13 @@ module.exports['DateIntervalExpand'] = {
                         }, {
                            "r" : "165",
                            "s" : [ {
-                              "value" : [ "Interval[","@2018-01-01",", ","@2018-01-04","]" ]
+                              "value" : [ "Interval[","@2016",", ","@2018","]" ]
                            } ]
                         }, {
                            "value" : [ " }" ]
                         } ]
                      }, {
-                        "value" : [ " per ","minute" ]
+                        "value" : [ " per ","month" ]
                      } ]
                   } ]
                }
@@ -92356,6 +92376,144 @@ module.exports['DateIntervalExpand'] = {
                         "type" : "Date",
                         "year" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2016",
+                           "type" : "Literal"
+                        }
+                     },
+                     "high" : {
+                        "localId" : "164",
+                        "type" : "Date",
+                        "year" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2018",
+                           "type" : "Literal"
+                        }
+                     }
+                  } ]
+               }, {
+                  "value" : 1.0,
+                  "unit" : "month",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "174",
+            "name" : "YearDayPer",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "174",
+                  "s" : [ {
+                     "value" : [ "define ","YearDayPer",": " ]
+                  }, {
+                     "r" : "173",
+                     "s" : [ {
+                        "value" : [ "expand " ]
+                     }, {
+                        "r" : "172",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "171",
+                           "s" : [ {
+                              "value" : [ "Interval[","@2016",", ","@2018","]" ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " per ","day" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "173",
+               "type" : "Expand",
+               "operand" : [ {
+                  "localId" : "172",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "171",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "low" : {
+                        "localId" : "169",
+                        "type" : "Date",
+                        "year" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2016",
+                           "type" : "Literal"
+                        }
+                     },
+                     "high" : {
+                        "localId" : "170",
+                        "type" : "Date",
+                        "year" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2018",
+                           "type" : "Literal"
+                        }
+                     }
+                  } ]
+               }, {
+                  "value" : 1.0,
+                  "unit" : "day",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "180",
+            "name" : "BadPerMinute",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "180",
+                  "s" : [ {
+                     "value" : [ "define ","BadPerMinute",": " ]
+                  }, {
+                     "r" : "179",
+                     "s" : [ {
+                        "value" : [ "expand " ]
+                     }, {
+                        "r" : "178",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "177",
+                           "s" : [ {
+                              "value" : [ "Interval[","@2018-01-01",", ","@2018-01-04","]" ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " per ","minute" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "179",
+               "type" : "Expand",
+               "operand" : [ {
+                  "localId" : "178",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "177",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "low" : {
+                        "localId" : "175",
+                        "type" : "Date",
+                        "year" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2018",
                            "type" : "Literal"
                         },
@@ -92371,7 +92529,7 @@ module.exports['DateIntervalExpand'] = {
                         }
                      },
                      "high" : {
-                        "localId" : "164",
+                        "localId" : "176",
                         "type" : "Date",
                         "year" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -92397,26 +92555,26 @@ module.exports['DateIntervalExpand'] = {
                } ]
             }
          }, {
-            "localId" : "175",
+            "localId" : "187",
             "name" : "BadPerGram",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "175",
+                  "r" : "187",
                   "s" : [ {
                      "value" : [ "define ","BadPerGram",": " ]
                   }, {
-                     "r" : "174",
+                     "r" : "186",
                      "s" : [ {
                         "value" : [ "expand " ]
                      }, {
-                        "r" : "172",
+                        "r" : "184",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "171",
+                           "r" : "183",
                            "s" : [ {
                               "value" : [ "Interval[","@2018-01-01",", ","@2018-01-04","]" ]
                            } ]
@@ -92426,7 +92584,7 @@ module.exports['DateIntervalExpand'] = {
                      }, {
                         "value" : [ " per " ]
                      }, {
-                        "r" : "173",
+                        "r" : "185",
                         "s" : [ {
                            "value" : [ "1 ","'g'" ]
                         } ]
@@ -92435,18 +92593,18 @@ module.exports['DateIntervalExpand'] = {
                }
             } ],
             "expression" : {
-               "localId" : "174",
+               "localId" : "186",
                "type" : "Expand",
                "operand" : [ {
-                  "localId" : "172",
+                  "localId" : "184",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "171",
+                     "localId" : "183",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "169",
+                        "localId" : "181",
                         "type" : "Date",
                         "year" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -92465,7 +92623,7 @@ module.exports['DateIntervalExpand'] = {
                         }
                      },
                      "high" : {
-                        "localId" : "170",
+                        "localId" : "182",
                         "type" : "Date",
                         "year" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -92485,7 +92643,7 @@ module.exports['DateIntervalExpand'] = {
                      }
                   } ]
                }, {
-                  "localId" : "173",
+                  "localId" : "185",
                   "value" : 1,
                   "unit" : "g",
                   "type" : "Quantity"
@@ -92579,11 +92737,13 @@ define OpenStart: expand { Interval(@2018-01-01T01+00:00, @2018-01-03T01+00:00] 
 define OpenEnd: expand { Interval[@2018-01-01T01+00:00, @2018-01-03T01+00:00) } per day
 define OpenBoth: expand { Interval(@2018-01-01T01+00:00, @2018-01-03T01+00:00) } per day
 
+define MismatchPrecision: expand { Interval[@2012-01-01T12:00+00:00, @2012-01-02T12:00:00+00:00] } per day
+define MismatchPrecisionEmpty: expand { Interval[@2012-01-01T13:00:00+00:00, @2012-01-02T12:59+00:00] } per day
+
 define EmptyList: List<Interval<Date>>{}
 define NullOpen: expand { Interval[null, @2018-01-03T01+00:00] } per day
 define NullClose: expand { Interval[@2018-01-01T01+00:00, null] } per day
 define NullBoth: expand { Interval[null, null] } per day
-define MismatchPrecision: expand { Interval[@2018-01-01T01+00:00, @2018-02-01T01:01+00:00] } per day
 define BadPerGram: expand { Interval[@2018-01-01T01+00:00, @2018-01-04T01+00:00] } per 1 'g'
 ###
 
@@ -100489,26 +100649,274 @@ module.exports['DateTimeIntervalExpand'] = {
                } ]
             }
          }, {
-            "localId" : "534",
+            "localId" : "536",
+            "name" : "MismatchPrecision",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "536",
+                  "s" : [ {
+                     "value" : [ "define ","MismatchPrecision",": " ]
+                  }, {
+                     "r" : "535",
+                     "s" : [ {
+                        "value" : [ "expand " ]
+                     }, {
+                        "r" : "534",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "533",
+                           "s" : [ {
+                              "value" : [ "Interval[","@2012-01-01T12:00+00:00",", ","@2012-01-02T12:00:00+00:00","]" ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " per ","day" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "535",
+               "type" : "Expand",
+               "operand" : [ {
+                  "localId" : "534",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "533",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "low" : {
+                        "localId" : "531",
+                        "type" : "DateTime",
+                        "year" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2012",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "0",
+                           "type" : "Literal"
+                        },
+                        "timezoneOffset" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "0.0",
+                           "type" : "Literal"
+                        }
+                     },
+                     "high" : {
+                        "localId" : "532",
+                        "type" : "DateTime",
+                        "year" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2012",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "0",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "0",
+                           "type" : "Literal"
+                        },
+                        "timezoneOffset" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "0.0",
+                           "type" : "Literal"
+                        }
+                     }
+                  } ]
+               }, {
+                  "value" : 1.0,
+                  "unit" : "day",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "542",
+            "name" : "MismatchPrecisionEmpty",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "542",
+                  "s" : [ {
+                     "value" : [ "define ","MismatchPrecisionEmpty",": " ]
+                  }, {
+                     "r" : "541",
+                     "s" : [ {
+                        "value" : [ "expand " ]
+                     }, {
+                        "r" : "540",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "539",
+                           "s" : [ {
+                              "value" : [ "Interval[","@2012-01-01T13:00:00+00:00",", ","@2012-01-02T12:59+00:00","]" ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " per ","day" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "541",
+               "type" : "Expand",
+               "operand" : [ {
+                  "localId" : "540",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "539",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "low" : {
+                        "localId" : "537",
+                        "type" : "DateTime",
+                        "year" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2012",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "0",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "0",
+                           "type" : "Literal"
+                        },
+                        "timezoneOffset" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "0.0",
+                           "type" : "Literal"
+                        }
+                     },
+                     "high" : {
+                        "localId" : "538",
+                        "type" : "DateTime",
+                        "year" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2012",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "59",
+                           "type" : "Literal"
+                        },
+                        "timezoneOffset" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "0.0",
+                           "type" : "Literal"
+                        }
+                     }
+                  } ]
+               }, {
+                  "value" : 1.0,
+                  "unit" : "day",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "546",
             "name" : "EmptyList",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "534",
+                  "r" : "546",
                   "s" : [ {
                      "value" : [ "define ","EmptyList",": " ]
                   }, {
-                     "r" : "533",
+                     "r" : "545",
                      "s" : [ {
                         "value" : [ "List<" ]
                      }, {
-                        "r" : "532",
+                        "r" : "544",
                         "s" : [ {
                            "value" : [ "Interval<" ]
                         }, {
-                           "r" : "531",
+                           "r" : "543",
                            "s" : [ {
                               "value" : [ "Date" ]
                            } ]
@@ -100522,30 +100930,30 @@ module.exports['DateTimeIntervalExpand'] = {
                }
             } ],
             "expression" : {
-               "localId" : "533",
+               "localId" : "545",
                "type" : "List"
             }
          }, {
-            "localId" : "540",
+            "localId" : "552",
             "name" : "NullOpen",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "540",
+                  "r" : "552",
                   "s" : [ {
                      "value" : [ "define ","NullOpen",": " ]
                   }, {
-                     "r" : "539",
+                     "r" : "551",
                      "s" : [ {
                         "value" : [ "expand " ]
                      }, {
-                        "r" : "538",
+                        "r" : "550",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "537",
+                           "r" : "549",
                            "s" : [ {
                               "value" : [ "Interval[","null",", ","@2018-01-03T01+00:00","]" ]
                            } ]
@@ -100559,13 +100967,13 @@ module.exports['DateTimeIntervalExpand'] = {
                }
             } ],
             "expression" : {
-               "localId" : "539",
+               "localId" : "551",
                "type" : "Expand",
                "operand" : [ {
-                  "localId" : "538",
+                  "localId" : "550",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "537",
+                     "localId" : "549",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
@@ -100573,12 +100981,12 @@ module.exports['DateTimeIntervalExpand'] = {
                         "asType" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "As",
                         "operand" : {
-                           "localId" : "535",
+                           "localId" : "547",
                            "type" : "Null"
                         }
                      },
                      "high" : {
-                        "localId" : "536",
+                        "localId" : "548",
                         "type" : "DateTime",
                         "year" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -100614,155 +101022,8 @@ module.exports['DateTimeIntervalExpand'] = {
                } ]
             }
          }, {
-            "localId" : "546",
-            "name" : "NullClose",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "546",
-                  "s" : [ {
-                     "value" : [ "define ","NullClose",": " ]
-                  }, {
-                     "r" : "545",
-                     "s" : [ {
-                        "value" : [ "expand " ]
-                     }, {
-                        "r" : "544",
-                        "s" : [ {
-                           "value" : [ "{ " ]
-                        }, {
-                           "r" : "543",
-                           "s" : [ {
-                              "value" : [ "Interval[","@2018-01-01T01+00:00",", ","null","]" ]
-                           } ]
-                        }, {
-                           "value" : [ " }" ]
-                        } ]
-                     }, {
-                        "value" : [ " per ","day" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "545",
-               "type" : "Expand",
-               "operand" : [ {
-                  "localId" : "544",
-                  "type" : "List",
-                  "element" : [ {
-                     "localId" : "543",
-                     "lowClosed" : true,
-                     "highClosed" : true,
-                     "type" : "Interval",
-                     "low" : {
-                        "localId" : "541",
-                        "type" : "DateTime",
-                        "year" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2018",
-                           "type" : "Literal"
-                        },
-                        "month" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
-                           "type" : "Literal"
-                        },
-                        "day" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
-                           "type" : "Literal"
-                        },
-                        "hour" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
-                           "type" : "Literal"
-                        },
-                        "timezoneOffset" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                           "value" : "0.0",
-                           "type" : "Literal"
-                        }
-                     },
-                     "high" : {
-                        "asType" : "{urn:hl7-org:elm-types:r1}DateTime",
-                        "type" : "As",
-                        "operand" : {
-                           "localId" : "542",
-                           "type" : "Null"
-                        }
-                     }
-                  } ]
-               }, {
-                  "value" : 1.0,
-                  "unit" : "day",
-                  "type" : "Quantity"
-               } ]
-            }
-         }, {
-            "localId" : "552",
-            "name" : "NullBoth",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "552",
-                  "s" : [ {
-                     "value" : [ "define ","NullBoth",": " ]
-                  }, {
-                     "r" : "551",
-                     "s" : [ {
-                        "value" : [ "expand " ]
-                     }, {
-                        "r" : "550",
-                        "s" : [ {
-                           "value" : [ "{ " ]
-                        }, {
-                           "r" : "549",
-                           "s" : [ {
-                              "value" : [ "Interval[","null",", ","null","]" ]
-                           } ]
-                        }, {
-                           "value" : [ " }" ]
-                        } ]
-                     }, {
-                        "value" : [ " per ","day" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "551",
-               "type" : "Expand",
-               "operand" : [ {
-                  "localId" : "550",
-                  "type" : "List",
-                  "element" : [ {
-                     "localId" : "549",
-                     "lowClosed" : true,
-                     "highClosed" : true,
-                     "type" : "Interval",
-                     "low" : {
-                        "localId" : "547",
-                        "type" : "Null"
-                     },
-                     "high" : {
-                        "localId" : "548",
-                        "type" : "Null"
-                     }
-                  } ]
-               }, {
-                  "value" : 1.0,
-                  "unit" : "day",
-                  "type" : "Quantity"
-               } ]
-            }
-         }, {
             "localId" : "558",
-            "name" : "MismatchPrecision",
+            "name" : "NullClose",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -100770,7 +101031,7 @@ module.exports['DateTimeIntervalExpand'] = {
                "s" : {
                   "r" : "558",
                   "s" : [ {
-                     "value" : [ "define ","MismatchPrecision",": " ]
+                     "value" : [ "define ","NullClose",": " ]
                   }, {
                      "r" : "557",
                      "s" : [ {
@@ -100782,7 +101043,7 @@ module.exports['DateTimeIntervalExpand'] = {
                         }, {
                            "r" : "555",
                            "s" : [ {
-                              "value" : [ "Interval[","@2018-01-01T01+00:00",", ","@2018-02-01T01:01+00:00","]" ]
+                              "value" : [ "Interval[","@2018-01-01T01+00:00",", ","null","]" ]
                            } ]
                         }, {
                            "value" : [ " }" ]
@@ -100834,37 +101095,11 @@ module.exports['DateTimeIntervalExpand'] = {
                         }
                      },
                      "high" : {
-                        "localId" : "554",
-                        "type" : "DateTime",
-                        "year" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2018",
-                           "type" : "Literal"
-                        },
-                        "month" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2",
-                           "type" : "Literal"
-                        },
-                        "day" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
-                           "type" : "Literal"
-                        },
-                        "hour" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
-                           "type" : "Literal"
-                        },
-                        "minute" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
-                           "type" : "Literal"
-                        },
-                        "timezoneOffset" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                           "value" : "0.0",
-                           "type" : "Literal"
+                        "asType" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "As",
+                        "operand" : {
+                           "localId" : "554",
+                           "type" : "Null"
                         }
                      }
                   } ]
@@ -100875,18 +101110,18 @@ module.exports['DateTimeIntervalExpand'] = {
                } ]
             }
          }, {
-            "localId" : "565",
-            "name" : "BadPerGram",
+            "localId" : "564",
+            "name" : "NullBoth",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "565",
+                  "r" : "564",
                   "s" : [ {
-                     "value" : [ "define ","BadPerGram",": " ]
+                     "value" : [ "define ","NullBoth",": " ]
                   }, {
-                     "r" : "564",
+                     "r" : "563",
                      "s" : [ {
                         "value" : [ "expand " ]
                      }, {
@@ -100896,24 +101131,19 @@ module.exports['DateTimeIntervalExpand'] = {
                         }, {
                            "r" : "561",
                            "s" : [ {
-                              "value" : [ "Interval[","@2018-01-01T01+00:00",", ","@2018-01-04T01+00:00","]" ]
+                              "value" : [ "Interval[","null",", ","null","]" ]
                            } ]
                         }, {
                            "value" : [ " }" ]
                         } ]
                      }, {
-                        "value" : [ " per " ]
-                     }, {
-                        "r" : "563",
-                        "s" : [ {
-                           "value" : [ "1 ","'g'" ]
-                        } ]
+                        "value" : [ " per ","day" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "564",
+               "localId" : "563",
                "type" : "Expand",
                "operand" : [ {
                   "localId" : "562",
@@ -100925,6 +101155,70 @@ module.exports['DateTimeIntervalExpand'] = {
                      "type" : "Interval",
                      "low" : {
                         "localId" : "559",
+                        "type" : "Null"
+                     },
+                     "high" : {
+                        "localId" : "560",
+                        "type" : "Null"
+                     }
+                  } ]
+               }, {
+                  "value" : 1.0,
+                  "unit" : "day",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "571",
+            "name" : "BadPerGram",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "571",
+                  "s" : [ {
+                     "value" : [ "define ","BadPerGram",": " ]
+                  }, {
+                     "r" : "570",
+                     "s" : [ {
+                        "value" : [ "expand " ]
+                     }, {
+                        "r" : "568",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "567",
+                           "s" : [ {
+                              "value" : [ "Interval[","@2018-01-01T01+00:00",", ","@2018-01-04T01+00:00","]" ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " per " ]
+                     }, {
+                        "r" : "569",
+                        "s" : [ {
+                           "value" : [ "1 ","'g'" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "570",
+               "type" : "Expand",
+               "operand" : [ {
+                  "localId" : "568",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "567",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "low" : {
+                        "localId" : "565",
                         "type" : "DateTime",
                         "year" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -100953,7 +101247,7 @@ module.exports['DateTimeIntervalExpand'] = {
                         }
                      },
                      "high" : {
-                        "localId" : "560",
+                        "localId" : "566",
                         "type" : "DateTime",
                         "year" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -100983,7 +101277,7 @@ module.exports['DateTimeIntervalExpand'] = {
                      }
                   } ]
                }, {
-                  "localId" : "563",
+                  "localId" : "569",
                   "value" : 1,
                   "unit" : "g",
                   "type" : "Quantity"

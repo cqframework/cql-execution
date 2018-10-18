@@ -1484,6 +1484,11 @@ describe 'DateIntervalExpand', ->
     a = @noPerDefaultYear.exec(@ctx)
     prettyList(a).should.equal '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
 
+    # define NoPerDefaultMonthWithMismatch: expand { Interval[@2016, @2018-03] }
+    a = @noPerDefaultYear.exec(@ctx)
+    prettyList(a).should.equal '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
+
+
   it 'expands interval with open ends', ->
     # define OpenStart: expand { Interval(@2018-01-01, @2018-01-03] } per day
     a = @openStart.exec(@ctx)
@@ -1496,6 +1501,17 @@ describe 'DateIntervalExpand', ->
     # define OpenBoth: expand { Interval(@2018-01-01, @2018-01-03) } per day
     a = @openBoth.exec(@ctx)
     prettyList(a).should.equal '{ [2018-01-02, 2018-01-02] }'
+
+  it 'handles ends with mismatched precision', ->
+    # define MismatchPrecision: expand { Interval[@2018-01-01, @2018-03] } per month
+    e = "{ [2018-01-01, 2018-01-31], [2018-02-01, 2018-02-28] }"
+    prettyList(@mismatchPrecision.exec(@ctx)).should.equal e
+
+    # define MismatchPrecisionEmpty: expand { Interval[@2018-01, @2018-02-28] } per month
+    e = "{ [2018-01, 2018-01], [2018-02, 2018-02] }"
+    prettyList(@mismatchPrecisionEmpty.exec(@ctx)).should.equal e
+
+    # @mismatchPrecisionEmpty.exec(@ctx).length.should.equal 0
 
   it 'returns an empty list if we get an empty list', ->
     # define EmptyList: List<Interval<Date>>{}
@@ -1513,11 +1529,6 @@ describe 'DateIntervalExpand', ->
 
     # define NullBoth: expand { Interval[null, null] } per day
     a = @nullBoth.exec(@ctx)
-    should.not.exist(a)
-
-  it 'returns null when ends are mismatched precision', ->
-    # define MismatchPrecision: expand { Interval[@2018-01-01, @2018-02] } per day
-    a = @mismatchPrecision.exec(@ctx)
     should.not.exist(a)
 
   it 'returns null when per is more precise than the interval ends', ->
@@ -1575,7 +1586,7 @@ describe 'DateTimeIntervalExpand', ->
     e = "{ [2018-01-01T01:00:00.000+00:00, 2018-01-01T01:00:00.999+00:00], [2018-01-01T01:00:01.000+00:00, 2018-01-01T01:00:01.999+00:00] }"
     prettyList(@msPrecPerSecond.exec(@ctx)).should.equal e
     
-    # define MsPrecPerMillisecond: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:00:00.002+00:00] } per millisecond
+    # define MsPrecPerMillisecond: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:00:00.001+00:00] } per millisecond
     e = "{ [2018-01-01T01:00:00.000+00:00, 2018-01-01T01:00:00.000+00:00], [2018-01-01T01:00:00.001+00:00, 2018-01-01T01:00:00.001+00:00] }"
     prettyList(@msPrecPerMillisecond.exec(@ctx)).should.equal e
 
@@ -1631,7 +1642,7 @@ describe 'DateTimeIntervalExpand', ->
     e = "{ [2018-01-01T01:00+00:00, 2018-01-01T01:59+00:00], [2018-01-01T02:00+00:00, 2018-01-01T02:59+00:00] }"
     prettyList(@minPrecPerHour.exec(@ctx)).should.equal e
     
-    # define MinPrecPerMinute: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T01:02+00:00] } per minute
+    # define MinPrecPerMinute: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T01:01+00:00] } per minute
     e = "{ [2018-01-01T01:00+00:00, 2018-01-01T01:00+00:00], [2018-01-01T01:01+00:00, 2018-01-01T01:01+00:00] }"
     prettyList(@minPrecPerMinute.exec(@ctx)).should.equal e
     
@@ -1771,6 +1782,14 @@ describe 'DateTimeIntervalExpand', ->
     a = @openBoth.exec(@ctx)
     prettyList(a).should.equal '{ [2018-01-01T02+00:00, 2018-01-02T01+00:00] }'
 
+  it 'handles ends with mismatched precision', ->
+    # define MismatchPrecision: expand { Interval[@2012-01-01T12:00+00:00, @2012-01-02T12:00:00+00:00] } per day
+    e = "{ [2012-01-01T12:00+00:00, 2012-01-02T11:59+00:00] }"
+    prettyList(@mismatchPrecision.exec(@ctx)).should.equal e
+
+    # define MismatchPrecisionEmpty: expand { Interval[@2012-01-01T13:00:00+00:00, @2012-01-02T12:59+00:00] } per day
+    @mismatchPrecisionEmpty.exec(@ctx).length.should.equal 0
+
   it 'returns an empty list if we get an empty list', ->
     # define EmptyList: List<Interval<Date>>{}
     a = @emptyList.exec(@ctx)
@@ -1790,10 +1809,6 @@ describe 'DateTimeIntervalExpand', ->
     should.not.exist(a)
 
   it 'returns null when per not applicable', ->
-    # define MismatchPrecision: expand { Interval[@2018-01-01T01+00:00, @2018-02-01T01:01+00:00] } per day
-    a = @mismatchPrecision.exec(@ctx)
-    should.not.exist(a)
-
     # define BadPerGram: expand { Interval[@2018-01-01T01+00:00, @2018-01-04T01+00:00] } per 1 'g'
     a = @badPerGram.exec(@ctx)
     should.not.exist(a)
@@ -1947,7 +1962,7 @@ describe 'QuantityIntervalExpand', ->
     a = @nullBoth.exec(@ctx)
     should.not.exist(a)
 
-  it 'returns null when per not applicable or mistmach interval', ->
+  it 'returns null when per not applicable or mismatch interval', ->
     # define BadPerMinute: expand { Interval(2 'g', 4 'g'] } per minute
     a = @badPerMinute.exec(@ctx)
     should.not.exist(a)
@@ -2024,7 +2039,7 @@ describe 'IntegerIntervalExpand', ->
     a = @nullBoth.exec(@ctx)
     should.not.exist(a)
 
-  it 'returns null when per not applicable or mistmach interval', ->
+  it 'returns null when per not applicable or mismatch interval', ->
     # define BadPerMinute: expand { Interval(2, 4] } per 1 minute
     a = @badPerMinute.exec(@ctx)
     should.not.exist(a)
@@ -2097,7 +2112,7 @@ describe 'DecimalIntervalExpand', ->
     a = @nullBoth.exec(@ctx)
     should.not.exist(a)
 
-  it 'returns null when per not applicable or mistmach interval', ->
+  it 'returns null when per not applicable or mismatch interval', ->
     # define BadPerMinute: expand { Interval(2.1, 4.1] } per 0.5 minute
     a = @badPerMinute.exec(@ctx)
     should.not.exist(a)

@@ -931,16 +931,19 @@ define NonOverlapping: expand { Interval[@2018-01-01, @2018-01-03], Interval[@20
 define NoPerDefaultDay: expand { Interval[@2018-01-01, @2018-01-03] }
 define NoPerDefaultMonth: expand { Interval[@2018-01, @2018-03] }
 define NoPerDefaultYear: expand { Interval[@2016, @2018] }
+define NoPerDefaultMonthWithMismatch: expand { Interval[@2016, @2018-03] }
 
 define OpenStart: expand { Interval(@2018-01-01, @2018-01-03] } per day
 define OpenEnd: expand { Interval[@2018-01-01, @2018-01-03) } per day
 define OpenBoth: expand { Interval(@2018-01-01, @2018-01-03) } per day
 
+define MismatchPrecision: expand { Interval[@2018-01-01, @2018-03] } per month
+define MismatchPrecisionEmpty: expand { Interval[@2018-01, @2018-02-28] } per month
+
 define EmptyList: List<Interval<Date>>{}
 define NullOpen: expand { Interval[null, @2018-01-03] } per day
 define NullClose: expand { Interval[@2018-01-01, null] } per day
 define NullBoth: expand { Interval[null, null] } per day
-define MismatchPrecision: expand { Interval[@2018-01-01, @2018-02] } per day
 define MonthDayPer: expand { Interval[@2018-01, @2018-03] } per day
 define YearMonthPer: expand { Interval[@2016, @2018] } per month
 define YearDayPer: expand { Interval[@2016, @2018] } per day
@@ -1028,11 +1031,13 @@ define OpenStart: expand { Interval(@2018-01-01T01+00:00, @2018-01-03T01+00:00] 
 define OpenEnd: expand { Interval[@2018-01-01T01+00:00, @2018-01-03T01+00:00) } per day
 define OpenBoth: expand { Interval(@2018-01-01T01+00:00, @2018-01-03T01+00:00) } per day
 
+define MismatchPrecision: expand { Interval[@2012-01-01T12:00+00:00, @2012-01-02T12:00:00+00:00] } per day
+define MismatchPrecisionEmpty: expand { Interval[@2012-01-01T13:00:00+00:00, @2012-01-02T12:59+00:00] } per day
+
 define EmptyList: List<Interval<Date>>{}
 define NullOpen: expand { Interval[null, @2018-01-03T01+00:00] } per day
 define NullClose: expand { Interval[@2018-01-01T01+00:00, null] } per day
 define NullBoth: expand { Interval[null, null] } per day
-define MismatchPrecision: expand { Interval[@2018-01-01T01+00:00, @2018-02-01T01:01+00:00] } per day
 define BadPerGram: expand { Interval[@2018-01-01T01+00:00, @2018-01-04T01+00:00] } per 1 'g'
 
 // @Test: TimeIntervalExpand 

@@ -3,7 +3,6 @@
 { build } = require './builder'
 { Quantity, doAddition, doSubtraction, compare_units, convert_value } = require './quantity'
 { successor, predecessor, MIN_FLOAT_PRECISION_VALUE } = require '../util/math'
-{ pushOntoArray } = require '../util/util'
 dtivl = require '../datatypes/interval'
 cmp = require '../util/comparison'
 
@@ -155,6 +154,77 @@ module.exports.Ends = class Ends extends Expression
     [a, b] = @execArgs ctx
     if a? and b? then a.ends(b, @precision) else null
 
+intervalListType = (intervals) ->
+  # Returns one of null, 'time', 'date', 'datetime', 'quantity', 'integer', 'decimal' or 'mismatch'
+  type = null;
+
+  for itvl in intervals
+    if !itvl?
+      continue
+
+    if !itvl.low? and !itvl.high? #can't really determine type from this
+      continue
+
+    # if one end is null (but not both), the type can be determined from the other end
+    low = itvl.low ? itvl.high
+    high = itvl.high ? itvl.low
+
+    if (low.isTime?() and high.isTime?())
+      if !type?
+        type = 'time'
+      else if type is 'time'
+        continue
+      else
+        return 'mismatch'
+
+    # if an interval mixes date and datetime, type is datetime (for implicit conversion)
+    else if (low.isDateTime or high.isDateTime) and
+    (low.isDateTime or low.isDate) and (high.isDateTime or high.isDate)
+      if (!type? or type is 'date')
+        type = 'datetime'
+      else if type is 'datetime'
+        continue
+      else
+        return 'mismatch'
+
+    else if (low.isDate and high.isDate)
+      if !type?
+        type = 'date'
+      else if type is 'date' or 'datetime'
+        continue
+      else
+        return 'mismatch'
+
+    else if (low.isQuantity and high.isQuantity)
+      if !type?
+        type = 'quantity'
+      else if type is 'quantity'
+        continue
+      else
+        return 'mismatch'
+
+    else if (Number.isInteger(low) and Number.isInteger(high))
+      if !type?
+        type = 'integer'
+      else if type is 'integer' or 'decimal'
+        continue
+      else
+        return 'mismatch'
+
+    else if (typeof low is 'number' and typeof high is 'number')
+      if (!type? or type is 'integer')
+        type = 'decimal'
+      else if type is 'decimal'
+        continue
+      else
+        return 'mismatch'
+    #if we are here ends are mismatched
+    else
+      return 'mismatch'
+
+  return type
+
+
 module.exports.Expand = class Expand extends Expression
   constructor: (json) ->
     super
@@ -162,7 +232,26 @@ module.exports.Expand = class Expand extends Expression
   exec: (ctx) ->
     # expand(argument List<Interval<T>>, per Quantity) List<Interval<T>>
     [intervals, per] = @execArgs ctx
+    type = intervalListType(intervals)
+    throw new Error("List of intervals contains mismatched types.") if type is 'mismatch'
+    return null if !type?
+
+    # this step collapses overlaps, and also returns a clone of intervals so we can feel free to mutate
     intervals = collapseIntervals(intervals, per)
+    return [] if intervals.length == 0
+
+    if type in ["time", "date", "datetime"]
+      expandFunction = @expandDTishInterval
+      defaultPer = (interval) -> new Quantity(value: 1, unit: interval.low.getPrecision())
+    else if type in ["quantity"]
+      expandFunction = @expandQuantityInterval
+      defaultPer = (interval) -> new Quantity(value: 1, unit: interval.low.unit)
+    else if type in ["integer", "decimal"]
+      expandFunction = @expandNumericInterval
+      defaultPer = (interval) -> new Quantity(value: 1, unit: '1')
+    else
+      throw new Error("Interval list type not yet supported.")
+
     results = []
     for interval in intervals
       if !interval?
@@ -171,78 +260,67 @@ module.exports.Expand = class Expand extends Expression
       if !interval.low? or !interval.high?
         return null
 
-      # if we mix date and datetime, convert to datetime
-      if ((interval.low.isDate or interval.high.isDate) and 
-      (interval.low.isDateTime or interval.high.isDateTime))
-        interval = interval.copy()
+      if type is 'datetime' #support for implicitly converting dates to datetime
         interval.low = interval.low.getDateTime()
         interval.high = interval.high.getDateTime()
-      
-      # Support for Date, Datetime, Time
-      if ((interval.low.isDate and interval.high.isDate) or
-      (interval.low.isDateTime and interval.high.isDateTime) or
-      (interval.low.isTime?() and interval.high.isTime?()))
-        func = @expandDTishInterval
 
-      # Support for Quantity
-      else if (interval.low.isQuantity and interval.high.isQuantity)
-        func = @expandQuantityInterval
-
-      # Support for Decimal and Integer (note Decimals with .0 (eg 1.0) are considered Integers)
-      else if (typeof interval.low is 'number' and typeof interval.high is 'number')
-        func = @expandNumericInterval
-
-      if func?
-        items = func.call(@,interval,per)
-        return null if items == null
-        pushOntoArray(results,items)
-      # If we are here, Interval type is unsupported or mismatched
-      else
-        return null
+      per = per ? defaultPer(interval)
+      items = expandFunction.call(@,interval,per)
+      return null if items == null
+      results.push(items...)
 
     return results
 
   expandDTishInterval: (interval, per) ->
-    per = per ? new Quantity(value: 1, unit: interval.low.getPrecision())
     if per.unit in ['week', 'weeks']
       per.value *= 7
       per.unit = 'day'
     # return null if precision not applicable (e.g. gram, or minutes for dates)
     return null if per.unit not in interval.low.constructor.FIELDS
-    # return null if interval ends have mismatched precision
-    return null if interval.low.getPrecision() != interval.high.getPrecision()
-    # return null if per is more precise than the ends
+    # return null if per is more precise than the low end
     return null if interval.low.isLessPrecise(per.unit)
 
-    start = if interval.lowClosed then interval.low else interval.low.successor()
-    return [] if start.after(interval.high)
-    # count is how many items to put in the result, take duration and thenn add a one for cases 
-    # where e.g. the high point ends a month, like 2018-03-31.
-    # we do this to avoid a date comparison operation for each item in the result list
-    count = start.durationBetween(interval.high,per.unit).low + 1
-    current_low = start
+    low = if interval.lowClosed then interval.low else interval.low.successor()
+    high = if interval.highClosed then interval.high else interval.high.predecessor()
+    return [] if low.after(high)
+
+    current_low = low
     results = []
-    # check if interval should be a point interval
-    if current_low.add(per.value, per.unit).predecessor().equals(current_low)
-      for i in [0..count]
+    # Check if interval should be a point interval, for example "expand [@2000-01-01, @2000-01-02]
+    # per 1 day" results in intervals with the same start and end: { [@2000-01-01, @2000-01-01],
+    # [@2000-01-02, @2000-01-02] }. However "expand [@2000-01-01, @2000-03-01] per 1 month" results
+    # in { [@2000-01-01, @2000-01-31], [@2000-02-01, @2000-02-28] }. This check allows us
+    # to skip the unnecessary date arithmetic in the first case.
+    point_intervals = current_low.add(per.value, per.unit).predecessor().equals(current_low)
+
+    # count is how many items to put in the result - take duration and then add a one for cases
+    # where e.g. the high point ends a month, like 2018-03-31. Then divide by the per value.
+    # We do this to avoid a date comparison operation for each item in the result list.
+    if per.unit == low.getPrecision()
+      count = Math.floor((low.durationBetween(high,per.unit).high + 1) / per.value)
+    # if precisions are equal, we want the high uncertainty (e.g. [2000, 2002] per year should
+    # give a list of 3) else, take the low uncertainty (e.g. [2012-01-01T13:00:00, 2012-01-02T12:59]
+    # per day should give {} since we dont include any uncertain portions)
+    else
+      count = Math.floor((low.durationBetween(high,per.unit).low + 1) / per.value)
+
+    if point_intervals
+      for i in [1..count + 1] #point intervals result in one extra item (see above example)
         results.push(new dtivl.Interval(current_low, current_low.copy(), true, true))
         current_low = current_low.add(per.value, per.unit)
     else
-      for i in [0..count]
-        high = current_low.add(per.value, per.unit).predecessor()
-        results.push(new dtivl.Interval(current_low, high, true, true))
+      for i in [1..count]
+        current_high = current_low.add(per.value, per.unit).predecessor()
+        results.push(new dtivl.Interval(current_low, current_high, true, true))
         current_low = current_low.add(per.value, per.unit)
-    return [] if results.length == 0    
-    # because of the +1 on count, we might have added up to 2 extraneous items at the end
-    while results.length > 0 and results[results.length-1].high.after(interval.high)
-      results.pop()
-    return [] if results.length == 0
-    if !interval.highClosed and results[results.length-1].high.equals(interval.high)
+    # because of the +1 in the count declaration, we might have added an extraneous item at the end.
+    # we use 'not sameOrBefore' instead of 'after' since we do not include items in the results
+    # if they just *might* not be after (due to uncertainty)
+    if results.length > 0 and !results[results.length-1].high.sameOrBefore(high)
       results.pop()
     return results
     
   expandQuantityInterval: (interval, per) ->
-    per = per ? new Quantity(value: 1, unit: interval.low.unit)
     # we want to convert everything to the more precise of the interval.low or per
     if compare_units(interval.low.unit, per.unit) > 0 #interval.low.unit is 'bigger' aka les precise
       result_units = per.unit
@@ -264,10 +342,9 @@ module.exports.Expand = class Expand extends Expression
     return results
 
   expandNumericInterval: (interval, per) ->
-    return null if per?.unit? and per.unit != '1'
-    per_value = per?.value ? 1
+    return null if per.unit != '1'
     return @makeNumericIntervalList(
-      interval.low, interval.high, interval.lowClosed, interval.highClosed, per_value)
+      interval.low, interval.high, interval.lowClosed, interval.highClosed, per.value)
 
   makeNumericIntervalList: (low, high, lowClosed, highClosed, per) ->
     point_intervals = Number.isInteger(low) and Number.isInteger(high) and Number.isInteger(per)

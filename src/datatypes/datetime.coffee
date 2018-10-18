@@ -548,7 +548,7 @@ DateTime.prototype.isImprecise = Date.prototype.isImprecise = () ->
 # This function can take another Date-ish object, or a precision string (e.g. 'month')
 DateTime.prototype.isMorePrecise = Date.prototype.isMorePrecise = (other) ->
     if typeof other is 'string' and other in @constructor.FIELDS
-      return @[other]?
+      return false if not @[other]?
 
     else
       for field in @constructor.FIELDS
