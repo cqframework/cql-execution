@@ -1995,7 +1995,7 @@ describe 'IntegerIntervalExpand', ->
 
     # define Overlapping: expand { Interval[2, 4], Interval[3, 5] } per 1 '1'
     a = @overlapping.exec(@ctx)
-    prettyList(a).should.equal "{ [2, 2], [3, 3], [4, 4], [5, 5] }"
+    prettyList(a).should.equal '{ [2, 2], [3, 3], [4, 4], [5, 5] }'
 
     # define NonOverlapping: expand { Interval[2, 4], Interval[6, 6] } per 1 '1'
     a = @nonOverlapping.exec(@ctx)
