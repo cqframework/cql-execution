@@ -2059,7 +2059,7 @@ describe 'DecimalIntervalExpand', ->
     
     # define ClosedSingle2: expand { Interval[2, 4.5] } per 0.5 '1'
     a = @closedSingle2.exec(@ctx)
-    prettyList(a).should.equal "{ [2, 2.49999999], [2.5, 2.99999999], [3, 3.49999999], [3.5, 3.99999999], [4, 4.49999999] }"
+    prettyList(a).should.equal '{ [2, 2.49999999], [2.5, 2.99999999], [3, 3.49999999], [3.5, 3.99999999], [4, 4.49999999] }'
     
   it 'expands lists of multiple intervals', ->
     # define NullInList: expand { Interval[2, 5], null } per 1.5 '1'
