@@ -1910,7 +1910,7 @@ describe 'QuantityIntervalExpand', ->
 
     # define NonOverlapping: expand { Interval[2 'g', 4 'g'], Interval[6 'g', 6 'g'] } per 1 'g'
     a = @nonOverlapping.exec(@ctx)
-    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'], [6 'g', 6 'g'] }" 
+    prettyList(a).should.equal '{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'], [6 'g', 6 'g'] }'
 
   it 'expands interval using the first items units if no per provided', ->
     # define NoPerDefaultM: expand { Interval[2 'm', 400 'cm'], null } per 1 'm'
