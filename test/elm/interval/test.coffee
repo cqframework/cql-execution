@@ -1467,7 +1467,7 @@ describe 'DateIntervalExpand', ->
     prettyList(a).should.equal '{ [2017-11-14, 2017-12-13], [2017-12-14, 2018-01-13] }'
 
   it 'expands an interval with mid boundaries per year', ->
-    # define MidBoundariesPerDayYear: expand { Interval[@2016-04-06, @2018-04-06] } per year
+    # define MidBoundariesPerYear: expand { Interval[@2016-04-06, @2018-04-06] } per year
     a = @midBoundariesPerYear.exec(@ctx)
     prettyList(a).should.equal '{ [2016-04-06, 2017-04-05], [2017-04-06, 2018-04-05] }'
 
