@@ -1934,7 +1934,7 @@ describe 'QuantityIntervalExpand', ->
     a = @openBoth.exec(@ctx)
     prettyList(a).should.equal '{ [3 'g', 3 'g'] }'
 
-    # define OpenBothDecimal: expand { Interval(2.1 'g', 4.1  'g'), null } per 1 'g'
+    # define OpenBothDecimal: expand { Interval(2.1 'g', 4.1 'g') } per 1 'g'
     a = @openBothDecimal.exec(@ctx)
     prettyList(a).should.equal "{ [2.10000001 'g', 3.1 'g'] }"
 
