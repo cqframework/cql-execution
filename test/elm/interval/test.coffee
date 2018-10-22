@@ -1889,7 +1889,7 @@ describe 'QuantityIntervalExpand', ->
     
     # define ClosedSingleMGPerGTrunc: expand { Interval[2999 'mg', 4200 'mg'] } per 1 'g'
     a = @closedSingleMGPerGTrunc.exec(@ctx)
-    prettyList(a).should.equal "{ [2999 'mg', 3998 'mg'] }"
+    prettyList(a).should.equal '{ [2999 'mg', 3998 'mg'] }'
     
     # define ClosedSingleMGPerMGTrunc: expand { Interval[2000 'mg', 4500 'mg'] } per 800 'mg'
     a = @closedSingleMGPerMGTrunc.exec(@ctx)
