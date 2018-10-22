@@ -1930,7 +1930,7 @@ describe 'QuantityIntervalExpand', ->
     a = @openEnd.exec(@ctx)
     prettyList(a).should.equal '{ [2 'g', 2 'g'], [3 'g', 3 'g'] }'
 
-    # define OpenBoth: expand { Interval(2 'g', 4 'g'), null } per 1 'g'
+    # define OpenBoth: expand { Interval(2 'g', 4 'g') } per 1 'g'
     a = @openBoth.exec(@ctx)
     prettyList(a).should.equal "{ [3 'g', 3 'g'] }"
 
