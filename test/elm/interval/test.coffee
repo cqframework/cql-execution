@@ -1622,7 +1622,7 @@ describe 'DateTimeIntervalExpand', ->
     should.not.exist @secPrecPerMillisecond.exec(@ctx)
   
   it 'expands a minute precision datetime', ->
-    # define MinPrecPerYear: expand { Interval[@2016-01-01T01:00+00:00, @2018-01-01T01:00+00:00] } per year
+    # define MinPrecPerYear: expand { Interval[@2016-01-01T00:00+00:00, @2018-01-01T00:00+00:00] } per year
     e = "{ [2016-01-01T00:00+00:00, 2016-12-31T23:59+00:00], [2017-01-01T00:00+00:00, 2017-12-31T23:59+00:00] }"
     prettyList(@minPrecPerYear.exec(@ctx)).should.equal e
 
