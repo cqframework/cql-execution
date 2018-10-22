@@ -1504,7 +1504,7 @@ describe 'DateIntervalExpand', ->
 
   it 'handles ends with mismatched precision', ->
     # define MismatchPrecision: expand { Interval[@2018-01-01, @2018-03] } per month
-    e = "{ [2018-01-01, 2018-01-31], [2018-02-01, 2018-02-28] }"
+    e = '{ [2018-01-01, 2018-01-31], [2018-02-01, 2018-02-28] }'
     prettyList(@mismatchPrecision.exec(@ctx)).should.equal e
 
     # define MismatchPrecisionEmpty: expand { Interval[@2018-01, @2018-02-28] } per month
