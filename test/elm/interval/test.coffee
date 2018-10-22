@@ -1902,7 +1902,7 @@ describe 'QuantityIntervalExpand', ->
   it 'expands lists of multiple intervals', ->
     # define NullInList: expand { Interval[2 'g', 4 'g'], null } per 1 'g'
     a = @nullInList.exec(@ctx)
-    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }"
+    prettyList(a).should.equal '{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }'
 
     # define Overlapping: expand { Interval[2 'g', 4 'g'], Interval[3 'g', 5 'g'] } per 1 'g'
     a = @overlapping.exec(@ctx)
