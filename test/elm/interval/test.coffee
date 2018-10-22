@@ -1906,7 +1906,7 @@ describe 'QuantityIntervalExpand', ->
 
     # define Overlapping: expand { Interval[2 'g', 4 'g'], Interval[3 'g', 5 'g'] } per 1 'g'
     a = @overlapping.exec(@ctx)
-    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'], [5 'g', 5 'g'] }"
+    prettyList(a).should.equal '{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'], [5 'g', 5 'g'] }'
 
     # define NonOverlapping: expand { Interval[2 'g', 4 'g'], Interval[6 'g', 6 'g'] } per 1 'g'
     a = @nonOverlapping.exec(@ctx)
