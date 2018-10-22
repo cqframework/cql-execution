@@ -1844,7 +1844,7 @@ describe 'TimeIntervalExpand', ->
     prettyList(@secPrecPerMinute.exec(@ctx)).should.equal e
     
     # define SecPrecPerSecond: expand { Interval[@T01:00:00+00:00, @T01:00:01+00:00] } per second
-    e = "{ [T01:00:00+00:00, T01:00:00+00:00], [T01:00:01+00:00, T01:00:01+00:00] }"
+    e = '{ [T01:00:00+00:00, T01:00:00+00:00], [T01:00:01+00:00, T01:00:01+00:00] }'
     prettyList(@secPrecPerSecond.exec(@ctx)).should.equal e
 
     should.not.exist @secPrecPerMillisecond.exec(@ctx)
