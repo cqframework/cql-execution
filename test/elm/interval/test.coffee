@@ -1881,7 +1881,7 @@ describe 'QuantityIntervalExpand', ->
     
     # define ClosedSingleGPerGDecimal: expand { Interval[2.1 'g', 4.1 'g'] } per 1 'g'
     a = @closedSingleGPerGDecimal.exec(@ctx)
-    prettyList(a).should.equal "{ [2.1 'g', 3.09999999 'g'], [3.1 'g', 4.09999999 'g'] }"
+    prettyList(a).should.equal '{ [2.1 'g', 3.09999999 'g'], [3.1 'g', 4.09999999 'g'] }'
     
     # define ClosedSingleGPerMG: expand { Interval[2 'g', 2.003 'g'] } per 1 'mg'
     a = @closedSingleGPerMG.exec(@ctx)
