@@ -1984,7 +1984,7 @@ describe 'IntegerIntervalExpand', ->
     a = @closedSinglePer3.exec(@ctx)
     prettyList(a).should.equal '{ [2, 4], [5, 7], [8, 10] }'
     
-    # define ClosedSinglePer3Weird: expand { Interval[2, 4] } per 3 '1'
+    # define ClosedSinglePer3NoteTheWidth: expand { Interval[2, 4] } per 3 '1'
     a = @closedSinglePer3NoteTheWidth.exec(@ctx)
     prettyList(a).should.equal "{ [2, 4] }"
     
