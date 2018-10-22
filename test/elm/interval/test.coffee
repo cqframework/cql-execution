@@ -1658,7 +1658,7 @@ describe 'DateTimeIntervalExpand', ->
     e = '{ [2018-01-01T00+00:00, 2018-01-31T23+00:00], [2018-02-01T00+00:00, 2018-02-28T23+00:00] }'
     prettyList(@hourPrecPerMonth.exec(@ctx)).should.equal e
 
-    # define HourPrecPerWeek: expand { Interval[@2018-01-01T01+00:00, @2018-01-21T01+00:00] } per week
+    # define HourPrecPerWeek: expand { Interval[@2018-01-01T00+00:00, @2018-01-21T00+00:00] } per week
     e = "{ [2018-01-01T00+00:00, 2018-01-07T23+00:00], [2018-01-08T00+00:00, 2018-01-14T23+00:00] }"
     prettyList(@hourPrecPerWeek.exec(@ctx)).should.equal e
     
