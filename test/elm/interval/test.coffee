@@ -1885,7 +1885,7 @@ describe 'QuantityIntervalExpand', ->
     
     # define ClosedSingleGPerMG: expand { Interval[2 'g', 2.003 'g'] } per 1 'mg'
     a = @closedSingleGPerMG.exec(@ctx)
-    prettyList(a).should.equal "{ [2000 'mg', 2000 'mg'], [2001 'mg', 2001 'mg'], [2002 'mg', 2002 'mg'], [2003 'mg', 2003 'mg'] }"
+    prettyList(a).should.equal '{ [2000 'mg', 2000 'mg'], [2001 'mg', 2001 'mg'], [2002 'mg', 2002 'mg'], [2003 'mg', 2003 'mg'] }'
     
     # define ClosedSingleMGPerGTrunc: expand { Interval[2999 'mg', 4200 'mg'] } per 1 'g'
     a = @closedSingleMGPerGTrunc.exec(@ctx)
