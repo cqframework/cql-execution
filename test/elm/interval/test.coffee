@@ -2013,7 +2013,7 @@ describe 'IntegerIntervalExpand', ->
 
     # define OpenEnd: expand { Interval[2, 4) } per 1 '1'
     a = @openEnd.exec(@ctx)
-    prettyList(a).should.equal "{ [2, 2], [3, 3] }"
+    prettyList(a).should.equal '{ [2, 2], [3, 3] }'
 
     # define OpenBoth: expand { Interval(2, 4) } per 1 '1'
     a = @openBoth.exec(@ctx)
