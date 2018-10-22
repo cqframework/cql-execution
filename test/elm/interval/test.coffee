@@ -1684,7 +1684,7 @@ describe 'DateTimeIntervalExpand', ->
     prettyList(@dayPrecPerMonth.exec(@ctx)).should.equal e
 
     # define DayPrecPerWeek: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,14)] } per week
-    e = "{ [2018-01-01, 2018-01-07], [2018-01-08, 2018-01-14] }"
+    e = '{ [2018-01-01, 2018-01-07], [2018-01-08, 2018-01-14] }'
     prettyList(@dayPrecPerWeek.exec(@ctx)).should.equal e
     
     # define DayPrecPerDay: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,02)] } per day
