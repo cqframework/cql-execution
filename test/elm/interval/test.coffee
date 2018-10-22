@@ -1627,7 +1627,7 @@ describe 'DateTimeIntervalExpand', ->
     prettyList(@minPrecPerYear.exec(@ctx)).should.equal e
 
     # define MinPrecPerMonth: expand { Interval[@2018-01-01T00:00+00:00, @2018-03-01T00:00+00:00] } per month
-    e = "{ [2018-01-01T00:00+00:00, 2018-01-31T23:59+00:00], [2018-02-01T00:00+00:00, 2018-02-28T23:59+00:00] }"
+    e = '{ [2018-01-01T00:00+00:00, 2018-01-31T23:59+00:00], [2018-02-01T00:00+00:00, 2018-02-28T23:59+00:00] }'
     prettyList(@minPrecPerMonth.exec(@ctx)).should.equal e
 
     # define MinPrecPerWeek: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-21T01:00+00:00] } per week
