@@ -1616,7 +1616,7 @@ describe 'DateTimeIntervalExpand', ->
     prettyList(@secPrecPerMinute.exec(@ctx)).should.equal e
     
     # define SecPrecPerSecond: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T01:00:01+00:00] } per second
-    e = "{ [2018-01-01T01:00:00+00:00, 2018-01-01T01:00:00+00:00], [2018-01-01T01:00:01+00:00, 2018-01-01T01:00:01+00:00] }"
+    e = '{ [2018-01-01T01:00:00+00:00, 2018-01-01T01:00:00+00:00], [2018-01-01T01:00:01+00:00, 2018-01-01T01:00:01+00:00] }'
     prettyList(@secPrecPerSecond.exec(@ctx)).should.equal e
 
     should.not.exist @secPrecPerMillisecond.exec(@ctx)
