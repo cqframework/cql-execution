@@ -2064,7 +2064,7 @@ describe 'DecimalIntervalExpand', ->
   it 'expands lists of multiple intervals', ->
     # define NullInList: expand { Interval[2, 5], null } per 1.5 '1'
     a = @nullInList.exec(@ctx)
-    prettyList(a).should.equal "{ [2, 3.49999999], [3.5, 4.99999999] }"
+    prettyList(a).should.equal '{ [2, 3.49999999], [3.5, 4.99999999] }'
 
     # define Overlapping: expand { Interval[2, 5], Interval[4, 7] } per 1.5 '1'
     a = @overlapping.exec(@ctx)
