@@ -2082,7 +2082,7 @@ describe 'DecimalIntervalExpand', ->
   it 'expands interval with open ends', ->
     # define OpenStart: expand { Interval(2, 5] } per 1.5 '1'
     a = @openStart.exec(@ctx)
-    prettyList(a).should.equal "{ [2.00000001, 3.5], [3.50000001, 5] }"
+    prettyList(a).should.equal '{ [2.00000001, 3.5], [3.50000001, 5] }'
 
     # define OpenEnd: expand { Interval[2, 5) } per 1.5 '1'
     a = @openEnd.exec(@ctx)
