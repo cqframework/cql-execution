@@ -1991,7 +1991,7 @@ describe 'IntegerIntervalExpand', ->
   it 'expands lists of multiple intervals', ->
     # define NullInList: expand { Interval[2, 4], null } per 1 '1'
     a = @nullInList.exec(@ctx)
-    prettyList(a).should.equal "{ [2, 2], [3, 3], [4, 4] }"
+    prettyList(a).should.equal '{ [2, 2], [3, 3], [4, 4] }'
 
     # define Overlapping: expand { Interval[2, 4], Interval[3, 5] } per 1 '1'
     a = @overlapping.exec(@ctx)
