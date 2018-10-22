@@ -2004,7 +2004,7 @@ describe 'IntegerIntervalExpand', ->
   it 'expands interval using default per of 1', ->
     # define NoPer: expand { Interval[2, 4] }
     a = @noPer.exec(@ctx)
-    prettyList(a).should.equal "{ [2, 2], [3, 3], [4, 4] }"
+    prettyList(a).should.equal '{ [2, 2], [3, 3], [4, 4] }'
 
   it 'expands interval with open ends', ->
     # define OpenStart: expand { Interval(2, 4] } per 1 '1'
