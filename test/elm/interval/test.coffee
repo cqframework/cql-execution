@@ -1831,7 +1831,7 @@ describe 'TimeIntervalExpand', ->
     prettyList(@msPrecPerSecond.exec(@ctx)).should.equal e
     
     # define MsPrecPerMillisecond: expand { Interval[@T01:00:00.000+00:00, @T01:00:00.002+00:00] } per millisecond
-    e = "{ [T01:00:00.000+00:00, T01:00:00.000+00:00], [T01:00:00.001+00:00, T01:00:00.001+00:00] }"
+    e = '{ [T01:00:00.000+00:00, T01:00:00.000+00:00], [T01:00:00.001+00:00, T01:00:00.001+00:00] }'
     prettyList(@msPrecPerMillisecond.exec(@ctx)).should.equal e
 
   xit 'expands a second precision datetime', ->
