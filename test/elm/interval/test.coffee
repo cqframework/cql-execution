@@ -1919,7 +1919,7 @@ describe 'QuantityIntervalExpand', ->
 
     # define NoPerDefaultG: expand { Interval[2 'g', 4 'g'] }
     a = @noPerDefaultG.exec(@ctx)
-    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }"
+    prettyList(a).should.equal '{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }'
 
   it 'expands interval with open ends', ->
     # define OpenStart: expand { Interval(2 'g', 4 'g'], null } per 1 'g'
