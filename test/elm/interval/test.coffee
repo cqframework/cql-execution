@@ -1702,7 +1702,7 @@ describe 'DateTimeIntervalExpand', ->
     prettyList(@monthPrecPerYear.exec(@ctx)).should.equal e
 
     # define MonthPrecPerMonth: expand { Interval[DateTime(2018,01), DateTime(2018,03)] } per month
-    e = "{ [2018-01, 2018-01], [2018-02, 2018-02] }"
+    e = '{ [2018-01, 2018-01], [2018-02, 2018-02] }'
     prettyList(@monthPrecPerMonth.exec(@ctx)).should.equal e
 
     should.not.exist @monthPrecPerWeek.exec(@ctx)
