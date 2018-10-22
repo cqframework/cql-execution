@@ -1595,7 +1595,7 @@ describe 'DateTimeIntervalExpand', ->
     e = '{ [2016-01-01T00:00:00+00:00, 2016-12-31T23:59:59+00:00], [2017-01-01T00:00:00+00:00, 2017-12-31T23:59:59+00:00] }'
     prettyList(@secPrecPerYear.exec(@ctx)).should.equal e
 
-    # define SecPrecPerMonth: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-03-01T01:00:00+00:00] } per month
+    # define SecPrecPerMonth: expand { Interval[@2018-01-01T00:00:00+00:00, @2018-03-01T00:00:00+00:00] } per month
     e = "{ [2018-01-01T00:00:00+00:00, 2018-01-31T23:59:59+00:00], [2018-02-01T00:00:00+00:00, 2018-02-28T23:59:59+00:00] }"
     prettyList(@secPrecPerMonth.exec(@ctx)).should.equal e
 
