@@ -2017,7 +2017,7 @@ describe 'IntegerIntervalExpand', ->
 
     # define OpenBoth: expand { Interval(2, 4) } per 1 '1'
     a = @openBoth.exec(@ctx)
-    prettyList(a).should.equal "{ [3, 3] }"
+    prettyList(a).should.equal '{ [3, 3] }'
 
   it 'returns an empty list if we get an empty list or if there are no results', ->
     # define EmptyList: List<Interval<Integer>>{}
