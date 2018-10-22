@@ -1676,7 +1676,7 @@ describe 'DateTimeIntervalExpand', ->
   
   it 'expands a day precision datetime', ->
     # define DayPrecPerYear: expand { Interval[DateTime(2016,01,01), DateTime(2018,01,01)] } per year
-    e = "{ [2016-01-01, 2016-12-31], [2017-01-01, 2017-12-31] }"
+    e = '{ [2016-01-01, 2016-12-31], [2017-01-01, 2017-12-31] }'
     prettyList(@dayPrecPerYear.exec(@ctx)).should.equal e
 
     # define DayPrecPerMonth: expand { Interval[DateTime(2018,01,01), DateTime(2018,03,01)] } per month
