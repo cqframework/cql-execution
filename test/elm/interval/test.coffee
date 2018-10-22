@@ -1823,7 +1823,7 @@ describe 'TimeIntervalExpand', ->
     prettyList(@msPrecPerHour.exec(@ctx)).should.equal e
     
     # define MsPrecPerMinute: expand { Interval[@T01:00:00.000+00:00, @T01:02:00.000+00:00] } per minute
-    e = "{ [T01:00:00.000+00:00, T01:00:59.999+00:00], [T01:01:00.000+00:00, T01:01:59.999+00:00] }"
+    e = '{ [T01:00:00.000+00:00, T01:00:59.999+00:00], [T01:01:00.000+00:00, T01:01:59.999+00:00] }'
     prettyList(@msPrecPerMinute.exec(@ctx)).should.equal e
     
     # define MsPrecPerSecond: expand { Interval[@T01:00:00.000+00:00, @T01:00:02.000+00:00] } per second
