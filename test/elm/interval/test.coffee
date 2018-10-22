@@ -1570,7 +1570,7 @@ describe 'DateTimeIntervalExpand', ->
     e = '{ [2018-01-01T00:00:00.000+00:00, 2018-01-07T23:59:59.999+00:00], [2018-01-08T00:00:00.000+00:00, 2018-01-14T23:59:59.999+00:00] }'
     prettyList(@msPrecPerWeek.exec(@ctx)).should.equal e
     
-    # define MsPrecPerDay: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-03T01:00:00.000+00:00] } per day
+    # define MsPrecPerDay: expand { Interval[@2018-01-01T00:00:00.000+00:00, @2018-01-03T00:00:00.000+00:00] } per day
     e = "{ [2018-01-01T00:00:00.000+00:00, 2018-01-01T23:59:59.999+00:00], [2018-01-02T00:00:00.000+00:00, 2018-01-02T23:59:59.999+00:00] }"
     prettyList(@msPrecPerDay.exec(@ctx)).should.equal e
     
