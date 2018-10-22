@@ -1938,7 +1938,7 @@ describe 'QuantityIntervalExpand', ->
     a = @openBothDecimal.exec(@ctx)
     prettyList(a).should.equal '{ [2.10000001 'g', 3.1 'g'] }'
 
-    # define OpenBothDecimalTrunc: expand { Interval(2.1 'g', 4.101 'g'), null } per 1 'g'
+    # define OpenBothDecimalTrunc: expand { Interval(2.1 'g', 4.101 'g') } per 1 'g'
     a = @openBothDecimalTrunc.exec(@ctx)
     prettyList(a).should.equal "{ [2.10000001 'g', 3.1 'g'], [3.10000001 'g', 4.1 'g'] }"
 
