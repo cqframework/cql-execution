@@ -1511,11 +1511,10 @@ describe 'DateIntervalExpand', ->
     e = '{ [2018-01, 2018-01], [2018-02, 2018-02] }'
     prettyList(@mismatchPrecisionEmpty.exec(@ctx)).should.equal e
 
-    # @mismatchPrecisionEmpty.exec(@ctx).length.should.equal 0
-
   it 'returns an empty list if we get an empty list', ->
     # define EmptyList: List<Interval<Date>>{}
     a = @emptyList.exec(@ctx)
+    a.should.be.instanceof(Array);
     a.length.should.equal 0
 
   it 'returns null with open ended intervals', ->
@@ -1788,11 +1787,14 @@ describe 'DateTimeIntervalExpand', ->
     prettyList(@mismatchPrecision.exec(@ctx)).should.equal e
 
     # define MismatchPrecisionEmpty: expand { Interval[@2012-01-01T13:00:00+00:00, @2012-01-02T12:59+00:00] } per day
-    @mismatchPrecisionEmpty.exec(@ctx).length.should.equal 0
+    a = @mismatchPrecisionEmpty.exec(@ctx)
+    a.should.be.instanceof(Array);
+    a.length.should.equal 0
 
   it 'returns an empty list if we get an empty list', ->
     # define EmptyList: List<Interval<Date>>{}
     a = @emptyList.exec(@ctx)
+    a.should.be.instanceof(Array);
     a.length.should.equal 0
 
   it 'returns null with open ended intervals', ->
@@ -1881,74 +1883,76 @@ describe 'QuantityIntervalExpand', ->
     
     # define ClosedSingleGPerGDecimal: expand { Interval[2.1 'g', 4.1 'g'] } per 1 'g'
     a = @closedSingleGPerGDecimal.exec(@ctx)
-    prettyList(a).should.equal '{ [2.1 'g', 3.09999999 'g'], [3.1 'g', 4.09999999 'g'] }'
+    prettyList(a).should.equal "{ [2.1 'g', 3.09999999 'g'], [3.1 'g', 4.09999999 'g'] }"
     
     # define ClosedSingleGPerMG: expand { Interval[2 'g', 2.003 'g'] } per 1 'mg'
     a = @closedSingleGPerMG.exec(@ctx)
-    prettyList(a).should.equal '{ [2000 'mg', 2000 'mg'], [2001 'mg', 2001 'mg'], [2002 'mg', 2002 'mg'], [2003 'mg', 2003 'mg'] }'
+    prettyList(a).should.equal "{ [2000 'mg', 2000 'mg'], [2001 'mg', 2001 'mg'], [2002 'mg', 2002 'mg'], [2003 'mg', 2003 'mg'] }"
     
     # define ClosedSingleMGPerGTrunc: expand { Interval[2999 'mg', 4200 'mg'] } per 1 'g'
     a = @closedSingleMGPerGTrunc.exec(@ctx)
-    prettyList(a).should.equal '{ [2999 'mg', 3998 'mg'] }'
+    prettyList(a).should.equal "{ [2999 'mg', 3998 'mg'] }"
     
     # define ClosedSingleMGPerMGTrunc: expand { Interval[2000 'mg', 4500 'mg'] } per 800 'mg'
     a = @closedSingleMGPerMGTrunc.exec(@ctx)
-    prettyList(a).should.equal '{ [2000 'mg', 2799 'mg'], [2800 'mg', 3599 'mg'], [3600 'mg', 4399 'mg'] }'
+    prettyList(a).should.equal "{ [2000 'mg', 2799 'mg'], [2800 'mg', 3599 'mg'], [3600 'mg', 4399 'mg'] }"
   
     # define ClosedSingleMGPerMGDecimal: expand { Interval[2000.01 'mg', 4500 'mg'] } per 800 'mg'
     a = @closedSingleMGPerMGDecimal.exec(@ctx)
-    prettyList(a).should.equal '{ [2000.01 'mg', 2800.00999999 'mg'], [2800.01 'mg', 3600.0099999900003 'mg'], [3600.01 'mg', 4400.00999999 'mg'] }'
+    prettyList(a).should.equal "{ [2000.01 'mg', 2800.00999999 'mg'], [2800.01 'mg', 3600.0099999900003 'mg'], [3600.01 'mg', 4400.00999999 'mg'] }"
   
   it 'expands lists of multiple intervals', ->
     # define NullInList: expand { Interval[2 'g', 4 'g'], null } per 1 'g'
     a = @nullInList.exec(@ctx)
-    prettyList(a).should.equal '{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }'
+    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }"
 
     # define Overlapping: expand { Interval[2 'g', 4 'g'], Interval[3 'g', 5 'g'] } per 1 'g'
     a = @overlapping.exec(@ctx)
-    prettyList(a).should.equal '{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'], [5 'g', 5 'g'] }'
+    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'], [5 'g', 5 'g'] }"
 
     # define NonOverlapping: expand { Interval[2 'g', 4 'g'], Interval[6 'g', 6 'g'] } per 1 'g'
     a = @nonOverlapping.exec(@ctx)
-    prettyList(a).should.equal '{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'], [6 'g', 6 'g'] }'
+    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'], [6 'g', 6 'g'] }"
 
   it 'expands interval using the first items units if no per provided', ->
     # define NoPerDefaultM: expand { Interval[2 'm', 400 'cm'] }
     a = @noPerDefaultM.exec(@ctx)
-    prettyList(a).should.equal '{ [2 'm', 2 'm'], [3 'm', 3 'm'], [4 'm', 4 'm'] }'
+    prettyList(a).should.equal "{ [2 'm', 2 'm'], [3 'm', 3 'm'], [4 'm', 4 'm'] }"
 
     # define NoPerDefaultG: expand { Interval[2 'g', 4 'g'] }
     a = @noPerDefaultG.exec(@ctx)
-    prettyList(a).should.equal '{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }'
+    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }"
 
   it 'expands interval with open ends', ->
     # define OpenStart: expand { Interval(2 'g', 4 'g'] } per 1 'g'
     a = @openStart.exec(@ctx)
-    prettyList(a).should.equal '{ [3 'g', 3 'g'], [4 'g', 4 'g'] }'
+    prettyList(a).should.equal "{ [3 'g', 3 'g'], [4 'g', 4 'g'] }"
 
     # define OpenEnd: expand { Interval[2 'g', 4 'g') } per 1 'g'
     a = @openEnd.exec(@ctx)
-    prettyList(a).should.equal '{ [2 'g', 2 'g'], [3 'g', 3 'g'] }'
+    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'] }"
 
     # define OpenBoth: expand { Interval(2 'g', 4 'g') } per 1 'g'
     a = @openBoth.exec(@ctx)
-    prettyList(a).should.equal '{ [3 'g', 3 'g'] }'
+    prettyList(a).should.equal "{ [3 'g', 3 'g'] }"
 
     # define OpenBothDecimal: expand { Interval(2.1 'g', 4.1 'g') } per 1 'g'
     a = @openBothDecimal.exec(@ctx)
-    prettyList(a).should.equal '{ [2.10000001 'g', 3.1 'g'] }'
+    prettyList(a).should.equal "{ [2.10000001 'g', 3.1 'g'] }"
 
     # define OpenBothDecimalTrunc: expand { Interval(2.1 'g', 4.101 'g') } per 1 'g'
     a = @openBothDecimalTrunc.exec(@ctx)
-    prettyList(a).should.equal '{ [2.10000001 'g', 3.1 'g'], [3.10000001 'g', 4.1 'g'] }'
+    prettyList(a).should.equal "{ [2.10000001 'g', 3.1 'g'], [3.10000001 'g', 4.1 'g'] }"
 
   it 'returns an empty list if we get an empty list or if there are no results', ->
     # define EmptyList: List<Interval<Date>>{}
     a = @emptyList.exec(@ctx)
+    a.should.be.instanceof(Array);
     a.length.should.equal 0
 
     # define PerTooBig: expand { Interval[2 'g', 4 'g'], null } per 5 'g'
     a = @perTooBig.exec(@ctx)
+    a.should.be.instanceof(Array);
     a.length.should.equal 0
 
   it 'returns null with open ended intervals', ->
@@ -2022,10 +2026,12 @@ describe 'IntegerIntervalExpand', ->
   it 'returns an empty list if we get an empty list or if there are no results', ->
     # define EmptyList: List<Interval<Integer>>{}
     a = @emptyList.exec(@ctx)
+    a.should.be.instanceof(Array);
     a.length.should.equal 0
 
     # define PerTooBig: expand { Interval[2, 4], null } per 5 '1'
     a = @perTooBig.exec(@ctx)
+    a.should.be.instanceof(Array);
     a.length.should.equal 0
 
   it 'returns null with open ended intervals', ->
@@ -2095,10 +2101,12 @@ describe 'DecimalIntervalExpand', ->
   it 'returns an empty list if we get an empty list or if there are no results', ->
     # define EmptyList: List<Interval<Decimal>>{}
     a = @emptyList.exec(@ctx)
+    a.should.be.instanceof(Array);
     a.length.should.equal 0
 
     # define PerTooBig: expand { Interval[2, 4], null } per 5.5 '1'
     a = @perTooBig.exec(@ctx)
+    a.should.be.instanceof(Array);
     a.length.should.equal 0
 
   it 'returns null with open ended intervals', ->
