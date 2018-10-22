@@ -1591,7 +1591,7 @@ describe 'DateTimeIntervalExpand', ->
     prettyList(@msPrecPerMillisecond.exec(@ctx)).should.equal e
 
   it 'expands a second precision datetime', ->
-    # define SecPrecPerYear: expand { Interval[@2016-01-01T01:00:00+00:00, @2018-01-01T01:00:00+00:00] } per year
+    # define SecPrecPerYear: expand { Interval[@2016-01-01T00:00:00+00:00, @2018-01-01T00:00:00+00:00] } per year
     e = "{ [2016-01-01T00:00:00+00:00, 2016-12-31T23:59:59+00:00], [2017-01-01T00:00:00+00:00, 2017-12-31T23:59:59+00:00] }"
     prettyList(@secPrecPerYear.exec(@ctx)).should.equal e
 
