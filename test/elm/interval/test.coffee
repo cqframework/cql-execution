@@ -1651,7 +1651,7 @@ describe 'DateTimeIntervalExpand', ->
   
   it 'expands an hour precision datetime', ->
     # define HourPrecPerYear: expand { Interval[@2016-01-01T00+00:00, @2018-01-01T00+00:00] } per year
-    e = "{ [2016-01-01T00+00:00, 2016-12-31T23+00:00], [2017-01-01T00+00:00, 2017-12-31T23+00:00] }"
+    e = '{ [2016-01-01T00+00:00, 2016-12-31T23+00:00], [2017-01-01T00+00:00, 2017-12-31T23+00:00] }'
     prettyList(@hourPrecPerYear.exec(@ctx)).should.equal e
 
     # define HourPrecPerMonth: expand { Interval[@2018-01-01T01+00:00, @2018-03-01T01+00:00] } per month
