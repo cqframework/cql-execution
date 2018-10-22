@@ -2090,7 +2090,7 @@ describe 'DecimalIntervalExpand', ->
 
     # define OpenBoth: expand { Interval(2, 5) } per 1.5 '1'
     a = @openBoth.exec(@ctx)
-    prettyList(a).should.equal "{ [2.00000001, 3.5] }"
+    prettyList(a).should.equal '{ [2.00000001, 3.5] }'
 
   it 'returns an empty list if we get an empty list or if there are no results', ->
     # define EmptyList: List<Interval<Decimal>>{}
