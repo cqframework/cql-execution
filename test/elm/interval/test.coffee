@@ -1643,7 +1643,7 @@ describe 'DateTimeIntervalExpand', ->
     prettyList(@minPrecPerHour.exec(@ctx)).should.equal e
     
     # define MinPrecPerMinute: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T01:01+00:00] } per minute
-    e = "{ [2018-01-01T01:00+00:00, 2018-01-01T01:00+00:00], [2018-01-01T01:01+00:00, 2018-01-01T01:01+00:00] }"
+    e = '{ [2018-01-01T01:00+00:00, 2018-01-01T01:00+00:00], [2018-01-01T01:01+00:00, 2018-01-01T01:01+00:00] }'
     prettyList(@minPrecPerMinute.exec(@ctx)).should.equal e
     
     should.not.exist @minPrecPerSecond.exec(@ctx)
