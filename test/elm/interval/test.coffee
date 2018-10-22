@@ -1978,7 +1978,7 @@ describe 'IntegerIntervalExpand', ->
   it 'expands single intervals', ->
     # define ClosedSinglePer1: expand { Interval[2, 4] } per 1 '1'
     a = @closedSinglePer1.exec(@ctx)
-    prettyList(a).should.equal "{ [2, 2], [3, 3], [4, 4] }"
+    prettyList(a).should.equal '{ [2, 2], [3, 3], [4, 4] }'
     
     # define ClosedSinglePer3: expand { Interval[2, 10] } per 3 '1'
     a = @closedSinglePer3.exec(@ctx)
