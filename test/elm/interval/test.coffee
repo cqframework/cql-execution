@@ -1579,7 +1579,7 @@ describe 'DateTimeIntervalExpand', ->
     prettyList(@msPrecPerHour.exec(@ctx)).should.equal e
     
     # define MsPrecPerMinute: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:02:00.000+00:00] } per minute
-    e = "{ [2018-01-01T01:00:00.000+00:00, 2018-01-01T01:00:59.999+00:00], [2018-01-01T01:01:00.000+00:00, 2018-01-01T01:01:59.999+00:00] }"
+    e = '{ [2018-01-01T01:00:00.000+00:00, 2018-01-01T01:00:59.999+00:00], [2018-01-01T01:01:00.000+00:00, 2018-01-01T01:01:59.999+00:00] }'
     prettyList(@msPrecPerMinute.exec(@ctx)).should.equal e
     
     # define MsPrecPerSecond: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:00:02.000+00:00] } per second
