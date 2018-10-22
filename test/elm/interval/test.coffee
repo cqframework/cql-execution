@@ -2077,7 +2077,7 @@ describe 'DecimalIntervalExpand', ->
   it 'expands interval using default per of 1', ->
     # define NoPer: expand { Interval[2.5, 4.5] }
     a = @noPer.exec(@ctx)
-    prettyList(a).should.equal "{ [2.5, 3.49999999], [3.5, 4.49999999] }"
+    prettyList(a).should.equal '{ [2.5, 3.49999999], [3.5, 4.49999999] }'
 
   it 'expands interval with open ends', ->
     # define OpenStart: expand { Interval(2, 5] } per 1.5 '1'
