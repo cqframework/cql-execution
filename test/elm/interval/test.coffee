@@ -1698,7 +1698,7 @@ describe 'DateTimeIntervalExpand', ->
   
   it 'expands a month precision datetime', ->
     # define MonthPrecPerYear: expand { Interval[DateTime(2016,01), DateTime(2018,01)] } per year
-    e = "{ [2016-01, 2016-12], [2017-01, 2017-12] }"
+    e = '{ [2016-01, 2016-12], [2017-01, 2017-12] }'
     prettyList(@monthPrecPerYear.exec(@ctx)).should.equal e
 
     # define MonthPrecPerMonth: expand { Interval[DateTime(2018,01), DateTime(2018,02)] } per month
