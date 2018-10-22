@@ -1714,7 +1714,7 @@ describe 'DateTimeIntervalExpand', ->
   
   it 'expands a year precision datetime', ->
     # define YearPrecPerYear: expand { Interval[DateTime(2016), DateTime(2018)] } per year
-    e = "{ [2016, 2016], [2017, 2017], [2018, 2018] }"
+    e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
     prettyList(@yearPrecPerYear.exec(@ctx)).should.equal e
 
     should.not.exist @yearPrecPerMonth.exec(@ctx)
