@@ -1897,7 +1897,7 @@ describe 'QuantityIntervalExpand', ->
   
     # define ClosedSingleMGPerMGDecimal: expand { Interval[2000.01 'mg', 4500 'mg'] } per 800 'mg'
     a = @closedSingleMGPerMGDecimal.exec(@ctx)
-    prettyList(a).should.equal "{ [2000.01 'mg', 2800.00999999 'mg'], [2800.01 'mg', 3600.0099999900003 'mg'], [3600.01 'mg', 4400.00999999 'mg'] }"
+    prettyList(a).should.equal '{ [2000.01 'mg', 2800.00999999 'mg'], [2800.01 'mg', 3600.0099999900003 'mg'], [3600.01 'mg', 4400.00999999 'mg'] }'
   
   it 'expands lists of multiple intervals', ->
     # define NullInList: expand { Interval[2 'g', 4 'g'], null } per 1 'g'
