@@ -1915,7 +1915,7 @@ describe 'QuantityIntervalExpand', ->
   it 'expands interval using the first items units if no per provided', ->
     # define NoPerDefaultM: expand { Interval[2 'm', 400 'cm'] }
     a = @noPerDefaultM.exec(@ctx)
-    prettyList(a).should.equal "{ [2 'm', 2 'm'], [3 'm', 3 'm'], [4 'm', 4 'm'] }"
+    prettyList(a).should.equal '{ [2 'm', 2 'm'], [3 'm', 3 'm'], [4 'm', 4 'm'] }'
 
     # define NoPerDefaultG: expand { Interval[2 'g', 4 'g'] }
     a = @noPerDefaultG.exec(@ctx)
