@@ -1963,7 +1963,7 @@ describe 'QuantityIntervalExpand', ->
     should.not.exist(a)
 
   it 'returns null when per not applicable or mismatch interval', ->
-    # define BadPerMinute: expand { Interval(2 'g', 4 'g'] } per minute
+    # define BadPerMinute: expand { Interval(2 'g', 4 'g'] } per 1 minute
     a = @badPerMinute.exec(@ctx)
     should.not.exist(a)
 
