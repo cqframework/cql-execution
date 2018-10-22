@@ -2072,7 +2072,7 @@ describe 'DecimalIntervalExpand', ->
 
     # define NonOverlapping: expand { Interval[2, 4], Interval[6, 8] } per 1.5 '1'
     a = @nonOverlapping.exec(@ctx)
-    prettyList(a).should.equal "{ [2, 3.49999999], [6, 7.49999999] }"
+    prettyList(a).should.equal '{ [2, 3.49999999], [6, 7.49999999] }'
 
   it 'expands interval using default per of 1', ->
     # define NoPer: expand { Interval[2.5, 4.5] }
