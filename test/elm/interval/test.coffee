@@ -1485,7 +1485,7 @@ describe 'DateIntervalExpand', ->
     prettyList(a).should.equal '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
 
     # define NoPerDefaultMonthWithMismatch: expand { Interval[@2016, @2018-03] }
-    a = @noPerDefaultYear.exec(@ctx)
+    a = @noPerDefaultMonthWithMismatch.exec(@ctx)
     prettyList(a).should.equal '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
 
 
