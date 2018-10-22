@@ -1999,7 +1999,7 @@ describe 'IntegerIntervalExpand', ->
 
     # define NonOverlapping: expand { Interval[2, 4], Interval[6, 6] } per 1 '1'
     a = @nonOverlapping.exec(@ctx)
-    prettyList(a).should.equal "{ [2, 2], [3, 3], [4, 4], [6, 6] }"
+    prettyList(a).should.equal '{ [2, 2], [3, 3], [4, 4], [6, 6] }'
 
   it 'expands interval using default per of 1', ->
     # define NoPer: expand { Interval[2, 4] }
