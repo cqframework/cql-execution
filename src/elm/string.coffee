@@ -1,4 +1,4 @@
-{ Expression } = require './expression'
+{ Expression, UnimplementedExpression } = require './expression'
 { build } = require './builder'
 
 module.exports.Concatenate = class Concatenate extends Expression
@@ -30,6 +30,8 @@ module.exports.Split = class Split extends Expression
     stringToSplit = @stringToSplit.execute(ctx)
     separator = @separator.execute(ctx)
     if not (stringToSplit? and separator?) then null else stringToSplit.split(separator)
+
+module.exports.SplitOnMatches = class SplitOnMatches extends UnimplementedExpression
 
 # Length is completely handled by overloaded#Length
 
