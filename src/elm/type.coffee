@@ -181,7 +181,17 @@ module.exports.Convert = class Convert extends Expression
         new ToTime({"type": "ToTime", "operand": @operand}).execute(ctx)
       else
         @execArgs(ctx)
+
 module.exports.Is = class Is extends UnimplementedExpression
+
+module.exports.ConvertsToBoolean = class ConvertsToBoolean extends UnimplementedExpression
+module.exports.ConvertsToDate = class ConvertsToDate extends UnimplementedExpression
+module.exports.ConvertsToDateTime = class ConvertsToDateTime extends UnimplementedExpression
+module.exports.ConvertsToDecimal = class ConvertsToDecimal extends UnimplementedExpression
+module.exports.ConvertsToInteger = class ConvertsToInteger extends UnimplementedExpression
+module.exports.ConvertsToQuantity = class ConvertsToQuantity extends UnimplementedExpression
+module.exports.ConvertsToString = class ConvertsToString extends UnimplementedExpression
+module.exports.ConvertsToTime = class ConvertsToTime extends UnimplementedExpression
 
 module.exports.IntervalTypeSpecifier = class IntervalTypeSpecifier extends UnimplementedExpression
 
