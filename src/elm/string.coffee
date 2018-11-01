@@ -31,7 +31,16 @@ module.exports.Split = class Split extends Expression
     separator = @separator.execute(ctx)
     if not (stringToSplit? and separator?) then null else stringToSplit.split(separator)
 
-module.exports.SplitOnMatches = class SplitOnMatches extends UnimplementedExpression
+module.exports.SplitOnMatches = class SplitOnMatches extends Expression
+  constructor: (json) ->
+    super
+    @stringToSplit = build json.stringToSplit
+    @separatorPattern = build json.separatorPattern
+
+  exec: (ctx) ->
+    stringToSplit = @stringToSplit.execute(ctx)
+    separatorPattern = @separatorPattern.execute(ctx)
+    if not (stringToSplit?) then null else stringToSplit.split(new RegExp(separatorPattern))
 
 # Length is completely handled by overloaded#Length
 
@@ -63,6 +72,18 @@ module.exports.PositionOf = class PositionOf extends Expression
     pattern = @pattern.execute(ctx)
     string = @string.execute(ctx)
     if not (pattern? and string?) then null else string.indexOf(pattern)
+
+module.exports.Matches = class Matches extends Expression
+  constructor: (json) ->
+    super
+    @string = build json.string
+    @pattern = build json.pattern
+
+  exec: (ctx) ->
+    string = @string.execute(ctx)
+    pattern = @pattern.execute(ctx)
+    return null if not (pattern? and string?)
+    if string.match(new RegExp(pattern)) then true else false
 
 module.exports.Substring = class Substring extends Expression
   constructor: (json) ->

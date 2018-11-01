@@ -1167,6 +1167,101 @@ module.exports['Split'] = {
    }
 }
 
+### SplitOnMatches
+library TestSnippet version '1'
+using QUICK
+context Patient
+define Foo: SplitOnMatches('foo','v')
+###
+
+###
+Translation Error(s):
+[4:13, 4:37] Index: 12, Size: 2
+###
+module.exports['SplitOnMatches'] = {
+   "library" : {
+      "annotation" : [ {
+         "startLine" : 4,
+         "startChar" : 13,
+         "endLine" : 4,
+         "endChar" : 37,
+         "message" : "Index: 12, Size: 2",
+         "errorType" : "semantic",
+         "errorSeverity" : "error",
+         "type" : "CqlToElmError"
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "5",
+            "name" : "Foo",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "define ","Foo",": " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "SplitOnMatches","(" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "'foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ "," ]
+                     }, {
+                        "r" : "3",
+                        "s" : [ {
+                           "value" : [ "'v'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "4",
+               "type" : "Null"
+            }
+         } ]
+      }
+   }
+}
+
 ### Length
 library TestSnippet version '1'
 using QUICK
@@ -1934,6 +2029,274 @@ module.exports['Indexer'] = {
                   "type" : "As",
                   "operand" : {
                      "localId" : "21",
+                     "type" : "Null"
+                  }
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
+### Matches
+library TestSnippet version '1'
+using QUICK
+context Patient
+define MatchesTrue: Matches('1,2three', '\\d,\\d\\w+')
+define MatchesFalse: Matches('1,2three', '\\w+')
+define MatchesIsNullFirst: Matches(null, '\\w+')
+define MatchesIsNullSecond: Matches('12three', null)
+define MatchesAllNull: Matches(null, null)
+###
+
+module.exports['Matches'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "5",
+            "name" : "MatchesTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "define ","MatchesTrue",": " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "Matches","(" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "'1,2three'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "3",
+                        "s" : [ {
+                           "value" : [ "'\\\\d,\\\\d\\\\w+'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "4",
+               "type" : "Matches",
+               "operand" : [ {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "1,2three",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "3",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\\d,\\d\\w+",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "9",
+            "name" : "MatchesFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "define ","MatchesFalse",": " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "Matches","(" ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "value" : [ "'1,2three'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "'\\\\w+'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "type" : "Matches",
+               "operand" : [ {
+                  "localId" : "6",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "1,2three",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "7",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\\w+",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "13",
+            "name" : "MatchesIsNullFirst",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "define ","MatchesIsNullFirst",": " ]
+                  }, {
+                     "r" : "12",
+                     "s" : [ {
+                        "value" : [ "Matches","(","null",", " ]
+                     }, {
+                        "r" : "11",
+                        "s" : [ {
+                           "value" : [ "'\\\\w+'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "12",
+               "type" : "Matches",
+               "operand" : [ {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "10",
+                     "type" : "Null"
+                  }
+               }, {
+                  "localId" : "11",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\\w+",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "17",
+            "name" : "MatchesIsNullSecond",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "17",
+                  "s" : [ {
+                     "value" : [ "define ","MatchesIsNullSecond",": " ]
+                  }, {
+                     "r" : "16",
+                     "s" : [ {
+                        "value" : [ "Matches","(" ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "'12three'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", ","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "16",
+               "type" : "Matches",
+               "operand" : [ {
+                  "localId" : "14",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "12three",
+                  "type" : "Literal"
+               }, {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "15",
+                     "type" : "Null"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "21",
+            "name" : "MatchesAllNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "21",
+                  "s" : [ {
+                     "value" : [ "define ","MatchesAllNull",": " ]
+                  }, {
+                     "r" : "20",
+                     "s" : [ {
+                        "value" : [ "Matches","(","null",", ","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "20",
+               "type" : "Matches",
+               "operand" : [ {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "18",
+                     "type" : "Null"
+                  }
+               }, {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "19",
                      "type" : "Null"
                   }
                } ]
