@@ -5,7 +5,7 @@ vsets = require './valuesets'
 DT = require '../../../lib/datatypes/datatypes'
 { PatientContext } =  require '../../../lib/cql'
 { Uncertainty } = require '../../../lib/datatypes/uncertainty'
-{ p1, p2 } = require './patients'
+{ p1, p2, p3 } = require './patients'
 { PatientSource} = require '../../../lib/cql-patient'
 
 
@@ -250,3 +250,20 @@ describe 'CalculateAgeAt', ->
 
   it 'should execute age at 1975 as -5 to -4 (since 1975 is not precise to days)', ->
     @ageAt1975.exec(@ctx).should.eql new Uncertainty(-5, -4)
+
+  it 'should give an uncertainty due to birthdate time component with (using AgeInYearsAt)', ->
+    setup @, data, [ p3 ]
+    @ageInYearsDateTimeArg.exec(@ctx).should.eql new Uncertainty(17, 18)
+
+  it 'should give an uncertainty due to birthdate time component (using CalculateAgeInYearsAt)', ->
+    setup @, data, [ p3 ]
+    @calculateAgeInYearsDateTimeArg.exec(@ctx).should.eql new Uncertainty(17, 18)
+
+  # TODO:unskip these tests after cql-to-elm updated to no longer implicitly convert these arguments
+  xit 'should convert birthdate to date, give 18 (using AgeInYearsAt)', ->
+    setup @, data, [ p3 ]
+    @ageInYearsDateArg.exec(@ctx).should.eql 18
+
+  xit 'should convert birthdate to date, give 18 (using CalculateAgeInYearsAt)', ->
+    setup @, data, [ p3 ]
+    @calculateAgeInYearsDateArg.exec(@ctx).should.eql 18

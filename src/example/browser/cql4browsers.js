@@ -3638,6 +3638,9 @@
       var date1, date2, ref, result;
       ref = this.execArgs(ctx), date1 = ref[0], date2 = ref[1];
       if ((date1 != null) && (date2 != null)) {
+        if (date2.isDate && date1.isDateTime) {
+          date1 = date1.getDate();
+        }
         result = date1.durationBetween(date2, this.precision.toLowerCase());
         if ((result != null) && result.isPoint()) {
           return result.low;

@@ -151,6 +151,9 @@ module.exports.CalculateAgeAt = class CalculateAgeAt extends Expression
   exec: (ctx) ->
     [date1, date2] = @execArgs(ctx)
     if date1? && date2?
+      # date1 is the birthdate, convert it to date if date2 is a date (to support ignoring time)
+      if date2.isDate and date1.isDateTime
+        date1 = date1.getDate()
       result = date1.durationBetween(date2, @precision.toLowerCase())
       if result? && result.isPoint() then result.low else result
     else
