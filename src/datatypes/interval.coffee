@@ -165,6 +165,11 @@ module.exports.Interval = class Interval
     else # ol is null
       null
 
+  sameAs: (other, precision) ->
+    if (@ == null or other == null) then return null
+    if (@low == null or @high == null or other.low == null or other.high == null) then return null
+    @low.sameAs(other.low, precision) and @high.sameAs(other.high, precision)
+
   equals: (other) ->
     if other instanceof Interval
       [a, b] = [@toClosed(), other.toClosed()]

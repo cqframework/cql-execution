@@ -2124,3 +2124,30 @@ describe 'DecimalIntervalExpand', ->
     # define BadPerMinute: expand { Interval(2.1, 4.1] } per 0.5 minute
     a = @badPerMinute.exec(@ctx)
     should.not.exist(a)
+
+describe 'SameAs', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'returns null when both intervals values are null', ->
+    # define NullBoth: Interval[null,null] same as Interval[null,null]
+    a = @nullBoth.exec(@ctx)
+    should.not.exist(a)
+  
+  it 'returns true when both intervals are the same', ->
+    # define Equal: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[DateTime(2018,01,01), DateTime(2018,01,01)]
+    @equal.exec(@ctx).should.be.true()
+
+  it 'returns false when both intervals are not the same', ->
+    # define NotEqual: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[DateTime(2018,02,01), DateTime(2018,05,01)]
+    @notEqual.exec(@ctx).should.be.false()
+
+  it 'returns null when comparing date and datetime because precision is changed when converting date to datetime', ->
+    # define DateTimeAndDateComparisonEqual: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[Date(2018,01,01), Date(2018,01,01)]
+    a = @dateTimeAndDateComparisonEqual.exec(@ctx)
+    should.not.exist(a)
+
+  it 'returns null when both intervals are null'. ->
+    # define NullIntervals: (null as Interval<DateTime>) same as (null as Interval<DateTime>)'
+    a = @nullIntervals.exec(@ctx)
+    should.not.exist(a)
