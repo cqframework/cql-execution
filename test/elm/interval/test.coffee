@@ -2147,7 +2147,88 @@ describe 'SameAs', ->
     a = @dateTimeAndDateComparisonEqual.exec(@ctx)
     should.not.exist(a)
 
-  it 'returns null when both intervals are null'. ->
+  it 'returns null when both intervals are null', ->
     # define NullIntervals: (null as Interval<DateTime>) same as (null as Interval<DateTime>)'
     a = @nullIntervals.exec(@ctx)
     should.not.exist(a)
+
+  it 'returns true when both Date intervals are the same', ->
+    # define DateIntervalComparisonSame: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,02)]
+    @dateIntervalComparisonSame.exec(@ctx).should.be.true()
+
+  it 'returns false when Date intervals are not the same', ->  
+    # define DateIntervalComparisonNotSame: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,01)]
+    @dateIntervalComparisonNotSame.exec(@ctx).should.be.false()
+   
+  it 'returns true when both Time intervals are the same', ->
+    # define TimeIntervalComparisonSame: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(02,02)]
+    @timeIntervalComparisonSame.exec(@ctx).should.be.true()
+    
+  it 'returns false when Time intervals are not the same', ->
+    # define TimeIntervalComparisonNotSame: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(08,01)]
+    @timeIntervalComparisonSame.exec(@ctx).should.be.false()
+
+  it 'returns true when DateTime intervals are same on the year precision', ->
+    # define DateTimeYearPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same year as Interval[DateTime(2018,02,01), DateTime(2019,05,01)]
+    @dateTimeYearPrecisionSame.exec(@ctx).should.be.true()
+
+  it 'returns false when DateTime intervals are not the same on the requested year precision', ->
+    # define DateTimeYearPrecisionNotSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same year as Interval[DateTime(2018,02,01), DateTime(2020,05,01)]
+    @dateTimeYearPrecisionNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when DateTime intervals are same on the year precision', ->
+    # define DateYearPrecisionSame: Interval[Date(2018,01,01), Date(2019,01,01)] same year as Interval[Date(2018,02,01), Date(2019,05,01)]
+    @dateYearPrecisionSame.exec(@ctx).should.be.true()
+
+  it 'returns false when DateTime intervals are not the same on the requested year precision', ->
+    # define DateYearPrecisionNotSame: Interval[Date(2018,01,01), Date(2019,01,01)] same year as Interval[Date(2018,02,01), Date(2020,05,01)]
+    @dateYearPrecisionNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when DateTime intervals are same on the month precision', ->
+    # define DateTimeMonthPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same month as Interval[DateTime(2018,01,01), DateTime(2019,01,03)]
+    @dateTimeMonthPrecisionSame.exec(@ctx).should.be.true()
+
+  it 'returns false when DateTime intervals are not the same on the requested month precision', ->
+    # define DateTimeMonthPrecisionNotSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same month as Interval[DateTime(2018,02,01), DateTime(2019,01,01)]
+    @dateTimeMonthPrecisionNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when DateTime intervals are same on the day precision', ->
+    # define DateTimeDayPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same day as Interval[DateTime(2018,01,01,05), DateTime(2019,01,01,09)]
+    @dateTimeDayPrecisionSame.exec(@ctx).should.be.true()
+
+  it 'returns false when DateTime intervals are not the same on the requested day precision', ->
+    # define DateTimeDayPrecisionNotSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same day as Interval[DateTime(2018,01,01), DateTime(2019,01,02,06)]
+    @dateTimeDayPrecisionNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when DateTime intervals are same on the hour precision', ->
+    # define DateTimeHourPrecisionSame: Interval[DateTime(2018,01,01,01), DateTime(2019,01,01,01)] same hour as Interval[DateTime(2018,01,01,01), DateTime(2019,01,01,01,05)]
+    @dateTimeHourPrecisionSame.exec(@ctx).should.be.true()
+
+  it 'returns false when DateTime intervals are not the same on the requested hour precision', ->
+    # define DateTimeHourPrecisionNotSame: Interval[DateTime(2018,01,01,01), DateTime(2019,01,01,01)] same hour as Interval[DateTime(2018,01,01,06), DateTime(2019,01,01,01)]
+    @dateTimeHourPrecisionNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when DateTime intervals are same on the minute precision', ->
+    # define DateTimeMinutePrecisionSame: Interval[DateTime(2018,01,01,01,01), DateTime(2019,01,01,01,01)] same minute as Interval[DateTime(2018,01,01,01,01,09), DateTime(2019,01,01,01,01,06)]
+    @dateTimeMinutePrecisionSame.exec(@ctx).should.be.true()
+
+  it 'returns false when DateTime intervals are not the same on the requested minute precision', ->
+    # define DateTimeMinutePrecisionNotSame: Interval[DateTime(2018,01,01,01,01), DateTime(2019,01,01,01,01)] same minute as Interval[DateTime(2018,01,01,06,03), DateTime(2019,01,01,01,06)]
+    @dateTimeMinutePrecisionNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when DateTime intervals are same on the second precision', ->
+    # define DateTimeSecondPrecisionSame: Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,01,01)] same second as Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,01,01,07)]
+    @dateTimeSecondPrecisionSame.exec(@ctx).should.be.true()
+
+  it 'returns false when DateTime intervals are not the same on the requested second precision', ->
+    # define DateTimeSecondPrecisionNotSame: Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,01,01)] same second as Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,07,55)]
+    @dateTimeSecondPrecisionNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when DateTime intervals are same on the millisecond precision', ->
+    # define DateTimeMillisecondPrecisionSame: Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)] same millisecond as Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)]
+    @dateTimeMillisecondPrecisionSame.exec(@ctx).should.be.true()
+
+  it 'returns false when DateTime intervals are not the same on the requested millisecond precision', ->
+    # define DateTimeMillisecondPrecisionNotSame: Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)] same millisecond as Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,09)]
+    @dateTimeMillisecondPrecisionNotSame.exec(@ctx).should.be.false()
+
