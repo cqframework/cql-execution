@@ -2166,7 +2166,7 @@ describe 'SameAs', ->
     
   it 'returns false when Time intervals are not the same', ->
     # define TimeIntervalComparisonNotSame: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(08,01)]
-    @timeIntervalComparisonSame.exec(@ctx).should.be.false()
+    @timeIntervalComparisonNotSame.exec(@ctx).should.be.false()
 
   it 'returns true when DateTime intervals are same on the year precision', ->
     # define DateTimeYearPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same year as Interval[DateTime(2018,02,01), DateTime(2019,05,01)]
