@@ -928,7 +928,7 @@ describe 'Width', ->
     @intWidthThreeToMax.exec(@ctx).should.equal Math.pow(2,31)-4
     @intWidthMinToThree.exec(@ctx).should.equal Math.pow(2,31)+3
 
-  it 'should calculate the width of infinite intervals', ->
+  it 'should calculate the width of infinite intervals that result in null', ->
     should(@intWidthThreeToUnknown.exec(@ctx)).be.null()
     should(@intWidthUnknownToThree.exec(@ctx)).be.null()
 
@@ -940,7 +940,7 @@ describe 'Start', ->
     @closedNotNull.exec(@ctx).should.eql new DateTime(2012, 1, 1)
 
   it 'should return the minimum possible DateTime', ->
-    @closedNull.exec(@ctx).should.eql new DateTime(1, 1, 1, 0, 0, 0, 0)
+    @closedNullDateTime.exec(@ctx).should.eql new DateTime(1, 1, 1, 0, 0, 0, 0)
 
   it 'should return null when the interval is null', ->
     should(@nullInterval.exec(@ctx)).be.null()
@@ -948,15 +948,27 @@ describe 'Start', ->
   it 'should return successor of low when the interval is open', ->
     @openNotNull.exec(@ctx).should.eql new DateTime(2012, 1, 1).successor()
 
-  it 'should return null for open interval with null low value', ->
+  it 'should return null for open interval with null high value', ->
     should(@openNull.exec(@ctx)).be.null()
 
 describe 'End', ->
   @beforeEach ->
     setup @, data
 
-  it 'should execute as the end of the interval', ->
-    @foo.exec(@ctx).should.eql new DateTime(2013, 1, 1)
+  it 'should return the high of the interval', ->
+    @closedNotNull.exec(@ctx).should.eql new DateTime(2013, 1, 1)
+
+  it 'should return the maximum possible DateTime', ->
+    @closedNullDateTime.exec(@ctx).should.eql new DateTime(9999, 12, 31, 23, 59, 59, 999)
+
+  it 'should return null when the interval is null', ->
+    should(@nullInterval.exec(@ctx)).be.null()
+
+  it 'should return predecessor of high when the interval is open', ->
+    @openNotNull.exec(@ctx).should.eql new DateTime(2013, 1, 1).predecessor()
+
+  it 'should return null for open interval with null low value', ->
+    should(@openNull.exec(@ctx)).be.null()
 
 describe 'Starts', ->
   @beforeEach ->
@@ -2145,7 +2157,7 @@ describe 'SameAs', ->
     # define NullBoth: Interval[null,null] same as Interval[null,null]
     a = @nullBoth.exec(@ctx)
     should.not.exist(a)
-  
+
   it 'returns true when both intervals are the same', ->
     # define Equal: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[DateTime(2018,01,01), DateTime(2018,01,01)]
     @equal.exec(@ctx).should.be.true()
@@ -2168,14 +2180,14 @@ describe 'SameAs', ->
     # define DateIntervalComparisonSame: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,02)]
     @dateIntervalComparisonSame.exec(@ctx).should.be.true()
 
-  it 'returns false when Date intervals are not the same', ->  
+  it 'returns false when Date intervals are not the same', ->
     # define DateIntervalComparisonNotSame: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,01)]
     @dateIntervalComparisonNotSame.exec(@ctx).should.be.false()
-   
+
   it 'returns true when both Time intervals are the same', ->
     # define TimeIntervalComparisonSame: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(02,02)]
     @timeIntervalComparisonSame.exec(@ctx).should.be.true()
-    
+
   it 'returns false when Time intervals are not the same', ->
     # define TimeIntervalComparisonNotSame: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(08,01)]
     @timeIntervalComparisonNotSame.exec(@ctx).should.be.false()
@@ -2243,4 +2255,3 @@ describe 'SameAs', ->
   it 'returns false when DateTime intervals are not the same on the requested millisecond precision', ->
     # define DateTimeMillisecondPrecisionNotSame: Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)] same millisecond as Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,09)]
     @dateTimeMillisecondPrecisionNotSame.exec(@ctx).should.be.false()
-
