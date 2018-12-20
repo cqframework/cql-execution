@@ -167,7 +167,7 @@ module.exports.Interval = class Interval
 
   sameAs: (other, precision) ->
     if (@low == null or @high == null or other.low == null or other.high == null) then return null
-    @low.sameAs(other.low, precision) and @high.sameAs(other.high, precision)
+    @.start().sameAs(other.start(), precision) and @.end().sameAs(other.end(), precision)
 
   equals: (other) ->
     if other instanceof Interval
