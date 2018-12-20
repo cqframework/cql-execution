@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/cqframework/cql-execution.svg?branch=master)](https://travis-ci.org/cqframework/cql-execution)
+[![codecov](https://codecov.io/gh/cqframework/cql-execution/branch/master/graph/badge.svg)](https://codecov.io/gh/cqframework/cql-execution)
+
 # CQL Execution Framework
 
 The CQL Execution Framework is a set of [CoffeeScript](http://coffeescript.org/) libraries that
