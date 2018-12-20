@@ -3,6 +3,12 @@ setup = require '../../setup'
 data = require './data'
 { Interval } = require '../../../lib/datatypes/interval'
 { DateTime } = require '../../../lib/datatypes/datetime'
+{ MIN_INT_VALUE,
+  MAX_INT_VALUE,
+  MIN_FLOAT_VALUE,
+  MAX_FLOAT_VALUE,
+  MIN_DATE_VALUE,
+  MAX_DATE_VALUE } = require '../../../lib/util/math'
 
 describe 'Interval', ->
   @beforeEach ->
@@ -936,11 +942,18 @@ describe 'Start', ->
   @beforeEach ->
     setup @, data
 
+
   it 'should return the low of the interval', ->
     @closedNotNull.exec(@ctx).should.eql new DateTime(2012, 1, 1)
 
   it 'should return the minimum possible DateTime', ->
-    @closedNullDateTime.exec(@ctx).should.eql new DateTime(1, 1, 1, 0, 0, 0, 0)
+    @closedNullDateTime.exec(@ctx).should.eql MIN_DATE_VALUE
+
+  it 'should return the minimum possible Integer', ->
+    @closedNullInteger.exec(@ctx).should.eql MIN_INT_VALUE
+
+  it 'should return the minimum possible Decimal', ->
+    @closedNullDecimal.exec(@ctx).should.eql MIN_FLOAT_VALUE
 
   it 'should return null when the interval is null', ->
     should(@nullInterval.exec(@ctx)).be.null()
@@ -959,7 +972,13 @@ describe 'End', ->
     @closedNotNull.exec(@ctx).should.eql new DateTime(2013, 1, 1)
 
   it 'should return the maximum possible DateTime', ->
-    @closedNullDateTime.exec(@ctx).should.eql new DateTime(9999, 12, 31, 23, 59, 59, 999)
+    @closedNullDateTime.exec(@ctx).should.eql MAX_DATE_VALUE
+
+  it 'should return the maximum possible Integer', ->
+    @closedNullInteger.exec(@ctx).should.eql MAX_INT_VALUE
+
+  it 'should return the maximum possible Decimal', ->
+    @closedNullDecimal.exec(@ctx).should.eql MAX_FLOAT_VALUE
 
   it 'should return null when the interval is null', ->
     should(@nullInterval.exec(@ctx)).be.null()
