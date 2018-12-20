@@ -666,13 +666,21 @@ define RealOpenWidth: width of Interval(1.23, 4.56)
 
 // @Test: Start
 define ClosedNotNull: start of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
-define ClosedNull: start of Interval[null, DateTime(2013, 1, 1)]
+define ClosedNullDateTime: start of Interval[null, DateTime(2013, 1, 1)]
+define ClosedNullInteger: start of Interval[null, 3]
+define ClosedNullDecimal: start of Interval[null, 5.0]
 define NullInterval: start of (null as Interval<DateTime>)
 define OpenNotNull: start of Interval(DateTime(2012, 1, 1), DateTime(2013, 1, 1))
 define OpenNull: start of Interval(null, DateTime(2013, 1, 1))
 
 // @Test: End
-define Foo: end of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
+define ClosedNotNull: end of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
+define ClosedNullDateTime: end of Interval[DateTime(2013, 1, 1), null]
+define ClosedNullInteger: end of Interval[5, null]
+define ClosedNullDecimal: end of Interval[7.3, null]
+define NullInterval: end of (null as Interval<DateTime>)
+define OpenNotNull: end of Interval(DateTime(2012, 1, 1), DateTime(2013, 1, 1))
+define OpenNull: end of Interval(DateTime(2013, 1, 1), null)
 
 // @Test: Starts
 define TestStartsNull: Interval[null, null] starts Interval[1, 10]
