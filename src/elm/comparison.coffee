@@ -40,12 +40,3 @@ module.exports.GreaterOrEqual = class GreaterOrEqual extends Expression
     args = @execArgs(ctx).map (x) -> Uncertainty.from x
     return null unless args[0]? and args[1]?
     args[0].greaterThanOrEquals args[1]
-
-module.exports.SameAs = class SameAs extends Expression
-  constructor: (json) ->
-    super
-    @precision = json.precision
-
-  exec: (ctx) ->
-    [a, b] = @execArgs(ctx)
-    if a? and b? then a.sameAs(b, @precision?.toLowerCase()) else null

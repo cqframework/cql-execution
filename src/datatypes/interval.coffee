@@ -1,8 +1,8 @@
 { DateTime } = require './datetime'
 { Uncertainty } = require './uncertainty'
 { ThreeValuedLogic } = require './logic'
-{ successor, predecessor, maxValueForInstance, minValueForInstance } = require '../util/math'
 cmp = require '../util/comparison'
+math = require '../util/math'
 
 module.exports.Interval = class Interval
   constructor: (@low, @high, @lowClosed = true, @highClosed = true) ->
@@ -166,7 +166,6 @@ module.exports.Interval = class Interval
       null
 
   sameAs: (other, precision) ->
-    if (@ == null or other == null) then return null
     if (@low == null or @high == null or other.low == null or other.high == null) then return null
     @low.sameAs(other.low, precision) and @high.sameAs(other.high, precision)
 
@@ -209,7 +208,7 @@ module.exports.Interval = class Interval
       if precision? and @low instanceof DateTime
         @toClosed().low.sameAs(other.toClosed().high?.add(1, precision), precision)
       else
-        cmp.equals @toClosed().low, successor(other.toClosed().high)
+        cmp.equals @toClosed().low, math.successor(other.toClosed().high)
     catch
       false
 
@@ -218,9 +217,17 @@ module.exports.Interval = class Interval
       if precision? and @high instanceof DateTime
         @toClosed().high.sameAs(other.toClosed().low?.add(-1, precision), precision)
       else
-        cmp.equals @toClosed().high, predecessor(other.toClosed().low)
+        cmp.equals @toClosed().high, math.predecessor(other.toClosed().low)
     catch
       false
+
+  start: () ->
+    if !@low?
+      if @lowClosed
+        return math.MIN_DATE_VALUE
+      else
+        return @low
+    return @toClosed().low
 
   starts: (other, precision) ->
     if precision? and @low instanceof DateTime
@@ -255,15 +262,15 @@ module.exports.Interval = class Interval
     point = @low ? @high
     if typeof(point) is 'number' or point instanceof DateTime or point?.isQuantity
       low = switch
-        when @lowClosed and not @low? then minValueForInstance point
-        when not @lowClosed and @low? then successor @low
+        when @lowClosed and not @low? then math.minValueForInstance point
+        when not @lowClosed and @low? then math.successor @low
         else @low
       high = switch
-        when @highClosed and not @high? then maxValueForInstance point
-        when not @highClosed and @high? then predecessor @high
+        when @highClosed and not @high? then math.maxValueForInstance point
+        when not @highClosed and @high? then math.predecessor @high
         else @high
-      if not low? then low = new Uncertainty(minValueForInstance(point), high)
-      if not high? then high = new Uncertainty(low, maxValueForInstance(point))
+      if not low? then low = new Uncertainty(math.minValueForInstance(point), high)
+      if not high? then high = new Uncertainty(low, math.maxValueForInstance(point))
       new Interval(low, high, true, true)
     else
       new Interval(@low, @high, true, true)
@@ -272,4 +279,3 @@ module.exports.Interval = class Interval
     start = if @lowClosed then '[' else '('
     end = if @highClosed then ']' else ')'
     return start + @low.toString() + ', ' + @high.toString() + end
-    
