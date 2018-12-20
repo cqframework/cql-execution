@@ -198,3 +198,12 @@ module.exports.Before = class After extends Expression
       when a instanceof DateTime then DT
       else IVL
     lib.doBefore(a, b, @precision)
+
+module.exports.SameAs = class SameAs extends Expression
+  constructor: (json) ->
+    super
+    @precision = json.precision
+
+  exec: (ctx) ->
+    [a, b] = @execArgs(ctx)
+    if a? and b? then a.sameAs(b, @precision?.toLowerCase()) else null

@@ -936,8 +936,20 @@ describe 'Start', ->
   @beforeEach ->
     setup @, data
 
-  it 'should execute as the start of the interval', ->
-    @foo.exec(@ctx).should.eql new DateTime(2012, 1, 1)
+  it 'should return the low of the interval', ->
+    @closedNotNull.exec(@ctx).should.eql new DateTime(2012, 1, 1)
+
+  it 'should return the minimum possible DateTime', ->
+    @closedNull.exec(@ctx).should.eql new DateTime(1, 1, 1, 0, 0, 0, 0)
+
+  it 'should return null when the interval is null', ->
+    should(@nullInterval.exec(@ctx)).be.null()
+
+  it 'should return successor of low when the interval is open', ->
+    @openNotNull.exec(@ctx).should.eql new DateTime(2012, 1, 1).successor()
+
+  it 'should return null for open interval with null low value', ->
+    should(@openNull.exec(@ctx)).be.null()
 
 describe 'End', ->
   @beforeEach ->
@@ -2148,7 +2160,7 @@ describe 'SameAs', ->
     should.not.exist(a)
 
   it 'returns null when both intervals are null', ->
-    # define NullIntervals: (null as Interval<DateTime>) same as (null as Interval<DateTime>)'
+    # define NullIntervals: (null as Interval<DateTime>) same as (null as Interval<DateTime>)
     a = @nullIntervals.exec(@ctx)
     should.not.exist(a)
 

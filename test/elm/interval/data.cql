@@ -665,7 +665,11 @@ define RealWidth: width of Interval[1.23, 4.56]
 define RealOpenWidth: width of Interval(1.23, 4.56)
 
 // @Test: Start
-define Foo: start of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
+define ClosedNotNull: start of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
+define ClosedNull: start of Interval[null, DateTime(2013, 1, 1)]
+define NullInterval: start of (null as Interval<DateTime>)
+define OpenNotNull: start of Interval(DateTime(2012, 1, 1), DateTime(2013, 1, 1))
+define OpenNull: start of Interval(null, DateTime(2013, 1, 1))
 
 // @Test: End
 define Foo: end of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
