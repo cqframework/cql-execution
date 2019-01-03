@@ -166,8 +166,16 @@ module.exports.Interval = class Interval
       null
 
   sameAs: (other, precision) ->
-    if (@low == null or @high == null or other.low == null or other.high == null) then return null
-    @.start().sameAs(other.start(), precision) and @.end().sameAs(other.end(), precision)
+    if ((@low == null and @high == null) or (other.low == null and other.high == null)) then return null
+    # pass in the opposite value to get the type since the checked value is null
+    else if @low == null then @low = minValueForInstance(@high)
+    else if other.low == null then other.low = minValueForInstance(other.high)
+    else if @high == null then @high = maxValueForInstance(@low)
+    else if other.high == null then other.high = maxValueForInstance(other.low)
+    if typeof @low == 'number'
+      @.start() == other.start() and @.end() == other.end()
+    else
+      @.start().sameAs(other.start(), precision) and @.end().sameAs(other.end(), precision)
 
   equals: (other) ->
     if other instanceof Interval
@@ -268,7 +276,7 @@ module.exports.Interval = class Interval
 
   toClosed: () ->
     point = @low ? @high
-    if typeof(point) is 'number' or point instanceof DateTime or point?.isQuantity
+    if typeof(point) is 'number' or point instanceof DateTime or point?.isQuantity or point?.isDate
       low = switch
         when @lowClosed and not @low? then minValueForInstance point
         when not @lowClosed and @low? then successor @low

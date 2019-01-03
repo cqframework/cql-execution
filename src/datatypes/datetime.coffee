@@ -841,6 +841,10 @@ DateTime.prototype.add = Date.prototype.add = (offset, field) ->
     for f in @constructor.FIELDS
       result[f] = null if not @[f]?
 
+  # To combat the conversion of the year 0 to 1900
+  if @.year == 0
+    result.year = 0
+
   result
 
 DateTime.prototype.getFieldFloor = Date.prototype.getFieldFloor = (field) ->

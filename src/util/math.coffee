@@ -49,7 +49,7 @@ module.exports.successor = successor = (val) ->
       #not bothering with the max float test because javascript does not handle floats at the level
       #very well
       val + MIN_FLOAT_PRECISION_VALUE
-  else if val instanceof DateTime
+  else if val instanceof DateTime || val?.isDate
     if val.sameAs(MAX_DATE_VALUE) then throw new OverFlowException() else val.successor()
   else if val instanceof Uncertainty
     # For uncertainties, if the high is the max val, don't increment it
@@ -70,7 +70,7 @@ module.exports.predecessor = predecessor = (val) ->
       #not bothering with the min float test because javascript does not handle floats at the level
       #very well
       val - MIN_FLOAT_PRECISION_VALUE
-  else if val instanceof DateTime
+  else if val instanceof DateTime || val?.isDate
     if val.sameAs(MIN_DATE_VALUE) then throw new OverFlowException() else val.predecessor()
   else if val instanceof Uncertainty
     # For uncertainties, if the low is the min val, don't decrement it
@@ -86,7 +86,7 @@ module.exports.predecessor = predecessor = (val) ->
 module.exports.maxValueForInstance = (val) ->
   if typeof val is "number"
     if parseInt(val) is val then MAX_INT_VALUE else MAX_FLOAT_VALUE
-  else if val instanceof DateTime
+  else if val instanceof DateTime || val?.isDate
     MAX_DATE_VALUE
   else if val?.isQuantity
     val2 = val.clone()
@@ -98,7 +98,7 @@ module.exports.maxValueForInstance = (val) ->
 module.exports.minValueForInstance = (val) ->
   if typeof val is "number"
     if parseInt(val) is val then MIN_INT_VALUE else MIN_FLOAT_VALUE
-  else if val instanceof DateTime
+  else if val instanceof DateTime || val?.isDate
     MIN_DATE_VALUE
   else if val?.isQuantity
     val2 = val.clone()

@@ -2195,6 +2195,30 @@ describe 'SameAs', ->
     a = @nullIntervals.exec(@ctx)
     should.not.exist(a)
 
+  it 'returns true when comparing a closed interval and open interval after it is converted', ->
+    # define OpenAndClosed: Interval[@2018-01-01T00:00:00.0, @2019-01-01T00:00:00.0) same as Interval[@2018-01-01T00:00:00.0, @2018-12-31T23:59:59.999]
+    @openAndClosed.exec(@ctx).should.be.true()
+
+  it 'returns true when both intervals are open ended', ->
+    # define OpenEnded: Interval[@2018-01-01, null] same day as Interval[@2018-01-01, null]
+    @openEnded.exec(@ctx).should.be.true()
+
+  it 'returns true when comparing a closed interval of Dates to an open interval after it is converted', ->
+    # define DateOpenAndClosed: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,03))
+    @dateOpenAndClosed.exec(@ctx).should.be.true()
+
+  it 'returns true when both Date intervals are open ended', ->
+    # define DateOpenEnded: Interval[Date(2018,01,01), null] same as Interval[Date(2018,01,01), null)]
+    @dateOpenEnded.exec(@ctx).should.be.true()
+
+  it 'returns true when comparing a closed interval of Times to an open interval after it is converted', ->
+    # define TimeOpenAndClosed: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(02,03))
+    @timeOpenAndClosed.exec(@ctx).should.be.true()
+
+  it 'returns true when both Time intervals are open ended', ->
+    # define TimeOpenEnded: Interval[Time(01,01), null] same as Interval[Time(01,01), null)]
+    @timeOpenEnded.exec(@ctx).should.be.true()
+
   it 'returns true when both Date intervals are the same', ->
     # define DateIntervalComparisonSame: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,02)]
     @dateIntervalComparisonSame.exec(@ctx).should.be.true()
@@ -2274,3 +2298,15 @@ describe 'SameAs', ->
   it 'returns false when DateTime intervals are not the same on the requested millisecond precision', ->
     # define DateTimeMillisecondPrecisionNotSame: Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)] same millisecond as Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,09)]
     @dateTimeMillisecondPrecisionNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when integer interval is the same', ->
+    # define IntegerIntervalSame: Interval[2,5] same as Interval[2,5]
+    @integerIntervalSame.exec(@ctx).should.be.true()
+
+  it 'returns false when integer interval is not the same', ->
+    # define IntegerIntervalNotSame: Interval[2,5] same as Interval[2,4]
+    @integerIntervalNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when integer interval is same after the open interval is closed', ->
+    # define IntegerIntervalSameOpen: Interval[2,5] same as Interval[2,6)
+    @integerIntervalSameOpen.exec(@ctx).should.be.true()
