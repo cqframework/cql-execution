@@ -1611,6 +1611,9 @@
         }
       }
     }
+    if (this.year === 0) {
+      result.year = 0;
+    }
     return result;
   };
 
@@ -2145,7 +2148,7 @@
     Interval.prototype.toClosed = function() {
       var high, low, point, ref1;
       point = (ref1 = this.low) != null ? ref1 : this.high;
-      if (typeof point === 'number' || point instanceof DateTime || (point != null ? point.isQuantity : void 0)) {
+      if (typeof point === 'number' || point instanceof DateTime || (point != null ? point.isQuantity : void 0) || (point != null ? point.isDate : void 0)) {
         low = (function() {
           switch (false) {
             case !(this.lowClosed && (this.low == null)):
