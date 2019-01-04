@@ -2175,12 +2175,12 @@ describe 'SameAs', ->
   it 'returns null when both intervals values are null', ->
     # define NullBoth: Interval[null,null] same as Interval[null,null]
     a = @nullBoth.exec(@ctx)
-    should.not.exist(a)
+    should(a).be.null()
 
-  it 'returns null when one interval is null', ->
+  it 'returns null when one intervals low and high are null', ->
     # define NullOne: Interval[DateTime(2018,01,01), DateTime(2018,02,02)] same as Interval[null,null]
     a = @nullOne.exec(@ctx)
-    should.not.exist(a)
+    should(a).be.null()
 
   it 'returns true when both intervals are the same', ->
     # define Equal: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[DateTime(2018,01,01), DateTime(2018,01,01)]
@@ -2193,19 +2193,19 @@ describe 'SameAs', ->
   it 'returns null when comparing date and datetime because precision is changed when converting date to datetime', ->
     # define DateTimeAndDateComparisonEqual: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[Date(2018,01,01), Date(2018,01,01)]
     a = @dateTimeAndDateComparisonEqual.exec(@ctx)
-    should.not.exist(a)
+    should(a).be.null()
 
   it 'returns null when both intervals are null', ->
     # define NullIntervals: (null as Interval<DateTime>) same as (null as Interval<DateTime>)
     a = @nullIntervals.exec(@ctx)
-    should.not.exist(a)
+    should(a).be.null()
 
   it 'returns true when comparing a closed interval and open interval after it is converted', ->
-    # define OpenAndClosed: Interval[@2018-01-01T00:00:00.0, @2019-01-01T00:00:00.0) same as Interval[@2018-01-01T00:00:00.0, @2018-12-31T23:59:59.999]
+    # define OpenAndClosed: Interval[DateTime(2018,01,01,00,00,00,0), DateTime(2019,01,01,00,00,00,0)) same as Interval[DateTime(2018,01,01,00,00,00,0), DateTime(2018,12,31,23,59,59,999)]
     @openAndClosed.exec(@ctx).should.be.true()
 
   it 'returns true when both intervals are open ended', ->
-    # define OpenEnded: Interval[@2018-01-01, null] same day as Interval[@2018-01-01, null]
+    # define OpenEnded: Interval[DateTime(2018,01,01), null] same day as Interval[DateTime(2018,01,01), null]
     @openEnded.exec(@ctx).should.be.true()
 
   it 'returns false when the first interval is open ended and the second is not', ->
@@ -2215,6 +2215,14 @@ describe 'SameAs', ->
   it 'returns false when the second interval is open and the first is not', ->
     # define OpenEndedNotSame2: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same day as Interval[DateTime(2018,01,01), null]
     @openEndedNotSame2.exec(@ctx).should.be.false()
+
+  it 'returns true when both intervals start at null and end at the same time', ->
+    # define OpenBeginningSame: Interval[null,DateTime(2018,01,01)] same as Interval[null,DateTime(2018,01,01)]
+    @openBeginningSame.exec(@ctx).should.be.true()
+
+  it 'returns false when one interval starts at null and the other does not', ->
+    # define OpenBeginningNotSame: Interval[DateTime(2017,01,01),DateTime(2018,01,01)] same as Interval[null,DateTime(2018,01,01)]
+    @openBeginningNotSame.exec(@ctx).should.be.false()
 
   it 'returns true when comparing a closed interval of Dates to an open interval after it is converted', ->
     # define DateOpenAndClosed: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,03))
