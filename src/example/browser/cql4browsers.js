@@ -914,15 +914,23 @@
     };
 
     DateTime.prototype.toJSDate = function(ignoreTimezone) {
-      var d, h, mi, mo, ms, ref1, ref2, ref3, ref4, ref5, ref6, s, y;
+      var d, date, h, mi, mo, ms, ref1, ref2, ref3, ref4, ref5, ref6, s, y;
       if (ignoreTimezone == null) {
         ignoreTimezone = false;
       }
       ref6 = [this.year, (this.month != null ? this.month - 1 : 0), (ref1 = this.day) != null ? ref1 : 1, (ref2 = this.hour) != null ? ref2 : 0, (ref3 = this.minute) != null ? ref3 : 0, (ref4 = this.second) != null ? ref4 : 0, (ref5 = this.millisecond) != null ? ref5 : 0], y = ref6[0], mo = ref6[1], d = ref6[2], h = ref6[3], mi = ref6[4], s = ref6[5], ms = ref6[6];
       if ((this.timezoneOffset != null) && !ignoreTimezone) {
-        return new jsDate(jsDate.UTC(y, mo, d, h, mi, s, ms) - (this.timezoneOffset * 60 * 60 * 1000));
+        date = new jsDate(jsDate.UTC(y, mo, d, h, mi, s, ms) - (this.timezoneOffset * 60 * 60 * 1000));
+        if (y < 100) {
+          date.setUTCFullYear(y);
+        }
+        return date;
       } else {
-        return new jsDate(y, mo, d, h, mi, s, ms);
+        date = new jsDate(y, mo, d, h, mi, s, ms);
+        if (y < 100) {
+          date.setFullYear(y);
+        }
+        return date;
       }
     };
 
@@ -1610,9 +1618,6 @@
           result[f] = null;
         }
       }
-    }
-    if (this.year === 0) {
-      result.year = 0;
     }
     return result;
   };

@@ -267,9 +267,17 @@ class DateTime
   toJSDate: (ignoreTimezone = false) ->
     [y, mo, d, h, mi, s, ms] = [ @year, (if @month? then @month-1 else 0), @day ? 1, @hour ? 0, @minute ? 0, @second ? 0, @millisecond ? 0 ]
     if @timezoneOffset? and not ignoreTimezone
-      new jsDate(jsDate.UTC(y, mo, d, h, mi, s, ms) - (@timezoneOffset * 60 * 60 * 1000))
+      date = new jsDate(jsDate.UTC(y, mo, d, h, mi, s, ms) - (@timezoneOffset * 60 * 60 * 1000))
+      # TODO: This fixes any case that would not cross the year boundary due to a timezone.
+      # Mainly used to solve the issue with the MIN_DATE_VALUE being converted from
+      # year 0001 to year 1900 because of strange JSDate behavior between year 0 and 100
+      # Also else case below
+      if y < 100 then date.setUTCFullYear(y)
+      return date
     else
-      new jsDate(y, mo, d, h, mi, s, ms)
+      date = new jsDate(y, mo, d, h, mi, s, ms)
+      if y < 100 then date.setFullYear(y)
+      return date
 
   toJSON: () ->
     @toString()
@@ -278,7 +286,7 @@ class DateTime
     String("0" + num).slice(-2)
 
   toString: () ->
-    if @isTime() then @toStringTime() else @toStringDateTime() 
+    if @isTime() then @toStringTime() else @toStringDateTime()
 
   toStringTime: () ->
     str = 'T'
@@ -840,10 +848,6 @@ DateTime.prototype.add = Date.prototype.add = (offset, field) ->
   if offsetIsMorePrecise
     for f in @constructor.FIELDS
       result[f] = null if not @[f]?
-
-  # To combat the conversion of the year 0 to 1900
-  if @.year == 0
-    result.year = 0
 
   result
 
