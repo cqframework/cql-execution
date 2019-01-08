@@ -2174,13 +2174,11 @@ describe 'SameAs', ->
 
   it 'returns null when both intervals values are null', ->
     # define NullBoth: Interval[null,null] same as Interval[null,null]
-    a = @nullBoth.exec(@ctx)
-    should(a).be.null()
+    @nullBoth.exec(@ctx).should.be.true()
 
   it 'returns null when one intervals low and high are null', ->
     # define NullOne: Interval[DateTime(2018,01,01), DateTime(2018,02,02)] same as Interval[null,null]
-    a = @nullOne.exec(@ctx)
-    should(a).be.null()
+    @nullOne.exec(@ctx).should.be.false()
 
   it 'returns true when both intervals are the same', ->
     # define Equal: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[DateTime(2018,01,01), DateTime(2018,01,01)]

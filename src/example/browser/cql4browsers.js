@@ -2016,14 +2016,6 @@
     Interval.prototype.sameAs = function(other, precision) {
       if ((this.low === null && this.high === null) || (other.low === null && other.high === null)) {
         return null;
-      } else if (this.low === null) {
-        this.low = minValueForInstance(this.high);
-      } else if (other.low === null) {
-        other.low = minValueForInstance(other.high);
-      } else if (this.high === null) {
-        this.high = maxValueForInstance(this.low);
-      } else if (other.high === null) {
-        other.high = maxValueForInstance(other.low);
       }
       if (typeof this.low === 'number') {
         return this.start() === other.start() && this.end() === other.end();

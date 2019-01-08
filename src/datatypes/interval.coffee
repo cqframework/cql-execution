@@ -166,12 +166,16 @@ module.exports.Interval = class Interval
       null
 
   sameAs: (other, precision) ->
-    if ((@low == null and @high == null) or (other.low == null and other.high == null)) then return null
-    # pass in the opposite value to get the type since the checked value is null
-    else if @low == null then @low = minValueForInstance(@high)
-    else if other.low == null then other.low = minValueForInstance(other.high)
-    else if @high == null then @high = maxValueForInstance(@low)
-    else if other.high == null then other.high = maxValueForInstance(other.low)
+    # Checks to see if any of the Intervals have a open, null boundary, returns null if true
+    if (@low == null and !@lowClosed) or (@high == null and !@highClosed) or (other.low == null and !other.lowClosed) or (other.high == null and !other.highClosed) then return null
+
+    # For the special case where Interval[null,null] same as Interval[null,null] to return true
+    if @lowClosed and !@low? and @highClosed and !@high? then return other.lowClosed and !other.low? and other.highClosed and !other.high?
+
+    # For the special case where Interval[...] same as Interval[null,null] should return false
+    # This accounts for the inverse of the if statement above: where the second Interval is [null,null] and not the first Interval
+    if other.lowClosed and !other.low? and other.highClosed and !other.high? then return false
+
     if typeof @low == 'number'
       @.start() == other.start() and @.end() == other.end()
     else
