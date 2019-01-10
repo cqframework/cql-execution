@@ -2014,8 +2014,14 @@
     };
 
     Interval.prototype.sameAs = function(other, precision) {
-      if ((this.low === null && this.high === null) || (other.low === null && other.high === null)) {
+      if ((this.low === null && !this.lowClosed) || (this.high === null && !this.highClosed) || (other.low === null && !other.lowClosed) || (other.high === null && !other.highClosed)) {
         return null;
+      }
+      if (this.lowClosed && (this.low == null) && this.highClosed && (this.high == null)) {
+        return other.lowClosed && (other.low == null) && other.highClosed && (other.high == null);
+      }
+      if (other.lowClosed && (other.low == null) && other.highClosed && (other.high == null)) {
+        return false;
       }
       if (typeof this.low === 'number') {
         return this.start() === other.start() && this.end() === other.end();
@@ -45705,8 +45711,14 @@
       } else {
         return val + MIN_FLOAT_PRECISION_VALUE;
       }
-    } else if (val instanceof DateTime || (val != null ? val.isDate : void 0)) {
+    } else if (val instanceof DateTime) {
       if (val.sameAs(MAX_DATE_VALUE)) {
+        throw new OverFlowException();
+      } else {
+        return val.successor();
+      }
+    } else if (val != null ? val.isDate : void 0) {
+      if (val.sameAs(MAX_DATE_VALUE.getDate())) {
         throw new OverFlowException();
       } else {
         return val.successor();
@@ -45742,8 +45754,14 @@
       } else {
         return val - MIN_FLOAT_PRECISION_VALUE;
       }
-    } else if (val instanceof DateTime || (val != null ? val.isDate : void 0)) {
+    } else if (val instanceof DateTime) {
       if (val.sameAs(MIN_DATE_VALUE)) {
+        throw new OverFlowException();
+      } else {
+        return val.predecessor();
+      }
+    } else if (val != null ? val.isDate : void 0) {
+      if (val.sameAs(MIN_DATE_VALUE.getDate())) {
         throw new OverFlowException();
       } else {
         return val.predecessor();
@@ -45775,8 +45793,10 @@
       } else {
         return MAX_FLOAT_VALUE;
       }
-    } else if (val instanceof DateTime || (val != null ? val.isDate : void 0)) {
+    } else if (val instanceof DateTime) {
       return MAX_DATE_VALUE;
+    } else if (val != null ? val.isDate : void 0) {
+      return MAX_DATE_VALUE.getDate();
     } else if (val != null ? val.isQuantity : void 0) {
       val2 = val.clone();
       val2.value = maxValueForInstance(val2.value);
@@ -45794,8 +45814,10 @@
       } else {
         return MIN_FLOAT_VALUE;
       }
-    } else if (val instanceof DateTime || (val != null ? val.isDate : void 0)) {
+    } else if (val instanceof DateTime) {
       return MIN_DATE_VALUE;
+    } else if (val != null ? val.isDate : void 0) {
+      return MIN_DATE_VALUE.getDate();
     } else if (val != null ? val.isQuantity : void 0) {
       val2 = val.clone();
       val2.value = minValueForInstance(val2.value);
