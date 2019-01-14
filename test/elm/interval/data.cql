@@ -1188,5 +1188,11 @@ define DateTimeMillisecondPrecisionNotSame: Interval[DateTime(2018,01,01,01,01,0
 define IntegerIntervalSame: Interval[2,5] same as Interval[2,5]
 define IntegerIntervalNotSame: Interval[2,5] same as Interval[2,4]
 define IntegerIntervalSameOpen: Interval[2,5] same as Interval[2,6)
-define OpenNullHigh: Interval(3,null) same as Interval(2,4)
-define OpenNullLow: Interval(1,5) same as Interval(null,4)
+define OpenNullHighLowDifferent: Interval(3,null) same as Interval(2,4)
+define OpenNullLowHighDifferent: Interval(1,5) same as Interval(null,4)
+define OpenNullHighLowSame: Interval(2,null) same as Interval(2,4)
+define OpenNullLowHighSame: Interval(1,4) same as Interval(null,4)
+define OpenNullLowOpenNullHigh: Interval(1,null) same as Interval(null,4)
+define OpenNullHighsLowsDifferent: Interval(1,null) same as Interval(2,null)
+define OpenNullHighsLowsSame: Interval(1,null) same as Interval(1,null)
+define OpenNullLowsHighsSame: Interval(null,3) same as Interval(null,3)

@@ -166,15 +166,22 @@ module.exports.Interval = class Interval
       null
 
   sameAs: (other, precision) ->
-    # Checks to see if any of the Intervals have a open, null boundary, returns null if true
-    if (@low == null and !@lowClosed) or (@high == null and !@highClosed) or (other.low == null and !other.lowClosed) or (other.high == null and !other.highClosed) then return null
+    # Checks to see if any of the Intervals have a open, null boundary
+    if (@low == null and !@lowClosed) or
+       (@high == null and !@highClosed) or
+       (other.low == null and !other.lowClosed) or
+       (other.high == null and !other.highClosed)
+ 
+      return null
 
-    # For the special case where Interval[null,null] same as Interval[null,null] to return true
-    if @lowClosed and !@low? and @highClosed and !@high? then return other.lowClosed and !other.low? and other.highClosed and !other.high?
+    # For the special cases where @ is Interval[null,null]
+    if @lowClosed and !@low? and @highClosed and !@high?
+      return other.lowClosed and !other.low? and other.highClosed and !other.high?
 
     # For the special case where Interval[...] same as Interval[null,null] should return false
     # This accounts for the inverse of the if statement above: where the second Interval is [null,null] and not the first Interval
-    if other.lowClosed and !other.low? and other.highClosed and !other.high? then return false
+    if other.lowClosed and !other.low? and other.highClosed and !other.high?
+      return false
 
     if typeof @low == 'number'
       @.start() == other.start() and @.end() == other.end()

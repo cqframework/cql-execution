@@ -2331,9 +2331,33 @@ describe 'SameAs', ->
     @integerIntervalSameOpen.exec(@ctx).should.be.true()
 
   it 'returns false even with an open ended null because the lows are not null and not same', ->
-    # define OpenNullHigh: Interval(3,null) same as Interval(2,4)
-    @openNullHigh.exec(@ctx).should.be.false()
+    # define OpenNullHighLowDifferent: Interval(3,null) same as Interval(2,4)
+    @openNullHighLowDifferent.exec(@ctx).should.be.false()
 
   it 'returns false even with an open ended null because the highs are not null and not same', ->
-    # define OpenNullLow: Interval(1,5) same as Interval(null,4)
-    @openNullLow.exec(@ctx).should.be.false()
+    # define OpenNullLowHighDifferent: Interval(1,5) same as Interval(null,4)
+    @openNullLowHighDifferent.exec(@ctx).should.be.false()
+
+  it 'returns null if lows are same and highs have an open null', ->
+    # OpenNullHighLowSame: Interval(2,null) same as Interval(2,4)
+    should(@openNullHighLowSame.exec(@ctx)).be.null()
+
+  it 'returns null if lows have an open null and highs are same', ->
+    # OpenNullLowHighSame: Interval(1,4) same as Interval(null,4)
+    should(@openNullLowHighSame.exec(@ctx)).be.null()
+
+  it 'returns null if both lows and highs have open null', ->
+    # OpenNullLowOpenNullHigh: Interval(1,null) same as Interval(null,4)
+    should(@openNullLowOpenNullHigh.exec(@ctx)).be.null()
+
+  it 'returns false if lows are different and highs have open null', ->
+    # OpenNullHighsLowsDifferent: Interval(1,null) same as Interval(2,null)
+    @openNullHighsLowsDifferent.exec(@ctx).should.be.false()
+
+  it 'returns null if lows are same and highs have open null', ->
+    # OpenNullHighsLowsSame: Interval(1,null) same as Interval(1,null)
+    should(@openNullHighsLowsSame.exec(@ctx)).be.null()
+
+  it 'returns null if lows have open null and highs are same', ->
+    # OpenNullLowsHighsSame: Interval(null,3) same as Interval(null,3)
+    should(@openNullLowsHighsSame.exec(@ctx)).be.null()

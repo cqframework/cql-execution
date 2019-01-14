@@ -2014,10 +2014,13 @@
     };
 
     Interval.prototype.sameAs = function(other, precision) {
-      if (this.equals(other) === null) {
+      if ((this.low === null && !this.lowClosed) || (this.high === null && !this.highClosed) || (other.low === null && !other.lowClosed) || (other.high === null && !other.highClosed)) {
         return null;
       }
-      if (((this.low != null) && (other.low != null) && this.start() !== other.start()) || ((this.high != null) && (other.high != null) && this.end() !== other.end())) {
+      if (this.lowClosed && (this.low == null) && this.highClosed && (this.high == null)) {
+        return other.lowClosed && (other.low == null) && other.highClosed && (other.high == null);
+      }
+      if (other.lowClosed && (other.low == null) && other.highClosed && (other.high == null)) {
         return false;
       }
       if (typeof this.low === 'number') {
