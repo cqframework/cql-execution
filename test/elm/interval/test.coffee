@@ -2172,11 +2172,11 @@ describe 'SameAs', ->
   @beforeEach ->
     setup @, data
 
-  it 'returns null when both intervals values are null', ->
+  it 'returns true when both intervals values are null and closed', ->
     # define NullBoth: Interval[null,null] same as Interval[null,null]
     @nullBoth.exec(@ctx).should.be.true()
 
-  it 'returns null when one intervals low and high are null', ->
+  it 'returns false when one intervals low and high are null', ->
     # define NullOne: Interval[DateTime(2018,01,01), DateTime(2018,02,02)] same as Interval[null,null]
     @nullOne.exec(@ctx).should.be.false()
 
@@ -2329,3 +2329,11 @@ describe 'SameAs', ->
   it 'returns true when integer interval is same after the open interval is closed', ->
     # define IntegerIntervalSameOpen: Interval[2,5] same as Interval[2,6)
     @integerIntervalSameOpen.exec(@ctx).should.be.true()
+
+  it 'returns false even with an open ended null because the lows are not null and not same', ->
+    # define OpenNullHigh: Interval(3,null) same as Interval(2,4)
+    @openNullHigh.exec(@ctx).should.be.false()
+
+  it 'returns false even with an open ended null because the highs are not null and not same', ->
+    # define OpenNullLow: Interval(1,5) same as Interval(null,4)
+    @openNullLow.exec(@ctx).should.be.false()
