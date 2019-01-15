@@ -166,6 +166,8 @@ module.exports.Interval = class Interval
       null
 
   sameAs: (other, precision) ->
+    # This large if and else if block handles the scenarios where there is an open ended null
+    # If both lows or highs exists, it can be determined that intervals are not Same As
     if (@low? and other.low? and !@high? and other.high? and !@highClosed) or
        (@low? and other.low? and @high? and !other.high? and !other.highClosed) or
        (@low? and other.low? and !@high? and !other.high? and !other.highClosed and !@highClosed)
@@ -194,6 +196,8 @@ module.exports.Interval = class Interval
 
     # For the special case where Interval[...] same as Interval[null,null] should return false
     # This accounts for the inverse of the if statement above: where the second Interval is [null,null] and not the first Interval
+    # The reason why this isn't caught below is due to how start() and end() work
+    # There is no way to tell the datatype for MIN and MAX if both boundaries are null
     if other.lowClosed and !other.low? and other.highClosed and !other.high?
       return false
 
