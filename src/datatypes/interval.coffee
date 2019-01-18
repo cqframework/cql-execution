@@ -165,6 +165,47 @@ module.exports.Interval = class Interval
     else # ol is null
       null
 
+  sameAs: (other, precision) ->
+    # This large if and else if block handles the scenarios where there is an open ended null
+    # If both lows or highs exists, it can be determined that intervals are not Same As
+    if (@low? and other.low? and !@high? and other.high? and !@highClosed) or
+       (@low? and other.low? and @high? and !other.high? and !other.highClosed) or
+       (@low? and other.low? and !@high? and !other.high? and !other.highClosed and !@highClosed)
+      if typeof @low == 'number'
+        if !(@.start() == other.start()) then return false
+      else
+        if !(@.start().sameAs(other.start(), precision)) then return false
+    else if (@low? and !other.low? and @high? and other.high?) or
+            (!@low? and other.low? and @high? and other.high?) or
+            (!@low? and !other.low? and @high? and other.high?)
+      if typeof @high == 'number'
+        if !(@.end() == other.end()) then return false
+      else
+        if !(@.end().sameAs(other.end(), precision)) then return false
+
+    # Checks to see if any of the Intervals have a open, null boundary
+    if (!@low? and !@lowClosed) or
+       (!@high? and !@highClosed) or
+       (!other.low? and !other.lowClosed) or
+       (!other.high? and !other.highClosed)
+      return null
+
+    # For the special cases where @ is Interval[null,null]
+    if @lowClosed and !@low? and @highClosed and !@high?
+      return other.lowClosed and !other.low? and other.highClosed and !other.high?
+
+    # For the special case where Interval[...] same as Interval[null,null] should return false
+    # This accounts for the inverse of the if statement above: where the second Interval is [null,null] and not the first Interval
+    # The reason why this isn't caught below is due to how start() and end() work
+    # There is no way to tell the datatype for MIN and MAX if both boundaries are null
+    if other.lowClosed and !other.low? and other.highClosed and !other.high?
+      return false
+
+    if typeof @low == 'number'
+      @.start() == other.start() and @.end() == other.end()
+    else
+      @.start().sameAs(other.start(), precision) and @.end().sameAs(other.end(), precision)
+
   equals: (other) ->
     if other instanceof Interval
       [a, b] = [@toClosed(), other.toClosed()]
@@ -217,6 +258,22 @@ module.exports.Interval = class Interval
     catch
       false
 
+  start: () ->
+    if !@low?
+      if @lowClosed
+        return minValueForInstance(@high)
+      else
+        return @low
+    return @toClosed().low
+
+  end: () ->
+    if !@high?
+      if @highClosed
+        return maxValueForInstance(@low)
+      else
+        return @high
+    return @toClosed().high
+
   starts: (other, precision) ->
     if precision? and @low instanceof DateTime
       startEqual = @low.sameAs(other.low, precision)
@@ -248,7 +305,7 @@ module.exports.Interval = class Interval
 
   toClosed: () ->
     point = @low ? @high
-    if typeof(point) is 'number' or point instanceof DateTime or point?.isQuantity
+    if typeof(point) is 'number' or point instanceof DateTime or point?.isQuantity or point?.isDate
       low = switch
         when @lowClosed and not @low? then minValueForInstance point
         when not @lowClosed and @low? then successor @low
@@ -267,4 +324,3 @@ module.exports.Interval = class Interval
     start = if @lowClosed then '[' else '('
     end = if @highClosed then ']' else ')'
     return start + @low.toString() + ', ' + @high.toString() + end
-    

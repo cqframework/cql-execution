@@ -3,6 +3,12 @@ setup = require '../../setup'
 data = require './data'
 { Interval } = require '../../../lib/datatypes/interval'
 { DateTime } = require '../../../lib/datatypes/datetime'
+{ MIN_INT_VALUE,
+  MAX_INT_VALUE,
+  MIN_FLOAT_VALUE,
+  MAX_FLOAT_VALUE,
+  MIN_DATE_VALUE,
+  MAX_DATE_VALUE } = require '../../../lib/util/math'
 
 describe 'Interval', ->
   @beforeEach ->
@@ -928,7 +934,7 @@ describe 'Width', ->
     @intWidthThreeToMax.exec(@ctx).should.equal Math.pow(2,31)-4
     @intWidthMinToThree.exec(@ctx).should.equal Math.pow(2,31)+3
 
-  it 'should calculate the width of infinite intervals', ->
+  it 'should calculate the width of infinite intervals that result in null', ->
     should(@intWidthThreeToUnknown.exec(@ctx)).be.null()
     should(@intWidthUnknownToThree.exec(@ctx)).be.null()
 
@@ -936,15 +942,52 @@ describe 'Start', ->
   @beforeEach ->
     setup @, data
 
-  it 'should execute as the start of the interval', ->
-    @foo.exec(@ctx).should.eql new DateTime(2012, 1, 1)
+
+  it 'should return the low of the interval', ->
+    @closedNotNull.exec(@ctx).should.eql new DateTime(2012, 1, 1)
+
+  it 'should return the minimum possible DateTime', ->
+    @closedNullDateTime.exec(@ctx).should.eql MIN_DATE_VALUE
+
+  it 'should return the minimum possible Integer', ->
+    @closedNullInteger.exec(@ctx).should.eql MIN_INT_VALUE
+
+  it 'should return the minimum possible Decimal', ->
+    @closedNullDecimal.exec(@ctx).should.eql MIN_FLOAT_VALUE
+
+  it 'should return null when the interval is null', ->
+    should(@nullInterval.exec(@ctx)).be.null()
+
+  it 'should return successor of low when the interval is open', ->
+    @openNotNull.exec(@ctx).should.eql new DateTime(2012, 1, 1).successor()
+
+  it 'should return null for open interval with null high value', ->
+    should(@openNull.exec(@ctx)).be.null()
 
 describe 'End', ->
   @beforeEach ->
     setup @, data
 
-  it 'should execute as the end of the interval', ->
-    @foo.exec(@ctx).should.eql new DateTime(2013, 1, 1)
+  it 'should return the high of the interval', ->
+    @closedNotNull.exec(@ctx).should.eql new DateTime(2013, 1, 1)
+
+  it 'should return the maximum possible DateTime', ->
+    @closedNullDateTime.exec(@ctx).should.eql MAX_DATE_VALUE
+
+  it 'should return the maximum possible Integer', ->
+    @closedNullInteger.exec(@ctx).should.eql MAX_INT_VALUE
+
+  it 'should return the maximum possible Decimal', ->
+    @closedNullDecimal.exec(@ctx).should.eql MAX_FLOAT_VALUE
+
+  it 'should return null when the interval is null', ->
+    should(@nullInterval.exec(@ctx)).be.null()
+
+  it 'should return predecessor of high when the interval is open', ->
+    @openNotNull.exec(@ctx).should.eql new DateTime(2013, 1, 1).predecessor()
+
+  it 'should return null for open interval with null low value', ->
+    should(@openNull.exec(@ctx)).be.null()
 
 describe 'Starts', ->
   @beforeEach ->
@@ -2124,3 +2167,197 @@ describe 'DecimalIntervalExpand', ->
     # define BadPerMinute: expand { Interval(2.1, 4.1] } per 0.5 minute
     a = @badPerMinute.exec(@ctx)
     should.not.exist(a)
+
+describe 'SameAs', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'returns true when both intervals values are null and closed', ->
+    # define NullBoth: Interval[null,null] same as Interval[null,null]
+    @nullBoth.exec(@ctx).should.be.true()
+
+  it 'returns false when one intervals low and high are null', ->
+    # define NullOne: Interval[DateTime(2018,01,01), DateTime(2018,02,02)] same as Interval[null,null]
+    @nullOne.exec(@ctx).should.be.false()
+
+  it 'returns true when both intervals are the same', ->
+    # define Equal: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[DateTime(2018,01,01), DateTime(2018,01,01)]
+    @equal.exec(@ctx).should.be.true()
+
+  it 'returns false when both intervals are not the same', ->
+    # define NotEqual: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[DateTime(2018,02,01), DateTime(2018,05,01)]
+    @notEqual.exec(@ctx).should.be.false()
+
+  it 'returns null when comparing date and datetime because precision is changed when converting date to datetime', ->
+    # define DateTimeAndDateComparisonEqual: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[Date(2018,01,01), Date(2018,01,01)]
+    a = @dateTimeAndDateComparisonEqual.exec(@ctx)
+    should(a).be.null()
+
+  it 'returns null when both intervals are null', ->
+    # define NullIntervals: (null as Interval<DateTime>) same as (null as Interval<DateTime>)
+    a = @nullIntervals.exec(@ctx)
+    should(a).be.null()
+
+  it 'returns true when comparing a closed interval and open interval after it is converted', ->
+    # define OpenAndClosed: Interval[DateTime(2018,01,01,00,00,00,0), DateTime(2019,01,01,00,00,00,0)) same as Interval[DateTime(2018,01,01,00,00,00,0), DateTime(2018,12,31,23,59,59,999)]
+    @openAndClosed.exec(@ctx).should.be.true()
+
+  it 'returns true when both intervals are open ended', ->
+    # define OpenEnded: Interval[DateTime(2018,01,01), null] same day as Interval[DateTime(2018,01,01), null]
+    @openEnded.exec(@ctx).should.be.true()
+
+  it 'returns false when the first interval is open ended and the second is not', ->
+    # define OpenEndedNotSame: Interval[DateTime(2018,01,01), null] same day as Interval[DateTime(2018,01,01), DateTime(2019,01,01)]
+    @openEndedNotSame.exec(@ctx).should.be.false()
+
+  it 'returns false when the second interval is open and the first is not', ->
+    # define OpenEndedNotSame2: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same day as Interval[DateTime(2018,01,01), null]
+    @openEndedNotSame2.exec(@ctx).should.be.false()
+
+  it 'returns true when both intervals start at null and end at the same time', ->
+    # define OpenBeginningSame: Interval[null,DateTime(2018,01,01)] same as Interval[null,DateTime(2018,01,01)]
+    @openBeginningSame.exec(@ctx).should.be.true()
+
+  it 'returns false when one interval starts at null and the other does not', ->
+    # define OpenBeginningNotSame: Interval[DateTime(2017,01,01),DateTime(2018,01,01)] same as Interval[null,DateTime(2018,01,01)]
+    @openBeginningNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when comparing a closed interval of Dates to an open interval after it is converted', ->
+    # define DateOpenAndClosed: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,03))
+    @dateOpenAndClosed.exec(@ctx).should.be.true()
+
+  it 'returns true when both Date intervals are open ended', ->
+    # define DateOpenEnded: Interval[Date(2018,01,01), null] same as Interval[Date(2018,01,01), null)]
+    @dateOpenEnded.exec(@ctx).should.be.true()
+
+  it 'returns true when comparing a closed interval of Times to an open interval after it is converted', ->
+    # define TimeOpenAndClosed: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(02,03))
+    @timeOpenAndClosed.exec(@ctx).should.be.true()
+
+  it 'returns true when both Time intervals are open ended', ->
+    # define TimeOpenEnded: Interval[Time(01,01), null] same as Interval[Time(01,01), null)]
+    @timeOpenEnded.exec(@ctx).should.be.true()
+
+  it 'returns true when both Date intervals are the same', ->
+    # define DateIntervalComparisonSame: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,02)]
+    @dateIntervalComparisonSame.exec(@ctx).should.be.true()
+
+  it 'returns false when Date intervals are not the same', ->
+    # define DateIntervalComparisonNotSame: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,01)]
+    @dateIntervalComparisonNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when both Time intervals are the same', ->
+    # define TimeIntervalComparisonSame: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(02,02)]
+    @timeIntervalComparisonSame.exec(@ctx).should.be.true()
+
+  it 'returns false when Time intervals are not the same', ->
+    # define TimeIntervalComparisonNotSame: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(08,01)]
+    @timeIntervalComparisonNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when DateTime intervals are same on the year precision', ->
+    # define DateTimeYearPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same year as Interval[DateTime(2018,02,01), DateTime(2019,05,01)]
+    @dateTimeYearPrecisionSame.exec(@ctx).should.be.true()
+
+  it 'returns false when DateTime intervals are not the same on the requested year precision', ->
+    # define DateTimeYearPrecisionNotSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same year as Interval[DateTime(2018,02,01), DateTime(2020,05,01)]
+    @dateTimeYearPrecisionNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when DateTime intervals are same on the year precision', ->
+    # define DateYearPrecisionSame: Interval[Date(2018,01,01), Date(2019,01,01)] same year as Interval[Date(2018,02,01), Date(2019,05,01)]
+    @dateYearPrecisionSame.exec(@ctx).should.be.true()
+
+  it 'returns false when DateTime intervals are not the same on the requested year precision', ->
+    # define DateYearPrecisionNotSame: Interval[Date(2018,01,01), Date(2019,01,01)] same year as Interval[Date(2018,02,01), Date(2020,05,01)]
+    @dateYearPrecisionNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when DateTime intervals are same on the month precision', ->
+    # define DateTimeMonthPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same month as Interval[DateTime(2018,01,01), DateTime(2019,01,03)]
+    @dateTimeMonthPrecisionSame.exec(@ctx).should.be.true()
+
+  it 'returns false when DateTime intervals are not the same on the requested month precision', ->
+    # define DateTimeMonthPrecisionNotSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same month as Interval[DateTime(2018,02,01), DateTime(2019,01,01)]
+    @dateTimeMonthPrecisionNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when DateTime intervals are same on the day precision', ->
+    # define DateTimeDayPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same day as Interval[DateTime(2018,01,01,05), DateTime(2019,01,01,09)]
+    @dateTimeDayPrecisionSame.exec(@ctx).should.be.true()
+
+  it 'returns false when DateTime intervals are not the same on the requested day precision', ->
+    # define DateTimeDayPrecisionNotSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same day as Interval[DateTime(2018,01,01), DateTime(2019,01,02,06)]
+    @dateTimeDayPrecisionNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when DateTime intervals are same on the hour precision', ->
+    # define DateTimeHourPrecisionSame: Interval[DateTime(2018,01,01,01), DateTime(2019,01,01,01)] same hour as Interval[DateTime(2018,01,01,01), DateTime(2019,01,01,01,05)]
+    @dateTimeHourPrecisionSame.exec(@ctx).should.be.true()
+
+  it 'returns false when DateTime intervals are not the same on the requested hour precision', ->
+    # define DateTimeHourPrecisionNotSame: Interval[DateTime(2018,01,01,01), DateTime(2019,01,01,01)] same hour as Interval[DateTime(2018,01,01,06), DateTime(2019,01,01,01)]
+    @dateTimeHourPrecisionNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when DateTime intervals are same on the minute precision', ->
+    # define DateTimeMinutePrecisionSame: Interval[DateTime(2018,01,01,01,01), DateTime(2019,01,01,01,01)] same minute as Interval[DateTime(2018,01,01,01,01,09), DateTime(2019,01,01,01,01,06)]
+    @dateTimeMinutePrecisionSame.exec(@ctx).should.be.true()
+
+  it 'returns false when DateTime intervals are not the same on the requested minute precision', ->
+    # define DateTimeMinutePrecisionNotSame: Interval[DateTime(2018,01,01,01,01), DateTime(2019,01,01,01,01)] same minute as Interval[DateTime(2018,01,01,06,03), DateTime(2019,01,01,01,06)]
+    @dateTimeMinutePrecisionNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when DateTime intervals are same on the second precision', ->
+    # define DateTimeSecondPrecisionSame: Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,01,01)] same second as Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,01,01,07)]
+    @dateTimeSecondPrecisionSame.exec(@ctx).should.be.true()
+
+  it 'returns false when DateTime intervals are not the same on the requested second precision', ->
+    # define DateTimeSecondPrecisionNotSame: Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,01,01)] same second as Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,07,55)]
+    @dateTimeSecondPrecisionNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when DateTime intervals are same on the millisecond precision', ->
+    # define DateTimeMillisecondPrecisionSame: Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)] same millisecond as Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)]
+    @dateTimeMillisecondPrecisionSame.exec(@ctx).should.be.true()
+
+  it 'returns false when DateTime intervals are not the same on the requested millisecond precision', ->
+    # define DateTimeMillisecondPrecisionNotSame: Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)] same millisecond as Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,09)]
+    @dateTimeMillisecondPrecisionNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when integer interval is the same', ->
+    # define IntegerIntervalSame: Interval[2,5] same as Interval[2,5]
+    @integerIntervalSame.exec(@ctx).should.be.true()
+
+  it 'returns false when integer interval is not the same', ->
+    # define IntegerIntervalNotSame: Interval[2,5] same as Interval[2,4]
+    @integerIntervalNotSame.exec(@ctx).should.be.false()
+
+  it 'returns true when integer interval is same after the open interval is closed', ->
+    # define IntegerIntervalSameOpen: Interval[2,5] same as Interval[2,6)
+    @integerIntervalSameOpen.exec(@ctx).should.be.true()
+
+  it 'returns false even with an open ended null because the lows are not null and not same', ->
+    # define OpenNullHighLowDifferent: Interval(3,null) same as Interval(2,4)
+    @openNullHighLowDifferent.exec(@ctx).should.be.false()
+
+  it 'returns false even with an open ended null because the highs are not null and not same', ->
+    # define OpenNullLowHighDifferent: Interval(1,5) same as Interval(null,4)
+    @openNullLowHighDifferent.exec(@ctx).should.be.false()
+
+  it 'returns null if lows are same and highs have an open null', ->
+    # OpenNullHighLowSame: Interval(2,null) same as Interval(2,4)
+    should(@openNullHighLowSame.exec(@ctx)).be.null()
+
+  it 'returns null if lows have an open null and highs are same', ->
+    # OpenNullLowHighSame: Interval(1,4) same as Interval(null,4)
+    should(@openNullLowHighSame.exec(@ctx)).be.null()
+
+  it 'returns null if both lows and highs have open null', ->
+    # OpenNullLowOpenNullHigh: Interval(1,null) same as Interval(null,4)
+    should(@openNullLowOpenNullHigh.exec(@ctx)).be.null()
+
+  it 'returns false if lows are different and highs have open null', ->
+    # OpenNullHighsLowsDifferent: Interval(1,null) same as Interval(2,null)
+    @openNullHighsLowsDifferent.exec(@ctx).should.be.false()
+
+  it 'returns null if lows are same and highs have open null', ->
+    # OpenNullHighsLowsSame: Interval(1,null) same as Interval(1,null)
+    should(@openNullHighsLowsSame.exec(@ctx)).be.null()
+
+  it 'returns null if lows have open null and highs are same', ->
+    # OpenNullLowsHighsSame: Interval(null,3) same as Interval(null,3)
+    should(@openNullLowsHighsSame.exec(@ctx)).be.null()

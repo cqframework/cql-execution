@@ -665,10 +665,22 @@ define RealWidth: width of Interval[1.23, 4.56]
 define RealOpenWidth: width of Interval(1.23, 4.56)
 
 // @Test: Start
-define Foo: start of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
+define ClosedNotNull: start of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
+define ClosedNullDateTime: start of Interval[null, DateTime(2013, 1, 1)]
+define ClosedNullInteger: start of Interval[null, 3]
+define ClosedNullDecimal: start of Interval[null, 5.1]
+define NullInterval: start of (null as Interval<DateTime>)
+define OpenNotNull: start of Interval(DateTime(2012, 1, 1), DateTime(2013, 1, 1))
+define OpenNull: start of Interval(null, DateTime(2013, 1, 1))
 
 // @Test: End
-define Foo: end of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
+define ClosedNotNull: end of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
+define ClosedNullDateTime: end of Interval[DateTime(2013, 1, 1), null]
+define ClosedNullInteger: end of Interval[5, null]
+define ClosedNullDecimal: end of Interval[7.3, null]
+define NullInterval: end of (null as Interval<DateTime>)
+define OpenNotNull: end of Interval(DateTime(2012, 1, 1), DateTime(2013, 1, 1))
+define OpenNull: end of Interval(DateTime(2013, 1, 1), null)
 
 // @Test: Starts
 define TestStartsNull: Interval[null, null] starts Interval[1, 10]
@@ -1135,3 +1147,52 @@ define NullOpen: expand { Interval[null, 4] } per 1.5 '1'
 define NullClose: expand { Interval[2, null] } per 1.5 '1'
 define NullBoth: expand { Interval[null, null] } per 1.5 '1'
 define BadPerMinute: expand { Interval(2.1, 4.1] } per 0.5 minute
+
+// @Test: SameAs
+define NullBoth: Interval[null,null] same as Interval[null,null]
+define NullOne: Interval[DateTime(2018,01,01), DateTime(2018,02,02)] same as Interval[null,null]
+define Equal: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[DateTime(2018,01,01), DateTime(2018,01,01)]
+define NotEqual: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[DateTime(2018,02,01), DateTime(2018,05,01)]
+define DateTimeAndDateComparisonEqual: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[Date(2018,01,01), Date(2018,01,01)]
+define NullIntervals: (null as Interval<DateTime>) same as (null as Interval<DateTime>)
+define OpenAndClosed: Interval[DateTime(2018,01,01,00,00,00,0), DateTime(2019,01,01,00,00,00,0)) same as Interval[DateTime(2018,01,01,00,00,00,0), DateTime(2018,12,31,23,59,59,999)]
+define OpenEnded: Interval[DateTime(2018,01,01), null] same day as Interval[DateTime(2018,01,01), null]
+define OpenEndedNotSame: Interval[DateTime(2018,01,01), null] same day as Interval[DateTime(2018,01,01), DateTime(2019,01,01)]
+define OpenEndedNotSame2: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same day as Interval[DateTime(2018,01,01), null]
+define OpenBeginningSame: Interval[null,DateTime(2018,01,01)] same as Interval[null,DateTime(2018,01,01)]
+define OpenBeginningNotSame: Interval[DateTime(2017,01,01),DateTime(2018,01,01)] same as Interval[null,DateTime(2018,01,01)]
+define DateOpenAndClosed: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,03))
+define DateOpenEnded: Interval[Date(2018,01,01), null] same as Interval[Date(2018,01,01), null]
+define TimeOpenAndClosed: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(02,03))
+define TimeOpenEnded: Interval[Time(01,01), null] same as Interval[Time(01,01), null]
+define DateIntervalComparisonSame: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,02)]
+define DateIntervalComparisonNotSame: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,01)]
+define TimeIntervalComparisonSame: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(02,02)]
+define TimeIntervalComparisonNotSame: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(08,01)]
+define DateTimeYearPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same year as Interval[DateTime(2018,02,01), DateTime(2019,05,01)]
+define DateTimeYearPrecisionNotSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same year as Interval[DateTime(2018,02,01), DateTime(2020,05,01)]
+define DateYearPrecisionSame: Interval[Date(2018,01,01), Date(2019,01,01)] same year as Interval[Date(2018,02,01), Date(2019,05,01)]
+define DateYearPrecisionNotSame: Interval[Date(2018,01,01), Date(2019,01,01)] same year as Interval[Date(2018,02,01), Date(2020,05,01)]
+define DateTimeMonthPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same month as Interval[DateTime(2018,01,01), DateTime(2019,01,03)]
+define DateTimeMonthPrecisionNotSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same month as Interval[DateTime(2018,02,01), DateTime(2019,01,01)]
+define DateTimeDayPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same day as Interval[DateTime(2018,01,01,05), DateTime(2019,01,01,09)]
+define DateTimeDayPrecisionNotSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same day as Interval[DateTime(2018,01,01), DateTime(2019,01,02,06)]
+define DateTimeHourPrecisionSame: Interval[DateTime(2018,01,01,01), DateTime(2019,01,01,01)] same hour as Interval[DateTime(2018,01,01,01), DateTime(2019,01,01,01,05)]
+define DateTimeHourPrecisionNotSame: Interval[DateTime(2018,01,01,01,01), DateTime(2019,01,01,01)] same hour as Interval[DateTime(2018,01,01,06), DateTime(2019,01,01,01)]
+define DateTimeMinutePrecisionSame: Interval[DateTime(2018,01,01,01,01), DateTime(2019,01,01,01,01)] same minute as Interval[DateTime(2018,01,01,01,01,09), DateTime(2019,01,01,01,01,06)]
+define DateTimeMinutePrecisionNotSame: Interval[DateTime(2018,01,01,01,01), DateTime(2019,01,01,01,01)] same minute as Interval[DateTime(2018,01,01,06,03), DateTime(2019,01,01,01,06)]
+define DateTimeSecondPrecisionSame: Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,01,01)] same second as Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,01,01,07)]
+define DateTimeSecondPrecisionNotSame: Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,01,01)] same second as Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,07,55)]
+define DateTimeMillisecondPrecisionSame: Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)] same millisecond as Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)]
+define DateTimeMillisecondPrecisionNotSame: Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)] same millisecond as Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,09)]
+define IntegerIntervalSame: Interval[2,5] same as Interval[2,5]
+define IntegerIntervalNotSame: Interval[2,5] same as Interval[2,4]
+define IntegerIntervalSameOpen: Interval[2,5] same as Interval[2,6)
+define OpenNullHighLowDifferent: Interval(3,null) same as Interval(2,4)
+define OpenNullLowHighDifferent: Interval(1,5) same as Interval(null,4)
+define OpenNullHighLowSame: Interval(2,null) same as Interval(2,4)
+define OpenNullLowHighSame: Interval(1,4) same as Interval(null,4)
+define OpenNullLowOpenNullHigh: Interval(1,null) same as Interval(null,4)
+define OpenNullHighsLowsDifferent: Interval(1,null) same as Interval(2,null)
+define OpenNullHighsLowsSame: Interval(1,null) same as Interval(1,null)
+define OpenNullLowsHighsSame: Interval(null,3) same as Interval(null,3)

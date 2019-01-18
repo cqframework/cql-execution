@@ -8,14 +8,14 @@ module.exports.Expression = class Expression
       if typeIsArray(json.operand) then @args = op else @arg = op
     if json.localId?
       @localId = json.localId
-  
+
   execute: (ctx) ->
     if @localId?
       # Store the localId and result on the root context of this library
       execValue = @exec(ctx)
       ctx.rootContext().setLocalIdWithResult @localId, execValue
       execValue
-    else 
+    else
       @exec(ctx)
 
   exec: (ctx) ->
