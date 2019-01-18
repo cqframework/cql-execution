@@ -2014,7 +2014,28 @@
     };
 
     Interval.prototype.sameAs = function(other, precision) {
-      if ((this.low === null && !this.lowClosed) || (this.high === null && !this.highClosed) || (other.low === null && !other.lowClosed) || (other.high === null && !other.highClosed)) {
+      if (((this.low != null) && (other.low != null) && (this.high == null) && (other.high != null) && !this.highClosed) || ((this.low != null) && (other.low != null) && (this.high != null) && (other.high == null) && !other.highClosed) || ((this.low != null) && (other.low != null) && (this.high == null) && (other.high == null) && !other.highClosed && !this.highClosed)) {
+        if (typeof this.low === 'number') {
+          if (!(this.start() === other.start())) {
+            return false;
+          }
+        } else {
+          if (!(this.start().sameAs(other.start(), precision))) {
+            return false;
+          }
+        }
+      } else if (((this.low != null) && (other.low == null) && (this.high != null) && (other.high != null)) || ((this.low == null) && (other.low != null) && (this.high != null) && (other.high != null)) || ((this.low == null) && (other.low == null) && (this.high != null) && (other.high != null))) {
+        if (typeof this.high === 'number') {
+          if (!(this.end() === other.end())) {
+            return false;
+          }
+        } else {
+          if (!(this.end().sameAs(other.end(), precision))) {
+            return false;
+          }
+        }
+      }
+      if (((this.low == null) && !this.lowClosed) || ((this.high == null) && !this.highClosed) || ((other.low == null) && !other.lowClosed) || ((other.high == null) && !other.highClosed)) {
         return null;
       }
       if (this.lowClosed && (this.low == null) && this.highClosed && (this.high == null)) {
