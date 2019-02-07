@@ -223,7 +223,10 @@ module.exports.MaxValue = class MaxValue extends Expression
 
   exec: (ctx) ->
     if MAX_VALUES[@valueType]?
-      MAX_VALUES[@valueType]
+      if @valueType == '{urn:hl7-org:elm-types:r1}DateTime'
+        MAX_VALUES[@valueType] - ctx.getTimezoneOffset()
+      else
+        MAX_VALUES[@valueType]
     else
       throw new Error("Maximum not supported for #{@valueType}")
 
