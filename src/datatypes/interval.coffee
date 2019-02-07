@@ -217,6 +217,22 @@ module.exports.Interval = class Interval
     catch
       false
 
+  start: () ->
+    if !@low?
+      if @lowClosed
+        return minValueForInstance(@high)
+      else
+        return @low
+    return @toClosed().low
+
+  end: () ->
+    if !@high?
+      if @highClosed
+        return maxValueForInstance(@low)
+      else
+        return @high
+    return @toClosed().high
+
   starts: (other, precision) ->
     if precision? and @low instanceof DateTime
       startEqual = @low.sameAs(other.low, precision)

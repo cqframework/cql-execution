@@ -127,14 +127,18 @@ module.exports.Start = class Start extends Expression
     super
 
   exec: (ctx) ->
-    @arg.execute(ctx)?.low
+    interval = @arg.execute(ctx)
+    return null if !interval?
+    return interval.start()
 
 module.exports.End = class End  extends Expression
   constructor: (json) ->
     super
 
   exec: (ctx) ->
-    @arg.execute(ctx)?.high
+    interval = @arg.execute(ctx)
+    return null if !interval?
+    return interval.end()
 
 module.exports.Starts = class Starts extends Expression
   constructor: (json) ->

@@ -2065,6 +2065,28 @@
       }
     };
 
+    Interval.prototype.start = function() {
+      if (this.low == null) {
+        if (this.lowClosed) {
+          return minValueForInstance(this.high);
+        } else {
+          return this.low;
+        }
+      }
+      return this.toClosed().low;
+    };
+
+    Interval.prototype.end = function() {
+      if (this.high == null) {
+        if (this.highClosed) {
+          return maxValueForInstance(this.low);
+        } else {
+          return this.high;
+        }
+      }
+      return this.toClosed().high;
+    };
+
     Interval.prototype.starts = function(other, precision) {
       var endLessThanOrEqual, startEqual;
       if ((precision != null) && this.low instanceof DateTime) {
@@ -4898,8 +4920,12 @@
     }
 
     Start.prototype.exec = function(ctx) {
-      var ref3;
-      return (ref3 = this.arg.execute(ctx)) != null ? ref3.low : void 0;
+      var interval;
+      interval = this.arg.execute(ctx);
+      if (interval == null) {
+        return null;
+      }
+      return interval.start();
     };
 
     return Start;
@@ -4914,8 +4940,12 @@
     }
 
     End.prototype.exec = function(ctx) {
-      var ref3;
-      return (ref3 = this.arg.execute(ctx)) != null ? ref3.high : void 0;
+      var interval;
+      interval = this.arg.execute(ctx);
+      if (interval == null) {
+        return null;
+      }
+      return interval.end();
     };
 
     return End;
