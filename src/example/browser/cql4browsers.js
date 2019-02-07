@@ -3258,7 +3258,11 @@
 
     MaxValue.prototype.exec = function(ctx) {
       if (MAX_VALUES[this.valueType] != null) {
-        return MAX_VALUES[this.valueType];
+        if (this.valueType === '{urn:hl7-org:elm-types:r1}DateTime') {
+          return MAX_VALUES[this.valueType] - ctx.getTimezoneOffset();
+        } else {
+          return MAX_VALUES[this.valueType];
+        }
       } else {
         throw new Error("Maximum not supported for " + this.valueType);
       }
