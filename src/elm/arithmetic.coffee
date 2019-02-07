@@ -206,7 +206,12 @@ module.exports.MinValue = class MinValue extends Expression
 
   exec: (ctx) ->
     if MIN_VALUES[@valueType]
-      MIN_VALUES[@valueType]
+      if @valueType == '{urn:hl7-org:elm-types:r1}DateTime'
+        minDateTime = MIN_VALUES[@valueType]
+        minDateTime.timezoneOffset = +ctx.getTimezoneOffset()
+        return minDateTime
+      else
+        MIN_VALUES[@valueType]
     else
       throw new Error("Minimum not supported for #{@valueType}")
 
@@ -224,7 +229,9 @@ module.exports.MaxValue = class MaxValue extends Expression
   exec: (ctx) ->
     if MAX_VALUES[@valueType]?
       if @valueType == '{urn:hl7-org:elm-types:r1}DateTime'
-        MAX_VALUES[@valueType] - ctx.getTimezoneOffset()
+        maxDateTime = MAX_VALUES[@valueType]
+        maxDateTime.timezoneOffset = +ctx.getTimezoneOffset()
+        return maxDateTime
       else
         MAX_VALUES[@valueType]
     else
