@@ -208,7 +208,7 @@ module.exports.MinValue = class MinValue extends Expression
     if MIN_VALUES[@valueType]
       if @valueType == '{urn:hl7-org:elm-types:r1}DateTime'
         minDateTime = MIN_VALUES[@valueType]
-        minDateTime.timezoneOffset = +ctx.getTimezoneOffset()
+        minDateTime.timezoneOffset = parseInt(ctx.getTimezoneOffset())
         return minDateTime
       else
         MIN_VALUES[@valueType]
@@ -230,7 +230,7 @@ module.exports.MaxValue = class MaxValue extends Expression
     if MAX_VALUES[@valueType]?
       if @valueType == '{urn:hl7-org:elm-types:r1}DateTime'
         maxDateTime = MAX_VALUES[@valueType]
-        maxDateTime.timezoneOffset = +ctx.getTimezoneOffset()
+        maxDateTime.timezoneOffset = parseInt(ctx.getTimezoneOffset())
         return maxDateTime
       else
         MAX_VALUES[@valueType]
