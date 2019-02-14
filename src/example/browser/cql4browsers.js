@@ -3271,8 +3271,15 @@
     }
 
     MinValue.prototype.exec = function(ctx) {
+      var minDateTime;
       if (MIN_VALUES[this.valueType]) {
-        return MIN_VALUES[this.valueType];
+        if (this.valueType === '{urn:hl7-org:elm-types:r1}DateTime') {
+          minDateTime = MIN_VALUES[this.valueType].copy();
+          minDateTime.timezoneOffset = ctx.getTimezoneOffset();
+          return minDateTime;
+        } else {
+          return MIN_VALUES[this.valueType];
+        }
       } else {
         throw new Error("Minimum not supported for " + this.valueType);
       }
@@ -3303,8 +3310,15 @@
     }
 
     MaxValue.prototype.exec = function(ctx) {
+      var maxDateTime;
       if (MAX_VALUES[this.valueType] != null) {
-        return MAX_VALUES[this.valueType];
+        if (this.valueType === '{urn:hl7-org:elm-types:r1}DateTime') {
+          maxDateTime = MAX_VALUES[this.valueType].copy();
+          maxDateTime.timezoneOffset = ctx.getTimezoneOffset();
+          return maxDateTime;
+        } else {
+          return MAX_VALUES[this.valueType];
+        }
       } else {
         throw new Error("Maximum not supported for " + this.valueType);
       }
