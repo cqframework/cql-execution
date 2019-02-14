@@ -3275,7 +3275,7 @@
       if (MIN_VALUES[this.valueType]) {
         if (this.valueType === '{urn:hl7-org:elm-types:r1}DateTime') {
           minDateTime = MIN_VALUES[this.valueType].copy();
-          minDateTime.timezoneOffset = parseFloat(ctx.getTimezoneOffset());
+          minDateTime.timezoneOffset = ctx.getTimezoneOffset();
           return minDateTime;
         } else {
           return MIN_VALUES[this.valueType];
@@ -3314,7 +3314,7 @@
       if (MAX_VALUES[this.valueType] != null) {
         if (this.valueType === '{urn:hl7-org:elm-types:r1}DateTime') {
           maxDateTime = MAX_VALUES[this.valueType].copy();
-          maxDateTime.timezoneOffset = parseFloat(ctx.getTimezoneOffset());
+          maxDateTime.timezoneOffset = ctx.getTimezoneOffset();
           return maxDateTime;
         } else {
           return MAX_VALUES[this.valueType];
