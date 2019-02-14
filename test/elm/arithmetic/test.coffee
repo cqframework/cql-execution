@@ -2,6 +2,7 @@ should = require 'should'
 setup = require '../../setup'
 data = require './data'
 Q = require '../../../lib/elm/quantity'
+DT = require '../../../lib/datatypes/datatypes'
 
 
 validateQuantity = (object,expectedValue,expectedUnit) ->
@@ -160,6 +161,18 @@ describe 'MaxValue', ->
     dateTimeResult.minute.should.equal(59)
     dateTimeResult.second.should.equal(59)
     dateTimeResult.millisecond.should.equal(999)
+
+  it 'of DateTime should work with different execution timezoneOffsets', ->
+    @ctx.executionDateTime.timezoneOffset = -4.0
+    dateTimeResult = @maxDateTime.exec(@ctx)
+    dateTimeResult.year.should.equal(9999)
+    dateTimeResult.month.should.equal(12)
+    dateTimeResult.day.should.equal(31)
+    dateTimeResult.hour.should.equal(23)
+    dateTimeResult.minute.should.equal(59)
+    dateTimeResult.second.should.equal(59)
+    dateTimeResult.millisecond.should.equal(999)
+    dateTimeResult.timezoneOffset.should.equal(-4.0)
 
   it 'of Time should return maximum representable Time value', ->
     timeResult = @maxTime.exec(@ctx)
