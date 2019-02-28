@@ -99,7 +99,7 @@ describe 'Max', ->
   it 'should be able to find max in lists of quantiies with nulls', ->
     validateQuantity @has_null_q.exec(@ctx), 2, 'ml'
   it 'should be able to find max in lists of quantiies with related units', ->
-    validateQuantity @q_diff_units.exec(@ctx),  5000, 'ml'
+    validateQuantity @q_diff_units.exec(@ctx),  5, 'l'
 
   it 'list of Integers', ->
     @integerMax.exec(@ctx).should.equal 8

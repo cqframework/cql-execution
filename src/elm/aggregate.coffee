@@ -2,6 +2,7 @@
 { typeIsArray , allTrue, anyTrue, removeNulls, numerical_sort} = require '../util/util'
 { build } = require './builder'
 { Exception } = require '../datatypes/exception'
+{ greaterThan, lessThan } = require '../util/comparison'
 Quantity = require './quantity'
 
 quantitiesOrArg = (arr) ->
@@ -56,26 +57,35 @@ module.exports.Sum = class Sum extends AggregateExpression
       val = if filtered.length == 0 then null else filtered.reduce (x,y) -> x+y
       quantityOrValue(val, arg)
 
-
 module.exports.Min = class Min extends AggregateExpression
   constructor:(json) ->
     super
 
   exec: (ctx) ->
-    arg = @source.execute(ctx)
-    if typeIsArray(arg)
-      filtered =  numerical_sort(quantitiesOrArg(arg),"asc")
-      quantityOrValue(filtered[0],arg)
+    list = @source.execute(ctx)
+    return null unless list?
+    listWithoutNulls = removeNulls(list)
+    return null unless listWithoutNulls.length > 0
+    # We assume the list is an array of all the same type.
+    minimum = listWithoutNulls[0]
+    for element in listWithoutNulls
+      minimum = element if lessThan(element, minimum)
+    return minimum
 
 module.exports.Max = class Max extends AggregateExpression
   constructor:(json) ->
     super
 
   exec: (ctx) ->
-    arg = @source.execute(ctx)
-    if typeIsArray(arg)
-      filtered =  numerical_sort(quantitiesOrArg(arg),"desc")
-      quantityOrValue(filtered[0],arg)
+    list = @source.execute(ctx)
+    return null unless list?
+    listWithoutNulls = removeNulls(list)
+    return null unless listWithoutNulls.length > 0
+    # We assume the list is an array of all the same type.
+    maximum = listWithoutNulls[0]
+    for element in listWithoutNulls
+      maximum = element if greaterThan(element, maximum)
+    maximum
 
 module.exports.Avg = class Avg extends  AggregateExpression
   constructor:(json) ->

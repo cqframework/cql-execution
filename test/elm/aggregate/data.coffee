@@ -814,8 +814,8 @@ define q_throw2: Min({1 ,2 'ml',3 'ml',4 'ml',5 'ml',0 'ml'})
 define IntegerMin: Min({ 2, 4, 8, 6 })
 define DecimalMin: Min({ 5.0, 4.9, 5.1, -5.0 })
 define DateMin: Min({ @2012-12-31, @2013-01-01, @2012-01-01 })
-define DateTimeMin: Min({ DateTime(2012, 2, 3), DateTime(2012, 9, 5) })
-define TimeMin: Min({ Time(12, 30, 1), Time(12, 30, 3), Time(12, 30, 2)})
+define DateTimeMin: Min({ DateTime(2012, 9, 9), DateTime(2012, 9, 5) })
+define TimeMin: Min({ Time(12, 30, 4), Time(12, 30, 3), Time(12, 30, 5)})
 define MinIsNull: Min({ null as Quantity, null as Quantity, null as Quantity })
 define MinIsAlsoNull: Min(null as List<Decimal>)
 ###
@@ -1783,7 +1783,7 @@ module.exports['Min'] = {
                         }, {
                            "r" : "93",
                            "s" : [ {
-                              "value" : [ "DateTime","(","2012",", ","2",", ","3",")" ]
+                              "value" : [ "DateTime","(","2012",", ","9",", ","9",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
@@ -1819,13 +1819,13 @@ module.exports['Min'] = {
                      "month" : {
                         "localId" : "91",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2",
+                        "value" : "9",
                         "type" : "Literal"
                      },
                      "day" : {
                         "localId" : "92",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "3",
+                        "value" : "9",
                         "type" : "Literal"
                      }
                   }, {
@@ -1874,7 +1874,7 @@ module.exports['Min'] = {
                         }, {
                            "r" : "104",
                            "s" : [ {
-                              "value" : [ "Time","(","12",", ","30",", ","1",")" ]
+                              "value" : [ "Time","(","12",", ","30",", ","4",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
@@ -1888,7 +1888,7 @@ module.exports['Min'] = {
                         }, {
                            "r" : "112",
                            "s" : [ {
-                              "value" : [ "Time","(","12",", ","30",", ","2",")" ]
+                              "value" : [ "Time","(","12",", ","30",", ","5",")" ]
                            } ]
                         }, {
                            "value" : [ "}" ]
@@ -1923,7 +1923,7 @@ module.exports['Min'] = {
                      "second" : {
                         "localId" : "103",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "1",
+                        "value" : "4",
                         "type" : "Literal"
                      }
                   }, {
@@ -1965,7 +1965,7 @@ module.exports['Min'] = {
                      "second" : {
                         "localId" : "111",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2",
+                        "value" : "5",
                         "type" : "Literal"
                      }
                   } ]
