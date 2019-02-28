@@ -1,11 +1,11 @@
 { Expression } = require './expression'
-{ typeIsArray , allTrue, anyTrue, compact, numerical_sort} = require '../util/util'
+{ typeIsArray , allTrue, anyTrue, removeNulls, numerical_sort} = require '../util/util'
 { build } = require './builder'
 { Exception } = require '../datatypes/exception'
 Quantity = require './quantity'
 
 quantitiesOrArg = (arr) ->
-  arr = compact(arr)
+  arr = removeNulls(arr)
   # short curcuit empty arrays and return
   if arr.length == 0
     return arr
@@ -43,7 +43,7 @@ module.exports.Count = class Count extends AggregateExpression
   exec: (ctx) ->
     arg = @source.execute(ctx)
     if typeIsArray(arg)
-      compact(arg).length
+      removeNulls(arg).length
 
 module.exports.Sum = class Sum extends AggregateExpression
   constructor:(json) ->
@@ -113,7 +113,7 @@ module.exports.Mode = class Mode extends AggregateExpression
   exec: (ctx) ->
     arg = @source.execute(ctx)
     if typeIsArray(arg)
-      filtered = compact(arg)
+      filtered = removeNulls(arg)
       mode = @mode(filtered)
       if mode.length == 1 then mode[0] else mode
 
@@ -186,7 +186,7 @@ module.exports.GeometricMean = class GeometricMean extends AggregateExpression
 productValue = (list) ->
   product = 1
   if typeIsArray(list)
-    filtered = compact(list)
+    filtered = removeNulls(list)
     return [null, null] if filtered.length == 0
     for item in filtered
       if item.isQuantity
