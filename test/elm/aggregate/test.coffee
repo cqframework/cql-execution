@@ -54,6 +54,36 @@ describe 'Min', ->
   it 'should be able to find min in lists of quantiies with related units', ->
     validateQuantity @q_diff_units.exec(@ctx), 0, 'ml'
 
+  it 'list of Integers', ->
+    @integerMin.exec(@ctx).should.equal 2
+
+  it 'list of Decimals', ->
+    @decimalMin.exec(@ctx).should.equal -5
+
+  it 'list of DateTimes', ->
+    dateTimeMin = @dateTimeMin.exec(@ctx)
+    dateTimeMin.year.should.equal 2012
+    dateTimeMin.month.should.equal 9
+    dateTimeMin.day.should.equal 5
+
+  it 'list of Dates', ->
+    dateMin = @dateMin.exec(@ctx)
+    dateMin.year.should.equal 2012
+    dateMin.month.should.equal 1
+
+  it 'list of Times', ->
+    timeMin = @timeMin.exec(@ctx)
+    timeMin.hour.should.equal 12
+    timeMin.minute.should.equal 30
+    timeMin.second.should.equal 3
+
+  it 'list of Nulls', ->
+    should(@minIsNull.exec(@ctx)).be.null()
+
+  it 'null list', ->
+    should(@minIsAlsoNull.exec(@ctx)).be.null()
+
+
 describe 'Max', ->
   @beforeEach ->
     setup @, data
@@ -70,6 +100,34 @@ describe 'Max', ->
     validateQuantity @has_null_q.exec(@ctx), 2, 'ml'
   it 'should be able to find max in lists of quantiies with related units', ->
     validateQuantity @q_diff_units.exec(@ctx),  5000, 'ml'
+
+  it 'list of Integers', ->
+    @integerMax.exec(@ctx).should.equal 8
+
+  it 'list of Decimals', ->
+    @decimalMax.exec(@ctx).should.equal 5.1
+
+  it 'list of DateTimes', ->
+    dateTimeMax = @dateTimeMax.exec(@ctx)
+    dateTimeMax.year.should.equal 2012
+    dateTimeMax.month.should.equal 9
+
+  it 'list of Dates', ->
+    dateMax = @dateMax.exec(@ctx)
+    dateMax.year.should.equal 2013
+    dateMax.month.should.equal 1
+
+  it 'list of Times', ->
+    timeMax = @timeMax.exec(@ctx)
+    timeMax.hour.should.equal 12
+    timeMax.minute.should.equal 30
+    timeMax.second.should.equal 3
+
+  it 'list of Nulls', ->
+    should(@maxIsNull.exec(@ctx)).be.null()
+
+  it 'null list', ->
+    should(@maxIsAlsoNull.exec(@ctx)).be.null()
 
 describe 'Avg', ->
   @beforeEach ->
