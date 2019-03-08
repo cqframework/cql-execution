@@ -1,5 +1,6 @@
 should = require 'should'
 { Uncertainty } = require '../../lib/datatypes/uncertainty'
+{ Code } = require '../../lib/datatypes/datatypes'
 
 describe 'Uncertainty', ->
 
@@ -27,6 +28,15 @@ describe 'Uncertainty', ->
     differentTypes = new Uncertainty(1, "1")
     differentTypes.low.should.eql 1
     differentTypes.high.should.eql "1"
+
+  it 'should not use coded values in uncertainties', ->
+    codedLow = new Uncertainty(new Code('ABC', '5.4.3.2.1', '1'), 1)
+    should(codedLow.low).be.null()
+    codedLow.high.should.eql 1
+
+    codedHigh = new Uncertainty(1, new Code('ABC', '5.4.3.2.1', '1'))
+    codedHigh.low.should.eql 1
+    should(codedHigh.high).be.null()
 
   it 'should swap low and high when constructed in wrong order', ->
     fiveToOne = new Uncertainty(5, 1)

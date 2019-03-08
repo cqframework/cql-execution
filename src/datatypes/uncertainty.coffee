@@ -11,6 +11,10 @@ module.exports.Uncertainty = class Uncertainty
         # Uncertainties with different types probably shouldn't be supported.
         return false
       if typeof a.after is 'function' then a.after b else a > b
+    isCode = (val) ->
+      val? and val.hasMatch and typeof val.hasMatch is 'function'
+    if isCode(@low) then @low = null
+    if isCode(@high) then @high = null
     if typeof @high is 'undefined' then @high = @low
     if @low? and @high? and gt(@low, @high) then [@low, @high] = [@high, @low]
 
