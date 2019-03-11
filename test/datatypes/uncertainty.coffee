@@ -1,6 +1,8 @@
 should = require 'should'
 { Uncertainty } = require '../../lib/datatypes/uncertainty'
 { Code } = require '../../lib/datatypes/datatypes'
+{ Concept } = require '../../lib/datatypes/clinical'
+{ ValueSet } = require '../../lib/datatypes/clinical'
 
 describe 'Uncertainty', ->
 
@@ -29,14 +31,37 @@ describe 'Uncertainty', ->
     differentTypes.low.should.eql 1
     differentTypes.high.should.eql "1"
 
-  it 'should not use coded values in uncertainties', ->
-    codedLow = new Uncertainty(new Code('ABC', '5.4.3.2.1', '1'), 1)
+  it 'should not use nonenumerable values in uncertainties', ->
+    code = new Code('ABC', '5.4.3.2.1', '1')
+    codedLow = new Uncertainty(code, 1)
     should(codedLow.low).be.null()
     codedLow.high.should.eql 1
 
-    codedHigh = new Uncertainty(1, new Code('ABC', '5.4.3.2.1', '1'))
+    codedHigh = new Uncertainty(1, code)
     codedHigh.low.should.eql 1
     should(codedHigh.high).be.null()
+
+    concept = new Concept([new Code("foo", "http://foo.org")], "Foo")
+    conceptLow = new Uncertainty(concept, 1)
+    should(conceptLow.low).be.null()
+    conceptLow.high.should.eql 1
+
+    conceptHigh = new Uncertainty(1, concept)
+    conceptHigh.low.should.eql 1
+    should(conceptHigh.high).be.null()
+
+    valueSet= new ValueSet('1.2.3.4.5', '1', [
+      new Code('ABC', '5.4.3.2.1', '1'),
+      new Code('DEF', '5.4.3.2.1', '2'),
+      new Code('GHI', '5.4.3.4.5', '3'),
+    ])
+    valueSetLow = new Uncertainty(valueSet, 1)
+    should(valueSetLow.low).be.null()
+    valueSetLow.high.should.eql 1
+
+    valueSetHigh = new Uncertainty(1, valueSet)
+    valueSetHigh.low.should.eql 1
+    should(valueSetHigh.high).be.null()
 
   it 'should swap low and high when constructed in wrong order', ->
     fiveToOne = new Uncertainty(5, 1)
