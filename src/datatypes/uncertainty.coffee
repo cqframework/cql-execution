@@ -14,8 +14,7 @@ module.exports.Uncertainty = class Uncertainty
     isNonEnumerable = (val) ->
       val? and (val.isCode or val.isConcept or val.isValueSet)
     if typeof @high is 'undefined' then @high = @low
-    if isNonEnumerable(@low) then @low = null
-    if isNonEnumerable(@high) then @high = null 
+    if isNonEnumerable(@low) || isNonEnumerable(@high) then @low = @high = null 
     if @low? and @high? and gt(@low, @high) then [@low, @high] = [@high, @low]
 
    copy: ->

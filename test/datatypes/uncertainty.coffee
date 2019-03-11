@@ -35,19 +35,19 @@ describe 'Uncertainty', ->
     code = new Code('ABC', '5.4.3.2.1', '1')
     codedLow = new Uncertainty(code, 1)
     should(codedLow.low).be.null()
-    codedLow.high.should.eql 1
+    should(codedLow.high).be.null()
 
     codedHigh = new Uncertainty(1, code)
-    codedHigh.low.should.eql 1
+    should(codedHigh.low).be.null()
     should(codedHigh.high).be.null()
 
     concept = new Concept([new Code("foo", "http://foo.org")], "Foo")
     conceptLow = new Uncertainty(concept, 1)
     should(conceptLow.low).be.null()
-    conceptLow.high.should.eql 1
+    should(conceptLow.high).be.null()
 
     conceptHigh = new Uncertainty(1, concept)
-    conceptHigh.low.should.eql 1
+    should(conceptHigh.low).be.null()
     should(conceptHigh.high).be.null()
 
     valueSet= new ValueSet('1.2.3.4.5', '1', [
@@ -57,10 +57,10 @@ describe 'Uncertainty', ->
     ])
     valueSetLow = new Uncertainty(valueSet, 1)
     should(valueSetLow.low).be.null()
-    valueSetLow.high.should.eql 1
+    should(valueSetLow.high).be.null()
 
     valueSetHigh = new Uncertainty(1, valueSet)
-    valueSetHigh.low.should.eql 1
+    should(valueSetHigh.low).be.null()
     should(valueSetHigh.high).be.null()
 
   it 'should set high to low when high is undefined', ->
