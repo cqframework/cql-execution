@@ -63,6 +63,11 @@ describe 'Uncertainty', ->
     valueSetHigh.low.should.eql 1
     should(valueSetHigh.high).be.null()
 
+  it 'should set high to low when high is undefined', ->
+    fiveToOne = new Uncertainty(5, undefined)
+    fiveToOne.low.should.equal 5
+    fiveToOne.high.should.equal 5
+
   it 'should swap low and high when constructed in wrong order', ->
     fiveToOne = new Uncertainty(5, 1)
     fiveToOne.low.should.equal 1
