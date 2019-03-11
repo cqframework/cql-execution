@@ -2255,14 +2255,14 @@
       isNonEnumerable = function(val) {
         return (val != null) && (val.isCode || val.isConcept || val.isValueSet);
       };
+      if (typeof this.high === 'undefined') {
+        this.high = this.low;
+      }
       if (isNonEnumerable(this.low)) {
         this.low = null;
       }
       if (isNonEnumerable(this.high)) {
         this.high = null;
-      }
-      if (typeof this.high === 'undefined') {
-        this.high = this.low;
       }
       if ((this.low != null) && (this.high != null) && gt(this.low, this.high)) {
         ref = [this.high, this.low], this.low = ref[0], this.high = ref[1];
