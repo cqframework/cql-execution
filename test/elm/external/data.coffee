@@ -29,17 +29,6 @@ define ConditionsByConcept: [Condition: "Viral pharyngitis"]
 
 module.exports['Retrieve'] = {
    "library" : {
-      "annotation" : [ {
-         "message" : "List-valued expression was demoted to a singleton.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "message" : "List-valued expression was demoted to a singleton.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -385,11 +374,8 @@ module.exports['Retrieve'] = {
                "codes" : {
                   "type" : "ToList",
                   "operand" : {
-                     "type" : "ToConcept",
-                     "operand" : {
-                        "name" : "Viral pharyngitis code",
-                        "type" : "CodeRef"
-                     }
+                     "name" : "Viral pharyngitis code",
+                     "type" : "CodeRef"
                   }
                }
             }

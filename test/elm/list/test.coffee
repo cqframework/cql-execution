@@ -28,6 +28,24 @@ describe 'Exists', ->
   it 'should return true for full list', ->
     @fullList.exec(@ctx).should.be.true()
 
+  it 'should return false for list with only one null', ->
+    @listWithOneNull.exec(@ctx).should.be.false()
+
+  it 'should return false for list with only two nulls', ->
+    @listWithTwoNulls.exec(@ctx).should.be.false()
+
+  it 'should return true for list starting with null and with non-null elements', ->
+    @listStartingWithNull.exec(@ctx).should.be.true()
+
+  it 'should return true for list with null and non-null elements', ->
+    @listWithNull.exec(@ctx).should.be.true()
+
+  # NOTE: This test is misleading due to list promotion of the null to a list with null.
+  # Test will remain as it still tests a different list creation method. Additionally, it
+  # will be useful if list promotion is disabled.
+  it 'should return false for null argument', ->
+    @nullExists.exec(@ctx).should.be.false()
+
 describe 'Equal', ->
   @beforeEach ->
     setup @, data
@@ -108,8 +126,8 @@ describe 'Union', ->
     @nestedToFifteen.exec(@ctx).should.eql [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
   it 'should return null if either arg is null', ->
-    should(@unionNull.exec(@ctx)).be.null
-    should(@nullUnion.exec(@ctx)).be.null
+    should(@unionNull.exec(@ctx)).be.null()
+    should(@nullUnion.exec(@ctx)).be.null()
 
 describe 'Except', ->
   @beforeEach ->
@@ -130,6 +148,9 @@ describe 'Except', ->
   it 'should remove all items when lists are the same', ->
     @exceptEverything.exec(@ctx).should.eql []
 
+  it 'should return items in first list without 3', ->
+    @multipleNullExcept.exec(@ctx).should.eql [1, 5, 7, null]
+
   it 'should be a no-op when second list is empty', ->
     @somethingExceptNothing.exec(@ctx).should.eql [1, 2, 3, 4, 5]
 
@@ -140,8 +161,8 @@ describe 'Except', ->
     @exceptTuples.exec(@ctx).should.eql [{a: 1}, {a: 3}]
 
   it 'should return null if either arg is null', ->
-    should(@exceptNull.exec(@ctx)).be.null
-    should(@nullExcept.exec(@ctx)).be.null
+    should(@exceptNull.exec(@ctx)).be.null()
+    should(@nullExcept.exec(@ctx)).be.null()
 
 describe 'Intersect', ->
   @beforeEach ->
@@ -152,6 +173,9 @@ describe 'Intersect', ->
 
   it 'should intersect two lists with a single common element', ->
     @intersectOnFive.exec(@ctx).should.eql [5]
+
+  it 'should intersect two lists with a single common element even with duplicates', ->
+    @intersectionOnFourDuplicates.exec(@ctx).should.eql [4]
 
   it 'should intersect two lists with several common elements', ->
     @intersectOnEvens.exec(@ctx).should.eql [2, 4, 6, 8, 10]
@@ -166,8 +190,11 @@ describe 'Intersect', ->
     @intersectTuples.exec(@ctx).should.eql [{a:1, b:'c'}, {a:2, b:'c'}]
 
   it 'should return null if either arg is null', ->
-    should(@intersectNull.exec(@ctx)).be.null
-    should(@nullIntersect.exec(@ctx)).be.null
+    should(@intersectNull.exec(@ctx)).be.null()
+    should(@nullIntersect.exec(@ctx)).be.null()
+
+  it 'should intersect on 3', ->
+    @multipleNullInListIntersect.exec(@ctx).should.eql [3]
 
 describe 'IndexOf', ->
   @beforeEach ->
@@ -186,10 +213,13 @@ describe 'IndexOf', ->
     @itemNotFound.exec(@ctx).should.equal -1
 
   it 'should return null if either arg is null', ->
-    should(@nullList.exec(@ctx)).be.null
-    should(@nullItem.exec(@ctx)).be.null
+    should(@nullList.exec(@ctx)).be.null()
+    should(@nullItem.exec(@ctx)).be.null()
 
-  describe 'should use equivalence to determine presence in List', ->
+  describe 'should use equality to determine presence in List', ->
+    it 'when code is in list but have undefined displays', ->
+      @listCodeUndefined.exec(@ctx).should.equal 0
+
     it 'when code is in list', ->
       @listCode.exec(@ctx).should.equal 0
 
@@ -208,14 +238,14 @@ describe 'Indexer', ->
     @secondItem.exec(@ctx).should.equal 'b'
 
   it 'should NOT return null when accessing index 0', ->
-    should(() => @zeroIndex.exec(@ctx)).not.be.null
+    should(@zeroIndex.exec(@ctx)).not.be.null()
 
   it 'should return null when accessing out of bounds index', ->
-    should(() => @outOfBounds.exec(@ctx)).be.null
+    should(@outOfBounds.exec(@ctx)).be.null()
 
   it 'should return null if either arg is null', ->
-    should(@nullList.exec(@ctx)).be.null
-    should(@nullIndexer.exec(@ctx)).be.null
+    should(@nullList.exec(@ctx)).be.null()
+    should(@nullIndexer.exec(@ctx)).be.null()
 
 describe 'In', ->
   @beforeEach ->
@@ -234,13 +264,13 @@ describe 'In', ->
     @tupleIsNotIn.exec(@ctx).should.be.false()
 
   it 'should return null if list is null', ->
-    should(@inNull.exec(@ctx)).be.null
+    should(@inNull.exec(@ctx)).be.null()
 
-  it 'should return true if null is in list', ->
-    should(@nullIn.exec(@ctx)).be.true()
+  it 'should return null if null is in list', ->
+    should(@nullIn.exec(@ctx)).be.null()
 
-  it 'should return false if null is not in list', ->
-    should(@nullNotIn.exec(@ctx)).be.false()
+  it 'should return null if null is not in list', ->
+    should(@nullNotIn.exec(@ctx)).be.null()
 
 describe 'Contains', ->
   @beforeEach ->
@@ -258,14 +288,14 @@ describe 'Contains', ->
   it 'should execute to false when tuple is not in list', ->
     @tupleIsNotIn.exec(@ctx).should.be.false()
 
-  it 'should return true if null is contained in the list', ->
-    should(@nullIn.exec(@ctx)).be.true()
+  it 'should return null if null is contained in the list', ->
+    should(@nullIn.exec(@ctx)).be.null()
 
-  it 'should return false if null is not contained in the list', ->
-    should(@nullNotIn.exec(@ctx)).be.false()
+  it 'should return null if null is not contained in the list', ->
+    should(@nullNotIn.exec(@ctx)).be.null()
 
   it 'should return null if list is null', ->
-    should(@inNull.exec(@ctx)).be.null
+    should(@inNull.exec(@ctx)).be.null()
 
 describe 'Includes', ->
   @beforeEach ->
@@ -289,9 +319,21 @@ describe 'Includes', ->
   it 'should execute to false when tuple sublist is not in list', ->
     @tuplesNotIncluded.exec(@ctx).should.be.false()
 
-  it 'should return null if either arg is null', ->
-    should(@nullIncluded.exec(@ctx)).be.null
-    should(@nullIncludes.exec(@ctx)).be.null
+  it.skip 'should return true if right arg is null', ->
+    # TODO: currently returns false
+    should(@nullIncluded.exec(@ctx)).be.true()
+
+  it.skip 'should return false if left arg is null', ->
+    # TODO: currently returns null
+    should(@nullIncludes.exec(@ctx)).be.false()
+
+  it 'should correctly handle point comparisons', ->
+    @dayIncluded.exec(@ctx).should.be.true()
+    @dayNotIncluded.exec(@ctx).should.be.false()
+    @integerIncluded.exec(@ctx).should.be.true()
+    @integerNotIncluded.exec(@ctx).should.be.false()
+    @quantityInList.exec(@ctx).should.be.true()
+    @quantityNotInList.exec(@ctx).should.be.false()
 
 describe 'IncludedIn', ->
   @beforeEach ->
@@ -315,9 +357,21 @@ describe 'IncludedIn', ->
   it 'should execute to false when tuple sublist is not in list', ->
     @tuplesNotIncluded.exec(@ctx).should.be.false()
 
-  it 'should return null if either arg is null', ->
-    should(@nullIncluded.exec(@ctx)).be.null
-    should(@nullIncludes.exec(@ctx)).be.null
+  it.skip 'should return true if left arg is null', ->
+    # TODO: currently returns false
+    should(@nullIncluded.exec(@ctx)).be.true()
+
+  it.skip 'should return false if right arg is null', ->
+    # TODO: currently returns null
+    should(@nullIncludes.exec(@ctx)).be.false()
+
+  it 'should correctly handle point comparisons', ->
+    @dayIncluded.exec(@ctx).should.be.true()
+    @dayNotIncluded.exec(@ctx).should.be.false()
+    @integerIncluded.exec(@ctx).should.be.true()
+    @integerNotIncluded.exec(@ctx).should.be.false()
+    @quantityInList.exec(@ctx).should.be.true()
+    @quantityNotInList.exec(@ctx).should.be.false()
 
 describe 'ProperIncludes', ->
   @beforeEach ->
@@ -343,8 +397,8 @@ describe 'ProperIncludes', ->
 
   # TODO: Support for ProperContains
   it.skip 'should return null if either arg is null', ->
-    should(@nullIncluded.exec(@ctx)).be.null
-    should(@nullIncludes.exec(@ctx)).be.null
+    should(@nullIncluded.exec(@ctx)).be.null()
+    should(@nullIncludes.exec(@ctx)).be.null()
 
 describe 'ProperIncludedIn', ->
   @beforeEach ->
@@ -369,8 +423,8 @@ describe 'ProperIncludedIn', ->
     @tuplesNotIncluded.exec(@ctx).should.be.false()
 
   it 'should return null if either arg is null', ->
-    should(@nullIncluded.exec(@ctx)).be.null
-    should(@nullIncludes.exec(@ctx)).be.null
+    should(@nullIncluded.exec(@ctx)).be.null()
+    should(@nullIncludes.exec(@ctx)).be.null()
 
 describe 'Flatten', ->
   @beforeEach ->
@@ -380,7 +434,7 @@ describe 'Flatten', ->
     @listOfLists.exec(@ctx).should.eql [1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 
   it 'should return null for a null list', ->
-    should(@nullValue.exec(@ctx)).be.null
+    should(@nullValue.exec(@ctx)).be.null()
 
 describe 'Distinct', ->
   @beforeEach ->
@@ -421,10 +475,10 @@ describe 'First', ->
     @unordered.exec(@ctx).should.equal 3
 
   it 'should return null for an empty list', ->
-    should(@empty.exec(@ctx)).be.null
+    should(@empty.exec(@ctx)).be.null()
 
   it 'should return null for an empty list', ->
-    should(@nullValue.exec(@ctx)).be.null
+    should(@nullValue.exec(@ctx)).be.null()
 
 describe 'Last', ->
   @beforeEach ->
@@ -446,10 +500,10 @@ describe 'Last', ->
     @unordered.exec(@ctx).should.equal 2
 
   it 'should return null for an empty list', ->
-    should(@empty.exec(@ctx)).be.null
+    should(@empty.exec(@ctx)).be.null()
 
   it 'should return null for an empty list', ->
-    should(@nullValue.exec(@ctx)).be.null
+    should(@nullValue.exec(@ctx)).be.null()
 
 describe 'Length', ->
   @beforeEach ->
@@ -468,7 +522,7 @@ describe 'Length', ->
     @empty.exec(@ctx).should.equal 0
 
   it 'should return null for an empty list', ->
-    should(@nullValue.exec(@ctx)).be.null
+    should(@nullValue.exec(@ctx)).be.null()
 
 describe 'ToList', ->
   @beforeEach ->

@@ -27,6 +27,22 @@ module.exports.ValueSetRef = class ValueSetRef extends Expression
       valueset = valueset.execute(ctx)
     valueset
 
+module.exports.AnyInValueSet = class AnyInValueSet extends Expression
+  constructor: (json) ->
+    super
+    @codes = build json.codes
+    @valueset = new ValueSetRef json.valueset
+
+  exec: (ctx) ->
+    valueset = @valueset.execute(ctx)
+    # If the value set reference cannot be resolved, a run-time error is thrown.
+    throw new Error("ValueSet must be provided to InValueSet function") unless valueset? and valueset.isValueSet
+
+    codes = @codes.exec(ctx)
+    for code in codes
+      return true if valueset.hasMatch(code)
+    return false
+
 module.exports.InValueSet = class InValueSet extends Expression
   constructor: (json) ->
     super
@@ -41,7 +57,7 @@ module.exports.InValueSet = class InValueSet extends Expression
     # spec indicates to return false if code is null, throw error if value set cannot be resolved
     return false unless code?
     valueset = @valueset.execute(ctx)
-    throw new Error("ValueSet must be provided to InValueSet function") unless valueset?
+    throw new Error("ValueSet must be provided to InValueSet function") unless valueset? and valueset.isValueSet
     # If there is a code and valueset return whether or not the valueset has the code
     return valueset.hasMatch code
 
@@ -123,7 +139,7 @@ module.exports.CalculateAge = class CalculateAge extends Expression
 
   exec: (ctx) ->
     date1 = @execArgs(ctx)
-    date2 = dt.DateTime.fromDate(ctx.getExecutionDateTime())
+    date2 = dt.DateTime.fromJSDate(ctx.getExecutionDateTime())
     result = date1?.durationBetween(date2, @precision.toLowerCase())
     if result? && result.isPoint() then result.low else result
 
@@ -135,6 +151,9 @@ module.exports.CalculateAgeAt = class CalculateAgeAt extends Expression
   exec: (ctx) ->
     [date1, date2] = @execArgs(ctx)
     if date1? && date2?
+      # date1 is the birthdate, convert it to date if date2 is a date (to support ignoring time)
+      if date2.isDate and date1.isDateTime
+        date1 = date1.getDate()
       result = date1.durationBetween(date2, @precision.toLowerCase())
       if result? && result.isPoint() then result.low else result
     else

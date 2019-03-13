@@ -4598,7 +4598,7 @@ module.exports['Quantity'] = {
                   "name" : "days_10",
                   "type" : "ExpressionRef"
                }, {
-                  "type" : "ToDecimal",
+                  "type" : "ToQuantity",
                   "operand" : {
                      "localId" : "42",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -4681,7 +4681,7 @@ module.exports['Quantity'] = {
                   "name" : "days_10",
                   "type" : "ExpressionRef"
                }, {
-                  "type" : "ToDecimal",
+                  "type" : "ToQuantity",
                   "operand" : {
                      "localId" : "50",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -4719,7 +4719,7 @@ module.exports['Quantity'] = {
                "localId" : "55",
                "type" : "Multiply",
                "operand" : [ {
-                  "type" : "ToDecimal",
+                  "type" : "ToQuantity",
                   "operand" : {
                      "localId" : "53",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",

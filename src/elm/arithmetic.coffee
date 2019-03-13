@@ -14,7 +14,7 @@ module.exports.Add = class Add extends Expression
       null
     else
       args?.reduce (x,y) ->
-        if x.isQuantity  or x.isDateTime
+        if x.isQuantity  or x.isDateTime or x.isDate
           Quantity.doAddition(x,y)
         else
           x + y
@@ -29,7 +29,7 @@ module.exports.Subtract = class Subtract extends Expression
       null
     else
       args.reduce (x,y) ->
-        if x.isQuantity or x.isDateTime
+        if x.isQuantity or x.isDateTime or x.isDate
           Quantity.doSubtraction(x,y)
         else
           x - y
@@ -206,7 +206,12 @@ module.exports.MinValue = class MinValue extends Expression
 
   exec: (ctx) ->
     if MIN_VALUES[@valueType]
-      MIN_VALUES[@valueType]
+      if @valueType == '{urn:hl7-org:elm-types:r1}DateTime'
+        minDateTime = MIN_VALUES[@valueType].copy()
+        minDateTime.timezoneOffset = ctx.getTimezoneOffset()
+        return minDateTime
+      else
+        MIN_VALUES[@valueType]
     else
       throw new Error("Minimum not supported for #{@valueType}")
 
@@ -223,7 +228,12 @@ module.exports.MaxValue = class MaxValue extends Expression
 
   exec: (ctx) ->
     if MAX_VALUES[@valueType]?
-      MAX_VALUES[@valueType]
+      if @valueType == '{urn:hl7-org:elm-types:r1}DateTime'
+        maxDateTime = MAX_VALUES[@valueType].copy()
+        maxDateTime.timezoneOffset = ctx.getTimezoneOffset()
+        return maxDateTime
+      else
+        MAX_VALUES[@valueType]
     else
       throw new Error("Maximum not supported for #{@valueType}")
 

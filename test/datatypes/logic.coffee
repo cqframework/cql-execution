@@ -28,8 +28,8 @@ describe 'ThreeValuedLogic.or', ->
     ThreeValuedLogic.or(false, false, false, false, false).should.be.false()
 
   it 'should return null when there is at least one null with no trues', ->
-    should(ThreeValuedLogic.or(false, false, null, false, false)).be.null
-    should(ThreeValuedLogic.or(null, null, null, null, null)).be.null
+    should(ThreeValuedLogic.or(false, false, null, false, false)).be.null()
+    should(ThreeValuedLogic.or(null, null, null, null, null)).be.null()
 
 describe 'ThreeValuedLogic.xor', ->
 
@@ -51,11 +51,11 @@ describe 'ThreeValuedLogic.xor', ->
     ThreeValuedLogic.xor(false, false, true, false, true).should.be.false()
 
   it 'should return null when there is at least one null', ->
-    should(ThreeValuedLogic.xor(true, null)).be.null
-    should(ThreeValuedLogic.xor(false, null)).be.null
-    should(ThreeValuedLogic.xor(true, false, null)).be.null
-    should(ThreeValuedLogic.xor(false, true, null)).be.null
-    should(ThreeValuedLogic.xor(false, false, true, null, false)).be.null
+    should(ThreeValuedLogic.xor(true, null)).be.null()
+    should(ThreeValuedLogic.xor(false, null)).be.null()
+    should(ThreeValuedLogic.xor(true, false, null)).be.null()
+    should(ThreeValuedLogic.xor(false, true, null)).be.null()
+    should(ThreeValuedLogic.xor(false, false, true, null, false)).be.null()
 
 describe 'ThreeValuedLogic.not', ->
 

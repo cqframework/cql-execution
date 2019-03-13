@@ -179,8 +179,13 @@ library TestSnippet version '1'
 using QUICK
 valueset "Female": '2.16.840.1.113883.3.560.100.2'
 valueset "Versioned Female": '2.16.840.1.113883.3.560.100.2' version '20121025'
+valueset "SharedCodes": '2.16.840.1.113883.3.000.000.0'
+valueset "ImproperSharedCodes": '2.16.840.1.113883.3.000.000.1'
 context Patient
 define String: 'F' in "Female"
+define SharedCodesFoo: 'foo' in "SharedCodes"
+define SharedCodesNoMatch: 'baz' in "SharedCodes"
+define ImproperSharedCodesCodeValue: 'codeValue' in "ImproperSharedCodes"
 define StringInVersionedValueSet: 'F' in "Versioned Female"
 define ShortCode: Code { code: 'F' } in "Female"
 define MediumCode: Code { code: 'F', system: '2.16.840.1.113883.18.2' } in "Female"
@@ -191,6 +196,12 @@ define WrongShortCode: Code { code: 'M' } in "Female"
 define WrongMediumCode: Code { code: 'F', system: '3.16.840.1.113883.18.2' } in "Female"
 define LongCodeDifferentVersion: Code { code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.6' } in "Female"
 define NullCode: Code { code: null, system: '2.16.840.1.113883.18.2', version: 'HL7V2.6' } in "Female"
+define InListOfCodes: { Code { code: 'M' } , Code { code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5' } } in "Female"
+define ListOfCodes: { Code { code: 'M' } , Code { code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5' } }
+define WrongListOfCodes: { Code { code: 'M' }, Code { code: 'F', system: '3.16.840.1.113883.18.2' } }
+define InListOfCodesExpressionRef: ListOfCodes in "Female"
+define InWrongListOfCodes: WrongListOfCodes in "Female"
+define ListOfCodesWithNull: { Code { code: 'M' }, (null as Code), Code { code: 'F', system: '2.16.840.1.113883.18.2' } } in "Female"
 ###
 
 module.exports['InValueSet'] = {
@@ -225,6 +236,16 @@ module.exports['InValueSet'] = {
             "id" : "2.16.840.1.113883.3.560.100.2",
             "version" : "20121025",
             "accessLevel" : "Public"
+         }, {
+            "localId" : "4",
+            "name" : "SharedCodes",
+            "id" : "2.16.840.1.113883.3.000.000.0",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "5",
+            "name" : "ImproperSharedCodes",
+            "id" : "2.16.840.1.113883.3.000.000.1",
+            "accessLevel" : "Public"
          } ]
       },
       "statements" : {
@@ -240,27 +261,27 @@ module.exports['InValueSet'] = {
                }
             }
          }, {
-            "localId" : "7",
+            "localId" : "9",
             "name" : "String",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "7",
+                  "r" : "9",
                   "s" : [ {
                      "value" : [ "define ","String",": " ]
                   }, {
-                     "r" : "6",
+                     "r" : "8",
                      "s" : [ {
-                        "r" : "4",
+                        "r" : "6",
                         "s" : [ {
                            "value" : [ "'F'" ]
                         } ]
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "5",
+                        "r" : "7",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -269,41 +290,170 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "6",
+               "localId" : "8",
                "type" : "InValueSet",
                "code" : {
-                  "localId" : "4",
+                  "localId" : "6",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "F",
                   "type" : "Literal"
                },
                "valueset" : {
-                  "localId" : "5",
+                  "localId" : "7",
                   "name" : "Female"
                }
             }
          }, {
-            "localId" : "11",
+            "localId" : "13",
+            "name" : "SharedCodesFoo",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "define ","SharedCodesFoo",": " ]
+                  }, {
+                     "r" : "12",
+                     "s" : [ {
+                        "r" : "10",
+                        "s" : [ {
+                           "value" : [ "'foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "11",
+                        "s" : [ {
+                           "value" : [ "\"SharedCodes\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "12",
+               "type" : "InValueSet",
+               "code" : {
+                  "localId" : "10",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "foo",
+                  "type" : "Literal"
+               },
+               "valueset" : {
+                  "localId" : "11",
+                  "name" : "SharedCodes"
+               }
+            }
+         }, {
+            "localId" : "17",
+            "name" : "SharedCodesNoMatch",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "17",
+                  "s" : [ {
+                     "value" : [ "define ","SharedCodesNoMatch",": " ]
+                  }, {
+                     "r" : "16",
+                     "s" : [ {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "'baz'" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "15",
+                        "s" : [ {
+                           "value" : [ "\"SharedCodes\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "16",
+               "type" : "InValueSet",
+               "code" : {
+                  "localId" : "14",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "baz",
+                  "type" : "Literal"
+               },
+               "valueset" : {
+                  "localId" : "15",
+                  "name" : "SharedCodes"
+               }
+            }
+         }, {
+            "localId" : "21",
+            "name" : "ImproperSharedCodesCodeValue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "21",
+                  "s" : [ {
+                     "value" : [ "define ","ImproperSharedCodesCodeValue",": " ]
+                  }, {
+                     "r" : "20",
+                     "s" : [ {
+                        "r" : "18",
+                        "s" : [ {
+                           "value" : [ "'codeValue'" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "19",
+                        "s" : [ {
+                           "value" : [ "\"ImproperSharedCodes\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "20",
+               "type" : "InValueSet",
+               "code" : {
+                  "localId" : "18",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "codeValue",
+                  "type" : "Literal"
+               },
+               "valueset" : {
+                  "localId" : "19",
+                  "name" : "ImproperSharedCodes"
+               }
+            }
+         }, {
+            "localId" : "25",
             "name" : "StringInVersionedValueSet",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "11",
+                  "r" : "25",
                   "s" : [ {
                      "value" : [ "define ","StringInVersionedValueSet",": " ]
                   }, {
-                     "r" : "10",
+                     "r" : "24",
                      "s" : [ {
-                        "r" : "8",
+                        "r" : "22",
                         "s" : [ {
                            "value" : [ "'F'" ]
                         } ]
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "9",
+                        "r" : "23",
                         "s" : [ {
                            "value" : [ "\"Versioned Female\"" ]
                         } ]
@@ -312,41 +462,41 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "10",
+               "localId" : "24",
                "type" : "InValueSet",
                "code" : {
-                  "localId" : "8",
+                  "localId" : "22",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "F",
                   "type" : "Literal"
                },
                "valueset" : {
-                  "localId" : "9",
+                  "localId" : "23",
                   "name" : "Versioned Female"
                }
             }
          }, {
-            "localId" : "16",
+            "localId" : "30",
             "name" : "ShortCode",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "16",
+                  "r" : "30",
                   "s" : [ {
                      "value" : [ "define ","ShortCode",": " ]
                   }, {
-                     "r" : "15",
+                     "r" : "29",
                      "s" : [ {
-                        "r" : "13",
+                        "r" : "27",
                         "s" : [ {
                            "value" : [ "Code"," { " ]
                         }, {
                            "s" : [ {
                               "value" : [ "code",": " ]
                            }, {
-                              "r" : "12",
+                              "r" : "26",
                               "s" : [ {
                                  "value" : [ "'F'" ]
                               } ]
@@ -357,7 +507,7 @@ module.exports['InValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "14",
+                        "r" : "28",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -366,16 +516,16 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "15",
+               "localId" : "29",
                "type" : "InValueSet",
                "code" : {
-                  "localId" : "13",
+                  "localId" : "27",
                   "classType" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "Instance",
                   "element" : [ {
                      "name" : "code",
                      "value" : {
-                        "localId" : "12",
+                        "localId" : "26",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "F",
                         "type" : "Literal"
@@ -383,32 +533,32 @@ module.exports['InValueSet'] = {
                   } ]
                },
                "valueset" : {
-                  "localId" : "14",
+                  "localId" : "28",
                   "name" : "Female"
                }
             }
          }, {
-            "localId" : "22",
+            "localId" : "36",
             "name" : "MediumCode",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "22",
+                  "r" : "36",
                   "s" : [ {
                      "value" : [ "define ","MediumCode",": " ]
                   }, {
-                     "r" : "21",
+                     "r" : "35",
                      "s" : [ {
-                        "r" : "19",
+                        "r" : "33",
                         "s" : [ {
                            "value" : [ "Code"," { " ]
                         }, {
                            "s" : [ {
                               "value" : [ "code",": " ]
                            }, {
-                              "r" : "17",
+                              "r" : "31",
                               "s" : [ {
                                  "value" : [ "'F'" ]
                               } ]
@@ -419,7 +569,7 @@ module.exports['InValueSet'] = {
                            "s" : [ {
                               "value" : [ "system",": " ]
                            }, {
-                              "r" : "18",
+                              "r" : "32",
                               "s" : [ {
                                  "value" : [ "'2.16.840.1.113883.18.2'" ]
                               } ]
@@ -430,7 +580,7 @@ module.exports['InValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "20",
+                        "r" : "34",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -439,16 +589,16 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "21",
+               "localId" : "35",
                "type" : "InValueSet",
                "code" : {
-                  "localId" : "19",
+                  "localId" : "33",
                   "classType" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "Instance",
                   "element" : [ {
                      "name" : "code",
                      "value" : {
-                        "localId" : "17",
+                        "localId" : "31",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "F",
                         "type" : "Literal"
@@ -456,7 +606,7 @@ module.exports['InValueSet'] = {
                   }, {
                      "name" : "system",
                      "value" : {
-                        "localId" : "18",
+                        "localId" : "32",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "2.16.840.1.113883.18.2",
                         "type" : "Literal"
@@ -464,32 +614,32 @@ module.exports['InValueSet'] = {
                   } ]
                },
                "valueset" : {
-                  "localId" : "20",
+                  "localId" : "34",
                   "name" : "Female"
                }
             }
          }, {
-            "localId" : "29",
+            "localId" : "43",
             "name" : "LongCode",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "29",
+                  "r" : "43",
                   "s" : [ {
                      "value" : [ "define ","LongCode",": " ]
                   }, {
-                     "r" : "28",
+                     "r" : "42",
                      "s" : [ {
-                        "r" : "26",
+                        "r" : "40",
                         "s" : [ {
                            "value" : [ "Code"," { " ]
                         }, {
                            "s" : [ {
                               "value" : [ "code",": " ]
                            }, {
-                              "r" : "23",
+                              "r" : "37",
                               "s" : [ {
                                  "value" : [ "'F'" ]
                               } ]
@@ -500,7 +650,7 @@ module.exports['InValueSet'] = {
                            "s" : [ {
                               "value" : [ "system",": " ]
                            }, {
-                              "r" : "24",
+                              "r" : "38",
                               "s" : [ {
                                  "value" : [ "'2.16.840.1.113883.18.2'" ]
                               } ]
@@ -511,7 +661,7 @@ module.exports['InValueSet'] = {
                            "s" : [ {
                               "value" : [ "version",": " ]
                            }, {
-                              "r" : "25",
+                              "r" : "39",
                               "s" : [ {
                                  "value" : [ "'HL7V2.5'" ]
                               } ]
@@ -522,7 +672,7 @@ module.exports['InValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "27",
+                        "r" : "41",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -531,16 +681,16 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "28",
+               "localId" : "42",
                "type" : "InValueSet",
                "code" : {
-                  "localId" : "26",
+                  "localId" : "40",
                   "classType" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "Instance",
                   "element" : [ {
                      "name" : "code",
                      "value" : {
-                        "localId" : "23",
+                        "localId" : "37",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "F",
                         "type" : "Literal"
@@ -548,7 +698,7 @@ module.exports['InValueSet'] = {
                   }, {
                      "name" : "system",
                      "value" : {
-                        "localId" : "24",
+                        "localId" : "38",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "2.16.840.1.113883.18.2",
                         "type" : "Literal"
@@ -556,7 +706,7 @@ module.exports['InValueSet'] = {
                   }, {
                      "name" : "version",
                      "value" : {
-                        "localId" : "25",
+                        "localId" : "39",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "HL7V2.5",
                         "type" : "Literal"
@@ -564,32 +714,32 @@ module.exports['InValueSet'] = {
                   } ]
                },
                "valueset" : {
-                  "localId" : "27",
+                  "localId" : "41",
                   "name" : "Female"
                }
             }
          }, {
-            "localId" : "33",
+            "localId" : "47",
             "name" : "WrongString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "33",
+                  "r" : "47",
                   "s" : [ {
                      "value" : [ "define ","WrongString",": " ]
                   }, {
-                     "r" : "32",
+                     "r" : "46",
                      "s" : [ {
-                        "r" : "30",
+                        "r" : "44",
                         "s" : [ {
                            "value" : [ "'M'" ]
                         } ]
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "31",
+                        "r" : "45",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -598,41 +748,41 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "32",
+               "localId" : "46",
                "type" : "InValueSet",
                "code" : {
-                  "localId" : "30",
+                  "localId" : "44",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "M",
                   "type" : "Literal"
                },
                "valueset" : {
-                  "localId" : "31",
+                  "localId" : "45",
                   "name" : "Female"
                }
             }
          }, {
-            "localId" : "37",
+            "localId" : "51",
             "name" : "WrongStringInVersionedValueSet",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "37",
+                  "r" : "51",
                   "s" : [ {
                      "value" : [ "define ","WrongStringInVersionedValueSet",": " ]
                   }, {
-                     "r" : "36",
+                     "r" : "50",
                      "s" : [ {
-                        "r" : "34",
+                        "r" : "48",
                         "s" : [ {
                            "value" : [ "'M'" ]
                         } ]
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "35",
+                        "r" : "49",
                         "s" : [ {
                            "value" : [ "\"Versioned Female\"" ]
                         } ]
@@ -641,41 +791,41 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "36",
+               "localId" : "50",
                "type" : "InValueSet",
                "code" : {
-                  "localId" : "34",
+                  "localId" : "48",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "M",
                   "type" : "Literal"
                },
                "valueset" : {
-                  "localId" : "35",
+                  "localId" : "49",
                   "name" : "Versioned Female"
                }
             }
          }, {
-            "localId" : "42",
+            "localId" : "56",
             "name" : "WrongShortCode",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "42",
+                  "r" : "56",
                   "s" : [ {
                      "value" : [ "define ","WrongShortCode",": " ]
                   }, {
-                     "r" : "41",
+                     "r" : "55",
                      "s" : [ {
-                        "r" : "39",
+                        "r" : "53",
                         "s" : [ {
                            "value" : [ "Code"," { " ]
                         }, {
                            "s" : [ {
                               "value" : [ "code",": " ]
                            }, {
-                              "r" : "38",
+                              "r" : "52",
                               "s" : [ {
                                  "value" : [ "'M'" ]
                               } ]
@@ -686,7 +836,7 @@ module.exports['InValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "40",
+                        "r" : "54",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -695,16 +845,16 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "41",
+               "localId" : "55",
                "type" : "InValueSet",
                "code" : {
-                  "localId" : "39",
+                  "localId" : "53",
                   "classType" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "Instance",
                   "element" : [ {
                      "name" : "code",
                      "value" : {
-                        "localId" : "38",
+                        "localId" : "52",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "M",
                         "type" : "Literal"
@@ -712,194 +862,13 @@ module.exports['InValueSet'] = {
                   } ]
                },
                "valueset" : {
-                  "localId" : "40",
-                  "name" : "Female"
-               }
-            }
-         }, {
-            "localId" : "48",
-            "name" : "WrongMediumCode",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "48",
-                  "s" : [ {
-                     "value" : [ "define ","WrongMediumCode",": " ]
-                  }, {
-                     "r" : "47",
-                     "s" : [ {
-                        "r" : "45",
-                        "s" : [ {
-                           "value" : [ "Code"," { " ]
-                        }, {
-                           "s" : [ {
-                              "value" : [ "code",": " ]
-                           }, {
-                              "r" : "43",
-                              "s" : [ {
-                                 "value" : [ "'F'" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "s" : [ {
-                              "value" : [ "system",": " ]
-                           }, {
-                              "r" : "44",
-                              "s" : [ {
-                                 "value" : [ "'3.16.840.1.113883.18.2'" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ " }" ]
-                        } ]
-                     }, {
-                        "value" : [ " in " ]
-                     }, {
-                        "r" : "46",
-                        "s" : [ {
-                           "value" : [ "\"Female\"" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "47",
-               "type" : "InValueSet",
-               "code" : {
-                  "localId" : "45",
-                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
-                  "type" : "Instance",
-                  "element" : [ {
-                     "name" : "code",
-                     "value" : {
-                        "localId" : "43",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "F",
-                        "type" : "Literal"
-                     }
-                  }, {
-                     "name" : "system",
-                     "value" : {
-                        "localId" : "44",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "3.16.840.1.113883.18.2",
-                        "type" : "Literal"
-                     }
-                  } ]
-               },
-               "valueset" : {
-                  "localId" : "46",
-                  "name" : "Female"
-               }
-            }
-         }, {
-            "localId" : "55",
-            "name" : "LongCodeDifferentVersion",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "55",
-                  "s" : [ {
-                     "value" : [ "define ","LongCodeDifferentVersion",": " ]
-                  }, {
-                     "r" : "54",
-                     "s" : [ {
-                        "r" : "52",
-                        "s" : [ {
-                           "value" : [ "Code"," { " ]
-                        }, {
-                           "s" : [ {
-                              "value" : [ "code",": " ]
-                           }, {
-                              "r" : "49",
-                              "s" : [ {
-                                 "value" : [ "'F'" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "s" : [ {
-                              "value" : [ "system",": " ]
-                           }, {
-                              "r" : "50",
-                              "s" : [ {
-                                 "value" : [ "'2.16.840.1.113883.18.2'" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "s" : [ {
-                              "value" : [ "version",": " ]
-                           }, {
-                              "r" : "51",
-                              "s" : [ {
-                                 "value" : [ "'HL7V2.6'" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ " }" ]
-                        } ]
-                     }, {
-                        "value" : [ " in " ]
-                     }, {
-                        "r" : "53",
-                        "s" : [ {
-                           "value" : [ "\"Female\"" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "54",
-               "type" : "InValueSet",
-               "code" : {
-                  "localId" : "52",
-                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
-                  "type" : "Instance",
-                  "element" : [ {
-                     "name" : "code",
-                     "value" : {
-                        "localId" : "49",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "F",
-                        "type" : "Literal"
-                     }
-                  }, {
-                     "name" : "system",
-                     "value" : {
-                        "localId" : "50",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "2.16.840.1.113883.18.2",
-                        "type" : "Literal"
-                     }
-                  }, {
-                     "name" : "version",
-                     "value" : {
-                        "localId" : "51",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "HL7V2.6",
-                        "type" : "Literal"
-                     }
-                  } ]
-               },
-               "valueset" : {
-                  "localId" : "53",
+                  "localId" : "54",
                   "name" : "Female"
                }
             }
          }, {
             "localId" : "62",
-            "name" : "NullCode",
+            "name" : "WrongMediumCode",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -907,7 +876,7 @@ module.exports['InValueSet'] = {
                "s" : {
                   "r" : "62",
                   "s" : [ {
-                     "value" : [ "define ","NullCode",": " ]
+                     "value" : [ "define ","WrongMediumCode",": " ]
                   }, {
                      "r" : "61",
                      "s" : [ {
@@ -916,7 +885,12 @@ module.exports['InValueSet'] = {
                            "value" : [ "Code"," { " ]
                         }, {
                            "s" : [ {
-                              "value" : [ "code",": ","null" ]
+                              "value" : [ "code",": " ]
+                           }, {
+                              "r" : "57",
+                              "s" : [ {
+                                 "value" : [ "'F'" ]
+                              } ]
                            } ]
                         }, {
                            "value" : [ ", " ]
@@ -924,20 +898,9 @@ module.exports['InValueSet'] = {
                            "s" : [ {
                               "value" : [ "system",": " ]
                            }, {
-                              "r" : "57",
-                              "s" : [ {
-                                 "value" : [ "'2.16.840.1.113883.18.2'" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "s" : [ {
-                              "value" : [ "version",": " ]
-                           }, {
                               "r" : "58",
                               "s" : [ {
-                                 "value" : [ "'HL7V2.6'" ]
+                                 "value" : [ "'3.16.840.1.113883.18.2'" ]
                               } ]
                            } ]
                         }, {
@@ -964,17 +927,107 @@ module.exports['InValueSet'] = {
                   "element" : [ {
                      "name" : "code",
                      "value" : {
-                        "asType" : "{urn:hl7-org:elm-types:r1}String",
-                        "type" : "As",
-                        "operand" : {
-                           "localId" : "56",
-                           "type" : "Null"
-                        }
+                        "localId" : "57",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "F",
+                        "type" : "Literal"
                      }
                   }, {
                      "name" : "system",
                      "value" : {
-                        "localId" : "57",
+                        "localId" : "58",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "3.16.840.1.113883.18.2",
+                        "type" : "Literal"
+                     }
+                  } ]
+               },
+               "valueset" : {
+                  "localId" : "60",
+                  "name" : "Female"
+               }
+            }
+         }, {
+            "localId" : "69",
+            "name" : "LongCodeDifferentVersion",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "69",
+                  "s" : [ {
+                     "value" : [ "define ","LongCodeDifferentVersion",": " ]
+                  }, {
+                     "r" : "68",
+                     "s" : [ {
+                        "r" : "66",
+                        "s" : [ {
+                           "value" : [ "Code"," { " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "code",": " ]
+                           }, {
+                              "r" : "63",
+                              "s" : [ {
+                                 "value" : [ "'F'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "system",": " ]
+                           }, {
+                              "r" : "64",
+                              "s" : [ {
+                                 "value" : [ "'2.16.840.1.113883.18.2'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "version",": " ]
+                           }, {
+                              "r" : "65",
+                              "s" : [ {
+                                 "value" : [ "'HL7V2.6'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "67",
+                        "s" : [ {
+                           "value" : [ "\"Female\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "68",
+               "type" : "InValueSet",
+               "code" : {
+                  "localId" : "66",
+                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "Instance",
+                  "element" : [ {
+                     "name" : "code",
+                     "value" : {
+                        "localId" : "63",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "F",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "system",
+                     "value" : {
+                        "localId" : "64",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "2.16.840.1.113883.18.2",
                         "type" : "Literal"
@@ -982,7 +1035,7 @@ module.exports['InValueSet'] = {
                   }, {
                      "name" : "version",
                      "value" : {
-                        "localId" : "58",
+                        "localId" : "65",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "HL7V2.6",
                         "type" : "Literal"
@@ -990,7 +1043,715 @@ module.exports['InValueSet'] = {
                   } ]
                },
                "valueset" : {
-                  "localId" : "60",
+                  "localId" : "67",
+                  "name" : "Female"
+               }
+            }
+         }, {
+            "localId" : "76",
+            "name" : "NullCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "76",
+                  "s" : [ {
+                     "value" : [ "define ","NullCode",": " ]
+                  }, {
+                     "r" : "75",
+                     "s" : [ {
+                        "r" : "73",
+                        "s" : [ {
+                           "value" : [ "Code"," { " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "code",": ","null" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "system",": " ]
+                           }, {
+                              "r" : "71",
+                              "s" : [ {
+                                 "value" : [ "'2.16.840.1.113883.18.2'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "version",": " ]
+                           }, {
+                              "r" : "72",
+                              "s" : [ {
+                                 "value" : [ "'HL7V2.6'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "74",
+                        "s" : [ {
+                           "value" : [ "\"Female\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "75",
+               "type" : "InValueSet",
+               "code" : {
+                  "localId" : "73",
+                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "Instance",
+                  "element" : [ {
+                     "name" : "code",
+                     "value" : {
+                        "asType" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "As",
+                        "operand" : {
+                           "localId" : "70",
+                           "type" : "Null"
+                        }
+                     }
+                  }, {
+                     "name" : "system",
+                     "value" : {
+                        "localId" : "71",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "2.16.840.1.113883.18.2",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "version",
+                     "value" : {
+                        "localId" : "72",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "HL7V2.6",
+                        "type" : "Literal"
+                     }
+                  } ]
+               },
+               "valueset" : {
+                  "localId" : "74",
+                  "name" : "Female"
+               }
+            }
+         }, {
+            "localId" : "86",
+            "name" : "InListOfCodes",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "86",
+                  "s" : [ {
+                     "value" : [ "define ","InListOfCodes",": " ]
+                  }, {
+                     "r" : "85",
+                     "s" : [ {
+                        "r" : "83",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "78",
+                           "s" : [ {
+                              "value" : [ "Code"," { " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "code",": " ]
+                              }, {
+                                 "r" : "77",
+                                 "s" : [ {
+                                    "value" : [ "'M'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " }" ]
+                           } ]
+                        }, {
+                           "value" : [ " , " ]
+                        }, {
+                           "r" : "82",
+                           "s" : [ {
+                              "value" : [ "Code"," { " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "code",": " ]
+                              }, {
+                                 "r" : "79",
+                                 "s" : [ {
+                                    "value" : [ "'F'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "system",": " ]
+                              }, {
+                                 "r" : "80",
+                                 "s" : [ {
+                                    "value" : [ "'2.16.840.1.113883.18.2'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "version",": " ]
+                              }, {
+                                 "r" : "81",
+                                 "s" : [ {
+                                    "value" : [ "'HL7V2.5'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " }" ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "84",
+                        "s" : [ {
+                           "value" : [ "\"Female\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "85",
+               "type" : "AnyInValueSet",
+               "codes" : {
+                  "localId" : "83",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "78",
+                     "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "Instance",
+                     "element" : [ {
+                        "name" : "code",
+                        "value" : {
+                           "localId" : "77",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "M",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }, {
+                     "localId" : "82",
+                     "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "Instance",
+                     "element" : [ {
+                        "name" : "code",
+                        "value" : {
+                           "localId" : "79",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "F",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "system",
+                        "value" : {
+                           "localId" : "80",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "2.16.840.1.113883.18.2",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "version",
+                        "value" : {
+                           "localId" : "81",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "HL7V2.5",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  } ]
+               },
+               "valueset" : {
+                  "localId" : "84",
+                  "name" : "Female"
+               }
+            }
+         }, {
+            "localId" : "94",
+            "name" : "ListOfCodes",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "94",
+                  "s" : [ {
+                     "value" : [ "define ","ListOfCodes",": " ]
+                  }, {
+                     "r" : "93",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "88",
+                        "s" : [ {
+                           "value" : [ "Code"," { " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "code",": " ]
+                           }, {
+                              "r" : "87",
+                              "s" : [ {
+                                 "value" : [ "'M'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " , " ]
+                     }, {
+                        "r" : "92",
+                        "s" : [ {
+                           "value" : [ "Code"," { " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "code",": " ]
+                           }, {
+                              "r" : "89",
+                              "s" : [ {
+                                 "value" : [ "'F'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "system",": " ]
+                           }, {
+                              "r" : "90",
+                              "s" : [ {
+                                 "value" : [ "'2.16.840.1.113883.18.2'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "version",": " ]
+                           }, {
+                              "r" : "91",
+                              "s" : [ {
+                                 "value" : [ "'HL7V2.5'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "93",
+               "type" : "List",
+               "element" : [ {
+                  "localId" : "88",
+                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "Instance",
+                  "element" : [ {
+                     "name" : "code",
+                     "value" : {
+                        "localId" : "87",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "M",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }, {
+                  "localId" : "92",
+                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "Instance",
+                  "element" : [ {
+                     "name" : "code",
+                     "value" : {
+                        "localId" : "89",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "F",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "system",
+                     "value" : {
+                        "localId" : "90",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "2.16.840.1.113883.18.2",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "version",
+                     "value" : {
+                        "localId" : "91",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "HL7V2.5",
+                        "type" : "Literal"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "101",
+            "name" : "WrongListOfCodes",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "101",
+                  "s" : [ {
+                     "value" : [ "define ","WrongListOfCodes",": " ]
+                  }, {
+                     "r" : "100",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "96",
+                        "s" : [ {
+                           "value" : [ "Code"," { " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "code",": " ]
+                           }, {
+                              "r" : "95",
+                              "s" : [ {
+                                 "value" : [ "'M'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "99",
+                        "s" : [ {
+                           "value" : [ "Code"," { " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "code",": " ]
+                           }, {
+                              "r" : "97",
+                              "s" : [ {
+                                 "value" : [ "'F'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "system",": " ]
+                           }, {
+                              "r" : "98",
+                              "s" : [ {
+                                 "value" : [ "'3.16.840.1.113883.18.2'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "100",
+               "type" : "List",
+               "element" : [ {
+                  "localId" : "96",
+                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "Instance",
+                  "element" : [ {
+                     "name" : "code",
+                     "value" : {
+                        "localId" : "95",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "M",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }, {
+                  "localId" : "99",
+                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "Instance",
+                  "element" : [ {
+                     "name" : "code",
+                     "value" : {
+                        "localId" : "97",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "F",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "system",
+                     "value" : {
+                        "localId" : "98",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "3.16.840.1.113883.18.2",
+                        "type" : "Literal"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "105",
+            "name" : "InListOfCodesExpressionRef",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "105",
+                  "s" : [ {
+                     "value" : [ "define ","InListOfCodesExpressionRef",": " ]
+                  }, {
+                     "r" : "104",
+                     "s" : [ {
+                        "r" : "102",
+                        "s" : [ {
+                           "value" : [ "ListOfCodes" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "103",
+                        "s" : [ {
+                           "value" : [ "\"Female\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "104",
+               "type" : "AnyInValueSet",
+               "codes" : {
+                  "localId" : "102",
+                  "name" : "ListOfCodes",
+                  "type" : "ExpressionRef"
+               },
+               "valueset" : {
+                  "localId" : "103",
+                  "name" : "Female"
+               }
+            }
+         }, {
+            "localId" : "109",
+            "name" : "InWrongListOfCodes",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "109",
+                  "s" : [ {
+                     "value" : [ "define ","InWrongListOfCodes",": " ]
+                  }, {
+                     "r" : "108",
+                     "s" : [ {
+                        "r" : "106",
+                        "s" : [ {
+                           "value" : [ "WrongListOfCodes" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "107",
+                        "s" : [ {
+                           "value" : [ "\"Female\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "108",
+               "type" : "AnyInValueSet",
+               "codes" : {
+                  "localId" : "106",
+                  "name" : "WrongListOfCodes",
+                  "type" : "ExpressionRef"
+               },
+               "valueset" : {
+                  "localId" : "107",
+                  "name" : "Female"
+               }
+            }
+         }, {
+            "localId" : "121",
+            "name" : "ListOfCodesWithNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "121",
+                  "s" : [ {
+                     "value" : [ "define ","ListOfCodesWithNull",": " ]
+                  }, {
+                     "r" : "120",
+                     "s" : [ {
+                        "r" : "118",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "111",
+                           "s" : [ {
+                              "value" : [ "Code"," { " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "code",": " ]
+                              }, {
+                                 "r" : "110",
+                                 "s" : [ {
+                                    "value" : [ "'M'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " }" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "114",
+                           "s" : [ {
+                              "value" : [ "(" ]
+                           }, {
+                              "r" : "114",
+                              "s" : [ {
+                                 "r" : "112",
+                                 "value" : [ "null"," as " ]
+                              }, {
+                                 "r" : "113",
+                                 "s" : [ {
+                                    "value" : [ "Code" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "117",
+                           "s" : [ {
+                              "value" : [ "Code"," { " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "code",": " ]
+                              }, {
+                                 "r" : "115",
+                                 "s" : [ {
+                                    "value" : [ "'F'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "system",": " ]
+                              }, {
+                                 "r" : "116",
+                                 "s" : [ {
+                                    "value" : [ "'2.16.840.1.113883.18.2'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " }" ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "119",
+                        "s" : [ {
+                           "value" : [ "\"Female\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "120",
+               "type" : "AnyInValueSet",
+               "codes" : {
+                  "localId" : "118",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "111",
+                     "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "Instance",
+                     "element" : [ {
+                        "name" : "code",
+                        "value" : {
+                           "localId" : "110",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "M",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }, {
+                     "localId" : "114",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "112",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "113",
+                        "name" : "{urn:hl7-org:elm-types:r1}Code",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "117",
+                     "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "Instance",
+                     "element" : [ {
+                        "name" : "code",
+                        "value" : {
+                           "localId" : "115",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "F",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "system",
+                        "value" : {
+                           "localId" : "116",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "2.16.840.1.113883.18.2",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  } ]
+               },
+               "valueset" : {
+                  "localId" : "119",
                   "name" : "Female"
                }
             }
@@ -1571,11 +2332,14 @@ module.exports['CalculateAge'] = {
                "precision" : "Year",
                "type" : "CalculateAge",
                "operand" : {
-                  "path" : "birthDate",
-                  "type" : "Property",
-                  "source" : {
-                     "name" : "Patient",
-                     "type" : "ExpressionRef"
+                  "type" : "ToDate",
+                  "operand" : {
+                     "path" : "birthDate",
+                     "type" : "Property",
+                     "source" : {
+                        "name" : "Patient",
+                        "type" : "ExpressionRef"
+                     }
                   }
                }
             }
@@ -1603,11 +2367,14 @@ module.exports['CalculateAge'] = {
                "precision" : "Month",
                "type" : "CalculateAge",
                "operand" : {
-                  "path" : "birthDate",
-                  "type" : "Property",
-                  "source" : {
-                     "name" : "Patient",
-                     "type" : "ExpressionRef"
+                  "type" : "ToDate",
+                  "operand" : {
+                     "path" : "birthDate",
+                     "type" : "Property",
+                     "source" : {
+                        "name" : "Patient",
+                        "type" : "ExpressionRef"
+                     }
                   }
                }
             }
@@ -1751,6 +2518,10 @@ context Patient
 define AgeAt2012: AgeInYearsAt(DateTime(2012))
 define AgeAt19810216: AgeInYearsAt(DateTime(1981, 2, 16))
 define AgeAt1975: AgeInYearsAt(DateTime(1975))
+define AgeInYearsDateTimeArg: AgeInYearsAt(DateTime(2012, 12, 1))
+define CalculateAgeInYearsDateTimeArg: CalculateAgeInYearsAt(@1994-12-01T23:59:00.000+00:00, DateTime(2012, 12, 1))
+define AgeInYearsDateArg: AgeInYearsAt(Date(2012, 12, 1))
+define CalculateAgeInYearsDateArg: CalculateAgeInYearsAt(@1994-12-01T23:59:00.000+00:00, Date(2012, 12, 1))
 ###
 
 module.exports['CalculateAgeAt'] = {
@@ -1938,6 +2709,324 @@ module.exports['CalculateAgeAt'] = {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1975",
                      "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "21",
+            "name" : "AgeInYearsDateTimeArg",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "21",
+                  "s" : [ {
+                     "value" : [ "define ","AgeInYearsDateTimeArg",": " ]
+                  }, {
+                     "r" : "20",
+                     "s" : [ {
+                        "value" : [ "AgeInYearsAt","(" ]
+                     }, {
+                        "r" : "19",
+                        "s" : [ {
+                           "value" : [ "DateTime","(","2012",", ","12",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "20",
+               "precision" : "Year",
+               "type" : "CalculateAgeAt",
+               "operand" : [ {
+                  "path" : "birthDate",
+                  "type" : "Property",
+                  "source" : {
+                     "name" : "Patient",
+                     "type" : "ExpressionRef"
+                  }
+               }, {
+                  "localId" : "19",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "16",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2012",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "17",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "12",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "18",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "28",
+            "name" : "CalculateAgeInYearsDateTimeArg",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "28",
+                  "s" : [ {
+                     "value" : [ "define ","CalculateAgeInYearsDateTimeArg",": " ]
+                  }, {
+                     "r" : "27",
+                     "s" : [ {
+                        "value" : [ "CalculateAgeInYearsAt","(","@1994-12-01T23:59:00.000+00:00",", " ]
+                     }, {
+                        "r" : "26",
+                        "s" : [ {
+                           "value" : [ "DateTime","(","2012",", ","12",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "27",
+               "precision" : "Year",
+               "type" : "CalculateAgeAt",
+               "operand" : [ {
+                  "localId" : "22",
+                  "type" : "DateTime",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1994",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "12",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "23",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "59",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "26",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "23",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2012",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "24",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "12",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "25",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "34",
+            "name" : "AgeInYearsDateArg",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "34",
+                  "s" : [ {
+                     "value" : [ "define ","AgeInYearsDateArg",": " ]
+                  }, {
+                     "r" : "33",
+                     "s" : [ {
+                        "value" : [ "AgeInYearsAt","(" ]
+                     }, {
+                        "r" : "32",
+                        "s" : [ {
+                           "value" : [ "Date","(","2012",", ","12",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "33",
+               "precision" : "Year",
+               "type" : "CalculateAgeAt",
+               "operand" : [ {
+                  "path" : "birthDate",
+                  "type" : "Property",
+                  "source" : {
+                     "name" : "Patient",
+                     "type" : "ExpressionRef"
+                  }
+               }, {
+                  "type" : "ToDateTime",
+                  "operand" : {
+                     "localId" : "32",
+                     "type" : "Date",
+                     "year" : {
+                        "localId" : "29",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "30",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "12",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "31",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "41",
+            "name" : "CalculateAgeInYearsDateArg",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "41",
+                  "s" : [ {
+                     "value" : [ "define ","CalculateAgeInYearsDateArg",": " ]
+                  }, {
+                     "r" : "40",
+                     "s" : [ {
+                        "value" : [ "CalculateAgeInYearsAt","(","@1994-12-01T23:59:00.000+00:00",", " ]
+                     }, {
+                        "r" : "39",
+                        "s" : [ {
+                           "value" : [ "Date","(","2012",", ","12",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "40",
+               "precision" : "Year",
+               "type" : "CalculateAgeAt",
+               "operand" : [ {
+                  "localId" : "35",
+                  "type" : "DateTime",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1994",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "12",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "23",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "59",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "type" : "ToDateTime",
+                  "operand" : {
+                     "localId" : "39",
+                     "type" : "Date",
+                     "year" : {
+                        "localId" : "36",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "37",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "12",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "38",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }
                   }
                } ]
             }

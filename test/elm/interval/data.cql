@@ -21,6 +21,7 @@ define EqualDates: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 
 define EqualDatesOpenClosed: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 1, 0, 0, 0, 0)) = Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 12, 31, 23, 59, 59, 999)]
 define SameDays: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)) = Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1))
 define DifferentDays: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)) = Interval[DateTime(2012, 1, 1), DateTime(2012, 7, 1))
+define DifferingPrecision: Interval[DateTime(2012, 1, 1, 12, 30, 21), DateTime(2013, 1, 1, 12, 30, 21)] = Interval[DateTime(2012, 1, 1, 12, 30), DateTime(2013, 1, 1, 12, 30)]
 
 // @Test: NotEqual
 define EqualClosed: Interval[1, 5] != Interval[1, 5]
@@ -39,6 +40,7 @@ define EqualDates: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 
 define EqualDatesOpenClosed: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 1, 0, 0, 0, 0)) != Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 12, 31, 23, 59, 59, 999)]
 define SameDays: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)) != Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1))
 define DifferentDays: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)) != Interval[DateTime(2012, 1, 1), DateTime(2012, 7, 1))
+define DifferingPrecision: Interval[DateTime(2012, 1, 1, 12, 30, 21), DateTime(2013, 1, 1, 12, 30, 21)] != Interval[DateTime(2012, 1, 1, 12, 30), DateTime(2013, 1, 1, 12, 30)]
 
 // @Test: Contains
 define ContainsInt: Interval[1, 5] contains 3
@@ -172,6 +174,10 @@ define MayIncludeDayOfIvlVeryImpreciseHigh: PrecisionDateIvl includes day of Int
 define MayIncludeDayOfIvlVeryImpreciseSurrounding: PrecisionDateIvl includes day of Interval[DateTime(2012), DateTime(2012)]
 define ImpDateIvl: Interval[DateTime(2012, 3), DateTime(2012, 8)]
 define ImpreciseIncludesDateIvl: ImpDateIvl includes Interval[DateTime(2012, 4, 1, 0, 0, 0, 0), DateTime(2012, 6, 1, 0, 0, 0, 0))
+define ImpreciseIncludesDate: ImpDateIvl includes DateTime(2012, 4, 1, 0, 0, 0, 0)
+define ImpreciseDoesntIncludeDate: ImpDateIvl includes DateTime(2016, 4, 1, 0, 0, 0, 0)
+define IntervalIncludesQuantity: Interval[4 'mg', 6 'mg'] includes 5 'mg'
+define IntervalDoesntIncludeQuantity: Interval[4 'mg', 6 'mg'] includes 50 'mg'
 define ImpreciseNotIncludesDateIvl: ImpDateIvl includes Interval[DateTime(2012, 2, 1, 0, 0, 0, 0), DateTime(2012, 6, 1, 0, 0, 0, 0))
 define ImpreciseMayIncludeDateIvl: ImpDateIvl includes Interval[DateTime(2012, 3, 15, 0, 0, 0, 0), DateTime(2012, 6, 1, 0, 0, 0, 0))
 define NegInfBegIncludesIntIvl: Interval[null, 5] includes Interval[-7, 2]
@@ -235,6 +241,10 @@ define IncludesDayOfIvlHighEdge: Interval[DateTime(2012, 6, 1, 0, 0, 0, 0), Date
 define NotIncludesDayOfIvlLowEdge: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 6, 1, 0, 0, 0, 0)] included in day of PrecisionDateIvl
 define NotIncludesDayOfIvlHighEdge: Interval[DateTime(2012, 6, 1, 0, 0, 0, 0), DateTime(2012, 9, 3, 0, 0, 0, 0)] included in day of PrecisionDateIvl
 define IncludesDayOfIvlImpreciseLowEdge: Interval[DateTime(2012, 3, 2), DateTime(2012, 6, 1)] included in day of PrecisionDateIvl
+define IncludesDayInInterval: DateTime(2012, 3, 3) included in day of PrecisionDateIvl
+define DoesNotIncludeDayInInterval: DateTime(2014, 3, 3) included in day of PrecisionDateIvl
+define QuantityIncludedInterval: 5 'mg' included in Interval[4 'mg', 6 'mg']
+define QuantityNotIncludedInterval: 50 'mg' included in Interval[4 'mg', 6 'mg']
 define IncludesDayOfIvlImpreciseHighEdge: Interval[DateTime(2012, 6, 1), DateTime(2012, 9, 2)] included in day of PrecisionDateIvl
 define IncludesDayOfIvlVeryImpreciseMiddle: Interval[DateTime(2012, 5), DateTime(2012, 6)] included in day of PrecisionDateIvl
 define NotIncludesDayOfIvlVeryImpreciseLow: Interval[DateTime(2012, 2), DateTime(2012, 6)] included in day of PrecisionDateIvl
@@ -545,14 +555,16 @@ define ivlD: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), DateTime(2014, 1, 1, 0, 
 define ivlE: Interval[DateTime(2013), DateTime(2015)]
 define ivlF: Interval[DateTime(2014), DateTime(2016)]
 define ivlG: Interval[DateTime(2016), DateTime(2017)]
+define ivlH: Interval[DateTime(2012, 2, 3), DateTime(2013, 3)]
 define OverlapsBefore: ivlA overlaps ivlB
 define OverlapsAfter: ivlB overlaps ivlA
 define OverlapsContained: ivlB overlaps ivlC
 define OverlapsContains: ivlC overlaps ivlB
-define ImpreciseOverlap: ivlD overlaps ivlE
+define ImpreciseOverlap: ivlD overlaps ivlH
 define NoOverlap: ivlC overlaps ivlD
 define NoImpreciseOverlap: ivlE overlaps ivlG
-define UnknownOverlap: ivlF overlaps ivlG
+define UnknownOverlap: ivlE overlaps ivlH
+define MatchingPrecisionOverlap: ivlF overlaps ivlG
 define PrecisionDateIvl: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
 // NOTE: There appears to be a bug in cql-to-elm that translates these 'overlaps' to 'OverlapsAfter'!
 define OverlapsBeforeDayOfIvlEdge: PrecisionDateIvl overlaps day of Interval[DateTime(2012, 9, 2, 23, 59, 59, 999), DateTime(2012, 10, 1, 0, 0, 0, 0)]
@@ -582,6 +594,7 @@ define ivlD: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), DateTime(2014, 1, 1, 0, 
 define ivlE: Interval[DateTime(2013), DateTime(2015)]
 define ivlF: Interval[DateTime(2014), DateTime(2016)]
 define ivlG: Interval[DateTime(2016), DateTime(2017)]
+define ivlH: Interval[DateTime(2013,1), DateTime(2015,1)]
 define OverlapsBefore: ivlA overlaps after ivlB
 define OverlapsAfter: ivlB overlaps after ivlA
 define OverlapsContained: ivlB overlaps after ivlC
@@ -590,7 +603,8 @@ define ImpreciseOverlapBefore: ivlE overlaps after ivlF
 define ImpreciseOverlapAfter: ivlF overlaps after ivlE
 define NoOverlap: ivlC overlaps after ivlD
 define NoImpreciseOverlap: ivlE overlaps after ivlG
-define UnknownOverlap: ivlG overlaps after ivlF
+define MatchingPrecisionOverlap: ivlG overlaps after ivlF
+define UnknownOverlap: ivlH overlaps after ivlE
 define PrecisionDateIvl: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
 define OverlapsBeforeDayOfIvlEdge: PrecisionDateIvl overlaps after day of Interval[DateTime(2012, 9, 2, 23, 59, 59, 999), DateTime(2012, 10, 1, 0, 0, 0, 0)]
 define OverlapsAfterDayOfIvlEdge: PrecisionDateIvl overlaps after day of Interval[DateTime(2012, 1, 2, 0, 0, 0, 0), DateTime(2012, 3, 2, 0, 0, 0, 0)]
@@ -619,6 +633,7 @@ define ivlD: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), DateTime(2014, 1, 1, 0, 
 define ivlE: Interval[DateTime(2013), DateTime(2015)]
 define ivlF: Interval[DateTime(2014), DateTime(2016)]
 define ivlG: Interval[DateTime(2016), DateTime(2017)]
+define ivlH: Interval[DateTime(2011, 3), DateTime(2013, 3)]
 define OverlapsBefore: ivlA overlaps before ivlB
 define OverlapsAfter: ivlB overlaps before ivlA
 define OverlapsContained: ivlB overlaps before ivlC
@@ -627,7 +642,8 @@ define ImpreciseOverlapBefore: ivlE overlaps before ivlF
 define ImpreciseOverlapAfter: ivlF overlaps before ivlE
 define NoOverlap: ivlC overlaps before ivlD
 define NoImpreciseOverlap: ivlE overlaps before ivlG
-define UnknownOverlap: ivlF overlaps before ivlG
+define MatchingPrecisionOverlap: ivlF overlaps before ivlG
+define UnknownOverlap: ivlH overlaps before ivlE
 define PrecisionDateIvl: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
 define OverlapsBeforeDayOfIvlEdge: PrecisionDateIvl overlaps before day of Interval[DateTime(2012, 9, 2, 23, 59, 59, 999), DateTime(2012, 10, 1, 0, 0, 0, 0)]
 define OverlapsAfterDayOfIvlEdge: PrecisionDateIvl overlaps before day of Interval[DateTime(2012, 1, 2, 0, 0, 0, 0), DateTime(2012, 3, 2, 0, 0, 0, 0)]
@@ -649,10 +665,22 @@ define RealWidth: width of Interval[1.23, 4.56]
 define RealOpenWidth: width of Interval(1.23, 4.56)
 
 // @Test: Start
-define Foo: start of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
+define ClosedNotNull: start of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
+define ClosedNullDateTime: start of Interval[null, DateTime(2013, 1, 1)]
+define ClosedNullInteger: start of Interval[null, 3]
+define ClosedNullDecimal: start of Interval[null, 5.1]
+define NullInterval: start of (null as Interval<DateTime>)
+define OpenNotNull: start of Interval(DateTime(2012, 1, 1), DateTime(2013, 1, 1))
+define OpenNull: start of Interval(null, DateTime(2013, 1, 1))
 
 // @Test: End
-define Foo: end of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
+define ClosedNotNull: end of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
+define ClosedNullDateTime: end of Interval[DateTime(2013, 1, 1), null]
+define ClosedNullInteger: end of Interval[5, null]
+define ClosedNullDecimal: end of Interval[7.3, null]
+define NullInterval: end of (null as Interval<DateTime>)
+define OpenNotNull: end of Interval(DateTime(2012, 1, 1), DateTime(2013, 1, 1))
+define OpenNull: end of Interval(DateTime(2013, 1, 1), null)
 
 // @Test: Starts
 define TestStartsNull: Interval[null, null] starts Interval[1, 10]
@@ -817,3 +845,354 @@ define DateTimeCollapseOverlapContainedEdge: collapse { DateTime1_10Interval, Da
 define DateTimeCollapseOverlapContainedEdge2: collapse { DateTime1_15Interval, DateTime1_10Interval }
 define DateTimeCollapseOverlapMultipleCombine: collapse { DateTime1_6Interval, DateTime5_12Interval, DateTime10_15Interval }
 define DateTimeCollapseImpreciseBoundary: collapse { DateTime1_3ImpreciseInterval, DateTime1_10Interval }
+
+// @Test: Collapse
+// Numeric Intervals
+define IntIntervalList: { Interval[1, 4], Interval[4, 8], Interval[7, 9] }
+define IntCollapsePerUnit1: collapse IntIntervalList per ToQuantity(1)
+define IntCollapseNoPer: collapse IntIntervalList
+define IntIntervalSeparatedList: { Interval[3, 5], Interval[8, 10] }
+define ExpectedIntervalList: { Interval[3,10] }
+define IntCollapseSeparatedListPer3: collapse IntIntervalSeparatedList per 3
+
+// DateTime Intervals
+define DateTime1_12Interval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 12, 0, 0, 0, 0)]
+define DateTime3_15Interval: Interval[DateTime(2012, 1, 3, 0, 0, 0, 0), DateTime(2012, 1, 15, 0, 0, 0, 0)]
+define DateTime1_15Interval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 15, 0, 0, 0, 0)]
+define DateTime1_15IntervalList: { DateTime1_15Interval }
+define DateTimeCollapseNoPer: collapse { DateTime1_12Interval, DateTime3_15Interval}
+define DateTimeCollapsePerMs: collapse { DateTime1_12Interval, DateTime3_15Interval} per millisecond
+define DateTimeCollapsePerDay: collapse { DateTime1_12Interval, DateTime3_15Interval} per day
+
+// Quantity Intervals with default units
+define QuantityIntervalList: { Interval[ToQuantity(1), ToQuantity(4)], Interval[ToQuantity(4), ToQuantity(8)] }
+define ExpectedQuantityList: { Interval[ToQuantity(1), ToQuantity(8)] }
+define QuantityIntervalCollapseNoPer: collapse QuantityIntervalList
+define QuantityIntervalCollapsePerUnit1: collapse QuantityIntervalList per ToQuantity(1)
+define QuantitySeparatedBy3: { Interval[ToQuantity(3), ToQuantity(5)], Interval[ToQuantity(8), ToQuantity(10)]}
+define CollapseSeparatedQuantity: collapse QuantitySeparatedBy3
+define ExpectedSeparatedQuantity: { Interval[ToQuantity(3), ToQuantity(10)] }
+define CollapseSeparatedQuantityPer3: collapse QuantitySeparatedBy3 per 3
+
+// Quantity Intervals with units
+define QuantityMeterIntervalList: { Interval[ToQuantity('1 \'m\''), ToQuantity('1.995 \'m\'')], Interval[ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')] }
+define CollapseDisjointQuantityUnits: collapse QuantityMeterIntervalList
+define ExpectedQuantityUnitsCollapse: { Interval[ToQuantity('1 \'m\''), ToQuantity('3 \'m\'')] }
+define CollapseQuantityUnitsWithinPer: collapse QuantityMeterIntervalList per ToQuantity('1 \'cm\'')
+define CollapseQuantityUnitsNotWithinPer: collapse QuantityMeterIntervalList per ToQuantity('1 \'mm\'')
+
+// Null test cases
+define NullLowIntervalList: { Interval[null, 4], Interval[3, 5] }
+define CollapseNullLowIntervalList: collapse NullLowIntervalList
+define ExpectedNullLowIntervalCollapse: { Interval[null, 5] }
+define NullHighIntervalList: { Interval[1, 4], Interval[3, null] }
+define CollapseNullHighIntervalList: collapse NullHighIntervalList
+define ExpectedNullHighIntervalCollapse: { Interval[1, null] }
+define NullInCollapse: collapse { Interval[1,3], null }
+define ExpectedResultWithNull: { Interval[1,3] }
+// define NullCollapse: collapse null // Translation Error
+define NullPerCollapse: collapse { Interval[1,4], Interval[4,7] } per null
+define ExpectedResultNullPer: { Interval[1,7] }
+define DateTime5_NullInterval: Interval[DateTime(2012, 1, 5, 0, 0, 0, 0), null]
+define DateTimeNull_5Interval: Interval[null, DateTime(2012, 1, 5, 0, 0, 0, 0)]
+define DateTime1_10Interval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 10, 0, 0, 0, 0)]
+define DateTime9_10Interval: Interval[DateTime(2012, 1, 9, 0, 0, 0, 0), DateTime(2012, 1, 10, 0, 0, 0, 0)]
+define DateTime1_2Interval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 2, 0, 0, 0, 0)]
+define DateTimeNullStartCollapse: collapse { DateTime1_10Interval, DateTimeNull_5Interval }
+define DateTimeNullStartCollapseExpected: { Interval[null, DateTime(2012, 1, 10, 0, 0, 0, 0)] }
+define DateTimeNullEndCollapse: collapse { DateTime1_10Interval, DateTime5_NullInterval }
+define DateTimeNullEndCollapseNoOverlap: collapse { DateTime1_2Interval, DateTime5_NullInterval }
+define DateTimeNullEndCollapseNoOverlapExpected: { DateTime1_2Interval, DateTime5_NullInterval }
+define DateTimeNullStartCollapseNoOverlap: collapse { DateTime9_10Interval, DateTimeNull_5Interval }
+define DateTimeNullStartCollapseNoOverlapExpected: { DateTimeNull_5Interval, DateTime9_10Interval }
+define DateTimeNullEndCollapseExpected: { Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), null] }
+define DateTimeNullStartEndCollapse: collapse { DateTimeNull_5Interval, DateTime1_10Interval, DateTime5_NullInterval }
+define DateTimeNullStartEndCollapseExpected: { Interval[null, null] }
+define QuantityMeterNullLowIntervalList: { Interval[null, ToQuantity('1.995 \'m\'')], Interval[ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')] }
+define CollapseQuantityNullLowUnitsWithinPer: collapse QuantityMeterNullLowIntervalList per ToQuantity('1 \'cm\'')
+define CollapseQuantityNullLowUnitsWithinPerExpected : { Interval[null, ToQuantity('3 \'m\'')] }
+define QuantityMeterNullHighIntervalList: { Interval[ToQuantity('1 \'m\''),ToQuantity('1.995 \'m\'')], Interval[ToQuantity('2 \'m\''), null] }
+define CollapseQuantityNullHighUnitsWithinPer: collapse QuantityMeterNullHighIntervalList per ToQuantity('1 \'cm\'')
+define CollapseQuantityNullHighUnitsWithinPerExpected : { Interval[ToQuantity('1 \'m\''), null] }
+define QuantityIntervalListWithNulls: { Interval[ToQuantity(4), ToQuantity(8)], Interval[null, ToQuantity(2)], Interval[ToQuantity(1), ToQuantity(4)], Interval[ToQuantity(7), null] }
+define CollapseQuantityIntervalListWithNulls: collapse QuantityIntervalListWithNulls
+define CollapseQuantityIntervalListWithNullsExpected: { Interval[null, null] }
+define QuantityIntervalListWithNullLowNoOverlap: { Interval[ToQuantity(4), ToQuantity(8)], Interval[null, ToQuantity(2)] }
+define CollapseQuantityIntervalListWithNullLowNoOverlap: collapse QuantityIntervalListWithNullLowNoOverlap
+define CollapseQuantityIntervalListWithNullLowNoOverlapExpected: { Interval[null, ToQuantity(2)], Interval[ToQuantity(4), ToQuantity(8)]}
+define QuantityIntervalListWithNullHighNoOverlap: { Interval[ToQuantity(4), null], Interval[ToQuantity(1), ToQuantity(2)] }
+define CollapseQuantityIntervalListWithNullHighNoOverlap: collapse QuantityIntervalListWithNullHighNoOverlap
+define CollapseQuantityIntervalListWithNullHighNoOverlapExpected: { Interval[ToQuantity(1), ToQuantity(2)], Interval[ToQuantity(4), null]}
+
+// @Test: DateIntervalExpand 
+define ClosedSinglePerDay: expand { Interval[@2018-01-01, @2018-01-03] } per day
+define ClosedSinglePerWeek: expand { Interval[@2018-01-01, @2018-01-21] } per week
+define ClosedSinglePerMonth: expand { Interval[@2018-01-01, @2018-03-31] } per month
+define ClosedSinglePerMonthTrunc: expand { Interval[@2018-01-01, @2018-04-29] } per month
+define ClosedSinglePerYear: expand { Interval[@2016-01-01, @2018-12-31] } per year
+define ClosedSinglePerYearTrunc: expand { Interval[@2016-01-01, @2019-12-30] } per year
+
+define MidBoundariesPerDay: expand { Interval[@2017-12-30, @2018-01-01] } per day
+define MidBoundariesPerMonth: expand { Interval[@2017-11-14, @2018-01-18] } per month
+define MidBoundariesPerYear: expand { Interval[@2016-04-06, @2018-04-06] } per year
+
+define NullInList: expand { Interval[@2018-01-01, @2018-01-03], null } per day
+define Overlapping: expand { Interval[@2018-01-01, @2018-01-03], Interval[@2018-01-02, @2018-01-04] } per day
+define NonOverlapping: expand { Interval[@2018-01-01, @2018-01-03], Interval[@2018-01-08, @2018-01-08] } per day
+
+define NoPerDefaultDay: expand { Interval[@2018-01-01, @2018-01-03] }
+define NoPerDefaultMonth: expand { Interval[@2018-01, @2018-03] }
+define NoPerDefaultYear: expand { Interval[@2016, @2018] }
+define NoPerDefaultMonthWithMismatch: expand { Interval[@2016, @2018-03] }
+
+define OpenStart: expand { Interval(@2018-01-01, @2018-01-03] } per day
+define OpenEnd: expand { Interval[@2018-01-01, @2018-01-03) } per day
+define OpenBoth: expand { Interval(@2018-01-01, @2018-01-03) } per day
+
+define MismatchPrecision: expand { Interval[@2018-01-01, @2018-03] } per month
+define MismatchPrecisionEmpty: expand { Interval[@2018-01, @2018-02-28] } per month
+
+define EmptyList: List<Interval<Date>>{}
+define NullOpen: expand { Interval[null, @2018-01-03] } per day
+define NullClose: expand { Interval[@2018-01-01, null] } per day
+define NullBoth: expand { Interval[null, null] } per day
+define MonthDayPer: expand { Interval[@2018-01, @2018-03] } per day
+define YearMonthPer: expand { Interval[@2016, @2018] } per month
+define YearDayPer: expand { Interval[@2016, @2018] } per day
+define BadPerMinute: expand { Interval[@2018-01-01, @2018-01-04] } per minute
+define BadPerGram: expand { Interval[@2018-01-01, @2018-01-04] } per 1 'g'
+
+
+// @Test: DateTimeIntervalExpand 
+define MsPrecPerYear: expand { Interval[@2016-01-01T00:00:00.000+00:00, @2018-01-01T00:00:00.000+00:00] } per year
+define MsPrecPerMonth: expand { Interval[@2018-01-01T00:00:00.000+00:00, @2018-03-01T00:00:00.000+00:00] } per month
+define MsPrecPerWeek: expand { Interval[@2018-01-01T00:00:00.000+00:00, @2018-01-21T00:00:00.000+00:00] } per week
+define MsPrecPerDay: expand { Interval[@2018-01-01T00:00:00.000+00:00, @2018-01-03T00:00:00.000+00:00] } per day
+define MsPrecPerHour: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T03:00:00.000+00:00] } per hour
+define MsPrecPerMinute: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:02:00.000+00:00] } per minute
+define MsPrecPerSecond: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:00:02.000+00:00] } per second
+define MsPrecPerMillisecond: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:00:00.001+00:00] } per millisecond
+
+define SecPrecPerYear: expand { Interval[@2016-01-01T00:00:00+00:00, @2018-01-01T00:00:00+00:00] } per year
+define SecPrecPerMonth: expand { Interval[@2018-01-01T00:00:00+00:00, @2018-03-01T00:00:00+00:00] } per month
+define SecPrecPerWeek: expand { Interval[@2018-01-01T00:00:00+00:00, @2018-01-21T00:00:00+00:00] } per week
+define SecPrecPerDay: expand { Interval[@2018-01-01T00:00:00+00:00, @2018-01-03T00:00:00+00:00] } per day
+define SecPrecPerHour: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T03:00:00+00:00] } per hour
+define SecPrecPerMinute: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T01:02:00+00:00] } per minute
+define SecPrecPerSecond: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T01:00:01+00:00] } per second
+define SecPrecPerMillisecond: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T01:00:00+00:00] } per millisecond
+
+define MinPrecPerYear: expand { Interval[@2016-01-01T00:00+00:00, @2018-01-01T00:00+00:00] } per year
+define MinPrecPerMonth: expand { Interval[@2018-01-01T00:00+00:00, @2018-03-01T00:00+00:00] } per month
+define MinPrecPerWeek: expand { Interval[@2018-01-01T00:00+00:00, @2018-01-21T00:00+00:00] } per week
+define MinPrecPerDay: expand { Interval[@2018-01-01T00:00+00:00, @2018-01-03T00:00+00:00] } per day
+define MinPrecPerHour: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T03:00+00:00] } per hour
+define MinPrecPerMinute: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T01:01+00:00] } per minute
+define MinPrecPerSecond: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T01:00+00:00] } per second
+define MinPrecPerMillisecond: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T01:00+00:00] } per millisecond
+
+define HourPrecPerYear: expand { Interval[@2016-01-01T00+00:00, @2018-01-01T00+00:00] } per year
+define HourPrecPerMonth: expand { Interval[@2018-01-01T00+00:00, @2018-03-01T00+00:00] } per month
+define HourPrecPerWeek: expand { Interval[@2018-01-01T00+00:00, @2018-01-21T00+00:00] } per week
+define HourPrecPerDay: expand { Interval[@2018-01-01T00+00:00, @2018-01-03T00+00:00] } per day
+define HourPrecPerHour: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T02+00:00] } per hour
+define HourPrecPerMinute: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T01+00:00] } per minute
+define HourPrecPerSecond: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T01+00:00] } per second
+define HourPrecPerMillisecond: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T01+00:00] } per millisecond
+
+define DayPrecPerYear: expand { Interval[DateTime(2016,01,01), DateTime(2018,01,01)] } per year
+define DayPrecPerMonth: expand { Interval[DateTime(2018,01,01), DateTime(2018,03,01)] } per month
+define DayPrecPerWeek: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,14)] } per week
+define DayPrecPerDay: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,02)] } per day
+define DayPrecPerHour: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,01)] } per hour
+define DayPrecPerMinute: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,01)] } per minute
+define DayPrecPerSecond: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,01)] } per second
+define DayPrecPerMillisecond: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,01)] } per millisecond
+
+define MonthPrecPerYear: expand { Interval[DateTime(2016,01), DateTime(2018,01)] } per year
+define MonthPrecPerMonth: expand { Interval[DateTime(2018,01), DateTime(2018,02)] } per month
+define MonthPrecPerWeek: expand { Interval[DateTime(2018,01), DateTime(2018,01)] } per week
+define MonthPrecPerDay: expand { Interval[DateTime(2018,01), DateTime(2018,01)] } per day
+define MonthPrecPerHour: expand { Interval[DateTime(2018,01), DateTime(2018,01)] } per hour
+define MonthPrecPerMinute: expand { Interval[DateTime(2018,01), DateTime(2018,01)] } per minute
+define MonthPrecPerSecond: expand { Interval[DateTime(2018,01), DateTime(2018,01)] } per second
+define MonthPrecPerMillisecond: expand { Interval[DateTime(2018,01), DateTime(2018,01)] } per millisecond
+
+define YearPrecPerYear: expand { Interval[DateTime(2016), DateTime(2018)] } per year
+define YearPrecPerMonth: expand { Interval[DateTime(2018), DateTime(2018)] } per month
+define YearPrecPerWeek: expand { Interval[DateTime(2018), DateTime(2018)] } per week
+define YearPrecPerDay: expand { Interval[DateTime(2018), DateTime(2018)] } per day
+define YearPrecPerHour: expand { Interval[DateTime(2018), DateTime(2018)] } per hour
+define YearPrecPerMinute: expand { Interval[DateTime(2018), DateTime(2018)] } per minute
+define YearPrecPerSecond: expand { Interval[DateTime(2018), DateTime(2018)] } per second
+define YearPrecPerMillisecond: expand { Interval[DateTime(2018), DateTime(2018)] } per millisecond
+
+define NullInList: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T01+00:00], null } per hour
+define Overlapping: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T03+00:00], Interval[@2018-01-01T02+00:00, @2018-01-01T04+00:00] } per hour
+define NonOverlapping: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T02+00:00], Interval[@2018-01-01T05+00:00, @2018-01-01T05+00:00] } per hour
+
+define NoPerDefaultMS: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:00:00.001+00:00] }
+define NoPerDefaultSec: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T01:00:01+00:00] }
+define NoPerDefaultMin: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T01:01+00:00] }
+define NoPerDefaultHour: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T01+00:00] }
+define NoPerDefaultDay: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,01)] }
+define NoPerDefaultMonth: expand { Interval[DateTime(2018,01), DateTime(2018,01)]  }
+define NoPerDefaultYear: expand { Interval[DateTime(2018), DateTime(2018)]  }
+
+define OpenStart: expand { Interval(@2018-01-01T01+00:00, @2018-01-03T01+00:00] } per day
+define OpenEnd: expand { Interval[@2018-01-01T01+00:00, @2018-01-03T01+00:00) } per day
+define OpenBoth: expand { Interval(@2018-01-01T01+00:00, @2018-01-03T01+00:00) } per day
+
+define MismatchPrecision: expand { Interval[@2012-01-01T12:00+00:00, @2012-01-02T12:00:00+00:00] } per day
+define MismatchPrecisionEmpty: expand { Interval[@2012-01-01T13:00:00+00:00, @2012-01-02T12:59+00:00] } per day
+
+define EmptyList: List<Interval<Date>>{}
+define NullOpen: expand { Interval[null, @2018-01-03T01+00:00] } per day
+define NullClose: expand { Interval[@2018-01-01T01+00:00, null] } per day
+define NullBoth: expand { Interval[null, null] } per day
+define BadPerGram: expand { Interval[@2018-01-01T01+00:00, @2018-01-04T01+00:00] } per 1 'g'
+
+// @Test: TimeIntervalExpand 
+define MsPrecPerHour: expand { Interval[@T01:00:00.000+00:00, @T03:00:00.000+00:00] } per hour
+define MsPrecPerMinute: expand { Interval[@T01:00:00.000+00:00, @T01:02:00.000+00:00] } per minute
+define MsPrecPerSecond: expand { Interval[@T01:00:00.000+00:00, @T01:00:02.000+00:00] } per second
+define MsPrecPerMillisecond: expand { Interval[@T01:00:00.000+00:00, @T01:00:00.001+00:00] } per millisecond
+
+define SecPrecPerHour: expand { Interval[@T01:00:00+00:00, @T03:00:00+00:00] } per hour
+define SecPrecPerMinute: expand { Interval[@T01:00:00+00:00, @T01:02:00+00:00] } per minute
+define SecPrecPerSecond: expand { Interval[@T01:00:00+00:00, @T01:00:01+00:00] } per second
+define SecPrecPerMillisecond: expand { Interval[@T01:00:00+00:00, @T01:00:00+00:00] } per millisecond
+
+define MinPrecPerHour: expand { Interval[@T01:00+00:00, @T03:00+00:00] } per hour
+define MinPrecPerMinute: expand { Interval[@T01:00+00:00, @T01:01+00:00] } per minute
+define MinPrecPerSecond: expand { Interval[@T01:00+00:00, @T01:00+00:00] } per second
+define MinPrecPerMillisecond: expand { Interval[@T01:00+00:00, @T01:00+00:00] } per millisecond
+
+define HourPrecPerHour: expand { Interval[@T01+00:00, @T02+00:00] } per hour
+define HourPrecPerMinute: expand { Interval[@T01+00:00, @T01+00:00] } per minute
+define HourPrecPerSecond: expand { Interval[@T01+00:00, @T01+00:00] } per second
+define HourPrecPerMillisecond: expand { Interval[@T01+00:00, @T01+00:00] } per millisecond
+
+
+// @Test: QuantityIntervalExpand 
+define ClosedSingleGPerG: expand { Interval[2 'g', 4 'g'] } per 1 'g'
+define ClosedSingleGPerGDecimal: expand { Interval[2.1 'g', 4.1 'g'] } per 1 'g'
+define ClosedSingleGPerMG: expand { Interval[2 'g', 2.003 'g'] } per 1 'mg'
+define ClosedSingleMGPerGTrunc: expand { Interval[2999 'mg', 4200 'mg'] } per 1 'g'
+define ClosedSingleMGPerMGTrunc: expand { Interval[2000 'mg', 4500 'mg'] } per 800 'mg'
+define ClosedSingleMGPerMGDecimal: expand { Interval[2000.01 'mg', 4500 'mg'] } per 800 'mg'
+
+define NullInList: expand { Interval[2 'g', 4 'g'], null } per 1 'g'
+define Overlapping: expand { Interval[2 'g', 4 'g'], Interval[3 'g', 5 'g'] } per 1 'g'
+define NonOverlapping: expand { Interval[2 'g', 4 'g'], Interval[6 'g', 6 'g'] } per 1 'g'
+
+define NoPerDefaultM: expand { Interval[2 'm', 400 'cm'] }
+define NoPerDefaultG: expand { Interval[2 'g', 4 'g'] }
+
+define OpenStart: expand { Interval(2 'g', 4 'g'] } per 1 'g'
+define OpenEnd: expand { Interval[2 'g', 4 'g') } per 1 'g'
+define OpenBoth: expand { Interval(2 'g', 4 'g') } per 1 'g'
+define OpenBothDecimal: expand { Interval(2.1 'g', 4.1 'g') } per 1 'g'
+define OpenBothDecimalTrunc: expand { Interval(2.1 'g', 4.101 'g') } per 1 'g'
+
+define EmptyList: List<Interval<Date>>{}
+define PerTooBig: expand { Interval[2 'g', 4 'g'], null } per 5 'g'
+define NullOpen: expand { Interval[null, 4 'g'] } per 1 'g'
+define NullClose: expand { Interval[2 'g', null] } per 1 'g'
+define NullBoth: expand { Interval[null, null] } per 1 'g'
+define BadPerMinute: expand { Interval(2 'g', 4 'g'] } per 1 minute
+define BadPerGram: expand { Interval(2 'km', 4 'km'] }  per 1 'g'
+
+
+// @Test: IntegerIntervalExpand
+define ClosedSinglePer1: expand { Interval[2, 4] } per 1 '1'
+define ClosedSinglePer3: expand { Interval[2, 10] } per 3 '1'
+define ClosedSinglePer3NoteTheWidth: expand { Interval[2, 4] } per 3 '1'
+
+define NullInList: expand { Interval[2, 4], null } per 1 '1'
+define Overlapping: expand { Interval[2, 4], Interval[3, 5] } per 1 '1'
+define NonOverlapping: expand { Interval[2, 4], Interval[6, 6] } per 1 '1'
+
+define NoPer: expand { Interval[2, 4] }
+
+define OpenStart: expand { Interval(2, 4] } per 1 '1'
+define OpenEnd: expand { Interval[2, 4) } per 1 '1'
+define OpenBoth: expand { Interval(2, 4) } per 1 '1'
+
+define EmptyList: List<Interval<Integer>>{}
+define PerTooBig: expand { Interval[2, 4], null } per 5 '1'
+define NullOpen: expand { Interval[null, 4] } per 1 '1'
+define NullClose: expand { Interval[2, null] } per 1 '1'
+define NullBoth: expand { Interval[null, null] } per 1 '1'
+define BadPerMinute: expand { Interval(2, 4] } per 1 minute
+
+// @Test: DecimalIntervalExpand
+define ClosedSingle: expand { Interval[2, 5] } per 1.5 '1'
+define ClosedSingle1: expand { Interval[2.5, 10] } per 2 '1'
+define ClosedSingle2: expand { Interval[2, 4.5] } per 0.5 '1'
+
+define NullInList: expand { Interval[2, 5], null } per 1.5 '1'
+define Overlapping: expand { Interval[2, 5], Interval[4, 7] } per 1.5 '1'
+define NonOverlapping: expand { Interval[2, 4], Interval[6, 8] } per 1.5 '1'
+
+define NoPer: expand { Interval[2.5, 4.5] }
+
+define OpenStart: expand { Interval(2, 5] } per 1.5 '1'
+define OpenEnd: expand { Interval[2, 5) } per 1.5 '1'
+define OpenBoth: expand { Interval(2, 5) } per 1.5 '1'
+
+define EmptyList: List<Interval<Decimal>>{}
+define PerTooBig: expand { Interval[2, 4], null } per 5.5 '1'
+define NullOpen: expand { Interval[null, 4] } per 1.5 '1'
+define NullClose: expand { Interval[2, null] } per 1.5 '1'
+define NullBoth: expand { Interval[null, null] } per 1.5 '1'
+define BadPerMinute: expand { Interval(2.1, 4.1] } per 0.5 minute
+
+// @Test: SameAs
+define NullBoth: Interval[null,null] same as Interval[null,null]
+define NullOne: Interval[DateTime(2018,01,01), DateTime(2018,02,02)] same as Interval[null,null]
+define Equal: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[DateTime(2018,01,01), DateTime(2018,01,01)]
+define NotEqual: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[DateTime(2018,02,01), DateTime(2018,05,01)]
+define DateTimeAndDateComparisonEqual: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[Date(2018,01,01), Date(2018,01,01)]
+define NullIntervals: (null as Interval<DateTime>) same as (null as Interval<DateTime>)
+define OpenAndClosed: Interval[DateTime(2018,01,01,00,00,00,0), DateTime(2019,01,01,00,00,00,0)) same as Interval[DateTime(2018,01,01,00,00,00,0), DateTime(2018,12,31,23,59,59,999)]
+define OpenEnded: Interval[DateTime(2018,01,01), null] same day as Interval[DateTime(2018,01,01), null]
+define OpenEndedNotSame: Interval[DateTime(2018,01,01), null] same day as Interval[DateTime(2018,01,01), DateTime(2019,01,01)]
+define OpenEndedNotSame2: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same day as Interval[DateTime(2018,01,01), null]
+define OpenBeginningSame: Interval[null,DateTime(2018,01,01)] same as Interval[null,DateTime(2018,01,01)]
+define OpenBeginningNotSame: Interval[DateTime(2017,01,01),DateTime(2018,01,01)] same as Interval[null,DateTime(2018,01,01)]
+define DateOpenAndClosed: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,03))
+define DateOpenEnded: Interval[Date(2018,01,01), null] same as Interval[Date(2018,01,01), null]
+define TimeOpenAndClosed: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(02,03))
+define TimeOpenEnded: Interval[Time(01,01), null] same as Interval[Time(01,01), null]
+define DateIntervalComparisonSame: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,02)]
+define DateIntervalComparisonNotSame: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,01)]
+define TimeIntervalComparisonSame: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(02,02)]
+define TimeIntervalComparisonNotSame: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(08,01)]
+define DateTimeYearPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same year as Interval[DateTime(2018,02,01), DateTime(2019,05,01)]
+define DateTimeYearPrecisionNotSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same year as Interval[DateTime(2018,02,01), DateTime(2020,05,01)]
+define DateYearPrecisionSame: Interval[Date(2018,01,01), Date(2019,01,01)] same year as Interval[Date(2018,02,01), Date(2019,05,01)]
+define DateYearPrecisionNotSame: Interval[Date(2018,01,01), Date(2019,01,01)] same year as Interval[Date(2018,02,01), Date(2020,05,01)]
+define DateTimeMonthPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same month as Interval[DateTime(2018,01,01), DateTime(2019,01,03)]
+define DateTimeMonthPrecisionNotSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same month as Interval[DateTime(2018,02,01), DateTime(2019,01,01)]
+define DateTimeDayPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same day as Interval[DateTime(2018,01,01,05), DateTime(2019,01,01,09)]
+define DateTimeDayPrecisionNotSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same day as Interval[DateTime(2018,01,01), DateTime(2019,01,02,06)]
+define DateTimeHourPrecisionSame: Interval[DateTime(2018,01,01,01), DateTime(2019,01,01,01)] same hour as Interval[DateTime(2018,01,01,01), DateTime(2019,01,01,01,05)]
+define DateTimeHourPrecisionNotSame: Interval[DateTime(2018,01,01,01,01), DateTime(2019,01,01,01)] same hour as Interval[DateTime(2018,01,01,06), DateTime(2019,01,01,01)]
+define DateTimeMinutePrecisionSame: Interval[DateTime(2018,01,01,01,01), DateTime(2019,01,01,01,01)] same minute as Interval[DateTime(2018,01,01,01,01,09), DateTime(2019,01,01,01,01,06)]
+define DateTimeMinutePrecisionNotSame: Interval[DateTime(2018,01,01,01,01), DateTime(2019,01,01,01,01)] same minute as Interval[DateTime(2018,01,01,06,03), DateTime(2019,01,01,01,06)]
+define DateTimeSecondPrecisionSame: Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,01,01)] same second as Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,01,01,07)]
+define DateTimeSecondPrecisionNotSame: Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,01,01)] same second as Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,07,55)]
+define DateTimeMillisecondPrecisionSame: Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)] same millisecond as Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)]
+define DateTimeMillisecondPrecisionNotSame: Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)] same millisecond as Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,09)]
+define IntegerIntervalSame: Interval[2,5] same as Interval[2,5]
+define IntegerIntervalNotSame: Interval[2,5] same as Interval[2,4]
+define IntegerIntervalSameOpen: Interval[2,5] same as Interval[2,6)
+define OpenNullHighLowDifferent: Interval(3,null) same as Interval(2,4)
+define OpenNullLowHighDifferent: Interval(1,5) same as Interval(null,4)
+define OpenNullHighLowSame: Interval(2,null) same as Interval(2,4)
+define OpenNullLowHighSame: Interval(1,4) same as Interval(null,4)
+define OpenNullLowOpenNullHigh: Interval(1,null) same as Interval(null,4)
+define OpenNullHighsLowsDifferent: Interval(1,null) same as Interval(2,null)
+define OpenNullHighsLowsSame: Interval(1,null) same as Interval(1,null)
+define OpenNullLowsHighsSame: Interval(null,3) same as Interval(null,3)

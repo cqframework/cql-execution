@@ -24,6 +24,24 @@ module.exports.DateTime = class DateTime extends Expression
     args = ((if @[p]? then @[p].execute(ctx)) for p in DateTime.PROPERTIES)
     new DT.DateTime(args...)
 
+module.exports.Date = class Date extends Expression
+  @PROPERTIES = ['year', 'month', 'day']
+  constructor: (@json) ->
+    super
+
+  # Define a simple getter to allow type-checking of this class without instanceof
+  # and in a way that survives minification (as opposed to checking constructor.name)
+  Object.defineProperties @prototype,
+    isDate:
+      get: -> true
+
+  exec: (ctx) ->
+    for property in Date.PROPERTIES
+      if @json[property]?
+        @[property] = build @json[property]
+    args = ((if @[p]? then @[p].execute(ctx)) for p in Date.PROPERTIES)
+    new DT.Date(args...)
+
 module.exports.Time = class Time extends Expression
   @PROPERTIES = ['hour', 'minute', 'second', 'millisecond', 'timezoneOffset']
   constructor: (json) ->
@@ -94,15 +112,6 @@ module.exports.TimezoneFrom = class TimezoneFrom extends Expression
   exec: (ctx) ->
     date = @execArgs(ctx)
     if date? then date.timezoneOffset else null
-
-module.exports.SameAs = class SameAs extends Expression
-  constructor: (json) ->
-    super
-    @precision = json.precision
-
-  exec: (ctx) ->
-    [d1, d2] = @execArgs(ctx)
-    if d1? and d2? then d1.sameAs(d2, @precision?.toLowerCase()) else null
 
 module.exports.SameOrAfter = class SameOrAfter extends Expression
   constructor: (json) ->

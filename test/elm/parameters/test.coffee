@@ -2,7 +2,7 @@ should = require 'should'
 setup = require '../../setup'
 data = require './data'
 {Code, Concept} = require '../../../lib/datatypes/clinical'
-{DateTime} = require '../../../lib/datatypes/datetime'
+{DateTime, Date} = require '../../../lib/datatypes/datetime'
 {Interval} = require '../../../lib/datatypes/interval'
 {Quantity} = require '../../../lib/elm/quantity'
 
@@ -161,7 +161,7 @@ describe 'DateTimeParameterTypes', ->
     should(() => @foo.exec(@ctx.withParameters { FooP: d })).throw(/.*wrong type.*/)
 
   it 'should execute to default value', ->
-    @foo2.exec(@ctx).should.eql DateTime.parse('2012-04-01')
+    @foo2.exec(@ctx).should.eql DateTime.parse('2012-04-01T12:11:10')
 
   it 'should execute to overriding valid value', ->
     d = DateTime.parse('2012-10-25T12:55:14.456+00')
@@ -169,6 +169,29 @@ describe 'DateTimeParameterTypes', ->
 
   it 'should throw when overriding value is wrong type', ->
     d = "2012-10-25T12:55:14.456+00"
+    should(() => @foo2.exec(@ctx.withParameters { FooP: d })).throw(/.*wrong type.*/)
+
+describe 'DateParameterTypes', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'should execute to provided valid value', ->
+    d = Date.parse('2012-10-25')
+    @foo.exec(@ctx.withParameters { FooP: d }).should.equal d
+
+  it 'should throw when provided value is wrong type', ->
+    d = "2012-10-25"
+    should(() => @foo.exec(@ctx.withParameters { FooP: d })).throw(/.*wrong type.*/)
+
+  it 'should execute to default value', ->
+    @foo2.exec(@ctx).should.eql Date.parse('2012-04-01')
+
+  it 'should execute to overriding valid value', ->
+    d = Date.parse('2012-10-25')
+    @foo2.exec(@ctx.withParameters { FooDP: d }).should.equal d
+
+  it 'should throw when overriding value is wrong type', ->
+    d = "2012-10-25"
     should(() => @foo2.exec(@ctx.withParameters { FooP: d })).throw(/.*wrong type.*/)
 
 describe 'QuantityParameterTypes', ->

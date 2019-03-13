@@ -1,11 +1,12 @@
 { Expression } = require './expression'
-{ typeIsArray , allTrue, anyTrue, compact, numerical_sort} = require '../util/util'
+{ typeIsArray , allTrue, anyTrue, removeNulls, numerical_sort} = require '../util/util'
 { build } = require './builder'
 { Exception } = require '../datatypes/exception'
+{ greaterThan, lessThan } = require '../util/comparison'
 Quantity = require './quantity'
 
 quantitiesOrArg = (arr) ->
-  arr = compact(arr)
+  arr = removeNulls(arr)
   # short curcuit empty arrays and return
   if arr.length == 0
     return arr
@@ -43,7 +44,7 @@ module.exports.Count = class Count extends AggregateExpression
   exec: (ctx) ->
     arg = @source.execute(ctx)
     if typeIsArray(arg)
-      compact(arg).length
+      removeNulls(arg).length
 
 module.exports.Sum = class Sum extends AggregateExpression
   constructor:(json) ->
@@ -56,26 +57,35 @@ module.exports.Sum = class Sum extends AggregateExpression
       val = if filtered.length == 0 then null else filtered.reduce (x,y) -> x+y
       quantityOrValue(val, arg)
 
-
 module.exports.Min = class Min extends AggregateExpression
   constructor:(json) ->
     super
 
   exec: (ctx) ->
-    arg = @source.execute(ctx)
-    if typeIsArray(arg)
-      filtered =  numerical_sort(quantitiesOrArg(arg),"asc")
-      quantityOrValue(filtered[0],arg)
+    list = @source.execute(ctx)
+    return null unless list?
+    listWithoutNulls = removeNulls(list)
+    return null unless listWithoutNulls.length > 0
+    # We assume the list is an array of all the same type.
+    minimum = listWithoutNulls[0]
+    for element in listWithoutNulls
+      minimum = element if lessThan(element, minimum)
+    return minimum
 
 module.exports.Max = class Max extends AggregateExpression
   constructor:(json) ->
     super
 
   exec: (ctx) ->
-    arg = @source.execute(ctx)
-    if typeIsArray(arg)
-      filtered =  numerical_sort(quantitiesOrArg(arg),"desc")
-      quantityOrValue(filtered[0],arg)
+    list = @source.execute(ctx)
+    return null unless list?
+    listWithoutNulls = removeNulls(list)
+    return null unless listWithoutNulls.length > 0
+    # We assume the list is an array of all the same type.
+    maximum = listWithoutNulls[0]
+    for element in listWithoutNulls
+      maximum = element if greaterThan(element, maximum)
+    maximum
 
 module.exports.Avg = class Avg extends  AggregateExpression
   constructor:(json) ->
@@ -113,7 +123,7 @@ module.exports.Mode = class Mode extends AggregateExpression
   exec: (ctx) ->
     arg = @source.execute(ctx)
     if typeIsArray(arg)
-      filtered = compact(arg)
+      filtered = removeNulls(arg)
       mode = @mode(filtered)
       if mode.length == 1 then mode[0] else mode
 
@@ -159,6 +169,43 @@ module.exports.StdDev = class StdDev extends AggregateExpression
     std_dev = Math.sqrt std_var
     pop_dev = Math.sqrt pop_var
     {standard_variance: std_var, population_variance: pop_var, standard_deviation: std_dev, population_deviation: pop_dev}
+
+module.exports.Product = class Product extends AggregateExpression
+  constructor:(json) ->
+    super
+
+  exec: (ctx) ->
+    listOfValues = @source.execute(ctx)
+    return null if listOfValues is null
+    [product, filtered] = productValue(listOfValues)
+    return null if product is null
+    return quantityOrValue(product, listOfValues)
+
+module.exports.GeometricMean = class GeometricMean extends AggregateExpression
+  constructor:(json) ->
+    super
+
+  exec: (ctx) ->
+    listOfValues = @source.execute(ctx)
+    return null if listOfValues is null
+    [product, filtered] = productValue(listOfValues)
+    return null if product is null
+    geoMean = Math.pow(product, 1.0 / filtered.length)
+    return geoMean
+
+productValue = (list) ->
+  product = 1
+  if typeIsArray(list)
+    filtered = removeNulls(list)
+    return [null, null] if filtered.length == 0
+    for item in filtered
+      if item.isQuantity
+        product = Quantity.doMultiplication(product,item)
+      else
+        product = product * item
+    return [product, filtered]
+  else
+    [null, null]
 
 module.exports.PopulationStdDev = class PopulationStdDev extends StdDev
   constructor:(json) ->

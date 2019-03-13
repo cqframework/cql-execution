@@ -21,6 +21,13 @@ define has_null_q: Min({1 'ml',null,-1 'ml',null,2 'ml'})
 define q_diff_units: Min({1 'ml',2 'dl',3 'l',4 'l',5 'l',0 'ml'})
 define q_throw1: Min({1 'ml',2 'm',3 'ml',4 'ml',5 'ml',0 'ml'})
 define q_throw2: Min({1 ,2 'ml',3 'ml',4 'ml',5 'ml',0 'ml'})
+define IntegerMin: Min({ 2, 4, 8, 6 })
+define DecimalMin: Min({ 5.0, 4.9, 5.1, -5.0 })
+define DateMin: Min({ @2012-12-31, @2013-01-01, @2012-01-01 })
+define DateTimeMin: Min({ DateTime(2012, 9, 9), DateTime(2012, 9, 5) })
+define TimeMin: Min({ Time(12, 30, 4), Time(12, 30, 3), Time(12, 30, 5)})
+define MinIsNull: Min({ null as Quantity, null as Quantity, null as Quantity })
+define MinIsAlsoNull: Min(null as List<Decimal>)
 
 // @Test: Max
 define not_null: Max({10,1,2,3,4,5})
@@ -32,6 +39,14 @@ define q_throw1: Max({10 'ml',1 'm',2 'ml',3 'ml',4 'ml',5 'ml'})
 define q_throw2: Max({10 ,1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 
 define empty: Max(List<Integer>{})
+
+define IntegerMax: Max({ 2, 4, 8, 6 })
+define DecimalMax: Max({ 5.0, 4.9, 5.1, -5.0 })
+define DateMax: Max({ @2012-12-31, @2013-01-01, @2012-01-01 })
+define DateTimeMax: Max({ DateTime(2012, 2, 3), DateTime(2012, 9, 5) })
+define TimeMax: Max({ Time(12, 30, 1), Time(12, 30, 3), Time(12, 30, 2)})
+define MaxIsNull: Max({ null as Quantity, null as Quantity, null as Quantity })
+define MaxIsAlsoNull: Max(null as List<Decimal>)
 
 // @Test: Avg
 define not_null: Avg({1,2,3,4,5})
@@ -93,6 +108,24 @@ define dev_q: PopulationStdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 define q_diff_units: PopulationStdDev({1 'ml', 0.002 'l',3 'ml',4 'ml', 0.05 'dl'})
 define q_throw1: PopulationStdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'm'})
 define q_throw2: PopulationStdDev({1 ,2 ,3 ,4 'ml',5 })
+
+// @Test: Product
+define decimal_product: Product({1.0, 2.0, 3.0, 4.0})
+define integer_product: Product({5, 4, 5})
+define zero_product: Product({0, 5, 10})
+define quantity_product: Product({1.0 'g', 2.0 'g', 3.0 'g', 4.0 'g'})
+define quantity_zero_product: Product({1.0 'g', 2.0 'g', 0 'g'})
+define product_with_null: Product({5, 4, null})
+define product_of_nulls: Product({null as Integer, null, null})
+define product_null: Product(null as List<Decimal>)
+define product_quantity_null: Product({null as Quantity, null as Quantity, null as Quantity})
+
+// @Test: GeometricMean
+define decimal_geometric_mean: GeometricMean({2.0, 8.0, null})
+define zero_geometric_mean: GeometricMean({2.0, 8.0, 0})
+define null_geometric_mean: GeometricMean({1, 2, null})
+define all_nulls: GeometricMean({null, null, null})
+define also_null_geometric_mean: GeometricMean(null as List<Decimal>)
 
 // @Test: AllTrue
 define at: AllTrue({true,true,true,true})

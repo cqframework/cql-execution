@@ -5,7 +5,7 @@ vsets = require './valuesets'
 DT = require '../../../lib/datatypes/datatypes'
 { PatientContext } =  require '../../../lib/cql'
 { Uncertainty } = require '../../../lib/datatypes/uncertainty'
-{ p1, p2 } = require './patients'
+{ p1, p2, p3 } = require './patients'
 { PatientSource} = require '../../../lib/cql-patient'
 
 
@@ -46,6 +46,15 @@ describe 'InValueSet', ->
   it 'should find string code in value set', ->
     @string.exec(@ctx).should.be.true()
 
+  it 'should throw an error when codes are in several codesystems', ->
+    should(() => @sharedCodesFoo.exec(@ctx)).throw('In (valueset) is ambiguous -- multiple codes with multiple code systems exist in value set.')
+
+  it 'should return false when there are multiple codesystems in a valueset but the string does not match any codes in valueset', ->
+    @sharedCodesNoMatch.exec(@ctx).should.be.false()
+
+  it 'should throw an error if not all codes have the same codesystem', ->
+    should(() => @improperSharedCodesCodeValue.exec(@ctx)).throw('In (valueset) is ambiguous -- multiple codes with multiple code systems exist in value set.')
+
   it 'should find string code in versioned value set', ->
     @stringInVersionedValueSet.exec(@ctx).should.be.true()
 
@@ -75,6 +84,18 @@ describe 'InValueSet', ->
 
   it 'should not find code if it is null', ->
     @nullCode.exec(@ctx).should.be.false()
+
+  it 'should return true if code in list is equivalent', ->
+    @inListOfCodes.exec(@ctx).should.be.true()
+
+  it 'should return true if code in list is equivalent using ExpressionRef', ->
+    @inListOfCodesExpressionRef.exec(@ctx).should.be.true()
+
+  it 'should return false if no code in list is equivalent', ->
+    @inWrongListOfCodes.exec(@ctx).should.be.false()
+
+  it 'should ignore null codes in list', ->
+    @listOfCodesWithNull.exec(@ctx).should.be.true()
 
 describe 'Patient Property In ValueSet', ->
   @beforeEach ->
@@ -161,7 +182,7 @@ describe 'CalculateAge', ->
     # p1 birth date is 1980-06-17
     @bday = new Date(1980, 5, 17)
     @bdayPlus20 = new Date(2000, 5, 18)
-    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(@bdayPlus20))
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromJSDate(@bdayPlus20))
 
     @today = @ctx.getExecutionDateTime()
     # according to spec, dates without timezones are in *current* time offset, so need to adjust
@@ -229,3 +250,20 @@ describe 'CalculateAgeAt', ->
 
   it 'should execute age at 1975 as -5 to -4 (since 1975 is not precise to days)', ->
     @ageAt1975.exec(@ctx).should.eql new Uncertainty(-5, -4)
+
+  it 'should give an uncertainty due to birthdate time component with (using AgeInYearsAt)', ->
+    setup @, data, [ p3 ]
+    @ageInYearsDateTimeArg.exec(@ctx).should.eql new Uncertainty(17, 18)
+
+  it 'should give an uncertainty due to birthdate time component (using CalculateAgeInYearsAt)', ->
+    setup @, data, [ p3 ]
+    @calculateAgeInYearsDateTimeArg.exec(@ctx).should.eql new Uncertainty(17, 18)
+
+  # TODO:unskip these tests after cql-to-elm updated to no longer implicitly convert these arguments
+  xit 'should convert birthdate to date, give 18 (using AgeInYearsAt)', ->
+    setup @, data, [ p3 ]
+    @ageInYearsDateArg.exec(@ctx).should.eql 18
+
+  xit 'should convert birthdate to date, give 18 (using CalculateAgeInYearsAt)', ->
+    setup @, data, [ p3 ]
+    @calculateAgeInYearsDateArg.exec(@ctx).should.eql 18

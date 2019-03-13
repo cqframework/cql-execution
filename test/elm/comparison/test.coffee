@@ -21,6 +21,21 @@ describe 'Equal', ->
     @eqTuples.exec(@ctx).should.be.true()
     @uneqTuples.exec(@ctx).should.be.false()
 
+  it 'should identify equal tuples with same fields null', ->
+    should(@eqTuplesWithNullFields.exec(@ctx)).be.true()
+
+  it 'should identify unequal tuples with same fields null', ->
+    should(@uneqTuplesWithNullFields.exec(@ctx)).be.false()
+
+  it 'should identify unequal tuples with different key names', ->
+    @tupleDifferentKeys.exec(@ctx).should.be.false()
+
+  it 'should identify uncertian tuples with same fields but one has a null field', ->
+    should(@uncertTuplesWithNullFieldOnOne.exec(@ctx)).be.null()
+
+  it 'should identify unequal tuples with different fields null', ->
+    @uncertTuplesWithDiffNullFields.exec(@ctx).should.be.false()
+
   it 'should identify equal/unequal DateTimes in same timezone', ->
     @eqDateTimes.exec(@ctx).should.be.true()
     @uneqDateTimes.exec(@ctx).should.be.false()
@@ -29,9 +44,27 @@ describe 'Equal', ->
     @eqDateTimesTZ.exec(@ctx).should.be.true()
     @uneqDateTimesTZ.exec(@ctx).should.be.false()
 
+  it 'should identify equal/unequal date times specified to only date level', ->
+    should(@eqDateTimesOnlyDate.exec(@ctx)).be.true()
+    should(@uneqDateTimesOnlyDate.exec(@ctx)).be.false()
+
+  it 'should identify case of a possibly equal date times with differing precisions', ->
+    should(@possiblyEqDateTimesOnlyDateOnOne.exec(@ctx)).be.null()
+
+  it 'should identify unequal date times with differing precisions', ->
+    should(@uneqDateTimesOnlyDateOnOne.exec(@ctx)).be.false()
+
   it 'should identify uncertain/unequal DateTimes when there is imprecision', ->
     should(@possiblyEqualDateTimes.exec(@ctx)).be.null()
     @impossiblyEqualDateTimes.exec(@ctx).should.be.false()
+
+  it 'should be false for all Date and DateTime equality', ->
+    @dateAndDateTimeEqual.exec(@ctx).should.be.false()
+    @dateAndDateTimeNotEqual.exec(@ctx).should.be.false()
+    @dateAndDateTimeUncertainEqual.exec(@ctx).should.be.false()
+    @dateTimeAndDateEqual.exec(@ctx).should.be.false()
+    @dateTimeAndDateNotEqual.exec(@ctx).should.be.false()
+    @dateTimeAndDateUncertainEqual.exec(@ctx).should.be.false()
 
   it 'should be false for 5 m = 4 m', ->
     @aGtB_Quantity.exec(@ctx).should.be.false()
@@ -51,14 +84,20 @@ describe 'Equal', ->
   it 'should be false for 5 m = 5 km', ->
     @aLtB_Quantity_diff.exec(@ctx).should.be.false()
 
-  it 'should throw IncompatibleTypesException for 5 Cel = 4 m', ->
-    should(() => @aGtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
+  it 'should be null for 5 Cel = 4 m', ->
+    should(@aGtB_Quantity_incompatible.exec(@ctx)).be.null()
 
-  it 'should throw IncompatibleTypesException for 5 Cel = 5 m', ->
-    should(() => @aEqB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
+  it 'should be null for 5 Cel = 5 m', ->
+    should(@aEqB_Quantity_incompatible.exec(@ctx)).be.null()
 
-  it 'should throw IncompatibleTypesException for 5 Cel = 40 m', ->
-    should(() => @aLtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
+  it 'should be null for 5 Cel = 40 m', ->
+    should(@aLtB_Quantity_incompatible.exec(@ctx)).be.null()
+
+  it 'should be true for 10mg:2dL = 15mg:3dL', ->
+    @eqRatios.exec(@ctx).should.be.true()
+  
+  it 'should be false for 10mg:2dL = 15mg:4dL', ->
+    @uneqRatios.exec(@ctx).should.be.false()
 
 describe 'NotEqual', ->
   @beforeEach ->
@@ -77,6 +116,18 @@ describe 'NotEqual', ->
     @eqTuples.exec(@ctx).should.be.false()
     @uneqTuples.exec(@ctx).should.be.true()
 
+  it 'should identify equal tuples with same fields null', ->
+    should(@eqTuplesWithNullFields.exec(@ctx)).be.false()
+
+  it 'should identify unequal tuples with same fields null', ->
+    should(@uneqTuplesWithNullFields.exec(@ctx)).be.true()
+
+  it 'should identify uncertian tuples with same fields but one has a null field', ->
+    should(@uncertTuplesWithNullFieldOnOne.exec(@ctx)).be.null()
+
+  it 'should identify unequal tuples with different fields null', ->
+    @uncertTuplesWithDiffNullFields.exec(@ctx).should.be.true()
+
   it 'should identify equal/unequal DateTimes in same timezone', ->
     @eqDateTimes.exec(@ctx).should.be.false()
     @uneqDateTimes.exec(@ctx).should.be.true()
@@ -85,9 +136,27 @@ describe 'NotEqual', ->
     @eqDateTimesTZ.exec(@ctx).should.be.false()
     @uneqDateTimesTZ.exec(@ctx).should.be.true()
 
+  it 'should identify equal/unequal date times specified to only date level', ->
+    should(@eqDateTimesOnlyDate.exec(@ctx)).be.false()
+    should(@uneqDateTimesOnlyDate.exec(@ctx)).be.true()
+
+  it 'should identify case of a possibly equal date times with differing precisions', ->
+    should(@possiblyEqDateTimesOnlyDateOnOne.exec(@ctx)).be.null()
+
+  it 'should identify unequal date times with differing precisions', ->
+    should(@uneqDateTimesOnlyDateOnOne.exec(@ctx)).be.true()
+
   it 'should identify uncertain/unequal DateTimes when there is imprecision', ->
     should(@possiblyEqualDateTimes.exec(@ctx)).be.null()
     @impossiblyEqualDateTimes.exec(@ctx).should.be.true()
+
+  it 'should be true for all Date and DateTime equality', ->
+    @dateAndDateTimeEqual.exec(@ctx).should.be.true()
+    @dateAndDateTimeNotEqual.exec(@ctx).should.be.true()
+    @dateAndDateTimeUncertainEqual.exec(@ctx).should.be.true()
+    @dateTimeAndDateEqual.exec(@ctx).should.be.true()
+    @dateTimeAndDateNotEqual.exec(@ctx).should.be.true()
+    @dateTimeAndDateUncertainEqual.exec(@ctx).should.be.true()
 
   it 'should be true for 5 m != 4 m', ->
     @aGtB_Quantity.exec(@ctx).should.be.true()
@@ -107,14 +176,14 @@ describe 'NotEqual', ->
   it 'should be true for 5 m != 5 km', ->
     @aLtB_Quantity_diff.exec(@ctx).should.be.true()
 
-  it 'should throw IncompatibleTypesException for 5 Cel != 4 m', ->
-    should(() => @aGtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
+  it 'should be null for 5 Cel != 4 m', ->
+    should(@aGtB_Quantity_incompatible.exec(@ctx)).be.null()
 
-  it 'should throw IncompatibleTypesException for 5 Cel != 5 m', ->
-    should(() => @aEqB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
+  it 'should be null for 5 Cel != 5 m', ->
+    should(@aEqB_Quantity_incompatible.exec(@ctx)).be.null()
 
-  it 'should throw IncompatibleTypesException for 5 Cel != 40 m', ->
-    should(() => @aLtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
+  it 'should be null for 5 Cel != 40 m', ->
+    should(@aLtB_Quantity_incompatible.exec(@ctx)).be.null()
 
 describe 'Equivalent', ->
   @beforeEach ->
@@ -122,6 +191,9 @@ describe 'Equivalent', ->
 
   it 'should be false for null ~ 4', ->
     @aNull_BDefined.exec(@ctx).should.be.false()
+
+  it 'should be false for ratio compared to date', ->
+    @uneqRatioTypes.exec(@ctx).should.be.false()
 
   it 'should be false for 5 ~ null', ->
     @aDefined_BNull.exec(@ctx).should.be.false()
@@ -131,6 +203,15 @@ describe 'Equivalent', ->
 
   it 'should be true for 3 ~ 3', ->
     @aDefined_BDefined.exec(@ctx).should.be.true()
+
+  it 'should be true for FOO ~ foo', ->
+    @caseInsensitiveStrings.exec(@ctx).should.be.true()
+
+  it 'should be true for 10mg:2dL ~ 15mg:3dL', ->
+    @eqRatios.exec(@ctx).should.be.true()
+  
+  it 'should be false for 10mg:2dL ~ 15mg:4dL', ->
+    @uneqRatios.exec(@ctx).should.be.false()
 
   describe 'Tuples', ->
     it.skip 'should return true for empty tuples', ->
@@ -241,14 +322,14 @@ describe 'Less', ->
   it 'should be false for 5 m < 5 km', ->
     @aLtB_Quantity_diff.exec(@ctx).should.be.true()
 
-  it 'should throw IncompatibleTypesException for 5 Cel < 4 m', ->
-    should(() => @aGtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
+  it 'should be null for 5 Cel < 4 m', ->
+    should(@aGtB_Quantity_incompatible.exec(@ctx)).be.null()
 
-  it 'should throw IncompatibleTypesException for 5 Cel < 5 m', ->
-    should(() => @aEqB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
+  it 'should be null for 5 Cel < 5 m', ->
+    should(@aEqB_Quantity_incompatible.exec(@ctx)).be.null()
 
-  it 'should throw IncompatibleTypesException for 5 Cel < 40 m', ->
-    should(() => @aLtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
+  it 'should be null for 5 Cel < 40 m', ->
+    should(@aLtB_Quantity_incompatible.exec(@ctx)).be.null()
 
 describe 'LessOrEqual', ->
   @beforeEach ->
@@ -281,14 +362,14 @@ describe 'LessOrEqual', ->
   it 'should be false for 5 m <= 5 km', ->
     @aLtB_Quantity_diff.exec(@ctx).should.be.true()
 
-  it 'should throw IncompatibleTypesException for 5 Cel <= 4 m', ->
-    should(() => @aGtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'Cel' and 'm'")
+  it 'should be null for 5 Cel <= 4 m', ->
+    should(@aGtB_Quantity_incompatible.exec(@ctx)).be.null()
 
-  it 'should throw IncompatibleTypesException for 5 Cel <= 5 m', ->
-    should(() => @aEqB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'Cel' and 'm'")
+  it 'should be null for 5 Cel <= 5 m', ->
+    should(@aEqB_Quantity_incompatible.exec(@ctx)).be.null()
 
-  it 'should throw IncompatibleTypesException for 5 Cel <= 40 m', ->
-    should(() => @aLtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'Cel' and 'm'")
+  it 'should be null for 5 Cel <= 40 m', ->
+    should(@aLtB_Quantity_incompatible.exec(@ctx)).be.null()
 
 describe 'Greater', ->
   @beforeEach ->
@@ -321,14 +402,14 @@ describe 'Greater', ->
   it 'should be false for 5 m > 5 km', ->
     @aLtB_Quantity_diff.exec(@ctx).should.be.false()
 
-  it 'should throw IncompatibleTypesException for 5 Cel > 4 m', ->
-    should(() => @aGtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'Cel' and 'm'")
+  it 'should be null for 5 Cel > 4 m', ->
+    should(@aGtB_Quantity_incompatible.exec(@ctx)).be.null()
 
-  it 'should throw IncompatibleTypesException for 5 Cel > 5 m', ->
-    should(() => @aEqB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'Cel' and 'm'")
+  it 'should be null for 5 Cel > 5 m', ->
+    should(@aEqB_Quantity_incompatible.exec(@ctx)).be.null()
 
-  it 'should throw IncompatibleTypesException for 5 Cel > 40 m', ->
-    should(() => @aLtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'Cel' and 'm'")
+  it 'should be null for 5 Cel > 40 m', ->
+    should(@aLtB_Quantity_incompatible.exec(@ctx)).be.null()
 
 describe 'GreaterOrEqual', ->
   @beforeEach ->
@@ -361,17 +442,17 @@ describe 'GreaterOrEqual', ->
   it 'should be false for 5 m  >=5 km', ->
     @aLtB_Quantity_diff.exec(@ctx).should.be.false()
 
-  it 'should throw IncompatibleTypesException for 5 Cel >= 4 m', ->
-    should(() => @aGtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
+  it 'should be null for 5 Cel >= 4 m', ->
+    should(@aGtB_Quantity_incompatible.exec(@ctx)).be.null()
 
-  it 'should throw IncompatibleTypesException for 5 Cel >= 5 m', ->
-    should(() => @aEqB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
+  it 'should be null for 5 Cel >= 5 m', ->
+    should(@aEqB_Quantity_incompatible.exec(@ctx)).be.null()
 
-  it 'should throw IncompatibleTypesException for 5 Cel >= 40 m', ->
-    should(() => @aLtB_Quantity_incompatible.exec(@ctx)).throw("Incompatible Types 'm' and 'Cel'")
+  it 'should be null for 5 Cel >= 40 m', ->
+    should(@aLtB_Quantity_incompatible.exec(@ctx)).be.null()
 
-  it 'should throw IncompatibleTypesException for 100 [nmi_i] / 2 h > 49 mg/[lb_av]', ->
-    should(() => @divideUcum_incompatible.exec(@ctx)).throw("Incompatible Types '[nmi_i]/h' and 'mg/[lb_av]'")
+  it 'should be null for 100 [nmi_i] / 2 h > 49 mg/[lb_av]', ->
+    should(@divideUcum_incompatible.exec(@ctx)).be.null()
 
   it 'should be true for 100 mg / 2 [lb_av]  > 49 mg/[lb_av]', ->
     @divideUcum.exec(@ctx).should.be.true()

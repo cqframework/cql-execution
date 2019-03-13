@@ -158,28 +158,17 @@ describe 'Today', ->
     setup @, data
     @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters)
 
-  it 'should return only day components and timezone of today', ->
+  it 'should return date of today', ->
     today = @todayVar.exec @ctx
-    today.isTime().should.be.false()
+    today.isDate.should.be.true()
     today.year.should.equal @ctx.getExecutionDateTime().year
     today.month.should.equal @ctx.getExecutionDateTime().month
     today.day.should.equal @ctx.getExecutionDateTime().day
-    today.timezoneOffset.should.equal @ctx.getTimezoneOffset()
-    should.not.exist(today[field]) for field in [ 'hour', 'minute', 'second', 'millisecond' ]
-
-  it 'should return only day components and timezone of today using the passed in timezone', ->
-    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
-    today = @todayVar.exec @ctx
-    today.isTime().should.be.false()
-    today.year.should.equal @ctx.getExecutionDateTime().year
-    today.month.should.equal @ctx.getExecutionDateTime().month
-    today.day.should.equal @ctx.getExecutionDateTime().day
-    today.timezoneOffset.should.equal "0"
-    should.not.exist(today[field]) for field in [ 'hour', 'minute', 'second', 'millisecond' ]
+    should.not.exist(today[field]) for field in [ 'hour', 'minute', 'second', 'millisecond', 'timezoneOffset' ]
 
   it 'should throw an exception because no execution datetime has been set', ->
     try
-      @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
+      @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromJSDate(new Date(), '0'))
       @ctx.executionDateTime = @ctx.executionDateTime = null
       @todayVar.exec(@ctx).should.equal "No Execution DateTime has been set"
     catch
@@ -202,7 +191,7 @@ describe 'Now', ->
     now.timezoneOffset.should.equal @ctx.getTimezoneOffset()
 
   it 'should return all date components representing now using a passed in timezone', ->
-    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromJSDate(new Date(), '0'))
     now = @nowVar.exec @ctx
     now.isTime().should.be.false()
     now.year.should.equal @ctx.getExecutionDateTime().year
@@ -215,7 +204,7 @@ describe 'Now', ->
     now.timezoneOffset.should.equal "0"
 
   it 'should return all date components representing now using a passed in timezone using a child context', ->
-    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromDate(new Date(), '0'))
+    @ctx = new PatientContext(@ctx.library, @ctx.patient, @ctx.codeService, @ctx.parameters, DT.DateTime.fromJSDate(new Date(), '0'))
     @child_ctx = @ctx.childContext()
     now = @nowVar.exec @child_ctx
     now.isTime().should.be.false()
@@ -284,7 +273,7 @@ describe 'DateTimeComponentFrom', ->
     }
 
   it 'should return null for null date', ->
-    should(@nullDate.exec(@ctx)).be.null
+    should(@nullDate.exec(@ctx)).be.null()
 
 describe 'DateFrom', ->
   @beforeEach ->
@@ -295,7 +284,7 @@ describe 'DateFrom', ->
     date.year.should.equal 2000
     date.month.should.equal 3
     date.day.should.equal 15
-    date.timezoneOffset.should.equal 1
+    should.not.exist date.timezoneOffset
     should.not.exist date.hour
     should.not.exist date.minute
     should.not.exist date.second
@@ -312,7 +301,7 @@ describe 'DateFrom', ->
     should.not.exist date.millisecond
 
   it 'should return null for null date', ->
-    should(@nullDate.exec(@ctx)).be.null
+    should(@nullDate.exec(@ctx)).be.null()
 
 describe 'TimeFrom', ->
   @beforeEach ->
@@ -340,7 +329,7 @@ describe 'TimeFrom', ->
     should.not.exist noTime.millisecond
 
   it 'should return null for null date', ->
-    should(@nullDate.exec(@ctx)).be.null
+    should(@nullDate.exec(@ctx)).be.null()
 
 describe 'TimezoneFrom', ->
   @beforeEach ->
@@ -354,7 +343,7 @@ describe 'TimezoneFrom', ->
     @defaultTimezone.exec(@ctx).should.equal (new Date()).getTimezoneOffset() / 60 * -1
 
   it 'should return null for null date', ->
-    should(@nullDate.exec(@ctx)).be.null
+    should(@nullDate.exec(@ctx)).be.null()
 
 describe 'SameAs', ->
   @beforeEach ->
@@ -403,13 +392,13 @@ describe 'SameAs', ->
     @sameHourWrongTimezone.exec(@ctx).should.be.false()
 
   it 'should handle imprecision', ->
-    should(@impreciseHour.exec(@ctx)).be.null
+    should(@impreciseHour.exec(@ctx)).be.null()
     @impreciseHourWrongDay.exec(@ctx).should.be.false()
 
   it 'should return null when either argument is null', ->
-    should(@nullLeft.exec(@ctx)).be.null
-    should(@nullRight.exec(@ctx)).be.null
-    should(@nullBoth.exec(@ctx)).be.null
+    should(@nullLeft.exec(@ctx)).be.null()
+    should(@nullRight.exec(@ctx)).be.null()
+    should(@nullBoth.exec(@ctx)).be.null()
 
 describe 'SameOrAfter', ->
   @beforeEach ->
@@ -461,7 +450,7 @@ describe 'SameOrAfter', ->
     @dayBeforeMonthAfter.exec(@ctx).should.be.true()
 
   it 'should handle imprecision', ->
-    should(@impreciseDay.exec(@ctx)).be.null
+    should(@impreciseDay.exec(@ctx)).be.null()
     @impreciseDayMonthAfter.exec(@ctx).should.be.true()
     @impreciseDayMonthBefore.exec(@ctx).should.be.false()
 
@@ -471,9 +460,25 @@ describe 'SameOrAfter', ->
     @hourBeforeNormalizeZones.exec(@ctx).should.be.false()
 
   it 'should return null when either argument is null', ->
-    should(@nullLeft.exec(@ctx)).be.null
-    should(@nullRight.exec(@ctx)).be.null
-    should(@nullBoth.exec(@ctx)).be.null
+    should(@nullLeft.exec(@ctx)).be.null()
+    should(@nullRight.exec(@ctx)).be.null()
+    should(@nullBoth.exec(@ctx)).be.null()
+
+  it 'should properly treat "on or after" the same as "same or after"', ->
+    @sameOOA.exec(@ctx).should.be.true()
+    @afterOOA.exec(@ctx).should.be.true()
+    @beforeOOA.exec(@ctx).should.be.false()
+    should(@nullLeftOOA.exec(@ctx)).be.null()
+    should(@nullRightOOA.exec(@ctx)).be.null()
+    should(@nullBothOOA.exec(@ctx)).be.null()
+
+  it 'should properly treat "after or on" the same as "same or after"', ->
+    @sameAOO.exec(@ctx).should.be.true()
+    @afterAOO.exec(@ctx).should.be.true()
+    @beforeAOO.exec(@ctx).should.be.false()
+    should(@nullLeftAOO.exec(@ctx)).be.null()
+    should(@nullRightAOO.exec(@ctx)).be.null()
+    should(@nullBothAOO.exec(@ctx)).be.null()
 
 describe 'SameOrBefore', ->
   @beforeEach ->
@@ -525,7 +530,7 @@ describe 'SameOrBefore', ->
     @dayBeforeMonthAfter.exec(@ctx).should.be.false()
 
   it 'should handle imprecision', ->
-    should(@impreciseDay.exec(@ctx)).be.null
+    should(@impreciseDay.exec(@ctx)).be.null()
     @impreciseDayMonthAfter.exec(@ctx).should.be.false()
     @impreciseDayMonthBefore.exec(@ctx).should.be.true()
 
@@ -535,9 +540,25 @@ describe 'SameOrBefore', ->
     @hourBeforeNormalizeZones.exec(@ctx).should.be.true()
 
   it 'should return null when either argument is null', ->
-    should(@nullLeft.exec(@ctx)).be.null
-    should(@nullRight.exec(@ctx)).be.null
-    should(@nullBoth.exec(@ctx)).be.null
+    should(@nullLeft.exec(@ctx)).be.null()
+    should(@nullRight.exec(@ctx)).be.null()
+    should(@nullBoth.exec(@ctx)).be.null()
+
+  it 'should properly treat "on or before" the same as "same or before"', ->
+    @sameOOB.exec(@ctx).should.be.true()
+    @afterOOB.exec(@ctx).should.be.false()
+    @beforeOOB.exec(@ctx).should.be.true()
+    should(@nullLeftOOB.exec(@ctx)).be.null()
+    should(@nullRightOOB.exec(@ctx)).be.null()
+    should(@nullBothOOB.exec(@ctx)).be.null()
+
+  it 'should properly treat "before or on" the same as "same or before"', ->
+    @sameBOO.exec(@ctx).should.be.true()
+    @afterBOO.exec(@ctx).should.be.false()
+    @beforeBOO.exec(@ctx).should.be.true()
+    should(@nullLeftBOO.exec(@ctx)).be.null()
+    should(@nullRightBOO.exec(@ctx)).be.null()
+    should(@nullBothBOO.exec(@ctx)).be.null()
 
 describe 'After', ->
   @beforeEach ->
@@ -584,7 +605,7 @@ describe 'After', ->
     @before.exec(@ctx).should.be.false()
 
   it 'should handle imprecision', ->
-    should(@impreciseDay.exec(@ctx)).be.null
+    should(@impreciseDay.exec(@ctx)).be.null()
     @impreciseDayMonthAfter.exec(@ctx).should.be.true()
     @impreciseDayMonthBefore.exec(@ctx).should.be.false()
 
@@ -594,9 +615,9 @@ describe 'After', ->
     @hourBeforeNormalizeZones.exec(@ctx).should.be.false()
 
   it 'should return null when either argument is null', ->
-    should(@nullLeft.exec(@ctx)).be.null
-    should(@nullRight.exec(@ctx)).be.null
-    should(@nullBoth.exec(@ctx)).be.null
+    should(@nullLeft.exec(@ctx)).be.null()
+    should(@nullRight.exec(@ctx)).be.null()
+    should(@nullBoth.exec(@ctx)).be.null()
 
 describe 'Before', ->
   @beforeEach ->
@@ -643,7 +664,7 @@ describe 'Before', ->
     @before.exec(@ctx).should.be.true()
 
   it 'should handle imprecision', ->
-    should(@impreciseDay.exec(@ctx)).be.null
+    should(@impreciseDay.exec(@ctx)).be.null()
     @impreciseDayMonthAfter.exec(@ctx).should.be.false()
     @impreciseDayMonthBefore.exec(@ctx).should.be.true()
 
@@ -653,9 +674,9 @@ describe 'Before', ->
     @hourBeforeNormalizeZones.exec(@ctx).should.be.true()
 
   it 'should return null when either argument is null', ->
-    should(@nullLeft.exec(@ctx)).be.null
-    should(@nullRight.exec(@ctx)).be.null
-    should(@nullBoth.exec(@ctx)).be.null
+    should(@nullLeft.exec(@ctx)).be.null()
+    should(@nullRight.exec(@ctx)).be.null()
+    should(@nullBoth.exec(@ctx)).be.null()
 
 describe 'DifferenceBetween', ->
   @beforeEach ->
@@ -728,32 +749,32 @@ describe 'DifferenceBetween Comparisons', ->
 
   it 'should calculate days between > x', ->
     @greaterThan25DaysAfter.exec(@ctx).should.be.true()
-    should(@greaterThan40DaysAfter.exec(@ctx)).be.null
+    should(@greaterThan40DaysAfter.exec(@ctx)).be.null()
     @greaterThan80DaysAfter.exec(@ctx).should.be.false()
 
   it 'should calculate days between >= x', ->
     @greaterOrEqualTo25DaysAfter.exec(@ctx).should.be.true()
-    should(@greaterOrEqualTo40DaysAfter.exec(@ctx)).be.null
+    should(@greaterOrEqualTo40DaysAfter.exec(@ctx)).be.null()
     @greaterOrEqualTo80DaysAfter.exec(@ctx).should.be.false()
 
   it 'should calculate days between = x', ->
     @equalTo25DaysAfter.exec(@ctx).should.be.false()
-    should(@equalTo40DaysAfter.exec(@ctx)).be.null
+    should(@equalTo40DaysAfter.exec(@ctx)).be.null()
     @equalTo80DaysAfter.exec(@ctx).should.be.false()
 
   it 'should calculate days between <= x', ->
     @lessOrEqualTo25DaysAfter.exec(@ctx).should.be.false()
-    should(@lessOrEqualTo40DaysAfter.exec(@ctx)).be.null
+    should(@lessOrEqualTo40DaysAfter.exec(@ctx)).be.null()
     @lessOrEqualTo80DaysAfter.exec(@ctx).should.be.true()
 
   it 'should calculate days between < x', ->
     @lessThan25DaysAfter.exec(@ctx).should.be.false()
-    should(@lessThan40DaysAfter.exec(@ctx)).be.null
+    should(@lessThan40DaysAfter.exec(@ctx)).be.null()
     @lessThan80DaysAfter.exec(@ctx).should.be.true()
 
   it 'should calculate other way too', ->
     @twentyFiveDaysLessThanDaysBetween.exec(@ctx).should.be.true()
-    should(@fortyDaysEqualToDaysBetween.exec(@ctx)).be.null
+    should(@fortyDaysEqualToDaysBetween.exec(@ctx)).be.null()
     @twentyFiveDaysGreaterThanDaysBetween.exec(@ctx).should.be.false()
 
   it 'should properly determine that Sep to Dec is NOT <= 2 months', ->
