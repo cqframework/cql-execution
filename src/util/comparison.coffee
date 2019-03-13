@@ -5,7 +5,10 @@ areNumbers = (a, b) ->
   typeof a is 'number' and typeof b is 'number'
 
 areDateTimesOrQuantities = (a, b) ->
-  (a instanceof DateTime and b instanceof DateTime) or (a?.isQuantity and b?.isQuantity)
+  a?.isDateTime and b?.isDateTime or
+  a?.isDate and b?.isDate or
+  a?.isTime and b?.isTime or
+  a?.isQuantity and b?.isQuantity
 
 isUncertainty = (x) ->
   x instanceof Uncertainty

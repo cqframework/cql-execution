@@ -1,4 +1,4 @@
-module.exports.compact = (things)-> things.filter (x)-> x?
+module.exports.removeNulls = (things) -> things.filter (x) -> x?
 
 module.exports.numerical_sort = (things, direction="asc") ->
   things.sort (a,b)->

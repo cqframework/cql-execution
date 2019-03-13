@@ -64,7 +64,7 @@
     "coffeescript": "^1.12.7",
     "coveralls": "^3.0.2",
     "mocha": "^5.2.0",
-    "nyc": "^11.4.1",
+    "nyc": "^13.3.0",
     "should": "^11.2.1"
   },
   "dependencies": {
