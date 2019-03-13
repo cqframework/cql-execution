@@ -152,7 +152,7 @@ module.exports.equals = equals = (a, b) ->
     when '[object Object]'
       return compareObjects(a, b, equals)
     when '[object Function]'
-      return a is b
+      return a.toString() == b.toString()
 
   # If we made it this far, we can't handle it
   return false
