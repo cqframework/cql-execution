@@ -3,6 +3,12 @@
 module.exports.Code = class Code
   constructor: (@code, @system, @version, @display) ->
 
+  # Define a simple getter to allow type-checking of this class without instanceof
+  # and in a way that survives minification (as opposed to checking constructor.name)
+  Object.defineProperties @prototype,
+    isCode:
+      get: -> true
+
   hasMatch: (code) ->
     if typeof code is 'string'
       # the specific behavior for this is not in the specification. Matching codesystem behavior.

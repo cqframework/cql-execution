@@ -11,7 +11,10 @@ module.exports.Uncertainty = class Uncertainty
         # Uncertainties with different types probably shouldn't be supported.
         return false
       if typeof a.after is 'function' then a.after b else a > b
+    isNonEnumerable = (val) ->
+      val? and (val.isCode or val.isConcept or val.isValueSet)
     if typeof @high is 'undefined' then @high = @low
+    if isNonEnumerable(@low) || isNonEnumerable(@high) then @low = @high = null 
     if @low? and @high? and gt(@low, @high) then [@low, @high] = [@high, @low]
 
    copy: ->
