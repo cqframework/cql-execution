@@ -70,7 +70,11 @@ describe 'SplitOnMatches', ->
     @splitOnMatchesListReturn.exec(@ctx).should.eql ["foo ", " bar"]
 
   it 'should return a list of two empty strings if its an exact match', ->
+<<<<<<< HEAD
     @splitOnMatchesOriginalString.exec(@ctx).should.eql ['','']
+=======
+    @splitOnMatchesOriginalString.exec(@ctx).should.eql ['', '']
+>>>>>>> Updated tests
 
   it 'should return original string because there was no match', ->
     @splitOnMatchesNoMatch.exec(@ctx).should.eql ['foobar']
