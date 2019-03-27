@@ -40,7 +40,7 @@ module.exports.SplitOnMatches = class SplitOnMatches extends Expression
   exec: (ctx) ->
     stringToSplit = @stringToSplit.execute(ctx)
     separatorPattern = @separatorPattern.execute(ctx)
-    if not (stringToSplit?) then null else stringToSplit.split(new RegExp(separatorPattern))
+    if not (stringToSplit? and separatorPattern?) then null else stringToSplit.split(new RegExp(separatorPattern))
 
 # Length is completely handled by overloaded#Length
 
@@ -76,13 +76,10 @@ module.exports.PositionOf = class PositionOf extends Expression
 module.exports.Matches = class Matches extends Expression
   constructor: (json) ->
     super
-    @string = build json.string
-    @pattern = build json.pattern
 
   exec: (ctx) ->
-    string = @string.execute(ctx)
-    pattern = @pattern.execute(ctx)
-    return null if not (pattern? and string?)
+    [string, pattern] = @execArgs ctx
+    return null if not (string? and pattern?)
     if string.match(new RegExp(pattern)) then true else false
 
 module.exports.Substring = class Substring extends Expression

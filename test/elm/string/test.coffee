@@ -62,6 +62,47 @@ describe 'Split', ->
   it 'should return null when the separator is null', ->
     should(@separateUsingNull.exec(@ctx)).be.null()
 
+describe 'SplitOnMatches', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'should splitOnMatches strings into a list of 2', ->
+    @splitOnMatchesListReturn.exec(@ctx).should.eql ["foo ", " bar"]
+
+  it 'should return a list of two empty strings if its an exact match', ->
+    @splitOnMatchesOriginalString.exec(@ctx).should.eql ['','']
+
+  it 'should return original string because there was no match', ->
+    @splitOnMatchesNoMatch.exec(@ctx).should.eql ['foobar']
+
+  it 'should return null when stringToSplit is null', ->
+    should(@splitOnMatchesIsNullFirst.exec(@ctx)).be.null()
+
+  it 'should return null when separatorPattern is null', ->
+    should(@splitOnMatchesIsNullSecond.exec(@ctx)).be.null()
+
+  it 'should return null when both parameters are null', ->
+    should(@splitOnMatchesAllNull.exec(@ctx)).be.null()
+
+describe 'Matches', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'should match and return true', ->
+    @matchesTrue.exec(@ctx).should.be.true()
+  
+  it 'should not match and return false', ->
+    @matchesFalse.exec(@ctx).should.be.false()
+
+  it 'should not match when string to match is null and return null', ->
+    should(@matchesIsNullFirst.exec(@ctx)).be.null()
+
+  it 'should not match and return null', ->
+    should(@matchesIsNullSecond.exec(@ctx)).be.null()
+
+  it 'should return null if both arguments are null', ->
+    should(@matchesAllNull.exec(@ctx)).be.null()
+
 describe 'Length', ->
   @beforeEach ->
     setup @, data

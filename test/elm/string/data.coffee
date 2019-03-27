@@ -1171,25 +1171,16 @@ module.exports['Split'] = {
 library TestSnippet version '1'
 using QUICK
 context Patient
-define Foo: SplitOnMatches('foo','v')
+define SplitOnMatchesListReturn: SplitOnMatches('foo 1,2three bar', '\\d,\\d\\w+')
+define SplitOnMatchesOriginalString: SplitOnMatches('1,2three', '\\w,\\w+')
+define SplitOnMatchesNoMatch: SplitOnMatches('foobar', '\\d')
+define SplitOnMatchesIsNullFirst: SplitOnMatches(null, '\\w+')
+define SplitOnMatchesIsNullSecond: SplitOnMatches('12three', null)
+define SplitOnMatchesAllNull: SplitOnMatches(null, null)
 ###
 
-###
-Translation Error(s):
-[4:13, 4:37] Index: 12, Size: 2
-###
 module.exports['SplitOnMatches'] = {
    "library" : {
-      "annotation" : [ {
-         "startLine" : 4,
-         "startChar" : 13,
-         "endLine" : 4,
-         "endChar" : 37,
-         "message" : "Index: 12, Size: 2",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1222,7 +1213,7 @@ module.exports['SplitOnMatches'] = {
             }
          }, {
             "localId" : "5",
-            "name" : "Foo",
+            "name" : "SplitOnMatchesListReturn",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -1230,7 +1221,7 @@ module.exports['SplitOnMatches'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","Foo",": " ]
+                     "value" : [ "define ","SplitOnMatchesListReturn",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -1238,14 +1229,14 @@ module.exports['SplitOnMatches'] = {
                      }, {
                         "r" : "2",
                         "s" : [ {
-                           "value" : [ "'foo'" ]
+                           "value" : [ "'foo 1,2three bar'" ]
                         } ]
                      }, {
-                        "value" : [ "," ]
+                        "value" : [ ", " ]
                      }, {
                         "r" : "3",
                         "s" : [ {
-                           "value" : [ "'v'" ]
+                           "value" : [ "'\\\\d,\\\\d\\\\w+'" ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -1255,7 +1246,247 @@ module.exports['SplitOnMatches'] = {
             } ],
             "expression" : {
                "localId" : "4",
-               "type" : "Null"
+               "type" : "SplitOnMatches",
+               "stringToSplit" : {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "foo 1,2three bar",
+                  "type" : "Literal"
+               },
+               "separatorPattern" : {
+                  "localId" : "3",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\\d,\\d\\w+",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "9",
+            "name" : "SplitOnMatchesOriginalString",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "define ","SplitOnMatchesOriginalString",": " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "SplitOnMatches","(" ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "value" : [ "'1,2three'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "'\\\\w,\\\\w+'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "type" : "SplitOnMatches",
+               "stringToSplit" : {
+                  "localId" : "6",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "1,2three",
+                  "type" : "Literal"
+               },
+               "separatorPattern" : {
+                  "localId" : "7",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\\w,\\w+",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "13",
+            "name" : "SplitOnMatchesNoMatch",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "define ","SplitOnMatchesNoMatch",": " ]
+                  }, {
+                     "r" : "12",
+                     "s" : [ {
+                        "value" : [ "SplitOnMatches","(" ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "value" : [ "'foobar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "11",
+                        "s" : [ {
+                           "value" : [ "'\\\\d'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "12",
+               "type" : "SplitOnMatches",
+               "stringToSplit" : {
+                  "localId" : "10",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "foobar",
+                  "type" : "Literal"
+               },
+               "separatorPattern" : {
+                  "localId" : "11",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\\d",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "17",
+            "name" : "SplitOnMatchesIsNullFirst",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "17",
+                  "s" : [ {
+                     "value" : [ "define ","SplitOnMatchesIsNullFirst",": " ]
+                  }, {
+                     "r" : "16",
+                     "s" : [ {
+                        "r" : "14",
+                        "value" : [ "SplitOnMatches","(","null",", " ]
+                     }, {
+                        "r" : "15",
+                        "s" : [ {
+                           "value" : [ "'\\\\w+'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "16",
+               "type" : "SplitOnMatches",
+               "stringToSplit" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "14",
+                     "type" : "Null"
+                  }
+               },
+               "separatorPattern" : {
+                  "localId" : "15",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\\w+",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "21",
+            "name" : "SplitOnMatchesIsNullSecond",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "21",
+                  "s" : [ {
+                     "value" : [ "define ","SplitOnMatchesIsNullSecond",": " ]
+                  }, {
+                     "r" : "20",
+                     "s" : [ {
+                        "value" : [ "SplitOnMatches","(" ]
+                     }, {
+                        "r" : "18",
+                        "s" : [ {
+                           "value" : [ "'12three'" ]
+                        } ]
+                     }, {
+                        "r" : "19",
+                        "value" : [ ", ","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "20",
+               "type" : "SplitOnMatches",
+               "stringToSplit" : {
+                  "localId" : "18",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "12three",
+                  "type" : "Literal"
+               },
+               "separatorPattern" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "19",
+                     "type" : "Null"
+                  }
+               }
+            }
+         }, {
+            "localId" : "25",
+            "name" : "SplitOnMatchesAllNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "25",
+                  "s" : [ {
+                     "value" : [ "define ","SplitOnMatchesAllNull",": " ]
+                  }, {
+                     "r" : "24",
+                     "s" : [ {
+                        "r" : "22",
+                        "value" : [ "SplitOnMatches","(","null",", ","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "24",
+               "type" : "SplitOnMatches",
+               "stringToSplit" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "22",
+                     "type" : "Null"
+                  }
+               },
+               "separatorPattern" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "23",
+                     "type" : "Null"
+                  }
+               }
             }
          } ]
       }
@@ -2043,7 +2274,7 @@ library TestSnippet version '1'
 using QUICK
 context Patient
 define MatchesTrue: Matches('1,2three', '\\d,\\d\\w+')
-define MatchesFalse: Matches('1,2three', '\\w+')
+define MatchesFalse: Matches('three', '\\d')
 define MatchesIsNullFirst: Matches(null, '\\w+')
 define MatchesIsNullSecond: Matches('12three', null)
 define MatchesAllNull: Matches(null, null)
@@ -2147,14 +2378,14 @@ module.exports['Matches'] = {
                      }, {
                         "r" : "6",
                         "s" : [ {
-                           "value" : [ "'1,2three'" ]
+                           "value" : [ "'three'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
                         "r" : "7",
                         "s" : [ {
-                           "value" : [ "'\\\\w+'" ]
+                           "value" : [ "'\\\\d'" ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -2168,12 +2399,12 @@ module.exports['Matches'] = {
                "operand" : [ {
                   "localId" : "6",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "1,2three",
+                  "value" : "three",
                   "type" : "Literal"
                }, {
                   "localId" : "7",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "\\w+",
+                  "value" : "\\d",
                   "type" : "Literal"
                } ]
             }
@@ -2191,6 +2422,7 @@ module.exports['Matches'] = {
                   }, {
                      "r" : "12",
                      "s" : [ {
+                        "r" : "10",
                         "value" : [ "Matches","(","null",", " ]
                      }, {
                         "r" : "11",
@@ -2241,6 +2473,7 @@ module.exports['Matches'] = {
                            "value" : [ "'12three'" ]
                         } ]
                      }, {
+                        "r" : "15",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]
@@ -2277,6 +2510,7 @@ module.exports['Matches'] = {
                   }, {
                      "r" : "20",
                      "s" : [ {
+                        "r" : "18",
                         "value" : [ "Matches","(","null",", ","null",")" ]
                      } ]
                   } ]
