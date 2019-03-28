@@ -118,7 +118,7 @@ module.exports.ToRatio = class ToRatio extends Expression
         [numerator, denominator] = arg.toString().split(':').map((quantity) -> parseQuantity(quantity))
       catch
         # If the input string is not formatted correctly, or cannot be
-        # interpreted as a valid Ratio value, the result is null.
+        # interpreted as a valid Quantity value, the result is null.
         return null
       # The value element of a Quantity must be present.
       return null unless numerator? and denominator?
