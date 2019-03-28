@@ -61,6 +61,7 @@ module.exports['Literal'] = {
                "s" : {
                   "r" : "3",
                   "s" : [ {
+                     "r" : "2",
                      "value" : [ "define ","BoolTrue",": ","true" ]
                   } ]
                }
@@ -81,6 +82,7 @@ module.exports['Literal'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
+                     "r" : "4",
                      "value" : [ "define ","BoolFalse",": ","false" ]
                   } ]
                }
@@ -101,6 +103,7 @@ module.exports['Literal'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
+                     "r" : "6",
                      "value" : [ "define ","IntOne",": ","1" ]
                   } ]
                }
@@ -121,6 +124,7 @@ module.exports['Literal'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
+                     "r" : "8",
                      "value" : [ "define ","DecimalTenth",": ","0.1" ]
                   } ]
                }
@@ -166,6 +170,7 @@ module.exports['Literal'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
+                     "r" : "12",
                      "value" : [ "define ","DateTimeX",": ","@2012-02-15T12:10:59.456Z" ]
                   } ]
                }
@@ -224,6 +229,7 @@ module.exports['Literal'] = {
                "s" : {
                   "r" : "15",
                   "s" : [ {
+                     "r" : "14",
                      "value" : [ "define ","TimeX",": ","@T12:10:59.456Z" ]
                   } ]
                }

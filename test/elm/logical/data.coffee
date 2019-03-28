@@ -1198,6 +1198,7 @@ module.exports['Not'] = {
                   }, {
                      "r" : "3",
                      "s" : [ {
+                        "r" : "2",
                         "value" : [ "not ","true" ]
                      } ]
                   } ]
@@ -1227,6 +1228,7 @@ module.exports['Not'] = {
                   }, {
                      "r" : "6",
                      "s" : [ {
+                        "r" : "5",
                         "value" : [ "not ","false" ]
                      } ]
                   } ]
@@ -1256,6 +1258,7 @@ module.exports['Not'] = {
                   }, {
                      "r" : "9",
                      "s" : [ {
+                        "r" : "8",
                         "value" : [ "not ","null" ]
                      } ]
                   } ]

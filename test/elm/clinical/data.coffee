@@ -1066,6 +1066,7 @@ module.exports['InValueSet'] = {
                            "value" : [ "Code"," { " ]
                         }, {
                            "s" : [ {
+                              "r" : "70",
                               "value" : [ "code",": ","null" ]
                            } ]
                         }, {
@@ -2574,6 +2575,7 @@ module.exports['CalculateAgeAt'] = {
                      }, {
                         "r" : "3",
                         "s" : [ {
+                           "r" : "2",
                            "value" : [ "DateTime","(","2012",")" ]
                         } ]
                      }, {
@@ -2622,6 +2624,7 @@ module.exports['CalculateAgeAt'] = {
                      }, {
                         "r" : "9",
                         "s" : [ {
+                           "r" : "6",
                            "value" : [ "DateTime","(","1981",", ","2",", ","16",")" ]
                         } ]
                      }, {
@@ -2682,6 +2685,7 @@ module.exports['CalculateAgeAt'] = {
                      }, {
                         "r" : "13",
                         "s" : [ {
+                           "r" : "12",
                            "value" : [ "DateTime","(","1975",")" ]
                         } ]
                      }, {
@@ -2730,6 +2734,7 @@ module.exports['CalculateAgeAt'] = {
                      }, {
                         "r" : "19",
                         "s" : [ {
+                           "r" : "16",
                            "value" : [ "DateTime","(","2012",", ","12",", ","1",")" ]
                         } ]
                      }, {
@@ -2786,10 +2791,12 @@ module.exports['CalculateAgeAt'] = {
                   }, {
                      "r" : "27",
                      "s" : [ {
+                        "r" : "22",
                         "value" : [ "CalculateAgeInYearsAt","(","@1994-12-01T23:59:00.000+00:00",", " ]
                      }, {
                         "r" : "26",
                         "s" : [ {
+                           "r" : "23",
                            "value" : [ "DateTime","(","2012",", ","12",", ","1",")" ]
                         } ]
                      }, {
@@ -2886,6 +2893,7 @@ module.exports['CalculateAgeAt'] = {
                      }, {
                         "r" : "32",
                         "s" : [ {
+                           "r" : "29",
                            "value" : [ "Date","(","2012",", ","12",", ","1",")" ]
                         } ]
                      }, {
@@ -2899,35 +2907,35 @@ module.exports['CalculateAgeAt'] = {
                "precision" : "Year",
                "type" : "CalculateAgeAt",
                "operand" : [ {
-                  "path" : "birthDate",
-                  "type" : "Property",
-                  "source" : {
-                     "name" : "Patient",
-                     "type" : "ExpressionRef"
+                  "type" : "ToDate",
+                  "operand" : {
+                     "path" : "birthDate",
+                     "type" : "Property",
+                     "source" : {
+                        "name" : "Patient",
+                        "type" : "ExpressionRef"
+                     }
                   }
                }, {
-                  "type" : "ToDateTime",
-                  "operand" : {
-                     "localId" : "32",
-                     "type" : "Date",
-                     "year" : {
-                        "localId" : "29",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2012",
-                        "type" : "Literal"
-                     },
-                     "month" : {
-                        "localId" : "30",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "12",
-                        "type" : "Literal"
-                     },
-                     "day" : {
-                        "localId" : "31",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "1",
-                        "type" : "Literal"
-                     }
+                  "localId" : "32",
+                  "type" : "Date",
+                  "year" : {
+                     "localId" : "29",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2012",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "30",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "12",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "31",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
                   }
                } ]
             }
@@ -2945,10 +2953,12 @@ module.exports['CalculateAgeAt'] = {
                   }, {
                      "r" : "40",
                      "s" : [ {
+                        "r" : "35",
                         "value" : [ "CalculateAgeInYearsAt","(","@1994-12-01T23:59:00.000+00:00",", " ]
                      }, {
                         "r" : "39",
                         "s" : [ {
+                           "r" : "36",
                            "value" : [ "Date","(","2012",", ","12",", ","1",")" ]
                         } ]
                      }, {

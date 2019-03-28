@@ -115,6 +115,7 @@ module.exports['FromString'] = {
                   }, {
                      "r" : "7",
                      "s" : [ {
+                        "r" : "6",
                         "value" : [ "convert ","null"," to " ]
                      }, {
                         "r" : "5",
@@ -933,6 +934,7 @@ module.exports['FromInteger'] = {
                   }, {
                      "r" : "4",
                      "s" : [ {
+                        "r" : "3",
                         "value" : [ "convert ","10"," to " ]
                      }, {
                         "r" : "2",
@@ -967,6 +969,7 @@ module.exports['FromInteger'] = {
                   }, {
                      "r" : "8",
                      "s" : [ {
+                        "r" : "7",
                         "value" : [ "convert ","10"," to " ]
                      }, {
                         "r" : "6",
@@ -1001,6 +1004,7 @@ module.exports['FromInteger'] = {
                   }, {
                      "r" : "12",
                      "s" : [ {
+                        "r" : "11",
                         "value" : [ "convert ","null"," to " ]
                      }, {
                         "r" : "10",
@@ -1034,6 +1038,7 @@ module.exports['FromInteger'] = {
                   }, {
                      "r" : "15",
                      "s" : [ {
+                        "r" : "15",
                         "value" : [ "convert ","10"," to " ]
                      }, {
                         "r" : "14",
@@ -1332,6 +1337,7 @@ module.exports['FromBoolean'] = {
                   }, {
                      "r" : "4",
                      "s" : [ {
+                        "r" : "3",
                         "value" : [ "convert ","true"," to " ]
                      }, {
                         "r" : "2",
@@ -1366,6 +1372,7 @@ module.exports['FromBoolean'] = {
                   }, {
                      "r" : "8",
                      "s" : [ {
+                        "r" : "7",
                         "value" : [ "convert ","false"," to " ]
                      }, {
                         "r" : "6",
@@ -1400,6 +1407,7 @@ module.exports['FromBoolean'] = {
                   }, {
                      "r" : "11",
                      "s" : [ {
+                        "r" : "11",
                         "value" : [ "convert ","true"," to " ]
                      }, {
                         "r" : "10",
@@ -1430,6 +1438,7 @@ module.exports['FromBoolean'] = {
                   }, {
                      "r" : "14",
                      "s" : [ {
+                        "r" : "14",
                         "value" : [ "convert ","false"," to " ]
                      }, {
                         "r" : "13",
@@ -1506,6 +1515,7 @@ module.exports['FromDateTime'] = {
                   }, {
                      "r" : "4",
                      "s" : [ {
+                        "r" : "3",
                         "value" : [ "convert ","@2015-01-02T12:01:02.321-06:00"," to " ]
                      }, {
                         "r" : "2",
@@ -1578,6 +1588,7 @@ module.exports['FromDateTime'] = {
                   }, {
                      "r" : "8",
                      "s" : [ {
+                        "r" : "7",
                         "value" : [ "convert ","@2015-01-02T12:01:02.321-06:00"," to " ]
                      }, {
                         "r" : "6",
@@ -1650,6 +1661,7 @@ module.exports['FromDateTime'] = {
                   }, {
                      "r" : "11",
                      "s" : [ {
+                        "r" : "11",
                         "value" : [ "convert ","@2015-01-02T12:01:02.321-06:00"," to " ]
                      }, {
                         "r" : "10",
@@ -1766,6 +1778,7 @@ module.exports['FromDate'] = {
                   }, {
                      "r" : "4",
                      "s" : [ {
+                        "r" : "3",
                         "value" : [ "convert ","@2015-01-01"," to " ]
                      }, {
                         "r" : "2",
@@ -1813,6 +1826,7 @@ module.exports['FromDate'] = {
                   }, {
                      "r" : "8",
                      "s" : [ {
+                        "r" : "7",
                         "value" : [ "convert ","@2015-01"," to " ]
                      }, {
                         "r" : "6",
@@ -1855,6 +1869,7 @@ module.exports['FromDate'] = {
                   }, {
                      "r" : "12",
                      "s" : [ {
+                        "r" : "11",
                         "value" : [ "convert ","@2015"," to " ]
                      }, {
                         "r" : "10",
@@ -1892,6 +1907,7 @@ module.exports['FromDate'] = {
                   }, {
                      "r" : "15",
                      "s" : [ {
+                        "r" : "15",
                         "value" : [ "convert ","@2015-01-01"," to " ]
                      }, {
                         "r" : "14",
@@ -1935,6 +1951,7 @@ module.exports['FromDate'] = {
                   }, {
                      "r" : "19",
                      "s" : [ {
+                        "r" : "18",
                         "value" : [ "convert ","@2015-01-01"," to " ]
                      }, {
                         "r" : "17",
@@ -2027,6 +2044,7 @@ module.exports['FromTime'] = {
                   }, {
                      "r" : "4",
                      "s" : [ {
+                        "r" : "3",
                         "value" : [ "convert ","@T11:57"," to " ]
                      }, {
                         "r" : "2",
@@ -2069,6 +2087,7 @@ module.exports['FromTime'] = {
                   }, {
                      "r" : "7",
                      "s" : [ {
+                        "r" : "7",
                         "value" : [ "convert ","@T11:57"," to " ]
                      }, {
                         "r" : "6",
@@ -2963,6 +2982,255 @@ module.exports['ToQuantity'] = {
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
+               }
+            }
+         } ]
+      }
+   }
+}
+
+### ToRatio
+library TestSnippet version '1'
+using QUICK
+context Patient
+define NullArg: ToRatio((null as String))
+define IsValid: ToRatio('1.0 \'mg\':2.0 \'mg\'')
+define InvalidSeparator: ToRatio('1.0 \'mg\';2.0 \'mg\'')
+define InvalidNumerator: ToRatio('1.0 \'cc\':2.0 \'mg\'')
+define InvalidDenominator: ToRatio('1.0 \'mg\':2.0 \'cc\'')
+###
+
+module.exports['ToRatio'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "6",
+            "name" : "NullArg",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "6",
+                  "s" : [ {
+                     "value" : [ "define ","NullArg",": " ]
+                  }, {
+                     "r" : "5",
+                     "s" : [ {
+                        "value" : [ "ToRatio","(" ]
+                     }, {
+                        "r" : "4",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "4",
+                           "s" : [ {
+                              "r" : "2",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "3",
+                              "s" : [ {
+                                 "value" : [ "String" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "5",
+               "type" : "ToRatio",
+               "operand" : {
+                  "localId" : "4",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "2",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "3",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            }
+         }, {
+            "localId" : "9",
+            "name" : "IsValid",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "define ","IsValid",": " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "ToRatio","(" ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "'1.0 \\'mg\\':2.0 \\'mg\\''" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "type" : "ToRatio",
+               "operand" : {
+                  "localId" : "7",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "1.0 'mg':2.0 'mg'",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "12",
+            "name" : "InvalidSeparator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "value" : [ "define ","InvalidSeparator",": " ]
+                  }, {
+                     "r" : "11",
+                     "s" : [ {
+                        "value" : [ "ToRatio","(" ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "value" : [ "'1.0 \\'mg\\';2.0 \\'mg\\''" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "11",
+               "type" : "ToRatio",
+               "operand" : {
+                  "localId" : "10",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "1.0 'mg';2.0 'mg'",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "15",
+            "name" : "InvalidNumerator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "15",
+                  "s" : [ {
+                     "value" : [ "define ","InvalidNumerator",": " ]
+                  }, {
+                     "r" : "14",
+                     "s" : [ {
+                        "value" : [ "ToRatio","(" ]
+                     }, {
+                        "r" : "13",
+                        "s" : [ {
+                           "value" : [ "'1.0 \\'cc\\':2.0 \\'mg\\''" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "14",
+               "type" : "ToRatio",
+               "operand" : {
+                  "localId" : "13",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "1.0 'cc':2.0 'mg'",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "18",
+            "name" : "InvalidDenominator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "18",
+                  "s" : [ {
+                     "value" : [ "define ","InvalidDenominator",": " ]
+                  }, {
+                     "r" : "17",
+                     "s" : [ {
+                        "value" : [ "ToRatio","(" ]
+                     }, {
+                        "r" : "16",
+                        "s" : [ {
+                           "value" : [ "'1.0 \\'mg\\':2.0 \\'cc\\''" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "17",
+               "type" : "ToRatio",
+               "operand" : {
+                  "localId" : "16",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "1.0 'mg':2.0 'cc'",
+                  "type" : "Literal"
                }
             }
          } ]
