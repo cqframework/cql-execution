@@ -5,6 +5,7 @@
 { parseQuantity } = require './quantity'
 { isValidDecimal, isValidInteger, limitDecimalPrecision } = require('../util/math')
 { normalizeMillisecondsField } = require '../util/util'
+{ Ratio } = require './ratio'
 
 # TODO: Casting and Conversion needs unit tests!
 
@@ -102,6 +103,26 @@ module.exports.ToQuantity = class ToQuantity extends Expression
     if arg? and typeof arg != 'undefined'
       quantity = parseQuantity(arg.toString())
       return quantity
+    else
+      return null
+
+module.exports.ToRatio = class ToRatio extends Expression
+  constructor: (json) ->
+    super
+
+  exec: (ctx) ->
+    arg = @execArgs(ctx)
+    if arg? and typeof arg != 'undefined'
+      # Argument will be of form '<quantity>:<quantity>'
+      try
+        [numerator, denominator] = arg.toString().split(':').map((quantity) -> parseQuantity(quantity))
+      catch
+        # If the input string is not formatted correctly, or cannot be
+        # interpreted as a valid Ratio value, the result is null.
+        return null
+      # The value element of a Quantity must be present.
+      return null unless numerator? and denominator?
+      return new Ratio({ numerator: numerator, denominator: denominator })
     else
       return null
 
