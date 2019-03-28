@@ -166,6 +166,7 @@ module.exports['DateRangeOptimizedQuery'] = {
                                  } ]
                               } ]
                            }, {
+                              "r" : "18",
                               "value" : [ " ","during"," " ]
                            }, {
                               "r" : "17",
@@ -257,6 +258,7 @@ module.exports['DateRangeOptimizedQuery'] = {
                                  } ]
                               } ]
                            }, {
+                              "r" : "26",
                               "value" : [ " ","during"," " ]
                            }, {
                               "r" : "25",
@@ -353,6 +355,7 @@ module.exports['DateRangeOptimizedQuery'] = {
                                  } ]
                               } ]
                            }, {
+                              "r" : "34",
                               "value" : [ " ","included in"," " ]
                            }, {
                               "r" : "33",
@@ -550,6 +553,7 @@ module.exports['IncludesQuery'] = {
                                  "value" : [ "MeasurementPeriod" ]
                               } ]
                            }, {
+                              "r" : "18",
                               "value" : [ " ","includes"," " ]
                            }, {
                               "r" : "17",
@@ -784,6 +788,7 @@ module.exports['MultiSourceQuery'] = {
                                  } ]
                               } ]
                            }, {
+                              "r" : "19",
                               "value" : [ " ","included in"," " ]
                            }, {
                               "r" : "18",
@@ -916,6 +921,7 @@ module.exports['MultiSourceQuery'] = {
                                     } ]
                                  } ]
                               }, {
+                                 "r" : "29",
                                  "value" : [ "  ","included in"," " ]
                               }, {
                                  "r" : "28",
@@ -2089,6 +2095,7 @@ module.exports['QueryFilterNulls'] = {
                               }, {
                                  "r" : "7",
                                  "s" : [ {
+                                    "r" : "2",
                                     "value" : [ "List{","null",", " ]
                                  }, {
                                     "r" : "3",
@@ -2096,6 +2103,7 @@ module.exports['QueryFilterNulls'] = {
                                        "value" : [ "'One'" ]
                                     } ]
                                  }, {
+                                    "r" : "4",
                                     "value" : [ ", ","null",", " ]
                                  }, {
                                     "r" : "5",
@@ -2103,6 +2111,7 @@ module.exports['QueryFilterNulls'] = {
                                        "value" : [ "'Two'" ]
                                     } ]
                                  }, {
+                                    "r" : "6",
                                     "value" : [ ", ","null","}" ]
                                  } ]
                               }, {
@@ -2858,6 +2867,7 @@ module.exports['Sorting'] = {
                               }, {
                                  "r" : "63",
                                  "s" : [ {
+                                    "r" : "56",
                                     "value" : [ "{","8",", ","6",", ","7",", ","5",", ","3",", ","0",", ","9","}" ]
                                  } ]
                               }, {
@@ -2868,6 +2878,7 @@ module.exports['Sorting'] = {
                            } ]
                         } ]
                      }, {
+                        "r" : "65",
                         "value" : [ " ","sort asc" ]
                      } ]
                   } ]
@@ -2952,6 +2963,7 @@ module.exports['Sorting'] = {
                               }, {
                                  "r" : "75",
                                  "s" : [ {
+                                    "r" : "68",
                                     "value" : [ "{","8",", ","6",", ","7",", ","5",", ","3",", ","0",", ","9","}" ]
                                  } ]
                               }, {
@@ -2974,6 +2986,7 @@ module.exports['Sorting'] = {
                            } ]
                         } ]
                      }, {
+                        "r" : "79",
                         "value" : [ " ","sort asc" ]
                      } ]
                   } ]
@@ -3066,6 +3079,7 @@ module.exports['Sorting'] = {
                               }, {
                                  "r" : "89",
                                  "s" : [ {
+                                    "r" : "82",
                                     "value" : [ "{","8",", ","6",", ","7",", ","5",", ","3",", ","0",", ","9","}" ]
                                  } ]
                               }, {
@@ -3076,6 +3090,7 @@ module.exports['Sorting'] = {
                            } ]
                         } ]
                      }, {
+                        "r" : "91",
                         "value" : [ " ","sort desc" ]
                      } ]
                   } ]
@@ -3160,6 +3175,7 @@ module.exports['Sorting'] = {
                               }, {
                                  "r" : "101",
                                  "s" : [ {
+                                    "r" : "94",
                                     "value" : [ "{","8",", ","6",", ","7",", ","5",", ","3",", ","0",", ","9","}" ]
                                  } ]
                               }, {
@@ -3182,6 +3198,7 @@ module.exports['Sorting'] = {
                            } ]
                         } ]
                      }, {
+                        "r" : "105",
                         "value" : [ " ","sort desc" ]
                      } ]
                   } ]
@@ -3319,6 +3336,7 @@ module.exports['Sorting'] = {
                            } ]
                         } ]
                      }, {
+                        "r" : "115",
                         "value" : [ " ","sort asc" ]
                      } ]
                   } ]
@@ -3450,6 +3468,7 @@ module.exports['Sorting'] = {
                            } ]
                         } ]
                      }, {
+                        "r" : "127",
                         "value" : [ " ","sort asc" ]
                      } ]
                   } ]
@@ -3577,6 +3596,7 @@ module.exports['Sorting'] = {
                            } ]
                         } ]
                      }, {
+                        "r" : "137",
                         "value" : [ " ","sort desc" ]
                      } ]
                   } ]
@@ -3708,6 +3728,7 @@ module.exports['Sorting'] = {
                            } ]
                         } ]
                      }, {
+                        "r" : "149",
                         "value" : [ " ","sort desc" ]
                      } ]
                   } ]
@@ -3777,6 +3798,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "153",
                   "s" : [ {
+                     "r" : "152",
                      "value" : [ "define ","five",": ","5" ]
                   } ]
                }
@@ -3810,6 +3832,7 @@ module.exports['Sorting'] = {
                               }, {
                                  "r" : "161",
                                  "s" : [ {
+                                    "r" : "154",
                                     "value" : [ "{","8",", ","6",", ","7",", ","5",", ","3",", ","0",", ","9","}" ]
                                  } ]
                               }, {
@@ -4038,6 +4061,7 @@ module.exports['Distinct'] = {
                               }, {
                                  "r" : "18",
                                  "s" : [ {
+                                    "r" : "2",
                                     "value" : [ "{","1",", ","2",", ","2",", ","3",", ","3",", ","3",", ","4",", ","4",", ","4",", ","4",", ","3",", ","3",", ","3",", ","2",", ","2",", ","1","}" ]
                                  } ]
                               }, {
@@ -4313,12 +4337,14 @@ module.exports['Distinct'] = {
                                        "value" : [ "Tuple{" ]
                                     }, {
                                        "s" : [ {
+                                          "r" : "34",
                                           "value" : [ "a",": ","1" ]
                                        } ]
                                     }, {
                                        "value" : [ ", " ]
                                     }, {
                                        "s" : [ {
+                                          "r" : "35",
                                           "value" : [ "b",":","2" ]
                                        } ]
                                     }, {
@@ -4332,12 +4358,14 @@ module.exports['Distinct'] = {
                                        "value" : [ "Tuple{" ]
                                     }, {
                                        "s" : [ {
+                                          "r" : "37",
                                           "value" : [ "a",": ","2" ]
                                        } ]
                                     }, {
                                        "value" : [ ", " ]
                                     }, {
                                        "s" : [ {
+                                          "r" : "38",
                                           "value" : [ "b",": ","3" ]
                                        } ]
                                     }, {
@@ -4351,12 +4379,14 @@ module.exports['Distinct'] = {
                                        "value" : [ "Tuple{" ]
                                     }, {
                                        "s" : [ {
+                                          "r" : "40",
                                           "value" : [ "a",": ","1" ]
                                        } ]
                                     }, {
                                        "value" : [ ", " ]
                                     }, {
                                        "s" : [ {
+                                          "r" : "41",
                                           "value" : [ "b",": ","2" ]
                                        } ]
                                     }, {
@@ -4493,6 +4523,7 @@ module.exports['Distinct'] = {
                               }, {
                                  "r" : "65",
                                  "s" : [ {
+                                    "r" : "49",
                                     "value" : [ "{","1",", ","2",", ","2",", ","3",", ","3",", ","3",", ","4",", ","4",", ","4",", ","4",", ","3",", ","3",", ","3",", ","2",", ","2",", ","1","}" ]
                                  } ]
                               }, {
@@ -4770,12 +4801,14 @@ module.exports['Distinct'] = {
                                        "value" : [ "Tuple{" ]
                                     }, {
                                        "s" : [ {
+                                          "r" : "81",
                                           "value" : [ "a",": ","1" ]
                                        } ]
                                     }, {
                                        "value" : [ ", " ]
                                     }, {
                                        "s" : [ {
+                                          "r" : "82",
                                           "value" : [ "b",":","2" ]
                                        } ]
                                     }, {
@@ -4789,12 +4822,14 @@ module.exports['Distinct'] = {
                                        "value" : [ "Tuple{" ]
                                     }, {
                                        "s" : [ {
+                                          "r" : "84",
                                           "value" : [ "a",": ","2" ]
                                        } ]
                                     }, {
                                        "value" : [ ", " ]
                                     }, {
                                        "s" : [ {
+                                          "r" : "85",
                                           "value" : [ "b",": ","3" ]
                                        } ]
                                     }, {
@@ -4808,12 +4843,14 @@ module.exports['Distinct'] = {
                                        "value" : [ "Tuple{" ]
                                     }, {
                                        "s" : [ {
+                                          "r" : "87",
                                           "value" : [ "a",": ","1" ]
                                        } ]
                                     }, {
                                        "value" : [ ", " ]
                                     }, {
                                        "s" : [ {
+                                          "r" : "88",
                                           "value" : [ "b",": ","2" ]
                                        } ]
                                     }, {
@@ -4951,6 +4988,7 @@ module.exports['Distinct'] = {
                               }, {
                                  "r" : "112",
                                  "s" : [ {
+                                    "r" : "96",
                                     "value" : [ "{","1",", ","2",", ","2",", ","3",", ","3",", ","3",", ","4",", ","4",", ","4",", ","4",", ","3",", ","3",", ","3",", ","2",", ","2",", ","1","}" ]
                                  } ]
                               }, {
@@ -5228,12 +5266,14 @@ module.exports['Distinct'] = {
                                        "value" : [ "Tuple{" ]
                                     }, {
                                        "s" : [ {
+                                          "r" : "128",
                                           "value" : [ "a",": ","1" ]
                                        } ]
                                     }, {
                                        "value" : [ ", " ]
                                     }, {
                                        "s" : [ {
+                                          "r" : "129",
                                           "value" : [ "b",":","2" ]
                                        } ]
                                     }, {
@@ -5247,12 +5287,14 @@ module.exports['Distinct'] = {
                                        "value" : [ "Tuple{" ]
                                     }, {
                                        "s" : [ {
+                                          "r" : "131",
                                           "value" : [ "a",": ","2" ]
                                        } ]
                                     }, {
                                        "value" : [ ", " ]
                                     }, {
                                        "s" : [ {
+                                          "r" : "132",
                                           "value" : [ "b",": ","3" ]
                                        } ]
                                     }, {
@@ -5266,12 +5308,14 @@ module.exports['Distinct'] = {
                                        "value" : [ "Tuple{" ]
                                     }, {
                                        "s" : [ {
+                                          "r" : "134",
                                           "value" : [ "a",": ","1" ]
                                        } ]
                                     }, {
                                        "value" : [ ", " ]
                                     }, {
                                        "s" : [ {
+                                          "r" : "135",
                                           "value" : [ "b",": ","2" ]
                                        } ]
                                     }, {
@@ -6591,6 +6635,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "100",
                   "s" : [ {
+                     "r" : "99",
                      "value" : [ "define ","asNull",": ","null" ]
                   } ]
                }
@@ -6683,6 +6728,7 @@ module.exports['SingleObjectAlias'] = {
                               "value" : [ "Tuple{" ]
                            }, {
                               "s" : [ {
+                                 "r" : "107",
                                  "value" : [ "a",":","1" ]
                               } ]
                            }, {

@@ -296,6 +296,30 @@ describe 'ToQuantity', ->
   it "should return null for null argument", ->
     should(@nullArg.exec(@ctx)).not.exist
 
+describe 'ToRatio', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should be null if string is null", ->
+    should(@nullArg.exec(@ctx)).be.null()
+
+  it "should be null if string separator is invalid", ->
+    should(@invalidSeparator.exec(@ctx)).be.null()
+
+  it "should be null if numerator is invalid", ->
+    should(@invalidNumerator.exec(@ctx)).be.null()
+
+  it "should be null if denominator is invalid", ->
+    should(@invalidDenominator.exec(@ctx)).be.null()
+
+  it "should create valid ratio", ->
+    ratio = @isValid.exec(@ctx)
+    ratio.numerator.value.should.eql 1.0
+    ratio.numerator.unit.should.eql 'mg'
+    ratio.denominator.value.should.eql 2.0
+    ratio.denominator.unit.should.eql 'mg'
+
+
 describe 'ToTime', ->
   @beforeEach ->
     setup @, data

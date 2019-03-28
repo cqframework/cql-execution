@@ -443,6 +443,7 @@ module.exports['Concat'] = {
                            "value" : [ "'Hello'" ]
                         } ]
                      }, {
+                        "r" : "41",
                         "value" : [ " + ","null" ]
                      } ]
                   } ]
@@ -797,6 +798,7 @@ module.exports['Combine'] = {
                   }, {
                      "r" : "19",
                      "s" : [ {
+                        "r" : "17",
                         "value" : [ "Combine","(","null",", " ]
                      }, {
                         "r" : "18",
@@ -865,6 +867,7 @@ module.exports['Combine'] = {
                               "value" : [ "'def'" ]
                            } ]
                         }, {
+                           "r" : "23",
                            "value" : [ ", ","null",", " ]
                         }, {
                            "r" : "24",
@@ -1083,6 +1086,7 @@ module.exports['Split'] = {
                   }, {
                      "r" : "12",
                      "s" : [ {
+                        "r" : "10",
                         "value" : [ "Split","(","null",", " ]
                      }, {
                         "r" : "11",
@@ -1134,6 +1138,7 @@ module.exports['Split'] = {
                            "value" : [ "'a,b,c'" ]
                         } ]
                      }, {
+                        "r" : "15",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]
@@ -1457,6 +1462,7 @@ module.exports['Upper'] = {
                   }, {
                      "r" : "12",
                      "s" : [ {
+                        "r" : "11",
                         "value" : [ "Upper","(","null",")" ]
                      } ]
                   } ]
@@ -1643,6 +1649,7 @@ module.exports['Lower'] = {
                   }, {
                      "r" : "12",
                      "s" : [ {
+                        "r" : "11",
                         "value" : [ "Lower","(","null",")" ]
                      } ]
                   } ]
@@ -1727,6 +1734,7 @@ module.exports['Indexer'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "3",
                         "value" : [ "[","6","]" ]
                      } ]
                   } ]
@@ -1766,6 +1774,7 @@ module.exports['Indexer'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "7",
                         "value" : [ "[","0","]" ]
                      } ]
                   } ]
@@ -1805,6 +1814,7 @@ module.exports['Indexer'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "11",
                         "value" : [ "[","20","]" ]
                      } ]
                   } ]
@@ -1857,6 +1867,7 @@ module.exports['Indexer'] = {
                            "value" : [ ")" ]
                         } ]
                      }, {
+                        "r" : "17",
                         "value" : [ "[","4","]" ]
                      } ]
                   } ]
@@ -1904,6 +1915,7 @@ module.exports['Indexer'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "21",
                         "value" : [ "[","null","]" ]
                      } ]
                   } ]
@@ -2085,6 +2097,7 @@ module.exports['PositionOf'] = {
                   }, {
                      "r" : "12",
                      "s" : [ {
+                        "r" : "10",
                         "value" : [ "PositionOf","(","null",", " ]
                      }, {
                         "r" : "11",
@@ -2136,6 +2149,7 @@ module.exports['PositionOf'] = {
                            "value" : [ "'cde'" ]
                         } ]
                      }, {
+                        "r" : "15",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]
@@ -2232,6 +2246,7 @@ module.exports['Substring'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "3",
                         "value" : [ ", ","5",")" ]
                      } ]
                   } ]
@@ -2274,6 +2289,7 @@ module.exports['Substring'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "7",
                         "value" : [ ", ","7",", ","2",")" ]
                      } ]
                   } ]
@@ -2322,6 +2338,7 @@ module.exports['Substring'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "12",
                         "value" : [ ", ","7",", ","0",")" ]
                      } ]
                   } ]
@@ -2374,6 +2391,7 @@ module.exports['Substring'] = {
                      }, {
                         "r" : "18",
                         "s" : [ {
+                           "r" : "17",
                            "value" : [ "-","1" ]
                         } ]
                      }, {
@@ -2423,6 +2441,7 @@ module.exports['Substring'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "22",
                         "value" : [ ", ","0",")" ]
                      } ]
                   } ]
@@ -2465,6 +2484,7 @@ module.exports['Substring'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "26",
                         "value" : [ ", ","7",", ","25",")" ]
                      } ]
                   } ]
@@ -2513,10 +2533,12 @@ module.exports['Substring'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "31",
                         "value" : [ ", ","7",", " ]
                      }, {
                         "r" : "33",
                         "s" : [ {
+                           "r" : "32",
                            "value" : [ "-","1" ]
                         } ]
                      }, {
@@ -2565,6 +2587,7 @@ module.exports['Substring'] = {
                   }, {
                      "r" : "38",
                      "s" : [ {
+                        "r" : "36",
                         "value" : [ "Substring","(","null",", ","5",")" ]
                      } ]
                   } ]
@@ -2609,6 +2632,7 @@ module.exports['Substring'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "41",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]
@@ -2896,6 +2920,7 @@ module.exports['StartsWith'] = {
                            "value" : [ "'FooBar'" ]
                         } ]
                      }, {
+                        "r" : "19",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]
@@ -2994,6 +3019,7 @@ module.exports['StartsWith'] = {
                   }, {
                      "r" : "30",
                      "s" : [ {
+                        "r" : "28",
                         "value" : [ "StartsWith","(","null",", " ]
                      }, {
                         "r" : "29",
@@ -3349,6 +3375,7 @@ module.exports['EndsWith'] = {
                            "value" : [ "'FooBar'" ]
                         } ]
                      }, {
+                        "r" : "19",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]

@@ -139,6 +139,7 @@ module.exports['In Age Demographic'] = {
                               "value" : [ ")" ]
                            } ]
                         }, {
+                           "r" : "15",
                            "value" : [ " ",">="," ","2" ]
                         } ]
                      }, {
@@ -163,6 +164,7 @@ module.exports['In Age Demographic'] = {
                               "value" : [ ")" ]
                            } ]
                         }, {
+                           "r" : "20",
                            "value" : [ " ","<"," ","18" ]
                         } ]
                      } ]
@@ -408,6 +410,7 @@ module.exports['CommonLib'] = {
                               "value" : [ ")" ]
                            } ]
                         }, {
+                           "r" : "19",
                            "value" : [ " ",">="," ","2" ]
                         } ]
                      }, {
@@ -432,6 +435,7 @@ module.exports['CommonLib'] = {
                               "value" : [ ")" ]
                            } ]
                         }, {
+                           "r" : "24",
                            "value" : [ " ","<"," ","18" ]
                         } ]
                      } ]
@@ -857,6 +861,7 @@ module.exports['Using CommonLib'] = {
                                     } ]
                                  } ]
                               }, {
+                                 "r" : "18",
                                  "value" : [ "[","0","]" ]
                               } ]
                            }, {
@@ -868,6 +873,7 @@ module.exports['Using CommonLib'] = {
                               } ]
                            } ]
                         }, {
+                           "r" : "21",
                            "value" : [ "[","0","]" ]
                         } ]
                      }, {
@@ -936,6 +942,7 @@ module.exports['Using CommonLib'] = {
                      }, {
                         "r" : "28",
                         "s" : [ {
+                           "r" : "26",
                            "value" : [ "foo","(","2",", ","5",")" ]
                         } ]
                      } ]
@@ -1318,6 +1325,7 @@ module.exports['CommonLib2'] = {
                   }, {
                      "r" : "24",
                      "s" : [ {
+                        "r" : "22",
                         "value" : [ "multiply","(","2",", ","3",")" ]
                      } ]
                   } ]
@@ -1349,6 +1357,7 @@ module.exports['CommonLib2'] = {
                "s" : {
                   "r" : "27",
                   "s" : [ {
+                     "r" : "26",
                      "value" : [ "define ","Two",":\n  ","2" ]
                   } ]
                }
@@ -1439,6 +1448,7 @@ module.exports['CommonLib2'] = {
                            "value" : [ "Two" ]
                         } ]
                      }, {
+                        "r" : "34",
                         "value" : [ " + ","1" ]
                      } ]
                   } ]
@@ -1481,6 +1491,7 @@ module.exports['CommonLib2'] = {
                               }, {
                                  "r" : "42",
                                  "s" : [ {
+                                    "r" : "37",
                                     "value" : [ "{","1",", ","3",", ","2",", ","5",", ","4","}" ]
                                  } ]
                               }, {
@@ -1765,6 +1776,7 @@ module.exports['Using CommonLib2'] = {
                      }, {
                         "r" : "11",
                         "s" : [ {
+                           "r" : "10",
                            "value" : [ "addToParameter","(","5",")" ]
                         } ]
                      } ]
@@ -1841,6 +1853,7 @@ module.exports['Using CommonLib2'] = {
                      }, {
                         "r" : "18",
                         "s" : [ {
+                           "r" : "17",
                            "value" : [ "square","(","5",")" ]
                         } ]
                      } ]
@@ -1917,6 +1930,7 @@ module.exports['Using CommonLib2'] = {
                      }, {
                         "r" : "25",
                         "s" : [ {
+                           "r" : "24",
                            "value" : [ "addTwo","(","5",")" ]
                         } ]
                      } ]

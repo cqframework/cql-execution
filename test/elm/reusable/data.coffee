@@ -125,6 +125,7 @@ module.exports['ExpressionRef'] = {
                "s" : {
                   "r" : "3",
                   "s" : [ {
+                     "r" : "2",
                      "value" : [ "define ","Life",": ","42" ]
                   } ]
                }
@@ -295,6 +296,7 @@ module.exports['FunctionDefinitions'] = {
                   }, {
                      "r" : "10",
                      "s" : [ {
+                        "r" : "8",
                         "value" : [ "\"foo bar\""," (","1",",","2",")" ]
                      } ]
                   } ]
@@ -396,6 +398,7 @@ module.exports['FunctionOverloads'] = {
                               "value" : [ "a" ]
                            } ]
                         }, {
+                           "r" : "4",
                            "value" : [ " + ","1" ]
                         } ]
                      } ]
@@ -500,6 +503,7 @@ module.exports['FunctionOverloads'] = {
                   }, {
                      "r" : "13",
                      "s" : [ {
+                        "r" : "12",
                         "value" : [ "\"foo bar\"","(","1",")" ]
                      } ]
                   } ]

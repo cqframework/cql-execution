@@ -95,6 +95,7 @@ module.exports['Instance'] = {
                         "value" : [ ",\n  " ]
                      }, {
                         "s" : [ {
+                           "r" : "3",
                            "value" : [ "value",": ","12" ]
                         } ]
                      }, {
@@ -330,6 +331,7 @@ module.exports['Instance'] = {
                         "value" : [ ",\n  " ]
                      }, {
                         "s" : [ {
+                           "r" : "18",
                            "value" : [ "isBrand",": ","false" ]
                         } ]
                      }, {

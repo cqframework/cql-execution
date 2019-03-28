@@ -59,6 +59,7 @@ module.exports['Add'] = {
                "s" : {
                   "r" : "3",
                   "s" : [ {
+                     "r" : "2",
                      "value" : [ "define ","Ten",": ","10" ]
                   } ]
                }
@@ -79,6 +80,7 @@ module.exports['Add'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
+                     "r" : "4",
                      "value" : [ "define ","Eleven",": ","11" ]
                   } ]
                }
@@ -158,27 +160,35 @@ module.exports['Add'] = {
                                                 "value" : [ "1"," + ","2" ]
                                              } ]
                                           }, {
+                                             "r" : "13",
                                              "value" : [ " + ","3" ]
                                           } ]
                                        }, {
+                                          "r" : "15",
                                           "value" : [ " + ","4" ]
                                        } ]
                                     }, {
+                                       "r" : "17",
                                        "value" : [ " + ","5" ]
                                     } ]
                                  }, {
+                                    "r" : "19",
                                     "value" : [ " + ","6" ]
                                  } ]
                               }, {
+                                 "r" : "21",
                                  "value" : [ " + ","7" ]
                               } ]
                            }, {
+                              "r" : "23",
                               "value" : [ " + ","8" ]
                            } ]
                         }, {
+                           "r" : "25",
                            "value" : [ " + ","9" ]
                         } ]
                      }, {
+                        "r" : "27",
                         "value" : [ " + ","10" ]
                      } ]
                   } ]
@@ -371,6 +381,7 @@ module.exports['Subtract'] = {
                "s" : {
                   "r" : "3",
                   "s" : [ {
+                     "r" : "2",
                      "value" : [ "define ","Ten",": ","10" ]
                   } ]
                }
@@ -391,6 +402,7 @@ module.exports['Subtract'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
+                     "r" : "4",
                      "value" : [ "define ","Eleven",": ","11" ]
                   } ]
                }
@@ -458,9 +470,11 @@ module.exports['Subtract'] = {
                               "value" : [ "100"," - ","50" ]
                            } ]
                         }, {
+                           "r" : "13",
                            "value" : [ " - ","25" ]
                         } ]
                      }, {
+                        "r" : "15",
                         "value" : [ " - ","10" ]
                      } ]
                   } ]
@@ -599,6 +613,7 @@ module.exports['Multiply'] = {
                "s" : {
                   "r" : "3",
                   "s" : [ {
+                     "r" : "2",
                      "value" : [ "define ","Ten",": ","10" ]
                   } ]
                }
@@ -619,6 +634,7 @@ module.exports['Multiply'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
+                     "r" : "4",
                      "value" : [ "define ","Eleven",": ","11" ]
                   } ]
                }
@@ -688,12 +704,15 @@ module.exports['Multiply'] = {
                                  "value" : [ "1"," * ","2" ]
                               } ]
                            }, {
+                              "r" : "13",
                               "value" : [ " * ","3" ]
                            } ]
                         }, {
+                           "r" : "15",
                            "value" : [ " * ","4" ]
                         } ]
                      }, {
+                        "r" : "17",
                         "value" : [ " * ","5" ]
                      } ]
                   } ]
@@ -842,6 +861,7 @@ module.exports['Divide'] = {
                "s" : {
                   "r" : "3",
                   "s" : [ {
+                     "r" : "2",
                      "value" : [ "define ","Hundred",": ","100" ]
                   } ]
                }
@@ -862,6 +882,7 @@ module.exports['Divide'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
+                     "r" : "4",
                      "value" : [ "define ","Four",": ","4" ]
                   } ]
                }
@@ -976,9 +997,11 @@ module.exports['Divide'] = {
                               "value" : [ "1000"," / ","4" ]
                            } ]
                         }, {
+                           "r" : "17",
                            "value" : [ " / ","10" ]
                         } ]
                      }, {
+                        "r" : "19",
                         "value" : [ " / ","5" ]
                      } ]
                   } ]
@@ -1135,6 +1158,7 @@ module.exports['Negate'] = {
                   }, {
                      "r" : "3",
                      "s" : [ {
+                        "r" : "2",
                         "value" : [ "-","1" ]
                      } ]
                   } ]
@@ -1328,6 +1352,7 @@ module.exports['MathPrecedence'] = {
                            } ]
                         } ]
                      }, {
+                        "r" : "19",
                         "value" : [ " / ","3" ]
                      } ]
                   } ]
@@ -2099,6 +2124,7 @@ module.exports['Ceiling'] = {
                   }, {
                      "r" : "3",
                      "s" : [ {
+                        "r" : "2",
                         "value" : [ "Ceiling","(","10.1",")" ]
                      } ]
                   } ]
@@ -2128,6 +2154,7 @@ module.exports['Ceiling'] = {
                   }, {
                      "r" : "6",
                      "s" : [ {
+                        "r" : "5",
                         "value" : [ "Ceiling","(","10",")" ]
                      } ]
                   } ]
@@ -2205,6 +2232,7 @@ module.exports['Floor'] = {
                   }, {
                      "r" : "3",
                      "s" : [ {
+                        "r" : "2",
                         "value" : [ "Floor","(","10.1",")" ]
                      } ]
                   } ]
@@ -2234,6 +2262,7 @@ module.exports['Floor'] = {
                   }, {
                      "r" : "6",
                      "s" : [ {
+                        "r" : "5",
                         "value" : [ "Floor","(","10",")" ]
                      } ]
                   } ]
@@ -2311,6 +2340,7 @@ module.exports['Truncate'] = {
                   }, {
                      "r" : "3",
                      "s" : [ {
+                        "r" : "2",
                         "value" : [ "Truncate","(","10.1",")" ]
                      } ]
                   } ]
@@ -2340,6 +2370,7 @@ module.exports['Truncate'] = {
                   }, {
                      "r" : "6",
                      "s" : [ {
+                        "r" : "5",
                         "value" : [ "Truncate","(","10",")" ]
                      } ]
                   } ]
@@ -2418,6 +2449,7 @@ module.exports['Abs'] = {
                   }, {
                      "r" : "3",
                      "s" : [ {
+                        "r" : "2",
                         "value" : [ "Abs","(","10",")" ]
                      } ]
                   } ]
@@ -2451,6 +2483,7 @@ module.exports['Abs'] = {
                      }, {
                         "r" : "6",
                         "s" : [ {
+                           "r" : "5",
                            "value" : [ "-","10" ]
                         } ]
                      }, {
@@ -2487,6 +2520,7 @@ module.exports['Abs'] = {
                   }, {
                      "r" : "10",
                      "s" : [ {
+                        "r" : "9",
                         "value" : [ "Abs","(","0",")" ]
                      } ]
                   } ]
@@ -2563,6 +2597,7 @@ module.exports['Round'] = {
                   }, {
                      "r" : "3",
                      "s" : [ {
+                        "r" : "2",
                         "value" : [ "Round","(","4.56",")" ]
                      } ]
                   } ]
@@ -2592,6 +2627,7 @@ module.exports['Round'] = {
                   }, {
                      "r" : "7",
                      "s" : [ {
+                        "r" : "5",
                         "value" : [ "Round","(","4.56",",","1",")" ]
                      } ]
                   } ]
@@ -2627,6 +2663,7 @@ module.exports['Round'] = {
                   }, {
                      "r" : "10",
                      "s" : [ {
+                        "r" : "9",
                         "value" : [ "Round","(","4.49",")" ]
                      } ]
                   } ]
@@ -2656,6 +2693,7 @@ module.exports['Round'] = {
                   }, {
                      "r" : "14",
                      "s" : [ {
+                        "r" : "12",
                         "value" : [ "Round","(","4.43",",","1",")" ]
                      } ]
                   } ]
@@ -2735,6 +2773,7 @@ module.exports['Ln'] = {
                   }, {
                      "r" : "3",
                      "s" : [ {
+                        "r" : "2",
                         "value" : [ "Ln","(","4",")" ]
                      } ]
                   } ]
@@ -2811,6 +2850,7 @@ module.exports['Log'] = {
                   }, {
                      "r" : "4",
                      "s" : [ {
+                        "r" : "2",
                         "value" : [ "Log","(","10",",","10000",")" ]
                      } ]
                   } ]
@@ -2905,6 +2945,7 @@ module.exports['Successor'] = {
                   }, {
                      "r" : "3",
                      "s" : [ {
+                        "r" : "2",
                         "value" : [ "successor of ","2" ]
                      } ]
                   } ]
@@ -2934,6 +2975,7 @@ module.exports['Successor'] = {
                   }, {
                      "r" : "6",
                      "s" : [ {
+                        "r" : "5",
                         "value" : [ "successor of ","2.2" ]
                      } ]
                   } ]
@@ -2963,6 +3005,7 @@ module.exports['Successor'] = {
                   }, {
                      "r" : "9",
                      "s" : [ {
+                        "r" : "8",
                         "value" : [ "successor of ","2147483647" ]
                      } ]
                   } ]
@@ -2996,6 +3039,7 @@ module.exports['Successor'] = {
                      }, {
                         "r" : "12",
                         "s" : [ {
+                           "r" : "11",
                            "value" : [ "DateTime","(","2015",")" ]
                         } ]
                      } ]
@@ -3034,6 +3078,7 @@ module.exports['Successor'] = {
                      }, {
                         "r" : "17",
                         "s" : [ {
+                           "r" : "15",
                            "value" : [ "DateTime","(","2015",",","01",")" ]
                         } ]
                      } ]
@@ -3078,6 +3123,7 @@ module.exports['Successor'] = {
                      }, {
                         "r" : "23",
                         "s" : [ {
+                           "r" : "20",
                            "value" : [ "DateTime","(","2015",",","01",",","01",")" ]
                         } ]
                      } ]
@@ -3128,6 +3174,7 @@ module.exports['Successor'] = {
                      }, {
                         "r" : "30",
                         "s" : [ {
+                           "r" : "26",
                            "value" : [ "DateTime","(","2015",",","01",",","01",",","0",")" ]
                         } ]
                      } ]
@@ -3184,6 +3231,7 @@ module.exports['Successor'] = {
                      }, {
                         "r" : "38",
                         "s" : [ {
+                           "r" : "33",
                            "value" : [ "DateTime","(","2015",",","01",",","01",",","0",",","0",")" ]
                         } ]
                      } ]
@@ -3246,6 +3294,7 @@ module.exports['Successor'] = {
                      }, {
                         "r" : "47",
                         "s" : [ {
+                           "r" : "41",
                            "value" : [ "DateTime","(","2015",",","01",",","01",",","0",",","0",",","0",")" ]
                         } ]
                      } ]
@@ -3314,6 +3363,7 @@ module.exports['Successor'] = {
                      }, {
                         "r" : "57",
                         "s" : [ {
+                           "r" : "50",
                            "value" : [ "DateTime","(","2015",",","01",",","01",",","0",",","0",",","0",",","0",")" ]
                         } ]
                      } ]
@@ -3388,6 +3438,7 @@ module.exports['Successor'] = {
                      }, {
                         "r" : "67",
                         "s" : [ {
+                           "r" : "60",
                            "value" : [ "DateTime","(","9999",",","12",",","31",",","23",",","59",",","59",",","999",")" ]
                         } ]
                      } ]
@@ -3512,6 +3563,7 @@ module.exports['Predecessor'] = {
                   }, {
                      "r" : "3",
                      "s" : [ {
+                        "r" : "2",
                         "value" : [ "predecessor of ","2" ]
                      } ]
                   } ]
@@ -3541,6 +3593,7 @@ module.exports['Predecessor'] = {
                   }, {
                      "r" : "6",
                      "s" : [ {
+                        "r" : "5",
                         "value" : [ "predecessor of ","2.2" ]
                      } ]
                   } ]
@@ -3574,6 +3627,7 @@ module.exports['Predecessor'] = {
                      }, {
                         "r" : "9",
                         "s" : [ {
+                           "r" : "8",
                            "value" : [ "-","2147483648" ]
                         } ]
                      } ]
@@ -3612,6 +3666,7 @@ module.exports['Predecessor'] = {
                      }, {
                         "r" : "13",
                         "s" : [ {
+                           "r" : "12",
                            "value" : [ "DateTime","(","2015",")" ]
                         } ]
                      } ]
@@ -3650,6 +3705,7 @@ module.exports['Predecessor'] = {
                      }, {
                         "r" : "18",
                         "s" : [ {
+                           "r" : "16",
                            "value" : [ "DateTime","(","2015",",","01",")" ]
                         } ]
                      } ]
@@ -3694,6 +3750,7 @@ module.exports['Predecessor'] = {
                      }, {
                         "r" : "24",
                         "s" : [ {
+                           "r" : "21",
                            "value" : [ "DateTime","(","2015",",","01",",","01",")" ]
                         } ]
                      } ]
@@ -3744,6 +3801,7 @@ module.exports['Predecessor'] = {
                      }, {
                         "r" : "31",
                         "s" : [ {
+                           "r" : "27",
                            "value" : [ "DateTime","(","2015",",","01",",","01",",","0",")" ]
                         } ]
                      } ]
@@ -3800,6 +3858,7 @@ module.exports['Predecessor'] = {
                      }, {
                         "r" : "39",
                         "s" : [ {
+                           "r" : "34",
                            "value" : [ "DateTime","(","2015",",","01",",","01",",","0",",","0",")" ]
                         } ]
                      } ]
@@ -3862,6 +3921,7 @@ module.exports['Predecessor'] = {
                      }, {
                         "r" : "48",
                         "s" : [ {
+                           "r" : "42",
                            "value" : [ "DateTime","(","2015",",","01",",","01",",","0",",","0",",","0",")" ]
                         } ]
                      } ]
@@ -3930,6 +3990,7 @@ module.exports['Predecessor'] = {
                      }, {
                         "r" : "58",
                         "s" : [ {
+                           "r" : "51",
                            "value" : [ "DateTime","(","2015",",","01",",","01",",","0",",","0",",","0",",","0",")" ]
                         } ]
                      } ]
@@ -4004,6 +4065,7 @@ module.exports['Predecessor'] = {
                      }, {
                         "r" : "68",
                         "s" : [ {
+                           "r" : "61",
                            "value" : [ "DateTime","(","0001",",","01",",","01",",","0",",","0",",","0",",","0",")" ]
                         } ]
                      } ]
@@ -4168,6 +4230,7 @@ module.exports['Quantity'] = {
                         "value" : [ "Quantity","{" ]
                      }, {
                         "s" : [ {
+                           "r" : "4",
                            "value" : [ "value",": ","10" ]
                         } ]
                      }, {
@@ -4229,6 +4292,7 @@ module.exports['Quantity'] = {
                         "value" : [ "Quantity","{" ]
                      }, {
                         "s" : [ {
+                           "r" : "8",
                            "value" : [ "value",": ","10" ]
                         } ]
                      }, {
@@ -4287,6 +4351,7 @@ module.exports['Quantity'] = {
                   }, {
                      "r" : "15",
                      "s" : [ {
+                        "r" : "12",
                         "value" : [ "DateTime","(","2000",", ","1",", ","1",")" ]
                      } ]
                   } ]
@@ -4585,6 +4650,7 @@ module.exports['Quantity'] = {
                            "value" : [ "days_10" ]
                         } ]
                      }, {
+                        "r" : "42",
                         "value" : [ " / ","2" ]
                      } ]
                   } ]
@@ -4668,6 +4734,7 @@ module.exports['Quantity'] = {
                            "value" : [ "days_10" ]
                         } ]
                      }, {
+                        "r" : "50",
                         "value" : [ " * ","2" ]
                      } ]
                   } ]
