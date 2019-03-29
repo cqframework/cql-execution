@@ -391,3 +391,71 @@ describe 'ToBoolean', ->
 
   it "should return false for F", ->
     should(@upperCaseF.exec(@ctx)).be.false
+
+describe 'ConvertsToBoolean', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for y", ->
+    should(@isTrueWithTrueValue.exec(@ctx)).be.true
+
+  it "should return true for 0", ->
+    should(@isTrueWithFalseValue.exec(@ctx)).be.true
+
+  it "should return false for invalid argument", ->
+    should(@isFalse.exec(@ctx)).be.false
+
+  it "should return null for null input", ->
+    should(@isNull.exec(@ctx)).be.null
+
+describe 'ConvertsToDate', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for valid date", ->
+    should(@isTrue.exec(@ctx)).be.true
+
+  it "should return false for invalid date", ->
+    should(@isFalse.exec(@ctx)).be.false
+
+  it "should return null for null input", ->
+    should(@isNull.exec(@ctx)).be.null
+
+describe 'ConvertsToDateTime', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for valid datetime", ->
+    should(@isTrue.exec(@ctx)).be.true
+
+  it "should return false for invalid datetime", ->
+    should(@isFalse.exec(@ctx)).be.false
+
+  it "should return null for null input", ->
+    should(@isNull.exec(@ctx)).be.null
+
+describe 'ConvertsToDecimal', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for valid decimal", ->
+    should(@isTrue.exec(@ctx)).be.true
+
+  it "should return false for invalid decimal", ->
+    should(@isFalse.exec(@ctx)).be.false
+
+  it "should return null for null input", ->
+    should(@isNull.exec(@ctx)).be.null
+
+describe 'ConvertsToInteger', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for valid integer", ->
+    should(@isTrue.exec(@ctx)).be.true
+
+  it "should return false for invalid integer", ->
+    should(@isFalse.exec(@ctx)).be.false
+
+  it "should return null for null input", ->
+    should(@isNull.exec(@ctx)).be.null

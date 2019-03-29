@@ -122,3 +122,29 @@ define IsNull: ToBoolean('falsetto')
 // @Test: ToConcept
 define IsValid: ToConcept(Code { system: 'http://loinc.org', code: '8480-6' }) // Concept { codes: { Code { system: 'http://loinc.org', code: '8480-6' } } }
 define IsNull: ToConcept(null as Code)
+
+// @Test: ConvertsToBoolean
+define IsTrueWithTrueValue: ConvertsToBoolean('y')
+define IsTrueWithFalseValue: ConvertsToBoolean('0')
+define IsFalse: ConvertsToBoolean('foo')
+define IsNull: ConvertsToBoolean(null as String)
+
+// @Test: ConvertsToDate
+define isTrue: ConvertsToDate('2015-01-01')
+define isFalse: ConvertsToDate('foo')
+define isNull: ConvertsToDate(null as Date)
+
+// @Test: ConvertsToDateTime
+define isTrue: ConvertsToDateTime('2014-01-01T14:30:00.0Z')
+define isFalse: ConvertsToDateTime('foo')
+define isNull: ConvertsToDateTime(null as DateTime)
+
+// @Test: ConvertsToDecimal
+define isTrue: ConvertsToDecimal('0.1')
+define isFalse: ConvertsToDecimal('foo')
+define isNull: ConvertsToDecimal(null as Decimal)
+
+// @Test: ConvertsToInteger
+define isTrue: ConvertsToInteger('101')
+define isFalse: ConvertsToInteger('foo')
+define isNull: ConvertsToInteger(null as Integer)

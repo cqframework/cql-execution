@@ -203,14 +203,94 @@ module.exports.Convert = class Convert extends Expression
       else
         @execArgs(ctx)
 
+module.exports.ConvertsToBoolean = class ConvertsToBoolean extends Expression
+  constructor: (json) ->
+    super
+    @operand = json.operand
+
+  exec: (ctx) ->
+    try
+      value = new ToBoolean({"type": "ToDate", "operand": @operand}).execute(ctx)
+      if value? then return true else return null
+    catch
+      return false
+
+module.exports.ConvertsToDate = class ConvertsToDate extends Expression
+  constructor: (json) ->
+    super
+    @operand = json.operand
+
+  exec: (ctx) ->
+    try
+      value = new ToBoolean({"type": "ToBoolean", "operand": @operand}).execute(ctx)
+      if value? then return true else return null
+    catch
+      return false
+
+module.exports.ConvertsToDateTime = class ConvertsToDateTime extends Expression
+  constructor: (json) ->
+    super
+    @operand = json.operand
+
+  exec: (ctx) ->
+    try
+      value = new ToDateTime({"type": "ToDateTime", "operand": @operand}).execute(ctx)
+      if value? then return true else return null
+    catch
+      return false
+
+module.exports.ConvertsToDecimal = class ConvertsToDecimal extends Expression
+  constructor: (json) ->
+    super
+    @operand = json.operand
+
+  exec: (ctx) ->
+    try
+      value = new ToDecimal({"type": "ToDecimal", "operand": @operand}).execute(ctx)
+      if value? then return true else return null
+    catch
+      return false
+
+module.exports.ConvertsToInteger = class ConvertsToInteger extends Expression
+  constructor: (json) ->
+    super
+    @operand = json.operand
+
+  exec: (ctx) ->
+    try
+      value = new ToInteger({"type": "ToInteger", "operand": @operand}).execute(ctx)
+      if value? then return true else return null
+    catch
+      return false
+
+module.exports.ConvertsToQuantity = class ConvertsToQuantity extends Expression
+  constructor: (json) ->
+    super
+    @operand = json.operand
+
+  exec: (ctx) ->
+    try
+      value = new ToQuantity({"type": "ToQuantity", "operand": @operand}).execute(ctx)
+      if value? then return true else return null
+    catch
+      return false
+
+module.exports.ConvertsToRatio = class ConvertsToRatio extends Expression
+  constructor: (json) ->
+    super
+    @operand = json.operand
+
+  exec: (ctx) ->
+    try
+      value = new ToRatio({"type": "ToRatio", "operand": @operand}).execute(ctx)
+      if value? then return true else return null
+    catch
+      return false
+
+
+
 module.exports.Is = class Is extends UnimplementedExpression
 
-module.exports.ConvertsToBoolean = class ConvertsToBoolean extends UnimplementedExpression
-module.exports.ConvertsToDate = class ConvertsToDate extends UnimplementedExpression
-module.exports.ConvertsToDateTime = class ConvertsToDateTime extends UnimplementedExpression
-module.exports.ConvertsToDecimal = class ConvertsToDecimal extends UnimplementedExpression
-module.exports.ConvertsToInteger = class ConvertsToInteger extends UnimplementedExpression
-module.exports.ConvertsToQuantity = class ConvertsToQuantity extends UnimplementedExpression
 module.exports.ConvertsToString = class ConvertsToString extends UnimplementedExpression
 module.exports.ConvertsToTime = class ConvertsToTime extends UnimplementedExpression
 

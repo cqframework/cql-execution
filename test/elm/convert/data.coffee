@@ -4402,3 +4402,712 @@ module.exports['ToConcept'] = {
    }
 }
 
+### ConvertsToBoolean
+library TestSnippet version '1'
+using QUICK
+context Patient
+define IsTrueWithTrueValue: ConvertsToBoolean('y')
+define IsTrueWithFalseValue: ConvertsToBoolean('0')
+define IsFalse: ConvertsToBoolean('foo')
+define IsNull: ConvertsToBoolean(null as String)
+###
+
+module.exports['ConvertsToBoolean'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "4",
+            "name" : "IsTrueWithTrueValue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "define ","IsTrueWithTrueValue",": " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "ConvertsToBoolean","(" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "'y'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "3",
+               "type" : "ConvertsToBoolean",
+               "operand" : {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "y",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "7",
+            "name" : "IsTrueWithFalseValue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "define ","IsTrueWithFalseValue",": " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "ConvertsToBoolean","(" ]
+                     }, {
+                        "r" : "5",
+                        "s" : [ {
+                           "value" : [ "'0'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "6",
+               "type" : "ConvertsToBoolean",
+               "operand" : {
+                  "localId" : "5",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "0",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "10",
+            "name" : "IsFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "10",
+                  "s" : [ {
+                     "value" : [ "define ","IsFalse",": " ]
+                  }, {
+                     "r" : "9",
+                     "s" : [ {
+                        "value" : [ "ConvertsToBoolean","(" ]
+                     }, {
+                        "r" : "8",
+                        "s" : [ {
+                           "value" : [ "'foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "9",
+               "type" : "ConvertsToBoolean",
+               "operand" : {
+                  "localId" : "8",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "foo",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "15",
+            "name" : "IsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "15",
+                  "s" : [ {
+                     "value" : [ "define ","IsNull",": " ]
+                  }, {
+                     "r" : "14",
+                     "s" : [ {
+                        "value" : [ "ConvertsToBoolean","(" ]
+                     }, {
+                        "r" : "13",
+                        "s" : [ {
+                           "r" : "11",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "12",
+                           "s" : [ {
+                              "value" : [ "String" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "14",
+               "type" : "ConvertsToBoolean",
+               "operand" : {
+                  "localId" : "13",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "11",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "12",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+
+### ConvertsToDate
+library TestSnippet version '1'
+using QUICK
+context Patient
+define isTrue: ConvertsToDate('2015-01-01')
+define isFalse: ConvertsToDate('foo')
+define isNull: ConvertsToDate(null as Date)
+###
+
+module.exports['ConvertsToDate'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "4",
+            "name" : "isTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "define ","isTrue",": " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "ConvertsToDate","(" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "'2015-01-01'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "3",
+               "type" : "ConvertsToDate",
+               "operand" : {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "2015-01-01",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "7",
+            "name" : "isFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "define ","isFalse",": " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "ConvertsToDate","(" ]
+                     }, {
+                        "r" : "5",
+                        "s" : [ {
+                           "value" : [ "'foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "6",
+               "type" : "ConvertsToDate",
+               "operand" : {
+                  "localId" : "5",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "foo",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "12",
+            "name" : "isNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "value" : [ "define ","isNull",": " ]
+                  }, {
+                     "r" : "11",
+                     "s" : [ {
+                        "value" : [ "ConvertsToDate","(" ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "r" : "8",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "9",
+                           "s" : [ {
+                              "value" : [ "Date" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "11",
+               "type" : "ConvertsToDate",
+               "operand" : {
+                  "localId" : "10",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "8",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "9",
+                     "name" : "{urn:hl7-org:elm-types:r1}Date",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+
+### ConvertsToDateTime
+library TestSnippet version '1'
+using QUICK
+context Patient
+define isTrue: ConvertsToDateTime('2014-01-01T14:30:00.0Z')
+define isFalse: ConvertsToDateTime('foo')
+define isNull: ConvertsToDateTime(null as DateTime)
+###
+
+module.exports['ConvertsToDateTime'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "4",
+            "name" : "isTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "define ","isTrue",": " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "ConvertsToDateTime","(" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "'2014-01-01T14:30:00.0Z'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "3",
+               "type" : "ConvertsToDateTime",
+               "operand" : {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "2014-01-01T14:30:00.0Z",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "7",
+            "name" : "isFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "define ","isFalse",": " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "ConvertsToDateTime","(" ]
+                     }, {
+                        "r" : "5",
+                        "s" : [ {
+                           "value" : [ "'foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "6",
+               "type" : "ConvertsToDateTime",
+               "operand" : {
+                  "localId" : "5",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "foo",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "12",
+            "name" : "isNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "value" : [ "define ","isNull",": " ]
+                  }, {
+                     "r" : "11",
+                     "s" : [ {
+                        "value" : [ "ConvertsToDateTime","(" ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "r" : "8",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "9",
+                           "s" : [ {
+                              "value" : [ "DateTime" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "11",
+               "type" : "ConvertsToDateTime",
+               "operand" : {
+                  "localId" : "10",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "8",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "9",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+
+### ConvertsToDecimal
+library TestSnippet version '1'
+using QUICK
+context Patient
+define isTrue: ConvertsToDecimal('0.1')
+define isFalse: ConvertsToDecimal('foo')
+define isNull: ConvertsToDecimal(null as Decimal)
+###
+
+module.exports['ConvertsToDecimal'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "4",
+            "name" : "isTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "define ","isTrue",": " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "ConvertsToDecimal","(" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "'0.1'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "3",
+               "type" : "ConvertsToDecimal",
+               "operand" : {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "0.1",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "7",
+            "name" : "isFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "define ","isFalse",": " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "ConvertsToDecimal","(" ]
+                     }, {
+                        "r" : "5",
+                        "s" : [ {
+                           "value" : [ "'foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "6",
+               "type" : "ConvertsToDecimal",
+               "operand" : {
+                  "localId" : "5",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "foo",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "12",
+            "name" : "isNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "value" : [ "define ","isNull",": " ]
+                  }, {
+                     "r" : "11",
+                     "s" : [ {
+                        "value" : [ "ConvertsToDecimal","(" ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "r" : "8",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "9",
+                           "s" : [ {
+                              "value" : [ "Decimal" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "11",
+               "type" : "ConvertsToDecimal",
+               "operand" : {
+                  "localId" : "10",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "8",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "9",
+                     "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+
