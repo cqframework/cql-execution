@@ -33,7 +33,7 @@ module.exports.ToBoolean = class ToBoolean extends Expression
       else if strArg in ["false", "f", "no", "n", "0"]
         false
       else
-        throw new Error("cannot convert #{strArg} to Boolean")
+        null
     else
       null
 
@@ -209,11 +209,11 @@ module.exports.ConvertsToBoolean = class ConvertsToBoolean extends Expression
     @operand = json.operand
 
   exec: (ctx) ->
-    try
-      value = new ToBoolean({"type": "ToDate", "operand": @operand}).execute(ctx)
-      if value? then return true else return null
-    catch
-      return false
+    operatorValue = @execArgs(ctx)
+    if operatorValue is null
+      return null
+    else
+      canConvertToType(ToBoolean, @operand, ctx)
 
 module.exports.ConvertsToDate = class ConvertsToDate extends Expression
   constructor: (json) ->
@@ -221,11 +221,11 @@ module.exports.ConvertsToDate = class ConvertsToDate extends Expression
     @operand = json.operand
 
   exec: (ctx) ->
-    try
-      value = new ToBoolean({"type": "ToBoolean", "operand": @operand}).execute(ctx)
-      if value? then return true else return null
-    catch
-      return false
+    operatorValue = @execArgs(ctx)
+    if operatorValue is null
+      return null
+    else
+      canConvertToType(ToDate, @operand, ctx)
 
 module.exports.ConvertsToDateTime = class ConvertsToDateTime extends Expression
   constructor: (json) ->
@@ -233,11 +233,11 @@ module.exports.ConvertsToDateTime = class ConvertsToDateTime extends Expression
     @operand = json.operand
 
   exec: (ctx) ->
-    try
-      value = new ToDateTime({"type": "ToDateTime", "operand": @operand}).execute(ctx)
-      if value? then return true else return null
-    catch
-      return false
+    operatorValue = @execArgs(ctx)
+    if operatorValue is null
+      return null
+    else
+      canConvertToType(ToDateTime, @operand, ctx)
 
 module.exports.ConvertsToDecimal = class ConvertsToDecimal extends Expression
   constructor: (json) ->
@@ -245,11 +245,11 @@ module.exports.ConvertsToDecimal = class ConvertsToDecimal extends Expression
     @operand = json.operand
 
   exec: (ctx) ->
-    try
-      value = new ToDecimal({"type": "ToDecimal", "operand": @operand}).execute(ctx)
-      if value? then return true else return null
-    catch
-      return false
+    operatorValue = @execArgs(ctx)
+    if operatorValue is null
+      return null
+    else
+      canConvertToType(ToDecimal, @operand, ctx)
 
 module.exports.ConvertsToInteger = class ConvertsToInteger extends Expression
   constructor: (json) ->
@@ -257,11 +257,11 @@ module.exports.ConvertsToInteger = class ConvertsToInteger extends Expression
     @operand = json.operand
 
   exec: (ctx) ->
-    try
-      value = new ToInteger({"type": "ToInteger", "operand": @operand}).execute(ctx)
-      if value? then return true else return null
-    catch
-      return false
+    operatorValue = @execArgs(ctx)
+    if operatorValue is null
+      return null
+    else
+      canConvertToType(ToInteger, @operand, ctx)
 
 module.exports.ConvertsToQuantity = class ConvertsToQuantity extends Expression
   constructor: (json) ->
@@ -269,11 +269,11 @@ module.exports.ConvertsToQuantity = class ConvertsToQuantity extends Expression
     @operand = json.operand
 
   exec: (ctx) ->
-    try
-      value = new ToQuantity({"type": "ToQuantity", "operand": @operand}).execute(ctx)
-      if value? then return true else return null
-    catch
-      return false
+    operatorValue = @execArgs(ctx)
+    if operatorValue is null
+      return null
+    else
+      canConvertToType(ToQuantity, @operand, ctx)
 
 module.exports.ConvertsToRatio = class ConvertsToRatio extends Expression
   constructor: (json) ->
@@ -281,23 +281,45 @@ module.exports.ConvertsToRatio = class ConvertsToRatio extends Expression
     @operand = json.operand
 
   exec: (ctx) ->
-    try
-      value = new ToRatio({"type": "ToRatio", "operand": @operand}).execute(ctx)
-      if value? then return true else return null
-    catch
-      return false
+    operatorValue = @execArgs(ctx)
+    if operatorValue is null
+      return null
+    else
+      canConvertToType(ToRatio, @operand, ctx)
 
+module.exports.ConvertsToString = class ConvertsToString extends Expression
+  constructor: (json) ->
+    super
+    @operand = json.operand
 
+  exec: (ctx) ->
+    operatorValue = @execArgs(ctx)
+    if operatorValue is null
+      return null
+    else
+      canConvertToType(ToString, @operand, ctx)
+
+module.exports.ConvertsToTime = class ConvertsToTime extends Expression
+  constructor: (json) ->
+    super
+    @operand = json.operand
+
+  exec: (ctx) ->
+    operatorValue = @execArgs(ctx)
+    if operatorValue is null
+      return null
+    else
+      canConvertToType(ToTime, @operand, ctx)
+
+canConvertToType = (toFunction, operand, ctx) ->
+  try
+    value = new toFunction({"type": toFunction.name, "operand": operand}).execute(ctx)
+    return value
+  catch
+    false
 
 module.exports.Is = class Is extends UnimplementedExpression
-
-module.exports.ConvertsToString = class ConvertsToString extends UnimplementedExpression
-module.exports.ConvertsToTime = class ConvertsToTime extends UnimplementedExpression
-
 module.exports.IntervalTypeSpecifier = class IntervalTypeSpecifier extends UnimplementedExpression
-
 module.exports.ListTypeSpecifier = class ListTypeSpecifier extends UnimplementedExpression
-
 module.exports.NamedTypeSpecifier = class NamedTypeSpecifier extends UnimplementedExpression
-
 module.exports.TupleTypeSpecifier = class TupleTypeSpecifier extends UnimplementedExpression

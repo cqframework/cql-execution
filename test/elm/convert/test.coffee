@@ -319,7 +319,6 @@ describe 'ToRatio', ->
     ratio.denominator.value.should.eql 2.0
     ratio.denominator.unit.should.eql 'mg'
 
-
 describe 'ToTime', ->
   @beforeEach ->
     setup @, data
@@ -455,6 +454,70 @@ describe 'ConvertsToInteger', ->
     should(@isTrue.exec(@ctx)).be.true
 
   it "should return false for invalid integer", ->
+    should(@isFalse.exec(@ctx)).be.false
+
+  it "should return null for null input", ->
+    should(@isNull.exec(@ctx)).be.null
+
+describe 'ConvertsToQuantity', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for valid decimal", ->
+    should(@isTrueWithDecimal.exec(@ctx)).be.true
+
+  it "should return true for valid integer", ->
+    should(@isTrueWithInteger.exec(@ctx)).be.true
+
+  it "should return true for valid string", ->
+    should(@isTrueWithString.exec(@ctx)).be.true
+
+  it "should return false for invalid ucum unit", ->
+    should(@isFalseWithInvalidUcum.exec(@ctx)).be.false
+
+  it "should return false for invalid string", ->
+    should(@isFalse.exec(@ctx)).be.false
+
+  it "should return null for null input", ->
+    should(@isNull.exec(@ctx)).be.null
+
+describe 'ConvertsToRatio', ->
+  @beforeEach ->
+    setup @, data
+  
+  it "should return true for valid ratio string", ->
+    should(@isTrue.exec(@ctx)).be.true
+  
+  it "should return false for invalid ratio string", ->
+    should(@isFalse.exec(@ctx)).be.false
+
+  it "should return false for invalid ucum units", ->
+    should(@isFalseWithInvalidUcum.exec(@ctx)).be.false
+
+  it "should return null for null input", ->
+    should(@isNull.exec(@ctx)).be.null
+
+describe 'ConvertsToString', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for valid Boolean", ->
+    should(@isTrue.exec(@ctx)).be.true
+
+  it "should return false for invalid type", ->
+    should(@isFalse.exec(@ctx)).be.false
+
+  it "should return null for null input", ->
+    should(@isNull.exec(@ctx)).be.null
+
+describe 'ConvertsToTime', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for valid string", ->
+    should(@isTrue.exec(@ctx)).be.true
+
+  it "should return false for invalid string", ->
     should(@isFalse.exec(@ctx)).be.false
 
   it "should return null for null input", ->

@@ -130,21 +130,45 @@ define IsFalse: ConvertsToBoolean('foo')
 define IsNull: ConvertsToBoolean(null as String)
 
 // @Test: ConvertsToDate
-define isTrue: ConvertsToDate('2015-01-01')
-define isFalse: ConvertsToDate('foo')
-define isNull: ConvertsToDate(null as Date)
+define IsTrue: ConvertsToDate('2015-01-01')
+define IsFalse: ConvertsToDate('foo')
+define IsNull: ConvertsToDate(null as Date)
 
 // @Test: ConvertsToDateTime
-define isTrue: ConvertsToDateTime('2014-01-01T14:30:00.0Z')
-define isFalse: ConvertsToDateTime('foo')
-define isNull: ConvertsToDateTime(null as DateTime)
+define IsTrue: ConvertsToDateTime('2014-01-01T14:30:00.0Z')
+define IsFalse: ConvertsToDateTime('foo')
+define IsNull: ConvertsToDateTime(null as DateTime)
 
 // @Test: ConvertsToDecimal
-define isTrue: ConvertsToDecimal('0.1')
-define isFalse: ConvertsToDecimal('foo')
-define isNull: ConvertsToDecimal(null as Decimal)
+define IsTrue: ConvertsToDecimal('0.1')
+define IsFalse: ConvertsToDecimal('foo')
+define IsNull: ConvertsToDecimal(null as Decimal)
 
 // @Test: ConvertsToInteger
-define isTrue: ConvertsToInteger('101')
-define isFalse: ConvertsToInteger('foo')
-define isNull: ConvertsToInteger(null as Integer)
+define IsTrue: ConvertsToInteger('101')
+define IsFalse: ConvertsToInteger('foo')
+define IsNull: ConvertsToInteger(null as Integer)
+
+// @Test: ConvertsToQuantity
+define IsTrueWithDecimal: ConvertsToQuantity(0.1)
+define IsTrueWithInteger: ConvertsToQuantity(101)
+define IsTrueWithString: ConvertsToQuantity('1.0 \'mg\'')
+define IsFalse: ConvertsToQuantity('foo')
+define IsFalseWithInvalidUcum: ConvertsToQuantity('1.0 \'cc\'')
+define IsNull: ConvertsToQuantity(null as String)
+
+// @Test: ConvertsToRatio
+define IsTrue: ConvertsToRatio('1.0 \'mg\':2.0 \'mg\'')
+define IsFalse: ConvertsToRatio('1.0 \'mg\';2.0 \'mg\'')
+define IsFalseWithInvalidUcum: ConvertsToRatio('1.0 \'mg\';2.0 \'cc\'')
+define IsNull: ConvertsToRatio(null as String)
+
+// @Test: ConvertsToString
+define IsTrue: ConvertsToString(true)
+define IsFalse: ConvertsToString(Code { system: 'http://loinc.org', code: '8480-6' })
+define IsNull: ConvertsToString(null as String)
+
+// @Test: ConvertsToTime
+define IsTrue: ConvertsToTime('T02:04:59.123+01:00')
+define IsFalse: ConvertsToTime('foo')
+define IsNull: ConvertsToString(null as String)
