@@ -11,6 +11,7 @@ before_script:
   - npm install -g coffeelint
   - npm install -g codecov
   - ./bin/validate_cql4browsers.sh
+  - ./bin/check_for_nonassertive_tests.sh
   - yarn audit
 script:
   - NODE_ENV=test ./node_modules/.bin/nyc --reporter=text-lcov ./node_modules/.bin/mocha --compilers coffee:coffeescript/register --require coffeescript --recursive --colors > coverage.lcov
