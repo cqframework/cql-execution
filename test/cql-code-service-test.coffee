@@ -59,7 +59,7 @@ describe 'CodeService', ->
     @svc.findValueSet('1.2.3.4.5').should.eql @vsTwo
 
   it 'should return empty array when searching for value sets by wrong OID', ->
-    @svc.findValueSetsByOid('0.0.0.0.0').should.be.empty
+    @svc.findValueSetsByOid('0.0.0.0.0').should.be.empty()
 
   it 'should return null when looking for a single value set by wrong OID', ->
     should.not.exist @svc.findValueSet('0.0.0.0.0')

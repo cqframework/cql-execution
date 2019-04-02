@@ -42,11 +42,11 @@ describe 'Retrieve', ->
 
   it 'should not find conditions with wrong valueset', ->
     e = @wrongValueSet.exec(@ctx)
-    e.should.be.empty
+    e.should.be.empty()
 
   it 'should not find encounter performances using wrong codeProperty', ->
     e = @wrongCodeProperty.exec(@ctx)
-    e.should.be.empty
+    e.should.be.empty()
 
   it 'should find conditions by specific pharyngitis code', ->
     e = @conditionsByCode.exec(@ctx)

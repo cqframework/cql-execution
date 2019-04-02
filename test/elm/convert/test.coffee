@@ -147,7 +147,7 @@ describe 'FromDateTime', ->
 
   it "should convert @2015-01-02T12:01:02.321-06:00 to Date", ->
     date = @dateTimeToDate.exec(@ctx)
-    date.isDate.should.be.true
+    date.isDate.should.be.true()
     date.year.should.equal 2015
     date.month.should.equal 1
     date.day.should.equal 2
@@ -155,7 +155,7 @@ describe 'FromDateTime', ->
 
   it "should convert @2015-01-02T12:01:02.321-06:00 to DateTime", ->
     dateTime = @dateTimeToDateTime.exec(@ctx)
-    dateTime.isDateTime.should.be.true
+    dateTime.isDateTime.should.be.true()
     dateTime.year.should.equal 2015
     dateTime.month.should.equal 1
     dateTime.day.should.equal 2
@@ -255,7 +255,7 @@ describe 'ToDecimal', ->
     should(@tooSmallDec.exec(@ctx)).be.null()
 
   it "should convert null to null", ->
-    should(@nullDecimal.exec(@ctx)).not.exist
+    should.not.exist(@nullDecimal.exec(@ctx))
 
   it.skip "should be null if wrong format (+.1)", ->
     # TODO: parseFloat is more forgiving than the CQL spec, so this does get converted
@@ -294,7 +294,7 @@ describe 'ToQuantity', ->
     should(@tooSmallQuantity.exec(@ctx)).be.null()
 
   it "should return null for null argument", ->
-    should(@nullArg.exec(@ctx)).not.exist
+    should.not.exist(@nullArg.exec(@ctx))
 
 describe 'ToRatio', ->
   @beforeEach ->
@@ -324,7 +324,7 @@ describe 'ToTime', ->
     setup @, data
 
   it "should return null if arg is null", ->
-    should(@nullArgTime.exec(@ctx)).not.exist
+    should.not.exist(@nullArgTime.exec(@ctx))
 
   it "should be null for incorrect format", ->
     should(@incorrectFormatTime.exec(@ctx)).be.null()
@@ -487,10 +487,10 @@ describe 'ConvertsToQuantity', ->
 describe 'ConvertsToRatio', ->
   @beforeEach ->
     setup @, data
-  
+
   it "should return true for valid ratio string", ->
     @isTrue.exec(@ctx).should.equal true
-  
+
   it "should return false for invalid ratio string", ->
     @isFalse.exec(@ctx).should.equal false
 
