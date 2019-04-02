@@ -374,151 +374,154 @@ describe 'ToBoolean', ->
     setup @, data
 
   it "should return true for TRUE", ->
-    should(@upperCaseTrue.exec(@ctx)).be.true
+    @upperCaseTrue.exec(@ctx).should.equal true
 
   it "should return true for FALSE", ->
-    should(@upperCaseFalse.exec(@ctx)).be.false
+    @upperCaseFalse.exec(@ctx).should.equal false
 
   it "should return true for true", ->
-    should(@lowerCaseT.exec(@ctx)).be.true
+    @lowerCaseT.exec(@ctx).should.equal true
 
   it "should return true for false", ->
-    should(@lowerCaseF.exec(@ctx)).be.false
+    @lowerCaseF.exec(@ctx).should.equal false
 
   it "should return true for T", ->
-    should(@upperCaseT.exec(@ctx)).be.true
+    @upperCaseT.exec(@ctx).should.equal true
 
   it "should return false for F", ->
-    should(@upperCaseF.exec(@ctx)).be.false
+    @upperCaseF.exec(@ctx).should.equal false
 
 describe 'ConvertsToBoolean', ->
   @beforeEach ->
     setup @, data
 
   it "should return true for y", ->
-    should(@isTrueWithTrueValue.exec(@ctx)).be.true
+    @isTrueWithTrueValue.exec(@ctx).should.equal true
 
   it "should return true for 0", ->
-    should(@isTrueWithFalseValue.exec(@ctx)).be.true
+    @isTrueWithFalseValue.exec(@ctx).should.equal true
 
   it "should return false for invalid argument", ->
-    should(@isFalse.exec(@ctx)).be.false
+    @isFalse.exec(@ctx).should.equal false
 
   it "should return null for null input", ->
-    should(@isNull.exec(@ctx)).be.null
+    should(@isNull.exec(@ctx)).be.null()
 
 describe 'ConvertsToDate', ->
   @beforeEach ->
     setup @, data
 
   it "should return true for valid date", ->
-    should(@isTrue.exec(@ctx)).be.true
+    @isTrue.exec(@ctx).should.equal true
 
   it "should return false for invalid date", ->
-    should(@isFalse.exec(@ctx)).be.false
+    @isFalse.exec(@ctx).should.equal false
 
   it "should return null for null input", ->
-    should(@isNull.exec(@ctx)).be.null
+    should(@isNull.exec(@ctx)).be.null()
 
 describe 'ConvertsToDateTime', ->
   @beforeEach ->
     setup @, data
 
   it "should return true for valid datetime", ->
-    should(@isTrue.exec(@ctx)).be.true
+    @isTrue.exec(@ctx).should.equal true
+
+  it "should return true for valid date", ->
+    @isTrueWithDateValue.exec(@ctx).should.equal true
 
   it "should return false for invalid datetime", ->
-    should(@isFalse.exec(@ctx)).be.false
+    @isFalse.exec(@ctx).should.equal false
 
   it "should return null for null input", ->
-    should(@isNull.exec(@ctx)).be.null
+    should(@isNull.exec(@ctx)).be.null()
 
 describe 'ConvertsToDecimal', ->
   @beforeEach ->
     setup @, data
 
   it "should return true for valid decimal", ->
-    should(@isTrue.exec(@ctx)).be.true
+    @isTrue.exec(@ctx).should.equal true
 
   it "should return false for invalid decimal", ->
-    should(@isFalse.exec(@ctx)).be.false
+    @isFalse.exec(@ctx).should.equal false
 
   it "should return null for null input", ->
-    should(@isNull.exec(@ctx)).be.null
+    should(@isNull.exec(@ctx)).be.null()
 
 describe 'ConvertsToInteger', ->
   @beforeEach ->
     setup @, data
 
   it "should return true for valid integer", ->
-    should(@isTrue.exec(@ctx)).be.true
+    @isTrue.exec(@ctx).should.equal true
 
   it "should return false for invalid integer", ->
-    should(@isFalse.exec(@ctx)).be.false
+    @isFalse.exec(@ctx).should.equal false
 
   it "should return null for null input", ->
-    should(@isNull.exec(@ctx)).be.null
+    should(@isNull.exec(@ctx)).be.null()
 
 describe 'ConvertsToQuantity', ->
   @beforeEach ->
     setup @, data
 
   it "should return true for valid decimal", ->
-    should(@isTrueWithDecimal.exec(@ctx)).be.true
+    @isTrueWithDecimal.exec(@ctx).should.equal true
 
   it "should return true for valid integer", ->
-    should(@isTrueWithInteger.exec(@ctx)).be.true
+    @isTrueWithInteger.exec(@ctx).should.equal true
 
   it "should return true for valid string", ->
-    should(@isTrueWithString.exec(@ctx)).be.true
+    @isTrueWithString.exec(@ctx).should.equal true
 
   it "should return false for invalid ucum unit", ->
-    should(@isFalseWithInvalidUcum.exec(@ctx)).be.false
+    @isFalseWithInvalidUcum.exec(@ctx).should.equal false
 
   it "should return false for invalid string", ->
-    should(@isFalse.exec(@ctx)).be.false
+    @isFalse.exec(@ctx).should.equal false
 
   it "should return null for null input", ->
-    should(@isNull.exec(@ctx)).be.null
+    should(@isNull.exec(@ctx)).be.null()
 
 describe 'ConvertsToRatio', ->
   @beforeEach ->
     setup @, data
   
   it "should return true for valid ratio string", ->
-    should(@isTrue.exec(@ctx)).be.true
+    @isTrue.exec(@ctx).should.equal true
   
   it "should return false for invalid ratio string", ->
-    should(@isFalse.exec(@ctx)).be.false
+    @isFalse.exec(@ctx).should.equal false
 
   it "should return false for invalid ucum units", ->
-    should(@isFalseWithInvalidUcum.exec(@ctx)).be.false
+    @isFalseWithInvalidUcum.exec(@ctx).should.equal false
 
   it "should return null for null input", ->
-    should(@isNull.exec(@ctx)).be.null
+    should(@isNull.exec(@ctx)).be.null()
 
 describe 'ConvertsToString', ->
   @beforeEach ->
     setup @, data
 
   it "should return true for valid Boolean", ->
-    should(@isTrue.exec(@ctx)).be.true
+    @isTrue.exec(@ctx).should.equal true
 
-  it "should return false for invalid type", ->
-    should(@isFalse.exec(@ctx)).be.false
+  it.skip "should return false for invalid type", ->
+    @isFalse.exec(@ctx).should.equal false
 
   it "should return null for null input", ->
-    should(@isNull.exec(@ctx)).be.null
+    should(@isNull.exec(@ctx)).be.null()
 
 describe 'ConvertsToTime', ->
   @beforeEach ->
     setup @, data
 
   it "should return true for valid string", ->
-    should(@isTrue.exec(@ctx)).be.true
+    @isTrue.exec(@ctx).should.equal true
 
   it "should return false for invalid string", ->
-    should(@isFalse.exec(@ctx)).be.false
+    @isFalse.exec(@ctx).should.equal false
 
   it "should return null for null input", ->
-    should(@isNull.exec(@ctx)).be.null
+    should(@isNull.exec(@ctx)).be.null()

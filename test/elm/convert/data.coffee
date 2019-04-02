@@ -4780,6 +4780,7 @@ library TestSnippet version '1'
 using QUICK
 context Patient
 define IsTrue: ConvertsToDateTime('2014-01-01T14:30:00.0Z')
+define IsTrueWithDateValue: ConvertsToDateTime(@2015-01-01)
 define IsFalse: ConvertsToDateTime('foo')
 define IsNull: ConvertsToDateTime(null as DateTime)
 ###
@@ -4854,7 +4855,7 @@ module.exports['ConvertsToDateTime'] = {
             }
          }, {
             "localId" : "7",
-            "name" : "IsFalse",
+            "name" : "IsTrueWithDateValue",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -4862,13 +4863,56 @@ module.exports['ConvertsToDateTime'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","IsFalse",": " ]
+                     "value" : [ "define ","IsTrueWithDateValue",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
+                        "r" : "5",
+                        "value" : [ "ConvertsToDateTime","(","@2015-01-01",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "6",
+               "type" : "ConvertsToDateTime",
+               "operand" : {
+                  "localId" : "5",
+                  "type" : "Date",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2015",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         }, {
+            "localId" : "10",
+            "name" : "IsFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "10",
+                  "s" : [ {
+                     "value" : [ "define ","IsFalse",": " ]
+                  }, {
+                     "r" : "9",
+                     "s" : [ {
                         "value" : [ "ConvertsToDateTime","(" ]
                      }, {
-                        "r" : "5",
+                        "r" : "8",
                         "s" : [ {
                            "value" : [ "'foo'" ]
                         } ]
@@ -4879,37 +4923,37 @@ module.exports['ConvertsToDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "6",
+               "localId" : "9",
                "type" : "ConvertsToDateTime",
                "operand" : {
-                  "localId" : "5",
+                  "localId" : "8",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "foo",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "12",
+            "localId" : "15",
             "name" : "IsNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "12",
+                  "r" : "15",
                   "s" : [ {
                      "value" : [ "define ","IsNull",": " ]
                   }, {
-                     "r" : "11",
+                     "r" : "14",
                      "s" : [ {
                         "value" : [ "ConvertsToDateTime","(" ]
                      }, {
-                        "r" : "10",
+                        "r" : "13",
                         "s" : [ {
-                           "r" : "8",
+                           "r" : "11",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "9",
+                           "r" : "12",
                            "s" : [ {
                               "value" : [ "DateTime" ]
                            } ]
@@ -4921,18 +4965,18 @@ module.exports['ConvertsToDateTime'] = {
                }
             } ],
             "expression" : {
-               "localId" : "11",
+               "localId" : "14",
                "type" : "ConvertsToDateTime",
                "operand" : {
-                  "localId" : "10",
+                  "localId" : "13",
                   "strict" : false,
                   "type" : "As",
                   "operand" : {
-                     "localId" : "8",
+                     "localId" : "11",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "9",
+                     "localId" : "12",
                      "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "NamedTypeSpecifier"
                   }

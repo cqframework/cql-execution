@@ -314,7 +314,7 @@ module.exports.ConvertsToTime = class ConvertsToTime extends Expression
 canConvertToType = (toFunction, operand, ctx) ->
   try
     value = new toFunction({"type": toFunction.name, "operand": operand}).execute(ctx)
-    return value
+    if value? then true else false
   catch
     false
 

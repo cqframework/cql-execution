@@ -8875,7 +8875,11 @@
         "type": toFunction.name,
         "operand": operand
       }).execute(ctx);
-      return value;
+      if (value != null) {
+        return true;
+      } else {
+        return false;
+      }
     } catch (error) {
       return false;
     }

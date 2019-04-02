@@ -136,6 +136,7 @@ define IsNull: ConvertsToDate(null as Date)
 
 // @Test: ConvertsToDateTime
 define IsTrue: ConvertsToDateTime('2014-01-01T14:30:00.0Z')
+define IsTrueWithDateValue: ConvertsToDateTime(@2015-01-01)
 define IsFalse: ConvertsToDateTime('foo')
 define IsNull: ConvertsToDateTime(null as DateTime)
 
