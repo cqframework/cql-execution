@@ -93,4 +93,4 @@ describe 'Patient', ->
     conditions[0].get('identifier').value.should.equal 'http://cqframework.org/1/2'
 
   it 'should return empty array for unfound records', ->
-    @patient.findRecords('foo').should.be.empty
+    @patient.findRecords('foo').should.be.empty()

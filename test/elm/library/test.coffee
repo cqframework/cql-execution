@@ -16,19 +16,19 @@ describe 'In Age Demographic', ->
     @results.patientResults['2'].InDemographic.should.equal true
 
   it 'should have empty population results', ->
-    @results.populationResults.should.be.empty
+    @results.populationResults.should.be.empty()
 
 describe 'Using CommonLib', ->
   @beforeEach ->
     setup @, data, [ p1, p2 ], {}, {}, new Repository(data)
 
   it "should have using models defined", ->
-    @lib.usings.should.not.be.empty
+    @lib.usings.should.not.be.empty()
     @lib.usings.length.should.equal 1
     @lib.usings[0].name.should.equal "QUICK"
 
   it 'Should have included a library', ->
-    @lib.includes.should.not.be.empty
+    @lib.includes.should.not.be.empty()
 
   it "should be able to execute expression from included library", ->
     @results = @executor.withLibrary(@lib).exec_patient_context(@patientSource)
