@@ -112,10 +112,13 @@ module.exports.ToRatio = class ToRatio extends Expression
 
   exec: (ctx) ->
     arg = @execArgs(ctx)
-    if arg? and typeof arg != 'undefined'
+    if arg?
       # Argument will be of form '<quantity>:<quantity>'
       try
-        [numerator, denominator] = arg.toString().split(':').map((quantity) -> parseQuantity(quantity))
+        # String will be split into the following format ["", "numerator", "denominator", ""]
+        splitRatioString = arg.toString().split(/^(\d+\.\d+?\s*\'\w+\'\s*):(\s*\d+\.\d+?\s*\'\w+\'?)/)
+        numerator = parseQuantity(splitRatioString[1])
+        denominator = parseQuantity(splitRatioString[2])
       catch
         # If the input string is not formatted correctly, or cannot be
         # interpreted as a valid Quantity value, the result is null.

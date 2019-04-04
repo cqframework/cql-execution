@@ -8501,13 +8501,13 @@
     }
 
     ToRatio.prototype.exec = function(ctx) {
-      var arg, denominator, numerator, ref3;
+      var arg, denominator, numerator, splitRatioString;
       arg = this.execArgs(ctx);
-      if ((arg != null) && typeof arg !== 'undefined') {
+      if (arg != null) {
         try {
-          ref3 = arg.toString().split(':').map(function(quantity) {
-            return parseQuantity(quantity);
-          }), numerator = ref3[0], denominator = ref3[1];
+          splitRatioString = arg.toString().split(/^(\d+\.\d+?\s*\'\w+\'\s*):(\s*\d+\.\d+?\s*\'\w+\'?)/);
+          numerator = parseQuantity(splitRatioString[1]);
+          denominator = parseQuantity(splitRatioString[2]);
         } catch (error) {
           return null;
         }

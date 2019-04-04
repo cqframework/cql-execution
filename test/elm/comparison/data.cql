@@ -79,7 +79,7 @@ define ALtB_Quantity_incompatible: 5 'Cel' != 40 'm'
 // @Test: Equivalent
 define ANull_BDefined: null ~ 4
 define ADefined_BNull: 5 ~ null
-define ANull_BNull: null ~ null
+define ANull_BNull: (null as String) ~ (null as String)
 define ADefined_BDefined: 3 ~ 3
 define CaseInsensitiveStrings: 'FOO' ~ 'foo'
 define EqRatios: 10 'mg' : 2 'dL' ~ 15 'mg' : 3 'dL'
