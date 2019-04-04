@@ -8505,9 +8505,12 @@
       arg = this.execArgs(ctx);
       if (arg != null) {
         try {
-          splitRatioString = arg.toString().split(/^(\d+\.\d+?\s*\'\w+\'\s*):(\s*\d+\.\d+?\s*\'\w+\'?)/);
+          splitRatioString = arg.toString().match(/^(\d+(\.\d+)?\s*('.+')?)\s*:\s*(\d+(\.\d+)?\s*('.+')?)$/);
+          if (splitRatioString == null) {
+            return null;
+          }
           numerator = parseQuantity(splitRatioString[1]);
-          denominator = parseQuantity(splitRatioString[2]);
+          denominator = parseQuantity(splitRatioString[4]);
         } catch (error) {
           return null;
         }

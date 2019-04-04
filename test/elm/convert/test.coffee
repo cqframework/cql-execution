@@ -312,6 +312,13 @@ describe 'ToRatio', ->
   it "should be null if denominator is invalid", ->
     should(@invalidDenominator.exec(@ctx)).be.null()
 
+  it "should be valid given quantities with custom UCUM units", ->
+    ratio = @isValidWithCustomUCUM.exec(@ctx)
+    ratio.numerator.value.should.eql 1.0
+    ratio.numerator.unit.should.eql '{foo:bar }'
+    ratio.denominator.value.should.eql 2.0
+    ratio.denominator.unit.should.eql 'mg'
+
   it "should create valid ratio", ->
     ratio = @isValid.exec(@ctx)
     ratio.numerator.value.should.eql 1.0

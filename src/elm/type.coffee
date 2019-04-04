@@ -115,10 +115,11 @@ module.exports.ToRatio = class ToRatio extends Expression
     if arg?
       # Argument will be of form '<quantity>:<quantity>'
       try
-        # String will be split into the following format ["", "numerator", "denominator", ""]
-        splitRatioString = arg.toString().split(/^(\d+\.\d+?\s*\'\w+\'\s*):(\s*\d+\.\d+?\s*\'\w+\'?)/)
+        # String will be split into an array. Numerator will be at index 1, Denominator will be at index 4
+        splitRatioString = arg.toString().match(/^(\d+(\.\d+)?\s*('.+')?)\s*:\s*(\d+(\.\d+)?\s*('.+')?)$/)
+        return null if !splitRatioString?
         numerator = parseQuantity(splitRatioString[1])
-        denominator = parseQuantity(splitRatioString[2])
+        denominator = parseQuantity(splitRatioString[4])
       catch
         # If the input string is not formatted correctly, or cannot be
         # interpreted as a valid Quantity value, the result is null.

@@ -2995,6 +2995,7 @@ using QUICK
 context Patient
 define NullArg: ToRatio((null as String))
 define IsValid: ToRatio('1.0 \'mg\':2.0 \'mg\'')
+define IsValidWithCustomUCUM: ToRatio('1.0 \'{foo:bar }\':2.0 \'mg\'')
 define InvalidSeparator: ToRatio('1.0 \'mg\';2.0 \'mg\'')
 define InvalidNumerator: ToRatio('1.0 \'cc\':2.0 \'mg\'')
 define InvalidDenominator: ToRatio('1.0 \'mg\':2.0 \'cc\'')
@@ -3127,7 +3128,7 @@ module.exports['ToRatio'] = {
             }
          }, {
             "localId" : "12",
-            "name" : "InvalidSeparator",
+            "name" : "IsValidWithCustomUCUM",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -3135,7 +3136,7 @@ module.exports['ToRatio'] = {
                "s" : {
                   "r" : "12",
                   "s" : [ {
-                     "value" : [ "define ","InvalidSeparator",": " ]
+                     "value" : [ "define ","IsValidWithCustomUCUM",": " ]
                   }, {
                      "r" : "11",
                      "s" : [ {
@@ -3143,7 +3144,7 @@ module.exports['ToRatio'] = {
                      }, {
                         "r" : "10",
                         "s" : [ {
-                           "value" : [ "'1.0 \\'mg\\';2.0 \\'mg\\''" ]
+                           "value" : [ "'1.0 \\'{foo:bar }\\':2.0 \\'mg\\''" ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -3157,13 +3158,13 @@ module.exports['ToRatio'] = {
                "operand" : {
                   "localId" : "10",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "1.0 'mg';2.0 'mg'",
+                  "value" : "1.0 '{foo:bar }':2.0 'mg'",
                   "type" : "Literal"
                }
             }
          }, {
             "localId" : "15",
-            "name" : "InvalidNumerator",
+            "name" : "InvalidSeparator",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -3171,7 +3172,7 @@ module.exports['ToRatio'] = {
                "s" : {
                   "r" : "15",
                   "s" : [ {
-                     "value" : [ "define ","InvalidNumerator",": " ]
+                     "value" : [ "define ","InvalidSeparator",": " ]
                   }, {
                      "r" : "14",
                      "s" : [ {
@@ -3179,7 +3180,7 @@ module.exports['ToRatio'] = {
                      }, {
                         "r" : "13",
                         "s" : [ {
-                           "value" : [ "'1.0 \\'cc\\':2.0 \\'mg\\''" ]
+                           "value" : [ "'1.0 \\'mg\\';2.0 \\'mg\\''" ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -3193,13 +3194,13 @@ module.exports['ToRatio'] = {
                "operand" : {
                   "localId" : "13",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "1.0 'cc':2.0 'mg'",
+                  "value" : "1.0 'mg';2.0 'mg'",
                   "type" : "Literal"
                }
             }
          }, {
             "localId" : "18",
-            "name" : "InvalidDenominator",
+            "name" : "InvalidNumerator",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -3207,7 +3208,7 @@ module.exports['ToRatio'] = {
                "s" : {
                   "r" : "18",
                   "s" : [ {
-                     "value" : [ "define ","InvalidDenominator",": " ]
+                     "value" : [ "define ","InvalidNumerator",": " ]
                   }, {
                      "r" : "17",
                      "s" : [ {
@@ -3215,7 +3216,7 @@ module.exports['ToRatio'] = {
                      }, {
                         "r" : "16",
                         "s" : [ {
-                           "value" : [ "'1.0 \\'mg\\':2.0 \\'cc\\''" ]
+                           "value" : [ "'1.0 \\'cc\\':2.0 \\'mg\\''" ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -3228,6 +3229,42 @@ module.exports['ToRatio'] = {
                "type" : "ToRatio",
                "operand" : {
                   "localId" : "16",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "1.0 'cc':2.0 'mg'",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "21",
+            "name" : "InvalidDenominator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "21",
+                  "s" : [ {
+                     "value" : [ "define ","InvalidDenominator",": " ]
+                  }, {
+                     "r" : "20",
+                     "s" : [ {
+                        "value" : [ "ToRatio","(" ]
+                     }, {
+                        "r" : "19",
+                        "s" : [ {
+                           "value" : [ "'1.0 \\'mg\\':2.0 \\'cc\\''" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "20",
+               "type" : "ToRatio",
+               "operand" : {
+                  "localId" : "19",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "1.0 'mg':2.0 'cc'",
                   "type" : "Literal"

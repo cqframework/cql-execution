@@ -87,6 +87,7 @@ define NullArg: ToQuantity((null as String))
 // @Test: ToRatio
 define NullArg: ToRatio((null as String))
 define IsValid: ToRatio('1.0 \'mg\':2.0 \'mg\'')
+define IsValidWithCustomUCUM: ToRatio('1.0 \'{foo:bar }\':2.0 \'mg\'')
 define InvalidSeparator: ToRatio('1.0 \'mg\';2.0 \'mg\'')
 define InvalidNumerator: ToRatio('1.0 \'cc\':2.0 \'mg\'')
 define InvalidDenominator: ToRatio('1.0 \'mg\':2.0 \'cc\'')
