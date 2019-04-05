@@ -173,4 +173,4 @@ define IsNull: ConvertsToString(null as String)
 // @Test: ConvertsToTime
 define IsTrue: ConvertsToTime('T02:04:59.123+01:00')
 define IsFalse: ConvertsToTime('foo')
-define IsNull: ConvertsToString(null as String)
+define IsNull: ConvertsToTime(null as String)

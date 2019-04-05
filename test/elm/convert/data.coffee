@@ -6038,7 +6038,7 @@ using QUICK
 context Patient
 define IsTrue: ConvertsToTime('T02:04:59.123+01:00')
 define IsFalse: ConvertsToTime('foo')
-define IsNull: ConvertsToString(null as String)
+define IsNull: ConvertsToTime(null as String)
 ###
 
 module.exports['ConvertsToTime'] = {
@@ -6159,7 +6159,7 @@ module.exports['ConvertsToTime'] = {
                   }, {
                      "r" : "11",
                      "s" : [ {
-                        "value" : [ "ConvertsToString","(" ]
+                        "value" : [ "ConvertsToTime","(" ]
                      }, {
                         "r" : "10",
                         "s" : [ {
@@ -6179,7 +6179,7 @@ module.exports['ConvertsToTime'] = {
             } ],
             "expression" : {
                "localId" : "11",
-               "type" : "ConvertsToString",
+               "type" : "ConvertsToTime",
                "operand" : {
                   "localId" : "10",
                   "strict" : false,
