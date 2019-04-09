@@ -237,6 +237,7 @@ module.exports['Case'] = {
                      }, {
                         "r" : "11",
                         "s" : [ {
+                           "r" : "9",
                            "value" : [ "when ","1"," then " ]
                         }, {
                            "r" : "10",
@@ -249,6 +250,7 @@ module.exports['Case'] = {
                      }, {
                         "r" : "14",
                         "s" : [ {
+                           "r" : "12",
                            "value" : [ "when ","2"," then " ]
                         }, {
                            "r" : "13",

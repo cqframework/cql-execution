@@ -147,7 +147,7 @@ describe 'FromDateTime', ->
 
   it "should convert @2015-01-02T12:01:02.321-06:00 to Date", ->
     date = @dateTimeToDate.exec(@ctx)
-    date.isDate.should.be.true
+    date.isDate.should.be.true()
     date.year.should.equal 2015
     date.month.should.equal 1
     date.day.should.equal 2
@@ -155,7 +155,7 @@ describe 'FromDateTime', ->
 
   it "should convert @2015-01-02T12:01:02.321-06:00 to DateTime", ->
     dateTime = @dateTimeToDateTime.exec(@ctx)
-    dateTime.isDateTime.should.be.true
+    dateTime.isDateTime.should.be.true()
     dateTime.year.should.equal 2015
     dateTime.month.should.equal 1
     dateTime.day.should.equal 2
@@ -255,7 +255,7 @@ describe 'ToDecimal', ->
     should(@tooSmallDec.exec(@ctx)).be.null()
 
   it "should convert null to null", ->
-    should(@nullDecimal.exec(@ctx)).not.exist
+    should.not.exist(@nullDecimal.exec(@ctx))
 
   it.skip "should be null if wrong format (+.1)", ->
     # TODO: parseFloat is more forgiving than the CQL spec, so this does get converted
@@ -294,14 +294,44 @@ describe 'ToQuantity', ->
     should(@tooSmallQuantity.exec(@ctx)).be.null()
 
   it "should return null for null argument", ->
-    should(@nullArg.exec(@ctx)).not.exist
+    should.not.exist(@nullArg.exec(@ctx))
+
+describe 'ToRatio', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should be null if string is null", ->
+    should(@nullArg.exec(@ctx)).be.null()
+
+  it "should be null if string separator is invalid", ->
+    should(@invalidSeparator.exec(@ctx)).be.null()
+
+  it "should be null if numerator is invalid", ->
+    should(@invalidNumerator.exec(@ctx)).be.null()
+
+  it "should be null if denominator is invalid", ->
+    should(@invalidDenominator.exec(@ctx)).be.null()
+
+  it "should be valid given quantities with custom UCUM units", ->
+    ratio = @isValidWithCustomUCUM.exec(@ctx)
+    ratio.numerator.value.should.eql 1.0
+    ratio.numerator.unit.should.eql '{foo:bar }'
+    ratio.denominator.value.should.eql 2.0
+    ratio.denominator.unit.should.eql 'mg'
+
+  it "should create valid ratio", ->
+    ratio = @isValid.exec(@ctx)
+    ratio.numerator.value.should.eql 1.0
+    ratio.numerator.unit.should.eql 'mg'
+    ratio.denominator.value.should.eql 2.0
+    ratio.denominator.unit.should.eql 'mg'
 
 describe 'ToTime', ->
   @beforeEach ->
     setup @, data
 
   it "should return null if arg is null", ->
-    should(@nullArgTime.exec(@ctx)).not.exist
+    should.not.exist(@nullArgTime.exec(@ctx))
 
   it "should be null for incorrect format", ->
     should(@incorrectFormatTime.exec(@ctx)).be.null()
@@ -351,19 +381,154 @@ describe 'ToBoolean', ->
     setup @, data
 
   it "should return true for TRUE", ->
-    should(@upperCaseTrue.exec(@ctx)).be.true
+    @upperCaseTrue.exec(@ctx).should.equal true
 
   it "should return true for FALSE", ->
-    should(@upperCaseFalse.exec(@ctx)).be.false
+    @upperCaseFalse.exec(@ctx).should.equal false
 
   it "should return true for true", ->
-    should(@lowerCaseT.exec(@ctx)).be.true
+    @lowerCaseT.exec(@ctx).should.equal true
 
   it "should return true for false", ->
-    should(@lowerCaseF.exec(@ctx)).be.false
+    @lowerCaseF.exec(@ctx).should.equal false
 
   it "should return true for T", ->
-    should(@upperCaseT.exec(@ctx)).be.true
+    @upperCaseT.exec(@ctx).should.equal true
 
   it "should return false for F", ->
-    should(@upperCaseF.exec(@ctx)).be.false
+    @upperCaseF.exec(@ctx).should.equal false
+
+describe 'ConvertsToBoolean', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for y", ->
+    @isTrueWithTrueValue.exec(@ctx).should.equal true
+
+  it "should return true for 0", ->
+    @isTrueWithFalseValue.exec(@ctx).should.equal true
+
+  it "should return false for invalid argument", ->
+    @isFalse.exec(@ctx).should.equal false
+
+  it "should return null for null input", ->
+    should(@isNull.exec(@ctx)).be.null()
+
+describe 'ConvertsToDate', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for valid date", ->
+    @isTrue.exec(@ctx).should.equal true
+
+  it "should return false for invalid date", ->
+    @isFalse.exec(@ctx).should.equal false
+
+  it "should return null for null input", ->
+    should(@isNull.exec(@ctx)).be.null()
+
+describe 'ConvertsToDateTime', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for valid datetime", ->
+    @isTrue.exec(@ctx).should.equal true
+
+  it "should return true for valid date", ->
+    @isTrueWithDateValue.exec(@ctx).should.equal true
+
+  it "should return false for invalid datetime", ->
+    @isFalse.exec(@ctx).should.equal false
+
+  it "should return null for null input", ->
+    should(@isNull.exec(@ctx)).be.null()
+
+describe 'ConvertsToDecimal', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for valid decimal", ->
+    @isTrue.exec(@ctx).should.equal true
+
+  it "should return false for invalid decimal", ->
+    @isFalse.exec(@ctx).should.equal false
+
+  it "should return null for null input", ->
+    should(@isNull.exec(@ctx)).be.null()
+
+describe 'ConvertsToInteger', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for valid integer", ->
+    @isTrue.exec(@ctx).should.equal true
+
+  it "should return false for invalid integer", ->
+    @isFalse.exec(@ctx).should.equal false
+
+  it "should return null for null input", ->
+    should(@isNull.exec(@ctx)).be.null()
+
+describe 'ConvertsToQuantity', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for valid decimal", ->
+    @isTrueWithDecimal.exec(@ctx).should.equal true
+
+  it "should return true for valid integer", ->
+    @isTrueWithInteger.exec(@ctx).should.equal true
+
+  it "should return true for valid string", ->
+    @isTrueWithString.exec(@ctx).should.equal true
+
+  it "should return false for invalid ucum unit", ->
+    @isFalseWithInvalidUcum.exec(@ctx).should.equal false
+
+  it "should return false for invalid string", ->
+    @isFalse.exec(@ctx).should.equal false
+
+  it "should return null for null input", ->
+    should(@isNull.exec(@ctx)).be.null()
+
+describe 'ConvertsToRatio', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for valid ratio string", ->
+    @isTrue.exec(@ctx).should.equal true
+
+  it "should return false for invalid ratio string", ->
+    @isFalse.exec(@ctx).should.equal false
+
+  it "should return false for invalid ucum units", ->
+    @isFalseWithInvalidUcum.exec(@ctx).should.equal false
+
+  it "should return null for null input", ->
+    should(@isNull.exec(@ctx)).be.null()
+
+describe 'ConvertsToString', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for valid Boolean", ->
+    @isTrue.exec(@ctx).should.equal true
+
+  it.skip "should return false for invalid type", ->
+    @isFalse.exec(@ctx).should.equal false
+
+  it "should return null for null input", ->
+    should(@isNull.exec(@ctx)).be.null()
+
+describe 'ConvertsToTime', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for valid string", ->
+    @isTrue.exec(@ctx).should.equal true
+
+  it "should return false for invalid string", ->
+    @isFalse.exec(@ctx).should.equal false
+
+  it "should return null for null input", ->
+    should(@isNull.exec(@ctx)).be.null()

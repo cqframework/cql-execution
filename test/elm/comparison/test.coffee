@@ -58,13 +58,23 @@ describe 'Equal', ->
     should(@possiblyEqualDateTimes.exec(@ctx)).be.null()
     @impossiblyEqualDateTimes.exec(@ctx).should.be.false()
 
-  it 'should be false for all Date and DateTime equality', ->
-    @dateAndDateTimeEqual.exec(@ctx).should.be.false()
+  it 'should be null for Date and DateTime equality with same year, month, hour', ->
+    should(@dateAndDateTimeNull.exec(@ctx)).be.null()
+
+  it 'should be false for Date and DateTime equality with same year, month, hour and additional fields', ->
+    @dateAndDateTimeUncertainFalse.exec(@ctx).should.be.false()
+
+  it 'should be null for DateTime and Date equality with same year, month, hour', ->
+    should(@dateTimeAndDateNull.exec(@ctx)).be.null()
+
+  it 'should be false for DateTime and Date equality with same year, month, hour and additional fields', ->
+    @dateTimeAndDateUncertainFalse.exec(@ctx).should.be.false()
+
+  it 'should be false for Date and DateTime equality with different hour', ->
     @dateAndDateTimeNotEqual.exec(@ctx).should.be.false()
-    @dateAndDateTimeUncertainEqual.exec(@ctx).should.be.false()
-    @dateTimeAndDateEqual.exec(@ctx).should.be.false()
+
+  it 'should be false for DateTime and Date equality with different hour', ->
     @dateTimeAndDateNotEqual.exec(@ctx).should.be.false()
-    @dateTimeAndDateUncertainEqual.exec(@ctx).should.be.false()
 
   it 'should be false for 5 m = 4 m', ->
     @aGtB_Quantity.exec(@ctx).should.be.false()
@@ -78,7 +88,7 @@ describe 'Equal', ->
   it 'should be false for 5 m = 5 cm', ->
     @aGtB_Quantity_diff.exec(@ctx).should.be.false()
 
-  it 'should be true for 5 m = 500 cm ', ->
+  it 'should be true for 5 m = 500 cm', ->
     @aEqB_Quantity_diff.exec(@ctx).should.be.true()
 
   it 'should be false for 5 m = 5 km', ->
@@ -95,7 +105,7 @@ describe 'Equal', ->
 
   it 'should be true for 10mg:2dL = 15mg:3dL', ->
     @eqRatios.exec(@ctx).should.be.true()
-  
+
   it 'should be false for 10mg:2dL = 15mg:4dL', ->
     @uneqRatios.exec(@ctx).should.be.false()
 
@@ -150,13 +160,20 @@ describe 'NotEqual', ->
     should(@possiblyEqualDateTimes.exec(@ctx)).be.null()
     @impossiblyEqualDateTimes.exec(@ctx).should.be.true()
 
-  it 'should be true for all Date and DateTime equality', ->
-    @dateAndDateTimeEqual.exec(@ctx).should.be.true()
+  it 'should be null for Date and DateTime equality with same year, month, hour', ->
+    should(@dateAndDateTimeNull.exec(@ctx)).be.null()
+
+  it 'should be true for date and DateTime with additional fields', ->
     @dateAndDateTimeNotEqual.exec(@ctx).should.be.true()
-    @dateAndDateTimeUncertainEqual.exec(@ctx).should.be.true()
-    @dateTimeAndDateEqual.exec(@ctx).should.be.true()
+
+  it 'should be true for DateTime and Date equality with same year, month, hour', ->
     @dateTimeAndDateNotEqual.exec(@ctx).should.be.true()
-    @dateTimeAndDateUncertainEqual.exec(@ctx).should.be.true()
+
+  it 'should be null for all DateTime and Date equality with same year, month, hour', ->
+    should(@dateTimeAndDateNull.exec(@ctx)).be.null()
+
+  it 'should be true for DateTime and Date equality with same year, month, hour and additional fields', ->
+    @dateTimeAndDateUncertainTrue.exec(@ctx).should.be.true()
 
   it 'should be true for 5 m != 4 m', ->
     @aGtB_Quantity.exec(@ctx).should.be.true()
@@ -198,7 +215,8 @@ describe 'Equivalent', ->
   it 'should be false for 5 ~ null', ->
     @aDefined_BNull.exec(@ctx).should.be.false()
 
-  it 'should be true for null ~ null', ->
+  it.skip 'should be true for null ~ null', ->
+    # Skipping because of cql-to-elm issue that will be fixed in 1.4
     @aNull_BNull.exec(@ctx).should.be.true()
 
   it 'should be true for 3 ~ 3', ->
@@ -209,7 +227,7 @@ describe 'Equivalent', ->
 
   it 'should be true for 10mg:2dL ~ 15mg:3dL', ->
     @eqRatios.exec(@ctx).should.be.true()
-  
+
   it 'should be false for 10mg:2dL ~ 15mg:4dL', ->
     @uneqRatios.exec(@ctx).should.be.false()
 

@@ -443,6 +443,7 @@ module.exports['Concat'] = {
                            "value" : [ "'Hello'" ]
                         } ]
                      }, {
+                        "r" : "41",
                         "value" : [ " + ","null" ]
                      } ]
                   } ]
@@ -797,6 +798,7 @@ module.exports['Combine'] = {
                   }, {
                      "r" : "19",
                      "s" : [ {
+                        "r" : "17",
                         "value" : [ "Combine","(","null",", " ]
                      }, {
                         "r" : "18",
@@ -865,6 +867,7 @@ module.exports['Combine'] = {
                               "value" : [ "'def'" ]
                            } ]
                         }, {
+                           "r" : "23",
                            "value" : [ ", ","null",", " ]
                         }, {
                            "r" : "24",
@@ -1083,6 +1086,7 @@ module.exports['Split'] = {
                   }, {
                      "r" : "12",
                      "s" : [ {
+                        "r" : "10",
                         "value" : [ "Split","(","null",", " ]
                      }, {
                         "r" : "11",
@@ -1134,6 +1138,7 @@ module.exports['Split'] = {
                            "value" : [ "'a,b,c'" ]
                         } ]
                      }, {
+                        "r" : "15",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]
@@ -1153,6 +1158,332 @@ module.exports['Split'] = {
                   "type" : "As",
                   "operand" : {
                      "localId" : "15",
+                     "type" : "Null"
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+
+### SplitOnMatches
+library TestSnippet version '1'
+using QUICK
+context Patient
+define SplitOnMatchesListReturn: SplitOnMatches('foo 1,2three bar', '\\d,\\d\\w+')
+define SplitOnMatchesOriginalString: SplitOnMatches('1,2three', '\\w,\\w+')
+define SplitOnMatchesNoMatch: SplitOnMatches('foobar', '\\d')
+define SplitOnMatchesIsNullFirst: SplitOnMatches(null, '\\w+')
+define SplitOnMatchesIsNullSecond: SplitOnMatches('12three', null)
+define SplitOnMatchesAllNull: SplitOnMatches(null, null)
+###
+
+module.exports['SplitOnMatches'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "5",
+            "name" : "SplitOnMatchesListReturn",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "define ","SplitOnMatchesListReturn",": " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "SplitOnMatches","(" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "'foo 1,2three bar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "3",
+                        "s" : [ {
+                           "value" : [ "'\\\\d,\\\\d\\\\w+'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "4",
+               "type" : "SplitOnMatches",
+               "stringToSplit" : {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "foo 1,2three bar",
+                  "type" : "Literal"
+               },
+               "separatorPattern" : {
+                  "localId" : "3",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\\d,\\d\\w+",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "9",
+            "name" : "SplitOnMatchesOriginalString",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "define ","SplitOnMatchesOriginalString",": " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "SplitOnMatches","(" ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "value" : [ "'1,2three'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "'\\\\w,\\\\w+'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "type" : "SplitOnMatches",
+               "stringToSplit" : {
+                  "localId" : "6",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "1,2three",
+                  "type" : "Literal"
+               },
+               "separatorPattern" : {
+                  "localId" : "7",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\\w,\\w+",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "13",
+            "name" : "SplitOnMatchesNoMatch",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "define ","SplitOnMatchesNoMatch",": " ]
+                  }, {
+                     "r" : "12",
+                     "s" : [ {
+                        "value" : [ "SplitOnMatches","(" ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "value" : [ "'foobar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "11",
+                        "s" : [ {
+                           "value" : [ "'\\\\d'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "12",
+               "type" : "SplitOnMatches",
+               "stringToSplit" : {
+                  "localId" : "10",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "foobar",
+                  "type" : "Literal"
+               },
+               "separatorPattern" : {
+                  "localId" : "11",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\\d",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "17",
+            "name" : "SplitOnMatchesIsNullFirst",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "17",
+                  "s" : [ {
+                     "value" : [ "define ","SplitOnMatchesIsNullFirst",": " ]
+                  }, {
+                     "r" : "16",
+                     "s" : [ {
+                        "r" : "14",
+                        "value" : [ "SplitOnMatches","(","null",", " ]
+                     }, {
+                        "r" : "15",
+                        "s" : [ {
+                           "value" : [ "'\\\\w+'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "16",
+               "type" : "SplitOnMatches",
+               "stringToSplit" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "14",
+                     "type" : "Null"
+                  }
+               },
+               "separatorPattern" : {
+                  "localId" : "15",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\\w+",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "21",
+            "name" : "SplitOnMatchesIsNullSecond",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "21",
+                  "s" : [ {
+                     "value" : [ "define ","SplitOnMatchesIsNullSecond",": " ]
+                  }, {
+                     "r" : "20",
+                     "s" : [ {
+                        "value" : [ "SplitOnMatches","(" ]
+                     }, {
+                        "r" : "18",
+                        "s" : [ {
+                           "value" : [ "'12three'" ]
+                        } ]
+                     }, {
+                        "r" : "19",
+                        "value" : [ ", ","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "20",
+               "type" : "SplitOnMatches",
+               "stringToSplit" : {
+                  "localId" : "18",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "12three",
+                  "type" : "Literal"
+               },
+               "separatorPattern" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "19",
+                     "type" : "Null"
+                  }
+               }
+            }
+         }, {
+            "localId" : "25",
+            "name" : "SplitOnMatchesAllNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "25",
+                  "s" : [ {
+                     "value" : [ "define ","SplitOnMatchesAllNull",": " ]
+                  }, {
+                     "r" : "24",
+                     "s" : [ {
+                        "r" : "22",
+                        "value" : [ "SplitOnMatches","(","null",", ","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "24",
+               "type" : "SplitOnMatches",
+               "stringToSplit" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "22",
+                     "type" : "Null"
+                  }
+               },
+               "separatorPattern" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "23",
                      "type" : "Null"
                   }
                }
@@ -1457,6 +1788,7 @@ module.exports['Upper'] = {
                   }, {
                      "r" : "12",
                      "s" : [ {
+                        "r" : "11",
                         "value" : [ "Upper","(","null",")" ]
                      } ]
                   } ]
@@ -1643,6 +1975,7 @@ module.exports['Lower'] = {
                   }, {
                      "r" : "12",
                      "s" : [ {
+                        "r" : "11",
                         "value" : [ "Lower","(","null",")" ]
                      } ]
                   } ]
@@ -1727,6 +2060,7 @@ module.exports['Indexer'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "3",
                         "value" : [ "[","6","]" ]
                      } ]
                   } ]
@@ -1766,6 +2100,7 @@ module.exports['Indexer'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "7",
                         "value" : [ "[","0","]" ]
                      } ]
                   } ]
@@ -1805,6 +2140,7 @@ module.exports['Indexer'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "11",
                         "value" : [ "[","20","]" ]
                      } ]
                   } ]
@@ -1857,6 +2193,7 @@ module.exports['Indexer'] = {
                            "value" : [ ")" ]
                         } ]
                      }, {
+                        "r" : "17",
                         "value" : [ "[","4","]" ]
                      } ]
                   } ]
@@ -1904,6 +2241,7 @@ module.exports['Indexer'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "21",
                         "value" : [ "[","null","]" ]
                      } ]
                   } ]
@@ -1922,6 +2260,277 @@ module.exports['Indexer'] = {
                   "type" : "As",
                   "operand" : {
                      "localId" : "21",
+                     "type" : "Null"
+                  }
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
+### Matches
+library TestSnippet version '1'
+using QUICK
+context Patient
+define MatchesTrue: Matches('1,2three', '\\d,\\d\\w+')
+define MatchesFalse: Matches('three', '\\d')
+define MatchesIsNullFirst: Matches(null, '\\w+')
+define MatchesIsNullSecond: Matches('12three', null)
+define MatchesAllNull: Matches(null, null)
+###
+
+module.exports['Matches'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "5",
+            "name" : "MatchesTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "define ","MatchesTrue",": " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "Matches","(" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "'1,2three'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "3",
+                        "s" : [ {
+                           "value" : [ "'\\\\d,\\\\d\\\\w+'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "4",
+               "type" : "Matches",
+               "operand" : [ {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "1,2three",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "3",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\\d,\\d\\w+",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "9",
+            "name" : "MatchesFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "define ","MatchesFalse",": " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "Matches","(" ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "value" : [ "'three'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "'\\\\d'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "type" : "Matches",
+               "operand" : [ {
+                  "localId" : "6",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "three",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "7",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\\d",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "13",
+            "name" : "MatchesIsNullFirst",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "define ","MatchesIsNullFirst",": " ]
+                  }, {
+                     "r" : "12",
+                     "s" : [ {
+                        "r" : "10",
+                        "value" : [ "Matches","(","null",", " ]
+                     }, {
+                        "r" : "11",
+                        "s" : [ {
+                           "value" : [ "'\\\\w+'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "12",
+               "type" : "Matches",
+               "operand" : [ {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "10",
+                     "type" : "Null"
+                  }
+               }, {
+                  "localId" : "11",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\\w+",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "17",
+            "name" : "MatchesIsNullSecond",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "17",
+                  "s" : [ {
+                     "value" : [ "define ","MatchesIsNullSecond",": " ]
+                  }, {
+                     "r" : "16",
+                     "s" : [ {
+                        "value" : [ "Matches","(" ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "'12three'" ]
+                        } ]
+                     }, {
+                        "r" : "15",
+                        "value" : [ ", ","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "16",
+               "type" : "Matches",
+               "operand" : [ {
+                  "localId" : "14",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "12three",
+                  "type" : "Literal"
+               }, {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "15",
+                     "type" : "Null"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "21",
+            "name" : "MatchesAllNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "21",
+                  "s" : [ {
+                     "value" : [ "define ","MatchesAllNull",": " ]
+                  }, {
+                     "r" : "20",
+                     "s" : [ {
+                        "r" : "18",
+                        "value" : [ "Matches","(","null",", ","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "20",
+               "type" : "Matches",
+               "operand" : [ {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "18",
+                     "type" : "Null"
+                  }
+               }, {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "19",
                      "type" : "Null"
                   }
                } ]
@@ -2085,6 +2694,7 @@ module.exports['PositionOf'] = {
                   }, {
                      "r" : "12",
                      "s" : [ {
+                        "r" : "10",
                         "value" : [ "PositionOf","(","null",", " ]
                      }, {
                         "r" : "11",
@@ -2136,6 +2746,7 @@ module.exports['PositionOf'] = {
                            "value" : [ "'cde'" ]
                         } ]
                      }, {
+                        "r" : "15",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]
@@ -2232,6 +2843,7 @@ module.exports['Substring'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "3",
                         "value" : [ ", ","5",")" ]
                      } ]
                   } ]
@@ -2274,6 +2886,7 @@ module.exports['Substring'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "7",
                         "value" : [ ", ","7",", ","2",")" ]
                      } ]
                   } ]
@@ -2322,6 +2935,7 @@ module.exports['Substring'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "12",
                         "value" : [ ", ","7",", ","0",")" ]
                      } ]
                   } ]
@@ -2374,6 +2988,7 @@ module.exports['Substring'] = {
                      }, {
                         "r" : "18",
                         "s" : [ {
+                           "r" : "17",
                            "value" : [ "-","1" ]
                         } ]
                      }, {
@@ -2423,6 +3038,7 @@ module.exports['Substring'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "22",
                         "value" : [ ", ","0",")" ]
                      } ]
                   } ]
@@ -2465,6 +3081,7 @@ module.exports['Substring'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "26",
                         "value" : [ ", ","7",", ","25",")" ]
                      } ]
                   } ]
@@ -2513,10 +3130,12 @@ module.exports['Substring'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "31",
                         "value" : [ ", ","7",", " ]
                      }, {
                         "r" : "33",
                         "s" : [ {
+                           "r" : "32",
                            "value" : [ "-","1" ]
                         } ]
                      }, {
@@ -2565,6 +3184,7 @@ module.exports['Substring'] = {
                   }, {
                      "r" : "38",
                      "s" : [ {
+                        "r" : "36",
                         "value" : [ "Substring","(","null",", ","5",")" ]
                      } ]
                   } ]
@@ -2609,6 +3229,7 @@ module.exports['Substring'] = {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
+                        "r" : "41",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]
@@ -2896,6 +3517,7 @@ module.exports['StartsWith'] = {
                            "value" : [ "'FooBar'" ]
                         } ]
                      }, {
+                        "r" : "19",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]
@@ -2994,6 +3616,7 @@ module.exports['StartsWith'] = {
                   }, {
                      "r" : "30",
                      "s" : [ {
+                        "r" : "28",
                         "value" : [ "StartsWith","(","null",", " ]
                      }, {
                         "r" : "29",
@@ -3349,6 +3972,7 @@ module.exports['EndsWith'] = {
                            "value" : [ "'FooBar'" ]
                         } ]
                      }, {
+                        "r" : "19",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]

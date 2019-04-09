@@ -84,6 +84,14 @@ define TooLargeQuantity: ToQuantity('444444444444444444444444444444 \'\'')
 define TooSmallQuantity: ToQuantity('-444444444444444444444444444444 \'\'')
 define NullArg: ToQuantity((null as String))
 
+// @Test: ToRatio
+define NullArg: ToRatio((null as String))
+define IsValid: ToRatio('1.0 \'mg\':2.0 \'mg\'')
+define IsValidWithCustomUCUM: ToRatio('1.0 \'{foo:bar }\':2.0 \'mg\'')
+define InvalidSeparator: ToRatio('1.0 \'mg\';2.0 \'mg\'')
+define InvalidNumerator: ToRatio('1.0 \'cc\':2.0 \'mg\'')
+define InvalidDenominator: ToRatio('1.0 \'mg\':2.0 \'cc\'')
+
 // @Test: ToTime
 define NullArgTime: ToTime((null as String))
 define IncorrectFormatTime: ToTime('10:00PM')
@@ -115,3 +123,54 @@ define IsNull: ToBoolean('falsetto')
 // @Test: ToConcept
 define IsValid: ToConcept(Code { system: 'http://loinc.org', code: '8480-6' }) // Concept { codes: { Code { system: 'http://loinc.org', code: '8480-6' } } }
 define IsNull: ToConcept(null as Code)
+
+// @Test: ConvertsToBoolean
+define IsTrueWithTrueValue: ConvertsToBoolean('y')
+define IsTrueWithFalseValue: ConvertsToBoolean('0')
+define IsFalse: ConvertsToBoolean('foo')
+define IsNull: ConvertsToBoolean(null as String)
+
+// @Test: ConvertsToDate
+define IsTrue: ConvertsToDate('2015-01-01')
+define IsFalse: ConvertsToDate('foo')
+define IsNull: ConvertsToDate(null as Date)
+
+// @Test: ConvertsToDateTime
+define IsTrue: ConvertsToDateTime('2014-01-01T14:30:00.0Z')
+define IsTrueWithDateValue: ConvertsToDateTime(@2015-01-01)
+define IsFalse: ConvertsToDateTime('foo')
+define IsNull: ConvertsToDateTime(null as DateTime)
+
+// @Test: ConvertsToDecimal
+define IsTrue: ConvertsToDecimal('0.1')
+define IsFalse: ConvertsToDecimal('foo')
+define IsNull: ConvertsToDecimal(null as Decimal)
+
+// @Test: ConvertsToInteger
+define IsTrue: ConvertsToInteger('101')
+define IsFalse: ConvertsToInteger('foo')
+define IsNull: ConvertsToInteger(null as Integer)
+
+// @Test: ConvertsToQuantity
+define IsTrueWithDecimal: ConvertsToQuantity(0.1)
+define IsTrueWithInteger: ConvertsToQuantity(101)
+define IsTrueWithString: ConvertsToQuantity('1.0 \'mg\'')
+define IsFalse: ConvertsToQuantity('foo')
+define IsFalseWithInvalidUcum: ConvertsToQuantity('1.0 \'cc\'')
+define IsNull: ConvertsToQuantity(null as String)
+
+// @Test: ConvertsToRatio
+define IsTrue: ConvertsToRatio('1.0 \'mg\':2.0 \'mg\'')
+define IsFalse: ConvertsToRatio('1.0 \'mg\';2.0 \'mg\'')
+define IsFalseWithInvalidUcum: ConvertsToRatio('1.0 \'mg\';2.0 \'cc\'')
+define IsNull: ConvertsToRatio(null as String)
+
+// @Test: ConvertsToString
+define IsTrue: ConvertsToString(true)
+define IsFalse: ConvertsToString(Code { system: 'http://loinc.org', code: '8480-6' })
+define IsNull: ConvertsToString(null as String)
+
+// @Test: ConvertsToTime
+define IsTrue: ConvertsToTime('T02:04:59.123+01:00')
+define IsFalse: ConvertsToTime('foo')
+define IsNull: ConvertsToTime(null as String)

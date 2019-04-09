@@ -19,6 +19,14 @@ define SeparatorNotUsed: Split('a,b,c,,1,2,3', ';')
 define SeparateNull: Split(null, ',')
 define SeparateUsingNull: Split('a,b,c', null)
 
+// @Test: SplitOnMatches
+define SplitOnMatchesListReturn: SplitOnMatches('foo 1,2three bar', '\\d,\\d\\w+')
+define SplitOnMatchesOriginalString: SplitOnMatches('1,2three', '\\w,\\w+')
+define SplitOnMatchesNoMatch: SplitOnMatches('foobar', '\\d')
+define SplitOnMatchesIsNullFirst: SplitOnMatches(null, '\\w+')
+define SplitOnMatchesIsNullSecond: SplitOnMatches('12three', null)
+define SplitOnMatchesAllNull: SplitOnMatches(null, null)
+
 // @Test: Length
 define ElevenLetters: Length('Hello World')
 define NullString: Length(null as String)
@@ -41,6 +49,13 @@ define HelloWorldZero: 'HelloWorld'[0]
 define HelloWorldTwenty: 'HelloWorld'[20]
 define NullString: (null as String)[4]
 define NullIndex: 'HelloWorld'[null]
+
+// @Test: Matches
+define MatchesTrue: Matches('1,2three', '\\d,\\d\\w+')
+define MatchesFalse: Matches('three', '\\d')
+define MatchesIsNullFirst: Matches(null, '\\w+')
+define MatchesIsNullSecond: Matches('12three', null)
+define MatchesAllNull: Matches(null, null)
 
 // @Test: PositionOf
 define found: PositionOf('cde', 'abcdefg')

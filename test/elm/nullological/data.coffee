@@ -55,6 +55,7 @@ module.exports['Nil'] = {
                "s" : {
                   "r" : "3",
                   "s" : [ {
+                     "r" : "2",
                      "value" : [ "define ","Nil",": ","null" ]
                   } ]
                }
@@ -122,6 +123,7 @@ module.exports['IsNull'] = {
                "s" : {
                   "r" : "3",
                   "s" : [ {
+                     "r" : "2",
                      "value" : [ "define ","Nil",": ","null" ]
                   } ]
                }
@@ -140,6 +142,7 @@ module.exports['IsNull'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
+                     "r" : "4",
                      "value" : [ "define ","One",": ","1" ]
                   } ]
                }
@@ -345,6 +348,7 @@ module.exports['Coalesce'] = {
                   }, {
                      "r" : "7",
                      "s" : [ {
+                        "r" : "2",
                         "value" : [ "Coalesce","(","null",", ","null",", " ]
                      }, {
                         "r" : "4",
@@ -352,6 +356,7 @@ module.exports['Coalesce'] = {
                            "value" : [ "'Hello'" ]
                         } ]
                      }, {
+                        "r" : "5",
                         "value" : [ ", ","null",", " ]
                      }, {
                         "r" : "6",
@@ -409,6 +414,7 @@ module.exports['Coalesce'] = {
                            "value" : [ "'Foo'" ]
                         } ]
                      }, {
+                        "r" : "10",
                         "value" : [ ", ","null",", ","null",", " ]
                      }, {
                         "r" : "12",
@@ -464,6 +470,7 @@ module.exports['Coalesce'] = {
                   }, {
                      "r" : "18",
                      "s" : [ {
+                        "r" : "15",
                         "value" : [ "Coalesce","(","null",", ","null",", ","null",")" ]
                      } ]
                   } ]
@@ -501,6 +508,7 @@ module.exports['Coalesce'] = {
                      }, {
                         "r" : "25",
                         "s" : [ {
+                           "r" : "20",
                            "value" : [ "List{","null",", ","null",", " ]
                         }, {
                            "r" : "22",
@@ -508,6 +516,7 @@ module.exports['Coalesce'] = {
                               "value" : [ "'One'" ]
                            } ]
                         }, {
+                           "r" : "23",
                            "value" : [ ", ","null",", " ]
                         }, {
                            "r" : "24",
@@ -581,6 +590,7 @@ module.exports['Coalesce'] = {
                      }, {
                         "r" : "32",
                         "s" : [ {
+                           "r" : "28",
                            "value" : [ "List{","null",", ","null",", ","null",", ","null","}" ]
                         } ]
                      }, {
@@ -624,6 +634,7 @@ module.exports['Coalesce'] = {
                   }, {
                      "r" : "40",
                      "s" : [ {
+                        "r" : "35",
                         "value" : [ "List{","null",", ","null",", " ]
                      }, {
                         "r" : "37",
@@ -631,6 +642,7 @@ module.exports['Coalesce'] = {
                            "value" : [ "'One'" ]
                         } ]
                      }, {
+                        "r" : "38",
                         "value" : [ ", ","null",", " ]
                      }, {
                         "r" : "39",
@@ -764,6 +776,7 @@ module.exports['Coalesce'] = {
                   }, {
                      "r" : "51",
                      "s" : [ {
+                        "r" : "48",
                         "value" : [ "List{","null",", ","null",", ","3","}" ]
                      } ]
                   } ]
@@ -846,7 +859,7 @@ module.exports['Coalesce'] = {
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
                            "type" : "ChoiceTypeSpecifier",
-                           "type" : [ {
+                           "choice" : [ {
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "type" : "NamedTypeSpecifier"
                            }, {
@@ -866,7 +879,7 @@ module.exports['Coalesce'] = {
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
                            "type" : "ChoiceTypeSpecifier",
-                           "type" : [ {
+                           "choice" : [ {
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "type" : "NamedTypeSpecifier"
                            }, {
