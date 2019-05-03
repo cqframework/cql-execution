@@ -295,19 +295,43 @@ describe 'Equivalent', ->
     it 'should return true for identical Intervals', ->
       @sameIntervals.exec(@ctx).should.be.true()
 
-  it 'should return false for List ~ Tuple', ->
-    @listAndTuple.exec(@ctx).should.be.false()
+  describe 'Lists and Tuples', ->
+    it 'should return false for List ~ Tuple', ->
+      @listAndTuple.exec(@ctx).should.be.false()
 
-  it 'should return false for Tuple ~ List', ->
-    @tupleAndList.exec(@ctx).should.be.false()
+    it 'should return false for Tuple ~ List', ->
+      @tupleAndList.exec(@ctx).should.be.false()
 
-  it 'should return false for List ~ Tuple with null', ->
-    @nullListAndTuple.exec(@ctx).should.be.false()
+    it 'should return false for List ~ Tuple with null', ->
+      @nullListAndTuple.exec(@ctx).should.be.false()
 
-  it 'should return false for Tuple with null ~ List', ->
-    @tupleAndNullList.exec(@ctx).should.be.false()
+    it 'should return false for Tuple with null ~ List', ->
+      @tupleAndNullList.exec(@ctx).should.be.false()
 
+  describe 'Codes and Concepts', ->
+    it 'should return true for same Codes', ->
+      @sameCodeAndCode.exec(@ctx).should.be.true()
 
+    it 'should return true for same Code and Concept', ->
+      @sameCodeAndConcept.exec(@ctx).should.be.true()
+
+    it 'should return true for same Concept and Code', ->
+      @sameConceptAndCode.exec(@ctx).should.be.true()
+
+    it 'should return true for same Concept and Concept', ->
+      @sameConceptAndConcept.exec(@ctx).should.be.true()
+
+    it 'should return false for same Codes', ->
+      @diffCodeAndCode.exec(@ctx).should.be.false()
+
+    it 'should return false for same Code and Concept', ->
+      @diffCodeAndConcept.exec(@ctx).should.be.false()
+
+    it 'should return false for same Concept and Code', ->
+      @diffConceptAndCode.exec(@ctx).should.be.false()
+
+    it 'should return false for same Concept and Concept', ->
+      @diffConceptAndConcept.exec(@ctx).should.be.false()
 
 describe 'Less', ->
   @beforeEach ->
