@@ -1940,7 +1940,7 @@
               return [this.high, this.highClosed];
             case !cmp.lessThanOrEquals(a.high, b.high):
               return [other.high, other.highClosed];
-            case !areNumeric(a.low, b.low):
+            case !areNumeric(a.high, b.high):
               return [highestNumericUncertainty(a.high, b.high), true];
             case !(areDateTimes(a.high, b.high) && a.high.isMorePrecise(b.high)):
               return [other.high, other.highClosed];
@@ -1981,7 +1981,7 @@
               return [this.high, this.highClosed];
             case !cmp.greaterThanOrEquals(a.high, b.high):
               return [other.high, other.highClosed];
-            case !areNumeric(a.low, b.low):
+            case !areNumeric(a.high, b.high):
               return [lowestNumericUncertainty(a.high, b.high), true];
             case !(areDateTimes(a.high, b.high) && b.high.isMorePrecise(a.high)):
               return [other.high, other.highClosed];
