@@ -77,6 +77,14 @@ define ALtB_Quantity_incompatible: 5 'Cel' != 40 'm'
 
 
 // @Test: Equivalent
+codesystem "LOINC": 'http://loinc.org'
+code "Tobacco smoking status code": '72166-2' from "LOINC" display 'Tobacco smoking status code'
+code "Tobacco smoking status code clone": '72166-2' from "LOINC" display 'Tobacco smoking status code clone'
+code "Total Score [AUDIT-C] code": '75626-2' from "LOINC" display 'Total Score [Audit-C] code'
+concept "Tobacco smoking status": { "Tobacco smoking status code" } display 'Tobacco smoking status'
+concept "Tobacco smoking status clone": { "Tobacco smoking status code clone" } display 'Tobacco smoking status'
+concept "Total Score [AUDIT-C]": { "Total Score [AUDIT-C] code" } display 'Total Score [Audit-C]'
+
 define ANull_BDefined: null ~ 4
 define ADefined_BNull: 5 ~ null
 define ANull_BNull: (null as String) ~ (null as String)
@@ -84,8 +92,7 @@ define ADefined_BDefined: 3 ~ 3
 define CaseInsensitiveStrings: 'FOO' ~ 'foo'
 define EqRatios: 10 'mg' : 2 'dL' ~ 15 'mg' : 3 'dL'
 define UneqRatios: 10 'mg' : 2 'dL' ~ 15 'mg' : 4 'dL'
-define UneqRatioTypes: 10 'mg' : 2 'dL' ~ DateTime(2000, 3, 13, 2, 4, 23) 
-
+define UneqRatioTypes: 10 'mg' : 2 'dL' ~ DateTime(2000, 3, 13, 2, 4, 23)
 
 // define EmptyTuples: { : } ~ { : } // TODO: We don't seem to support this format
 define SameTuples: Tuple{a: 'a', b: 'b'} ~ Tuple{a: 'a', b: 'b'}
@@ -113,6 +120,15 @@ define TupleAndList: {a: '1'} ~ {'1'}
 define ListAndTuple: {'1'} ~ {a: '1'}
 define TupleAndNullList: {a: '1'} ~ {null}
 define NullListAndTuple: {null} ~ {a: '1'}
+
+define SameCodeAndCode: "Tobacco smoking status code" ~ "Tobacco smoking status code clone"
+define SameCodeAndConcept: "Tobacco smoking status code clone" ~ "Tobacco smoking status"
+define SameConceptAndCode: "Tobacco smoking status" ~ "Tobacco smoking status code clone"
+define SameConceptAndConcept: "Tobacco smoking status" ~ "Tobacco smoking status clone"
+define DiffCodeAndCode: "Tobacco smoking status code" ~ "Total Score [AUDIT-C] code"
+define DiffCodeAndConcept: "Tobacco smoking status code clone" ~ "Total Score [AUDIT-C]"
+define DiffConceptAndCode: "Tobacco smoking status" ~ "Total Score [AUDIT-C] code"
+define DiffConceptAndConcept: "Tobacco smoking status" ~ "Total Score [AUDIT-C]"
 
 // @Test: Less
 define AGtB_Int: 5 < 4
