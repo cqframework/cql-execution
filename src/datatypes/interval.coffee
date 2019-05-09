@@ -118,7 +118,7 @@ module.exports.Interval = class Interval
       [h, hc] = switch
         when cmp.greaterThanOrEquals(a.high, b.high) then [@high, @highClosed]
         when cmp.lessThanOrEquals(a.high, b.high) then [other.high, other.highClosed]
-        when areNumeric(a.low, b.low) then [highestNumericUncertainty(a.high, b.high), true]
+        when areNumeric(a.high, b.high) then [highestNumericUncertainty(a.high, b.high), true]
         # TODO: Do we need to support quantities here?
         when areDateTimes(a.high, b.high) and a.high.isMorePrecise(b.high) then [other.high, other.highClosed]
         else [@high, @highClosed]
@@ -141,7 +141,7 @@ module.exports.Interval = class Interval
       [h, hc] = switch
         when cmp.lessThanOrEquals(a.high, b.high) then [@high, @highClosed]
         when cmp.greaterThanOrEquals(a.high, b.high) then [other.high, other.highClosed]
-        when areNumeric(a.low, b.low) then [lowestNumericUncertainty(a.high, b.high), true]
+        when areNumeric(a.high, b.high) then [lowestNumericUncertainty(a.high, b.high), true]
         # TODO: Do we need to support quantities here?
         when areDateTimes(a.high, b.high) and b.high.isMorePrecise(a.high) then [other.high, other.highClosed]
         else [@high, @highClosed]

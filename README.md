@@ -261,4 +261,11 @@ execute `cake watch-test-data`.
 
 To watch for _all_ changes (Coffeescript _and_ CQL), use:
 
-    cake watch-all
+   `cake watch-all`
+
+
+# Pull Requests
+
+If coffeescript source is modified, `cql4browsers.js` needs to be included. Otherwise Travis CI will fail. To generate this file, run:
+
+  `yarn run build-everything`
