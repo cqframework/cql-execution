@@ -443,8 +443,8 @@
   })();
 
   module.exports.Concept = Concept = (function() {
-    function Concept(codes, display) {
-      this.codes = codes != null ? codes : [];
+    function Concept(codes1, display) {
+      this.codes = codes1 != null ? codes1 : [];
       this.display = display;
     }
 
@@ -466,9 +466,23 @@
 
   module.exports.ValueSet = ValueSet = (function() {
     function ValueSet(oid, version, codes) {
+      var code, i, len;
       this.oid = oid;
       this.version = version;
-      this.codes = codes != null ? codes : [];
+      if (codes == null) {
+        codes = [];
+      }
+      this.systemMap = new Map();
+      for (i = 0, len = codes.length; i < len; i++) {
+        code = codes[i];
+        if (!this.systemMap.has(code.system)) {
+          this.systemMap.set(code.system, new Map());
+        }
+        this.systemMap.get(code.system).set(code.code, {
+          version: code.version,
+          display: code.display
+        });
+      }
     }
 
     Object.defineProperties(ValueSet.prototype, {
@@ -476,31 +490,37 @@
         get: function() {
           return true;
         }
+      },
+      codes: {
+        get: function() {
+          return Array.from(this.systemMap.entries()).reduce(function(all, curr) {
+            all.push.apply(all, Array.from(curr[1].entries()).map(function(c) {
+              return new Code(c[0], curr[0], c[1].version, c[1].display);
+            }));
+            return all;
+          }, []);
+        }
       }
     });
 
     ValueSet.prototype.hasMatch = function(code) {
-      var codeItem, codesList, i, len, matchFound, multipleCodeSystemsExist, ref;
+      var codesList, matchFound, multipleCodeSystemsExist;
       codesList = toCodeList(code);
       if (codesList.length === 1 && typeof codesList[0] === 'string') {
-        matchFound = false;
-        multipleCodeSystemsExist = false;
-        ref = this.codes;
-        for (i = 0, len = ref.length; i < len; i++) {
-          codeItem = ref[i];
-          if (codeItem.system !== this.codes[0].system) {
-            multipleCodeSystemsExist = true;
-          }
-          if (codeItem.code === codesList[0]) {
-            matchFound = true;
-          }
-          if (multipleCodeSystemsExist && matchFound) {
-            throw new Error('In (valueset) is ambiguous -- multiple codes with multiple code systems exist in value set.');
-          }
+        multipleCodeSystemsExist = this.systemMap.size > 1;
+        matchFound = Array.from(this.systemMap.values()).some(function(codes) {
+          return codes.has(codesList[0]);
+        });
+        if (multipleCodeSystemsExist && matchFound) {
+          throw new Error('In (valueset) is ambiguous -- multiple codes with multiple code systems exist in value set.');
         }
         return matchFound;
       } else {
-        return codesInList(codesList, this.codes);
+        return codesList.some((function(_this) {
+          return function(c) {
+            return _this.systemMap.has(c.system) && _this.systemMap.get(c.system).has(c.code);
+          };
+        })(this));
       }
     };
 

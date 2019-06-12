@@ -29,29 +29,37 @@ module.exports.Concept = class Concept
     codesInList(toCodeList(code), @codes)
 
 module.exports.ValueSet = class ValueSet
-  constructor: (@oid, @version, @codes = []) ->
+  constructor: (@oid, @version, codes = []) ->
+    @systemMap = new Map()
+    for code in codes
+      unless @systemMap.has code.system
+        @systemMap.set(code.system, new Map())
+      @systemMap.get(code.system).set(code.code, { version: code.version, display: code.display })
 
   Object.defineProperties @prototype,
     isValueSet:
       get: -> true
+    codes:
+      # for backwards compatibility, still support codes array
+      get: ->
+        Array.from(@systemMap.entries()).reduce((all, curr) ->
+          # Note for below: curr is [system, codeMap], c is [code, {version, display}]
+          all.push((Array.from(curr[1].entries()).map (c) -> new Code(c[0], curr[0], c[1].version, c[1].display))...)
+          return all
+        , [])
 
   hasMatch: (code) ->
     codesList = toCodeList(code)
     # InValueSet String Overload
     if codesList.length == 1 and typeof codesList[0] is 'string'
-      matchFound = false
-      multipleCodeSystemsExist = false
-      for codeItem in @codes
-        # Confirm all code systems match
-        if codeItem.system != @codes[0].system
-          multipleCodeSystemsExist = true
-        if codeItem.code == codesList[0]
-          matchFound = true
-        if multipleCodeSystemsExist and matchFound
-          throw new Error('In (valueset) is ambiguous -- multiple codes with multiple code systems exist in value set.')
+      multipleCodeSystemsExist = @systemMap.size > 1
+      matchFound = Array.from(@systemMap.values()).some (codes) -> codes.has(codesList[0])
+      if multipleCodeSystemsExist and matchFound
+        throw new Error('In (valueset) is ambiguous -- multiple codes with multiple code systems exist in value set.')
       return matchFound
     else
-      codesInList(codesList, @codes)
+      codesList.some (c) =>
+        @systemMap.has(c.system) and @systemMap.get(c.system).has(c.code)
 
 toCodeList = (c) ->
   if not c?
