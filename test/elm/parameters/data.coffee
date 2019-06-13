@@ -733,6 +733,136 @@ module.exports['StringParameterTypes'] = {
    }
 }
 
+### CodeParameterTypes
+library TestSnippet version '1'
+using QUICK
+codesystem "FOOTESTCS": 'http://footest.org'
+parameter FooP Code
+parameter FooDP default Code 'FooTest' from "FOOTESTCS" display 'Foo Test'
+context Patient
+define Foo: FooP
+define Foo2: FooDP
+###
+
+module.exports['CodeParameterTypes'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "parameters" : {
+         "def" : [ {
+            "localId" : "4",
+            "name" : "FooP",
+            "accessLevel" : "Public",
+            "parameterTypeSpecifier" : {
+               "localId" : "3",
+               "name" : "{urn:hl7-org:elm-types:r1}Code",
+               "type" : "NamedTypeSpecifier"
+            }
+         }, {
+            "localId" : "7",
+            "name" : "FooDP",
+            "accessLevel" : "Public",
+            "default" : {
+               "localId" : "6",
+               "code" : "FooTest",
+               "display" : "Foo Test",
+               "type" : "Code",
+               "system" : {
+                  "localId" : "5",
+                  "name" : "FOOTESTCS"
+               }
+            }
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "localId" : "2",
+            "name" : "FOOTESTCS",
+            "id" : "http://footest.org",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "9",
+            "name" : "Foo",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "define ","Foo",": " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "FooP" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "name" : "FooP",
+               "type" : "ParameterRef"
+            }
+         }, {
+            "localId" : "11",
+            "name" : "Foo2",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "11",
+                  "s" : [ {
+                     "value" : [ "define ","Foo2",": " ]
+                  }, {
+                     "r" : "10",
+                     "s" : [ {
+                        "value" : [ "FooDP" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "10",
+               "name" : "FooDP",
+               "type" : "ParameterRef"
+            }
+         } ]
+      }
+   }
+}
+
 ### ConceptParameterTypes
 library TestSnippet version '1'
 using QUICK

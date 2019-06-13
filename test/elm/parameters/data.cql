@@ -33,6 +33,13 @@ parameter FooDP default 'Hello'
 define Foo: FooP
 define Foo2: FooDP
 
+// @Test: CodeParameterTypes
+codesystem "FOOTESTCS": 'http://footest.org'
+parameter FooP Code
+parameter FooDP default Code 'FooTest' from "FOOTESTCS" display 'Foo Test'
+define Foo: FooP
+define Foo2: FooDP
+
 // @Test: ConceptParameterTypes
 codesystem "FOOTESTCS": 'http://footest.org'
 parameter FooP Concept
