@@ -373,35 +373,41 @@
 
   module.exports.Repository = repository.Repository;
 
+  module.exports.Expression = expression.Expression;
+
   module.exports.Context = context.Context;
+
+  module.exports.Executor = exec.Executor;
 
   module.exports.PatientContext = context.PatientContext;
 
   module.exports.PopulationContext = context.PopulationContext;
 
-  module.exports.Executor = exec.Executor;
-
   module.exports.Results = results.Results;
-
-  module.exports.Code = datatypes.Code;
-
-  module.exports.Quantity = quantity.Quantity;
-
-  module.exports.Ratio = ratio.Ratio;
-
-  module.exports.Expression = expression.Expression;
-
-  module.exports.ValueSet = datatypes.ValueSet;
-
-  module.exports.DateTime = datatypes.DateTime;
-
-  module.exports.Interval = datatypes.Interval;
 
   module.exports.Patient = patient.Patient;
 
   module.exports.PatientSource = patient.PatientSource;
 
   module.exports.CodeService = codeservice.CodeService;
+
+  module.exports.Code = datatypes.Code;
+
+  module.exports.CodeSystem = datatypes.CodeSystem;
+
+  module.exports.Concept = datatypes.Concept;
+
+  module.exports.Date = datatypes.Date;
+
+  module.exports.DateTime = datatypes.DateTime;
+
+  module.exports.Interval = datatypes.Interval;
+
+  module.exports.Quantity = quantity.Quantity;
+
+  module.exports.Ratio = ratio.Ratio;
+
+  module.exports.ValueSet = datatypes.ValueSet;
 
 }).call(this);
 
