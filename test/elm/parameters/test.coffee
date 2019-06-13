@@ -125,6 +125,29 @@ describe 'StringParameterTypes', ->
   it 'should throw when overriding value is wrong type', ->
     should(() => @foo2.exec(@ctx.withParameters { FooDP: 42 })).throw(/.*wrong type.*/)
 
+describe 'CodeParameterTypes', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'should execute to provided valid value', ->
+    c = new Code("foo", "http://foo.org", null, "Foo")
+    @foo.exec(@ctx.withParameters { FooP: c }).should.equal c
+
+  it 'should throw when provided value is wrong type', ->
+    c = new Concept([new Code("foo", "http://foo.org")], "Foo")
+    should(() => @foo.exec(@ctx.withParameters { FooP: c })).throw(/.*wrong type.*/)
+
+  it 'should execute to default value', ->
+    @foo2.exec(@ctx).should.eql new Code("FooTest", "http://footest.org", undefined, "Foo Test")
+
+  it 'should execute to overriding valid value', ->
+    c = new Code("foo", "http://foo.org", null, "Foo")
+    @foo2.exec(@ctx.withParameters { FooDP: c }).should.equal c
+
+  it 'should throw when overriding value is wrong type', ->
+    c = new Concept([new Code("foo", "http://foo.org")], "Foo")
+    should(() => @foo2.exec(@ctx.withParameters { FooDP: c })).throw(/.*wrong type.*/)
+
 describe 'ConceptParameterTypes', ->
   @beforeEach ->
     setup @, data

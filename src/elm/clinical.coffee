@@ -93,6 +93,24 @@ module.exports.CodeRef = class CodeRef extends Expression
     ctx = if @library then ctx.getLibraryContext(@library) else ctx
     ctx.getCode(@name)?.execute(ctx)
 
+module.exports.Code = class Code extends Expression
+  constructor: (json) ->
+    super
+    @code = json.code
+    @systemName = json.system.name
+    @version = json.version
+    @display = json.display
+
+  # Define a simple getter to allow type-checking of this class without instanceof
+  # and in a way that survives minification (as opposed to checking constructor.name)
+  Object.defineProperties @prototype,
+    isCode:
+      get: -> true
+
+  exec: (ctx) ->
+    system = ctx.getCodeSystem(@systemName)?.id
+    new dt.Code(@code, system, @version, @display)
+
 module.exports.ConceptDef = class ConceptDef extends Expression
   constructor: (json) ->
     super

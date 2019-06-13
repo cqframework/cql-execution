@@ -188,6 +188,7 @@ module.exports.Context = class Context
       when "{urn:hl7-org:elm-types:r1}Integer" then typeof val is "number" && Math.floor(val) == val
       when "{urn:hl7-org:elm-types:r1}String" then typeof val is "string"
       when "{urn:hl7-org:elm-types:r1}Concept" then val?.isConcept
+      when "{urn:hl7-org:elm-types:r1}Code" then val?.isCode
       when "{urn:hl7-org:elm-types:r1}DateTime" then val?.isDateTime
       when "{urn:hl7-org:elm-types:r1}Date" then val?.isDate
       when "{urn:hl7-org:elm-types:r1}Quantity" then val?.isQuantity
@@ -200,6 +201,7 @@ module.exports.Context = class Context
       when inst.isDecimalLiteral then typeof val is "number"
       when inst.isIntegerLiteral then typeof val is "number" && Math.floor(val) == val
       when inst.isStringLiteral then typeof val is "string"
+      when inst.isCode then val?.isCode
       when inst.isConcept then val?.isConcept
       when inst.isDateTime then val?.isDateTime
       when inst.isQuantity then val?.isQuantity
