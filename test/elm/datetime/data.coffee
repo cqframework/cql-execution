@@ -485,25 +485,10 @@ define Hour: Time(12)
 define Minute: Time(12, 10)
 define Second: Time(12, 10, 59)
 define Millisecond: Time(12, 10, 59, 456)
-define TimezoneOffset: Time(12, 10, 59, 456, -8.0)
 ###
 
-###
-Translation Error(s):
-[8:24, 8:50] Could not resolve call to system operator Time.  Expected 1 - 4 arguments.
-###
 module.exports['Time'] = {
    "library" : {
-      "annotation" : [ {
-         "startLine" : 8,
-         "startChar" : 24,
-         "endLine" : 8,
-         "endChar" : 50,
-         "message" : "Could not resolve call to system operator Time.  Expected 1 - 4 arguments.",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -689,38 +674,6 @@ module.exports['Time'] = {
                   "value" : "456",
                   "type" : "Literal"
                }
-            }
-         }, {
-            "localId" : "27",
-            "name" : "TimezoneOffset",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "27",
-                  "s" : [ {
-                     "value" : [ "define ","TimezoneOffset",": " ]
-                  }, {
-                     "r" : "26",
-                     "s" : [ {
-                        "r" : "20",
-                        "value" : [ "Time","(","12",", ","10",", ","59",", ","456",", " ]
-                     }, {
-                        "r" : "25",
-                        "s" : [ {
-                           "r" : "24",
-                           "value" : [ "-","8.0" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "26",
-               "type" : "Null"
             }
          } ]
       }
@@ -2073,122 +2026,18 @@ module.exports['TimeFrom'] = {
    }
 }
 
-### TimezoneFrom
+### TimezoneOffsetFrom
 library TestSnippet version '1'
 using QUICK
 context Patient
-define CentralEuropean: timezone from DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
-define EasternStandard: timezone from DateTime(2000, 3, 15, 13, 30, 25, 200, -5.0)
-define DefaultTimezone: timezone from DateTime(2000, 3, 15, 13, 30, 25, 200)
-define NullDate: timezone from (null as DateTime)
+define CentralEuropean: timezoneoffset from DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
+define EasternStandard: timezoneoffset from DateTime(2000, 3, 15, 13, 30, 25, 200, -5.0)
+define DefaultTimezone: timezoneoffset from DateTime(2000, 3, 15, 13, 30, 25, 200)
+define NullDate: timezoneoffset from (null as DateTime)
 ###
 
-###
-Translation Error(s):
-[4:33, 4:33] Syntax error at from
-[4:51, 4:51] Syntax error at ,
-[4:54, 4:54] Syntax error at ,
-[4:58, 4:58] Syntax error at ,
-[4:62, 4:62] Syntax error at ,
-[4:66, 4:66] Syntax error at ,
-[4:70, 4:70] Syntax error at ,
-[4:75, 4:75] Syntax error at ,
-[4:81, 4:81] Syntax error at )
-[4:25, 4:47] Could not resolve identifier timezone in the current library.
-###
-module.exports['TimezoneFrom'] = {
+module.exports['TimezoneOffsetFrom'] = {
    "library" : {
-      "annotation" : [ {
-         "startLine" : 4,
-         "startChar" : 33,
-         "endLine" : 4,
-         "endChar" : 33,
-         "message" : "Syntax error at from",
-         "errorType" : "syntax",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 4,
-         "startChar" : 51,
-         "endLine" : 4,
-         "endChar" : 51,
-         "message" : "Syntax error at ,",
-         "errorType" : "syntax",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 4,
-         "startChar" : 54,
-         "endLine" : 4,
-         "endChar" : 54,
-         "message" : "Syntax error at ,",
-         "errorType" : "syntax",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 4,
-         "startChar" : 58,
-         "endLine" : 4,
-         "endChar" : 58,
-         "message" : "Syntax error at ,",
-         "errorType" : "syntax",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 4,
-         "startChar" : 62,
-         "endLine" : 4,
-         "endChar" : 62,
-         "message" : "Syntax error at ,",
-         "errorType" : "syntax",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 4,
-         "startChar" : 66,
-         "endLine" : 4,
-         "endChar" : 66,
-         "message" : "Syntax error at ,",
-         "errorType" : "syntax",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 4,
-         "startChar" : 70,
-         "endLine" : 4,
-         "endChar" : 70,
-         "message" : "Syntax error at ,",
-         "errorType" : "syntax",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 4,
-         "startChar" : 75,
-         "endLine" : 4,
-         "endChar" : 75,
-         "message" : "Syntax error at ,",
-         "errorType" : "syntax",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 4,
-         "startChar" : 81,
-         "endLine" : 4,
-         "endChar" : 81,
-         "message" : "Syntax error at )",
-         "errorType" : "syntax",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 4,
-         "startChar" : 25,
-         "endLine" : 4,
-         "endChar" : 47,
-         "message" : "Could not resolve identifier timezone in the current library.",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2220,103 +2069,316 @@ module.exports['TimezoneFrom'] = {
                }
             }
          }, {
-            "localId" : "17",
+            "localId" : "12",
             "name" : "CentralEuropean",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "17",
+                  "r" : "12",
                   "s" : [ {
                      "value" : [ "define ","CentralEuropean",": " ]
                   }, {
-                     "r" : "16",
+                     "r" : "11",
                      "s" : [ {
-                        "r" : "11",
+                        "value" : [ "timezoneoffset from " ]
+                     }, {
+                        "r" : "10",
                         "s" : [ {
-                           "r" : "8",
-                           "s" : [ {
-                              "r" : "7",
-                              "s" : [ {
-                                 "r" : "6",
-                                 "s" : [ {
-                                    "r" : "5",
-                                    "s" : [ {
-                                       "r" : "4",
-                                       "s" : [ {
-                                          "r" : "3",
-                                          "s" : [ {
-                                             "r" : "2",
-                                             "s" : [ {
-                                                "value" : [ "timezone"," from DateTime(" ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "2000," ]
-                                          } ]
-                                       }, {
-                                          "value" : [ " 3," ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " 15," ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " 13," ]
-                                 } ]
-                              }, {
-                                 "value" : [ " 30," ]
-                              } ]
-                           }, {
-                              "value" : [ " 25," ]
-                           } ]
-                        }, {
-                           "value" : [ " " ]
-                        }, {
-                           "r" : "11",
-                           "s" : [ {
-                              "r" : "10",
-                              "value" : [ "200","," ]
-                           } ]
-                        }, {
-                           "value" : [ " " ]
+                           "r" : "2",
+                           "value" : [ "DateTime","(","2000",", ","3",", ","15",", ","13",", ","30",", ","25",", ","200",", " ]
                         }, {
                            "r" : "9",
                            "s" : [ {
-                              "value" : [ "+" ]
+                              "r" : "9",
+                              "value" : [ "+","1.0" ]
                            } ]
-                        } ]
-                     }, {
-                        "r" : "16",
-                        "s" : [ {
-                           "r" : "15",
-                           "value" : [ "1.0",")" ]
-                        } ]
-                     }, {
-                        "value" : [ "\n" ]
-                     }, {
-                        "r" : "14",
-                        "s" : [ {
-                           "s" : [ {
-                              "r" : "13",
-                              "s" : [ {
-                                 "r" : "12",
-                                 "s" : [ {
-                                    "s" : [ {
-                                       "value" : [ "define" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " ","EasternStandard" ]
-                              } ]
-                           } ]
+                        }, {
+                           "value" : [ ")" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "16",
-               "type" : "Null"
+               "localId" : "11",
+               "type" : "TimezoneOffsetFrom",
+               "operand" : {
+                  "localId" : "10",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "2",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2000",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "3",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "4",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "15",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "localId" : "5",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "13",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "localId" : "6",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "30",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "localId" : "7",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "25",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "localId" : "8",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "200",
+                     "type" : "Literal"
+                  },
+                  "timezoneOffset" : {
+                     "localId" : "9",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "1.0",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         }, {
+            "localId" : "24",
+            "name" : "EasternStandard",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "24",
+                  "s" : [ {
+                     "value" : [ "define ","EasternStandard",": " ]
+                  }, {
+                     "r" : "23",
+                     "s" : [ {
+                        "value" : [ "timezoneoffset from " ]
+                     }, {
+                        "r" : "22",
+                        "s" : [ {
+                           "r" : "13",
+                           "value" : [ "DateTime","(","2000",", ","3",", ","15",", ","13",", ","30",", ","25",", ","200",", " ]
+                        }, {
+                           "r" : "21",
+                           "s" : [ {
+                              "r" : "20",
+                              "value" : [ "-","5.0" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "23",
+               "type" : "TimezoneOffsetFrom",
+               "operand" : {
+                  "localId" : "22",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "13",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2000",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "14",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "15",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "15",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "localId" : "16",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "13",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "localId" : "17",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "30",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "localId" : "18",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "25",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "localId" : "19",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "200",
+                     "type" : "Literal"
+                  },
+                  "timezoneOffset" : {
+                     "localId" : "21",
+                     "type" : "Negate",
+                     "operand" : {
+                        "localId" : "20",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "value" : "5.0",
+                        "type" : "Literal"
+                     }
+                  }
+               }
+            }
+         }, {
+            "localId" : "34",
+            "name" : "DefaultTimezone",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "34",
+                  "s" : [ {
+                     "value" : [ "define ","DefaultTimezone",": " ]
+                  }, {
+                     "r" : "33",
+                     "s" : [ {
+                        "value" : [ "timezoneoffset from " ]
+                     }, {
+                        "r" : "32",
+                        "s" : [ {
+                           "r" : "25",
+                           "value" : [ "DateTime","(","2000",", ","3",", ","15",", ","13",", ","30",", ","25",", ","200",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "33",
+               "type" : "TimezoneOffsetFrom",
+               "operand" : {
+                  "localId" : "32",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "25",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2000",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "26",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "27",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "15",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "localId" : "28",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "13",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "localId" : "29",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "30",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "localId" : "30",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "25",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "localId" : "31",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "200",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         }, {
+            "localId" : "39",
+            "name" : "NullDate",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "39",
+                  "s" : [ {
+                     "value" : [ "define ","NullDate",": " ]
+                  }, {
+                     "r" : "38",
+                     "s" : [ {
+                        "value" : [ "timezoneoffset from " ]
+                     }, {
+                        "r" : "37",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "37",
+                           "s" : [ {
+                              "r" : "35",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "36",
+                              "s" : [ {
+                                 "value" : [ "DateTime" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "38",
+               "type" : "TimezoneOffsetFrom",
+               "operand" : {
+                  "localId" : "37",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "35",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "36",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
             }
          } ]
       }

@@ -16,25 +16,11 @@ define IntOne: 1
 define DecimalTenth: 0.1
 define StringTrue: 'true'
 define DateTimeX: @2012-02-15T12:10:59.456Z
-define TimeX: @T12:10:59.456Z
+define TimeX: @T12:10:59.456
 ###
 
-###
-Translation Error(s):
-[10:28, 10:28] Syntax error at Z
-###
 module.exports['Literal'] = {
    "library" : {
-      "annotation" : [ {
-         "startLine" : 10,
-         "startChar" : 28,
-         "endLine" : 10,
-         "endChar" : 28,
-         "message" : "Syntax error at Z",
-         "errorType" : "syntax",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -234,19 +220,44 @@ module.exports['Literal'] = {
                }
             }
          }, {
-            "localId" : "14",
+            "localId" : "15",
             "name" : "TimeX",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "14",
+                  "r" : "15",
                   "s" : [ {
-                     "value" : [ "define ","TimeX",": ","@T12:10:59.456Z" ]
+                     "r" : "14",
+                     "value" : [ "define ","TimeX",": ","@T12:10:59.456" ]
                   } ]
                }
-            } ]
+            } ],
+            "expression" : {
+               "localId" : "14",
+               "type" : "Time",
+               "hour" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "12",
+                  "type" : "Literal"
+               },
+               "minute" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "10",
+                  "type" : "Literal"
+               },
+               "second" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "59",
+                  "type" : "Literal"
+               },
+               "millisecond" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "456",
+                  "type" : "Literal"
+               }
+            }
          } ]
       }
    }

@@ -63,7 +63,9 @@ class DateTime
 
   constructor: (@year=null, @month=null, @day=null, @hour=null, @minute=null, @second=null, @millisecond=null, @timezoneOffset) ->
     # from the spec: If no timezone is specified, the timezone of the evaluation request timestamp is used.
-    if not @timezoneOffset?
+    # NOTE: timezoneOffset will be explicitly null for the Time overload, whereas
+    # it will be undefined if simply unspecified
+    if typeof(@timezoneOffset) is 'undefined'
       @timezoneOffset = (new jsDate()).getTimezoneOffset() / 60 * -1
 
   # Define a simple getter to allow type-checking of this class without instanceof
@@ -334,7 +336,8 @@ class DateTime
     new Date(@year, @month, @day)
 
   getTime: () ->
-    new DateTime(0, 1, 1, @hour, @minute, @second, @millisecond, @timezoneOffset)
+    # Times no longer have timezoneOffets, so we must explicitly set it to null
+    new DateTime(0, 1, 1, @hour, @minute, @second, @millisecond, null)
 
   isTime: () ->
     @year == 0 && @month == 1 && @day == 1

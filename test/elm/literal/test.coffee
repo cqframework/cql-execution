@@ -48,8 +48,7 @@ describe 'Literal', ->
     d.millisecond.should.equal 456
     d.timezoneOffset.should.equal 0
 
-  xit 'should execute \'\' as correct Time', ->
-    # Broken with 1.4.5-SNAPSHOT: TimezoneOffset
+  it 'should execute \'\' as correct Time', ->
     d = @timeX.exec(@ctx)
     d.isTime().should.be.true()
     d.year.should.equal 0
@@ -59,4 +58,4 @@ describe 'Literal', ->
     d.minute.should.equal 10
     d.second.should.equal 59
     d.millisecond.should.equal 456
-    d.timezoneOffset.should.equal 0
+    should(d.timezoneOffset).be.null()
