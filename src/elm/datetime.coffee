@@ -43,7 +43,7 @@ module.exports.Date = class Date extends Expression
     new DT.Date(args...)
 
 module.exports.Time = class Time extends Expression
-  @PROPERTIES = ['hour', 'minute', 'second', 'millisecond', 'timezoneOffset']
+  @PROPERTIES = ['hour', 'minute', 'second', 'millisecond']
   constructor: (json) ->
     super
     for property in Time.PROPERTIES
@@ -105,7 +105,7 @@ module.exports.TimeFrom = class TimeFrom extends Expression
     date = @execArgs(ctx)
     if date? then date.getTime() else null
 
-module.exports.TimezoneFrom = class TimezoneFrom extends Expression
+module.exports.TimezoneOffsetFrom = class TimezoneOffsetFrom extends Expression
   constructor: (json) ->
     super
 

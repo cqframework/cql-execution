@@ -1985,7 +1985,7 @@ describe 'DateTime.getTime', ->
     t.minute.should.equal 55
     t.second.should.equal 14
     t.millisecond.should.equal 456
-    t.timezoneOffset.should.equal 0
+    should(t.timezoneOffset).be.null()
 
   it 'should properly extract the time from datetimes without milliseconds', ->
     t = DateTime.parse('2012-10-25T12:55:14+00').getTime()
@@ -1996,7 +1996,7 @@ describe 'DateTime.getTime', ->
     t.minute.should.equal 55
     t.second.should.equal 14
     should.not.exist t.millisecond
-    t.timezoneOffset.should.equal 0
+    should(t.timezoneOffset).be.null()
 
   it 'should properly extract the time from datetimes without seconds', ->
     t = DateTime.parse('2012-10-25T12:55+00').getTime()
@@ -2007,7 +2007,7 @@ describe 'DateTime.getTime', ->
     t.minute.should.equal 55
     should.not.exist t.second
     should.not.exist t.millisecond
-    t.timezoneOffset.should.equal 0
+    should(t.timezoneOffset).be.null()
 
   it 'should properly extract the time from datetimes without minutes', ->
     t = DateTime.parse('2012-10-25T12+00').getTime()
@@ -2018,7 +2018,7 @@ describe 'DateTime.getTime', ->
     should.not.exist t.minute
     should.not.exist t.second
     should.not.exist t.millisecond
-    t.timezoneOffset.should.equal 0
+    should(t.timezoneOffset).be.null()
 
   it 'should properly extract the time from datetimes without hours', ->
     t = DateTime.parse('2012-10-25T+00').getTime()
@@ -2029,7 +2029,7 @@ describe 'DateTime.getTime', ->
     should.not.exist t.minute
     should.not.exist t.second
     should.not.exist t.millisecond
-    t.timezoneOffset.should.equal 0
+    should(t.timezoneOffset).be.null()
 
 describe 'DateTime.reducedPrecision', ->
 
