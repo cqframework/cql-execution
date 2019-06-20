@@ -51,8 +51,32 @@ define EqRatios: 10 'mg' : 2 'dL' = 15 'mg' : 3 'dL'
 define UneqRatios: 10 'mg' : 2 'dL' = 15 'mg' : 4 'dL'
 ###
 
+###
+Translation Error(s):
+[11:28, 11:42] Could not resolve call to operator Equal with signature (tuple{Foo:System.Any},tuple{Bar:System.Any}).
+[15:40, 15:94] Could not resolve call to operator Equal with signature (tuple{a:System.String,b:System.Any},tuple{a:System.String,c:System.Any}).
+###
 module.exports['Equal'] = {
    "library" : {
+      "annotation" : [ {
+         "startLine" : 11,
+         "startChar" : 28,
+         "endLine" : 11,
+         "endChar" : 42,
+         "message" : "Could not resolve call to operator Equal with signature (tuple{Foo:System.Any},tuple{Bar:System.Any}).",
+         "errorType" : "semantic",
+         "errorSeverity" : "error",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 15,
+         "startChar" : 40,
+         "endLine" : 15,
+         "endChar" : 94,
+         "message" : "Could not resolve call to operator Equal with signature (tuple{a:System.String,b:System.Any},tuple{a:System.String,c:System.Any}).",
+         "errorType" : "semantic",
+         "errorSeverity" : "error",
+         "type" : "CqlToElmError"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -578,22 +602,7 @@ module.exports['Equal'] = {
             } ],
             "expression" : {
                "localId" : "43",
-               "type" : "Equal",
-               "operand" : [ {
-                  "type" : "ToList",
-                  "operand" : {
-                     "localId" : "41",
-                     "name" : "TupleA",
-                     "type" : "ExpressionRef"
-                  }
-               }, {
-                  "type" : "ToList",
-                  "operand" : {
-                     "localId" : "42",
-                     "name" : "TupleB",
-                     "type" : "ExpressionRef"
-                  }
-               } ]
+               "type" : "Null"
             }
          }, {
             "localId" : "52",
@@ -986,50 +995,7 @@ module.exports['Equal'] = {
             } ],
             "expression" : {
                "localId" : "75",
-               "type" : "Equal",
-               "operand" : [ {
-                  "type" : "ToList",
-                  "operand" : {
-                     "localId" : "71",
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "a",
-                        "value" : {
-                           "localId" : "69",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Hello",
-                           "type" : "Literal"
-                        }
-                     }, {
-                        "name" : "b",
-                        "value" : {
-                           "localId" : "70",
-                           "type" : "Null"
-                        }
-                     } ]
-                  }
-               }, {
-                  "type" : "ToList",
-                  "operand" : {
-                     "localId" : "74",
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "a",
-                        "value" : {
-                           "localId" : "72",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Hello",
-                           "type" : "Literal"
-                        }
-                     }, {
-                        "name" : "c",
-                        "value" : {
-                           "localId" : "73",
-                           "type" : "Null"
-                        }
-                     } ]
-                  }
-               } ]
+               "type" : "Null"
             }
          }, {
             "localId" : "96",
@@ -3256,8 +3222,22 @@ define AEqB_Quantity_incompatible: 5 'Cel' != 5 'm'
 define ALtB_Quantity_incompatible: 5 'Cel' != 40 'm'
 ###
 
+###
+Translation Error(s):
+[12:40, 12:95] Could not resolve call to operator Equal with signature (tuple{a:System.String,b:System.Any},tuple{a:System.String,c:System.Any}).
+###
 module.exports['NotEqual'] = {
    "library" : {
+      "annotation" : [ {
+         "startLine" : 12,
+         "startChar" : 40,
+         "endLine" : 12,
+         "endChar" : 95,
+         "message" : "Could not resolve call to operator Equal with signature (tuple{a:System.String,b:System.Any},tuple{a:System.String,c:System.Any}).",
+         "errorType" : "semantic",
+         "errorSeverity" : "error",
+         "type" : "CqlToElmError"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -4093,53 +4073,7 @@ module.exports['NotEqual'] = {
             } ],
             "expression" : {
                "localId" : "65",
-               "type" : "Not",
-               "operand" : {
-                  "type" : "Equal",
-                  "operand" : [ {
-                     "type" : "ToList",
-                     "operand" : {
-                        "localId" : "61",
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "a",
-                           "value" : {
-                              "localId" : "59",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                              "value" : "Hello",
-                              "type" : "Literal"
-                           }
-                        }, {
-                           "name" : "b",
-                           "value" : {
-                              "localId" : "60",
-                              "type" : "Null"
-                           }
-                        } ]
-                     }
-                  }, {
-                     "type" : "ToList",
-                     "operand" : {
-                        "localId" : "64",
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "a",
-                           "value" : {
-                              "localId" : "62",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                              "value" : "Hello",
-                              "type" : "Literal"
-                           }
-                        }, {
-                           "name" : "c",
-                           "value" : {
-                              "localId" : "63",
-                              "type" : "Null"
-                           }
-                        } ]
-                     }
-                  } ]
-               }
+               "type" : "Null"
             }
          }, {
             "localId" : "86",
