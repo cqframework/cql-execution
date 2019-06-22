@@ -1864,43 +1864,43 @@ describe 'TimeIntervalExpand', ->
 
   xit 'expands a millisecond precision datetime', ->
     # define MsPrecPerHour: expand { Interval[@T01:00:00.000+00:00, @T03:00:00.000+00:00] } per hour
-    e = '{ [T01:00:00.000, T01:59:59.999], [T02:00:00.000, T02:59:59.999] }'
+    e = '{ [01:00:00.000, 01:59:59.999], [02:00:00.000, 02:59:59.999] }'
     prettyList(@msPrecPerHour.exec(@ctx)).should.equal e
 
     # define MsPrecPerMinute: expand { Interval[@T01:00:00.000+00:00, @T01:02:00.000+00:00] } per minute
-    e = '{ [T01:00:00.000, T01:00:59.999], [T01:01:00.000, T01:01:59.999] }'
+    e = '{ [01:00:00.000, 01:00:59.999], [01:01:00.000, 01:01:59.999] }'
     prettyList(@msPrecPerMinute.exec(@ctx)).should.equal e
 
     # define MsPrecPerSecond: expand { Interval[@T01:00:00.000+00:00, @T01:00:02.000+00:00] } per second
-    e = '{ [T01:00:00.000, T01:00:00.999], [T01:00:01.000, T01:00:01.999] }'
+    e = '{ [01:00:00.000, 01:00:00.999], [01:00:01.000, 01:00:01.999] }'
     prettyList(@msPrecPerSecond.exec(@ctx)).should.equal e
 
     # define MsPrecPerMillisecond: expand { Interval[@T01:00:00.000+00:00, @T01:00:00.001+00:00] } per millisecond
-    e = '{ [T01:00:00.000, T01:00:00.000], [T01:00:00.001, T01:00:00.001] }'
+    e = '{ [01:00:00.000, 01:00:00.000], [01:00:00.001, 01:00:00.001] }'
     prettyList(@msPrecPerMillisecond.exec(@ctx)).should.equal e
 
   xit 'expands a second precision datetime', ->
     # define SecPrecPerHour: expand { Interval[@T01:00:00+00:00, @T03:00:00+00:00] } per hour
-    e = '{ [T01:00:00, T01:59:59], [T02:00:00, T02:59:59] }'
+    e = '{ [01:00:00, 01:59:59], [02:00:00, 02:59:59] }'
     prettyList(@secPrecPerHour.exec(@ctx)).should.equal e
 
     # define SecPrecPerMinute: expand { Interval[@T01:00:00+00:00, @T01:02:00+00:00] } per minute
-    e = '{ [T01:00:00, T01:00:59], [T01:01:00, T01:01:59] }'
+    e = '{ [01:00:00, 01:00:59], [01:01:00, 01:01:59] }'
     prettyList(@secPrecPerMinute.exec(@ctx)).should.equal e
 
     # define SecPrecPerSecond: expand { Interval[@T01:00:00+00:00, @T01:00:01+00:00] } per second
-    e = '{ [T01:00:00, T01:00:00], [T01:00:01, T01:00:01] }'
+    e = '{ [01:00:00, 01:00:00], [01:00:01, 01:00:01] }'
     prettyList(@secPrecPerSecond.exec(@ctx)).should.equal e
 
     should.not.exist @secPrecPerMillisecond.exec(@ctx)
 
   xit 'expands a minute precision datetime', ->
     # define MinPrecPerHour: expand { Interval[@T01:00+00:00, @T03:00+00:00] } per hour
-    e = '{ [T01:00, T01:59], [T02:00, T02:59] }'
+    e = '{ [01:00, 01:59], [02:00, 02:59] }'
     prettyList(@minPrecPerHour.exec(@ctx)).should.equal e
 
     # define MinPrecPerMinute: expand { Interval[@T01:00+00:00, @T01:01+00:00] } per minute
-    e = '{ [T01:00, T01:00], [T01:01, T01:01] }'
+    e = '{ [01:00, 01:00], [01:01, 01:01] }'
     prettyList(@minPrecPerMinute.exec(@ctx)).should.equal e
 
     should.not.exist @minPrecPerSecond.exec(@ctx)
@@ -1908,7 +1908,7 @@ describe 'TimeIntervalExpand', ->
 
   xit 'expands an hour precision datetime', ->
     # define HourPrecPerHour: expand { Interval[@T01+00:00, @T02+00:00] } per hour
-    e = '{ [T01, T01], [T02, T02] }'
+    e = '{ [01, 01], [02, 02] }'
     prettyList(@hourPrecPerHour.exec(@ctx)).should.equal e
 
     should.not.exist @hourPrecPerMinute.exec(@ctx)

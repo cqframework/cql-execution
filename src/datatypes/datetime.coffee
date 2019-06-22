@@ -291,7 +291,7 @@ class DateTime
     if @isTime() then @toStringTime() else @toStringDateTime()
 
   toStringTime: () ->
-    str = 'T'
+    str = ''
     if @hour?
       str += + @_pad(@hour)
       if @minute?

@@ -28,8 +28,7 @@ define dateStr: convert '2015-01-02' to Date
 define NullConvert: convert 'foo' to DateTime
 define ZDateTime: convert '2014-01-01T14:30:00.0Z' to DateTime // January 1st, 2014, 2:30PM UTC
 define TimezoneDateTime: convert '2014-01-01T14:30:00.0-07:00' to DateTime // January 1st, 2014, 2:30PM Mountain Standard (GMT-7:00)
-define ZTime: convert 'T14:30:00.0Z' to Time // 2:30PM UTC
-define TimezoneTime: convert 'T14:30:00.0-07:00' to Time // 2:30PM Mountain Standard (GMT-7:00)
+define TimezoneTime: convert '14:30:00.0-07:00' to Time // 2:30PM Mountain Standard (GMT-7:00)
 ###
 
 module.exports['FromString'] = {
@@ -793,7 +792,7 @@ module.exports['FromString'] = {
             }
          }, {
             "localId" : "76",
-            "name" : "ZTime",
+            "name" : "TimezoneTime",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -801,7 +800,7 @@ module.exports['FromString'] = {
                "s" : {
                   "r" : "76",
                   "s" : [ {
-                     "value" : [ "define ","ZTime",": " ]
+                     "value" : [ "define ","TimezoneTime",": " ]
                   }, {
                      "r" : "75",
                      "s" : [ {
@@ -809,7 +808,7 @@ module.exports['FromString'] = {
                      }, {
                         "r" : "74",
                         "s" : [ {
-                           "value" : [ "'T14:30:00.0Z'" ]
+                           "value" : [ "'14:30:00.0-07:00'" ]
                         } ]
                      }, {
                         "value" : [ " to " ]
@@ -828,48 +827,7 @@ module.exports['FromString'] = {
                "operand" : {
                   "localId" : "74",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "T14:30:00.0Z",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "80",
-            "name" : "TimezoneTime",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "80",
-                  "s" : [ {
-                     "value" : [ "define ","TimezoneTime",": " ]
-                  }, {
-                     "r" : "79",
-                     "s" : [ {
-                        "value" : [ "convert " ]
-                     }, {
-                        "r" : "78",
-                        "s" : [ {
-                           "value" : [ "'T14:30:00.0-07:00'" ]
-                        } ]
-                     }, {
-                        "value" : [ " to " ]
-                     }, {
-                        "r" : "77",
-                        "s" : [ {
-                           "value" : [ "Time" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "79",
-               "type" : "ToTime",
-               "operand" : {
-                  "localId" : "78",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "T14:30:00.0-07:00",
+                  "value" : "14:30:00.0-07:00",
                   "type" : "Literal"
                }
             }
@@ -3281,17 +3239,14 @@ using QUICK
 context Patient
 define NullArgTime: ToTime((null as String))
 define IncorrectFormatTime: ToTime('10:00PM')
-define InvalidTime: ToTime('25:99.000+00.00')
-define TimeH: ToTime('T02')
-define TimeHM: ToTime('T02:04')
-define TimeHMS: ToTime('T02:04:59')
-define TimeHMSMs: ToTime('T02:04:59.123')
-define TimeHMSMsZ: ToTime('T02:04:59.123Z')
-define TimeHMSMsTimezone: ToTime('T02:04:59.123+01')
-define TimeHMSMsFullTimezone: ToTime('T02:04:59.123+01:00')
-define HourTooHigh: ToTime('T24')
-define MinuteTooHigh: ToTime('T23:60')
-define SecondTooHigh: ToTime('T23:59:60')
+define InvalidTime: ToTime('25:99.000')
+define TimeH: ToTime('02')
+define TimeHM: ToTime('02:04')
+define TimeHMS: ToTime('02:04:59')
+define TimeHMSMs: ToTime('02:04:59.123')
+define HourTooHigh: ToTime('24')
+define MinuteTooHigh: ToTime('23:60')
+define SecondTooHigh: ToTime('23:59:60')
 ###
 
 module.exports['ToTime'] = {
@@ -3437,7 +3392,7 @@ module.exports['ToTime'] = {
                      }, {
                         "r" : "10",
                         "s" : [ {
-                           "value" : [ "'25:99.000+00.00'" ]
+                           "value" : [ "'25:99.000'" ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -3451,7 +3406,7 @@ module.exports['ToTime'] = {
                "operand" : {
                   "localId" : "10",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "25:99.000+00.00",
+                  "value" : "25:99.000",
                   "type" : "Literal"
                }
             }
@@ -3473,7 +3428,7 @@ module.exports['ToTime'] = {
                      }, {
                         "r" : "13",
                         "s" : [ {
-                           "value" : [ "'T02'" ]
+                           "value" : [ "'02'" ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -3487,7 +3442,7 @@ module.exports['ToTime'] = {
                "operand" : {
                   "localId" : "13",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "T02",
+                  "value" : "02",
                   "type" : "Literal"
                }
             }
@@ -3509,7 +3464,7 @@ module.exports['ToTime'] = {
                      }, {
                         "r" : "16",
                         "s" : [ {
-                           "value" : [ "'T02:04'" ]
+                           "value" : [ "'02:04'" ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -3523,7 +3478,7 @@ module.exports['ToTime'] = {
                "operand" : {
                   "localId" : "16",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "T02:04",
+                  "value" : "02:04",
                   "type" : "Literal"
                }
             }
@@ -3545,7 +3500,7 @@ module.exports['ToTime'] = {
                      }, {
                         "r" : "19",
                         "s" : [ {
-                           "value" : [ "'T02:04:59'" ]
+                           "value" : [ "'02:04:59'" ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -3559,7 +3514,7 @@ module.exports['ToTime'] = {
                "operand" : {
                   "localId" : "19",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "T02:04:59",
+                  "value" : "02:04:59",
                   "type" : "Literal"
                }
             }
@@ -3581,7 +3536,7 @@ module.exports['ToTime'] = {
                      }, {
                         "r" : "22",
                         "s" : [ {
-                           "value" : [ "'T02:04:59.123'" ]
+                           "value" : [ "'02:04:59.123'" ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -3595,13 +3550,13 @@ module.exports['ToTime'] = {
                "operand" : {
                   "localId" : "22",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "T02:04:59.123",
+                  "value" : "02:04:59.123",
                   "type" : "Literal"
                }
             }
          }, {
             "localId" : "27",
-            "name" : "TimeHMSMsZ",
+            "name" : "HourTooHigh",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -3609,7 +3564,7 @@ module.exports['ToTime'] = {
                "s" : {
                   "r" : "27",
                   "s" : [ {
-                     "value" : [ "define ","TimeHMSMsZ",": " ]
+                     "value" : [ "define ","HourTooHigh",": " ]
                   }, {
                      "r" : "26",
                      "s" : [ {
@@ -3617,7 +3572,7 @@ module.exports['ToTime'] = {
                      }, {
                         "r" : "25",
                         "s" : [ {
-                           "value" : [ "'T02:04:59.123Z'" ]
+                           "value" : [ "'24'" ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -3631,13 +3586,13 @@ module.exports['ToTime'] = {
                "operand" : {
                   "localId" : "25",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "T02:04:59.123Z",
+                  "value" : "24",
                   "type" : "Literal"
                }
             }
          }, {
             "localId" : "30",
-            "name" : "TimeHMSMsTimezone",
+            "name" : "MinuteTooHigh",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -3645,7 +3600,7 @@ module.exports['ToTime'] = {
                "s" : {
                   "r" : "30",
                   "s" : [ {
-                     "value" : [ "define ","TimeHMSMsTimezone",": " ]
+                     "value" : [ "define ","MinuteTooHigh",": " ]
                   }, {
                      "r" : "29",
                      "s" : [ {
@@ -3653,7 +3608,7 @@ module.exports['ToTime'] = {
                      }, {
                         "r" : "28",
                         "s" : [ {
-                           "value" : [ "'T02:04:59.123+01'" ]
+                           "value" : [ "'23:60'" ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -3667,13 +3622,13 @@ module.exports['ToTime'] = {
                "operand" : {
                   "localId" : "28",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "T02:04:59.123+01",
+                  "value" : "23:60",
                   "type" : "Literal"
                }
             }
          }, {
             "localId" : "33",
-            "name" : "TimeHMSMsFullTimezone",
+            "name" : "SecondTooHigh",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -3681,7 +3636,7 @@ module.exports['ToTime'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","TimeHMSMsFullTimezone",": " ]
+                     "value" : [ "define ","SecondTooHigh",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -3689,7 +3644,7 @@ module.exports['ToTime'] = {
                      }, {
                         "r" : "31",
                         "s" : [ {
-                           "value" : [ "'T02:04:59.123+01:00'" ]
+                           "value" : [ "'23:59:60'" ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -3703,115 +3658,7 @@ module.exports['ToTime'] = {
                "operand" : {
                   "localId" : "31",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "T02:04:59.123+01:00",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "36",
-            "name" : "HourTooHigh",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "36",
-                  "s" : [ {
-                     "value" : [ "define ","HourTooHigh",": " ]
-                  }, {
-                     "r" : "35",
-                     "s" : [ {
-                        "value" : [ "ToTime","(" ]
-                     }, {
-                        "r" : "34",
-                        "s" : [ {
-                           "value" : [ "'T24'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "35",
-               "type" : "ToTime",
-               "operand" : {
-                  "localId" : "34",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "T24",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "39",
-            "name" : "MinuteTooHigh",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "39",
-                  "s" : [ {
-                     "value" : [ "define ","MinuteTooHigh",": " ]
-                  }, {
-                     "r" : "38",
-                     "s" : [ {
-                        "value" : [ "ToTime","(" ]
-                     }, {
-                        "r" : "37",
-                        "s" : [ {
-                           "value" : [ "'T23:60'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "38",
-               "type" : "ToTime",
-               "operand" : {
-                  "localId" : "37",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "T23:60",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "42",
-            "name" : "SecondTooHigh",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "42",
-                  "s" : [ {
-                     "value" : [ "define ","SecondTooHigh",": " ]
-                  }, {
-                     "r" : "41",
-                     "s" : [ {
-                        "value" : [ "ToTime","(" ]
-                     }, {
-                        "r" : "40",
-                        "s" : [ {
-                           "value" : [ "'T23:59:60'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "41",
-               "type" : "ToTime",
-               "operand" : {
-                  "localId" : "40",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "T23:59:60",
+                  "value" : "23:59:60",
                   "type" : "Literal"
                }
             }
@@ -6036,7 +5883,7 @@ module.exports['ConvertsToString'] = {
 library TestSnippet version '1'
 using QUICK
 context Patient
-define IsTrue: ConvertsToTime('T02:04:59.123+01:00')
+define IsTrue: ConvertsToTime('02:04:59.123')
 define IsFalse: ConvertsToTime('foo')
 define IsNull: ConvertsToTime(null as String)
 ###
@@ -6091,7 +5938,7 @@ module.exports['ConvertsToTime'] = {
                      }, {
                         "r" : "2",
                         "s" : [ {
-                           "value" : [ "'T02:04:59.123+01:00'" ]
+                           "value" : [ "'02:04:59.123'" ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -6105,7 +5952,7 @@ module.exports['ConvertsToTime'] = {
                "operand" : {
                   "localId" : "2",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "T02:04:59.123+01:00",
+                  "value" : "02:04:59.123",
                   "type" : "Literal"
                }
             }
