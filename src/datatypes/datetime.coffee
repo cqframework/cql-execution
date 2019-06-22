@@ -6,6 +6,12 @@
 moment = require 'moment'
 
 class DateTime
+  # Define a simple getter to allow type-checking of this class without instanceof
+  # and in a way that survives minification (as opposed to checking constructor.name)
+  Object.defineProperties @prototype,
+    isDateTime:
+      get: -> true
+
   @Unit: { YEAR: 'year', MONTH: 'month', WEEK: 'week', DAY: 'day', HOUR: 'hour', MINUTE: 'minute', SECOND: 'second', MILLISECOND: 'millisecond' }
   @FIELDS: [@Unit.YEAR, @Unit.MONTH, @Unit.DAY, @Unit.HOUR, @Unit.MINUTE, @Unit.SECOND, @Unit.MILLISECOND]
 
@@ -67,12 +73,6 @@ class DateTime
     # it will be undefined if simply unspecified
     if typeof(@timezoneOffset) is 'undefined'
       @timezoneOffset = (new jsDate()).getTimezoneOffset() / 60 * -1
-
-  # Define a simple getter to allow type-checking of this class without instanceof
-  # and in a way that survives minification (as opposed to checking constructor.name)
-  Object.defineProperties @prototype,
-    isDateTime:
-      get: -> true
 
   copy: () ->
     new DateTime(@year, @month, @day, @hour, @minute, @second, @millisecond, @timezoneOffset)
@@ -357,6 +357,12 @@ class DateTime
 
 
 class Date
+  # Define a simple getter to allow type-checking of this class without instanceof
+  # and in a way that survives minification (as opposed to checking constructor.name)
+  Object.defineProperties @prototype,
+    isDate:
+      get: -> true
+
   @Unit: { YEAR: 'year', MONTH: 'month', WEEK: 'week', DAY: 'day' }
   @FIELDS: [@Unit.YEAR, @Unit.MONTH, @Unit.DAY]
 
@@ -379,12 +385,6 @@ class Date
 
   constructor: (@year=null, @month=null, @day=null) ->
     return
-
-  # Define a simple getter to allow type-checking of this class without instanceof
-  # and in a way that survives minification (as opposed to checking constructor.name)
-  Object.defineProperties @prototype,
-    isDate:
-      get: -> true
 
   copy: () ->
     new Date(@year, @month, @day)
