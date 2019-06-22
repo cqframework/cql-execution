@@ -20,7 +20,7 @@ module.exports.Interval = class Interval
     if @low? and typeof @low.copy == 'function'
       newLow = @low.copy()
     if @high? and typeof @high.copy == 'function'
-      newHigh = @high.copy();
+      newHigh = @high.copy()
 
     new Interval(newLow, newHigh, @lowClosed, @highClosed)
 

@@ -575,7 +575,7 @@ DateTime.prototype.isLessPrecise = Date.prototype.isLessPrecise = (other) ->
 DateTime.prototype.isSamePrecision = Date.prototype.isSamePrecision = (other) ->
     if typeof other is 'string' and other in @constructor.FIELDS
       return other == @getPrecision()
-    
+
     for field in @constructor.FIELDS
       if (@[field]? and not other[field]?) then return false
       if (not @[field]? and other[field]?) then return false

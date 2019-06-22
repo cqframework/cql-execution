@@ -228,7 +228,7 @@ describe 'StdDev', ->
     setup @, data
   it 'should be able to find Standard Dev of a list ', ->
     @std.exec(@ctx).should.equal 1.4142135623730951
-  it 'should be able to find Standard Dev of a list of like qauntities', ->
+  it 'should be able to find Standard Dev of a list of like quantities', ->
     validateQuantity @std_q.exec(@ctx), 1.4142135623730951, 'ml'
   it 'should be able to find Standard Dev of a list of related quantities', ->
     validateQuantity @q_diff_units.exec(@ctx), 1.4142135623730951, 'ml'

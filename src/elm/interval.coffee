@@ -332,7 +332,7 @@ module.exports.Expand = class Expand extends Expression
     if results.length > 0 and !results[results.length-1].high.sameOrBefore(high)
       results.pop()
     return results
-    
+
   expandQuantityInterval: (interval, per) ->
     # we want to convert everything to the more precise of the interval.low or per
     if compare_units(interval.low.unit, per.unit) > 0 #interval.low.unit is 'bigger' aka les precise
