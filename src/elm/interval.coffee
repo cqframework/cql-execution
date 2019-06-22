@@ -121,6 +121,16 @@ module.exports.Width = class Width extends Expression
   exec: (ctx) ->
     @arg.execute(ctx)?.width()
 
+module.exports.Size = class Size extends Expression
+  constructor: (json) ->
+    super
+
+  exec: (ctx) ->
+    interval = @arg.execute(ctx)
+    return null unless interval?
+    pointSize = getpointSize(interval)
+    interval.size(pointSize)
+
 module.exports.Start = class Start extends Expression
   constructor: (json) ->
     super
@@ -386,27 +396,7 @@ collapseIntervals = (intervals, perWidth) ->
     # of the intervals involved will be used (i.e. the interval that has a
     # width equal to the result of the successor function for the point type).
     if !perWidth?
-      if intervalsClone[0].low?
-        if intervalsClone[0].low.isDateTime
-          precisionUnits = intervalsClone[0].low.getPrecision()
-          perWidth = new Quantity(value: 1, unit: precisionUnits)
-        else if intervalsClone[0].low.isQuantity
-          perWidth = doSubtraction(successor(intervalsClone[0].low), intervalsClone[0].low)
-        else
-          perWidth = successor(intervalsClone[0].low) - intervalsClone[0].low
-      else if intervalsClone[0].high?
-        if intervalsClone[0].high.isDateTime
-          precisionUnits = intervalsClone[0].high.getPrecision()
-          perWidth = new Quantity(value: 1, unit: precisionUnits)
-        else if intervalsClone[0].high.isQuantity
-          perWidth = doSubtraction(successor(intervalsClone[0].high), intervalsClone[0].high)
-        else
-          perWidth = successor(intervalsClone[0].high) - intervalsClone[0].high
-      else
-        throw new Error("Point type of intervals provided to collapse cannot be determined.")
-
-      if typeof perWidth is 'number'
-        perWidth = new Quantity(value: perWidth, unit: '1')
+      perWidth = getpointSize(intervalsClone[0])
 
     # sort intervalsClone by start
     intervalsClone.sort (a,b)->
@@ -463,3 +453,28 @@ collapseIntervals = (intervals, perWidth) ->
       b = intervalsClone.shift()
     collapsedIntervals.push a
     collapsedIntervals
+
+getpointSize = (interval) ->
+  if interval.low?
+    if interval.low.isDateTime
+      precisionUnits = interval.low.getPrecision()
+      pointSize = new Quantity(value: 1, unit: precisionUnits)
+    else if interval.low.isQuantity
+      pointSize = doSubtraction(successor(interval.low), interval.low)
+    else
+      pointSize = successor(interval.low) - interval.low
+  else if interval.high?
+    if interval.high.isDateTime
+      precisionUnits = interval.high.getPrecision()
+      pointSize = new Quantity(value: 1, unit: precisionUnits)
+    else if interval.high.isQuantity
+      pointSize = doSubtraction(successor(interval.high), interval.high)
+    else
+      pointSize = successor(interval.high) - interval.high
+  else
+    throw new Error("Point type of intervals cannot be determined.")
+
+  if typeof pointSize is 'number'
+    pointSize = new Quantity(value: pointSize, unit: '1')
+
+  return pointSize

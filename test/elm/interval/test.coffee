@@ -6,6 +6,7 @@ data = require './data'
 { MIN_INT_VALUE,
   MAX_INT_VALUE,
   MIN_FLOAT_VALUE,
+  MIN_FLOAT_PRECISION_VALUE,
   MAX_FLOAT_VALUE,
   MIN_DATE_VALUE,
   MAX_DATE_VALUE } = require '../../../lib/util/math'
@@ -923,20 +924,101 @@ describe 'Width', ->
     setup @, data
 
   it 'should calculate the width of integer intervals', ->
+    # define IntWidth: width of Interval[-2, 5]
     @intWidth.exec(@ctx).should.equal 7
+    # define IntOpenWidth: width of Interval(-2, 5)
     @intOpenWidth.exec(@ctx).should.equal 5
 
   it 'should calculate the width of real intervals', ->
+    # define RealWidth: width of Interval[1.23, 4.56]
     @realWidth.exec(@ctx).should.equal 3.33
+    # define RealOpenWidth: width of Interval(1.23, 4.56)
     @realOpenWidth.exec(@ctx).should.equal 3.32999998
 
   it 'should calculate the width of infinite intervals', ->
+    # define IntWidthThreeToMax: width of Interval[3, null]
     @intWidthThreeToMax.exec(@ctx).should.equal Math.pow(2,31)-4
+    # define IntWidthMinToThree: width of Interval[null, 3]
     @intWidthMinToThree.exec(@ctx).should.equal Math.pow(2,31)+3
 
   it 'should calculate the width of infinite intervals that result in null', ->
+    # define IntWidthThreeToUnknown: width of Interval[3, null)
     should(@intWidthThreeToUnknown.exec(@ctx)).be.null()
+    # define IntWidthUnknownToThree: width of Interval(null, 3]
     should(@intWidthUnknownToThree.exec(@ctx)).be.null()
+
+  it 'should calculate the width of interval of quantities', ->
+    # define WidthOfQuantityInterval: width of Interval[Quantity{value: 1, unit: 'mm'}, Quantity{value: 10, unit: 'mm'}]
+    width = @widthOfQuantityInterval.exec(@ctx)
+    width.value.should.equal(9)
+    width.unit.should.equal('mm')
+
+  it 'should throw for DateTime Intervals', ->
+    # define WidthOfDateTimeInterval: width of Interval[DateTime(2012,01,01), DateTime(2012,01,03)]
+    should(() => @widthOfDateTimeInterval.exec(@ctx)).throw()
+
+  it 'should throw for Date Intervals', ->
+    # define WidthOfDateInterval: width of Interval[Date(2012,01,01), Date(2012,01,03)]
+    should(() => @widthOfDateInterval.exec(@ctx)).throw()
+
+  it 'should throw for Time Intervals', ->
+    # define WidthOfTimeInterval: width of Interval[Time(12,00,00), Time(12,30,02)]
+    should(() => @widthOfTimeInterval.exec(@ctx)).throw()
+
+describe 'Size', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'should calculate the size of integer intervals', ->
+    # define IntSize: width of Interval[-2, 5]
+    @intSize.exec(@ctx).should.equal 8
+    # define IntOpenSize: width of Interval(-2, 5)
+    @intOpenSize.exec(@ctx).should.equal 6
+
+  it 'should calculate the size of real intervals', ->
+    # define RealSize: width of Interval[1.23, 4.56]
+    @realSize.exec(@ctx).should.equal 3.33 + MIN_FLOAT_PRECISION_VALUE
+    # define RealOpenSize: width of Interval(1.23, 4.56)
+    @realOpenSize.exec(@ctx).should.equal 3.32999998 + MIN_FLOAT_PRECISION_VALUE
+
+  it 'should calculate the size of infinite intervals', ->
+    # define IntSizeThreeToMax: width of Interval[3, null]
+    @intSizeThreeToMax.exec(@ctx).should.equal Math.pow(2,31)-4 + 1
+    # define IntSizeMinToThree: width of Interval[null, 3]
+    @intSizeMinToThree.exec(@ctx).should.equal Math.pow(2,31)+3 + 1
+
+  it 'should calculate the size of infinite intervals that result in null', ->
+    # define IntSizeThreeToUnknown: width of Interval[3, null)
+    should(@intSizeThreeToUnknown.exec(@ctx)).be.null()
+    # define IntSizeUnknownToThree: width of Interval(null, 3]
+    should(@intSizeUnknownToThree.exec(@ctx)).be.null()
+
+  it 'should return null if integer is null', ->
+    # define SizeIsNull: Size(null as Interval<Integer>)
+    should(@sizeIsNull.exec(@ctx)).be.null()
+
+  it 'should return null if integer is null', ->
+    # define SizeIsNull: Size(null as Interval<Integer>)
+    should(@sizeIsNull.exec(@ctx)).be.null()
+
+  it 'should calculate size of interval of quantities', ->
+    # define SizeOfQuantityInterval: Size(Interval[Quantity{value: 1, unit: 'mm'}, Quantity{value: 10, unit: 'mm'}])
+    size = @sizeOfQuantityInterval.exec(@ctx)
+    size.value.should.equal(10)
+    size.unit.should.equal('mm')
+
+  it 'should throw for Date Interval', ->
+    # define SizeOfDateTimeInterval: Size(Interval[DateTime(2012,01,01), DateTime(2012,01,03)])
+    should(() => @sizeOfDateTimeInterval.exec(@ctx)).throw()
+
+  it 'should throw for DateTime Interval', ->
+    # define SizeOfDateInterval: Size(Interval[Date(2012,01,01), Date(2012,01,03)])
+    should(() => @sizeOfDateInterval.exec(@ctx)).throw()
+
+  it 'should throw for Time Interval', ->
+    # define SizeOfTimeInterval: Size(Interval[Time(12,00,00), Time(12,30,02)])
+    should(() => @sizeOfTimeInterval.exec(@ctx)).throw()
+
 
 describe 'Start', ->
   @beforeEach ->
