@@ -1,6 +1,6 @@
 { Expression } = require './expression'
 { build } = require './builder'
-{ Quantity } = require('./quantity')
+{ Quantity } = require('../datatypes/quantity')
 { Code, Concept } = require('../datatypes/datatypes')
 class Element
   constructor: (json) ->

@@ -3,7 +3,7 @@
 { build } = require './builder'
 { Exception } = require '../datatypes/exception'
 { greaterThan, lessThan } = require '../util/comparison'
-Quantity = require './quantity'
+{ Quantity, createQuantity, doMultiplication } = require '../datatypes/quantity'
 
 quantitiesOrArg = (arr) ->
   arr = removeNulls(arr)
@@ -28,7 +28,7 @@ quantityOrValue = (value, arr) ->
   # we used the first unit in the list to convert to so that is what
   # we will use as a unit for quantities
   if arr?[0]?.unit
-    Quantity.createQuantity(value, arr[0].unit)
+    createQuantity(value, arr[0].unit)
   else
     value
 
@@ -200,7 +200,7 @@ productValue = (list) ->
     return [null, null] if filtered.length == 0
     for item in filtered
       if item.isQuantity
-        product = Quantity.doMultiplication(product,item)
+        product = doMultiplication(product,item)
       else
         product = product * item
     return [product, filtered]

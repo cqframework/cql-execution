@@ -3,7 +3,7 @@ setup = require '../../setup'
 data = require './data'
 { DateTime } = require '../../../lib/datatypes/datetime'
 { Code, Concept } = require '../../../lib/datatypes/clinical'
-{ Quantity } = require '../../../lib/elm/quantity'
+{ Quantity } = require '../../../lib/datatypes/quantity'
 
 describe 'Instance', ->
   @beforeEach ->

@@ -1,5 +1,6 @@
 { DateTime } = require './datetime'
 { Uncertainty } = require './uncertainty'
+{ Quantity } = require '../datatypes/quantity'
 { ThreeValuedLogic } = require './logic'
 { successor, predecessor, maxValueForInstance, minValueForInstance } = require '../util/math'
 cmp = require '../util/comparison'

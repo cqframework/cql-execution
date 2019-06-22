@@ -1,6 +1,6 @@
 { Exception } = require '../datatypes/exception'
 { Expression } = require './expression'
-{ Quantity } = require('./quantity')
+{ Quantity } = require('../datatypes/quantity')
 
 module.exports.Ratio = class Ratio extends Expression
   constructor: (json) ->

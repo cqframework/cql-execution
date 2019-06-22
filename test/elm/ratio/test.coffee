@@ -1,6 +1,6 @@
 should = require 'should'
 setup = require '../../setup'
-{Quantity} = require '../../../lib/elm/quantity'
+{Quantity} = require '../../../lib/datatypes/quantity'
 {Ratio} = require '../../../lib/elm/ratio'
 
 describe 'Ratio', ->
