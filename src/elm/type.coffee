@@ -2,7 +2,7 @@
 { FunctionRef } = require './reusable'
 { DateTime, Date } = require '../datatypes/datetime'
 { Concept } = require '../datatypes/clinical'
-{ parseQuantity } = require './quantity'
+{ parseQuantity, Quantity } = require './quantity'
 { isValidDecimal, isValidInteger, limitDecimalPrecision } = require('../util/math')
 { normalizeMillisecondsField } = require '../util/util'
 { Ratio } = require './ratio'
@@ -321,6 +321,29 @@ canConvertToType = (toFunction, operand, ctx) ->
     if value? then true else false
   catch
     false
+
+module.exports.ConvertQuantity = class ConvertQuantity extends Expression
+  constructor: (json) ->
+    super
+
+  exec: (ctx) ->
+    [quantity, newUnit] = @execArgs(ctx)
+
+    if quantity? and newUnit?
+      newValue = quantity.convertUnits(newUnit)
+      return new Quantity({value: newValue, unit: newUnit}) if newValue?
+    return null
+
+module.exports.CanConvertQuantity = class CanConvertQuantity extends Expression
+  constructor: (json) ->
+    super
+
+  exec: (ctx) ->
+    [quantity, newUnit] = @execArgs(ctx)
+
+    if quantity? and newUnit?
+      if quantity.convertUnits(newUnit)? then return true else return false
+    return null
 
 module.exports.Is = class Is extends UnimplementedExpression
 module.exports.IntervalTypeSpecifier = class IntervalTypeSpecifier extends UnimplementedExpression
