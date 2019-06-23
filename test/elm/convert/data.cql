@@ -178,6 +178,8 @@ define IsNull: ConvertsToTime(null as String)
 // @Test: ConvertQuantity
 define ConvertQuantityGood: ConvertQuantity(5 'mg', 'g')
 define ConvertSyntax: convert 5 'mg' to 'g'
+define ConvertQuantityToKg: ConvertQuantity(5000 'g', 'kg')
+define ConvertQuantityToWeeks: ConvertQuantity(28 'days', 'weeks')
 define NullConvertQuantity: ConvertQuantity(5 'mg', 'fox')
 
 // @Test: CanConvertQuantity

@@ -6206,6 +6206,8 @@ using QUICK
 context Patient
 define ConvertQuantityGood: ConvertQuantity(5 'mg', 'g')
 define ConvertSyntax: convert 5 'mg' to 'g'
+define ConvertQuantityToKg: ConvertQuantity(5000 'g', 'kg')
+define ConvertQuantityToWeeks: ConvertQuantity(28 'days', 'weeks')
 define NullConvertQuantity: ConvertQuantity(5 'mg', 'fox')
 ###
 
@@ -6331,7 +6333,7 @@ module.exports['ConvertQuantity'] = {
             }
          }, {
             "localId" : "12",
-            "name" : "NullConvertQuantity",
+            "name" : "ConvertQuantityToKg",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -6339,7 +6341,7 @@ module.exports['ConvertQuantity'] = {
                "s" : {
                   "r" : "12",
                   "s" : [ {
-                     "value" : [ "define ","NullConvertQuantity",": " ]
+                     "value" : [ "define ","ConvertQuantityToKg",": " ]
                   }, {
                      "r" : "11",
                      "s" : [ {
@@ -6347,14 +6349,14 @@ module.exports['ConvertQuantity'] = {
                      }, {
                         "r" : "9",
                         "s" : [ {
-                           "value" : [ "5 ","'mg'" ]
+                           "value" : [ "5000 ","'g'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
                         "r" : "10",
                         "s" : [ {
-                           "value" : [ "'fox'" ]
+                           "value" : [ "'kg'" ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -6367,11 +6369,107 @@ module.exports['ConvertQuantity'] = {
                "type" : "ConvertQuantity",
                "operand" : [ {
                   "localId" : "9",
+                  "value" : 5000,
+                  "unit" : "g",
+                  "type" : "Quantity"
+               }, {
+                  "localId" : "10",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "kg",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "16",
+            "name" : "ConvertQuantityToWeeks",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "16",
+                  "s" : [ {
+                     "value" : [ "define ","ConvertQuantityToWeeks",": " ]
+                  }, {
+                     "r" : "15",
+                     "s" : [ {
+                        "value" : [ "ConvertQuantity","(" ]
+                     }, {
+                        "r" : "13",
+                        "s" : [ {
+                           "value" : [ "28 ","'days'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "'weeks'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "15",
+               "type" : "ConvertQuantity",
+               "operand" : [ {
+                  "localId" : "13",
+                  "value" : 28,
+                  "unit" : "days",
+                  "type" : "Quantity"
+               }, {
+                  "localId" : "14",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "weeks",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "20",
+            "name" : "NullConvertQuantity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "20",
+                  "s" : [ {
+                     "value" : [ "define ","NullConvertQuantity",": " ]
+                  }, {
+                     "r" : "19",
+                     "s" : [ {
+                        "value" : [ "ConvertQuantity","(" ]
+                     }, {
+                        "r" : "17",
+                        "s" : [ {
+                           "value" : [ "5 ","'mg'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "18",
+                        "s" : [ {
+                           "value" : [ "'fox'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "19",
+               "type" : "ConvertQuantity",
+               "operand" : [ {
+                  "localId" : "17",
                   "value" : 5,
                   "unit" : "mg",
                   "type" : "Quantity"
                }, {
-                  "localId" : "10",
+                  "localId" : "18",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "fox",
                   "type" : "Literal"

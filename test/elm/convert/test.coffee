@@ -545,6 +545,12 @@ describe 'ConvertQuantity', ->
   it "should return converted Quantity using new syntx", ->
     @convertSyntax.exec(@ctx).should.eql new Quantity({unit:"g", value: .005})
 
+  it "should return converted Quantity with Kg", ->
+    @convertQuantityToKg.exec(@ctx).should.eql new Quantity({unit: "kg", value: 5})
+
+  it "should return converted Quantity with weeks", ->
+    @convertQuantityToWeeks.exec(@ctx).should.eql new Quantity({unit: "weeks", value: 4})
+
   it "should return null for an invalid UCUM conversion", ->
     should(@nullConvertQuantity.exec(@ctx)).be.null()
 
