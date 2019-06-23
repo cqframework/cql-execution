@@ -966,7 +966,7 @@
 
     DateTime.prototype.toStringTime = function() {
       var str;
-      str = 'T';
+      str = '';
       if (this.hour != null) {
         str += +this._pad(this.hour);
         if (this.minute != null) {
@@ -8594,11 +8594,11 @@
     }
 
     ToTime.prototype.exec = function(ctx) {
-      var arg, hours, matches, milliseconds, minutes, seconds, timeString, timezoneOffset, tz;
+      var arg, hours, matches, milliseconds, minutes, seconds, timeString;
       arg = this.execArgs(ctx);
       if ((arg != null) && typeof arg !== 'undefined') {
         timeString = arg.toString();
-        matches = /T((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(\:?(\d{2}))?))?/.exec(timeString);
+        matches = /^((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?$/.exec(timeString);
         if (matches == null) {
           return null;
         }
@@ -8627,13 +8627,7 @@
         if (milliseconds != null) {
           milliseconds = parseInt(normalizeMillisecondsField(milliseconds));
         }
-        if (matches[11] != null) {
-          tz = parseInt(matches[12], 10) + (matches[14] != null ? parseInt(matches[14], 10) / 60 : 0);
-          timezoneOffset = matches[11] === '+' ? tz : tz * -1;
-        } else if (matches[9] === 'Z') {
-          timezoneOffset = 0;
-        }
-        return new DateTime(0, 1, 1, hours, minutes, seconds, milliseconds, timezoneOffset);
+        return new DateTime(0, 1, 1, hours, minutes, seconds, milliseconds, null);
       } else {
         return null;
       }

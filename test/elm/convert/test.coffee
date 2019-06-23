@@ -80,14 +80,6 @@ describe 'FromString', ->
     expectedDateTime = new DateTime(2014, 1, 1, 14, 30, 0, 0, -7)
     @timezoneDateTime.exec(@ctx).equals(expectedDateTime).should.be.true()
 
-  it 'should convert Time string with Z', ->
-    expectedTime = new DateTime(0, 1, 1, 14, 30, 0, 0, 0)
-    @zTime.exec(@ctx).equals(expectedTime).should.be.true()
-
-  it 'should convert Time string with timezone offset', ->
-    expectedTime = new DateTime(0, 1, 1, 14, 30, 0, 0, -7)
-    @timezoneTime.exec(@ctx).equals(expectedTime).should.be.true()
-
 describe 'FromInteger', ->
   @beforeEach ->
     setup @, data
@@ -339,33 +331,24 @@ describe 'ToTime', ->
   it "should be null for invalid time-of-day", ->
     should(@invalidTime.exec(@ctx)).be.null()
 
-  it "should work with for Thh", ->
-    expectedDateTime = new DateTime(0,1,1,2)
+  it "should work with for hh", ->
+    # NOTE: We need to pass in null timezoneOffset because DateTime assumes
+    # execution context timezoneOffset while time does not have a
+    # timezoneOffset
+    expectedDateTime = new DateTime(0,1,1,2,null,null,null,null)
     @timeH.exec(@ctx).equals(expectedDateTime).should.be.true()
 
-  it "should work with for Thh:mm", ->
-    expectedDateTime = new DateTime(0,1,1,2,4)
+  it "should work with for hh:mm", ->
+    expectedDateTime = new DateTime(0,1,1,2,4,null,null,null)
     @timeHM.exec(@ctx).equals(expectedDateTime).should.be.true()
 
-  it "should work with for Thh:mm:ss", ->
-    expectedDateTime = new DateTime(0,1,1,2,4,59)
+  it "should work with for hh:mm:ss", ->
+    expectedDateTime = new DateTime(0,1,1,2,4,59,null,null)
     @timeHMS.exec(@ctx).equals(expectedDateTime).should.be.true()
 
-  it "should work with for Thh:mm:ss.fff", ->
-    expectedDateTime = new DateTime(0,1,1,2,4,59,123)
+  it "should work with for hh:mm:ss.fff", ->
+    expectedDateTime = new DateTime(0,1,1,2,4,59,123, null)
     @timeHMSMs.exec(@ctx).equals(expectedDateTime).should.be.true()
-
-  it "should work with for Thh:mm:ss.fffZ", ->
-    expectedDateTime = new DateTime(0,1,1,2,4,59,123,0)
-    @timeHMSMsZ.exec(@ctx).equals(expectedDateTime).should.be.true()
-
-  it "should work with for Thh:mm:ss.fff+hh:mm", ->
-    expectedDateTime = new DateTime(0,1,1,2,4,59,123,1)
-    @timeHMSMsTimezone.exec(@ctx).equals(expectedDateTime).should.be.true()
-
-  it "should work with for Thh:mm:ss.fff+hh", ->
-    expectedDateTime = new DateTime(0,1,1,2,4,59,123,1)
-    @timeHMSMsFullTimezone.exec(@ctx).equals(expectedDateTime).should.be.true()
 
   it "should be null for hour over 24", ->
     should(@hourTooHigh.exec(@ctx)).be.null()

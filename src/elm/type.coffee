@@ -147,8 +147,8 @@ module.exports.ToTime = class ToTime extends Expression
     if arg? and typeof arg != 'undefined'
       timeString = arg.toString()
       # Return null if string doesn't represent a valid ISO-8601 Time
-      # Thh:mm:ss.fff(+|-)hh:mm or Thh:mm:ss.fffZ
-      matches = /T((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(\:?(\d{2}))?))?/.exec timeString
+      # hh:mm:ss.fff or hh:mm:ss.fff
+      matches = /^((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?$/.exec timeString
       return null unless matches?
       hours = matches[2]
       minutes = matches[4]
@@ -167,14 +167,8 @@ module.exports.ToTime = class ToTime extends Expression
       if milliseconds?
         milliseconds = parseInt(normalizeMillisecondsField(milliseconds))
 
-      if matches[11]?
-        tz = parseInt(matches[12],10) + (if matches[14]? then parseInt(matches[14],10) / 60 else 0)
-        timezoneOffset = if matches[11] is '+' then tz else tz * -1
-      else if matches[9] == 'Z'
-        timezoneOffset = 0
-
-      # Time is implemented as Datetime with year 0, month 1, day 1
-      return new DateTime(0, 1, 1, hours, minutes, seconds, milliseconds, timezoneOffset)
+      # Time is implemented as Datetime with year 0, month 1, day 1 and null timezoneOffset
+      return new DateTime(0, 1, 1, hours, minutes, seconds, milliseconds, null)
     else
       return null
 
