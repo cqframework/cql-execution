@@ -2,7 +2,7 @@
 { FunctionRef } = require './reusable'
 { DateTime, Date } = require '../datatypes/datetime'
 { Concept } = require '../datatypes/clinical'
-{ parseQuantity, Quantity } = require './quantity'
+{ parseQuantity, Quantity } = require '../datatypes/quantity'
 { isValidDecimal, isValidInteger, limitDecimalPrecision } = require('../util/math')
 { normalizeMillisecondsField } = require '../util/util'
 { Ratio } = require './ratio'

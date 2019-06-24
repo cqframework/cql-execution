@@ -3,7 +3,7 @@ setup = require '../../setup'
 data = require './data'
 {isNull} = require '../../../lib/util/util'
 {DateTime} = require '../../../lib/datatypes/datetime'
-{ Quantity } = require '../../../lib/elm/quantity'
+{ Quantity } = require '../../../lib/datatypes/quantity'
 
 
 describe 'FromString', ->
