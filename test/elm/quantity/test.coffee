@@ -1,6 +1,6 @@
 should = require 'should'
 setup = require '../../setup'
-{ Quantity, doAddition, doSubtraction, doMultiplication, doDivision } = require '../../../lib/elm/quantity'
+{ Quantity, doAddition, doSubtraction, doMultiplication, doDivision } = require '../../../lib/datatypes/quantity'
 
 describe 'Quantity', ->
   it 'should allow creation of Quantity with valid ucum units', ->

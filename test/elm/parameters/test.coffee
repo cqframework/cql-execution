@@ -4,7 +4,7 @@ data = require './data'
 {Code, Concept} = require '../../../lib/datatypes/clinical'
 {DateTime, Date} = require '../../../lib/datatypes/datetime'
 {Interval} = require '../../../lib/datatypes/interval'
-{Quantity} = require '../../../lib/elm/quantity'
+{Quantity} = require '../../../lib/datatypes/quantity'
 
 describe 'ParameterDef', ->
   @beforeEach ->
