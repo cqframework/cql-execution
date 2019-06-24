@@ -6047,3 +6047,514 @@ module.exports['ConvertsToTime'] = {
    }
 }
 
+### ConvertQuantity
+library TestSnippet version '1'
+using QUICK
+context Patient
+define ConvertQuantityGood: ConvertQuantity(5 'mg', 'g')
+define ConvertSyntax: convert 5 'mg' to 'g'
+define ConvertQuantityToKg: ConvertQuantity(5000 'g', 'kg')
+define ConvertQuantityToWeeks: ConvertQuantity(28 'days', 'weeks')
+define NullConvertQuantity: ConvertQuantity(5 'mg', 'fox')
+###
+
+module.exports['ConvertQuantity'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "5",
+            "name" : "ConvertQuantityGood",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "define ","ConvertQuantityGood",": " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "ConvertQuantity","(" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "5 ","'mg'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "3",
+                        "s" : [ {
+                           "value" : [ "'g'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "4",
+               "type" : "ConvertQuantity",
+               "operand" : [ {
+                  "localId" : "2",
+                  "value" : 5,
+                  "unit" : "mg",
+                  "type" : "Quantity"
+               }, {
+                  "localId" : "3",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "g",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "8",
+            "name" : "ConvertSyntax",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "8",
+                  "s" : [ {
+                     "value" : [ "define ","ConvertSyntax",": " ]
+                  }, {
+                     "r" : "7",
+                     "s" : [ {
+                        "value" : [ "convert " ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "value" : [ "5 ","'mg'" ]
+                        } ]
+                     }, {
+                        "value" : [ " to ","'g'" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "7",
+               "type" : "ConvertQuantity",
+               "operand" : [ {
+                  "localId" : "6",
+                  "value" : 5,
+                  "unit" : "mg",
+                  "type" : "Quantity"
+               }, {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "g",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "12",
+            "name" : "ConvertQuantityToKg",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "value" : [ "define ","ConvertQuantityToKg",": " ]
+                  }, {
+                     "r" : "11",
+                     "s" : [ {
+                        "value" : [ "ConvertQuantity","(" ]
+                     }, {
+                        "r" : "9",
+                        "s" : [ {
+                           "value" : [ "5000 ","'g'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "value" : [ "'kg'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "11",
+               "type" : "ConvertQuantity",
+               "operand" : [ {
+                  "localId" : "9",
+                  "value" : 5000,
+                  "unit" : "g",
+                  "type" : "Quantity"
+               }, {
+                  "localId" : "10",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "kg",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "16",
+            "name" : "ConvertQuantityToWeeks",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "16",
+                  "s" : [ {
+                     "value" : [ "define ","ConvertQuantityToWeeks",": " ]
+                  }, {
+                     "r" : "15",
+                     "s" : [ {
+                        "value" : [ "ConvertQuantity","(" ]
+                     }, {
+                        "r" : "13",
+                        "s" : [ {
+                           "value" : [ "28 ","'days'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "'weeks'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "15",
+               "type" : "ConvertQuantity",
+               "operand" : [ {
+                  "localId" : "13",
+                  "value" : 28,
+                  "unit" : "days",
+                  "type" : "Quantity"
+               }, {
+                  "localId" : "14",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "weeks",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "20",
+            "name" : "NullConvertQuantity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "20",
+                  "s" : [ {
+                     "value" : [ "define ","NullConvertQuantity",": " ]
+                  }, {
+                     "r" : "19",
+                     "s" : [ {
+                        "value" : [ "ConvertQuantity","(" ]
+                     }, {
+                        "r" : "17",
+                        "s" : [ {
+                           "value" : [ "5 ","'mg'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "18",
+                        "s" : [ {
+                           "value" : [ "'fox'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "19",
+               "type" : "ConvertQuantity",
+               "operand" : [ {
+                  "localId" : "17",
+                  "value" : 5,
+                  "unit" : "mg",
+                  "type" : "Quantity"
+               }, {
+                  "localId" : "18",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "fox",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
+### CanConvertQuantity
+library TestSnippet version '1'
+using QUICK
+context Patient
+define CanConvertQuantityTrue: CanConvertQuantity(5 'mg', 'g')
+define CanConvertQuantityFalse: CanConvertQuantity(5 'mg', 'fox')
+define CanConvertQuantityNullFirstNull: CanConvertQuantity(null, 'g')
+define CanConvertQuantityNullSecondNUll: CanConvertQuantity(5 'mg', null)
+###
+
+module.exports['CanConvertQuantity'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "5",
+            "name" : "CanConvertQuantityTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "define ","CanConvertQuantityTrue",": " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "CanConvertQuantity","(" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "5 ","'mg'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "3",
+                        "s" : [ {
+                           "value" : [ "'g'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "4",
+               "type" : "CanConvertQuantity",
+               "operand" : [ {
+                  "localId" : "2",
+                  "value" : 5,
+                  "unit" : "mg",
+                  "type" : "Quantity"
+               }, {
+                  "localId" : "3",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "g",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "9",
+            "name" : "CanConvertQuantityFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "define ","CanConvertQuantityFalse",": " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "CanConvertQuantity","(" ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "value" : [ "5 ","'mg'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "'fox'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "type" : "CanConvertQuantity",
+               "operand" : [ {
+                  "localId" : "6",
+                  "value" : 5,
+                  "unit" : "mg",
+                  "type" : "Quantity"
+               }, {
+                  "localId" : "7",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "fox",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "13",
+            "name" : "CanConvertQuantityNullFirstNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "define ","CanConvertQuantityNullFirstNull",": " ]
+                  }, {
+                     "r" : "12",
+                     "s" : [ {
+                        "r" : "10",
+                        "value" : [ "CanConvertQuantity","(","null",", " ]
+                     }, {
+                        "r" : "11",
+                        "s" : [ {
+                           "value" : [ "'g'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "12",
+               "type" : "CanConvertQuantity",
+               "operand" : [ {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "10",
+                     "type" : "Null"
+                  }
+               }, {
+                  "localId" : "11",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "g",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "17",
+            "name" : "CanConvertQuantityNullSecondNUll",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "17",
+                  "s" : [ {
+                     "value" : [ "define ","CanConvertQuantityNullSecondNUll",": " ]
+                  }, {
+                     "r" : "16",
+                     "s" : [ {
+                        "value" : [ "CanConvertQuantity","(" ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "5 ","'mg'" ]
+                        } ]
+                     }, {
+                        "r" : "15",
+                        "value" : [ ", ","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "16",
+               "type" : "CanConvertQuantity",
+               "operand" : [ {
+                  "localId" : "14",
+                  "value" : 5,
+                  "unit" : "mg",
+                  "type" : "Quantity"
+               }, {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "15",
+                     "type" : "Null"
+                  }
+               } ]
+            }
+         } ]
+      }
+   }
+}
+

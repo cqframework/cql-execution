@@ -3,6 +3,8 @@ setup = require '../../setup'
 data = require './data'
 {isNull} = require '../../../lib/util/util'
 {DateTime} = require '../../../lib/datatypes/datetime'
+{ Quantity } = require '../../../lib/elm/quantity'
+
 
 describe 'FromString', ->
   @beforeEach ->
@@ -515,3 +517,38 @@ describe 'ConvertsToTime', ->
 
   it "should return null for null input", ->
     should(@isNull.exec(@ctx)).be.null()
+
+describe 'ConvertQuantity', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return converted Quantity", ->
+    @convertQuantityGood.exec(@ctx).should.eql new Quantity({unit:"g", value: .005})
+
+  it "should return converted Quantity using new syntx", ->
+    @convertSyntax.exec(@ctx).should.eql new Quantity({unit:"g", value: .005})
+
+  it "should return converted Quantity with Kg", ->
+    @convertQuantityToKg.exec(@ctx).should.eql new Quantity({unit: "kg", value: 5})
+
+  it "should return converted Quantity with weeks", ->
+    @convertQuantityToWeeks.exec(@ctx).should.eql new Quantity({unit: "weeks", value: 4})
+
+  it "should return null for an invalid UCUM conversion", ->
+    should(@nullConvertQuantity.exec(@ctx)).be.null()
+
+describe 'CanConvertQuantity', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for valid conversion", ->
+    @canConvertQuantityTrue.exec(@ctx).should.equal true
+
+  it "should return false for valid conversion", ->
+    @canConvertQuantityFalse.exec(@ctx).should.equal false
+
+  it "should return null for first argument null", ->
+    should(@canConvertQuantityNullFirstNull.exec(@ctx)).be.null()
+
+  it "should return null for second argument being null", ->
+    should(@canConvertQuantityNullSecondNUll.exec(@ctx)).be.null()
