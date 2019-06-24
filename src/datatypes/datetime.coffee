@@ -444,10 +444,10 @@ class Date
   _durationBetweenDates: (a, b, unitField) ->
     #we need to fix offsets to match so we dont get any JS DST interference, to avoid crossing day boundaries put it in the middle of the day
     #DST stuff should only be +/- one hour so this should work
-    a.setTime(a.getTime() + (12*60*60*1000)); 
-    b.setTime(b.getTime() + (12*60*60*1000)); 
+    a.setTime(a.getTime() + (12*60*60*1000))
+    b.setTime(b.getTime() + (12*60*60*1000))
     tzdiff = a.getTimezoneOffset() - b.getTimezoneOffset()
-    b.setTime(b.getTime() + (tzdiff*60*1000)); 
+    b.setTime(b.getTime() + (tzdiff*60*1000))
 
     # DurationBetween is different than DifferenceBetween in that DurationBetween counts whole elapsed time periods, but
     # DifferenceBetween counts boundaries.  For example:
@@ -531,7 +531,7 @@ class Date
     str
 
   getDateTime: () ->
-    # from the spec: the result will be a DateTime with the time components set to zero, 
+    # from the spec: the result will be a DateTime with the time components set to zero,
     # except for the timezone offset, which will be set to the timezone offset of the evaluation
     # request timestamp. (this last part is acheived by just not passing in timezone offset)
     if @year? and @month? and @day?
@@ -564,7 +564,7 @@ DateTime.prototype.isMorePrecise = Date.prototype.isMorePrecise = (other) ->
     else
       for field in @constructor.FIELDS
         if (other[field]? and not @[field]?) then return false
-    
+
     not @isSamePrecision(other)
 
 # This function can take another Date-ish object, or a precision string (e.g. 'month')
@@ -575,37 +575,18 @@ DateTime.prototype.isLessPrecise = Date.prototype.isLessPrecise = (other) ->
 DateTime.prototype.isSamePrecision = Date.prototype.isSamePrecision = (other) ->
     if typeof other is 'string' and other in @constructor.FIELDS
       return other == @getPrecision()
-    
+
     for field in @constructor.FIELDS
       if (@[field]? and not other[field]?) then return false
       if (not @[field]? and other[field]?) then return false
     true
 
 DateTime.prototype.equals = Date.prototype.equals = (other) ->
-  # leave with false there is a type mismatch
-  unless (@isDate and other.isDate) or (@isDateTime and other.isDateTime)
-    return false
+  compareWithDefaultResult(@, other, null)
 
-  # make a copy of other in the correct timezone offset if they don't match.
-  if (@timezoneOffset != other.timezoneOffset)
-    other = other.convertToTimezoneOffset(@timezoneOffset)
+DateTime.prototype.equivalent = Date.prototype.equivalent = (other) ->
+  compareWithDefaultResult(@, other, false)
 
-  for field in @constructor.FIELDS
-    # if both have this precision defined
-    if @[field]? and other[field]?
-      # if they are different then return with false
-      if @[field] != other[field]
-        return false
-
-    # if both dont have this precision, return true
-    else if !@[field]? and !other[field]?
-      return true
-
-    # otherwise they have inconclusive precision, return null
-    else
-      return null
-  # if we made it here, then all fields matched.
-  true
 
 DateTime.prototype.sameAs = Date.prototype.sameAs = (other, precision) ->
   if not((other.isDate) or (other.isDateTime))
@@ -885,11 +866,50 @@ DateTime.prototype.getFieldCieling = Date.prototype.getFieldCieling = (field) ->
     return 999
   throw new Error('Tried to clieling a field that has no cieling value: ' + field)
 
+compareWithDefaultResult = (a, b, defaultResult) ->
+  # leave with false there is a type mismatch
+  unless (a.isDate and b.isDate) or (a.isDateTime and b.isDateTime)
+    return false
+
+  # make a copy of other in the correct timezone offset if they don't match.
+  if (a.timezoneOffset != b.timezoneOffset)
+    b = b.convertToTimezoneOffset(a.timezoneOffset)
+
+  for field in a.constructor.FIELDS
+    # if both have this precision defined
+    if a[field]? and b[field]?
+      # For the purposes of comparison, seconds and milliseconds are combined
+      # as a single precision using a decimal, with decimal equality semantics
+      if field is 'second'
+        # NOTE: if millisecond is null it will calcualte like this anyway, but
+        # if millisecond is undefined, using it will result in NaN calculations
+        aMillisecond = if a['millisecond']? then a['millisecond'] else 0
+        aSecondAndMillisecond = a[field] + aMillisecond / 1000
+        bMillisecond = if b['millisecond']? then b['millisecond'] else 0
+        bSecondAndMillisecond = b[field] + bMillisecond / 1000
+
+        # second/millisecond is the most precise comparison, so we can directly return
+        return aSecondAndMillisecond == bSecondAndMillisecond
+
+      # if they are different then return with false
+      if a[field] != b[field]
+        return false
+
+    # if both dont have this precision, return true
+    else if !a[field]? and !b[field]?
+      return true
+
+    # otherwise they have inconclusive precision, return defaultResult
+    else
+      return defaultResult
+  # if we made it here, then all fields matched.
+  true
+
 daysInMonth = (year, month) ->
   if not (year? and month?)
     throw new Error('daysInMonth requires year and month as arguments')
   # Month is 1-indexed here because of the 0 day
-  return new jsDate(year, month, 0).getDate();
+  return new jsDate(year, month, 0).getDate()
 
 normalizeMillisecondsField = (msString) ->
   # fix up milliseconds by padding zeros and/or truncating (5 --> 500, 50 --> 500, 54321 --> 543, etc.)
