@@ -970,27 +970,27 @@ describe 'Size', ->
     setup @, data
 
   it 'should calculate the size of integer intervals', ->
-    # define IntSize: width of Interval[-2, 5]
+    # define IntSize: Size(Interval[-2, 5])
     @intSize.exec(@ctx).should.equal 8
-    # define IntOpenSize: width of Interval(-2, 5)
+    # define IntOpenSize: Size(Interval(-2, 5))
     @intOpenSize.exec(@ctx).should.equal 6
 
   it 'should calculate the size of real intervals', ->
-    # define RealSize: width of Interval[1.23, 4.56]
+    # define RealSize: Size(Interval[1.23, 4.56])
     @realSize.exec(@ctx).should.equal 3.33 + MIN_FLOAT_PRECISION_VALUE
-    # define RealOpenSize: width of Interval(1.23, 4.56)
+    # define RealOpenSize: Size(Interval(1.23, 4.56))
     @realOpenSize.exec(@ctx).should.equal 3.32999998 + MIN_FLOAT_PRECISION_VALUE
 
   it 'should calculate the size of infinite intervals', ->
-    # define IntSizeThreeToMax: width of Interval[3, null]
+    # define IntSizeThreeToMax: Size(Interval[3, null])
     @intSizeThreeToMax.exec(@ctx).should.equal Math.pow(2,31)-4 + 1
-    # define IntSizeMinToThree: width of Interval[null, 3]
+    # define IntSizeMinToThree: Size(Interval[null, 3])
     @intSizeMinToThree.exec(@ctx).should.equal Math.pow(2,31)+3 + 1
 
   it 'should calculate the size of infinite intervals that result in null', ->
-    # define IntSizeThreeToUnknown: width of Interval[3, null)
+    # define IntSizeThreeToUnknown: Size(Interval[3, null))
     should(@intSizeThreeToUnknown.exec(@ctx)).be.null()
-    # define IntSizeUnknownToThree: width of Interval(null, 3]
+    # define IntSizeUnknownToThree: Size(Interval(null, 3])
     should(@intSizeUnknownToThree.exec(@ctx)).be.null()
 
   it 'should return null if integer is null', ->
