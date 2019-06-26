@@ -403,7 +403,7 @@
 
   module.exports.Interval = datatypes.Interval;
 
-  module.exports.Quantity = quantity.Quantity;
+  module.exports.Quantity = datatypes.Quantity;
 
   module.exports.Ratio = ratio.Ratio;
 

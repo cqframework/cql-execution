@@ -36,6 +36,6 @@ module.exports.Concept            = datatypes.Concept
 module.exports.Date               = datatypes.Date
 module.exports.DateTime           = datatypes.DateTime
 module.exports.Interval           = datatypes.Interval
-module.exports.Quantity           = quantity.Quantity
+module.exports.Quantity           = datatypes.Quantity
 module.exports.Ratio              = ratio.Ratio
 module.exports.ValueSet           = datatypes.ValueSet
