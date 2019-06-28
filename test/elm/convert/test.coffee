@@ -383,6 +383,29 @@ describe 'ToBoolean', ->
   it "should return false for F", ->
     @upperCaseF.exec(@ctx).should.equal false
 
+describe 'ToDate', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should convert String 2015-01-02 to Date", ->
+    date = @toDateString.exec(@ctx)
+    date.year.should.equal 2015
+    date.month.should.equal 1
+    date.day.should.equal 2
+    should.not.exist(date[field]) for field in [ 'hour', 'minute', 'second', 'millisecond', 'timezoneOffset' ]
+    date.isDate.should.equal.true
+
+  it "should convert Datetime to Date", ->
+    date = @toDateDateTime.exec(@ctx)
+    date.year.should.equal 2000
+    date.month.should.equal 3
+    date.day.should.equal 15
+    should.not.exist(date[field]) for field in [ 'hour', 'minute', 'second', 'millisecond', 'timezoneOffset' ]
+    date.isDate.should.equal.true
+
+  it "should return null for null input", ->
+    should(@toDateNull.exec(@ctx)).be.null()
+
 describe 'ConvertsToBoolean', ->
   @beforeEach ->
     setup @, data
