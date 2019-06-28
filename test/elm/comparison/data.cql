@@ -93,6 +93,8 @@ define ADefined_BNull: 5 ~ null
 define ANull_BNull: (null as String) ~ (null as String)
 define ADefined_BDefined: 3 ~ 3
 define CaseInsensitiveStrings: 'FOO' ~ 'foo'
+define WhiteSpaceTrue: 'foo bar' ~ 'foo          bar'
+define WhiteSpaceFalse: 'foo bar' ~ 'foobar'
 define EqRatios: 10 'mg' : 2 'dL' ~ 15 'mg' : 3 'dL'
 define UneqRatios: 10 'mg' : 2 'dL' ~ 15 'mg' : 4 'dL'
 define UneqRatioTypes: 10 'mg' : 2 'dL' ~ DateTime(2000, 3, 13, 2, 4, 23)

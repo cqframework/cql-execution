@@ -6682,6 +6682,8 @@ define ADefined_BNull: 5 ~ null
 define ANull_BNull: (null as String) ~ (null as String)
 define ADefined_BDefined: 3 ~ 3
 define CaseInsensitiveStrings: 'FOO' ~ 'foo'
+define WhiteSpaceTrue: 'foo bar' ~ 'foo          bar'
+define WhiteSpaceFalse: 'foo bar' ~ 'foobar'
 define EqRatios: 10 'mg' : 2 'dL' ~ 15 'mg' : 3 'dL'
 define UneqRatios: 10 'mg' : 2 'dL' ~ 15 'mg' : 4 'dL'
 define UneqRatioTypes: 10 'mg' : 2 'dL' ~ DateTime(2000, 3, 13, 2, 4, 23)
@@ -6745,18 +6747,18 @@ define DateTimeAndDateUncertainFalse: DateTime(2000, 3, 13, 2, 4, 23) ~ Date(200
 module.exports['Equivalent'] = {
    "library" : {
       "annotation" : [ {
-         "startLine" : 45,
+         "startLine" : 47,
          "startChar" : 37,
-         "endLine" : 45,
+         "endLine" : 47,
          "endChar" : 42,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
-         "startLine" : 46,
+         "startLine" : 48,
          "startChar" : 26,
-         "endLine" : 46,
+         "endLine" : 48,
          "endChar" : 31,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -7104,8 +7106,52 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
+            "localId" : "42",
+            "name" : "WhiteSpaceTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "42",
+                  "s" : [ {
+                     "value" : [ "define ","WhiteSpaceTrue",": " ]
+                  }, {
+                     "r" : "41",
+                     "s" : [ {
+                        "r" : "39",
+                        "s" : [ {
+                           "value" : [ "'foo bar'" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","~"," " ]
+                     }, {
+                        "r" : "40",
+                        "s" : [ {
+                           "value" : [ "'foo          bar'" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "41",
+               "type" : "Equivalent",
+               "operand" : [ {
+                  "localId" : "39",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "foo bar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "40",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "foo          bar",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
             "localId" : "46",
-            "name" : "EqRatios",
+            "name" : "WhiteSpaceFalse",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -7113,40 +7159,20 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "46",
                   "s" : [ {
-                     "value" : [ "define ","EqRatios",": " ]
+                     "value" : [ "define ","WhiteSpaceFalse",": " ]
                   }, {
                      "r" : "45",
                      "s" : [ {
-                        "r" : "41",
+                        "r" : "43",
                         "s" : [ {
-                           "r" : "39",
-                           "s" : [ {
-                              "value" : [ "10 ","'mg'" ]
-                           } ]
-                        }, {
-                           "value" : [ " : " ]
-                        }, {
-                           "r" : "40",
-                           "s" : [ {
-                              "value" : [ "2 ","'dL'" ]
-                           } ]
+                           "value" : [ "'foo bar'" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
                         "r" : "44",
                         "s" : [ {
-                           "r" : "42",
-                           "s" : [ {
-                              "value" : [ "15 ","'mg'" ]
-                           } ]
-                        }, {
-                           "value" : [ " : " ]
-                        }, {
-                           "r" : "43",
-                           "s" : [ {
-                              "value" : [ "3 ","'dL'" ]
-                           } ]
+                           "value" : [ "'foobar'" ]
                         } ]
                      } ]
                   } ]
@@ -7156,36 +7182,20 @@ module.exports['Equivalent'] = {
                "localId" : "45",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "41",
-                  "type" : "Ratio",
-                  "numerator" : {
-                     "localId" : "39",
-                     "value" : 10,
-                     "unit" : "mg"
-                  },
-                  "denominator" : {
-                     "localId" : "40",
-                     "value" : 2,
-                     "unit" : "dL"
-                  }
+                  "localId" : "43",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "foo bar",
+                  "type" : "Literal"
                }, {
                   "localId" : "44",
-                  "type" : "Ratio",
-                  "numerator" : {
-                     "localId" : "42",
-                     "value" : 15,
-                     "unit" : "mg"
-                  },
-                  "denominator" : {
-                     "localId" : "43",
-                     "value" : 3,
-                     "unit" : "dL"
-                  }
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "foobar",
+                  "type" : "Literal"
                } ]
             }
          }, {
             "localId" : "54",
-            "name" : "UneqRatios",
+            "name" : "EqRatios",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -7193,7 +7203,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "54",
                   "s" : [ {
-                     "value" : [ "define ","UneqRatios",": " ]
+                     "value" : [ "define ","EqRatios",": " ]
                   }, {
                      "r" : "53",
                      "s" : [ {
@@ -7225,7 +7235,7 @@ module.exports['Equivalent'] = {
                         }, {
                            "r" : "51",
                            "s" : [ {
-                              "value" : [ "4 ","'dL'" ]
+                              "value" : [ "3 ","'dL'" ]
                            } ]
                         } ]
                      } ]
@@ -7258,24 +7268,24 @@ module.exports['Equivalent'] = {
                   },
                   "denominator" : {
                      "localId" : "51",
-                     "value" : 4,
+                     "value" : 3,
                      "unit" : "dL"
                   }
                } ]
             }
          }, {
-            "localId" : "66",
-            "name" : "UneqRatioTypes",
+            "localId" : "62",
+            "name" : "UneqRatios",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "66",
+                  "r" : "62",
                   "s" : [ {
-                     "value" : [ "define ","UneqRatioTypes",": " ]
+                     "value" : [ "define ","UneqRatios",": " ]
                   }, {
-                     "r" : "65",
+                     "r" : "61",
                      "s" : [ {
                         "r" : "57",
                         "s" : [ {
@@ -7294,81 +7304,58 @@ module.exports['Equivalent'] = {
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "64",
+                        "r" : "60",
                         "s" : [ {
                            "r" : "58",
-                           "value" : [ "DateTime","(","2000",", ","3",", ","13",", ","2",", ","4",", ","23",")" ]
+                           "s" : [ {
+                              "value" : [ "15 ","'mg'" ]
+                           } ]
+                        }, {
+                           "value" : [ " : " ]
+                        }, {
+                           "r" : "59",
+                           "s" : [ {
+                              "value" : [ "4 ","'dL'" ]
+                           } ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "65",
+               "localId" : "61",
                "type" : "Equivalent",
                "operand" : [ {
-                  "type" : "ToList",
-                  "operand" : {
-                     "localId" : "57",
-                     "type" : "Ratio",
-                     "numerator" : {
-                        "localId" : "55",
-                        "value" : 10,
-                        "unit" : "mg"
-                     },
-                     "denominator" : {
-                        "localId" : "56",
-                        "value" : 2,
-                        "unit" : "dL"
-                     }
+                  "localId" : "57",
+                  "type" : "Ratio",
+                  "numerator" : {
+                     "localId" : "55",
+                     "value" : 10,
+                     "unit" : "mg"
+                  },
+                  "denominator" : {
+                     "localId" : "56",
+                     "value" : 2,
+                     "unit" : "dL"
                   }
                }, {
-                  "type" : "ToList",
-                  "operand" : {
-                     "localId" : "64",
-                     "type" : "DateTime",
-                     "year" : {
-                        "localId" : "58",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2000",
-                        "type" : "Literal"
-                     },
-                     "month" : {
-                        "localId" : "59",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "3",
-                        "type" : "Literal"
-                     },
-                     "day" : {
-                        "localId" : "60",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "13",
-                        "type" : "Literal"
-                     },
-                     "hour" : {
-                        "localId" : "61",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2",
-                        "type" : "Literal"
-                     },
-                     "minute" : {
-                        "localId" : "62",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "4",
-                        "type" : "Literal"
-                     },
-                     "second" : {
-                        "localId" : "63",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "23",
-                        "type" : "Literal"
-                     }
+                  "localId" : "60",
+                  "type" : "Ratio",
+                  "numerator" : {
+                     "localId" : "58",
+                     "value" : 15,
+                     "unit" : "mg"
+                  },
+                  "denominator" : {
+                     "localId" : "59",
+                     "value" : 4,
+                     "unit" : "dL"
                   }
                } ]
             }
          }, {
             "localId" : "74",
-            "name" : "SameTuples",
+            "name" : "UneqRatioTypes",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -7376,64 +7363,31 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "74",
                   "s" : [ {
-                     "value" : [ "define ","SameTuples",": " ]
+                     "value" : [ "define ","UneqRatioTypes",": " ]
                   }, {
                      "r" : "73",
                      "s" : [ {
-                        "r" : "69",
+                        "r" : "65",
                         "s" : [ {
-                           "value" : [ "Tuple{" ]
-                        }, {
+                           "r" : "63",
                            "s" : [ {
-                              "value" : [ "a",": " ]
-                           }, {
-                              "r" : "67",
-                              "s" : [ {
-                                 "value" : [ "'a'" ]
-                              } ]
+                              "value" : [ "10 ","'mg'" ]
                            } ]
                         }, {
-                           "value" : [ ", " ]
+                           "value" : [ " : " ]
                         }, {
+                           "r" : "64",
                            "s" : [ {
-                              "value" : [ "b",": " ]
-                           }, {
-                              "r" : "68",
-                              "s" : [ {
-                                 "value" : [ "'b'" ]
-                              } ]
+                              "value" : [ "2 ","'dL'" ]
                            } ]
-                        }, {
-                           "value" : [ "}" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
                         "r" : "72",
                         "s" : [ {
-                           "value" : [ "Tuple{" ]
-                        }, {
-                           "s" : [ {
-                              "value" : [ "a",": " ]
-                           }, {
-                              "r" : "70",
-                              "s" : [ {
-                                 "value" : [ "'a'" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "s" : [ {
-                              "value" : [ "b",": " ]
-                           }, {
-                              "r" : "71",
-                              "s" : [ {
-                                 "value" : [ "'b'" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "}" ]
+                           "r" : "66",
+                           "value" : [ "DateTime","(","2000",", ","3",", ","13",", ","2",", ","4",", ","23",")" ]
                         } ]
                      } ]
                   } ]
@@ -7443,137 +7397,87 @@ module.exports['Equivalent'] = {
                "localId" : "73",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "69",
-                  "type" : "Tuple",
-                  "element" : [ {
-                     "name" : "a",
-                     "value" : {
+                  "type" : "ToList",
+                  "operand" : {
+                     "localId" : "65",
+                     "type" : "Ratio",
+                     "numerator" : {
+                        "localId" : "63",
+                        "value" : 10,
+                        "unit" : "mg"
+                     },
+                     "denominator" : {
+                        "localId" : "64",
+                        "value" : 2,
+                        "unit" : "dL"
+                     }
+                  }
+               }, {
+                  "type" : "ToList",
+                  "operand" : {
+                     "localId" : "72",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "66",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2000",
+                        "type" : "Literal"
+                     },
+                     "month" : {
                         "localId" : "67",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "a",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
                         "type" : "Literal"
-                     }
-                  }, {
-                     "name" : "b",
-                     "value" : {
+                     },
+                     "day" : {
                         "localId" : "68",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "b",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "13",
                         "type" : "Literal"
-                     }
-                  } ]
-               }, {
-                  "localId" : "72",
-                  "type" : "Tuple",
-                  "element" : [ {
-                     "name" : "a",
-                     "value" : {
+                     },
+                     "hour" : {
+                        "localId" : "69",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     },
+                     "minute" : {
                         "localId" : "70",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "a",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
                         "type" : "Literal"
-                     }
-                  }, {
-                     "name" : "b",
-                     "value" : {
+                     },
+                     "second" : {
                         "localId" : "71",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "b",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "23",
                         "type" : "Literal"
                      }
-                  } ]
+                  }
                } ]
             }
          }, {
-            "localId" : "80",
-            "name" : "SameTuplesNull",
+            "localId" : "82",
+            "name" : "SameTuples",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "80",
+                  "r" : "82",
                   "s" : [ {
-                     "value" : [ "define ","SameTuplesNull",": " ]
+                     "value" : [ "define ","SameTuples",": " ]
                   }, {
-                     "r" : "79",
+                     "r" : "81",
                      "s" : [ {
-                        "r" : "76",
-                        "s" : [ {
-                           "value" : [ "Tuple{" ]
-                        }, {
-                           "s" : [ {
-                              "r" : "75",
-                              "value" : [ "a",": ","null" ]
-                           } ]
-                        }, {
-                           "value" : [ "}" ]
-                        } ]
-                     }, {
-                        "value" : [ " ","~"," " ]
-                     }, {
-                        "r" : "78",
-                        "s" : [ {
-                           "value" : [ "Tuple{" ]
-                        }, {
-                           "s" : [ {
-                              "r" : "77",
-                              "value" : [ "a"," : ","null" ]
-                           } ]
-                        }, {
-                           "value" : [ "}" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "79",
-               "type" : "Equivalent",
-               "operand" : [ {
-                  "localId" : "76",
-                  "type" : "Tuple",
-                  "element" : [ {
-                     "name" : "a",
-                     "value" : {
-                        "localId" : "75",
-                        "type" : "Null"
-                     }
-                  } ]
-               }, {
-                  "localId" : "78",
-                  "type" : "Tuple",
-                  "element" : [ {
-                     "name" : "a",
-                     "value" : {
-                        "localId" : "77",
-                        "type" : "Null"
-                     }
-                  } ]
-               } ]
-            }
-         }, {
-            "localId" : "88",
-            "name" : "DifferentTuples",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "88",
-                  "s" : [ {
-                     "value" : [ "define ","DifferentTuples",": " ]
-                  }, {
-                     "r" : "87",
-                     "s" : [ {
-                        "r" : "83",
+                        "r" : "77",
                         "s" : [ {
                            "value" : [ "Tuple{" ]
                         }, {
                            "s" : [ {
                               "value" : [ "a",": " ]
                            }, {
-                              "r" : "81",
+                              "r" : "75",
                               "s" : [ {
                                  "value" : [ "'a'" ]
                               } ]
@@ -7584,10 +7488,113 @@ module.exports['Equivalent'] = {
                            "s" : [ {
                               "value" : [ "b",": " ]
                            }, {
-                              "r" : "82",
+                              "r" : "76",
                               "s" : [ {
                                  "value" : [ "'b'" ]
                               } ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","~"," " ]
+                     }, {
+                        "r" : "80",
+                        "s" : [ {
+                           "value" : [ "Tuple{" ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "a",": " ]
+                           }, {
+                              "r" : "78",
+                              "s" : [ {
+                                 "value" : [ "'a'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "b",": " ]
+                           }, {
+                              "r" : "79",
+                              "s" : [ {
+                                 "value" : [ "'b'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "81",
+               "type" : "Equivalent",
+               "operand" : [ {
+                  "localId" : "77",
+                  "type" : "Tuple",
+                  "element" : [ {
+                     "name" : "a",
+                     "value" : {
+                        "localId" : "75",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "a",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "b",
+                     "value" : {
+                        "localId" : "76",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "b",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }, {
+                  "localId" : "80",
+                  "type" : "Tuple",
+                  "element" : [ {
+                     "name" : "a",
+                     "value" : {
+                        "localId" : "78",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "a",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "b",
+                     "value" : {
+                        "localId" : "79",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "b",
+                        "type" : "Literal"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "88",
+            "name" : "SameTuplesNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "88",
+                  "s" : [ {
+                     "value" : [ "define ","SameTuplesNull",": " ]
+                  }, {
+                     "r" : "87",
+                     "s" : [ {
+                        "r" : "84",
+                        "s" : [ {
+                           "value" : [ "Tuple{" ]
+                        }, {
+                           "s" : [ {
+                              "r" : "83",
+                              "value" : [ "a",": ","null" ]
                            } ]
                         }, {
                            "value" : [ "}" ]
@@ -7600,23 +7607,8 @@ module.exports['Equivalent'] = {
                            "value" : [ "Tuple{" ]
                         }, {
                            "s" : [ {
-                              "value" : [ "a",": " ]
-                           }, {
-                              "r" : "84",
-                              "s" : [ {
-                                 "value" : [ "'x'" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "s" : [ {
-                              "value" : [ "b",": " ]
-                           }, {
                               "r" : "85",
-                              "s" : [ {
-                                 "value" : [ "'b'" ]
-                              } ]
+                              "value" : [ "a"," : ","null" ]
                            } ]
                         }, {
                            "value" : [ "}" ]
@@ -7629,23 +7621,13 @@ module.exports['Equivalent'] = {
                "localId" : "87",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "83",
+                  "localId" : "84",
                   "type" : "Tuple",
                   "element" : [ {
                      "name" : "a",
                      "value" : {
-                        "localId" : "81",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "a",
-                        "type" : "Literal"
-                     }
-                  }, {
-                     "name" : "b",
-                     "value" : {
-                        "localId" : "82",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "b",
-                        "type" : "Literal"
+                        "localId" : "83",
+                        "type" : "Null"
                      }
                   } ]
                }, {
@@ -7654,37 +7636,27 @@ module.exports['Equivalent'] = {
                   "element" : [ {
                      "name" : "a",
                      "value" : {
-                        "localId" : "84",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "x",
-                        "type" : "Literal"
-                     }
-                  }, {
-                     "name" : "b",
-                     "value" : {
                         "localId" : "85",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "b",
-                        "type" : "Literal"
+                        "type" : "Null"
                      }
                   } ]
                } ]
             }
          }, {
-            "localId" : "98",
-            "name" : "SameNestedTuples",
+            "localId" : "96",
+            "name" : "DifferentTuples",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "98",
+                  "r" : "96",
                   "s" : [ {
-                     "value" : [ "define ","SameNestedTuples",": " ]
+                     "value" : [ "define ","DifferentTuples",": " ]
                   }, {
-                     "r" : "97",
+                     "r" : "95",
                      "s" : [ {
-                        "r" : "92",
+                        "r" : "91",
                         "s" : [ {
                            "value" : [ "Tuple{" ]
                         }, {
@@ -7702,20 +7674,9 @@ module.exports['Equivalent'] = {
                            "s" : [ {
                               "value" : [ "b",": " ]
                            }, {
-                              "r" : "91",
+                              "r" : "90",
                               "s" : [ {
-                                 "value" : [ "Tuple{" ]
-                              }, {
-                                 "s" : [ {
-                                    "value" : [ "c",": " ]
-                                 }, {
-                                    "r" : "90",
-                                    "s" : [ {
-                                       "value" : [ "'c'" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ "}" ]
+                                 "value" : [ "'b'" ]
                               } ]
                            } ]
                         }, {
@@ -7724,16 +7685,16 @@ module.exports['Equivalent'] = {
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "96",
+                        "r" : "94",
                         "s" : [ {
                            "value" : [ "Tuple{" ]
                         }, {
                            "s" : [ {
                               "value" : [ "a",": " ]
                            }, {
-                              "r" : "93",
+                              "r" : "92",
                               "s" : [ {
-                                 "value" : [ "'a'" ]
+                                 "value" : [ "'x'" ]
                               } ]
                            } ]
                         }, {
@@ -7742,20 +7703,9 @@ module.exports['Equivalent'] = {
                            "s" : [ {
                               "value" : [ "b",": " ]
                            }, {
-                              "r" : "95",
+                              "r" : "93",
                               "s" : [ {
-                                 "value" : [ "Tuple{" ]
-                              }, {
-                                 "s" : [ {
-                                    "value" : [ "c",": " ]
-                                 }, {
-                                    "r" : "94",
-                                    "s" : [ {
-                                       "value" : [ "'c'" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ "}" ]
+                                 "value" : [ "'b'" ]
                               } ]
                            } ]
                         }, {
@@ -7766,10 +7716,10 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "97",
+               "localId" : "95",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "92",
+                  "localId" : "91",
                   "type" : "Tuple",
                   "element" : [ {
                      "name" : "a",
@@ -7782,70 +7732,56 @@ module.exports['Equivalent'] = {
                   }, {
                      "name" : "b",
                      "value" : {
-                        "localId" : "91",
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "c",
-                           "value" : {
-                              "localId" : "90",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                              "value" : "c",
-                              "type" : "Literal"
-                           }
-                        } ]
+                        "localId" : "90",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "b",
+                        "type" : "Literal"
                      }
                   } ]
                }, {
-                  "localId" : "96",
+                  "localId" : "94",
                   "type" : "Tuple",
                   "element" : [ {
                      "name" : "a",
                      "value" : {
-                        "localId" : "93",
+                        "localId" : "92",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "a",
+                        "value" : "x",
                         "type" : "Literal"
                      }
                   }, {
                      "name" : "b",
                      "value" : {
-                        "localId" : "95",
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "c",
-                           "value" : {
-                              "localId" : "94",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                              "value" : "c",
-                              "type" : "Literal"
-                           }
-                        } ]
+                        "localId" : "93",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "b",
+                        "type" : "Literal"
                      }
                   } ]
                } ]
             }
          }, {
-            "localId" : "108",
-            "name" : "SameNestedTuplesNull",
+            "localId" : "106",
+            "name" : "SameNestedTuples",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "108",
+                  "r" : "106",
                   "s" : [ {
-                     "value" : [ "define ","SameNestedTuplesNull",": " ]
+                     "value" : [ "define ","SameNestedTuples",": " ]
                   }, {
-                     "r" : "107",
+                     "r" : "105",
                      "s" : [ {
-                        "r" : "102",
+                        "r" : "100",
                         "s" : [ {
                            "value" : [ "Tuple{" ]
                         }, {
                            "s" : [ {
                               "value" : [ "a",": " ]
                            }, {
-                              "r" : "99",
+                              "r" : "97",
                               "s" : [ {
                                  "value" : [ "'a'" ]
                               } ]
@@ -7856,12 +7792,166 @@ module.exports['Equivalent'] = {
                            "s" : [ {
                               "value" : [ "b",": " ]
                            }, {
-                              "r" : "101",
+                              "r" : "99",
                               "s" : [ {
                                  "value" : [ "Tuple{" ]
                               }, {
                                  "s" : [ {
-                                    "r" : "100",
+                                    "value" : [ "c",": " ]
+                                 }, {
+                                    "r" : "98",
+                                    "s" : [ {
+                                       "value" : [ "'c'" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ "}" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","~"," " ]
+                     }, {
+                        "r" : "104",
+                        "s" : [ {
+                           "value" : [ "Tuple{" ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "a",": " ]
+                           }, {
+                              "r" : "101",
+                              "s" : [ {
+                                 "value" : [ "'a'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "b",": " ]
+                           }, {
+                              "r" : "103",
+                              "s" : [ {
+                                 "value" : [ "Tuple{" ]
+                              }, {
+                                 "s" : [ {
+                                    "value" : [ "c",": " ]
+                                 }, {
+                                    "r" : "102",
+                                    "s" : [ {
+                                       "value" : [ "'c'" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ "}" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "105",
+               "type" : "Equivalent",
+               "operand" : [ {
+                  "localId" : "100",
+                  "type" : "Tuple",
+                  "element" : [ {
+                     "name" : "a",
+                     "value" : {
+                        "localId" : "97",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "a",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "b",
+                     "value" : {
+                        "localId" : "99",
+                        "type" : "Tuple",
+                        "element" : [ {
+                           "name" : "c",
+                           "value" : {
+                              "localId" : "98",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "c",
+                              "type" : "Literal"
+                           }
+                        } ]
+                     }
+                  } ]
+               }, {
+                  "localId" : "104",
+                  "type" : "Tuple",
+                  "element" : [ {
+                     "name" : "a",
+                     "value" : {
+                        "localId" : "101",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "a",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "b",
+                     "value" : {
+                        "localId" : "103",
+                        "type" : "Tuple",
+                        "element" : [ {
+                           "name" : "c",
+                           "value" : {
+                              "localId" : "102",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "c",
+                              "type" : "Literal"
+                           }
+                        } ]
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "116",
+            "name" : "SameNestedTuplesNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "116",
+                  "s" : [ {
+                     "value" : [ "define ","SameNestedTuplesNull",": " ]
+                  }, {
+                     "r" : "115",
+                     "s" : [ {
+                        "r" : "110",
+                        "s" : [ {
+                           "value" : [ "Tuple{" ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "a",": " ]
+                           }, {
+                              "r" : "107",
+                              "s" : [ {
+                                 "value" : [ "'a'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "b",": " ]
+                           }, {
+                              "r" : "109",
+                              "s" : [ {
+                                 "value" : [ "Tuple{" ]
+                              }, {
+                                 "s" : [ {
+                                    "r" : "108",
                                     "value" : [ "c",": ","null" ]
                                  } ]
                               }, {
@@ -7874,14 +7964,14 @@ module.exports['Equivalent'] = {
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "106",
+                        "r" : "114",
                         "s" : [ {
                            "value" : [ "Tuple{" ]
                         }, {
                            "s" : [ {
                               "value" : [ "a",": " ]
                            }, {
-                              "r" : "103",
+                              "r" : "111",
                               "s" : [ {
                                  "value" : [ "'a'" ]
                               } ]
@@ -7892,12 +7982,12 @@ module.exports['Equivalent'] = {
                            "s" : [ {
                               "value" : [ "b",": " ]
                            }, {
-                              "r" : "105",
+                              "r" : "113",
                               "s" : [ {
                                  "value" : [ "Tuple{" ]
                               }, {
                                  "s" : [ {
-                                    "r" : "104",
+                                    "r" : "112",
                                     "value" : [ "c",": ","null" ]
                                  } ]
                               }, {
@@ -7912,15 +8002,15 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "107",
+               "localId" : "115",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "102",
+                  "localId" : "110",
                   "type" : "Tuple",
                   "element" : [ {
                      "name" : "a",
                      "value" : {
-                        "localId" : "99",
+                        "localId" : "107",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "a",
                         "type" : "Literal"
@@ -7928,24 +8018,24 @@ module.exports['Equivalent'] = {
                   }, {
                      "name" : "b",
                      "value" : {
-                        "localId" : "101",
+                        "localId" : "109",
                         "type" : "Tuple",
                         "element" : [ {
                            "name" : "c",
                            "value" : {
-                              "localId" : "100",
+                              "localId" : "108",
                               "type" : "Null"
                            }
                         } ]
                      }
                   } ]
                }, {
-                  "localId" : "106",
+                  "localId" : "114",
                   "type" : "Tuple",
                   "element" : [ {
                      "name" : "a",
                      "value" : {
-                        "localId" : "103",
+                        "localId" : "111",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "a",
                         "type" : "Literal"
@@ -7953,12 +8043,12 @@ module.exports['Equivalent'] = {
                   }, {
                      "name" : "b",
                      "value" : {
-                        "localId" : "105",
+                        "localId" : "113",
                         "type" : "Tuple",
                         "element" : [ {
                            "name" : "c",
                            "value" : {
-                              "localId" : "104",
+                              "localId" : "112",
                               "type" : "Null"
                            }
                         } ]
@@ -7967,69 +8057,69 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
-            "localId" : "112",
+            "localId" : "120",
             "name" : "EmptyLists",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "112",
+                  "r" : "120",
                   "s" : [ {
                      "value" : [ "define ","EmptyLists",": " ]
                   }, {
-                     "r" : "111",
+                     "r" : "119",
                      "s" : [ {
-                        "r" : "109",
+                        "r" : "117",
                         "value" : [ "{ }"," ","~"," ","{ }" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "111",
+               "localId" : "119",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "109",
+                  "localId" : "117",
                   "type" : "List"
                }, {
-                  "localId" : "110",
+                  "localId" : "118",
                   "type" : "List"
                } ]
             }
          }, {
-            "localId" : "122",
+            "localId" : "130",
             "name" : "DifferentTypesLists",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "122",
+                  "r" : "130",
                   "s" : [ {
                      "value" : [ "define ","DifferentTypesLists",": " ]
                   }, {
-                     "r" : "121",
+                     "r" : "129",
                      "s" : [ {
-                        "r" : "116",
+                        "r" : "124",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "113",
+                           "r" : "121",
                            "s" : [ {
                               "value" : [ "'1'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "114",
+                           "r" : "122",
                            "s" : [ {
                               "value" : [ "'2'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "115",
+                           "r" : "123",
                            "s" : [ {
                               "value" : [ "'3'" ]
                            } ]
@@ -8039,9 +8129,9 @@ module.exports['Equivalent'] = {
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "120",
+                        "r" : "128",
                         "s" : [ {
-                           "r" : "117",
+                           "r" : "125",
                            "value" : [ "{","1",", ","2",", ","3","}" ]
                         } ]
                      } ]
@@ -8049,129 +8139,51 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "121",
-               "type" : "Equivalent",
-               "operand" : [ {
-                  "localId" : "116",
-                  "type" : "List",
-                  "element" : [ {
-                     "localId" : "113",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "1",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "114",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "2",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "115",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "3",
-                     "type" : "Literal"
-                  } ]
-               }, {
-                  "localId" : "120",
-                  "type" : "List",
-                  "element" : [ {
-                     "localId" : "117",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "118",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "119",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "3",
-                     "type" : "Literal"
-                  } ]
-               } ]
-            }
-         }, {
-            "localId" : "129",
-            "name" : "DifferentLengthLists",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "129",
-                  "s" : [ {
-                     "value" : [ "define ","DifferentLengthLists",": " ]
-                  }, {
-                     "r" : "128",
-                     "s" : [ {
-                        "r" : "124",
-                        "s" : [ {
-                           "value" : [ "{" ]
-                        }, {
-                           "r" : "123",
-                           "s" : [ {
-                              "value" : [ "'a'" ]
-                           } ]
-                        }, {
-                           "value" : [ "}" ]
-                        } ]
-                     }, {
-                        "value" : [ " ","~"," " ]
-                     }, {
-                        "r" : "127",
-                        "s" : [ {
-                           "value" : [ "{" ]
-                        }, {
-                           "r" : "125",
-                           "s" : [ {
-                              "value" : [ "'a'" ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "126",
-                           "s" : [ {
-                              "value" : [ "'a'" ]
-                           } ]
-                        }, {
-                           "value" : [ "}" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "128",
+               "localId" : "129",
                "type" : "Equivalent",
                "operand" : [ {
                   "localId" : "124",
                   "type" : "List",
                   "element" : [ {
+                     "localId" : "121",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "122",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
                      "localId" : "123",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "a",
+                     "value" : "3",
                      "type" : "Literal"
                   } ]
                }, {
-                  "localId" : "127",
+                  "localId" : "128",
                   "type" : "List",
                   "element" : [ {
                      "localId" : "125",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "a",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
                      "type" : "Literal"
                   }, {
                      "localId" : "126",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "a",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "127",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
                      "type" : "Literal"
                   } ]
                } ]
             }
          }, {
             "localId" : "137",
-            "name" : "DifferentOrderLists",
+            "name" : "DifferentLengthLists",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -8179,7 +8191,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "137",
                   "s" : [ {
-                     "value" : [ "define ","DifferentOrderLists",": " ]
+                     "value" : [ "define ","DifferentLengthLists",": " ]
                   }, {
                      "r" : "136",
                      "s" : [ {
@@ -8187,16 +8199,9 @@ module.exports['Equivalent'] = {
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "130",
-                           "s" : [ {
-                              "value" : [ "'a'" ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
                            "r" : "131",
                            "s" : [ {
-                              "value" : [ "'b'" ]
+                              "value" : [ "'a'" ]
                            } ]
                         }, {
                            "value" : [ "}" ]
@@ -8210,7 +8215,7 @@ module.exports['Equivalent'] = {
                         }, {
                            "r" : "133",
                            "s" : [ {
-                              "value" : [ "'b'" ]
+                              "value" : [ "'a'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
@@ -8233,14 +8238,9 @@ module.exports['Equivalent'] = {
                   "localId" : "132",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "130",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "a",
-                     "type" : "Literal"
-                  }, {
                      "localId" : "131",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "b",
+                     "value" : "a",
                      "type" : "Literal"
                   } ]
                }, {
@@ -8249,7 +8249,7 @@ module.exports['Equivalent'] = {
                   "element" : [ {
                      "localId" : "133",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "b",
+                     "value" : "a",
                      "type" : "Literal"
                   }, {
                      "localId" : "134",
@@ -8260,20 +8260,20 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
-            "localId" : "147",
-            "name" : "SameLists",
+            "localId" : "145",
+            "name" : "DifferentOrderLists",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "147",
+                  "r" : "145",
                   "s" : [ {
-                     "value" : [ "define ","SameLists",": " ]
+                     "value" : [ "define ","DifferentOrderLists",": " ]
                   }, {
-                     "r" : "146",
+                     "r" : "144",
                      "s" : [ {
-                        "r" : "141",
+                        "r" : "140",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
@@ -8289,39 +8289,25 @@ module.exports['Equivalent'] = {
                               "value" : [ "'b'" ]
                            } ]
                         }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "140",
-                           "s" : [ {
-                              "value" : [ "'c'" ]
-                           } ]
-                        }, {
                            "value" : [ "}" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "145",
+                        "r" : "143",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "142",
-                           "s" : [ {
-                              "value" : [ "'a'" ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "143",
+                           "r" : "141",
                            "s" : [ {
                               "value" : [ "'b'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "144",
+                           "r" : "142",
                            "s" : [ {
-                              "value" : [ "'c'" ]
+                              "value" : [ "'a'" ]
                            } ]
                         }, {
                            "value" : [ "}" ]
@@ -8331,10 +8317,10 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "146",
+               "localId" : "144",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "141",
+                  "localId" : "140",
                   "type" : "List",
                   "element" : [ {
                      "localId" : "138",
@@ -8346,27 +8332,131 @@ module.exports['Equivalent'] = {
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "b",
                      "type" : "Literal"
+                  } ]
+               }, {
+                  "localId" : "143",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "141",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "b",
+                     "type" : "Literal"
                   }, {
-                     "localId" : "140",
+                     "localId" : "142",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "a",
+                     "type" : "Literal"
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "155",
+            "name" : "SameLists",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "155",
+                  "s" : [ {
+                     "value" : [ "define ","SameLists",": " ]
+                  }, {
+                     "r" : "154",
+                     "s" : [ {
+                        "r" : "149",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "146",
+                           "s" : [ {
+                              "value" : [ "'a'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "147",
+                           "s" : [ {
+                              "value" : [ "'b'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "148",
+                           "s" : [ {
+                              "value" : [ "'c'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","~"," " ]
+                     }, {
+                        "r" : "153",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "150",
+                           "s" : [ {
+                              "value" : [ "'a'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "151",
+                           "s" : [ {
+                              "value" : [ "'b'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "152",
+                           "s" : [ {
+                              "value" : [ "'c'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "154",
+               "type" : "Equivalent",
+               "operand" : [ {
+                  "localId" : "149",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "146",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "a",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "147",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "b",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "148",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "c",
                      "type" : "Literal"
                   } ]
                }, {
-                  "localId" : "145",
+                  "localId" : "153",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "142",
+                     "localId" : "150",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "a",
                      "type" : "Literal"
                   }, {
-                     "localId" : "143",
+                     "localId" : "151",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "b",
                      "type" : "Literal"
                   }, {
-                     "localId" : "144",
+                     "localId" : "152",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "c",
                      "type" : "Literal"
@@ -8374,30 +8464,30 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
-            "localId" : "157",
+            "localId" : "165",
             "name" : "SameListsNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "157",
+                  "r" : "165",
                   "s" : [ {
                      "value" : [ "define ","SameListsNull",": " ]
                   }, {
-                     "r" : "156",
+                     "r" : "164",
                      "s" : [ {
-                        "r" : "151",
+                        "r" : "159",
                         "s" : [ {
-                           "r" : "148",
+                           "r" : "156",
                            "value" : [ "{","null",", ","null",", ","null","}" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "155",
+                        "r" : "163",
                         "s" : [ {
-                           "r" : "152",
+                           "r" : "160",
                            "value" : [ "{","null",", ","null",", ","null","}" ]
                         } ]
                      } ]
@@ -8405,116 +8495,67 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "156",
+               "localId" : "164",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "151",
+                  "localId" : "159",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "148",
+                     "localId" : "156",
                      "type" : "Null"
                   }, {
-                     "localId" : "149",
+                     "localId" : "157",
                      "type" : "Null"
                   }, {
-                     "localId" : "150",
+                     "localId" : "158",
                      "type" : "Null"
                   } ]
                }, {
-                  "localId" : "155",
+                  "localId" : "163",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "152",
+                     "localId" : "160",
                      "type" : "Null"
                   }, {
-                     "localId" : "153",
+                     "localId" : "161",
                      "type" : "Null"
                   }, {
-                     "localId" : "154",
+                     "localId" : "162",
                      "type" : "Null"
                   } ]
                } ]
             }
          }, {
-            "localId" : "173",
+            "localId" : "181",
             "name" : "SameNestedLists",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "173",
+                  "r" : "181",
                   "s" : [ {
                      "value" : [ "define ","SameNestedLists",": " ]
                   }, {
-                     "r" : "172",
+                     "r" : "180",
                      "s" : [ {
-                        "r" : "164",
+                        "r" : "172",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "160",
+                           "r" : "168",
                            "s" : [ {
                               "value" : [ "{" ]
-                           }, {
-                              "r" : "158",
-                              "s" : [ {
-                                 "value" : [ "'a'" ]
-                              } ]
-                           }, {
-                              "value" : [ "," ]
-                           }, {
-                              "r" : "159",
-                              "s" : [ {
-                                 "value" : [ "'d'" ]
-                              } ]
-                           }, {
-                              "value" : [ "}" ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "163",
-                           "s" : [ {
-                              "value" : [ "{" ]
-                           }, {
-                              "r" : "161",
-                              "s" : [ {
-                                 "value" : [ "'b'" ]
-                              } ]
-                           }, {
-                              "value" : [ ", " ]
-                           }, {
-                              "r" : "162",
-                              "s" : [ {
-                                 "value" : [ "'c'" ]
-                              } ]
-                           }, {
-                              "value" : [ "}" ]
-                           } ]
-                        }, {
-                           "value" : [ "}" ]
-                        } ]
-                     }, {
-                        "value" : [ " ","~"," " ]
-                     }, {
-                        "r" : "171",
-                        "s" : [ {
-                           "value" : [ "{" ]
-                        }, {
-                           "r" : "167",
-                           "s" : [ {
-                              "value" : [ "{" ]
-                           }, {
-                              "r" : "165",
-                              "s" : [ {
-                                 "value" : [ "'a'" ]
-                              } ]
-                           }, {
-                              "value" : [ "," ]
                            }, {
                               "r" : "166",
                               "s" : [ {
+                                 "value" : [ "'a'" ]
+                              } ]
+                           }, {
+                              "value" : [ "," ]
+                           }, {
+                              "r" : "167",
+                              "s" : [ {
                                  "value" : [ "'d'" ]
                               } ]
                            }, {
@@ -8523,18 +8564,67 @@ module.exports['Equivalent'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "170",
+                           "r" : "171",
                            "s" : [ {
                               "value" : [ "{" ]
                            }, {
-                              "r" : "168",
+                              "r" : "169",
                               "s" : [ {
                                  "value" : [ "'b'" ]
                               } ]
                            }, {
                               "value" : [ ", " ]
                            }, {
-                              "r" : "169",
+                              "r" : "170",
+                              "s" : [ {
+                                 "value" : [ "'c'" ]
+                              } ]
+                           }, {
+                              "value" : [ "}" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","~"," " ]
+                     }, {
+                        "r" : "179",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "175",
+                           "s" : [ {
+                              "value" : [ "{" ]
+                           }, {
+                              "r" : "173",
+                              "s" : [ {
+                                 "value" : [ "'a'" ]
+                              } ]
+                           }, {
+                              "value" : [ "," ]
+                           }, {
+                              "r" : "174",
+                              "s" : [ {
+                                 "value" : [ "'d'" ]
+                              } ]
+                           }, {
+                              "value" : [ "}" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "178",
+                           "s" : [ {
+                              "value" : [ "{" ]
+                           }, {
+                              "r" : "176",
+                              "s" : [ {
+                                 "value" : [ "'b'" ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "r" : "177",
                               "s" : [ {
                                  "value" : [ "'c'" ]
                               } ]
@@ -8549,183 +8639,77 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "172",
+               "localId" : "180",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "164",
+                  "localId" : "172",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "160",
+                     "localId" : "168",
                      "type" : "List",
                      "element" : [ {
-                        "localId" : "158",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "a",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "159",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "d",
-                        "type" : "Literal"
-                     } ]
-                  }, {
-                     "localId" : "163",
-                     "type" : "List",
-                     "element" : [ {
-                        "localId" : "161",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "b",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "162",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "c",
-                        "type" : "Literal"
-                     } ]
-                  } ]
-               }, {
-                  "localId" : "171",
-                  "type" : "List",
-                  "element" : [ {
-                     "localId" : "167",
-                     "type" : "List",
-                     "element" : [ {
-                        "localId" : "165",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "a",
-                        "type" : "Literal"
-                     }, {
                         "localId" : "166",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "a",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "167",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "d",
                         "type" : "Literal"
                      } ]
                   }, {
-                     "localId" : "170",
+                     "localId" : "171",
                      "type" : "List",
                      "element" : [ {
-                        "localId" : "168",
+                        "localId" : "169",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "b",
                         "type" : "Literal"
                      }, {
-                        "localId" : "169",
+                        "localId" : "170",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "c",
                         "type" : "Literal"
                      } ]
                   } ]
-               } ]
-            }
-         }, {
-            "localId" : "185",
-            "name" : "SameNestedListsNull",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "185",
-                  "s" : [ {
-                     "value" : [ "define ","SameNestedListsNull",": " ]
-                  }, {
-                     "r" : "184",
-                     "s" : [ {
-                        "r" : "178",
-                        "s" : [ {
-                           "r" : "174",
-                           "value" : [ "{","null",", " ]
-                        }, {
-                           "r" : "177",
-                           "s" : [ {
-                              "r" : "175",
-                              "value" : [ "{","null",", ","null","}" ]
-                           } ]
-                        }, {
-                           "value" : [ "}" ]
-                        } ]
-                     }, {
-                        "value" : [ " ","~"," " ]
-                     }, {
-                        "r" : "183",
-                        "s" : [ {
-                           "r" : "179",
-                           "value" : [ "{","null",", " ]
-                        }, {
-                           "r" : "182",
-                           "s" : [ {
-                              "r" : "180",
-                              "value" : [ "{","null",", ","null","}" ]
-                           } ]
-                        }, {
-                           "value" : [ "}" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "184",
-               "type" : "Equivalent",
-               "operand" : [ {
-                  "localId" : "178",
-                  "type" : "List",
-                  "element" : [ {
-                     "type" : "As",
-                     "operand" : {
-                        "localId" : "174",
-                        "type" : "Null"
-                     },
-                     "asTypeSpecifier" : {
-                        "type" : "ListTypeSpecifier",
-                        "elementType" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}Any",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     }
-                  }, {
-                     "localId" : "177",
-                     "type" : "List",
-                     "element" : [ {
-                        "localId" : "175",
-                        "type" : "Null"
-                     }, {
-                        "localId" : "176",
-                        "type" : "Null"
-                     } ]
-                  } ]
                }, {
-                  "localId" : "183",
+                  "localId" : "179",
                   "type" : "List",
                   "element" : [ {
-                     "type" : "As",
-                     "operand" : {
-                        "localId" : "179",
-                        "type" : "Null"
-                     },
-                     "asTypeSpecifier" : {
-                        "type" : "ListTypeSpecifier",
-                        "elementType" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}Any",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     }
-                  }, {
-                     "localId" : "182",
+                     "localId" : "175",
                      "type" : "List",
                      "element" : [ {
-                        "localId" : "180",
-                        "type" : "Null"
+                        "localId" : "173",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "a",
+                        "type" : "Literal"
                      }, {
-                        "localId" : "181",
-                        "type" : "Null"
+                        "localId" : "174",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "d",
+                        "type" : "Literal"
+                     } ]
+                  }, {
+                     "localId" : "178",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "176",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "b",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "177",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "c",
+                        "type" : "Literal"
                      } ]
                   } ]
                } ]
             }
          }, {
             "localId" : "193",
-            "name" : "EmptyInterval",
+            "name" : "SameNestedListsNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -8733,22 +8717,38 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "193",
                   "s" : [ {
-                     "value" : [ "define ","EmptyInterval",": " ]
+                     "value" : [ "define ","SameNestedListsNull",": " ]
                   }, {
                      "r" : "192",
                      "s" : [ {
-                        "r" : "188",
+                        "r" : "186",
                         "s" : [ {
-                           "r" : "186",
-                           "value" : [ "Interval(","null",", ","null",")" ]
+                           "r" : "182",
+                           "value" : [ "{","null",", " ]
+                        }, {
+                           "r" : "185",
+                           "s" : [ {
+                              "r" : "183",
+                              "value" : [ "{","null",", ","null","}" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
                         "r" : "191",
                         "s" : [ {
-                           "r" : "189",
-                           "value" : [ "Interval(","null",", ","null",")" ]
+                           "r" : "187",
+                           "value" : [ "{","null",", " ]
+                        }, {
+                           "r" : "190",
+                           "s" : [ {
+                              "r" : "188",
+                              "value" : [ "{","null",", ","null","}" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
                         } ]
                      } ]
                   } ]
@@ -8758,36 +8758,64 @@ module.exports['Equivalent'] = {
                "localId" : "192",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "188",
-                  "lowClosed" : false,
-                  "highClosed" : false,
-                  "type" : "Interval",
-                  "low" : {
-                     "localId" : "186",
-                     "type" : "Null"
-                  },
-                  "high" : {
-                     "localId" : "187",
-                     "type" : "Null"
-                  }
+                  "localId" : "186",
+                  "type" : "List",
+                  "element" : [ {
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "182",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}Any",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }, {
+                     "localId" : "185",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "183",
+                        "type" : "Null"
+                     }, {
+                        "localId" : "184",
+                        "type" : "Null"
+                     } ]
+                  } ]
                }, {
                   "localId" : "191",
-                  "lowClosed" : false,
-                  "highClosed" : false,
-                  "type" : "Interval",
-                  "low" : {
-                     "localId" : "189",
-                     "type" : "Null"
-                  },
-                  "high" : {
+                  "type" : "List",
+                  "element" : [ {
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "187",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}Any",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }, {
                      "localId" : "190",
-                     "type" : "Null"
-                  }
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "188",
+                        "type" : "Null"
+                     }, {
+                        "localId" : "189",
+                        "type" : "Null"
+                     } ]
+                  } ]
                } ]
             }
          }, {
             "localId" : "201",
-            "name" : "IntervalDifferentPointTypes",
+            "name" : "EmptyInterval",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -8795,35 +8823,22 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "201",
                   "s" : [ {
-                     "value" : [ "define ","IntervalDifferentPointTypes",":  " ]
+                     "value" : [ "define ","EmptyInterval",": " ]
                   }, {
                      "r" : "200",
                      "s" : [ {
                         "r" : "196",
                         "s" : [ {
                            "r" : "194",
-                           "value" : [ "Interval[","1",", ","5","]" ]
+                           "value" : [ "Interval(","null",", ","null",")" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
                         "r" : "199",
                         "s" : [ {
-                           "value" : [ "Interval[" ]
-                        }, {
                            "r" : "197",
-                           "s" : [ {
-                              "value" : [ "'1'" ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "198",
-                           "s" : [ {
-                              "value" : [ "'5'" ]
-                           } ]
-                        }, {
-                           "value" : [ "]" ]
+                           "value" : [ "Interval(","null",", ","null",")" ]
                         } ]
                      } ]
                   } ]
@@ -8834,43 +8849,35 @@ module.exports['Equivalent'] = {
                "type" : "Equivalent",
                "operand" : [ {
                   "localId" : "196",
-                  "lowClosed" : true,
-                  "highClosed" : true,
+                  "lowClosed" : false,
+                  "highClosed" : false,
                   "type" : "Interval",
                   "low" : {
                      "localId" : "194",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
-                     "type" : "Literal"
+                     "type" : "Null"
                   },
                   "high" : {
                      "localId" : "195",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "5",
-                     "type" : "Literal"
+                     "type" : "Null"
                   }
                }, {
                   "localId" : "199",
-                  "lowClosed" : true,
-                  "highClosed" : true,
+                  "lowClosed" : false,
+                  "highClosed" : false,
                   "type" : "Interval",
                   "low" : {
                      "localId" : "197",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "1",
-                     "type" : "Literal"
+                     "type" : "Null"
                   },
                   "high" : {
                      "localId" : "198",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "5",
-                     "type" : "Literal"
+                     "type" : "Null"
                   }
                } ]
             }
          }, {
             "localId" : "209",
-            "name" : "IntervalDifferentStarts",
+            "name" : "IntervalDifferentPointTypes",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -8878,22 +8885,35 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "209",
                   "s" : [ {
-                     "value" : [ "define ","IntervalDifferentStarts",": " ]
+                     "value" : [ "define ","IntervalDifferentPointTypes",":  " ]
                   }, {
                      "r" : "208",
                      "s" : [ {
                         "r" : "204",
                         "s" : [ {
                            "r" : "202",
-                           "value" : [ "Interval[","1",",","3","]" ]
+                           "value" : [ "Interval[","1",", ","5","]" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
                         "r" : "207",
                         "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
                            "r" : "205",
-                           "value" : [ "Interval[","2",",","3","]" ]
+                           "s" : [ {
+                              "value" : [ "'1'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "206",
+                           "s" : [ {
+                              "value" : [ "'5'" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
                         } ]
                      } ]
                   } ]
@@ -8916,7 +8936,7 @@ module.exports['Equivalent'] = {
                   "high" : {
                      "localId" : "203",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "3",
+                     "value" : "5",
                      "type" : "Literal"
                   }
                }, {
@@ -8926,21 +8946,21 @@ module.exports['Equivalent'] = {
                   "type" : "Interval",
                   "low" : {
                      "localId" : "205",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "1",
                      "type" : "Literal"
                   },
                   "high" : {
                      "localId" : "206",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "3",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "5",
                      "type" : "Literal"
                   }
                } ]
             }
          }, {
             "localId" : "217",
-            "name" : "IntervalDifferentEndings",
+            "name" : "IntervalDifferentStarts",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -8948,7 +8968,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "217",
                   "s" : [ {
-                     "value" : [ "define ","IntervalDifferentEndings",": " ]
+                     "value" : [ "define ","IntervalDifferentStarts",": " ]
                   }, {
                      "r" : "216",
                      "s" : [ {
@@ -8963,7 +8983,7 @@ module.exports['Equivalent'] = {
                         "r" : "215",
                         "s" : [ {
                            "r" : "213",
-                           "value" : [ "Interval[","1",",","4","]" ]
+                           "value" : [ "Interval[","2",",","3","]" ]
                         } ]
                      } ]
                   } ]
@@ -8997,20 +9017,20 @@ module.exports['Equivalent'] = {
                   "low" : {
                      "localId" : "213",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
+                     "value" : "2",
                      "type" : "Literal"
                   },
                   "high" : {
                      "localId" : "214",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "4",
+                     "value" : "3",
                      "type" : "Literal"
                   }
                } ]
             }
          }, {
             "localId" : "225",
-            "name" : "SameIntervals",
+            "name" : "IntervalDifferentEndings",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -9018,7 +9038,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "225",
                   "s" : [ {
-                     "value" : [ "define ","SameIntervals",": " ]
+                     "value" : [ "define ","IntervalDifferentEndings",": " ]
                   }, {
                      "r" : "224",
                      "s" : [ {
@@ -9033,7 +9053,7 @@ module.exports['Equivalent'] = {
                         "r" : "223",
                         "s" : [ {
                            "r" : "221",
-                           "value" : [ "Interval[","1",",","3","]" ]
+                           "value" : [ "Interval[","1",",","4","]" ]
                         } ]
                      } ]
                   } ]
@@ -9073,134 +9093,95 @@ module.exports['Equivalent'] = {
                   "high" : {
                      "localId" : "222",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "3",
+                     "value" : "4",
                      "type" : "Literal"
                   }
                } ]
             }
          }, {
-            "localId" : "231",
-            "name" : "TupleAndList",
+            "localId" : "233",
+            "name" : "SameIntervals",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "231",
+                  "r" : "233",
                   "s" : [ {
-                     "value" : [ "define ","TupleAndList",": " ]
+                     "value" : [ "define ","SameIntervals",": " ]
                   }, {
-                     "r" : "230",
+                     "r" : "232",
                      "s" : [ {
-                        "r" : "227",
+                        "r" : "228",
                         "s" : [ {
-                           "value" : [ "{" ]
-                        }, {
-                           "s" : [ {
-                              "value" : [ "a",": " ]
-                           }, {
-                              "r" : "226",
-                              "s" : [ {
-                                 "value" : [ "'1'" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "}" ]
+                           "r" : "226",
+                           "value" : [ "Interval[","1",",","3","]" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "229",
+                        "r" : "231",
                         "s" : [ {
-                           "value" : [ "{" ]
-                        }, {
-                           "r" : "228",
-                           "s" : [ {
-                              "value" : [ "'1'" ]
-                           } ]
-                        }, {
-                           "value" : [ "}" ]
+                           "r" : "229",
+                           "value" : [ "Interval[","1",",","3","]" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "230",
+               "localId" : "232",
                "type" : "Equivalent",
                "operand" : [ {
-                  "type" : "ToList",
-                  "operand" : {
-                     "type" : "ToList",
-                     "operand" : {
-                        "localId" : "227",
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "a",
-                           "value" : {
-                              "localId" : "226",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                              "value" : "1",
-                              "type" : "Literal"
-                           }
-                        } ]
-                     }
+                  "localId" : "228",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "226",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "227",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
                   }
                }, {
-                  "type" : "Query",
-                  "source" : [ {
-                     "alias" : "X",
-                     "expression" : {
-                        "localId" : "229",
-                        "type" : "List",
-                        "element" : [ {
-                           "localId" : "228",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "1",
-                           "type" : "Literal"
-                        } ]
-                     }
-                  } ],
-                  "return" : {
-                     "distinct" : false,
-                     "expression" : {
-                        "type" : "ToList",
-                        "operand" : {
-                           "name" : "X",
-                           "type" : "AliasRef"
-                        }
-                     }
+                  "localId" : "231",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "low" : {
+                     "localId" : "229",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "high" : {
+                     "localId" : "230",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
                   }
                } ]
             }
          }, {
-            "localId" : "237",
-            "name" : "ListAndTuple",
+            "localId" : "239",
+            "name" : "TupleAndList",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "237",
+                  "r" : "239",
                   "s" : [ {
-                     "value" : [ "define ","ListAndTuple",": " ]
+                     "value" : [ "define ","TupleAndList",": " ]
                   }, {
-                     "r" : "236",
+                     "r" : "238",
                      "s" : [ {
-                        "r" : "233",
-                        "s" : [ {
-                           "value" : [ "{" ]
-                        }, {
-                           "r" : "232",
-                           "s" : [ {
-                              "value" : [ "'1'" ]
-                           } ]
-                        }, {
-                           "value" : [ "}" ]
-                        } ]
-                     }, {
-                        "value" : [ " ","~"," " ]
-                     }, {
                         "r" : "235",
                         "s" : [ {
                            "value" : [ "{" ]
@@ -9216,39 +9197,28 @@ module.exports['Equivalent'] = {
                         }, {
                            "value" : [ "}" ]
                         } ]
+                     }, {
+                        "value" : [ " ","~"," " ]
+                     }, {
+                        "r" : "237",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "236",
+                           "s" : [ {
+                              "value" : [ "'1'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "236",
+               "localId" : "238",
                "type" : "Equivalent",
                "operand" : [ {
-                  "type" : "Query",
-                  "source" : [ {
-                     "alias" : "X",
-                     "expression" : {
-                        "localId" : "233",
-                        "type" : "List",
-                        "element" : [ {
-                           "localId" : "232",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "1",
-                           "type" : "Literal"
-                        } ]
-                     }
-                  } ],
-                  "return" : {
-                     "distinct" : false,
-                     "expression" : {
-                        "type" : "ToList",
-                        "operand" : {
-                           "name" : "X",
-                           "type" : "AliasRef"
-                        }
-                     }
-                  }
-               }, {
                   "type" : "ToList",
                   "operand" : {
                      "type" : "ToList",
@@ -9266,33 +9236,54 @@ module.exports['Equivalent'] = {
                         } ]
                      }
                   }
+               }, {
+                  "type" : "Query",
+                  "source" : [ {
+                     "alias" : "X",
+                     "expression" : {
+                        "localId" : "237",
+                        "type" : "List",
+                        "element" : [ {
+                           "localId" : "236",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "1",
+                           "type" : "Literal"
+                        } ]
+                     }
+                  } ],
+                  "return" : {
+                     "distinct" : false,
+                     "expression" : {
+                        "type" : "ToList",
+                        "operand" : {
+                           "name" : "X",
+                           "type" : "AliasRef"
+                        }
+                     }
+                  }
                } ]
             }
          }, {
-            "localId" : "243",
-            "name" : "TupleAndNullList",
+            "localId" : "245",
+            "name" : "ListAndTuple",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "243",
+                  "r" : "245",
                   "s" : [ {
-                     "value" : [ "define ","TupleAndNullList",": " ]
+                     "value" : [ "define ","ListAndTuple",": " ]
                   }, {
-                     "r" : "242",
+                     "r" : "244",
                      "s" : [ {
-                        "r" : "239",
+                        "r" : "241",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
+                           "r" : "240",
                            "s" : [ {
-                              "value" : [ "a",": " ]
-                           }, {
-                              "r" : "238",
-                              "s" : [ {
-                                 "value" : [ "'1'" ]
-                              } ]
+                              "value" : [ "'1'" ]
                            } ]
                         }, {
                            "value" : [ "}" ]
@@ -9300,77 +9291,87 @@ module.exports['Equivalent'] = {
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "241",
+                        "r" : "243",
                         "s" : [ {
-                           "r" : "240",
-                           "value" : [ "{","null","}" ]
+                           "value" : [ "{" ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "a",": " ]
+                           }, {
+                              "r" : "242",
+                              "s" : [ {
+                                 "value" : [ "'1'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "242",
+               "localId" : "244",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "239",
-                  "type" : "Tuple",
-                  "element" : [ {
-                     "name" : "a",
-                     "value" : {
-                        "localId" : "238",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "1",
-                        "type" : "Literal"
-                     }
-                  } ]
-               }, {
-                  "type" : "As",
-                  "operand" : {
-                     "type" : "SingletonFrom",
-                     "operand" : {
+                  "type" : "Query",
+                  "source" : [ {
+                     "alias" : "X",
+                     "expression" : {
                         "localId" : "241",
                         "type" : "List",
                         "element" : [ {
                            "localId" : "240",
-                           "type" : "Null"
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "1",
+                           "type" : "Literal"
                         } ]
                      }
-                  },
-                  "asTypeSpecifier" : {
-                     "type" : "TupleTypeSpecifier",
-                     "element" : [ {
-                        "name" : "a",
-                        "type" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}String",
-                           "type" : "NamedTypeSpecifier"
+                  } ],
+                  "return" : {
+                     "distinct" : false,
+                     "expression" : {
+                        "type" : "ToList",
+                        "operand" : {
+                           "name" : "X",
+                           "type" : "AliasRef"
                         }
-                     } ]
+                     }
+                  }
+               }, {
+                  "type" : "ToList",
+                  "operand" : {
+                     "type" : "ToList",
+                     "operand" : {
+                        "localId" : "243",
+                        "type" : "Tuple",
+                        "element" : [ {
+                           "name" : "a",
+                           "value" : {
+                              "localId" : "242",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "1",
+                              "type" : "Literal"
+                           }
+                        } ]
+                     }
                   }
                } ]
             }
          }, {
-            "localId" : "249",
-            "name" : "NullListAndTuple",
+            "localId" : "251",
+            "name" : "TupleAndNullList",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "249",
+                  "r" : "251",
                   "s" : [ {
-                     "value" : [ "define ","NullListAndTuple",": " ]
+                     "value" : [ "define ","TupleAndNullList",": " ]
                   }, {
-                     "r" : "248",
+                     "r" : "250",
                      "s" : [ {
-                        "r" : "245",
-                        "s" : [ {
-                           "r" : "244",
-                           "value" : [ "{","null","}" ]
-                        } ]
-                     }, {
-                        "value" : [ " ","~"," " ]
-                     }, {
                         "r" : "247",
                         "s" : [ {
                            "value" : [ "{" ]
@@ -9386,22 +9387,111 @@ module.exports['Equivalent'] = {
                         }, {
                            "value" : [ "}" ]
                         } ]
+                     }, {
+                        "value" : [ " ","~"," " ]
+                     }, {
+                        "r" : "249",
+                        "s" : [ {
+                           "r" : "248",
+                           "value" : [ "{","null","}" ]
+                        } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "248",
+               "localId" : "250",
+               "type" : "Equivalent",
+               "operand" : [ {
+                  "localId" : "247",
+                  "type" : "Tuple",
+                  "element" : [ {
+                     "name" : "a",
+                     "value" : {
+                        "localId" : "246",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }, {
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "SingletonFrom",
+                     "operand" : {
+                        "localId" : "249",
+                        "type" : "List",
+                        "element" : [ {
+                           "localId" : "248",
+                           "type" : "Null"
+                        } ]
+                     }
+                  },
+                  "asTypeSpecifier" : {
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "name" : "a",
+                        "type" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "257",
+            "name" : "NullListAndTuple",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "257",
+                  "s" : [ {
+                     "value" : [ "define ","NullListAndTuple",": " ]
+                  }, {
+                     "r" : "256",
+                     "s" : [ {
+                        "r" : "253",
+                        "s" : [ {
+                           "r" : "252",
+                           "value" : [ "{","null","}" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","~"," " ]
+                     }, {
+                        "r" : "255",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "a",": " ]
+                           }, {
+                              "r" : "254",
+                              "s" : [ {
+                                 "value" : [ "'1'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "256",
                "type" : "Equivalent",
                "operand" : [ {
                   "type" : "As",
                   "operand" : {
                      "type" : "SingletonFrom",
                      "operand" : {
-                        "localId" : "245",
+                        "localId" : "253",
                         "type" : "List",
                         "element" : [ {
-                           "localId" : "244",
+                           "localId" : "252",
                            "type" : "Null"
                         } ]
                      }
@@ -9417,12 +9507,12 @@ module.exports['Equivalent'] = {
                      } ]
                   }
                }, {
-                  "localId" : "247",
+                  "localId" : "255",
                   "type" : "Tuple",
                   "element" : [ {
                      "name" : "a",
                      "value" : {
-                        "localId" : "246",
+                        "localId" : "254",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "1",
                         "type" : "Literal"
@@ -9431,95 +9521,8 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
-            "localId" : "253",
-            "name" : "SameCodeAndCode",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "253",
-                  "s" : [ {
-                     "value" : [ "define ","SameCodeAndCode",": " ]
-                  }, {
-                     "r" : "252",
-                     "s" : [ {
-                        "r" : "250",
-                        "s" : [ {
-                           "value" : [ "\"Tobacco smoking status code\"" ]
-                        } ]
-                     }, {
-                        "value" : [ " ","~"," " ]
-                     }, {
-                        "r" : "251",
-                        "s" : [ {
-                           "value" : [ "\"Tobacco smoking status code clone\"" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "252",
-               "type" : "Equivalent",
-               "operand" : [ {
-                  "localId" : "250",
-                  "name" : "Tobacco smoking status code",
-                  "type" : "CodeRef"
-               }, {
-                  "localId" : "251",
-                  "name" : "Tobacco smoking status code clone",
-                  "type" : "CodeRef"
-               } ]
-            }
-         }, {
-            "localId" : "257",
-            "name" : "SameCodeAndConcept",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "257",
-                  "s" : [ {
-                     "value" : [ "define ","SameCodeAndConcept",": " ]
-                  }, {
-                     "r" : "256",
-                     "s" : [ {
-                        "r" : "254",
-                        "s" : [ {
-                           "value" : [ "\"Tobacco smoking status code clone\"" ]
-                        } ]
-                     }, {
-                        "value" : [ " ","~"," " ]
-                     }, {
-                        "r" : "255",
-                        "s" : [ {
-                           "value" : [ "\"Tobacco smoking status\"" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "256",
-               "type" : "Equivalent",
-               "operand" : [ {
-                  "type" : "ToConcept",
-                  "operand" : {
-                     "localId" : "254",
-                     "name" : "Tobacco smoking status code clone",
-                     "type" : "CodeRef"
-                  }
-               }, {
-                  "localId" : "255",
-                  "name" : "Tobacco smoking status",
-                  "type" : "ConceptRef"
-               } ]
-            }
-         }, {
             "localId" : "261",
-            "name" : "SameConceptAndCode",
+            "name" : "SameCodeAndCode",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -9527,13 +9530,13 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "261",
                   "s" : [ {
-                     "value" : [ "define ","SameConceptAndCode",": " ]
+                     "value" : [ "define ","SameCodeAndCode",": " ]
                   }, {
                      "r" : "260",
                      "s" : [ {
                         "r" : "258",
                         "s" : [ {
-                           "value" : [ "\"Tobacco smoking status\"" ]
+                           "value" : [ "\"Tobacco smoking status code\"" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
@@ -9551,20 +9554,17 @@ module.exports['Equivalent'] = {
                "type" : "Equivalent",
                "operand" : [ {
                   "localId" : "258",
-                  "name" : "Tobacco smoking status",
-                  "type" : "ConceptRef"
+                  "name" : "Tobacco smoking status code",
+                  "type" : "CodeRef"
                }, {
-                  "type" : "ToConcept",
-                  "operand" : {
-                     "localId" : "259",
-                     "name" : "Tobacco smoking status code clone",
-                     "type" : "CodeRef"
-                  }
+                  "localId" : "259",
+                  "name" : "Tobacco smoking status code clone",
+                  "type" : "CodeRef"
                } ]
             }
          }, {
             "localId" : "265",
-            "name" : "SameConceptAndConcept",
+            "name" : "SameCodeAndConcept",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -9572,20 +9572,20 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "265",
                   "s" : [ {
-                     "value" : [ "define ","SameConceptAndConcept",": " ]
+                     "value" : [ "define ","SameCodeAndConcept",": " ]
                   }, {
                      "r" : "264",
                      "s" : [ {
                         "r" : "262",
                         "s" : [ {
-                           "value" : [ "\"Tobacco smoking status\"" ]
+                           "value" : [ "\"Tobacco smoking status code clone\"" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
                         "r" : "263",
                         "s" : [ {
-                           "value" : [ "\"Tobacco smoking status clone\"" ]
+                           "value" : [ "\"Tobacco smoking status\"" ]
                         } ]
                      } ]
                   } ]
@@ -9595,18 +9595,21 @@ module.exports['Equivalent'] = {
                "localId" : "264",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "262",
-                  "name" : "Tobacco smoking status",
-                  "type" : "ConceptRef"
+                  "type" : "ToConcept",
+                  "operand" : {
+                     "localId" : "262",
+                     "name" : "Tobacco smoking status code clone",
+                     "type" : "CodeRef"
+                  }
                }, {
                   "localId" : "263",
-                  "name" : "Tobacco smoking status clone",
+                  "name" : "Tobacco smoking status",
                   "type" : "ConceptRef"
                } ]
             }
          }, {
             "localId" : "269",
-            "name" : "DiffCodeAndCode",
+            "name" : "SameConceptAndCode",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -9614,20 +9617,20 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "269",
                   "s" : [ {
-                     "value" : [ "define ","DiffCodeAndCode",": " ]
+                     "value" : [ "define ","SameConceptAndCode",": " ]
                   }, {
                      "r" : "268",
                      "s" : [ {
                         "r" : "266",
                         "s" : [ {
-                           "value" : [ "\"Tobacco smoking status code\"" ]
+                           "value" : [ "\"Tobacco smoking status\"" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
                         "r" : "267",
                         "s" : [ {
-                           "value" : [ "\"Total Score [AUDIT-C] code\"" ]
+                           "value" : [ "\"Tobacco smoking status code clone\"" ]
                         } ]
                      } ]
                   } ]
@@ -9638,17 +9641,20 @@ module.exports['Equivalent'] = {
                "type" : "Equivalent",
                "operand" : [ {
                   "localId" : "266",
-                  "name" : "Tobacco smoking status code",
-                  "type" : "CodeRef"
+                  "name" : "Tobacco smoking status",
+                  "type" : "ConceptRef"
                }, {
-                  "localId" : "267",
-                  "name" : "Total Score [AUDIT-C] code",
-                  "type" : "CodeRef"
+                  "type" : "ToConcept",
+                  "operand" : {
+                     "localId" : "267",
+                     "name" : "Tobacco smoking status code clone",
+                     "type" : "CodeRef"
+                  }
                } ]
             }
          }, {
             "localId" : "273",
-            "name" : "DiffCodeAndConcept",
+            "name" : "SameConceptAndConcept",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -9656,20 +9662,20 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "273",
                   "s" : [ {
-                     "value" : [ "define ","DiffCodeAndConcept",": " ]
+                     "value" : [ "define ","SameConceptAndConcept",": " ]
                   }, {
                      "r" : "272",
                      "s" : [ {
                         "r" : "270",
                         "s" : [ {
-                           "value" : [ "\"Tobacco smoking status code clone\"" ]
+                           "value" : [ "\"Tobacco smoking status\"" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
                         "r" : "271",
                         "s" : [ {
-                           "value" : [ "\"Total Score [AUDIT-C]\"" ]
+                           "value" : [ "\"Tobacco smoking status clone\"" ]
                         } ]
                      } ]
                   } ]
@@ -9679,21 +9685,18 @@ module.exports['Equivalent'] = {
                "localId" : "272",
                "type" : "Equivalent",
                "operand" : [ {
-                  "type" : "ToConcept",
-                  "operand" : {
-                     "localId" : "270",
-                     "name" : "Tobacco smoking status code clone",
-                     "type" : "CodeRef"
-                  }
+                  "localId" : "270",
+                  "name" : "Tobacco smoking status",
+                  "type" : "ConceptRef"
                }, {
                   "localId" : "271",
-                  "name" : "Total Score [AUDIT-C]",
+                  "name" : "Tobacco smoking status clone",
                   "type" : "ConceptRef"
                } ]
             }
          }, {
             "localId" : "277",
-            "name" : "DiffConceptAndCode",
+            "name" : "DiffCodeAndCode",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -9701,13 +9704,13 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "277",
                   "s" : [ {
-                     "value" : [ "define ","DiffConceptAndCode",": " ]
+                     "value" : [ "define ","DiffCodeAndCode",": " ]
                   }, {
                      "r" : "276",
                      "s" : [ {
                         "r" : "274",
                         "s" : [ {
-                           "value" : [ "\"Tobacco smoking status\"" ]
+                           "value" : [ "\"Tobacco smoking status code\"" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
@@ -9725,20 +9728,17 @@ module.exports['Equivalent'] = {
                "type" : "Equivalent",
                "operand" : [ {
                   "localId" : "274",
-                  "name" : "Tobacco smoking status",
-                  "type" : "ConceptRef"
+                  "name" : "Tobacco smoking status code",
+                  "type" : "CodeRef"
                }, {
-                  "type" : "ToConcept",
-                  "operand" : {
-                     "localId" : "275",
-                     "name" : "Total Score [AUDIT-C] code",
-                     "type" : "CodeRef"
-                  }
+                  "localId" : "275",
+                  "name" : "Total Score [AUDIT-C] code",
+                  "type" : "CodeRef"
                } ]
             }
          }, {
             "localId" : "281",
-            "name" : "DiffConceptAndConcept",
+            "name" : "DiffCodeAndConcept",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -9746,13 +9746,13 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "281",
                   "s" : [ {
-                     "value" : [ "define ","DiffConceptAndConcept",": " ]
+                     "value" : [ "define ","DiffCodeAndConcept",": " ]
                   }, {
                      "r" : "280",
                      "s" : [ {
                         "r" : "278",
                         "s" : [ {
-                           "value" : [ "\"Tobacco smoking status\"" ]
+                           "value" : [ "\"Tobacco smoking status code clone\"" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
@@ -9769,9 +9769,12 @@ module.exports['Equivalent'] = {
                "localId" : "280",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "278",
-                  "name" : "Tobacco smoking status",
-                  "type" : "ConceptRef"
+                  "type" : "ToConcept",
+                  "operand" : {
+                     "localId" : "278",
+                     "name" : "Tobacco smoking status code clone",
+                     "type" : "CodeRef"
+                  }
                }, {
                   "localId" : "279",
                   "name" : "Total Score [AUDIT-C]",
@@ -9779,27 +9782,114 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
-            "localId" : "301",
+            "localId" : "285",
+            "name" : "DiffConceptAndCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "285",
+                  "s" : [ {
+                     "value" : [ "define ","DiffConceptAndCode",": " ]
+                  }, {
+                     "r" : "284",
+                     "s" : [ {
+                        "r" : "282",
+                        "s" : [ {
+                           "value" : [ "\"Tobacco smoking status\"" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","~"," " ]
+                     }, {
+                        "r" : "283",
+                        "s" : [ {
+                           "value" : [ "\"Total Score [AUDIT-C] code\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "284",
+               "type" : "Equivalent",
+               "operand" : [ {
+                  "localId" : "282",
+                  "name" : "Tobacco smoking status",
+                  "type" : "ConceptRef"
+               }, {
+                  "type" : "ToConcept",
+                  "operand" : {
+                     "localId" : "283",
+                     "name" : "Total Score [AUDIT-C] code",
+                     "type" : "CodeRef"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "289",
+            "name" : "DiffConceptAndConcept",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "289",
+                  "s" : [ {
+                     "value" : [ "define ","DiffConceptAndConcept",": " ]
+                  }, {
+                     "r" : "288",
+                     "s" : [ {
+                        "r" : "286",
+                        "s" : [ {
+                           "value" : [ "\"Tobacco smoking status\"" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","~"," " ]
+                     }, {
+                        "r" : "287",
+                        "s" : [ {
+                           "value" : [ "\"Total Score [AUDIT-C]\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "288",
+               "type" : "Equivalent",
+               "operand" : [ {
+                  "localId" : "286",
+                  "name" : "Tobacco smoking status",
+                  "type" : "ConceptRef"
+               }, {
+                  "localId" : "287",
+                  "name" : "Total Score [AUDIT-C]",
+                  "type" : "ConceptRef"
+               } ]
+            }
+         }, {
+            "localId" : "309",
             "name" : "EqDateTimes",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "301",
+                  "r" : "309",
                   "s" : [ {
                      "value" : [ "define ","EqDateTimes",": " ]
                   }, {
-                     "r" : "300",
+                     "r" : "308",
                      "s" : [ {
-                        "r" : "290",
+                        "r" : "298",
                         "s" : [ {
-                           "r" : "282",
+                           "r" : "290",
                            "value" : [ "DateTime","(","2000",", ","3",", ","15",", ","13",", ","30",", ","25",", ","200",", " ]
                         }, {
-                           "r" : "289",
+                           "r" : "297",
                            "s" : [ {
-                              "r" : "289",
+                              "r" : "297",
                               "value" : [ "+","1.0" ]
                            } ]
                         }, {
@@ -9808,14 +9898,14 @@ module.exports['Equivalent'] = {
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "299",
+                        "r" : "307",
                         "s" : [ {
-                           "r" : "291",
+                           "r" : "299",
                            "value" : [ "DateTime","(","2000",", ","3",", ","15",", ","13",", ","30",", ","25",", ","200",", " ]
                         }, {
-                           "r" : "298",
+                           "r" : "306",
                            "s" : [ {
-                              "r" : "298",
+                              "r" : "306",
                               "value" : [ "+","1.0" ]
                            } ]
                         }, {
@@ -9826,106 +9916,106 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "300",
+               "localId" : "308",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "290",
+                  "localId" : "298",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "282",
+                     "localId" : "290",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "283",
+                     "localId" : "291",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "284",
+                     "localId" : "292",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "15",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "285",
+                     "localId" : "293",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "13",
                      "type" : "Literal"
                   },
                   "minute" : {
-                     "localId" : "286",
+                     "localId" : "294",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "30",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "287",
+                     "localId" : "295",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "25",
                      "type" : "Literal"
                   },
                   "millisecond" : {
-                     "localId" : "288",
+                     "localId" : "296",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "200",
                      "type" : "Literal"
                   },
                   "timezoneOffset" : {
-                     "localId" : "289",
+                     "localId" : "297",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "1.0",
                      "type" : "Literal"
                   }
                }, {
-                  "localId" : "299",
+                  "localId" : "307",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "291",
+                     "localId" : "299",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "292",
+                     "localId" : "300",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "293",
+                     "localId" : "301",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "15",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "294",
+                     "localId" : "302",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "13",
                      "type" : "Literal"
                   },
                   "minute" : {
-                     "localId" : "295",
+                     "localId" : "303",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "30",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "296",
+                     "localId" : "304",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "25",
                      "type" : "Literal"
                   },
                   "millisecond" : {
-                     "localId" : "297",
+                     "localId" : "305",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "200",
                      "type" : "Literal"
                   },
                   "timezoneOffset" : {
-                     "localId" : "298",
+                     "localId" : "306",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "1.0",
                      "type" : "Literal"
@@ -9933,27 +10023,27 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
-            "localId" : "321",
+            "localId" : "329",
             "name" : "UneqDateTimes",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "321",
+                  "r" : "329",
                   "s" : [ {
                      "value" : [ "define ","UneqDateTimes",": " ]
                   }, {
-                     "r" : "320",
+                     "r" : "328",
                      "s" : [ {
-                        "r" : "310",
+                        "r" : "318",
                         "s" : [ {
-                           "r" : "302",
+                           "r" : "310",
                            "value" : [ "DateTime","(","2000",", ","3",", ","15",", ","13",", ","30",", ","25",", ","200",", " ]
                         }, {
-                           "r" : "309",
+                           "r" : "317",
                            "s" : [ {
-                              "r" : "309",
+                              "r" : "317",
                               "value" : [ "+","1.0" ]
                            } ]
                         }, {
@@ -9962,14 +10052,14 @@ module.exports['Equivalent'] = {
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "319",
+                        "r" : "327",
                         "s" : [ {
-                           "r" : "311",
+                           "r" : "319",
                            "value" : [ "DateTime","(","2000",", ","3",", ","15",", ","13",", ","30",", ","25",", ","201",", " ]
                         }, {
-                           "r" : "318",
+                           "r" : "326",
                            "s" : [ {
-                              "r" : "318",
+                              "r" : "326",
                               "value" : [ "+","1.0" ]
                            } ]
                         }, {
@@ -9980,106 +10070,106 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "320",
+               "localId" : "328",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "310",
+                  "localId" : "318",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "302",
+                     "localId" : "310",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "303",
+                     "localId" : "311",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "304",
+                     "localId" : "312",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "15",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "305",
+                     "localId" : "313",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "13",
                      "type" : "Literal"
                   },
                   "minute" : {
-                     "localId" : "306",
+                     "localId" : "314",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "30",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "307",
+                     "localId" : "315",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "25",
                      "type" : "Literal"
                   },
                   "millisecond" : {
-                     "localId" : "308",
+                     "localId" : "316",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "200",
                      "type" : "Literal"
                   },
                   "timezoneOffset" : {
-                     "localId" : "309",
+                     "localId" : "317",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "1.0",
                      "type" : "Literal"
                   }
                }, {
-                  "localId" : "319",
+                  "localId" : "327",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "311",
+                     "localId" : "319",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "312",
+                     "localId" : "320",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "313",
+                     "localId" : "321",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "15",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "314",
+                     "localId" : "322",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "13",
                      "type" : "Literal"
                   },
                   "minute" : {
-                     "localId" : "315",
+                     "localId" : "323",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "30",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "316",
+                     "localId" : "324",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "25",
                      "type" : "Literal"
                   },
                   "millisecond" : {
-                     "localId" : "317",
+                     "localId" : "325",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "201",
                      "type" : "Literal"
                   },
                   "timezoneOffset" : {
-                     "localId" : "318",
+                     "localId" : "326",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "1.0",
                      "type" : "Literal"
@@ -10087,27 +10177,27 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
-            "localId" : "341",
+            "localId" : "349",
             "name" : "EqDateTimesTZ",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "341",
+                  "r" : "349",
                   "s" : [ {
                      "value" : [ "define ","EqDateTimesTZ",": " ]
                   }, {
-                     "r" : "340",
+                     "r" : "348",
                      "s" : [ {
-                        "r" : "330",
+                        "r" : "338",
                         "s" : [ {
-                           "r" : "322",
+                           "r" : "330",
                            "value" : [ "DateTime","(","2000",", ","3",", ","15",", ","23",", ","30",", ","25",", ","200",", " ]
                         }, {
-                           "r" : "329",
+                           "r" : "337",
                            "s" : [ {
-                              "r" : "329",
+                              "r" : "337",
                               "value" : [ "+","1.0" ]
                            } ]
                         }, {
@@ -10116,14 +10206,14 @@ module.exports['Equivalent'] = {
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "339",
+                        "r" : "347",
                         "s" : [ {
-                           "r" : "331",
+                           "r" : "339",
                            "value" : [ "DateTime","(","2000",", ","3",", ","16",", ","2",", ","30",", ","25",", ","200",", " ]
                         }, {
-                           "r" : "338",
+                           "r" : "346",
                            "s" : [ {
-                              "r" : "338",
+                              "r" : "346",
                               "value" : [ "+","4.0" ]
                            } ]
                         }, {
@@ -10134,106 +10224,106 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "340",
+               "localId" : "348",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "330",
+                  "localId" : "338",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "322",
+                     "localId" : "330",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "323",
+                     "localId" : "331",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "324",
+                     "localId" : "332",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "15",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "325",
+                     "localId" : "333",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "23",
                      "type" : "Literal"
                   },
                   "minute" : {
-                     "localId" : "326",
+                     "localId" : "334",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "30",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "327",
+                     "localId" : "335",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "25",
                      "type" : "Literal"
                   },
                   "millisecond" : {
-                     "localId" : "328",
+                     "localId" : "336",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "200",
                      "type" : "Literal"
                   },
                   "timezoneOffset" : {
-                     "localId" : "329",
+                     "localId" : "337",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "1.0",
                      "type" : "Literal"
                   }
                }, {
-                  "localId" : "339",
+                  "localId" : "347",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "331",
+                     "localId" : "339",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "332",
+                     "localId" : "340",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "333",
+                     "localId" : "341",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "16",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "334",
+                     "localId" : "342",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   },
                   "minute" : {
-                     "localId" : "335",
+                     "localId" : "343",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "30",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "336",
+                     "localId" : "344",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "25",
                      "type" : "Literal"
                   },
                   "millisecond" : {
-                     "localId" : "337",
+                     "localId" : "345",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "200",
                      "type" : "Literal"
                   },
                   "timezoneOffset" : {
-                     "localId" : "338",
+                     "localId" : "346",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "4.0",
                      "type" : "Literal"
@@ -10241,27 +10331,27 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
-            "localId" : "361",
+            "localId" : "369",
             "name" : "UneqDateTimesTZ",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "361",
+                  "r" : "369",
                   "s" : [ {
                      "value" : [ "define ","UneqDateTimesTZ",": " ]
                   }, {
-                     "r" : "360",
+                     "r" : "368",
                      "s" : [ {
-                        "r" : "350",
+                        "r" : "358",
                         "s" : [ {
-                           "r" : "342",
+                           "r" : "350",
                            "value" : [ "DateTime","(","2000",", ","3",", ","15",", ","13",", ","30",", ","25",", ","200",", " ]
                         }, {
-                           "r" : "349",
+                           "r" : "357",
                            "s" : [ {
-                              "r" : "349",
+                              "r" : "357",
                               "value" : [ "+","1.0" ]
                            } ]
                         }, {
@@ -10270,14 +10360,14 @@ module.exports['Equivalent'] = {
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "359",
+                        "r" : "367",
                         "s" : [ {
-                           "r" : "351",
+                           "r" : "359",
                            "value" : [ "DateTime","(","2000",", ","3",", ","15",", ","13",", ","30",", ","25",", ","200",", " ]
                         }, {
-                           "r" : "358",
+                           "r" : "366",
                            "s" : [ {
-                              "r" : "358",
+                              "r" : "366",
                               "value" : [ "+","2.0" ]
                            } ]
                         }, {
@@ -10288,106 +10378,106 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "360",
+               "localId" : "368",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "350",
+                  "localId" : "358",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "342",
+                     "localId" : "350",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "343",
+                     "localId" : "351",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "344",
+                     "localId" : "352",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "15",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "345",
+                     "localId" : "353",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "13",
                      "type" : "Literal"
                   },
                   "minute" : {
-                     "localId" : "346",
+                     "localId" : "354",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "30",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "347",
+                     "localId" : "355",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "25",
                      "type" : "Literal"
                   },
                   "millisecond" : {
-                     "localId" : "348",
+                     "localId" : "356",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "200",
                      "type" : "Literal"
                   },
                   "timezoneOffset" : {
-                     "localId" : "349",
+                     "localId" : "357",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "1.0",
                      "type" : "Literal"
                   }
                }, {
-                  "localId" : "359",
+                  "localId" : "367",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "351",
+                     "localId" : "359",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "352",
+                     "localId" : "360",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "353",
+                     "localId" : "361",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "15",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "354",
+                     "localId" : "362",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "13",
                      "type" : "Literal"
                   },
                   "minute" : {
-                     "localId" : "355",
+                     "localId" : "363",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "30",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "356",
+                     "localId" : "364",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "25",
                      "type" : "Literal"
                   },
                   "millisecond" : {
-                     "localId" : "357",
+                     "localId" : "365",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "200",
                      "type" : "Literal"
                   },
                   "timezoneOffset" : {
-                     "localId" : "358",
+                     "localId" : "366",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "2.0",
                      "type" : "Literal"
@@ -10395,30 +10485,30 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
-            "localId" : "378",
+            "localId" : "386",
             "name" : "EqDateTimesNullMs",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "378",
+                  "r" : "386",
                   "s" : [ {
                      "value" : [ "define ","EqDateTimesNullMs",": " ]
                   }, {
-                     "r" : "377",
+                     "r" : "385",
                      "s" : [ {
-                        "r" : "369",
+                        "r" : "377",
                         "s" : [ {
-                           "r" : "362",
+                           "r" : "370",
                            "value" : [ "DateTime","(","2000",", ","3",", ","15",", ","13",", ","30",", ","25",", ","0",")" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "376",
+                        "r" : "384",
                         "s" : [ {
-                           "r" : "370",
+                           "r" : "378",
                            "value" : [ "DateTime","(","2000",", ","3",", ","15",", ","13",", ","30",", ","25",")" ]
                         } ]
                      } ]
@@ -10426,55 +10516,10 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "377",
+               "localId" : "385",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "369",
-                  "type" : "DateTime",
-                  "year" : {
-                     "localId" : "362",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2000",
-                     "type" : "Literal"
-                  },
-                  "month" : {
-                     "localId" : "363",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "3",
-                     "type" : "Literal"
-                  },
-                  "day" : {
-                     "localId" : "364",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "15",
-                     "type" : "Literal"
-                  },
-                  "hour" : {
-                     "localId" : "365",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "13",
-                     "type" : "Literal"
-                  },
-                  "minute" : {
-                     "localId" : "366",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "30",
-                     "type" : "Literal"
-                  },
-                  "second" : {
-                     "localId" : "367",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "25",
-                     "type" : "Literal"
-                  },
-                  "millisecond" : {
-                     "localId" : "368",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
-                     "type" : "Literal"
-                  }
-               }, {
-                  "localId" : "376",
+                  "localId" : "377",
                   "type" : "DateTime",
                   "year" : {
                      "localId" : "370",
@@ -10511,34 +10556,79 @@ module.exports['Equivalent'] = {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "25",
                      "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "localId" : "376",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "384",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "378",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2000",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "379",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "380",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "15",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "localId" : "381",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "13",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "localId" : "382",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "30",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "localId" : "383",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "25",
+                     "type" : "Literal"
                   }
                } ]
             }
          }, {
-            "localId" : "395",
+            "localId" : "403",
             "name" : "EqDateTimesNullOtherMs",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "395",
+                  "r" : "403",
                   "s" : [ {
                      "value" : [ "define ","EqDateTimesNullOtherMs",": " ]
                   }, {
-                     "r" : "394",
+                     "r" : "402",
                      "s" : [ {
-                        "r" : "385",
+                        "r" : "393",
                         "s" : [ {
-                           "r" : "379",
+                           "r" : "387",
                            "value" : [ "DateTime","(","2000",", ","3",", ","15",", ","13",", ","30",", ","25",")" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "393",
+                        "r" : "401",
                         "s" : [ {
-                           "r" : "386",
+                           "r" : "394",
                            "value" : [ "DateTime","(","2000",", ","3",", ","15",", ","13",", ","30",", ","25",", ","0",")" ]
                         } ]
                      } ]
@@ -10546,88 +10636,88 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "394",
+               "localId" : "402",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "385",
+                  "localId" : "393",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "379",
+                     "localId" : "387",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "380",
+                     "localId" : "388",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "381",
+                     "localId" : "389",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "15",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "382",
+                     "localId" : "390",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "13",
                      "type" : "Literal"
                   },
                   "minute" : {
-                     "localId" : "383",
+                     "localId" : "391",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "30",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "384",
+                     "localId" : "392",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "25",
                      "type" : "Literal"
                   }
                }, {
-                  "localId" : "393",
+                  "localId" : "401",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "386",
+                     "localId" : "394",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "387",
+                     "localId" : "395",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "388",
+                     "localId" : "396",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "15",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "389",
+                     "localId" : "397",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "13",
                      "type" : "Literal"
                   },
                   "minute" : {
-                     "localId" : "390",
+                     "localId" : "398",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "30",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "391",
+                     "localId" : "399",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "25",
                      "type" : "Literal"
                   },
                   "millisecond" : {
-                     "localId" : "392",
+                     "localId" : "400",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
                      "type" : "Literal"
@@ -10635,30 +10725,30 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
-            "localId" : "405",
+            "localId" : "413",
             "name" : "EqDateTimesOnlyDate",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "405",
+                  "r" : "413",
                   "s" : [ {
                      "value" : [ "define ","EqDateTimesOnlyDate",": " ]
                   }, {
-                     "r" : "404",
+                     "r" : "412",
                      "s" : [ {
-                        "r" : "399",
+                        "r" : "407",
                         "s" : [ {
-                           "r" : "396",
+                           "r" : "404",
                            "value" : [ "DateTime","(","2000",", ","3",", ","15",")" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "403",
+                        "r" : "411",
                         "s" : [ {
-                           "r" : "400",
+                           "r" : "408",
                            "value" : [ "DateTime","(","2000",", ","3",", ","15",")" ]
                         } ]
                      } ]
@@ -10666,46 +10756,46 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "404",
+               "localId" : "412",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "399",
+                  "localId" : "407",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "396",
+                     "localId" : "404",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "397",
+                     "localId" : "405",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "398",
+                     "localId" : "406",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "15",
                      "type" : "Literal"
                   }
                }, {
-                  "localId" : "403",
+                  "localId" : "411",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "400",
+                     "localId" : "408",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "401",
+                     "localId" : "409",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "402",
+                     "localId" : "410",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "15",
                      "type" : "Literal"
@@ -10713,30 +10803,30 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
-            "localId" : "415",
+            "localId" : "423",
             "name" : "UneqDateTimesOnlyDate",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "415",
+                  "r" : "423",
                   "s" : [ {
                      "value" : [ "define ","UneqDateTimesOnlyDate",": " ]
                   }, {
-                     "r" : "414",
+                     "r" : "422",
                      "s" : [ {
-                        "r" : "409",
+                        "r" : "417",
                         "s" : [ {
-                           "r" : "406",
+                           "r" : "414",
                            "value" : [ "DateTime","(","2000",", ","3",", ","14",")" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "413",
+                        "r" : "421",
                         "s" : [ {
-                           "r" : "410",
+                           "r" : "418",
                            "value" : [ "DateTime","(","2000",", ","3",", ","15",")" ]
                         } ]
                      } ]
@@ -10744,46 +10834,46 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "414",
+               "localId" : "422",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "409",
+                  "localId" : "417",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "406",
+                     "localId" : "414",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "407",
+                     "localId" : "415",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "408",
+                     "localId" : "416",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "14",
                      "type" : "Literal"
                   }
                }, {
-                  "localId" : "413",
+                  "localId" : "421",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "410",
+                     "localId" : "418",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "411",
+                     "localId" : "419",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "412",
+                     "localId" : "420",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "15",
                      "type" : "Literal"
@@ -10791,30 +10881,30 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
-            "localId" : "428",
+            "localId" : "436",
             "name" : "PossiblyEqDateTimesOnlyDateOnOne",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "428",
+                  "r" : "436",
                   "s" : [ {
                      "value" : [ "define ","PossiblyEqDateTimesOnlyDateOnOne",": " ]
                   }, {
-                     "r" : "427",
+                     "r" : "435",
                      "s" : [ {
-                        "r" : "419",
+                        "r" : "427",
                         "s" : [ {
-                           "r" : "416",
+                           "r" : "424",
                            "value" : [ "DateTime","(","2000",", ","3",", ","13",")" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "426",
+                        "r" : "434",
                         "s" : [ {
-                           "r" : "420",
+                           "r" : "428",
                            "value" : [ "DateTime","(","2000",", ","3",", ","13",", ","13",", ","43",", ","32",")" ]
                         } ]
                      } ]
@@ -10822,169 +10912,73 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "427",
+               "localId" : "435",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "419",
+                  "localId" : "427",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "416",
+                     "localId" : "424",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "417",
+                     "localId" : "425",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "418",
+                     "localId" : "426",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "13",
                      "type" : "Literal"
                   }
                }, {
-                  "localId" : "426",
+                  "localId" : "434",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "420",
+                     "localId" : "428",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "421",
+                     "localId" : "429",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "422",
+                     "localId" : "430",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "13",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "423",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "13",
-                     "type" : "Literal"
-                  },
-                  "minute" : {
-                     "localId" : "424",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "43",
-                     "type" : "Literal"
-                  },
-                  "second" : {
-                     "localId" : "425",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "32",
-                     "type" : "Literal"
-                  }
-               } ]
-            }
-         }, {
-            "localId" : "441",
-            "name" : "UneqDateTimesOnlyDateOnOne",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "441",
-                  "s" : [ {
-                     "value" : [ "define ","UneqDateTimesOnlyDateOnOne",": " ]
-                  }, {
-                     "r" : "440",
-                     "s" : [ {
-                        "r" : "435",
-                        "s" : [ {
-                           "r" : "429",
-                           "value" : [ "DateTime","(","2000",", ","4",", ","13",", ","12",", ","43",", ","32",")" ]
-                        } ]
-                     }, {
-                        "value" : [ " ","~"," " ]
-                     }, {
-                        "r" : "439",
-                        "s" : [ {
-                           "r" : "436",
-                           "value" : [ "DateTime","(","2000",", ","3",", ","13",")" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "440",
-               "type" : "Equivalent",
-               "operand" : [ {
-                  "localId" : "435",
-                  "type" : "DateTime",
-                  "year" : {
-                     "localId" : "429",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2000",
-                     "type" : "Literal"
-                  },
-                  "month" : {
-                     "localId" : "430",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "4",
-                     "type" : "Literal"
-                  },
-                  "day" : {
                      "localId" : "431",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "13",
                      "type" : "Literal"
                   },
-                  "hour" : {
-                     "localId" : "432",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "12",
-                     "type" : "Literal"
-                  },
                   "minute" : {
-                     "localId" : "433",
+                     "localId" : "432",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "43",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "434",
+                     "localId" : "433",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "32",
-                     "type" : "Literal"
-                  }
-               }, {
-                  "localId" : "439",
-                  "type" : "DateTime",
-                  "year" : {
-                     "localId" : "436",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2000",
-                     "type" : "Literal"
-                  },
-                  "month" : {
-                     "localId" : "437",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "3",
-                     "type" : "Literal"
-                  },
-                  "day" : {
-                     "localId" : "438",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "13",
                      "type" : "Literal"
                   }
                } ]
             }
          }, {
             "localId" : "449",
-            "name" : "PossiblyEqualDateTimes",
+            "name" : "UneqDateTimesOnlyDateOnOne",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -10992,22 +10986,22 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "449",
                   "s" : [ {
-                     "value" : [ "define ","PossiblyEqualDateTimes",": " ]
+                     "value" : [ "define ","UneqDateTimesOnlyDateOnOne",": " ]
                   }, {
                      "r" : "448",
                      "s" : [ {
-                        "r" : "445",
+                        "r" : "443",
                         "s" : [ {
-                           "r" : "442",
-                           "value" : [ "DateTime","(","2000",", ","3",", ","15",")" ]
+                           "r" : "437",
+                           "value" : [ "DateTime","(","2000",", ","4",", ","13",", ","12",", ","43",", ","32",")" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
                         "r" : "447",
                         "s" : [ {
-                           "r" : "446",
-                           "value" : [ "DateTime","(","2000",")" ]
+                           "r" : "444",
+                           "value" : [ "DateTime","(","2000",", ","3",", ","13",")" ]
                         } ]
                      } ]
                   } ]
@@ -11017,50 +11011,80 @@ module.exports['Equivalent'] = {
                "localId" : "448",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "445",
+                  "localId" : "443",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "442",
+                     "localId" : "437",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "443",
+                     "localId" : "438",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "3",
+                     "value" : "4",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "444",
+                     "localId" : "439",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "15",
+                     "value" : "13",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "localId" : "440",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "12",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "localId" : "441",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "43",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "localId" : "442",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "32",
                      "type" : "Literal"
                   }
                }, {
                   "localId" : "447",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "446",
+                     "localId" : "444",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "445",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "446",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "13",
                      "type" : "Literal"
                   }
                } ]
             }
          }, {
-            "localId" : "458",
-            "name" : "ImpossiblyEqualDateTimes",
+            "localId" : "457",
+            "name" : "PossiblyEqualDateTimes",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "458",
+                  "r" : "457",
                   "s" : [ {
-                     "value" : [ "define ","ImpossiblyEqualDateTimes",": " ]
+                     "value" : [ "define ","PossiblyEqualDateTimes",": " ]
                   }, {
-                     "r" : "457",
+                     "r" : "456",
                      "s" : [ {
                         "r" : "453",
                         "s" : [ {
@@ -11070,17 +11094,17 @@ module.exports['Equivalent'] = {
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "456",
+                        "r" : "455",
                         "s" : [ {
                            "r" : "454",
-                           "value" : [ "DateTime","(","2000",", ","4",")" ]
+                           "value" : [ "DateTime","(","2000",")" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "457",
+               "localId" : "456",
                "type" : "Equivalent",
                "operand" : [ {
                   "localId" : "453",
@@ -11104,16 +11128,82 @@ module.exports['Equivalent'] = {
                      "type" : "Literal"
                   }
                }, {
-                  "localId" : "456",
+                  "localId" : "455",
                   "type" : "DateTime",
                   "year" : {
                      "localId" : "454",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "466",
+            "name" : "ImpossiblyEqualDateTimes",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "466",
+                  "s" : [ {
+                     "value" : [ "define ","ImpossiblyEqualDateTimes",": " ]
+                  }, {
+                     "r" : "465",
+                     "s" : [ {
+                        "r" : "461",
+                        "s" : [ {
+                           "r" : "458",
+                           "value" : [ "DateTime","(","2000",", ","3",", ","15",")" ]
+                        } ]
+                     }, {
+                        "value" : [ " ","~"," " ]
+                     }, {
+                        "r" : "464",
+                        "s" : [ {
+                           "r" : "462",
+                           "value" : [ "DateTime","(","2000",", ","4",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "465",
+               "type" : "Equivalent",
+               "operand" : [ {
+                  "localId" : "461",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "458",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2000",
+                     "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "455",
+                     "localId" : "459",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "460",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "15",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "464",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "462",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2000",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "463",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "4",
                      "type" : "Literal"
@@ -11121,30 +11211,30 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
-            "localId" : "468",
+            "localId" : "476",
             "name" : "DateAndDateTimeNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "468",
+                  "r" : "476",
                   "s" : [ {
                      "value" : [ "define ","DateAndDateTimeNull",": " ]
                   }, {
-                     "r" : "467",
+                     "r" : "475",
                      "s" : [ {
-                        "r" : "462",
+                        "r" : "470",
                         "s" : [ {
-                           "r" : "459",
+                           "r" : "467",
                            "value" : [ "Date","(","2000",", ","3",", ","13",")" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "466",
+                        "r" : "474",
                         "s" : [ {
-                           "r" : "463",
+                           "r" : "471",
                            "value" : [ "DateTime","(","2000",", ","3",", ","13",")" ]
                         } ]
                      } ]
@@ -11152,49 +11242,49 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "467",
+               "localId" : "475",
                "type" : "Equivalent",
                "operand" : [ {
                   "type" : "ToDateTime",
                   "operand" : {
-                     "localId" : "462",
+                     "localId" : "470",
                      "type" : "Date",
                      "year" : {
-                        "localId" : "459",
+                        "localId" : "467",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2000",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "460",
+                        "localId" : "468",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "461",
+                        "localId" : "469",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "13",
                         "type" : "Literal"
                      }
                   }
                }, {
-                  "localId" : "466",
+                  "localId" : "474",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "463",
+                     "localId" : "471",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "464",
+                     "localId" : "472",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "465",
+                     "localId" : "473",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "13",
                      "type" : "Literal"
@@ -11202,30 +11292,30 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
-            "localId" : "478",
+            "localId" : "486",
             "name" : "DateAndDateTimeNotEqual",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "478",
+                  "r" : "486",
                   "s" : [ {
                      "value" : [ "define ","DateAndDateTimeNotEqual",": " ]
                   }, {
-                     "r" : "477",
+                     "r" : "485",
                      "s" : [ {
-                        "r" : "472",
+                        "r" : "480",
                         "s" : [ {
-                           "r" : "469",
+                           "r" : "477",
                            "value" : [ "Date","(","2000",", ","3",", ","13",")" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "476",
+                        "r" : "484",
                         "s" : [ {
-                           "r" : "473",
+                           "r" : "481",
                            "value" : [ "DateTime","(","2000",", ","3",", ","12",")" ]
                         } ]
                      } ]
@@ -11233,49 +11323,49 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "477",
+               "localId" : "485",
                "type" : "Equivalent",
                "operand" : [ {
                   "type" : "ToDateTime",
                   "operand" : {
-                     "localId" : "472",
+                     "localId" : "480",
                      "type" : "Date",
                      "year" : {
-                        "localId" : "469",
+                        "localId" : "477",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2000",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "470",
+                        "localId" : "478",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "471",
+                        "localId" : "479",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "13",
                         "type" : "Literal"
                      }
                   }
                }, {
-                  "localId" : "476",
+                  "localId" : "484",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "473",
+                     "localId" : "481",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "474",
+                     "localId" : "482",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "475",
+                     "localId" : "483",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "12",
                      "type" : "Literal"
@@ -11283,30 +11373,30 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
-            "localId" : "491",
+            "localId" : "499",
             "name" : "DateAndDateTimeUncertainFalse",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "491",
+                  "r" : "499",
                   "s" : [ {
                      "value" : [ "define ","DateAndDateTimeUncertainFalse",": " ]
                   }, {
-                     "r" : "490",
+                     "r" : "498",
                      "s" : [ {
-                        "r" : "482",
+                        "r" : "490",
                         "s" : [ {
-                           "r" : "479",
+                           "r" : "487",
                            "value" : [ "Date","(","2000",", ","3",", ","13",")" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "489",
+                        "r" : "497",
                         "s" : [ {
-                           "r" : "483",
+                           "r" : "491",
                            "value" : [ "DateTime","(","2000",", ","3",", ","13",", ","2",", ","4",", ","23",")" ]
                         } ]
                      } ]
@@ -11314,67 +11404,67 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "490",
+               "localId" : "498",
                "type" : "Equivalent",
                "operand" : [ {
                   "type" : "ToDateTime",
                   "operand" : {
-                     "localId" : "482",
+                     "localId" : "490",
                      "type" : "Date",
                      "year" : {
-                        "localId" : "479",
+                        "localId" : "487",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2000",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "480",
+                        "localId" : "488",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "481",
+                        "localId" : "489",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "13",
                         "type" : "Literal"
                      }
                   }
                }, {
-                  "localId" : "489",
+                  "localId" : "497",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "483",
+                     "localId" : "491",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "484",
+                     "localId" : "492",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "485",
+                     "localId" : "493",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "13",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "486",
+                     "localId" : "494",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   },
                   "minute" : {
-                     "localId" : "487",
+                     "localId" : "495",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "4",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "488",
+                     "localId" : "496",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "23",
                      "type" : "Literal"
@@ -11382,30 +11472,30 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
-            "localId" : "501",
+            "localId" : "509",
             "name" : "DateTimeAndDateNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "501",
+                  "r" : "509",
                   "s" : [ {
                      "value" : [ "define ","DateTimeAndDateNull",": " ]
                   }, {
-                     "r" : "500",
+                     "r" : "508",
                      "s" : [ {
-                        "r" : "495",
+                        "r" : "503",
                         "s" : [ {
-                           "r" : "492",
+                           "r" : "500",
                            "value" : [ "DateTime","(","2000",", ","3",", ","13",")" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "499",
+                        "r" : "507",
                         "s" : [ {
-                           "r" : "496",
+                           "r" : "504",
                            "value" : [ "Date","(","2000",", ","3",", ","13",")" ]
                         } ]
                      } ]
@@ -11413,25 +11503,25 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "500",
+               "localId" : "508",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "495",
+                  "localId" : "503",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "492",
+                     "localId" : "500",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "493",
+                     "localId" : "501",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "494",
+                     "localId" : "502",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "13",
                      "type" : "Literal"
@@ -11439,22 +11529,22 @@ module.exports['Equivalent'] = {
                }, {
                   "type" : "ToDateTime",
                   "operand" : {
-                     "localId" : "499",
+                     "localId" : "507",
                      "type" : "Date",
                      "year" : {
-                        "localId" : "496",
+                        "localId" : "504",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2000",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "497",
+                        "localId" : "505",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "498",
+                        "localId" : "506",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "13",
                         "type" : "Literal"
@@ -11463,30 +11553,30 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
-            "localId" : "511",
+            "localId" : "519",
             "name" : "DateTimeAndDateNotEqual",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "511",
+                  "r" : "519",
                   "s" : [ {
                      "value" : [ "define ","DateTimeAndDateNotEqual",": " ]
                   }, {
-                     "r" : "510",
+                     "r" : "518",
                      "s" : [ {
-                        "r" : "505",
+                        "r" : "513",
                         "s" : [ {
-                           "r" : "502",
+                           "r" : "510",
                            "value" : [ "DateTime","(","2000",", ","3",", ","12",")" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "509",
+                        "r" : "517",
                         "s" : [ {
-                           "r" : "506",
+                           "r" : "514",
                            "value" : [ "Date","(","2000",", ","3",", ","13",")" ]
                         } ]
                      } ]
@@ -11494,25 +11584,25 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "510",
+               "localId" : "518",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "505",
+                  "localId" : "513",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "502",
+                     "localId" : "510",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "503",
+                     "localId" : "511",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "504",
+                     "localId" : "512",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "12",
                      "type" : "Literal"
@@ -11520,22 +11610,22 @@ module.exports['Equivalent'] = {
                }, {
                   "type" : "ToDateTime",
                   "operand" : {
-                     "localId" : "509",
+                     "localId" : "517",
                      "type" : "Date",
                      "year" : {
-                        "localId" : "506",
+                        "localId" : "514",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2000",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "507",
+                        "localId" : "515",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "508",
+                        "localId" : "516",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "13",
                         "type" : "Literal"
@@ -11544,30 +11634,30 @@ module.exports['Equivalent'] = {
                } ]
             }
          }, {
-            "localId" : "524",
+            "localId" : "532",
             "name" : "DateTimeAndDateUncertainFalse",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "524",
+                  "r" : "532",
                   "s" : [ {
                      "value" : [ "define ","DateTimeAndDateUncertainFalse",": " ]
                   }, {
-                     "r" : "523",
+                     "r" : "531",
                      "s" : [ {
-                        "r" : "518",
+                        "r" : "526",
                         "s" : [ {
-                           "r" : "512",
+                           "r" : "520",
                            "value" : [ "DateTime","(","2000",", ","3",", ","13",", ","2",", ","4",", ","23",")" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
-                        "r" : "522",
+                        "r" : "530",
                         "s" : [ {
-                           "r" : "519",
+                           "r" : "527",
                            "value" : [ "Date","(","2000",", ","3",", ","13",")" ]
                         } ]
                      } ]
@@ -11575,43 +11665,43 @@ module.exports['Equivalent'] = {
                }
             } ],
             "expression" : {
-               "localId" : "523",
+               "localId" : "531",
                "type" : "Equivalent",
                "operand" : [ {
-                  "localId" : "518",
+                  "localId" : "526",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "512",
+                     "localId" : "520",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2000",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "513",
+                     "localId" : "521",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "514",
+                     "localId" : "522",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "13",
                      "type" : "Literal"
                   },
                   "hour" : {
-                     "localId" : "515",
+                     "localId" : "523",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   },
                   "minute" : {
-                     "localId" : "516",
+                     "localId" : "524",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "4",
                      "type" : "Literal"
                   },
                   "second" : {
-                     "localId" : "517",
+                     "localId" : "525",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "23",
                      "type" : "Literal"
@@ -11619,22 +11709,22 @@ module.exports['Equivalent'] = {
                }, {
                   "type" : "ToDateTime",
                   "operand" : {
-                     "localId" : "522",
+                     "localId" : "530",
                      "type" : "Date",
                      "year" : {
-                        "localId" : "519",
+                        "localId" : "527",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2000",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "520",
+                        "localId" : "528",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "521",
+                        "localId" : "529",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "13",
                         "type" : "Literal"
