@@ -755,6 +755,9 @@ describe 'Overlaps', ->
   it 'should reject non-overlaps (real)', ->
     @noOverlapsRealIvl.exec(@ctx).should.be.false()
 
+  it 'should return null for null value', ->
+    should(@overlapsIsNull.exec(@ctx)).be.null()
+
 describe 'OverlapsDateTime', ->
   @beforeEach ->
     setup @, data

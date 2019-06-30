@@ -546,6 +546,7 @@ define OverlapsBeforeRealIvl: Interval[1.234, 1.567] overlaps Interval[1.345, 1.
 define OverlapsAfterRealIvl: Interval[1.345, 1.678] overlaps Interval[1.234, 1.567]
 define OverlapsBoundaryRealIvl: Interval[1.0, 1.234] overlaps Interval[1.234, 2.0]
 define NoOverlapsRealIvl: Interval[1.0, 1.23456789) overlaps Interval[1.23456789, 2.0]
+define OverlapsIsNull: Interval[6, 10] overlaps (null as Interval<Integer>)
 
 // @Test: OverlapsDateTime
 define ivlA: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 6, 1, 0, 0, 0, 0))
