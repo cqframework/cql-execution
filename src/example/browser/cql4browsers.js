@@ -45910,6 +45910,8 @@
         return compareObjects(a, b, equivalent);
       case '[object String]':
         if (bClass === '[object String]') {
+          a = a.replace(/\s/g, ' ');
+          b = b.replace(/\s/g, ' ');
           return (a.localeCompare(b, 'en', {
             sensitivity: 'base'
           })) === 0;

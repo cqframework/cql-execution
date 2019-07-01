@@ -65,6 +65,8 @@ module.exports.equivalent = equivalent = (a, b) ->
       # Make sure b is also a string
       if bClass == '[object String]'
         # String equivalence is case- and locale insensitive
+        a = a.replace(/\s/g, ' ')
+        b = b.replace(/\s/g, ' ')
         return (a.localeCompare(b, 'en', {sensitivity: 'base'})) == 0
 
   return equals a, b

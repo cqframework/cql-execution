@@ -236,6 +236,21 @@ describe 'Equivalent', ->
   it 'should be true for FOO ~ foo', ->
     @caseInsensitiveStrings.exec(@ctx).should.be.true()
 
+  it 'should be true for foo bar ~ foo\tbar', ->
+    @whiteSpaceTabTrue.exec(@ctx).should.be.true()
+
+  it 'should be true for foo\tbar ~ foo\nbar', ->
+    @whiteSpaceTabReturnTrue.exec(@ctx).should.be.true()
+
+  it 'should be false for foo bar ~ foo\t\tbar', ->
+    @whiteSpaceIncorrectSpaceFalse.exec(@ctx).should.be.false()
+
+  it 'should be false for foo\t\tbar ~ foo\tbar', ->
+    @whiteSpaceIncorrectNumberTabsFalse.exec(@ctx).should.be.false()
+
+  it 'should be false for foo bar ~ foobar', ->
+    @whiteSpaceNoSpaceFalse.exec(@ctx).should.be.false()
+
   it 'should be true for 10mg:2dL ~ 15mg:3dL', ->
     @eqRatios.exec(@ctx).should.be.true()
 
