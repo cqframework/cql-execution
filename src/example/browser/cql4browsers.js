@@ -8050,15 +8050,20 @@
     }
 
     Combine.prototype.exec = function(ctx) {
-      var separator, source;
+      var filteredArray, separator, source;
       source = this.source.execute(ctx);
       separator = this.separator != null ? this.separator.execute(ctx) : '';
-      if ((source == null) || source.some(function(x) {
-        return x == null;
-      })) {
+      if (source == null) {
         return null;
       } else {
-        return source.join(separator);
+        filteredArray = source.filter(function(x) {
+          return x !== null && x !== void 0;
+        });
+        if (filteredArray.length < 1) {
+          return null;
+        } else {
+          return filteredArray.join(separator);
+        }
       }
     };
 

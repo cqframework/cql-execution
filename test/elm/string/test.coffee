@@ -40,7 +40,10 @@ describe 'Combine', ->
     should(@combineNull.exec(@ctx)).be.null()
 
   it 'should return null when an item in the list is null', ->
-    should(@combineNullItem.exec(@ctx)).be.null()
+    @combineNullItem.exec(@ctx).should.equal 'abc;def;jkl'
+
+  it 'should return null for list of null', ->
+    should(@combineOneNullItem.exec(@ctx)).be.null()
 
 describe 'Split', ->
   @beforeEach ->

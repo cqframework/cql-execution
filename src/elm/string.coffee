@@ -18,7 +18,11 @@ module.exports.Combine = class Combine extends Expression
   exec: (ctx) ->
     source = @source.execute(ctx)
     separator = if @separator? then @separator.execute(ctx) else ''
-    if (not source? or source.some (x) -> not x?) then null else source.join(separator)
+    if not source?
+      return null
+    else
+      filteredArray = source.filter (x) -> (x != null && x != undefined)
+      if filteredArray.length < 1 then null else filteredArray.join(separator)
 
 module.exports.Split = class Split extends Expression
   constructor: (json) ->
