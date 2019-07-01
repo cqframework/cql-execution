@@ -1072,7 +1072,7 @@ define NullClose: expand { Interval[@2018-01-01T01+00:00, null] } per day
 define NullBoth: expand { Interval[null, null] } per day
 define BadPerGram: expand { Interval[@2018-01-01T01+00:00, @2018-01-04T01+00:00] } per 1 'g'
 
-// @Test: TimeIntervalExpand 
+// @Test: TimeIntervalExpand
 define MsPrecPerHour: expand { Interval[@T01:00:00.000, @T03:00:00.000] } per hour
 define MsPrecPerMinute: expand { Interval[@T01:00:00.000, @T01:02:00.000] } per minute
 define MsPrecPerSecond: expand { Interval[@T01:00:00.000, @T01:00:02.000] } per second
@@ -1093,8 +1093,7 @@ define HourPrecPerMinute: expand { Interval[@T01, @T01] } per minute
 define HourPrecPerSecond: expand { Interval[@T01, @T01] } per second
 define HourPrecPerMillisecond: expand { Interval[@T01, @T01] } per millisecond
 
-
-// @Test: QuantityIntervalExpand 
+// @Test: QuantityIntervalExpand
 define ClosedSingleGPerG: expand { Interval[2 'g', 4 'g'] } per 1 'g'
 define ClosedSingleGPerGDecimal: expand { Interval[2.1 'g', 4.1 'g'] } per 1 'g'
 define ClosedSingleGPerMG: expand { Interval[2 'g', 2.003 'g'] } per 1 'mg'
