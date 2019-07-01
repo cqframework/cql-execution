@@ -406,6 +406,13 @@ describe 'ToDate', ->
   it "should return null for null input", ->
     should(@toDateNull.exec(@ctx)).be.null()
 
+  it "should return 2014-01-01 and ignore time", ->
+    date = @toDateDateTimeString.exec(@ctx)
+    date.year.should.equal 2014
+    date.month.should.equal 1
+    date.day.should.equal 1
+    should.not.exist(date[field]) for field in [ 'hour', 'minute', 'second', 'millisecond', 'timezoneOffset' ]
+
 describe 'ConvertsToBoolean', ->
   @beforeEach ->
     setup @, data

@@ -4293,6 +4293,7 @@ context Patient
 define ToDateString: ToDate('2015-01-02')
 define ToDateDateTime: ToDate(DateTime(2000, 3, 15, 13, 30, 25, 200))
 define ToDateNull: ToDate(null as String)
+define ToDateDateTimeString: ToDate(@2014-01-01T12:30:00)
 ###
 
 module.exports['ToDate'] = {
@@ -4487,6 +4488,64 @@ module.exports['ToDate'] = {
                      "localId" : "16",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
+                  }
+               }
+            }
+         }, {
+            "localId" : "22",
+            "name" : "ToDateDateTimeString",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "22",
+                  "s" : [ {
+                     "value" : [ "define ","ToDateDateTimeString",": " ]
+                  }, {
+                     "r" : "21",
+                     "s" : [ {
+                        "r" : "20",
+                        "value" : [ "ToDate","(","@2014-01-01T12:30:00",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "21",
+               "type" : "ToDate",
+               "operand" : {
+                  "localId" : "20",
+                  "type" : "DateTime",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2014",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "12",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "30",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
                   }
                }
             }
