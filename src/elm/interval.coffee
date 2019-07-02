@@ -1,7 +1,7 @@
 { Expression, UnimplementedExpression } = require './expression'
 { ThreeValuedLogic } = require '../datatypes/logic'
 { build } = require './builder'
-{ Quantity, doAddition, doSubtraction, compare_units, convert_value } = require '../datatypes/quantity'
+{ Quantity, doAddition, compare_units, convert_value } = require '../datatypes/quantity'
 { successor, predecessor, MIN_FLOAT_PRECISION_VALUE } = require '../util/math'
 dtivl = require '../datatypes/interval'
 cmp = require '../util/comparison'
@@ -128,8 +128,7 @@ module.exports.Size = class Size extends Expression
   exec: (ctx) ->
     interval = @arg.execute(ctx)
     return null unless interval?
-    pointSize = getpointSize(interval)
-    interval.size(pointSize)
+    interval.size()
 
 module.exports.Start = class Start extends Expression
   constructor: (json) ->
@@ -396,7 +395,7 @@ collapseIntervals = (intervals, perWidth) ->
     # of the intervals involved will be used (i.e. the interval that has a
     # width equal to the result of the successor function for the point type).
     if !perWidth?
-      perWidth = getpointSize(intervalsClone[0])
+      perWidth = intervalsClone[0].getPointSize()
 
     # sort intervalsClone by start
     intervalsClone.sort (a,b)->
@@ -454,27 +453,3 @@ collapseIntervals = (intervals, perWidth) ->
     collapsedIntervals.push a
     collapsedIntervals
 
-getpointSize = (interval) ->
-  if interval.low?
-    if interval.low.isDateTime
-      precisionUnits = interval.low.getPrecision()
-      pointSize = new Quantity(value: 1, unit: precisionUnits)
-    else if interval.low.isQuantity
-      pointSize = doSubtraction(successor(interval.low), interval.low)
-    else
-      pointSize = successor(interval.low) - interval.low
-  else if interval.high?
-    if interval.high.isDateTime
-      precisionUnits = interval.high.getPrecision()
-      pointSize = new Quantity(value: 1, unit: precisionUnits)
-    else if interval.high.isQuantity
-      pointSize = doSubtraction(successor(interval.high), interval.high)
-    else
-      pointSize = successor(interval.high) - interval.high
-  else
-    throw new Error("Point type of intervals cannot be determined.")
-
-  if typeof pointSize is 'number'
-    pointSize = new Quantity(value: pointSize, unit: '1')
-
-  return pointSize

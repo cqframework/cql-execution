@@ -1,6 +1,6 @@
 { DateTime } = require './datetime'
 { Uncertainty } = require './uncertainty'
-{ Quantity } = require '../datatypes/quantity'
+{ Quantity, doSubtraction } = require '../datatypes/quantity'
 { ThreeValuedLogic } = require './logic'
 { successor, predecessor, maxValueForInstance, minValueForInstance } = require '../util/math'
 cmp = require '../util/comparison'
@@ -313,6 +313,7 @@ module.exports.Interval = class Interval
       Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8)
 
   size: (pointSize) ->
+    pointSize = @getPointSize()
     if (@low? and (@low.isDateTime or @low.isDate or @low.isTime)) or
        (@high? and (@high.isDateTime or @high.isDate or @high.isTime))
       throw new Error("Size of Date, DateTime, and Time intervals is not supported")
@@ -332,6 +333,30 @@ module.exports.Interval = class Interval
       diff = Math.abs(closed.high - closed.low) + pointSize.value
       Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8)
 
+  getPointSize: () ->
+    if @low?
+      if @low.isDateTime
+        precisionUnits = @low.getPrecision()
+        pointSize = new Quantity(value: 1, unit: precisionUnits)
+      else if @low.isQuantity
+        pointSize = doSubtraction(successor(@low), @low)
+      else
+        pointSize = successor(@low) - @low
+    else if @high?
+      if @high.isDateTime
+        precisionUnits = @high.getPrecision()
+        pointSize = new Quantity(value: 1, unit: precisionUnits)
+      else if @high.isQuantity
+        pointSize = doSubtraction(successor(@high), @high)
+      else
+        pointSize = successor(@high) - @high
+    else
+      throw new Error("Point type of intervals cannot be determined.")
+
+    if typeof pointSize is 'number'
+      pointSize = new Quantity(value: pointSize, unit: '1')
+
+    return pointSize
 
   toClosed: () ->
     point = @low ? @high
