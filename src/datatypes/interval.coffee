@@ -312,7 +312,7 @@ module.exports.Interval = class Interval
       diff = Math.abs(closed.high - closed.low)
       Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8)
 
-  size: (pointSize) ->
+  size: () ->
     pointSize = @getPointSize()
     if (@low? and (@low.isDateTime or @low.isDate or @low.isTime)) or
        (@high? and (@high.isDateTime or @high.isDate or @high.isTime))
