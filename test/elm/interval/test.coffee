@@ -1560,16 +1560,16 @@ describe 'DateIntervalExpand', ->
     # define ClosedSinglePerMonthTrunc: expand { Interval[@2018-01-01, @2018-04-29] } per month
     a = @closedSinglePerMonth.exec(@ctx)
     b = @closedSinglePerMonthTrunc.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01, 2018-01-31], [2018-02-01, 2018-02-28], [2018-03-01, 2018-03-31] }'
-    prettyList(a).should.equal prettyList(b)
+    prettyList(a).should.equal '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }'
+    prettyList(b).should.equal '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03], [2018-04, 2018-04] }'
 
   it 'expands a closed interval per year', ->
     # define ClosedSinglePerYear: expand { Interval[@2016-01-01, @2018-12-32] } per year
     # define ClosedSinglePerYearTrunc: expand { Interval[@2016-01-01, @2019-12-30] } per year
     a = @closedSinglePerYear.exec(@ctx)
     b = @closedSinglePerYearTrunc.exec(@ctx)
-    prettyList(a).should.equal '{ [2016-01-01, 2016-12-31], [2017-01-01, 2017-12-31], [2018-01-01, 2018-12-31] }'
-    prettyList(a).should.equal prettyList(b)
+    prettyList(a).should.equal '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
+    prettyList(b).should.equal '{ [2016, 2016], [2017, 2017], [2018, 2018], [2019, 2019] }'
 
   it 'ignores null item in list', ->
     # define NullInList: expand { Interval[@2018-01-01, @2018-01-03], null } per day
@@ -1594,12 +1594,12 @@ describe 'DateIntervalExpand', ->
   it 'expands an interval with mid boundaries per month', ->
     # define MidBoundariesPerMonth: expand { Interval[@2017-11-14, @2018-01-18] } per month
     a = @midBoundariesPerMonth.exec(@ctx)
-    prettyList(a).should.equal '{ [2017-11-14, 2017-12-13], [2017-12-14, 2018-01-13] }'
+    prettyList(a).should.equal '{ [2017-11, 2017-11], [2017-12, 2017-12], [2018-01, 2018-01] }'
 
   it 'expands an interval with mid boundaries per year', ->
     # define MidBoundariesPerYear: expand { Interval[@2016-04-06, @2018-04-06] } per year
     a = @midBoundariesPerYear.exec(@ctx)
-    prettyList(a).should.equal '{ [2016-04-06, 2017-04-05], [2017-04-06, 2018-04-05] }'
+    prettyList(a).should.equal '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
 
   it 'expands an interval with default per', ->
     # define NoPerDefaultDay: expand { Interval[@2018-01-01, @2018-01-03] }
@@ -1618,7 +1618,6 @@ describe 'DateIntervalExpand', ->
     a = @noPerDefaultMonthWithMismatch.exec(@ctx)
     prettyList(a).should.equal '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
 
-
   it 'expands interval with open ends', ->
     # define OpenStart: expand { Interval(@2018-01-01, @2018-01-03] } per day
     a = @openStart.exec(@ctx)
@@ -1634,12 +1633,12 @@ describe 'DateIntervalExpand', ->
 
   it 'handles ends with mismatched precision', ->
     # define MismatchPrecision: expand { Interval[@2018-01-01, @2018-03] } per month
-    e = '{ [2018-01-01, 2018-01-31], [2018-02-01, 2018-02-28] }'
+    e = '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }'
     prettyList(@mismatchPrecision.exec(@ctx)).should.equal e
 
-    # define MismatchPrecisionEmpty: expand { Interval[@2018-01, @2018-02-28] } per month
+    # define MismatchPrecisionResultLongerThanInput: expand { Interval[@2018-01, @2018-02-28] } per month
     e = '{ [2018-01, 2018-01], [2018-02, 2018-02] }'
-    prettyList(@mismatchPrecisionEmpty.exec(@ctx)).should.equal e
+    prettyList(@mismatchPrecisionResultLongerThanInput.exec(@ctx)).should.equal e
 
   it 'returns an empty list if we get an empty list', ->
     # define EmptyList: List<Interval<Date>>{}
@@ -1660,18 +1659,9 @@ describe 'DateIntervalExpand', ->
     a = @nullBoth.exec(@ctx)
     should.not.exist(a)
 
-  it 'returns null when per is more precise than the interval ends', ->
+  it 'returns more precise intervals when per is more precise than the interval ends', ->
     # define MonthDayPer: expand { Interval[@2018-01, @2018-03] } per day
-    a = @monthDayPer.exec(@ctx)
-    should.not.exist(a)
-
-    # define YearMonthPer: expand { Interval[@2016, @2018] } per month
-    a = @yearMonthPer.exec(@ctx)
-    should.not.exist(a)
-
-    # define YearDayPer: expand { Interval[@2016, @2018] } per day
-    a = @yearDayPer.exec(@ctx)
-    should.not.exist(a)
+    @monthDayPer.exec(@ctx).should.be.empty()
 
   it 'returns null when per not applicable', ->
     # define BadPerMinute: expand { Interval[@2018-01-01, @2018-01-04] } per minute
@@ -1688,31 +1678,31 @@ describe 'DateTimeIntervalExpand', ->
 
   it 'expands a millisecond precision datetime', ->
     # define MsPrecPerYear: expand { Interval[@2016-01-01T00:00:00.000+00:00, @2018-01-01T00:00:00.000+00:00] } per year
-    e = '{ [2016-01-01T00:00:00.000+00:00, 2016-12-31T23:59:59.999+00:00], [2017-01-01T00:00:00.000+00:00, 2017-12-31T23:59:59.999+00:00] }'
+    e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
     prettyList(@msPrecPerYear.exec(@ctx)).should.equal e
 
     # define MsPrecPerMonth: expand { Interval[@2018-01-01T00:00:00.000+00:00, @2018-03-01T00:00:00.000+00:00] } per month
-    e = '{ [2018-01-01T00:00:00.000+00:00, 2018-01-31T23:59:59.999+00:00], [2018-02-01T00:00:00.000+00:00, 2018-02-28T23:59:59.999+00:00] }'
+    e = '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }'
     prettyList(@msPrecPerMonth.exec(@ctx)).should.equal e
 
     # define MsPrecPerWeek: expand { Interval[@2018-01-01T00:00:00.000+00:00, @2018-01-21T00:00:00.000+00:00] } per week
-    e = '{ [2018-01-01T00:00:00.000+00:00, 2018-01-07T23:59:59.999+00:00], [2018-01-08T00:00:00.000+00:00, 2018-01-14T23:59:59.999+00:00] }'
+    e = '{ [2018-01-01, 2018-01-07], [2018-01-08, 2018-01-14], [2018-01-15, 2018-01-21] }'
     prettyList(@msPrecPerWeek.exec(@ctx)).should.equal e
 
     # define MsPrecPerDay: expand { Interval[@2018-01-01T00:00:00.000+00:00, @2018-01-03T00:00:00.000+00:00] } per day
-    e = '{ [2018-01-01T00:00:00.000+00:00, 2018-01-01T23:59:59.999+00:00], [2018-01-02T00:00:00.000+00:00, 2018-01-02T23:59:59.999+00:00] }'
+    e = '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }'
     prettyList(@msPrecPerDay.exec(@ctx)).should.equal e
 
     # define MsPrecPerHour: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T03:00:00.000+00:00] } per hour
-    e = '{ [2018-01-01T01:00:00.000+00:00, 2018-01-01T01:59:59.999+00:00], [2018-01-01T02:00:00.000+00:00, 2018-01-01T02:59:59.999+00:00] }'
+    e = '{ [2018-01-01T01+00:00, 2018-01-01T01+00:00], [2018-01-01T02+00:00, 2018-01-01T02+00:00], [2018-01-01T03+00:00, 2018-01-01T03+00:00] }'
     prettyList(@msPrecPerHour.exec(@ctx)).should.equal e
 
     # define MsPrecPerMinute: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:02:00.000+00:00] } per minute
-    e = '{ [2018-01-01T01:00:00.000+00:00, 2018-01-01T01:00:59.999+00:00], [2018-01-01T01:01:00.000+00:00, 2018-01-01T01:01:59.999+00:00] }'
+    e = '{ [2018-01-01T01:00+00:00, 2018-01-01T01:00+00:00], [2018-01-01T01:01+00:00, 2018-01-01T01:01+00:00], [2018-01-01T01:02+00:00, 2018-01-01T01:02+00:00] }'
     prettyList(@msPrecPerMinute.exec(@ctx)).should.equal e
 
     # define MsPrecPerSecond: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:00:02.000+00:00] } per second
-    e = '{ [2018-01-01T01:00:00.000+00:00, 2018-01-01T01:00:00.999+00:00], [2018-01-01T01:00:01.000+00:00, 2018-01-01T01:00:01.999+00:00] }'
+    e = '{ [2018-01-01T01:00:00+00:00, 2018-01-01T01:00:00+00:00], [2018-01-01T01:00:01+00:00, 2018-01-01T01:00:01+00:00], [2018-01-01T01:00:02+00:00, 2018-01-01T01:00:02+00:00] }'
     prettyList(@msPrecPerSecond.exec(@ctx)).should.equal e
 
     # define MsPrecPerMillisecond: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:00:00.001+00:00] } per millisecond
@@ -1721,95 +1711,95 @@ describe 'DateTimeIntervalExpand', ->
 
   it 'expands a second precision datetime', ->
     # define SecPrecPerYear: expand { Interval[@2016-01-01T00:00:00+00:00, @2018-01-01T00:00:00+00:00] } per year
-    e = '{ [2016-01-01T00:00:00+00:00, 2016-12-31T23:59:59+00:00], [2017-01-01T00:00:00+00:00, 2017-12-31T23:59:59+00:00] }'
+    e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
     prettyList(@secPrecPerYear.exec(@ctx)).should.equal e
 
     # define SecPrecPerMonth: expand { Interval[@2018-01-01T00:00:00+00:00, @2018-03-01T00:00:00+00:00] } per month
-    e = '{ [2018-01-01T00:00:00+00:00, 2018-01-31T23:59:59+00:00], [2018-02-01T00:00:00+00:00, 2018-02-28T23:59:59+00:00] }'
+    e = '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }'
     prettyList(@secPrecPerMonth.exec(@ctx)).should.equal e
 
     # define SecPrecPerWeek: expand { Interval[@2018-01-01T00:00:00+00:00, @2018-01-21T00:00:00+00:00] } per week
-    e = '{ [2018-01-01T00:00:00+00:00, 2018-01-07T23:59:59+00:00], [2018-01-08T00:00:00+00:00, 2018-01-14T23:59:59+00:00] }'
+    e = '{ [2018-01-01, 2018-01-07], [2018-01-08, 2018-01-14], [2018-01-15, 2018-01-21] }'
     prettyList(@secPrecPerWeek.exec(@ctx)).should.equal e
 
     # define SecPrecPerDay: expand { Interval[@2018-01-01T00:00:00+00:00, @2018-01-03T00:00:00+00:00] } per day
-    e = '{ [2018-01-01T00:00:00+00:00, 2018-01-01T23:59:59+00:00], [2018-01-02T00:00:00+00:00, 2018-01-02T23:59:59+00:00] }'
+    e = '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }'
     prettyList(@secPrecPerDay.exec(@ctx)).should.equal e
 
     # define SecPrecPerHour: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T03:00:00+00:00] } per hour
-    e = '{ [2018-01-01T01:00:00+00:00, 2018-01-01T01:59:59+00:00], [2018-01-01T02:00:00+00:00, 2018-01-01T02:59:59+00:00] }'
+    e = '{ [2018-01-01T01+00:00, 2018-01-01T01+00:00], [2018-01-01T02+00:00, 2018-01-01T02+00:00], [2018-01-01T03+00:00, 2018-01-01T03+00:00] }'
     prettyList(@secPrecPerHour.exec(@ctx)).should.equal e
 
     # define SecPrecPerMinute: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T01:02:00+00:00] } per minute
-    e = '{ [2018-01-01T01:00:00+00:00, 2018-01-01T01:00:59+00:00], [2018-01-01T01:01:00+00:00, 2018-01-01T01:01:59+00:00] }'
+    e = '{ [2018-01-01T01:00+00:00, 2018-01-01T01:00+00:00], [2018-01-01T01:01+00:00, 2018-01-01T01:01+00:00], [2018-01-01T01:02+00:00, 2018-01-01T01:02+00:00] }'
     prettyList(@secPrecPerMinute.exec(@ctx)).should.equal e
 
     # define SecPrecPerSecond: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T01:00:01+00:00] } per second
     e = '{ [2018-01-01T01:00:00+00:00, 2018-01-01T01:00:00+00:00], [2018-01-01T01:00:01+00:00, 2018-01-01T01:00:01+00:00] }'
     prettyList(@secPrecPerSecond.exec(@ctx)).should.equal e
 
-    should.not.exist @secPrecPerMillisecond.exec(@ctx)
+    @secPrecPerMillisecond.exec(@ctx).should.be.empty()
 
   it 'expands a minute precision datetime', ->
     # define MinPrecPerYear: expand { Interval[@2016-01-01T00:00+00:00, @2018-01-01T00:00+00:00] } per year
-    e = '{ [2016-01-01T00:00+00:00, 2016-12-31T23:59+00:00], [2017-01-01T00:00+00:00, 2017-12-31T23:59+00:00] }'
+    e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
     prettyList(@minPrecPerYear.exec(@ctx)).should.equal e
 
     # define MinPrecPerMonth: expand { Interval[@2018-01-01T00:00+00:00, @2018-03-01T00:00+00:00] } per month
-    e = '{ [2018-01-01T00:00+00:00, 2018-01-31T23:59+00:00], [2018-02-01T00:00+00:00, 2018-02-28T23:59+00:00] }'
+    e = '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }'
     prettyList(@minPrecPerMonth.exec(@ctx)).should.equal e
 
     # define MinPrecPerWeek: expand { Interval[@2018-01-01T00:00+00:00, @2018-01-21T00:00+00:00] } per week
-    e = '{ [2018-01-01T00:00+00:00, 2018-01-07T23:59+00:00], [2018-01-08T00:00+00:00, 2018-01-14T23:59+00:00] }'
+    e = '{ [2018-01-01, 2018-01-07], [2018-01-08, 2018-01-14], [2018-01-15, 2018-01-21] }'
     prettyList(@minPrecPerWeek.exec(@ctx)).should.equal e
 
     # define MinPrecPerDay: expand { Interval[@2018-01-01T00:00+00:00, @2018-01-03T00:00+00:00] } per day
-    e = '{ [2018-01-01T00:00+00:00, 2018-01-01T23:59+00:00], [2018-01-02T00:00+00:00, 2018-01-02T23:59+00:00] }'
+    e = '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }'
     prettyList(@minPrecPerDay.exec(@ctx)).should.equal e
 
     # define MinPrecPerHour: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T03:00+00:00] } per hour
-    e = '{ [2018-01-01T01:00+00:00, 2018-01-01T01:59+00:00], [2018-01-01T02:00+00:00, 2018-01-01T02:59+00:00] }'
+    e = '{ [2018-01-01T01+00:00, 2018-01-01T01+00:00], [2018-01-01T02+00:00, 2018-01-01T02+00:00], [2018-01-01T03+00:00, 2018-01-01T03+00:00] }'
     prettyList(@minPrecPerHour.exec(@ctx)).should.equal e
 
     # define MinPrecPerMinute: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T01:01+00:00] } per minute
     e = '{ [2018-01-01T01:00+00:00, 2018-01-01T01:00+00:00], [2018-01-01T01:01+00:00, 2018-01-01T01:01+00:00] }'
     prettyList(@minPrecPerMinute.exec(@ctx)).should.equal e
 
-    should.not.exist @minPrecPerSecond.exec(@ctx)
-    should.not.exist @minPrecPerMillisecond.exec(@ctx)
+    @minPrecPerSecond.exec(@ctx).should.be.empty()
+    @minPrecPerMillisecond.exec(@ctx).should.be.empty()
 
   it 'expands an hour precision datetime', ->
     # define HourPrecPerYear: expand { Interval[@2016-01-01T00+00:00, @2018-01-01T00+00:00] } per year
-    e = '{ [2016-01-01T00+00:00, 2016-12-31T23+00:00], [2017-01-01T00+00:00, 2017-12-31T23+00:00] }'
+    e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
     prettyList(@hourPrecPerYear.exec(@ctx)).should.equal e
 
     # define HourPrecPerMonth: expand { Interval[@2018-01-01T00+00:00, @2018-03-01T00+00:00] } per month
-    e = '{ [2018-01-01T00+00:00, 2018-01-31T23+00:00], [2018-02-01T00+00:00, 2018-02-28T23+00:00] }'
+    e = '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }'
     prettyList(@hourPrecPerMonth.exec(@ctx)).should.equal e
 
     # define HourPrecPerWeek: expand { Interval[@2018-01-01T00+00:00, @2018-01-21T00+00:00] } per week
-    e = '{ [2018-01-01T00+00:00, 2018-01-07T23+00:00], [2018-01-08T00+00:00, 2018-01-14T23+00:00] }'
+    e = '{ [2018-01-01, 2018-01-07], [2018-01-08, 2018-01-14], [2018-01-15, 2018-01-21] }'
     prettyList(@hourPrecPerWeek.exec(@ctx)).should.equal e
 
     # define HourPrecPerDay: expand { Interval[@2018-01-01T00+00:00, @2018-01-03T00+00:00] } per day
-    e = '{ [2018-01-01T00+00:00, 2018-01-01T23+00:00], [2018-01-02T00+00:00, 2018-01-02T23+00:00] }'
+    e = '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }'
     prettyList(@hourPrecPerDay.exec(@ctx)).should.equal e
 
     # define HourPrecPerHour: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T02+00:00] } per hour
     e = '{ [2018-01-01T01+00:00, 2018-01-01T01+00:00], [2018-01-01T02+00:00, 2018-01-01T02+00:00] }'
     prettyList(@hourPrecPerHour.exec(@ctx)).should.equal e
 
-    should.not.exist @hourPrecPerMinute.exec(@ctx)
-    should.not.exist @hourPrecPerSecond.exec(@ctx)
-    should.not.exist @hourPrecPerMillisecond.exec(@ctx)
+    @hourPrecPerMinute.exec(@ctx).should.be.empty()
+    @hourPrecPerSecond.exec(@ctx).should.be.empty()
+    @hourPrecPerMillisecond.exec(@ctx).should.be.empty()
 
   it 'expands a day precision datetime', ->
     # define DayPrecPerYear: expand { Interval[DateTime(2016,01,01), DateTime(2018,01,01)] } per year
-    e = '{ [2016-01-01, 2016-12-31], [2017-01-01, 2017-12-31] }'
+    e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
     prettyList(@dayPrecPerYear.exec(@ctx)).should.equal e
 
     # define DayPrecPerMonth: expand { Interval[DateTime(2018,01,01), DateTime(2018,03,01)] } per month
-    e = '{ [2018-01-01, 2018-01-31], [2018-02-01, 2018-02-28] }'
+    e = '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }'
     prettyList(@dayPrecPerMonth.exec(@ctx)).should.equal e
 
     # define DayPrecPerWeek: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,14)] } per week
@@ -1820,39 +1810,39 @@ describe 'DateTimeIntervalExpand', ->
     e = '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02] }'
     prettyList(@dayPrecPerDay.exec(@ctx)).should.equal e
 
-    should.not.exist @dayPrecPerHour.exec(@ctx)
-    should.not.exist @dayPrecPerMinute.exec(@ctx)
-    should.not.exist @dayPrecPerSecond.exec(@ctx)
-    should.not.exist @dayPrecPerMillisecond.exec(@ctx)
+    @dayPrecPerHour.exec(@ctx).should.be.empty()
+    @dayPrecPerMinute.exec(@ctx).should.be.empty()
+    @dayPrecPerSecond.exec(@ctx).should.be.empty()
+    @dayPrecPerMillisecond.exec(@ctx).should.be.empty()
 
   it 'expands a month precision datetime', ->
     # define MonthPrecPerYear: expand { Interval[DateTime(2016,01), DateTime(2018,01)] } per year
-    e = '{ [2016-01, 2016-12], [2017-01, 2017-12] }'
+    e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
     prettyList(@monthPrecPerYear.exec(@ctx)).should.equal e
 
     # define MonthPrecPerMonth: expand { Interval[DateTime(2018,01), DateTime(2018,02)] } per month
     e = '{ [2018-01, 2018-01], [2018-02, 2018-02] }'
     prettyList(@monthPrecPerMonth.exec(@ctx)).should.equal e
 
-    should.not.exist @monthPrecPerWeek.exec(@ctx)
-    should.not.exist @monthPrecPerDay.exec(@ctx)
-    should.not.exist @monthPrecPerHour.exec(@ctx)
-    should.not.exist @monthPrecPerMinute.exec(@ctx)
-    should.not.exist @monthPrecPerSecond.exec(@ctx)
-    should.not.exist @monthPrecPerMillisecond.exec(@ctx)
+    @monthPrecPerWeek.exec(@ctx).should.be.empty()
+    @monthPrecPerDay.exec(@ctx).should.be.empty()
+    @monthPrecPerHour.exec(@ctx).should.be.empty()
+    @monthPrecPerMinute.exec(@ctx).should.be.empty()
+    @monthPrecPerSecond.exec(@ctx).should.be.empty()
+    @monthPrecPerMillisecond.exec(@ctx).should.be.empty()
 
   it 'expands a year precision datetime', ->
     # define YearPrecPerYear: expand { Interval[DateTime(2016), DateTime(2018)] } per year
     e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
     prettyList(@yearPrecPerYear.exec(@ctx)).should.equal e
 
-    should.not.exist @yearPrecPerMonth.exec(@ctx)
-    should.not.exist @yearPrecPerWeek.exec(@ctx)
-    should.not.exist @yearPrecPerDay.exec(@ctx)
-    should.not.exist @yearPrecPerHour.exec(@ctx)
-    should.not.exist @yearPrecPerMinute.exec(@ctx)
-    should.not.exist @yearPrecPerSecond.exec(@ctx)
-    should.not.exist @yearPrecPerMillisecond.exec(@ctx)
+    @yearPrecPerMonth.exec(@ctx).should.be.empty()
+    @yearPrecPerWeek.exec(@ctx).should.be.empty()
+    @yearPrecPerDay.exec(@ctx).should.be.empty()
+    @yearPrecPerHour.exec(@ctx).should.be.empty()
+    @yearPrecPerMinute.exec(@ctx).should.be.empty()
+    @yearPrecPerSecond.exec(@ctx).should.be.empty()
+    @yearPrecPerMillisecond.exec(@ctx).should.be.empty()
 
   it 'ignores null item in list', ->
     # define NullInList: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T01+00:00], null } per hour
@@ -1901,25 +1891,24 @@ describe 'DateTimeIntervalExpand', ->
   it 'expands interval with open ends', ->
     # define OpenStart: expand { Interval(@2018-01-01T01+00:00, @2018-01-03T01+00:00] } per day
     a = @openStart.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01T02+00:00, 2018-01-02T01+00:00], [2018-01-02T02+00:00, 2018-01-03T01+00:00] }'
+    prettyList(a).should.equal '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }'
 
     # define OpenEnd: expand { Interval[@2018-01-01T01+00:00, @2018-01-03T01+00:00) } per day
     a = @openEnd.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01T01+00:00, 2018-01-02T00+00:00], [2018-01-02T01+00:00, 2018-01-03T00+00:00] }'
+    prettyList(a).should.equal '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }'
 
     # define OpenBoth: expand { Interval(@2018-01-01T01+00:00, @2018-01-03T01+00:00) } per day
     a = @openBoth.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01T02+00:00, 2018-01-02T01+00:00] }'
+    prettyList(a).should.equal '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }'
 
   it 'handles ends with mismatched precision', ->
     # define MismatchPrecision: expand { Interval[@2012-01-01T12:00+00:00, @2012-01-02T12:00:00+00:00] } per day
-    e = "{ [2012-01-01T12:00+00:00, 2012-01-02T11:59+00:00] }"
+    e = "{ [2012-01-01, 2012-01-01], [2012-01-02, 2012-01-02] }"
     prettyList(@mismatchPrecision.exec(@ctx)).should.equal e
 
-    # define MismatchPrecisionEmpty: expand { Interval[@2012-01-01T13:00:00+00:00, @2012-01-02T12:59+00:00] } per day
-    a = @mismatchPrecisionEmpty.exec(@ctx)
-    a.should.be.instanceof(Array);
-    a.length.should.equal 0
+    # define MismatchPrecisionResultLongerThanInput: expand { Interval[@2012-01-01T13:00:00+00:00, @2012-01-02T12:59+00:00] } per day
+    e = "{ [2012-01-01, 2012-01-01], [2012-01-02, 2012-01-02] }"
+    prettyList(@mismatchPrecisionResultLongerThanInput.exec(@ctx)).should.equal e
 
   it 'returns an empty list if we get an empty list', ->
     # define EmptyList: List<Interval<Date>>{}
@@ -1951,15 +1940,15 @@ describe 'TimeIntervalExpand', ->
 
   it 'expands a millisecond precision time', ->
     # define MsPrecPerHour: expand { Interval[@T01:00:00.000, @T03:00:00.000] } per hour
-    e = '{ [1:00:00.000, 1:59:59.999], [2:00:00.000, 2:59:59.999] }'
+    e = '{ [1, 1], [2, 2], [3, 3] }'
     prettyList(@msPrecPerHour.exec(@ctx)).should.equal e
 
     # define MsPrecPerMinute: expand { Interval[@T01:00:00.000, @T01:02:00.000] } per minute
-    e = '{ [1:00:00.000, 1:00:59.999], [1:01:00.000, 1:01:59.999] }'
+    e = '{ [1:00, 1:00], [1:01, 1:01], [1:02, 1:02] }'
     prettyList(@msPrecPerMinute.exec(@ctx)).should.equal e
 
     # define MsPrecPerSecond: expand { Interval[@T01:00:00.000, @T01:00:02.000] } per second
-    e = '{ [1:00:00.000, 1:00:00.999], [1:00:01.000, 1:00:01.999] }'
+    e = '{ [1:00:00, 1:00:00], [1:00:01, 1:00:01], [1:00:02, 1:00:02] }'
     prettyList(@msPrecPerSecond.exec(@ctx)).should.equal e
 
     # define MsPrecPerMillisecond: expand { Interval[@T01:00:00.000, @T01:00:00.001] } per millisecond
@@ -1967,40 +1956,40 @@ describe 'TimeIntervalExpand', ->
     prettyList(@msPrecPerMillisecond.exec(@ctx)).should.equal e
 
   it 'expands a second precision datetime', ->
-    # define SecPrecPerHour: expand { Interval[@T01:00:00+00:00, @T03:00:00+00:00] } per hour
-    e = '{ [1:00:00, 1:59:59], [2:00:00, 2:59:59] }'
+    # define SecPrecPerHour: expand { Interval[@T01:00:00, @T03:00:00] } per hour
+    e = '{ [1, 1], [2, 2], [3, 3] }'
     prettyList(@secPrecPerHour.exec(@ctx)).should.equal e
 
-    # define SecPrecPerMinute: expand { Interval[@T01:00:00+00:00, @T01:02:00+00:00] } per minute
-    e = '{ [1:00:00, 1:00:59], [1:01:00, 1:01:59] }'
+    # define SecPrecPerMinute: expand { Interval[@T01:00:00, @T01:02:00] } per minute
+    e = '{ [1:00, 1:00], [1:01, 1:01], [1:02, 1:02] }'
     prettyList(@secPrecPerMinute.exec(@ctx)).should.equal e
 
-    # define SecPrecPerSecond: expand { Interval[@T01:00:00+00:00, @T01:00:01+00:00] } per second
+    # define SecPrecPerSecond: expand { Interval[@T01:00:00, @T01:00:01] } per second
     e = '{ [1:00:00, 1:00:00], [1:00:01, 1:00:01] }'
     prettyList(@secPrecPerSecond.exec(@ctx)).should.equal e
 
-    should.not.exist @secPrecPerMillisecond.exec(@ctx)
+    @secPrecPerMillisecond.exec(@ctx).should.be.empty()
 
   it 'expands a minute precision datetime', ->
-    # define MinPrecPerHour: expand { Interval[@T01:00+00:00, @T03:00+00:00] } per hour
-    e = '{ [1:00, 1:59], [2:00, 2:59] }'
+    # define MinPrecPerHour: expand { Interval[@T01:00, @T03:00] } per hour
+    e = '{ [1, 1], [2, 2], [3, 3] }'
     prettyList(@minPrecPerHour.exec(@ctx)).should.equal e
 
-    # define MinPrecPerMinute: expand { Interval[@T01:00+00:00, @T01:01+00:00] } per minute
+    # define MinPrecPerMinute: expand { Interval[@T01:00, @T01:01] } per minute
     e = '{ [1:00, 1:00], [1:01, 1:01] }'
     prettyList(@minPrecPerMinute.exec(@ctx)).should.equal e
 
-    should.not.exist @minPrecPerSecond.exec(@ctx)
-    should.not.exist @minPrecPerMillisecond.exec(@ctx)
+    @minPrecPerSecond.exec(@ctx).should.be.empty()
+    @minPrecPerMillisecond.exec(@ctx).should.be.empty()
 
   it 'expands an hour precision datetime', ->
-    # define HourPrecPerHour: expand { Interval[@T01+00:00, @T02+00:00] } per hour
+    # define HourPrecPerHour: expand { Interval[@T01, @T02] } per hour
     e = '{ [1, 1], [2, 2] }'
     prettyList(@hourPrecPerHour.exec(@ctx)).should.equal e
 
-    should.not.exist @hourPrecPerMinute.exec(@ctx)
-    should.not.exist @hourPrecPerSecond.exec(@ctx)
-    should.not.exist @hourPrecPerMillisecond.exec(@ctx)
+    @hourPrecPerMinute.exec(@ctx).should.be.empty()
+    @hourPrecPerSecond.exec(@ctx).should.be.empty()
+    @hourPrecPerMillisecond.exec(@ctx).should.be.empty()
 
 describe 'QuantityIntervalExpand', ->
   @beforeEach ->
@@ -2013,7 +2002,7 @@ describe 'QuantityIntervalExpand', ->
 
     # define ClosedSingleGPerGDecimal: expand { Interval[2.1 'g', 4.1 'g'] } per 1 'g'
     a = @closedSingleGPerGDecimal.exec(@ctx)
-    prettyList(a).should.equal "{ [2.1 'g', 3.09999999 'g'], [3.1 'g', 4.09999999 'g'] }"
+    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }"
 
     # define ClosedSingleGPerMG: expand { Interval[2 'g', 2.003 'g'] } per 1 'mg'
     a = @closedSingleGPerMG.exec(@ctx)
@@ -2029,7 +2018,7 @@ describe 'QuantityIntervalExpand', ->
 
     # define ClosedSingleMGPerMGDecimal: expand { Interval[2000.01 'mg', 4500 'mg'] } per 800 'mg'
     a = @closedSingleMGPerMGDecimal.exec(@ctx)
-    prettyList(a).should.equal "{ [2000.01 'mg', 2800.00999999 'mg'], [2800.01 'mg', 3600.0099999900003 'mg'], [3600.01 'mg', 4400.00999999 'mg'] }"
+    prettyList(a).should.equal "{ [2000 'mg', 2799 'mg'], [2800 'mg', 3599 'mg'], [3600 'mg', 4399 'mg'] }"
 
   it 'expands lists of multiple intervals', ->
     # define NullInList: expand { Interval[2 'g', 4 'g'], null } per 1 'g'
@@ -2068,11 +2057,11 @@ describe 'QuantityIntervalExpand', ->
 
     # define OpenBothDecimal: expand { Interval(2.1 'g', 4.1 'g') } per 1 'g'
     a = @openBothDecimal.exec(@ctx)
-    prettyList(a).should.equal "{ [2.10000001 'g', 3.1 'g'] }"
+    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }"
 
     # define OpenBothDecimalTrunc: expand { Interval(2.1 'g', 4.101 'g') } per 1 'g'
     a = @openBothDecimalTrunc.exec(@ctx)
-    prettyList(a).should.equal "{ [2.10000001 'g', 3.1 'g'], [3.10000001 'g', 4.1 'g'] }"
+    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }"
 
   it 'returns an empty list if we get an empty list or if there are no results', ->
     # define EmptyList: List<Interval<Date>>{}
@@ -2180,6 +2169,12 @@ describe 'IntegerIntervalExpand', ->
     a = @badPerMinute.exec(@ctx)
     should.not.exist(a)
 
+  it 'produces a more precise value for output intervals', ->
+    # define PerDecimalMorePrecise: expand { Interval[10, 10] } per 0.1
+    a = @perDecimalMorePrecise.exec(@ctx)
+    # JavaScript truncates 10.0 to 10.
+    prettyList(a).should.equal '{ [10, 10], [10.1, 10.1], [10.2, 10.2], [10.3, 10.3], [10.4, 10.4], [10.5, 10.5], [10.6, 10.6], [10.7, 10.7], [10.8, 10.8], [10.9, 10.9] }'
+
 describe 'DecimalIntervalExpand', ->
   @beforeEach ->
     setup @, data
@@ -2187,57 +2182,57 @@ describe 'DecimalIntervalExpand', ->
   it 'expands single intervals', ->
     # define ClosedSingle: expand { Interval[2, 5] } per 1.5 '1'
     a = @closedSingle.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 3.49999999], [3.5, 4.99999999] }'
+    prettyList(a).should.equal '{ [2, 3.4], [3.5, 4.9] }'
 
     # define ClosedSingle1: expand { Interval[2.5, 10] } per 2 '1'
     a = @closedSingle1.exec(@ctx)
-    prettyList(a).should.equal '{ [2.5, 4.49999999], [4.5, 6.49999999], [6.5, 8.49999999] }'
+    prettyList(a).should.equal '{ [2, 3], [4, 5], [6, 7], [8, 9] }'
 
     # define ClosedSingle2: expand { Interval[2, 4.5] } per 0.5 '1'
     a = @closedSingle2.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 2.49999999], [2.5, 2.99999999], [3, 3.49999999], [3.5, 3.99999999], [4, 4.49999999] }'
+    prettyList(a).should.equal '{ [2, 2.4], [2.5, 2.9], [3, 3.4], [3.5, 3.9], [4, 4.4] }'
 
   it 'expands lists of multiple intervals', ->
     # define NullInList: expand { Interval[2, 5], null } per 1.5 '1'
     a = @nullInList.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 3.49999999], [3.5, 4.99999999] }'
+    prettyList(a).should.equal '{ [2, 3.4], [3.5, 4.9] }'
 
     # define Overlapping: expand { Interval[2, 5], Interval[4, 7] } per 1.5 '1'
     a = @overlapping.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 3.49999999], [3.5, 4.99999999], [5, 6.49999999] }'
+    prettyList(a).should.equal '{ [2, 3.4], [3.5, 4.9], [5, 6.4] }'
 
     # define NonOverlapping: expand { Interval[2, 4], Interval[6, 8] } per 1.5 '1'
     a = @nonOverlapping.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 3.49999999], [6, 7.49999999] }'
+    prettyList(a).should.equal '{ [2, 3.4], [6, 7.4] }'
 
   it 'expands interval using default per of 1', ->
     # define NoPer: expand { Interval[2.5, 4.5] }
     a = @noPer.exec(@ctx)
-    prettyList(a).should.equal '{ [2.5, 3.49999999], [3.5, 4.49999999] }'
+    prettyList(a).should.equal '{ [2, 2], [3, 3], [4, 4] }'
 
   it 'expands interval with open ends', ->
     # define OpenStart: expand { Interval(2, 5] } per 1.5 '1'
     a = @openStart.exec(@ctx)
-    prettyList(a).should.equal '{ [2.00000001, 3.5], [3.50000001, 5] }'
+    prettyList(a).should.equal '{ [3, 4.4] }'
 
     # define OpenEnd: expand { Interval[2, 5) } per 1.5 '1'
     a = @openEnd.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 3.49999999], [3.5, 4.99999999] }'
+    prettyList(a).should.equal '{ [2, 3.4] }'
 
     # define OpenBoth: expand { Interval(2, 5) } per 1.5 '1'
-    a = @openBoth.exec(@ctx)
-    prettyList(a).should.equal '{ [2.00000001, 3.5] }'
+    @openBoth.exec(@ctx).should.be.empty()
 
-  it 'returns an empty list if we get an empty list or if there are no results', ->
+  it 'returns an empty list if we get an empty list', ->
     # define EmptyList: List<Interval<Decimal>>{}
     a = @emptyList.exec(@ctx)
     a.should.be.instanceof(Array);
-    a.length.should.equal 0
+    a.should.be.empty()
 
+  it 'returns an empty list if we get an interval with a null boundary', ->
     # define PerTooBig: expand { Interval[2, 4], null } per 5.5 '1'
     a = @perTooBig.exec(@ctx)
     a.should.be.instanceof(Array);
-    a.length.should.equal 0
+    a.should.be.empty()
 
   it 'returns null with open ended intervals', ->
     # define NullClose: expand { Interval[2, null] } per 1.5 '1'

@@ -970,7 +970,7 @@ define OpenEnd: expand { Interval[@2018-01-01, @2018-01-03) } per day
 define OpenBoth: expand { Interval(@2018-01-01, @2018-01-03) } per day
 
 define MismatchPrecision: expand { Interval[@2018-01-01, @2018-03] } per month
-define MismatchPrecisionEmpty: expand { Interval[@2018-01, @2018-02-28] } per month
+define MismatchPrecisionResultLongerThanInput: expand { Interval[@2018-01, @2018-02-28] } per month
 
 define EmptyList: List<Interval<Date>>{}
 define NullOpen: expand { Interval[null, @2018-01-03] } per day
@@ -983,7 +983,7 @@ define BadPerMinute: expand { Interval[@2018-01-01, @2018-01-04] } per minute
 define BadPerGram: expand { Interval[@2018-01-01, @2018-01-04] } per 1 'g'
 
 
-// @Test: DateTimeIntervalExpand 
+// @Test: DateTimeIntervalExpand
 define MsPrecPerYear: expand { Interval[@2016-01-01T00:00:00.000+00:00, @2018-01-01T00:00:00.000+00:00] } per year
 define MsPrecPerMonth: expand { Interval[@2018-01-01T00:00:00.000+00:00, @2018-03-01T00:00:00.000+00:00] } per month
 define MsPrecPerWeek: expand { Interval[@2018-01-01T00:00:00.000+00:00, @2018-01-21T00:00:00.000+00:00] } per week
@@ -1064,7 +1064,7 @@ define OpenEnd: expand { Interval[@2018-01-01T01+00:00, @2018-01-03T01+00:00) } 
 define OpenBoth: expand { Interval(@2018-01-01T01+00:00, @2018-01-03T01+00:00) } per day
 
 define MismatchPrecision: expand { Interval[@2012-01-01T12:00+00:00, @2012-01-02T12:00:00+00:00] } per day
-define MismatchPrecisionEmpty: expand { Interval[@2012-01-01T13:00:00+00:00, @2012-01-02T12:59+00:00] } per day
+define MismatchPrecisionResultLongerThanInput: expand { Interval[@2012-01-01T13:00:00+00:00, @2012-01-02T12:59+00:00] } per day
 
 define EmptyList: List<Interval<Date>>{}
 define NullOpen: expand { Interval[null, @2018-01-03T01+00:00] } per day
@@ -1087,6 +1087,7 @@ define MinPrecPerHour: expand { Interval[@T01:00, @T03:00] } per hour
 define MinPrecPerMinute: expand { Interval[@T01:00, @T01:01] } per minute
 define MinPrecPerSecond: expand { Interval[@T01:00, @T01:00] } per second
 define MinPrecPerMillisecond: expand { Interval[@T01:00, @T01:00] } per millisecond
+define MinPrecPerMinuteEmpty: expand { Interval[@T10, @T10] } per minute
 
 define HourPrecPerHour: expand { Interval[@T01, @T02] } per hour
 define HourPrecPerMinute: expand { Interval[@T01, @T01] } per minute
@@ -1144,6 +1145,8 @@ define NullOpen: expand { Interval[null, 4] } per 1 '1'
 define NullClose: expand { Interval[2, null] } per 1 '1'
 define NullBoth: expand { Interval[null, null] } per 1 '1'
 define BadPerMinute: expand { Interval(2, 4] } per 1 minute
+
+define PerDecimalMorePrecise: expand { Interval[10, 10] } per 0.1
 
 // @Test: DecimalIntervalExpand
 define ClosedSingle: expand { Interval[2, 5] } per 1.5 '1'

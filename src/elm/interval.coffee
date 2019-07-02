@@ -1,8 +1,8 @@
 { Expression, UnimplementedExpression } = require './expression'
 { ThreeValuedLogic } = require '../datatypes/logic'
 { build } = require './builder'
-{ Quantity, doAddition, compare_units, convert_value } = require '../datatypes/quantity'
-{ successor, predecessor, MIN_FLOAT_PRECISION_VALUE } = require '../util/math'
+{ Quantity, doAddition, doSubtraction, compare_units, convert_value } = require '../datatypes/quantity'
+{ successor, predecessor } = require '../util/math'
 dtivl = require '../datatypes/interval'
 cmp = require '../util/comparison'
 
@@ -287,50 +287,49 @@ module.exports.Expand = class Expand extends Expression
     if per.unit in ['week', 'weeks']
       per.value *= 7
       per.unit = 'day'
+
+    # Precision Checks
     # return null if precision not applicable (e.g. gram, or minutes for dates)
     return null if per.unit not in interval.low.constructor.FIELDS
-    # return null if per is more precise than the low end
-    return null if interval.low.isLessPrecise(per.unit)
+
+    # open interval with null boundaries do not contribute to output
+    # closed interval with null boundaries are not allowed for performance reasons
+    return null unless interval.low? and interval.high?
 
     low = if interval.lowClosed then interval.low else interval.low.successor()
     high = if interval.highClosed then interval.high else interval.high.predecessor()
     return [] if low.after(high)
+    return [] if interval.low.isLessPrecise(per.unit) or interval.high.isLessPrecise(per.unit)
 
     current_low = low
     results = []
-    # Check if interval should be a point interval, for example "expand [@2000-01-01, @2000-01-02]
-    # per 1 day" results in intervals with the same start and end: { [@2000-01-01, @2000-01-01],
-    # [@2000-01-02, @2000-01-02] }. However "expand [@2000-01-01, @2000-03-01] per 1 month" results
-    # in { [@2000-01-01, @2000-01-31], [@2000-02-01, @2000-02-28] }. This check allows us
-    # to skip the unnecessary date arithmetic in the first case.
-    point_intervals = current_low.add(per.value, per.unit).predecessor().equals(current_low)
 
-    # count is how many items to put in the result - take duration and then add a one for cases
-    # where e.g. the high point ends a month, like 2018-03-31. Then divide by the per value.
-    # We do this to avoid a date comparison operation for each item in the result list.
-    if per.unit == low.getPrecision()
-      count = Math.floor((low.durationBetween(high,per.unit).high + 1) / per.value)
-    # if precisions are equal, we want the high uncertainty (e.g. [2000, 2002] per year should
-    # give a list of 3) else, take the low uncertainty (e.g. [2012-01-01T13:00:00, 2012-01-02T12:59]
-    # per day should give {} since we dont include any uncertain portions)
-    else
-      count = Math.floor((low.durationBetween(high,per.unit).low + 1) / per.value)
+    low = @truncateToPrecision(low, per.unit)
+    high = @truncateToPrecision(high, per.unit)
 
-    if point_intervals
-      for i in [1..count + 1] #point intervals result in one extra item (see above example)
-        results.push(new dtivl.Interval(current_low, current_low.copy(), true, true))
-        current_low = current_low.add(per.value, per.unit)
-    else
-      for i in [1..count]
-        current_high = current_low.add(per.value, per.unit).predecessor()
-        results.push(new dtivl.Interval(current_low, current_high, true, true))
-        current_low = current_low.add(per.value, per.unit)
-    # because of the +1 in the count declaration, we might have added an extraneous item at the end.
-    # we use 'not sameOrBefore' instead of 'after' since we do not include items in the results
-    # if they just *might* not be after (due to uncertainty)
-    if results.length > 0 and !results[results.length-1].high.sameOrBefore(high)
-      results.pop()
+    current_high = current_low.add(per.value, per.unit).predecessor()
+    intervalToAdd = new dtivl.Interval(current_low, current_high, true, true)
+    while intervalToAdd.high.sameOrBefore(high)
+      results.push(intervalToAdd)
+      current_low = current_low.add(per.value, per.unit)
+      current_high = current_low.add(per.value, per.unit).predecessor()
+      intervalToAdd = new dtivl.Interval(current_low, current_high, true, true)
+
     return results
+
+  truncateToPrecision: (value, unit) ->
+    # If interval boundaries are more precise than per quantity, truncate to
+    # the precision specified by the per
+    # If the per is more precise than the interval, fill out precision with
+    # minimum values so that the expansion can produce a more precise result
+    shouldTruncate = false
+    for field in value.constructor.FIELDS
+      if shouldTruncate
+        value[field] = null
+      if field is unit
+        # Start truncating after this unit
+        shouldTruncate = true
+    return value
 
   expandQuantityInterval: (interval, per) ->
     # we want to convert everything to the more precise of the interval.low or per
@@ -345,8 +344,7 @@ module.exports.Expand = class Expand extends Expression
     # return null if unit conversion failed, must have mismatched units
     return null if not (low_value? and high_value? and per_value?)
 
-    results = @makeNumericIntervalList(
-      low_value, high_value, interval.lowClosed, interval.highClosed, per_value)
+    results = @makeNumericIntervalList(low_value, high_value, interval.lowClosed, interval.highClosed, per_value)
 
     for itvl in results
       itvl.low = new Quantity(itvl.low, result_units)
@@ -354,18 +352,63 @@ module.exports.Expand = class Expand extends Expression
     return results
 
   expandNumericInterval: (interval, per) ->
-    return null if per.unit != '1'
-    return @makeNumericIntervalList(
-      interval.low, interval.high, interval.lowClosed, interval.highClosed, per.value)
+    return null unless per.unit is '1' or per.unit is ''
+    @makeNumericIntervalList(interval.low, interval.high, interval.lowClosed, interval.highClosed, per.value)
 
-  makeNumericIntervalList: (low, high, lowClosed, highClosed, per) ->
-    point_intervals = Number.isInteger(low) and Number.isInteger(high) and Number.isInteger(per)
-    gap = if point_intervals then 1 else MIN_FLOAT_PRECISION_VALUE
-    low = low + gap if !lowClosed
-    high = high - gap if !highClosed
-    width = per - gap
+  makeNumericIntervalList: (low, high, lowClosed, highClosed, perValue) ->
+    # Determine the precision to pass to the truncateDecimal call below.
+    if Math.floor(perValue.valueOf()) == perValue.valueOf()
+      decimalPrecision = 0
+    else
+      decimalPrecision = perValue.toString().split('.')[1].length || 0
+
+    # CQL has max decimal precision of 8
+    if decimalPrecision > 8
+      decimalPrecision = 8
+
+    low = if lowClosed then low else successor low
+    high = if highClosed then high else predecessor high
+
+    # If the interval boundaries are more precise than the per quantity, the
+    # more precise values will be truncated to the precision specified by the
+    # per quantity.
+    low = truncateDecimal(low, decimalPrecision)
+    high = truncateDecimal(high, decimalPrecision)
+
     return [] if low > high
-    results = (new dtivl.Interval(x, x + width, true, true) for x in [low..(high - width)] by per)
+    return [] unless low? and high?
+
+    # Deal with the weird case of a point interval expanding with more
+    # precision than it is defined by moving the high
+    if low is high
+      # parseFloat(toFixed()) avoids JavaScript floating point issues
+      # i.e. 10.2 + 0.1 = 10.299999999999
+      high = truncateDecimal(high + 1 - perValue, decimalPrecision)
+
+    current_low = low
+    results = []
+
+    # The spec says that each interval in the result should be of _size_ per, and gives an example:
+    # expand { Interval[10, 10] } per 0.1
+    # with result { Interval[10.0, 10.0], Interval[10.1, 10.1], ..., Interval[10.9, 10.9] }
+    # but size for decimal point intervals would be 0.00000001 rather than 0.1,
+    # so we can't simply use successor or predecessor like we can with datetime
+    # I'm going to assume that what the spec wants is to use the decimal digit as the base unit for size.
+    # So `per 0.1` will treat a point interval as size 0.1.
+    # expand {Interval{[10, 10]} per 0.2 would then result in
+    # with result { Interval[10.0, 10.1], Interval[10.3, 10.4], ..., Interval[10.7, 10.8] }
+    perUnitSize = truncateDecimal(Math.pow(0.1, decimalPrecision), decimalPrecision)
+    return [] if perValue > (high - low + perUnitSize)
+    current_high = truncateDecimal(current_low + perValue - perUnitSize, decimalPrecision)
+    intervalToAdd = new dtivl.Interval(current_low, current_high, true, true)
+    while intervalToAdd.high <= high
+      results.push(intervalToAdd)
+      # current_low = truncateDecimal(current_low + per.value, decimalPrecision)
+      # current_high = truncateDecimal(current_low + per.value - perUnitSize, decimalPrecision)
+      current_low = parseFloat((current_low + perValue).toFixed(decimalPrecision))
+      current_high = parseFloat((current_low + perValue - perUnitSize).toFixed(decimalPrecision))
+      intervalToAdd = new dtivl.Interval(current_low, current_high, true, true)
+
     return results
 
 module.exports.Collapse = class Collapse extends Expression
@@ -453,3 +496,34 @@ collapseIntervals = (intervals, perWidth) ->
     collapsedIntervals.push a
     collapsedIntervals
 
+getpointSize = (interval) ->
+  if interval.low?
+    if interval.low.isDateTime
+      precisionUnits = interval.low.getPrecision()
+      pointSize = new Quantity(value: 1, unit: precisionUnits)
+    else if interval.low.isQuantity
+      pointSize = doSubtraction(successor(interval.low), interval.low)
+    else
+      pointSize = successor(interval.low) - interval.low
+  else if interval.high?
+    if interval.high.isDateTime
+      precisionUnits = interval.high.getPrecision()
+      pointSize = new Quantity(value: 1, unit: precisionUnits)
+    else if interval.high.isQuantity
+      pointSize = doSubtraction(successor(interval.high), interval.high)
+    else
+      pointSize = successor(interval.high) - interval.high
+  else
+    throw new Error("Point type of intervals cannot be determined.")
+
+  if typeof pointSize is 'number'
+    pointSize = new Quantity(value: pointSize, unit: '1')
+
+  return pointSize
+
+truncateDecimal = (decimal, decimalPlaces) ->
+  # like parseFloat().toFixed() but floor rather than round
+  # TODO: This is currently failing for 10.2 + 0.1, which results in
+  # 10.299999999999999 and so gets truncated to 10.2, causing an infinite loop.
+  re = new RegExp('^-?\\d+(?:\.\\d{0,' + (decimalPlaces || -1) + '})?')
+  parseFloat(decimal.toString().match(re)[0])
