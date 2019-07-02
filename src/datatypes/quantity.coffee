@@ -8,13 +8,10 @@ module.exports.Quantity = class Quantity
     isQuantity:
       get: -> true
 
-  constructor: (json) ->
-    @unit = json.unit
-
-    if !json.value?
+  constructor: (@value, @unit) ->
+    if !@value? or isNaN(@value)
       throw new Error("Cannot create a quantity with an undefined value")
     else
-      @value = parseFloat json.value
       if !isValidDecimal(@value)
         throw new Error("Cannot create a quantity with an invalid decimal value")
 
@@ -23,7 +20,7 @@ module.exports.Quantity = class Quantity
       throw new Error("\'#{@unit}\' is not a valid UCUM unit.")
 
   clone: () ->
-    new Quantity({value: @value, unit: @unit})
+    new Quantity(@value, @unit)
 
   toString: () ->
     "#{@value} '#{@unit}'"
@@ -73,8 +70,11 @@ module.exports.Quantity = class Quantity
         else
           decimalAdjust("round", @value, -8)  == decimalAdjust("round", other_v, -8)
 
-  convertUnits: (to_units) ->
-    convert_value(@value,@unit,to_units)
+  convertUnit: (to_unit) ->
+    value = convert_value(@value,@unit,to_unit)
+    unit = to_unit
+    # Need to pass through constructor again to catch invalid units
+    new Quantity(value, unit)
 
   dividedBy: (other) ->
     @multiplyDivide(other,"/")
@@ -84,19 +84,19 @@ module.exports.Quantity = class Quantity
 
   multiplyDivide: (other, operator) ->
     if other instanceof Quantity
-      a = if this.unit? then this else new Quantity({value: this.value, unit: "1"})
-      b = if other.unit? then other else new Quantity({value: other.value, unit: "1"})
+      a = if this.unit? then this else new Quantity(this.value, '1')
+      b = if other.unit? then other else new Quantity(other.value, unit: '1')
       can_val = a.to_ucum()
       other_can_value = b.to_ucum()
       ucum_value = ucum_multiply(can_val,[[operator,other_can_value]])
       try
-        createQuantity(ucum_value.value, units_to_string(ucum_value.units))
+        new Quantity(ucum_value.value, units_to_string(ucum_value.units))
       catch
         null
     else
       value = if operator == "/" then @value / other  else @value * other
       try
-        createQuantity( decimalAdjust("round",value,-8), coalesceToOne(@unit) )
+        new Quantity(decimalAdjust("round",value,-8), coalesceToOne(@unit))
       catch
         null
 
@@ -214,9 +214,6 @@ ucum_multiply = (t, ms=[]) ->
         delete ret.units[k]
   ret
 
-module.exports.createQuantity = createQuantity = (value,unit) ->
-  new Quantity({value: value, unit: unit})
-
 module.exports.parseQuantity = (str) ->
   components = /([+|-]?\d+\.?\d*)\s*('(.+)')?/.exec str
   if components? and components[1]?
@@ -226,7 +223,7 @@ module.exports.parseQuantity = (str) ->
       unit = components[3].trim()
     else
       unit = ""
-    new Quantity({value: value, unit: unit})
+    new Quantity(value, unit)
   else
     null
 
@@ -237,7 +234,7 @@ doScaledAddition = (a,b,scaleForB) ->
     # we will choose the unit of a to be the unit we return
     val = convert_value(b.value * scaleForB, b_unit, a_unit)
     return null unless val?
-    new Quantity({unit: a_unit, value: a.value + val})
+    new Quantity(a.value + val, a_unit)
   else if a.copy and a.add
     b_unit = if b instanceof Quantity then coalesceToOne(b.unit) else b.unit
     a.copy().add(b.value * scaleForB, clean_unit(b_unit))

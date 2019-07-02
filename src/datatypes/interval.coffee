@@ -306,7 +306,7 @@ module.exports.Interval = class Interval
       highValue = closed.high.value
       diff = Math.abs(highValue - lowValue)
       Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8)
-      new Quantity(value: diff, unit: closed.low.unit)
+      new Quantity(diff, closed.low.unit)
     else
       # TODO: Fix precision to 8 decimals in other places that return numbers
       diff = Math.abs(closed.high - closed.low)
@@ -328,7 +328,7 @@ module.exports.Interval = class Interval
       highValue = closed.high.value
       diff = Math.abs(highValue - lowValue) + pointSize.value
       Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8)
-      new Quantity(value: diff, unit: closed.low.unit)
+      new Quantity(diff, closed.low.unit)
     else
       diff = Math.abs(closed.high - closed.low) + pointSize.value
       Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8)
@@ -337,7 +337,7 @@ module.exports.Interval = class Interval
     if @low?
       if @low.isDateTime
         precisionUnits = @low.getPrecision()
-        pointSize = new Quantity(value: 1, unit: precisionUnits)
+        pointSize = new Quantity(1, precisionUnits)
       else if @low.isQuantity
         pointSize = doSubtraction(successor(@low), @low)
       else
@@ -345,7 +345,7 @@ module.exports.Interval = class Interval
     else if @high?
       if @high.isDateTime
         precisionUnits = @high.getPrecision()
-        pointSize = new Quantity(value: 1, unit: precisionUnits)
+        pointSize = new Quantity(1, precisionUnits)
       else if @high.isQuantity
         pointSize = doSubtraction(successor(@high), @high)
       else
@@ -354,7 +354,7 @@ module.exports.Interval = class Interval
       throw new Error("Point type of intervals cannot be determined.")
 
     if typeof pointSize is 'number'
-      pointSize = new Quantity(value: pointSize, unit: '1')
+      pointSize = new Quantity(pointSize, '1')
 
     return pointSize
 

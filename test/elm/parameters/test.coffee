@@ -222,7 +222,7 @@ describe 'QuantityParameterTypes', ->
     setup @, data
 
   it 'should execute to provided valid value', ->
-    q = new Quantity({value: 5, unit: "mg"})
+    q = new Quantity(5, 'mg')
     @foo.exec(@ctx.withParameters { FooP: q }).should.equal q
 
   it 'should throw when provided value is wrong type', ->
@@ -230,10 +230,10 @@ describe 'QuantityParameterTypes', ->
     should(() => @foo.exec(@ctx.withParameters { FooP: q })).throw(/.*wrong type.*/)
 
   it 'should execute to default value', ->
-    @foo2.exec(@ctx).should.eql new Quantity({localId: '4', value: 10, unit: "dL"})
+    @foo2.exec(@ctx).should.eql new Quantity(10, 'dL')
 
   it 'should execute to overriding valid value', ->
-    q = new Quantity({value: 5, unit: "mg"})
+    q = new Quantity(5, 'mg')
     @foo2.exec(@ctx.withParameters { FooDP: q }).should.equal q
 
   it 'should throw when overriding value is wrong type', ->

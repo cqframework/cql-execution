@@ -21,7 +21,7 @@ module.exports.Instance = class Instance extends Expression
     for el in @element
       obj[el.name] = el.exec(ctx)
     switch @classType
-      when "{urn:hl7-org:elm-types:r1}Quantity" then new Quantity(obj)
+      when "{urn:hl7-org:elm-types:r1}Quantity" then new Quantity(obj.value, obj.unit)
       when "{urn:hl7-org:elm-types:r1}Code" then new Code(obj.code, obj.system, obj.version, obj.display)
       when "{urn:hl7-org:elm-types:r1}Concept" then new Concept(obj.codes, obj.display)
       else obj

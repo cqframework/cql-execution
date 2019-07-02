@@ -254,13 +254,13 @@ module.exports.Expand = class Expand extends Expression
 
     if type in ["time", "date", "datetime"]
       expandFunction = @expandDTishInterval
-      defaultPer = (interval) -> new Quantity(value: 1, unit: interval.low.getPrecision())
+      defaultPer = (interval) -> new Quantity(1, interval.low.getPrecision())
     else if type in ["quantity"]
       expandFunction = @expandQuantityInterval
-      defaultPer = (interval) -> new Quantity(value: 1, unit: interval.low.unit)
+      defaultPer = (interval) -> new Quantity(1, interval.low.unit)
     else if type in ["integer", "decimal"]
       expandFunction = @expandNumericInterval
-      defaultPer = (interval) -> new Quantity(value: 1, unit: '1')
+      defaultPer = (interval) -> new Quantity(1, '1')
     else
       throw new Error("Interval list type not yet supported.")
 
@@ -349,8 +349,8 @@ module.exports.Expand = class Expand extends Expression
       low_value, high_value, interval.lowClosed, interval.highClosed, per_value)
 
     for itvl in results
-      itvl.low = new Quantity(value: itvl.low, unit:result_units)
-      itvl.high = new Quantity(value: itvl.high, unit:result_units)
+      itvl.low = new Quantity(itvl.low, result_units)
+      itvl.high = new Quantity(itvl.high, result_units)
     return results
 
   expandNumericInterval: (interval, per) ->

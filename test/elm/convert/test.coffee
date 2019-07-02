@@ -553,16 +553,16 @@ describe 'ConvertQuantity', ->
     setup @, data
 
   it "should return converted Quantity", ->
-    @convertQuantityGood.exec(@ctx).should.eql new Quantity({unit:"g", value: .005})
+    @convertQuantityGood.exec(@ctx).should.eql new Quantity(.005, 'g')
 
   it "should return converted Quantity using new syntx", ->
-    @convertSyntax.exec(@ctx).should.eql new Quantity({unit:"g", value: .005})
+    @convertSyntax.exec(@ctx).should.eql new Quantity(.005, 'g')
 
   it "should return converted Quantity with Kg", ->
-    @convertQuantityToKg.exec(@ctx).should.eql new Quantity({unit: "kg", value: 5})
+    @convertQuantityToKg.exec(@ctx).should.eql new Quantity(5, 'kg')
 
   it "should return converted Quantity with weeks", ->
-    @convertQuantityToWeeks.exec(@ctx).should.eql new Quantity({unit: "weeks", value: 4})
+    @convertQuantityToWeeks.exec(@ctx).should.eql new Quantity(4, 'weeks')
 
   it "should return null for an invalid UCUM conversion", ->
     should(@nullConvertQuantity.exec(@ctx)).be.null()
