@@ -5,7 +5,7 @@
 { parseQuantity, Quantity } = require '../datatypes/quantity'
 { isValidDecimal, isValidInteger, limitDecimalPrecision } = require('../util/math')
 { normalizeMillisecondsField } = require '../util/util'
-{ Ratio } = require './ratio'
+{ Ratio } = require '../datatypes/ratio'
 
 # TODO: Casting and Conversion needs unit tests!
 
@@ -126,7 +126,7 @@ module.exports.ToRatio = class ToRatio extends Expression
         return null
       # The value element of a Quantity must be present.
       return null unless numerator? and denominator?
-      return new Ratio({ numerator: numerator, denominator: denominator })
+      return new Ratio(numerator, denominator)
     else
       return null
 

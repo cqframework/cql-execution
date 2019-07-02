@@ -1,6 +1,5 @@
 library     = require './elm/library'
 quantity    = require './elm/quantity'
-ratio       = require './elm/ratio'
 expression  = require './elm/expression'
 repository  = require './runtime/repository'
 context     = require './runtime/context'
@@ -37,5 +36,5 @@ module.exports.Date               = datatypes.Date
 module.exports.DateTime           = datatypes.DateTime
 module.exports.Interval           = datatypes.Interval
 module.exports.Quantity           = datatypes.Quantity
-module.exports.Ratio              = ratio.Ratio
+module.exports.Ratio              = datatypes.Ratio
 module.exports.ValueSet           = datatypes.ValueSet
