@@ -867,7 +867,7 @@ DateTime.prototype.getFieldCieling = Date.prototype.getFieldCieling = (field) ->
   throw new Error('Tried to clieling a field that has no cieling value: ' + field)
 
 compareWithDefaultResult = (a, b, defaultResult) ->
-  # leave with false there is a type mismatch
+  # return false there is a type mismatch
   unless (a.isDate and b.isDate) or (a.isDateTime and b.isDateTime)
     return false
 
