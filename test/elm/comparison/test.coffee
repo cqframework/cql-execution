@@ -2,7 +2,7 @@ should = require 'should'
 setup = require '../../setup'
 data = require './data'
 
-# TO Comparisons for Dates
+# TODO: Comparisons for Dates
 
 describe 'Equal', ->
   @beforeEach ->

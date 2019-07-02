@@ -324,9 +324,11 @@ module.exports.ConvertQuantity = class ConvertQuantity extends Expression
     [quantity, newUnit] = @execArgs(ctx)
 
     if quantity? and newUnit?
-      newValue = quantity.convertUnits(newUnit)
-      return new Quantity({value: newValue, unit: newUnit}) if newValue?
-    return null
+      try
+        quantity.convertUnit(newUnit)
+      catch
+        # Cannot convert input to target unit, spec says to return null
+        null
 
 module.exports.CanConvertQuantity = class CanConvertQuantity extends Expression
   constructor: (json) ->
@@ -336,7 +338,11 @@ module.exports.CanConvertQuantity = class CanConvertQuantity extends Expression
     [quantity, newUnit] = @execArgs(ctx)
 
     if quantity? and newUnit?
-      if quantity.convertUnits(newUnit)? then return true else return false
+      try
+        quantity.convertUnit(newUnit)
+        return true
+      catch
+        return false
     return null
 
 module.exports.Is = class Is extends UnimplementedExpression

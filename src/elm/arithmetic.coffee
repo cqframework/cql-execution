@@ -2,7 +2,7 @@
 { typeIsArray , allTrue, anyTrue} = require '../util/util'
 { build } = require './builder'
 MathUtil = require '../util/math'
-{ Quantity, createQuantity, doAddition, doSubtraction, doMultiplication, doDivision } = require('../datatypes/quantity')
+{ Quantity, doAddition, doSubtraction, doMultiplication, doDivision } = require('../datatypes/quantity')
 
 module.exports.Add = class Add extends Expression
   constructor: (json) ->
@@ -119,7 +119,7 @@ module.exports.Abs = class Abs extends  Expression
     if (not arg?)
       null
     else if arg.isQuantity
-      createQuantity( Math.abs(arg.value), arg.unit)
+      new Quantity(Math.abs(arg.value), arg.unit)
     else
       Math.abs arg
 
@@ -132,7 +132,7 @@ module.exports.Negate = class Negate extends Expression
     if (not arg?)
       null
     else if arg.isQuantity
-      createQuantity(arg.value * -1, arg.unit)
+      new Quantity(arg.value * -1, arg.unit)
     else
       arg * -1
 
