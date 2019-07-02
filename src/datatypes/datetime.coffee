@@ -68,6 +68,11 @@ class DateTime
         date.getMilliseconds())
 
   constructor: (@year=null, @month=null, @day=null, @hour=null, @minute=null, @second=null, @millisecond=null, @timezoneOffset) ->
+    # Mongoose has some special logic that passes in a Date to the Constructor,
+    # so if the first argument is a Date, pass through
+    if @year? and @year.isDate # @year is actually a Date
+      return @year
+
     # from the spec: If no timezone is specified, the timezone of the evaluation request timestamp is used.
     # NOTE: timezoneOffset will be explicitly null for the Time overload, whereas
     # it will be undefined if simply unspecified

@@ -270,13 +270,6 @@ convertAllUnits = (arr) ->
     converted.push(quantity.convertUnit(arr[0].unit))
   converted
 
-setQuantityUnit = (quantity, arr) ->
-  # we used the first unit in the list to convert to so that is what
-  # we will use as a unit for quantities
-  if arr?[0]?.unit
-    quantity.unit = arr[0].unit
-  quantity
-
 medianOfNumbers = (numbers) ->
   numbers = numerical_sort(numbers, "asc")
   if (numbers.length % 2 == 1)
