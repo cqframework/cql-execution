@@ -12,6 +12,8 @@ define NoSeparator: Combine({ 'abc', 'def', 'ghi', 'jkl' })
 define Separator: Combine({ 'abc', 'def', 'ghi', 'jkl' }, ';')
 define CombineNull: Combine(null, ';')
 define CombineNullItem: Combine({ 'abc', 'def', null, 'jkl' }, ';')
+define CombineOneNullItem: Combine({null}, ';')
+define CombineEmptyNull: Combine({}, ';')
 
 // @Test: Split
 define CommaSeparated: Split('a,b,c,,1,2,3', ',')
