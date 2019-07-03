@@ -572,6 +572,7 @@ define Separator: Combine({ 'abc', 'def', 'ghi', 'jkl' }, ';')
 define CombineNull: Combine(null, ';')
 define CombineNullItem: Combine({ 'abc', 'def', null, 'jkl' }, ';')
 define CombineOneNullItem: Combine({null}, ';')
+define CombineEmptyNull: Combine({}, ';')
 ###
 
 module.exports['Combine'] = {
@@ -992,6 +993,64 @@ module.exports['Combine'] = {
                },
                "separator" : {
                   "localId" : "31",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : ";",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "37",
+            "name" : "CombineEmptyNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "37",
+                  "s" : [ {
+                     "value" : [ "define ","CombineEmptyNull",": " ]
+                  }, {
+                     "r" : "36",
+                     "s" : [ {
+                        "r" : "34",
+                        "value" : [ "Combine","(","{}",", " ]
+                     }, {
+                        "r" : "35",
+                        "s" : [ {
+                           "value" : [ "';'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "36",
+               "type" : "Combine",
+               "source" : {
+                  "type" : "Query",
+                  "source" : [ {
+                     "alias" : "X",
+                     "expression" : {
+                        "localId" : "34",
+                        "type" : "List"
+                     }
+                  } ],
+                  "return" : {
+                     "distinct" : false,
+                     "expression" : {
+                        "asType" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "As",
+                        "operand" : {
+                           "name" : "X",
+                           "type" : "AliasRef"
+                        }
+                     }
+                  }
+               },
+               "separator" : {
+                  "localId" : "35",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : ";",
                   "type" : "Literal"
