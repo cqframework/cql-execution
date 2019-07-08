@@ -452,8 +452,9 @@ describe 'Distinct', ->
   it 'should do nothing to an array of distinct tuples', ->
     @noDupsTuples.exec(@ctx).should.eql [{ hello: 'world' }, { hello: 'cleveland' }]
 
-  it 'should remove duplicate null values', ->
-    @duplicateNulls.exec(@ctx).should.eql [null, 1, 2, 3, 4, 5]
+  it 'should preserve duplicate null values in original order', ->
+    # define DuplicateNulls: distinct {null, 1, 2, null, 3, 4, 5, null}
+    @duplicateNulls.exec(@ctx).should.eql [null, 1, 2, null, 3, 4, 5, null]
 
 describe 'First', ->
   @beforeEach ->
