@@ -17,8 +17,7 @@ define dateStr: convert '2015-01-02' to Date
 define NullConvert: convert 'foo' to DateTime
 define ZDateTime: convert '2014-01-01T14:30:00.0Z' to DateTime // January 1st, 2014, 2:30PM UTC
 define TimezoneDateTime: convert '2014-01-01T14:30:00.0-07:00' to DateTime // January 1st, 2014, 2:30PM Mountain Standard (GMT-7:00)
-define ZTime: convert 'T14:30:00.0Z' to Time // 2:30PM UTC
-define TimezoneTime: convert 'T14:30:00.0-07:00' to Time // 2:30PM Mountain Standard (GMT-7:00)
+define TimezoneTime: convert '14:30:00.0-07:00' to Time // 2:30PM Mountain Standard (GMT-7:00)
 
 // @Test: FromInteger
 define string10: convert 10 to String
@@ -95,17 +94,14 @@ define InvalidDenominator: ToRatio('1.0 \'mg\':2.0 \'cc\'')
 // @Test: ToTime
 define NullArgTime: ToTime((null as String))
 define IncorrectFormatTime: ToTime('10:00PM')
-define InvalidTime: ToTime('25:99.000+00.00')
-define TimeH: ToTime('T02')
-define TimeHM: ToTime('T02:04')
-define TimeHMS: ToTime('T02:04:59')
-define TimeHMSMs: ToTime('T02:04:59.123')
-define TimeHMSMsZ: ToTime('T02:04:59.123Z')
-define TimeHMSMsTimezone: ToTime('T02:04:59.123+01')
-define TimeHMSMsFullTimezone: ToTime('T02:04:59.123+01:00')
-define HourTooHigh: ToTime('T24')
-define MinuteTooHigh: ToTime('T23:60')
-define SecondTooHigh: ToTime('T23:59:60')
+define InvalidTime: ToTime('25:99.000')
+define TimeH: ToTime('02')
+define TimeHM: ToTime('02:04')
+define TimeHMS: ToTime('02:04:59')
+define TimeHMSMs: ToTime('02:04:59.123')
+define HourTooHigh: ToTime('24')
+define MinuteTooHigh: ToTime('23:60')
+define SecondTooHigh: ToTime('23:59:60')
 
 // @Test: ToBoolean
 define UpperCaseTrue: ToBoolean('TRUE')
@@ -123,6 +119,12 @@ define IsNull: ToBoolean('falsetto')
 // @Test: ToConcept
 define IsValid: ToConcept(Code { system: 'http://loinc.org', code: '8480-6' }) // Concept { codes: { Code { system: 'http://loinc.org', code: '8480-6' } } }
 define IsNull: ToConcept(null as Code)
+
+// @Test: ToDate
+define ToDateString: ToDate('2015-01-02')
+define ToDateDateTime: ToDate(DateTime(2000, 3, 15, 13, 30, 25, 200))
+define ToDateNull: ToDate(null as String)
+define ToDateDateTimeString: ToDate(@2014-01-01T12:30:00)
 
 // @Test: ConvertsToBoolean
 define IsTrueWithTrueValue: ConvertsToBoolean('y')
@@ -171,6 +173,19 @@ define IsFalse: ConvertsToString(Code { system: 'http://loinc.org', code: '8480-
 define IsNull: ConvertsToString(null as String)
 
 // @Test: ConvertsToTime
-define IsTrue: ConvertsToTime('T02:04:59.123+01:00')
+define IsTrue: ConvertsToTime('02:04:59.123')
 define IsFalse: ConvertsToTime('foo')
 define IsNull: ConvertsToTime(null as String)
+
+// @Test: ConvertQuantity
+define ConvertQuantityGood: ConvertQuantity(5 'mg', 'g')
+define ConvertSyntax: convert 5 'mg' to 'g'
+define ConvertQuantityToKg: ConvertQuantity(5000 'g', 'kg')
+define ConvertQuantityToWeeks: ConvertQuantity(28 'days', 'weeks')
+define NullConvertQuantity: ConvertQuantity(5 'mg', 'fox')
+
+// @Test: CanConvertQuantity
+define CanConvertQuantityTrue: CanConvertQuantity(5 'mg', 'g')
+define CanConvertQuantityFalse: CanConvertQuantity(5 'mg', 'fox')
+define CanConvertQuantityNullFirstNull: CanConvertQuantity(null, 'g')
+define CanConvertQuantityNullSecondNUll: CanConvertQuantity(5 'mg', null)

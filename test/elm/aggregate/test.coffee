@@ -24,18 +24,26 @@ describe 'Sum', ->
 
   it 'should be able to sum lists without nulls', ->
     @not_null.exec(@ctx).should.equal 15
+
   it 'should be able to sum lists with nulls', ->
     @has_null.exec(@ctx).should.equal 3
+
   it 'should be able to sum empty list', ->
     @empty.exec(@ctx) == null
+
   it 'should be able to sum quantity lists without nulls', ->
-    validateQuantity @not_null_q.exec(@ctx), 15, 'ml'
+    q = @not_null_q.exec(@ctx)
+    validateQuantity q, 15, 'ml'
+
   it 'should be able to sum  quantity lists with nulls', ->
     validateQuantity @has_null_q.exec(@ctx), 3, 'ml'
+
   it 'should return null for unmatched units in a list of quantiies', ->
     @unmatched_units_q.exec(@ctx) == null
+
   it 'should be able to sum quantity lists with related units', ->
-    validateQuantity @q_diff_units.exec(@ctx), 15, 'ml'
+    q = @q_diff_units.exec(@ctx)
+    validateQuantity q, 15, 'ml'
 
 describe 'Min', ->
   @beforeEach ->
@@ -132,18 +140,27 @@ describe 'Max', ->
 describe 'Avg', ->
   @beforeEach ->
     setup @, data
+
   it 'should be able to find average for lists without nulls', ->
     @not_null.exec(@ctx).should.equal 3
+
   it 'should be able to find average for lists with nulls', ->
     @has_null.exec(@ctx).should.equal 1.5
+
   it 'should be return null for empty list', ->
     @empty.exec(@ctx) == null
+
   it 'should be able to find average for lists of quantiies without nulls', ->
-    validateQuantity @not_null_q.exec(@ctx), 3, 'ml'
+    q = @not_null_q.exec(@ctx)
+    validateQuantity q, 3, 'ml'
+
   it 'should be able to find average for lists of quantiies with nulls', ->
-    validateQuantity @has_null_q.exec(@ctx), 1.5 , 'ml'
+    q = @has_null_q.exec(@ctx)
+    validateQuantity q, 1.5 , 'ml'
+
   it 'should be able to find average for lists of quantiies with related units', ->
-    validateQuantity @q_diff_units.exec(@ctx), 3, 'ml'
+    q = @q_diff_units.exec(@ctx)
+    validateQuantity q, 3, 'ml'
 
 
 describe 'Median', ->
@@ -152,24 +169,39 @@ describe 'Median', ->
 
   it 'should be able to find median of odd numbered list', ->
     @odd.exec(@ctx).should.equal 3
+
   it 'should be able to find median of even numbered list', ->
     @even.exec(@ctx).should.equal 3.5
+
   it 'should be able to find median of odd numbered list that contains duplicates', ->
     @dup_vals_odd.exec(@ctx).should.equal 3
+
   it 'should be able to find median of even numbered list that contians duplicates', ->
     @dup_vals_even.exec(@ctx).should.equal 2.5
+
   it 'should be return null for empty list', ->
     @empty.exec(@ctx) == null
+
   it 'should be able to find median of odd numbered list', ->
-    validateQuantity @odd_q.exec(@ctx),  3 , 'ml'
+    q = @odd_q.exec(@ctx)
+    validateQuantity q, 3, 'ml'
+
   it 'should be able to find median of even numbered list', ->
-    validateQuantity @even_q.exec(@ctx), 3.5, 'ml'
+    q = @even_q.exec(@ctx)
+    validateQuantity q, 3.5, 'ml'
+
   it 'should be able to find median of odd numbered list that contains duplicates', ->
-    validateQuantity @dup_vals_odd_q.exec(@ctx),3, 'ml'
+    q = @dup_vals_odd_q.exec(@ctx)
+    validateQuantity q,3, 'ml'
+
   it 'should be able to find median of even numbered list that contians duplicates', ->
-    validateQuantity @dup_vals_even_q.exec(@ctx), 2.5, 'ml'
+    q = @dup_vals_even_q.exec(@ctx)
+    validateQuantity q, 2.5, 'ml'
+
   it 'should be able to find median of even numbered list of quantities with related units', ->
-    validateQuantity @q_diff_units.exec(@ctx), 3.5, 'ml'
+    q = @q_diff_units.exec(@ctx)
+    validateQuantity q, 3.5, 'ml'
+
 
 describe 'Mode', ->
   @beforeEach ->
@@ -228,7 +260,7 @@ describe 'StdDev', ->
     setup @, data
   it 'should be able to find Standard Dev of a list ', ->
     @std.exec(@ctx).should.equal 1.4142135623730951
-  it 'should be able to find Standard Dev of a list of like qauntities', ->
+  it 'should be able to find Standard Dev of a list of like quantities', ->
     validateQuantity @std_q.exec(@ctx), 1.4142135623730951, 'ml'
   it 'should be able to find Standard Dev of a list of related quantities', ->
     validateQuantity @q_diff_units.exec(@ctx), 1.4142135623730951, 'ml'
@@ -283,7 +315,8 @@ describe 'Product', ->
     validateQuantity @quantity_product.exec(@ctx), 24, 'g'
 
   it 'should return a 0 quantity product', ->
-    validateQuantity @quantity_zero_product.exec(@ctx), 0, 'g'
+    q = @quantity_zero_product.exec(@ctx)
+    validateQuantity q, 0, 'g'
 
   it 'should return null when null list is passed in', ->
     should(@product_null.exec(@ctx)).be.null()

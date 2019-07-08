@@ -2,10 +2,10 @@
 { FunctionRef } = require './reusable'
 { DateTime, Date } = require '../datatypes/datetime'
 { Concept } = require '../datatypes/clinical'
-{ parseQuantity } = require './quantity'
+{ parseQuantity, Quantity } = require '../datatypes/quantity'
 { isValidDecimal, isValidInteger, limitDecimalPrecision } = require('../util/math')
 { normalizeMillisecondsField } = require '../util/util'
-{ Ratio } = require './ratio'
+{ Ratio } = require '../datatypes/ratio'
 
 # TODO: Casting and Conversion needs unit tests!
 
@@ -126,7 +126,7 @@ module.exports.ToRatio = class ToRatio extends Expression
         return null
       # The value element of a Quantity must be present.
       return null unless numerator? and denominator?
-      return new Ratio({ numerator: numerator, denominator: denominator })
+      return new Ratio(numerator, denominator)
     else
       return null
 
@@ -147,8 +147,8 @@ module.exports.ToTime = class ToTime extends Expression
     if arg? and typeof arg != 'undefined'
       timeString = arg.toString()
       # Return null if string doesn't represent a valid ISO-8601 Time
-      # Thh:mm:ss.fff(+|-)hh:mm or Thh:mm:ss.fffZ
-      matches = /T((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(\:?(\d{2}))?))?/.exec timeString
+      # hh:mm:ss.fff or hh:mm:ss.fff
+      matches = /^((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?$/.exec timeString
       return null unless matches?
       hours = matches[2]
       minutes = matches[4]
@@ -167,14 +167,8 @@ module.exports.ToTime = class ToTime extends Expression
       if milliseconds?
         milliseconds = parseInt(normalizeMillisecondsField(milliseconds))
 
-      if matches[11]?
-        tz = parseInt(matches[12],10) + (if matches[14]? then parseInt(matches[14],10) / 60 else 0)
-        timezoneOffset = if matches[11] is '+' then tz else tz * -1
-      else if matches[9] == 'Z'
-        timezoneOffset = 0
-
-      # Time is implemented as Datetime with year 0, month 1, day 1
-      return new DateTime(0, 1, 1, hours, minutes, seconds, milliseconds, timezoneOffset)
+      # Time is implemented as Datetime with year 0, month 1, day 1 and null timezoneOffset
+      return new DateTime(0, 1, 1, hours, minutes, seconds, milliseconds, null)
     else
       return null
 
@@ -321,6 +315,35 @@ canConvertToType = (toFunction, operand, ctx) ->
     if value? then true else false
   catch
     false
+
+module.exports.ConvertQuantity = class ConvertQuantity extends Expression
+  constructor: (json) ->
+    super
+
+  exec: (ctx) ->
+    [quantity, newUnit] = @execArgs(ctx)
+
+    if quantity? and newUnit?
+      try
+        quantity.convertUnit(newUnit)
+      catch
+        # Cannot convert input to target unit, spec says to return null
+        null
+
+module.exports.CanConvertQuantity = class CanConvertQuantity extends Expression
+  constructor: (json) ->
+    super
+
+  exec: (ctx) ->
+    [quantity, newUnit] = @execArgs(ctx)
+
+    if quantity? and newUnit?
+      try
+        quantity.convertUnit(newUnit)
+        return true
+      catch
+        return false
+    return null
 
 module.exports.Is = class Is extends UnimplementedExpression
 module.exports.IntervalTypeSpecifier = class IntervalTypeSpecifier extends UnimplementedExpression

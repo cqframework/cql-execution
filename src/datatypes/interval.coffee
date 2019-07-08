@@ -1,5 +1,6 @@
 { DateTime } = require './datetime'
 { Uncertainty } = require './uncertainty'
+{ Quantity, doSubtraction } = require '../datatypes/quantity'
 { ThreeValuedLogic } = require './logic'
 { successor, predecessor, maxValueForInstance, minValueForInstance } = require '../util/math'
 cmp = require '../util/comparison'
@@ -19,7 +20,7 @@ module.exports.Interval = class Interval
     if @low? and typeof @low.copy == 'function'
       newLow = @low.copy()
     if @high? and typeof @high.copy == 'function'
-      newHigh = @high.copy();
+      newHigh = @high.copy()
 
     new Interval(newLow, newHigh, @lowClosed, @highClosed)
 
@@ -291,17 +292,71 @@ module.exports.Interval = class Interval
     startGreaterThanOrEqual && endEqual
 
   width: () ->
-    if @low instanceof DateTime or @high instanceof DateTime
-      throw new Error("Width of DateTime intervals is not supported")
+    if (@low? and (@low.isDateTime or @low.isDate or @low.isTime)) or
+       (@high? and (@high.isDateTime or @high.isDate or @high.isTime))
+      throw new Error("Width of Date, DateTime, and Time intervals is not supported")
 
     closed = @toClosed()
     if closed.low instanceof Uncertainty or closed.high instanceof Uncertainty
       null
+    else if closed.low.isQuantity
+      if closed.low.unit != closed.high.unit
+        throw new Error("Cannot calculate width of Quantity Interval with different units")
+      lowValue = closed.low.value
+      highValue = closed.high.value
+      diff = Math.abs(highValue - lowValue)
+      Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8)
+      new Quantity(diff, closed.low.unit)
     else
       # TODO: Fix precision to 8 decimals in other places that return numbers
       diff = Math.abs(closed.high - closed.low)
       Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8)
 
+  size: () ->
+    pointSize = @getPointSize()
+    if (@low? and (@low.isDateTime or @low.isDate or @low.isTime)) or
+       (@high? and (@high.isDateTime or @high.isDate or @high.isTime))
+      throw new Error("Size of Date, DateTime, and Time intervals is not supported")
+
+    closed = @toClosed()
+    if closed.low instanceof Uncertainty or closed.high instanceof Uncertainty
+      null
+    else if closed.low.isQuantity
+      if closed.low.unit != closed.high.unit
+        throw new Error("Cannot calculate size of Quantity Interval with different units")
+      lowValue = closed.low.value
+      highValue = closed.high.value
+      diff = Math.abs(highValue - lowValue) + pointSize.value
+      Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8)
+      new Quantity(diff, closed.low.unit)
+    else
+      diff = Math.abs(closed.high - closed.low) + pointSize.value
+      Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8)
+
+  getPointSize: () ->
+    if @low?
+      if @low.isDateTime
+        precisionUnits = @low.getPrecision()
+        pointSize = new Quantity(1, precisionUnits)
+      else if @low.isQuantity
+        pointSize = doSubtraction(successor(@low), @low)
+      else
+        pointSize = successor(@low) - @low
+    else if @high?
+      if @high.isDateTime
+        precisionUnits = @high.getPrecision()
+        pointSize = new Quantity(1, precisionUnits)
+      else if @high.isQuantity
+        pointSize = doSubtraction(successor(@high), @high)
+      else
+        pointSize = successor(@high) - @high
+    else
+      throw new Error("Point type of intervals cannot be determined.")
+
+    if typeof pointSize is 'number'
+      pointSize = new Quantity(pointSize, '1')
+
+    return pointSize
 
   toClosed: () ->
     point = @low ? @high

@@ -546,6 +546,7 @@ define OverlapsBeforeRealIvl: Interval[1.234, 1.567] overlaps Interval[1.345, 1.
 define OverlapsAfterRealIvl: Interval[1.345, 1.678] overlaps Interval[1.234, 1.567]
 define OverlapsBoundaryRealIvl: Interval[1.0, 1.234] overlaps Interval[1.234, 2.0]
 define NoOverlapsRealIvl: Interval[1.0, 1.23456789) overlaps Interval[1.23456789, 2.0]
+define OverlapsIsNull: Interval[6, 10] overlaps (null as Interval<Integer>)
 
 // @Test: OverlapsDateTime
 define ivlA: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 6, 1, 0, 0, 0, 0))
@@ -663,6 +664,25 @@ define IntWidthThreeToUnknown: width of Interval[3, null)
 define IntWidthUnknownToThree: width of Interval(null, 3]
 define RealWidth: width of Interval[1.23, 4.56]
 define RealOpenWidth: width of Interval(1.23, 4.56)
+define WidthOfQuantityInterval: width of Interval[Quantity{value: 1, unit: 'mm'}, Quantity{value: 10, unit: 'mm'}]
+define WidthOfDateTimeInterval: width of Interval[DateTime(2012,01,01), DateTime(2012,01,03)]
+define WidthOfDateInterval: width of Interval[Date(2012,01,01), Date(2012,01,03)]
+define WidthOfTimeInterval: width of Interval[Time(12,00,00), Time(12,30,02)]
+
+// @Test: Size
+define IntSize: Size(Interval[-2, 5])
+define IntOpenSize: Size(Interval(-2, 5))
+define IntSizeThreeToMax: Size(Interval[3, null])
+define IntSizeMinToThree: Size(Interval[null, 3])
+define IntSizeThreeToUnknown: Size(Interval[3, null))
+define IntSizeUnknownToThree: Size(Interval(null, 3])
+define RealSize: Size(Interval[1.23, 4.56])
+define RealOpenSize: Size(Interval(1.23, 4.56))
+define SizeIsNull: Size(null as Interval<Integer>)
+define SizeOfQuantityInterval: Size(Interval[Quantity{value: 1, unit: 'mm'}, Quantity{value: 10, unit: 'mm'}])
+define SizeOfDateTimeInterval: Size(Interval[DateTime(2012,01,01), DateTime(2012,01,03)])
+define SizeOfDateInterval: Size(Interval[Date(2012,01,01), Date(2012,01,03)])
+define SizeOfTimeInterval: Size(Interval[Time(12,00,00), Time(12,30,02)])
 
 // @Test: Start
 define ClosedNotNull: start of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]

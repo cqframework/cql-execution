@@ -246,7 +246,13 @@ module.exports['Retrieve'] = {
                   }, {
                      "r" : "18",
                      "s" : [ {
-                        "value" : [ "[","Encounter",": ","type"," in " ]
+                        "value" : [ "[","Encounter",": " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "type" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
                      }, {
                         "s" : [ {
                            "value" : [ "\"Ambulatory/ED Visit\"" ]
@@ -318,7 +324,13 @@ module.exports['Retrieve'] = {
                   }, {
                      "r" : "22",
                      "s" : [ {
-                        "value" : [ "[","Encounter",": ","class"," in " ]
+                        "value" : [ "[","Encounter",": " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "class" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
                      }, {
                         "s" : [ {
                            "value" : [ "\"Ambulatory/ED Visit\"" ]

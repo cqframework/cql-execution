@@ -5,7 +5,7 @@ module.exports.Uncertainty = class Uncertainty
     if obj instanceof Uncertainty then obj else new Uncertainty(obj)
 
   constructor: (@low = null, @high) ->
-    gt = (a, b) -> 
+    gt = (a, b) ->
       if typeof a != typeof b
         # TODO: This should probably throw rather than return false.
         # Uncertainties with different types probably shouldn't be supported.
@@ -14,10 +14,10 @@ module.exports.Uncertainty = class Uncertainty
     isNonEnumerable = (val) ->
       val? and (val.isCode or val.isConcept or val.isValueSet)
     if typeof @high is 'undefined' then @high = @low
-    if isNonEnumerable(@low) || isNonEnumerable(@high) then @low = @high = null 
+    if isNonEnumerable(@low) || isNonEnumerable(@high) then @low = @high = null
     if @low? and @high? and gt(@low, @high) then [@low, @high] = [@high, @low]
 
-   copy: ->
+  copy: ->
     newLow = @low
     newHigh = @high
     if typeof @low.copy == 'function'
@@ -30,11 +30,11 @@ module.exports.Uncertainty = class Uncertainty
   isPoint: () ->
     # Note: Can't use normal equality, as that fails for Javascript dates
     # TODO: Fix after we don't need to support Javascript date uncertainties anymore
-    lte = (a, b) -> 
+    lte = (a, b) ->
       if typeof a != typeof b
         return false
       if typeof a.sameOrBefore is 'function' then a.sameOrBefore b else a <= b
-    gte = (a, b) -> 
+    gte = (a, b) ->
       if typeof a != typeof b
         return false
       if typeof a.sameOrBefore is 'function' then a.sameOrAfter b else a >= b
@@ -45,7 +45,7 @@ module.exports.Uncertainty = class Uncertainty
     ThreeValuedLogic.not ThreeValuedLogic.or(@lessThan(other), @greaterThan(other))
 
   lessThan: (other) ->
-    lt = (a, b) -> 
+    lt = (a, b) ->
       if typeof a != typeof b then return false
       if typeof a.before is 'function' then a.before b else a < b
     other = Uncertainty.from other

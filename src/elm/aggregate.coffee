@@ -3,34 +3,7 @@
 { build } = require './builder'
 { Exception } = require '../datatypes/exception'
 { greaterThan, lessThan } = require '../util/comparison'
-Quantity = require './quantity'
-
-quantitiesOrArg = (arr) ->
-  arr = removeNulls(arr)
-  # short curcuit empty arrays and return
-  if arr.length == 0
-    return arr
-
-  allQs = arr.every (x) -> x.isQuantity
-  someQs = arr.some (x) -> x.isQuantity
-  if allQs
-    unit = arr[0].unit
-    values = []
-    for i in arr
-      values.push i.convertUnits(unit)
-    return values
-  else if someQs
-    throw new Exception("Cannot perform aggregate operations on mixed values of Quantities and non Quantities")
-  else
-    arr
-
-quantityOrValue = (value, arr) ->
-  # we used the first unit in the list to convert to so that is what
-  # we will use as a unit for quantities
-  if arr?[0]?.unit
-    Quantity.createQuantity(value, arr[0].unit)
-  else
-    value
+{ Quantity, doAddition, doMultiplication } = require '../datatypes/quantity'
 
 class AggregateExpression extends Expression
   constructor:(json) ->
@@ -42,20 +15,27 @@ module.exports.Count = class Count extends AggregateExpression
     super
 
   exec: (ctx) ->
-    arg = @source.execute(ctx)
-    if typeIsArray(arg)
-      removeNulls(arg).length
+    items = @source.execute(ctx)
+    return null unless typeIsArray(items)
+    removeNulls(items).length
 
 module.exports.Sum = class Sum extends AggregateExpression
   constructor:(json) ->
     super
 
   exec: (ctx) ->
-    arg = @source.execute(ctx)
-    if typeIsArray(arg)
-      filtered =  quantitiesOrArg(arg)
-      val = if filtered.length == 0 then null else filtered.reduce (x,y) -> x+y
-      quantityOrValue(val, arg)
+    items = @source.execute(ctx)
+    return null unless typeIsArray(items)
+
+    items = processQuantities(items)
+    return null unless items.length > 0
+
+    if hasOnlyQuantities(items)
+      values = getValuesFromQuantities(items)
+      sum = values.reduce (x, y) -> x + y
+      new Quantity(sum, items[0].unit)
+    else
+      items.reduce (x, y) -> x + y
 
 module.exports.Min = class Min extends AggregateExpression
   constructor:(json) ->
@@ -77,9 +57,9 @@ module.exports.Max = class Max extends AggregateExpression
     super
 
   exec: (ctx) ->
-    list = @source.execute(ctx)
-    return null unless list?
-    listWithoutNulls = removeNulls(list)
+    items = @source.execute(ctx)
+    return null unless items?
+    listWithoutNulls = removeNulls(items)
     return null unless listWithoutNulls.length > 0
     # We assume the list is an array of all the same type.
     maximum = listWithoutNulls[0]
@@ -92,38 +72,54 @@ module.exports.Avg = class Avg extends  AggregateExpression
     super
 
   exec: (ctx) ->
-    arg = @source.execute(ctx)
-    if typeIsArray(arg)
-      filtered = quantitiesOrArg(arg)
-      return null if filtered.length == 0
-      sum = filtered.reduce (x,y) -> x+y
-      quantityOrValue((sum / filtered.length),arg)
+    items = @source.execute(ctx)
+    return null unless typeIsArray(items)
+
+    items = processQuantities(items)
+    return null if items.length == 0
+
+    if hasOnlyQuantities(items)
+      values = getValuesFromQuantities(items)
+      sum = values.reduce (x, y) -> x + y
+      new Quantity(sum / values.length, items[0].unit)
+    else
+      sum = items.reduce (x, y) -> x + y
+      sum / items.length
 
 module.exports.Median = class Median extends AggregateExpression
   constructor:(json) ->
     super
 
   exec: (ctx) ->
-    arg = @source.execute(ctx)
-    if typeIsArray(arg)
-      filtered =  numerical_sort(quantitiesOrArg(arg),"asc")
-      if filtered.length == 0
-        null
-      else if (filtered.length % 2 == 1)
-         quantityOrValue(filtered[(filtered.length - 1) / 2],arg)
-      else
-        v = (filtered[(filtered.length / 2) - 1] +
-         filtered[(filtered.length / 2)]) / 2
-        quantityOrValue(v,arg)
+    items = @source.execute(ctx)
+    return null unless typeIsArray(items)
+    return null unless items.length > 0
+
+    items = processQuantities(items)
+    return medianOfNumbers(items) unless hasOnlyQuantities(items)
+
+    values = getValuesFromQuantities(items)
+    median = medianOfNumbers(values)
+    new Quantity(median, items[0].unit)
+
 
 module.exports.Mode = class Mode extends AggregateExpression
   constructor:(json) ->
     super
 
   exec: (ctx) ->
-    arg = @source.execute(ctx)
-    if typeIsArray(arg)
-      filtered = removeNulls(arg)
+    items = @source.execute(ctx)
+    return null unless typeIsArray(items)
+    return null unless items.length > 0
+
+    filtered = processQuantities(items)
+    if hasOnlyQuantities(filtered)
+      values = getValuesFromQuantities(filtered)
+      mode = @mode(values)
+      if mode.length == 1
+        mode = mode[0]
+      new Quantity(mode, items[0].unit)
+    else
       mode = @mode(filtered)
       if mode.length == 1 then mode[0] else mode
 
@@ -140,19 +136,30 @@ module.exports.Mode = class Mode extends AggregateExpression
         max = cnt
     results
 
-module.exports.StdDev = class StdDev extends AggregateExpression
 
-  constructor:(json) ->
+module.exports.StdDev = class StdDev extends AggregateExpression
+  # TODO: This should be a derived class of an abstract base class 'Statistic'
+  # rather than the base class
+
+  constructor: (json) ->
     super
     @type = "standard_deviation"
 
   exec: (ctx) ->
-    args = @source.execute(ctx)
-    if typeIsArray(args)
-      val = quantitiesOrArg(args)
-      if val.length > 0 then quantityOrValue(@calculate(val),args)  else null
+    items = @source.execute(ctx)
+    return null unless typeIsArray(items)
 
-  calculate: (list) ->
+    items = processQuantities(items)
+    return null unless items.length > 0
+
+    if hasOnlyQuantities(items)
+      values = getValuesFromQuantities(items)
+      stdDev = @standardDeviation(values)
+      new Quantity(stdDev, items[0].unit)
+    else
+      @standardDeviation(items)
+
+  standardDeviation: (list) ->
     val = @stats(list)
     if val then val[@type]
 
@@ -175,37 +182,37 @@ module.exports.Product = class Product extends AggregateExpression
     super
 
   exec: (ctx) ->
-    listOfValues = @source.execute(ctx)
-    return null if listOfValues is null
-    [product, filtered] = productValue(listOfValues)
-    return null if product is null
-    return quantityOrValue(product, listOfValues)
+    items = @source.execute(ctx)
+    return null unless typeIsArray(items)
+    items = processQuantities(items)
+    return null unless items.length > 0
+
+    if hasOnlyQuantities(items)
+      values = getValuesFromQuantities(items)
+      product = values.reduce (x, y) -> x * y
+      # Units are not multiplied for the geometric product
+      new Quantity(product, items[0].unit)
+    else
+      items.reduce (x, y) -> x * y
 
 module.exports.GeometricMean = class GeometricMean extends AggregateExpression
   constructor:(json) ->
     super
 
   exec: (ctx) ->
-    listOfValues = @source.execute(ctx)
-    return null if listOfValues is null
-    [product, filtered] = productValue(listOfValues)
-    return null if product is null
-    geoMean = Math.pow(product, 1.0 / filtered.length)
-    return geoMean
+    items = @source.execute(ctx)
+    return null unless typeIsArray(items)
 
-productValue = (list) ->
-  product = 1
-  if typeIsArray(list)
-    filtered = removeNulls(list)
-    return [null, null] if filtered.length == 0
-    for item in filtered
-      if item.isQuantity
-        product = Quantity.doMultiplication(product,item)
-      else
-        product = product * item
-    return [product, filtered]
-  else
-    [null, null]
+    items = processQuantities(items)
+    return null unless items.length > 0
+    if hasOnlyQuantities(items)
+      values = getValuesFromQuantities(items)
+      product = values.reduce (x, y) -> x * y
+      geoMean = Math.pow(product, 1.0 / items.length)
+      new Quantity(geoMean, items[0].unit)
+    else
+      product = items.reduce (x, y) -> x * y
+      Math.pow(product, 1.0 / items.length)
 
 module.exports.PopulationStdDev = class PopulationStdDev extends StdDev
   constructor:(json) ->
@@ -227,13 +234,47 @@ module.exports.AllTrue = class AllTrue extends AggregateExpression
     super
 
   exec: (ctx) ->
-    args =@source.execute(ctx)
-    allTrue(args)
+    items = @source.execute(ctx)
+    allTrue(items)
 
 module.exports.AnyTrue = class AnyTrue extends AggregateExpression
   constructor:(json) ->
     super
 
   exec: (ctx) ->
-    args = @source.execute(ctx)
-    anyTrue(args)
+    items = @source.execute(ctx)
+    anyTrue(items)
+
+processQuantities = (values) ->
+  values = removeNulls(values)
+  if hasOnlyQuantities(values)
+    values = convertAllUnits(values)
+  else if hasSomeQuantities(values)
+    throw new Exception("Cannot perform aggregate operations on mixed values of Quantities and non Quantities")
+  else
+    values
+
+getValuesFromQuantities = (quantities) ->
+  quantities.map (quantity) -> quantity.value
+
+hasOnlyQuantities = (arr) ->
+  arr.every (x) -> x.isQuantity
+
+hasSomeQuantities = (arr) ->
+  arr.some (x) -> x.isQuantity
+
+convertAllUnits = (arr) ->
+  # convert all quantities in array to match the unit of the first item
+  converted = []
+  for quantity in arr
+    converted.push(quantity.convertUnit(arr[0].unit))
+  converted
+
+medianOfNumbers = (numbers) ->
+  numbers = numerical_sort(numbers, "asc")
+  if (numbers.length % 2 == 1)
+    # Odd number of items
+    numbers[(numbers.length - 1) / 2]
+  else
+    # Even number of items
+    (numbers[(numbers.length / 2) - 1] + numbers[(numbers.length / 2)]) / 2

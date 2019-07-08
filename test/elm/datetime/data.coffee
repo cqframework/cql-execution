@@ -485,7 +485,6 @@ define Hour: Time(12)
 define Minute: Time(12, 10)
 define Second: Time(12, 10, 59)
 define Millisecond: Time(12, 10, 59, 456)
-define TimezoneOffset: Time(12, 10, 59, 456, -8.0)
 ###
 
 module.exports['Time'] = {
@@ -674,72 +673,6 @@ module.exports['Time'] = {
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "456",
                   "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "27",
-            "name" : "TimezoneOffset",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "27",
-                  "s" : [ {
-                     "value" : [ "define ","TimezoneOffset",": " ]
-                  }, {
-                     "r" : "26",
-                     "s" : [ {
-                        "r" : "20",
-                        "value" : [ "Time","(","12",", ","10",", ","59",", ","456",", " ]
-                     }, {
-                        "r" : "25",
-                        "s" : [ {
-                           "r" : "24",
-                           "value" : [ "-","8.0" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "26",
-               "type" : "Time",
-               "hour" : {
-                  "localId" : "20",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "12",
-                  "type" : "Literal"
-               },
-               "minute" : {
-                  "localId" : "21",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "10",
-                  "type" : "Literal"
-               },
-               "second" : {
-                  "localId" : "22",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "59",
-                  "type" : "Literal"
-               },
-               "millisecond" : {
-                  "localId" : "23",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "456",
-                  "type" : "Literal"
-               },
-               "timezoneOffset" : {
-                  "localId" : "25",
-                  "type" : "Negate",
-                  "operand" : {
-                     "localId" : "24",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                     "value" : "8.0",
-                     "type" : "Literal"
-                  }
                }
             }
          } ]
@@ -2093,17 +2026,17 @@ module.exports['TimeFrom'] = {
    }
 }
 
-### TimezoneFrom
+### TimezoneOffsetFrom
 library TestSnippet version '1'
 using QUICK
 context Patient
-define CentralEuropean: timezone from DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
-define EasternStandard: timezone from DateTime(2000, 3, 15, 13, 30, 25, 200, -5.0)
-define DefaultTimezone: timezone from DateTime(2000, 3, 15, 13, 30, 25, 200)
-define NullDate: timezone from (null as DateTime)
+define CentralEuropean: timezoneoffset from DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
+define EasternStandard: timezoneoffset from DateTime(2000, 3, 15, 13, 30, 25, 200, -5.0)
+define DefaultTimezone: timezoneoffset from DateTime(2000, 3, 15, 13, 30, 25, 200)
+define NullDate: timezoneoffset from (null as DateTime)
 ###
 
-module.exports['TimezoneFrom'] = {
+module.exports['TimezoneOffsetFrom'] = {
    "library" : {
       "identifier" : {
          "id" : "TestSnippet",
@@ -2149,7 +2082,7 @@ module.exports['TimezoneFrom'] = {
                   }, {
                      "r" : "11",
                      "s" : [ {
-                        "value" : [ "timezone from " ]
+                        "value" : [ "timezoneoffset from " ]
                      }, {
                         "r" : "10",
                         "s" : [ {
@@ -2170,7 +2103,7 @@ module.exports['TimezoneFrom'] = {
             } ],
             "expression" : {
                "localId" : "11",
-               "type" : "TimezoneFrom",
+               "type" : "TimezoneOffsetFrom",
                "operand" : {
                   "localId" : "10",
                   "type" : "DateTime",
@@ -2238,7 +2171,7 @@ module.exports['TimezoneFrom'] = {
                   }, {
                      "r" : "23",
                      "s" : [ {
-                        "value" : [ "timezone from " ]
+                        "value" : [ "timezoneoffset from " ]
                      }, {
                         "r" : "22",
                         "s" : [ {
@@ -2259,7 +2192,7 @@ module.exports['TimezoneFrom'] = {
             } ],
             "expression" : {
                "localId" : "23",
-               "type" : "TimezoneFrom",
+               "type" : "TimezoneOffsetFrom",
                "operand" : {
                   "localId" : "22",
                   "type" : "DateTime",
@@ -2331,7 +2264,7 @@ module.exports['TimezoneFrom'] = {
                   }, {
                      "r" : "33",
                      "s" : [ {
-                        "value" : [ "timezone from " ]
+                        "value" : [ "timezoneoffset from " ]
                      }, {
                         "r" : "32",
                         "s" : [ {
@@ -2344,7 +2277,7 @@ module.exports['TimezoneFrom'] = {
             } ],
             "expression" : {
                "localId" : "33",
-               "type" : "TimezoneFrom",
+               "type" : "TimezoneOffsetFrom",
                "operand" : {
                   "localId" : "32",
                   "type" : "DateTime",
@@ -2406,7 +2339,7 @@ module.exports['TimezoneFrom'] = {
                   }, {
                      "r" : "38",
                      "s" : [ {
-                        "value" : [ "timezone from " ]
+                        "value" : [ "timezoneoffset from " ]
                      }, {
                         "r" : "37",
                         "s" : [ {
@@ -2431,7 +2364,7 @@ module.exports['TimezoneFrom'] = {
             } ],
             "expression" : {
                "localId" : "38",
-               "type" : "TimezoneFrom",
+               "type" : "TimezoneOffsetFrom",
                "operand" : {
                   "localId" : "37",
                   "strict" : false,

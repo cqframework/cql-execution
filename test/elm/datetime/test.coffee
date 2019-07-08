@@ -94,7 +94,6 @@ describe 'DateTime', ->
 describe 'Time', ->
   @beforeEach ->
     setup @, data
-    @defaultOffset = (new Date()).getTimezoneOffset() / 60 * -1
 
   it 'should execute hour precision correctly', ->
     d = @hour.exec(@ctx)
@@ -103,8 +102,7 @@ describe 'Time', ->
     d.month.should.equal 1
     d.day.should.equal 1
     d.hour.should.equal 12
-    d.timezoneOffset.should.equal @defaultOffset
-    should.not.exist(d[field]) for field in [ 'minute', 'second', 'millisecond' ]
+    should.not.exist(d[field]) for field in [ 'minute', 'second', 'millisecond', 'timezoneOffset']
 
   it 'should execute minute precision correctly', ->
     d = @minute.exec(@ctx)
@@ -114,8 +112,8 @@ describe 'Time', ->
     d.day.should.equal 1
     d.hour.should.equal 12
     d.minute.should.equal 10
-    d.timezoneOffset.should.equal @defaultOffset
-    should.not.exist(d[field]) for field in [ 'second', 'millisecond' ]
+    should(d.timezoneOffset).be.null()
+    should.not.exist(d[field]) for field in [ 'second', 'millisecond', 'timezoneOffset' ]
 
   it 'should execute second precision correctly', ->
     d = @second.exec(@ctx)
@@ -126,7 +124,7 @@ describe 'Time', ->
     d.hour.should.equal 12
     d.minute.should.equal 10
     d.second.should.equal 59
-    d.timezoneOffset.should.equal @defaultOffset
+    should(d.timezoneOffset).be.null()
     should.not.exist(d.millisecond)
 
   it 'should execute millisecond precision correctly', ->
@@ -139,19 +137,7 @@ describe 'Time', ->
     d.minute.should.equal 10
     d.second.should.equal 59
     d.millisecond.should.equal 456
-    d.timezoneOffset.should.equal @defaultOffset
-
-  it 'should execute timezone offsets correctly', ->
-    d = @timezoneOffset.exec(@ctx)
-    d.isTime().should.be.true()
-    d.year.should.equal 0
-    d.month.should.equal 1
-    d.day.should.equal 1
-    d.hour.should.equal 12
-    d.minute.should.equal 10
-    d.second.should.equal 59
-    d.millisecond.should.equal 456
-    d.timezoneOffset.should.equal -8
+    should(d.timezoneOffset).be.null()
 
 describe 'Today', ->
   @beforeEach ->
@@ -233,7 +219,7 @@ describe 'TimeOfDay', ->
     tod.minute.should.exist
     tod.second.should.exist
     tod.millisecond.should.exist
-    tod.timezoneOffset.should.equal jsDate.getTimezoneOffset() / 60 * -1
+    should(tod.timezoneOffset).be.null()
 
 describe 'DateTimeComponentFrom', ->
   @beforeEach ->
@@ -316,7 +302,7 @@ describe 'TimeFrom', ->
     time.minute.should.equal 30
     time.second.should.equal 25
     time.millisecond.should.equal 200
-    time.timezoneOffset.should.equal 1
+    should(time.timezoneOffset).be.null()
 
   it 'should return the null time components from a date with no time', ->
     noTime = @noTime.exec(@ctx)
@@ -327,15 +313,16 @@ describe 'TimeFrom', ->
     should.not.exist noTime.minute
     should.not.exist noTime.second
     should.not.exist noTime.millisecond
+    should(noTime.timezoneOffset).be.null()
 
   it 'should return null for null date', ->
     should(@nullDate.exec(@ctx)).be.null()
 
-describe 'TimezoneFrom', ->
+describe 'TimezoneOffsetFrom', ->
   @beforeEach ->
     setup @, data
 
-  it 'should return the timezone from a fully defined DateTime', ->
+  it 'should return the timezoneoffset from a fully defined DateTime', ->
     @centralEuropean.exec(@ctx).should.equal 1
     @easternStandard.exec(@ctx).should.equal -5
 

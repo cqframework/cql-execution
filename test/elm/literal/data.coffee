@@ -16,7 +16,7 @@ define IntOne: 1
 define DecimalTenth: 0.1
 define StringTrue: 'true'
 define DateTimeX: @2012-02-15T12:10:59.456Z
-define TimeX: @T12:10:59.456Z
+define TimeX: @T12:10:59.456
 ###
 
 module.exports['Literal'] = {
@@ -230,7 +230,7 @@ module.exports['Literal'] = {
                   "r" : "15",
                   "s" : [ {
                      "r" : "14",
-                     "value" : [ "define ","TimeX",": ","@T12:10:59.456Z" ]
+                     "value" : [ "define ","TimeX",": ","@T12:10:59.456" ]
                   } ]
                }
             } ],
@@ -255,11 +255,6 @@ module.exports['Literal'] = {
                "millisecond" : {
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "456",
-                  "type" : "Literal"
-               },
-               "timezoneOffset" : {
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                  "value" : "0.0",
                   "type" : "Literal"
                }
             }

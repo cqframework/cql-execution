@@ -58,4 +58,4 @@ describe 'Literal', ->
     d.minute.should.equal 10
     d.second.should.equal 59
     d.millisecond.should.equal 456
-    d.timezoneOffset.should.equal 0
+    should(d.timezoneOffset).be.null()

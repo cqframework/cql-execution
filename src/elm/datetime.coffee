@@ -8,12 +8,6 @@ module.exports.DateTime = class DateTime extends Expression
   constructor: (@json) ->
     super
 
-  # Define a simple getter to allow type-checking of this class without instanceof
-  # and in a way that survives minification (as opposed to checking constructor.name)
-  Object.defineProperties @prototype,
-    isDateTime:
-      get: -> true
-
   exec: (ctx) ->
     for property in DateTime.PROPERTIES
       # if json does not contain 'timezoneOffset' set it to the executionDateTime from the context
@@ -29,12 +23,6 @@ module.exports.Date = class Date extends Expression
   constructor: (@json) ->
     super
 
-  # Define a simple getter to allow type-checking of this class without instanceof
-  # and in a way that survives minification (as opposed to checking constructor.name)
-  Object.defineProperties @prototype,
-    isDate:
-      get: -> true
-
   exec: (ctx) ->
     for property in Date.PROPERTIES
       if @json[property]?
@@ -43,17 +31,11 @@ module.exports.Date = class Date extends Expression
     new DT.Date(args...)
 
 module.exports.Time = class Time extends Expression
-  @PROPERTIES = ['hour', 'minute', 'second', 'millisecond', 'timezoneOffset']
+  @PROPERTIES = ['hour', 'minute', 'second', 'millisecond']
   constructor: (json) ->
     super
     for property in Time.PROPERTIES
       if json[property]? then @[property] = build json[property]
-
-  # Define a simple getter to allow type-checking of this class without instanceof
-  # and in a way that survives minification (as opposed to checking constructor.name)
-  Object.defineProperties @prototype,
-    isTime:
-      get: -> true
 
   exec: (ctx) ->
     args = ((if @[p]? then @[p].execute(ctx)) for p in Time.PROPERTIES)
@@ -105,7 +87,7 @@ module.exports.TimeFrom = class TimeFrom extends Expression
     date = @execArgs(ctx)
     if date? then date.getTime() else null
 
-module.exports.TimezoneFrom = class TimezoneFrom extends Expression
+module.exports.TimezoneOffsetFrom = class TimezoneOffsetFrom extends Expression
   constructor: (json) ->
     super
 

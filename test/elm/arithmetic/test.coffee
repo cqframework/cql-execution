@@ -1,29 +1,29 @@
 should = require 'should'
 setup = require '../../setup'
 data = require './data'
-Q = require '../../../lib/elm/quantity'
+{Quantity, doMultiplication, doDivision, doAddition, doSubtraction, parseQuantity} = require '../../../lib/datatypes/quantity'
 DT = require '../../../lib/datatypes/datatypes'
 
 
 validateQuantity = (object,expectedValue,expectedUnit) ->
   object.isQuantity.should.be.true()
-  q = Q.createQuantity(expectedValue,expectedUnit)
+  q = new Quantity(expectedValue, expectedUnit)
   q.equals(object).should.be.true("Expected "+ object + " to equal " + q)
 
 doQuantityMathTests = (tests, operator) ->
   func = switch operator
-           when "*" then Q.doMultiplication
-           when "/" then Q.doDivision
-           when "+" then Q.doAddition
-           when "-" then Q.doSubtraction
+           when "*" then doMultiplication
+           when "/" then doDivision
+           when "+" then doAddition
+           when "-" then doSubtraction
 
   for x in tests
-    a = Q.parseQuantity(x[0])
-    b = Q.parseQuantity(x[1])
+    a = parseQuantity(x[0])
+    b = parseQuantity(x[1])
     # try to parse the expected value but if it comes back null
     # which it will if there are no units create a new Quantity
     # with just the exepected as the value with null units
-    e = Q.parseQuantity(x[2]) || new Q.Quantity({value: x[2]})
+    e = parseQuantity(x[2]) || new Quantity(x[2])
 
     res = func(a,b)
     e.equals(res).should.be.true(a + " " + operator + " " + b + " should eq " + e + " but was " + res )

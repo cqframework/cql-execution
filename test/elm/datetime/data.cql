@@ -13,7 +13,6 @@ define Hour: Time(12)
 define Minute: Time(12, 10)
 define Second: Time(12, 10, 59)
 define Millisecond: Time(12, 10, 59, 456)
-define TimezoneOffset: Time(12, 10, 59, 456, -8.0)
 
 // @Test: Today
 define TodayVar: Today()
@@ -55,11 +54,11 @@ define Time: time from DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
 define NoTime: time from DateTime(2000, 3, 15)
 define NullDate: time from null
 
-// @Test: TimezoneFrom
-define CentralEuropean: timezone from DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
-define EasternStandard: timezone from DateTime(2000, 3, 15, 13, 30, 25, 200, -5.0)
-define DefaultTimezone: timezone from DateTime(2000, 3, 15, 13, 30, 25, 200)
-define NullDate: timezone from (null as DateTime)
+// @Test: TimezoneOffsetFrom
+define CentralEuropean: timezoneoffset from DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
+define EasternStandard: timezoneoffset from DateTime(2000, 3, 15, 13, 30, 25, 200, -5.0)
+define DefaultTimezone: timezoneoffset from DateTime(2000, 3, 15, 13, 30, 25, 200)
+define NullDate: timezoneoffset from (null as DateTime)
 
 // @Test: SameAs
 define SameYear: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) same year as DateTime(2000, 11, 23, 8, 14, 47, 500, +1.0)

@@ -51,8 +51,8 @@ module.exports.equivalent = equivalent = (a, b) ->
 
   return codesAreEquivalent(a, b) if isCode(a)
 
-  # Use ratio equivalent function if a is ratio
-  return a.equivalent(b) if a?.isRatio
+  # Use overloaded 'equivalent' function if it is available
+  return a.equivalent(b) if typeof a.equivalent is 'function'
 
   [aClass, bClass] = getClassOfObjects(a, b)
 
@@ -65,6 +65,8 @@ module.exports.equivalent = equivalent = (a, b) ->
       # Make sure b is also a string
       if bClass == '[object String]'
         # String equivalence is case- and locale insensitive
+        a = a.replace(/\s/g, ' ')
+        b = b.replace(/\s/g, ' ')
         return (a.localeCompare(b, 'en', {sensitivity: 'base'})) == 0
 
   return equals a, b

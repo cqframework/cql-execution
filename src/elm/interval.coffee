@@ -1,7 +1,7 @@
 { Expression, UnimplementedExpression } = require './expression'
 { ThreeValuedLogic } = require '../datatypes/logic'
 { build } = require './builder'
-{ Quantity, doAddition, doSubtraction, compare_units, convert_value } = require './quantity'
+{ Quantity, doAddition, compare_units, convert_value } = require '../datatypes/quantity'
 { successor, predecessor, MIN_FLOAT_PRECISION_VALUE } = require '../util/math'
 dtivl = require '../datatypes/interval'
 cmp = require '../util/comparison'
@@ -120,6 +120,15 @@ module.exports.Width = class Width extends Expression
 
   exec: (ctx) ->
     @arg.execute(ctx)?.width()
+
+module.exports.Size = class Size extends Expression
+  constructor: (json) ->
+    super
+
+  exec: (ctx) ->
+    interval = @arg.execute(ctx)
+    return null unless interval?
+    interval.size()
 
 module.exports.Start = class Start extends Expression
   constructor: (json) ->
@@ -245,13 +254,13 @@ module.exports.Expand = class Expand extends Expression
 
     if type in ["time", "date", "datetime"]
       expandFunction = @expandDTishInterval
-      defaultPer = (interval) -> new Quantity(value: 1, unit: interval.low.getPrecision())
+      defaultPer = (interval) -> new Quantity(1, interval.low.getPrecision())
     else if type in ["quantity"]
       expandFunction = @expandQuantityInterval
-      defaultPer = (interval) -> new Quantity(value: 1, unit: interval.low.unit)
+      defaultPer = (interval) -> new Quantity(1, interval.low.unit)
     else if type in ["integer", "decimal"]
       expandFunction = @expandNumericInterval
-      defaultPer = (interval) -> new Quantity(value: 1, unit: '1')
+      defaultPer = (interval) -> new Quantity(1, '1')
     else
       throw new Error("Interval list type not yet supported.")
 
@@ -322,7 +331,7 @@ module.exports.Expand = class Expand extends Expression
     if results.length > 0 and !results[results.length-1].high.sameOrBefore(high)
       results.pop()
     return results
-    
+
   expandQuantityInterval: (interval, per) ->
     # we want to convert everything to the more precise of the interval.low or per
     if compare_units(interval.low.unit, per.unit) > 0 #interval.low.unit is 'bigger' aka les precise
@@ -340,8 +349,8 @@ module.exports.Expand = class Expand extends Expression
       low_value, high_value, interval.lowClosed, interval.highClosed, per_value)
 
     for itvl in results
-      itvl.low = new Quantity(value: itvl.low, unit:result_units)
-      itvl.high = new Quantity(value: itvl.high, unit:result_units)
+      itvl.low = new Quantity(itvl.low, result_units)
+      itvl.high = new Quantity(itvl.high, result_units)
     return results
 
   expandNumericInterval: (interval, per) ->
@@ -386,27 +395,7 @@ collapseIntervals = (intervals, perWidth) ->
     # of the intervals involved will be used (i.e. the interval that has a
     # width equal to the result of the successor function for the point type).
     if !perWidth?
-      if intervalsClone[0].low?
-        if intervalsClone[0].low.isDateTime
-          precisionUnits = intervalsClone[0].low.getPrecision()
-          perWidth = new Quantity(value: 1, unit: precisionUnits)
-        else if intervalsClone[0].low.isQuantity
-          perWidth = doSubtraction(successor(intervalsClone[0].low), intervalsClone[0].low)
-        else
-          perWidth = successor(intervalsClone[0].low) - intervalsClone[0].low
-      else if intervalsClone[0].high?
-        if intervalsClone[0].high.isDateTime
-          precisionUnits = intervalsClone[0].high.getPrecision()
-          perWidth = new Quantity(value: 1, unit: precisionUnits)
-        else if intervalsClone[0].high.isQuantity
-          perWidth = doSubtraction(successor(intervalsClone[0].high), intervalsClone[0].high)
-        else
-          perWidth = successor(intervalsClone[0].high) - intervalsClone[0].high
-      else
-        throw new Error("Point type of intervals provided to collapse cannot be determined.")
-
-      if typeof perWidth is 'number'
-        perWidth = new Quantity(value: perWidth, unit: '1')
+      perWidth = intervalsClone[0].getPointSize()
 
     # sort intervalsClone by start
     intervalsClone.sort (a,b)->
@@ -463,3 +452,4 @@ collapseIntervals = (intervals, perWidth) ->
       b = intervalsClone.shift()
     collapsedIntervals.push a
     collapsedIntervals
+

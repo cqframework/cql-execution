@@ -3,6 +3,8 @@ setup = require '../../setup'
 data = require './data'
 {isNull} = require '../../../lib/util/util'
 {DateTime} = require '../../../lib/datatypes/datetime'
+{ Quantity } = require '../../../lib/datatypes/quantity'
+
 
 describe 'FromString', ->
   @beforeEach ->
@@ -79,14 +81,6 @@ describe 'FromString', ->
   it 'should convert DateTime string with timezone offset', ->
     expectedDateTime = new DateTime(2014, 1, 1, 14, 30, 0, 0, -7)
     @timezoneDateTime.exec(@ctx).equals(expectedDateTime).should.be.true()
-
-  it 'should convert Time string with Z', ->
-    expectedTime = new DateTime(0, 1, 1, 14, 30, 0, 0, 0)
-    @zTime.exec(@ctx).equals(expectedTime).should.be.true()
-
-  it 'should convert Time string with timezone offset', ->
-    expectedTime = new DateTime(0, 1, 1, 14, 30, 0, 0, -7)
-    @timezoneTime.exec(@ctx).equals(expectedTime).should.be.true()
 
 describe 'FromInteger', ->
   @beforeEach ->
@@ -339,33 +333,24 @@ describe 'ToTime', ->
   it "should be null for invalid time-of-day", ->
     should(@invalidTime.exec(@ctx)).be.null()
 
-  it "should work with for Thh", ->
-    expectedDateTime = new DateTime(0,1,1,2)
+  it "should work with for hh", ->
+    # NOTE: We need to pass in null timezoneOffset because DateTime assumes
+    # execution context timezoneOffset while time does not have a
+    # timezoneOffset
+    expectedDateTime = new DateTime(0,1,1,2,null,null,null,null)
     @timeH.exec(@ctx).equals(expectedDateTime).should.be.true()
 
-  it "should work with for Thh:mm", ->
-    expectedDateTime = new DateTime(0,1,1,2,4)
+  it "should work with for hh:mm", ->
+    expectedDateTime = new DateTime(0,1,1,2,4,null,null,null)
     @timeHM.exec(@ctx).equals(expectedDateTime).should.be.true()
 
-  it "should work with for Thh:mm:ss", ->
-    expectedDateTime = new DateTime(0,1,1,2,4,59)
+  it "should work with for hh:mm:ss", ->
+    expectedDateTime = new DateTime(0,1,1,2,4,59,null,null)
     @timeHMS.exec(@ctx).equals(expectedDateTime).should.be.true()
 
-  it "should work with for Thh:mm:ss.fff", ->
-    expectedDateTime = new DateTime(0,1,1,2,4,59,123)
+  it "should work with for hh:mm:ss.fff", ->
+    expectedDateTime = new DateTime(0,1,1,2,4,59,123, null)
     @timeHMSMs.exec(@ctx).equals(expectedDateTime).should.be.true()
-
-  it "should work with for Thh:mm:ss.fffZ", ->
-    expectedDateTime = new DateTime(0,1,1,2,4,59,123,0)
-    @timeHMSMsZ.exec(@ctx).equals(expectedDateTime).should.be.true()
-
-  it "should work with for Thh:mm:ss.fff+hh:mm", ->
-    expectedDateTime = new DateTime(0,1,1,2,4,59,123,1)
-    @timeHMSMsTimezone.exec(@ctx).equals(expectedDateTime).should.be.true()
-
-  it "should work with for Thh:mm:ss.fff+hh", ->
-    expectedDateTime = new DateTime(0,1,1,2,4,59,123,1)
-    @timeHMSMsFullTimezone.exec(@ctx).equals(expectedDateTime).should.be.true()
 
   it "should be null for hour over 24", ->
     should(@hourTooHigh.exec(@ctx)).be.null()
@@ -397,6 +382,36 @@ describe 'ToBoolean', ->
 
   it "should return false for F", ->
     @upperCaseF.exec(@ctx).should.equal false
+
+describe 'ToDate', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should convert String 2015-01-02 to Date", ->
+    date = @toDateString.exec(@ctx)
+    date.year.should.equal 2015
+    date.month.should.equal 1
+    date.day.should.equal 2
+    should.not.exist(date[field]) for field in [ 'hour', 'minute', 'second', 'millisecond', 'timezoneOffset' ]
+    date.isDate.should.equal.true
+
+  it "should convert Datetime to Date", ->
+    date = @toDateDateTime.exec(@ctx)
+    date.year.should.equal 2000
+    date.month.should.equal 3
+    date.day.should.equal 15
+    should.not.exist(date[field]) for field in [ 'hour', 'minute', 'second', 'millisecond', 'timezoneOffset' ]
+    date.isDate.should.equal.true
+
+  it "should return null for null input", ->
+    should(@toDateNull.exec(@ctx)).be.null()
+
+  it "should return 2014-01-01 and ignore time", ->
+    date = @toDateDateTimeString.exec(@ctx)
+    date.year.should.equal 2014
+    date.month.should.equal 1
+    date.day.should.equal 1
+    should.not.exist(date[field]) for field in [ 'hour', 'minute', 'second', 'millisecond', 'timezoneOffset' ]
 
 describe 'ConvertsToBoolean', ->
   @beforeEach ->
@@ -532,3 +547,38 @@ describe 'ConvertsToTime', ->
 
   it "should return null for null input", ->
     should(@isNull.exec(@ctx)).be.null()
+
+describe 'ConvertQuantity', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return converted Quantity", ->
+    @convertQuantityGood.exec(@ctx).should.eql new Quantity(.005, 'g')
+
+  it "should return converted Quantity using new syntx", ->
+    @convertSyntax.exec(@ctx).should.eql new Quantity(.005, 'g')
+
+  it "should return converted Quantity with Kg", ->
+    @convertQuantityToKg.exec(@ctx).should.eql new Quantity(5, 'kg')
+
+  it "should return converted Quantity with weeks", ->
+    @convertQuantityToWeeks.exec(@ctx).should.eql new Quantity(4, 'weeks')
+
+  it "should return null for an invalid UCUM conversion", ->
+    should(@nullConvertQuantity.exec(@ctx)).be.null()
+
+describe 'CanConvertQuantity', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should return true for valid conversion", ->
+    @canConvertQuantityTrue.exec(@ctx).should.equal true
+
+  it "should return false for valid conversion", ->
+    @canConvertQuantityFalse.exec(@ctx).should.equal false
+
+  it "should return null for first argument null", ->
+    should(@canConvertQuantityNullFirstNull.exec(@ctx)).be.null()
+
+  it "should return null for second argument being null", ->
+    should(@canConvertQuantityNullSecondNUll.exec(@ctx)).be.null()
