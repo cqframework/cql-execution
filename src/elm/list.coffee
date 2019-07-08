@@ -38,16 +38,19 @@ module.exports.Exists = class Exists extends Expression
 
 # Delegated to by overloaded#Union
 module.exports.doUnion = (a, b) ->
-  doDistinct(a.concat b)
+  distinct = doDistinct(a.concat b)
+  removeDuplicateNulls(distinct)
 
 # Delegated to by overloaded#Except
 module.exports.doExcept = (a, b) ->
-  setList = doDistinct(a)
+  distinct = doDistinct(a)
+  setList = removeDuplicateNulls(distinct)
   (itm for itm in setList when not doContains(b, itm))
 
 # Delegated to by overloaded#Intersect
 module.exports.doIntersect = (a, b) ->
-  setList = doDistinct(a)
+  distinct = doDistinct(a)
+  setList = removeDuplicateNulls(distinct)
   (itm for itm in setList when doContains(b, itm))
 
 # ELM-only, not a product of CQL
@@ -129,16 +132,18 @@ module.exports.Distinct = class Distinct extends Expression
     doDistinct(result)
 
 doDistinct = (list) ->
-  seen = []
+  distinct = []
   list.filter (item) ->
-    isNew = seen.every (seenItem) -> !equals(item, seenItem)
-    seen.push item if isNew
+    isNew = distinct.every (seenItem) -> !equals(item, seenItem)
+    distinct.push item if isNew
     isNew
+  distinct
 
+removeDuplicateNulls = (list) ->
   # Remove duplicate null elements
   firstNullFound = false
   setList = []
-  for item in seen
+  for item in list
     setList.push item if item != null
     if item == null && !firstNullFound
       setList.push item
