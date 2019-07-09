@@ -3521,21 +3521,28 @@
     }
 
     Add.prototype.exec = function(ctx) {
-      var args;
+      var args, sum;
       args = this.execArgs(ctx);
+      sum = null;
       if ((args == null) || args.some(function(x) {
         return x == null;
       })) {
-        return null;
+        null;
       } else {
-        return args != null ? args.reduce(function(x, y) {
-          if (x.isQuantity || x.isDateTime || x.isDate) {
-            return doAddition(x, y);
-          } else {
-            return x + y;
-          }
-        }) : void 0;
+        if (args != null) {
+          args.reduce(function(x, y) {
+            if (x.isQuantity || x.isDateTime || x.isDate || x.isTime) {
+              return sum = doAddition(x, y);
+            } else {
+              return sum = x + y;
+            }
+          });
+        }
       }
+      if (MathUtil.overflowsOrUnderflows(sum)) {
+        return null;
+      }
+      return sum;
     };
 
     return Add;
@@ -3550,21 +3557,26 @@
     }
 
     Subtract.prototype.exec = function(ctx) {
-      var args;
+      var args, difference;
       args = this.execArgs(ctx);
+      difference = null;
       if ((args == null) || args.some(function(x) {
         return x == null;
       })) {
-        return null;
+        null;
       } else {
-        return args.reduce(function(x, y) {
+        args.reduce(function(x, y) {
           if (x.isQuantity || x.isDateTime || x.isDate) {
-            return doSubtraction(x, y);
+            return difference = doSubtraction(x, y);
           } else {
-            return x - y;
+            return difference = x - y;
           }
         });
       }
+      if (MathUtil.overflowsOrUnderflows(difference)) {
+        return null;
+      }
+      return difference;
     };
 
     return Subtract;
@@ -3579,21 +3591,28 @@
     }
 
     Multiply.prototype.exec = function(ctx) {
-      var args;
+      var args, product;
       args = this.execArgs(ctx);
+      product = null;
       if ((args == null) || args.some(function(x) {
         return x == null;
       })) {
-        return null;
+        null;
       } else {
-        return args != null ? args.reduce(function(x, y) {
-          if (x.isQuantity || y.isQuantity) {
-            return doMultiplication(x, y);
-          } else {
-            return x * y;
-          }
-        }) : void 0;
+        if (args != null) {
+          args.reduce(function(x, y) {
+            if (x.isQuantity || y.isQuantity) {
+              return product = doMultiplication(x, y);
+            } else {
+              return product = x * y;
+            }
+          });
+        }
       }
+      if (MathUtil.overflowsOrUnderflows(product)) {
+        return null;
+      }
+      return product;
     };
 
     return Multiply;
@@ -3608,21 +3627,28 @@
     }
 
     Divide.prototype.exec = function(ctx) {
-      var args;
+      var args, quotient;
       args = this.execArgs(ctx);
+      quotient = null;
       if ((args == null) || args.some(function(x) {
         return x == null;
       })) {
-        return null;
+        null;
       } else {
-        return args != null ? args.reduce(function(x, y) {
-          if (x.isQuantity) {
-            return doDivision(x, y);
-          } else {
-            return x / y;
-          }
-        }) : void 0;
+        if (args != null) {
+          args.reduce(function(x, y) {
+            if (x.isQuantity) {
+              return quotient = doDivision(x, y);
+            } else {
+              return quotient = x / y;
+            }
+          });
+        }
       }
+      if (MathUtil.overflowsOrUnderflows(quotient)) {
+        return null;
+      }
+      return quotient;
     };
 
     return Divide;
@@ -3637,17 +3663,21 @@
     }
 
     TruncatedDivide.prototype.exec = function(ctx) {
-      var args;
+      var args, quotient;
       args = this.execArgs(ctx);
       if ((args == null) || args.some(function(x) {
         return x == null;
       })) {
-        return null;
+        null;
       } else {
-        return Math.floor(args.reduce(function(x, y) {
+        quotient = Math.floor(args.reduce(function(x, y) {
           return x / y;
         }));
       }
+      if (MathUtil.overflowsOrUnderflows(quotient)) {
+        return null;
+      }
+      return quotient;
     };
 
     return TruncatedDivide;
@@ -3830,13 +3860,17 @@
     }
 
     Exp.prototype.exec = function(ctx) {
-      var arg;
+      var arg, power;
       arg = this.execArgs(ctx);
       if (arg == null) {
-        return null;
+        null;
       } else {
-        return Math.exp(arg);
+        power = Math.exp(arg);
       }
+      if (MathUtil.overflowsOrUnderflows(power)) {
+        return null;
+      }
+      return power;
     };
 
     return Exp;
@@ -3876,17 +3910,22 @@
     }
 
     Power.prototype.exec = function(ctx) {
-      var args;
+      var args, power;
       args = this.execArgs(ctx);
+      power = null;
       if ((args == null) || args.some(function(x) {
         return x == null;
       })) {
-        return null;
+        null;
       } else {
-        return args.reduce(function(x, y) {
+        power = args.reduce(function(x, y) {
           return Math.pow(x, y);
         });
       }
+      if (MathUtil.overflowsOrUnderflows(power)) {
+        return null;
+      }
+      return power;
     };
 
     return Power;
@@ -3904,7 +3943,9 @@
 
     MIN_VALUES['{urn:hl7-org:elm-types:r1}Decimal'] = MathUtil.MIN_FLOAT_VALUE;
 
-    MIN_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MIN_DATE_VALUE;
+    MIN_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MIN_DATETIME_VALUE;
+
+    MIN_VALUES['{urn:hl7-org:elm-types:r1}Date'] = MathUtil.MIN_DATE_VALUE;
 
     MIN_VALUES['{urn:hl7-org:elm-types:r1}Time'] = MathUtil.MIN_TIME_VALUE;
 
@@ -3943,7 +3984,9 @@
 
     MAX_VALUES['{urn:hl7-org:elm-types:r1}Decimal'] = MathUtil.MAX_FLOAT_VALUE;
 
-    MAX_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MAX_DATE_VALUE;
+    MAX_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MAX_DATETIME_VALUE;
+
+    MAX_VALUES['{urn:hl7-org:elm-types:r1}Date'] = MathUtil.MAX_DATE_VALUE;
 
     MAX_VALUES['{urn:hl7-org:elm-types:r1}Time'] = MathUtil.MAX_TIME_VALUE;
 
@@ -3979,13 +4022,25 @@
     }
 
     Successor.prototype.exec = function(ctx) {
-      var arg;
+      var arg, e, successor;
       arg = this.execArgs(ctx);
+      successor = null;
       if (arg == null) {
-        return null;
+        null;
       } else {
-        return MathUtil.successor(arg);
+        try {
+          successor = MathUtil.successor(arg);
+        } catch (error) {
+          e = error;
+          if (e instanceof MathUtil.OverFlowException) {
+            null;
+          }
+        }
       }
+      if (MathUtil.overflowsOrUnderflows(successor)) {
+        return null;
+      }
+      return successor;
     };
 
     return Successor;
@@ -4000,13 +4055,25 @@
     }
 
     Predecessor.prototype.exec = function(ctx) {
-      var arg;
+      var arg, e, predecessor;
       arg = this.execArgs(ctx);
+      predecessor = null;
       if (arg == null) {
-        return null;
+        null;
       } else {
-        return MathUtil.predecessor(arg);
+        try {
+          predecessor = MathUtil.predecessor(arg);
+        } catch (error) {
+          e = error;
+          if (e instanceof MathUtil.OverFlowException) {
+            null;
+          }
+        }
       }
+      if (MathUtil.overflowsOrUnderflows(predecessor)) {
+        return null;
+      }
+      return predecessor;
     };
 
     return Predecessor;
@@ -46080,13 +46147,13 @@
 },{"../datatypes/datetime":7,"../datatypes/uncertainty":13}],137:[function(require,module,exports){
 // Generated by CoffeeScript 1.12.7
 (function() {
-  var DateTime, Exception, MAX_DATE_VALUE, MAX_FLOAT_VALUE, MAX_INT_VALUE, MAX_TIME_VALUE, MIN_DATE_VALUE, MIN_FLOAT_PRECISION_VALUE, MIN_FLOAT_VALUE, MIN_INT_VALUE, MIN_TIME_VALUE, OverFlowException, Uncertainty, isValidDecimal, isValidInteger, predecessor, successor,
+  var Date, DateTime, Exception, MAX_DATETIME_VALUE, MAX_DATE_VALUE, MAX_FLOAT_VALUE, MAX_INT_VALUE, MAX_TIME_VALUE, MIN_DATETIME_VALUE, MIN_DATE_VALUE, MIN_FLOAT_PRECISION_VALUE, MIN_FLOAT_VALUE, MIN_INT_VALUE, MIN_TIME_VALUE, OverFlowException, Uncertainty, isValidDecimal, isValidInteger, predecessor, ref, successor,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
   Exception = require('../datatypes/exception').Exception;
 
-  DateTime = require('../datatypes/datetime').DateTime;
+  ref = require('../datatypes/datetime'), DateTime = ref.DateTime, Date = ref.Date;
 
   Uncertainty = require('../datatypes/uncertainty').Uncertainty;
 
@@ -46100,13 +46167,58 @@
 
   module.exports.MIN_FLOAT_PRECISION_VALUE = MIN_FLOAT_PRECISION_VALUE = Math.pow(10, -8);
 
-  module.exports.MIN_DATE_VALUE = MIN_DATE_VALUE = DateTime.parse("0001-01-01T00:00:00.000");
+  module.exports.MIN_DATETIME_VALUE = MIN_DATETIME_VALUE = DateTime.parse("0001-01-01T00:00:00.000");
 
-  module.exports.MAX_DATE_VALUE = MAX_DATE_VALUE = DateTime.parse("9999-12-31T23:59:59.999");
+  module.exports.MAX_DATETIME_VALUE = MAX_DATETIME_VALUE = DateTime.parse("9999-12-31T23:59:59.999");
+
+  module.exports.MIN_DATE_VALUE = MIN_DATE_VALUE = Date.parse("0001-01-01");
+
+  module.exports.MAX_DATE_VALUE = MAX_DATE_VALUE = Date.parse("9999-12-31");
 
   module.exports.MIN_TIME_VALUE = MIN_TIME_VALUE = DateTime.parse("0000-01-01T00:00:00.000");
 
   module.exports.MAX_TIME_VALUE = MAX_TIME_VALUE = DateTime.parse("0000-01-01T23:59:59.999");
+
+  module.exports.overflowsOrUnderflows = function(value) {
+    if (value == null) {
+      return false;
+    }
+    if (value.isQuantity) {
+      if (!isValidDecimal(value.value)) {
+        return true;
+      }
+    } else if (value.isDateTime) {
+      if (value.after(MAX_DATETIME_VALUE)) {
+        return true;
+      }
+      if (value.before(MIN_DATETIME_VALUE)) {
+        return true;
+      }
+    } else if (value.isDate) {
+      if (value.after(MAX_DATE_VALUE)) {
+        return true;
+      }
+      if (value.before(MIN_DATETIME_VALUE)) {
+        return true;
+      }
+    } else if (value.isTime) {
+      if (value.after(MAX_TIME_VALUE)) {
+        return true;
+      }
+      if (value.before(MIN_TIME_VALUE)) {
+        return true;
+      }
+    } else if (Number.isInteger(value)) {
+      if (!isValidInteger(value)) {
+        return true;
+      }
+    } else {
+      if (!isValidDecimal(value)) {
+        return true;
+      }
+    }
+    return false;
+  };
 
   module.exports.isValidInteger = isValidInteger = function(integer) {
     if (isNaN(integer)) {
@@ -46172,13 +46284,19 @@
         return val + MIN_FLOAT_PRECISION_VALUE;
       }
     } else if (val instanceof DateTime) {
-      if (val.sameAs(MAX_DATE_VALUE)) {
+      if (val.sameAs(MAX_DATETIME_VALUE)) {
         throw new OverFlowException();
       } else {
         return val.successor();
       }
     } else if (val != null ? val.isDate : void 0) {
-      if (val.sameAs(MAX_DATE_VALUE.getDate())) {
+      if (val.sameAs(MAX_DATE_VALUE)) {
+        throw new OverFlowException();
+      } else {
+        return val.successor();
+      }
+    } else if (val != null ? val.isTime : void 0) {
+      if (val.sameAs(MAX_TIME_VALUE)) {
         throw new OverFlowException();
       } else {
         return val.successor();
@@ -46215,13 +46333,19 @@
         return val - MIN_FLOAT_PRECISION_VALUE;
       }
     } else if (val instanceof DateTime) {
-      if (val.sameAs(MIN_DATE_VALUE)) {
+      if (val.sameAs(MIN_DATETIME_VALUE)) {
         throw new OverFlowException();
       } else {
         return val.predecessor();
       }
     } else if (val != null ? val.isDate : void 0) {
-      if (val.sameAs(MIN_DATE_VALUE.getDate())) {
+      if (val.sameAs(MIN_DATE_VALUE)) {
+        throw new OverFlowException();
+      } else {
+        return val.predecessor();
+      }
+    } else if (val != null ? val.isTime : void 0) {
+      if (val.sameAs(MIN_TIME_VALUE)) {
         throw new OverFlowException();
       } else {
         return val.predecessor();
@@ -46254,9 +46378,11 @@
         return MAX_FLOAT_VALUE;
       }
     } else if (val instanceof DateTime) {
-      return MAX_DATE_VALUE;
+      return MAX_DATETIME_VALUE;
     } else if (val != null ? val.isDate : void 0) {
-      return MAX_DATE_VALUE.getDate();
+      return MAX_DATE_VALUE;
+    } else if (val != null ? val.isTime : void 0) {
+      return MAX_TIME_VALUE;
     } else if (val != null ? val.isQuantity : void 0) {
       val2 = val.clone();
       val2.value = maxValueForInstance(val2.value);
@@ -46275,9 +46401,11 @@
         return MIN_FLOAT_VALUE;
       }
     } else if (val instanceof DateTime) {
-      return MIN_DATE_VALUE;
+      return MIN_DATETIME_VALUE;
     } else if (val != null ? val.isDate : void 0) {
-      return MIN_DATE_VALUE.getDate();
+      return MIN_DATE_VALUE;
+    } else if (val != null ? val.isTime : void 0) {
+      return MIN_TIME_VALUE;
     } else if (val != null ? val.isQuantity : void 0) {
       val2 = val.clone();
       val2.value = minValueForInstance(val2.value);
