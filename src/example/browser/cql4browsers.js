@@ -46198,7 +46198,7 @@
       if (value.after(MAX_DATE_VALUE)) {
         return true;
       }
-      if (value.before(MIN_DATETIME_VALUE)) {
+      if (value.before(MIN_DATE_VALUE)) {
         return true;
       }
     } else if (value.isTime) {

@@ -23,7 +23,7 @@ module.exports.overflowsOrUnderflows = (value) ->
     return true if value.before(MIN_DATETIME_VALUE)
   else if value.isDate
     return true if value.after(MAX_DATE_VALUE)
-    return true if value.before(MIN_DATETIME_VALUE)
+    return true if value.before(MIN_DATE_VALUE)
   else if value.isTime
     return true if value.after(MAX_TIME_VALUE)
     return true if value.before(MIN_TIME_VALUE)
