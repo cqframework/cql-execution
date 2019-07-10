@@ -9,7 +9,9 @@ data = require './data'
   MIN_FLOAT_PRECISION_VALUE,
   MAX_FLOAT_VALUE,
   MIN_DATE_VALUE,
-  MAX_DATE_VALUE } = require '../../../lib/util/math'
+  MIN_DATETIME_VALUE,
+  MAX_DATETIME_VALUE,
+  MIN_TIME_VALUE } = require '../../../lib/util/math'
 
 describe 'Interval', ->
   @beforeEach ->
@@ -1032,7 +1034,7 @@ describe 'Start', ->
     @closedNotNull.exec(@ctx).should.eql new DateTime(2012, 1, 1)
 
   it 'should return the minimum possible DateTime', ->
-    @closedNullDateTime.exec(@ctx).should.eql MIN_DATE_VALUE
+    @closedNullDateTime.exec(@ctx).should.eql MIN_DATETIME_VALUE
 
   it 'should return the minimum possible Integer', ->
     @closedNullInteger.exec(@ctx).should.eql MIN_INT_VALUE
@@ -1057,7 +1059,7 @@ describe 'End', ->
     @closedNotNull.exec(@ctx).should.eql new DateTime(2013, 1, 1)
 
   it 'should return the maximum possible DateTime', ->
-    @closedNullDateTime.exec(@ctx).should.eql MAX_DATE_VALUE
+    @closedNullDateTime.exec(@ctx).should.eql MAX_DATETIME_VALUE
 
   it 'should return the maximum possible Integer', ->
     @closedNullInteger.exec(@ctx).should.eql MAX_INT_VALUE
