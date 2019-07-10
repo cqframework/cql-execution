@@ -9,7 +9,8 @@ define Age:
 define InDemographic:
   AgeInYearsAt(start of MeasurementPeriod) >= 2 and AgeInYearsAt(start of MeasurementPeriod) < 18  
 
-context Population
+
+context Unspecified
 
 define AgeSum: Sum(Age)
 
