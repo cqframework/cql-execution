@@ -2173,7 +2173,7 @@ describe 'IntegerIntervalExpand', ->
     # define PerDecimalMorePrecise: expand { Interval[10, 10] } per 0.1
     a = @perDecimalMorePrecise.exec(@ctx)
     # JavaScript truncates 10.0 to 10.
-    prettyList(a).should.equal '{ [10, 10], [10.1, 10.1], [10.2, 10.2], [10.3, 10.3], [10.4, 10.4], [10.5, 10.5], [10.6, 10.6], [10.7, 10.7], [10.8, 10.8], [10.9, 10.9] }'
+    prettyList(a).should.equal '{ [10, 10.09999999], [10.1, 10.19999999], [10.2, 10.29999999], [10.3, 10.39999999], [10.4, 10.49999999], [10.5, 10.59999999], [10.6, 10.69999999], [10.7, 10.79999999], [10.8, 10.89999999], [10.9, 10.99999999] }'
 
 describe 'DecimalIntervalExpand', ->
   @beforeEach ->
@@ -2182,7 +2182,7 @@ describe 'DecimalIntervalExpand', ->
   it 'expands single intervals', ->
     # define ClosedSingle: expand { Interval[2, 5] } per 1.5 '1'
     a = @closedSingle.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 3.4], [3.5, 4.9] }'
+    prettyList(a).should.equal '{ [2, 3.49999999], [3.5, 4.99999999] }'
 
     # define ClosedSingle1: expand { Interval[2.5, 10] } per 2 '1'
     a = @closedSingle1.exec(@ctx)
@@ -2190,20 +2190,20 @@ describe 'DecimalIntervalExpand', ->
 
     # define ClosedSingle2: expand { Interval[2, 4.5] } per 0.5 '1'
     a = @closedSingle2.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 2.4], [2.5, 2.9], [3, 3.4], [3.5, 3.9], [4, 4.4] }'
+    prettyList(a).should.equal '{ [2, 2.49999999], [2.5, 2.99999999], [3, 3.49999999], [3.5, 3.99999999], [4, 4.49999999] }'
 
   it 'expands lists of multiple intervals', ->
     # define NullInList: expand { Interval[2, 5], null } per 1.5 '1'
     a = @nullInList.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 3.4], [3.5, 4.9] }'
+    prettyList(a).should.equal '{ [2, 3.49999999], [3.5, 4.99999999] }'
 
     # define Overlapping: expand { Interval[2, 5], Interval[4, 7] } per 1.5 '1'
     a = @overlapping.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 3.4], [3.5, 4.9], [5, 6.4] }'
+    prettyList(a).should.equal '{ [2, 3.49999999], [3.5, 4.99999999], [5, 6.49999999] }'
 
     # define NonOverlapping: expand { Interval[2, 4], Interval[6, 8] } per 1.5 '1'
     a = @nonOverlapping.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 3.4], [6, 7.4] }'
+    prettyList(a).should.equal '{ [2, 3.49999999], [6, 7.49999999] }'
 
   it 'expands interval using default per of 1', ->
     # define NoPer: expand { Interval[2.5, 4.5] }
@@ -2213,11 +2213,11 @@ describe 'DecimalIntervalExpand', ->
   it 'expands interval with open ends', ->
     # define OpenStart: expand { Interval(2, 5] } per 1.5 '1'
     a = @openStart.exec(@ctx)
-    prettyList(a).should.equal '{ [3, 4.4] }'
+    prettyList(a).should.equal '{ [3, 4.49999999] }'
 
     # define OpenEnd: expand { Interval[2, 5) } per 1.5 '1'
     a = @openEnd.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 3.4] }'
+    prettyList(a).should.equal '{ [2, 3.49999999] }'
 
     # define OpenBoth: expand { Interval(2, 5) } per 1.5 '1'
     @openBoth.exec(@ctx).should.be.empty()

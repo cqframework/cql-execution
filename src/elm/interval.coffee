@@ -356,15 +356,10 @@ module.exports.Expand = class Expand extends Expression
     @makeNumericIntervalList(interval.low, interval.high, interval.lowClosed, interval.highClosed, per.value)
 
   makeNumericIntervalList: (low, high, lowClosed, highClosed, perValue) ->
-    # Determine the precision to pass to the truncateDecimal call below.
-    if Math.floor(perValue.valueOf()) == perValue.valueOf()
-      decimalPrecision = 0
-    else
-      decimalPrecision = perValue.toString().split('.')[1].length || 0
-
-    # CQL has max decimal precision of 8
-    if decimalPrecision > 8
-      decimalPrecision = 8
+    # If the per value is a Decimal (has a .), 8 decimal places are appropriate
+    # Integers should have 0 Decimal places
+    perIsDecimal = perValue.toString().includes('.')
+    decimalPrecision = if perIsDecimal then 8 else 0
 
     low = if lowClosed then low else successor low
     high = if highClosed then high else predecessor high
@@ -378,28 +373,16 @@ module.exports.Expand = class Expand extends Expression
     return [] if low > high
     return [] unless low? and high?
 
-    # Deal with the weird case of a point interval expanding with more
-    # precision than it is defined by moving the high
-    if low is high
-      # parseFloat(toFixed()) avoids JavaScript floating point issues
-      # i.e. 10.2 + 0.1 = 10.299999999999
-      high = truncateDecimal(high + 1 - perValue, decimalPrecision)
+    perUnitSize = if perIsDecimal then 0.00000001 else 1
+
+    if low is high and Number.isInteger(low) and Number.isInteger(high) and !Number.isInteger(perValue)
+      high = parseFloat((high + 1).toFixed(decimalPrecision))
 
     current_low = low
     results = []
 
-    # The spec says that each interval in the result should be of _size_ per, and gives an example:
-    # expand { Interval[10, 10] } per 0.1
-    # with result { Interval[10.0, 10.0], Interval[10.1, 10.1], ..., Interval[10.9, 10.9] }
-    # but size for decimal point intervals would be 0.00000001 rather than 0.1,
-    # so we can't simply use successor or predecessor like we can with datetime
-    # I'm going to assume that what the spec wants is to use the decimal digit as the base unit for size.
-    # So `per 0.1` will treat a point interval as size 0.1.
-    # expand {Interval{[10, 10]} per 0.2 would then result in
-    # with result { Interval[10.0, 10.1], Interval[10.3, 10.4], ..., Interval[10.7, 10.8] }
-    perUnitSize = truncateDecimal(Math.pow(0.1, decimalPrecision), decimalPrecision)
     return [] if perValue > (high - low + perUnitSize)
-    current_high = truncateDecimal(current_low + perValue - perUnitSize, decimalPrecision)
+    current_high = parseFloat((current_low + perValue - perUnitSize).toFixed(decimalPrecision))
     intervalToAdd = new dtivl.Interval(current_low, current_high, true, true)
     while intervalToAdd.high <= high
       results.push(intervalToAdd)
@@ -523,7 +506,6 @@ getpointSize = (interval) ->
 
 truncateDecimal = (decimal, decimalPlaces) ->
   # like parseFloat().toFixed() but floor rather than round
-  # TODO: This is currently failing for 10.2 + 0.1, which results in
-  # 10.299999999999999 and so gets truncated to 10.2, causing an infinite loop.
+  # Needed for when per precision is less than the interval input precision
   re = new RegExp('^-?\\d+(?:\.\\d{0,' + (decimalPlaces || -1) + '})?')
   parseFloat(decimal.toString().match(re)[0])
