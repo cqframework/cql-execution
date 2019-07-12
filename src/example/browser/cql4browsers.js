@@ -379,7 +379,7 @@
 
   module.exports.PatientContext = context.PatientContext;
 
-  module.exports.UnfilteredContext = context.UnfiliteredContext;
+  module.exports.UnfilteredContext = context.UnfilteredContext;
 
   module.exports.Results = results.Results;
 
@@ -45712,14 +45712,14 @@
     };
 
     Executor.prototype.exec = function(patientSource, executionDateTime) {
-      var expr, key, popContext, r, ref;
+      var expr, key, r, ref, unfilteredContext;
       Results(r = this.exec_patient_context(patientSource, executionDateTime));
-      popContext = new UnfilteredContext(this.library, r, this.codeService, this.parameters);
+      unfilteredContext = new UnfilteredContext(this.library, r, this.codeService, this.parameters);
       ref = this.library.expressions;
       for (key in ref) {
         expr = ref[key];
-        if (expr.context === "Unspecified") {
-          r.recordPopulationResult(key, expr.exec(popContext));
+        if (expr.context === "Unfiltered") {
+          r.recordUnfilteredResult(key, expr.exec(unfilteredContext));
         }
       }
       return r;
@@ -45819,7 +45819,7 @@
       return this.localIdPatientResultsMap[patientId] = patient_ctx.getAllLocalIds();
     };
 
-    Results.prototype.recordPopulationResult = function(resultName, result) {
+    Results.prototype.recordUnfilteredResult = function(resultName, result) {
       return this.unfilteredResults[resultName] = result;
     };
 
