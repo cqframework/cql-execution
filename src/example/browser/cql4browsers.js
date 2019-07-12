@@ -5982,15 +5982,9 @@
     };
 
     Expand.prototype.makeNumericIntervalList = function(low, high, lowClosed, highClosed, perValue) {
-      var current_high, current_low, decimalPrecision, intervalToAdd, perUnitSize, results;
-      if (Math.floor(perValue.valueOf()) === perValue.valueOf()) {
-        decimalPrecision = 0;
-      } else {
-        decimalPrecision = perValue.toString().split('.')[1].length || 0;
-      }
-      if (decimalPrecision > 8) {
-        decimalPrecision = 8;
-      }
+      var current_high, current_low, decimalPrecision, intervalToAdd, perIsDecimal, perUnitSize, results;
+      perIsDecimal = perValue.toString().includes('.');
+      decimalPrecision = perIsDecimal ? 8 : 0;
       low = lowClosed ? low : successor(low);
       high = highClosed ? high : predecessor(high);
       low = truncateDecimal(low, decimalPrecision);
@@ -6001,16 +5995,16 @@
       if (!((low != null) && (high != null))) {
         return [];
       }
-      if (low === high) {
-        high = truncateDecimal(high + 1 - perValue, decimalPrecision);
+      perUnitSize = perIsDecimal ? 0.00000001 : 1;
+      if (low === high && Number.isInteger(low) && Number.isInteger(high) && !Number.isInteger(perValue)) {
+        high = parseFloat((high + 1).toFixed(decimalPrecision));
       }
       current_low = low;
       results = [];
-      perUnitSize = truncateDecimal(Math.pow(0.1, decimalPrecision), decimalPrecision);
       if (perValue > (high - low + perUnitSize)) {
         return [];
       }
-      current_high = truncateDecimal(current_low + perValue - perUnitSize, decimalPrecision);
+      current_high = parseFloat((current_low + perValue - perUnitSize).toFixed(decimalPrecision));
       intervalToAdd = new dtivl.Interval(current_low, current_high, true, true);
       while (intervalToAdd.high <= high) {
         results.push(intervalToAdd);
