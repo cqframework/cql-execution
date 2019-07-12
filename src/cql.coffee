@@ -18,7 +18,7 @@ module.exports.Expression         = expression.Expression
 module.exports.Context            = context.Context
 module.exports.Executor           = exec.Executor
 module.exports.PatientContext     = context.PatientContext
-module.exports.PopulationContext  = context.PopulationContext
+module.exports.UnfilteredContext  = context.UnfilteredContext
 module.exports.Results            = results.Results
 
 # PatientSource-related classes

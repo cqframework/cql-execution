@@ -5,7 +5,7 @@ libNames = []
 # Library-related classes
 libNames.push('Library', 'Repository', 'Expression')
 # Execution-related classes
-libNames.push('Context', 'Executor', 'PatientContext', 'PopulationContext', 'Results')
+libNames.push('Context', 'Executor', 'PatientContext', 'UnfilteredContext', 'Results')
 # PatientSource-related classes
 libNames.push('Patient', 'PatientSource')
 # TerminologyService-related classes
