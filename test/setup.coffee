@@ -1,4 +1,4 @@
-{ Library, Context, PatientSource, CodeService, PatientContext, PopulationContext, Executor} =  require '../lib/cql'
+{ Library, Context, PatientSource, CodeService, PatientContext, UnfilteredContext, Executor} =  require '../lib/cql'
 
 module.exports = (test, data, patients=[], valuesets={}, parameters={}, repository=null) ->
   try

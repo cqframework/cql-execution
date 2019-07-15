@@ -240,7 +240,7 @@ module.exports.PatientContext = class PatientContext extends Context
   findRecords: ( profile) ->
     @patient?.findRecords(profile)
 
-module.exports.PopulationContext = class PopulationContext extends Context
+module.exports.UnfilteredContext = class UnfilteredContext extends Context
 
   constructor: (@library, @results, codeService, parameters, @executionDateTime = dt.DateTime.fromJSDate(new Date())) ->
     super(@library, codeService, parameters)
@@ -248,16 +248,16 @@ module.exports.PopulationContext = class PopulationContext extends Context
   rootContext:  -> @
 
   findRecords: (template) ->
-    throw new Exception("Retreives are not currently supported in Population Context")
+    throw new Exception("Retreives are not currently supported in Unfiltered Context")
 
   getLibraryContext: (library) ->
-    throw new Exception("Library expressions are not currently supported in Population Context")
+    throw new Exception("Library expressions are not currently supported in Unfiltered Context")
 
   get: (identifier) ->
-    #First check to see if the identifier is a population context expression that has already been cached
+    #First check to see if the identifier is a unfiltered context expression that has already been cached
     return @context_values[identifier] if @context_values[identifier]
-    #if not look to see if the library has a population expression of that identifier
-    return @library.expressions[identifier] if @library[identifier]?.context == "Population"
+    #if not look to see if the library has a unfiltered expression of that identifier
+    return @library.expressions[identifier] if @library[identifier]?.context == "Unfiltered"
     #lastley attempt to gather all patient level results that have that identifier
     # should this compact null values before return ?
     for pid,res of @results.patientResults

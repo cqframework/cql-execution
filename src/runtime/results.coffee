@@ -1,7 +1,7 @@
 module.exports.Results = class Results
   constructor: () ->
     @patientResults = {}
-    @populationResults = {}
+    @unfilteredResults = {}
     @localIdPatientResultsMap = {}
 
   recordPatientResult: (patient_ctx, resultName, result) ->
@@ -14,5 +14,5 @@ module.exports.Results = class Results
     @patientResults[patientId][resultName] = result
     @localIdPatientResultsMap[patientId] = patient_ctx.getAllLocalIds()
 
-  recordPopulationResult: (resultName, result) ->
-    @populationResults[resultName] = result
+  recordUnfilteredResult: (resultName, result) ->
+    @unfilteredResults[resultName] = result

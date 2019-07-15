@@ -15,8 +15,8 @@ describe 'In Age Demographic', ->
     @results.patientResults['1'].InDemographic.should.equal false
     @results.patientResults['2'].InDemographic.should.equal true
 
-  it 'should have empty population results', ->
-    @results.populationResults.should.be.empty()
+  it 'should have empty unfiltered results', ->
+    @results.unfilteredResults.should.be.empty()
 
 describe 'Using CommonLib', ->
   @beforeEach ->
