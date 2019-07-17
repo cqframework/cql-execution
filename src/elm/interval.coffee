@@ -386,8 +386,6 @@ module.exports.Expand = class Expand extends Expression
     intervalToAdd = new dtivl.Interval(current_low, current_high, true, true)
     while intervalToAdd.high <= high
       results.push(intervalToAdd)
-      # current_low = truncateDecimal(current_low + per.value, decimalPrecision)
-      # current_high = truncateDecimal(current_low + per.value - perUnitSize, decimalPrecision)
       current_low = parseFloat((current_low + perValue).toFixed(decimalPrecision))
       current_high = parseFloat((current_low + perValue - perUnitSize).toFixed(decimalPrecision))
       intervalToAdd = new dtivl.Interval(current_low, current_high, true, true)
