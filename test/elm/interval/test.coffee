@@ -1659,7 +1659,7 @@ describe 'DateIntervalExpand', ->
     a = @nullBoth.exec(@ctx)
     should.not.exist(a)
 
-  it 'returns more precise intervals when per is more precise than the interval ends', ->
+  it 'returns empty list when per is more precise than the interval ends', ->
     # define MonthDayPer: expand { Interval[@2018-01, @2018-03] } per day
     @monthDayPer.exec(@ctx).should.be.empty()
 

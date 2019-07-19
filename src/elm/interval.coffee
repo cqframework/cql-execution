@@ -320,8 +320,6 @@ module.exports.Expand = class Expand extends Expression
   truncateToPrecision: (value, unit) ->
     # If interval boundaries are more precise than per quantity, truncate to
     # the precision specified by the per
-    # If the per is more precise than the interval, fill out precision with
-    # minimum values so that the expansion can produce a more precise result
     shouldTruncate = false
     for field in value.constructor.FIELDS
       if shouldTruncate
@@ -476,31 +474,6 @@ collapseIntervals = (intervals, perWidth) ->
       b = intervalsClone.shift()
     collapsedIntervals.push a
     collapsedIntervals
-
-getpointSize = (interval) ->
-  if interval.low?
-    if interval.low.isDateTime
-      precisionUnits = interval.low.getPrecision()
-      pointSize = new Quantity(value: 1, unit: precisionUnits)
-    else if interval.low.isQuantity
-      pointSize = doSubtraction(successor(interval.low), interval.low)
-    else
-      pointSize = successor(interval.low) - interval.low
-  else if interval.high?
-    if interval.high.isDateTime
-      precisionUnits = interval.high.getPrecision()
-      pointSize = new Quantity(value: 1, unit: precisionUnits)
-    else if interval.high.isQuantity
-      pointSize = doSubtraction(successor(interval.high), interval.high)
-    else
-      pointSize = successor(interval.high) - interval.high
-  else
-    throw new Error("Point type of intervals cannot be determined.")
-
-  if typeof pointSize is 'number'
-    pointSize = new Quantity(value: pointSize, unit: '1')
-
-  return pointSize
 
 truncateDecimal = (decimal, decimalPlaces) ->
   # like parseFloat().toFixed() but floor rather than round
