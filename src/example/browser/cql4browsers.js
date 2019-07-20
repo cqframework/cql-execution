@@ -4033,7 +4033,7 @@
         } catch (error) {
           e = error;
           if (e instanceof MathUtil.OverFlowException) {
-            null;
+            return null;
           }
         }
       }
@@ -4066,7 +4066,7 @@
         } catch (error) {
           e = error;
           if (e instanceof MathUtil.OverFlowException) {
-            null;
+            return null;
           }
         }
       }

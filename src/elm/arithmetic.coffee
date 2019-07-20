@@ -279,12 +279,12 @@ module.exports.Successor = class Successor extends Expression
       null
     else
       try
-        # MathUtil.successor throws on underflow, and the exception is used in
-        # the logic for evaluating `meets`
+        # MathUtil.successor throws on overflow, and the exception is used in
+        # the logic for evaluating `meets`, so it can't be changed to just return null
         successor = MathUtil.successor arg
       catch e
         if e instanceof MathUtil.OverFlowException
-          null
+          return null
 
     return null if MathUtil.overflowsOrUnderflows(successor)
     successor
@@ -300,12 +300,12 @@ module.exports.Predecessor = class Predecessor extends  Expression
       null
     else
       # MathUtil.predecessor throws on underflow, and the exception is used in
-      # the logic for evaluating `meets`
+      # the logic for evaluating `meets`, so it can't be changed to just return null
       try
         predecessor = MathUtil.predecessor arg
       catch e
         if e instanceof MathUtil.OverFlowException
-          null
+          return null
 
     return null if MathUtil.overflowsOrUnderflows(predecessor)
     predecessor
