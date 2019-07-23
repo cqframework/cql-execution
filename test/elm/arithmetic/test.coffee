@@ -268,8 +268,8 @@ describe 'Successor', ->
   it "should be able to get Real Successor", ->
     @rs.exec(@ctx).should.equal ( 2.2  + Math.pow(10,-8) )
 
-  it "should cause runtime error for Successor greater than Integer Max value" , ->
-    should(() => @ofr.exec(@ctx)).throw(Math.OverFlowException)
+  it "should return null for Successor greater than Integer Max value" , ->
+    should(@ofr.exec(@ctx)).be.null()
 
   it "should be able to get Date Successor for year", ->
     dp = @y_date.exec(@ctx)
@@ -341,8 +341,8 @@ describe 'Successor', ->
     dp.second.should.equal 0
     dp.millisecond.should.equal 1
 
-  it "should throw an exception when attempting to get the Successor of the maximum allowed date", ->
-    should(() => @max_date.exec(@ctx)).throw(Math.OverFlowException)
+  it "should return null when attempting to get the Successor of the maximum allowed date", ->
+    should(@max_date.exec(@ctx)).be.null()
 
 describe 'Predecessor', ->
   @beforeEach ->
@@ -352,8 +352,8 @@ describe 'Predecessor', ->
     @is.exec(@ctx).should.equal 1
   it "should be able to get Real Predecessor", ->
     @rs.exec(@ctx).should.equal ( 2.2  - Math.pow(10,-8))
-  it "should cause runtime error for Predecessor greater than Integer Max value" , ->
-    should(() => @ufr.exec(@ctx)).throw(Math.OverFlowException)
+  it "should return null for Predecessor greater than Integer Max value" , ->
+    should(@ufr.exec(@ctx)).be.null()
 
   it "should be able to get Date Predecessor for year", ->
     dp = @y_date.exec(@ctx)
@@ -423,8 +423,8 @@ describe 'Predecessor', ->
     dp.minute.should.equal 59
     dp.millisecond.should.equal 999
 
-  it "should throw an exception when attempting to get the Predecessor of the minimum allowed date", ->
-    should(() => @min_date.exec(@ctx)).throw(Math.OverFlowException)
+  it "should return null when attempting to get the Predecessor of the minimum allowed date", ->
+    should(@min_date.exec(@ctx)).be.null()
 
 describe 'Quantity', ->
   @beforeEach ->
@@ -519,3 +519,187 @@ describe 'Quantity', ->
       ["10 'ml'", "20 'dl'", "-1.99 'l'"],
     ]
     doQuantityMathTests(tests, "-")
+
+describe 'OutOfBounds', ->
+  @beforeEach ->
+    setup @, data
+
+  describe 'Integer', ->
+    it 'should return null for Add overflow', ->
+      should(@integerAddOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Add underflow', ->
+      should(@integerAddUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for Subtract overflow', ->
+      should(@integerSubtractOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Subtract underflow', ->
+      should(@integerSubtractUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for Multiply overflow', ->
+      should(@integerMultiplyOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Multiply underflow', ->
+      should(@integerMultiplyUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for Divide overflow', ->
+      should(@integerDivideOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Divide underflow', ->
+      should(@integerDivideUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for Divide By Zero', ->
+      should(@integerDivideByZero.exec(@ctx)).be.null()
+
+    it 'should return null for Power overflow', ->
+      should(@integerPowerOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Power underflow', ->
+      should(@integerPowerUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for successor overflow', ->
+      should(@integerSuccessorOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for predecessor underflow', ->
+      should(@integerPredecessorUnderflow.exec(@ctx)).be.null()
+
+  describe 'Decimal', ->
+    it 'should return null for Add overflow', ->
+      should(@decimalAddOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Add underflow', ->
+      should(@decimalAddUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for Subtract overflow', ->
+      should(@decimalSubtractOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Subtract underflow', ->
+      should(@decimalSubtractUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for Multiply overflow', ->
+      should(@decimalMultiplyOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Multiply underflow', ->
+      should(@decimalMultiplyUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for Divide overflow', ->
+      should(@decimalDivideOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Divide underflow', ->
+      should(@decimalDivideUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for Divide By Zero', ->
+      should(@decimalDivideByZero.exec(@ctx)).be.null()
+
+    it 'should return null for Power overflow', ->
+      should(@decimalPowerOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Power underflow', ->
+      should(@decimalPowerUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for successor overflow', ->
+      should(@decimalSuccessorOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for predecessor underflow', ->
+      should(@decimalPredecessorUnderflow.exec(@ctx)).be.null()
+
+  describe 'Quantity', ->
+    it 'should return null for Add overflow', ->
+      should(@quantityAddOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Add underflow', ->
+      should(@quantityAddUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for Subtract overflow', ->
+      should(@quantitySubtractOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Subtract underflow', ->
+      should(@quantitySubtractUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for Multiply overflow', ->
+      should(@quantityMultiplyOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Multiply underflow', ->
+      should(@quantityMultiplyUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for Divide overflow', ->
+      should(@quantityDivideOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Divide underflow', ->
+      should(@quantityDivideUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for Divide By Zero', ->
+      should(@quantityDivideByZero.exec(@ctx)).be.null()
+
+    it 'should return null for Power overflow', ->
+      should(@quantityPowerOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Power underflow', ->
+      should(@quantityPowerUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for successor overflow', ->
+      should(@quantitySuccessorOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for predecessor underflow', ->
+      should(@quantityPredecessorUnderflow.exec(@ctx)).be.null()
+
+  describe 'DateTime', ->
+    it 'should return null for Add overflow', ->
+      should(@dateTimeAddOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Add underflow', ->
+      should(@dateTimeAddUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for Subtract overflow', ->
+      should(@dateTimeSubtractOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Subtract underflow', ->
+      should(@dateTimeSubtractUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for successor overflow', ->
+      should(@dateTimeSuccessorOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for predecessor underflow', ->
+      should(@dateTimePredecessorUnderflow.exec(@ctx)).be.null()
+
+  describe 'Date', ->
+    it 'should return null for Add overflow', ->
+      should(@dateAddOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Add underflow', ->
+      should(@dateAddUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for Subtract overflow', ->
+      should(@dateSubtractOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Subtract underflow', ->
+      should(@dateSubtractUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for successor overflow', ->
+      should(@dateSuccessorOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for predecessor underflow', ->
+      should(@datePredecessorUnderflow.exec(@ctx)).be.null()
+
+  describe 'Time', ->
+    it 'should return null for Add overflow', ->
+      should(@timeAddOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Add underflow', ->
+      should(@timeAddUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for Subtract overflow', ->
+      should(@timeSubtractOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for Subtract underflow', ->
+      should(@timeSubtractUnderflow.exec(@ctx)).be.null()
+
+    it 'should return null for successor overflow', ->
+      should(@timeSuccessorOverflow.exec(@ctx)).be.null()
+
+    it 'should return null for predecessor underflow', ->
+      should(@timePredecessorUnderflow.exec(@ctx)).be.null()
+
+  it 'Exp should return null for overflow', ->
+    should(@expOverflow.exec(@ctx)).be.null()

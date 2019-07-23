@@ -1073,25 +1073,25 @@ define NullBoth: expand { Interval[null, null] } per day
 define BadPerGram: expand { Interval[@2018-01-01T01+00:00, @2018-01-04T01+00:00] } per 1 'g'
 
 // @Test: TimeIntervalExpand 
-define MsPrecPerHour: expand { Interval[@T01:00:00.000+00:00, @T03:00:00.000+00:00] } per hour
-define MsPrecPerMinute: expand { Interval[@T01:00:00.000+00:00, @T01:02:00.000+00:00] } per minute
-define MsPrecPerSecond: expand { Interval[@T01:00:00.000+00:00, @T01:00:02.000+00:00] } per second
-define MsPrecPerMillisecond: expand { Interval[@T01:00:00.000+00:00, @T01:00:00.001+00:00] } per millisecond
+define MsPrecPerHour: expand { Interval[@T01:00:00.000, @T03:00:00.000] } per hour
+define MsPrecPerMinute: expand { Interval[@T01:00:00.000, @T01:02:00.000] } per minute
+define MsPrecPerSecond: expand { Interval[@T01:00:00.000, @T01:00:02.000] } per second
+define MsPrecPerMillisecond: expand { Interval[@T01:00:00.000, @T01:00:00.001] } per millisecond
 
-define SecPrecPerHour: expand { Interval[@T01:00:00+00:00, @T03:00:00+00:00] } per hour
-define SecPrecPerMinute: expand { Interval[@T01:00:00+00:00, @T01:02:00+00:00] } per minute
-define SecPrecPerSecond: expand { Interval[@T01:00:00+00:00, @T01:00:01+00:00] } per second
-define SecPrecPerMillisecond: expand { Interval[@T01:00:00+00:00, @T01:00:00+00:00] } per millisecond
+define SecPrecPerHour: expand { Interval[@T01:00:00, @T03:00:00] } per hour
+define SecPrecPerMinute: expand { Interval[@T01:00:00, @T01:02:00] } per minute
+define SecPrecPerSecond: expand { Interval[@T01:00:00, @T01:00:01] } per second
+define SecPrecPerMillisecond: expand { Interval[@T01:00:00, @T01:00:00] } per millisecond
 
-define MinPrecPerHour: expand { Interval[@T01:00+00:00, @T03:00+00:00] } per hour
-define MinPrecPerMinute: expand { Interval[@T01:00+00:00, @T01:01+00:00] } per minute
-define MinPrecPerSecond: expand { Interval[@T01:00+00:00, @T01:00+00:00] } per second
-define MinPrecPerMillisecond: expand { Interval[@T01:00+00:00, @T01:00+00:00] } per millisecond
+define MinPrecPerHour: expand { Interval[@T01:00, @T03:00] } per hour
+define MinPrecPerMinute: expand { Interval[@T01:00, @T01:01] } per minute
+define MinPrecPerSecond: expand { Interval[@T01:00, @T01:00] } per second
+define MinPrecPerMillisecond: expand { Interval[@T01:00, @T01:00] } per millisecond
 
-define HourPrecPerHour: expand { Interval[@T01+00:00, @T02+00:00] } per hour
-define HourPrecPerMinute: expand { Interval[@T01+00:00, @T01+00:00] } per minute
-define HourPrecPerSecond: expand { Interval[@T01+00:00, @T01+00:00] } per second
-define HourPrecPerMillisecond: expand { Interval[@T01+00:00, @T01+00:00] } per millisecond
+define HourPrecPerHour: expand { Interval[@T01, @T02] } per hour
+define HourPrecPerMinute: expand { Interval[@T01, @T01] } per minute
+define HourPrecPerSecond: expand { Interval[@T01, @T01] } per second
+define HourPrecPerMillisecond: expand { Interval[@T01, @T01] } per millisecond
 
 
 // @Test: QuantityIntervalExpand 

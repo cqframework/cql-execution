@@ -138,3 +138,71 @@ define MultiplyUcum: (5 'm' * 25 'km') = 125000 'm2'
 define DivideUcum: (20 'm2' / 5 'm') = 4 'm'
 define AddUcum: (5 'm' + 5 'km') = 5005 'm'
 define SubtractUcum: (25 'km' - 5 'm') = 24995 'm'
+
+// @Test: OutOfBounds
+define IntegerAddOverflow: maximum Integer + 1
+define IntegerAddUnderflow: minimum Integer + -1
+define IntegerSubtractOverflow: maximum Integer - -1
+define IntegerSubtractUnderflow: minimum Integer - 1
+define IntegerMultiplyOverflow: maximum Integer * 2
+define IntegerMultiplyUnderflow: minimum Integer * -2
+define IntegerDivideOverflow: maximum Integer / (0.5)
+define IntegerDivideUnderflow: minimum Integer / (-0.5)
+define IntegerDivideByZero: 1 / 0
+define IntegerPowerOverflow: (maximum Integer)^3
+define IntegerPowerUnderflow: (minimum Integer)^3
+define IntegerSuccessorOverflow: successor of maximum Integer
+define IntegerPredecessorUnderflow: predecessor of minimum Integer
+
+define DecimalAddOverflow: maximum Decimal + 1.0
+define DecimalAddUnderflow: minimum Decimal + -1.0
+define DecimalSubtractOverflow: maximum Decimal - -1.0
+define DecimalSubtractUnderflow: minimum Decimal - 1.0
+define DecimalMultiplyOverflow: maximum Decimal * 2
+define DecimalMultiplyUnderflow: minimum Decimal * -2
+define DecimalDivideOverflow: maximum Decimal / (0.5)
+define DecimalDivideUnderflow: minimum Decimal / (-0.5)
+define DecimalDivideByZero: 1.0 / 0
+define DecimalPowerOverflow: (maximum Decimal)^2
+define DecimalPowerUnderflow: (minimum Decimal)^3
+define DecimalSuccessorOverflow: successor of maximum Decimal
+define DecimalPredecessorUnderflow: predecessor of minimum Decimal
+
+define MaxQuantity: Quantity(maximum Decimal, 'mm')
+define MinQuantity: Quantity(minimum Decimal, 'mm')
+define QuantityAddOverflow: MaxQuantity + '1.0 mm'
+define QuantityAddUnderflow: MinQuantity + '-1.0 mm'
+define QuantitySubtractOverflow: MaxQuantity - Quantity(-1, 'mm')
+define QuantitySubtractUnderflow: MinQuantity - Quantity(1, 'mm')
+define QuantityMultiplyOverflow: MaxQuantity * Quantity(2, 'mm')
+define QuantityMultiplyUnderflow: MinQuantity * Quantity(2, 'mm')
+define QuantityDivideOverflow: MaxQuantity / Quantity(0.5, 'mm')
+define QuantityDivideUnderflow: MinQuantity / Quantity(-0.5, 'mm')
+define QuantityDivideByZero: '1.0 mm' / '0 mm'
+define QuantityPowerOverflow: MaxQuantity^3
+define QuantityPowerUnderflow: MinQuantity^3
+define QuantitySuccessorOverflow: successor of MaxQuantity
+define QuantityPredecessorUnderflow: predecessor of MinQuantity
+
+define DateTimeAddOverflow: maximum DateTime + '1 day'
+define DateTimeAddUnderflow: minimum DateTime + '-1 day'
+define DateTimeSubtractOverflow: maximum DateTime - '-1 day'
+define DateTimeSubtractUnderflow: minimum DateTime - '1 day'
+define DateTimeSuccessorOverflow: successor of maximum DateTime
+define DateTimePredecessorUnderflow: predecessor of minimum DateTime
+
+define DateAddOverflow: maximum Date + '1 day'
+define DateAddUnderflow: minimum Date + '-1 day'
+define DateSubtractOverflow: maximum Date - '-1 day'
+define DateSubtractUnderflow: minimum Date - '1 day'
+define DateSuccessorOverflow: successor of maximum Date
+define DatePredecessorUnderflow: predecessor of minimum Date
+
+define TimeAddOverflow: maximum Time + '1 second'
+define TimeAddUnderflow: minimum Time + '-1 second'
+define TimeSubtractOverflow: maximum Time - '-1 second'
+define TimeSubtractUnderflow: minimum Time - '1 second'
+define TimeSuccessorOverflow: successor of maximum Time
+define TimePredecessorUnderflow: predecessor of minimum Time
+
+define ExpOverflow: Exp(maximum Decimal)

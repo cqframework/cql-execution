@@ -379,7 +379,7 @@
 
   module.exports.PatientContext = context.PatientContext;
 
-  module.exports.PopulationContext = context.PopulationContext;
+  module.exports.UnfilteredContext = context.UnfilteredContext;
 
   module.exports.Results = results.Results;
 
@@ -3521,21 +3521,28 @@
     }
 
     Add.prototype.exec = function(ctx) {
-      var args;
+      var args, sum;
       args = this.execArgs(ctx);
+      sum = null;
       if ((args == null) || args.some(function(x) {
         return x == null;
       })) {
-        return null;
+        null;
       } else {
-        return args != null ? args.reduce(function(x, y) {
-          if (x.isQuantity || x.isDateTime || x.isDate) {
-            return doAddition(x, y);
-          } else {
-            return x + y;
-          }
-        }) : void 0;
+        if (args != null) {
+          args.reduce(function(x, y) {
+            if (x.isQuantity || x.isDateTime || x.isDate || x.isTime) {
+              return sum = doAddition(x, y);
+            } else {
+              return sum = x + y;
+            }
+          });
+        }
       }
+      if (MathUtil.overflowsOrUnderflows(sum)) {
+        return null;
+      }
+      return sum;
     };
 
     return Add;
@@ -3550,21 +3557,26 @@
     }
 
     Subtract.prototype.exec = function(ctx) {
-      var args;
+      var args, difference;
       args = this.execArgs(ctx);
+      difference = null;
       if ((args == null) || args.some(function(x) {
         return x == null;
       })) {
-        return null;
+        null;
       } else {
-        return args.reduce(function(x, y) {
+        args.reduce(function(x, y) {
           if (x.isQuantity || x.isDateTime || x.isDate) {
-            return doSubtraction(x, y);
+            return difference = doSubtraction(x, y);
           } else {
-            return x - y;
+            return difference = x - y;
           }
         });
       }
+      if (MathUtil.overflowsOrUnderflows(difference)) {
+        return null;
+      }
+      return difference;
     };
 
     return Subtract;
@@ -3579,21 +3591,28 @@
     }
 
     Multiply.prototype.exec = function(ctx) {
-      var args;
+      var args, product;
       args = this.execArgs(ctx);
+      product = null;
       if ((args == null) || args.some(function(x) {
         return x == null;
       })) {
-        return null;
+        null;
       } else {
-        return args != null ? args.reduce(function(x, y) {
-          if (x.isQuantity || y.isQuantity) {
-            return doMultiplication(x, y);
-          } else {
-            return x * y;
-          }
-        }) : void 0;
+        if (args != null) {
+          args.reduce(function(x, y) {
+            if (x.isQuantity || y.isQuantity) {
+              return product = doMultiplication(x, y);
+            } else {
+              return product = x * y;
+            }
+          });
+        }
       }
+      if (MathUtil.overflowsOrUnderflows(product)) {
+        return null;
+      }
+      return product;
     };
 
     return Multiply;
@@ -3608,21 +3627,28 @@
     }
 
     Divide.prototype.exec = function(ctx) {
-      var args;
+      var args, quotient;
       args = this.execArgs(ctx);
+      quotient = null;
       if ((args == null) || args.some(function(x) {
         return x == null;
       })) {
-        return null;
+        null;
       } else {
-        return args != null ? args.reduce(function(x, y) {
-          if (x.isQuantity) {
-            return doDivision(x, y);
-          } else {
-            return x / y;
-          }
-        }) : void 0;
+        if (args != null) {
+          args.reduce(function(x, y) {
+            if (x.isQuantity) {
+              return quotient = doDivision(x, y);
+            } else {
+              return quotient = x / y;
+            }
+          });
+        }
       }
+      if (MathUtil.overflowsOrUnderflows(quotient)) {
+        return null;
+      }
+      return quotient;
     };
 
     return Divide;
@@ -3637,17 +3663,21 @@
     }
 
     TruncatedDivide.prototype.exec = function(ctx) {
-      var args;
+      var args, quotient;
       args = this.execArgs(ctx);
       if ((args == null) || args.some(function(x) {
         return x == null;
       })) {
-        return null;
+        null;
       } else {
-        return Math.floor(args.reduce(function(x, y) {
+        quotient = Math.floor(args.reduce(function(x, y) {
           return x / y;
         }));
       }
+      if (MathUtil.overflowsOrUnderflows(quotient)) {
+        return null;
+      }
+      return quotient;
     };
 
     return TruncatedDivide;
@@ -3830,13 +3860,17 @@
     }
 
     Exp.prototype.exec = function(ctx) {
-      var arg;
+      var arg, power;
       arg = this.execArgs(ctx);
       if (arg == null) {
-        return null;
+        null;
       } else {
-        return Math.exp(arg);
+        power = Math.exp(arg);
       }
+      if (MathUtil.overflowsOrUnderflows(power)) {
+        return null;
+      }
+      return power;
     };
 
     return Exp;
@@ -3876,17 +3910,22 @@
     }
 
     Power.prototype.exec = function(ctx) {
-      var args;
+      var args, power;
       args = this.execArgs(ctx);
+      power = null;
       if ((args == null) || args.some(function(x) {
         return x == null;
       })) {
-        return null;
+        null;
       } else {
-        return args.reduce(function(x, y) {
+        power = args.reduce(function(x, y) {
           return Math.pow(x, y);
         });
       }
+      if (MathUtil.overflowsOrUnderflows(power)) {
+        return null;
+      }
+      return power;
     };
 
     return Power;
@@ -3904,7 +3943,9 @@
 
     MIN_VALUES['{urn:hl7-org:elm-types:r1}Decimal'] = MathUtil.MIN_FLOAT_VALUE;
 
-    MIN_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MIN_DATE_VALUE;
+    MIN_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MIN_DATETIME_VALUE;
+
+    MIN_VALUES['{urn:hl7-org:elm-types:r1}Date'] = MathUtil.MIN_DATE_VALUE;
 
     MIN_VALUES['{urn:hl7-org:elm-types:r1}Time'] = MathUtil.MIN_TIME_VALUE;
 
@@ -3943,7 +3984,9 @@
 
     MAX_VALUES['{urn:hl7-org:elm-types:r1}Decimal'] = MathUtil.MAX_FLOAT_VALUE;
 
-    MAX_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MAX_DATE_VALUE;
+    MAX_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MAX_DATETIME_VALUE;
+
+    MAX_VALUES['{urn:hl7-org:elm-types:r1}Date'] = MathUtil.MAX_DATE_VALUE;
 
     MAX_VALUES['{urn:hl7-org:elm-types:r1}Time'] = MathUtil.MAX_TIME_VALUE;
 
@@ -3979,13 +4022,25 @@
     }
 
     Successor.prototype.exec = function(ctx) {
-      var arg;
+      var arg, e, successor;
       arg = this.execArgs(ctx);
+      successor = null;
       if (arg == null) {
-        return null;
+        null;
       } else {
-        return MathUtil.successor(arg);
+        try {
+          successor = MathUtil.successor(arg);
+        } catch (error) {
+          e = error;
+          if (e instanceof MathUtil.OverFlowException) {
+            return null;
+          }
+        }
       }
+      if (MathUtil.overflowsOrUnderflows(successor)) {
+        return null;
+      }
+      return successor;
     };
 
     return Successor;
@@ -4000,13 +4055,25 @@
     }
 
     Predecessor.prototype.exec = function(ctx) {
-      var arg;
+      var arg, e, predecessor;
       arg = this.execArgs(ctx);
+      predecessor = null;
       if (arg == null) {
-        return null;
+        null;
       } else {
-        return MathUtil.predecessor(arg);
+        try {
+          predecessor = MathUtil.predecessor(arg);
+        } catch (error) {
+          e = error;
+          if (e instanceof MathUtil.OverFlowException) {
+            return null;
+          }
+        }
       }
+      if (MathUtil.overflowsOrUnderflows(predecessor)) {
+        return null;
+      }
+      return predecessor;
     };
 
     return Predecessor;
@@ -6161,7 +6228,7 @@
 },{"../runtime/results":135,"./expressions":23}],28:[function(require,module,exports){
 // Generated by CoffeeScript 1.12.7
 (function() {
-  var Current, Distinct, Exists, Expression, Filter, First, Flatten, ForEach, IndexOf, Last, List, SingletonFrom, Times, ToList, UnimplementedExpression, ValueSet, build, doContains, doDistinct, doIncludes, equals, ref, typeIsArray,
+  var Current, Distinct, Exists, Expression, Filter, First, Flatten, ForEach, IndexOf, Last, List, SingletonFrom, Times, ToList, UnimplementedExpression, ValueSet, build, doContains, doDistinct, doIncludes, equals, ref, removeDuplicateNulls, typeIsArray,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
@@ -6233,12 +6300,15 @@
   })(Expression);
 
   module.exports.doUnion = function(a, b) {
-    return doDistinct(a.concat(b));
+    var distinct;
+    distinct = doDistinct(a.concat(b));
+    return removeDuplicateNulls(distinct);
   };
 
   module.exports.doExcept = function(a, b) {
-    var itm, j, len, results, setList;
-    setList = doDistinct(a);
+    var distinct, itm, j, len, results, setList;
+    distinct = doDistinct(a);
+    setList = removeDuplicateNulls(distinct);
     results = [];
     for (j = 0, len = setList.length; j < len; j++) {
       itm = setList[j];
@@ -6250,8 +6320,9 @@
   };
 
   module.exports.doIntersect = function(a, b) {
-    var itm, j, len, results, setList;
-    setList = doDistinct(a);
+    var distinct, itm, j, len, results, setList;
+    distinct = doDistinct(a);
+    setList = removeDuplicateNulls(distinct);
     results = [];
     for (j = 0, len = setList.length; j < len; j++) {
       itm = setList[j];
@@ -6440,22 +6511,27 @@
   })(Expression);
 
   doDistinct = function(list) {
-    var firstNullFound, item, j, len, seen, setList;
-    seen = [];
+    var distinct;
+    distinct = [];
     list.filter(function(item) {
       var isNew;
-      isNew = seen.every(function(seenItem) {
+      isNew = distinct.every(function(seenItem) {
         return !equals(item, seenItem);
       });
       if (isNew) {
-        seen.push(item);
+        distinct.push(item);
       }
       return isNew;
     });
+    return distinct;
+  };
+
+  removeDuplicateNulls = function(list) {
+    var firstNullFound, item, j, len, setList;
     firstNullFound = false;
     setList = [];
-    for (j = 0, len = seen.length; j < len; j++) {
-      item = seen[j];
+    for (j = 0, len = list.length; j < len; j++) {
+      item = list[j];
       if (item !== null) {
         setList.push(item);
       }
@@ -8074,15 +8150,20 @@
     }
 
     Combine.prototype.exec = function(ctx) {
-      var separator, source;
+      var filteredArray, separator, source;
       source = this.source.execute(ctx);
       separator = this.separator != null ? this.separator.execute(ctx) : '';
-      if ((source == null) || source.some(function(x) {
-        return x == null;
-      })) {
+      if (source == null) {
         return null;
       } else {
-        return source.join(separator);
+        filteredArray = source.filter(function(x) {
+          return x !== null && x !== void 0;
+        });
+        if (filteredArray.length < 1) {
+          return null;
+        } else {
+          return filteredArray.join(separator);
+        }
       }
     };
 
@@ -45226,7 +45307,7 @@
 },{"../cql-datatypes":2,"./core":59}],132:[function(require,module,exports){
 // Generated by CoffeeScript 1.12.7
 (function() {
-  var Context, Exception, Library, PatientContext, PopulationContext, dt, typeIsArray, util,
+  var Context, Exception, Library, PatientContext, UnfilteredContext, dt, typeIsArray, util,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
@@ -45620,34 +45701,34 @@
 
   })(Context);
 
-  module.exports.PopulationContext = PopulationContext = (function(superClass) {
-    extend(PopulationContext, superClass);
+  module.exports.UnfilteredContext = UnfilteredContext = (function(superClass) {
+    extend(UnfilteredContext, superClass);
 
-    function PopulationContext(library1, results, codeService, parameters, executionDateTime) {
+    function UnfilteredContext(library1, results, codeService, parameters, executionDateTime) {
       this.library = library1;
       this.results = results;
       this.executionDateTime = executionDateTime != null ? executionDateTime : dt.DateTime.fromJSDate(new Date());
-      PopulationContext.__super__.constructor.call(this, this.library, codeService, parameters);
+      UnfilteredContext.__super__.constructor.call(this, this.library, codeService, parameters);
     }
 
-    PopulationContext.prototype.rootContext = function() {
+    UnfilteredContext.prototype.rootContext = function() {
       return this;
     };
 
-    PopulationContext.prototype.findRecords = function(template) {
-      throw new Exception("Retreives are not currently supported in Population Context");
+    UnfilteredContext.prototype.findRecords = function(template) {
+      throw new Exception("Retreives are not currently supported in Unfiltered Context");
     };
 
-    PopulationContext.prototype.getLibraryContext = function(library) {
-      throw new Exception("Library expressions are not currently supported in Population Context");
+    UnfilteredContext.prototype.getLibraryContext = function(library) {
+      throw new Exception("Library expressions are not currently supported in Unfiltered Context");
     };
 
-    PopulationContext.prototype.get = function(identifier) {
+    UnfilteredContext.prototype.get = function(identifier) {
       var pid, ref, ref1, res, results;
       if (this.context_values[identifier]) {
         return this.context_values[identifier];
       }
-      if (((ref = this.library[identifier]) != null ? ref.context : void 0) === "Population") {
+      if (((ref = this.library[identifier]) != null ? ref.context : void 0) === "Unfiltered") {
         return this.library.expressions[identifier];
       }
       ref1 = this.results.patientResults;
@@ -45659,7 +45740,7 @@
       return results;
     };
 
-    return PopulationContext;
+    return UnfilteredContext;
 
   })(Context);
 
@@ -45670,7 +45751,7 @@
 },{"../datatypes/datatypes":6,"../datatypes/exception":8,"../elm/library":27,"../util/util":138,"util":151}],133:[function(require,module,exports){
 // Generated by CoffeeScript 1.12.7
 (function() {
-  var Executor, PatientContext, PopulationContext, Results, ref;
+  var Executor, PatientContext, Results, UnfilteredContext, ref;
 
   module.exports.Executor = Executor = (function() {
     function Executor(library, codeService, parameters) {
@@ -45707,14 +45788,14 @@
     };
 
     Executor.prototype.exec = function(patientSource, executionDateTime) {
-      var expr, key, popContext, r, ref;
+      var expr, key, r, ref, unfilteredContext;
       Results(r = this.exec_patient_context(patientSource, executionDateTime));
-      popContext = new PopulationContext(this.library, r, this.codeService, this.parameters);
+      unfilteredContext = new UnfilteredContext(this.library, r, this.codeService, this.parameters);
       ref = this.library.expressions;
       for (key in ref) {
         expr = ref[key];
-        if (expr.context === "Population") {
-          r.recordPopulationResult(key, expr.exec(popContext));
+        if (expr.context === "Unfiltered") {
+          r.recordUnfilteredResult(key, expr.exec(unfilteredContext));
         }
       }
       return r;
@@ -45743,7 +45824,7 @@
 
   Results = require('./results').Results;
 
-  ref = require('./context'), PopulationContext = ref.PopulationContext, PatientContext = ref.PatientContext;
+  ref = require('./context'), UnfilteredContext = ref.UnfilteredContext, PatientContext = ref.PatientContext;
 
 }).call(this);
 
@@ -45799,7 +45880,7 @@
   module.exports.Results = Results = (function() {
     function Results() {
       this.patientResults = {};
-      this.populationResults = {};
+      this.unfilteredResults = {};
       this.localIdPatientResultsMap = {};
     }
 
@@ -45814,8 +45895,8 @@
       return this.localIdPatientResultsMap[patientId] = patient_ctx.getAllLocalIds();
     };
 
-    Results.prototype.recordPopulationResult = function(resultName, result) {
-      return this.populationResults[resultName] = result;
+    Results.prototype.recordUnfilteredResult = function(resultName, result) {
+      return this.unfilteredResults[resultName] = result;
     };
 
     return Results;
@@ -46080,13 +46161,13 @@
 },{"../datatypes/datetime":7,"../datatypes/uncertainty":13}],137:[function(require,module,exports){
 // Generated by CoffeeScript 1.12.7
 (function() {
-  var DateTime, Exception, MAX_DATE_VALUE, MAX_FLOAT_VALUE, MAX_INT_VALUE, MAX_TIME_VALUE, MIN_DATE_VALUE, MIN_FLOAT_PRECISION_VALUE, MIN_FLOAT_VALUE, MIN_INT_VALUE, MIN_TIME_VALUE, OverFlowException, Uncertainty, isValidDecimal, isValidInteger, predecessor, successor,
+  var Date, DateTime, Exception, MAX_DATETIME_VALUE, MAX_DATE_VALUE, MAX_FLOAT_VALUE, MAX_INT_VALUE, MAX_TIME_VALUE, MIN_DATETIME_VALUE, MIN_DATE_VALUE, MIN_FLOAT_PRECISION_VALUE, MIN_FLOAT_VALUE, MIN_INT_VALUE, MIN_TIME_VALUE, OverFlowException, Uncertainty, isValidDecimal, isValidInteger, predecessor, ref, successor,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
   Exception = require('../datatypes/exception').Exception;
 
-  DateTime = require('../datatypes/datetime').DateTime;
+  ref = require('../datatypes/datetime'), DateTime = ref.DateTime, Date = ref.Date;
 
   Uncertainty = require('../datatypes/uncertainty').Uncertainty;
 
@@ -46100,13 +46181,58 @@
 
   module.exports.MIN_FLOAT_PRECISION_VALUE = MIN_FLOAT_PRECISION_VALUE = Math.pow(10, -8);
 
-  module.exports.MIN_DATE_VALUE = MIN_DATE_VALUE = DateTime.parse("0001-01-01T00:00:00.000");
+  module.exports.MIN_DATETIME_VALUE = MIN_DATETIME_VALUE = DateTime.parse("0001-01-01T00:00:00.000");
 
-  module.exports.MAX_DATE_VALUE = MAX_DATE_VALUE = DateTime.parse("9999-12-31T23:59:59.999");
+  module.exports.MAX_DATETIME_VALUE = MAX_DATETIME_VALUE = DateTime.parse("9999-12-31T23:59:59.999");
+
+  module.exports.MIN_DATE_VALUE = MIN_DATE_VALUE = Date.parse("0001-01-01");
+
+  module.exports.MAX_DATE_VALUE = MAX_DATE_VALUE = Date.parse("9999-12-31");
 
   module.exports.MIN_TIME_VALUE = MIN_TIME_VALUE = DateTime.parse("0000-01-01T00:00:00.000");
 
   module.exports.MAX_TIME_VALUE = MAX_TIME_VALUE = DateTime.parse("0000-01-01T23:59:59.999");
+
+  module.exports.overflowsOrUnderflows = function(value) {
+    if (value == null) {
+      return false;
+    }
+    if (value.isQuantity) {
+      if (!isValidDecimal(value.value)) {
+        return true;
+      }
+    } else if (value.isDateTime) {
+      if (value.after(MAX_DATETIME_VALUE)) {
+        return true;
+      }
+      if (value.before(MIN_DATETIME_VALUE)) {
+        return true;
+      }
+    } else if (value.isDate) {
+      if (value.after(MAX_DATE_VALUE)) {
+        return true;
+      }
+      if (value.before(MIN_DATE_VALUE)) {
+        return true;
+      }
+    } else if (value.isTime) {
+      if (value.after(MAX_TIME_VALUE)) {
+        return true;
+      }
+      if (value.before(MIN_TIME_VALUE)) {
+        return true;
+      }
+    } else if (Number.isInteger(value)) {
+      if (!isValidInteger(value)) {
+        return true;
+      }
+    } else {
+      if (!isValidDecimal(value)) {
+        return true;
+      }
+    }
+    return false;
+  };
 
   module.exports.isValidInteger = isValidInteger = function(integer) {
     if (isNaN(integer)) {
@@ -46172,13 +46298,19 @@
         return val + MIN_FLOAT_PRECISION_VALUE;
       }
     } else if (val instanceof DateTime) {
-      if (val.sameAs(MAX_DATE_VALUE)) {
+      if (val.sameAs(MAX_DATETIME_VALUE)) {
         throw new OverFlowException();
       } else {
         return val.successor();
       }
     } else if (val != null ? val.isDate : void 0) {
-      if (val.sameAs(MAX_DATE_VALUE.getDate())) {
+      if (val.sameAs(MAX_DATE_VALUE)) {
+        throw new OverFlowException();
+      } else {
+        return val.successor();
+      }
+    } else if (val != null ? val.isTime : void 0) {
+      if (val.sameAs(MAX_TIME_VALUE)) {
         throw new OverFlowException();
       } else {
         return val.successor();
@@ -46215,13 +46347,19 @@
         return val - MIN_FLOAT_PRECISION_VALUE;
       }
     } else if (val instanceof DateTime) {
-      if (val.sameAs(MIN_DATE_VALUE)) {
+      if (val.sameAs(MIN_DATETIME_VALUE)) {
         throw new OverFlowException();
       } else {
         return val.predecessor();
       }
     } else if (val != null ? val.isDate : void 0) {
-      if (val.sameAs(MIN_DATE_VALUE.getDate())) {
+      if (val.sameAs(MIN_DATE_VALUE)) {
+        throw new OverFlowException();
+      } else {
+        return val.predecessor();
+      }
+    } else if (val != null ? val.isTime : void 0) {
+      if (val.sameAs(MIN_TIME_VALUE)) {
         throw new OverFlowException();
       } else {
         return val.predecessor();
@@ -46254,9 +46392,11 @@
         return MAX_FLOAT_VALUE;
       }
     } else if (val instanceof DateTime) {
-      return MAX_DATE_VALUE;
+      return MAX_DATETIME_VALUE;
     } else if (val != null ? val.isDate : void 0) {
-      return MAX_DATE_VALUE.getDate();
+      return MAX_DATE_VALUE;
+    } else if (val != null ? val.isTime : void 0) {
+      return MAX_TIME_VALUE;
     } else if (val != null ? val.isQuantity : void 0) {
       val2 = val.clone();
       val2.value = maxValueForInstance(val2.value);
@@ -46275,9 +46415,11 @@
         return MIN_FLOAT_VALUE;
       }
     } else if (val instanceof DateTime) {
-      return MIN_DATE_VALUE;
+      return MIN_DATETIME_VALUE;
     } else if (val != null ? val.isDate : void 0) {
-      return MIN_DATE_VALUE.getDate();
+      return MIN_DATE_VALUE;
+    } else if (val != null ? val.isTime : void 0) {
+      return MIN_TIME_VALUE;
     } else if (val != null ? val.isQuantity : void 0) {
       val2 = val.clone();
       val2.value = minValueForInstance(val2.value);

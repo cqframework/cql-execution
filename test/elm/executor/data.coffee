@@ -19,7 +19,8 @@ define Age:
 define InDemographic:
   AgeInYearsAt(start of MeasurementPeriod) >= 2 and AgeInYearsAt(start of MeasurementPeriod) < 18  
 
-context Population
+
+context Unfiltered
 
 define AgeSum: Sum(Age)
 
@@ -30,36 +31,18 @@ define AgeSumRef : AgeSum
 
 ###
 Translation Error(s):
-[13:1, 13:18] Could not resolve context name Population in model QUICK.
+[14:1, 14:18] Could not resolve context name Unfiltered in model QUICK.
 ###
 module.exports['Age'] = {
    "library" : {
       "annotation" : [ {
-         "startLine" : 13,
+         "startLine" : 14,
          "startChar" : 1,
-         "endLine" : 13,
+         "endLine" : 14,
          "endChar" : 18,
-         "message" : "Could not resolve context name Population in model QUICK.",
+         "message" : "Could not resolve context name Unfiltered in model QUICK.",
          "errorType" : "semantic",
          "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 17,
-         "startChar" : 20,
-         "endLine" : 17,
-         "endChar" : 50,
-         "message" : "Boolean-valued expression was promoted to a list.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 17,
-         "startChar" : 20,
-         "endLine" : 17,
-         "endChar" : 50,
-         "message" : "Boolean-valued expression was promoted to a list.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       } ],
       "identifier" : {
@@ -332,7 +315,7 @@ module.exports['Age'] = {
          }, {
             "localId" : "31",
             "name" : "AgeSum",
-            "context" : "Population",
+            "context" : "Unfiltered",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
@@ -359,18 +342,15 @@ module.exports['Age'] = {
                "localId" : "30",
                "type" : "Sum",
                "source" : {
-                  "type" : "ToList",
-                  "operand" : {
-                     "localId" : "29",
-                     "name" : "Age",
-                     "type" : "ExpressionRef"
-                  }
+                  "localId" : "29",
+                  "name" : "Age",
+                  "type" : "ExpressionRef"
                }
             }
          }, {
             "localId" : "38",
             "name" : "DEMO",
-            "context" : "Population",
+            "context" : "Unfiltered",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
@@ -426,28 +406,25 @@ module.exports['Age'] = {
                "localId" : "37",
                "type" : "Count",
                "source" : {
-                  "type" : "ToList",
-                  "operand" : {
-                     "localId" : "36",
-                     "type" : "Query",
-                     "source" : [ {
-                        "localId" : "33",
-                        "alias" : "w",
-                        "expression" : {
-                           "localId" : "32",
-                           "name" : "InDemographic",
-                           "type" : "ExpressionRef"
-                        }
-                     } ],
-                     "relationship" : [ ],
-                     "where" : {
-                        "localId" : "35",
-                        "type" : "IsTrue",
-                        "operand" : {
-                           "localId" : "34",
-                           "name" : "w",
-                           "type" : "AliasRef"
-                        }
+                  "localId" : "36",
+                  "type" : "Query",
+                  "source" : [ {
+                     "localId" : "33",
+                     "alias" : "w",
+                     "expression" : {
+                        "localId" : "32",
+                        "name" : "InDemographic",
+                        "type" : "ExpressionRef"
+                     }
+                  } ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "localId" : "35",
+                     "type" : "IsTrue",
+                     "operand" : {
+                        "localId" : "34",
+                        "name" : "w",
+                        "type" : "AliasRef"
                      }
                   }
                }
@@ -455,7 +432,7 @@ module.exports['Age'] = {
          }, {
             "localId" : "40",
             "name" : "AgeSumRef",
-            "context" : "Population",
+            "context" : "Unfiltered",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",

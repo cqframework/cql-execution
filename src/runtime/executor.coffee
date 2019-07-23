@@ -25,9 +25,9 @@ module.exports.Executor = class Executor
 
   exec: (patientSource, executionDateTime) ->
     Results r = @exec_patient_context(patientSource, executionDateTime)
-    popContext = new PopulationContext(@library,r,@codeService,@parameters)
-    for key,expr of @library.expressions when expr.context is "Population"
-       r.recordPopulationResult( key, expr.exec(popContext))
+    unfilteredContext = new UnfilteredContext(@library,r,@codeService,@parameters)
+    for key,expr of @library.expressions when expr.context is "Unfiltered"
+       r.recordUnfilteredResult( key, expr.exec(unfilteredContext))
     r
 
   exec_patient_context: (patientSource, executionDateTime) ->
@@ -40,4 +40,4 @@ module.exports.Executor = class Executor
     r
 
 { Results } = require './results'
-{ PopulationContext,PatientContext } = require './context'
+{ UnfilteredContext,PatientContext } = require './context'

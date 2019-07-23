@@ -271,7 +271,7 @@ class DateTime
     if @timezoneOffset? and not ignoreTimezone
       date = new jsDate(jsDate.UTC(y, mo, d, h, mi, s, ms) - (@timezoneOffset * 60 * 60 * 1000))
       # TODO: This fixes any case that would not cross the year boundary due to a timezone.
-      # Mainly used to solve the issue with the MIN_DATE_VALUE being converted from
+      # Mainly used to solve the issue with the MIN_DATETIME_VALUE being converted from
       # year 0001 to year 1900 because of strange JSDate behavior between year 0 and 100
       # Also else case below
       if y < 100 then date.setUTCFullYear(y)
