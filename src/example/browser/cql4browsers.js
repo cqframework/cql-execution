@@ -3034,12 +3034,17 @@
     }
 
     Sum.prototype.exec = function(ctx) {
-      var items, sum, values;
+      var e, items, sum, values;
       items = this.source.execute(ctx);
       if (!typeIsArray(items)) {
         return null;
       }
-      items = processQuantities(items);
+      try {
+        items = processQuantities(items);
+      } catch (error) {
+        e = error;
+        return null;
+      }
       if (!(items.length > 0)) {
         return null;
       }
@@ -3068,12 +3073,18 @@
     }
 
     Min.prototype.exec = function(ctx) {
-      var element, i, len, list, listWithoutNulls, minimum;
+      var e, element, i, len, list, listWithoutNulls, minimum;
       list = this.source.execute(ctx);
       if (list == null) {
         return null;
       }
       listWithoutNulls = removeNulls(list);
+      try {
+        processQuantities(list);
+      } catch (error) {
+        e = error;
+        return null;
+      }
       if (!(listWithoutNulls.length > 0)) {
         return null;
       }
@@ -3099,12 +3110,18 @@
     }
 
     Max.prototype.exec = function(ctx) {
-      var element, i, items, len, listWithoutNulls, maximum;
+      var e, element, i, items, len, listWithoutNulls, maximum;
       items = this.source.execute(ctx);
       if (items == null) {
         return null;
       }
       listWithoutNulls = removeNulls(items);
+      try {
+        processQuantities(items);
+      } catch (error) {
+        e = error;
+        return null;
+      }
       if (!(listWithoutNulls.length > 0)) {
         return null;
       }
@@ -3130,12 +3147,17 @@
     }
 
     Avg.prototype.exec = function(ctx) {
-      var items, sum, values;
+      var e, items, sum, values;
       items = this.source.execute(ctx);
       if (!typeIsArray(items)) {
         return null;
       }
-      items = processQuantities(items);
+      try {
+        items = processQuantities(items);
+      } catch (error) {
+        e = error;
+        return null;
+      }
       if (items.length === 0) {
         return null;
       }
@@ -3165,7 +3187,7 @@
     }
 
     Median.prototype.exec = function(ctx) {
-      var items, median, values;
+      var e, items, median, values;
       items = this.source.execute(ctx);
       if (!typeIsArray(items)) {
         return null;
@@ -3173,7 +3195,12 @@
       if (!(items.length > 0)) {
         return null;
       }
-      items = processQuantities(items);
+      try {
+        items = processQuantities(items);
+      } catch (error) {
+        e = error;
+        return null;
+      }
       if (!hasOnlyQuantities(items)) {
         return medianOfNumbers(items);
       }
@@ -3194,7 +3221,7 @@
     }
 
     Mode.prototype.exec = function(ctx) {
-      var filtered, items, mode, values;
+      var e, filtered, items, mode, values;
       items = this.source.execute(ctx);
       if (!typeIsArray(items)) {
         return null;
@@ -3202,7 +3229,12 @@
       if (!(items.length > 0)) {
         return null;
       }
-      filtered = processQuantities(items);
+      try {
+        filtered = processQuantities(items);
+      } catch (error) {
+        e = error;
+        return null;
+      }
       if (hasOnlyQuantities(filtered)) {
         values = getValuesFromQuantities(filtered);
         mode = this.mode(values);
@@ -3251,12 +3283,17 @@
     }
 
     StdDev.prototype.exec = function(ctx) {
-      var items, stdDev, values;
+      var e, items, stdDev, values;
       items = this.source.execute(ctx);
       if (!typeIsArray(items)) {
         return null;
       }
-      items = processQuantities(items);
+      try {
+        items = processQuantities(items);
+      } catch (error) {
+        e = error;
+        return null;
+      }
       if (!(items.length > 0)) {
         return null;
       }
@@ -3312,12 +3349,17 @@
     }
 
     Product.prototype.exec = function(ctx) {
-      var items, product, values;
+      var e, items, product, values;
       items = this.source.execute(ctx);
       if (!typeIsArray(items)) {
         return null;
       }
-      items = processQuantities(items);
+      try {
+        items = processQuantities(items);
+      } catch (error) {
+        e = error;
+        return null;
+      }
       if (!(items.length > 0)) {
         return null;
       }
@@ -3346,12 +3388,17 @@
     }
 
     GeometricMean.prototype.exec = function(ctx) {
-      var geoMean, items, product, values;
+      var e, geoMean, items, product, values;
       items = this.source.execute(ctx);
       if (!typeIsArray(items)) {
         return null;
       }
-      items = processQuantities(items);
+      try {
+        items = processQuantities(items);
+      } catch (error) {
+        e = error;
+        return null;
+      }
       if (!(items.length > 0)) {
         return null;
       }

@@ -45,6 +45,9 @@ describe 'Sum', ->
     q = @q_diff_units.exec(@ctx)
     validateQuantity q, 15, 'ml'
 
+  it 'should be null if quantity units are not compatible', ->
+    should(@incompatibleUnitsNull.exec(@ctx)).be.null()
+
 describe 'Min', ->
   @beforeEach ->
     setup @, data
@@ -90,6 +93,9 @@ describe 'Min', ->
 
   it 'null list', ->
     should(@minIsAlsoNull.exec(@ctx)).be.null()
+
+  it 'should be null if quantity units are not compatible', ->
+    should(@incompatibleUnitsNull.exec(@ctx)).be.null()
 
 
 describe 'Max', ->
@@ -137,6 +143,9 @@ describe 'Max', ->
   it 'null list', ->
     should(@maxIsAlsoNull.exec(@ctx)).be.null()
 
+  it 'should be null if quantity units are not compatible', ->
+    should(@incompatibleUnitsNull.exec(@ctx)).be.null()
+
 describe 'Avg', ->
   @beforeEach ->
     setup @, data
@@ -162,6 +171,8 @@ describe 'Avg', ->
     q = @q_diff_units.exec(@ctx)
     validateQuantity q, 3, 'ml'
 
+  it 'should be null if quantity units are not compatible', ->
+    should(@incompatibleUnitsNull.exec(@ctx)).be.null()
 
 describe 'Median', ->
   @beforeEach ->
@@ -202,6 +213,8 @@ describe 'Median', ->
     q = @q_diff_units.exec(@ctx)
     validateQuantity q, 3.5, 'ml'
 
+  it 'should be null if quantity units are not compatible', ->
+    should(@incompatibleUnitsNull.exec(@ctx)).be.null()
 
 describe 'Mode', ->
   @beforeEach ->
@@ -214,6 +227,9 @@ describe 'Mode', ->
     @empty.exec(@ctx) == null
   it 'should be able to find bimodal', ->
     @bi_modal.exec(@ctx).should.eql [2,3]
+
+  it 'should be null if quantity units are not compatible', ->
+    should(@incompatibleUnitsNull.exec(@ctx)).be.null()
 
 describe 'PopulationVariance', ->
   @beforeEach ->
@@ -235,6 +251,9 @@ describe 'PopulationVariance', ->
       false.should.be.true("Incompatible Quantities should throw an error")
     catch
 
+  it 'should be null if quantity units are not compatible', ->
+    should(@incompatibleUnitsNull.exec(@ctx)).be.null()
+
 describe 'Variance', ->
   @beforeEach ->
     setup @, data
@@ -254,6 +273,9 @@ describe 'Variance', ->
       @q_throw2.exec(@ctx)
       false.should.be.true("Incompatible Quantities should throw an error")
     catch
+
+  it 'should be null if quantity units are not compatible', ->
+    should(@incompatibleUnitsNull.exec(@ctx)).be.null()
 
 describe 'StdDev', ->
   @beforeEach ->
@@ -275,6 +297,9 @@ describe 'StdDev', ->
       false.should.be.true("Incompatible Quantities should throw an error")
     catch
 
+  it 'should be null if quantity units are not compatible', ->
+    should(@incompatibleUnitsNull.exec(@ctx)).be.null()
+
 describe 'PopulationStdDev', ->
   @beforeEach ->
     setup @, data
@@ -294,6 +319,9 @@ describe 'PopulationStdDev', ->
       @q_throw2.exec(@ctx)
       false.should.be.true("Incompatible Quantities should throw an error")
     catch
+
+  it 'should be null if quantity units are not compatible', ->
+    should(@incompatibleUnitsNull.exec(@ctx)).be.null()
 
 describe 'Product', ->
   @beforeEach ->
@@ -327,6 +355,9 @@ describe 'Product', ->
   it 'should return null when list is all null', ->
     should(@product_of_nulls.exec(@ctx)).be.null()
 
+  it 'should be null if quantity units are not compatible', ->
+    should(@incompatibleUnitsNull.exec(@ctx)).be.null()
+
 describe 'GeometricMean', ->
   @beforeEach ->
     setup @, data
@@ -345,6 +376,9 @@ describe 'GeometricMean', ->
 
   it 'should return null when pass in list as null', ->
     should(@also_null_geometric_mean.exec(@ctx)).be.null()
+
+  it 'should be null if quantity units are not compatible', ->
+    should(@incompatibleUnitsNull.exec(@ctx)).be.null()
 
 describe 'AllTrue', ->
   @beforeEach ->

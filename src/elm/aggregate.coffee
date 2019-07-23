@@ -27,7 +27,11 @@ module.exports.Sum = class Sum extends AggregateExpression
     items = @source.execute(ctx)
     return null unless typeIsArray(items)
 
-    items = processQuantities(items)
+    try
+      items = processQuantities(items)
+    catch e
+      return null
+
     return null unless items.length > 0
 
     if hasOnlyQuantities(items)
@@ -45,6 +49,14 @@ module.exports.Min = class Min extends AggregateExpression
     list = @source.execute(ctx)
     return null unless list?
     listWithoutNulls = removeNulls(list)
+
+    # Check for incompatible units and return null. We don't want to convert
+    # the units for Min/Max, so we throw away tue converted array if it succeeds
+    try
+      processQuantities(list)
+    catch e
+      return null
+
     return null unless listWithoutNulls.length > 0
     # We assume the list is an array of all the same type.
     minimum = listWithoutNulls[0]
@@ -60,6 +72,14 @@ module.exports.Max = class Max extends AggregateExpression
     items = @source.execute(ctx)
     return null unless items?
     listWithoutNulls = removeNulls(items)
+
+    # Check for incompatible units and return null. We don't want to convert
+    # the units for Min/Max, so we throw away tue converted array if it succeeds
+    try
+      processQuantities(items)
+    catch e
+      return null
+
     return null unless listWithoutNulls.length > 0
     # We assume the list is an array of all the same type.
     maximum = listWithoutNulls[0]
@@ -75,7 +95,11 @@ module.exports.Avg = class Avg extends  AggregateExpression
     items = @source.execute(ctx)
     return null unless typeIsArray(items)
 
-    items = processQuantities(items)
+    try
+      items = processQuantities(items)
+    catch e
+      return null
+
     return null if items.length == 0
 
     if hasOnlyQuantities(items)
@@ -95,7 +119,11 @@ module.exports.Median = class Median extends AggregateExpression
     return null unless typeIsArray(items)
     return null unless items.length > 0
 
-    items = processQuantities(items)
+    try
+      items = processQuantities(items)
+    catch e
+      return null
+
     return medianOfNumbers(items) unless hasOnlyQuantities(items)
 
     values = getValuesFromQuantities(items)
@@ -112,7 +140,11 @@ module.exports.Mode = class Mode extends AggregateExpression
     return null unless typeIsArray(items)
     return null unless items.length > 0
 
-    filtered = processQuantities(items)
+    try
+      filtered = processQuantities(items)
+    catch e
+      return null
+
     if hasOnlyQuantities(filtered)
       values = getValuesFromQuantities(filtered)
       mode = @mode(values)
@@ -149,7 +181,11 @@ module.exports.StdDev = class StdDev extends AggregateExpression
     items = @source.execute(ctx)
     return null unless typeIsArray(items)
 
-    items = processQuantities(items)
+    try
+      items = processQuantities(items)
+    catch e
+      return null
+
     return null unless items.length > 0
 
     if hasOnlyQuantities(items)
@@ -184,7 +220,10 @@ module.exports.Product = class Product extends AggregateExpression
   exec: (ctx) ->
     items = @source.execute(ctx)
     return null unless typeIsArray(items)
-    items = processQuantities(items)
+    try
+      items = processQuantities(items)
+    catch e
+      return null
     return null unless items.length > 0
 
     if hasOnlyQuantities(items)
@@ -202,8 +241,10 @@ module.exports.GeometricMean = class GeometricMean extends AggregateExpression
   exec: (ctx) ->
     items = @source.execute(ctx)
     return null unless typeIsArray(items)
-
-    items = processQuantities(items)
+    try
+      items = processQuantities(items)
+    catch e
+      return null
     return null unless items.length > 0
     if hasOnlyQuantities(items)
       values = getValuesFromQuantities(items)
@@ -268,6 +309,7 @@ convertAllUnits = (arr) ->
   converted = []
   for quantity in arr
     converted.push(quantity.convertUnit(arr[0].unit))
+
   converted
 
 medianOfNumbers = (numbers) ->
