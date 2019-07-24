@@ -115,11 +115,11 @@ module.exports.maxValueForInstance = (val) ->
   if typeof val is "number"
     if parseInt(val) is val then MAX_INT_VALUE else MAX_FLOAT_VALUE
   else if val instanceof DateTime
-    MAX_DATETIME_VALUE
+    MAX_DATETIME_VALUE.copy()
   else if val?.isDate
-    MAX_DATE_VALUE
+    MAX_DATE_VALUE.copy()
   else if val?.isTime
-    MAX_TIME_VALUE
+    MAX_TIME_VALUE.copy()
   else if val?.isQuantity
     val2 = val.clone()
     val2.value = maxValueForInstance val2.value
