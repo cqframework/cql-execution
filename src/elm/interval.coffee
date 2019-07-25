@@ -146,11 +146,11 @@ module.exports.End = class End  extends Expression
   exec: (ctx) ->
     interval = @arg.execute(ctx)
     return null if !interval?
-    end = interval.end();
+    end = interval.end()
     # fix the timezoneOffset of maximum Datetime to match context offset
     if end?.isDateTime && end.equals(MAX_DATETIME_VALUE)
       end.timezoneOffset = ctx.getTimezoneOffset()
-    return end;
+    return end
 
 module.exports.Starts = class Starts extends Expression
   constructor: (json) ->
