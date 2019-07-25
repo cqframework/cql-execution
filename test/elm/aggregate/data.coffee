@@ -219,6 +219,7 @@ define has_null_q: Sum({1 'ml',null,null,null,2 'ml'})
 define unmatched_units_q: Min({1 'ml',2 'L',3 'ml',4 'ml',5 'ml',0 'ml'})
 define empty: Sum(List<Integer>{})
 define q_diff_units: Sum({1 'ml',0.002 'l',0.03 'dl',4 'ml',0.005 'l'})
+define IncompatibleUnitsNull: Sum({1 'mg/d', 0.002 '/d'})
 ###
 
 module.exports['Sum'] = {
@@ -800,6 +801,65 @@ module.exports['Sum'] = {
                   } ]
                }
             }
+         }, {
+            "localId" : "59",
+            "name" : "IncompatibleUnitsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "59",
+                  "s" : [ {
+                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                  }, {
+                     "r" : "58",
+                     "s" : [ {
+                        "value" : [ "Sum","(" ]
+                     }, {
+                        "r" : "57",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "55",
+                           "s" : [ {
+                              "value" : [ "1 ","'mg/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "56",
+                           "s" : [ {
+                              "value" : [ "0.002 ","'/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "58",
+               "type" : "Sum",
+               "source" : {
+                  "localId" : "57",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "55",
+                     "value" : 1,
+                     "unit" : "mg/d",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "56",
+                     "value" : 0.002,
+                     "unit" : "/d",
+                     "type" : "Quantity"
+                  } ]
+               }
+            }
          } ]
       }
    }
@@ -824,6 +884,7 @@ define DateTimeMin: Min({ DateTime(2012, 9, 9), DateTime(2012, 9, 5) })
 define TimeMin: Min({ Time(12, 30, 4), Time(12, 30, 3), Time(12, 30, 5)})
 define MinIsNull: Min({ null as Quantity, null as Quantity, null as Quantity })
 define MinIsAlsoNull: Min(null as List<Decimal>)
+define IncompatibleUnitsNull: Min({1 'mg/d', 0.002 '/d'})
 ###
 
 module.exports['Min'] = {
@@ -2167,6 +2228,65 @@ module.exports['Min'] = {
                   }
                }
             }
+         }, {
+            "localId" : "138",
+            "name" : "IncompatibleUnitsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "138",
+                  "s" : [ {
+                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                  }, {
+                     "r" : "137",
+                     "s" : [ {
+                        "value" : [ "Min","(" ]
+                     }, {
+                        "r" : "136",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "134",
+                           "s" : [ {
+                              "value" : [ "1 ","'mg/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "135",
+                           "s" : [ {
+                              "value" : [ "0.002 ","'/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "137",
+               "type" : "Min",
+               "source" : {
+                  "localId" : "136",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "134",
+                     "value" : 1,
+                     "unit" : "mg/d",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "135",
+                     "value" : 0.002,
+                     "unit" : "/d",
+                     "type" : "Quantity"
+                  } ]
+               }
+            }
          } ]
       }
    }
@@ -2183,6 +2303,7 @@ define has_null_q: Max({1 'ml',null,null,2 'ml'})
 define q_diff_units: Max({10 'ml',1 'ml',2 'ml',3 'ml',4 'ml',5 'l'})
 define q_throw1: Max({10 'ml',1 'm',2 'ml',3 'ml',4 'ml',5 'ml'})
 define q_throw2: Max({10 ,1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
+define IncompatibleUnitsNull: Max({1 'mg/d', 0.002 '/d'})
 
 define empty: Max(List<Integer>{})
 
@@ -2853,26 +2974,85 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "64",
+            "localId" : "65",
+            "name" : "IncompatibleUnitsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "65",
+                  "s" : [ {
+                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                  }, {
+                     "r" : "64",
+                     "s" : [ {
+                        "value" : [ "Max","(" ]
+                     }, {
+                        "r" : "63",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "61",
+                           "s" : [ {
+                              "value" : [ "1 ","'mg/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "62",
+                           "s" : [ {
+                              "value" : [ "0.002 ","'/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "64",
+               "type" : "Max",
+               "source" : {
+                  "localId" : "63",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "61",
+                     "value" : 1,
+                     "unit" : "mg/d",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "62",
+                     "value" : 0.002,
+                     "unit" : "/d",
+                     "type" : "Quantity"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "69",
             "name" : "empty",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "64",
+                  "r" : "69",
                   "s" : [ {
                      "value" : [ "define ","empty",": " ]
                   }, {
-                     "r" : "63",
+                     "r" : "68",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "62",
+                        "r" : "67",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "61",
+                           "r" : "66",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -2886,32 +3066,32 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "63",
+               "localId" : "68",
                "type" : "Max",
                "source" : {
-                  "localId" : "62",
+                  "localId" : "67",
                   "type" : "List"
                }
             }
          }, {
-            "localId" : "71",
+            "localId" : "76",
             "name" : "IntegerMax",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "71",
+                  "r" : "76",
                   "s" : [ {
                      "value" : [ "define ","IntegerMax",": " ]
                   }, {
-                     "r" : "70",
+                     "r" : "75",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "69",
+                        "r" : "74",
                         "s" : [ {
-                           "r" : "65",
+                           "r" : "70",
                            "value" : [ "{ ","2",", ","4",", ","8",", ","6"," }" ]
                         } ]
                      }, {
@@ -2921,28 +3101,28 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "70",
+               "localId" : "75",
                "type" : "Max",
                "source" : {
-                  "localId" : "69",
+                  "localId" : "74",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "65",
+                     "localId" : "70",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   }, {
-                     "localId" : "66",
+                     "localId" : "71",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "4",
                      "type" : "Literal"
                   }, {
-                     "localId" : "67",
+                     "localId" : "72",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "8",
                      "type" : "Literal"
                   }, {
-                     "localId" : "68",
+                     "localId" : "73",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "6",
                      "type" : "Literal"
@@ -2950,29 +3130,29 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "79",
+            "localId" : "84",
             "name" : "DecimalMax",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "79",
+                  "r" : "84",
                   "s" : [ {
                      "value" : [ "define ","DecimalMax",": " ]
                   }, {
-                     "r" : "78",
+                     "r" : "83",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "77",
+                        "r" : "82",
                         "s" : [ {
-                           "r" : "72",
+                           "r" : "77",
                            "value" : [ "{ ","5.0",", ","4.9",", ","5.1",", " ]
                         }, {
-                           "r" : "76",
+                           "r" : "81",
                            "s" : [ {
-                              "r" : "75",
+                              "r" : "80",
                               "value" : [ "-","5.0" ]
                            } ]
                         }, {
@@ -2985,31 +3165,31 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "78",
+               "localId" : "83",
                "type" : "Max",
                "source" : {
-                  "localId" : "77",
+                  "localId" : "82",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "72",
+                     "localId" : "77",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "5.0",
                      "type" : "Literal"
                   }, {
-                     "localId" : "73",
+                     "localId" : "78",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "4.9",
                      "type" : "Literal"
                   }, {
-                     "localId" : "74",
+                     "localId" : "79",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "5.1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "76",
+                     "localId" : "81",
                      "type" : "Negate",
                      "operand" : {
-                        "localId" : "75",
+                        "localId" : "80",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "value" : "5.0",
                         "type" : "Literal"
@@ -3018,24 +3198,24 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "85",
+            "localId" : "90",
             "name" : "DateMax",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "85",
+                  "r" : "90",
                   "s" : [ {
                      "value" : [ "define ","DateMax",": " ]
                   }, {
-                     "r" : "84",
+                     "r" : "89",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "83",
+                        "r" : "88",
                         "s" : [ {
-                           "r" : "80",
+                           "r" : "85",
                            "value" : [ "{ ","@2012-12-31",", ","@2013-01-01",", ","@2012-01-01"," }" ]
                         } ]
                      }, {
@@ -3045,13 +3225,13 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "84",
+               "localId" : "89",
                "type" : "Max",
                "source" : {
-                  "localId" : "83",
+                  "localId" : "88",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "80",
+                     "localId" : "85",
                      "type" : "Date",
                      "year" : {
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -3069,7 +3249,7 @@ module.exports['Max'] = {
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "81",
+                     "localId" : "86",
                      "type" : "Date",
                      "year" : {
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -3087,7 +3267,7 @@ module.exports['Max'] = {
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "82",
+                     "localId" : "87",
                      "type" : "Date",
                      "year" : {
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -3108,36 +3288,36 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "96",
+            "localId" : "101",
             "name" : "DateTimeMax",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "96",
+                  "r" : "101",
                   "s" : [ {
                      "value" : [ "define ","DateTimeMax",": " ]
                   }, {
-                     "r" : "95",
+                     "r" : "100",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "94",
+                        "r" : "99",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "89",
+                           "r" : "94",
                            "s" : [ {
-                              "r" : "86",
+                              "r" : "91",
                               "value" : [ "DateTime","(","2012",", ","2",", ","3",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "93",
+                           "r" : "98",
                            "s" : [ {
-                              "r" : "90",
+                              "r" : "95",
                               "value" : [ "DateTime","(","2012",", ","9",", ","5",")" ]
                            } ]
                         }, {
@@ -3150,49 +3330,49 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "95",
+               "localId" : "100",
                "type" : "Max",
                "source" : {
-                  "localId" : "94",
+                  "localId" : "99",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "89",
+                     "localId" : "94",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "86",
+                        "localId" : "91",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "87",
+                        "localId" : "92",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "88",
+                        "localId" : "93",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "93",
+                     "localId" : "98",
                      "type" : "DateTime",
                      "year" : {
-                        "localId" : "90",
+                        "localId" : "95",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "91",
+                        "localId" : "96",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "9",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "92",
+                        "localId" : "97",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -3201,44 +3381,44 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "111",
+            "localId" : "116",
             "name" : "TimeMax",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "111",
+                  "r" : "116",
                   "s" : [ {
                      "value" : [ "define ","TimeMax",": " ]
                   }, {
-                     "r" : "110",
+                     "r" : "115",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "109",
+                        "r" : "114",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "100",
+                           "r" : "105",
                            "s" : [ {
-                              "r" : "97",
+                              "r" : "102",
                               "value" : [ "Time","(","12",", ","30",", ","1",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "104",
+                           "r" : "109",
                            "s" : [ {
-                              "r" : "101",
+                              "r" : "106",
                               "value" : [ "Time","(","12",", ","30",", ","3",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "108",
+                           "r" : "113",
                            "s" : [ {
-                              "r" : "105",
+                              "r" : "110",
                               "value" : [ "Time","(","12",", ","30",", ","2",")" ]
                            } ]
                         }, {
@@ -3251,70 +3431,70 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "110",
+               "localId" : "115",
                "type" : "Max",
                "source" : {
-                  "localId" : "109",
+                  "localId" : "114",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "100",
+                     "localId" : "105",
                      "type" : "Time",
                      "hour" : {
-                        "localId" : "97",
+                        "localId" : "102",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "12",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "98",
+                        "localId" : "103",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "30",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "99",
+                        "localId" : "104",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "104",
+                     "localId" : "109",
                      "type" : "Time",
                      "hour" : {
-                        "localId" : "101",
+                        "localId" : "106",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "12",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "102",
+                        "localId" : "107",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "30",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "103",
+                        "localId" : "108",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "108",
+                     "localId" : "113",
                      "type" : "Time",
                      "hour" : {
-                        "localId" : "105",
+                        "localId" : "110",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "12",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "106",
+                        "localId" : "111",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "30",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "107",
+                        "localId" : "112",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
@@ -3323,57 +3503,57 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "123",
+            "localId" : "128",
             "name" : "MaxIsNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "123",
+                  "r" : "128",
                   "s" : [ {
                      "value" : [ "define ","MaxIsNull",": " ]
                   }, {
-                     "r" : "122",
+                     "r" : "127",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "121",
+                        "r" : "126",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "114",
+                           "r" : "119",
                            "s" : [ {
-                              "r" : "112",
+                              "r" : "117",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "113",
-                              "s" : [ {
-                                 "value" : [ "Quantity" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "117",
-                           "s" : [ {
-                              "r" : "115",
-                              "value" : [ "null"," as " ]
-                           }, {
-                              "r" : "116",
-                              "s" : [ {
-                                 "value" : [ "Quantity" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "120",
-                           "s" : [ {
                               "r" : "118",
+                              "s" : [ {
+                                 "value" : [ "Quantity" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "122",
+                           "s" : [ {
+                              "r" : "120",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "119",
+                              "r" : "121",
+                              "s" : [ {
+                                 "value" : [ "Quantity" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "125",
+                           "s" : [ {
+                              "r" : "123",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "124",
                               "s" : [ {
                                  "value" : [ "Quantity" ]
                               } ]
@@ -3388,47 +3568,47 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "122",
+               "localId" : "127",
                "type" : "Max",
                "source" : {
-                  "localId" : "121",
+                  "localId" : "126",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "114",
+                     "localId" : "119",
                      "strict" : false,
                      "type" : "As",
                      "operand" : {
-                        "localId" : "112",
+                        "localId" : "117",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "113",
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  }, {
-                     "localId" : "117",
-                     "strict" : false,
-                     "type" : "As",
-                     "operand" : {
-                        "localId" : "115",
-                        "type" : "Null"
-                     },
-                     "asTypeSpecifier" : {
-                        "localId" : "116",
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  }, {
-                     "localId" : "120",
-                     "strict" : false,
-                     "type" : "As",
-                     "operand" : {
                         "localId" : "118",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "122",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "120",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "119",
+                        "localId" : "121",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "125",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "123",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "124",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -3436,31 +3616,31 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "129",
+            "localId" : "134",
             "name" : "MaxIsAlsoNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "129",
+                  "r" : "134",
                   "s" : [ {
                      "value" : [ "define ","MaxIsAlsoNull",": " ]
                   }, {
-                     "r" : "128",
+                     "r" : "133",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "127",
+                        "r" : "132",
                         "s" : [ {
-                           "r" : "124",
+                           "r" : "129",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "126",
+                           "r" : "131",
                            "s" : [ {
                               "value" : [ "List<" ]
                            }, {
-                              "r" : "125",
+                              "r" : "130",
                               "s" : [ {
                                  "value" : [ "Decimal" ]
                               } ]
@@ -3475,21 +3655,21 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "128",
+               "localId" : "133",
                "type" : "Max",
                "source" : {
-                  "localId" : "127",
+                  "localId" : "132",
                   "strict" : false,
                   "type" : "As",
                   "operand" : {
-                     "localId" : "124",
+                     "localId" : "129",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "126",
+                     "localId" : "131",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "125",
+                        "localId" : "130",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -3512,6 +3692,7 @@ define has_null_q: Avg({1 'ml',null,null,2 'ml'})
 define empty: Avg(List<Integer>{})
 define q_diff_units: Avg({1 'ml',0.002 'l',0.03 'dl',4 'ml',5 'ml'})
 define q_throw1: Avg({1 'ml',0.002 'm',0.03 'dl',4 'ml',5 'ml'})
+define IncompatibleUnitsNull: Avg({1 'mg/d', 0.002 '/d'})
 ###
 
 module.exports['Avg'] = {
@@ -4115,6 +4296,65 @@ module.exports['Avg'] = {
                   } ]
                }
             }
+         }, {
+            "localId" : "56",
+            "name" : "IncompatibleUnitsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "56",
+                  "s" : [ {
+                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                  }, {
+                     "r" : "55",
+                     "s" : [ {
+                        "value" : [ "Avg","(" ]
+                     }, {
+                        "r" : "54",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "52",
+                           "s" : [ {
+                              "value" : [ "1 ","'mg/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "53",
+                           "s" : [ {
+                              "value" : [ "0.002 ","'/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "55",
+               "type" : "Avg",
+               "source" : {
+                  "localId" : "54",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "52",
+                     "value" : 1,
+                     "unit" : "mg/d",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "53",
+                     "value" : 0.002,
+                     "unit" : "/d",
+                     "type" : "Quantity"
+                  } ]
+               }
+            }
          } ]
       }
    }
@@ -4139,6 +4379,7 @@ define dup_vals_odd:  Median({3,1,2,2,2,3,4,5,6})
 define has_null_q: Median({1 'ml',null,null,2 'ml'})
 define dup_vals_even_q: Median({3 'ml',1 'ml',2 'ml',2 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 define dup_vals_odd_q:  Median({3 'ml',1 'ml',2 'ml',2 'ml',2 'ml',3 'ml',4 'ml',5 'ml',6 'ml'})
+define IncompatibleUnitsNull: Median({1 'mg/d', 0.002 '/d'})
 ###
 
 module.exports['Median'] = {
@@ -5510,6 +5751,65 @@ module.exports['Median'] = {
                   } ]
                }
             }
+         }, {
+            "localId" : "131",
+            "name" : "IncompatibleUnitsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "131",
+                  "s" : [ {
+                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                  }, {
+                     "r" : "130",
+                     "s" : [ {
+                        "value" : [ "Median","(" ]
+                     }, {
+                        "r" : "129",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "127",
+                           "s" : [ {
+                              "value" : [ "1 ","'mg/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "128",
+                           "s" : [ {
+                              "value" : [ "0.002 ","'/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "130",
+               "type" : "Median",
+               "source" : {
+                  "localId" : "129",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "127",
+                     "value" : 1,
+                     "unit" : "mg/d",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "128",
+                     "value" : 0.002,
+                     "unit" : "/d",
+                     "type" : "Quantity"
+                  } ]
+               }
+            }
          } ]
       }
    }
@@ -5524,6 +5824,7 @@ define has_null: Mode({1,null,null,2,2})
 define empty: Mode({})
 
 define bi_modal: Mode({1,2,2,2,3,3,3,4,5})
+define IncompatibleUnitsNull: Mode({1 'mg/d', 0.002 '/d'})
 ###
 
 module.exports['Mode'] = {
@@ -5803,6 +6104,65 @@ module.exports['Mode'] = {
                   } ]
                }
             }
+         }, {
+            "localId" : "39",
+            "name" : "IncompatibleUnitsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "39",
+                  "s" : [ {
+                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                  }, {
+                     "r" : "38",
+                     "s" : [ {
+                        "value" : [ "Mode","(" ]
+                     }, {
+                        "r" : "37",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "35",
+                           "s" : [ {
+                              "value" : [ "1 ","'mg/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "36",
+                           "s" : [ {
+                              "value" : [ "0.002 ","'/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "38",
+               "type" : "Mode",
+               "source" : {
+                  "localId" : "37",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "35",
+                     "value" : 1,
+                     "unit" : "mg/d",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "36",
+                     "value" : 0.002,
+                     "unit" : "/d",
+                     "type" : "Quantity"
+                  } ]
+               }
+            }
          } ]
       }
    }
@@ -5817,6 +6177,7 @@ define v_q: Variance({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 define q_diff_units: Variance({1.0 'ml',0.002 'l',0.003 'l',0.04 'dl',5.0 'ml'})
 define q_throw1: Variance({1.0 'm',2.0 'l',3.0 'h',4.0 'ml',5.0 'ml'})
 define q_throw2: Variance({1.0 ,2.0 ,3.0 ,4.0 'ml',5.0 'ml'})
+define IncompatibleUnitsNull: Variance({1 'mg/d', 0.002 '/d'})
 ###
 
 module.exports['Variance'] = {
@@ -6297,6 +6658,65 @@ module.exports['Variance'] = {
                   } ]
                }
             }
+         }, {
+            "localId" : "46",
+            "name" : "IncompatibleUnitsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "46",
+                  "s" : [ {
+                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                  }, {
+                     "r" : "45",
+                     "s" : [ {
+                        "value" : [ "Variance","(" ]
+                     }, {
+                        "r" : "44",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "42",
+                           "s" : [ {
+                              "value" : [ "1 ","'mg/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "43",
+                           "s" : [ {
+                              "value" : [ "0.002 ","'/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "45",
+               "type" : "Variance",
+               "source" : {
+                  "localId" : "44",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "42",
+                     "value" : 1,
+                     "unit" : "mg/d",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "43",
+                     "value" : 0.002,
+                     "unit" : "/d",
+                     "type" : "Quantity"
+                  } ]
+               }
+            }
          } ]
       }
    }
@@ -6311,6 +6731,7 @@ define v_q: PopulationVariance({1.0 'ml',2.0 'ml',3.0 'ml',4.0 'ml',5.0 'ml'})
 define q_diff_units: PopulationVariance({1.0 'ml',0.002 'l',0.003 'l',0.04 'dl',5.0 'ml'})
 define q_throw1: PopulationVariance({1.0 'm',2.0 'l',3.0 'h',4.0 'ml',5.0 'ml'})
 define q_throw2: PopulationVariance({1.0 ,2.0 ,3.0 ,4.0 'ml',5.0 'ml'})
+define IncompatibleUnitsNull: PopulationVariance({1 'mg/d', 0.002 '/d'})
 ###
 
 module.exports['PopulationVariance'] = {
@@ -6775,6 +7196,65 @@ module.exports['PopulationVariance'] = {
                   } ]
                }
             }
+         }, {
+            "localId" : "46",
+            "name" : "IncompatibleUnitsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "46",
+                  "s" : [ {
+                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                  }, {
+                     "r" : "45",
+                     "s" : [ {
+                        "value" : [ "PopulationVariance","(" ]
+                     }, {
+                        "r" : "44",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "42",
+                           "s" : [ {
+                              "value" : [ "1 ","'mg/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "43",
+                           "s" : [ {
+                              "value" : [ "0.002 ","'/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "45",
+               "type" : "PopulationVariance",
+               "source" : {
+                  "localId" : "44",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "42",
+                     "value" : 1,
+                     "unit" : "mg/d",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "43",
+                     "value" : 0.002,
+                     "unit" : "/d",
+                     "type" : "Quantity"
+                  } ]
+               }
+            }
          } ]
       }
    }
@@ -6789,6 +7269,7 @@ define std_q: StdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 define q_diff_units: StdDev({1 'ml', 0.002 'l',3 'ml',4 'ml', 0.05 'dl'})
 define sq_throw1: StdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'm'})
 define q_throw2: StdDev({1 ,2 ,3 ,4 'ml',5 })
+define IncompatibleUnitsNull: StdDev({1 'mg/d', 0.002 '/d'})
 ###
 
 module.exports['StdDev'] = {
@@ -7266,6 +7747,65 @@ module.exports['StdDev'] = {
                   } ]
                }
             }
+         }, {
+            "localId" : "46",
+            "name" : "IncompatibleUnitsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "46",
+                  "s" : [ {
+                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                  }, {
+                     "r" : "45",
+                     "s" : [ {
+                        "value" : [ "StdDev","(" ]
+                     }, {
+                        "r" : "44",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "42",
+                           "s" : [ {
+                              "value" : [ "1 ","'mg/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "43",
+                           "s" : [ {
+                              "value" : [ "0.002 ","'/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "45",
+               "type" : "StdDev",
+               "source" : {
+                  "localId" : "44",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "42",
+                     "value" : 1,
+                     "unit" : "mg/d",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "43",
+                     "value" : 0.002,
+                     "unit" : "/d",
+                     "type" : "Quantity"
+                  } ]
+               }
+            }
          } ]
       }
    }
@@ -7280,6 +7820,7 @@ define dev_q: PopulationStdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 define q_diff_units: PopulationStdDev({1 'ml', 0.002 'l',3 'ml',4 'ml', 0.05 'dl'})
 define q_throw1: PopulationStdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'm'})
 define q_throw2: PopulationStdDev({1 ,2 ,3 ,4 'ml',5 })
+define IncompatibleUnitsNull: PopulationStdDev({1 'mg/d', 0.002 '/d'})
 ###
 
 module.exports['PopulationStdDev'] = {
@@ -7757,6 +8298,65 @@ module.exports['PopulationStdDev'] = {
                   } ]
                }
             }
+         }, {
+            "localId" : "46",
+            "name" : "IncompatibleUnitsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "46",
+                  "s" : [ {
+                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                  }, {
+                     "r" : "45",
+                     "s" : [ {
+                        "value" : [ "PopulationStdDev","(" ]
+                     }, {
+                        "r" : "44",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "42",
+                           "s" : [ {
+                              "value" : [ "1 ","'mg/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "43",
+                           "s" : [ {
+                              "value" : [ "0.002 ","'/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "45",
+               "type" : "PopulationStdDev",
+               "source" : {
+                  "localId" : "44",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "42",
+                     "value" : 1,
+                     "unit" : "mg/d",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "43",
+                     "value" : 0.002,
+                     "unit" : "/d",
+                     "type" : "Quantity"
+                  } ]
+               }
+            }
          } ]
       }
    }
@@ -7775,6 +8375,7 @@ define product_with_null: Product({5, 4, null})
 define product_of_nulls: Product({null as Integer, null, null})
 define product_null: Product(null as List<Decimal>)
 define product_quantity_null: Product({null as Quantity, null as Quantity, null as Quantity})
+define IncompatibleUnitsNull: Product({1 'mg/d', 0.002 '/d'})
 ###
 
 module.exports['Product'] = {
@@ -8424,6 +9025,65 @@ module.exports['Product'] = {
                   } ]
                }
             }
+         }, {
+            "localId" : "70",
+            "name" : "IncompatibleUnitsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "70",
+                  "s" : [ {
+                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                  }, {
+                     "r" : "69",
+                     "s" : [ {
+                        "value" : [ "Product","(" ]
+                     }, {
+                        "r" : "68",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "66",
+                           "s" : [ {
+                              "value" : [ "1 ","'mg/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "67",
+                           "s" : [ {
+                              "value" : [ "0.002 ","'/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "69",
+               "type" : "Product",
+               "source" : {
+                  "localId" : "68",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "66",
+                     "value" : 1,
+                     "unit" : "mg/d",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "67",
+                     "value" : 0.002,
+                     "unit" : "/d",
+                     "type" : "Quantity"
+                  } ]
+               }
+            }
          } ]
       }
    }
@@ -8438,10 +9098,25 @@ define zero_geometric_mean: GeometricMean({2.0, 8.0, 0})
 define null_geometric_mean: GeometricMean({1, 2, null})
 define all_nulls: GeometricMean({null, null, null})
 define also_null_geometric_mean: GeometricMean(null as List<Decimal>)
+define IncompatibleUnitsNull: GeometricMean({1 'mg/d', 0.002 '/d'})
 ###
 
+###
+Translation Error(s):
+[9:31, 9:67] Could not resolve call to operator GeometricMean with signature (list<System.Quantity>).
+###
 module.exports['GeometricMean'] = {
    "library" : {
+      "annotation" : [ {
+         "startLine" : 9,
+         "startChar" : 31,
+         "endLine" : 9,
+         "endChar" : 67,
+         "message" : "Could not resolve call to operator GeometricMean with signature (list<System.Quantity>).",
+         "errorType" : "semantic",
+         "errorSeverity" : "error",
+         "type" : "CqlToElmError"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -8770,6 +9445,50 @@ module.exports['GeometricMean'] = {
                      }
                   }
                }
+            }
+         }, {
+            "localId" : "36",
+            "name" : "IncompatibleUnitsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "36",
+                  "s" : [ {
+                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                  }, {
+                     "r" : "35",
+                     "s" : [ {
+                        "value" : [ "GeometricMean","(" ]
+                     }, {
+                        "r" : "34",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "32",
+                           "s" : [ {
+                              "value" : [ "1 ","'mg/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "33",
+                           "s" : [ {
+                              "value" : [ "0.002 ","'/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "35",
+               "type" : "Null"
             }
          } ]
       }

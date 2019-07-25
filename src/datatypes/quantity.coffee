@@ -71,7 +71,7 @@ module.exports.Quantity = class Quantity
           decimalAdjust("round", @value, -8)  == decimalAdjust("round", other_v, -8)
 
   convertUnit: (to_unit) ->
-    value = convert_value(@value,@unit,to_unit)
+    value = convert_value(@value, @unit, to_unit)
     unit = to_unit
     # Need to pass through constructor again to catch invalid units
     new Quantity(value, unit)
@@ -142,7 +142,7 @@ ucum_to_cql_units = {
 ucum_unit = (unit) ->
   ucum_time_units[unit] || unit || ''
 
-#just a wrapper function to deal with possible exceptions being thrown
+# just a wrapper function to deal with possible exceptions being thrown
 convert_value = (value, from, to) ->
   try
     if from == to

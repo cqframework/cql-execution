@@ -2,7 +2,7 @@
 { ThreeValuedLogic } = require '../datatypes/logic'
 { build } = require './builder'
 { Quantity, doAddition, doSubtraction, compare_units, convert_value } = require '../datatypes/quantity'
-{ successor, predecessor } = require '../util/math'
+{ successor, predecessor, MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } = require '../util/math'
 dtivl = require '../datatypes/interval'
 cmp = require '../util/comparison'
 
@@ -137,7 +137,12 @@ module.exports.Start = class Start extends Expression
   exec: (ctx) ->
     interval = @arg.execute(ctx)
     return null if !interval?
-    return interval.start()
+    start = interval.start()
+    # fix the timezoneOffset of minimum Datetime to match context offset
+    if start?.isDateTime && start.equals(MIN_DATETIME_VALUE)
+      start.timezoneOffset = ctx.getTimezoneOffset()
+    return start
+
 
 module.exports.End = class End  extends Expression
   constructor: (json) ->
@@ -146,7 +151,11 @@ module.exports.End = class End  extends Expression
   exec: (ctx) ->
     interval = @arg.execute(ctx)
     return null if !interval?
-    return interval.end()
+    end = interval.end()
+    # fix the timezoneOffset of maximum Datetime to match context offset
+    if end?.isDateTime && end.equals(MAX_DATETIME_VALUE)
+      end.timezoneOffset = ctx.getTimezoneOffset()
+    return end
 
 module.exports.Starts = class Starts extends Expression
   constructor: (json) ->

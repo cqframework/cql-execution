@@ -1036,6 +1036,11 @@ describe 'Start', ->
   it 'should return the minimum possible DateTime', ->
     @closedNullDateTime.exec(@ctx).should.eql MIN_DATETIME_VALUE
 
+  it 'should return the minimum possible DateTime in timzoneOffset of context', ->
+    # set execution timestamp to be +5
+    @ctx.executionDateTime = new DateTime(2019, 10, 1, 12, 31, 31, 2, 5)
+    (@closedNullDateTime.exec(@ctx)).timezoneOffset.should.eql(5)
+
   it 'should return the minimum possible Integer', ->
     @closedNullInteger.exec(@ctx).should.eql MIN_INT_VALUE
 
@@ -1060,6 +1065,11 @@ describe 'End', ->
 
   it 'should return the maximum possible DateTime', ->
     @closedNullDateTime.exec(@ctx).should.eql MAX_DATETIME_VALUE
+
+  it 'should return the maximum possible DateTime in timzoneOffset of context', ->
+    # set execution timestamp to be +5
+    @ctx.executionDateTime = new DateTime(2019, 10, 1, 12, 31, 31, 2, 5)
+    (@closedNullDateTime.exec(@ctx)).timezoneOffset.should.eql(5)
 
   it 'should return the maximum possible Integer', ->
     @closedNullInteger.exec(@ctx).should.eql MAX_INT_VALUE
