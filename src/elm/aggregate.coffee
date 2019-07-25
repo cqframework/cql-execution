@@ -51,7 +51,7 @@ module.exports.Min = class Min extends AggregateExpression
     listWithoutNulls = removeNulls(list)
 
     # Check for incompatible units and return null. We don't want to convert
-    # the units for Min/Max, so we throw away tue converted array if it succeeds
+    # the units for Min/Max, so we throw away the converted array if it succeeds
     try
       processQuantities(list)
     catch e
@@ -74,7 +74,7 @@ module.exports.Max = class Max extends AggregateExpression
     listWithoutNulls = removeNulls(items)
 
     # Check for incompatible units and return null. We don't want to convert
-    # the units for Min/Max, so we throw away tue converted array if it succeeds
+    # the units for Min/Max, so we throw away the converted array if it succeeds
     try
       processQuantities(items)
     catch e
