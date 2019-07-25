@@ -2,7 +2,7 @@
 { ThreeValuedLogic } = require '../datatypes/logic'
 { build } = require './builder'
 { Quantity, doAddition, doSubtraction, compare_units, convert_value } = require '../datatypes/quantity'
-{ successor, predecessor, maxValueForInstance, MAX_DATETIME_VALUE, minValueForInstance, MIN_DATETIME_VALUE } = require '../util/math'
+{ successor, predecessor, MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } = require '../util/math'
 dtivl = require '../datatypes/interval'
 cmp = require '../util/comparison'
 
