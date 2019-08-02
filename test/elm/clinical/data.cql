@@ -33,6 +33,8 @@ define WrongListOfCodes: { Code { code: 'M' }, Code { code: 'F', system: '3.16.8
 define InListOfCodesExpressionRef: ListOfCodes in "Female"
 define InWrongListOfCodes: WrongListOfCodes in "Female"
 define ListOfCodesWithNull: { Code { code: 'M' }, (null as Code), Code { code: 'F', system: '2.16.840.1.113883.18.2' } } in "Female"
+define ListOfCodesNull: (null as List<Code>) in "Female"
+
 
 // @Test: Patient Property In ValueSet
 valueset "Female": '2.16.840.1.113883.3.560.100.2'

@@ -202,6 +202,7 @@ define WrongListOfCodes: { Code { code: 'M' }, Code { code: 'F', system: '3.16.8
 define InListOfCodesExpressionRef: ListOfCodes in "Female"
 define InWrongListOfCodes: WrongListOfCodes in "Female"
 define ListOfCodesWithNull: { Code { code: 'M' }, (null as Code), Code { code: 'F', system: '2.16.840.1.113883.18.2' } } in "Female"
+define ListOfCodesNull: (null as List<Code>) in "Female"
 ###
 
 module.exports['InValueSet'] = {
@@ -1753,6 +1754,81 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "119",
+                  "name" : "Female"
+               }
+            }
+         }, {
+            "localId" : "128",
+            "name" : "ListOfCodesNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "128",
+                  "s" : [ {
+                     "value" : [ "define ","ListOfCodesNull",": " ]
+                  }, {
+                     "r" : "127",
+                     "s" : [ {
+                        "r" : "125",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "125",
+                           "s" : [ {
+                              "r" : "122",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "124",
+                              "s" : [ {
+                                 "value" : [ "List<" ]
+                              }, {
+                                 "r" : "123",
+                                 "s" : [ {
+                                    "value" : [ "Code" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ">" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "126",
+                        "s" : [ {
+                           "value" : [ "\"Female\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "127",
+               "type" : "AnyInValueSet",
+               "codes" : {
+                  "localId" : "125",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "122",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "124",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "123",
+                        "name" : "{urn:hl7-org:elm-types:r1}Code",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               },
+               "valueset" : {
+                  "localId" : "126",
                   "name" : "Female"
                }
             }

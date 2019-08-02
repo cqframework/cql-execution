@@ -97,6 +97,9 @@ describe 'InValueSet', ->
   it 'should ignore null codes in list', ->
     @listOfCodesWithNull.exec(@ctx).should.be.true()
 
+  it 'should return false for null list of codes', ->
+    @listOfCodesNull.exec(@ctx).should.be.false()
+
 describe 'Patient Property In ValueSet', ->
   @beforeEach ->
     setup @, data, [], vsets
