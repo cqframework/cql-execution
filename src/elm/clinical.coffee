@@ -39,6 +39,7 @@ module.exports.AnyInValueSet = class AnyInValueSet extends Expression
     throw new Error("ValueSet must be provided to InValueSet function") unless valueset? and valueset.isValueSet
 
     codes = @codes.exec(ctx)
+    return false unless codes?
     for code in codes
       return true if valueset.hasMatch(code)
     return false

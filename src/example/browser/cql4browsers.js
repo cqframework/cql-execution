@@ -4250,6 +4250,9 @@
         throw new Error("ValueSet must be provided to InValueSet function");
       }
       codes = this.codes.exec(ctx);
+      if (codes == null) {
+        return false;
+      }
       for (i = 0, len = codes.length; i < len; i++) {
         code = codes[i];
         if (valueset.hasMatch(code)) {
