@@ -374,6 +374,15 @@ define PosInfEndNotBeforeDateIvl: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), nul
 define UnknownEndMayBeBeforeDateIvl: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null) before Interval[DateTime(2020, 1, 1, 0, 0, 0, 0), DateTime(2040, 1, 1, 0, 0, 0, 0)]
 define UnknownEndNotBeforeDateIvl: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null) before Interval[DateTime(2000, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 1, 0, 0, 0, 0)]
 
+// @Test: BeforeOrOn
+define IntervalSurroundsDateTime: Interval[DateTime(2012, 1, 2, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)] before or on DateTime(2012, 1, 2, 0, 0, 0, 0)
+define IntervalBeforeDateTime: Interval[DateTime(2012, 1, 2, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)] before or on DateTime(2012, 4, 2, 0, 0, 0, 0)
+define IntervalAfterDateTime: Interval[DateTime(2012, 1, 2, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)] before or on DateTime(2012, 1, 1, 0, 0, 0, 0)
+
+// @Test: AfterOrOn
+define IntervalSurroundsDateTime: Interval[DateTime(2012, 1, 2, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)] after or on DateTime(2012, 1, 2, 0, 0, 0, 0)
+define IntervalBeforeDateTime: Interval[DateTime(2012, 1, 2, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)] after or on DateTime(2012, 4, 2, 0, 0, 0, 0)
+define IntervalAfterDateTime: Interval[DateTime(2012, 1, 2, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)] after or on DateTime(2012, 1, 1, 0, 0, 0, 0)
 
 // @Test: Meets
 define MeetsAfterIntIvl: Interval[11, 15] meets Interval[5, 10]

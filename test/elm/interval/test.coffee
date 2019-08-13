@@ -536,6 +536,32 @@ describe 'Before', ->
     @mayBeAfterDayOfImpreciseIvl.exec(@ctx).should.be.false()
     should(@mayBeBeforeDayOfImpreciseIvl.exec(@ctx)).be.null()
 
+describe 'BeforeOrOn', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'should return false for datetime being encompassed in interval', ->
+    @intervalSurroundsDateTime.exec(@ctx).should.be.false()
+
+  it 'should return true for datetime being before interval', ->
+    @intervalBeforeDateTime.exec(@ctx).should.be.true()
+
+  it 'should return false for datetime being after the interval', ->
+    @intervalAfterDateTime.exec(@ctx).should.be.false()
+
+describe 'AfterOrOn', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'should return false for datetime being encompassed in interval', ->
+    @intervalSurroundsDateTime.exec(@ctx).should.be.false()
+
+  it 'should return true for datetime being before interval', ->
+    @intervalBeforeDateTime.exec(@ctx).should.be.false()
+
+  it 'should return false for datetime being after the interval', ->
+    @intervalAfterDateTime.exec(@ctx).should.be.true()
+
 describe 'Meets', ->
   @beforeEach ->
     setup @, data
