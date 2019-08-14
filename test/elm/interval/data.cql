@@ -394,6 +394,16 @@ define ImpDateIvl: Interval[DateTime(2012, 3), DateTime(2012, 8)]
 define ImpreciseMayMeetAfterDateIvl: ImpDateIvl before or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 2, 29, 23, 59, 59, 999)]
 define ImpreciseMayMeetBeforeDateIvl: ImpDateIvl before or on Interval[DateTime(2012, 9, 1, 0, 0, 0, 0), DateTime(2012, 12, 31, 23, 59, 59, 999)]
 define ImpreciseNotMeetsDateIvl: ImpDateIvl before or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 12, 31, 23, 59, 59, 999))
+define NullEndIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), null)
+define BeforeNullEndIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 2, 20, 0, 0, 0, 0)] before or on NullEndIvl
+define AfterStartNullEndIvl: Interval[DateTime(2012, 3, 10, 0, 0, 0, 0), DateTime(2012, 3, 20, 0, 0, 0, 0)] before or on NullEndIvl
+define NullEndStartBeforeIvl: NullEndIvl before or on Interval[DateTime(2012, 4, 1, 0, 0, 0, 0), DateTime(2012, 4, 20, 0, 0, 0, 0)]
+define NullEndStartAfterIvl: NullEndIvl before or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 20, 0, 0, 0, 0)]
+define NullStartIvl: Interval(null, DateTime(2012, 3, 1, 0, 0, 0, 0)]
+define EndsBeforeNullStartIvlEnds: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 2, 20, 0, 0, 0, 0)] before or on NullStartIvl
+define AfterEndOfNullStartIvl: Interval[DateTime(2012, 3, 10, 0, 0, 0, 0), DateTime(2012, 3, 20, 0, 0, 0, 0)] before or on NullStartIvl
+define NullStartStartBeforeIvl: NullStartIvl before or on Interval[DateTime(2012, 4, 1, 0, 0, 0, 0), DateTime(2012, 4, 20, 0, 0, 0, 0)]
+define NullStartStartAfterIvl: NullStartIvl before or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 20, 0, 0, 0, 0)]
 
 // @Test: AfterOrOn
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0)]
@@ -415,6 +425,17 @@ define ImpDateIvl: Interval[DateTime(2012, 3), DateTime(2012, 8)]
 define ImpreciseMayMeetAfterDateIvl: ImpDateIvl after or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 2, 29, 23, 59, 59, 999)]
 define ImpreciseMayMeetBeforeDateIvl: ImpDateIvl after or on Interval[DateTime(2012, 9, 1, 0, 0, 0, 0), DateTime(2012, 12, 31, 23, 59, 59, 999)]
 define ImpreciseNotMeetsDateIvl: ImpDateIvl after or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 12, 31, 23, 59, 59, 999))
+define NullEndIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), null)
+define BeforeNullEndIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 2, 20, 0, 0, 0, 0)] after or on NullEndIvl
+define AfterStartNullEndIvl: Interval[DateTime(2012, 3, 10, 0, 0, 0, 0), DateTime(2012, 3, 20, 0, 0, 0, 0)] after or on NullEndIvl
+define NullEndStartBeforeIvl: NullEndIvl after or on Interval[DateTime(2012, 4, 1, 0, 0, 0, 0), DateTime(2012, 4, 20, 0, 0, 0, 0)]
+define NullEndStartAfterIvl: NullEndIvl after or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 20, 0, 0, 0, 0)]
+define NullStartIvl: Interval(null, DateTime(2012, 3, 1, 0, 0, 0, 0)]
+define EndsBeforeNullStartIvlEnds: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 2, 20, 0, 0, 0, 0)] after or on NullStartIvl
+define AfterEndOfNullStartIvl: Interval[DateTime(2012, 3, 10, 0, 0, 0, 0), DateTime(2012, 3, 20, 0, 0, 0, 0)] after or on NullStartIvl
+define NullStartStartBeforeIvl: NullStartIvl after or on Interval[DateTime(2012, 4, 1, 0, 0, 0, 0), DateTime(2012, 4, 20, 0, 0, 0, 0)]
+define NullStartStartAfterIvl: NullStartIvl after or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 20, 0, 0, 0, 0)]
+
 
 // @Test: Meets
 define MeetsAfterIntIvl: Interval[11, 15] meets Interval[5, 10]

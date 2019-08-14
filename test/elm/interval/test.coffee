@@ -562,6 +562,18 @@ describe 'BeforeOrOn', ->
     should(@mayMeetAfterDayOfImpreciseIvl.exec(@ctx)).be.false()
     should(@mayMeetBeforeDayOfImpreciseIvl.exec(@ctx)).be.null()
 
+  it 'should handle intervals with null end', ->
+    @beforeNullEndIvl.exec(@ctx).should.be.true()
+    @afterStartNullEndIvl.exec(@ctx).should.be.false()
+    should(@nullEndStartBeforeIvl.exec(@ctx)).be.null()
+    should(@nullEndStartAfterIvl.exec(@ctx)).be.null()
+
+  it 'should handle intervals with null start', ->
+    should(@endsBeforeNullStartIvlEnds.exec(@ctx)).be.null()
+    should(@afterEndOfNullStartIvl.exec(@ctx)).be.null()
+    @nullStartStartBeforeIvl.exec(@ctx).should.be.true()
+    @nullStartStartAfterIvl.exec(@ctx).should.be.false()
+
 describe 'AfterOrOn', ->
   @beforeEach ->
     setup @, data
@@ -587,6 +599,18 @@ describe 'AfterOrOn', ->
     @notMeetsDayOfImpreciseIVL.exec(@ctx).should.be.true()
     should(@mayMeetAfterDayOfImpreciseIvl.exec(@ctx)).be.null()
     should(@mayMeetBeforeDayOfImpreciseIvl.exec(@ctx)).be.false()
+
+  it 'should handle intervals with null end', ->
+    should(@beforeNullEndIvl.exec(@ctx)).be.null()
+    should(@afterStartNullEndIvl.exec(@ctx)).be.null()
+    @nullEndStartBeforeIvl.exec(@ctx).should.be.false()
+    @nullEndStartAfterIvl.exec(@ctx).should.be.true()
+
+  it 'should handle intervals with null start', ->
+    @endsBeforeNullStartIvlEnds.exec(@ctx).should.be.false()
+    @afterEndOfNullStartIvl.exec(@ctx).should.be.true()
+    should(@nullStartStartBeforeIvl.exec(@ctx)).be.null()
+    should(@nullStartStartAfterIvl.exec(@ctx)).be.null()
 
 describe 'Meets', ->
   @beforeEach ->
