@@ -547,11 +547,11 @@ describe 'BeforeOrOn', ->
     @beforeDateIvl.exec(@ctx).should.be.true()
 
   it 'should correctly handle imprecision', ->
-    should(@mayMeetAfterImpreciseDateIvl.exec(@ctx)).be.false()
+    @mayMeetAfterImpreciseDateIvl.exec(@ctx).should.be.false()
     should(@mayMeetBeforeImpreciseDateIvl.exec(@ctx)).be.null()
     @notMeetsImpreciseDateIvl.exec(@ctx).should.be.false()
-    should(@impreciseMayMeetAfterDateIvl.exec(@ctx)).be.false()
-    should(@impreciseMayMeetBeforeDateIvl.exec(@ctx)).be.true()
+    @impreciseMayMeetAfterDateIvl.exec(@ctx).should.be.false()
+    @impreciseMayMeetBeforeDateIvl.exec(@ctx).should.be.true()
     @impreciseNotMeetsDateIvl.exec(@ctx).should.be.false()
 
   it 'should correctly compare using the requested precision', ->
@@ -559,7 +559,7 @@ describe 'BeforeOrOn', ->
     @meetsBeforeDayOfIvl.exec(@ctx).should.be.true()
     @notMeetsDayOfIvl.exec(@ctx).should.be.false()
     @notMeetsDayOfImpreciseIVL.exec(@ctx).should.be.false()
-    should(@mayMeetAfterDayOfImpreciseIvl.exec(@ctx)).be.false()
+    @mayMeetAfterDayOfImpreciseIvl.exec(@ctx).should.be.false()
     should(@mayMeetBeforeDayOfImpreciseIvl.exec(@ctx)).be.null()
 
   it 'should handle intervals with null end', ->
@@ -586,10 +586,10 @@ describe 'AfterOrOn', ->
 
   it 'should correctly handle imprecision', ->
     should(@mayMeetAfterImpreciseDateIvl.exec(@ctx)).be.null()
-    should(@mayMeetBeforeImpreciseDateIvl.exec(@ctx)).be.false()
+    @mayMeetBeforeImpreciseDateIvl.exec(@ctx).should.be.false()
     @notMeetsImpreciseDateIvl.exec(@ctx).should.be.false()
-    should(@impreciseMayMeetAfterDateIvl.exec(@ctx)).be.true()
-    should(@impreciseMayMeetBeforeDateIvl.exec(@ctx)).be.false()
+    @impreciseMayMeetAfterDateIvl.exec(@ctx).should.be.true()
+    @impreciseMayMeetBeforeDateIvl.exec(@ctx).should.be.false()
     @impreciseNotMeetsDateIvl.exec(@ctx).should.be.false()
 
   it 'should correctly compare using the requested precision', ->
@@ -598,7 +598,7 @@ describe 'AfterOrOn', ->
     @notMeetsDayOfIvl.exec(@ctx).should.be.true()
     @notMeetsDayOfImpreciseIVL.exec(@ctx).should.be.true()
     should(@mayMeetAfterDayOfImpreciseIvl.exec(@ctx)).be.null()
-    should(@mayMeetBeforeDayOfImpreciseIvl.exec(@ctx)).be.false()
+    @mayMeetBeforeDayOfImpreciseIvl.exec(@ctx).should.be.false()
 
   it 'should handle intervals with null end', ->
     should(@beforeNullEndIvl.exec(@ctx)).be.null()

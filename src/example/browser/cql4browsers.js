@@ -2085,7 +2085,7 @@
     };
 
     Interval.prototype.sameOrBefore = function(other, precision) {
-      if (this.end() === null || other.start() === null) {
+      if ((this.end() == null) || (other.start() == null)) {
         return null;
       } else {
         return this.end().sameOrBefore(other.start(), precision);
@@ -2093,7 +2093,7 @@
     };
 
     Interval.prototype.sameOrAfter = function(other, precision) {
-      if (this.start() === null || other.end() === null) {
+      if ((this.start() == null) || (other.end() == null)) {
         return null;
       } else {
         return this.start().sameOrAfter(other.end(), precision);
