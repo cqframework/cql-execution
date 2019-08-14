@@ -208,16 +208,16 @@ module.exports.Interval = class Interval
       @.start().sameAs(other.start(), precision) and @.end().sameAs(other.end(), precision)
 
   sameOrBefore: (other, precision) ->
-    ThreeValuedLogic.or(
-      @meetsBefore(other, precision),
-      @before(other, precision)
-    )
+    if @end() == null || other.start() == null
+      return null
+    else
+      return @end().sameOrBefore(other.start(), precision)
 
   sameOrAfter: (other, precision) ->
-    ThreeValuedLogic.or(
-      @meetsAfter(other, precision),
-      @after(other, precision)
-    )
+    if @start() == null || other.end() == null
+      return null
+    else
+      return @start().sameOrAfter(other.end(), precision)
 
   equals: (other) ->
     if other instanceof Interval

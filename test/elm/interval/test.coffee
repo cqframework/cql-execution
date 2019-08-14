@@ -540,27 +540,53 @@ describe 'BeforeOrOn', ->
   @beforeEach ->
     setup @, data
 
-  it 'should return false for datetime being encompassed in interval', ->
-    @intervalSurroundsDateTime.exec(@ctx).should.be.false()
+  it 'should handle nominal datetime interval situations', ->
+    @meetsAfterDateIvl.exec(@ctx).should.be.false()
+    @meetsBeforeDateIvl.exec(@ctx).should.be.true()
+    @afterDateIvl.exec(@ctx).should.be.false()
+    @beforeDateIvl.exec(@ctx).should.be.true()
 
-  it 'should return true for datetime being before interval', ->
-    @intervalBeforeDateTime.exec(@ctx).should.be.true()
+  it 'should correctly handle imprecision', ->
+    should(@mayMeetAfterImpreciseDateIvl.exec(@ctx)).be.false()
+    should(@mayMeetBeforeImpreciseDateIvl.exec(@ctx)).be.null()
+    @notMeetsImpreciseDateIvl.exec(@ctx).should.be.false()
+    should(@impreciseMayMeetAfterDateIvl.exec(@ctx)).be.false()
+    should(@impreciseMayMeetBeforeDateIvl.exec(@ctx)).be.true()
+    @impreciseNotMeetsDateIvl.exec(@ctx).should.be.false()
 
-  it 'should return false for datetime being after the interval', ->
-    @intervalAfterDateTime.exec(@ctx).should.be.false()
+  it 'should correctly compare using the requested precision', ->
+    @meetsAfterDayOfIvl.exec(@ctx).should.be.false()
+    @meetsBeforeDayOfIvl.exec(@ctx).should.be.true()
+    @notMeetsDayOfIvl.exec(@ctx).should.be.false()
+    @notMeetsDayOfImpreciseIVL.exec(@ctx).should.be.false()
+    should(@mayMeetAfterDayOfImpreciseIvl.exec(@ctx)).be.false()
+    should(@mayMeetBeforeDayOfImpreciseIvl.exec(@ctx)).be.null()
 
 describe 'AfterOrOn', ->
   @beforeEach ->
     setup @, data
 
-  it 'should return false for datetime being encompassed in interval', ->
-    @intervalSurroundsDateTime.exec(@ctx).should.be.false()
+  it 'should handle nominal datetime interval situations', ->
+    @meetsAfterDateIvl.exec(@ctx).should.be.true()
+    @meetsBeforeDateIvl.exec(@ctx).should.be.false()
+    @afterDateIvl.exec(@ctx).should.be.true()
+    @beforeDateIvl.exec(@ctx).should.be.false()
 
-  it 'should return true for datetime being before interval', ->
-    @intervalBeforeDateTime.exec(@ctx).should.be.false()
+  it 'should correctly handle imprecision', ->
+    should(@mayMeetAfterImpreciseDateIvl.exec(@ctx)).be.null()
+    should(@mayMeetBeforeImpreciseDateIvl.exec(@ctx)).be.false()
+    @notMeetsImpreciseDateIvl.exec(@ctx).should.be.false()
+    should(@impreciseMayMeetAfterDateIvl.exec(@ctx)).be.true()
+    should(@impreciseMayMeetBeforeDateIvl.exec(@ctx)).be.false()
+    @impreciseNotMeetsDateIvl.exec(@ctx).should.be.false()
 
-  it 'should return false for datetime being after the interval', ->
-    @intervalAfterDateTime.exec(@ctx).should.be.true()
+  it 'should correctly compare using the requested precision', ->
+    @meetsAfterDayOfIvl.exec(@ctx).should.be.true()
+    @meetsBeforeDayOfIvl.exec(@ctx).should.be.false()
+    @notMeetsDayOfIvl.exec(@ctx).should.be.true()
+    @notMeetsDayOfImpreciseIVL.exec(@ctx).should.be.true()
+    should(@mayMeetAfterDayOfImpreciseIvl.exec(@ctx)).be.null()
+    should(@mayMeetBeforeDayOfImpreciseIvl.exec(@ctx)).be.false()
 
 describe 'Meets', ->
   @beforeEach ->
