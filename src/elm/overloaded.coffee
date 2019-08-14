@@ -207,3 +207,21 @@ module.exports.SameAs = class SameAs extends Expression
   exec: (ctx) ->
     [a, b] = @execArgs(ctx)
     if a? and b? then a.sameAs(b, @precision?.toLowerCase()) else null
+
+module.exports.SameOrAfter = class SameOrAfter extends Expression
+  constructor: (json) ->
+    super
+    @precision = json.precision
+
+  exec: (ctx) ->
+    [d1, d2] = @execArgs(ctx)
+    if d1? and d2? then d1.sameOrAfter(d2, @precision?.toLowerCase()) else null
+
+module.exports.SameOrBefore = class SameOrBefore extends Expression
+  constructor: (json) ->
+    super
+    @precision = json.precision
+
+  exec: (ctx) ->
+    [d1, d2] = @execArgs(ctx)
+    if d1? and d2? then d1.sameOrBefore(d2, @precision?.toLowerCase()) else null
