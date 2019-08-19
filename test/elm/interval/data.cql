@@ -404,6 +404,8 @@ define EndsBeforeNullStartIvlEnds: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), Da
 define AfterEndOfNullStartIvl: Interval[DateTime(2012, 3, 10, 0, 0, 0, 0), DateTime(2012, 3, 20, 0, 0, 0, 0)] before or on NullStartIvl
 define NullStartStartBeforeIvl: NullStartIvl before or on Interval[DateTime(2012, 4, 1, 0, 0, 0, 0), DateTime(2012, 4, 20, 0, 0, 0, 0)]
 define NullStartStartAfterIvl: NullStartIvl before or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 20, 0, 0, 0, 0)]
+define DateIvlBeforeNull: DateIvl before or on null
+define NullBeforeDateIvl: null before or on DateIvl
 
 // @Test: AfterOrOn
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0)]
@@ -435,7 +437,8 @@ define EndsBeforeNullStartIvlEnds: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), Da
 define AfterEndOfNullStartIvl: Interval[DateTime(2012, 3, 10, 0, 0, 0, 0), DateTime(2012, 3, 20, 0, 0, 0, 0)] after or on NullStartIvl
 define NullStartStartBeforeIvl: NullStartIvl after or on Interval[DateTime(2012, 4, 1, 0, 0, 0, 0), DateTime(2012, 4, 20, 0, 0, 0, 0)]
 define NullStartStartAfterIvl: NullStartIvl after or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 20, 0, 0, 0, 0)]
-
+define DateIvlBeforeNull: DateIvl after or on null
+define NullBeforeDateIvl: null after or on DateIvl
 
 // @Test: Meets
 define MeetsAfterIntIvl: Interval[11, 15] meets Interval[5, 10]

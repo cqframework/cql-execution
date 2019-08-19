@@ -574,6 +574,10 @@ describe 'BeforeOrOn', ->
     @nullStartStartBeforeIvl.exec(@ctx).should.be.true()
     @nullStartStartAfterIvl.exec(@ctx).should.be.false()
 
+  it 'should handle null on either side', ->
+    should(@dateIvlBeforeNull.exec(@ctx)).be.null()
+    should(@nullBeforeDateIvl.exec(@ctx)).be.null()
+
 describe 'AfterOrOn', ->
   @beforeEach ->
     setup @, data
@@ -611,6 +615,10 @@ describe 'AfterOrOn', ->
     @afterEndOfNullStartIvl.exec(@ctx).should.be.true()
     should(@nullStartStartBeforeIvl.exec(@ctx)).be.null()
     should(@nullStartStartAfterIvl.exec(@ctx)).be.null()
+
+  it 'should handle null on either side', ->
+    should(@dateIvlBeforeNull.exec(@ctx)).be.null()
+    should(@nullBeforeDateIvl.exec(@ctx)).be.null()
 
 describe 'Meets', ->
   @beforeEach ->
