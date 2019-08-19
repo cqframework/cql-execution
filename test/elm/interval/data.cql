@@ -406,6 +406,14 @@ define NullStartStartBeforeIvl: NullStartIvl before or on Interval[DateTime(2012
 define NullStartStartAfterIvl: NullStartIvl before or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 20, 0, 0, 0, 0)]
 define DateIvlBeforeNull: DateIvl before or on null
 define NullBeforeDateIvl: null before or on DateIvl
+define DateTimeBeforeDateIvl: DateTime(2012, 2, 20, 0, 0, 0, 0) before or on DateIvl
+define DateBeforeDateIvl: Date(2012, 2, 20) before or on DateIvl
+define DateIvlBeforeDateTime: DateIvl before or on DateTime(2012, 9, 20, 0, 0, 0, 0)
+define DateIvlBeforeDate: DateIvl before or on DateTime(2012, 9, 20)
+define DateOnlyIvl: Interval[Date(2012, 1, 1), Date(2012, 2, 20)]
+define DateOnlyIvlBeforeDateIvl: DateOnlyIvl before or on DateIvl
+define DateIvlAfterDateOnlyIvl: DateIvl before or on DateOnlyIvl
+define DateOnlyMeetsBeforeDateIvl: Interval[Date(2012, 1, 1), Date(2012, 3, 1)] before or on DateIvl
 
 // @Test: AfterOrOn
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0)]
@@ -439,6 +447,14 @@ define NullStartStartBeforeIvl: NullStartIvl after or on Interval[DateTime(2012,
 define NullStartStartAfterIvl: NullStartIvl after or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 20, 0, 0, 0, 0)]
 define DateIvlBeforeNull: DateIvl after or on null
 define NullBeforeDateIvl: null after or on DateIvl
+define DateTimeBeforeDateIvl: DateTime(2012, 2, 20, 0, 0, 0, 0) after or on DateIvl
+define DateBeforeDateIvl: Date(2012, 2, 20) after or on DateIvl
+define DateIvlBeforeDateTime: DateIvl after or on DateTime(2012, 9, 20, 0, 0, 0, 0)
+define DateIvlBeforeDate: DateIvl after or on DateTime(2012, 9, 20)
+define DateOnlyIvl: Interval[Date(2012, 1, 1), Date(2012, 2, 20)]
+define DateOnlyIvlBeforeDateIvl: DateOnlyIvl after or on DateIvl
+define DateIvlAfterDateOnlyIvl: DateIvl after or on DateOnlyIvl
+define DateOnlyMeetsAfterDateIvl: Interval[Date(2012, 9, 1), Date(2012, 10, 1)] after or on DateIvl
 
 // @Test: Meets
 define MeetsAfterIntIvl: Interval[11, 15] meets Interval[5, 10]

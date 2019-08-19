@@ -578,6 +578,17 @@ describe 'BeforeOrOn', ->
     should(@dateIvlBeforeNull.exec(@ctx)).be.null()
     should(@nullBeforeDateIvl.exec(@ctx)).be.null()
 
+  it 'should handle Date and DateTime on either side', ->
+    @dateTimeBeforeDateIvl.exec(@ctx).should.be.true()
+    @dateBeforeDateIvl.exec(@ctx).should.be.true()
+    @dateIvlBeforeDateTime.exec(@ctx).should.be.true()
+    @dateIvlBeforeDate.exec(@ctx).should.be.true()
+
+  it 'should handle Interval<Date> and Interval<DateTime> on either side', ->
+    @dateOnlyIvlBeforeDateIvl.exec(@ctx).should.be.true()
+    @dateIvlAfterDateOnlyIvl.exec(@ctx).should.be.false()
+    @dateOnlyMeetsBeforeDateIvl.exec(@ctx).should.be.true()
+
 describe 'AfterOrOn', ->
   @beforeEach ->
     setup @, data
@@ -619,6 +630,17 @@ describe 'AfterOrOn', ->
   it 'should handle null on either side', ->
     should(@dateIvlBeforeNull.exec(@ctx)).be.null()
     should(@nullBeforeDateIvl.exec(@ctx)).be.null()
+
+  it 'should handle Date and DateTime on either side', ->
+    @dateTimeBeforeDateIvl.exec(@ctx).should.be.false()
+    @dateBeforeDateIvl.exec(@ctx).should.be.false()
+    @dateIvlBeforeDateTime.exec(@ctx).should.be.false()
+    @dateIvlBeforeDate.exec(@ctx).should.be.false()
+
+  it 'should handle Interval<Date> and Interval<DateTime> on either side', ->
+    @dateOnlyIvlBeforeDateIvl.exec(@ctx).should.be.false()
+    @dateIvlAfterDateOnlyIvl.exec(@ctx).should.be.true()
+    @dateOnlyMeetsAfterDateIvl.exec(@ctx).should.be.true()
 
 describe 'Meets', ->
   @beforeEach ->
