@@ -9247,13 +9247,43 @@
   module.exports.Is = Is = (function(superClass) {
     extend(Is, superClass);
 
-    function Is() {
-      return Is.__super__.constructor.apply(this, arguments);
+    function Is(json) {
+      this.expectedType = json.isTypeSpecifier.name;
+      Is.__super__.constructor.apply(this, arguments);
     }
+
+    Is.prototype.exec = function(ctx) {
+      var obj, ref4;
+      if (this.arg.valueType === this.expectedType) {
+        return true;
+      }
+      obj = this.execArgs(ctx);
+      switch (this.expectedType) {
+        case "{urn:hl7-org:elm-types:r1}Boolean":
+          return obj.isBoolean != null;
+        case "{urn:hl7-org:elm-types:r1}Concept":
+          return obj.isConcept != null;
+        case "{urn:hl7-org:elm-types:r1}Decimal":
+          return obj.isDecimal != null;
+        case "{urn:hl7-org:elm-types:r1}Integer":
+          return obj.isInteger != null;
+        case "{urn:hl7-org:elm-types:r1}String":
+          return obj.isString != null;
+        case "{urn:hl7-org:elm-types:r1}Quantity":
+          return obj.isQuantity != null;
+        case "{urn:hl7-org:elm-types:r1}DateTime":
+          return obj.isDateTime != null;
+        case "{urn:hl7-org:elm-types:r1}Date":
+          return obj.isDate != null;
+        case "{urn:hl7-org:elm-types:r1}Time":
+          return (obj.isTime != null) && obj.isTime();
+      }
+      return ((ref4 = ctx.parent) != null ? ref4.getValueType(obj) : void 0) === this.expectedType;
+    };
 
     return Is;
 
-  })(UnimplementedExpression);
+  })(Expression);
 
   module.exports.IntervalTypeSpecifier = IntervalTypeSpecifier = (function(superClass) {
     extend(IntervalTypeSpecifier, superClass);
@@ -45768,10 +45798,11 @@
   module.exports.PatientContext = PatientContext = (function(superClass) {
     extend(PatientContext, superClass);
 
-    function PatientContext(library1, patient, codeService, parameters, executionDateTime) {
+    function PatientContext(library1, patient, codeService, parameters, executionDateTime, getValueType) {
       this.library = library1;
       this.patient = patient;
       this.executionDateTime = executionDateTime != null ? executionDateTime : dt.DateTime.fromJSDate(new Date());
+      this.getValueType = getValueType != null ? getValueType : function() {};
       PatientContext.__super__.constructor.call(this, this.library, codeService, parameters);
     }
 
@@ -45781,12 +45812,12 @@
 
     PatientContext.prototype.getLibraryContext = function(library) {
       var base;
-      return (base = this.library_context)[library] || (base[library] = new PatientContext(this.get(library), this.patient, this.codeService, this.parameters, this.executionDateTime));
+      return (base = this.library_context)[library] || (base[library] = new PatientContext(this.get(library), this.patient, this.codeService, this.parameters, this.executionDateTime, this.getValueType));
     };
 
     PatientContext.prototype.getLocalIdContext = function(localId) {
       var base;
-      return (base = this.localId_context)[localId] || (base[localId] = new PatientContext(this.get(library), this.patient, this.codeService, this.parameters, this.executionDateTime));
+      return (base = this.localId_context)[localId] || (base[localId] = new PatientContext(this.get(library), this.patient, this.codeService, this.parameters, this.executionDateTime, this.getValueType));
     };
 
     PatientContext.prototype.findRecords = function(profile) {
@@ -45872,21 +45903,27 @@
       return this;
     };
 
-    Executor.prototype.exec_expression = function(expression, patientSource) {
+    Executor.prototype.exec_expression = function(expression, patientSource, getValueType) {
       var expr, p, patient_ctx, r;
+      if (getValueType == null) {
+        getValueType = function() {};
+      }
       Results(r = new Results());
       expr = this.library.expressions[expression];
       while (expr && (p = patientSource.currentPatient())) {
-        patient_ctx = new PatientContext(this.library, p, this.codeService, this.parameters);
+        patient_ctx = new PatientContext(this.library, p, this.codeService, this.parameters, getValueType);
         r.recordPatientResult(patient_ctx, expression, expr.execute(patient_ctx));
         patientSource.nextPatient();
       }
       return r;
     };
 
-    Executor.prototype.exec = function(patientSource, executionDateTime) {
+    Executor.prototype.exec = function(patientSource, executionDateTime, getValueType) {
       var expr, key, r, ref, unfilteredContext;
-      Results(r = this.exec_patient_context(patientSource, executionDateTime));
+      if (getValueType == null) {
+        getValueType = function() {};
+      }
+      Results(r = this.exec_patient_context(patientSource, executionDateTime, getValueType));
       unfilteredContext = new UnfilteredContext(this.library, r, this.codeService, this.parameters);
       ref = this.library.expressions;
       for (key in ref) {
@@ -45898,11 +45935,14 @@
       return r;
     };
 
-    Executor.prototype.exec_patient_context = function(patientSource, executionDateTime) {
+    Executor.prototype.exec_patient_context = function(patientSource, executionDateTime, getValueType) {
       var expr, key, p, patient_ctx, r, ref;
+      if (getValueType == null) {
+        getValueType = function() {};
+      }
       Results(r = new Results());
       while (p = patientSource.currentPatient()) {
-        patient_ctx = new PatientContext(this.library, p, this.codeService, this.parameters, executionDateTime);
+        patient_ctx = new PatientContext(this.library, p, this.codeService, this.parameters, executionDateTime, getValueType);
         ref = this.library.expressions;
         for (key in ref) {
           expr = ref[key];

@@ -345,7 +345,41 @@ module.exports.CanConvertQuantity = class CanConvertQuantity extends Expression
         return false
     return null
 
-module.exports.Is = class Is extends UnimplementedExpression
+module.exports.Is = class Is extends Expression
+  constructor: (json) ->
+    @expectedType = json.isTypeSpecifier.name
+    super
+
+  exec: (ctx) ->
+    # If the argument is a literal, extract the type from the elm directly
+    if @arg.valueType is @expectedType
+      return true
+
+    obj = @execArgs(ctx)
+
+    switch @expectedType
+      when "{urn:hl7-org:elm-types:r1}Boolean"
+        return obj.isBoolean?
+      when "{urn:hl7-org:elm-types:r1}Concept"
+        return obj.isConcept?
+      when "{urn:hl7-org:elm-types:r1}Decimal"
+        return obj.isDecimal?
+      when "{urn:hl7-org:elm-types:r1}Integer"
+        return obj.isInteger?
+      when "{urn:hl7-org:elm-types:r1}String"
+        return obj.isString?
+      when "{urn:hl7-org:elm-types:r1}Quantity"
+        return obj.isQuantity?
+      when "{urn:hl7-org:elm-types:r1}DateTime"
+        return obj.isDateTime?
+      when "{urn:hl7-org:elm-types:r1}Date"
+        return obj.isDate?
+      when "{urn:hl7-org:elm-types:r1}Time"
+        return obj.isTime? && obj.isTime()
+
+    # Determine type at runtime using patient context
+    return ctx.parent?.getValueType(obj) is @expectedType
+
 module.exports.IntervalTypeSpecifier = class IntervalTypeSpecifier extends UnimplementedExpression
 module.exports.ListTypeSpecifier = class ListTypeSpecifier extends UnimplementedExpression
 module.exports.NamedTypeSpecifier = class NamedTypeSpecifier extends UnimplementedExpression

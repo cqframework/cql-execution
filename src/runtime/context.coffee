@@ -226,18 +226,18 @@ module.exports.Context = class Context
       ((! val.high?) || @matchesInstanceType(val.high, pointType))
 
 module.exports.PatientContext = class PatientContext extends Context
-  constructor: (@library, @patient, codeService, parameters, @executionDateTime = dt.DateTime.fromJSDate(new Date())) ->
+  constructor: (@library, @patient, codeService, parameters, @executionDateTime = dt.DateTime.fromJSDate(new Date()), @getValueType = -> ) ->
     super(@library, codeService, parameters)
 
   rootContext:  -> @
 
   getLibraryContext: (library) ->
-    @library_context[library] ||= new PatientContext(@get(library),@patient,@codeService,@parameters,@executionDateTime)
+    @library_context[library] ||= new PatientContext(@get(library), @patient, @codeService, @parameters, @executionDateTime, @getValueType)
 
   getLocalIdContext: (localId) ->
-    @localId_context[localId] ||= new PatientContext(@get(library),@patient,@codeService,@parameters,@executionDateTime)
+    @localId_context[localId] ||= new PatientContext(@get(library), @patient, @codeService, @parameters, @executionDateTime, @getValueType)
 
-  findRecords: ( profile) ->
+  findRecords: (profile) ->
     @patient?.findRecords(profile)
 
 module.exports.UnfilteredContext = class UnfilteredContext extends Context
