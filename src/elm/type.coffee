@@ -359,15 +359,19 @@ module.exports.Is = class Is extends Expression
 
     switch @expectedType
       when "{urn:hl7-org:elm-types:r1}Boolean"
-        return obj.isBoolean?
+        return obj.isBooleanLiteral? || typeof obj == "boolean"
+      when "{urn:hl7-org:elm-types:r1}Decimal"
+        return obj.isDecimalLiteral? || (typeof obj == "number" && parseInt(obj) != obj)
+      when "{urn:hl7-org:elm-types:r1}Integer"
+        return obj.isIntegerLiteral? || (typeof obj == "number" && parseInt(obj) == obj)
+      when "{urn:hl7-org:elm-types:r1}String"
+        return obj.isStringLiteral? || typeof obj == "string"
+      when "{urn:hl7-org:elm-types:r1}Code"
+        return obj.isCode?
       when "{urn:hl7-org:elm-types:r1}Concept"
         return obj.isConcept?
-      when "{urn:hl7-org:elm-types:r1}Decimal"
-        return obj.isDecimal?
-      when "{urn:hl7-org:elm-types:r1}Integer"
-        return obj.isInteger?
-      when "{urn:hl7-org:elm-types:r1}String"
-        return obj.isString?
+      when "{http://hl7.org/fhir}ValueSet"
+        return obj.isValueSet?
       when "{urn:hl7-org:elm-types:r1}Quantity"
         return obj.isQuantity?
       when "{urn:hl7-org:elm-types:r1}DateTime"

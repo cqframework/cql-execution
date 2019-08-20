@@ -9,6 +9,7 @@
 ### Is
 library TestSnippet version '1'
 using QUICK
+valueset "Female": '2.16.840.1.113883.3.560.100.2'
 context Patient
 define IsTrueInteger: 5 is Integer
 define IsFalseInteger: '5' is Integer
@@ -26,6 +27,43 @@ define IsTrueQuantity: 1 'mm' is Quantity
 define IsFalseQuantity: 'one millimeter' is Quantity
 define IsTrueBoolean: true is Boolean
 define IsFalseBoolean: 'true' is Boolean
+define IsTrueCode: Code{ system: 'fake', code: 'fake' } is Code
+define IsFalseCode: 'Foo' is Code
+define IsTrueConcept: Concept { codes: { Code{ system: 'fake', code: 'fake' } }, display: 'Test Concept' } is Concept
+define IsFalseConcept: 'Foo' is Concept
+define IsTrueRuntimeBoolean: ('5' = '5') is Boolean
+define IsFalseRuntimeBoolean: (5 / 3) is Boolean
+define IsTrueRuntimeDecimal: (1.0 / 3.0) is Decimal
+define IsFalseRuntimeDecimal: ('foo' + 'bar') is Decimal
+define IsTrueRuntimeInteger: (1 + 3) is Integer
+define IsFalseRuntimeInteger: (1.0 / 3.0) is Integer
+define IsTrueRuntimeString: 'foo' + 'bar' is String
+define IsFalseRuntimeString: (1.0 / 3.0) is String
+define CodeA: Code {
+  system: 'http://loinc.org',
+  code: '12345',
+  version: '1',
+  display: 'Test Code'
+}
+define IsTrueRuntimeCode: CodeA is Code
+define IsFalseRuntimeCode: 'Foo' + 'Foo' is Code
+define ConceptA: Concept {
+  codes: { CodeA },
+  display: 'Test Concept'
+}
+
+define IsTrueRuntimeConcept: ConceptA is Concept
+define IsFalseRuntimeConcept: 'Foo' + 'Foo' is Concept
+define IsTrueRuntimeValueSet: "Female" is ValueSet
+define IsFalseRuntimeValueSet: 'Foo' + 'Foo' is ValueSet
+define IsTrueRuntimeQuantity: 1 'mm' + 1 'mm' is Quantity
+define IsFalseRuntimeQuantity: 'Foo' + 'Foo' is Quantity
+define IsTrueRuntimeDateTime: DateTime(2012) + 1 'year' is DateTime
+define IsFalseRuntimeDateTime: 'Foo' + 'Foo' is DateTime
+define IsTrueRuntimeDate: Date(2012) + 1 'year' is Date
+define IsFalseRuntimeDate: 'Foo' + 'Foo' is Date
+define IsTrueRuntimeTime: Time(12) + 1 'hour' is Time
+define IsFalseRuntimeTime: 'Foo' + 'Foo' is Time
 ###
 
 module.exports['Is'] = {
@@ -48,6 +86,14 @@ module.exports['Is'] = {
             "uri" : "http://hl7.org/fhir"
          } ]
       },
+      "valueSets" : {
+         "def" : [ {
+            "localId" : "2",
+            "name" : "Female",
+            "id" : "2.16.840.1.113883.3.560.100.2",
+            "accessLevel" : "Public"
+         } ]
+      },
       "statements" : {
          "def" : [ {
             "name" : "Patient",
@@ -61,23 +107,23 @@ module.exports['Is'] = {
                }
             }
          }, {
-            "localId" : "5",
+            "localId" : "6",
             "name" : "IsTrueInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "5",
+                  "r" : "6",
                   "s" : [ {
                      "value" : [ "define ","IsTrueInteger",": " ]
                   }, {
-                     "r" : "4",
+                     "r" : "5",
                      "s" : [ {
-                        "r" : "2",
+                        "r" : "3",
                         "value" : [ "5"," is " ]
                      }, {
-                        "r" : "3",
+                        "r" : "4",
                         "s" : [ {
                            "value" : [ "Integer" ]
                         } ]
@@ -86,42 +132,42 @@ module.exports['Is'] = {
                }
             } ],
             "expression" : {
-               "localId" : "4",
+               "localId" : "5",
                "type" : "Is",
                "operand" : {
-                  "localId" : "2",
+                  "localId" : "3",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "5",
                   "type" : "Literal"
                },
                "isTypeSpecifier" : {
-                  "localId" : "3",
+                  "localId" : "4",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "9",
+            "localId" : "10",
             "name" : "IsFalseInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "9",
+                  "r" : "10",
                   "s" : [ {
                      "value" : [ "define ","IsFalseInteger",": " ]
                   }, {
-                     "r" : "8",
+                     "r" : "9",
                      "s" : [ {
-                        "r" : "6",
+                        "r" : "7",
                         "s" : [ {
                            "value" : [ "'5'" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "7",
+                        "r" : "8",
                         "s" : [ {
                            "value" : [ "Integer" ]
                         } ]
@@ -130,38 +176,38 @@ module.exports['Is'] = {
                }
             } ],
             "expression" : {
-               "localId" : "8",
+               "localId" : "9",
                "type" : "Is",
                "operand" : {
-                  "localId" : "6",
+                  "localId" : "7",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "5",
                   "type" : "Literal"
                },
                "isTypeSpecifier" : {
-                  "localId" : "7",
+                  "localId" : "8",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "13",
+            "localId" : "14",
             "name" : "IsTrueDecimal",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "13",
+                  "r" : "14",
                   "s" : [ {
                      "value" : [ "define ","IsTrueDecimal",": " ]
                   }, {
-                     "r" : "12",
+                     "r" : "13",
                      "s" : [ {
-                        "r" : "10",
+                        "r" : "11",
                         "value" : [ "5.0"," is " ]
                      }, {
-                        "r" : "11",
+                        "r" : "12",
                         "s" : [ {
                            "value" : [ "Decimal" ]
                         } ]
@@ -170,38 +216,38 @@ module.exports['Is'] = {
                }
             } ],
             "expression" : {
-               "localId" : "12",
+               "localId" : "13",
                "type" : "Is",
                "operand" : {
-                  "localId" : "10",
+                  "localId" : "11",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "value" : "5.0",
                   "type" : "Literal"
                },
                "isTypeSpecifier" : {
-                  "localId" : "11",
+                  "localId" : "12",
                   "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "17",
+            "localId" : "18",
             "name" : "IsFalseDecimal",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "17",
+                  "r" : "18",
                   "s" : [ {
                      "value" : [ "define ","IsFalseDecimal",": " ]
                   }, {
-                     "r" : "16",
+                     "r" : "17",
                      "s" : [ {
-                        "r" : "14",
+                        "r" : "15",
                         "value" : [ "5"," is " ]
                      }, {
-                        "r" : "15",
+                        "r" : "16",
                         "s" : [ {
                            "value" : [ "Decimal" ]
                         } ]
@@ -210,42 +256,42 @@ module.exports['Is'] = {
                }
             } ],
             "expression" : {
-               "localId" : "16",
+               "localId" : "17",
                "type" : "Is",
                "operand" : {
-                  "localId" : "14",
+                  "localId" : "15",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "5",
                   "type" : "Literal"
                },
                "isTypeSpecifier" : {
-                  "localId" : "15",
+                  "localId" : "16",
                   "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "21",
+            "localId" : "22",
             "name" : "IsTrueString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "21",
+                  "r" : "22",
                   "s" : [ {
                      "value" : [ "define ","IsTrueString",": " ]
                   }, {
-                     "r" : "20",
+                     "r" : "21",
                      "s" : [ {
-                        "r" : "18",
+                        "r" : "19",
                         "s" : [ {
                            "value" : [ "'5'" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "19",
+                        "r" : "20",
                         "s" : [ {
                            "value" : [ "String" ]
                         } ]
@@ -254,38 +300,38 @@ module.exports['Is'] = {
                }
             } ],
             "expression" : {
-               "localId" : "20",
+               "localId" : "21",
                "type" : "Is",
                "operand" : {
-                  "localId" : "18",
+                  "localId" : "19",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "5",
                   "type" : "Literal"
                },
                "isTypeSpecifier" : {
-                  "localId" : "19",
+                  "localId" : "20",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "25",
+            "localId" : "26",
             "name" : "IsFalseString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "25",
+                  "r" : "26",
                   "s" : [ {
                      "value" : [ "define ","IsFalseString",": " ]
                   }, {
-                     "r" : "24",
+                     "r" : "25",
                      "s" : [ {
-                        "r" : "22",
+                        "r" : "23",
                         "value" : [ "5"," is " ]
                      }, {
-                        "r" : "23",
+                        "r" : "24",
                         "s" : [ {
                            "value" : [ "String" ]
                         } ]
@@ -294,43 +340,43 @@ module.exports['Is'] = {
                }
             } ],
             "expression" : {
-               "localId" : "24",
+               "localId" : "25",
                "type" : "Is",
                "operand" : {
-                  "localId" : "22",
+                  "localId" : "23",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "5",
                   "type" : "Literal"
                },
                "isTypeSpecifier" : {
-                  "localId" : "23",
+                  "localId" : "24",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "30",
+            "localId" : "31",
             "name" : "IsTrueDateTime",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "30",
+                  "r" : "31",
                   "s" : [ {
                      "value" : [ "define ","IsTrueDateTime",": " ]
                   }, {
-                     "r" : "29",
+                     "r" : "30",
                      "s" : [ {
-                        "r" : "27",
+                        "r" : "28",
                         "s" : [ {
-                           "r" : "26",
+                           "r" : "27",
                            "value" : [ "DateTime","(","2012",")" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "28",
+                        "r" : "29",
                         "s" : [ {
                            "value" : [ "DateTime" ]
                         } ]
@@ -339,47 +385,47 @@ module.exports['Is'] = {
                }
             } ],
             "expression" : {
-               "localId" : "29",
+               "localId" : "30",
                "type" : "Is",
                "operand" : {
-                  "localId" : "27",
+                  "localId" : "28",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "26",
+                     "localId" : "27",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2012",
                      "type" : "Literal"
                   }
                },
                "isTypeSpecifier" : {
-                  "localId" : "28",
+                  "localId" : "29",
                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "35",
+            "localId" : "36",
             "name" : "IsFalseDateTime",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "35",
+                  "r" : "36",
                   "s" : [ {
                      "value" : [ "define ","IsFalseDateTime",": " ]
                   }, {
-                     "r" : "34",
+                     "r" : "35",
                      "s" : [ {
-                        "r" : "32",
+                        "r" : "33",
                         "s" : [ {
-                           "r" : "31",
+                           "r" : "32",
                            "value" : [ "Date","(","2012",")" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "33",
+                        "r" : "34",
                         "s" : [ {
                            "value" : [ "DateTime" ]
                         } ]
@@ -388,47 +434,47 @@ module.exports['Is'] = {
                }
             } ],
             "expression" : {
-               "localId" : "34",
+               "localId" : "35",
                "type" : "Is",
                "operand" : {
-                  "localId" : "32",
+                  "localId" : "33",
                   "type" : "Date",
                   "year" : {
-                     "localId" : "31",
+                     "localId" : "32",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2012",
                      "type" : "Literal"
                   }
                },
                "isTypeSpecifier" : {
-                  "localId" : "33",
+                  "localId" : "34",
                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "40",
+            "localId" : "41",
             "name" : "IsTrueDate",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "40",
+                  "r" : "41",
                   "s" : [ {
                      "value" : [ "define ","IsTrueDate",": " ]
                   }, {
-                     "r" : "39",
+                     "r" : "40",
                      "s" : [ {
-                        "r" : "37",
+                        "r" : "38",
                         "s" : [ {
-                           "r" : "36",
+                           "r" : "37",
                            "value" : [ "Date","(","2012",")" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "38",
+                        "r" : "39",
                         "s" : [ {
                            "value" : [ "Date" ]
                         } ]
@@ -437,47 +483,47 @@ module.exports['Is'] = {
                }
             } ],
             "expression" : {
-               "localId" : "39",
+               "localId" : "40",
                "type" : "Is",
                "operand" : {
-                  "localId" : "37",
+                  "localId" : "38",
                   "type" : "Date",
                   "year" : {
-                     "localId" : "36",
+                     "localId" : "37",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2012",
                      "type" : "Literal"
                   }
                },
                "isTypeSpecifier" : {
-                  "localId" : "38",
+                  "localId" : "39",
                   "name" : "{urn:hl7-org:elm-types:r1}Date",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "45",
+            "localId" : "46",
             "name" : "IsFalseDate",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "45",
+                  "r" : "46",
                   "s" : [ {
                      "value" : [ "define ","IsFalseDate",": " ]
                   }, {
-                     "r" : "44",
+                     "r" : "45",
                      "s" : [ {
-                        "r" : "42",
+                        "r" : "43",
                         "s" : [ {
-                           "r" : "41",
+                           "r" : "42",
                            "value" : [ "DateTime","(","2012",")" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "43",
+                        "r" : "44",
                         "s" : [ {
                            "value" : [ "Date" ]
                         } ]
@@ -486,47 +532,47 @@ module.exports['Is'] = {
                }
             } ],
             "expression" : {
-               "localId" : "44",
+               "localId" : "45",
                "type" : "Is",
                "operand" : {
-                  "localId" : "42",
+                  "localId" : "43",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "41",
+                     "localId" : "42",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2012",
                      "type" : "Literal"
                   }
                },
                "isTypeSpecifier" : {
-                  "localId" : "43",
+                  "localId" : "44",
                   "name" : "{urn:hl7-org:elm-types:r1}Date",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "50",
+            "localId" : "51",
             "name" : "IsTrueTime",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "50",
+                  "r" : "51",
                   "s" : [ {
                      "value" : [ "define ","IsTrueTime",": " ]
                   }, {
-                     "r" : "49",
+                     "r" : "50",
                      "s" : [ {
-                        "r" : "47",
+                        "r" : "48",
                         "s" : [ {
-                           "r" : "46",
+                           "r" : "47",
                            "value" : [ "Time","(","12",")" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "48",
+                        "r" : "49",
                         "s" : [ {
                            "value" : [ "Time" ]
                         } ]
@@ -535,47 +581,47 @@ module.exports['Is'] = {
                }
             } ],
             "expression" : {
-               "localId" : "49",
+               "localId" : "50",
                "type" : "Is",
                "operand" : {
-                  "localId" : "47",
+                  "localId" : "48",
                   "type" : "Time",
                   "hour" : {
-                     "localId" : "46",
+                     "localId" : "47",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "12",
                      "type" : "Literal"
                   }
                },
                "isTypeSpecifier" : {
-                  "localId" : "48",
+                  "localId" : "49",
                   "name" : "{urn:hl7-org:elm-types:r1}Time",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "55",
+            "localId" : "56",
             "name" : "IsFalseTime",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "55",
+                  "r" : "56",
                   "s" : [ {
                      "value" : [ "define ","IsFalseTime",": " ]
                   }, {
-                     "r" : "54",
+                     "r" : "55",
                      "s" : [ {
-                        "r" : "52",
+                        "r" : "53",
                         "s" : [ {
-                           "r" : "51",
+                           "r" : "52",
                            "value" : [ "DateTime","(","2012",")" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "53",
+                        "r" : "54",
                         "s" : [ {
                            "value" : [ "Time" ]
                         } ]
@@ -584,46 +630,46 @@ module.exports['Is'] = {
                }
             } ],
             "expression" : {
-               "localId" : "54",
+               "localId" : "55",
                "type" : "Is",
                "operand" : {
-                  "localId" : "52",
+                  "localId" : "53",
                   "type" : "DateTime",
                   "year" : {
-                     "localId" : "51",
+                     "localId" : "52",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2012",
                      "type" : "Literal"
                   }
                },
                "isTypeSpecifier" : {
-                  "localId" : "53",
+                  "localId" : "54",
                   "name" : "{urn:hl7-org:elm-types:r1}Time",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "59",
+            "localId" : "60",
             "name" : "IsTrueQuantity",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "59",
+                  "r" : "60",
                   "s" : [ {
                      "value" : [ "define ","IsTrueQuantity",": " ]
                   }, {
-                     "r" : "58",
+                     "r" : "59",
                      "s" : [ {
-                        "r" : "56",
+                        "r" : "57",
                         "s" : [ {
                            "value" : [ "1 ","'mm'" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "57",
+                        "r" : "58",
                         "s" : [ {
                            "value" : [ "Quantity" ]
                         } ]
@@ -632,42 +678,42 @@ module.exports['Is'] = {
                }
             } ],
             "expression" : {
-               "localId" : "58",
+               "localId" : "59",
                "type" : "Is",
                "operand" : {
-                  "localId" : "56",
+                  "localId" : "57",
                   "value" : 1,
                   "unit" : "mm",
                   "type" : "Quantity"
                },
                "isTypeSpecifier" : {
-                  "localId" : "57",
+                  "localId" : "58",
                   "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "63",
+            "localId" : "64",
             "name" : "IsFalseQuantity",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "63",
+                  "r" : "64",
                   "s" : [ {
                      "value" : [ "define ","IsFalseQuantity",": " ]
                   }, {
-                     "r" : "62",
+                     "r" : "63",
                      "s" : [ {
-                        "r" : "60",
+                        "r" : "61",
                         "s" : [ {
                            "value" : [ "'one millimeter'" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "61",
+                        "r" : "62",
                         "s" : [ {
                            "value" : [ "Quantity" ]
                         } ]
@@ -676,38 +722,38 @@ module.exports['Is'] = {
                }
             } ],
             "expression" : {
-               "localId" : "62",
+               "localId" : "63",
                "type" : "Is",
                "operand" : {
-                  "localId" : "60",
+                  "localId" : "61",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "one millimeter",
                   "type" : "Literal"
                },
                "isTypeSpecifier" : {
-                  "localId" : "61",
+                  "localId" : "62",
                   "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "67",
+            "localId" : "68",
             "name" : "IsTrueBoolean",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "67",
+                  "r" : "68",
                   "s" : [ {
                      "value" : [ "define ","IsTrueBoolean",": " ]
                   }, {
-                     "r" : "66",
+                     "r" : "67",
                      "s" : [ {
-                        "r" : "64",
+                        "r" : "65",
                         "value" : [ "true"," is " ]
                      }, {
-                        "r" : "65",
+                        "r" : "66",
                         "s" : [ {
                            "value" : [ "Boolean" ]
                         } ]
@@ -716,42 +762,42 @@ module.exports['Is'] = {
                }
             } ],
             "expression" : {
-               "localId" : "66",
+               "localId" : "67",
                "type" : "Is",
                "operand" : {
-                  "localId" : "64",
+                  "localId" : "65",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
                   "type" : "Literal"
                },
                "isTypeSpecifier" : {
-                  "localId" : "65",
+                  "localId" : "66",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "71",
+            "localId" : "72",
             "name" : "IsFalseBoolean",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "71",
+                  "r" : "72",
                   "s" : [ {
                      "value" : [ "define ","IsFalseBoolean",": " ]
                   }, {
-                     "r" : "70",
+                     "r" : "71",
                      "s" : [ {
-                        "r" : "68",
+                        "r" : "69",
                         "s" : [ {
                            "value" : [ "'true'" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "69",
+                        "r" : "70",
                         "s" : [ {
                            "value" : [ "Boolean" ]
                         } ]
@@ -760,17 +806,1843 @@ module.exports['Is'] = {
                }
             } ],
             "expression" : {
-               "localId" : "70",
+               "localId" : "71",
                "type" : "Is",
                "operand" : {
-                  "localId" : "68",
+                  "localId" : "69",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "true",
                   "type" : "Literal"
                },
                "isTypeSpecifier" : {
-                  "localId" : "69",
+                  "localId" : "70",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "78",
+            "name" : "IsTrueCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "78",
+                  "s" : [ {
+                     "value" : [ "define ","IsTrueCode",": " ]
+                  }, {
+                     "r" : "77",
+                     "s" : [ {
+                        "r" : "75",
+                        "s" : [ {
+                           "value" : [ "Code","{ " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "system",": " ]
+                           }, {
+                              "r" : "73",
+                              "s" : [ {
+                                 "value" : [ "'fake'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "code",": " ]
+                           }, {
+                              "r" : "74",
+                              "s" : [ {
+                                 "value" : [ "'fake'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "76",
+                        "s" : [ {
+                           "value" : [ "Code" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "77",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "75",
+                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "Instance",
+                  "element" : [ {
+                     "name" : "system",
+                     "value" : {
+                        "localId" : "73",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "fake",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "name" : "code",
+                     "value" : {
+                        "localId" : "74",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "fake",
+                        "type" : "Literal"
+                     }
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "76",
+                  "name" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "82",
+            "name" : "IsFalseCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "82",
+                  "s" : [ {
+                     "value" : [ "define ","IsFalseCode",": " ]
+                  }, {
+                     "r" : "81",
+                     "s" : [ {
+                        "r" : "79",
+                        "s" : [ {
+                           "value" : [ "'Foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "80",
+                        "s" : [ {
+                           "value" : [ "Code" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "81",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "79",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo",
+                  "type" : "Literal"
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "80",
+                  "name" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "91",
+            "name" : "IsTrueConcept",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "91",
+                  "s" : [ {
+                     "value" : [ "define ","IsTrueConcept",": " ]
+                  }, {
+                     "r" : "90",
+                     "s" : [ {
+                        "r" : "88",
+                        "s" : [ {
+                           "value" : [ "Concept"," { " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "codes",": " ]
+                           }, {
+                              "r" : "86",
+                              "s" : [ {
+                                 "value" : [ "{ " ]
+                              }, {
+                                 "r" : "85",
+                                 "s" : [ {
+                                    "value" : [ "Code","{ " ]
+                                 }, {
+                                    "s" : [ {
+                                       "value" : [ "system",": " ]
+                                    }, {
+                                       "r" : "83",
+                                       "s" : [ {
+                                          "value" : [ "'fake'" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ", " ]
+                                 }, {
+                                    "s" : [ {
+                                       "value" : [ "code",": " ]
+                                    }, {
+                                       "r" : "84",
+                                       "s" : [ {
+                                          "value" : [ "'fake'" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " }" ]
+                                 } ]
+                              }, {
+                                 "value" : [ " }" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "display",": " ]
+                           }, {
+                              "r" : "87",
+                              "s" : [ {
+                                 "value" : [ "'Test Concept'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "89",
+                        "s" : [ {
+                           "value" : [ "Concept" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "90",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "88",
+                  "classType" : "{urn:hl7-org:elm-types:r1}Concept",
+                  "type" : "Instance",
+                  "element" : [ {
+                     "name" : "codes",
+                     "value" : {
+                        "localId" : "86",
+                        "type" : "List",
+                        "element" : [ {
+                           "localId" : "85",
+                           "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                           "type" : "Instance",
+                           "element" : [ {
+                              "name" : "system",
+                              "value" : {
+                                 "localId" : "83",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "fake",
+                                 "type" : "Literal"
+                              }
+                           }, {
+                              "name" : "code",
+                              "value" : {
+                                 "localId" : "84",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "fake",
+                                 "type" : "Literal"
+                              }
+                           } ]
+                        } ]
+                     }
+                  }, {
+                     "name" : "display",
+                     "value" : {
+                        "localId" : "87",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Test Concept",
+                        "type" : "Literal"
+                     }
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "89",
+                  "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "95",
+            "name" : "IsFalseConcept",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "95",
+                  "s" : [ {
+                     "value" : [ "define ","IsFalseConcept",": " ]
+                  }, {
+                     "r" : "94",
+                     "s" : [ {
+                        "r" : "92",
+                        "s" : [ {
+                           "value" : [ "'Foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "93",
+                        "s" : [ {
+                           "value" : [ "Concept" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "94",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "92",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo",
+                  "type" : "Literal"
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "93",
+                  "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "101",
+            "name" : "IsTrueRuntimeBoolean",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "101",
+                  "s" : [ {
+                     "value" : [ "define ","IsTrueRuntimeBoolean",": " ]
+                  }, {
+                     "r" : "100",
+                     "s" : [ {
+                        "r" : "98",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "98",
+                           "s" : [ {
+                              "r" : "96",
+                              "s" : [ {
+                                 "value" : [ "'5'" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","="," " ]
+                           }, {
+                              "r" : "97",
+                              "s" : [ {
+                                 "value" : [ "'5'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "99",
+                        "s" : [ {
+                           "value" : [ "Boolean" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "100",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "98",
+                  "type" : "Equal",
+                  "operand" : [ {
+                     "localId" : "96",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "5",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "97",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "5",
+                     "type" : "Literal"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "99",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "107",
+            "name" : "IsFalseRuntimeBoolean",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "107",
+                  "s" : [ {
+                     "value" : [ "define ","IsFalseRuntimeBoolean",": " ]
+                  }, {
+                     "r" : "106",
+                     "s" : [ {
+                        "r" : "104",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "104",
+                           "s" : [ {
+                              "r" : "102",
+                              "value" : [ "5"," / ","3" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "105",
+                        "s" : [ {
+                           "value" : [ "Boolean" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "106",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "104",
+                  "type" : "Divide",
+                  "operand" : [ {
+                     "type" : "ToDecimal",
+                     "operand" : {
+                        "localId" : "102",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "type" : "ToDecimal",
+                     "operand" : {
+                        "localId" : "103",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "105",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "113",
+            "name" : "IsTrueRuntimeDecimal",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "113",
+                  "s" : [ {
+                     "value" : [ "define ","IsTrueRuntimeDecimal",": " ]
+                  }, {
+                     "r" : "112",
+                     "s" : [ {
+                        "r" : "110",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "110",
+                           "s" : [ {
+                              "r" : "108",
+                              "value" : [ "1.0"," / ","3.0" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "111",
+                        "s" : [ {
+                           "value" : [ "Decimal" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "112",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "110",
+                  "type" : "Divide",
+                  "operand" : [ {
+                     "localId" : "108",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "1.0",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "109",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "3.0",
+                     "type" : "Literal"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "111",
+                  "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "119",
+            "name" : "IsFalseRuntimeDecimal",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "119",
+                  "s" : [ {
+                     "value" : [ "define ","IsFalseRuntimeDecimal",": " ]
+                  }, {
+                     "r" : "118",
+                     "s" : [ {
+                        "r" : "116",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "116",
+                           "s" : [ {
+                              "r" : "114",
+                              "s" : [ {
+                                 "value" : [ "'foo'" ]
+                              } ]
+                           }, {
+                              "value" : [ " + " ]
+                           }, {
+                              "r" : "115",
+                              "s" : [ {
+                                 "value" : [ "'bar'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "117",
+                        "s" : [ {
+                           "value" : [ "Decimal" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "118",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "116",
+                  "type" : "Concatenate",
+                  "operand" : [ {
+                     "localId" : "114",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "foo",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "115",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "bar",
+                     "type" : "Literal"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "117",
+                  "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "125",
+            "name" : "IsTrueRuntimeInteger",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "125",
+                  "s" : [ {
+                     "value" : [ "define ","IsTrueRuntimeInteger",": " ]
+                  }, {
+                     "r" : "124",
+                     "s" : [ {
+                        "r" : "122",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "122",
+                           "s" : [ {
+                              "r" : "120",
+                              "value" : [ "1"," + ","3" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "123",
+                        "s" : [ {
+                           "value" : [ "Integer" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "124",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "122",
+                  "type" : "Add",
+                  "operand" : [ {
+                     "localId" : "120",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "121",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "123",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "131",
+            "name" : "IsFalseRuntimeInteger",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "131",
+                  "s" : [ {
+                     "value" : [ "define ","IsFalseRuntimeInteger",": " ]
+                  }, {
+                     "r" : "130",
+                     "s" : [ {
+                        "r" : "128",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "128",
+                           "s" : [ {
+                              "r" : "126",
+                              "value" : [ "1.0"," / ","3.0" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "129",
+                        "s" : [ {
+                           "value" : [ "Integer" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "130",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "128",
+                  "type" : "Divide",
+                  "operand" : [ {
+                     "localId" : "126",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "1.0",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "127",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "3.0",
+                     "type" : "Literal"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "129",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "137",
+            "name" : "IsTrueRuntimeString",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "137",
+                  "s" : [ {
+                     "value" : [ "define ","IsTrueRuntimeString",": " ]
+                  }, {
+                     "r" : "136",
+                     "s" : [ {
+                        "r" : "134",
+                        "s" : [ {
+                           "r" : "132",
+                           "s" : [ {
+                              "value" : [ "'foo'" ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "133",
+                           "s" : [ {
+                              "value" : [ "'bar'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "135",
+                        "s" : [ {
+                           "value" : [ "String" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "136",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "134",
+                  "type" : "Concatenate",
+                  "operand" : [ {
+                     "localId" : "132",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "foo",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "133",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "bar",
+                     "type" : "Literal"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "135",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "143",
+            "name" : "IsFalseRuntimeString",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "143",
+                  "s" : [ {
+                     "value" : [ "define ","IsFalseRuntimeString",": " ]
+                  }, {
+                     "r" : "142",
+                     "s" : [ {
+                        "r" : "140",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "140",
+                           "s" : [ {
+                              "r" : "138",
+                              "value" : [ "1.0"," / ","3.0" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "141",
+                        "s" : [ {
+                           "value" : [ "String" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "142",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "140",
+                  "type" : "Divide",
+                  "operand" : [ {
+                     "localId" : "138",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "1.0",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "139",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "3.0",
+                     "type" : "Literal"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "141",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "149",
+            "name" : "CodeA",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "149",
+                  "s" : [ {
+                     "value" : [ "define ","CodeA",": " ]
+                  }, {
+                     "r" : "148",
+                     "s" : [ {
+                        "value" : [ "Code"," {\n  " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "system",": " ]
+                        }, {
+                           "r" : "144",
+                           "s" : [ {
+                              "value" : [ "'http://loinc.org'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ",\n  " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "code",": " ]
+                        }, {
+                           "r" : "145",
+                           "s" : [ {
+                              "value" : [ "'12345'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ",\n  " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "version",": " ]
+                        }, {
+                           "r" : "146",
+                           "s" : [ {
+                              "value" : [ "'1'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ",\n  " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "display",": " ]
+                        }, {
+                           "r" : "147",
+                           "s" : [ {
+                              "value" : [ "'Test Code'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n}" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "148",
+               "classType" : "{urn:hl7-org:elm-types:r1}Code",
+               "type" : "Instance",
+               "element" : [ {
+                  "name" : "system",
+                  "value" : {
+                     "localId" : "144",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "http://loinc.org",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "name" : "code",
+                  "value" : {
+                     "localId" : "145",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "12345",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "name" : "version",
+                  "value" : {
+                     "localId" : "146",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "name" : "display",
+                  "value" : {
+                     "localId" : "147",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Test Code",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "153",
+            "name" : "IsTrueRuntimeCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "153",
+                  "s" : [ {
+                     "value" : [ "define ","IsTrueRuntimeCode",": " ]
+                  }, {
+                     "r" : "152",
+                     "s" : [ {
+                        "r" : "150",
+                        "s" : [ {
+                           "value" : [ "CodeA" ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "151",
+                        "s" : [ {
+                           "value" : [ "Code" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "152",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "150",
+                  "name" : "CodeA",
+                  "type" : "ExpressionRef"
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "151",
+                  "name" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "159",
+            "name" : "IsFalseRuntimeCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "159",
+                  "s" : [ {
+                     "value" : [ "define ","IsFalseRuntimeCode",": " ]
+                  }, {
+                     "r" : "158",
+                     "s" : [ {
+                        "r" : "156",
+                        "s" : [ {
+                           "r" : "154",
+                           "s" : [ {
+                              "value" : [ "'Foo'" ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "155",
+                           "s" : [ {
+                              "value" : [ "'Foo'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "157",
+                        "s" : [ {
+                           "value" : [ "Code" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "158",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "156",
+                  "type" : "Concatenate",
+                  "operand" : [ {
+                     "localId" : "154",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Foo",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "155",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Foo",
+                     "type" : "Literal"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "157",
+                  "name" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "164",
+            "name" : "ConceptA",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "164",
+                  "s" : [ {
+                     "value" : [ "define ","ConceptA",": " ]
+                  }, {
+                     "r" : "163",
+                     "s" : [ {
+                        "value" : [ "Concept"," {\n  " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "codes",": " ]
+                        }, {
+                           "r" : "161",
+                           "s" : [ {
+                              "value" : [ "{ " ]
+                           }, {
+                              "r" : "160",
+                              "s" : [ {
+                                 "value" : [ "CodeA" ]
+                              } ]
+                           }, {
+                              "value" : [ " }" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ",\n  " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "display",": " ]
+                        }, {
+                           "r" : "162",
+                           "s" : [ {
+                              "value" : [ "'Test Concept'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n}" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "163",
+               "classType" : "{urn:hl7-org:elm-types:r1}Concept",
+               "type" : "Instance",
+               "element" : [ {
+                  "name" : "codes",
+                  "value" : {
+                     "localId" : "161",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "160",
+                        "name" : "CodeA",
+                        "type" : "ExpressionRef"
+                     } ]
+                  }
+               }, {
+                  "name" : "display",
+                  "value" : {
+                     "localId" : "162",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Test Concept",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "168",
+            "name" : "IsTrueRuntimeConcept",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "168",
+                  "s" : [ {
+                     "value" : [ "define ","IsTrueRuntimeConcept",": " ]
+                  }, {
+                     "r" : "167",
+                     "s" : [ {
+                        "r" : "165",
+                        "s" : [ {
+                           "value" : [ "ConceptA" ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "166",
+                        "s" : [ {
+                           "value" : [ "Concept" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "167",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "165",
+                  "name" : "ConceptA",
+                  "type" : "ExpressionRef"
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "166",
+                  "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "174",
+            "name" : "IsFalseRuntimeConcept",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "174",
+                  "s" : [ {
+                     "value" : [ "define ","IsFalseRuntimeConcept",": " ]
+                  }, {
+                     "r" : "173",
+                     "s" : [ {
+                        "r" : "171",
+                        "s" : [ {
+                           "r" : "169",
+                           "s" : [ {
+                              "value" : [ "'Foo'" ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "170",
+                           "s" : [ {
+                              "value" : [ "'Foo'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "172",
+                        "s" : [ {
+                           "value" : [ "Concept" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "173",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "171",
+                  "type" : "Concatenate",
+                  "operand" : [ {
+                     "localId" : "169",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Foo",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "170",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Foo",
+                     "type" : "Literal"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "172",
+                  "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "178",
+            "name" : "IsTrueRuntimeValueSet",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "178",
+                  "s" : [ {
+                     "value" : [ "define ","IsTrueRuntimeValueSet",": " ]
+                  }, {
+                     "r" : "177",
+                     "s" : [ {
+                        "r" : "175",
+                        "s" : [ {
+                           "value" : [ "\"Female\"" ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "176",
+                        "s" : [ {
+                           "value" : [ "ValueSet" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "177",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "175",
+                  "name" : "Female",
+                  "type" : "ValueSetRef"
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "176",
+                  "name" : "{http://hl7.org/fhir}ValueSet",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "184",
+            "name" : "IsFalseRuntimeValueSet",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "184",
+                  "s" : [ {
+                     "value" : [ "define ","IsFalseRuntimeValueSet",": " ]
+                  }, {
+                     "r" : "183",
+                     "s" : [ {
+                        "r" : "181",
+                        "s" : [ {
+                           "r" : "179",
+                           "s" : [ {
+                              "value" : [ "'Foo'" ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "180",
+                           "s" : [ {
+                              "value" : [ "'Foo'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "182",
+                        "s" : [ {
+                           "value" : [ "ValueSet" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "183",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "181",
+                  "type" : "Concatenate",
+                  "operand" : [ {
+                     "localId" : "179",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Foo",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "180",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Foo",
+                     "type" : "Literal"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "182",
+                  "name" : "{http://hl7.org/fhir}ValueSet",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "190",
+            "name" : "IsTrueRuntimeQuantity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "190",
+                  "s" : [ {
+                     "value" : [ "define ","IsTrueRuntimeQuantity",": " ]
+                  }, {
+                     "r" : "189",
+                     "s" : [ {
+                        "r" : "187",
+                        "s" : [ {
+                           "r" : "185",
+                           "s" : [ {
+                              "value" : [ "1 ","'mm'" ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "186",
+                           "s" : [ {
+                              "value" : [ "1 ","'mm'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "188",
+                        "s" : [ {
+                           "value" : [ "Quantity" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "189",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "187",
+                  "type" : "Add",
+                  "operand" : [ {
+                     "localId" : "185",
+                     "value" : 1,
+                     "unit" : "mm",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "186",
+                     "value" : 1,
+                     "unit" : "mm",
+                     "type" : "Quantity"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "188",
+                  "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "196",
+            "name" : "IsFalseRuntimeQuantity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "196",
+                  "s" : [ {
+                     "value" : [ "define ","IsFalseRuntimeQuantity",": " ]
+                  }, {
+                     "r" : "195",
+                     "s" : [ {
+                        "r" : "193",
+                        "s" : [ {
+                           "r" : "191",
+                           "s" : [ {
+                              "value" : [ "'Foo'" ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "192",
+                           "s" : [ {
+                              "value" : [ "'Foo'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "194",
+                        "s" : [ {
+                           "value" : [ "Quantity" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "195",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "193",
+                  "type" : "Concatenate",
+                  "operand" : [ {
+                     "localId" : "191",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Foo",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "192",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Foo",
+                     "type" : "Literal"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "194",
+                  "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "203",
+            "name" : "IsTrueRuntimeDateTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "203",
+                  "s" : [ {
+                     "value" : [ "define ","IsTrueRuntimeDateTime",": " ]
+                  }, {
+                     "r" : "202",
+                     "s" : [ {
+                        "r" : "200",
+                        "s" : [ {
+                           "r" : "198",
+                           "s" : [ {
+                              "r" : "197",
+                              "value" : [ "DateTime","(","2012",")" ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "199",
+                           "s" : [ {
+                              "value" : [ "1 ","'year'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "201",
+                        "s" : [ {
+                           "value" : [ "DateTime" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "202",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "200",
+                  "type" : "Add",
+                  "operand" : [ {
+                     "localId" : "198",
+                     "type" : "DateTime",
+                     "year" : {
+                        "localId" : "197",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "199",
+                     "value" : 1,
+                     "unit" : "year",
+                     "type" : "Quantity"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "201",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "209",
+            "name" : "IsFalseRuntimeDateTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "209",
+                  "s" : [ {
+                     "value" : [ "define ","IsFalseRuntimeDateTime",": " ]
+                  }, {
+                     "r" : "208",
+                     "s" : [ {
+                        "r" : "206",
+                        "s" : [ {
+                           "r" : "204",
+                           "s" : [ {
+                              "value" : [ "'Foo'" ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "205",
+                           "s" : [ {
+                              "value" : [ "'Foo'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "207",
+                        "s" : [ {
+                           "value" : [ "DateTime" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "208",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "206",
+                  "type" : "Concatenate",
+                  "operand" : [ {
+                     "localId" : "204",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Foo",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "205",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Foo",
+                     "type" : "Literal"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "207",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "216",
+            "name" : "IsTrueRuntimeDate",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "216",
+                  "s" : [ {
+                     "value" : [ "define ","IsTrueRuntimeDate",": " ]
+                  }, {
+                     "r" : "215",
+                     "s" : [ {
+                        "r" : "213",
+                        "s" : [ {
+                           "r" : "211",
+                           "s" : [ {
+                              "r" : "210",
+                              "value" : [ "Date","(","2012",")" ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "212",
+                           "s" : [ {
+                              "value" : [ "1 ","'year'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "214",
+                        "s" : [ {
+                           "value" : [ "Date" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "215",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "213",
+                  "type" : "Add",
+                  "operand" : [ {
+                     "localId" : "211",
+                     "type" : "Date",
+                     "year" : {
+                        "localId" : "210",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "212",
+                     "value" : 1,
+                     "unit" : "year",
+                     "type" : "Quantity"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "214",
+                  "name" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "222",
+            "name" : "IsFalseRuntimeDate",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "222",
+                  "s" : [ {
+                     "value" : [ "define ","IsFalseRuntimeDate",": " ]
+                  }, {
+                     "r" : "221",
+                     "s" : [ {
+                        "r" : "219",
+                        "s" : [ {
+                           "r" : "217",
+                           "s" : [ {
+                              "value" : [ "'Foo'" ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "218",
+                           "s" : [ {
+                              "value" : [ "'Foo'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "220",
+                        "s" : [ {
+                           "value" : [ "Date" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "221",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "219",
+                  "type" : "Concatenate",
+                  "operand" : [ {
+                     "localId" : "217",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Foo",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "218",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Foo",
+                     "type" : "Literal"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "220",
+                  "name" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "229",
+            "name" : "IsTrueRuntimeTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "229",
+                  "s" : [ {
+                     "value" : [ "define ","IsTrueRuntimeTime",": " ]
+                  }, {
+                     "r" : "228",
+                     "s" : [ {
+                        "r" : "226",
+                        "s" : [ {
+                           "r" : "224",
+                           "s" : [ {
+                              "r" : "223",
+                              "value" : [ "Time","(","12",")" ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "225",
+                           "s" : [ {
+                              "value" : [ "1 ","'hour'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "227",
+                        "s" : [ {
+                           "value" : [ "Time" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "228",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "226",
+                  "type" : "Add",
+                  "operand" : [ {
+                     "localId" : "224",
+                     "type" : "Time",
+                     "hour" : {
+                        "localId" : "223",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "12",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "225",
+                     "value" : 1,
+                     "unit" : "hour",
+                     "type" : "Quantity"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "227",
+                  "name" : "{urn:hl7-org:elm-types:r1}Time",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "235",
+            "name" : "IsFalseRuntimeTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "235",
+                  "s" : [ {
+                     "value" : [ "define ","IsFalseRuntimeTime",": " ]
+                  }, {
+                     "r" : "234",
+                     "s" : [ {
+                        "r" : "232",
+                        "s" : [ {
+                           "r" : "230",
+                           "s" : [ {
+                              "value" : [ "'Foo'" ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "231",
+                           "s" : [ {
+                              "value" : [ "'Foo'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "233",
+                        "s" : [ {
+                           "value" : [ "Time" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "234",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "232",
+                  "type" : "Concatenate",
+                  "operand" : [ {
+                     "localId" : "230",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Foo",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "231",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Foo",
+                     "type" : "Literal"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "233",
+                  "name" : "{urn:hl7-org:elm-types:r1}Time",
                   "type" : "NamedTypeSpecifier"
                }
             }

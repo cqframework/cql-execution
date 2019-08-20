@@ -9260,15 +9260,19 @@
       obj = this.execArgs(ctx);
       switch (this.expectedType) {
         case "{urn:hl7-org:elm-types:r1}Boolean":
-          return obj.isBoolean != null;
+          return (obj.isBooleanLiteral != null) || typeof obj === "boolean";
+        case "{urn:hl7-org:elm-types:r1}Decimal":
+          return (obj.isDecimalLiteral != null) || (typeof obj === "number" && parseInt(obj) !== obj);
+        case "{urn:hl7-org:elm-types:r1}Integer":
+          return (obj.isIntegerLiteral != null) || (typeof obj === "number" && parseInt(obj) === obj);
+        case "{urn:hl7-org:elm-types:r1}String":
+          return (obj.isStringLiteral != null) || typeof obj === "string";
+        case "{urn:hl7-org:elm-types:r1}Code":
+          return obj.isCode != null;
         case "{urn:hl7-org:elm-types:r1}Concept":
           return obj.isConcept != null;
-        case "{urn:hl7-org:elm-types:r1}Decimal":
-          return obj.isDecimal != null;
-        case "{urn:hl7-org:elm-types:r1}Integer":
-          return obj.isInteger != null;
-        case "{urn:hl7-org:elm-types:r1}String":
-          return obj.isString != null;
+        case "{http://hl7.org/fhir}ValueSet":
+          return obj.isValueSet != null;
         case "{urn:hl7-org:elm-types:r1}Quantity":
           return obj.isQuantity != null;
         case "{urn:hl7-org:elm-types:r1}DateTime":
@@ -46338,6 +46342,13 @@
       if (!isValidDecimal(value.value)) {
         return true;
       }
+    } else if (value.isTime && value.isTime()) {
+      if (value.after(MAX_TIME_VALUE)) {
+        return true;
+      }
+      if (value.before(MIN_TIME_VALUE)) {
+        return true;
+      }
     } else if (value.isDateTime) {
       if (value.after(MAX_DATETIME_VALUE)) {
         return true;
@@ -46350,13 +46361,6 @@
         return true;
       }
       if (value.before(MIN_DATE_VALUE)) {
-        return true;
-      }
-    } else if (value.isTime) {
-      if (value.after(MAX_TIME_VALUE)) {
-        return true;
-      }
-      if (value.before(MIN_TIME_VALUE)) {
         return true;
       }
     } else if (Number.isInteger(value)) {
