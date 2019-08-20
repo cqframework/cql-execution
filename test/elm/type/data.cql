@@ -8,12 +8,10 @@ define IsFalseString: 5 is String
 define IsTrueDateTime: DateTime(2012) is DateTime
 define IsFalseDateTime: Date(2012) is DateTime
 define IsTrueDate: Date(2012) is Date
-define IsFalseDate: DateTime(2012) is DateTime
+define IsFalseDate: DateTime(2012) is Date
 define IsTrueTime: Time(12) is Time
 define IsFalseTime: DateTime(2012) is Time
-define IsTrueQuantity: '1 mm' is Quantity
+define IsTrueQuantity: 1 'mm' is Quantity
 define IsFalseQuantity: 'one millimeter' is Quantity
 define IsTrueBoolean: true is Boolean
 define IsFalseBoolean: 'true' is Boolean
-define IsTrueList: [1, 2, 3] is List<Integer>
-define IsFalseList: {a: 1, b: 2} is List<Integer>

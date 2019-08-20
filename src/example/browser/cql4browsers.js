@@ -9254,8 +9254,8 @@
 
     Is.prototype.exec = function(ctx) {
       var obj, ref4;
-      if (this.arg.valueType === this.expectedType) {
-        return true;
+      if (this.arg.valueType != null) {
+        return this.arg.valueType === this.expectedType;
       }
       obj = this.execArgs(ctx);
       switch (this.expectedType) {

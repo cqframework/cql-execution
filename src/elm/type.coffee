@@ -352,8 +352,8 @@ module.exports.Is = class Is extends Expression
 
   exec: (ctx) ->
     # If the argument is a literal, extract the type from the elm directly
-    if @arg.valueType is @expectedType
-      return true
+    if @arg.valueType?
+      return @arg.valueType is @expectedType
 
     obj = @execArgs(ctx)
 

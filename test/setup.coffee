@@ -1,5 +1,8 @@
 { Library, Context, PatientSource, CodeService, PatientContext, UnfilteredContext, Executor} =  require '../lib/cql'
 
+getValueType = (object) ->
+  return 'testType'
+
 module.exports = (test, data, patients=[], valuesets={}, parameters={}, repository=null) ->
   try
     test.lib = new Library(data[test.test.parent.title],repository)

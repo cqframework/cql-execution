@@ -19,33 +19,17 @@ define IsFalseString: 5 is String
 define IsTrueDateTime: DateTime(2012) is DateTime
 define IsFalseDateTime: Date(2012) is DateTime
 define IsTrueDate: Date(2012) is Date
-define IsFalseDate: DateTime(2012) is DateTime
+define IsFalseDate: DateTime(2012) is Date
 define IsTrueTime: Time(12) is Time
 define IsFalseTime: DateTime(2012) is Time
-define IsTrueQuantity: '1 mm' is Quantity
+define IsTrueQuantity: 1 'mm' is Quantity
 define IsFalseQuantity: 'one millimeter' is Quantity
 define IsTrueBoolean: true is Boolean
 define IsFalseBoolean: 'true' is Boolean
-define IsTrueList: [1, 2, 3] is List<Integer>
-define IsFalseList: {a: 1, b: 2} is List<Integer>
 ###
 
-###
-Translation Error(s):
-[20:20, 20:20] Syntax error at 1
-###
 module.exports['Is'] = {
    "library" : {
-      "annotation" : [ {
-         "startLine" : 20,
-         "startChar" : 20,
-         "endLine" : 20,
-         "endChar" : 20,
-         "message" : "Syntax error at 1",
-         "errorType" : "syntax",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -495,7 +479,7 @@ module.exports['Is'] = {
                      }, {
                         "r" : "43",
                         "s" : [ {
-                           "value" : [ "DateTime" ]
+                           "value" : [ "Date" ]
                         } ]
                      } ]
                   } ]
@@ -516,7 +500,7 @@ module.exports['Is'] = {
                },
                "isTypeSpecifier" : {
                   "localId" : "43",
-                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "name" : "{urn:hl7-org:elm-types:r1}Date",
                   "type" : "NamedTypeSpecifier"
                }
             }
@@ -634,7 +618,7 @@ module.exports['Is'] = {
                      "s" : [ {
                         "r" : "56",
                         "s" : [ {
-                           "value" : [ "'1 mm'" ]
+                           "value" : [ "1 ","'mm'" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
@@ -652,9 +636,9 @@ module.exports['Is'] = {
                "type" : "Is",
                "operand" : {
                   "localId" : "56",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "1 mm",
-                  "type" : "Literal"
+                  "value" : 1,
+                  "unit" : "mm",
+                  "type" : "Quantity"
                },
                "isTypeSpecifier" : {
                   "localId" : "57",
@@ -788,104 +772,6 @@ module.exports['Is'] = {
                   "localId" : "69",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
-               }
-            }
-         }, {
-            "localId" : "72",
-            "name" : "IsTrueList",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "72",
-                  "s" : [ {
-                     "value" : [ "define ","IsTrueList",": ","[1, 2, 3] is List<Integer>" ]
-                  } ]
-               }
-            } ]
-         }, {
-            "localId" : "79",
-            "name" : "IsFalseList",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "79",
-                  "s" : [ {
-                     "value" : [ "define ","IsFalseList",": " ]
-                  }, {
-                     "r" : "78",
-                     "s" : [ {
-                        "r" : "75",
-                        "s" : [ {
-                           "value" : [ "{" ]
-                        }, {
-                           "s" : [ {
-                              "r" : "73",
-                              "value" : [ "a",": ","1" ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "s" : [ {
-                              "r" : "74",
-                              "value" : [ "b",": ","2" ]
-                           } ]
-                        }, {
-                           "value" : [ "}" ]
-                        } ]
-                     }, {
-                        "value" : [ " is " ]
-                     }, {
-                        "r" : "77",
-                        "s" : [ {
-                           "value" : [ "List<" ]
-                        }, {
-                           "r" : "76",
-                           "s" : [ {
-                              "value" : [ "Integer" ]
-                           } ]
-                        }, {
-                           "value" : [ ">" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "78",
-               "type" : "Is",
-               "operand" : {
-                  "localId" : "75",
-                  "type" : "Tuple",
-                  "element" : [ {
-                     "name" : "a",
-                     "value" : {
-                        "localId" : "73",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "1",
-                        "type" : "Literal"
-                     }
-                  }, {
-                     "name" : "b",
-                     "value" : {
-                        "localId" : "74",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2",
-                        "type" : "Literal"
-                     }
-                  } ]
-               },
-               "isTypeSpecifier" : {
-                  "localId" : "77",
-                  "type" : "ListTypeSpecifier",
-                  "elementType" : {
-                     "localId" : "76",
-                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "type" : "NamedTypeSpecifier"
-                  }
                }
             }
          } ]
