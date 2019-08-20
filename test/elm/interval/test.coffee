@@ -536,6 +536,112 @@ describe 'Before', ->
     @mayBeAfterDayOfImpreciseIvl.exec(@ctx).should.be.false()
     should(@mayBeBeforeDayOfImpreciseIvl.exec(@ctx)).be.null()
 
+describe 'BeforeOrOn', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'should handle nominal datetime interval situations', ->
+    @meetsAfterDateIvl.exec(@ctx).should.be.false()
+    @meetsBeforeDateIvl.exec(@ctx).should.be.true()
+    @afterDateIvl.exec(@ctx).should.be.false()
+    @beforeDateIvl.exec(@ctx).should.be.true()
+
+  it 'should correctly handle imprecision', ->
+    @mayMeetAfterImpreciseDateIvl.exec(@ctx).should.be.false()
+    should(@mayMeetBeforeImpreciseDateIvl.exec(@ctx)).be.null()
+    @notMeetsImpreciseDateIvl.exec(@ctx).should.be.false()
+    @impreciseMayMeetAfterDateIvl.exec(@ctx).should.be.false()
+    @impreciseMayMeetBeforeDateIvl.exec(@ctx).should.be.true()
+    @impreciseNotMeetsDateIvl.exec(@ctx).should.be.false()
+
+  it 'should correctly compare using the requested precision', ->
+    @meetsAfterDayOfIvl.exec(@ctx).should.be.false()
+    @meetsBeforeDayOfIvl.exec(@ctx).should.be.true()
+    @notMeetsDayOfIvl.exec(@ctx).should.be.false()
+    @notMeetsDayOfImpreciseIVL.exec(@ctx).should.be.false()
+    @mayMeetAfterDayOfImpreciseIvl.exec(@ctx).should.be.false()
+    should(@mayMeetBeforeDayOfImpreciseIvl.exec(@ctx)).be.null()
+
+  it 'should handle intervals with null end', ->
+    @beforeNullEndIvl.exec(@ctx).should.be.true()
+    @afterStartNullEndIvl.exec(@ctx).should.be.false()
+    should(@nullEndStartBeforeIvl.exec(@ctx)).be.null()
+    should(@nullEndStartAfterIvl.exec(@ctx)).be.null()
+
+  it 'should handle intervals with null start', ->
+    should(@endsBeforeNullStartIvlEnds.exec(@ctx)).be.null()
+    should(@afterEndOfNullStartIvl.exec(@ctx)).be.null()
+    @nullStartStartBeforeIvl.exec(@ctx).should.be.true()
+    @nullStartStartAfterIvl.exec(@ctx).should.be.false()
+
+  it 'should handle null on either side', ->
+    should(@dateIvlBeforeNull.exec(@ctx)).be.null()
+    should(@nullBeforeDateIvl.exec(@ctx)).be.null()
+
+  it 'should handle Date and DateTime on either side', ->
+    @dateTimeBeforeDateIvl.exec(@ctx).should.be.true()
+    @dateBeforeDateIvl.exec(@ctx).should.be.true()
+    @dateIvlBeforeDateTime.exec(@ctx).should.be.true()
+    @dateIvlBeforeDate.exec(@ctx).should.be.true()
+
+  it 'should handle Interval<Date> and Interval<DateTime> on either side', ->
+    @dateOnlyIvlBeforeDateIvl.exec(@ctx).should.be.true()
+    @dateIvlAfterDateOnlyIvl.exec(@ctx).should.be.false()
+    @dateOnlyMeetsBeforeDateIvl.exec(@ctx).should.be.true()
+
+describe 'AfterOrOn', ->
+  @beforeEach ->
+    setup @, data
+
+  it 'should handle nominal datetime interval situations', ->
+    @meetsAfterDateIvl.exec(@ctx).should.be.true()
+    @meetsBeforeDateIvl.exec(@ctx).should.be.false()
+    @afterDateIvl.exec(@ctx).should.be.true()
+    @beforeDateIvl.exec(@ctx).should.be.false()
+
+  it 'should correctly handle imprecision', ->
+    should(@mayMeetAfterImpreciseDateIvl.exec(@ctx)).be.null()
+    @mayMeetBeforeImpreciseDateIvl.exec(@ctx).should.be.false()
+    @notMeetsImpreciseDateIvl.exec(@ctx).should.be.false()
+    @impreciseMayMeetAfterDateIvl.exec(@ctx).should.be.true()
+    @impreciseMayMeetBeforeDateIvl.exec(@ctx).should.be.false()
+    @impreciseNotMeetsDateIvl.exec(@ctx).should.be.false()
+
+  it 'should correctly compare using the requested precision', ->
+    @meetsAfterDayOfIvl.exec(@ctx).should.be.true()
+    @meetsBeforeDayOfIvl.exec(@ctx).should.be.false()
+    @notMeetsDayOfIvl.exec(@ctx).should.be.true()
+    @notMeetsDayOfImpreciseIVL.exec(@ctx).should.be.true()
+    should(@mayMeetAfterDayOfImpreciseIvl.exec(@ctx)).be.null()
+    @mayMeetBeforeDayOfImpreciseIvl.exec(@ctx).should.be.false()
+
+  it 'should handle intervals with null end', ->
+    should(@beforeNullEndIvl.exec(@ctx)).be.null()
+    should(@afterStartNullEndIvl.exec(@ctx)).be.null()
+    @nullEndStartBeforeIvl.exec(@ctx).should.be.false()
+    @nullEndStartAfterIvl.exec(@ctx).should.be.true()
+
+  it 'should handle intervals with null start', ->
+    @endsBeforeNullStartIvlEnds.exec(@ctx).should.be.false()
+    @afterEndOfNullStartIvl.exec(@ctx).should.be.true()
+    should(@nullStartStartBeforeIvl.exec(@ctx)).be.null()
+    should(@nullStartStartAfterIvl.exec(@ctx)).be.null()
+
+  it 'should handle null on either side', ->
+    should(@dateIvlBeforeNull.exec(@ctx)).be.null()
+    should(@nullBeforeDateIvl.exec(@ctx)).be.null()
+
+  it 'should handle Date and DateTime on either side', ->
+    @dateTimeBeforeDateIvl.exec(@ctx).should.be.false()
+    @dateBeforeDateIvl.exec(@ctx).should.be.false()
+    @dateIvlBeforeDateTime.exec(@ctx).should.be.false()
+    @dateIvlBeforeDate.exec(@ctx).should.be.false()
+
+  it 'should handle Interval<Date> and Interval<DateTime> on either side', ->
+    @dateOnlyIvlBeforeDateIvl.exec(@ctx).should.be.false()
+    @dateIvlAfterDateOnlyIvl.exec(@ctx).should.be.true()
+    @dateOnlyMeetsAfterDateIvl.exec(@ctx).should.be.true()
+
 describe 'Meets', ->
   @beforeEach ->
     setup @, data

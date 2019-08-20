@@ -374,6 +374,87 @@ define PosInfEndNotBeforeDateIvl: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), nul
 define UnknownEndMayBeBeforeDateIvl: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null) before Interval[DateTime(2020, 1, 1, 0, 0, 0, 0), DateTime(2040, 1, 1, 0, 0, 0, 0)]
 define UnknownEndNotBeforeDateIvl: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null) before Interval[DateTime(2000, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 1, 0, 0, 0, 0)]
 
+// @Test: BeforeOrOn
+define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0)]
+define MeetsAfterDateIvl: Interval[DateTime(2012, 9, 1, 0, 0, 0, 0), DateTime(2012, 12, 1, 0, 0, 0, 0)) before or on DateIvl
+define MeetsBeforeDateIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)) before or on DateIvl
+define AfterDateIvl: Interval[DateTime(2012, 10, 11, 0, 0, 0, 0), DateTime(2012, 10, 29, 0, 0, 0, 0)) before or on DateIvl
+define BeforeDateIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 2, 29, 0, 0, 0, 0)) before or on DateIvl
+define MayMeetAfterImpreciseDateIvl: DateIvl before or on Interval[DateTime(2012, 1), DateTime(2012, 2)]
+define MayMeetBeforeImpreciseDateIvl: DateIvl before or on Interval[DateTime(2012, 9), DateTime(2012, 12)]
+define NotMeetsImpreciseDateIvl: DateIvl before or on Interval[DateTime(2012, 1), DateTime(2012, 12)]
+define PrecisionDateIvl: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
+define MeetsAfterDayOfIvl: PrecisionDateIvl before or on day of Interval[DateTime(2012, 1, 2, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)]
+define MeetsBeforeDayOfIvl: PrecisionDateIvl before or on day of Interval[DateTime(2012, 9, 3, 0, 0, 0, 0), DateTime(2012, 12, 1, 0, 0, 0, 0)]
+define NotMeetsDayOfIvl: PrecisionDateIvl before or on day of Interval[DateTime(2012, 1, 2, 0, 0, 0, 0), DateTime(2012, 3, 2, 0, 0, 0, 0)]
+define NotMeetsDayOfImpreciseIVL: PrecisionDateIvl before or on day of Interval[DateTime(2012, 1), DateTime(2012, 2)]
+define MayMeetAfterDayOfImpreciseIvl: PrecisionDateIvl before or on day of Interval[DateTime(2012, 1), DateTime(2012, 3)]
+define MayMeetBeforeDayOfImpreciseIvl: PrecisionDateIvl before or on day of Interval[DateTime(2012, 9), DateTime(2012, 12)]
+define ImpDateIvl: Interval[DateTime(2012, 3), DateTime(2012, 8)]
+define ImpreciseMayMeetAfterDateIvl: ImpDateIvl before or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 2, 29, 23, 59, 59, 999)]
+define ImpreciseMayMeetBeforeDateIvl: ImpDateIvl before or on Interval[DateTime(2012, 9, 1, 0, 0, 0, 0), DateTime(2012, 12, 31, 23, 59, 59, 999)]
+define ImpreciseNotMeetsDateIvl: ImpDateIvl before or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 12, 31, 23, 59, 59, 999))
+define NullEndIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), null)
+define BeforeNullEndIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 2, 20, 0, 0, 0, 0)] before or on NullEndIvl
+define AfterStartNullEndIvl: Interval[DateTime(2012, 3, 10, 0, 0, 0, 0), DateTime(2012, 3, 20, 0, 0, 0, 0)] before or on NullEndIvl
+define NullEndStartBeforeIvl: NullEndIvl before or on Interval[DateTime(2012, 4, 1, 0, 0, 0, 0), DateTime(2012, 4, 20, 0, 0, 0, 0)]
+define NullEndStartAfterIvl: NullEndIvl before or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 20, 0, 0, 0, 0)]
+define NullStartIvl: Interval(null, DateTime(2012, 3, 1, 0, 0, 0, 0)]
+define EndsBeforeNullStartIvlEnds: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 2, 20, 0, 0, 0, 0)] before or on NullStartIvl
+define AfterEndOfNullStartIvl: Interval[DateTime(2012, 3, 10, 0, 0, 0, 0), DateTime(2012, 3, 20, 0, 0, 0, 0)] before or on NullStartIvl
+define NullStartStartBeforeIvl: NullStartIvl before or on Interval[DateTime(2012, 4, 1, 0, 0, 0, 0), DateTime(2012, 4, 20, 0, 0, 0, 0)]
+define NullStartStartAfterIvl: NullStartIvl before or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 20, 0, 0, 0, 0)]
+define DateIvlBeforeNull: DateIvl before or on null
+define NullBeforeDateIvl: null before or on DateIvl
+define DateTimeBeforeDateIvl: DateTime(2012, 2, 20, 0, 0, 0, 0) before or on DateIvl
+define DateBeforeDateIvl: Date(2012, 2, 20) before or on DateIvl
+define DateIvlBeforeDateTime: DateIvl before or on DateTime(2012, 9, 20, 0, 0, 0, 0)
+define DateIvlBeforeDate: DateIvl before or on DateTime(2012, 9, 20)
+define DateOnlyIvl: Interval[Date(2012, 1, 1), Date(2012, 2, 20)]
+define DateOnlyIvlBeforeDateIvl: DateOnlyIvl before or on DateIvl
+define DateIvlAfterDateOnlyIvl: DateIvl before or on DateOnlyIvl
+define DateOnlyMeetsBeforeDateIvl: Interval[Date(2012, 1, 1), Date(2012, 3, 1)] before or on DateIvl
+
+// @Test: AfterOrOn
+define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0)]
+define MeetsAfterDateIvl: Interval[DateTime(2012, 9, 1, 0, 0, 0, 0), DateTime(2012, 12, 1, 0, 0, 0, 0)) after or on DateIvl
+define MeetsBeforeDateIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)) after or on DateIvl
+define AfterDateIvl: Interval[DateTime(2012, 10, 11, 0, 0, 0, 0), DateTime(2012, 10, 29, 0, 0, 0, 0)) after or on DateIvl
+define BeforeDateIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 2, 29, 0, 0, 0, 0)) after or on DateIvl
+define MayMeetAfterImpreciseDateIvl: DateIvl after or on Interval[DateTime(2012, 1), DateTime(2012, 3)]
+define MayMeetBeforeImpreciseDateIvl: DateIvl after or on Interval[DateTime(2012, 9), DateTime(2012, 12)]
+define NotMeetsImpreciseDateIvl: DateIvl after or on Interval[DateTime(2012, 1), DateTime(2012, 12)]
+define PrecisionDateIvl: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
+define MeetsAfterDayOfIvl: PrecisionDateIvl after or on day of Interval[DateTime(2012, 1, 2, 0, 0, 0, 0), DateTime(2012, 3, 2, 0, 0, 0, 0)]
+define MeetsBeforeDayOfIvl: PrecisionDateIvl after or on day of Interval[DateTime(2012, 9, 3, 0, 0, 0, 0), DateTime(2012, 12, 1, 0, 0, 0, 0)]
+define NotMeetsDayOfIvl: PrecisionDateIvl after or on day of Interval[DateTime(2012, 1, 2, 0, 0, 0, 0), DateTime(2012, 3, 2, 0, 0, 0, 0)]
+define NotMeetsDayOfImpreciseIVL: PrecisionDateIvl after or on day of Interval[DateTime(2012, 1), DateTime(2012, 2)]
+define MayMeetAfterDayOfImpreciseIvl: PrecisionDateIvl after or on day of Interval[DateTime(2012, 1), DateTime(2012, 3)]
+define MayMeetBeforeDayOfImpreciseIvl: PrecisionDateIvl after or on day of Interval[DateTime(2012, 9), DateTime(2012, 12)]
+define ImpDateIvl: Interval[DateTime(2012, 3), DateTime(2012, 8)]
+define ImpreciseMayMeetAfterDateIvl: ImpDateIvl after or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 2, 29, 23, 59, 59, 999)]
+define ImpreciseMayMeetBeforeDateIvl: ImpDateIvl after or on Interval[DateTime(2012, 9, 1, 0, 0, 0, 0), DateTime(2012, 12, 31, 23, 59, 59, 999)]
+define ImpreciseNotMeetsDateIvl: ImpDateIvl after or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 12, 31, 23, 59, 59, 999))
+define NullEndIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), null)
+define BeforeNullEndIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 2, 20, 0, 0, 0, 0)] after or on NullEndIvl
+define AfterStartNullEndIvl: Interval[DateTime(2012, 3, 10, 0, 0, 0, 0), DateTime(2012, 3, 20, 0, 0, 0, 0)] after or on NullEndIvl
+define NullEndStartBeforeIvl: NullEndIvl after or on Interval[DateTime(2012, 4, 1, 0, 0, 0, 0), DateTime(2012, 4, 20, 0, 0, 0, 0)]
+define NullEndStartAfterIvl: NullEndIvl after or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 20, 0, 0, 0, 0)]
+define NullStartIvl: Interval(null, DateTime(2012, 3, 1, 0, 0, 0, 0)]
+define EndsBeforeNullStartIvlEnds: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 2, 20, 0, 0, 0, 0)] after or on NullStartIvl
+define AfterEndOfNullStartIvl: Interval[DateTime(2012, 3, 10, 0, 0, 0, 0), DateTime(2012, 3, 20, 0, 0, 0, 0)] after or on NullStartIvl
+define NullStartStartBeforeIvl: NullStartIvl after or on Interval[DateTime(2012, 4, 1, 0, 0, 0, 0), DateTime(2012, 4, 20, 0, 0, 0, 0)]
+define NullStartStartAfterIvl: NullStartIvl after or on Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 20, 0, 0, 0, 0)]
+define DateIvlBeforeNull: DateIvl after or on null
+define NullBeforeDateIvl: null after or on DateIvl
+define DateTimeBeforeDateIvl: DateTime(2012, 2, 20, 0, 0, 0, 0) after or on DateIvl
+define DateBeforeDateIvl: Date(2012, 2, 20) after or on DateIvl
+define DateIvlBeforeDateTime: DateIvl after or on DateTime(2012, 9, 20, 0, 0, 0, 0)
+define DateIvlBeforeDate: DateIvl after or on DateTime(2012, 9, 20)
+define DateOnlyIvl: Interval[Date(2012, 1, 1), Date(2012, 2, 20)]
+define DateOnlyIvlBeforeDateIvl: DateOnlyIvl after or on DateIvl
+define DateIvlAfterDateOnlyIvl: DateIvl after or on DateOnlyIvl
+define DateOnlyMeetsAfterDateIvl: Interval[Date(2012, 9, 1), Date(2012, 10, 1)] after or on DateIvl
 
 // @Test: Meets
 define MeetsAfterIntIvl: Interval[11, 15] meets Interval[5, 10]

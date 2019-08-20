@@ -207,6 +207,18 @@ module.exports.Interval = class Interval
     else
       @.start().sameAs(other.start(), precision) and @.end().sameAs(other.end(), precision)
 
+  sameOrBefore: (other, precision) ->
+    if !@end()? || !other?.start()?
+      return null
+    else
+      return @end().sameOrBefore(other.start(), precision)
+
+  sameOrAfter: (other, precision) ->
+    if !@start()? || !other?.end()?
+      return null
+    else
+      return @start().sameOrAfter(other.end(), precision)
+
   equals: (other) ->
     if other instanceof Interval
       [a, b] = [@toClosed(), other.toClosed()]

@@ -95,24 +95,6 @@ module.exports.TimezoneOffsetFrom = class TimezoneOffsetFrom extends Expression
     date = @execArgs(ctx)
     if date? then date.timezoneOffset else null
 
-module.exports.SameOrAfter = class SameOrAfter extends Expression
-  constructor: (json) ->
-    super
-    @precision = json.precision
-
-  exec: (ctx) ->
-    [d1, d2] = @execArgs(ctx)
-    if d1? and d2? then d1.sameOrAfter(d2, @precision?.toLowerCase()) else null
-
-module.exports.SameOrBefore = class SameOrBefore extends Expression
-  constructor: (json) ->
-    super
-    @precision = json.precision
-
-  exec: (ctx) ->
-    [d1, d2] = @execArgs(ctx)
-    if d1? and d2? then d1.sameOrBefore(d2, @precision?.toLowerCase()) else null
-
 # Delegated to by overloaded#After
 module.exports.doAfter = (a, b, precision) ->
   a.after b, precision
