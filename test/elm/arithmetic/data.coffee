@@ -15,6 +15,7 @@ define Eleven: 11
 define OnePlusTwo: 1 + 2
 define AddMultiple: 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10
 define AddVariables: Ten + Eleven
+define AddTime: Time(12) + 1 'hour'
 ###
 
 module.exports['Add'] = {
@@ -321,6 +322,55 @@ module.exports['Add'] = {
                   "localId" : "31",
                   "name" : "Eleven",
                   "type" : "ExpressionRef"
+               } ]
+            }
+         }, {
+            "localId" : "38",
+            "name" : "AddTime",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "38",
+                  "s" : [ {
+                     "value" : [ "define ","AddTime",": " ]
+                  }, {
+                     "r" : "37",
+                     "s" : [ {
+                        "r" : "35",
+                        "s" : [ {
+                           "r" : "34",
+                           "value" : [ "Time","(","12",")" ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "36",
+                        "s" : [ {
+                           "value" : [ "1 ","'hour'" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "37",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "35",
+                  "type" : "Time",
+                  "hour" : {
+                     "localId" : "34",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "12",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "36",
+                  "value" : 1,
+                  "unit" : "hour",
+                  "type" : "Quantity"
                } ]
             }
          } ]

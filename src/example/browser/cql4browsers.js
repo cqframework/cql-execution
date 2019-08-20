@@ -46298,6 +46298,13 @@
       if (!isValidDecimal(value.value)) {
         return true;
       }
+    } else if ((value.isTime != null) && value.isTime()) {
+      if (value.after(MAX_TIME_VALUE)) {
+        return true;
+      }
+      if (value.before(MIN_TIME_VALUE)) {
+        return true;
+      }
     } else if (value.isDateTime) {
       if (value.after(MAX_DATETIME_VALUE)) {
         return true;
@@ -46310,13 +46317,6 @@
         return true;
       }
       if (value.before(MIN_DATE_VALUE)) {
-        return true;
-      }
-    } else if (value.isTime) {
-      if (value.after(MAX_TIME_VALUE)) {
-        return true;
-      }
-      if (value.before(MIN_TIME_VALUE)) {
         return true;
       }
     } else if (Number.isInteger(value)) {
