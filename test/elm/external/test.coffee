@@ -7,10 +7,6 @@ vsets = require './valuesets'
 describe 'Retrieve', ->
   @beforeEach ->
     setup @, data, [ p1 ], vsets
-    @getValueType = (obj) ->
-      if obj?.json?.resourceType?
-        return "{http://hl7.org/fhir}#{obj.json.resourceType}"
-      return null
 
   it 'should find conditions', ->
     c = @conditions.exec(@ctx)
@@ -62,7 +58,8 @@ describe 'Retrieve', ->
     e.should.have.length(1)
     e[0].id().should.equal 'http://cqframework.org/3/2'
 
-  it 'should be able to tell if type is or is not external type at runtime', ->
-    results =  @executor.exec(@patientSource, null, @getValueType)
-    results.patientResults[3]['IsTrueRuntimeEncounter'].should.be.true()
-    results.patientResults[3]['IsFalseRuntimeEncounter'].should.be.false()
+  it 'should be able to tell if type is external type at runtime', ->
+    @isTrueRuntimeEncounter.exec(@ctx).should.be.true()
+
+  it 'should be able to tell if type is not external type at runtime', ->
+    @isFalseRuntimeEncounter.exec(@ctx).should.be.false()

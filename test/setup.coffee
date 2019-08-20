@@ -5,7 +5,11 @@ module.exports = (test, data, patients=[], valuesets={}, parameters={}, reposito
     test.lib = new Library(data[test.test.parent.title],repository)
     cservice = new CodeService(valuesets)
     psource = new PatientSource(patients)
-    test.ctx = new PatientContext(test.lib, psource.currentPatient(), cservice, parameters)
+    getValueType = (obj) ->
+      if obj?.json?.resourceType?
+        return "{http://hl7.org/fhir}#{obj.json.resourceType}"
+      return null
+    test.ctx = new PatientContext(test.lib, psource.currentPatient(), cservice, parameters, null, getValueType)
     test.executor = new Executor(test.lib,cservice,parameters)
 
     test.patientSource = psource

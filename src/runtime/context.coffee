@@ -8,13 +8,14 @@ Function::property = (prop, desc) ->
 
 module.exports.Context = class Context
 
-  constructor: (@parent, @_codeService = null, _parameters = {}) ->
+  constructor: (@parent, @_codeService = null, _parameters = {}, getValueType = ->) ->
     @context_values = {}
     @library_context = {}
     @localId_context = {}
     # TODO: If there is an issue with number of parameters look into cql4browsers fix: 387ea77538182833283af65e6341e7a05192304c
     @checkParameters(_parameters) # not crazy about possibly throwing an error in a constructor, but...
     @_parameters = _parameters
+    @getValueType = getValueType
 
   @property "parameters" ,
     get: ->
@@ -227,7 +228,7 @@ module.exports.Context = class Context
 
 module.exports.PatientContext = class PatientContext extends Context
   constructor: (@library, @patient, codeService, parameters, @executionDateTime = dt.DateTime.fromJSDate(new Date()), @getValueType = -> ) ->
-    super(@library, codeService, parameters)
+    super(@library, codeService, parameters, @getValueType)
 
   rootContext:  -> @
 
