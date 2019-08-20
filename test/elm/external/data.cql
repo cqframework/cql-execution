@@ -14,4 +14,5 @@ define WrongValueSet: [Condition: "Ambulatory/ED Visit"]
 define WrongCodeProperty: [Encounter: class in "Ambulatory/ED Visit"]
 define ConditionsByCode: [Condition: "Viral pharyngitis code"]
 define ConditionsByConcept: [Condition: "Viral pharyngitis"]
-
+define IsTrueRuntimeEncounter: First(AmbulatoryEncounters) is "Encounter"
+define IsFalseRuntimeEncounter: 'foo' + 'foo' is "Encounter"

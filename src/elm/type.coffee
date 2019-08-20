@@ -382,7 +382,7 @@ module.exports.Is = class Is extends Expression
         return obj.isTime? && obj.isTime()
 
     # Determine type at runtime using patient context
-    return ctx.parent?.getValueType(obj) is @expectedType
+    return ctx.getValueType(obj) is @expectedType
 
 module.exports.IntervalTypeSpecifier = class IntervalTypeSpecifier extends UnimplementedExpression
 module.exports.ListTypeSpecifier = class ListTypeSpecifier extends UnimplementedExpression

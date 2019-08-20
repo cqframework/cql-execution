@@ -25,7 +25,7 @@ module.exports.Executor = class Executor
 
   exec: (patientSource, executionDateTime, getValueType = ->) ->
     Results r = @exec_patient_context(patientSource, executionDateTime, getValueType)
-    unfilteredContext = new UnfilteredContext(@library,r,@codeService,@parameters)
+    unfilteredContext = new UnfilteredContext(@library,r,@codeService,@parameters, getValueType)
     for key,expr of @library.expressions when expr.context is "Unfiltered"
        r.recordUnfilteredResult( key, expr.exec(unfilteredContext))
     r

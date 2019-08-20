@@ -25,6 +25,8 @@ define WrongValueSet: [Condition: "Ambulatory/ED Visit"]
 define WrongCodeProperty: [Encounter: class in "Ambulatory/ED Visit"]
 define ConditionsByCode: [Condition: "Viral pharyngitis code"]
 define ConditionsByConcept: [Condition: "Viral pharyngitis"]
+define IsTrueRuntimeEncounter: First(AmbulatoryEncounters) is "Encounter"
+define IsFalseRuntimeEncounter: 'foo' + 'foo' is "Encounter"
 ###
 
 module.exports['Retrieve'] = {
@@ -431,6 +433,123 @@ module.exports['Retrieve'] = {
                      "name" : "Viral pharyngitis",
                      "type" : "ConceptRef"
                   }
+               }
+            }
+         }, {
+            "localId" : "32",
+            "name" : "IsTrueRuntimeEncounter",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "32",
+                  "s" : [ {
+                     "value" : [ "define ","IsTrueRuntimeEncounter",": " ]
+                  }, {
+                     "r" : "31",
+                     "s" : [ {
+                        "r" : "29",
+                        "s" : [ {
+                           "value" : [ "First","(" ]
+                        }, {
+                           "r" : "28",
+                           "s" : [ {
+                              "value" : [ "AmbulatoryEncounters" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "30",
+                        "s" : [ {
+                           "value" : [ "\"Encounter\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "31",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "29",
+                  "type" : "First",
+                  "source" : {
+                     "localId" : "28",
+                     "name" : "AmbulatoryEncounters",
+                     "type" : "ExpressionRef"
+                  }
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "30",
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "localId" : "38",
+            "name" : "IsFalseRuntimeEncounter",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "38",
+                  "s" : [ {
+                     "value" : [ "define ","IsFalseRuntimeEncounter",": " ]
+                  }, {
+                     "r" : "37",
+                     "s" : [ {
+                        "r" : "35",
+                        "s" : [ {
+                           "r" : "33",
+                           "s" : [ {
+                              "value" : [ "'foo'" ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "34",
+                           "s" : [ {
+                              "value" : [ "'foo'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " is " ]
+                     }, {
+                        "r" : "36",
+                        "s" : [ {
+                           "value" : [ "\"Encounter\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "37",
+               "type" : "Is",
+               "operand" : {
+                  "localId" : "35",
+                  "type" : "Concatenate",
+                  "operand" : [ {
+                     "localId" : "33",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "foo",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "34",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "foo",
+                     "type" : "Literal"
+                  } ]
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "36",
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier"
                }
             }
          } ]

@@ -9253,7 +9253,7 @@
     }
 
     Is.prototype.exec = function(ctx) {
-      var obj, ref4;
+      var obj;
       if (this.arg.valueType != null) {
         return this.arg.valueType === this.expectedType;
       }
@@ -9282,7 +9282,7 @@
         case "{urn:hl7-org:elm-types:r1}Time":
           return (obj.isTime != null) && obj.isTime();
       }
-      return ((ref4 = ctx.parent) != null ? ref4.getValueType(obj) : void 0) === this.expectedType;
+      return ctx.getValueType(obj) === this.expectedType;
     };
 
     return Is;
@@ -45836,10 +45836,11 @@
   module.exports.UnfilteredContext = UnfilteredContext = (function(superClass) {
     extend(UnfilteredContext, superClass);
 
-    function UnfilteredContext(library1, results, codeService, parameters, executionDateTime) {
+    function UnfilteredContext(library1, results, codeService, parameters, executionDateTime, getValueType) {
       this.library = library1;
       this.results = results;
       this.executionDateTime = executionDateTime != null ? executionDateTime : dt.DateTime.fromJSDate(new Date());
+      this.getValueType = getValueType != null ? getValueType : function() {};
       UnfilteredContext.__super__.constructor.call(this, this.library, codeService, parameters);
     }
 
@@ -45928,7 +45929,7 @@
         getValueType = function() {};
       }
       Results(r = this.exec_patient_context(patientSource, executionDateTime, getValueType));
-      unfilteredContext = new UnfilteredContext(this.library, r, this.codeService, this.parameters);
+      unfilteredContext = new UnfilteredContext(this.library, r, this.codeService, this.parameters, getValueType);
       ref = this.library.expressions;
       for (key in ref) {
         expr = ref[key];
