@@ -7979,7 +7979,7 @@
       results = [];
       for (i = 0, len = records.length; i < len; i++) {
         rec = records[i];
-        rctx = new Context(ctx);
+        rctx = new Context(ctx, ctx.codeService, ctx.parameters, ctx.executionDateTime, ctx.getValueType);
         rctx.set(this.alias, rec);
         if (this.rest) {
           results.push(this.rest.forEach(rctx, func));
@@ -45457,21 +45457,19 @@
   };
 
   module.exports.Context = Context = (function() {
-    function Context(parent, _codeService, _parameters, getValueType) {
+    function Context(parent, _codeService, _parameters, executionDateTime, getValueType) {
       this.parent = parent;
       this._codeService = _codeService != null ? _codeService : null;
       if (_parameters == null) {
         _parameters = {};
       }
-      if (getValueType == null) {
-        getValueType = function() {};
-      }
+      this.executionDateTime = executionDateTime;
+      this.getValueType = getValueType != null ? getValueType : function() {};
       this.context_values = {};
       this.library_context = {};
       this.localId_context = {};
       this.checkParameters(_parameters);
       this._parameters = _parameters;
-      this.getValueType = getValueType;
     }
 
     Context.property("parameters", {
@@ -45806,11 +45804,11 @@
   module.exports.PatientContext = PatientContext = (function(superClass) {
     extend(PatientContext, superClass);
 
-    function PatientContext(library1, patient, codeService, parameters, executionDateTime, getValueType1) {
+    function PatientContext(library1, patient, codeService, parameters, executionDateTime, getValueType) {
       this.library = library1;
       this.patient = patient;
       this.executionDateTime = executionDateTime != null ? executionDateTime : dt.DateTime.fromJSDate(new Date());
-      this.getValueType = getValueType1 != null ? getValueType1 : function() {};
+      this.getValueType = getValueType != null ? getValueType : function() {};
       PatientContext.__super__.constructor.call(this, this.library, codeService, parameters, this.getValueType);
     }
 
@@ -45840,11 +45838,11 @@
   module.exports.UnfilteredContext = UnfilteredContext = (function(superClass) {
     extend(UnfilteredContext, superClass);
 
-    function UnfilteredContext(library1, results, codeService, parameters, executionDateTime, getValueType1) {
+    function UnfilteredContext(library1, results, codeService, parameters, executionDateTime, getValueType) {
       this.library = library1;
       this.results = results;
       this.executionDateTime = executionDateTime != null ? executionDateTime : dt.DateTime.fromJSDate(new Date());
-      this.getValueType = getValueType1 != null ? getValueType1 : function() {};
+      this.getValueType = getValueType != null ? getValueType : function() {};
       UnfilteredContext.__super__.constructor.call(this, this.library, codeService, parameters);
     }
 

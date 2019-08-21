@@ -185,7 +185,7 @@ class MultiSource
     @isList = typeIsArray(records)
     records = if @isList then records else [records]
     for rec in records
-      rctx = new Context(ctx)
+      rctx = new Context(ctx, ctx.codeService, ctx.parameters, ctx.executionDateTime, ctx.getValueType)
       rctx.set(@alias,rec)
       if @rest
         @rest.forEach(rctx,func)
