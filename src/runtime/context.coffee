@@ -243,7 +243,7 @@ module.exports.PatientContext = class PatientContext extends Context
 module.exports.UnfilteredContext = class UnfilteredContext extends Context
 
   constructor: (@library, @results, codeService, parameters, @executionDateTime = dt.DateTime.fromJSDate(new Date()), @getValueType = ->) ->
-    super(@library, codeService, parameters)
+    super(@library, codeService, parameters, @executionDateTime, @getValueType)
 
   rootContext:  -> @
 

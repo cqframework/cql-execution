@@ -45843,7 +45843,7 @@
       this.results = results;
       this.executionDateTime = executionDateTime != null ? executionDateTime : dt.DateTime.fromJSDate(new Date());
       this.getValueType = getValueType != null ? getValueType : function() {};
-      UnfilteredContext.__super__.constructor.call(this, this.library, codeService, parameters);
+      UnfilteredContext.__super__.constructor.call(this, this.library, codeService, parameters, this.executionDateTime, this.getValueType);
     }
 
     UnfilteredContext.prototype.rootContext = function() {
