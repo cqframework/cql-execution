@@ -45809,7 +45809,7 @@
       this.patient = patient;
       this.executionDateTime = executionDateTime != null ? executionDateTime : dt.DateTime.fromJSDate(new Date());
       this.getValueType = getValueType != null ? getValueType : function() {};
-      PatientContext.__super__.constructor.call(this, this.library, codeService, parameters, this.getValueType);
+      PatientContext.__super__.constructor.call(this, this.library, codeService, parameters, this.executionDateTime, this.getValueType);
     }
 
     PatientContext.prototype.rootContext = function() {
