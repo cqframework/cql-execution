@@ -4,6 +4,7 @@ define Eleven: 11
 define OnePlusTwo: 1 + 2
 define AddMultiple: 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10
 define AddVariables: Ten + Eleven
+define AddTime: Time(12) + 1 'hour'
 
 // @Test: Subtract
 define Ten: 10

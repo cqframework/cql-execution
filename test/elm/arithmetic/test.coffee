@@ -42,6 +42,9 @@ describe 'Add', ->
   it 'should add variables', ->
     @addVariables.exec(@ctx).should.equal 21
 
+  it 'should add Time/Quantity', ->
+    @addTime.exec(@ctx).isTime().should.be.true()
+
 describe 'Subtract', ->
   @beforeEach ->
     setup @, data
