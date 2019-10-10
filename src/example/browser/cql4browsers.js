@@ -3506,11 +3506,12 @@
     function ValueSetRef(json) {
       ValueSetRef.__super__.constructor.apply(this, arguments);
       this.name = json.name;
+      this.libraryName = json.libraryName;
     }
 
     ValueSetRef.prototype.exec = function(ctx) {
       var valueset;
-      valueset = ctx.getValueSet(this.name);
+      valueset = ctx.getValueSet(this.name, this.libraryName);
       if (valueset instanceof Expression) {
         valueset = valueset.execute(ctx);
       }
@@ -5578,8 +5579,12 @@
       return this.expressions[identifier] || this.includes[identifier];
     };
 
-    Library.prototype.getValueSet = function(identifier) {
-      return this.valuesets[identifier];
+    Library.prototype.getValueSet = function(identifier, libraryName) {
+      if (libraryName != null) {
+        return this.includes[libraryName].valuesets[identifier];
+      } else {
+        return this.valuesets[identifier];
+      }
     };
 
     Library.prototype.getCodeSystem = function(identifier) {
@@ -45215,9 +45220,9 @@
       }
     };
 
-    Context.prototype.getValueSet = function(name) {
+    Context.prototype.getValueSet = function(name, library) {
       var ref;
-      return (ref = this.parent) != null ? ref.getValueSet(name) : void 0;
+      return (ref = this.parent) != null ? ref.getValueSet(name, library) : void 0;
     };
 
     Context.prototype.getCodeSystem = function(name) {
