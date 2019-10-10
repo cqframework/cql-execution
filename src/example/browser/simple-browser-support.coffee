@@ -9,7 +9,7 @@ window.executeSimpleELM = (elm, patientSource, valueSets, libraryName, version, 
       lib = new cql.Library(elm[0])
   else
     lib = new cql.Library(elm)
-    
+
   codeService = new cql.CodeService(valueSets)
-  executor = new cql.Executor(lib, codeService, parameters);
+  executor = new cql.Executor(lib, codeService, parameters)
   executor.exec(patientSource, executionDateTime)

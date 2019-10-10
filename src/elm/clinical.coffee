@@ -19,10 +19,11 @@ module.exports.ValueSetRef = class ValueSetRef extends Expression
   constructor: (json) ->
     super
     @name = json.name
+    @libraryName = json.libraryName
 
   exec: (ctx) ->
     # TODO: This calls the code service every time-- should be optimized
-    valueset = ctx.getValueSet(@name)
+    valueset = ctx.getValueSet(@name, @libraryName)
     if valueset instanceof Expression
       valueset = valueset.execute(ctx)
     valueset
