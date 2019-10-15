@@ -4659,6 +4659,9 @@
       codes = this.codes;
       if (this.codes && typeof this.codes.exec === 'function') {
         codes = this.codes.execute(ctx);
+        if (codes == null) {
+          return [];
+        }
       }
       if (codes) {
         records = records.filter((function(_this) {
