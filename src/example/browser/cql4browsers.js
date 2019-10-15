@@ -5580,11 +5580,11 @@
     };
 
     Library.prototype.getValueSet = function(identifier, libraryName) {
-      if (libraryName != null) {
-        return this.includes[libraryName].valuesets[identifier];
-      } else {
+      var ref;
+      if (this.valuesets[identifier] != null) {
         return this.valuesets[identifier];
       }
+      return (ref = this.includes[libraryName]) != null ? ref.valuesets[identifier] : void 0;
     };
 
     Library.prototype.getCodeSystem = function(identifier) {
