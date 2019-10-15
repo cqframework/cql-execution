@@ -17,8 +17,6 @@ module.exports.Retrieve = class Retrieve extends Expression
     codes = @codes
     if @codes && typeof @codes.exec == 'function'
       codes = @codes.execute(ctx)
-      if !codes?
-        return []
     if codes
       records = records.filter (r) => @recordMatchesCodesOrVS(r, codes)
     # TODO: Added @dateProperty check due to previous fix in cql4browsers in cql_qdm_patient_api hash: ddbc57
