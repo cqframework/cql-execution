@@ -9,8 +9,9 @@
 ### Retrieve
 library TestSnippet version '1'
 using QUICK
+include Included version '1' called included
+
 codesystem "SNOMED": '2.16.840.1.113883.6.96'
-valueset "Acute Pharyngitis": '2.16.840.1.113883.3.464.1003.102.12.1011'
 valueset "Ambulatory/ED Visit": '2.16.840.1.113883.3.464.1003.101.12.1061'
 valueset "Annual Wellness Visit": '2.16.840.1.113883.3.526.3.1240'
 code "Viral pharyngitis code": '1532007' from "SNOMED" display 'Viral pharyngitis (disorder)'
@@ -18,7 +19,7 @@ concept "Viral pharyngitis": { "Viral pharyngitis code" } display 'Viral pharyng
 context Patient
 define Conditions: [Condition]
 define Encounters: [Encounter]
-define PharyngitisConditions: [Condition: "Acute Pharyngitis"]
+define PharyngitisConditions: [Condition: included."Acute Pharyngitis"]
 define AmbulatoryEncounters: [Encounter: "Ambulatory/ED Visit"]
 define EncountersByServiceType: [Encounter: type in "Ambulatory/ED Visit"]
 define WrongValueSet: [Condition: "Ambulatory/ED Visit"]
@@ -47,9 +48,17 @@ module.exports['Retrieve'] = {
             "uri" : "http://hl7.org/fhir"
          } ]
       },
-      "codeSystems" : {
+      "includes" : {
          "def" : [ {
             "localId" : "2",
+            "localIdentifier" : "included",
+            "path" : "Included",
+            "version" : "1"
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "localId" : "3",
             "name" : "SNOMED",
             "id" : "2.16.840.1.113883.6.96",
             "accessLevel" : "Public"
@@ -57,11 +66,6 @@ module.exports['Retrieve'] = {
       },
       "valueSets" : {
          "def" : [ {
-            "localId" : "3",
-            "name" : "Acute Pharyngitis",
-            "id" : "2.16.840.1.113883.3.464.1003.102.12.1011",
-            "accessLevel" : "Public"
-         }, {
             "localId" : "4",
             "name" : "Ambulatory/ED Visit",
             "id" : "2.16.840.1.113883.3.464.1003.101.12.1061",
@@ -177,7 +181,7 @@ module.exports['Retrieve'] = {
                         "value" : [ "[","Condition",": " ]
                      }, {
                         "s" : [ {
-                           "value" : [ "\"Acute Pharyngitis\"" ]
+                           "value" : [ "included",".","\"Acute Pharyngitis\"" ]
                         } ]
                      }, {
                         "value" : [ "]" ]
@@ -193,6 +197,7 @@ module.exports['Retrieve'] = {
                "type" : "Retrieve",
                "codes" : {
                   "name" : "Acute Pharyngitis",
+                  "libraryName" : "included",
                   "type" : "ValueSetRef"
                }
             }
@@ -433,6 +438,53 @@ module.exports['Retrieve'] = {
                   }
                }
             }
+         } ]
+      }
+   }
+}
+
+### Included
+library Included version '1'
+using QUICK
+
+codesystem "SNOMED": '2.16.840.1.113883.6.96'
+valueset "Acute Pharyngitis": '2.16.840.1.113883.3.464.1003.102.12.1011''
+###
+
+module.exports['Included'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "Included",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "localId" : "2",
+            "name" : "SNOMED",
+            "id" : "2.16.840.1.113883.6.96",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "localId" : "3",
+            "name" : "Acute Pharyngitis",
+            "id" : "2.16.840.1.113883.3.464.1003.102.12.1011",
+            "accessLevel" : "Public"
          } ]
       }
    }
