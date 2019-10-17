@@ -79,8 +79,8 @@ module.exports.Context = class Context
     else
       throw new Exception("No Execution DateTime has been set")
 
-  getValueSet: (name) ->
-    @parent?.getValueSet(name)
+  getValueSet: (name, library) ->
+    @parent?.getValueSet(name, library)
 
   getCodeSystem: (name) ->
     @parent?.getCodeSystem(name)

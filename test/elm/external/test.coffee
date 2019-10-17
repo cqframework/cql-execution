@@ -3,10 +3,11 @@ setup = require '../../setup'
 data = require './data'
 vsets = require './valuesets'
 { p1 } = require './patients'
+{Repository} = require '../../../lib/cql'
 
 describe 'Retrieve', ->
   @beforeEach ->
-    setup @, data, [ p1 ], vsets
+    setup @, data, [ p1 ], vsets, {}, new Repository(data)
 
   it 'should find conditions', ->
     c = @conditions.exec(@ctx)
@@ -21,7 +22,7 @@ describe 'Retrieve', ->
     e[1].id().should.equal 'http://cqframework.org/3/3'
     e[2].id().should.equal 'http://cqframework.org/3/5'
 
-  it 'should find observations with a value set', ->
+  it 'should find observations with a value set from included library', ->
     p = @pharyngitisConditions.exec(@ctx)
     p.should.have.length(1)
     p[0].id().should.equal 'http://cqframework.org/3/2'

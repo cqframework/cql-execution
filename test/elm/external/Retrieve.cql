@@ -1,5 +1,7 @@
-// @Test: Retrieve
-include Included version '1' called included
+library Retrieve version '1'
+using QUICK
+
+include Included called included
 
 codesystem "SNOMED": '2.16.840.1.113883.6.96'
 valueset "Ambulatory/ED Visit": '2.16.840.1.113883.3.464.1003.101.12.1061'
@@ -15,11 +17,3 @@ define WrongValueSet: [Condition: "Ambulatory/ED Visit"]
 define WrongCodeProperty: [Encounter: class in "Ambulatory/ED Visit"]
 define ConditionsByCode: [Condition: "Viral pharyngitis code"]
 define ConditionsByConcept: [Condition: "Viral pharyngitis"]
-
-// @Test: Included
-library Included version '1'
-using QUICK
-
-codesystem "SNOMED": '2.16.840.1.113883.6.96'
-valueset "Acute Pharyngitis": '2.16.840.1.113883.3.464.1003.102.12.1011'
-
