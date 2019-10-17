@@ -3,7 +3,7 @@ module.exports.Executor = class Executor
   constructor: (@library,@codeService,@parameters) ->
 
   withLibrary: (lib) ->
-    @library = lib 
+    @library = lib
     @
 
   withParameters: (params) ->

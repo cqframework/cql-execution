@@ -29,8 +29,10 @@ module.exports.Library = class Library
   get: (identifier) ->
     @expressions[identifier] || @includes[identifier]
 
-  getValueSet: (identifier) ->
-    @valuesets[identifier]
+  getValueSet: (identifier, libraryName) ->
+    if @valuesets[identifier]?
+      return @valuesets[identifier]
+    return @includes[libraryName]?.valuesets[identifier]
 
   getCodeSystem: (identifier) ->
     @codesystems[identifier]
