@@ -92,9 +92,11 @@ module.exports.Context = class Context
     @parent?.getConcept(name)
 
   get: (identifier) ->
+    if identifier == "$this"
+      @context_values
     # Check for undefined because if its null, we actually *do* want to return null (rather than looking at parent),
     # but if it's really undefined, *then* look at the parent
-    if typeof @context_values[identifier] isnt 'undefined'
+    else if typeof @context_values[identifier] isnt 'undefined'
       @context_values[identifier]
     else
       @parent?.get(identifier)

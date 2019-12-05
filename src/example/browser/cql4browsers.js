@@ -45245,7 +45245,9 @@
 
     Context.prototype.get = function(identifier) {
       var ref;
-      if (typeof this.context_values[identifier] !== 'undefined') {
+      if (identifier === "$this") {
+        return this.context_values;
+      } else if (typeof this.context_values[identifier] !== 'undefined') {
         return this.context_values[identifier];
       } else {
         return (ref = this.parent) != null ? ref.get(identifier) : void 0;
