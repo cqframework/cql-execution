@@ -52,6 +52,9 @@ define TupleReturnTupleAsc: [Encounter] E return {E : E} sort by E.id
 define TupleDesc: [Encounter] E sort by id desc
 define TupleReturnDesc: [Encounter] E return E sort by id desc
 define TupleReturnTupleDesc:  [Encounter] E return {E : E} sort by E.id desc
+define ConditionDates: [Condition] C return C.onsetDateTime
+define lastDateUnsorted: Last("ConditionDates")
+define lastDateByThis: Last("ConditionDates" CD sort by $this)
 define numberAsc: ({8, 6, 7, 5, 3, 0, 9}) N sort asc
 define numberReturnAsc: ({8, 6, 7, 5, 3, 0, 9}) N return N sort asc
 define numberDesc: ({8, 6, 7, 5, 3, 0, 9}) N sort desc

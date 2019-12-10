@@ -2,6 +2,7 @@ should = require 'should'
 setup = require '../../setup'
 data = require './data'
 vsets = require './valuesets'
+{ DateTime } = require '../../../lib/datatypes/datetime'
 { p1 } = require './patients'
 
 describe 'DateRangeOptimizedQuery', ->
@@ -137,6 +138,14 @@ describe 'Sorting', ->
     e[2].E.id().should.equal "http://cqframework.org/3/1"
     e[1].E.id().should.equal  "http://cqframework.org/3/3"
     e[0].E.id().should.equal  "http://cqframework.org/3/5"
+
+  it 'should be able to sort dates by this' , ->
+    d1 = new DateTime(1982, 3, 12, null, null, null, null, -5)
+    d2 = new DateTime(2010, 10, 24, null, null, null, null, -5)
+    unsortedDate = @lastDateUnsorted.exec(@ctx)
+    unsortedDate.should.eql d1
+    sortedDate = @lastDateByThis.exec(@ctx)
+    sortedDate.should.eql d2
 
   it 'should be able to sort by number asc' , ->
     e = @numberAsc.exec(@ctx)

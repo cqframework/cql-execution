@@ -28,6 +28,17 @@ module.exports.p1 = {
           "period": { "start": "1978-07-15T10:00", "end": "1978-07-15T10:45" }
           }
     },
+    {
+      "resource":{
+          "resourceType" : "Condition",
+          "id" : "http://cqframework.org/3/4",
+          "meta" :{ "profile" : ["condition-qicore-qicore-condition"]},
+          "identifier": [{ "value": "http://cqframework.org/3/4", "system": "http://cqframework.org" }],
+          "code": {"coding":[{ "code": "109962001", "system": "2.16.840.1.113883.6.96", "version": "2013-09", "display": "Diffuse non-Hodgkin's lymphoma (disorder)" }]},
+          "onsetDateTime": "2010-10-24",
+          "issued": "2011-02-01T11:55:00"
+          }
+    },
     {"resource": {
           "resourceType" : "Condition",
           "id" : "http://cqframework.org/3/2",
@@ -47,16 +58,6 @@ module.exports.p1 = {
           "class": "outpatient" ,
           "type": [{"coding" : [{ "code": "406547006", "system": "2.16.840.1.113883.6.96", "version": "2013-09", "display": "Urgent follow-up (procedure)" }]}],
           "period": { "start": "1982-03-15T15:00", "end": "1982-03-15T15:30" }
-          }
-    }, {
-      "resource":{
-          "resourceType" : "Condition",
-          "id" : "http://cqframework.org/3/4",
-          "meta" :{ "profile" : ["condition-qicore-qicore-condition"]},
-          "identifier": [{ "value": "http://cqframework.org/3/4", "system": "http://cqframework.org" }],
-          "code": {"coding":[{ "code": "109962001", "system": "2.16.840.1.113883.6.96", "version": "2013-09", "display": "Diffuse non-Hodgkin's lymphoma (disorder)" }]},
-          "onsetDateTime": "2010-10-24",
-          "issued": "2011-02-01T11:55:00"
           }
     },
     { "resource": {
