@@ -399,6 +399,261 @@ module.exports['DateRangeOptimizedQuery'] = {
    }
 }
 
+### FunctionQuery
+library TestSnippet version '1'
+using QUICK
+context Patient
+define function "FunctionWithThis"(Encounter List<"Encounter">): Count(Encounter.period EncounterPeriod return EncounterPeriod)
+define queryWithThis: "FunctionWithThis"([Encounter] E) > 0
+###
+
+module.exports['FunctionQuery'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "patient-qicore-qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "10",
+            "name" : "FunctionWithThis",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "10",
+                  "s" : [ {
+                     "value" : [ "define function ","\"FunctionWithThis\"","(","Encounter"," " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "List<" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "\"Encounter\"" ]
+                        } ]
+                     }, {
+                        "value" : [ ">" ]
+                     } ]
+                  }, {
+                     "value" : [ "): " ]
+                  }, {
+                     "r" : "9",
+                     "s" : [ {
+                        "r" : "9",
+                        "s" : [ {
+                           "value" : [ "Count","(" ]
+                        }, {
+                           "r" : "8",
+                           "s" : [ {
+                              "s" : [ {
+                                 "r" : "5",
+                                 "s" : [ {
+                                    "r" : "4",
+                                    "s" : [ {
+                                       "s" : [ {
+                                          "value" : [ "Encounter",".","period" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","EncounterPeriod" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " " ]
+                           }, {
+                              "r" : "7",
+                              "s" : [ {
+                                 "value" : [ "return " ]
+                              }, {
+                                 "r" : "6",
+                                 "s" : [ {
+                                    "value" : [ "EncounterPeriod" ]
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "9",
+               "type" : "Count",
+               "source" : {
+                  "localId" : "8",
+                  "type" : "Query",
+                  "source" : [ {
+                     "localId" : "5",
+                     "alias" : "EncounterPeriod",
+                     "expression" : {
+                        "localId" : "4",
+                        "type" : "Query",
+                        "source" : [ {
+                           "alias" : "$this",
+                           "expression" : {
+                              "name" : "Encounter",
+                              "type" : "OperandRef"
+                           }
+                        } ],
+                        "where" : {
+                           "type" : "Not",
+                           "operand" : {
+                              "type" : "IsNull",
+                              "operand" : {
+                                 "path" : "period",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "name" : "$this",
+                                    "type" : "AliasRef"
+                                 }
+                              }
+                           }
+                        },
+                        "return" : {
+                           "expression" : {
+                              "path" : "period",
+                              "type" : "Property",
+                              "source" : {
+                                 "name" : "$this",
+                                 "type" : "AliasRef"
+                              }
+                           }
+                        }
+                     }
+                  } ],
+                  "relationship" : [ ],
+                  "return" : {
+                     "localId" : "7",
+                     "expression" : {
+                        "localId" : "6",
+                        "name" : "EncounterPeriod",
+                        "type" : "AliasRef"
+                     }
+                  }
+               }
+            },
+            "operand" : [ {
+               "name" : "Encounter",
+               "operandTypeSpecifier" : {
+                  "localId" : "3",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "2",
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            } ]
+         }, {
+            "localId" : "17",
+            "name" : "queryWithThis",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "17",
+                  "s" : [ {
+                     "value" : [ "define ","queryWithThis",": " ]
+                  }, {
+                     "r" : "16",
+                     "s" : [ {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "\"FunctionWithThis\"","(" ]
+                        }, {
+                           "r" : "13",
+                           "s" : [ {
+                              "s" : [ {
+                                 "r" : "12",
+                                 "s" : [ {
+                                    "r" : "11",
+                                    "s" : [ {
+                                       "r" : "11",
+                                       "s" : [ {
+                                          "value" : [ "[","Encounter","]" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","E" ]
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "r" : "15",
+                        "value" : [ " ",">"," ","0" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "16",
+               "type" : "Greater",
+               "operand" : [ {
+                  "localId" : "14",
+                  "name" : "FunctionWithThis",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "localId" : "13",
+                     "type" : "Query",
+                     "source" : [ {
+                        "localId" : "12",
+                        "alias" : "E",
+                        "expression" : {
+                           "localId" : "11",
+                           "dataType" : "{http://hl7.org/fhir}Encounter",
+                           "templateId" : "encounter-qicore-qicore-encounter",
+                           "type" : "Retrieve"
+                        }
+                     } ],
+                     "relationship" : [ ]
+                  } ]
+               }, {
+                  "localId" : "15",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
 ### IncludesQuery
 library TestSnippet version '1'
 using QUICK
