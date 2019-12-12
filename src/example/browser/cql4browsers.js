@@ -45246,7 +45246,11 @@
     Context.prototype.get = function(identifier) {
       var ref;
       if (identifier === "$this") {
-        return this.context_values;
+        if (typeof this.context_values[identifier] !== 'undefined') {
+          return this.context_values[identifier];
+        } else {
+          return this.context_values;
+        }
       } else if (typeof this.context_values[identifier] !== 'undefined') {
         return this.context_values[identifier];
       } else {
