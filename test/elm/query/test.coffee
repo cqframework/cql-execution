@@ -24,6 +24,14 @@ describe 'DateRangeOptimizedQuery', ->
     e.should.have.length(1)
     e[0].id().should.equal 'http://cqframework.org/3/5'
 
+describe 'FunctionQuery', ->
+  @beforeEach ->
+    setup @, data, [ p1 ], vsets
+
+  it 'function with this' , ->
+    functionReturnsDates = @queryWithThis.exec(@ctx)
+    functionReturnsDates.should.eql true
+
 describe.skip 'IncludesQuery', ->
   @beforeEach ->
     setup @, data, [ p1 ], vsets

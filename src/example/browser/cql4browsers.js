@@ -45245,10 +45245,10 @@
 
     Context.prototype.get = function(identifier) {
       var ref;
-      if (identifier === "$this") {
-        return this.context_values;
-      } else if (typeof this.context_values[identifier] !== 'undefined') {
+      if (typeof this.context_values[identifier] !== 'undefined') {
         return this.context_values[identifier];
+      } else if (identifier === "$this") {
+        return this.context_values;
       } else {
         return (ref = this.parent) != null ? ref.get(identifier) : void 0;
       }

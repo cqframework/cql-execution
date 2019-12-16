@@ -5,6 +5,10 @@ define EncountersDuringMP: [Encounter] E where E.period during MeasurementPeriod
 define AmbulatoryEncountersDuringMP: [Encounter: "Ambulatory/ED Visit"] E where E.period during MeasurementPeriod
 define AmbulatoryEncountersIncludedInMP: [Encounter: "Ambulatory/ED Visit"] E where E.period included in MeasurementPeriod
 
+// @Test: FunctionQuery
+define function "FunctionWithThis"(Encounter List<"Encounter">): Count(Encounter.period EncounterPeriod return EncounterPeriod)
+define queryWithThis: "FunctionWithThis"([Encounter] E) > 0
+
 // @Test: IncludesQuery
 valueset "Ambulatory/ED Visit": '2.16.840.1.113883.3.464.1003.101.12.1061'
 parameter MeasurementPeriod default Interval[DateTime(2013, 1, 1), DateTime(2014, 1, 1))
