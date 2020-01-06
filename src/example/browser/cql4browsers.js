@@ -1838,12 +1838,35 @@
     };
 
     Interval.prototype.contains = function(item, precision) {
-      var closed;
+      var highFn, lowFn;
       if (item instanceof Interval) {
         throw new Error("Argument to contains must be a point");
       }
-      closed = this.toClosed();
-      return ThreeValuedLogic.and(cmp.lessThanOrEquals(closed.low, item, precision), cmp.greaterThanOrEquals(closed.high, item, precision));
+      lowFn = (function() {
+        switch (false) {
+          case !(this.lowClosed && (this.low == null)):
+            return function() {
+              return true;
+            };
+          case !this.lowClosed:
+            return cmp.lessThanOrEquals;
+          default:
+            return cmp.lessThan;
+        }
+      }).call(this);
+      highFn = (function() {
+        switch (false) {
+          case !(this.highClosed && (this.high == null)):
+            return function() {
+              return true;
+            };
+          case !this.highClosed:
+            return cmp.greaterThanOrEquals;
+          default:
+            return cmp.greaterThan;
+        }
+      }).call(this);
+      return ThreeValuedLogic.and(lowFn(this.low, item, precision), highFn(this.high, item, precision));
     };
 
     Interval.prototype.properlyIncludes = function(other, precision) {
