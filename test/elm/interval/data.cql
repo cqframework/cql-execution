@@ -51,47 +51,55 @@ define ContainsQuantity: Interval[1 'mg', 5 'mg'] contains 3 'mg'
 define ContainsQuantityInclusiveEdge: Interval[1 'mg', 5 'mg'] contains 5 'mg'
 define NotContainsQuantity: Interval[2 'mg', 5 'mg'] contains 1 'mg'
 define NotContainsQuantityExclusiveEdge: Interval(1 'mg', 5 'mg'] contains 1 'mg'
-define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
-define ContainsDate: DateIvl contains DateTime(2012, 6, 1, 0, 0, 0, 0)
-define NotContainsDate: DateIvl contains DateTime(2012, 9, 1, 0, 0, 0, 0)
-define ContainsImpreciseDate: DateIvl contains DateTime(2012, 4)
-define NotContainsImpreciseDate: DateIvl contains DateTime(2012, 9)
-define MayContainImpreciseDate: DateIvl contains DateTime(2012)
-define PrecisionDateIvl: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
-define ContainsDayOfDateLowEdge: PrecisionDateIvl contains day of DateTime(2012, 3, 2, 0, 0, 0, 0)
-define ContainsDayOfDateHighEdge: PrecisionDateIvl contains day of DateTime(2012, 9, 2, 23, 59, 59, 999)
-define NotContainsDayOfDateLowEdge: PrecisionDateIvl contains day of DateTime(2012, 3, 1, 23, 59, 59, 999)
-define NotContainsDayOfDateHighEdge: PrecisionDateIvl contains day of DateTime(2012, 9, 3, 0, 0, 0, 0)
-define ContainsDayOfDateImpreciseLowEdge: PrecisionDateIvl contains day of DateTime(2012, 3, 2)
-define ContainsDayOfDateImpreciseHighEdge: PrecisionDateIvl contains day of DateTime(2012, 9, 2)
-define ContainsDayOfDateVeryImpreciseMiddle: PrecisionDateIvl contains day of DateTime(2012, 6)
-define NotContainsDayOfDateVeryImpreciseLow: PrecisionDateIvl contains day of DateTime(2012, 2)
-define NotContainsDayOfDateVeryImpreciseHigh: PrecisionDateIvl contains day of DateTime(2012, 10)
-define MayContainDayOfDateVeryImpreciseLow: PrecisionDateIvl contains day of DateTime(2012, 3)
-define MayContainDayOfDateVeryImpreciseHigh: PrecisionDateIvl contains day of DateTime(2012, 9)
-define MayContainDayOfDateVeryImpreciseSurrounding: PrecisionDateIvl contains day of DateTime(2012)
+define DateIvlHighOpen: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
+define DateIvlHighClosed: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0)]
+define ContainsDate: DateIvlHighOpen contains DateTime(2012, 6, 1, 0, 0, 0, 0)
+define NotContainsDate: DateIvlHighOpen contains DateTime(2012, 9, 1, 0, 0, 0, 0)
+define ContainsImpreciseDate: DateIvlHighOpen contains DateTime(2012, 4)
+define NotContainsImpreciseDate: DateIvlHighClosed contains DateTime(2012, 10)
+define MayContainImpreciseDate: DateIvlHighOpen contains DateTime(2012)
+define PrecisionDateIvlHighOpen: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
+define PrecisionDateIvlHighClosed: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678)]
+define ContainsDayOfDateLowEdge: PrecisionDateIvlHighOpen contains day of DateTime(2012, 3, 2, 0, 0, 0, 0)
+define NotContainsDayOfDateHighEdgeOpen: PrecisionDateIvlHighOpen contains day of DateTime(2012, 9, 2, 23, 59, 59, 999)
+define ContainsDayOfDateHighEdgeClosed: PrecisionDateIvlHighClosed contains day of DateTime(2012, 9, 2, 23, 59, 59, 999)
+define NotContainsDayOfDateLowEdge: PrecisionDateIvlHighOpen contains day of DateTime(2012, 3, 1, 23, 59, 59, 999)
+define NotContainsDayOfDateBeyondHighEdge: PrecisionDateIvlHighOpen contains day of DateTime(2012, 9, 3, 0, 0, 0, 0)
+define ContainsDayOfDateImpreciseLowEdge: PrecisionDateIvlHighOpen contains day of DateTime(2012, 3, 2)
+define NotContainsDayOfDateImpreciseHighEdgeOpen: PrecisionDateIvlHighOpen contains day of DateTime(2012, 9, 2)
+define ContainsDayOfDateImpreciseHighEdgeClosed: PrecisionDateIvlHighClosed contains day of DateTime(2012, 9, 2)
+define ContainsDayOfDateVeryImpreciseMiddle: PrecisionDateIvlHighOpen contains day of DateTime(2012, 6)
+define NotContainsDayOfDateVeryImpreciseLow: PrecisionDateIvlHighOpen contains day of DateTime(2012, 2)
+define NotContainsDayOfDateVeryImpreciseHighEdgeOpen: PrecisionDateIvlHighOpen contains day of DateTime(2012, 10)
+define MayContainDayOfDateVeryImpreciseLow: PrecisionDateIvlHighOpen contains day of DateTime(2012, 3)
+define MayContainDayOfDateVeryImpreciseHigh: PrecisionDateIvlHighOpen contains day of DateTime(2012, 9)
+define MayContainDayOfDateVeryImpreciseSurrounding: PrecisionDateIvlHighOpen contains day of DateTime(2012)
 define ImpDateIvl: Interval[DateTime(2012, 3), DateTime(2012, 8)]
 define ImpreciseContainsDate: ImpDateIvl contains DateTime(2012, 6, 1, 0, 0, 0, 0)
 define ImpreciseNotContainsDate: ImpDateIvl contains DateTime(2012, 9, 1, 0, 0, 0, 0)
 define ImpreciseMayContainDate: ImpDateIvl contains DateTime(2012, 3, 15, 0, 0, 0, 0)
 define NegInfBegContainsInt: Interval[null, 5] contains -7
 define NegInfBegNotContainsInt: Interval[null, 5] contains 7
-define UnknownBegContainsInt: Interval(null, 5] contains 5
+define unknownOpenBegMayContainInt: Interval(null, 5] contains 5
+define unknownClosedBegContainsInt: Interval[null, 5] contains 5
 define UnknownBegMayContainInt: Interval(null, 5] contains -7
 define UnknownBegNotContainsInt: Interval(null, 5] contains 7
 define PosInfEndContainsInt: Interval[0, null] contains 123456789
 define PosInfEndNotContainsInt: Interval[0, null] contains -1
-define UnknownEndContainsInt: Interval[0, null) contains 0
+define UnknownOpenEndMayContainInt: Interval[0, null) contains 0
+define UnknownClosedEndContainsInt: Interval[0, null] contains 0
 define UnknownEndMayContainInt: Interval[0, null) contains 123456789
 define UnknownEndNotContainsInt: Interval[0, null) contains -1
 define NegInfBegContainsDate: Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0)) contains DateTime(1, 1, 1, 0, 0, 0, 0)
 define NegInfBegNotContainsDate: Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0)) contains DateTime(2013, 1, 2, 0, 0, 0, 0)
-define UnknownBegContainsDate: Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 0)) contains DateTime(2012, 12, 31, 23, 59, 59, 999)
+define UnknownOpenBegMayContainDate: Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 0)) contains DateTime(2012, 12, 31, 23, 59, 59, 999)
+define UnknownClosedBegContainsDate: Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0)) contains DateTime(2012, 12, 31, 23, 59, 59, 999)
 define UnknownBegMayContainDate: Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 0)) contains DateTime(1, 1, 1, 0, 0, 0, 0)
 define UnknownBegNotContainsDate: Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 0)) contains DateTime(2013, 1, 2, 0, 0, 0, 0)
 define PosInfEndContainsDate: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null] contains DateTime(2014, 1, 1, 0, 0, 0, 0)
 define PosInfEndNotContainsDate: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null] contains DateTime(2012, 1, 1, 0, 0, 0, 0)
-define UnknownEndContainsDate: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null) contains DateTime(2013, 1, 1, 0, 0, 0, 0)
+define UnknownOpenEndMayContainDate: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null) contains DateTime(2013, 1, 1, 0, 0, 0, 0)
+define UnknownClosedEndContainsDate: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null] contains DateTime(2013, 1, 1, 0, 0, 0, 0)
 define UnknownEndMayContainDate: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null) contains DateTime(2014, 1, 1, 0, 0, 0, 0)
 define UnknownEndNotContainsDate: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null) contains DateTime(2012, 1, 1, 0, 0, 0, 0)
 
@@ -104,47 +112,55 @@ define ContainsQuantity: 5 'mg' in Interval[4 'mg', 6 'mg']
 define ContainsQuantityInclusiveEdge: 6 'mg' in Interval[4 'mg', 6 'mg']
 define NotContainsQuantity: 3 'mg' in Interval[4 'mg', 6 'mg']
 define NotContainsQuantityExclusiveEdge: 6 'mg' in Interval[4 'mg', 6 'mg')
-define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
-define ContainsDate: DateTime(2012, 6, 1, 0, 0, 0, 0) in DateIvl
-define NotContainsDate: DateTime(2012, 9, 1, 0, 0, 0, 0) in DateIvl
-define ContainsImpreciseDate: DateTime(2012, 4) in DateIvl
-define NotContainsImpreciseDate: DateTime(2012, 9) in DateIvl
-define MayContainImpreciseDate: DateTime(2012) in DateIvl
-define PrecisionDateIvl: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
-define ContainsDayOfDateLowEdge: DateTime(2012, 3, 2, 0, 0, 0, 0) in day of PrecisionDateIvl
-define ContainsDayOfDateHighEdge: DateTime(2012, 9, 2, 23, 59, 59, 999) in day of PrecisionDateIvl
-define NotContainsDayOfDateLowEdge: DateTime(2012, 3, 1, 23, 59, 59, 999) in day of PrecisionDateIvl
-define NotContainsDayOfDateHighEdge: DateTime(2012, 9, 3, 0, 0, 0, 0) in day of PrecisionDateIvl
-define ContainsDayOfDateImpreciseLowEdge: DateTime(2012, 3, 2) in day of PrecisionDateIvl
-define ContainsDayOfDateImpreciseHighEdge: DateTime(2012, 9, 2) in day of PrecisionDateIvl
-define ContainsDayOfDateVeryImpreciseMiddle: DateTime(2012, 6) in day of PrecisionDateIvl
-define NotContainsDayOfDateVeryImpreciseLow: DateTime(2012, 2) in day of PrecisionDateIvl
-define NotContainsDayOfDateVeryImpreciseHigh: DateTime(2012, 10) in day of PrecisionDateIvl
-define MayContainDayOfDateVeryImpreciseLow: DateTime(2012, 3) in day of PrecisionDateIvl
-define MayContainDayOfDateVeryImpreciseHigh: DateTime(2012, 9) in day of PrecisionDateIvl
-define MayContainDayOfDateVeryImpreciseSurrounding: DateTime(2012) in day of PrecisionDateIvl
+define DateIvlHighOpen: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
+define DateIvlHighClosed: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0)]
+define ContainsDate: DateTime(2012, 6, 1, 0, 0, 0, 0) in DateIvlHighClosed
+define NotContainsDate: DateTime(2012, 9, 1, 0, 0, 0, 0) in DateIvlHighOpen
+define ContainsImpreciseDate: DateTime(2012, 4) in DateIvlHighClosed
+define NotContainsImpreciseDate: DateTime(2012, 10) in DateIvlHighClosed
+define MayContainImpreciseDate: DateTime(2012) in DateIvlHighClosed
+define PrecisionDateIvlHighOpen: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
+define PrecisionDateIvlHighClosed: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678)]
+define ContainsDayOfDateLowEdge: DateTime(2012, 3, 2, 0, 0, 0, 0) in day of PrecisionDateIvlHighOpen
+define NotContainsDayOfDateHighEdgeOpen: DateTime(2012, 9, 2, 23, 59, 59, 999) in day of PrecisionDateIvlHighOpen
+define ContainsDayOfDateHighEdgeClosed: DateTime(2012, 9, 2, 23, 59, 59, 999) in day of PrecisionDateIvlHighClosed
+define NotContainsDayOfDateLowEdge: DateTime(2012, 3, 1, 23, 59, 59, 999) in day of PrecisionDateIvlHighOpen
+define NotContainsDayOfDateBeyondHighEdge: DateTime(2012, 9, 3, 0, 0, 0, 0) in day of PrecisionDateIvlHighOpen
+define ContainsDayOfDateImpreciseLowEdge: DateTime(2012, 3, 2) in day of PrecisionDateIvlHighOpen
+define NotContainsDayOfDateImpreciseHighEdgeOpen: DateTime(2012, 9, 2) in day of PrecisionDateIvlHighOpen
+define ContainsDayOfDateImpreciseHighEdgeClosed: DateTime(2012, 9, 2) in day of PrecisionDateIvlHighClosed
+define ContainsDayOfDateVeryImpreciseMiddle: DateTime(2012, 6) in day of PrecisionDateIvlHighOpen
+define NotContainsDayOfDateVeryImpreciseLow: DateTime(2012, 2) in day of PrecisionDateIvlHighOpen
+define NotContainsDayOfDateVeryImpreciseHighEdgeOpen: DateTime(2012, 10) in day of PrecisionDateIvlHighOpen
+define MayContainDayOfDateVeryImpreciseLow: DateTime(2012, 3) in day of PrecisionDateIvlHighOpen
+define MayContainDayOfDateVeryImpreciseHigh: DateTime(2012, 9) in day of PrecisionDateIvlHighOpen
+define MayContainDayOfDateVeryImpreciseSurrounding: DateTime(2012) in day of PrecisionDateIvlHighOpen
 define ImpDateIvl: Interval[DateTime(2012, 3), DateTime(2012, 8)]
 define ImpreciseContainsDate: DateTime(2012, 6, 1, 0, 0, 0, 0) in ImpDateIvl
 define ImpreciseNotContainsDate: DateTime(2012, 9, 1, 0, 0, 0, 0) in ImpDateIvl
 define ImpreciseMayContainDate: DateTime(2012, 3, 15, 0, 0, 0, 0) in ImpDateIvl
 define NegInfBegContainsInt: -7 in Interval[null, 5]
 define NegInfBegNotContainsInt: 7 in Interval[null, 5]
-define UnknownBegContainsInt: 5 in Interval(null, 5]
+define UnknownOpenBegMayContainInt: 5 in Interval(null, 5]
+define UnknownClosedBegContainsInt: 5 in Interval[null, 5]
 define UnknownBegMayContainInt: -7 in Interval(null, 5]
 define UnknownBegNotContainsInt: 7 in Interval(null, 5]
 define PosInfEndContainsInt: 123456789 in Interval[0, null]
 define PosInfEndNotContainsInt: -1 in Interval[0, null]
-define UnknownEndContainsInt: 0 in Interval[0, null)
+define UnknownOpenEndMayContainInt: 0 in Interval[0, null)
+define UnknownClosedEndContainsInt: 0 in Interval[0, null]
 define UnknownEndMayContainInt: 123456789 in Interval[0, null)
 define UnknownEndNotContainsInt: -1 in Interval[0, null)
 define NegInfBegContainsDate: DateTime(1, 1, 1, 0, 0, 0, 0) in Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0))
 define NegInfBegNotContainsDate: DateTime(2013, 1, 2, 0, 0, 0, 0) in Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0))
-define UnknownBegContainsDate: DateTime(2012, 12, 31, 23, 59, 59, 999) in Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 0))
+define UnknownOpenBegMayContainDate: DateTime(2012, 12, 31, 23, 59, 59, 999) in Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 0))
+define UnknownClosedBegContainsDate: DateTime(2012, 12, 31, 23, 59, 59, 999) in Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0))
 define UnknownBegMayContainDate: DateTime(1, 1, 1, 0, 0, 0, 0) in Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 0))
 define UnknownBegNotContainsDate: DateTime(2013, 1, 2, 0, 0, 0, 0) in Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 0))
 define PosInfEndContainsDate:  DateTime(2014, 1, 1, 0, 0, 0, 0) in Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null]
 define PosInfEndNotContainsDate: DateTime(2012, 1, 1, 0, 0, 0, 0) in Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null]
-define UnknownEndContainsDate: DateTime(2013, 1, 1, 0, 0, 0, 0) in Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null)
+define UnknownOpenEndMayContainDate: DateTime(2013, 1, 1, 0, 0, 0, 0) in Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null)
+define UnknownClosedEndContainsDate: DateTime(2013, 1, 1, 0, 0, 0, 0) in Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null]
 define UnknownEndMayContainDate: DateTime(2014, 1, 1, 0, 0, 0, 0) in Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null)
 define UnknownEndNotContainsDate: DateTime(2012, 1, 1, 0, 0, 0, 0) in Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null)
 
