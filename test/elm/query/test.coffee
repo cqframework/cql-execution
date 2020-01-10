@@ -23,6 +23,14 @@ describe 'DateRangeOptimizedQuery', ->
     e.should.have.length(1)
     e[0].id().should.equal 'http://cqframework.org/3/5'
 
+describe 'FunctionQuery', ->
+  @beforeEach ->
+    setup @, data, [ p1 ], vsets
+
+  it 'function with this' , ->
+    functionReturnsDates = @queryWithThis.exec(@ctx)
+    functionReturnsDates.should.eql true
+
 describe.skip 'IncludesQuery', ->
   @beforeEach ->
     setup @, data, [ p1 ], vsets
@@ -137,6 +145,12 @@ describe 'Sorting', ->
     e[2].E.id().should.equal "http://cqframework.org/3/1"
     e[1].E.id().should.equal  "http://cqframework.org/3/3"
     e[0].E.id().should.equal  "http://cqframework.org/3/5"
+
+  it 'should be able to sort dates by this' , ->
+    unsortedDate = @lastDateUnsorted.exec(@ctx)
+    unsortedDate.year.should.eql 1982
+    sortedDate = @lastDateByThis.exec(@ctx)
+    sortedDate.year.should.eql 2010
 
   it 'should be able to sort by number asc' , ->
     e = @numberAsc.exec(@ctx)
