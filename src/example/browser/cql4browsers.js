@@ -45568,6 +45568,8 @@
       var ref;
       if (typeof this.context_values[identifier] !== 'undefined') {
         return this.context_values[identifier];
+      } else if (identifier === "$this") {
+        return this.context_values;
       } else {
         return (ref = this.parent) != null ? ref.get(identifier) : void 0;
       }

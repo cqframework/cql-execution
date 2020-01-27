@@ -5,6 +5,10 @@ define EncountersDuringMP: [Encounter] E where E.period during MeasurementPeriod
 define AmbulatoryEncountersDuringMP: [Encounter: "Ambulatory/ED Visit"] E where E.period during MeasurementPeriod
 define AmbulatoryEncountersIncludedInMP: [Encounter: "Ambulatory/ED Visit"] E where E.period included in MeasurementPeriod
 
+// @Test: FunctionQuery
+define function "FunctionWithThis"(Encounter List<"Encounter">): Count(Encounter.period EncounterPeriod return EncounterPeriod)
+define queryWithThis: "FunctionWithThis"([Encounter] E) > 0
+
 // @Test: IncludesQuery
 valueset "Ambulatory/ED Visit": '2.16.840.1.113883.3.464.1003.101.12.1061'
 parameter MeasurementPeriod default Interval[DateTime(2013, 1, 1), DateTime(2014, 1, 1))
@@ -52,6 +56,9 @@ define TupleReturnTupleAsc: [Encounter] E return {E : E} sort by E.id
 define TupleDesc: [Encounter] E sort by id desc
 define TupleReturnDesc: [Encounter] E return E sort by id desc
 define TupleReturnTupleDesc:  [Encounter] E return {E : E} sort by E.id desc
+define ConditionDates: [Condition] C return C.onsetDateTime
+define lastDateUnsorted: Last("ConditionDates")
+define lastDateByThis: Last("ConditionDates" CD sort by $this)
 define numberAsc: ({8, 6, 7, 5, 3, 0, 9}) N sort asc
 define numberReturnAsc: ({8, 6, 7, 5, 3, 0, 9}) N return N sort asc
 define numberDesc: ({8, 6, 7, 5, 3, 0, 9}) N sort desc
