@@ -1839,6 +1839,12 @@
 
     Interval.prototype.contains = function(item, precision) {
       var highFn, lowFn;
+      if (this.lowClosed && (this.low != null) && cmp.equals(this.low, item)) {
+        return true;
+      }
+      if (this.highClosed && (this.high != null) && cmp.equals(this.high, item)) {
+        return true;
+      }
       if (item instanceof Interval) {
         throw new Error("Argument to contains must be a point");
       }

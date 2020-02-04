@@ -80,13 +80,13 @@ define ImpreciseNotContainsDate: ImpDateIvl contains DateTime(2012, 9, 1, 0, 0, 
 define ImpreciseMayContainDate: ImpDateIvl contains DateTime(2012, 3, 15, 0, 0, 0, 0)
 define NegInfBegContainsInt: Interval[null, 5] contains -7
 define NegInfBegNotContainsInt: Interval[null, 5] contains 7
-define unknownOpenBegMayContainInt: Interval(null, 5] contains 5
-define unknownClosedBegContainsInt: Interval[null, 5] contains 5
+define UnknownOpenBegContainsInt: Interval(null, 5] contains 5
+define UnknownClosedBegContainsInt: Interval[null, 5] contains 5
 define UnknownBegMayContainInt: Interval(null, 5] contains -7
 define UnknownBegNotContainsInt: Interval(null, 5] contains 7
 define PosInfEndContainsInt: Interval[0, null] contains 123456789
 define PosInfEndNotContainsInt: Interval[0, null] contains -1
-define UnknownOpenEndMayContainInt: Interval[0, null) contains 0
+define UnknownOpenEndContainsInt: Interval[0, null) contains 0
 define UnknownClosedEndContainsInt: Interval[0, null] contains 0
 define UnknownEndMayContainInt: Interval[0, null) contains 123456789
 define UnknownEndNotContainsInt: Interval[0, null) contains -1
@@ -98,7 +98,7 @@ define UnknownBegMayContainDate: Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 0)
 define UnknownBegNotContainsDate: Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 0)) contains DateTime(2013, 1, 2, 0, 0, 0, 0)
 define PosInfEndContainsDate: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null] contains DateTime(2014, 1, 1, 0, 0, 0, 0)
 define PosInfEndNotContainsDate: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null] contains DateTime(2012, 1, 1, 0, 0, 0, 0)
-define UnknownOpenEndMayContainDate: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null) contains DateTime(2013, 1, 1, 0, 0, 0, 0)
+define UnknownOpenEndContainsDate: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null) contains DateTime(2013, 1, 1, 0, 0, 0, 0)
 define UnknownClosedEndContainsDate: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null] contains DateTime(2013, 1, 1, 0, 0, 0, 0)
 define UnknownEndMayContainDate: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null) contains DateTime(2014, 1, 1, 0, 0, 0, 0)
 define UnknownEndNotContainsDate: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null) contains DateTime(2012, 1, 1, 0, 0, 0, 0)
@@ -141,13 +141,13 @@ define ImpreciseNotContainsDate: DateTime(2012, 9, 1, 0, 0, 0, 0) in ImpDateIvl
 define ImpreciseMayContainDate: DateTime(2012, 3, 15, 0, 0, 0, 0) in ImpDateIvl
 define NegInfBegContainsInt: -7 in Interval[null, 5]
 define NegInfBegNotContainsInt: 7 in Interval[null, 5]
-define UnknownOpenBegMayContainInt: 5 in Interval(null, 5]
+define UnknownOpenBegContainsInt: 5 in Interval(null, 5]
 define UnknownClosedBegContainsInt: 5 in Interval[null, 5]
 define UnknownBegMayContainInt: -7 in Interval(null, 5]
 define UnknownBegNotContainsInt: 7 in Interval(null, 5]
 define PosInfEndContainsInt: 123456789 in Interval[0, null]
 define PosInfEndNotContainsInt: -1 in Interval[0, null]
-define UnknownOpenEndMayContainInt: 0 in Interval[0, null)
+define UnknownOpenEndContainsInt: 0 in Interval[0, null)
 define UnknownClosedEndContainsInt: 0 in Interval[0, null]
 define UnknownEndMayContainInt: 123456789 in Interval[0, null)
 define UnknownEndNotContainsInt: -1 in Interval[0, null)
@@ -159,7 +159,7 @@ define UnknownBegMayContainDate: DateTime(1, 1, 1, 0, 0, 0, 0) in Interval(null,
 define UnknownBegNotContainsDate: DateTime(2013, 1, 2, 0, 0, 0, 0) in Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 0))
 define PosInfEndContainsDate:  DateTime(2014, 1, 1, 0, 0, 0, 0) in Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null]
 define PosInfEndNotContainsDate: DateTime(2012, 1, 1, 0, 0, 0, 0) in Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null]
-define UnknownOpenEndMayContainDate: DateTime(2013, 1, 1, 0, 0, 0, 0) in Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null)
+define UnknownOpenEndContainsDate: DateTime(2013, 1, 1, 0, 0, 0, 0) in Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null)
 define UnknownClosedEndContainsDate: DateTime(2013, 1, 1, 0, 0, 0, 0) in Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null]
 define UnknownEndMayContainDate: DateTime(2014, 1, 1, 0, 0, 0, 0) in Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null)
 define UnknownEndNotContainsDate: DateTime(2012, 1, 1, 0, 0, 0, 0) in Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null)

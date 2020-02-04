@@ -25,6 +25,11 @@ module.exports.Interval = class Interval
     new Interval(newLow, newHigh, @lowClosed, @highClosed)
 
   contains: (item, precision) ->
+    # These first two checks esure correct handling of edge case where an item equals the closed boundary
+    if @lowClosed and @low? and cmp.equals(@low, item)
+      return true
+    if @highClosed and @high? and cmp.equals(@high, item)
+      return true
     if item instanceof Interval then throw new Error("Argument to contains must be a point")
     lowFn = switch
       when @lowClosed and not @low? then (() -> true)
