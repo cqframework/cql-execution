@@ -25,7 +25,7 @@ module.exports.Interval = class Interval
     new Interval(newLow, newHigh, @lowClosed, @highClosed)
 
   contains: (item, precision) ->
-    # These first two checks esure correct handling of edge case where an item equals the closed boundary
+    # These first two checks ensure correct handling of edge case where an item equals the closed boundary
     if @lowClosed and @low? and cmp.equals(@low, item)
       return true
     if @highClosed and @high? and cmp.equals(@high, item)
