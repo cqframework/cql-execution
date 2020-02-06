@@ -754,7 +754,7 @@
     DateTime.prototype.differenceBetween = function(other, unitField) {
       var a, aHighMoment, aJS, aLowMoment, aUncertainty, b, bHighMoment, bJS, bLowMoment, bUncertainty, tzDiff;
       other = this._implicitlyConvert(other);
-      if (!(other instanceof DateTime)) {
+      if (!(other && other.isDateTime())) {
         return null;
       }
       a = this.copy();

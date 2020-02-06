@@ -26,7 +26,7 @@ module.exports.Quantity = class Quantity
     "#{@value} '#{@unit}'"
 
   sameOrBefore: (other) ->
-    if other instanceof Quantity
+    if other?.isQuantity
       other_v = convert_value(other.value,ucum_unit(other.unit),ucum_unit(@unit))
       if(!other_v?)
         null
@@ -34,7 +34,7 @@ module.exports.Quantity = class Quantity
         @value <= other_v
 
   sameOrAfter: (other) ->
-    if other instanceof Quantity
+    if other?.isQuantity
       other_v = convert_value(other.value,ucum_unit(other.unit),ucum_unit(@unit))
       if(!other_v?)
         null
@@ -42,7 +42,7 @@ module.exports.Quantity = class Quantity
         @value >= other_v
 
   after: (other) ->
-    if other instanceof Quantity
+    if other?.isQuantity
       other_v = convert_value(other.value,ucum_unit(other.unit),ucum_unit(@unit))
       if(!other_v?)
         null
@@ -50,7 +50,7 @@ module.exports.Quantity = class Quantity
         @value > other_v
 
   before: (other) ->
-    if other instanceof Quantity
+    if other?.isQuantity
       other_v = convert_value(other.value,ucum_unit(other.unit),ucum_unit(@unit))
       if(!other_v?)
         null
@@ -58,7 +58,7 @@ module.exports.Quantity = class Quantity
         @value < other_v
 
   equals: (other) ->
-    if other instanceof Quantity
+    if other?.isQuantity
       if (!@unit && other.unit ) || (@unit && !other.unit)
         false
       else if !@unit && !other.unit
@@ -83,7 +83,7 @@ module.exports.Quantity = class Quantity
     @multiplyDivide(other,".") # in ucum . represents multiplication
 
   multiplyDivide: (other, operator) ->
-    if other instanceof Quantity
+    if other?.isQuantity
       a = if this.unit? then this else new Quantity(this.value, '1')
       b = if other.unit? then other else new Quantity(other.value, unit: '1')
       can_val = a.to_ucum()
@@ -228,7 +228,7 @@ module.exports.parseQuantity = (str) ->
     null
 
 doScaledAddition = (a,b,scaleForB) ->
-  if a instanceof Quantity and b instanceof Quantity
+  if a?.isQuantity and b?.isQuantity
     [a_unit, b_unit] = [coalesceToOne(a.unit), coalesceToOne(b.unit)]
     # The units don't have to match (m and m^2), but must be convertable
     # we will choose the unit of a to be the unit we return
@@ -236,7 +236,7 @@ doScaledAddition = (a,b,scaleForB) ->
     return null unless val?
     new Quantity(a.value + val, a_unit)
   else if a.copy and a.add
-    b_unit = if b instanceof Quantity then coalesceToOne(b.unit) else b.unit
+    b_unit = if b?.isQuantity then coalesceToOne(b.unit) else b.unit
     a.copy().add(b.value * scaleForB, clean_unit(b_unit))
   else
     throw new Error("Unsupported argument types.")
@@ -248,11 +248,11 @@ module.exports.doSubtraction = (a,b) ->
   doScaledAddition(a,b,-1)
 
 module.exports.doDivision = (a,b) ->
-  if a instanceof Quantity
+  if a?.isQuantity
     a.dividedBy(b)
 
 module.exports.doMultiplication = (a,b) ->
-  if a instanceof Quantity then a.multiplyBy(b) else b.multiplyBy(a)
+  if a?.isQuantity then a.multiplyBy(b) else b.multiplyBy(a)
 
 coalesceToOne = (o) ->
   if !o? or (o.trim? and !o.trim()) then '1' else o
