@@ -115,7 +115,7 @@ class DateTime
 
   differenceBetween: (other, unitField) ->
     other = @_implicitlyConvert(other)
-    if not(other instanceof DateTime) then return null
+    if not(other?.isDateTime) then return null
 
     # According to CQL spec, to calculate difference, you can just floor lesser precisions and do a duration
     # Make copies since we'll be flooring values and mucking with timezones
@@ -187,7 +187,7 @@ class DateTime
 
   durationBetween: (other, unitField) ->
     other = @_implicitlyConvert(other)
-    if not(other instanceof DateTime) then return null
+    if not(other?.isDateTime) then return null
     a = @toUncertainty()
     b = other.toUncertainty()
     new Uncertainty(@_durationBetweenDates(a.high, b.low, unitField), @_durationBetweenDates(a.low, b.high, unitField))
@@ -343,7 +343,7 @@ class DateTime
     @year == 0 && @month == 1 && @day == 1
 
   _implicitlyConvert: (other) ->
-    if (other instanceof Date) then return other.getDateTime()
+    if (other?.isDate) then return other.getDateTime()
     return other
 
   reducedPrecision: (unitField = DateTime.Unit.MILLISECOND) ->
@@ -406,8 +406,8 @@ class Date
       @add(-1,Date.Unit.YEAR)
 
   differenceBetween: (other, unitField) ->
-    if (other instanceof DateTime) then return this.getDateTime().differenceBetween(other, unitField)
-    if not(other instanceof Date) then return null
+    if (other?.isDateTime) then return this.getDateTime().differenceBetween(other, unitField)
+    if not(other?.isDate) then return null
 
     a = @
     b = other
@@ -433,8 +433,8 @@ class Date
     new Date(floored.getFullYear(), floored.getMonth()+1, floored.getDate())
 
   durationBetween: (other, unitField) ->
-    if (other instanceof DateTime) then return this.getDateTime().durationBetween(other, unitField)
-    if not(other instanceof Date) then return null
+    if (other?.isDateTime) then return this.getDateTime().durationBetween(other, unitField)
+    if not(other?.isDate) then return null
 
     a = @toUncertainty()
     b = other.toUncertainty()

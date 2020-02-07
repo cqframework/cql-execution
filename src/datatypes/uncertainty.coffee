@@ -2,7 +2,7 @@
 
 module.exports.Uncertainty = class Uncertainty
   @from: (obj) ->
-    if obj instanceof Uncertainty then obj else new Uncertainty(obj)
+    if obj?.isUncertainty then obj else new Uncertainty(obj)
 
   constructor: (@low = null, @high) ->
     gt = (a, b) ->
@@ -16,6 +16,10 @@ module.exports.Uncertainty = class Uncertainty
     if typeof @high is 'undefined' then @high = @low
     if isNonEnumerable(@low) || isNonEnumerable(@high) then @low = @high = null
     if @low? and @high? and gt(@low, @high) then [@low, @high] = [@high, @low]
+
+  Object.defineProperties @prototype,
+    isUncertainty:
+      get: -> true
 
   copy: ->
     newLow = @low

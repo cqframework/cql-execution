@@ -30,7 +30,7 @@ module.exports.Interval = class Interval
       return true
     if @highClosed and @high? and cmp.equals(@high, item)
       return true
-    if item instanceof Interval then throw new Error("Argument to contains must be a point")
+    if item?.isInterval then throw new Error("Argument to contains must be a point")
     lowFn = switch
       when @lowClosed and not @low? then (() -> true)
       when @lowClosed then cmp.lessThanOrEquals
@@ -45,14 +45,14 @@ module.exports.Interval = class Interval
     )
 
   properlyIncludes: (other, precision) ->
-    if not (other instanceof Interval) then throw new Error("Argument to properlyIncludes must be an interval")
+    if not (other?.isInterval) then throw new Error("Argument to properlyIncludes must be an interval")
     ThreeValuedLogic.and(
       @includes(other, precision),
       ThreeValuedLogic.not(other.includes(@, precision))
     )
 
   includes: (other, precision) ->
-    if not (other instanceof Interval)
+    if not (other?.isInterval)
       return @.contains(other,precision)
     a = @toClosed()
     b = other.toClosed()
@@ -63,14 +63,14 @@ module.exports.Interval = class Interval
 
   includedIn: (other, precision) ->
     # For the point overload, this operator is a synonym for the in operator
-    if not (other instanceof Interval)
+    if not (other?.isInterval)
       @.contains(other, precision)
     else
       other.includes @
 
   overlaps: (item, precision) ->
     closed = @toClosed()
-    [low, high] = if item instanceof Interval
+    [low, high] = if item?.isInterval
       itemClosed = item.toClosed()
       [itemClosed.low, itemClosed.high]
     else
@@ -82,7 +82,7 @@ module.exports.Interval = class Interval
 
   overlapsAfter: (item, precision) ->
     closed = @toClosed()
-    high = if item instanceof Interval then item.toClosed().high else item
+    high = if item?.isInterval then item.toClosed().high else item
     ThreeValuedLogic.and(
       cmp.lessThanOrEquals(closed.low, high, precision),
       cmp.greaterThan(closed.high, high, precision)
@@ -90,34 +90,34 @@ module.exports.Interval = class Interval
 
   overlapsBefore: (item, precision) ->
     closed = @toClosed()
-    low = if item instanceof Interval then item.toClosed().low else item
+    low = if item?.isInterval then item.toClosed().low else item
     ThreeValuedLogic.and(
       cmp.lessThan(closed.low, low, precision),
       cmp.greaterThanOrEquals(closed.high, low, precision)
     )
 
   areDateTimes = (x, y) ->
-    [x, y].every (z) -> z instanceof DateTime
+    [x, y].every (z) -> z?.isDateTime
 
   areNumeric = (x, y) ->
-    [x, y].every (z) -> typeof z is 'number' or (z instanceof Uncertainty and typeof z.low is 'number')
+    [x, y].every (z) -> typeof z is 'number' or (z?.isUncertainty and typeof z.low is 'number')
 
   lowestNumericUncertainty = (x, y) ->
-    if not(x instanceof Uncertainty) then x = new Uncertainty(x)
-    if not(y instanceof Uncertainty) then y = new Uncertainty(y)
+    if not(x?.isUncertainty) then x = new Uncertainty(x)
+    if not(y?.isUncertainty) then y = new Uncertainty(y)
     low = if x.low < y.low then x.low else y.low
     high = if x.high < y.high then x.high else y.high
     if low != high then return new Uncertainty(low, high) else return low
 
   highestNumericUncertainty = (x, y) ->
-    if not(x instanceof Uncertainty) then x = new Uncertainty(x)
-    if not(y instanceof Uncertainty) then y = new Uncertainty(y)
+    if not(x?.isUncertainty) then x = new Uncertainty(x)
+    if not(y?.isUncertainty) then y = new Uncertainty(y)
     low = if x.low > y.low then x.low else y.low
     high = if x.high > y.high then x.high else y.high
     if low != high then return new Uncertainty(low, high) else return low
 
   union: (other) ->
-    if not (other instanceof Interval) then throw new Error("Argument to union must be an interval")
+    if not (other?.isInterval) then throw new Error("Argument to union must be an interval")
     # Note that interval union is only defined if the arguments overlap or meet.
     if @overlaps(other) or @meets(other)
       [a, b] = [@toClosed(), other.toClosed()]
@@ -140,7 +140,7 @@ module.exports.Interval = class Interval
       null
 
   intersect: (other) ->
-    if not (other instanceof Interval) then throw new Error("Argument to union must be an interval")
+    if not (other?.isInterval) then throw new Error("Argument to union must be an interval")
     # Note that interval union is only defined if the arguments overlap.
     if @overlaps(other)
       [a, b] = [@toClosed(), other.toClosed()]
@@ -164,7 +164,7 @@ module.exports.Interval = class Interval
 
   except: (other) ->
     if (other == null) then return null
-    if not (other instanceof Interval) then throw new Error("Argument to except must be an interval")
+    if not (other?.isInterval) then throw new Error("Argument to except must be an interval")
 
     ol = @overlaps other
     if ol is true
@@ -232,7 +232,7 @@ module.exports.Interval = class Interval
       return @start().sameOrAfter(other.end(), precision)
 
   equals: (other) ->
-    if other instanceof Interval
+    if other?.isInterval
       [a, b] = [@toClosed(), other.toClosed()]
       ThreeValuedLogic.and(
         cmp.equals(a.low, b.low),
@@ -267,7 +267,7 @@ module.exports.Interval = class Interval
 
   meetsAfter: (other, precision) ->
     try
-      if precision? and @low instanceof DateTime
+      if precision? and @low?.isDateTime
         @toClosed().low.sameAs(other.toClosed().high?.add(1, precision), precision)
       else
         cmp.equals @toClosed().low, successor(other.toClosed().high)
@@ -276,7 +276,7 @@ module.exports.Interval = class Interval
 
   meetsBefore: (other, precision) ->
     try
-      if precision? and @high instanceof DateTime
+      if precision? and @high?.isDateTime
         @toClosed().high.sameAs(other.toClosed().low?.add(-1, precision), precision)
       else
         cmp.equals @toClosed().high, predecessor(other.toClosed().low)
@@ -300,7 +300,7 @@ module.exports.Interval = class Interval
     return @toClosed().high
 
   starts: (other, precision) ->
-    if precision? and @low instanceof DateTime
+    if precision? and @low?.isDateTime
       startEqual = @low.sameAs(other.low, precision)
     else
       startEqual = cmp.equals(@low, other.low)
@@ -309,7 +309,7 @@ module.exports.Interval = class Interval
 
   ends: (other, precision) ->
     startGreaterThanOrEqual = cmp.greaterThanOrEquals(@low, other.low, precision)
-    if precision? and @low instanceof DateTime
+    if precision? and @low?.isDateTime
       endEqual = @high.sameAs(other.high, precision)
     else
       endEqual = cmp.equals(@high, other.high)
@@ -321,7 +321,7 @@ module.exports.Interval = class Interval
       throw new Error("Width of Date, DateTime, and Time intervals is not supported")
 
     closed = @toClosed()
-    if closed.low instanceof Uncertainty or closed.high instanceof Uncertainty
+    if closed.low?.isUncertainty or closed.high?.isUncertainty
       null
     else if closed.low.isQuantity
       if closed.low.unit != closed.high.unit
@@ -343,7 +343,7 @@ module.exports.Interval = class Interval
       throw new Error("Size of Date, DateTime, and Time intervals is not supported")
 
     closed = @toClosed()
-    if closed.low instanceof Uncertainty or closed.high instanceof Uncertainty
+    if closed.low?.isUncertainty or closed.high?.isUncertainty
       null
     else if closed.low.isQuantity
       if closed.low.unit != closed.high.unit
@@ -384,7 +384,7 @@ module.exports.Interval = class Interval
 
   toClosed: () ->
     point = @low ? @high
-    if typeof(point) is 'number' or point instanceof DateTime or point?.isQuantity or point?.isDate
+    if typeof(point) is 'number' or point?.isDateTime or point?.isQuantity or point?.isDate
       low = switch
         when @lowClosed and not @low? then minValueForInstance point
         when not @lowClosed and @low? then successor @low

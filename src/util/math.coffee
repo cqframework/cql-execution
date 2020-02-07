@@ -69,13 +69,13 @@ module.exports.successor = successor = (val) ->
       #not bothering with the max float test because javascript does not handle floats at the level
       #very well
       val + MIN_FLOAT_PRECISION_VALUE
-  else if val instanceof DateTime
+  else if val?.isDateTime
     if val.sameAs(MAX_DATETIME_VALUE) then throw new OverFlowException() else val.successor()
   else if val?.isDate
     if val.sameAs(MAX_DATE_VALUE) then throw new OverFlowException() else val.successor()
   else if val?.isTime
     if val.sameAs(MAX_TIME_VALUE) then throw new OverFlowException() else val.successor()
-  else if val instanceof Uncertainty
+  else if val?.isUncertainty
     # For uncertainties, if the high is the max val, don't increment it
     high = try successor val.high; catch e then val.high
     new Uncertainty(successor(val.low), high)
@@ -94,13 +94,13 @@ module.exports.predecessor = predecessor = (val) ->
       #not bothering with the min float test because javascript does not handle floats at the level
       #very well
       val - MIN_FLOAT_PRECISION_VALUE
-  else if val instanceof DateTime
+  else if val?.isDateTime
     if val.sameAs(MIN_DATETIME_VALUE) then throw new OverFlowException() else val.predecessor()
   else if val?.isDate
     if val.sameAs(MIN_DATE_VALUE) then throw new OverFlowException() else val.predecessor()
   else if val?.isTime
     if val.sameAs(MIN_TIME_VALUE) then throw new OverFlowException() else val.predecessor()
-  else if val instanceof Uncertainty
+  else if val?.isUncertainty
     # For uncertainties, if the low is the min val, don't decrement it
     low = try predecessor val.low; catch e then val.low
     new Uncertainty(low, predecessor(val.high))
@@ -114,7 +114,7 @@ module.exports.predecessor = predecessor = (val) ->
 module.exports.maxValueForInstance = (val) ->
   if typeof val is "number"
     if parseInt(val) is val then MAX_INT_VALUE else MAX_FLOAT_VALUE
-  else if val instanceof DateTime
+  else if val?.isDateTime
     MAX_DATETIME_VALUE.copy()
   else if val?.isDate
     MAX_DATE_VALUE.copy()
@@ -130,7 +130,7 @@ module.exports.maxValueForInstance = (val) ->
 module.exports.minValueForInstance = (val) ->
   if typeof val is "number"
     if parseInt(val) is val then MIN_INT_VALUE else MIN_FLOAT_VALUE
-  else if val instanceof DateTime
+  else if val?.isDateTime
     MIN_DATETIME_VALUE.copy()
   else if val?.isDate
     MIN_DATE_VALUE.copy()

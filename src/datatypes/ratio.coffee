@@ -18,7 +18,7 @@ module.exports.Ratio = class Ratio
     "#{@numerator.toString()} : #{@denominator.toString()}"
 
   equals: (other) ->
-    if other instanceof Ratio
+    if other?.isRatio
       divided_this = @numerator.dividedBy(@denominator)
       divided_other = other.numerator.dividedBy(other.denominator)
       divided_this.equals(divided_other)
