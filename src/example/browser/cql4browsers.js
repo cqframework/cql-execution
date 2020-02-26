@@ -8583,14 +8583,14 @@
     extend(Tuple, superClass);
 
     function Tuple(json) {
-      var el;
+      var el, elements;
       Tuple.__super__.constructor.apply(this, arguments);
+      elements = json.element != null ? json.element : [];
       this.elements = (function() {
-        var i, len, ref1, results;
-        ref1 = json.element;
+        var i, len, results;
         results = [];
-        for (i = 0, len = ref1.length; i < len; i++) {
-          el = ref1[i];
+        for (i = 0, len = elements.length; i < len; i++) {
+          el = elements[i];
           results.push({
             name: el.name,
             value: build(el.value)

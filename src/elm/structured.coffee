@@ -26,7 +26,8 @@ module.exports.Property = class Property extends Expression
 module.exports.Tuple = class Tuple extends Expression
   constructor: (json) ->
     super
-    @elements = for el in json.element
+    elements = if json.element? then json.element else []
+    @elements = for el in elements
       name: el.name
       value: build el.value
 
