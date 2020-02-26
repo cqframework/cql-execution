@@ -87,8 +87,8 @@ module.exports.IndexOf = class IndexOf extends Expression
     @element = build json.element
 
   exec: (ctx) ->
-    src = @source.exec ctx
-    el = @element.exec ctx
+    src = @source.execute ctx
+    el = @element.execute ctx
     if not src? or not el? then return null
     (index = i; break) for itm, i in src when equals itm, el
     if index? then return index else return -1

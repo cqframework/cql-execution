@@ -6508,8 +6508,8 @@
 
     IndexOf.prototype.exec = function(ctx) {
       var el, i, index, itm, j, len, src;
-      src = this.source.exec(ctx);
-      el = this.element.exec(ctx);
+      src = this.source.execute(ctx);
+      el = this.element.execute(ctx);
       if ((src == null) || (el == null)) {
         return null;
       }

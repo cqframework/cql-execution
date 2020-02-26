@@ -202,6 +202,8 @@ describe 'IndexOf', ->
 
   it 'should return the correct 0-based index when an item is in the list', ->
     @indexOfSecond.exec(@ctx).should.equal 1
+    @ctx.rootContext().localId_context[@indexOfSecond.source.localId].should.not.be.null()
+    @ctx.rootContext().localId_context[@indexOfSecond.element.localId].should.not.be.null()
 
   it 'should work with complex types like tuples', ->
     @indexOfThirdTuple.exec(@ctx).should.equal 2
