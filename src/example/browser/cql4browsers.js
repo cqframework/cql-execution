@@ -763,16 +763,18 @@
         if (a.timezoneOffset !== b.timezoneOffset) {
           b = b.convertToTimezoneOffset(a.timezoneOffset);
         }
-        aJS = a.toJSDate(true);
-        bJS = b.toJSDate(true);
-        tzDiff = a.isUTC() && b.isUTC() ? 0 : aJS.getTimezoneOffset() - bJS.getTimezoneOffset();
-        if (tzDiff !== 0) {
-          if ((b.year != null) && (b.month != null) && (b.day != null) && (b.hour != null) && (b.minute != null)) {
-            b = b.add(tzDiff, DateTime.Unit.MINUTE);
-          } else if ((b.year != null) && (b.month != null) && (b.day != null) && (b.hour != null)) {
-            b = b.add(tzDiff / 60, DateTime.Unit.HOUR);
-          } else {
-            b.timezoneOffset = b.timezoneOffset + (tzDiff / 60);
+        if (!a.isUTC() || !b.isUTC()) {
+          aJS = a.toJSDate(true);
+          bJS = b.toJSDate(true);
+          tzDiff = aJS.getTimezoneOffset() - bJS.getTimezoneOffset();
+          if (tzDiff !== 0) {
+            if ((b.year != null) && (b.month != null) && (b.day != null) && (b.hour != null) && (b.minute != null)) {
+              b = b.add(tzDiff, DateTime.Unit.MINUTE);
+            } else if ((b.year != null) && (b.month != null) && (b.day != null) && (b.hour != null)) {
+              b = b.add(tzDiff / 60, DateTime.Unit.HOUR);
+            } else {
+              b.timezoneOffset = b.timezoneOffset + (tzDiff / 60);
+            }
           }
         }
       }
