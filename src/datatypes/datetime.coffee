@@ -126,20 +126,18 @@ class DateTime
       # The dates need to agree on where the boundaries are, so we must normalize to the same time zone
       if a.timezoneOffset isnt b.timezoneOffset
         b = b.convertToTimezoneOffset(a.timezoneOffset)
-
       # JS always represents dates in the current locale, but in locales with DST, we want to account for the
       # potential difference in offset from one date to the other.  We try to simulate them being in the same
       # timezone, because we don't want midnight to roll back to 11:00pm since that will mess up day boundaries.
-      aJS = a.toJSDate(true)
-      bJS = b.toJSDate(true)
-      # Set tzDiff to zero if a and b are both UTC (UTC is not subject to DST)
-      tzDiff = if a.isUTC() && b.isUTC() then 0 else aJS.getTimezoneOffset() - bJS.getTimezoneOffset()
-      if (tzDiff != 0)
-        # Since we'll be doing duration later, account for timezone offset by adding to the time (if possible)
-        if b.year? and b.month? and b.day? and b.hour? and b.minute? then b = b.add(tzDiff, DateTime.Unit.MINUTE)
-        else if b.year? and b.month? and b.day? and b.hour? then b = b.add(tzDiff/60, DateTime.Unit.HOUR)
-        else b.timezoneOffset = b.timezoneOffset + (tzDiff/60)
-
+      if (!a.isUTC() || !b.isUTC())
+        aJS = a.toJSDate(true)
+        bJS = b.toJSDate(true)
+        tzDiff = aJS.getTimezoneOffset() - bJS.getTimezoneOffset()
+        if (tzDiff != 0)
+          # Since we'll be doing duration later, account for timezone offset by adding to the time (if possible)
+          if b.year? and b.month? and b.day? and b.hour? and b.minute? then b = b.add(tzDiff, DateTime.Unit.MINUTE)
+          else if b.year? and b.month? and b.day? and b.hour? then b = b.add(tzDiff/60, DateTime.Unit.HOUR)
+          else b.timezoneOffset = b.timezoneOffset + (tzDiff/60)
     # Now floor lesser precisions before we go on to calculate duration
     if unitField == DateTime.Unit.YEAR
       a = new DateTime(a.year, 1, 1, 12, 0, 0, 0, a.timezoneOffset)
