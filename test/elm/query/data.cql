@@ -50,7 +50,9 @@ define query:  [Encounter] E return {id: E.id, thing: E.status}
 define query:  (List{null, 'One', null, 'Two', null}) I where I is not null
 
 // @Test: Sorting
-define TupleAsc: [Encounter] E sort by id
+define QuantityListAsc: ({ ToQuantity('10 \'m\''), ToQuantity('2 \'m\'') }) S return S sort asc
+define QuantityListSort: ({ ToQuantity('10 \'m\''), ToQuantity('2 \'m\'') }) N return Tuple{N: N} sort by (N)
+define TupleAsc: [Encounter] E sort by id 
 define TupleReturnAsc: [Encounter] E return E sort by id
 define TupleReturnTupleAsc: [Encounter] E return {E : E} sort by E.id
 define TupleDesc: [Encounter] E sort by id desc

@@ -108,6 +108,15 @@ describe 'Sorting', ->
   @beforeEach ->
     setup @, data, [ p1 ]
 
+  it 'should correctly sort quantities asc', ->
+    e = @quantityListAsc.exec(@ctx)
+    e.should.have.length(2)
+    e[0]['value'].should.equal 2
+
+  it 'should correctly sort quantities', ->
+    e = @quantityListSort.exec(@ctx)
+    e[0]['N']['value'].should.equal 2
+
   it 'should be able to sort by a tuple field asc' , ->
     e = @tupleAsc.exec(@ctx)
     e.should.have.length(3)
