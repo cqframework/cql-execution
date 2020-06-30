@@ -7763,6 +7763,12 @@
     ByDirection.prototype.exec = function(ctx, a, b) {
       if (a === b) {
         return 0;
+      } else if (a.isQuantity && b.isQuantity) {
+        if (a.before(b)) {
+          return this.low_order;
+        } else {
+          return this.high_order;
+        }
       } else if (a < b) {
         return this.low_order;
       } else {
@@ -7793,6 +7799,12 @@
       b_val = this.expression.execute(sctx);
       if (a_val === b_val) {
         return 0;
+      } else if (a_val.isQuantity && b_val.isQuantity) {
+        if (a_val.before(b_val)) {
+          return this.low_order;
+        } else {
+          return this.high_order;
+        }
       } else if (a_val < b_val) {
         return this.low_order;
       } else {
