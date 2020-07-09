@@ -74,7 +74,8 @@
   },
   "resolutions": {
     "browserify/**/acorn": "^7.2.0",
-    "minimist": "^1.2.5"
+    "minimist": "^1.2.5",
+    "lodash": "^4.17.19"
   },
   "main": "lib/cql",
   "directories": {
