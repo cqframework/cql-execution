@@ -8,7 +8,7 @@
 
 ### If
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 parameter var Boolean
 context Patient
 define exp: if var then 'true return' else 'false return'
@@ -30,8 +30,9 @@ module.exports['If'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -53,8 +54,7 @@ module.exports['If'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -128,7 +128,7 @@ module.exports['If'] = {
 
 ### Case
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 parameter var Integer
 parameter X Integer
 parameter Y Integer
@@ -166,8 +166,9 @@ module.exports['Case'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -207,8 +208,7 @@ module.exports['Case'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }

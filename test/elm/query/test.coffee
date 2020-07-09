@@ -11,17 +11,17 @@ describe 'DateRangeOptimizedQuery', ->
   it 'should find encounters performed during the MP', ->
     e = @encountersDuringMP.exec(@ctx)
     e.should.have.length(1)
-    e[0].id().should.equal 'http://cqframework.org/3/5'
+    e[0].id.should.equal 'http://cqframework.org/3/5'
 
   it 'should find ambulatory encounters performed during the MP', ->
     e = @ambulatoryEncountersDuringMP.exec(@ctx)
     e.should.have.length(1)
-    e[0].id().should.equal 'http://cqframework.org/3/5'
+    e[0].id.should.equal 'http://cqframework.org/3/5'
 
   it 'should find ambulatory encounter performances included in the MP', ->
     e = @ambulatoryEncountersIncludedInMP.exec(@ctx)
     e.should.have.length(1)
-    e[0].id().should.equal 'http://cqframework.org/3/5'
+    e[0].id.should.equal 'http://cqframework.org/3/5'
 
 describe 'FunctionQuery', ->
   @beforeEach ->
@@ -38,7 +38,7 @@ describe.skip 'IncludesQuery', ->
   it 'should find ambulatory encounter performances included in the MP', ->
     e = @mPIncludedAmbulatoryEncounters.exec(@ctx)
     e.should.have.length(1)
-    e[0].id().should.equal 'http://cqframework.org/3/5'
+    e[0].id.should.equal 'http://cqframework.org/3/5'
 
 describe 'MultiSourceQuery', ->
   @beforeEach ->
@@ -120,40 +120,40 @@ describe 'Sorting', ->
   it 'should be able to sort by a tuple field asc' , ->
     e = @tupleAsc.exec(@ctx)
     e.should.have.length(3)
-    e[0].id().should.equal "http://cqframework.org/3/1"
-    e[1].id().should.equal  "http://cqframework.org/3/3"
-    e[2].id().should.equal  "http://cqframework.org/3/5"
+    e[0].id.should.equal "http://cqframework.org/3/1"
+    e[1].id.should.equal  "http://cqframework.org/3/3"
+    e[2].id.should.equal  "http://cqframework.org/3/5"
 
     e = @tupleReturnAsc.exec(@ctx)
     e.should.have.length(3)
-    e[0].id().should.equal "http://cqframework.org/3/1"
-    e[1].id().should.equal  "http://cqframework.org/3/3"
-    e[2].id().should.equal  "http://cqframework.org/3/5"
+    e[0].id.should.equal "http://cqframework.org/3/1"
+    e[1].id.should.equal  "http://cqframework.org/3/3"
+    e[2].id.should.equal  "http://cqframework.org/3/5"
 
     e = @tupleReturnTupleAsc.exec(@ctx)
     e.should.have.length(3)
-    e[0].E.id().should.equal "http://cqframework.org/3/1"
-    e[1].E.id().should.equal  "http://cqframework.org/3/3"
-    e[2].E.id().should.equal  "http://cqframework.org/3/5"
+    e[0].E.id.should.equal "http://cqframework.org/3/1"
+    e[1].E.id.should.equal  "http://cqframework.org/3/3"
+    e[2].E.id.should.equal  "http://cqframework.org/3/5"
 
   it 'should be able to sort by a tuple field desc', ->
     e = @tupleDesc.exec(@ctx)
     e.should.have.length(3)
-    e[2].id().should.equal "http://cqframework.org/3/1"
-    e[1].id().should.equal  "http://cqframework.org/3/3"
-    e[0].id().should.equal  "http://cqframework.org/3/5"
+    e[2].id.should.equal "http://cqframework.org/3/1"
+    e[1].id.should.equal  "http://cqframework.org/3/3"
+    e[0].id.should.equal  "http://cqframework.org/3/5"
 
     e = @tupleReturnDesc.exec(@ctx)
     e.should.have.length(3)
-    e[2].id().should.equal "http://cqframework.org/3/1"
-    e[1].id().should.equal  "http://cqframework.org/3/3"
-    e[0].id().should.equal  "http://cqframework.org/3/5"
+    e[2].id.should.equal "http://cqframework.org/3/1"
+    e[1].id.should.equal  "http://cqframework.org/3/3"
+    e[0].id.should.equal  "http://cqframework.org/3/5"
 
     e = @tupleReturnTupleDesc.exec(@ctx)
     e.should.have.length(3)
-    e[2].E.id().should.equal "http://cqframework.org/3/1"
-    e[1].E.id().should.equal  "http://cqframework.org/3/3"
-    e[0].E.id().should.equal  "http://cqframework.org/3/5"
+    e[2].E.id.should.equal "http://cqframework.org/3/1"
+    e[1].E.id.should.equal  "http://cqframework.org/3/3"
+    e[0].E.id.should.equal  "http://cqframework.org/3/5"
 
   it 'should be able to sort dates by this' , ->
     unsortedDate = @lastDateUnsorted.exec(@ctx)

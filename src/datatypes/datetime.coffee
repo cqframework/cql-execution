@@ -814,7 +814,7 @@ DateTime.prototype.add = Date.prototype.add = (offset, field) ->
   # "floor" UP to the incoming field precision, then add the offset, then reduce back down to original precision.
   # For negative offsets, we use the cieling
   if offsetIsMorePrecise
-    result.year = new jsDate().getFullYear() if not @year #in case there is no year, proceed as if in this year, year will be nullified later
+    result.year = new jsDate().getFullYear() if not @year? #in case there is no year, proceed as if in this year, year will be nullified later
     fieldFloorOrCiel = if offset >= 0 then @getFieldFloor else @getFieldCieling
     for f in @constructor.FIELDS # this relies on FIELDS being sorted least to most precise
       result[f] = result[f] ? fieldFloorOrCiel.call(result,f)
@@ -831,7 +831,8 @@ DateTime.prototype.add = Date.prototype.add = (offset, field) ->
     for f in @constructor.FIELDS
       result[f] = null if not @[f]?
 
-  result
+  # Can't use overflowsOrUnderflows from math.coffee due to circular dependencies when we require it
+  if result.after MAX_DATETIME_VALUE or result.before MIN_DATETIME_VALUE then null else result
 
 DateTime.prototype.getFieldFloor = Date.prototype.getFieldFloor = (field) ->
   if field == 'month'
@@ -989,6 +990,10 @@ cqlFormatStringToMomentFormatString = (string) ->
 
   momentString = momentString.replace /f/g, 'S'
 
+# Redefine MIN/MAX here because math.coffee requires this file, and when we make this file require
+# math.coffee, it errors due to the circular dependency...
+MIN_DATETIME_VALUE = DateTime.parse("0001-01-01T00:00:00.000")
+MAX_DATETIME_VALUE = DateTime.parse("9999-12-31T23:59:59.999")
 
 module.exports.DateTime = DateTime
 module.exports.Date = Date

@@ -1,6 +1,6 @@
 // NOTE: This library must be DUPLICATED in the data.cql file as well!
 library Common2
-using QUICK
+using Simple version '1.0.0'
 parameter SomeNumber default 17
 
 context Patient

@@ -377,9 +377,6 @@ describe 'GeometricMean', ->
   it 'should return null when pass in list as null', ->
     should(@also_null_geometric_mean.exec(@ctx)).be.null()
 
-  it 'should be null if quantity units are not compatible', ->
-    should(@incompatibleUnitsNull.exec(@ctx)).be.null()
-
 describe 'AllTrue', ->
   @beforeEach ->
     setup @, data

@@ -137,7 +137,6 @@ define zero_geometric_mean: GeometricMean({2.0, 8.0, 0})
 define null_geometric_mean: GeometricMean({1, 2, null})
 define all_nulls: GeometricMean({null, null, null})
 define also_null_geometric_mean: GeometricMean(null as List<Decimal>)
-define IncompatibleUnitsNull: GeometricMean({1 'mg/d', 0.002 '/d'})
 
 // @Test: AllTrue
 define at: AllTrue({true,true,true,true})

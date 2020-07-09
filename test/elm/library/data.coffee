@@ -8,7 +8,7 @@
 
 ### In Age Demographic
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 parameter MeasurementPeriod default Interval[DateTime(2013, 1, 1), DateTime(2014, 1, 1))
 
 context Patient
@@ -33,8 +33,9 @@ module.exports['In Age Demographic'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -101,8 +102,7 @@ module.exports['In Age Demographic'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -241,7 +241,7 @@ module.exports['In Age Demographic'] = {
 
 ### CommonLib
 library Common
-using QUICK
+using Simple version '1.0.0'
 include Common2 called common2
 
 codesystem "SNOMEDCT": '2.16.840.1.113883.6.96'
@@ -276,8 +276,9 @@ module.exports['CommonLib'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "includes" : {
@@ -372,8 +373,7 @@ module.exports['CommonLib'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -680,7 +680,7 @@ module.exports['CommonLib'] = {
 
 ### Using CommonLib
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 
 include Common called common
 parameter MeasurementPeriod default Interval[DateTime(2013, 1, 1), DateTime(2014, 1, 1))
@@ -689,7 +689,7 @@ context Patient
 
 define ID: common.InDemographic
 
-define L : Length(Patient.name[0].given[0])
+define L : Length(Patient.name)
 define FuncTest : common.foo(2, 5)
 define supportLibCode: common."directReferenceCode"
 ###
@@ -710,8 +710,9 @@ module.exports['Using CommonLib'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "includes" : {
@@ -785,8 +786,7 @@ module.exports['Using CommonLib'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -826,56 +826,34 @@ module.exports['Using CommonLib'] = {
                "type" : "ExpressionRef"
             }
          }, {
-            "localId" : "24",
+            "localId" : "19",
             "name" : "L",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "24",
+                  "r" : "19",
                   "s" : [ {
                      "value" : [ "define ","L"," : " ]
                   }, {
-                     "r" : "23",
+                     "r" : "18",
                      "s" : [ {
                         "value" : [ "Length","(" ]
                      }, {
-                        "r" : "22",
+                        "r" : "17",
                         "s" : [ {
-                           "r" : "20",
+                           "r" : "16",
                            "s" : [ {
-                              "r" : "19",
-                              "s" : [ {
-                                 "r" : "17",
-                                 "s" : [ {
-                                    "r" : "16",
-                                    "s" : [ {
-                                       "value" : [ "Patient" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "17",
-                                    "s" : [ {
-                                       "value" : [ "name" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "r" : "18",
-                                 "value" : [ "[","0","]" ]
-                              } ]
-                           }, {
-                              "value" : [ "." ]
-                           }, {
-                              "r" : "20",
-                              "s" : [ {
-                                 "value" : [ "given" ]
-                              } ]
+                              "value" : [ "Patient" ]
                            } ]
                         }, {
-                           "r" : "21",
-                           "value" : [ "[","0","]" ]
+                           "value" : [ "." ]
+                        }, {
+                           "r" : "17",
+                           "s" : [ {
+                              "value" : [ "name" ]
+                           } ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -884,55 +862,79 @@ module.exports['Using CommonLib'] = {
                }
             } ],
             "expression" : {
-               "localId" : "23",
+               "localId" : "18",
                "type" : "Length",
                "operand" : {
-                  "localId" : "22",
-                  "type" : "Indexer",
-                  "operand" : [ {
-                     "localId" : "20",
-                     "path" : "given",
-                     "type" : "Property",
-                     "source" : {
-                        "localId" : "19",
-                        "type" : "Indexer",
-                        "operand" : [ {
-                           "localId" : "17",
-                           "path" : "name",
-                           "type" : "Property",
-                           "source" : {
-                              "localId" : "16",
-                              "name" : "Patient",
-                              "type" : "ExpressionRef"
-                           }
-                        }, {
-                           "localId" : "18",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "0",
-                           "type" : "Literal"
-                        } ]
-                     }
-                  }, {
-                     "localId" : "21",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
-                     "type" : "Literal"
-                  } ]
+                  "localId" : "17",
+                  "path" : "name",
+                  "type" : "Property",
+                  "source" : {
+                     "localId" : "16",
+                     "name" : "Patient",
+                     "type" : "ExpressionRef"
+                  }
                }
             }
          }, {
-            "localId" : "29",
+            "localId" : "24",
             "name" : "FuncTest",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "29",
+                  "r" : "24",
                   "s" : [ {
                      "value" : [ "define ","FuncTest"," : " ]
                   }, {
-                     "r" : "28",
+                     "r" : "23",
+                     "s" : [ {
+                        "r" : "20",
+                        "s" : [ {
+                           "value" : [ "common" ]
+                        } ]
+                     }, {
+                        "value" : [ "." ]
+                     }, {
+                        "r" : "23",
+                        "s" : [ {
+                           "r" : "21",
+                           "value" : [ "foo","(","2",", ","5",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "23",
+               "name" : "foo",
+               "libraryName" : "common",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "localId" : "21",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "22",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "5",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "27",
+            "name" : "supportLibCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "27",
+                  "s" : [ {
+                     "value" : [ "define ","supportLibCode",": " ]
+                  }, {
+                     "r" : "26",
                      "s" : [ {
                         "r" : "25",
                         "s" : [ {
@@ -941,54 +943,7 @@ module.exports['Using CommonLib'] = {
                      }, {
                         "value" : [ "." ]
                      }, {
-                        "r" : "28",
-                        "s" : [ {
-                           "r" : "26",
-                           "value" : [ "foo","(","2",", ","5",")" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "28",
-               "name" : "foo",
-               "libraryName" : "common",
-               "type" : "FunctionRef",
-               "operand" : [ {
-                  "localId" : "26",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "2",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "27",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "5",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "32",
-            "name" : "supportLibCode",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "32",
-                  "s" : [ {
-                     "value" : [ "define ","supportLibCode",": " ]
-                  }, {
-                     "r" : "31",
-                     "s" : [ {
-                        "r" : "30",
-                        "s" : [ {
-                           "value" : [ "common" ]
-                        } ]
-                     }, {
-                        "value" : [ "." ]
-                     }, {
-                        "r" : "31",
+                        "r" : "26",
                         "s" : [ {
                            "value" : [ "\"directReferenceCode\"" ]
                         } ]
@@ -997,7 +952,7 @@ module.exports['Using CommonLib'] = {
                }
             } ],
             "expression" : {
-               "localId" : "31",
+               "localId" : "26",
                "name" : "directReferenceCode",
                "libraryName" : "common",
                "type" : "CodeRef"
@@ -1009,7 +964,7 @@ module.exports['Using CommonLib'] = {
 
 ### CommonLib2
 library Common2
-using QUICK
+using Simple version '1.0.0'
 parameter SomeNumber default 17
 
 context Patient
@@ -1057,8 +1012,9 @@ module.exports['CommonLib2'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -1081,8 +1037,7 @@ module.exports['CommonLib2'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1630,7 +1585,7 @@ module.exports['CommonLib2'] = {
 
 ### Using CommonLib2
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 include Common2 called common2
 
 context Patient
@@ -1661,8 +1616,9 @@ module.exports['Using CommonLib2'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "includes" : {
@@ -1679,8 +1635,7 @@ module.exports['Using CommonLib2'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1992,7 +1947,7 @@ module.exports['Using CommonLib2'] = {
 
 ### Using CommonLib and CommonLib2
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 include Common2 called common2
 include Common called common
 
@@ -2018,8 +1973,9 @@ module.exports['Using CommonLib and CommonLib2'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "includes" : {
@@ -2040,8 +1996,7 @@ module.exports['Using CommonLib and CommonLib2'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
