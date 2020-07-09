@@ -1,5 +1,9 @@
 {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "Math",
          "version" : "1"
@@ -36,7 +40,7 @@
       "statements" : {
          "def" : [ {
             "name" : "Add",
-            "context" : "Population",
+            "context" : "Unfiltered",
             "accessLevel" : "Public",
             "expression" : {
                "type" : "Add",
@@ -50,7 +54,7 @@
             }
          }, {
             "name" : "Subtract",
-            "context" : "Population",
+            "context" : "Unfiltered",
             "accessLevel" : "Public",
             "expression" : {
                "type" : "Subtract",
@@ -64,7 +68,7 @@
             }
          }, {
             "name" : "Multiply",
-            "context" : "Population",
+            "context" : "Unfiltered",
             "accessLevel" : "Public",
             "expression" : {
                "type" : "Multiply",
@@ -78,7 +82,7 @@
             }
          }, {
             "name" : "Divide",
-            "context" : "Population",
+            "context" : "Unfiltered",
             "accessLevel" : "Public",
             "expression" : {
                "type" : "Divide",
@@ -94,3 +98,4 @@
       }
    }
 }
+

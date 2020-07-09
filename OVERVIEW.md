@@ -1,7 +1,7 @@
 CQL Execution Framework Reference Implementation
 ================================================
 
-The reference implementation for executing CQL is currently under development. The reference implementation is intended to be used in CQF pilots and integrated into production eCQM tools such as Bonnie and Cypress.
+The reference implementation for executing CQL is still under development. The reference implementation was created to prove that CQL is implementable and has been integrated into production eCQM tools such as [Bonnie](https://bonnie.healthit.gov/) and [Cypress](https://cypress.healthit.gov/). It is also used in several [CDS Connect](https://cds.ahrq.gov/cdsconnect) tools.
 
 The CQL execution framework is licensed under the open source [Apache Version 2.0](../../../LICENSE) license.
 
@@ -33,11 +33,11 @@ The expression 1 + 2 is represented in JSON ELM as follows:
 {
   "type" : "Add",
   "operand" : [ {
-    "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
     "value" : "1",
-     "type" : "Literal"
+    "type" : "Literal"
   }, {
-    "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
     "value" : "2",
     "type" : "Literal"
   } ]
@@ -70,15 +70,15 @@ When the `constructor` is passed the JSON ELM from the previous example, it cons
 
 When `exec` is called, it calls `exec` on `@arg1` and `@arg2` (resulting in the primitives `1` and `2`) and then adds them using the native `+` operator. In CoffeeScript, the last line of a function is an implicit return, so it returns the result of the native addition operation.
 
-Note that the actual reference implementation of `Add` differs from this example in that it can handle other types of operands (since not all addition is on `IntegerLiteral` expressions). It also utilizes common functions from its superclass, resulting in an actual implementation that is more flexible and less verbose than the implementation in this example.
+Note that the actual reference implementation of `Add` differs from this example in that it can handle other types of operands (since not all addition is on `IntegerLiteral` expressions). It also utilizes common functions from its superclass, resulting in an actual implementation that is more flexible (but also more complex) than the implementation in this example.
 
 This is the core of how all operations are defined and executed in the CQL execution framework. Since ELM is an AST, execution is simply a chained execution down the tree.
 
 ### PatientSource
 
-The CQL execution framework is implemented with FHIR Profiles for Clinical Quality (QUICK) as the primary data model. Access to the data model, however, always occurs through a `PatientSource` class, allowing the actual backend model implementation to be replaced with another implementation.
+The CQL execution framework contains a very simplistic data model to support demonstration and testing. Real-world uses will use more complex data models such as FHIR or QDM.  Access to the data model always occurs through a `PatientSource` class, allowing the backend model implementation to vary based on data model.
 
-When the CQL execution framework executes a CQL library, it iterates over the patients provided by the `PatientSource`, calculating each expression in the library’s `Patient` context for each patient. In the `Patient` context, retrieves are always executed against the current patient record. In order to support patient-specific retrieves and record access, the `Patient` class must implement a small number of predefined functions (such as `find` and `get`).
+When the CQL execution framework executes a CQL library, it iterates over the patients provided by the `PatientSource`, calculating each expression in the library’s `Patient` context for each patient. In the `Patient` context, retrieves are always executed against the current patient record. In order to support patient-specific retrieves and record access, the `Patient` class must implement a small number of predefined functions (such as `findRecords` and `get`).
 
 Ideally, a `PatientSource` should provide the pre-filtered set of patients, based on the initial data requiremements (gleaned from the library’s retrieve statements). In the current reference implementation, the `PatientSource` is populated with an array of JSON-formatted patients, usually from a flat file.
 

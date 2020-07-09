@@ -1,4 +1,4 @@
-{ decimalAdjust, isValidDecimal } = require '../util/math'
+{ decimalAdjust, isValidDecimal, overflowsOrUnderflows } = require '../util/math'
 ucum = require 'ucum'
 
 module.exports.Quantity = class Quantity
@@ -89,12 +89,14 @@ module.exports.Quantity = class Quantity
       can_val = a.to_ucum()
       other_can_value = b.to_ucum()
       ucum_value = ucum_multiply(can_val,[[operator,other_can_value]])
+      return null if overflowsOrUnderflows(ucum_value.value)
       try
         new Quantity(ucum_value.value, units_to_string(ucum_value.units))
       catch
         null
     else
       value = if operator == "/" then @value / other  else @value * other
+      return null if overflowsOrUnderflows(value)
       try
         new Quantity(decimalAdjust("round",value,-8), coalesceToOne(@unit))
       catch
@@ -234,7 +236,8 @@ doScaledAddition = (a,b,scaleForB) ->
     # we will choose the unit of a to be the unit we return
     val = convert_value(b.value * scaleForB, b_unit, a_unit)
     return null unless val?
-    new Quantity(a.value + val, a_unit)
+    sum = a.value + val
+    if overflowsOrUnderflows(sum) then null else new Quantity(sum, a_unit)
   else if a.copy and a.add
     b_unit = if b?.isQuantity then coalesceToOne(b.unit) else b.unit
     a.copy().add(b.value * scaleForB, clean_unit(b_unit))

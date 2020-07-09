@@ -8,7 +8,7 @@
 
 ### FromString
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define stringStr: convert 'str' to String
 define stringNull: convert null to String
@@ -47,8 +47,9 @@ module.exports['FromString'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -58,8 +59,7 @@ module.exports['FromString'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -838,7 +838,7 @@ module.exports['FromString'] = {
 
 ### FromInteger
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define string10: convert 10 to String
 define decimal10: convert 10 to Decimal
@@ -862,8 +862,9 @@ module.exports['FromInteger'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -873,8 +874,7 @@ module.exports['FromInteger'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1020,7 +1020,7 @@ module.exports['FromInteger'] = {
 
 ### FromQuantity
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define quantityStr: convert 10 'A' to String
 define negQuantityStr: convert -10 'A' to String
@@ -1044,8 +1044,9 @@ module.exports['FromQuantity'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -1055,8 +1056,7 @@ module.exports['FromQuantity'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1241,7 +1241,7 @@ module.exports['FromQuantity'] = {
 
 ### FromBoolean
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define booleanTrueStr: convert true to String
 define booleanFalseStr: convert false to String
@@ -1265,8 +1265,9 @@ module.exports['FromBoolean'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -1276,8 +1277,7 @@ module.exports['FromBoolean'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1420,7 +1420,7 @@ module.exports['FromBoolean'] = {
 
 ### FromDateTime
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define dateTimeToStr: convert @2015-01-02T12:01:02.321-06:00 to String
 define dateTimeToDate: convert @2015-01-02T12:01:02.321-06:00 to Date
@@ -1443,8 +1443,9 @@ module.exports['FromDateTime'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -1454,8 +1455,7 @@ module.exports['FromDateTime'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1681,7 +1681,7 @@ module.exports['FromDateTime'] = {
 
 ### FromDate
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define dateYMDToDateTime: convert @2015-01-01 to DateTime
 define dateYMToDateTime: convert @2015-01 to DateTime
@@ -1706,8 +1706,9 @@ module.exports['FromDate'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -1717,8 +1718,7 @@ module.exports['FromDate'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1950,7 +1950,7 @@ module.exports['FromDate'] = {
 
 ### FromTime
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define timeStr: convert @T11:57 to String
 define timeTime: convert @T11:57 to Time
@@ -1972,8 +1972,9 @@ module.exports['FromTime'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -1983,8 +1984,7 @@ module.exports['FromTime'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2077,7 +2077,7 @@ module.exports['FromTime'] = {
 
 ### FromCode
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 // define hepB: Code '66071002' from "SNOMED-CT" display 'Type B viral hepatitis'
 // define codeConcept: convert hepB to Concept
 // define codeCode: convert hepB to Code
@@ -2101,8 +2101,9 @@ module.exports['FromCode'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -2112,8 +2113,7 @@ module.exports['FromCode'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2149,7 +2149,7 @@ module.exports['FromCode'] = {
 
 ### ToDecimal
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define NoSign: ToDecimal('0.0')
 define PositiveSign: ToDecimal('+1.1')
@@ -2177,8 +2177,9 @@ module.exports['ToDecimal'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -2188,8 +2189,7 @@ module.exports['ToDecimal'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2509,7 +2509,7 @@ module.exports['ToDecimal'] = {
 
 ### ToInteger
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define NoSign: ToInteger('12345')
 define PositiveSign: ToInteger('+12345')
@@ -2534,8 +2534,9 @@ module.exports['ToInteger'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -2545,8 +2546,7 @@ module.exports['ToInteger'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2737,7 +2737,7 @@ module.exports['ToInteger'] = {
 
 ### ToQuantity
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define WrongFormatQuantity: ToQuantity('abc')
 define TooLargeQuantity: ToQuantity('444444444444444444444444444444 \'\'')
@@ -2761,8 +2761,9 @@ module.exports['ToQuantity'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -2772,8 +2773,7 @@ module.exports['ToQuantity'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2949,7 +2949,7 @@ module.exports['ToQuantity'] = {
 
 ### ToRatio
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define NullArg: ToRatio((null as String))
 define IsValid: ToRatio('1.0 \'mg\':2.0 \'mg\'')
@@ -2975,8 +2975,9 @@ module.exports['ToRatio'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -2986,8 +2987,7 @@ module.exports['ToRatio'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -3235,7 +3235,7 @@ module.exports['ToRatio'] = {
 
 ### ToTime
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define NullArgTime: ToTime((null as String))
 define IncorrectFormatTime: ToTime('10:00PM')
@@ -3265,8 +3265,9 @@ module.exports['ToTime'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -3276,8 +3277,7 @@ module.exports['ToTime'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -3669,7 +3669,7 @@ module.exports['ToTime'] = {
 
 ### ToBoolean
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define UpperCaseTrue: ToBoolean('TRUE')
 define UpperCaseFalse: ToBoolean('FALSE')
@@ -3700,8 +3700,9 @@ module.exports['ToBoolean'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -3711,8 +3712,7 @@ module.exports['ToBoolean'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -4119,7 +4119,7 @@ module.exports['ToBoolean'] = {
 
 ### ToConcept
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IsValid: ToConcept(Code { system: 'http://loinc.org', code: '8480-6' }) // Concept { codes: { Code { system: 'http://loinc.org', code: '8480-6' } } }
 define IsNull: ToConcept(null as Code)
@@ -4141,8 +4141,9 @@ module.exports['ToConcept'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -4152,8 +4153,7 @@ module.exports['ToConcept'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -4288,7 +4288,7 @@ module.exports['ToConcept'] = {
 
 ### ToDate
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define ToDateString: ToDate('2015-01-02')
 define ToDateDateTime: ToDate(DateTime(2000, 3, 15, 13, 30, 25, 200))
@@ -4312,8 +4312,9 @@ module.exports['ToDate'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -4323,8 +4324,7 @@ module.exports['ToDate'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -4556,7 +4556,7 @@ module.exports['ToDate'] = {
 
 ### ConvertsToBoolean
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IsTrueWithTrueValue: ConvertsToBoolean('y')
 define IsTrueWithFalseValue: ConvertsToBoolean('0')
@@ -4580,8 +4580,9 @@ module.exports['ConvertsToBoolean'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -4591,8 +4592,7 @@ module.exports['ConvertsToBoolean'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -4761,7 +4761,7 @@ module.exports['ConvertsToBoolean'] = {
 
 ### ConvertsToDate
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IsTrue: ConvertsToDate('2015-01-01')
 define IsFalse: ConvertsToDate('foo')
@@ -4784,8 +4784,9 @@ module.exports['ConvertsToDate'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -4795,8 +4796,7 @@ module.exports['ConvertsToDate'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -4929,7 +4929,7 @@ module.exports['ConvertsToDate'] = {
 
 ### ConvertsToDateTime
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IsTrue: ConvertsToDateTime('2014-01-01T14:30:00.0Z')
 define IsTrueWithDateValue: ConvertsToDateTime(@2015-01-01)
@@ -4953,8 +4953,9 @@ module.exports['ConvertsToDateTime'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -4964,8 +4965,7 @@ module.exports['ConvertsToDateTime'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -5141,7 +5141,7 @@ module.exports['ConvertsToDateTime'] = {
 
 ### ConvertsToDecimal
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IsTrue: ConvertsToDecimal('0.1')
 define IsFalse: ConvertsToDecimal('foo')
@@ -5164,8 +5164,9 @@ module.exports['ConvertsToDecimal'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -5175,8 +5176,7 @@ module.exports['ConvertsToDecimal'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -5309,7 +5309,7 @@ module.exports['ConvertsToDecimal'] = {
 
 ### ConvertsToInteger
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IsTrue: ConvertsToInteger('101')
 define IsFalse: ConvertsToInteger('foo')
@@ -5332,8 +5332,9 @@ module.exports['ConvertsToInteger'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -5343,8 +5344,7 @@ module.exports['ConvertsToInteger'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -5477,7 +5477,7 @@ module.exports['ConvertsToInteger'] = {
 
 ### ConvertsToQuantity
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IsTrueWithDecimal: ConvertsToQuantity(0.1)
 define IsTrueWithInteger: ConvertsToQuantity(101)
@@ -5503,8 +5503,9 @@ module.exports['ConvertsToQuantity'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -5514,8 +5515,7 @@ module.exports['ConvertsToQuantity'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -5744,7 +5744,7 @@ module.exports['ConvertsToQuantity'] = {
 
 ### ConvertsToRatio
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IsTrue: ConvertsToRatio('1.0 \'mg\':2.0 \'mg\'')
 define IsFalse: ConvertsToRatio('1.0 \'mg\';2.0 \'mg\'')
@@ -5768,8 +5768,9 @@ module.exports['ConvertsToRatio'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -5779,8 +5780,7 @@ module.exports['ConvertsToRatio'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -5949,7 +5949,7 @@ module.exports['ConvertsToRatio'] = {
 
 ### ConvertsToString
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IsTrue: ConvertsToString(true)
 define IsFalse: ConvertsToString(Code { system: 'http://loinc.org', code: '8480-6' })
@@ -5972,8 +5972,9 @@ module.exports['ConvertsToString'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -5983,8 +5984,7 @@ module.exports['ConvertsToString'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -6149,7 +6149,7 @@ module.exports['ConvertsToString'] = {
 
 ### ConvertsToTime
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IsTrue: ConvertsToTime('02:04:59.123')
 define IsFalse: ConvertsToTime('foo')
@@ -6172,8 +6172,9 @@ module.exports['ConvertsToTime'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -6183,8 +6184,7 @@ module.exports['ConvertsToTime'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -6317,7 +6317,7 @@ module.exports['ConvertsToTime'] = {
 
 ### ConvertQuantity
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define ConvertQuantityGood: ConvertQuantity(5 'mg', 'g')
 define ConvertSyntax: convert 5 'mg' to 'g'
@@ -6342,8 +6342,9 @@ module.exports['ConvertQuantity'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -6353,8 +6354,7 @@ module.exports['ConvertQuantity'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -6597,7 +6597,7 @@ module.exports['ConvertQuantity'] = {
 
 ### CanConvertQuantity
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define CanConvertQuantityTrue: CanConvertQuantity(5 'mg', 'g')
 define CanConvertQuantityFalse: CanConvertQuantity(5 'mg', 'fox')
@@ -6621,8 +6621,9 @@ module.exports['CanConvertQuantity'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -6632,8 +6633,7 @@ module.exports['CanConvertQuantity'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }

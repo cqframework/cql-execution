@@ -169,40 +169,38 @@ define DecimalPowerUnderflow: (minimum Decimal)^3
 define DecimalSuccessorOverflow: successor of maximum Decimal
 define DecimalPredecessorUnderflow: predecessor of minimum Decimal
 
-define MaxQuantity: Quantity(maximum Decimal, 'mm')
-define MinQuantity: Quantity(minimum Decimal, 'mm')
-define QuantityAddOverflow: MaxQuantity + '1.0 mm'
-define QuantityAddUnderflow: MinQuantity + '-1.0 mm'
-define QuantitySubtractOverflow: MaxQuantity - Quantity(-1, 'mm')
-define QuantitySubtractUnderflow: MinQuantity - Quantity(1, 'mm')
-define QuantityMultiplyOverflow: MaxQuantity * Quantity(2, 'mm')
-define QuantityMultiplyUnderflow: MinQuantity * Quantity(2, 'mm')
-define QuantityDivideOverflow: MaxQuantity / Quantity(0.5, 'mm')
-define QuantityDivideUnderflow: MinQuantity / Quantity(-0.5, 'mm')
-define QuantityDivideByZero: '1.0 mm' / '0 mm'
-define QuantityPowerOverflow: MaxQuantity^3
-define QuantityPowerUnderflow: MinQuantity^3
+define MaxQuantity: Quantity { value: maximum Decimal, unit: 'mm' }
+define MinQuantity: Quantity { value: minimum Decimal, unit: 'mm' }
+define QuantityAddOverflow: MaxQuantity + 1.0 'mm'
+define QuantityAddUnderflow: MinQuantity + (-1.0 'mm')
+define QuantitySubtractOverflow: MaxQuantity - (-1 'mm')
+define QuantitySubtractUnderflow: MinQuantity - 1 'mm'
+define QuantityMultiplyOverflow: MaxQuantity * 2 'mm'
+define QuantityMultiplyUnderflow: MinQuantity * 2 'mm'
+define QuantityDivideOverflow: MaxQuantity / 0.5 'mm'
+define QuantityDivideUnderflow: MinQuantity / (-0.5 'mm')
+define QuantityDivideByZero: 1.0 'mm' / 0 'mm'
 define QuantitySuccessorOverflow: successor of MaxQuantity
 define QuantityPredecessorUnderflow: predecessor of MinQuantity
 
-define DateTimeAddOverflow: maximum DateTime + '1 day'
-define DateTimeAddUnderflow: minimum DateTime + '-1 day'
-define DateTimeSubtractOverflow: maximum DateTime - '-1 day'
-define DateTimeSubtractUnderflow: minimum DateTime - '1 day'
+define DateTimeAddOverflow: maximum DateTime + 1 day
+define DateTimeAddUnderflow: minimum DateTime + (-1 day)
+define DateTimeSubtractOverflow: maximum DateTime - (-1 day)
+define DateTimeSubtractUnderflow: minimum DateTime - 1 day
 define DateTimeSuccessorOverflow: successor of maximum DateTime
 define DateTimePredecessorUnderflow: predecessor of minimum DateTime
 
-define DateAddOverflow: maximum Date + '1 day'
-define DateAddUnderflow: minimum Date + '-1 day'
-define DateSubtractOverflow: maximum Date - '-1 day'
-define DateSubtractUnderflow: minimum Date - '1 day'
+define DateAddOverflow: maximum Date + 1 day
+define DateAddUnderflow: minimum Date + (-1 day)
+define DateSubtractOverflow: maximum Date - (-1 day)
+define DateSubtractUnderflow: minimum Date - 1 day
 define DateSuccessorOverflow: successor of maximum Date
 define DatePredecessorUnderflow: predecessor of minimum Date
 
-define TimeAddOverflow: maximum Time + '1 second'
-define TimeAddUnderflow: minimum Time + '-1 second'
-define TimeSubtractOverflow: maximum Time - '-1 second'
-define TimeSubtractUnderflow: minimum Time - '1 second'
+define TimeAddOverflow: maximum Time + 1 second
+define TimeAddUnderflow: minimum Time + (-1 second)
+define TimeSubtractOverflow: maximum Time - (-1 second)
+define TimeSubtractUnderflow: minimum Time - 1 second
 define TimeSuccessorOverflow: successor of maximum Time
 define TimePredecessorUnderflow: predecessor of minimum Time
 

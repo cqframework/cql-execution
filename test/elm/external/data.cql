@@ -10,16 +10,15 @@ define Conditions: [Condition]
 define Encounters: [Encounter]
 define PharyngitisConditions: [Condition: included."Acute Pharyngitis"]
 define AmbulatoryEncounters: [Encounter: "Ambulatory/ED Visit"]
-define EncountersByServiceType: [Encounter: type in "Ambulatory/ED Visit"]
+define EncountersByCode: [Encounter: code in "Ambulatory/ED Visit"]
 define WrongValueSet: [Condition: "Ambulatory/ED Visit"]
-define WrongCodeProperty: [Encounter: class in "Ambulatory/ED Visit"]
+define WrongCodeProperty: [Encounter: status in "Ambulatory/ED Visit"]
 define ConditionsByCode: [Condition: "Viral pharyngitis code"]
 define ConditionsByConcept: [Condition: "Viral pharyngitis"]
 
 // @Test: Included
 library Included version '1'
-using QUICK
 
 codesystem "SNOMED": '2.16.840.1.113883.6.96'
-valueset "Acute Pharyngitis": '2.16.840.1.113883.3.464.1003.102.12.1011''
+valueset "Acute Pharyngitis": '2.16.840.1.113883.3.464.1003.102.12.1011'
 

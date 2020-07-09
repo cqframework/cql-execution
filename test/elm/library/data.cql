@@ -8,7 +8,7 @@ AgeInYearsAt(start of MeasurementPeriod) >= 2 and AgeInYearsAt(start of Measurem
 
 // @Test: CommonLib
 library Common
-using QUICK
+using Simple version '1.0.0'
 include Common2 called common2
 
 codesystem "SNOMEDCT": '2.16.840.1.113883.6.96'
@@ -28,7 +28,7 @@ define SupportLibDef:
   common2.TheParameter + common2.TwoPlusOne + common2.TwoTimesThree
 
 // @Test: Using CommonLib
-using QUICK
+using Simple version '1.0.0'
 
 include Common called common
 parameter MeasurementPeriod default Interval[DateTime(2013, 1, 1), DateTime(2014, 1, 1))
@@ -37,13 +37,13 @@ context Patient
 
 define ID: common.InDemographic
 
-define L : Length(Patient.name[0].given[0])
+define L : Length(Patient.name)
 define FuncTest : common.foo(2, 5)
 define supportLibCode: common."directReferenceCode"
 
 // @Test: CommonLib2
 library Common2
-using QUICK
+using Simple version '1.0.0'
 parameter SomeNumber default 17
 
 context Patient
@@ -76,7 +76,7 @@ define SortUsingFunction:
   ({1, 3, 2, 5, 4}) N return Tuple{N: N} sort by square(N)
 
 // @Test: Using CommonLib2
-using QUICK
+using Simple version '1.0.0'
 include Common2 called common2
 
 context Patient
@@ -92,7 +92,7 @@ define ExprSortsOnFunc: common2.SortUsingFunction
 
 
 // @Test: Using CommonLib and CommonLib2
-using QUICK
+using Simple version '1.0.0'
 include Common2 called common2
 include Common called common
 

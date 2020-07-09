@@ -1,5 +1,10 @@
 // @Test: Instance
-using QUICK
+using Simple version '1.0.0'
+codesystem "SNOMED": '2.16.840.1.113883.6.96'
+codesystem "SIMPLE": '1.2.3.4.5'
+code "Viral pharyngitis code": '1532007' from "SNOMED" display 'Viral pharyngitis (disorder)'
+code "Active code": 'active' from "SNOMED" display 'Active'
+
 define QuantityA: Quantity {
   unit: 'a',
   value: 12
@@ -17,9 +22,9 @@ define ConceptA: Concept {
   display: 'Test Concept'
 }
 
-define Med : Medication {
-  name: 'Best Med Ever',
-  isBrand: false
+define Pharyngitis : Condition {
+  code: "Viral pharyngitis code",
+  status: "Active code"
 }
 
 define val: QuantityA.value

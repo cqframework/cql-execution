@@ -8,7 +8,7 @@
 
 ### Date
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Year: Date(2012)
 define Month: Date(2012, 2)
@@ -31,8 +31,9 @@ module.exports['Date'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -42,8 +43,7 @@ module.exports['Date'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -162,7 +162,7 @@ module.exports['Date'] = {
 
 ### DateComponentFrom
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IdesOfMarch: Date(2000, 3, 15)
 define Year: year from IdesOfMarch
@@ -193,8 +193,9 @@ module.exports['DateComponentFrom'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -204,8 +205,7 @@ module.exports['DateComponentFrom'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -560,7 +560,7 @@ module.exports['DateComponentFrom'] = {
 
 ### SameAs
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define SameYear: Date(2000, 3, 15) same year as Date(2000, 11, 23)
 define NotSameYear: Date(2000, 3, 15) same year as Date(2001, 11, 23)
@@ -593,8 +593,9 @@ module.exports['SameAs'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -604,8 +605,7 @@ module.exports['SameAs'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1619,7 +1619,7 @@ module.exports['SameAs'] = {
 
 ### SameOrAfter
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define SameYear: Date(2000, 3, 15) same year or after Date(2000, 11, 23)
 define YearAfter: Date(2000, 3, 15) same year or after Date(1999, 11, 23)
@@ -1660,8 +1660,9 @@ module.exports['SameOrAfter'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -1671,8 +1672,7 @@ module.exports['SameOrAfter'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -3283,7 +3283,7 @@ module.exports['SameOrAfter'] = {
 
 ### SameOrBefore
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define SameYear: Date(2000, 3, 15) same year or before Date(2000, 11, 23)
 define YearAfter: Date(2000, 3, 15) same year or before Date(1999, 11, 23)
@@ -3324,8 +3324,9 @@ module.exports['SameOrBefore'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -3335,8 +3336,7 @@ module.exports['SameOrBefore'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -4947,7 +4947,7 @@ module.exports['SameOrBefore'] = {
 
 ### After
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define SameYear: Date(2000, 12, 15) after year of Date(2000, 11, 23)
 define YearAfter: Date(2000, 12, 15) after year of Date(1999, 11, 23)
@@ -4985,8 +4985,9 @@ module.exports['After'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -4996,8 +4997,7 @@ module.exports['After'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -6368,7 +6368,7 @@ module.exports['After'] = {
 
 ### Before
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define SameYear: Date(2000, 10, 15) before year of Date(2000, 11, 23)
 define YearAfter: Date(2000, 10, 15) before year of Date(1999, 11, 23)
@@ -6406,8 +6406,9 @@ module.exports['Before'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -6417,8 +6418,7 @@ module.exports['Before'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -7789,7 +7789,7 @@ module.exports['Before'] = {
 
 ### DifferenceBetween
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define NewYear2013: Date(2013, 1, 1)
 define NewYear2014: Date(2014, 1, 1)
@@ -7820,8 +7820,9 @@ module.exports['DifferenceBetween'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -7831,8 +7832,7 @@ module.exports['DifferenceBetween'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -8323,7 +8323,7 @@ module.exports['DifferenceBetween'] = {
 
 ### DifferenceBetween Comparisons
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define NewYear2014: Date(2014, 1, 1)
 define February2014: Date(2014, 2)
@@ -8363,8 +8363,9 @@ module.exports['DifferenceBetween Comparisons'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -8374,8 +8375,7 @@ module.exports['DifferenceBetween Comparisons'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -9544,7 +9544,7 @@ module.exports['DifferenceBetween Comparisons'] = {
 
 ### DurationBetween
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define DecTen2013: Date(2013, 12, 10)
 define JanOne2015: Date(2015, 1, 1)
@@ -9575,8 +9575,9 @@ module.exports['DurationBetween'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -9586,8 +9587,7 @@ module.exports['DurationBetween'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -10078,7 +10078,7 @@ module.exports['DurationBetween'] = {
 
 ### DateMath
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define June15th2013: Date(2013, 6, 15)
 define PlusThreeYears: June15th2013 + 3 years
@@ -10107,8 +10107,9 @@ module.exports['DateMath'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -10118,8 +10119,7 @@ module.exports['DateMath'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }

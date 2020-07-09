@@ -8,7 +8,7 @@
 
 ### Count
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define not_null: Count({1,2,3,4,5})
 define has_null: Count({1,null,null,null,2})
@@ -31,8 +31,9 @@ module.exports['Count'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -42,8 +43,7 @@ module.exports['Count'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -210,7 +210,7 @@ module.exports['Count'] = {
 
 ### Sum
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define not_null: Sum({1,2,3,4,5})
 define has_null: Sum({1,null,null,null,2})
@@ -238,8 +238,9 @@ module.exports['Sum'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -249,8 +250,7 @@ module.exports['Sum'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -867,7 +867,7 @@ module.exports['Sum'] = {
 
 ### Min
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define not_null: Min({1,2,3,4,5,0})
 define has_null: Min({1,null,-1,null,2})
@@ -903,8 +903,9 @@ module.exports['Min'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -914,8 +915,7 @@ module.exports['Min'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2294,7 +2294,7 @@ module.exports['Min'] = {
 
 ### Max
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define not_null: Max({10,1,2,3,4,5})
 define has_null: Max({1,null,null,2})
@@ -2332,8 +2332,9 @@ module.exports['Max'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -2343,8 +2344,7 @@ module.exports['Max'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -3683,7 +3683,7 @@ module.exports['Max'] = {
 
 ### Avg
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define not_null: Avg({1,2,3,4,5})
 define has_null: Avg({1,null,null,2})
@@ -3711,8 +3711,9 @@ module.exports['Avg'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -3722,8 +3723,7 @@ module.exports['Avg'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -4362,7 +4362,7 @@ module.exports['Avg'] = {
 
 ### Median
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define odd: Median({5,1,2,3,4})
 define even: Median({5,1,2,3,4,6})
@@ -4398,8 +4398,9 @@ module.exports['Median'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -4409,8 +4410,7 @@ module.exports['Median'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -5817,7 +5817,7 @@ module.exports['Median'] = {
 
 ### Mode
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define not_null: Mode({1,2,2,2,3,4,5})
 define has_null: Mode({1,null,null,2,2})
@@ -5843,8 +5843,9 @@ module.exports['Mode'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -5854,8 +5855,7 @@ module.exports['Mode'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -6170,7 +6170,7 @@ module.exports['Mode'] = {
 
 ### Variance
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define v: Variance({1,2,3,4,5})
 define v_q: Variance({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
@@ -6196,8 +6196,9 @@ module.exports['Variance'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -6207,8 +6208,7 @@ module.exports['Variance'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -6724,7 +6724,7 @@ module.exports['Variance'] = {
 
 ### PopulationVariance
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define v: PopulationVariance({1.0,2.0,3.0,4.0,5.0})
 define v_q: PopulationVariance({1.0 'ml',2.0 'ml',3.0 'ml',4.0 'ml',5.0 'ml'})
@@ -6750,8 +6750,9 @@ module.exports['PopulationVariance'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -6761,8 +6762,7 @@ module.exports['PopulationVariance'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -7262,7 +7262,7 @@ module.exports['PopulationVariance'] = {
 
 ### StdDev
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define std: StdDev({1,2,3,4,5})
 define std_q: StdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
@@ -7288,8 +7288,9 @@ module.exports['StdDev'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -7299,8 +7300,7 @@ module.exports['StdDev'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -7813,7 +7813,7 @@ module.exports['StdDev'] = {
 
 ### PopulationStdDev
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define dev: PopulationStdDev({1,2,3,4,5})
 define dev_q: PopulationStdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
@@ -7839,8 +7839,9 @@ module.exports['PopulationStdDev'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -7850,8 +7851,7 @@ module.exports['PopulationStdDev'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -8364,7 +8364,7 @@ module.exports['PopulationStdDev'] = {
 
 ### Product
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define decimal_product: Product({1.0, 2.0, 3.0, 4.0})
 define integer_product: Product({5, 4, 5})
@@ -8394,8 +8394,9 @@ module.exports['Product'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -8405,8 +8406,7 @@ module.exports['Product'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -9091,32 +9091,17 @@ module.exports['Product'] = {
 
 ### GeometricMean
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define decimal_geometric_mean: GeometricMean({2.0, 8.0, null})
 define zero_geometric_mean: GeometricMean({2.0, 8.0, 0})
 define null_geometric_mean: GeometricMean({1, 2, null})
 define all_nulls: GeometricMean({null, null, null})
 define also_null_geometric_mean: GeometricMean(null as List<Decimal>)
-define IncompatibleUnitsNull: GeometricMean({1 'mg/d', 0.002 '/d'})
 ###
 
-###
-Translation Error(s):
-[9:31, 9:67] Could not resolve call to operator GeometricMean with signature (list<System.Quantity>).
-###
 module.exports['GeometricMean'] = {
    "library" : {
-      "annotation" : [ {
-         "startLine" : 9,
-         "startChar" : 31,
-         "endLine" : 9,
-         "endChar" : 67,
-         "message" : "Could not resolve call to operator GeometricMean with signature (list<System.Quantity>).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -9131,8 +9116,9 @@ module.exports['GeometricMean'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -9142,8 +9128,7 @@ module.exports['GeometricMean'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -9446,50 +9431,6 @@ module.exports['GeometricMean'] = {
                   }
                }
             }
-         }, {
-            "localId" : "36",
-            "name" : "IncompatibleUnitsNull",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "36",
-                  "s" : [ {
-                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
-                  }, {
-                     "r" : "35",
-                     "s" : [ {
-                        "value" : [ "GeometricMean","(" ]
-                     }, {
-                        "r" : "34",
-                        "s" : [ {
-                           "value" : [ "{" ]
-                        }, {
-                           "r" : "32",
-                           "s" : [ {
-                              "value" : [ "1 ","'mg/d'" ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "33",
-                           "s" : [ {
-                              "value" : [ "0.002 ","'/d'" ]
-                           } ]
-                        }, {
-                           "value" : [ "}" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "35",
-               "type" : "Null"
-            }
          } ]
       }
    }
@@ -9497,7 +9438,7 @@ module.exports['GeometricMean'] = {
 
 ### AllTrue
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define at: AllTrue({true,true,true,true})
 define atwn: AllTrue({true,true,null,null,true,true})
@@ -9522,8 +9463,9 @@ module.exports['AllTrue'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -9533,8 +9475,7 @@ module.exports['AllTrue'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -9797,7 +9738,7 @@ module.exports['AllTrue'] = {
 
 ### AnyTrue
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define at: AnyTrue({true,false,false,true})
 define atwn: AnyTrue({true,false,null,null,false,true})
@@ -9822,8 +9763,9 @@ module.exports['AnyTrue'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -9833,8 +9775,7 @@ module.exports['AnyTrue'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
