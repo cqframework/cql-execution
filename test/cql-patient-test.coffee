@@ -6,91 +6,74 @@ describe 'Record', ->
   @beforeEach ->
     patient = new Patient {
       "records": [{
-        "identifier": { "value": "http://cqframework.org/1/1", "system": "http://cqframework.org" },
-        "profile": "encounter-qicore-qicore-encounter",
-        "topic": "Encounter",
-        "class": { "code": "185349003", "system": "2.16.840.1.113883.6.96", "version": "2013-09", "display": "Encounter for \"check-up\" (procedure)" },
-        "type": { "code": "G0438", "system": "2.16.840.1.113883.6.285", "version": "2014", "display": "Annual wellness visit; includes a personalized prevention plan of service (pps), initial visit" },
-        "period": { "start": "1978-07-15T10:00", "end": "1978-07-15T10:45" }
+        "recordType": "Encounter",
+        "id": "http://cqframework.org/1/1",
+        "code": { "code": "185349003", "system": "2.16.840.1.113883.6.96", "version": "2013-09", "display": "Encounter for \"check-up\" (procedure)" },
+        "period": { "low": "1978-07-15T10:00", "high": "1978-07-15T10:45" }
       }, {
-        "identifier": { "value": "http://cqframework.org/1/2", "system": "http://cqframework.org" },
-        "profile": "condition-qicore-qicore-condition",
-        "topic": "Condition",
+        "recordType": "Condition",
+        "id": "http://cqframework.org/1/2",
         "code": { "code": "1532007", "system": "2.16.840.1.113883.6.96", "version": "2013-09", "display": "Viral pharyngitis (disorder)" },
-        "onsetDateTime": "1982-03-12",
-        "abatementDateTime": "1982-03-26",
-        "issued": "1982-03-15T15:15:00"
+        "period": { "low": "1982-03-12", "high": "1982-03-26" }
       }]
     }
     [@encRecord, @cndRecord] = (v[0] for k,v of patient.records)
 
   it 'should get simple record entries', ->
-    @encRecord.get('identifier').value.should.equal 'http://cqframework.org/1/1'
-    @encRecord.get('identifier').system.should.equal 'http://cqframework.org'
-    @encRecord.get('profile').should.equal 'encounter-qicore-qicore-encounter'
-    @encRecord.get('topic').should.equal 'Encounter'
-    @cndRecord.get('identifier').value.should.equal 'http://cqframework.org/1/2'
-    @cndRecord.get('identifier').system.should.equal 'http://cqframework.org'
-    @cndRecord.get('profile').should.equal 'condition-qicore-qicore-condition'
-    @cndRecord.get('topic').should.equal 'Condition'
+    @encRecord.get('id').should.equal 'http://cqframework.org/1/1'
+    @encRecord.get('recordType').should.equal 'Encounter'
+    @cndRecord.get('id').should.equal 'http://cqframework.org/1/2'
+    @cndRecord.get('recordType').should.equal 'Condition'
 
   it 'should get codes', ->
-    @encRecord.getCode('class').should.eql new DT.Code('185349003', '2.16.840.1.113883.6.96', '2013-09')
-    @encRecord.getCode('type').should.eql new DT.Code('G0438', '2.16.840.1.113883.6.285', '2014')
-    @cndRecord.getCode('code').should.eql new DT.Code('1532007', '2.16.840.1.113883.6.96', '2013-09')
+    @encRecord.getCode('code').should.eql new DT.Code('185349003', '2.16.840.1.113883.6.96', '2013-09')
 
   it 'should get dates', ->
-    @cndRecord.getDate('onsetDateTime').should.eql new DT.DateTime.parse('1982-03-12')
-    @cndRecord.getDate('abatementDateTime').should.eql new DT.DateTime.parse('1982-03-26')
-    @cndRecord.getDate('issued').should.eql new DT.DateTime.parse('1982-03-15T15:15:00')
+    @cndRecord.getDate('period.low').should.eql new DT.DateTime.parse('1982-03-12')
+    @cndRecord.getDate('period.high').should.eql new DT.DateTime.parse('1982-03-26')
 
   it 'should get intervals', ->
     @encRecord.getInterval('period').should.eql new DT.Interval(DT.DateTime.parse('1978-07-15T10:00'), DT.DateTime.parse('1978-07-15T10:45'))
 
   it 'should get date or interval', ->
-    @cndRecord.getDateOrInterval('issued').should.eql new DT.DateTime.parse('1982-03-15T15:15:00')
+    @cndRecord.getDateOrInterval('period.low').should.eql new DT.DateTime.parse('1982-03-12')
     @encRecord.getDateOrInterval('period').should.eql new DT.Interval(DT.DateTime.parse('1978-07-15T10:00'), DT.DateTime.parse('1978-07-15T10:45'))
 
 describe 'Patient', ->
   @beforeEach ->
     @patient = new Patient {
-      "identifier": { "value": "1" },
+      "id": "1",
       "name": "Bob Jones",
       "gender": "M",
       "birthDate" : "1974-07-12T11:15",
       "records": [{
-          "identifier": { "value": "http://cqframework.org/1/1", "system": "http://cqframework.org" },
-          "profile": "encounter-qicore-qicore-encounter",
-          "topic": "Encounter",
-          "class": { "code": "185349003", "system": "2.16.840.1.113883.6.96", "version": "2013-09", "display": "Encounter for \"check-up\" (procedure)" },
-          "type": { "code": "G0438", "system": "2.16.840.1.113883.6.285", "version": "2014", "display": "Annual wellness visit; includes a personalized prevention plan of service (pps), initial visit" },
-          "period": { "start": "1978-07-15T10:00", "end": "1978-07-15T10:45" }
+          "id": "http://cqframework.org/1/1",
+          "recordType": "Encounter",
+          "code": { "code": "185349003", "system": "2.16.840.1.113883.6.96", "version": "2013-09", "display": "Encounter for \"check-up\" (procedure)" },
+          "period": { "low": "1978-07-15T10:00", "high": "1978-07-15T10:45" }
         }, {
-          "identifier": { "value": "http://cqframework.org/1/2", "system": "http://cqframework.org" },
-          "profile": "condition-qicore-qicore-condition",
-          "topic": "Condition",
+          "id": "http://cqframework.org/1/2",
+          "recordType": "Condition",
           "code": { "code": "1532007", "system": "2.16.840.1.113883.6.96", "version": "2013-09", "display": "Viral pharyngitis (disorder)" },
-          "onsetDateTime": "1982-03-12",
-          "abatementDateTime": "1982-03-26",
-          "issued": "1982-03-15T15:15:00"
+          "period": { "low": "1982-03-12", "high": "1982-03-26" }
         }
       ]
     }
 
   it 'should contain patient attributes', ->
-    @patient.identifier.value.should.equal '1'
+    @patient.id.should.equal '1'
     @patient.name.should.equal 'Bob Jones'
     @patient.gender.should.equal 'M'
     @patient.birthDate.should.eql DT.DateTime.parse('1974-07-12T11:15')
 
   it 'should find records by profile', ->
-    encounters = @patient.findRecords('encounter-qicore-qicore-encounter')
+    encounters = @patient.findRecords('{https://github.com/cqframework/cql-execution/simple}Encounter')
     encounters.length.should.equal 1
-    encounters[0].get('identifier').value.should.equal 'http://cqframework.org/1/1'
+    encounters[0].get('id').should.equal 'http://cqframework.org/1/1'
 
-    conditions = @patient.findRecords('condition-qicore-qicore-condition')
+    conditions = @patient.findRecords('{https://github.com/cqframework/cql-execution/simple}Condition')
     conditions.length.should.equal 1
-    conditions[0].get('identifier').value.should.equal 'http://cqframework.org/1/2'
+    conditions[0].get('id').should.equal 'http://cqframework.org/1/2'
 
   it 'should return empty array for unfound records', ->
-    @patient.findRecords('foo').should.be.empty()
+    @patient.findRecords('{https://github.com/cqframework/cql-execution/simple}Foo').should.be.empty()

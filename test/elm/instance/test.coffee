@@ -36,5 +36,5 @@ describe 'Instance', ->
     c.display.should.equal 'Test Concept'
 
   it 'should create generic json objects with the correct key values', ->
-    @med.exec(@ctx).isBrand.should.eql false
-    @med.exec(@ctx).name.should.eql "Best Med Ever"
+    @pharyngitis.exec(@ctx).status.code.should.eql "active"
+    @pharyngitis.exec(@ctx).code.display.should.eql "Viral pharyngitis (disorder)"

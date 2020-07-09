@@ -8,7 +8,7 @@
 
 ### Retrieve
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 include Included version '1' called included
 
 codesystem "SNOMED": '2.16.840.1.113883.6.96'
@@ -21,9 +21,9 @@ define Conditions: [Condition]
 define Encounters: [Encounter]
 define PharyngitisConditions: [Condition: included."Acute Pharyngitis"]
 define AmbulatoryEncounters: [Encounter: "Ambulatory/ED Visit"]
-define EncountersByServiceType: [Encounter: type in "Ambulatory/ED Visit"]
+define EncountersByCode: [Encounter: code in "Ambulatory/ED Visit"]
 define WrongValueSet: [Condition: "Ambulatory/ED Visit"]
-define WrongCodeProperty: [Encounter: class in "Ambulatory/ED Visit"]
+define WrongCodeProperty: [Encounter: status in "Ambulatory/ED Visit"]
 define ConditionsByCode: [Condition: "Viral pharyngitis code"]
 define ConditionsByConcept: [Condition: "Viral pharyngitis"]
 ###
@@ -44,8 +44,9 @@ module.exports['Retrieve'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "includes" : {
@@ -109,8 +110,7 @@ module.exports['Retrieve'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -135,8 +135,7 @@ module.exports['Retrieve'] = {
             } ],
             "expression" : {
                "localId" : "10",
-               "dataType" : "{http://hl7.org/fhir}Condition",
-               "templateId" : "condition-qicore-qicore-condition",
+               "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                "type" : "Retrieve"
             }
          }, {
@@ -160,8 +159,7 @@ module.exports['Retrieve'] = {
             } ],
             "expression" : {
                "localId" : "12",
-               "dataType" : "{http://hl7.org/fhir}Encounter",
-               "templateId" : "encounter-qicore-qicore-encounter",
+               "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                "type" : "Retrieve"
             }
          }, {
@@ -191,8 +189,7 @@ module.exports['Retrieve'] = {
             } ],
             "expression" : {
                "localId" : "14",
-               "dataType" : "{http://hl7.org/fhir}Condition",
-               "templateId" : "condition-qicore-qicore-condition",
+               "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                "codeProperty" : "code",
                "type" : "Retrieve",
                "codes" : {
@@ -228,9 +225,8 @@ module.exports['Retrieve'] = {
             } ],
             "expression" : {
                "localId" : "16",
-               "dataType" : "{http://hl7.org/fhir}Encounter",
-               "templateId" : "encounter-qicore-qicore-encounter",
-               "codeProperty" : "type",
+               "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+               "codeProperty" : "code",
                "type" : "Retrieve",
                "codes" : {
                   "name" : "Ambulatory/ED Visit",
@@ -239,7 +235,7 @@ module.exports['Retrieve'] = {
             }
          }, {
             "localId" : "19",
-            "name" : "EncountersByServiceType",
+            "name" : "EncountersByCode",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -247,14 +243,14 @@ module.exports['Retrieve'] = {
                "s" : {
                   "r" : "19",
                   "s" : [ {
-                     "value" : [ "define ","EncountersByServiceType",": " ]
+                     "value" : [ "define ","EncountersByCode",": " ]
                   }, {
                      "r" : "18",
                      "s" : [ {
                         "value" : [ "[","Encounter",": " ]
                      }, {
                         "s" : [ {
-                           "value" : [ "type" ]
+                           "value" : [ "code" ]
                         } ]
                      }, {
                         "value" : [ " in " ]
@@ -270,9 +266,8 @@ module.exports['Retrieve'] = {
             } ],
             "expression" : {
                "localId" : "18",
-               "dataType" : "{http://hl7.org/fhir}Encounter",
-               "templateId" : "encounter-qicore-qicore-encounter",
-               "codeProperty" : "type",
+               "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+               "codeProperty" : "code",
                "type" : "Retrieve",
                "codes" : {
                   "name" : "Ambulatory/ED Visit",
@@ -306,8 +301,7 @@ module.exports['Retrieve'] = {
             } ],
             "expression" : {
                "localId" : "20",
-               "dataType" : "{http://hl7.org/fhir}Condition",
-               "templateId" : "condition-qicore-qicore-condition",
+               "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                "codeProperty" : "code",
                "type" : "Retrieve",
                "codes" : {
@@ -332,7 +326,7 @@ module.exports['Retrieve'] = {
                         "value" : [ "[","Encounter",": " ]
                      }, {
                         "s" : [ {
-                           "value" : [ "class" ]
+                           "value" : [ "status" ]
                         } ]
                      }, {
                         "value" : [ " in " ]
@@ -348,9 +342,8 @@ module.exports['Retrieve'] = {
             } ],
             "expression" : {
                "localId" : "22",
-               "dataType" : "{http://hl7.org/fhir}Encounter",
-               "templateId" : "encounter-qicore-qicore-encounter",
-               "codeProperty" : "class",
+               "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+               "codeProperty" : "status",
                "type" : "Retrieve",
                "codes" : {
                   "name" : "Ambulatory/ED Visit",
@@ -384,18 +377,14 @@ module.exports['Retrieve'] = {
             } ],
             "expression" : {
                "localId" : "24",
-               "dataType" : "{http://hl7.org/fhir}Condition",
-               "templateId" : "condition-qicore-qicore-condition",
+               "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                "codeProperty" : "code",
                "type" : "Retrieve",
                "codes" : {
                   "type" : "ToList",
                   "operand" : {
-                     "type" : "ToConcept",
-                     "operand" : {
-                        "name" : "Viral pharyngitis code",
-                        "type" : "CodeRef"
-                     }
+                     "name" : "Viral pharyngitis code",
+                     "type" : "CodeRef"
                   }
                }
             }
@@ -426,8 +415,7 @@ module.exports['Retrieve'] = {
             } ],
             "expression" : {
                "localId" : "26",
-               "dataType" : "{http://hl7.org/fhir}Condition",
-               "templateId" : "condition-qicore-qicore-condition",
+               "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                "codeProperty" : "code",
                "type" : "Retrieve",
                "codes" : {
@@ -445,10 +433,10 @@ module.exports['Retrieve'] = {
 
 ### Included
 library Included version '1'
-using QUICK
+using Simple version '1.0.0'
 
 codesystem "SNOMED": '2.16.840.1.113883.6.96'
-valueset "Acute Pharyngitis": '2.16.840.1.113883.3.464.1003.102.12.1011''
+valueset "Acute Pharyngitis": '2.16.840.1.113883.3.464.1003.102.12.1011'
 ###
 
 module.exports['Included'] = {
@@ -467,8 +455,9 @@ module.exports['Included'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "codeSystems" : {

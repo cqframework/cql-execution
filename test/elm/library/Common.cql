@@ -1,6 +1,6 @@
 // NOTE: This library must be DUPLICATED in the data.cql file as well!
 library Common
-using QUICK
+using Simple version '1.0.0'
 
 include Common2 called common2
 

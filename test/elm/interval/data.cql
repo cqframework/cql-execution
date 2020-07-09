@@ -1041,7 +1041,7 @@ define QuantityIntervalListWithNullHighNoOverlap: { Interval[ToQuantity(4), null
 define CollapseQuantityIntervalListWithNullHighNoOverlap: collapse QuantityIntervalListWithNullHighNoOverlap
 define CollapseQuantityIntervalListWithNullHighNoOverlapExpected: { Interval[ToQuantity(1), ToQuantity(2)], Interval[ToQuantity(4), null]}
 
-// @Test: DateIntervalExpand 
+// @Test: DateIntervalExpand
 define ClosedSinglePerDay: expand { Interval[@2018-01-01, @2018-01-03] } per day
 define ClosedSinglePerWeek: expand { Interval[@2018-01-01, @2018-01-21] } per week
 define ClosedSinglePerMonth: expand { Interval[@2018-01-01, @2018-03-31] } per month

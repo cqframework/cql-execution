@@ -1,5 +1,5 @@
 library Retrieve version '1'
-using QUICK
+using Simple version '1.0.0'
 
 include Included called included
 
@@ -14,6 +14,6 @@ define PharyngitisConditions: [Condition: included."Acute Pharyngitis"]
 define AmbulatoryEncounters: [Encounter: "Ambulatory/ED Visit"]
 define EncountersByServiceType: [Encounter: type in "Ambulatory/ED Visit"]
 define WrongValueSet: [Condition: "Ambulatory/ED Visit"]
-define WrongCodeProperty: [Encounter: class in "Ambulatory/ED Visit"]
+define WrongCodeProperty: [Encounter: status in "Ambulatory/ED Visit"]
 define ConditionsByCode: [Condition: "Viral pharyngitis code"]
 define ConditionsByConcept: [Condition: "Viral pharyngitis"]

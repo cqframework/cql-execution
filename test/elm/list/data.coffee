@@ -8,7 +8,7 @@
 
 ### List
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Three: 1 + 2
 define IntList: { 9, 7, 8 }
@@ -33,8 +33,9 @@ module.exports['List'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -44,8 +45,7 @@ module.exports['List'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -281,7 +281,7 @@ module.exports['List'] = {
 
 ### Exists
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define EmptyList: exists (List<Integer>{})
 define FullList: exists ({ 1, 2, 3 })
@@ -308,8 +308,9 @@ module.exports['Exists'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -319,8 +320,7 @@ module.exports['Exists'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -683,7 +683,7 @@ module.exports['Exists'] = {
 
 ### Equal
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define EqualIntList: {1, 2, 3} = {1, 2, 3}
 define UnequalIntList: {1, 2, 3} = {1, 2}
@@ -713,8 +713,9 @@ module.exports['Equal'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -724,8 +725,7 @@ module.exports['Equal'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2038,7 +2038,7 @@ module.exports['Equal'] = {
 
 ### NotEqual
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define EqualIntList: {1, 2, 3} != {1, 2, 3}
 define UnequalIntList: {1, 2, 3} != {1, 2}
@@ -2065,8 +2065,9 @@ module.exports['NotEqual'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -2076,8 +2077,7 @@ module.exports['NotEqual'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -3043,7 +3043,7 @@ module.exports['NotEqual'] = {
 
 ### Union
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define OneToTen: {1, 2, 3, 4, 5} union {6, 7, 8, 9, 10}
 define OneToFiveOverlapped: {1, 2, 3, 4} union {3, 4, 5}
@@ -3070,8 +3070,9 @@ module.exports['Union'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -3081,8 +3082,7 @@ module.exports['Union'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -3724,7 +3724,7 @@ module.exports['Union'] = {
 
 ### Except
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define ExceptThreeFour: {1, 2, 3, 4, 5} except {3, 4}
 define ThreeFourExcept: {3, 4} except {1, 2, 3, 4, 5}
@@ -3756,8 +3756,9 @@ module.exports['Except'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -3767,8 +3768,7 @@ module.exports['Except'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -4744,7 +4744,7 @@ module.exports['Except'] = {
 
 ### Intersect
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define NoIntersection: {1, 2, 2, 3} intersect {4, 5, 6}
 define IntersectOnFive: {4, 5, 5, 6} intersect {1, 3, 5, 7}
@@ -4774,8 +4774,9 @@ module.exports['Intersect'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -4785,8 +4786,7 @@ module.exports['Intersect'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -6014,7 +6014,7 @@ module.exports['Intersect'] = {
 
 ### IndexOf
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IndexOfSecond: IndexOf({'a', 'b', 'c', 'd'}, 'b')
 define IndexOfThirdTuple: IndexOf({Tuple{a: 1}, Tuple{a: 2}, Tuple{a: 3}}, Tuple{a: 3})
@@ -6044,8 +6044,9 @@ module.exports['IndexOf'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -6055,8 +6056,7 @@ module.exports['IndexOf'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -7384,7 +7384,7 @@ module.exports['IndexOf'] = {
 
 ### Indexer
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define SecondItem: {'a', 'b', 'c', 'd'}[1]
 define ZeroIndex: {'a', 'b', 'c', 'd'}[0]
@@ -7409,8 +7409,9 @@ module.exports['Indexer'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -7420,8 +7421,7 @@ module.exports['Indexer'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -7854,7 +7854,7 @@ module.exports['Indexer'] = {
 
 ### In
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IsIn: 4 in { 3, 4, 5 }
 define IsNotIn: 4 in { 3, 5, 6 }
@@ -7881,8 +7881,9 @@ module.exports['In'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -7892,8 +7893,7 @@ module.exports['In'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -8600,7 +8600,7 @@ module.exports['In'] = {
 
 ### Contains
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IsIn: { 3, 4, 5 } contains 4
 define IsNotIn: { 3, 5, 6 } contains 4
@@ -8627,8 +8627,9 @@ module.exports['Contains'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -8638,8 +8639,7 @@ module.exports['Contains'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -9375,7 +9375,7 @@ module.exports['Contains'] = {
 
 ### Includes
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IsIncluded: {1, 2, 3, 4, 5} includes {2, 3, 4}
 define IsIncludedReversed: {1, 2, 3, 4, 5} includes {4, 3, 2}
@@ -9473,8 +9473,9 @@ module.exports['Includes'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -9484,8 +9485,7 @@ module.exports['Includes'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -11248,7 +11248,7 @@ module.exports['Includes'] = {
 
 ### IncludedIn
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IsIncluded: {2, 3, 4} included in {1, 2, 3, 4, 5}
 define IsIncludedReversed: {4, 3, 2} included in {1, 2, 3, 4, 5}
@@ -11337,8 +11337,9 @@ module.exports['IncludedIn'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -11348,8 +11349,7 @@ module.exports['IncludedIn'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -13112,7 +13112,7 @@ module.exports['IncludedIn'] = {
 
 ### ProperIncludes
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IsIncluded: {1, 2, 3, 4, 5} properly includes {2, 3, 4, 5}
 define IsIncludedReversed: {1, 2, 3, 4, 5} properly includes {5, 4, 3, 2}
@@ -13204,8 +13204,9 @@ module.exports['ProperIncludes'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -13215,8 +13216,7 @@ module.exports['ProperIncludes'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -14274,7 +14274,7 @@ module.exports['ProperIncludes'] = {
 
 ### ProperIncludedIn
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IsIncluded: {2, 3, 4} properly included in {1, 2, 3, 4, 5}
 define IsIncludedReversed: {4, 3, 2} properly included in {1, 2, 3, 4, 5}
@@ -14366,8 +14366,9 @@ module.exports['ProperIncludedIn'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -14377,8 +14378,7 @@ module.exports['ProperIncludedIn'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -15450,7 +15450,7 @@ module.exports['ProperIncludedIn'] = {
 
 ### Flatten
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define ListOfLists: flatten { {1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {9, 8, 7, 6, 5}, {4}, {3, 2, 1} }
 define NullValue: flatten null
@@ -15472,8 +15472,9 @@ module.exports['Flatten'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -15483,8 +15484,7 @@ module.exports['Flatten'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -15731,7 +15731,7 @@ module.exports['Flatten'] = {
 
 ### Distinct
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define LotsOfDups: distinct {1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 4, 3, 2, 1}
 define NoDups: distinct {2, 4, 6, 8, 10}
@@ -15756,8 +15756,9 @@ module.exports['Distinct'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -15767,8 +15768,7 @@ module.exports['Distinct'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -16293,7 +16293,7 @@ module.exports['Distinct'] = {
 
 ### First
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Numbers: First({1, 2, 3, 4})
 define Letters: First({'a', 'b', 'c'})
@@ -16320,8 +16320,9 @@ module.exports['First'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -16331,8 +16332,7 @@ module.exports['First'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -16904,7 +16904,7 @@ module.exports['First'] = {
 
 ### Last
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Numbers: Last({1, 2, 3, 4})
 define Letters: Last({'a', 'b', 'c'})
@@ -16931,8 +16931,9 @@ module.exports['Last'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -16942,8 +16943,7 @@ module.exports['Last'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -17515,7 +17515,7 @@ module.exports['Last'] = {
 
 ### Length
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Numbers: Length({2, 4, 6, 8, 10})
 define Lists: Length({ {1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {10, 11, 12}})
@@ -17540,8 +17540,9 @@ module.exports['Length'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -17551,8 +17552,7 @@ module.exports['Length'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -18016,7 +18016,7 @@ module.exports['Length'] = {
 
 ### ToList
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define FiveInFive: 5 in 5 // CQL-to-ELM will promote the second 5 to a list via ToList
 define FourInFive: 4 in 5 // CQL-to-ELM will promote the 5 to a list via ToList
@@ -18039,8 +18039,9 @@ module.exports['ToList'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -18050,8 +18051,7 @@ module.exports['ToList'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
