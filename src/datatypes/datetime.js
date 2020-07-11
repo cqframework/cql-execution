@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-useless-escape,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS101: Remove unnecessary use of Array.from
@@ -52,8 +57,8 @@ class DateTime {
     args = ((() => {
       const result = [];
       for (let arg of args) {         if (arg != null) { result.push(parseInt(arg,10)); } else {
-          result.push(undefined);
-        }
+        result.push(undefined);
+      }
       }
       return result;
     })());
@@ -344,7 +349,7 @@ class DateTime {
   }
 
   _pad(num) {
-    return String("0" + num).slice(-2);
+    return String('0' + num).slice(-2);
   }
 
   toString() {
@@ -360,7 +365,7 @@ class DateTime {
         if (this.second != null) {
           str += ':' + this._pad(this.second);
           if (this.millisecond != null) {
-            str += '.' + String("00" + this.millisecond).slice(-3);
+            str += '.' + String('00' + this.millisecond).slice(-3);
           }
         }
       }
@@ -384,7 +389,7 @@ class DateTime {
               if (this.second != null) {
                 str += ':' + this._pad(this.second);
                 if (this.millisecond != null) {
-                  str += '.' + String("00" + this.millisecond).slice(-3);
+                  str += '.' + String('00' + this.millisecond).slice(-3);
                 }
               }
             }
@@ -472,8 +477,8 @@ class Date {
     args = ((() => {
       const result = [];
       for (let arg of args) {         if (arg != null) { result.push(parseInt(arg,10)); } else {
-          result.push(undefined);
-        }
+        result.push(undefined);
+      }
       }
       return result;
     })());
@@ -643,9 +648,9 @@ class Date {
     if (this.year != null) {
       str += this.year.toString();
       if (this.month != null) {
-        str += '-' + this.month.toString().padStart(2,"0");
+        str += '-' + this.month.toString().padStart(2,'0');
         if (this.day != null) {
-          str += '-' + this.day.toString().padStart(2,"0");
+          str += '-' + this.day.toString().padStart(2,'0');
         }
       }
     }
@@ -679,44 +684,44 @@ Date.initClass();
 
 // Shared Funtions For Date and DateTime
 DateTime.prototype.isPrecise = (Date.prototype.isPrecise = function() {
-    return this.constructor.FIELDS.every(field => (this[field] != null));
-  });
+  return this.constructor.FIELDS.every(field => (this[field] != null));
+});
 
 DateTime.prototype.isImprecise = (Date.prototype.isImprecise = function() {
-    return !this.isPrecise();
-  });
+  return !this.isPrecise();
+});
 
 // This function can take another Date-ish object, or a precision string (e.g. 'month')
 DateTime.prototype.isMorePrecise = (Date.prototype.isMorePrecise = function(other) {
-    if ((typeof other === 'string') && this.constructor.FIELDS.includes(other)) {
-      if ((this[other] == null)) { return false; }
+  if ((typeof other === 'string') && this.constructor.FIELDS.includes(other)) {
+    if ((this[other] == null)) { return false; }
 
-    } else {
-      for (let field of this.constructor.FIELDS) {
-        if ((other[field] != null) && (this[field] == null)) { return false; }
-      }
+  } else {
+    for (let field of this.constructor.FIELDS) {
+      if ((other[field] != null) && (this[field] == null)) { return false; }
     }
+  }
 
-    return !this.isSamePrecision(other);
-  });
+  return !this.isSamePrecision(other);
+});
 
 // This function can take another Date-ish object, or a precision string (e.g. 'month')
 DateTime.prototype.isLessPrecise = (Date.prototype.isLessPrecise = function(other) {
-    return !this.isSamePrecision(other) && !this.isMorePrecise(other);
-  });
+  return !this.isSamePrecision(other) && !this.isMorePrecise(other);
+});
 
 // This function can take another Date-ish object, or a precision string (e.g. 'month')
 DateTime.prototype.isSamePrecision = (Date.prototype.isSamePrecision = function(other) {
-    if ((typeof other === 'string') && this.constructor.FIELDS.includes(other)) {
-      return other === this.getPrecision();
-    }
+  if ((typeof other === 'string') && this.constructor.FIELDS.includes(other)) {
+    return other === this.getPrecision();
+  }
 
-    for (let field of this.constructor.FIELDS) {
-      if ((this[field] != null) && (other[field] == null)) { return false; }
-      if ((this[field] == null) && (other[field] != null)) { return false; }
-    }
-    return true;
-  });
+  for (let field of this.constructor.FIELDS) {
+    if ((this[field] != null) && (other[field] == null)) { return false; }
+    if ((this[field] == null) && (other[field] != null)) { return false; }
+  }
+  return true;
+});
 
 DateTime.prototype.equals = (Date.prototype.equals = function(other) {
   return compareWithDefaultResult(this, other, null);
@@ -1125,13 +1130,13 @@ var daysInMonth = function(year, month) {
 };
 
 normalizeMillisecondsField = msString => // fix up milliseconds by padding zeros and/or truncating (5 --> 500, 50 --> 500, 54321 --> 543, etc.)
-msString = (msString + "00").substring(0, 3);
+  msString = (msString + '00').substring(0, 3);
 
 var isValidDateStringFormat = function(string) {
   if (typeof string !== 'string') { return false; }
   const cqlFormats = ['YYYY',
-                'YYYY-MM',
-                'YYYY-MM-DD'];
+    'YYYY-MM',
+    'YYYY-MM-DD'];
 
   const cqlFormatStringWithLength = {};
   for (let format of cqlFormats) { cqlFormatStringWithLength[format.length] = format; }
@@ -1145,37 +1150,37 @@ var isValidDateStringFormat = function(string) {
 var isValidDateTimeStringFormat = function(string) {
   if (typeof string !== 'string') { return false; }
   const cqlFormats = ['YYYY',
-                'YYYY-MM',
-                'YYYY-MM-DD',
-                'YYYY-MM-DDTZ',
-                'YYYY-MM-DDT+hh',
-                'YYYY-MM-DDT+hh:mm',
-                'YYYY-MM-DDT-hh',
-                'YYYY-MM-DDT-hh:mm',
-                'YYYY-MM-DDThh',
-                'YYYY-MM-DDThhZ',
-                'YYYY-MM-DDThh+hh',
-                'YYYY-MM-DDThh+hh:mm',
-                'YYYY-MM-DDThh-hh',
-                'YYYY-MM-DDThh-hh:mm',
-                'YYYY-MM-DDThh:mm',
-                'YYYY-MM-DDThh:mmZ',
-                'YYYY-MM-DDThh:mm+hh',
-                'YYYY-MM-DDThh:mm+hh:mm',
-                'YYYY-MM-DDThh:mm-hh',
-                'YYYY-MM-DDThh:mm-hh:mm',
-                'YYYY-MM-DDThh:mm:ss',
-                'YYYY-MM-DDThh:mm:ssZ',
-                'YYYY-MM-DDThh:mm:ss+hh',
-                'YYYY-MM-DDThh:mm:ss+hh:mm',
-                'YYYY-MM-DDThh:mm:ss-hh',
-                'YYYY-MM-DDThh:mm:ss-hh:mm',
-                'YYYY-MM-DDThh:mm:ss.fff',
-                'YYYY-MM-DDThh:mm:ss.fffZ',
-                'YYYY-MM-DDThh:mm:ss.fff+hh',
-                'YYYY-MM-DDThh:mm:ss.fff+hh:mm',
-                'YYYY-MM-DDThh:mm:ss.fff-hh',
-                'YYYY-MM-DDThh:mm:ss.fff-hh:mm'];
+    'YYYY-MM',
+    'YYYY-MM-DD',
+    'YYYY-MM-DDTZ',
+    'YYYY-MM-DDT+hh',
+    'YYYY-MM-DDT+hh:mm',
+    'YYYY-MM-DDT-hh',
+    'YYYY-MM-DDT-hh:mm',
+    'YYYY-MM-DDThh',
+    'YYYY-MM-DDThhZ',
+    'YYYY-MM-DDThh+hh',
+    'YYYY-MM-DDThh+hh:mm',
+    'YYYY-MM-DDThh-hh',
+    'YYYY-MM-DDThh-hh:mm',
+    'YYYY-MM-DDThh:mm',
+    'YYYY-MM-DDThh:mmZ',
+    'YYYY-MM-DDThh:mm+hh',
+    'YYYY-MM-DDThh:mm+hh:mm',
+    'YYYY-MM-DDThh:mm-hh',
+    'YYYY-MM-DDThh:mm-hh:mm',
+    'YYYY-MM-DDThh:mm:ss',
+    'YYYY-MM-DDThh:mm:ssZ',
+    'YYYY-MM-DDThh:mm:ss+hh',
+    'YYYY-MM-DDThh:mm:ss+hh:mm',
+    'YYYY-MM-DDThh:mm:ss-hh',
+    'YYYY-MM-DDThh:mm:ss-hh:mm',
+    'YYYY-MM-DDThh:mm:ss.fff',
+    'YYYY-MM-DDThh:mm:ss.fffZ',
+    'YYYY-MM-DDThh:mm:ss.fff+hh',
+    'YYYY-MM-DDThh:mm:ss.fff+hh:mm',
+    'YYYY-MM-DDThh:mm:ss.fff-hh',
+    'YYYY-MM-DDThh:mm:ss.fff-hh:mm'];
 
   const cqlFormatStringWithLength = {};
   for (let format of cqlFormats) { cqlFormatStringWithLength[format.length] = format; }
@@ -1200,7 +1205,7 @@ var cqlFormatStringToMomentFormatString = function(string) {
 
   let momentString = yearMonthDay;
   if (string.match(/T/) != null) { momentString += '[T]'; }
-  if (!!timezoneSeparator) {
+  if (timezoneSeparator) {
     momentString += timeAndTimeZoneOffset.substring(0, timeAndTimeZoneOffset.search(timezoneSeparator)) + '[Z]';
   } else {
     momentString += timeAndTimeZoneOffset;
@@ -1211,8 +1216,8 @@ var cqlFormatStringToMomentFormatString = function(string) {
 
 // Redefine MIN/MAX here because math.coffee requires this file, and when we make this file require
 // math.coffee, it errors due to the circular dependency...
-var MIN_DATETIME_VALUE = DateTime.parse("0001-01-01T00:00:00.000");
-var MAX_DATETIME_VALUE = DateTime.parse("9999-12-31T23:59:59.999");
+var MIN_DATETIME_VALUE = DateTime.parse('0001-01-01T00:00:00.000');
+var MAX_DATETIME_VALUE = DateTime.parse('9999-12-31T23:59:59.999');
 
 module.exports.DateTime = DateTime;
 module.exports.Date = Date;

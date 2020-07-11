@@ -1,3 +1,10 @@
+/* eslint-disable
+    no-constant-condition,
+    no-unused-vars,
+    no-useless-escape,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS101: Remove unnecessary use of Array.from
@@ -323,24 +330,24 @@ module.exports.Expand = (Expand = class Expand extends Expression {
     let defaultPer, expandFunction;
     let [intervals, per] = Array.from(this.execArgs(ctx));
     const type = intervalListType(intervals);
-    if (type === 'mismatch') { throw new Error("List of intervals contains mismatched types."); }
+    if (type === 'mismatch') { throw new Error('List of intervals contains mismatched types.'); }
     if ((type == null)) { return null; }
 
     // this step collapses overlaps, and also returns a clone of intervals so we can feel free to mutate
     intervals = collapseIntervals(intervals, per);
     if (intervals.length === 0) { return []; }
 
-    if (["time", "date", "datetime"].includes(type)) {
+    if (['time', 'date', 'datetime'].includes(type)) {
       expandFunction = this.expandDTishInterval;
       defaultPer = interval => new Quantity(1, interval.low.getPrecision());
-    } else if (["quantity"].includes(type)) {
+    } else if (['quantity'].includes(type)) {
       expandFunction = this.expandQuantityInterval;
       defaultPer = interval => new Quantity(1, interval.low.unit);
-    } else if (["integer", "decimal"].includes(type)) {
+    } else if (['integer', 'decimal'].includes(type)) {
       expandFunction = this.expandNumericInterval;
       defaultPer = interval => new Quantity(1, '1');
     } else {
-      throw new Error("Interval list type not yet supported.");
+      throw new Error('Interval list type not yet supported.');
     }
 
     const results = [];

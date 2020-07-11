@@ -1,3 +1,6 @@
+// TODO: This file was created by bulk-decaffeinate.
+// Sanity-check the conversion and remove this comment.
+/* eslint-env mocha */
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -391,7 +394,7 @@ describe('Equivalent', function() {
     });
 
     it.skip('should return false if Tuples are not of the same type', function() {});
-      // Note: There is currently no way to tell the type of Tuples as they are all treated as Objects
+    // Note: There is currently no way to tell the type of Tuples as they are all treated as Objects
 
     it('should return true if Tuples are elementwise identical', function() {
       return this.sameTuples.exec(this.ctx).should.be.true();

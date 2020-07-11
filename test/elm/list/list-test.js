@@ -1,3 +1,6 @@
+// TODO: This file was created by bulk-decaffeinate.
+// Sanity-check the conversion and remove this comment.
+/* eslint-env mocha */
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -14,19 +17,19 @@ describe('List', function() {
 
   it('should execute to an array (ints)', function() {
     return this.intList.exec(this.ctx).should.eql([9, 7, 8]);
-});
+  });
 
   it('should execute to an array (strings)', function() {
     return this.stringList.exec(this.ctx).should.eql(['a', 'bee', 'see']);
-});
+  });
 
   it('should execute to an array (mixed)', function() {
     return this.mixedList.exec(this.ctx).should.eql([1, 'two', 3]);
-});
+  });
 
   return it('should execute to an empty array', function() {
     return this.emptyList.exec(this.ctx).should.eql([]);
-});
+  });
 });
 
 describe('Exists', function() {
@@ -155,23 +158,23 @@ describe('Union', function() {
 
   it('should union two lists to a single list', function() {
     return this.oneToTen.exec(this.ctx).should.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-});
+  });
 
   it('should remove duplicate elements (according to CQL 1.2 spec)', function() {
     return this.oneToFiveOverlapped.exec(this.ctx).should.eql([1, 2, 3, 4, 5]);
-});
+  });
 
   it('should remove duplicate null elements', function() {
     return this.oneToFiveOverlappedWithNulls.exec(this.ctx).should.eql([1, null, 2, 3, 4, 5]);
-});
+  });
 
   it('should not fill in values in a disjoint union', function() {
     return this.disjoint.exec(this.ctx).should.eql([1, 2, 4, 5]);
-});
+  });
 
   it('should return one list for multiple nested unions', function() {
     return this.nestedToFifteen.exec(this.ctx).should.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
-});
+  });
 
   return it('should return null if either arg is null', function() {
     should(this.unionNull.exec(this.ctx)).be.null();
@@ -186,39 +189,39 @@ describe('Except', function() {
 
   it('should remove items in second list', function() {
     return this.exceptThreeFour.exec(this.ctx).should.eql([1, 2, 5]);
-});
+  });
 
   it('should not be commutative', function() {
     return this.threeFourExcept.exec(this.ctx).should.eql([]);
-});
+  });
 
   it('should remove items in second list regardless of order', function() {
     return this.exceptFiveThree.exec(this.ctx).should.eql([1, 2, 4]);
-});
+  });
 
   it('should be a no-op when lists have no common items', function() {
     return this.exceptNoOp.exec(this.ctx).should.eql([1, 2, 3, 4, 5]);
-});
+  });
 
   it('should remove all items when lists are the same', function() {
     return this.exceptEverything.exec(this.ctx).should.eql([]);
-});
+  });
 
   it('should return items in first list without 3', function() {
     return this.multipleNullExcept.exec(this.ctx).should.eql([1, 5, 7, null]);
-});
+  });
 
   it('should be a no-op when second list is empty', function() {
     return this.somethingExceptNothing.exec(this.ctx).should.eql([1, 2, 3, 4, 5]);
-});
+  });
 
   it('should be a no-op when first list is already empty', function() {
     return this.nothingExceptSomething.exec(this.ctx).should.eql([]);
-});
+  });
 
   it('should except lists of tuples', function() {
     return this.exceptTuples.exec(this.ctx).should.eql([{a: 1}, {a: 3}]);
-});
+  });
 
   return it('should return null if either arg is null', function() {
     should(this.exceptNull.exec(this.ctx)).be.null();
@@ -233,31 +236,31 @@ describe('Intersect', function() {
 
   it('should intersect two disjoint lists  to an empty list', function() {
     return this.noIntersection.exec(this.ctx).should.eql([]);
-});
+  });
 
   it('should intersect two lists with a single common element', function() {
     return this.intersectOnFive.exec(this.ctx).should.eql([5]);
-});
+  });
 
   it('should intersect two lists with a single common element even with duplicates', function() {
     return this.intersectionOnFourDuplicates.exec(this.ctx).should.eql([4]);
-});
+  });
 
   it('should intersect two lists with several common elements', function() {
     return this.intersectOnEvens.exec(this.ctx).should.eql([2, 4, 6, 8, 10]);
-});
+  });
 
   it('should intersect two identical lists to the same list', function() {
     return this.intersectOnAll.exec(this.ctx).should.eql([1, 2, 3, 4, 5]);
-});
+  });
 
   it('should intersect multiple lists to only those elements common across all', function() {
     return this.nestedIntersects.exec(this.ctx).should.eql([4, 5]);
-});
+  });
 
   it('should intersect lists of tuples', function() {
     return this.intersectTuples.exec(this.ctx).should.eql([{a:1, b:'c'}, {a:2, b:'c'}]);
-});
+  });
 
   it('should return null if either arg is null', function() {
     should(this.intersectNull.exec(this.ctx)).be.null();
@@ -266,7 +269,7 @@ describe('Intersect', function() {
 
   return it('should intersect on 3', function() {
     return this.multipleNullInListIntersect.exec(this.ctx).should.eql([3]);
-});
+  });
 });
 
 describe('IndexOf', function() {
@@ -582,7 +585,7 @@ describe('Flatten', function() {
 
   it('should flatten a list of lists', function() {
     return this.listOfLists.exec(this.ctx).should.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
-});
+  });
 
   return it('should return null for a null list', function() {
     return should(this.nullValue.exec(this.ctx)).be.null();
@@ -596,24 +599,24 @@ describe('Distinct', function() {
 
   it('should remove duplicates', function() {
     return this.lotsOfDups.exec(this.ctx).should.eql([1, 2, 3, 4, 5]);
-});
+  });
 
   it('should do nothing to an already distinct array', function() {
     return this.noDups.exec(this.ctx).should.eql([2, 4, 6, 8, 10]);
-});
+  });
 
   it('should remove duplicate tuples', function() {
     return this.dupsTuples.exec(this.ctx).should.eql([{ hello: 'world' }, { hello: 'cleveland' }, { hello: 'dolly'}]);
-});
+  });
 
   it('should do nothing to an array of distinct tuples', function() {
     return this.noDupsTuples.exec(this.ctx).should.eql([{ hello: 'world' }, { hello: 'cleveland' }]);
-});
+  });
 
   return it('should preserve duplicate null values in original order', function() {
     // define DuplicateNulls: distinct {null, 1, 2, null, 3, 4, 5, null}
     return this.duplicateNulls.exec(this.ctx).should.eql([null, 1, 2, null, 3, 4, 5, null]);
-});
+  });
 });
 
 describe('First', function() {
@@ -631,11 +634,11 @@ describe('First', function() {
 
   it('should get first of a list of lists', function() {
     return this.lists.exec(this.ctx).should.eql(['a','b','c']);
-});
+  });
 
   it('should get first of a list of tuples', function() {
     return this.tuples.exec(this.ctx).should.eql({ a: 1, b: 2, c: 3 });
-});
+  });
 
   it('should get first of a list of unordered numbers', function() {
     return this.unordered.exec(this.ctx).should.equal(3);
@@ -665,11 +668,11 @@ describe('Last', function() {
 
   it('should get last of a list of lists', function() {
     return this.lists.exec(this.ctx).should.eql(['d','e','f']);
-});
+  });
 
   it('should get last of a list of tuples', function() {
     return this.tuples.exec(this.ctx).should.eql({ a: 24, b: 25, c: 26 });
-});
+  });
 
   it('should get last of a list of unordered numbers', function() {
     return this.unordered.exec(this.ctx).should.equal(2);

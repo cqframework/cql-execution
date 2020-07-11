@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -35,7 +40,7 @@ module.exports.Case = (Case = class Case extends Expression {
     super(...arguments);
     this.comparand = build(json.comparand);
     this.caseItems = json.caseItem.map((ci) =>
-                   new CaseItem(ci));
+      new CaseItem(ci));
     this.els = build(json.else);
   }
 
@@ -47,8 +52,8 @@ module.exports.Case = (Case = class Case extends Expression {
     const val = this.comparand.execute(ctx);
     for (let ci of this.caseItems) {
       if (equals(ci.when.execute(ctx), val)) {
-       return ci.then.execute(ctx);
-     }
+        return ci.then.execute(ctx);
+      }
     }
     return this.els.execute(ctx);
   }
@@ -56,8 +61,8 @@ module.exports.Case = (Case = class Case extends Expression {
   exec_standard(ctx) {
     for (let ci of this.caseItems) {
       if (ci.when.execute(ctx)) {
-       return ci.then.execute(ctx);
-     }
+        return ci.then.execute(ctx);
+      }
     }
     return this.els.execute(ctx);
   }

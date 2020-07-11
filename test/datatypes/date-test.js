@@ -1,3 +1,6 @@
+// TODO: This file was created by bulk-decaffeinate.
+// Sanity-check the conversion and remove this comment.
+/* eslint-env mocha */
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -300,7 +303,7 @@ describe('Date.durationBetween', function() {
     return a.durationBetween(b, Date.Unit.DAY).should.eql(new Uncertainty(364));
   });
 
-  it("should handle durations ", function() {
+  it('should handle durations ', function() {
 
     const a = new Date(2011, 1, 2);
     const b = new Date(2011, 9, 29);
@@ -347,7 +350,7 @@ describe('Date.sameAs', function() {
   it('should always accept cases where a is same as b', function() {
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15')).should.be.true();
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15'), Date.Unit.DAY).should.be.true();
-    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw("Invalid precision: week");
+    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw('Invalid precision: week');
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15'), Date.Unit.MONTH).should.be.true();
     return Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15'), Date.Unit.YEAR).should.be.true();
   });
@@ -355,7 +358,7 @@ describe('Date.sameAs', function() {
   it('should properly calculate cases where the day is different', function() {
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-16')).should.be.false();
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-16'), Date.Unit.DAY).should.be.false();
-    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-05-16'), Date.Unit.WEEK).should.be.true()).throw("Invalid precision: week");
+    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-05-16'), Date.Unit.WEEK).should.be.true()).throw('Invalid precision: week');
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-16'), Date.Unit.MONTH).should.be.true();
     return Date.parse('2000-05-15').sameAs(Date.parse('2000-05-16'), Date.Unit.YEAR).should.be.true();
   });
@@ -363,7 +366,7 @@ describe('Date.sameAs', function() {
   it('should properly calculate cases where the week is different', function() {
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-21')).should.be.false();
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-21'), Date.Unit.DAY).should.be.false();
-    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-05-21'), Date.Unit.WEEK).should.be.false()).throw("Invalid precision: week");
+    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-05-21'), Date.Unit.WEEK).should.be.false()).throw('Invalid precision: week');
     Date.parse('2000-05-15').sameAs(Date.parse('2000-05-21'), Date.Unit.MONTH).should.be.true();
     return Date.parse('2000-05-15').sameAs(Date.parse('2000-05-21'), Date.Unit.YEAR).should.be.true();
   });
@@ -371,7 +374,7 @@ describe('Date.sameAs', function() {
   it('should properly calculate cases where the month is different', function() {
     Date.parse('2000-05-15').sameAs(Date.parse('2000-06-15')).should.be.false();
     Date.parse('2000-05-15').sameAs(Date.parse('2000-06-15'), Date.Unit.DAY).should.be.false();
-    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-06-15'), Date.Unit.WEEK).should.be.false()).throw("Invalid precision: week");
+    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-06-15'), Date.Unit.WEEK).should.be.false()).throw('Invalid precision: week');
     Date.parse('2000-05-15').sameAs(Date.parse('2000-06-15'), Date.Unit.MONTH).should.be.false();
     return Date.parse('2000-05-15').sameAs(Date.parse('2000-06-15'), Date.Unit.YEAR).should.be.true();
   });
@@ -379,7 +382,7 @@ describe('Date.sameAs', function() {
   it('should properly calculate cases where the year is different', function() {
     Date.parse('2000-05-15').sameAs(Date.parse('2001-05-15')).should.be.false();
     Date.parse('2000-05-15').sameAs(Date.parse('2001-05-15'), Date.Unit.DAY).should.be.false();
-    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2001-05-15'), Date.Unit.WEEK).should.be.false()).throw("Invalid precision: week");
+    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2001-05-15'), Date.Unit.WEEK).should.be.false()).throw('Invalid precision: week');
     Date.parse('2000-05-15').sameAs(Date.parse('2001-05-15'), Date.Unit.MONTH).should.be.false();
     return Date.parse('2000-05-15').sameAs(Date.parse('2001-05-15'), Date.Unit.YEAR).should.be.false();
   });
@@ -435,8 +438,8 @@ describe('Date.sameAs', function() {
   });
 
   return it('should error on incorrect precisions', function() {
-    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw("Invalid precision: week");
-    return should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15'), DateTime.Unit.MINUTE)).throw("Invalid precision: minute");
+    should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw('Invalid precision: week');
+    return should(() => Date.parse('2000-05-15').sameAs(Date.parse('2000-05-15'), DateTime.Unit.MINUTE)).throw('Invalid precision: minute');
   });
 });
 
@@ -503,8 +506,8 @@ describe('Date.before', function() {
   });
 
   return it('should error on incorrect precisions', function() {
-    should(() => Date.parse('2000-05-15').before(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw("Invalid precision: week");
-    return should(() => Date.parse('2000-05-15').before(Date.parse('2000-05-15'), DateTime.Unit.MINUTE)).throw("Invalid precision: minute");
+    should(() => Date.parse('2000-05-15').before(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw('Invalid precision: week');
+    return should(() => Date.parse('2000-05-15').before(Date.parse('2000-05-15'), DateTime.Unit.MINUTE)).throw('Invalid precision: minute');
   });
 });
 
@@ -582,8 +585,8 @@ describe('Date.sameOrBefore', function() {
   });
 
   return it('should error on incorrect precisions', function() {
-    should(() => Date.parse('2000-05-15').sameOrBefore(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw("Invalid precision: week");
-    return should(() => Date.parse('2000-05-15').sameOrBefore(Date.parse('2000-05-15'), DateTime.Unit.MINUTE)).throw("Invalid precision: minute");
+    should(() => Date.parse('2000-05-15').sameOrBefore(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw('Invalid precision: week');
+    return should(() => Date.parse('2000-05-15').sameOrBefore(Date.parse('2000-05-15'), DateTime.Unit.MINUTE)).throw('Invalid precision: minute');
   });
 });
 
@@ -657,8 +660,8 @@ describe('Date.after', function() {
   });
 
   return it('should error on incorrect precisions', function() {
-    should(() => Date.parse('2000-05-15').after(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw("Invalid precision: week");
-    return should(() => Date.parse('2000-05-15').after(Date.parse('2000-05-15'), DateTime.Unit.MINUTE)).throw("Invalid precision: minute");
+    should(() => Date.parse('2000-05-15').after(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw('Invalid precision: week');
+    return should(() => Date.parse('2000-05-15').after(Date.parse('2000-05-15'), DateTime.Unit.MINUTE)).throw('Invalid precision: minute');
   });
 });
 
@@ -742,8 +745,8 @@ describe('Date.sameOrAfter', function() {
   });
 
   return it('should error on incorrect precisions', function() {
-    should(() => Date.parse('2000-05-15').sameOrAfter(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw("Invalid precision: week");
-    return should(() => Date.parse('2000-05-15').sameOrAfter(Date.parse('2000-05-15'), DateTime.Unit.MINUTE)).throw("Invalid precision: minute");
+    should(() => Date.parse('2000-05-15').sameOrAfter(Date.parse('2000-05-15'), Date.Unit.WEEK)).throw('Invalid precision: week');
+    return should(() => Date.parse('2000-05-15').sameOrAfter(Date.parse('2000-05-15'), DateTime.Unit.MINUTE)).throw('Invalid precision: minute');
   });
 });
 

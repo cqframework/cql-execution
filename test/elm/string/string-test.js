@@ -1,3 +1,6 @@
+// TODO: This file was created by bulk-decaffeinate.
+// Sanity-check the conversion and remove this comment.
+/* eslint-env mocha */
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -80,11 +83,11 @@ describe('Split', function() {
 
   it('should split strings on comma', function() {
     return this.commaSeparated.exec(this.ctx).should.eql(['a','b','c','','1','2','3']);
-});
+  });
 
   it('should return single-item array when separator is not used', function() {
     return this.separatorNotUsed.exec(this.ctx).should.eql(['a,b,c,,1,2,3']);
-});
+  });
 
   it('should return null when separating null', function() {
     return should(this.separateNull.exec(this.ctx)).be.null();
@@ -102,16 +105,16 @@ describe('SplitOnMatches', function() {
   });
 
   it('should splitOnMatches strings into a list of 2', function() {
-    return this.splitOnMatchesListReturn.exec(this.ctx).should.eql(["foo ", " bar"]);
-});
+    return this.splitOnMatchesListReturn.exec(this.ctx).should.eql(['foo ', ' bar']);
+  });
 
   it('should return a list of two empty strings if its an exact match', function() {
     return this.splitOnMatchesOriginalString.exec(this.ctx).should.eql(['','']);
-});
+  });
 
   it('should return original string because there was no match', function() {
     return this.splitOnMatchesNoMatch.exec(this.ctx).should.eql(['foobar']);
-});
+  });
 
   it('should return null when stringToSplit is null', function() {
     return should(this.splitOnMatchesIsNullFirst.exec(this.ctx)).be.null();

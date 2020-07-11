@@ -1,3 +1,9 @@
+/* eslint-disable
+    no-empty,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
+/* eslint-env mocha */
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -22,7 +28,7 @@ describe('DateTime', function() {
     d.year.should.equal(2012);
     d.timezoneOffset.should.equal(this.defaultOffset);
     return [ 'month', 'day', 'hour', 'minute', 'second', 'millisecond' ].map((field) => should.not.exist(d[field]));
-});
+  });
 
   it('should execute month precision correctly', function() {
     const d = this.month.exec(this.ctx);
@@ -31,7 +37,7 @@ describe('DateTime', function() {
     d.month.should.equal(2);
     d.timezoneOffset.should.equal(this.defaultOffset);
     return [ 'day', 'hour', 'minute', 'second', 'millisecond' ].map((field) => should.not.exist(d[field]));
-});
+  });
 
   it('should execute day precision correctly', function() {
     const d = this.day.exec(this.ctx);
@@ -41,7 +47,7 @@ describe('DateTime', function() {
     d.day.should.equal(15);
     d.timezoneOffset.should.equal(this.defaultOffset);
     return [ 'hour', 'minute', 'second', 'millisecond' ].map((field) => should.not.exist(d[field]));
-});
+  });
 
   it('should execute hour precision correctly', function() {
     const d = this.hour.exec(this.ctx);
@@ -52,7 +58,7 @@ describe('DateTime', function() {
     d.hour.should.equal(12);
     d.timezoneOffset.should.equal(this.defaultOffset);
     return [ 'minute', 'second', 'millisecond' ].map((field) => should.not.exist(d[field]));
-});
+  });
 
   it('should execute minute precision correctly', function() {
     const d = this.minute.exec(this.ctx);
@@ -64,7 +70,7 @@ describe('DateTime', function() {
     d.minute.should.equal(10);
     d.timezoneOffset.should.equal(this.defaultOffset);
     return [ 'second', 'millisecond' ].map((field) => should.not.exist(d[field]));
-});
+  });
 
   it('should execute second precision correctly', function() {
     const d = this.second.exec(this.ctx);
@@ -119,7 +125,7 @@ describe('Time', function() {
     d.day.should.equal(1);
     d.hour.should.equal(12);
     return [ 'minute', 'second', 'millisecond', 'timezoneOffset'].map((field) => should.not.exist(d[field]));
-});
+  });
 
   it('should execute minute precision correctly', function() {
     const d = this.minute.exec(this.ctx);
@@ -131,7 +137,7 @@ describe('Time', function() {
     d.minute.should.equal(10);
     should(d.timezoneOffset).be.null();
     return [ 'second', 'millisecond', 'timezoneOffset' ].map((field) => should.not.exist(d[field]));
-});
+  });
 
   it('should execute second precision correctly', function() {
     const d = this.second.exec(this.ctx);
@@ -173,13 +179,13 @@ describe('Today', function() {
     today.month.should.equal(this.ctx.getExecutionDateTime().month);
     today.day.should.equal(this.ctx.getExecutionDateTime().day);
     return [ 'hour', 'minute', 'second', 'millisecond', 'timezoneOffset' ].map((field) => should.not.exist(today[field]));
-});
+  });
 
   return it('should throw an exception because no execution datetime has been set', function() {
     try {
       this.ctx = new PatientContext(this.ctx.library, this.ctx.patient, this.ctx.codeService, this.ctx.parameters, DT.DateTime.fromJSDate(new Date(), '0'));
       this.ctx.executionDateTime = (this.ctx.executionDateTime = null);
-      return this.todayVar.exec(this.ctx).should.equal("No Execution DateTime has been set");
+      return this.todayVar.exec(this.ctx).should.equal('No Execution DateTime has been set');
     } catch (error) {}
   });
 });
@@ -214,7 +220,7 @@ describe('Now', function() {
     now.minute.should.exist;
     now.second.should.exist;
     now.millisecond.should.exist;
-    return now.timezoneOffset.should.equal("0");
+    return now.timezoneOffset.should.equal('0');
   });
 
   return it('should return all date components representing now using a passed in timezone using a child context', function() {
@@ -230,7 +236,7 @@ describe('Now', function() {
     now.second.should.exist;
     now.millisecond.should.exist;
     now.timezoneOffset.should.equal(this.child_ctx.getTimezoneOffset());
-    return now.timezoneOffset.should.equal("0");
+    return now.timezoneOffset.should.equal('0');
   });
 });
 
@@ -298,7 +304,7 @@ describe('DateTimeComponentFrom', function() {
       Second: null,
       Millisecond: null
     });
-});
+  });
 
   return it('should return null for null date', function() {
     return should(this.nullDate.exec(this.ctx)).be.null();

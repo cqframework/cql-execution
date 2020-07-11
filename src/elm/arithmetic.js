@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -25,12 +30,12 @@ module.exports.Add = (Add = class Add extends Expression {
     } else {
       if (args != null) {
         args.reduce(function(x,y) {
-        if (x.isQuantity  || x.isDateTime || x.isDate || x.isTime) {
-          return sum = doAddition(x,y);
-        } else {
-          return sum = x + y;
-        }
-      });
+          if (x.isQuantity  || x.isDateTime || x.isDate || x.isTime) {
+            return sum = doAddition(x,y);
+          } else {
+            return sum = x + y;
+          }
+        });
       }
     }
 
@@ -78,12 +83,12 @@ module.exports.Multiply = (Multiply = class Multiply extends Expression {
     } else {
       if (args != null) {
         args.reduce(function(x,y) {
-        if (x.isQuantity || y.isQuantity) {
-          return product = doMultiplication(x,y);
-        } else {
-          return product = x * y;
-        }
-      });
+          if (x.isQuantity || y.isQuantity) {
+            return product = doMultiplication(x,y);
+          } else {
+            return product = x * y;
+          }
+        });
       }
     }
 
@@ -105,12 +110,12 @@ module.exports.Divide = (Divide = class Divide extends Expression {
     } else {
       if (args != null) {
         args.reduce(function(x,y) {
-        if (x.isQuantity) {
-          return quotient = doDivision(x,y);
-        } else {
-          return quotient = x / y;
-        }
-      });
+          if (x.isQuantity) {
+            return quotient = doDivision(x,y);
+          } else {
+            return quotient = x / y;
+          }
+        });
       }
     }
 

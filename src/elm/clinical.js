@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS101: Remove unnecessary use of Array.from
@@ -20,7 +25,7 @@ module.exports.ValueSetDef = (ValueSetDef = class ValueSetDef extends Expression
     this.id = json.id;
     this.version = json.version;
   }
-    //todo: code systems and versions
+  //todo: code systems and versions
 
   exec(ctx) {
     let left;
@@ -57,7 +62,7 @@ module.exports.AnyInValueSet = (AnyInValueSet = class AnyInValueSet extends Expr
   exec(ctx) {
     const valueset = this.valueset.execute(ctx);
     // If the value set reference cannot be resolved, a run-time error is thrown.
-    if ((valueset == null) || !valueset.isValueSet) { throw new Error("ValueSet must be provided to InValueSet function"); }
+    if ((valueset == null) || !valueset.isValueSet) { throw new Error('ValueSet must be provided to InValueSet function'); }
 
     const codes = this.codes.exec(ctx);
     if (codes == null) { return false; }
@@ -78,12 +83,12 @@ module.exports.InValueSet = (InValueSet = class InValueSet extends Expression {
   exec(ctx) {
     // If the code argument is null, the result is false
     if (this.code == null) { return false; }
-    if (this.valueset == null) { throw new Error("ValueSet must be provided to InValueSet function"); }
+    if (this.valueset == null) { throw new Error('ValueSet must be provided to InValueSet function'); }
     const code = this.code.execute(ctx);
     // spec indicates to return false if code is null, throw error if value set cannot be resolved
     if (code == null) { return false; }
     const valueset = this.valueset.execute(ctx);
-    if ((valueset == null) || !valueset.isValueSet) { throw new Error("ValueSet must be provided to InValueSet function"); }
+    if ((valueset == null) || !valueset.isValueSet) { throw new Error('ValueSet must be provided to InValueSet function'); }
     // If there is a code and valueset return whether or not the valueset has the code
     return valueset.hasMatch(code);
   }

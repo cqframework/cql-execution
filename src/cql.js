@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 const library     = require('./elm/library');
 const quantity    = require('./elm/quantity');
 const expression  = require('./elm/expression');

@@ -1,3 +1,5 @@
+// TODO: This file was created by bulk-decaffeinate.
+// Sanity-check the conversion and remove this comment.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -23,10 +25,10 @@ module.exports.Ratio = (Ratio = (function() {
       this.numerator = numerator;
       this.denominator = denominator;
       if ((this.numerator == null)) {
-        throw new Error("Cannot create a ratio with an undefined numerator");
+        throw new Error('Cannot create a ratio with an undefined numerator');
       }
       if ((this.denominator == null)) {
-        throw new Error("Cannot create a ratio with an undefined denominator");
+        throw new Error('Cannot create a ratio with an undefined denominator');
       }
     }
 

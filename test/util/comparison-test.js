@@ -1,3 +1,11 @@
+/* eslint-disable
+    constructor-super,
+    no-constant-condition,
+    no-this-before-super,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
+/* eslint-env mocha */
 /*
  * decaffeinate suggestions:
  * DS001: Remove Babel/TypeScript constructor workaround
@@ -21,7 +29,7 @@ describe('equals', function() {
     equals('', '').should.be.true();
     equals('a', 'a').should.be.true();
     equals('a', 'A').should.be.false();
-    equals('abc', "abc").should.be.true();
+    equals('abc', 'abc').should.be.true();
     return equals('abc', 'abcd').should.be.false();
   });
 
@@ -117,9 +125,9 @@ describe('equals', function() {
 
       asInt() {
         switch (typeof(this.num)) {
-          case 'number': return Math.floor(this.num);
-          case 'string': return parseInt(this.num);
-          default: return Number.NaN;
+        case 'number': return Math.floor(this.num);
+        case 'string': return parseInt(this.num);
+        default: return Number.NaN;
         }
       }
 
@@ -205,7 +213,7 @@ describe('equivalent', function() {
     equivalent('a', 'a').should.be.true();
     equivalent('réservé', 'RESERVE').should.be.true();
     equivalent('a', 'A').should.be.true();
-    equivalent('abc', "abc").should.be.true();
+    equivalent('abc', 'abc').should.be.true();
     return equivalent('abc', 'abcd').should.be.false();
   });
 });

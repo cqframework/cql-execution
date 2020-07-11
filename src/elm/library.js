@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -11,7 +16,7 @@ module.exports.Library = (Library = class Library {
     this.source = json;
     this.usings = [];
     for (let u of (json.library.usings != null ? json.library.usings.def : undefined) != null ? (json.library.usings != null ? json.library.usings.def : undefined) : []) {
-      if (u.localIdentifier !== "System") { this.usings.push({"name" : u.localIdentifier, "version" : u.version}); }
+      if (u.localIdentifier !== 'System') { this.usings.push({'name' : u.localIdentifier, 'version' : u.version}); }
     }
     this.parameters = {};
     for (let param of (json.library.parameters != null ? json.library.parameters.def : undefined) != null ? (json.library.parameters != null ? json.library.parameters.def : undefined) : []) {
@@ -35,7 +40,7 @@ module.exports.Library = (Library = class Library {
     }
     this.expressions = {};
     for (expr of (json.library.statements != null ? json.library.statements.def : undefined) != null ? (json.library.statements != null ? json.library.statements.def : undefined) : []) {
-      this.expressions[expr.name] = expr.type === "FunctionDef"  ? new FunctionDef(expr) : new ExpressionDef(expr);
+      this.expressions[expr.name] = expr.type === 'FunctionDef'  ? new FunctionDef(expr) : new ExpressionDef(expr);
     }
     this.includes = {};
     for (expr of (json.library.includes != null ? json.library.includes.def : undefined) != null ? (json.library.includes != null ? json.library.includes.def : undefined) : []) {

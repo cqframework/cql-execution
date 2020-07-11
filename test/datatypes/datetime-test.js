@@ -1,3 +1,6 @@
+// TODO: This file was created by bulk-decaffeinate.
+// Sanity-check the conversion and remove this comment.
+/* eslint-env mocha */
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -662,70 +665,70 @@ describe('DateTime.differenceBetween', function() {
 });
 
 it('should handle crossing DST in the fall', function() {
-    // NOTE: Since we "fall back" the 1st Sunday of November at 2:00am,
-    // the difference between 1:00am EDT and 3:00am EST is actually 3 hours!
-    const a = DateTime.parse('2017-11-05T01:00:00.0-04:00');
-    const b = DateTime.parse('2017-11-05T03:00:00.0-05:00');
-    a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(3));
-    a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(3*60));
-    a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(3*60*60));
-    return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(3*60*60*1000));
- });
+  // NOTE: Since we "fall back" the 1st Sunday of November at 2:00am,
+  // the difference between 1:00am EDT and 3:00am EST is actually 3 hours!
+  const a = DateTime.parse('2017-11-05T01:00:00.0-04:00');
+  const b = DateTime.parse('2017-11-05T03:00:00.0-05:00');
+  a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(3));
+  a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(3*60));
+  a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(3*60*60));
+  return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(3*60*60*1000));
+});
 
 it('should handle crossing DST in the spring when UTC', function() {
-    // NOTE: UTC does not have DST
-    const a = DateTime.parse('2017-03-12T01:00:00.0+00:00');
-    const b = DateTime.parse('2017-03-12T03:00:00.0+00:00');
-    a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(2));
-    a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(2*60));
-    a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(2*60*60));
-    return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(2*60*60*1000));
- });
+  // NOTE: UTC does not have DST
+  const a = DateTime.parse('2017-03-12T01:00:00.0+00:00');
+  const b = DateTime.parse('2017-03-12T03:00:00.0+00:00');
+  a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(2));
+  a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(2*60));
+  a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(2*60*60));
+  return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(2*60*60*1000));
+});
 
 it('should handle crossing DST in the fall when UTC', function() {
-    // NOTE: UTC does not have DST
-    const a = DateTime.parse('2017-11-05T01:00:00.0+00:00');
-    const b = DateTime.parse('2017-11-05T03:00:00.0+00:00');
-    a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(2));
-    a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(2*60));
-    a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(2*60*60));
-    return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(2*60*60*1000));
- });
+  // NOTE: UTC does not have DST
+  const a = DateTime.parse('2017-11-05T01:00:00.0+00:00');
+  const b = DateTime.parse('2017-11-05T03:00:00.0+00:00');
+  a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(2));
+  a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(2*60));
+  a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(2*60*60));
+  return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(2*60*60*1000));
+});
 
 it('should handle dates without minutes specified', function() {
-    const a = DateTime.parse('2017-01-01T05');
-    const b = DateTime.parse('2017-01-01T07');
-    a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(2));
-    // Because minute, second, and millisecond are null, the expects change
-    a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(60 + 1, (3*60) - 1));
-    a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty((60*60) + 1, (3*60*60) - 1));
-    return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty((60*60*1000) + 1, (3*60*60*1000) - 1));
- });
+  const a = DateTime.parse('2017-01-01T05');
+  const b = DateTime.parse('2017-01-01T07');
+  a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(2));
+  // Because minute, second, and millisecond are null, the expects change
+  a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(60 + 1, (3*60) - 1));
+  a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty((60*60) + 1, (3*60*60) - 1));
+  return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty((60*60*1000) + 1, (3*60*60*1000) - 1));
+});
 
 it('should handle dates without minutes specified with different time zones', function() {
-    const a = new DateTime(2017, 1, 1, 7, null, null, null, 3);
-    const b = new DateTime(2017, 1, 1, 7, null, null, null, 1);
-    a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(2));
-    // Because minute, second, and millisecond are null, the expects change
-    a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(60 + 1, (3*60) - 1));
-    a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty((60*60) + 1, (3*60*60) - 1));
-    return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty((60*60*1000) + 1, (3*60*60*1000) - 1));
- });
+  const a = new DateTime(2017, 1, 1, 7, null, null, null, 3);
+  const b = new DateTime(2017, 1, 1, 7, null, null, null, 1);
+  a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(2));
+  // Because minute, second, and millisecond are null, the expects change
+  a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(60 + 1, (3*60) - 1));
+  a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty((60*60) + 1, (3*60*60) - 1));
+  return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty((60*60*1000) + 1, (3*60*60*1000) - 1));
+});
 
 
 describe('DateTime.durationBetween', function() {
@@ -832,7 +835,7 @@ describe('DateTime.durationBetween', function() {
 
 
 
-  it.skip("should handling durations with different timezones", function() {
+  it.skip('should handling durations with different timezones', function() {
     // need to properly handle date duration calculations with dates that supply
     // a timezone.
     let a = DateTime.parse('2011-01-02T11:00:00.0-05:00');
@@ -864,168 +867,168 @@ describe('DateTime.durationBetween', function() {
 });
 
 it('should handle crossing DST in the fall', function() {
-    // NOTE: Since we "fall back" the 1st Sunday of November at 2:00am,
-    // the duration between 1:00am EDT and 3:00am EST is actually 3 hours!
-    const a = DateTime.parse('2017-11-05T01:00:00.0-04:00');
-    const b = DateTime.parse('2017-11-05T03:00:00.0-05:00');
-    a.durationBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
-    a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
-    a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
-    a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(3));
-    a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(3*60));
-    a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(3*60*60));
-    return a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(3*60*60*1000));
- });
+  // NOTE: Since we "fall back" the 1st Sunday of November at 2:00am,
+  // the duration between 1:00am EDT and 3:00am EST is actually 3 hours!
+  const a = DateTime.parse('2017-11-05T01:00:00.0-04:00');
+  const b = DateTime.parse('2017-11-05T03:00:00.0-05:00');
+  a.durationBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
+  a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
+  a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
+  a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(3));
+  a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(3*60));
+  a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(3*60*60));
+  return a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(3*60*60*1000));
+});
 
-it("should handle durations ", function() {
+it('should handle durations ', function() {
 
-    let a = new DateTime(2011, 1, 2, 11, 0, 0, 0, 0);
-    let b = new DateTime(2011, 9, 29, 11, 1, 0, 0, 0);
-    a.durationBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
-    a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(8));
-    a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(270));
+  let a = new DateTime(2011, 1, 2, 11, 0, 0, 0, 0);
+  let b = new DateTime(2011, 9, 29, 11, 1, 0, 0, 0);
+  a.durationBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
+  a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(8));
+  a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(270));
 
-    a = new DateTime(2011, 1, 2, 11, 0, 0, 0, 0);
-    b = new DateTime(2011, 9, 29, 10, 59, 0, 0, 0);
-    a.durationBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
-    a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(8));
-    return a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(269));
-  });
+  a = new DateTime(2011, 1, 2, 11, 0, 0, 0, 0);
+  b = new DateTime(2011, 9, 29, 10, 59, 0, 0, 0);
+  a.durationBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
+  a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(8));
+  return a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(269));
+});
 
 
 it('should handle leap year', function() {
-    let a = DateTime.parse('1999-02-01T00:00:00.00');
-    let b = DateTime.parse('2000-02-01T00:00:00.00');
-    a.durationBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(1));
-    a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(12));
-    a.durationBetween(b, DateTime.Unit.WEEK).should.eql(new Uncertainty(52));
-    a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(365));
-    a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(8760));
-    a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(525600));
-    a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(31536000));
-    a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(31536000000));
+  let a = DateTime.parse('1999-02-01T00:00:00.00');
+  let b = DateTime.parse('2000-02-01T00:00:00.00');
+  a.durationBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(1));
+  a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(12));
+  a.durationBetween(b, DateTime.Unit.WEEK).should.eql(new Uncertainty(52));
+  a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(365));
+  a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(8760));
+  a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(525600));
+  a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(31536000));
+  a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(31536000000));
 
-    a = DateTime.parse('2000-02-01T00:00:00.0');
-    b = DateTime.parse('2001-02-01T00:00:00.0');
-    a.durationBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(1));
-    a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(12));
-    a.durationBetween(b, DateTime.Unit.WEEK).should.eql(new Uncertainty(52));
-    a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(366));
-    a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(8784));
-    a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(527040));
-    a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(31622400));
-    return a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(31622400000));
-  });
+  a = DateTime.parse('2000-02-01T00:00:00.0');
+  b = DateTime.parse('2001-02-01T00:00:00.0');
+  a.durationBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(1));
+  a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(12));
+  a.durationBetween(b, DateTime.Unit.WEEK).should.eql(new Uncertainty(52));
+  a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(366));
+  a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(8784));
+  a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(527040));
+  a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(31622400));
+  return a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(31622400000));
+});
 
 it('should handle different timezones', function() {
 
-    const a = DateTime.parse('2001-01-01T00:00:00.0+00:00');
-    const b = DateTime.parse('2000-12-31T19:00:00.0-05:00');
-    a.durationBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
-    a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
-    a.durationBetween(b, DateTime.Unit.WEEK).should.eql(new Uncertainty(0));
-    a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
-    a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(0));
-    a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(0));
-    a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(0));
-    return a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(0));
-  });
+  const a = DateTime.parse('2001-01-01T00:00:00.0+00:00');
+  const b = DateTime.parse('2000-12-31T19:00:00.0-05:00');
+  a.durationBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
+  a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
+  a.durationBetween(b, DateTime.Unit.WEEK).should.eql(new Uncertainty(0));
+  a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
+  a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(0));
+  a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(0));
+  a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(0));
+  return a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(0));
+});
 
 it('should handle different timezones with no minutes specified', function() {
 
-    const a = new DateTime(2001,1,1,0,null,null,null,0);
-    const b = new DateTime(2000,12,31,19,null,null,null,-5);
-    a.durationBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
-    a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
-    a.durationBetween(b, DateTime.Unit.WEEK).should.eql(new Uncertainty(0));
-    a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
-    a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(0));
-    a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(-1*(60-1), 60-1));
-    a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-1*((60*60)-1), (60*60)-1));
-    return a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-1*((60*60*1000)-1), (60*60*1000)-1));
-  });
+  const a = new DateTime(2001,1,1,0,null,null,null,0);
+  const b = new DateTime(2000,12,31,19,null,null,null,-5);
+  a.durationBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
+  a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
+  a.durationBetween(b, DateTime.Unit.WEEK).should.eql(new Uncertainty(0));
+  a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
+  a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(0));
+  a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(-1*(60-1), 60-1));
+  a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-1*((60*60)-1), (60*60)-1));
+  return a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-1*((60*60*1000)-1), (60*60*1000)-1));
+});
 
-    // TODO: When a and b are different timezones, which do we use to count boundaries?
-    // 1) a's timezone
-    // 2) b's timezone
-    // 3) default timezone (right now, the environment's timezone)
-    // 4) UTC
+// TODO: When a and b are different timezones, which do we use to count boundaries?
+// 1) a's timezone
+// 2) b's timezone
+// 3) default timezone (right now, the environment's timezone)
+// 4) UTC
 
 it('should handle imprecision', function() {
-    let a = DateTime.parse('2009-06-15T12:37:45.250');
-    let b = DateTime.parse('2009-06-15T12:37:45');
-    a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-250,749));
+  let a = DateTime.parse('2009-06-15T12:37:45.250');
+  let b = DateTime.parse('2009-06-15T12:37:45');
+  a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-250,749));
 
-    a = DateTime.parse('2009-06-15T12:37:45.250');
-    b = DateTime.parse('2009-06-15T12:37');
-    a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-45,14));
-    a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-45250,14749));
+  a = DateTime.parse('2009-06-15T12:37:45.250');
+  b = DateTime.parse('2009-06-15T12:37');
+  a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-45,14));
+  a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-45250,14749));
 
-    a = DateTime.parse('2009-06-15T12:37:45.250');
-    b = DateTime.parse('2009-06-15T14');
-    a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(2));
-    a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(83, 142));
-    a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(4935, 8534));
-    a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(4934750,8534749));
+  a = DateTime.parse('2009-06-15T12:37:45.250');
+  b = DateTime.parse('2009-06-15T14');
+  a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(2));
+  a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(83, 142));
+  a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(4935, 8534));
+  a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(4934750,8534749));
 
-    // Because no timezone offset is passed in here, it uses the timezone offset of the local environment.
-    // It cannot be assumed that this date should have been on daylight savings time just by the month/day.
-    a = DateTime.parse('2000-06-15T12:37:45.250');
-    b = DateTime.parse('2009');
-    a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(9));
-    a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(103, 114));
-    a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(3122, 3486));
-    a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(74916, 83675));
-    a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(4494923, 5020522));
-    a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(269695335, 301231334));
-    a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(269695334750, 301231334749));
+  // Because no timezone offset is passed in here, it uses the timezone offset of the local environment.
+  // It cannot be assumed that this date should have been on daylight savings time just by the month/day.
+  a = DateTime.parse('2000-06-15T12:37:45.250');
+  b = DateTime.parse('2009');
+  a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(9));
+  a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(103, 114));
+  a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(3122, 3486));
+  a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(74916, 83675));
+  a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(4494923, 5020522));
+  a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(269695335, 301231334));
+  a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(269695334750, 301231334749));
 
-    a = DateTime.parse('2009-06-15T12:37:45');
-    b = DateTime.parse('2009-06-15T12:37:45');
-    a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(0));
-    return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-999,999));
-  });
+  a = DateTime.parse('2009-06-15T12:37:45');
+  b = DateTime.parse('2009-06-15T12:37:45');
+  a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(0));
+  return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-999,999));
+});
 
 it('should return negative values for going backwards', function() {
-    let a = DateTime.parse('2009-07-04T12:56:50.150');
-    let b = DateTime.parse('2000-06-15T12:37:45.350');
-    a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(-9));
-    a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(-109));
-    a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(-3306));
-    a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(-79344));
-    a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(-4760659));
-    a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-285639545));
-    a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-285639544800));
+  let a = DateTime.parse('2009-07-04T12:56:50.150');
+  let b = DateTime.parse('2000-06-15T12:37:45.350');
+  a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(-9));
+  a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(-109));
+  a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(-3306));
+  a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(-79344));
+  a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(-4760659));
+  a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-285639545));
+  a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-285639544800));
 
-    a = DateTime.parse('2009-06-15T12:37:45');
-    b = DateTime.parse('2009-06-15T12:37:44.123');
-    a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-1));
-    return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-1876, -877));
-  });
+  a = DateTime.parse('2009-06-15T12:37:45');
+  b = DateTime.parse('2009-06-15T12:37:44.123');
+  a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(0));
+  a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-1));
+  return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-1876, -877));
+});
 
 
 describe('DateTime.sameAs', function() {
@@ -1036,7 +1039,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.123'), DateTime.Unit.MINUTE).should.be.true();
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.123'), DateTime.Unit.HOUR).should.be.true();
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.123'), DateTime.Unit.DAY).should.be.true();
-    should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.123'), DateTime.Unit.WEEK)).throw("Invalid precision: week");
+    should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.123'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.123'), DateTime.Unit.MONTH).should.be.true();
     return DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.123'), DateTime.Unit.YEAR).should.be.true();
   });
@@ -1048,7 +1051,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.124'), DateTime.Unit.MINUTE).should.be.true();
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.124'), DateTime.Unit.HOUR).should.be.true();
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.124'), DateTime.Unit.DAY).should.be.true();
-    should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.124'), DateTime.Unit.WEEK)).throw("Invalid precision: week");
+    should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.124'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.124'), DateTime.Unit.MONTH).should.be.true();
     return DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.124'), DateTime.Unit.YEAR).should.be.true();
   });
@@ -1060,7 +1063,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:46.123'), DateTime.Unit.MINUTE).should.be.true();
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:46.123'), DateTime.Unit.HOUR).should.be.true();
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:46.123'), DateTime.Unit.DAY).should.be.true();
-    should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:46.123'), DateTime.Unit.WEEK)).throw("Invalid precision: week");
+    should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:46.123'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:46.123'), DateTime.Unit.MONTH).should.be.true();
     return DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:46.123'), DateTime.Unit.YEAR).should.be.true();
   });
@@ -1072,7 +1075,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:36:45.123'), DateTime.Unit.MINUTE).should.be.false();
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:36:45.123'), DateTime.Unit.HOUR).should.be.true();
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:36:45.123'), DateTime.Unit.DAY).should.be.true();
-    should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:36:45.123'), DateTime.Unit.WEEK)).throw("Invalid precision: week");
+    should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:36:45.123'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:36:45.123'), DateTime.Unit.MONTH).should.be.true();
     return DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:36:45.123'), DateTime.Unit.YEAR).should.be.true();
   });
@@ -1084,7 +1087,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T13:35:45.123'), DateTime.Unit.MINUTE).should.be.false();
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T13:35:45.123'), DateTime.Unit.HOUR).should.be.false();
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T13:35:45.123'), DateTime.Unit.DAY).should.be.true();
-    should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T13:35:45.123'), DateTime.Unit.WEEK)).throw("Invalid precision: week");
+    should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T13:35:45.123'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T13:35:45.123'), DateTime.Unit.MONTH).should.be.true();
     return DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T13:35:45.123'), DateTime.Unit.YEAR).should.be.true();
   });
@@ -1096,7 +1099,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-16T12:35:45.123'), DateTime.Unit.MINUTE).should.be.false();
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-16T12:35:45.123'), DateTime.Unit.HOUR).should.be.false();
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-16T12:35:45.123'), DateTime.Unit.DAY).should.be.false();
-    should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-16T12:35:45.123'), DateTime.Unit.WEEK)).throw("Invalid precision: week");
+    should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-16T12:35:45.123'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-16T12:35:45.123'), DateTime.Unit.MONTH).should.be.true();
     return DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-16T12:35:45.123'), DateTime.Unit.YEAR).should.be.true();
   });
@@ -1108,7 +1111,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-21T12:35:45.123'), DateTime.Unit.MINUTE).should.be.false();
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-21T12:35:45.123'), DateTime.Unit.HOUR).should.be.false();
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-21T12:35:45.123'), DateTime.Unit.DAY).should.be.false();
-    should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-21T12:35:45.123'), DateTime.Unit.WEEK)).throw("Invalid precision: week");
+    should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-21T12:35:45.123'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-21T12:35:45.123'), DateTime.Unit.MONTH).should.be.true();
     return DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-21T12:35:45.123'), DateTime.Unit.YEAR).should.be.true();
   });
@@ -1120,7 +1123,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-06-15T12:35:45.123'), DateTime.Unit.MINUTE).should.be.false();
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-06-15T12:35:45.123'), DateTime.Unit.HOUR).should.be.false();
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-06-15T12:35:45.123'), DateTime.Unit.DAY).should.be.false();
-    should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-06-15T12:35:45.123'), DateTime.Unit.WEEK)).throw("Invalid precision: week");
+    should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-06-15T12:35:45.123'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-06-15T12:35:45.123'), DateTime.Unit.MONTH).should.be.false();
     return DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-06-15T12:35:45.123'), DateTime.Unit.YEAR).should.be.true();
   });
@@ -1132,7 +1135,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2001-05-15T12:35:45.123'), DateTime.Unit.MINUTE).should.be.false();
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2001-05-15T12:35:45.123'), DateTime.Unit.HOUR).should.be.false();
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2001-05-15T12:35:45.123'), DateTime.Unit.DAY).should.be.false();
-    should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2001-05-15T12:35:45.123'), DateTime.Unit.WEEK)).throw("Invalid precision: week");
+    should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2001-05-15T12:35:45.123'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2001-05-15T12:35:45.123'), DateTime.Unit.MONTH).should.be.false();
     return DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2001-05-15T12:35:45.123'), DateTime.Unit.YEAR).should.be.false();
   });

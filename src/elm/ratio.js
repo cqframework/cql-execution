@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -14,13 +19,13 @@ module.exports.Ratio = (Ratio = class Ratio extends Expression {
   constructor(json) {
     super(...arguments);
     if ((json.numerator == null)) {
-      throw new Error("Cannot create a ratio with an undefined numerator value");
+      throw new Error('Cannot create a ratio with an undefined numerator value');
     } else {
       this.numerator = new Quantity(json.numerator.value, json.numerator.unit);
     }
 
     if ((json.denominator == null)) {
-      throw new Error("Cannot create a ratio with an undefined denominator value");
+      throw new Error('Cannot create a ratio with an undefined denominator value');
     } else {
       this.denominator = new Quantity(json.denominator.value, json.denominator.unit);
     }

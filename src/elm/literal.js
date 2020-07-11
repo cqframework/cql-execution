@@ -1,3 +1,5 @@
+// TODO: This file was created by bulk-decaffeinate.
+// Sanity-check the conversion and remove this comment.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -10,11 +12,11 @@ const { Expression } = require('./expression');
 module.exports.Literal = (Literal = class Literal extends Expression {
   static from(json) {
     switch(json.valueType) {
-      case "{urn:hl7-org:elm-types:r1}Boolean": return new BooleanLiteral(json);
-      case "{urn:hl7-org:elm-types:r1}Integer": return new IntegerLiteral(json);
-      case "{urn:hl7-org:elm-types:r1}Decimal": return new DecimalLiteral(json);
-      case "{urn:hl7-org:elm-types:r1}String": return new StringLiteral(json);
-      default: return new Literal(json);
+    case '{urn:hl7-org:elm-types:r1}Boolean': return new BooleanLiteral(json);
+    case '{urn:hl7-org:elm-types:r1}Integer': return new IntegerLiteral(json);
+    case '{urn:hl7-org:elm-types:r1}Decimal': return new DecimalLiteral(json);
+    case '{urn:hl7-org:elm-types:r1}String': return new StringLiteral(json);
+    default: return new Literal(json);
     }
   }
 
@@ -128,7 +130,7 @@ module.exports.StringLiteral = (StringLiteral = (function() {
 
     exec(ctx) {
       // TODO: Remove these replacements when CQL-to-ELM fixes bug: https://github.com/cqframework/clinical_quality_language/issues/82
-      return this.value.replace(/\\'/g, "'").replace(/\\"/g, "\"");
+      return this.value.replace(/\\'/g, '\'').replace(/\\"/g, '"');
     }
   };
   StringLiteral.initClass();

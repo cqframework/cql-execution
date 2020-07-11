@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -66,7 +71,7 @@ module.exports.ByDirection = (ByDirection = class ByDirection extends Expression
   constructor(json) {
     super(...arguments);
     this.direction = json.direction;
-    this.low_order = this.direction === "asc" ? -1 : 1;
+    this.low_order = this.direction === 'asc' ? -1 : 1;
     this.high_order = this.low_order * -1;
   }
 
@@ -92,7 +97,7 @@ module.exports.ByExpression = (ByExpression = class ByExpression extends Express
     super(...arguments);
     this.expression = build(json.expression);
     this.direction = json.direction;
-    this.low_order = this.direction === "asc" ? -1 : 1;
+    this.low_order = this.direction === 'asc' ? -1 : 1;
     this.high_order = this.low_order * -1;
   }
 
@@ -122,8 +127,8 @@ module.exports.ByColumn = (ByColumn = class ByColumn extends ByExpression {
   constructor(json) {
     super(...arguments);
     this.expression = build({
-      "name" : json.path,
-      "type" : "IdentifierRef"
+      'name' : json.path,
+      'type' : 'IdentifierRef'
     });
   }
 });

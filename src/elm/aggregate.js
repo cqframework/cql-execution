@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -222,7 +227,7 @@ module.exports.StdDev = (StdDev = class StdDev extends AggregateExpression {
 
   constructor(json) {
     super(...arguments);
-    this.type = "standard_deviation";
+    this.type = 'standard_deviation';
   }
 
   exec(ctx) {
@@ -324,21 +329,21 @@ module.exports.GeometricMean = (GeometricMean = class GeometricMean extends Aggr
 module.exports.PopulationStdDev = (PopulationStdDev = class PopulationStdDev extends StdDev {
   constructor(json) {
     super(...arguments);
-    this.type = "population_deviation";
+    this.type = 'population_deviation';
   }
 });
 
 module.exports.Variance = (Variance = class Variance extends  StdDev {
   constructor(json) {
     super(...arguments);
-    this.type = "standard_variance";
+    this.type = 'standard_variance';
   }
 });
 
 module.exports.PopulationVariance = (PopulationVariance = class PopulationVariance extends  StdDev {
   constructor(json) {
     super(...arguments);
-    this.type = "population_variance";
+    this.type = 'population_variance';
   }
 });
 
@@ -369,7 +374,7 @@ var processQuantities = function(values) {
   if (hasOnlyQuantities(values)) {
     return values = convertAllUnits(values);
   } else if (hasSomeQuantities(values)) {
-    throw new Exception("Cannot perform aggregate operations on mixed values of Quantities and non Quantities");
+    throw new Exception('Cannot perform aggregate operations on mixed values of Quantities and non Quantities');
   } else {
     return values;
   }
@@ -392,7 +397,7 @@ var convertAllUnits = function(arr) {
 };
 
 var medianOfNumbers = function(numbers) {
-  numbers = numerical_sort(numbers, "asc");
+  numbers = numerical_sort(numbers, 'asc');
   if ((numbers.length % 2) === 1) {
     // Odd number of items
     return numbers[(numbers.length - 1) / 2];
