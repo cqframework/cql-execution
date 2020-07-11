@@ -1,3 +1,5 @@
+// TODO: This file was created by bulk-decaffeinate.
+// Sanity-check the conversion and remove this comment.
 const expression = require('./expression');
 const aggregate = require('./aggregate');
 const arithmetic = require('./arithmetic');
@@ -24,8 +26,8 @@ const type = require('./type');
 const overloaded = require('./overloaded');
 
 const libs = [expression, aggregate, arithmetic, clinical, comparison, conditional, datetime, declaration,
-        external, instance, interval, list, literal, logical, nullological, parameters, query, quantity, ratio,
-         reusable, string, structured, type, overloaded];
+  external, instance, interval, list, literal, logical, nullological, parameters, query, quantity, ratio,
+  reusable, string, structured, type, overloaded];
 for (let lib of libs) {
   for (let element of Object.keys(lib)) {
     module.exports[element] = lib[element];

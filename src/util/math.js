@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-undef,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -15,12 +20,12 @@ module.exports.MIN_INT_VALUE = (MIN_INT_VALUE = Math.pow(-2,31));
 module.exports.MAX_FLOAT_VALUE = (MAX_FLOAT_VALUE = 99999999999999999999999999999.99999999);
 module.exports.MIN_FLOAT_VALUE = (MIN_FLOAT_VALUE = -99999999999999999999999999999.99999999);
 module.exports.MIN_FLOAT_PRECISION_VALUE = (MIN_FLOAT_PRECISION_VALUE = Math.pow(10,-8));
-module.exports.MIN_DATETIME_VALUE = (MIN_DATETIME_VALUE = DateTime.parse("0001-01-01T00:00:00.000"));
-module.exports.MAX_DATETIME_VALUE = (MAX_DATETIME_VALUE = DateTime.parse("9999-12-31T23:59:59.999"));
-module.exports.MIN_DATE_VALUE = (MIN_DATE_VALUE = Date.parse("0001-01-01"));
-module.exports.MAX_DATE_VALUE = (MAX_DATE_VALUE = Date.parse("9999-12-31"));
-module.exports.MIN_TIME_VALUE = (MIN_TIME_VALUE = DateTime.parse("0000-01-01T00:00:00.000"));
-module.exports.MAX_TIME_VALUE = (MAX_TIME_VALUE = DateTime.parse("0000-01-01T23:59:59.999"));
+module.exports.MIN_DATETIME_VALUE = (MIN_DATETIME_VALUE = DateTime.parse('0001-01-01T00:00:00.000'));
+module.exports.MAX_DATETIME_VALUE = (MAX_DATETIME_VALUE = DateTime.parse('9999-12-31T23:59:59.999'));
+module.exports.MIN_DATE_VALUE = (MIN_DATE_VALUE = Date.parse('0001-01-01'));
+module.exports.MAX_DATE_VALUE = (MAX_DATE_VALUE = Date.parse('9999-12-31'));
+module.exports.MIN_TIME_VALUE = (MIN_TIME_VALUE = DateTime.parse('0000-01-01T00:00:00.000'));
+module.exports.MAX_TIME_VALUE = (MAX_TIME_VALUE = DateTime.parse('0000-01-01T23:59:59.999'));
 
 module.exports.overflowsOrUnderflows = function(value) {
   if (value == null) { return false; }
@@ -77,7 +82,7 @@ module.exports.limitDecimalPrecision = function(decimal) {
 module.exports.OverFlowException = (OverFlowException = (OverFlowException = class OverFlowException extends Exception {}));
 
 module.exports.successor = (successor = function(val) {
-  if (typeof val === "number") {
+  if (typeof val === 'number') {
     if (parseInt(val) === val) {
       if (val === MAX_INT_VALUE) { throw  new OverFlowException(); } else { return val + 1; }
     } else {
@@ -103,7 +108,7 @@ module.exports.successor = (successor = function(val) {
 });
 
 module.exports.predecessor = (predecessor = function(val) {
-  if (typeof val === "number") {
+  if (typeof val === 'number') {
     if (parseInt(val) === val) {
       if (val === MIN_INT_VALUE) { throw  new OverFlowException(); } else { return val - 1; }
     } else {
@@ -129,7 +134,7 @@ module.exports.predecessor = (predecessor = function(val) {
 });
 
 module.exports.maxValueForInstance = function(val) {
-  if (typeof val === "number") {
+  if (typeof val === 'number') {
     if (parseInt(val) === val) { return MAX_INT_VALUE; } else { return MAX_FLOAT_VALUE; }
   } else if (val != null ? val.isDateTime : undefined) {
     return MAX_DATETIME_VALUE.copy();
@@ -147,7 +152,7 @@ module.exports.maxValueForInstance = function(val) {
 };
 
 module.exports.minValueForInstance = function(val) {
-  if (typeof val === "number") {
+  if (typeof val === 'number') {
     if (parseInt(val) === val) { return MIN_INT_VALUE; } else { return MIN_FLOAT_VALUE; }
   } else if (val != null ? val.isDateTime : undefined) {
     return MIN_DATETIME_VALUE.copy();

@@ -1,3 +1,11 @@
+/* eslint-disable
+    constructor-super,
+    no-constant-condition,
+    no-this-before-super,
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS001: Remove Babel/TypeScript constructor workaround
@@ -63,7 +71,7 @@ module.exports.FunctionRef = (FunctionRef = class FunctionRef extends Expression
     const args = this.execArgs(ctx);
     const child_ctx = this.library ? __guard__(ctx.getLibraryContext(this.library), x1 => x1.childContext()) : ctx.childContext();
     if (args.length !== functionDef.parameters.length) {
-      throw new Error("incorrect number of arguments supplied");
+      throw new Error('incorrect number of arguments supplied');
     }
     for (let i = 0; i < functionDef.parameters.length; i++) {
       const p = functionDef.parameters[i];
@@ -103,7 +111,7 @@ module.exports.IdentifierRef = (IdentifierRef = class IdentifierRef extends Expr
     let val = this.library ? __guard__(ctx.get(this.library), x => x.get(this.name)) : ctx.get(this.name);
 
     if ((val == null)) {
-      const parts = this.name.split(".");
+      const parts = this.name.split('.');
       val = ctx.get(part);
       if ((val != null) && (parts.length > 1)) {
         let curr_obj = val;

@@ -1,3 +1,11 @@
+/* eslint-disable
+    constructor-super,
+    no-constant-condition,
+    no-this-before-super,
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS001: Remove Babel/TypeScript constructor workaround
@@ -37,14 +45,14 @@ module.exports.DateTime = (DateTime = (function() {
         if (this.json[property] != null) {
           this[property] = build(this.json[property]);
         } else if ((property === 'timezoneOffset') && (ctx.getTimezoneOffset() != null)) {
-          this[property] = Literal.from({"type": "Literal", "value": ctx.getTimezoneOffset(), "valueType": "{urn:hl7-org:elm-types:r1}Integer"});
+          this[property] = Literal.from({'type': 'Literal', 'value': ctx.getTimezoneOffset(), 'valueType': '{urn:hl7-org:elm-types:r1}Integer'});
         }
       }
       const args = ((() => {
         const result = [];
         for (let p of DateTime.PROPERTIES) {           if (this[p] != null) { result.push(this[p].execute(ctx)); } else {
-            result.push(undefined);
-          }
+          result.push(undefined);
+        }
         }
         return result;
       })());
@@ -81,8 +89,8 @@ module.exports.Date = (Date = (function() {
       const args = ((() => {
         const result = [];
         for (let p of Date.PROPERTIES) {           if (this[p] != null) { result.push(this[p].execute(ctx)); } else {
-            result.push(undefined);
-          }
+          result.push(undefined);
+        }
         }
         return result;
       })());
@@ -109,8 +117,8 @@ module.exports.Time = (Time = (function() {
       const args = ((() => {
         const result = [];
         for (let p of Time.PROPERTIES) {           if (this[p] != null) { result.push(this[p].execute(ctx)); } else {
-            result.push(undefined);
-          }
+          result.push(undefined);
+        }
         }
         return result;
       })());

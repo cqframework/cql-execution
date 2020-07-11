@@ -1,3 +1,9 @@
+/* eslint-disable
+    no-unreachable,
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS101: Remove unnecessary use of Array.from
@@ -21,41 +27,41 @@ const isUncertainty = x => x instanceof Uncertainty;
 
 module.exports.lessThan = function(a, b, precision) {
   switch (false) {
-    case !areNumbers(a, b): return a < b;
-    case !areDateTimesOrQuantities(a, b): return a.before(b, precision);
-    case !isUncertainty(a): return a.lessThan(b);
-    case !isUncertainty(b): return Uncertainty.from(a).lessThan(b);
-    default: return null;
+  case !areNumbers(a, b): return a < b;
+  case !areDateTimesOrQuantities(a, b): return a.before(b, precision);
+  case !isUncertainty(a): return a.lessThan(b);
+  case !isUncertainty(b): return Uncertainty.from(a).lessThan(b);
+  default: return null;
   }
 };
 
 module.exports.lessThanOrEquals = function(a, b, precision) {
   switch (false) {
-    case !areNumbers(a, b): return a <= b;
-    case !areDateTimesOrQuantities(a, b): return a.sameOrBefore(b, precision);
-    case !isUncertainty(a): return a.lessThanOrEquals(b);
-    case !isUncertainty(b): return Uncertainty.from(a).lessThanOrEquals(b);
-    default: return null;
+  case !areNumbers(a, b): return a <= b;
+  case !areDateTimesOrQuantities(a, b): return a.sameOrBefore(b, precision);
+  case !isUncertainty(a): return a.lessThanOrEquals(b);
+  case !isUncertainty(b): return Uncertainty.from(a).lessThanOrEquals(b);
+  default: return null;
   }
 };
 
 module.exports.greaterThan = function(a, b, precision) {
   switch (false) {
-    case !areNumbers(a, b): return a > b;
-    case !areDateTimesOrQuantities(a, b): return a.after(b, precision);
-    case !isUncertainty(a): return a.greaterThan(b);
-    case !isUncertainty(b): return Uncertainty.from(a).greaterThan(b);
-    default: return null;
+  case !areNumbers(a, b): return a > b;
+  case !areDateTimesOrQuantities(a, b): return a.after(b, precision);
+  case !isUncertainty(a): return a.greaterThan(b);
+  case !isUncertainty(b): return Uncertainty.from(a).greaterThan(b);
+  default: return null;
   }
 };
 
 module.exports.greaterThanOrEquals = function(a, b, precision) {
   switch (false) {
-    case !areNumbers(a, b): return a >= b;
-    case !areDateTimesOrQuantities(a, b): return a.sameOrAfter(b, precision);
-    case !isUncertainty(a): return a.greaterThanOrEquals(b);
-    case !isUncertainty(b): return Uncertainty.from(a).greaterThanOrEquals(b);
-    default: return null;
+  case !areNumbers(a, b): return a >= b;
+  case !areDateTimesOrQuantities(a, b): return a.sameOrAfter(b, precision);
+  case !isUncertainty(a): return a.greaterThanOrEquals(b);
+  case !isUncertainty(b): return Uncertainty.from(a).greaterThanOrEquals(b);
+  default: return null;
   }
 };
 
@@ -71,21 +77,21 @@ module.exports.equivalent = (equivalent = function(a, b) {
   const [aClass, bClass] = Array.from(getClassOfObjects(a, b));
 
   switch (aClass) {
-    case '[object Array]':
-      return compareEveryItemInArrays(a, b, equivalent);
-      break;
-    case '[object Object]':
-      return compareObjects(a, b, equivalent);
-      break;
-    case '[object String]':
-      // Make sure b is also a string
-      if (bClass === '[object String]') {
-        // String equivalence is case- and locale insensitive
-        a = a.replace(/\s/g, ' ');
-        b = b.replace(/\s/g, ' ');
-        return (a.localeCompare(b, 'en', {sensitivity: 'base'})) === 0;
-      }
-      break;
+  case '[object Array]':
+    return compareEveryItemInArrays(a, b, equivalent);
+    break;
+  case '[object Object]':
+    return compareObjects(a, b, equivalent);
+    break;
+  case '[object String]':
+    // Make sure b is also a string
+    if (bClass === '[object String]') {
+      // String equivalence is case- and locale insensitive
+      a = a.replace(/\s/g, ' ');
+      b = b.replace(/\s/g, ' ');
+      return (a.localeCompare(b, 'en', {sensitivity: 'base'})) === 0;
+    }
+    break;
   }
 
   return equals(a, b);
@@ -170,24 +176,24 @@ module.exports.equals = (equals = function(a, b) {
   if (aClass !== bClass) { return false; }
 
   switch (aClass) {
-    case '[object Date]':
-      // Compare the ms since epoch
-      return a.getTime() === b.getTime();
-      break;
-    case '[object RegExp]':
-      // Compare the components of the regular expression
-      return ['source', 'global', 'ignoreCase', 'multiline'].every(p => a[p] === b[p]);
-      break;
-    case '[object Array]':
-      if ((a.indexOf(null) >= 0) || (a.indexOf(undefined) >= 0) || (b.indexOf(null) >= 0) || (b.indexOf(undefined) >= 0)) { return null; }
-      return compareEveryItemInArrays(a, b, equals);
-      break;
-    case '[object Object]':
-      return compareObjects(a, b, equals);
-      break;
-    case '[object Function]':
-      return a.toString() === b.toString();
-      break;
+  case '[object Date]':
+    // Compare the ms since epoch
+    return a.getTime() === b.getTime();
+    break;
+  case '[object RegExp]':
+    // Compare the components of the regular expression
+    return ['source', 'global', 'ignoreCase', 'multiline'].every(p => a[p] === b[p]);
+    break;
+  case '[object Array]':
+    if ((a.indexOf(null) >= 0) || (a.indexOf(undefined) >= 0) || (b.indexOf(null) >= 0) || (b.indexOf(undefined) >= 0)) { return null; }
+    return compareEveryItemInArrays(a, b, equals);
+    break;
+  case '[object Object]':
+    return compareObjects(a, b, equals);
+    break;
+  case '[object Function]':
+    return a.toString() === b.toString();
+    break;
   }
 
   // If we made it this far, we can't handle it

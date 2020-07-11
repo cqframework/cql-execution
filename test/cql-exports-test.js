@@ -1,3 +1,10 @@
+/* eslint-disable
+    no-console,
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
+/* eslint-env mocha */
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -23,4 +30,4 @@ describe('CQL Exports', () => libNames.map((libName) =>
     console.log('Testing', name);
     cql[name].should.be.Function();
     return cql[name].name.should.equal(name);
-})))(libName)));
+  })))(libName)));

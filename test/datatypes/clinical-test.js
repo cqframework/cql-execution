@@ -1,3 +1,9 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
+/* eslint-env mocha */
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -109,10 +115,10 @@ describe('Concept', function() {
 describe('ValueSet', function() {
   this.beforeEach(function() {
     return this.valueSet = new ValueSet('1.2.3.4.5', '1', [
-        new Code('ABC', '5.4.3.2.1', '1'),
-        new Code('DEF', '5.4.3.2.1', '2'),
-        new Code('GHI', '5.4.3.4.5', '3'),
-      ]);
+      new Code('ABC', '5.4.3.2.1', '1'),
+      new Code('DEF', '5.4.3.2.1', '2'),
+      new Code('GHI', '5.4.3.4.5', '3'),
+    ]);
   });
 
   it('should properly represent the OID, version and codes', function() {

@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS101: Remove unnecessary use of Array.from
@@ -69,8 +74,8 @@ module.exports.Union = (Union = class Union extends Expression {
     const [a, b] = Array.from(this.execArgs(ctx));
     if ((a == null) || (b == null)) { return null; }
     const lib = (() => { switch (false) {
-      case !typeIsArray(a): return LIST;
-      default: return IVL;
+    case !typeIsArray(a): return LIST;
+    default: return IVL;
     } })();
     return lib.doUnion(a, b);
   }
@@ -85,8 +90,8 @@ module.exports.Except = (Except = class Except extends Expression {
     const [a, b] = Array.from(this.execArgs(ctx));
     if ((a == null) || (b == null)) { return null; }
     const lib = (() => { switch (false) {
-      case !typeIsArray(a): return LIST;
-      default: return IVL;
+    case !typeIsArray(a): return LIST;
+    default: return IVL;
     } })();
     return lib.doExcept(a, b);
   }
@@ -101,8 +106,8 @@ module.exports.Intersect = (Intersect = class Intersect extends Expression {
     const [a, b] = Array.from(this.execArgs(ctx));
     if ((a == null) || (b == null)) { return null; }
     const lib = (() => { switch (false) {
-      case !typeIsArray(a): return LIST;
-      default: return IVL;
+    case !typeIsArray(a): return LIST;
+    default: return IVL;
     } })();
     return lib.doIntersect(a, b);
   }
@@ -131,8 +136,8 @@ module.exports.In = (In = class In extends Expression {
     const [item, container] = Array.from(this.execArgs(ctx));
     if ((container == null) || (item == null)) { return null; }
     const lib = (() => { switch (false) {
-      case !typeIsArray(container): return LIST;
-      default: return IVL;
+    case !typeIsArray(container): return LIST;
+    default: return IVL;
     } })();
     return lib.doContains(container, item, this.precision);
   }
@@ -148,8 +153,8 @@ module.exports.Contains = (Contains = class Contains extends Expression {
     const [container, item] = Array.from(this.execArgs(ctx));
     if ((container == null) || (item == null)) { return null; }
     const lib = (() => { switch (false) {
-      case !typeIsArray(container): return LIST;
-      default: return IVL;
+    case !typeIsArray(container): return LIST;
+    default: return IVL;
     } })();
     return lib.doContains(container, item, this.precision);
   }
@@ -165,8 +170,8 @@ module.exports.Includes = (Includes = class Includes extends Expression {
     const [container, contained] = Array.from(this.execArgs(ctx));
     if ((container == null) || (contained == null)) { return null; }
     const lib = (() => { switch (false) {
-      case !typeIsArray(container): return LIST;
-      default: return IVL;
+    case !typeIsArray(container): return LIST;
+    default: return IVL;
     } })();
     return lib.doIncludes(container, contained, this.precision);
   }
@@ -182,8 +187,8 @@ module.exports.IncludedIn = (IncludedIn = class IncludedIn extends Expression {
     const [contained, container] = Array.from(this.execArgs(ctx));
     if ((container == null) || (contained == null)) { return null; }
     const lib = (() => { switch (false) {
-      case !typeIsArray(container): return LIST;
-      default: return IVL;
+    case !typeIsArray(container): return LIST;
+    default: return IVL;
     } })();
     return lib.doIncludes(container, contained, this.precision);
   }
@@ -199,8 +204,8 @@ module.exports.ProperIncludes = (ProperIncludes = class ProperIncludes extends E
     const [container, contained] = Array.from(this.execArgs(ctx));
     if ((container == null) || (contained == null)) { return null; }
     const lib = (() => { switch (false) {
-      case !typeIsArray(container): return LIST;
-      default: return IVL;
+    case !typeIsArray(container): return LIST;
+    default: return IVL;
     } })();
     return lib.doProperIncludes(container, contained, this.precision);
   }
@@ -216,8 +221,8 @@ module.exports.ProperIncludedIn = (ProperIncludedIn = class ProperIncludedIn ext
     const [contained, container] = Array.from(this.execArgs(ctx));
     if ((container == null) || (contained == null)) { return null; }
     const lib = (() => { switch (false) {
-      case !typeIsArray(container): return LIST;
-      default: return IVL;
+    case !typeIsArray(container): return LIST;
+    default: return IVL;
     } })();
     return lib.doProperIncludes(container, contained, this.precision);
   }
@@ -244,8 +249,8 @@ module.exports.After = (After = class After extends Expression {
     const [a, b] = Array.from(this.execArgs(ctx));
     if ((a == null) || (b == null)) { return null; }
     const lib = (() => { switch (false) {
-      case !(a instanceof DateTime): return DT;
-      default: return IVL;
+    case !(a instanceof DateTime): return DT;
+    default: return IVL;
     } })();
     return lib.doAfter(a, b, this.precision);
   }
@@ -261,8 +266,8 @@ module.exports.Before = (After = class After extends Expression {
     const [a, b] = Array.from(this.execArgs(ctx));
     if ((a == null) || (b == null)) { return null; }
     const lib = (() => { switch (false) {
-      case !(a instanceof DateTime): return DT;
-      default: return IVL;
+    case !(a instanceof DateTime): return DT;
+    default: return IVL;
     } })();
     return lib.doBefore(a, b, this.precision);
   }

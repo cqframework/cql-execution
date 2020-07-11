@@ -1,3 +1,9 @@
+/* eslint-disable
+    no-unused-vars,
+    no-useless-escape,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS101: Remove unnecessary use of Array.from
@@ -40,9 +46,9 @@ module.exports.ToBoolean = (ToBoolean = class ToBoolean extends Expression {
     const arg = this.execArgs(ctx);
     if ((arg != null) && (typeof arg !== 'undefined')) {
       const strArg = arg.toString().toLowerCase();
-      if (["true", "t", "yes", "y", "1"].includes(strArg)) {
+      if (['true', 't', 'yes', 'y', '1'].includes(strArg)) {
         return true;
-      } else if (["false", "f", "no", "n", "0"].includes(strArg)) {
+      } else if (['false', 'f', 'no', 'n', '0'].includes(strArg)) {
         return false;
       } else {
         return null;
@@ -237,26 +243,26 @@ module.exports.Convert = (Convert = class Convert extends Expression {
 
   exec(ctx) {
     switch (this.toType) {
-      case "{urn:hl7-org:elm-types:r1}Boolean":
-        return new ToBoolean({"type": "ToBoolean", "operand": this.operand}).execute(ctx);
-      case "{urn:hl7-org:elm-types:r1}Concept":
-        return new ToConcept({"type": "ToConcept", "operand": this.operand}).execute(ctx);
-      case "{urn:hl7-org:elm-types:r1}Decimal":
-        return new ToDecimal({"type": "ToDecimal", "operand": this.operand}).execute(ctx);
-      case "{urn:hl7-org:elm-types:r1}Integer":
-        return new ToInteger({"type": "ToInteger", "operand": this.operand}).execute(ctx);
-      case "{urn:hl7-org:elm-types:r1}String":
-        return new ToString({"type": "ToString", "operand": this.operand}).execute(ctx);
-      case "{urn:hl7-org:elm-types:r1}Quantity":
-        return new ToQuantity({"type": "ToQuantity", "operand": this.operand}).execute(ctx);
-      case "{urn:hl7-org:elm-types:r1}DateTime":
-        return new ToDateTime({"type": "ToDateTime", "operand": this.operand}).execute(ctx);
-      case "{urn:hl7-org:elm-types:r1}Date":
-        return new ToDate({"type": "ToDate", "operand": this.operand}).execute(ctx);
-      case "{urn:hl7-org:elm-types:r1}Time":
-        return new ToTime({"type": "ToTime", "operand": this.operand}).execute(ctx);
-      default:
-        return this.execArgs(ctx);
+    case '{urn:hl7-org:elm-types:r1}Boolean':
+      return new ToBoolean({'type': 'ToBoolean', 'operand': this.operand}).execute(ctx);
+    case '{urn:hl7-org:elm-types:r1}Concept':
+      return new ToConcept({'type': 'ToConcept', 'operand': this.operand}).execute(ctx);
+    case '{urn:hl7-org:elm-types:r1}Decimal':
+      return new ToDecimal({'type': 'ToDecimal', 'operand': this.operand}).execute(ctx);
+    case '{urn:hl7-org:elm-types:r1}Integer':
+      return new ToInteger({'type': 'ToInteger', 'operand': this.operand}).execute(ctx);
+    case '{urn:hl7-org:elm-types:r1}String':
+      return new ToString({'type': 'ToString', 'operand': this.operand}).execute(ctx);
+    case '{urn:hl7-org:elm-types:r1}Quantity':
+      return new ToQuantity({'type': 'ToQuantity', 'operand': this.operand}).execute(ctx);
+    case '{urn:hl7-org:elm-types:r1}DateTime':
+      return new ToDateTime({'type': 'ToDateTime', 'operand': this.operand}).execute(ctx);
+    case '{urn:hl7-org:elm-types:r1}Date':
+      return new ToDate({'type': 'ToDate', 'operand': this.operand}).execute(ctx);
+    case '{urn:hl7-org:elm-types:r1}Time':
+      return new ToTime({'type': 'ToTime', 'operand': this.operand}).execute(ctx);
+    default:
+      return this.execArgs(ctx);
     }
   }
 });
@@ -407,7 +413,7 @@ module.exports.ConvertsToTime = (ConvertsToTime = class ConvertsToTime extends E
 
 var canConvertToType = function(toFunction, operand, ctx) {
   try {
-    const value = new toFunction({"type": toFunction.name, "operand": operand}).execute(ctx);
+    const value = new toFunction({'type': toFunction.name, 'operand': operand}).execute(ctx);
     if (value != null) { return true; } else { return false; }
   } catch (error) {
     return false;

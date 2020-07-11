@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS101: Remove unnecessary use of Array.from
@@ -81,16 +86,16 @@ module.exports.Interval = (Interval = (function() {
       if (this.highClosed && (this.high != null) && cmp.equals(this.high, item)) {
         return true;
       }
-      if (item != null ? item.isInterval : undefined) { throw new Error("Argument to contains must be a point"); }
+      if (item != null ? item.isInterval : undefined) { throw new Error('Argument to contains must be a point'); }
       const lowFn = (() => { switch (false) {
-        case !this.lowClosed || !(this.low == null): return () => true;
-        case !this.lowClosed: return cmp.lessThanOrEquals;
-        default: return cmp.lessThan;
+      case !this.lowClosed || !(this.low == null): return () => true;
+      case !this.lowClosed: return cmp.lessThanOrEquals;
+      default: return cmp.lessThan;
       } })();
       const highFn = (() => { switch (false) {
-        case !this.highClosed || !(this.high == null): return () => true;
-        case !this.highClosed: return cmp.greaterThanOrEquals;
-        default: return cmp.greaterThan;
+      case !this.highClosed || !(this.high == null): return () => true;
+      case !this.highClosed: return cmp.greaterThanOrEquals;
+      default: return cmp.greaterThan;
       } })();
       return ThreeValuedLogic.and(
         lowFn(this.low, item, precision),
@@ -99,7 +104,7 @@ module.exports.Interval = (Interval = (function() {
     }
 
     properlyIncludes(other, precision) {
-      if (!(other != null ? other.isInterval : undefined)) { throw new Error("Argument to properlyIncludes must be an interval"); }
+      if (!(other != null ? other.isInterval : undefined)) { throw new Error('Argument to properlyIncludes must be an interval'); }
       return ThreeValuedLogic.and(
         this.includes(other, precision),
         ThreeValuedLogic.not(other.includes(this, precision))
@@ -131,11 +136,11 @@ module.exports.Interval = (Interval = (function() {
       const closed = this.toClosed();
       const [low, high] = Array.from((() => {
         if (item != null ? item.isInterval : undefined) {
-        const itemClosed = item.toClosed();
-        return [itemClosed.low, itemClosed.high];
-      } else {
-        return [item, item];
-      }
+          const itemClosed = item.toClosed();
+          return [itemClosed.low, itemClosed.high];
+        } else {
+          return [item, item];
+        }
       })());
       return ThreeValuedLogic.and(
         cmp.lessThanOrEquals(closed.low, high, precision),
@@ -162,25 +167,25 @@ module.exports.Interval = (Interval = (function() {
     }
 
     union(other) {
-      if (!(other != null ? other.isInterval : undefined)) { throw new Error("Argument to union must be an interval"); }
+      if (!(other != null ? other.isInterval : undefined)) { throw new Error('Argument to union must be an interval'); }
       // Note that interval union is only defined if the arguments overlap or meet.
       if (this.overlaps(other) || this.meets(other)) {
         const [a, b] = Array.from([this.toClosed(), other.toClosed()]);
         const [l, lc] = Array.from((() => { switch (false) {
-          case !cmp.lessThanOrEquals(a.low, b.low): return [this.low, this.lowClosed];
-          case !cmp.greaterThanOrEquals(a.low, b.low): return [other.low, other.lowClosed];
-          case !areNumeric(a.low, b.low): return [lowestNumericUncertainty(a.low, b.low), true];
+        case !cmp.lessThanOrEquals(a.low, b.low): return [this.low, this.lowClosed];
+        case !cmp.greaterThanOrEquals(a.low, b.low): return [other.low, other.lowClosed];
+        case !areNumeric(a.low, b.low): return [lowestNumericUncertainty(a.low, b.low), true];
           // TODO: Do we need to support quantities here?
-          case !areDateTimes(a.low, b.low) || !a.low.isMorePrecise(b.low): return [other.low, other.lowClosed];
-          default: return [this.low, this.lowClosed];
+        case !areDateTimes(a.low, b.low) || !a.low.isMorePrecise(b.low): return [other.low, other.lowClosed];
+        default: return [this.low, this.lowClosed];
         } })());
         const [h, hc] = Array.from((() => { switch (false) {
-          case !cmp.greaterThanOrEquals(a.high, b.high): return [this.high, this.highClosed];
-          case !cmp.lessThanOrEquals(a.high, b.high): return [other.high, other.highClosed];
-          case !areNumeric(a.high, b.high): return [highestNumericUncertainty(a.high, b.high), true];
+        case !cmp.greaterThanOrEquals(a.high, b.high): return [this.high, this.highClosed];
+        case !cmp.lessThanOrEquals(a.high, b.high): return [other.high, other.highClosed];
+        case !areNumeric(a.high, b.high): return [highestNumericUncertainty(a.high, b.high), true];
           // TODO: Do we need to support quantities here?
-          case !areDateTimes(a.high, b.high) || !a.high.isMorePrecise(b.high): return [other.high, other.highClosed];
-          default: return [this.high, this.highClosed];
+        case !areDateTimes(a.high, b.high) || !a.high.isMorePrecise(b.high): return [other.high, other.highClosed];
+        default: return [this.high, this.highClosed];
         } })());
         return new Interval(l, h, lc, hc);
       } else {
@@ -189,25 +194,25 @@ module.exports.Interval = (Interval = (function() {
     }
 
     intersect(other) {
-      if (!(other != null ? other.isInterval : undefined)) { throw new Error("Argument to union must be an interval"); }
+      if (!(other != null ? other.isInterval : undefined)) { throw new Error('Argument to union must be an interval'); }
       // Note that interval union is only defined if the arguments overlap.
       if (this.overlaps(other)) {
         const [a, b] = Array.from([this.toClosed(), other.toClosed()]);
         const [l, lc] = Array.from((() => { switch (false) {
-          case !cmp.greaterThanOrEquals(a.low, b.low): return [this.low, this.lowClosed];
-          case !cmp.lessThanOrEquals(a.low, b.low): return [other.low, other.lowClosed];
-          case !areNumeric(a.low, b.low): return [highestNumericUncertainty(a.low, b.low), true];
+        case !cmp.greaterThanOrEquals(a.low, b.low): return [this.low, this.lowClosed];
+        case !cmp.lessThanOrEquals(a.low, b.low): return [other.low, other.lowClosed];
+        case !areNumeric(a.low, b.low): return [highestNumericUncertainty(a.low, b.low), true];
           // TODO: Do we need to support quantities here?
-          case !areDateTimes(a.low, b.low) || !b.low.isMorePrecise(a.low): return [other.low, other.lowClosed];
-          default: return [this.low, this.lowClosed];
+        case !areDateTimes(a.low, b.low) || !b.low.isMorePrecise(a.low): return [other.low, other.lowClosed];
+        default: return [this.low, this.lowClosed];
         } })());
         const [h, hc] = Array.from((() => { switch (false) {
-          case !cmp.lessThanOrEquals(a.high, b.high): return [this.high, this.highClosed];
-          case !cmp.greaterThanOrEquals(a.high, b.high): return [other.high, other.highClosed];
-          case !areNumeric(a.high, b.high): return [lowestNumericUncertainty(a.high, b.high), true];
+        case !cmp.lessThanOrEquals(a.high, b.high): return [this.high, this.highClosed];
+        case !cmp.greaterThanOrEquals(a.high, b.high): return [other.high, other.highClosed];
+        case !areNumeric(a.high, b.high): return [lowestNumericUncertainty(a.high, b.high), true];
           // TODO: Do we need to support quantities here?
-          case !areDateTimes(a.high, b.high) || !b.high.isMorePrecise(a.high): return [other.high, other.highClosed];
-          default: return [this.high, this.highClosed];
+        case !areDateTimes(a.high, b.high) || !b.high.isMorePrecise(a.high): return [other.high, other.highClosed];
+        default: return [this.high, this.highClosed];
         } })());
         return new Interval(l, h, lc, hc);
       } else {
@@ -217,7 +222,7 @@ module.exports.Interval = (Interval = (function() {
 
     except(other) {
       if (other === null) { return null; }
-      if (!(other != null ? other.isInterval : undefined)) { throw new Error("Argument to except must be an interval"); }
+      if (!(other != null ? other.isInterval : undefined)) { throw new Error('Argument to except must be an interval'); }
 
       const ol = this.overlaps(other);
       if (ol === true) {
@@ -314,7 +319,7 @@ module.exports.Interval = (Interval = (function() {
       const closed = this.toClosed();
       // Meets spec, but not 100% correct (e.g., (null, 5] after [6, 10] --> null)
       // Simple way to fix it: and w/ not overlaps
-      if (!!other.toClosed) {
+      if (other.toClosed) {
         return cmp.greaterThan(closed.low, other.toClosed().high, precision);
       } else {
         return cmp.greaterThan(closed.low, other, precision);
@@ -325,7 +330,7 @@ module.exports.Interval = (Interval = (function() {
       const closed = this.toClosed();
       // Meets spec, but not 100% correct (e.g., (null, 5] after [6, 10] --> null)
       // Simple way to fix it: and w/ not overlaps
-      if (!!other.toClosed) {
+      if (other.toClosed) {
         return cmp.lessThan(closed.high, other.toClosed().low, precision);
       } else {
         return cmp.lessThan(closed.high, other, precision);
@@ -411,7 +416,7 @@ module.exports.Interval = (Interval = (function() {
       let diff;
       if (((this.low != null) && (this.low.isDateTime || this.low.isDate || this.low.isTime)) ||
          ((this.high != null) && (this.high.isDateTime || this.high.isDate || this.high.isTime))) {
-        throw new Error("Width of Date, DateTime, and Time intervals is not supported");
+        throw new Error('Width of Date, DateTime, and Time intervals is not supported');
       }
 
       const closed = this.toClosed();
@@ -419,7 +424,7 @@ module.exports.Interval = (Interval = (function() {
         return null;
       } else if (closed.low.isQuantity) {
         if (closed.low.unit !== closed.high.unit) {
-          throw new Error("Cannot calculate width of Quantity Interval with different units");
+          throw new Error('Cannot calculate width of Quantity Interval with different units');
         }
         const lowValue = closed.low.value;
         const highValue = closed.high.value;
@@ -438,7 +443,7 @@ module.exports.Interval = (Interval = (function() {
       const pointSize = this.getPointSize();
       if (((this.low != null) && (this.low.isDateTime || this.low.isDate || this.low.isTime)) ||
          ((this.high != null) && (this.high.isDateTime || this.high.isDate || this.high.isTime))) {
-        throw new Error("Size of Date, DateTime, and Time intervals is not supported");
+        throw new Error('Size of Date, DateTime, and Time intervals is not supported');
       }
 
       const closed = this.toClosed();
@@ -446,7 +451,7 @@ module.exports.Interval = (Interval = (function() {
         return null;
       } else if (closed.low.isQuantity) {
         if (closed.low.unit !== closed.high.unit) {
-          throw new Error("Cannot calculate size of Quantity Interval with different units");
+          throw new Error('Cannot calculate size of Quantity Interval with different units');
         }
         const lowValue = closed.low.value;
         const highValue = closed.high.value;
@@ -480,7 +485,7 @@ module.exports.Interval = (Interval = (function() {
           pointSize = successor(this.high) - this.high;
         }
       } else {
-        throw new Error("Point type of intervals cannot be determined.");
+        throw new Error('Point type of intervals cannot be determined.');
       }
 
       if (typeof pointSize === 'number') {
@@ -495,14 +500,14 @@ module.exports.Interval = (Interval = (function() {
       const point = this.low != null ? this.low : this.high;
       if ((typeof(point) === 'number') || (point != null ? point.isDateTime : undefined) || (point != null ? point.isQuantity : undefined) || (point != null ? point.isDate : undefined)) {
         low = (() => { switch (false) {
-          case !this.lowClosed || !(this.low == null): return minValueForInstance(point);
-          case !!this.lowClosed || (this.low == null): return successor(this.low);
-          default: return this.low;
+        case !this.lowClosed || !(this.low == null): return minValueForInstance(point);
+        case !!this.lowClosed || (this.low == null): return successor(this.low);
+        default: return this.low;
         } })();
         high = (() => { switch (false) {
-          case !this.highClosed || !(this.high == null): return maxValueForInstance(point);
-          case !!this.highClosed || (this.high == null): return predecessor(this.high);
-          default: return this.high;
+        case !this.highClosed || !(this.high == null): return maxValueForInstance(point);
+        case !!this.highClosed || (this.high == null): return predecessor(this.high);
+        default: return this.high;
         } })();
         if ((low == null)) { low = new Uncertainty(minValueForInstance(point), high); }
         if ((high == null)) { high = new Uncertainty(low, maxValueForInstance(point)); }

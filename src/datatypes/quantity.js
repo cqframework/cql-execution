@@ -1,3 +1,9 @@
+/* eslint-disable
+    no-prototype-builtins,
+    no-useless-escape,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS101: Remove unnecessary use of Array.from
@@ -27,10 +33,10 @@ module.exports.Quantity = (Quantity = (function() {
       this.value = value;
       this.unit = unit;
       if ((this.value == null) || isNaN(this.value)) {
-        throw new Error("Cannot create a quantity with an undefined value");
+        throw new Error('Cannot create a quantity with an undefined value');
       } else {
         if (!isValidDecimal(this.value)) {
-          throw new Error("Cannot create a quantity with an invalid decimal value");
+          throw new Error('Cannot create a quantity with an invalid decimal value');
         }
       }
 
@@ -103,7 +109,7 @@ module.exports.Quantity = (Quantity = (function() {
           if((other_v == null)) {
             return null;
           } else {
-            return decimalAdjust("round", this.value, -8)  === decimalAdjust("round", other_v, -8);
+            return decimalAdjust('round', this.value, -8)  === decimalAdjust('round', other_v, -8);
           }
         }
       }
@@ -117,11 +123,11 @@ module.exports.Quantity = (Quantity = (function() {
     }
 
     dividedBy(other) {
-      return this.multiplyDivide(other,"/");
+      return this.multiplyDivide(other,'/');
     }
 
     multiplyBy(other) {
-      return this.multiplyDivide(other,"."); // in ucum . represents multiplication
+      return this.multiplyDivide(other,'.'); // in ucum . represents multiplication
     }
 
     multiplyDivide(other, operator) {
@@ -138,10 +144,10 @@ module.exports.Quantity = (Quantity = (function() {
           return null;
         }
       } else {
-        const value = operator === "/" ? this.value / other  : this.value * other;
+        const value = operator === '/' ? this.value / other  : this.value * other;
         if (overflowsOrUnderflows(value)) { return null; }
         try {
-          return new Quantity(decimalAdjust("round",value,-8), coalesceToOne(this.unit));
+          return new Quantity(decimalAdjust('round',value,-8), coalesceToOne(this.unit));
         } catch (error1) {
           return null;
         }
@@ -178,10 +184,10 @@ var ucum_time_units = {'years': 'a_g', 'year': 'a_g', 'YEARS': 'a_g', 'YEAR': 'a
   , 'minutes': 'min', 'minute': 'min', 'min': 'min', 'MIN': 'min'
   , 'seconds':'s', 'second':'s', 's': 's', 'S': 's'
   , 'milliseconds' : 'ms', 'millisecond' : 'ms', 'ms': 'ms', 'MS': 'ms'
-  };
+};
 
 var ucum_to_cql_units = {
-    'a_j':  'year'
+  'a_j':  'year'
   , 'a_g':  'year'
   , 'mo_j': 'month'
   , 'mo_g': 'month'
@@ -201,7 +207,7 @@ var convert_value = function(value, from, to) {
     if (from === to) {
       return value;
     } else {
-      return decimalAdjust("round", ucum.convert(value,ucum_unit(from),ucum_unit(to)), -8);
+      return decimalAdjust('round', ucum.convert(value,ucum_unit(from),ucum_unit(to)), -8);
     }
   // If the units could not be alignied ie: incompareable, exception will be thrown, return null
   } catch (e) {
@@ -247,12 +253,12 @@ var units_to_string = function(units = {}) {
     const str = pow === 1 ? key  : key + pow;
     if (v < 0) { denom.push(str); } else { numer.push(str); }
   }
-  let unit_string = "";
-  unit_string += numer.join(".");
+  let unit_string = '';
+  unit_string += numer.join('.');
   if (denom.length > 0) {
-    unit_string += "/" + denom.join("/");
+    unit_string += '/' + denom.join('/');
   }
-  if (unit_string === "") { return "1"; } else { return unit_string; }
+  if (unit_string === '') { return '1'; } else { return unit_string; }
 };
 
 
@@ -290,7 +296,7 @@ module.exports.parseQuantity = function(str) {
     if (components[3] != null) {
       unit = components[3].trim();
     } else {
-      unit = "";
+      unit = '';
     }
     return new Quantity(value, unit);
   } else {
@@ -313,7 +319,7 @@ const doScaledAddition = function(a,b,scaleForB) {
     b_unit = (b != null ? b.isQuantity : undefined) ? coalesceToOne(b.unit) : b.unit;
     return a.copy().add(b.value * scaleForB, clean_unit(b_unit));
   } else {
-    throw new Error("Unsupported argument types.");
+    throw new Error('Unsupported argument types.');
   }
 };
 

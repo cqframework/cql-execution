@@ -1,3 +1,9 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
+/* eslint-env mocha */
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -155,8 +161,8 @@ describe('DateTime.sameAs with implicit conversion of first variable', function(
   });
 
   it('should throw an error for invalid precisions', function() {
-    should(() => Date.parse('2000-05-15').sameAs(DateTime.parse('2001'), DateTime.Unit.WEEK)).throw("Invalid precision: week");
-    return should(() => Date.parse('2000-05-15').sameAs(DateTime.parse('2001'), 'femtosecond')).throw("Invalid precision: femtosecond");
+    should(() => Date.parse('2000-05-15').sameAs(DateTime.parse('2001'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
+    return should(() => Date.parse('2000-05-15').sameAs(DateTime.parse('2001'), 'femtosecond')).throw('Invalid precision: femtosecond');
   });
 
   return it('should handle potentially non-obvious cases of date to datetime conversion', function() {
@@ -232,8 +238,8 @@ describe('DateTime.after with implicit conversion of first variable', function()
   });
 
   it('should throw an error for invalid precisions', function() {
-    should(() => Date.parse('2000-05-15').after(DateTime.parse('2001'), DateTime.Unit.WEEK)).throw("Invalid precision: week");
-    return should(() => Date.parse('2000-05-15').after(DateTime.parse('2001'), 'femtosecond')).throw("Invalid precision: femtosecond");
+    should(() => Date.parse('2000-05-15').after(DateTime.parse('2001'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
+    return should(() => Date.parse('2000-05-15').after(DateTime.parse('2001'), 'femtosecond')).throw('Invalid precision: femtosecond');
   });
 
   return it('should handle potentially non-obvious cases of date to datetime conversion', function() {
@@ -323,8 +329,8 @@ describe('DateTime.sameOrAfter with implicit conversion of first variable', func
   });
 
   it('should throw an error for invalid precisions', function() {
-    should(() => Date.parse('2000-05-15').sameOrAfter(DateTime.parse('2001'), DateTime.Unit.WEEK)).throw("Invalid precision: week");
-    return should(() => Date.parse('2000-05-15').sameOrAfter(DateTime.parse('2001'), 'femtosecond')).throw("Invalid precision: femtosecond");
+    should(() => Date.parse('2000-05-15').sameOrAfter(DateTime.parse('2001'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
+    return should(() => Date.parse('2000-05-15').sameOrAfter(DateTime.parse('2001'), 'femtosecond')).throw('Invalid precision: femtosecond');
   });
 
   return it('should handle potentially non-obvious cases of date to datetime conversion', function() {
@@ -405,8 +411,8 @@ describe('DateTime.before with implicit conversion of first variable', function(
   });
 
   return it('should throw an error for invalid precisions', function() {
-    should(() => Date.parse('2000-05-15').before(DateTime.parse('2001'), DateTime.Unit.WEEK)).throw("Invalid precision: week");
-    return should(() => Date.parse('2000-05-15').before(DateTime.parse('2001'), 'femtosecond')).throw("Invalid precision: femtosecond");
+    should(() => Date.parse('2000-05-15').before(DateTime.parse('2001'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
+    return should(() => Date.parse('2000-05-15').before(DateTime.parse('2001'), 'femtosecond')).throw('Invalid precision: femtosecond');
   });
 });
 
@@ -491,8 +497,8 @@ describe('DateTime.sameOrBefore with implicit conversion of first variable', fun
   });
 
   it('should throw an error for invalid precisions', function() {
-    should(() => Date.parse('2000-05-15').sameOrBefore(DateTime.parse('2001'), DateTime.Unit.WEEK)).throw("Invalid precision: week");
-    return should(() => Date.parse('2000-05-15').sameOrBefore(DateTime.parse('2001'), 'femtosecond')).throw("Invalid precision: femtosecond");
+    should(() => Date.parse('2000-05-15').sameOrBefore(DateTime.parse('2001'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
+    return should(() => Date.parse('2000-05-15').sameOrBefore(DateTime.parse('2001'), 'femtosecond')).throw('Invalid precision: femtosecond');
   });
 
   return it('should handle potentially non-obvious cases of date to datetime conversion', function() {

@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS101: Remove unnecessary use of Array.from
@@ -9,8 +14,8 @@
 let getTimezoneSeparatorFromString, normalizeMillisecondsField, normalizeMillisecondsFieldInString, typeIsArray;
 module.exports.removeNulls = things => things.filter(x => x != null);
 
-module.exports.numerical_sort = (things, direction="asc") => things.sort(function(a,b){
-  if (direction === "asc") {
+module.exports.numerical_sort = (things, direction='asc') => things.sort(function(a,b){
+  if (direction === 'asc') {
     return a - b;
   } else {
     return b - a;
@@ -46,13 +51,13 @@ module.exports.normalizeMillisecondsFieldInString = (normalizeMillisecondsFieldI
   const [beforeMs, msAndAfter] = Array.from(string.split('.'));
   const timezoneSeparator = getTimezoneSeparatorFromString(msAndAfter);
 
-  if (!!timezoneSeparator) { timezoneField = msAndAfter != null ? msAndAfter.split(timezoneSeparator)[1] : undefined; }
+  if (timezoneSeparator) { timezoneField = msAndAfter != null ? msAndAfter.split(timezoneSeparator)[1] : undefined; }
   if ((timezoneField == null)) { timezoneField = ''; }
   return string = beforeMs + '.' + msString + timezoneSeparator + timezoneField;
 });
 
 module.exports.normalizeMillisecondsField = (normalizeMillisecondsField = msString => // fix up milliseconds by padding zeros and/or truncating (5 --> 500, 50 --> 500, 54321 --> 543, etc.)
-msString = (msString + "00").substring(0, 3));
+  msString = (msString + '00').substring(0, 3));
 
 module.exports.getTimezoneSeparatorFromString = (getTimezoneSeparatorFromString = function(string) {
   let timezoneSeparator;

@@ -1,3 +1,9 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
+/* eslint-env mocha */
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -2413,11 +2419,11 @@ describe('DateTimeIntervalExpand', function() {
 
   it('handles ends with mismatched precision', function() {
     // define MismatchPrecision: expand { Interval[@2012-01-01T12:00+00:00, @2012-01-02T12:00:00+00:00] } per day
-    let e = "{ [2012-01-01, 2012-01-01], [2012-01-02, 2012-01-02] }";
+    let e = '{ [2012-01-01, 2012-01-01], [2012-01-02, 2012-01-02] }';
     prettyList(this.mismatchPrecision.exec(this.ctx)).should.equal(e);
 
     // define MismatchPrecisionResultLongerThanInput: expand { Interval[@2012-01-01T13:00:00+00:00, @2012-01-02T12:59+00:00] } per day
-    e = "{ [2012-01-01, 2012-01-01], [2012-01-02, 2012-01-02] }";
+    e = '{ [2012-01-01, 2012-01-01], [2012-01-02, 2012-01-02] }';
     return prettyList(this.mismatchPrecisionResultLongerThanInput.exec(this.ctx)).should.equal(e);
   });
 
@@ -2520,73 +2526,73 @@ describe('QuantityIntervalExpand', function() {
   it('expands single intervals', function() {
     // define ClosedSingleGPerG: expand { Interval[2 'g', 4 'g'] } per 1 'g'
     let a = this.closedSingleGPerG.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal('{ [2 \'g\', 2 \'g\'], [3 \'g\', 3 \'g\'], [4 \'g\', 4 \'g\'] }');
 
     // define ClosedSingleGPerGDecimal: expand { Interval[2.1 'g', 4.1 'g'] } per 1 'g'
     a = this.closedSingleGPerGDecimal.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal('{ [2 \'g\', 2 \'g\'], [3 \'g\', 3 \'g\'], [4 \'g\', 4 \'g\'] }');
 
     // define ClosedSingleGPerMG: expand { Interval[2 'g', 2.003 'g'] } per 1 'mg'
     a = this.closedSingleGPerMG.exec(this.ctx);
-    prettyList(a).should.equal("{ [2000 'mg', 2000 'mg'], [2001 'mg', 2001 'mg'], [2002 'mg', 2002 'mg'], [2003 'mg', 2003 'mg'] }");
+    prettyList(a).should.equal('{ [2000 \'mg\', 2000 \'mg\'], [2001 \'mg\', 2001 \'mg\'], [2002 \'mg\', 2002 \'mg\'], [2003 \'mg\', 2003 \'mg\'] }');
 
     // define ClosedSingleMGPerGTrunc: expand { Interval[2999 'mg', 4200 'mg'] } per 1 'g'
     a = this.closedSingleMGPerGTrunc.exec(this.ctx);
-    prettyList(a).should.equal("{ [2999 'mg', 3998 'mg'] }");
+    prettyList(a).should.equal('{ [2999 \'mg\', 3998 \'mg\'] }');
 
     // define ClosedSingleMGPerMGTrunc: expand { Interval[2000 'mg', 4500 'mg'] } per 800 'mg'
     a = this.closedSingleMGPerMGTrunc.exec(this.ctx);
-    prettyList(a).should.equal("{ [2000 'mg', 2799 'mg'], [2800 'mg', 3599 'mg'], [3600 'mg', 4399 'mg'] }");
+    prettyList(a).should.equal('{ [2000 \'mg\', 2799 \'mg\'], [2800 \'mg\', 3599 \'mg\'], [3600 \'mg\', 4399 \'mg\'] }');
 
     // define ClosedSingleMGPerMGDecimal: expand { Interval[2000.01 'mg', 4500 'mg'] } per 800 'mg'
     a = this.closedSingleMGPerMGDecimal.exec(this.ctx);
-    return prettyList(a).should.equal("{ [2000 'mg', 2799 'mg'], [2800 'mg', 3599 'mg'], [3600 'mg', 4399 'mg'] }");
+    return prettyList(a).should.equal('{ [2000 \'mg\', 2799 \'mg\'], [2800 \'mg\', 3599 \'mg\'], [3600 \'mg\', 4399 \'mg\'] }');
   });
 
   it('expands lists of multiple intervals', function() {
     // define NullInList: expand { Interval[2 'g', 4 'g'], null } per 1 'g'
     let a = this.nullInList.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal('{ [2 \'g\', 2 \'g\'], [3 \'g\', 3 \'g\'], [4 \'g\', 4 \'g\'] }');
 
     // define Overlapping: expand { Interval[2 'g', 4 'g'], Interval[3 'g', 5 'g'] } per 1 'g'
     a = this.overlapping.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'], [5 'g', 5 'g'] }");
+    prettyList(a).should.equal('{ [2 \'g\', 2 \'g\'], [3 \'g\', 3 \'g\'], [4 \'g\', 4 \'g\'], [5 \'g\', 5 \'g\'] }');
 
     // define NonOverlapping: expand { Interval[2 'g', 4 'g'], Interval[6 'g', 6 'g'] } per 1 'g'
     a = this.nonOverlapping.exec(this.ctx);
-    return prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'], [6 'g', 6 'g'] }");
+    return prettyList(a).should.equal('{ [2 \'g\', 2 \'g\'], [3 \'g\', 3 \'g\'], [4 \'g\', 4 \'g\'], [6 \'g\', 6 \'g\'] }');
   });
 
   it('expands interval using the first items units if no per provided', function() {
     // define NoPerDefaultM: expand { Interval[2 'm', 400 'cm'] }
     let a = this.noPerDefaultM.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'm', 2 'm'], [3 'm', 3 'm'], [4 'm', 4 'm'] }");
+    prettyList(a).should.equal('{ [2 \'m\', 2 \'m\'], [3 \'m\', 3 \'m\'], [4 \'m\', 4 \'m\'] }');
 
     // define NoPerDefaultG: expand { Interval[2 'g', 4 'g'] }
     a = this.noPerDefaultG.exec(this.ctx);
-    return prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    return prettyList(a).should.equal('{ [2 \'g\', 2 \'g\'], [3 \'g\', 3 \'g\'], [4 \'g\', 4 \'g\'] }');
   });
 
   it('expands interval with open ends', function() {
     // define OpenStart: expand { Interval(2 'g', 4 'g'] } per 1 'g'
     let a = this.openStart.exec(this.ctx);
-    prettyList(a).should.equal("{ [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal('{ [3 \'g\', 3 \'g\'], [4 \'g\', 4 \'g\'] }');
 
     // define OpenEnd: expand { Interval[2 'g', 4 'g') } per 1 'g'
     a = this.openEnd.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'] }");
+    prettyList(a).should.equal('{ [2 \'g\', 2 \'g\'], [3 \'g\', 3 \'g\'] }');
 
     // define OpenBoth: expand { Interval(2 'g', 4 'g') } per 1 'g'
     a = this.openBoth.exec(this.ctx);
-    prettyList(a).should.equal("{ [3 'g', 3 'g'] }");
+    prettyList(a).should.equal('{ [3 \'g\', 3 \'g\'] }');
 
     // define OpenBothDecimal: expand { Interval(2.1 'g', 4.1 'g') } per 1 'g'
     a = this.openBothDecimal.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal('{ [2 \'g\', 2 \'g\'], [3 \'g\', 3 \'g\'], [4 \'g\', 4 \'g\'] }');
 
     // define OpenBothDecimalTrunc: expand { Interval(2.1 'g', 4.101 'g') } per 1 'g'
     a = this.openBothDecimalTrunc.exec(this.ctx);
-    return prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    return prettyList(a).should.equal('{ [2 \'g\', 2 \'g\'], [3 \'g\', 3 \'g\'], [4 \'g\', 4 \'g\'] }');
   });
 
   it('returns an empty list if we get an empty list or if there are no results', function() {

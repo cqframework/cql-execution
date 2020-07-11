@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -24,7 +29,7 @@ module.exports.Property = (Property = class Property extends Expression {
     let val = (obj != null ? obj[this.path] : undefined) != null ? (obj != null ? obj[this.path] : undefined) : __guardMethod__(obj, 'get', o => o.get(this.path));
 
     if (!val) {
-      const parts = this.path.split(".");
+      const parts = this.path.split('.');
       let curr_obj = obj;
       const curr_val = null;
       for (var part of parts) {

@@ -1,3 +1,9 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
+/* eslint-env mocha */
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -45,7 +51,7 @@ describe('Instance', function() {
   });
 
   return it('should create generic json objects with the correct key values', function() {
-    this.pharyngitis.exec(this.ctx).status.code.should.eql("active");
-    return this.pharyngitis.exec(this.ctx).code.display.should.eql("Viral pharyngitis (disorder)");
+    this.pharyngitis.exec(this.ctx).status.code.should.eql('active');
+    return this.pharyngitis.exec(this.ctx).code.display.should.eql('Viral pharyngitis (disorder)');
   });
 });

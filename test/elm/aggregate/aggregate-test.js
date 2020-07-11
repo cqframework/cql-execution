@@ -1,3 +1,9 @@
+/* eslint-disable
+    no-empty,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
+/* eslint-env mocha */
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -306,7 +312,7 @@ describe('Mode', function() {
   });
   it('should be able to find bimodal', function() {
     return this.bi_modal.exec(this.ctx).should.eql([2,3]);
-});
+  });
 
   return it('should be null if quantity units are not compatible', function() {
     return should(this.incompatibleUnitsNull.exec(this.ctx)).be.null();
@@ -329,13 +335,13 @@ describe('PopulationVariance', function() {
   it('should throw an exception when quantities are not compatible ', function() {
     try {
       this.q_throw1.exec(this.ctx);
-      return false.should.be.true("Incompatible Quantities should throw an error");
+      return false.should.be.true('Incompatible Quantities should throw an error');
     } catch (error) {}
   });
   it('should throw an exception when quanties exist in a list but not all are quantities', function() {
     try {
       this.q_throw2.exec(this.ctx);
-      return false.should.be.true("Incompatible Quantities should throw an error");
+      return false.should.be.true('Incompatible Quantities should throw an error');
     } catch (error) {}
   });
 
@@ -360,13 +366,13 @@ describe('Variance', function() {
   it('should throw an exception when quantities are not compatible ', function() {
     try {
       this.q_throw1.exec(this.ctx);
-      return false.should.be.true("Incompatible Quantities should throw an error");
+      return false.should.be.true('Incompatible Quantities should throw an error');
     } catch (error) {}
   });
   it('should throw an exception when quanties exist in a list but not all are quantities', function() {
     try {
       this.q_throw2.exec(this.ctx);
-      return false.should.be.true("Incompatible Quantities should throw an error");
+      return false.should.be.true('Incompatible Quantities should throw an error');
     } catch (error) {}
   });
 
@@ -391,13 +397,13 @@ describe('StdDev', function() {
   it('should throw an exception when quantities are not compatible ', function() {
     try {
       this.q_throw1.exec(this.ctx);
-      return false.should.be.true("Incompatible Quantities should throw an error");
+      return false.should.be.true('Incompatible Quantities should throw an error');
     } catch (error) {}
   });
   it('should throw an exception when quanties exist in a list but not all are quantities', function() {
     try {
       this.q_throw2.exec(this.ctx);
-      return false.should.be.true("Incompatible Quantities should throw an error");
+      return false.should.be.true('Incompatible Quantities should throw an error');
     } catch (error) {}
   });
 
@@ -422,13 +428,13 @@ describe('PopulationStdDev', function() {
   it('should throw an exception when quantities are not compatible ', function() {
     try {
       this.q_throw1.exec(this.ctx);
-      return false.should.be.true("Incompatible Quantities should throw an error");
+      return false.should.be.true('Incompatible Quantities should throw an error');
     } catch (error) {}
   });
   it('should throw an exception when quanties exist in a list but not all are quantities', function() {
     try {
       this.q_throw2.exec(this.ctx);
-      return false.should.be.true("Incompatible Quantities should throw an error");
+      return false.should.be.true('Incompatible Quantities should throw an error');
     } catch (error) {}
   });
 
