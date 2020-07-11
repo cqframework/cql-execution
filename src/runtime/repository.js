@@ -1,10 +1,19 @@
-cql = require '../cql'
-module.exports.Repository = class Repository
-  constructor: (@data) ->
-    @libraries = for k,v of @data
-       v
+const { Library } = require('../elm/library');
 
-  resolve: (library,version) ->
-    for lib in @libraries
-      if lib.library?.identifier?.id == library && lib.library?.identifier?.version == version
-        return new cql.Library(lib,@)
+module.exports.Repository = class Repository {
+  constructor(data) {
+    this.data = data;
+    this.libraries = Array.from(Object.values(data));
+  }
+
+  resolve(library, version) {
+    for (const lib of this.libraries) {
+      if (lib.library && lib.library.identifier) {
+        const id = lib.library.identifier;
+        if(id.id === library && id.version === version) {
+          return new Library(lib, this);
+        }
+      }
+    }
+  }
+};
