@@ -64,6 +64,7 @@
     "browserify": "^16.5.1",
     "coffeescript": "^1.12.7",
     "coveralls": "^3.1.0",
+    "eslint": "^7.4.0",
     "mocha": "^5.2.0",
     "nyc": "^15.0.1",
     "should": "^11.2.1"
@@ -84,6 +85,8 @@
   "scripts": {
     "prepublish": "./node_modules/.bin/cake build && ./node_modules/.bin/cake build-cql4browsers",
     "test": "./node_modules/.bin/cake test",
+    "lint": "./node_modules/.bin/eslint .",
+    "lint:fix": "./node_modules/.bin/eslint . --fix",
     "build": "./node_modules/.bin/cake build",
     "build-test-data": "./node_modules/.bin/cake build-test-data",
     "build-everything": "./node_modules/.bin/cake 'build' && ./node_modules/.bin/cake 'build-test-data' && ./node_modules/.bin/cake 'build-cql4browsers'",
