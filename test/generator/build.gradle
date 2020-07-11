@@ -15,13 +15,13 @@ dependencies {
 }
 
 task generateTestData (dependsOn: 'classes', type: JavaExec) {
-    main = 'CoffeeScriptTestDataGenerator'
+    main = 'JavaScriptTestDataGenerator'
     classpath = sourceSets.main.runtimeClasspath
     args = ["-r", "-i", "${projectDir}/../elm"]
 }
 
 task watchTestData (dependsOn: 'classes', type: JavaExec) {
-    main = 'CoffeeScriptTestDataGenerator'
+    main = 'JavaScriptTestDataGenerator'
     classpath = sourceSets.main.runtimeClasspath
     args = ["-r", "-w", "-i", "${projectDir}/../elm"]
 }
