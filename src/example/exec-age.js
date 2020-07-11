@@ -1,9 +1,9 @@
-cql = require '../cql'
-measure = require './age'
+const cql = require('../cql');
+const measure = require('./age');
 
-lib = new cql.Library(measure)
-executor = new cql.Executor(lib)
-psource = new cql.PatientSource [ {
+const lib = new cql.Library(measure);
+const executor = new cql.Executor(lib);
+const psource = new cql.PatientSource([ {
   "id" : "1",
   "recordType" : "Patient",
   "name": "John Smith",
@@ -15,7 +15,7 @@ psource = new cql.PatientSource [ {
   "name": "Sally Smith",
   "gender": "F",
   "birthDate" : "2007-08-02T11:47"
-} ]
+} ]);
 
-result = executor.exec(psource)
-console.log JSON.stringify(result, undefined, 2)
+const result = executor.exec(psource);
+console.log(JSON.stringify(result, undefined, 2));

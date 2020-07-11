@@ -1,42 +1,61 @@
-{ Expression } = require './expression'
-{ Uncertainty } = require '../datatypes/datatypes'
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS207: Consider shorter variations of null checks
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+let Greater, GreaterOrEqual, Less, LessOrEqual;
+const { Expression } = require('./expression');
+const { Uncertainty } = require('../datatypes/datatypes');
 
-# Equal is completely handled by overloaded#Equal
+// Equal is completely handled by overloaded#Equal
 
-# NotEqual is completely handled by overloaded#Equal
+// NotEqual is completely handled by overloaded#Equal
 
-module.exports.Less = class Less extends Expression
-  constructor: (json) ->
-    super
+module.exports.Less = (Less = class Less extends Expression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-  exec: (ctx) ->
-    args = @execArgs(ctx).map (x) -> Uncertainty.from x
-    return null unless args[0]? and args[1]?
-    args[0].lessThan args[1]
+  exec(ctx) {
+    const args = this.execArgs(ctx).map(x => Uncertainty.from(x));
+    if ((args[0] == null) || (args[1] == null)) { return null; }
+    return args[0].lessThan(args[1]);
+  }
+});
 
-module.exports.LessOrEqual = class LessOrEqual extends Expression
-  constructor: (json) ->
-    super
+module.exports.LessOrEqual = (LessOrEqual = class LessOrEqual extends Expression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-  exec: (ctx) ->
-    args = @execArgs(ctx).map (x) -> Uncertainty.from x
-    return null unless args[0]? and args[1]?
-    args[0].lessThanOrEquals args[1]
+  exec(ctx) {
+    const args = this.execArgs(ctx).map(x => Uncertainty.from(x));
+    if ((args[0] == null) || (args[1] == null)) { return null; }
+    return args[0].lessThanOrEquals(args[1]);
+  }
+});
 
-module.exports.Greater = class Greater extends Expression
-  constructor: (json) ->
-    super
+module.exports.Greater = (Greater = class Greater extends Expression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-  exec: (ctx) ->
-    args = @execArgs(ctx).map (x) -> Uncertainty.from x
-    return null unless args[0]? and args[1]?
-    args[0].greaterThan args[1]
+  exec(ctx) {
+    const args = this.execArgs(ctx).map(x => Uncertainty.from(x));
+    if ((args[0] == null) || (args[1] == null)) { return null; }
+    return args[0].greaterThan(args[1]);
+  }
+});
 
-module.exports.GreaterOrEqual = class GreaterOrEqual extends Expression
-  constructor: (json) ->
-    super
+module.exports.GreaterOrEqual = (GreaterOrEqual = class GreaterOrEqual extends Expression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-  exec: (ctx) ->
-    args = @execArgs(ctx).map (x) -> Uncertainty.from x
-    return null unless args[0]? and args[1]?
-    args[0].greaterThanOrEquals args[1]
+  exec(ctx) {
+    const args = this.execArgs(ctx).map(x => Uncertainty.from(x));
+    if ((args[0] == null) || (args[1] == null)) { return null; }
+    return args[0].greaterThanOrEquals(args[1]);
+  }
+});

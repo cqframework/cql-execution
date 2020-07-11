@@ -1,122 +1,165 @@
-{ Expression, UnimplementedExpression } = require './expression'
-{ build } = require './builder'
+/*
+ * decaffeinate suggestions:
+ * DS101: Remove unnecessary use of Array.from
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS207: Consider shorter variations of null checks
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+let Combine, Concatenate, EndsWith, Lower, Matches, PositionOf, Split, SplitOnMatches, StartsWith, Substring, Upper;
+const { Expression, UnimplementedExpression } = require('./expression');
+const { build } = require('./builder');
 
-module.exports.Concatenate = class Concatenate extends Expression
-  constructor: (json) ->
-    super
+module.exports.Concatenate = (Concatenate = class Concatenate extends Expression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-  exec: (ctx) ->
-    args = @execArgs(ctx)
-    if (args.some (x) -> not x?) then null else args.reduce (x,y) -> x + y
+  exec(ctx) {
+    const args = this.execArgs(ctx);
+    if (args.some(x => x == null)) { return null; } else { return args.reduce((x, y) => x + y); }
+  }
+});
 
-module.exports.Combine = class Combine extends Expression
-  constructor: (json) ->
-    super
-    @source = build json.source
-    @separator = build json.separator
+module.exports.Combine = (Combine = class Combine extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.source = build(json.source);
+    this.separator = build(json.separator);
+  }
 
-  exec: (ctx) ->
-    source = @source.execute(ctx)
-    separator = if @separator? then @separator.execute(ctx) else ''
-    if not source?
-      return null
-    else
-      filteredArray = source.filter (x) -> (x != null && x != undefined)
-      if filteredArray.length < 1 then null else filteredArray.join(separator)
+  exec(ctx) {
+    const source = this.source.execute(ctx);
+    const separator = (this.separator != null) ? this.separator.execute(ctx) : '';
+    if ((source == null)) {
+      return null;
+    } else {
+      const filteredArray = source.filter(x => (x !== null) && (x !== undefined));
+      if (filteredArray.length < 1) { return null; } else { return filteredArray.join(separator); }
+    }
+  }
+});
 
-module.exports.Split = class Split extends Expression
-  constructor: (json) ->
-    super
-    @stringToSplit = build json.stringToSplit
-    @separator = build json.separator
+module.exports.Split = (Split = class Split extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.stringToSplit = build(json.stringToSplit);
+    this.separator = build(json.separator);
+  }
 
-  exec: (ctx) ->
-    stringToSplit = @stringToSplit.execute(ctx)
-    separator = @separator.execute(ctx)
-    if not (stringToSplit? and separator?) then null else stringToSplit.split(separator)
+  exec(ctx) {
+    const stringToSplit = this.stringToSplit.execute(ctx);
+    const separator = this.separator.execute(ctx);
+    if (!((stringToSplit != null) && (separator != null))) { return null; } else { return stringToSplit.split(separator); }
+  }
+});
 
-module.exports.SplitOnMatches = class SplitOnMatches extends Expression
-  constructor: (json) ->
-    super
-    @stringToSplit = build json.stringToSplit
-    @separatorPattern = build json.separatorPattern
+module.exports.SplitOnMatches = (SplitOnMatches = class SplitOnMatches extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.stringToSplit = build(json.stringToSplit);
+    this.separatorPattern = build(json.separatorPattern);
+  }
 
-  exec: (ctx) ->
-    stringToSplit = @stringToSplit.execute(ctx)
-    separatorPattern = @separatorPattern.execute(ctx)
-    if not (stringToSplit? and separatorPattern?) then null else stringToSplit.split(new RegExp(separatorPattern))
+  exec(ctx) {
+    const stringToSplit = this.stringToSplit.execute(ctx);
+    const separatorPattern = this.separatorPattern.execute(ctx);
+    if (!((stringToSplit != null) && (separatorPattern != null))) { return null; } else { return stringToSplit.split(new RegExp(separatorPattern)); }
+  }
+});
 
-# Length is completely handled by overloaded#Length
+// Length is completely handled by overloaded#Length
 
-module.exports.Upper = class Upper extends Expression
-  constructor: (json) ->
-    super
+module.exports.Upper = (Upper = class Upper extends Expression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-  exec: (ctx) ->
-    arg = @execArgs ctx
-    if arg? then arg.toUpperCase() else null
+  exec(ctx) {
+    const arg = this.execArgs(ctx);
+    if (arg != null) { return arg.toUpperCase(); } else { return null; }
+  }
+});
 
-module.exports.Lower = class Lower extends Expression
-  constructor: (json) ->
-    super
+module.exports.Lower = (Lower = class Lower extends Expression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-  exec: (ctx) ->
-    arg = @execArgs ctx
-    if arg? then arg.toLowerCase() else null
+  exec(ctx) {
+    const arg = this.execArgs(ctx);
+    if (arg != null) { return arg.toLowerCase(); } else { return null; }
+  }
+});
 
-# Indexer is completely handled by overloaded#Indexer
+// Indexer is completely handled by overloaded#Indexer
 
-module.exports.PositionOf = class PositionOf extends Expression
-  constructor: (json) ->
-    super
-    @pattern = build json.pattern
-    @string = build json.string
+module.exports.PositionOf = (PositionOf = class PositionOf extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.pattern = build(json.pattern);
+    this.string = build(json.string);
+  }
 
-  exec: (ctx) ->
-    pattern = @pattern.execute(ctx)
-    string = @string.execute(ctx)
-    if not (pattern? and string?) then null else string.indexOf(pattern)
+  exec(ctx) {
+    const pattern = this.pattern.execute(ctx);
+    const string = this.string.execute(ctx);
+    if (!((pattern != null) && (string != null))) { return null; } else { return string.indexOf(pattern); }
+  }
+});
 
-module.exports.Matches = class Matches extends Expression
-  constructor: (json) ->
-    super
+module.exports.Matches = (Matches = class Matches extends Expression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-  exec: (ctx) ->
-    [string, pattern] = @execArgs ctx
-    return null if not (string? and pattern?)
-    if string.match(new RegExp(pattern)) then true else false
+  exec(ctx) {
+    const [string, pattern] = Array.from(this.execArgs(ctx));
+    if (!((string != null) && (pattern != null))) { return null; }
+    if (string.match(new RegExp(pattern))) { return true; } else { return false; }
+  }
+});
 
-module.exports.Substring = class Substring extends Expression
-  constructor: (json) ->
-    super
-    @stringToSub = build json.stringToSub
-    @startIndex = build json.startIndex
-    @length = build json['length']
+module.exports.Substring = (Substring = class Substring extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.stringToSub = build(json.stringToSub);
+    this.startIndex = build(json.startIndex);
+    this.length = build(json['length']);
+  }
 
-  exec: (ctx) ->
-    stringToSub = @stringToSub.execute(ctx)
-    startIndex = @startIndex.execute(ctx)
-    length = if @length? then @length.execute(ctx) else null
-    # According to spec: If stringToSub or startIndex is null, or startIndex is out of range, the result is null.
-    if not stringToSub? || not startIndex? || startIndex < 0 || startIndex >= stringToSub.length
-      null
-    else if length?
-      stringToSub.substr(startIndex, length)
-    else
-      stringToSub.substr(startIndex)
+  exec(ctx) {
+    const stringToSub = this.stringToSub.execute(ctx);
+    const startIndex = this.startIndex.execute(ctx);
+    const length = (this.length != null) ? this.length.execute(ctx) : null;
+    // According to spec: If stringToSub or startIndex is null, or startIndex is out of range, the result is null.
+    if ((stringToSub == null) || (startIndex == null) || (startIndex < 0) || (startIndex >= stringToSub.length)) {
+      return null;
+    } else if (length != null) {
+      return stringToSub.substr(startIndex, length);
+    } else {
+      return stringToSub.substr(startIndex);
+    }
+  }
+});
 
-module.exports.StartsWith = class StartsWith extends Expression
-  constructor: (json) ->
-    super
+module.exports.StartsWith = (StartsWith = class StartsWith extends Expression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-  exec: (ctx) ->
-    args = @execArgs ctx
-    if (args.some (x) -> not x?) then null else args[0].slice(0, args[1].length) == args[1]
+  exec(ctx) {
+    const args = this.execArgs(ctx);
+    if (args.some(x => x == null)) { return null; } else { return args[0].slice(0, args[1].length) === args[1]; }
+  }
+});
 
-module.exports.EndsWith = class EndsWith extends Expression
-  constructor: (json) ->
-    super
+module.exports.EndsWith = (EndsWith = class EndsWith extends Expression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-  exec: (ctx) ->
-    args = @execArgs ctx
-    if (args.some (x) -> not x?) then null else args[1] is '' or args[0].slice(-args[1].length) == args[1]
+  exec(ctx) {
+    const args = this.execArgs(ctx);
+    if (args.some(x => x == null)) { return null; } else { return (args[1] === '') || (args[0].slice(-args[1].length) === args[1]); }
+  }
+});

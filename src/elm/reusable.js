@@ -1,79 +1,131 @@
-{ Expression } = require './expression'
-{ build } = require './builder'
+/*
+ * decaffeinate suggestions:
+ * DS001: Remove Babel/TypeScript constructor workaround
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS103: Rewrite code to no longer use __guard__
+ * DS207: Consider shorter variations of null checks
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+let ExpressionDef, ExpressionRef, FunctionDef, FunctionRef, IdentifierRef, OperandRef;
+const { Expression } = require('./expression');
+const { build } = require('./builder');
 
-module.exports.ExpressionDef = class ExpressionDef extends Expression
-  constructor: (json) ->
-    super
-    @name = json.name
-    @context = json.context
-    @expression = build json.expression
-  exec: (ctx) ->
-    value = @expression?.execute(ctx)
-    ctx.rootContext().set @name,value
-    value
+module.exports.ExpressionDef = (ExpressionDef = class ExpressionDef extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.name = json.name;
+    this.context = json.context;
+    this.expression = build(json.expression);
+  }
+  exec(ctx) {
+    const value = this.expression != null ? this.expression.execute(ctx) : undefined;
+    ctx.rootContext().set(this.name,value);
+    return value;
+  }
+});
 
-module.exports.ExpressionRef = class ExpressionRef extends Expression
-  constructor: (json) ->
-    super
-    @name = json.name
-    @library = json.libraryName
-  exec: (ctx) ->
-    ctx = if @library then ctx.getLibraryContext(@library) else ctx
-    value = ctx.get(@name)
-    if value instanceof Expression
-      value = value.execute(ctx)
-    value
+module.exports.ExpressionRef = (ExpressionRef = class ExpressionRef extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.name = json.name;
+    this.library = json.libraryName;
+  }
+  exec(ctx) {
+    ctx = this.library ? ctx.getLibraryContext(this.library) : ctx;
+    let value = ctx.get(this.name);
+    if (value instanceof Expression) {
+      value = value.execute(ctx);
+    }
+    return value;
+  }
+});
 
-module.exports.FunctionDef = class FunctionDef extends Expression
-  constructor: (json) ->
-    super
-    @name = json.name
-    @expression = build json.expression
-    @parameters = json.operand
-  exec: (ctx) ->
-    @
+module.exports.FunctionDef = (FunctionDef = class FunctionDef extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.name = json.name;
+    this.expression = build(json.expression);
+    this.parameters = json.operand;
+  }
+  exec(ctx) {
+    return this;
+  }
+});
 
-module.exports.FunctionRef = class FunctionRef extends Expression
-  constructor: (json) ->
-    super
-    @name = json.name
-    @library = json.libraryName
-  exec: (ctx) ->
-    functionDef = if @library then ctx.get(@library)?.get(@name) else ctx.get(@name)
-    args = @execArgs(ctx)
-    child_ctx = if @library then ctx.getLibraryContext(@library)?.childContext() else ctx.childContext()
-    if args.length != functionDef.parameters.length
-      throw new Error("incorrect number of arguments supplied")
-    for p, i in functionDef.parameters
-      child_ctx.set(p.name,args[i])
-    functionDef.expression.execute(child_ctx)
+module.exports.FunctionRef = (FunctionRef = class FunctionRef extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.name = json.name;
+    this.library = json.libraryName;
+  }
+  exec(ctx) {
+    const functionDef = this.library ? __guard__(ctx.get(this.library), x => x.get(this.name)) : ctx.get(this.name);
+    const args = this.execArgs(ctx);
+    const child_ctx = this.library ? __guard__(ctx.getLibraryContext(this.library), x1 => x1.childContext()) : ctx.childContext();
+    if (args.length !== functionDef.parameters.length) {
+      throw new Error("incorrect number of arguments supplied");
+    }
+    for (let i = 0; i < functionDef.parameters.length; i++) {
+      const p = functionDef.parameters[i];
+      child_ctx.set(p.name,args[i]);
+    }
+    return functionDef.expression.execute(child_ctx);
+  }
+});
 
-module.exports.OperandRef = class OperandRef extends Expression
-  constructor: (json) ->
-    @name = json.name
-  exec: (ctx) ->
-    ctx.get(@name) 
+module.exports.OperandRef = (OperandRef = class OperandRef extends Expression {
+  constructor(json) {
+    {
+      // Hack: trick Babel/TypeScript into allowing this before super.
+      if (false) { super(); }
+      let thisFn = (() => { return this; }).toString();
+      let thisName = thisFn.match(/return (?:_assertThisInitialized\()*(\w+)\)*;/)[1];
+      eval(`${thisName} = this;`);
+    }
+    this.name = json.name;
+  }
+  exec(ctx) {
+    return ctx.get(this.name); 
+  }
+});
 
      
-module.exports.IdentifierRef = class IdentifierRef extends Expression
-  constructor: (json) ->
-    super
-    @name = json.name
-    @library = json.libraryName
-  exec: (ctx) ->
-    # TODO: Technically, the ELM Translator should never output one of these
-    # but this code is needed since it does, as a work-around to get queries
-    # to work properly when sorting by a field in a tuple
-    val = if @library then ctx.get(@library)?.get(@name) else ctx.get(@name)
+module.exports.IdentifierRef = (IdentifierRef = class IdentifierRef extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.name = json.name;
+    this.library = json.libraryName;
+  }
+  exec(ctx) {
+    // TODO: Technically, the ELM Translator should never output one of these
+    // but this code is needed since it does, as a work-around to get queries
+    // to work properly when sorting by a field in a tuple
+    let val = this.library ? __guard__(ctx.get(this.library), x => x.get(this.name)) : ctx.get(this.name);
 
-    if not val?
-      parts = @name.split(".")
-      val = ctx.get(part)
-      if val? and parts.length > 1
-        curr_obj = val
-        curr_val = null
-        for part in parts[1..]
-          _obj = curr_obj?[part] ? curr_obj?.get?(part)
-          curr_obj = if _obj instanceof Function then _obj.call(curr_obj) else _obj
-        val = curr_obj
-    if val instanceof Function then val.call(ctx.context_values) else val
+    if ((val == null)) {
+      const parts = this.name.split(".");
+      val = ctx.get(part);
+      if ((val != null) && (parts.length > 1)) {
+        let curr_obj = val;
+        const curr_val = null;
+        for (var part of parts.slice(1)) {
+          const _obj = (curr_obj != null ? curr_obj[part] : undefined) != null ? (curr_obj != null ? curr_obj[part] : undefined) : __guardMethod__(curr_obj, 'get', o => o.get(part));
+          curr_obj = _obj instanceof Function ? _obj.call(curr_obj) : _obj;
+        }
+        val = curr_obj;
+      }
+    }
+    if (val instanceof Function) { return val.call(ctx.context_values); } else { return val; }
+  }
+});
+
+function __guard__(value, transform) {
+  return (typeof value !== 'undefined' && value !== null) ? transform(value) : undefined;
+}
+function __guardMethod__(obj, methodName, transform) {
+  if (typeof obj !== 'undefined' && obj !== null && typeof obj[methodName] === 'function') {
+    return transform(obj, methodName);
+  } else {
+    return undefined;
+  }
+}

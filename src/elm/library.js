@@ -1,51 +1,76 @@
-module.exports.Library = class Library
-  constructor: (json, libraryManager) ->
-    @source = json
-    @usings = []
-    for u in json.library.usings?.def ? []
-      @usings.push {"name" : u.localIdentifier, "version" : u.version} if u.localIdentifier != "System"
-    @parameters = {}
-    for param in json.library.parameters?.def ? []
-      @parameters[param.name] = new ParameterDef(param)
-    @codesystems = {}
-    for codesystem in json.library.codeSystems?.def ? []
-      @codesystems[codesystem.name] = new CodeSystemDef(codesystem)
-    @valuesets = {}
-    for valueset in json.library.valueSets?.def ? []
-      @valuesets[valueset.name] = new ValueSetDef(valueset)
-    @codes = {}
-    for code in json.library.codes?.def ? []
-      @codes[code.name] = new CodeDef(code)
-    @concepts = {}
-    for concept in json.library.concepts?.def ? []
-      @concepts[concept.name] = new ConceptDef(concept)
-    @expressions = {}
-    for expr in json.library.statements?.def ? []
-      @expressions[expr.name] = if expr.type == "FunctionDef"  then new FunctionDef(expr) else new ExpressionDef(expr)
-    @includes = {}
-    for expr in json.library.includes?.def ? []
-      if libraryManager then @includes[expr.localIdentifier] =  libraryManager.resolve(expr.path,expr.version)
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS207: Consider shorter variations of null checks
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+let Library;
+module.exports.Library = (Library = class Library {
+  constructor(json, libraryManager) {
+    let expr;
+    this.source = json;
+    this.usings = [];
+    for (let u of (json.library.usings != null ? json.library.usings.def : undefined) != null ? (json.library.usings != null ? json.library.usings.def : undefined) : []) {
+      if (u.localIdentifier !== "System") { this.usings.push({"name" : u.localIdentifier, "version" : u.version}); }
+    }
+    this.parameters = {};
+    for (let param of (json.library.parameters != null ? json.library.parameters.def : undefined) != null ? (json.library.parameters != null ? json.library.parameters.def : undefined) : []) {
+      this.parameters[param.name] = new ParameterDef(param);
+    }
+    this.codesystems = {};
+    for (let codesystem of (json.library.codeSystems != null ? json.library.codeSystems.def : undefined) != null ? (json.library.codeSystems != null ? json.library.codeSystems.def : undefined) : []) {
+      this.codesystems[codesystem.name] = new CodeSystemDef(codesystem);
+    }
+    this.valuesets = {};
+    for (let valueset of (json.library.valueSets != null ? json.library.valueSets.def : undefined) != null ? (json.library.valueSets != null ? json.library.valueSets.def : undefined) : []) {
+      this.valuesets[valueset.name] = new ValueSetDef(valueset);
+    }
+    this.codes = {};
+    for (let code of (json.library.codes != null ? json.library.codes.def : undefined) != null ? (json.library.codes != null ? json.library.codes.def : undefined) : []) {
+      this.codes[code.name] = new CodeDef(code);
+    }
+    this.concepts = {};
+    for (let concept of (json.library.concepts != null ? json.library.concepts.def : undefined) != null ? (json.library.concepts != null ? json.library.concepts.def : undefined) : []) {
+      this.concepts[concept.name] = new ConceptDef(concept);
+    }
+    this.expressions = {};
+    for (expr of (json.library.statements != null ? json.library.statements.def : undefined) != null ? (json.library.statements != null ? json.library.statements.def : undefined) : []) {
+      this.expressions[expr.name] = expr.type === "FunctionDef"  ? new FunctionDef(expr) : new ExpressionDef(expr);
+    }
+    this.includes = {};
+    for (expr of (json.library.includes != null ? json.library.includes.def : undefined) != null ? (json.library.includes != null ? json.library.includes.def : undefined) : []) {
+      if (libraryManager) { this.includes[expr.localIdentifier] =  libraryManager.resolve(expr.path,expr.version); }
+    }
+  }
 
-  get: (identifier) ->
-    @expressions[identifier] || @includes[identifier]
+  get(identifier) {
+    return this.expressions[identifier] || this.includes[identifier];
+  }
 
-  getValueSet: (identifier, libraryName) ->
-    if @valuesets[identifier]?
-      return @valuesets[identifier]
-    return @includes[libraryName]?.valuesets[identifier]
+  getValueSet(identifier, libraryName) {
+    if (this.valuesets[identifier] != null) {
+      return this.valuesets[identifier];
+    }
+    return (this.includes[libraryName] != null ? this.includes[libraryName].valuesets[identifier] : undefined);
+  }
 
-  getCodeSystem: (identifier) ->
-    @codesystems[identifier]
+  getCodeSystem(identifier) {
+    return this.codesystems[identifier];
+  }
 
-  getCode: (identifier) ->
-    @codes[identifier]
+  getCode(identifier) {
+    return this.codes[identifier];
+  }
 
-  getConcept: (identifier) ->
-    @concepts[identifier]
+  getConcept(identifier) {
+    return this.concepts[identifier];
+  }
 
-  getParameter: (name) ->
-    @parameters[name]
-# These requires are at the end of the file because having them first in the
-# file creates errors due to the order that the libraries are loaded.
-{ ExpressionDef, FunctionDef, ParameterDef, ValueSetDef, CodeSystemDef, CodeDef, ConceptDef } = require './expressions'
-{ Results } = require '../runtime/results'
+  getParameter(name) {
+    return this.parameters[name];
+  }
+});
+// These requires are at the end of the file because having them first in the
+// file creates errors due to the order that the libraries are loaded.
+var { ExpressionDef, FunctionDef, ParameterDef, ValueSetDef, CodeSystemDef, CodeDef, ConceptDef } = require('./expressions');
+const { Results } = require('../runtime/results');

@@ -1,23 +1,35 @@
-{ Exception } = require '../datatypes/exception'
-{ Expression } = require './expression'
-{ Quantity } = require('../datatypes/quantity')
-DT = require('../datatypes/datatypes')
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS207: Consider shorter variations of null checks
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+let Ratio;
+const { Exception } = require('../datatypes/exception');
+const { Expression } = require('./expression');
+const { Quantity } = require('../datatypes/quantity');
+const DT = require('../datatypes/datatypes');
 
-module.exports.Ratio = class Ratio extends Expression
-  constructor: (json) ->
-    super
-    if !json.numerator?
-      throw new Error("Cannot create a ratio with an undefined numerator value")
-    else
-      @numerator = new Quantity(json.numerator.value, json.numerator.unit)
+module.exports.Ratio = (Ratio = class Ratio extends Expression {
+  constructor(json) {
+    super(...arguments);
+    if ((json.numerator == null)) {
+      throw new Error("Cannot create a ratio with an undefined numerator value");
+    } else {
+      this.numerator = new Quantity(json.numerator.value, json.numerator.unit);
+    }
 
-    if !json.denominator?
-      throw new Error("Cannot create a ratio with an undefined denominator value")
-    else
-      @denominator = new Quantity(json.denominator.value, json.denominator.unit)
+    if ((json.denominator == null)) {
+      throw new Error("Cannot create a ratio with an undefined denominator value");
+    } else {
+      this.denominator = new Quantity(json.denominator.value, json.denominator.unit);
+    }
+  }
 
-  exec: (ctx) ->
-    new DT.Ratio(@numerator, @denominator)
+  exec(ctx) {
+    return new DT.Ratio(this.numerator, this.denominator);
+  }
+});
 
 
 

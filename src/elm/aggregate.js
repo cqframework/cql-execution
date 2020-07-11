@@ -1,322 +1,403 @@
-{ Expression } = require './expression'
-{ typeIsArray , allTrue, anyTrue, removeNulls, numerical_sort} = require '../util/util'
-{ build } = require './builder'
-{ Exception } = require '../datatypes/exception'
-{ greaterThan, lessThan } = require '../util/comparison'
-{ Quantity, doAddition, doMultiplication } = require '../datatypes/quantity'
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS207: Consider shorter variations of null checks
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+let AllTrue, AnyTrue, Avg, Count, GeometricMean, Max, Median, Min, Mode, PopulationStdDev, PopulationVariance, Product, StdDev, Sum, Variance;
+const { Expression } = require('./expression');
+const { typeIsArray , allTrue, anyTrue, removeNulls, numerical_sort} = require('../util/util');
+const { build } = require('./builder');
+const { Exception } = require('../datatypes/exception');
+const { greaterThan, lessThan } = require('../util/comparison');
+const { Quantity, doAddition, doMultiplication } = require('../datatypes/quantity');
 
-class AggregateExpression extends Expression
-  constructor:(json) ->
-    super
-    @source = build json.source
+class AggregateExpression extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.source = build(json.source);
+  }
+}
 
-module.exports.Count = class Count extends AggregateExpression
-  constructor:(json) ->
-    super
+module.exports.Count = (Count = class Count extends AggregateExpression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-  exec: (ctx) ->
-    items = @source.execute(ctx)
-    return null unless typeIsArray(items)
-    removeNulls(items).length
+  exec(ctx) {
+    const items = this.source.execute(ctx);
+    if (!typeIsArray(items)) { return null; }
+    return removeNulls(items).length;
+  }
+});
 
-module.exports.Sum = class Sum extends AggregateExpression
-  constructor:(json) ->
-    super
+module.exports.Sum = (Sum = class Sum extends AggregateExpression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-  exec: (ctx) ->
-    items = @source.execute(ctx)
-    return null unless typeIsArray(items)
+  exec(ctx) {
+    let items = this.source.execute(ctx);
+    if (!typeIsArray(items)) { return null; }
 
-    try
-      items = processQuantities(items)
-    catch e
-      return null
+    try {
+      items = processQuantities(items);
+    } catch (e) {
+      return null;
+    }
 
-    return null unless items.length > 0
+    if (!(items.length > 0)) { return null; }
 
-    if hasOnlyQuantities(items)
-      values = getValuesFromQuantities(items)
-      sum = values.reduce (x, y) -> x + y
-      new Quantity(sum, items[0].unit)
-    else
-      items.reduce (x, y) -> x + y
+    if (hasOnlyQuantities(items)) {
+      const values = getValuesFromQuantities(items);
+      const sum = values.reduce((x, y) => x + y);
+      return new Quantity(sum, items[0].unit);
+    } else {
+      return items.reduce((x, y) => x + y);
+    }
+  }
+});
 
-module.exports.Min = class Min extends AggregateExpression
-  constructor:(json) ->
-    super
+module.exports.Min = (Min = class Min extends AggregateExpression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-  exec: (ctx) ->
-    list = @source.execute(ctx)
-    return null unless list?
-    listWithoutNulls = removeNulls(list)
+  exec(ctx) {
+    const list = this.source.execute(ctx);
+    if (list == null) { return null; }
+    const listWithoutNulls = removeNulls(list);
 
-    # Check for incompatible units and return null. We don't want to convert
-    # the units for Min/Max, so we throw away the converted array if it succeeds
-    try
-      processQuantities(list)
-    catch e
-      return null
+    // Check for incompatible units and return null. We don't want to convert
+    // the units for Min/Max, so we throw away the converted array if it succeeds
+    try {
+      processQuantities(list);
+    } catch (e) {
+      return null;
+    }
 
-    return null unless listWithoutNulls.length > 0
-    # We assume the list is an array of all the same type.
-    minimum = listWithoutNulls[0]
-    for element in listWithoutNulls
-      minimum = element if lessThan(element, minimum)
-    return minimum
+    if (!(listWithoutNulls.length > 0)) { return null; }
+    // We assume the list is an array of all the same type.
+    let minimum = listWithoutNulls[0];
+    for (let element of listWithoutNulls) {
+      if (lessThan(element, minimum)) { minimum = element; }
+    }
+    return minimum;
+  }
+});
 
-module.exports.Max = class Max extends AggregateExpression
-  constructor:(json) ->
-    super
+module.exports.Max = (Max = class Max extends AggregateExpression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-  exec: (ctx) ->
-    items = @source.execute(ctx)
-    return null unless items?
-    listWithoutNulls = removeNulls(items)
+  exec(ctx) {
+    const items = this.source.execute(ctx);
+    if (items == null) { return null; }
+    const listWithoutNulls = removeNulls(items);
 
-    # Check for incompatible units and return null. We don't want to convert
-    # the units for Min/Max, so we throw away the converted array if it succeeds
-    try
-      processQuantities(items)
-    catch e
-      return null
+    // Check for incompatible units and return null. We don't want to convert
+    // the units for Min/Max, so we throw away the converted array if it succeeds
+    try {
+      processQuantities(items);
+    } catch (e) {
+      return null;
+    }
 
-    return null unless listWithoutNulls.length > 0
-    # We assume the list is an array of all the same type.
-    maximum = listWithoutNulls[0]
-    for element in listWithoutNulls
-      maximum = element if greaterThan(element, maximum)
-    maximum
+    if (!(listWithoutNulls.length > 0)) { return null; }
+    // We assume the list is an array of all the same type.
+    let maximum = listWithoutNulls[0];
+    for (let element of listWithoutNulls) {
+      if (greaterThan(element, maximum)) { maximum = element; }
+    }
+    return maximum;
+  }
+});
 
-module.exports.Avg = class Avg extends  AggregateExpression
-  constructor:(json) ->
-    super
+module.exports.Avg = (Avg = class Avg extends  AggregateExpression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-  exec: (ctx) ->
-    items = @source.execute(ctx)
-    return null unless typeIsArray(items)
+  exec(ctx) {
+    let sum;
+    let items = this.source.execute(ctx);
+    if (!typeIsArray(items)) { return null; }
 
-    try
-      items = processQuantities(items)
-    catch e
-      return null
+    try {
+      items = processQuantities(items);
+    } catch (e) {
+      return null;
+    }
 
-    return null if items.length == 0
+    if (items.length === 0) { return null; }
 
-    if hasOnlyQuantities(items)
-      values = getValuesFromQuantities(items)
-      sum = values.reduce (x, y) -> x + y
-      new Quantity(sum / values.length, items[0].unit)
-    else
-      sum = items.reduce (x, y) -> x + y
-      sum / items.length
+    if (hasOnlyQuantities(items)) {
+      const values = getValuesFromQuantities(items);
+      sum = values.reduce((x, y) => x + y);
+      return new Quantity(sum / values.length, items[0].unit);
+    } else {
+      sum = items.reduce((x, y) => x + y);
+      return sum / items.length;
+    }
+  }
+});
 
-module.exports.Median = class Median extends AggregateExpression
-  constructor:(json) ->
-    super
+module.exports.Median = (Median = class Median extends AggregateExpression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-  exec: (ctx) ->
-    items = @source.execute(ctx)
-    return null unless typeIsArray(items)
-    return null unless items.length > 0
+  exec(ctx) {
+    let items = this.source.execute(ctx);
+    if (!typeIsArray(items)) { return null; }
+    if (!(items.length > 0)) { return null; }
 
-    try
-      items = processQuantities(items)
-    catch e
-      return null
+    try {
+      items = processQuantities(items);
+    } catch (e) {
+      return null;
+    }
 
-    return medianOfNumbers(items) unless hasOnlyQuantities(items)
+    if (!hasOnlyQuantities(items)) { return medianOfNumbers(items); }
 
-    values = getValuesFromQuantities(items)
-    median = medianOfNumbers(values)
-    new Quantity(median, items[0].unit)
-
-
-module.exports.Mode = class Mode extends AggregateExpression
-  constructor:(json) ->
-    super
-
-  exec: (ctx) ->
-    items = @source.execute(ctx)
-    return null unless typeIsArray(items)
-    return null unless items.length > 0
-
-    try
-      filtered = processQuantities(items)
-    catch e
-      return null
-
-    if hasOnlyQuantities(filtered)
-      values = getValuesFromQuantities(filtered)
-      mode = @mode(values)
-      if mode.length == 1
-        mode = mode[0]
-      new Quantity(mode, items[0].unit)
-    else
-      mode = @mode(filtered)
-      if mode.length == 1 then mode[0] else mode
-
-  mode: (arr) ->
-    max = 0
-    counts = {}
-    results = []
-    for elem in arr
-      cnt = counts[elem] = (counts[elem] ? 0) + 1
-      if cnt is max and elem not in results
-        results.push elem
-      else if cnt > max
-        results = [elem]
-        max = cnt
-    results
+    const values = getValuesFromQuantities(items);
+    const median = medianOfNumbers(values);
+    return new Quantity(median, items[0].unit);
+  }
+});
 
 
-module.exports.StdDev = class StdDev extends AggregateExpression
-  # TODO: This should be a derived class of an abstract base class 'Statistic'
-  # rather than the base class
+module.exports.Mode = (Mode = class Mode extends AggregateExpression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-  constructor: (json) ->
-    super
-    @type = "standard_deviation"
+  exec(ctx) {
+    let filtered, mode;
+    const items = this.source.execute(ctx);
+    if (!typeIsArray(items)) { return null; }
+    if (!(items.length > 0)) { return null; }
 
-  exec: (ctx) ->
-    items = @source.execute(ctx)
-    return null unless typeIsArray(items)
+    try {
+      filtered = processQuantities(items);
+    } catch (e) {
+      return null;
+    }
 
-    try
-      items = processQuantities(items)
-    catch e
-      return null
+    if (hasOnlyQuantities(filtered)) {
+      const values = getValuesFromQuantities(filtered);
+      mode = this.mode(values);
+      if (mode.length === 1) {
+        mode = mode[0];
+      }
+      return new Quantity(mode, items[0].unit);
+    } else {
+      mode = this.mode(filtered);
+      if (mode.length === 1) { return mode[0]; } else { return mode; }
+    }
+  }
 
-    return null unless items.length > 0
+  mode(arr) {
+    let max = 0;
+    const counts = {};
+    let results = [];
+    for (let elem of arr) {
+      const cnt = (counts[elem] = (counts[elem] != null ? counts[elem] : 0) + 1);
+      if ((cnt === max) && !results.includes(elem)) {
+        results.push(elem);
+      } else if (cnt > max) {
+        results = [elem];
+        max = cnt;
+      }
+    }
+    return results;
+  }
+});
 
-    if hasOnlyQuantities(items)
-      values = getValuesFromQuantities(items)
-      stdDev = @standardDeviation(values)
-      new Quantity(stdDev, items[0].unit)
-    else
-      @standardDeviation(items)
 
-  standardDeviation: (list) ->
-    val = @stats(list)
-    if val then val[@type]
+module.exports.StdDev = (StdDev = class StdDev extends AggregateExpression {
+  // TODO: This should be a derived class of an abstract base class 'Statistic'
+  // rather than the base class
 
-  stats:(list) ->
-    sum = list.reduce (x,y) -> x+y
-    mean = sum / list.length
-    sumOfSquares = 0
+  constructor(json) {
+    super(...arguments);
+    this.type = "standard_deviation";
+  }
 
-    for sq in list
-      sumOfSquares += Math.pow((sq - mean),2)
+  exec(ctx) {
+    let items = this.source.execute(ctx);
+    if (!typeIsArray(items)) { return null; }
 
-    std_var = (1/list.length) * sumOfSquares
-    pop_var = (1/(list.length-1)) * sumOfSquares
-    std_dev = Math.sqrt std_var
-    pop_dev = Math.sqrt pop_var
-    {standard_variance: std_var, population_variance: pop_var, standard_deviation: std_dev, population_deviation: pop_dev}
+    try {
+      items = processQuantities(items);
+    } catch (e) {
+      return null;
+    }
 
-module.exports.Product = class Product extends AggregateExpression
-  constructor:(json) ->
-    super
+    if (!(items.length > 0)) { return null; }
 
-  exec: (ctx) ->
-    items = @source.execute(ctx)
-    return null unless typeIsArray(items)
-    try
-      items = processQuantities(items)
-    catch e
-      return null
-    return null unless items.length > 0
+    if (hasOnlyQuantities(items)) {
+      const values = getValuesFromQuantities(items);
+      const stdDev = this.standardDeviation(values);
+      return new Quantity(stdDev, items[0].unit);
+    } else {
+      return this.standardDeviation(items);
+    }
+  }
 
-    if hasOnlyQuantities(items)
-      values = getValuesFromQuantities(items)
-      product = values.reduce (x, y) -> x * y
-      # Units are not multiplied for the geometric product
-      new Quantity(product, items[0].unit)
-    else
-      items.reduce (x, y) -> x * y
+  standardDeviation(list) {
+    const val = this.stats(list);
+    if (val) { return val[this.type]; }
+  }
 
-module.exports.GeometricMean = class GeometricMean extends AggregateExpression
-  constructor:(json) ->
-    super
+  stats(list) {
+    const sum = list.reduce((x, y) => x+y);
+    const mean = sum / list.length;
+    let sumOfSquares = 0;
 
-  exec: (ctx) ->
-    items = @source.execute(ctx)
-    return null unless typeIsArray(items)
-    try
-      items = processQuantities(items)
-    catch e
-      return null
-    return null unless items.length > 0
-    if hasOnlyQuantities(items)
-      values = getValuesFromQuantities(items)
-      product = values.reduce (x, y) -> x * y
-      geoMean = Math.pow(product, 1.0 / items.length)
-      new Quantity(geoMean, items[0].unit)
-    else
-      product = items.reduce (x, y) -> x * y
-      Math.pow(product, 1.0 / items.length)
+    for (let sq of list) {
+      sumOfSquares += Math.pow((sq - mean),2);
+    }
 
-module.exports.PopulationStdDev = class PopulationStdDev extends StdDev
-  constructor:(json) ->
-    super
-    @type = "population_deviation"
+    const std_var = (1/list.length) * sumOfSquares;
+    const pop_var = (1/(list.length-1)) * sumOfSquares;
+    const std_dev = Math.sqrt(std_var);
+    const pop_dev = Math.sqrt(pop_var);
+    return {standard_variance: std_var, population_variance: pop_var, standard_deviation: std_dev, population_deviation: pop_dev};
+  }
+});
 
-module.exports.Variance = class Variance extends  StdDev
-  constructor:(json) ->
-    super
-    @type = "standard_variance"
+module.exports.Product = (Product = class Product extends AggregateExpression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-module.exports.PopulationVariance = class PopulationVariance extends  StdDev
-  constructor:(json) ->
-    super
-    @type = "population_variance"
+  exec(ctx) {
+    let items = this.source.execute(ctx);
+    if (!typeIsArray(items)) { return null; }
+    try {
+      items = processQuantities(items);
+    } catch (e) {
+      return null;
+    }
+    if (!(items.length > 0)) { return null; }
 
-module.exports.AllTrue = class AllTrue extends AggregateExpression
-  constructor:(json) ->
-    super
+    if (hasOnlyQuantities(items)) {
+      const values = getValuesFromQuantities(items);
+      const product = values.reduce((x, y) => x * y);
+      // Units are not multiplied for the geometric product
+      return new Quantity(product, items[0].unit);
+    } else {
+      return items.reduce((x, y) => x * y);
+    }
+  }
+});
 
-  exec: (ctx) ->
-    items = @source.execute(ctx)
-    allTrue(items)
+module.exports.GeometricMean = (GeometricMean = class GeometricMean extends AggregateExpression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-module.exports.AnyTrue = class AnyTrue extends AggregateExpression
-  constructor:(json) ->
-    super
+  exec(ctx) {
+    let product;
+    let items = this.source.execute(ctx);
+    if (!typeIsArray(items)) { return null; }
+    try {
+      items = processQuantities(items);
+    } catch (e) {
+      return null;
+    }
+    if (!(items.length > 0)) { return null; }
+    if (hasOnlyQuantities(items)) {
+      const values = getValuesFromQuantities(items);
+      product = values.reduce((x, y) => x * y);
+      const geoMean = Math.pow(product, 1.0 / items.length);
+      return new Quantity(geoMean, items[0].unit);
+    } else {
+      product = items.reduce((x, y) => x * y);
+      return Math.pow(product, 1.0 / items.length);
+    }
+  }
+});
 
-  exec: (ctx) ->
-    items = @source.execute(ctx)
-    anyTrue(items)
+module.exports.PopulationStdDev = (PopulationStdDev = class PopulationStdDev extends StdDev {
+  constructor(json) {
+    super(...arguments);
+    this.type = "population_deviation";
+  }
+});
 
-processQuantities = (values) ->
-  values = removeNulls(values)
-  if hasOnlyQuantities(values)
-    values = convertAllUnits(values)
-  else if hasSomeQuantities(values)
-    throw new Exception("Cannot perform aggregate operations on mixed values of Quantities and non Quantities")
-  else
-    values
+module.exports.Variance = (Variance = class Variance extends  StdDev {
+  constructor(json) {
+    super(...arguments);
+    this.type = "standard_variance";
+  }
+});
 
-getValuesFromQuantities = (quantities) ->
-  quantities.map (quantity) -> quantity.value
+module.exports.PopulationVariance = (PopulationVariance = class PopulationVariance extends  StdDev {
+  constructor(json) {
+    super(...arguments);
+    this.type = "population_variance";
+  }
+});
 
-hasOnlyQuantities = (arr) ->
-  arr.every (x) -> x.isQuantity
+module.exports.AllTrue = (AllTrue = class AllTrue extends AggregateExpression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-hasSomeQuantities = (arr) ->
-  arr.some (x) -> x.isQuantity
+  exec(ctx) {
+    const items = this.source.execute(ctx);
+    return allTrue(items);
+  }
+});
 
-convertAllUnits = (arr) ->
-  # convert all quantities in array to match the unit of the first item
-  converted = []
-  for quantity in arr
-    converted.push(quantity.convertUnit(arr[0].unit))
+module.exports.AnyTrue = (AnyTrue = class AnyTrue extends AggregateExpression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-  converted
+  exec(ctx) {
+    const items = this.source.execute(ctx);
+    return anyTrue(items);
+  }
+});
 
-medianOfNumbers = (numbers) ->
-  numbers = numerical_sort(numbers, "asc")
-  if (numbers.length % 2 == 1)
-    # Odd number of items
-    numbers[(numbers.length - 1) / 2]
-  else
-    # Even number of items
-    (numbers[(numbers.length / 2) - 1] + numbers[(numbers.length / 2)]) / 2
+var processQuantities = function(values) {
+  values = removeNulls(values);
+  if (hasOnlyQuantities(values)) {
+    return values = convertAllUnits(values);
+  } else if (hasSomeQuantities(values)) {
+    throw new Exception("Cannot perform aggregate operations on mixed values of Quantities and non Quantities");
+  } else {
+    return values;
+  }
+};
+
+var getValuesFromQuantities = quantities => quantities.map(quantity => quantity.value);
+
+var hasOnlyQuantities = arr => arr.every(x => x.isQuantity);
+
+var hasSomeQuantities = arr => arr.some(x => x.isQuantity);
+
+var convertAllUnits = function(arr) {
+  // convert all quantities in array to match the unit of the first item
+  const converted = [];
+  for (let quantity of arr) {
+    converted.push(quantity.convertUnit(arr[0].unit));
+  }
+
+  return converted;
+};
+
+var medianOfNumbers = function(numbers) {
+  numbers = numerical_sort(numbers, "asc");
+  if ((numbers.length % 2) === 1) {
+    // Odd number of items
+    return numbers[(numbers.length - 1) / 2];
+  } else {
+    // Even number of items
+    return (numbers[(numbers.length / 2) - 1] + numbers[(numbers.length / 2)]) / 2;
+  }
+};

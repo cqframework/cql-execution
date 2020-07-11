@@ -1,77 +1,106 @@
-DT = require './datatypes/datatypes'
-{ typeIsArray } = require './util/util'
+/*
+ * decaffeinate suggestions:
+ * DS101: Remove unnecessary use of Array.from
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS207: Consider shorter variations of null checks
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+const DT = require('./datatypes/datatypes');
+const { typeIsArray } = require('./util/util');
 
-toDate = (str) ->
-  if typeof str is 'string' then new Date(str)
-  else null
+const toDate = function(str) {
+  if (typeof str === 'string') { return new Date(str);
+  } else { return null; }
+};
 
-class Record
-  constructor: (@json) ->
-    @id = @json.id
+class Record {
+  constructor(json) {
+    this.json = json;
+    this.id = this.json.id;
+  }
 
-  _recursiveGet: (field) ->
-    if (field? and field.indexOf('.') >= 0)
-      [root, rest] =  field.split('.', 2)
-      return (new Record(@_recursiveGet(root)))._recursiveGet(rest)
-    return @json[field]
+  _recursiveGet(field) {
+    if ((field != null) && (field.indexOf('.') >= 0)) {
+      const [root, rest] =  Array.from(field.split('.', 2));
+      return (new Record(this._recursiveGet(root)))._recursiveGet(rest);
+    }
+    return this.json[field];
+  }
 
-  get: (field) ->
-    # the model should return the correct type for the field. For this simple model example,
-    # we just cheat and use the shape of the value to determine it. Real implementations should
-    # have a more sophisticated approach
-    value = @_recursiveGet field
-    if typeof value is 'string' and /\d{4}-\d{2}-\d{2}(T[\d\-.]+)?/.test(value) then return @getDate(field)
-    if value? and typeof value is 'object' and value.code? and value.system? then return @getCode(field)
-    if value? and typeof value is 'object' and (value.low? or value.high?) then return @getInterval(field)
-    return value
+  get(field) {
+    // the model should return the correct type for the field. For this simple model example,
+    // we just cheat and use the shape of the value to determine it. Real implementations should
+    // have a more sophisticated approach
+    const value = this._recursiveGet(field);
+    if ((typeof value === 'string') && /\d{4}-\d{2}-\d{2}(T[\d\-.]+)?/.test(value)) { return this.getDate(field); }
+    if ((value != null) && (typeof value === 'object') && (value.code != null) && (value.system != null)) { return this.getCode(field); }
+    if ((value != null) && (typeof value === 'object') && ((value.low != null) || (value.high != null))) { return this.getInterval(field); }
+    return value;
+  }
 
-  getId: () ->
-    @id
+  getId() {
+    return this.id;
+  }
 
-  getDate: (field) ->
-    val = @_recursiveGet field
-    if val? then DT.DateTime.parse(val) else null
+  getDate(field) {
+    const val = this._recursiveGet(field);
+    if (val != null) { return DT.DateTime.parse(val); } else { return null; }
+  }
 
-  getInterval: (field) ->
-    val = @_recursiveGet field
-    if val? and typeof val is 'object'
-      low = if val.low? then DT.DateTime.parse val.low else null
-      high = if val.high? then DT.DateTime.parse val.high else null
-      new DT.Interval(low, high)
+  getInterval(field) {
+    const val = this._recursiveGet(field);
+    if ((val != null) && (typeof val === 'object')) {
+      const low = (val.low != null) ? DT.DateTime.parse(val.low) : null;
+      const high = (val.high != null) ? DT.DateTime.parse(val.high) : null;
+      return new DT.Interval(low, high);
+    }
+  }
 
-  getDateOrInterval: (field) ->
-    val = @_recursiveGet field
-    if val? and typeof val is 'object' then @getInterval field else @getDate field
+  getDateOrInterval(field) {
+    const val = this._recursiveGet(field);
+    if ((val != null) && (typeof val === 'object')) { return this.getInterval(field); } else { return this.getDate(field); }
+  }
 
-  getCode: (field) ->
-    val = @_recursiveGet field
-    if val? and typeof val is 'object' then new DT.Code(val.code, val.system, val.version)
+  getCode(field) {
+    const val = this._recursiveGet(field);
+    if ((val != null) && (typeof val === 'object')) { return new DT.Code(val.code, val.system, val.version); }
+  }
+}
 
-class Patient extends Record
-  constructor: (json) ->
-    super
-    @name = json.name
-    @gender = json.gender
-    @birthDate = if json.birthDate? then DT.DateTime.parse json.birthDate
-    @records = {}
-    for r in json.records ? []
-      @records[r.recordType] ?= []
-      @records[r.recordType].push new Record(r)
+class Patient extends Record {
+  constructor(json) {
+    super(...arguments);
+    this.name = json.name;
+    this.gender = json.gender;
+    this.birthDate = (json.birthDate != null) ? DT.DateTime.parse(json.birthDate) : undefined;
+    this.records = {};
+    for (let r of json.records != null ? json.records : []) {
+      if (this.records[r.recordType] == null) { this.records[r.recordType] = []; }
+      this.records[r.recordType].push(new Record(r));
+    }
+  }
 
-  findRecords: (profile) ->
-    recordType = profile?.match(/(\{https:\/\/github\.com\/cqframework\/cql-execution\/simple\})?(.*)/)[2]
-    if recordType is 'Patient' then [@] else @records[recordType] ? []
+  findRecords(profile) {
+    const recordType = profile != null ? profile.match(/(\{https:\/\/github\.com\/cqframework\/cql-execution\/simple\})?(.*)/)[2] : undefined;
+    if (recordType === 'Patient') { return [this]; } else { return this.records[recordType] != null ? this.records[recordType] : []; }
+  }
+}
 
-class PatientSource
-  constructor: (@patients) ->
-    @nextPatient()
+class PatientSource {
+  constructor(patients) {
+    this.patients = patients;
+    this.nextPatient();
+  }
 
-  currentPatient: ->
-    @current
+  currentPatient() {
+    return this.current;
+  }
 
-  nextPatient: ->
-    currentJSON = @patients.shift()
-    @current = if currentJSON then new Patient(currentJSON) else undefined
+  nextPatient() {
+    const currentJSON = this.patients.shift();
+    return this.current = currentJSON ? new Patient(currentJSON) : undefined;
+  }
+}
 
-module.exports.Patient = Patient
-module.exports.PatientSource = PatientSource
+module.exports.Patient = Patient;
+module.exports.PatientSource = PatientSource;

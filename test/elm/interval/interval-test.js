@@ -1,9 +1,15 @@
-should = require 'should'
-setup = require '../../setup'
-data = require './data'
-{ Interval } = require '../../../lib/datatypes/interval'
-{ DateTime } = require '../../../lib/datatypes/datetime'
-{ MIN_INT_VALUE,
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS207: Consider shorter variations of null checks
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+const should = require('should');
+const setup = require('../../setup');
+const data = require('./data');
+const { Interval } = require('../../../lib/datatypes/interval');
+const { DateTime } = require('../../../lib/datatypes/datetime');
+const { MIN_INT_VALUE,
   MAX_INT_VALUE,
   MIN_FLOAT_VALUE,
   MIN_FLOAT_PRECISION_VALUE,
@@ -11,2563 +17,3028 @@ data = require './data'
   MIN_DATE_VALUE,
   MIN_DATETIME_VALUE,
   MAX_DATETIME_VALUE,
-  MIN_TIME_VALUE } = require '../../../lib/util/math'
-
-describe 'Interval', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should properly represent an open interval', ->
-    @open.lowClosed.should.be.false()
-    @open.highClosed.should.be.false()
-    @open.low.exec(@ctx).should.eql new DateTime(2012, 1, 1)
-    @open.high.exec(@ctx).should.eql new DateTime(2013, 1, 1)
-
-  it 'should properly represent a left-open interval', ->
-    @leftOpen.lowClosed.should.be.false()
-    @leftOpen.highClosed.should.be.true()
-    @leftOpen.low.exec(@ctx).should.eql new DateTime(2012, 1, 1)
-    @leftOpen.high.exec(@ctx).should.eql new DateTime(2013, 1, 1)
-
-  it 'should properly represent a right-open interval', ->
-    @rightOpen.lowClosed.should.be.true()
-    @rightOpen.highClosed.should.be.false()
-    @rightOpen.low.exec(@ctx).should.eql new DateTime(2012, 1, 1)
-    @rightOpen.high.exec(@ctx).should.eql new DateTime(2013, 1, 1)
-
-  it 'should properly represent a closed interval', ->
-    @closed.lowClosed.should.be.true()
-    @closed.highClosed.should.be.true()
-    @closed.low.exec(@ctx).should.eql new DateTime(2012, 1, 1)
-    @closed.high.exec(@ctx).should.eql new DateTime(2013, 1, 1)
-
-  it 'should exec to native Interval datatype', ->
-    ivl = @open.exec(@ctx)
-    ivl.should.be.instanceOf Interval
-    ivl.lowClosed.should.equal @open.lowClosed
-    ivl.highClosed.should.equal @open.highClosed
-    ivl.low.should.eql new DateTime(2012, 1, 1)
-    ivl.high.should.eql new DateTime(2013, 1, 1)
-
-describe 'Equal', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should determine equal integer intervals', ->
-    @equalClosed.exec(@ctx).should.be.true()
-    @equalOpen.exec(@ctx).should.be.true()
-    @equalOpenClosed.exec(@ctx).should.be.true()
-
-  it 'should determine unequal integer intervals', ->
-    @unequalClosed.exec(@ctx).should.be.false()
-    @unequalOpen.exec(@ctx).should.be.false()
-    @unequalClosedOpen.exec(@ctx).should.be.false()
-
-  it 'should determine equal quantity intervals', ->
-    @equalQuantityClosed.exec(@ctx).should.be.true()
-    @equalQuantityOpen.exec(@ctx).should.be.true()
-    @equalQuantityOpenClosed.exec(@ctx).should.be.true()
-
-  it 'should determine unequal quantity intervals', ->
-    @unequalQuantityClosed.exec(@ctx).should.be.false()
-    @unequalQuantityOpen.exec(@ctx).should.be.false()
-    @unequalQuantityClosedOpen.exec(@ctx).should.be.false()
-
-  it 'should determine equal datetime intervals', ->
-    @equalDates.exec(@ctx).should.be.true()
-    @equalDatesOpenClosed.exec(@ctx).should.be.true()
-
-  it 'should operate correctly with imprecision', ->
-    @sameDays.exec(@ctx).should.be.true()
-    @differentDays.exec(@ctx).should.be.false()
-    should(@differingPrecision.exec(@ctx)).be.null()
-
-describe 'NotEqual', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should determine equal integer intervals', ->
-    @equalClosed.exec(@ctx).should.be.false()
-    @equalOpen.exec(@ctx).should.be.false()
-    @equalOpenClosed.exec(@ctx).should.be.false()
-
-  it 'should determine unequal integer intervals', ->
-    @unequalClosed.exec(@ctx).should.be.true()
-    @unequalOpen.exec(@ctx).should.be.true()
-    @unequalClosedOpen.exec(@ctx).should.be.true()
-
-  it 'should determine equal quantity intervals', ->
-    @equalQuantityClosed.exec(@ctx).should.be.false()
-    @equalQuantityOpen.exec(@ctx).should.be.false()
-    @equalQuantityOpenClosed.exec(@ctx).should.be.false()
-
-  it 'should determine unequal quantity intervals', ->
-    @unequalQuantityClosed.exec(@ctx).should.be.true()
-    @unequalQuantityOpen.exec(@ctx).should.be.true()
-    @unequalQuantityClosedOpen.exec(@ctx).should.be.true()
-
-  it 'should determine equal datetime intervals', ->
-    @equalDates.exec(@ctx).should.be.false()
-    @equalDatesOpenClosed.exec(@ctx).should.be.false()
-
-  it 'should operate correctly with imprecision', ->
-    @sameDays.exec(@ctx).should.be.false()
-    @differentDays.exec(@ctx).should.be.true()
-    should(@differingPrecision.exec(@ctx)).be.null()
-
-describe 'Contains', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should accept contained items', ->
-    @containsInt.exec(@ctx).should.be.true()
-    @containsReal.exec(@ctx).should.be.true()
-    @containsQuantity.exec(@ctx).should.be.true()
-    @containsQuantityInclusiveEdge.exec(@ctx).should.be.true()
-    @containsDate.exec(@ctx).should.be.true()
-
-  it 'should reject uncontained items', ->
-    @notContainsInt.exec(@ctx).should.be.false()
-    @notContainsReal.exec(@ctx).should.be.false()
-    @notContainsQuantity.exec(@ctx).should.be.false()
-    @notContainsQuantityExclusiveEdge.exec(@ctx).should.be.false()
-    @notContainsDate.exec(@ctx).should.be.false()
-
-  it 'should correctly handle null endpoints (int)', ->
-    @negInfBegContainsInt.exec(@ctx).should.be.true()
-    @negInfBegNotContainsInt.exec(@ctx).should.be.false()
-    @unknownOpenBegContainsInt.exec(@ctx).should.be.true()
-    @unknownClosedBegContainsInt.exec(@ctx).should.be.true()
-    should(@unknownBegMayContainInt.exec(@ctx)).be.null()
-    @unknownBegNotContainsInt.exec(@ctx).should.be.false()
-    @posInfEndContainsInt.exec(@ctx).should.be.true()
-    @posInfEndNotContainsInt.exec(@ctx).should.be.false()
-    @unknownOpenEndContainsInt.exec(@ctx).should.be.true()
-    @unknownClosedEndContainsInt.exec(@ctx).should.be.true()
-    should(@unknownEndMayContainInt.exec(@ctx)).be.null()
-    @unknownEndNotContainsInt.exec(@ctx).should.be.false()
-
-  it 'should correctly handle null endpoints (date)', ->
-    @negInfBegContainsDate.exec(@ctx).should.be.true()
-    @negInfBegNotContainsDate.exec(@ctx).should.be.false()
-    should(@unknownOpenBegMayContainDate.exec(@ctx)).be.null()
-    @unknownClosedBegContainsDate.exec(@ctx).should.be.true()
-    should(@unknownBegMayContainDate.exec(@ctx)).be.null()
-    @unknownBegNotContainsDate.exec(@ctx).should.be.false()
-    @posInfEndContainsDate.exec(@ctx).should.be.true()
-    @posInfEndNotContainsDate.exec(@ctx).should.be.false()
-    @unknownOpenEndContainsDate.exec(@ctx).should.be.true()
-    @unknownClosedEndContainsDate.exec(@ctx).should.be.true()
-    should(@unknownEndMayContainDate.exec(@ctx)).be.null()
-    @unknownEndNotContainsDate.exec(@ctx).should.be.false()
-
-  it 'should correctly handle imprecision', ->
-    @containsImpreciseDate.exec(@ctx).should.be.true()
-    @notContainsImpreciseDate.exec(@ctx).should.be.false()
-    should(@mayContainImpreciseDate.exec(@ctx)).be.null()
-    @impreciseContainsDate.exec(@ctx).should.be.true()
-    @impreciseNotContainsDate.exec(@ctx).should.be.false()
-    should(@impreciseMayContainDate.exec(@ctx)).be.null()
-
-  it 'should correctly compare using the requested precision', ->
-    @containsDayOfDateLowEdge.exec(@ctx).should.be.true()
-    @notContainsDayOfDateHighEdgeOpen.exec(@ctx).should.be.false()
-    @containsDayOfDateHighEdgeClosed.exec(@ctx).should.be.true()
-    @notContainsDayOfDateLowEdge.exec(@ctx).should.be.false()
-    @notContainsDayOfDateBeyondHighEdge.exec(@ctx).should.be.false()
-    @containsDayOfDateImpreciseLowEdge.exec(@ctx).should.be.true()
-    @notContainsDayOfDateImpreciseHighEdgeOpen.exec(@ctx).should.be.false()
-    @containsDayOfDateImpreciseHighEdgeClosed.exec(@ctx).should.be.true()
-    @containsDayOfDateVeryImpreciseMiddle.exec(@ctx).should.be.true()
-    @notContainsDayOfDateVeryImpreciseLow.exec(@ctx).should.be.false()
-    @notContainsDayOfDateVeryImpreciseHighEdgeOpen.exec(@ctx).should.be.false()
-    should(@mayContainDayOfDateVeryImpreciseLow.exec(@ctx)).be.null()
-    should(@mayContainDayOfDateVeryImpreciseHigh.exec(@ctx)).be.null()
-    should(@mayContainDayOfDateVeryImpreciseSurrounding.exec(@ctx)).be.null()
-
-describe 'In', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should accept contained items', ->
-    @containsInt.exec(@ctx).should.be.true()
-    @containsReal.exec(@ctx).should.be.true()
-    @containsQuantity.exec(@ctx).should.be.true()
-    @containsQuantityInclusiveEdge.exec(@ctx).should.be.true()
-    @containsDate.exec(@ctx).should.be.true()
-
-  it 'should reject uncontained items', ->
-    @notContainsInt.exec(@ctx).should.be.false()
-    @notContainsReal.exec(@ctx).should.be.false()
-    @notContainsQuantity.exec(@ctx).should.be.false()
-    @notContainsQuantityExclusiveEdge.exec(@ctx).should.be.false()
-    @notContainsDate.exec(@ctx).should.be.false()
-
-  it 'should correctly handle null endpoints (int)', ->
-    @negInfBegContainsInt.exec(@ctx).should.be.true()
-    @negInfBegNotContainsInt.exec(@ctx).should.be.false()
-    @unknownOpenBegContainsInt.exec(@ctx).should.be.true()
-    @unknownClosedBegContainsInt.exec(@ctx).should.be.true()
-    should(@unknownBegMayContainInt.exec(@ctx)).be.null()
-    @unknownBegNotContainsInt.exec(@ctx).should.be.false()
-    @posInfEndContainsInt.exec(@ctx).should.be.true()
-    @posInfEndNotContainsInt.exec(@ctx).should.be.false()
-    @unknownOpenEndContainsInt.exec(@ctx).should.be.true()
-    @unknownClosedEndContainsInt.exec(@ctx).should.be.true()
-    should(@unknownEndMayContainInt.exec(@ctx)).be.null()
-    @unknownEndNotContainsInt.exec(@ctx).should.be.false()
-
-  it 'should correctly handle null endpoints (date)', ->
-    @negInfBegContainsDate.exec(@ctx).should.be.true()
-    @negInfBegNotContainsDate.exec(@ctx).should.be.false()
-    should(@unknownOpenBegMayContainDate.exec(@ctx)).be.null()
-    @unknownClosedBegContainsDate.exec(@ctx).should.be.true()
-    should(@unknownBegMayContainDate.exec(@ctx)).be.null()
-    @unknownBegNotContainsDate.exec(@ctx).should.be.false()
-    @posInfEndContainsDate.exec(@ctx).should.be.true()
-    @posInfEndNotContainsDate.exec(@ctx).should.be.false()
-    @unknownOpenEndContainsDate.exec(@ctx).should.be.true()
-    @unknownClosedEndContainsDate.exec(@ctx).should.be.true()
-    should(@unknownEndMayContainDate.exec(@ctx)).be.null()
-    @unknownEndNotContainsDate.exec(@ctx).should.be.false()
-
-  it 'should correctly handle imprecision', ->
-    @containsImpreciseDate.exec(@ctx).should.be.true()
-    @notContainsImpreciseDate.exec(@ctx).should.be.false()
-    should(@mayContainImpreciseDate.exec(@ctx)).be.null()
-    @impreciseContainsDate.exec(@ctx).should.be.true()
-    @impreciseNotContainsDate.exec(@ctx).should.be.false()
-    should(@impreciseMayContainDate.exec(@ctx)).be.null()
-
-  it 'should correctly compare using the requested precision', ->
-    @containsDayOfDateLowEdge.exec(@ctx).should.be.true()
-    @notContainsDayOfDateHighEdgeOpen.exec(@ctx).should.be.false()
-    @containsDayOfDateHighEdgeClosed.exec(@ctx).should.be.true()
-    @notContainsDayOfDateLowEdge.exec(@ctx).should.be.false()
-    @notContainsDayOfDateBeyondHighEdge.exec(@ctx).should.be.false()
-    @containsDayOfDateImpreciseLowEdge.exec(@ctx).should.be.true()
-    @notContainsDayOfDateImpreciseHighEdgeOpen.exec(@ctx).should.be.false()
-    @containsDayOfDateImpreciseHighEdgeClosed.exec(@ctx).should.be.true()
-    @containsDayOfDateVeryImpreciseMiddle.exec(@ctx).should.be.true()
-    @notContainsDayOfDateVeryImpreciseLow.exec(@ctx).should.be.false()
-    @notContainsDayOfDateVeryImpreciseHighEdgeOpen.exec(@ctx).should.be.false()
-    should(@mayContainDayOfDateVeryImpreciseLow.exec(@ctx)).be.null()
-    should(@mayContainDayOfDateVeryImpreciseHigh.exec(@ctx)).be.null()
-    should(@mayContainDayOfDateVeryImpreciseSurrounding.exec(@ctx)).be.null()
-
-describe 'Includes', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should accept included items', ->
-    @includesIntIvl.exec(@ctx).should.be.true()
-    @includesRealIvl.exec(@ctx).should.be.true()
-    @includesDateIvl.exec(@ctx).should.be.true()
-
-  it 'should reject unincluded items', ->
-    @notIncludesIntIvl.exec(@ctx).should.be.false()
-    @notIncludesRealIvl.exec(@ctx).should.be.false()
-    @notIncludesDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly handle null endpoints (int)', ->
-    @negInfBegIncludesIntIvl.exec(@ctx).should.be.true()
-    @negInfBegNotIncludesIntIvl.exec(@ctx).should.be.false()
-    @unknownBegIncludesIntIvl.exec(@ctx).should.be.true()
-    should(@unknownBegMayIncludeIntIvl.exec(@ctx)).be.null()
-    @unknownBegNotIncludesIntIvl.exec(@ctx).should.be.false()
-    @posInfEndIncludesIntIvl.exec(@ctx).should.be.true()
-    @posInfEndNotIncludesIntIvl.exec(@ctx).should.be.false()
-    @unknownEndIncludesIntIvl.exec(@ctx).should.be.true()
-    should(@unknownEndMayIncludeIntIvl.exec(@ctx)).be.null()
-    @unknownEndNotIncludesIntIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly handle null endpoints (date)', ->
-    @negInfBegIncludesDateIvl.exec(@ctx).should.be.true()
-    @negInfBegNotIncludesDateIvl.exec(@ctx).should.be.false()
-    @unknownBegIncludesDateIvl.exec(@ctx).should.be.true()
-    should(@unknownBegMayIncludeDateIvl.exec(@ctx)).be.null()
-    @unknownBegNotIncludesDateIvl.exec(@ctx).should.be.false()
-    @posInfEndIncludesDateIvl.exec(@ctx).should.be.true()
-    @posInfEndNotIncludesDateIvl.exec(@ctx).should.be.false()
-    @unknownEndIncludesDateIvl.exec(@ctx).should.be.true()
-    should(@unknownEndMayIncludeDateIvl.exec(@ctx)).be.null()
-    @unknownEndNotIncludesDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly handle imprecision', ->
-    @includesImpreciseDateIvl.exec(@ctx).should.be.true()
-    @notIncludesImpreciseDateIvl.exec(@ctx).should.be.false()
-    should(@mayIncludeImpreciseDateIvl.exec(@ctx)).be.null()
-    @impreciseIncludesDateIvl.exec(@ctx).should.be.true()
-    @impreciseNotIncludesDateIvl.exec(@ctx).should.be.false()
-    should(@impreciseMayIncludeDateIvl.exec(@ctx)).be.null()
-
-  it 'should correctly compare using the requested precision', ->
-    @includesDayOfIvlLowEdge.exec(@ctx).should.be.true()
-    @includesDayOfIvlHighEdge.exec(@ctx).should.be.true()
-    @notIncludesDayOfIvlLowEdge.exec(@ctx).should.be.false()
-    @notIncludesDayOfIvlHighEdge.exec(@ctx).should.be.false()
-    @includesDayOfIvlImpreciseLowEdge.exec(@ctx).should.be.true()
-    @includesDayOfIvlImpreciseHighEdge.exec(@ctx).should.be.true()
-    @includesDayOfIvlVeryImpreciseMiddle.exec(@ctx).should.be.true()
-    @notIncludesDayOfIvlVeryImpreciseLow.exec(@ctx).should.be.false()
-    @notIncludesDayOfIvlVeryImpreciseHigh.exec(@ctx).should.be.false()
-    should(@mayIncludeDayOfIvlVeryImpreciseLow.exec(@ctx)).be.null()
-    should(@mayIncludeDayOfIvlVeryImpreciseHigh.exec(@ctx)).be.null()
-    should(@mayIncludeDayOfIvlVeryImpreciseSurrounding.exec(@ctx)).be.null()
-
-  it 'should correctly handle point inclusion', ->
-    @impreciseIncludesDate.exec(@ctx).should.be.true()
-    @impreciseDoesntIncludeDate.exec(@ctx).should.be.false()
-    @intervalIncludesQuantity.exec(@ctx).should.be.true()
-    @intervalDoesntIncludeQuantity.exec(@ctx).should.be.false()
-
-describe 'ProperlyIncludes', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should accept properly included intervals', ->
-    @properlyIncludesIntIvl.exec(@ctx).should.be.true()
-    @properlyIncludesIntBeginsIvl.exec(@ctx).should.be.true()
-    @properlyIncludesIntEndsIvl.exec(@ctx).should.be.true()
-    @properlyIncludesRealIvl.exec(@ctx).should.be.true()
-    @properlyIncludesDateIvl.exec(@ctx).should.be.true()
-
-  it 'should reject intervals not properly included', ->
-    @notProperlyIncludesIntIvl.exec(@ctx).should.be.false()
-    @notProperlyIncludesRealIvl.exec(@ctx).should.be.false()
-    @notProperlyIncludesDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly handle null endpoints (int)', ->
-    @posInfEndProperlyIncludesIntIvl.exec(@ctx).should.be.true()
-    @posInfEndNotProperlyIncludesIntIvl.exec(@ctx).should.be.false()
-    should(@unknownEndMayProperlyIncludeIntIvl.exec(@ctx)).be.null()
-
-  it 'should correctly compare using the requested precision', ->
-    @properlyIncludesDayOfIvlLowEdge.exec(@ctx).should.be.true()
-    @properlyIncludesDayOfIvlHighEdge.exec(@ctx).should.be.true()
-    @properlyIncludesDayOfIvlNearEdges.exec(@ctx).should.be.true()
-    @notProperlyIncludesDayOfIvlSameEdges.exec(@ctx).should.be.false()
-    should(@mayProperlyIncludeDayOfIvlVeryImpreciseLow.exec(@ctx)).be.null()
-    should(@mayProperlyIncludeDayOfIvlVeryImpreciseHigh.exec(@ctx)).be.null()
-    should(@mayProperlyIncludeDayOfIvlVeryImpreciseLowAndHigh.exec(@ctx)).be.null()
-    should(@mayProperlyIncludeDayOfIvlVeryImpreciseSurrounding.exec(@ctx)).be.null()
-
-describe 'IncludedIn', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should accept included items', ->
-    @includesIntIvl.exec(@ctx).should.be.true()
-    @includesRealIvl.exec(@ctx).should.be.true()
-    @includesDateIvl.exec(@ctx).should.be.true()
-
-  it 'should reject unincluded items', ->
-    @notIncludesIntIvl.exec(@ctx).should.be.false()
-    @notIncludesRealIvl.exec(@ctx).should.be.false()
-    @notIncludesDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly handle null endpoints (int)', ->
-    @negInfBegIncludedInIntIvl.exec(@ctx).should.be.true()
-    @negInfBegNotIncludedInIntIvl.exec(@ctx).should.be.false()
-    @unknownBegIncludedInIntIvl.exec(@ctx).should.be.true()
-    should(@unknownBegMayBeIncludedInIntIvl.exec(@ctx)).be.null()
-    @unknownBegNotIncludedInIntIvl.exec(@ctx).should.be.false()
-    @posInfEndIncludedInIntIvl.exec(@ctx).should.be.true()
-    @posInfEndNotIncludedInIntIvl.exec(@ctx).should.be.false()
-    @unknownEndIncludedInIntIvl.exec(@ctx).should.be.true()
-    should(@unknownEndMayBeIncludedInIntIvl.exec(@ctx)).be.null()
-    @unknownEndNotIncludedInIntIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly handle null endpoints (date)', ->
-    @negInfBegIncludedInDateIvl.exec(@ctx).should.be.true()
-    @negInfBegNotIncludedInDateIvl.exec(@ctx).should.be.false()
-    @unknownBegIncludedInDateIvl.exec(@ctx).should.be.true()
-    should(@unknownBegMayBeIncludedInDateIvl.exec(@ctx)).be.null()
-    @unknownBegNotIncludedInDateIvl.exec(@ctx).should.be.false()
-    @posInfEndIncludedInDateIvl.exec(@ctx).should.be.true()
-    @posInfEndNotIncludedInDateIvl.exec(@ctx).should.be.false()
-    @unknownEndIncludedInDateIvl.exec(@ctx).should.be.true()
-    should(@unknownEndMayBeIncludedInDateIvl.exec(@ctx)).be.null()
-    @unknownEndNotIncludedInDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly handle imprecision', ->
-    @includesImpreciseDateIvl.exec(@ctx).should.be.true()
-    @notIncludesImpreciseDateIvl.exec(@ctx).should.be.false()
-    should(@mayIncludeImpreciseDateIvl.exec(@ctx)).be.null()
-    @impreciseIncludesDateIvl.exec(@ctx).should.be.true()
-    @impreciseNotIncludesDateIvl.exec(@ctx).should.be.false()
-    should(@impreciseMayIncludeDateIvl.exec(@ctx)).be.null()
-
-  it 'should correctly compare using the requested precision', ->
-    @includesDayOfIvlLowEdge.exec(@ctx).should.be.true()
-    @includesDayOfIvlHighEdge.exec(@ctx).should.be.true()
-    @notIncludesDayOfIvlLowEdge.exec(@ctx).should.be.false()
-    @notIncludesDayOfIvlHighEdge.exec(@ctx).should.be.false()
-    @includesDayOfIvlImpreciseLowEdge.exec(@ctx).should.be.true()
-    @includesDayOfIvlImpreciseHighEdge.exec(@ctx).should.be.true()
-    @includesDayOfIvlVeryImpreciseMiddle.exec(@ctx).should.be.true()
-    @notIncludesDayOfIvlVeryImpreciseLow.exec(@ctx).should.be.false()
-    @notIncludesDayOfIvlVeryImpreciseHigh.exec(@ctx).should.be.false()
-    should(@mayIncludeDayOfIvlVeryImpreciseLow.exec(@ctx)).be.null()
-    should(@mayIncludeDayOfIvlVeryImpreciseHigh.exec(@ctx)).be.null()
-    should(@mayIncludeDayOfIvlVeryImpreciseSurrounding.exec(@ctx)).be.null()
-
-  it 'should correctly handle point comparisons', ->
-    @includesDayInInterval.exec(@ctx).should.be.true()
-    @doesNotIncludeDayInInterval.exec(@ctx).should.be.false()
-    @quantityIncludedInterval.exec(@ctx).should.be.true()
-    @quantityNotIncludedInterval.exec(@ctx).should.be.false()
-
-
-describe 'ProperlyIncludedIn', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should accept properly included intervals', ->
-    @properlyIncludesIntIvl.exec(@ctx).should.be.true()
-    @properlyIncludesIntBeginsIvl.exec(@ctx).should.be.true()
-    @properlyIncludesIntEndsIvl.exec(@ctx).should.be.true()
-    @properlyIncludesRealIvl.exec(@ctx).should.be.true()
-    @properlyIncludesDateIvl.exec(@ctx).should.be.true()
-
-  it 'should reject intervals not properly included', ->
-    @notProperlyIncludesIntIvl.exec(@ctx).should.be.false()
-    @notProperlyIncludesRealIvl.exec(@ctx).should.be.false()
-    @notProperlyIncludesDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly handle null endpoints (int)', ->
-    @posInfEndProperlyIncludedInDateIvl.exec(@ctx).should.be.true()
-    @posInfEndNotProperlyIncludedInDateIvl.exec(@ctx).should.be.false()
-    should(@unknownEndMayBeProperlyIncludedInDateIvl.exec(@ctx)).be.null()
-
-  it 'should correctly compare using the requested precision', ->
-    @properlyIncludesDayOfIvlLowEdge.exec(@ctx).should.be.true()
-    @properlyIncludesDayOfIvlHighEdge.exec(@ctx).should.be.true()
-    @properlyIncludesDayOfIvlNearEdges.exec(@ctx).should.be.true()
-    @notProperlyIncludesDayOfIvlSameEdges.exec(@ctx).should.be.false()
-    should(@mayProperlyIncludeDayOfIvlVeryImpreciseLow.exec(@ctx)).be.null()
-    should(@mayProperlyIncludeDayOfIvlVeryImpreciseHigh.exec(@ctx)).be.null()
-    should(@mayProperlyIncludeDayOfIvlVeryImpreciseLowAndHigh.exec(@ctx)).be.null()
-    should(@mayProperlyIncludeDayOfIvlVeryImpreciseSurrounding.exec(@ctx)).be.null()
-
-describe 'After', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should accept intervals before it', ->
-    @afterIntIvl.exec(@ctx).should.be.true()
-    @afterRealIvl.exec(@ctx).should.be.true()
-    @afterDateIvl.exec(@ctx).should.be.true()
-
-  it 'should reject intervals on or after it', ->
-    @notAfterIntIvl.exec(@ctx).should.be.false()
-    @notAfterRealIvl.exec(@ctx).should.be.false()
-    @notAfterDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly handle null endpoints (int)', ->
-    @negInfBegNotAfterIntIvl.exec(@ctx).should.be.false()
-    should(@unknownBegMayBeAfterIntIvl.exec(@ctx)).be.null()
-    @unknownBegNotAfterIntIvl.exec(@ctx).should.be.false()
-    @posInfEndAfterIntIvl.exec(@ctx).should.be.true()
-    @posInfEndNotAfterIntIvl.exec(@ctx).should.be.false()
-    @unknownEndAfterIntIvl.exec(@ctx).should.be.true()
-    @unknownEndNotAfterIntIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly handle null endpoints (date)', ->
-    @negInfBegNotAfterDateIvl.exec(@ctx).should.be.false()
-    should(@unknownBegMayBeAfterDateIvl.exec(@ctx)).be.null()
-    @unknownBegNotAfterDateIvl.exec(@ctx).should.be.false()
-    @posInfEndAfterDateIvl.exec(@ctx).should.be.true()
-    @posInfEndNotAfterDateIvl.exec(@ctx).should.be.false()
-    @unknownEndAfterDateIvl.exec(@ctx).should.be.true()
-    @unknownEndNotAfterDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly handle imprecision', ->
-    @afterImpreciseDateIvl.exec(@ctx).should.be.true()
-    should(@notAfterImpreciseDateIvl.exec(@ctx)).be.null()
-    should(@mayBeAfterImpreciseDateIvl.exec(@ctx)).be.null()
-    @impreciseAfterDateIvl.exec(@ctx).should.be.true()
-    # meets with uncertainty due to toClose
-    should(@impreciseNotAfterDateIvl.exec(@ctx)).be.null()
-    should(@impreciseMayBeAfterDateIvl.exec(@ctx)).be.null()
-
-  it 'should correctly compare using the requested precision', ->
-    @afterDayOfIvl.exec(@ctx).should.be.true()
-    @beforeDayOfIvl.exec(@ctx).should.be.false()
-    @startsSameDayOfIvlEnd.exec(@ctx).should.be.false()
-    @endsSameDayOfIvlStart.exec(@ctx).should.be.false()
-    should(@mayBeAfterDayOfImpreciseIvl.exec(@ctx)).be.null()
-    @mayBeBeforeDayOfImpreciseIvl.exec(@ctx).should.be.false()
-
-describe 'Before', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should accept intervals before it', ->
-    @beforeIntIvl.exec(@ctx).should.be.true()
-    @beforeRealIvl.exec(@ctx).should.be.true()
-    @beforeDateIvl.exec(@ctx).should.be.true()
-
-  it 'should reject intervals on or after it', ->
-    @notBeforeIntIvl.exec(@ctx).should.be.false()
-    @notBeforeRealIvl.exec(@ctx).should.be.false()
-    @notBeforeDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly handle null endpoints (int)', ->
-    @negInfBegBeforeIntIvl.exec(@ctx).should.be.true()
-    @negInfBegNotBeforeIntIvl.exec(@ctx).should.be.false()
-    @unknownBegBeforeIntIvl.exec(@ctx).should.be.true()
-    @unknownBegNotBeforeIntIvl.exec(@ctx).should.be.false()
-    @posInfEndNotBeforeIntIvl.exec(@ctx).should.be.false()
-    should(@unknownEndMayBeBeforeIntIvl.exec(@ctx)).be.null()
-    @unknownEndNotBeforeIntIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly handle null endpoints (date)', ->
-    @negInfBegBeforeDateIvl.exec(@ctx).should.be.true()
-    @negInfBegNotBeforeDateIvl.exec(@ctx).should.be.false()
-    @unknownBegBeforeDateIvl.exec(@ctx).should.be.true()
-    @unknownBegNotBeforeDateIvl.exec(@ctx).should.be.false()
-    @posInfEndNotBeforeDateIvl.exec(@ctx).should.be.false()
-    should(@unknownEndMayBeBeforeDateIvl.exec(@ctx)).be.null()
-    @unknownEndNotBeforeDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly handle imprecision', ->
-    @beforeImpreciseDateIvl.exec(@ctx).should.be.true()
-    # meets with uncertaintity due to toClose
-    should(@notBeforeImpreciseDateIvl.exec(@ctx)).be.null()
-    should(@mayBeBeforeImpreciseDateIvl.exec(@ctx)).be.null()
-    @impreciseBeforeDateIvl.exec(@ctx).should.be.true()
-    should(@impreciseNotBeforeDateIvl.exec(@ctx)).be.null()
-    should(@impreciseMayBeBeforeDateIvl.exec(@ctx)).be.null()
-
-  it 'should correctly compare using the requested precision', ->
-    @afterDayOfIvl.exec(@ctx).should.be.false()
-    @beforeDayOfIvl.exec(@ctx).should.be.true()
-    @startsSameDayOfIvlEnd.exec(@ctx).should.be.false()
-    @endsSameDayOfIvlStart.exec(@ctx).should.be.false()
-    @mayBeAfterDayOfImpreciseIvl.exec(@ctx).should.be.false()
-    should(@mayBeBeforeDayOfImpreciseIvl.exec(@ctx)).be.null()
-
-describe 'BeforeOrOn', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should handle nominal datetime interval situations', ->
-    @meetsAfterDateIvl.exec(@ctx).should.be.false()
-    @meetsBeforeDateIvl.exec(@ctx).should.be.true()
-    @afterDateIvl.exec(@ctx).should.be.false()
-    @beforeDateIvl.exec(@ctx).should.be.true()
-
-  it 'should correctly handle imprecision', ->
-    @mayMeetAfterImpreciseDateIvl.exec(@ctx).should.be.false()
-    should(@mayMeetBeforeImpreciseDateIvl.exec(@ctx)).be.null()
-    @notMeetsImpreciseDateIvl.exec(@ctx).should.be.false()
-    @impreciseMayMeetAfterDateIvl.exec(@ctx).should.be.false()
-    @impreciseMayMeetBeforeDateIvl.exec(@ctx).should.be.true()
-    @impreciseNotMeetsDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly compare using the requested precision', ->
-    @meetsAfterDayOfIvl.exec(@ctx).should.be.false()
-    @meetsBeforeDayOfIvl.exec(@ctx).should.be.true()
-    @notMeetsDayOfIvl.exec(@ctx).should.be.false()
-    @notMeetsDayOfImpreciseIVL.exec(@ctx).should.be.false()
-    @mayMeetAfterDayOfImpreciseIvl.exec(@ctx).should.be.false()
-    should(@mayMeetBeforeDayOfImpreciseIvl.exec(@ctx)).be.null()
-
-  it 'should handle intervals with null end', ->
-    @beforeNullEndIvl.exec(@ctx).should.be.true()
-    @afterStartNullEndIvl.exec(@ctx).should.be.false()
-    should(@nullEndStartBeforeIvl.exec(@ctx)).be.null()
-    should(@nullEndStartAfterIvl.exec(@ctx)).be.null()
-
-  it 'should handle intervals with null start', ->
-    should(@endsBeforeNullStartIvlEnds.exec(@ctx)).be.null()
-    should(@afterEndOfNullStartIvl.exec(@ctx)).be.null()
-    @nullStartStartBeforeIvl.exec(@ctx).should.be.true()
-    @nullStartStartAfterIvl.exec(@ctx).should.be.false()
-
-  it 'should handle null on either side', ->
-    should(@dateIvlBeforeNull.exec(@ctx)).be.null()
-    should(@nullBeforeDateIvl.exec(@ctx)).be.null()
-
-  it 'should handle Date and DateTime on either side', ->
-    @dateTimeBeforeDateIvl.exec(@ctx).should.be.true()
-    @dateBeforeDateIvl.exec(@ctx).should.be.true()
-    @dateIvlBeforeDateTime.exec(@ctx).should.be.true()
-    @dateIvlBeforeDate.exec(@ctx).should.be.true()
-
-  it 'should handle Interval<Date> and Interval<DateTime> on either side', ->
-    @dateOnlyIvlBeforeDateIvl.exec(@ctx).should.be.true()
-    @dateIvlAfterDateOnlyIvl.exec(@ctx).should.be.false()
-    @dateOnlyMeetsBeforeDateIvl.exec(@ctx).should.be.true()
-
-describe 'AfterOrOn', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should handle nominal datetime interval situations', ->
-    @meetsAfterDateIvl.exec(@ctx).should.be.true()
-    @meetsBeforeDateIvl.exec(@ctx).should.be.false()
-    @afterDateIvl.exec(@ctx).should.be.true()
-    @beforeDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly handle imprecision', ->
-    should(@mayMeetAfterImpreciseDateIvl.exec(@ctx)).be.null()
-    @mayMeetBeforeImpreciseDateIvl.exec(@ctx).should.be.false()
-    @notMeetsImpreciseDateIvl.exec(@ctx).should.be.false()
-    @impreciseMayMeetAfterDateIvl.exec(@ctx).should.be.true()
-    @impreciseMayMeetBeforeDateIvl.exec(@ctx).should.be.false()
-    @impreciseNotMeetsDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly compare using the requested precision', ->
-    @meetsAfterDayOfIvl.exec(@ctx).should.be.true()
-    @meetsBeforeDayOfIvl.exec(@ctx).should.be.false()
-    @notMeetsDayOfIvl.exec(@ctx).should.be.true()
-    @notMeetsDayOfImpreciseIVL.exec(@ctx).should.be.true()
-    should(@mayMeetAfterDayOfImpreciseIvl.exec(@ctx)).be.null()
-    @mayMeetBeforeDayOfImpreciseIvl.exec(@ctx).should.be.false()
-
-  it 'should handle intervals with null end', ->
-    should(@beforeNullEndIvl.exec(@ctx)).be.null()
-    should(@afterStartNullEndIvl.exec(@ctx)).be.null()
-    @nullEndStartBeforeIvl.exec(@ctx).should.be.false()
-    @nullEndStartAfterIvl.exec(@ctx).should.be.true()
-
-  it 'should handle intervals with null start', ->
-    @endsBeforeNullStartIvlEnds.exec(@ctx).should.be.false()
-    @afterEndOfNullStartIvl.exec(@ctx).should.be.true()
-    should(@nullStartStartBeforeIvl.exec(@ctx)).be.null()
-    should(@nullStartStartAfterIvl.exec(@ctx)).be.null()
-
-  it 'should handle null on either side', ->
-    should(@dateIvlBeforeNull.exec(@ctx)).be.null()
-    should(@nullBeforeDateIvl.exec(@ctx)).be.null()
-
-  it 'should handle Date and DateTime on either side', ->
-    @dateTimeBeforeDateIvl.exec(@ctx).should.be.false()
-    @dateBeforeDateIvl.exec(@ctx).should.be.false()
-    @dateIvlBeforeDateTime.exec(@ctx).should.be.false()
-    @dateIvlBeforeDate.exec(@ctx).should.be.false()
-
-  it 'should handle Interval<Date> and Interval<DateTime> on either side', ->
-    @dateOnlyIvlBeforeDateIvl.exec(@ctx).should.be.false()
-    @dateIvlAfterDateOnlyIvl.exec(@ctx).should.be.true()
-    @dateOnlyMeetsAfterDateIvl.exec(@ctx).should.be.true()
-
-describe 'Meets', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should accept intervals meeting after it', ->
-    @meetsBeforeIntIvl.exec(@ctx).should.be.true()
-    @meetsBeforeRealIvl.exec(@ctx).should.be.true()
-    @meetsBeforeDateIvl.exec(@ctx).should.be.true()
-
-  it 'should accept intervals meeting before it', ->
-    @meetsAfterIntIvl.exec(@ctx).should.be.true()
-    @meetsAfterRealIvl.exec(@ctx).should.be.true()
-    @meetsAfterDateIvl.exec(@ctx).should.be.true()
-
-  it 'should reject intervals not meeting it', ->
-    @notMeetsIntIvl.exec(@ctx).should.be.false()
-    @notMeetsRealIvl.exec(@ctx).should.be.false()
-    @notMeetsDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly handle null endpoints (int)', ->
-    @negInfBegMeetsBeforeIntIvl.exec(@ctx).should.be.true()
-    @negInfBegNotMeetsIntIvl.exec(@ctx).should.be.false()
-    @intIvlNotMeetsNegInfBeg.exec(@ctx).should.be.false()
-    @unknownBegMeetsBeforeIntIvl.exec(@ctx).should.be.true()
-    should(@unknownBegMayMeetAfterIntIvl.exec(@ctx)).be.null()
-    @unknownBegNotMeetsIntIvl.exec(@ctx).should.be.false()
-    should(@intIvlMayMeetBeforeUnknownBeg.exec(@ctx)).be.null()
-    @posInfEndMeetsAfterIntIvl.exec(@ctx).should.be.true()
-    @posInfEndNotMeetsIntIvl.exec(@ctx).should.be.false()
-    @intIvlNotMeetsPosInfEnd.exec(@ctx).should.be.false()
-    @unknownEndMeetsAfterIntIvl.exec(@ctx).should.be.true()
-    should(@unknownEndMayMeetBeforeIntIvl.exec(@ctx)).be.null()
-    @unknownEndNotMeetsIntIvl.exec(@ctx).should.be.false()
-    should(@intIvlMayMeetAfterUnknownEnd.exec(@ctx)).be.null()
-
-  it 'should correctly handle null endpoints (date)', ->
-    @negInfBegMeetsBeforeDateIvl.exec(@ctx).should.be.true()
-    @negInfBegNotMeetsDateIvl.exec(@ctx).should.be.false()
-    @dateIvlNotMeetsNegInfBeg.exec(@ctx).should.be.false()
-    @unknownBegMeetsBeforeDateIvl.exec(@ctx).should.be.true()
-    should(@unknownBegMayMeetAfterDateIvl.exec(@ctx)).be.null()
-    @unknownBegNotMeetsDateIvl.exec(@ctx).should.be.false()
-    should(@dateIvlMayMeetBeforeUnknownBeg.exec(@ctx)).be.null()
-    @posInfEndMeetsAfterDateIvl.exec(@ctx).should.be.true()
-    @posInfEndNotMeetsDateIvl.exec(@ctx).should.be.false()
-    @dateIvlNotMeetsPosInfEnd.exec(@ctx).should.be.false()
-    @unknownEndMeetsAfterDateIvl.exec(@ctx).should.be.true()
-    should(@unknownEndMayMeetBeforeDateIvl.exec(@ctx)).be.null()
-    @unknownEndNotMeetsDateIvl.exec(@ctx).should.be.false()
-    should(@dateIvlMayMeetAfterUnknownEnd.exec(@ctx)).be.null()
-
-  it 'should correctly handle imprecision', ->
-    should(@mayMeetAfterImpreciseDateIvl.exec(@ctx)).be.null()
-    should(@mayMeetBeforeImpreciseDateIvl.exec(@ctx)).be.null()
-    @notMeetsImpreciseDateIvl.exec(@ctx).should.be.false()
-    should(@impreciseMayMeetAfterDateIvl.exec(@ctx)).be.null()
-    should(@impreciseMayMeetBeforeDateIvl.exec(@ctx)).be.null()
-    @impreciseNotMeetsDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly compare using the requested precision', ->
-    @meetsAfterDayOfIvl.exec(@ctx).should.be.true()
-    @meetsBeforeDayOfIvl.exec(@ctx).should.be.true()
-    @notMeetsDayOfIvl.exec(@ctx).should.be.false()
-    @notMeetsDayOfImpreciseIVL.exec(@ctx).should.be.false()
-    should(@mayMeetAfterDayOfImpreciseIvl.exec(@ctx)).be.null()
-    should(@mayMeetBeforeDayOfImpreciseIvl.exec(@ctx)).be.null()
-
-describe 'MeetsAfter', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should accept intervals meeting before it', ->
-    @meetsAfterIntIvl.exec(@ctx).should.be.true()
-    @meetsAfterRealIvl.exec(@ctx).should.be.true()
-    @meetsAfterDateIvl.exec(@ctx).should.be.true()
-
-  it 'should reject intervals meeting after it', ->
-    @meetsBeforeIntIvl.exec(@ctx).should.be.false()
-    @meetsBeforeRealIvl.exec(@ctx).should.be.false()
-    @meetsBeforeDateIvl.exec(@ctx).should.be.false()
-
-  it 'should reject intervals not meeting it', ->
-    @notMeetsIntIvl.exec(@ctx).should.be.false()
-    @notMeetsRealIvl.exec(@ctx).should.be.false()
-    @notMeetsDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly handle null endpoints (int)', ->
-    @negInfBegMeetsBeforeIntIvl.exec(@ctx).should.be.false()
-    @negInfBegNotMeetsIntIvl.exec(@ctx).should.be.false()
-    @intIvlNotMeetsNegInfBeg.exec(@ctx).should.be.false()
-    @unknownBegMeetsBeforeIntIvl.exec(@ctx).should.be.false()
-    should(@unknownBegMayMeetAfterIntIvl.exec(@ctx)).be.null()
-    @unknownBegNotMeetsIntIvl.exec(@ctx).should.be.false()
-    @intIvlMayMeetBeforeUnknownBeg.exec(@ctx).should.be.false()
-    @posInfEndMeetsAfterIntIvl.exec(@ctx).should.be.true()
-    @posInfEndNotMeetsIntIvl.exec(@ctx).should.be.false()
-    @intIvlNotMeetsPosInfEnd.exec(@ctx).should.be.false()
-    @unknownEndMeetsAfterIntIvl.exec(@ctx).should.be.true()
-    @unknownEndMayMeetBeforeIntIvl.exec(@ctx).should.be.false()
-    @unknownEndNotMeetsIntIvl.exec(@ctx).should.be.false()
-    should(@intIvlMayMeetAfterUnknownEnd.exec(@ctx)).be.null()
-
-  it 'should correctly handle null endpoints (date)', ->
-    @negInfBegMeetsBeforeDateIvl.exec(@ctx).should.be.false()
-    @negInfBegNotMeetsDateIvl.exec(@ctx).should.be.false()
-    @dateIvlNotMeetsNegInfBeg.exec(@ctx).should.be.false()
-    @unknownBegMeetsBeforeDateIvl.exec(@ctx).should.be.false()
-    should(@unknownBegMayMeetAfterDateIvl.exec(@ctx)).be.null()
-    @unknownBegNotMeetsDateIvl.exec(@ctx).should.be.false()
-    @dateIvlMayMeetBeforeUnknownBeg.exec(@ctx).should.be.false()
-    @posInfEndMeetsAfterDateIvl.exec(@ctx).should.be.true()
-    @posInfEndNotMeetsDateIvl.exec(@ctx).should.be.false()
-    @dateIvlNotMeetsPosInfEnd.exec(@ctx).should.be.false()
-    @unknownEndMeetsAfterDateIvl.exec(@ctx).should.be.true()
-    @unknownEndMayMeetBeforeDateIvl.exec(@ctx).should.be.false()
-    @unknownEndNotMeetsDateIvl.exec(@ctx).should.be.false()
-    should(@dateIvlMayMeetAfterUnknownEnd.exec(@ctx)).be.null()
-
-  it 'should correctly handle imprecision', ->
-    should(@mayMeetAfterImpreciseDateIvl.exec(@ctx)).be.null()
-    @mayMeetBeforeImpreciseDateIvl.exec(@ctx).should.be.false()
-    @notMeetsImpreciseDateIvl.exec(@ctx).should.be.false()
-    should(@impreciseMayMeetAfterDateIvl.exec(@ctx)).be.null()
-    @impreciseMayMeetBeforeDateIvl.exec(@ctx).should.be.false()
-    @impreciseNotMeetsDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly compare using the requested precision', ->
-    @meetsAfterDayOfIvl.exec(@ctx).should.be.true()
-    @meetsBeforeDayOfIvl.exec(@ctx).should.be.false()
-    @notMeetsDayOfIvl.exec(@ctx).should.be.false()
-    @notMeetsDayOfImpreciseIVL.exec(@ctx).should.be.false()
-    should(@mayMeetAfterDayOfImpreciseIvl.exec(@ctx)).be.null()
-    @mayMeetBeforeDayOfImpreciseIvl.exec(@ctx).should.be.false()
-
-describe 'MeetsBefore', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should accept intervals meeting after it', ->
-    @meetsBeforeIntIvl.exec(@ctx).should.be.true()
-    @meetsBeforeRealIvl.exec(@ctx).should.be.true()
-    @meetsBeforeDateIvl.exec(@ctx).should.be.true()
-
-  it 'should reject intervals meeting before it', ->
-    @meetsAfterIntIvl.exec(@ctx).should.be.false()
-    @meetsAfterRealIvl.exec(@ctx).should.be.false()
-    @meetsAfterDateIvl.exec(@ctx).should.be.false()
-
-  it 'should reject intervals not meeting it', ->
-    @notMeetsIntIvl.exec(@ctx).should.be.false()
-    @notMeetsRealIvl.exec(@ctx).should.be.false()
-    @notMeetsDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly handle null endpoints (int)', ->
-    @negInfBegMeetsBeforeIntIvl.exec(@ctx).should.be.true()
-    @negInfBegNotMeetsIntIvl.exec(@ctx).should.be.false()
-    @intIvlNotMeetsNegInfBeg.exec(@ctx).should.be.false()
-    @unknownBegMeetsBeforeIntIvl.exec(@ctx).should.be.true()
-    @unknownBegMayMeetAfterIntIvl.exec(@ctx).should.be.false()
-    @unknownBegNotMeetsIntIvl.exec(@ctx).should.be.false()
-    should(@intIvlMayMeetBeforeUnknownBeg.exec(@ctx)).be.null()
-    @posInfEndMeetsAfterIntIvl.exec(@ctx).should.be.false()
-    @posInfEndNotMeetsIntIvl.exec(@ctx).should.be.false()
-    @intIvlNotMeetsPosInfEnd.exec(@ctx).should.be.false()
-    @unknownEndMeetsAfterIntIvl.exec(@ctx).should.be.false()
-    should(@unknownEndMayMeetBeforeIntIvl.exec(@ctx)).be.null()
-    @unknownEndNotMeetsIntIvl.exec(@ctx).should.be.false()
-    @intIvlMayMeetAfterUnknownEnd.exec(@ctx).should.be.false()
-
-  it 'should correctly handle null endpoints (date)', ->
-    @negInfBegMeetsBeforeDateIvl.exec(@ctx).should.be.true()
-    @negInfBegNotMeetsDateIvl.exec(@ctx).should.be.false()
-    @dateIvlNotMeetsNegInfBeg.exec(@ctx).should.be.false()
-    @unknownBegMeetsBeforeDateIvl.exec(@ctx).should.be.true()
-    @unknownBegMayMeetAfterDateIvl.exec(@ctx).should.be.false()
-    @unknownBegNotMeetsDateIvl.exec(@ctx).should.be.false()
-    should(@dateIvlMayMeetBeforeUnknownBeg.exec(@ctx)).be.null()
-    @posInfEndMeetsAfterDateIvl.exec(@ctx).should.be.false()
-    @posInfEndNotMeetsDateIvl.exec(@ctx).should.be.false()
-    @dateIvlNotMeetsPosInfEnd.exec(@ctx).should.be.false()
-    @unknownEndMeetsAfterDateIvl.exec(@ctx).should.be.false()
-    should(@unknownEndMayMeetBeforeDateIvl.exec(@ctx)).be.null()
-    @unknownEndNotMeetsDateIvl.exec(@ctx).should.be.false()
-    @dateIvlMayMeetAfterUnknownEnd.exec(@ctx).should.be.false()
-
-  it 'should correctly handle imprecision', ->
-    @mayMeetAfterImpreciseDateIvl.exec(@ctx).should.be.false()
-    should(@mayMeetBeforeImpreciseDateIvl.exec(@ctx)).be.null()
-    @notMeetsImpreciseDateIvl.exec(@ctx).should.be.false()
-    @impreciseMayMeetAfterDateIvl.exec(@ctx).should.be.false()
-    should(@impreciseMayMeetBeforeDateIvl.exec(@ctx)).be.null()
-    @impreciseNotMeetsDateIvl.exec(@ctx).should.be.false()
-
-  it 'should correctly compare using the requested precision', ->
-    @meetsAfterDayOfIvl.exec(@ctx).should.be.false()
-    @meetsBeforeDayOfIvl.exec(@ctx).should.be.true()
-    @notMeetsDayOfIvl.exec(@ctx).should.be.false()
-    @notMeetsDayOfImpreciseIVL.exec(@ctx).should.be.false()
-    @mayMeetAfterDayOfImpreciseIvl.exec(@ctx).should.be.false()
-    should(@mayMeetBeforeDayOfImpreciseIvl.exec(@ctx)).be.null()
-
-describe 'Overlaps', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should accept overlaps (integer)', ->
-    @overlapsBeforeIntIvl.exec(@ctx).should.be.true()
-    @overlapsAfterIntIvl.exec(@ctx).should.be.true()
-    @overlapsBoundaryIntIvl.exec(@ctx).should.be.true()
-
-  it 'should accept overlaps (real)', ->
-    @overlapsBeforeRealIvl.exec(@ctx).should.be.true()
-    @overlapsAfterRealIvl.exec(@ctx).should.be.true()
-    @overlapsBoundaryRealIvl.exec(@ctx).should.be.true()
-
-  it 'should reject non-overlaps (integer)', ->
-    @noOverlapsIntIvl.exec(@ctx).should.be.false()
-
-  it 'should reject non-overlaps (real)', ->
-    @noOverlapsRealIvl.exec(@ctx).should.be.false()
-
-  it 'should return null for null value', ->
-    should(@overlapsIsNull.exec(@ctx)).be.null()
-
-describe 'OverlapsDateTime', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should accept overlaps', ->
-    @overlapsBefore.exec(@ctx).should.be.true()
-    @overlapsAfter.exec(@ctx).should.be.true()
-    @overlapsContained.exec(@ctx).should.be.true()
-    @overlapsContains.exec(@ctx).should.be.true()
-
-  it 'should accept imprecise overlaps', ->
-    @impreciseOverlap.exec(@ctx).should.be.true()
-
-  it 'should reject non-overlaps', ->
-    @noOverlap.exec(@ctx).should.be.false()
-
-  it 'should reject imprecise non-overlaps', ->
-    @noImpreciseOverlap.exec(@ctx).should.be.false()
-
-  it 'should return null for imprecise overlaps with differing precision', ->
-    should(@unknownOverlap.exec(@ctx)).be.null()
-
-  it 'should return true for imprecise overlaps with matching precision', ->
-    @matchingPrecisionOverlap.exec(@ctx).should.be.true()
-
-  it 'should correctly compare using the requested precision', ->
-    # NOTE: Some assertions commented out because cql-to-elm is WRONGLY translating 'overlaps' to 'OverlapsAfter'!
-    #@overlapsBeforeDayOfIvlEdge.exec(@ctx).should.be.true()
-    @overlapsAfterDayOfIvlEdge.exec(@ctx).should.be.true()
-    @overlapsContainsDayOfIvl.exec(@ctx).should.be.true()
-    #@overlapsContainedByDayOfIvl.exec(@ctx).should.be.true()
-    @notOverlapsDayOfIvl.exec(@ctx).should.be.false()
-    @overlapsAfterDayOfImpreciseInterval.exec(@ctx).should.be.true()
-    #should(@mayOverlapBeforeDayOfImpreciseIvl.exec(@ctx)).be.null()
-    should(@mayOverlapAfterDayOfImpreciseIvl.exec(@ctx)).be.null()
-
-describe 'OverlapsAfter', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should accept overlaps that are after (integer)', ->
-    @overlapsAfterIntIvl.exec(@ctx).should.be.true()
-    @overlapsBoundaryIntIvl.exec(@ctx).should.be.true()
-
-  it 'should accept overlaps that are after (real)', ->
-    @overlapsAfterRealIvl.exec(@ctx).should.be.true()
-    @overlapsBoundaryRealIvl.exec(@ctx).should.be.true()
-
-  it 'should reject overlaps that are before (integer)', ->
-    @overlapsBeforeIntIvl.exec(@ctx).should.be.false()
-
-  it 'should reject overlaps that are before (real)', ->
-    @overlapsBeforeRealIvl.exec(@ctx).should.be.false()
-
-  it 'should reject non-overlaps (integer)', ->
-    @noOverlapsIntIvl.exec(@ctx).should.be.false()
-
-  it 'should reject non-overlaps (real)', ->
-    @noOverlapsRealIvl.exec(@ctx).should.be.false()
-
-describe 'OverlapsAfterDateTime', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should accept overlaps that are after', ->
-    @overlapsAfter.exec(@ctx).should.be.true()
-    @overlapsContains.exec(@ctx).should.be.true()
-
-  it 'should accept imprecise overlaps that are after', ->
-    @impreciseOverlapAfter.exec(@ctx).should.be.true()
-
-  it 'should reject overlaps that are not before', ->
-    @overlapsBefore.exec(@ctx).should.be.false()
-    @overlapsContained.exec(@ctx).should.be.false()
-
-  it 'should reject imprecise overlaps that are not before', ->
-    @impreciseOverlapBefore.exec(@ctx).should.be.false()
-
-  it 'should reject non-overlaps', ->
-    @noOverlap.exec(@ctx).should.be.false()
-
-  it 'should reject imprecise non-overlaps', ->
-    @noImpreciseOverlap.exec(@ctx).should.be.false()
-
-  it 'should return true for imprecise overlaps with matching precision', ->
-    @matchingPrecisionOverlap.exec(@ctx).should.be.true()
-
-  it 'should return null for imprecise overlaps that are unknown', ->
-    should(@unknownOverlap.exec(@ctx)).be.null()
-
-  it 'should correctly compare using the requested precision', ->
-    @overlapsBeforeDayOfIvlEdge.exec(@ctx).should.be.false()
-    @overlapsAfterDayOfIvlEdge.exec(@ctx).should.be.true()
-    @overlapsContainsDayOfIvl.exec(@ctx).should.be.true()
-    @overlapsContainedByDayOfIvl.exec(@ctx).should.be.false()
-    @notOverlapsDayOfIvl.exec(@ctx).should.be.false()
-    @overlapsAfterDayOfImpreciseInterval.exec(@ctx).should.be.true()
-    @mayOverlapBeforeDayOfImpreciseIvl.exec(@ctx).should.be.false()
-    should(@mayOverlapAfterDayOfImpreciseIvl.exec(@ctx)).be.null()
-
-describe 'OverlapsBefore', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should accept overlaps that are before (integer)', ->
-    @overlapsBeforeIntIvl.exec(@ctx).should.be.true()
-    @overlapsBoundaryIntIvl.exec(@ctx).should.be.true()
-
-  it 'should accept overlaps that are before (real)', ->
-    @overlapsBeforeRealIvl.exec(@ctx).should.be.true()
-    @overlapsBoundaryRealIvl.exec(@ctx).should.be.true()
-
-  it 'should reject overlaps that are after (integer)', ->
-    @overlapsAfterIntIvl.exec(@ctx).should.be.false()
-
-  it 'should reject overlaps that are after (real)', ->
-    @overlapsAfterRealIvl.exec(@ctx).should.be.false()
-
-  it 'should reject non-overlaps (integer)', ->
-    @noOverlapsIntIvl.exec(@ctx).should.be.false()
-
-  it 'should reject non-overlaps (real)', ->
-    @noOverlapsRealIvl.exec(@ctx).should.be.false()
-
-describe 'OverlapsBeforeDateTime', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should accept overlaps that are before', ->
-    @overlapsBefore.exec(@ctx).should.be.true()
-    @overlapsContains.exec(@ctx).should.be.true()
-
-  it 'should accept imprecise overlaps that are before', ->
-    @impreciseOverlapBefore.exec(@ctx).should.be.true()
-
-  it 'should reject overlaps that are not before', ->
-    @overlapsAfter.exec(@ctx).should.be.false()
-    @overlapsContained.exec(@ctx).should.be.false()
-
-  it 'should reject imprecise overlaps that are not before', ->
-    @impreciseOverlapAfter.exec(@ctx).should.be.false()
-
-  it 'should reject non-overlaps', ->
-    @noOverlap.exec(@ctx).should.be.false()
-
-  it 'should reject imprecise non-overlaps', ->
-    @noImpreciseOverlap.exec(@ctx).should.be.false()
-
-  it 'should return true for imprecise overlaps with matching precision', ->
-    @matchingPrecisionOverlap.exec(@ctx).should.be.true()
-
-  it 'should return null for imprecise overlaps that are unknown', ->
-    should(@unknownOverlap.exec(@ctx)).be.null()
-
-  it 'should correctly compare using the requested precision', ->
-    @overlapsBeforeDayOfIvlEdge.exec(@ctx).should.be.true()
-    @overlapsAfterDayOfIvlEdge.exec(@ctx).should.be.false()
-    @overlapsContainsDayOfIvl.exec(@ctx).should.be.true()
-    @overlapsContainedByDayOfIvl.exec(@ctx).should.be.false()
-    @notOverlapsDayOfIvl.exec(@ctx).should.be.false()
-    @overlapsAfterDayOfImpreciseInterval.exec(@ctx).should.be.false()
-    should(@mayOverlapBeforeDayOfImpreciseIvl.exec(@ctx)).be.null()
-    @mayOverlapAfterDayOfImpreciseIvl.exec(@ctx).should.be.false()
-
-describe 'Width', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should calculate the width of integer intervals', ->
-    # define IntWidth: width of Interval[-2, 5]
-    @intWidth.exec(@ctx).should.equal 7
-    # define IntOpenWidth: width of Interval(-2, 5)
-    @intOpenWidth.exec(@ctx).should.equal 5
-
-  it 'should calculate the width of real intervals', ->
-    # define RealWidth: width of Interval[1.23, 4.56]
-    @realWidth.exec(@ctx).should.equal 3.33
-    # define RealOpenWidth: width of Interval(1.23, 4.56)
-    @realOpenWidth.exec(@ctx).should.equal 3.32999998
-
-  it 'should calculate the width of infinite intervals', ->
-    # define IntWidthThreeToMax: width of Interval[3, null]
-    @intWidthThreeToMax.exec(@ctx).should.equal Math.pow(2,31)-4
-    # define IntWidthMinToThree: width of Interval[null, 3]
-    @intWidthMinToThree.exec(@ctx).should.equal Math.pow(2,31)+3
-
-  it 'should calculate the width of infinite intervals that result in null', ->
-    # define IntWidthThreeToUnknown: width of Interval[3, null)
-    should(@intWidthThreeToUnknown.exec(@ctx)).be.null()
-    # define IntWidthUnknownToThree: width of Interval(null, 3]
-    should(@intWidthUnknownToThree.exec(@ctx)).be.null()
-
-  it 'should calculate the width of interval of quantities', ->
-    # define WidthOfQuantityInterval: width of Interval[Quantity{value: 1, unit: 'mm'}, Quantity{value: 10, unit: 'mm'}]
-    width = @widthOfQuantityInterval.exec(@ctx)
-    width.value.should.equal(9)
-    width.unit.should.equal('mm')
-
-  it 'should throw for DateTime Intervals', ->
-    # define WidthOfDateTimeInterval: width of Interval[DateTime(2012,01,01), DateTime(2012,01,03)]
-    should(() => @widthOfDateTimeInterval.exec(@ctx)).throw()
-
-  it 'should throw for Date Intervals', ->
-    # define WidthOfDateInterval: width of Interval[Date(2012,01,01), Date(2012,01,03)]
-    should(() => @widthOfDateInterval.exec(@ctx)).throw()
-
-  it 'should throw for Time Intervals', ->
-    # define WidthOfTimeInterval: width of Interval[Time(12,00,00), Time(12,30,02)]
-    should(() => @widthOfTimeInterval.exec(@ctx)).throw()
-
-describe 'Size', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should calculate the size of integer intervals', ->
-    # define IntSize: Size(Interval[-2, 5])
-    @intSize.exec(@ctx).should.equal 8
-    # define IntOpenSize: Size(Interval(-2, 5))
-    @intOpenSize.exec(@ctx).should.equal 6
-
-  it 'should calculate the size of real intervals', ->
-    # define RealSize: Size(Interval[1.23, 4.56])
-    @realSize.exec(@ctx).should.equal 3.33 + MIN_FLOAT_PRECISION_VALUE
-    # define RealOpenSize: Size(Interval(1.23, 4.56))
-    @realOpenSize.exec(@ctx).should.equal 3.32999998 + MIN_FLOAT_PRECISION_VALUE
-
-  it 'should calculate the size of infinite intervals', ->
-    # define IntSizeThreeToMax: Size(Interval[3, null])
-    @intSizeThreeToMax.exec(@ctx).should.equal Math.pow(2,31)-4 + 1
-    # define IntSizeMinToThree: Size(Interval[null, 3])
-    @intSizeMinToThree.exec(@ctx).should.equal Math.pow(2,31)+3 + 1
-
-  it 'should calculate the size of infinite intervals that result in null', ->
-    # define IntSizeThreeToUnknown: Size(Interval[3, null))
-    should(@intSizeThreeToUnknown.exec(@ctx)).be.null()
-    # define IntSizeUnknownToThree: Size(Interval(null, 3])
-    should(@intSizeUnknownToThree.exec(@ctx)).be.null()
-
-  it 'should return null if integer is null', ->
-    # define SizeIsNull: Size(null as Interval<Integer>)
-    should(@sizeIsNull.exec(@ctx)).be.null()
-
-  it 'should return null if integer is null', ->
-    # define SizeIsNull: Size(null as Interval<Integer>)
-    should(@sizeIsNull.exec(@ctx)).be.null()
-
-  it 'should calculate size of interval of quantities', ->
-    # define SizeOfQuantityInterval: Size(Interval[Quantity{value: 1, unit: 'mm'}, Quantity{value: 10, unit: 'mm'}])
-    size = @sizeOfQuantityInterval.exec(@ctx)
-    size.value.should.equal(10)
-    size.unit.should.equal('mm')
-
-  it 'should throw for Date Interval', ->
-    # define SizeOfDateTimeInterval: Size(Interval[DateTime(2012,01,01), DateTime(2012,01,03)])
-    should(() => @sizeOfDateTimeInterval.exec(@ctx)).throw()
-
-  it 'should throw for DateTime Interval', ->
-    # define SizeOfDateInterval: Size(Interval[Date(2012,01,01), Date(2012,01,03)])
-    should(() => @sizeOfDateInterval.exec(@ctx)).throw()
-
-  it 'should throw for Time Interval', ->
-    # define SizeOfTimeInterval: Size(Interval[Time(12,00,00), Time(12,30,02)])
-    should(() => @sizeOfTimeInterval.exec(@ctx)).throw()
-
-
-describe 'Start', ->
-  @beforeEach ->
-    setup @, data
-
-
-  it 'should return the low of the interval', ->
-    @closedNotNull.exec(@ctx).should.eql new DateTime(2012, 1, 1)
-
-  it 'should return the minimum possible DateTime', ->
-    @closedNullDateTime.exec(@ctx).should.eql MIN_DATETIME_VALUE
-
-  it 'should return the minimum possible DateTime in timzoneOffset of context', ->
-    # set execution timestamp to be +5
-    @ctx.executionDateTime = new DateTime(2019, 10, 1, 12, 31, 31, 2, 5)
-    (@closedNullDateTime.exec(@ctx)).timezoneOffset.should.eql(5)
-
-  it 'should return the minimum possible Integer', ->
-    @closedNullInteger.exec(@ctx).should.eql MIN_INT_VALUE
-
-  it 'should return the minimum possible Decimal', ->
-    @closedNullDecimal.exec(@ctx).should.eql MIN_FLOAT_VALUE
-
-  it 'should return null when the interval is null', ->
-    should(@nullInterval.exec(@ctx)).be.null()
-
-  it 'should return successor of low when the interval is open', ->
-    @openNotNull.exec(@ctx).should.eql new DateTime(2012, 1, 1).successor()
-
-  it 'should return null for open interval with null high value', ->
-    should(@openNull.exec(@ctx)).be.null()
-
-describe 'End', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should return the high of the interval', ->
-    @closedNotNull.exec(@ctx).should.eql new DateTime(2013, 1, 1)
-
-  it 'should return the maximum possible DateTime', ->
-    @closedNullDateTime.exec(@ctx).should.eql MAX_DATETIME_VALUE
-
-  it 'should return the maximum possible DateTime in timzoneOffset of context', ->
-    # set execution timestamp to be +5
-    @ctx.executionDateTime = new DateTime(2019, 10, 1, 12, 31, 31, 2, 5)
-    (@closedNullDateTime.exec(@ctx)).timezoneOffset.should.eql(5)
-
-  it 'should return the maximum possible Integer', ->
-    @closedNullInteger.exec(@ctx).should.eql MAX_INT_VALUE
-
-  it 'should return the maximum possible Decimal', ->
-    @closedNullDecimal.exec(@ctx).should.eql MAX_FLOAT_VALUE
-
-  it 'should return null when the interval is null', ->
-    should(@nullInterval.exec(@ctx)).be.null()
-
-  it 'should return predecessor of high when the interval is open', ->
-    @openNotNull.exec(@ctx).should.eql new DateTime(2013, 1, 1).predecessor()
-
-  it 'should return null for open interval with null low value', ->
-    should(@openNull.exec(@ctx)).be.null()
-
-describe 'Starts', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should calculate to null', ->
-    should(@testStartsNull.exec(@ctx)).be.null()
-
-  it 'should calculate integer intervals properly', ->
-    @integerIntervalStartsTrue.exec(@ctx).should.be.true()
-    @integerIntervalStartsFalse.exec(@ctx).should.be.false()
-    @integerIntervalStartEndsFalse.exec(@ctx).should.be.false()
-
-  it 'should calculate decimal intervals properly', ->
-    @decimalIntervalStartsTrue.exec(@ctx).should.be.true()
-    @decimalIntervalStartsFalse.exec(@ctx).should.be.false()
-    @decimalIntervalStartsEndsFalse.exec(@ctx).should.be.false()
-
-  it 'should calculate quantity intervals properly', ->
-    @quantityIntervalStartsTrue.exec(@ctx).should.be.true()
-    @quantityIntervalStartsFalse.exec(@ctx).should.be.false()
-    @quantityIntervalStartsEndsFalse.exec(@ctx).should.be.false()
-
-  it 'should calculate datetime intervals properly', ->
-    @dateTimeIntervalStartsTrue.exec(@ctx).should.be.true()
-    @dateTimeIntervalStartsFalse.exec(@ctx).should.be.false()
-    @dateTimeIntervalStartsDayOfTrue.exec(@ctx).should.be.true()
-    @dateTimeIntervalStartsEndsFalse.exec(@ctx).should.be.false()
-
-describe 'Ends', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should calculate to null', ->
-    should(@testEndsNull.exec(@ctx)).be.null()
-
-  it 'should calculate integer intervals properly', ->
-    @integerIntervalEndsTrue.exec(@ctx).should.be.true()
-    @integerIntervalEndsFalse.exec(@ctx).should.be.false()
-    @integerIntervalEndsStartsFalse.exec(@ctx).should.be.false()
-
-  it 'should calculate decimal intervals properly', ->
-    @decimalIntervalEndsTrue.exec(@ctx).should.be.true()
-    @decimalIntervalEndsFalse.exec(@ctx).should.be.false()
-    @decimalIntervalEndsStartsFalse.exec(@ctx).should.be.false()
-
-  it 'should calculate quantity intervals properly', ->
-    @quantityIntervalEndsTrue.exec(@ctx).should.be.true()
-    @quantityIntervalEndsFalse.exec(@ctx).should.be.false()
-    @quantityIntervalEndsStartsFalse.exec(@ctx).should.be.false()
-
-  it 'should calculate datetime intervals properly', ->
-    @dateTimeIntervalEndsTrue.exec(@ctx).should.be.true()
-    @dateTimeIntervalEndsFalse.exec(@ctx).should.be.false()
-    @dateTimeIntervalEndsDayOfTrue.exec(@ctx).should.be.true()
-    @dateTimeIntervalEndsStartsFalse.exec(@ctx).should.be.false()
-
-describe 'IntegerIntervalUnion', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should properly calculate open and closed unions', ->
-    x = @intFullInterval.exec(@ctx)
-    y = @intClosedUnionClosed.exec(@ctx)
-    y.equals(x).should.be.true()
-
-    y = @intClosedUnionOpen.exec(@ctx)
-    y.contains(0).should.be.true()
-    y.contains(10).should.be.false()
-
-    y = @intOpenUnionOpen.exec(@ctx)
-    y.contains(0).should.be.false()
-    y.contains(10).should.be.false()
-
-    y = @intOpenUnionClosed.exec(@ctx)
-    y.contains(0).should.be.false()
-    y.contains(10).should.be.true()
-
-  it 'should properly calculate sameAs unions', ->
-    x = @intFullInterval.exec(@ctx)
-    y = @intSameAsUnion.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate before/after unions', ->
-    should(@intBeforeUnion.exec(@ctx)).be.null()
-
-  it 'should properly calculate meets unions', ->
-    x = @intFullInterval.exec(@ctx)
-    y = @intMeetsUnion.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate left/right overlapping unions', ->
-    x = @intFullInterval.exec(@ctx)
-    y = @intOverlapsUnion.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate begins/begun by unions', ->
-    x = @intFullInterval.exec(@ctx)
-    y = @intBeginsUnion.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate includes/included by unions', ->
-    x = @intFullInterval.exec(@ctx)
-    y = @intDuringUnion.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate ends/ended by unions', ->
-    x = @intFullInterval.exec(@ctx)
-    y = @intEndsUnion.exec(@ctx)
-    y.equals(x).should.be.true()
-
-# TODO
-# it 'should properly handle imprecision', ->
-
-describe 'DateTimeIntervalUnion', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should properly calculate open and closed unions', ->
-    x = @dateTimeFullInterval.exec(@ctx)
-    y = @dateTimeClosedUnionClosed.exec(@ctx)
-    y.equals(x).should.be.true()
-
-    a = new DateTime(2012, 1, 1, 0, 0, 0, 0)
-    b = new DateTime(2013, 1, 1, 0, 0, 0, 0)
-
-    y = @dateTimeClosedUnionOpen.exec(@ctx)
-    y.contains(a).should.be.true()
-    y.contains(b).should.be.false()
-
-    y = @dateTimeOpenUnionOpen.exec(@ctx)
-    y.contains(a).should.be.false()
-    y.contains(b).should.be.false()
-
-    y = @dateTimeOpenUnionClosed.exec(@ctx)
-    y.contains(a).should.be.false()
-    y.contains(b).should.be.true()
-
-  it 'should properly calculate sameAs unions', ->
-    x = @dateTimeFullInterval.exec(@ctx)
-    y = @dateTimeSameAsUnion.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate before/after unions', ->
-    should(@dateTimeBeforeUnion.exec(@ctx)).be.null()
-
-  it 'should properly calculate meets unions', ->
-    x = @dateTimeFullInterval.exec(@ctx)
-    y = @dateTimeMeetsUnion.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate left/right overlapping unions', ->
-    x = @dateTimeFullInterval.exec(@ctx)
-    y = @dateTimeOverlapsUnion.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate begins/begun by unions', ->
-    x = @dateTimeFullInterval.exec(@ctx)
-    y = @dateTimeBeginsUnion.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate includes/included by unions', ->
-    x = @dateTimeFullInterval.exec(@ctx)
-    y = @dateTimeDuringUnion.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate ends/ended by unions', ->
-    x = @dateTimeFullInterval.exec(@ctx)
-    y = @dateTimeEndsUnion.exec(@ctx)
-    y.equals(x).should.be.true()
-
-# TODO
-# it 'should properly handle imprecision', ->
-
-describe 'IntegerIntervalExcept', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should properly calculate sameAs except', ->
-    should(@intSameAsExcept.exec(@ctx)).be.null()
-
-  it 'should properly calculate before/after except', ->
-    @intBeforeExcept.exec(@ctx).should.eql new Interval(0,4)
-
-  it 'should properly calculate meets except', ->
-    x = @intHalfInterval.exec(@ctx)
-    y = @intMeetsExcept.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate left/right overlapping except', ->
-    x = @intHalfInterval.exec(@ctx)
-    y = @intOverlapsExcept.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate begins/begun by except', ->
-    should(@intBeginsExcept.exec(@ctx)).be.null()
-
-  it 'should properly calculate includes/included by except', ->
-    should(@intDuringExcept.exec(@ctx)).be.null()
-
-  it 'should properly calculate ends/ended by except', ->
-    should(@intEndsExcept.exec(@ctx)).be.null()
-
-# TODO
-# it 'should properly handle imprecision', ->
-
-describe 'DateTimeIntervalExcept', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should properly calculate sameAs except', ->
-    should(@dateTimeSameAsExcept.exec(@ctx)).be.null()
-
-  it 'should properly calculate before/after except', ->
-    @dateTimeBeforeExcept.exec(@ctx).should.eql new Interval(new DateTime(2012, 1, 1, 0, 0, 0, 0), new DateTime(2012, 4, 1, 0, 0, 0, 0))
-
-  it 'should properly calculate meets except', ->
-    x = @dateTimeHalfInterval.exec(@ctx)
-    y = @dateTimeMeetsExcept.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate left/right overlapping except', ->
-    x = @dateTimeHalfInterval.exec(@ctx)
-    y = @dateTimeOverlapsExcept.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate begins/begun by except', ->
-    should(@dateTimeBeginsExcept.exec(@ctx)).be.null()
-
-  it 'should properly calculate includes/included by except', ->
-    should(@dateTimeDuringExcept.exec(@ctx)).be.null()
-
-  it 'should properly calculate ends/ended by except', ->
-    should(@dateTimeEndsExcept.exec(@ctx)).be.null()
-
-# TODO
-# it 'should properly handle imprecision', ->
-
-describe 'IntegerIntervalIntersect', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should properly calculate sameAs intersect', ->
-    x = @intSameAsIntersect.exec(@ctx)
-    y = @intFullInterval.exec(@ctx)
-    x.equals(y).should.be.true()
-
-  it 'should properly calculate before/after intersect', ->
-    should(@intBeforeIntersect.exec(@ctx)).be.null()
-
-  it 'should properly calculate meets intersect', ->
-    x = @intMeetsInterval.exec(@ctx)
-    y = @intMeetsIntersect.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate left/right overlapping intersect', ->
-    x = @intOverlapsInterval.exec(@ctx)
-    y = @intOverlapsIntersect.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate begins/begun by intersect', ->
-    x = @intBeginsInterval.exec(@ctx)
-    y = @intBeginsIntersect.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate includes/included by intersect', ->
-    x = @intDuringInterval.exec(@ctx)
-    y = @intDuringIntersect.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate ends/ended by intersect', ->
-    x = @intEndsInterval.exec(@ctx)
-    y = @intEndsIntersect.exec(@ctx)
-    y.equals(x).should.be.true()
-
-describe 'DateTimeIntervalIntersect', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'should properly calculate sameAs intersect', ->
-    x = @dateTimeSameAsIntersect.exec(@ctx)
-    y = @dateTimeFullInterval.exec(@ctx)
-    x.equals(y).should.be.true()
-
-  it 'should properly calculate before/after intersect', ->
-    should(@dateTimeBeforeIntersect.exec(@ctx)).be.null()
-
-  it 'should properly calculate meets intersect', ->
-    x = @dateTimeMeetsInterval.exec(@ctx)
-    y = @dateTimeMeetsIntersect.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate left/right overlapping intersect', ->
-    x = @dateTimeOverlapsInterval.exec(@ctx)
-    y = @dateTimeOverlapsIntersect.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate begins/begun by intersect', ->
-    x = @dateTimeBeginsInterval.exec(@ctx)
-    y = @dateTimeBeginsIntersect.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate includes/included by intersect', ->
-    x = @dateTimeDuringInterval.exec(@ctx)
-    y = @dateTimeDuringIntersect.exec(@ctx)
-    y.equals(x).should.be.true()
-
-  it 'should properly calculate ends/ended by intersect', ->
-    x = @dateTimeEndsInterval.exec(@ctx)
-    y = @dateTimeEndsIntersect.exec(@ctx)
-    y.equals(x).should.be.true()
-
-# TODO: 2 tests I don't know how to write:
-#   - If the argument is null, the result is null.
-#   - If the list of intervals contains nulls, they will be excluded from the resulting list.
-describe 'IntegerIntervalCollapse', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'empty interval collapses to empty', ->
-    @intCollapseEmpty.exec(@ctx).should.eql @intEmptyIntervalList.exec(@ctx)
-
-  it 'single interval list collapse to self', ->
-    @intCollapseSingleInterval.exec(@ctx).should.eql @int1_10IntervalList.exec(@ctx)
-
-  it 'disjoint intervals list collapses to ordered self', ->
-    @intCollapseDisjoint.exec(@ctx).should.eql @intTwoItemDisjointList.exec(@ctx)
-    @intCollapseDisjointReversed.exec(@ctx).should.eql @intTwoItemDisjointList.exec(@ctx)
-
-  it 'adjacent intervals list combines', ->
-    @intCollapseAdjacent.exec(@ctx).should.eql @int1_15IntervalList.exec(@ctx)
-
-  it 'overlapping intervals list combine', ->
-    @intCollapseOverlap.exec(@ctx).should.eql @int1_12IntervalList.exec(@ctx)
-    @intCollapseOverlapContained.exec(@ctx).should.eql @int1_15IntervalList.exec(@ctx)
-    @intCollapseOverlapContainedEdge.exec(@ctx).should.eql @int1_10IntervalList.exec(@ctx)
-    @intCollapseOverlapContainedEdge2.exec(@ctx).should.eql @int1_15IntervalList.exec(@ctx)
-    @intCollapseOverlapMultipleCombine.exec(@ctx).should.eql @int1_15IntervalList.exec(@ctx)
-
-describe 'DateTimeIntervalCollapse', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'empty interval collapses to empty', ->
-    @dateTimeCollapseEmpty.exec(@ctx).should.eql @dateTimeEmptyIntervalList.exec(@ctx)
-
-  it 'single interval list collapse to self', ->
-    @dateTimeCollapseSingleInterval.exec(@ctx).should.eql @dateTime1_10IntervalList.exec(@ctx)
-
-  it 'disjoint intervals list collapses to ordered self', ->
-    @dateTimeCollapseDisjoint.exec(@ctx).should.eql @dateTimeTwoItemDisjointList.exec(@ctx)
-
-  it 'reversed disjoint intervals list collapses to ordered self', ->
-    @dateTimeCollapseDisjointReversed.exec(@ctx).should.eql @dateTimeTwoItemDisjointList.exec(@ctx)
-
-  it 'adjacent intervals list combines', ->
-    @dateTimeCollapseAdjacent.exec(@ctx).should.eql @dateTime1_15IntervalList.exec(@ctx)
-
-  it 'overlapping intervals list combine', ->
-    @dateTimeCollapseOverlap.exec(@ctx).should.eql @dateTime1_12IntervalList.exec(@ctx)
-    @dateTimeCollapseOverlapContained.exec(@ctx).should.eql @dateTime1_15IntervalList.exec(@ctx)
-    @dateTimeCollapseOverlapContainedEdge.exec(@ctx).should.eql @dateTime1_10IntervalList.exec(@ctx)
-    @dateTimeCollapseOverlapContainedEdge2.exec(@ctx).should.eql @dateTime1_15IntervalList.exec(@ctx)
-    @dateTimeCollapseOverlapMultipleCombine.exec(@ctx).should.eql @dateTime1_15IntervalList.exec(@ctx)
-
-  it 'throws collapsing imprecise interval', ->
-    @dateTimeCollapseImpreciseBoundary.exec(@ctx).should.eql @dateTime1_10IntervalList.exec(@ctx)
-
-  it 'should not modify collapse parameters', ->
-    interval1CopyString = @dateTime1_6Interval.toString()
-    interval2CopyString = @dateTime5_12Interval.toString()
-    interval3CopyString = @dateTime10_15Interval.toString()
-    @dateTimeCollapseOverlapMultipleCombine.exec(@ctx)
-    @dateTime1_6Interval.toString().should.eql interval1CopyString
-    @dateTime5_12Interval.toString().should.eql interval2CopyString
-    @dateTime10_15Interval.toString().should.eql interval3CopyString
-
-describe 'Collapse', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'numeric collapse uses "1" as default per unit', ->
-    @intCollapseNoPer.exec(@ctx).should.eql @intCollapsePerUnit1.exec(@ctx)
-
-  it 'combines intervals separated by less than per unit', ->
-    @intCollapseSeparatedListPer3.exec(@ctx).should.eql @expectedIntervalList.exec(@ctx)
-
-  it 'DateTime collapse uses 1 ms as default per unit', ->
-    # TODO: spec says to determine this based on width of successor, but Bonnie
-    # will only ever have fully-defined dates. Implement successor way if time.
-    @dateTimeCollapseNoPer.exec(@ctx).should.eql @dateTimeCollapsePerMs.exec(@ctx)
-
-  it 'DateTime with null end collapse with no overlap', ->
-    @dateTimeNullEndCollapseNoOverlap.exec(@ctx).should.eql @dateTimeNullEndCollapseNoOverlapExpected.exec(@ctx)
-
-  it 'DateTime with null start collapse with no overlap', ->
-    @dateTimeNullStartCollapseNoOverlap.exec(@ctx).should.eql @dateTimeNullStartCollapseNoOverlapExpected.exec(@ctx)
-
-  it 'combines DateTime intervals separated by less than per unit', ->
-    @dateTimeCollapsePerDay.exec(@ctx).should.eql @dateTime1_15IntervalList.exec(@ctx)
-
-  it 'Quantity uses default per unit', ->
-    quantity_collapse = @quantityIntervalCollapseNoPer.exec(@ctx)
-    quantity_collapse.should.eql @expectedQuantityList.exec(@ctx)
-    quantity_collapse.should.eql @quantityIntervalCollapsePerUnit1.exec(@ctx)
-
-  it 'Quantity with separated intervals', ->
-    @collapseSeparatedQuantity.exec(@ctx).should.eql @quantitySeparatedBy3.exec(@ctx)
-
-  it 'Quantity combines disjoint intervals that are within per width', ->
-    @collapseSeparatedQuantityPer3.exec(@ctx).should.eql @expectedSeparatedQuantity.exec(@ctx)
-
-  it 'Quantity with units uses point type as default per value', ->
-    @collapseDisjointQuantityUnits.exec(@ctx).should.eql @expectedQuantityUnitsCollapse.exec(@ctx)
-
-  it 'Quantity with units disjoint but within per', ->
-    @collapseQuantityUnitsWithinPer.exec(@ctx).should.eql @expectedQuantityUnitsCollapse.exec(@ctx)
-
-  it 'Quantity with units disjoint and not within per', ->
-    @collapseQuantityUnitsNotWithinPer.exec(@ctx).should.eql @quantityMeterIntervalList.exec(@ctx)
-
-  it 'Quantity with units with null low value', ->
-    @collapseQuantityNullLowUnitsWithinPer.exec(@ctx).should.eql @collapseQuantityNullLowUnitsWithinPerExpected.exec(@ctx)
-
-  it 'Quantity with units with null low and high values', ->
-    @collapseQuantityIntervalListWithNulls.exec(@ctx).should.eql @collapseQuantityIntervalListWithNullsExpected.exec(@ctx)
-
-  it 'Quantity with units with null high value', ->
-    @collapseQuantityNullHighUnitsWithinPer.exec(@ctx).should.eql @collapseQuantityNullHighUnitsWithinPerExpected.exec(@ctx)
-
-  it 'Quantity Intervals no overlap with null low', ->
-    @collapseQuantityIntervalListWithNullLowNoOverlap.exec(@ctx).should.eql @collapseQuantityIntervalListWithNullLowNoOverlapExpected.exec(@ctx)
-
-  it 'Quantity Intervals no overlap with null high', ->
-    @collapseQuantityIntervalListWithNullHighNoOverlap.exec(@ctx).should.eql @collapseQuantityIntervalListWithNullHighNoOverlapExpected.exec(@ctx)
-
-  it 'with Interval that has null low values', ->
-    @collapseNullLowIntervalList.exec(@ctx).should.eql @expectedNullLowIntervalCollapse.exec(@ctx)
-
-  it 'with Interval that has null high values', ->
-    @collapseNullHighIntervalList.exec(@ctx).should.eql @expectedNullHighIntervalCollapse.exec(@ctx)
-
-  it 'with Date Interval that has null start values', ->
-    @dateTimeNullStartCollapse.exec(@ctx).should.eql @dateTimeNullStartCollapseExpected.exec(@ctx)
-
-  it 'with Date Interval that has null high values', ->
-    @dateTimeNullEndCollapse.exec(@ctx).should.eql @dateTimeNullEndCollapseExpected.exec(@ctx)
-
-  it 'with Date Interval that has null high and low values', ->
-    @dateTimeNullStartEndCollapse.exec(@ctx).should.eql @dateTimeNullStartEndCollapseExpected.exec(@ctx)
-
-  it 'should ignore nulls in list of Intervals', ->
-    @nullInCollapse.exec(@ctx).should.eql @expectedResultWithNull.exec(@ctx)
-
-  it.skip 'should return null if list is null', ->
-    # TODO: Translation Error
-    should.not.exist @nullCollapse.exec(@ctx)
-
-  it 'should use default per unit if per is expicitly null', ->
-    @nullPerCollapse.exec(@ctx).should.eql @expectedResultNullPer.exec(@ctx)
-
-prettyList = (array) ->
-  if not array?
-    return array
-  '{ ' + array.join(', ') + ' }'
-
-describe 'DateIntervalExpand', ->
-  @beforeEach ->
-    setup @, data
-
-  it 'expands a closed interval per day', ->
-    # define ClosedSinglePerDay: expand { Interval[@2018-01-01, @2018-01-03] } per day
-    a = @closedSinglePerDay.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }'
-
-  it 'expands a closed interval per week', ->
-    # define ClosedSinglePerWeek: expand { Interval[@2018-01-01, @2018-01-21] } per week
-    a = @closedSinglePerWeek.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01, 2018-01-07], [2018-01-08, 2018-01-14], [2018-01-15, 2018-01-21] }'
-
-  it 'expands a closed interval per month', ->
-    # define ClosedSinglePerMonth: expand { Interval[@2018-01-01, @2018-03-31] } per month
-    # define ClosedSinglePerMonthTrunc: expand { Interval[@2018-01-01, @2018-04-29] } per month
-    a = @closedSinglePerMonth.exec(@ctx)
-    b = @closedSinglePerMonthTrunc.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }'
-    prettyList(b).should.equal '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03], [2018-04, 2018-04] }'
-
-  it 'expands a closed interval per year', ->
-    # define ClosedSinglePerYear: expand { Interval[@2016-01-01, @2018-12-32] } per year
-    # define ClosedSinglePerYearTrunc: expand { Interval[@2016-01-01, @2019-12-30] } per year
-    a = @closedSinglePerYear.exec(@ctx)
-    b = @closedSinglePerYearTrunc.exec(@ctx)
-    prettyList(a).should.equal '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
-    prettyList(b).should.equal '{ [2016, 2016], [2017, 2017], [2018, 2018], [2019, 2019] }'
-
-  it 'ignores null item in list', ->
-    # define NullInList: expand { Interval[@2018-01-01, @2018-01-03], null } per day
-    a = @nullInList.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }'
-
-  it 'expands two overlapping intervals', ->
-    # define Overlapping: expand { Interval[@2018-01-01, @2018-01-03], Interval[@2018-01-02, @2018-01-04] } per day
-    a = @overlapping.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03], [2018-01-04, 2018-01-04] }'
-
-  it 'expands two non overlapping intervals', ->
-    # define NonOverlapping: expand { Interval[@2018-01-01, @2018-01-03], Interval[@2018-01-08, @2018-01-08] } per day
-    a = @nonOverlapping.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03], [2018-01-08, 2018-01-08] }'
-
-  it 'expands an interval with mid boundaries per day', ->
-    # define MidBoundariesPerDay: expand { Interval[@2017-12-30, @2018-01-01] } per day
-    a = @midBoundariesPerDay.exec(@ctx)
-    prettyList(a).should.equal '{ [2017-12-30, 2017-12-30], [2017-12-31, 2017-12-31], [2018-01-01, 2018-01-01] }'
-
-  it 'expands an interval with mid boundaries per month', ->
-    # define MidBoundariesPerMonth: expand { Interval[@2017-11-14, @2018-01-18] } per month
-    a = @midBoundariesPerMonth.exec(@ctx)
-    prettyList(a).should.equal '{ [2017-11, 2017-11], [2017-12, 2017-12], [2018-01, 2018-01] }'
-
-  it 'expands an interval with mid boundaries per year', ->
-    # define MidBoundariesPerYear: expand { Interval[@2016-04-06, @2018-04-06] } per year
-    a = @midBoundariesPerYear.exec(@ctx)
-    prettyList(a).should.equal '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
-
-  it 'expands an interval with default per', ->
-    # define NoPerDefaultDay: expand { Interval[@2018-01-01, @2018-01-03] }
-    a = @noPerDefaultDay.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }'
-
-    # define NoPerDefaultMonth: expand { Interval[@2018-01, @2018-03] }
-    a = @noPerDefaultMonth.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }'
-
-    # define NoPerDefaultYear: expand { Interval[@2016, @2018] }
-    a = @noPerDefaultYear.exec(@ctx)
-    prettyList(a).should.equal '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
-
-    # define NoPerDefaultMonthWithMismatch: expand { Interval[@2016, @2018-03] }
-    a = @noPerDefaultMonthWithMismatch.exec(@ctx)
-    prettyList(a).should.equal '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
-
-  it 'expands interval with open ends', ->
-    # define OpenStart: expand { Interval(@2018-01-01, @2018-01-03] } per day
-    a = @openStart.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }'
-
-    # define OpenEnd: expand { Interval[@2018-01-01, @2018-01-03) } per day
-    a = @openEnd.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02] }'
-
-    # define OpenBoth: expand { Interval(@2018-01-01, @2018-01-03) } per day
-    a = @openBoth.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-02, 2018-01-02] }'
-
-  it 'handles ends with mismatched precision', ->
-    # define MismatchPrecision: expand { Interval[@2018-01-01, @2018-03] } per month
-    e = '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }'
-    prettyList(@mismatchPrecision.exec(@ctx)).should.equal e
-
-    # define MismatchPrecisionResultLongerThanInput: expand { Interval[@2018-01, @2018-02-28] } per month
-    e = '{ [2018-01, 2018-01], [2018-02, 2018-02] }'
-    prettyList(@mismatchPrecisionResultLongerThanInput.exec(@ctx)).should.equal e
-
-  it 'returns an empty list if we get an empty list', ->
-    # define EmptyList: List<Interval<Date>>{}
-    a = @emptyList.exec(@ctx)
+  MIN_TIME_VALUE } = require('../../../lib/util/math');
+
+describe('Interval', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should properly represent an open interval', function() {
+    this.open.lowClosed.should.be.false();
+    this.open.highClosed.should.be.false();
+    this.open.low.exec(this.ctx).should.eql(new DateTime(2012, 1, 1));
+    return this.open.high.exec(this.ctx).should.eql(new DateTime(2013, 1, 1));
+  });
+
+  it('should properly represent a left-open interval', function() {
+    this.leftOpen.lowClosed.should.be.false();
+    this.leftOpen.highClosed.should.be.true();
+    this.leftOpen.low.exec(this.ctx).should.eql(new DateTime(2012, 1, 1));
+    return this.leftOpen.high.exec(this.ctx).should.eql(new DateTime(2013, 1, 1));
+  });
+
+  it('should properly represent a right-open interval', function() {
+    this.rightOpen.lowClosed.should.be.true();
+    this.rightOpen.highClosed.should.be.false();
+    this.rightOpen.low.exec(this.ctx).should.eql(new DateTime(2012, 1, 1));
+    return this.rightOpen.high.exec(this.ctx).should.eql(new DateTime(2013, 1, 1));
+  });
+
+  it('should properly represent a closed interval', function() {
+    this.closed.lowClosed.should.be.true();
+    this.closed.highClosed.should.be.true();
+    this.closed.low.exec(this.ctx).should.eql(new DateTime(2012, 1, 1));
+    return this.closed.high.exec(this.ctx).should.eql(new DateTime(2013, 1, 1));
+  });
+
+  return it('should exec to native Interval datatype', function() {
+    const ivl = this.open.exec(this.ctx);
+    ivl.should.be.instanceOf(Interval);
+    ivl.lowClosed.should.equal(this.open.lowClosed);
+    ivl.highClosed.should.equal(this.open.highClosed);
+    ivl.low.should.eql(new DateTime(2012, 1, 1));
+    return ivl.high.should.eql(new DateTime(2013, 1, 1));
+  });
+});
+
+describe('Equal', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should determine equal integer intervals', function() {
+    this.equalClosed.exec(this.ctx).should.be.true();
+    this.equalOpen.exec(this.ctx).should.be.true();
+    return this.equalOpenClosed.exec(this.ctx).should.be.true();
+  });
+
+  it('should determine unequal integer intervals', function() {
+    this.unequalClosed.exec(this.ctx).should.be.false();
+    this.unequalOpen.exec(this.ctx).should.be.false();
+    return this.unequalClosedOpen.exec(this.ctx).should.be.false();
+  });
+
+  it('should determine equal quantity intervals', function() {
+    this.equalQuantityClosed.exec(this.ctx).should.be.true();
+    this.equalQuantityOpen.exec(this.ctx).should.be.true();
+    return this.equalQuantityOpenClosed.exec(this.ctx).should.be.true();
+  });
+
+  it('should determine unequal quantity intervals', function() {
+    this.unequalQuantityClosed.exec(this.ctx).should.be.false();
+    this.unequalQuantityOpen.exec(this.ctx).should.be.false();
+    return this.unequalQuantityClosedOpen.exec(this.ctx).should.be.false();
+  });
+
+  it('should determine equal datetime intervals', function() {
+    this.equalDates.exec(this.ctx).should.be.true();
+    return this.equalDatesOpenClosed.exec(this.ctx).should.be.true();
+  });
+
+  return it('should operate correctly with imprecision', function() {
+    this.sameDays.exec(this.ctx).should.be.true();
+    this.differentDays.exec(this.ctx).should.be.false();
+    return should(this.differingPrecision.exec(this.ctx)).be.null();
+  });
+});
+
+describe('NotEqual', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should determine equal integer intervals', function() {
+    this.equalClosed.exec(this.ctx).should.be.false();
+    this.equalOpen.exec(this.ctx).should.be.false();
+    return this.equalOpenClosed.exec(this.ctx).should.be.false();
+  });
+
+  it('should determine unequal integer intervals', function() {
+    this.unequalClosed.exec(this.ctx).should.be.true();
+    this.unequalOpen.exec(this.ctx).should.be.true();
+    return this.unequalClosedOpen.exec(this.ctx).should.be.true();
+  });
+
+  it('should determine equal quantity intervals', function() {
+    this.equalQuantityClosed.exec(this.ctx).should.be.false();
+    this.equalQuantityOpen.exec(this.ctx).should.be.false();
+    return this.equalQuantityOpenClosed.exec(this.ctx).should.be.false();
+  });
+
+  it('should determine unequal quantity intervals', function() {
+    this.unequalQuantityClosed.exec(this.ctx).should.be.true();
+    this.unequalQuantityOpen.exec(this.ctx).should.be.true();
+    return this.unequalQuantityClosedOpen.exec(this.ctx).should.be.true();
+  });
+
+  it('should determine equal datetime intervals', function() {
+    this.equalDates.exec(this.ctx).should.be.false();
+    return this.equalDatesOpenClosed.exec(this.ctx).should.be.false();
+  });
+
+  return it('should operate correctly with imprecision', function() {
+    this.sameDays.exec(this.ctx).should.be.false();
+    this.differentDays.exec(this.ctx).should.be.true();
+    return should(this.differingPrecision.exec(this.ctx)).be.null();
+  });
+});
+
+describe('Contains', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should accept contained items', function() {
+    this.containsInt.exec(this.ctx).should.be.true();
+    this.containsReal.exec(this.ctx).should.be.true();
+    this.containsQuantity.exec(this.ctx).should.be.true();
+    this.containsQuantityInclusiveEdge.exec(this.ctx).should.be.true();
+    return this.containsDate.exec(this.ctx).should.be.true();
+  });
+
+  it('should reject uncontained items', function() {
+    this.notContainsInt.exec(this.ctx).should.be.false();
+    this.notContainsReal.exec(this.ctx).should.be.false();
+    this.notContainsQuantity.exec(this.ctx).should.be.false();
+    this.notContainsQuantityExclusiveEdge.exec(this.ctx).should.be.false();
+    return this.notContainsDate.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (int)', function() {
+    this.negInfBegContainsInt.exec(this.ctx).should.be.true();
+    this.negInfBegNotContainsInt.exec(this.ctx).should.be.false();
+    this.unknownOpenBegContainsInt.exec(this.ctx).should.be.true();
+    this.unknownClosedBegContainsInt.exec(this.ctx).should.be.true();
+    should(this.unknownBegMayContainInt.exec(this.ctx)).be.null();
+    this.unknownBegNotContainsInt.exec(this.ctx).should.be.false();
+    this.posInfEndContainsInt.exec(this.ctx).should.be.true();
+    this.posInfEndNotContainsInt.exec(this.ctx).should.be.false();
+    this.unknownOpenEndContainsInt.exec(this.ctx).should.be.true();
+    this.unknownClosedEndContainsInt.exec(this.ctx).should.be.true();
+    should(this.unknownEndMayContainInt.exec(this.ctx)).be.null();
+    return this.unknownEndNotContainsInt.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (date)', function() {
+    this.negInfBegContainsDate.exec(this.ctx).should.be.true();
+    this.negInfBegNotContainsDate.exec(this.ctx).should.be.false();
+    should(this.unknownOpenBegMayContainDate.exec(this.ctx)).be.null();
+    this.unknownClosedBegContainsDate.exec(this.ctx).should.be.true();
+    should(this.unknownBegMayContainDate.exec(this.ctx)).be.null();
+    this.unknownBegNotContainsDate.exec(this.ctx).should.be.false();
+    this.posInfEndContainsDate.exec(this.ctx).should.be.true();
+    this.posInfEndNotContainsDate.exec(this.ctx).should.be.false();
+    this.unknownOpenEndContainsDate.exec(this.ctx).should.be.true();
+    this.unknownClosedEndContainsDate.exec(this.ctx).should.be.true();
+    should(this.unknownEndMayContainDate.exec(this.ctx)).be.null();
+    return this.unknownEndNotContainsDate.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle imprecision', function() {
+    this.containsImpreciseDate.exec(this.ctx).should.be.true();
+    this.notContainsImpreciseDate.exec(this.ctx).should.be.false();
+    should(this.mayContainImpreciseDate.exec(this.ctx)).be.null();
+    this.impreciseContainsDate.exec(this.ctx).should.be.true();
+    this.impreciseNotContainsDate.exec(this.ctx).should.be.false();
+    return should(this.impreciseMayContainDate.exec(this.ctx)).be.null();
+  });
+
+  return it('should correctly compare using the requested precision', function() {
+    this.containsDayOfDateLowEdge.exec(this.ctx).should.be.true();
+    this.notContainsDayOfDateHighEdgeOpen.exec(this.ctx).should.be.false();
+    this.containsDayOfDateHighEdgeClosed.exec(this.ctx).should.be.true();
+    this.notContainsDayOfDateLowEdge.exec(this.ctx).should.be.false();
+    this.notContainsDayOfDateBeyondHighEdge.exec(this.ctx).should.be.false();
+    this.containsDayOfDateImpreciseLowEdge.exec(this.ctx).should.be.true();
+    this.notContainsDayOfDateImpreciseHighEdgeOpen.exec(this.ctx).should.be.false();
+    this.containsDayOfDateImpreciseHighEdgeClosed.exec(this.ctx).should.be.true();
+    this.containsDayOfDateVeryImpreciseMiddle.exec(this.ctx).should.be.true();
+    this.notContainsDayOfDateVeryImpreciseLow.exec(this.ctx).should.be.false();
+    this.notContainsDayOfDateVeryImpreciseHighEdgeOpen.exec(this.ctx).should.be.false();
+    should(this.mayContainDayOfDateVeryImpreciseLow.exec(this.ctx)).be.null();
+    should(this.mayContainDayOfDateVeryImpreciseHigh.exec(this.ctx)).be.null();
+    return should(this.mayContainDayOfDateVeryImpreciseSurrounding.exec(this.ctx)).be.null();
+  });
+});
+
+describe('In', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should accept contained items', function() {
+    this.containsInt.exec(this.ctx).should.be.true();
+    this.containsReal.exec(this.ctx).should.be.true();
+    this.containsQuantity.exec(this.ctx).should.be.true();
+    this.containsQuantityInclusiveEdge.exec(this.ctx).should.be.true();
+    return this.containsDate.exec(this.ctx).should.be.true();
+  });
+
+  it('should reject uncontained items', function() {
+    this.notContainsInt.exec(this.ctx).should.be.false();
+    this.notContainsReal.exec(this.ctx).should.be.false();
+    this.notContainsQuantity.exec(this.ctx).should.be.false();
+    this.notContainsQuantityExclusiveEdge.exec(this.ctx).should.be.false();
+    return this.notContainsDate.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (int)', function() {
+    this.negInfBegContainsInt.exec(this.ctx).should.be.true();
+    this.negInfBegNotContainsInt.exec(this.ctx).should.be.false();
+    this.unknownOpenBegContainsInt.exec(this.ctx).should.be.true();
+    this.unknownClosedBegContainsInt.exec(this.ctx).should.be.true();
+    should(this.unknownBegMayContainInt.exec(this.ctx)).be.null();
+    this.unknownBegNotContainsInt.exec(this.ctx).should.be.false();
+    this.posInfEndContainsInt.exec(this.ctx).should.be.true();
+    this.posInfEndNotContainsInt.exec(this.ctx).should.be.false();
+    this.unknownOpenEndContainsInt.exec(this.ctx).should.be.true();
+    this.unknownClosedEndContainsInt.exec(this.ctx).should.be.true();
+    should(this.unknownEndMayContainInt.exec(this.ctx)).be.null();
+    return this.unknownEndNotContainsInt.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (date)', function() {
+    this.negInfBegContainsDate.exec(this.ctx).should.be.true();
+    this.negInfBegNotContainsDate.exec(this.ctx).should.be.false();
+    should(this.unknownOpenBegMayContainDate.exec(this.ctx)).be.null();
+    this.unknownClosedBegContainsDate.exec(this.ctx).should.be.true();
+    should(this.unknownBegMayContainDate.exec(this.ctx)).be.null();
+    this.unknownBegNotContainsDate.exec(this.ctx).should.be.false();
+    this.posInfEndContainsDate.exec(this.ctx).should.be.true();
+    this.posInfEndNotContainsDate.exec(this.ctx).should.be.false();
+    this.unknownOpenEndContainsDate.exec(this.ctx).should.be.true();
+    this.unknownClosedEndContainsDate.exec(this.ctx).should.be.true();
+    should(this.unknownEndMayContainDate.exec(this.ctx)).be.null();
+    return this.unknownEndNotContainsDate.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle imprecision', function() {
+    this.containsImpreciseDate.exec(this.ctx).should.be.true();
+    this.notContainsImpreciseDate.exec(this.ctx).should.be.false();
+    should(this.mayContainImpreciseDate.exec(this.ctx)).be.null();
+    this.impreciseContainsDate.exec(this.ctx).should.be.true();
+    this.impreciseNotContainsDate.exec(this.ctx).should.be.false();
+    return should(this.impreciseMayContainDate.exec(this.ctx)).be.null();
+  });
+
+  return it('should correctly compare using the requested precision', function() {
+    this.containsDayOfDateLowEdge.exec(this.ctx).should.be.true();
+    this.notContainsDayOfDateHighEdgeOpen.exec(this.ctx).should.be.false();
+    this.containsDayOfDateHighEdgeClosed.exec(this.ctx).should.be.true();
+    this.notContainsDayOfDateLowEdge.exec(this.ctx).should.be.false();
+    this.notContainsDayOfDateBeyondHighEdge.exec(this.ctx).should.be.false();
+    this.containsDayOfDateImpreciseLowEdge.exec(this.ctx).should.be.true();
+    this.notContainsDayOfDateImpreciseHighEdgeOpen.exec(this.ctx).should.be.false();
+    this.containsDayOfDateImpreciseHighEdgeClosed.exec(this.ctx).should.be.true();
+    this.containsDayOfDateVeryImpreciseMiddle.exec(this.ctx).should.be.true();
+    this.notContainsDayOfDateVeryImpreciseLow.exec(this.ctx).should.be.false();
+    this.notContainsDayOfDateVeryImpreciseHighEdgeOpen.exec(this.ctx).should.be.false();
+    should(this.mayContainDayOfDateVeryImpreciseLow.exec(this.ctx)).be.null();
+    should(this.mayContainDayOfDateVeryImpreciseHigh.exec(this.ctx)).be.null();
+    return should(this.mayContainDayOfDateVeryImpreciseSurrounding.exec(this.ctx)).be.null();
+  });
+});
+
+describe('Includes', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should accept included items', function() {
+    this.includesIntIvl.exec(this.ctx).should.be.true();
+    this.includesRealIvl.exec(this.ctx).should.be.true();
+    return this.includesDateIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should reject unincluded items', function() {
+    this.notIncludesIntIvl.exec(this.ctx).should.be.false();
+    this.notIncludesRealIvl.exec(this.ctx).should.be.false();
+    return this.notIncludesDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (int)', function() {
+    this.negInfBegIncludesIntIvl.exec(this.ctx).should.be.true();
+    this.negInfBegNotIncludesIntIvl.exec(this.ctx).should.be.false();
+    this.unknownBegIncludesIntIvl.exec(this.ctx).should.be.true();
+    should(this.unknownBegMayIncludeIntIvl.exec(this.ctx)).be.null();
+    this.unknownBegNotIncludesIntIvl.exec(this.ctx).should.be.false();
+    this.posInfEndIncludesIntIvl.exec(this.ctx).should.be.true();
+    this.posInfEndNotIncludesIntIvl.exec(this.ctx).should.be.false();
+    this.unknownEndIncludesIntIvl.exec(this.ctx).should.be.true();
+    should(this.unknownEndMayIncludeIntIvl.exec(this.ctx)).be.null();
+    return this.unknownEndNotIncludesIntIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (date)', function() {
+    this.negInfBegIncludesDateIvl.exec(this.ctx).should.be.true();
+    this.negInfBegNotIncludesDateIvl.exec(this.ctx).should.be.false();
+    this.unknownBegIncludesDateIvl.exec(this.ctx).should.be.true();
+    should(this.unknownBegMayIncludeDateIvl.exec(this.ctx)).be.null();
+    this.unknownBegNotIncludesDateIvl.exec(this.ctx).should.be.false();
+    this.posInfEndIncludesDateIvl.exec(this.ctx).should.be.true();
+    this.posInfEndNotIncludesDateIvl.exec(this.ctx).should.be.false();
+    this.unknownEndIncludesDateIvl.exec(this.ctx).should.be.true();
+    should(this.unknownEndMayIncludeDateIvl.exec(this.ctx)).be.null();
+    return this.unknownEndNotIncludesDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle imprecision', function() {
+    this.includesImpreciseDateIvl.exec(this.ctx).should.be.true();
+    this.notIncludesImpreciseDateIvl.exec(this.ctx).should.be.false();
+    should(this.mayIncludeImpreciseDateIvl.exec(this.ctx)).be.null();
+    this.impreciseIncludesDateIvl.exec(this.ctx).should.be.true();
+    this.impreciseNotIncludesDateIvl.exec(this.ctx).should.be.false();
+    return should(this.impreciseMayIncludeDateIvl.exec(this.ctx)).be.null();
+  });
+
+  it('should correctly compare using the requested precision', function() {
+    this.includesDayOfIvlLowEdge.exec(this.ctx).should.be.true();
+    this.includesDayOfIvlHighEdge.exec(this.ctx).should.be.true();
+    this.notIncludesDayOfIvlLowEdge.exec(this.ctx).should.be.false();
+    this.notIncludesDayOfIvlHighEdge.exec(this.ctx).should.be.false();
+    this.includesDayOfIvlImpreciseLowEdge.exec(this.ctx).should.be.true();
+    this.includesDayOfIvlImpreciseHighEdge.exec(this.ctx).should.be.true();
+    this.includesDayOfIvlVeryImpreciseMiddle.exec(this.ctx).should.be.true();
+    this.notIncludesDayOfIvlVeryImpreciseLow.exec(this.ctx).should.be.false();
+    this.notIncludesDayOfIvlVeryImpreciseHigh.exec(this.ctx).should.be.false();
+    should(this.mayIncludeDayOfIvlVeryImpreciseLow.exec(this.ctx)).be.null();
+    should(this.mayIncludeDayOfIvlVeryImpreciseHigh.exec(this.ctx)).be.null();
+    return should(this.mayIncludeDayOfIvlVeryImpreciseSurrounding.exec(this.ctx)).be.null();
+  });
+
+  return it('should correctly handle point inclusion', function() {
+    this.impreciseIncludesDate.exec(this.ctx).should.be.true();
+    this.impreciseDoesntIncludeDate.exec(this.ctx).should.be.false();
+    this.intervalIncludesQuantity.exec(this.ctx).should.be.true();
+    return this.intervalDoesntIncludeQuantity.exec(this.ctx).should.be.false();
+  });
+});
+
+describe('ProperlyIncludes', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should accept properly included intervals', function() {
+    this.properlyIncludesIntIvl.exec(this.ctx).should.be.true();
+    this.properlyIncludesIntBeginsIvl.exec(this.ctx).should.be.true();
+    this.properlyIncludesIntEndsIvl.exec(this.ctx).should.be.true();
+    this.properlyIncludesRealIvl.exec(this.ctx).should.be.true();
+    return this.properlyIncludesDateIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should reject intervals not properly included', function() {
+    this.notProperlyIncludesIntIvl.exec(this.ctx).should.be.false();
+    this.notProperlyIncludesRealIvl.exec(this.ctx).should.be.false();
+    return this.notProperlyIncludesDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (int)', function() {
+    this.posInfEndProperlyIncludesIntIvl.exec(this.ctx).should.be.true();
+    this.posInfEndNotProperlyIncludesIntIvl.exec(this.ctx).should.be.false();
+    return should(this.unknownEndMayProperlyIncludeIntIvl.exec(this.ctx)).be.null();
+  });
+
+  return it('should correctly compare using the requested precision', function() {
+    this.properlyIncludesDayOfIvlLowEdge.exec(this.ctx).should.be.true();
+    this.properlyIncludesDayOfIvlHighEdge.exec(this.ctx).should.be.true();
+    this.properlyIncludesDayOfIvlNearEdges.exec(this.ctx).should.be.true();
+    this.notProperlyIncludesDayOfIvlSameEdges.exec(this.ctx).should.be.false();
+    should(this.mayProperlyIncludeDayOfIvlVeryImpreciseLow.exec(this.ctx)).be.null();
+    should(this.mayProperlyIncludeDayOfIvlVeryImpreciseHigh.exec(this.ctx)).be.null();
+    should(this.mayProperlyIncludeDayOfIvlVeryImpreciseLowAndHigh.exec(this.ctx)).be.null();
+    return should(this.mayProperlyIncludeDayOfIvlVeryImpreciseSurrounding.exec(this.ctx)).be.null();
+  });
+});
+
+describe('IncludedIn', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should accept included items', function() {
+    this.includesIntIvl.exec(this.ctx).should.be.true();
+    this.includesRealIvl.exec(this.ctx).should.be.true();
+    return this.includesDateIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should reject unincluded items', function() {
+    this.notIncludesIntIvl.exec(this.ctx).should.be.false();
+    this.notIncludesRealIvl.exec(this.ctx).should.be.false();
+    return this.notIncludesDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (int)', function() {
+    this.negInfBegIncludedInIntIvl.exec(this.ctx).should.be.true();
+    this.negInfBegNotIncludedInIntIvl.exec(this.ctx).should.be.false();
+    this.unknownBegIncludedInIntIvl.exec(this.ctx).should.be.true();
+    should(this.unknownBegMayBeIncludedInIntIvl.exec(this.ctx)).be.null();
+    this.unknownBegNotIncludedInIntIvl.exec(this.ctx).should.be.false();
+    this.posInfEndIncludedInIntIvl.exec(this.ctx).should.be.true();
+    this.posInfEndNotIncludedInIntIvl.exec(this.ctx).should.be.false();
+    this.unknownEndIncludedInIntIvl.exec(this.ctx).should.be.true();
+    should(this.unknownEndMayBeIncludedInIntIvl.exec(this.ctx)).be.null();
+    return this.unknownEndNotIncludedInIntIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (date)', function() {
+    this.negInfBegIncludedInDateIvl.exec(this.ctx).should.be.true();
+    this.negInfBegNotIncludedInDateIvl.exec(this.ctx).should.be.false();
+    this.unknownBegIncludedInDateIvl.exec(this.ctx).should.be.true();
+    should(this.unknownBegMayBeIncludedInDateIvl.exec(this.ctx)).be.null();
+    this.unknownBegNotIncludedInDateIvl.exec(this.ctx).should.be.false();
+    this.posInfEndIncludedInDateIvl.exec(this.ctx).should.be.true();
+    this.posInfEndNotIncludedInDateIvl.exec(this.ctx).should.be.false();
+    this.unknownEndIncludedInDateIvl.exec(this.ctx).should.be.true();
+    should(this.unknownEndMayBeIncludedInDateIvl.exec(this.ctx)).be.null();
+    return this.unknownEndNotIncludedInDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle imprecision', function() {
+    this.includesImpreciseDateIvl.exec(this.ctx).should.be.true();
+    this.notIncludesImpreciseDateIvl.exec(this.ctx).should.be.false();
+    should(this.mayIncludeImpreciseDateIvl.exec(this.ctx)).be.null();
+    this.impreciseIncludesDateIvl.exec(this.ctx).should.be.true();
+    this.impreciseNotIncludesDateIvl.exec(this.ctx).should.be.false();
+    return should(this.impreciseMayIncludeDateIvl.exec(this.ctx)).be.null();
+  });
+
+  it('should correctly compare using the requested precision', function() {
+    this.includesDayOfIvlLowEdge.exec(this.ctx).should.be.true();
+    this.includesDayOfIvlHighEdge.exec(this.ctx).should.be.true();
+    this.notIncludesDayOfIvlLowEdge.exec(this.ctx).should.be.false();
+    this.notIncludesDayOfIvlHighEdge.exec(this.ctx).should.be.false();
+    this.includesDayOfIvlImpreciseLowEdge.exec(this.ctx).should.be.true();
+    this.includesDayOfIvlImpreciseHighEdge.exec(this.ctx).should.be.true();
+    this.includesDayOfIvlVeryImpreciseMiddle.exec(this.ctx).should.be.true();
+    this.notIncludesDayOfIvlVeryImpreciseLow.exec(this.ctx).should.be.false();
+    this.notIncludesDayOfIvlVeryImpreciseHigh.exec(this.ctx).should.be.false();
+    should(this.mayIncludeDayOfIvlVeryImpreciseLow.exec(this.ctx)).be.null();
+    should(this.mayIncludeDayOfIvlVeryImpreciseHigh.exec(this.ctx)).be.null();
+    return should(this.mayIncludeDayOfIvlVeryImpreciseSurrounding.exec(this.ctx)).be.null();
+  });
+
+  return it('should correctly handle point comparisons', function() {
+    this.includesDayInInterval.exec(this.ctx).should.be.true();
+    this.doesNotIncludeDayInInterval.exec(this.ctx).should.be.false();
+    this.quantityIncludedInterval.exec(this.ctx).should.be.true();
+    return this.quantityNotIncludedInterval.exec(this.ctx).should.be.false();
+  });
+});
+
+
+describe('ProperlyIncludedIn', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should accept properly included intervals', function() {
+    this.properlyIncludesIntIvl.exec(this.ctx).should.be.true();
+    this.properlyIncludesIntBeginsIvl.exec(this.ctx).should.be.true();
+    this.properlyIncludesIntEndsIvl.exec(this.ctx).should.be.true();
+    this.properlyIncludesRealIvl.exec(this.ctx).should.be.true();
+    return this.properlyIncludesDateIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should reject intervals not properly included', function() {
+    this.notProperlyIncludesIntIvl.exec(this.ctx).should.be.false();
+    this.notProperlyIncludesRealIvl.exec(this.ctx).should.be.false();
+    return this.notProperlyIncludesDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (int)', function() {
+    this.posInfEndProperlyIncludedInDateIvl.exec(this.ctx).should.be.true();
+    this.posInfEndNotProperlyIncludedInDateIvl.exec(this.ctx).should.be.false();
+    return should(this.unknownEndMayBeProperlyIncludedInDateIvl.exec(this.ctx)).be.null();
+  });
+
+  return it('should correctly compare using the requested precision', function() {
+    this.properlyIncludesDayOfIvlLowEdge.exec(this.ctx).should.be.true();
+    this.properlyIncludesDayOfIvlHighEdge.exec(this.ctx).should.be.true();
+    this.properlyIncludesDayOfIvlNearEdges.exec(this.ctx).should.be.true();
+    this.notProperlyIncludesDayOfIvlSameEdges.exec(this.ctx).should.be.false();
+    should(this.mayProperlyIncludeDayOfIvlVeryImpreciseLow.exec(this.ctx)).be.null();
+    should(this.mayProperlyIncludeDayOfIvlVeryImpreciseHigh.exec(this.ctx)).be.null();
+    should(this.mayProperlyIncludeDayOfIvlVeryImpreciseLowAndHigh.exec(this.ctx)).be.null();
+    return should(this.mayProperlyIncludeDayOfIvlVeryImpreciseSurrounding.exec(this.ctx)).be.null();
+  });
+});
+
+describe('After', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should accept intervals before it', function() {
+    this.afterIntIvl.exec(this.ctx).should.be.true();
+    this.afterRealIvl.exec(this.ctx).should.be.true();
+    return this.afterDateIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should reject intervals on or after it', function() {
+    this.notAfterIntIvl.exec(this.ctx).should.be.false();
+    this.notAfterRealIvl.exec(this.ctx).should.be.false();
+    return this.notAfterDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (int)', function() {
+    this.negInfBegNotAfterIntIvl.exec(this.ctx).should.be.false();
+    should(this.unknownBegMayBeAfterIntIvl.exec(this.ctx)).be.null();
+    this.unknownBegNotAfterIntIvl.exec(this.ctx).should.be.false();
+    this.posInfEndAfterIntIvl.exec(this.ctx).should.be.true();
+    this.posInfEndNotAfterIntIvl.exec(this.ctx).should.be.false();
+    this.unknownEndAfterIntIvl.exec(this.ctx).should.be.true();
+    return this.unknownEndNotAfterIntIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (date)', function() {
+    this.negInfBegNotAfterDateIvl.exec(this.ctx).should.be.false();
+    should(this.unknownBegMayBeAfterDateIvl.exec(this.ctx)).be.null();
+    this.unknownBegNotAfterDateIvl.exec(this.ctx).should.be.false();
+    this.posInfEndAfterDateIvl.exec(this.ctx).should.be.true();
+    this.posInfEndNotAfterDateIvl.exec(this.ctx).should.be.false();
+    this.unknownEndAfterDateIvl.exec(this.ctx).should.be.true();
+    return this.unknownEndNotAfterDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle imprecision', function() {
+    this.afterImpreciseDateIvl.exec(this.ctx).should.be.true();
+    should(this.notAfterImpreciseDateIvl.exec(this.ctx)).be.null();
+    should(this.mayBeAfterImpreciseDateIvl.exec(this.ctx)).be.null();
+    this.impreciseAfterDateIvl.exec(this.ctx).should.be.true();
+    // meets with uncertainty due to toClose
+    should(this.impreciseNotAfterDateIvl.exec(this.ctx)).be.null();
+    return should(this.impreciseMayBeAfterDateIvl.exec(this.ctx)).be.null();
+  });
+
+  return it('should correctly compare using the requested precision', function() {
+    this.afterDayOfIvl.exec(this.ctx).should.be.true();
+    this.beforeDayOfIvl.exec(this.ctx).should.be.false();
+    this.startsSameDayOfIvlEnd.exec(this.ctx).should.be.false();
+    this.endsSameDayOfIvlStart.exec(this.ctx).should.be.false();
+    should(this.mayBeAfterDayOfImpreciseIvl.exec(this.ctx)).be.null();
+    return this.mayBeBeforeDayOfImpreciseIvl.exec(this.ctx).should.be.false();
+  });
+});
+
+describe('Before', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should accept intervals before it', function() {
+    this.beforeIntIvl.exec(this.ctx).should.be.true();
+    this.beforeRealIvl.exec(this.ctx).should.be.true();
+    return this.beforeDateIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should reject intervals on or after it', function() {
+    this.notBeforeIntIvl.exec(this.ctx).should.be.false();
+    this.notBeforeRealIvl.exec(this.ctx).should.be.false();
+    return this.notBeforeDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (int)', function() {
+    this.negInfBegBeforeIntIvl.exec(this.ctx).should.be.true();
+    this.negInfBegNotBeforeIntIvl.exec(this.ctx).should.be.false();
+    this.unknownBegBeforeIntIvl.exec(this.ctx).should.be.true();
+    this.unknownBegNotBeforeIntIvl.exec(this.ctx).should.be.false();
+    this.posInfEndNotBeforeIntIvl.exec(this.ctx).should.be.false();
+    should(this.unknownEndMayBeBeforeIntIvl.exec(this.ctx)).be.null();
+    return this.unknownEndNotBeforeIntIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (date)', function() {
+    this.negInfBegBeforeDateIvl.exec(this.ctx).should.be.true();
+    this.negInfBegNotBeforeDateIvl.exec(this.ctx).should.be.false();
+    this.unknownBegBeforeDateIvl.exec(this.ctx).should.be.true();
+    this.unknownBegNotBeforeDateIvl.exec(this.ctx).should.be.false();
+    this.posInfEndNotBeforeDateIvl.exec(this.ctx).should.be.false();
+    should(this.unknownEndMayBeBeforeDateIvl.exec(this.ctx)).be.null();
+    return this.unknownEndNotBeforeDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle imprecision', function() {
+    this.beforeImpreciseDateIvl.exec(this.ctx).should.be.true();
+    // meets with uncertaintity due to toClose
+    should(this.notBeforeImpreciseDateIvl.exec(this.ctx)).be.null();
+    should(this.mayBeBeforeImpreciseDateIvl.exec(this.ctx)).be.null();
+    this.impreciseBeforeDateIvl.exec(this.ctx).should.be.true();
+    should(this.impreciseNotBeforeDateIvl.exec(this.ctx)).be.null();
+    return should(this.impreciseMayBeBeforeDateIvl.exec(this.ctx)).be.null();
+  });
+
+  return it('should correctly compare using the requested precision', function() {
+    this.afterDayOfIvl.exec(this.ctx).should.be.false();
+    this.beforeDayOfIvl.exec(this.ctx).should.be.true();
+    this.startsSameDayOfIvlEnd.exec(this.ctx).should.be.false();
+    this.endsSameDayOfIvlStart.exec(this.ctx).should.be.false();
+    this.mayBeAfterDayOfImpreciseIvl.exec(this.ctx).should.be.false();
+    return should(this.mayBeBeforeDayOfImpreciseIvl.exec(this.ctx)).be.null();
+  });
+});
+
+describe('BeforeOrOn', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should handle nominal datetime interval situations', function() {
+    this.meetsAfterDateIvl.exec(this.ctx).should.be.false();
+    this.meetsBeforeDateIvl.exec(this.ctx).should.be.true();
+    this.afterDateIvl.exec(this.ctx).should.be.false();
+    return this.beforeDateIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should correctly handle imprecision', function() {
+    this.mayMeetAfterImpreciseDateIvl.exec(this.ctx).should.be.false();
+    should(this.mayMeetBeforeImpreciseDateIvl.exec(this.ctx)).be.null();
+    this.notMeetsImpreciseDateIvl.exec(this.ctx).should.be.false();
+    this.impreciseMayMeetAfterDateIvl.exec(this.ctx).should.be.false();
+    this.impreciseMayMeetBeforeDateIvl.exec(this.ctx).should.be.true();
+    return this.impreciseNotMeetsDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly compare using the requested precision', function() {
+    this.meetsAfterDayOfIvl.exec(this.ctx).should.be.false();
+    this.meetsBeforeDayOfIvl.exec(this.ctx).should.be.true();
+    this.notMeetsDayOfIvl.exec(this.ctx).should.be.false();
+    this.notMeetsDayOfImpreciseIVL.exec(this.ctx).should.be.false();
+    this.mayMeetAfterDayOfImpreciseIvl.exec(this.ctx).should.be.false();
+    return should(this.mayMeetBeforeDayOfImpreciseIvl.exec(this.ctx)).be.null();
+  });
+
+  it('should handle intervals with null end', function() {
+    this.beforeNullEndIvl.exec(this.ctx).should.be.true();
+    this.afterStartNullEndIvl.exec(this.ctx).should.be.false();
+    should(this.nullEndStartBeforeIvl.exec(this.ctx)).be.null();
+    return should(this.nullEndStartAfterIvl.exec(this.ctx)).be.null();
+  });
+
+  it('should handle intervals with null start', function() {
+    should(this.endsBeforeNullStartIvlEnds.exec(this.ctx)).be.null();
+    should(this.afterEndOfNullStartIvl.exec(this.ctx)).be.null();
+    this.nullStartStartBeforeIvl.exec(this.ctx).should.be.true();
+    return this.nullStartStartAfterIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should handle null on either side', function() {
+    should(this.dateIvlBeforeNull.exec(this.ctx)).be.null();
+    return should(this.nullBeforeDateIvl.exec(this.ctx)).be.null();
+  });
+
+  it('should handle Date and DateTime on either side', function() {
+    this.dateTimeBeforeDateIvl.exec(this.ctx).should.be.true();
+    this.dateBeforeDateIvl.exec(this.ctx).should.be.true();
+    this.dateIvlBeforeDateTime.exec(this.ctx).should.be.true();
+    return this.dateIvlBeforeDate.exec(this.ctx).should.be.true();
+  });
+
+  return it('should handle Interval<Date> and Interval<DateTime> on either side', function() {
+    this.dateOnlyIvlBeforeDateIvl.exec(this.ctx).should.be.true();
+    this.dateIvlAfterDateOnlyIvl.exec(this.ctx).should.be.false();
+    return this.dateOnlyMeetsBeforeDateIvl.exec(this.ctx).should.be.true();
+  });
+});
+
+describe('AfterOrOn', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should handle nominal datetime interval situations', function() {
+    this.meetsAfterDateIvl.exec(this.ctx).should.be.true();
+    this.meetsBeforeDateIvl.exec(this.ctx).should.be.false();
+    this.afterDateIvl.exec(this.ctx).should.be.true();
+    return this.beforeDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle imprecision', function() {
+    should(this.mayMeetAfterImpreciseDateIvl.exec(this.ctx)).be.null();
+    this.mayMeetBeforeImpreciseDateIvl.exec(this.ctx).should.be.false();
+    this.notMeetsImpreciseDateIvl.exec(this.ctx).should.be.false();
+    this.impreciseMayMeetAfterDateIvl.exec(this.ctx).should.be.true();
+    this.impreciseMayMeetBeforeDateIvl.exec(this.ctx).should.be.false();
+    return this.impreciseNotMeetsDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly compare using the requested precision', function() {
+    this.meetsAfterDayOfIvl.exec(this.ctx).should.be.true();
+    this.meetsBeforeDayOfIvl.exec(this.ctx).should.be.false();
+    this.notMeetsDayOfIvl.exec(this.ctx).should.be.true();
+    this.notMeetsDayOfImpreciseIVL.exec(this.ctx).should.be.true();
+    should(this.mayMeetAfterDayOfImpreciseIvl.exec(this.ctx)).be.null();
+    return this.mayMeetBeforeDayOfImpreciseIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should handle intervals with null end', function() {
+    should(this.beforeNullEndIvl.exec(this.ctx)).be.null();
+    should(this.afterStartNullEndIvl.exec(this.ctx)).be.null();
+    this.nullEndStartBeforeIvl.exec(this.ctx).should.be.false();
+    return this.nullEndStartAfterIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should handle intervals with null start', function() {
+    this.endsBeforeNullStartIvlEnds.exec(this.ctx).should.be.false();
+    this.afterEndOfNullStartIvl.exec(this.ctx).should.be.true();
+    should(this.nullStartStartBeforeIvl.exec(this.ctx)).be.null();
+    return should(this.nullStartStartAfterIvl.exec(this.ctx)).be.null();
+  });
+
+  it('should handle null on either side', function() {
+    should(this.dateIvlBeforeNull.exec(this.ctx)).be.null();
+    return should(this.nullBeforeDateIvl.exec(this.ctx)).be.null();
+  });
+
+  it('should handle Date and DateTime on either side', function() {
+    this.dateTimeBeforeDateIvl.exec(this.ctx).should.be.false();
+    this.dateBeforeDateIvl.exec(this.ctx).should.be.false();
+    this.dateIvlBeforeDateTime.exec(this.ctx).should.be.false();
+    return this.dateIvlBeforeDate.exec(this.ctx).should.be.false();
+  });
+
+  return it('should handle Interval<Date> and Interval<DateTime> on either side', function() {
+    this.dateOnlyIvlBeforeDateIvl.exec(this.ctx).should.be.false();
+    this.dateIvlAfterDateOnlyIvl.exec(this.ctx).should.be.true();
+    return this.dateOnlyMeetsAfterDateIvl.exec(this.ctx).should.be.true();
+  });
+});
+
+describe('Meets', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should accept intervals meeting after it', function() {
+    this.meetsBeforeIntIvl.exec(this.ctx).should.be.true();
+    this.meetsBeforeRealIvl.exec(this.ctx).should.be.true();
+    return this.meetsBeforeDateIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should accept intervals meeting before it', function() {
+    this.meetsAfterIntIvl.exec(this.ctx).should.be.true();
+    this.meetsAfterRealIvl.exec(this.ctx).should.be.true();
+    return this.meetsAfterDateIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should reject intervals not meeting it', function() {
+    this.notMeetsIntIvl.exec(this.ctx).should.be.false();
+    this.notMeetsRealIvl.exec(this.ctx).should.be.false();
+    return this.notMeetsDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (int)', function() {
+    this.negInfBegMeetsBeforeIntIvl.exec(this.ctx).should.be.true();
+    this.negInfBegNotMeetsIntIvl.exec(this.ctx).should.be.false();
+    this.intIvlNotMeetsNegInfBeg.exec(this.ctx).should.be.false();
+    this.unknownBegMeetsBeforeIntIvl.exec(this.ctx).should.be.true();
+    should(this.unknownBegMayMeetAfterIntIvl.exec(this.ctx)).be.null();
+    this.unknownBegNotMeetsIntIvl.exec(this.ctx).should.be.false();
+    should(this.intIvlMayMeetBeforeUnknownBeg.exec(this.ctx)).be.null();
+    this.posInfEndMeetsAfterIntIvl.exec(this.ctx).should.be.true();
+    this.posInfEndNotMeetsIntIvl.exec(this.ctx).should.be.false();
+    this.intIvlNotMeetsPosInfEnd.exec(this.ctx).should.be.false();
+    this.unknownEndMeetsAfterIntIvl.exec(this.ctx).should.be.true();
+    should(this.unknownEndMayMeetBeforeIntIvl.exec(this.ctx)).be.null();
+    this.unknownEndNotMeetsIntIvl.exec(this.ctx).should.be.false();
+    return should(this.intIvlMayMeetAfterUnknownEnd.exec(this.ctx)).be.null();
+  });
+
+  it('should correctly handle null endpoints (date)', function() {
+    this.negInfBegMeetsBeforeDateIvl.exec(this.ctx).should.be.true();
+    this.negInfBegNotMeetsDateIvl.exec(this.ctx).should.be.false();
+    this.dateIvlNotMeetsNegInfBeg.exec(this.ctx).should.be.false();
+    this.unknownBegMeetsBeforeDateIvl.exec(this.ctx).should.be.true();
+    should(this.unknownBegMayMeetAfterDateIvl.exec(this.ctx)).be.null();
+    this.unknownBegNotMeetsDateIvl.exec(this.ctx).should.be.false();
+    should(this.dateIvlMayMeetBeforeUnknownBeg.exec(this.ctx)).be.null();
+    this.posInfEndMeetsAfterDateIvl.exec(this.ctx).should.be.true();
+    this.posInfEndNotMeetsDateIvl.exec(this.ctx).should.be.false();
+    this.dateIvlNotMeetsPosInfEnd.exec(this.ctx).should.be.false();
+    this.unknownEndMeetsAfterDateIvl.exec(this.ctx).should.be.true();
+    should(this.unknownEndMayMeetBeforeDateIvl.exec(this.ctx)).be.null();
+    this.unknownEndNotMeetsDateIvl.exec(this.ctx).should.be.false();
+    return should(this.dateIvlMayMeetAfterUnknownEnd.exec(this.ctx)).be.null();
+  });
+
+  it('should correctly handle imprecision', function() {
+    should(this.mayMeetAfterImpreciseDateIvl.exec(this.ctx)).be.null();
+    should(this.mayMeetBeforeImpreciseDateIvl.exec(this.ctx)).be.null();
+    this.notMeetsImpreciseDateIvl.exec(this.ctx).should.be.false();
+    should(this.impreciseMayMeetAfterDateIvl.exec(this.ctx)).be.null();
+    should(this.impreciseMayMeetBeforeDateIvl.exec(this.ctx)).be.null();
+    return this.impreciseNotMeetsDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  return it('should correctly compare using the requested precision', function() {
+    this.meetsAfterDayOfIvl.exec(this.ctx).should.be.true();
+    this.meetsBeforeDayOfIvl.exec(this.ctx).should.be.true();
+    this.notMeetsDayOfIvl.exec(this.ctx).should.be.false();
+    this.notMeetsDayOfImpreciseIVL.exec(this.ctx).should.be.false();
+    should(this.mayMeetAfterDayOfImpreciseIvl.exec(this.ctx)).be.null();
+    return should(this.mayMeetBeforeDayOfImpreciseIvl.exec(this.ctx)).be.null();
+  });
+});
+
+describe('MeetsAfter', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should accept intervals meeting before it', function() {
+    this.meetsAfterIntIvl.exec(this.ctx).should.be.true();
+    this.meetsAfterRealIvl.exec(this.ctx).should.be.true();
+    return this.meetsAfterDateIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should reject intervals meeting after it', function() {
+    this.meetsBeforeIntIvl.exec(this.ctx).should.be.false();
+    this.meetsBeforeRealIvl.exec(this.ctx).should.be.false();
+    return this.meetsBeforeDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should reject intervals not meeting it', function() {
+    this.notMeetsIntIvl.exec(this.ctx).should.be.false();
+    this.notMeetsRealIvl.exec(this.ctx).should.be.false();
+    return this.notMeetsDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (int)', function() {
+    this.negInfBegMeetsBeforeIntIvl.exec(this.ctx).should.be.false();
+    this.negInfBegNotMeetsIntIvl.exec(this.ctx).should.be.false();
+    this.intIvlNotMeetsNegInfBeg.exec(this.ctx).should.be.false();
+    this.unknownBegMeetsBeforeIntIvl.exec(this.ctx).should.be.false();
+    should(this.unknownBegMayMeetAfterIntIvl.exec(this.ctx)).be.null();
+    this.unknownBegNotMeetsIntIvl.exec(this.ctx).should.be.false();
+    this.intIvlMayMeetBeforeUnknownBeg.exec(this.ctx).should.be.false();
+    this.posInfEndMeetsAfterIntIvl.exec(this.ctx).should.be.true();
+    this.posInfEndNotMeetsIntIvl.exec(this.ctx).should.be.false();
+    this.intIvlNotMeetsPosInfEnd.exec(this.ctx).should.be.false();
+    this.unknownEndMeetsAfterIntIvl.exec(this.ctx).should.be.true();
+    this.unknownEndMayMeetBeforeIntIvl.exec(this.ctx).should.be.false();
+    this.unknownEndNotMeetsIntIvl.exec(this.ctx).should.be.false();
+    return should(this.intIvlMayMeetAfterUnknownEnd.exec(this.ctx)).be.null();
+  });
+
+  it('should correctly handle null endpoints (date)', function() {
+    this.negInfBegMeetsBeforeDateIvl.exec(this.ctx).should.be.false();
+    this.negInfBegNotMeetsDateIvl.exec(this.ctx).should.be.false();
+    this.dateIvlNotMeetsNegInfBeg.exec(this.ctx).should.be.false();
+    this.unknownBegMeetsBeforeDateIvl.exec(this.ctx).should.be.false();
+    should(this.unknownBegMayMeetAfterDateIvl.exec(this.ctx)).be.null();
+    this.unknownBegNotMeetsDateIvl.exec(this.ctx).should.be.false();
+    this.dateIvlMayMeetBeforeUnknownBeg.exec(this.ctx).should.be.false();
+    this.posInfEndMeetsAfterDateIvl.exec(this.ctx).should.be.true();
+    this.posInfEndNotMeetsDateIvl.exec(this.ctx).should.be.false();
+    this.dateIvlNotMeetsPosInfEnd.exec(this.ctx).should.be.false();
+    this.unknownEndMeetsAfterDateIvl.exec(this.ctx).should.be.true();
+    this.unknownEndMayMeetBeforeDateIvl.exec(this.ctx).should.be.false();
+    this.unknownEndNotMeetsDateIvl.exec(this.ctx).should.be.false();
+    return should(this.dateIvlMayMeetAfterUnknownEnd.exec(this.ctx)).be.null();
+  });
+
+  it('should correctly handle imprecision', function() {
+    should(this.mayMeetAfterImpreciseDateIvl.exec(this.ctx)).be.null();
+    this.mayMeetBeforeImpreciseDateIvl.exec(this.ctx).should.be.false();
+    this.notMeetsImpreciseDateIvl.exec(this.ctx).should.be.false();
+    should(this.impreciseMayMeetAfterDateIvl.exec(this.ctx)).be.null();
+    this.impreciseMayMeetBeforeDateIvl.exec(this.ctx).should.be.false();
+    return this.impreciseNotMeetsDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  return it('should correctly compare using the requested precision', function() {
+    this.meetsAfterDayOfIvl.exec(this.ctx).should.be.true();
+    this.meetsBeforeDayOfIvl.exec(this.ctx).should.be.false();
+    this.notMeetsDayOfIvl.exec(this.ctx).should.be.false();
+    this.notMeetsDayOfImpreciseIVL.exec(this.ctx).should.be.false();
+    should(this.mayMeetAfterDayOfImpreciseIvl.exec(this.ctx)).be.null();
+    return this.mayMeetBeforeDayOfImpreciseIvl.exec(this.ctx).should.be.false();
+  });
+});
+
+describe('MeetsBefore', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should accept intervals meeting after it', function() {
+    this.meetsBeforeIntIvl.exec(this.ctx).should.be.true();
+    this.meetsBeforeRealIvl.exec(this.ctx).should.be.true();
+    return this.meetsBeforeDateIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should reject intervals meeting before it', function() {
+    this.meetsAfterIntIvl.exec(this.ctx).should.be.false();
+    this.meetsAfterRealIvl.exec(this.ctx).should.be.false();
+    return this.meetsAfterDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should reject intervals not meeting it', function() {
+    this.notMeetsIntIvl.exec(this.ctx).should.be.false();
+    this.notMeetsRealIvl.exec(this.ctx).should.be.false();
+    return this.notMeetsDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (int)', function() {
+    this.negInfBegMeetsBeforeIntIvl.exec(this.ctx).should.be.true();
+    this.negInfBegNotMeetsIntIvl.exec(this.ctx).should.be.false();
+    this.intIvlNotMeetsNegInfBeg.exec(this.ctx).should.be.false();
+    this.unknownBegMeetsBeforeIntIvl.exec(this.ctx).should.be.true();
+    this.unknownBegMayMeetAfterIntIvl.exec(this.ctx).should.be.false();
+    this.unknownBegNotMeetsIntIvl.exec(this.ctx).should.be.false();
+    should(this.intIvlMayMeetBeforeUnknownBeg.exec(this.ctx)).be.null();
+    this.posInfEndMeetsAfterIntIvl.exec(this.ctx).should.be.false();
+    this.posInfEndNotMeetsIntIvl.exec(this.ctx).should.be.false();
+    this.intIvlNotMeetsPosInfEnd.exec(this.ctx).should.be.false();
+    this.unknownEndMeetsAfterIntIvl.exec(this.ctx).should.be.false();
+    should(this.unknownEndMayMeetBeforeIntIvl.exec(this.ctx)).be.null();
+    this.unknownEndNotMeetsIntIvl.exec(this.ctx).should.be.false();
+    return this.intIvlMayMeetAfterUnknownEnd.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (date)', function() {
+    this.negInfBegMeetsBeforeDateIvl.exec(this.ctx).should.be.true();
+    this.negInfBegNotMeetsDateIvl.exec(this.ctx).should.be.false();
+    this.dateIvlNotMeetsNegInfBeg.exec(this.ctx).should.be.false();
+    this.unknownBegMeetsBeforeDateIvl.exec(this.ctx).should.be.true();
+    this.unknownBegMayMeetAfterDateIvl.exec(this.ctx).should.be.false();
+    this.unknownBegNotMeetsDateIvl.exec(this.ctx).should.be.false();
+    should(this.dateIvlMayMeetBeforeUnknownBeg.exec(this.ctx)).be.null();
+    this.posInfEndMeetsAfterDateIvl.exec(this.ctx).should.be.false();
+    this.posInfEndNotMeetsDateIvl.exec(this.ctx).should.be.false();
+    this.dateIvlNotMeetsPosInfEnd.exec(this.ctx).should.be.false();
+    this.unknownEndMeetsAfterDateIvl.exec(this.ctx).should.be.false();
+    should(this.unknownEndMayMeetBeforeDateIvl.exec(this.ctx)).be.null();
+    this.unknownEndNotMeetsDateIvl.exec(this.ctx).should.be.false();
+    return this.dateIvlMayMeetAfterUnknownEnd.exec(this.ctx).should.be.false();
+  });
+
+  it('should correctly handle imprecision', function() {
+    this.mayMeetAfterImpreciseDateIvl.exec(this.ctx).should.be.false();
+    should(this.mayMeetBeforeImpreciseDateIvl.exec(this.ctx)).be.null();
+    this.notMeetsImpreciseDateIvl.exec(this.ctx).should.be.false();
+    this.impreciseMayMeetAfterDateIvl.exec(this.ctx).should.be.false();
+    should(this.impreciseMayMeetBeforeDateIvl.exec(this.ctx)).be.null();
+    return this.impreciseNotMeetsDateIvl.exec(this.ctx).should.be.false();
+  });
+
+  return it('should correctly compare using the requested precision', function() {
+    this.meetsAfterDayOfIvl.exec(this.ctx).should.be.false();
+    this.meetsBeforeDayOfIvl.exec(this.ctx).should.be.true();
+    this.notMeetsDayOfIvl.exec(this.ctx).should.be.false();
+    this.notMeetsDayOfImpreciseIVL.exec(this.ctx).should.be.false();
+    this.mayMeetAfterDayOfImpreciseIvl.exec(this.ctx).should.be.false();
+    return should(this.mayMeetBeforeDayOfImpreciseIvl.exec(this.ctx)).be.null();
+  });
+});
+
+describe('Overlaps', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should accept overlaps (integer)', function() {
+    this.overlapsBeforeIntIvl.exec(this.ctx).should.be.true();
+    this.overlapsAfterIntIvl.exec(this.ctx).should.be.true();
+    return this.overlapsBoundaryIntIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should accept overlaps (real)', function() {
+    this.overlapsBeforeRealIvl.exec(this.ctx).should.be.true();
+    this.overlapsAfterRealIvl.exec(this.ctx).should.be.true();
+    return this.overlapsBoundaryRealIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should reject non-overlaps (integer)', function() {
+    return this.noOverlapsIntIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should reject non-overlaps (real)', function() {
+    return this.noOverlapsRealIvl.exec(this.ctx).should.be.false();
+  });
+
+  return it('should return null for null value', function() {
+    return should(this.overlapsIsNull.exec(this.ctx)).be.null();
+  });
+});
+
+describe('OverlapsDateTime', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should accept overlaps', function() {
+    this.overlapsBefore.exec(this.ctx).should.be.true();
+    this.overlapsAfter.exec(this.ctx).should.be.true();
+    this.overlapsContained.exec(this.ctx).should.be.true();
+    return this.overlapsContains.exec(this.ctx).should.be.true();
+  });
+
+  it('should accept imprecise overlaps', function() {
+    return this.impreciseOverlap.exec(this.ctx).should.be.true();
+  });
+
+  it('should reject non-overlaps', function() {
+    return this.noOverlap.exec(this.ctx).should.be.false();
+  });
+
+  it('should reject imprecise non-overlaps', function() {
+    return this.noImpreciseOverlap.exec(this.ctx).should.be.false();
+  });
+
+  it('should return null for imprecise overlaps with differing precision', function() {
+    return should(this.unknownOverlap.exec(this.ctx)).be.null();
+  });
+
+  it('should return true for imprecise overlaps with matching precision', function() {
+    return this.matchingPrecisionOverlap.exec(this.ctx).should.be.true();
+  });
+
+  return it('should correctly compare using the requested precision', function() {
+    // NOTE: Some assertions commented out because cql-to-elm is WRONGLY translating 'overlaps' to 'OverlapsAfter'!
+    //@overlapsBeforeDayOfIvlEdge.exec(@ctx).should.be.true()
+    this.overlapsAfterDayOfIvlEdge.exec(this.ctx).should.be.true();
+    this.overlapsContainsDayOfIvl.exec(this.ctx).should.be.true();
+    //@overlapsContainedByDayOfIvl.exec(@ctx).should.be.true()
+    this.notOverlapsDayOfIvl.exec(this.ctx).should.be.false();
+    this.overlapsAfterDayOfImpreciseInterval.exec(this.ctx).should.be.true();
+    //should(@mayOverlapBeforeDayOfImpreciseIvl.exec(@ctx)).be.null()
+    return should(this.mayOverlapAfterDayOfImpreciseIvl.exec(this.ctx)).be.null();
+  });
+});
+
+describe('OverlapsAfter', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should accept overlaps that are after (integer)', function() {
+    this.overlapsAfterIntIvl.exec(this.ctx).should.be.true();
+    return this.overlapsBoundaryIntIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should accept overlaps that are after (real)', function() {
+    this.overlapsAfterRealIvl.exec(this.ctx).should.be.true();
+    return this.overlapsBoundaryRealIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should reject overlaps that are before (integer)', function() {
+    return this.overlapsBeforeIntIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should reject overlaps that are before (real)', function() {
+    return this.overlapsBeforeRealIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should reject non-overlaps (integer)', function() {
+    return this.noOverlapsIntIvl.exec(this.ctx).should.be.false();
+  });
+
+  return it('should reject non-overlaps (real)', function() {
+    return this.noOverlapsRealIvl.exec(this.ctx).should.be.false();
+  });
+});
+
+describe('OverlapsAfterDateTime', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should accept overlaps that are after', function() {
+    this.overlapsAfter.exec(this.ctx).should.be.true();
+    return this.overlapsContains.exec(this.ctx).should.be.true();
+  });
+
+  it('should accept imprecise overlaps that are after', function() {
+    return this.impreciseOverlapAfter.exec(this.ctx).should.be.true();
+  });
+
+  it('should reject overlaps that are not before', function() {
+    this.overlapsBefore.exec(this.ctx).should.be.false();
+    return this.overlapsContained.exec(this.ctx).should.be.false();
+  });
+
+  it('should reject imprecise overlaps that are not before', function() {
+    return this.impreciseOverlapBefore.exec(this.ctx).should.be.false();
+  });
+
+  it('should reject non-overlaps', function() {
+    return this.noOverlap.exec(this.ctx).should.be.false();
+  });
+
+  it('should reject imprecise non-overlaps', function() {
+    return this.noImpreciseOverlap.exec(this.ctx).should.be.false();
+  });
+
+  it('should return true for imprecise overlaps with matching precision', function() {
+    return this.matchingPrecisionOverlap.exec(this.ctx).should.be.true();
+  });
+
+  it('should return null for imprecise overlaps that are unknown', function() {
+    return should(this.unknownOverlap.exec(this.ctx)).be.null();
+  });
+
+  return it('should correctly compare using the requested precision', function() {
+    this.overlapsBeforeDayOfIvlEdge.exec(this.ctx).should.be.false();
+    this.overlapsAfterDayOfIvlEdge.exec(this.ctx).should.be.true();
+    this.overlapsContainsDayOfIvl.exec(this.ctx).should.be.true();
+    this.overlapsContainedByDayOfIvl.exec(this.ctx).should.be.false();
+    this.notOverlapsDayOfIvl.exec(this.ctx).should.be.false();
+    this.overlapsAfterDayOfImpreciseInterval.exec(this.ctx).should.be.true();
+    this.mayOverlapBeforeDayOfImpreciseIvl.exec(this.ctx).should.be.false();
+    return should(this.mayOverlapAfterDayOfImpreciseIvl.exec(this.ctx)).be.null();
+  });
+});
+
+describe('OverlapsBefore', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should accept overlaps that are before (integer)', function() {
+    this.overlapsBeforeIntIvl.exec(this.ctx).should.be.true();
+    return this.overlapsBoundaryIntIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should accept overlaps that are before (real)', function() {
+    this.overlapsBeforeRealIvl.exec(this.ctx).should.be.true();
+    return this.overlapsBoundaryRealIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should reject overlaps that are after (integer)', function() {
+    return this.overlapsAfterIntIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should reject overlaps that are after (real)', function() {
+    return this.overlapsAfterRealIvl.exec(this.ctx).should.be.false();
+  });
+
+  it('should reject non-overlaps (integer)', function() {
+    return this.noOverlapsIntIvl.exec(this.ctx).should.be.false();
+  });
+
+  return it('should reject non-overlaps (real)', function() {
+    return this.noOverlapsRealIvl.exec(this.ctx).should.be.false();
+  });
+});
+
+describe('OverlapsBeforeDateTime', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should accept overlaps that are before', function() {
+    this.overlapsBefore.exec(this.ctx).should.be.true();
+    return this.overlapsContains.exec(this.ctx).should.be.true();
+  });
+
+  it('should accept imprecise overlaps that are before', function() {
+    return this.impreciseOverlapBefore.exec(this.ctx).should.be.true();
+  });
+
+  it('should reject overlaps that are not before', function() {
+    this.overlapsAfter.exec(this.ctx).should.be.false();
+    return this.overlapsContained.exec(this.ctx).should.be.false();
+  });
+
+  it('should reject imprecise overlaps that are not before', function() {
+    return this.impreciseOverlapAfter.exec(this.ctx).should.be.false();
+  });
+
+  it('should reject non-overlaps', function() {
+    return this.noOverlap.exec(this.ctx).should.be.false();
+  });
+
+  it('should reject imprecise non-overlaps', function() {
+    return this.noImpreciseOverlap.exec(this.ctx).should.be.false();
+  });
+
+  it('should return true for imprecise overlaps with matching precision', function() {
+    return this.matchingPrecisionOverlap.exec(this.ctx).should.be.true();
+  });
+
+  it('should return null for imprecise overlaps that are unknown', function() {
+    return should(this.unknownOverlap.exec(this.ctx)).be.null();
+  });
+
+  return it('should correctly compare using the requested precision', function() {
+    this.overlapsBeforeDayOfIvlEdge.exec(this.ctx).should.be.true();
+    this.overlapsAfterDayOfIvlEdge.exec(this.ctx).should.be.false();
+    this.overlapsContainsDayOfIvl.exec(this.ctx).should.be.true();
+    this.overlapsContainedByDayOfIvl.exec(this.ctx).should.be.false();
+    this.notOverlapsDayOfIvl.exec(this.ctx).should.be.false();
+    this.overlapsAfterDayOfImpreciseInterval.exec(this.ctx).should.be.false();
+    should(this.mayOverlapBeforeDayOfImpreciseIvl.exec(this.ctx)).be.null();
+    return this.mayOverlapAfterDayOfImpreciseIvl.exec(this.ctx).should.be.false();
+  });
+});
+
+describe('Width', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should calculate the width of integer intervals', function() {
+    // define IntWidth: width of Interval[-2, 5]
+    this.intWidth.exec(this.ctx).should.equal(7);
+    // define IntOpenWidth: width of Interval(-2, 5)
+    return this.intOpenWidth.exec(this.ctx).should.equal(5);
+  });
+
+  it('should calculate the width of real intervals', function() {
+    // define RealWidth: width of Interval[1.23, 4.56]
+    this.realWidth.exec(this.ctx).should.equal(3.33);
+    // define RealOpenWidth: width of Interval(1.23, 4.56)
+    return this.realOpenWidth.exec(this.ctx).should.equal(3.32999998);
+  });
+
+  it('should calculate the width of infinite intervals', function() {
+    // define IntWidthThreeToMax: width of Interval[3, null]
+    this.intWidthThreeToMax.exec(this.ctx).should.equal(Math.pow(2,31)-4);
+    // define IntWidthMinToThree: width of Interval[null, 3]
+    return this.intWidthMinToThree.exec(this.ctx).should.equal(Math.pow(2,31)+3);
+  });
+
+  it('should calculate the width of infinite intervals that result in null', function() {
+    // define IntWidthThreeToUnknown: width of Interval[3, null)
+    should(this.intWidthThreeToUnknown.exec(this.ctx)).be.null();
+    // define IntWidthUnknownToThree: width of Interval(null, 3]
+    return should(this.intWidthUnknownToThree.exec(this.ctx)).be.null();
+  });
+
+  it('should calculate the width of interval of quantities', function() {
+    // define WidthOfQuantityInterval: width of Interval[Quantity{value: 1, unit: 'mm'}, Quantity{value: 10, unit: 'mm'}]
+    const width = this.widthOfQuantityInterval.exec(this.ctx);
+    width.value.should.equal(9);
+    return width.unit.should.equal('mm');
+  });
+
+  it('should throw for DateTime Intervals', function() {
+    // define WidthOfDateTimeInterval: width of Interval[DateTime(2012,01,01), DateTime(2012,01,03)]
+    return should(() => this.widthOfDateTimeInterval.exec(this.ctx)).throw();
+  });
+
+  it('should throw for Date Intervals', function() {
+    // define WidthOfDateInterval: width of Interval[Date(2012,01,01), Date(2012,01,03)]
+    return should(() => this.widthOfDateInterval.exec(this.ctx)).throw();
+  });
+
+  return it('should throw for Time Intervals', function() {
+    // define WidthOfTimeInterval: width of Interval[Time(12,00,00), Time(12,30,02)]
+    return should(() => this.widthOfTimeInterval.exec(this.ctx)).throw();
+  });
+});
+
+describe('Size', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should calculate the size of integer intervals', function() {
+    // define IntSize: Size(Interval[-2, 5])
+    this.intSize.exec(this.ctx).should.equal(8);
+    // define IntOpenSize: Size(Interval(-2, 5))
+    return this.intOpenSize.exec(this.ctx).should.equal(6);
+  });
+
+  it('should calculate the size of real intervals', function() {
+    // define RealSize: Size(Interval[1.23, 4.56])
+    this.realSize.exec(this.ctx).should.equal(3.33 + MIN_FLOAT_PRECISION_VALUE);
+    // define RealOpenSize: Size(Interval(1.23, 4.56))
+    return this.realOpenSize.exec(this.ctx).should.equal(3.32999998 + MIN_FLOAT_PRECISION_VALUE);
+  });
+
+  it('should calculate the size of infinite intervals', function() {
+    // define IntSizeThreeToMax: Size(Interval[3, null])
+    this.intSizeThreeToMax.exec(this.ctx).should.equal((Math.pow(2,31)-4) + 1);
+    // define IntSizeMinToThree: Size(Interval[null, 3])
+    return this.intSizeMinToThree.exec(this.ctx).should.equal(Math.pow(2,31)+3 + 1);
+  });
+
+  it('should calculate the size of infinite intervals that result in null', function() {
+    // define IntSizeThreeToUnknown: Size(Interval[3, null))
+    should(this.intSizeThreeToUnknown.exec(this.ctx)).be.null();
+    // define IntSizeUnknownToThree: Size(Interval(null, 3])
+    return should(this.intSizeUnknownToThree.exec(this.ctx)).be.null();
+  });
+
+  it('should return null if integer is null', function() {
+    // define SizeIsNull: Size(null as Interval<Integer>)
+    return should(this.sizeIsNull.exec(this.ctx)).be.null();
+  });
+
+  it('should return null if integer is null', function() {
+    // define SizeIsNull: Size(null as Interval<Integer>)
+    return should(this.sizeIsNull.exec(this.ctx)).be.null();
+  });
+
+  it('should calculate size of interval of quantities', function() {
+    // define SizeOfQuantityInterval: Size(Interval[Quantity{value: 1, unit: 'mm'}, Quantity{value: 10, unit: 'mm'}])
+    const size = this.sizeOfQuantityInterval.exec(this.ctx);
+    size.value.should.equal(10);
+    return size.unit.should.equal('mm');
+  });
+
+  it('should throw for Date Interval', function() {
+    // define SizeOfDateTimeInterval: Size(Interval[DateTime(2012,01,01), DateTime(2012,01,03)])
+    return should(() => this.sizeOfDateTimeInterval.exec(this.ctx)).throw();
+  });
+
+  it('should throw for DateTime Interval', function() {
+    // define SizeOfDateInterval: Size(Interval[Date(2012,01,01), Date(2012,01,03)])
+    return should(() => this.sizeOfDateInterval.exec(this.ctx)).throw();
+  });
+
+  return it('should throw for Time Interval', function() {
+    // define SizeOfTimeInterval: Size(Interval[Time(12,00,00), Time(12,30,02)])
+    return should(() => this.sizeOfTimeInterval.exec(this.ctx)).throw();
+  });
+});
+
+
+describe('Start', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+
+  it('should return the low of the interval', function() {
+    return this.closedNotNull.exec(this.ctx).should.eql(new DateTime(2012, 1, 1));
+  });
+
+  it('should return the minimum possible DateTime', function() {
+    return this.closedNullDateTime.exec(this.ctx).should.eql(MIN_DATETIME_VALUE);
+  });
+
+  it('should return the minimum possible DateTime in timzoneOffset of context', function() {
+    // set execution timestamp to be +5
+    this.ctx.executionDateTime = new DateTime(2019, 10, 1, 12, 31, 31, 2, 5);
+    return (this.closedNullDateTime.exec(this.ctx)).timezoneOffset.should.eql(5);
+  });
+
+  it('should return the minimum possible Integer', function() {
+    return this.closedNullInteger.exec(this.ctx).should.eql(MIN_INT_VALUE);
+  });
+
+  it('should return the minimum possible Decimal', function() {
+    return this.closedNullDecimal.exec(this.ctx).should.eql(MIN_FLOAT_VALUE);
+  });
+
+  it('should return null when the interval is null', function() {
+    return should(this.nullInterval.exec(this.ctx)).be.null();
+  });
+
+  it('should return successor of low when the interval is open', function() {
+    return this.openNotNull.exec(this.ctx).should.eql(new DateTime(2012, 1, 1).successor());
+  });
+
+  return it('should return null for open interval with null high value', function() {
+    return should(this.openNull.exec(this.ctx)).be.null();
+  });
+});
+
+describe('End', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should return the high of the interval', function() {
+    return this.closedNotNull.exec(this.ctx).should.eql(new DateTime(2013, 1, 1));
+  });
+
+  it('should return the maximum possible DateTime', function() {
+    return this.closedNullDateTime.exec(this.ctx).should.eql(MAX_DATETIME_VALUE);
+  });
+
+  it('should return the maximum possible DateTime in timzoneOffset of context', function() {
+    // set execution timestamp to be +5
+    this.ctx.executionDateTime = new DateTime(2019, 10, 1, 12, 31, 31, 2, 5);
+    return (this.closedNullDateTime.exec(this.ctx)).timezoneOffset.should.eql(5);
+  });
+
+  it('should return the maximum possible Integer', function() {
+    return this.closedNullInteger.exec(this.ctx).should.eql(MAX_INT_VALUE);
+  });
+
+  it('should return the maximum possible Decimal', function() {
+    return this.closedNullDecimal.exec(this.ctx).should.eql(MAX_FLOAT_VALUE);
+  });
+
+  it('should return null when the interval is null', function() {
+    return should(this.nullInterval.exec(this.ctx)).be.null();
+  });
+
+  it('should return predecessor of high when the interval is open', function() {
+    return this.openNotNull.exec(this.ctx).should.eql(new DateTime(2013, 1, 1).predecessor());
+  });
+
+  return it('should return null for open interval with null low value', function() {
+    return should(this.openNull.exec(this.ctx)).be.null();
+  });
+});
+
+describe('Starts', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should calculate to null', function() {
+    return should(this.testStartsNull.exec(this.ctx)).be.null();
+  });
+
+  it('should calculate integer intervals properly', function() {
+    this.integerIntervalStartsTrue.exec(this.ctx).should.be.true();
+    this.integerIntervalStartsFalse.exec(this.ctx).should.be.false();
+    return this.integerIntervalStartEndsFalse.exec(this.ctx).should.be.false();
+  });
+
+  it('should calculate decimal intervals properly', function() {
+    this.decimalIntervalStartsTrue.exec(this.ctx).should.be.true();
+    this.decimalIntervalStartsFalse.exec(this.ctx).should.be.false();
+    return this.decimalIntervalStartsEndsFalse.exec(this.ctx).should.be.false();
+  });
+
+  it('should calculate quantity intervals properly', function() {
+    this.quantityIntervalStartsTrue.exec(this.ctx).should.be.true();
+    this.quantityIntervalStartsFalse.exec(this.ctx).should.be.false();
+    return this.quantityIntervalStartsEndsFalse.exec(this.ctx).should.be.false();
+  });
+
+  return it('should calculate datetime intervals properly', function() {
+    this.dateTimeIntervalStartsTrue.exec(this.ctx).should.be.true();
+    this.dateTimeIntervalStartsFalse.exec(this.ctx).should.be.false();
+    this.dateTimeIntervalStartsDayOfTrue.exec(this.ctx).should.be.true();
+    return this.dateTimeIntervalStartsEndsFalse.exec(this.ctx).should.be.false();
+  });
+});
+
+describe('Ends', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should calculate to null', function() {
+    return should(this.testEndsNull.exec(this.ctx)).be.null();
+  });
+
+  it('should calculate integer intervals properly', function() {
+    this.integerIntervalEndsTrue.exec(this.ctx).should.be.true();
+    this.integerIntervalEndsFalse.exec(this.ctx).should.be.false();
+    return this.integerIntervalEndsStartsFalse.exec(this.ctx).should.be.false();
+  });
+
+  it('should calculate decimal intervals properly', function() {
+    this.decimalIntervalEndsTrue.exec(this.ctx).should.be.true();
+    this.decimalIntervalEndsFalse.exec(this.ctx).should.be.false();
+    return this.decimalIntervalEndsStartsFalse.exec(this.ctx).should.be.false();
+  });
+
+  it('should calculate quantity intervals properly', function() {
+    this.quantityIntervalEndsTrue.exec(this.ctx).should.be.true();
+    this.quantityIntervalEndsFalse.exec(this.ctx).should.be.false();
+    return this.quantityIntervalEndsStartsFalse.exec(this.ctx).should.be.false();
+  });
+
+  return it('should calculate datetime intervals properly', function() {
+    this.dateTimeIntervalEndsTrue.exec(this.ctx).should.be.true();
+    this.dateTimeIntervalEndsFalse.exec(this.ctx).should.be.false();
+    this.dateTimeIntervalEndsDayOfTrue.exec(this.ctx).should.be.true();
+    return this.dateTimeIntervalEndsStartsFalse.exec(this.ctx).should.be.false();
+  });
+});
+
+describe('IntegerIntervalUnion', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should properly calculate open and closed unions', function() {
+    const x = this.intFullInterval.exec(this.ctx);
+    let y = this.intClosedUnionClosed.exec(this.ctx);
+    y.equals(x).should.be.true();
+
+    y = this.intClosedUnionOpen.exec(this.ctx);
+    y.contains(0).should.be.true();
+    y.contains(10).should.be.false();
+
+    y = this.intOpenUnionOpen.exec(this.ctx);
+    y.contains(0).should.be.false();
+    y.contains(10).should.be.false();
+
+    y = this.intOpenUnionClosed.exec(this.ctx);
+    y.contains(0).should.be.false();
+    return y.contains(10).should.be.true();
+  });
+
+  it('should properly calculate sameAs unions', function() {
+    const x = this.intFullInterval.exec(this.ctx);
+    const y = this.intSameAsUnion.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate before/after unions', function() {
+    return should(this.intBeforeUnion.exec(this.ctx)).be.null();
+  });
+
+  it('should properly calculate meets unions', function() {
+    const x = this.intFullInterval.exec(this.ctx);
+    const y = this.intMeetsUnion.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate left/right overlapping unions', function() {
+    const x = this.intFullInterval.exec(this.ctx);
+    const y = this.intOverlapsUnion.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate begins/begun by unions', function() {
+    const x = this.intFullInterval.exec(this.ctx);
+    const y = this.intBeginsUnion.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate includes/included by unions', function() {
+    const x = this.intFullInterval.exec(this.ctx);
+    const y = this.intDuringUnion.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  return it('should properly calculate ends/ended by unions', function() {
+    const x = this.intFullInterval.exec(this.ctx);
+    const y = this.intEndsUnion.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+});
+
+// TODO
+// it 'should properly handle imprecision', ->
+
+describe('DateTimeIntervalUnion', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should properly calculate open and closed unions', function() {
+    const x = this.dateTimeFullInterval.exec(this.ctx);
+    let y = this.dateTimeClosedUnionClosed.exec(this.ctx);
+    y.equals(x).should.be.true();
+
+    const a = new DateTime(2012, 1, 1, 0, 0, 0, 0);
+    const b = new DateTime(2013, 1, 1, 0, 0, 0, 0);
+
+    y = this.dateTimeClosedUnionOpen.exec(this.ctx);
+    y.contains(a).should.be.true();
+    y.contains(b).should.be.false();
+
+    y = this.dateTimeOpenUnionOpen.exec(this.ctx);
+    y.contains(a).should.be.false();
+    y.contains(b).should.be.false();
+
+    y = this.dateTimeOpenUnionClosed.exec(this.ctx);
+    y.contains(a).should.be.false();
+    return y.contains(b).should.be.true();
+  });
+
+  it('should properly calculate sameAs unions', function() {
+    const x = this.dateTimeFullInterval.exec(this.ctx);
+    const y = this.dateTimeSameAsUnion.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate before/after unions', function() {
+    return should(this.dateTimeBeforeUnion.exec(this.ctx)).be.null();
+  });
+
+  it('should properly calculate meets unions', function() {
+    const x = this.dateTimeFullInterval.exec(this.ctx);
+    const y = this.dateTimeMeetsUnion.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate left/right overlapping unions', function() {
+    const x = this.dateTimeFullInterval.exec(this.ctx);
+    const y = this.dateTimeOverlapsUnion.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate begins/begun by unions', function() {
+    const x = this.dateTimeFullInterval.exec(this.ctx);
+    const y = this.dateTimeBeginsUnion.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate includes/included by unions', function() {
+    const x = this.dateTimeFullInterval.exec(this.ctx);
+    const y = this.dateTimeDuringUnion.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  return it('should properly calculate ends/ended by unions', function() {
+    const x = this.dateTimeFullInterval.exec(this.ctx);
+    const y = this.dateTimeEndsUnion.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+});
+
+// TODO
+// it 'should properly handle imprecision', ->
+
+describe('IntegerIntervalExcept', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should properly calculate sameAs except', function() {
+    return should(this.intSameAsExcept.exec(this.ctx)).be.null();
+  });
+
+  it('should properly calculate before/after except', function() {
+    return this.intBeforeExcept.exec(this.ctx).should.eql(new Interval(0,4));
+  });
+
+  it('should properly calculate meets except', function() {
+    const x = this.intHalfInterval.exec(this.ctx);
+    const y = this.intMeetsExcept.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate left/right overlapping except', function() {
+    const x = this.intHalfInterval.exec(this.ctx);
+    const y = this.intOverlapsExcept.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate begins/begun by except', function() {
+    return should(this.intBeginsExcept.exec(this.ctx)).be.null();
+  });
+
+  it('should properly calculate includes/included by except', function() {
+    return should(this.intDuringExcept.exec(this.ctx)).be.null();
+  });
+
+  return it('should properly calculate ends/ended by except', function() {
+    return should(this.intEndsExcept.exec(this.ctx)).be.null();
+  });
+});
+
+// TODO
+// it 'should properly handle imprecision', ->
+
+describe('DateTimeIntervalExcept', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should properly calculate sameAs except', function() {
+    return should(this.dateTimeSameAsExcept.exec(this.ctx)).be.null();
+  });
+
+  it('should properly calculate before/after except', function() {
+    return this.dateTimeBeforeExcept.exec(this.ctx).should.eql(new Interval(new DateTime(2012, 1, 1, 0, 0, 0, 0), new DateTime(2012, 4, 1, 0, 0, 0, 0)));
+  });
+
+  it('should properly calculate meets except', function() {
+    const x = this.dateTimeHalfInterval.exec(this.ctx);
+    const y = this.dateTimeMeetsExcept.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate left/right overlapping except', function() {
+    const x = this.dateTimeHalfInterval.exec(this.ctx);
+    const y = this.dateTimeOverlapsExcept.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate begins/begun by except', function() {
+    return should(this.dateTimeBeginsExcept.exec(this.ctx)).be.null();
+  });
+
+  it('should properly calculate includes/included by except', function() {
+    return should(this.dateTimeDuringExcept.exec(this.ctx)).be.null();
+  });
+
+  return it('should properly calculate ends/ended by except', function() {
+    return should(this.dateTimeEndsExcept.exec(this.ctx)).be.null();
+  });
+});
+
+// TODO
+// it 'should properly handle imprecision', ->
+
+describe('IntegerIntervalIntersect', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should properly calculate sameAs intersect', function() {
+    const x = this.intSameAsIntersect.exec(this.ctx);
+    const y = this.intFullInterval.exec(this.ctx);
+    return x.equals(y).should.be.true();
+  });
+
+  it('should properly calculate before/after intersect', function() {
+    return should(this.intBeforeIntersect.exec(this.ctx)).be.null();
+  });
+
+  it('should properly calculate meets intersect', function() {
+    const x = this.intMeetsInterval.exec(this.ctx);
+    const y = this.intMeetsIntersect.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate left/right overlapping intersect', function() {
+    const x = this.intOverlapsInterval.exec(this.ctx);
+    const y = this.intOverlapsIntersect.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate begins/begun by intersect', function() {
+    const x = this.intBeginsInterval.exec(this.ctx);
+    const y = this.intBeginsIntersect.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate includes/included by intersect', function() {
+    const x = this.intDuringInterval.exec(this.ctx);
+    const y = this.intDuringIntersect.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  return it('should properly calculate ends/ended by intersect', function() {
+    const x = this.intEndsInterval.exec(this.ctx);
+    const y = this.intEndsIntersect.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+});
+
+describe('DateTimeIntervalIntersect', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('should properly calculate sameAs intersect', function() {
+    const x = this.dateTimeSameAsIntersect.exec(this.ctx);
+    const y = this.dateTimeFullInterval.exec(this.ctx);
+    return x.equals(y).should.be.true();
+  });
+
+  it('should properly calculate before/after intersect', function() {
+    return should(this.dateTimeBeforeIntersect.exec(this.ctx)).be.null();
+  });
+
+  it('should properly calculate meets intersect', function() {
+    const x = this.dateTimeMeetsInterval.exec(this.ctx);
+    const y = this.dateTimeMeetsIntersect.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate left/right overlapping intersect', function() {
+    const x = this.dateTimeOverlapsInterval.exec(this.ctx);
+    const y = this.dateTimeOverlapsIntersect.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate begins/begun by intersect', function() {
+    const x = this.dateTimeBeginsInterval.exec(this.ctx);
+    const y = this.dateTimeBeginsIntersect.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate includes/included by intersect', function() {
+    const x = this.dateTimeDuringInterval.exec(this.ctx);
+    const y = this.dateTimeDuringIntersect.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+
+  return it('should properly calculate ends/ended by intersect', function() {
+    const x = this.dateTimeEndsInterval.exec(this.ctx);
+    const y = this.dateTimeEndsIntersect.exec(this.ctx);
+    return y.equals(x).should.be.true();
+  });
+});
+
+// TODO: 2 tests I don't know how to write:
+//   - If the argument is null, the result is null.
+//   - If the list of intervals contains nulls, they will be excluded from the resulting list.
+describe('IntegerIntervalCollapse', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('empty interval collapses to empty', function() {
+    return this.intCollapseEmpty.exec(this.ctx).should.eql(this.intEmptyIntervalList.exec(this.ctx));
+  });
+
+  it('single interval list collapse to self', function() {
+    return this.intCollapseSingleInterval.exec(this.ctx).should.eql(this.int1_10IntervalList.exec(this.ctx));
+  });
+
+  it('disjoint intervals list collapses to ordered self', function() {
+    this.intCollapseDisjoint.exec(this.ctx).should.eql(this.intTwoItemDisjointList.exec(this.ctx));
+    return this.intCollapseDisjointReversed.exec(this.ctx).should.eql(this.intTwoItemDisjointList.exec(this.ctx));
+  });
+
+  it('adjacent intervals list combines', function() {
+    return this.intCollapseAdjacent.exec(this.ctx).should.eql(this.int1_15IntervalList.exec(this.ctx));
+  });
+
+  return it('overlapping intervals list combine', function() {
+    this.intCollapseOverlap.exec(this.ctx).should.eql(this.int1_12IntervalList.exec(this.ctx));
+    this.intCollapseOverlapContained.exec(this.ctx).should.eql(this.int1_15IntervalList.exec(this.ctx));
+    this.intCollapseOverlapContainedEdge.exec(this.ctx).should.eql(this.int1_10IntervalList.exec(this.ctx));
+    this.intCollapseOverlapContainedEdge2.exec(this.ctx).should.eql(this.int1_15IntervalList.exec(this.ctx));
+    return this.intCollapseOverlapMultipleCombine.exec(this.ctx).should.eql(this.int1_15IntervalList.exec(this.ctx));
+  });
+});
+
+describe('DateTimeIntervalCollapse', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('empty interval collapses to empty', function() {
+    return this.dateTimeCollapseEmpty.exec(this.ctx).should.eql(this.dateTimeEmptyIntervalList.exec(this.ctx));
+  });
+
+  it('single interval list collapse to self', function() {
+    return this.dateTimeCollapseSingleInterval.exec(this.ctx).should.eql(this.dateTime1_10IntervalList.exec(this.ctx));
+  });
+
+  it('disjoint intervals list collapses to ordered self', function() {
+    return this.dateTimeCollapseDisjoint.exec(this.ctx).should.eql(this.dateTimeTwoItemDisjointList.exec(this.ctx));
+  });
+
+  it('reversed disjoint intervals list collapses to ordered self', function() {
+    return this.dateTimeCollapseDisjointReversed.exec(this.ctx).should.eql(this.dateTimeTwoItemDisjointList.exec(this.ctx));
+  });
+
+  it('adjacent intervals list combines', function() {
+    return this.dateTimeCollapseAdjacent.exec(this.ctx).should.eql(this.dateTime1_15IntervalList.exec(this.ctx));
+  });
+
+  it('overlapping intervals list combine', function() {
+    this.dateTimeCollapseOverlap.exec(this.ctx).should.eql(this.dateTime1_12IntervalList.exec(this.ctx));
+    this.dateTimeCollapseOverlapContained.exec(this.ctx).should.eql(this.dateTime1_15IntervalList.exec(this.ctx));
+    this.dateTimeCollapseOverlapContainedEdge.exec(this.ctx).should.eql(this.dateTime1_10IntervalList.exec(this.ctx));
+    this.dateTimeCollapseOverlapContainedEdge2.exec(this.ctx).should.eql(this.dateTime1_15IntervalList.exec(this.ctx));
+    return this.dateTimeCollapseOverlapMultipleCombine.exec(this.ctx).should.eql(this.dateTime1_15IntervalList.exec(this.ctx));
+  });
+
+  it('throws collapsing imprecise interval', function() {
+    return this.dateTimeCollapseImpreciseBoundary.exec(this.ctx).should.eql(this.dateTime1_10IntervalList.exec(this.ctx));
+  });
+
+  return it('should not modify collapse parameters', function() {
+    const interval1CopyString = this.dateTime1_6Interval.toString();
+    const interval2CopyString = this.dateTime5_12Interval.toString();
+    const interval3CopyString = this.dateTime10_15Interval.toString();
+    this.dateTimeCollapseOverlapMultipleCombine.exec(this.ctx);
+    this.dateTime1_6Interval.toString().should.eql(interval1CopyString);
+    this.dateTime5_12Interval.toString().should.eql(interval2CopyString);
+    return this.dateTime10_15Interval.toString().should.eql(interval3CopyString);
+  });
+});
+
+describe('Collapse', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('numeric collapse uses "1" as default per unit', function() {
+    return this.intCollapseNoPer.exec(this.ctx).should.eql(this.intCollapsePerUnit1.exec(this.ctx));
+  });
+
+  it('combines intervals separated by less than per unit', function() {
+    return this.intCollapseSeparatedListPer3.exec(this.ctx).should.eql(this.expectedIntervalList.exec(this.ctx));
+  });
+
+  it('DateTime collapse uses 1 ms as default per unit', function() {
+    // TODO: spec says to determine this based on width of successor, but Bonnie
+    // will only ever have fully-defined dates. Implement successor way if time.
+    return this.dateTimeCollapseNoPer.exec(this.ctx).should.eql(this.dateTimeCollapsePerMs.exec(this.ctx));
+  });
+
+  it('DateTime with null end collapse with no overlap', function() {
+    return this.dateTimeNullEndCollapseNoOverlap.exec(this.ctx).should.eql(this.dateTimeNullEndCollapseNoOverlapExpected.exec(this.ctx));
+  });
+
+  it('DateTime with null start collapse with no overlap', function() {
+    return this.dateTimeNullStartCollapseNoOverlap.exec(this.ctx).should.eql(this.dateTimeNullStartCollapseNoOverlapExpected.exec(this.ctx));
+  });
+
+  it('combines DateTime intervals separated by less than per unit', function() {
+    return this.dateTimeCollapsePerDay.exec(this.ctx).should.eql(this.dateTime1_15IntervalList.exec(this.ctx));
+  });
+
+  it('Quantity uses default per unit', function() {
+    const quantity_collapse = this.quantityIntervalCollapseNoPer.exec(this.ctx);
+    quantity_collapse.should.eql(this.expectedQuantityList.exec(this.ctx));
+    return quantity_collapse.should.eql(this.quantityIntervalCollapsePerUnit1.exec(this.ctx));
+  });
+
+  it('Quantity with separated intervals', function() {
+    return this.collapseSeparatedQuantity.exec(this.ctx).should.eql(this.quantitySeparatedBy3.exec(this.ctx));
+  });
+
+  it('Quantity combines disjoint intervals that are within per width', function() {
+    return this.collapseSeparatedQuantityPer3.exec(this.ctx).should.eql(this.expectedSeparatedQuantity.exec(this.ctx));
+  });
+
+  it('Quantity with units uses point type as default per value', function() {
+    return this.collapseDisjointQuantityUnits.exec(this.ctx).should.eql(this.expectedQuantityUnitsCollapse.exec(this.ctx));
+  });
+
+  it('Quantity with units disjoint but within per', function() {
+    return this.collapseQuantityUnitsWithinPer.exec(this.ctx).should.eql(this.expectedQuantityUnitsCollapse.exec(this.ctx));
+  });
+
+  it('Quantity with units disjoint and not within per', function() {
+    return this.collapseQuantityUnitsNotWithinPer.exec(this.ctx).should.eql(this.quantityMeterIntervalList.exec(this.ctx));
+  });
+
+  it('Quantity with units with null low value', function() {
+    return this.collapseQuantityNullLowUnitsWithinPer.exec(this.ctx).should.eql(this.collapseQuantityNullLowUnitsWithinPerExpected.exec(this.ctx));
+  });
+
+  it('Quantity with units with null low and high values', function() {
+    return this.collapseQuantityIntervalListWithNulls.exec(this.ctx).should.eql(this.collapseQuantityIntervalListWithNullsExpected.exec(this.ctx));
+  });
+
+  it('Quantity with units with null high value', function() {
+    return this.collapseQuantityNullHighUnitsWithinPer.exec(this.ctx).should.eql(this.collapseQuantityNullHighUnitsWithinPerExpected.exec(this.ctx));
+  });
+
+  it('Quantity Intervals no overlap with null low', function() {
+    return this.collapseQuantityIntervalListWithNullLowNoOverlap.exec(this.ctx).should.eql(this.collapseQuantityIntervalListWithNullLowNoOverlapExpected.exec(this.ctx));
+  });
+
+  it('Quantity Intervals no overlap with null high', function() {
+    return this.collapseQuantityIntervalListWithNullHighNoOverlap.exec(this.ctx).should.eql(this.collapseQuantityIntervalListWithNullHighNoOverlapExpected.exec(this.ctx));
+  });
+
+  it('with Interval that has null low values', function() {
+    return this.collapseNullLowIntervalList.exec(this.ctx).should.eql(this.expectedNullLowIntervalCollapse.exec(this.ctx));
+  });
+
+  it('with Interval that has null high values', function() {
+    return this.collapseNullHighIntervalList.exec(this.ctx).should.eql(this.expectedNullHighIntervalCollapse.exec(this.ctx));
+  });
+
+  it('with Date Interval that has null start values', function() {
+    return this.dateTimeNullStartCollapse.exec(this.ctx).should.eql(this.dateTimeNullStartCollapseExpected.exec(this.ctx));
+  });
+
+  it('with Date Interval that has null high values', function() {
+    return this.dateTimeNullEndCollapse.exec(this.ctx).should.eql(this.dateTimeNullEndCollapseExpected.exec(this.ctx));
+  });
+
+  it('with Date Interval that has null high and low values', function() {
+    return this.dateTimeNullStartEndCollapse.exec(this.ctx).should.eql(this.dateTimeNullStartEndCollapseExpected.exec(this.ctx));
+  });
+
+  it('should ignore nulls in list of Intervals', function() {
+    return this.nullInCollapse.exec(this.ctx).should.eql(this.expectedResultWithNull.exec(this.ctx));
+  });
+
+  it.skip('should return null if list is null', function() {
+    // TODO: Translation Error
+    return should.not.exist(this.nullCollapse.exec(this.ctx));
+  });
+
+  return it('should use default per unit if per is expicitly null', function() {
+    return this.nullPerCollapse.exec(this.ctx).should.eql(this.expectedResultNullPer.exec(this.ctx));
+  });
+});
+
+const prettyList = function(array) {
+  if ((array == null)) {
+    return array;
+  }
+  return '{ ' + array.join(', ') + ' }';
+};
+
+describe('DateIntervalExpand', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
+
+  it('expands a closed interval per day', function() {
+    // define ClosedSinglePerDay: expand { Interval[@2018-01-01, @2018-01-03] } per day
+    const a = this.closedSinglePerDay.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }');
+  });
+
+  it('expands a closed interval per week', function() {
+    // define ClosedSinglePerWeek: expand { Interval[@2018-01-01, @2018-01-21] } per week
+    const a = this.closedSinglePerWeek.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2018-01-01, 2018-01-07], [2018-01-08, 2018-01-14], [2018-01-15, 2018-01-21] }');
+  });
+
+  it('expands a closed interval per month', function() {
+    // define ClosedSinglePerMonth: expand { Interval[@2018-01-01, @2018-03-31] } per month
+    // define ClosedSinglePerMonthTrunc: expand { Interval[@2018-01-01, @2018-04-29] } per month
+    const a = this.closedSinglePerMonth.exec(this.ctx);
+    const b = this.closedSinglePerMonthTrunc.exec(this.ctx);
+    prettyList(a).should.equal('{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }');
+    return prettyList(b).should.equal('{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03], [2018-04, 2018-04] }');
+  });
+
+  it('expands a closed interval per year', function() {
+    // define ClosedSinglePerYear: expand { Interval[@2016-01-01, @2018-12-32] } per year
+    // define ClosedSinglePerYearTrunc: expand { Interval[@2016-01-01, @2019-12-30] } per year
+    const a = this.closedSinglePerYear.exec(this.ctx);
+    const b = this.closedSinglePerYearTrunc.exec(this.ctx);
+    prettyList(a).should.equal('{ [2016, 2016], [2017, 2017], [2018, 2018] }');
+    return prettyList(b).should.equal('{ [2016, 2016], [2017, 2017], [2018, 2018], [2019, 2019] }');
+  });
+
+  it('ignores null item in list', function() {
+    // define NullInList: expand { Interval[@2018-01-01, @2018-01-03], null } per day
+    const a = this.nullInList.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }');
+  });
+
+  it('expands two overlapping intervals', function() {
+    // define Overlapping: expand { Interval[@2018-01-01, @2018-01-03], Interval[@2018-01-02, @2018-01-04] } per day
+    const a = this.overlapping.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03], [2018-01-04, 2018-01-04] }');
+  });
+
+  it('expands two non overlapping intervals', function() {
+    // define NonOverlapping: expand { Interval[@2018-01-01, @2018-01-03], Interval[@2018-01-08, @2018-01-08] } per day
+    const a = this.nonOverlapping.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03], [2018-01-08, 2018-01-08] }');
+  });
+
+  it('expands an interval with mid boundaries per day', function() {
+    // define MidBoundariesPerDay: expand { Interval[@2017-12-30, @2018-01-01] } per day
+    const a = this.midBoundariesPerDay.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2017-12-30, 2017-12-30], [2017-12-31, 2017-12-31], [2018-01-01, 2018-01-01] }');
+  });
+
+  it('expands an interval with mid boundaries per month', function() {
+    // define MidBoundariesPerMonth: expand { Interval[@2017-11-14, @2018-01-18] } per month
+    const a = this.midBoundariesPerMonth.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2017-11, 2017-11], [2017-12, 2017-12], [2018-01, 2018-01] }');
+  });
+
+  it('expands an interval with mid boundaries per year', function() {
+    // define MidBoundariesPerYear: expand { Interval[@2016-04-06, @2018-04-06] } per year
+    const a = this.midBoundariesPerYear.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2016, 2016], [2017, 2017], [2018, 2018] }');
+  });
+
+  it('expands an interval with default per', function() {
+    // define NoPerDefaultDay: expand { Interval[@2018-01-01, @2018-01-03] }
+    let a = this.noPerDefaultDay.exec(this.ctx);
+    prettyList(a).should.equal('{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }');
+
+    // define NoPerDefaultMonth: expand { Interval[@2018-01, @2018-03] }
+    a = this.noPerDefaultMonth.exec(this.ctx);
+    prettyList(a).should.equal('{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }');
+
+    // define NoPerDefaultYear: expand { Interval[@2016, @2018] }
+    a = this.noPerDefaultYear.exec(this.ctx);
+    prettyList(a).should.equal('{ [2016, 2016], [2017, 2017], [2018, 2018] }');
+
+    // define NoPerDefaultMonthWithMismatch: expand { Interval[@2016, @2018-03] }
+    a = this.noPerDefaultMonthWithMismatch.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2016, 2016], [2017, 2017], [2018, 2018] }');
+  });
+
+  it('expands interval with open ends', function() {
+    // define OpenStart: expand { Interval(@2018-01-01, @2018-01-03] } per day
+    let a = this.openStart.exec(this.ctx);
+    prettyList(a).should.equal('{ [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }');
+
+    // define OpenEnd: expand { Interval[@2018-01-01, @2018-01-03) } per day
+    a = this.openEnd.exec(this.ctx);
+    prettyList(a).should.equal('{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02] }');
+
+    // define OpenBoth: expand { Interval(@2018-01-01, @2018-01-03) } per day
+    a = this.openBoth.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2018-01-02, 2018-01-02] }');
+  });
+
+  it('handles ends with mismatched precision', function() {
+    // define MismatchPrecision: expand { Interval[@2018-01-01, @2018-03] } per month
+    let e = '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }';
+    prettyList(this.mismatchPrecision.exec(this.ctx)).should.equal(e);
+
+    // define MismatchPrecisionResultLongerThanInput: expand { Interval[@2018-01, @2018-02-28] } per month
+    e = '{ [2018-01, 2018-01], [2018-02, 2018-02] }';
+    return prettyList(this.mismatchPrecisionResultLongerThanInput.exec(this.ctx)).should.equal(e);
+  });
+
+  it('returns an empty list if we get an empty list', function() {
+    // define EmptyList: List<Interval<Date>>{}
+    const a = this.emptyList.exec(this.ctx);
     a.should.be.instanceof(Array);
-    a.length.should.equal 0
+    return a.length.should.equal(0);
+  });
 
-  it 'returns null with open ended intervals', ->
-    # define NullOpen: expand { Interval[null, @2018-01-03] } per day
-    a = @nullOpen.exec(@ctx)
-    should.not.exist(a)
+  it('returns null with open ended intervals', function() {
+    // define NullOpen: expand { Interval[null, @2018-01-03] } per day
+    let a = this.nullOpen.exec(this.ctx);
+    should.not.exist(a);
 
-    # define NullClose: expand { Interval[@2018-01-01, null] } per day
-    a = @nullClose.exec(@ctx)
-    should.not.exist(a)
+    // define NullClose: expand { Interval[@2018-01-01, null] } per day
+    a = this.nullClose.exec(this.ctx);
+    should.not.exist(a);
 
-    # define NullBoth: expand { Interval[null, null] } per day
-    a = @nullBoth.exec(@ctx)
-    should.not.exist(a)
+    // define NullBoth: expand { Interval[null, null] } per day
+    a = this.nullBoth.exec(this.ctx);
+    return should.not.exist(a);
+  });
 
-  it 'returns empty list when per is more precise than the interval ends', ->
-    # define MonthDayPer: expand { Interval[@2018-01, @2018-03] } per day
-    @monthDayPer.exec(@ctx).should.be.empty()
+  it('returns empty list when per is more precise than the interval ends', function() {
+    // define MonthDayPer: expand { Interval[@2018-01, @2018-03] } per day
+    return this.monthDayPer.exec(this.ctx).should.be.empty();
+  });
 
-  it 'returns null when per not applicable', ->
-    # define BadPerMinute: expand { Interval[@2018-01-01, @2018-01-04] } per minute
-    a = @badPerMinute.exec(@ctx)
-    should.not.exist(a)
+  return it('returns null when per not applicable', function() {
+    // define BadPerMinute: expand { Interval[@2018-01-01, @2018-01-04] } per minute
+    let a = this.badPerMinute.exec(this.ctx);
+    should.not.exist(a);
 
-    # define BadPerGram: expand { Interval[@2018-01-01, @2018-01-04] } per 1 'g'
-    a = @badPerGram.exec(@ctx)
-    should.not.exist(a)
+    // define BadPerGram: expand { Interval[@2018-01-01, @2018-01-04] } per 1 'g'
+    a = this.badPerGram.exec(this.ctx);
+    return should.not.exist(a);
+  });
+});
 
-describe 'DateTimeIntervalExpand', ->
-  @beforeEach ->
-    setup @, data
+describe('DateTimeIntervalExpand', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
 
-  it 'expands a millisecond precision datetime', ->
-    # define MsPrecPerYear: expand { Interval[@2016-01-01T00:00:00.000+00:00, @2018-01-01T00:00:00.000+00:00] } per year
-    e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
-    prettyList(@msPrecPerYear.exec(@ctx)).should.equal e
+  it('expands a millisecond precision datetime', function() {
+    // define MsPrecPerYear: expand { Interval[@2016-01-01T00:00:00.000+00:00, @2018-01-01T00:00:00.000+00:00] } per year
+    let e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }';
+    prettyList(this.msPrecPerYear.exec(this.ctx)).should.equal(e);
 
-    # define MsPrecPerMonth: expand { Interval[@2018-01-01T00:00:00.000+00:00, @2018-03-01T00:00:00.000+00:00] } per month
-    e = '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }'
-    prettyList(@msPrecPerMonth.exec(@ctx)).should.equal e
+    // define MsPrecPerMonth: expand { Interval[@2018-01-01T00:00:00.000+00:00, @2018-03-01T00:00:00.000+00:00] } per month
+    e = '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }';
+    prettyList(this.msPrecPerMonth.exec(this.ctx)).should.equal(e);
 
-    # define MsPrecPerWeek: expand { Interval[@2018-01-01T00:00:00.000+00:00, @2018-01-21T00:00:00.000+00:00] } per week
-    e = '{ [2018-01-01, 2018-01-07], [2018-01-08, 2018-01-14], [2018-01-15, 2018-01-21] }'
-    prettyList(@msPrecPerWeek.exec(@ctx)).should.equal e
+    // define MsPrecPerWeek: expand { Interval[@2018-01-01T00:00:00.000+00:00, @2018-01-21T00:00:00.000+00:00] } per week
+    e = '{ [2018-01-01, 2018-01-07], [2018-01-08, 2018-01-14], [2018-01-15, 2018-01-21] }';
+    prettyList(this.msPrecPerWeek.exec(this.ctx)).should.equal(e);
 
-    # define MsPrecPerDay: expand { Interval[@2018-01-01T00:00:00.000+00:00, @2018-01-03T00:00:00.000+00:00] } per day
-    e = '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }'
-    prettyList(@msPrecPerDay.exec(@ctx)).should.equal e
+    // define MsPrecPerDay: expand { Interval[@2018-01-01T00:00:00.000+00:00, @2018-01-03T00:00:00.000+00:00] } per day
+    e = '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }';
+    prettyList(this.msPrecPerDay.exec(this.ctx)).should.equal(e);
 
-    # define MsPrecPerHour: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T03:00:00.000+00:00] } per hour
-    e = '{ [2018-01-01T01+00:00, 2018-01-01T01+00:00], [2018-01-01T02+00:00, 2018-01-01T02+00:00], [2018-01-01T03+00:00, 2018-01-01T03+00:00] }'
-    prettyList(@msPrecPerHour.exec(@ctx)).should.equal e
+    // define MsPrecPerHour: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T03:00:00.000+00:00] } per hour
+    e = '{ [2018-01-01T01+00:00, 2018-01-01T01+00:00], [2018-01-01T02+00:00, 2018-01-01T02+00:00], [2018-01-01T03+00:00, 2018-01-01T03+00:00] }';
+    prettyList(this.msPrecPerHour.exec(this.ctx)).should.equal(e);
 
-    # define MsPrecPerMinute: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:02:00.000+00:00] } per minute
-    e = '{ [2018-01-01T01:00+00:00, 2018-01-01T01:00+00:00], [2018-01-01T01:01+00:00, 2018-01-01T01:01+00:00], [2018-01-01T01:02+00:00, 2018-01-01T01:02+00:00] }'
-    prettyList(@msPrecPerMinute.exec(@ctx)).should.equal e
+    // define MsPrecPerMinute: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:02:00.000+00:00] } per minute
+    e = '{ [2018-01-01T01:00+00:00, 2018-01-01T01:00+00:00], [2018-01-01T01:01+00:00, 2018-01-01T01:01+00:00], [2018-01-01T01:02+00:00, 2018-01-01T01:02+00:00] }';
+    prettyList(this.msPrecPerMinute.exec(this.ctx)).should.equal(e);
 
-    # define MsPrecPerSecond: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:00:02.000+00:00] } per second
-    e = '{ [2018-01-01T01:00:00+00:00, 2018-01-01T01:00:00+00:00], [2018-01-01T01:00:01+00:00, 2018-01-01T01:00:01+00:00], [2018-01-01T01:00:02+00:00, 2018-01-01T01:00:02+00:00] }'
-    prettyList(@msPrecPerSecond.exec(@ctx)).should.equal e
+    // define MsPrecPerSecond: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:00:02.000+00:00] } per second
+    e = '{ [2018-01-01T01:00:00+00:00, 2018-01-01T01:00:00+00:00], [2018-01-01T01:00:01+00:00, 2018-01-01T01:00:01+00:00], [2018-01-01T01:00:02+00:00, 2018-01-01T01:00:02+00:00] }';
+    prettyList(this.msPrecPerSecond.exec(this.ctx)).should.equal(e);
 
-    # define MsPrecPerMillisecond: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:00:00.001+00:00] } per millisecond
-    e = '{ [2018-01-01T01:00:00.000+00:00, 2018-01-01T01:00:00.000+00:00], [2018-01-01T01:00:00.001+00:00, 2018-01-01T01:00:00.001+00:00] }'
-    prettyList(@msPrecPerMillisecond.exec(@ctx)).should.equal e
+    // define MsPrecPerMillisecond: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:00:00.001+00:00] } per millisecond
+    e = '{ [2018-01-01T01:00:00.000+00:00, 2018-01-01T01:00:00.000+00:00], [2018-01-01T01:00:00.001+00:00, 2018-01-01T01:00:00.001+00:00] }';
+    return prettyList(this.msPrecPerMillisecond.exec(this.ctx)).should.equal(e);
+  });
 
-  it 'expands a second precision datetime', ->
-    # define SecPrecPerYear: expand { Interval[@2016-01-01T00:00:00+00:00, @2018-01-01T00:00:00+00:00] } per year
-    e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
-    prettyList(@secPrecPerYear.exec(@ctx)).should.equal e
+  it('expands a second precision datetime', function() {
+    // define SecPrecPerYear: expand { Interval[@2016-01-01T00:00:00+00:00, @2018-01-01T00:00:00+00:00] } per year
+    let e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }';
+    prettyList(this.secPrecPerYear.exec(this.ctx)).should.equal(e);
 
-    # define SecPrecPerMonth: expand { Interval[@2018-01-01T00:00:00+00:00, @2018-03-01T00:00:00+00:00] } per month
-    e = '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }'
-    prettyList(@secPrecPerMonth.exec(@ctx)).should.equal e
+    // define SecPrecPerMonth: expand { Interval[@2018-01-01T00:00:00+00:00, @2018-03-01T00:00:00+00:00] } per month
+    e = '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }';
+    prettyList(this.secPrecPerMonth.exec(this.ctx)).should.equal(e);
 
-    # define SecPrecPerWeek: expand { Interval[@2018-01-01T00:00:00+00:00, @2018-01-21T00:00:00+00:00] } per week
-    e = '{ [2018-01-01, 2018-01-07], [2018-01-08, 2018-01-14], [2018-01-15, 2018-01-21] }'
-    prettyList(@secPrecPerWeek.exec(@ctx)).should.equal e
+    // define SecPrecPerWeek: expand { Interval[@2018-01-01T00:00:00+00:00, @2018-01-21T00:00:00+00:00] } per week
+    e = '{ [2018-01-01, 2018-01-07], [2018-01-08, 2018-01-14], [2018-01-15, 2018-01-21] }';
+    prettyList(this.secPrecPerWeek.exec(this.ctx)).should.equal(e);
 
-    # define SecPrecPerDay: expand { Interval[@2018-01-01T00:00:00+00:00, @2018-01-03T00:00:00+00:00] } per day
-    e = '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }'
-    prettyList(@secPrecPerDay.exec(@ctx)).should.equal e
+    // define SecPrecPerDay: expand { Interval[@2018-01-01T00:00:00+00:00, @2018-01-03T00:00:00+00:00] } per day
+    e = '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }';
+    prettyList(this.secPrecPerDay.exec(this.ctx)).should.equal(e);
 
-    # define SecPrecPerHour: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T03:00:00+00:00] } per hour
-    e = '{ [2018-01-01T01+00:00, 2018-01-01T01+00:00], [2018-01-01T02+00:00, 2018-01-01T02+00:00], [2018-01-01T03+00:00, 2018-01-01T03+00:00] }'
-    prettyList(@secPrecPerHour.exec(@ctx)).should.equal e
+    // define SecPrecPerHour: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T03:00:00+00:00] } per hour
+    e = '{ [2018-01-01T01+00:00, 2018-01-01T01+00:00], [2018-01-01T02+00:00, 2018-01-01T02+00:00], [2018-01-01T03+00:00, 2018-01-01T03+00:00] }';
+    prettyList(this.secPrecPerHour.exec(this.ctx)).should.equal(e);
 
-    # define SecPrecPerMinute: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T01:02:00+00:00] } per minute
-    e = '{ [2018-01-01T01:00+00:00, 2018-01-01T01:00+00:00], [2018-01-01T01:01+00:00, 2018-01-01T01:01+00:00], [2018-01-01T01:02+00:00, 2018-01-01T01:02+00:00] }'
-    prettyList(@secPrecPerMinute.exec(@ctx)).should.equal e
+    // define SecPrecPerMinute: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T01:02:00+00:00] } per minute
+    e = '{ [2018-01-01T01:00+00:00, 2018-01-01T01:00+00:00], [2018-01-01T01:01+00:00, 2018-01-01T01:01+00:00], [2018-01-01T01:02+00:00, 2018-01-01T01:02+00:00] }';
+    prettyList(this.secPrecPerMinute.exec(this.ctx)).should.equal(e);
 
-    # define SecPrecPerSecond: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T01:00:01+00:00] } per second
-    e = '{ [2018-01-01T01:00:00+00:00, 2018-01-01T01:00:00+00:00], [2018-01-01T01:00:01+00:00, 2018-01-01T01:00:01+00:00] }'
-    prettyList(@secPrecPerSecond.exec(@ctx)).should.equal e
+    // define SecPrecPerSecond: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T01:00:01+00:00] } per second
+    e = '{ [2018-01-01T01:00:00+00:00, 2018-01-01T01:00:00+00:00], [2018-01-01T01:00:01+00:00, 2018-01-01T01:00:01+00:00] }';
+    prettyList(this.secPrecPerSecond.exec(this.ctx)).should.equal(e);
 
-    @secPrecPerMillisecond.exec(@ctx).should.be.empty()
+    return this.secPrecPerMillisecond.exec(this.ctx).should.be.empty();
+  });
 
-  it 'expands a minute precision datetime', ->
-    # define MinPrecPerYear: expand { Interval[@2016-01-01T00:00+00:00, @2018-01-01T00:00+00:00] } per year
-    e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
-    prettyList(@minPrecPerYear.exec(@ctx)).should.equal e
+  it('expands a minute precision datetime', function() {
+    // define MinPrecPerYear: expand { Interval[@2016-01-01T00:00+00:00, @2018-01-01T00:00+00:00] } per year
+    let e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }';
+    prettyList(this.minPrecPerYear.exec(this.ctx)).should.equal(e);
 
-    # define MinPrecPerMonth: expand { Interval[@2018-01-01T00:00+00:00, @2018-03-01T00:00+00:00] } per month
-    e = '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }'
-    prettyList(@minPrecPerMonth.exec(@ctx)).should.equal e
+    // define MinPrecPerMonth: expand { Interval[@2018-01-01T00:00+00:00, @2018-03-01T00:00+00:00] } per month
+    e = '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }';
+    prettyList(this.minPrecPerMonth.exec(this.ctx)).should.equal(e);
 
-    # define MinPrecPerWeek: expand { Interval[@2018-01-01T00:00+00:00, @2018-01-21T00:00+00:00] } per week
-    e = '{ [2018-01-01, 2018-01-07], [2018-01-08, 2018-01-14], [2018-01-15, 2018-01-21] }'
-    prettyList(@minPrecPerWeek.exec(@ctx)).should.equal e
+    // define MinPrecPerWeek: expand { Interval[@2018-01-01T00:00+00:00, @2018-01-21T00:00+00:00] } per week
+    e = '{ [2018-01-01, 2018-01-07], [2018-01-08, 2018-01-14], [2018-01-15, 2018-01-21] }';
+    prettyList(this.minPrecPerWeek.exec(this.ctx)).should.equal(e);
 
-    # define MinPrecPerDay: expand { Interval[@2018-01-01T00:00+00:00, @2018-01-03T00:00+00:00] } per day
-    e = '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }'
-    prettyList(@minPrecPerDay.exec(@ctx)).should.equal e
+    // define MinPrecPerDay: expand { Interval[@2018-01-01T00:00+00:00, @2018-01-03T00:00+00:00] } per day
+    e = '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }';
+    prettyList(this.minPrecPerDay.exec(this.ctx)).should.equal(e);
 
-    # define MinPrecPerHour: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T03:00+00:00] } per hour
-    e = '{ [2018-01-01T01+00:00, 2018-01-01T01+00:00], [2018-01-01T02+00:00, 2018-01-01T02+00:00], [2018-01-01T03+00:00, 2018-01-01T03+00:00] }'
-    prettyList(@minPrecPerHour.exec(@ctx)).should.equal e
+    // define MinPrecPerHour: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T03:00+00:00] } per hour
+    e = '{ [2018-01-01T01+00:00, 2018-01-01T01+00:00], [2018-01-01T02+00:00, 2018-01-01T02+00:00], [2018-01-01T03+00:00, 2018-01-01T03+00:00] }';
+    prettyList(this.minPrecPerHour.exec(this.ctx)).should.equal(e);
 
-    # define MinPrecPerMinute: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T01:01+00:00] } per minute
-    e = '{ [2018-01-01T01:00+00:00, 2018-01-01T01:00+00:00], [2018-01-01T01:01+00:00, 2018-01-01T01:01+00:00] }'
-    prettyList(@minPrecPerMinute.exec(@ctx)).should.equal e
+    // define MinPrecPerMinute: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T01:01+00:00] } per minute
+    e = '{ [2018-01-01T01:00+00:00, 2018-01-01T01:00+00:00], [2018-01-01T01:01+00:00, 2018-01-01T01:01+00:00] }';
+    prettyList(this.minPrecPerMinute.exec(this.ctx)).should.equal(e);
 
-    @minPrecPerSecond.exec(@ctx).should.be.empty()
-    @minPrecPerMillisecond.exec(@ctx).should.be.empty()
+    this.minPrecPerSecond.exec(this.ctx).should.be.empty();
+    return this.minPrecPerMillisecond.exec(this.ctx).should.be.empty();
+  });
 
-  it 'expands an hour precision datetime', ->
-    # define HourPrecPerYear: expand { Interval[@2016-01-01T00+00:00, @2018-01-01T00+00:00] } per year
-    e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
-    prettyList(@hourPrecPerYear.exec(@ctx)).should.equal e
+  it('expands an hour precision datetime', function() {
+    // define HourPrecPerYear: expand { Interval[@2016-01-01T00+00:00, @2018-01-01T00+00:00] } per year
+    let e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }';
+    prettyList(this.hourPrecPerYear.exec(this.ctx)).should.equal(e);
 
-    # define HourPrecPerMonth: expand { Interval[@2018-01-01T00+00:00, @2018-03-01T00+00:00] } per month
-    e = '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }'
-    prettyList(@hourPrecPerMonth.exec(@ctx)).should.equal e
+    // define HourPrecPerMonth: expand { Interval[@2018-01-01T00+00:00, @2018-03-01T00+00:00] } per month
+    e = '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }';
+    prettyList(this.hourPrecPerMonth.exec(this.ctx)).should.equal(e);
 
-    # define HourPrecPerWeek: expand { Interval[@2018-01-01T00+00:00, @2018-01-21T00+00:00] } per week
-    e = '{ [2018-01-01, 2018-01-07], [2018-01-08, 2018-01-14], [2018-01-15, 2018-01-21] }'
-    prettyList(@hourPrecPerWeek.exec(@ctx)).should.equal e
+    // define HourPrecPerWeek: expand { Interval[@2018-01-01T00+00:00, @2018-01-21T00+00:00] } per week
+    e = '{ [2018-01-01, 2018-01-07], [2018-01-08, 2018-01-14], [2018-01-15, 2018-01-21] }';
+    prettyList(this.hourPrecPerWeek.exec(this.ctx)).should.equal(e);
 
-    # define HourPrecPerDay: expand { Interval[@2018-01-01T00+00:00, @2018-01-03T00+00:00] } per day
-    e = '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }'
-    prettyList(@hourPrecPerDay.exec(@ctx)).should.equal e
+    // define HourPrecPerDay: expand { Interval[@2018-01-01T00+00:00, @2018-01-03T00+00:00] } per day
+    e = '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }';
+    prettyList(this.hourPrecPerDay.exec(this.ctx)).should.equal(e);
 
-    # define HourPrecPerHour: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T02+00:00] } per hour
-    e = '{ [2018-01-01T01+00:00, 2018-01-01T01+00:00], [2018-01-01T02+00:00, 2018-01-01T02+00:00] }'
-    prettyList(@hourPrecPerHour.exec(@ctx)).should.equal e
+    // define HourPrecPerHour: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T02+00:00] } per hour
+    e = '{ [2018-01-01T01+00:00, 2018-01-01T01+00:00], [2018-01-01T02+00:00, 2018-01-01T02+00:00] }';
+    prettyList(this.hourPrecPerHour.exec(this.ctx)).should.equal(e);
 
-    @hourPrecPerMinute.exec(@ctx).should.be.empty()
-    @hourPrecPerSecond.exec(@ctx).should.be.empty()
-    @hourPrecPerMillisecond.exec(@ctx).should.be.empty()
+    this.hourPrecPerMinute.exec(this.ctx).should.be.empty();
+    this.hourPrecPerSecond.exec(this.ctx).should.be.empty();
+    return this.hourPrecPerMillisecond.exec(this.ctx).should.be.empty();
+  });
 
-  it 'expands a day precision datetime', ->
-    # define DayPrecPerYear: expand { Interval[DateTime(2016,01,01), DateTime(2018,01,01)] } per year
-    e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
-    prettyList(@dayPrecPerYear.exec(@ctx)).should.equal e
+  it('expands a day precision datetime', function() {
+    // define DayPrecPerYear: expand { Interval[DateTime(2016,01,01), DateTime(2018,01,01)] } per year
+    let e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }';
+    prettyList(this.dayPrecPerYear.exec(this.ctx)).should.equal(e);
 
-    # define DayPrecPerMonth: expand { Interval[DateTime(2018,01,01), DateTime(2018,03,01)] } per month
-    e = '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }'
-    prettyList(@dayPrecPerMonth.exec(@ctx)).should.equal e
+    // define DayPrecPerMonth: expand { Interval[DateTime(2018,01,01), DateTime(2018,03,01)] } per month
+    e = '{ [2018-01, 2018-01], [2018-02, 2018-02], [2018-03, 2018-03] }';
+    prettyList(this.dayPrecPerMonth.exec(this.ctx)).should.equal(e);
 
-    # define DayPrecPerWeek: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,14)] } per week
-    e = '{ [2018-01-01, 2018-01-07], [2018-01-08, 2018-01-14] }'
-    prettyList(@dayPrecPerWeek.exec(@ctx)).should.equal e
+    // define DayPrecPerWeek: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,14)] } per week
+    e = '{ [2018-01-01, 2018-01-07], [2018-01-08, 2018-01-14] }';
+    prettyList(this.dayPrecPerWeek.exec(this.ctx)).should.equal(e);
 
-    # define DayPrecPerDay: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,02)] } per day
-    e = '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02] }'
-    prettyList(@dayPrecPerDay.exec(@ctx)).should.equal e
+    // define DayPrecPerDay: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,02)] } per day
+    e = '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02] }';
+    prettyList(this.dayPrecPerDay.exec(this.ctx)).should.equal(e);
 
-    @dayPrecPerHour.exec(@ctx).should.be.empty()
-    @dayPrecPerMinute.exec(@ctx).should.be.empty()
-    @dayPrecPerSecond.exec(@ctx).should.be.empty()
-    @dayPrecPerMillisecond.exec(@ctx).should.be.empty()
+    this.dayPrecPerHour.exec(this.ctx).should.be.empty();
+    this.dayPrecPerMinute.exec(this.ctx).should.be.empty();
+    this.dayPrecPerSecond.exec(this.ctx).should.be.empty();
+    return this.dayPrecPerMillisecond.exec(this.ctx).should.be.empty();
+  });
 
-  it 'expands a month precision datetime', ->
-    # define MonthPrecPerYear: expand { Interval[DateTime(2016,01), DateTime(2018,01)] } per year
-    e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
-    prettyList(@monthPrecPerYear.exec(@ctx)).should.equal e
+  it('expands a month precision datetime', function() {
+    // define MonthPrecPerYear: expand { Interval[DateTime(2016,01), DateTime(2018,01)] } per year
+    let e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }';
+    prettyList(this.monthPrecPerYear.exec(this.ctx)).should.equal(e);
 
-    # define MonthPrecPerMonth: expand { Interval[DateTime(2018,01), DateTime(2018,02)] } per month
-    e = '{ [2018-01, 2018-01], [2018-02, 2018-02] }'
-    prettyList(@monthPrecPerMonth.exec(@ctx)).should.equal e
+    // define MonthPrecPerMonth: expand { Interval[DateTime(2018,01), DateTime(2018,02)] } per month
+    e = '{ [2018-01, 2018-01], [2018-02, 2018-02] }';
+    prettyList(this.monthPrecPerMonth.exec(this.ctx)).should.equal(e);
 
-    @monthPrecPerWeek.exec(@ctx).should.be.empty()
-    @monthPrecPerDay.exec(@ctx).should.be.empty()
-    @monthPrecPerHour.exec(@ctx).should.be.empty()
-    @monthPrecPerMinute.exec(@ctx).should.be.empty()
-    @monthPrecPerSecond.exec(@ctx).should.be.empty()
-    @monthPrecPerMillisecond.exec(@ctx).should.be.empty()
+    this.monthPrecPerWeek.exec(this.ctx).should.be.empty();
+    this.monthPrecPerDay.exec(this.ctx).should.be.empty();
+    this.monthPrecPerHour.exec(this.ctx).should.be.empty();
+    this.monthPrecPerMinute.exec(this.ctx).should.be.empty();
+    this.monthPrecPerSecond.exec(this.ctx).should.be.empty();
+    return this.monthPrecPerMillisecond.exec(this.ctx).should.be.empty();
+  });
 
-  it 'expands a year precision datetime', ->
-    # define YearPrecPerYear: expand { Interval[DateTime(2016), DateTime(2018)] } per year
-    e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }'
-    prettyList(@yearPrecPerYear.exec(@ctx)).should.equal e
+  it('expands a year precision datetime', function() {
+    // define YearPrecPerYear: expand { Interval[DateTime(2016), DateTime(2018)] } per year
+    const e = '{ [2016, 2016], [2017, 2017], [2018, 2018] }';
+    prettyList(this.yearPrecPerYear.exec(this.ctx)).should.equal(e);
 
-    @yearPrecPerMonth.exec(@ctx).should.be.empty()
-    @yearPrecPerWeek.exec(@ctx).should.be.empty()
-    @yearPrecPerDay.exec(@ctx).should.be.empty()
-    @yearPrecPerHour.exec(@ctx).should.be.empty()
-    @yearPrecPerMinute.exec(@ctx).should.be.empty()
-    @yearPrecPerSecond.exec(@ctx).should.be.empty()
-    @yearPrecPerMillisecond.exec(@ctx).should.be.empty()
+    this.yearPrecPerMonth.exec(this.ctx).should.be.empty();
+    this.yearPrecPerWeek.exec(this.ctx).should.be.empty();
+    this.yearPrecPerDay.exec(this.ctx).should.be.empty();
+    this.yearPrecPerHour.exec(this.ctx).should.be.empty();
+    this.yearPrecPerMinute.exec(this.ctx).should.be.empty();
+    this.yearPrecPerSecond.exec(this.ctx).should.be.empty();
+    return this.yearPrecPerMillisecond.exec(this.ctx).should.be.empty();
+  });
 
-  it 'ignores null item in list', ->
-    # define NullInList: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T01+00:00], null } per hour
-    a = @nullInList.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01T01+00:00, 2018-01-01T01+00:00] }'
+  it('ignores null item in list', function() {
+    // define NullInList: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T01+00:00], null } per hour
+    const a = this.nullInList.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2018-01-01T01+00:00, 2018-01-01T01+00:00] }');
+  });
 
-  it 'expands two overlapping intervals', ->
-    # define Overlapping: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T03+00:00], Interval[@2018-01-01T02+00:00, @2018-01-01T04+00:00] } per hour
-    a = @overlapping.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01T01+00:00, 2018-01-01T01+00:00], [2018-01-01T02+00:00, 2018-01-01T02+00:00], [2018-01-01T03+00:00, 2018-01-01T03+00:00], [2018-01-01T04+00:00, 2018-01-01T04+00:00] }'
+  it('expands two overlapping intervals', function() {
+    // define Overlapping: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T03+00:00], Interval[@2018-01-01T02+00:00, @2018-01-01T04+00:00] } per hour
+    const a = this.overlapping.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2018-01-01T01+00:00, 2018-01-01T01+00:00], [2018-01-01T02+00:00, 2018-01-01T02+00:00], [2018-01-01T03+00:00, 2018-01-01T03+00:00], [2018-01-01T04+00:00, 2018-01-01T04+00:00] }');
+  });
 
-  it 'expands two non overlapping intervals', ->
-    # define NonOverlapping: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T02+00:00], Interval[@2018-01-01T05+00:00, @2018-01-01T05+00:00] } per hour
-    a = @nonOverlapping.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01T01+00:00, 2018-01-01T01+00:00], [2018-01-01T02+00:00, 2018-01-01T02+00:00], [2018-01-01T05+00:00, 2018-01-01T05+00:00] }'
+  it('expands two non overlapping intervals', function() {
+    // define NonOverlapping: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T02+00:00], Interval[@2018-01-01T05+00:00, @2018-01-01T05+00:00] } per hour
+    const a = this.nonOverlapping.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2018-01-01T01+00:00, 2018-01-01T01+00:00], [2018-01-01T02+00:00, 2018-01-01T02+00:00], [2018-01-01T05+00:00, 2018-01-01T05+00:00] }');
+  });
 
-  it 'expands an interval with default per', ->
-    # # define NoPerDefaultMS: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:00:00.001+00:00] }
-    a = @noPerDefaultMS.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01T01:00:00.000+00:00, 2018-01-01T01:00:00.000+00:00], [2018-01-01T01:00:00.001+00:00, 2018-01-01T01:00:00.001+00:00] }'
+  it('expands an interval with default per', function() {
+    // # define NoPerDefaultMS: expand { Interval[@2018-01-01T01:00:00.000+00:00, @2018-01-01T01:00:00.001+00:00] }
+    let a = this.noPerDefaultMS.exec(this.ctx);
+    prettyList(a).should.equal('{ [2018-01-01T01:00:00.000+00:00, 2018-01-01T01:00:00.000+00:00], [2018-01-01T01:00:00.001+00:00, 2018-01-01T01:00:00.001+00:00] }');
 
-    # # define NoPerDefaultSec: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T01:00:01+00:00] }
-    a = @noPerDefaultSec.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01T01:00:00+00:00, 2018-01-01T01:00:00+00:00], [2018-01-01T01:00:01+00:00, 2018-01-01T01:00:01+00:00] }'
+    // # define NoPerDefaultSec: expand { Interval[@2018-01-01T01:00:00+00:00, @2018-01-01T01:00:01+00:00] }
+    a = this.noPerDefaultSec.exec(this.ctx);
+    prettyList(a).should.equal('{ [2018-01-01T01:00:00+00:00, 2018-01-01T01:00:00+00:00], [2018-01-01T01:00:01+00:00, 2018-01-01T01:00:01+00:00] }');
 
-    # # define NoPerDefaultMin: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T01:01+00:00] }
-    a = @noPerDefaultMin.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01T01:00+00:00, 2018-01-01T01:00+00:00], [2018-01-01T01:01+00:00, 2018-01-01T01:01+00:00] }'
+    // # define NoPerDefaultMin: expand { Interval[@2018-01-01T01:00+00:00, @2018-01-01T01:01+00:00] }
+    a = this.noPerDefaultMin.exec(this.ctx);
+    prettyList(a).should.equal('{ [2018-01-01T01:00+00:00, 2018-01-01T01:00+00:00], [2018-01-01T01:01+00:00, 2018-01-01T01:01+00:00] }');
 
-    # define NoPerDefaultHour: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T01+00:00] }
-    a = @noPerDefaultHour.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01T01+00:00, 2018-01-01T01+00:00] }'
+    // define NoPerDefaultHour: expand { Interval[@2018-01-01T01+00:00, @2018-01-01T01+00:00] }
+    a = this.noPerDefaultHour.exec(this.ctx);
+    prettyList(a).should.equal('{ [2018-01-01T01+00:00, 2018-01-01T01+00:00] }');
 
-    # define NoPerDefaultDay: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,01)] }
-    a = @noPerDefaultDay.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01, 2018-01-01] }'
+    // define NoPerDefaultDay: expand { Interval[DateTime(2018,01,01), DateTime(2018,01,01)] }
+    a = this.noPerDefaultDay.exec(this.ctx);
+    prettyList(a).should.equal('{ [2018-01-01, 2018-01-01] }');
 
-    # define NoPerDefaultMonth: expand { Interval[DateTime(2018,01), DateTime(2018,01)]  }
-    a = @noPerDefaultMonth.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01, 2018-01] }'
+    // define NoPerDefaultMonth: expand { Interval[DateTime(2018,01), DateTime(2018,01)]  }
+    a = this.noPerDefaultMonth.exec(this.ctx);
+    prettyList(a).should.equal('{ [2018-01, 2018-01] }');
 
-    # define NoPerDefaultYear: expand { Interval[DateTime(2018), DateTime(2018)]  }
-    a = @noPerDefaultYear.exec(@ctx)
-    prettyList(a).should.equal '{ [2018, 2018] }'
+    // define NoPerDefaultYear: expand { Interval[DateTime(2018), DateTime(2018)]  }
+    a = this.noPerDefaultYear.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2018, 2018] }');
+  });
 
-  it 'expands interval with open ends', ->
-    # define OpenStart: expand { Interval(@2018-01-01T01+00:00, @2018-01-03T01+00:00] } per day
-    a = @openStart.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }'
+  it('expands interval with open ends', function() {
+    // define OpenStart: expand { Interval(@2018-01-01T01+00:00, @2018-01-03T01+00:00] } per day
+    let a = this.openStart.exec(this.ctx);
+    prettyList(a).should.equal('{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }');
 
-    # define OpenEnd: expand { Interval[@2018-01-01T01+00:00, @2018-01-03T01+00:00) } per day
-    a = @openEnd.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }'
+    // define OpenEnd: expand { Interval[@2018-01-01T01+00:00, @2018-01-03T01+00:00) } per day
+    a = this.openEnd.exec(this.ctx);
+    prettyList(a).should.equal('{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }');
 
-    # define OpenBoth: expand { Interval(@2018-01-01T01+00:00, @2018-01-03T01+00:00) } per day
-    a = @openBoth.exec(@ctx)
-    prettyList(a).should.equal '{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }'
+    // define OpenBoth: expand { Interval(@2018-01-01T01+00:00, @2018-01-03T01+00:00) } per day
+    a = this.openBoth.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2018-01-01, 2018-01-01], [2018-01-02, 2018-01-02], [2018-01-03, 2018-01-03] }');
+  });
 
-  it 'handles ends with mismatched precision', ->
-    # define MismatchPrecision: expand { Interval[@2012-01-01T12:00+00:00, @2012-01-02T12:00:00+00:00] } per day
-    e = "{ [2012-01-01, 2012-01-01], [2012-01-02, 2012-01-02] }"
-    prettyList(@mismatchPrecision.exec(@ctx)).should.equal e
+  it('handles ends with mismatched precision', function() {
+    // define MismatchPrecision: expand { Interval[@2012-01-01T12:00+00:00, @2012-01-02T12:00:00+00:00] } per day
+    let e = "{ [2012-01-01, 2012-01-01], [2012-01-02, 2012-01-02] }";
+    prettyList(this.mismatchPrecision.exec(this.ctx)).should.equal(e);
 
-    # define MismatchPrecisionResultLongerThanInput: expand { Interval[@2012-01-01T13:00:00+00:00, @2012-01-02T12:59+00:00] } per day
-    e = "{ [2012-01-01, 2012-01-01], [2012-01-02, 2012-01-02] }"
-    prettyList(@mismatchPrecisionResultLongerThanInput.exec(@ctx)).should.equal e
+    // define MismatchPrecisionResultLongerThanInput: expand { Interval[@2012-01-01T13:00:00+00:00, @2012-01-02T12:59+00:00] } per day
+    e = "{ [2012-01-01, 2012-01-01], [2012-01-02, 2012-01-02] }";
+    return prettyList(this.mismatchPrecisionResultLongerThanInput.exec(this.ctx)).should.equal(e);
+  });
 
-  it 'returns an empty list if we get an empty list', ->
-    # define EmptyList: List<Interval<Date>>{}
-    a = @emptyList.exec(@ctx)
+  it('returns an empty list if we get an empty list', function() {
+    // define EmptyList: List<Interval<Date>>{}
+    const a = this.emptyList.exec(this.ctx);
     a.should.be.instanceof(Array);
-    a.length.should.equal 0
+    return a.length.should.equal(0);
+  });
 
-  it 'returns null with open ended intervals', ->
-    # define NullOpen: expand { Interval[null, @2018-01-03T01+00:00] } per day
-    a = @nullOpen.exec(@ctx)
-    should.not.exist(a)
+  it('returns null with open ended intervals', function() {
+    // define NullOpen: expand { Interval[null, @2018-01-03T01+00:00] } per day
+    let a = this.nullOpen.exec(this.ctx);
+    should.not.exist(a);
 
-    # define NullClose: expand { Interval[@2018-01-01T01+00:00, null] } per day
-    a = @nullClose.exec(@ctx)
-    should.not.exist(a)
+    // define NullClose: expand { Interval[@2018-01-01T01+00:00, null] } per day
+    a = this.nullClose.exec(this.ctx);
+    should.not.exist(a);
 
-    # define NullBoth: expand { Interval[null, null] } per day
-    a = @nullBoth.exec(@ctx)
-    should.not.exist(a)
+    // define NullBoth: expand { Interval[null, null] } per day
+    a = this.nullBoth.exec(this.ctx);
+    return should.not.exist(a);
+  });
 
-  it 'returns null when per not applicable', ->
-    # define BadPerGram: expand { Interval[@2018-01-01T01+00:00, @2018-01-04T01+00:00] } per 1 'g'
-    a = @badPerGram.exec(@ctx)
-    should.not.exist(a)
+  return it('returns null when per not applicable', function() {
+    // define BadPerGram: expand { Interval[@2018-01-01T01+00:00, @2018-01-04T01+00:00] } per 1 'g'
+    const a = this.badPerGram.exec(this.ctx);
+    return should.not.exist(a);
+  });
+});
 
-describe 'TimeIntervalExpand', ->
-  @beforeEach ->
-    setup @, data
+describe('TimeIntervalExpand', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
 
-  it 'expands a millisecond precision time', ->
-    # define MsPrecPerHour: expand { Interval[@T01:00:00.000, @T03:00:00.000] } per hour
-    e = '{ [1, 1], [2, 2], [3, 3] }'
-    prettyList(@msPrecPerHour.exec(@ctx)).should.equal e
+  it('expands a millisecond precision time', function() {
+    // define MsPrecPerHour: expand { Interval[@T01:00:00.000, @T03:00:00.000] } per hour
+    let e = '{ [1, 1], [2, 2], [3, 3] }';
+    prettyList(this.msPrecPerHour.exec(this.ctx)).should.equal(e);
 
-    # define MsPrecPerMinute: expand { Interval[@T01:00:00.000, @T01:02:00.000] } per minute
-    e = '{ [1:00, 1:00], [1:01, 1:01], [1:02, 1:02] }'
-    prettyList(@msPrecPerMinute.exec(@ctx)).should.equal e
+    // define MsPrecPerMinute: expand { Interval[@T01:00:00.000, @T01:02:00.000] } per minute
+    e = '{ [1:00, 1:00], [1:01, 1:01], [1:02, 1:02] }';
+    prettyList(this.msPrecPerMinute.exec(this.ctx)).should.equal(e);
 
-    # define MsPrecPerSecond: expand { Interval[@T01:00:00.000, @T01:00:02.000] } per second
-    e = '{ [1:00:00, 1:00:00], [1:00:01, 1:00:01], [1:00:02, 1:00:02] }'
-    prettyList(@msPrecPerSecond.exec(@ctx)).should.equal e
+    // define MsPrecPerSecond: expand { Interval[@T01:00:00.000, @T01:00:02.000] } per second
+    e = '{ [1:00:00, 1:00:00], [1:00:01, 1:00:01], [1:00:02, 1:00:02] }';
+    prettyList(this.msPrecPerSecond.exec(this.ctx)).should.equal(e);
 
-    # define MsPrecPerMillisecond: expand { Interval[@T01:00:00.000, @T01:00:00.001] } per millisecond
-    e = '{ [1:00:00.000, 1:00:00.000], [1:00:00.001, 1:00:00.001] }'
-    prettyList(@msPrecPerMillisecond.exec(@ctx)).should.equal e
+    // define MsPrecPerMillisecond: expand { Interval[@T01:00:00.000, @T01:00:00.001] } per millisecond
+    e = '{ [1:00:00.000, 1:00:00.000], [1:00:00.001, 1:00:00.001] }';
+    return prettyList(this.msPrecPerMillisecond.exec(this.ctx)).should.equal(e);
+  });
 
-  it 'expands a second precision datetime', ->
-    # define SecPrecPerHour: expand { Interval[@T01:00:00, @T03:00:00] } per hour
-    e = '{ [1, 1], [2, 2], [3, 3] }'
-    prettyList(@secPrecPerHour.exec(@ctx)).should.equal e
+  it('expands a second precision datetime', function() {
+    // define SecPrecPerHour: expand { Interval[@T01:00:00, @T03:00:00] } per hour
+    let e = '{ [1, 1], [2, 2], [3, 3] }';
+    prettyList(this.secPrecPerHour.exec(this.ctx)).should.equal(e);
 
-    # define SecPrecPerMinute: expand { Interval[@T01:00:00, @T01:02:00] } per minute
-    e = '{ [1:00, 1:00], [1:01, 1:01], [1:02, 1:02] }'
-    prettyList(@secPrecPerMinute.exec(@ctx)).should.equal e
+    // define SecPrecPerMinute: expand { Interval[@T01:00:00, @T01:02:00] } per minute
+    e = '{ [1:00, 1:00], [1:01, 1:01], [1:02, 1:02] }';
+    prettyList(this.secPrecPerMinute.exec(this.ctx)).should.equal(e);
 
-    # define SecPrecPerSecond: expand { Interval[@T01:00:00, @T01:00:01] } per second
-    e = '{ [1:00:00, 1:00:00], [1:00:01, 1:00:01] }'
-    prettyList(@secPrecPerSecond.exec(@ctx)).should.equal e
+    // define SecPrecPerSecond: expand { Interval[@T01:00:00, @T01:00:01] } per second
+    e = '{ [1:00:00, 1:00:00], [1:00:01, 1:00:01] }';
+    prettyList(this.secPrecPerSecond.exec(this.ctx)).should.equal(e);
 
-    @secPrecPerMillisecond.exec(@ctx).should.be.empty()
+    return this.secPrecPerMillisecond.exec(this.ctx).should.be.empty();
+  });
 
-  it 'expands a minute precision datetime', ->
-    # define MinPrecPerHour: expand { Interval[@T01:00, @T03:00] } per hour
-    e = '{ [1, 1], [2, 2], [3, 3] }'
-    prettyList(@minPrecPerHour.exec(@ctx)).should.equal e
+  it('expands a minute precision datetime', function() {
+    // define MinPrecPerHour: expand { Interval[@T01:00, @T03:00] } per hour
+    let e = '{ [1, 1], [2, 2], [3, 3] }';
+    prettyList(this.minPrecPerHour.exec(this.ctx)).should.equal(e);
 
-    # define MinPrecPerMinute: expand { Interval[@T01:00, @T01:01] } per minute
-    e = '{ [1:00, 1:00], [1:01, 1:01] }'
-    prettyList(@minPrecPerMinute.exec(@ctx)).should.equal e
+    // define MinPrecPerMinute: expand { Interval[@T01:00, @T01:01] } per minute
+    e = '{ [1:00, 1:00], [1:01, 1:01] }';
+    prettyList(this.minPrecPerMinute.exec(this.ctx)).should.equal(e);
 
-    @minPrecPerSecond.exec(@ctx).should.be.empty()
-    @minPrecPerMillisecond.exec(@ctx).should.be.empty()
+    this.minPrecPerSecond.exec(this.ctx).should.be.empty();
+    return this.minPrecPerMillisecond.exec(this.ctx).should.be.empty();
+  });
 
-  it 'expands an hour precision datetime', ->
-    # define HourPrecPerHour: expand { Interval[@T01, @T02] } per hour
-    e = '{ [1, 1], [2, 2] }'
-    prettyList(@hourPrecPerHour.exec(@ctx)).should.equal e
+  return it('expands an hour precision datetime', function() {
+    // define HourPrecPerHour: expand { Interval[@T01, @T02] } per hour
+    const e = '{ [1, 1], [2, 2] }';
+    prettyList(this.hourPrecPerHour.exec(this.ctx)).should.equal(e);
 
-    @hourPrecPerMinute.exec(@ctx).should.be.empty()
-    @hourPrecPerSecond.exec(@ctx).should.be.empty()
-    @hourPrecPerMillisecond.exec(@ctx).should.be.empty()
+    this.hourPrecPerMinute.exec(this.ctx).should.be.empty();
+    this.hourPrecPerSecond.exec(this.ctx).should.be.empty();
+    return this.hourPrecPerMillisecond.exec(this.ctx).should.be.empty();
+  });
+});
 
-describe 'QuantityIntervalExpand', ->
-  @beforeEach ->
-    setup @, data
+describe('QuantityIntervalExpand', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
 
-  it 'expands single intervals', ->
-    # define ClosedSingleGPerG: expand { Interval[2 'g', 4 'g'] } per 1 'g'
-    a = @closedSingleGPerG.exec(@ctx)
-    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }"
+  it('expands single intervals', function() {
+    // define ClosedSingleGPerG: expand { Interval[2 'g', 4 'g'] } per 1 'g'
+    let a = this.closedSingleGPerG.exec(this.ctx);
+    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
 
-    # define ClosedSingleGPerGDecimal: expand { Interval[2.1 'g', 4.1 'g'] } per 1 'g'
-    a = @closedSingleGPerGDecimal.exec(@ctx)
-    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }"
+    // define ClosedSingleGPerGDecimal: expand { Interval[2.1 'g', 4.1 'g'] } per 1 'g'
+    a = this.closedSingleGPerGDecimal.exec(this.ctx);
+    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
 
-    # define ClosedSingleGPerMG: expand { Interval[2 'g', 2.003 'g'] } per 1 'mg'
-    a = @closedSingleGPerMG.exec(@ctx)
-    prettyList(a).should.equal "{ [2000 'mg', 2000 'mg'], [2001 'mg', 2001 'mg'], [2002 'mg', 2002 'mg'], [2003 'mg', 2003 'mg'] }"
+    // define ClosedSingleGPerMG: expand { Interval[2 'g', 2.003 'g'] } per 1 'mg'
+    a = this.closedSingleGPerMG.exec(this.ctx);
+    prettyList(a).should.equal("{ [2000 'mg', 2000 'mg'], [2001 'mg', 2001 'mg'], [2002 'mg', 2002 'mg'], [2003 'mg', 2003 'mg'] }");
 
-    # define ClosedSingleMGPerGTrunc: expand { Interval[2999 'mg', 4200 'mg'] } per 1 'g'
-    a = @closedSingleMGPerGTrunc.exec(@ctx)
-    prettyList(a).should.equal "{ [2999 'mg', 3998 'mg'] }"
+    // define ClosedSingleMGPerGTrunc: expand { Interval[2999 'mg', 4200 'mg'] } per 1 'g'
+    a = this.closedSingleMGPerGTrunc.exec(this.ctx);
+    prettyList(a).should.equal("{ [2999 'mg', 3998 'mg'] }");
 
-    # define ClosedSingleMGPerMGTrunc: expand { Interval[2000 'mg', 4500 'mg'] } per 800 'mg'
-    a = @closedSingleMGPerMGTrunc.exec(@ctx)
-    prettyList(a).should.equal "{ [2000 'mg', 2799 'mg'], [2800 'mg', 3599 'mg'], [3600 'mg', 4399 'mg'] }"
+    // define ClosedSingleMGPerMGTrunc: expand { Interval[2000 'mg', 4500 'mg'] } per 800 'mg'
+    a = this.closedSingleMGPerMGTrunc.exec(this.ctx);
+    prettyList(a).should.equal("{ [2000 'mg', 2799 'mg'], [2800 'mg', 3599 'mg'], [3600 'mg', 4399 'mg'] }");
 
-    # define ClosedSingleMGPerMGDecimal: expand { Interval[2000.01 'mg', 4500 'mg'] } per 800 'mg'
-    a = @closedSingleMGPerMGDecimal.exec(@ctx)
-    prettyList(a).should.equal "{ [2000 'mg', 2799 'mg'], [2800 'mg', 3599 'mg'], [3600 'mg', 4399 'mg'] }"
+    // define ClosedSingleMGPerMGDecimal: expand { Interval[2000.01 'mg', 4500 'mg'] } per 800 'mg'
+    a = this.closedSingleMGPerMGDecimal.exec(this.ctx);
+    return prettyList(a).should.equal("{ [2000 'mg', 2799 'mg'], [2800 'mg', 3599 'mg'], [3600 'mg', 4399 'mg'] }");
+  });
 
-  it 'expands lists of multiple intervals', ->
-    # define NullInList: expand { Interval[2 'g', 4 'g'], null } per 1 'g'
-    a = @nullInList.exec(@ctx)
-    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }"
+  it('expands lists of multiple intervals', function() {
+    // define NullInList: expand { Interval[2 'g', 4 'g'], null } per 1 'g'
+    let a = this.nullInList.exec(this.ctx);
+    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
 
-    # define Overlapping: expand { Interval[2 'g', 4 'g'], Interval[3 'g', 5 'g'] } per 1 'g'
-    a = @overlapping.exec(@ctx)
-    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'], [5 'g', 5 'g'] }"
+    // define Overlapping: expand { Interval[2 'g', 4 'g'], Interval[3 'g', 5 'g'] } per 1 'g'
+    a = this.overlapping.exec(this.ctx);
+    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'], [5 'g', 5 'g'] }");
 
-    # define NonOverlapping: expand { Interval[2 'g', 4 'g'], Interval[6 'g', 6 'g'] } per 1 'g'
-    a = @nonOverlapping.exec(@ctx)
-    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'], [6 'g', 6 'g'] }"
+    // define NonOverlapping: expand { Interval[2 'g', 4 'g'], Interval[6 'g', 6 'g'] } per 1 'g'
+    a = this.nonOverlapping.exec(this.ctx);
+    return prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'], [6 'g', 6 'g'] }");
+  });
 
-  it 'expands interval using the first items units if no per provided', ->
-    # define NoPerDefaultM: expand { Interval[2 'm', 400 'cm'] }
-    a = @noPerDefaultM.exec(@ctx)
-    prettyList(a).should.equal "{ [2 'm', 2 'm'], [3 'm', 3 'm'], [4 'm', 4 'm'] }"
+  it('expands interval using the first items units if no per provided', function() {
+    // define NoPerDefaultM: expand { Interval[2 'm', 400 'cm'] }
+    let a = this.noPerDefaultM.exec(this.ctx);
+    prettyList(a).should.equal("{ [2 'm', 2 'm'], [3 'm', 3 'm'], [4 'm', 4 'm'] }");
 
-    # define NoPerDefaultG: expand { Interval[2 'g', 4 'g'] }
-    a = @noPerDefaultG.exec(@ctx)
-    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }"
+    // define NoPerDefaultG: expand { Interval[2 'g', 4 'g'] }
+    a = this.noPerDefaultG.exec(this.ctx);
+    return prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+  });
 
-  it 'expands interval with open ends', ->
-    # define OpenStart: expand { Interval(2 'g', 4 'g'] } per 1 'g'
-    a = @openStart.exec(@ctx)
-    prettyList(a).should.equal "{ [3 'g', 3 'g'], [4 'g', 4 'g'] }"
+  it('expands interval with open ends', function() {
+    // define OpenStart: expand { Interval(2 'g', 4 'g'] } per 1 'g'
+    let a = this.openStart.exec(this.ctx);
+    prettyList(a).should.equal("{ [3 'g', 3 'g'], [4 'g', 4 'g'] }");
 
-    # define OpenEnd: expand { Interval[2 'g', 4 'g') } per 1 'g'
-    a = @openEnd.exec(@ctx)
-    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'] }"
+    // define OpenEnd: expand { Interval[2 'g', 4 'g') } per 1 'g'
+    a = this.openEnd.exec(this.ctx);
+    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'] }");
 
-    # define OpenBoth: expand { Interval(2 'g', 4 'g') } per 1 'g'
-    a = @openBoth.exec(@ctx)
-    prettyList(a).should.equal "{ [3 'g', 3 'g'] }"
+    // define OpenBoth: expand { Interval(2 'g', 4 'g') } per 1 'g'
+    a = this.openBoth.exec(this.ctx);
+    prettyList(a).should.equal("{ [3 'g', 3 'g'] }");
 
-    # define OpenBothDecimal: expand { Interval(2.1 'g', 4.1 'g') } per 1 'g'
-    a = @openBothDecimal.exec(@ctx)
-    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }"
+    // define OpenBothDecimal: expand { Interval(2.1 'g', 4.1 'g') } per 1 'g'
+    a = this.openBothDecimal.exec(this.ctx);
+    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
 
-    # define OpenBothDecimalTrunc: expand { Interval(2.1 'g', 4.101 'g') } per 1 'g'
-    a = @openBothDecimalTrunc.exec(@ctx)
-    prettyList(a).should.equal "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }"
+    // define OpenBothDecimalTrunc: expand { Interval(2.1 'g', 4.101 'g') } per 1 'g'
+    a = this.openBothDecimalTrunc.exec(this.ctx);
+    return prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+  });
 
-  it 'returns an empty list if we get an empty list or if there are no results', ->
-    # define EmptyList: List<Interval<Date>>{}
-    a = @emptyList.exec(@ctx)
+  it('returns an empty list if we get an empty list or if there are no results', function() {
+    // define EmptyList: List<Interval<Date>>{}
+    let a = this.emptyList.exec(this.ctx);
     a.should.be.instanceof(Array);
-    a.length.should.equal 0
+    a.length.should.equal(0);
 
-    # define PerTooBig: expand { Interval[2 'g', 4 'g'], null } per 5 'g'
-    a = @perTooBig.exec(@ctx)
+    // define PerTooBig: expand { Interval[2 'g', 4 'g'], null } per 5 'g'
+    a = this.perTooBig.exec(this.ctx);
     a.should.be.instanceof(Array);
-    a.length.should.equal 0
+    return a.length.should.equal(0);
+  });
 
-  it 'returns null with open ended intervals', ->
-    # define NullClose: expand { Interval[2 'g', null] } per 1 'g'
-    a = @nullClose.exec(@ctx)
-    should.not.exist(a)
-    # define NullOpen: expand { Interval[null, 4 'g'] } per 1 'g'
-    a = @nullOpen.exec(@ctx)
-    should.not.exist(a)
-    # define NullBoth: expand { Interval[null, null] } per 1 'g'
-    a = @nullBoth.exec(@ctx)
-    should.not.exist(a)
+  it('returns null with open ended intervals', function() {
+    // define NullClose: expand { Interval[2 'g', null] } per 1 'g'
+    let a = this.nullClose.exec(this.ctx);
+    should.not.exist(a);
+    // define NullOpen: expand { Interval[null, 4 'g'] } per 1 'g'
+    a = this.nullOpen.exec(this.ctx);
+    should.not.exist(a);
+    // define NullBoth: expand { Interval[null, null] } per 1 'g'
+    a = this.nullBoth.exec(this.ctx);
+    return should.not.exist(a);
+  });
 
-  it 'returns null when per not applicable or mismatch interval', ->
-    # define BadPerMinute: expand { Interval(2 'g', 4 'g'] } per 1 minute
-    a = @badPerMinute.exec(@ctx)
-    should.not.exist(a)
+  return it('returns null when per not applicable or mismatch interval', function() {
+    // define BadPerMinute: expand { Interval(2 'g', 4 'g'] } per 1 minute
+    let a = this.badPerMinute.exec(this.ctx);
+    should.not.exist(a);
 
-    # define BadPerGram: expand { Interval(2 'km', 4 'km'] }  per 1 'g'
-    a = @badPerGram.exec(@ctx)
-    should.not.exist(a)
+    // define BadPerGram: expand { Interval(2 'km', 4 'km'] }  per 1 'g'
+    a = this.badPerGram.exec(this.ctx);
+    return should.not.exist(a);
+  });
+});
 
-describe 'IntegerIntervalExpand', ->
-  @beforeEach ->
-    setup @, data
+describe('IntegerIntervalExpand', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
 
-  it 'expands single intervals', ->
-    # define ClosedSinglePer1: expand { Interval[2, 4] } per 1 '1'
-    a = @closedSinglePer1.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 2], [3, 3], [4, 4] }'
+  it('expands single intervals', function() {
+    // define ClosedSinglePer1: expand { Interval[2, 4] } per 1 '1'
+    let a = this.closedSinglePer1.exec(this.ctx);
+    prettyList(a).should.equal('{ [2, 2], [3, 3], [4, 4] }');
 
-    # define ClosedSinglePer3: expand { Interval[2, 10] } per 3 '1'
-    a = @closedSinglePer3.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 4], [5, 7], [8, 10] }'
+    // define ClosedSinglePer3: expand { Interval[2, 10] } per 3 '1'
+    a = this.closedSinglePer3.exec(this.ctx);
+    prettyList(a).should.equal('{ [2, 4], [5, 7], [8, 10] }');
 
-    # define ClosedSinglePer3NoteTheWidth: expand { Interval[2, 4] } per 3 '1'
-    a = @closedSinglePer3NoteTheWidth.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 4] }'
+    // define ClosedSinglePer3NoteTheWidth: expand { Interval[2, 4] } per 3 '1'
+    a = this.closedSinglePer3NoteTheWidth.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2, 4] }');
+  });
 
-  it 'expands lists of multiple intervals', ->
-    # define NullInList: expand { Interval[2, 4], null } per 1 '1'
-    a = @nullInList.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 2], [3, 3], [4, 4] }'
+  it('expands lists of multiple intervals', function() {
+    // define NullInList: expand { Interval[2, 4], null } per 1 '1'
+    let a = this.nullInList.exec(this.ctx);
+    prettyList(a).should.equal('{ [2, 2], [3, 3], [4, 4] }');
 
-    # define Overlapping: expand { Interval[2, 4], Interval[3, 5] } per 1 '1'
-    a = @overlapping.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 2], [3, 3], [4, 4], [5, 5] }'
+    // define Overlapping: expand { Interval[2, 4], Interval[3, 5] } per 1 '1'
+    a = this.overlapping.exec(this.ctx);
+    prettyList(a).should.equal('{ [2, 2], [3, 3], [4, 4], [5, 5] }');
 
-    # define NonOverlapping: expand { Interval[2, 4], Interval[6, 6] } per 1 '1'
-    a = @nonOverlapping.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 2], [3, 3], [4, 4], [6, 6] }'
+    // define NonOverlapping: expand { Interval[2, 4], Interval[6, 6] } per 1 '1'
+    a = this.nonOverlapping.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2, 2], [3, 3], [4, 4], [6, 6] }');
+  });
 
-  it 'expands interval using default per of 1', ->
-    # define NoPer: expand { Interval[2, 4] }
-    a = @noPer.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 2], [3, 3], [4, 4] }'
+  it('expands interval using default per of 1', function() {
+    // define NoPer: expand { Interval[2, 4] }
+    const a = this.noPer.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2, 2], [3, 3], [4, 4] }');
+  });
 
-  it 'expands interval with open ends', ->
-    # define OpenStart: expand { Interval(2, 4] } per 1 '1'
-    a = @openStart.exec(@ctx)
-    prettyList(a).should.equal '{ [3, 3], [4, 4] }'
+  it('expands interval with open ends', function() {
+    // define OpenStart: expand { Interval(2, 4] } per 1 '1'
+    let a = this.openStart.exec(this.ctx);
+    prettyList(a).should.equal('{ [3, 3], [4, 4] }');
 
-    # define OpenEnd: expand { Interval[2, 4) } per 1 '1'
-    a = @openEnd.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 2], [3, 3] }'
+    // define OpenEnd: expand { Interval[2, 4) } per 1 '1'
+    a = this.openEnd.exec(this.ctx);
+    prettyList(a).should.equal('{ [2, 2], [3, 3] }');
 
-    # define OpenBoth: expand { Interval(2, 4) } per 1 '1'
-    a = @openBoth.exec(@ctx)
-    prettyList(a).should.equal '{ [3, 3] }'
+    // define OpenBoth: expand { Interval(2, 4) } per 1 '1'
+    a = this.openBoth.exec(this.ctx);
+    return prettyList(a).should.equal('{ [3, 3] }');
+  });
 
-  it 'returns an empty list if we get an empty list or if there are no results', ->
-    # define EmptyList: List<Interval<Integer>>{}
-    a = @emptyList.exec(@ctx)
+  it('returns an empty list if we get an empty list or if there are no results', function() {
+    // define EmptyList: List<Interval<Integer>>{}
+    let a = this.emptyList.exec(this.ctx);
     a.should.be.instanceof(Array);
-    a.length.should.equal 0
+    a.length.should.equal(0);
 
-    # define PerTooBig: expand { Interval[2, 4], null } per 5 '1'
-    a = @perTooBig.exec(@ctx)
+    // define PerTooBig: expand { Interval[2, 4], null } per 5 '1'
+    a = this.perTooBig.exec(this.ctx);
     a.should.be.instanceof(Array);
-    a.length.should.equal 0
+    return a.length.should.equal(0);
+  });
 
-  it 'returns null with open ended intervals', ->
-    # define NullClose: expand { Interval[2, null] } per 1 '1'
-    a = @nullClose.exec(@ctx)
-    should.not.exist(a)
-    # define NullOpen: expand { Interval[null, 4] } per 1 '1'
-    a = @nullOpen.exec(@ctx)
-    should.not.exist(a)
-    # define NullBoth: expand { Interval[null, null] } per 1 '1'
-    a = @nullBoth.exec(@ctx)
-    should.not.exist(a)
+  it('returns null with open ended intervals', function() {
+    // define NullClose: expand { Interval[2, null] } per 1 '1'
+    let a = this.nullClose.exec(this.ctx);
+    should.not.exist(a);
+    // define NullOpen: expand { Interval[null, 4] } per 1 '1'
+    a = this.nullOpen.exec(this.ctx);
+    should.not.exist(a);
+    // define NullBoth: expand { Interval[null, null] } per 1 '1'
+    a = this.nullBoth.exec(this.ctx);
+    return should.not.exist(a);
+  });
 
-  it 'returns null when per not applicable or mismatch interval', ->
-    # define BadPerMinute: expand { Interval(2, 4] } per 1 minute
-    a = @badPerMinute.exec(@ctx)
-    should.not.exist(a)
+  it('returns null when per not applicable or mismatch interval', function() {
+    // define BadPerMinute: expand { Interval(2, 4] } per 1 minute
+    const a = this.badPerMinute.exec(this.ctx);
+    return should.not.exist(a);
+  });
 
-  it 'produces a more precise value for output intervals', ->
-    # define PerDecimalMorePrecise: expand { Interval[10, 10] } per 0.1
-    a = @perDecimalMorePrecise.exec(@ctx)
-    # JavaScript truncates 10.0 to 10.
-    prettyList(a).should.equal '{ [10, 10.09999999], [10.1, 10.19999999], [10.2, 10.29999999], [10.3, 10.39999999], [10.4, 10.49999999], [10.5, 10.59999999], [10.6, 10.69999999], [10.7, 10.79999999], [10.8, 10.89999999], [10.9, 10.99999999] }'
+  return it('produces a more precise value for output intervals', function() {
+    // define PerDecimalMorePrecise: expand { Interval[10, 10] } per 0.1
+    const a = this.perDecimalMorePrecise.exec(this.ctx);
+    // JavaScript truncates 10.0 to 10.
+    return prettyList(a).should.equal('{ [10, 10.09999999], [10.1, 10.19999999], [10.2, 10.29999999], [10.3, 10.39999999], [10.4, 10.49999999], [10.5, 10.59999999], [10.6, 10.69999999], [10.7, 10.79999999], [10.8, 10.89999999], [10.9, 10.99999999] }');
+  });
+});
 
-describe 'DecimalIntervalExpand', ->
-  @beforeEach ->
-    setup @, data
+describe('DecimalIntervalExpand', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
 
-  it 'expands single intervals', ->
-    # define ClosedSingle: expand { Interval[2, 5] } per 1.5 '1'
-    a = @closedSingle.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 3.49999999], [3.5, 4.99999999] }'
+  it('expands single intervals', function() {
+    // define ClosedSingle: expand { Interval[2, 5] } per 1.5 '1'
+    let a = this.closedSingle.exec(this.ctx);
+    prettyList(a).should.equal('{ [2, 3.49999999], [3.5, 4.99999999] }');
 
-    # define ClosedSingle1: expand { Interval[2.5, 10] } per 2 '1'
-    a = @closedSingle1.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 3], [4, 5], [6, 7], [8, 9] }'
+    // define ClosedSingle1: expand { Interval[2.5, 10] } per 2 '1'
+    a = this.closedSingle1.exec(this.ctx);
+    prettyList(a).should.equal('{ [2, 3], [4, 5], [6, 7], [8, 9] }');
 
-    # define ClosedSingle2: expand { Interval[2, 4.5] } per 0.5 '1'
-    a = @closedSingle2.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 2.49999999], [2.5, 2.99999999], [3, 3.49999999], [3.5, 3.99999999], [4, 4.49999999] }'
+    // define ClosedSingle2: expand { Interval[2, 4.5] } per 0.5 '1'
+    a = this.closedSingle2.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2, 2.49999999], [2.5, 2.99999999], [3, 3.49999999], [3.5, 3.99999999], [4, 4.49999999] }');
+  });
 
-  it 'expands lists of multiple intervals', ->
-    # define NullInList: expand { Interval[2, 5], null } per 1.5 '1'
-    a = @nullInList.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 3.49999999], [3.5, 4.99999999] }'
+  it('expands lists of multiple intervals', function() {
+    // define NullInList: expand { Interval[2, 5], null } per 1.5 '1'
+    let a = this.nullInList.exec(this.ctx);
+    prettyList(a).should.equal('{ [2, 3.49999999], [3.5, 4.99999999] }');
 
-    # define Overlapping: expand { Interval[2, 5], Interval[4, 7] } per 1.5 '1'
-    a = @overlapping.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 3.49999999], [3.5, 4.99999999], [5, 6.49999999] }'
+    // define Overlapping: expand { Interval[2, 5], Interval[4, 7] } per 1.5 '1'
+    a = this.overlapping.exec(this.ctx);
+    prettyList(a).should.equal('{ [2, 3.49999999], [3.5, 4.99999999], [5, 6.49999999] }');
 
-    # define NonOverlapping: expand { Interval[2, 4], Interval[6, 8] } per 1.5 '1'
-    a = @nonOverlapping.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 3.49999999], [6, 7.49999999] }'
+    // define NonOverlapping: expand { Interval[2, 4], Interval[6, 8] } per 1.5 '1'
+    a = this.nonOverlapping.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2, 3.49999999], [6, 7.49999999] }');
+  });
 
-  it 'expands interval using default per of 1', ->
-    # define NoPer: expand { Interval[2.5, 4.5] }
-    a = @noPer.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 2], [3, 3], [4, 4] }'
+  it('expands interval using default per of 1', function() {
+    // define NoPer: expand { Interval[2.5, 4.5] }
+    const a = this.noPer.exec(this.ctx);
+    return prettyList(a).should.equal('{ [2, 2], [3, 3], [4, 4] }');
+  });
 
-  it 'expands interval with open ends', ->
-    # define OpenStart: expand { Interval(2, 5] } per 1.5 '1'
-    a = @openStart.exec(@ctx)
-    prettyList(a).should.equal '{ [3, 4.49999999] }'
+  it('expands interval with open ends', function() {
+    // define OpenStart: expand { Interval(2, 5] } per 1.5 '1'
+    let a = this.openStart.exec(this.ctx);
+    prettyList(a).should.equal('{ [3, 4.49999999] }');
 
-    # define OpenEnd: expand { Interval[2, 5) } per 1.5 '1'
-    a = @openEnd.exec(@ctx)
-    prettyList(a).should.equal '{ [2, 3.49999999] }'
+    // define OpenEnd: expand { Interval[2, 5) } per 1.5 '1'
+    a = this.openEnd.exec(this.ctx);
+    prettyList(a).should.equal('{ [2, 3.49999999] }');
 
-    # define OpenBoth: expand { Interval(2, 5) } per 1.5 '1'
-    @openBoth.exec(@ctx).should.be.empty()
+    // define OpenBoth: expand { Interval(2, 5) } per 1.5 '1'
+    return this.openBoth.exec(this.ctx).should.be.empty();
+  });
 
-  it 'returns an empty list if we get an empty list', ->
-    # define EmptyList: List<Interval<Decimal>>{}
-    a = @emptyList.exec(@ctx)
+  it('returns an empty list if we get an empty list', function() {
+    // define EmptyList: List<Interval<Decimal>>{}
+    const a = this.emptyList.exec(this.ctx);
     a.should.be.instanceof(Array);
-    a.should.be.empty()
+    return a.should.be.empty();
+  });
 
-  it 'returns an empty list if we get an interval with a null boundary', ->
-    # define PerTooBig: expand { Interval[2, 4], null } per 5.5 '1'
-    a = @perTooBig.exec(@ctx)
+  it('returns an empty list if we get an interval with a null boundary', function() {
+    // define PerTooBig: expand { Interval[2, 4], null } per 5.5 '1'
+    const a = this.perTooBig.exec(this.ctx);
     a.should.be.instanceof(Array);
-    a.should.be.empty()
+    return a.should.be.empty();
+  });
 
-  it 'returns null with open ended intervals', ->
-    # define NullClose: expand { Interval[2, null] } per 1.5 '1'
-    a = @nullClose.exec(@ctx)
-    should.not.exist(a)
-    # define NullOpen: expand { Interval[null, 4] } per 1.5 '1'
-    a = @nullOpen.exec(@ctx)
-    should.not.exist(a)
-    # define NullBoth: expand { Interval[null, null] } per 1.5 '1'
-    a = @nullBoth.exec(@ctx)
-    should.not.exist(a)
+  it('returns null with open ended intervals', function() {
+    // define NullClose: expand { Interval[2, null] } per 1.5 '1'
+    let a = this.nullClose.exec(this.ctx);
+    should.not.exist(a);
+    // define NullOpen: expand { Interval[null, 4] } per 1.5 '1'
+    a = this.nullOpen.exec(this.ctx);
+    should.not.exist(a);
+    // define NullBoth: expand { Interval[null, null] } per 1.5 '1'
+    a = this.nullBoth.exec(this.ctx);
+    return should.not.exist(a);
+  });
 
-  it 'returns null when per not applicable or mismatch interval', ->
-    # define BadPerMinute: expand { Interval(2.1, 4.1] } per 0.5 minute
-    a = @badPerMinute.exec(@ctx)
-    should.not.exist(a)
+  return it('returns null when per not applicable or mismatch interval', function() {
+    // define BadPerMinute: expand { Interval(2.1, 4.1] } per 0.5 minute
+    const a = this.badPerMinute.exec(this.ctx);
+    return should.not.exist(a);
+  });
+});
 
-describe 'SameAs', ->
-  @beforeEach ->
-    setup @, data
+describe('SameAs', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
 
-  it 'returns true when both intervals values are null and closed', ->
-    # define NullBoth: Interval[null,null] same as Interval[null,null]
-    @nullBoth.exec(@ctx).should.be.true()
+  it('returns true when both intervals values are null and closed', function() {
+    // define NullBoth: Interval[null,null] same as Interval[null,null]
+    return this.nullBoth.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns false when one intervals low and high are null', ->
-    # define NullOne: Interval[DateTime(2018,01,01), DateTime(2018,02,02)] same as Interval[null,null]
-    @nullOne.exec(@ctx).should.be.false()
+  it('returns false when one intervals low and high are null', function() {
+    // define NullOne: Interval[DateTime(2018,01,01), DateTime(2018,02,02)] same as Interval[null,null]
+    return this.nullOne.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns true when both intervals are the same', ->
-    # define Equal: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[DateTime(2018,01,01), DateTime(2018,01,01)]
-    @equal.exec(@ctx).should.be.true()
+  it('returns true when both intervals are the same', function() {
+    // define Equal: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[DateTime(2018,01,01), DateTime(2018,01,01)]
+    return this.equal.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns false when both intervals are not the same', ->
-    # define NotEqual: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[DateTime(2018,02,01), DateTime(2018,05,01)]
-    @notEqual.exec(@ctx).should.be.false()
+  it('returns false when both intervals are not the same', function() {
+    // define NotEqual: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[DateTime(2018,02,01), DateTime(2018,05,01)]
+    return this.notEqual.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns null when comparing date and datetime because precision is changed when converting date to datetime', ->
-    # define DateTimeAndDateComparisonEqual: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[Date(2018,01,01), Date(2018,01,01)]
-    a = @dateTimeAndDateComparisonEqual.exec(@ctx)
-    should(a).be.null()
+  it('returns null when comparing date and datetime because precision is changed when converting date to datetime', function() {
+    // define DateTimeAndDateComparisonEqual: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[Date(2018,01,01), Date(2018,01,01)]
+    const a = this.dateTimeAndDateComparisonEqual.exec(this.ctx);
+    return should(a).be.null();
+  });
 
-  it 'returns null when both intervals are null', ->
-    # define NullIntervals: (null as Interval<DateTime>) same as (null as Interval<DateTime>)
-    a = @nullIntervals.exec(@ctx)
-    should(a).be.null()
+  it('returns null when both intervals are null', function() {
+    // define NullIntervals: (null as Interval<DateTime>) same as (null as Interval<DateTime>)
+    const a = this.nullIntervals.exec(this.ctx);
+    return should(a).be.null();
+  });
 
-  it 'returns true when comparing a closed interval and open interval after it is converted', ->
-    # define OpenAndClosed: Interval[DateTime(2018,01,01,00,00,00,0), DateTime(2019,01,01,00,00,00,0)) same as Interval[DateTime(2018,01,01,00,00,00,0), DateTime(2018,12,31,23,59,59,999)]
-    @openAndClosed.exec(@ctx).should.be.true()
+  it('returns true when comparing a closed interval and open interval after it is converted', function() {
+    // define OpenAndClosed: Interval[DateTime(2018,01,01,00,00,00,0), DateTime(2019,01,01,00,00,00,0)) same as Interval[DateTime(2018,01,01,00,00,00,0), DateTime(2018,12,31,23,59,59,999)]
+    return this.openAndClosed.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns true when both intervals are open ended', ->
-    # define OpenEnded: Interval[DateTime(2018,01,01), null] same day as Interval[DateTime(2018,01,01), null]
-    @openEnded.exec(@ctx).should.be.true()
+  it('returns true when both intervals are open ended', function() {
+    // define OpenEnded: Interval[DateTime(2018,01,01), null] same day as Interval[DateTime(2018,01,01), null]
+    return this.openEnded.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns false when the first interval is open ended and the second is not', ->
-    # define OpenEndedNotSame: Interval[DateTime(2018,01,01), null] same day as Interval[DateTime(2018,01,01), DateTime(2019,01,01)]
-    @openEndedNotSame.exec(@ctx).should.be.false()
+  it('returns false when the first interval is open ended and the second is not', function() {
+    // define OpenEndedNotSame: Interval[DateTime(2018,01,01), null] same day as Interval[DateTime(2018,01,01), DateTime(2019,01,01)]
+    return this.openEndedNotSame.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns false when the second interval is open and the first is not', ->
-    # define OpenEndedNotSame2: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same day as Interval[DateTime(2018,01,01), null]
-    @openEndedNotSame2.exec(@ctx).should.be.false()
+  it('returns false when the second interval is open and the first is not', function() {
+    // define OpenEndedNotSame2: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same day as Interval[DateTime(2018,01,01), null]
+    return this.openEndedNotSame2.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns true when both intervals start at null and end at the same time', ->
-    # define OpenBeginningSame: Interval[null,DateTime(2018,01,01)] same as Interval[null,DateTime(2018,01,01)]
-    @openBeginningSame.exec(@ctx).should.be.true()
+  it('returns true when both intervals start at null and end at the same time', function() {
+    // define OpenBeginningSame: Interval[null,DateTime(2018,01,01)] same as Interval[null,DateTime(2018,01,01)]
+    return this.openBeginningSame.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns false when one interval starts at null and the other does not', ->
-    # define OpenBeginningNotSame: Interval[DateTime(2017,01,01),DateTime(2018,01,01)] same as Interval[null,DateTime(2018,01,01)]
-    @openBeginningNotSame.exec(@ctx).should.be.false()
+  it('returns false when one interval starts at null and the other does not', function() {
+    // define OpenBeginningNotSame: Interval[DateTime(2017,01,01),DateTime(2018,01,01)] same as Interval[null,DateTime(2018,01,01)]
+    return this.openBeginningNotSame.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns true when comparing a closed interval of Dates to an open interval after it is converted', ->
-    # define DateOpenAndClosed: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,03))
-    @dateOpenAndClosed.exec(@ctx).should.be.true()
+  it('returns true when comparing a closed interval of Dates to an open interval after it is converted', function() {
+    // define DateOpenAndClosed: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,03))
+    return this.dateOpenAndClosed.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns true when both Date intervals are open ended', ->
-    # define DateOpenEnded: Interval[Date(2018,01,01), null] same as Interval[Date(2018,01,01), null)]
-    @dateOpenEnded.exec(@ctx).should.be.true()
+  it('returns true when both Date intervals are open ended', function() {
+    // define DateOpenEnded: Interval[Date(2018,01,01), null] same as Interval[Date(2018,01,01), null)]
+    return this.dateOpenEnded.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns true when comparing a closed interval of Times to an open interval after it is converted', ->
-    # define TimeOpenAndClosed: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(02,03))
-    @timeOpenAndClosed.exec(@ctx).should.be.true()
+  it('returns true when comparing a closed interval of Times to an open interval after it is converted', function() {
+    // define TimeOpenAndClosed: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(02,03))
+    return this.timeOpenAndClosed.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns true when both Time intervals are open ended', ->
-    # define TimeOpenEnded: Interval[Time(01,01), null] same as Interval[Time(01,01), null)]
-    @timeOpenEnded.exec(@ctx).should.be.true()
+  it('returns true when both Time intervals are open ended', function() {
+    // define TimeOpenEnded: Interval[Time(01,01), null] same as Interval[Time(01,01), null)]
+    return this.timeOpenEnded.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns true when both Date intervals are the same', ->
-    # define DateIntervalComparisonSame: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,02)]
-    @dateIntervalComparisonSame.exec(@ctx).should.be.true()
+  it('returns true when both Date intervals are the same', function() {
+    // define DateIntervalComparisonSame: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,02)]
+    return this.dateIntervalComparisonSame.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns false when Date intervals are not the same', ->
-    # define DateIntervalComparisonNotSame: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,01)]
-    @dateIntervalComparisonNotSame.exec(@ctx).should.be.false()
+  it('returns false when Date intervals are not the same', function() {
+    // define DateIntervalComparisonNotSame: Interval[Date(2018,01,01), Date(2018,02,02)] same as Interval[Date(2018,01,01), Date(2018,02,01)]
+    return this.dateIntervalComparisonNotSame.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns true when both Time intervals are the same', ->
-    # define TimeIntervalComparisonSame: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(02,02)]
-    @timeIntervalComparisonSame.exec(@ctx).should.be.true()
+  it('returns true when both Time intervals are the same', function() {
+    // define TimeIntervalComparisonSame: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(02,02)]
+    return this.timeIntervalComparisonSame.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns false when Time intervals are not the same', ->
-    # define TimeIntervalComparisonNotSame: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(08,01)]
-    @timeIntervalComparisonNotSame.exec(@ctx).should.be.false()
+  it('returns false when Time intervals are not the same', function() {
+    // define TimeIntervalComparisonNotSame: Interval[Time(01,01), Time(02,02)] same as Interval[Time(01,01), Time(08,01)]
+    return this.timeIntervalComparisonNotSame.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns true when DateTime intervals are same on the year precision', ->
-    # define DateTimeYearPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same year as Interval[DateTime(2018,02,01), DateTime(2019,05,01)]
-    @dateTimeYearPrecisionSame.exec(@ctx).should.be.true()
+  it('returns true when DateTime intervals are same on the year precision', function() {
+    // define DateTimeYearPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same year as Interval[DateTime(2018,02,01), DateTime(2019,05,01)]
+    return this.dateTimeYearPrecisionSame.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns false when DateTime intervals are not the same on the requested year precision', ->
-    # define DateTimeYearPrecisionNotSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same year as Interval[DateTime(2018,02,01), DateTime(2020,05,01)]
-    @dateTimeYearPrecisionNotSame.exec(@ctx).should.be.false()
+  it('returns false when DateTime intervals are not the same on the requested year precision', function() {
+    // define DateTimeYearPrecisionNotSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same year as Interval[DateTime(2018,02,01), DateTime(2020,05,01)]
+    return this.dateTimeYearPrecisionNotSame.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns true when DateTime intervals are same on the year precision', ->
-    # define DateYearPrecisionSame: Interval[Date(2018,01,01), Date(2019,01,01)] same year as Interval[Date(2018,02,01), Date(2019,05,01)]
-    @dateYearPrecisionSame.exec(@ctx).should.be.true()
+  it('returns true when DateTime intervals are same on the year precision', function() {
+    // define DateYearPrecisionSame: Interval[Date(2018,01,01), Date(2019,01,01)] same year as Interval[Date(2018,02,01), Date(2019,05,01)]
+    return this.dateYearPrecisionSame.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns false when DateTime intervals are not the same on the requested year precision', ->
-    # define DateYearPrecisionNotSame: Interval[Date(2018,01,01), Date(2019,01,01)] same year as Interval[Date(2018,02,01), Date(2020,05,01)]
-    @dateYearPrecisionNotSame.exec(@ctx).should.be.false()
+  it('returns false when DateTime intervals are not the same on the requested year precision', function() {
+    // define DateYearPrecisionNotSame: Interval[Date(2018,01,01), Date(2019,01,01)] same year as Interval[Date(2018,02,01), Date(2020,05,01)]
+    return this.dateYearPrecisionNotSame.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns true when DateTime intervals are same on the month precision', ->
-    # define DateTimeMonthPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same month as Interval[DateTime(2018,01,01), DateTime(2019,01,03)]
-    @dateTimeMonthPrecisionSame.exec(@ctx).should.be.true()
+  it('returns true when DateTime intervals are same on the month precision', function() {
+    // define DateTimeMonthPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same month as Interval[DateTime(2018,01,01), DateTime(2019,01,03)]
+    return this.dateTimeMonthPrecisionSame.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns false when DateTime intervals are not the same on the requested month precision', ->
-    # define DateTimeMonthPrecisionNotSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same month as Interval[DateTime(2018,02,01), DateTime(2019,01,01)]
-    @dateTimeMonthPrecisionNotSame.exec(@ctx).should.be.false()
+  it('returns false when DateTime intervals are not the same on the requested month precision', function() {
+    // define DateTimeMonthPrecisionNotSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same month as Interval[DateTime(2018,02,01), DateTime(2019,01,01)]
+    return this.dateTimeMonthPrecisionNotSame.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns true when DateTime intervals are same on the day precision', ->
-    # define DateTimeDayPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same day as Interval[DateTime(2018,01,01,05), DateTime(2019,01,01,09)]
-    @dateTimeDayPrecisionSame.exec(@ctx).should.be.true()
+  it('returns true when DateTime intervals are same on the day precision', function() {
+    // define DateTimeDayPrecisionSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same day as Interval[DateTime(2018,01,01,05), DateTime(2019,01,01,09)]
+    return this.dateTimeDayPrecisionSame.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns false when DateTime intervals are not the same on the requested day precision', ->
-    # define DateTimeDayPrecisionNotSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same day as Interval[DateTime(2018,01,01), DateTime(2019,01,02,06)]
-    @dateTimeDayPrecisionNotSame.exec(@ctx).should.be.false()
+  it('returns false when DateTime intervals are not the same on the requested day precision', function() {
+    // define DateTimeDayPrecisionNotSame: Interval[DateTime(2018,01,01), DateTime(2019,01,01)] same day as Interval[DateTime(2018,01,01), DateTime(2019,01,02,06)]
+    return this.dateTimeDayPrecisionNotSame.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns true when DateTime intervals are same on the hour precision', ->
-    # define DateTimeHourPrecisionSame: Interval[DateTime(2018,01,01,01), DateTime(2019,01,01,01)] same hour as Interval[DateTime(2018,01,01,01), DateTime(2019,01,01,01,05)]
-    @dateTimeHourPrecisionSame.exec(@ctx).should.be.true()
+  it('returns true when DateTime intervals are same on the hour precision', function() {
+    // define DateTimeHourPrecisionSame: Interval[DateTime(2018,01,01,01), DateTime(2019,01,01,01)] same hour as Interval[DateTime(2018,01,01,01), DateTime(2019,01,01,01,05)]
+    return this.dateTimeHourPrecisionSame.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns false when DateTime intervals are not the same on the requested hour precision', ->
-    # define DateTimeHourPrecisionNotSame: Interval[DateTime(2018,01,01,01), DateTime(2019,01,01,01)] same hour as Interval[DateTime(2018,01,01,06), DateTime(2019,01,01,01)]
-    @dateTimeHourPrecisionNotSame.exec(@ctx).should.be.false()
+  it('returns false when DateTime intervals are not the same on the requested hour precision', function() {
+    // define DateTimeHourPrecisionNotSame: Interval[DateTime(2018,01,01,01), DateTime(2019,01,01,01)] same hour as Interval[DateTime(2018,01,01,06), DateTime(2019,01,01,01)]
+    return this.dateTimeHourPrecisionNotSame.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns true when DateTime intervals are same on the minute precision', ->
-    # define DateTimeMinutePrecisionSame: Interval[DateTime(2018,01,01,01,01), DateTime(2019,01,01,01,01)] same minute as Interval[DateTime(2018,01,01,01,01,09), DateTime(2019,01,01,01,01,06)]
-    @dateTimeMinutePrecisionSame.exec(@ctx).should.be.true()
+  it('returns true when DateTime intervals are same on the minute precision', function() {
+    // define DateTimeMinutePrecisionSame: Interval[DateTime(2018,01,01,01,01), DateTime(2019,01,01,01,01)] same minute as Interval[DateTime(2018,01,01,01,01,09), DateTime(2019,01,01,01,01,06)]
+    return this.dateTimeMinutePrecisionSame.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns false when DateTime intervals are not the same on the requested minute precision', ->
-    # define DateTimeMinutePrecisionNotSame: Interval[DateTime(2018,01,01,01,01), DateTime(2019,01,01,01,01)] same minute as Interval[DateTime(2018,01,01,06,03), DateTime(2019,01,01,01,06)]
-    @dateTimeMinutePrecisionNotSame.exec(@ctx).should.be.false()
+  it('returns false when DateTime intervals are not the same on the requested minute precision', function() {
+    // define DateTimeMinutePrecisionNotSame: Interval[DateTime(2018,01,01,01,01), DateTime(2019,01,01,01,01)] same minute as Interval[DateTime(2018,01,01,06,03), DateTime(2019,01,01,01,06)]
+    return this.dateTimeMinutePrecisionNotSame.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns true when DateTime intervals are same on the second precision', ->
-    # define DateTimeSecondPrecisionSame: Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,01,01)] same second as Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,01,01,07)]
-    @dateTimeSecondPrecisionSame.exec(@ctx).should.be.true()
+  it('returns true when DateTime intervals are same on the second precision', function() {
+    // define DateTimeSecondPrecisionSame: Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,01,01)] same second as Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,01,01,07)]
+    return this.dateTimeSecondPrecisionSame.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns false when DateTime intervals are not the same on the requested second precision', ->
-    # define DateTimeSecondPrecisionNotSame: Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,01,01)] same second as Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,07,55)]
-    @dateTimeSecondPrecisionNotSame.exec(@ctx).should.be.false()
+  it('returns false when DateTime intervals are not the same on the requested second precision', function() {
+    // define DateTimeSecondPrecisionNotSame: Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,01,01)] same second as Interval[DateTime(2018,01,01,01,01,01), DateTime(2019,01,01,01,07,55)]
+    return this.dateTimeSecondPrecisionNotSame.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns true when DateTime intervals are same on the millisecond precision', ->
-    # define DateTimeMillisecondPrecisionSame: Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)] same millisecond as Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)]
-    @dateTimeMillisecondPrecisionSame.exec(@ctx).should.be.true()
+  it('returns true when DateTime intervals are same on the millisecond precision', function() {
+    // define DateTimeMillisecondPrecisionSame: Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)] same millisecond as Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)]
+    return this.dateTimeMillisecondPrecisionSame.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns false when DateTime intervals are not the same on the requested millisecond precision', ->
-    # define DateTimeMillisecondPrecisionNotSame: Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)] same millisecond as Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,09)]
-    @dateTimeMillisecondPrecisionNotSame.exec(@ctx).should.be.false()
+  it('returns false when DateTime intervals are not the same on the requested millisecond precision', function() {
+    // define DateTimeMillisecondPrecisionNotSame: Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,01)] same millisecond as Interval[DateTime(2018,01,01,01,01,01,01), DateTime(2019,01,01,01,01,01,09)]
+    return this.dateTimeMillisecondPrecisionNotSame.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns true when integer interval is the same', ->
-    # define IntegerIntervalSame: Interval[2,5] same as Interval[2,5]
-    @integerIntervalSame.exec(@ctx).should.be.true()
+  it('returns true when integer interval is the same', function() {
+    // define IntegerIntervalSame: Interval[2,5] same as Interval[2,5]
+    return this.integerIntervalSame.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns false when integer interval is not the same', ->
-    # define IntegerIntervalNotSame: Interval[2,5] same as Interval[2,4]
-    @integerIntervalNotSame.exec(@ctx).should.be.false()
+  it('returns false when integer interval is not the same', function() {
+    // define IntegerIntervalNotSame: Interval[2,5] same as Interval[2,4]
+    return this.integerIntervalNotSame.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns true when integer interval is same after the open interval is closed', ->
-    # define IntegerIntervalSameOpen: Interval[2,5] same as Interval[2,6)
-    @integerIntervalSameOpen.exec(@ctx).should.be.true()
+  it('returns true when integer interval is same after the open interval is closed', function() {
+    // define IntegerIntervalSameOpen: Interval[2,5] same as Interval[2,6)
+    return this.integerIntervalSameOpen.exec(this.ctx).should.be.true();
+  });
 
-  it 'returns false even with an open ended null because the lows are not null and not same', ->
-    # define OpenNullHighLowDifferent: Interval(3,null) same as Interval(2,4)
-    @openNullHighLowDifferent.exec(@ctx).should.be.false()
+  it('returns false even with an open ended null because the lows are not null and not same', function() {
+    // define OpenNullHighLowDifferent: Interval(3,null) same as Interval(2,4)
+    return this.openNullHighLowDifferent.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns false even with an open ended null because the highs are not null and not same', ->
-    # define OpenNullLowHighDifferent: Interval(1,5) same as Interval(null,4)
-    @openNullLowHighDifferent.exec(@ctx).should.be.false()
+  it('returns false even with an open ended null because the highs are not null and not same', function() {
+    // define OpenNullLowHighDifferent: Interval(1,5) same as Interval(null,4)
+    return this.openNullLowHighDifferent.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns null if lows are same and highs have an open null', ->
-    # OpenNullHighLowSame: Interval(2,null) same as Interval(2,4)
-    should(@openNullHighLowSame.exec(@ctx)).be.null()
+  it('returns null if lows are same and highs have an open null', function() {
+    // OpenNullHighLowSame: Interval(2,null) same as Interval(2,4)
+    return should(this.openNullHighLowSame.exec(this.ctx)).be.null();
+  });
 
-  it 'returns null if lows have an open null and highs are same', ->
-    # OpenNullLowHighSame: Interval(1,4) same as Interval(null,4)
-    should(@openNullLowHighSame.exec(@ctx)).be.null()
+  it('returns null if lows have an open null and highs are same', function() {
+    // OpenNullLowHighSame: Interval(1,4) same as Interval(null,4)
+    return should(this.openNullLowHighSame.exec(this.ctx)).be.null();
+  });
 
-  it 'returns null if both lows and highs have open null', ->
-    # OpenNullLowOpenNullHigh: Interval(1,null) same as Interval(null,4)
-    should(@openNullLowOpenNullHigh.exec(@ctx)).be.null()
+  it('returns null if both lows and highs have open null', function() {
+    // OpenNullLowOpenNullHigh: Interval(1,null) same as Interval(null,4)
+    return should(this.openNullLowOpenNullHigh.exec(this.ctx)).be.null();
+  });
 
-  it 'returns false if lows are different and highs have open null', ->
-    # OpenNullHighsLowsDifferent: Interval(1,null) same as Interval(2,null)
-    @openNullHighsLowsDifferent.exec(@ctx).should.be.false()
+  it('returns false if lows are different and highs have open null', function() {
+    // OpenNullHighsLowsDifferent: Interval(1,null) same as Interval(2,null)
+    return this.openNullHighsLowsDifferent.exec(this.ctx).should.be.false();
+  });
 
-  it 'returns null if lows are same and highs have open null', ->
-    # OpenNullHighsLowsSame: Interval(1,null) same as Interval(1,null)
-    should(@openNullHighsLowsSame.exec(@ctx)).be.null()
+  it('returns null if lows are same and highs have open null', function() {
+    // OpenNullHighsLowsSame: Interval(1,null) same as Interval(1,null)
+    return should(this.openNullHighsLowsSame.exec(this.ctx)).be.null();
+  });
 
-  it 'returns null if lows have open null and highs are same', ->
-    # OpenNullLowsHighsSame: Interval(null,3) same as Interval(null,3)
-    should(@openNullLowsHighsSame.exec(@ctx)).be.null()
+  return it('returns null if lows have open null and highs are same', function() {
+    // OpenNullLowsHighsSame: Interval(null,3) same as Interval(null,3)
+    return should(this.openNullLowsHighsSame.exec(this.ctx)).be.null();
+  });
+});

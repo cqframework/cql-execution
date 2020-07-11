@@ -1,17 +1,29 @@
-module.exports.ThreeValuedLogic = class ThreeValuedLogic
-  @and: (val...) ->
-    if false in val then false
-    else if null in val then null
-    else true
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS207: Consider shorter variations of null checks
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+let ThreeValuedLogic;
+module.exports.ThreeValuedLogic = (ThreeValuedLogic = class ThreeValuedLogic {
+  static and(...val) {
+    if (val.includes(false)) { return false;
+    } else if (val.includes(null)) { return null;
+    } else { return true; }
+  }
 
-  @or: (val...) ->
-    if true in val then true
-    else if null in val then null
-    else false
+  static or(...val) {
+    if (val.includes(true)) { return true;
+    } else if (val.includes(null)) { return null;
+    } else { return false; }
+  }
 
-  @xor: (val...) ->
-    if null in val then null
-    else val.reduce (a,b) -> (!a ^ !b) is 1
+  static xor(...val) {
+    if (val.includes(null)) { return null;
+    } else { return val.reduce((a, b) => (!a ^ !b) === 1); }
+  }
 
-  @not: (val) ->
-    if val? then return not val else return null
+  static not(val) {
+    if (val != null) { return !val; } else { return null; }
+  }
+});

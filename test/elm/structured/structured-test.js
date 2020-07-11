@@ -1,12 +1,20 @@
-should = require 'should'
-setup = require '../../setup'
-data = require './data'
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+const should = require('should');
+const setup = require('../../setup');
+const data = require('./data');
 
-describe 'Tuple', ->
-  @beforeEach ->
-    setup @, data
+describe('Tuple', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
 
-  it 'should be able to define a tuple', ->
-    e = @tup.exec(@ctx)
-    e["a"].should.equal 1
-    e["b"].should.equal 2
+  return it('should be able to define a tuple', function() {
+    const e = this.tup.exec(this.ctx);
+    e["a"].should.equal(1);
+    return e["b"].should.equal(2);
+  });
+});

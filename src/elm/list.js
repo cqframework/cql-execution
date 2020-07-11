@@ -1,174 +1,247 @@
-{ Expression, UnimplementedExpression } = require './expression'
-{ ValueSet } = require '../datatypes/datatypes'
-{ build } = require './builder'
-{ typeIsArray } = require '../util/util'
-{ equals } = require '../util/comparison'
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS104: Avoid inline assignments
+ * DS205: Consider reworking code to avoid use of IIFEs
+ * DS206: Consider reworking classes to avoid initClass
+ * DS207: Consider shorter variations of null checks
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+let Current, Distinct, doContains, doIncludes, Exists, Filter, First, Flatten, ForEach, IndexOf, Last, List, SingletonFrom, Times, ToList;
+const { Expression, UnimplementedExpression } = require('./expression');
+const { ValueSet } = require('../datatypes/datatypes');
+const { build } = require('./builder');
+const { typeIsArray } = require('../util/util');
+const { equals } = require('../util/comparison');
 
-module.exports.List = class List extends Expression
-  constructor: (json) ->
-    super
-    @elements = (build json.element) ? []
+module.exports.List = (List = (function() {
+  List = class List extends Expression {
+    static initClass() {
+  
+      // Define a simple getter to allow type-checking of this class without instanceof
+      // and in a way that survives minification (as opposed to checking constructor.name)
+      Object.defineProperties(this.prototype, {
+        isList: {
+          get() { return true; }
+        }
+      }
+      );
+    }
+    constructor(json) {
+      let left;
+      super(...arguments);
+      this.elements = ((left = build(json.element))) != null ? left : [];
+    }
 
-  # Define a simple getter to allow type-checking of this class without instanceof
-  # and in a way that survives minification (as opposed to checking constructor.name)
-  Object.defineProperties @prototype,
-    isList:
-      get: -> true
+    exec(ctx) {
+      return (this.elements.map((item) => item.execute(ctx)));
+    }
+  };
+  List.initClass();
+  return List;
+})());
 
-  exec: (ctx) ->
-    (item.execute(ctx) for item in @elements)
+module.exports.Exists = (Exists = class Exists extends Expression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-module.exports.Exists = class Exists extends Expression
-  constructor: (json) ->
-    super
+  exec(ctx) {
+    const list = this.execArgs(ctx);
+    // if list exists and has non empty length we need to make sure it isnt just full of nulls
+    if ((list != null ? list.length : undefined) > 0) {
+      for (let item of list) {
+        // return true if we found an item that isnt null.
+        if (item !== null) { return true; }
+      }
+    }
+    return false;
+  }
+});
 
-  exec: (ctx) ->
-    list = @execArgs(ctx)
-    # if list exists and has non empty length we need to make sure it isnt just full of nulls
-    if list?.length > 0
-      for item in list
-        # return true if we found an item that isnt null.
-        return true if item != null
-    false
 
+// Equal is completely handled by overloaded#Equal
 
-# Equal is completely handled by overloaded#Equal
+// NotEqual is completely handled by overloaded#Equal
 
-# NotEqual is completely handled by overloaded#Equal
+// Delegated to by overloaded#Union
+module.exports.doUnion = function(a, b) {
+  const distinct = doDistinct(a.concat(b));
+  return removeDuplicateNulls(distinct);
+};
 
-# Delegated to by overloaded#Union
-module.exports.doUnion = (a, b) ->
-  distinct = doDistinct(a.concat b)
-  removeDuplicateNulls(distinct)
+// Delegated to by overloaded#Except
+module.exports.doExcept = function(a, b) {
+  const distinct = doDistinct(a);
+  const setList = removeDuplicateNulls(distinct);
+  return (() => {
+    const result = [];
+    for (let itm of setList) {       if (!doContains(b, itm)) {
+        result.push(itm);
+      }
+    }
+    return result;
+  })();
+};
 
-# Delegated to by overloaded#Except
-module.exports.doExcept = (a, b) ->
-  distinct = doDistinct(a)
-  setList = removeDuplicateNulls(distinct)
-  (itm for itm in setList when not doContains(b, itm))
+// Delegated to by overloaded#Intersect
+module.exports.doIntersect = function(a, b) {
+  const distinct = doDistinct(a);
+  const setList = removeDuplicateNulls(distinct);
+  return (() => {
+    const result = [];
+    for (let itm of setList) {       if (doContains(b, itm)) {
+        result.push(itm);
+      }
+    }
+    return result;
+  })();
+};
 
-# Delegated to by overloaded#Intersect
-module.exports.doIntersect = (a, b) ->
-  distinct = doDistinct(a)
-  setList = removeDuplicateNulls(distinct)
-  (itm for itm in setList when doContains(b, itm))
+// ELM-only, not a product of CQL
+module.exports.Times = (Times = class Times extends UnimplementedExpression {});
 
-# ELM-only, not a product of CQL
-module.exports.Times = class Times extends UnimplementedExpression
+// ELM-only, not a product of CQL
+module.exports.Filter = (Filter = class Filter extends UnimplementedExpression {});
 
-# ELM-only, not a product of CQL
-module.exports.Filter = class Filter extends UnimplementedExpression
+module.exports.SingletonFrom = (SingletonFrom = class SingletonFrom extends Expression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-module.exports.SingletonFrom = class SingletonFrom extends Expression
-  constructor: (json) ->
-    super
+  exec(ctx) {
+    const arg = this.execArgs(ctx);
+    if ((arg != null) && (arg.length > 1)) { throw new Error('IllegalArgument: \'SingletonFrom\' requires a 0 or 1 arg array');
+    } else if ((arg != null) && (arg.length === 1)) { return arg[0];
+    } else { return null; }
+  }
+});
 
-  exec: (ctx) ->
-    arg = @execArgs ctx
-    if arg? and arg.length > 1 then throw new Error 'IllegalArgument: \'SingletonFrom\' requires a 0 or 1 arg array'
-    else if arg? and arg.length is 1 then return arg[0]
-    else return null
+module.exports.ToList = (ToList = class ToList extends Expression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-module.exports.ToList = class ToList extends Expression
-  constructor: (json) ->
-    super
+  exec(ctx) {
+    const arg = this.execArgs(ctx);
+    if (arg != null) {
+      return [arg];
+    } else {
+      return [];
+    }
+  }
+});
 
-  exec: (ctx) ->
-    arg = @execArgs ctx
-    if arg?
-      [arg]
-    else
-      []
+module.exports.IndexOf = (IndexOf = class IndexOf extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.source = build(json.source);
+    this.element = build(json.element);
+  }
 
-module.exports.IndexOf = class IndexOf extends Expression
-  constructor: (json) ->
-    super
-    @source = build json.source
-    @element = build json.element
+  exec(ctx) {
+    let index;
+    const src = this.source.exec(ctx);
+    const el = this.element.exec(ctx);
+    if ((src == null) || (el == null)) { return null; }
+    for (let i = 0; i < src.length; i++) { const itm = src[i]; if (equals(itm, el)) { index = i; break; } }
+    if (index != null) { return index; } else { return -1; }
+  }
+});
 
-  exec: (ctx) ->
-    src = @source.exec ctx
-    el = @element.exec ctx
-    if not src? or not el? then return null
-    (index = i; break) for itm, i in src when equals itm, el
-    if index? then return index else return -1
+// Indexer is completely handled by overloaded#Indexer
 
-# Indexer is completely handled by overloaded#Indexer
+// Delegated to by overloaded#Contains and overloaded#In
+module.exports.doContains = (doContains = function(container, item) {
+  for (let element of container) { if (equals(element, item)) { return true; } }
+  return false;
+});
 
-# Delegated to by overloaded#Contains and overloaded#In
-module.exports.doContains = doContains = (container, item) ->
-  return true for element in container when equals element, item
-  return false
+// Delegated to by overloaded#Includes and overloaded@IncludedIn
+module.exports.doIncludes = (doIncludes = (list, sublist) => sublist.every(x => doContains(list, x)));
 
-# Delegated to by overloaded#Includes and overloaded@IncludedIn
-module.exports.doIncludes = doIncludes = (list, sublist) ->
-  sublist.every (x) -> doContains(list, x)
+// Delegated to by overloaded#ProperIncludes and overloaded@ProperIncludedIn
+module.exports.doProperIncludes = (list, sublist) => (list.length > sublist.length) && doIncludes(list, sublist);
 
-# Delegated to by overloaded#ProperIncludes and overloaded@ProperIncludedIn
-module.exports.doProperIncludes = (list, sublist) ->
-  list.length > sublist.length and doIncludes(list, sublist)
+// ELM-only, not a product of CQL
+module.exports.ForEach = (ForEach = class ForEach extends UnimplementedExpression {});
 
-# ELM-only, not a product of CQL
-module.exports.ForEach = class ForEach extends UnimplementedExpression
+module.exports.Flatten = (Flatten = class Flatten extends Expression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-module.exports.Flatten = class Flatten extends Expression
-  constructor: (json) ->
-    super
+  exec(ctx) {
+    const arg = this.execArgs(ctx);
+    if (typeIsArray(arg) && (arg.every(x => typeIsArray(x)))) {
+      return arg.reduce(((x, y) => x.concat(y)), []);
+    } else {
+      return arg;
+    }
+  }
+});
 
-  exec: (ctx) ->
-    arg = @execArgs(ctx)
-    if typeIsArray(arg) and (arg.every (x) -> typeIsArray x)
-      arg.reduce ((x, y) -> x.concat(y)), []
-    else
-      arg
+module.exports.Distinct = (Distinct = class Distinct extends Expression {
+  constructor(json) {
+    super(...arguments);
+  }
 
-module.exports.Distinct = class Distinct extends Expression
-  constructor: (json) ->
-    super
+  exec(ctx) {
+    const result = this.execArgs(ctx);
+    if ((result == null)) { return null; }
+    return doDistinct(result);
+  }
+});
 
-  exec: (ctx) ->
-    result = @execArgs ctx
-    if not result? then return null
-    doDistinct(result)
+var doDistinct = function(list) {
+  const distinct = [];
+  list.filter(function(item) {
+    const isNew = distinct.every(seenItem => !equals(item, seenItem));
+    if (isNew) { distinct.push(item); }
+    return isNew;
+  });
+  return distinct;
+};
 
-doDistinct = (list) ->
-  distinct = []
-  list.filter (item) ->
-    isNew = distinct.every (seenItem) -> !equals(item, seenItem)
-    distinct.push item if isNew
-    isNew
-  distinct
+var removeDuplicateNulls = function(list) {
+  // Remove duplicate null elements
+  let firstNullFound = false;
+  const setList = [];
+  for (let item of list) {
+    if (item !== null) { setList.push(item); }
+    if ((item === null) && !firstNullFound) {
+      setList.push(item);
+      firstNullFound = true;
+    }
+  }
+  return setList;
+};
 
-removeDuplicateNulls = (list) ->
-  # Remove duplicate null elements
-  firstNullFound = false
-  setList = []
-  for item in list
-    setList.push item if item != null
-    if item == null && !firstNullFound
-      setList.push item
-      firstNullFound = true
-  setList
+// ELM-only, not a product of CQL
+module.exports.Current = (Current = class Current extends UnimplementedExpression {});
 
-# ELM-only, not a product of CQL
-module.exports.Current = class Current extends UnimplementedExpression
+module.exports.First = (First = class First extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.source = build(json.source);
+  }
 
-module.exports.First = class First extends Expression
-  constructor: (json) ->
-    super
-    @source = build json.source
+  exec(ctx) {
+    const src = this.source.exec(ctx);
+    if ((src != null) && typeIsArray(src) && (src.length > 0)) { return src[0]; } else { return null; }
+  }
+});
 
-  exec: (ctx) ->
-    src = @source.exec ctx
-    if src? and typeIsArray(src) and src.length > 0 then src[0] else null
+module.exports.Last = (Last = class Last extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.source = build(json.source);
+  }
 
-module.exports.Last = class Last extends Expression
-  constructor: (json) ->
-    super
-    @source = build json.source
+  exec(ctx) {
+    const src = this.source.exec(ctx);
+    if ((src != null) && typeIsArray(src) && (src.length > 0)) { return src[src.length-1]; } else { return null; }
+  }
+});
 
-  exec: (ctx) ->
-    src = @source.exec ctx
-    if src? and typeIsArray(src) and src.length > 0 then src[src.length-1] else null
-
-# Length is completely handled by overloaded#Length
+// Length is completely handled by overloaded#Length

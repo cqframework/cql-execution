@@ -1,44 +1,64 @@
-{ Expression } = require './expression'
-{ build } = require './builder'
-{ equals } = require '../util/comparison'
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+let Case, CaseItem, If;
+const { Expression } = require('./expression');
+const { build } = require('./builder');
+const { equals } = require('../util/comparison');
 
-# TODO: Spec lists "Conditional", but it's "If" in the XSD
-module.exports.If = class If extends Expression
-  constructor: (json) ->
-    super
-    @condition = build json.condition
-    @th = build json.then
-    @els = build json.else
+// TODO: Spec lists "Conditional", but it's "If" in the XSD
+module.exports.If = (If = class If extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.condition = build(json.condition);
+    this.th = build(json.then);
+    this.els = build(json.else);
+  }
 
-  exec: (ctx) ->
-    if @condition.execute(ctx) then @th.execute(ctx) else @els.execute(ctx)
+  exec(ctx) {
+    if (this.condition.execute(ctx)) { return this.th.execute(ctx); } else { return this.els.execute(ctx); }
+  }
+});
 
-module.exports.CaseItem = CaseItem = class CaseItem
-  constructor:(json) ->
-    @when = build json.when
-    @then = build json.then
+module.exports.CaseItem = (CaseItem = (CaseItem = class CaseItem {
+  constructor(json) {
+    this.when = build(json.when);
+    this.then = build(json.then);
+  }
+}));
 
-module.exports.Case = class Case extends Expression
+module.exports.Case = (Case = class Case extends Expression {
 
-  constructor: (json) ->
-    super
-    @comparand = build json.comparand
-    @caseItems = for ci in json.caseItem
-                   new CaseItem(ci)
-    @els = build json.else
+  constructor(json) {
+    super(...arguments);
+    this.comparand = build(json.comparand);
+    this.caseItems = json.caseItem.map((ci) =>
+                   new CaseItem(ci));
+    this.els = build(json.else);
+  }
 
-  exec: (ctx) ->
-    if @comparand then @exec_selected(ctx) else @exec_standard(ctx)
+  exec(ctx) {
+    if (this.comparand) { return this.exec_selected(ctx); } else { return this.exec_standard(ctx); }
+  }
 
-  exec_selected: (ctx) ->
-    val = @comparand.execute(ctx)
-    for ci in @caseItems
-      if equals ci.when.execute(ctx), val
-       return ci.then.execute(ctx)
-    @els.execute(ctx)
+  exec_selected(ctx) {
+    const val = this.comparand.execute(ctx);
+    for (let ci of this.caseItems) {
+      if (equals(ci.when.execute(ctx), val)) {
+       return ci.then.execute(ctx);
+     }
+    }
+    return this.els.execute(ctx);
+  }
 
-  exec_standard: (ctx) ->
-    for ci in @caseItems
-      if ci.when.execute(ctx)
-       return ci.then.execute(ctx)
-    @els.execute(ctx)
+  exec_standard(ctx) {
+    for (let ci of this.caseItems) {
+      if (ci.when.execute(ctx)) {
+       return ci.then.execute(ctx);
+     }
+    }
+    return this.els.execute(ctx);
+  }
+});
