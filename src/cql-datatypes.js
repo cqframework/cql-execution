@@ -1,4 +1,5 @@
-DT = require "./datatypes/datatypes"
+const DT = require("./datatypes/datatypes");
 
-for element in Object.keys(DT)
-  module.exports[element] = DT[element]
+for (let element of Object.keys(DT)) {
+  module.exports[element] = DT[element];
+}

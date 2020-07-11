@@ -1,4 +1,4 @@
-# Acute Pharyngitis and ED/Ambulatory Visits
+// Acute Pharyngitis and ED/Ambulatory Visits
 module.exports.p1 = {
   "recordType" : "Patient",
   "id" : "3",
@@ -37,4 +37,4 @@ module.exports.p1 = {
       "period": { "low": "2013-05-23T10:00", "high": "2013-05-23T11:00" }
     }
   ]
-}
+};

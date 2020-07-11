@@ -1,203 +1,281 @@
-{ Expression, UnimplementedExpression } = require './expression'
-{ Context } = require '../runtime/context'
-{ build } = require './builder'
-{ typeIsArray , allTrue} = require '../util/util'
-{ equals } = require '../util/comparison'
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS205: Consider reworking code to avoid use of IIFEs
+ * DS207: Consider shorter variations of null checks
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+let AliasedQuerySource, AliasRef, ByColumn, ByDirection, ByExpression, LetClause, Query, QueryLetRef, ReturnClause, Sort, SortClause, With, Without;
+const { Expression, UnimplementedExpression } = require('./expression');
+const { Context } = require('../runtime/context');
+const { build } = require('./builder');
+const { typeIsArray , allTrue} = require('../util/util');
+const { equals } = require('../util/comparison');
 
-module.exports.AliasedQuerySource = class AliasedQuerySource
-  constructor: (json) ->
-    @alias = json.alias
-    @expression = build json.expression
+module.exports.AliasedQuerySource = (AliasedQuerySource = class AliasedQuerySource {
+  constructor(json) {
+    this.alias = json.alias;
+    this.expression = build(json.expression);
+  }
+});
 
-module.exports.LetClause = class LetClause
-  constructor: (json) ->
-    @identifier = json.identifier
-    @expression = build json.expression
+module.exports.LetClause = (LetClause = class LetClause {
+  constructor(json) {
+    this.identifier = json.identifier;
+    this.expression = build(json.expression);
+  }
+});
 
-module.exports.With = class With extends Expression
-  constructor: (json) ->
-    super
-    @alias = json.alias
-    @expression = build json.expression
-    @suchThat = build json.suchThat
-  exec: (ctx) ->
-    records = @expression.execute(ctx)
-    @isList = typeIsArray(records)
-    records = if @isList then records else [records]
-    returns = for rec in records
-      childCtx = ctx.childContext()
-      childCtx.set @alias, rec
-      @suchThat.execute(childCtx)
-    returns.some (x) -> x
+module.exports.With = (With = class With extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.alias = json.alias;
+    this.expression = build(json.expression);
+    this.suchThat = build(json.suchThat);
+  }
+  exec(ctx) {
+    let records = this.expression.execute(ctx);
+    this.isList = typeIsArray(records);
+    records = this.isList ? records : [records];
+    const returns = (() => {
+      const result = [];
+      for (let rec of records) {
+        const childCtx = ctx.childContext();
+        childCtx.set(this.alias, rec);
+        result.push(this.suchThat.execute(childCtx));
+      }
+      return result;
+    })();
+    return returns.some(x => x);
+  }
+});
 
-module.exports.Without = class Without extends With
-  constructor: (json) ->
-    super
-  exec: (ctx) ->
-    !super(ctx)
+module.exports.Without = (Without = class Without extends With {
+  constructor(json) {
+    super(...arguments);
+  }
+  exec(ctx) {
+    return !super.exec(ctx);
+  }
+});
 
-# ELM-only, not a product of CQL
-module.exports.Sort = class Sort extends UnimplementedExpression
+// ELM-only, not a product of CQL
+module.exports.Sort = (Sort = class Sort extends UnimplementedExpression {});
 
-module.exports.ByDirection = class ByDirection extends Expression
-  constructor: (json) ->
-    super
-    @direction = json.direction
-    @low_order = if @direction == "asc" then -1 else 1
-    @high_order = @low_order * -1
+module.exports.ByDirection = (ByDirection = class ByDirection extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.direction = json.direction;
+    this.low_order = this.direction === "asc" ? -1 : 1;
+    this.high_order = this.low_order * -1;
+  }
 
-  exec: (ctx,a,b) ->
-    if a == b
-      0
-    else if a.isQuantity && b.isQuantity
-      if a.before(b)
-        @low_order
-      else 
-        @high_order
-    else if a < b
-      @low_order
-    else
-      @high_order
+  exec(ctx,a,b) {
+    if (a === b) {
+      return 0;
+    } else if (a.isQuantity && b.isQuantity) {
+      if (a.before(b)) {
+        return this.low_order;
+      } else { 
+        return this.high_order;
+      }
+    } else if (a < b) {
+      return this.low_order;
+    } else {
+      return this.high_order;
+    }
+  }
+});
 
-module.exports.ByExpression = class ByExpression extends Expression
-  constructor: (json) ->
-    super
-    @expression = build json.expression
-    @direction = json.direction
-    @low_order = if @direction == "asc" then -1 else 1
-    @high_order = @low_order * -1
+module.exports.ByExpression = (ByExpression = class ByExpression extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.expression = build(json.expression);
+    this.direction = json.direction;
+    this.low_order = this.direction === "asc" ? -1 : 1;
+    this.high_order = this.low_order * -1;
+  }
 
-  exec: (ctx,a,b) ->
-    sctx = ctx.childContext(a)
-    a_val = @expression.execute(sctx)
-    sctx = ctx.childContext(b)
-    b_val = @expression.execute(sctx)
+  exec(ctx,a,b) {
+    let sctx = ctx.childContext(a);
+    const a_val = this.expression.execute(sctx);
+    sctx = ctx.childContext(b);
+    const b_val = this.expression.execute(sctx);
 
-    if a_val == b_val
-      0
-    else if a_val.isQuantity && b_val.isQuantity
-      if a_val.before(b_val)
-        @low_order
-      else 
-        @high_order
-    else if a_val < b_val
-      @low_order
-    else
-      @high_order
+    if (a_val === b_val) {
+      return 0;
+    } else if (a_val.isQuantity && b_val.isQuantity) {
+      if (a_val.before(b_val)) {
+        return this.low_order;
+      } else { 
+        return this.high_order;
+      }
+    } else if (a_val < b_val) {
+      return this.low_order;
+    } else {
+      return this.high_order;
+    }
+  }
+});
 
-module.exports.ByColumn = class ByColumn extends ByExpression
-  constructor: (json) ->
-    super
-    @expression = build {
+module.exports.ByColumn = (ByColumn = class ByColumn extends ByExpression {
+  constructor(json) {
+    super(...arguments);
+    this.expression = build({
       "name" : json.path,
       "type" : "IdentifierRef"
+    });
+  }
+});
+
+module.exports.ReturnClause = (ReturnClause = (ReturnClause = class ReturnClause {
+  constructor(json) {
+    this.expression = build(json.expression);
+    this.distinct = json.distinct != null ? json.distinct : true;
+  }
+}));
+
+module.exports.SortClause = (SortClause = (SortClause = class SortClause {
+  constructor(json) {
+    this.by = build(json != null ? json.by : undefined);
+  }
+
+  sort(ctx, values) {
+    if (this.by) {
+      return values.sort((a,b) => {
+        let order = 0;
+        for (let item of this.by) {
+          // Do not use execute here because the value of the sort order is not important.
+          order = item.exec(ctx,a,b);
+          if (order !== 0) { break; }
+        }
+        return order;
+      });
     }
+  }
+}));
 
-module.exports.ReturnClause = ReturnClause = class ReturnClause
-  constructor:(json) ->
-    @expression = build json.expression
-    @distinct = json.distinct ? true
+const toDistinctList = function(xList) {
+  const yList = [];
+  for (let x of xList) {
+    let inYList = false;
+    for (let y of yList) { if (equals(x, y)) { inYList = true; } }
+    if (!inYList) { yList.push(x); }
+  }
+  return yList;
+};
 
-module.exports.SortClause = SortClause = class SortClause
-  constructor:(json) ->
-    @by = build json?.by
+module.exports.Query = (Query = class Query extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.sources = new MultiSource((json.source.map((s) => new AliasedQuerySource(s))));
+    this.letClauses = ((json.let != null ? json.let : []).map((d) => new LetClause(d)));
+    this.relationship = (json.relationship != null) ? build(json.relationship) : [];
+    this.where = build(json.where);
+    this.returnClause = (json.return != null) ? new ReturnClause(json.return) : null;
+    this.aliases = this.sources.aliases();
+    this.sortClause = (json.sort != null) ? new SortClause(json.sort) : null;
+  }
 
-  sort: (ctx, values) ->
-    if @by
-      values.sort (a,b) =>
-        order = 0
-        for item in @by
-          # Do not use execute here because the value of the sort order is not important.
-          order = item.exec(ctx,a,b)
-          if order != 0 then break
-        order
+  exec(ctx) {
+    let returnedValues = [];
+    this.sources.forEach(ctx, rctx => {
+      for (let def of this.letClauses) {
+        rctx.set(def.identifier, def.expression.execute(rctx));
+      }
 
-toDistinctList = (xList) ->
-  yList = []
-  for x in xList
-    inYList = false
-    inYList = true for y in yList when equals(x, y)
-    unless inYList then yList.push x
-  yList
+      const relations = (() => {
+        const result = [];
+        for (let rel of this.relationship) {
+          const child_ctx = rctx.childContext();
+          result.push(rel.execute(child_ctx));
+        }
+        return result;
+      })();
+      let passed = allTrue(relations);
+      passed = passed && (this.where ? this.where.execute(rctx) : passed);
+      if (passed) {
+        if (this.returnClause != null) {
+          const val = this.returnClause.expression.execute(rctx);
+          return returnedValues.push(val);
+        } else {
+          if (this.aliases.length === 1) {
+            return returnedValues.push(rctx.get(this.aliases[0]));
+          } else {
+            return returnedValues.push(rctx.context_values);
+          }
+        }
+      }
+    });
 
-module.exports.Query = class Query extends Expression
-  constructor: (json) ->
-    super
-    @sources = new MultiSource((new AliasedQuerySource(s) for s in json.source))
-    @letClauses = (new LetClause(d) for d in (json.let ? []))
-    @relationship = if json.relationship? then build json.relationship else []
-    @where = build json.where
-    @returnClause = if json.return? then new ReturnClause(json.return) else null
-    @aliases = @sources.aliases()
-    @sortClause = if json.sort? then new SortClause(json.sort) else null
+    const distinct = (this.returnClause != null) ? this.returnClause.distinct : true;
+    if (distinct) { returnedValues = toDistinctList(returnedValues); }
 
-  exec: (ctx) ->
-    returnedValues = []
-    @sources.forEach(ctx, (rctx) =>
-      for def in @letClauses
-        rctx.set def.identifier, def.expression.execute(rctx)
+    if (this.sortClause != null) {
+      this.sortClause.sort(ctx, returnedValues);
+    }
+    if (this.sources.returnsList()) { return returnedValues; } else { return returnedValues[0]; }
+  }
+});
 
-      relations = for rel in @relationship
-        child_ctx = rctx.childContext()
-        rel.execute(child_ctx)
-      passed = allTrue(relations)
-      passed = passed && if @where then @where.execute(rctx) else passed
-      if passed
-        if @returnClause?
-          val = @returnClause.expression.execute(rctx)
-          returnedValues.push val
-        else
-          if @aliases.length == 1
-            returnedValues.push rctx.get(@aliases[0])
-          else
-            returnedValues.push rctx.context_values
-    )
+module.exports.AliasRef = (AliasRef = class AliasRef extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.name = json.name;
+  }
 
-    distinct = if @returnClause? then @returnClause.distinct else true
-    if distinct then returnedValues = toDistinctList(returnedValues)
+  exec(ctx) {
+    return (ctx != null ? ctx.get(this.name) : undefined);
+  }
+});
 
-    @sortClause?.sort(ctx, returnedValues)
-    return if @sources.returnsList() then returnedValues else returnedValues[0]
+module.exports.QueryLetRef = (QueryLetRef = class QueryLetRef extends AliasRef {
+  constructor(json) {
+    super(...arguments);
+  }
+});
 
-module.exports.AliasRef = class AliasRef extends Expression
-  constructor: (json) ->
-    super
-    @name = json.name
+// The following is not defined by ELM but is helpful for execution
 
-  exec: (ctx) ->
-    ctx?.get(@name)
+class MultiSource {
+  constructor(sources) {
+    this.sources = sources;
+    this.alias = this.sources[0].alias;
+    this.expression = this.sources[0].expression;
+    this.isList = true;
+    if (this.sources.length > 1) {
+      this.rest = new MultiSource(this.sources.slice(1));
+    }
+  }
 
-module.exports.QueryLetRef = class QueryLetRef extends AliasRef
-  constructor: (json) ->
-    super
+  aliases() {
+    let a = [this.alias];
+    if (this.rest) {
+      a = a.concat(this.rest.aliases());
+    }
+    return a;
+  }
 
-# The following is not defined by ELM but is helpful for execution
+  returnsList() {
+    return this.isList || (this.rest && this.rest.returnsList());
+  }
 
-class MultiSource
-  constructor: (@sources) ->
-    @alias = @sources[0].alias
-    @expression = @sources[0].expression
-    @isList = true
-    if @sources.length > 1
-      @rest = new MultiSource(@sources.slice(1))
-
-  aliases: ->
-    a = [@alias]
-    if @rest
-      a = a.concat @rest.aliases()
-    a
-
-  returnsList: ->
-    @isList || (@rest && @rest.returnsList())
-
-  forEach: (ctx, func) ->
-    records = @expression.execute(ctx)
-    @isList = typeIsArray(records)
-    records = if @isList then records else [records]
-    for rec in records
-      rctx = new Context(ctx)
-      rctx.set(@alias,rec)
-      if @rest
-        @rest.forEach(rctx,func)
-      else
-        func(rctx)
+  forEach(ctx, func) {
+    let records = this.expression.execute(ctx);
+    this.isList = typeIsArray(records);
+    records = this.isList ? records : [records];
+    return (() => {
+      const result = [];
+      for (let rec of records) {
+        const rctx = new Context(ctx);
+        rctx.set(this.alias,rec);
+        if (this.rest) {
+          result.push(this.rest.forEach(rctx,func));
+        } else {
+          result.push(func(rctx));
+        }
+      }
+      return result;
+    })();
+  }
+}

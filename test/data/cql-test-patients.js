@@ -1,25 +1,25 @@
-# Born in 1980
-p1 = {
+// Born in 1980
+const p1 = {
   "recordType": "Patient",
   "id" : "1",
   "name": "John Smith",
   "gender": "M",
   "birthDate" : "1980-02-17T06:15"
-}
-module.exports.P1 = p1
+};
+module.exports.P1 = p1;
 
-# Born in 2007
-p2 = {
+// Born in 2007
+const p2 = {
   "recordType" : "Patient",
   "id" : "2",
   "name": "Sally Smith",
   "gender": "F",
   "birthDate" : "2007-08-02T11:47"
-}
-module.exports.P2 = p2
+};
+module.exports.P2 = p2;
 
-# Acute Pharyngitis and ED/Ambulatory Visits
-p3 = {
+// Acute Pharyngitis and ED/Ambulatory Visits
+const p3 = {
   "recordType" : "Patient",
   "id" : "3",
   "name": "Bob Jones",
@@ -57,11 +57,11 @@ p3 = {
       "period": { "low": "2013-05-23T10:00", "high": "2013-05-23T11:00" }
     }
   ]
-}
-module.exports.P3 = p3
+};
+module.exports.P3 = p3;
 
-# ED/Ambulatory Visit
-p4 = {
+// ED/Ambulatory Visit
+const p4 = {
   "recordType" : "Patient",
   "id" : "4",
   "name": "Jane Jones",
@@ -75,7 +75,7 @@ p4 = {
       "period": { "low": "1985-05-01T13:00", "high": "1985-05-01T14:00" }
     }
   ]
-}
-module.exports.P4 = p4
+};
+module.exports.P4 = p4;
 
-module.exports.P1AndP2 = [p1, p2]
+module.exports.P1AndP2 = [p1, p2];

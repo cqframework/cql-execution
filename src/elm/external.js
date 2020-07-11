@@ -1,35 +1,62 @@
-{ Expression } = require './expression'
-{ build } = require './builder'
-{ typeIsArray } = require '../util/util'
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS205: Consider reworking code to avoid use of IIFEs
+ * DS207: Consider shorter variations of null checks
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+let Retrieve;
+const { Expression } = require('./expression');
+const { build } = require('./builder');
+const { typeIsArray } = require('../util/util');
 
-module.exports.Retrieve = class Retrieve extends Expression
-  constructor: (json) ->
-    super
-    @datatype = json.dataType
-    @templateId = json.templateId
-    @codeProperty = json.codeProperty
-    @codes = build json.codes
-    @dateProperty = json.dateProperty
-    @dateRange = build json.dateRange
+module.exports.Retrieve = (Retrieve = class Retrieve extends Expression {
+  constructor(json) {
+    super(...arguments);
+    this.datatype = json.dataType;
+    this.templateId = json.templateId;
+    this.codeProperty = json.codeProperty;
+    this.codes = build(json.codes);
+    this.dateProperty = json.dateProperty;
+    this.dateRange = build(json.dateRange);
+  }
 
-  exec: (ctx) ->
-    records = ctx.findRecords(@templateId ? @datatype)
-    codes = @codes
-    if @codes && typeof @codes.exec == 'function'
-      codes = @codes.execute(ctx)
-      if !codes?
-        return []
-    if codes
-      records = records.filter (r) => @recordMatchesCodesOrVS(r, codes)
-    # TODO: Added @dateProperty check due to previous fix in cql4browsers in cql_qdm_patient_api hash: ddbc57
-    if @dateRange && @dateProperty
-      range = @dateRange.execute(ctx)
-      records = (r for r in records when range.includes(r.getDateOrInterval(@dateProperty)))
+  exec(ctx) {
+    let r;
+    let records = ctx.findRecords(this.templateId != null ? this.templateId : this.datatype);
+    let {
+      codes
+    } = this;
+    if (this.codes && (typeof this.codes.exec === 'function')) {
+      codes = this.codes.execute(ctx);
+      if ((codes == null)) {
+        return [];
+      }
+    }
+    if (codes) {
+      records = records.filter(r => this.recordMatchesCodesOrVS(r, codes));
+    }
+    // TODO: Added @dateProperty check due to previous fix in cql4browsers in cql_qdm_patient_api hash: ddbc57
+    if (this.dateRange && this.dateProperty) {
+      const range = this.dateRange.execute(ctx);
+      records = ((() => {
+        const result = [];
+        for (r of records) {           if (range.includes(r.getDateOrInterval(this.dateProperty))) {
+            result.push(r);
+          }
+        }
+        return result;
+      })());
+    }
 
-    records
+    return records;
+  }
 
-  recordMatchesCodesOrVS: (record, codes) ->
-    if typeIsArray codes
-      codes.some (c) => c.hasMatch(record.getCode(@codeProperty))
-    else
-      codes.hasMatch(record.getCode(@codeProperty))
+  recordMatchesCodesOrVS(record, codes) {
+    if (typeIsArray(codes)) {
+      return codes.some(c => c.hasMatch(record.getCode(this.codeProperty)));
+    } else {
+      return codes.hasMatch(record.getCode(this.codeProperty));
+    }
+  }
+});

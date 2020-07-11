@@ -1,10 +1,19 @@
-should = require 'should'
-{ Patient } = require '../lib/cql-patient'
-DT = require '../lib/datatypes/datatypes'
+/*
+ * decaffeinate suggestions:
+ * DS101: Remove unnecessary use of Array.from
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS104: Avoid inline assignments
+ * DS205: Consider reworking code to avoid use of IIFEs
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+const should = require('should');
+const { Patient } = require('../lib/cql-patient');
+const DT = require('../lib/datatypes/datatypes');
 
-describe 'Record', ->
-  @beforeEach ->
-    patient = new Patient {
+describe('Record', function() {
+  this.beforeEach(function() {
+    let ref;
+    const patient = new Patient({
       "records": [{
         "recordType": "Encounter",
         "id": "http://cqframework.org/1/1",
@@ -16,32 +25,46 @@ describe 'Record', ->
         "code": { "code": "1532007", "system": "2.16.840.1.113883.6.96", "version": "2013-09", "display": "Viral pharyngitis (disorder)" },
         "period": { "low": "1982-03-12", "high": "1982-03-26" }
       }]
-    }
-    [@encRecord, @cndRecord] = (v[0] for k,v of patient.records)
+    });
+    return [this.encRecord, this.cndRecord] = Array.from((ref = (() => {
+      const result = [];
+      for (let k in patient.records) {
+        const v = patient.records[k];
+        result.push(v[0]);
+      }
+      return result;
+    })())), ref;
+  });
 
-  it 'should get simple record entries', ->
-    @encRecord.get('id').should.equal 'http://cqframework.org/1/1'
-    @encRecord.get('recordType').should.equal 'Encounter'
-    @cndRecord.get('id').should.equal 'http://cqframework.org/1/2'
-    @cndRecord.get('recordType').should.equal 'Condition'
+  it('should get simple record entries', function() {
+    this.encRecord.get('id').should.equal('http://cqframework.org/1/1');
+    this.encRecord.get('recordType').should.equal('Encounter');
+    this.cndRecord.get('id').should.equal('http://cqframework.org/1/2');
+    return this.cndRecord.get('recordType').should.equal('Condition');
+  });
 
-  it 'should get codes', ->
-    @encRecord.getCode('code').should.eql new DT.Code('185349003', '2.16.840.1.113883.6.96', '2013-09')
+  it('should get codes', function() {
+    return this.encRecord.getCode('code').should.eql(new DT.Code('185349003', '2.16.840.1.113883.6.96', '2013-09'));
+  });
 
-  it 'should get dates', ->
-    @cndRecord.getDate('period.low').should.eql new DT.DateTime.parse('1982-03-12')
-    @cndRecord.getDate('period.high').should.eql new DT.DateTime.parse('1982-03-26')
+  it('should get dates', function() {
+    this.cndRecord.getDate('period.low').should.eql(new DT.DateTime.parse('1982-03-12'));
+    return this.cndRecord.getDate('period.high').should.eql(new DT.DateTime.parse('1982-03-26'));
+  });
 
-  it 'should get intervals', ->
-    @encRecord.getInterval('period').should.eql new DT.Interval(DT.DateTime.parse('1978-07-15T10:00'), DT.DateTime.parse('1978-07-15T10:45'))
+  it('should get intervals', function() {
+    return this.encRecord.getInterval('period').should.eql(new DT.Interval(DT.DateTime.parse('1978-07-15T10:00'), DT.DateTime.parse('1978-07-15T10:45')));
+  });
 
-  it 'should get date or interval', ->
-    @cndRecord.getDateOrInterval('period.low').should.eql new DT.DateTime.parse('1982-03-12')
-    @encRecord.getDateOrInterval('period').should.eql new DT.Interval(DT.DateTime.parse('1978-07-15T10:00'), DT.DateTime.parse('1978-07-15T10:45'))
+  return it('should get date or interval', function() {
+    this.cndRecord.getDateOrInterval('period.low').should.eql(new DT.DateTime.parse('1982-03-12'));
+    return this.encRecord.getDateOrInterval('period').should.eql(new DT.Interval(DT.DateTime.parse('1978-07-15T10:00'), DT.DateTime.parse('1978-07-15T10:45')));
+  });
+});
 
-describe 'Patient', ->
-  @beforeEach ->
-    @patient = new Patient {
+describe('Patient', function() {
+  this.beforeEach(function() {
+    return this.patient = new Patient({
       "id": "1",
       "name": "Bob Jones",
       "gender": "M",
@@ -58,22 +81,26 @@ describe 'Patient', ->
           "period": { "low": "1982-03-12", "high": "1982-03-26" }
         }
       ]
-    }
+    });});
 
-  it 'should contain patient attributes', ->
-    @patient.id.should.equal '1'
-    @patient.name.should.equal 'Bob Jones'
-    @patient.gender.should.equal 'M'
-    @patient.birthDate.should.eql DT.DateTime.parse('1974-07-12T11:15')
+  it('should contain patient attributes', function() {
+    this.patient.id.should.equal('1');
+    this.patient.name.should.equal('Bob Jones');
+    this.patient.gender.should.equal('M');
+    return this.patient.birthDate.should.eql(DT.DateTime.parse('1974-07-12T11:15'));
+  });
 
-  it 'should find records by profile', ->
-    encounters = @patient.findRecords('{https://github.com/cqframework/cql-execution/simple}Encounter')
-    encounters.length.should.equal 1
-    encounters[0].get('id').should.equal 'http://cqframework.org/1/1'
+  it('should find records by profile', function() {
+    const encounters = this.patient.findRecords('{https://github.com/cqframework/cql-execution/simple}Encounter');
+    encounters.length.should.equal(1);
+    encounters[0].get('id').should.equal('http://cqframework.org/1/1');
 
-    conditions = @patient.findRecords('{https://github.com/cqframework/cql-execution/simple}Condition')
-    conditions.length.should.equal 1
-    conditions[0].get('id').should.equal 'http://cqframework.org/1/2'
+    const conditions = this.patient.findRecords('{https://github.com/cqframework/cql-execution/simple}Condition');
+    conditions.length.should.equal(1);
+    return conditions[0].get('id').should.equal('http://cqframework.org/1/2');
+  });
 
-  it 'should return empty array for unfound records', ->
-    @patient.findRecords('{https://github.com/cqframework/cql-execution/simple}Foo').should.be.empty()
+  return it('should return empty array for unfound records', function() {
+    return this.patient.findRecords('{https://github.com/cqframework/cql-execution/simple}Foo').should.be.empty();
+  });
+});

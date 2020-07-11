@@ -1,99 +1,134 @@
-should = require 'should'
-setup = require '../../setup'
-data = require './data'
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+const should = require('should');
+const setup = require('../../setup');
+const data = require('./data');
 
-describe 'And', ->
-  @beforeEach ->
-    setup @, data
+describe('And', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
 
-  it 'should execute true and...', ->
-    @tT.exec(@ctx).should.be.true()
-    @tF.exec(@ctx).should.be.false()
-    should(@tN.exec(@ctx)).be.null()
+  it('should execute true and...', function() {
+    this.tT.exec(this.ctx).should.be.true();
+    this.tF.exec(this.ctx).should.be.false();
+    return should(this.tN.exec(this.ctx)).be.null();
+  });
 
-  it 'should execute false and...', ->
-    @fF.exec(@ctx).should.be.false()
-    @fT.exec(@ctx).should.be.false()
-    @fN.exec(@ctx).should.be.false()
+  it('should execute false and...', function() {
+    this.fF.exec(this.ctx).should.be.false();
+    this.fT.exec(this.ctx).should.be.false();
+    return this.fN.exec(this.ctx).should.be.false();
+  });
 
-  it 'should execute null and...', ->
-    should(@nN.exec(@ctx)).be.null()
-    should(@nT.exec(@ctx)).be.null()
-    @nF.exec(@ctx).should.be.false()
+  return it('should execute null and...', function() {
+    should(this.nN.exec(this.ctx)).be.null();
+    should(this.nT.exec(this.ctx)).be.null();
+    return this.nF.exec(this.ctx).should.be.false();
+  });
+});
 
-describe 'Or', ->
-  @beforeEach ->
-    setup @, data
+describe('Or', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
 
-  it 'should execute true or...', ->
-    @tT.exec(@ctx).should.be.true()
-    @tF.exec(@ctx).should.be.true()
-    @tN.exec(@ctx).should.be.true()
+  it('should execute true or...', function() {
+    this.tT.exec(this.ctx).should.be.true();
+    this.tF.exec(this.ctx).should.be.true();
+    return this.tN.exec(this.ctx).should.be.true();
+  });
 
-  it 'should execute false or...', ->
-    @fF.exec(@ctx).should.be.false()
-    @fT.exec(@ctx).should.be.true()
-    should(@fN.exec(@ctx)).be.null()
+  it('should execute false or...', function() {
+    this.fF.exec(this.ctx).should.be.false();
+    this.fT.exec(this.ctx).should.be.true();
+    return should(this.fN.exec(this.ctx)).be.null();
+  });
 
-  it 'should execute null or...', ->
-    should(@nN.exec(@ctx)).be.null()
-    @nT.exec(@ctx).should.be.true()
-    should(@nF.exec(@ctx)).be.null()
+  return it('should execute null or...', function() {
+    should(this.nN.exec(this.ctx)).be.null();
+    this.nT.exec(this.ctx).should.be.true();
+    return should(this.nF.exec(this.ctx)).be.null();
+  });
+});
 
-describe 'Not', ->
-  @beforeEach ->
-    setup @, data
+describe('Not', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
 
-  it 'should execute not true as false', ->
-    @notTrue.exec(@ctx).should.be.false()
+  it('should execute not true as false', function() {
+    return this.notTrue.exec(this.ctx).should.be.false();
+  });
 
-  it 'should execute not false as true', ->
-    @notFalse.exec(@ctx).should.be.true()
+  it('should execute not false as true', function() {
+    return this.notFalse.exec(this.ctx).should.be.true();
+  });
 
-  it 'should execute not null as null', ->
-    should(@notNull.exec(@ctx)).be.null()
+  return it('should execute not null as null', function() {
+    return should(this.notNull.exec(this.ctx)).be.null();
+  });
+});
 
-describe 'XOr', ->
-  @beforeEach ->
-    setup @, data
+describe('XOr', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
 
-  it 'should execute true xor...', ->
-    @tT.exec(@ctx).should.be.false()
-    @tF.exec(@ctx).should.be.true()
-    should(@tN.exec(@ctx)).be.null()
+  it('should execute true xor...', function() {
+    this.tT.exec(this.ctx).should.be.false();
+    this.tF.exec(this.ctx).should.be.true();
+    return should(this.tN.exec(this.ctx)).be.null();
+  });
 
-  it 'should execute false xor...', ->
-    @fF.exec(@ctx).should.be.false()
-    @fT.exec(@ctx).should.be.true()
-    should(@fN.exec(@ctx)).be.null()
+  it('should execute false xor...', function() {
+    this.fF.exec(this.ctx).should.be.false();
+    this.fT.exec(this.ctx).should.be.true();
+    return should(this.fN.exec(this.ctx)).be.null();
+  });
 
-  it 'should execute null xor...', ->
-    should(@nN.exec(@ctx)).be.null()
-    should(@nT.exec(@ctx)).be.null()
-    should(@nF.exec(@ctx)).be.null()
+  return it('should execute null xor...', function() {
+    should(this.nN.exec(this.ctx)).be.null();
+    should(this.nT.exec(this.ctx)).be.null();
+    return should(this.nF.exec(this.ctx)).be.null();
+  });
+});
 
-describe 'IsTrue', ->
-  @beforeEach ->
-    setup @, data
+describe('IsTrue', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
 
-  it 'should execute true is true...', ->
-    @trueIsTrue.exec(@ctx).should.be.true()
+  it('should execute true is true...', function() {
+    return this.trueIsTrue.exec(this.ctx).should.be.true();
+  });
 
-  it 'should execute false is true...', ->
-    @falseIsTrue.exec(@ctx).should.be.false()
+  it('should execute false is true...', function() {
+    return this.falseIsTrue.exec(this.ctx).should.be.false();
+  });
 
-  it 'should execute null is true...', ->
-    @nullIsTrue.exec(@ctx).should.be.false()
+  return it('should execute null is true...', function() {
+    return this.nullIsTrue.exec(this.ctx).should.be.false();
+  });
+});
 
-describe 'IsFalse', ->
-  @beforeEach ->
-    setup @, data
+describe('IsFalse', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
 
-  it 'should execute true is false...', ->
-    @trueIsFalse.exec(@ctx).should.be.false()
+  it('should execute true is false...', function() {
+    return this.trueIsFalse.exec(this.ctx).should.be.false();
+  });
 
-  it 'should execute false is false...', ->
-    @falseIsFalse.exec(@ctx).should.be.true()
+  it('should execute false is false...', function() {
+    return this.falseIsFalse.exec(this.ctx).should.be.true();
+  });
 
-  it 'should execute null is false...', ->
-    @nullIsFalse.exec(@ctx).should.be.false()
+  return it('should execute null is false...', function() {
+    return this.nullIsFalse.exec(this.ctx).should.be.false();
+  });
+});

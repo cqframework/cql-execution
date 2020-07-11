@@ -1,45 +1,65 @@
-should = require 'should'
-setup = require '../../setup'
-data = require './data'
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+const should = require('should');
+const setup = require('../../setup');
+const data = require('./data');
 
-describe 'ExpressionDef', ->
-  @beforeEach ->
-    setup @, data
-    @def = @lib.expressions.Foo
+describe('ExpressionDef', function() {
+  this.beforeEach(function() {
+    setup(this, data);
+    return this.def = this.lib.expressions.Foo;
+  });
 
-  it 'should have a name', ->
-    @def.name.should.equal 'Foo'
+  it('should have a name', function() {
+    return this.def.name.should.equal('Foo');
+  });
 
-  it 'should have the correct context', ->
-    @def.context.should.equal 'Patient'
+  it('should have the correct context', function() {
+    return this.def.context.should.equal('Patient');
+  });
 
-  it 'should execute to its value', ->
-    @def.exec(@ctx).should.equal 'Bar'
+  return it('should execute to its value', function() {
+    return this.def.exec(this.ctx).should.equal('Bar');
+  });
+});
 
-describe 'ExpressionRef', ->
-  @beforeEach ->
-    setup @, data
+describe('ExpressionRef', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
 
-  it 'should have a name', ->
-    @foo.name.should.equal 'Life'
+  it('should have a name', function() {
+    return this.foo.name.should.equal('Life');
+  });
 
-  it 'should execute to expression value', ->
-    @foo.exec(@ctx).should.equal 42
+  return it('should execute to expression value', function() {
+    return this.foo.exec(this.ctx).should.equal(42);
+  });
+});
 
-describe 'FunctionDefinitions', ->
-  @beforeEach ->
-    setup @, data
+describe('FunctionDefinitions', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
 
-  it 'should be able to define and use a simple function' , ->
-    e = @testValue.exec(@ctx)
-    e.should.equal 3
+  return it('should be able to define and use a simple function' , function() {
+    const e = this.testValue.exec(this.ctx);
+    return e.should.equal(3);
+  });
+});
 
-describe.skip 'FunctionOverloads', ->
-  @beforeEach ->
-    setup @, data
+describe.skip('FunctionOverloads', function() {
+  this.beforeEach(function() {
+    return setup(this, data);
+  });
 
-  it 'should be able to use the function with Integer argument' , ->
-    e = @testValue1.exec(@ctx)
-    e.should.equal 2
-    e = @testValue2.exec(@ctx)
-    e.should.equal 'Hello World'
+  return it('should be able to use the function with Integer argument' , function() {
+    let e = this.testValue1.exec(this.ctx);
+    e.should.equal(2);
+    e = this.testValue2.exec(this.ctx);
+    return e.should.equal('Hello World');
+  });
+});
