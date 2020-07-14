@@ -14,7 +14,7 @@ const setup = require('../../setup');
 const data = require('./data');
 const vsets = require('./valuesets');
 const { p1 } = require('./patients');
-const {Repository} = require('../../../lib/cql');
+const {Repository} = require('../../../src/cql');
 
 describe('Retrieve', function() {
   this.beforeEach(function() {

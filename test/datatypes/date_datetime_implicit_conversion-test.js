@@ -10,9 +10,9 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 const should = require('should');
-const { DateTime, Date } = require('../../lib/datatypes/datetime');
-const { jsDate } = require('../../lib/util/util');
-const { Uncertainty } = require('../../lib/datatypes/uncertainty');
+const { DateTime, Date } = require('../../src/datatypes/datetime');
+const { jsDate } = require('../../src/util/util');
+const { Uncertainty } = require('../../src/datatypes/uncertainty');
 
 
 describe('Overlapping DateTime and Date units', () => it('should match', function() {

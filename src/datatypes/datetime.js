@@ -29,7 +29,7 @@ class DateTime {
       }
     }
     );
-  
+
     this.Unit = { YEAR: 'year', MONTH: 'month', WEEK: 'week', DAY: 'day', HOUR: 'hour', MINUTE: 'minute', SECOND: 'second', MILLISECOND: 'millisecond' };
     this.FIELDS = [this.Unit.YEAR, this.Unit.MONTH, this.Unit.DAY, this.Unit.HOUR, this.Unit.MINUTE, this.Unit.SECOND, this.Unit.MILLISECOND];
   }
@@ -455,7 +455,7 @@ class Date {
       }
     }
     );
-  
+
     this.Unit = { YEAR: 'year', MONTH: 'month', WEEK: 'week', DAY: 'day' };
     this.FIELDS = [this.Unit.YEAR, this.Unit.MONTH, this.Unit.DAY];
   }
@@ -1026,7 +1026,7 @@ DateTime.prototype.add = (Date.prototype.add = function(offset, field) {
     }
   }
 
-  // Can't use overflowsOrUnderflows from math.coffee due to circular dependencies when we require it
+  // Can't use overflowsOrUnderflows from math.js due to circular dependencies when we require it
   if (result.after(MAX_DATETIME_VALUE || result.before(MIN_DATETIME_VALUE))) { return null; } else { return result; }
 });
 
@@ -1214,8 +1214,8 @@ var cqlFormatStringToMomentFormatString = function(string) {
   return momentString = momentString.replace(/f/g, 'S');
 };
 
-// Redefine MIN/MAX here because math.coffee requires this file, and when we make this file require
-// math.coffee, it errors due to the circular dependency...
+// Redefine MIN/MAX here because math.js requires this file, and when we make this file require
+// math.js, it errors due to the circular dependency...
 var MIN_DATETIME_VALUE = DateTime.parse('0001-01-01T00:00:00.000');
 var MAX_DATETIME_VALUE = DateTime.parse('9999-12-31T23:59:59.999');
 

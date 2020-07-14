@@ -12,10 +12,10 @@
  */
 const should = require('should');
 const setup = require('./interval-setup');
-const { Interval } = require('../../lib/datatypes/interval');
-const { DateTime } = require('../../lib/datatypes/datetime');
-const { Uncertainty } = require('../../lib/datatypes/uncertainty');
-const cmp = require('../../lib/util/comparison');
+const { Interval } = require('../../src/datatypes/interval');
+const { DateTime } = require('../../src/datatypes/datetime');
+const { Uncertainty } = require('../../src/datatypes/uncertainty');
+const cmp = require('../../src/util/comparison');
 
 const xy = obj => [obj.x, obj.y];
 

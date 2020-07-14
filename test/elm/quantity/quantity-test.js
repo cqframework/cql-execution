@@ -12,7 +12,7 @@
  */
 const should = require('should');
 const setup = require('../../setup');
-const { Quantity, doAddition, doSubtraction, doMultiplication, doDivision } = require('../../../lib/datatypes/quantity');
+const { Quantity, doAddition, doSubtraction, doMultiplication, doDivision } = require('../../../src/datatypes/quantity');
 
 describe('Quantity', function() {
   it('should allow creation of Quantity with valid ucum units', () => should.doesNotThrow(() => new Quantity(42.424242, 'mm')));

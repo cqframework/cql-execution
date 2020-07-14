@@ -34,10 +34,9 @@ module.exports.Executor = (Executor = class Executor {
   }
 
   exec_expression(expression, patientSource) {
-    let r;
-    let p;
-    Results(r = new Results());
+    const r = new Results();
     const expr = this.library.expressions[expression];
+    let p;
     while (expr && (p = patientSource.currentPatient())) {
       const patient_ctx = new PatientContext(this.library,p,this.codeService,this.parameters);
       r.recordPatientResult(patient_ctx, expression, expr.execute(patient_ctx));
@@ -47,8 +46,7 @@ module.exports.Executor = (Executor = class Executor {
   }
 
   exec(patientSource, executionDateTime) {
-    let r;
-    Results(r = this.exec_patient_context(patientSource, executionDateTime));
+    const r = this.exec_patient_context(patientSource, executionDateTime);
     const unfilteredContext = new UnfilteredContext(this.library,r,this.codeService,this.parameters);
     for (let key in this.library.expressions) {
       const expr = this.library.expressions[key];
@@ -60,9 +58,8 @@ module.exports.Executor = (Executor = class Executor {
   }
 
   exec_patient_context(patientSource, executionDateTime) {
-    let r;
+    const r = new Results();
     let p;
-    Results(r = new Results());
     while ((p = patientSource.currentPatient())) {
       const patient_ctx = new PatientContext(this.library,p,this.codeService,this.parameters,executionDateTime);
       for (let key in this.library.expressions) {

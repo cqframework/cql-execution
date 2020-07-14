@@ -13,8 +13,8 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 const should = require('should');
-const { Patient } = require('../lib/cql-patient');
-const DT = require('../lib/datatypes/datatypes');
+const { Patient } = require('../src/cql-patient');
+const DT = require('../src/datatypes/datatypes');
 
 describe('Record', function() {
   this.beforeEach(function() {
@@ -54,8 +54,8 @@ describe('Record', function() {
   });
 
   it('should get dates', function() {
-    this.cndRecord.getDate('period.low').should.eql(new DT.DateTime.parse('1982-03-12'));
-    return this.cndRecord.getDate('period.high').should.eql(new DT.DateTime.parse('1982-03-26'));
+    this.cndRecord.getDate('period.low').should.eql(DT.DateTime.parse('1982-03-12'));
+    return this.cndRecord.getDate('period.high').should.eql(DT.DateTime.parse('1982-03-26'));
   });
 
   it('should get intervals', function() {
@@ -63,7 +63,7 @@ describe('Record', function() {
   });
 
   return it('should get date or interval', function() {
-    this.cndRecord.getDateOrInterval('period.low').should.eql(new DT.DateTime.parse('1982-03-12'));
+    this.cndRecord.getDateOrInterval('period.low').should.eql(DT.DateTime.parse('1982-03-12'));
     return this.encRecord.getDateOrInterval('period').should.eql(new DT.Interval(DT.DateTime.parse('1978-07-15T10:00'), DT.DateTime.parse('1978-07-15T10:45')));
   });
 });

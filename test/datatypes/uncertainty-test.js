@@ -7,10 +7,10 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 const should = require('should');
-const { Uncertainty } = require('../../lib/datatypes/uncertainty');
-const { Code } = require('../../lib/datatypes/datatypes');
-const { Concept } = require('../../lib/datatypes/clinical');
-const { ValueSet } = require('../../lib/datatypes/clinical');
+const { Uncertainty } = require('../../src/datatypes/uncertainty');
+const { Code } = require('../../src/datatypes/datatypes');
+const { Concept } = require('../../src/datatypes/clinical');
+const { ValueSet } = require('../../src/datatypes/clinical');
 
 describe('Uncertainty', function() {
 

@@ -1,10 +1,8 @@
 /* eslint-disable
     no-console,
 */
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-const cql = require('../cql');
-const measure = require('./age');
+const cql = require('../../src/cql');
+const measure = require('./age.json');
 
 const lib = new cql.Library(measure);
 const executor = new cql.Executor(lib);

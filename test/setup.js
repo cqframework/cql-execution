@@ -9,7 +9,7 @@
  * DS205: Consider reworking code to avoid use of IIFEs
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const { Library, Context, PatientSource, CodeService, PatientContext, UnfilteredContext, Executor} =  require('../lib/cql');
+const { Library, Context, PatientSource, CodeService, PatientContext, UnfilteredContext, Executor} =  require('../src/cql');
 
 module.exports = function(test, data, patients=[], valuesets={}, parameters={}, repository=null) {
   try {

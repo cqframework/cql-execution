@@ -6,8 +6,8 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const { Interval } = require('../../lib/datatypes/interval');
-const { DateTime } = require('../../lib/datatypes/datetime');
+const { Interval } = require('../../src/datatypes/interval');
+const { DateTime } = require('../../src/datatypes/datetime');
 
 class TestDateTime {
   static parse(string) {

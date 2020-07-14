@@ -10,7 +10,7 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 const should = require('should');
-const { Code, Concept, ValueSet } = require('../../lib/datatypes/clinical');
+const { Code, Concept, ValueSet } = require('../../src/datatypes/clinical');
 
 describe('Code', function() {
   this.beforeEach(function() {

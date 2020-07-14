@@ -6,8 +6,7 @@ The browserified code is checked into source control, but if you need to update 
 you can follow these steps:
 
 1. Install [Node.js](http://nodejs.org/)
-2. Install [CoffeeScript](http://coffeescript.org/)
+2. Install [Yarn](https://yarnpkg.com)
 3. Execute the following from the _cql-execution_ directory:
    1. `yarn install`
-   2. `cake build`
-   3. `cake build-cql4browsers`
+   2. `cake build:all`

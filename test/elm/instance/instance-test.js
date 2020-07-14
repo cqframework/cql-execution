@@ -12,9 +12,9 @@
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
-const { DateTime } = require('../../../lib/datatypes/datetime');
-const { Code, Concept } = require('../../../lib/datatypes/clinical');
-const { Quantity } = require('../../../lib/datatypes/quantity');
+const { DateTime } = require('../../../src/datatypes/datetime');
+const { Code, Concept } = require('../../../src/datatypes/clinical');
+const { Quantity } = require('../../../src/datatypes/quantity');
 
 describe('Instance', function() {
   this.beforeEach(function() {

@@ -1,14 +1,14 @@
 CQL Execution Framework Reference Implementation
 ================================================
 
-The reference implementation for executing CQL is still under development. The reference implementation was created to prove that CQL is implementable and has been integrated into production eCQM tools such as [Bonnie](https://bonnie.healthit.gov/) and [Cypress](https://cypress.healthit.gov/). It is also used in several [CDS Connect](https://cds.ahrq.gov/cdsconnect) tools.
+This reference implementation for executing CQL is still under development. The reference implementation was created to prove that CQL is implementable and has been integrated into production eCQM tools such as [Bonnie](https://bonnie.healthit.gov/) and [Cypress](https://cypress.healthit.gov/). It is also used in several [CDS Connect](https://cds.ahrq.gov/cdsconnect) tools.
 
 The CQL execution framework is licensed under the open source [Apache Version 2.0](../../../LICENSE) license.
 
 Technologies
 ------------
 
-The CQL execution framework is written in [CoffeeScript](http://coffeescript.org/). CoffeeScript is an elegant, yet powerful, scripting language that compiles down to JavaScript. The CoffeeScript source code allows the reference implementation to be easily read and understood by developers of most any language (due to its simplicity). The JavaScript execution code allows the reference implementation to be integrated into a variety of environments, including servers, other languages’ runtime environments, and standard web browsers.
+The CQL execution framework was originally written in [CoffeeScript](http://coffeescript.org/). CoffeeScript is a scripting language that compiles down to JavaScript. In 2020, the CQL Execution framework source code was migrated from CoffeeScript to ES6 JavaScript. JavaScript execution code allows the reference implementation to be integrated into a variety of environments, including servers, other languages’ runtime environments, and standard web browsers.
 
 The CQL execution framework tests and examples are configured to run using [Node.js](http://nodejs.org/), but can be easily integrated into other JavaScript runtime environments.
 
@@ -46,7 +46,7 @@ The expression 1 + 2 is represented in JSON ELM as follows:
 
 ### ELM Expression Classes
 
-Each ELM expression has a corresponding class defined in the CoffeeScript CQL execution framework. These classes all extend a common `Expression` class and define, at a minimum, these components:
+Each ELM expression has a corresponding class defined in the JavaScript CQL execution framework. These classes all extend a common `Expression` class and define, at a minimum, these components:
 
 1.	A `constructor` that takes a JSON ELM object as its argument
 2.	An `exec` function that takes a `Context` object as its argument
@@ -55,24 +55,27 @@ The `constructor` is responsible for setting class properties from the JSON ELM 
 
 The following is an example of the `Add` class that corresponds to the JSON ELM example in the previous section:
 
-```coffee
-class Add extends Expression
-  constructor: (json) ->
-    super
-    @arg1 = new IntegerLiteral(json.operand[0])
-    @arg2 = new IntegerLiteral(json.operand[1])
+```js
+class Add extends Expression {
+  constructor(json) {
+    super(json);
+    this.arg1 = new IntegerLiteral(json.operand[0])
+    this.arg2 = new IntegerLiteral(json.operand[1])
+  }
 
-  exec: (ctx) ->
-    @arg1.exec(ctx) + @arg2.exec(ctx)
+  exec(ctx) {
+    return this.arg1.exec(ctx) + this.arg2.exec(ctx)
+  }
+}
 ```
 
-When the `constructor` is passed the JSON ELM from the previous example, it constructs `IntegerLiteral` classes from the `operand` elements, and sets the `@arg1` and `@arg2` properties to the resulting `IntegerLiteral` instances.
+When the `constructor` is passed the JSON ELM from the previous example, it constructs `IntegerLiteral` classes from the `operand` elements, and sets `this.arg1` and `this.arg2` to the resulting `IntegerLiteral` instances.
 
-When `exec` is called, it calls `exec` on `@arg1` and `@arg2` (resulting in the primitives `1` and `2`) and then adds them using the native `+` operator. In CoffeeScript, the last line of a function is an implicit return, so it returns the result of the native addition operation.
+When `exec` is called, it calls `exec` on `this.arg1` and `this.arg2` (resulting in the primitives `1` and `2`) and then adds them using the native `+` operator. The `exec` function returns the result of the native addition operation.
 
 Note that the actual reference implementation of `Add` differs from this example in that it can handle other types of operands (since not all addition is on `IntegerLiteral` expressions). It also utilizes common functions from its superclass, resulting in an actual implementation that is more flexible (but also more complex) than the implementation in this example.
 
-This is the core of how all operations are defined and executed in the CQL execution framework. Since ELM is an AST, execution is simply a chained execution down the tree.
+This is the core of how all operations are defined and executed in the CQL execution framework. Since ELM is an abstract syntax tree (AST), execution is simply a chained execution down the tree.
 
 ### PatientSource
 
@@ -93,26 +96,29 @@ The CQL execution framework provides a basic Executor class for executing a cql 
 Executing CQL Libraries
 -----------------------
 
-The following is an example of a CoffeeScript file for executing a CQL library:
+The following is an example of a JavaScript file for executing a CQL library:
 
-```coffee
-cql = require './cql/cql'
-patients = require './data/example-patients'
-valuesets = require './data/example-valuesets'
-measure = require './example-measure'
+```js
+const cql = require('./cql');
+const patients = require('./data/example-patients');
+const valuesets = require('./data/example-valuesets');
+const measure = require('./example-measure');
 
-lib = new cql.Library(measure)
-patientSource = new cql.PatientSource(patients)
-codeService = new cql.CodeService(valuesets)
+const lib = new cql.Library(measure);
+const patientSource = new cql.PatientSource(patients);
+const codeService = new cql.CodeService(valuesets);
 
-parameters = {
-  "MeasurementPeriod" : new cql.Interval(
+const parameters = {
+  MeasurementPeriod : new cql.Interval(
     new cql.DateTime(2013, 1, 1, 0, 0, 0, 0),
-    new cql.DateTime(2014, 1, 1, 0, 0, 0, 0), true, false)
-}
+    new cql.DateTime(2014, 1, 1, 0, 0, 0, 0),
+    true,
+    false
+  );
+};
 
-executor = new cql.Executor(lib, codeService, parameters)
-result = executor.exec(patientSource)
+const executor = new cql.Executor(lib, codeService, parameters);
+const result = executor.exec(patientSource);
 ```
 
 The first line imports the CQL execution framework library, while the next three lines import the measure JSON ELM, patient data, and valueset data. The next three lines then construct the CQL `Library`, `PatientSource`, and `CodeService` using the imported data. The `parameters` definition overrides the `"MeasurementPeriod"` parameter with an interval representing the entire year of 2013. Finally, the last two lines construct an Executor object that will execute the cql document against the supplied PatientSource.

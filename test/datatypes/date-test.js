@@ -7,9 +7,9 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 const should = require('should');
-const { jsDate } = require('../../lib/util/util');
-const { Date, DateTime } = require('../../lib/datatypes/datetime');
-const { Uncertainty } = require('../../lib/datatypes/uncertainty');
+const { jsDate } = require('../../src/util/util');
+const { Date, DateTime } = require('../../src/datatypes/datetime');
+const { Uncertainty } = require('../../src/datatypes/uncertainty');
 
 describe('Date', function() {
 

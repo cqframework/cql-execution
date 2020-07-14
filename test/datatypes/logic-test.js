@@ -7,7 +7,7 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 const should = require('should');
-const { ThreeValuedLogic } = require('../../lib/datatypes/logic');
+const { ThreeValuedLogic } = require('../../src/datatypes/logic');
 
 describe('ThreeValuedLogic.and', function() {
 

@@ -54,15 +54,8 @@ module.exports.Expression = (Expression = class Expression {
 
 module.exports.UnimplementedExpression = (UnimplementedExpression = class UnimplementedExpression extends Expression {
   constructor(json) {
-    {
-      // Hack: trick Babel/TypeScript into allowing this before super.
-      if (false) { super(); }
-      let thisFn = (() => { return this; }).toString();
-      let thisName = thisFn.match(/return (?:_assertThisInitialized\()*(\w+)\)*;/)[1];
-      eval(`${thisName} = this;`);
-    }
+    super(json);
     this.json = json;
-    super(...arguments);
   }
 
   exec(ctx) {

@@ -9,10 +9,10 @@
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
-const {Code, Concept} = require('../../../lib/datatypes/clinical');
-const {DateTime, Date} = require('../../../lib/datatypes/datetime');
-const {Interval} = require('../../../lib/datatypes/interval');
-const {Quantity} = require('../../../lib/datatypes/quantity');
+const {Code, Concept} = require('../../../src/datatypes/clinical');
+const {DateTime, Date} = require('../../../src/datatypes/datetime');
+const {Interval} = require('../../../src/datatypes/interval');
+const {Quantity} = require('../../../src/datatypes/quantity');
 
 describe('ParameterDef', function() {
   this.beforeEach(function() {

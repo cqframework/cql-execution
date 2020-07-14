@@ -13,8 +13,8 @@
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
-const {Quantity, doMultiplication, doDivision, doAddition, doSubtraction, parseQuantity} = require('../../../lib/datatypes/quantity');
-const DT = require('../../../lib/datatypes/datatypes');
+const {Quantity, doMultiplication, doDivision, doAddition, doSubtraction, parseQuantity} = require('../../../src/datatypes/quantity');
+const DT = require('../../../src/datatypes/datatypes');
 
 
 const validateQuantity = function(object,expectedValue,expectedUnit) {
