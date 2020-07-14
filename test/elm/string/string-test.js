@@ -9,7 +9,7 @@
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
-const str = require('../../../lib/elm/string');
+const str = require('../../../src/elm/string');
 
 describe('Concat', function() {
   this.beforeEach(function() {

@@ -28,15 +28,8 @@ module.exports.DateTime = (DateTime = (function() {
       this.PROPERTIES = ['year', 'month', 'day', 'hour', 'minute', 'second', 'millisecond', 'timezoneOffset'];
     }
     constructor(json) {
-      {
-        // Hack: trick Babel/TypeScript into allowing this before super.
-        if (false) { super(); }
-        let thisFn = (() => { return this; }).toString();
-        let thisName = thisFn.match(/return (?:_assertThisInitialized\()*(\w+)\)*;/)[1];
-        eval(`${thisName} = this;`);
-      }
+      super(json);
       this.json = json;
-      super(...arguments);
     }
 
     exec(ctx) {
@@ -69,15 +62,8 @@ module.exports.Date = (Date = (function() {
       this.PROPERTIES = ['year', 'month', 'day'];
     }
     constructor(json) {
-      {
-        // Hack: trick Babel/TypeScript into allowing this before super.
-        if (false) { super(); }
-        let thisFn = (() => { return this; }).toString();
-        let thisName = thisFn.match(/return (?:_assertThisInitialized\()*(\w+)\)*;/)[1];
-        eval(`${thisName} = this;`);
-      }
+      super(json);
       this.json = json;
-      super(...arguments);
     }
 
     exec(ctx) {

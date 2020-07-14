@@ -10,7 +10,7 @@
         } else {
           params = {}
         }
-        f.results.value = JSON.stringify(executeSimpleELM(elm, params), null, 2)
+        f.results.value = JSON.stringify(executeSimpleELM(elm, new cql.PatientSource([]), [], 'Math', '1', null, params), null, 2)
       }
     </script>
   </head>
@@ -58,7 +58,7 @@
       "statements" : {
          "def" : [ {
             "name" : "Add",
-            "context" : "Population",
+            "context" : "Unfiltered",
             "accessLevel" : "Public",
             "expression" : {
                "type" : "Add",
@@ -72,7 +72,7 @@
             }
          }, {
             "name" : "Subtract",
-            "context" : "Population",
+            "context" : "Unfiltered",
             "accessLevel" : "Public",
             "expression" : {
                "type" : "Subtract",
@@ -86,7 +86,7 @@
             }
          }, {
             "name" : "Multiply",
-            "context" : "Population",
+            "context" : "Unfiltered",
             "accessLevel" : "Public",
             "expression" : {
                "type" : "Multiply",
@@ -100,7 +100,7 @@
             }
          }, {
             "name" : "Divide",
-            "context" : "Population",
+            "context" : "Unfiltered",
             "accessLevel" : "Public",
             "expression" : {
                "type" : "Divide",

@@ -8,8 +8,8 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 const should = require('should');
-const { DateTime } = require('../../lib/datatypes/datetime');
-const { Uncertainty } = require('../../lib/datatypes/uncertainty');
+const { DateTime } = require('../../src/datatypes/datetime');
+const { Uncertainty } = require('../../src/datatypes/uncertainty');
 
 const tzDate = function(y, mo, d, h, mi, s, ms, offset) {
   if ((offset == null)) { offset = ((new Date()).getTimezoneOffset() / 60) * -1; }

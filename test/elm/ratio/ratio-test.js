@@ -11,8 +11,8 @@
  */
 const should = require('should');
 const setup = require('../../setup');
-const {Quantity} = require('../../../lib/datatypes/quantity');
-const {Ratio} = require('../../../lib/datatypes/ratio');
+const {Quantity} = require('../../../src/datatypes/quantity');
+const {Ratio} = require('../../../src/datatypes/ratio');
 
 describe('Ratio', function() {
   it('should allow creation of Ratio with two valid quantities with units', () => should.doesNotThrow(function() {

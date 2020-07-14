@@ -7,7 +7,7 @@ if [ $? == 0 ]; then
   exit 1
 fi
 
-cp ./src/example/browser/cql4browsers.js ./src/example/browser/cql4browsers.js.original
+cp ./examples/browser/cql4browsers.js ./examples/browser/cql4browsers.js.original
 
 if [ $? != 0 ]; then
   echo "cql4browsers.js not found. Run this script from the base repository directory."
@@ -16,9 +16,9 @@ fi
 yarn install
 
 # comm -3 only returns lines that differ between the two files. If none are different, diff will be empty
-diff=`diff ./src/example/browser/cql4browsers.js.original ./src/example/browser/cql4browsers.js`
+diff=`diff ./examples/browser/cql4browsers.js.original ./examples/browser/cql4browsers.js`
 
-mv ./src/example/browser/cql4browsers.js.original ./src/example/browser/cql4browsers.js
+mv ./examples/browser/cql4browsers.js.original ./examples/browser/cql4browsers.js
 
 # Exit with a non-zero code if the diff isn't empty
 if [ "$diff" != "" ]; then

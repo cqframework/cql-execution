@@ -9,8 +9,8 @@
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
-const {equivalent}= require('../../../lib/util/comparison');
-const {Repository, Code} = require('../../../lib/cql');
+const {equivalent}= require('../../../src/util/comparison');
+const {Repository, Code} = require('../../../src/cql');
 
 const { p1, p2 } = require('./patients');
 

@@ -13,8 +13,8 @@
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
-const { Interval } = require('../../../lib/datatypes/interval');
-const { DateTime } = require('../../../lib/datatypes/datetime');
+const { Interval } = require('../../../src/datatypes/interval');
+const { DateTime } = require('../../../src/datatypes/datetime');
 const { MIN_INT_VALUE,
   MAX_INT_VALUE,
   MIN_FLOAT_VALUE,
@@ -23,7 +23,7 @@ const { MIN_INT_VALUE,
   MIN_DATE_VALUE,
   MIN_DATETIME_VALUE,
   MAX_DATETIME_VALUE,
-  MIN_TIME_VALUE } = require('../../../lib/util/math');
+  MIN_TIME_VALUE } = require('../../../src/util/math');
 
 describe('Interval', function() {
   this.beforeEach(function() {

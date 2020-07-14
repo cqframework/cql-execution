@@ -12,9 +12,9 @@
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
-const {isNull} = require('../../../lib/util/util');
-const {DateTime} = require('../../../lib/datatypes/datetime');
-const { Quantity } = require('../../../lib/datatypes/quantity');
+const {isNull} = require('../../../src/util/util');
+const {DateTime} = require('../../../src/datatypes/datetime');
+const { Quantity } = require('../../../src/datatypes/quantity');
 
 
 describe('FromString', function() {

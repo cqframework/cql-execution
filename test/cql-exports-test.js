@@ -11,7 +11,7 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 const should = require('should');
-const cql = require('../lib/cql');
+const cql = require('../src/cql');
 
 const libNames = [];
 // Library-related classes

@@ -13,8 +13,8 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 const should = require('should');
-const {equals, equivalent} = require('../../lib/util/comparison');
-const {Code, Concept} = require('../../lib/datatypes/clinical');
+const {equals, equivalent} = require('../../src/util/comparison');
+const {Code, Concept} = require('../../src/datatypes/clinical');
 
 describe('equals', function() {
   it('should detect equality/inequality for numbers', function() {
@@ -70,16 +70,7 @@ describe('equals', function() {
 
     class Bar extends Foo {
       constructor(prop1, prop2) {
-        {
-          // Hack: trick Babel/TypeScript into allowing this before super.
-          if (false) { super(); }
-          let thisFn = (() => { return this; }).toString();
-          let thisName = thisFn.match(/return (?:_assertThisInitialized\()*(\w+)\)*;/)[1];
-          eval(`${thisName} = this;`);
-        }
-        this.prop1 = prop1;
-        this.prop2 = prop2;
-        super(...arguments);
+        super(prop1, prop2);
       }
     }
 
@@ -113,14 +104,7 @@ describe('equals', function() {
 
     class StringFriendlyInt extends Int {
       constructor(num) {
-        {
-          // Hack: trick Babel/TypeScript into allowing this before super.
-          if (false) { super(); }
-          let thisFn = (() => { return this; }).toString();
-          let thisName = thisFn.match(/return (?:_assertThisInitialized\()*(\w+)\)*;/)[1];
-          eval(`${thisName} = this;`);
-        }
-        this.num = num;
+        super(num);
       }
 
       asInt() {

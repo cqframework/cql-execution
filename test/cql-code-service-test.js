@@ -7,8 +7,8 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 const should = require('should');
-const { CodeService } = require('../lib/cql-code-service');
-const { Code, ValueSet } = require('../lib/datatypes/datatypes');
+const { CodeService } = require('../src/cql-code-service');
+const { Code, ValueSet } = require('../src/datatypes/datatypes');
 
 
 describe('CodeService', function() {

@@ -10,7 +10,7 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 const should = require('should');
-const {typeIsArray} = require('../../lib/util/util');
+const {typeIsArray} = require('../../src/util/util');
 
 describe('typeIsArray', function() {
 

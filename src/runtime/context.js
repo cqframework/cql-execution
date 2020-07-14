@@ -29,19 +29,19 @@ Function.prototype.property = function(prop, desc) {
 module.exports.Context = (Context = (function() {
   Context = class Context {
     static initClass() {
-  
+
       this.property('parameters' , {
         get() {
           return this._parameters || (this.parent != null ? this.parent.parameters : undefined);
         },
-  
+
         set(params) {
           this.checkParameters(params);
           return this._parameters = params;
         }
       }
       );
-  
+
       this.property('codeService' , {
         get() { return this._codeService || (this.parent != null ? this.parent.codeService : undefined); },
         set(cs) { return this._codeService = cs; }
@@ -327,17 +327,11 @@ module.exports.Context = (Context = (function() {
 
 module.exports.PatientContext = (PatientContext = class PatientContext extends Context {
   constructor(library, patient, codeService, parameters, executionDateTime = dt.DateTime.fromJSDate(new Date())) {
-    {
-      // Hack: trick Babel/TypeScript into allowing this before super.
-      if (false) { super(); }
-      let thisFn = (() => { return this; }).toString();
-      let thisName = thisFn.match(/return (?:_assertThisInitialized\()*(\w+)\)*;/)[1];
-      eval(`${thisName} = this;`);
-    }
+    super(library, codeService, parameters);
     this.library = library;
     this.patient = patient;
     this.executionDateTime = executionDateTime;
-    super(this.library, codeService, parameters);
+
   }
 
   rootContext() { return this; }
@@ -358,17 +352,10 @@ module.exports.PatientContext = (PatientContext = class PatientContext extends C
 module.exports.UnfilteredContext = (UnfilteredContext = class UnfilteredContext extends Context {
 
   constructor(library, results, codeService, parameters, executionDateTime = dt.DateTime.fromJSDate(new Date())) {
-    {
-      // Hack: trick Babel/TypeScript into allowing this before super.
-      if (false) { super(); }
-      let thisFn = (() => { return this; }).toString();
-      let thisName = thisFn.match(/return (?:_assertThisInitialized\()*(\w+)\)*;/)[1];
-      eval(`${thisName} = this;`);
-    }
+    super(library, codeService, parameters);
     this.library = library;
     this.results = results;
     this.executionDateTime = executionDateTime;
-    super(this.library, codeService, parameters);
   }
 
   rootContext() { return this; }
