@@ -18,7 +18,7 @@ const { Quantity } = require('../../../src/datatypes/quantity');
 
 describe('Instance', function() {
   this.beforeEach(function() {
-    return setup(this, data);
+    setup(this, data);
   });
 
   it('should be able to construct a Quantity', function() {
@@ -27,7 +27,7 @@ describe('Instance', function() {
     q.unit.should.eql('a');
     q.value.should.eql(12);
     q.toString().should.equal('12 \'a\'');
-    return this.val.exec(this.ctx).should.eql(12);
+    this.val.exec(this.ctx).should.eql(12);
   });
 
   it('should be able to construct a Code', function() {
@@ -36,7 +36,7 @@ describe('Instance', function() {
     c.code.should.equal('12345');
     c.system.should.equal('http://loinc.org');
     c.version.should.equal('1');
-    return c.display.should.equal('Test Code');
+    c.display.should.equal('Test Code');
   });
 
   it('should be able to construct a Concept', function() {
@@ -47,11 +47,11 @@ describe('Instance', function() {
     c.codes[0].system.should.equal('http://loinc.org');
     c.codes[0].version.should.equal('1');
     c.codes[0].display.should.equal('Test Code');
-    return c.display.should.equal('Test Concept');
+    c.display.should.equal('Test Concept');
   });
 
-  return it('should create generic json objects with the correct key values', function() {
+  it('should create generic json objects with the correct key values', function() {
     this.pharyngitis.exec(this.ctx).status.code.should.eql('active');
-    return this.pharyngitis.exec(this.ctx).code.display.should.eql('Viral pharyngitis (disorder)');
+    this.pharyngitis.exec(this.ctx).code.display.should.eql('Viral pharyngitis (disorder)');
   });
 });

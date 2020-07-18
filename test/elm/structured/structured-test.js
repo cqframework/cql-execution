@@ -15,13 +15,13 @@ const data = require('./data');
 
 describe('Tuple', function() {
   this.beforeEach(function() {
-    return setup(this, data);
+    setup(this, data);
   });
 
   it('should be able to define a tuple', function() {
     const e = this.tup.exec(this.ctx);
     e['a'].should.equal(1);
-    return e['b'].should.equal(2);
+    e['b'].should.equal(2);
   });
 
   return it('should be able to define an empty tuple', function() {

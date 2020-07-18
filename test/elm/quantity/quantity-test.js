@@ -19,7 +19,7 @@ describe('Quantity', function() {
 
   it('should allow creation of Quantity with valid ucum units on multiple uses of same unit', () => should.doesNotThrow(function() {
     new Quantity(42.424242, 'cm');
-    return new Quantity(43.434242, 'cm');
+    new Quantity(43.434242, 'cm');
   }));
 
   it('should allow creation of Quantity with valid ucum converted time units', () => should.doesNotThrow(() => new Quantity(3, 'years')));
@@ -28,7 +28,7 @@ describe('Quantity', function() {
 
   it('should throw error when creating Quantity with invalid ucum units on multiple uses of same unit', function() {
     should.throws(() => new Quantity(42.424242, 'caches'));
-    return should.throws(() => new Quantity(44.4242242, 'caches'));
+    should.throws(() => new Quantity(44.4242242, 'caches'));
   });
 
   it('should allow creation of Quantity with no unit', () => should.doesNotThrow(() => new Quantity(9)));
@@ -37,12 +37,12 @@ describe('Quantity', function() {
 
   it('should allow for the value of the quantity to be null', () => should.throws(function() {
     const q = new Quantity(null, 'mg');
-    return should.equal(q.value, null);
+    should.equal(q.value, null);
   }));
 
   it('should convert undefined values to null', () => should.throws(function() {
     const q = new Quantity(undefined, 'mg');
-    return should.equal(q.value, null);
+    should.equal(q.value, null);
   }));
 
   it('should throw an error if value is a string that is not a number', () => should.throws(() => new Quantity('twenty', 'mg')));
@@ -52,7 +52,7 @@ describe('Quantity', function() {
   it('should handle cql temporal keywords with ucum units', function() {
     const a = new Quantity(1, 'd');
     const b = new Quantity(1, 'day');
-    return a.equals(b).should.equal(true);
+    a.equals(b).should.equal(true);
   });
 
   it('dividing identical units should result in default unit', function() {
@@ -60,7 +60,7 @@ describe('Quantity', function() {
     const denominator = new Quantity(2.0, 'mg');
     const result = numerator.dividedBy(denominator);
     result.unit.should.equal('1');
-    return result.value.should.equal(-2.75);
+    result.value.should.equal(-2.75);
   });
 
   it('should allow for singular time units', function() {
@@ -77,35 +77,35 @@ describe('Quantity', function() {
     hour.equals(new Quantity(4, 'hours')).should.be.true();
     minute.equals(new Quantity(4, 'minutes')).should.be.true();
     second.equals(new Quantity(4, 'seconds')).should.be.true();
-    return millisecond.equals(new Quantity(4, 'milliseconds')).should.be.true();
+    millisecond.equals(new Quantity(4, 'milliseconds')).should.be.true();
   });
 
   it('added to Quantity with invalid ucum units results in null', function() {
     const quantity1 = new Quantity(2, 'm');
     const quantity2 = new Quantity(2, 'm');
     quantity2.unit = 'fakeUnit';
-    return should(doAddition(quantity1, quantity2)).be.null();
+    should(doAddition(quantity1, quantity2)).be.null();
   });
 
   it('subtracted from Quantity with invalid ucum units results in null', function() {
     const quantity1 = new Quantity(2, 'm');
     const quantity2 = new Quantity(2, 'm');
     quantity2.unit = 'fakeUnit';
-    return should(doSubtraction(quantity1, quantity2)).be.null();
+    should(doSubtraction(quantity1, quantity2)).be.null();
   });
 
   it('multiplied by Quantity with invalid ucum units results in null', function() {
     const quantity1 = new Quantity(2, 'm');
     const quantity2 = new Quantity(2, 'm');
     quantity2.unit = 'fakeUnit';
-    return should(doMultiplication(quantity1, '.')).be.null();
+    should(doMultiplication(quantity1, '.')).be.null();
   });
 
   it('divided by Quantity with invalid ucum units results in null', function() {
     const quantity1 = new Quantity(2, 'm');
     const quantity2 = new Quantity(2, 'm');
     quantity2.unit = 'fakeUnit';
-    return should(doDivision(quantity1, '/')).be.null();
+    should(doDivision(quantity1, '/')).be.null();
   });
 
   it('should convert units when possible to perform arithmetic', function() {
@@ -116,17 +116,17 @@ describe('Quantity', function() {
     const add = doAddition(new Quantity(8, 'cm'), new Quantity(2, 'm'));
     add.equals(new Quantity(2.08, 'm')).should.be.true();
     const subtract = doSubtraction(new Quantity(150, 'cm'), new Quantity(1, 'm'));
-    return subtract.equals(new Quantity(0.5, 'm')).should.be.true();
+    subtract.equals(new Quantity(0.5, 'm')).should.be.true();
   });
 
   it('should return null when units are mismatched and cannot be converted', function() {
     const add = doAddition(new Quantity(8, 'cm'), new Quantity(2, 'g'));
     should.not.exist(add);
     const subtract = doSubtraction(new Quantity(150, 'cm'), new Quantity(1, 'mg'));
-    return should.not.exist(subtract);
+    should.not.exist(subtract);
   });
 
-  return (() => {
+  (() => {
     const result = [];
     const object = {Undefined: undefined, Null: null, EmptyString: ''};
     for (let unitName in object) {
@@ -156,9 +156,9 @@ describe('Quantity', function() {
         addWithOneOnLeft.should.deepEqual(addWithNullOnLeft);
         const subtractWithOneOnLeft = doSubtraction(new Quantity(8, '1'), new Quantity(2, '1'));
         const subtractWithNullOnLeft = doSubtraction(new Quantity(8, unitValue), new Quantity(2, '1'));
-        return subtractWithOneOnLeft.should.deepEqual(subtractWithNullOnLeft);
+        subtractWithOneOnLeft.should.deepEqual(subtractWithNullOnLeft);
       }));
     }
-    return result;
+    result;
   })();
 });

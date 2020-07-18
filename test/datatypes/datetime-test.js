@@ -27,7 +27,7 @@ describe('DateTime', function() {
     d.minute.should.equal(25);
     d.second.should.equal(59);
     d.millisecond.should.equal(246);
-    return d.timezoneOffset.should.equal(5.5);
+    d.timezoneOffset.should.equal(5.5);
   });
 
   it('should leave unset properties as undefined', function() {
@@ -39,22 +39,22 @@ describe('DateTime', function() {
     should.not.exist(d.hour);
     should.not.exist(d.minute);
     should.not.exist(d.second);
-    return should.not.exist(d.millisecond);
+    should.not.exist(d.millisecond);
   });
 
   it('should parse yyyy', function() {
     const d = DateTime.parse('2012');
-    return d.should.eql(new DateTime(2012));
+    d.should.eql(new DateTime(2012));
   });
 
   it('should parse yyyy-mm', function() {
     const d = DateTime.parse('2012-10');
-    return d.should.eql(new DateTime(2012, 10));
+    d.should.eql(new DateTime(2012, 10));
   });
 
   it('should parse yyyy-mm-dd', function() {
     const d = DateTime.parse('2012-10-25');
-    return d.should.eql(new DateTime(2012, 10, 25));
+    d.should.eql(new DateTime(2012, 10, 25));
   });
 
   it('should parse yyyy-mm-ddThh with and without timezone offset', function() {
@@ -65,7 +65,7 @@ describe('DateTime', function() {
     d = DateTime.parse('2012-10-25T12-05:30');
     d.should.eql(new DateTime(2012, 10, 25, 12, null, null, null, -5.5));
     d = DateTime.parse('2012-10-25T12Z');
-    return d.should.eql(new DateTime(2012, 10, 25, 12, null, null, null, 0));
+    d.should.eql(new DateTime(2012, 10, 25, 12, null, null, null, 0));
   });
 
   it('should parse yyyy-mm-ddThh:mm with and without timezone offset', function() {
@@ -76,7 +76,7 @@ describe('DateTime', function() {
     d = DateTime.parse('2012-10-25T12:55+05:30');
     d.should.eql(new DateTime(2012, 10, 25, 12, 55, null, null, 5.5));
     d = DateTime.parse('2012-10-25T12:55Z');
-    return d.should.eql(new DateTime(2012, 10, 25, 12, 55, null, null, 0));
+    d.should.eql(new DateTime(2012, 10, 25, 12, 55, null, null, 0));
   });
 
   it('should parse yyyy-mm-ddThh:mm:ss with and without timezone offset', function() {
@@ -87,7 +87,7 @@ describe('DateTime', function() {
     d = DateTime.parse('2012-10-25T12:55:14+01:30');
     d.should.eql(new DateTime(2012, 10, 25, 12, 55, 14, null, 1.5));
     d = DateTime.parse('2012-10-25T12:55:14Z');
-    return d.should.eql(new DateTime(2012, 10, 25, 12, 55, 14, null, 0));
+    d.should.eql(new DateTime(2012, 10, 25, 12, 55, 14, null, 0));
   });
 
   it('should parse yyyy-mm-ddThh:mm:ss.s with and without timezone offset', function() {
@@ -110,37 +110,37 @@ describe('DateTime', function() {
     d.should.eql(new DateTime(2012, 10, 25, 12, 55, 14, 953, -1.5));
 
     d = DateTime.parse('2012-10-25T12:55:14.953Z');
-    return d.should.eql(new DateTime(2012, 10, 25, 12, 55, 14, 953, 0));
+    d.should.eql(new DateTime(2012, 10, 25, 12, 55, 14, 953, 0));
   });
 
   it('should toString yyyy', function() {
     const d = new DateTime(2012);
-    return d.toString().should.eql('2012');
+    d.toString().should.eql('2012');
   });
 
   it('should toString yyyy-mm', function() {
     const d = new DateTime(2012, 10);
-    return d.toString().should.eql('2012-10');
+    d.toString().should.eql('2012-10');
   });
 
   it('should toString yyyy-mm-dd', function() {
     const d = new DateTime(2012, 10, 25);
-    return d.toString().should.eql('2012-10-25');
+    d.toString().should.eql('2012-10-25');
   });
 
   it('should toString yyyy-mm-ddThh', function() {
     const d = new DateTime(2012, 10, 25, 12, null, null, null, -5);
-    return d.toString().should.eql('2012-10-25T12-05:00');
+    d.toString().should.eql('2012-10-25T12-05:00');
   });
 
   it('should toString yyyy-mm-ddThh:mm', function() {
     const d = new DateTime(2012, 10, 25, 12, 55, null, null, -5);
-    return d.toString().should.eql('2012-10-25T12:55-05:00');
+    d.toString().should.eql('2012-10-25T12:55-05:00');
   });
 
   it('should toString yyyy-mm-ddThh:mm:ss', function() {
     const d = new DateTime(2012, 10, 25, 12, 55, 14, null, -5);
-    return d.toString().should.eql('2012-10-25T12:55:14-05:00');
+    d.toString().should.eql('2012-10-25T12:55:14-05:00');
   });
 
   it('should toString yyyy-mm-ddThh:mm:ss.sss', function() {
@@ -151,7 +151,7 @@ describe('DateTime', function() {
     d.toString().should.eql('2012-10-25T12:55:14.095-05:00');
 
     d = new DateTime(2012, 10, 25, 12, 55, 14, 953, -5);
-    return d.toString().should.eql('2012-10-25T12:55:14.953-05:00');
+    d.toString().should.eql('2012-10-25T12:55:14.953-05:00');
   });
 
   it('should be null when parsing non-string', () => should(DateTime.parse(20121025)).be.null());
@@ -160,7 +160,7 @@ describe('DateTime', function() {
 
   it('should be null when parsing invalid date/time values', function() {
     should(DateTime.parse('0000-00-00')).be.null();
-    return should(DateTime.parse('2000-11-31T23:59:59.999')).be.null();
+    should(DateTime.parse('2000-11-31T23:59:59.999')).be.null();
   });
 
   it.skip('should be null when ms field contains non-numeric characters after thousandths place', () => should(DateTime.parse('2000-11-30T23:59:59.999abc')).be.null());
@@ -171,28 +171,28 @@ describe('DateTime', function() {
 
   it('should construct from a javascript date into a target timezone', function() {
     DateTime.fromJSDate(new Date(Date.UTC(1999, 1, 16, 13, 56, 24, 123)), -5).should.eql(DateTime.parse('1999-02-16T08:56:24.123-05:00'));
-    return DateTime.fromJSDate(new Date(Date.UTC(1999, 1, 16, 13, 56, 24, 123)), +4.5).should.eql(DateTime.parse('1999-02-16T18:26:24.123+04:30'));
+    DateTime.fromJSDate(new Date(Date.UTC(1999, 1, 16, 13, 56, 24, 123)), +4.5).should.eql(DateTime.parse('1999-02-16T18:26:24.123+04:30'));
   });
 
   it('should copy a fully define DateTime', function() {
     const original = DateTime.parse('1999-02-16T13:56:24.123+04:30');
     const copy = original.copy();
     copy.should.eql(original);
-    return copy.should.not.equal(original);
+    copy.should.not.equal(original);
   });
 
   it('should copy an imprecise DateTime', function() {
     const original = DateTime.parse('1999-02');
     const copy = original.copy();
     copy.should.eql(original);
-    return copy.should.not.equal(original);
+    copy.should.not.equal(original);
   });
 
   it('should convert to other timezone offsets', function() {
     const original = DateTime.parse('1999-02-16T13:56:24.123+04:30');
     const converted = original.convertToTimezoneOffset(-5);
     converted.should.not.eql(original);
-    return converted.should.eql(DateTime.parse('1999-02-16T04:26:24.123-05:00'));
+    converted.should.eql(DateTime.parse('1999-02-16T04:26:24.123-05:00'));
   });
 
   it('should know if it is precise', function() {
@@ -203,7 +203,7 @@ describe('DateTime', function() {
     DateTime.parse('2000-01-01T00').isPrecise().should.be.false();
     DateTime.parse('2000-01-01').isPrecise().should.be.false();
     DateTime.parse('2000-01').isPrecise().should.be.false();
-    return DateTime.parse('2000').isPrecise().should.be.false();
+    DateTime.parse('2000').isPrecise().should.be.false();
   });
 
   it('should know if it is imprecise', function() {
@@ -214,7 +214,7 @@ describe('DateTime', function() {
     DateTime.parse('2000-01-01T00').isImprecise().should.be.true();
     DateTime.parse('2000-01-01').isImprecise().should.be.true();
     DateTime.parse('2000-01').isImprecise().should.be.true();
-    return DateTime.parse('2000').isImprecise().should.be.true();
+    DateTime.parse('2000').isImprecise().should.be.true();
   });
 
   it('should correctly convert to uncertainties with JavaScript dates', function() {
@@ -256,7 +256,7 @@ describe('DateTime', function() {
     const toYear = DateTime.parse('2000').toUncertainty();
     toYear.isPoint().should.be.false();
     toYear.low.should.eql(tzDate(2000, 0, 1, 0, 0, 0, 0));
-    return toYear.high.should.eql(tzDate(2000, 11, 31, 23, 59, 59, 999));
+    toYear.high.should.eql(tzDate(2000, 11, 31, 23, 59, 59, 999));
   });
 
   it('should convert to javascript Date', () => DateTime.parse('2012-02-25T12:55:14.456').toJSDate().should.eql(tzDate(2012, 1, 25, 12, 55, 14, 456)));
@@ -264,10 +264,10 @@ describe('DateTime', function() {
   it('should convert to javascript Date w/ time zone offsets', function() {
     DateTime.parse('2012-10-25T12:55:14.456+04:30').toJSDate().should.eql(new Date('2012-10-25T12:55:14.456+04:30'));
     DateTime.parse('2012-10-25T12:55:14.456+00:00').toJSDate().should.eql(new Date('2012-10-25T12:55:14.456Z'));
-    return DateTime.parse('2012-10-25T12:55:14.0-05').toJSDate().should.eql(new Date('25 Oct 2012 12:55:14 EST'));
+    DateTime.parse('2012-10-25T12:55:14.0-05').toJSDate().should.eql(new Date('25 Oct 2012 12:55:14 EST'));
   });
 
-  return it('should floor unknown values when it converts to javascript Date', () => DateTime.parse('2012').toJSDate().should.eql(tzDate(2012, 0, 1, 0, 0, 0, 0)));
+  it('should floor unknown values when it converts to javascript Date', () => DateTime.parse('2012').toJSDate().should.eql(tzDate(2012, 0, 1, 0, 0, 0, 0)));
 });
 
 describe('DateTime.add', function() {
@@ -280,7 +280,7 @@ describe('DateTime.add', function() {
     simple.add(1, DateTime.Unit.HOUR).should.eql(DateTime.parse('2000-06-15T11:20:30.555'));
     simple.add(1, DateTime.Unit.MINUTE).should.eql(DateTime.parse('2000-06-15T10:21:30.555'));
     simple.add(1, DateTime.Unit.SECOND).should.eql(DateTime.parse('2000-06-15T10:20:31.555'));
-    return simple.add(1, DateTime.Unit.MILLISECOND).should.eql(DateTime.parse('2000-06-15T10:20:30.556'));
+    simple.add(1, DateTime.Unit.MILLISECOND).should.eql(DateTime.parse('2000-06-15T10:20:30.556'));
   });
 
   it('should subtract units for simple cases', function() {
@@ -291,7 +291,7 @@ describe('DateTime.add', function() {
     simple.add(-1, DateTime.Unit.HOUR).should.eql(DateTime.parse('2000-06-15T09:20:30.555'));
     simple.add(-1, DateTime.Unit.MINUTE).should.eql(DateTime.parse('2000-06-15T10:19:30.555'));
     simple.add(-1, DateTime.Unit.SECOND).should.eql(DateTime.parse('2000-06-15T10:20:29.555'));
-    return simple.add(-1, DateTime.Unit.MILLISECOND).should.eql(DateTime.parse('2000-06-15T10:20:30.554'));
+    simple.add(-1, DateTime.Unit.MILLISECOND).should.eql(DateTime.parse('2000-06-15T10:20:30.554'));
   });
 
   it('should rollover when you add past a boundary', function() {
@@ -301,7 +301,7 @@ describe('DateTime.add', function() {
     almostMidnight.add(1, DateTime.Unit.HOUR).should.eql(DateTime.parse('2001-01-01T00:59:59.999'));
     almostMidnight.add(1, DateTime.Unit.MINUTE).should.eql(DateTime.parse('2001-01-01T00:00:59.999'));
     almostMidnight.add(1, DateTime.Unit.SECOND).should.eql(DateTime.parse('2001-01-01T00:00:00.999'));
-    return almostMidnight.add(1, DateTime.Unit.MILLISECOND).should.eql(DateTime.parse('2001-01-01T00:00:00.0'));
+    almostMidnight.add(1, DateTime.Unit.MILLISECOND).should.eql(DateTime.parse('2001-01-01T00:00:00.0'));
   });
 
   it('should rollover when you add past a boundary w/ timezone offsets', function() {
@@ -311,7 +311,7 @@ describe('DateTime.add', function() {
     almostMidnight.add(1, DateTime.Unit.HOUR).should.eql(DateTime.parse('2001-01-01T00:59:59.999+00:00'));
     almostMidnight.add(1, DateTime.Unit.MINUTE).should.eql(DateTime.parse('2001-01-01T00:00:59.999+00:00'));
     almostMidnight.add(1, DateTime.Unit.SECOND).should.eql(DateTime.parse('2001-01-01T00:00:00.999+00:00'));
-    return almostMidnight.add(1, DateTime.Unit.MILLISECOND).should.eql(DateTime.parse('2001-01-01T00:00:00.0+00:00'));
+    almostMidnight.add(1, DateTime.Unit.MILLISECOND).should.eql(DateTime.parse('2001-01-01T00:00:00.0+00:00'));
   });
 
   it('should rollover when you subtract past a boundary', function() {
@@ -321,7 +321,7 @@ describe('DateTime.add', function() {
     midnight.add(-1, DateTime.Unit.HOUR).should.eql(DateTime.parse('2000-12-31T23:00:00.0'));
     midnight.add(-1, DateTime.Unit.MINUTE).should.eql(DateTime.parse('2000-12-31T23:59:00.0'));
     midnight.add(-1, DateTime.Unit.SECOND).should.eql(DateTime.parse('2000-12-31T23:59:59.0'));
-    return midnight.add(-1, DateTime.Unit.MILLISECOND).should.eql(DateTime.parse('2000-12-31T23:59:59.999'));
+    midnight.add(-1, DateTime.Unit.MILLISECOND).should.eql(DateTime.parse('2000-12-31T23:59:59.999'));
   });
 
   it('should rollover when you subtract past a boundary w/ timezone offsets', function() {
@@ -331,7 +331,7 @@ describe('DateTime.add', function() {
     midnight.add(-1, DateTime.Unit.HOUR).should.eql(DateTime.parse('2000-12-31T23:00:00.0+00:00'));
     midnight.add(-1, DateTime.Unit.MINUTE).should.eql(DateTime.parse('2000-12-31T23:59:00.0+00:00'));
     midnight.add(-1, DateTime.Unit.SECOND).should.eql(DateTime.parse('2000-12-31T23:59:59.0+00:00'));
-    return midnight.add(-1, DateTime.Unit.MILLISECOND).should.eql(DateTime.parse('2000-12-31T23:59:59.999+00:00'));
+    midnight.add(-1, DateTime.Unit.MILLISECOND).should.eql(DateTime.parse('2000-12-31T23:59:59.999+00:00'));
   });
 
   it('should still work for imprecise numbers, when adding to a defined field', function() {
@@ -340,7 +340,7 @@ describe('DateTime.add', function() {
     DateTime.parse('2000-06-15T10').add(14, DateTime.Unit.HOUR).should.eql(DateTime.parse('2000-06-16T00'));
     DateTime.parse('2000-06-15').add(30, DateTime.Unit.DAY).should.eql(DateTime.parse('2000-07-15'));
     DateTime.parse('2000-06').add(8, DateTime.Unit.MONTH).should.eql(DateTime.parse('2001-02'));
-    return DateTime.parse('2000').add(5, DateTime.Unit.YEAR).should.eql(DateTime.parse('2005'));
+    DateTime.parse('2000').add(5, DateTime.Unit.YEAR).should.eql(DateTime.parse('2005'));
   });
 
   it('should handle adding to undefined fields', function() {
@@ -385,7 +385,7 @@ describe('DateTime.add', function() {
     DateTime.parse('2000').add(100, DateTime.Unit.DAY).should.eql(DateTime.parse('2000'));
     DateTime.parse('2000').add(400, DateTime.Unit.DAY).should.eql(DateTime.parse('2001'));
     DateTime.parse('2000').add(10, DateTime.Unit.MONTH).should.eql(DateTime.parse('2000'));
-    return DateTime.parse('2000').add(100, DateTime.Unit.MONTH).should.eql(DateTime.parse('2008'));
+    DateTime.parse('2000').add(100, DateTime.Unit.MONTH).should.eql(DateTime.parse('2008'));
   });
 
   it('should handle subtracting from undefined fields', function() {
@@ -430,21 +430,21 @@ describe('DateTime.add', function() {
     DateTime.parse('2000').add(-100, DateTime.Unit.DAY).should.eql(DateTime.parse('2000'));
     DateTime.parse('2000').add(-400, DateTime.Unit.DAY).should.eql(DateTime.parse('1999'));
     DateTime.parse('2000').add(-10, DateTime.Unit.MONTH).should.eql(DateTime.parse('2000'));
-    return DateTime.parse('2000').add(-100, DateTime.Unit.MONTH).should.eql(DateTime.parse('1992'));
+    DateTime.parse('2000').add(-100, DateTime.Unit.MONTH).should.eql(DateTime.parse('1992'));
   });
 
   it('should not mutate the original object', function() {
     const date1 = DateTime.parse('2000-06-15T10:20:30.0');
     const date2 = date1.add(6, DateTime.Unit.MONTH);
     date1.should.eql(DateTime.parse('2000-06-15T10:20:30.0'));
-    return date2.should.eql(DateTime.parse('2000-12-15T10:20:30.0'));
+    date2.should.eql(DateTime.parse('2000-12-15T10:20:30.0'));
   });
 
-  return it('should return a different object (copy)', function() {
+  it('should return a different object (copy)', function() {
     const date1 = DateTime.parse('2000-06-15T10:20:30.0');
     const date2 = date1.add(0, DateTime.Unit.SECOND);
     date1.should.eql(date2);
-    return date1.should.not.equal(date2);
+    date1.should.not.equal(date2);
   });
 });
 
@@ -452,7 +452,7 @@ describe('DateTime.differenceBetween', function() {
   it('should return null if passed a non-DateTime object', function() {
     const a = DateTime.parse('2018-01-23T01:41:00');
     const b = '2018-01-23T01:41:00';
-    return should.not.exist(a.differenceBetween(b, DateTime.Unit.YEAR));
+    should.not.exist(a.differenceBetween(b, DateTime.Unit.YEAR));
   });
 
   it('should calculate time between two full specified dates', function() {
@@ -544,7 +544,7 @@ describe('DateTime.differenceBetween', function() {
     a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(8759));
     a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(525599));
     a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(31535999));
-    return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(31535999999));
+    a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(31535999999));
   });
 
   it('should count the boundaries', function() {
@@ -556,7 +556,7 @@ describe('DateTime.differenceBetween', function() {
     a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(1));
     a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(1));
     a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(1));
-    return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(1));
+    a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(1));
   });
 
   it('should handle leap year', function() {
@@ -578,7 +578,7 @@ describe('DateTime.differenceBetween', function() {
     a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(8784));
     a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(527040));
     a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(31622400));
-    return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(31622400000));
+    a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(31622400000));
   });
 
   it('should properly calculate duration and difference for Bonnie test cases that have come up', function() {
@@ -606,7 +606,7 @@ describe('DateTime.differenceBetween', function() {
     a = DateTime.parse('2012-09-13T14:50:00.0+00:00');
     b = DateTime.parse('2012-12-31T23:59:59.999+00:00');
     a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(3));
-    return a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(3));
+    a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(3));
   });
 
   it('should handle difference in weeks using Sunday as a boundary', function() {
@@ -633,7 +633,7 @@ describe('DateTime.differenceBetween', function() {
 
     a = DateTime.parse('2012-02-12T00:00:00.0'); // Sunday
     b = DateTime.parse('2012-02-05T00:00:00.0'); // Sunday
-    return a.differenceBetween(b, DateTime.Unit.WEEK).should.eql(new Uncertainty(-1));
+    a.differenceBetween(b, DateTime.Unit.WEEK).should.eql(new Uncertainty(-1));
   });
 
   it('should handle different timezones', function() {
@@ -646,10 +646,10 @@ describe('DateTime.differenceBetween', function() {
     a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(0));
     a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(0));
     a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(0));
-    return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(0));
+    a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(0));
   });
 
-  return it('should handle crossing DST in the spring', function() {
+  it('should handle crossing DST in the spring', function() {
     // NOTE: Since we "spring ahead" the 2nd Sunday of March at 2:00am,
     // the difference between 1:00am EST and 3:00am EDT is only 1 hour!
     const a = DateTime.parse('2017-03-12T01:00:00.0-05:00');
@@ -660,7 +660,7 @@ describe('DateTime.differenceBetween', function() {
     a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(1));
     a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(60));
     a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(60*60));
-    return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(60*60*1000));
+    a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(60*60*1000));
   });
 });
 
@@ -675,7 +675,7 @@ it('should handle crossing DST in the fall', function() {
   a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(3));
   a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(3*60));
   a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(3*60*60));
-  return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(3*60*60*1000));
+  a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(3*60*60*1000));
 });
 
 it('should handle crossing DST in the spring when UTC', function() {
@@ -688,7 +688,7 @@ it('should handle crossing DST in the spring when UTC', function() {
   a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(2));
   a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(2*60));
   a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(2*60*60));
-  return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(2*60*60*1000));
+  a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(2*60*60*1000));
 });
 
 it('should handle crossing DST in the fall when UTC', function() {
@@ -701,7 +701,7 @@ it('should handle crossing DST in the fall when UTC', function() {
   a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(2));
   a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(2*60));
   a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(2*60*60));
-  return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(2*60*60*1000));
+  a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(2*60*60*1000));
 });
 
 it('should handle dates without minutes specified', function() {
@@ -714,7 +714,7 @@ it('should handle dates without minutes specified', function() {
   // Because minute, second, and millisecond are null, the expects change
   a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(60 + 1, (3*60) - 1));
   a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty((60*60) + 1, (3*60*60) - 1));
-  return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty((60*60*1000) + 1, (3*60*60*1000) - 1));
+  a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty((60*60*1000) + 1, (3*60*60*1000) - 1));
 });
 
 it('should handle dates without minutes specified with different time zones', function() {
@@ -727,7 +727,7 @@ it('should handle dates without minutes specified with different time zones', fu
   // Because minute, second, and millisecond are null, the expects change
   a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(60 + 1, (3*60) - 1));
   a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty((60*60) + 1, (3*60*60) - 1));
-  return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty((60*60*1000) + 1, (3*60*60*1000) - 1));
+  a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty((60*60*1000) + 1, (3*60*60*1000) - 1));
 });
 
 
@@ -830,7 +830,7 @@ describe('DateTime.durationBetween', function() {
     a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(8759));
     a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(525599));
     a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(31535999));
-    return a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(31535999999));
+    a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(31535999999));
   });
 
 
@@ -848,10 +848,10 @@ describe('DateTime.durationBetween', function() {
     b = DateTime.parse('2011-09-29T10:59:00.0-04:00');
     a.durationBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
     a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(8));
-    return a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(269));
+    a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(269));
   });
 
-  return it('should handle crossing DST in the spring', function() {
+  it('should handle crossing DST in the spring', function() {
     // NOTE: Since we "spring ahead" the 2nd Sunday of March at 2:00am,
     // the duration between 1:00am EST and 3:00am EDT is only 1 hour!
     const a = DateTime.parse('2017-03-12T01:00:00.0-05:00');
@@ -862,7 +862,7 @@ describe('DateTime.durationBetween', function() {
     a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(1));
     a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(60));
     a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(60*60));
-    return a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(60*60*1000));
+    a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(60*60*1000));
   });
 });
 
@@ -877,7 +877,7 @@ it('should handle crossing DST in the fall', function() {
   a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(3));
   a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(3*60));
   a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(3*60*60));
-  return a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(3*60*60*1000));
+  a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(3*60*60*1000));
 });
 
 it('should handle durations ', function() {
@@ -892,7 +892,7 @@ it('should handle durations ', function() {
   b = new DateTime(2011, 9, 29, 10, 59, 0, 0, 0);
   a.durationBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
   a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(8));
-  return a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(269));
+  a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(269));
 });
 
 
@@ -917,7 +917,7 @@ it('should handle leap year', function() {
   a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(8784));
   a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(527040));
   a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(31622400));
-  return a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(31622400000));
+  a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(31622400000));
 });
 
 it('should handle different timezones', function() {
@@ -931,7 +931,7 @@ it('should handle different timezones', function() {
   a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(0));
   a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(0));
   a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(0));
-  return a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(0));
+  a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(0));
 });
 
 it('should handle different timezones with no minutes specified', function() {
@@ -945,7 +945,7 @@ it('should handle different timezones with no minutes specified', function() {
   a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(0));
   a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(-1*(60-1), 60-1));
   a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-1*((60*60)-1), (60*60)-1));
-  return a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-1*((60*60*1000)-1), (60*60*1000)-1));
+  a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-1*((60*60*1000)-1), (60*60*1000)-1));
 });
 
 // TODO: When a and b are different timezones, which do we use to count boundaries?
@@ -1005,7 +1005,7 @@ it('should handle imprecision', function() {
   a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(0));
   a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(0));
   a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(0));
-  return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-999,999));
+  a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-999,999));
 });
 
 it('should return negative values for going backwards', function() {
@@ -1027,7 +1027,7 @@ it('should return negative values for going backwards', function() {
   a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(0));
   a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(0));
   a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-1));
-  return a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-1876, -877));
+  a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-1876, -877));
 });
 
 
@@ -1041,7 +1041,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.123'), DateTime.Unit.DAY).should.be.true();
     should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.123'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.123'), DateTime.Unit.MONTH).should.be.true();
-    return DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.123'), DateTime.Unit.YEAR).should.be.true();
+    DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.123'), DateTime.Unit.YEAR).should.be.true();
   });
 
   it('should properly calculate cases where the millisecond is different', function() {
@@ -1053,7 +1053,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.124'), DateTime.Unit.DAY).should.be.true();
     should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.124'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.124'), DateTime.Unit.MONTH).should.be.true();
-    return DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.124'), DateTime.Unit.YEAR).should.be.true();
+    DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45.124'), DateTime.Unit.YEAR).should.be.true();
   });
 
   it('should properly calculate cases where the second is different', function() {
@@ -1065,7 +1065,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:46.123'), DateTime.Unit.DAY).should.be.true();
     should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:46.123'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:46.123'), DateTime.Unit.MONTH).should.be.true();
-    return DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:46.123'), DateTime.Unit.YEAR).should.be.true();
+    DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:46.123'), DateTime.Unit.YEAR).should.be.true();
   });
 
   it('should properly calculate cases where the minute is different', function() {
@@ -1077,7 +1077,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:36:45.123'), DateTime.Unit.DAY).should.be.true();
     should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:36:45.123'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:36:45.123'), DateTime.Unit.MONTH).should.be.true();
-    return DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:36:45.123'), DateTime.Unit.YEAR).should.be.true();
+    DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:36:45.123'), DateTime.Unit.YEAR).should.be.true();
   });
 
   it('should properly calculate cases where the hour is different', function() {
@@ -1089,7 +1089,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T13:35:45.123'), DateTime.Unit.DAY).should.be.true();
     should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T13:35:45.123'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T13:35:45.123'), DateTime.Unit.MONTH).should.be.true();
-    return DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T13:35:45.123'), DateTime.Unit.YEAR).should.be.true();
+    DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T13:35:45.123'), DateTime.Unit.YEAR).should.be.true();
   });
 
   it('should properly calculate cases where the day is different', function() {
@@ -1101,7 +1101,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-16T12:35:45.123'), DateTime.Unit.DAY).should.be.false();
     should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-16T12:35:45.123'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-16T12:35:45.123'), DateTime.Unit.MONTH).should.be.true();
-    return DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-16T12:35:45.123'), DateTime.Unit.YEAR).should.be.true();
+    DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-16T12:35:45.123'), DateTime.Unit.YEAR).should.be.true();
   });
 
   it('should properly calculate cases where the week is different', function() {
@@ -1113,7 +1113,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-21T12:35:45.123'), DateTime.Unit.DAY).should.be.false();
     should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-21T12:35:45.123'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-21T12:35:45.123'), DateTime.Unit.MONTH).should.be.true();
-    return DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-21T12:35:45.123'), DateTime.Unit.YEAR).should.be.true();
+    DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-21T12:35:45.123'), DateTime.Unit.YEAR).should.be.true();
   });
 
   it('should properly calculate cases where the month is different', function() {
@@ -1125,7 +1125,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-06-15T12:35:45.123'), DateTime.Unit.DAY).should.be.false();
     should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-06-15T12:35:45.123'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-06-15T12:35:45.123'), DateTime.Unit.MONTH).should.be.false();
-    return DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-06-15T12:35:45.123'), DateTime.Unit.YEAR).should.be.true();
+    DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-06-15T12:35:45.123'), DateTime.Unit.YEAR).should.be.true();
   });
 
   it('should properly calculate cases where the year is different', function() {
@@ -1137,7 +1137,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2001-05-15T12:35:45.123'), DateTime.Unit.DAY).should.be.false();
     should(() => DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2001-05-15T12:35:45.123'), DateTime.Unit.WEEK)).throw('Invalid precision: week');
     DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2001-05-15T12:35:45.123'), DateTime.Unit.MONTH).should.be.false();
-    return DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2001-05-15T12:35:45.123'), DateTime.Unit.YEAR).should.be.false();
+    DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2001-05-15T12:35:45.123'), DateTime.Unit.YEAR).should.be.false();
   });
 
   it('should handle different time zones', function() {
@@ -1148,7 +1148,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-12-31T19:35:45.123+00:00').sameAs(DateTime.parse('2001-01-01T00:05:45.123+04:30'), DateTime.Unit.HOUR).should.be.true();
     DateTime.parse('2000-12-31T19:35:45.123+00:00').sameAs(DateTime.parse('2001-01-01T00:05:45.123+04:30'), DateTime.Unit.DAY).should.be.true();
     DateTime.parse('2000-12-31T19:35:45.123+00:00').sameAs(DateTime.parse('2001-01-01T00:05:45.123+04:30'), DateTime.Unit.MONTH).should.be.true();
-    return DateTime.parse('2000-12-31T19:35:45.123+00:00').sameAs(DateTime.parse('2001-01-01T00:05:45.123+04:30'), DateTime.Unit.YEAR).should.be.true();
+    DateTime.parse('2000-12-31T19:35:45.123+00:00').sameAs(DateTime.parse('2001-01-01T00:05:45.123+04:30'), DateTime.Unit.YEAR).should.be.true();
   });
 
   it('should handle imprecision correctly with missing milliseconds', function() {
@@ -1200,7 +1200,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35:45').sameAs(DateTime.parse('2000-05-15T12:35:46'), DateTime.Unit.HOUR).should.be.true();
     DateTime.parse('2000-05-15T12:35:45').sameAs(DateTime.parse('2000-05-15T12:35:46'), DateTime.Unit.DAY).should.be.true();
     DateTime.parse('2000-05-15T12:35:45').sameAs(DateTime.parse('2000-05-15T12:35:46'), DateTime.Unit.MONTH).should.be.true();
-    return DateTime.parse('2000-05-15T12:35:45').sameAs(DateTime.parse('2000-05-15T12:35:46'), DateTime.Unit.YEAR).should.be.true();
+    DateTime.parse('2000-05-15T12:35:45').sameAs(DateTime.parse('2000-05-15T12:35:46'), DateTime.Unit.YEAR).should.be.true();
   });
 
   it('should handle imprecision correctly with missing seconds', function() {
@@ -1252,7 +1252,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12:35').sameAs(DateTime.parse('2000-05-15T12:36'), DateTime.Unit.HOUR).should.be.true();
     DateTime.parse('2000-05-15T12:35').sameAs(DateTime.parse('2000-05-15T12:36'), DateTime.Unit.DAY).should.be.true();
     DateTime.parse('2000-05-15T12:35').sameAs(DateTime.parse('2000-05-15T12:36'), DateTime.Unit.MONTH).should.be.true();
-    return DateTime.parse('2000-05-15T12:35').sameAs(DateTime.parse('2000-05-15T12:36'), DateTime.Unit.YEAR).should.be.true();
+    DateTime.parse('2000-05-15T12:35').sameAs(DateTime.parse('2000-05-15T12:36'), DateTime.Unit.YEAR).should.be.true();
   });
 
   it('should handle imprecision correctly with missing minutes', function() {
@@ -1304,7 +1304,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15T12').sameAs(DateTime.parse('2000-05-15T13'), DateTime.Unit.HOUR).should.be.false();
     DateTime.parse('2000-05-15T12').sameAs(DateTime.parse('2000-05-15T13'), DateTime.Unit.DAY).should.be.true();
     DateTime.parse('2000-05-15T12').sameAs(DateTime.parse('2000-05-15T13'), DateTime.Unit.MONTH).should.be.true();
-    return DateTime.parse('2000-05-15T12').sameAs(DateTime.parse('2000-05-15T13'), DateTime.Unit.YEAR).should.be.true();
+    DateTime.parse('2000-05-15T12').sameAs(DateTime.parse('2000-05-15T13'), DateTime.Unit.YEAR).should.be.true();
   });
 
   it('should handle imprecision correctly with missing hours', function() {
@@ -1356,7 +1356,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05-15').sameAs(DateTime.parse('2000-05-16'), DateTime.Unit.HOUR).should.be.false();
     DateTime.parse('2000-05-15').sameAs(DateTime.parse('2000-05-16'), DateTime.Unit.DAY).should.be.false();
     DateTime.parse('2000-05-15').sameAs(DateTime.parse('2000-05-16'), DateTime.Unit.MONTH).should.be.true();
-    return DateTime.parse('2000-05-15').sameAs(DateTime.parse('2000-05-16'), DateTime.Unit.YEAR).should.be.true();
+    DateTime.parse('2000-05-15').sameAs(DateTime.parse('2000-05-16'), DateTime.Unit.YEAR).should.be.true();
   });
 
   it('should handle imprecision correctly with missing days', function() {
@@ -1408,7 +1408,7 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000-05').sameAs(DateTime.parse('2000-06'), DateTime.Unit.HOUR).should.be.false();
     DateTime.parse('2000-05').sameAs(DateTime.parse('2000-06'), DateTime.Unit.DAY).should.be.false();
     DateTime.parse('2000-05').sameAs(DateTime.parse('2000-06'), DateTime.Unit.MONTH).should.be.false();
-    return DateTime.parse('2000-05').sameAs(DateTime.parse('2000-06'), DateTime.Unit.YEAR).should.be.true();
+    DateTime.parse('2000-05').sameAs(DateTime.parse('2000-06'), DateTime.Unit.YEAR).should.be.true();
   });
 
   it('should handle imprecision correctly with missing months', function() {
@@ -1460,10 +1460,10 @@ describe('DateTime.sameAs', function() {
     DateTime.parse('2000').sameAs(DateTime.parse('2001'), DateTime.Unit.HOUR).should.be.false();
     DateTime.parse('2000').sameAs(DateTime.parse('2001'), DateTime.Unit.DAY).should.be.false();
     DateTime.parse('2000').sameAs(DateTime.parse('2001'), DateTime.Unit.MONTH).should.be.false();
-    return DateTime.parse('2000').sameAs(DateTime.parse('2001'), DateTime.Unit.YEAR).should.be.false();
+    DateTime.parse('2000').sameAs(DateTime.parse('2001'), DateTime.Unit.YEAR).should.be.false();
   });
 
-  return it('should return null when something other than a DateTime is passed in', () => should.not.exist(DateTime.parse('2000').sameAs({test: 'im not a DateTime'})));
+  it('should return null when something other than a DateTime is passed in', () => should.not.exist(DateTime.parse('2000').sameAs({test: 'im not a DateTime'})));
 });
 
 describe('DateTime.before', function() {
@@ -1475,7 +1475,7 @@ describe('DateTime.before', function() {
     DateTime.parse('2000-12-31T22:59:59.999').before(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true();
     DateTime.parse('2000-12-30T23:59:59.999').before(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true();
     DateTime.parse('2000-11-30T23:59:59.999').before(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true();
-    return DateTime.parse('1999-12-31T23:59:59.999').before(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true();
+    DateTime.parse('1999-12-31T23:59:59.999').before(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true();
   });
 
   it('should reject cases where a is after b', function() {
@@ -1485,7 +1485,7 @@ describe('DateTime.before', function() {
     DateTime.parse('2000-01-01T01:00:00.0').before(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false();
     DateTime.parse('2000-01-02T00:00:00.0').before(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false();
     DateTime.parse('2000-02-01T00:00:00.0').before(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false();
-    return DateTime.parse('2001-01-01T00:00:00.0').before(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false();
+    DateTime.parse('2001-01-01T00:00:00.0').before(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false();
   });
 
   it('should reject cases where a is b', () => DateTime.parse('2000-01-01T00:00:00.0').before(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false());
@@ -1493,48 +1493,48 @@ describe('DateTime.before', function() {
   it('should work with different timezone offsets', function() {
     DateTime.parse('2000-01-01T12:00:00.0+01:00').before(DateTime.parse('2000-01-01T07:00:00.0-05:00')).should.be.true();
     DateTime.parse('2000-01-01T12:00:00.0+01:00').before(DateTime.parse('2000-01-01T06:00:00.0-05:00')).should.be.false();
-    return DateTime.parse('2000-01-01T07:00:00.0-05:00').before(DateTime.parse('2000-01-01T12:00:00.0+01:00')).should.be.false();
+    DateTime.parse('2000-01-01T07:00:00.0-05:00').before(DateTime.parse('2000-01-01T12:00:00.0+01:00')).should.be.false();
   });
 
   it('should use year precision when requested', function() {
     DateTime.parse('2000-01-01T00:00:00.0+00').before(DateTime.parse('2000-06-01T00:00:00.0+00')).should.be.true();
     DateTime.parse('2000-01-01T00:00:00.0+00').before(DateTime.parse('2000-06-01T00:00:00.0+00'), DateTime.Unit.YEAR).should.be.false();
-    return DateTime.parse('1999-12-31T23:59:59.999+00').before(DateTime.parse('2000-06-01T00:00:00.0+00'), DateTime.Unit.YEAR).should.be.true();
+    DateTime.parse('1999-12-31T23:59:59.999+00').before(DateTime.parse('2000-06-01T00:00:00.0+00'), DateTime.Unit.YEAR).should.be.true();
   });
 
   it('should use month precision when requested', function() {
     DateTime.parse('2000-02-01T00:00:00.0+00').before(DateTime.parse('2000-02-15T00:00:00.0+00')).should.be.true();
     DateTime.parse('2000-02-01T00:00:00.0+00').before(DateTime.parse('2000-02-15T00:00:00.0+00'), DateTime.Unit.MONTH).should.be.false();
-    return DateTime.parse('2000-01-31T23:59:59.999+00').before(DateTime.parse('2000-02-15T00:00:00.0+00'), DateTime.Unit.MONTH).should.be.true();
+    DateTime.parse('2000-01-31T23:59:59.999+00').before(DateTime.parse('2000-02-15T00:00:00.0+00'), DateTime.Unit.MONTH).should.be.true();
   });
 
   it('should use day precision when requested', function() {
     DateTime.parse('2000-02-15T00:00:00.0+00').before(DateTime.parse('2000-02-15T12:00:00.0+00')).should.be.true();
     DateTime.parse('2000-02-15T00:00:00.0+00').before(DateTime.parse('2000-02-15T12:00:00.0+00'), DateTime.Unit.DAY).should.be.false();
-    return DateTime.parse('2000-02-14T23:59:59.999+00').before(DateTime.parse('2000-02-15T12:00:00.0+00'), DateTime.Unit.DAY).should.be.true();
+    DateTime.parse('2000-02-14T23:59:59.999+00').before(DateTime.parse('2000-02-15T12:00:00.0+00'), DateTime.Unit.DAY).should.be.true();
   });
 
   it('should use hour precision when requested', function() {
     DateTime.parse('2000-02-15T12:00:00.0+00').before(DateTime.parse('2000-02-15T12:30:00.0+00')).should.be.true();
     DateTime.parse('2000-02-15T12:00:00.0+00').before(DateTime.parse('2000-02-15T12:30:00.0+00'), DateTime.Unit.HOUR).should.be.false();
-    return DateTime.parse('2000-02-15T11:59:59.999+00').before(DateTime.parse('2000-02-15T12:30:00.0+00'), DateTime.Unit.HOUR).should.be.true();
+    DateTime.parse('2000-02-15T11:59:59.999+00').before(DateTime.parse('2000-02-15T12:30:00.0+00'), DateTime.Unit.HOUR).should.be.true();
   });
 
   it('should use minute precision when requested', function() {
     DateTime.parse('2000-02-15T12:30:00.0+00').before(DateTime.parse('2000-02-15T12:30:30.0+00')).should.be.true();
     DateTime.parse('2000-02-15T12:30:00.0+00').before(DateTime.parse('2000-02-15T12:30:30.0+00'), DateTime.Unit.MINUTE).should.be.false();
-    return DateTime.parse('2000-02-15T12:29:59.999+00').before(DateTime.parse('2000-02-15T12:30:30.0+00'), DateTime.Unit.MINUTE).should.be.true();
+    DateTime.parse('2000-02-15T12:29:59.999+00').before(DateTime.parse('2000-02-15T12:30:30.0+00'), DateTime.Unit.MINUTE).should.be.true();
   });
 
   it('should use second precision when requested', function() {
     DateTime.parse('2000-02-15T12:30:30.0+00').before(DateTime.parse('2000-02-15T12:30:30.500+00')).should.be.true();
     DateTime.parse('2000-02-15T12:30:30.0+00').before(DateTime.parse('2000-02-15T12:30:30.500+00'), DateTime.Unit.SECOND).should.be.false();
-    return DateTime.parse('2000-02-15T12:30:29.999+00').before(DateTime.parse('2000-02-15T12:30:30.500+00'), DateTime.Unit.SECOND).should.be.true();
+    DateTime.parse('2000-02-15T12:30:29.999+00').before(DateTime.parse('2000-02-15T12:30:30.500+00'), DateTime.Unit.SECOND).should.be.true();
   });
 
   it('should use millisecond precision when requested', function() {
     DateTime.parse('2000-02-15T12:30:30.0+00').before(DateTime.parse('2000-02-15T12:30:30.500+00')).should.be.true();
-    return DateTime.parse('2000-02-15T12:30:30.0+00').before(DateTime.parse('2000-02-15T12:30:30.500+00'), DateTime.Unit.MILLISECOND).should.be.true();
+    DateTime.parse('2000-02-15T12:30:30.0+00').before(DateTime.parse('2000-02-15T12:30:30.500+00'), DateTime.Unit.MILLISECOND).should.be.true();
   });
 
   it('should return false in cases where a is b but there are unknown values', function() {
@@ -1543,7 +1543,7 @@ describe('DateTime.before', function() {
     DateTime.parse('2000-01-01T00').before(DateTime.parse('2000-01-01T00')).should.be.false();
     DateTime.parse('2000-01-01').before(DateTime.parse('2000-01-01')).should.be.false();
     DateTime.parse('2000-01').before(DateTime.parse('2000-01')).should.be.false();
-    return DateTime.parse('2000').before(DateTime.parse('2000')).should.be.false();
+    DateTime.parse('2000').before(DateTime.parse('2000')).should.be.false();
   });
 
   it('should return null in cases where a has unknown values that prevent deterministic result', function() {
@@ -1552,7 +1552,7 @@ describe('DateTime.before', function() {
     should.not.exist(DateTime.parse('2000-01-01T00').before(DateTime.parse('2000-01-01T00:00:00.999')));
     should.not.exist(DateTime.parse('2000-01-01').before(DateTime.parse('2000-01-01T00:00:00.999')));
     should.not.exist(DateTime.parse('2000-01').before(DateTime.parse('2000-01-01T00:00:00.999')));
-    return should.not.exist(DateTime.parse('2000').before(DateTime.parse('2000-01-01T00:00:00.999')));
+    should.not.exist(DateTime.parse('2000').before(DateTime.parse('2000-01-01T00:00:00.999')));
   });
 
   it('should return null in cases where b has unknown values that prevent deterministic result', function() {
@@ -1561,7 +1561,7 @@ describe('DateTime.before', function() {
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').before(DateTime.parse('2000-01-01T00')));
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').before(DateTime.parse('2000-01-01')));
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').before(DateTime.parse('2000-01')));
-    return should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').before(DateTime.parse('2000')));
+    should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').before(DateTime.parse('2000')));
   });
 
   it('should accept cases where a has unknown values but is still deterministicly before b', function() {
@@ -1570,7 +1570,7 @@ describe('DateTime.before', function() {
     DateTime.parse('2000-01-01T00').before(DateTime.parse('2000-01-01T01:00:00.0')).should.be.true();
     DateTime.parse('2000-01-01').before(DateTime.parse('2000-01-02T00:00:00.0')).should.be.true();
     DateTime.parse('2000-01').before(DateTime.parse('2000-02-01T00:00:00.0')).should.be.true();
-    return DateTime.parse('2000').before(DateTime.parse('2001-01-01T00:00:00.0')).should.be.true();
+    DateTime.parse('2000').before(DateTime.parse('2001-01-01T00:00:00.0')).should.be.true();
   });
 
   it('should accept cases where b has unknown values but a is still deterministicly before b', function() {
@@ -1579,7 +1579,7 @@ describe('DateTime.before', function() {
     DateTime.parse('2000-01-01T00:00:00.0').before(DateTime.parse('2000-01-01T01')).should.be.true();
     DateTime.parse('2000-01-01T00:00:00.0').before(DateTime.parse('2000-01-02')).should.be.true();
     DateTime.parse('2000-01-01T00:00:00.0').before(DateTime.parse('2000-02')).should.be.true();
-    return DateTime.parse('2000-01-01T00:00:00.0').before(DateTime.parse('2001')).should.be.true();
+    DateTime.parse('2000-01-01T00:00:00.0').before(DateTime.parse('2001')).should.be.true();
   });
 
   it('should reject cases where a has unknown values but is still deterministicly after b', function() {
@@ -1588,7 +1588,7 @@ describe('DateTime.before', function() {
     DateTime.parse('2000-01-01T01').before(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false();
     DateTime.parse('2000-01-02').before(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false();
     DateTime.parse('2000-02').before(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false();
-    return DateTime.parse('2001').before(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false();
+    DateTime.parse('2001').before(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false();
   });
 
   it('should reject cases where b has unknown values but a is still deterministicly after b', function() {
@@ -1597,14 +1597,14 @@ describe('DateTime.before', function() {
     DateTime.parse('2000-01-01T01:00:00.0').before(DateTime.parse('2000-01-01T00')).should.be.false();
     DateTime.parse('2000-01-02T00:00:00.0').before(DateTime.parse('2000-01-01')).should.be.false();
     DateTime.parse('2000-02-01T00:00:00.0').before(DateTime.parse('2000-01')).should.be.false();
-    return DateTime.parse('2001-01-01T00:00:00.0').before(DateTime.parse('2000')).should.be.false();
+    DateTime.parse('2001-01-01T00:00:00.0').before(DateTime.parse('2000')).should.be.false();
   });
 
   it('should return null if not enough precision exists for comparison', () => should.not.exist(DateTime.parse('2000-01-01').before(DateTime.parse('2000-01-01'), DateTime.Unit.MINUTE)));
 
   it('should return null when something other than a DateTime is passed in', () => should.not.exist(DateTime.parse('2000').before({test: 'im not a DateTime'})));
 
-  return it('should throw an error if an invalid precision is passed in', () => should.throws(() => DateTime.parse('2001-01-01T00:00:00').before(DateTime.parse('2000'), DateTime.Unit.WEEK)));
+  it('should throw an error if an invalid precision is passed in', () => should.throws(() => DateTime.parse('2001-01-01T00:00:00').before(DateTime.parse('2000'), DateTime.Unit.WEEK)));
 });
 
 describe('DateTime.sameOrBefore', function() {
@@ -1616,7 +1616,7 @@ describe('DateTime.sameOrBefore', function() {
     DateTime.parse('2000-12-31T22:59:59.999').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true();
     DateTime.parse('2000-12-30T23:59:59.999').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true();
     DateTime.parse('2000-11-30T23:59:59.999').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true();
-    return DateTime.parse('1999-12-31T23:59:59.999').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true();
+    DateTime.parse('1999-12-31T23:59:59.999').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true();
   });
 
   it('should reject cases where a is after b', function() {
@@ -1626,7 +1626,7 @@ describe('DateTime.sameOrBefore', function() {
     DateTime.parse('2000-01-01T01:00:00.0').sameOrBefore(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false();
     DateTime.parse('2000-01-02T00:00:00.0').sameOrBefore(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false();
     DateTime.parse('2000-02-01T00:00:00.0').sameOrBefore(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false();
-    return DateTime.parse('2001-01-01T00:00:00.0').sameOrBefore(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false();
+    DateTime.parse('2001-01-01T00:00:00.0').sameOrBefore(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false();
   });
 
   it('should accept cases where a is b', () => DateTime.parse('2000-01-01T00:00:00.0').sameOrBefore(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true());
@@ -1634,50 +1634,50 @@ describe('DateTime.sameOrBefore', function() {
   it('should work with different timezone offsets', function() {
     DateTime.parse('2000-01-01T12:00:00.0+01:00').sameOrBefore(DateTime.parse('2000-01-01T07:00:00.0-05:00')).should.be.true();
     DateTime.parse('2000-01-01T12:00:00.0+01:00').sameOrBefore(DateTime.parse('2000-01-01T06:00:00.0-05:00')).should.be.true();
-    return DateTime.parse('2000-01-01T07:00:00.0-05:00').sameOrBefore(DateTime.parse('2000-01-01T12:00:00.0+01:00')).should.be.false();
+    DateTime.parse('2000-01-01T07:00:00.0-05:00').sameOrBefore(DateTime.parse('2000-01-01T12:00:00.0+01:00')).should.be.false();
   });
 
   it('should use year precision when requested', function() {
     DateTime.parse('2000-06-01T00:00:00.0+00').sameOrBefore(DateTime.parse('2000-01-01T00:00:00.0+00')).should.be.false();
     DateTime.parse('2000-06-01T00:00:00.0+00').sameOrBefore(DateTime.parse('2000-01-01T00:00:00.0+00'), DateTime.Unit.YEAR).should.be.true();
-    return DateTime.parse('2000-06-01T00:00:00.0+00').sameOrBefore(DateTime.parse('1999-12-31T23:59:59.999+00'), DateTime.Unit.YEAR).should.be.false();
+    DateTime.parse('2000-06-01T00:00:00.0+00').sameOrBefore(DateTime.parse('1999-12-31T23:59:59.999+00'), DateTime.Unit.YEAR).should.be.false();
   });
 
   it('should use month precision when requested', function() {
     DateTime.parse('2000-02-15T00:00:00.0+00').sameOrBefore(DateTime.parse('2000-02-01T00:00:00.0+00')).should.be.false();
     DateTime.parse('2000-02-15T00:00:00.0+00').sameOrBefore(DateTime.parse('2000-02-01T00:00:00.0+00'), DateTime.Unit.MONTH).should.be.true();
-    return DateTime.parse('2000-02-15T00:00:00.0+00').sameOrBefore(DateTime.parse('2000-01-31T23:59:59.999+00'), DateTime.Unit.MONTH).should.be.false();
+    DateTime.parse('2000-02-15T00:00:00.0+00').sameOrBefore(DateTime.parse('2000-01-31T23:59:59.999+00'), DateTime.Unit.MONTH).should.be.false();
   });
 
   it('should use day precision when requested', function() {
     DateTime.parse('2000-02-15T12:00:00.0+00').sameOrBefore(DateTime.parse('2000-02-15T00:00:00.0+00')).should.be.false();
     DateTime.parse('2000-02-15T12:00:00.0+00').sameOrBefore(DateTime.parse('2000-02-15T00:00:00.0+00'), DateTime.Unit.DAY).should.be.true();
-    return DateTime.parse('2000-02-15T12:00:00.0+00').sameOrBefore(DateTime.parse('2000-02-14T23:59:59.999+00'), DateTime.Unit.DAY).should.be.false();
+    DateTime.parse('2000-02-15T12:00:00.0+00').sameOrBefore(DateTime.parse('2000-02-14T23:59:59.999+00'), DateTime.Unit.DAY).should.be.false();
   });
 
   it('should use hour precision when requested', function() {
     DateTime.parse('2000-02-15T12:30:00.0+00').sameOrBefore(DateTime.parse('2000-02-15T12:00:00.0+00')).should.be.false();
     DateTime.parse('2000-02-15T12:30:00.0+00').sameOrBefore(DateTime.parse('2000-02-15T12:00:00.0+00'), DateTime.Unit.HOUR).should.be.true();
-    return DateTime.parse('2000-02-15T12:30:00.0+00').sameOrBefore(DateTime.parse('2000-02-15T11:59:59.999+00'), DateTime.Unit.HOUR).should.be.false();
+    DateTime.parse('2000-02-15T12:30:00.0+00').sameOrBefore(DateTime.parse('2000-02-15T11:59:59.999+00'), DateTime.Unit.HOUR).should.be.false();
   });
 
   it('should use minute precision when requested', function() {
     DateTime.parse('2000-02-15T12:30:30.0+00').sameOrBefore(DateTime.parse('2000-02-15T12:30:00.0+00')).should.be.false();
     DateTime.parse('2000-02-15T12:30:30.0+00').sameOrBefore(DateTime.parse('2000-02-15T12:30:00.0+00'), DateTime.Unit.MINUTE).should.be.true();
-    return DateTime.parse('2000-02-15T12:30:30.0+00').sameOrBefore(DateTime.parse('2000-02-15T12:29:59.999+00'), DateTime.Unit.MINUTE).should.be.false();
+    DateTime.parse('2000-02-15T12:30:30.0+00').sameOrBefore(DateTime.parse('2000-02-15T12:29:59.999+00'), DateTime.Unit.MINUTE).should.be.false();
   });
 
   it('should use second precision when requested', function() {
     DateTime.parse('2000-02-15T12:30:30.500+00').sameOrBefore(DateTime.parse('2000-02-15T12:30:30.0+00')).should.be.false();
     DateTime.parse('2000-02-15T12:30:30.500+00').sameOrBefore(DateTime.parse('2000-02-15T12:30:30.0+00'), DateTime.Unit.SECOND).should.be.true();
-    return DateTime.parse('2000-02-15T12:30:30.500+00').sameOrBefore(DateTime.parse('2000-02-15T12:30:29.999+00'), DateTime.Unit.SECOND).should.be.false();
+    DateTime.parse('2000-02-15T12:30:30.500+00').sameOrBefore(DateTime.parse('2000-02-15T12:30:29.999+00'), DateTime.Unit.SECOND).should.be.false();
   });
 
   it('should use millisecond precision when requested', function() {
     DateTime.parse('2000-02-15T12:30:30.500+00').sameOrBefore(DateTime.parse('2000-02-15T12:30:30.0+00')).should.be.false();
     DateTime.parse('2000-02-15T12:30:30.500+00').sameOrBefore(DateTime.parse('2000-02-15T12:30:30.0+00'), DateTime.Unit.MILLISECOND).should.be.false();
     DateTime.parse('2000-02-15T12:30:30.0+00').sameOrBefore(DateTime.parse('2000-02-15T12:30:30.500+00'), DateTime.Unit.MILLISECOND).should.be.true();
-    return DateTime.parse('2000-02-15T12:30:30.0+00').sameOrBefore(DateTime.parse('2000-02-15T12:30:30.0+00'), DateTime.Unit.MILLISECOND).should.be.true();
+    DateTime.parse('2000-02-15T12:30:30.0+00').sameOrBefore(DateTime.parse('2000-02-15T12:30:30.0+00'), DateTime.Unit.MILLISECOND).should.be.true();
   });
 
   it('should return true in cases where a is b but their precision matches', function() {
@@ -1686,7 +1686,7 @@ describe('DateTime.sameOrBefore', function() {
     DateTime.parse('2000-01-01T00').sameOrBefore(DateTime.parse('2000-01-01T00')).should.be.true();
     DateTime.parse('2000-01-01').sameOrBefore(DateTime.parse('2000-01-01')).should.be.true();
     DateTime.parse('2000-01').sameOrBefore(DateTime.parse('2000-01')).should.be.true();
-    return DateTime.parse('2000').sameOrBefore(DateTime.parse('2000')).should.be.true();
+    DateTime.parse('2000').sameOrBefore(DateTime.parse('2000')).should.be.true();
   });
 
   it('should return null in cases where a has unknown values that prevent deterministic result', function() {
@@ -1695,7 +1695,7 @@ describe('DateTime.sameOrBefore', function() {
     should.not.exist(DateTime.parse('2000-01-01T00').sameOrBefore(DateTime.parse('2000-01-01T00:59:59.998')));
     should.not.exist(DateTime.parse('2000-01-01').sameOrBefore(DateTime.parse('2000-01-01T23:59:59.998')));
     should.not.exist(DateTime.parse('2000-01').sameOrBefore(DateTime.parse('2000-01-31T23:59:59.998')));
-    return should.not.exist(DateTime.parse('2000').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.998')));
+    should.not.exist(DateTime.parse('2000').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.998')));
   });
 
   it('should return null in cases where b has unknown values that prevent deterministic result', function() {
@@ -1704,7 +1704,7 @@ describe('DateTime.sameOrBefore', function() {
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrBefore(DateTime.parse('2000-01-01T00')));
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrBefore(DateTime.parse('2000-01-01')));
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrBefore(DateTime.parse('2000-01')));
-    return should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrBefore(DateTime.parse('2000')));
+    should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrBefore(DateTime.parse('2000')));
   });
 
   it('should accept cases where a has unknown values but is still deterministicly before b', function() {
@@ -1713,7 +1713,7 @@ describe('DateTime.sameOrBefore', function() {
     DateTime.parse('2000-01-01T00').sameOrBefore(DateTime.parse('2000-01-01T01:00:00.0')).should.be.true();
     DateTime.parse('2000-01-01').sameOrBefore(DateTime.parse('2000-01-02T00:00:00.0')).should.be.true();
     DateTime.parse('2000-01').sameOrBefore(DateTime.parse('2000-02-01T00:00:00.0')).should.be.true();
-    return DateTime.parse('2000').sameOrBefore(DateTime.parse('2001-01-01T00:00:00.0')).should.be.true();
+    DateTime.parse('2000').sameOrBefore(DateTime.parse('2001-01-01T00:00:00.0')).should.be.true();
   });
 
   it('should return null for cases where a has less precision than b with all overlapping precision fields matching', function() {
@@ -1722,7 +1722,7 @@ describe('DateTime.sameOrBefore', function() {
     should.not.exist(DateTime.parse('2000-01-01T00').sameOrBefore(DateTime.parse('2000-01-01T00:59:59.999')));
     should.not.exist(DateTime.parse('2000-01-01').sameOrBefore(DateTime.parse('2000-01-01T23:59:59.999')));
     should.not.exist(DateTime.parse('2000-01').sameOrBefore(DateTime.parse('2000-01-31T23:59:59.999')));
-    return should.not.exist(DateTime.parse('2001').sameOrBefore(DateTime.parse('2001-12-31T23:59:59.999')));
+    should.not.exist(DateTime.parse('2001').sameOrBefore(DateTime.parse('2001-12-31T23:59:59.999')));
   });
 
   it('should accept cases where b has unknown values but a is still deterministicly before b', function() {
@@ -1731,7 +1731,7 @@ describe('DateTime.sameOrBefore', function() {
     DateTime.parse('2000-01-01T00:59:59.999').sameOrBefore(DateTime.parse('2000-01-01T01')).should.be.true();
     DateTime.parse('2000-01-01T23:59:59.999').sameOrBefore(DateTime.parse('2000-01-02')).should.be.true();
     DateTime.parse('2000-01-31T23:59:59.999').sameOrBefore(DateTime.parse('2000-02')).should.be.true();
-    return DateTime.parse('2000-12-31T23:59:59.999').sameOrBefore(DateTime.parse('2001')).should.be.true();
+    DateTime.parse('2000-12-31T23:59:59.999').sameOrBefore(DateTime.parse('2001')).should.be.true();
   });
 
   it('should return null for cases where b has less precision than a with all overlapping precision fields matching', function() {
@@ -1740,7 +1740,7 @@ describe('DateTime.sameOrBefore', function() {
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.0').sameOrBefore(DateTime.parse('2000-01-01T00')));
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.0').sameOrBefore(DateTime.parse('2000-01-01')));
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.0').sameOrBefore(DateTime.parse('2000-01')));
-    return should.not.exist(DateTime.parse('2000-01-01T00:00:00.0').sameOrBefore(DateTime.parse('2000')));
+    should.not.exist(DateTime.parse('2000-01-01T00:00:00.0').sameOrBefore(DateTime.parse('2000')));
   });
 
   it('should reject cases where a has unknown values but is still deterministicly after b', function() {
@@ -1749,7 +1749,7 @@ describe('DateTime.sameOrBefore', function() {
     DateTime.parse('2000-01-01T01').sameOrBefore(DateTime.parse('2000-01-01T00:59:59.999')).should.be.false();
     DateTime.parse('2000-01-02').sameOrBefore(DateTime.parse('2000-01-01T23:59:59.999')).should.be.false();
     DateTime.parse('2000-02').sameOrBefore(DateTime.parse('2000-01-31T23:59:59.999')).should.be.false();
-    return DateTime.parse('2001').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false();
+    DateTime.parse('2001').sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false();
   });
 
   it('should reject cases where b has unknown values but a is still deterministicly after b', function() {
@@ -1758,14 +1758,14 @@ describe('DateTime.sameOrBefore', function() {
     DateTime.parse('2000-01-01T01:00:00').sameOrBefore(DateTime.parse('2000-01-01T00')).should.be.false();
     DateTime.parse('2000-01-02T00:00:00').sameOrBefore(DateTime.parse('2000-01-01')).should.be.false();
     DateTime.parse('2000-02-01T00:00:00').sameOrBefore(DateTime.parse('2000-01')).should.be.false();
-    return DateTime.parse('2001-01-01T00:00:00').sameOrBefore(DateTime.parse('2000')).should.be.false();
+    DateTime.parse('2001-01-01T00:00:00').sameOrBefore(DateTime.parse('2000')).should.be.false();
   });
 
   it('should return null if not enough precision exists for comparison', () => should.not.exist(DateTime.parse('2000-01-01').sameOrBefore(DateTime.parse('2000-01-01'), DateTime.Unit.MINUTE)));
 
   it('should return null when something other than a DateTime is passed in', () => should.not.exist(DateTime.parse('2000').sameOrBefore({test: 'im not a DateTime'})));
 
-  return it('should throw an error if an invalid precision is passed in', () => should.throws(() => DateTime.parse('2001-01-01T00:00:00').sameOrBefore(DateTime.parse('2000'), DateTime.Unit.WEEK)));
+  it('should throw an error if an invalid precision is passed in', () => should.throws(() => DateTime.parse('2001-01-01T00:00:00').sameOrBefore(DateTime.parse('2000'), DateTime.Unit.WEEK)));
 });
 
 describe('DateTime.after', function() {
@@ -1777,7 +1777,7 @@ describe('DateTime.after', function() {
     DateTime.parse('2000-01-01T01:00:00.0').after(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true();
     DateTime.parse('2000-01-02T00:00:00.0').after(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true();
     DateTime.parse('2000-02-01T00:00:00.0').after(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true();
-    return DateTime.parse('2001-01-01T00:00:00.0').after(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true();
+    DateTime.parse('2001-01-01T00:00:00.0').after(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true();
   });
 
   it('should reject cases where a is before b', function() {
@@ -1787,7 +1787,7 @@ describe('DateTime.after', function() {
     DateTime.parse('2000-12-31T22:59:59.999').after(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false();
     DateTime.parse('2000-12-30T23:59:59.999').after(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false();
     DateTime.parse('2000-11-30T23:59:59.999').after(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false();
-    return DateTime.parse('1999-12-31T23:59:59.999').after(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false();
+    DateTime.parse('1999-12-31T23:59:59.999').after(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false();
   });
 
   it('should reject cases where a is b', () => DateTime.parse('2000-01-01T00:00:00.0').after(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false());
@@ -1795,48 +1795,48 @@ describe('DateTime.after', function() {
   it('should work with different timezone offsets', function() {
     DateTime.parse('2000-01-01T07:00:00.0-05:00').after(DateTime.parse('2000-01-01T12:00:00.0+01:00')).should.be.true();
     DateTime.parse('2000-01-01T12:00:00.0+01:00').after(DateTime.parse('2000-01-01T06:00:00.0-05:00')).should.be.false();
-    return DateTime.parse('2000-01-01T12:00:00.0+01:00').after(DateTime.parse('2000-01-01T07:00:00.0-05:00')).should.be.false();
+    DateTime.parse('2000-01-01T12:00:00.0+01:00').after(DateTime.parse('2000-01-01T07:00:00.0-05:00')).should.be.false();
   });
 
   it('should use year precision when requested', function() {
     DateTime.parse('2000-06-01T00:00:00.0+00').after(DateTime.parse('2000-01-01T00:00:00.0+00')).should.be.true();
     DateTime.parse('2000-06-01T00:00:00.0+00').after(DateTime.parse('2000-01-01T00:00:00.0+00'), DateTime.Unit.YEAR).should.be.false();
-    return DateTime.parse('2000-06-01T00:00:00.0+00').after(DateTime.parse('1999-12-31T23:59:59.999+00'), DateTime.Unit.YEAR).should.be.true();
+    DateTime.parse('2000-06-01T00:00:00.0+00').after(DateTime.parse('1999-12-31T23:59:59.999+00'), DateTime.Unit.YEAR).should.be.true();
   });
 
   it('should use month precision when requested', function() {
     DateTime.parse('2000-02-15T00:00:00.0+00').after(DateTime.parse('2000-02-01T00:00:00.0+00')).should.be.true();
     DateTime.parse('2000-02-15T00:00:00.0+00').after(DateTime.parse('2000-02-01T00:00:00.0+00'), DateTime.Unit.MONTH).should.be.false();
-    return DateTime.parse('2000-02-15T00:00:00.0+00').after(DateTime.parse('2000-01-31T23:59:59.999+00'), DateTime.Unit.MONTH).should.be.true();
+    DateTime.parse('2000-02-15T00:00:00.0+00').after(DateTime.parse('2000-01-31T23:59:59.999+00'), DateTime.Unit.MONTH).should.be.true();
   });
 
   it('should use day precision when requested', function() {
     DateTime.parse('2000-02-15T12:00:00.0+00').after(DateTime.parse('2000-02-15T00:00:00.0+00')).should.be.true();
     DateTime.parse('2000-02-15T12:00:00.0+00').after(DateTime.parse('2000-02-15T00:00:00.0+00'), DateTime.Unit.DAY).should.be.false();
-    return DateTime.parse('2000-02-15T12:00:00.0+00').after(DateTime.parse('2000-02-14T23:59:59.999+00'), DateTime.Unit.DAY).should.be.true();
+    DateTime.parse('2000-02-15T12:00:00.0+00').after(DateTime.parse('2000-02-14T23:59:59.999+00'), DateTime.Unit.DAY).should.be.true();
   });
 
   it('should use hour precision when requested', function() {
     DateTime.parse('2000-02-15T12:30:00.0+00').after(DateTime.parse('2000-02-15T12:00:00.0+00')).should.be.true();
     DateTime.parse('2000-02-15T12:30:00.0+00').after(DateTime.parse('2000-02-15T12:00:00.0+00'), DateTime.Unit.HOUR).should.be.false();
-    return DateTime.parse('2000-02-15T12:30:00.0+00').after(DateTime.parse('2000-02-15T11:59:59.999+00'), DateTime.Unit.HOUR).should.be.true();
+    DateTime.parse('2000-02-15T12:30:00.0+00').after(DateTime.parse('2000-02-15T11:59:59.999+00'), DateTime.Unit.HOUR).should.be.true();
   });
 
   it('should use minute precision when requested', function() {
     DateTime.parse('2000-02-15T12:30:30.0+00').after(DateTime.parse('2000-02-15T12:30:00.0+00')).should.be.true();
     DateTime.parse('2000-02-15T12:30:30.0+00').after(DateTime.parse('2000-02-15T12:30:00.0+00'), DateTime.Unit.MINUTE).should.be.false();
-    return DateTime.parse('2000-02-15T12:30:30.0+00').after(DateTime.parse('2000-02-15T12:29:59.999+00'), DateTime.Unit.MINUTE).should.be.true();
+    DateTime.parse('2000-02-15T12:30:30.0+00').after(DateTime.parse('2000-02-15T12:29:59.999+00'), DateTime.Unit.MINUTE).should.be.true();
   });
 
   it('should use second precision when requested', function() {
     DateTime.parse('2000-02-15T12:30:30.500+00').after(DateTime.parse('2000-02-15T12:30:30.0+00')).should.be.true();
     DateTime.parse('2000-02-15T12:30:30.500+00').after(DateTime.parse('2000-02-15T12:30:30.0+00'), DateTime.Unit.SECOND).should.be.false();
-    return DateTime.parse('2000-02-15T12:30:30.500+00').after(DateTime.parse('2000-02-15T12:30:29.999+00'), DateTime.Unit.SECOND).should.be.true();
+    DateTime.parse('2000-02-15T12:30:30.500+00').after(DateTime.parse('2000-02-15T12:30:29.999+00'), DateTime.Unit.SECOND).should.be.true();
   });
 
   it('should use millisecond precision when requested', function() {
     DateTime.parse('2000-02-15T12:30:30.500+00').after(DateTime.parse('2000-02-15T12:30:30.0+00')).should.be.true();
-    return DateTime.parse('2000-02-15T12:30:30.500+00').after(DateTime.parse('2000-02-15T12:30:30.0+00'), DateTime.Unit.MILLISECOND).should.be.true();
+    DateTime.parse('2000-02-15T12:30:30.500+00').after(DateTime.parse('2000-02-15T12:30:30.0+00'), DateTime.Unit.MILLISECOND).should.be.true();
   });
 
   it('should return false in cases where a is b, with unknown values but the precision level is matching', function() {
@@ -1845,7 +1845,7 @@ describe('DateTime.after', function() {
     DateTime.parse('2000-01-01T00').after(DateTime.parse('2000-01-01T00')).should.be.false();
     DateTime.parse('2000-01-01').after(DateTime.parse('2000-01-01')).should.be.false();
     DateTime.parse('2000-01').after(DateTime.parse('2000-01')).should.be.false();
-    return DateTime.parse('2000').after(DateTime.parse('2000')).should.be.false();
+    DateTime.parse('2000').after(DateTime.parse('2000')).should.be.false();
   });
 
   it('should return null in cases where a has unknown values that prevent deterministic result', function() {
@@ -1854,7 +1854,7 @@ describe('DateTime.after', function() {
     should.not.exist(DateTime.parse('2000-01-01T00').after(DateTime.parse('2000-01-01T00:00:00.0')));
     should.not.exist(DateTime.parse('2000-01-01').after(DateTime.parse('2000-01-01T00:00:00.0')));
     should.not.exist(DateTime.parse('2000-01').after(DateTime.parse('2000-01-01T00:00:00.0')));
-    return should.not.exist(DateTime.parse('2000').after(DateTime.parse('2000-01-01T00:00:00.0')));
+    should.not.exist(DateTime.parse('2000').after(DateTime.parse('2000-01-01T00:00:00.0')));
   });
 
   it('should return null in cases where b has unknown values that prevent deterministic result', function() {
@@ -1863,7 +1863,7 @@ describe('DateTime.after', function() {
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').after(DateTime.parse('2000-01-01T00')));
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').after(DateTime.parse('2000-01-01')));
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').after(DateTime.parse('2000-01')));
-    return should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').after(DateTime.parse('2000')));
+    should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').after(DateTime.parse('2000')));
   });
 
   it('should accept cases where a has unknown values but is still deterministicly after b', function() {
@@ -1872,7 +1872,7 @@ describe('DateTime.after', function() {
     DateTime.parse('2000-01-01T01').after(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true();
     DateTime.parse('2000-01-02').after(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true();
     DateTime.parse('2000-02').after(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true();
-    return DateTime.parse('2001').after(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true();
+    DateTime.parse('2001').after(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true();
   });
 
   it('should accept cases where b has unknown values but a is still deterministicly after b', function() {
@@ -1881,7 +1881,7 @@ describe('DateTime.after', function() {
     DateTime.parse('2000-01-01T01:00:00.0').after(DateTime.parse('2000-01-01T00')).should.be.true();
     DateTime.parse('2000-01-02T00:00:00.0').after(DateTime.parse('2000-01-01')).should.be.true();
     DateTime.parse('2000-02-01T00:00:00.0').after(DateTime.parse('2000-01')).should.be.true();
-    return DateTime.parse('2001-01-01T00:00:00.0').after(DateTime.parse('2000')).should.be.true();
+    DateTime.parse('2001-01-01T00:00:00.0').after(DateTime.parse('2000')).should.be.true();
   });
 
   it('should reject cases where a has unknown values but is still deterministicly before b', function() {
@@ -1890,7 +1890,7 @@ describe('DateTime.after', function() {
     DateTime.parse('2000-01-01T00').after(DateTime.parse('2000-01-01T01:00:00.0')).should.be.false();
     DateTime.parse('2000-01-01').after(DateTime.parse('2000-01-02T00:00:00.0')).should.be.false();
     DateTime.parse('2000-01').after(DateTime.parse('2000-02-01T00:00:00.0')).should.be.false();
-    return DateTime.parse('2000').after(DateTime.parse('2001-01-01T00:00:00.0')).should.be.false();
+    DateTime.parse('2000').after(DateTime.parse('2001-01-01T00:00:00.0')).should.be.false();
   });
 
   it('should reject cases where b has unknown values but a is still deterministicly before b', function() {
@@ -1899,14 +1899,14 @@ describe('DateTime.after', function() {
     DateTime.parse('2000-01-01T00:00:00.0').after(DateTime.parse('2000-01-01T01')).should.be.false();
     DateTime.parse('2000-01-01T00:00:00.0').after(DateTime.parse('2000-01-02')).should.be.false();
     DateTime.parse('2000-01-01T00:00:00.0').after(DateTime.parse('2000-02')).should.be.false();
-    return DateTime.parse('2000-01-01T00:00:00.0').after(DateTime.parse('2001')).should.be.false();
+    DateTime.parse('2000-01-01T00:00:00.0').after(DateTime.parse('2001')).should.be.false();
   });
 
   it('should return null if not enough precision exists for comparison', () => should.not.exist(DateTime.parse('2000-01-01').after(DateTime.parse('2000-01-01'), DateTime.Unit.MINUTE)));
 
   it('should return null when something other than a DateTime is passed in', () => should.not.exist(DateTime.parse('2000').after({test: 'im not a DateTime'})));
 
-  return it('should throw an error if an invalid precision is passed in', () => should.throws(() => DateTime.parse('2001-01-01T00:00:00').after(DateTime.parse('2000'), DateTime.Unit.WEEK)));
+  it('should throw an error if an invalid precision is passed in', () => should.throws(() => DateTime.parse('2001-01-01T00:00:00').after(DateTime.parse('2000'), DateTime.Unit.WEEK)));
 });
 
 describe('DateTime.sameOrAfter', function() {
@@ -1918,7 +1918,7 @@ describe('DateTime.sameOrAfter', function() {
     DateTime.parse('2000-01-01T01:00:00.0').sameOrAfter(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true();
     DateTime.parse('2000-01-02T00:00:00.0').sameOrAfter(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true();
     DateTime.parse('2000-02-01T00:00:00.0').sameOrAfter(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true();
-    return DateTime.parse('2001-01-01T00:00:00.0').sameOrAfter(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true();
+    DateTime.parse('2001-01-01T00:00:00.0').sameOrAfter(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true();
   });
 
   it('should reject cases where a is before b', function() {
@@ -1928,7 +1928,7 @@ describe('DateTime.sameOrAfter', function() {
     DateTime.parse('2000-12-31T22:59:59.999').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false();
     DateTime.parse('2000-12-30T23:59:59.999').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false();
     DateTime.parse('2000-11-30T23:59:59.999').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false();
-    return DateTime.parse('1999-12-31T23:59:59.999').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false();
+    DateTime.parse('1999-12-31T23:59:59.999').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.false();
   });
 
   it('should accept cases where a is b', () => DateTime.parse('2000-01-01T00:00:00.0').sameOrAfter(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true());
@@ -1936,50 +1936,50 @@ describe('DateTime.sameOrAfter', function() {
   it('should work with different timezone offsets', function() {
     DateTime.parse('2000-01-01T07:00:00.0-05:00').sameOrAfter(DateTime.parse('2000-01-01T12:00:00.0+01:00')).should.be.true();
     DateTime.parse('2000-01-01T12:00:00.0+01:00').sameOrAfter(DateTime.parse('2000-01-01T06:00:00.0-05:00')).should.be.true();
-    return DateTime.parse('2000-01-01T12:00:00.0+01:00').sameOrAfter(DateTime.parse('2000-01-01T07:00:00.0-05:00')).should.be.false();
+    DateTime.parse('2000-01-01T12:00:00.0+01:00').sameOrAfter(DateTime.parse('2000-01-01T07:00:00.0-05:00')).should.be.false();
   });
 
   it('should use year precision when requested', function() {
     DateTime.parse('2000-01-01T00:00:00.0+00').sameOrAfter(DateTime.parse('2000-06-01T00:00:00.0+00')).should.be.false();
     DateTime.parse('2000-01-01T00:00:00.0+00').sameOrAfter(DateTime.parse('2000-06-01T00:00:00.0+00'), DateTime.Unit.YEAR).should.be.true();
-    return DateTime.parse('1999-12-31T23:59:59.999+00').sameOrAfter(DateTime.parse('2000-06-01T00:00:00.0+00'), DateTime.Unit.YEAR).should.be.false();
+    DateTime.parse('1999-12-31T23:59:59.999+00').sameOrAfter(DateTime.parse('2000-06-01T00:00:00.0+00'), DateTime.Unit.YEAR).should.be.false();
   });
 
   it('should use month precision when requested', function() {
     DateTime.parse('2000-02-01T00:00:00.0+00').sameOrAfter(DateTime.parse('2000-02-15T00:00:00.0+00')).should.be.false();
     DateTime.parse('2000-02-01T00:00:00.0+00').sameOrAfter(DateTime.parse('2000-02-15T00:00:00.0+00'), DateTime.Unit.MONTH).should.be.true();
-    return DateTime.parse('2000-01-31T23:59:59.999+00').sameOrAfter(DateTime.parse('2000-02-15T00:00:00.0+00'), DateTime.Unit.MONTH).should.be.false();
+    DateTime.parse('2000-01-31T23:59:59.999+00').sameOrAfter(DateTime.parse('2000-02-15T00:00:00.0+00'), DateTime.Unit.MONTH).should.be.false();
   });
 
   it('should use day precision when requested', function() {
     DateTime.parse('2000-02-15T00:00:00.0+00').sameOrAfter(DateTime.parse('2000-02-15T12:00:00.0+00')).should.be.false();
     DateTime.parse('2000-02-15T00:00:00.0+00').sameOrAfter(DateTime.parse('2000-02-15T12:00:00.0+00'), DateTime.Unit.DAY).should.be.true();
-    return DateTime.parse('2000-02-14T23:59:59.999+00').sameOrAfter(DateTime.parse('2000-02-15T12:00:00.0+00'), DateTime.Unit.DAY).should.be.false();
+    DateTime.parse('2000-02-14T23:59:59.999+00').sameOrAfter(DateTime.parse('2000-02-15T12:00:00.0+00'), DateTime.Unit.DAY).should.be.false();
   });
 
   it('should use hour precision when requested', function() {
     DateTime.parse('2000-02-15T12:00:00.0+00').sameOrAfter(DateTime.parse('2000-02-15T12:30:00.0+00')).should.be.false();
     DateTime.parse('2000-02-15T12:00:00.0+00').sameOrAfter(DateTime.parse('2000-02-15T12:30:00.0+00'), DateTime.Unit.HOUR).should.be.true();
-    return DateTime.parse('2000-02-15T11:59:59.999+00').sameOrAfter(DateTime.parse('2000-02-15T12:30:00.0+00'), DateTime.Unit.HOUR).should.be.false();
+    DateTime.parse('2000-02-15T11:59:59.999+00').sameOrAfter(DateTime.parse('2000-02-15T12:30:00.0+00'), DateTime.Unit.HOUR).should.be.false();
   });
 
   it('should use minute precision when requested', function() {
     DateTime.parse('2000-02-15T12:30:00.0+00').sameOrAfter(DateTime.parse('2000-02-15T12:30:30.0+00')).should.be.false();
     DateTime.parse('2000-02-15T12:30:00.0+00').sameOrAfter(DateTime.parse('2000-02-15T12:30:30.0+00'), DateTime.Unit.MINUTE).should.be.true();
-    return DateTime.parse('2000-02-15T12:29:59.999+00').sameOrAfter(DateTime.parse('2000-02-15T12:30:30.0+00'), DateTime.Unit.MINUTE).should.be.false();
+    DateTime.parse('2000-02-15T12:29:59.999+00').sameOrAfter(DateTime.parse('2000-02-15T12:30:30.0+00'), DateTime.Unit.MINUTE).should.be.false();
   });
 
   it('should use second precision when requested', function() {
     DateTime.parse('2000-02-15T12:30:30.0+00').sameOrAfter(DateTime.parse('2000-02-15T12:30:30.500+00')).should.be.false();
     DateTime.parse('2000-02-15T12:30:30.0+00').sameOrAfter(DateTime.parse('2000-02-15T12:30:30.500+00'), DateTime.Unit.SECOND).should.be.true();
-    return DateTime.parse('2000-02-15T12:30:29.999+00').sameOrAfter(DateTime.parse('2000-02-15T12:30:30.500+00'), DateTime.Unit.SECOND).should.be.false();
+    DateTime.parse('2000-02-15T12:30:29.999+00').sameOrAfter(DateTime.parse('2000-02-15T12:30:30.500+00'), DateTime.Unit.SECOND).should.be.false();
   });
 
   it('should use millisecond precision when requested', function() {
     DateTime.parse('2000-02-15T12:30:30.0+00').sameOrAfter(DateTime.parse('2000-02-15T12:30:30.500+00')).should.be.false();
     DateTime.parse('2000-02-15T12:30:30.0+00').sameOrAfter(DateTime.parse('2000-02-15T12:30:30.500+00'), DateTime.Unit.MILLISECOND).should.be.false();
     DateTime.parse('2000-02-15T12:30:30.500+00').sameOrAfter(DateTime.parse('2000-02-15T12:30:30.0+00'), DateTime.Unit.MILLISECOND).should.be.true();
-    return DateTime.parse('2000-02-15T12:30:30.0+00').sameOrAfter(DateTime.parse('2000-02-15T12:30:30.0+00'), DateTime.Unit.MILLISECOND).should.be.true();
+    DateTime.parse('2000-02-15T12:30:30.0+00').sameOrAfter(DateTime.parse('2000-02-15T12:30:30.0+00'), DateTime.Unit.MILLISECOND).should.be.true();
   });
 
   it('should return true in cases where a is b and precision matches', function() {
@@ -1988,7 +1988,7 @@ describe('DateTime.sameOrAfter', function() {
     DateTime.parse('2000-01-01T00').sameOrAfter(DateTime.parse('2000-01-01T00')).should.be.true();
     DateTime.parse('2000-01-01').sameOrAfter(DateTime.parse('2000-01-01')).should.be.true();
     DateTime.parse('2000-01').sameOrAfter(DateTime.parse('2000-01')).should.be.true();
-    return DateTime.parse('2000').sameOrAfter(DateTime.parse('2000')).should.be.true();
+    DateTime.parse('2000').sameOrAfter(DateTime.parse('2000')).should.be.true();
   });
 
   it('should return null in cases where a has unknown values that prevent deterministic result', function() {
@@ -1997,7 +1997,7 @@ describe('DateTime.sameOrAfter', function() {
     should.not.exist(DateTime.parse('2000-01-01T00').sameOrAfter(DateTime.parse('2000-01-01T00:59:59.999')));
     should.not.exist(DateTime.parse('2000-01-01').sameOrAfter(DateTime.parse('2000-01-01T23:59:59.999')));
     should.not.exist(DateTime.parse('2000-01').sameOrAfter(DateTime.parse('2000-01-31T23:59:59.999')));
-    return should.not.exist(DateTime.parse('2000').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')));
+    should.not.exist(DateTime.parse('2000').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')));
   });
 
   it('should return null in cases where b has unknown values that prevent deterministic result', function() {
@@ -2006,7 +2006,7 @@ describe('DateTime.sameOrAfter', function() {
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrAfter(DateTime.parse('2000-01-01T00')));
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrAfter(DateTime.parse('2000-01-01')));
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrAfter(DateTime.parse('2000-01')));
-    return should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrAfter(DateTime.parse('2000')));
+    should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrAfter(DateTime.parse('2000')));
   });
 
   it('should accept cases where a has unknown values but is still deterministicly after b', function() {
@@ -2015,7 +2015,7 @@ describe('DateTime.sameOrAfter', function() {
     DateTime.parse('2000-01-01T01').sameOrAfter(DateTime.parse('2000-01-01T00:59:59.999')).should.be.true();
     DateTime.parse('2000-01-02').sameOrAfter(DateTime.parse('2000-01-01T23:59:59.999')).should.be.true();
     DateTime.parse('2000-02').sameOrAfter(DateTime.parse('2000-01-31T23:59:59.999')).should.be.true();
-    return DateTime.parse('2001').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true();
+    DateTime.parse('2001').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true();
   });
 
   it('should return null for cases where a has less precision than b with all overlapping precision fields matching', function() {
@@ -2024,7 +2024,7 @@ describe('DateTime.sameOrAfter', function() {
     should.not.exist(DateTime.parse('2000-01-01T01').sameOrAfter(DateTime.parse('2000-01-01T01:00:00.0')));
     should.not.exist(DateTime.parse('2000-01-01').sameOrAfter(DateTime.parse('2000-01-01T00:00:00.0')));
     should.not.exist(DateTime.parse('2000-01').sameOrAfter(DateTime.parse('2000-01-01T00:00:00.0')));
-    return should.not.exist(DateTime.parse('2000').sameOrAfter(DateTime.parse('2000-01-01T00:00:00.0')));
+    should.not.exist(DateTime.parse('2000').sameOrAfter(DateTime.parse('2000-01-01T00:00:00.0')));
   });
 
   it('should accept cases where b has unknown values but a is still deterministicly after or same as b', function() {
@@ -2033,7 +2033,7 @@ describe('DateTime.sameOrAfter', function() {
     DateTime.parse('2000-01-01T01:00:00.0').sameOrAfter(DateTime.parse('2000-01-01T00')).should.be.true();
     DateTime.parse('2000-01-02T00:00:00.0').sameOrAfter(DateTime.parse('2000-01-01')).should.be.true();
     DateTime.parse('2000-02-01T00:00:00.0').sameOrAfter(DateTime.parse('2000-01')).should.be.true();
-    return DateTime.parse('2001-01-01T00:00:00.0').sameOrAfter(DateTime.parse('2000')).should.be.true();
+    DateTime.parse('2001-01-01T00:00:00.0').sameOrAfter(DateTime.parse('2000')).should.be.true();
   });
 
   it('should return null for cases where b has less precision than a with all overlapping precision fields matching', function() {
@@ -2042,7 +2042,7 @@ describe('DateTime.sameOrAfter', function() {
     should.not.exist(DateTime.parse('2000-01-01T00:59:59.999').sameOrAfter(DateTime.parse('2000-01-01T00')));
     should.not.exist(DateTime.parse('2000-01-01T23:59:59.999').sameOrAfter(DateTime.parse('2000-01-01')));
     should.not.exist(DateTime.parse('2000-01-31T23:59:59.999').sameOrAfter(DateTime.parse('2000-01')));
-    return should.not.exist(DateTime.parse('2000-12-31T23:59:59.999').sameOrAfter(DateTime.parse('2000')));
+    should.not.exist(DateTime.parse('2000-12-31T23:59:59.999').sameOrAfter(DateTime.parse('2000')));
   });
 
   it('should reject cases where a has unknown values but is still deterministicly before b', function() {
@@ -2051,7 +2051,7 @@ describe('DateTime.sameOrAfter', function() {
     DateTime.parse('2000-01-01T00').sameOrAfter(DateTime.parse('2000-01-01T01:00:00.0')).should.be.false();
     DateTime.parse('2000-01-01').sameOrAfter(DateTime.parse('2000-01-02T00:00:00.0')).should.be.false();
     DateTime.parse('2000-01').sameOrAfter(DateTime.parse('2000-02-01T00:00:00.0')).should.be.false();
-    return DateTime.parse('2000').sameOrAfter(DateTime.parse('2001-01-01T00:00:00.0')).should.be.false();
+    DateTime.parse('2000').sameOrAfter(DateTime.parse('2001-01-01T00:00:00.0')).should.be.false();
   });
 
   it('should reject cases where b has unknown values but a is still deterministicly before b', function() {
@@ -2060,14 +2060,14 @@ describe('DateTime.sameOrAfter', function() {
     DateTime.parse('2000-01-01T00:59:59.999').sameOrAfter(DateTime.parse('2000-01-01T01')).should.be.false();
     DateTime.parse('2000-01-01T23:59:59.999').sameOrAfter(DateTime.parse('2000-01-02')).should.be.false();
     DateTime.parse('2000-01-31T23:59:59.999').sameOrAfter(DateTime.parse('2000-02')).should.be.false();
-    return DateTime.parse('2000-12-31T23:59:59.999').sameOrAfter(DateTime.parse('2001')).should.be.false();
+    DateTime.parse('2000-12-31T23:59:59.999').sameOrAfter(DateTime.parse('2001')).should.be.false();
   });
 
   it('should return null if not enough precision exists for comparison', () => should.not.exist(DateTime.parse('2000-01-01').sameOrAfter(DateTime.parse('2000-01-01'), DateTime.Unit.MINUTE)));
 
   it('should return null when something other than a DateTime is passed in', () => should.not.exist(DateTime.parse('2000').sameOrAfter({test: 'im not a DateTime'})));
 
-  return it('should throw an error if an invalid precision is passed in', () => should.throws(() => DateTime.parse('2001-01-01T00:00:00').sameOrAfter(DateTime.parse('2000'), DateTime.Unit.WEEK)));
+  it('should throw an error if an invalid precision is passed in', () => should.throws(() => DateTime.parse('2001-01-01T00:00:00').sameOrAfter(DateTime.parse('2000'), DateTime.Unit.WEEK)));
 });
 
 describe('DateTime.getDate', function() {
@@ -2081,7 +2081,7 @@ describe('DateTime.getDate', function() {
     should.not.exist(d.minute);
     should.not.exist(d.second);
     should.not.exist(d.millisecond);
-    return should.not.exist(d.timezoneOffset);
+    should.not.exist(d.timezoneOffset);
   });
 
   it('should properly extract the date from datetime without time', function() {
@@ -2092,7 +2092,7 @@ describe('DateTime.getDate', function() {
     should.not.exist(d.hour);
     should.not.exist(d.minute);
     should.not.exist(d.second);
-    return should.not.exist(d.millisecond);
+    should.not.exist(d.millisecond);
   });
 
   it('should properly extract the date from datetime without days', function() {
@@ -2103,10 +2103,10 @@ describe('DateTime.getDate', function() {
     should.not.exist(d.hour);
     should.not.exist(d.minute);
     should.not.exist(d.second);
-    return should.not.exist(d.millisecond);
+    should.not.exist(d.millisecond);
   });
 
-  return it('should properly extract the date from datetime without months', function() {
+  it('should properly extract the date from datetime without months', function() {
     const d = DateTime.parse('2012').getDate();
     d.year.should.equal(2012);
     should.not.exist(d.month);
@@ -2114,7 +2114,7 @@ describe('DateTime.getDate', function() {
     should.not.exist(d.hour);
     should.not.exist(d.minute);
     should.not.exist(d.second);
-    return should.not.exist(d.millisecond);
+    should.not.exist(d.millisecond);
   });
 });
 
@@ -2129,7 +2129,7 @@ describe('DateTime.getTime', function() {
     t.minute.should.equal(55);
     t.second.should.equal(14);
     t.millisecond.should.equal(456);
-    return should(t.timezoneOffset).be.null();
+    should(t.timezoneOffset).be.null();
   });
 
   it('should properly extract the time from datetimes without milliseconds', function() {
@@ -2141,7 +2141,7 @@ describe('DateTime.getTime', function() {
     t.minute.should.equal(55);
     t.second.should.equal(14);
     should.not.exist(t.millisecond);
-    return should(t.timezoneOffset).be.null();
+    should(t.timezoneOffset).be.null();
   });
 
   it('should properly extract the time from datetimes without seconds', function() {
@@ -2153,7 +2153,7 @@ describe('DateTime.getTime', function() {
     t.minute.should.equal(55);
     should.not.exist(t.second);
     should.not.exist(t.millisecond);
-    return should(t.timezoneOffset).be.null();
+    should(t.timezoneOffset).be.null();
   });
 
   it('should properly extract the time from datetimes without minutes', function() {
@@ -2165,10 +2165,10 @@ describe('DateTime.getTime', function() {
     should.not.exist(t.minute);
     should.not.exist(t.second);
     should.not.exist(t.millisecond);
-    return should(t.timezoneOffset).be.null();
+    should(t.timezoneOffset).be.null();
   });
 
-  return it('should properly extract the time from datetimes without hours', function() {
+  it('should properly extract the time from datetimes without hours', function() {
     const t = DateTime.parse('2012-10-25T+00').getTime();
     t.year.should.equal(0);
     t.month.should.equal(1);
@@ -2177,7 +2177,7 @@ describe('DateTime.getTime', function() {
     should.not.exist(t.minute);
     should.not.exist(t.second);
     should.not.exist(t.millisecond);
-    return should(t.timezoneOffset).be.null();
+    should(t.timezoneOffset).be.null();
   });
 });
 
@@ -2191,7 +2191,7 @@ describe('DateTime.reducedPrecision', function() {
     should.not.exist(reduced.hour);
     should.not.exist(reduced.minute);
     should.not.exist(reduced.second);
-    return should.not.exist(reduced.millisecond);
+    should.not.exist(reduced.millisecond);
   });
 
   it('should properly reduce to month precision', function() {
@@ -2202,7 +2202,7 @@ describe('DateTime.reducedPrecision', function() {
     should.not.exist(reduced.hour);
     should.not.exist(reduced.minute);
     should.not.exist(reduced.second);
-    return should.not.exist(reduced.millisecond);
+    should.not.exist(reduced.millisecond);
   });
 
   it('should properly reduce to day precision', function() {
@@ -2213,7 +2213,7 @@ describe('DateTime.reducedPrecision', function() {
     should.not.exist(reduced.hour);
     should.not.exist(reduced.minute);
     should.not.exist(reduced.second);
-    return should.not.exist(reduced.millisecond);
+    should.not.exist(reduced.millisecond);
   });
 
   it('should properly reduce to hour precision', function() {
@@ -2224,7 +2224,7 @@ describe('DateTime.reducedPrecision', function() {
     reduced.hour.should.equal(12);
     should.not.exist(reduced.minute);
     should.not.exist(reduced.second);
-    return should.not.exist(reduced.millisecond);
+    should.not.exist(reduced.millisecond);
   });
 
   it('should properly reduce to minute precision', function() {
@@ -2235,7 +2235,7 @@ describe('DateTime.reducedPrecision', function() {
     reduced.hour.should.equal(12);
     reduced.minute.should.equal(55);
     should.not.exist(reduced.second);
-    return should.not.exist(reduced.millisecond);
+    should.not.exist(reduced.millisecond);
   });
 
   it('should properly reduce to second precision', function() {
@@ -2246,10 +2246,10 @@ describe('DateTime.reducedPrecision', function() {
     reduced.hour.should.equal(12);
     reduced.minute.should.equal(55);
     reduced.second.should.equal(14);
-    return should.not.exist(reduced.millisecond);
+    should.not.exist(reduced.millisecond);
   });
 
-  return it('should properly reduce to millisecond precision', function() {
+  it('should properly reduce to millisecond precision', function() {
     const reduced = DateTime.parse('2012-10-25T12:55:14.456').reducedPrecision(DateTime.Unit.MILLISECOND);
     reduced.year.should.equal(2012);
     reduced.month.should.equal(10);
@@ -2257,6 +2257,6 @@ describe('DateTime.reducedPrecision', function() {
     reduced.hour.should.equal(12);
     reduced.minute.should.equal(55);
     reduced.second.should.equal(14);
-    return reduced.millisecond.should.equal(456);
+    reduced.millisecond.should.equal(456);
   });
 });

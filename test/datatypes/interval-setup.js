@@ -108,7 +108,7 @@ module.exports = function(test) {
   test['zeroToForty'] = new TestInterval(0, 40);
   test['fortyToSixty'] = new TestInterval(40, 60);
   test['sixtyToHundred'] = new TestInterval(60, 100);
-  return test['iIvl'] = {
+  test['iIvl'] = {
     sameAs: {
       //    |----------X----------|
       //    |----------Y----------|

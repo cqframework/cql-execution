@@ -19,20 +19,20 @@ const { p1, p2 } = require('./patients');
 describe('Age', function() {
   this.beforeEach(function() {
     setup(this, data, [ p1, p2 ]);
-    return this.results = this.executor.withLibrary(this.lib).exec(this.patientSource);
+    this.results = this.executor.withLibrary(this.lib).exec(this.patientSource);
   });
 
   it('should have correct patient results', function() {
     this.results.patientResults['1'].Age.should.equal(32);
-    return this.results.patientResults['2'].Age.should.equal(5);
+    this.results.patientResults['2'].Age.should.equal(5);
   });
 
   xit('should have the correct unfiltered results', function() {
     // Broken with 1.4.5-SNAPSHOT
-    return this.results.unfilteredResults.AgeSum.should.equal(37);
+    this.results.unfilteredResults.AgeSum.should.equal(37);
   });
 
-  return xit('should be able to reference other unfiltered context expressions', function() {
-    return this.results.unfilteredResults.AgeSumRef.should.equal(37);
+  xit('should be able to reference other unfiltered context expressions', function() {
+    this.results.unfilteredResults.AgeSumRef.should.equal(37);
   });
 });
