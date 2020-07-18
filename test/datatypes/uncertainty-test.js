@@ -37,7 +37,7 @@ describe('Uncertainty', function() {
 
     const differentTypes = new Uncertainty(1, '1');
     differentTypes.low.should.eql(1);
-    return differentTypes.high.should.eql('1');
+    differentTypes.high.should.eql('1');
   });
 
   it('should not use nonenumerable values in uncertainties', function() {
@@ -70,25 +70,25 @@ describe('Uncertainty', function() {
 
     const valueSetHigh = new Uncertainty(1, valueSet);
     should(valueSetHigh.low).be.null();
-    return should(valueSetHigh.high).be.null();
+    should(valueSetHigh.high).be.null();
   });
 
   it('should set high to low when high is undefined', function() {
     const fiveToOne = new Uncertainty(5, undefined);
     fiveToOne.low.should.equal(5);
-    return fiveToOne.high.should.equal(5);
+    fiveToOne.high.should.equal(5);
   });
 
   it('should swap low and high when constructed in wrong order', function() {
     const fiveToOne = new Uncertainty(5, 1);
     fiveToOne.low.should.equal(1);
-    return fiveToOne.high.should.equal(5);
+    fiveToOne.high.should.equal(5);
   });
 
   it('should contruct uncertainties with correct properties', function() {
     const oneToFive = new Uncertainty(1,5);
     oneToFive.low.should.equal(1);
-    return oneToFive.high.should.equal(5);
+    oneToFive.high.should.equal(5);
   });
 
   it('should detect zero-width intervals as points', function() {
@@ -99,7 +99,7 @@ describe('Uncertainty', function() {
     new Uncertainty(null, 2).isPoint().should.be.false();
     new Uncertainty(1, 2).isPoint().should.be.false();
     new Uncertainty().isPoint().should.be.false();
-    return new Uncertainty(1, '1').isPoint().should.be.false();
+    new Uncertainty(1, '1').isPoint().should.be.false();
   });
 
   it('should properly calculate equality', function() {
@@ -167,7 +167,7 @@ describe('Uncertainty', function() {
     new Uncertainty(2, null).equals(new Uncertainty(0, 1)).should.be.false();
     new Uncertainty(2, 2).equals(new Uncertainty(1, 1)).should.be.false();
     new Uncertainty(2, 3).equals(new Uncertainty(1, 1)).should.be.false();
-    return new Uncertainty(2, null).equals(new Uncertainty(1, 1)).should.be.false();
+    new Uncertainty(2, null).equals(new Uncertainty(1, 1)).should.be.false();
   });
 
   it('should properly calculate "less than" inequality', function() {
@@ -235,7 +235,7 @@ describe('Uncertainty', function() {
     new Uncertainty(2, null).lessThan(new Uncertainty(0, 1)).should.be.false();
     new Uncertainty(2, 2).lessThan(new Uncertainty(1, 1)).should.be.false();
     new Uncertainty(2, 3).lessThan(new Uncertainty(1, 1)).should.be.false();
-    return new Uncertainty(2, null).lessThan(new Uncertainty(1, 1)).should.be.false();
+    new Uncertainty(2, null).lessThan(new Uncertainty(1, 1)).should.be.false();
   });
 
   it('should properly calculate "less than or equals" inequality', function() {
@@ -302,7 +302,7 @@ describe('Uncertainty', function() {
     new Uncertainty(2, null).lessThanOrEquals(new Uncertainty(0, 1)).should.be.false();
     new Uncertainty(2, 2).lessThanOrEquals(new Uncertainty(1, 1)).should.be.false();
     new Uncertainty(2, 3).lessThanOrEquals(new Uncertainty(1, 1)).should.be.false();
-    return new Uncertainty(2, null).lessThanOrEquals(new Uncertainty(1, 1)).should.be.false();
+    new Uncertainty(2, null).lessThanOrEquals(new Uncertainty(1, 1)).should.be.false();
   });
 
   it('should properly calculate "greater than" inequality', function() {
@@ -369,10 +369,10 @@ describe('Uncertainty', function() {
     new Uncertainty(2, null).greaterThan(new Uncertainty(0, 1)).should.be.true();
     new Uncertainty(2, 2).greaterThan(new Uncertainty(1, 1)).should.be.true();
     new Uncertainty(2, 3).greaterThan(new Uncertainty(1, 1)).should.be.true();
-    return new Uncertainty(2, null).greaterThan(new Uncertainty(1, 1)).should.be.true();
+    new Uncertainty(2, null).greaterThan(new Uncertainty(1, 1)).should.be.true();
   });
 
-  return it('should properly calculate "greater than or equals" inequality', function() {
+  it('should properly calculate "greater than or equals" inequality', function() {
 
     // Equality
     new Uncertainty(1, 1).greaterThanOrEquals(new Uncertainty(1, 1)).should.be.true();
@@ -436,6 +436,6 @@ describe('Uncertainty', function() {
     new Uncertainty(2, null).greaterThanOrEquals(new Uncertainty(0, 1)).should.be.true();
     new Uncertainty(2, 2).greaterThanOrEquals(new Uncertainty(1, 1)).should.be.true();
     new Uncertainty(2, 3).greaterThanOrEquals(new Uncertainty(1, 1)).should.be.true();
-    return new Uncertainty(2, null).greaterThanOrEquals(new Uncertainty(1, 1)).should.be.true();
+    new Uncertainty(2, null).greaterThanOrEquals(new Uncertainty(1, 1)).should.be.true();
   });
 });

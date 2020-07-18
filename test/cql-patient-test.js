@@ -32,7 +32,7 @@ describe('Record', function() {
         'period': { 'low': '1982-03-12', 'high': '1982-03-26' }
       }]
     });
-    return [this.encRecord, this.cndRecord] = Array.from((ref = (() => {
+    [this.encRecord, this.cndRecord] = Array.from((ref = (() => {
       const result = [];
       for (let k in patient.records) {
         const v = patient.records[k];
@@ -46,31 +46,31 @@ describe('Record', function() {
     this.encRecord.get('id').should.equal('http://cqframework.org/1/1');
     this.encRecord.get('recordType').should.equal('Encounter');
     this.cndRecord.get('id').should.equal('http://cqframework.org/1/2');
-    return this.cndRecord.get('recordType').should.equal('Condition');
+    this.cndRecord.get('recordType').should.equal('Condition');
   });
 
   it('should get codes', function() {
-    return this.encRecord.getCode('code').should.eql(new DT.Code('185349003', '2.16.840.1.113883.6.96', '2013-09'));
+    this.encRecord.getCode('code').should.eql(new DT.Code('185349003', '2.16.840.1.113883.6.96', '2013-09'));
   });
 
   it('should get dates', function() {
     this.cndRecord.getDate('period.low').should.eql(DT.DateTime.parse('1982-03-12'));
-    return this.cndRecord.getDate('period.high').should.eql(DT.DateTime.parse('1982-03-26'));
+    this.cndRecord.getDate('period.high').should.eql(DT.DateTime.parse('1982-03-26'));
   });
 
   it('should get intervals', function() {
-    return this.encRecord.getInterval('period').should.eql(new DT.Interval(DT.DateTime.parse('1978-07-15T10:00'), DT.DateTime.parse('1978-07-15T10:45')));
+    this.encRecord.getInterval('period').should.eql(new DT.Interval(DT.DateTime.parse('1978-07-15T10:00'), DT.DateTime.parse('1978-07-15T10:45')));
   });
 
-  return it('should get date or interval', function() {
+  it('should get date or interval', function() {
     this.cndRecord.getDateOrInterval('period.low').should.eql(DT.DateTime.parse('1982-03-12'));
-    return this.encRecord.getDateOrInterval('period').should.eql(new DT.Interval(DT.DateTime.parse('1978-07-15T10:00'), DT.DateTime.parse('1978-07-15T10:45')));
+    this.encRecord.getDateOrInterval('period').should.eql(new DT.Interval(DT.DateTime.parse('1978-07-15T10:00'), DT.DateTime.parse('1978-07-15T10:45')));
   });
 });
 
 describe('Patient', function() {
   this.beforeEach(function() {
-    return this.patient = new Patient({
+    this.patient = new Patient({
       'id': '1',
       'name': 'Bob Jones',
       'gender': 'M',
@@ -93,7 +93,7 @@ describe('Patient', function() {
     this.patient.id.should.equal('1');
     this.patient.name.should.equal('Bob Jones');
     this.patient.gender.should.equal('M');
-    return this.patient.birthDate.should.eql(DT.DateTime.parse('1974-07-12T11:15'));
+    this.patient.birthDate.should.eql(DT.DateTime.parse('1974-07-12T11:15'));
   });
 
   it('should find records by profile', function() {
@@ -103,10 +103,10 @@ describe('Patient', function() {
 
     const conditions = this.patient.findRecords('{https://github.com/cqframework/cql-execution/simple}Condition');
     conditions.length.should.equal(1);
-    return conditions[0].get('id').should.equal('http://cqframework.org/1/2');
+    conditions[0].get('id').should.equal('http://cqframework.org/1/2');
   });
 
-  return it('should return empty array for unfound records', function() {
-    return this.patient.findRecords('{https://github.com/cqframework/cql-execution/simple}Foo').should.be.empty();
+  it('should return empty array for unfound records', function() {
+    this.patient.findRecords('{https://github.com/cqframework/cql-execution/simple}Foo').should.be.empty();
   });
 });

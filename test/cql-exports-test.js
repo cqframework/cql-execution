@@ -29,5 +29,5 @@ describe('CQL Exports', () => libNames.map((libName) =>
   ((name => it(`should export ${name}`, function() {
     console.log('Testing', name);
     cql[name].should.be.Function();
-    return cql[name].name.should.equal(name);
+    cql[name].name.should.equal(name);
   })))(libName)));
