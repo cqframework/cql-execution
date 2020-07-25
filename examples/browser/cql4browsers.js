@@ -38,16 +38,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 var _require = require('./datatypes/datatypes'),
     Code = _require.Code,
     ValueSet = _require.ValueSet;
@@ -75,18 +65,7 @@ var CodeService = /*#__PURE__*/function () {
   _createClass(CodeService, [{
     key: "findValueSetsByOid",
     value: function findValueSetsByOid(oid) {
-      var _this = this;
-
-      return function () {
-        var result = [];
-
-        for (var version in _this.valueSets[oid]) {
-          var valueSet = _this.valueSets[oid][version];
-          result.push(valueSet);
-        }
-
-        return result;
-      }();
+      return this.valueSets[oid] ? Object.values(this.valueSets[oid]) : [];
     }
   }, {
     key: "findValueSet",
@@ -117,8 +96,6 @@ var CodeService = /*#__PURE__*/function () {
 module.exports.CodeService = CodeService;
 },{"./datatypes/datatypes":6}],3:[function(require,module,exports){
 "use strict";
-
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -154,31 +131,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 var DT = require('./datatypes/datatypes');
-
-var _require = require('./util/util'),
-    typeIsArray = _require.typeIsArray;
-
-var toDate = function toDate(str) {
-  if (typeof str === 'string') {
-    return new Date(str);
-  } else {
-    return null;
-  }
-};
 
 var Record = /*#__PURE__*/function () {
   function Record(json) {
@@ -192,10 +145,10 @@ var Record = /*#__PURE__*/function () {
     key: "_recursiveGet",
     value: function _recursiveGet(field) {
       if (field != null && field.indexOf('.') >= 0) {
-        var _Array$from = Array.from(field.split('.', 2)),
-            _Array$from2 = _slicedToArray(_Array$from, 2),
-            root = _Array$from2[0],
-            rest = _Array$from2[1];
+        var _field$split = field.split('.', 2),
+            _field$split2 = _slicedToArray(_field$split, 2),
+            root = _field$split2[0],
+            rest = _field$split2[1];
 
         return new Record(this._recursiveGet(root))._recursiveGet(rest);
       }
@@ -286,43 +239,34 @@ var Patient = /*#__PURE__*/function (_Record) {
 
     _classCallCheck(this, Patient);
 
-    _this = _super.apply(this, arguments);
+    _this = _super.call(this, json);
     _this.name = json.name;
     _this.gender = json.gender;
     _this.birthDate = json.birthDate != null ? DT.DateTime.parse(json.birthDate) : undefined;
     _this.records = {};
-
-    var _iterator = _createForOfIteratorHelper(json.records != null ? json.records : []),
-        _step;
-
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var r = _step.value;
-
-        if (_this.records[r.recordType] == null) {
-          _this.records[r.recordType] = [];
-        }
-
-        _this.records[r.recordType].push(new Record(r));
+    (json.records || []).forEach(function (r) {
+      if (_this.records[r.recordType] == null) {
+        _this.records[r.recordType] = [];
       }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
 
+      _this.records[r.recordType].push(new Record(r));
+    });
     return _this;
   }
 
   _createClass(Patient, [{
     key: "findRecords",
     value: function findRecords(profile) {
-      var recordType = profile != null ? profile.match(/(\{https:\/\/github\.com\/cqframework\/cql-execution\/simple\})?(.*)/)[2] : undefined;
+      if (profile == null) {
+        return [];
+      }
+
+      var recordType = profile.match(/(\{https:\/\/github\.com\/cqframework\/cql-execution\/simple\})?(.*)/)[2];
 
       if (recordType === 'Patient') {
         return [this];
       } else {
-        return this.records[recordType] != null ? this.records[recordType] : [];
+        return this.records[recordType] || [];
       }
     }
   }]);
@@ -347,7 +291,8 @@ var PatientSource = /*#__PURE__*/function () {
     key: "nextPatient",
     value: function nextPatient() {
       var currentJSON = this.patients.shift();
-      return this.current = currentJSON ? new Patient(currentJSON) : undefined;
+      this.current = currentJSON ? new Patient(currentJSON) : undefined;
+      return this.current;
     }
   }]);
 
@@ -356,17 +301,10 @@ var PatientSource = /*#__PURE__*/function () {
 
 module.exports.Patient = Patient;
 module.exports.PatientSource = PatientSource;
-},{"./datatypes/datatypes":6,"./util/util":47}],4:[function(require,module,exports){
+},{"./datatypes/datatypes":6}],4:[function(require,module,exports){
 "use strict";
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
 var library = require('./elm/library');
-
-var quantity = require('./elm/quantity');
 
 var expression = require('./elm/expression');
 
@@ -409,7 +347,7 @@ module.exports.Interval = datatypes.Interval;
 module.exports.Quantity = datatypes.Quantity;
 module.exports.Ratio = datatypes.Ratio;
 module.exports.ValueSet = datatypes.ValueSet;
-},{"./cql-code-service":2,"./cql-patient":3,"./datatypes/datatypes":6,"./elm/expression":22,"./elm/library":27,"./elm/quantity":34,"./runtime/context":41,"./runtime/executor":42,"./runtime/repository":43,"./runtime/results":44}],5:[function(require,module,exports){
+},{"./cql-code-service":2,"./cql-patient":3,"./datatypes/datatypes":6,"./elm/expression":22,"./elm/library":27,"./runtime/context":41,"./runtime/executor":42,"./runtime/repository":43,"./runtime/results":44}],5:[function(require,module,exports){
 "use strict";
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
