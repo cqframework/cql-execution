@@ -6,7 +6,9 @@ class CodeService {
     for (let oid in valueSetsJson) {
       this.valueSets[oid] = {};
       for (let version in valueSetsJson[oid]) {
-        const codes = valueSetsJson[oid][version].map((code) => new Code(code.code, code.system, code.version));
+        const codes = valueSetsJson[oid][version].map(
+          code => new Code(code.code, code.system, code.version)
+        );
         this.valueSets[oid][version] = new ValueSet(oid, version, codes);
       }
     }
