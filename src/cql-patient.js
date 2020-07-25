@@ -11,12 +11,6 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 const DT = require('./datatypes/datatypes');
-const { typeIsArray } = require('./util/util');
-
-const toDate = function(str) {
-  if (typeof str === 'string') { return new Date(str);
-  } else { return null; }
-};
 
 class Record {
   constructor(json) {
@@ -25,9 +19,9 @@ class Record {
   }
 
   _recursiveGet(field) {
-    if ((field != null) && (field.indexOf('.') >= 0)) {
-      const [root, rest] =  Array.from(field.split('.', 2));
-      return (new Record(this._recursiveGet(root)))._recursiveGet(rest);
+    if (field != null && field.indexOf('.') >= 0) {
+      const [root, rest] =  field.split('.', 2);
+      return new Record(this._recursiveGet(root))._recursiveGet(rest);
     }
     return this.json[field];
   }
@@ -37,9 +31,9 @@ class Record {
     // we just cheat and use the shape of the value to determine it. Real implementations should
     // have a more sophisticated approach
     const value = this._recursiveGet(field);
-    if ((typeof value === 'string') && /\d{4}-\d{2}-\d{2}(T[\d\-.]+)?/.test(value)) { return this.getDate(field); }
-    if ((value != null) && (typeof value === 'object') && (value.code != null) && (value.system != null)) { return this.getCode(field); }
-    if ((value != null) && (typeof value === 'object') && ((value.low != null) || (value.high != null))) { return this.getInterval(field); }
+    if (typeof value === 'string' && /\d{4}-\d{2}-\d{2}(T[\d\-.]+)?/.test(value)) { return this.getDate(field); }
+    if (value != null && typeof value === 'object' && value.code != null && value.system != null) { return this.getCode(field); }
+    if (value != null && typeof value === 'object' && (value.low != null || value.high != null)) { return this.getInterval(field); }
     return value;
   }
 
@@ -54,40 +48,43 @@ class Record {
 
   getInterval(field) {
     const val = this._recursiveGet(field);
-    if ((val != null) && (typeof val === 'object')) {
-      const low = (val.low != null) ? DT.DateTime.parse(val.low) : null;
-      const high = (val.high != null) ? DT.DateTime.parse(val.high) : null;
+    if (val != null && typeof val === 'object') {
+      const low = val.low != null ? DT.DateTime.parse(val.low) : null;
+      const high = val.high != null ? DT.DateTime.parse(val.high) : null;
       return new DT.Interval(low, high);
     }
   }
 
   getDateOrInterval(field) {
     const val = this._recursiveGet(field);
-    if ((val != null) && (typeof val === 'object')) { return this.getInterval(field); } else { return this.getDate(field); }
+    if (val != null && typeof val === 'object') { return this.getInterval(field); } else { return this.getDate(field); }
   }
 
   getCode(field) {
     const val = this._recursiveGet(field);
-    if ((val != null) && (typeof val === 'object')) { return new DT.Code(val.code, val.system, val.version); }
+    if (val != null && typeof val === 'object') { return new DT.Code(val.code, val.system, val.version); }
   }
 }
 
 class Patient extends Record {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.name = json.name;
     this.gender = json.gender;
-    this.birthDate = (json.birthDate != null) ? DT.DateTime.parse(json.birthDate) : undefined;
+    this.birthDate = json.birthDate != null ? DT.DateTime.parse(json.birthDate) : undefined;
     this.records = {};
-    for (let r of json.records != null ? json.records : []) {
+    (json.records || []).forEach(r => {
       if (this.records[r.recordType] == null) { this.records[r.recordType] = []; }
       this.records[r.recordType].push(new Record(r));
-    }
+    });
   }
 
   findRecords(profile) {
-    const recordType = profile != null ? profile.match(/(\{https:\/\/github\.com\/cqframework\/cql-execution\/simple\})?(.*)/)[2] : undefined;
-    if (recordType === 'Patient') { return [this]; } else { return this.records[recordType] != null ? this.records[recordType] : []; }
+    if (profile == null) {
+      return [];
+    }
+    const recordType = profile.match(/(\{https:\/\/github\.com\/cqframework\/cql-execution\/simple\})?(.*)/)[2];
+    if (recordType === 'Patient') { return [this]; } else { return this.records[recordType] || []; }
   }
 }
 
@@ -103,7 +100,8 @@ class PatientSource {
 
   nextPatient() {
     const currentJSON = this.patients.shift();
-    return this.current = currentJSON ? new Patient(currentJSON) : undefined;
+    this.current = currentJSON ? new Patient(currentJSON) : undefined;
+    return this.current;
   }
 }
 
