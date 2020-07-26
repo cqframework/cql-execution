@@ -246,11 +246,11 @@ module.exports.Context = (Context = (function() {
 
     matchesTypeSpecifier(val, spec) {
       switch (spec.type) {
-      case 'NamedTypeSpecifier': return this.matchesNamedTypeSpecifier(val, spec);
-      case 'ListTypeSpecifier': return this.matchesListTypeSpecifier(val, spec);
-      case 'TupleTypeSpecifier': return this.matchesTupleTypeSpecifier(val, spec);
-      case 'IntervalTypeSpecifier': return this.matchesIntervalTypeSpecifier(val, spec);
-      default: return true; // default to true when we don't know
+        case 'NamedTypeSpecifier': return this.matchesNamedTypeSpecifier(val, spec);
+        case 'ListTypeSpecifier': return this.matchesListTypeSpecifier(val, spec);
+        case 'TupleTypeSpecifier': return this.matchesTupleTypeSpecifier(val, spec);
+        case 'IntervalTypeSpecifier': return this.matchesIntervalTypeSpecifier(val, spec);
+        default: return true; // default to true when we don't know
       }
     }
 
@@ -272,35 +272,35 @@ module.exports.Context = (Context = (function() {
 
     matchesNamedTypeSpecifier(val, spec) {
       switch (spec.name) {
-      case '{urn:hl7-org:elm-types:r1}Boolean': return typeof val === 'boolean';
-      case '{urn:hl7-org:elm-types:r1}Decimal': return typeof val === 'number';
-      case '{urn:hl7-org:elm-types:r1}Integer': return (typeof val === 'number') && (Math.floor(val) === val);
-      case '{urn:hl7-org:elm-types:r1}String': return typeof val === 'string';
-      case '{urn:hl7-org:elm-types:r1}Concept': return (val != null ? val.isConcept : undefined);
-      case '{urn:hl7-org:elm-types:r1}Code': return (val != null ? val.isCode : undefined);
-      case '{urn:hl7-org:elm-types:r1}DateTime': return (val != null ? val.isDateTime : undefined);
-      case '{urn:hl7-org:elm-types:r1}Date': return (val != null ? val.isDate : undefined);
-      case '{urn:hl7-org:elm-types:r1}Quantity': return (val != null ? val.isQuantity : undefined);
-      case '{urn:hl7-org:elm-types:r1}Time': return (val != null ? val.isDateTime : undefined) && val.isTime();
-      default: return true; // TODO: Better checking of custom or complex types
+        case '{urn:hl7-org:elm-types:r1}Boolean': return typeof val === 'boolean';
+        case '{urn:hl7-org:elm-types:r1}Decimal': return typeof val === 'number';
+        case '{urn:hl7-org:elm-types:r1}Integer': return (typeof val === 'number') && (Math.floor(val) === val);
+        case '{urn:hl7-org:elm-types:r1}String': return typeof val === 'string';
+        case '{urn:hl7-org:elm-types:r1}Concept': return (val != null ? val.isConcept : undefined);
+        case '{urn:hl7-org:elm-types:r1}Code': return (val != null ? val.isCode : undefined);
+        case '{urn:hl7-org:elm-types:r1}DateTime': return (val != null ? val.isDateTime : undefined);
+        case '{urn:hl7-org:elm-types:r1}Date': return (val != null ? val.isDate : undefined);
+        case '{urn:hl7-org:elm-types:r1}Quantity': return (val != null ? val.isQuantity : undefined);
+        case '{urn:hl7-org:elm-types:r1}Time': return (val != null ? val.isDateTime : undefined) && val.isTime();
+        default: return true; // TODO: Better checking of custom or complex types
       }
     }
 
     matchesInstanceType(val, inst) {
       switch (false) {
-      case !inst.isBooleanLiteral: return typeof val === 'boolean';
-      case !inst.isDecimalLiteral: return typeof val === 'number';
-      case !inst.isIntegerLiteral: return (typeof val === 'number') && (Math.floor(val) === val);
-      case !inst.isStringLiteral: return typeof val === 'string';
-      case !inst.isCode: return (val != null ? val.isCode : undefined);
-      case !inst.isConcept: return (val != null ? val.isConcept : undefined);
-      case !inst.isDateTime: return (val != null ? val.isDateTime : undefined);
-      case !inst.isQuantity: return (val != null ? val.isQuantity : undefined);
-      case !inst.isTime: return (val != null ? val.isDateTime : undefined) && val.isTime();
-      case !inst.isList: return this.matchesListInstanceType(val, inst);
-      case !inst.isTuple: return this.matchesTupleInstanceType(val, inst);
-      case !inst.isInterval: return this.matchesIntervalInstanceType(val, inst);
-      default: return true; // default to true when we don't know for sure
+        case !inst.isBooleanLiteral: return typeof val === 'boolean';
+        case !inst.isDecimalLiteral: return typeof val === 'number';
+        case !inst.isIntegerLiteral: return (typeof val === 'number') && (Math.floor(val) === val);
+        case !inst.isStringLiteral: return typeof val === 'string';
+        case !inst.isCode: return (val != null ? val.isCode : undefined);
+        case !inst.isConcept: return (val != null ? val.isConcept : undefined);
+        case !inst.isDateTime: return (val != null ? val.isDateTime : undefined);
+        case !inst.isQuantity: return (val != null ? val.isQuantity : undefined);
+        case !inst.isTime: return (val != null ? val.isDateTime : undefined) && val.isTime();
+        case !inst.isList: return this.matchesListInstanceType(val, inst);
+        case !inst.isTuple: return this.matchesTupleInstanceType(val, inst);
+        case !inst.isInterval: return this.matchesIntervalInstanceType(val, inst);
+        default: return true; // default to true when we don't know for sure
       }
     }
 

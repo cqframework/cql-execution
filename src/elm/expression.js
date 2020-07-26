@@ -45,9 +45,9 @@ module.exports.Expression = (Expression = class Expression {
 
   execArgs(ctx) {
     switch (false) {
-    case (this.args == null): return (this.args.map((arg) => arg.execute(ctx)));
-    case (this.arg == null): return this.arg.execute(ctx);
-    default: return null;
+      case (this.args == null): return (this.args.map((arg) => arg.execute(ctx)));
+      case (this.arg == null): return this.arg.execute(ctx);
+      default: return null;
     }
   }
 });

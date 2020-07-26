@@ -25,10 +25,10 @@ const validateQuantity = function(object,expectedValue,expectedUnit) {
 
 const doQuantityMathTests = function(tests, operator) {
   const func = (() => { switch (operator) {
-  case '*': return doMultiplication;
-  case '/': return doDivision;
-  case '+': return doAddition;
-  case '-': return doSubtraction;
+    case '*': return doMultiplication;
+    case '/': return doDivision;
+    case '+': return doAddition;
+    case '-': return doSubtraction;
   } })();
 
   (() => {
