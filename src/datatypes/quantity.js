@@ -223,7 +223,7 @@ function convert_value(value, from, to) {
     } else {
       return decimalAdjust('round', ucum.convert(value, ucum_unit(from), ucum_unit(to)), -8);
     }
-    // If the units could not be alignied ie: incompareable, exception will be thrown, return null
+  // If the units could not be alignied ie: incompareable, exception will be thrown, return null
   } catch (e) {
     return null;
   }
@@ -387,11 +387,11 @@ function compare_units(unit_a, unit_b) {
   try {
     const c = ucum.convert(1, ucum_unit(unit_a), ucum_unit(unit_b));
     if (c > 1) {
-      return 1;
-    } // unit_a is bigger (less precise)
+      return 1; // unit_a is bigger (less precise)
+    }
     if (c < 1) {
-      return -1;
-    } // unit_a is smaller
+      return -1; // unit_a is smaller
+    }
     return 0; //units are the same
   } catch (e) {
     return null;

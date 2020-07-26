@@ -2003,59 +2003,53 @@ DateTime.prototype.add = _Date.prototype.add = function (offset, field) {
 };
 
 DateTime.prototype.getFieldFloor = _Date.prototype.getFieldFloor = function (field) {
-  if (field === 'month') {
-    return 1;
-  }
+  switch (field) {
+    case 'month':
+      return 1;
 
-  if (field === 'day') {
-    return 1;
-  }
+    case 'day':
+      return 1;
 
-  if (field === 'hour') {
-    return 0;
-  }
+    case 'hour':
+      return 0;
 
-  if (field === 'minute') {
-    return 0;
-  }
+    case 'minute':
+      return 0;
 
-  if (field === 'second') {
-    return 0;
-  }
+    case 'second':
+      return 0;
 
-  if (field === 'millisecond') {
-    return 0;
-  }
+    case 'millisecond':
+      return 0;
 
-  throw new Error('Tried to floor a field that has no floor value: ' + field);
+    default:
+      throw new Error('Tried to floor a field that has no floor value: ' + field);
+  }
 };
 
 DateTime.prototype.getFieldCieling = _Date.prototype.getFieldCieling = function (field) {
-  if (field === 'month') {
-    return 12;
-  }
+  switch (field) {
+    case 'month':
+      return 12;
 
-  if (field === 'day') {
-    return daysInMonth(this.year, this.month);
-  }
+    case 'day':
+      return daysInMonth(this.year, this.month);
 
-  if (field === 'hour') {
-    return 23;
-  }
+    case 'hour':
+      return 23;
 
-  if (field === 'minute') {
-    return 59;
-  }
+    case 'minute':
+      return 59;
 
-  if (field === 'second') {
-    return 59;
-  }
+    case 'second':
+      return 59;
 
-  if (field === 'millisecond') {
-    return 999;
-  }
+    case 'millisecond':
+      return 999;
 
-  throw new Error('Tried to clieling a field that has no cieling value: ' + field);
+    default:
+      throw new Error('Tried to clieling a field that has no cieling value: ' + field);
+  }
 };
 
 function compareWithDefaultResult(a, b, defaultResult) {
@@ -2192,17 +2186,18 @@ function cqlFormatStringToMomentFormatString(string) {
   }
 
   return momentString = momentString.replace(/f/g, 'S');
-} // Redefine MIN/MAX here because math.js requires this file, and when we make this file require
-// math.js, it errors due to the circular dependency...
+}
 
-
-var MIN_DATETIME_VALUE = DateTime.parse('0001-01-01T00:00:00.000');
-var MAX_DATETIME_VALUE = DateTime.parse('9999-12-31T23:59:59.999');
 module.exports = {
   DateTime: DateTime,
   Date: _Date
-};
-},{"../util/util":47,"./uncertainty":13,"moment":48}],8:[function(require,module,exports){
+}; // Require MIN/MAX here because math.js requires this file, and when we make this file require
+// math.js before it exports DateTime and Date, it errors due to the circular dependency...
+
+var _require3 = require('../util/math'),
+    MAX_DATETIME_VALUE = _require3.MAX_DATETIME_VALUE,
+    MIN_DATETIME_VALUE = _require3.MIN_DATETIME_VALUE;
+},{"../util/math":46,"../util/util":47,"./uncertainty":13,"moment":48}],8:[function(require,module,exports){
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2288,8 +2283,6 @@ var Interval = /*#__PURE__*/function () {
   }, {
     key: "contains",
     value: function contains(item, precision) {
-      var _this = this;
-
       // These first two checks ensure correct handling of edge case where an item equals the closed boundary
       if (this.lowClosed && this.low != null && cmp.equals(this.low, item)) {
         return true;
@@ -2303,35 +2296,29 @@ var Interval = /*#__PURE__*/function () {
         throw new Error('Argument to contains must be a point');
       }
 
-      var lowFn = function () {
-        switch (true) {
-          case _this.lowClosed && _this.low == null:
-            return function () {
-              return true;
-            };
+      var lowFn;
 
-          case _this.lowClosed:
-            return cmp.lessThanOrEquals;
+      if (this.lowClosed && this.low == null) {
+        lowFn = function lowFn() {
+          return true;
+        };
+      } else if (this.lowClosed) {
+        lowFn = cmp.lessThanOrEquals;
+      } else {
+        lowFn = cmp.lessThan;
+      }
 
-          default:
-            return cmp.lessThan;
-        }
-      }();
+      var highFn;
 
-      var highFn = function () {
-        switch (true) {
-          case _this.highClosed && _this.high == null:
-            return function () {
-              return true;
-            };
-
-          case _this.highClosed:
-            return cmp.greaterThanOrEquals;
-
-          default:
-            return cmp.greaterThan;
-        }
-      }();
+      if (this.highClosed && this.high == null) {
+        highFn = function highFn() {
+          return true;
+        };
+      } else if (this.highClosed) {
+        highFn = cmp.greaterThanOrEquals;
+      } else {
+        highFn = cmp.greaterThan;
+      }
 
       return ThreeValuedLogic.and(lowFn(this.low, item, precision), highFn(this.high, item, precision));
     }
@@ -2401,8 +2388,6 @@ var Interval = /*#__PURE__*/function () {
   }, {
     key: "union",
     value: function union(other) {
-      var _this2 = this;
-
       if (other == null || !other.isInterval) {
         throw new Error('Argument to union must be an interval');
       } // Note that interval union is only defined if the arguments overlap or meet.
@@ -2412,52 +2397,53 @@ var Interval = /*#__PURE__*/function () {
         var _ref3 = [this.toClosed(), other.toClosed()],
             a = _ref3[0],
             b = _ref3[1];
+        var l, lc;
 
-        var _ref4 = function () {
-          switch (true) {
-            case cmp.lessThanOrEquals(a.low, b.low):
-              return [_this2.low, _this2.lowClosed];
+        if (cmp.lessThanOrEquals(a.low, b.low)) {
+          var _ref4 = [this.low, this.lowClosed];
+          l = _ref4[0];
+          lc = _ref4[1];
+        } else if (cmp.greaterThanOrEquals(a.low, b.low)) {
+          var _ref5 = [other.low, other.lowClosed];
+          l = _ref5[0];
+          lc = _ref5[1];
+        } else if (areNumeric(a.low, b.low)) {
+          var _ref6 = [lowestNumericUncertainty(a.low, b.low), true];
+          l = _ref6[0];
+          lc = _ref6[1];
+        } else if (areDateTimes(a.low, b.low) && a.low.isMorePrecise(b.low)) {
+          var _ref7 = [other.low, other.lowClosed];
+          l = _ref7[0];
+          lc = _ref7[1];
+        } else {
+          var _ref8 = [this.low, this.lowClosed];
+          l = _ref8[0];
+          lc = _ref8[1];
+        }
 
-            case cmp.greaterThanOrEquals(a.low, b.low):
-              return [other.low, other.lowClosed];
+        var h, hc;
 
-            case areNumeric(a.low, b.low):
-              return [lowestNumericUncertainty(a.low, b.low), true];
-            // TODO: Do we need to support quantities here?
-
-            case areDateTimes(a.low, b.low) && a.low.isMorePrecise(b.low):
-              return [other.low, other.lowClosed];
-
-            default:
-              return [_this2.low, _this2.lowClosed];
-          }
-        }(),
-            _ref5 = _slicedToArray(_ref4, 2),
-            l = _ref5[0],
-            lc = _ref5[1];
-
-        var _ref6 = function () {
-          switch (true) {
-            case cmp.greaterThanOrEquals(a.high, b.high):
-              return [_this2.high, _this2.highClosed];
-
-            case cmp.lessThanOrEquals(a.high, b.high):
-              return [other.high, other.highClosed];
-
-            case areNumeric(a.high, b.high):
-              return [highestNumericUncertainty(a.high, b.high), true];
-            // TODO: Do we need to support quantities here?
-
-            case areDateTimes(a.high, b.high) && a.high.isMorePrecise(b.high):
-              return [other.high, other.highClosed];
-
-            default:
-              return [_this2.high, _this2.highClosed];
-          }
-        }(),
-            _ref7 = _slicedToArray(_ref6, 2),
-            h = _ref7[0],
-            hc = _ref7[1];
+        if (cmp.greaterThanOrEquals(a.high, b.high)) {
+          var _ref9 = [this.high, this.highClosed];
+          h = _ref9[0];
+          hc = _ref9[1];
+        } else if (cmp.lessThanOrEquals(a.high, b.high)) {
+          var _ref10 = [other.high, other.highClosed];
+          h = _ref10[0];
+          hc = _ref10[1];
+        } else if (areNumeric(a.high, b.high)) {
+          var _ref11 = [highestNumericUncertainty(a.high, b.high), true];
+          h = _ref11[0];
+          hc = _ref11[1];
+        } else if (areDateTimes(a.high, b.high) && a.high.isMorePrecise(b.high)) {
+          var _ref12 = [other.high, other.highClosed];
+          h = _ref12[0];
+          hc = _ref12[1];
+        } else {
+          var _ref13 = [this.high, this.highClosed];
+          h = _ref13[0];
+          hc = _ref13[1];
+        }
 
         return new Interval(l, h, lc, hc);
       } else {
@@ -2467,63 +2453,62 @@ var Interval = /*#__PURE__*/function () {
   }, {
     key: "intersect",
     value: function intersect(other) {
-      var _this3 = this;
-
       if (other == null || !other.isInterval) {
         throw new Error('Argument to union must be an interval');
       } // Note that interval union is only defined if the arguments overlap.
 
 
       if (this.overlaps(other)) {
-        var _ref8 = [this.toClosed(), other.toClosed()],
-            a = _ref8[0],
-            b = _ref8[1];
+        var _ref14 = [this.toClosed(), other.toClosed()],
+            a = _ref14[0],
+            b = _ref14[1];
+        var l, lc;
 
-        var _ref9 = function () {
-          switch (true) {
-            case cmp.greaterThanOrEquals(a.low, b.low):
-              return [_this3.low, _this3.lowClosed];
+        if (cmp.greaterThanOrEquals(a.low, b.low)) {
+          var _ref15 = [this.low, this.lowClosed];
+          l = _ref15[0];
+          lc = _ref15[1];
+        } else if (cmp.lessThanOrEquals(a.low, b.low)) {
+          var _ref16 = [other.low, other.lowClosed];
+          l = _ref16[0];
+          lc = _ref16[1];
+        } else if (areNumeric(a.low, b.low)) {
+          var _ref17 = [highestNumericUncertainty(a.low, b.low), true];
+          l = _ref17[0];
+          lc = _ref17[1];
+        } else if (areDateTimes(a.low, b.low) && b.low.isMorePrecise(a.low)) {
+          var _ref18 = [other.low, other.lowClosed];
+          l = _ref18[0];
+          lc = _ref18[1];
+        } else {
+          var _ref19 = [this.low, this.lowClosed];
+          l = _ref19[0];
+          lc = _ref19[1];
+        }
 
-            case cmp.lessThanOrEquals(a.low, b.low):
-              return [other.low, other.lowClosed];
+        var h, hc;
 
-            case areNumeric(a.low, b.low):
-              return [highestNumericUncertainty(a.low, b.low), true];
-            // TODO: Do we need to support quantities here?
-
-            case areDateTimes(a.low, b.low) && b.low.isMorePrecise(a.low):
-              return [other.low, other.lowClosed];
-
-            default:
-              return [_this3.low, _this3.lowClosed];
-          }
-        }(),
-            _ref10 = _slicedToArray(_ref9, 2),
-            l = _ref10[0],
-            lc = _ref10[1];
-
-        var _ref11 = function () {
-          switch (true) {
-            case cmp.lessThanOrEquals(a.high, b.high):
-              return [_this3.high, _this3.highClosed];
-
-            case cmp.greaterThanOrEquals(a.high, b.high):
-              return [other.high, other.highClosed];
-
-            case areNumeric(a.high, b.high):
-              return [lowestNumericUncertainty(a.high, b.high), true];
-            // TODO: Do we need to support quantities here?
-
-            case areDateTimes(a.high, b.high) && b.high.isMorePrecise(a.high):
-              return [other.high, other.highClosed];
-
-            default:
-              return [_this3.high, _this3.highClosed];
-          }
-        }(),
-            _ref12 = _slicedToArray(_ref11, 2),
-            h = _ref12[0],
-            hc = _ref12[1];
+        if (cmp.lessThanOrEquals(a.high, b.high)) {
+          var _ref20 = [this.high, this.highClosed];
+          h = _ref20[0];
+          hc = _ref20[1];
+        } else if (cmp.greaterThanOrEquals(a.high, b.high)) {
+          var _ref21 = [other.high, other.highClosed];
+          h = _ref21[0];
+          hc = _ref21[1];
+        } else if (areNumeric(a.high, b.high)) {
+          var _ref22 = [lowestNumericUncertainty(a.high, b.high), true];
+          h = _ref22[0];
+          hc = _ref22[1];
+        } else if (areDateTimes(a.high, b.high) && b.high.isMorePrecise(a.high)) {
+          var _ref23 = [other.high, other.highClosed];
+          h = _ref23[0];
+          hc = _ref23[1];
+        } else {
+          var _ref24 = [this.high, this.highClosed];
+          h = _ref24[0];
+          hc = _ref24[1];
+        }
 
         return new Interval(l, h, lc, hc);
       } else {
@@ -2596,10 +2581,11 @@ var Interval = /*#__PURE__*/function () {
 
       if (this.lowClosed && this.low == null && this.highClosed && this.high == null) {
         return other.lowClosed && other.low == null && other.highClosed && other.high == null;
-      } // For the special case where Interval[...] same as Interval[null,null] should return false
-      // This accounts for the inverse of the if statement above: where the second Interval is [null,null] and not the first Interval
-      // The reason why this isn't caught below is due to how start() and end() work
-      // There is no way to tell the datatype for MIN and MAX if both boundaries are null
+      } // For the special case where Interval[...] same as Interval[null,null] should return false.
+      // This accounts for the inverse of the if statement above: where the second Interval is
+      // [null,null] and not the first Interval.
+      // The reason why this isn't caught below is due to how start() and end() work.
+      // There is no way to tell the datatype for MIN and MAX if both boundaries are null.
 
 
       if (other.lowClosed && other.low == null && other.highClosed && other.high == null) {
@@ -2634,9 +2620,9 @@ var Interval = /*#__PURE__*/function () {
     key: "equals",
     value: function equals(other) {
       if (other != null && other.isInterval) {
-        var _ref13 = [this.toClosed(), other.toClosed()],
-            a = _ref13[0],
-            b = _ref13[1];
+        var _ref25 = [this.toClosed(), other.toClosed()],
+            a = _ref25[0],
+            b = _ref25[1];
         return ThreeValuedLogic.and(cmp.equals(a.low, b.low), cmp.equals(a.high, b.high));
       } else {
         return false;
@@ -2770,7 +2756,7 @@ var Interval = /*#__PURE__*/function () {
         var lowValue = closed.low.value;
         var highValue = closed.high.value;
         var diff = Math.abs(highValue - lowValue);
-        Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
+        diff = Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
         return new Quantity(diff, closed.low.unit);
       } else {
         // TODO: Fix precision to 8 decimals in other places that return numbers
@@ -2842,36 +2828,28 @@ var Interval = /*#__PURE__*/function () {
   }, {
     key: "toClosed",
     value: function toClosed() {
-      var _this4 = this;
-
       var point = this.low != null ? this.low : this.high;
 
       if (typeof point === 'number' || point != null && (point.isDateTime || point.isQuantity || point.isDate)) {
-        var low = function () {
-          switch (true) {
-            case _this4.lowClosed && _this4.low == null:
-              return minValueForInstance(point);
+        var low;
 
-            case !_this4.lowClosed && _this4.low != null:
-              return successor(_this4.low);
+        if (this.lowClosed && this.low == null) {
+          low = minValueForInstance(point);
+        } else if (!this.lowClosed && this.low != null) {
+          low = successor(this.low);
+        } else {
+          low = this.low;
+        }
 
-            default:
-              return _this4.low;
-          }
-        }();
+        var high;
 
-        var high = function () {
-          switch (true) {
-            case _this4.highClosed && _this4.high == null:
-              return maxValueForInstance(point);
-
-            case !_this4.highClosed && _this4.high != null:
-              return predecessor(_this4.high);
-
-            default:
-              return _this4.high;
-          }
-        }();
+        if (this.highClosed && this.high == null) {
+          high = maxValueForInstance(point);
+        } else if (!this.highClosed && this.high != null) {
+          high = predecessor(this.high);
+        } else {
+          high = this.high;
+        }
 
         if (low == null) {
           low = new Uncertainty(minValueForInstance(point), high);
@@ -3504,14 +3482,12 @@ function compare_units(unit_a, unit_b) {
     var c = ucum.convert(1, ucum_unit(unit_a), ucum_unit(unit_b));
 
     if (c > 1) {
-      return 1;
-    } // unit_a is bigger (less precise)
-
+      return 1; // unit_a is bigger (less precise)
+    }
 
     if (c < 1) {
-      return -1;
-    } // unit_a is smaller
-
+      return -1; // unit_a is smaller
+    }
 
     return 0; //units are the same
   } catch (e) {
