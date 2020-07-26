@@ -45,26 +45,22 @@ class Interval {
     if (item != null && item.isInterval) {
       throw new Error('Argument to contains must be a point');
     }
-    const lowFn = (() => {
-      switch (true) {
-        case this.lowClosed && this.low == null:
-          return () => true;
-        case this.lowClosed:
-          return cmp.lessThanOrEquals;
-        default:
-          return cmp.lessThan;
-      }
-    })();
-    const highFn = (() => {
-      switch (true) {
-        case this.highClosed && this.high == null:
-          return () => true;
-        case this.highClosed:
-          return cmp.greaterThanOrEquals;
-        default:
-          return cmp.greaterThan;
-      }
-    })();
+    let lowFn;
+    if (this.lowClosed && this.low == null) {
+      lowFn = () => true;
+    } else if (this.lowClosed) {
+      lowFn = cmp.lessThanOrEquals;
+    } else {
+      lowFn = cmp.lessThan;
+    }
+    let highFn;
+    if (this.highClosed && this.high == null) {
+      highFn = () => true;
+    } else if (this.highClosed) {
+      highFn = cmp.greaterThanOrEquals;
+    } else {
+      highFn = cmp.greaterThan;
+    }
     return ThreeValuedLogic.and(
       lowFn(this.low, item, precision),
       highFn(this.high, item, precision)
@@ -143,36 +139,32 @@ class Interval {
     // Note that interval union is only defined if the arguments overlap or meet.
     if (this.overlaps(other) || this.meets(other)) {
       const [a, b] = [this.toClosed(), other.toClosed()];
-      const [l, lc] = (() => {
-        switch (true) {
-          case cmp.lessThanOrEquals(a.low, b.low):
-            return [this.low, this.lowClosed];
-          case cmp.greaterThanOrEquals(a.low, b.low):
-            return [other.low, other.lowClosed];
-          case areNumeric(a.low, b.low):
-            return [lowestNumericUncertainty(a.low, b.low), true];
-          // TODO: Do we need to support quantities here?
-          case areDateTimes(a.low, b.low) && a.low.isMorePrecise(b.low):
-            return [other.low, other.lowClosed];
-          default:
-            return [this.low, this.lowClosed];
-        }
-      })();
-      const [h, hc] = (() => {
-        switch (true) {
-          case cmp.greaterThanOrEquals(a.high, b.high):
-            return [this.high, this.highClosed];
-          case cmp.lessThanOrEquals(a.high, b.high):
-            return [other.high, other.highClosed];
-          case areNumeric(a.high, b.high):
-            return [highestNumericUncertainty(a.high, b.high), true];
-          // TODO: Do we need to support quantities here?
-          case areDateTimes(a.high, b.high) && a.high.isMorePrecise(b.high):
-            return [other.high, other.highClosed];
-          default:
-            return [this.high, this.highClosed];
-        }
-      })();
+      let l, lc;
+      if (cmp.lessThanOrEquals(a.low, b.low)) {
+        [l, lc] = [this.low, this.lowClosed];
+      } else if (cmp.greaterThanOrEquals(a.low, b.low)) {
+        [l, lc] = [other.low, other.lowClosed];
+      } else if (areNumeric(a.low, b.low)) {
+        [l, lc] = [lowestNumericUncertainty(a.low, b.low), true];
+        // TODO: Do we need to support quantities here?
+      } else if (areDateTimes(a.low, b.low) && a.low.isMorePrecise(b.low)) {
+        [l, lc] = [other.low, other.lowClosed];
+      } else {
+        [l, lc] = [this.low, this.lowClosed];
+      }
+      let h, hc;
+      if (cmp.greaterThanOrEquals(a.high, b.high)) {
+        [h, hc] = [this.high, this.highClosed];
+      } else if (cmp.lessThanOrEquals(a.high, b.high)) {
+        [h, hc] = [other.high, other.highClosed];
+      } else if (areNumeric(a.high, b.high)) {
+        [h, hc] = [highestNumericUncertainty(a.high, b.high), true];
+        // TODO: Do we need to support quantities here?
+      } else if (areDateTimes(a.high, b.high) && a.high.isMorePrecise(b.high)) {
+        [h, hc] = [other.high, other.highClosed];
+      } else {
+        [h, hc] = [this.high, this.highClosed];
+      }
       return new Interval(l, h, lc, hc);
     } else {
       return null;
@@ -186,36 +178,32 @@ class Interval {
     // Note that interval union is only defined if the arguments overlap.
     if (this.overlaps(other)) {
       const [a, b] = [this.toClosed(), other.toClosed()];
-      const [l, lc] = (() => {
-        switch (true) {
-          case cmp.greaterThanOrEquals(a.low, b.low):
-            return [this.low, this.lowClosed];
-          case cmp.lessThanOrEquals(a.low, b.low):
-            return [other.low, other.lowClosed];
-          case areNumeric(a.low, b.low):
-            return [highestNumericUncertainty(a.low, b.low), true];
-          // TODO: Do we need to support quantities here?
-          case areDateTimes(a.low, b.low) && b.low.isMorePrecise(a.low):
-            return [other.low, other.lowClosed];
-          default:
-            return [this.low, this.lowClosed];
-        }
-      })();
-      const [h, hc] = (() => {
-        switch (true) {
-          case cmp.lessThanOrEquals(a.high, b.high):
-            return [this.high, this.highClosed];
-          case cmp.greaterThanOrEquals(a.high, b.high):
-            return [other.high, other.highClosed];
-          case areNumeric(a.high, b.high):
-            return [lowestNumericUncertainty(a.high, b.high), true];
-          // TODO: Do we need to support quantities here?
-          case areDateTimes(a.high, b.high) && b.high.isMorePrecise(a.high):
-            return [other.high, other.highClosed];
-          default:
-            return [this.high, this.highClosed];
-        }
-      })();
+      let l, lc;
+      if (cmp.greaterThanOrEquals(a.low, b.low)) {
+        [l, lc] = [this.low, this.lowClosed];
+      } else if (cmp.lessThanOrEquals(a.low, b.low)) {
+        [l, lc] = [other.low, other.lowClosed];
+      } else if (areNumeric(a.low, b.low)) {
+        [l, lc] = [highestNumericUncertainty(a.low, b.low), true];
+        // TODO: Do we need to support quantities here?
+      } else if (areDateTimes(a.low, b.low) && b.low.isMorePrecise(a.low)) {
+        [l, lc] = [other.low, other.lowClosed];
+      } else {
+        [l, lc] = [this.low, this.lowClosed];
+      }
+      let h, hc;
+      if (cmp.lessThanOrEquals(a.high, b.high)) {
+        [h, hc] = [this.high, this.highClosed];
+      } else if (cmp.greaterThanOrEquals(a.high, b.high)) {
+        [h, hc] = [other.high, other.highClosed];
+      } else if (areNumeric(a.high, b.high)) {
+        [h, hc] = [lowestNumericUncertainty(a.high, b.high), true];
+        // TODO: Do we need to support quantities here?
+      } else if (areDateTimes(a.high, b.high) && b.high.isMorePrecise(a.high)) {
+        [h, hc] = [other.high, other.highClosed];
+      } else {
+        [h, hc] = [this.high, this.highClosed];
+      }
       return new Interval(l, h, lc, hc);
     } else {
       return null;
@@ -310,10 +298,11 @@ class Interval {
       return other.lowClosed && other.low == null && other.highClosed && other.high == null;
     }
 
-    // For the special case where Interval[...] same as Interval[null,null] should return false
-    // This accounts for the inverse of the if statement above: where the second Interval is [null,null] and not the first Interval
-    // The reason why this isn't caught below is due to how start() and end() work
-    // There is no way to tell the datatype for MIN and MAX if both boundaries are null
+    // For the special case where Interval[...] same as Interval[null,null] should return false.
+    // This accounts for the inverse of the if statement above: where the second Interval is
+    // [null,null] and not the first Interval.
+    // The reason why this isn't caught below is due to how start() and end() work.
+    // There is no way to tell the datatype for MIN and MAX if both boundaries are null.
     if (other.lowClosed && other.low == null && other.highClosed && other.high == null) {
       return false;
     }
@@ -475,8 +464,8 @@ class Interval {
       }
       const lowValue = closed.low.value;
       const highValue = closed.high.value;
-      const diff = Math.abs(highValue - lowValue);
-      Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
+      let diff = Math.abs(highValue - lowValue);
+      diff = Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
       return new Quantity(diff, closed.low.unit);
     } else {
       // TODO: Fix precision to 8 decimals in other places that return numbers
@@ -550,26 +539,22 @@ class Interval {
       typeof point === 'number' ||
       (point != null && (point.isDateTime || point.isQuantity || point.isDate))
     ) {
-      let low = (() => {
-        switch (true) {
-          case this.lowClosed && this.low == null:
-            return minValueForInstance(point);
-          case !this.lowClosed && this.low != null:
-            return successor(this.low);
-          default:
-            return this.low;
-        }
-      })();
-      let high = (() => {
-        switch (true) {
-          case this.highClosed && this.high == null:
-            return maxValueForInstance(point);
-          case !this.highClosed && this.high != null:
-            return predecessor(this.high);
-          default:
-            return this.high;
-        }
-      })();
+      let low;
+      if (this.lowClosed && this.low == null) {
+        low = minValueForInstance(point);
+      } else if (!this.lowClosed && this.low != null) {
+        low = successor(this.low);
+      } else {
+        low = this.low;
+      }
+      let high;
+      if (this.highClosed && this.high == null) {
+        high = maxValueForInstance(point);
+      } else if (!this.highClosed && this.high != null) {
+        high = predecessor(this.high);
+      } else {
+        high = this.high;
+      }
       if (low == null) {
         low = new Uncertainty(minValueForInstance(point), high);
       }

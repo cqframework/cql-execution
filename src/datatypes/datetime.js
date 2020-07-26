@@ -1179,7 +1179,8 @@ DateTime.prototype.add = Date.prototype.add = function(offset, field) {
   if (offsetIsMorePrecise) {
     if (this.year == null) {
       result.year = new jsDate().getFullYear();
-    } //in case there is no year, proceed as if in this year, year will be nullified later
+    }
+    //in case there is no year, proceed as if in this year, year will be nullified later
     const fieldFloorOrCiel = offset >= 0 ? this.getFieldFloor : this.getFieldCieling;
     for (let f of this.constructor.FIELDS) {
       // this relies on FIELDS being sorted least to most precise
@@ -1217,47 +1218,41 @@ DateTime.prototype.add = Date.prototype.add = function(offset, field) {
 };
 
 DateTime.prototype.getFieldFloor = Date.prototype.getFieldFloor = function(field) {
-  if (field === 'month') {
-    return 1;
+  switch (field) {
+    case 'month':
+      return 1;
+    case 'day':
+      return 1;
+    case 'hour':
+      return 0;
+    case 'minute':
+      return 0;
+    case 'second':
+      return 0;
+    case 'millisecond':
+      return 0;
+    default:
+      throw new Error('Tried to floor a field that has no floor value: ' + field);
   }
-  if (field === 'day') {
-    return 1;
-  }
-  if (field === 'hour') {
-    return 0;
-  }
-  if (field === 'minute') {
-    return 0;
-  }
-  if (field === 'second') {
-    return 0;
-  }
-  if (field === 'millisecond') {
-    return 0;
-  }
-  throw new Error('Tried to floor a field that has no floor value: ' + field);
 };
 
 DateTime.prototype.getFieldCieling = Date.prototype.getFieldCieling = function(field) {
-  if (field === 'month') {
-    return 12;
+  switch (field) {
+    case 'month':
+      return 12;
+    case 'day':
+      return daysInMonth(this.year, this.month);
+    case 'hour':
+      return 23;
+    case 'minute':
+      return 59;
+    case 'second':
+      return 59;
+    case 'millisecond':
+      return 999;
+    default:
+      throw new Error('Tried to clieling a field that has no cieling value: ' + field);
   }
-  if (field === 'day') {
-    return daysInMonth(this.year, this.month);
-  }
-  if (field === 'hour') {
-    return 23;
-  }
-  if (field === 'minute') {
-    return 59;
-  }
-  if (field === 'second') {
-    return 59;
-  }
-  if (field === 'millisecond') {
-    return 999;
-  }
-  throw new Error('Tried to clieling a field that has no cieling value: ' + field);
 };
 
 function compareWithDefaultResult(a, b, defaultResult) {
@@ -1415,9 +1410,8 @@ function cqlFormatStringToMomentFormatString(string) {
   return (momentString = momentString.replace(/f/g, 'S'));
 }
 
-// Redefine MIN/MAX here because math.js requires this file, and when we make this file require
-// math.js, it errors due to the circular dependency...
-const MIN_DATETIME_VALUE = DateTime.parse('0001-01-01T00:00:00.000');
-const MAX_DATETIME_VALUE = DateTime.parse('9999-12-31T23:59:59.999');
-
 module.exports = { DateTime, Date };
+
+// Require MIN/MAX here because math.js requires this file, and when we make this file require
+// math.js before it exports DateTime and Date, it errors due to the circular dependency...
+const { MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } = require('../util/math');
