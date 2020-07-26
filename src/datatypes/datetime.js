@@ -1,43 +1,17 @@
-/* eslint-disable
-    no-useless-escape,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const { Uncertainty } = require('./uncertainty');
-let { jsDate,
+const {
+  jsDate,
   normalizeMillisecondsField,
   normalizeMillisecondsFieldInString,
-  getTimezoneSeparatorFromString } = require('../util/util');
+  getTimezoneSeparatorFromString
+} = require('../util/util');
 const moment = require('moment');
 
 class DateTime {
-  static initClass() {
-    // Define a simple getter to allow type-checking of this class without instanceof
-    // and in a way that survives minification (as opposed to checking constructor.name)
-    Object.defineProperties(this.prototype, {
-      isDateTime: {
-        get() { return true; }
-      }
-    }
-    );
-
-    this.Unit = { YEAR: 'year', MONTH: 'month', WEEK: 'week', DAY: 'day', HOUR: 'hour', MINUTE: 'minute', SECOND: 'second', MILLISECOND: 'millisecond' };
-    this.FIELDS = [this.Unit.YEAR, this.Unit.MONTH, this.Unit.DAY, this.Unit.HOUR, this.Unit.MINUTE, this.Unit.SECOND, this.Unit.MILLISECOND];
-  }
-
   static parse(string) {
     if (string === null) { return null; }
 
-    const matches = /(\d{4})(-(\d{2}))?(-(\d{2}))?(T((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(\:?(\d{2}))?))?)?/.exec(string);
+    const matches = /(\d{4})(-(\d{2}))?(-(\d{2}))?(T((\d{2})(:(\d{2})(:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(:?(\d{2}))?))?)?/.exec(string);
 
     if (matches == null) { return null; }
     const years= matches[1];
@@ -52,24 +26,18 @@ class DateTime {
 
     if (!isValidDateTimeStringFormat(string)) { return null; }
 
-    let args = [years, months, days, hours, minutes, seconds, milliseconds];
-    // convert them all to integers
-    args = ((() => {
-      const result = [];
-      for (let arg of args) {         if (arg != null) { result.push(parseInt(arg,10)); } else {
-        result.push(undefined);
-      }
-      }
-      return result;
-    })());
+    // convert the args to integers
+    const args = [years, months, days, hours, minutes, seconds, milliseconds].map(arg => {
+      return arg != null ? parseInt(arg) : arg;
+    });
     // convert timezone offset to decimal and add it to arguments
     if (matches[18] != null) {
-      const num = parseInt(matches[18],10) + ((matches[20] != null) ? parseInt(matches[20],10) / 60 : 0);
+      const num = parseInt(matches[18]) + ((matches[20] != null) ? parseInt(matches[20]) / 60 : 0);
       args.push(matches[17] === '+' ? num : num * -1);
     } else if (matches[15] === 'Z') {
       args.push(0);
     }
-    return new DateTime(...Array.from(args || []));
+    return new DateTime(...args);
   }
 
   static fromJSDate(date, timezoneOffset) { //This is from a JS Date, not a CQL Date
@@ -109,10 +77,12 @@ class DateTime {
     this.second = second;
     this.millisecond = millisecond;
     this.timezoneOffset = timezoneOffset;
-    if (typeof(this.timezoneOffset) === 'undefined') {
+    if (this.timezoneOffset === undefined) {
       this.timezoneOffset = ((new jsDate()).getTimezoneOffset() / 60) * -1;
     }
   }
+
+  get isDateTime() { return true; }
 
   copy() {
     return new DateTime(this.year, this.month, this.day, this.hour, this.minute, this.second, this.millisecond, this.timezoneOffset);
@@ -161,14 +131,14 @@ class DateTime {
 
   differenceBetween(other, unitField) {
     other = this._implicitlyConvert(other);
-    if (!(other != null ? other.isDateTime : undefined)) { return null; }
+    if (other == null || !other.isDateTime) { return null; }
 
     // According to CQL spec, to calculate difference, you can just floor lesser precisions and do a duration
     // Make copies since we'll be flooring values and mucking with timezones
     let a = this.copy();
     let b = other.copy();
     // Use moment.js for day or finer granularity due to the daylight savings time fall back/spring forward
-    if ((unitField === DateTime.Unit.MONTH) || (unitField === DateTime.Unit.YEAR) || (unitField === DateTime.Unit.WEEK) || (unitField === DateTime.Unit.DAY)) {
+    if (unitField === DateTime.Unit.MONTH || unitField === DateTime.Unit.YEAR || unitField === DateTime.Unit.WEEK || unitField === DateTime.Unit.DAY) {
       // The dates need to agree on where the boundaries are, so we must normalize to the same time zone
       if (a.timezoneOffset !== b.timezoneOffset) {
         b = b.convertToTimezoneOffset(a.timezoneOffset);
@@ -182,8 +152,8 @@ class DateTime {
         const tzDiff = aJS.getTimezoneOffset() - bJS.getTimezoneOffset();
         if (tzDiff !== 0) {
           // Since we'll be doing duration later, account for timezone offset by adding to the time (if possible)
-          if ((b.year != null) && (b.month != null) && (b.day != null) && (b.hour != null) && (b.minute != null)) { b = b.add(tzDiff, DateTime.Unit.MINUTE);
-          } else if ((b.year != null) && (b.month != null) && (b.day != null) && (b.hour != null)) { b = b.add(tzDiff/60, DateTime.Unit.HOUR);
+          if (b.year != null && b.month != null && b.day != null && b.hour != null && b.minute != null) { b = b.add(tzDiff, DateTime.Unit.MINUTE);
+          } else if (b.year != null && b.month != null && b.day != null && b.hour != null) { b = b.add(tzDiff/60, DateTime.Unit.HOUR);
           } else { b.timezoneOffset = b.timezoneOffset + (tzDiff/60); }
         }
       }
@@ -214,7 +184,7 @@ class DateTime {
 
     // Because moment.js handles years and months differently, use the existing durationBetween for those
     // Finer granularity times can be handled by the DST-aware moment.js library.
-    if ((unitField === DateTime.Unit.YEAR) || (unitField === DateTime.Unit.MONTH)) {
+    if (unitField === DateTime.Unit.YEAR || unitField === DateTime.Unit.MONTH) {
       return a.durationBetween(b, unitField);
     } else {
       const aUncertainty = a.toUncertainty();
@@ -231,7 +201,7 @@ class DateTime {
   _floorWeek(d) {
     // To "floor" a week, we need to go back to the last Sunday (that's when getDay() == 0 in javascript)
     // But if we don't know the day, then just return it as-is
-    if ((d.day == null)) { return d; }
+    if (d.day == null) { return d; }
     const floored = new jsDate(d.year, d.month-1, d.day);
     while (floored.getDay() > 0) { floored.setDate(floored.getDate() - 1); }
     return new DateTime(floored.getFullYear(), floored.getMonth()+1, floored.getDate(), 12, 0, 0, 0, d.timezoneOffset);
@@ -239,7 +209,7 @@ class DateTime {
 
   durationBetween(other, unitField) {
     other = this._implicitlyConvert(other);
-    if (!(other != null ? other.isDateTime : undefined)) { return null; }
+    if (other == null || !other.isDateTime) { return null; }
     const a = this.toUncertainty();
     const b = other.toUncertainty();
     return new Uncertainty(this._durationBetweenDates(a.high, b.low, unitField), this._durationBetweenDates(a.low, b.high, unitField));
@@ -266,7 +236,7 @@ class DateTime {
     } else if (unitField === DateTime.Unit.WEEK) {
       return truncFunc(msDiff / (7 * 24 * 60 * 60 * 1000));
     // Months and years are trickier since months are variable length
-    } else if ((unitField === DateTime.Unit.MONTH) || (unitField === DateTime.Unit.YEAR)) {
+    } else if (unitField === DateTime.Unit.MONTH || unitField === DateTime.Unit.YEAR) {
       // First get the rough months, essentially counting month "boundaries"
       let months = ((b.getFullYear() - a.getFullYear()) * 12) + (b.getMonth() - a.getMonth());
       // Now we need to look at the smaller units to see how they compare.  Since we only care about comparing
@@ -280,9 +250,9 @@ class DateTime {
         aInMonth.setMinutes(aInMonth.getMinutes() + (aInMonthOriginalOffset - aInMonth.getTimezoneOffset()));
       }
       // When a is before b, then if a's smaller units are greater than b's, a whole month hasn't elapsed, so adjust
-      if ((msDiff > 0) && (aInMonth > b)) { months = months - 1;
+      if (msDiff > 0 && aInMonth > b) { months = months - 1;
       // When b is before a, then if a's smaller units are less than b's, a whole month hasn't elaspsed backwards, so adjust
-      } else if ((msDiff < 0) && (aInMonth < b)) { months = months + 1; }
+      } else if (msDiff < 0 && aInMonth < b) { months = months + 1; }
       // If this is months, just return them, but if it's years, we need to convert
       if (unitField === DateTime.Unit.MONTH) {
         return months;
@@ -328,8 +298,8 @@ class DateTime {
 
   toJSDate(ignoreTimezone = false) {
     let date;
-    const [y, mo, d, h, mi, s, ms] = Array.from([ this.year, ((this.month != null) ? this.month-1 : 0), this.day != null ? this.day : 1, this.hour != null ? this.hour : 0, this.minute != null ? this.minute : 0, this.second != null ? this.second : 0, this.millisecond != null ? this.millisecond : 0 ]);
-    if ((this.timezoneOffset != null) && !ignoreTimezone) {
+    const [y, mo, d, h, mi, s, ms] = [ this.year, ((this.month != null) ? this.month-1 : 0), this.day != null ? this.day : 1, this.hour != null ? this.hour : 0, this.minute != null ? this.minute : 0, this.second != null ? this.second : 0, this.millisecond != null ? this.millisecond : 0 ];
+    if (this.timezoneOffset != null && !ignoreTimezone) {
       date = new jsDate(jsDate.UTC(y, mo, d, h, mi, s, ms) - (this.timezoneOffset * 60 * 60 * 1000));
       // TODO: This fixes any case that would not cross the year boundary due to a timezone.
       // Mainly used to solve the issue with the MIN_DATETIME_VALUE being converted from
@@ -398,7 +368,7 @@ class DateTime {
       }
     }
 
-    if ((str.indexOf('T') !== -1) && (this.timezoneOffset != null)) {
+    if (str.indexOf('T') !== -1 && this.timezoneOffset != null) {
       str += this.timezoneOffset < 0 ? '-' : '+';
       const offsetHours = Math.floor(Math.abs(this.timezoneOffset));
       str += this._pad(offsetHours);
@@ -427,7 +397,7 @@ class DateTime {
   }
 
   _implicitlyConvert(other) {
-    if (other != null ? other.isDate : undefined) { return other.getDateTime(); }
+    if (other != null && other.isDate) { return other.getDateTime(); }
     return other;
   }
 
@@ -441,25 +411,11 @@ class DateTime {
     return reduced;
   }
 }
-DateTime.initClass();
 
-
+DateTime.Unit = { YEAR: 'year', MONTH: 'month', WEEK: 'week', DAY: 'day', HOUR: 'hour', MINUTE: 'minute', SECOND: 'second', MILLISECOND: 'millisecond' };
+DateTime.FIELDS = [DateTime.Unit.YEAR, DateTime.Unit.MONTH, DateTime.Unit.DAY, DateTime.Unit.HOUR, DateTime.Unit.MINUTE, DateTime.Unit.SECOND, DateTime.Unit.MILLISECOND];
 
 class Date {
-  static initClass() {
-    // Define a simple getter to allow type-checking of this class without instanceof
-    // and in a way that survives minification (as opposed to checking constructor.name)
-    Object.defineProperties(this.prototype, {
-      isDate: {
-        get() { return true; }
-      }
-    }
-    );
-
-    this.Unit = { YEAR: 'year', MONTH: 'month', WEEK: 'week', DAY: 'day' };
-    this.FIELDS = [this.Unit.YEAR, this.Unit.MONTH, this.Unit.DAY];
-  }
-
   static parse(string) {
     if (string === null) { return null; }
 
@@ -472,17 +428,10 @@ class Date {
 
     if (!isValidDateStringFormat(string)) { return null; }
 
-    let args = [years, months, days];
-    // convert them all to integers
-    args = ((() => {
-      const result = [];
-      for (let arg of args) {         if (arg != null) { result.push(parseInt(arg,10)); } else {
-        result.push(undefined);
-      }
-      }
-      return result;
-    })());
-    return new Date(...Array.from(args || []));
+    // convert args to integers
+    const args = [years, months, days].map(arg => arg != null ? parseInt(arg) : arg);
+
+    return new Date(...args);
   }
 
   constructor(year=null, month=null, day=null) {
@@ -490,6 +439,8 @@ class Date {
     this.month = month;
     this.day = day;
   }
+
+  get isDate() { return true; }
 
   copy() {
     return new Date(this.year, this.month, this.day);
@@ -516,8 +467,8 @@ class Date {
   }
 
   differenceBetween(other, unitField) {
-    if (other != null ? other.isDateTime : undefined) { return this.getDateTime().differenceBetween(other, unitField); }
-    if (!(other != null ? other.isDate : undefined)) { return null; }
+    if (other != null && other.isDateTime) { return this.getDateTime().differenceBetween(other, unitField); }
+    if (other == null || !other.isDate) { return null; }
 
     let a = this;
     let b = other;
@@ -539,15 +490,15 @@ class Date {
   _floorWeek(d) {
     // To "floor" a week, we need to go back to the last Sunday (that's when getDay() == 0 in javascript)
     // But if we don't know the day, then just return it as-is
-    if ((d.day == null)) { return d; }
+    if (d.day == null) { return d; }
     const floored = new jsDate(d.year, d.month-1, d.day);
     while (floored.getDay() > 0) { floored.setDate(floored.getDate() - 1); }
     return new Date(floored.getFullYear(), floored.getMonth()+1, floored.getDate());
   }
 
   durationBetween(other, unitField) {
-    if (other != null ? other.isDateTime : undefined) { return this.getDateTime().durationBetween(other, unitField); }
-    if (!(other != null ? other.isDate : undefined)) { return null; }
+    if (other != null && other.isDateTime) { return this.getDateTime().durationBetween(other, unitField); }
+    if (other == null || !other.isDate) { return null; }
 
     const a = this.toUncertainty();
     const b = other.toUncertainty();
@@ -592,9 +543,9 @@ class Date {
         aInMonth.setMinutes(aInMonth.getMinutes() + (aInMonthOriginalOffset - aInMonth.getTimezoneOffset()));
       }
       // When a is before b, then if a's smaller units are greater than b's, a whole month hasn't elapsed, so adjust
-      if ((msDiff > 0) && (aInMonth > b)) { months = months - 1;
+      if (msDiff > 0 && aInMonth > b) { months = months - 1;
       // When b is before a, then if a's smaller units are less than b's, a whole month hasn't elaspsed backwards, so adjust
-      } else if ((msDiff < 0) && (aInMonth < b)) { months = months + 1; }
+      } else if (msDiff < 0 && aInMonth < b) { months = months + 1; }
       // If this is months, just return them, but if it's years, we need to convert
       if (unitField === Date.Unit.MONTH) {
         return months;
@@ -627,7 +578,7 @@ class Date {
   }
 
   toJSDate() {
-    const [y, mo, d] = Array.from([ this.year, ((this.month != null) ? this.month-1 : 0), this.day != null ? this.day : 1 ]);
+    const [y, mo, d] = [ this.year, ((this.month != null) ? this.month-1 : 0), this.day != null ? this.day : 1 ];
     return new jsDate(y, mo, d);
   }
 
@@ -661,7 +612,7 @@ class Date {
     // from the spec: the result will be a DateTime with the time components set to zero,
     // except for the timezone offset, which will be set to the timezone offset of the evaluation
     // request timestamp. (this last part is acheived by just not passing in timezone offset)
-    if ((this.year != null) && (this.month != null) && (this.day != null)) {
+    if (this.year != null && this.month != null && this.day != null) {
       return new DateTime(this.year, this.month, this.day, 0, 0, 0, 0);
     // from spec: no component may be specified at a precision below an unspecified precision.
     // For example, hour may be null, but if it is, minute, second, and millisecond must all be null as well.
@@ -680,60 +631,61 @@ class Date {
     return reduced;
   }
 }
-Date.initClass();
+
+Date.Unit = { YEAR: 'year', MONTH: 'month', WEEK: 'week', DAY: 'day' };
+Date.FIELDS = [Date.Unit.YEAR, Date.Unit.MONTH, Date.Unit.DAY];
 
 // Shared Funtions For Date and DateTime
-DateTime.prototype.isPrecise = (Date.prototype.isPrecise = function() {
+DateTime.prototype.isPrecise = Date.prototype.isPrecise = function() {
   return this.constructor.FIELDS.every(field => (this[field] != null));
-});
+};
 
-DateTime.prototype.isImprecise = (Date.prototype.isImprecise = function() {
+DateTime.prototype.isImprecise = Date.prototype.isImprecise = function() {
   return !this.isPrecise();
-});
+};
 
 // This function can take another Date-ish object, or a precision string (e.g. 'month')
-DateTime.prototype.isMorePrecise = (Date.prototype.isMorePrecise = function(other) {
-  if ((typeof other === 'string') && this.constructor.FIELDS.includes(other)) {
-    if ((this[other] == null)) { return false; }
+DateTime.prototype.isMorePrecise = Date.prototype.isMorePrecise = function(other) {
+  if (typeof other === 'string' && this.constructor.FIELDS.includes(other)) {
+    if (this[other] == null) { return false; }
 
   } else {
     for (let field of this.constructor.FIELDS) {
-      if ((other[field] != null) && (this[field] == null)) { return false; }
+      if (other[field] != null && this[field] == null) { return false; }
     }
   }
 
   return !this.isSamePrecision(other);
-});
+};
 
 // This function can take another Date-ish object, or a precision string (e.g. 'month')
-DateTime.prototype.isLessPrecise = (Date.prototype.isLessPrecise = function(other) {
+DateTime.prototype.isLessPrecise = Date.prototype.isLessPrecise = function(other) {
   return !this.isSamePrecision(other) && !this.isMorePrecise(other);
-});
+};
 
 // This function can take another Date-ish object, or a precision string (e.g. 'month')
-DateTime.prototype.isSamePrecision = (Date.prototype.isSamePrecision = function(other) {
-  if ((typeof other === 'string') && this.constructor.FIELDS.includes(other)) {
+DateTime.prototype.isSamePrecision = Date.prototype.isSamePrecision = function(other) {
+  if (typeof other === 'string' && this.constructor.FIELDS.includes(other)) {
     return other === this.getPrecision();
   }
 
   for (let field of this.constructor.FIELDS) {
-    if ((this[field] != null) && (other[field] == null)) { return false; }
-    if ((this[field] == null) && (other[field] != null)) { return false; }
+    if (this[field] != null && other[field] == null) { return false; }
+    if (this[field] == null && other[field] != null) { return false; }
   }
   return true;
-});
+};
 
-DateTime.prototype.equals = (Date.prototype.equals = function(other) {
+DateTime.prototype.equals = Date.prototype.equals = function(other) {
   return compareWithDefaultResult(this, other, null);
-});
+};
 
-DateTime.prototype.equivalent = (Date.prototype.equivalent = function(other) {
+DateTime.prototype.equivalent = Date.prototype.equivalent = function(other) {
   return compareWithDefaultResult(this, other, false);
-});
+};
 
-
-DateTime.prototype.sameAs = (Date.prototype.sameAs = function(other, precision) {
-  if (!((other.isDate) || (other.isDateTime))) {
+DateTime.prototype.sameAs = Date.prototype.sameAs = function(other, precision) {
+  if (!(other.isDate || other.isDateTime)) {
     return null;
   } else if (this.isDate && other.isDateTime) {
     return this.getDateTime().sameAs(other, precision);
@@ -741,7 +693,7 @@ DateTime.prototype.sameAs = (Date.prototype.sameAs = function(other, precision) 
     other = other.getDateTime();
   }
 
-  if ((precision != null) && (this.constructor.FIELDS.indexOf(precision) < 0)) {
+  if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
     throw new Error(`Invalid precision: ${precision}`);
   }
 
@@ -752,15 +704,15 @@ DateTime.prototype.sameAs = (Date.prototype.sameAs = function(other, precision) 
 
   for (let field of this.constructor.FIELDS) {
     // if both have this precision defined
-    if ((this[field] != null) && (other[field] != null)) {
+    if (this[field] != null && other[field] != null) {
       // if they are different then return with false
       if (this[field] !== other[field]) {
         return false;
       }
 
     // if both dont have this precision, return true of precision is not defined
-    } else if ((this[field] == null) && (other[field] == null)) {
-      if ((precision == null)) {
+    } else if (this[field] == null && other[field] == null) {
+      if (precision == null) {
         return true;
       } else { // we havent met precision yet
         return null;
@@ -772,15 +724,15 @@ DateTime.prototype.sameAs = (Date.prototype.sameAs = function(other, precision) 
     }
 
     // if precision is defined and we have reached expected precision, we can leave the loop
-    if ((precision != null) && (precision === field)) { break; }
+    if (precision != null && precision === field) { break; }
   }
 
   // if we made it here, then all fields matched.
   return true;
-});
+};
 
-DateTime.prototype.sameOrBefore = (Date.prototype.sameOrBefore = function(other, precision) {
-  if (!((other.isDate) || (other.isDateTime))) {
+DateTime.prototype.sameOrBefore = Date.prototype.sameOrBefore = function(other, precision) {
+  if (!(other.isDate || other.isDateTime)) {
     return null;
   } else if (this.isDate && other.isDateTime) {
     return this.getDateTime().sameOrBefore(other, precision);
@@ -788,7 +740,7 @@ DateTime.prototype.sameOrBefore = (Date.prototype.sameOrBefore = function(other,
     other = other.getDateTime();
   }
 
-  if ((precision != null) && (this.constructor.FIELDS.indexOf(precision) < 0)) {
+  if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
     throw new Error(`Invalid precision: ${precision}`);
   }
 
@@ -799,7 +751,7 @@ DateTime.prototype.sameOrBefore = (Date.prototype.sameOrBefore = function(other,
 
   for (let field of this.constructor.FIELDS) {
     // if both have this precision defined
-    if ((this[field] != null) && (other[field] != null)) {
+    if (this[field] != null && other[field] != null) {
       // if this value is less than the other return with true. this is before other
       if (this[field] < other[field]) {
         return true;
@@ -810,8 +762,8 @@ DateTime.prototype.sameOrBefore = (Date.prototype.sameOrBefore = function(other,
       // execution continues if the values are the same
 
     // if both dont have this precision, return true if precision is not defined
-    } else if ((this[field] == null) && (other[field] == null)) {
-      if ((precision == null)) {
+    } else if (this[field] == null && other[field] == null) {
+      if (precision == null) {
         return true;
       } else { // we havent met precision yet
         return null;
@@ -823,15 +775,15 @@ DateTime.prototype.sameOrBefore = (Date.prototype.sameOrBefore = function(other,
     }
 
     // if precision is defined and we have reached expected precision, we can leave the loop
-    if ((precision != null) && (precision === field)) { break; }
+    if (precision != null && precision === field) { break; }
   }
 
   // if we made it here, then all fields matched and they are same
   return true;
-});
+};
 
-DateTime.prototype.sameOrAfter = (Date.prototype.sameOrAfter = function(other, precision) {
-  if (!((other.isDate) || (other.isDateTime))) {
+DateTime.prototype.sameOrAfter = Date.prototype.sameOrAfter = function(other, precision) {
+  if (!(other.isDate || other.isDateTime)) {
     return null;
   } else if (this.isDate && other.isDateTime) {
     return this.getDateTime().sameOrAfter(other, precision);
@@ -839,7 +791,7 @@ DateTime.prototype.sameOrAfter = (Date.prototype.sameOrAfter = function(other, p
     other = other.getDateTime();
   }
 
-  if ((precision != null) && (this.constructor.FIELDS.indexOf(precision) < 0)) {
+  if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
     throw new Error(`Invalid precision: ${precision}`);
   }
 
@@ -850,7 +802,7 @@ DateTime.prototype.sameOrAfter = (Date.prototype.sameOrAfter = function(other, p
 
   for (let field of this.constructor.FIELDS) {
     // if both have this precision defined
-    if ((this[field] != null) && (other[field] != null)) {
+    if (this[field] != null && other[field] != null) {
       // if this value is greater than the other return with true. this is after other
       if (this[field] > other[field]) {
         return true;
@@ -861,7 +813,7 @@ DateTime.prototype.sameOrAfter = (Date.prototype.sameOrAfter = function(other, p
       // execution continues if the values are the same
 
     // if both dont have this precision, return true if precision is not defined
-    } else if ((this[field] == null) && (other[field] == null)) {
+    } else if (this[field] == null && other[field] == null) {
       if ((precision == null)) {
         return true;
       } else { // we havent met precision yet
@@ -874,15 +826,15 @@ DateTime.prototype.sameOrAfter = (Date.prototype.sameOrAfter = function(other, p
     }
 
     // if precision is defined and we have reached expected precision, we can leave the loop
-    if ((precision != null) && (precision === field)) { break; }
+    if (precision != null && precision === field) { break; }
   }
 
   // if we made it here, then all fields matched and they are same
   return true;
-});
+};
 
-DateTime.prototype.before = (Date.prototype.before = function(other, precision) {
-  if (!((other.isDate) || (other.isDateTime))) {
+DateTime.prototype.before = Date.prototype.before = function(other, precision) {
+  if (!(other.isDate || other.isDateTime)) {
     return null;
   } else if (this.isDate && other.isDateTime) {
     return this.getDateTime().before(other, precision);
@@ -890,7 +842,7 @@ DateTime.prototype.before = (Date.prototype.before = function(other, precision) 
     other = other.getDateTime();
   }
 
-  if ((precision != null) && (this.constructor.FIELDS.indexOf(precision) < 0)) {
+  if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
     throw new Error(`Invalid precision: ${precision}`);
   }
 
@@ -901,7 +853,7 @@ DateTime.prototype.before = (Date.prototype.before = function(other, precision) 
 
   for (let field of this.constructor.FIELDS) {
     // if both have this precision defined
-    if ((this[field] != null) && (other[field] != null)) {
+    if (this[field] != null && other[field] != null) {
       // if this value is less than the other return with true. this is before other
       if (this[field] < other[field]) {
         return true;
@@ -912,8 +864,8 @@ DateTime.prototype.before = (Date.prototype.before = function(other, precision) 
       // execution continues if the values are the same
 
     // if both dont have this precision, return false if precision is not defined
-    } else if ((this[field] == null) && (other[field] == null)) {
-      if ((precision == null)) {
+    } else if (this[field] == null && other[field] == null) {
+      if (precision == null) {
         return false;
       } else { // we havent met precision yet
         return null;
@@ -925,15 +877,15 @@ DateTime.prototype.before = (Date.prototype.before = function(other, precision) 
     }
 
     // if precision is defined and we have reached expected precision, we can leave the loop
-    if ((precision != null) && (precision === field)) { break; }
+    if (precision != null && precision === field) { break; }
   }
 
   // if we made it here, then all fields matched and they are same
   return false;
-});
+};
 
-DateTime.prototype.after = (Date.prototype.after = function(other, precision) {
-  if (!((other.isDate) || (other.isDateTime))) {
+DateTime.prototype.after = Date.prototype.after = function(other, precision) {
+  if (!(other.isDate || other.isDateTime)) {
     return null;
   } else if (this.isDate && other.isDateTime) {
     return this.getDateTime().after(other, precision);
@@ -941,7 +893,7 @@ DateTime.prototype.after = (Date.prototype.after = function(other, precision) {
     other = other.getDateTime();
   }
 
-  if ((precision != null) && (this.constructor.FIELDS.indexOf(precision) < 0)) {
+  if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
     throw new Error(`Invalid precision: ${precision}`);
   }
 
@@ -952,7 +904,7 @@ DateTime.prototype.after = (Date.prototype.after = function(other, precision) {
 
   for (let field of this.constructor.FIELDS) {
     // if both have this precision defined
-    if ((this[field] != null) && (other[field] != null)) {
+    if (this[field] != null && other[field] != null) {
       // if this value is greater than the other return with true. this is after other
       if (this[field] > other[field]) {
         return true;
@@ -963,8 +915,8 @@ DateTime.prototype.after = (Date.prototype.after = function(other, precision) {
       // execution continues if the values are the same
 
     // if both dont have this precision, return false if precision is not defined
-    } else if ((this[field] == null) && (other[field] == null)) {
-      if ((precision == null)) {
+    } else if (this[field] == null && other[field] == null) {
+      if (precision == null) {
         return false;
       } else { // we havent met precision yet
         return null;
@@ -976,15 +928,14 @@ DateTime.prototype.after = (Date.prototype.after = function(other, precision) {
     }
 
     // if precision is defined and we have reached expected precision, we can leave the loop
-    if ((precision != null) && (precision === field)) { break; }
+    if (precision != null && precision === field) { break; }
   }
 
   // if we made it here, then all fields matched and they are same
   return false;
-});
+};
 
 DateTime.prototype.add = (Date.prototype.add = function(offset, field) {
-  let f;
   const result = this.copy();
   if (offset === 0) { return result; }
 
@@ -1002,9 +953,9 @@ DateTime.prototype.add = (Date.prototype.add = function(offset, field) {
   // "floor" UP to the incoming field precision, then add the offset, then reduce back down to original precision.
   // For negative offsets, we use the cieling
   if (offsetIsMorePrecise) {
-    if ((this.year == null)) { result.year = new jsDate().getFullYear(); } //in case there is no year, proceed as if in this year, year will be nullified later
+    if (this.year == null) { result.year = new jsDate().getFullYear(); } //in case there is no year, proceed as if in this year, year will be nullified later
     const fieldFloorOrCiel = offset >= 0 ? this.getFieldFloor : this.getFieldCieling;
-    for (f of this.constructor.FIELDS) { // this relies on FIELDS being sorted least to most precise
+    for (let f of this.constructor.FIELDS) { // this relies on FIELDS being sorted least to most precise
       result[f] = result[f] != null ? result[f] : fieldFloorOrCiel.call(result,f);
       if (result[field] != null) { break; }
     }
@@ -1021,7 +972,7 @@ DateTime.prototype.add = (Date.prototype.add = function(offset, field) {
 
   // remove any fields we added (go back to original precision)
   if (offsetIsMorePrecise) {
-    for (f of this.constructor.FIELDS) {
+    for (let f of this.constructor.FIELDS) {
       if ((this[f] == null)) { result[f] = null; }
     }
   }
@@ -1075,7 +1026,7 @@ DateTime.prototype.getFieldCieling = (Date.prototype.getFieldCieling = function(
   throw new Error('Tried to clieling a field that has no cieling value: ' + field);
 });
 
-var compareWithDefaultResult = function(a, b, defaultResult) {
+function compareWithDefaultResult(a, b, defaultResult) {
   // return false there is a type mismatch
   if ((!a.isDate || !b.isDate) && (!a.isDateTime || !b.isDateTime)) {
     return false;
@@ -1088,7 +1039,7 @@ var compareWithDefaultResult = function(a, b, defaultResult) {
 
   for (let field of a.constructor.FIELDS) {
     // if both have this precision defined
-    if ((a[field] != null) && (b[field] != null)) {
+    if (a[field] != null && b[field] != null) {
       // For the purposes of comparison, seconds and milliseconds are combined
       // as a single precision using a decimal, with decimal equality semantics
       if (field === 'second') {
@@ -1109,7 +1060,7 @@ var compareWithDefaultResult = function(a, b, defaultResult) {
       }
 
     // if both dont have this precision, return true
-    } else if ((a[field] == null) && (b[field] == null)) {
+    } else if (a[field] == null && b[field] == null) {
       return true;
 
     // otherwise they have inconclusive precision, return defaultResult
@@ -1119,20 +1070,17 @@ var compareWithDefaultResult = function(a, b, defaultResult) {
   }
   // if we made it here, then all fields matched.
   return true;
-};
+}
 
-var daysInMonth = function(year, month) {
-  if (!((year != null) && (month != null))) {
+function daysInMonth(year, month) {
+  if (year == null || month == null) {
     throw new Error('daysInMonth requires year and month as arguments');
   }
   // Month is 1-indexed here because of the 0 day
   return new jsDate(year, month, 0).getDate();
-};
+}
 
-normalizeMillisecondsField = msString => // fix up milliseconds by padding zeros and/or truncating (5 --> 500, 50 --> 500, 54321 --> 543, etc.)
-  msString = (msString + '00').substring(0, 3);
-
-var isValidDateStringFormat = function(string) {
+function isValidDateStringFormat(string) {
   if (typeof string !== 'string') { return false; }
   const cqlFormats = ['YYYY',
     'YYYY-MM',
@@ -1141,13 +1089,13 @@ var isValidDateStringFormat = function(string) {
   const cqlFormatStringWithLength = {};
   for (let format of cqlFormats) { cqlFormatStringWithLength[format.length] = format; }
 
-  if ((cqlFormatStringWithLength[string.length] == null)) { return false; }
+  if (cqlFormatStringWithLength[string.length] == null) { return false; }
 
   const strict = true;
   return moment(string, cqlFormatStringWithLength[string.length], strict).isValid();
-};
+}
 
-var isValidDateTimeStringFormat = function(string) {
+function isValidDateTimeStringFormat(string) {
   if (typeof string !== 'string') { return false; }
   const cqlFormats = ['YYYY',
     'YYYY-MM',
@@ -1185,19 +1133,19 @@ var isValidDateTimeStringFormat = function(string) {
   const cqlFormatStringWithLength = {};
   for (let format of cqlFormats) { cqlFormatStringWithLength[format.length] = format; }
 
-  if ((cqlFormatStringWithLength[string.length] == null)) { return false; }
+  if (cqlFormatStringWithLength[string.length] == null) { return false; }
 
   // Moment.js has 2 options for parsing, strict or forgiving.
   // Strict parsing requires that the format and input match exactly, including delimeters.
   // Due to CQL using slightly different delimiters than moment, we need to use forgiving.
   const strict = false;
   return moment(string, cqlFormatStringToMomentFormatString(cqlFormatStringWithLength[string.length]), strict).isValid();
-};
+}
 
-var cqlFormatStringToMomentFormatString = function(string) {
+function cqlFormatStringToMomentFormatString(string) {
   // CQL: 'YYYY-MM-DDThh:mm:ss.fff-hh:mm', Moment: 'YYYY-MM-DD[T]hh:mm:ss.SSS[Z]'
   let timezoneSeparator;
-  const [yearMonthDay, timeAndTimeZoneOffset] = Array.from(string.split('T'));
+  const [yearMonthDay, timeAndTimeZoneOffset] = string.split('T');
 
   if (timeAndTimeZoneOffset != null) {
     timezoneSeparator = getTimezoneSeparatorFromString(timeAndTimeZoneOffset);
@@ -1212,12 +1160,11 @@ var cqlFormatStringToMomentFormatString = function(string) {
   }
 
   return momentString = momentString.replace(/f/g, 'S');
-};
+}
 
 // Redefine MIN/MAX here because math.js requires this file, and when we make this file require
 // math.js, it errors due to the circular dependency...
-var MIN_DATETIME_VALUE = DateTime.parse('0001-01-01T00:00:00.000');
-var MAX_DATETIME_VALUE = DateTime.parse('9999-12-31T23:59:59.999');
+const MIN_DATETIME_VALUE = DateTime.parse('0001-01-01T00:00:00.000');
+const MAX_DATETIME_VALUE = DateTime.parse('9999-12-31T23:59:59.999');
 
-module.exports.DateTime = DateTime;
-module.exports.Date = Date;
+module.exports = {DateTime, Date};

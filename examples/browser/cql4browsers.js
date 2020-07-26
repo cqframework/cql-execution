@@ -362,185 +362,127 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Code, CodeSystem, Concept, ValueSet;
-
 var _require = require('../util/util'),
     typeIsArray = _require.typeIsArray;
 
-module.exports.Code = Code = function () {
-  Code = /*#__PURE__*/function () {
-    _createClass(Code, null, [{
-      key: "initClass",
-      value: function initClass() {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        Object.defineProperties(this.prototype, {
-          isCode: {
-            get: function get() {
-              return true;
-            }
-          }
-        });
+var Code = /*#__PURE__*/function () {
+  function Code(code, system, version, display) {
+    _classCallCheck(this, Code);
+
+    this.code = code;
+    this.system = system;
+    this.version = version;
+    this.display = display;
+  }
+
+  _createClass(Code, [{
+    key: "hasMatch",
+    value: function hasMatch(code) {
+      if (typeof code === 'string') {
+        // the specific behavior for this is not in the specification. Matching codesystem behavior.
+        return code === this.code;
+      } else {
+        return codesInList(toCodeList(code), [this]);
       }
-    }]);
-
-    function Code(code, system, version, display) {
-      _classCallCheck(this, Code);
-
-      this.code = code;
-      this.system = system;
-      this.version = version;
-      this.display = display;
     }
+  }, {
+    key: "isCode",
+    get: function get() {
+      return true;
+    }
+  }]);
 
-    _createClass(Code, [{
-      key: "hasMatch",
-      value: function hasMatch(code) {
-        if (typeof code === 'string') {
-          // the specific behavior for this is not in the specification. Matching codesystem behavior.
-          return code === this.code;
-        } else {
-          return codesInList(toCodeList(code), [this]);
-        }
-      }
-    }]);
-
-    return Code;
-  }();
-
-  Code.initClass();
   return Code;
 }();
 
-module.exports.Concept = Concept = function () {
-  Concept = /*#__PURE__*/function () {
-    _createClass(Concept, null, [{
-      key: "initClass",
-      value: function initClass() {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        Object.defineProperties(this.prototype, {
-          isConcept: {
-            get: function get() {
-              return true;
-            }
-          }
-        });
-      }
-    }]);
+var Concept = /*#__PURE__*/function () {
+  function Concept() {
+    var codes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var display = arguments.length > 1 ? arguments[1] : undefined;
 
-    function Concept() {
-      var codes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-      var display = arguments.length > 1 ? arguments[1] : undefined;
+    _classCallCheck(this, Concept);
 
-      _classCallCheck(this, Concept);
+    this.codes = codes;
+    this.display = display;
+  }
 
-      this.codes = codes;
-      this.display = display;
+  _createClass(Concept, [{
+    key: "hasMatch",
+    value: function hasMatch(code) {
+      return codesInList(toCodeList(code), this.codes);
     }
+  }, {
+    key: "isConcept",
+    get: function get() {
+      return true;
+    }
+  }]);
 
-    _createClass(Concept, [{
-      key: "hasMatch",
-      value: function hasMatch(code) {
-        return codesInList(toCodeList(code), this.codes);
-      }
-    }]);
-
-    return Concept;
-  }();
-
-  Concept.initClass();
   return Concept;
 }();
 
-module.exports.ValueSet = ValueSet = function () {
-  ValueSet = /*#__PURE__*/function () {
-    _createClass(ValueSet, null, [{
-      key: "initClass",
-      value: function initClass() {
-        Object.defineProperties(this.prototype, {
-          isValueSet: {
-            get: function get() {
-              return true;
+var ValueSet = /*#__PURE__*/function () {
+  function ValueSet(oid, version) {
+    var codes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+
+    _classCallCheck(this, ValueSet);
+
+    this.oid = oid;
+    this.version = version;
+    this.codes = codes;
+  }
+
+  _createClass(ValueSet, [{
+    key: "hasMatch",
+    value: function hasMatch(code) {
+      var codesList = toCodeList(code); // InValueSet String Overload
+
+      if (codesList.length === 1 && typeof codesList[0] === 'string') {
+        var matchFound = false;
+        var multipleCodeSystemsExist = false;
+
+        var _iterator = _createForOfIteratorHelper(this.codes),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var codeItem = _step.value;
+
+            // Confirm all code systems match
+            if (codeItem.system !== this.codes[0].system) {
+              multipleCodeSystemsExist = true;
+            }
+
+            if (codeItem.code === codesList[0]) {
+              matchFound = true;
+            }
+
+            if (multipleCodeSystemsExist && matchFound) {
+              throw new Error('In (valueset) is ambiguous -- multiple codes with multiple code systems exist in value set.');
             }
           }
-        });
-      }
-    }]);
-
-    function ValueSet(oid, version) {
-      var codes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-
-      _classCallCheck(this, ValueSet);
-
-      this.oid = oid;
-      this.version = version;
-      this.codes = codes;
-    }
-
-    _createClass(ValueSet, [{
-      key: "hasMatch",
-      value: function hasMatch(code) {
-        var codesList = toCodeList(code); // InValueSet String Overload
-
-        if (codesList.length === 1 && typeof codesList[0] === 'string') {
-          var matchFound = false;
-          var multipleCodeSystemsExist = false;
-
-          var _iterator = _createForOfIteratorHelper(this.codes),
-              _step;
-
-          try {
-            for (_iterator.s(); !(_step = _iterator.n()).done;) {
-              var codeItem = _step.value;
-
-              // Confirm all code systems match
-              if (codeItem.system !== this.codes[0].system) {
-                multipleCodeSystemsExist = true;
-              }
-
-              if (codeItem.code === codesList[0]) {
-                matchFound = true;
-              }
-
-              if (multipleCodeSystemsExist && matchFound) {
-                throw new Error('In (valueset) is ambiguous -- multiple codes with multiple code systems exist in value set.');
-              }
-            }
-          } catch (err) {
-            _iterator.e(err);
-          } finally {
-            _iterator.f();
-          }
-
-          return matchFound;
-        } else {
-          return codesInList(codesList, this.codes);
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
         }
+
+        return matchFound;
+      } else {
+        return codesInList(codesList, this.codes);
       }
-    }]);
+    }
+  }, {
+    key: "isValueSet",
+    get: function get() {
+      return true;
+    }
+  }]);
 
-    return ValueSet;
-  }();
-
-  ValueSet.initClass();
   return ValueSet;
 }();
 
-var toCodeList = function toCodeList(c) {
+function toCodeList(c) {
   if (c == null) {
     return [];
   } else if (typeIsArray(c)) {
@@ -566,9 +508,10 @@ var toCodeList = function toCodeList(c) {
   } else {
     return [c];
   }
-};
+}
 
-var codesInList = function codesInList(cl1, cl2) {
+function codesInList(cl1, cl2) {
+  // test each code in c1 against each code in c2 looking for a match
   return cl1.some(function (c1) {
     return cl2.some(function (c2) {
       // only the left argument (cl1) can contain strings. cl2 will only contain codes.
@@ -581,23 +524,28 @@ var codesInList = function codesInList(cl1, cl2) {
       }
     });
   });
-};
+}
 
-var codesMatch = function codesMatch(code1, code2) {
+function codesMatch(code1, code2) {
   return code1.code === code2.code && code1.system === code2.system;
-};
+}
 
-module.exports.CodeSystem = CodeSystem = function CodeSystem(id, version) {
+var CodeSystem = function CodeSystem(id, version) {
   _classCallCheck(this, CodeSystem);
 
   this.id = id;
   this.version = version;
 };
+
+module.exports = {
+  Code: Code,
+  Concept: Concept,
+  ValueSet: ValueSet,
+  CodeSystem: CodeSystem
+};
 },{"../util/util":47}],6:[function(require,module,exports){
 "use strict";
 
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
 var logic = require('./logic');
 
 var clinical = require('./clinical');
@@ -633,6 +581,8 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
 function _construct(Parent, args, Class) { if (_isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
@@ -643,13 +593,11 @@ function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableTo
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -659,21 +607,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-/* eslint-disable
-    no-useless-escape,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 var _require = require('./uncertainty'),
     Uncertainty = _require.Uncertainty;
 
@@ -687,37 +620,13 @@ var moment = require('moment');
 
 var DateTime = /*#__PURE__*/function () {
   _createClass(DateTime, null, [{
-    key: "initClass",
-    value: function initClass() {
-      // Define a simple getter to allow type-checking of this class without instanceof
-      // and in a way that survives minification (as opposed to checking constructor.name)
-      Object.defineProperties(this.prototype, {
-        isDateTime: {
-          get: function get() {
-            return true;
-          }
-        }
-      });
-      this.Unit = {
-        YEAR: 'year',
-        MONTH: 'month',
-        WEEK: 'week',
-        DAY: 'day',
-        HOUR: 'hour',
-        MINUTE: 'minute',
-        SECOND: 'second',
-        MILLISECOND: 'millisecond'
-      };
-      this.FIELDS = [this.Unit.YEAR, this.Unit.MONTH, this.Unit.DAY, this.Unit.HOUR, this.Unit.MINUTE, this.Unit.SECOND, this.Unit.MILLISECOND];
-    }
-  }, {
     key: "parse",
     value: function parse(string) {
       if (string === null) {
         return null;
       }
 
-      var matches = /(\d{4})(-(\d{2}))?(-(\d{2}))?(T((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(\:?(\d{2}))?))?)?/.exec(string);
+      var matches = /(\d{4})(-(\d{2}))?(-(\d{2}))?(T((\d{2})(:(\d{2})(:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(:?(\d{2}))?))?)?/.exec(string);
 
       if (matches == null) {
         return null;
@@ -741,44 +650,21 @@ var DateTime = /*#__PURE__*/function () {
 
       if (!isValidDateTimeStringFormat(string)) {
         return null;
-      }
+      } // convert the args to integers
 
-      var args = [years, months, days, hours, minutes, seconds, milliseconds]; // convert them all to integers
 
-      args = function () {
-        var result = [];
-
-        var _iterator = _createForOfIteratorHelper(args),
-            _step;
-
-        try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var arg = _step.value;
-
-            if (arg != null) {
-              result.push(parseInt(arg, 10));
-            } else {
-              result.push(undefined);
-            }
-          }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
-        }
-
-        return result;
-      }(); // convert timezone offset to decimal and add it to arguments
-
+      var args = [years, months, days, hours, minutes, seconds, milliseconds].map(function (arg) {
+        return arg != null ? parseInt(arg) : arg;
+      }); // convert timezone offset to decimal and add it to arguments
 
       if (matches[18] != null) {
-        var num = parseInt(matches[18], 10) + (matches[20] != null ? parseInt(matches[20], 10) / 60 : 0);
+        var num = parseInt(matches[18]) + (matches[20] != null ? parseInt(matches[20]) / 60 : 0);
         args.push(matches[17] === '+' ? num : num * -1);
       } else if (matches[15] === 'Z') {
         args.push(0);
       }
 
-      return _construct(DateTime, _toConsumableArray(Array.from(args || [])));
+      return _construct(DateTime, _toConsumableArray(args));
     }
   }, {
     key: "fromJSDate",
@@ -821,7 +707,7 @@ var DateTime = /*#__PURE__*/function () {
     this.millisecond = millisecond;
     this.timezoneOffset = timezoneOffset;
 
-    if (typeof this.timezoneOffset === 'undefined') {
+    if (this.timezoneOffset === undefined) {
       this.timezoneOffset = new jsDate().getTimezoneOffset() / 60 * -1;
     }
   }
@@ -881,7 +767,7 @@ var DateTime = /*#__PURE__*/function () {
     value: function differenceBetween(other, unitField) {
       other = this._implicitlyConvert(other);
 
-      if (!(other != null ? other.isDateTime : undefined)) {
+      if (other == null || !other.isDateTime) {
         return null;
       } // According to CQL spec, to calculate difference, you can just floor lesser precisions and do a duration
       // Make copies since we'll be flooring values and mucking with timezones
@@ -978,7 +864,7 @@ var DateTime = /*#__PURE__*/function () {
     value: function durationBetween(other, unitField) {
       other = this._implicitlyConvert(other);
 
-      if (!(other != null ? other.isDateTime : undefined)) {
+      if (other == null || !other.isDateTime) {
         return null;
       }
 
@@ -1114,16 +1000,14 @@ var DateTime = /*#__PURE__*/function () {
     value: function toJSDate() {
       var ignoreTimezone = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var date;
-
-      var _Array$from = Array.from([this.year, this.month != null ? this.month - 1 : 0, this.day != null ? this.day : 1, this.hour != null ? this.hour : 0, this.minute != null ? this.minute : 0, this.second != null ? this.second : 0, this.millisecond != null ? this.millisecond : 0]),
-          _Array$from2 = _slicedToArray(_Array$from, 7),
-          y = _Array$from2[0],
-          mo = _Array$from2[1],
-          d = _Array$from2[2],
-          h = _Array$from2[3],
-          mi = _Array$from2[4],
-          s = _Array$from2[5],
-          ms = _Array$from2[6];
+      var _ref = [this.year, this.month != null ? this.month - 1 : 0, this.day != null ? this.day : 1, this.hour != null ? this.hour : 0, this.minute != null ? this.minute : 0, this.second != null ? this.second : 0, this.millisecond != null ? this.millisecond : 0],
+          y = _ref[0],
+          mo = _ref[1],
+          d = _ref[2],
+          h = _ref[3],
+          mi = _ref[4],
+          s = _ref[5],
+          ms = _ref[6];
 
       if (this.timezoneOffset != null && !ignoreTimezone) {
         date = new jsDate(jsDate.UTC(y, mo, d, h, mi, s, ms) - this.timezoneOffset * 60 * 60 * 1000); // TODO: This fixes any case that would not cross the year boundary due to a timezone.
@@ -1255,7 +1139,7 @@ var DateTime = /*#__PURE__*/function () {
   }, {
     key: "_implicitlyConvert",
     value: function _implicitlyConvert(other) {
-      if (other != null ? other.isDate : undefined) {
+      if (other != null && other.isDate) {
         return other.getDateTime();
       }
 
@@ -1271,52 +1155,47 @@ var DateTime = /*#__PURE__*/function () {
         var fieldIndex = DateTime.FIELDS.indexOf(unitField);
         var fieldsToRemove = DateTime.FIELDS.slice(fieldIndex + 1);
 
-        var _iterator2 = _createForOfIteratorHelper(fieldsToRemove),
-            _step2;
+        var _iterator = _createForOfIteratorHelper(fieldsToRemove),
+            _step;
 
         try {
-          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-            var field = _step2.value;
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var field = _step.value;
             reduced[field] = null;
           }
         } catch (err) {
-          _iterator2.e(err);
+          _iterator.e(err);
         } finally {
-          _iterator2.f();
+          _iterator.f();
         }
       }
 
       return reduced;
+    }
+  }, {
+    key: "isDateTime",
+    get: function get() {
+      return true;
     }
   }]);
 
   return DateTime;
 }();
 
-DateTime.initClass();
+DateTime.Unit = {
+  YEAR: 'year',
+  MONTH: 'month',
+  WEEK: 'week',
+  DAY: 'day',
+  HOUR: 'hour',
+  MINUTE: 'minute',
+  SECOND: 'second',
+  MILLISECOND: 'millisecond'
+};
+DateTime.FIELDS = [DateTime.Unit.YEAR, DateTime.Unit.MONTH, DateTime.Unit.DAY, DateTime.Unit.HOUR, DateTime.Unit.MINUTE, DateTime.Unit.SECOND, DateTime.Unit.MILLISECOND];
 
 var _Date = /*#__PURE__*/function () {
   _createClass(_Date, null, [{
-    key: "initClass",
-    value: function initClass() {
-      // Define a simple getter to allow type-checking of this class without instanceof
-      // and in a way that survives minification (as opposed to checking constructor.name)
-      Object.defineProperties(this.prototype, {
-        isDate: {
-          get: function get() {
-            return true;
-          }
-        }
-      });
-      this.Unit = {
-        YEAR: 'year',
-        MONTH: 'month',
-        WEEK: 'week',
-        DAY: 'day'
-      };
-      this.FIELDS = [this.Unit.YEAR, this.Unit.MONTH, this.Unit.DAY];
-    }
-  }, {
     key: "parse",
     value: function parse(string) {
       if (string === null) {
@@ -1335,36 +1214,13 @@ var _Date = /*#__PURE__*/function () {
 
       if (!isValidDateStringFormat(string)) {
         return null;
-      }
+      } // convert args to integers
 
-      var args = [years, months, days]; // convert them all to integers
 
-      args = function () {
-        var result = [];
-
-        var _iterator3 = _createForOfIteratorHelper(args),
-            _step3;
-
-        try {
-          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-            var arg = _step3.value;
-
-            if (arg != null) {
-              result.push(parseInt(arg, 10));
-            } else {
-              result.push(undefined);
-            }
-          }
-        } catch (err) {
-          _iterator3.e(err);
-        } finally {
-          _iterator3.f();
-        }
-
-        return result;
-      }();
-
-      return _construct(_Date, _toConsumableArray(Array.from(args || [])));
+      var args = [years, months, days].map(function (arg) {
+        return arg != null ? parseInt(arg) : arg;
+      });
+      return _construct(_Date, _toConsumableArray(args));
     }
   }]);
 
@@ -1410,11 +1266,11 @@ var _Date = /*#__PURE__*/function () {
   }, {
     key: "differenceBetween",
     value: function differenceBetween(other, unitField) {
-      if (other != null ? other.isDateTime : undefined) {
+      if (other != null && other.isDateTime) {
         return this.getDateTime().differenceBetween(other, unitField);
       }
 
-      if (!(other != null ? other.isDate : undefined)) {
+      if (other == null || !other.isDate) {
         return null;
       }
 
@@ -1454,11 +1310,11 @@ var _Date = /*#__PURE__*/function () {
   }, {
     key: "durationBetween",
     value: function durationBetween(other, unitField) {
-      if (other != null ? other.isDateTime : undefined) {
+      if (other != null && other.isDateTime) {
         return this.getDateTime().durationBetween(other, unitField);
       }
 
-      if (!(other != null ? other.isDate : undefined)) {
+      if (other == null || !other.isDate) {
         return null;
       }
 
@@ -1561,12 +1417,10 @@ var _Date = /*#__PURE__*/function () {
   }, {
     key: "toJSDate",
     value: function toJSDate() {
-      var _Array$from3 = Array.from([this.year, this.month != null ? this.month - 1 : 0, this.day != null ? this.day : 1]),
-          _Array$from4 = _slicedToArray(_Array$from3, 3),
-          y = _Array$from4[0],
-          mo = _Array$from4[1],
-          d = _Array$from4[2];
-
+      var _ref2 = [this.year, this.month != null ? this.month - 1 : 0, this.day != null ? this.day : 1],
+          y = _ref2[0],
+          mo = _ref2[1],
+          d = _ref2[2];
       return new jsDate(y, mo, d);
     }
   }, {
@@ -1617,22 +1471,27 @@ var _Date = /*#__PURE__*/function () {
 
         var fieldsToRemove = _Date.FIELDS.slice(fieldIndex + 1);
 
-        var _iterator4 = _createForOfIteratorHelper(fieldsToRemove),
-            _step4;
+        var _iterator2 = _createForOfIteratorHelper(fieldsToRemove),
+            _step2;
 
         try {
-          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-            var field = _step4.value;
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var field = _step2.value;
             reduced[field] = null;
           }
         } catch (err) {
-          _iterator4.e(err);
+          _iterator2.e(err);
         } finally {
-          _iterator4.f();
+          _iterator2.f();
         }
       }
 
       return reduced;
+    }
+  }, {
+    key: "isDate",
+    get: function get() {
+      return true;
     }
   }], [{
     key: "fromJSDate",
@@ -1648,8 +1507,13 @@ var _Date = /*#__PURE__*/function () {
   return _Date;
 }();
 
-_Date.initClass(); // Shared Funtions For Date and DateTime
-
+_Date.Unit = {
+  YEAR: 'year',
+  MONTH: 'month',
+  WEEK: 'week',
+  DAY: 'day'
+};
+_Date.FIELDS = [_Date.Unit.YEAR, _Date.Unit.MONTH, _Date.Unit.DAY]; // Shared Funtions For Date and DateTime
 
 DateTime.prototype.isPrecise = _Date.prototype.isPrecise = function () {
   var _this = this;
@@ -1670,21 +1534,21 @@ DateTime.prototype.isMorePrecise = _Date.prototype.isMorePrecise = function (oth
       return false;
     }
   } else {
-    var _iterator5 = _createForOfIteratorHelper(this.constructor.FIELDS),
-        _step5;
+    var _iterator3 = _createForOfIteratorHelper(this.constructor.FIELDS),
+        _step3;
 
     try {
-      for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-        var field = _step5.value;
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        var field = _step3.value;
 
         if (other[field] != null && this[field] == null) {
           return false;
         }
       }
     } catch (err) {
-      _iterator5.e(err);
+      _iterator3.e(err);
     } finally {
-      _iterator5.f();
+      _iterator3.f();
     }
   }
 
@@ -1702,12 +1566,12 @@ DateTime.prototype.isSamePrecision = _Date.prototype.isSamePrecision = function 
     return other === this.getPrecision();
   }
 
-  var _iterator6 = _createForOfIteratorHelper(this.constructor.FIELDS),
-      _step6;
+  var _iterator4 = _createForOfIteratorHelper(this.constructor.FIELDS),
+      _step4;
 
   try {
-    for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-      var field = _step6.value;
+    for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+      var field = _step4.value;
 
       if (this[field] != null && other[field] == null) {
         return false;
@@ -1718,9 +1582,9 @@ DateTime.prototype.isSamePrecision = _Date.prototype.isSamePrecision = function 
       }
     }
   } catch (err) {
-    _iterator6.e(err);
+    _iterator4.e(err);
   } finally {
-    _iterator6.f();
+    _iterator4.f();
   }
 
   return true;
@@ -1752,12 +1616,12 @@ DateTime.prototype.sameAs = _Date.prototype.sameAs = function (other, precision)
     other = other.convertToTimezoneOffset(this.timezoneOffset);
   }
 
-  var _iterator7 = _createForOfIteratorHelper(this.constructor.FIELDS),
-      _step7;
+  var _iterator5 = _createForOfIteratorHelper(this.constructor.FIELDS),
+      _step5;
 
   try {
-    for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-      var field = _step7.value;
+    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+      var field = _step5.value;
 
       // if both have this precision defined
       if (this[field] != null && other[field] != null) {
@@ -1785,9 +1649,9 @@ DateTime.prototype.sameAs = _Date.prototype.sameAs = function (other, precision)
     } // if we made it here, then all fields matched.
 
   } catch (err) {
-    _iterator7.e(err);
+    _iterator5.e(err);
   } finally {
-    _iterator7.f();
+    _iterator5.f();
   }
 
   return true;
@@ -1798,6 +1662,130 @@ DateTime.prototype.sameOrBefore = _Date.prototype.sameOrBefore = function (other
     return null;
   } else if (this.isDate && other.isDateTime) {
     return this.getDateTime().sameOrBefore(other, precision);
+  } else if (this.isDateTime && other.isDate) {
+    other = other.getDateTime();
+  }
+
+  if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
+    throw new Error("Invalid precision: ".concat(precision));
+  } // make a copy of other in the correct timezone offset if they don't match.
+
+
+  if (this.timezoneOffset !== other.timezoneOffset) {
+    other = other.convertToTimezoneOffset(this.timezoneOffset);
+  }
+
+  var _iterator6 = _createForOfIteratorHelper(this.constructor.FIELDS),
+      _step6;
+
+  try {
+    for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+      var field = _step6.value;
+
+      // if both have this precision defined
+      if (this[field] != null && other[field] != null) {
+        // if this value is less than the other return with true. this is before other
+        if (this[field] < other[field]) {
+          return true; // if this value is greater than the other return with false. this is after
+        } else if (this[field] > other[field]) {
+          return false;
+        } // execution continues if the values are the same
+        // if both dont have this precision, return true if precision is not defined
+
+      } else if (this[field] == null && other[field] == null) {
+        if (precision == null) {
+          return true;
+        } else {
+          // we havent met precision yet
+          return null;
+        } // otherwise they have inconclusive precision, return null
+
+      } else {
+        return null;
+      } // if precision is defined and we have reached expected precision, we can leave the loop
+
+
+      if (precision != null && precision === field) {
+        break;
+      }
+    } // if we made it here, then all fields matched and they are same
+
+  } catch (err) {
+    _iterator6.e(err);
+  } finally {
+    _iterator6.f();
+  }
+
+  return true;
+};
+
+DateTime.prototype.sameOrAfter = _Date.prototype.sameOrAfter = function (other, precision) {
+  if (!(other.isDate || other.isDateTime)) {
+    return null;
+  } else if (this.isDate && other.isDateTime) {
+    return this.getDateTime().sameOrAfter(other, precision);
+  } else if (this.isDateTime && other.isDate) {
+    other = other.getDateTime();
+  }
+
+  if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
+    throw new Error("Invalid precision: ".concat(precision));
+  } // make a copy of other in the correct timezone offset if they don't match.
+
+
+  if (this.timezoneOffset !== other.timezoneOffset) {
+    other = other.convertToTimezoneOffset(this.timezoneOffset);
+  }
+
+  var _iterator7 = _createForOfIteratorHelper(this.constructor.FIELDS),
+      _step7;
+
+  try {
+    for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+      var field = _step7.value;
+
+      // if both have this precision defined
+      if (this[field] != null && other[field] != null) {
+        // if this value is greater than the other return with true. this is after other
+        if (this[field] > other[field]) {
+          return true; // if this value is greater than the other return with false. this is before
+        } else if (this[field] < other[field]) {
+          return false;
+        } // execution continues if the values are the same
+        // if both dont have this precision, return true if precision is not defined
+
+      } else if (this[field] == null && other[field] == null) {
+        if (precision == null) {
+          return true;
+        } else {
+          // we havent met precision yet
+          return null;
+        } // otherwise they have inconclusive precision, return null
+
+      } else {
+        return null;
+      } // if precision is defined and we have reached expected precision, we can leave the loop
+
+
+      if (precision != null && precision === field) {
+        break;
+      }
+    } // if we made it here, then all fields matched and they are same
+
+  } catch (err) {
+    _iterator7.e(err);
+  } finally {
+    _iterator7.f();
+  }
+
+  return true;
+};
+
+DateTime.prototype.before = _Date.prototype.before = function (other, precision) {
+  if (!(other.isDate || other.isDateTime)) {
+    return null;
+  } else if (this.isDate && other.isDateTime) {
+    return this.getDateTime().before(other, precision);
   } else if (this.isDateTime && other.isDate) {
     other = other.getDateTime();
   }
@@ -1826,11 +1814,11 @@ DateTime.prototype.sameOrBefore = _Date.prototype.sameOrBefore = function (other
         } else if (this[field] > other[field]) {
           return false;
         } // execution continues if the values are the same
-        // if both dont have this precision, return true if precision is not defined
+        // if both dont have this precision, return false if precision is not defined
 
       } else if (this[field] == null && other[field] == null) {
         if (precision == null) {
-          return true;
+          return false;
         } else {
           // we havent met precision yet
           return null;
@@ -1852,14 +1840,14 @@ DateTime.prototype.sameOrBefore = _Date.prototype.sameOrBefore = function (other
     _iterator8.f();
   }
 
-  return true;
+  return false;
 };
 
-DateTime.prototype.sameOrAfter = _Date.prototype.sameOrAfter = function (other, precision) {
+DateTime.prototype.after = _Date.prototype.after = function (other, precision) {
   if (!(other.isDate || other.isDateTime)) {
     return null;
   } else if (this.isDate && other.isDateTime) {
-    return this.getDateTime().sameOrAfter(other, precision);
+    return this.getDateTime().after(other, precision);
   } else if (this.isDateTime && other.isDate) {
     other = other.getDateTime();
   }
@@ -1888,11 +1876,11 @@ DateTime.prototype.sameOrAfter = _Date.prototype.sameOrAfter = function (other, 
         } else if (this[field] < other[field]) {
           return false;
         } // execution continues if the values are the same
-        // if both dont have this precision, return true if precision is not defined
+        // if both dont have this precision, return false if precision is not defined
 
       } else if (this[field] == null && other[field] == null) {
         if (precision == null) {
-          return true;
+          return false;
         } else {
           // we havent met precision yet
           return null;
@@ -1914,135 +1902,10 @@ DateTime.prototype.sameOrAfter = _Date.prototype.sameOrAfter = function (other, 
     _iterator9.f();
   }
 
-  return true;
-};
-
-DateTime.prototype.before = _Date.prototype.before = function (other, precision) {
-  if (!(other.isDate || other.isDateTime)) {
-    return null;
-  } else if (this.isDate && other.isDateTime) {
-    return this.getDateTime().before(other, precision);
-  } else if (this.isDateTime && other.isDate) {
-    other = other.getDateTime();
-  }
-
-  if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
-    throw new Error("Invalid precision: ".concat(precision));
-  } // make a copy of other in the correct timezone offset if they don't match.
-
-
-  if (this.timezoneOffset !== other.timezoneOffset) {
-    other = other.convertToTimezoneOffset(this.timezoneOffset);
-  }
-
-  var _iterator10 = _createForOfIteratorHelper(this.constructor.FIELDS),
-      _step10;
-
-  try {
-    for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
-      var field = _step10.value;
-
-      // if both have this precision defined
-      if (this[field] != null && other[field] != null) {
-        // if this value is less than the other return with true. this is before other
-        if (this[field] < other[field]) {
-          return true; // if this value is greater than the other return with false. this is after
-        } else if (this[field] > other[field]) {
-          return false;
-        } // execution continues if the values are the same
-        // if both dont have this precision, return false if precision is not defined
-
-      } else if (this[field] == null && other[field] == null) {
-        if (precision == null) {
-          return false;
-        } else {
-          // we havent met precision yet
-          return null;
-        } // otherwise they have inconclusive precision, return null
-
-      } else {
-        return null;
-      } // if precision is defined and we have reached expected precision, we can leave the loop
-
-
-      if (precision != null && precision === field) {
-        break;
-      }
-    } // if we made it here, then all fields matched and they are same
-
-  } catch (err) {
-    _iterator10.e(err);
-  } finally {
-    _iterator10.f();
-  }
-
-  return false;
-};
-
-DateTime.prototype.after = _Date.prototype.after = function (other, precision) {
-  if (!(other.isDate || other.isDateTime)) {
-    return null;
-  } else if (this.isDate && other.isDateTime) {
-    return this.getDateTime().after(other, precision);
-  } else if (this.isDateTime && other.isDate) {
-    other = other.getDateTime();
-  }
-
-  if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
-    throw new Error("Invalid precision: ".concat(precision));
-  } // make a copy of other in the correct timezone offset if they don't match.
-
-
-  if (this.timezoneOffset !== other.timezoneOffset) {
-    other = other.convertToTimezoneOffset(this.timezoneOffset);
-  }
-
-  var _iterator11 = _createForOfIteratorHelper(this.constructor.FIELDS),
-      _step11;
-
-  try {
-    for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
-      var field = _step11.value;
-
-      // if both have this precision defined
-      if (this[field] != null && other[field] != null) {
-        // if this value is greater than the other return with true. this is after other
-        if (this[field] > other[field]) {
-          return true; // if this value is greater than the other return with false. this is before
-        } else if (this[field] < other[field]) {
-          return false;
-        } // execution continues if the values are the same
-        // if both dont have this precision, return false if precision is not defined
-
-      } else if (this[field] == null && other[field] == null) {
-        if (precision == null) {
-          return false;
-        } else {
-          // we havent met precision yet
-          return null;
-        } // otherwise they have inconclusive precision, return null
-
-      } else {
-        return null;
-      } // if precision is defined and we have reached expected precision, we can leave the loop
-
-
-      if (precision != null && precision === field) {
-        break;
-      }
-    } // if we made it here, then all fields matched and they are same
-
-  } catch (err) {
-    _iterator11.e(err);
-  } finally {
-    _iterator11.f();
-  }
-
   return false;
 };
 
 DateTime.prototype.add = _Date.prototype.add = function (offset, field) {
-  var f;
   var result = this.copy();
 
   if (offset === 0) {
@@ -2070,12 +1933,12 @@ DateTime.prototype.add = _Date.prototype.add = function (offset, field) {
 
     var fieldFloorOrCiel = offset >= 0 ? this.getFieldFloor : this.getFieldCieling;
 
-    var _iterator12 = _createForOfIteratorHelper(this.constructor.FIELDS),
-        _step12;
+    var _iterator10 = _createForOfIteratorHelper(this.constructor.FIELDS),
+        _step10;
 
     try {
-      for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
-        f = _step12.value;
+      for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+        var f = _step10.value;
         // this relies on FIELDS being sorted least to most precise
         result[f] = result[f] != null ? result[f] : fieldFloorOrCiel.call(result, f);
 
@@ -2084,9 +1947,9 @@ DateTime.prototype.add = _Date.prototype.add = function (offset, field) {
         }
       }
     } catch (err) {
-      _iterator12.e(err);
+      _iterator10.e(err);
     } finally {
-      _iterator12.f();
+      _iterator10.f();
     }
   } // Increment the field, then round-trip to JS date and back for calendar math
 
@@ -2094,12 +1957,12 @@ DateTime.prototype.add = _Date.prototype.add = function (offset, field) {
   result[field] = result[field] + offset;
   var normalized = this.constructor.fromJSDate(result.toJSDate(), this.timezoneOffset);
 
-  var _iterator13 = _createForOfIteratorHelper(this.constructor.FIELDS),
-      _step13;
+  var _iterator11 = _createForOfIteratorHelper(this.constructor.FIELDS),
+      _step11;
 
   try {
-    for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
-      field = _step13.value;
+    for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
+      field = _step11.value;
 
       if (result[field] != null) {
         result[field] = normalized[field];
@@ -2107,27 +1970,27 @@ DateTime.prototype.add = _Date.prototype.add = function (offset, field) {
     } // remove any fields we added (go back to original precision)
 
   } catch (err) {
-    _iterator13.e(err);
+    _iterator11.e(err);
   } finally {
-    _iterator13.f();
+    _iterator11.f();
   }
 
   if (offsetIsMorePrecise) {
-    var _iterator14 = _createForOfIteratorHelper(this.constructor.FIELDS),
-        _step14;
+    var _iterator12 = _createForOfIteratorHelper(this.constructor.FIELDS),
+        _step12;
 
     try {
-      for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
-        f = _step14.value;
+      for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
+        var _f = _step12.value;
 
-        if (this[f] == null) {
-          result[f] = null;
+        if (this[_f] == null) {
+          result[_f] = null;
         }
       }
     } catch (err) {
-      _iterator14.e(err);
+      _iterator12.e(err);
     } finally {
-      _iterator14.f();
+      _iterator12.f();
     }
   } // Can't use overflowsOrUnderflows from math.js due to circular dependencies when we require it
 
@@ -2195,7 +2058,7 @@ DateTime.prototype.getFieldCieling = _Date.prototype.getFieldCieling = function 
   throw new Error('Tried to clieling a field that has no cieling value: ' + field);
 };
 
-var compareWithDefaultResult = function compareWithDefaultResult(a, b, defaultResult) {
+function compareWithDefaultResult(a, b, defaultResult) {
   // return false there is a type mismatch
   if ((!a.isDate || !b.isDate) && (!a.isDateTime || !b.isDateTime)) {
     return false;
@@ -2206,12 +2069,12 @@ var compareWithDefaultResult = function compareWithDefaultResult(a, b, defaultRe
     b = b.convertToTimezoneOffset(a.timezoneOffset);
   }
 
-  var _iterator15 = _createForOfIteratorHelper(a.constructor.FIELDS),
-      _step15;
+  var _iterator13 = _createForOfIteratorHelper(a.constructor.FIELDS),
+      _step13;
 
   try {
-    for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
-      var field = _step15.value;
+    for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
+      var field = _step13.value;
 
       // if both have this precision defined
       if (a[field] != null && b[field] != null) {
@@ -2241,30 +2104,24 @@ var compareWithDefaultResult = function compareWithDefaultResult(a, b, defaultRe
     } // if we made it here, then all fields matched.
 
   } catch (err) {
-    _iterator15.e(err);
+    _iterator13.e(err);
   } finally {
-    _iterator15.f();
+    _iterator13.f();
   }
 
   return true;
-};
+}
 
-var daysInMonth = function daysInMonth(year, month) {
-  if (!(year != null && month != null)) {
+function daysInMonth(year, month) {
+  if (year == null || month == null) {
     throw new Error('daysInMonth requires year and month as arguments');
   } // Month is 1-indexed here because of the 0 day
 
 
   return new jsDate(year, month, 0).getDate();
-};
+}
 
-normalizeMillisecondsField = function normalizeMillisecondsField(msString) {
-  return (// fix up milliseconds by padding zeros and/or truncating (5 --> 500, 50 --> 500, 54321 --> 543, etc.)
-    msString = (msString + '00').substring(0, 3)
-  );
-};
-
-var isValidDateStringFormat = function isValidDateStringFormat(string) {
+function isValidDateStringFormat(string) {
   if (typeof string !== 'string') {
     return false;
   }
@@ -2272,8 +2129,8 @@ var isValidDateStringFormat = function isValidDateStringFormat(string) {
   var cqlFormats = ['YYYY', 'YYYY-MM', 'YYYY-MM-DD'];
   var cqlFormatStringWithLength = {};
 
-  for (var _i2 = 0, _cqlFormats = cqlFormats; _i2 < _cqlFormats.length; _i2++) {
-    var format = _cqlFormats[_i2];
+  for (var _i = 0, _cqlFormats = cqlFormats; _i < _cqlFormats.length; _i++) {
+    var format = _cqlFormats[_i];
     cqlFormatStringWithLength[format.length] = format;
   }
 
@@ -2283,9 +2140,9 @@ var isValidDateStringFormat = function isValidDateStringFormat(string) {
 
   var strict = true;
   return moment(string, cqlFormatStringWithLength[string.length], strict).isValid();
-};
+}
 
-var isValidDateTimeStringFormat = function isValidDateTimeStringFormat(string) {
+function isValidDateTimeStringFormat(string) {
   if (typeof string !== 'string') {
     return false;
   }
@@ -2293,8 +2150,8 @@ var isValidDateTimeStringFormat = function isValidDateTimeStringFormat(string) {
   var cqlFormats = ['YYYY', 'YYYY-MM', 'YYYY-MM-DD', 'YYYY-MM-DDTZ', 'YYYY-MM-DDT+hh', 'YYYY-MM-DDT+hh:mm', 'YYYY-MM-DDT-hh', 'YYYY-MM-DDT-hh:mm', 'YYYY-MM-DDThh', 'YYYY-MM-DDThhZ', 'YYYY-MM-DDThh+hh', 'YYYY-MM-DDThh+hh:mm', 'YYYY-MM-DDThh-hh', 'YYYY-MM-DDThh-hh:mm', 'YYYY-MM-DDThh:mm', 'YYYY-MM-DDThh:mmZ', 'YYYY-MM-DDThh:mm+hh', 'YYYY-MM-DDThh:mm+hh:mm', 'YYYY-MM-DDThh:mm-hh', 'YYYY-MM-DDThh:mm-hh:mm', 'YYYY-MM-DDThh:mm:ss', 'YYYY-MM-DDThh:mm:ssZ', 'YYYY-MM-DDThh:mm:ss+hh', 'YYYY-MM-DDThh:mm:ss+hh:mm', 'YYYY-MM-DDThh:mm:ss-hh', 'YYYY-MM-DDThh:mm:ss-hh:mm', 'YYYY-MM-DDThh:mm:ss.fff', 'YYYY-MM-DDThh:mm:ss.fffZ', 'YYYY-MM-DDThh:mm:ss.fff+hh', 'YYYY-MM-DDThh:mm:ss.fff+hh:mm', 'YYYY-MM-DDThh:mm:ss.fff-hh', 'YYYY-MM-DDThh:mm:ss.fff-hh:mm'];
   var cqlFormatStringWithLength = {};
 
-  for (var _i3 = 0, _cqlFormats2 = cqlFormats; _i3 < _cqlFormats2.length; _i3++) {
-    var format = _cqlFormats2[_i3];
+  for (var _i2 = 0, _cqlFormats2 = cqlFormats; _i2 < _cqlFormats2.length; _i2++) {
+    var format = _cqlFormats2[_i2];
     cqlFormatStringWithLength[format.length] = format;
   }
 
@@ -2307,16 +2164,16 @@ var isValidDateTimeStringFormat = function isValidDateTimeStringFormat(string) {
 
   var strict = false;
   return moment(string, cqlFormatStringToMomentFormatString(cqlFormatStringWithLength[string.length]), strict).isValid();
-};
+}
 
-var cqlFormatStringToMomentFormatString = function cqlFormatStringToMomentFormatString(string) {
+function cqlFormatStringToMomentFormatString(string) {
   // CQL: 'YYYY-MM-DDThh:mm:ss.fff-hh:mm', Moment: 'YYYY-MM-DD[T]hh:mm:ss.SSS[Z]'
   var timezoneSeparator;
 
-  var _Array$from5 = Array.from(string.split('T')),
-      _Array$from6 = _slicedToArray(_Array$from5, 2),
-      yearMonthDay = _Array$from6[0],
-      timeAndTimeZoneOffset = _Array$from6[1];
+  var _string$split = string.split('T'),
+      _string$split2 = _slicedToArray(_string$split, 2),
+      yearMonthDay = _string$split2[0],
+      timeAndTimeZoneOffset = _string$split2[1];
 
   if (timeAndTimeZoneOffset != null) {
     timezoneSeparator = getTimezoneSeparatorFromString(timeAndTimeZoneOffset);
@@ -2335,31 +2192,30 @@ var cqlFormatStringToMomentFormatString = function cqlFormatStringToMomentFormat
   }
 
   return momentString = momentString.replace(/f/g, 'S');
-}; // Redefine MIN/MAX here because math.js requires this file, and when we make this file require
+} // Redefine MIN/MAX here because math.js requires this file, and when we make this file require
 // math.js, it errors due to the circular dependency...
 
 
 var MIN_DATETIME_VALUE = DateTime.parse('0001-01-01T00:00:00.000');
 var MAX_DATETIME_VALUE = DateTime.parse('9999-12-31T23:59:59.999');
-module.exports.DateTime = DateTime;
-module.exports.Date = _Date;
+module.exports = {
+  DateTime: DateTime,
+  Date: _Date
+};
 },{"../util/util":47,"./uncertainty":13,"moment":48}],8:[function(require,module,exports){
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-var Exception;
-
-module.exports.Exception = Exception = function Exception(message, wrapped) {
+var Exception = function Exception(message, wrapped) {
   _classCallCheck(this, Exception);
 
   this.message = message;
   this.wrapped = wrapped;
+};
+
+module.exports = {
+  Exception: Exception
 };
 },{}],9:[function(require,module,exports){
 "use strict";
@@ -2382,778 +2238,725 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
+var _require = require('./uncertainty'),
+    Uncertainty = _require.Uncertainty;
 
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS103: Rewrite code to no longer use __guard__
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Interval;
+var _require2 = require('../datatypes/quantity'),
+    Quantity = _require2.Quantity,
+    doSubtraction = _require2.doSubtraction;
 
-var _require = require('./datetime'),
-    DateTime = _require.DateTime;
+var _require3 = require('./logic'),
+    ThreeValuedLogic = _require3.ThreeValuedLogic;
 
-var _require2 = require('./uncertainty'),
-    Uncertainty = _require2.Uncertainty;
-
-var _require3 = require('../datatypes/quantity'),
-    Quantity = _require3.Quantity,
-    doSubtraction = _require3.doSubtraction;
-
-var _require4 = require('./logic'),
-    ThreeValuedLogic = _require4.ThreeValuedLogic;
-
-var _require5 = require('../util/math'),
-    successor = _require5.successor,
-    predecessor = _require5.predecessor,
-    maxValueForInstance = _require5.maxValueForInstance,
-    minValueForInstance = _require5.minValueForInstance;
+var _require4 = require('../util/math'),
+    successor = _require4.successor,
+    predecessor = _require4.predecessor,
+    maxValueForInstance = _require4.maxValueForInstance,
+    minValueForInstance = _require4.minValueForInstance;
 
 var cmp = require('../util/comparison');
 
-module.exports.Interval = Interval = function () {
-  var areDateTimes = undefined;
-  var areNumeric = undefined;
-  var lowestNumericUncertainty = undefined;
-  var highestNumericUncertainty = undefined;
+var Interval = /*#__PURE__*/function () {
+  function Interval(low, high) {
+    var lowClosed = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+    var highClosed = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
 
-  Interval = /*#__PURE__*/function () {
-    _createClass(Interval, null, [{
-      key: "initClass",
-      value: function initClass() {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        Object.defineProperties(this.prototype, {
-          isInterval: {
-            get: function get() {
-              return true;
-            }
-          }
-        });
+    _classCallCheck(this, Interval);
 
-        areDateTimes = function areDateTimes(x, y) {
-          return [x, y].every(function (z) {
-            return z != null ? z.isDateTime : undefined;
-          });
-        };
+    this.low = low;
+    this.high = high;
+    this.lowClosed = lowClosed;
+    this.highClosed = highClosed;
+  }
 
-        areNumeric = function areNumeric(x, y) {
-          return [x, y].every(function (z) {
-            return typeof z === 'number' || (z != null ? z.isUncertainty : undefined) && typeof z.low === 'number';
-          });
-        };
+  _createClass(Interval, [{
+    key: "copy",
+    value: function copy() {
+      var newLow = this.low;
+      var newHigh = this.high;
 
-        lowestNumericUncertainty = function lowestNumericUncertainty(x, y) {
-          if (!(x != null ? x.isUncertainty : undefined)) {
-            x = new Uncertainty(x);
-          }
-
-          if (!(y != null ? y.isUncertainty : undefined)) {
-            y = new Uncertainty(y);
-          }
-
-          var low = x.low < y.low ? x.low : y.low;
-          var high = x.high < y.high ? x.high : y.high;
-
-          if (low !== high) {
-            return new Uncertainty(low, high);
-          } else {
-            return low;
-          }
-        };
-
-        highestNumericUncertainty = function highestNumericUncertainty(x, y) {
-          if (!(x != null ? x.isUncertainty : undefined)) {
-            x = new Uncertainty(x);
-          }
-
-          if (!(y != null ? y.isUncertainty : undefined)) {
-            y = new Uncertainty(y);
-          }
-
-          var low = x.low > y.low ? x.low : y.low;
-          var high = x.high > y.high ? x.high : y.high;
-
-          if (low !== high) {
-            return new Uncertainty(low, high);
-          } else {
-            return low;
-          }
-        };
+      if (this.low != null && typeof this.low.copy === 'function') {
+        newLow = this.low.copy();
       }
-    }]);
 
-    function Interval(low, high) {
-      var lowClosed = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-      var highClosed = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+      if (this.high != null && typeof this.high.copy === 'function') {
+        newHigh = this.high.copy();
+      }
 
-      _classCallCheck(this, Interval);
-
-      this.low = low;
-      this.high = high;
-      this.lowClosed = lowClosed;
-      this.highClosed = highClosed;
+      return new Interval(newLow, newHigh, this.lowClosed, this.highClosed);
     }
+  }, {
+    key: "contains",
+    value: function contains(item, precision) {
+      var _this = this;
 
-    _createClass(Interval, [{
-      key: "copy",
-      value: function copy() {
-        var newLow = this.low;
-        var newHigh = this.high;
-
-        if (this.low != null && typeof this.low.copy === 'function') {
-          newLow = this.low.copy();
-        }
-
-        if (this.high != null && typeof this.high.copy === 'function') {
-          newHigh = this.high.copy();
-        }
-
-        return new Interval(newLow, newHigh, this.lowClosed, this.highClosed);
+      // These first two checks ensure correct handling of edge case where an item equals the closed boundary
+      if (this.lowClosed && this.low != null && cmp.equals(this.low, item)) {
+        return true;
       }
-    }, {
-      key: "contains",
-      value: function contains(item, precision) {
-        var _this = this;
 
-        // These first two checks ensure correct handling of edge case where an item equals the closed boundary
-        if (this.lowClosed && this.low != null && cmp.equals(this.low, item)) {
-          return true;
+      if (this.highClosed && this.high != null && cmp.equals(this.high, item)) {
+        return true;
+      }
+
+      if (item != null && item.isInterval) {
+        throw new Error('Argument to contains must be a point');
+      }
+
+      var lowFn = function () {
+        switch (true) {
+          case _this.lowClosed && _this.low == null:
+            return function () {
+              return true;
+            };
+
+          case _this.lowClosed:
+            return cmp.lessThanOrEquals;
+
+          default:
+            return cmp.lessThan;
         }
+      }();
 
-        if (this.highClosed && this.high != null && cmp.equals(this.high, item)) {
-          return true;
+      var highFn = function () {
+        switch (true) {
+          case _this.highClosed && _this.high == null:
+            return function () {
+              return true;
+            };
+
+          case _this.highClosed:
+            return cmp.greaterThanOrEquals;
+
+          default:
+            return cmp.greaterThan;
         }
+      }();
 
-        if (item != null ? item.isInterval : undefined) {
-          throw new Error('Argument to contains must be a point');
+      return ThreeValuedLogic.and(lowFn(this.low, item, precision), highFn(this.high, item, precision));
+    }
+  }, {
+    key: "properlyIncludes",
+    value: function properlyIncludes(other, precision) {
+      if (other == null || !other.isInterval) {
+        throw new Error('Argument to properlyIncludes must be an interval');
+      }
+
+      return ThreeValuedLogic.and(this.includes(other, precision), ThreeValuedLogic.not(other.includes(this, precision)));
+    }
+  }, {
+    key: "includes",
+    value: function includes(other, precision) {
+      if (other == null || !other.isInterval) {
+        return this.contains(other, precision);
+      }
+
+      var a = this.toClosed();
+      var b = other.toClosed();
+      return ThreeValuedLogic.and(cmp.lessThanOrEquals(a.low, b.low, precision), cmp.greaterThanOrEquals(a.high, b.high, precision));
+    }
+  }, {
+    key: "includedIn",
+    value: function includedIn(other, precision) {
+      // For the point overload, this operator is a synonym for the in operator
+      if (other == null || !other.isInterval) {
+        return this.contains(other, precision);
+      } else {
+        return other.includes(this);
+      }
+    }
+  }, {
+    key: "overlaps",
+    value: function overlaps(item, precision) {
+      var closed = this.toClosed();
+
+      var _ref = function () {
+        if (item != null && item.isInterval) {
+          var itemClosed = item.toClosed();
+          return [itemClosed.low, itemClosed.high];
+        } else {
+          return [item, item];
         }
+      }(),
+          _ref2 = _slicedToArray(_ref, 2),
+          low = _ref2[0],
+          high = _ref2[1];
 
-        var lowFn = function () {
-          switch (false) {
-            case !_this.lowClosed || !(_this.low == null):
-              return function () {
-                return true;
-              };
+      return ThreeValuedLogic.and(cmp.lessThanOrEquals(closed.low, high, precision), cmp.greaterThanOrEquals(closed.high, low, precision));
+    }
+  }, {
+    key: "overlapsAfter",
+    value: function overlapsAfter(item, precision) {
+      var closed = this.toClosed();
+      var high = item != null && item.isInterval ? item.toClosed().high : item;
+      return ThreeValuedLogic.and(cmp.lessThanOrEquals(closed.low, high, precision), cmp.greaterThan(closed.high, high, precision));
+    }
+  }, {
+    key: "overlapsBefore",
+    value: function overlapsBefore(item, precision) {
+      var closed = this.toClosed();
+      var low = item != null && item.isInterval ? item.toClosed().low : item;
+      return ThreeValuedLogic.and(cmp.lessThan(closed.low, low, precision), cmp.greaterThanOrEquals(closed.high, low, precision));
+    }
+  }, {
+    key: "union",
+    value: function union(other) {
+      var _this2 = this;
 
-            case !_this.lowClosed:
-              return cmp.lessThanOrEquals;
+      if (other == null || !other.isInterval) {
+        throw new Error('Argument to union must be an interval');
+      } // Note that interval union is only defined if the arguments overlap or meet.
+
+
+      if (this.overlaps(other) || this.meets(other)) {
+        var _ref3 = [this.toClosed(), other.toClosed()],
+            a = _ref3[0],
+            b = _ref3[1];
+
+        var _ref4 = function () {
+          switch (true) {
+            case cmp.lessThanOrEquals(a.low, b.low):
+              return [_this2.low, _this2.lowClosed];
+
+            case cmp.greaterThanOrEquals(a.low, b.low):
+              return [other.low, other.lowClosed];
+
+            case areNumeric(a.low, b.low):
+              return [lowestNumericUncertainty(a.low, b.low), true];
+            // TODO: Do we need to support quantities here?
+
+            case areDateTimes(a.low, b.low) && a.low.isMorePrecise(b.low):
+              return [other.low, other.lowClosed];
 
             default:
-              return cmp.lessThan;
+              return [_this2.low, _this2.lowClosed];
           }
-        }();
+        }(),
+            _ref5 = _slicedToArray(_ref4, 2),
+            l = _ref5[0],
+            lc = _ref5[1];
 
-        var highFn = function () {
-          switch (false) {
-            case !_this.highClosed || !(_this.high == null):
-              return function () {
-                return true;
-              };
+        var _ref6 = function () {
+          switch (true) {
+            case cmp.greaterThanOrEquals(a.high, b.high):
+              return [_this2.high, _this2.highClosed];
 
-            case !_this.highClosed:
-              return cmp.greaterThanOrEquals;
+            case cmp.lessThanOrEquals(a.high, b.high):
+              return [other.high, other.highClosed];
+
+            case areNumeric(a.high, b.high):
+              return [highestNumericUncertainty(a.high, b.high), true];
+            // TODO: Do we need to support quantities here?
+
+            case areDateTimes(a.high, b.high) && a.high.isMorePrecise(b.high):
+              return [other.high, other.highClosed];
 
             default:
-              return cmp.greaterThan;
+              return [_this2.high, _this2.highClosed];
           }
-        }();
+        }(),
+            _ref7 = _slicedToArray(_ref6, 2),
+            h = _ref7[0],
+            hc = _ref7[1];
 
-        return ThreeValuedLogic.and(lowFn(this.low, item, precision), highFn(this.high, item, precision));
+        return new Interval(l, h, lc, hc);
+      } else {
+        return null;
       }
-    }, {
-      key: "properlyIncludes",
-      value: function properlyIncludes(other, precision) {
-        if (!(other != null ? other.isInterval : undefined)) {
-          throw new Error('Argument to properlyIncludes must be an interval');
-        }
+    }
+  }, {
+    key: "intersect",
+    value: function intersect(other) {
+      var _this3 = this;
 
-        return ThreeValuedLogic.and(this.includes(other, precision), ThreeValuedLogic.not(other.includes(this, precision)));
-      }
-    }, {
-      key: "includes",
-      value: function includes(other, precision) {
-        if (!(other != null ? other.isInterval : undefined)) {
-          return this.contains(other, precision);
-        }
+      if (other == null || !other.isInterval) {
+        throw new Error('Argument to union must be an interval');
+      } // Note that interval union is only defined if the arguments overlap.
 
-        var a = this.toClosed();
-        var b = other.toClosed();
-        return ThreeValuedLogic.and(cmp.lessThanOrEquals(a.low, b.low, precision), cmp.greaterThanOrEquals(a.high, b.high, precision));
-      }
-    }, {
-      key: "includedIn",
-      value: function includedIn(other, precision) {
-        // For the point overload, this operator is a synonym for the in operator
-        if (!(other != null ? other.isInterval : undefined)) {
-          return this.contains(other, precision);
-        } else {
-          return other.includes(this);
-        }
-      }
-    }, {
-      key: "overlaps",
-      value: function overlaps(item, precision) {
-        var closed = this.toClosed();
 
-        var _Array$from = Array.from(function () {
-          if (item != null ? item.isInterval : undefined) {
-            var itemClosed = item.toClosed();
-            return [itemClosed.low, itemClosed.high];
-          } else {
-            return [item, item];
+      if (this.overlaps(other)) {
+        var _ref8 = [this.toClosed(), other.toClosed()],
+            a = _ref8[0],
+            b = _ref8[1];
+
+        var _ref9 = function () {
+          switch (true) {
+            case cmp.greaterThanOrEquals(a.low, b.low):
+              return [_this3.low, _this3.lowClosed];
+
+            case cmp.lessThanOrEquals(a.low, b.low):
+              return [other.low, other.lowClosed];
+
+            case areNumeric(a.low, b.low):
+              return [highestNumericUncertainty(a.low, b.low), true];
+            // TODO: Do we need to support quantities here?
+
+            case areDateTimes(a.low, b.low) && b.low.isMorePrecise(a.low):
+              return [other.low, other.lowClosed];
+
+            default:
+              return [_this3.low, _this3.lowClosed];
           }
-        }()),
-            _Array$from2 = _slicedToArray(_Array$from, 2),
-            low = _Array$from2[0],
-            high = _Array$from2[1];
+        }(),
+            _ref10 = _slicedToArray(_ref9, 2),
+            l = _ref10[0],
+            lc = _ref10[1];
 
-        return ThreeValuedLogic.and(cmp.lessThanOrEquals(closed.low, high, precision), cmp.greaterThanOrEquals(closed.high, low, precision));
+        var _ref11 = function () {
+          switch (true) {
+            case cmp.lessThanOrEquals(a.high, b.high):
+              return [_this3.high, _this3.highClosed];
+
+            case cmp.greaterThanOrEquals(a.high, b.high):
+              return [other.high, other.highClosed];
+
+            case areNumeric(a.high, b.high):
+              return [lowestNumericUncertainty(a.high, b.high), true];
+            // TODO: Do we need to support quantities here?
+
+            case areDateTimes(a.high, b.high) && b.high.isMorePrecise(a.high):
+              return [other.high, other.highClosed];
+
+            default:
+              return [_this3.high, _this3.highClosed];
+          }
+        }(),
+            _ref12 = _slicedToArray(_ref11, 2),
+            h = _ref12[0],
+            hc = _ref12[1];
+
+        return new Interval(l, h, lc, hc);
+      } else {
+        return null;
       }
-    }, {
-      key: "overlapsAfter",
-      value: function overlapsAfter(item, precision) {
-        var closed = this.toClosed();
-        var high = (item != null ? item.isInterval : undefined) ? item.toClosed().high : item;
-        return ThreeValuedLogic.and(cmp.lessThanOrEquals(closed.low, high, precision), cmp.greaterThan(closed.high, high, precision));
+    }
+  }, {
+    key: "except",
+    value: function except(other) {
+      if (other === null) {
+        return null;
       }
-    }, {
-      key: "overlapsBefore",
-      value: function overlapsBefore(item, precision) {
-        var closed = this.toClosed();
-        var low = (item != null ? item.isInterval : undefined) ? item.toClosed().low : item;
-        return ThreeValuedLogic.and(cmp.lessThan(closed.low, low, precision), cmp.greaterThanOrEquals(closed.high, low, precision));
+
+      if (other == null || !other.isInterval) {
+        throw new Error('Argument to except must be an interval');
       }
-    }, {
-      key: "union",
-      value: function union(other) {
-        var _this2 = this;
 
-        if (!(other != null ? other.isInterval : undefined)) {
-          throw new Error('Argument to union must be an interval');
-        } // Note that interval union is only defined if the arguments overlap or meet.
+      var ol = this.overlaps(other);
 
+      if (ol === true) {
+        var olb = this.overlapsBefore(other);
+        var ola = this.overlapsAfter(other);
 
-        if (this.overlaps(other) || this.meets(other)) {
-          var _Array$from3 = Array.from([this.toClosed(), other.toClosed()]),
-              _Array$from4 = _slicedToArray(_Array$from3, 2),
-              a = _Array$from4[0],
-              b = _Array$from4[1];
-
-          var _Array$from5 = Array.from(function () {
-            switch (false) {
-              case !cmp.lessThanOrEquals(a.low, b.low):
-                return [_this2.low, _this2.lowClosed];
-
-              case !cmp.greaterThanOrEquals(a.low, b.low):
-                return [other.low, other.lowClosed];
-
-              case !areNumeric(a.low, b.low):
-                return [lowestNumericUncertainty(a.low, b.low), true];
-              // TODO: Do we need to support quantities here?
-
-              case !areDateTimes(a.low, b.low) || !a.low.isMorePrecise(b.low):
-                return [other.low, other.lowClosed];
-
-              default:
-                return [_this2.low, _this2.lowClosed];
-            }
-          }()),
-              _Array$from6 = _slicedToArray(_Array$from5, 2),
-              l = _Array$from6[0],
-              lc = _Array$from6[1];
-
-          var _Array$from7 = Array.from(function () {
-            switch (false) {
-              case !cmp.greaterThanOrEquals(a.high, b.high):
-                return [_this2.high, _this2.highClosed];
-
-              case !cmp.lessThanOrEquals(a.high, b.high):
-                return [other.high, other.highClosed];
-
-              case !areNumeric(a.high, b.high):
-                return [highestNumericUncertainty(a.high, b.high), true];
-              // TODO: Do we need to support quantities here?
-
-              case !areDateTimes(a.high, b.high) || !a.high.isMorePrecise(b.high):
-                return [other.high, other.highClosed];
-
-              default:
-                return [_this2.high, _this2.highClosed];
-            }
-          }()),
-              _Array$from8 = _slicedToArray(_Array$from7, 2),
-              h = _Array$from8[0],
-              hc = _Array$from8[1];
-
-          return new Interval(l, h, lc, hc);
+        if (olb === true && ola === false) {
+          return new Interval(this.low, other.low, this.lowClosed, !other.lowClosed);
+        } else if (ola === true && olb === false) {
+          return new Interval(other.high, this.high, !other.highClosed, this.highClosed);
         } else {
           return null;
         }
+      } else if (ol === false) {
+        return this;
+      } else {
+        // ol is null
+        return null;
       }
-    }, {
-      key: "intersect",
-      value: function intersect(other) {
-        var _this3 = this;
-
-        if (!(other != null ? other.isInterval : undefined)) {
-          throw new Error('Argument to union must be an interval');
-        } // Note that interval union is only defined if the arguments overlap.
-
-
-        if (this.overlaps(other)) {
-          var _Array$from9 = Array.from([this.toClosed(), other.toClosed()]),
-              _Array$from10 = _slicedToArray(_Array$from9, 2),
-              a = _Array$from10[0],
-              b = _Array$from10[1];
-
-          var _Array$from11 = Array.from(function () {
-            switch (false) {
-              case !cmp.greaterThanOrEquals(a.low, b.low):
-                return [_this3.low, _this3.lowClosed];
-
-              case !cmp.lessThanOrEquals(a.low, b.low):
-                return [other.low, other.lowClosed];
-
-              case !areNumeric(a.low, b.low):
-                return [highestNumericUncertainty(a.low, b.low), true];
-              // TODO: Do we need to support quantities here?
-
-              case !areDateTimes(a.low, b.low) || !b.low.isMorePrecise(a.low):
-                return [other.low, other.lowClosed];
-
-              default:
-                return [_this3.low, _this3.lowClosed];
-            }
-          }()),
-              _Array$from12 = _slicedToArray(_Array$from11, 2),
-              l = _Array$from12[0],
-              lc = _Array$from12[1];
-
-          var _Array$from13 = Array.from(function () {
-            switch (false) {
-              case !cmp.lessThanOrEquals(a.high, b.high):
-                return [_this3.high, _this3.highClosed];
-
-              case !cmp.greaterThanOrEquals(a.high, b.high):
-                return [other.high, other.highClosed];
-
-              case !areNumeric(a.high, b.high):
-                return [lowestNumericUncertainty(a.high, b.high), true];
-              // TODO: Do we need to support quantities here?
-
-              case !areDateTimes(a.high, b.high) || !b.high.isMorePrecise(a.high):
-                return [other.high, other.highClosed];
-
-              default:
-                return [_this3.high, _this3.highClosed];
-            }
-          }()),
-              _Array$from14 = _slicedToArray(_Array$from13, 2),
-              h = _Array$from14[0],
-              hc = _Array$from14[1];
-
-          return new Interval(l, h, lc, hc);
-        } else {
-          return null;
-        }
-      }
-    }, {
-      key: "except",
-      value: function except(other) {
-        if (other === null) {
-          return null;
-        }
-
-        if (!(other != null ? other.isInterval : undefined)) {
-          throw new Error('Argument to except must be an interval');
-        }
-
-        var ol = this.overlaps(other);
-
-        if (ol === true) {
-          var olb = this.overlapsBefore(other);
-          var ola = this.overlapsAfter(other);
-
-          if (olb === true && ola === false) {
-            return new Interval(this.low, other.low, this.lowClosed, !other.lowClosed);
-          } else if (ola === true && olb === false) {
-            return new Interval(other.high, this.high, !other.highClosed, this.highClosed);
-          } else {
-            return null;
-          }
-        } else if (ol === false) {
-          return this;
-        } else {
-          // ol is null
-          return null;
-        }
-      }
-    }, {
-      key: "sameAs",
-      value: function sameAs(other, precision) {
-        // This large if and else if block handles the scenarios where there is an open ended null
-        // If both lows or highs exists, it can be determined that intervals are not Same As
-        if (this.low != null && other.low != null && this.high == null && other.high != null && !this.highClosed || this.low != null && other.low != null && this.high != null && other.high == null && !other.highClosed || this.low != null && other.low != null && this.high == null && other.high == null && !other.highClosed && !this.highClosed) {
-          if (typeof this.low === 'number') {
-            if (!(this.start() === other.start())) {
-              return false;
-            }
-          } else {
-            if (!this.start().sameAs(other.start(), precision)) {
-              return false;
-            }
-          }
-        } else if (this.low != null && other.low == null && this.high != null && other.high != null || this.low == null && other.low != null && this.high != null && other.high != null || this.low == null && other.low == null && this.high != null && other.high != null) {
-          if (typeof this.high === 'number') {
-            if (!(this.end() === other.end())) {
-              return false;
-            }
-          } else {
-            if (!this.end().sameAs(other.end(), precision)) {
-              return false;
-            }
-          }
-        } // Checks to see if any of the Intervals have a open, null boundary
-
-
-        if (this.low == null && !this.lowClosed || this.high == null && !this.highClosed || other.low == null && !other.lowClosed || other.high == null && !other.highClosed) {
-          return null;
-        } // For the special cases where @ is Interval[null,null]
-
-
-        if (this.lowClosed && this.low == null && this.highClosed && this.high == null) {
-          return other.lowClosed && other.low == null && other.highClosed && other.high == null;
-        } // For the special case where Interval[...] same as Interval[null,null] should return false
-        // This accounts for the inverse of the if statement above: where the second Interval is [null,null] and not the first Interval
-        // The reason why this isn't caught below is due to how start() and end() work
-        // There is no way to tell the datatype for MIN and MAX if both boundaries are null
-
-
-        if (other.lowClosed && other.low == null && other.highClosed && other.high == null) {
-          return false;
-        }
-
+    }
+  }, {
+    key: "sameAs",
+    value: function sameAs(other, precision) {
+      // This large if and else if block handles the scenarios where there is an open ended null
+      // If both lows or highs exists, it can be determined that intervals are not Same As
+      if (this.low != null && other.low != null && this.high == null && other.high != null && !this.highClosed || this.low != null && other.low != null && this.high != null && other.high == null && !other.highClosed || this.low != null && other.low != null && this.high == null && other.high == null && !other.highClosed && !this.highClosed) {
         if (typeof this.low === 'number') {
-          return this.start() === other.start() && this.end() === other.end();
-        } else {
-          return this.start().sameAs(other.start(), precision) && this.end().sameAs(other.end(), precision);
-        }
-      }
-    }, {
-      key: "sameOrBefore",
-      value: function sameOrBefore(other, precision) {
-        if (this.end() == null || (other != null ? other.start() : undefined) == null) {
-          return null;
-        } else {
-          return this.end().sameOrBefore(other.start(), precision);
-        }
-      }
-    }, {
-      key: "sameOrAfter",
-      value: function sameOrAfter(other, precision) {
-        if (this.start() == null || (other != null ? other.end() : undefined) == null) {
-          return null;
-        } else {
-          return this.start().sameOrAfter(other.end(), precision);
-        }
-      }
-    }, {
-      key: "equals",
-      value: function equals(other) {
-        if (other != null ? other.isInterval : undefined) {
-          var _Array$from15 = Array.from([this.toClosed(), other.toClosed()]),
-              _Array$from16 = _slicedToArray(_Array$from15, 2),
-              a = _Array$from16[0],
-              b = _Array$from16[1];
-
-          return ThreeValuedLogic.and(cmp.equals(a.low, b.low), cmp.equals(a.high, b.high));
-        } else {
-          return false;
-        }
-      }
-    }, {
-      key: "after",
-      value: function after(other, precision) {
-        var closed = this.toClosed(); // Meets spec, but not 100% correct (e.g., (null, 5] after [6, 10] --> null)
-        // Simple way to fix it: and w/ not overlaps
-
-        if (other.toClosed) {
-          return cmp.greaterThan(closed.low, other.toClosed().high, precision);
-        } else {
-          return cmp.greaterThan(closed.low, other, precision);
-        }
-      }
-    }, {
-      key: "before",
-      value: function before(other, precision) {
-        var closed = this.toClosed(); // Meets spec, but not 100% correct (e.g., (null, 5] after [6, 10] --> null)
-        // Simple way to fix it: and w/ not overlaps
-
-        if (other.toClosed) {
-          return cmp.lessThan(closed.high, other.toClosed().low, precision);
-        } else {
-          return cmp.lessThan(closed.high, other, precision);
-        }
-      }
-    }, {
-      key: "meets",
-      value: function meets(other, precision) {
-        return ThreeValuedLogic.or(this.meetsBefore(other, precision), this.meetsAfter(other, precision));
-      }
-    }, {
-      key: "meetsAfter",
-      value: function meetsAfter(other, precision) {
-        try {
-          if (precision != null && (this.low != null ? this.low.isDateTime : undefined)) {
-            return this.toClosed().low.sameAs(__guard__(other.toClosed().high, function (x) {
-              return x.add(1, precision);
-            }), precision);
-          } else {
-            return cmp.equals(this.toClosed().low, successor(other.toClosed().high));
-          }
-        } catch (error) {
-          return false;
-        }
-      }
-    }, {
-      key: "meetsBefore",
-      value: function meetsBefore(other, precision) {
-        try {
-          if (precision != null && (this.high != null ? this.high.isDateTime : undefined)) {
-            return this.toClosed().high.sameAs(__guard__(other.toClosed().low, function (x) {
-              return x.add(-1, precision);
-            }), precision);
-          } else {
-            return cmp.equals(this.toClosed().high, predecessor(other.toClosed().low));
-          }
-        } catch (error) {
-          return false;
-        }
-      }
-    }, {
-      key: "start",
-      value: function start() {
-        if (this.low == null) {
-          if (this.lowClosed) {
-            return minValueForInstance(this.high);
-          } else {
-            return this.low;
-          }
-        }
-
-        return this.toClosed().low;
-      }
-    }, {
-      key: "end",
-      value: function end() {
-        if (this.high == null) {
-          if (this.highClosed) {
-            return maxValueForInstance(this.low);
-          } else {
-            return this.high;
-          }
-        }
-
-        return this.toClosed().high;
-      }
-    }, {
-      key: "starts",
-      value: function starts(other, precision) {
-        var startEqual;
-
-        if (precision != null && (this.low != null ? this.low.isDateTime : undefined)) {
-          startEqual = this.low.sameAs(other.low, precision);
-        } else {
-          startEqual = cmp.equals(this.low, other.low);
-        }
-
-        var endLessThanOrEqual = cmp.lessThanOrEquals(this.high, other.high, precision);
-        return startEqual && endLessThanOrEqual;
-      }
-    }, {
-      key: "ends",
-      value: function ends(other, precision) {
-        var endEqual;
-        var startGreaterThanOrEqual = cmp.greaterThanOrEquals(this.low, other.low, precision);
-
-        if (precision != null && (this.low != null ? this.low.isDateTime : undefined)) {
-          endEqual = this.high.sameAs(other.high, precision);
-        } else {
-          endEqual = cmp.equals(this.high, other.high);
-        }
-
-        return startGreaterThanOrEqual && endEqual;
-      }
-    }, {
-      key: "width",
-      value: function width() {
-        var diff;
-
-        if (this.low != null && (this.low.isDateTime || this.low.isDate || this.low.isTime) || this.high != null && (this.high.isDateTime || this.high.isDate || this.high.isTime)) {
-          throw new Error('Width of Date, DateTime, and Time intervals is not supported');
-        }
-
-        var closed = this.toClosed();
-
-        if ((closed.low != null ? closed.low.isUncertainty : undefined) || (closed.high != null ? closed.high.isUncertainty : undefined)) {
-          return null;
-        } else if (closed.low.isQuantity) {
-          if (closed.low.unit !== closed.high.unit) {
-            throw new Error('Cannot calculate width of Quantity Interval with different units');
-          }
-
-          var lowValue = closed.low.value;
-          var highValue = closed.high.value;
-          diff = Math.abs(highValue - lowValue);
-          Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
-          return new Quantity(diff, closed.low.unit);
-        } else {
-          // TODO: Fix precision to 8 decimals in other places that return numbers
-          diff = Math.abs(closed.high - closed.low);
-          return Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
-        }
-      }
-    }, {
-      key: "size",
-      value: function size() {
-        var diff;
-        var pointSize = this.getPointSize();
-
-        if (this.low != null && (this.low.isDateTime || this.low.isDate || this.low.isTime) || this.high != null && (this.high.isDateTime || this.high.isDate || this.high.isTime)) {
-          throw new Error('Size of Date, DateTime, and Time intervals is not supported');
-        }
-
-        var closed = this.toClosed();
-
-        if ((closed.low != null ? closed.low.isUncertainty : undefined) || (closed.high != null ? closed.high.isUncertainty : undefined)) {
-          return null;
-        } else if (closed.low.isQuantity) {
-          if (closed.low.unit !== closed.high.unit) {
-            throw new Error('Cannot calculate size of Quantity Interval with different units');
-          }
-
-          var lowValue = closed.low.value;
-          var highValue = closed.high.value;
-          diff = Math.abs(highValue - lowValue) + pointSize.value;
-          Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
-          return new Quantity(diff, closed.low.unit);
-        } else {
-          diff = Math.abs(closed.high - closed.low) + pointSize.value;
-          return Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
-        }
-      }
-    }, {
-      key: "getPointSize",
-      value: function getPointSize() {
-        var pointSize, precisionUnits;
-
-        if (this.low != null) {
-          if (this.low.isDateTime) {
-            precisionUnits = this.low.getPrecision();
-            pointSize = new Quantity(1, precisionUnits);
-          } else if (this.low.isQuantity) {
-            pointSize = doSubtraction(successor(this.low), this.low);
-          } else {
-            pointSize = successor(this.low) - this.low;
-          }
-        } else if (this.high != null) {
-          if (this.high.isDateTime) {
-            precisionUnits = this.high.getPrecision();
-            pointSize = new Quantity(1, precisionUnits);
-          } else if (this.high.isQuantity) {
-            pointSize = doSubtraction(successor(this.high), this.high);
-          } else {
-            pointSize = successor(this.high) - this.high;
+          if (!(this.start() === other.start())) {
+            return false;
           }
         } else {
-          throw new Error('Point type of intervals cannot be determined.');
-        }
-
-        if (typeof pointSize === 'number') {
-          pointSize = new Quantity(pointSize, '1');
-        }
-
-        return pointSize;
-      }
-    }, {
-      key: "toClosed",
-      value: function toClosed() {
-        var _this4 = this;
-
-        var high, low;
-        var point = this.low != null ? this.low : this.high;
-
-        if (typeof point === 'number' || (point != null ? point.isDateTime : undefined) || (point != null ? point.isQuantity : undefined) || (point != null ? point.isDate : undefined)) {
-          low = function () {
-            switch (false) {
-              case !_this4.lowClosed || !(_this4.low == null):
-                return minValueForInstance(point);
-
-              case !!_this4.lowClosed || _this4.low == null:
-                return successor(_this4.low);
-
-              default:
-                return _this4.low;
-            }
-          }();
-
-          high = function () {
-            switch (false) {
-              case !_this4.highClosed || !(_this4.high == null):
-                return maxValueForInstance(point);
-
-              case !!_this4.highClosed || _this4.high == null:
-                return predecessor(_this4.high);
-
-              default:
-                return _this4.high;
-            }
-          }();
-
-          if (low == null) {
-            low = new Uncertainty(minValueForInstance(point), high);
+          if (!this.start().sameAs(other.start(), precision)) {
+            return false;
           }
-
-          if (high == null) {
-            high = new Uncertainty(low, maxValueForInstance(point));
+        }
+      } else if (this.low != null && other.low == null && this.high != null && other.high != null || this.low == null && other.low != null && this.high != null && other.high != null || this.low == null && other.low == null && this.high != null && other.high != null) {
+        if (typeof this.high === 'number') {
+          if (!(this.end() === other.end())) {
+            return false;
           }
-
-          return new Interval(low, high, true, true);
         } else {
-          return new Interval(this.low, this.high, true, true);
+          if (!this.end().sameAs(other.end(), precision)) {
+            return false;
+          }
+        }
+      } // Checks to see if any of the Intervals have a open, null boundary
+
+
+      if (this.low == null && !this.lowClosed || this.high == null && !this.highClosed || other.low == null && !other.lowClosed || other.high == null && !other.highClosed) {
+        return null;
+      } // For the special cases where @ is Interval[null,null]
+
+
+      if (this.lowClosed && this.low == null && this.highClosed && this.high == null) {
+        return other.lowClosed && other.low == null && other.highClosed && other.high == null;
+      } // For the special case where Interval[...] same as Interval[null,null] should return false
+      // This accounts for the inverse of the if statement above: where the second Interval is [null,null] and not the first Interval
+      // The reason why this isn't caught below is due to how start() and end() work
+      // There is no way to tell the datatype for MIN and MAX if both boundaries are null
+
+
+      if (other.lowClosed && other.low == null && other.highClosed && other.high == null) {
+        return false;
+      }
+
+      if (typeof this.low === 'number') {
+        return this.start() === other.start() && this.end() === other.end();
+      } else {
+        return this.start().sameAs(other.start(), precision) && this.end().sameAs(other.end(), precision);
+      }
+    }
+  }, {
+    key: "sameOrBefore",
+    value: function sameOrBefore(other, precision) {
+      if (this.end() == null || other == null || other.start() == null) {
+        return null;
+      } else {
+        return this.end().sameOrBefore(other.start(), precision);
+      }
+    }
+  }, {
+    key: "sameOrAfter",
+    value: function sameOrAfter(other, precision) {
+      if (this.start() == null || other == null || other.end() == null) {
+        return null;
+      } else {
+        return this.start().sameOrAfter(other.end(), precision);
+      }
+    }
+  }, {
+    key: "equals",
+    value: function equals(other) {
+      if (other != null && other.isInterval) {
+        var _ref13 = [this.toClosed(), other.toClosed()],
+            a = _ref13[0],
+            b = _ref13[1];
+        return ThreeValuedLogic.and(cmp.equals(a.low, b.low), cmp.equals(a.high, b.high));
+      } else {
+        return false;
+      }
+    }
+  }, {
+    key: "after",
+    value: function after(other, precision) {
+      var closed = this.toClosed(); // Meets spec, but not 100% correct (e.g., (null, 5] after [6, 10] --> null)
+      // Simple way to fix it: and w/ not overlaps
+
+      if (other.toClosed) {
+        return cmp.greaterThan(closed.low, other.toClosed().high, precision);
+      } else {
+        return cmp.greaterThan(closed.low, other, precision);
+      }
+    }
+  }, {
+    key: "before",
+    value: function before(other, precision) {
+      var closed = this.toClosed(); // Meets spec, but not 100% correct (e.g., (null, 5] after [6, 10] --> null)
+      // Simple way to fix it: and w/ not overlaps
+
+      if (other.toClosed) {
+        return cmp.lessThan(closed.high, other.toClosed().low, precision);
+      } else {
+        return cmp.lessThan(closed.high, other, precision);
+      }
+    }
+  }, {
+    key: "meets",
+    value: function meets(other, precision) {
+      return ThreeValuedLogic.or(this.meetsBefore(other, precision), this.meetsAfter(other, precision));
+    }
+  }, {
+    key: "meetsAfter",
+    value: function meetsAfter(other, precision) {
+      try {
+        if (precision != null && this.low != null && this.low.isDateTime) {
+          return this.toClosed().low.sameAs(other.toClosed().high != null ? other.toClosed().high.add(1, precision) : null, precision);
+        } else {
+          return cmp.equals(this.toClosed().low, successor(other.toClosed().high));
+        }
+      } catch (error) {
+        return false;
+      }
+    }
+  }, {
+    key: "meetsBefore",
+    value: function meetsBefore(other, precision) {
+      try {
+        if (precision != null && this.high != null && this.high.isDateTime) {
+          return this.toClosed().high.sameAs(other.toClosed().low != null ? other.toClosed().low.add(-1, precision) : null, precision);
+        } else {
+          return cmp.equals(this.toClosed().high, predecessor(other.toClosed().low));
+        }
+      } catch (error) {
+        return false;
+      }
+    }
+  }, {
+    key: "start",
+    value: function start() {
+      if (this.low == null) {
+        if (this.lowClosed) {
+          return minValueForInstance(this.high);
+        } else {
+          return this.low;
         }
       }
-    }, {
-      key: "toString",
-      value: function toString() {
-        var start = this.lowClosed ? '[' : '(';
-        var end = this.highClosed ? ']' : ')';
-        return start + this.low.toString() + ', ' + this.high.toString() + end;
+
+      return this.toClosed().low;
+    }
+  }, {
+    key: "end",
+    value: function end() {
+      if (this.high == null) {
+        if (this.highClosed) {
+          return maxValueForInstance(this.low);
+        } else {
+          return this.high;
+        }
       }
-    }]);
 
-    return Interval;
-  }();
+      return this.toClosed().high;
+    }
+  }, {
+    key: "starts",
+    value: function starts(other, precision) {
+      var startEqual;
 
-  Interval.initClass();
+      if (precision != null && this.low != null && this.low.isDateTime) {
+        startEqual = this.low.sameAs(other.low, precision);
+      } else {
+        startEqual = cmp.equals(this.low, other.low);
+      }
+
+      var endLessThanOrEqual = cmp.lessThanOrEquals(this.high, other.high, precision);
+      return startEqual && endLessThanOrEqual;
+    }
+  }, {
+    key: "ends",
+    value: function ends(other, precision) {
+      var endEqual;
+      var startGreaterThanOrEqual = cmp.greaterThanOrEquals(this.low, other.low, precision);
+
+      if (precision != null && (this.low != null ? this.low.isDateTime : undefined)) {
+        endEqual = this.high.sameAs(other.high, precision);
+      } else {
+        endEqual = cmp.equals(this.high, other.high);
+      }
+
+      return startGreaterThanOrEqual && endEqual;
+    }
+  }, {
+    key: "width",
+    value: function width() {
+      if (this.low != null && (this.low.isDateTime || this.low.isDate || this.low.isTime) || this.high != null && (this.high.isDateTime || this.high.isDate || this.high.isTime)) {
+        throw new Error('Width of Date, DateTime, and Time intervals is not supported');
+      }
+
+      var closed = this.toClosed();
+
+      if (closed.low != null && closed.low.isUncertainty || closed.high != null && closed.high.isUncertainty) {
+        return null;
+      } else if (closed.low.isQuantity) {
+        if (closed.low.unit !== closed.high.unit) {
+          throw new Error('Cannot calculate width of Quantity Interval with different units');
+        }
+
+        var lowValue = closed.low.value;
+        var highValue = closed.high.value;
+        var diff = Math.abs(highValue - lowValue);
+        Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
+        return new Quantity(diff, closed.low.unit);
+      } else {
+        // TODO: Fix precision to 8 decimals in other places that return numbers
+        var _diff = Math.abs(closed.high - closed.low);
+
+        return Math.round(_diff * Math.pow(10, 8)) / Math.pow(10, 8);
+      }
+    }
+  }, {
+    key: "size",
+    value: function size() {
+      var pointSize = this.getPointSize();
+
+      if (this.low != null && (this.low.isDateTime || this.low.isDate || this.low.isTime) || this.high != null && (this.high.isDateTime || this.high.isDate || this.high.isTime)) {
+        throw new Error('Size of Date, DateTime, and Time intervals is not supported');
+      }
+
+      var closed = this.toClosed();
+
+      if (closed.low != null && closed.low.isUncertainty || closed.high != null && closed.high.isUncertainty) {
+        return null;
+      } else if (closed.low.isQuantity) {
+        if (closed.low.unit !== closed.high.unit) {
+          throw new Error('Cannot calculate size of Quantity Interval with different units');
+        }
+
+        var lowValue = closed.low.value;
+        var highValue = closed.high.value;
+        var diff = Math.abs(highValue - lowValue) + pointSize.value;
+        Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
+        return new Quantity(diff, closed.low.unit);
+      } else {
+        var _diff2 = Math.abs(closed.high - closed.low) + pointSize.value;
+
+        return Math.round(_diff2 * Math.pow(10, 8)) / Math.pow(10, 8);
+      }
+    }
+  }, {
+    key: "getPointSize",
+    value: function getPointSize() {
+      var pointSize;
+
+      if (this.low != null) {
+        if (this.low.isDateTime) {
+          pointSize = new Quantity(1, this.low.getPrecision());
+        } else if (this.low.isQuantity) {
+          pointSize = doSubtraction(successor(this.low), this.low);
+        } else {
+          pointSize = successor(this.low) - this.low;
+        }
+      } else if (this.high != null) {
+        if (this.high.isDateTime) {
+          pointSize = new Quantity(1, this.high.getPrecision());
+        } else if (this.high.isQuantity) {
+          pointSize = doSubtraction(successor(this.high), this.high);
+        } else {
+          pointSize = successor(this.high) - this.high;
+        }
+      } else {
+        throw new Error('Point type of intervals cannot be determined.');
+      }
+
+      if (typeof pointSize === 'number') {
+        pointSize = new Quantity(pointSize, '1');
+      }
+
+      return pointSize;
+    }
+  }, {
+    key: "toClosed",
+    value: function toClosed() {
+      var _this4 = this;
+
+      var point = this.low != null ? this.low : this.high;
+
+      if (typeof point === 'number' || point != null && (point.isDateTime || point.isQuantity || point.isDate)) {
+        var low = function () {
+          switch (true) {
+            case _this4.lowClosed && _this4.low == null:
+              return minValueForInstance(point);
+
+            case !_this4.lowClosed && _this4.low != null:
+              return successor(_this4.low);
+
+            default:
+              return _this4.low;
+          }
+        }();
+
+        var high = function () {
+          switch (true) {
+            case _this4.highClosed && _this4.high == null:
+              return maxValueForInstance(point);
+
+            case !_this4.highClosed && _this4.high != null:
+              return predecessor(_this4.high);
+
+            default:
+              return _this4.high;
+          }
+        }();
+
+        if (low == null) {
+          low = new Uncertainty(minValueForInstance(point), high);
+        }
+
+        if (high == null) {
+          high = new Uncertainty(low, maxValueForInstance(point));
+        }
+
+        return new Interval(low, high, true, true);
+      } else {
+        return new Interval(this.low, this.high, true, true);
+      }
+    }
+  }, {
+    key: "toString",
+    value: function toString() {
+      var start = this.lowClosed ? '[' : '(';
+      var end = this.highClosed ? ']' : ')';
+      return start + this.low.toString() + ', ' + this.high.toString() + end;
+    }
+  }, {
+    key: "isInterval",
+    get: function get() {
+      return true;
+    }
+  }]);
+
   return Interval;
 }();
 
-function __guard__(value, transform) {
-  return typeof value !== 'undefined' && value !== null ? transform(value) : undefined;
+function areDateTimes(x, y) {
+  return [x, y].every(function (z) {
+    return z != null && z.isDateTime;
+  });
 }
-},{"../datatypes/quantity":11,"../util/comparison":45,"../util/math":46,"./datetime":7,"./logic":10,"./uncertainty":13}],10:[function(require,module,exports){
+
+function areNumeric(x, y) {
+  return [x, y].every(function (z) {
+    return typeof z === 'number' || z != null && z.isUncertainty && typeof z.low === 'number';
+  });
+}
+
+function lowestNumericUncertainty(x, y) {
+  if (x == null || !x.isUncertainty) {
+    x = new Uncertainty(x);
+  }
+
+  if (y == null || !y.isUncertainty) {
+    y = new Uncertainty(y);
+  }
+
+  var low = x.low < y.low ? x.low : y.low;
+  var high = x.high < y.high ? x.high : y.high;
+
+  if (low !== high) {
+    return new Uncertainty(low, high);
+  } else {
+    return low;
+  }
+}
+
+function highestNumericUncertainty(x, y) {
+  if (x == null || !x.isUncertainty) {
+    x = new Uncertainty(x);
+  }
+
+  if (y == null || !y.isUncertainty) {
+    y = new Uncertainty(y);
+  }
+
+  var low = x.low > y.low ? x.low : y.low;
+  var high = x.high > y.high ? x.high : y.high;
+
+  if (low !== high) {
+    return new Uncertainty(low, high);
+  } else {
+    return low;
+  }
+}
+
+module.exports = {
+  Interval: Interval
+};
+},{"../datatypes/quantity":11,"../util/comparison":45,"../util/math":46,"./logic":10,"./uncertainty":13}],10:[function(require,module,exports){
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3162,21 +2965,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var ThreeValuedLogic;
-
-module.exports.ThreeValuedLogic = ThreeValuedLogic = /*#__PURE__*/function () {
+var ThreeValuedLogic = /*#__PURE__*/function () {
   function ThreeValuedLogic() {
     _classCallCheck(this, ThreeValuedLogic);
   }
@@ -3239,18 +3028,14 @@ module.exports.ThreeValuedLogic = ThreeValuedLogic = /*#__PURE__*/function () {
 
   return ThreeValuedLogic;
 }();
+
+module.exports = {
+  ThreeValuedLogic: ThreeValuedLogic
+};
 },{}],11:[function(require,module,exports){
 "use strict";
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
@@ -3262,23 +3047,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-/* eslint-disable
-    no-prototype-builtins,
-    no-useless-escape,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Quantity;
-
 var _require = require('../util/math'),
     decimalAdjust = _require.decimalAdjust,
     isValidDecimal = _require.isValidDecimal,
@@ -3286,200 +3054,183 @@ var _require = require('../util/math'),
 
 var ucum = require('ucum');
 
-module.exports.Quantity = Quantity = function () {
-  Quantity = /*#__PURE__*/function () {
-    _createClass(Quantity, null, [{
-      key: "initClass",
-      value: function initClass() {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        Object.defineProperties(this.prototype, {
-          isQuantity: {
-            get: function get() {
-              return true;
-            }
-          }
-        });
-      }
-    }]);
+var Quantity = /*#__PURE__*/function () {
+  function Quantity(value, unit) {
+    _classCallCheck(this, Quantity);
 
-    function Quantity(value, unit) {
-      _classCallCheck(this, Quantity);
+    this.value = value;
+    this.unit = unit;
 
-      this.value = value;
-      this.unit = unit;
+    if (this.value == null || isNaN(this.value)) {
+      throw new Error('Cannot create a quantity with an undefined value');
+    } else if (!isValidDecimal(this.value)) {
+      throw new Error('Cannot create a quantity with an invalid decimal value');
+    } // Attempt to parse the unit with UCUM. If it fails, throw a friendly error.
 
-      if (this.value == null || isNaN(this.value)) {
-        throw new Error('Cannot create a quantity with an undefined value');
-      } else {
-        if (!isValidDecimal(this.value)) {
-          throw new Error('Cannot create a quantity with an invalid decimal value');
+
+    if (this.unit != null && !is_valid_ucum_unit(this.unit)) {
+      throw new Error("'".concat(this.unit, "' is not a valid UCUM unit."));
+    }
+  }
+
+  _createClass(Quantity, [{
+    key: "clone",
+    value: function clone() {
+      return new Quantity(this.value, this.unit);
+    }
+  }, {
+    key: "toString",
+    value: function toString() {
+      return "".concat(this.value, " '").concat(this.unit, "'");
+    }
+  }, {
+    key: "sameOrBefore",
+    value: function sameOrBefore(other) {
+      if (other != null && other.isQuantity) {
+        var other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
+
+        if (other_v == null) {
+          return null;
+        } else {
+          return this.value <= other_v;
         }
-      } // Attempt to parse the unit with UCUM. If it fails, throw a friendly error.
-
-
-      if (this.unit != null && !is_valid_ucum_unit(this.unit)) {
-        throw new Error("'".concat(this.unit, "' is not a valid UCUM unit."));
       }
     }
+  }, {
+    key: "sameOrAfter",
+    value: function sameOrAfter(other) {
+      if (other != null && other.isQuantity) {
+        var other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
 
-    _createClass(Quantity, [{
-      key: "clone",
-      value: function clone() {
-        return new Quantity(this.value, this.unit);
-      }
-    }, {
-      key: "toString",
-      value: function toString() {
-        return "".concat(this.value, " '").concat(this.unit, "'");
-      }
-    }, {
-      key: "sameOrBefore",
-      value: function sameOrBefore(other) {
-        if (other != null ? other.isQuantity : undefined) {
-          var other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
-
-          if (other_v == null) {
-            return null;
-          } else {
-            return this.value <= other_v;
-          }
-        }
-      }
-    }, {
-      key: "sameOrAfter",
-      value: function sameOrAfter(other) {
-        if (other != null ? other.isQuantity : undefined) {
-          var other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
-
-          if (other_v == null) {
-            return null;
-          } else {
-            return this.value >= other_v;
-          }
-        }
-      }
-    }, {
-      key: "after",
-      value: function after(other) {
-        if (other != null ? other.isQuantity : undefined) {
-          var other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
-
-          if (other_v == null) {
-            return null;
-          } else {
-            return this.value > other_v;
-          }
-        }
-      }
-    }, {
-      key: "before",
-      value: function before(other) {
-        if (other != null ? other.isQuantity : undefined) {
-          var other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
-
-          if (other_v == null) {
-            return null;
-          } else {
-            return this.value < other_v;
-          }
-        }
-      }
-    }, {
-      key: "equals",
-      value: function equals(other) {
-        if (other != null ? other.isQuantity : undefined) {
-          if (!this.unit && other.unit || this.unit && !other.unit) {
-            return false;
-          } else if (!this.unit && !other.unit) {
-            return this.value === other.value;
-          } else {
-            var other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
-
-            if (other_v == null) {
-              return null;
-            } else {
-              return decimalAdjust('round', this.value, -8) === decimalAdjust('round', other_v, -8);
-            }
-          }
-        }
-      }
-    }, {
-      key: "convertUnit",
-      value: function convertUnit(to_unit) {
-        var value = convert_value(this.value, this.unit, to_unit);
-        var unit = to_unit; // Need to pass through constructor again to catch invalid units
-
-        return new Quantity(value, unit);
-      }
-    }, {
-      key: "dividedBy",
-      value: function dividedBy(other) {
-        return this.multiplyDivide(other, '/');
-      }
-    }, {
-      key: "multiplyBy",
-      value: function multiplyBy(other) {
-        return this.multiplyDivide(other, '.'); // in ucum . represents multiplication
-      }
-    }, {
-      key: "multiplyDivide",
-      value: function multiplyDivide(other, operator) {
-        if (other != null ? other.isQuantity : undefined) {
-          var a = this.unit != null ? this : new Quantity(this.value, '1');
-          var b = other.unit != null ? other : new Quantity(other.value, {
-            unit: '1'
-          });
-          var can_val = a.to_ucum();
-          var other_can_value = b.to_ucum();
-          var ucum_value = ucum_multiply(can_val, [[operator, other_can_value]]);
-
-          if (overflowsOrUnderflows(ucum_value.value)) {
-            return null;
-          }
-
-          try {
-            return new Quantity(ucum_value.value, units_to_string(ucum_value.units));
-          } catch (error) {
-            return null;
-          }
+        if (other_v == null) {
+          return null;
         } else {
-          var value = operator === '/' ? this.value / other : this.value * other;
+          return this.value >= other_v;
+        }
+      }
+    }
+  }, {
+    key: "after",
+    value: function after(other) {
+      if (other != null && other.isQuantity) {
+        var other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
 
-          if (overflowsOrUnderflows(value)) {
-            return null;
-          }
+        if (other_v == null) {
+          return null;
+        } else {
+          return this.value > other_v;
+        }
+      }
+    }
+  }, {
+    key: "before",
+    value: function before(other) {
+      if (other != null && other.isQuantity) {
+        var other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
 
-          try {
-            return new Quantity(decimalAdjust('round', value, -8), coalesceToOne(this.unit));
-          } catch (error1) {
+        if (other_v == null) {
+          return null;
+        } else {
+          return this.value < other_v;
+        }
+      }
+    }
+  }, {
+    key: "equals",
+    value: function equals(other) {
+      if (other != null && other.isQuantity) {
+        if (!this.unit && other.unit || this.unit && !other.unit) {
+          return false;
+        } else if (!this.unit && !other.unit) {
+          return this.value === other.value;
+        } else {
+          var other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
+
+          if (other_v == null) {
             return null;
+          } else {
+            return decimalAdjust('round', this.value, -8) === decimalAdjust('round', other_v, -8);
           }
         }
       }
-    }, {
-      key: "to_ucum",
-      value: function to_ucum() {
-        var u = ucum.parse(ucum_unit(this.unit));
-        u.value *= this.value;
-        return u;
+    }
+  }, {
+    key: "convertUnit",
+    value: function convertUnit(to_unit) {
+      var value = convert_value(this.value, this.unit, to_unit);
+      var unit = to_unit; // Need to pass through constructor again to catch invalid units
+
+      return new Quantity(value, unit);
+    }
+  }, {
+    key: "dividedBy",
+    value: function dividedBy(other) {
+      return this.multiplyDivide(other, '/');
+    }
+  }, {
+    key: "multiplyBy",
+    value: function multiplyBy(other) {
+      return this.multiplyDivide(other, '.'); // in ucum . represents multiplication
+    }
+  }, {
+    key: "multiplyDivide",
+    value: function multiplyDivide(other, operator) {
+      if (other != null && other.isQuantity) {
+        var a = this.unit != null ? this : new Quantity(this.value, '1');
+        var b = other.unit != null ? other : new Quantity(other.value, {
+          unit: '1'
+        });
+        var can_val = a.to_ucum();
+        var other_can_value = b.to_ucum();
+        var ucum_value = ucum_multiply(can_val, [[operator, other_can_value]]);
+
+        if (overflowsOrUnderflows(ucum_value.value)) {
+          return null;
+        }
+
+        try {
+          return new Quantity(ucum_value.value, units_to_string(ucum_value.units));
+        } catch (e) {
+          return null;
+        }
+      } else {
+        var value = operator === '/' ? this.value / other : this.value * other;
+
+        if (overflowsOrUnderflows(value)) {
+          return null;
+        }
+
+        try {
+          return new Quantity(decimalAdjust('round', value, -8), coalesceToOne(this.unit));
+        } catch (e) {
+          return null;
+        }
       }
-    }]);
+    }
+  }, {
+    key: "to_ucum",
+    value: function to_ucum() {
+      var u = ucum.parse(ucum_unit(this.unit));
+      u.value *= this.value;
+      return u;
+    }
+  }, {
+    key: "isQuantity",
+    get: function get() {
+      return true;
+    }
+  }]);
 
-    return Quantity;
-  }();
-
-  Quantity.initClass();
   return Quantity;
 }();
 
-var clean_unit = function clean_unit(units) {
+function clean_unit(units) {
   if (ucum_time_units[units]) {
     return ucum_to_cql_units[ucum_time_units[units]];
   } else {
     return units;
   }
-}; // Hash of time units and their UCUM equivalents, both case-sensitive and case-insensitive
+} // Hash of time units and their UCUM equivalents, both case-sensitive and case-insensitive
 // See http://unitsofmeasure.org/ucum.html#para-31
 // The CQL specification says that dates are based on the Gregorian calendar
 // UCUM says that years should be Julian. As a result, CQL-based year and month identifiers will
@@ -3542,12 +3293,12 @@ var ucum_to_cql_units = {
   'ms': 'millisecond'
 }; // this is used to perform any conversions of CQL date time fields to their ucum equivalents
 
-var ucum_unit = function ucum_unit(unit) {
+function ucum_unit(unit) {
   return ucum_time_units[unit] || unit || '';
-}; // just a wrapper function to deal with possible exceptions being thrown
+} // just a wrapper function to deal with possible exceptions being thrown
 
 
-var convert_value = function convert_value(value, from, to) {
+function convert_value(value, from, to) {
   try {
     if (from === to) {
       return value;
@@ -3558,14 +3309,14 @@ var convert_value = function convert_value(value, from, to) {
   } catch (e) {
     return null;
   }
-}; // Cache for unit validity results so we dont have to go to ucum.js for every check.
+} // Cache for unit validity results so we dont have to go to ucum.js for every check.
 // Is a map of unit string to boolean validity
 
 
 var unitValidityCache = {}; // Helper for checking if a unit is valid. Checks the cache first, checks with ucum.js otherwise.
 
-var is_valid_ucum_unit = function is_valid_ucum_unit(unit) {
-  if (unitValidityCache.hasOwnProperty(unit)) {
+function is_valid_ucum_unit(unit) {
+  if (unitValidityCache[unit] != null) {
     return unitValidityCache[unit];
   } else {
     try {
@@ -3577,9 +3328,7 @@ var is_valid_ucum_unit = function is_valid_ucum_unit(unit) {
       return false;
     }
   }
-};
-
-module.exports.convert_value = convert_value; // This method will take a ucum.js representation of units and convert them to a string
+} // This method will take a ucum.js representation of units and convert them to a string
 // ucum.js units are a has of unit => power values.  For instance m/h (meters per hour) in
 // ucum.js will be reprsented by the json object {m: 1, h:-1}  negative values are inverted and
 // are akin to denominator values in a fraction.  Positive values are somewhat a kin to numerator
@@ -3588,7 +3337,8 @@ module.exports.convert_value = convert_value; // This method will take a ucum.js
 // the ucum multiplication operator '.' and then appends the inverted values separated by the ucum
 // divisor '/' .
 
-var units_to_string = function units_to_string() {
+
+function units_to_string() {
   var units = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var numer = [];
   var denom = [];
@@ -3618,7 +3368,7 @@ var units_to_string = function units_to_string() {
   } else {
     return unit_string;
   }
-}; // this method is taken from the ucum.js library which it does not  export
+} // this method is taken from the ucum.js library which it does not  export
 // so we need to replicate the behavior here in order to perform multiplication
 // and division of the ucum values.
 // t:  the ucum quantity being multiplied/divided .  This method modifies the object t that is passed in
@@ -3626,7 +3376,7 @@ var units_to_string = function units_to_string() {
 // this would represent multiply t by the value m^2
 
 
-var ucum_multiply = function ucum_multiply(t) {
+function ucum_multiply(t) {
   var ms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
   if (ms.length === 0) {
@@ -3662,18 +3412,19 @@ var ucum_multiply = function ucum_multiply(t) {
   }
 
   return ret;
-};
+}
 
-module.exports.parseQuantity = function (str) {
+function parseQuantity(str) {
   var components = /([+|-]?\d+\.?\d*)\s*('(.+)')?/.exec(str);
 
   if (components != null && components[1] != null) {
-    var unit;
     var value = parseFloat(components[1]);
 
     if (!isValidDecimal(value)) {
       return null;
     }
+
+    var unit;
 
     if (components[3] != null) {
       unit = components[3].trim();
@@ -3685,20 +3436,16 @@ module.exports.parseQuantity = function (str) {
   } else {
     return null;
   }
-};
+}
 
-var doScaledAddition = function doScaledAddition(a, b, scaleForB) {
+function doScaledAddition(a, b, scaleForB) {
   var b_unit;
 
-  if ((a != null ? a.isQuantity : undefined) && (b != null ? b.isQuantity : undefined)) {
+  if (a != null && a.isQuantity && b != null && b.isQuantity) {
     var a_unit;
-
-    var _Array$from = Array.from([coalesceToOne(a.unit), coalesceToOne(b.unit)]);
-
-    var _Array$from2 = _slicedToArray(_Array$from, 2);
-
-    a_unit = _Array$from2[0];
-    b_unit = _Array$from2[1];
+    var _ref = [coalesceToOne(a.unit), coalesceToOne(b.unit)];
+    a_unit = _ref[0];
+    b_unit = _ref[1];
     // The units don't have to match (m and m^2), but must be convertable
     // we will choose the unit of a to be the unit we return
     var val = convert_value(b.value * scaleForB, b_unit, a_unit);
@@ -3715,34 +3462,34 @@ var doScaledAddition = function doScaledAddition(a, b, scaleForB) {
       return new Quantity(sum, a_unit);
     }
   } else if (a.copy && a.add) {
-    b_unit = (b != null ? b.isQuantity : undefined) ? coalesceToOne(b.unit) : b.unit;
+    b_unit = b != null && b.isQuantity ? coalesceToOne(b.unit) : b.unit;
     return a.copy().add(b.value * scaleForB, clean_unit(b_unit));
   } else {
     throw new Error('Unsupported argument types.');
   }
-};
+}
 
-module.exports.doAddition = function (a, b) {
+function doAddition(a, b) {
   return doScaledAddition(a, b, 1);
-};
+}
 
-module.exports.doSubtraction = function (a, b) {
+function doSubtraction(a, b) {
   return doScaledAddition(a, b, -1);
-};
+}
 
-module.exports.doDivision = function (a, b) {
-  if (a != null ? a.isQuantity : undefined) {
+function doDivision(a, b) {
+  if (a != null && a.isQuantity) {
     return a.dividedBy(b);
   }
-};
+}
 
-module.exports.doMultiplication = function (a, b) {
-  if (a != null ? a.isQuantity : undefined) {
+function doMultiplication(a, b) {
+  if (a != null && a.isQuantity) {
     return a.multiplyBy(b);
   } else {
     return b.multiplyBy(a);
   }
-};
+}
 
 var coalesceToOne = function coalesceToOne(o) {
   if (o == null || o.trim != null && !o.trim()) {
@@ -3752,7 +3499,7 @@ var coalesceToOne = function coalesceToOne(o) {
   }
 };
 
-module.exports.compare_units = function (unit_a, unit_b) {
+function compare_units(unit_a, unit_b) {
   try {
     var c = ucum.convert(1, ucum_unit(unit_a), ucum_unit(unit_b));
 
@@ -3770,6 +3517,17 @@ module.exports.compare_units = function (unit_a, unit_b) {
   } catch (e) {
     return null;
   }
+}
+
+module.exports = {
+  Quantity: Quantity,
+  convert_value: convert_value,
+  parseQuantity: parseQuantity,
+  doAddition: doAddition,
+  doSubtraction: doSubtraction,
+  doDivision: doDivision,
+  doMultiplication: doMultiplication,
+  compare_units: compare_units
 };
 },{"../util/math":46,"ucum":57}],12:[function(require,module,exports){
 "use strict";
@@ -3780,104 +3538,64 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
+var Ratio = /*#__PURE__*/function () {
+  function Ratio(numerator, denominator) {
+    _classCallCheck(this, Ratio);
 
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Ratio;
+    this.numerator = numerator;
+    this.denominator = denominator;
 
-module.exports.Ratio = Ratio = function () {
-  Ratio = /*#__PURE__*/function () {
-    _createClass(Ratio, null, [{
-      key: "initClass",
-      value: function initClass() {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        Object.defineProperties(this.prototype, {
-          isRatio: {
-            get: function get() {
-              return true;
-            }
-          }
-        });
-      }
-    }]);
-
-    function Ratio(numerator, denominator) {
-      _classCallCheck(this, Ratio);
-
-      this.numerator = numerator;
-      this.denominator = denominator;
-
-      if (this.numerator == null) {
-        throw new Error('Cannot create a ratio with an undefined numerator');
-      }
-
-      if (this.denominator == null) {
-        throw new Error('Cannot create a ratio with an undefined denominator');
-      }
+    if (this.numerator == null) {
+      throw new Error('Cannot create a ratio with an undefined numerator');
     }
 
-    _createClass(Ratio, [{
-      key: "clone",
-      value: function clone() {
-        return new Ratio(this.numerator.clone(), this.denominator.clone());
-      }
-    }, {
-      key: "toString",
-      value: function toString() {
-        return "".concat(this.numerator.toString(), " : ").concat(this.denominator.toString());
-      }
-    }, {
-      key: "equals",
-      value: function equals(other) {
-        if (other != null ? other.isRatio : undefined) {
-          var divided_this = this.numerator.dividedBy(this.denominator);
-          var divided_other = other.numerator.dividedBy(other.denominator);
-          return divided_this.equals(divided_other);
-        } else {
-          return false;
-        }
-      }
-    }, {
-      key: "equivalent",
-      value: function equivalent(other) {
-        var equal = this.equals(other);
+    if (this.denominator == null) {
+      throw new Error('Cannot create a ratio with an undefined denominator');
+    }
+  }
 
-        if (equal == null) {
-          return false;
-        }
-
-        return equal;
+  _createClass(Ratio, [{
+    key: "clone",
+    value: function clone() {
+      return new Ratio(this.numerator.clone(), this.denominator.clone());
+    }
+  }, {
+    key: "toString",
+    value: function toString() {
+      return "".concat(this.numerator.toString(), " : ").concat(this.denominator.toString());
+    }
+  }, {
+    key: "equals",
+    value: function equals(other) {
+      if (other != null && other.isRatio) {
+        var divided_this = this.numerator.dividedBy(this.denominator);
+        var divided_other = other.numerator.dividedBy(other.denominator);
+        return divided_this.equals(divided_other);
+      } else {
+        return false;
       }
-    }]);
+    }
+  }, {
+    key: "equivalent",
+    value: function equivalent(other) {
+      var equal = this.equals(other);
+      return equal != null ? equal : false;
+    }
+  }, {
+    key: "isRatio",
+    get: function get() {
+      return true;
+    }
+  }]);
 
-    return Ratio;
-  }();
-
-  Ratio.initClass();
   return Ratio;
 }();
+
+module.exports = {
+  Ratio: Ratio
+};
 },{}],13:[function(require,module,exports){
 "use strict";
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -3887,195 +3605,169 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
-
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Uncertainty;
-
 var _require = require('./logic'),
     ThreeValuedLogic = _require.ThreeValuedLogic;
 
-module.exports.Uncertainty = Uncertainty = function () {
-  Uncertainty = /*#__PURE__*/function () {
-    _createClass(Uncertainty, null, [{
-      key: "initClass",
-      value: function initClass() {
-        Object.defineProperties(this.prototype, {
-          isUncertainty: {
-            get: function get() {
-              return true;
-            }
-          }
-        });
+var Uncertainty = /*#__PURE__*/function () {
+  _createClass(Uncertainty, null, [{
+    key: "from",
+    value: function from(obj) {
+      if (obj != null && obj.isUncertainty) {
+        return obj;
+      } else {
+        return new Uncertainty(obj);
       }
-    }, {
-      key: "from",
-      value: function from(obj) {
-        if (obj != null ? obj.isUncertainty : undefined) {
-          return obj;
-        } else {
-          return new Uncertainty(obj);
-        }
+    }
+  }]);
+
+  function Uncertainty() {
+    var low = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    var high = arguments.length > 1 ? arguments[1] : undefined;
+
+    _classCallCheck(this, Uncertainty);
+
+    this.low = low;
+    this.high = high;
+
+    var gt = function gt(a, b) {
+      if (_typeof(a) !== _typeof(b)) {
+        // TODO: This should probably throw rather than return false.
+        // Uncertainties with different types probably shouldn't be supported.
+        return false;
       }
-    }]);
 
-    function Uncertainty() {
-      var low = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var high = arguments.length > 1 ? arguments[1] : undefined;
+      if (typeof a.after === 'function') {
+        return a.after(b);
+      } else {
+        return a > b;
+      }
+    };
 
-      _classCallCheck(this, Uncertainty);
+    var isNonEnumerable = function isNonEnumerable(val) {
+      return val != null && (val.isCode || val.isConcept || val.isValueSet);
+    };
 
-      this.low = low;
-      this.high = high;
+    if (typeof this.high === 'undefined') {
+      this.high = this.low;
+    }
 
-      var gt = function gt(a, b) {
+    if (isNonEnumerable(this.low) || isNonEnumerable(this.high)) {
+      this.low = this.high = null;
+    }
+
+    if (this.low != null && this.high != null && gt(this.low, this.high)) {
+      var _ref = [this.high, this.low];
+      this.low = _ref[0];
+      this.high = _ref[1];
+    }
+  }
+
+  _createClass(Uncertainty, [{
+    key: "copy",
+    value: function copy() {
+      var newLow = this.low;
+      var newHigh = this.high;
+
+      if (typeof this.low.copy === 'function') {
+        newLow = this.low.copy();
+      }
+
+      if (typeof this.high.copy === 'function') {
+        newHigh = this.high.copy();
+      }
+
+      return new Uncertainty(newLow, newHigh);
+    }
+  }, {
+    key: "isPoint",
+    value: function isPoint() {
+      // Note: Can't use normal equality, as that fails for Javascript dates
+      // TODO: Fix after we don't need to support Javascript date uncertainties anymore
+      var lte = function lte(a, b) {
         if (_typeof(a) !== _typeof(b)) {
-          // TODO: This should probably throw rather than return false.
-          // Uncertainties with different types probably shouldn't be supported.
           return false;
         }
 
-        if (typeof a.after === 'function') {
-          return a.after(b);
+        if (typeof a.sameOrBefore === 'function') {
+          return a.sameOrBefore(b);
         } else {
-          return a > b;
+          return a <= b;
         }
       };
 
-      var isNonEnumerable = function isNonEnumerable(val) {
-        return val != null && (val.isCode || val.isConcept || val.isValueSet);
+      var gte = function gte(a, b) {
+        if (_typeof(a) !== _typeof(b)) {
+          return false;
+        }
+
+        if (typeof a.sameOrBefore === 'function') {
+          return a.sameOrAfter(b);
+        } else {
+          return a >= b;
+        }
       };
 
-      if (typeof this.high === 'undefined') {
-        this.high = this.low;
-      }
+      return this.low != null && this.high != null && lte(this.low, this.high) && gte(this.low, this.high);
+    }
+  }, {
+    key: "equals",
+    value: function equals(other) {
+      other = Uncertainty.from(other);
+      return ThreeValuedLogic.not(ThreeValuedLogic.or(this.lessThan(other), this.greaterThan(other)));
+    }
+  }, {
+    key: "lessThan",
+    value: function lessThan(other) {
+      var lt = function lt(a, b) {
+        if (_typeof(a) !== _typeof(b)) {
+          return false;
+        }
 
-      if (isNonEnumerable(this.low) || isNonEnumerable(this.high)) {
-        this.low = this.high = null;
-      }
+        if (typeof a.before === 'function') {
+          return a.before(b);
+        } else {
+          return a < b;
+        }
+      };
 
-      if (this.low != null && this.high != null && gt(this.low, this.high)) {
-        var _Array$from = Array.from([this.high, this.low]);
+      other = Uncertainty.from(other);
+      var bestCase = this.low == null || other.high == null || lt(this.low, other.high);
+      var worstCase = this.high != null && other.low != null && lt(this.high, other.low);
 
-        var _Array$from2 = _slicedToArray(_Array$from, 2);
-
-        this.low = _Array$from2[0];
-        this.high = _Array$from2[1];
+      if (bestCase === worstCase) {
+        return bestCase;
+      } else {
+        return null;
       }
     }
+  }, {
+    key: "greaterThan",
+    value: function greaterThan(other) {
+      return Uncertainty.from(other).lessThan(this);
+    }
+  }, {
+    key: "lessThanOrEquals",
+    value: function lessThanOrEquals(other) {
+      return ThreeValuedLogic.not(this.greaterThan(Uncertainty.from(other)));
+    }
+  }, {
+    key: "greaterThanOrEquals",
+    value: function greaterThanOrEquals(other) {
+      return ThreeValuedLogic.not(this.lessThan(Uncertainty.from(other)));
+    }
+  }, {
+    key: "isUncertainty",
+    get: function get() {
+      return true;
+    }
+  }]);
 
-    _createClass(Uncertainty, [{
-      key: "copy",
-      value: function copy() {
-        var newLow = this.low;
-        var newHigh = this.high;
-
-        if (typeof this.low.copy === 'function') {
-          newLow = this.low.copy();
-        }
-
-        if (typeof this.high.copy === 'function') {
-          newHigh = this.high.copy();
-        }
-
-        return new Uncertainty(newLow, newHigh);
-      }
-    }, {
-      key: "isPoint",
-      value: function isPoint() {
-        // Note: Can't use normal equality, as that fails for Javascript dates
-        // TODO: Fix after we don't need to support Javascript date uncertainties anymore
-        var lte = function lte(a, b) {
-          if (_typeof(a) !== _typeof(b)) {
-            return false;
-          }
-
-          if (typeof a.sameOrBefore === 'function') {
-            return a.sameOrBefore(b);
-          } else {
-            return a <= b;
-          }
-        };
-
-        var gte = function gte(a, b) {
-          if (_typeof(a) !== _typeof(b)) {
-            return false;
-          }
-
-          if (typeof a.sameOrBefore === 'function') {
-            return a.sameOrAfter(b);
-          } else {
-            return a >= b;
-          }
-        };
-
-        return this.low != null && this.high != null && lte(this.low, this.high) && gte(this.low, this.high);
-      }
-    }, {
-      key: "equals",
-      value: function equals(other) {
-        other = Uncertainty.from(other);
-        return ThreeValuedLogic.not(ThreeValuedLogic.or(this.lessThan(other), this.greaterThan(other)));
-      }
-    }, {
-      key: "lessThan",
-      value: function lessThan(other) {
-        var lt = function lt(a, b) {
-          if (_typeof(a) !== _typeof(b)) {
-            return false;
-          }
-
-          if (typeof a.before === 'function') {
-            return a.before(b);
-          } else {
-            return a < b;
-          }
-        };
-
-        other = Uncertainty.from(other);
-        var bestCase = this.low == null || other.high == null || lt(this.low, other.high);
-        var worstCase = this.high != null && other.low != null && lt(this.high, other.low);
-
-        if (bestCase === worstCase) {
-          return bestCase;
-        } else {
-          return null;
-        }
-      }
-    }, {
-      key: "greaterThan",
-      value: function greaterThan(other) {
-        other = Uncertainty.from(other);
-        return other.lessThan(this);
-      }
-    }, {
-      key: "lessThanOrEquals",
-      value: function lessThanOrEquals(other) {
-        other = Uncertainty.from(other);
-        return ThreeValuedLogic.not(this.greaterThan(other));
-      }
-    }, {
-      key: "greaterThanOrEquals",
-      value: function greaterThanOrEquals(other) {
-        other = Uncertainty.from(other);
-        return ThreeValuedLogic.not(this.lessThan(other));
-      }
-    }]);
-
-    return Uncertainty;
-  }();
-
-  Uncertainty.initClass();
   return Uncertainty;
 }();
+
+module.exports = {
+  Uncertainty: Uncertainty
+};
 },{"./logic":10}],14:[function(require,module,exports){
 "use strict";
 
