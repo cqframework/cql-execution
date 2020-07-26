@@ -1,9 +1,12 @@
 const { ThreeValuedLogic } = require('./logic');
 
 class Uncertainty {
-
   static from(obj) {
-    if (obj != null && obj.isUncertainty) { return obj; } else { return new Uncertainty(obj); }
+    if (obj != null && obj.isUncertainty) {
+      return obj;
+    } else {
+      return new Uncertainty(obj);
+    }
   }
 
   constructor(low = null, high) {
@@ -15,12 +18,22 @@ class Uncertainty {
         // Uncertainties with different types probably shouldn't be supported.
         return false;
       }
-      if (typeof a.after === 'function') { return a.after(b); } else { return a > b; }
+      if (typeof a.after === 'function') {
+        return a.after(b);
+      } else {
+        return a > b;
+      }
     };
     const isNonEnumerable = val => val != null && (val.isCode || val.isConcept || val.isValueSet);
-    if (typeof this.high === 'undefined') { this.high = this.low; }
-    if (isNonEnumerable(this.low) || isNonEnumerable(this.high)) { this.low = this.high = null; }
-    if (this.low != null && this.high != null && gt(this.low, this.high)) { [this.low, this.high] = [this.high, this.low]; }
+    if (typeof this.high === 'undefined') {
+      this.high = this.low;
+    }
+    if (isNonEnumerable(this.low) || isNonEnumerable(this.high)) {
+      this.low = this.high = null;
+    }
+    if (this.low != null && this.high != null && gt(this.low, this.high)) {
+      [this.low, this.high] = [this.high, this.low];
+    }
   }
 
   get isUncertainty() {
@@ -47,15 +60,25 @@ class Uncertainty {
       if (typeof a !== typeof b) {
         return false;
       }
-      if (typeof a.sameOrBefore === 'function') { return a.sameOrBefore(b); } else { return a <= b; }
+      if (typeof a.sameOrBefore === 'function') {
+        return a.sameOrBefore(b);
+      } else {
+        return a <= b;
+      }
     };
     const gte = (a, b) => {
       if (typeof a !== typeof b) {
         return false;
       }
-      if (typeof a.sameOrBefore === 'function') { return a.sameOrAfter(b); } else { return a >= b; }
+      if (typeof a.sameOrBefore === 'function') {
+        return a.sameOrAfter(b);
+      } else {
+        return a >= b;
+      }
     };
-    return this.low != null && this.high != null && lte(this.low, this.high) && gte(this.low, this.high);
+    return (
+      this.low != null && this.high != null && lte(this.low, this.high) && gte(this.low, this.high)
+    );
   }
 
   equals(other) {
@@ -65,13 +88,23 @@ class Uncertainty {
 
   lessThan(other) {
     const lt = (a, b) => {
-      if (typeof a !== typeof b) { return false; }
-      if (typeof a.before === 'function') { return a.before(b); } else { return a < b; }
+      if (typeof a !== typeof b) {
+        return false;
+      }
+      if (typeof a.before === 'function') {
+        return a.before(b);
+      } else {
+        return a < b;
+      }
     };
     other = Uncertainty.from(other);
     const bestCase = this.low == null || other.high == null || lt(this.low, other.high);
     const worstCase = this.high != null && other.low != null && lt(this.high, other.low);
-    if (bestCase === worstCase) { return bestCase; } else { return null; }
+    if (bestCase === worstCase) {
+      return bestCase;
+    } else {
+      return null;
+    }
   }
 
   greaterThan(other) {

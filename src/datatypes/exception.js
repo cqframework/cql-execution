@@ -1,5 +1,5 @@
 class Exception {
-  constructor(message, wrapped ) {
+  constructor(message, wrapped) {
     this.message = message;
     this.wrapped = wrapped;
   }

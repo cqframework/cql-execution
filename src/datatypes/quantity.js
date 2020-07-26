@@ -31,8 +31,8 @@ class Quantity {
 
   sameOrBefore(other) {
     if (other != null && other.isQuantity) {
-      const other_v = convert_value(other.value,ucum_unit(other.unit),ucum_unit(this.unit));
-      if(other_v == null) {
+      const other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
+      if (other_v == null) {
         return null;
       } else {
         return this.value <= other_v;
@@ -42,8 +42,8 @@ class Quantity {
 
   sameOrAfter(other) {
     if (other != null && other.isQuantity) {
-      const other_v = convert_value(other.value,ucum_unit(other.unit),ucum_unit(this.unit));
-      if(other_v == null) {
+      const other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
+      if (other_v == null) {
         return null;
       } else {
         return this.value >= other_v;
@@ -53,8 +53,8 @@ class Quantity {
 
   after(other) {
     if (other != null && other.isQuantity) {
-      const other_v = convert_value(other.value,ucum_unit(other.unit),ucum_unit(this.unit));
-      if(other_v == null) {
+      const other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
+      if (other_v == null) {
         return null;
       } else {
         return this.value > other_v;
@@ -64,8 +64,8 @@ class Quantity {
 
   before(other) {
     if (other != null && other.isQuantity) {
-      const other_v = convert_value(other.value,ucum_unit(other.unit),ucum_unit(this.unit));
-      if(other_v == null) {
+      const other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
+      if (other_v == null) {
         return null;
       } else {
         return this.value < other_v;
@@ -80,11 +80,11 @@ class Quantity {
       } else if (!this.unit && !other.unit) {
         return this.value === other.value;
       } else {
-        const other_v = convert_value(other.value,ucum_unit(other.unit),ucum_unit(this.unit));
-        if(other_v == null) {
+        const other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
+        if (other_v == null) {
           return null;
         } else {
-          return decimalAdjust('round', this.value, -8)  === decimalAdjust('round', other_v, -8);
+          return decimalAdjust('round', this.value, -8) === decimalAdjust('round', other_v, -8);
         }
       }
     }
@@ -98,31 +98,35 @@ class Quantity {
   }
 
   dividedBy(other) {
-    return this.multiplyDivide(other,'/');
+    return this.multiplyDivide(other, '/');
   }
 
   multiplyBy(other) {
-    return this.multiplyDivide(other,'.'); // in ucum . represents multiplication
+    return this.multiplyDivide(other, '.'); // in ucum . represents multiplication
   }
 
   multiplyDivide(other, operator) {
     if (other != null && other.isQuantity) {
       const a = this.unit != null ? this : new Quantity(this.value, '1');
-      const b = other.unit != null ? other : new Quantity(other.value, {unit: '1'});
+      const b = other.unit != null ? other : new Quantity(other.value, { unit: '1' });
       const can_val = a.to_ucum();
       const other_can_value = b.to_ucum();
-      const ucum_value = ucum_multiply(can_val,[[operator,other_can_value]]);
-      if (overflowsOrUnderflows(ucum_value.value)) { return null; }
+      const ucum_value = ucum_multiply(can_val, [[operator, other_can_value]]);
+      if (overflowsOrUnderflows(ucum_value.value)) {
+        return null;
+      }
       try {
         return new Quantity(ucum_value.value, units_to_string(ucum_value.units));
       } catch (e) {
         return null;
       }
     } else {
-      const value = operator === '/' ? this.value / other  : this.value * other;
-      if (overflowsOrUnderflows(value)) { return null; }
+      const value = operator === '/' ? this.value / other : this.value * other;
+      if (overflowsOrUnderflows(value)) {
+        return null;
+      }
       try {
-        return new Quantity(decimalAdjust('round',value,-8), coalesceToOne(this.unit));
+        return new Quantity(decimalAdjust('round', value, -8), coalesceToOne(this.unit));
       } catch (e) {
         return null;
       }
@@ -137,7 +141,11 @@ class Quantity {
 }
 
 function clean_unit(units) {
-  if (ucum_time_units[units]) { return ucum_to_cql_units[ucum_time_units[units]]; } else { return units; }
+  if (ucum_time_units[units]) {
+    return ucum_to_cql_units[ucum_time_units[units]];
+  } else {
+    return units;
+  }
 }
 
 // Hash of time units and their UCUM equivalents, both case-sensitive and case-insensitive
@@ -146,29 +154,60 @@ function clean_unit(units) {
 // UCUM says that years should be Julian. As a result, CQL-based year and month identifiers will
 // be matched to the UCUM gregorian units. UCUM-based year and month identifiers will be matched
 // to the UCUM julian units.
-const ucum_time_units = {'years': 'a_g', 'year': 'a_g', 'YEARS': 'a_g', 'YEAR': 'a_g', 'a_g': 'a_g'
-  , 'a': 'a_j', 'ANN': 'a_j', 'ann': 'a_j', 'A': 'a_j', 'a_j': 'a_j'
-  , 'months': 'mo_g', 'month':'mo_g', 'mo_g': 'mo_g'
-  , 'mo': 'mo_j', 'MO': 'mo_j', 'mo_j': 'mo_j'
-  , 'weeks': 'wk', 'week': 'wk', 'wk': 'wk', 'WK': 'wk'
-  , 'days': 'd', 'day':'d', 'd': 'd', 'D': 'd'
-  , 'hours': 'h', 'hour': 'h', 'h': 'h', 'H': 'h'
-  , 'minutes': 'min', 'minute': 'min', 'min': 'min', 'MIN': 'min'
-  , 'seconds':'s', 'second':'s', 's': 's', 'S': 's'
-  , 'milliseconds' : 'ms', 'millisecond' : 'ms', 'ms': 'ms', 'MS': 'ms'
+const ucum_time_units = {
+  years: 'a_g',
+  year: 'a_g',
+  YEARS: 'a_g',
+  YEAR: 'a_g',
+  a_g: 'a_g',
+  a: 'a_j',
+  ANN: 'a_j',
+  ann: 'a_j',
+  A: 'a_j',
+  a_j: 'a_j',
+  months: 'mo_g',
+  month: 'mo_g',
+  mo_g: 'mo_g',
+  mo: 'mo_j',
+  MO: 'mo_j',
+  mo_j: 'mo_j',
+  weeks: 'wk',
+  week: 'wk',
+  wk: 'wk',
+  WK: 'wk',
+  days: 'd',
+  day: 'd',
+  d: 'd',
+  D: 'd',
+  hours: 'h',
+  hour: 'h',
+  h: 'h',
+  H: 'h',
+  minutes: 'min',
+  minute: 'min',
+  min: 'min',
+  MIN: 'min',
+  seconds: 's',
+  second: 's',
+  s: 's',
+  S: 's',
+  milliseconds: 'ms',
+  millisecond: 'ms',
+  ms: 'ms',
+  MS: 'ms'
 };
 
 const ucum_to_cql_units = {
-  'a_j':  'year'
-  , 'a_g':  'year'
-  , 'mo_j': 'month'
-  , 'mo_g': 'month'
-  , 'wk':   'week'
-  , 'd':    'day'
-  , 'h':    'hour'
-  , 'min':  'minute'
-  , 's':    'second'
-  , 'ms':   'millisecond'
+  a_j: 'year',
+  a_g: 'year',
+  mo_j: 'month',
+  mo_g: 'month',
+  wk: 'week',
+  d: 'day',
+  h: 'hour',
+  min: 'minute',
+  s: 'second',
+  ms: 'millisecond'
 };
 
 // this is used to perform any conversions of CQL date time fields to their ucum equivalents
@@ -182,9 +221,9 @@ function convert_value(value, from, to) {
     if (from === to) {
       return value;
     } else {
-      return decimalAdjust('round', ucum.convert(value,ucum_unit(from),ucum_unit(to)), -8);
+      return decimalAdjust('round', ucum.convert(value, ucum_unit(from), ucum_unit(to)), -8);
     }
-  // If the units could not be alignied ie: incompareable, exception will be thrown, return null
+    // If the units could not be alignied ie: incompareable, exception will be thrown, return null
   } catch (e) {
     return null;
   }
@@ -224,17 +263,24 @@ function units_to_string(units = {}) {
   for (let key of Object.keys(units)) {
     const v = units[key];
     const pow = Math.abs(v);
-    const str = pow === 1 ? key  : key + pow;
-    if (v < 0) { denom.push(str); } else { numer.push(str); }
+    const str = pow === 1 ? key : key + pow;
+    if (v < 0) {
+      denom.push(str);
+    } else {
+      numer.push(str);
+    }
   }
   let unit_string = '';
   unit_string += numer.join('.');
   if (denom.length > 0) {
     unit_string += '/' + denom.join('/');
   }
-  if (unit_string === '') { return '1'; } else { return unit_string; }
+  if (unit_string === '') {
+    return '1';
+  } else {
+    return unit_string;
+  }
 }
-
 
 // this method is taken from the ucum.js library which it does not  export
 // so we need to replicate the behavior here in order to perform multiplication
@@ -242,17 +288,19 @@ function units_to_string(units = {}) {
 // t:  the ucum quantity being multiplied/divided .  This method modifies the object t that is passed in
 // ms: an array of arrays whoes format is [<operator>,<ucum quantity>] an example would be [['.', {value: 1, units: {m:2}}]]
 // this would represent multiply t by the value m^2
-function ucum_multiply(t, ms=[]) {
-  if (ms.length === 0) { return t; }
+function ucum_multiply(t, ms = []) {
+  if (ms.length === 0) {
+    return t;
+  }
   const ret = t;
   for (let mterm of ms) {
     const sign = mterm[0] === '.' ? 1 : -1;
     const b = mterm[1];
-    ret.value *= Math.pow(b.value,sign);
+    ret.value *= Math.pow(b.value, sign);
     for (let k in b.units) {
       const v = b.units[k];
       ret.units[k] = ret.units[k] || 0;
-      ret.units[k] = ret.units[k] + sign*v;
+      ret.units[k] = ret.units[k] + sign * v;
       if (ret.units[k] === 0) {
         delete ret.units[k];
       }
@@ -265,7 +313,9 @@ function parseQuantity(str) {
   const components = /([+|-]?\d+\.?\d*)\s*('(.+)')?/.exec(str);
   if (components != null && components[1] != null) {
     const value = parseFloat(components[1]);
-    if (!isValidDecimal(value)) { return null; }
+    if (!isValidDecimal(value)) {
+      return null;
+    }
     let unit;
     if (components[3] != null) {
       unit = components[3].trim();
@@ -278,7 +328,7 @@ function parseQuantity(str) {
   }
 }
 
-function doScaledAddition(a,b,scaleForB) {
+function doScaledAddition(a, b, scaleForB) {
   let b_unit;
   if (a != null && a.isQuantity && b != null && b.isQuantity) {
     let a_unit;
@@ -286,9 +336,15 @@ function doScaledAddition(a,b,scaleForB) {
     // The units don't have to match (m and m^2), but must be convertable
     // we will choose the unit of a to be the unit we return
     const val = convert_value(b.value * scaleForB, b_unit, a_unit);
-    if (val == null) { return null; }
+    if (val == null) {
+      return null;
+    }
     const sum = a.value + val;
-    if (overflowsOrUnderflows(sum)) { return null; } else { return new Quantity(sum, a_unit); }
+    if (overflowsOrUnderflows(sum)) {
+      return null;
+    } else {
+      return new Quantity(sum, a_unit);
+    }
   } else if (a.copy && a.add) {
     b_unit = b != null && b.isQuantity ? coalesceToOne(b.unit) : b.unit;
     return a.copy().add(b.value * scaleForB, clean_unit(b_unit));
@@ -298,36 +354,57 @@ function doScaledAddition(a,b,scaleForB) {
 }
 
 function doAddition(a, b) {
-  return doScaledAddition(a,b,1);
+  return doScaledAddition(a, b, 1);
 }
 
 function doSubtraction(a, b) {
-  return doScaledAddition(a,b,-1);
+  return doScaledAddition(a, b, -1);
 }
 
-function doDivision(a,b) {
+function doDivision(a, b) {
   if (a != null && a.isQuantity) {
     return a.dividedBy(b);
   }
 }
 
-function doMultiplication(a,b) {
-  if (a != null && a.isQuantity) { return a.multiplyBy(b); } else { return b.multiplyBy(a); }
+function doMultiplication(a, b) {
+  if (a != null && a.isQuantity) {
+    return a.multiplyBy(b);
+  } else {
+    return b.multiplyBy(a);
+  }
 }
 
 var coalesceToOne = function(o) {
-  if (o == null || (o.trim != null && !o.trim())) { return '1'; } else { return o; }
+  if (o == null || (o.trim != null && !o.trim())) {
+    return '1';
+  } else {
+    return o;
+  }
 };
 
 function compare_units(unit_a, unit_b) {
   try {
-    const c = ucum.convert(1,ucum_unit(unit_a),ucum_unit(unit_b));
-    if (c > 1) { return 1; } // unit_a is bigger (less precise)
-    if (c < 1) { return -1; } // unit_a is smaller
-    return 0;  //units are the same
+    const c = ucum.convert(1, ucum_unit(unit_a), ucum_unit(unit_b));
+    if (c > 1) {
+      return 1;
+    } // unit_a is bigger (less precise)
+    if (c < 1) {
+      return -1;
+    } // unit_a is smaller
+    return 0; //units are the same
   } catch (e) {
     return null;
   }
 }
 
-module.exports = { Quantity, convert_value, parseQuantity, doAddition, doSubtraction, doDivision, doMultiplication, compare_units };
+module.exports = {
+  Quantity,
+  convert_value,
+  parseQuantity,
+  doAddition,
+  doSubtraction,
+  doDivision,
+  doMultiplication,
+  compare_units
+};
