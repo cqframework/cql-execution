@@ -109,9 +109,9 @@ describe('equals', function() {
 
       asInt() {
         switch (typeof(this.num)) {
-        case 'number': return Math.floor(this.num);
-        case 'string': return parseInt(this.num);
-        default: return Number.NaN;
+          case 'number': return Math.floor(this.num);
+          case 'string': return parseInt(this.num);
+          default: return Number.NaN;
         }
       }
 

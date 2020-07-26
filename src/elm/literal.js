@@ -12,11 +12,11 @@ const { Expression } = require('./expression');
 module.exports.Literal = (Literal = class Literal extends Expression {
   static from(json) {
     switch(json.valueType) {
-    case '{urn:hl7-org:elm-types:r1}Boolean': return new BooleanLiteral(json);
-    case '{urn:hl7-org:elm-types:r1}Integer': return new IntegerLiteral(json);
-    case '{urn:hl7-org:elm-types:r1}Decimal': return new DecimalLiteral(json);
-    case '{urn:hl7-org:elm-types:r1}String': return new StringLiteral(json);
-    default: return new Literal(json);
+      case '{urn:hl7-org:elm-types:r1}Boolean': return new BooleanLiteral(json);
+      case '{urn:hl7-org:elm-types:r1}Integer': return new IntegerLiteral(json);
+      case '{urn:hl7-org:elm-types:r1}Decimal': return new DecimalLiteral(json);
+      case '{urn:hl7-org:elm-types:r1}String': return new StringLiteral(json);
+      default: return new Literal(json);
     }
   }
 
