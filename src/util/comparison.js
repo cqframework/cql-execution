@@ -5,10 +5,12 @@ function areNumbers(a, b) {
 }
 
 function areDateTimesOrQuantities(a, b) {
-  return ((a && a.isDateTime) && (b && b.isDateTime)) ||
-    ((a && a.isDate) && (b && b.isDate)) ||
-    ((a && a.isTime) && (b && b.isTime)) ||
-    ((a && a.isQuantity) && (b && b.isQuantity));
+  return (
+    (a && a.isDateTime && b && b.isDateTime) ||
+    (a && a.isDate && b && b.isDate) ||
+    (a && a.isTime && b && b.isTime) ||
+    (a && a.isQuantity && b && b.isQuantity)
+  );
 }
 
 function isUncertainty(x) {
@@ -16,45 +18,77 @@ function isUncertainty(x) {
 }
 
 function lessThan(a, b, precision) {
-  if (areNumbers(a, b)) { return a < b;
-  } else if (areDateTimesOrQuantities(a, b)) { return a.before(b, precision);
-  } else if (isUncertainty(a)) { return a.lessThan(b);
-  } else if (isUncertainty(b)) { return Uncertainty.from(a).lessThan(b);
-  } else { return null; }
+  if (areNumbers(a, b)) {
+    return a < b;
+  } else if (areDateTimesOrQuantities(a, b)) {
+    return a.before(b, precision);
+  } else if (isUncertainty(a)) {
+    return a.lessThan(b);
+  } else if (isUncertainty(b)) {
+    return Uncertainty.from(a).lessThan(b);
+  } else {
+    return null;
+  }
 }
 
 function lessThanOrEquals(a, b, precision) {
-  if (areNumbers(a, b)) { return a <= b;
-  } else if (areDateTimesOrQuantities(a, b)) { return a.sameOrBefore(b, precision);
-  } else if (isUncertainty(a)) { return a.lessThanOrEquals(b);
-  } else if (isUncertainty(b)) { return Uncertainty.from(a).lessThanOrEquals(b);
-  } else { return null; }
+  if (areNumbers(a, b)) {
+    return a <= b;
+  } else if (areDateTimesOrQuantities(a, b)) {
+    return a.sameOrBefore(b, precision);
+  } else if (isUncertainty(a)) {
+    return a.lessThanOrEquals(b);
+  } else if (isUncertainty(b)) {
+    return Uncertainty.from(a).lessThanOrEquals(b);
+  } else {
+    return null;
+  }
 }
 
 function greaterThan(a, b, precision) {
-  if (areNumbers(a, b)) { return a > b;
-  } else if (areDateTimesOrQuantities(a, b)) { return a.after(b, precision);
-  } else if (isUncertainty(a)) { return a.greaterThan(b);
-  } else if (isUncertainty(b)) { return Uncertainty.from(a).greaterThan(b);
-  } else { return null; }
+  if (areNumbers(a, b)) {
+    return a > b;
+  } else if (areDateTimesOrQuantities(a, b)) {
+    return a.after(b, precision);
+  } else if (isUncertainty(a)) {
+    return a.greaterThan(b);
+  } else if (isUncertainty(b)) {
+    return Uncertainty.from(a).greaterThan(b);
+  } else {
+    return null;
+  }
 }
 
 function greaterThanOrEquals(a, b, precision) {
-  if (areNumbers(a, b)) { return a >= b;
-  } else if (areDateTimesOrQuantities(a, b)) { return a.sameOrAfter(b, precision);
-  } else if (isUncertainty(a)) { return a.greaterThanOrEquals(b);
-  } else if (isUncertainty(b)) { return Uncertainty.from(a).greaterThanOrEquals(b);
-  } else { return null; }
+  if (areNumbers(a, b)) {
+    return a >= b;
+  } else if (areDateTimesOrQuantities(a, b)) {
+    return a.sameOrAfter(b, precision);
+  } else if (isUncertainty(a)) {
+    return a.greaterThanOrEquals(b);
+  } else if (isUncertainty(b)) {
+    return Uncertainty.from(a).greaterThanOrEquals(b);
+  } else {
+    return null;
+  }
 }
 
 function equivalent(a, b) {
-  if (a == null && b == null) { return true; }
-  if (a == null || b == null) { return false; }
+  if (a == null && b == null) {
+    return true;
+  }
+  if (a == null || b == null) {
+    return false;
+  }
 
-  if (isCode(a)) { return codesAreEquivalent(a, b); }
+  if (isCode(a)) {
+    return codesAreEquivalent(a, b);
+  }
 
   // Use overloaded 'equivalent' function if it is available
-  if (typeof a.equivalent === 'function') { return a.equivalent(b); }
+  if (typeof a.equivalent === 'function') {
+    return a.equivalent(b);
+  }
 
   const [aClass, bClass] = getClassOfObjects(a, b);
 
@@ -69,7 +103,7 @@ function equivalent(a, b) {
         // String equivalence is case- and locale insensitive
         a = a.replace(/\s/g, ' ');
         b = b.replace(/\s/g, ' ');
-        return a.localeCompare(b, 'en', {sensitivity: 'base'}) === 0;
+        return a.localeCompare(b, 'en', { sensitivity: 'base' }) === 0;
       }
       break;
   }
@@ -86,15 +120,20 @@ function codesAreEquivalent(code1, code2) {
 }
 
 function getClassOfObjects(object1, object2) {
-  return [object1, object2].map((obj) => ({}.toString.call(obj)));
+  return [object1, object2].map(obj => ({}.toString.call(obj)));
 }
 
 function compareEveryItemInArrays(array1, array2, comparisonFunction) {
-  return array1.length === array2.length && array1.every((item, i) => comparisonFunction(item, array2[i]));
+  return (
+    array1.length === array2.length &&
+    array1.every((item, i) => comparisonFunction(item, array2[i]))
+  );
 }
 
 function compareObjects(a, b, comparisonFunction) {
-  if (!classesEqual(a, b)) { return false; }
+  if (!classesEqual(a, b)) {
+    return false;
+  }
   return deepCompareKeysAndValues(a, b, comparisonFunction);
 }
 
@@ -110,18 +149,24 @@ function deepCompareKeysAndValues(a, b, comparisonFunction) {
   let shouldReturnNull = false;
   // Check if both arrays of keys are the same length and key names match
   if (aKeys.length === bKeys.length && aKeys.every((value, index) => value === bKeys[index])) {
-    finalComparisonResult = aKeys.every((key) => {
+    finalComparisonResult = aKeys.every(key => {
       // if both are null we should return true to satisfy ignoring empty values in tuples
-      if (a[key] == null && b[key] == null) { return true; }
+      if (a[key] == null && b[key] == null) {
+        return true;
+      }
       const comparisonResult = comparisonFunction(a[key], b[key]);
-      if (comparisonResult === null) { shouldReturnNull = true; }
+      if (comparisonResult === null) {
+        shouldReturnNull = true;
+      }
       return comparisonResult;
     });
   } else {
     finalComparisonResult = false;
   }
 
-  if (shouldReturnNull) { return null; }
+  if (shouldReturnNull) {
+    return null;
+  }
   return finalComparisonResult;
 }
 
@@ -135,39 +180,63 @@ function isFunction(input) {
 
 function equals(a, b) {
   // Handle null cases first: spec says if either is null, return null
-  if (a == null || b == null) { return null; }
+  if (a == null || b == null) {
+    return null;
+  }
 
   // If one is a Quantity, use the Quantity equals function
-  if (a && a.isQuantity) { return a.equals(b); }
+  if (a && a.isQuantity) {
+    return a.equals(b);
+  }
 
   // If one is a Ratio, use the ratio equals function
-  if (a && a.isRatio) { return a.equals(b); }
+  if (a && a.isRatio) {
+    return a.equals(b);
+  }
 
   // If one is an Uncertainty, convert the other to an Uncertainty
-  if (a instanceof Uncertainty) { b = Uncertainty.from(b);
-  } else if (b instanceof Uncertainty) { a = Uncertainty.from(a); }
+  if (a instanceof Uncertainty) {
+    b = Uncertainty.from(b);
+  } else if (b instanceof Uncertainty) {
+    a = Uncertainty.from(a);
+  }
 
   // Use overloaded 'equals' function if it is available
-  if (typeof a.equals === 'function') { return a.equals(b); }
+  if (typeof a.equals === 'function') {
+    return a.equals(b);
+  }
 
   // Return true of the objects are primitives and are strictly equal
-  if (typeof a === typeof b && typeof a === 'string' || typeof a === 'number' || typeof a === 'boolean') {
+  if (
+    (typeof a === typeof b && typeof a === 'string') ||
+    typeof a === 'number' ||
+    typeof a === 'boolean'
+  ) {
     return a === b;
   }
 
   // Return false if they are instances of different classes
   const [aClass, bClass] = getClassOfObjects(a, b);
-  if (aClass !== bClass) { return false; }
+  if (aClass !== bClass) {
+    return false;
+  }
 
   switch (aClass) {
     case '[object Date]':
-    // Compare the ms since epoch
+      // Compare the ms since epoch
       return a.getTime() === b.getTime();
     case '[object RegExp]':
-    // Compare the components of the regular expression
+      // Compare the components of the regular expression
       return ['source', 'global', 'ignoreCase', 'multiline'].every(p => a[p] === b[p]);
     case '[object Array]':
-      if (a.indexOf(null) >= 0 || a.indexOf(undefined) >= 0 || b.indexOf(null) >= 0 || b.indexOf(undefined) >= 0) { return null; }
+      if (
+        a.indexOf(null) >= 0 ||
+        a.indexOf(undefined) >= 0 ||
+        b.indexOf(null) >= 0 ||
+        b.indexOf(undefined) >= 0
+      ) {
+        return null;
+      }
       return compareEveryItemInArrays(a, b, equals);
     case '[object Object]':
       return compareObjects(a, b, equals);
@@ -179,4 +248,11 @@ function equals(a, b) {
   return false;
 }
 
-module.exports = { lessThan, lessThanOrEquals, greaterThan, greaterThanOrEquals, equivalent, equals };
+module.exports = {
+  lessThan,
+  lessThanOrEquals,
+  greaterThan,
+  greaterThanOrEquals,
+  equivalent,
+  equals
+};
