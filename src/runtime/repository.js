@@ -1,6 +1,6 @@
 const { Library } = require('../elm/library');
 
-module.exports.Repository = class Repository {
+class Repository {
   constructor(data) {
     this.data = data;
     this.libraries = Array.from(Object.values(data));
@@ -16,4 +16,6 @@ module.exports.Repository = class Repository {
       }
     }
   }
-};
+}
+
+module.exports = { Repository };

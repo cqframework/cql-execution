@@ -1,16 +1,7 @@
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-let Executor;
-module.exports.Executor = (Executor = class Executor {
+const { Results } = require('./results');
+const { UnfilteredContext,PatientContext } = require('./context');
+
+class Executor {
 
   constructor(library,codeService,parameters) {
     this.library = library;
@@ -36,11 +27,11 @@ module.exports.Executor = (Executor = class Executor {
   exec_expression(expression, patientSource) {
     const r = new Results();
     const expr = this.library.expressions[expression];
-    let p;
-    while (expr && (p = patientSource.currentPatient())) {
-      const patient_ctx = new PatientContext(this.library,p,this.codeService,this.parameters);
-      r.recordPatientResult(patient_ctx, expression, expr.execute(patient_ctx));
-      patientSource.nextPatient();
+    if (expr != null) {
+      for (let p = patientSource.currentPatient(); p!= null; p = patientSource.nextPatient()) {
+        const patient_ctx = new PatientContext(this.library,p,this.codeService,this.parameters);
+        r.recordPatientResult(patient_ctx, expression, expr.execute(patient_ctx));
+      }
     }
     return r;
   }
@@ -59,8 +50,7 @@ module.exports.Executor = (Executor = class Executor {
 
   exec_patient_context(patientSource, executionDateTime) {
     const r = new Results();
-    let p;
-    while ((p = patientSource.currentPatient())) {
+    for (let p = patientSource.currentPatient(); p!= null; p = patientSource.nextPatient()) {
       const patient_ctx = new PatientContext(this.library,p,this.codeService,this.parameters,executionDateTime);
       for (let key in this.library.expressions) {
         const expr = this.library.expressions[key];
@@ -68,11 +58,9 @@ module.exports.Executor = (Executor = class Executor {
           r.recordPatientResult(patient_ctx, key, expr.execute(patient_ctx));
         }
       }
-      patientSource.nextPatient();
     }
     return r;
   }
-});
+}
 
-var { Results } = require('./results');
-var { UnfilteredContext,PatientContext } = require('./context');
+module.exports = { Executor };
