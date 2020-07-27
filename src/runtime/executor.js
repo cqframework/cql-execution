@@ -1,9 +1,8 @@
 const { Results } = require('./results');
-const { UnfilteredContext,PatientContext } = require('./context');
+const { UnfilteredContext, PatientContext } = require('./context');
 
 class Executor {
-
-  constructor(library,codeService,parameters) {
+  constructor(library, codeService, parameters) {
     this.library = library;
     this.codeService = codeService;
     this.parameters = parameters;
@@ -28,8 +27,8 @@ class Executor {
     const r = new Results();
     const expr = this.library.expressions[expression];
     if (expr != null) {
-      for (let p = patientSource.currentPatient(); p!= null; p = patientSource.nextPatient()) {
-        const patient_ctx = new PatientContext(this.library,p,this.codeService,this.parameters);
+      for (let p = patientSource.currentPatient(); p != null; p = patientSource.nextPatient()) {
+        const patient_ctx = new PatientContext(this.library, p, this.codeService, this.parameters);
         r.recordPatientResult(patient_ctx, expression, expr.execute(patient_ctx));
       }
     }
@@ -38,11 +37,16 @@ class Executor {
 
   exec(patientSource, executionDateTime) {
     const r = this.exec_patient_context(patientSource, executionDateTime);
-    const unfilteredContext = new UnfilteredContext(this.library,r,this.codeService,this.parameters);
+    const unfilteredContext = new UnfilteredContext(
+      this.library,
+      r,
+      this.codeService,
+      this.parameters
+    );
     for (let key in this.library.expressions) {
       const expr = this.library.expressions[key];
       if (expr.context === 'Unfiltered') {
-        r.recordUnfilteredResult( key, expr.exec(unfilteredContext));
+        r.recordUnfilteredResult(key, expr.exec(unfilteredContext));
       }
     }
     return r;
@@ -50,8 +54,14 @@ class Executor {
 
   exec_patient_context(patientSource, executionDateTime) {
     const r = new Results();
-    for (let p = patientSource.currentPatient(); p!= null; p = patientSource.nextPatient()) {
-      const patient_ctx = new PatientContext(this.library,p,this.codeService,this.parameters,executionDateTime);
+    for (let p = patientSource.currentPatient(); p != null; p = patientSource.nextPatient()) {
+      const patient_ctx = new PatientContext(
+        this.library,
+        p,
+        this.codeService,
+        this.parameters,
+        executionDateTime
+      );
       for (let key in this.library.expressions) {
         const expr = this.library.expressions[key];
         if (expr.context === 'Patient') {
