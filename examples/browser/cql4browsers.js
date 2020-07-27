@@ -3505,7 +3505,7 @@ module.exports = {
   doMultiplication: doMultiplication,
   compare_units: compare_units
 };
-},{"../util/math":46,"ucum":57}],12:[function(require,module,exports){
+},{"../util/math":46,"ucum":56}],12:[function(require,module,exports){
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13554,471 +13554,415 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-/* eslint-disable
-    constructor-super,
-    no-constant-condition,
-    no-this-before-super,
-    no-undef,
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
+var _require = require('../datatypes/exception'),
+    Exception = _require.Exception;
 
-/*
- * decaffeinate suggestions:
- * DS001: Remove Babel/TypeScript constructor workaround
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Context, PatientContext, UnfilteredContext;
-
-var _require = require('../elm/library'),
-    Library = _require.Library;
-
-var _require2 = require('../datatypes/exception'),
-    Exception = _require2.Exception;
-
-var _require3 = require('../util/util'),
-    typeIsArray = _require3.typeIsArray;
+var _require2 = require('../util/util'),
+    typeIsArray = _require2.typeIsArray;
 
 var dt = require('../datatypes/datatypes');
 
-var util = require('util');
+var Context = /*#__PURE__*/function () {
+  function Context(parent) {
+    var _codeService = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
-Function.prototype.property = function (prop, desc) {
-  return Object.defineProperty(this.prototype, prop, desc);
-};
+    var _parameters = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-module.exports.Context = Context = function () {
-  Context = /*#__PURE__*/function () {
-    _createClass(Context, null, [{
-      key: "initClass",
-      value: function initClass() {
-        this.property('parameters', {
-          get: function get() {
-            return this._parameters || (this.parent != null ? this.parent.parameters : undefined);
-          },
-          set: function set(params) {
-            this.checkParameters(params);
-            return this._parameters = params;
-          }
-        });
-        this.property('codeService', {
-          get: function get() {
-            return this._codeService || (this.parent != null ? this.parent.codeService : undefined);
-          },
-          set: function set(cs) {
-            return this._codeService = cs;
-          }
-        });
-      }
-    }]);
+    _classCallCheck(this, Context);
 
-    function Context(parent) {
-      var _codeService = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    this.parent = parent;
+    this._codeService = _codeService;
+    this.context_values = {};
+    this.library_context = {};
+    this.localId_context = {}; // TODO: If there is an issue with number of parameters look into cql4browsers fix: 387ea77538182833283af65e6341e7a05192304c
 
-      var _parameters = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    this.checkParameters(_parameters); // not crazy about possibly throwing an error in a constructor, but...
 
-      _classCallCheck(this, Context);
+    this._parameters = _parameters;
+  }
 
-      this.parent = parent;
-      this._codeService = _codeService;
-      this.context_values = {};
-      this.library_context = {};
-      this.localId_context = {}; // TODO: If there is an issue with number of parameters look into cql4browsers fix: 387ea77538182833283af65e6341e7a05192304c
-
-      this.checkParameters(_parameters); // not crazy about possibly throwing an error in a constructor, but...
-
-      this._parameters = _parameters;
+  _createClass(Context, [{
+    key: "withParameters",
+    value: function withParameters(params) {
+      this.parameters = params || {};
+      return this;
     }
-
-    _createClass(Context, [{
-      key: "withParameters",
-      value: function withParameters(params) {
-        this.parameters = params != null ? params : {};
+  }, {
+    key: "withCodeService",
+    value: function withCodeService(cs) {
+      this.codeService = cs;
+      return this;
+    }
+  }, {
+    key: "rootContext",
+    value: function rootContext() {
+      if (this.parent) {
+        return this.parent.rootContext();
+      } else {
         return this;
       }
-    }, {
-      key: "withCodeService",
-      value: function withCodeService(cs) {
-        this.codeService = cs;
-        return this;
-      }
-    }, {
-      key: "rootContext",
-      value: function rootContext() {
-        if (this.parent) {
-          return this.parent.rootContext();
-        } else {
-          return this;
-        }
-      }
-    }, {
-      key: "findRecords",
-      value: function findRecords(profile) {
-        return this.parent != null ? this.parent.findRecords(profile) : undefined;
-      }
-    }, {
-      key: "childContext",
-      value: function childContext() {
-        var context_values = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-        var ctx = new Context(this);
-        ctx.context_values = context_values;
-        return ctx;
-      }
-    }, {
-      key: "getLibraryContext",
-      value: function getLibraryContext(library) {
-        return this.parent != null ? this.parent.getLibraryContext(library) : undefined;
-      }
-    }, {
-      key: "getLocalIdContext",
-      value: function getLocalIdContext(localId) {
-        return this.parent != null ? this.parent.getLocalIdContext(localId) : undefined;
-      }
-    }, {
-      key: "getParameter",
-      value: function getParameter(name) {
-        return this.parent != null ? this.parent.getParameter(name) : undefined;
-      }
-    }, {
-      key: "getParentParameter",
-      value: function getParentParameter(name) {
-        if ((this.parent != null ? this.parent.parameters[name] : undefined) != null) {
+    }
+  }, {
+    key: "findRecords",
+    value: function findRecords(profile) {
+      return this.parent && this.parent.findRecords(profile);
+    }
+  }, {
+    key: "childContext",
+    value: function childContext() {
+      var context_values = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var ctx = new Context(this);
+      ctx.context_values = context_values;
+      return ctx;
+    }
+  }, {
+    key: "getLibraryContext",
+    value: function getLibraryContext(library) {
+      return this.parent && this.parent.getLibraryContext(library);
+    }
+  }, {
+    key: "getLocalIdContext",
+    value: function getLocalIdContext(localId) {
+      return this.parent && this.parent.getLocalIdContext(localId);
+    }
+  }, {
+    key: "getParameter",
+    value: function getParameter(name) {
+      return this.parent && this.parent.getParameter(name);
+    }
+  }, {
+    key: "getParentParameter",
+    value: function getParentParameter(name) {
+      if (this.parent) {
+        if (this.parent.parameters[name] != null) {
           return this.parent.parameters[name];
-        } else if (this.parent != null) {
+        } else {
           return this.parent.getParentParameter(name);
         }
       }
-    }, {
-      key: "getTimezoneOffset",
-      value: function getTimezoneOffset() {
-        if (this.executionDateTime != null) {
-          return this.executionDateTime.timezoneOffset;
-        } else if ((this.parent != null ? this.parent.getTimezoneOffset : undefined) != null) {
-          return this.parent.getTimezoneOffset();
-        } else {
-          throw new Exception('No Timezone Offset has been set');
+    }
+  }, {
+    key: "getTimezoneOffset",
+    value: function getTimezoneOffset() {
+      if (this.executionDateTime != null) {
+        return this.executionDateTime.timezoneOffset;
+      } else if (this.parent && this.parent.getTimezoneOffset != null) {
+        return this.parent.getTimezoneOffset();
+      } else {
+        throw new Exception('No Timezone Offset has been set');
+      }
+    }
+  }, {
+    key: "getExecutionDateTime",
+    value: function getExecutionDateTime() {
+      if (this.executionDateTime != null) {
+        return this.executionDateTime;
+      } else if (this.parent && this.parent.getExecutionDateTime != null) {
+        return this.parent.getExecutionDateTime();
+      } else {
+        throw new Exception('No Execution DateTime has been set');
+      }
+    }
+  }, {
+    key: "getValueSet",
+    value: function getValueSet(name, library) {
+      return this.parent && this.parent.getValueSet(name, library);
+    }
+  }, {
+    key: "getCodeSystem",
+    value: function getCodeSystem(name) {
+      return this.parent && this.parent.getCodeSystem(name);
+    }
+  }, {
+    key: "getCode",
+    value: function getCode(name) {
+      return this.parent && this.parent.getCode(name);
+    }
+  }, {
+    key: "getConcept",
+    value: function getConcept(name) {
+      return this.parent && this.parent.getConcept(name);
+    }
+  }, {
+    key: "get",
+    value: function get(identifier) {
+      // Check for undefined because if its null, we actually *do* want to return null (rather than
+      // looking at parent), but if it's really undefined, *then* look at the parent
+      if (typeof this.context_values[identifier] !== 'undefined') {
+        return this.context_values[identifier];
+      } else if (identifier === '$this') {
+        return this.context_values;
+      } else {
+        return this.parent != null && this.parent.get(identifier);
+      }
+    }
+  }, {
+    key: "set",
+    value: function set(identifier, value) {
+      this.context_values[identifier] = value;
+    }
+  }, {
+    key: "setLocalIdWithResult",
+    value: function setLocalIdWithResult(localId, value) {
+      // Temporary fix. Real fix will be to return a list of all result values for a given localId.
+      var ctx = this.localId_context[localId];
+
+      if (ctx === false || ctx === null || ctx === undefined || ctx.length === 0) {
+        this.localId_context[localId] = value;
+      }
+    }
+  }, {
+    key: "getLocalIdResult",
+    value: function getLocalIdResult(localId) {
+      return this.localId_context[localId];
+    } // Returns an object of objects containing each library name
+    // with the localIds and result values
+
+  }, {
+    key: "getAllLocalIds",
+    value: function getAllLocalIds() {
+      var localIdResults = {}; // Add the localIds and result values from the main library
+
+      localIdResults[this.parent.source.library.identifier.id] = {};
+      localIdResults[this.parent.source.library.identifier.id] = this.localId_context; // Iterate over support libraries and store localIds
+
+      for (var libName in this.library_context) {
+        var lib = this.library_context[libName];
+        this.supportLibraryLocalIds(lib, localIdResults);
+      }
+
+      return localIdResults;
+    } // Recursive function that will grab nested support library localId results
+
+  }, {
+    key: "supportLibraryLocalIds",
+    value: function supportLibraryLocalIds(lib, localIdResults) {
+      var _this = this;
+
+      // Set library identifier name as the key and the object of localIds with their results as the value
+      // if it already exists then we need to merge the results instead of overwriting
+      if (localIdResults[lib.library.source.library.identifier.id] != null) {
+        this.mergeLibraryLocalIdResults(localIdResults, lib.library.source.library.identifier.id, lib.localId_context);
+      } else {
+        localIdResults[lib.library.source.library.identifier.id] = lib.localId_context;
+      } // Iterate over any support libraries in the current support library
+
+
+      Object.values(lib.library_context).forEach(function (supportLib) {
+        _this.supportLibraryLocalIds(supportLib, localIdResults);
+      });
+    } // Merges the localId results for a library into the already collected results. The logic used for which result
+    // to keep is the same as the logic used above in setLocalIdWithResult, "falsey" results are always replaced.
+
+  }, {
+    key: "mergeLibraryLocalIdResults",
+    value: function mergeLibraryLocalIdResults(localIdResults, libraryId, libraryResults) {
+      for (var localId in libraryResults) {
+        var localIdResult = libraryResults[localId];
+        var existingResult = localIdResults[libraryId][localId]; // overwite this localid result if the existing result is "falsey". future work could track all results for each localid
+
+        if (existingResult === false || existingResult === null || existingResult === undefined || existingResult.length === 0) {
+          localIdResults[libraryId][localId] = localIdResult;
         }
       }
-    }, {
-      key: "getExecutionDateTime",
-      value: function getExecutionDateTime() {
-        if (this.executionDateTime != null) {
-          return this.executionDateTime;
-        } else if ((this.parent != null ? this.parent.getExecutionDateTime : undefined) != null) {
-          return this.parent.getExecutionDateTime();
-        } else {
-          throw new Exception('No Execution DateTime has been set');
-        }
-      }
-    }, {
-      key: "getValueSet",
-      value: function getValueSet(name, library) {
-        return this.parent != null ? this.parent.getValueSet(name, library) : undefined;
-      }
-    }, {
-      key: "getCodeSystem",
-      value: function getCodeSystem(name) {
-        return this.parent != null ? this.parent.getCodeSystem(name) : undefined;
-      }
-    }, {
-      key: "getCode",
-      value: function getCode(name) {
-        return this.parent != null ? this.parent.getCode(name) : undefined;
-      }
-    }, {
-      key: "getConcept",
-      value: function getConcept(name) {
-        return this.parent != null ? this.parent.getConcept(name) : undefined;
-      }
-    }, {
-      key: "get",
-      value: function get(identifier) {
-        // Check for undefined because if its null, we actually *do* want to return null (rather than looking at parent),
-        // but if it's really undefined, *then* look at the parent
-        if (typeof this.context_values[identifier] !== 'undefined') {
-          return this.context_values[identifier];
-        } else if (identifier === '$this') {
-          return this.context_values;
-        } else {
-          return this.parent != null ? this.parent.get(identifier) : undefined;
-        }
-      }
-    }, {
-      key: "set",
-      value: function set(identifier, value) {
-        return this.context_values[identifier] = value;
-      }
-    }, {
-      key: "setLocalIdWithResult",
-      value: function setLocalIdWithResult(localId, value) {
-        // Temporary fix. Real fix will be to return a list of all result values for a given localId.
-        var ctx = this.localId_context[localId];
+    }
+  }, {
+    key: "checkParameters",
+    value: function checkParameters(params) {
+      for (var pName in params) {
+        var pVal = params[pName];
+        var pDef = this.getParameter(pName);
 
-        if (ctx === false || ctx === null || ctx === undefined || ctx.length === 0) {
-          return this.localId_context[localId] = value;
-        } else {
-          return ctx;
-        }
-      }
-    }, {
-      key: "getLocalIdResult",
-      value: function getLocalIdResult(localId) {
-        return this.localId_context[localId];
-      } // Returns an object of objects containing each library name
-      // with the localIds and result values
-
-    }, {
-      key: "getAllLocalIds",
-      value: function getAllLocalIds() {
-        var localIdResults = {}; // Add the localIds and result values from the main library
-
-        localIdResults[this.parent.source.library.identifier.id] = {};
-        localIdResults[this.parent.source.library.identifier.id] = this.localId_context; // Iterate over support libraries and store localIds
-
-        for (var libName in this.library_context) {
-          var lib = this.library_context[libName];
-          this.supportLibraryLocalIds(lib, localIdResults);
+        if (pVal == null) {
+          return; // Null can theoretically be any type
         }
 
-        return localIdResults;
-      } // Recursive function that will grab nested support library localId results
-
-    }, {
-      key: "supportLibraryLocalIds",
-      value: function supportLibraryLocalIds(lib, localIdResults) {
-        var _this = this;
-
-        // Set library identifier name as the key and the object of localIds with their results as the value
-        // if it already exists then we need to merge the results instead of overwriting
-        if (localIdResults[lib.library.source.library.identifier.id] != null) {
-          this.mergeLibraryLocalIdResults(localIdResults, lib.library.source.library.identifier.id, lib.localId_context);
-        } else {
-          localIdResults[lib.library.source.library.identifier.id] = lib.localId_context;
-        } // Iterate over any support libraries in the current support library
-
-
-        return function () {
-          var result = [];
-
-          for (var supportLibName in lib.library_context) {
-            var supportLib = lib.library_context[supportLibName];
-            result.push(_this.supportLibraryLocalIds(supportLib, localIdResults));
-          }
-
-          return result;
-        }();
-      } // Merges the localId results for a library into the already collected results. The logic used for which result
-      // to keep is the same as the logic used above in setLocalIdWithResult, "falsey" results are always replaced.
-
-    }, {
-      key: "mergeLibraryLocalIdResults",
-      value: function mergeLibraryLocalIdResults(localIdResults, libraryId, libraryResults) {
-        return function () {
-          var result = [];
-
-          for (var localId in libraryResults) {
-            var localIdResult = libraryResults[localId];
-            var existingResult = localIdResults[libraryId][localId]; // overwite this localid result if the existing result is "falsey". future work could track all results for each localid
-
-            if (existingResult === false || existingResult === null || existingResult === undefined || existingResult.length === 0) {
-              result.push(localIdResults[libraryId][localId] = localIdResult);
-            } else {
-              result.push(undefined);
-            }
-          }
-
-          return result;
-        }();
-      }
-    }, {
-      key: "checkParameters",
-      value: function checkParameters(params) {
-        for (var pName in params) {
-          var pVal = params[pName];
-          var pDef = this.getParameter(pName);
-
-          if (pVal == null) {
-            return; // Null can theoretically be any type
-          }
-
-          if (typeof pDef === 'undefined') {
-            return; // This will happen if the parameter is declared in a different (included) library
-          } else if (pDef.parameterTypeSpecifier != null && !this.matchesTypeSpecifier(pVal, pDef.parameterTypeSpecifier)) {
-            throw new Error("Passed in parameter '".concat(pName, "' is wrong type"));
-          } else if (pDef['default'] != null && !this.matchesInstanceType(pVal, pDef['default'])) {
-            throw new Error("Passed in parameter '".concat(pName, "' is wrong type"));
-          }
-        }
-
-        return true;
-      }
-    }, {
-      key: "matchesTypeSpecifier",
-      value: function matchesTypeSpecifier(val, spec) {
-        switch (spec.type) {
-          case 'NamedTypeSpecifier':
-            return this.matchesNamedTypeSpecifier(val, spec);
-
-          case 'ListTypeSpecifier':
-            return this.matchesListTypeSpecifier(val, spec);
-
-          case 'TupleTypeSpecifier':
-            return this.matchesTupleTypeSpecifier(val, spec);
-
-          case 'IntervalTypeSpecifier':
-            return this.matchesIntervalTypeSpecifier(val, spec);
-
-          default:
-            return true;
-          // default to true when we don't know
+        if (typeof pDef === 'undefined') {
+          return; // This will happen if the parameter is declared in a different (included) library
+        } else if (pDef.parameterTypeSpecifier != null && !this.matchesTypeSpecifier(pVal, pDef.parameterTypeSpecifier)) {
+          throw new Error("Passed in parameter '".concat(pName, "' is wrong type"));
+        } else if (pDef['default'] != null && !this.matchesInstanceType(pVal, pDef['default'])) {
+          throw new Error("Passed in parameter '".concat(pName, "' is wrong type"));
         }
       }
-    }, {
-      key: "matchesListTypeSpecifier",
-      value: function matchesListTypeSpecifier(val, spec) {
-        var _this2 = this;
 
-        return typeIsArray(val) && val.every(function (x) {
-          return _this2.matchesTypeSpecifier(x, spec.elementType);
-        });
+      return true;
+    }
+  }, {
+    key: "matchesTypeSpecifier",
+    value: function matchesTypeSpecifier(val, spec) {
+      switch (spec.type) {
+        case 'NamedTypeSpecifier':
+          return this.matchesNamedTypeSpecifier(val, spec);
+
+        case 'ListTypeSpecifier':
+          return this.matchesListTypeSpecifier(val, spec);
+
+        case 'TupleTypeSpecifier':
+          return this.matchesTupleTypeSpecifier(val, spec);
+
+        case 'IntervalTypeSpecifier':
+          return this.matchesIntervalTypeSpecifier(val, spec);
+
+        default:
+          return true;
+        // default to true when we don't know
       }
-    }, {
-      key: "matchesTupleTypeSpecifier",
-      value: function matchesTupleTypeSpecifier(val, spec) {
-        var _this3 = this;
+    }
+  }, {
+    key: "matchesListTypeSpecifier",
+    value: function matchesListTypeSpecifier(val, spec) {
+      var _this2 = this;
 
-        return _typeof(val) === 'object' && !typeIsArray(val) && spec.element.every(function (x) {
-          return typeof val[x.name] === 'undefined' || _this3.matchesTypeSpecifier(val[x.name], x.elementType);
-        });
+      return typeIsArray(val) && val.every(function (x) {
+        return _this2.matchesTypeSpecifier(x, spec.elementType);
+      });
+    }
+  }, {
+    key: "matchesTupleTypeSpecifier",
+    value: function matchesTupleTypeSpecifier(val, spec) {
+      var _this3 = this;
+
+      return _typeof(val) === 'object' && !typeIsArray(val) && spec.element.every(function (x) {
+        return typeof val[x.name] === 'undefined' || _this3.matchesTypeSpecifier(val[x.name], x.elementType);
+      });
+    }
+  }, {
+    key: "matchesIntervalTypeSpecifier",
+    value: function matchesIntervalTypeSpecifier(val, spec) {
+      return val.isInterval && (val.low == null || this.matchesTypeSpecifier(val.low, spec.pointType)) && (val.high == null || this.matchesTypeSpecifier(val.high, spec.pointType));
+    }
+  }, {
+    key: "matchesNamedTypeSpecifier",
+    value: function matchesNamedTypeSpecifier(val, spec) {
+      switch (spec.name) {
+        case '{urn:hl7-org:elm-types:r1}Boolean':
+          return typeof val === 'boolean';
+
+        case '{urn:hl7-org:elm-types:r1}Decimal':
+          return typeof val === 'number';
+
+        case '{urn:hl7-org:elm-types:r1}Integer':
+          return typeof val === 'number' && Math.floor(val) === val;
+
+        case '{urn:hl7-org:elm-types:r1}String':
+          return typeof val === 'string';
+
+        case '{urn:hl7-org:elm-types:r1}Concept':
+          return val && val.isConcept;
+
+        case '{urn:hl7-org:elm-types:r1}Code':
+          return val && val.isCode;
+
+        case '{urn:hl7-org:elm-types:r1}DateTime':
+          return val && val.isDateTime;
+
+        case '{urn:hl7-org:elm-types:r1}Date':
+          return val && val.isDate;
+
+        case '{urn:hl7-org:elm-types:r1}Quantity':
+          return val && val.isQuantity;
+
+        case '{urn:hl7-org:elm-types:r1}Time':
+          return val && val.isDateTime && val.isTime();
+
+        default:
+          return true;
+        // TODO: Better checking of custom or complex types
       }
-    }, {
-      key: "matchesIntervalTypeSpecifier",
-      value: function matchesIntervalTypeSpecifier(val, spec) {
-        return val.isInterval && (val.low == null || this.matchesTypeSpecifier(val.low, spec.pointType)) && (val.high == null || this.matchesTypeSpecifier(val.high, spec.pointType));
+    }
+  }, {
+    key: "matchesInstanceType",
+    value: function matchesInstanceType(val, inst) {
+      switch (false) {
+        case !inst.isBooleanLiteral:
+          return typeof val === 'boolean';
+
+        case !inst.isDecimalLiteral:
+          return typeof val === 'number';
+
+        case !inst.isIntegerLiteral:
+          return typeof val === 'number' && Math.floor(val) === val;
+
+        case !inst.isStringLiteral:
+          return typeof val === 'string';
+
+        case !inst.isCode:
+          return val && val.isCode;
+
+        case !inst.isConcept:
+          return val && val.isConcept;
+
+        case !inst.isDateTime:
+          return val && val.isDateTime;
+
+        case !inst.isQuantity:
+          return val && val.isQuantity;
+
+        case !inst.isTime:
+          return val && val.isDateTime && val.isTime();
+
+        case !inst.isList:
+          return this.matchesListInstanceType(val, inst);
+
+        case !inst.isTuple:
+          return this.matchesTupleInstanceType(val, inst);
+
+        case !inst.isInterval:
+          return this.matchesIntervalInstanceType(val, inst);
+
+        default:
+          return true;
+        // default to true when we don't know for sure
       }
-    }, {
-      key: "matchesNamedTypeSpecifier",
-      value: function matchesNamedTypeSpecifier(val, spec) {
-        switch (spec.name) {
-          case '{urn:hl7-org:elm-types:r1}Boolean':
-            return typeof val === 'boolean';
+    }
+  }, {
+    key: "matchesListInstanceType",
+    value: function matchesListInstanceType(val, list) {
+      var _this4 = this;
 
-          case '{urn:hl7-org:elm-types:r1}Decimal':
-            return typeof val === 'number';
+      return typeIsArray(val) && val.every(function (x) {
+        return _this4.matchesInstanceType(x, list.elements[0]);
+      });
+    }
+  }, {
+    key: "matchesTupleInstanceType",
+    value: function matchesTupleInstanceType(val, tpl) {
+      var _this5 = this;
 
-          case '{urn:hl7-org:elm-types:r1}Integer':
-            return typeof val === 'number' && Math.floor(val) === val;
+      return _typeof(val) === 'object' && !typeIsArray(val) && tpl.elements.every(function (x) {
+        return typeof val[x.name] === 'undefined' || _this5.matchesInstanceType(val[x.name], x.value);
+      });
+    }
+  }, {
+    key: "matchesIntervalInstanceType",
+    value: function matchesIntervalInstanceType(val, ivl) {
+      var pointType = ivl.low != null ? ivl.low : ivl.high;
+      return val.isInterval && (val.low == null || this.matchesInstanceType(val.low, pointType)) && (val.high == null || this.matchesInstanceType(val.high, pointType));
+    }
+  }, {
+    key: "parameters",
+    get: function get() {
+      return this._parameters || this.parent && this.parent.parameters;
+    },
+    set: function set(params) {
+      this.checkParameters(params);
+      this._parameters = params;
+    }
+  }, {
+    key: "codeService",
+    get: function get() {
+      return this._codeService || this.parent && this.parent.codeService;
+    },
+    set: function set(cs) {
+      this._codeService = cs;
+    }
+  }]);
 
-          case '{urn:hl7-org:elm-types:r1}String':
-            return typeof val === 'string';
-
-          case '{urn:hl7-org:elm-types:r1}Concept':
-            return val != null ? val.isConcept : undefined;
-
-          case '{urn:hl7-org:elm-types:r1}Code':
-            return val != null ? val.isCode : undefined;
-
-          case '{urn:hl7-org:elm-types:r1}DateTime':
-            return val != null ? val.isDateTime : undefined;
-
-          case '{urn:hl7-org:elm-types:r1}Date':
-            return val != null ? val.isDate : undefined;
-
-          case '{urn:hl7-org:elm-types:r1}Quantity':
-            return val != null ? val.isQuantity : undefined;
-
-          case '{urn:hl7-org:elm-types:r1}Time':
-            return (val != null ? val.isDateTime : undefined) && val.isTime();
-
-          default:
-            return true;
-          // TODO: Better checking of custom or complex types
-        }
-      }
-    }, {
-      key: "matchesInstanceType",
-      value: function matchesInstanceType(val, inst) {
-        switch (false) {
-          case !inst.isBooleanLiteral:
-            return typeof val === 'boolean';
-
-          case !inst.isDecimalLiteral:
-            return typeof val === 'number';
-
-          case !inst.isIntegerLiteral:
-            return typeof val === 'number' && Math.floor(val) === val;
-
-          case !inst.isStringLiteral:
-            return typeof val === 'string';
-
-          case !inst.isCode:
-            return val != null ? val.isCode : undefined;
-
-          case !inst.isConcept:
-            return val != null ? val.isConcept : undefined;
-
-          case !inst.isDateTime:
-            return val != null ? val.isDateTime : undefined;
-
-          case !inst.isQuantity:
-            return val != null ? val.isQuantity : undefined;
-
-          case !inst.isTime:
-            return (val != null ? val.isDateTime : undefined) && val.isTime();
-
-          case !inst.isList:
-            return this.matchesListInstanceType(val, inst);
-
-          case !inst.isTuple:
-            return this.matchesTupleInstanceType(val, inst);
-
-          case !inst.isInterval:
-            return this.matchesIntervalInstanceType(val, inst);
-
-          default:
-            return true;
-          // default to true when we don't know for sure
-        }
-      }
-    }, {
-      key: "matchesListInstanceType",
-      value: function matchesListInstanceType(val, list) {
-        var _this4 = this;
-
-        return typeIsArray(val) && val.every(function (x) {
-          return _this4.matchesInstanceType(x, list.elements[0]);
-        });
-      }
-    }, {
-      key: "matchesTupleInstanceType",
-      value: function matchesTupleInstanceType(val, tpl) {
-        var _this5 = this;
-
-        return _typeof(val) === 'object' && !typeIsArray(val) && tpl.elements.every(function (x) {
-          return typeof val[x.name] === 'undefined' || _this5.matchesInstanceType(val[x.name], x.value);
-        });
-      }
-    }, {
-      key: "matchesIntervalInstanceType",
-      value: function matchesIntervalInstanceType(val, ivl) {
-        var pointType = ivl.low != null ? ivl.low : ivl.high;
-        return val.isInterval && (val.low == null || this.matchesInstanceType(val.low, pointType)) && (val.high == null || this.matchesInstanceType(val.high, pointType));
-      }
-    }]);
-
-    return Context;
-  }();
-
-  Context.initClass();
   return Context;
 }();
 
-module.exports.PatientContext = PatientContext = /*#__PURE__*/function (_Context) {
+var PatientContext = /*#__PURE__*/function (_Context) {
   _inherits(PatientContext, _Context);
 
   var _super = _createSuper(PatientContext);
@@ -14045,24 +13989,32 @@ module.exports.PatientContext = PatientContext = /*#__PURE__*/function (_Context
   }, {
     key: "getLibraryContext",
     value: function getLibraryContext(library) {
-      return this.library_context[library] || (this.library_context[library] = new PatientContext(this.get(library), this.patient, this.codeService, this.parameters, this.executionDateTime));
+      if (this.library_context[library] == null) {
+        this.library_context[library] = new PatientContext(this.get(library), this.patient, this.codeService, this.parameters, this.executionDateTime);
+      }
+
+      return this.library_context[library];
     }
   }, {
     key: "getLocalIdContext",
     value: function getLocalIdContext(localId) {
-      return this.localId_context[localId] || (this.localId_context[localId] = new PatientContext(this.get(library), this.patient, this.codeService, this.parameters, this.executionDateTime));
+      if (this.localId_context[localId] == null) {
+        this.localId_context[localId] = new PatientContext(this.get(localId), this.patient, this.codeService, this.parameters, this.executionDateTime);
+      }
+
+      return this.localId_context[localId];
     }
   }, {
     key: "findRecords",
     value: function findRecords(profile) {
-      return this.patient != null ? this.patient.findRecords(profile) : undefined;
+      return this.patient && this.patient.findRecords(profile);
     }
   }]);
 
   return PatientContext;
 }(Context);
 
-module.exports.UnfilteredContext = UnfilteredContext = /*#__PURE__*/function (_Context2) {
+var UnfilteredContext = /*#__PURE__*/function (_Context2) {
   _inherits(UnfilteredContext, _Context2);
 
   var _super2 = _createSuper(UnfilteredContext);
@@ -14099,36 +14051,33 @@ module.exports.UnfilteredContext = UnfilteredContext = /*#__PURE__*/function (_C
   }, {
     key: "get",
     value: function get(identifier) {
-      var _this8 = this;
-
       //First check to see if the identifier is a unfiltered context expression that has already been cached
       if (this.context_values[identifier]) {
         return this.context_values[identifier];
       } //if not look to see if the library has a unfiltered expression of that identifier
 
 
-      if ((this.library[identifier] != null ? this.library[identifier].context : undefined) === 'Unfiltered') {
+      if (this.library[identifier] && this.library[identifier].context === 'Unfiltered') {
         return this.library.expressions[identifier];
       } //lastley attempt to gather all patient level results that have that identifier
       // should this compact null values before return ?
 
 
-      return function () {
-        var result = [];
-
-        for (var pid in _this8.results.patientResults) {
-          var res = _this8.results.patientResults[pid];
-          result.push(res[identifier]);
-        }
-
-        return result;
-      }();
+      return Object.values(this.results.patientResults).map(function (pr) {
+        return pr[identifier];
+      });
     }
   }]);
 
   return UnfilteredContext;
 }(Context);
-},{"../datatypes/datatypes":6,"../datatypes/exception":8,"../elm/library":27,"../util/util":47,"util":60}],42:[function(require,module,exports){
+
+module.exports = {
+  Context: Context,
+  PatientContext: PatientContext,
+  UnfilteredContext: UnfilteredContext
+};
+},{"../datatypes/datatypes":6,"../datatypes/exception":8,"../util/util":47}],42:[function(require,module,exports){
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14137,21 +14086,14 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
+var _require = require('./results'),
+    Results = _require.Results;
 
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Executor;
+var _require2 = require('./context'),
+    UnfilteredContext = _require2.UnfilteredContext,
+    PatientContext = _require2.PatientContext;
 
-module.exports.Executor = Executor = /*#__PURE__*/function () {
+var Executor = /*#__PURE__*/function () {
   function Executor(library, codeService, parameters) {
     _classCallCheck(this, Executor);
 
@@ -14183,12 +14125,12 @@ module.exports.Executor = Executor = /*#__PURE__*/function () {
     value: function exec_expression(expression, patientSource) {
       var r = new Results();
       var expr = this.library.expressions[expression];
-      var p;
 
-      while (expr && (p = patientSource.currentPatient())) {
-        var patient_ctx = new PatientContext(this.library, p, this.codeService, this.parameters);
-        r.recordPatientResult(patient_ctx, expression, expr.execute(patient_ctx));
-        patientSource.nextPatient();
+      if (expr != null) {
+        for (var p = patientSource.currentPatient(); p != null; p = patientSource.nextPatient()) {
+          var patient_ctx = new PatientContext(this.library, p, this.codeService, this.parameters);
+          r.recordPatientResult(patient_ctx, expression, expr.execute(patient_ctx));
+        }
       }
 
       return r;
@@ -14213,9 +14155,8 @@ module.exports.Executor = Executor = /*#__PURE__*/function () {
     key: "exec_patient_context",
     value: function exec_patient_context(patientSource, executionDateTime) {
       var r = new Results();
-      var p;
 
-      while (p = patientSource.currentPatient()) {
+      for (var p = patientSource.currentPatient(); p != null; p = patientSource.nextPatient()) {
         var patient_ctx = new PatientContext(this.library, p, this.codeService, this.parameters, executionDateTime);
 
         for (var key in this.library.expressions) {
@@ -14225,8 +14166,6 @@ module.exports.Executor = Executor = /*#__PURE__*/function () {
             r.recordPatientResult(patient_ctx, key, expr.execute(patient_ctx));
           }
         }
-
-        patientSource.nextPatient();
       }
 
       return r;
@@ -14236,12 +14175,9 @@ module.exports.Executor = Executor = /*#__PURE__*/function () {
   return Executor;
 }();
 
-var _require = require('./results'),
-    Results = _require.Results;
-
-var _require2 = require('./context'),
-    UnfilteredContext = _require2.UnfilteredContext,
-    PatientContext = _require2.PatientContext;
+module.exports = {
+  Executor: Executor
+};
 },{"./context":41,"./results":44}],43:[function(require,module,exports){
 "use strict";
 
@@ -14260,7 +14196,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var _require = require('../elm/library'),
     Library = _require.Library;
 
-module.exports.Repository = /*#__PURE__*/function () {
+var Repository = /*#__PURE__*/function () {
   function Repository(data) {
     _classCallCheck(this, Repository);
 
@@ -14296,6 +14232,10 @@ module.exports.Repository = /*#__PURE__*/function () {
 
   return Repository;
 }();
+
+module.exports = {
+  Repository: Repository
+};
 },{"../elm/library":27}],44:[function(require,module,exports){
 "use strict";
 
@@ -14305,21 +14245,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Results;
-
-module.exports.Results = Results = /*#__PURE__*/function () {
+var Results = /*#__PURE__*/function () {
   function Results() {
     _classCallCheck(this, Results);
 
@@ -14342,17 +14268,21 @@ module.exports.Results = Results = /*#__PURE__*/function () {
       }
 
       this.patientResults[patientId][resultName] = result;
-      return this.localIdPatientResultsMap[patientId] = patient_ctx.getAllLocalIds();
+      this.localIdPatientResultsMap[patientId] = patient_ctx.getAllLocalIds();
     }
   }, {
     key: "recordUnfilteredResult",
     value: function recordUnfilteredResult(resultName, result) {
-      return this.unfilteredResults[resultName] = result;
+      this.unfilteredResults[resultName] = result;
     }
   }]);
 
   return Results;
 }();
+
+module.exports = {
+  Results: Results
+};
 },{}],45:[function(require,module,exports){
 "use strict";
 
@@ -14370,118 +14300,78 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-/* eslint-disable
-    no-unreachable,
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
+var _require = require('../datatypes/uncertainty'),
+    Uncertainty = _require.Uncertainty;
 
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var _equals, _equivalent;
-
-var _require = require('../datatypes/datetime'),
-    DateTime = _require.DateTime;
-
-var _require2 = require('../datatypes/uncertainty'),
-    Uncertainty = _require2.Uncertainty;
-
-var areNumbers = function areNumbers(a, b) {
+function areNumbers(a, b) {
   return typeof a === 'number' && typeof b === 'number';
-};
+}
 
-var areDateTimesOrQuantities = function areDateTimesOrQuantities(a, b) {
-  return (a != null ? a.isDateTime : undefined) && (b != null ? b.isDateTime : undefined) || (a != null ? a.isDate : undefined) && (b != null ? b.isDate : undefined) || (a != null ? a.isTime : undefined) && (b != null ? b.isTime : undefined) || (a != null ? a.isQuantity : undefined) && (b != null ? b.isQuantity : undefined);
-};
+function areDateTimesOrQuantities(a, b) {
+  return a && a.isDateTime && b && b.isDateTime || a && a.isDate && b && b.isDate || a && a.isTime && b && b.isTime || a && a.isQuantity && b && b.isQuantity;
+}
 
-var isUncertainty = function isUncertainty(x) {
+function isUncertainty(x) {
   return x instanceof Uncertainty;
-};
+}
 
-module.exports.lessThan = function (a, b, precision) {
-  switch (false) {
-    case !areNumbers(a, b):
-      return a < b;
-
-    case !areDateTimesOrQuantities(a, b):
-      return a.before(b, precision);
-
-    case !isUncertainty(a):
-      return a.lessThan(b);
-
-    case !isUncertainty(b):
-      return Uncertainty.from(a).lessThan(b);
-
-    default:
-      return null;
+function lessThan(a, b, precision) {
+  if (areNumbers(a, b)) {
+    return a < b;
+  } else if (areDateTimesOrQuantities(a, b)) {
+    return a.before(b, precision);
+  } else if (isUncertainty(a)) {
+    return a.lessThan(b);
+  } else if (isUncertainty(b)) {
+    return Uncertainty.from(a).lessThan(b);
+  } else {
+    return null;
   }
-};
+}
 
-module.exports.lessThanOrEquals = function (a, b, precision) {
-  switch (false) {
-    case !areNumbers(a, b):
-      return a <= b;
-
-    case !areDateTimesOrQuantities(a, b):
-      return a.sameOrBefore(b, precision);
-
-    case !isUncertainty(a):
-      return a.lessThanOrEquals(b);
-
-    case !isUncertainty(b):
-      return Uncertainty.from(a).lessThanOrEquals(b);
-
-    default:
-      return null;
+function lessThanOrEquals(a, b, precision) {
+  if (areNumbers(a, b)) {
+    return a <= b;
+  } else if (areDateTimesOrQuantities(a, b)) {
+    return a.sameOrBefore(b, precision);
+  } else if (isUncertainty(a)) {
+    return a.lessThanOrEquals(b);
+  } else if (isUncertainty(b)) {
+    return Uncertainty.from(a).lessThanOrEquals(b);
+  } else {
+    return null;
   }
-};
+}
 
-module.exports.greaterThan = function (a, b, precision) {
-  switch (false) {
-    case !areNumbers(a, b):
-      return a > b;
-
-    case !areDateTimesOrQuantities(a, b):
-      return a.after(b, precision);
-
-    case !isUncertainty(a):
-      return a.greaterThan(b);
-
-    case !isUncertainty(b):
-      return Uncertainty.from(a).greaterThan(b);
-
-    default:
-      return null;
+function greaterThan(a, b, precision) {
+  if (areNumbers(a, b)) {
+    return a > b;
+  } else if (areDateTimesOrQuantities(a, b)) {
+    return a.after(b, precision);
+  } else if (isUncertainty(a)) {
+    return a.greaterThan(b);
+  } else if (isUncertainty(b)) {
+    return Uncertainty.from(a).greaterThan(b);
+  } else {
+    return null;
   }
-};
+}
 
-module.exports.greaterThanOrEquals = function (a, b, precision) {
-  switch (false) {
-    case !areNumbers(a, b):
-      return a >= b;
-
-    case !areDateTimesOrQuantities(a, b):
-      return a.sameOrAfter(b, precision);
-
-    case !isUncertainty(a):
-      return a.greaterThanOrEquals(b);
-
-    case !isUncertainty(b):
-      return Uncertainty.from(a).greaterThanOrEquals(b);
-
-    default:
-      return null;
+function greaterThanOrEquals(a, b, precision) {
+  if (areNumbers(a, b)) {
+    return a >= b;
+  } else if (areDateTimesOrQuantities(a, b)) {
+    return a.sameOrAfter(b, precision);
+  } else if (isUncertainty(a)) {
+    return a.greaterThanOrEquals(b);
+  } else if (isUncertainty(b)) {
+    return Uncertainty.from(a).greaterThanOrEquals(b);
+  } else {
+    return null;
   }
-};
+}
 
-module.exports.equivalent = _equivalent = function equivalent(a, b) {
+function equivalent(a, b) {
   if (a == null && b == null) {
     return true;
   }
@@ -14499,19 +14389,17 @@ module.exports.equivalent = _equivalent = function equivalent(a, b) {
     return a.equivalent(b);
   }
 
-  var _Array$from = Array.from(getClassOfObjects(a, b)),
-      _Array$from2 = _slicedToArray(_Array$from, 2),
-      aClass = _Array$from2[0],
-      bClass = _Array$from2[1];
+  var _getClassOfObjects = getClassOfObjects(a, b),
+      _getClassOfObjects2 = _slicedToArray(_getClassOfObjects, 2),
+      aClass = _getClassOfObjects2[0],
+      bClass = _getClassOfObjects2[1];
 
   switch (aClass) {
     case '[object Array]':
-      return compareEveryItemInArrays(a, b, _equivalent);
-      break;
+      return compareEveryItemInArrays(a, b, equivalent);
 
     case '[object Object]':
-      return compareObjects(a, b, _equivalent);
-      break;
+      return compareObjects(a, b, equivalent);
 
     case '[object String]':
       // Make sure b is also a string
@@ -14527,42 +14415,42 @@ module.exports.equivalent = _equivalent = function equivalent(a, b) {
       break;
   }
 
-  return _equals(a, b);
-};
+  return equals(a, b);
+}
 
-var isCode = function isCode(object) {
+function isCode(object) {
   return object.hasMatch && typeof object.hasMatch === 'function';
-};
+}
 
-var codesAreEquivalent = function codesAreEquivalent(code1, code2) {
+function codesAreEquivalent(code1, code2) {
   return code1.hasMatch(code2);
-};
+}
 
-var getClassOfObjects = function getClassOfObjects(object1, object2) {
+function getClassOfObjects(object1, object2) {
   return [object1, object2].map(function (obj) {
     return {}.toString.call(obj);
   });
-};
+}
 
-var compareEveryItemInArrays = function compareEveryItemInArrays(array1, array2, comparisonFunction) {
+function compareEveryItemInArrays(array1, array2, comparisonFunction) {
   return array1.length === array2.length && array1.every(function (item, i) {
     return comparisonFunction(item, array2[i]);
   });
-};
+}
 
-var compareObjects = function compareObjects(a, b, comparisonFunction) {
+function compareObjects(a, b, comparisonFunction) {
   if (!classesEqual(a, b)) {
     return false;
   }
 
   return deepCompareKeysAndValues(a, b, comparisonFunction);
-};
+}
 
-var classesEqual = function classesEqual(object1, object2) {
+function classesEqual(object1, object2) {
   return object2 instanceof object1.constructor && object1 instanceof object2.constructor;
-};
+}
 
-var deepCompareKeysAndValues = function deepCompareKeysAndValues(a, b, comparisonFunction) {
+function deepCompareKeysAndValues(a, b, comparisonFunction) {
   var finalComparisonResult;
   var aKeys = getKeysFromObject(a).sort();
   var bKeys = getKeysFromObject(b).sort(); // Array.every() will only return true or false, so set a flag for if we should return null
@@ -14595,39 +14483,31 @@ var deepCompareKeysAndValues = function deepCompareKeysAndValues(a, b, compariso
   }
 
   return finalComparisonResult;
-};
+}
 
-var getKeysFromObject = function getKeysFromObject(object) {
-  var key;
-  var objectClass = {}.toString.call(object);
-  return !isFunction(key) ? function () {
-    var result = [];
+function getKeysFromObject(object) {
+  return Object.keys(object).filter(function (k) {
+    return !isFunction(object[k]);
+  });
+}
 
-    for (key in object) {
-      result.push(key);
-    }
-
-    return result;
-  }() : undefined;
-};
-
-var isFunction = function isFunction(input) {
+function isFunction(input) {
   return input instanceof Function || {}.toString.call(input) === '[object Function]';
-};
+}
 
-module.exports.equals = _equals = function equals(a, b) {
+function equals(a, b) {
   // Handle null cases first: spec says if either is null, return null
   if (a == null || b == null) {
     return null;
   } // If one is a Quantity, use the Quantity equals function
 
 
-  if (a != null ? a.isQuantity : undefined) {
+  if (a && a.isQuantity) {
     return a.equals(b);
   } // If one is a Ratio, use the ratio equals function
 
 
-  if (a != null ? a.isRatio : undefined) {
+  if (a && a.isRatio) {
     return a.equals(b);
   } // If one is an Uncertainty, convert the other to an Uncertainty
 
@@ -14649,10 +14529,10 @@ module.exports.equals = _equals = function equals(a, b) {
   } // Return false if they are instances of different classes
 
 
-  var _Array$from3 = Array.from(getClassOfObjects(a, b)),
-      _Array$from4 = _slicedToArray(_Array$from3, 2),
-      aClass = _Array$from4[0],
-      bClass = _Array$from4[1];
+  var _getClassOfObjects3 = getClassOfObjects(a, b),
+      _getClassOfObjects4 = _slicedToArray(_getClassOfObjects3, 2),
+      aClass = _getClassOfObjects4[0],
+      bClass = _getClassOfObjects4[1];
 
   if (aClass !== bClass) {
     return false;
@@ -14662,36 +14542,40 @@ module.exports.equals = _equals = function equals(a, b) {
     case '[object Date]':
       // Compare the ms since epoch
       return a.getTime() === b.getTime();
-      break;
 
     case '[object RegExp]':
       // Compare the components of the regular expression
       return ['source', 'global', 'ignoreCase', 'multiline'].every(function (p) {
         return a[p] === b[p];
       });
-      break;
 
     case '[object Array]':
       if (a.indexOf(null) >= 0 || a.indexOf(undefined) >= 0 || b.indexOf(null) >= 0 || b.indexOf(undefined) >= 0) {
         return null;
       }
 
-      return compareEveryItemInArrays(a, b, _equals);
-      break;
+      return compareEveryItemInArrays(a, b, equals);
 
     case '[object Object]':
-      return compareObjects(a, b, _equals);
-      break;
+      return compareObjects(a, b, equals);
 
     case '[object Function]':
       return a.toString() === b.toString();
-      break;
   } // If we made it this far, we can't handle it
 
 
   return false;
+}
+
+module.exports = {
+  lessThan: lessThan,
+  lessThanOrEquals: lessThanOrEquals,
+  greaterThan: greaterThan,
+  greaterThanOrEquals: greaterThanOrEquals,
+  equivalent: equivalent,
+  equals: equals
 };
-},{"../datatypes/datetime":7,"../datatypes/uncertainty":13}],46:[function(require,module,exports){
+},{"../datatypes/uncertainty":13}],46:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -14712,21 +14596,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-undef,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var isValidDecimal, isValidInteger, MAX_DATE_VALUE, MAX_DATETIME_VALUE, MAX_FLOAT_VALUE, MAX_INT_VALUE, MAX_TIME_VALUE, MIN_DATE_VALUE, MIN_DATETIME_VALUE, MIN_FLOAT_PRECISION_VALUE, MIN_FLOAT_VALUE, MIN_INT_VALUE, MIN_TIME_VALUE, OverFlowException, _predecessor, _successor;
-
 var _require = require('../datatypes/exception'),
     Exception = _require.Exception;
 
@@ -14737,19 +14606,22 @@ var _require2 = require('../datatypes/datetime'),
 var _require3 = require('../datatypes/uncertainty'),
     Uncertainty = _require3.Uncertainty;
 
-module.exports.MAX_INT_VALUE = MAX_INT_VALUE = Math.pow(2, 31) - 1;
-module.exports.MIN_INT_VALUE = MIN_INT_VALUE = Math.pow(-2, 31);
-module.exports.MAX_FLOAT_VALUE = MAX_FLOAT_VALUE = 99999999999999999999999999999.99999999;
-module.exports.MIN_FLOAT_VALUE = MIN_FLOAT_VALUE = -99999999999999999999999999999.99999999;
-module.exports.MIN_FLOAT_PRECISION_VALUE = MIN_FLOAT_PRECISION_VALUE = Math.pow(10, -8);
-module.exports.MIN_DATETIME_VALUE = MIN_DATETIME_VALUE = DateTime.parse('0001-01-01T00:00:00.000');
-module.exports.MAX_DATETIME_VALUE = MAX_DATETIME_VALUE = DateTime.parse('9999-12-31T23:59:59.999');
-module.exports.MIN_DATE_VALUE = MIN_DATE_VALUE = _Date.parse('0001-01-01');
-module.exports.MAX_DATE_VALUE = MAX_DATE_VALUE = _Date.parse('9999-12-31');
-module.exports.MIN_TIME_VALUE = MIN_TIME_VALUE = DateTime.parse('0000-01-01T00:00:00.000');
-module.exports.MAX_TIME_VALUE = MAX_TIME_VALUE = DateTime.parse('0000-01-01T23:59:59.999');
+var MAX_INT_VALUE = Math.pow(2, 31) - 1;
+var MIN_INT_VALUE = Math.pow(-2, 31);
+var MAX_FLOAT_VALUE = 99999999999999999999999999999.99999999;
+var MIN_FLOAT_VALUE = -99999999999999999999999999999.99999999;
+var MIN_FLOAT_PRECISION_VALUE = Math.pow(10, -8);
+var MIN_DATETIME_VALUE = DateTime.parse('0001-01-01T00:00:00.000');
+var MAX_DATETIME_VALUE = DateTime.parse('9999-12-31T23:59:59.999');
 
-module.exports.overflowsOrUnderflows = function (value) {
+var MIN_DATE_VALUE = _Date.parse('0001-01-01');
+
+var MAX_DATE_VALUE = _Date.parse('9999-12-31');
+
+var MIN_TIME_VALUE = DateTime.parse('0000-01-01T00:00:00.000');
+var MAX_TIME_VALUE = DateTime.parse('0000-01-01T23:59:59.999');
+
+function overflowsOrUnderflows(value) {
   if (value == null) {
     return false;
   }
@@ -14793,9 +14665,9 @@ module.exports.overflowsOrUnderflows = function (value) {
   }
 
   return false;
-};
+}
 
-module.exports.isValidInteger = isValidInteger = function isValidInteger(integer) {
+function isValidInteger(integer) {
   if (isNaN(integer)) {
     return false;
   }
@@ -14809,9 +14681,9 @@ module.exports.isValidInteger = isValidInteger = function isValidInteger(integer
   }
 
   return true;
-};
+}
 
-module.exports.isValidDecimal = isValidDecimal = function isValidDecimal(decimal) {
+function isValidDecimal(decimal) {
   if (isNaN(decimal)) {
     return false;
   }
@@ -14825,9 +14697,9 @@ module.exports.isValidDecimal = isValidDecimal = function isValidDecimal(decimal
   }
 
   return true;
-};
+}
 
-module.exports.limitDecimalPrecision = function (decimal) {
+function limitDecimalPrecision(decimal) {
   var decimalString = decimal.toString(); // For decimals so large that they are represented in scientific notation, javascript has already limited
   // the decimal to its own constraints, so we can't determine the original precision.  Leave as-is unless
   // this becomes problematic, in which case we would need our own parseFloat.
@@ -14844,9 +14716,9 @@ module.exports.limitDecimalPrecision = function (decimal) {
   }
 
   return parseFloat(decimalString);
-};
+}
 
-module.exports.OverFlowException = OverFlowException = OverFlowException = /*#__PURE__*/function (_Exception) {
+var OverFlowException = /*#__PURE__*/function (_Exception) {
   _inherits(OverFlowException, _Exception);
 
   var _super = _createSuper(OverFlowException);
@@ -14860,7 +14732,7 @@ module.exports.OverFlowException = OverFlowException = OverFlowException = /*#__
   return OverFlowException;
 }(Exception);
 
-module.exports.successor = _successor = function successor(val) {
+function successor(val) {
   if (typeof val === 'number') {
     if (parseInt(val) === val) {
       if (val === MAX_INT_VALUE) {
@@ -14875,45 +14747,45 @@ module.exports.successor = _successor = function successor(val) {
         return val + MIN_FLOAT_PRECISION_VALUE;
       }
     }
-  } else if (val != null ? val.isDateTime : undefined) {
+  } else if (val && val.isDateTime) {
     if (val.sameAs(MAX_DATETIME_VALUE)) {
       throw new OverFlowException();
     } else {
       return val.successor();
     }
-  } else if (val != null ? val.isDate : undefined) {
+  } else if (val && val.isDate) {
     if (val.sameAs(MAX_DATE_VALUE)) {
       throw new OverFlowException();
     } else {
       return val.successor();
     }
-  } else if (val != null ? val.isTime : undefined) {
+  } else if (val && val.isTime) {
     if (val.sameAs(MAX_TIME_VALUE)) {
       throw new OverFlowException();
     } else {
       return val.successor();
     }
-  } else if (val != null ? val.isUncertainty : undefined) {
+  } else if (val && val.isUncertainty) {
     // For uncertainties, if the high is the max val, don't increment it
     var high = function () {
       try {
-        return _successor(val.high);
+        return successor(val.high);
       } catch (e) {
         return val.high;
       }
     }();
 
-    return new Uncertainty(_successor(val.low), high);
-  } else if (val != null ? val.isQuantity : undefined) {
+    return new Uncertainty(successor(val.low), high);
+  } else if (val && val.isQuantity) {
     var succ = val.clone();
-    succ.value = _successor(val.value);
+    succ.value = successor(val.value);
     return succ;
   } else if (val == null) {
     return null;
   }
-};
+}
 
-module.exports.predecessor = _predecessor = function predecessor(val) {
+function predecessor(val) {
   if (typeof val === 'number') {
     if (parseInt(val) === val) {
       if (val === MIN_INT_VALUE) {
@@ -14928,89 +14800,89 @@ module.exports.predecessor = _predecessor = function predecessor(val) {
         return val - MIN_FLOAT_PRECISION_VALUE;
       }
     }
-  } else if (val != null ? val.isDateTime : undefined) {
+  } else if (val && val.isDateTime) {
     if (val.sameAs(MIN_DATETIME_VALUE)) {
       throw new OverFlowException();
     } else {
       return val.predecessor();
     }
-  } else if (val != null ? val.isDate : undefined) {
+  } else if (val && val.isDate) {
     if (val.sameAs(MIN_DATE_VALUE)) {
       throw new OverFlowException();
     } else {
       return val.predecessor();
     }
-  } else if (val != null ? val.isTime : undefined) {
+  } else if (val && val.isTime) {
     if (val.sameAs(MIN_TIME_VALUE)) {
       throw new OverFlowException();
     } else {
       return val.predecessor();
     }
-  } else if (val != null ? val.isUncertainty : undefined) {
+  } else if (val && val.isUncertainty) {
     // For uncertainties, if the low is the min val, don't decrement it
     var low = function () {
       try {
-        return _predecessor(val.low);
+        return predecessor(val.low);
       } catch (e) {
         return val.low;
       }
     }();
 
-    return new Uncertainty(low, _predecessor(val.high));
-  } else if (val != null ? val.isQuantity : undefined) {
+    return new Uncertainty(low, predecessor(val.high));
+  } else if (val && val.isQuantity) {
     var pred = val.clone();
-    pred.value = _predecessor(val.value);
+    pred.value = predecessor(val.value);
     return pred;
   } else if (val == null) {
     return null;
   }
-};
+}
 
-module.exports.maxValueForInstance = function (val) {
+function maxValueForInstance(val) {
   if (typeof val === 'number') {
     if (parseInt(val) === val) {
       return MAX_INT_VALUE;
     } else {
       return MAX_FLOAT_VALUE;
     }
-  } else if (val != null ? val.isDateTime : undefined) {
+  } else if (val && val.isDateTime) {
     return MAX_DATETIME_VALUE.copy();
-  } else if (val != null ? val.isDate : undefined) {
+  } else if (val && val.isDate) {
     return MAX_DATE_VALUE.copy();
-  } else if (val != null ? val.isTime : undefined) {
+  } else if (val && val.isTime) {
     return MAX_TIME_VALUE.copy();
-  } else if (val != null ? val.isQuantity : undefined) {
+  } else if (val && val.isQuantity) {
     var val2 = val.clone();
     val2.value = maxValueForInstance(val2.value);
     return val2;
   } else {
     return null;
   }
-};
+}
 
-module.exports.minValueForInstance = function (val) {
+function minValueForInstance(val) {
   if (typeof val === 'number') {
     if (parseInt(val) === val) {
       return MIN_INT_VALUE;
     } else {
       return MIN_FLOAT_VALUE;
     }
-  } else if (val != null ? val.isDateTime : undefined) {
+  } else if (val && val.isDateTime) {
     return MIN_DATETIME_VALUE.copy();
-  } else if (val != null ? val.isDate : undefined) {
+  } else if (val && val.isDate) {
     return MIN_DATE_VALUE.copy();
-  } else if (val != null ? val.isTime : undefined) {
+  } else if (val && val.isTime) {
     return MIN_TIME_VALUE.copy();
-  } else if (val != null ? val.isQuantity : undefined) {
+  } else if (val && val.isQuantity) {
     var val2 = val.clone();
     val2.value = minValueForInstance(val2.value);
     return val2;
   } else {
     return null;
   }
-};
+}
 
-module.exports.decimalAdjust = function (type, value, exp) {
+function decimalAdjust(type, value, exp) {
   //If the exp is undefined or zero...
   if (typeof exp === 'undefined' || +exp === 0) {
     return Math[type](value);
@@ -15031,6 +14903,30 @@ module.exports.decimalAdjust = function (type, value, exp) {
   value = value.toString().split('e');
   v = value[1] ? +value[1] + exp : exp;
   return +(value[0] + 'e' + v);
+}
+
+module.exports = {
+  MAX_INT_VALUE: MAX_INT_VALUE,
+  MIN_INT_VALUE: MIN_INT_VALUE,
+  MAX_FLOAT_VALUE: MAX_FLOAT_VALUE,
+  MIN_FLOAT_VALUE: MIN_FLOAT_VALUE,
+  MIN_FLOAT_PRECISION_VALUE: MIN_FLOAT_PRECISION_VALUE,
+  MIN_DATETIME_VALUE: MIN_DATETIME_VALUE,
+  MAX_DATETIME_VALUE: MAX_DATETIME_VALUE,
+  MIN_DATE_VALUE: MIN_DATE_VALUE,
+  MAX_DATE_VALUE: MAX_DATE_VALUE,
+  MIN_TIME_VALUE: MIN_TIME_VALUE,
+  MAX_TIME_VALUE: MAX_TIME_VALUE,
+  overflowsOrUnderflows: overflowsOrUnderflows,
+  isValidInteger: isValidInteger,
+  isValidDecimal: isValidDecimal,
+  limitDecimalPrecision: limitDecimalPrecision,
+  OverFlowException: OverFlowException,
+  successor: successor,
+  predecessor: predecessor,
+  maxValueForInstance: maxValueForInstance,
+  minValueForInstance: minValueForInstance,
+  decimalAdjust: decimalAdjust
 };
 },{"../datatypes/datetime":7,"../datatypes/exception":8,"../datatypes/uncertainty":13}],47:[function(require,module,exports){
 "use strict";
@@ -15047,29 +14943,13 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS103: Rewrite code to no longer use __guard__
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var getTimezoneSeparatorFromString, normalizeMillisecondsField, normalizeMillisecondsFieldInString, typeIsArray;
-
-module.exports.removeNulls = function (things) {
+function removeNulls(things) {
   return things.filter(function (x) {
     return x != null;
   });
-};
+}
 
-module.exports.numerical_sort = function (things) {
+function numerical_sort(things) {
   var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'asc';
   return things.sort(function (a, b) {
     if (direction === 'asc') {
@@ -15078,17 +14958,17 @@ module.exports.numerical_sort = function (things) {
       return b - a;
     }
   });
-};
+}
 
-module.exports.isNull = function (value) {
+function isNull(value) {
   return value === null;
-};
+}
 
-module.exports.typeIsArray = typeIsArray = Array.isArray || function (value) {
+var typeIsArray = Array.isArray || function (value) {
   return {}.toString.call(value) === '[object Array]';
 };
 
-module.exports.allTrue = function (things) {
+function allTrue(things) {
   if (typeIsArray(things)) {
     return things.every(function (x) {
       return x;
@@ -15096,9 +14976,9 @@ module.exports.allTrue = function (things) {
   } else {
     return things;
   }
-};
+}
 
-module.exports.anyTrue = function (things) {
+function anyTrue(things) {
   if (typeIsArray(things)) {
     return things.some(function (x) {
       return x;
@@ -15106,12 +14986,12 @@ module.exports.anyTrue = function (things) {
   } else {
     return things;
   }
-}; //The export below is to make it easier if js Date is overwritten with CQL Date
+} //The export below is to make it easier if js Date is overwritten with CQL Date
 
 
-module.exports.jsDate = Date;
+var jsDate = Date;
 
-module.exports.normalizeMillisecondsFieldInString = normalizeMillisecondsFieldInString = function normalizeMillisecondsFieldInString(string, msString) {
+function normalizeMillisecondsFieldInString(string, msString) {
   // TODO: verify we are only removing numeral digits
   var timezoneField;
   msString = normalizeMillisecondsField(msString);
@@ -15132,33 +15012,43 @@ module.exports.normalizeMillisecondsFieldInString = normalizeMillisecondsFieldIn
   }
 
   return string = beforeMs + '.' + msString + timezoneSeparator + timezoneField;
-};
-
-module.exports.normalizeMillisecondsField = normalizeMillisecondsField = function normalizeMillisecondsField(msString) {
-  return (// fix up milliseconds by padding zeros and/or truncating (5 --> 500, 50 --> 500, 54321 --> 543, etc.)
-    msString = (msString + '00').substring(0, 3)
-  );
-};
-
-module.exports.getTimezoneSeparatorFromString = getTimezoneSeparatorFromString = function getTimezoneSeparatorFromString(string) {
-  var timezoneSeparator;
-
-  if (__guard__(string != null ? string.match(/-/) : undefined, function (x) {
-    return x.length;
-  }) === 1) {
-    return timezoneSeparator = '-';
-  } else if (__guard__(string != null ? string.match(/\+/) : undefined, function (x1) {
-    return x1.length;
-  }) === 1) {
-    return timezoneSeparator = '+';
-  } else {
-    return timezoneSeparator = '';
-  }
-};
-
-function __guard__(value, transform) {
-  return typeof value !== 'undefined' && value !== null ? transform(value) : undefined;
 }
+
+function normalizeMillisecondsField(msString) {
+  // fix up milliseconds by padding zeros and/or truncating (5 --> 500, 50 --> 500, 54321 --> 543, etc.)
+  return msString = (msString + '00').substring(0, 3);
+}
+
+function getTimezoneSeparatorFromString(string) {
+  if (string != null) {
+    var matches = string.match(/-/);
+
+    if (matches && matches.length === 1) {
+      return '-';
+    }
+
+    matches = string.match(/\+/);
+
+    if (matches && matches.length === 1) {
+      return '+';
+    }
+  }
+
+  return '';
+}
+
+module.exports = {
+  removeNulls: removeNulls,
+  numerical_sort: numerical_sort,
+  isNull: isNull,
+  typeIsArray: typeIsArray,
+  allTrue: allTrue,
+  anyTrue: anyTrue,
+  jsDate: jsDate,
+  normalizeMillisecondsFieldInString: normalizeMillisecondsFieldInString,
+  normalizeMillisecondsField: normalizeMillisecondsField,
+  getTimezoneSeparatorFromString: getTimezoneSeparatorFromString
+};
 },{}],48:[function(require,module,exports){
 //! moment.js
 //! version : 2.27.0
@@ -20830,192 +20720,6 @@ function __guard__(value, transform) {
 })));
 
 },{}],49:[function(require,module,exports){
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-},{}],50:[function(require,module,exports){
 module.exports={
   "10*": {
     "value": 10,
@@ -22219,10 +21923,10 @@ module.exports={
   }
 }
 
-},{}],51:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 module.exports={"mol":true,"sr":true,"Hz":true,"N":true,"Pa":true,"J":true,"W":true,"A":true,"V":true,"F":true,"Ohm":true,"S":true,"Wb":true,"Cel":true,"T":true,"H":true,"lm":true,"lx":true,"Bq":true,"Gy":true,"Sv":true,"l":true,"L":true,"ar":true,"t":true,"bar":true,"u":true,"eV":true,"pc":true,"[c]":true,"[h]":true,"[k]":true,"[eps_0]":true,"[mu_0]":true,"[e]":true,"[m_e]":true,"[m_p]":true,"[G]":true,"[g]":true,"[ly]":true,"gf":true,"Ky":true,"Gal":true,"dyn":true,"erg":true,"P":true,"Bi":true,"St":true,"Mx":true,"G":true,"Oe":true,"Gb":true,"sb":true,"Lmb":true,"ph":true,"Ci":true,"R":true,"RAD":true,"REM":true,"cal_[15]":true,"cal_[20]":true,"cal_m":true,"cal_IT":true,"cal_th":true,"cal":true,"tex":true,"m[H2O]":true,"m[Hg]":true,"eq":true,"osm":true,"g%":true,"kat":true,"U":true,"[iU]":true,"[IU]":true,"Np":true,"B":true,"B[SPL]":true,"B[V]":true,"B[mV]":true,"B[uV]":true,"B[10.nV]":true,"B[W]":true,"B[kW]":true,"st":true,"mho":true,"bit":true,"By":true,"Bd":true,"m":true,"s":true,"g":true,"rad":true,"K":true,"C":true,"cd":true}
 
-},{}],52:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 module.exports={
   "Y": {
     "CODE": "YA",
@@ -22586,7 +22290,7 @@ module.exports={
   }
 }
 
-},{}],53:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 module.exports={
   "Y": 1e+24,
   "Z": 1e+21,
@@ -22614,7 +22318,7 @@ module.exports={
   "Ti": 1099511627776
 }
 
-},{}],54:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 module.exports = function () {
   /*
    * Generated by PEG.js 0.8.0.
@@ -31194,7 +30898,7 @@ module.exports = function () {
   };
 }();
 
-},{"../lib/helpers":56,"./metrics.json":51,"./prefixMetadata.json":52,"./prefixes.json":53,"./unitMetadata.json":55}],55:[function(require,module,exports){
+},{"../lib/helpers":55,"./metrics.json":50,"./prefixMetadata.json":51,"./prefixes.json":52,"./unitMetadata.json":54}],54:[function(require,module,exports){
 module.exports={
   "10*": {
     "isBase": false,
@@ -37381,7 +37085,7 @@ module.exports={
   }
 }
 
-},{}],56:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 module.exports = {
   multiply: function multiply(t, ms) {
     //console.log("Multiply: ", JSON.stringify(t), JSON.stringify(ms));
@@ -37444,7 +37148,7 @@ module.exports = {
   }
 };
 
-},{}],57:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 parser = require('./generated/ucum-parser.js');
@@ -37665,626 +37369,4 @@ function unitQuery(criteria, resultFields) {
   });
 }
 
-},{"./generated/equivalents.json":50,"./generated/ucum-parser.js":54,"./generated/unitMetadata.json":55,"./lib/helpers.js":56}],58:[function(require,module,exports){
-if (typeof Object.create === 'function') {
-  // implementation from standard node.js 'util' module
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-  };
-} else {
-  // old school shim for old browsers
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    var TempCtor = function () {}
-    TempCtor.prototype = superCtor.prototype
-    ctor.prototype = new TempCtor()
-    ctor.prototype.constructor = ctor
-  }
-}
-
-},{}],59:[function(require,module,exports){
-module.exports = function isBuffer(arg) {
-  return arg && typeof arg === 'object'
-    && typeof arg.copy === 'function'
-    && typeof arg.fill === 'function'
-    && typeof arg.readUInt8 === 'function';
-}
-},{}],60:[function(require,module,exports){
-(function (process,global){
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-var formatRegExp = /%[sdj%]/g;
-exports.format = function(f) {
-  if (!isString(f)) {
-    var objects = [];
-    for (var i = 0; i < arguments.length; i++) {
-      objects.push(inspect(arguments[i]));
-    }
-    return objects.join(' ');
-  }
-
-  var i = 1;
-  var args = arguments;
-  var len = args.length;
-  var str = String(f).replace(formatRegExp, function(x) {
-    if (x === '%%') return '%';
-    if (i >= len) return x;
-    switch (x) {
-      case '%s': return String(args[i++]);
-      case '%d': return Number(args[i++]);
-      case '%j':
-        try {
-          return JSON.stringify(args[i++]);
-        } catch (_) {
-          return '[Circular]';
-        }
-      default:
-        return x;
-    }
-  });
-  for (var x = args[i]; i < len; x = args[++i]) {
-    if (isNull(x) || !isObject(x)) {
-      str += ' ' + x;
-    } else {
-      str += ' ' + inspect(x);
-    }
-  }
-  return str;
-};
-
-
-// Mark that a method should not be used.
-// Returns a modified function which warns once by default.
-// If --no-deprecation is set, then it is a no-op.
-exports.deprecate = function(fn, msg) {
-  // Allow for deprecating things in the process of starting up.
-  if (isUndefined(global.process)) {
-    return function() {
-      return exports.deprecate(fn, msg).apply(this, arguments);
-    };
-  }
-
-  if (process.noDeprecation === true) {
-    return fn;
-  }
-
-  var warned = false;
-  function deprecated() {
-    if (!warned) {
-      if (process.throwDeprecation) {
-        throw new Error(msg);
-      } else if (process.traceDeprecation) {
-        console.trace(msg);
-      } else {
-        console.error(msg);
-      }
-      warned = true;
-    }
-    return fn.apply(this, arguments);
-  }
-
-  return deprecated;
-};
-
-
-var debugs = {};
-var debugEnviron;
-exports.debuglog = function(set) {
-  if (isUndefined(debugEnviron))
-    debugEnviron = process.env.NODE_DEBUG || '';
-  set = set.toUpperCase();
-  if (!debugs[set]) {
-    if (new RegExp('\\b' + set + '\\b', 'i').test(debugEnviron)) {
-      var pid = process.pid;
-      debugs[set] = function() {
-        var msg = exports.format.apply(exports, arguments);
-        console.error('%s %d: %s', set, pid, msg);
-      };
-    } else {
-      debugs[set] = function() {};
-    }
-  }
-  return debugs[set];
-};
-
-
-/**
- * Echos the value of a value. Trys to print the value out
- * in the best way possible given the different types.
- *
- * @param {Object} obj The object to print out.
- * @param {Object} opts Optional options object that alters the output.
- */
-/* legacy: obj, showHidden, depth, colors*/
-function inspect(obj, opts) {
-  // default options
-  var ctx = {
-    seen: [],
-    stylize: stylizeNoColor
-  };
-  // legacy...
-  if (arguments.length >= 3) ctx.depth = arguments[2];
-  if (arguments.length >= 4) ctx.colors = arguments[3];
-  if (isBoolean(opts)) {
-    // legacy...
-    ctx.showHidden = opts;
-  } else if (opts) {
-    // got an "options" object
-    exports._extend(ctx, opts);
-  }
-  // set default options
-  if (isUndefined(ctx.showHidden)) ctx.showHidden = false;
-  if (isUndefined(ctx.depth)) ctx.depth = 2;
-  if (isUndefined(ctx.colors)) ctx.colors = false;
-  if (isUndefined(ctx.customInspect)) ctx.customInspect = true;
-  if (ctx.colors) ctx.stylize = stylizeWithColor;
-  return formatValue(ctx, obj, ctx.depth);
-}
-exports.inspect = inspect;
-
-
-// http://en.wikipedia.org/wiki/ANSI_escape_code#graphics
-inspect.colors = {
-  'bold' : [1, 22],
-  'italic' : [3, 23],
-  'underline' : [4, 24],
-  'inverse' : [7, 27],
-  'white' : [37, 39],
-  'grey' : [90, 39],
-  'black' : [30, 39],
-  'blue' : [34, 39],
-  'cyan' : [36, 39],
-  'green' : [32, 39],
-  'magenta' : [35, 39],
-  'red' : [31, 39],
-  'yellow' : [33, 39]
-};
-
-// Don't use 'blue' not visible on cmd.exe
-inspect.styles = {
-  'special': 'cyan',
-  'number': 'yellow',
-  'boolean': 'yellow',
-  'undefined': 'grey',
-  'null': 'bold',
-  'string': 'green',
-  'date': 'magenta',
-  // "name": intentionally not styling
-  'regexp': 'red'
-};
-
-
-function stylizeWithColor(str, styleType) {
-  var style = inspect.styles[styleType];
-
-  if (style) {
-    return '\u001b[' + inspect.colors[style][0] + 'm' + str +
-           '\u001b[' + inspect.colors[style][1] + 'm';
-  } else {
-    return str;
-  }
-}
-
-
-function stylizeNoColor(str, styleType) {
-  return str;
-}
-
-
-function arrayToHash(array) {
-  var hash = {};
-
-  array.forEach(function(val, idx) {
-    hash[val] = true;
-  });
-
-  return hash;
-}
-
-
-function formatValue(ctx, value, recurseTimes) {
-  // Provide a hook for user-specified inspect functions.
-  // Check that value is an object with an inspect function on it
-  if (ctx.customInspect &&
-      value &&
-      isFunction(value.inspect) &&
-      // Filter out the util module, it's inspect function is special
-      value.inspect !== exports.inspect &&
-      // Also filter out any prototype objects using the circular check.
-      !(value.constructor && value.constructor.prototype === value)) {
-    var ret = value.inspect(recurseTimes, ctx);
-    if (!isString(ret)) {
-      ret = formatValue(ctx, ret, recurseTimes);
-    }
-    return ret;
-  }
-
-  // Primitive types cannot have properties
-  var primitive = formatPrimitive(ctx, value);
-  if (primitive) {
-    return primitive;
-  }
-
-  // Look up the keys of the object.
-  var keys = Object.keys(value);
-  var visibleKeys = arrayToHash(keys);
-
-  if (ctx.showHidden) {
-    keys = Object.getOwnPropertyNames(value);
-  }
-
-  // IE doesn't make error fields non-enumerable
-  // http://msdn.microsoft.com/en-us/library/ie/dww52sbt(v=vs.94).aspx
-  if (isError(value)
-      && (keys.indexOf('message') >= 0 || keys.indexOf('description') >= 0)) {
-    return formatError(value);
-  }
-
-  // Some type of object without properties can be shortcutted.
-  if (keys.length === 0) {
-    if (isFunction(value)) {
-      var name = value.name ? ': ' + value.name : '';
-      return ctx.stylize('[Function' + name + ']', 'special');
-    }
-    if (isRegExp(value)) {
-      return ctx.stylize(RegExp.prototype.toString.call(value), 'regexp');
-    }
-    if (isDate(value)) {
-      return ctx.stylize(Date.prototype.toString.call(value), 'date');
-    }
-    if (isError(value)) {
-      return formatError(value);
-    }
-  }
-
-  var base = '', array = false, braces = ['{', '}'];
-
-  // Make Array say that they are Array
-  if (isArray(value)) {
-    array = true;
-    braces = ['[', ']'];
-  }
-
-  // Make functions say that they are functions
-  if (isFunction(value)) {
-    var n = value.name ? ': ' + value.name : '';
-    base = ' [Function' + n + ']';
-  }
-
-  // Make RegExps say that they are RegExps
-  if (isRegExp(value)) {
-    base = ' ' + RegExp.prototype.toString.call(value);
-  }
-
-  // Make dates with properties first say the date
-  if (isDate(value)) {
-    base = ' ' + Date.prototype.toUTCString.call(value);
-  }
-
-  // Make error with message first say the error
-  if (isError(value)) {
-    base = ' ' + formatError(value);
-  }
-
-  if (keys.length === 0 && (!array || value.length == 0)) {
-    return braces[0] + base + braces[1];
-  }
-
-  if (recurseTimes < 0) {
-    if (isRegExp(value)) {
-      return ctx.stylize(RegExp.prototype.toString.call(value), 'regexp');
-    } else {
-      return ctx.stylize('[Object]', 'special');
-    }
-  }
-
-  ctx.seen.push(value);
-
-  var output;
-  if (array) {
-    output = formatArray(ctx, value, recurseTimes, visibleKeys, keys);
-  } else {
-    output = keys.map(function(key) {
-      return formatProperty(ctx, value, recurseTimes, visibleKeys, key, array);
-    });
-  }
-
-  ctx.seen.pop();
-
-  return reduceToSingleString(output, base, braces);
-}
-
-
-function formatPrimitive(ctx, value) {
-  if (isUndefined(value))
-    return ctx.stylize('undefined', 'undefined');
-  if (isString(value)) {
-    var simple = '\'' + JSON.stringify(value).replace(/^"|"$/g, '')
-                                             .replace(/'/g, "\\'")
-                                             .replace(/\\"/g, '"') + '\'';
-    return ctx.stylize(simple, 'string');
-  }
-  if (isNumber(value))
-    return ctx.stylize('' + value, 'number');
-  if (isBoolean(value))
-    return ctx.stylize('' + value, 'boolean');
-  // For some reason typeof null is "object", so special case here.
-  if (isNull(value))
-    return ctx.stylize('null', 'null');
-}
-
-
-function formatError(value) {
-  return '[' + Error.prototype.toString.call(value) + ']';
-}
-
-
-function formatArray(ctx, value, recurseTimes, visibleKeys, keys) {
-  var output = [];
-  for (var i = 0, l = value.length; i < l; ++i) {
-    if (hasOwnProperty(value, String(i))) {
-      output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
-          String(i), true));
-    } else {
-      output.push('');
-    }
-  }
-  keys.forEach(function(key) {
-    if (!key.match(/^\d+$/)) {
-      output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
-          key, true));
-    }
-  });
-  return output;
-}
-
-
-function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
-  var name, str, desc;
-  desc = Object.getOwnPropertyDescriptor(value, key) || { value: value[key] };
-  if (desc.get) {
-    if (desc.set) {
-      str = ctx.stylize('[Getter/Setter]', 'special');
-    } else {
-      str = ctx.stylize('[Getter]', 'special');
-    }
-  } else {
-    if (desc.set) {
-      str = ctx.stylize('[Setter]', 'special');
-    }
-  }
-  if (!hasOwnProperty(visibleKeys, key)) {
-    name = '[' + key + ']';
-  }
-  if (!str) {
-    if (ctx.seen.indexOf(desc.value) < 0) {
-      if (isNull(recurseTimes)) {
-        str = formatValue(ctx, desc.value, null);
-      } else {
-        str = formatValue(ctx, desc.value, recurseTimes - 1);
-      }
-      if (str.indexOf('\n') > -1) {
-        if (array) {
-          str = str.split('\n').map(function(line) {
-            return '  ' + line;
-          }).join('\n').substr(2);
-        } else {
-          str = '\n' + str.split('\n').map(function(line) {
-            return '   ' + line;
-          }).join('\n');
-        }
-      }
-    } else {
-      str = ctx.stylize('[Circular]', 'special');
-    }
-  }
-  if (isUndefined(name)) {
-    if (array && key.match(/^\d+$/)) {
-      return str;
-    }
-    name = JSON.stringify('' + key);
-    if (name.match(/^"([a-zA-Z_][a-zA-Z_0-9]*)"$/)) {
-      name = name.substr(1, name.length - 2);
-      name = ctx.stylize(name, 'name');
-    } else {
-      name = name.replace(/'/g, "\\'")
-                 .replace(/\\"/g, '"')
-                 .replace(/(^"|"$)/g, "'");
-      name = ctx.stylize(name, 'string');
-    }
-  }
-
-  return name + ': ' + str;
-}
-
-
-function reduceToSingleString(output, base, braces) {
-  var numLinesEst = 0;
-  var length = output.reduce(function(prev, cur) {
-    numLinesEst++;
-    if (cur.indexOf('\n') >= 0) numLinesEst++;
-    return prev + cur.replace(/\u001b\[\d\d?m/g, '').length + 1;
-  }, 0);
-
-  if (length > 60) {
-    return braces[0] +
-           (base === '' ? '' : base + '\n ') +
-           ' ' +
-           output.join(',\n  ') +
-           ' ' +
-           braces[1];
-  }
-
-  return braces[0] + base + ' ' + output.join(', ') + ' ' + braces[1];
-}
-
-
-// NOTE: These type checking functions intentionally don't use `instanceof`
-// because it is fragile and can be easily faked with `Object.create()`.
-function isArray(ar) {
-  return Array.isArray(ar);
-}
-exports.isArray = isArray;
-
-function isBoolean(arg) {
-  return typeof arg === 'boolean';
-}
-exports.isBoolean = isBoolean;
-
-function isNull(arg) {
-  return arg === null;
-}
-exports.isNull = isNull;
-
-function isNullOrUndefined(arg) {
-  return arg == null;
-}
-exports.isNullOrUndefined = isNullOrUndefined;
-
-function isNumber(arg) {
-  return typeof arg === 'number';
-}
-exports.isNumber = isNumber;
-
-function isString(arg) {
-  return typeof arg === 'string';
-}
-exports.isString = isString;
-
-function isSymbol(arg) {
-  return typeof arg === 'symbol';
-}
-exports.isSymbol = isSymbol;
-
-function isUndefined(arg) {
-  return arg === void 0;
-}
-exports.isUndefined = isUndefined;
-
-function isRegExp(re) {
-  return isObject(re) && objectToString(re) === '[object RegExp]';
-}
-exports.isRegExp = isRegExp;
-
-function isObject(arg) {
-  return typeof arg === 'object' && arg !== null;
-}
-exports.isObject = isObject;
-
-function isDate(d) {
-  return isObject(d) && objectToString(d) === '[object Date]';
-}
-exports.isDate = isDate;
-
-function isError(e) {
-  return isObject(e) &&
-      (objectToString(e) === '[object Error]' || e instanceof Error);
-}
-exports.isError = isError;
-
-function isFunction(arg) {
-  return typeof arg === 'function';
-}
-exports.isFunction = isFunction;
-
-function isPrimitive(arg) {
-  return arg === null ||
-         typeof arg === 'boolean' ||
-         typeof arg === 'number' ||
-         typeof arg === 'string' ||
-         typeof arg === 'symbol' ||  // ES6 symbol
-         typeof arg === 'undefined';
-}
-exports.isPrimitive = isPrimitive;
-
-exports.isBuffer = require('./support/isBuffer');
-
-function objectToString(o) {
-  return Object.prototype.toString.call(o);
-}
-
-
-function pad(n) {
-  return n < 10 ? '0' + n.toString(10) : n.toString(10);
-}
-
-
-var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
-              'Oct', 'Nov', 'Dec'];
-
-// 26 Feb 16:19:34
-function timestamp() {
-  var d = new Date();
-  var time = [pad(d.getHours()),
-              pad(d.getMinutes()),
-              pad(d.getSeconds())].join(':');
-  return [d.getDate(), months[d.getMonth()], time].join(' ');
-}
-
-
-// log is just a thin wrapper to console.log that prepends a timestamp
-exports.log = function() {
-  console.log('%s - %s', timestamp(), exports.format.apply(exports, arguments));
-};
-
-
-/**
- * Inherit the prototype methods from one constructor into another.
- *
- * The Function.prototype.inherits from lang.js rewritten as a standalone
- * function (not on Function.prototype). NOTE: If this file is to be loaded
- * during bootstrapping this function needs to be rewritten using some native
- * functions as prototype setup using normal JavaScript does not work as
- * expected during bootstrapping (see mirror.js in r114903).
- *
- * @param {function} ctor Constructor function which needs to inherit the
- *     prototype.
- * @param {function} superCtor Constructor function to inherit prototype from.
- */
-exports.inherits = require('inherits');
-
-exports._extend = function(origin, add) {
-  // Don't do anything if add isn't an object
-  if (!add || !isObject(add)) return origin;
-
-  var keys = Object.keys(add);
-  var i = keys.length;
-  while (i--) {
-    origin[keys[i]] = add[keys[i]];
-  }
-  return origin;
-};
-
-function hasOwnProperty(obj, prop) {
-  return Object.prototype.hasOwnProperty.call(obj, prop);
-}
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":59,"_process":49,"inherits":58}]},{},[1]);
+},{"./generated/equivalents.json":49,"./generated/ucum-parser.js":53,"./generated/unitMetadata.json":54,"./lib/helpers.js":55}]},{},[1]);
