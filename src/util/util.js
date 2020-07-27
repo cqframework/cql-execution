@@ -2,8 +2,8 @@ function removeNulls(things) {
   return things.filter(x => x != null);
 }
 
-function numerical_sort(things, direction='asc') {
-  return things.sort((a,b) => {
+function numerical_sort(things, direction = 'asc') {
+  return things.sort((a, b) => {
     if (direction === 'asc') {
       return a - b;
     } else {
@@ -16,7 +16,7 @@ function isNull(value) {
   return value === null;
 }
 
-const typeIsArray  = Array.isArray || (value => ({}).toString.call( value ) === '[object Array]');
+const typeIsArray = Array.isArray || (value => ({}.toString.call(value) === '[object Array]'));
 
 function allTrue(things) {
   if (typeIsArray(things)) {
@@ -44,14 +44,18 @@ function normalizeMillisecondsFieldInString(string, msString) {
   const [beforeMs, msAndAfter] = Array.from(string.split('.'));
   const timezoneSeparator = getTimezoneSeparatorFromString(msAndAfter);
 
-  if (timezoneSeparator) { timezoneField = msAndAfter != null ? msAndAfter.split(timezoneSeparator)[1] : undefined; }
-  if (timezoneField == null) { timezoneField = ''; }
-  return string = beforeMs + '.' + msString + timezoneSeparator + timezoneField;
+  if (timezoneSeparator) {
+    timezoneField = msAndAfter != null ? msAndAfter.split(timezoneSeparator)[1] : undefined;
+  }
+  if (timezoneField == null) {
+    timezoneField = '';
+  }
+  return (string = beforeMs + '.' + msString + timezoneSeparator + timezoneField);
 }
 
 function normalizeMillisecondsField(msString) {
   // fix up milliseconds by padding zeros and/or truncating (5 --> 500, 50 --> 500, 54321 --> 543, etc.)
-  return msString = (msString + '00').substring(0, 3);
+  return (msString = (msString + '00').substring(0, 3));
 }
 
 function getTimezoneSeparatorFromString(string) {
@@ -68,4 +72,15 @@ function getTimezoneSeparatorFromString(string) {
   return '';
 }
 
-module.exports = { removeNulls, numerical_sort, isNull, typeIsArray, allTrue, anyTrue, jsDate, normalizeMillisecondsFieldInString, normalizeMillisecondsField, getTimezoneSeparatorFromString };
+module.exports = {
+  removeNulls,
+  numerical_sort,
+  isNull,
+  typeIsArray,
+  allTrue,
+  anyTrue,
+  jsDate,
+  normalizeMillisecondsFieldInString,
+  normalizeMillisecondsField,
+  getTimezoneSeparatorFromString
+};
