@@ -11,7 +11,9 @@ class Results {
     // that is not a string (e.g., FHIR) -- so reserve getId() for the API (and expect a string
     // representation) but leave id() for data-model specific formats.
     const patientId = typeof p.getId === 'function' ? p.getId() : p.id();
-    if (this.patientResults[patientId] == null) { this.patientResults[patientId] = {}; }
+    if (this.patientResults[patientId] == null) {
+      this.patientResults[patientId] = {};
+    }
     this.patientResults[patientId][resultName] = result;
     this.localIdPatientResultsMap[patientId] = patient_ctx.getAllLocalIds();
   }
