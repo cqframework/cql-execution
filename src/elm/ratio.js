@@ -15,16 +15,16 @@ const { Expression } = require('./expression');
 const { Quantity } = require('../datatypes/quantity');
 const DT = require('../datatypes/datatypes');
 
-module.exports.Ratio = (Ratio = class Ratio extends Expression {
+module.exports.Ratio = Ratio = class Ratio extends Expression {
   constructor(json) {
     super(...arguments);
-    if ((json.numerator == null)) {
+    if (json.numerator == null) {
       throw new Error('Cannot create a ratio with an undefined numerator value');
     } else {
       this.numerator = new Quantity(json.numerator.value, json.numerator.unit);
     }
 
-    if ((json.denominator == null)) {
+    if (json.denominator == null) {
       throw new Error('Cannot create a ratio with an undefined denominator value');
     } else {
       this.denominator = new Quantity(json.denominator.value, json.denominator.unit);
@@ -34,7 +34,4 @@ module.exports.Ratio = (Ratio = class Ratio extends Expression {
   exec(ctx) {
     return new DT.Ratio(this.numerator, this.denominator);
   }
-});
-
-
-
+};

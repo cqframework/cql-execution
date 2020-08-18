@@ -16,16 +16,36 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-let Date, DateFrom, DateTime, DateTimeComponentFrom, DifferenceBetween, DurationBetween, Now, Time, TimeFrom, TimeOfDay, TimezoneOffsetFrom, Today;
+let Date,
+  DateFrom,
+  DateTime,
+  DateTimeComponentFrom,
+  DifferenceBetween,
+  DurationBetween,
+  Now,
+  Time,
+  TimeFrom,
+  TimeOfDay,
+  TimezoneOffsetFrom,
+  Today;
 const { Expression } = require('./expression');
 const { build } = require('./builder');
 const { Literal } = require('./literal');
 const DT = require('../datatypes/datatypes');
 
-module.exports.DateTime = (DateTime = (function() {
+module.exports.DateTime = DateTime = (function () {
   DateTime = class DateTime extends Expression {
     static initClass() {
-      this.PROPERTIES = ['year', 'month', 'day', 'hour', 'minute', 'second', 'millisecond', 'timezoneOffset'];
+      this.PROPERTIES = [
+        'year',
+        'month',
+        'day',
+        'hour',
+        'minute',
+        'second',
+        'millisecond',
+        'timezoneOffset'
+      ];
     }
     constructor(json) {
       super(json);
@@ -37,26 +57,33 @@ module.exports.DateTime = (DateTime = (function() {
         // if json does not contain 'timezoneOffset' set it to the executionDateTime from the context
         if (this.json[property] != null) {
           this[property] = build(this.json[property]);
-        } else if ((property === 'timezoneOffset') && (ctx.getTimezoneOffset() != null)) {
-          this[property] = Literal.from({'type': 'Literal', 'value': ctx.getTimezoneOffset(), 'valueType': '{urn:hl7-org:elm-types:r1}Integer'});
+        } else if (property === 'timezoneOffset' && ctx.getTimezoneOffset() != null) {
+          this[property] = Literal.from({
+            type: 'Literal',
+            value: ctx.getTimezoneOffset(),
+            valueType: '{urn:hl7-org:elm-types:r1}Integer'
+          });
         }
       }
-      const args = ((() => {
+      const args = (() => {
         const result = [];
-        for (let p of DateTime.PROPERTIES) {           if (this[p] != null) { result.push(this[p].execute(ctx)); } else {
-          result.push(undefined);
-        }
+        for (let p of DateTime.PROPERTIES) {
+          if (this[p] != null) {
+            result.push(this[p].execute(ctx));
+          } else {
+            result.push(undefined);
+          }
         }
         return result;
-      })());
+      })();
       return new DT.DateTime(...Array.from(args || []));
     }
   };
   DateTime.initClass();
   return DateTime;
-})());
+})();
 
-module.exports.Date = (Date = (function() {
+module.exports.Date = Date = (function () {
   Date = class Date extends Expression {
     static initClass() {
       this.PROPERTIES = ['year', 'month', 'day'];
@@ -72,22 +99,25 @@ module.exports.Date = (Date = (function() {
           this[property] = build(this.json[property]);
         }
       }
-      const args = ((() => {
+      const args = (() => {
         const result = [];
-        for (let p of Date.PROPERTIES) {           if (this[p] != null) { result.push(this[p].execute(ctx)); } else {
-          result.push(undefined);
-        }
+        for (let p of Date.PROPERTIES) {
+          if (this[p] != null) {
+            result.push(this[p].execute(ctx));
+          } else {
+            result.push(undefined);
+          }
         }
         return result;
-      })());
+      })();
       return new DT.Date(...Array.from(args || []));
     }
   };
   Date.initClass();
   return Date;
-})());
+})();
 
-module.exports.Time = (Time = (function() {
+module.exports.Time = Time = (function () {
   Time = class Time extends Expression {
     static initClass() {
       this.PROPERTIES = ['hour', 'minute', 'second', 'millisecond'];
@@ -95,27 +125,32 @@ module.exports.Time = (Time = (function() {
     constructor(json) {
       super(...arguments);
       for (let property of Time.PROPERTIES) {
-        if (json[property] != null) { this[property] = build(json[property]); }
+        if (json[property] != null) {
+          this[property] = build(json[property]);
+        }
       }
     }
 
     exec(ctx) {
-      const args = ((() => {
+      const args = (() => {
         const result = [];
-        for (let p of Time.PROPERTIES) {           if (this[p] != null) { result.push(this[p].execute(ctx)); } else {
-          result.push(undefined);
-        }
+        for (let p of Time.PROPERTIES) {
+          if (this[p] != null) {
+            result.push(this[p].execute(ctx));
+          } else {
+            result.push(undefined);
+          }
         }
         return result;
-      })());
-      return (new DT.DateTime(0, 1, 1, ...Array.from(args))).getTime();
+      })();
+      return new DT.DateTime(0, 1, 1, ...Array.from(args)).getTime();
     }
   };
   Time.initClass();
   return Time;
-})());
+})();
 
-module.exports.Today = (Today = class Today extends Expression {
+module.exports.Today = Today = class Today extends Expression {
   constructor(json) {
     super(...arguments);
   }
@@ -123,9 +158,9 @@ module.exports.Today = (Today = class Today extends Expression {
   exec(ctx) {
     return ctx.getExecutionDateTime().getDate();
   }
-});
+};
 
-module.exports.Now = (Now = class Now extends Expression {
+module.exports.Now = Now = class Now extends Expression {
   constructor(json) {
     super(...arguments);
   }
@@ -133,9 +168,9 @@ module.exports.Now = (Now = class Now extends Expression {
   exec(ctx) {
     return ctx.getExecutionDateTime();
   }
-});
+};
 
-module.exports.TimeOfDay = (TimeOfDay = class TimeOfDay extends Expression {
+module.exports.TimeOfDay = TimeOfDay = class TimeOfDay extends Expression {
   constructor(json) {
     super(...arguments);
   }
@@ -143,9 +178,9 @@ module.exports.TimeOfDay = (TimeOfDay = class TimeOfDay extends Expression {
   exec(ctx) {
     return ctx.getExecutionDateTime().getTime();
   }
-});
+};
 
-module.exports.DateTimeComponentFrom = (DateTimeComponentFrom = class DateTimeComponentFrom extends Expression {
+module.exports.DateTimeComponentFrom = DateTimeComponentFrom = class DateTimeComponentFrom extends Expression {
   constructor(json) {
     super(...arguments);
     this.precision = json.precision;
@@ -153,42 +188,58 @@ module.exports.DateTimeComponentFrom = (DateTimeComponentFrom = class DateTimeCo
 
   exec(ctx) {
     const arg = this.execArgs(ctx);
-    if (arg != null) { return arg[this.precision.toLowerCase()]; } else { return null; }
+    if (arg != null) {
+      return arg[this.precision.toLowerCase()];
+    } else {
+      return null;
+    }
   }
-});
+};
 
-module.exports.DateFrom = (DateFrom = class DateFrom extends Expression {
+module.exports.DateFrom = DateFrom = class DateFrom extends Expression {
   constructor(json) {
     super(...arguments);
   }
 
   exec(ctx) {
     const date = this.execArgs(ctx);
-    if (date != null) { return date.getDate(); } else { return null; }
+    if (date != null) {
+      return date.getDate();
+    } else {
+      return null;
+    }
   }
-});
+};
 
-module.exports.TimeFrom = (TimeFrom = class TimeFrom extends Expression {
+module.exports.TimeFrom = TimeFrom = class TimeFrom extends Expression {
   constructor(json) {
     super(...arguments);
   }
 
   exec(ctx) {
     const date = this.execArgs(ctx);
-    if (date != null) { return date.getTime(); } else { return null; }
+    if (date != null) {
+      return date.getTime();
+    } else {
+      return null;
+    }
   }
-});
+};
 
-module.exports.TimezoneOffsetFrom = (TimezoneOffsetFrom = class TimezoneOffsetFrom extends Expression {
+module.exports.TimezoneOffsetFrom = TimezoneOffsetFrom = class TimezoneOffsetFrom extends Expression {
   constructor(json) {
     super(...arguments);
   }
 
   exec(ctx) {
     const date = this.execArgs(ctx);
-    if (date != null) { return date.timezoneOffset; } else { return null; }
+    if (date != null) {
+      return date.timezoneOffset;
+    } else {
+      return null;
+    }
   }
-});
+};
 
 // Delegated to by overloaded#After
 module.exports.doAfter = (a, b, precision) => a.after(b, precision);
@@ -196,7 +247,7 @@ module.exports.doAfter = (a, b, precision) => a.after(b, precision);
 // Delegated to by overloaded#Before
 module.exports.doBefore = (a, b, precision) => a.before(b, precision);
 
-module.exports.DifferenceBetween = (DifferenceBetween = class DifferenceBetween extends Expression {
+module.exports.DifferenceBetween = DifferenceBetween = class DifferenceBetween extends Expression {
   constructor(json) {
     super(...arguments);
     this.precision = json.precision;
@@ -205,15 +256,27 @@ module.exports.DifferenceBetween = (DifferenceBetween = class DifferenceBetween 
   exec(ctx) {
     const args = this.execArgs(ctx);
     // Check to make sure args exist and that they have differenceBetween functions so that they can be compared to one another
-    if ((args[0] == null) || (args[1] == null) || (typeof args[0].differenceBetween !== 'function') || (typeof args[1].differenceBetween !== 'function')) {
+    if (
+      args[0] == null ||
+      args[1] == null ||
+      typeof args[0].differenceBetween !== 'function' ||
+      typeof args[1].differenceBetween !== 'function'
+    ) {
       return null;
     }
-    const result = args[0].differenceBetween(args[1], this.precision != null ? this.precision.toLowerCase() : undefined);
-    if ((result != null) && result.isPoint()) { return result.low; } else { return result; }
+    const result = args[0].differenceBetween(
+      args[1],
+      this.precision != null ? this.precision.toLowerCase() : undefined
+    );
+    if (result != null && result.isPoint()) {
+      return result.low;
+    } else {
+      return result;
+    }
   }
-});
+};
 
-module.exports.DurationBetween = (DurationBetween = class DurationBetween extends Expression {
+module.exports.DurationBetween = DurationBetween = class DurationBetween extends Expression {
   constructor(json) {
     super(...arguments);
     this.precision = json.precision;
@@ -222,10 +285,22 @@ module.exports.DurationBetween = (DurationBetween = class DurationBetween extend
   exec(ctx) {
     const args = this.execArgs(ctx);
     // Check to make sure args exist and that they have durationBetween functions so that they can be compared to one another
-    if ((args[0] == null) || (args[1] == null) || (typeof args[0].durationBetween !== 'function') || (typeof args[1].durationBetween !== 'function')) {
+    if (
+      args[0] == null ||
+      args[1] == null ||
+      typeof args[0].durationBetween !== 'function' ||
+      typeof args[1].durationBetween !== 'function'
+    ) {
       return null;
     }
-    const result = args[0].durationBetween(args[1], this.precision != null ? this.precision.toLowerCase() : undefined);
-    if ((result != null) && result.isPoint()) { return result.low; } else { return result; }
+    const result = args[0].durationBetween(
+      args[1],
+      this.precision != null ? this.precision.toLowerCase() : undefined
+    );
+    if (result != null && result.isPoint()) {
+      return result.low;
+    } else {
+      return result;
+    }
   }
-});
+};

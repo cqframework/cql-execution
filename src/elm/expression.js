@@ -17,11 +17,15 @@ let Expression, UnimplementedExpression;
 const { build } = require('./builder');
 const { typeIsArray } = require('../util/util');
 
-module.exports.Expression = (Expression = class Expression {
+module.exports.Expression = Expression = class Expression {
   constructor(json) {
     if (json.operand != null) {
       const op = build(json.operand);
-      if (typeIsArray(json.operand)) { this.args = op; } else { this.arg = op; }
+      if (typeIsArray(json.operand)) {
+        this.args = op;
+      } else {
+        this.arg = op;
+      }
     }
     if (json.localId != null) {
       this.localId = json.localId;
@@ -45,14 +49,17 @@ module.exports.Expression = (Expression = class Expression {
 
   execArgs(ctx) {
     switch (false) {
-      case (this.args == null): return (this.args.map((arg) => arg.execute(ctx)));
-      case (this.arg == null): return this.arg.execute(ctx);
-      default: return null;
+      case this.args == null:
+        return this.args.map(arg => arg.execute(ctx));
+      case this.arg == null:
+        return this.arg.execute(ctx);
+      default:
+        return null;
     }
   }
-});
+};
 
-module.exports.UnimplementedExpression = (UnimplementedExpression = class UnimplementedExpression extends Expression {
+module.exports.UnimplementedExpression = UnimplementedExpression = class UnimplementedExpression extends Expression {
   constructor(json) {
     super(json);
     this.json = json;
@@ -61,4 +68,4 @@ module.exports.UnimplementedExpression = (UnimplementedExpression = class Unimpl
   exec(ctx) {
     throw new Error(`Unimplemented Expression: ${this.json.type}`);
   }
-});
+};

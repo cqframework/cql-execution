@@ -6402,9 +6402,9 @@ module.exports.DateTime = DateTime = function () {
               this[property] = build(this.json[property]);
             } else if (property === 'timezoneOffset' && ctx.getTimezoneOffset() != null) {
               this[property] = Literal.from({
-                'type': 'Literal',
-                'value': ctx.getTimezoneOffset(),
-                'valueType': '{urn:hl7-org:elm-types:r1}Integer'
+                type: 'Literal',
+                value: ctx.getTimezoneOffset(),
+                valueType: '{urn:hl7-org:elm-types:r1}Integer'
               });
             }
           }
@@ -8522,7 +8522,7 @@ var collapseIntervals = function collapseIntervals(intervals, perWidth) {
 var truncateDecimal = function truncateDecimal(decimal, decimalPlaces) {
   // like parseFloat().toFixed() but floor rather than round
   // Needed for when per precision is less than the interval input precision
-  var re = new RegExp('^-?\\d+(?:\.\\d{0,' + (decimalPlaces || -1) + '})?');
+  var re = new RegExp('^-?\\d+(?:.\\d{0,' + (decimalPlaces || -1) + '})?');
   return parseFloat(decimal.toString().match(re)[0]);
 };
 
@@ -8575,8 +8575,8 @@ module.exports.Library = Library = /*#__PURE__*/function () {
 
         if (u.localIdentifier !== 'System') {
           this.usings.push({
-            'name': u.localIdentifier,
-            'version': u.version
+            name: u.localIdentifier,
+            version: u.version
           });
         }
       }
@@ -9020,7 +9020,7 @@ module.exports.SingletonFrom = SingletonFrom = /*#__PURE__*/function (_Expressio
       var arg = this.execArgs(ctx);
 
       if (arg != null && arg.length > 1) {
-        throw new Error('IllegalArgument: \'SingletonFrom\' requires a 0 or 1 arg array');
+        throw new Error("IllegalArgument: 'SingletonFrom' requires a 0 or 1 arg array");
       } else if (arg != null && arg.length === 1) {
         return arg[0];
       } else {
@@ -11205,8 +11205,8 @@ module.exports.ByColumn = ByColumn = /*#__PURE__*/function (_ByExpression) {
 
     _this5 = _super6.apply(this, arguments);
     _this5.expression = build({
-      'name': json.path,
-      'type': 'IdentifierRef'
+      name: json.path,
+      type: 'IdentifierRef'
     });
     return _this5;
   }
@@ -13035,56 +13035,56 @@ module.exports.Convert = Convert = /*#__PURE__*/function (_Expression12) {
       switch (this.toType) {
         case '{urn:hl7-org:elm-types:r1}Boolean':
           return new ToBoolean({
-            'type': 'ToBoolean',
-            'operand': this.operand
+            type: 'ToBoolean',
+            operand: this.operand
           }).execute(ctx);
 
         case '{urn:hl7-org:elm-types:r1}Concept':
           return new ToConcept({
-            'type': 'ToConcept',
-            'operand': this.operand
+            type: 'ToConcept',
+            operand: this.operand
           }).execute(ctx);
 
         case '{urn:hl7-org:elm-types:r1}Decimal':
           return new ToDecimal({
-            'type': 'ToDecimal',
-            'operand': this.operand
+            type: 'ToDecimal',
+            operand: this.operand
           }).execute(ctx);
 
         case '{urn:hl7-org:elm-types:r1}Integer':
           return new ToInteger({
-            'type': 'ToInteger',
-            'operand': this.operand
+            type: 'ToInteger',
+            operand: this.operand
           }).execute(ctx);
 
         case '{urn:hl7-org:elm-types:r1}String':
           return new ToString({
-            'type': 'ToString',
-            'operand': this.operand
+            type: 'ToString',
+            operand: this.operand
           }).execute(ctx);
 
         case '{urn:hl7-org:elm-types:r1}Quantity':
           return new ToQuantity({
-            'type': 'ToQuantity',
-            'operand': this.operand
+            type: 'ToQuantity',
+            operand: this.operand
           }).execute(ctx);
 
         case '{urn:hl7-org:elm-types:r1}DateTime':
           return new ToDateTime({
-            'type': 'ToDateTime',
-            'operand': this.operand
+            type: 'ToDateTime',
+            operand: this.operand
           }).execute(ctx);
 
         case '{urn:hl7-org:elm-types:r1}Date':
           return new ToDate({
-            'type': 'ToDate',
-            'operand': this.operand
+            type: 'ToDate',
+            operand: this.operand
           }).execute(ctx);
 
         case '{urn:hl7-org:elm-types:r1}Time':
           return new ToTime({
-            'type': 'ToTime',
-            'operand': this.operand
+            type: 'ToTime',
+            operand: this.operand
           }).execute(ctx);
 
         default:
@@ -13378,8 +13378,8 @@ module.exports.ConvertsToTime = ConvertsToTime = /*#__PURE__*/function (_Express
 var canConvertToType = function canConvertToType(toFunction, operand, ctx) {
   try {
     var value = new toFunction({
-      'type': toFunction.name,
-      'operand': operand
+      type: toFunction.name,
+      operand: operand
     }).execute(ctx);
 
     if (value != null) {

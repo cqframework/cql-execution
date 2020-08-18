@@ -15,7 +15,7 @@ const { Expression } = require('./expression');
 const { build } = require('./builder');
 const { typeIsArray } = require('../util/util');
 
-module.exports.Retrieve = (Retrieve = class Retrieve extends Expression {
+module.exports.Retrieve = Retrieve = class Retrieve extends Expression {
   constructor(json) {
     super(...arguments);
     this.datatype = json.dataType;
@@ -29,12 +29,10 @@ module.exports.Retrieve = (Retrieve = class Retrieve extends Expression {
   exec(ctx) {
     let r;
     let records = ctx.findRecords(this.templateId != null ? this.templateId : this.datatype);
-    let {
-      codes
-    } = this;
-    if (this.codes && (typeof this.codes.exec === 'function')) {
+    let { codes } = this;
+    if (this.codes && typeof this.codes.exec === 'function') {
       codes = this.codes.execute(ctx);
-      if ((codes == null)) {
+      if (codes == null) {
         return [];
       }
     }
@@ -44,14 +42,15 @@ module.exports.Retrieve = (Retrieve = class Retrieve extends Expression {
     // TODO: Added @dateProperty check due to previous fix in cql4browsers in cql_qdm_patient_api hash: ddbc57
     if (this.dateRange && this.dateProperty) {
       const range = this.dateRange.execute(ctx);
-      records = ((() => {
+      records = (() => {
         const result = [];
-        for (r of records) {           if (range.includes(r.getDateOrInterval(this.dateProperty))) {
-          result.push(r);
-        }
+        for (r of records) {
+          if (range.includes(r.getDateOrInterval(this.dateProperty))) {
+            result.push(r);
+          }
         }
         return result;
-      })());
+      })();
     }
 
     return records;
@@ -64,4 +63,4 @@ module.exports.Retrieve = (Retrieve = class Retrieve extends Expression {
       return codes.hasMatch(record.getCode(this.codeProperty));
     }
   }
-});
+};

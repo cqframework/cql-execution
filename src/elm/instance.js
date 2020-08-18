@@ -20,16 +20,15 @@ class Element {
     this.value = build(json.value);
   }
   exec(ctx) {
-    return (this.value != null ? this.value.execute(ctx) : undefined);
+    return this.value != null ? this.value.execute(ctx) : undefined;
   }
 }
 
-
-module.exports.Instance = (Instance = class Instance extends Expression {
+module.exports.Instance = Instance = class Instance extends Expression {
   constructor(json) {
     super(...arguments);
     this.classType = json.classType;
-    this.element = ( json.element.map((child) => new Element(child)));
+    this.element = json.element.map(child => new Element(child));
   }
 
   exec(ctx) {
@@ -38,10 +37,14 @@ module.exports.Instance = (Instance = class Instance extends Expression {
       obj[el.name] = el.exec(ctx);
     }
     switch (this.classType) {
-      case '{urn:hl7-org:elm-types:r1}Quantity': return new Quantity(obj.value, obj.unit);
-      case '{urn:hl7-org:elm-types:r1}Code': return new Code(obj.code, obj.system, obj.version, obj.display);
-      case '{urn:hl7-org:elm-types:r1}Concept': return new Concept(obj.codes, obj.display);
-      default: return obj;
+      case '{urn:hl7-org:elm-types:r1}Quantity':
+        return new Quantity(obj.value, obj.unit);
+      case '{urn:hl7-org:elm-types:r1}Code':
+        return new Code(obj.code, obj.system, obj.version, obj.display);
+      case '{urn:hl7-org:elm-types:r1}Concept':
+        return new Concept(obj.codes, obj.display);
+      default:
+        return obj;
     }
   }
-});
+};

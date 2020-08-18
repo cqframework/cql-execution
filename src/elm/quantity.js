@@ -18,7 +18,7 @@ const DT = require('../datatypes/datatypes');
 
 // Unit conversation is currently implemented on for time duration comparison operations
 // TODO: Implement unit conversation for time duration mathematical operations
-module.exports.Quantity = (Quantity = class Quantity extends Expression {
+module.exports.Quantity = Quantity = class Quantity extends Expression {
   constructor(json) {
     super(...arguments);
     this.value = parseFloat(json.value);
@@ -28,4 +28,4 @@ module.exports.Quantity = (Quantity = class Quantity extends Expression {
   exec(ctx) {
     return new DT.Quantity(this.value, this.unit);
   }
-});
+};

@@ -14,28 +14,48 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-let Collapse, doIncludes, End, Ends, Expand, Interval, Meets, MeetsAfter, MeetsBefore, Overlaps, OverlapsAfter, OverlapsBefore, Size, Start, Starts, Width;
+let Collapse,
+  doIncludes,
+  End,
+  Ends,
+  Expand,
+  Interval,
+  Meets,
+  MeetsAfter,
+  MeetsBefore,
+  Overlaps,
+  OverlapsAfter,
+  OverlapsBefore,
+  Size,
+  Start,
+  Starts,
+  Width;
 const { Expression, UnimplementedExpression } = require('./expression');
 const { ThreeValuedLogic } = require('../datatypes/logic');
 const { build } = require('./builder');
-const { Quantity, doAddition, doSubtraction, compare_units, convert_value } = require('../datatypes/quantity');
+const {
+  Quantity,
+  doAddition,
+  doSubtraction,
+  compare_units,
+  convert_value
+} = require('../datatypes/quantity');
 const { successor, predecessor, MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } = require('../util/math');
 const dtivl = require('../datatypes/interval');
 const cmp = require('../util/comparison');
 
-
-module.exports.Interval = (Interval = (function() {
+module.exports.Interval = Interval = (function () {
   Interval = class Interval extends Expression {
     static initClass() {
-  
       // Define a simple getter to allow type-checking of this class without instanceof
       // and in a way that survives minification (as opposed to checking constructor.name)
       Object.defineProperties(this.prototype, {
         isInterval: {
-          get() { return true; }
+          get() {
+            return true;
+          }
         }
-      }
-      );
+      });
     }
     constructor(json) {
       super(...arguments);
@@ -46,12 +66,17 @@ module.exports.Interval = (Interval = (function() {
     }
 
     exec(ctx) {
-      return new dtivl.Interval(this.low.execute(ctx), this.high.execute(ctx), this.lowClosed, this.highClosed);
+      return new dtivl.Interval(
+        this.low.execute(ctx),
+        this.high.execute(ctx),
+        this.lowClosed,
+        this.highClosed
+      );
     }
   };
   Interval.initClass();
   return Interval;
-})());
+})();
 
 // Equal is completely handled by overloaded#Equal
 
@@ -61,10 +86,12 @@ module.exports.Interval = (Interval = (function() {
 module.exports.doContains = (interval, item, precision) => interval.contains(item, precision);
 
 // Delegated to by overloaded#Includes and overloaded#IncludedIn
-module.exports.doIncludes = (doIncludes = (interval, subinterval, precision) => interval.includes(subinterval, precision));
+module.exports.doIncludes = doIncludes = (interval, subinterval, precision) =>
+  interval.includes(subinterval, precision);
 
 // Delegated to by overloaded#ProperIncludes and overloaded@ProperIncludedIn
-module.exports.doProperIncludes = (interval, subinterval, precision) => interval.properlyIncludes(subinterval, precision);
+module.exports.doProperIncludes = (interval, subinterval, precision) =>
+  interval.properlyIncludes(subinterval, precision);
 
 // Delegated to by overloaded#After
 module.exports.doAfter = (a, b, precision) => a.after(b, precision);
@@ -72,7 +99,7 @@ module.exports.doAfter = (a, b, precision) => a.after(b, precision);
 // Delegated to by overloaded#Before
 module.exports.doBefore = (a, b, precision) => a.before(b, precision);
 
-module.exports.Meets = (Meets = class Meets extends Expression {
+module.exports.Meets = Meets = class Meets extends Expression {
   constructor(json) {
     super(...arguments);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
@@ -80,11 +107,15 @@ module.exports.Meets = (Meets = class Meets extends Expression {
 
   exec(ctx) {
     const [a, b] = Array.from(this.execArgs(ctx));
-    if ((a != null) && (b != null)) { return a.meets(b, this.precision); } else { return null; }
+    if (a != null && b != null) {
+      return a.meets(b, this.precision);
+    } else {
+      return null;
+    }
   }
-});
+};
 
-module.exports.MeetsAfter = (MeetsAfter = class MeetsAfter extends Expression {
+module.exports.MeetsAfter = MeetsAfter = class MeetsAfter extends Expression {
   constructor(json) {
     super(...arguments);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
@@ -92,11 +123,15 @@ module.exports.MeetsAfter = (MeetsAfter = class MeetsAfter extends Expression {
 
   exec(ctx) {
     const [a, b] = Array.from(this.execArgs(ctx));
-    if ((a != null) && (b != null)) { return a.meetsAfter(b, this.precision); } else { return null; }
+    if (a != null && b != null) {
+      return a.meetsAfter(b, this.precision);
+    } else {
+      return null;
+    }
   }
-});
+};
 
-module.exports.MeetsBefore = (MeetsBefore = class MeetsBefore extends Expression {
+module.exports.MeetsBefore = MeetsBefore = class MeetsBefore extends Expression {
   constructor(json) {
     super(...arguments);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
@@ -104,11 +139,15 @@ module.exports.MeetsBefore = (MeetsBefore = class MeetsBefore extends Expression
 
   exec(ctx) {
     const [a, b] = Array.from(this.execArgs(ctx));
-    if ((a != null) && (b != null)) { return a.meetsBefore(b, this.precision); } else { return null; }
+    if (a != null && b != null) {
+      return a.meetsBefore(b, this.precision);
+    } else {
+      return null;
+    }
   }
-});
+};
 
-module.exports.Overlaps = (Overlaps = class Overlaps extends Expression {
+module.exports.Overlaps = Overlaps = class Overlaps extends Expression {
   constructor(json) {
     super(...arguments);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
@@ -116,11 +155,15 @@ module.exports.Overlaps = (Overlaps = class Overlaps extends Expression {
 
   exec(ctx) {
     const [a, b] = Array.from(this.execArgs(ctx));
-    if ((a != null) && (b != null)) { return a.overlaps(b, this.precision); } else { return null; }
+    if (a != null && b != null) {
+      return a.overlaps(b, this.precision);
+    } else {
+      return null;
+    }
   }
-});
+};
 
-module.exports.OverlapsAfter = (OverlapsAfter = class OverlapsAfter extends Expression {
+module.exports.OverlapsAfter = OverlapsAfter = class OverlapsAfter extends Expression {
   constructor(json) {
     super(...arguments);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
@@ -128,11 +171,15 @@ module.exports.OverlapsAfter = (OverlapsAfter = class OverlapsAfter extends Expr
 
   exec(ctx) {
     const [a, b] = Array.from(this.execArgs(ctx));
-    if ((a != null) && (b != null)) { return a.overlapsAfter(b, this.precision); } else { return null; }
+    if (a != null && b != null) {
+      return a.overlapsAfter(b, this.precision);
+    } else {
+      return null;
+    }
   }
-});
+};
 
-module.exports.OverlapsBefore = (OverlapsBefore = class OverlapsBefore extends Expression {
+module.exports.OverlapsBefore = OverlapsBefore = class OverlapsBefore extends Expression {
   constructor(json) {
     super(...arguments);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
@@ -140,24 +187,36 @@ module.exports.OverlapsBefore = (OverlapsBefore = class OverlapsBefore extends E
 
   exec(ctx) {
     const [a, b] = Array.from(this.execArgs(ctx));
-    if ((a != null) && (b != null)) { return a.overlapsBefore(b, this.precision); } else { return null; }
+    if (a != null && b != null) {
+      return a.overlapsBefore(b, this.precision);
+    } else {
+      return null;
+    }
   }
-});
+};
 
 // Delegated to by overloaded#Union
 module.exports.doUnion = (a, b) => a.union(b);
 
 // Delegated to by overloaded#Except
-module.exports.doExcept = function(a, b) {
-  if ((a != null) && (b != null)) { return a.except(b); } else { return null; }
+module.exports.doExcept = function (a, b) {
+  if (a != null && b != null) {
+    return a.except(b);
+  } else {
+    return null;
+  }
 };
 
 // Delegated to by overloaded#Intersect
-module.exports.doIntersect = function(a, b) {
-  if ((a != null) && (b != null)) { return a.intersect(b); } else { return null; }
+module.exports.doIntersect = function (a, b) {
+  if (a != null && b != null) {
+    return a.intersect(b);
+  } else {
+    return null;
+  }
 };
 
-module.exports.Width = (Width = class Width extends Expression {
+module.exports.Width = Width = class Width extends Expression {
   constructor(json) {
     super(...arguments);
   }
@@ -165,28 +224,32 @@ module.exports.Width = (Width = class Width extends Expression {
   exec(ctx) {
     return __guard__(this.arg.execute(ctx), x => x.width());
   }
-});
+};
 
-module.exports.Size = (Size = class Size extends Expression {
+module.exports.Size = Size = class Size extends Expression {
   constructor(json) {
     super(...arguments);
   }
 
   exec(ctx) {
     const interval = this.arg.execute(ctx);
-    if (interval == null) { return null; }
+    if (interval == null) {
+      return null;
+    }
     return interval.size();
   }
-});
+};
 
-module.exports.Start = (Start = class Start extends Expression {
+module.exports.Start = Start = class Start extends Expression {
   constructor(json) {
     super(...arguments);
   }
 
   exec(ctx) {
     const interval = this.arg.execute(ctx);
-    if ((interval == null)) { return null; }
+    if (interval == null) {
+      return null;
+    }
     const start = interval.start();
     // fix the timezoneOffset of minimum Datetime to match context offset
     if ((start != null ? start.isDateTime : undefined) && start.equals(MIN_DATETIME_VALUE)) {
@@ -194,17 +257,18 @@ module.exports.Start = (Start = class Start extends Expression {
     }
     return start;
   }
-});
+};
 
-
-module.exports.End = (End = class End  extends Expression {
+module.exports.End = End = class End extends Expression {
   constructor(json) {
     super(...arguments);
   }
 
   exec(ctx) {
     const interval = this.arg.execute(ctx);
-    if ((interval == null)) { return null; }
+    if (interval == null) {
+      return null;
+    }
     const end = interval.end();
     // fix the timezoneOffset of maximum Datetime to match context offset
     if ((end != null ? end.isDateTime : undefined) && end.equals(MAX_DATETIME_VALUE)) {
@@ -212,9 +276,9 @@ module.exports.End = (End = class End  extends Expression {
     }
     return end;
   }
-});
+};
 
-module.exports.Starts = (Starts = class Starts extends Expression {
+module.exports.Starts = Starts = class Starts extends Expression {
   constructor(json) {
     super(...arguments);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
@@ -222,11 +286,15 @@ module.exports.Starts = (Starts = class Starts extends Expression {
 
   exec(ctx) {
     const [a, b] = Array.from(this.execArgs(ctx));
-    if ((a != null) && (b != null)) { return a.starts(b, this.precision); } else { return null; }
+    if (a != null && b != null) {
+      return a.starts(b, this.precision);
+    } else {
+      return null;
+    }
   }
-});
+};
 
-module.exports.Ends = (Ends = class Ends extends Expression {
+module.exports.Ends = Ends = class Ends extends Expression {
   constructor(json) {
     super(...arguments);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
@@ -234,20 +302,25 @@ module.exports.Ends = (Ends = class Ends extends Expression {
 
   exec(ctx) {
     const [a, b] = Array.from(this.execArgs(ctx));
-    if ((a != null) && (b != null)) { return a.ends(b, this.precision); } else { return null; }
+    if (a != null && b != null) {
+      return a.ends(b, this.precision);
+    } else {
+      return null;
+    }
   }
-});
+};
 
-const intervalListType = function(intervals) {
+const intervalListType = function (intervals) {
   // Returns one of null, 'time', 'date', 'datetime', 'quantity', 'integer', 'decimal' or 'mismatch'
   let type = null;
 
   for (let itvl of intervals) {
-    if ((itvl == null)) {
+    if (itvl == null) {
       continue;
     }
 
-    if ((itvl.low == null) && (itvl.high == null)) { //can't really determine type from this
+    if (itvl.low == null && itvl.high == null) {
+      //can't really determine type from this
       continue;
     }
 
@@ -255,8 +328,11 @@ const intervalListType = function(intervals) {
     const low = itvl.low != null ? itvl.low : itvl.high;
     const high = itvl.high != null ? itvl.high : itvl.low;
 
-    if ((typeof low.isTime === 'function' ? low.isTime() : undefined) && (typeof high.isTime === 'function' ? high.isTime() : undefined)) {
-      if ((type == null)) {
+    if (
+      (typeof low.isTime === 'function' ? low.isTime() : undefined) &&
+      (typeof high.isTime === 'function' ? high.isTime() : undefined)
+    ) {
+      if (type == null) {
         type = 'time';
       } else if (type === 'time') {
         continue;
@@ -264,53 +340,52 @@ const intervalListType = function(intervals) {
         return 'mismatch';
       }
 
-    // if an interval mixes date and datetime, type is datetime (for implicit conversion)
-    } else if ((low.isDateTime || high.isDateTime) &&
-    (low.isDateTime || low.isDate) && (high.isDateTime || high.isDate)) {
-      if ((type == null) || (type === 'date')) {
+      // if an interval mixes date and datetime, type is datetime (for implicit conversion)
+    } else if (
+      (low.isDateTime || high.isDateTime) &&
+      (low.isDateTime || low.isDate) &&
+      (high.isDateTime || high.isDate)
+    ) {
+      if (type == null || type === 'date') {
         type = 'datetime';
       } else if (type === 'datetime') {
         continue;
       } else {
         return 'mismatch';
       }
-
     } else if (low.isDate && high.isDate) {
-      if ((type == null)) {
+      if (type == null) {
         type = 'date';
-      } else if ((type === 'date') || 'datetime') {
+      } else if (type === 'date' || 'datetime') {
         continue;
       } else {
         return 'mismatch';
       }
-
     } else if (low.isQuantity && high.isQuantity) {
-      if ((type == null)) {
+      if (type == null) {
         type = 'quantity';
       } else if (type === 'quantity') {
         continue;
       } else {
         return 'mismatch';
       }
-
     } else if (Number.isInteger(low) && Number.isInteger(high)) {
-      if ((type == null)) {
+      if (type == null) {
         type = 'integer';
-      } else if ((type === 'integer') || 'decimal') {
+      } else if (type === 'integer' || 'decimal') {
         continue;
       } else {
         return 'mismatch';
       }
-
-    } else if ((typeof low === 'number') && (typeof high === 'number')) {
-      if ((type == null) || (type === 'integer')) {
+    } else if (typeof low === 'number' && typeof high === 'number') {
+      if (type == null || type === 'integer') {
         type = 'decimal';
       } else if (type === 'decimal') {
         continue;
       } else {
         return 'mismatch';
       }
-    //if we are here ends are mismatched
+      //if we are here ends are mismatched
     } else {
       return 'mismatch';
     }
@@ -319,8 +394,7 @@ const intervalListType = function(intervals) {
   return type;
 };
 
-
-module.exports.Expand = (Expand = class Expand extends Expression {
+module.exports.Expand = Expand = class Expand extends Expression {
   constructor(json) {
     super(...arguments);
   }
@@ -330,12 +404,18 @@ module.exports.Expand = (Expand = class Expand extends Expression {
     let defaultPer, expandFunction;
     let [intervals, per] = Array.from(this.execArgs(ctx));
     const type = intervalListType(intervals);
-    if (type === 'mismatch') { throw new Error('List of intervals contains mismatched types.'); }
-    if ((type == null)) { return null; }
+    if (type === 'mismatch') {
+      throw new Error('List of intervals contains mismatched types.');
+    }
+    if (type == null) {
+      return null;
+    }
 
     // this step collapses overlaps, and also returns a clone of intervals so we can feel free to mutate
     intervals = collapseIntervals(intervals, per);
-    if (intervals.length === 0) { return []; }
+    if (intervals.length === 0) {
+      return [];
+    }
 
     if (['time', 'date', 'datetime'].includes(type)) {
       expandFunction = this.expandDTishInterval;
@@ -352,22 +432,25 @@ module.exports.Expand = (Expand = class Expand extends Expression {
 
     const results = [];
     for (let interval of intervals) {
-      if ((interval == null)) {
+      if (interval == null) {
         continue;
       }
       // We do not support open ended intervals since result would likely be too long
-      if ((interval.low == null) || (interval.high == null)) {
+      if (interval.low == null || interval.high == null) {
         return null;
       }
 
-      if (type === 'datetime') { //support for implicitly converting dates to datetime
+      if (type === 'datetime') {
+        //support for implicitly converting dates to datetime
         interval.low = interval.low.getDateTime();
         interval.high = interval.high.getDateTime();
       }
 
       per = per != null ? per : defaultPer(interval);
-      const items = expandFunction.call(this,interval,per);
-      if (items === null) { return null; }
+      const items = expandFunction.call(this, interval, per);
+      if (items === null) {
+        return null;
+      }
       results.push(...Array.from(items || []));
     }
 
@@ -382,16 +465,24 @@ module.exports.Expand = (Expand = class Expand extends Expression {
 
     // Precision Checks
     // return null if precision not applicable (e.g. gram, or minutes for dates)
-    if (!interval.low.constructor.FIELDS.includes(per.unit)) { return null; }
+    if (!interval.low.constructor.FIELDS.includes(per.unit)) {
+      return null;
+    }
 
     // open interval with null boundaries do not contribute to output
     // closed interval with null boundaries are not allowed for performance reasons
-    if ((interval.low == null) || (interval.high == null)) { return null; }
+    if (interval.low == null || interval.high == null) {
+      return null;
+    }
 
     let low = interval.lowClosed ? interval.low : interval.low.successor();
     let high = interval.highClosed ? interval.high : interval.high.predecessor();
-    if (low.after(high)) { return []; }
-    if (interval.low.isLessPrecise(per.unit) || interval.high.isLessPrecise(per.unit)) { return []; }
+    if (low.after(high)) {
+      return [];
+    }
+    if (interval.low.isLessPrecise(per.unit) || interval.high.isLessPrecise(per.unit)) {
+      return [];
+    }
 
     let current_low = low;
     const results = [];
@@ -430,7 +521,8 @@ module.exports.Expand = (Expand = class Expand extends Expression {
   expandQuantityInterval(interval, per) {
     // we want to convert everything to the more precise of the interval.low or per
     let result_units;
-    if (compare_units(interval.low.unit, per.unit) > 0) { //interval.low.unit is 'bigger' aka les precise
+    if (compare_units(interval.low.unit, per.unit) > 0) {
+      //interval.low.unit is 'bigger' aka les precise
       result_units = per.unit;
     } else {
       result_units = interval.low.unit;
@@ -440,9 +532,17 @@ module.exports.Expand = (Expand = class Expand extends Expression {
     const per_value = convert_value(per.value, per.unit, result_units);
 
     // return null if unit conversion failed, must have mismatched units
-    if (!((low_value != null) && (high_value != null) && (per_value != null))) { return null; }
+    if (!(low_value != null && high_value != null && per_value != null)) {
+      return null;
+    }
 
-    const results = this.makeNumericIntervalList(low_value, high_value, interval.lowClosed, interval.highClosed, per_value);
+    const results = this.makeNumericIntervalList(
+      low_value,
+      high_value,
+      interval.lowClosed,
+      interval.highClosed,
+      per_value
+    );
 
     for (let itvl of results) {
       itvl.low = new Quantity(itvl.low, result_units);
@@ -452,8 +552,16 @@ module.exports.Expand = (Expand = class Expand extends Expression {
   }
 
   expandNumericInterval(interval, per) {
-    if ((per.unit !== '1') && (per.unit !== '')) { return null; }
-    return this.makeNumericIntervalList(interval.low, interval.high, interval.lowClosed, interval.highClosed, per.value);
+    if (per.unit !== '1' && per.unit !== '') {
+      return null;
+    }
+    return this.makeNumericIntervalList(
+      interval.low,
+      interval.high,
+      interval.lowClosed,
+      interval.highClosed,
+      per.value
+    );
   }
 
   makeNumericIntervalList(low, high, lowClosed, highClosed, perValue) {
@@ -471,33 +579,44 @@ module.exports.Expand = (Expand = class Expand extends Expression {
     low = truncateDecimal(low, decimalPrecision);
     high = truncateDecimal(high, decimalPrecision);
 
-    if (low > high) { return []; }
-    if ((low == null) || (high == null)) { return []; }
+    if (low > high) {
+      return [];
+    }
+    if (low == null || high == null) {
+      return [];
+    }
 
     const perUnitSize = perIsDecimal ? 0.00000001 : 1;
 
-    if ((low === high) && Number.isInteger(low) && Number.isInteger(high) && !Number.isInteger(perValue)) {
+    if (
+      low === high &&
+      Number.isInteger(low) &&
+      Number.isInteger(high) &&
+      !Number.isInteger(perValue)
+    ) {
       high = parseFloat((high + 1).toFixed(decimalPrecision));
     }
 
     let current_low = low;
     const results = [];
 
-    if (perValue > ((high - low) + perUnitSize)) { return []; }
-    let current_high = parseFloat(((current_low + perValue) - perUnitSize).toFixed(decimalPrecision));
+    if (perValue > high - low + perUnitSize) {
+      return [];
+    }
+    let current_high = parseFloat((current_low + perValue - perUnitSize).toFixed(decimalPrecision));
     let intervalToAdd = new dtivl.Interval(current_low, current_high, true, true);
     while (intervalToAdd.high <= high) {
       results.push(intervalToAdd);
       current_low = parseFloat((current_low + perValue).toFixed(decimalPrecision));
-      current_high = parseFloat(((current_low + perValue) - perUnitSize).toFixed(decimalPrecision));
+      current_high = parseFloat((current_low + perValue - perUnitSize).toFixed(decimalPrecision));
       intervalToAdd = new dtivl.Interval(current_low, current_high, true, true);
     }
 
     return results;
   }
-});
+};
 
-module.exports.Collapse = (Collapse = class Collapse extends Expression {
+module.exports.Collapse = Collapse = class Collapse extends Expression {
   constructor(json) {
     super(...arguments);
   }
@@ -507,9 +626,9 @@ module.exports.Collapse = (Collapse = class Collapse extends Expression {
     const [intervals, perWidth] = Array.from(this.execArgs(ctx));
     return collapseIntervals(intervals, perWidth);
   }
-});
+};
 
-var collapseIntervals = function(intervals, perWidth) {
+var collapseIntervals = function (intervals, perWidth) {
   // Clone intervals so this function remains idempotent
   const intervalsClone = [];
   for (let interval of intervals) {
@@ -520,7 +639,7 @@ var collapseIntervals = function(intervals, perWidth) {
   }
 
   // If the list is null, return null
-  if ((intervals == null)) {
+  if (intervals == null) {
     return null;
   } else if ((intervalsClone != null ? intervalsClone.length : undefined) <= 1) {
     return intervalsClone;
@@ -528,33 +647,49 @@ var collapseIntervals = function(intervals, perWidth) {
     // If the per argument is null, the default unit interval for the point type
     // of the intervals involved will be used (i.e. the interval that has a
     // width equal to the result of the successor function for the point type).
-    if ((perWidth == null)) {
+    if (perWidth == null) {
       perWidth = intervalsClone[0].getPointSize();
     }
 
     // sort intervalsClone by start
-    intervalsClone.sort(function(a,b){
+    intervalsClone.sort(function (a, b) {
       if (typeof (a.low != null ? a.low.before : undefined) === 'function') {
-        if ((b.low != null) && a.low.before(b.low)) { return -1; }
-        if ((b.low == null) || a.low.after(b.low)) { return 1; }
-      } else if ((a.low != null) && (b.low != null)) {
-        if (a.low < b.low) { return -1; }
-        if (a.low > b.low) { return 1; }
-      } else if ((a.low != null) && (b.low == null)) {
+        if (b.low != null && a.low.before(b.low)) {
+          return -1;
+        }
+        if (b.low == null || a.low.after(b.low)) {
+          return 1;
+        }
+      } else if (a.low != null && b.low != null) {
+        if (a.low < b.low) {
+          return -1;
+        }
+        if (a.low > b.low) {
+          return 1;
+        }
+      } else if (a.low != null && b.low == null) {
         return 1;
-      } else if ((a.low == null) && (b.low != null)) {
+      } else if (a.low == null && b.low != null) {
         return -1;
       }
       // if both lows are undefined, sort by high
       if (typeof (a.high != null ? a.high.before : undefined) === 'function') {
-        if ((b.high == null) || a.high.before(b.high)) { return -1; }
-        if (a.high.after(b.high)) { return 1; }
-      } else if ((a.high != null) && (b.high != null)) {
-        if (a.high < b.high) { return -1; }
-        if (a.high > b.high) { return 1; }
-      } else if ((a.high != null) && (b.high == null)) {
+        if (b.high == null || a.high.before(b.high)) {
+          return -1;
+        }
+        if (a.high.after(b.high)) {
+          return 1;
+        }
+      } else if (a.high != null && b.high != null) {
+        if (a.high < b.high) {
+          return -1;
+        }
+        if (a.high > b.high) {
+          return 1;
+        }
+      } else if (a.high != null && b.high == null) {
         return -1;
-      } else if ((a.high == null) && (b.high != null)) {
+      } else if (a.high == null && b.high != null) {
         return 1;
       }
       return 0;
@@ -568,24 +703,34 @@ var collapseIntervals = function(intervals, perWidth) {
     while (b) {
       if (typeof (b.low != null ? b.low.durationBetween : undefined) === 'function') {
         // handle DateTimes using durationBetween
-        if (a.high != null ? a.high.sameOrAfter(b.low) : undefined) { // overlap
-          if ((b.high == null) || b.high.after(a.high)) { a.high = b.high; }
-        } else if ((a.high != null ? a.high.durationBetween(b.low, perWidth.unit).high : undefined) <= perWidth.value) {
+        if (a.high != null ? a.high.sameOrAfter(b.low) : undefined) {
+          // overlap
+          if (b.high == null || b.high.after(a.high)) {
+            a.high = b.high;
+          }
+        } else if (
+          (a.high != null ? a.high.durationBetween(b.low, perWidth.unit).high : undefined) <=
+          perWidth.value
+        ) {
           a.high = b.high;
         } else {
           collapsedIntervals.push(a);
           a = b;
         }
       } else if (typeof (b.low != null ? b.low.sameOrBefore : undefined) === 'function') {
-        if ((a.high != null) && b.low.sameOrBefore(doAddition(a.high, perWidth))) {
-          if ((b.high == null) || b.high.after(a.high)) { a.high = b.high; }
+        if (a.high != null && b.low.sameOrBefore(doAddition(a.high, perWidth))) {
+          if (b.high == null || b.high.after(a.high)) {
+            a.high = b.high;
+          }
         } else {
           collapsedIntervals.push(a);
           a = b;
         }
       } else {
-        if ((b.low - a.high) <= perWidth.value) {
-          if ((b.high > a.high) || (b.high == null)) { a.high = b.high; }
+        if (b.low - a.high <= perWidth.value) {
+          if (b.high > a.high || b.high == null) {
+            a.high = b.high;
+          }
         } else {
           collapsedIntervals.push(a);
           a = b;
@@ -598,13 +743,13 @@ var collapseIntervals = function(intervals, perWidth) {
   }
 };
 
-var truncateDecimal = function(decimal, decimalPlaces) {
+var truncateDecimal = function (decimal, decimalPlaces) {
   // like parseFloat().toFixed() but floor rather than round
   // Needed for when per precision is less than the interval input precision
-  const re = new RegExp('^-?\\d+(?:\.\\d{0,' + (decimalPlaces || -1) + '})?');
+  const re = new RegExp('^-?\\d+(?:.\\d{0,' + (decimalPlaces || -1) + '})?');
   return parseFloat(decimal.toString().match(re)[0]);
 };
 
 function __guard__(value, transform) {
-  return (typeof value !== 'undefined' && value !== null) ? transform(value) : undefined;
+  return typeof value !== 'undefined' && value !== null ? transform(value) : undefined;
 }
