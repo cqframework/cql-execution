@@ -18,7 +18,7 @@ let ExpressionDef, ExpressionRef, FunctionDef, FunctionRef, IdentifierRef, Opera
 const { Expression } = require('./expression');
 const { build } = require('./builder');
 
-module.exports.ExpressionDef = (ExpressionDef = class ExpressionDef extends Expression {
+module.exports.ExpressionDef = ExpressionDef = class ExpressionDef extends Expression {
   constructor(json) {
     super(...arguments);
     this.name = json.name;
@@ -27,12 +27,12 @@ module.exports.ExpressionDef = (ExpressionDef = class ExpressionDef extends Expr
   }
   exec(ctx) {
     const value = this.expression != null ? this.expression.execute(ctx) : undefined;
-    ctx.rootContext().set(this.name,value);
+    ctx.rootContext().set(this.name, value);
     return value;
   }
-});
+};
 
-module.exports.ExpressionRef = (ExpressionRef = class ExpressionRef extends Expression {
+module.exports.ExpressionRef = ExpressionRef = class ExpressionRef extends Expression {
   constructor(json) {
     super(...arguments);
     this.name = json.name;
@@ -46,9 +46,9 @@ module.exports.ExpressionRef = (ExpressionRef = class ExpressionRef extends Expr
     }
     return value;
   }
-});
+};
 
-module.exports.FunctionDef = (FunctionDef = class FunctionDef extends Expression {
+module.exports.FunctionDef = FunctionDef = class FunctionDef extends Expression {
   constructor(json) {
     super(...arguments);
     this.name = json.name;
@@ -58,30 +58,34 @@ module.exports.FunctionDef = (FunctionDef = class FunctionDef extends Expression
   exec(ctx) {
     return this;
   }
-});
+};
 
-module.exports.FunctionRef = (FunctionRef = class FunctionRef extends Expression {
+module.exports.FunctionRef = FunctionRef = class FunctionRef extends Expression {
   constructor(json) {
     super(...arguments);
     this.name = json.name;
     this.library = json.libraryName;
   }
   exec(ctx) {
-    const functionDef = this.library ? __guard__(ctx.get(this.library), x => x.get(this.name)) : ctx.get(this.name);
+    const functionDef = this.library
+      ? __guard__(ctx.get(this.library), x => x.get(this.name))
+      : ctx.get(this.name);
     const args = this.execArgs(ctx);
-    const child_ctx = this.library ? __guard__(ctx.getLibraryContext(this.library), x1 => x1.childContext()) : ctx.childContext();
+    const child_ctx = this.library
+      ? __guard__(ctx.getLibraryContext(this.library), x1 => x1.childContext())
+      : ctx.childContext();
     if (args.length !== functionDef.parameters.length) {
       throw new Error('incorrect number of arguments supplied');
     }
     for (let i = 0; i < functionDef.parameters.length; i++) {
       const p = functionDef.parameters[i];
-      child_ctx.set(p.name,args[i]);
+      child_ctx.set(p.name, args[i]);
     }
     return functionDef.expression.execute(child_ctx);
   }
-});
+};
 
-module.exports.OperandRef = (OperandRef = class OperandRef extends Expression {
+module.exports.OperandRef = OperandRef = class OperandRef extends Expression {
   constructor(json) {
     super(json);
     this.name = json.name;
@@ -89,10 +93,9 @@ module.exports.OperandRef = (OperandRef = class OperandRef extends Expression {
   exec(ctx) {
     return ctx.get(this.name);
   }
-});
+};
 
-
-module.exports.IdentifierRef = (IdentifierRef = class IdentifierRef extends Expression {
+module.exports.IdentifierRef = IdentifierRef = class IdentifierRef extends Expression {
   constructor(json) {
     super(...arguments);
     this.name = json.name;
@@ -102,27 +105,38 @@ module.exports.IdentifierRef = (IdentifierRef = class IdentifierRef extends Expr
     // TODO: Technically, the ELM Translator should never output one of these
     // but this code is needed since it does, as a work-around to get queries
     // to work properly when sorting by a field in a tuple
-    let val = this.library ? __guard__(ctx.get(this.library), x => x.get(this.name)) : ctx.get(this.name);
+    let val = this.library
+      ? __guard__(ctx.get(this.library), x => x.get(this.name))
+      : ctx.get(this.name);
 
-    if ((val == null)) {
+    if (val == null) {
       const parts = this.name.split('.');
       val = ctx.get(part);
-      if ((val != null) && (parts.length > 1)) {
+      if (val != null && parts.length > 1) {
         let curr_obj = val;
         const curr_val = null;
         for (var part of parts.slice(1)) {
-          const _obj = (curr_obj != null ? curr_obj[part] : undefined) != null ? (curr_obj != null ? curr_obj[part] : undefined) : __guardMethod__(curr_obj, 'get', o => o.get(part));
+          const _obj =
+            (curr_obj != null ? curr_obj[part] : undefined) != null
+              ? curr_obj != null
+                ? curr_obj[part]
+                : undefined
+              : __guardMethod__(curr_obj, 'get', o => o.get(part));
           curr_obj = _obj instanceof Function ? _obj.call(curr_obj) : _obj;
         }
         val = curr_obj;
       }
     }
-    if (val instanceof Function) { return val.call(ctx.context_values); } else { return val; }
+    if (val instanceof Function) {
+      return val.call(ctx.context_values);
+    } else {
+      return val;
+    }
   }
-});
+};
 
 function __guard__(value, transform) {
-  return (typeof value !== 'undefined' && value !== null) ? transform(value) : undefined;
+  return typeof value !== 'undefined' && value !== null ? transform(value) : undefined;
 }
 function __guardMethod__(obj, methodName, transform) {
   if (typeof obj !== 'undefined' && obj !== null && typeof obj[methodName] === 'function') {

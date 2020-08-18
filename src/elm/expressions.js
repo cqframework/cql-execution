@@ -25,9 +25,32 @@ const structured = require('./structured');
 const type = require('./type');
 const overloaded = require('./overloaded');
 
-const libs = [expression, aggregate, arithmetic, clinical, comparison, conditional, datetime, declaration,
-  external, instance, interval, list, literal, logical, nullological, parameters, query, quantity, ratio,
-  reusable, string, structured, type, overloaded];
+const libs = [
+  expression,
+  aggregate,
+  arithmetic,
+  clinical,
+  comparison,
+  conditional,
+  datetime,
+  declaration,
+  external,
+  instance,
+  interval,
+  list,
+  literal,
+  logical,
+  nullological,
+  parameters,
+  query,
+  quantity,
+  ratio,
+  reusable,
+  string,
+  structured,
+  type,
+  overloaded
+];
 for (let lib of libs) {
   for (let element of Object.keys(lib)) {
     module.exports[element] = lib[element];

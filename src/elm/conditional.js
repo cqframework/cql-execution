@@ -14,7 +14,7 @@ const { build } = require('./builder');
 const { equals } = require('../util/comparison');
 
 // TODO: Spec lists "Conditional", but it's "If" in the XSD
-module.exports.If = (If = class If extends Expression {
+module.exports.If = If = class If extends Expression {
   constructor(json) {
     super(...arguments);
     this.condition = build(json.condition);
@@ -23,29 +23,35 @@ module.exports.If = (If = class If extends Expression {
   }
 
   exec(ctx) {
-    if (this.condition.execute(ctx)) { return this.th.execute(ctx); } else { return this.els.execute(ctx); }
+    if (this.condition.execute(ctx)) {
+      return this.th.execute(ctx);
+    } else {
+      return this.els.execute(ctx);
+    }
   }
-});
+};
 
-module.exports.CaseItem = (CaseItem = (CaseItem = class CaseItem {
+module.exports.CaseItem = CaseItem = CaseItem = class CaseItem {
   constructor(json) {
     this.when = build(json.when);
     this.then = build(json.then);
   }
-}));
+};
 
-module.exports.Case = (Case = class Case extends Expression {
-
+module.exports.Case = Case = class Case extends Expression {
   constructor(json) {
     super(...arguments);
     this.comparand = build(json.comparand);
-    this.caseItems = json.caseItem.map((ci) =>
-      new CaseItem(ci));
+    this.caseItems = json.caseItem.map(ci => new CaseItem(ci));
     this.els = build(json.else);
   }
 
   exec(ctx) {
-    if (this.comparand) { return this.exec_selected(ctx); } else { return this.exec_standard(ctx); }
+    if (this.comparand) {
+      return this.exec_selected(ctx);
+    } else {
+      return this.exec_standard(ctx);
+    }
   }
 
   exec_selected(ctx) {
@@ -66,4 +72,4 @@ module.exports.Case = (Case = class Case extends Expression {
     }
     return this.els.execute(ctx);
   }
-});
+};

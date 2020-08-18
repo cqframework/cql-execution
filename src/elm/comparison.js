@@ -17,50 +17,58 @@ const { Uncertainty } = require('../datatypes/datatypes');
 
 // NotEqual is completely handled by overloaded#Equal
 
-module.exports.Less = (Less = class Less extends Expression {
+module.exports.Less = Less = class Less extends Expression {
   constructor(json) {
     super(...arguments);
   }
 
   exec(ctx) {
     const args = this.execArgs(ctx).map(x => Uncertainty.from(x));
-    if ((args[0] == null) || (args[1] == null)) { return null; }
+    if (args[0] == null || args[1] == null) {
+      return null;
+    }
     return args[0].lessThan(args[1]);
   }
-});
+};
 
-module.exports.LessOrEqual = (LessOrEqual = class LessOrEqual extends Expression {
+module.exports.LessOrEqual = LessOrEqual = class LessOrEqual extends Expression {
   constructor(json) {
     super(...arguments);
   }
 
   exec(ctx) {
     const args = this.execArgs(ctx).map(x => Uncertainty.from(x));
-    if ((args[0] == null) || (args[1] == null)) { return null; }
+    if (args[0] == null || args[1] == null) {
+      return null;
+    }
     return args[0].lessThanOrEquals(args[1]);
   }
-});
+};
 
-module.exports.Greater = (Greater = class Greater extends Expression {
+module.exports.Greater = Greater = class Greater extends Expression {
   constructor(json) {
     super(...arguments);
   }
 
   exec(ctx) {
     const args = this.execArgs(ctx).map(x => Uncertainty.from(x));
-    if ((args[0] == null) || (args[1] == null)) { return null; }
+    if (args[0] == null || args[1] == null) {
+      return null;
+    }
     return args[0].greaterThan(args[1]);
   }
-});
+};
 
-module.exports.GreaterOrEqual = (GreaterOrEqual = class GreaterOrEqual extends Expression {
+module.exports.GreaterOrEqual = GreaterOrEqual = class GreaterOrEqual extends Expression {
   constructor(json) {
     super(...arguments);
   }
 
   exec(ctx) {
     const args = this.execArgs(ctx).map(x => Uncertainty.from(x));
-    if ((args[0] == null) || (args[1] == null)) { return null; }
+    if (args[0] == null || args[1] == null) {
+      return null;
+    }
     return args[0].greaterThanOrEquals(args[1]);
   }
-});
+};
