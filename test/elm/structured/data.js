@@ -17,6 +17,10 @@ define tup: {a: 1, b: 2}
 
 module.exports['Tuple'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"

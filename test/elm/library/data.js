@@ -21,6 +21,10 @@ AgeInYearsAt(start of MeasurementPeriod) >= 2 and AgeInYearsAt(start of Measurem
 
 module.exports['In Age Demographic'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -265,6 +269,10 @@ define SupportLibDef:
 
 module.exports['CommonLib'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "Common"
       },
@@ -698,6 +706,10 @@ define supportLibCode: common."directReferenceCode"
 
 module.exports['Using CommonLib'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1001,6 +1013,10 @@ define SortUsingFunction:
 
 module.exports['CommonLib2'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "Common2"
       },
@@ -1604,6 +1620,10 @@ define ExprSortsOnFunc: common2.SortUsingFunction
 
 module.exports['Using CommonLib2'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1961,6 +1981,10 @@ define testCommon2Lib: common2.SortUsingFunction
 
 module.exports['Using CommonLib and CommonLib2'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"

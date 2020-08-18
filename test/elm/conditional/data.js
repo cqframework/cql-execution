@@ -18,6 +18,10 @@ define exp: if var then 'true return' else 'false return'
 
 module.exports['If'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -154,6 +158,10 @@ define standard:
 
 module.exports['Case'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
