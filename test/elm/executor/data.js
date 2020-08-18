@@ -31,21 +31,11 @@ define DEMO: Count(InDemographic w where w is true )
 define AgeSumRef : AgeSum
 */
 
-/*
-Translation Error(s):
-[14:1, 14:18] Could not resolve context name Unfiltered in model Simple.
-*/
 module.exports['Age'] = {
    "library" : {
       "annotation" : [ {
-         "startLine" : 14,
-         "startChar" : 1,
-         "endLine" : 14,
-         "endChar" : 18,
-         "message" : "Could not resolve context name Unfiltered in model Simple.",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -315,22 +305,22 @@ module.exports['Age'] = {
                } ]
             }
          }, {
-            "localId" : "31",
+            "localId" : "30",
             "name" : "AgeSum",
             "context" : "Unfiltered",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "31",
+                  "r" : "30",
                   "s" : [ {
                      "value" : [ "define ","AgeSum",": " ]
                   }, {
-                     "r" : "30",
+                     "r" : "29",
                      "s" : [ {
                         "value" : [ "Sum","(" ]
                      }, {
-                        "r" : "29",
+                        "r" : "28",
                         "s" : [ {
                            "value" : [ "Age" ]
                         } ]
@@ -341,36 +331,36 @@ module.exports['Age'] = {
                }
             } ],
             "expression" : {
-               "localId" : "30",
+               "localId" : "29",
                "type" : "Sum",
                "source" : {
-                  "localId" : "29",
+                  "localId" : "28",
                   "name" : "Age",
                   "type" : "ExpressionRef"
                }
             }
          }, {
-            "localId" : "38",
+            "localId" : "37",
             "name" : "DEMO",
             "context" : "Unfiltered",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "38",
+                  "r" : "37",
                   "s" : [ {
                      "value" : [ "define ","DEMO",": " ]
                   }, {
-                     "r" : "37",
+                     "r" : "36",
                      "s" : [ {
                         "value" : [ "Count","(" ]
                      }, {
-                        "r" : "36",
+                        "r" : "35",
                         "s" : [ {
                            "s" : [ {
-                              "r" : "33",
+                              "r" : "32",
                               "s" : [ {
-                                 "r" : "32",
+                                 "r" : "31",
                                  "s" : [ {
                                     "s" : [ {
                                        "value" : [ "InDemographic" ]
@@ -383,13 +373,13 @@ module.exports['Age'] = {
                         }, {
                            "value" : [ " " ]
                         }, {
-                           "r" : "35",
+                           "r" : "34",
                            "s" : [ {
                               "value" : [ "where " ]
                            }, {
-                              "r" : "35",
+                              "r" : "34",
                               "s" : [ {
-                                 "r" : "34",
+                                 "r" : "33",
                                  "s" : [ {
                                     "value" : [ "w" ]
                                  } ]
@@ -405,26 +395,26 @@ module.exports['Age'] = {
                }
             } ],
             "expression" : {
-               "localId" : "37",
+               "localId" : "36",
                "type" : "Count",
                "source" : {
-                  "localId" : "36",
+                  "localId" : "35",
                   "type" : "Query",
                   "source" : [ {
-                     "localId" : "33",
+                     "localId" : "32",
                      "alias" : "w",
                      "expression" : {
-                        "localId" : "32",
+                        "localId" : "31",
                         "name" : "InDemographic",
                         "type" : "ExpressionRef"
                      }
                   } ],
                   "relationship" : [ ],
                   "where" : {
-                     "localId" : "35",
+                     "localId" : "34",
                      "type" : "IsTrue",
                      "operand" : {
-                        "localId" : "34",
+                        "localId" : "33",
                         "name" : "w",
                         "type" : "AliasRef"
                      }
@@ -432,18 +422,18 @@ module.exports['Age'] = {
                }
             }
          }, {
-            "localId" : "40",
+            "localId" : "39",
             "name" : "AgeSumRef",
             "context" : "Unfiltered",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "40",
+                  "r" : "39",
                   "s" : [ {
                      "value" : [ "define ","AgeSumRef"," : " ]
                   }, {
-                     "r" : "39",
+                     "r" : "38",
                      "s" : [ {
                         "value" : [ "AgeSum" ]
                      } ]
@@ -451,7 +441,7 @@ module.exports['Age'] = {
                }
             } ],
             "expression" : {
-               "localId" : "39",
+               "localId" : "38",
                "name" : "AgeSum",
                "type" : "ExpressionRef"
             }

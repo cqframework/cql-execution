@@ -32,6 +32,10 @@ define ConditionsByConcept: [Condition: "Viral pharyngitis"]
 
 module.exports['Retrieve'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -421,8 +425,9 @@ module.exports['Retrieve'] = {
                "codeProperty" : "code",
                "type" : "Retrieve",
                "codes" : {
-                  "type" : "ToList",
-                  "operand" : {
+                  "path" : "codes",
+                  "type" : "Property",
+                  "source" : {
                      "name" : "Viral pharyngitis",
                      "type" : "ConceptRef"
                   }
@@ -443,6 +448,10 @@ valueset "Acute Pharyngitis": '2.16.840.1.113883.3.464.1003.102.12.1011'
 
 module.exports['Included'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "Included",
          "version" : "1"

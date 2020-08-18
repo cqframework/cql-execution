@@ -21,6 +21,10 @@ define EmptyList: List<Integer>{}
 
 module.exports['List'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -296,6 +300,10 @@ define NullExists: exists (null)
 
 module.exports['Exists'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -701,6 +709,10 @@ define BothListsHaveNull: List<Integer>{(null as Integer)} = List<Integer>{(null
 
 module.exports['Equal'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2053,6 +2065,10 @@ define UnequalTupleList: List<Any>{ Tuple{a: 1, b: Tuple{c: 1}}, Tuple{x: 'y', z
 
 module.exports['NotEqual'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -3058,6 +3074,10 @@ define UnionNull: {1, 2, 3} union null
 
 module.exports['Union'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -3744,6 +3764,10 @@ define NullExcept: null except {1, 2, 3, 4, 5}
 
 module.exports['Except'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -4762,6 +4786,10 @@ define MultipleNullInListIntersect: {1, 2, 3, null} intersect {null, 3}
 
 module.exports['Intersect'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -6032,6 +6060,10 @@ define ListWrongCodeSystem: IndexOf({Code{code: 'F', system: '1.16.840.1.113883.
 
 module.exports['IndexOf'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -7397,6 +7429,10 @@ define NullIndexer: {'a', 'b', 'c', 'd'}[null]
 
 module.exports['Indexer'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -7869,6 +7905,10 @@ define NullNotIn: null in {1, 2, 3}
 
 module.exports['In'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -8615,6 +8655,10 @@ define NullNotIn: {1, 2, 3} contains null
 
 module.exports['Contains'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -9398,6 +9442,11 @@ define QuantityNotInList: { ToQuantity('100 \'m\''), ToQuantity('1.995 \'m\''), 
 module.exports['Includes'] = {
    "library" : {
       "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 4,
          "startChar" : 45,
          "endLine" : 4,
@@ -9407,6 +9456,8 @@ module.exports['Includes'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 5,
          "startChar" : 53,
          "endLine" : 5,
@@ -9416,6 +9467,8 @@ module.exports['Includes'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 6,
          "startChar" : 41,
          "endLine" : 6,
@@ -9425,6 +9478,8 @@ module.exports['Includes'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 7,
          "startChar" : 48,
          "endLine" : 7,
@@ -9434,6 +9489,8 @@ module.exports['Includes'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 8,
          "startChar" : 91,
          "endLine" : 8,
@@ -9443,6 +9500,8 @@ module.exports['Includes'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 9,
          "startChar" : 94,
          "endLine" : 9,
@@ -9452,6 +9511,8 @@ module.exports['Includes'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 11,
          "startChar" : 36,
          "endLine" : 11,
@@ -11271,6 +11332,11 @@ define QuantityNotInList: ToQuantity('100 \'m\'') included in { ToQuantity('1 \'
 module.exports['IncludedIn'] = {
    "library" : {
       "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 4,
          "startChar" : 20,
          "endLine" : 4,
@@ -11280,6 +11346,8 @@ module.exports['IncludedIn'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 5,
          "startChar" : 28,
          "endLine" : 5,
@@ -11289,6 +11357,8 @@ module.exports['IncludedIn'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 6,
          "startChar" : 16,
          "endLine" : 6,
@@ -11298,6 +11368,8 @@ module.exports['IncludedIn'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 7,
          "startChar" : 23,
          "endLine" : 7,
@@ -11307,6 +11379,8 @@ module.exports['IncludedIn'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 8,
          "startChar" : 24,
          "endLine" : 8,
@@ -11316,6 +11390,8 @@ module.exports['IncludedIn'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 9,
          "startChar" : 27,
          "endLine" : 9,
@@ -13129,6 +13205,11 @@ define NullIncludes: null properly includes {1, 2, 3, 4, 5}
 module.exports['ProperIncludes'] = {
    "library" : {
       "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 4,
          "startChar" : 54,
          "endLine" : 4,
@@ -13138,6 +13219,8 @@ module.exports['ProperIncludes'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 5,
          "startChar" : 62,
          "endLine" : 5,
@@ -13147,6 +13230,8 @@ module.exports['ProperIncludes'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 6,
          "startChar" : 50,
          "endLine" : 6,
@@ -13156,6 +13241,8 @@ module.exports['ProperIncludes'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 7,
          "startChar" : 57,
          "endLine" : 7,
@@ -13165,6 +13252,8 @@ module.exports['ProperIncludes'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 8,
          "startChar" : 100,
          "endLine" : 8,
@@ -13174,6 +13263,8 @@ module.exports['ProperIncludes'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 9,
          "startChar" : 103,
          "endLine" : 9,
@@ -13183,6 +13274,8 @@ module.exports['ProperIncludes'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 11,
          "startChar" : 45,
          "endLine" : 11,
@@ -14291,6 +14384,11 @@ define NullIncluded: (null as List<Integer>) properly included in {1, 2, 3, 4, 5
 module.exports['ProperIncludedIn'] = {
    "library" : {
       "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 4,
          "startChar" : 20,
          "endLine" : 4,
@@ -14300,6 +14398,8 @@ module.exports['ProperIncludedIn'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 5,
          "startChar" : 28,
          "endLine" : 5,
@@ -14309,6 +14409,8 @@ module.exports['ProperIncludedIn'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 6,
          "startChar" : 16,
          "endLine" : 6,
@@ -14318,6 +14420,8 @@ module.exports['ProperIncludedIn'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 7,
          "startChar" : 23,
          "endLine" : 7,
@@ -14327,6 +14431,8 @@ module.exports['ProperIncludedIn'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 8,
          "startChar" : 24,
          "endLine" : 8,
@@ -14336,6 +14442,8 @@ module.exports['ProperIncludedIn'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 9,
          "startChar" : 27,
          "endLine" : 9,
@@ -14345,6 +14453,8 @@ module.exports['ProperIncludedIn'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 11,
          "startChar" : 23,
          "endLine" : 11,
@@ -15460,6 +15570,10 @@ define NullValue: flatten null
 
 module.exports['Flatten'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -15744,6 +15858,10 @@ define DuplicateNulls: distinct {null, 1, 2, null, 3, 4, 5, null}
 
 module.exports['Distinct'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -16308,6 +16426,10 @@ define NullValue: First(null as List<Integer>)
 
 module.exports['First'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -16919,6 +17041,10 @@ define NullValue: Last(null as List<Integer>)
 
 module.exports['Last'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -17528,6 +17654,10 @@ define NullValue: Length(null as List<Integer>)
 
 module.exports['Length'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -18027,6 +18157,10 @@ define LengthOfNull: Length(null as Integer) // CQL-to-ELM will promote the null
 
 module.exports['ToList'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
