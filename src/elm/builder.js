@@ -1,16 +1,7 @@
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-let build;
 const E = require('./expressions');
 const { typeIsArray } = require('../util/util');
 
-module.exports.build = build = function (json) {
+function build(json) {
   if (json == null) {
     return json;
   }
@@ -28,8 +19,14 @@ module.exports.build = build = function (json) {
   } else {
     return null;
   }
-};
+}
 
-var functionExists = name => typeof E[name] === 'function';
+function functionExists(name) {
+  return typeof E[name] === 'function';
+}
 
-var constructByName = (name, json) => new E[name](json);
+function constructByName(name, json) {
+  return new E[name](json);
+}
+
+module.exports = { build };

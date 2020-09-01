@@ -1,234 +1,199 @@
-/* eslint-disable
-    no-constant-condition,
-    no-unused-vars,
-    no-useless-escape,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS103: Rewrite code to no longer use __guard__
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-let Collapse,
-  doIncludes,
-  End,
-  Ends,
-  Expand,
-  Interval,
-  Meets,
-  MeetsAfter,
-  MeetsBefore,
-  Overlaps,
-  OverlapsAfter,
-  OverlapsBefore,
-  Size,
-  Start,
-  Starts,
-  Width;
-const { Expression, UnimplementedExpression } = require('./expression');
-const { ThreeValuedLogic } = require('../datatypes/logic');
+const { Expression } = require('./expression');
 const { build } = require('./builder');
-const {
-  Quantity,
-  doAddition,
-  doSubtraction,
-  compare_units,
-  convert_value
-} = require('../datatypes/quantity');
+const { Quantity, doAddition, compare_units, convert_value } = require('../datatypes/quantity');
 const { successor, predecessor, MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } = require('../util/math');
 const dtivl = require('../datatypes/interval');
-const cmp = require('../util/comparison');
 
-module.exports.Interval = Interval = (function () {
-  Interval = class Interval extends Expression {
-    static initClass() {
-      // Define a simple getter to allow type-checking of this class without instanceof
-      // and in a way that survives minification (as opposed to checking constructor.name)
-      Object.defineProperties(this.prototype, {
-        isInterval: {
-          get() {
-            return true;
-          }
-        }
-      });
-    }
-    constructor(json) {
-      super(...arguments);
-      this.lowClosed = json.lowClosed;
-      this.highClosed = json.highClosed;
-      this.low = build(json.low);
-      this.high = build(json.high);
-    }
+class Interval extends Expression {
+  constructor(json) {
+    super(json);
+    this.lowClosed = json.lowClosed;
+    this.highClosed = json.highClosed;
+    this.low = build(json.low);
+    this.high = build(json.high);
+  }
 
-    exec(ctx) {
-      return new dtivl.Interval(
-        this.low.execute(ctx),
-        this.high.execute(ctx),
-        this.lowClosed,
-        this.highClosed
-      );
-    }
-  };
-  Interval.initClass();
-  return Interval;
-})();
+  // Define a simple getter to allow type-checking of this class without instanceof
+  // and in a way that survives minification (as opposed to checking constructor.name)
+  get isInterval() {
+    return true;
+  }
+
+  exec(ctx) {
+    return new dtivl.Interval(
+      this.low.execute(ctx),
+      this.high.execute(ctx),
+      this.lowClosed,
+      this.highClosed
+    );
+  }
+}
 
 // Equal is completely handled by overloaded#Equal
 
 // NotEqual is completely handled by overloaded#Equal
 
 // Delegated to by overloaded#Contains and overloaded#In
-module.exports.doContains = (interval, item, precision) => interval.contains(item, precision);
+function doContains(interval, item, precision) {
+  return interval.contains(item, precision);
+}
 
 // Delegated to by overloaded#Includes and overloaded#IncludedIn
-module.exports.doIncludes = doIncludes = (interval, subinterval, precision) =>
-  interval.includes(subinterval, precision);
+function doIncludes(interval, subinterval, precision) {
+  return interval.includes(subinterval, precision);
+}
 
 // Delegated to by overloaded#ProperIncludes and overloaded@ProperIncludedIn
-module.exports.doProperIncludes = (interval, subinterval, precision) =>
-  interval.properlyIncludes(subinterval, precision);
+function doProperIncludes(interval, subinterval, precision) {
+  return interval.properlyIncludes(subinterval, precision);
+}
 
 // Delegated to by overloaded#After
-module.exports.doAfter = (a, b, precision) => a.after(b, precision);
+function doAfter(a, b, precision) {
+  return a.after(b, precision);
+}
 
 // Delegated to by overloaded#Before
-module.exports.doBefore = (a, b, precision) => a.before(b, precision);
+function doBefore(a, b, precision) {
+  return a.before(b, precision);
+}
 
-module.exports.Meets = Meets = class Meets extends Expression {
+class Meets extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
   exec(ctx) {
-    const [a, b] = Array.from(this.execArgs(ctx));
+    const [a, b] = this.execArgs(ctx);
     if (a != null && b != null) {
       return a.meets(b, this.precision);
     } else {
       return null;
     }
   }
-};
+}
 
-module.exports.MeetsAfter = MeetsAfter = class MeetsAfter extends Expression {
+class MeetsAfter extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
   exec(ctx) {
-    const [a, b] = Array.from(this.execArgs(ctx));
+    const [a, b] = this.execArgs(ctx);
     if (a != null && b != null) {
       return a.meetsAfter(b, this.precision);
     } else {
       return null;
     }
   }
-};
+}
 
-module.exports.MeetsBefore = MeetsBefore = class MeetsBefore extends Expression {
+class MeetsBefore extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
   exec(ctx) {
-    const [a, b] = Array.from(this.execArgs(ctx));
+    const [a, b] = this.execArgs(ctx);
     if (a != null && b != null) {
       return a.meetsBefore(b, this.precision);
     } else {
       return null;
     }
   }
-};
+}
 
-module.exports.Overlaps = Overlaps = class Overlaps extends Expression {
+class Overlaps extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
   exec(ctx) {
-    const [a, b] = Array.from(this.execArgs(ctx));
+    const [a, b] = this.execArgs(ctx);
     if (a != null && b != null) {
       return a.overlaps(b, this.precision);
     } else {
       return null;
     }
   }
-};
+}
 
-module.exports.OverlapsAfter = OverlapsAfter = class OverlapsAfter extends Expression {
+class OverlapsAfter extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
   exec(ctx) {
-    const [a, b] = Array.from(this.execArgs(ctx));
+    const [a, b] = this.execArgs(ctx);
     if (a != null && b != null) {
       return a.overlapsAfter(b, this.precision);
     } else {
       return null;
     }
   }
-};
+}
 
-module.exports.OverlapsBefore = OverlapsBefore = class OverlapsBefore extends Expression {
+class OverlapsBefore extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
   exec(ctx) {
-    const [a, b] = Array.from(this.execArgs(ctx));
+    const [a, b] = this.execArgs(ctx);
     if (a != null && b != null) {
       return a.overlapsBefore(b, this.precision);
     } else {
       return null;
     }
   }
-};
+}
 
 // Delegated to by overloaded#Union
-module.exports.doUnion = (a, b) => a.union(b);
+function doUnion(a, b) {
+  return a.union(b);
+}
 
 // Delegated to by overloaded#Except
-module.exports.doExcept = function (a, b) {
+function doExcept(a, b) {
   if (a != null && b != null) {
     return a.except(b);
   } else {
     return null;
   }
-};
+}
 
 // Delegated to by overloaded#Intersect
-module.exports.doIntersect = function (a, b) {
+function doIntersect(a, b) {
   if (a != null && b != null) {
     return a.intersect(b);
   } else {
     return null;
   }
-};
+}
 
-module.exports.Width = Width = class Width extends Expression {
+class Width extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
-    return __guard__(this.arg.execute(ctx), x => x.width());
+    const interval = this.arg.execute(ctx);
+    if (interval == null) {
+      return null;
+    }
+    return interval.width();
   }
-};
+}
 
-module.exports.Size = Size = class Size extends Expression {
+class Size extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
@@ -238,11 +203,11 @@ module.exports.Size = Size = class Size extends Expression {
     }
     return interval.size();
   }
-};
+}
 
-module.exports.Start = Start = class Start extends Expression {
+class Start extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
@@ -252,16 +217,16 @@ module.exports.Start = Start = class Start extends Expression {
     }
     const start = interval.start();
     // fix the timezoneOffset of minimum Datetime to match context offset
-    if ((start != null ? start.isDateTime : undefined) && start.equals(MIN_DATETIME_VALUE)) {
+    if (start && start.isDateTime && start.equals(MIN_DATETIME_VALUE)) {
       start.timezoneOffset = ctx.getTimezoneOffset();
     }
     return start;
   }
-};
+}
 
-module.exports.End = End = class End extends Expression {
+class End extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
@@ -271,46 +236,46 @@ module.exports.End = End = class End extends Expression {
     }
     const end = interval.end();
     // fix the timezoneOffset of maximum Datetime to match context offset
-    if ((end != null ? end.isDateTime : undefined) && end.equals(MAX_DATETIME_VALUE)) {
+    if (end && end.isDateTime && end.equals(MAX_DATETIME_VALUE)) {
       end.timezoneOffset = ctx.getTimezoneOffset();
     }
     return end;
   }
-};
+}
 
-module.exports.Starts = Starts = class Starts extends Expression {
+class Starts extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
   exec(ctx) {
-    const [a, b] = Array.from(this.execArgs(ctx));
+    const [a, b] = this.execArgs(ctx);
     if (a != null && b != null) {
       return a.starts(b, this.precision);
     } else {
       return null;
     }
   }
-};
+}
 
-module.exports.Ends = Ends = class Ends extends Expression {
+class Ends extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
   exec(ctx) {
-    const [a, b] = Array.from(this.execArgs(ctx));
+    const [a, b] = this.execArgs(ctx);
     if (a != null && b != null) {
       return a.ends(b, this.precision);
     } else {
       return null;
     }
   }
-};
+}
 
-const intervalListType = function (intervals) {
+function intervalListType(intervals) {
   // Returns one of null, 'time', 'date', 'datetime', 'quantity', 'integer', 'decimal' or 'mismatch'
   let type = null;
 
@@ -329,8 +294,10 @@ const intervalListType = function (intervals) {
     const high = itvl.high != null ? itvl.high : itvl.low;
 
     if (
-      (typeof low.isTime === 'function' ? low.isTime() : undefined) &&
-      (typeof high.isTime === 'function' ? high.isTime() : undefined)
+      typeof low.isTime === 'function' &&
+      low.isTime() &&
+      typeof high.isTime === 'function' &&
+      high.isTime()
     ) {
       if (type == null) {
         type = 'time';
@@ -356,7 +323,7 @@ const intervalListType = function (intervals) {
     } else if (low.isDate && high.isDate) {
       if (type == null) {
         type = 'date';
-      } else if (type === 'date' || 'datetime') {
+      } else if (type === 'date' || type === 'datetime') {
         continue;
       } else {
         return 'mismatch';
@@ -372,7 +339,7 @@ const intervalListType = function (intervals) {
     } else if (Number.isInteger(low) && Number.isInteger(high)) {
       if (type == null) {
         type = 'integer';
-      } else if (type === 'integer' || 'decimal') {
+      } else if (type === 'integer' || type === 'decimal') {
         continue;
       } else {
         return 'mismatch';
@@ -392,17 +359,17 @@ const intervalListType = function (intervals) {
   }
 
   return type;
-};
+}
 
-module.exports.Expand = Expand = class Expand extends Expression {
+class Expand extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
     // expand(argument List<Interval<T>>, per Quantity) List<Interval<T>>
     let defaultPer, expandFunction;
-    let [intervals, per] = Array.from(this.execArgs(ctx));
+    let [intervals, per] = this.execArgs(ctx);
     const type = intervalListType(intervals);
     if (type === 'mismatch') {
       throw new Error('List of intervals contains mismatched types.');
@@ -451,7 +418,7 @@ module.exports.Expand = Expand = class Expand extends Expression {
       if (items === null) {
         return null;
       }
-      results.push(...Array.from(items || []));
+      results.push(...(items || []));
     }
 
     return results;
@@ -614,21 +581,21 @@ module.exports.Expand = Expand = class Expand extends Expression {
 
     return results;
   }
-};
+}
 
-module.exports.Collapse = Collapse = class Collapse extends Expression {
+class Collapse extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
     // collapse(argument List<Interval<T>>, per Quantity) List<Interval<T>>
-    const [intervals, perWidth] = Array.from(this.execArgs(ctx));
+    const [intervals, perWidth] = this.execArgs(ctx);
     return collapseIntervals(intervals, perWidth);
   }
-};
+}
 
-var collapseIntervals = function (intervals, perWidth) {
+function collapseIntervals(intervals, perWidth) {
   // Clone intervals so this function remains idempotent
   const intervalsClone = [];
   for (let interval of intervals) {
@@ -641,7 +608,7 @@ var collapseIntervals = function (intervals, perWidth) {
   // If the list is null, return null
   if (intervals == null) {
     return null;
-  } else if ((intervalsClone != null ? intervalsClone.length : undefined) <= 1) {
+  } else if (intervalsClone.length <= 1) {
     return intervalsClone;
   } else {
     // If the per argument is null, the default unit interval for the point type
@@ -653,7 +620,7 @@ var collapseIntervals = function (intervals, perWidth) {
 
     // sort intervalsClone by start
     intervalsClone.sort(function (a, b) {
-      if (typeof (a.low != null ? a.low.before : undefined) === 'function') {
+      if (a.low && typeof a.low.before === 'function') {
         if (b.low != null && a.low.before(b.low)) {
           return -1;
         }
@@ -673,7 +640,7 @@ var collapseIntervals = function (intervals, perWidth) {
         return -1;
       }
       // if both lows are undefined, sort by high
-      if (typeof (a.high != null ? a.high.before : undefined) === 'function') {
+      if (a.high && typeof a.high.before === 'function') {
         if (b.high == null || a.high.before(b.high)) {
           return -1;
         }
@@ -701,7 +668,7 @@ var collapseIntervals = function (intervals, perWidth) {
     let b = intervalsClone.shift();
 
     while (b) {
-      if (typeof (b.low != null ? b.low.durationBetween : undefined) === 'function') {
+      if (b.low && typeof b.low.durationBetween === 'function') {
         // handle DateTimes using durationBetween
         if (a.high != null ? a.high.sameOrAfter(b.low) : undefined) {
           // overlap
@@ -717,7 +684,7 @@ var collapseIntervals = function (intervals, perWidth) {
           collapsedIntervals.push(a);
           a = b;
         }
-      } else if (typeof (b.low != null ? b.low.sameOrBefore : undefined) === 'function') {
+      } else if (b.low && typeof b.low.sameOrBefore === 'function') {
         if (a.high != null && b.low.sameOrBefore(doAddition(a.high, perWidth))) {
           if (b.high == null || b.high.after(a.high)) {
             a.high = b.high;
@@ -741,15 +708,37 @@ var collapseIntervals = function (intervals, perWidth) {
     collapsedIntervals.push(a);
     return collapsedIntervals;
   }
-};
+}
 
-var truncateDecimal = function (decimal, decimalPlaces) {
+function truncateDecimal(decimal, decimalPlaces) {
   // like parseFloat().toFixed() but floor rather than round
   // Needed for when per precision is less than the interval input precision
   const re = new RegExp('^-?\\d+(?:.\\d{0,' + (decimalPlaces || -1) + '})?');
   return parseFloat(decimal.toString().match(re)[0]);
-};
-
-function __guard__(value, transform) {
-  return typeof value !== 'undefined' && value !== null ? transform(value) : undefined;
 }
+
+module.exports = {
+  Collapse,
+  End,
+  Ends,
+  Expand,
+  Interval,
+  Meets,
+  MeetsAfter,
+  MeetsBefore,
+  Overlaps,
+  OverlapsAfter,
+  OverlapsBefore,
+  Size,
+  Start,
+  Starts,
+  Width,
+  doContains,
+  doIncludes,
+  doProperIncludes,
+  doAfter,
+  doBefore,
+  doUnion,
+  doExcept,
+  doIntersect
+};

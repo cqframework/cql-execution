@@ -3775,20 +3775,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var AllTrue, AnyTrue, Avg, Count, GeometricMean, Max, Median, Min, Mode, PopulationStdDev, PopulationVariance, Product, StdDev, Sum, Variance;
-
 var _require = require('./expression'),
     Expression = _require.Expression;
 
@@ -3810,9 +3796,7 @@ var _require5 = require('../util/comparison'),
     lessThan = _require5.lessThan;
 
 var _require6 = require('../datatypes/quantity'),
-    Quantity = _require6.Quantity,
-    doAddition = _require6.doAddition,
-    doMultiplication = _require6.doMultiplication;
+    Quantity = _require6.Quantity;
 
 var AggregateExpression = /*#__PURE__*/function (_Expression) {
   _inherits(AggregateExpression, _Expression);
@@ -3824,7 +3808,7 @@ var AggregateExpression = /*#__PURE__*/function (_Expression) {
 
     _classCallCheck(this, AggregateExpression);
 
-    _this = _super.apply(this, arguments);
+    _this = _super.call(this, json);
     _this.source = build(json.source);
     return _this;
   }
@@ -3832,7 +3816,7 @@ var AggregateExpression = /*#__PURE__*/function (_Expression) {
   return AggregateExpression;
 }(Expression);
 
-module.exports.Count = Count = /*#__PURE__*/function (_AggregateExpression) {
+var Count = /*#__PURE__*/function (_AggregateExpression) {
   _inherits(Count, _AggregateExpression);
 
   var _super2 = _createSuper(Count);
@@ -3840,7 +3824,7 @@ module.exports.Count = Count = /*#__PURE__*/function (_AggregateExpression) {
   function Count(json) {
     _classCallCheck(this, Count);
 
-    return _super2.apply(this, arguments);
+    return _super2.call(this, json);
   }
 
   _createClass(Count, [{
@@ -3859,7 +3843,7 @@ module.exports.Count = Count = /*#__PURE__*/function (_AggregateExpression) {
   return Count;
 }(AggregateExpression);
 
-module.exports.Sum = Sum = /*#__PURE__*/function (_AggregateExpression2) {
+var Sum = /*#__PURE__*/function (_AggregateExpression2) {
   _inherits(Sum, _AggregateExpression2);
 
   var _super3 = _createSuper(Sum);
@@ -3867,7 +3851,7 @@ module.exports.Sum = Sum = /*#__PURE__*/function (_AggregateExpression2) {
   function Sum(json) {
     _classCallCheck(this, Sum);
 
-    return _super3.apply(this, arguments);
+    return _super3.call(this, json);
   }
 
   _createClass(Sum, [{
@@ -3885,7 +3869,7 @@ module.exports.Sum = Sum = /*#__PURE__*/function (_AggregateExpression2) {
         return null;
       }
 
-      if (!(items.length > 0)) {
+      if (items.length === 0) {
         return null;
       }
 
@@ -3906,7 +3890,7 @@ module.exports.Sum = Sum = /*#__PURE__*/function (_AggregateExpression2) {
   return Sum;
 }(AggregateExpression);
 
-module.exports.Min = Min = /*#__PURE__*/function (_AggregateExpression3) {
+var Min = /*#__PURE__*/function (_AggregateExpression3) {
   _inherits(Min, _AggregateExpression3);
 
   var _super4 = _createSuper(Min);
@@ -3914,7 +3898,7 @@ module.exports.Min = Min = /*#__PURE__*/function (_AggregateExpression3) {
   function Min(json) {
     _classCallCheck(this, Min);
 
-    return _super4.apply(this, arguments);
+    return _super4.call(this, json);
   }
 
   _createClass(Min, [{
@@ -3935,7 +3919,7 @@ module.exports.Min = Min = /*#__PURE__*/function (_AggregateExpression3) {
         return null;
       }
 
-      if (!(listWithoutNulls.length > 0)) {
+      if (listWithoutNulls.length === 0) {
         return null;
       } // We assume the list is an array of all the same type.
 
@@ -3966,7 +3950,7 @@ module.exports.Min = Min = /*#__PURE__*/function (_AggregateExpression3) {
   return Min;
 }(AggregateExpression);
 
-module.exports.Max = Max = /*#__PURE__*/function (_AggregateExpression4) {
+var Max = /*#__PURE__*/function (_AggregateExpression4) {
   _inherits(Max, _AggregateExpression4);
 
   var _super5 = _createSuper(Max);
@@ -3974,7 +3958,7 @@ module.exports.Max = Max = /*#__PURE__*/function (_AggregateExpression4) {
   function Max(json) {
     _classCallCheck(this, Max);
 
-    return _super5.apply(this, arguments);
+    return _super5.call(this, json);
   }
 
   _createClass(Max, [{
@@ -3995,7 +3979,7 @@ module.exports.Max = Max = /*#__PURE__*/function (_AggregateExpression4) {
         return null;
       }
 
-      if (!(listWithoutNulls.length > 0)) {
+      if (listWithoutNulls.length === 0) {
         return null;
       } // We assume the list is an array of all the same type.
 
@@ -4026,7 +4010,7 @@ module.exports.Max = Max = /*#__PURE__*/function (_AggregateExpression4) {
   return Max;
 }(AggregateExpression);
 
-module.exports.Avg = Avg = /*#__PURE__*/function (_AggregateExpression5) {
+var Avg = /*#__PURE__*/function (_AggregateExpression5) {
   _inherits(Avg, _AggregateExpression5);
 
   var _super6 = _createSuper(Avg);
@@ -4034,13 +4018,12 @@ module.exports.Avg = Avg = /*#__PURE__*/function (_AggregateExpression5) {
   function Avg(json) {
     _classCallCheck(this, Avg);
 
-    return _super6.apply(this, arguments);
+    return _super6.call(this, json);
   }
 
   _createClass(Avg, [{
     key: "exec",
     value: function exec(ctx) {
-      var sum;
       var items = this.source.execute(ctx);
 
       if (!typeIsArray(items)) {
@@ -4059,15 +4042,16 @@ module.exports.Avg = Avg = /*#__PURE__*/function (_AggregateExpression5) {
 
       if (hasOnlyQuantities(items)) {
         var values = getValuesFromQuantities(items);
-        sum = values.reduce(function (x, y) {
+        var sum = values.reduce(function (x, y) {
           return x + y;
         });
         return new Quantity(sum / values.length, items[0].unit);
       } else {
-        sum = items.reduce(function (x, y) {
+        var _sum = items.reduce(function (x, y) {
           return x + y;
         });
-        return sum / items.length;
+
+        return _sum / items.length;
       }
     }
   }]);
@@ -4075,7 +4059,7 @@ module.exports.Avg = Avg = /*#__PURE__*/function (_AggregateExpression5) {
   return Avg;
 }(AggregateExpression);
 
-module.exports.Median = Median = /*#__PURE__*/function (_AggregateExpression6) {
+var Median = /*#__PURE__*/function (_AggregateExpression6) {
   _inherits(Median, _AggregateExpression6);
 
   var _super7 = _createSuper(Median);
@@ -4083,7 +4067,7 @@ module.exports.Median = Median = /*#__PURE__*/function (_AggregateExpression6) {
   function Median(json) {
     _classCallCheck(this, Median);
 
-    return _super7.apply(this, arguments);
+    return _super7.call(this, json);
   }
 
   _createClass(Median, [{
@@ -4095,7 +4079,7 @@ module.exports.Median = Median = /*#__PURE__*/function (_AggregateExpression6) {
         return null;
       }
 
-      if (!(items.length > 0)) {
+      if (items.length === 0) {
         return null;
       }
 
@@ -4118,7 +4102,7 @@ module.exports.Median = Median = /*#__PURE__*/function (_AggregateExpression6) {
   return Median;
 }(AggregateExpression);
 
-module.exports.Mode = Mode = /*#__PURE__*/function (_AggregateExpression7) {
+var Mode = /*#__PURE__*/function (_AggregateExpression7) {
   _inherits(Mode, _AggregateExpression7);
 
   var _super8 = _createSuper(Mode);
@@ -4126,22 +4110,23 @@ module.exports.Mode = Mode = /*#__PURE__*/function (_AggregateExpression7) {
   function Mode(json) {
     _classCallCheck(this, Mode);
 
-    return _super8.apply(this, arguments);
+    return _super8.call(this, json);
   }
 
   _createClass(Mode, [{
     key: "exec",
     value: function exec(ctx) {
-      var filtered, mode;
       var items = this.source.execute(ctx);
 
       if (!typeIsArray(items)) {
         return null;
       }
 
-      if (!(items.length > 0)) {
+      if (items.length === 0) {
         return null;
       }
+
+      var filtered;
 
       try {
         filtered = processQuantities(items);
@@ -4151,7 +4136,7 @@ module.exports.Mode = Mode = /*#__PURE__*/function (_AggregateExpression7) {
 
       if (hasOnlyQuantities(filtered)) {
         var values = getValuesFromQuantities(filtered);
-        mode = this.mode(values);
+        var mode = this.mode(values);
 
         if (mode.length === 1) {
           mode = mode[0];
@@ -4159,12 +4144,12 @@ module.exports.Mode = Mode = /*#__PURE__*/function (_AggregateExpression7) {
 
         return new Quantity(mode, items[0].unit);
       } else {
-        mode = this.mode(filtered);
+        var _mode = this.mode(filtered);
 
-        if (mode.length === 1) {
-          return mode[0];
+        if (_mode.length === 1) {
+          return _mode[0];
         } else {
-          return mode;
+          return _mode;
         }
       }
     }
@@ -4203,7 +4188,7 @@ module.exports.Mode = Mode = /*#__PURE__*/function (_AggregateExpression7) {
   return Mode;
 }(AggregateExpression);
 
-module.exports.StdDev = StdDev = /*#__PURE__*/function (_AggregateExpression8) {
+var StdDev = /*#__PURE__*/function (_AggregateExpression8) {
   _inherits(StdDev, _AggregateExpression8);
 
   var _super9 = _createSuper(StdDev);
@@ -4215,7 +4200,7 @@ module.exports.StdDev = StdDev = /*#__PURE__*/function (_AggregateExpression8) {
 
     _classCallCheck(this, StdDev);
 
-    _this2 = _super9.apply(this, arguments);
+    _this2 = _super9.call(this, json);
     _this2.type = 'standard_deviation';
     return _this2;
   }
@@ -4235,7 +4220,7 @@ module.exports.StdDev = StdDev = /*#__PURE__*/function (_AggregateExpression8) {
         return null;
       }
 
-      if (!(items.length > 0)) {
+      if (items.length === 0) {
         return null;
       }
 
@@ -4295,7 +4280,7 @@ module.exports.StdDev = StdDev = /*#__PURE__*/function (_AggregateExpression8) {
   return StdDev;
 }(AggregateExpression);
 
-module.exports.Product = Product = /*#__PURE__*/function (_AggregateExpression9) {
+var Product = /*#__PURE__*/function (_AggregateExpression9) {
   _inherits(Product, _AggregateExpression9);
 
   var _super10 = _createSuper(Product);
@@ -4303,7 +4288,7 @@ module.exports.Product = Product = /*#__PURE__*/function (_AggregateExpression9)
   function Product(json) {
     _classCallCheck(this, Product);
 
-    return _super10.apply(this, arguments);
+    return _super10.call(this, json);
   }
 
   _createClass(Product, [{
@@ -4321,7 +4306,7 @@ module.exports.Product = Product = /*#__PURE__*/function (_AggregateExpression9)
         return null;
       }
 
-      if (!(items.length > 0)) {
+      if (items.length === 0) {
         return null;
       }
 
@@ -4343,7 +4328,7 @@ module.exports.Product = Product = /*#__PURE__*/function (_AggregateExpression9)
   return Product;
 }(AggregateExpression);
 
-module.exports.GeometricMean = GeometricMean = /*#__PURE__*/function (_AggregateExpression10) {
+var GeometricMean = /*#__PURE__*/function (_AggregateExpression10) {
   _inherits(GeometricMean, _AggregateExpression10);
 
   var _super11 = _createSuper(GeometricMean);
@@ -4351,13 +4336,12 @@ module.exports.GeometricMean = GeometricMean = /*#__PURE__*/function (_Aggregate
   function GeometricMean(json) {
     _classCallCheck(this, GeometricMean);
 
-    return _super11.apply(this, arguments);
+    return _super11.call(this, json);
   }
 
   _createClass(GeometricMean, [{
     key: "exec",
     value: function exec(ctx) {
-      var product;
       var items = this.source.execute(ctx);
 
       if (!typeIsArray(items)) {
@@ -4370,22 +4354,23 @@ module.exports.GeometricMean = GeometricMean = /*#__PURE__*/function (_Aggregate
         return null;
       }
 
-      if (!(items.length > 0)) {
+      if (items.length === 0) {
         return null;
       }
 
       if (hasOnlyQuantities(items)) {
         var values = getValuesFromQuantities(items);
-        product = values.reduce(function (x, y) {
+        var product = values.reduce(function (x, y) {
           return x * y;
         });
         var geoMean = Math.pow(product, 1.0 / items.length);
         return new Quantity(geoMean, items[0].unit);
       } else {
-        product = items.reduce(function (x, y) {
+        var _product = items.reduce(function (x, y) {
           return x * y;
         });
-        return Math.pow(product, 1.0 / items.length);
+
+        return Math.pow(_product, 1.0 / items.length);
       }
     }
   }]);
@@ -4393,7 +4378,7 @@ module.exports.GeometricMean = GeometricMean = /*#__PURE__*/function (_Aggregate
   return GeometricMean;
 }(AggregateExpression);
 
-module.exports.PopulationStdDev = PopulationStdDev = /*#__PURE__*/function (_StdDev) {
+var PopulationStdDev = /*#__PURE__*/function (_StdDev) {
   _inherits(PopulationStdDev, _StdDev);
 
   var _super12 = _createSuper(PopulationStdDev);
@@ -4403,7 +4388,7 @@ module.exports.PopulationStdDev = PopulationStdDev = /*#__PURE__*/function (_Std
 
     _classCallCheck(this, PopulationStdDev);
 
-    _this3 = _super12.apply(this, arguments);
+    _this3 = _super12.call(this, json);
     _this3.type = 'population_deviation';
     return _this3;
   }
@@ -4411,7 +4396,7 @@ module.exports.PopulationStdDev = PopulationStdDev = /*#__PURE__*/function (_Std
   return PopulationStdDev;
 }(StdDev);
 
-module.exports.Variance = Variance = /*#__PURE__*/function (_StdDev2) {
+var Variance = /*#__PURE__*/function (_StdDev2) {
   _inherits(Variance, _StdDev2);
 
   var _super13 = _createSuper(Variance);
@@ -4421,7 +4406,7 @@ module.exports.Variance = Variance = /*#__PURE__*/function (_StdDev2) {
 
     _classCallCheck(this, Variance);
 
-    _this4 = _super13.apply(this, arguments);
+    _this4 = _super13.call(this, json);
     _this4.type = 'standard_variance';
     return _this4;
   }
@@ -4429,7 +4414,7 @@ module.exports.Variance = Variance = /*#__PURE__*/function (_StdDev2) {
   return Variance;
 }(StdDev);
 
-module.exports.PopulationVariance = PopulationVariance = /*#__PURE__*/function (_StdDev3) {
+var PopulationVariance = /*#__PURE__*/function (_StdDev3) {
   _inherits(PopulationVariance, _StdDev3);
 
   var _super14 = _createSuper(PopulationVariance);
@@ -4439,7 +4424,7 @@ module.exports.PopulationVariance = PopulationVariance = /*#__PURE__*/function (
 
     _classCallCheck(this, PopulationVariance);
 
-    _this5 = _super14.apply(this, arguments);
+    _this5 = _super14.call(this, json);
     _this5.type = 'population_variance';
     return _this5;
   }
@@ -4447,7 +4432,7 @@ module.exports.PopulationVariance = PopulationVariance = /*#__PURE__*/function (
   return PopulationVariance;
 }(StdDev);
 
-module.exports.AllTrue = AllTrue = /*#__PURE__*/function (_AggregateExpression11) {
+var AllTrue = /*#__PURE__*/function (_AggregateExpression11) {
   _inherits(AllTrue, _AggregateExpression11);
 
   var _super15 = _createSuper(AllTrue);
@@ -4455,7 +4440,7 @@ module.exports.AllTrue = AllTrue = /*#__PURE__*/function (_AggregateExpression11
   function AllTrue(json) {
     _classCallCheck(this, AllTrue);
 
-    return _super15.apply(this, arguments);
+    return _super15.call(this, json);
   }
 
   _createClass(AllTrue, [{
@@ -4469,7 +4454,7 @@ module.exports.AllTrue = AllTrue = /*#__PURE__*/function (_AggregateExpression11
   return AllTrue;
 }(AggregateExpression);
 
-module.exports.AnyTrue = AnyTrue = /*#__PURE__*/function (_AggregateExpression12) {
+var AnyTrue = /*#__PURE__*/function (_AggregateExpression12) {
   _inherits(AnyTrue, _AggregateExpression12);
 
   var _super16 = _createSuper(AnyTrue);
@@ -4477,7 +4462,7 @@ module.exports.AnyTrue = AnyTrue = /*#__PURE__*/function (_AggregateExpression12
   function AnyTrue(json) {
     _classCallCheck(this, AnyTrue);
 
-    return _super16.apply(this, arguments);
+    return _super16.call(this, json);
   }
 
   _createClass(AnyTrue, [{
@@ -4491,67 +4476,71 @@ module.exports.AnyTrue = AnyTrue = /*#__PURE__*/function (_AggregateExpression12
   return AnyTrue;
 }(AggregateExpression);
 
-var processQuantities = function processQuantities(values) {
-  values = removeNulls(values);
+function processQuantities(values) {
+  var items = removeNulls(values);
 
-  if (hasOnlyQuantities(values)) {
-    return values = convertAllUnits(values);
-  } else if (hasSomeQuantities(values)) {
+  if (hasOnlyQuantities(items)) {
+    return convertAllUnits(items);
+  } else if (hasSomeQuantities(items)) {
     throw new Exception('Cannot perform aggregate operations on mixed values of Quantities and non Quantities');
   } else {
-    return values;
+    return items;
   }
-};
+}
 
-var getValuesFromQuantities = function getValuesFromQuantities(quantities) {
+function getValuesFromQuantities(quantities) {
   return quantities.map(function (quantity) {
     return quantity.value;
   });
-};
+}
 
-var hasOnlyQuantities = function hasOnlyQuantities(arr) {
+function hasOnlyQuantities(arr) {
   return arr.every(function (x) {
     return x.isQuantity;
   });
-};
+}
 
-var hasSomeQuantities = function hasSomeQuantities(arr) {
+function hasSomeQuantities(arr) {
   return arr.some(function (x) {
     return x.isQuantity;
   });
-};
+}
 
-var convertAllUnits = function convertAllUnits(arr) {
+function convertAllUnits(arr) {
   // convert all quantities in array to match the unit of the first item
-  var converted = [];
+  return arr.map(function (q) {
+    return q.convertUnit(arr[0].unit);
+  });
+}
 
-  var _iterator5 = _createForOfIteratorHelper(arr),
-      _step5;
+function medianOfNumbers(numbers) {
+  var items = numerical_sort(numbers, 'asc');
 
-  try {
-    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-      var quantity = _step5.value;
-      converted.push(quantity.convertUnit(arr[0].unit));
-    }
-  } catch (err) {
-    _iterator5.e(err);
-  } finally {
-    _iterator5.f();
-  }
-
-  return converted;
-};
-
-var medianOfNumbers = function medianOfNumbers(numbers) {
-  numbers = numerical_sort(numbers, 'asc');
-
-  if (numbers.length % 2 === 1) {
+  if (items.length % 2 === 1) {
     // Odd number of items
-    return numbers[(numbers.length - 1) / 2];
+    return items[(items.length - 1) / 2];
   } else {
     // Even number of items
-    return (numbers[numbers.length / 2 - 1] + numbers[numbers.length / 2]) / 2;
+    return (items[items.length / 2 - 1] + items[items.length / 2]) / 2;
   }
+}
+
+module.exports = {
+  Count: Count,
+  Sum: Sum,
+  Min: Min,
+  Max: Max,
+  Avg: Avg,
+  Median: Median,
+  Mode: Mode,
+  StdDev: StdDev,
+  Product: Product,
+  GeometricMean: GeometricMean,
+  PopulationStdDev: PopulationStdDev,
+  Variance: Variance,
+  PopulationVariance: PopulationVariance,
+  AllTrue: AllTrue,
+  AnyTrue: AnyTrue
 };
 },{"../datatypes/exception":8,"../datatypes/quantity":11,"../util/comparison":45,"../util/util":47,"./builder":16,"./expression":22}],15:[function(require,module,exports){
 "use strict";
@@ -4578,42 +4567,22 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Abs, Add, Ceiling, Divide, Exp, Floor, Ln, Log, MaxValue, MinValue, Modulo, Multiply, Negate, Power, Predecessor, Round, Subtract, Successor, Truncate, TruncatedDivide;
-
 var _require = require('./expression'),
     Expression = _require.Expression;
 
-var _require2 = require('../util/util'),
-    typeIsArray = _require2.typeIsArray,
-    allTrue = _require2.allTrue,
-    anyTrue = _require2.anyTrue;
-
-var _require3 = require('./builder'),
-    build = _require3.build;
+var _require2 = require('./builder'),
+    build = _require2.build;
 
 var MathUtil = require('../util/math');
 
-var _require4 = require('../datatypes/quantity'),
-    Quantity = _require4.Quantity,
-    doAddition = _require4.doAddition,
-    doSubtraction = _require4.doSubtraction,
-    doMultiplication = _require4.doMultiplication,
-    doDivision = _require4.doDivision;
+var _require3 = require('../datatypes/quantity'),
+    Quantity = _require3.Quantity,
+    doAddition = _require3.doAddition,
+    doSubtraction = _require3.doSubtraction,
+    doMultiplication = _require3.doMultiplication,
+    doDivision = _require3.doDivision;
 
-module.exports.Add = Add = /*#__PURE__*/function (_Expression) {
+var Add = /*#__PURE__*/function (_Expression) {
   _inherits(Add, _Expression);
 
   var _super = _createSuper(Add);
@@ -4621,30 +4590,27 @@ module.exports.Add = Add = /*#__PURE__*/function (_Expression) {
   function Add(json) {
     _classCallCheck(this, Add);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, json);
   }
 
   _createClass(Add, [{
     key: "exec",
     value: function exec(ctx) {
       var args = this.execArgs(ctx);
-      var sum = null;
 
       if (args == null || args.some(function (x) {
         return x == null;
       })) {
-        null;
-      } else {
-        if (args != null) {
-          args.reduce(function (x, y) {
-            if (x.isQuantity || x.isDateTime || x.isDate || x.isTime) {
-              return sum = doAddition(x, y);
-            } else {
-              return sum = x + y;
-            }
-          });
-        }
+        return null;
       }
+
+      var sum = args.reduce(function (x, y) {
+        if (x.isQuantity || x.isDateTime || x.isDate || x.isTime) {
+          return doAddition(x, y);
+        } else {
+          return x + y;
+        }
+      });
 
       if (MathUtil.overflowsOrUnderflows(sum)) {
         return null;
@@ -4657,7 +4623,7 @@ module.exports.Add = Add = /*#__PURE__*/function (_Expression) {
   return Add;
 }(Expression);
 
-module.exports.Subtract = Subtract = /*#__PURE__*/function (_Expression2) {
+var Subtract = /*#__PURE__*/function (_Expression2) {
   _inherits(Subtract, _Expression2);
 
   var _super2 = _createSuper(Subtract);
@@ -4665,28 +4631,27 @@ module.exports.Subtract = Subtract = /*#__PURE__*/function (_Expression2) {
   function Subtract(json) {
     _classCallCheck(this, Subtract);
 
-    return _super2.apply(this, arguments);
+    return _super2.call(this, json);
   }
 
   _createClass(Subtract, [{
     key: "exec",
     value: function exec(ctx) {
       var args = this.execArgs(ctx);
-      var difference = null;
 
       if (args == null || args.some(function (x) {
         return x == null;
       })) {
-        null;
-      } else {
-        args.reduce(function (x, y) {
-          if (x.isQuantity || x.isDateTime || x.isDate) {
-            return difference = doSubtraction(x, y);
-          } else {
-            return difference = x - y;
-          }
-        });
+        return null;
       }
+
+      var difference = args.reduce(function (x, y) {
+        if (x.isQuantity || x.isDateTime || x.isDate) {
+          return doSubtraction(x, y);
+        } else {
+          return x - y;
+        }
+      });
 
       if (MathUtil.overflowsOrUnderflows(difference)) {
         return null;
@@ -4699,7 +4664,7 @@ module.exports.Subtract = Subtract = /*#__PURE__*/function (_Expression2) {
   return Subtract;
 }(Expression);
 
-module.exports.Multiply = Multiply = /*#__PURE__*/function (_Expression3) {
+var Multiply = /*#__PURE__*/function (_Expression3) {
   _inherits(Multiply, _Expression3);
 
   var _super3 = _createSuper(Multiply);
@@ -4707,30 +4672,27 @@ module.exports.Multiply = Multiply = /*#__PURE__*/function (_Expression3) {
   function Multiply(json) {
     _classCallCheck(this, Multiply);
 
-    return _super3.apply(this, arguments);
+    return _super3.call(this, json);
   }
 
   _createClass(Multiply, [{
     key: "exec",
     value: function exec(ctx) {
       var args = this.execArgs(ctx);
-      var product = null;
 
       if (args == null || args.some(function (x) {
         return x == null;
       })) {
         null;
-      } else {
-        if (args != null) {
-          args.reduce(function (x, y) {
-            if (x.isQuantity || y.isQuantity) {
-              return product = doMultiplication(x, y);
-            } else {
-              return product = x * y;
-            }
-          });
-        }
       }
+
+      var product = args.reduce(function (x, y) {
+        if (x.isQuantity || y.isQuantity) {
+          return doMultiplication(x, y);
+        } else {
+          return x * y;
+        }
+      });
 
       if (MathUtil.overflowsOrUnderflows(product)) {
         return null;
@@ -4743,7 +4705,7 @@ module.exports.Multiply = Multiply = /*#__PURE__*/function (_Expression3) {
   return Multiply;
 }(Expression);
 
-module.exports.Divide = Divide = /*#__PURE__*/function (_Expression4) {
+var Divide = /*#__PURE__*/function (_Expression4) {
   _inherits(Divide, _Expression4);
 
   var _super4 = _createSuper(Divide);
@@ -4751,32 +4713,28 @@ module.exports.Divide = Divide = /*#__PURE__*/function (_Expression4) {
   function Divide(json) {
     _classCallCheck(this, Divide);
 
-    return _super4.apply(this, arguments);
+    return _super4.call(this, json);
   }
 
   _createClass(Divide, [{
     key: "exec",
     value: function exec(ctx) {
       var args = this.execArgs(ctx);
-      var quotient = null;
 
       if (args == null || args.some(function (x) {
         return x == null;
       })) {
-        null;
-      } else {
-        if (args != null) {
-          args.reduce(function (x, y) {
-            if (x.isQuantity) {
-              return quotient = doDivision(x, y);
-            } else {
-              return quotient = x / y;
-            }
-          });
-        }
-      } // Note, anything divided by 0 is Infinity in Javascript, which will be
-      // considered as overflow by this check.
+        return null;
+      }
 
+      var quotient = args.reduce(function (x, y) {
+        if (x.isQuantity) {
+          return doDivision(x, y);
+        } else {
+          return x / y;
+        }
+      }); // Note, anything divided by 0 is Infinity in Javascript, which will be
+      // considered as overflow by this check.
 
       if (MathUtil.overflowsOrUnderflows(quotient)) {
         return null;
@@ -4789,7 +4747,7 @@ module.exports.Divide = Divide = /*#__PURE__*/function (_Expression4) {
   return Divide;
 }(Expression);
 
-module.exports.TruncatedDivide = TruncatedDivide = /*#__PURE__*/function (_Expression5) {
+var TruncatedDivide = /*#__PURE__*/function (_Expression5) {
   _inherits(TruncatedDivide, _Expression5);
 
   var _super5 = _createSuper(TruncatedDivide);
@@ -4797,24 +4755,23 @@ module.exports.TruncatedDivide = TruncatedDivide = /*#__PURE__*/function (_Expre
   function TruncatedDivide(json) {
     _classCallCheck(this, TruncatedDivide);
 
-    return _super5.apply(this, arguments);
+    return _super5.call(this, json);
   }
 
   _createClass(TruncatedDivide, [{
     key: "exec",
     value: function exec(ctx) {
-      var quotient;
       var args = this.execArgs(ctx);
 
       if (args == null || args.some(function (x) {
         return x == null;
       })) {
-        null;
-      } else {
-        quotient = Math.floor(args.reduce(function (x, y) {
-          return x / y;
-        }));
+        return null;
       }
+
+      var quotient = Math.floor(args.reduce(function (x, y) {
+        return x / y;
+      }));
 
       if (MathUtil.overflowsOrUnderflows(quotient)) {
         return null;
@@ -4827,7 +4784,7 @@ module.exports.TruncatedDivide = TruncatedDivide = /*#__PURE__*/function (_Expre
   return TruncatedDivide;
 }(Expression);
 
-module.exports.Modulo = Modulo = /*#__PURE__*/function (_Expression6) {
+var Modulo = /*#__PURE__*/function (_Expression6) {
   _inherits(Modulo, _Expression6);
 
   var _super6 = _createSuper(Modulo);
@@ -4835,7 +4792,7 @@ module.exports.Modulo = Modulo = /*#__PURE__*/function (_Expression6) {
   function Modulo(json) {
     _classCallCheck(this, Modulo);
 
-    return _super6.apply(this, arguments);
+    return _super6.call(this, json);
   }
 
   _createClass(Modulo, [{
@@ -4847,18 +4804,18 @@ module.exports.Modulo = Modulo = /*#__PURE__*/function (_Expression6) {
         return x == null;
       })) {
         return null;
-      } else {
-        return args.reduce(function (x, y) {
-          return x % y;
-        });
       }
+
+      return args.reduce(function (x, y) {
+        return x % y;
+      });
     }
   }]);
 
   return Modulo;
 }(Expression);
 
-module.exports.Ceiling = Ceiling = /*#__PURE__*/function (_Expression7) {
+var Ceiling = /*#__PURE__*/function (_Expression7) {
   _inherits(Ceiling, _Expression7);
 
   var _super7 = _createSuper(Ceiling);
@@ -4866,7 +4823,7 @@ module.exports.Ceiling = Ceiling = /*#__PURE__*/function (_Expression7) {
   function Ceiling(json) {
     _classCallCheck(this, Ceiling);
 
-    return _super7.apply(this, arguments);
+    return _super7.call(this, json);
   }
 
   _createClass(Ceiling, [{
@@ -4876,16 +4833,16 @@ module.exports.Ceiling = Ceiling = /*#__PURE__*/function (_Expression7) {
 
       if (arg == null) {
         return null;
-      } else {
-        return Math.ceil(arg);
       }
+
+      return Math.ceil(arg);
     }
   }]);
 
   return Ceiling;
 }(Expression);
 
-module.exports.Floor = Floor = /*#__PURE__*/function (_Expression8) {
+var Floor = /*#__PURE__*/function (_Expression8) {
   _inherits(Floor, _Expression8);
 
   var _super8 = _createSuper(Floor);
@@ -4893,7 +4850,7 @@ module.exports.Floor = Floor = /*#__PURE__*/function (_Expression8) {
   function Floor(json) {
     _classCallCheck(this, Floor);
 
-    return _super8.apply(this, arguments);
+    return _super8.call(this, json);
   }
 
   _createClass(Floor, [{
@@ -4903,16 +4860,16 @@ module.exports.Floor = Floor = /*#__PURE__*/function (_Expression8) {
 
       if (arg == null) {
         return null;
-      } else {
-        return Math.floor(arg);
       }
+
+      return Math.floor(arg);
     }
   }]);
 
   return Floor;
 }(Expression);
 
-module.exports.Truncate = Truncate = /*#__PURE__*/function (_Floor) {
+var Truncate = /*#__PURE__*/function (_Floor) {
   _inherits(Truncate, _Floor);
 
   var _super9 = _createSuper(Truncate);
@@ -4926,7 +4883,7 @@ module.exports.Truncate = Truncate = /*#__PURE__*/function (_Floor) {
   return Truncate;
 }(Floor);
 
-module.exports.Abs = Abs = /*#__PURE__*/function (_Expression9) {
+var Abs = /*#__PURE__*/function (_Expression9) {
   _inherits(Abs, _Expression9);
 
   var _super10 = _createSuper(Abs);
@@ -4934,7 +4891,7 @@ module.exports.Abs = Abs = /*#__PURE__*/function (_Expression9) {
   function Abs(json) {
     _classCallCheck(this, Abs);
 
-    return _super10.apply(this, arguments);
+    return _super10.call(this, json);
   }
 
   _createClass(Abs, [{
@@ -4955,7 +4912,7 @@ module.exports.Abs = Abs = /*#__PURE__*/function (_Expression9) {
   return Abs;
 }(Expression);
 
-module.exports.Negate = Negate = /*#__PURE__*/function (_Expression10) {
+var Negate = /*#__PURE__*/function (_Expression10) {
   _inherits(Negate, _Expression10);
 
   var _super11 = _createSuper(Negate);
@@ -4963,7 +4920,7 @@ module.exports.Negate = Negate = /*#__PURE__*/function (_Expression10) {
   function Negate(json) {
     _classCallCheck(this, Negate);
 
-    return _super11.apply(this, arguments);
+    return _super11.call(this, json);
   }
 
   _createClass(Negate, [{
@@ -4984,7 +4941,7 @@ module.exports.Negate = Negate = /*#__PURE__*/function (_Expression10) {
   return Negate;
 }(Expression);
 
-module.exports.Round = Round = /*#__PURE__*/function (_Expression11) {
+var Round = /*#__PURE__*/function (_Expression11) {
   _inherits(Round, _Expression11);
 
   var _super12 = _createSuper(Round);
@@ -4994,7 +4951,7 @@ module.exports.Round = Round = /*#__PURE__*/function (_Expression11) {
 
     _classCallCheck(this, Round);
 
-    _this = _super12.apply(this, arguments);
+    _this = _super12.call(this, json);
     _this.precision = build(json.precision);
     return _this;
   }
@@ -5006,17 +4963,17 @@ module.exports.Round = Round = /*#__PURE__*/function (_Expression11) {
 
       if (arg == null) {
         return null;
-      } else {
-        var dec = this.precision != null ? this.precision.execute(ctx) : 0;
-        return Math.round(arg * Math.pow(10, dec)) / Math.pow(10, dec);
       }
+
+      var dec = this.precision != null ? this.precision.execute(ctx) : 0;
+      return Math.round(arg * Math.pow(10, dec)) / Math.pow(10, dec);
     }
   }]);
 
   return Round;
 }(Expression);
 
-module.exports.Ln = Ln = /*#__PURE__*/function (_Expression12) {
+var Ln = /*#__PURE__*/function (_Expression12) {
   _inherits(Ln, _Expression12);
 
   var _super13 = _createSuper(Ln);
@@ -5024,7 +4981,7 @@ module.exports.Ln = Ln = /*#__PURE__*/function (_Expression12) {
   function Ln(json) {
     _classCallCheck(this, Ln);
 
-    return _super13.apply(this, arguments);
+    return _super13.call(this, json);
   }
 
   _createClass(Ln, [{
@@ -5034,16 +4991,16 @@ module.exports.Ln = Ln = /*#__PURE__*/function (_Expression12) {
 
       if (arg == null) {
         return null;
-      } else {
-        return Math.log(arg);
       }
+
+      return Math.log(arg);
     }
   }]);
 
   return Ln;
 }(Expression);
 
-module.exports.Exp = Exp = /*#__PURE__*/function (_Expression13) {
+var Exp = /*#__PURE__*/function (_Expression13) {
   _inherits(Exp, _Expression13);
 
   var _super14 = _createSuper(Exp);
@@ -5051,20 +5008,19 @@ module.exports.Exp = Exp = /*#__PURE__*/function (_Expression13) {
   function Exp(json) {
     _classCallCheck(this, Exp);
 
-    return _super14.apply(this, arguments);
+    return _super14.call(this, json);
   }
 
   _createClass(Exp, [{
     key: "exec",
     value: function exec(ctx) {
-      var power;
       var arg = this.execArgs(ctx);
 
       if (arg == null) {
-        null;
-      } else {
-        power = Math.exp(arg);
+        return null;
       }
+
+      var power = Math.exp(arg);
 
       if (MathUtil.overflowsOrUnderflows(power)) {
         return null;
@@ -5077,7 +5033,7 @@ module.exports.Exp = Exp = /*#__PURE__*/function (_Expression13) {
   return Exp;
 }(Expression);
 
-module.exports.Log = Log = /*#__PURE__*/function (_Expression14) {
+var Log = /*#__PURE__*/function (_Expression14) {
   _inherits(Log, _Expression14);
 
   var _super15 = _createSuper(Log);
@@ -5085,7 +5041,7 @@ module.exports.Log = Log = /*#__PURE__*/function (_Expression14) {
   function Log(json) {
     _classCallCheck(this, Log);
 
-    return _super15.apply(this, arguments);
+    return _super15.call(this, json);
   }
 
   _createClass(Log, [{
@@ -5097,18 +5053,18 @@ module.exports.Log = Log = /*#__PURE__*/function (_Expression14) {
         return x == null;
       })) {
         return null;
-      } else {
-        return args.reduce(function (x, y) {
-          return Math.log(x) / Math.log(y);
-        });
       }
+
+      return args.reduce(function (x, y) {
+        return Math.log(x) / Math.log(y);
+      });
     }
   }]);
 
   return Log;
 }(Expression);
 
-module.exports.Power = Power = /*#__PURE__*/function (_Expression15) {
+var Power = /*#__PURE__*/function (_Expression15) {
   _inherits(Power, _Expression15);
 
   var _super16 = _createSuper(Power);
@@ -5116,24 +5072,23 @@ module.exports.Power = Power = /*#__PURE__*/function (_Expression15) {
   function Power(json) {
     _classCallCheck(this, Power);
 
-    return _super16.apply(this, arguments);
+    return _super16.call(this, json);
   }
 
   _createClass(Power, [{
     key: "exec",
     value: function exec(ctx) {
       var args = this.execArgs(ctx);
-      var power = null;
 
       if (args == null || args.some(function (x) {
         return x == null;
       })) {
         null;
-      } else {
-        power = args.reduce(function (x, y) {
-          return Math.pow(x, y);
-        });
       }
+
+      var power = args.reduce(function (x, y) {
+        return Math.pow(x, y);
+      });
 
       if (MathUtil.overflowsOrUnderflows(power)) {
         return null;
@@ -5146,115 +5101,91 @@ module.exports.Power = Power = /*#__PURE__*/function (_Expression15) {
   return Power;
 }(Expression);
 
-module.exports.MinValue = MinValue = function () {
-  var MIN_VALUES = undefined;
+var MinValue = /*#__PURE__*/function (_Expression16) {
+  _inherits(MinValue, _Expression16);
 
-  MinValue = /*#__PURE__*/function (_Expression16) {
-    _inherits(MinValue, _Expression16);
+  var _super17 = _createSuper(MinValue);
 
-    var _super17 = _createSuper(MinValue);
+  function MinValue(json) {
+    var _this2;
 
-    _createClass(MinValue, null, [{
-      key: "initClass",
-      value: function initClass() {
-        MIN_VALUES = {};
-        MIN_VALUES['{urn:hl7-org:elm-types:r1}Integer'] = MathUtil.MIN_INT_VALUE;
-        MIN_VALUES['{urn:hl7-org:elm-types:r1}Decimal'] = MathUtil.MIN_FLOAT_VALUE;
-        MIN_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MIN_DATETIME_VALUE;
-        MIN_VALUES['{urn:hl7-org:elm-types:r1}Date'] = MathUtil.MIN_DATE_VALUE;
-        MIN_VALUES['{urn:hl7-org:elm-types:r1}Time'] = MathUtil.MIN_TIME_VALUE;
-      }
-    }]);
+    _classCallCheck(this, MinValue);
 
-    function MinValue(json) {
-      var _this2;
+    _this2 = _super17.call(this, json);
+    _this2.valueType = json.valueType;
+    return _this2;
+  }
 
-      _classCallCheck(this, MinValue);
-
-      _this2 = _super17.apply(this, arguments);
-      _this2.valueType = json.valueType;
-      return _this2;
-    }
-
-    _createClass(MinValue, [{
-      key: "exec",
-      value: function exec(ctx) {
-        if (MIN_VALUES[this.valueType]) {
-          if (this.valueType === '{urn:hl7-org:elm-types:r1}DateTime') {
-            var minDateTime = MIN_VALUES[this.valueType].copy();
-            minDateTime.timezoneOffset = ctx.getTimezoneOffset();
-            return minDateTime;
-          } else {
-            return MIN_VALUES[this.valueType];
-          }
+  _createClass(MinValue, [{
+    key: "exec",
+    value: function exec(ctx) {
+      if (MinValue.MIN_VALUES[this.valueType]) {
+        if (this.valueType === '{urn:hl7-org:elm-types:r1}DateTime') {
+          var minDateTime = MinValue.MIN_VALUES[this.valueType].copy();
+          minDateTime.timezoneOffset = ctx.getTimezoneOffset();
+          return minDateTime;
         } else {
-          throw new Error("Minimum not supported for ".concat(this.valueType));
+          return MinValue.MIN_VALUES[this.valueType];
         }
+      } else {
+        throw new Error("Minimum not supported for ".concat(this.valueType));
       }
-    }]);
+    }
+  }]);
 
-    return MinValue;
-  }(Expression);
-
-  MinValue.initClass();
   return MinValue;
-}();
+}(Expression);
 
-module.exports.MaxValue = MaxValue = function () {
-  var MAX_VALUES = undefined;
+MinValue.MIN_VALUES = {};
+MinValue.MIN_VALUES['{urn:hl7-org:elm-types:r1}Integer'] = MathUtil.MIN_INT_VALUE;
+MinValue.MIN_VALUES['{urn:hl7-org:elm-types:r1}Decimal'] = MathUtil.MIN_FLOAT_VALUE;
+MinValue.MIN_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MIN_DATETIME_VALUE;
+MinValue.MIN_VALUES['{urn:hl7-org:elm-types:r1}Date'] = MathUtil.MIN_DATE_VALUE;
+MinValue.MIN_VALUES['{urn:hl7-org:elm-types:r1}Time'] = MathUtil.MIN_TIME_VALUE;
 
-  MaxValue = /*#__PURE__*/function (_Expression17) {
-    _inherits(MaxValue, _Expression17);
+var MaxValue = /*#__PURE__*/function (_Expression17) {
+  _inherits(MaxValue, _Expression17);
 
-    var _super18 = _createSuper(MaxValue);
+  var _super18 = _createSuper(MaxValue);
 
-    _createClass(MaxValue, null, [{
-      key: "initClass",
-      value: function initClass() {
-        MAX_VALUES = {};
-        MAX_VALUES['{urn:hl7-org:elm-types:r1}Integer'] = MathUtil.MAX_INT_VALUE;
-        MAX_VALUES['{urn:hl7-org:elm-types:r1}Decimal'] = MathUtil.MAX_FLOAT_VALUE;
-        MAX_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MAX_DATETIME_VALUE;
-        MAX_VALUES['{urn:hl7-org:elm-types:r1}Date'] = MathUtil.MAX_DATE_VALUE;
-        MAX_VALUES['{urn:hl7-org:elm-types:r1}Time'] = MathUtil.MAX_TIME_VALUE;
-      }
-    }]);
+  function MaxValue(json) {
+    var _this3;
 
-    function MaxValue(json) {
-      var _this3;
+    _classCallCheck(this, MaxValue);
 
-      _classCallCheck(this, MaxValue);
+    _this3 = _super18.call(this, json);
+    _this3.valueType = json.valueType;
+    return _this3;
+  }
 
-      _this3 = _super18.apply(this, arguments);
-      _this3.valueType = json.valueType;
-      return _this3;
-    }
-
-    _createClass(MaxValue, [{
-      key: "exec",
-      value: function exec(ctx) {
-        if (MAX_VALUES[this.valueType] != null) {
-          if (this.valueType === '{urn:hl7-org:elm-types:r1}DateTime') {
-            var maxDateTime = MAX_VALUES[this.valueType].copy();
-            maxDateTime.timezoneOffset = ctx.getTimezoneOffset();
-            return maxDateTime;
-          } else {
-            return MAX_VALUES[this.valueType];
-          }
+  _createClass(MaxValue, [{
+    key: "exec",
+    value: function exec(ctx) {
+      if (MaxValue.MAX_VALUES[this.valueType] != null) {
+        if (this.valueType === '{urn:hl7-org:elm-types:r1}DateTime') {
+          var maxDateTime = MaxValue.MAX_VALUES[this.valueType].copy();
+          maxDateTime.timezoneOffset = ctx.getTimezoneOffset();
+          return maxDateTime;
         } else {
-          throw new Error("Maximum not supported for ".concat(this.valueType));
+          return MaxValue.MAX_VALUES[this.valueType];
         }
+      } else {
+        throw new Error("Maximum not supported for ".concat(this.valueType));
       }
-    }]);
+    }
+  }]);
 
-    return MaxValue;
-  }(Expression);
-
-  MaxValue.initClass();
   return MaxValue;
-}();
+}(Expression);
 
-module.exports.Successor = Successor = /*#__PURE__*/function (_Expression18) {
+MaxValue.MAX_VALUES = {};
+MaxValue.MAX_VALUES['{urn:hl7-org:elm-types:r1}Integer'] = MathUtil.MAX_INT_VALUE;
+MaxValue.MAX_VALUES['{urn:hl7-org:elm-types:r1}Decimal'] = MathUtil.MAX_FLOAT_VALUE;
+MaxValue.MAX_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MAX_DATETIME_VALUE;
+MaxValue.MAX_VALUES['{urn:hl7-org:elm-types:r1}Date'] = MathUtil.MAX_DATE_VALUE;
+MaxValue.MAX_VALUES['{urn:hl7-org:elm-types:r1}Time'] = MathUtil.MAX_TIME_VALUE;
+
+var Successor = /*#__PURE__*/function (_Expression18) {
   _inherits(Successor, _Expression18);
 
   var _super19 = _createSuper(Successor);
@@ -5262,26 +5193,27 @@ module.exports.Successor = Successor = /*#__PURE__*/function (_Expression18) {
   function Successor(json) {
     _classCallCheck(this, Successor);
 
-    return _super19.apply(this, arguments);
+    return _super19.call(this, json);
   }
 
   _createClass(Successor, [{
     key: "exec",
     value: function exec(ctx) {
       var arg = this.execArgs(ctx);
-      var successor = null;
 
       if (arg == null) {
         null;
-      } else {
-        try {
-          // MathUtil.successor throws on overflow, and the exception is used in
-          // the logic for evaluating `meets`, so it can't be changed to just return null
-          successor = MathUtil.successor(arg);
-        } catch (e) {
-          if (e instanceof MathUtil.OverFlowException) {
-            return null;
-          }
+      }
+
+      var successor = null;
+
+      try {
+        // MathUtil.successor throws on overflow, and the exception is used in
+        // the logic for evaluating `meets`, so it can't be changed to just return null
+        successor = MathUtil.successor(arg);
+      } catch (e) {
+        if (e instanceof MathUtil.OverFlowException) {
+          return null;
         }
       }
 
@@ -5296,7 +5228,7 @@ module.exports.Successor = Successor = /*#__PURE__*/function (_Expression18) {
   return Successor;
 }(Expression);
 
-module.exports.Predecessor = Predecessor = /*#__PURE__*/function (_Expression19) {
+var Predecessor = /*#__PURE__*/function (_Expression19) {
   _inherits(Predecessor, _Expression19);
 
   var _super20 = _createSuper(Predecessor);
@@ -5304,26 +5236,27 @@ module.exports.Predecessor = Predecessor = /*#__PURE__*/function (_Expression19)
   function Predecessor(json) {
     _classCallCheck(this, Predecessor);
 
-    return _super20.apply(this, arguments);
+    return _super20.call(this, json);
   }
 
   _createClass(Predecessor, [{
     key: "exec",
     value: function exec(ctx) {
       var arg = this.execArgs(ctx);
-      var predecessor = null;
 
       if (arg == null) {
         null;
-      } else {
+      }
+
+      var predecessor = null;
+
+      try {
         // MathUtil.predecessor throws on underflow, and the exception is used in
         // the logic for evaluating `meets`, so it can't be changed to just return null
-        try {
-          predecessor = MathUtil.predecessor(arg);
-        } catch (e) {
-          if (e instanceof MathUtil.OverFlowException) {
-            return null;
-          }
+        predecessor = MathUtil.predecessor(arg);
+      } catch (e) {
+        if (e instanceof MathUtil.OverFlowException) {
+          return null;
         }
       }
 
@@ -5337,33 +5270,45 @@ module.exports.Predecessor = Predecessor = /*#__PURE__*/function (_Expression19)
 
   return Predecessor;
 }(Expression);
-},{"../datatypes/quantity":11,"../util/math":46,"../util/util":47,"./builder":16,"./expression":22}],16:[function(require,module,exports){
+
+module.exports = {
+  Abs: Abs,
+  Add: Add,
+  Ceiling: Ceiling,
+  Divide: Divide,
+  Exp: Exp,
+  Floor: Floor,
+  Ln: Ln,
+  Log: Log,
+  MaxValue: MaxValue,
+  MinValue: MinValue,
+  Modulo: Modulo,
+  Multiply: Multiply,
+  Negate: Negate,
+  Power: Power,
+  Predecessor: Predecessor,
+  Round: Round,
+  Subtract: Subtract,
+  Successor: Successor,
+  Truncate: Truncate,
+  TruncatedDivide: TruncatedDivide
+};
+},{"../datatypes/quantity":11,"../util/math":46,"./builder":16,"./expression":22}],16:[function(require,module,exports){
 "use strict";
-
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var _build;
 
 var E = require('./expressions');
 
 var _require = require('../util/util'),
     typeIsArray = _require.typeIsArray;
 
-module.exports.build = _build = function build(json) {
+function build(json) {
   if (json == null) {
     return json;
   }
 
   if (typeIsArray(json)) {
     return json.map(function (child) {
-      return _build(child);
+      return build(child);
     });
   }
 
@@ -5376,33 +5321,35 @@ module.exports.build = _build = function build(json) {
   } else {
     return null;
   }
-};
+}
 
-var functionExists = function functionExists(name) {
+function functionExists(name) {
   return typeof E[name] === 'function';
-};
+}
 
-var constructByName = function constructByName(name, json) {
+function constructByName(name, json) {
   return new E[name](json);
+}
+
+module.exports = {
+  build: build
 };
 },{"../util/util":47,"./expressions":23}],17:[function(require,module,exports){
 "use strict";
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -5424,24 +5371,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS103: Rewrite code to no longer use __guard__
- * DS104: Avoid inline assignments
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var AnyInValueSet, CalculateAge, CalculateAgeAt, Code, CodeDef, CodeRef, CodeSystemDef, Concept, ConceptDef, ConceptRef, InValueSet, ValueSetDef, ValueSetRef;
-
 var _require = require('./expression'),
     Expression = _require.Expression;
 
@@ -5450,7 +5379,7 @@ var dt = require('../datatypes/datatypes');
 var _require2 = require('./builder'),
     build = _require2.build;
 
-module.exports.ValueSetDef = ValueSetDef = /*#__PURE__*/function (_Expression) {
+var ValueSetDef = /*#__PURE__*/function (_Expression) {
   _inherits(ValueSetDef, _Expression);
 
   var _super = _createSuper(ValueSetDef);
@@ -5460,7 +5389,7 @@ module.exports.ValueSetDef = ValueSetDef = /*#__PURE__*/function (_Expression) {
 
     _classCallCheck(this, ValueSetDef);
 
-    _this = _super.apply(this, arguments);
+    _this = _super.call(this, json);
     _this.name = json.name;
     _this.id = json.id;
     _this.version = json.version;
@@ -5471,8 +5400,7 @@ module.exports.ValueSetDef = ValueSetDef = /*#__PURE__*/function (_Expression) {
   _createClass(ValueSetDef, [{
     key: "exec",
     value: function exec(ctx) {
-      var left;
-      var valueset = (left = ctx.codeService.findValueSet(this.id, this.version)) != null ? left : new dt.ValueSet(this.id, this.version);
+      var valueset = ctx.codeService.findValueSet(this.id, this.version) || new dt.ValueSet(this.id, this.version);
       ctx.rootContext().set(this.name, valueset);
       return valueset;
     }
@@ -5481,7 +5409,7 @@ module.exports.ValueSetDef = ValueSetDef = /*#__PURE__*/function (_Expression) {
   return ValueSetDef;
 }(Expression);
 
-module.exports.ValueSetRef = ValueSetRef = /*#__PURE__*/function (_Expression2) {
+var ValueSetRef = /*#__PURE__*/function (_Expression2) {
   _inherits(ValueSetRef, _Expression2);
 
   var _super2 = _createSuper(ValueSetRef);
@@ -5491,7 +5419,7 @@ module.exports.ValueSetRef = ValueSetRef = /*#__PURE__*/function (_Expression2) 
 
     _classCallCheck(this, ValueSetRef);
 
-    _this2 = _super2.apply(this, arguments);
+    _this2 = _super2.call(this, json);
     _this2.name = json.name;
     _this2.libraryName = json.libraryName;
     return _this2;
@@ -5514,7 +5442,7 @@ module.exports.ValueSetRef = ValueSetRef = /*#__PURE__*/function (_Expression2) 
   return ValueSetRef;
 }(Expression);
 
-module.exports.AnyInValueSet = AnyInValueSet = /*#__PURE__*/function (_Expression3) {
+var AnyInValueSet = /*#__PURE__*/function (_Expression3) {
   _inherits(AnyInValueSet, _Expression3);
 
   var _super3 = _createSuper(AnyInValueSet);
@@ -5524,7 +5452,7 @@ module.exports.AnyInValueSet = AnyInValueSet = /*#__PURE__*/function (_Expressio
 
     _classCallCheck(this, AnyInValueSet);
 
-    _this3 = _super3.apply(this, arguments);
+    _this3 = _super3.call(this, json);
     _this3.codes = build(json.codes);
     _this3.valueset = new ValueSetRef(json.valueset);
     return _this3;
@@ -5540,36 +5468,16 @@ module.exports.AnyInValueSet = AnyInValueSet = /*#__PURE__*/function (_Expressio
       }
 
       var codes = this.codes.exec(ctx);
-
-      if (codes == null) {
-        return false;
-      }
-
-      var _iterator = _createForOfIteratorHelper(codes),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var code = _step.value;
-
-          if (valueset.hasMatch(code)) {
-            return true;
-          }
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-
-      return false;
+      return codes != null && codes.some(function (code) {
+        return valueset.hasMatch(code);
+      });
     }
   }]);
 
   return AnyInValueSet;
 }(Expression);
 
-module.exports.InValueSet = InValueSet = /*#__PURE__*/function (_Expression4) {
+var InValueSet = /*#__PURE__*/function (_Expression4) {
   _inherits(InValueSet, _Expression4);
 
   var _super4 = _createSuper(InValueSet);
@@ -5579,7 +5487,7 @@ module.exports.InValueSet = InValueSet = /*#__PURE__*/function (_Expression4) {
 
     _classCallCheck(this, InValueSet);
 
-    _this4 = _super4.apply(this, arguments);
+    _this4 = _super4.call(this, json);
     _this4.code = build(json.code);
     _this4.valueset = new ValueSetRef(json.valueset);
     return _this4;
@@ -5617,7 +5525,7 @@ module.exports.InValueSet = InValueSet = /*#__PURE__*/function (_Expression4) {
   return InValueSet;
 }(Expression);
 
-module.exports.CodeSystemDef = CodeSystemDef = /*#__PURE__*/function (_Expression5) {
+var CodeSystemDef = /*#__PURE__*/function (_Expression5) {
   _inherits(CodeSystemDef, _Expression5);
 
   var _super5 = _createSuper(CodeSystemDef);
@@ -5627,7 +5535,7 @@ module.exports.CodeSystemDef = CodeSystemDef = /*#__PURE__*/function (_Expressio
 
     _classCallCheck(this, CodeSystemDef);
 
-    _this5 = _super5.apply(this, arguments);
+    _this5 = _super5.call(this, json);
     _this5.name = json.name;
     _this5.id = json.id;
     _this5.version = json.version;
@@ -5644,7 +5552,7 @@ module.exports.CodeSystemDef = CodeSystemDef = /*#__PURE__*/function (_Expressio
   return CodeSystemDef;
 }(Expression);
 
-module.exports.CodeDef = CodeDef = /*#__PURE__*/function (_Expression6) {
+var CodeDef = /*#__PURE__*/function (_Expression6) {
   _inherits(CodeDef, _Expression6);
 
   var _super6 = _createSuper(CodeDef);
@@ -5654,7 +5562,7 @@ module.exports.CodeDef = CodeDef = /*#__PURE__*/function (_Expression6) {
 
     _classCallCheck(this, CodeDef);
 
-    _this6 = _super6.apply(this, arguments);
+    _this6 = _super6.call(this, json);
     _this6.name = json.name;
     _this6.id = json.id;
     _this6.systemName = json.codeSystem.name;
@@ -5665,10 +5573,7 @@ module.exports.CodeDef = CodeDef = /*#__PURE__*/function (_Expression6) {
   _createClass(CodeDef, [{
     key: "exec",
     value: function exec(ctx) {
-      var system = __guard__(ctx.getCodeSystem(this.systemName), function (x) {
-        return x.execute(ctx);
-      });
-
+      var system = ctx.getCodeSystem(this.systemName).execute(ctx);
       return new dt.Code(this.id, system.id, system.version, this.display);
     }
   }]);
@@ -5676,7 +5581,7 @@ module.exports.CodeDef = CodeDef = /*#__PURE__*/function (_Expression6) {
   return CodeDef;
 }(Expression);
 
-module.exports.CodeRef = CodeRef = /*#__PURE__*/function (_Expression7) {
+var CodeRef = /*#__PURE__*/function (_Expression7) {
   _inherits(CodeRef, _Expression7);
 
   var _super7 = _createSuper(CodeRef);
@@ -5686,7 +5591,7 @@ module.exports.CodeRef = CodeRef = /*#__PURE__*/function (_Expression7) {
 
     _classCallCheck(this, CodeRef);
 
-    _this7 = _super7.apply(this, arguments);
+    _this7 = _super7.call(this, json);
     _this7.name = json.name;
     _this7.library = json.libraryName;
     return _this7;
@@ -5696,68 +5601,51 @@ module.exports.CodeRef = CodeRef = /*#__PURE__*/function (_Expression7) {
     key: "exec",
     value: function exec(ctx) {
       ctx = this.library ? ctx.getLibraryContext(this.library) : ctx;
-      return __guard__(ctx.getCode(this.name), function (x) {
-        return x.execute(ctx);
-      });
+      var codeDef = ctx.getCode(this.name);
+      return codeDef ? codeDef.execute(ctx) : undefined;
     }
   }]);
 
   return CodeRef;
 }(Expression);
 
-module.exports.Code = Code = function () {
-  Code = /*#__PURE__*/function (_Expression8) {
-    _inherits(Code, _Expression8);
+var Code = /*#__PURE__*/function (_Expression8) {
+  _inherits(Code, _Expression8);
 
-    var _super8 = _createSuper(Code);
+  var _super8 = _createSuper(Code);
 
-    _createClass(Code, null, [{
-      key: "initClass",
-      value: function initClass() {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        Object.defineProperties(this.prototype, {
-          isCode: {
-            get: function get() {
-              return true;
-            }
-          }
-        });
-      }
-    }]);
+  function Code(json) {
+    var _this8;
 
-    function Code(json) {
-      var _this8;
+    _classCallCheck(this, Code);
 
-      _classCallCheck(this, Code);
+    _this8 = _super8.call(this, json);
+    _this8.code = json.code;
+    _this8.systemName = json.system.name;
+    _this8.version = json.version;
+    _this8.display = json.display;
+    return _this8;
+  } // Define a simple getter to allow type-checking of this class without instanceof
+  // and in a way that survives minification (as opposed to checking constructor.name)
 
-      _this8 = _super8.apply(this, arguments);
-      _this8.code = json.code;
-      _this8.systemName = json.system.name;
-      _this8.version = json.version;
-      _this8.display = json.display;
-      return _this8;
+
+  _createClass(Code, [{
+    key: "exec",
+    value: function exec(ctx) {
+      var system = ctx.getCodeSystem(this.systemName) || {};
+      return new dt.Code(this.code, system.id, this.version, this.display);
     }
+  }, {
+    key: "isCode",
+    get: function get() {
+      return true;
+    }
+  }]);
 
-    _createClass(Code, [{
-      key: "exec",
-      value: function exec(ctx) {
-        var system = __guard__(ctx.getCodeSystem(this.systemName), function (x) {
-          return x.id;
-        });
-
-        return new dt.Code(this.code, system, this.version, this.display);
-      }
-    }]);
-
-    return Code;
-  }(Expression);
-
-  Code.initClass();
   return Code;
-}();
+}(Expression);
 
-module.exports.ConceptDef = ConceptDef = /*#__PURE__*/function (_Expression9) {
+var ConceptDef = /*#__PURE__*/function (_Expression9) {
   _inherits(ConceptDef, _Expression9);
 
   var _super9 = _createSuper(ConceptDef);
@@ -5767,7 +5655,7 @@ module.exports.ConceptDef = ConceptDef = /*#__PURE__*/function (_Expression9) {
 
     _classCallCheck(this, ConceptDef);
 
-    _this9 = _super9.apply(this, arguments);
+    _this9 = _super9.call(this, json);
     _this9.name = json.name;
     _this9.display = json.display;
     _this9.codes = json.code;
@@ -5778,9 +5666,8 @@ module.exports.ConceptDef = ConceptDef = /*#__PURE__*/function (_Expression9) {
     key: "exec",
     value: function exec(ctx) {
       var codes = this.codes.map(function (code) {
-        return __guard__(ctx.getCode(code.name), function (x) {
-          return x.execute(ctx);
-        });
+        var codeDef = ctx.getCode(code.name);
+        return codeDef ? codeDef.execute(ctx) : undefined;
       });
       return new dt.Concept(codes, this.display);
     }
@@ -5789,7 +5676,7 @@ module.exports.ConceptDef = ConceptDef = /*#__PURE__*/function (_Expression9) {
   return ConceptDef;
 }(Expression);
 
-module.exports.ConceptRef = ConceptRef = /*#__PURE__*/function (_Expression10) {
+var ConceptRef = /*#__PURE__*/function (_Expression10) {
   _inherits(ConceptRef, _Expression10);
 
   var _super10 = _createSuper(ConceptRef);
@@ -5799,7 +5686,7 @@ module.exports.ConceptRef = ConceptRef = /*#__PURE__*/function (_Expression10) {
 
     _classCallCheck(this, ConceptRef);
 
-    _this10 = _super10.apply(this, arguments);
+    _this10 = _super10.call(this, json);
     _this10.name = json.name;
     return _this10;
   }
@@ -5807,76 +5694,59 @@ module.exports.ConceptRef = ConceptRef = /*#__PURE__*/function (_Expression10) {
   _createClass(ConceptRef, [{
     key: "exec",
     value: function exec(ctx) {
-      return __guard__(ctx.getConcept(this.name), function (x) {
-        return x.execute(ctx);
-      });
+      var conceptDef = ctx.getConcept(this.name);
+      return conceptDef ? conceptDef.execute(ctx) : undefined;
     }
   }]);
 
   return ConceptRef;
 }(Expression);
 
-module.exports.Concept = Concept = function () {
-  Concept = /*#__PURE__*/function (_Expression11) {
-    _inherits(Concept, _Expression11);
+var Concept = /*#__PURE__*/function (_Expression11) {
+  _inherits(Concept, _Expression11);
 
-    var _super11 = _createSuper(Concept);
+  var _super11 = _createSuper(Concept);
 
-    _createClass(Concept, null, [{
-      key: "initClass",
-      value: function initClass() {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        Object.defineProperties(this.prototype, {
-          isConcept: {
-            get: function get() {
-              return true;
-            }
-          }
-        });
-      }
-    }]);
+  function Concept(json) {
+    var _this11;
 
-    function Concept(json) {
-      var _this11;
+    _classCallCheck(this, Concept);
 
-      _classCallCheck(this, Concept);
+    _this11 = _super11.call(this, json);
+    _this11.codes = json.code;
+    _this11.display = json.display;
+    return _this11;
+  } // Define a simple getter to allow type-checking of this class without instanceof
+  // and in a way that survives minification (as opposed to checking constructor.name)
 
-      _this11 = _super11.apply(this, arguments);
-      _this11.codes = json.code;
-      _this11.display = json.display;
-      return _this11;
+
+  _createClass(Concept, [{
+    key: "toCode",
+    value: function toCode(ctx, code) {
+      var system = ctx.getCodeSystem(code.system.name) || {};
+      return new dt.Code(code.code, system.id, code.version, code.display);
     }
+  }, {
+    key: "exec",
+    value: function exec(ctx) {
+      var _this12 = this;
 
-    _createClass(Concept, [{
-      key: "toCode",
-      value: function toCode(ctx, code) {
-        var system = __guard__(ctx.getCodeSystem(code.system.name), function (x) {
-          return x.id;
-        });
+      var codes = this.codes.map(function (code) {
+        return _this12.toCode(ctx, code);
+      });
+      return new dt.Concept(codes, this.display);
+    }
+  }, {
+    key: "isConcept",
+    get: function get() {
+      return true;
+    }
+  }]);
 
-        return new dt.Code(code.code, system, code.version, code.display);
-      }
-    }, {
-      key: "exec",
-      value: function exec(ctx) {
-        var _this12 = this;
-
-        var codes = this.codes.map(function (code) {
-          return _this12.toCode(ctx, code);
-        });
-        return new dt.Concept(codes, this.display);
-      }
-    }]);
-
-    return Concept;
-  }(Expression);
-
-  Concept.initClass();
   return Concept;
-}();
+}(Expression);
 
-module.exports.CalculateAge = CalculateAge = /*#__PURE__*/function (_Expression12) {
+var CalculateAge = /*#__PURE__*/function (_Expression12) {
   _inherits(CalculateAge, _Expression12);
 
   var _super12 = _createSuper(CalculateAge);
@@ -5886,7 +5756,7 @@ module.exports.CalculateAge = CalculateAge = /*#__PURE__*/function (_Expression1
 
     _classCallCheck(this, CalculateAge);
 
-    _this13 = _super12.apply(this, arguments);
+    _this13 = _super12.call(this, json);
     _this13.precision = json.precision;
     return _this13;
   }
@@ -5909,7 +5779,7 @@ module.exports.CalculateAge = CalculateAge = /*#__PURE__*/function (_Expression1
   return CalculateAge;
 }(Expression);
 
-module.exports.CalculateAgeAt = CalculateAgeAt = /*#__PURE__*/function (_Expression13) {
+var CalculateAgeAt = /*#__PURE__*/function (_Expression13) {
   _inherits(CalculateAgeAt, _Expression13);
 
   var _super13 = _createSuper(CalculateAgeAt);
@@ -5919,7 +5789,7 @@ module.exports.CalculateAgeAt = CalculateAgeAt = /*#__PURE__*/function (_Express
 
     _classCallCheck(this, CalculateAgeAt);
 
-    _this14 = _super13.apply(this, arguments);
+    _this14 = _super13.call(this, json);
     _this14.precision = json.precision;
     return _this14;
   }
@@ -5927,10 +5797,10 @@ module.exports.CalculateAgeAt = CalculateAgeAt = /*#__PURE__*/function (_Express
   _createClass(CalculateAgeAt, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from = Array.from(this.execArgs(ctx)),
-          _Array$from2 = _slicedToArray(_Array$from, 2),
-          date1 = _Array$from2[0],
-          date2 = _Array$from2[1];
+      var _this$execArgs = this.execArgs(ctx),
+          _this$execArgs2 = _slicedToArray(_this$execArgs, 2),
+          date1 = _this$execArgs2[0],
+          date2 = _this$execArgs2[1];
 
       if (date1 != null && date2 != null) {
         // date1 is the birthdate, convert it to date if date2 is a date (to support ignoring time)
@@ -5945,18 +5815,30 @@ module.exports.CalculateAgeAt = CalculateAgeAt = /*#__PURE__*/function (_Express
         } else {
           return result;
         }
-      } else {
-        return null;
       }
+
+      return null;
     }
   }]);
 
   return CalculateAgeAt;
 }(Expression);
 
-function __guard__(value, transform) {
-  return typeof value !== 'undefined' && value !== null ? transform(value) : undefined;
-}
+module.exports = {
+  AnyInValueSet: AnyInValueSet,
+  CalculateAge: CalculateAge,
+  CalculateAgeAt: CalculateAgeAt,
+  Code: Code,
+  CodeDef: CodeDef,
+  CodeRef: CodeRef,
+  CodeSystemDef: CodeSystemDef,
+  Concept: Concept,
+  ConceptDef: ConceptDef,
+  ConceptRef: ConceptRef,
+  InValueSet: InValueSet,
+  ValueSetDef: ValueSetDef,
+  ValueSetRef: ValueSetRef
+};
 },{"../datatypes/datatypes":6,"./builder":16,"./expression":22}],18:[function(require,module,exports){
 "use strict";
 
@@ -5982,20 +5864,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Greater, GreaterOrEqual, Less, LessOrEqual;
-
 var _require = require('./expression'),
     Expression = _require.Expression;
 
@@ -6004,7 +5872,7 @@ var _require2 = require('../datatypes/datatypes'),
 // NotEqual is completely handled by overloaded#Equal
 
 
-module.exports.Less = Less = /*#__PURE__*/function (_Expression) {
+var Less = /*#__PURE__*/function (_Expression) {
   _inherits(Less, _Expression);
 
   var _super = _createSuper(Less);
@@ -6012,7 +5880,7 @@ module.exports.Less = Less = /*#__PURE__*/function (_Expression) {
   function Less(json) {
     _classCallCheck(this, Less);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, json);
   }
 
   _createClass(Less, [{
@@ -6033,7 +5901,7 @@ module.exports.Less = Less = /*#__PURE__*/function (_Expression) {
   return Less;
 }(Expression);
 
-module.exports.LessOrEqual = LessOrEqual = /*#__PURE__*/function (_Expression2) {
+var LessOrEqual = /*#__PURE__*/function (_Expression2) {
   _inherits(LessOrEqual, _Expression2);
 
   var _super2 = _createSuper(LessOrEqual);
@@ -6041,7 +5909,7 @@ module.exports.LessOrEqual = LessOrEqual = /*#__PURE__*/function (_Expression2) 
   function LessOrEqual(json) {
     _classCallCheck(this, LessOrEqual);
 
-    return _super2.apply(this, arguments);
+    return _super2.call(this, json);
   }
 
   _createClass(LessOrEqual, [{
@@ -6062,7 +5930,7 @@ module.exports.LessOrEqual = LessOrEqual = /*#__PURE__*/function (_Expression2) 
   return LessOrEqual;
 }(Expression);
 
-module.exports.Greater = Greater = /*#__PURE__*/function (_Expression3) {
+var Greater = /*#__PURE__*/function (_Expression3) {
   _inherits(Greater, _Expression3);
 
   var _super3 = _createSuper(Greater);
@@ -6070,7 +5938,7 @@ module.exports.Greater = Greater = /*#__PURE__*/function (_Expression3) {
   function Greater(json) {
     _classCallCheck(this, Greater);
 
-    return _super3.apply(this, arguments);
+    return _super3.call(this, json);
   }
 
   _createClass(Greater, [{
@@ -6091,7 +5959,7 @@ module.exports.Greater = Greater = /*#__PURE__*/function (_Expression3) {
   return Greater;
 }(Expression);
 
-module.exports.GreaterOrEqual = GreaterOrEqual = /*#__PURE__*/function (_Expression4) {
+var GreaterOrEqual = /*#__PURE__*/function (_Expression4) {
   _inherits(GreaterOrEqual, _Expression4);
 
   var _super4 = _createSuper(GreaterOrEqual);
@@ -6099,7 +5967,7 @@ module.exports.GreaterOrEqual = GreaterOrEqual = /*#__PURE__*/function (_Express
   function GreaterOrEqual(json) {
     _classCallCheck(this, GreaterOrEqual);
 
-    return _super4.apply(this, arguments);
+    return _super4.call(this, json);
   }
 
   _createClass(GreaterOrEqual, [{
@@ -6119,16 +5987,23 @@ module.exports.GreaterOrEqual = GreaterOrEqual = /*#__PURE__*/function (_Express
 
   return GreaterOrEqual;
 }(Expression);
+
+module.exports = {
+  Greater: Greater,
+  GreaterOrEqual: GreaterOrEqual,
+  Less: Less,
+  LessOrEqual: LessOrEqual
+};
 },{"../datatypes/datatypes":6,"./expression":22}],19:[function(require,module,exports){
 "use strict";
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6150,19 +6025,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Case, CaseItem, If;
-
 var _require = require('./expression'),
     Expression = _require.Expression;
 
@@ -6173,7 +6035,7 @@ var _require3 = require('../util/comparison'),
     equals = _require3.equals; // TODO: Spec lists "Conditional", but it's "If" in the XSD
 
 
-module.exports.If = If = /*#__PURE__*/function (_Expression) {
+var If = /*#__PURE__*/function (_Expression) {
   _inherits(If, _Expression);
 
   var _super = _createSuper(If);
@@ -6183,7 +6045,7 @@ module.exports.If = If = /*#__PURE__*/function (_Expression) {
 
     _classCallCheck(this, If);
 
-    _this = _super.apply(this, arguments);
+    _this = _super.call(this, json);
     _this.condition = build(json.condition);
     _this.th = build(json.then);
     _this.els = build(json.else);
@@ -6204,14 +6066,14 @@ module.exports.If = If = /*#__PURE__*/function (_Expression) {
   return If;
 }(Expression);
 
-module.exports.CaseItem = CaseItem = CaseItem = function CaseItem(json) {
+var CaseItem = function CaseItem(json) {
   _classCallCheck(this, CaseItem);
 
   this.when = build(json.when);
   this.then = build(json.then);
 };
 
-module.exports.Case = Case = /*#__PURE__*/function (_Expression2) {
+var Case = /*#__PURE__*/function (_Expression2) {
   _inherits(Case, _Expression2);
 
   var _super2 = _createSuper(Case);
@@ -6221,7 +6083,7 @@ module.exports.Case = Case = /*#__PURE__*/function (_Expression2) {
 
     _classCallCheck(this, Case);
 
-    _this2 = _super2.apply(this, arguments);
+    _this2 = _super2.call(this, json);
     _this2.comparand = build(json.comparand);
     _this2.caseItems = json.caseItem.map(function (ci) {
       return new CaseItem(ci);
@@ -6289,6 +6151,12 @@ module.exports.Case = Case = /*#__PURE__*/function (_Expression2) {
 
   return Case;
 }(Expression);
+
+module.exports = {
+  Case: Case,
+  CaseItem: CaseItem,
+  If: If
+};
 },{"../util/comparison":45,"./builder":16,"./expression":22}],20:[function(require,module,exports){
 "use strict";
 
@@ -6330,27 +6198,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    constructor-super,
-    no-constant-condition,
-    no-this-before-super,
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS001: Remove Babel/TypeScript constructor workaround
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var _Date, DateFrom, DateTime, DateTimeComponentFrom, DifferenceBetween, DurationBetween, Now, Time, TimeFrom, TimeOfDay, TimezoneOffsetFrom, Today;
-
 var _require = require('./expression'),
     Expression = _require.Expression;
 
@@ -6362,258 +6209,162 @@ var _require3 = require('./literal'),
 
 var DT = require('../datatypes/datatypes');
 
-module.exports.DateTime = DateTime = function () {
-  DateTime = /*#__PURE__*/function (_Expression) {
-    _inherits(DateTime, _Expression);
+var DateTime = /*#__PURE__*/function (_Expression) {
+  _inherits(DateTime, _Expression);
 
-    var _super = _createSuper(DateTime);
+  var _super = _createSuper(DateTime);
 
-    _createClass(DateTime, null, [{
-      key: "initClass",
-      value: function initClass() {
-        this.PROPERTIES = ['year', 'month', 'day', 'hour', 'minute', 'second', 'millisecond', 'timezoneOffset'];
-      }
-    }]);
+  function DateTime(json) {
+    var _this;
 
-    function DateTime(json) {
-      var _this;
+    _classCallCheck(this, DateTime);
 
-      _classCallCheck(this, DateTime);
+    _this = _super.call(this, json);
+    _this.json = json;
+    return _this;
+  }
 
-      _this = _super.call(this, json);
-      _this.json = json;
-      return _this;
-    }
+  _createClass(DateTime, [{
+    key: "exec",
+    value: function exec(ctx) {
+      var _this2 = this;
 
-    _createClass(DateTime, [{
-      key: "exec",
-      value: function exec(ctx) {
-        var _this2 = this;
-
-        var _iterator = _createForOfIteratorHelper(DateTime.PROPERTIES),
-            _step;
-
-        try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var property = _step.value;
-
-            // if json does not contain 'timezoneOffset' set it to the executionDateTime from the context
-            if (this.json[property] != null) {
-              this[property] = build(this.json[property]);
-            } else if (property === 'timezoneOffset' && ctx.getTimezoneOffset() != null) {
-              this[property] = Literal.from({
-                type: 'Literal',
-                value: ctx.getTimezoneOffset(),
-                valueType: '{urn:hl7-org:elm-types:r1}Integer'
-              });
-            }
-          }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
-        }
-
-        var args = function () {
-          var result = [];
-
-          var _iterator2 = _createForOfIteratorHelper(DateTime.PROPERTIES),
-              _step2;
-
-          try {
-            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-              var p = _step2.value;
-
-              if (_this2[p] != null) {
-                result.push(_this2[p].execute(ctx));
-              } else {
-                result.push(undefined);
-              }
-            }
-          } catch (err) {
-            _iterator2.e(err);
-          } finally {
-            _iterator2.f();
-          }
-
-          return result;
-        }();
-
-        return _construct(DT.DateTime, _toConsumableArray(Array.from(args || [])));
-      }
-    }]);
-
-    return DateTime;
-  }(Expression);
-
-  DateTime.initClass();
-  return DateTime;
-}();
-
-module.exports.Date = _Date = function () {
-  _Date = /*#__PURE__*/function (_Expression2) {
-    _inherits(Date, _Expression2);
-
-    var _super2 = _createSuper(Date);
-
-    _createClass(Date, null, [{
-      key: "initClass",
-      value: function initClass() {
-        this.PROPERTIES = ['year', 'month', 'day'];
-      }
-    }]);
-
-    function Date(json) {
-      var _this3;
-
-      _classCallCheck(this, Date);
-
-      _this3 = _super2.call(this, json);
-      _this3.json = json;
-      return _this3;
-    }
-
-    _createClass(Date, [{
-      key: "exec",
-      value: function exec(ctx) {
-        var _this4 = this;
-
-        var _iterator3 = _createForOfIteratorHelper(Date.PROPERTIES),
-            _step3;
-
-        try {
-          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-            var property = _step3.value;
-
-            if (this.json[property] != null) {
-              this[property] = build(this.json[property]);
-            }
-          }
-        } catch (err) {
-          _iterator3.e(err);
-        } finally {
-          _iterator3.f();
-        }
-
-        var args = function () {
-          var result = [];
-
-          var _iterator4 = _createForOfIteratorHelper(Date.PROPERTIES),
-              _step4;
-
-          try {
-            for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-              var p = _step4.value;
-
-              if (_this4[p] != null) {
-                result.push(_this4[p].execute(ctx));
-              } else {
-                result.push(undefined);
-              }
-            }
-          } catch (err) {
-            _iterator4.e(err);
-          } finally {
-            _iterator4.f();
-          }
-
-          return result;
-        }();
-
-        return _construct(DT.Date, _toConsumableArray(Array.from(args || [])));
-      }
-    }]);
-
-    return Date;
-  }(Expression);
-
-  _Date.initClass();
-
-  return _Date;
-}();
-
-module.exports.Time = Time = function () {
-  Time = /*#__PURE__*/function (_Expression3) {
-    _inherits(Time, _Expression3);
-
-    var _super3 = _createSuper(Time);
-
-    _createClass(Time, null, [{
-      key: "initClass",
-      value: function initClass() {
-        this.PROPERTIES = ['hour', 'minute', 'second', 'millisecond'];
-      }
-    }]);
-
-    function Time(json) {
-      var _this5;
-
-      _classCallCheck(this, Time);
-
-      _this5 = _super3.apply(this, arguments);
-
-      var _iterator5 = _createForOfIteratorHelper(Time.PROPERTIES),
-          _step5;
+      var _iterator = _createForOfIteratorHelper(DateTime.PROPERTIES),
+          _step;
 
       try {
-        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-          var property = _step5.value;
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var property = _step.value;
 
-          if (json[property] != null) {
-            _this5[property] = build(json[property]);
+          // if json does not contain 'timezoneOffset' set it to the executionDateTime from the context
+          if (this.json[property] != null) {
+            this[property] = build(this.json[property]);
+          } else if (property === 'timezoneOffset' && ctx.getTimezoneOffset() != null) {
+            this[property] = Literal.from({
+              type: 'Literal',
+              value: ctx.getTimezoneOffset(),
+              valueType: '{urn:hl7-org:elm-types:r1}Integer'
+            });
           }
         }
       } catch (err) {
-        _iterator5.e(err);
+        _iterator.e(err);
       } finally {
-        _iterator5.f();
+        _iterator.f();
       }
 
-      return _this5;
+      var args = DateTime.PROPERTIES.map(function (p) {
+        return _this2[p] != null ? _this2[p].execute(ctx) : undefined;
+      });
+      return _construct(DT.DateTime, _toConsumableArray(args));
+    }
+  }]);
+
+  return DateTime;
+}(Expression);
+
+DateTime.PROPERTIES = ['year', 'month', 'day', 'hour', 'minute', 'second', 'millisecond', 'timezoneOffset'];
+
+var _Date = /*#__PURE__*/function (_Expression2) {
+  _inherits(_Date, _Expression2);
+
+  var _super2 = _createSuper(_Date);
+
+  function _Date(json) {
+    var _this3;
+
+    _classCallCheck(this, _Date);
+
+    _this3 = _super2.call(this, json);
+    _this3.json = json;
+    return _this3;
+  }
+
+  _createClass(_Date, [{
+    key: "exec",
+    value: function exec(ctx) {
+      var _this4 = this;
+
+      var _iterator2 = _createForOfIteratorHelper(_Date.PROPERTIES),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var property = _step2.value;
+
+          if (this.json[property] != null) {
+            this[property] = build(this.json[property]);
+          }
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+
+      var args = _Date.PROPERTIES.map(function (p) {
+        return _this4[p] != null ? _this4[p].execute(ctx) : undefined;
+      });
+
+      return _construct(DT.Date, _toConsumableArray(args));
+    }
+  }]);
+
+  return _Date;
+}(Expression);
+
+_Date.PROPERTIES = ['year', 'month', 'day'];
+
+var Time = /*#__PURE__*/function (_Expression3) {
+  _inherits(Time, _Expression3);
+
+  var _super3 = _createSuper(Time);
+
+  function Time(json) {
+    var _this5;
+
+    _classCallCheck(this, Time);
+
+    _this5 = _super3.call(this, json);
+
+    var _iterator3 = _createForOfIteratorHelper(Time.PROPERTIES),
+        _step3;
+
+    try {
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        var property = _step3.value;
+
+        if (json[property] != null) {
+          _this5[property] = build(json[property]);
+        }
+      }
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
     }
 
-    _createClass(Time, [{
-      key: "exec",
-      value: function exec(ctx) {
-        var _this6 = this;
+    return _this5;
+  }
 
-        var args = function () {
-          var result = [];
+  _createClass(Time, [{
+    key: "exec",
+    value: function exec(ctx) {
+      var _this6 = this;
 
-          var _iterator6 = _createForOfIteratorHelper(Time.PROPERTIES),
-              _step6;
+      var args = Time.PROPERTIES.map(function (p) {
+        return _this6[p] != null ? _this6[p].execute(ctx) : undefined;
+      });
+      return _construct(DT.DateTime, [0, 1, 1].concat(_toConsumableArray(args))).getTime();
+    }
+  }]);
 
-          try {
-            for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-              var p = _step6.value;
-
-              if (_this6[p] != null) {
-                result.push(_this6[p].execute(ctx));
-              } else {
-                result.push(undefined);
-              }
-            }
-          } catch (err) {
-            _iterator6.e(err);
-          } finally {
-            _iterator6.f();
-          }
-
-          return result;
-        }();
-
-        return _construct(DT.DateTime, [0, 1, 1].concat(_toConsumableArray(Array.from(args)))).getTime();
-      }
-    }]);
-
-    return Time;
-  }(Expression);
-
-  Time.initClass();
   return Time;
-}();
+}(Expression);
 
-module.exports.Today = Today = /*#__PURE__*/function (_Expression4) {
+Time.PROPERTIES = ['hour', 'minute', 'second', 'millisecond'];
+
+var Today = /*#__PURE__*/function (_Expression4) {
   _inherits(Today, _Expression4);
 
   var _super4 = _createSuper(Today);
@@ -6621,7 +6372,7 @@ module.exports.Today = Today = /*#__PURE__*/function (_Expression4) {
   function Today(json) {
     _classCallCheck(this, Today);
 
-    return _super4.apply(this, arguments);
+    return _super4.call(this, json);
   }
 
   _createClass(Today, [{
@@ -6634,7 +6385,7 @@ module.exports.Today = Today = /*#__PURE__*/function (_Expression4) {
   return Today;
 }(Expression);
 
-module.exports.Now = Now = /*#__PURE__*/function (_Expression5) {
+var Now = /*#__PURE__*/function (_Expression5) {
   _inherits(Now, _Expression5);
 
   var _super5 = _createSuper(Now);
@@ -6642,7 +6393,7 @@ module.exports.Now = Now = /*#__PURE__*/function (_Expression5) {
   function Now(json) {
     _classCallCheck(this, Now);
 
-    return _super5.apply(this, arguments);
+    return _super5.call(this, json);
   }
 
   _createClass(Now, [{
@@ -6655,7 +6406,7 @@ module.exports.Now = Now = /*#__PURE__*/function (_Expression5) {
   return Now;
 }(Expression);
 
-module.exports.TimeOfDay = TimeOfDay = /*#__PURE__*/function (_Expression6) {
+var TimeOfDay = /*#__PURE__*/function (_Expression6) {
   _inherits(TimeOfDay, _Expression6);
 
   var _super6 = _createSuper(TimeOfDay);
@@ -6663,7 +6414,7 @@ module.exports.TimeOfDay = TimeOfDay = /*#__PURE__*/function (_Expression6) {
   function TimeOfDay(json) {
     _classCallCheck(this, TimeOfDay);
 
-    return _super6.apply(this, arguments);
+    return _super6.call(this, json);
   }
 
   _createClass(TimeOfDay, [{
@@ -6676,7 +6427,7 @@ module.exports.TimeOfDay = TimeOfDay = /*#__PURE__*/function (_Expression6) {
   return TimeOfDay;
 }(Expression);
 
-module.exports.DateTimeComponentFrom = DateTimeComponentFrom = /*#__PURE__*/function (_Expression7) {
+var DateTimeComponentFrom = /*#__PURE__*/function (_Expression7) {
   _inherits(DateTimeComponentFrom, _Expression7);
 
   var _super7 = _createSuper(DateTimeComponentFrom);
@@ -6686,7 +6437,7 @@ module.exports.DateTimeComponentFrom = DateTimeComponentFrom = /*#__PURE__*/func
 
     _classCallCheck(this, DateTimeComponentFrom);
 
-    _this7 = _super7.apply(this, arguments);
+    _this7 = _super7.call(this, json);
     _this7.precision = json.precision;
     return _this7;
   }
@@ -6707,7 +6458,7 @@ module.exports.DateTimeComponentFrom = DateTimeComponentFrom = /*#__PURE__*/func
   return DateTimeComponentFrom;
 }(Expression);
 
-module.exports.DateFrom = DateFrom = /*#__PURE__*/function (_Expression8) {
+var DateFrom = /*#__PURE__*/function (_Expression8) {
   _inherits(DateFrom, _Expression8);
 
   var _super8 = _createSuper(DateFrom);
@@ -6715,7 +6466,7 @@ module.exports.DateFrom = DateFrom = /*#__PURE__*/function (_Expression8) {
   function DateFrom(json) {
     _classCallCheck(this, DateFrom);
 
-    return _super8.apply(this, arguments);
+    return _super8.call(this, json);
   }
 
   _createClass(DateFrom, [{
@@ -6734,7 +6485,7 @@ module.exports.DateFrom = DateFrom = /*#__PURE__*/function (_Expression8) {
   return DateFrom;
 }(Expression);
 
-module.exports.TimeFrom = TimeFrom = /*#__PURE__*/function (_Expression9) {
+var TimeFrom = /*#__PURE__*/function (_Expression9) {
   _inherits(TimeFrom, _Expression9);
 
   var _super9 = _createSuper(TimeFrom);
@@ -6742,7 +6493,7 @@ module.exports.TimeFrom = TimeFrom = /*#__PURE__*/function (_Expression9) {
   function TimeFrom(json) {
     _classCallCheck(this, TimeFrom);
 
-    return _super9.apply(this, arguments);
+    return _super9.call(this, json);
   }
 
   _createClass(TimeFrom, [{
@@ -6761,7 +6512,7 @@ module.exports.TimeFrom = TimeFrom = /*#__PURE__*/function (_Expression9) {
   return TimeFrom;
 }(Expression);
 
-module.exports.TimezoneOffsetFrom = TimezoneOffsetFrom = /*#__PURE__*/function (_Expression10) {
+var TimezoneOffsetFrom = /*#__PURE__*/function (_Expression10) {
   _inherits(TimezoneOffsetFrom, _Expression10);
 
   var _super10 = _createSuper(TimezoneOffsetFrom);
@@ -6769,7 +6520,7 @@ module.exports.TimezoneOffsetFrom = TimezoneOffsetFrom = /*#__PURE__*/function (
   function TimezoneOffsetFrom(json) {
     _classCallCheck(this, TimezoneOffsetFrom);
 
-    return _super10.apply(this, arguments);
+    return _super10.call(this, json);
   }
 
   _createClass(TimezoneOffsetFrom, [{
@@ -6789,16 +6540,16 @@ module.exports.TimezoneOffsetFrom = TimezoneOffsetFrom = /*#__PURE__*/function (
 }(Expression); // Delegated to by overloaded#After
 
 
-module.exports.doAfter = function (a, b, precision) {
+function doAfter(a, b, precision) {
   return a.after(b, precision);
-}; // Delegated to by overloaded#Before
+} // Delegated to by overloaded#Before
 
 
-module.exports.doBefore = function (a, b, precision) {
+function doBefore(a, b, precision) {
   return a.before(b, precision);
-};
+}
 
-module.exports.DifferenceBetween = DifferenceBetween = /*#__PURE__*/function (_Expression11) {
+var DifferenceBetween = /*#__PURE__*/function (_Expression11) {
   _inherits(DifferenceBetween, _Expression11);
 
   var _super11 = _createSuper(DifferenceBetween);
@@ -6808,7 +6559,7 @@ module.exports.DifferenceBetween = DifferenceBetween = /*#__PURE__*/function (_E
 
     _classCallCheck(this, DifferenceBetween);
 
-    _this8 = _super11.apply(this, arguments);
+    _this8 = _super11.call(this, json);
     _this8.precision = json.precision;
     return _this8;
   }
@@ -6835,7 +6586,7 @@ module.exports.DifferenceBetween = DifferenceBetween = /*#__PURE__*/function (_E
   return DifferenceBetween;
 }(Expression);
 
-module.exports.DurationBetween = DurationBetween = /*#__PURE__*/function (_Expression12) {
+var DurationBetween = /*#__PURE__*/function (_Expression12) {
   _inherits(DurationBetween, _Expression12);
 
   var _super12 = _createSuper(DurationBetween);
@@ -6845,7 +6596,7 @@ module.exports.DurationBetween = DurationBetween = /*#__PURE__*/function (_Expre
 
     _classCallCheck(this, DurationBetween);
 
-    _this9 = _super12.apply(this, arguments);
+    _this9 = _super12.call(this, json);
     _this9.precision = json.precision;
     return _this9;
   }
@@ -6871,6 +6622,23 @@ module.exports.DurationBetween = DurationBetween = /*#__PURE__*/function (_Expre
 
   return DurationBetween;
 }(Expression);
+
+module.exports = {
+  Date: _Date,
+  DateFrom: DateFrom,
+  DateTime: DateTime,
+  DateTimeComponentFrom: DateTimeComponentFrom,
+  DifferenceBetween: DifferenceBetween,
+  DurationBetween: DurationBetween,
+  Now: Now,
+  Time: Time,
+  TimeFrom: TimeFrom,
+  TimeOfDay: TimeOfDay,
+  TimezoneOffsetFrom: TimezoneOffsetFrom,
+  Today: Today,
+  doAfter: doAfter,
+  doBefore: doBefore
+};
 },{"../datatypes/datatypes":6,"./builder":16,"./expression":22,"./literal":29}],21:[function(require,module,exports){
 "use strict";
 
@@ -6892,18 +6660,10 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-var IncludeDef, UsingDef, VersionedIdentifier;
-
 var _require = require('./expression'),
-    Expression = _require.Expression,
     UnimplementedExpression = _require.UnimplementedExpression;
 
-module.exports.UsingDef = UsingDef = /*#__PURE__*/function (_UnimplementedExpress) {
+var UsingDef = /*#__PURE__*/function (_UnimplementedExpress) {
   _inherits(UsingDef, _UnimplementedExpress);
 
   var _super = _createSuper(UsingDef);
@@ -6917,7 +6677,7 @@ module.exports.UsingDef = UsingDef = /*#__PURE__*/function (_UnimplementedExpres
   return UsingDef;
 }(UnimplementedExpression);
 
-module.exports.IncludeDef = IncludeDef = /*#__PURE__*/function (_UnimplementedExpress2) {
+var IncludeDef = /*#__PURE__*/function (_UnimplementedExpress2) {
   _inherits(IncludeDef, _UnimplementedExpress2);
 
   var _super2 = _createSuper(IncludeDef);
@@ -6931,7 +6691,7 @@ module.exports.IncludeDef = IncludeDef = /*#__PURE__*/function (_UnimplementedEx
   return IncludeDef;
 }(UnimplementedExpression);
 
-module.exports.VersionedIdentifier = VersionedIdentifier = /*#__PURE__*/function (_UnimplementedExpress3) {
+var VersionedIdentifier = /*#__PURE__*/function (_UnimplementedExpress3) {
   _inherits(VersionedIdentifier, _UnimplementedExpress3);
 
   var _super3 = _createSuper(VersionedIdentifier);
@@ -6944,6 +6704,12 @@ module.exports.VersionedIdentifier = VersionedIdentifier = /*#__PURE__*/function
 
   return VersionedIdentifier;
 }(UnimplementedExpression);
+
+module.exports = {
+  UsingDef: UsingDef,
+  IncludeDef: IncludeDef,
+  VersionedIdentifier: VersionedIdentifier
+};
 },{"./expression":22}],22:[function(require,module,exports){
 "use strict";
 
@@ -6969,31 +6735,13 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-/* eslint-disable
-    constructor-super,
-    no-constant-condition,
-    no-this-before-super,
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS001: Remove Babel/TypeScript constructor workaround
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Expression, UnimplementedExpression;
-
 var _require = require('./builder'),
     build = _require.build;
 
 var _require2 = require('../util/util'),
     typeIsArray = _require2.typeIsArray;
 
-module.exports.Expression = Expression = /*#__PURE__*/function () {
+var Expression = /*#__PURE__*/function () {
   function Expression(json) {
     _classCallCheck(this, Expression);
 
@@ -7050,7 +6798,7 @@ module.exports.Expression = Expression = /*#__PURE__*/function () {
   return Expression;
 }();
 
-module.exports.UnimplementedExpression = UnimplementedExpression = /*#__PURE__*/function (_Expression) {
+var UnimplementedExpression = /*#__PURE__*/function (_Expression) {
   _inherits(UnimplementedExpression, _Expression);
 
   var _super = _createSuper(UnimplementedExpression);
@@ -7074,11 +6822,14 @@ module.exports.UnimplementedExpression = UnimplementedExpression = /*#__PURE__*/
 
   return UnimplementedExpression;
 }(Expression);
+
+module.exports = {
+  Expression: Expression,
+  UnimplementedExpression: UnimplementedExpression
+};
 },{"../util/util":47,"./builder":16}],23:[function(require,module,exports){
 "use strict";
 
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
 var expression = require('./expression');
 
 var aggregate = require('./aggregate');
@@ -7142,12 +6893,6 @@ for (var _i = 0, _libs = libs; _i < _libs.length; _i++) {
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -7168,21 +6913,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Retrieve;
-
 var _require = require('./expression'),
     Expression = _require.Expression;
 
@@ -7192,7 +6922,7 @@ var _require2 = require('./builder'),
 var _require3 = require('../util/util'),
     typeIsArray = _require3.typeIsArray;
 
-module.exports.Retrieve = Retrieve = /*#__PURE__*/function (_Expression) {
+var Retrieve = /*#__PURE__*/function (_Expression) {
   _inherits(Retrieve, _Expression);
 
   var _super = _createSuper(Retrieve);
@@ -7202,7 +6932,7 @@ module.exports.Retrieve = Retrieve = /*#__PURE__*/function (_Expression) {
 
     _classCallCheck(this, Retrieve);
 
-    _this = _super.apply(this, arguments);
+    _this = _super.call(this, json);
     _this.datatype = json.dataType;
     _this.templateId = json.templateId;
     _this.codeProperty = json.codeProperty;
@@ -7217,7 +6947,6 @@ module.exports.Retrieve = Retrieve = /*#__PURE__*/function (_Expression) {
     value: function exec(ctx) {
       var _this2 = this;
 
-      var r;
       var records = ctx.findRecords(this.templateId != null ? this.templateId : this.datatype);
       var codes = this.codes;
 
@@ -7238,29 +6967,9 @@ module.exports.Retrieve = Retrieve = /*#__PURE__*/function (_Expression) {
 
       if (this.dateRange && this.dateProperty) {
         var range = this.dateRange.execute(ctx);
-
-        records = function () {
-          var result = [];
-
-          var _iterator = _createForOfIteratorHelper(records),
-              _step;
-
-          try {
-            for (_iterator.s(); !(_step = _iterator.n()).done;) {
-              r = _step.value;
-
-              if (range.includes(r.getDateOrInterval(_this2.dateProperty))) {
-                result.push(r);
-              }
-            }
-          } catch (err) {
-            _iterator.e(err);
-          } finally {
-            _iterator.f();
-          }
-
-          return result;
-        }();
+        records = records.filter(function (r) {
+          return range.includes(r.getDateOrInterval(_this2.dateProperty));
+        });
       }
 
       return records;
@@ -7282,6 +6991,10 @@ module.exports.Retrieve = Retrieve = /*#__PURE__*/function (_Expression) {
 
   return Retrieve;
 }(Expression);
+
+module.exports = {
+  Retrieve: Retrieve
+};
 },{"../util/util":47,"./builder":16,"./expression":22}],25:[function(require,module,exports){
 "use strict";
 
@@ -7312,20 +7025,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Instance;
 
 var _require = require('./expression'),
     Expression = _require.Expression;
@@ -7358,7 +7057,7 @@ var Element = /*#__PURE__*/function () {
   return Element;
 }();
 
-module.exports.Instance = Instance = /*#__PURE__*/function (_Expression) {
+var Instance = /*#__PURE__*/function (_Expression) {
   _inherits(Instance, _Expression);
 
   var _super = _createSuper(Instance);
@@ -7368,7 +7067,7 @@ module.exports.Instance = Instance = /*#__PURE__*/function (_Expression) {
 
     _classCallCheck(this, Instance);
 
-    _this = _super.apply(this, arguments);
+    _this = _super.call(this, json);
     _this.classType = json.classType;
     _this.element = json.element.map(function (child) {
       return new Element(child);
@@ -7413,10 +7112,12 @@ module.exports.Instance = Instance = /*#__PURE__*/function (_Expression) {
 
   return Instance;
 }(Expression);
+
+module.exports = {
+  Instance: Instance
+};
 },{"../datatypes/datatypes":6,"../datatypes/quantity":11,"./builder":16,"./expression":22}],26:[function(require,module,exports){
 "use strict";
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -7440,6 +7141,8 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -7460,128 +7163,89 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-constant-condition,
-    no-unused-vars,
-    no-useless-escape,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS103: Rewrite code to no longer use __guard__
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Collapse, doIncludes, End, Ends, Expand, Interval, Meets, MeetsAfter, MeetsBefore, Overlaps, OverlapsAfter, OverlapsBefore, Size, Start, Starts, Width;
-
 var _require = require('./expression'),
-    Expression = _require.Expression,
-    UnimplementedExpression = _require.UnimplementedExpression;
+    Expression = _require.Expression;
 
-var _require2 = require('../datatypes/logic'),
-    ThreeValuedLogic = _require2.ThreeValuedLogic;
+var _require2 = require('./builder'),
+    build = _require2.build;
 
-var _require3 = require('./builder'),
-    build = _require3.build;
+var _require3 = require('../datatypes/quantity'),
+    Quantity = _require3.Quantity,
+    doAddition = _require3.doAddition,
+    compare_units = _require3.compare_units,
+    convert_value = _require3.convert_value;
 
-var _require4 = require('../datatypes/quantity'),
-    Quantity = _require4.Quantity,
-    doAddition = _require4.doAddition,
-    doSubtraction = _require4.doSubtraction,
-    compare_units = _require4.compare_units,
-    convert_value = _require4.convert_value;
-
-var _require5 = require('../util/math'),
-    successor = _require5.successor,
-    predecessor = _require5.predecessor,
-    MAX_DATETIME_VALUE = _require5.MAX_DATETIME_VALUE,
-    MIN_DATETIME_VALUE = _require5.MIN_DATETIME_VALUE;
+var _require4 = require('../util/math'),
+    successor = _require4.successor,
+    predecessor = _require4.predecessor,
+    MAX_DATETIME_VALUE = _require4.MAX_DATETIME_VALUE,
+    MIN_DATETIME_VALUE = _require4.MIN_DATETIME_VALUE;
 
 var dtivl = require('../datatypes/interval');
 
-var cmp = require('../util/comparison');
+var Interval = /*#__PURE__*/function (_Expression) {
+  _inherits(Interval, _Expression);
 
-module.exports.Interval = Interval = function () {
-  Interval = /*#__PURE__*/function (_Expression) {
-    _inherits(Interval, _Expression);
+  var _super = _createSuper(Interval);
 
-    var _super = _createSuper(Interval);
+  function Interval(json) {
+    var _this;
 
-    _createClass(Interval, null, [{
-      key: "initClass",
-      value: function initClass() {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        Object.defineProperties(this.prototype, {
-          isInterval: {
-            get: function get() {
-              return true;
-            }
-          }
-        });
-      }
-    }]);
+    _classCallCheck(this, Interval);
 
-    function Interval(json) {
-      var _this;
+    _this = _super.call(this, json);
+    _this.lowClosed = json.lowClosed;
+    _this.highClosed = json.highClosed;
+    _this.low = build(json.low);
+    _this.high = build(json.high);
+    return _this;
+  } // Define a simple getter to allow type-checking of this class without instanceof
+  // and in a way that survives minification (as opposed to checking constructor.name)
 
-      _classCallCheck(this, Interval);
 
-      _this = _super.apply(this, arguments);
-      _this.lowClosed = json.lowClosed;
-      _this.highClosed = json.highClosed;
-      _this.low = build(json.low);
-      _this.high = build(json.high);
-      return _this;
+  _createClass(Interval, [{
+    key: "exec",
+    value: function exec(ctx) {
+      return new dtivl.Interval(this.low.execute(ctx), this.high.execute(ctx), this.lowClosed, this.highClosed);
     }
+  }, {
+    key: "isInterval",
+    get: function get() {
+      return true;
+    }
+  }]);
 
-    _createClass(Interval, [{
-      key: "exec",
-      value: function exec(ctx) {
-        return new dtivl.Interval(this.low.execute(ctx), this.high.execute(ctx), this.lowClosed, this.highClosed);
-      }
-    }]);
-
-    return Interval;
-  }(Expression);
-
-  Interval.initClass();
   return Interval;
-}(); // Equal is completely handled by overloaded#Equal
+}(Expression); // Equal is completely handled by overloaded#Equal
 // NotEqual is completely handled by overloaded#Equal
 // Delegated to by overloaded#Contains and overloaded#In
 
 
-module.exports.doContains = function (interval, item, precision) {
+function doContains(interval, item, precision) {
   return interval.contains(item, precision);
-}; // Delegated to by overloaded#Includes and overloaded#IncludedIn
+} // Delegated to by overloaded#Includes and overloaded#IncludedIn
 
 
-module.exports.doIncludes = doIncludes = function doIncludes(interval, subinterval, precision) {
+function doIncludes(interval, subinterval, precision) {
   return interval.includes(subinterval, precision);
-}; // Delegated to by overloaded#ProperIncludes and overloaded@ProperIncludedIn
+} // Delegated to by overloaded#ProperIncludes and overloaded@ProperIncludedIn
 
 
-module.exports.doProperIncludes = function (interval, subinterval, precision) {
+function doProperIncludes(interval, subinterval, precision) {
   return interval.properlyIncludes(subinterval, precision);
-}; // Delegated to by overloaded#After
+} // Delegated to by overloaded#After
 
 
-module.exports.doAfter = function (a, b, precision) {
+function doAfter(a, b, precision) {
   return a.after(b, precision);
-}; // Delegated to by overloaded#Before
+} // Delegated to by overloaded#Before
 
 
-module.exports.doBefore = function (a, b, precision) {
+function doBefore(a, b, precision) {
   return a.before(b, precision);
-};
+}
 
-module.exports.Meets = Meets = /*#__PURE__*/function (_Expression2) {
+var Meets = /*#__PURE__*/function (_Expression2) {
   _inherits(Meets, _Expression2);
 
   var _super2 = _createSuper(Meets);
@@ -7591,7 +7255,7 @@ module.exports.Meets = Meets = /*#__PURE__*/function (_Expression2) {
 
     _classCallCheck(this, Meets);
 
-    _this2 = _super2.apply(this, arguments);
+    _this2 = _super2.call(this, json);
     _this2.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     return _this2;
   }
@@ -7599,10 +7263,10 @@ module.exports.Meets = Meets = /*#__PURE__*/function (_Expression2) {
   _createClass(Meets, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from = Array.from(this.execArgs(ctx)),
-          _Array$from2 = _slicedToArray(_Array$from, 2),
-          a = _Array$from2[0],
-          b = _Array$from2[1];
+      var _this$execArgs = this.execArgs(ctx),
+          _this$execArgs2 = _slicedToArray(_this$execArgs, 2),
+          a = _this$execArgs2[0],
+          b = _this$execArgs2[1];
 
       if (a != null && b != null) {
         return a.meets(b, this.precision);
@@ -7615,7 +7279,7 @@ module.exports.Meets = Meets = /*#__PURE__*/function (_Expression2) {
   return Meets;
 }(Expression);
 
-module.exports.MeetsAfter = MeetsAfter = /*#__PURE__*/function (_Expression3) {
+var MeetsAfter = /*#__PURE__*/function (_Expression3) {
   _inherits(MeetsAfter, _Expression3);
 
   var _super3 = _createSuper(MeetsAfter);
@@ -7625,7 +7289,7 @@ module.exports.MeetsAfter = MeetsAfter = /*#__PURE__*/function (_Expression3) {
 
     _classCallCheck(this, MeetsAfter);
 
-    _this3 = _super3.apply(this, arguments);
+    _this3 = _super3.call(this, json);
     _this3.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     return _this3;
   }
@@ -7633,10 +7297,10 @@ module.exports.MeetsAfter = MeetsAfter = /*#__PURE__*/function (_Expression3) {
   _createClass(MeetsAfter, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from3 = Array.from(this.execArgs(ctx)),
-          _Array$from4 = _slicedToArray(_Array$from3, 2),
-          a = _Array$from4[0],
-          b = _Array$from4[1];
+      var _this$execArgs3 = this.execArgs(ctx),
+          _this$execArgs4 = _slicedToArray(_this$execArgs3, 2),
+          a = _this$execArgs4[0],
+          b = _this$execArgs4[1];
 
       if (a != null && b != null) {
         return a.meetsAfter(b, this.precision);
@@ -7649,7 +7313,7 @@ module.exports.MeetsAfter = MeetsAfter = /*#__PURE__*/function (_Expression3) {
   return MeetsAfter;
 }(Expression);
 
-module.exports.MeetsBefore = MeetsBefore = /*#__PURE__*/function (_Expression4) {
+var MeetsBefore = /*#__PURE__*/function (_Expression4) {
   _inherits(MeetsBefore, _Expression4);
 
   var _super4 = _createSuper(MeetsBefore);
@@ -7659,7 +7323,7 @@ module.exports.MeetsBefore = MeetsBefore = /*#__PURE__*/function (_Expression4) 
 
     _classCallCheck(this, MeetsBefore);
 
-    _this4 = _super4.apply(this, arguments);
+    _this4 = _super4.call(this, json);
     _this4.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     return _this4;
   }
@@ -7667,10 +7331,10 @@ module.exports.MeetsBefore = MeetsBefore = /*#__PURE__*/function (_Expression4) 
   _createClass(MeetsBefore, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from5 = Array.from(this.execArgs(ctx)),
-          _Array$from6 = _slicedToArray(_Array$from5, 2),
-          a = _Array$from6[0],
-          b = _Array$from6[1];
+      var _this$execArgs5 = this.execArgs(ctx),
+          _this$execArgs6 = _slicedToArray(_this$execArgs5, 2),
+          a = _this$execArgs6[0],
+          b = _this$execArgs6[1];
 
       if (a != null && b != null) {
         return a.meetsBefore(b, this.precision);
@@ -7683,7 +7347,7 @@ module.exports.MeetsBefore = MeetsBefore = /*#__PURE__*/function (_Expression4) 
   return MeetsBefore;
 }(Expression);
 
-module.exports.Overlaps = Overlaps = /*#__PURE__*/function (_Expression5) {
+var Overlaps = /*#__PURE__*/function (_Expression5) {
   _inherits(Overlaps, _Expression5);
 
   var _super5 = _createSuper(Overlaps);
@@ -7693,7 +7357,7 @@ module.exports.Overlaps = Overlaps = /*#__PURE__*/function (_Expression5) {
 
     _classCallCheck(this, Overlaps);
 
-    _this5 = _super5.apply(this, arguments);
+    _this5 = _super5.call(this, json);
     _this5.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     return _this5;
   }
@@ -7701,10 +7365,10 @@ module.exports.Overlaps = Overlaps = /*#__PURE__*/function (_Expression5) {
   _createClass(Overlaps, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from7 = Array.from(this.execArgs(ctx)),
-          _Array$from8 = _slicedToArray(_Array$from7, 2),
-          a = _Array$from8[0],
-          b = _Array$from8[1];
+      var _this$execArgs7 = this.execArgs(ctx),
+          _this$execArgs8 = _slicedToArray(_this$execArgs7, 2),
+          a = _this$execArgs8[0],
+          b = _this$execArgs8[1];
 
       if (a != null && b != null) {
         return a.overlaps(b, this.precision);
@@ -7717,7 +7381,7 @@ module.exports.Overlaps = Overlaps = /*#__PURE__*/function (_Expression5) {
   return Overlaps;
 }(Expression);
 
-module.exports.OverlapsAfter = OverlapsAfter = /*#__PURE__*/function (_Expression6) {
+var OverlapsAfter = /*#__PURE__*/function (_Expression6) {
   _inherits(OverlapsAfter, _Expression6);
 
   var _super6 = _createSuper(OverlapsAfter);
@@ -7727,7 +7391,7 @@ module.exports.OverlapsAfter = OverlapsAfter = /*#__PURE__*/function (_Expressio
 
     _classCallCheck(this, OverlapsAfter);
 
-    _this6 = _super6.apply(this, arguments);
+    _this6 = _super6.call(this, json);
     _this6.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     return _this6;
   }
@@ -7735,10 +7399,10 @@ module.exports.OverlapsAfter = OverlapsAfter = /*#__PURE__*/function (_Expressio
   _createClass(OverlapsAfter, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from9 = Array.from(this.execArgs(ctx)),
-          _Array$from10 = _slicedToArray(_Array$from9, 2),
-          a = _Array$from10[0],
-          b = _Array$from10[1];
+      var _this$execArgs9 = this.execArgs(ctx),
+          _this$execArgs10 = _slicedToArray(_this$execArgs9, 2),
+          a = _this$execArgs10[0],
+          b = _this$execArgs10[1];
 
       if (a != null && b != null) {
         return a.overlapsAfter(b, this.precision);
@@ -7751,7 +7415,7 @@ module.exports.OverlapsAfter = OverlapsAfter = /*#__PURE__*/function (_Expressio
   return OverlapsAfter;
 }(Expression);
 
-module.exports.OverlapsBefore = OverlapsBefore = /*#__PURE__*/function (_Expression7) {
+var OverlapsBefore = /*#__PURE__*/function (_Expression7) {
   _inherits(OverlapsBefore, _Expression7);
 
   var _super7 = _createSuper(OverlapsBefore);
@@ -7761,7 +7425,7 @@ module.exports.OverlapsBefore = OverlapsBefore = /*#__PURE__*/function (_Express
 
     _classCallCheck(this, OverlapsBefore);
 
-    _this7 = _super7.apply(this, arguments);
+    _this7 = _super7.call(this, json);
     _this7.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     return _this7;
   }
@@ -7769,10 +7433,10 @@ module.exports.OverlapsBefore = OverlapsBefore = /*#__PURE__*/function (_Express
   _createClass(OverlapsBefore, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from11 = Array.from(this.execArgs(ctx)),
-          _Array$from12 = _slicedToArray(_Array$from11, 2),
-          a = _Array$from12[0],
-          b = _Array$from12[1];
+      var _this$execArgs11 = this.execArgs(ctx),
+          _this$execArgs12 = _slicedToArray(_this$execArgs11, 2),
+          a = _this$execArgs12[0],
+          b = _this$execArgs12[1];
 
       if (a != null && b != null) {
         return a.overlapsBefore(b, this.precision);
@@ -7786,29 +7450,29 @@ module.exports.OverlapsBefore = OverlapsBefore = /*#__PURE__*/function (_Express
 }(Expression); // Delegated to by overloaded#Union
 
 
-module.exports.doUnion = function (a, b) {
+function doUnion(a, b) {
   return a.union(b);
-}; // Delegated to by overloaded#Except
+} // Delegated to by overloaded#Except
 
 
-module.exports.doExcept = function (a, b) {
+function doExcept(a, b) {
   if (a != null && b != null) {
     return a.except(b);
   } else {
     return null;
   }
-}; // Delegated to by overloaded#Intersect
+} // Delegated to by overloaded#Intersect
 
 
-module.exports.doIntersect = function (a, b) {
+function doIntersect(a, b) {
   if (a != null && b != null) {
     return a.intersect(b);
   } else {
     return null;
   }
-};
+}
 
-module.exports.Width = Width = /*#__PURE__*/function (_Expression8) {
+var Width = /*#__PURE__*/function (_Expression8) {
   _inherits(Width, _Expression8);
 
   var _super8 = _createSuper(Width);
@@ -7816,22 +7480,26 @@ module.exports.Width = Width = /*#__PURE__*/function (_Expression8) {
   function Width(json) {
     _classCallCheck(this, Width);
 
-    return _super8.apply(this, arguments);
+    return _super8.call(this, json);
   }
 
   _createClass(Width, [{
     key: "exec",
     value: function exec(ctx) {
-      return __guard__(this.arg.execute(ctx), function (x) {
-        return x.width();
-      });
+      var interval = this.arg.execute(ctx);
+
+      if (interval == null) {
+        return null;
+      }
+
+      return interval.width();
     }
   }]);
 
   return Width;
 }(Expression);
 
-module.exports.Size = Size = /*#__PURE__*/function (_Expression9) {
+var Size = /*#__PURE__*/function (_Expression9) {
   _inherits(Size, _Expression9);
 
   var _super9 = _createSuper(Size);
@@ -7839,7 +7507,7 @@ module.exports.Size = Size = /*#__PURE__*/function (_Expression9) {
   function Size(json) {
     _classCallCheck(this, Size);
 
-    return _super9.apply(this, arguments);
+    return _super9.call(this, json);
   }
 
   _createClass(Size, [{
@@ -7858,7 +7526,7 @@ module.exports.Size = Size = /*#__PURE__*/function (_Expression9) {
   return Size;
 }(Expression);
 
-module.exports.Start = Start = /*#__PURE__*/function (_Expression10) {
+var Start = /*#__PURE__*/function (_Expression10) {
   _inherits(Start, _Expression10);
 
   var _super10 = _createSuper(Start);
@@ -7866,7 +7534,7 @@ module.exports.Start = Start = /*#__PURE__*/function (_Expression10) {
   function Start(json) {
     _classCallCheck(this, Start);
 
-    return _super10.apply(this, arguments);
+    return _super10.call(this, json);
   }
 
   _createClass(Start, [{
@@ -7880,7 +7548,7 @@ module.exports.Start = Start = /*#__PURE__*/function (_Expression10) {
 
       var start = interval.start(); // fix the timezoneOffset of minimum Datetime to match context offset
 
-      if ((start != null ? start.isDateTime : undefined) && start.equals(MIN_DATETIME_VALUE)) {
+      if (start && start.isDateTime && start.equals(MIN_DATETIME_VALUE)) {
         start.timezoneOffset = ctx.getTimezoneOffset();
       }
 
@@ -7891,7 +7559,7 @@ module.exports.Start = Start = /*#__PURE__*/function (_Expression10) {
   return Start;
 }(Expression);
 
-module.exports.End = End = /*#__PURE__*/function (_Expression11) {
+var End = /*#__PURE__*/function (_Expression11) {
   _inherits(End, _Expression11);
 
   var _super11 = _createSuper(End);
@@ -7899,7 +7567,7 @@ module.exports.End = End = /*#__PURE__*/function (_Expression11) {
   function End(json) {
     _classCallCheck(this, End);
 
-    return _super11.apply(this, arguments);
+    return _super11.call(this, json);
   }
 
   _createClass(End, [{
@@ -7913,7 +7581,7 @@ module.exports.End = End = /*#__PURE__*/function (_Expression11) {
 
       var end = interval.end(); // fix the timezoneOffset of maximum Datetime to match context offset
 
-      if ((end != null ? end.isDateTime : undefined) && end.equals(MAX_DATETIME_VALUE)) {
+      if (end && end.isDateTime && end.equals(MAX_DATETIME_VALUE)) {
         end.timezoneOffset = ctx.getTimezoneOffset();
       }
 
@@ -7924,7 +7592,7 @@ module.exports.End = End = /*#__PURE__*/function (_Expression11) {
   return End;
 }(Expression);
 
-module.exports.Starts = Starts = /*#__PURE__*/function (_Expression12) {
+var Starts = /*#__PURE__*/function (_Expression12) {
   _inherits(Starts, _Expression12);
 
   var _super12 = _createSuper(Starts);
@@ -7934,7 +7602,7 @@ module.exports.Starts = Starts = /*#__PURE__*/function (_Expression12) {
 
     _classCallCheck(this, Starts);
 
-    _this8 = _super12.apply(this, arguments);
+    _this8 = _super12.call(this, json);
     _this8.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     return _this8;
   }
@@ -7942,10 +7610,10 @@ module.exports.Starts = Starts = /*#__PURE__*/function (_Expression12) {
   _createClass(Starts, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from13 = Array.from(this.execArgs(ctx)),
-          _Array$from14 = _slicedToArray(_Array$from13, 2),
-          a = _Array$from14[0],
-          b = _Array$from14[1];
+      var _this$execArgs13 = this.execArgs(ctx),
+          _this$execArgs14 = _slicedToArray(_this$execArgs13, 2),
+          a = _this$execArgs14[0],
+          b = _this$execArgs14[1];
 
       if (a != null && b != null) {
         return a.starts(b, this.precision);
@@ -7958,7 +7626,7 @@ module.exports.Starts = Starts = /*#__PURE__*/function (_Expression12) {
   return Starts;
 }(Expression);
 
-module.exports.Ends = Ends = /*#__PURE__*/function (_Expression13) {
+var Ends = /*#__PURE__*/function (_Expression13) {
   _inherits(Ends, _Expression13);
 
   var _super13 = _createSuper(Ends);
@@ -7968,7 +7636,7 @@ module.exports.Ends = Ends = /*#__PURE__*/function (_Expression13) {
 
     _classCallCheck(this, Ends);
 
-    _this9 = _super13.apply(this, arguments);
+    _this9 = _super13.call(this, json);
     _this9.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     return _this9;
   }
@@ -7976,10 +7644,10 @@ module.exports.Ends = Ends = /*#__PURE__*/function (_Expression13) {
   _createClass(Ends, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from15 = Array.from(this.execArgs(ctx)),
-          _Array$from16 = _slicedToArray(_Array$from15, 2),
-          a = _Array$from16[0],
-          b = _Array$from16[1];
+      var _this$execArgs15 = this.execArgs(ctx),
+          _this$execArgs16 = _slicedToArray(_this$execArgs15, 2),
+          a = _this$execArgs16[0],
+          b = _this$execArgs16[1];
 
       if (a != null && b != null) {
         return a.ends(b, this.precision);
@@ -7992,7 +7660,7 @@ module.exports.Ends = Ends = /*#__PURE__*/function (_Expression13) {
   return Ends;
 }(Expression);
 
-var intervalListType = function intervalListType(intervals) {
+function intervalListType(intervals) {
   // Returns one of null, 'time', 'date', 'datetime', 'quantity', 'integer', 'decimal' or 'mismatch'
   var type = null;
 
@@ -8016,7 +7684,7 @@ var intervalListType = function intervalListType(intervals) {
       var low = itvl.low != null ? itvl.low : itvl.high;
       var high = itvl.high != null ? itvl.high : itvl.low;
 
-      if ((typeof low.isTime === 'function' ? low.isTime() : undefined) && (typeof high.isTime === 'function' ? high.isTime() : undefined)) {
+      if (typeof low.isTime === 'function' && low.isTime() && typeof high.isTime === 'function' && high.isTime()) {
         if (type == null) {
           type = 'time';
         } else if (type === 'time') {
@@ -8036,7 +7704,7 @@ var intervalListType = function intervalListType(intervals) {
       } else if (low.isDate && high.isDate) {
         if (type == null) {
           type = 'date';
-        } else if (type === 'date' || 'datetime') {
+        } else if (type === 'date' || type === 'datetime') {
           continue;
         } else {
           return 'mismatch';
@@ -8052,7 +7720,7 @@ var intervalListType = function intervalListType(intervals) {
       } else if (Number.isInteger(low) && Number.isInteger(high)) {
         if (type == null) {
           type = 'integer';
-        } else if (type === 'integer' || 'decimal') {
+        } else if (type === 'integer' || type === 'decimal') {
           continue;
         } else {
           return 'mismatch';
@@ -8077,9 +7745,9 @@ var intervalListType = function intervalListType(intervals) {
   }
 
   return type;
-};
+}
 
-module.exports.Expand = Expand = /*#__PURE__*/function (_Expression14) {
+var Expand = /*#__PURE__*/function (_Expression14) {
   _inherits(Expand, _Expression14);
 
   var _super14 = _createSuper(Expand);
@@ -8087,7 +7755,7 @@ module.exports.Expand = Expand = /*#__PURE__*/function (_Expression14) {
   function Expand(json) {
     _classCallCheck(this, Expand);
 
-    return _super14.apply(this, arguments);
+    return _super14.call(this, json);
   }
 
   _createClass(Expand, [{
@@ -8096,10 +7764,10 @@ module.exports.Expand = Expand = /*#__PURE__*/function (_Expression14) {
       // expand(argument List<Interval<T>>, per Quantity) List<Interval<T>>
       var defaultPer, expandFunction;
 
-      var _Array$from17 = Array.from(this.execArgs(ctx)),
-          _Array$from18 = _slicedToArray(_Array$from17, 2),
-          intervals = _Array$from18[0],
-          per = _Array$from18[1];
+      var _this$execArgs17 = this.execArgs(ctx),
+          _this$execArgs18 = _slicedToArray(_this$execArgs17, 2),
+          intervals = _this$execArgs18[0],
+          per = _this$execArgs18[1];
 
       var type = intervalListType(intervals);
 
@@ -8171,7 +7839,7 @@ module.exports.Expand = Expand = /*#__PURE__*/function (_Expression14) {
             return null;
           }
 
-          results.push.apply(results, _toConsumableArray(Array.from(items || [])));
+          results.push.apply(results, _toConsumableArray(items || []));
         }
       } catch (err) {
         _iterator2.e(err);
@@ -8361,7 +8029,7 @@ module.exports.Expand = Expand = /*#__PURE__*/function (_Expression14) {
   return Expand;
 }(Expression);
 
-module.exports.Collapse = Collapse = /*#__PURE__*/function (_Expression15) {
+var Collapse = /*#__PURE__*/function (_Expression15) {
   _inherits(Collapse, _Expression15);
 
   var _super15 = _createSuper(Collapse);
@@ -8369,17 +8037,17 @@ module.exports.Collapse = Collapse = /*#__PURE__*/function (_Expression15) {
   function Collapse(json) {
     _classCallCheck(this, Collapse);
 
-    return _super15.apply(this, arguments);
+    return _super15.call(this, json);
   }
 
   _createClass(Collapse, [{
     key: "exec",
     value: function exec(ctx) {
       // collapse(argument List<Interval<T>>, per Quantity) List<Interval<T>>
-      var _Array$from19 = Array.from(this.execArgs(ctx)),
-          _Array$from20 = _slicedToArray(_Array$from19, 2),
-          intervals = _Array$from20[0],
-          perWidth = _Array$from20[1];
+      var _this$execArgs19 = this.execArgs(ctx),
+          _this$execArgs20 = _slicedToArray(_this$execArgs19, 2),
+          intervals = _this$execArgs20[0],
+          perWidth = _this$execArgs20[1];
 
       return collapseIntervals(intervals, perWidth);
     }
@@ -8388,7 +8056,7 @@ module.exports.Collapse = Collapse = /*#__PURE__*/function (_Expression15) {
   return Collapse;
 }(Expression);
 
-var collapseIntervals = function collapseIntervals(intervals, perWidth) {
+function collapseIntervals(intervals, perWidth) {
   // Clone intervals so this function remains idempotent
   var intervalsClone = [];
 
@@ -8413,7 +8081,7 @@ var collapseIntervals = function collapseIntervals(intervals, perWidth) {
 
   if (intervals == null) {
     return null;
-  } else if ((intervalsClone != null ? intervalsClone.length : undefined) <= 1) {
+  } else if (intervalsClone.length <= 1) {
     return intervalsClone;
   } else {
     // If the per argument is null, the default unit interval for the point type
@@ -8425,7 +8093,7 @@ var collapseIntervals = function collapseIntervals(intervals, perWidth) {
 
 
     intervalsClone.sort(function (a, b) {
-      if (typeof (a.low != null ? a.low.before : undefined) === 'function') {
+      if (a.low && typeof a.low.before === 'function') {
         if (b.low != null && a.low.before(b.low)) {
           return -1;
         }
@@ -8448,7 +8116,7 @@ var collapseIntervals = function collapseIntervals(intervals, perWidth) {
       } // if both lows are undefined, sort by high
 
 
-      if (typeof (a.high != null ? a.high.before : undefined) === 'function') {
+      if (a.high && typeof a.high.before === 'function') {
         if (b.high == null || a.high.before(b.high)) {
           return -1;
         }
@@ -8478,7 +8146,7 @@ var collapseIntervals = function collapseIntervals(intervals, perWidth) {
     var b = intervalsClone.shift();
 
     while (b) {
-      if (typeof (b.low != null ? b.low.durationBetween : undefined) === 'function') {
+      if (b.low && typeof b.low.durationBetween === 'function') {
         // handle DateTimes using durationBetween
         if (a.high != null ? a.high.sameOrAfter(b.low) : undefined) {
           // overlap
@@ -8491,7 +8159,7 @@ var collapseIntervals = function collapseIntervals(intervals, perWidth) {
           collapsedIntervals.push(a);
           a = b;
         }
-      } else if (typeof (b.low != null ? b.low.sameOrBefore : undefined) === 'function') {
+      } else if (b.low && typeof b.low.sameOrBefore === 'function') {
         if (a.high != null && b.low.sameOrBefore(doAddition(a.high, perWidth))) {
           if (b.high == null || b.high.after(a.high)) {
             a.high = b.high;
@@ -8517,19 +8185,41 @@ var collapseIntervals = function collapseIntervals(intervals, perWidth) {
     collapsedIntervals.push(a);
     return collapsedIntervals;
   }
-};
+}
 
-var truncateDecimal = function truncateDecimal(decimal, decimalPlaces) {
+function truncateDecimal(decimal, decimalPlaces) {
   // like parseFloat().toFixed() but floor rather than round
   // Needed for when per precision is less than the interval input precision
   var re = new RegExp('^-?\\d+(?:.\\d{0,' + (decimalPlaces || -1) + '})?');
   return parseFloat(decimal.toString().match(re)[0]);
-};
-
-function __guard__(value, transform) {
-  return typeof value !== 'undefined' && value !== null ? transform(value) : undefined;
 }
-},{"../datatypes/interval":9,"../datatypes/logic":10,"../datatypes/quantity":11,"../util/comparison":45,"../util/math":46,"./builder":16,"./expression":22}],27:[function(require,module,exports){
+
+module.exports = {
+  Collapse: Collapse,
+  End: End,
+  Ends: Ends,
+  Expand: Expand,
+  Interval: Interval,
+  Meets: Meets,
+  MeetsAfter: MeetsAfter,
+  MeetsBefore: MeetsBefore,
+  Overlaps: Overlaps,
+  OverlapsAfter: OverlapsAfter,
+  OverlapsBefore: OverlapsBefore,
+  Size: Size,
+  Start: Start,
+  Starts: Starts,
+  Width: Width,
+  doContains: doContains,
+  doIncludes: doIncludes,
+  doProperIncludes: doProperIncludes,
+  doAfter: doAfter,
+  doBefore: doBefore,
+  doUnion: doUnion,
+  doExcept: doExcept,
+  doIntersect: doIntersect
+};
+},{"../datatypes/interval":9,"../datatypes/quantity":11,"../util/math":46,"./builder":16,"./expression":22}],27:[function(require,module,exports){
 "use strict";
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
@@ -8544,161 +8234,148 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Library;
-
-module.exports.Library = Library = /*#__PURE__*/function () {
+var Library = /*#__PURE__*/function () {
   function Library(json, libraryManager) {
     _classCallCheck(this, Library);
 
-    var expr;
-    this.source = json;
-    this.usings = [];
+    this.source = json; // usings
 
-    var _iterator = _createForOfIteratorHelper((json.library.usings != null ? json.library.usings.def : undefined) != null ? json.library.usings != null ? json.library.usings.def : undefined : []),
+    var usingDefs = json.library.usings && json.library.usings.def || [];
+    this.usings = usingDefs.filter(function (u) {
+      return u.localIdentifier !== 'System';
+    }).map(function (u) {
+      return {
+        name: u.localIdentifier,
+        version: u.version
+      };
+    }); // parameters
+
+    var paramDefs = json.library.parameters && json.library.parameters.def || [];
+    this.parameters = {};
+
+    var _iterator = _createForOfIteratorHelper(paramDefs),
         _step;
 
     try {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var u = _step.value;
+        var param = _step.value;
+        this.parameters[param.name] = new ParameterDef(param);
+      } // code systems
 
-        if (u.localIdentifier !== 'System') {
-          this.usings.push({
-            name: u.localIdentifier,
-            version: u.version
-          });
-        }
-      }
     } catch (err) {
       _iterator.e(err);
     } finally {
       _iterator.f();
     }
 
-    this.parameters = {};
+    var csDefs = json.library.codeSystems && json.library.codeSystems.def || [];
+    this.codesystems = {};
 
-    var _iterator2 = _createForOfIteratorHelper((json.library.parameters != null ? json.library.parameters.def : undefined) != null ? json.library.parameters != null ? json.library.parameters.def : undefined : []),
+    var _iterator2 = _createForOfIteratorHelper(csDefs),
         _step2;
 
     try {
       for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-        var param = _step2.value;
-        this.parameters[param.name] = new ParameterDef(param);
-      }
+        var codesystem = _step2.value;
+        this.codesystems[codesystem.name] = new CodeSystemDef(codesystem);
+      } // value sets
+
     } catch (err) {
       _iterator2.e(err);
     } finally {
       _iterator2.f();
     }
 
-    this.codesystems = {};
+    var vsDefs = json.library.valueSets && json.library.valueSets.def || [];
+    this.valuesets = {};
 
-    var _iterator3 = _createForOfIteratorHelper((json.library.codeSystems != null ? json.library.codeSystems.def : undefined) != null ? json.library.codeSystems != null ? json.library.codeSystems.def : undefined : []),
+    var _iterator3 = _createForOfIteratorHelper(vsDefs),
         _step3;
 
     try {
       for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-        var codesystem = _step3.value;
-        this.codesystems[codesystem.name] = new CodeSystemDef(codesystem);
-      }
+        var valueset = _step3.value;
+        this.valuesets[valueset.name] = new ValueSetDef(valueset);
+      } // codes
+
     } catch (err) {
       _iterator3.e(err);
     } finally {
       _iterator3.f();
     }
 
-    this.valuesets = {};
+    var codeDefs = json.library.codes && json.library.codes.def || [];
+    this.codes = {};
 
-    var _iterator4 = _createForOfIteratorHelper((json.library.valueSets != null ? json.library.valueSets.def : undefined) != null ? json.library.valueSets != null ? json.library.valueSets.def : undefined : []),
+    var _iterator4 = _createForOfIteratorHelper(codeDefs),
         _step4;
 
     try {
       for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-        var valueset = _step4.value;
-        this.valuesets[valueset.name] = new ValueSetDef(valueset);
-      }
+        var code = _step4.value;
+        this.codes[code.name] = new CodeDef(code);
+      } // concepts
+
     } catch (err) {
       _iterator4.e(err);
     } finally {
       _iterator4.f();
     }
 
-    this.codes = {};
+    var conceptDefs = json.library.concepts && json.library.concepts.def || [];
+    this.concepts = {};
 
-    var _iterator5 = _createForOfIteratorHelper((json.library.codes != null ? json.library.codes.def : undefined) != null ? json.library.codes != null ? json.library.codes.def : undefined : []),
+    var _iterator5 = _createForOfIteratorHelper(conceptDefs),
         _step5;
 
     try {
       for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-        var code = _step5.value;
-        this.codes[code.name] = new CodeDef(code);
-      }
+        var concept = _step5.value;
+        this.concepts[concept.name] = new ConceptDef(concept);
+      } // expressions
+
     } catch (err) {
       _iterator5.e(err);
     } finally {
       _iterator5.f();
     }
 
-    this.concepts = {};
+    var exprDefs = json.library.statements && json.library.statements.def || [];
+    this.expressions = {};
 
-    var _iterator6 = _createForOfIteratorHelper((json.library.concepts != null ? json.library.concepts.def : undefined) != null ? json.library.concepts != null ? json.library.concepts.def : undefined : []),
+    var _iterator6 = _createForOfIteratorHelper(exprDefs),
         _step6;
 
     try {
       for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-        var concept = _step6.value;
-        this.concepts[concept.name] = new ConceptDef(concept);
-      }
+        var expr = _step6.value;
+        this.expressions[expr.name] = expr.type === 'FunctionDef' ? new FunctionDef(expr) : new ExpressionDef(expr);
+      } // includes
+
     } catch (err) {
       _iterator6.e(err);
     } finally {
       _iterator6.f();
     }
 
-    this.expressions = {};
+    var inclDefs = json.library.includes && json.library.includes.def || [];
+    this.includes = {};
 
-    var _iterator7 = _createForOfIteratorHelper((json.library.statements != null ? json.library.statements.def : undefined) != null ? json.library.statements != null ? json.library.statements.def : undefined : []),
+    var _iterator7 = _createForOfIteratorHelper(inclDefs),
         _step7;
 
     try {
       for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-        expr = _step7.value;
-        this.expressions[expr.name] = expr.type === 'FunctionDef' ? new FunctionDef(expr) : new ExpressionDef(expr);
+        var incl = _step7.value;
+
+        if (libraryManager) {
+          this.includes[incl.localIdentifier] = libraryManager.resolve(incl.path, incl.version);
+        }
       }
     } catch (err) {
       _iterator7.e(err);
     } finally {
       _iterator7.f();
-    }
-
-    this.includes = {};
-
-    var _iterator8 = _createForOfIteratorHelper((json.library.includes != null ? json.library.includes.def : undefined) != null ? json.library.includes != null ? json.library.includes.def : undefined : []),
-        _step8;
-
-    try {
-      for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-        expr = _step8.value;
-
-        if (libraryManager) {
-          this.includes[expr.localIdentifier] = libraryManager.resolve(expr.path, expr.version);
-        }
-      }
-    } catch (err) {
-      _iterator8.e(err);
-    } finally {
-      _iterator8.f();
     }
   }
 
@@ -8752,18 +8429,19 @@ var _require = require('./expressions'),
     CodeDef = _require.CodeDef,
     ConceptDef = _require.ConceptDef;
 
-var _require2 = require('../runtime/results'),
-    Results = _require2.Results;
-},{"../runtime/results":44,"./expressions":23}],28:[function(require,module,exports){
+module.exports = {
+  Library: Library
+};
+},{"./expressions":23}],28:[function(require,module,exports){
 "use strict";
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -8785,88 +8463,52 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS104: Avoid inline assignments
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Current, Distinct, doContains, doIncludes, Exists, Filter, First, Flatten, ForEach, IndexOf, Last, List, SingletonFrom, Times, ToList;
-
 var _require = require('./expression'),
     Expression = _require.Expression,
     UnimplementedExpression = _require.UnimplementedExpression;
 
-var _require2 = require('../datatypes/datatypes'),
-    ValueSet = _require2.ValueSet;
+var _require2 = require('./builder'),
+    build = _require2.build;
 
-var _require3 = require('./builder'),
-    build = _require3.build;
+var _require3 = require('../util/util'),
+    typeIsArray = _require3.typeIsArray;
 
-var _require4 = require('../util/util'),
-    typeIsArray = _require4.typeIsArray;
+var _require4 = require('../util/comparison'),
+    equals = _require4.equals;
 
-var _require5 = require('../util/comparison'),
-    equals = _require5.equals;
+var List = /*#__PURE__*/function (_Expression) {
+  _inherits(List, _Expression);
 
-module.exports.List = List = function () {
-  List = /*#__PURE__*/function (_Expression) {
-    _inherits(List, _Expression);
+  var _super = _createSuper(List);
 
-    var _super = _createSuper(List);
+  function List(json) {
+    var _this;
 
-    _createClass(List, null, [{
-      key: "initClass",
-      value: function initClass() {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        Object.defineProperties(this.prototype, {
-          isList: {
-            get: function get() {
-              return true;
-            }
-          }
-        });
-      }
-    }]);
+    _classCallCheck(this, List);
 
-    function List(json) {
-      var _this;
+    _this = _super.call(this, json);
+    _this.elements = build(json.element) || [];
+    return _this;
+  }
 
-      _classCallCheck(this, List);
-
-      var left;
-      _this = _super.apply(this, arguments);
-      _this.elements = (left = build(json.element)) != null ? left : [];
-      return _this;
+  _createClass(List, [{
+    key: "exec",
+    value: function exec(ctx) {
+      return this.elements.map(function (item) {
+        return item.execute(ctx);
+      });
     }
+  }, {
+    key: "isList",
+    get: function get() {
+      return true;
+    }
+  }]);
 
-    _createClass(List, [{
-      key: "exec",
-      value: function exec(ctx) {
-        return this.elements.map(function (item) {
-          return item.execute(ctx);
-        });
-      }
-    }]);
-
-    return List;
-  }(Expression);
-
-  List.initClass();
   return List;
-}();
+}(Expression);
 
-module.exports.Exists = Exists = /*#__PURE__*/function (_Expression2) {
+var Exists = /*#__PURE__*/function (_Expression2) {
   _inherits(Exists, _Expression2);
 
   var _super2 = _createSuper(Exists);
@@ -8874,7 +8516,7 @@ module.exports.Exists = Exists = /*#__PURE__*/function (_Expression2) {
   function Exists(json) {
     _classCallCheck(this, Exists);
 
-    return _super2.apply(this, arguments);
+    return _super2.call(this, json);
   }
 
   _createClass(Exists, [{
@@ -8882,24 +8524,10 @@ module.exports.Exists = Exists = /*#__PURE__*/function (_Expression2) {
     value: function exec(ctx) {
       var list = this.execArgs(ctx); // if list exists and has non empty length we need to make sure it isnt just full of nulls
 
-      if ((list != null ? list.length : undefined) > 0) {
-        var _iterator = _createForOfIteratorHelper(list),
-            _step;
-
-        try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var item = _step.value;
-
-            // return true if we found an item that isnt null.
-            if (item !== null) {
-              return true;
-            }
-          }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
-        }
+      if (list) {
+        return list.some(function (item) {
+          return item != null;
+        });
       }
 
       return false;
@@ -8912,69 +8540,31 @@ module.exports.Exists = Exists = /*#__PURE__*/function (_Expression2) {
 // Delegated to by overloaded#Union
 
 
-module.exports.doUnion = function (a, b) {
+function doUnion(a, b) {
   var distinct = doDistinct(a.concat(b));
   return removeDuplicateNulls(distinct);
-}; // Delegated to by overloaded#Except
+} // Delegated to by overloaded#Except
 
 
-module.exports.doExcept = function (a, b) {
+function doExcept(a, b) {
   var distinct = doDistinct(a);
   var setList = removeDuplicateNulls(distinct);
-  return function () {
-    var result = [];
-
-    var _iterator2 = _createForOfIteratorHelper(setList),
-        _step2;
-
-    try {
-      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-        var itm = _step2.value;
-
-        if (!doContains(b, itm)) {
-          result.push(itm);
-        }
-      }
-    } catch (err) {
-      _iterator2.e(err);
-    } finally {
-      _iterator2.f();
-    }
-
-    return result;
-  }();
-}; // Delegated to by overloaded#Intersect
+  return setList.filter(function (item) {
+    return !doContains(b, item);
+  });
+} // Delegated to by overloaded#Intersect
 
 
-module.exports.doIntersect = function (a, b) {
+function doIntersect(a, b) {
   var distinct = doDistinct(a);
   var setList = removeDuplicateNulls(distinct);
-  return function () {
-    var result = [];
-
-    var _iterator3 = _createForOfIteratorHelper(setList),
-        _step3;
-
-    try {
-      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-        var itm = _step3.value;
-
-        if (doContains(b, itm)) {
-          result.push(itm);
-        }
-      }
-    } catch (err) {
-      _iterator3.e(err);
-    } finally {
-      _iterator3.f();
-    }
-
-    return result;
-  }();
-}; // ELM-only, not a product of CQL
+  return setList.filter(function (item) {
+    return doContains(b, item);
+  });
+} // ELM-only, not a product of CQL
 
 
-module.exports.Times = Times = /*#__PURE__*/function (_UnimplementedExpress) {
+var Times = /*#__PURE__*/function (_UnimplementedExpress) {
   _inherits(Times, _UnimplementedExpress);
 
   var _super3 = _createSuper(Times);
@@ -8989,7 +8579,7 @@ module.exports.Times = Times = /*#__PURE__*/function (_UnimplementedExpress) {
 }(UnimplementedExpression); // ELM-only, not a product of CQL
 
 
-module.exports.Filter = Filter = /*#__PURE__*/function (_UnimplementedExpress2) {
+var Filter = /*#__PURE__*/function (_UnimplementedExpress2) {
   _inherits(Filter, _UnimplementedExpress2);
 
   var _super4 = _createSuper(Filter);
@@ -9003,7 +8593,7 @@ module.exports.Filter = Filter = /*#__PURE__*/function (_UnimplementedExpress2) 
   return Filter;
 }(UnimplementedExpression);
 
-module.exports.SingletonFrom = SingletonFrom = /*#__PURE__*/function (_Expression3) {
+var SingletonFrom = /*#__PURE__*/function (_Expression3) {
   _inherits(SingletonFrom, _Expression3);
 
   var _super5 = _createSuper(SingletonFrom);
@@ -9011,7 +8601,7 @@ module.exports.SingletonFrom = SingletonFrom = /*#__PURE__*/function (_Expressio
   function SingletonFrom(json) {
     _classCallCheck(this, SingletonFrom);
 
-    return _super5.apply(this, arguments);
+    return _super5.call(this, json);
   }
 
   _createClass(SingletonFrom, [{
@@ -9032,7 +8622,7 @@ module.exports.SingletonFrom = SingletonFrom = /*#__PURE__*/function (_Expressio
   return SingletonFrom;
 }(Expression);
 
-module.exports.ToList = ToList = /*#__PURE__*/function (_Expression4) {
+var ToList = /*#__PURE__*/function (_Expression4) {
   _inherits(ToList, _Expression4);
 
   var _super6 = _createSuper(ToList);
@@ -9040,7 +8630,7 @@ module.exports.ToList = ToList = /*#__PURE__*/function (_Expression4) {
   function ToList(json) {
     _classCallCheck(this, ToList);
 
-    return _super6.apply(this, arguments);
+    return _super6.call(this, json);
   }
 
   _createClass(ToList, [{
@@ -9059,7 +8649,7 @@ module.exports.ToList = ToList = /*#__PURE__*/function (_Expression4) {
   return ToList;
 }(Expression);
 
-module.exports.IndexOf = IndexOf = /*#__PURE__*/function (_Expression5) {
+var IndexOf = /*#__PURE__*/function (_Expression5) {
   _inherits(IndexOf, _Expression5);
 
   var _super7 = _createSuper(IndexOf);
@@ -9069,7 +8659,7 @@ module.exports.IndexOf = IndexOf = /*#__PURE__*/function (_Expression5) {
 
     _classCallCheck(this, IndexOf);
 
-    _this2 = _super7.apply(this, arguments);
+    _this2 = _super7.call(this, json);
     _this2.source = build(json.source);
     _this2.element = build(json.element);
     return _this2;
@@ -9108,41 +8698,26 @@ module.exports.IndexOf = IndexOf = /*#__PURE__*/function (_Expression5) {
 // Delegated to by overloaded#Contains and overloaded#In
 
 
-module.exports.doContains = doContains = function doContains(container, item) {
-  var _iterator4 = _createForOfIteratorHelper(container),
-      _step4;
-
-  try {
-    for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-      var element = _step4.value;
-
-      if (equals(element, item)) {
-        return true;
-      }
-    }
-  } catch (err) {
-    _iterator4.e(err);
-  } finally {
-    _iterator4.f();
-  }
-
-  return false;
-}; // Delegated to by overloaded#Includes and overloaded@IncludedIn
+function doContains(container, item) {
+  return container.some(function (element) {
+    return equals(element, item);
+  });
+} // Delegated to by overloaded#Includes and overloaded@IncludedIn
 
 
-module.exports.doIncludes = doIncludes = function doIncludes(list, sublist) {
+function doIncludes(list, sublist) {
   return sublist.every(function (x) {
     return doContains(list, x);
   });
-}; // Delegated to by overloaded#ProperIncludes and overloaded@ProperIncludedIn
+} // Delegated to by overloaded#ProperIncludes and overloaded@ProperIncludedIn
 
 
-module.exports.doProperIncludes = function (list, sublist) {
+function doProperIncludes(list, sublist) {
   return list.length > sublist.length && doIncludes(list, sublist);
-}; // ELM-only, not a product of CQL
+} // ELM-only, not a product of CQL
 
 
-module.exports.ForEach = ForEach = /*#__PURE__*/function (_UnimplementedExpress3) {
+var ForEach = /*#__PURE__*/function (_UnimplementedExpress3) {
   _inherits(ForEach, _UnimplementedExpress3);
 
   var _super8 = _createSuper(ForEach);
@@ -9156,7 +8731,7 @@ module.exports.ForEach = ForEach = /*#__PURE__*/function (_UnimplementedExpress3
   return ForEach;
 }(UnimplementedExpression);
 
-module.exports.Flatten = Flatten = /*#__PURE__*/function (_Expression6) {
+var Flatten = /*#__PURE__*/function (_Expression6) {
   _inherits(Flatten, _Expression6);
 
   var _super9 = _createSuper(Flatten);
@@ -9164,7 +8739,7 @@ module.exports.Flatten = Flatten = /*#__PURE__*/function (_Expression6) {
   function Flatten(json) {
     _classCallCheck(this, Flatten);
 
-    return _super9.apply(this, arguments);
+    return _super9.call(this, json);
   }
 
   _createClass(Flatten, [{
@@ -9187,7 +8762,7 @@ module.exports.Flatten = Flatten = /*#__PURE__*/function (_Expression6) {
   return Flatten;
 }(Expression);
 
-module.exports.Distinct = Distinct = /*#__PURE__*/function (_Expression7) {
+var Distinct = /*#__PURE__*/function (_Expression7) {
   _inherits(Distinct, _Expression7);
 
   var _super10 = _createSuper(Distinct);
@@ -9195,7 +8770,7 @@ module.exports.Distinct = Distinct = /*#__PURE__*/function (_Expression7) {
   function Distinct(json) {
     _classCallCheck(this, Distinct);
 
-    return _super10.apply(this, arguments);
+    return _super10.call(this, json);
   }
 
   _createClass(Distinct, [{
@@ -9214,9 +8789,9 @@ module.exports.Distinct = Distinct = /*#__PURE__*/function (_Expression7) {
   return Distinct;
 }(Expression);
 
-var doDistinct = function doDistinct(list) {
+function doDistinct(list) {
   var distinct = [];
-  list.filter(function (item) {
+  list.forEach(function (item) {
     var isNew = distinct.every(function (seenItem) {
       return !equals(item, seenItem);
     });
@@ -9224,44 +8799,40 @@ var doDistinct = function doDistinct(list) {
     if (isNew) {
       distinct.push(item);
     }
-
-    return isNew;
   });
   return distinct;
-};
+}
 
-var removeDuplicateNulls = function removeDuplicateNulls(list) {
+function removeDuplicateNulls(list) {
   // Remove duplicate null elements
   var firstNullFound = false;
   var setList = [];
 
-  var _iterator5 = _createForOfIteratorHelper(list),
-      _step5;
+  var _iterator = _createForOfIteratorHelper(list),
+      _step;
 
   try {
-    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-      var item = _step5.value;
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var item = _step.value;
 
       if (item !== null) {
         setList.push(item);
-      }
-
-      if (item === null && !firstNullFound) {
+      } else if (item === null && !firstNullFound) {
         setList.push(item);
         firstNullFound = true;
       }
     }
   } catch (err) {
-    _iterator5.e(err);
+    _iterator.e(err);
   } finally {
-    _iterator5.f();
+    _iterator.f();
   }
 
   return setList;
-}; // ELM-only, not a product of CQL
+} // ELM-only, not a product of CQL
 
 
-module.exports.Current = Current = /*#__PURE__*/function (_UnimplementedExpress4) {
+var Current = /*#__PURE__*/function (_UnimplementedExpress4) {
   _inherits(Current, _UnimplementedExpress4);
 
   var _super11 = _createSuper(Current);
@@ -9275,7 +8846,7 @@ module.exports.Current = Current = /*#__PURE__*/function (_UnimplementedExpress4
   return Current;
 }(UnimplementedExpression);
 
-module.exports.First = First = /*#__PURE__*/function (_Expression8) {
+var First = /*#__PURE__*/function (_Expression8) {
   _inherits(First, _Expression8);
 
   var _super12 = _createSuper(First);
@@ -9285,7 +8856,7 @@ module.exports.First = First = /*#__PURE__*/function (_Expression8) {
 
     _classCallCheck(this, First);
 
-    _this3 = _super12.apply(this, arguments);
+    _this3 = _super12.call(this, json);
     _this3.source = build(json.source);
     return _this3;
   }
@@ -9306,7 +8877,7 @@ module.exports.First = First = /*#__PURE__*/function (_Expression8) {
   return First;
 }(Expression);
 
-module.exports.Last = Last = /*#__PURE__*/function (_Expression9) {
+var Last = /*#__PURE__*/function (_Expression9) {
   _inherits(Last, _Expression9);
 
   var _super13 = _createSuper(Last);
@@ -9316,7 +8887,7 @@ module.exports.Last = Last = /*#__PURE__*/function (_Expression9) {
 
     _classCallCheck(this, Last);
 
-    _this4 = _super13.apply(this, arguments);
+    _this4 = _super13.call(this, json);
     _this4.source = build(json.source);
     return _this4;
   }
@@ -9336,7 +8907,30 @@ module.exports.Last = Last = /*#__PURE__*/function (_Expression9) {
 
   return Last;
 }(Expression); // Length is completely handled by overloaded#Length
-},{"../datatypes/datatypes":6,"../util/comparison":45,"../util/util":47,"./builder":16,"./expression":22}],29:[function(require,module,exports){
+
+
+module.exports = {
+  Current: Current,
+  Distinct: Distinct,
+  Exists: Exists,
+  Filter: Filter,
+  First: First,
+  Flatten: Flatten,
+  ForEach: ForEach,
+  IndexOf: IndexOf,
+  Last: Last,
+  List: List,
+  SingletonFrom: SingletonFrom,
+  Times: Times,
+  ToList: ToList,
+  doContains: doContains,
+  doIncludes: doIncludes,
+  doProperIncludes: doProperIncludes,
+  doUnion: doUnion,
+  doExcept: doExcept,
+  doIntersect: doIntersect
+};
+},{"../util/comparison":45,"../util/util":47,"./builder":16,"./expression":22}],29:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -9361,21 +8955,10 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var BooleanLiteral, DecimalLiteral, IntegerLiteral, Literal, StringLiteral;
-
 var _require = require('./expression'),
     Expression = _require.Expression;
 
-module.exports.Literal = Literal = /*#__PURE__*/function (_Expression) {
+var Literal = /*#__PURE__*/function (_Expression) {
   _inherits(Literal, _Expression);
 
   var _super = _createSuper(Literal);
@@ -9407,7 +8990,7 @@ module.exports.Literal = Literal = /*#__PURE__*/function (_Expression) {
 
     _classCallCheck(this, Literal);
 
-    _this = _super.apply(this, arguments);
+    _this = _super.call(this, json);
     _this.valueType = json.valueType;
     _this.value = json.value;
     return _this;
@@ -9424,182 +9007,138 @@ module.exports.Literal = Literal = /*#__PURE__*/function (_Expression) {
 }(Expression); // The following are not defined in ELM, but helpful for execution
 
 
-module.exports.BooleanLiteral = BooleanLiteral = function () {
-  BooleanLiteral = /*#__PURE__*/function (_Literal) {
-    _inherits(BooleanLiteral, _Literal);
+var BooleanLiteral = /*#__PURE__*/function (_Literal) {
+  _inherits(BooleanLiteral, _Literal);
 
-    var _super2 = _createSuper(BooleanLiteral);
+  var _super2 = _createSuper(BooleanLiteral);
 
-    _createClass(BooleanLiteral, null, [{
-      key: "initClass",
-      value: function initClass() {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        Object.defineProperties(this.prototype, {
-          isBooleanLiteral: {
-            get: function get() {
-              return true;
-            }
-          }
-        });
-      }
-    }]);
+  function BooleanLiteral(json) {
+    var _this2;
 
-    function BooleanLiteral(json) {
-      var _this2;
+    _classCallCheck(this, BooleanLiteral);
 
-      _classCallCheck(this, BooleanLiteral);
+    _this2 = _super2.call(this, json);
+    _this2.value = _this2.value === 'true';
+    return _this2;
+  } // Define a simple getter to allow type-checking of this class without instanceof
+  // and in a way that survives minification (as opposed to checking constructor.name)
 
-      _this2 = _super2.apply(this, arguments);
-      _this2.value = _this2.value === 'true';
-      return _this2;
+
+  _createClass(BooleanLiteral, [{
+    key: "exec",
+    value: function exec(ctx) {
+      return this.value;
     }
+  }, {
+    key: "isBooleanLiteral",
+    get: function get() {
+      return true;
+    }
+  }]);
 
-    _createClass(BooleanLiteral, [{
-      key: "exec",
-      value: function exec(ctx) {
-        return this.value;
-      }
-    }]);
-
-    return BooleanLiteral;
-  }(Literal);
-
-  BooleanLiteral.initClass();
   return BooleanLiteral;
-}();
+}(Literal);
 
-module.exports.IntegerLiteral = IntegerLiteral = function () {
-  IntegerLiteral = /*#__PURE__*/function (_Literal2) {
-    _inherits(IntegerLiteral, _Literal2);
+var IntegerLiteral = /*#__PURE__*/function (_Literal2) {
+  _inherits(IntegerLiteral, _Literal2);
 
-    var _super3 = _createSuper(IntegerLiteral);
+  var _super3 = _createSuper(IntegerLiteral);
 
-    _createClass(IntegerLiteral, null, [{
-      key: "initClass",
-      value: function initClass() {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        Object.defineProperties(this.prototype, {
-          isIntegerLiteral: {
-            get: function get() {
-              return true;
-            }
-          }
-        });
-      }
-    }]);
+  function IntegerLiteral(json) {
+    var _this3;
 
-    function IntegerLiteral(json) {
-      var _this3;
+    _classCallCheck(this, IntegerLiteral);
 
-      _classCallCheck(this, IntegerLiteral);
+    _this3 = _super3.call(this, json);
+    _this3.value = parseInt(_this3.value, 10);
+    return _this3;
+  } // Define a simple getter to allow type-checking of this class without instanceof
+  // and in a way that survives minification (as opposed to checking constructor.name)
 
-      _this3 = _super3.apply(this, arguments);
-      _this3.value = parseInt(_this3.value, 10);
-      return _this3;
+
+  _createClass(IntegerLiteral, [{
+    key: "exec",
+    value: function exec(ctx) {
+      return this.value;
     }
+  }, {
+    key: "isIntegerLiteral",
+    get: function get() {
+      return true;
+    }
+  }]);
 
-    _createClass(IntegerLiteral, [{
-      key: "exec",
-      value: function exec(ctx) {
-        return this.value;
-      }
-    }]);
-
-    return IntegerLiteral;
-  }(Literal);
-
-  IntegerLiteral.initClass();
   return IntegerLiteral;
-}();
+}(Literal);
 
-module.exports.DecimalLiteral = DecimalLiteral = function () {
-  DecimalLiteral = /*#__PURE__*/function (_Literal3) {
-    _inherits(DecimalLiteral, _Literal3);
+var DecimalLiteral = /*#__PURE__*/function (_Literal3) {
+  _inherits(DecimalLiteral, _Literal3);
 
-    var _super4 = _createSuper(DecimalLiteral);
+  var _super4 = _createSuper(DecimalLiteral);
 
-    _createClass(DecimalLiteral, null, [{
-      key: "initClass",
-      value: function initClass() {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        Object.defineProperties(this.prototype, {
-          isDecimalLiteral: {
-            get: function get() {
-              return true;
-            }
-          }
-        });
-      }
-    }]);
+  function DecimalLiteral(json) {
+    var _this4;
 
-    function DecimalLiteral(json) {
-      var _this4;
+    _classCallCheck(this, DecimalLiteral);
 
-      _classCallCheck(this, DecimalLiteral);
+    _this4 = _super4.call(this, json);
+    _this4.value = parseFloat(_this4.value);
+    return _this4;
+  } // Define a simple getter to allow type-checking of this class without instanceof
+  // and in a way that survives minification (as opposed to checking constructor.name)
 
-      _this4 = _super4.apply(this, arguments);
-      _this4.value = parseFloat(_this4.value);
-      return _this4;
+
+  _createClass(DecimalLiteral, [{
+    key: "exec",
+    value: function exec(ctx) {
+      return this.value;
     }
+  }, {
+    key: "isDecimalLiteral",
+    get: function get() {
+      return true;
+    }
+  }]);
 
-    _createClass(DecimalLiteral, [{
-      key: "exec",
-      value: function exec(ctx) {
-        return this.value;
-      }
-    }]);
-
-    return DecimalLiteral;
-  }(Literal);
-
-  DecimalLiteral.initClass();
   return DecimalLiteral;
-}();
+}(Literal);
 
-module.exports.StringLiteral = StringLiteral = function () {
-  StringLiteral = /*#__PURE__*/function (_Literal4) {
-    _inherits(StringLiteral, _Literal4);
+var StringLiteral = /*#__PURE__*/function (_Literal4) {
+  _inherits(StringLiteral, _Literal4);
 
-    var _super5 = _createSuper(StringLiteral);
+  var _super5 = _createSuper(StringLiteral);
 
-    _createClass(StringLiteral, null, [{
-      key: "initClass",
-      value: function initClass() {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        Object.defineProperties(this.prototype, {
-          isStringLiteral: {
-            get: function get() {
-              return true;
-            }
-          }
-        });
-      }
-    }]);
+  function StringLiteral(json) {
+    _classCallCheck(this, StringLiteral);
 
-    function StringLiteral(json) {
-      _classCallCheck(this, StringLiteral);
+    return _super5.call(this, json);
+  } // Define a simple getter to allow type-checking of this class without instanceof
+  // and in a way that survives minification (as opposed to checking constructor.name)
 
-      return _super5.apply(this, arguments);
+
+  _createClass(StringLiteral, [{
+    key: "exec",
+    value: function exec(ctx) {
+      // TODO: Remove these replacements when CQL-to-ELM fixes bug: https://github.com/cqframework/clinical_quality_language/issues/82
+      return this.value.replace(/\\'/g, '\'').replace(/\\"/g, '"');
     }
+  }, {
+    key: "isStringLiteral",
+    get: function get() {
+      return true;
+    }
+  }]);
 
-    _createClass(StringLiteral, [{
-      key: "exec",
-      value: function exec(ctx) {
-        // TODO: Remove these replacements when CQL-to-ELM fixes bug: https://github.com/cqframework/clinical_quality_language/issues/82
-        return this.value.replace(/\\'/g, '\'').replace(/\\"/g, '"');
-      }
-    }]);
-
-    return StringLiteral;
-  }(Literal);
-
-  StringLiteral.initClass();
   return StringLiteral;
-}();
+}(Literal);
+
+module.exports = {
+  BooleanLiteral: BooleanLiteral,
+  DecimalLiteral: DecimalLiteral,
+  IntegerLiteral: IntegerLiteral,
+  Literal: Literal,
+  StringLiteral: StringLiteral
+};
 },{"./expression":22}],30:[function(require,module,exports){
 "use strict";
 
@@ -9637,27 +9176,13 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var And, IsFalse, IsTrue, Not, Or, Xor;
-
 var _require = require('./expression'),
     Expression = _require.Expression;
 
 var _require2 = require('../datatypes/datatypes'),
     ThreeValuedLogic = _require2.ThreeValuedLogic;
 
-module.exports.And = And = /*#__PURE__*/function (_Expression) {
+var And = /*#__PURE__*/function (_Expression) {
   _inherits(And, _Expression);
 
   var _super = _createSuper(And);
@@ -9665,20 +9190,20 @@ module.exports.And = And = /*#__PURE__*/function (_Expression) {
   function And(json) {
     _classCallCheck(this, And);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, json);
   }
 
   _createClass(And, [{
     key: "exec",
     value: function exec(ctx) {
-      return ThreeValuedLogic.and.apply(ThreeValuedLogic, _toConsumableArray(Array.from(this.execArgs(ctx) || [])));
+      return ThreeValuedLogic.and.apply(ThreeValuedLogic, _toConsumableArray(this.execArgs(ctx)));
     }
   }]);
 
   return And;
 }(Expression);
 
-module.exports.Or = Or = /*#__PURE__*/function (_Expression2) {
+var Or = /*#__PURE__*/function (_Expression2) {
   _inherits(Or, _Expression2);
 
   var _super2 = _createSuper(Or);
@@ -9686,20 +9211,20 @@ module.exports.Or = Or = /*#__PURE__*/function (_Expression2) {
   function Or(json) {
     _classCallCheck(this, Or);
 
-    return _super2.apply(this, arguments);
+    return _super2.call(this, json);
   }
 
   _createClass(Or, [{
     key: "exec",
     value: function exec(ctx) {
-      return ThreeValuedLogic.or.apply(ThreeValuedLogic, _toConsumableArray(Array.from(this.execArgs(ctx) || [])));
+      return ThreeValuedLogic.or.apply(ThreeValuedLogic, _toConsumableArray(this.execArgs(ctx)));
     }
   }]);
 
   return Or;
 }(Expression);
 
-module.exports.Not = Not = /*#__PURE__*/function (_Expression3) {
+var Not = /*#__PURE__*/function (_Expression3) {
   _inherits(Not, _Expression3);
 
   var _super3 = _createSuper(Not);
@@ -9707,7 +9232,7 @@ module.exports.Not = Not = /*#__PURE__*/function (_Expression3) {
   function Not(json) {
     _classCallCheck(this, Not);
 
-    return _super3.apply(this, arguments);
+    return _super3.call(this, json);
   }
 
   _createClass(Not, [{
@@ -9720,7 +9245,7 @@ module.exports.Not = Not = /*#__PURE__*/function (_Expression3) {
   return Not;
 }(Expression);
 
-module.exports.Xor = Xor = /*#__PURE__*/function (_Expression4) {
+var Xor = /*#__PURE__*/function (_Expression4) {
   _inherits(Xor, _Expression4);
 
   var _super4 = _createSuper(Xor);
@@ -9728,20 +9253,20 @@ module.exports.Xor = Xor = /*#__PURE__*/function (_Expression4) {
   function Xor(json) {
     _classCallCheck(this, Xor);
 
-    return _super4.apply(this, arguments);
+    return _super4.call(this, json);
   }
 
   _createClass(Xor, [{
     key: "exec",
     value: function exec(ctx) {
-      return ThreeValuedLogic.xor.apply(ThreeValuedLogic, _toConsumableArray(Array.from(this.execArgs(ctx) || [])));
+      return ThreeValuedLogic.xor.apply(ThreeValuedLogic, _toConsumableArray(this.execArgs(ctx)));
     }
   }]);
 
   return Xor;
 }(Expression);
 
-module.exports.IsTrue = IsTrue = /*#__PURE__*/function (_Expression5) {
+var IsTrue = /*#__PURE__*/function (_Expression5) {
   _inherits(IsTrue, _Expression5);
 
   var _super5 = _createSuper(IsTrue);
@@ -9749,7 +9274,7 @@ module.exports.IsTrue = IsTrue = /*#__PURE__*/function (_Expression5) {
   function IsTrue(json) {
     _classCallCheck(this, IsTrue);
 
-    return _super5.apply(this, arguments);
+    return _super5.call(this, json);
   }
 
   _createClass(IsTrue, [{
@@ -9762,7 +9287,7 @@ module.exports.IsTrue = IsTrue = /*#__PURE__*/function (_Expression5) {
   return IsTrue;
 }(Expression);
 
-module.exports.IsFalse = IsFalse = /*#__PURE__*/function (_Expression6) {
+var IsFalse = /*#__PURE__*/function (_Expression6) {
   _inherits(IsFalse, _Expression6);
 
   var _super6 = _createSuper(IsFalse);
@@ -9770,7 +9295,7 @@ module.exports.IsFalse = IsFalse = /*#__PURE__*/function (_Expression6) {
   function IsFalse(json) {
     _classCallCheck(this, IsFalse);
 
-    return _super6.apply(this, arguments);
+    return _super6.call(this, json);
   }
 
   _createClass(IsFalse, [{
@@ -9782,16 +9307,25 @@ module.exports.IsFalse = IsFalse = /*#__PURE__*/function (_Expression6) {
 
   return IsFalse;
 }(Expression);
+
+module.exports = {
+  And: And,
+  IsFalse: IsFalse,
+  IsTrue: IsTrue,
+  Not: Not,
+  Or: Or,
+  Xor: Xor
+};
 },{"../datatypes/datatypes":6,"./expression":22}],31:[function(require,module,exports){
 "use strict";
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9813,24 +9347,10 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Coalesce, IsNull, Null;
-
 var _require = require('./expression'),
     Expression = _require.Expression;
 
-module.exports.Null = Null = /*#__PURE__*/function (_Expression) {
+var Null = /*#__PURE__*/function (_Expression) {
   _inherits(Null, _Expression);
 
   var _super = _createSuper(Null);
@@ -9838,7 +9358,7 @@ module.exports.Null = Null = /*#__PURE__*/function (_Expression) {
   function Null(json) {
     _classCallCheck(this, Null);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, json);
   }
 
   _createClass(Null, [{
@@ -9851,7 +9371,7 @@ module.exports.Null = Null = /*#__PURE__*/function (_Expression) {
   return Null;
 }(Expression);
 
-module.exports.IsNull = IsNull = /*#__PURE__*/function (_Expression2) {
+var IsNull = /*#__PURE__*/function (_Expression2) {
   _inherits(IsNull, _Expression2);
 
   var _super2 = _createSuper(IsNull);
@@ -9859,7 +9379,7 @@ module.exports.IsNull = IsNull = /*#__PURE__*/function (_Expression2) {
   function IsNull(json) {
     _classCallCheck(this, IsNull);
 
-    return _super2.apply(this, arguments);
+    return _super2.call(this, json);
   }
 
   _createClass(IsNull, [{
@@ -9872,7 +9392,7 @@ module.exports.IsNull = IsNull = /*#__PURE__*/function (_Expression2) {
   return IsNull;
 }(Expression);
 
-module.exports.Coalesce = Coalesce = /*#__PURE__*/function (_Expression3) {
+var Coalesce = /*#__PURE__*/function (_Expression3) {
   _inherits(Coalesce, _Expression3);
 
   var _super3 = _createSuper(Coalesce);
@@ -9880,7 +9400,7 @@ module.exports.Coalesce = Coalesce = /*#__PURE__*/function (_Expression3) {
   function Coalesce(json) {
     _classCallCheck(this, Coalesce);
 
-    return _super3.apply(this, arguments);
+    return _super3.call(this, json);
   }
 
   _createClass(Coalesce, [{
@@ -9895,21 +9415,12 @@ module.exports.Coalesce = Coalesce = /*#__PURE__*/function (_Expression3) {
           var result = arg.execute(ctx); // if a single arg that's a list, coalesce over the list
 
           if (this.args.length === 1 && Array.isArray(result)) {
-            var _iterator2 = _createForOfIteratorHelper(result),
-                _step2;
+            var item = result.find(function (item) {
+              return item != null;
+            });
 
-            try {
-              for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-                var item = _step2.value;
-
-                if (item != null) {
-                  return item;
-                }
-              }
-            } catch (err) {
-              _iterator2.e(err);
-            } finally {
-              _iterator2.f();
+            if (item != null) {
+              return item;
             }
           } else {
             if (result != null) {
@@ -9929,10 +9440,14 @@ module.exports.Coalesce = Coalesce = /*#__PURE__*/function (_Expression3) {
 
   return Coalesce;
 }(Expression);
+
+module.exports = {
+  Coalesce: Coalesce,
+  IsNull: IsNull,
+  Null: Null
+};
 },{"./expression":22}],32:[function(require,module,exports){
 "use strict";
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -9941,6 +9456,8 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -9974,22 +9491,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var After, Contains, Equal, Equivalent, Except, In, IncludedIn, Includes, Indexer, Intersect, Length, NotEqual, ProperIncludedIn, ProperIncludes, SameAs, SameOrAfter, SameOrBefore, Union;
-
 var _require = require('./expression'),
     Expression = _require.Expression;
 
@@ -9999,18 +9500,12 @@ var _require2 = require('../datatypes/logic'),
 var _require3 = require('../datatypes/datetime'),
     DateTime = _require3.DateTime;
 
-var _require4 = require('../datatypes/exception'),
-    Exception = _require4.Exception;
+var _require4 = require('../util/util'),
+    typeIsArray = _require4.typeIsArray;
 
-var _require5 = require('../util/util'),
-    typeIsArray = _require5.typeIsArray;
-
-var _require6 = require('../util/comparison'),
-    equals = _require6.equals,
-    equivalent = _require6.equivalent;
-
-var _require7 = require('./builder'),
-    build = _require7.build;
+var _require5 = require('../util/comparison'),
+    equals = _require5.equals,
+    equivalent = _require5.equivalent;
 
 var DT = require('./datetime');
 
@@ -10018,9 +9513,7 @@ var LIST = require('./list');
 
 var IVL = require('./interval');
 
-var STRING = require('./string');
-
-module.exports.Equal = Equal = /*#__PURE__*/function (_Expression) {
+var Equal = /*#__PURE__*/function (_Expression) {
   _inherits(Equal, _Expression);
 
   var _super = _createSuper(Equal);
@@ -10028,7 +9521,7 @@ module.exports.Equal = Equal = /*#__PURE__*/function (_Expression) {
   function Equal(json) {
     _classCallCheck(this, Equal);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, json);
   }
 
   _createClass(Equal, [{
@@ -10040,14 +9533,14 @@ module.exports.Equal = Equal = /*#__PURE__*/function (_Expression) {
         return null;
       }
 
-      return equals.apply(void 0, _toConsumableArray(Array.from(this.execArgs(ctx) || [])));
+      return equals.apply(void 0, _toConsumableArray(this.execArgs(ctx)));
     }
   }]);
 
   return Equal;
 }(Expression);
 
-module.exports.Equivalent = Equivalent = /*#__PURE__*/function (_Expression2) {
+var Equivalent = /*#__PURE__*/function (_Expression2) {
   _inherits(Equivalent, _Expression2);
 
   var _super2 = _createSuper(Equivalent);
@@ -10055,16 +9548,16 @@ module.exports.Equivalent = Equivalent = /*#__PURE__*/function (_Expression2) {
   function Equivalent(json) {
     _classCallCheck(this, Equivalent);
 
-    return _super2.apply(this, arguments);
+    return _super2.call(this, json);
   }
 
   _createClass(Equivalent, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from = Array.from(this.execArgs(ctx)),
-          _Array$from2 = _slicedToArray(_Array$from, 2),
-          a = _Array$from2[0],
-          b = _Array$from2[1];
+      var _this$execArgs = this.execArgs(ctx),
+          _this$execArgs2 = _slicedToArray(_this$execArgs, 2),
+          a = _this$execArgs2[0],
+          b = _this$execArgs2[1];
 
       if (a == null && b == null) {
         return true;
@@ -10079,7 +9572,7 @@ module.exports.Equivalent = Equivalent = /*#__PURE__*/function (_Expression2) {
   return Equivalent;
 }(Expression);
 
-module.exports.NotEqual = NotEqual = /*#__PURE__*/function (_Expression3) {
+var NotEqual = /*#__PURE__*/function (_Expression3) {
   _inherits(NotEqual, _Expression3);
 
   var _super3 = _createSuper(NotEqual);
@@ -10087,7 +9580,7 @@ module.exports.NotEqual = NotEqual = /*#__PURE__*/function (_Expression3) {
   function NotEqual(json) {
     _classCallCheck(this, NotEqual);
 
-    return _super3.apply(this, arguments);
+    return _super3.call(this, json);
   }
 
   _createClass(NotEqual, [{
@@ -10099,14 +9592,14 @@ module.exports.NotEqual = NotEqual = /*#__PURE__*/function (_Expression3) {
         return null;
       }
 
-      return ThreeValuedLogic.not(equals.apply(void 0, _toConsumableArray(Array.from(this.execArgs(ctx) || []))));
+      return ThreeValuedLogic.not(equals.apply(void 0, _toConsumableArray(this.execArgs(ctx))));
     }
   }]);
 
   return NotEqual;
 }(Expression);
 
-module.exports.Union = Union = /*#__PURE__*/function (_Expression4) {
+var Union = /*#__PURE__*/function (_Expression4) {
   _inherits(Union, _Expression4);
 
   var _super4 = _createSuper(Union);
@@ -10114,31 +9607,22 @@ module.exports.Union = Union = /*#__PURE__*/function (_Expression4) {
   function Union(json) {
     _classCallCheck(this, Union);
 
-    return _super4.apply(this, arguments);
+    return _super4.call(this, json);
   }
 
   _createClass(Union, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from3 = Array.from(this.execArgs(ctx)),
-          _Array$from4 = _slicedToArray(_Array$from3, 2),
-          a = _Array$from4[0],
-          b = _Array$from4[1];
+      var _this$execArgs3 = this.execArgs(ctx),
+          _this$execArgs4 = _slicedToArray(_this$execArgs3, 2),
+          a = _this$execArgs4[0],
+          b = _this$execArgs4[1];
 
       if (a == null || b == null) {
         return null;
       }
 
-      var lib = function () {
-        switch (false) {
-          case !typeIsArray(a):
-            return LIST;
-
-          default:
-            return IVL;
-        }
-      }();
-
+      var lib = typeIsArray(a) ? LIST : IVL;
       return lib.doUnion(a, b);
     }
   }]);
@@ -10146,7 +9630,7 @@ module.exports.Union = Union = /*#__PURE__*/function (_Expression4) {
   return Union;
 }(Expression);
 
-module.exports.Except = Except = /*#__PURE__*/function (_Expression5) {
+var Except = /*#__PURE__*/function (_Expression5) {
   _inherits(Except, _Expression5);
 
   var _super5 = _createSuper(Except);
@@ -10154,31 +9638,22 @@ module.exports.Except = Except = /*#__PURE__*/function (_Expression5) {
   function Except(json) {
     _classCallCheck(this, Except);
 
-    return _super5.apply(this, arguments);
+    return _super5.call(this, json);
   }
 
   _createClass(Except, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from5 = Array.from(this.execArgs(ctx)),
-          _Array$from6 = _slicedToArray(_Array$from5, 2),
-          a = _Array$from6[0],
-          b = _Array$from6[1];
+      var _this$execArgs5 = this.execArgs(ctx),
+          _this$execArgs6 = _slicedToArray(_this$execArgs5, 2),
+          a = _this$execArgs6[0],
+          b = _this$execArgs6[1];
 
       if (a == null || b == null) {
         return null;
       }
 
-      var lib = function () {
-        switch (false) {
-          case !typeIsArray(a):
-            return LIST;
-
-          default:
-            return IVL;
-        }
-      }();
-
+      var lib = typeIsArray(a) ? LIST : IVL;
       return lib.doExcept(a, b);
     }
   }]);
@@ -10186,7 +9661,7 @@ module.exports.Except = Except = /*#__PURE__*/function (_Expression5) {
   return Except;
 }(Expression);
 
-module.exports.Intersect = Intersect = /*#__PURE__*/function (_Expression6) {
+var Intersect = /*#__PURE__*/function (_Expression6) {
   _inherits(Intersect, _Expression6);
 
   var _super6 = _createSuper(Intersect);
@@ -10194,31 +9669,22 @@ module.exports.Intersect = Intersect = /*#__PURE__*/function (_Expression6) {
   function Intersect(json) {
     _classCallCheck(this, Intersect);
 
-    return _super6.apply(this, arguments);
+    return _super6.call(this, json);
   }
 
   _createClass(Intersect, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from7 = Array.from(this.execArgs(ctx)),
-          _Array$from8 = _slicedToArray(_Array$from7, 2),
-          a = _Array$from8[0],
-          b = _Array$from8[1];
+      var _this$execArgs7 = this.execArgs(ctx),
+          _this$execArgs8 = _slicedToArray(_this$execArgs7, 2),
+          a = _this$execArgs8[0],
+          b = _this$execArgs8[1];
 
       if (a == null || b == null) {
         return null;
       }
 
-      var lib = function () {
-        switch (false) {
-          case !typeIsArray(a):
-            return LIST;
-
-          default:
-            return IVL;
-        }
-      }();
-
+      var lib = typeIsArray(a) ? LIST : IVL;
       return lib.doIntersect(a, b);
     }
   }]);
@@ -10226,7 +9692,7 @@ module.exports.Intersect = Intersect = /*#__PURE__*/function (_Expression6) {
   return Intersect;
 }(Expression);
 
-module.exports.Indexer = Indexer = /*#__PURE__*/function (_Expression7) {
+var Indexer = /*#__PURE__*/function (_Expression7) {
   _inherits(Indexer, _Expression7);
 
   var _super7 = _createSuper(Indexer);
@@ -10234,16 +9700,16 @@ module.exports.Indexer = Indexer = /*#__PURE__*/function (_Expression7) {
   function Indexer(json) {
     _classCallCheck(this, Indexer);
 
-    return _super7.apply(this, arguments);
+    return _super7.call(this, json);
   }
 
   _createClass(Indexer, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from9 = Array.from(this.execArgs(ctx)),
-          _Array$from10 = _slicedToArray(_Array$from9, 2),
-          operand = _Array$from10[0],
-          index = _Array$from10[1];
+      var _this$execArgs9 = this.execArgs(ctx),
+          _this$execArgs10 = _slicedToArray(_this$execArgs9, 2),
+          operand = _this$execArgs10[0],
+          index = _this$execArgs10[1];
 
       if (operand == null || index == null) {
         return null;
@@ -10260,7 +9726,7 @@ module.exports.Indexer = Indexer = /*#__PURE__*/function (_Expression7) {
   return Indexer;
 }(Expression);
 
-module.exports.In = In = /*#__PURE__*/function (_Expression8) {
+var In = /*#__PURE__*/function (_Expression8) {
   _inherits(In, _Expression8);
 
   var _super8 = _createSuper(In);
@@ -10270,7 +9736,7 @@ module.exports.In = In = /*#__PURE__*/function (_Expression8) {
 
     _classCallCheck(this, In);
 
-    _this = _super8.apply(this, arguments);
+    _this = _super8.call(this, json);
     _this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     return _this;
   }
@@ -10278,25 +9744,16 @@ module.exports.In = In = /*#__PURE__*/function (_Expression8) {
   _createClass(In, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from11 = Array.from(this.execArgs(ctx)),
-          _Array$from12 = _slicedToArray(_Array$from11, 2),
-          item = _Array$from12[0],
-          container = _Array$from12[1];
+      var _this$execArgs11 = this.execArgs(ctx),
+          _this$execArgs12 = _slicedToArray(_this$execArgs11, 2),
+          item = _this$execArgs12[0],
+          container = _this$execArgs12[1];
 
       if (container == null || item == null) {
         return null;
       }
 
-      var lib = function () {
-        switch (false) {
-          case !typeIsArray(container):
-            return LIST;
-
-          default:
-            return IVL;
-        }
-      }();
-
+      var lib = typeIsArray(container) ? LIST : IVL;
       return lib.doContains(container, item, this.precision);
     }
   }]);
@@ -10304,7 +9761,7 @@ module.exports.In = In = /*#__PURE__*/function (_Expression8) {
   return In;
 }(Expression);
 
-module.exports.Contains = Contains = /*#__PURE__*/function (_Expression9) {
+var Contains = /*#__PURE__*/function (_Expression9) {
   _inherits(Contains, _Expression9);
 
   var _super9 = _createSuper(Contains);
@@ -10314,7 +9771,7 @@ module.exports.Contains = Contains = /*#__PURE__*/function (_Expression9) {
 
     _classCallCheck(this, Contains);
 
-    _this2 = _super9.apply(this, arguments);
+    _this2 = _super9.call(this, json);
     _this2.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     return _this2;
   }
@@ -10322,25 +9779,16 @@ module.exports.Contains = Contains = /*#__PURE__*/function (_Expression9) {
   _createClass(Contains, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from13 = Array.from(this.execArgs(ctx)),
-          _Array$from14 = _slicedToArray(_Array$from13, 2),
-          container = _Array$from14[0],
-          item = _Array$from14[1];
+      var _this$execArgs13 = this.execArgs(ctx),
+          _this$execArgs14 = _slicedToArray(_this$execArgs13, 2),
+          container = _this$execArgs14[0],
+          item = _this$execArgs14[1];
 
       if (container == null || item == null) {
         return null;
       }
 
-      var lib = function () {
-        switch (false) {
-          case !typeIsArray(container):
-            return LIST;
-
-          default:
-            return IVL;
-        }
-      }();
-
+      var lib = typeIsArray(container) ? LIST : IVL;
       return lib.doContains(container, item, this.precision);
     }
   }]);
@@ -10348,7 +9796,7 @@ module.exports.Contains = Contains = /*#__PURE__*/function (_Expression9) {
   return Contains;
 }(Expression);
 
-module.exports.Includes = Includes = /*#__PURE__*/function (_Expression10) {
+var Includes = /*#__PURE__*/function (_Expression10) {
   _inherits(Includes, _Expression10);
 
   var _super10 = _createSuper(Includes);
@@ -10358,7 +9806,7 @@ module.exports.Includes = Includes = /*#__PURE__*/function (_Expression10) {
 
     _classCallCheck(this, Includes);
 
-    _this3 = _super10.apply(this, arguments);
+    _this3 = _super10.call(this, json);
     _this3.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     return _this3;
   }
@@ -10366,25 +9814,16 @@ module.exports.Includes = Includes = /*#__PURE__*/function (_Expression10) {
   _createClass(Includes, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from15 = Array.from(this.execArgs(ctx)),
-          _Array$from16 = _slicedToArray(_Array$from15, 2),
-          container = _Array$from16[0],
-          contained = _Array$from16[1];
+      var _this$execArgs15 = this.execArgs(ctx),
+          _this$execArgs16 = _slicedToArray(_this$execArgs15, 2),
+          container = _this$execArgs16[0],
+          contained = _this$execArgs16[1];
 
       if (container == null || contained == null) {
         return null;
       }
 
-      var lib = function () {
-        switch (false) {
-          case !typeIsArray(container):
-            return LIST;
-
-          default:
-            return IVL;
-        }
-      }();
-
+      var lib = typeIsArray(container) ? LIST : IVL;
       return lib.doIncludes(container, contained, this.precision);
     }
   }]);
@@ -10392,7 +9831,7 @@ module.exports.Includes = Includes = /*#__PURE__*/function (_Expression10) {
   return Includes;
 }(Expression);
 
-module.exports.IncludedIn = IncludedIn = /*#__PURE__*/function (_Expression11) {
+var IncludedIn = /*#__PURE__*/function (_Expression11) {
   _inherits(IncludedIn, _Expression11);
 
   var _super11 = _createSuper(IncludedIn);
@@ -10402,7 +9841,7 @@ module.exports.IncludedIn = IncludedIn = /*#__PURE__*/function (_Expression11) {
 
     _classCallCheck(this, IncludedIn);
 
-    _this4 = _super11.apply(this, arguments);
+    _this4 = _super11.call(this, json);
     _this4.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     return _this4;
   }
@@ -10410,25 +9849,16 @@ module.exports.IncludedIn = IncludedIn = /*#__PURE__*/function (_Expression11) {
   _createClass(IncludedIn, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from17 = Array.from(this.execArgs(ctx)),
-          _Array$from18 = _slicedToArray(_Array$from17, 2),
-          contained = _Array$from18[0],
-          container = _Array$from18[1];
+      var _this$execArgs17 = this.execArgs(ctx),
+          _this$execArgs18 = _slicedToArray(_this$execArgs17, 2),
+          contained = _this$execArgs18[0],
+          container = _this$execArgs18[1];
 
       if (container == null || contained == null) {
         return null;
       }
 
-      var lib = function () {
-        switch (false) {
-          case !typeIsArray(container):
-            return LIST;
-
-          default:
-            return IVL;
-        }
-      }();
-
+      var lib = typeIsArray(container) ? LIST : IVL;
       return lib.doIncludes(container, contained, this.precision);
     }
   }]);
@@ -10436,7 +9866,7 @@ module.exports.IncludedIn = IncludedIn = /*#__PURE__*/function (_Expression11) {
   return IncludedIn;
 }(Expression);
 
-module.exports.ProperIncludes = ProperIncludes = /*#__PURE__*/function (_Expression12) {
+var ProperIncludes = /*#__PURE__*/function (_Expression12) {
   _inherits(ProperIncludes, _Expression12);
 
   var _super12 = _createSuper(ProperIncludes);
@@ -10446,7 +9876,7 @@ module.exports.ProperIncludes = ProperIncludes = /*#__PURE__*/function (_Express
 
     _classCallCheck(this, ProperIncludes);
 
-    _this5 = _super12.apply(this, arguments);
+    _this5 = _super12.call(this, json);
     _this5.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     return _this5;
   }
@@ -10454,25 +9884,16 @@ module.exports.ProperIncludes = ProperIncludes = /*#__PURE__*/function (_Express
   _createClass(ProperIncludes, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from19 = Array.from(this.execArgs(ctx)),
-          _Array$from20 = _slicedToArray(_Array$from19, 2),
-          container = _Array$from20[0],
-          contained = _Array$from20[1];
+      var _this$execArgs19 = this.execArgs(ctx),
+          _this$execArgs20 = _slicedToArray(_this$execArgs19, 2),
+          container = _this$execArgs20[0],
+          contained = _this$execArgs20[1];
 
       if (container == null || contained == null) {
         return null;
       }
 
-      var lib = function () {
-        switch (false) {
-          case !typeIsArray(container):
-            return LIST;
-
-          default:
-            return IVL;
-        }
-      }();
-
+      var lib = typeIsArray(container) ? LIST : IVL;
       return lib.doProperIncludes(container, contained, this.precision);
     }
   }]);
@@ -10480,7 +9901,7 @@ module.exports.ProperIncludes = ProperIncludes = /*#__PURE__*/function (_Express
   return ProperIncludes;
 }(Expression);
 
-module.exports.ProperIncludedIn = ProperIncludedIn = /*#__PURE__*/function (_Expression13) {
+var ProperIncludedIn = /*#__PURE__*/function (_Expression13) {
   _inherits(ProperIncludedIn, _Expression13);
 
   var _super13 = _createSuper(ProperIncludedIn);
@@ -10490,7 +9911,7 @@ module.exports.ProperIncludedIn = ProperIncludedIn = /*#__PURE__*/function (_Exp
 
     _classCallCheck(this, ProperIncludedIn);
 
-    _this6 = _super13.apply(this, arguments);
+    _this6 = _super13.call(this, json);
     _this6.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     return _this6;
   }
@@ -10498,25 +9919,16 @@ module.exports.ProperIncludedIn = ProperIncludedIn = /*#__PURE__*/function (_Exp
   _createClass(ProperIncludedIn, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from21 = Array.from(this.execArgs(ctx)),
-          _Array$from22 = _slicedToArray(_Array$from21, 2),
-          contained = _Array$from22[0],
-          container = _Array$from22[1];
+      var _this$execArgs21 = this.execArgs(ctx),
+          _this$execArgs22 = _slicedToArray(_this$execArgs21, 2),
+          contained = _this$execArgs22[0],
+          container = _this$execArgs22[1];
 
       if (container == null || contained == null) {
         return null;
       }
 
-      var lib = function () {
-        switch (false) {
-          case !typeIsArray(container):
-            return LIST;
-
-          default:
-            return IVL;
-        }
-      }();
-
+      var lib = typeIsArray(container) ? LIST : IVL;
       return lib.doProperIncludes(container, contained, this.precision);
     }
   }]);
@@ -10524,7 +9936,7 @@ module.exports.ProperIncludedIn = ProperIncludedIn = /*#__PURE__*/function (_Exp
   return ProperIncludedIn;
 }(Expression);
 
-module.exports.Length = Length = /*#__PURE__*/function (_Expression14) {
+var Length = /*#__PURE__*/function (_Expression14) {
   _inherits(Length, _Expression14);
 
   var _super14 = _createSuper(Length);
@@ -10532,7 +9944,7 @@ module.exports.Length = Length = /*#__PURE__*/function (_Expression14) {
   function Length(json) {
     _classCallCheck(this, Length);
 
-    return _super14.apply(this, arguments);
+    return _super14.call(this, json);
   }
 
   _createClass(Length, [{
@@ -10551,7 +9963,7 @@ module.exports.Length = Length = /*#__PURE__*/function (_Expression14) {
   return Length;
 }(Expression);
 
-module.exports.After = After = /*#__PURE__*/function (_Expression15) {
+var After = /*#__PURE__*/function (_Expression15) {
   _inherits(After, _Expression15);
 
   var _super15 = _createSuper(After);
@@ -10561,7 +9973,7 @@ module.exports.After = After = /*#__PURE__*/function (_Expression15) {
 
     _classCallCheck(this, After);
 
-    _this7 = _super15.apply(this, arguments);
+    _this7 = _super15.call(this, json);
     _this7.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     return _this7;
   }
@@ -10569,25 +9981,16 @@ module.exports.After = After = /*#__PURE__*/function (_Expression15) {
   _createClass(After, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from23 = Array.from(this.execArgs(ctx)),
-          _Array$from24 = _slicedToArray(_Array$from23, 2),
-          a = _Array$from24[0],
-          b = _Array$from24[1];
+      var _this$execArgs23 = this.execArgs(ctx),
+          _this$execArgs24 = _slicedToArray(_this$execArgs23, 2),
+          a = _this$execArgs24[0],
+          b = _this$execArgs24[1];
 
       if (a == null || b == null) {
         return null;
       }
 
-      var lib = function () {
-        switch (false) {
-          case !(a instanceof DateTime):
-            return DT;
-
-          default:
-            return IVL;
-        }
-      }();
-
+      var lib = a instanceof DateTime ? DT : IVL;
       return lib.doAfter(a, b, this.precision);
     }
   }]);
@@ -10595,51 +9998,42 @@ module.exports.After = After = /*#__PURE__*/function (_Expression15) {
   return After;
 }(Expression);
 
-module.exports.Before = After = /*#__PURE__*/function (_Expression16) {
-  _inherits(After, _Expression16);
+var Before = /*#__PURE__*/function (_Expression16) {
+  _inherits(Before, _Expression16);
 
-  var _super16 = _createSuper(After);
+  var _super16 = _createSuper(Before);
 
-  function After(json) {
+  function Before(json) {
     var _this8;
 
-    _classCallCheck(this, After);
+    _classCallCheck(this, Before);
 
-    _this8 = _super16.apply(this, arguments);
+    _this8 = _super16.call(this, json);
     _this8.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     return _this8;
   }
 
-  _createClass(After, [{
+  _createClass(Before, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from25 = Array.from(this.execArgs(ctx)),
-          _Array$from26 = _slicedToArray(_Array$from25, 2),
-          a = _Array$from26[0],
-          b = _Array$from26[1];
+      var _this$execArgs25 = this.execArgs(ctx),
+          _this$execArgs26 = _slicedToArray(_this$execArgs25, 2),
+          a = _this$execArgs26[0],
+          b = _this$execArgs26[1];
 
       if (a == null || b == null) {
         return null;
       }
 
-      var lib = function () {
-        switch (false) {
-          case !(a instanceof DateTime):
-            return DT;
-
-          default:
-            return IVL;
-        }
-      }();
-
+      var lib = a instanceof DateTime ? DT : IVL;
       return lib.doBefore(a, b, this.precision);
     }
   }]);
 
-  return After;
+  return Before;
 }(Expression);
 
-module.exports.SameAs = SameAs = /*#__PURE__*/function (_Expression17) {
+var SameAs = /*#__PURE__*/function (_Expression17) {
   _inherits(SameAs, _Expression17);
 
   var _super17 = _createSuper(SameAs);
@@ -10649,7 +10043,7 @@ module.exports.SameAs = SameAs = /*#__PURE__*/function (_Expression17) {
 
     _classCallCheck(this, SameAs);
 
-    _this9 = _super17.apply(this, arguments);
+    _this9 = _super17.call(this, json);
     _this9.precision = json.precision;
     return _this9;
   }
@@ -10657,10 +10051,10 @@ module.exports.SameAs = SameAs = /*#__PURE__*/function (_Expression17) {
   _createClass(SameAs, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from27 = Array.from(this.execArgs(ctx)),
-          _Array$from28 = _slicedToArray(_Array$from27, 2),
-          a = _Array$from28[0],
-          b = _Array$from28[1];
+      var _this$execArgs27 = this.execArgs(ctx),
+          _this$execArgs28 = _slicedToArray(_this$execArgs27, 2),
+          a = _this$execArgs28[0],
+          b = _this$execArgs28[1];
 
       if (a != null && b != null) {
         return a.sameAs(b, this.precision != null ? this.precision.toLowerCase() : undefined);
@@ -10673,7 +10067,7 @@ module.exports.SameAs = SameAs = /*#__PURE__*/function (_Expression17) {
   return SameAs;
 }(Expression);
 
-module.exports.SameOrAfter = SameOrAfter = /*#__PURE__*/function (_Expression18) {
+var SameOrAfter = /*#__PURE__*/function (_Expression18) {
   _inherits(SameOrAfter, _Expression18);
 
   var _super18 = _createSuper(SameOrAfter);
@@ -10683,7 +10077,7 @@ module.exports.SameOrAfter = SameOrAfter = /*#__PURE__*/function (_Expression18)
 
     _classCallCheck(this, SameOrAfter);
 
-    _this10 = _super18.apply(this, arguments);
+    _this10 = _super18.call(this, json);
     _this10.precision = json.precision;
     return _this10;
   }
@@ -10691,10 +10085,10 @@ module.exports.SameOrAfter = SameOrAfter = /*#__PURE__*/function (_Expression18)
   _createClass(SameOrAfter, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from29 = Array.from(this.execArgs(ctx)),
-          _Array$from30 = _slicedToArray(_Array$from29, 2),
-          d1 = _Array$from30[0],
-          d2 = _Array$from30[1];
+      var _this$execArgs29 = this.execArgs(ctx),
+          _this$execArgs30 = _slicedToArray(_this$execArgs29, 2),
+          d1 = _this$execArgs30[0],
+          d2 = _this$execArgs30[1];
 
       if (d1 != null && d2 != null) {
         return d1.sameOrAfter(d2, this.precision != null ? this.precision.toLowerCase() : undefined);
@@ -10707,7 +10101,7 @@ module.exports.SameOrAfter = SameOrAfter = /*#__PURE__*/function (_Expression18)
   return SameOrAfter;
 }(Expression);
 
-module.exports.SameOrBefore = SameOrBefore = /*#__PURE__*/function (_Expression19) {
+var SameOrBefore = /*#__PURE__*/function (_Expression19) {
   _inherits(SameOrBefore, _Expression19);
 
   var _super19 = _createSuper(SameOrBefore);
@@ -10717,7 +10111,7 @@ module.exports.SameOrBefore = SameOrBefore = /*#__PURE__*/function (_Expression1
 
     _classCallCheck(this, SameOrBefore);
 
-    _this11 = _super19.apply(this, arguments);
+    _this11 = _super19.call(this, json);
     _this11.precision = json.precision;
     return _this11;
   }
@@ -10725,10 +10119,10 @@ module.exports.SameOrBefore = SameOrBefore = /*#__PURE__*/function (_Expression1
   _createClass(SameOrBefore, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from31 = Array.from(this.execArgs(ctx)),
-          _Array$from32 = _slicedToArray(_Array$from31, 2),
-          d1 = _Array$from32[0],
-          d2 = _Array$from32[1];
+      var _this$execArgs31 = this.execArgs(ctx),
+          _this$execArgs32 = _slicedToArray(_this$execArgs31, 2),
+          d1 = _this$execArgs32[0],
+          d2 = _this$execArgs32[1];
 
       if (d1 != null && d2 != null) {
         return d1.sameOrBefore(d2, this.precision != null ? this.precision.toLowerCase() : undefined);
@@ -10740,7 +10134,29 @@ module.exports.SameOrBefore = SameOrBefore = /*#__PURE__*/function (_Expression1
 
   return SameOrBefore;
 }(Expression);
-},{"../datatypes/datetime":7,"../datatypes/exception":8,"../datatypes/logic":10,"../util/comparison":45,"../util/util":47,"./builder":16,"./datetime":20,"./expression":22,"./interval":26,"./list":28,"./string":38}],33:[function(require,module,exports){
+
+module.exports = {
+  After: After,
+  Before: Before,
+  Contains: Contains,
+  Equal: Equal,
+  Equivalent: Equivalent,
+  Except: Except,
+  In: In,
+  IncludedIn: IncludedIn,
+  Includes: Includes,
+  Indexer: Indexer,
+  Intersect: Intersect,
+  Length: Length,
+  NotEqual: NotEqual,
+  ProperIncludedIn: ProperIncludedIn,
+  ProperIncludes: ProperIncludes,
+  SameAs: SameAs,
+  SameOrAfter: SameOrAfter,
+  SameOrBefore: SameOrBefore,
+  Union: Union
+};
+},{"../datatypes/datetime":7,"../datatypes/logic":10,"../util/comparison":45,"../util/util":47,"./datetime":20,"./expression":22,"./interval":26,"./list":28}],33:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -10765,28 +10181,13 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS103: Rewrite code to no longer use __guard__
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var ParameterDef, ParameterRef;
-
 var _require = require('./expression'),
     Expression = _require.Expression;
 
 var _require2 = require('./builder'),
     build = _require2.build;
 
-module.exports.ParameterDef = ParameterDef = /*#__PURE__*/function (_Expression) {
+var ParameterDef = /*#__PURE__*/function (_Expression) {
   _inherits(ParameterDef, _Expression);
 
   var _super = _createSuper(ParameterDef);
@@ -10796,7 +10197,7 @@ module.exports.ParameterDef = ParameterDef = /*#__PURE__*/function (_Expression)
 
     _classCallCheck(this, ParameterDef);
 
-    _this = _super.apply(this, arguments);
+    _this = _super.call(this, json);
     _this.name = json.name;
     _this.default = build(json.default);
     _this.parameterTypeSpecifier = json.parameterTypeSpecifier;
@@ -10807,7 +10208,7 @@ module.exports.ParameterDef = ParameterDef = /*#__PURE__*/function (_Expression)
     key: "exec",
     value: function exec(ctx) {
       // If context parameters contains the name, return value.
-      if ((ctx != null ? ctx.parameters[this.name] : undefined) != null) {
+      if (ctx && ctx.parameters[this.name] !== undefined) {
         return ctx.parameters[this.name]; // If default type exists, execute the default type
       } else if (this.default != null) {
         return this.default != null ? this.default.execute(ctx) : undefined; // Else, if context and context's parent exist return the value of the parent's parameters with the given name.
@@ -10820,7 +10221,7 @@ module.exports.ParameterDef = ParameterDef = /*#__PURE__*/function (_Expression)
   return ParameterDef;
 }(Expression);
 
-module.exports.ParameterRef = ParameterRef = /*#__PURE__*/function (_Expression2) {
+var ParameterRef = /*#__PURE__*/function (_Expression2) {
   _inherits(ParameterRef, _Expression2);
 
   var _super2 = _createSuper(ParameterRef);
@@ -10830,7 +10231,7 @@ module.exports.ParameterRef = ParameterRef = /*#__PURE__*/function (_Expression2
 
     _classCallCheck(this, ParameterRef);
 
-    _this2 = _super2.apply(this, arguments);
+    _this2 = _super2.call(this, json);
     _this2.name = json.name;
     _this2.library = json.libraryName;
     return _this2;
@@ -10840,18 +10241,18 @@ module.exports.ParameterRef = ParameterRef = /*#__PURE__*/function (_Expression2
     key: "exec",
     value: function exec(ctx) {
       ctx = this.library ? ctx.getLibraryContext(this.library) : ctx;
-      return __guard__(ctx.getParameter(this.name), function (x) {
-        return x.execute(ctx);
-      });
+      var param = ctx.getParameter(this.name);
+      return param != null ? param.execute(ctx) : undefined;
     }
   }]);
 
   return ParameterRef;
 }(Expression);
 
-function __guard__(value, transform) {
-  return typeof value !== 'undefined' && value !== null ? transform(value) : undefined;
-}
+module.exports = {
+  ParameterDef: ParameterDef,
+  ParameterRef: ParameterRef
+};
 },{"./builder":16,"./expression":22}],34:[function(require,module,exports){
 "use strict";
 
@@ -10877,40 +10278,14 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Quantity;
-
 var _require = require('./expression'),
     Expression = _require.Expression;
-
-var _require2 = require('./reusable'),
-    FunctionRef = _require2.FunctionRef;
-
-var _require3 = require('../datatypes/datatypes'),
-    ValueSet = _require3.ValueSet,
-    Code = _require3.Code;
-
-var _require4 = require('../datatypes/exception'),
-    Exception = _require4.Exception;
-
-var _require5 = require('./builder'),
-    build = _require5.build;
 
 var DT = require('../datatypes/datatypes'); // Unit conversation is currently implemented on for time duration comparison operations
 // TODO: Implement unit conversation for time duration mathematical operations
 
 
-module.exports.Quantity = Quantity = /*#__PURE__*/function (_Expression) {
+var Quantity = /*#__PURE__*/function (_Expression) {
   _inherits(Quantity, _Expression);
 
   var _super = _createSuper(Quantity);
@@ -10920,7 +10295,7 @@ module.exports.Quantity = Quantity = /*#__PURE__*/function (_Expression) {
 
     _classCallCheck(this, Quantity);
 
-    _this = _super.apply(this, arguments);
+    _this = _super.call(this, json);
     _this.value = parseFloat(json.value);
     _this.unit = json.unit;
     return _this;
@@ -10935,20 +10310,24 @@ module.exports.Quantity = Quantity = /*#__PURE__*/function (_Expression) {
 
   return Quantity;
 }(Expression);
-},{"../datatypes/datatypes":6,"../datatypes/exception":8,"./builder":16,"./expression":22,"./reusable":37}],35:[function(require,module,exports){
+
+module.exports = {
+  Quantity: Quantity
+};
+},{"../datatypes/datatypes":6,"./expression":22}],35:[function(require,module,exports){
 "use strict";
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
@@ -10970,21 +10349,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var AliasedQuerySource, AliasRef, ByColumn, ByDirection, ByExpression, LetClause, Query, QueryLetRef, ReturnClause, Sort, SortClause, With, Without;
-
 var _require = require('./expression'),
     Expression = _require.Expression,
     UnimplementedExpression = _require.UnimplementedExpression;
@@ -11002,21 +10366,21 @@ var _require4 = require('../util/util'),
 var _require5 = require('../util/comparison'),
     equals = _require5.equals;
 
-module.exports.AliasedQuerySource = AliasedQuerySource = function AliasedQuerySource(json) {
+var AliasedQuerySource = function AliasedQuerySource(json) {
   _classCallCheck(this, AliasedQuerySource);
 
   this.alias = json.alias;
   this.expression = build(json.expression);
 };
 
-module.exports.LetClause = LetClause = function LetClause(json) {
+var LetClause = function LetClause(json) {
   _classCallCheck(this, LetClause);
 
   this.identifier = json.identifier;
   this.expression = build(json.expression);
 };
 
-module.exports.With = With = /*#__PURE__*/function (_Expression) {
+var With = /*#__PURE__*/function (_Expression) {
   _inherits(With, _Expression);
 
   var _super = _createSuper(With);
@@ -11026,7 +10390,7 @@ module.exports.With = With = /*#__PURE__*/function (_Expression) {
 
     _classCallCheck(this, With);
 
-    _this = _super.apply(this, arguments);
+    _this = _super.call(this, json);
     _this.alias = json.alias;
     _this.expression = build(json.expression);
     _this.suchThat = build(json.suchThat);
@@ -11039,31 +10403,16 @@ module.exports.With = With = /*#__PURE__*/function (_Expression) {
       var _this2 = this;
 
       var records = this.expression.execute(ctx);
-      this.isList = typeIsArray(records);
-      records = this.isList ? records : [records];
 
-      var returns = function () {
-        var result = [];
+      if (!typeIsArray(records)) {
+        records = [records];
+      }
 
-        var _iterator = _createForOfIteratorHelper(records),
-            _step;
-
-        try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var rec = _step.value;
-            var childCtx = ctx.childContext();
-            childCtx.set(_this2.alias, rec);
-            result.push(_this2.suchThat.execute(childCtx));
-          }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
-        }
-
-        return result;
-      }();
-
+      var returns = records.map(function (rec) {
+        var childCtx = ctx.childContext();
+        childCtx.set(_this2.alias, rec);
+        return _this2.suchThat.execute(childCtx);
+      });
       return returns.some(function (x) {
         return x;
       });
@@ -11073,7 +10422,7 @@ module.exports.With = With = /*#__PURE__*/function (_Expression) {
   return With;
 }(Expression);
 
-module.exports.Without = Without = /*#__PURE__*/function (_With) {
+var Without = /*#__PURE__*/function (_With) {
   _inherits(Without, _With);
 
   var _super2 = _createSuper(Without);
@@ -11081,7 +10430,7 @@ module.exports.Without = Without = /*#__PURE__*/function (_With) {
   function Without(json) {
     _classCallCheck(this, Without);
 
-    return _super2.apply(this, arguments);
+    return _super2.call(this, json);
   }
 
   _createClass(Without, [{
@@ -11095,7 +10444,7 @@ module.exports.Without = Without = /*#__PURE__*/function (_With) {
 }(With); // ELM-only, not a product of CQL
 
 
-module.exports.Sort = Sort = /*#__PURE__*/function (_UnimplementedExpress) {
+var Sort = /*#__PURE__*/function (_UnimplementedExpress) {
   _inherits(Sort, _UnimplementedExpress);
 
   var _super3 = _createSuper(Sort);
@@ -11109,7 +10458,7 @@ module.exports.Sort = Sort = /*#__PURE__*/function (_UnimplementedExpress) {
   return Sort;
 }(UnimplementedExpression);
 
-module.exports.ByDirection = ByDirection = /*#__PURE__*/function (_Expression2) {
+var ByDirection = /*#__PURE__*/function (_Expression2) {
   _inherits(ByDirection, _Expression2);
 
   var _super4 = _createSuper(ByDirection);
@@ -11119,7 +10468,7 @@ module.exports.ByDirection = ByDirection = /*#__PURE__*/function (_Expression2) 
 
     _classCallCheck(this, ByDirection);
 
-    _this3 = _super4.apply(this, arguments);
+    _this3 = _super4.call(this, json);
     _this3.direction = json.direction;
     _this3.low_order = _this3.direction === 'asc' ? -1 : 1;
     _this3.high_order = _this3.low_order * -1;
@@ -11148,7 +10497,7 @@ module.exports.ByDirection = ByDirection = /*#__PURE__*/function (_Expression2) 
   return ByDirection;
 }(Expression);
 
-module.exports.ByExpression = ByExpression = /*#__PURE__*/function (_Expression3) {
+var ByExpression = /*#__PURE__*/function (_Expression3) {
   _inherits(ByExpression, _Expression3);
 
   var _super5 = _createSuper(ByExpression);
@@ -11158,7 +10507,7 @@ module.exports.ByExpression = ByExpression = /*#__PURE__*/function (_Expression3
 
     _classCallCheck(this, ByExpression);
 
-    _this4 = _super5.apply(this, arguments);
+    _this4 = _super5.call(this, json);
     _this4.expression = build(json.expression);
     _this4.direction = json.direction;
     _this4.low_order = _this4.direction === 'asc' ? -1 : 1;
@@ -11193,7 +10542,7 @@ module.exports.ByExpression = ByExpression = /*#__PURE__*/function (_Expression3
   return ByExpression;
 }(Expression);
 
-module.exports.ByColumn = ByColumn = /*#__PURE__*/function (_ByExpression) {
+var ByColumn = /*#__PURE__*/function (_ByExpression) {
   _inherits(ByColumn, _ByExpression);
 
   var _super6 = _createSuper(ByColumn);
@@ -11203,7 +10552,7 @@ module.exports.ByColumn = ByColumn = /*#__PURE__*/function (_ByExpression) {
 
     _classCallCheck(this, ByColumn);
 
-    _this5 = _super6.apply(this, arguments);
+    _this5 = _super6.call(this, json);
     _this5.expression = build({
       name: json.path,
       type: 'IdentifierRef'
@@ -11214,14 +10563,14 @@ module.exports.ByColumn = ByColumn = /*#__PURE__*/function (_ByExpression) {
   return ByColumn;
 }(ByExpression);
 
-module.exports.ReturnClause = ReturnClause = ReturnClause = function ReturnClause(json) {
+var ReturnClause = function ReturnClause(json) {
   _classCallCheck(this, ReturnClause);
 
   this.expression = build(json.expression);
   this.distinct = json.distinct != null ? json.distinct : true;
 };
 
-module.exports.SortClause = SortClause = SortClause = /*#__PURE__*/function () {
+var SortClause = /*#__PURE__*/function () {
   function SortClause(json) {
     _classCallCheck(this, SortClause);
 
@@ -11237,12 +10586,12 @@ module.exports.SortClause = SortClause = SortClause = /*#__PURE__*/function () {
         return values.sort(function (a, b) {
           var order = 0;
 
-          var _iterator2 = _createForOfIteratorHelper(_this6.by),
-              _step2;
+          var _iterator = _createForOfIteratorHelper(_this6.by),
+              _step;
 
           try {
-            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-              var item = _step2.value;
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var item = _step.value;
               // Do not use execute here because the value of the sort order is not important.
               order = item.exec(ctx, a, b);
 
@@ -11251,9 +10600,9 @@ module.exports.SortClause = SortClause = SortClause = /*#__PURE__*/function () {
               }
             }
           } catch (err) {
-            _iterator2.e(err);
+            _iterator.e(err);
           } finally {
-            _iterator2.f();
+            _iterator.f();
           }
 
           return order;
@@ -11267,46 +10616,17 @@ module.exports.SortClause = SortClause = SortClause = /*#__PURE__*/function () {
 
 var toDistinctList = function toDistinctList(xList) {
   var yList = [];
-
-  var _iterator3 = _createForOfIteratorHelper(xList),
-      _step3;
-
-  try {
-    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-      var x = _step3.value;
-      var inYList = false;
-
-      var _iterator4 = _createForOfIteratorHelper(yList),
-          _step4;
-
-      try {
-        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-          var y = _step4.value;
-
-          if (equals(x, y)) {
-            inYList = true;
-          }
-        }
-      } catch (err) {
-        _iterator4.e(err);
-      } finally {
-        _iterator4.f();
-      }
-
-      if (!inYList) {
-        yList.push(x);
-      }
+  xList.forEach(function (x) {
+    if (!yList.some(function (y) {
+      return equals(x, y);
+    })) {
+      yList.push(x);
     }
-  } catch (err) {
-    _iterator3.e(err);
-  } finally {
-    _iterator3.f();
-  }
-
+  });
   return yList;
 };
 
-module.exports.Query = Query = /*#__PURE__*/function (_Expression4) {
+var Query = /*#__PURE__*/function (_Expression4) {
   _inherits(Query, _Expression4);
 
   var _super7 = _createSuper(Query);
@@ -11316,13 +10636,13 @@ module.exports.Query = Query = /*#__PURE__*/function (_Expression4) {
 
     _classCallCheck(this, Query);
 
-    _this7 = _super7.apply(this, arguments);
+    _this7 = _super7.call(this, json);
     _this7.sources = new MultiSource(json.source.map(function (s) {
       return new AliasedQuerySource(s);
     }));
-    _this7.letClauses = (json.let != null ? json.let : []).map(function (d) {
+    _this7.letClauses = json.let != null ? json.let.map(function (d) {
       return new LetClause(d);
-    });
+    }) : [];
     _this7.relationship = json.relationship != null ? build(json.relationship) : [];
     _this7.where = build(json.where);
     _this7.returnClause = json.return != null ? new ReturnClause(json.return) : null;
@@ -11338,54 +10658,37 @@ module.exports.Query = Query = /*#__PURE__*/function (_Expression4) {
 
       var returnedValues = [];
       this.sources.forEach(ctx, function (rctx) {
-        var _iterator5 = _createForOfIteratorHelper(_this8.letClauses),
-            _step5;
+        var _iterator2 = _createForOfIteratorHelper(_this8.letClauses),
+            _step2;
 
         try {
-          for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-            var def = _step5.value;
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var def = _step2.value;
             rctx.set(def.identifier, def.expression.execute(rctx));
           }
         } catch (err) {
-          _iterator5.e(err);
+          _iterator2.e(err);
         } finally {
-          _iterator5.f();
+          _iterator2.f();
         }
 
-        var relations = function () {
-          var result = [];
+        var relations = _this8.relationship.map(function (rel) {
+          var child_ctx = rctx.childContext();
+          return rel.execute(child_ctx);
+        });
 
-          var _iterator6 = _createForOfIteratorHelper(_this8.relationship),
-              _step6;
-
-          try {
-            for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-              var rel = _step6.value;
-              var child_ctx = rctx.childContext();
-              result.push(rel.execute(child_ctx));
-            }
-          } catch (err) {
-            _iterator6.e(err);
-          } finally {
-            _iterator6.f();
-          }
-
-          return result;
-        }();
-
-        var passed = allTrue(relations);
-        passed = passed && (_this8.where ? _this8.where.execute(rctx) : passed);
+        var passed = allTrue(relations) && (_this8.where ? _this8.where.execute(rctx) : true);
 
         if (passed) {
           if (_this8.returnClause != null) {
             var val = _this8.returnClause.expression.execute(rctx);
 
-            return returnedValues.push(val);
+            returnedValues.push(val);
           } else {
             if (_this8.aliases.length === 1) {
-              return returnedValues.push(rctx.get(_this8.aliases[0]));
+              returnedValues.push(rctx.get(_this8.aliases[0]));
             } else {
-              return returnedValues.push(rctx.context_values);
+              returnedValues.push(rctx.context_values);
             }
           }
         }
@@ -11411,7 +10714,7 @@ module.exports.Query = Query = /*#__PURE__*/function (_Expression4) {
   return Query;
 }(Expression);
 
-module.exports.AliasRef = AliasRef = /*#__PURE__*/function (_Expression5) {
+var AliasRef = /*#__PURE__*/function (_Expression5) {
   _inherits(AliasRef, _Expression5);
 
   var _super8 = _createSuper(AliasRef);
@@ -11421,7 +10724,7 @@ module.exports.AliasRef = AliasRef = /*#__PURE__*/function (_Expression5) {
 
     _classCallCheck(this, AliasRef);
 
-    _this9 = _super8.apply(this, arguments);
+    _this9 = _super8.call(this, json);
     _this9.name = json.name;
     return _this9;
   }
@@ -11436,7 +10739,7 @@ module.exports.AliasRef = AliasRef = /*#__PURE__*/function (_Expression5) {
   return AliasRef;
 }(Expression);
 
-module.exports.QueryLetRef = QueryLetRef = /*#__PURE__*/function (_AliasRef) {
+var QueryLetRef = /*#__PURE__*/function (_AliasRef) {
   _inherits(QueryLetRef, _AliasRef);
 
   var _super9 = _createSuper(QueryLetRef);
@@ -11444,7 +10747,7 @@ module.exports.QueryLetRef = QueryLetRef = /*#__PURE__*/function (_AliasRef) {
   function QueryLetRef(json) {
     _classCallCheck(this, QueryLetRef);
 
-    return _super9.apply(this, arguments);
+    return _super9.call(this, json);
   }
 
   return QueryLetRef;
@@ -11489,37 +10792,37 @@ var MultiSource = /*#__PURE__*/function () {
       var records = this.expression.execute(ctx);
       this.isList = typeIsArray(records);
       records = this.isList ? records : [records];
-      return function () {
-        var result = [];
+      return records.map(function (rec) {
+        var rctx = new Context(ctx);
+        rctx.set(_this10.alias, rec);
 
-        var _iterator7 = _createForOfIteratorHelper(records),
-            _step7;
-
-        try {
-          for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-            var rec = _step7.value;
-            var rctx = new Context(ctx);
-            rctx.set(_this10.alias, rec);
-
-            if (_this10.rest) {
-              result.push(_this10.rest.forEach(rctx, func));
-            } else {
-              result.push(func(rctx));
-            }
-          }
-        } catch (err) {
-          _iterator7.e(err);
-        } finally {
-          _iterator7.f();
+        if (_this10.rest) {
+          return _this10.rest.forEach(rctx, func);
+        } else {
+          return func(rctx);
         }
-
-        return result;
-      }();
+      });
     }
   }]);
 
   return MultiSource;
 }();
+
+module.exports = {
+  AliasedQuerySource: AliasedQuerySource,
+  AliasRef: AliasRef,
+  ByColumn: ByColumn,
+  ByDirection: ByDirection,
+  ByExpression: ByExpression,
+  LetClause: LetClause,
+  Query: Query,
+  QueryLetRef: QueryLetRef,
+  ReturnClause: ReturnClause,
+  Sort: Sort,
+  SortClause: SortClause,
+  With: With,
+  Without: Without
+};
 },{"../runtime/context":41,"../util/comparison":45,"../util/util":47,"./builder":16,"./expression":22}],36:[function(require,module,exports){
 "use strict";
 
@@ -11545,32 +10848,15 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
+var _require = require('./expression'),
+    Expression = _require.Expression;
 
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Ratio;
-
-var _require = require('../datatypes/exception'),
-    Exception = _require.Exception;
-
-var _require2 = require('./expression'),
-    Expression = _require2.Expression;
-
-var _require3 = require('../datatypes/quantity'),
-    Quantity = _require3.Quantity;
+var _require2 = require('../datatypes/quantity'),
+    Quantity = _require2.Quantity;
 
 var DT = require('../datatypes/datatypes');
 
-module.exports.Ratio = Ratio = /*#__PURE__*/function (_Expression) {
+var Ratio = /*#__PURE__*/function (_Expression) {
   _inherits(Ratio, _Expression);
 
   var _super = _createSuper(Ratio);
@@ -11580,7 +10866,7 @@ module.exports.Ratio = Ratio = /*#__PURE__*/function (_Expression) {
 
     _classCallCheck(this, Ratio);
 
-    _this = _super.apply(this, arguments);
+    _this = _super.call(this, json);
 
     if (json.numerator == null) {
       throw new Error('Cannot create a ratio with an undefined numerator value');
@@ -11606,16 +10892,20 @@ module.exports.Ratio = Ratio = /*#__PURE__*/function (_Expression) {
 
   return Ratio;
 }(Expression);
-},{"../datatypes/datatypes":6,"../datatypes/exception":8,"../datatypes/quantity":11,"./expression":22}],37:[function(require,module,exports){
-"use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+module.exports = {
+  Ratio: Ratio
+};
+},{"../datatypes/datatypes":6,"../datatypes/quantity":11,"./expression":22}],37:[function(require,module,exports){
+"use strict";
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -11637,32 +10927,13 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    constructor-super,
-    no-constant-condition,
-    no-this-before-super,
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS001: Remove Babel/TypeScript constructor workaround
- * DS102: Remove unnecessary code created because of implicit returns
- * DS103: Rewrite code to no longer use __guard__
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var ExpressionDef, ExpressionRef, FunctionDef, FunctionRef, IdentifierRef, OperandRef;
-
 var _require = require('./expression'),
     Expression = _require.Expression;
 
 var _require2 = require('./builder'),
     build = _require2.build;
 
-module.exports.ExpressionDef = ExpressionDef = /*#__PURE__*/function (_Expression) {
+var ExpressionDef = /*#__PURE__*/function (_Expression) {
   _inherits(ExpressionDef, _Expression);
 
   var _super = _createSuper(ExpressionDef);
@@ -11672,7 +10943,7 @@ module.exports.ExpressionDef = ExpressionDef = /*#__PURE__*/function (_Expressio
 
     _classCallCheck(this, ExpressionDef);
 
-    _this = _super.apply(this, arguments);
+    _this = _super.call(this, json);
     _this.name = json.name;
     _this.context = json.context;
     _this.expression = build(json.expression);
@@ -11691,7 +10962,7 @@ module.exports.ExpressionDef = ExpressionDef = /*#__PURE__*/function (_Expressio
   return ExpressionDef;
 }(Expression);
 
-module.exports.ExpressionRef = ExpressionRef = /*#__PURE__*/function (_Expression2) {
+var ExpressionRef = /*#__PURE__*/function (_Expression2) {
   _inherits(ExpressionRef, _Expression2);
 
   var _super2 = _createSuper(ExpressionRef);
@@ -11701,7 +10972,7 @@ module.exports.ExpressionRef = ExpressionRef = /*#__PURE__*/function (_Expressio
 
     _classCallCheck(this, ExpressionRef);
 
-    _this2 = _super2.apply(this, arguments);
+    _this2 = _super2.call(this, json);
     _this2.name = json.name;
     _this2.library = json.libraryName;
     return _this2;
@@ -11724,7 +10995,7 @@ module.exports.ExpressionRef = ExpressionRef = /*#__PURE__*/function (_Expressio
   return ExpressionRef;
 }(Expression);
 
-module.exports.FunctionDef = FunctionDef = /*#__PURE__*/function (_Expression3) {
+var FunctionDef = /*#__PURE__*/function (_Expression3) {
   _inherits(FunctionDef, _Expression3);
 
   var _super3 = _createSuper(FunctionDef);
@@ -11734,7 +11005,7 @@ module.exports.FunctionDef = FunctionDef = /*#__PURE__*/function (_Expression3) 
 
     _classCallCheck(this, FunctionDef);
 
-    _this3 = _super3.apply(this, arguments);
+    _this3 = _super3.call(this, json);
     _this3.name = json.name;
     _this3.expression = build(json.expression);
     _this3.parameters = json.operand;
@@ -11751,7 +11022,7 @@ module.exports.FunctionDef = FunctionDef = /*#__PURE__*/function (_Expression3) 
   return FunctionDef;
 }(Expression);
 
-module.exports.FunctionRef = FunctionRef = /*#__PURE__*/function (_Expression4) {
+var FunctionRef = /*#__PURE__*/function (_Expression4) {
   _inherits(FunctionRef, _Expression4);
 
   var _super4 = _createSuper(FunctionRef);
@@ -11761,7 +11032,7 @@ module.exports.FunctionRef = FunctionRef = /*#__PURE__*/function (_Expression4) 
 
     _classCallCheck(this, FunctionRef);
 
-    _this4 = _super4.apply(this, arguments);
+    _this4 = _super4.call(this, json);
     _this4.name = json.name;
     _this4.library = json.libraryName;
     return _this4;
@@ -11770,23 +11041,26 @@ module.exports.FunctionRef = FunctionRef = /*#__PURE__*/function (_Expression4) 
   _createClass(FunctionRef, [{
     key: "exec",
     value: function exec(ctx) {
-      var _this5 = this;
+      var functionDef, child_ctx;
 
-      var functionDef = this.library ? __guard__(ctx.get(this.library), function (x) {
-        return x.get(_this5.name);
-      }) : ctx.get(this.name);
+      if (this.library) {
+        var lib = ctx.get(this.library);
+        functionDef = lib ? lib.get(this.name) : undefined;
+        var libCtx = ctx.getLibraryContext(this.library);
+        child_ctx = libCtx ? libCtx.childContext() : undefined;
+      } else {
+        functionDef = ctx.get(this.name);
+        child_ctx = ctx.childContext();
+      }
+
       var args = this.execArgs(ctx);
-      var child_ctx = this.library ? __guard__(ctx.getLibraryContext(this.library), function (x1) {
-        return x1.childContext();
-      }) : ctx.childContext();
 
       if (args.length !== functionDef.parameters.length) {
         throw new Error('incorrect number of arguments supplied');
       }
 
       for (var i = 0; i < functionDef.parameters.length; i++) {
-        var p = functionDef.parameters[i];
-        child_ctx.set(p.name, args[i]);
+        child_ctx.set(functionDef.parameters[i].name, args[i]);
       }
 
       return functionDef.expression.execute(child_ctx);
@@ -11796,19 +11070,19 @@ module.exports.FunctionRef = FunctionRef = /*#__PURE__*/function (_Expression4) 
   return FunctionRef;
 }(Expression);
 
-module.exports.OperandRef = OperandRef = /*#__PURE__*/function (_Expression5) {
+var OperandRef = /*#__PURE__*/function (_Expression5) {
   _inherits(OperandRef, _Expression5);
 
   var _super5 = _createSuper(OperandRef);
 
   function OperandRef(json) {
-    var _this6;
+    var _this5;
 
     _classCallCheck(this, OperandRef);
 
-    _this6 = _super5.call(this, json);
-    _this6.name = json.name;
-    return _this6;
+    _this5 = _super5.call(this, json);
+    _this5.name = json.name;
+    return _this5;
   }
 
   _createClass(OperandRef, [{
@@ -11821,41 +11095,37 @@ module.exports.OperandRef = OperandRef = /*#__PURE__*/function (_Expression5) {
   return OperandRef;
 }(Expression);
 
-module.exports.IdentifierRef = IdentifierRef = /*#__PURE__*/function (_Expression6) {
+var IdentifierRef = /*#__PURE__*/function (_Expression6) {
   _inherits(IdentifierRef, _Expression6);
 
   var _super6 = _createSuper(IdentifierRef);
 
   function IdentifierRef(json) {
-    var _this7;
+    var _this6;
 
     _classCallCheck(this, IdentifierRef);
 
-    _this7 = _super6.apply(this, arguments);
-    _this7.name = json.name;
-    _this7.library = json.libraryName;
-    return _this7;
+    _this6 = _super6.call(this, json);
+    _this6.name = json.name;
+    _this6.library = json.libraryName;
+    return _this6;
   }
 
   _createClass(IdentifierRef, [{
     key: "exec",
     value: function exec(ctx) {
-      var _this8 = this;
-
       // TODO: Technically, the ELM Translator should never output one of these
       // but this code is needed since it does, as a work-around to get queries
       // to work properly when sorting by a field in a tuple
-      var val = this.library ? __guard__(ctx.get(this.library), function (x) {
-        return x.get(_this8.name);
-      }) : ctx.get(this.name);
+      var lib = this.library ? ctx.get(this.library) : undefined;
+      var val = lib ? lib.get(this.name) : ctx.get(this.name);
 
       if (val == null) {
         var parts = this.name.split('.');
-        val = ctx.get(part);
+        val = ctx.get(parts[0]);
 
         if (val != null && parts.length > 1) {
           var curr_obj = val;
-          var curr_val = null;
 
           var _iterator = _createForOfIteratorHelper(parts.slice(1)),
               _step;
@@ -11864,9 +11134,17 @@ module.exports.IdentifierRef = IdentifierRef = /*#__PURE__*/function (_Expressio
             for (_iterator.s(); !(_step = _iterator.n()).done;) {
               var part = _step.value;
 
-              var _obj = (curr_obj != null ? curr_obj[part] : undefined) != null ? curr_obj != null ? curr_obj[part] : undefined : __guardMethod__(curr_obj, 'get', function (o) {
-                return o.get(part);
-              });
+              // _obj = curr_obj?[part] ? curr_obj?.get?(part)
+              // curr_obj = if _obj instanceof Function then _obj.call(curr_obj) else _obj
+              var _obj = void 0;
+
+              if (curr_obj != null) {
+                _obj = curr_obj[part];
+
+                if (_obj === undefined && typeof curr_obj.get === 'function') {
+                  _obj = curr_obj.get(part);
+                }
+              }
 
               curr_obj = _obj instanceof Function ? _obj.call(curr_obj) : _obj;
             }
@@ -11891,21 +11169,16 @@ module.exports.IdentifierRef = IdentifierRef = /*#__PURE__*/function (_Expressio
   return IdentifierRef;
 }(Expression);
 
-function __guard__(value, transform) {
-  return typeof value !== 'undefined' && value !== null ? transform(value) : undefined;
-}
-
-function __guardMethod__(obj, methodName, transform) {
-  if (typeof obj !== 'undefined' && obj !== null && typeof obj[methodName] === 'function') {
-    return transform(obj, methodName);
-  } else {
-    return undefined;
-  }
-}
+module.exports = {
+  ExpressionDef: ExpressionDef,
+  ExpressionRef: ExpressionRef,
+  FunctionDef: FunctionDef,
+  FunctionRef: FunctionRef,
+  IdentifierRef: IdentifierRef,
+  OperandRef: OperandRef
+};
 },{"./builder":16,"./expression":22}],38:[function(require,module,exports){
 "use strict";
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -11918,6 +11191,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -11939,29 +11214,13 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Combine, Concatenate, EndsWith, Lower, Matches, PositionOf, Split, SplitOnMatches, StartsWith, Substring, Upper;
-
 var _require = require('./expression'),
-    Expression = _require.Expression,
-    UnimplementedExpression = _require.UnimplementedExpression;
+    Expression = _require.Expression;
 
 var _require2 = require('./builder'),
     build = _require2.build;
 
-module.exports.Concatenate = Concatenate = /*#__PURE__*/function (_Expression) {
+var Concatenate = /*#__PURE__*/function (_Expression) {
   _inherits(Concatenate, _Expression);
 
   var _super = _createSuper(Concatenate);
@@ -11969,7 +11228,7 @@ module.exports.Concatenate = Concatenate = /*#__PURE__*/function (_Expression) {
   function Concatenate(json) {
     _classCallCheck(this, Concatenate);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, json);
   }
 
   _createClass(Concatenate, [{
@@ -11992,7 +11251,7 @@ module.exports.Concatenate = Concatenate = /*#__PURE__*/function (_Expression) {
   return Concatenate;
 }(Expression);
 
-module.exports.Combine = Combine = /*#__PURE__*/function (_Expression2) {
+var Combine = /*#__PURE__*/function (_Expression2) {
   _inherits(Combine, _Expression2);
 
   var _super2 = _createSuper(Combine);
@@ -12002,7 +11261,7 @@ module.exports.Combine = Combine = /*#__PURE__*/function (_Expression2) {
 
     _classCallCheck(this, Combine);
 
-    _this = _super2.apply(this, arguments);
+    _this = _super2.call(this, json);
     _this.source = build(json.source);
     _this.separator = build(json.separator);
     return _this;
@@ -12018,10 +11277,10 @@ module.exports.Combine = Combine = /*#__PURE__*/function (_Expression2) {
         return null;
       } else {
         var filteredArray = source.filter(function (x) {
-          return x !== null && x !== undefined;
+          return x != null;
         });
 
-        if (filteredArray.length < 1) {
+        if (filteredArray.length === 0) {
           return null;
         } else {
           return filteredArray.join(separator);
@@ -12033,7 +11292,7 @@ module.exports.Combine = Combine = /*#__PURE__*/function (_Expression2) {
   return Combine;
 }(Expression);
 
-module.exports.Split = Split = /*#__PURE__*/function (_Expression3) {
+var Split = /*#__PURE__*/function (_Expression3) {
   _inherits(Split, _Expression3);
 
   var _super3 = _createSuper(Split);
@@ -12043,7 +11302,7 @@ module.exports.Split = Split = /*#__PURE__*/function (_Expression3) {
 
     _classCallCheck(this, Split);
 
-    _this2 = _super3.apply(this, arguments);
+    _this2 = _super3.call(this, json);
     _this2.stringToSplit = build(json.stringToSplit);
     _this2.separator = build(json.separator);
     return _this2;
@@ -12055,7 +11314,7 @@ module.exports.Split = Split = /*#__PURE__*/function (_Expression3) {
       var stringToSplit = this.stringToSplit.execute(ctx);
       var separator = this.separator.execute(ctx);
 
-      if (!(stringToSplit != null && separator != null)) {
+      if (stringToSplit == null || separator == null) {
         return null;
       } else {
         return stringToSplit.split(separator);
@@ -12066,7 +11325,7 @@ module.exports.Split = Split = /*#__PURE__*/function (_Expression3) {
   return Split;
 }(Expression);
 
-module.exports.SplitOnMatches = SplitOnMatches = /*#__PURE__*/function (_Expression4) {
+var SplitOnMatches = /*#__PURE__*/function (_Expression4) {
   _inherits(SplitOnMatches, _Expression4);
 
   var _super4 = _createSuper(SplitOnMatches);
@@ -12076,7 +11335,7 @@ module.exports.SplitOnMatches = SplitOnMatches = /*#__PURE__*/function (_Express
 
     _classCallCheck(this, SplitOnMatches);
 
-    _this3 = _super4.apply(this, arguments);
+    _this3 = _super4.call(this, json);
     _this3.stringToSplit = build(json.stringToSplit);
     _this3.separatorPattern = build(json.separatorPattern);
     return _this3;
@@ -12088,7 +11347,7 @@ module.exports.SplitOnMatches = SplitOnMatches = /*#__PURE__*/function (_Express
       var stringToSplit = this.stringToSplit.execute(ctx);
       var separatorPattern = this.separatorPattern.execute(ctx);
 
-      if (!(stringToSplit != null && separatorPattern != null)) {
+      if (stringToSplit == null || separatorPattern == null) {
         return null;
       } else {
         return stringToSplit.split(new RegExp(separatorPattern));
@@ -12100,7 +11359,7 @@ module.exports.SplitOnMatches = SplitOnMatches = /*#__PURE__*/function (_Express
 }(Expression); // Length is completely handled by overloaded#Length
 
 
-module.exports.Upper = Upper = /*#__PURE__*/function (_Expression5) {
+var Upper = /*#__PURE__*/function (_Expression5) {
   _inherits(Upper, _Expression5);
 
   var _super5 = _createSuper(Upper);
@@ -12108,7 +11367,7 @@ module.exports.Upper = Upper = /*#__PURE__*/function (_Expression5) {
   function Upper(json) {
     _classCallCheck(this, Upper);
 
-    return _super5.apply(this, arguments);
+    return _super5.call(this, json);
   }
 
   _createClass(Upper, [{
@@ -12127,7 +11386,7 @@ module.exports.Upper = Upper = /*#__PURE__*/function (_Expression5) {
   return Upper;
 }(Expression);
 
-module.exports.Lower = Lower = /*#__PURE__*/function (_Expression6) {
+var Lower = /*#__PURE__*/function (_Expression6) {
   _inherits(Lower, _Expression6);
 
   var _super6 = _createSuper(Lower);
@@ -12135,7 +11394,7 @@ module.exports.Lower = Lower = /*#__PURE__*/function (_Expression6) {
   function Lower(json) {
     _classCallCheck(this, Lower);
 
-    return _super6.apply(this, arguments);
+    return _super6.call(this, json);
   }
 
   _createClass(Lower, [{
@@ -12155,7 +11414,7 @@ module.exports.Lower = Lower = /*#__PURE__*/function (_Expression6) {
 }(Expression); // Indexer is completely handled by overloaded#Indexer
 
 
-module.exports.PositionOf = PositionOf = /*#__PURE__*/function (_Expression7) {
+var PositionOf = /*#__PURE__*/function (_Expression7) {
   _inherits(PositionOf, _Expression7);
 
   var _super7 = _createSuper(PositionOf);
@@ -12165,7 +11424,7 @@ module.exports.PositionOf = PositionOf = /*#__PURE__*/function (_Expression7) {
 
     _classCallCheck(this, PositionOf);
 
-    _this4 = _super7.apply(this, arguments);
+    _this4 = _super7.call(this, json);
     _this4.pattern = build(json.pattern);
     _this4.string = build(json.string);
     return _this4;
@@ -12177,7 +11436,7 @@ module.exports.PositionOf = PositionOf = /*#__PURE__*/function (_Expression7) {
       var pattern = this.pattern.execute(ctx);
       var string = this.string.execute(ctx);
 
-      if (!(pattern != null && string != null)) {
+      if (pattern == null || string == null) {
         return null;
       } else {
         return string.indexOf(pattern);
@@ -12188,7 +11447,7 @@ module.exports.PositionOf = PositionOf = /*#__PURE__*/function (_Expression7) {
   return PositionOf;
 }(Expression);
 
-module.exports.Matches = Matches = /*#__PURE__*/function (_Expression8) {
+var Matches = /*#__PURE__*/function (_Expression8) {
   _inherits(Matches, _Expression8);
 
   var _super8 = _createSuper(Matches);
@@ -12196,18 +11455,18 @@ module.exports.Matches = Matches = /*#__PURE__*/function (_Expression8) {
   function Matches(json) {
     _classCallCheck(this, Matches);
 
-    return _super8.apply(this, arguments);
+    return _super8.call(this, json);
   }
 
   _createClass(Matches, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from = Array.from(this.execArgs(ctx)),
-          _Array$from2 = _slicedToArray(_Array$from, 2),
-          string = _Array$from2[0],
-          pattern = _Array$from2[1];
+      var _this$execArgs = this.execArgs(ctx),
+          _this$execArgs2 = _slicedToArray(_this$execArgs, 2),
+          string = _this$execArgs2[0],
+          pattern = _this$execArgs2[1];
 
-      if (!(string != null && pattern != null)) {
+      if (string == null || pattern == null) {
         return null;
       }
 
@@ -12222,7 +11481,7 @@ module.exports.Matches = Matches = /*#__PURE__*/function (_Expression8) {
   return Matches;
 }(Expression);
 
-module.exports.Substring = Substring = /*#__PURE__*/function (_Expression9) {
+var Substring = /*#__PURE__*/function (_Expression9) {
   _inherits(Substring, _Expression9);
 
   var _super9 = _createSuper(Substring);
@@ -12232,7 +11491,7 @@ module.exports.Substring = Substring = /*#__PURE__*/function (_Expression9) {
 
     _classCallCheck(this, Substring);
 
-    _this5 = _super9.apply(this, arguments);
+    _this5 = _super9.call(this, json);
     _this5.stringToSub = build(json.stringToSub);
     _this5.startIndex = build(json.startIndex);
     _this5.length = build(json['length']);
@@ -12259,7 +11518,7 @@ module.exports.Substring = Substring = /*#__PURE__*/function (_Expression9) {
   return Substring;
 }(Expression);
 
-module.exports.StartsWith = StartsWith = /*#__PURE__*/function (_Expression10) {
+var StartsWith = /*#__PURE__*/function (_Expression10) {
   _inherits(StartsWith, _Expression10);
 
   var _super10 = _createSuper(StartsWith);
@@ -12267,7 +11526,7 @@ module.exports.StartsWith = StartsWith = /*#__PURE__*/function (_Expression10) {
   function StartsWith(json) {
     _classCallCheck(this, StartsWith);
 
-    return _super10.apply(this, arguments);
+    return _super10.call(this, json);
   }
 
   _createClass(StartsWith, [{
@@ -12288,7 +11547,7 @@ module.exports.StartsWith = StartsWith = /*#__PURE__*/function (_Expression10) {
   return StartsWith;
 }(Expression);
 
-module.exports.EndsWith = EndsWith = /*#__PURE__*/function (_Expression11) {
+var EndsWith = /*#__PURE__*/function (_Expression11) {
   _inherits(EndsWith, _Expression11);
 
   var _super11 = _createSuper(EndsWith);
@@ -12296,7 +11555,7 @@ module.exports.EndsWith = EndsWith = /*#__PURE__*/function (_Expression11) {
   function EndsWith(json) {
     _classCallCheck(this, EndsWith);
 
-    return _super11.apply(this, arguments);
+    return _super11.call(this, json);
   }
 
   _createClass(EndsWith, [{
@@ -12316,6 +11575,20 @@ module.exports.EndsWith = EndsWith = /*#__PURE__*/function (_Expression11) {
 
   return EndsWith;
 }(Expression);
+
+module.exports = {
+  Combine: Combine,
+  Concatenate: Concatenate,
+  EndsWith: EndsWith,
+  Lower: Lower,
+  Matches: Matches,
+  PositionOf: PositionOf,
+  Split: Split,
+  SplitOnMatches: SplitOnMatches,
+  StartsWith: StartsWith,
+  Substring: Substring,
+  Upper: Upper
+};
 },{"./builder":16,"./expression":22}],39:[function(require,module,exports){
 "use strict";
 
@@ -12347,22 +11620,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS103: Rewrite code to no longer use __guard__
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var Property, Tuple, TupleElement, TupleElementDefinition;
-
 var _require = require('./expression'),
     Expression = _require.Expression,
     UnimplementedExpression = _require.UnimplementedExpression;
@@ -12370,7 +11627,7 @@ var _require = require('./expression'),
 var _require2 = require('./builder'),
     build = _require2.build;
 
-module.exports.Property = Property = /*#__PURE__*/function (_Expression) {
+var Property = /*#__PURE__*/function (_Expression) {
   _inherits(Property, _Expression);
 
   var _super = _createSuper(Property);
@@ -12380,7 +11637,7 @@ module.exports.Property = Property = /*#__PURE__*/function (_Expression) {
 
     _classCallCheck(this, Property);
 
-    _this = _super.apply(this, arguments);
+    _this = _super.call(this, json);
     _this.scope = json.scope;
     _this.source = build(json.source);
     _this.path = json.path;
@@ -12390,22 +11647,17 @@ module.exports.Property = Property = /*#__PURE__*/function (_Expression) {
   _createClass(Property, [{
     key: "exec",
     value: function exec(ctx) {
-      var _this2 = this;
-
       var obj = this.scope != null ? ctx.get(this.scope) : this.source;
 
       if (obj instanceof Expression) {
         obj = obj.execute(ctx);
       }
 
-      var val = (obj != null ? obj[this.path] : undefined) != null ? obj != null ? obj[this.path] : undefined : __guardMethod__(obj, 'get', function (o) {
-        return o.get(_this2.path);
-      });
+      var val = getPropertyFromObject(obj, this.path);
 
-      if (!val) {
+      if (val == null) {
         var parts = this.path.split('.');
         var curr_obj = obj;
-        var curr_val = null;
 
         var _iterator = _createForOfIteratorHelper(parts),
             _step;
@@ -12414,9 +11666,7 @@ module.exports.Property = Property = /*#__PURE__*/function (_Expression) {
           for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var part = _step.value;
 
-            var _obj = (curr_obj != null ? curr_obj[part] : undefined) != null ? curr_obj != null ? curr_obj[part] : undefined : __guardMethod__(curr_obj, 'get', function (o1) {
-              return o1.get(part);
-            });
+            var _obj = getPropertyFromObject(curr_obj, part);
 
             curr_obj = _obj instanceof Function ? _obj.call(curr_obj) : _obj;
           }
@@ -12440,73 +11690,72 @@ module.exports.Property = Property = /*#__PURE__*/function (_Expression) {
   return Property;
 }(Expression);
 
-module.exports.Tuple = Tuple = function () {
-  Tuple = /*#__PURE__*/function (_Expression2) {
-    _inherits(Tuple, _Expression2);
+function getPropertyFromObject(obj, path) {
+  var val;
 
-    var _super2 = _createSuper(Tuple);
+  if (obj != null) {
+    val = obj[path];
 
-    _createClass(Tuple, null, [{
-      key: "initClass",
-      value: function initClass() {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        Object.defineProperties(this.prototype, {
-          isTuple: {
-            get: function get() {
-              return true;
-            }
-          }
-        });
-      }
-    }]);
-
-    function Tuple(json) {
-      var _this3;
-
-      _classCallCheck(this, Tuple);
-
-      _this3 = _super2.apply(this, arguments);
-      _this3.elements = json.element.map(function (el) {
-        return {
-          name: el.name,
-          value: build(el.value)
-        };
-      });
-      return _this3;
+    if (val === undefined && typeof obj.get === 'function') {
+      val = obj.get(path);
     }
+  }
 
-    _createClass(Tuple, [{
-      key: "exec",
-      value: function exec(ctx) {
-        var val = {};
+  return val;
+}
 
-        var _iterator2 = _createForOfIteratorHelper(this.elements),
-            _step2;
+var Tuple = /*#__PURE__*/function (_Expression2) {
+  _inherits(Tuple, _Expression2);
 
-        try {
-          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-            var el = _step2.value;
-            val[el.name] = el.value != null ? el.value.execute(ctx) : undefined;
-          }
-        } catch (err) {
-          _iterator2.e(err);
-        } finally {
-          _iterator2.f();
+  var _super2 = _createSuper(Tuple);
+
+  function Tuple(json) {
+    var _this2;
+
+    _classCallCheck(this, Tuple);
+
+    _this2 = _super2.call(this, json);
+    _this2.elements = json.element.map(function (el) {
+      return {
+        name: el.name,
+        value: build(el.value)
+      };
+    });
+    return _this2;
+  }
+
+  _createClass(Tuple, [{
+    key: "exec",
+    value: function exec(ctx) {
+      var val = {};
+
+      var _iterator2 = _createForOfIteratorHelper(this.elements),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var el = _step2.value;
+          val[el.name] = el.value != null ? el.value.execute(ctx) : undefined;
         }
-
-        return val;
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
       }
-    }]);
 
-    return Tuple;
-  }(Expression);
+      return val;
+    }
+  }, {
+    key: "isTuple",
+    get: function get() {
+      return true;
+    }
+  }]);
 
-  Tuple.initClass();
   return Tuple;
-}();
+}(Expression);
 
-module.exports.TupleElement = TupleElement = /*#__PURE__*/function (_UnimplementedExpress) {
+var TupleElement = /*#__PURE__*/function (_UnimplementedExpress) {
   _inherits(TupleElement, _UnimplementedExpress);
 
   var _super3 = _createSuper(TupleElement);
@@ -12520,7 +11769,7 @@ module.exports.TupleElement = TupleElement = /*#__PURE__*/function (_Unimplement
   return TupleElement;
 }(UnimplementedExpression);
 
-module.exports.TupleElementDefinition = TupleElementDefinition = /*#__PURE__*/function (_UnimplementedExpress2) {
+var TupleElementDefinition = /*#__PURE__*/function (_UnimplementedExpress2) {
   _inherits(TupleElementDefinition, _UnimplementedExpress2);
 
   var _super4 = _createSuper(TupleElementDefinition);
@@ -12534,17 +11783,14 @@ module.exports.TupleElementDefinition = TupleElementDefinition = /*#__PURE__*/fu
   return TupleElementDefinition;
 }(UnimplementedExpression);
 
-function __guardMethod__(obj, methodName, transform) {
-  if (typeof obj !== 'undefined' && obj !== null && typeof obj[methodName] === 'function') {
-    return transform(obj, methodName);
-  } else {
-    return undefined;
-  }
-}
+module.exports = {
+  Property: Property,
+  Tuple: Tuple,
+  TupleElement: TupleElement,
+  TupleElementDefinition: TupleElementDefinition
+};
 },{"./builder":16,"./expression":22}],40:[function(require,module,exports){
 "use strict";
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -12557,6 +11803,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -12578,53 +11826,33 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-/* eslint-disable
-    no-unused-vars,
-    no-useless-escape,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var As, CanConvertQuantity, Convert, ConvertQuantity, ConvertsToBoolean, ConvertsToDate, ConvertsToDateTime, ConvertsToDecimal, ConvertsToInteger, ConvertsToQuantity, ConvertsToRatio, ConvertsToString, ConvertsToTime, IntervalTypeSpecifier, Is, ListTypeSpecifier, NamedTypeSpecifier, ToBoolean, ToConcept, ToDate, ToDateTime, ToDecimal, ToInteger, ToQuantity, ToRatio, ToString, ToTime, TupleTypeSpecifier;
-
 var _require = require('./expression'),
     Expression = _require.Expression,
     UnimplementedExpression = _require.UnimplementedExpression;
 
-var _require2 = require('./reusable'),
-    FunctionRef = _require2.FunctionRef;
+var _require2 = require('../datatypes/datetime'),
+    DateTime = _require2.DateTime,
+    _Date = _require2.Date;
 
-var _require3 = require('../datatypes/datetime'),
-    DateTime = _require3.DateTime,
-    _Date = _require3.Date;
+var _require3 = require('../datatypes/clinical'),
+    Concept = _require3.Concept;
 
-var _require4 = require('../datatypes/clinical'),
-    Concept = _require4.Concept;
+var _require4 = require('../datatypes/quantity'),
+    parseQuantity = _require4.parseQuantity;
 
-var _require5 = require('../datatypes/quantity'),
-    parseQuantity = _require5.parseQuantity,
-    Quantity = _require5.Quantity;
+var _require5 = require('../util/math'),
+    isValidDecimal = _require5.isValidDecimal,
+    isValidInteger = _require5.isValidInteger,
+    limitDecimalPrecision = _require5.limitDecimalPrecision;
 
-var _require6 = require('../util/math'),
-    isValidDecimal = _require6.isValidDecimal,
-    isValidInteger = _require6.isValidInteger,
-    limitDecimalPrecision = _require6.limitDecimalPrecision;
+var _require6 = require('../util/util'),
+    normalizeMillisecondsField = _require6.normalizeMillisecondsField;
 
-var _require7 = require('../util/util'),
-    normalizeMillisecondsField = _require7.normalizeMillisecondsField;
-
-var _require8 = require('../datatypes/ratio'),
-    Ratio = _require8.Ratio; // TODO: Casting and Conversion needs unit tests!
+var _require7 = require('../datatypes/ratio'),
+    Ratio = _require7.Ratio; // TODO: Casting and Conversion needs unit tests!
 
 
-module.exports.As = As = /*#__PURE__*/function (_Expression) {
+var As = /*#__PURE__*/function (_Expression) {
   _inherits(As, _Expression);
 
   var _super = _createSuper(As);
@@ -12634,7 +11862,7 @@ module.exports.As = As = /*#__PURE__*/function (_Expression) {
 
     _classCallCheck(this, As);
 
-    _this = _super.apply(this, arguments);
+    _this = _super.call(this, json);
     _this.asType = json.asType;
     _this.asTypeSpecifier = json.asTypeSpecifier;
     _this.strict = json.strict != null ? json.strict : false;
@@ -12652,7 +11880,7 @@ module.exports.As = As = /*#__PURE__*/function (_Expression) {
   return As;
 }(Expression);
 
-module.exports.ToBoolean = ToBoolean = /*#__PURE__*/function (_Expression2) {
+var ToBoolean = /*#__PURE__*/function (_Expression2) {
   _inherits(ToBoolean, _Expression2);
 
   var _super2 = _createSuper(ToBoolean);
@@ -12660,7 +11888,7 @@ module.exports.ToBoolean = ToBoolean = /*#__PURE__*/function (_Expression2) {
   function ToBoolean(json) {
     _classCallCheck(this, ToBoolean);
 
-    return _super2.apply(this, arguments);
+    return _super2.call(this, json);
   }
 
   _createClass(ToBoolean, [{
@@ -12668,26 +11896,24 @@ module.exports.ToBoolean = ToBoolean = /*#__PURE__*/function (_Expression2) {
     value: function exec(ctx) {
       var arg = this.execArgs(ctx);
 
-      if (arg != null && typeof arg !== 'undefined') {
+      if (arg != null) {
         var strArg = arg.toString().toLowerCase();
 
         if (['true', 't', 'yes', 'y', '1'].includes(strArg)) {
           return true;
         } else if (['false', 'f', 'no', 'n', '0'].includes(strArg)) {
           return false;
-        } else {
-          return null;
         }
-      } else {
-        return null;
       }
+
+      return null;
     }
   }]);
 
   return ToBoolean;
 }(Expression);
 
-module.exports.ToConcept = ToConcept = /*#__PURE__*/function (_Expression3) {
+var ToConcept = /*#__PURE__*/function (_Expression3) {
   _inherits(ToConcept, _Expression3);
 
   var _super3 = _createSuper(ToConcept);
@@ -12695,7 +11921,7 @@ module.exports.ToConcept = ToConcept = /*#__PURE__*/function (_Expression3) {
   function ToConcept(json) {
     _classCallCheck(this, ToConcept);
 
-    return _super3.apply(this, arguments);
+    return _super3.call(this, json);
   }
 
   _createClass(ToConcept, [{
@@ -12703,7 +11929,7 @@ module.exports.ToConcept = ToConcept = /*#__PURE__*/function (_Expression3) {
     value: function exec(ctx) {
       var arg = this.execArgs(ctx);
 
-      if (arg != null && typeof arg !== 'undefined') {
+      if (arg != null) {
         return new Concept([arg], arg.display);
       } else {
         return null;
@@ -12714,7 +11940,7 @@ module.exports.ToConcept = ToConcept = /*#__PURE__*/function (_Expression3) {
   return ToConcept;
 }(Expression);
 
-module.exports.ToDate = ToDate = /*#__PURE__*/function (_Expression4) {
+var ToDate = /*#__PURE__*/function (_Expression4) {
   _inherits(ToDate, _Expression4);
 
   var _super4 = _createSuper(ToDate);
@@ -12722,7 +11948,7 @@ module.exports.ToDate = ToDate = /*#__PURE__*/function (_Expression4) {
   function ToDate(json) {
     _classCallCheck(this, ToDate);
 
-    return _super4.apply(this, arguments);
+    return _super4.call(this, json);
   }
 
   _createClass(ToDate, [{
@@ -12743,7 +11969,7 @@ module.exports.ToDate = ToDate = /*#__PURE__*/function (_Expression4) {
   return ToDate;
 }(Expression);
 
-module.exports.ToDateTime = ToDateTime = /*#__PURE__*/function (_Expression5) {
+var ToDateTime = /*#__PURE__*/function (_Expression5) {
   _inherits(ToDateTime, _Expression5);
 
   var _super5 = _createSuper(ToDateTime);
@@ -12751,7 +11977,7 @@ module.exports.ToDateTime = ToDateTime = /*#__PURE__*/function (_Expression5) {
   function ToDateTime(json) {
     _classCallCheck(this, ToDateTime);
 
-    return _super5.apply(this, arguments);
+    return _super5.call(this, json);
   }
 
   _createClass(ToDateTime, [{
@@ -12772,7 +11998,7 @@ module.exports.ToDateTime = ToDateTime = /*#__PURE__*/function (_Expression5) {
   return ToDateTime;
 }(Expression);
 
-module.exports.ToDecimal = ToDecimal = /*#__PURE__*/function (_Expression6) {
+var ToDecimal = /*#__PURE__*/function (_Expression6) {
   _inherits(ToDecimal, _Expression6);
 
   var _super6 = _createSuper(ToDecimal);
@@ -12780,7 +12006,7 @@ module.exports.ToDecimal = ToDecimal = /*#__PURE__*/function (_Expression6) {
   function ToDecimal(json) {
     _classCallCheck(this, ToDecimal);
 
-    return _super6.apply(this, arguments);
+    return _super6.call(this, json);
   }
 
   _createClass(ToDecimal, [{
@@ -12788,9 +12014,8 @@ module.exports.ToDecimal = ToDecimal = /*#__PURE__*/function (_Expression6) {
     value: function exec(ctx) {
       var arg = this.execArgs(ctx);
 
-      if (arg != null && typeof arg !== 'undefined') {
-        var decimal = parseFloat(arg.toString());
-        decimal = limitDecimalPrecision(decimal);
+      if (arg != null) {
+        var decimal = limitDecimalPrecision(parseFloat(arg.toString()));
 
         if (isValidDecimal(decimal)) {
           return decimal;
@@ -12804,7 +12029,7 @@ module.exports.ToDecimal = ToDecimal = /*#__PURE__*/function (_Expression6) {
   return ToDecimal;
 }(Expression);
 
-module.exports.ToInteger = ToInteger = /*#__PURE__*/function (_Expression7) {
+var ToInteger = /*#__PURE__*/function (_Expression7) {
   _inherits(ToInteger, _Expression7);
 
   var _super7 = _createSuper(ToInteger);
@@ -12812,7 +12037,7 @@ module.exports.ToInteger = ToInteger = /*#__PURE__*/function (_Expression7) {
   function ToInteger(json) {
     _classCallCheck(this, ToInteger);
 
-    return _super7.apply(this, arguments);
+    return _super7.call(this, json);
   }
 
   _createClass(ToInteger, [{
@@ -12820,7 +12045,7 @@ module.exports.ToInteger = ToInteger = /*#__PURE__*/function (_Expression7) {
     value: function exec(ctx) {
       var arg = this.execArgs(ctx);
 
-      if (arg != null && typeof arg !== 'undefined') {
+      if (arg != null) {
         var integer = parseInt(arg.toString());
 
         if (isValidInteger(integer)) {
@@ -12835,7 +12060,7 @@ module.exports.ToInteger = ToInteger = /*#__PURE__*/function (_Expression7) {
   return ToInteger;
 }(Expression);
 
-module.exports.ToQuantity = ToQuantity = /*#__PURE__*/function (_Expression8) {
+var ToQuantity = /*#__PURE__*/function (_Expression8) {
   _inherits(ToQuantity, _Expression8);
 
   var _super8 = _createSuper(ToQuantity);
@@ -12843,7 +12068,7 @@ module.exports.ToQuantity = ToQuantity = /*#__PURE__*/function (_Expression8) {
   function ToQuantity(json) {
     _classCallCheck(this, ToQuantity);
 
-    return _super8.apply(this, arguments);
+    return _super8.call(this, json);
   }
 
   _createClass(ToQuantity, [{
@@ -12851,9 +12076,8 @@ module.exports.ToQuantity = ToQuantity = /*#__PURE__*/function (_Expression8) {
     value: function exec(ctx) {
       var arg = this.execArgs(ctx);
 
-      if (arg != null && typeof arg !== 'undefined') {
-        var quantity = parseQuantity(arg.toString());
-        return quantity;
+      if (arg != null) {
+        return parseQuantity(arg.toString());
       } else {
         return null;
       }
@@ -12863,7 +12087,7 @@ module.exports.ToQuantity = ToQuantity = /*#__PURE__*/function (_Expression8) {
   return ToQuantity;
 }(Expression);
 
-module.exports.ToRatio = ToRatio = /*#__PURE__*/function (_Expression9) {
+var ToRatio = /*#__PURE__*/function (_Expression9) {
   _inherits(ToRatio, _Expression9);
 
   var _super9 = _createSuper(ToRatio);
@@ -12871,7 +12095,7 @@ module.exports.ToRatio = ToRatio = /*#__PURE__*/function (_Expression9) {
   function ToRatio(json) {
     _classCallCheck(this, ToRatio);
 
-    return _super9.apply(this, arguments);
+    return _super9.call(this, json);
   }
 
   _createClass(ToRatio, [{
@@ -12914,7 +12138,7 @@ module.exports.ToRatio = ToRatio = /*#__PURE__*/function (_Expression9) {
   return ToRatio;
 }(Expression);
 
-module.exports.ToString = ToString = /*#__PURE__*/function (_Expression10) {
+var ToString = /*#__PURE__*/function (_Expression10) {
   _inherits(ToString, _Expression10);
 
   var _super10 = _createSuper(ToString);
@@ -12922,7 +12146,7 @@ module.exports.ToString = ToString = /*#__PURE__*/function (_Expression10) {
   function ToString(json) {
     _classCallCheck(this, ToString);
 
-    return _super10.apply(this, arguments);
+    return _super10.call(this, json);
   }
 
   _createClass(ToString, [{
@@ -12930,7 +12154,7 @@ module.exports.ToString = ToString = /*#__PURE__*/function (_Expression10) {
     value: function exec(ctx) {
       var arg = this.execArgs(ctx);
 
-      if (arg != null && typeof arg !== 'undefined') {
+      if (arg != null) {
         return arg.toString();
       } else {
         return null;
@@ -12941,7 +12165,7 @@ module.exports.ToString = ToString = /*#__PURE__*/function (_Expression10) {
   return ToString;
 }(Expression);
 
-module.exports.ToTime = ToTime = /*#__PURE__*/function (_Expression11) {
+var ToTime = /*#__PURE__*/function (_Expression11) {
   _inherits(ToTime, _Expression11);
 
   var _super11 = _createSuper(ToTime);
@@ -12949,7 +12173,7 @@ module.exports.ToTime = ToTime = /*#__PURE__*/function (_Expression11) {
   function ToTime(json) {
     _classCallCheck(this, ToTime);
 
-    return _super11.apply(this, arguments);
+    return _super11.call(this, json);
   }
 
   _createClass(ToTime, [{
@@ -12957,11 +12181,11 @@ module.exports.ToTime = ToTime = /*#__PURE__*/function (_Expression11) {
     value: function exec(ctx) {
       var arg = this.execArgs(ctx);
 
-      if (arg != null && typeof arg !== 'undefined') {
+      if (arg != null) {
         var timeString = arg.toString(); // Return null if string doesn't represent a valid ISO-8601 Time
         // hh:mm:ss.fff or hh:mm:ss.fff
 
-        var matches = /^((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?$/.exec(timeString);
+        var matches = /^((\d{2})(:(\d{2})(:(\d{2})(\.(\d+))?)?)?)?$/.exec(timeString);
 
         if (matches == null) {
           return null;
@@ -12972,7 +12196,7 @@ module.exports.ToTime = ToTime = /*#__PURE__*/function (_Expression11) {
         var seconds = matches[6]; // Validate h/m/s if they exist, but allow null
 
         if (hours != null) {
-          if (!(hours >= 0) || !(hours <= 23)) {
+          if (hours < 0 || hours > 23) {
             return null;
           }
 
@@ -12980,7 +12204,7 @@ module.exports.ToTime = ToTime = /*#__PURE__*/function (_Expression11) {
         }
 
         if (minutes != null) {
-          if (!(minutes >= 0) || !(minutes <= 59)) {
+          if (minutes < 0 || minutes > 59) {
             return null;
           }
 
@@ -12988,7 +12212,7 @@ module.exports.ToTime = ToTime = /*#__PURE__*/function (_Expression11) {
         }
 
         if (seconds != null) {
-          if (!(seconds >= 0) || !(seconds <= 59)) {
+          if (seconds < 0 || seconds > 59) {
             return null;
           }
 
@@ -13012,7 +12236,7 @@ module.exports.ToTime = ToTime = /*#__PURE__*/function (_Expression11) {
   return ToTime;
 }(Expression);
 
-module.exports.Convert = Convert = /*#__PURE__*/function (_Expression12) {
+var Convert = /*#__PURE__*/function (_Expression12) {
   _inherits(Convert, _Expression12);
 
   var _super12 = _createSuper(Convert);
@@ -13022,7 +12246,7 @@ module.exports.Convert = Convert = /*#__PURE__*/function (_Expression12) {
 
     _classCallCheck(this, Convert);
 
-    _this2 = _super12.apply(this, arguments);
+    _this2 = _super12.call(this, json);
     _this2.operand = json.operand;
     _this2.toType = json.toType;
     return _this2;
@@ -13095,7 +12319,7 @@ module.exports.Convert = Convert = /*#__PURE__*/function (_Expression12) {
   return Convert;
 }(Expression);
 
-module.exports.ConvertsToBoolean = ConvertsToBoolean = /*#__PURE__*/function (_Expression13) {
+var ConvertsToBoolean = /*#__PURE__*/function (_Expression13) {
   _inherits(ConvertsToBoolean, _Expression13);
 
   var _super13 = _createSuper(ConvertsToBoolean);
@@ -13105,7 +12329,7 @@ module.exports.ConvertsToBoolean = ConvertsToBoolean = /*#__PURE__*/function (_E
 
     _classCallCheck(this, ConvertsToBoolean);
 
-    _this3 = _super13.apply(this, arguments);
+    _this3 = _super13.call(this, json);
     _this3.operand = json.operand;
     return _this3;
   }
@@ -13126,7 +12350,7 @@ module.exports.ConvertsToBoolean = ConvertsToBoolean = /*#__PURE__*/function (_E
   return ConvertsToBoolean;
 }(Expression);
 
-module.exports.ConvertsToDate = ConvertsToDate = /*#__PURE__*/function (_Expression14) {
+var ConvertsToDate = /*#__PURE__*/function (_Expression14) {
   _inherits(ConvertsToDate, _Expression14);
 
   var _super14 = _createSuper(ConvertsToDate);
@@ -13136,7 +12360,7 @@ module.exports.ConvertsToDate = ConvertsToDate = /*#__PURE__*/function (_Express
 
     _classCallCheck(this, ConvertsToDate);
 
-    _this4 = _super14.apply(this, arguments);
+    _this4 = _super14.call(this, json);
     _this4.operand = json.operand;
     return _this4;
   }
@@ -13157,7 +12381,7 @@ module.exports.ConvertsToDate = ConvertsToDate = /*#__PURE__*/function (_Express
   return ConvertsToDate;
 }(Expression);
 
-module.exports.ConvertsToDateTime = ConvertsToDateTime = /*#__PURE__*/function (_Expression15) {
+var ConvertsToDateTime = /*#__PURE__*/function (_Expression15) {
   _inherits(ConvertsToDateTime, _Expression15);
 
   var _super15 = _createSuper(ConvertsToDateTime);
@@ -13167,7 +12391,7 @@ module.exports.ConvertsToDateTime = ConvertsToDateTime = /*#__PURE__*/function (
 
     _classCallCheck(this, ConvertsToDateTime);
 
-    _this5 = _super15.apply(this, arguments);
+    _this5 = _super15.call(this, json);
     _this5.operand = json.operand;
     return _this5;
   }
@@ -13188,7 +12412,7 @@ module.exports.ConvertsToDateTime = ConvertsToDateTime = /*#__PURE__*/function (
   return ConvertsToDateTime;
 }(Expression);
 
-module.exports.ConvertsToDecimal = ConvertsToDecimal = /*#__PURE__*/function (_Expression16) {
+var ConvertsToDecimal = /*#__PURE__*/function (_Expression16) {
   _inherits(ConvertsToDecimal, _Expression16);
 
   var _super16 = _createSuper(ConvertsToDecimal);
@@ -13198,7 +12422,7 @@ module.exports.ConvertsToDecimal = ConvertsToDecimal = /*#__PURE__*/function (_E
 
     _classCallCheck(this, ConvertsToDecimal);
 
-    _this6 = _super16.apply(this, arguments);
+    _this6 = _super16.call(this, json);
     _this6.operand = json.operand;
     return _this6;
   }
@@ -13219,7 +12443,7 @@ module.exports.ConvertsToDecimal = ConvertsToDecimal = /*#__PURE__*/function (_E
   return ConvertsToDecimal;
 }(Expression);
 
-module.exports.ConvertsToInteger = ConvertsToInteger = /*#__PURE__*/function (_Expression17) {
+var ConvertsToInteger = /*#__PURE__*/function (_Expression17) {
   _inherits(ConvertsToInteger, _Expression17);
 
   var _super17 = _createSuper(ConvertsToInteger);
@@ -13229,7 +12453,7 @@ module.exports.ConvertsToInteger = ConvertsToInteger = /*#__PURE__*/function (_E
 
     _classCallCheck(this, ConvertsToInteger);
 
-    _this7 = _super17.apply(this, arguments);
+    _this7 = _super17.call(this, json);
     _this7.operand = json.operand;
     return _this7;
   }
@@ -13250,7 +12474,7 @@ module.exports.ConvertsToInteger = ConvertsToInteger = /*#__PURE__*/function (_E
   return ConvertsToInteger;
 }(Expression);
 
-module.exports.ConvertsToQuantity = ConvertsToQuantity = /*#__PURE__*/function (_Expression18) {
+var ConvertsToQuantity = /*#__PURE__*/function (_Expression18) {
   _inherits(ConvertsToQuantity, _Expression18);
 
   var _super18 = _createSuper(ConvertsToQuantity);
@@ -13260,7 +12484,7 @@ module.exports.ConvertsToQuantity = ConvertsToQuantity = /*#__PURE__*/function (
 
     _classCallCheck(this, ConvertsToQuantity);
 
-    _this8 = _super18.apply(this, arguments);
+    _this8 = _super18.call(this, json);
     _this8.operand = json.operand;
     return _this8;
   }
@@ -13281,7 +12505,7 @@ module.exports.ConvertsToQuantity = ConvertsToQuantity = /*#__PURE__*/function (
   return ConvertsToQuantity;
 }(Expression);
 
-module.exports.ConvertsToRatio = ConvertsToRatio = /*#__PURE__*/function (_Expression19) {
+var ConvertsToRatio = /*#__PURE__*/function (_Expression19) {
   _inherits(ConvertsToRatio, _Expression19);
 
   var _super19 = _createSuper(ConvertsToRatio);
@@ -13291,7 +12515,7 @@ module.exports.ConvertsToRatio = ConvertsToRatio = /*#__PURE__*/function (_Expre
 
     _classCallCheck(this, ConvertsToRatio);
 
-    _this9 = _super19.apply(this, arguments);
+    _this9 = _super19.call(this, json);
     _this9.operand = json.operand;
     return _this9;
   }
@@ -13312,7 +12536,7 @@ module.exports.ConvertsToRatio = ConvertsToRatio = /*#__PURE__*/function (_Expre
   return ConvertsToRatio;
 }(Expression);
 
-module.exports.ConvertsToString = ConvertsToString = /*#__PURE__*/function (_Expression20) {
+var ConvertsToString = /*#__PURE__*/function (_Expression20) {
   _inherits(ConvertsToString, _Expression20);
 
   var _super20 = _createSuper(ConvertsToString);
@@ -13322,7 +12546,7 @@ module.exports.ConvertsToString = ConvertsToString = /*#__PURE__*/function (_Exp
 
     _classCallCheck(this, ConvertsToString);
 
-    _this10 = _super20.apply(this, arguments);
+    _this10 = _super20.call(this, json);
     _this10.operand = json.operand;
     return _this10;
   }
@@ -13343,7 +12567,7 @@ module.exports.ConvertsToString = ConvertsToString = /*#__PURE__*/function (_Exp
   return ConvertsToString;
 }(Expression);
 
-module.exports.ConvertsToTime = ConvertsToTime = /*#__PURE__*/function (_Expression21) {
+var ConvertsToTime = /*#__PURE__*/function (_Expression21) {
   _inherits(ConvertsToTime, _Expression21);
 
   var _super21 = _createSuper(ConvertsToTime);
@@ -13353,7 +12577,7 @@ module.exports.ConvertsToTime = ConvertsToTime = /*#__PURE__*/function (_Express
 
     _classCallCheck(this, ConvertsToTime);
 
-    _this11 = _super21.apply(this, arguments);
+    _this11 = _super21.call(this, json);
     _this11.operand = json.operand;
     return _this11;
   }
@@ -13374,7 +12598,7 @@ module.exports.ConvertsToTime = ConvertsToTime = /*#__PURE__*/function (_Express
   return ConvertsToTime;
 }(Expression);
 
-var canConvertToType = function canConvertToType(toFunction, operand, ctx) {
+function canConvertToType(toFunction, operand, ctx) {
   try {
     var value = new toFunction({
       type: toFunction.name,
@@ -13389,9 +12613,9 @@ var canConvertToType = function canConvertToType(toFunction, operand, ctx) {
   } catch (error) {
     return false;
   }
-};
+}
 
-module.exports.ConvertQuantity = ConvertQuantity = /*#__PURE__*/function (_Expression22) {
+var ConvertQuantity = /*#__PURE__*/function (_Expression22) {
   _inherits(ConvertQuantity, _Expression22);
 
   var _super22 = _createSuper(ConvertQuantity);
@@ -13399,16 +12623,16 @@ module.exports.ConvertQuantity = ConvertQuantity = /*#__PURE__*/function (_Expre
   function ConvertQuantity(json) {
     _classCallCheck(this, ConvertQuantity);
 
-    return _super22.apply(this, arguments);
+    return _super22.call(this, json);
   }
 
   _createClass(ConvertQuantity, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from = Array.from(this.execArgs(ctx)),
-          _Array$from2 = _slicedToArray(_Array$from, 2),
-          quantity = _Array$from2[0],
-          newUnit = _Array$from2[1];
+      var _this$execArgs = this.execArgs(ctx),
+          _this$execArgs2 = _slicedToArray(_this$execArgs, 2),
+          quantity = _this$execArgs2[0],
+          newUnit = _this$execArgs2[1];
 
       if (quantity != null && newUnit != null) {
         try {
@@ -13424,7 +12648,7 @@ module.exports.ConvertQuantity = ConvertQuantity = /*#__PURE__*/function (_Expre
   return ConvertQuantity;
 }(Expression);
 
-module.exports.CanConvertQuantity = CanConvertQuantity = /*#__PURE__*/function (_Expression23) {
+var CanConvertQuantity = /*#__PURE__*/function (_Expression23) {
   _inherits(CanConvertQuantity, _Expression23);
 
   var _super23 = _createSuper(CanConvertQuantity);
@@ -13432,16 +12656,16 @@ module.exports.CanConvertQuantity = CanConvertQuantity = /*#__PURE__*/function (
   function CanConvertQuantity(json) {
     _classCallCheck(this, CanConvertQuantity);
 
-    return _super23.apply(this, arguments);
+    return _super23.call(this, json);
   }
 
   _createClass(CanConvertQuantity, [{
     key: "exec",
     value: function exec(ctx) {
-      var _Array$from3 = Array.from(this.execArgs(ctx)),
-          _Array$from4 = _slicedToArray(_Array$from3, 2),
-          quantity = _Array$from4[0],
-          newUnit = _Array$from4[1];
+      var _this$execArgs3 = this.execArgs(ctx),
+          _this$execArgs4 = _slicedToArray(_this$execArgs3, 2),
+          quantity = _this$execArgs4[0],
+          newUnit = _this$execArgs4[1];
 
       if (quantity != null && newUnit != null) {
         try {
@@ -13459,7 +12683,7 @@ module.exports.CanConvertQuantity = CanConvertQuantity = /*#__PURE__*/function (
   return CanConvertQuantity;
 }(Expression);
 
-module.exports.Is = Is = /*#__PURE__*/function (_UnimplementedExpress) {
+var Is = /*#__PURE__*/function (_UnimplementedExpress) {
   _inherits(Is, _UnimplementedExpress);
 
   var _super24 = _createSuper(Is);
@@ -13473,7 +12697,7 @@ module.exports.Is = Is = /*#__PURE__*/function (_UnimplementedExpress) {
   return Is;
 }(UnimplementedExpression);
 
-module.exports.IntervalTypeSpecifier = IntervalTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress2) {
+var IntervalTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress2) {
   _inherits(IntervalTypeSpecifier, _UnimplementedExpress2);
 
   var _super25 = _createSuper(IntervalTypeSpecifier);
@@ -13487,7 +12711,7 @@ module.exports.IntervalTypeSpecifier = IntervalTypeSpecifier = /*#__PURE__*/func
   return IntervalTypeSpecifier;
 }(UnimplementedExpression);
 
-module.exports.ListTypeSpecifier = ListTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress3) {
+var ListTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress3) {
   _inherits(ListTypeSpecifier, _UnimplementedExpress3);
 
   var _super26 = _createSuper(ListTypeSpecifier);
@@ -13501,7 +12725,7 @@ module.exports.ListTypeSpecifier = ListTypeSpecifier = /*#__PURE__*/function (_U
   return ListTypeSpecifier;
 }(UnimplementedExpression);
 
-module.exports.NamedTypeSpecifier = NamedTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress4) {
+var NamedTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress4) {
   _inherits(NamedTypeSpecifier, _UnimplementedExpress4);
 
   var _super27 = _createSuper(NamedTypeSpecifier);
@@ -13515,7 +12739,7 @@ module.exports.NamedTypeSpecifier = NamedTypeSpecifier = /*#__PURE__*/function (
   return NamedTypeSpecifier;
 }(UnimplementedExpression);
 
-module.exports.TupleTypeSpecifier = TupleTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress5) {
+var TupleTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress5) {
   _inherits(TupleTypeSpecifier, _UnimplementedExpress5);
 
   var _super28 = _createSuper(TupleTypeSpecifier);
@@ -13528,7 +12752,38 @@ module.exports.TupleTypeSpecifier = TupleTypeSpecifier = /*#__PURE__*/function (
 
   return TupleTypeSpecifier;
 }(UnimplementedExpression);
-},{"../datatypes/clinical":5,"../datatypes/datetime":7,"../datatypes/quantity":11,"../datatypes/ratio":12,"../util/math":46,"../util/util":47,"./expression":22,"./reusable":37}],41:[function(require,module,exports){
+
+module.exports = {
+  As: As,
+  CanConvertQuantity: CanConvertQuantity,
+  Convert: Convert,
+  ConvertQuantity: ConvertQuantity,
+  ConvertsToBoolean: ConvertsToBoolean,
+  ConvertsToDate: ConvertsToDate,
+  ConvertsToDateTime: ConvertsToDateTime,
+  ConvertsToDecimal: ConvertsToDecimal,
+  ConvertsToInteger: ConvertsToInteger,
+  ConvertsToQuantity: ConvertsToQuantity,
+  ConvertsToRatio: ConvertsToRatio,
+  ConvertsToString: ConvertsToString,
+  ConvertsToTime: ConvertsToTime,
+  IntervalTypeSpecifier: IntervalTypeSpecifier,
+  Is: Is,
+  ListTypeSpecifier: ListTypeSpecifier,
+  NamedTypeSpecifier: NamedTypeSpecifier,
+  ToBoolean: ToBoolean,
+  ToConcept: ToConcept,
+  ToDate: ToDate,
+  ToDateTime: ToDateTime,
+  ToDecimal: ToDecimal,
+  ToInteger: ToInteger,
+  ToQuantity: ToQuantity,
+  ToRatio: ToRatio,
+  ToString: ToString,
+  ToTime: ToTime,
+  TupleTypeSpecifier: TupleTypeSpecifier
+};
+},{"../datatypes/clinical":5,"../datatypes/datetime":7,"../datatypes/quantity":11,"../datatypes/ratio":12,"../util/math":46,"../util/util":47,"./expression":22}],41:[function(require,module,exports){
 "use strict";
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }

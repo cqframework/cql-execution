@@ -1,58 +1,16 @@
-/* eslint-disable
-    no-unused-vars,
-    no-useless-escape,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-let As,
-  CanConvertQuantity,
-  Convert,
-  ConvertQuantity,
-  ConvertsToBoolean,
-  ConvertsToDate,
-  ConvertsToDateTime,
-  ConvertsToDecimal,
-  ConvertsToInteger,
-  ConvertsToQuantity,
-  ConvertsToRatio,
-  ConvertsToString,
-  ConvertsToTime,
-  IntervalTypeSpecifier,
-  Is,
-  ListTypeSpecifier,
-  NamedTypeSpecifier,
-  ToBoolean,
-  ToConcept,
-  ToDate,
-  ToDateTime,
-  ToDecimal,
-  ToInteger,
-  ToQuantity,
-  ToRatio,
-  ToString,
-  ToTime,
-  TupleTypeSpecifier;
 const { Expression, UnimplementedExpression } = require('./expression');
-const { FunctionRef } = require('./reusable');
 const { DateTime, Date } = require('../datatypes/datetime');
 const { Concept } = require('../datatypes/clinical');
-const { parseQuantity, Quantity } = require('../datatypes/quantity');
+const { parseQuantity } = require('../datatypes/quantity');
 const { isValidDecimal, isValidInteger, limitDecimalPrecision } = require('../util/math');
 const { normalizeMillisecondsField } = require('../util/util');
 const { Ratio } = require('../datatypes/ratio');
 
 // TODO: Casting and Conversion needs unit tests!
 
-module.exports.As = As = class As extends Expression {
+class As extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.asType = json.asType;
     this.asTypeSpecifier = json.asTypeSpecifier;
     this.strict = json.strict != null ? json.strict : false;
@@ -62,48 +20,45 @@ module.exports.As = As = class As extends Expression {
     // TODO: Currently just returns the arg (which works for null, but probably not others)
     return this.execArgs(ctx);
   }
-};
+}
 
-module.exports.ToBoolean = ToBoolean = class ToBoolean extends Expression {
+class ToBoolean extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
     const arg = this.execArgs(ctx);
-    if (arg != null && typeof arg !== 'undefined') {
+    if (arg != null) {
       const strArg = arg.toString().toLowerCase();
       if (['true', 't', 'yes', 'y', '1'].includes(strArg)) {
         return true;
       } else if (['false', 'f', 'no', 'n', '0'].includes(strArg)) {
         return false;
-      } else {
-        return null;
       }
-    } else {
-      return null;
     }
+    return null;
   }
-};
+}
 
-module.exports.ToConcept = ToConcept = class ToConcept extends Expression {
+class ToConcept extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
     const arg = this.execArgs(ctx);
-    if (arg != null && typeof arg !== 'undefined') {
+    if (arg != null) {
       return new Concept([arg], arg.display);
     } else {
       return null;
     }
   }
-};
+}
 
-module.exports.ToDate = ToDate = class ToDate extends Expression {
+class ToDate extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
@@ -116,11 +71,11 @@ module.exports.ToDate = ToDate = class ToDate extends Expression {
       return Date.parse(arg.toString());
     }
   }
-};
+}
 
-module.exports.ToDateTime = ToDateTime = class ToDateTime extends Expression {
+class ToDateTime extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
@@ -133,34 +88,33 @@ module.exports.ToDateTime = ToDateTime = class ToDateTime extends Expression {
       return DateTime.parse(arg.toString());
     }
   }
-};
+}
 
-module.exports.ToDecimal = ToDecimal = class ToDecimal extends Expression {
+class ToDecimal extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
     const arg = this.execArgs(ctx);
-    if (arg != null && typeof arg !== 'undefined') {
-      let decimal = parseFloat(arg.toString());
-      decimal = limitDecimalPrecision(decimal);
+    if (arg != null) {
+      const decimal = limitDecimalPrecision(parseFloat(arg.toString()));
       if (isValidDecimal(decimal)) {
         return decimal;
       }
     }
     return null;
   }
-};
+}
 
-module.exports.ToInteger = ToInteger = class ToInteger extends Expression {
+class ToInteger extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
     const arg = this.execArgs(ctx);
-    if (arg != null && typeof arg !== 'undefined') {
+    if (arg != null) {
       const integer = parseInt(arg.toString());
       if (isValidInteger(integer)) {
         return integer;
@@ -168,27 +122,26 @@ module.exports.ToInteger = ToInteger = class ToInteger extends Expression {
     }
     return null;
   }
-};
+}
 
-module.exports.ToQuantity = ToQuantity = class ToQuantity extends Expression {
+class ToQuantity extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
     const arg = this.execArgs(ctx);
-    if (arg != null && typeof arg !== 'undefined') {
-      const quantity = parseQuantity(arg.toString());
-      return quantity;
+    if (arg != null) {
+      return parseQuantity(arg.toString());
     } else {
       return null;
     }
   }
-};
+}
 
-module.exports.ToRatio = ToRatio = class ToRatio extends Expression {
+class ToRatio extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
@@ -220,35 +173,35 @@ module.exports.ToRatio = ToRatio = class ToRatio extends Expression {
       return null;
     }
   }
-};
+}
 
-module.exports.ToString = ToString = class ToString extends Expression {
+class ToString extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
     const arg = this.execArgs(ctx);
-    if (arg != null && typeof arg !== 'undefined') {
+    if (arg != null) {
       return arg.toString();
     } else {
       return null;
     }
   }
-};
+}
 
-module.exports.ToTime = ToTime = class ToTime extends Expression {
+class ToTime extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
     const arg = this.execArgs(ctx);
-    if (arg != null && typeof arg !== 'undefined') {
+    if (arg != null) {
       const timeString = arg.toString();
       // Return null if string doesn't represent a valid ISO-8601 Time
       // hh:mm:ss.fff or hh:mm:ss.fff
-      const matches = /^((\d{2})(\:(\d{2})(\:(\d{2})(\.(\d+))?)?)?)?$/.exec(timeString);
+      const matches = /^((\d{2})(:(\d{2})(:(\d{2})(\.(\d+))?)?)?)?$/.exec(timeString);
       if (matches == null) {
         return null;
       }
@@ -257,19 +210,19 @@ module.exports.ToTime = ToTime = class ToTime extends Expression {
       let seconds = matches[6];
       // Validate h/m/s if they exist, but allow null
       if (hours != null) {
-        if (!(hours >= 0) || !(hours <= 23)) {
+        if (hours < 0 || hours > 23) {
           return null;
         }
         hours = parseInt(hours, 10);
       }
       if (minutes != null) {
-        if (!(minutes >= 0) || !(minutes <= 59)) {
+        if (minutes < 0 || minutes > 59) {
           return null;
         }
         minutes = parseInt(minutes, 10);
       }
       if (seconds != null) {
-        if (!(seconds >= 0) || !(seconds <= 59)) {
+        if (seconds < 0 || seconds > 59) {
           return null;
         }
         seconds = parseInt(seconds, 10);
@@ -285,11 +238,11 @@ module.exports.ToTime = ToTime = class ToTime extends Expression {
       return null;
     }
   }
-};
+}
 
-module.exports.Convert = Convert = class Convert extends Expression {
+class Convert extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.operand = json.operand;
     this.toType = json.toType;
   }
@@ -318,11 +271,11 @@ module.exports.Convert = Convert = class Convert extends Expression {
         return this.execArgs(ctx);
     }
   }
-};
+}
 
-module.exports.ConvertsToBoolean = ConvertsToBoolean = class ConvertsToBoolean extends Expression {
+class ConvertsToBoolean extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.operand = json.operand;
   }
 
@@ -334,11 +287,11 @@ module.exports.ConvertsToBoolean = ConvertsToBoolean = class ConvertsToBoolean e
       return canConvertToType(ToBoolean, this.operand, ctx);
     }
   }
-};
+}
 
-module.exports.ConvertsToDate = ConvertsToDate = class ConvertsToDate extends Expression {
+class ConvertsToDate extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.operand = json.operand;
   }
 
@@ -350,11 +303,11 @@ module.exports.ConvertsToDate = ConvertsToDate = class ConvertsToDate extends Ex
       return canConvertToType(ToDate, this.operand, ctx);
     }
   }
-};
+}
 
-module.exports.ConvertsToDateTime = ConvertsToDateTime = class ConvertsToDateTime extends Expression {
+class ConvertsToDateTime extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.operand = json.operand;
   }
 
@@ -366,11 +319,11 @@ module.exports.ConvertsToDateTime = ConvertsToDateTime = class ConvertsToDateTim
       return canConvertToType(ToDateTime, this.operand, ctx);
     }
   }
-};
+}
 
-module.exports.ConvertsToDecimal = ConvertsToDecimal = class ConvertsToDecimal extends Expression {
+class ConvertsToDecimal extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.operand = json.operand;
   }
 
@@ -382,11 +335,11 @@ module.exports.ConvertsToDecimal = ConvertsToDecimal = class ConvertsToDecimal e
       return canConvertToType(ToDecimal, this.operand, ctx);
     }
   }
-};
+}
 
-module.exports.ConvertsToInteger = ConvertsToInteger = class ConvertsToInteger extends Expression {
+class ConvertsToInteger extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.operand = json.operand;
   }
 
@@ -398,11 +351,11 @@ module.exports.ConvertsToInteger = ConvertsToInteger = class ConvertsToInteger e
       return canConvertToType(ToInteger, this.operand, ctx);
     }
   }
-};
+}
 
-module.exports.ConvertsToQuantity = ConvertsToQuantity = class ConvertsToQuantity extends Expression {
+class ConvertsToQuantity extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.operand = json.operand;
   }
 
@@ -414,11 +367,11 @@ module.exports.ConvertsToQuantity = ConvertsToQuantity = class ConvertsToQuantit
       return canConvertToType(ToQuantity, this.operand, ctx);
     }
   }
-};
+}
 
-module.exports.ConvertsToRatio = ConvertsToRatio = class ConvertsToRatio extends Expression {
+class ConvertsToRatio extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.operand = json.operand;
   }
 
@@ -430,11 +383,11 @@ module.exports.ConvertsToRatio = ConvertsToRatio = class ConvertsToRatio extends
       return canConvertToType(ToRatio, this.operand, ctx);
     }
   }
-};
+}
 
-module.exports.ConvertsToString = ConvertsToString = class ConvertsToString extends Expression {
+class ConvertsToString extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.operand = json.operand;
   }
 
@@ -446,11 +399,11 @@ module.exports.ConvertsToString = ConvertsToString = class ConvertsToString exte
       return canConvertToType(ToString, this.operand, ctx);
     }
   }
-};
+}
 
-module.exports.ConvertsToTime = ConvertsToTime = class ConvertsToTime extends Expression {
+class ConvertsToTime extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.operand = json.operand;
   }
 
@@ -462,9 +415,9 @@ module.exports.ConvertsToTime = ConvertsToTime = class ConvertsToTime extends Ex
       return canConvertToType(ToTime, this.operand, ctx);
     }
   }
-};
+}
 
-var canConvertToType = function (toFunction, operand, ctx) {
+function canConvertToType(toFunction, operand, ctx) {
   try {
     const value = new toFunction({ type: toFunction.name, operand: operand }).execute(ctx);
     if (value != null) {
@@ -475,15 +428,15 @@ var canConvertToType = function (toFunction, operand, ctx) {
   } catch (error) {
     return false;
   }
-};
+}
 
-module.exports.ConvertQuantity = ConvertQuantity = class ConvertQuantity extends Expression {
+class ConvertQuantity extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
-    const [quantity, newUnit] = Array.from(this.execArgs(ctx));
+    const [quantity, newUnit] = this.execArgs(ctx);
 
     if (quantity != null && newUnit != null) {
       try {
@@ -494,15 +447,15 @@ module.exports.ConvertQuantity = ConvertQuantity = class ConvertQuantity extends
       }
     }
   }
-};
+}
 
-module.exports.CanConvertQuantity = CanConvertQuantity = class CanConvertQuantity extends Expression {
+class CanConvertQuantity extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
-    const [quantity, newUnit] = Array.from(this.execArgs(ctx));
+    const [quantity, newUnit] = this.execArgs(ctx);
 
     if (quantity != null && newUnit != null) {
       try {
@@ -514,10 +467,41 @@ module.exports.CanConvertQuantity = CanConvertQuantity = class CanConvertQuantit
     }
     return null;
   }
-};
+}
 
-module.exports.Is = Is = class Is extends UnimplementedExpression {};
-module.exports.IntervalTypeSpecifier = IntervalTypeSpecifier = class IntervalTypeSpecifier extends UnimplementedExpression {};
-module.exports.ListTypeSpecifier = ListTypeSpecifier = class ListTypeSpecifier extends UnimplementedExpression {};
-module.exports.NamedTypeSpecifier = NamedTypeSpecifier = class NamedTypeSpecifier extends UnimplementedExpression {};
-module.exports.TupleTypeSpecifier = TupleTypeSpecifier = class TupleTypeSpecifier extends UnimplementedExpression {};
+class Is extends UnimplementedExpression {}
+class IntervalTypeSpecifier extends UnimplementedExpression {}
+class ListTypeSpecifier extends UnimplementedExpression {}
+class NamedTypeSpecifier extends UnimplementedExpression {}
+class TupleTypeSpecifier extends UnimplementedExpression {}
+
+module.exports = {
+  As,
+  CanConvertQuantity,
+  Convert,
+  ConvertQuantity,
+  ConvertsToBoolean,
+  ConvertsToDate,
+  ConvertsToDateTime,
+  ConvertsToDecimal,
+  ConvertsToInteger,
+  ConvertsToQuantity,
+  ConvertsToRatio,
+  ConvertsToString,
+  ConvertsToTime,
+  IntervalTypeSpecifier,
+  Is,
+  ListTypeSpecifier,
+  NamedTypeSpecifier,
+  ToBoolean,
+  ToConcept,
+  ToDate,
+  ToDateTime,
+  ToDecimal,
+  ToInteger,
+  ToQuantity,
+  ToRatio,
+  ToString,
+  ToTime,
+  TupleTypeSpecifier
+};

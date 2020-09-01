@@ -1,22 +1,9 @@
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS103: Rewrite code to no longer use __guard__
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-let ParameterDef, ParameterRef;
 const { Expression } = require('./expression');
 const { build } = require('./builder');
 
-module.exports.ParameterDef = ParameterDef = class ParameterDef extends Expression {
+class ParameterDef extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.name = json.name;
     this.default = build(json.default);
     this.parameterTypeSpecifier = json.parameterTypeSpecifier;
@@ -24,7 +11,7 @@ module.exports.ParameterDef = ParameterDef = class ParameterDef extends Expressi
 
   exec(ctx) {
     // If context parameters contains the name, return value.
-    if ((ctx != null ? ctx.parameters[this.name] : undefined) != null) {
+    if (ctx && ctx.parameters[this.name] !== undefined) {
       return ctx.parameters[this.name];
       // If default type exists, execute the default type
     } else if (this.default != null) {
@@ -34,20 +21,20 @@ module.exports.ParameterDef = ParameterDef = class ParameterDef extends Expressi
       return ctx.getParentParameter(this.name);
     }
   }
-};
+}
 
-module.exports.ParameterRef = ParameterRef = class ParameterRef extends Expression {
+class ParameterRef extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.name = json.name;
     this.library = json.libraryName;
   }
 
   exec(ctx) {
     ctx = this.library ? ctx.getLibraryContext(this.library) : ctx;
-    return __guard__(ctx.getParameter(this.name), x => x.execute(ctx));
+    const param = ctx.getParameter(this.name);
+    return param != null ? param.execute(ctx) : undefined;
   }
-};
-function __guard__(value, transform) {
-  return typeof value !== 'undefined' && value !== null ? transform(value) : undefined;
 }
+
+module.exports = { ParameterDef, ParameterRef };
