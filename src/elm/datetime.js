@@ -1,188 +1,113 @@
-/* eslint-disable
-    constructor-super,
-    no-constant-condition,
-    no-this-before-super,
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS001: Remove Babel/TypeScript constructor workaround
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-let Date,
-  DateFrom,
-  DateTime,
-  DateTimeComponentFrom,
-  DifferenceBetween,
-  DurationBetween,
-  Now,
-  Time,
-  TimeFrom,
-  TimeOfDay,
-  TimezoneOffsetFrom,
-  Today;
 const { Expression } = require('./expression');
 const { build } = require('./builder');
 const { Literal } = require('./literal');
 const DT = require('../datatypes/datatypes');
 
-module.exports.DateTime = DateTime = (function () {
-  DateTime = class DateTime extends Expression {
-    static initClass() {
-      this.PROPERTIES = [
-        'year',
-        'month',
-        'day',
-        'hour',
-        'minute',
-        'second',
-        'millisecond',
-        'timezoneOffset'
-      ];
-    }
-    constructor(json) {
-      super(json);
-      this.json = json;
-    }
-
-    exec(ctx) {
-      for (let property of DateTime.PROPERTIES) {
-        // if json does not contain 'timezoneOffset' set it to the executionDateTime from the context
-        if (this.json[property] != null) {
-          this[property] = build(this.json[property]);
-        } else if (property === 'timezoneOffset' && ctx.getTimezoneOffset() != null) {
-          this[property] = Literal.from({
-            type: 'Literal',
-            value: ctx.getTimezoneOffset(),
-            valueType: '{urn:hl7-org:elm-types:r1}Integer'
-          });
-        }
-      }
-      const args = (() => {
-        const result = [];
-        for (let p of DateTime.PROPERTIES) {
-          if (this[p] != null) {
-            result.push(this[p].execute(ctx));
-          } else {
-            result.push(undefined);
-          }
-        }
-        return result;
-      })();
-      return new DT.DateTime(...Array.from(args || []));
-    }
-  };
-  DateTime.initClass();
-  return DateTime;
-})();
-
-module.exports.Date = Date = (function () {
-  Date = class Date extends Expression {
-    static initClass() {
-      this.PROPERTIES = ['year', 'month', 'day'];
-    }
-    constructor(json) {
-      super(json);
-      this.json = json;
-    }
-
-    exec(ctx) {
-      for (let property of Date.PROPERTIES) {
-        if (this.json[property] != null) {
-          this[property] = build(this.json[property]);
-        }
-      }
-      const args = (() => {
-        const result = [];
-        for (let p of Date.PROPERTIES) {
-          if (this[p] != null) {
-            result.push(this[p].execute(ctx));
-          } else {
-            result.push(undefined);
-          }
-        }
-        return result;
-      })();
-      return new DT.Date(...Array.from(args || []));
-    }
-  };
-  Date.initClass();
-  return Date;
-})();
-
-module.exports.Time = Time = (function () {
-  Time = class Time extends Expression {
-    static initClass() {
-      this.PROPERTIES = ['hour', 'minute', 'second', 'millisecond'];
-    }
-    constructor(json) {
-      super(...arguments);
-      for (let property of Time.PROPERTIES) {
-        if (json[property] != null) {
-          this[property] = build(json[property]);
-        }
-      }
-    }
-
-    exec(ctx) {
-      const args = (() => {
-        const result = [];
-        for (let p of Time.PROPERTIES) {
-          if (this[p] != null) {
-            result.push(this[p].execute(ctx));
-          } else {
-            result.push(undefined);
-          }
-        }
-        return result;
-      })();
-      return new DT.DateTime(0, 1, 1, ...Array.from(args)).getTime();
-    }
-  };
-  Time.initClass();
-  return Time;
-})();
-
-module.exports.Today = Today = class Today extends Expression {
+class DateTime extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
+    this.json = json;
+  }
+
+  exec(ctx) {
+    for (let property of DateTime.PROPERTIES) {
+      // if json does not contain 'timezoneOffset' set it to the executionDateTime from the context
+      if (this.json[property] != null) {
+        this[property] = build(this.json[property]);
+      } else if (property === 'timezoneOffset' && ctx.getTimezoneOffset() != null) {
+        this[property] = Literal.from({
+          type: 'Literal',
+          value: ctx.getTimezoneOffset(),
+          valueType: '{urn:hl7-org:elm-types:r1}Integer'
+        });
+      }
+    }
+    const args = DateTime.PROPERTIES.map(p => (this[p] != null ? this[p].execute(ctx) : undefined));
+    return new DT.DateTime(...args);
+  }
+}
+
+DateTime.PROPERTIES = [
+  'year',
+  'month',
+  'day',
+  'hour',
+  'minute',
+  'second',
+  'millisecond',
+  'timezoneOffset'
+];
+
+class Date extends Expression {
+  constructor(json) {
+    super(json);
+    this.json = json;
+  }
+
+  exec(ctx) {
+    for (let property of Date.PROPERTIES) {
+      if (this.json[property] != null) {
+        this[property] = build(this.json[property]);
+      }
+    }
+    const args = Date.PROPERTIES.map(p => (this[p] != null ? this[p].execute(ctx) : undefined));
+    return new DT.Date(...args);
+  }
+}
+
+Date.PROPERTIES = ['year', 'month', 'day'];
+
+class Time extends Expression {
+  constructor(json) {
+    super(json);
+    for (let property of Time.PROPERTIES) {
+      if (json[property] != null) {
+        this[property] = build(json[property]);
+      }
+    }
+  }
+
+  exec(ctx) {
+    const args = Time.PROPERTIES.map(p => (this[p] != null ? this[p].execute(ctx) : undefined));
+    return new DT.DateTime(0, 1, 1, ...args).getTime();
+  }
+}
+
+Time.PROPERTIES = ['hour', 'minute', 'second', 'millisecond'];
+
+class Today extends Expression {
+  constructor(json) {
+    super(json);
   }
 
   exec(ctx) {
     return ctx.getExecutionDateTime().getDate();
   }
-};
+}
 
-module.exports.Now = Now = class Now extends Expression {
+class Now extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
     return ctx.getExecutionDateTime();
   }
-};
+}
 
-module.exports.TimeOfDay = TimeOfDay = class TimeOfDay extends Expression {
+class TimeOfDay extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
     return ctx.getExecutionDateTime().getTime();
   }
-};
+}
 
-module.exports.DateTimeComponentFrom = DateTimeComponentFrom = class DateTimeComponentFrom extends Expression {
+class DateTimeComponentFrom extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.precision = json.precision;
   }
 
@@ -194,11 +119,11 @@ module.exports.DateTimeComponentFrom = DateTimeComponentFrom = class DateTimeCom
       return null;
     }
   }
-};
+}
 
-module.exports.DateFrom = DateFrom = class DateFrom extends Expression {
+class DateFrom extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
@@ -209,11 +134,11 @@ module.exports.DateFrom = DateFrom = class DateFrom extends Expression {
       return null;
     }
   }
-};
+}
 
-module.exports.TimeFrom = TimeFrom = class TimeFrom extends Expression {
+class TimeFrom extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
@@ -224,11 +149,11 @@ module.exports.TimeFrom = TimeFrom = class TimeFrom extends Expression {
       return null;
     }
   }
-};
+}
 
-module.exports.TimezoneOffsetFrom = TimezoneOffsetFrom = class TimezoneOffsetFrom extends Expression {
+class TimezoneOffsetFrom extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
@@ -239,17 +164,21 @@ module.exports.TimezoneOffsetFrom = TimezoneOffsetFrom = class TimezoneOffsetFro
       return null;
     }
   }
-};
+}
 
 // Delegated to by overloaded#After
-module.exports.doAfter = (a, b, precision) => a.after(b, precision);
+function doAfter(a, b, precision) {
+  return a.after(b, precision);
+}
 
 // Delegated to by overloaded#Before
-module.exports.doBefore = (a, b, precision) => a.before(b, precision);
+function doBefore(a, b, precision) {
+  return a.before(b, precision);
+}
 
-module.exports.DifferenceBetween = DifferenceBetween = class DifferenceBetween extends Expression {
+class DifferenceBetween extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.precision = json.precision;
   }
 
@@ -274,11 +203,11 @@ module.exports.DifferenceBetween = DifferenceBetween = class DifferenceBetween e
       return result;
     }
   }
-};
+}
 
-module.exports.DurationBetween = DurationBetween = class DurationBetween extends Expression {
+class DurationBetween extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.precision = json.precision;
   }
 
@@ -303,4 +232,21 @@ module.exports.DurationBetween = DurationBetween = class DurationBetween extends
       return result;
     }
   }
+}
+
+module.exports = {
+  Date,
+  DateFrom,
+  DateTime,
+  DateTimeComponentFrom,
+  DifferenceBetween,
+  DurationBetween,
+  Now,
+  Time,
+  TimeFrom,
+  TimeOfDay,
+  TimezoneOffsetFrom,
+  Today,
+  doAfter,
+  doBefore
 };

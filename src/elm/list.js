@@ -1,134 +1,71 @@
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS104: Avoid inline assignments
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-let Current,
-  Distinct,
-  doContains,
-  doIncludes,
-  Exists,
-  Filter,
-  First,
-  Flatten,
-  ForEach,
-  IndexOf,
-  Last,
-  List,
-  SingletonFrom,
-  Times,
-  ToList;
 const { Expression, UnimplementedExpression } = require('./expression');
-const { ValueSet } = require('../datatypes/datatypes');
 const { build } = require('./builder');
 const { typeIsArray } = require('../util/util');
 const { equals } = require('../util/comparison');
 
-module.exports.List = List = (function () {
-  List = class List extends Expression {
-    static initClass() {
-      // Define a simple getter to allow type-checking of this class without instanceof
-      // and in a way that survives minification (as opposed to checking constructor.name)
-      Object.defineProperties(this.prototype, {
-        isList: {
-          get() {
-            return true;
-          }
-        }
-      });
-    }
-    constructor(json) {
-      let left;
-      super(...arguments);
-      this.elements = (left = build(json.element)) != null ? left : [];
-    }
-
-    exec(ctx) {
-      return this.elements.map(item => item.execute(ctx));
-    }
-  };
-  List.initClass();
-  return List;
-})();
-
-module.exports.Exists = Exists = class Exists extends Expression {
+class List extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
+    this.elements = build(json.element) || [];
+  }
+
+  get isList() {
+    return true;
+  }
+
+  exec(ctx) {
+    return this.elements.map(item => item.execute(ctx));
+  }
+}
+
+class Exists extends Expression {
+  constructor(json) {
+    super(json);
   }
 
   exec(ctx) {
     const list = this.execArgs(ctx);
     // if list exists and has non empty length we need to make sure it isnt just full of nulls
-    if ((list != null ? list.length : undefined) > 0) {
-      for (let item of list) {
-        // return true if we found an item that isnt null.
-        if (item !== null) {
-          return true;
-        }
-      }
+    if (list) {
+      return list.some(item => item != null);
     }
     return false;
   }
-};
+}
 
 // Equal is completely handled by overloaded#Equal
 
 // NotEqual is completely handled by overloaded#Equal
 
 // Delegated to by overloaded#Union
-module.exports.doUnion = function (a, b) {
+function doUnion(a, b) {
   const distinct = doDistinct(a.concat(b));
   return removeDuplicateNulls(distinct);
-};
+}
 
 // Delegated to by overloaded#Except
-module.exports.doExcept = function (a, b) {
+function doExcept(a, b) {
   const distinct = doDistinct(a);
   const setList = removeDuplicateNulls(distinct);
-  return (() => {
-    const result = [];
-    for (let itm of setList) {
-      if (!doContains(b, itm)) {
-        result.push(itm);
-      }
-    }
-    return result;
-  })();
-};
+  return setList.filter(item => !doContains(b, item));
+}
 
 // Delegated to by overloaded#Intersect
-module.exports.doIntersect = function (a, b) {
+function doIntersect(a, b) {
   const distinct = doDistinct(a);
   const setList = removeDuplicateNulls(distinct);
-  return (() => {
-    const result = [];
-    for (let itm of setList) {
-      if (doContains(b, itm)) {
-        result.push(itm);
-      }
-    }
-    return result;
-  })();
-};
+  return setList.filter(item => doContains(b, item));
+}
 
 // ELM-only, not a product of CQL
-module.exports.Times = Times = class Times extends UnimplementedExpression {};
+class Times extends UnimplementedExpression {}
 
 // ELM-only, not a product of CQL
-module.exports.Filter = Filter = class Filter extends UnimplementedExpression {};
+class Filter extends UnimplementedExpression {}
 
-module.exports.SingletonFrom = SingletonFrom = class SingletonFrom extends Expression {
+class SingletonFrom extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
@@ -141,11 +78,11 @@ module.exports.SingletonFrom = SingletonFrom = class SingletonFrom extends Expre
       return null;
     }
   }
-};
+}
 
-module.exports.ToList = ToList = class ToList extends Expression {
+class ToList extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
@@ -156,11 +93,11 @@ module.exports.ToList = ToList = class ToList extends Expression {
       return [];
     }
   }
-};
+}
 
-module.exports.IndexOf = IndexOf = class IndexOf extends Expression {
+class IndexOf extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.source = build(json.source);
     this.element = build(json.element);
   }
@@ -185,33 +122,31 @@ module.exports.IndexOf = IndexOf = class IndexOf extends Expression {
       return -1;
     }
   }
-};
+}
 
 // Indexer is completely handled by overloaded#Indexer
 
 // Delegated to by overloaded#Contains and overloaded#In
-module.exports.doContains = doContains = function (container, item) {
-  for (let element of container) {
-    if (equals(element, item)) {
-      return true;
-    }
-  }
-  return false;
-};
+function doContains(container, item) {
+  return container.some(element => equals(element, item));
+}
 
 // Delegated to by overloaded#Includes and overloaded@IncludedIn
-module.exports.doIncludes = doIncludes = (list, sublist) => sublist.every(x => doContains(list, x));
+function doIncludes(list, sublist) {
+  return sublist.every(x => doContains(list, x));
+}
 
 // Delegated to by overloaded#ProperIncludes and overloaded@ProperIncludedIn
-module.exports.doProperIncludes = (list, sublist) =>
-  list.length > sublist.length && doIncludes(list, sublist);
+function doProperIncludes(list, sublist) {
+  return list.length > sublist.length && doIncludes(list, sublist);
+}
 
 // ELM-only, not a product of CQL
-module.exports.ForEach = ForEach = class ForEach extends UnimplementedExpression {};
+class ForEach extends UnimplementedExpression {}
 
-module.exports.Flatten = Flatten = class Flatten extends Expression {
+class Flatten extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
@@ -222,11 +157,11 @@ module.exports.Flatten = Flatten = class Flatten extends Expression {
       return arg;
     }
   }
-};
+}
 
-module.exports.Distinct = Distinct = class Distinct extends Expression {
+class Distinct extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
@@ -236,42 +171,40 @@ module.exports.Distinct = Distinct = class Distinct extends Expression {
     }
     return doDistinct(result);
   }
-};
+}
 
-var doDistinct = function (list) {
+function doDistinct(list) {
   const distinct = [];
-  list.filter(function (item) {
+  list.forEach(item => {
     const isNew = distinct.every(seenItem => !equals(item, seenItem));
     if (isNew) {
       distinct.push(item);
     }
-    return isNew;
   });
   return distinct;
-};
+}
 
-var removeDuplicateNulls = function (list) {
+function removeDuplicateNulls(list) {
   // Remove duplicate null elements
   let firstNullFound = false;
   const setList = [];
   for (let item of list) {
     if (item !== null) {
       setList.push(item);
-    }
-    if (item === null && !firstNullFound) {
+    } else if (item === null && !firstNullFound) {
       setList.push(item);
       firstNullFound = true;
     }
   }
   return setList;
-};
+}
 
 // ELM-only, not a product of CQL
-module.exports.Current = Current = class Current extends UnimplementedExpression {};
+class Current extends UnimplementedExpression {}
 
-module.exports.First = First = class First extends Expression {
+class First extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.source = build(json.source);
   }
 
@@ -283,11 +216,11 @@ module.exports.First = First = class First extends Expression {
       return null;
     }
   }
-};
+}
 
-module.exports.Last = Last = class Last extends Expression {
+class Last extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.source = build(json.source);
   }
 
@@ -299,6 +232,28 @@ module.exports.Last = Last = class Last extends Expression {
       return null;
     }
   }
-};
+}
 
 // Length is completely handled by overloaded#Length
+
+module.exports = {
+  Current,
+  Distinct,
+  Exists,
+  Filter,
+  First,
+  Flatten,
+  ForEach,
+  IndexOf,
+  Last,
+  List,
+  SingletonFrom,
+  Times,
+  ToList,
+  doContains,
+  doIncludes,
+  doProperIncludes,
+  doUnion,
+  doExcept,
+  doIntersect
+};

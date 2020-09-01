@@ -1,26 +1,9 @@
-/* eslint-disable
-    constructor-super,
-    no-constant-condition,
-    no-this-before-super,
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS001: Remove Babel/TypeScript constructor workaround
- * DS102: Remove unnecessary code created because of implicit returns
- * DS103: Rewrite code to no longer use __guard__
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-let ExpressionDef, ExpressionRef, FunctionDef, FunctionRef, IdentifierRef, OperandRef;
 const { Expression } = require('./expression');
 const { build } = require('./builder');
 
-module.exports.ExpressionDef = ExpressionDef = class ExpressionDef extends Expression {
+class ExpressionDef extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.name = json.name;
     this.context = json.context;
     this.expression = build(json.expression);
@@ -30,11 +13,11 @@ module.exports.ExpressionDef = ExpressionDef = class ExpressionDef extends Expre
     ctx.rootContext().set(this.name, value);
     return value;
   }
-};
+}
 
-module.exports.ExpressionRef = ExpressionRef = class ExpressionRef extends Expression {
+class ExpressionRef extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.name = json.name;
     this.library = json.libraryName;
   }
@@ -46,11 +29,11 @@ module.exports.ExpressionRef = ExpressionRef = class ExpressionRef extends Expre
     }
     return value;
   }
-};
+}
 
-module.exports.FunctionDef = FunctionDef = class FunctionDef extends Expression {
+class FunctionDef extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.name = json.name;
     this.expression = build(json.expression);
     this.parameters = json.operand;
@@ -58,34 +41,37 @@ module.exports.FunctionDef = FunctionDef = class FunctionDef extends Expression 
   exec(ctx) {
     return this;
   }
-};
+}
 
-module.exports.FunctionRef = FunctionRef = class FunctionRef extends Expression {
+class FunctionRef extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.name = json.name;
     this.library = json.libraryName;
   }
   exec(ctx) {
-    const functionDef = this.library
-      ? __guard__(ctx.get(this.library), x => x.get(this.name))
-      : ctx.get(this.name);
+    let functionDef, child_ctx;
+    if (this.library) {
+      const lib = ctx.get(this.library);
+      functionDef = lib ? lib.get(this.name) : undefined;
+      const libCtx = ctx.getLibraryContext(this.library);
+      child_ctx = libCtx ? libCtx.childContext() : undefined;
+    } else {
+      functionDef = ctx.get(this.name);
+      child_ctx = ctx.childContext();
+    }
     const args = this.execArgs(ctx);
-    const child_ctx = this.library
-      ? __guard__(ctx.getLibraryContext(this.library), x1 => x1.childContext())
-      : ctx.childContext();
     if (args.length !== functionDef.parameters.length) {
       throw new Error('incorrect number of arguments supplied');
     }
     for (let i = 0; i < functionDef.parameters.length; i++) {
-      const p = functionDef.parameters[i];
-      child_ctx.set(p.name, args[i]);
+      child_ctx.set(functionDef.parameters[i].name, args[i]);
     }
     return functionDef.expression.execute(child_ctx);
   }
-};
+}
 
-module.exports.OperandRef = OperandRef = class OperandRef extends Expression {
+class OperandRef extends Expression {
   constructor(json) {
     super(json);
     this.name = json.name;
@@ -93,11 +79,11 @@ module.exports.OperandRef = OperandRef = class OperandRef extends Expression {
   exec(ctx) {
     return ctx.get(this.name);
   }
-};
+}
 
-module.exports.IdentifierRef = IdentifierRef = class IdentifierRef extends Expression {
+class IdentifierRef extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.name = json.name;
     this.library = json.libraryName;
   }
@@ -105,23 +91,23 @@ module.exports.IdentifierRef = IdentifierRef = class IdentifierRef extends Expre
     // TODO: Technically, the ELM Translator should never output one of these
     // but this code is needed since it does, as a work-around to get queries
     // to work properly when sorting by a field in a tuple
-    let val = this.library
-      ? __guard__(ctx.get(this.library), x => x.get(this.name))
-      : ctx.get(this.name);
-
+    const lib = this.library ? ctx.get(this.library) : undefined;
+    let val = lib ? lib.get(this.name) : ctx.get(this.name);
     if (val == null) {
       const parts = this.name.split('.');
-      val = ctx.get(part);
+      val = ctx.get(parts[0]);
       if (val != null && parts.length > 1) {
         let curr_obj = val;
-        const curr_val = null;
-        for (var part of parts.slice(1)) {
-          const _obj =
-            (curr_obj != null ? curr_obj[part] : undefined) != null
-              ? curr_obj != null
-                ? curr_obj[part]
-                : undefined
-              : __guardMethod__(curr_obj, 'get', o => o.get(part));
+        for (let part of parts.slice(1)) {
+          // _obj = curr_obj?[part] ? curr_obj?.get?(part)
+          // curr_obj = if _obj instanceof Function then _obj.call(curr_obj) else _obj
+          let _obj;
+          if (curr_obj != null) {
+            _obj = curr_obj[part];
+            if (_obj === undefined && typeof curr_obj.get === 'function') {
+              _obj = curr_obj.get(part);
+            }
+          }
           curr_obj = _obj instanceof Function ? _obj.call(curr_obj) : _obj;
         }
         val = curr_obj;
@@ -133,15 +119,13 @@ module.exports.IdentifierRef = IdentifierRef = class IdentifierRef extends Expre
       return val;
     }
   }
-};
+}
 
-function __guard__(value, transform) {
-  return typeof value !== 'undefined' && value !== null ? transform(value) : undefined;
-}
-function __guardMethod__(obj, methodName, transform) {
-  if (typeof obj !== 'undefined' && obj !== null && typeof obj[methodName] === 'function') {
-    return transform(obj, methodName);
-  } else {
-    return undefined;
-  }
-}
+module.exports = {
+  ExpressionDef,
+  ExpressionRef,
+  FunctionDef,
+  FunctionRef,
+  IdentifierRef,
+  OperandRef
+};

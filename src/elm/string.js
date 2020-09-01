@@ -1,32 +1,9 @@
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-let Combine,
-  Concatenate,
-  EndsWith,
-  Lower,
-  Matches,
-  PositionOf,
-  Split,
-  SplitOnMatches,
-  StartsWith,
-  Substring,
-  Upper;
-const { Expression, UnimplementedExpression } = require('./expression');
+const { Expression } = require('./expression');
 const { build } = require('./builder');
 
-module.exports.Concatenate = Concatenate = class Concatenate extends Expression {
+class Concatenate extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
@@ -37,11 +14,11 @@ module.exports.Concatenate = Concatenate = class Concatenate extends Expression 
       return args.reduce((x, y) => x + y);
     }
   }
-};
+}
 
-module.exports.Combine = Combine = class Combine extends Expression {
+class Combine extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.source = build(json.source);
     this.separator = build(json.separator);
   }
@@ -52,19 +29,19 @@ module.exports.Combine = Combine = class Combine extends Expression {
     if (source == null) {
       return null;
     } else {
-      const filteredArray = source.filter(x => x !== null && x !== undefined);
-      if (filteredArray.length < 1) {
+      const filteredArray = source.filter(x => x != null);
+      if (filteredArray.length === 0) {
         return null;
       } else {
         return filteredArray.join(separator);
       }
     }
   }
-};
+}
 
-module.exports.Split = Split = class Split extends Expression {
+class Split extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.stringToSplit = build(json.stringToSplit);
     this.separator = build(json.separator);
   }
@@ -72,17 +49,17 @@ module.exports.Split = Split = class Split extends Expression {
   exec(ctx) {
     const stringToSplit = this.stringToSplit.execute(ctx);
     const separator = this.separator.execute(ctx);
-    if (!(stringToSplit != null && separator != null)) {
+    if (stringToSplit == null || separator == null) {
       return null;
     } else {
       return stringToSplit.split(separator);
     }
   }
-};
+}
 
-module.exports.SplitOnMatches = SplitOnMatches = class SplitOnMatches extends Expression {
+class SplitOnMatches extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.stringToSplit = build(json.stringToSplit);
     this.separatorPattern = build(json.separatorPattern);
   }
@@ -90,19 +67,19 @@ module.exports.SplitOnMatches = SplitOnMatches = class SplitOnMatches extends Ex
   exec(ctx) {
     const stringToSplit = this.stringToSplit.execute(ctx);
     const separatorPattern = this.separatorPattern.execute(ctx);
-    if (!(stringToSplit != null && separatorPattern != null)) {
+    if (stringToSplit == null || separatorPattern == null) {
       return null;
     } else {
       return stringToSplit.split(new RegExp(separatorPattern));
     }
   }
-};
+}
 
 // Length is completely handled by overloaded#Length
 
-module.exports.Upper = Upper = class Upper extends Expression {
+class Upper extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
@@ -113,11 +90,11 @@ module.exports.Upper = Upper = class Upper extends Expression {
       return null;
     }
   }
-};
+}
 
-module.exports.Lower = Lower = class Lower extends Expression {
+class Lower extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
@@ -128,13 +105,13 @@ module.exports.Lower = Lower = class Lower extends Expression {
       return null;
     }
   }
-};
+}
 
 // Indexer is completely handled by overloaded#Indexer
 
-module.exports.PositionOf = PositionOf = class PositionOf extends Expression {
+class PositionOf extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.pattern = build(json.pattern);
     this.string = build(json.string);
   }
@@ -142,22 +119,22 @@ module.exports.PositionOf = PositionOf = class PositionOf extends Expression {
   exec(ctx) {
     const pattern = this.pattern.execute(ctx);
     const string = this.string.execute(ctx);
-    if (!(pattern != null && string != null)) {
+    if (pattern == null || string == null) {
       return null;
     } else {
       return string.indexOf(pattern);
     }
   }
-};
+}
 
-module.exports.Matches = Matches = class Matches extends Expression {
+class Matches extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
-    const [string, pattern] = Array.from(this.execArgs(ctx));
-    if (!(string != null && pattern != null)) {
+    const [string, pattern] = this.execArgs(ctx);
+    if (string == null || pattern == null) {
       return null;
     }
     if (string.match(new RegExp(pattern))) {
@@ -166,11 +143,11 @@ module.exports.Matches = Matches = class Matches extends Expression {
       return false;
     }
   }
-};
+}
 
-module.exports.Substring = Substring = class Substring extends Expression {
+class Substring extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.stringToSub = build(json.stringToSub);
     this.startIndex = build(json.startIndex);
     this.length = build(json['length']);
@@ -194,11 +171,11 @@ module.exports.Substring = Substring = class Substring extends Expression {
       return stringToSub.substr(startIndex);
     }
   }
-};
+}
 
-module.exports.StartsWith = StartsWith = class StartsWith extends Expression {
+class StartsWith extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
@@ -209,11 +186,11 @@ module.exports.StartsWith = StartsWith = class StartsWith extends Expression {
       return args[0].slice(0, args[1].length) === args[1];
     }
   }
-};
+}
 
-module.exports.EndsWith = EndsWith = class EndsWith extends Expression {
+class EndsWith extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
   }
 
   exec(ctx) {
@@ -224,4 +201,18 @@ module.exports.EndsWith = EndsWith = class EndsWith extends Expression {
       return args[1] === '' || args[0].slice(-args[1].length) === args[1];
     }
   }
+}
+
+module.exports = {
+  Combine,
+  Concatenate,
+  EndsWith,
+  Lower,
+  Matches,
+  PositionOf,
+  Split,
+  SplitOnMatches,
+  StartsWith,
+  Substring,
+  Upper
 };

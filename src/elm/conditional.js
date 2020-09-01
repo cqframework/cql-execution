@@ -1,22 +1,11 @@
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-let Case, CaseItem, If;
 const { Expression } = require('./expression');
 const { build } = require('./builder');
 const { equals } = require('../util/comparison');
 
 // TODO: Spec lists "Conditional", but it's "If" in the XSD
-module.exports.If = If = class If extends Expression {
+class If extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.condition = build(json.condition);
     this.th = build(json.then);
     this.els = build(json.else);
@@ -29,18 +18,18 @@ module.exports.If = If = class If extends Expression {
       return this.els.execute(ctx);
     }
   }
-};
+}
 
-module.exports.CaseItem = CaseItem = CaseItem = class CaseItem {
+class CaseItem {
   constructor(json) {
     this.when = build(json.when);
     this.then = build(json.then);
   }
-};
+}
 
-module.exports.Case = Case = class Case extends Expression {
+class Case extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.comparand = build(json.comparand);
     this.caseItems = json.caseItem.map(ci => new CaseItem(ci));
     this.els = build(json.else);
@@ -72,4 +61,6 @@ module.exports.Case = Case = class Case extends Expression {
     }
     return this.els.execute(ctx);
   }
-};
+}
+
+module.exports = { Case, CaseItem, If };

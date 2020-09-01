@@ -1,23 +1,10 @@
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-let Retrieve;
 const { Expression } = require('./expression');
 const { build } = require('./builder');
 const { typeIsArray } = require('../util/util');
 
-module.exports.Retrieve = Retrieve = class Retrieve extends Expression {
+class Retrieve extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.datatype = json.dataType;
     this.templateId = json.templateId;
     this.codeProperty = json.codeProperty;
@@ -27,9 +14,8 @@ module.exports.Retrieve = Retrieve = class Retrieve extends Expression {
   }
 
   exec(ctx) {
-    let r;
     let records = ctx.findRecords(this.templateId != null ? this.templateId : this.datatype);
-    let { codes } = this;
+    let codes = this.codes;
     if (this.codes && typeof this.codes.exec === 'function') {
       codes = this.codes.execute(ctx);
       if (codes == null) {
@@ -42,15 +28,7 @@ module.exports.Retrieve = Retrieve = class Retrieve extends Expression {
     // TODO: Added @dateProperty check due to previous fix in cql4browsers in cql_qdm_patient_api hash: ddbc57
     if (this.dateRange && this.dateProperty) {
       const range = this.dateRange.execute(ctx);
-      records = (() => {
-        const result = [];
-        for (r of records) {
-          if (range.includes(r.getDateOrInterval(this.dateProperty))) {
-            result.push(r);
-          }
-        }
-        return result;
-      })();
+      records = records.filter(r => range.includes(r.getDateOrInterval(this.dateProperty)));
     }
 
     return records;
@@ -63,4 +41,6 @@ module.exports.Retrieve = Retrieve = class Retrieve extends Expression {
       return codes.hasMatch(record.getCode(this.codeProperty));
     }
   }
-};
+}
+
+module.exports = { Retrieve };

@@ -1,15 +1,3 @@
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-let Instance;
 const { Expression } = require('./expression');
 const { build } = require('./builder');
 const { Quantity } = require('../datatypes/quantity');
@@ -24,9 +12,9 @@ class Element {
   }
 }
 
-module.exports.Instance = Instance = class Instance extends Expression {
+class Instance extends Expression {
   constructor(json) {
-    super(...arguments);
+    super(json);
     this.classType = json.classType;
     this.element = json.element.map(child => new Element(child));
   }
@@ -47,4 +35,6 @@ module.exports.Instance = Instance = class Instance extends Expression {
         return obj;
     }
   }
-};
+}
+
+module.exports = { Instance };
