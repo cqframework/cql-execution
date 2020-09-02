@@ -30,10 +30,12 @@ class TestDateTime {
   }
 }
 
-
 class TestInterval {
   constructor(low, high) {
-    const [thLow, thHigh] = Array.from([TestDateTime.fromDateTime(low), TestDateTime.fromDateTime(high)]);
+    const [thLow, thHigh] = Array.from([
+      TestDateTime.fromDateTime(low),
+      TestDateTime.fromDateTime(high)
+    ]);
     this.closed = new Interval(low, high, true, true);
     this.open = new Interval(low, high, false, false);
     this.closedOpen = new Interval(low, high, true, false);
@@ -48,13 +50,31 @@ class TestInterval {
   }
 }
 
-module.exports = function(test) {
-  test['all2012'] = new TestInterval(DateTime.parse('2012-01-01T00:00:00.0'), DateTime.parse('2012-12-31T23:59:59.999'));
-  test['janjune'] = new TestInterval(DateTime.parse('2012-01-01T00:00:00.0'), DateTime.parse('2012-06-01T00:00:00.0'));
-  test['septdec'] = new TestInterval(DateTime.parse('2012-09-01T00:00:00.0'), DateTime.parse('2012-12-31T23:59:59.999'));
-  test['julysept'] = new TestInterval(DateTime.parse('2012-06-01T00:00:00.0'), DateTime.parse('2012-09-01T00:00:00.0'));
-  test['julydec'] = new TestInterval(DateTime.parse('2012-07-01T00:00:00.0'), DateTime.parse('2012-12-31T23:59:59.999'));
-  test['janjuly'] = new TestInterval(DateTime.parse('2012-01-01T00:00:00.0'), DateTime.parse('2012-07-01T00:00:00.0'));
+module.exports = function (test) {
+  test['all2012'] = new TestInterval(
+    DateTime.parse('2012-01-01T00:00:00.0'),
+    DateTime.parse('2012-12-31T23:59:59.999')
+  );
+  test['janjune'] = new TestInterval(
+    DateTime.parse('2012-01-01T00:00:00.0'),
+    DateTime.parse('2012-06-01T00:00:00.0')
+  );
+  test['septdec'] = new TestInterval(
+    DateTime.parse('2012-09-01T00:00:00.0'),
+    DateTime.parse('2012-12-31T23:59:59.999')
+  );
+  test['julysept'] = new TestInterval(
+    DateTime.parse('2012-06-01T00:00:00.0'),
+    DateTime.parse('2012-09-01T00:00:00.0')
+  );
+  test['julydec'] = new TestInterval(
+    DateTime.parse('2012-07-01T00:00:00.0'),
+    DateTime.parse('2012-12-31T23:59:59.999')
+  );
+  test['janjuly'] = new TestInterval(
+    DateTime.parse('2012-01-01T00:00:00.0'),
+    DateTime.parse('2012-07-01T00:00:00.0')
+  );
   test['bef2012'] = TestDateTime.parse('2011-06-01T00:00:00.0');
   test['beg2012'] = TestDateTime.parse('2012-01-01T00:00:00.0');
   test['mid2012'] = TestDateTime.parse('2012-06-01T00:00:00.0');
@@ -64,44 +84,86 @@ module.exports = function(test) {
     sameAs: {
       //    |----------X----------|
       //    |----------Y----------|
-      x: new TestInterval(DateTime.parse('2012-01-01T00:00:00.0'), DateTime.parse('2012-12-31T23:59:59.999')),
-      y: new TestInterval(DateTime.parse('2012-01-01T00:00:00.0'), DateTime.parse('2012-12-31T23:59:59.999'))
+      x: new TestInterval(
+        DateTime.parse('2012-01-01T00:00:00.0'),
+        DateTime.parse('2012-12-31T23:59:59.999')
+      ),
+      y: new TestInterval(
+        DateTime.parse('2012-01-01T00:00:00.0'),
+        DateTime.parse('2012-12-31T23:59:59.999')
+      )
     },
     before: {
       //    |----------X----------|
       //                                   |----------Y----------|
-      x: new TestInterval(DateTime.parse('2012-01-01T00:00:00.0'), DateTime.parse('2012-04-01T00:00:00.0')),
-      y: new TestInterval(DateTime.parse('2012-07-01T00:00:00.0'), DateTime.parse('2012-12-31T23:59:59.999'))
+      x: new TestInterval(
+        DateTime.parse('2012-01-01T00:00:00.0'),
+        DateTime.parse('2012-04-01T00:00:00.0')
+      ),
+      y: new TestInterval(
+        DateTime.parse('2012-07-01T00:00:00.0'),
+        DateTime.parse('2012-12-31T23:59:59.999')
+      )
     },
     meets: {
       //    |----------X----------|
       //                           |-----------Y----------|
-      x: new TestInterval(DateTime.parse('2012-01-01T00:00:00.0'), DateTime.parse('2012-06-30T23:59:59.999')),
-      y: new TestInterval(DateTime.parse('2012-07-01T00:00:00.0'), DateTime.parse('2012-12-31T23:59:59.999'))
+      x: new TestInterval(
+        DateTime.parse('2012-01-01T00:00:00.0'),
+        DateTime.parse('2012-06-30T23:59:59.999')
+      ),
+      y: new TestInterval(
+        DateTime.parse('2012-07-01T00:00:00.0'),
+        DateTime.parse('2012-12-31T23:59:59.999')
+      )
     },
     overlaps: {
       //    |----------X----------|
       //                  |----------Y----------|
-      x: new TestInterval(DateTime.parse('2012-01-01T00:00:00.0'), DateTime.parse('2012-09-01T00:00:00.0')),
-      y: new TestInterval(DateTime.parse('2012-06-01T00:00:00.0'), DateTime.parse('2012-12-31T23:59:59.999'))
+      x: new TestInterval(
+        DateTime.parse('2012-01-01T00:00:00.0'),
+        DateTime.parse('2012-09-01T00:00:00.0')
+      ),
+      y: new TestInterval(
+        DateTime.parse('2012-06-01T00:00:00.0'),
+        DateTime.parse('2012-12-31T23:59:59.999')
+      )
     },
     begins: {
       //    |-----X-----|
       //    |----------Y----------|
-      x: new TestInterval(DateTime.parse('2012-01-01T00:00:00.0'), DateTime.parse('2012-07-01T00:00:00.0')),
-      y: new TestInterval(DateTime.parse('2012-01-01T00:00:00.0'), DateTime.parse('2012-12-31T23:59:59.999'))
+      x: new TestInterval(
+        DateTime.parse('2012-01-01T00:00:00.0'),
+        DateTime.parse('2012-07-01T00:00:00.0')
+      ),
+      y: new TestInterval(
+        DateTime.parse('2012-01-01T00:00:00.0'),
+        DateTime.parse('2012-12-31T23:59:59.999')
+      )
     },
     during: {
       //         |-----X-----|
       //    |----------Y----------|
-      x: new TestInterval(DateTime.parse('2012-05-01T00:00:00.0'), DateTime.parse('2012-07-01T00:00:00.0')),
-      y: new TestInterval(DateTime.parse('2012-01-01T00:00:00.0'), DateTime.parse('2012-12-31T23:59:59.999'))
+      x: new TestInterval(
+        DateTime.parse('2012-05-01T00:00:00.0'),
+        DateTime.parse('2012-07-01T00:00:00.0')
+      ),
+      y: new TestInterval(
+        DateTime.parse('2012-01-01T00:00:00.0'),
+        DateTime.parse('2012-12-31T23:59:59.999')
+      )
     },
     ends: {
       //              |-----X-----|
       //    |----------Y----------|
-      x: new TestInterval(DateTime.parse('2012-07-01T00:00:00.0'), DateTime.parse('2012-12-31T23:59:59.999')),
-      y: new TestInterval(DateTime.parse('2012-01-01T00:00:00.0'), DateTime.parse('2012-12-31T23:59:59.999'))
+      x: new TestInterval(
+        DateTime.parse('2012-07-01T00:00:00.0'),
+        DateTime.parse('2012-12-31T23:59:59.999')
+      ),
+      y: new TestInterval(
+        DateTime.parse('2012-01-01T00:00:00.0'),
+        DateTime.parse('2012-12-31T23:59:59.999')
+      )
     }
   };
   test['zeroToHundred'] = new TestInterval(0, 100);

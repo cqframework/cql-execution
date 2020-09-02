@@ -13,12 +13,12 @@ const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
 
-describe('Tuple', function() {
-  this.beforeEach(function() {
+describe('Tuple', function () {
+  this.beforeEach(function () {
     setup(this, data);
   });
 
-  it('should be able to define a tuple', function() {
+  it('should be able to define a tuple', function () {
     const e = this.tup.exec(this.ctx);
     e['a'].should.equal(1);
     e['b'].should.equal(2);

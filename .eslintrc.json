@@ -11,7 +11,7 @@
       "linebreak-style": ["error", "unix"],
       "no-console": ["warn", { "allow": ["warn", "error"] }],
       "no-unused-vars": ["error", { "vars": "all", "args": "none" }],
-      "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+      "quotes": ["error", "single", { "allowTemplateLiterals": true, "avoidEscape": true }],
       "semi": ["error", "always"]
   },
   "env": {
@@ -19,5 +19,5 @@
       "node": true,
       "mocha": true
   },
-  "extends": ["eslint:recommended"]
+  "extends": ["eslint:recommended", "prettier"]
 }

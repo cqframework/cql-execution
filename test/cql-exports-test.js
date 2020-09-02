@@ -23,11 +23,24 @@ libNames.push('Patient', 'PatientSource');
 // TerminologyService-related classes
 libNames.push('CodeService');
 // DataType classes
-libNames.push('Code', 'CodeSystem', 'Concept', 'Date', 'DateTime', 'Interval', 'Quantity', 'Ratio', 'ValueSet');
+libNames.push(
+  'Code',
+  'CodeSystem',
+  'Concept',
+  'Date',
+  'DateTime',
+  'Interval',
+  'Quantity',
+  'Ratio',
+  'ValueSet'
+);
 
-describe('CQL Exports', () => libNames.map((libName) =>
-  ((name => it(`should export ${name}`, function() {
-    console.log('Testing', name);
-    cql[name].should.be.Function();
-    cql[name].name.should.equal(name);
-  })))(libName)));
+describe('CQL Exports', () =>
+  libNames.map(libName =>
+    (name =>
+      it(`should export ${name}`, function () {
+        console.log('Testing', name);
+        cql[name].should.be.Function();
+        cql[name].name.should.equal(name);
+      }))(libName)
+  ));

@@ -65,8 +65,10 @@
     "browserify": "^16.5.1",
     "coveralls": "^3.1.0",
     "eslint": "^7.4.0",
+    "eslint-config-prettier": "^6.11.0",
     "mocha": "^8.0.1",
     "nyc": "^15.1.0",
+    "prettier": "^2.1.1",
     "should": "^13.2.3"
   },
   "dependencies": {
@@ -92,7 +94,9 @@
     "test:nyc": "nyc --reporter=html npx mocha --reporter spec --recursive",
     "test:watch": "mocha --reporter spec --recursive --watch",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "prettier": "prettier --check \"**/*.js\"",
+    "prettier:fix": "prettier --write \"**/*.js\""
   },
   "license": "Apache-2.0"
 }

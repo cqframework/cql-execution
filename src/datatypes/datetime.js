@@ -837,16 +837,16 @@ Date.Unit = { YEAR: 'year', MONTH: 'month', WEEK: 'week', DAY: 'day' };
 Date.FIELDS = [Date.Unit.YEAR, Date.Unit.MONTH, Date.Unit.DAY];
 
 // Shared Funtions For Date and DateTime
-DateTime.prototype.isPrecise = Date.prototype.isPrecise = function() {
+DateTime.prototype.isPrecise = Date.prototype.isPrecise = function () {
   return this.constructor.FIELDS.every(field => this[field] != null);
 };
 
-DateTime.prototype.isImprecise = Date.prototype.isImprecise = function() {
+DateTime.prototype.isImprecise = Date.prototype.isImprecise = function () {
   return !this.isPrecise();
 };
 
 // This function can take another Date-ish object, or a precision string (e.g. 'month')
-DateTime.prototype.isMorePrecise = Date.prototype.isMorePrecise = function(other) {
+DateTime.prototype.isMorePrecise = Date.prototype.isMorePrecise = function (other) {
   if (typeof other === 'string' && this.constructor.FIELDS.includes(other)) {
     if (this[other] == null) {
       return false;
@@ -863,12 +863,12 @@ DateTime.prototype.isMorePrecise = Date.prototype.isMorePrecise = function(other
 };
 
 // This function can take another Date-ish object, or a precision string (e.g. 'month')
-DateTime.prototype.isLessPrecise = Date.prototype.isLessPrecise = function(other) {
+DateTime.prototype.isLessPrecise = Date.prototype.isLessPrecise = function (other) {
   return !this.isSamePrecision(other) && !this.isMorePrecise(other);
 };
 
 // This function can take another Date-ish object, or a precision string (e.g. 'month')
-DateTime.prototype.isSamePrecision = Date.prototype.isSamePrecision = function(other) {
+DateTime.prototype.isSamePrecision = Date.prototype.isSamePrecision = function (other) {
   if (typeof other === 'string' && this.constructor.FIELDS.includes(other)) {
     return other === this.getPrecision();
   }
@@ -884,15 +884,15 @@ DateTime.prototype.isSamePrecision = Date.prototype.isSamePrecision = function(o
   return true;
 };
 
-DateTime.prototype.equals = Date.prototype.equals = function(other) {
+DateTime.prototype.equals = Date.prototype.equals = function (other) {
   return compareWithDefaultResult(this, other, null);
 };
 
-DateTime.prototype.equivalent = Date.prototype.equivalent = function(other) {
+DateTime.prototype.equivalent = Date.prototype.equivalent = function (other) {
   return compareWithDefaultResult(this, other, false);
 };
 
-DateTime.prototype.sameAs = Date.prototype.sameAs = function(other, precision) {
+DateTime.prototype.sameAs = Date.prototype.sameAs = function (other, precision) {
   if (!(other.isDate || other.isDateTime)) {
     return null;
   } else if (this.isDate && other.isDateTime) {
@@ -942,7 +942,7 @@ DateTime.prototype.sameAs = Date.prototype.sameAs = function(other, precision) {
   return true;
 };
 
-DateTime.prototype.sameOrBefore = Date.prototype.sameOrBefore = function(other, precision) {
+DateTime.prototype.sameOrBefore = Date.prototype.sameOrBefore = function (other, precision) {
   if (!(other.isDate || other.isDateTime)) {
     return null;
   } else if (this.isDate && other.isDateTime) {
@@ -996,7 +996,7 @@ DateTime.prototype.sameOrBefore = Date.prototype.sameOrBefore = function(other, 
   return true;
 };
 
-DateTime.prototype.sameOrAfter = Date.prototype.sameOrAfter = function(other, precision) {
+DateTime.prototype.sameOrAfter = Date.prototype.sameOrAfter = function (other, precision) {
   if (!(other.isDate || other.isDateTime)) {
     return null;
   } else if (this.isDate && other.isDateTime) {
@@ -1050,7 +1050,7 @@ DateTime.prototype.sameOrAfter = Date.prototype.sameOrAfter = function(other, pr
   return true;
 };
 
-DateTime.prototype.before = Date.prototype.before = function(other, precision) {
+DateTime.prototype.before = Date.prototype.before = function (other, precision) {
   if (!(other.isDate || other.isDateTime)) {
     return null;
   } else if (this.isDate && other.isDateTime) {
@@ -1104,7 +1104,7 @@ DateTime.prototype.before = Date.prototype.before = function(other, precision) {
   return false;
 };
 
-DateTime.prototype.after = Date.prototype.after = function(other, precision) {
+DateTime.prototype.after = Date.prototype.after = function (other, precision) {
   if (!(other.isDate || other.isDateTime)) {
     return null;
   } else if (this.isDate && other.isDateTime) {
@@ -1158,7 +1158,7 @@ DateTime.prototype.after = Date.prototype.after = function(other, precision) {
   return false;
 };
 
-DateTime.prototype.add = Date.prototype.add = function(offset, field) {
+DateTime.prototype.add = Date.prototype.add = function (offset, field) {
   const result = this.copy();
   if (offset === 0) {
     return result;
@@ -1217,7 +1217,7 @@ DateTime.prototype.add = Date.prototype.add = function(offset, field) {
   }
 };
 
-DateTime.prototype.getFieldFloor = Date.prototype.getFieldFloor = function(field) {
+DateTime.prototype.getFieldFloor = Date.prototype.getFieldFloor = function (field) {
   switch (field) {
     case 'month':
       return 1;
@@ -1236,7 +1236,7 @@ DateTime.prototype.getFieldFloor = Date.prototype.getFieldFloor = function(field
   }
 };
 
-DateTime.prototype.getFieldCieling = Date.prototype.getFieldCieling = function(field) {
+DateTime.prototype.getFieldCieling = Date.prototype.getFieldCieling = function (field) {
   switch (field) {
     case 'month':
       return 12;

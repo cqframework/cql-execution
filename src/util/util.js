@@ -41,7 +41,7 @@ function normalizeMillisecondsFieldInString(string, msString) {
   // TODO: verify we are only removing numeral digits
   let timezoneField;
   msString = normalizeMillisecondsField(msString);
-  const [beforeMs, msAndAfter] = Array.from(string.split('.'));
+  const [beforeMs, msAndAfter] = string.split('.');
   const timezoneSeparator = getTimezoneSeparatorFromString(msAndAfter);
 
   if (timezoneSeparator) {

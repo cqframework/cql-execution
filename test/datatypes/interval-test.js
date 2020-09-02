@@ -19,9 +19,8 @@ const cmp = require('../../src/util/comparison');
 
 const xy = obj => [obj.x, obj.y];
 
-describe('Interval', function() {
-
-  it('should properly set all properties when constructed as DateTime interval', function() {
+describe('Interval', function () {
+  it('should properly set all properties when constructed as DateTime interval', function () {
     const i = new Interval(DateTime.parse('2012-01-01'), DateTime.parse('2013-01-01'), true, false);
     i.low.should.eql(DateTime.parse('2012-01-01'));
     i.high.should.eql(DateTime.parse('2013-01-01'));
@@ -29,7 +28,7 @@ describe('Interval', function() {
     i.highClosed.should.be.false();
   });
 
-  it('should properly set all properties when constructed as integer interval', function() {
+  it('should properly set all properties when constructed as integer interval', function () {
     const i = new Interval(12, 36, true, false);
     i.low.should.equal(12);
     i.high.should.equal(36);
@@ -37,7 +36,7 @@ describe('Interval', function() {
     i.highClosed.should.be.false();
   });
 
-  it('should default lowClosed/highClosed to true', function() {
+  it('should default lowClosed/highClosed to true', function () {
     const i = new Interval(DateTime.parse('2012-01-01'), DateTime.parse('2013-01-01'));
     i.low.should.eql(DateTime.parse('2012-01-01'));
     i.high.should.eql(DateTime.parse('2013-01-01'));
@@ -46,50 +45,50 @@ describe('Interval', function() {
   });
 });
 
-describe('DateTimeInterval.contains', function() {
-  this.beforeEach(function() {
+describe('DateTimeInterval.contains', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate dates before it', function() {
+  it('should properly calculate dates before it', function () {
     this.all2012.closed.contains(this.bef2012.full).should.be.false();
   });
 
-  it('should properly calculate the left boundary date', function() {
+  it('should properly calculate the left boundary date', function () {
     this.all2012.closed.contains(this.beg2012.full).should.be.true();
     this.all2012.open.contains(this.beg2012.full).should.be.false();
   });
 
-  it('should properly calculate dates in the middle of it', function() {
+  it('should properly calculate dates in the middle of it', function () {
     this.all2012.closed.contains(this.mid2012.full).should.be.true();
   });
 
-  it('should properly calculate the right boundary date', function() {
+  it('should properly calculate the right boundary date', function () {
     this.all2012.closed.contains(this.end2012.full).should.be.true();
     this.all2012.open.contains(this.end2012.full).should.be.false();
   });
 
-  it('should properly calculate dates after it', function() {
+  it('should properly calculate dates after it', function () {
     this.all2012.closed.contains(this.aft2012.full).should.be.false();
   });
 
-  it('should properly handle null endpoints', function() {
+  it('should properly handle null endpoints', function () {
     const date = DateTime.parse('2012-01-01T00:00:00.0');
     const early = DateTime.parse('0001-01-01T00:00:00.0');
     const late = DateTime.parse('2999-01-01T00:00:00.0');
     new Interval(null, date).contains(early).should.be.true();
     new Interval(null, date).contains(late).should.be.false();
-    new Interval(null,date,false,true).contains(date).should.be.true();
-    should(new Interval(null,date,false,true).contains(early)).be.null();
-    new Interval(null,date,false,true).contains(late).should.be.false();
-    new Interval(date,null).contains(late).should.be.true();
-    new Interval(date,null).contains(early).should.be.false();
-    new Interval(date,null,true,false).contains(date).should.be.true();
-    should(new Interval(date,null,true,false).contains(late)).be.null();
-    new Interval(date,null,true,false).contains(early).should.be.false();
+    new Interval(null, date, false, true).contains(date).should.be.true();
+    should(new Interval(null, date, false, true).contains(early)).be.null();
+    new Interval(null, date, false, true).contains(late).should.be.false();
+    new Interval(date, null).contains(late).should.be.true();
+    new Interval(date, null).contains(early).should.be.false();
+    new Interval(date, null, true, false).contains(date).should.be.true();
+    should(new Interval(date, null, true, false).contains(late)).be.null();
+    new Interval(date, null, true, false).contains(early).should.be.false();
   });
 
-  it('should properly handle imprecision', function() {
+  it('should properly handle imprecision', function () {
     this.all2012.closed.contains(this.bef2012.toMonth).should.be.false();
     should.not.exist(this.all2012.closed.contains(this.beg2012.toMonth));
     this.all2012.closed.contains(this.mid2012.toMonth).should.be.true();
@@ -111,22 +110,22 @@ describe('DateTimeInterval.contains', function() {
     should.not.exist(this.all2012.closed.contains(this.mid2012.toYear));
   });
 
-  it('should return null when checking if interval contains null point', function() {
+  it('should return null when checking if interval contains null point', function () {
     const date = DateTime.parse('2012-01-01T00:00:00.0');
-    should(new Interval(date,null,true,false).contains(null)).be.null();
+    should(new Interval(date, null, true, false).contains(null)).be.null();
   });
 
-  it('should throw when the argument is an interval', function() {
+  it('should throw when the argument is an interval', function () {
     should(() => this.all2012.closed.contains(this.all2012.open)).throw(Error);
   });
 });
 
-describe('DateTimeInterval.includes', function() {
-  this.beforeEach(function() {
+describe('DateTimeInterval.includes', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intervals', function() {
+  it('should properly calculate sameAs intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.sameAs));
     x.closed.includes(y.closed).should.be.true();
     x.closed.includes(y.open).should.be.true();
@@ -138,7 +137,7 @@ describe('DateTimeInterval.includes', function() {
     y.open.includes(x.open).should.be.true();
   });
 
-  it('should properly calculate before/after intervals', function() {
+  it('should properly calculate before/after intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.before));
     x.closed.includes(y.closed).should.be.false();
     x.closed.includes(y.open).should.be.false();
@@ -150,7 +149,7 @@ describe('DateTimeInterval.includes', function() {
     y.open.includes(x.open).should.be.false();
   });
 
-  it('should properly calculate meets intervals', function() {
+  it('should properly calculate meets intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.meets));
     x.closed.includes(y.closed).should.be.false();
     x.closed.includes(y.open).should.be.false();
@@ -162,7 +161,7 @@ describe('DateTimeInterval.includes', function() {
     y.open.includes(x.open).should.be.false();
   });
 
-  it('should properly calculate left/right overlapping intervals', function() {
+  it('should properly calculate left/right overlapping intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.overlaps));
     x.closed.includes(y.closed).should.be.false();
     x.closed.includes(y.open).should.be.false();
@@ -174,7 +173,7 @@ describe('DateTimeInterval.includes', function() {
     y.open.includes(x.open).should.be.false();
   });
 
-  it('should properly calculate begins/begun by intervals', function() {
+  it('should properly calculate begins/begun by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.begins));
     x.closed.includes(y.closed).should.be.false();
     x.closed.includes(y.open).should.be.false();
@@ -186,7 +185,7 @@ describe('DateTimeInterval.includes', function() {
     y.open.includes(x.open).should.be.true();
   });
 
-  it('should properly calculate includes/included by intervals', function() {
+  it('should properly calculate includes/included by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.during));
     x.closed.includes(y.closed).should.be.false();
     x.closed.includes(y.open).should.be.false();
@@ -198,7 +197,7 @@ describe('DateTimeInterval.includes', function() {
     y.open.includes(x.open).should.be.true();
   });
 
-  it('should properly calculate ends/ended by intervals', function() {
+  it('should properly calculate ends/ended by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.ends));
     x.closed.includes(y.closed).should.be.false();
     x.closed.includes(y.open).should.be.false();
@@ -210,8 +209,7 @@ describe('DateTimeInterval.includes', function() {
     y.open.includes(x.open).should.be.true();
   });
 
-  it('should properly handle imprecision', function() {
-
+  it('should properly handle imprecision', function () {
     let [x, y] = Array.from(xy(this.dIvl.sameAs));
     should.not.exist(x.closed.includes(y.toMinute));
     should.not.exist(x.toHour.includes(y.toMinute));
@@ -242,17 +240,17 @@ describe('DateTimeInterval.includes', function() {
     should.not.exist(x.toYear.includes(y.closed));
   });
 
-  it('should include a point date', function() {
+  it('should include a point date', function () {
     this.all2012.closed.includes(this.mid2012.full).should.be.true();
   });
 });
 
-describe('DateTimeInterval.includedIn', function() {
-  this.beforeEach(function() {
+describe('DateTimeInterval.includedIn', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intervals', function() {
+  it('should properly calculate sameAs intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.sameAs));
     x.closed.includedIn(y.closed).should.be.true();
     x.closed.includedIn(y.open).should.be.false();
@@ -265,7 +263,7 @@ describe('DateTimeInterval.includedIn', function() {
     y.open.includedIn(x.open).should.be.true();
   });
 
-  it('should properly calculate before/after intervals', function() {
+  it('should properly calculate before/after intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.before));
     x.closed.includedIn(y.closed).should.be.false();
     x.closed.includedIn(y.open).should.be.false();
@@ -277,7 +275,7 @@ describe('DateTimeInterval.includedIn', function() {
     y.open.includedIn(x.open).should.be.false();
   });
 
-  it('should properly calculate meets intervals', function() {
+  it('should properly calculate meets intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.meets));
     x.closed.includedIn(y.closed).should.be.false();
     x.closed.includedIn(y.open).should.be.false();
@@ -289,7 +287,7 @@ describe('DateTimeInterval.includedIn', function() {
     y.open.includedIn(x.open).should.be.false();
   });
 
-  it('should properly calculate left/right overlapping intervals', function() {
+  it('should properly calculate left/right overlapping intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.overlaps));
     x.closed.includedIn(y.closed).should.be.false();
     x.closed.includedIn(y.open).should.be.false();
@@ -301,7 +299,7 @@ describe('DateTimeInterval.includedIn', function() {
     y.open.includedIn(x.open).should.be.false();
   });
 
-  it('should properly calculate begins/begun by intervals', function() {
+  it('should properly calculate begins/begun by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.begins));
     x.closed.includedIn(y.closed).should.be.true();
     x.closed.includedIn(y.open).should.be.false();
@@ -313,7 +311,7 @@ describe('DateTimeInterval.includedIn', function() {
     y.open.includedIn(x.open).should.be.false();
   });
 
-  it('should properly calculate includes/included by intervals', function() {
+  it('should properly calculate includes/included by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.during));
     x.closed.includedIn(y.closed).should.be.true();
     x.closed.includedIn(y.open).should.be.true();
@@ -325,7 +323,7 @@ describe('DateTimeInterval.includedIn', function() {
     y.open.includedIn(x.open).should.be.false();
   });
 
-  it('should properly calculate ends/ended by intervals', function() {
+  it('should properly calculate ends/ended by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.ends));
     x.closed.includedIn(y.closed).should.be.true();
     x.closed.includedIn(y.open).should.be.false();
@@ -337,7 +335,7 @@ describe('DateTimeInterval.includedIn', function() {
     y.open.includedIn(x.open).should.be.false();
   });
 
-  it('should properly handle imprecision', function() {
+  it('should properly handle imprecision', function () {
     let [x, y] = Array.from(xy(this.dIvl.sameAs));
     should.not.exist(x.closed.includedIn(y.toMinute));
     should.not.exist(x.toHour.includedIn(y.toMinute));
@@ -368,17 +366,17 @@ describe('DateTimeInterval.includedIn', function() {
     should.not.exist(x.toYear.includedIn(y.closed));
   });
 
-  it('should include a point date', function() {
+  it('should include a point date', function () {
     this.all2012.closed.includedIn(this.mid2012.full).should.be.true();
   });
 });
 
-describe('DateTimeInterval.overlaps(DateTimeInterval)', function() {
-  this.beforeEach(function() {
+describe('DateTimeInterval.overlaps(DateTimeInterval)', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intervals', function() {
+  it('should properly calculate sameAs intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.sameAs));
     x.closed.overlaps(y.closed).should.be.true();
     x.closed.overlaps(y.open).should.be.true();
@@ -390,7 +388,7 @@ describe('DateTimeInterval.overlaps(DateTimeInterval)', function() {
     y.open.overlaps(x.open).should.be.true();
   });
 
-  it('should properly calculate before/after intervals', function() {
+  it('should properly calculate before/after intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.before));
     x.closed.overlaps(y.closed).should.be.false();
     x.closed.overlaps(y.open).should.be.false();
@@ -402,7 +400,7 @@ describe('DateTimeInterval.overlaps(DateTimeInterval)', function() {
     y.open.overlaps(x.open).should.be.false();
   });
 
-  it('should properly calculate meets intervals', function() {
+  it('should properly calculate meets intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.meets));
     x.closed.overlaps(y.closed).should.be.false();
     x.closed.overlaps(y.open).should.be.false();
@@ -414,7 +412,7 @@ describe('DateTimeInterval.overlaps(DateTimeInterval)', function() {
     y.open.overlaps(x.open).should.be.false();
   });
 
-  it('should properly calculate left/right overlapping intervals', function() {
+  it('should properly calculate left/right overlapping intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.overlaps));
     x.closed.overlaps(y.closed).should.be.true();
     x.closed.overlaps(y.open).should.be.true();
@@ -426,7 +424,7 @@ describe('DateTimeInterval.overlaps(DateTimeInterval)', function() {
     y.open.overlaps(x.open).should.be.true();
   });
 
-  it('should properly calculate begins/begun by intervals', function() {
+  it('should properly calculate begins/begun by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.begins));
     x.closed.overlaps(y.closed).should.be.true();
     x.closed.overlaps(y.open).should.be.true();
@@ -438,7 +436,7 @@ describe('DateTimeInterval.overlaps(DateTimeInterval)', function() {
     y.open.overlaps(x.open).should.be.true();
   });
 
-  it('should properly calculate includes/included by intervals', function() {
+  it('should properly calculate includes/included by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.during));
     x.closed.overlaps(y.closed).should.be.true();
     x.closed.overlaps(y.open).should.be.true();
@@ -450,7 +448,7 @@ describe('DateTimeInterval.overlaps(DateTimeInterval)', function() {
     y.open.overlaps(x.open).should.be.true();
   });
 
-  it('should properly calculate ends/ended by intervals', function() {
+  it('should properly calculate ends/ended by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.ends));
     x.closed.overlaps(y.closed).should.be.true();
     x.closed.overlaps(y.open).should.be.true();
@@ -462,7 +460,7 @@ describe('DateTimeInterval.overlaps(DateTimeInterval)', function() {
     y.open.overlaps(x.open).should.be.true();
   });
 
-  it('should properly handle imprecision', function() {
+  it('should properly handle imprecision', function () {
     let [x, y] = Array.from(xy(this.dIvl.sameAs));
     x.closed.overlaps(y.toMinute).should.be.true();
     x.toHour.overlaps(y.toMinute).should.be.true();
@@ -494,34 +492,34 @@ describe('DateTimeInterval.overlaps(DateTimeInterval)', function() {
   });
 });
 
-describe('DateTimeInterval.overlaps(DateTime)', function() {
-  this.beforeEach(function() {
+describe('DateTimeInterval.overlaps(DateTime)', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate dates before it', function() {
+  it('should properly calculate dates before it', function () {
     this.all2012.closed.overlaps(this.bef2012.full).should.be.false();
   });
 
-  it('should properly calculate the left boundary date', function() {
+  it('should properly calculate the left boundary date', function () {
     this.all2012.closed.overlaps(this.beg2012.full).should.be.true();
     this.all2012.open.overlaps(this.beg2012.full).should.be.false();
   });
 
-  it('should properly calculate dates in the middle of it', function() {
+  it('should properly calculate dates in the middle of it', function () {
     this.all2012.closed.overlaps(this.mid2012.full).should.be.true();
   });
 
-  it('should properly calculate the right boundary date', function() {
+  it('should properly calculate the right boundary date', function () {
     this.all2012.closed.overlaps(this.end2012.full).should.be.true();
     this.all2012.open.overlaps(this.end2012.full).should.be.false();
   });
 
-  it('should properly calculate dates after it', function() {
+  it('should properly calculate dates after it', function () {
     this.all2012.closed.overlaps(this.aft2012.full).should.be.false();
   });
 
-  it('should properly handle imprecision', function() {
+  it('should properly handle imprecision', function () {
     this.all2012.closed.overlaps(this.bef2012.toMonth).should.be.false();
     should.not.exist(this.all2012.closed.overlaps(this.beg2012.toMonth));
     this.all2012.closed.overlaps(this.mid2012.toMonth).should.be.true();
@@ -544,12 +542,12 @@ describe('DateTimeInterval.overlaps(DateTime)', function() {
   });
 });
 
-describe('DateTimeInterval.equals', function() {
-  this.beforeEach(function() {
+describe('DateTimeInterval.equals', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intervals', function() {
+  it('should properly calculate sameAs intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.sameAs));
     x.closed.equals(y.closed).should.be.true();
     x.closed.equals(y.open).should.be.false();
@@ -561,7 +559,7 @@ describe('DateTimeInterval.equals', function() {
     y.open.equals(x.open).should.be.true();
   });
 
-  it('should properly calculate before/after intervals', function() {
+  it('should properly calculate before/after intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.before));
     x.closed.equals(y.closed).should.be.false();
     x.closed.equals(y.open).should.be.false();
@@ -573,7 +571,7 @@ describe('DateTimeInterval.equals', function() {
     y.open.equals(x.open).should.be.false();
   });
 
-  it('should properly calculate meets intervals', function() {
+  it('should properly calculate meets intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.meets));
     x.closed.equals(y.closed).should.be.false();
     x.closed.equals(y.open).should.be.false();
@@ -585,7 +583,7 @@ describe('DateTimeInterval.equals', function() {
     y.open.equals(x.open).should.be.false();
   });
 
-  it('should properly calculate left/right overlapping intervals', function() {
+  it('should properly calculate left/right overlapping intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.overlaps));
     x.closed.equals(y.closed).should.be.false();
     x.closed.equals(y.open).should.be.false();
@@ -597,7 +595,7 @@ describe('DateTimeInterval.equals', function() {
     y.open.equals(x.open).should.be.false();
   });
 
-  it('should properly calculate begins/begun by intervals', function() {
+  it('should properly calculate begins/begun by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.begins));
     x.closed.equals(y.closed).should.be.false();
     x.closed.equals(y.open).should.be.false();
@@ -609,7 +607,7 @@ describe('DateTimeInterval.equals', function() {
     y.open.equals(x.open).should.be.false();
   });
 
-  it('should properly calculate includes/included by intervals', function() {
+  it('should properly calculate includes/included by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.during));
     x.closed.equals(y.closed).should.be.false();
     x.closed.equals(y.open).should.be.false();
@@ -621,7 +619,7 @@ describe('DateTimeInterval.equals', function() {
     y.open.equals(x.open).should.be.false();
   });
 
-  it('should properly calculate ends/ended by intervals', function() {
+  it('should properly calculate ends/ended by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.ends));
     x.closed.equals(y.closed).should.be.false();
     x.closed.equals(y.open).should.be.false();
@@ -633,7 +631,7 @@ describe('DateTimeInterval.equals', function() {
     y.open.equals(x.open).should.be.false();
   });
 
-  it('should properly calculate open vs. closed intervals', function() {
+  it('should properly calculate open vs. closed intervals', function () {
     const lowEdge2012 = DateTime.parse('2012-01-01T00:00:00.0+00');
     const lowEdge2012Succ = DateTime.parse('2012-01-01T00:00:00.001+00');
     const highEdge2012 = DateTime.parse('2012-12-31T23:59:59.999+00');
@@ -660,7 +658,7 @@ describe('DateTimeInterval.equals', function() {
     cci.equals(cc).should.be.false();
   });
 
-  it('should properly handle imprecision', function() {
+  it('should properly handle imprecision', function () {
     let [x, y] = Array.from(xy(this.dIvl.sameAs));
     should(x.closed.equals(y.toMinute)).be.null();
     should(x.toHour.equals(y.toMinute)).be.null();
@@ -691,7 +689,7 @@ describe('DateTimeInterval.equals', function() {
     should(x.toYear.equals(y.closed)).be.null();
   });
 
-  it('should be false for equality with points', function() {
+  it('should be false for equality with points', function () {
     const point = DateTime.parse('2012-01-01T00:00:00.0+00');
     const ivl = new Interval(point, point, true, true);
 
@@ -699,12 +697,12 @@ describe('DateTimeInterval.equals', function() {
   });
 });
 
-describe('DateTimeInterval.union', function() {
-  this.beforeEach(function() {
+describe('DateTimeInterval.union', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs unions', function() {
+  it('should properly calculate sameAs unions', function () {
     const [x, y] = Array.from(xy(this.dIvl.sameAs));
     x.closed.union(y.closed).equals(x.closed).should.be.true();
     x.closed.union(y.open).equals(x.closed).should.be.true();
@@ -716,7 +714,7 @@ describe('DateTimeInterval.union', function() {
     y.open.union(x.open).equals(y.open).should.be.true();
   });
 
-  it('should properly calculate before/after unions', function() {
+  it('should properly calculate before/after unions', function () {
     const [x, y] = Array.from(xy(this.dIvl.before));
     should(x.closed.union(y.closed)).be.null();
     should(x.closed.union(y.open)).be.null();
@@ -728,7 +726,7 @@ describe('DateTimeInterval.union', function() {
     should(y.open.union(x.open)).be.null();
   });
 
-  it('should properly calculate meets unions', function() {
+  it('should properly calculate meets unions', function () {
     const [x, y] = Array.from(xy(this.dIvl.meets));
     const z = this.all2012;
     x.closed.union(y.closed).equals(z.closed).should.be.true();
@@ -741,7 +739,7 @@ describe('DateTimeInterval.union', function() {
     should(y.open.union(x.open)).be.null();
   });
 
-  it('should properly calculate left/right overlapping unions', function() {
+  it('should properly calculate left/right overlapping unions', function () {
     const [x, y] = Array.from(xy(this.dIvl.overlaps));
     const z = this.all2012;
     x.closed.union(y.closed).equals(z.closed).should.be.true();
@@ -754,7 +752,7 @@ describe('DateTimeInterval.union', function() {
     y.open.union(x.open).equals(z.open).should.be.true();
   });
 
-  it('should properly calculate begins/begun by unions', function() {
+  it('should properly calculate begins/begun by unions', function () {
     const [x, y] = Array.from(xy(this.dIvl.begins));
     x.closed.union(y.closed).equals(y.closed).should.be.true();
     x.closed.union(y.open).equals(y.closedOpen).should.be.true();
@@ -766,7 +764,7 @@ describe('DateTimeInterval.union', function() {
     y.open.union(x.open).equals(y.open).should.be.true();
   });
 
-  it('should properly calculate includes/included by unions', function() {
+  it('should properly calculate includes/included by unions', function () {
     const [x, y] = Array.from(xy(this.dIvl.during));
     x.closed.union(y.closed).equals(y.closed).should.be.true();
     x.closed.union(y.open).equals(y.open).should.be.true();
@@ -778,7 +776,7 @@ describe('DateTimeInterval.union', function() {
     y.open.union(x.open).equals(y.open).should.be.true();
   });
 
-  it('should properly calculate ends/ended by unions', function() {
+  it('should properly calculate ends/ended by unions', function () {
     const [x, y] = Array.from(xy(this.dIvl.ends));
     x.closed.union(y.closed).equals(y.closed).should.be.true();
     x.closed.union(y.open).equals(y.openClosed).should.be.true();
@@ -790,8 +788,7 @@ describe('DateTimeInterval.union', function() {
     y.open.union(x.open).equals(y.open).should.be.true();
   });
 
-  it('should properly handle imprecision', function() {
-
+  it('should properly handle imprecision', function () {
     let [x, y] = Array.from(xy(this.dIvl.sameAs));
 
     // first, check that the DateTime precision methods are correct.
@@ -834,7 +831,7 @@ describe('DateTimeInterval.union', function() {
     j.equals(i).should.be.true();
 
     [x, y] = Array.from(xy(this.dIvl.meets));
-    i =  x.toMonth.union(y.toMonth);
+    i = x.toMonth.union(y.toMonth);
     should(i).not.be.null();
     i.low.equals(x.toMonth.low);
     i.high.equals(y.toMonth.high);
@@ -876,17 +873,17 @@ describe('DateTimeInterval.union', function() {
     x.toMonth.high.sameAs(j.high, DateTime.Unit.MONTH).should.be.true();
   });
 
-  it('should throw when the argument is a point', function() {
+  it('should throw when the argument is a point', function () {
     should(() => this.all2012.closed.union(this.mid2012.closed)).throw(Error);
   });
 });
 
-describe('DateTimeInterval.intersect', function() {
-  this.beforeEach(function() {
+describe('DateTimeInterval.intersect', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intersect', function() {
+  it('should properly calculate sameAs intersect', function () {
     const [x, y] = Array.from(xy(this.dIvl.sameAs));
     x.closed.intersect(y.closed).equals(x.closed).should.be.true();
     x.closed.intersect(y.open).equals(y.open).should.be.true();
@@ -898,7 +895,7 @@ describe('DateTimeInterval.intersect', function() {
     y.open.intersect(x.open).equals(y.open).should.be.true();
   });
 
-  it('should properly calculate before/after intersect', function() {
+  it('should properly calculate before/after intersect', function () {
     const [x, y] = Array.from(xy(this.dIvl.before));
     should.not.exist(x.closed.intersect(y.closed));
     should.not.exist(x.closed.intersect(y.open));
@@ -910,7 +907,7 @@ describe('DateTimeInterval.intersect', function() {
     should.not.exist(y.open.intersect(x.open));
   });
 
-  it('should properly calculate meets intersect', function() {
+  it('should properly calculate meets intersect', function () {
     const [x, y] = Array.from(xy(this.dIvl.meets));
     should.not.exist(x.closed.intersect(y.closed));
     should.not.exist(x.closed.intersect(y.open));
@@ -922,7 +919,7 @@ describe('DateTimeInterval.intersect', function() {
     should.not.exist(y.open.intersect(x.open));
   });
 
-  it('should properly calculate left/right overlapping intersect', function() {
+  it('should properly calculate left/right overlapping intersect', function () {
     const [x, y] = Array.from(xy(this.dIvl.overlaps));
     const a = this.julysept;
     x.closed.intersect(y.closed).equals(a.closed).should.be.true();
@@ -935,7 +932,7 @@ describe('DateTimeInterval.intersect', function() {
     y.open.intersect(x.open).equals(a.open).should.be.true();
   });
 
-  it('should properly calculate begins/begun by intersect', function() {
+  it('should properly calculate begins/begun by intersect', function () {
     const [x, y] = Array.from(xy(this.dIvl.begins));
     x.closed.intersect(y.closed).equals(x.closed).should.be.true();
     x.closed.intersect(y.open).equals(x.openClosed).should.be.true();
@@ -947,7 +944,7 @@ describe('DateTimeInterval.intersect', function() {
     y.open.intersect(x.open).equals(x.open).should.be.true();
   });
 
-  it('should properly calculate includes/included by intersect', function() {
+  it('should properly calculate includes/included by intersect', function () {
     const [x, y] = Array.from(xy(this.dIvl.during));
     x.closed.intersect(y.closed).equals(x.closed).should.be.true();
     x.closed.intersect(y.open).equals(x.closed).should.be.true();
@@ -959,7 +956,7 @@ describe('DateTimeInterval.intersect', function() {
     y.open.intersect(x.open).equals(x.open).should.be.true();
   });
 
-  it('should properly calculate ends/ended by intersect', function() {
+  it('should properly calculate ends/ended by intersect', function () {
     const [x, y] = Array.from(xy(this.dIvl.ends));
     x.closed.intersect(y.closed).equals(x.closed).should.be.true();
     x.closed.intersect(y.open).equals(x.closedOpen).should.be.true();
@@ -971,7 +968,7 @@ describe('DateTimeInterval.intersect', function() {
     y.open.intersect(x.open).equals(x.open).should.be.true();
   });
 
-  it('should properly handle imprecision', function() {
+  it('should properly handle imprecision', function () {
     let [x, y] = Array.from(xy(this.dIvl.overlaps));
     x.toDay.intersect(y.toDay).low.should.eql(y.toDay.low);
     x.toDay.intersect(y.toDay).high.should.eql(x.toDay.high);
@@ -1001,17 +998,17 @@ describe('DateTimeInterval.intersect', function() {
     y.toDay.intersect(x.toDay).high.should.eql(x.toDay.high);
   });
 
-  it('should throw when the argument is a point', function() {
+  it('should throw when the argument is a point', function () {
     should(() => this.all2012.intersect(DateTime.parse('2012-07-01T00:00:00.0'))).throw(Error);
   });
 });
 
-describe('DateTimeInterval.except', function() {
-  this.beforeEach(function() {
+describe('DateTimeInterval.except', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs except', function() {
+  it('should properly calculate sameAs except', function () {
     const [x, y] = Array.from(xy(this.dIvl.sameAs));
     should.not.exist(x.closed.except(y.closed));
     should.not.exist(x.closed.except(y.open));
@@ -1023,7 +1020,7 @@ describe('DateTimeInterval.except', function() {
     should.not.exist(y.open.except(x.open));
   });
 
-  it('should properly calculate before/after except', function() {
+  it('should properly calculate before/after except', function () {
     const [x, y] = Array.from(xy(this.dIvl.before));
     x.closed.except(y.closed).should.eql(x.closed);
     x.closed.except(y.open).should.eql(x.closed);
@@ -1035,7 +1032,7 @@ describe('DateTimeInterval.except', function() {
     y.open.except(x.open).should.eql(y.open);
   });
 
-  it('should properly calculate meets except', function() {
+  it('should properly calculate meets except', function () {
     const [x, y] = Array.from(xy(this.dIvl.meets));
     x.closed.except(y.closed).should.eql(x.closed);
     x.closed.except(y.open).should.eql(x.closed);
@@ -1047,7 +1044,7 @@ describe('DateTimeInterval.except', function() {
     y.open.except(x.open).should.eql(y.open);
   });
 
-  it('should properly calculate left/right overlapping except', function() {
+  it('should properly calculate left/right overlapping except', function () {
     const [x, y] = Array.from(xy(this.dIvl.overlaps));
     const a = this.janjune;
     const b = this.septdec;
@@ -1061,7 +1058,7 @@ describe('DateTimeInterval.except', function() {
     y.open.except(x.open).equals(b.closedOpen).should.be.true();
   });
 
-  it('should properly calculate begins/begun by except', function() {
+  it('should properly calculate begins/begun by except', function () {
     const [x, y] = Array.from(xy(this.dIvl.begins));
     const b = this.julydec;
     should.not.exist(x.closed.except(y.closed));
@@ -1073,7 +1070,7 @@ describe('DateTimeInterval.except', function() {
     y.open.except(x.open).equals(b.closedOpen).should.be.true();
   });
 
-  it('should properly calculate includes/included by except', function() {
+  it('should properly calculate includes/included by except', function () {
     const [x, y] = Array.from(xy(this.dIvl.during));
     should.not.exist(x.closed.except(y.closed));
     should.not.exist(x.closed.except(y.open));
@@ -1085,7 +1082,7 @@ describe('DateTimeInterval.except', function() {
     should.not.exist(y.open.except(x.open));
   });
 
-  it('should properly calculate ends/ended by except', function() {
+  it('should properly calculate ends/ended by except', function () {
     const [x, y] = Array.from(xy(this.dIvl.ends));
     const b = this.janjuly;
     should.not.exist(x.closed.except(y.closed));
@@ -1098,7 +1095,7 @@ describe('DateTimeInterval.except', function() {
     y.open.except(x.open).equals(b.openClosed).should.be.true();
   });
 
-  it('should properly handle imprecision', function() {
+  it('should properly handle imprecision', function () {
     let [x, y] = Array.from(xy(this.dIvl.overlaps));
     x.toDay.except(y.toDay).low.should.eql(x.toDay.low);
     x.toDay.except(y.toDay).high.should.eql(y.toDay.low);
@@ -1132,18 +1129,17 @@ describe('DateTimeInterval.except', function() {
     should.not.exist(y.toDay.except(x.toMinute));
   });
 
-
-  it('should throw when the argument is a point', function() {
+  it('should throw when the argument is a point', function () {
     should(() => this.all2012.closed.except(DateTime.parse('2012-07-01T00:00:00.0'))).throw(Error);
   });
 });
 
-describe('DateTimeInterval.after', function() {
-  this.beforeEach(function() {
+describe('DateTimeInterval.after', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intervals', function() {
+  it('should properly calculate sameAs intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.sameAs));
     x.closed.after(y.closed).should.be.false();
     x.closed.after(y.open).should.be.false();
@@ -1155,7 +1151,7 @@ describe('DateTimeInterval.after', function() {
     y.open.after(x.open).should.be.false();
   });
 
-  it('should properly calculate before/after intervals', function() {
+  it('should properly calculate before/after intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.before));
     x.closed.after(y.closed).should.be.false();
     x.closed.after(y.open).should.be.false();
@@ -1167,7 +1163,7 @@ describe('DateTimeInterval.after', function() {
     y.open.after(x.open).should.be.true();
   });
 
-  it('should properly calculate meets intervals', function() {
+  it('should properly calculate meets intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.meets));
     x.closed.after(y.closed).should.be.false();
     x.closed.after(y.open).should.be.false();
@@ -1179,7 +1175,7 @@ describe('DateTimeInterval.after', function() {
     y.open.after(x.open).should.be.true();
   });
 
-  it('should properly calculate left/right overlapping intervals', function() {
+  it('should properly calculate left/right overlapping intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.overlaps));
     x.closed.after(y.closed).should.be.false();
     x.closed.after(y.open).should.be.false();
@@ -1191,7 +1187,7 @@ describe('DateTimeInterval.after', function() {
     y.open.after(x.open).should.be.false();
   });
 
-  it('should properly calculate begins/begun by intervals', function() {
+  it('should properly calculate begins/begun by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.begins));
     x.closed.after(y.closed).should.be.false();
     x.closed.after(y.open).should.be.false();
@@ -1203,7 +1199,7 @@ describe('DateTimeInterval.after', function() {
     y.open.after(x.open).should.be.false();
   });
 
-  it('should properly calculate includes/included by intervals', function() {
+  it('should properly calculate includes/included by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.during));
     x.closed.after(y.closed).should.be.false();
     x.closed.after(y.open).should.be.false();
@@ -1215,7 +1211,7 @@ describe('DateTimeInterval.after', function() {
     y.open.after(x.open).should.be.false();
   });
 
-  it('should properly calculate ends/ended by intervals', function() {
+  it('should properly calculate ends/ended by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.ends));
     x.closed.after(y.closed).should.be.false();
     x.closed.after(y.open).should.be.false();
@@ -1227,7 +1223,7 @@ describe('DateTimeInterval.after', function() {
     y.open.after(x.open).should.be.false();
   });
 
-  it('should properly handle imprecision', function() {
+  it('should properly handle imprecision', function () {
     let [x, y] = Array.from(xy(this.dIvl.sameAs));
     x.closed.after(y.toMinute).should.be.false();
     x.toHour.after(y.toMinute).should.be.false();
@@ -1270,12 +1266,12 @@ describe('DateTimeInterval.after', function() {
   });
 });
 
-describe('DateTimeInterval.before', function() {
-  this.beforeEach(function() {
+describe('DateTimeInterval.before', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intervals', function() {
+  it('should properly calculate sameAs intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.sameAs));
     x.closed.before(y.closed).should.be.false();
     x.closed.before(y.open).should.be.false();
@@ -1287,7 +1283,7 @@ describe('DateTimeInterval.before', function() {
     y.open.before(x.open).should.be.false();
   });
 
-  it('should properly calculate before/after intervals', function() {
+  it('should properly calculate before/after intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.before));
     x.closed.before(y.closed).should.be.true();
     x.closed.before(y.open).should.be.true();
@@ -1299,7 +1295,7 @@ describe('DateTimeInterval.before', function() {
     y.open.before(x.open).should.be.false();
   });
 
-  it('should properly calculate meets intervals', function() {
+  it('should properly calculate meets intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.meets));
     x.closed.before(y.closed).should.be.true();
     x.closed.before(y.open).should.be.true();
@@ -1311,7 +1307,7 @@ describe('DateTimeInterval.before', function() {
     y.open.before(x.open).should.be.false();
   });
 
-  it('should properly calculate left/right overlapping intervals', function() {
+  it('should properly calculate left/right overlapping intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.overlaps));
     x.closed.before(y.closed).should.be.false();
     x.closed.before(y.open).should.be.false();
@@ -1323,7 +1319,7 @@ describe('DateTimeInterval.before', function() {
     y.open.before(x.open).should.be.false();
   });
 
-  it('should properly calculate begins/begun by intervals', function() {
+  it('should properly calculate begins/begun by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.begins));
     x.closed.before(y.closed).should.be.false();
     x.closed.before(y.open).should.be.false();
@@ -1335,7 +1331,7 @@ describe('DateTimeInterval.before', function() {
     y.open.before(x.open).should.be.false();
   });
 
-  it('should properly calculate includes/included by intervals', function() {
+  it('should properly calculate includes/included by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.during));
     x.closed.before(y.closed).should.be.false();
     x.closed.before(y.open).should.be.false();
@@ -1347,7 +1343,7 @@ describe('DateTimeInterval.before', function() {
     y.open.before(x.open).should.be.false();
   });
 
-  it('should properly calculate ends/ended by intervals', function() {
+  it('should properly calculate ends/ended by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.ends));
     x.closed.before(y.closed).should.be.false();
     x.closed.before(y.open).should.be.false();
@@ -1359,7 +1355,7 @@ describe('DateTimeInterval.before', function() {
     y.open.before(x.open).should.be.false();
   });
 
-  it('should properly handle imprecision', function() {
+  it('should properly handle imprecision', function () {
     let [x, y] = Array.from(xy(this.dIvl.sameAs));
     x.closed.before(y.toMinute).should.be.false();
     x.toHour.before(y.toMinute).should.be.false();
@@ -1402,12 +1398,12 @@ describe('DateTimeInterval.before', function() {
 });
 
 // TODO Add tests that pass in precision parameters
-describe('DateTimeInterval.meets', function() {
-  this.beforeEach(function() {
+describe('DateTimeInterval.meets', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intervals', function() {
+  it('should properly calculate sameAs intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.sameAs));
     x.closed.meets(y.closed).should.be.false();
     x.closed.meets(y.open).should.be.false();
@@ -1419,7 +1415,7 @@ describe('DateTimeInterval.meets', function() {
     y.open.meets(x.open).should.be.false();
   });
 
-  it('should properly calculate before/after intervals', function() {
+  it('should properly calculate before/after intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.before));
     x.closed.meets(y.closed).should.be.false();
     x.closed.meets(y.open).should.be.false();
@@ -1431,7 +1427,7 @@ describe('DateTimeInterval.meets', function() {
     y.open.meets(x.open).should.be.false();
   });
 
-  it('should properly calculate meets intervals', function() {
+  it('should properly calculate meets intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.meets));
     x.closed.meets(y.closed).should.be.true();
     x.closed.meets(y.open).should.be.false();
@@ -1443,7 +1439,7 @@ describe('DateTimeInterval.meets', function() {
     y.open.meets(x.open).should.be.false();
   });
 
-  it('should properly calculate left/right overlapping intervals', function() {
+  it('should properly calculate left/right overlapping intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.overlaps));
     x.closed.meets(y.closed).should.be.false();
     x.closed.meets(y.open).should.be.false();
@@ -1455,7 +1451,7 @@ describe('DateTimeInterval.meets', function() {
     y.open.meets(x.open).should.be.false();
   });
 
-  it('should properly calculate begins/begun by intervals', function() {
+  it('should properly calculate begins/begun by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.begins));
     x.closed.meets(y.closed).should.be.false();
     x.closed.meets(y.open).should.be.false();
@@ -1467,7 +1463,7 @@ describe('DateTimeInterval.meets', function() {
     y.open.meets(x.open).should.be.false();
   });
 
-  it('should properly calculate includes/included by intervals', function() {
+  it('should properly calculate includes/included by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.during));
     x.closed.meets(y.closed).should.be.false();
     x.closed.meets(y.open).should.be.false();
@@ -1479,7 +1475,7 @@ describe('DateTimeInterval.meets', function() {
     y.open.meets(x.open).should.be.false();
   });
 
-  it('should properly calculate ends/ended by intervals', function() {
+  it('should properly calculate ends/ended by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.ends));
     x.closed.meets(y.closed).should.be.false();
     x.closed.meets(y.open).should.be.false();
@@ -1491,7 +1487,7 @@ describe('DateTimeInterval.meets', function() {
     y.open.meets(x.open).should.be.false();
   });
 
-  it('should properly handle imprecision', function() {
+  it('should properly handle imprecision', function () {
     let [x, y] = Array.from(xy(this.dIvl.sameAs));
     x.closed.meets(y.toMinute).should.be.false();
     x.toHour.meets(y.toMinute).should.be.false();
@@ -1524,12 +1520,12 @@ describe('DateTimeInterval.meets', function() {
 });
 
 // TODO Add tests that pass in precision parameter
-describe('DateTimeInterval.meetsAfter', function() {
-  this.beforeEach(function() {
+describe('DateTimeInterval.meetsAfter', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intervals', function() {
+  it('should properly calculate sameAs intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.sameAs));
     x.closed.meetsAfter(y.closed).should.be.false();
     x.closed.meetsAfter(y.open).should.be.false();
@@ -1541,7 +1537,7 @@ describe('DateTimeInterval.meetsAfter', function() {
     y.open.meetsAfter(x.open).should.be.false();
   });
 
-  it('should properly calculate before/after intervals', function() {
+  it('should properly calculate before/after intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.before));
     x.closed.meetsAfter(y.closed).should.be.false();
     x.closed.meetsAfter(y.open).should.be.false();
@@ -1553,7 +1549,7 @@ describe('DateTimeInterval.meetsAfter', function() {
     y.open.meetsAfter(x.open).should.be.false();
   });
 
-  it('should properly calculate meets intervals', function() {
+  it('should properly calculate meets intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.meets));
     x.closed.meetsAfter(y.closed).should.be.false();
     x.closed.meetsAfter(y.open).should.be.false();
@@ -1565,7 +1561,7 @@ describe('DateTimeInterval.meetsAfter', function() {
     y.open.meetsAfter(x.open).should.be.false();
   });
 
-  it('should properly calculate left/right overlapping intervals', function() {
+  it('should properly calculate left/right overlapping intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.overlaps));
     x.closed.meetsAfter(y.closed).should.be.false();
     x.closed.meetsAfter(y.open).should.be.false();
@@ -1577,7 +1573,7 @@ describe('DateTimeInterval.meetsAfter', function() {
     y.open.meetsAfter(x.open).should.be.false();
   });
 
-  it('should properly calculate begins/begun by intervals', function() {
+  it('should properly calculate begins/begun by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.begins));
     x.closed.meetsAfter(y.closed).should.be.false();
     x.closed.meetsAfter(y.open).should.be.false();
@@ -1589,7 +1585,7 @@ describe('DateTimeInterval.meetsAfter', function() {
     y.open.meetsAfter(x.open).should.be.false();
   });
 
-  it('should properly calculate includes/included by intervals', function() {
+  it('should properly calculate includes/included by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.during));
     x.closed.meetsAfter(y.closed).should.be.false();
     x.closed.meetsAfter(y.open).should.be.false();
@@ -1601,7 +1597,7 @@ describe('DateTimeInterval.meetsAfter', function() {
     y.open.meetsAfter(x.open).should.be.false();
   });
 
-  it('should properly calculate ends/ended by intervals', function() {
+  it('should properly calculate ends/ended by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.ends));
     x.closed.meetsAfter(y.closed).should.be.false();
     x.closed.meetsAfter(y.open).should.be.false();
@@ -1613,7 +1609,7 @@ describe('DateTimeInterval.meetsAfter', function() {
     y.open.meetsAfter(x.open).should.be.false();
   });
 
-  it('should properly handle imprecision', function() {
+  it('should properly handle imprecision', function () {
     let [x, y] = Array.from(xy(this.dIvl.sameAs));
     x.closed.meetsAfter(y.toMinute).should.be.false();
     x.toHour.meetsAfter(y.toMinute).should.be.false();
@@ -1651,12 +1647,12 @@ describe('DateTimeInterval.meetsAfter', function() {
 });
 
 // TODO Add tests that pass in precision parameter
-describe('DateTimeInterval.meetsBefore', function() {
-  this.beforeEach(function() {
+describe('DateTimeInterval.meetsBefore', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intervals', function() {
+  it('should properly calculate sameAs intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.sameAs));
     x.closed.meetsBefore(y.closed).should.be.false();
     x.closed.meetsBefore(y.open).should.be.false();
@@ -1668,7 +1664,7 @@ describe('DateTimeInterval.meetsBefore', function() {
     y.open.meetsBefore(x.open).should.be.false();
   });
 
-  it('should properly calculate before/after intervals', function() {
+  it('should properly calculate before/after intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.before));
     x.closed.meetsBefore(y.closed).should.be.false();
     x.closed.meetsBefore(y.open).should.be.false();
@@ -1680,7 +1676,7 @@ describe('DateTimeInterval.meetsBefore', function() {
     y.open.meetsBefore(x.open).should.be.false();
   });
 
-  it('should properly calculate meets intervals', function() {
+  it('should properly calculate meets intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.meets));
     x.closed.meetsBefore(y.closed).should.be.true();
     x.closed.meetsBefore(y.open).should.be.false();
@@ -1692,7 +1688,7 @@ describe('DateTimeInterval.meetsBefore', function() {
     y.open.meetsBefore(x.open).should.be.false();
   });
 
-  it('should properly calculate left/right overlapping intervals', function() {
+  it('should properly calculate left/right overlapping intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.overlaps));
     x.closed.meetsBefore(y.closed).should.be.false();
     x.closed.meetsBefore(y.open).should.be.false();
@@ -1704,7 +1700,7 @@ describe('DateTimeInterval.meetsBefore', function() {
     y.open.meetsBefore(x.open).should.be.false();
   });
 
-  it('should properly calculate begins/begun by intervals', function() {
+  it('should properly calculate begins/begun by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.begins));
     x.closed.meetsBefore(y.closed).should.be.false();
     x.closed.meetsBefore(y.open).should.be.false();
@@ -1716,7 +1712,7 @@ describe('DateTimeInterval.meetsBefore', function() {
     y.open.meetsBefore(x.open).should.be.false();
   });
 
-  it('should properly calculate includes/included by intervals', function() {
+  it('should properly calculate includes/included by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.during));
     x.closed.meetsBefore(y.closed).should.be.false();
     x.closed.meetsBefore(y.open).should.be.false();
@@ -1728,7 +1724,7 @@ describe('DateTimeInterval.meetsBefore', function() {
     y.open.meetsBefore(x.open).should.be.false();
   });
 
-  it('should properly calculate ends/ended by intervals', function() {
+  it('should properly calculate ends/ended by intervals', function () {
     const [x, y] = Array.from(xy(this.dIvl.ends));
     x.closed.meetsBefore(y.closed).should.be.false();
     x.closed.meetsBefore(y.open).should.be.false();
@@ -1740,7 +1736,7 @@ describe('DateTimeInterval.meetsBefore', function() {
     y.open.meetsBefore(x.open).should.be.false();
   });
 
-  it('should properly handle imprecision', function() {
+  it('should properly handle imprecision', function () {
     let [x, y] = Array.from(xy(this.dIvl.sameAs));
     x.closed.meetsBefore(y.toMinute).should.be.false();
     x.toHour.meetsBefore(y.toMinute).should.be.false();
@@ -1773,55 +1769,55 @@ describe('DateTimeInterval.meetsBefore', function() {
   });
 });
 
-describe('IntegerInterval.contains', function() {
-  this.beforeEach(function() {
+describe('IntegerInterval.contains', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate integers less than it', function() {
+  it('should properly calculate integers less than it', function () {
     this.zeroToHundred.closed.contains(-5).should.be.false();
   });
 
-  it('should properly calculate the left boundary integer', function() {
+  it('should properly calculate the left boundary integer', function () {
     this.zeroToHundred.closed.contains(0).should.be.true();
     this.zeroToHundred.open.contains(0).should.be.false();
   });
 
-  it('should properly calculate integers in the middle of it', function() {
+  it('should properly calculate integers in the middle of it', function () {
     this.zeroToHundred.closed.contains(50).should.be.true();
   });
 
-  it('should properly calculate the right boundary integer', function() {
+  it('should properly calculate the right boundary integer', function () {
     this.zeroToHundred.closed.contains(100).should.be.true();
     this.zeroToHundred.open.contains(100).should.be.false();
   });
 
-  it('should properly calculate integers greater than it', function() {
+  it('should properly calculate integers greater than it', function () {
     this.zeroToHundred.closed.contains(105).should.be.false();
   });
 
-  it('should properly handle null endpoints', function() {
+  it('should properly handle null endpoints', function () {
     new Interval(null, 0).contains(-123456789).should.be.true();
     new Interval(null, 0).contains(1).should.be.false();
-    new Interval(null,0,false,true).contains(0).should.be.true();
-    should(new Interval(null,0,false,true).contains(-123456789)).be.null();
-    new Interval(null,0,false,true).contains(1).should.be.false();
-    new Interval(0,null).contains(123456789).should.be.true();
-    new Interval(0,null).contains(-1).should.be.false();
-    new Interval(0,null,true,false).contains(0).should.be.true();
-    should(new Interval(0,null,true,false).contains(123456789)).be.null();
-    new Interval(0,null,true,false).contains(-1).should.be.false();
+    new Interval(null, 0, false, true).contains(0).should.be.true();
+    should(new Interval(null, 0, false, true).contains(-123456789)).be.null();
+    new Interval(null, 0, false, true).contains(1).should.be.false();
+    new Interval(0, null).contains(123456789).should.be.true();
+    new Interval(0, null).contains(-1).should.be.false();
+    new Interval(0, null, true, false).contains(0).should.be.true();
+    should(new Interval(0, null, true, false).contains(123456789)).be.null();
+    new Interval(0, null, true, false).contains(-1).should.be.false();
   });
 
-  it('should properly handle imprecision', function() {
-    this.zeroToHundred.closed.contains(new Uncertainty(-20,-10)).should.be.false();
-    should.not.exist(this.zeroToHundred.closed.contains(new Uncertainty(-20,20)));
-    this.zeroToHundred.closed.contains(new Uncertainty(0,100)).should.be.true();
-    should.not.exist(this.zeroToHundred.closed.contains(new Uncertainty(80,120)));
-    this.zeroToHundred.closed.contains(new Uncertainty(120,140)).should.be.false();
-    should.not.exist(this.zeroToHundred.closed.contains(new Uncertainty(-20,120)));
+  it('should properly handle imprecision', function () {
+    this.zeroToHundred.closed.contains(new Uncertainty(-20, -10)).should.be.false();
+    should.not.exist(this.zeroToHundred.closed.contains(new Uncertainty(-20, 20)));
+    this.zeroToHundred.closed.contains(new Uncertainty(0, 100)).should.be.true();
+    should.not.exist(this.zeroToHundred.closed.contains(new Uncertainty(80, 120)));
+    this.zeroToHundred.closed.contains(new Uncertainty(120, 140)).should.be.false();
+    should.not.exist(this.zeroToHundred.closed.contains(new Uncertainty(-20, 120)));
 
-    const uIvl = new Interval(new Uncertainty(5,10), new Uncertainty(15, 20));
+    const uIvl = new Interval(new Uncertainty(5, 10), new Uncertainty(15, 20));
 
     uIvl.contains(0).should.be.false();
     should.not.exist(uIvl.contains(5));
@@ -1833,26 +1829,26 @@ describe('IntegerInterval.contains', function() {
     should.not.exist(uIvl.contains(20));
     uIvl.contains(25).should.be.false();
 
-    uIvl.contains(new Uncertainty(0,4)).should.be.false();
-    should.not.exist(uIvl.contains(new Uncertainty(0,5)));
-    should.not.exist(uIvl.contains(new Uncertainty(5,10)));
-    uIvl.contains(new Uncertainty(10,15)).should.be.true();
-    should.not.exist(uIvl.contains(new Uncertainty(15,20)));
-    should.not.exist(uIvl.contains(new Uncertainty(20,25)));
-    uIvl.contains(new Uncertainty(25,30)).should.be.false();
+    uIvl.contains(new Uncertainty(0, 4)).should.be.false();
+    should.not.exist(uIvl.contains(new Uncertainty(0, 5)));
+    should.not.exist(uIvl.contains(new Uncertainty(5, 10)));
+    uIvl.contains(new Uncertainty(10, 15)).should.be.true();
+    should.not.exist(uIvl.contains(new Uncertainty(15, 20)));
+    should.not.exist(uIvl.contains(new Uncertainty(20, 25)));
+    uIvl.contains(new Uncertainty(25, 30)).should.be.false();
   });
 
-  it('should throw when the argument is an interval', function() {
+  it('should throw when the argument is an interval', function () {
     should(() => this.zeroToHundred.closed.contains(new Interval(5, 10))).throw(Error);
   });
 });
 
-describe('IntegerInterval.includes', function() {
-  this.beforeEach(function() {
+describe('IntegerInterval.includes', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intervals', function() {
+  it('should properly calculate sameAs intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.sameAs));
     x.closed.includes(y.closed).should.be.true();
     x.closed.includes(y.open).should.be.true();
@@ -1864,7 +1860,7 @@ describe('IntegerInterval.includes', function() {
     y.open.includes(x.open).should.be.true();
   });
 
-  it('should properly calculate before/after intervals', function() {
+  it('should properly calculate before/after intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.before));
     x.closed.includes(y.closed).should.be.false();
     x.closed.includes(y.open).should.be.false();
@@ -1876,7 +1872,7 @@ describe('IntegerInterval.includes', function() {
     y.open.includes(x.open).should.be.false();
   });
 
-  it('should properly calculate meets intervals', function() {
+  it('should properly calculate meets intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.meets));
     x.closed.includes(y.closed).should.be.false();
     x.closed.includes(y.open).should.be.false();
@@ -1888,7 +1884,7 @@ describe('IntegerInterval.includes', function() {
     y.open.includes(x.open).should.be.false();
   });
 
-  it('should properly calculate left/right overlapping intervals', function() {
+  it('should properly calculate left/right overlapping intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.overlaps));
     x.closed.includes(y.closed).should.be.false();
     x.closed.includes(y.open).should.be.false();
@@ -1900,7 +1896,7 @@ describe('IntegerInterval.includes', function() {
     y.open.includes(x.open).should.be.false();
   });
 
-  it('should properly calculate begins/begun by intervals', function() {
+  it('should properly calculate begins/begun by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.begins));
     x.closed.includes(y.closed).should.be.false();
     x.closed.includes(y.open).should.be.false();
@@ -1912,7 +1908,7 @@ describe('IntegerInterval.includes', function() {
     y.open.includes(x.open).should.be.true();
   });
 
-  it('should properly calculate includes/included by intervals', function() {
+  it('should properly calculate includes/included by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.during));
     x.closed.includes(y.closed).should.be.false();
     x.closed.includes(y.open).should.be.false();
@@ -1924,7 +1920,7 @@ describe('IntegerInterval.includes', function() {
     y.open.includes(x.open).should.be.true();
   });
 
-  it('should properly calculate ends/ended by intervals', function() {
+  it('should properly calculate ends/ended by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.ends));
     x.closed.includes(y.closed).should.be.false();
     x.closed.includes(y.open).should.be.false();
@@ -1936,8 +1932,8 @@ describe('IntegerInterval.includes', function() {
     y.open.includes(x.open).should.be.true();
   });
 
-  it('should properly handle imprecision', function() {
-    const uIvl = new Interval(new Uncertainty(5,10), new Uncertainty(15, 20));
+  it('should properly handle imprecision', function () {
+    const uIvl = new Interval(new Uncertainty(5, 10), new Uncertainty(15, 20));
 
     let ivl = new Interval(0, 100);
     ivl.includes(uIvl).should.be.true();
@@ -1958,17 +1954,17 @@ describe('IntegerInterval.includes', function() {
     should.not.exist(uIvl.includes(uIvl));
   });
 
-  it('should include a point Integer', function() {
+  it('should include a point Integer', function () {
     this.zeroToHundred.closed.includes(50).should.be.true();
   });
 });
 
-describe('IntegerInterval.includedIn', function() {
-  this.beforeEach(function() {
+describe('IntegerInterval.includedIn', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intervals', function() {
+  it('should properly calculate sameAs intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.sameAs));
     x.closed.includedIn(y.closed).should.be.true();
     x.closed.includedIn(y.open).should.be.false();
@@ -1981,7 +1977,7 @@ describe('IntegerInterval.includedIn', function() {
     y.open.includedIn(x.open).should.be.true();
   });
 
-  it('should properly calculate before/after intervals', function() {
+  it('should properly calculate before/after intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.before));
     x.closed.includedIn(y.closed).should.be.false();
     x.closed.includedIn(y.open).should.be.false();
@@ -1993,7 +1989,7 @@ describe('IntegerInterval.includedIn', function() {
     y.open.includedIn(x.open).should.be.false();
   });
 
-  it('should properly calculate meets intervals', function() {
+  it('should properly calculate meets intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.meets));
     x.closed.includedIn(y.closed).should.be.false();
     x.closed.includedIn(y.open).should.be.false();
@@ -2005,7 +2001,7 @@ describe('IntegerInterval.includedIn', function() {
     y.open.includedIn(x.open).should.be.false();
   });
 
-  it('should properly calculate left/right overlapping intervals', function() {
+  it('should properly calculate left/right overlapping intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.overlaps));
     x.closed.includedIn(y.closed).should.be.false();
     x.closed.includedIn(y.open).should.be.false();
@@ -2017,7 +2013,7 @@ describe('IntegerInterval.includedIn', function() {
     y.open.includedIn(x.open).should.be.false();
   });
 
-  it('should properly calculate begins/begun by intervals', function() {
+  it('should properly calculate begins/begun by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.begins));
     x.closed.includedIn(y.closed).should.be.true();
     x.closed.includedIn(y.open).should.be.false();
@@ -2029,7 +2025,7 @@ describe('IntegerInterval.includedIn', function() {
     y.open.includedIn(x.open).should.be.false();
   });
 
-  it('should properly calculate includes/included by intervals', function() {
+  it('should properly calculate includes/included by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.during));
     x.closed.includedIn(y.closed).should.be.true();
     x.closed.includedIn(y.open).should.be.true();
@@ -2041,7 +2037,7 @@ describe('IntegerInterval.includedIn', function() {
     y.open.includedIn(x.open).should.be.false();
   });
 
-  it('should properly calculate ends/ended by intervals', function() {
+  it('should properly calculate ends/ended by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.ends));
     x.closed.includedIn(y.closed).should.be.true();
     x.closed.includedIn(y.open).should.be.false();
@@ -2053,8 +2049,8 @@ describe('IntegerInterval.includedIn', function() {
     y.open.includedIn(x.open).should.be.false();
   });
 
-  it('should properly handle imprecision', function() {
-    const uIvl = new Interval(new Uncertainty(5,10), new Uncertainty(15, 20));
+  it('should properly handle imprecision', function () {
+    const uIvl = new Interval(new Uncertainty(5, 10), new Uncertainty(15, 20));
 
     let ivl = new Interval(0, 100);
     ivl.includedIn(uIvl).should.be.false();
@@ -2075,18 +2071,18 @@ describe('IntegerInterval.includedIn', function() {
     should.not.exist(uIvl.includedIn(uIvl));
   });
 
-  it('should include a point integer', function() {
+  it('should include a point integer', function () {
     this.zeroToHundred.closed.includedIn(50).should.be.true();
     this.zeroToHundred.closed.includedIn(500).should.be.false();
   });
 });
 
-describe('IntegerInterval.overlaps(IntegerInterval)', function() {
-  this.beforeEach(function() {
+describe('IntegerInterval.overlaps(IntegerInterval)', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intervals', function() {
+  it('should properly calculate sameAs intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.sameAs));
     x.closed.overlaps(y.closed).should.be.true();
     x.closed.overlaps(y.open).should.be.true();
@@ -2098,7 +2094,7 @@ describe('IntegerInterval.overlaps(IntegerInterval)', function() {
     y.open.overlaps(x.open).should.be.true();
   });
 
-  it('should properly calculate before/after intervals', function() {
+  it('should properly calculate before/after intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.before));
     x.closed.overlaps(y.closed).should.be.false();
     x.closed.overlaps(y.open).should.be.false();
@@ -2110,7 +2106,7 @@ describe('IntegerInterval.overlaps(IntegerInterval)', function() {
     y.open.overlaps(x.open).should.be.false();
   });
 
-  it('should properly calculate meets intervals', function() {
+  it('should properly calculate meets intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.meets));
     x.closed.overlaps(y.closed).should.be.false();
     x.closed.overlaps(y.open).should.be.false();
@@ -2122,7 +2118,7 @@ describe('IntegerInterval.overlaps(IntegerInterval)', function() {
     y.open.overlaps(x.open).should.be.false();
   });
 
-  it('should properly calculate left/right overlapping intervals', function() {
+  it('should properly calculate left/right overlapping intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.overlaps));
     x.closed.overlaps(y.closed).should.be.true();
     x.closed.overlaps(y.open).should.be.true();
@@ -2134,7 +2130,7 @@ describe('IntegerInterval.overlaps(IntegerInterval)', function() {
     y.open.overlaps(x.open).should.be.true();
   });
 
-  it('should properly calculate begins/begun by intervals', function() {
+  it('should properly calculate begins/begun by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.begins));
     x.closed.overlaps(y.closed).should.be.true();
     x.closed.overlaps(y.open).should.be.true();
@@ -2146,7 +2142,7 @@ describe('IntegerInterval.overlaps(IntegerInterval)', function() {
     y.open.overlaps(x.open).should.be.true();
   });
 
-  it('should properly calculate includes/included by intervals', function() {
+  it('should properly calculate includes/included by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.during));
     x.closed.overlaps(y.closed).should.be.true();
     x.closed.overlaps(y.open).should.be.true();
@@ -2158,7 +2154,7 @@ describe('IntegerInterval.overlaps(IntegerInterval)', function() {
     y.open.overlaps(x.open).should.be.true();
   });
 
-  it('should properly calculate ends/ended by intervals', function() {
+  it('should properly calculate ends/ended by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.ends));
     x.closed.overlaps(y.closed).should.be.true();
     x.closed.overlaps(y.open).should.be.true();
@@ -2170,8 +2166,8 @@ describe('IntegerInterval.overlaps(IntegerInterval)', function() {
     y.open.overlaps(x.open).should.be.true();
   });
 
-  it('should properly handle imprecision', function() {
-    const uIvl = new Interval(new Uncertainty(5,10), new Uncertainty(15, 20));
+  it('should properly handle imprecision', function () {
+    const uIvl = new Interval(new Uncertainty(5, 10), new Uncertainty(15, 20));
 
     let ivl = new Interval(0, 100);
     ivl.overlaps(uIvl).should.be.true();
@@ -2193,42 +2189,42 @@ describe('IntegerInterval.overlaps(IntegerInterval)', function() {
   });
 });
 
-describe('IntegerInterval.overlaps(Integer)', function() {
-  this.beforeEach(function() {
+describe('IntegerInterval.overlaps(Integer)', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate integers less than it', function() {
+  it('should properly calculate integers less than it', function () {
     this.zeroToHundred.closed.overlaps(-5).should.be.false();
   });
 
-  it('should properly calculate the left boundary integer', function() {
+  it('should properly calculate the left boundary integer', function () {
     this.zeroToHundred.closed.overlaps(0).should.be.true();
     this.zeroToHundred.open.overlaps(0).should.be.false();
   });
 
-  it('should properly calculate integers in the middle of it', function() {
+  it('should properly calculate integers in the middle of it', function () {
     this.zeroToHundred.closed.overlaps(50).should.be.true();
   });
 
-  it('should properly calculate the right boundary integer', function() {
+  it('should properly calculate the right boundary integer', function () {
     this.zeroToHundred.closed.overlaps(100).should.be.true();
     this.zeroToHundred.open.overlaps(100).should.be.false();
   });
 
-  it('should properly calculate integers greater than it', function() {
+  it('should properly calculate integers greater than it', function () {
     this.zeroToHundred.closed.overlaps(105).should.be.false();
   });
 
-  it('should properly handle imprecision', function() {
-    this.zeroToHundred.closed.overlaps(new Uncertainty(-20,-10)).should.be.false();
-    should.not.exist(this.zeroToHundred.closed.overlaps(new Uncertainty(-20,20)));
-    this.zeroToHundred.closed.overlaps(new Uncertainty(0,100)).should.be.true();
-    should.not.exist(this.zeroToHundred.closed.overlaps(new Uncertainty(80,120)));
-    this.zeroToHundred.closed.overlaps(new Uncertainty(120,140)).should.be.false();
-    should.not.exist(this.zeroToHundred.closed.overlaps(new Uncertainty(-20,120)));
+  it('should properly handle imprecision', function () {
+    this.zeroToHundred.closed.overlaps(new Uncertainty(-20, -10)).should.be.false();
+    should.not.exist(this.zeroToHundred.closed.overlaps(new Uncertainty(-20, 20)));
+    this.zeroToHundred.closed.overlaps(new Uncertainty(0, 100)).should.be.true();
+    should.not.exist(this.zeroToHundred.closed.overlaps(new Uncertainty(80, 120)));
+    this.zeroToHundred.closed.overlaps(new Uncertainty(120, 140)).should.be.false();
+    should.not.exist(this.zeroToHundred.closed.overlaps(new Uncertainty(-20, 120)));
 
-    const uIvl = new Interval(new Uncertainty(5,10), new Uncertainty(15, 20));
+    const uIvl = new Interval(new Uncertainty(5, 10), new Uncertainty(15, 20));
 
     uIvl.overlaps(0).should.be.false();
     should.not.exist(uIvl.overlaps(5));
@@ -2240,22 +2236,22 @@ describe('IntegerInterval.overlaps(Integer)', function() {
     should.not.exist(uIvl.overlaps(20));
     uIvl.overlaps(25).should.be.false();
 
-    uIvl.overlaps(new Uncertainty(0,4)).should.be.false();
-    should.not.exist(uIvl.overlaps(new Uncertainty(0,5)));
-    should.not.exist(uIvl.overlaps(new Uncertainty(5,10)));
-    uIvl.overlaps(new Uncertainty(10,15)).should.be.true();
-    should.not.exist(uIvl.overlaps(new Uncertainty(15,20)));
-    should.not.exist(uIvl.overlaps(new Uncertainty(20,25)));
-    uIvl.overlaps(new Uncertainty(25,30)).should.be.false();
+    uIvl.overlaps(new Uncertainty(0, 4)).should.be.false();
+    should.not.exist(uIvl.overlaps(new Uncertainty(0, 5)));
+    should.not.exist(uIvl.overlaps(new Uncertainty(5, 10)));
+    uIvl.overlaps(new Uncertainty(10, 15)).should.be.true();
+    should.not.exist(uIvl.overlaps(new Uncertainty(15, 20)));
+    should.not.exist(uIvl.overlaps(new Uncertainty(20, 25)));
+    uIvl.overlaps(new Uncertainty(25, 30)).should.be.false();
   });
 });
 
-describe('IntegerInterval.equals', function() {
-  this.beforeEach(function() {
+describe('IntegerInterval.equals', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intervals', function() {
+  it('should properly calculate sameAs intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.sameAs));
     x.closed.equals(y.closed).should.be.true();
     x.closed.equals(y.open).should.be.false();
@@ -2267,7 +2263,7 @@ describe('IntegerInterval.equals', function() {
     y.open.equals(x.open).should.be.true();
   });
 
-  it('should properly calculate before/after intervals', function() {
+  it('should properly calculate before/after intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.before));
     x.closed.equals(y.closed).should.be.false();
     x.closed.equals(y.open).should.be.false();
@@ -2279,7 +2275,7 @@ describe('IntegerInterval.equals', function() {
     y.open.equals(x.open).should.be.false();
   });
 
-  it('should properly calculate meets intervals', function() {
+  it('should properly calculate meets intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.meets));
     x.closed.equals(y.closed).should.be.false();
     x.closed.equals(y.open).should.be.false();
@@ -2291,7 +2287,7 @@ describe('IntegerInterval.equals', function() {
     y.open.equals(x.open).should.be.false();
   });
 
-  it('should properly calculate left/right overlapping intervals', function() {
+  it('should properly calculate left/right overlapping intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.overlaps));
     x.closed.equals(y.closed).should.be.false();
     x.closed.equals(y.open).should.be.false();
@@ -2303,7 +2299,7 @@ describe('IntegerInterval.equals', function() {
     y.open.equals(x.open).should.be.false();
   });
 
-  it('should properly calculate begins/begun by intervals', function() {
+  it('should properly calculate begins/begun by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.begins));
     x.closed.equals(y.closed).should.be.false();
     x.closed.equals(y.open).should.be.false();
@@ -2315,7 +2311,7 @@ describe('IntegerInterval.equals', function() {
     y.open.equals(x.open).should.be.false();
   });
 
-  it('should properly calculate includes/included by intervals', function() {
+  it('should properly calculate includes/included by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.during));
     x.closed.equals(y.closed).should.be.false();
     x.closed.equals(y.open).should.be.false();
@@ -2327,7 +2323,7 @@ describe('IntegerInterval.equals', function() {
     y.open.equals(x.open).should.be.false();
   });
 
-  it('should properly calculate ends/ended by intervals', function() {
+  it('should properly calculate ends/ended by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.ends));
     x.closed.equals(y.closed).should.be.false();
     x.closed.equals(y.open).should.be.false();
@@ -2339,7 +2335,7 @@ describe('IntegerInterval.equals', function() {
     y.open.equals(x.open).should.be.false();
   });
 
-  it('should properly calculate open vs. closed intervals', function() {
+  it('should properly calculate open vs. closed intervals', function () {
     const c2c5 = new Interval(2, 5, true, true);
     const o2c5 = new Interval(2, 5, false, true);
     const c2o5 = new Interval(2, 5, true, false);
@@ -2361,8 +2357,8 @@ describe('IntegerInterval.equals', function() {
     o1o6.equals(o2o5).should.be.false();
   });
 
-  it('should properly handle imprecision', function() {
-    const uIvl = new Interval(new Uncertainty(5,10), new Uncertainty(15, 20));
+  it('should properly handle imprecision', function () {
+    const uIvl = new Interval(new Uncertainty(5, 10), new Uncertainty(15, 20));
 
     let ivl = new Interval(0, 100);
     ivl.equals(uIvl).should.be.false();
@@ -2383,7 +2379,7 @@ describe('IntegerInterval.equals', function() {
     should(uIvl.equals(uIvl)).be.null();
   });
 
-  it('should be false for equality with points', function() {
+  it('should be false for equality with points', function () {
     const point = 3;
     const ivl = new Interval(point, point, true, true);
 
@@ -2391,12 +2387,12 @@ describe('IntegerInterval.equals', function() {
   });
 });
 
-describe('IntegerInterval.union', function() {
-  this.beforeEach(function() {
+describe('IntegerInterval.union', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs unions', function() {
+  it('should properly calculate sameAs unions', function () {
     const [x, y] = Array.from(xy(this.iIvl.sameAs));
     x.closed.union(y.closed).equals(x.closed).should.be.true();
     x.closed.union(y.open).equals(x.closed).should.be.true();
@@ -2408,7 +2404,7 @@ describe('IntegerInterval.union', function() {
     y.open.union(x.open).equals(y.open).should.be.true();
   });
 
-  it('should properly calculate before/after unions', function() {
+  it('should properly calculate before/after unions', function () {
     const [x, y] = Array.from(xy(this.iIvl.before));
     should(x.closed.union(y.closed)).be.null();
     should(x.closed.union(y.open)).be.null();
@@ -2420,7 +2416,7 @@ describe('IntegerInterval.union', function() {
     should(y.open.union(x.open)).be.null();
   });
 
-  it('should properly calculate meets unions', function() {
+  it('should properly calculate meets unions', function () {
     const [x, y] = Array.from(xy(this.iIvl.meets));
     const z = this.zeroToHundred;
     x.closed.union(y.closed).equals(z.closed).should.be.true();
@@ -2433,7 +2429,7 @@ describe('IntegerInterval.union', function() {
     should(y.open.union(x.open)).be.null();
   });
 
-  it('should properly calculate left/right overlapping unions', function() {
+  it('should properly calculate left/right overlapping unions', function () {
     const [x, y] = Array.from(xy(this.iIvl.overlaps));
     const z = this.zeroToHundred;
     x.closed.union(y.closed).equals(z.closed).should.be.true();
@@ -2446,7 +2442,7 @@ describe('IntegerInterval.union', function() {
     y.open.union(x.open).equals(z.open).should.be.true();
   });
 
-  it('should properly calculate begins/begun by unions', function() {
+  it('should properly calculate begins/begun by unions', function () {
     const [x, y] = Array.from(xy(this.iIvl.begins));
     x.closed.union(y.closed).equals(y.closed).should.be.true();
     x.closed.union(y.open).equals(y.closedOpen).should.be.true();
@@ -2458,7 +2454,7 @@ describe('IntegerInterval.union', function() {
     y.open.union(x.open).equals(y.open).should.be.true();
   });
 
-  it('should properly calculate includes/included by unions', function() {
+  it('should properly calculate includes/included by unions', function () {
     const [x, y] = Array.from(xy(this.iIvl.during));
     x.closed.union(y.closed).equals(y.closed).should.be.true();
     x.closed.union(y.open).equals(y.open).should.be.true();
@@ -2470,7 +2466,7 @@ describe('IntegerInterval.union', function() {
     y.open.union(x.open).equals(y.open).should.be.true();
   });
 
-  it('should properly calculate ends/ended by unions', function() {
+  it('should properly calculate ends/ended by unions', function () {
     const [x, y] = Array.from(xy(this.iIvl.ends));
     x.closed.union(y.closed).equals(y.closed).should.be.true();
     x.closed.union(y.open).equals(y.openClosed).should.be.true();
@@ -2482,8 +2478,8 @@ describe('IntegerInterval.union', function() {
     y.open.union(x.open).equals(y.open).should.be.true();
   });
 
-  it('should properly handle imprecision', function() {
-    const uIvl = new Interval(new Uncertainty(5,10), new Uncertainty(15, 20));
+  it('should properly handle imprecision', function () {
+    const uIvl = new Interval(new Uncertainty(5, 10), new Uncertainty(15, 20));
 
     let ivl = new Interval(0, 100);
     ivl.union(uIvl).equals(ivl).should.be.true();
@@ -2529,17 +2525,17 @@ describe('IntegerInterval.union', function() {
     uIvl.union(ivl).equals(ivl).should.be.true();
   });
 
-  it('should throw when the argument is a point', function() {
+  it('should throw when the argument is a point', function () {
     should(() => this.zeroToHundred.union(300)).throw(Error);
   });
 });
 
-describe('IntegerInterval.intersect', function() {
-  this.beforeEach(function() {
+describe('IntegerInterval.intersect', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intersect', function() {
+  it('should properly calculate sameAs intersect', function () {
     const [x, y] = Array.from(xy(this.iIvl.sameAs));
     x.closed.intersect(y.closed).equals(x.closed).should.be.true();
     x.closed.intersect(y.open).equals(y.open).should.be.true();
@@ -2551,7 +2547,7 @@ describe('IntegerInterval.intersect', function() {
     y.open.intersect(x.open).equals(y.open).should.be.true();
   });
 
-  it('should properly calculate before/after intersect', function() {
+  it('should properly calculate before/after intersect', function () {
     const [x, y] = Array.from(xy(this.iIvl.before));
     should.not.exist(x.closed.intersect(y.closed));
     should.not.exist(x.closed.intersect(y.open));
@@ -2563,7 +2559,7 @@ describe('IntegerInterval.intersect', function() {
     should.not.exist(y.open.intersect(x.open));
   });
 
-  it('should properly calculate meets intersect', function() {
+  it('should properly calculate meets intersect', function () {
     const [x, y] = Array.from(xy(this.iIvl.meets));
     should.not.exist(x.closed.intersect(y.closed));
     should.not.exist(x.closed.intersect(y.open));
@@ -2575,7 +2571,7 @@ describe('IntegerInterval.intersect', function() {
     should.not.exist(y.open.intersect(x.open));
   });
 
-  it('should properly calculate left/right overlapping intersect', function() {
+  it('should properly calculate left/right overlapping intersect', function () {
     const [x, y] = Array.from(xy(this.iIvl.overlaps));
     const a = this.fortyToSixty;
     x.closed.intersect(y.closed).equals(a.closed).should.be.true();
@@ -2588,7 +2584,7 @@ describe('IntegerInterval.intersect', function() {
     y.open.intersect(x.open).equals(a.open).should.be.true();
   });
 
-  it('should properly calculate begins/begun by intersect', function() {
+  it('should properly calculate begins/begun by intersect', function () {
     const [x, y] = Array.from(xy(this.iIvl.begins));
     x.closed.intersect(y.closed).equals(x.closed).should.be.true();
     x.closed.intersect(y.open).equals(x.openClosed).should.be.true();
@@ -2600,7 +2596,7 @@ describe('IntegerInterval.intersect', function() {
     y.open.intersect(x.open).equals(x.open).should.be.true();
   });
 
-  it('should properly calculate includes/included by intersect', function() {
+  it('should properly calculate includes/included by intersect', function () {
     const [x, y] = Array.from(xy(this.iIvl.during));
     x.closed.intersect(y.closed).equals(x.closed).should.be.true();
     x.closed.intersect(y.open).equals(x.closed).should.be.true();
@@ -2612,7 +2608,7 @@ describe('IntegerInterval.intersect', function() {
     y.open.intersect(x.open).equals(x.open).should.be.true();
   });
 
-  it('should properly calculate ends/ended by intersect', function() {
+  it('should properly calculate ends/ended by intersect', function () {
     const [x, y] = Array.from(xy(this.iIvl.ends));
     x.closed.intersect(y.closed).equals(x.closed).should.be.true();
     x.closed.intersect(y.open).equals(x.closedOpen).should.be.true();
@@ -2624,37 +2620,37 @@ describe('IntegerInterval.intersect', function() {
     y.open.intersect(x.open).equals(x.open).should.be.true();
   });
 
-  it('should properly handle imprecision', function() {
+  it('should properly handle imprecision', function () {
     const a = 0;
-    const b = new Uncertainty(10,20);
+    const b = new Uncertainty(10, 20);
     const c = 50;
-    const d = new Uncertainty(80,90);
+    const d = new Uncertainty(80, 90);
     const e = 100;
 
-    let x = new Interval(  b,  e);
-    let y = new Interval(a  ,c  );
+    let x = new Interval(b, e);
+    let y = new Interval(a, c);
     x.intersect(y).should.eql(new Interval(b, c));
     y.intersect(x).should.eql(new Interval(b, c));
 
-    x = new Interval(a,b   );
-    y = new Interval(  b,d );
+    x = new Interval(a, b);
+    y = new Interval(b, d);
     // x.intersect(y) should result in [b,b] but spec says we don't know if they overlap
     should.not.exist(x.intersect(y));
     // y.intersect(x) should result in [b,b] but spec says we don't know if they overlap
     should.not.exist(y.intersect(x));
 
-    x = new Interval(a  ,  e);
-    y = new Interval(  b,d  );
+    x = new Interval(a, e);
+    y = new Interval(b, d);
     x.intersect(y).should.eql(y);
     y.intersect(x).should.eql(y);
 
-    x = new Interval(a,  d );
-    y = new Interval(  b, e);
+    x = new Interval(a, d);
+    y = new Interval(b, e);
     x.intersect(y).should.eql(new Interval(b, d));
     y.intersect(x).should.eql(new Interval(b, d));
 
-    x = new Interval(a,b   );
-    y = new Interval(    d,e);
+    x = new Interval(a, b);
+    y = new Interval(d, e);
     should.not.exist(x.intersect(y));
     should.not.exist(y.intersect(x));
 
@@ -2664,17 +2660,17 @@ describe('IntegerInterval.intersect', function() {
     y.intersect(x).should.eql(new Interval(new Uncertainty(8, 10), new Uncertainty(15, 17)));
   });
 
-  it('should throw when the argument is a point', function() {
+  it('should throw when the argument is a point', function () {
     should(() => this.zeroToHundred.intersect(50)).throw(Error);
   });
 });
 
-describe('IntegerInterval.except', function() {
-  this.beforeEach(function() {
+describe('IntegerInterval.except', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs except', function() {
+  it('should properly calculate sameAs except', function () {
     const [x, y] = Array.from(xy(this.iIvl.sameAs));
     should.not.exist(x.closed.except(y.closed));
     should.not.exist(x.closed.except(y.open));
@@ -2686,7 +2682,7 @@ describe('IntegerInterval.except', function() {
     should.not.exist(y.open.except(x.open));
   });
 
-  it('should properly calculate before/after except', function() {
+  it('should properly calculate before/after except', function () {
     const [x, y] = Array.from(xy(this.iIvl.before));
     x.closed.except(y.closed).should.eql(x.closed);
     x.closed.except(y.open).should.eql(x.closed);
@@ -2698,7 +2694,7 @@ describe('IntegerInterval.except', function() {
     y.open.except(x.open).should.eql(y.open);
   });
 
-  it('should properly calculate meets except', function() {
+  it('should properly calculate meets except', function () {
     const [x, y] = Array.from(xy(this.iIvl.meets));
     x.closed.except(y.closed).should.eql(x.closed);
     x.closed.except(y.open).should.eql(x.closed);
@@ -2710,7 +2706,7 @@ describe('IntegerInterval.except', function() {
     y.open.except(x.open).should.eql(y.open);
   });
 
-  it('should properly calculate left/right overlapping except', function() {
+  it('should properly calculate left/right overlapping except', function () {
     const [x, y] = Array.from(xy(this.iIvl.overlaps));
     const a = this.zeroToForty;
     const b = this.sixtyToHundred;
@@ -2724,7 +2720,7 @@ describe('IntegerInterval.except', function() {
     y.open.except(x.open).equals(b.closedOpen).should.be.true();
   });
 
-  it('should properly calculate begins/begun by except', function() {
+  it('should properly calculate begins/begun by except', function () {
     const [x, y] = Array.from(xy(this.iIvl.begins));
     const b = this.sixtyToHundred;
     should.not.exist(x.closed.except(y.closed));
@@ -2737,7 +2733,7 @@ describe('IntegerInterval.except', function() {
     y.open.except(x.open).equals(b.closedOpen).should.be.true();
   });
 
-  it('should properly calculate includes/included by except', function() {
+  it('should properly calculate includes/included by except', function () {
     const [x, y] = Array.from(xy(this.iIvl.during));
     should.not.exist(x.closed.except(y.closed));
     should.not.exist(x.closed.except(y.open));
@@ -2749,7 +2745,7 @@ describe('IntegerInterval.except', function() {
     should.not.exist(y.open.except(x.open));
   });
 
-  it('should properly calculate ends/ended by except', function() {
+  it('should properly calculate ends/ended by except', function () {
     const [x, y] = Array.from(xy(this.iIvl.ends));
     const b = this.zeroToForty;
     should.not.exist(x.closed.except(y.closed));
@@ -2762,52 +2758,52 @@ describe('IntegerInterval.except', function() {
     y.open.except(x.open).equals(b.openClosed).should.be.true();
   });
 
-  it('should properly handle imprecision', function() {
+  it('should properly handle imprecision', function () {
     const a = 0;
-    const b = new Uncertainty(10,20);
+    const b = new Uncertainty(10, 20);
     const c = 50;
-    const d = new Uncertainty(80,90);
+    const d = new Uncertainty(80, 90);
     const e = 100;
 
-    let x = new Interval(  b,  e); //([10,20] , 100)
-    let y = new Interval(a  ,c  ); //(   0    ,  50)
+    let x = new Interval(b, e); //([10,20] , 100)
+    let y = new Interval(a, c); //(   0    ,  50)
     x.except(y).should.eql(new Interval(c, e, false, true));
     y.except(x).should.eql(new Interval(a, b, true, false));
 
-    x = new Interval(a,b   );
-    y = new Interval(  b,d );
+    x = new Interval(a, b);
+    y = new Interval(b, d);
     // x.except(y) should result in [a,b) but spec says we don't know if they overlap
     should.not.exist(x.except(y));
     // y.except(x) should result in (b,d] but spec says we don't know if they overlap
     should.not.exist(y.except(x));
 
-    x = new Interval(a  ,  e);
-    y = new Interval(  b,d  );
+    x = new Interval(a, e);
+    y = new Interval(b, d);
     should.not.exist(x.except(y));
     should.not.exist(y.except(x));
 
-    x = new Interval(a,  d );
-    y = new Interval(  b, e);
+    x = new Interval(a, d);
+    y = new Interval(b, e);
     x.except(y).should.eql(new Interval(a, b, true, false));
     y.except(x).should.eql(new Interval(d, e, false, true));
 
-    x = new Interval(a,b   );
-    y = new Interval(    d,e);
+    x = new Interval(a, b);
+    y = new Interval(d, e);
     x.except(y).should.eql(x);
     y.except(x).should.eql(y);
   });
 
-  it('should throw when the argument is a point', function() {
+  it('should throw when the argument is a point', function () {
     should(() => this.zeroToHundred.except(100)).throw(Error);
   });
 });
 
-describe('IntegerInterval.after', function() {
-  this.beforeEach(function() {
+describe('IntegerInterval.after', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intervals', function() {
+  it('should properly calculate sameAs intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.sameAs));
     x.closed.after(y.closed).should.be.false();
     x.closed.after(y.open).should.be.false();
@@ -2819,7 +2815,7 @@ describe('IntegerInterval.after', function() {
     y.open.after(x.open).should.be.false();
   });
 
-  it('should properly calculate before/after intervals', function() {
+  it('should properly calculate before/after intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.before));
     x.closed.after(y.closed).should.be.false();
     x.closed.after(y.open).should.be.false();
@@ -2831,7 +2827,7 @@ describe('IntegerInterval.after', function() {
     y.open.after(x.open).should.be.true();
   });
 
-  it('should properly calculate meets intervals', function() {
+  it('should properly calculate meets intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.meets));
     x.closed.after(y.closed).should.be.false();
     x.closed.after(y.open).should.be.false();
@@ -2843,7 +2839,7 @@ describe('IntegerInterval.after', function() {
     y.open.after(x.open).should.be.true();
   });
 
-  it('should properly calculate left/right overlapping intervals', function() {
+  it('should properly calculate left/right overlapping intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.overlaps));
     x.closed.after(y.closed).should.be.false();
     x.closed.after(y.open).should.be.false();
@@ -2855,7 +2851,7 @@ describe('IntegerInterval.after', function() {
     y.open.after(x.open).should.be.false();
   });
 
-  it('should properly calculate begins/begun by intervals', function() {
+  it('should properly calculate begins/begun by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.begins));
     x.closed.after(y.closed).should.be.false();
     x.closed.after(y.open).should.be.false();
@@ -2867,7 +2863,7 @@ describe('IntegerInterval.after', function() {
     y.open.after(x.open).should.be.false();
   });
 
-  it('should properly calculate includes/included by intervals', function() {
+  it('should properly calculate includes/included by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.during));
     x.closed.after(y.closed).should.be.false();
     x.closed.after(y.open).should.be.false();
@@ -2879,7 +2875,7 @@ describe('IntegerInterval.after', function() {
     y.open.after(x.open).should.be.false();
   });
 
-  it('should properly calculate ends/ended by intervals', function() {
+  it('should properly calculate ends/ended by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.ends));
     x.closed.after(y.closed).should.be.false();
     x.closed.after(y.open).should.be.false();
@@ -2891,8 +2887,8 @@ describe('IntegerInterval.after', function() {
     y.open.after(x.open).should.be.false();
   });
 
-  it('should properly handle imprecision', function() {
-    const uIvl = new Interval(new Uncertainty(5,10), new Uncertainty(15, 20));
+  it('should properly handle imprecision', function () {
+    const uIvl = new Interval(new Uncertainty(5, 10), new Uncertainty(15, 20));
 
     let ivl = new Interval(0, 100);
     ivl.after(uIvl).should.be.false();
@@ -2922,12 +2918,12 @@ describe('IntegerInterval.after', function() {
   });
 });
 
-describe('IntegerInterval.before', function() {
-  this.beforeEach(function() {
+describe('IntegerInterval.before', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intervals', function() {
+  it('should properly calculate sameAs intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.sameAs));
     x.closed.before(y.closed).should.be.false();
     x.closed.before(y.open).should.be.false();
@@ -2939,7 +2935,7 @@ describe('IntegerInterval.before', function() {
     y.open.before(x.open).should.be.false();
   });
 
-  it('should properly calculate before/after intervals', function() {
+  it('should properly calculate before/after intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.before));
     x.closed.before(y.closed).should.be.true();
     x.closed.before(y.open).should.be.true();
@@ -2951,7 +2947,7 @@ describe('IntegerInterval.before', function() {
     y.open.before(x.open).should.be.false();
   });
 
-  it('should properly calculate meets intervals', function() {
+  it('should properly calculate meets intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.meets));
     x.closed.before(y.closed).should.be.true();
     x.closed.before(y.open).should.be.true();
@@ -2963,7 +2959,7 @@ describe('IntegerInterval.before', function() {
     y.open.before(x.open).should.be.false();
   });
 
-  it('should properly calculate left/right overlapping intervals', function() {
+  it('should properly calculate left/right overlapping intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.overlaps));
     x.closed.before(y.closed).should.be.false();
     x.closed.before(y.open).should.be.false();
@@ -2975,7 +2971,7 @@ describe('IntegerInterval.before', function() {
     y.open.before(x.open).should.be.false();
   });
 
-  it('should properly calculate begins/begun by intervals', function() {
+  it('should properly calculate begins/begun by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.begins));
     x.closed.before(y.closed).should.be.false();
     x.closed.before(y.open).should.be.false();
@@ -2987,7 +2983,7 @@ describe('IntegerInterval.before', function() {
     y.open.before(x.open).should.be.false();
   });
 
-  it('should properly calculate includes/included by intervals', function() {
+  it('should properly calculate includes/included by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.during));
     x.closed.before(y.closed).should.be.false();
     x.closed.before(y.open).should.be.false();
@@ -2999,7 +2995,7 @@ describe('IntegerInterval.before', function() {
     y.open.before(x.open).should.be.false();
   });
 
-  it('should properly calculate ends/ended by intervals', function() {
+  it('should properly calculate ends/ended by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.ends));
     x.closed.before(y.closed).should.be.false();
     x.closed.before(y.open).should.be.false();
@@ -3011,8 +3007,8 @@ describe('IntegerInterval.before', function() {
     y.open.before(x.open).should.be.false();
   });
 
-  it('should properly handle imprecision', function() {
-    const uIvl = new Interval(new Uncertainty(5,10), new Uncertainty(15, 20));
+  it('should properly handle imprecision', function () {
+    const uIvl = new Interval(new Uncertainty(5, 10), new Uncertainty(15, 20));
 
     let ivl = new Interval(0, 100);
     ivl.before(uIvl).should.be.false();
@@ -3042,12 +3038,12 @@ describe('IntegerInterval.before', function() {
   });
 });
 
-describe('IntegerInterval.meets', function() {
-  this.beforeEach(function() {
+describe('IntegerInterval.meets', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intervals', function() {
+  it('should properly calculate sameAs intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.sameAs));
     x.closed.meets(y.closed).should.be.false();
     x.closed.meets(y.open).should.be.false();
@@ -3059,7 +3055,7 @@ describe('IntegerInterval.meets', function() {
     y.open.meets(x.open).should.be.false();
   });
 
-  it('should properly calculate before/after intervals', function() {
+  it('should properly calculate before/after intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.before));
     x.closed.meets(y.closed).should.be.false();
     x.closed.meets(y.open).should.be.false();
@@ -3071,7 +3067,7 @@ describe('IntegerInterval.meets', function() {
     y.open.meets(x.open).should.be.false();
   });
 
-  it('should properly calculate meets intervals', function() {
+  it('should properly calculate meets intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.meets));
     x.closed.meets(y.closed).should.be.true();
     x.closed.meets(y.open).should.be.false();
@@ -3083,7 +3079,7 @@ describe('IntegerInterval.meets', function() {
     y.open.meets(x.open).should.be.false();
   });
 
-  it('should properly calculate left/right overlapping intervals', function() {
+  it('should properly calculate left/right overlapping intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.overlaps));
     x.closed.meets(y.closed).should.be.false();
     x.closed.meets(y.open).should.be.false();
@@ -3095,7 +3091,7 @@ describe('IntegerInterval.meets', function() {
     y.open.meets(x.open).should.be.false();
   });
 
-  it('should properly calculate begins/begun by intervals', function() {
+  it('should properly calculate begins/begun by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.begins));
     x.closed.meets(y.closed).should.be.false();
     x.closed.meets(y.open).should.be.false();
@@ -3107,7 +3103,7 @@ describe('IntegerInterval.meets', function() {
     y.open.meets(x.open).should.be.false();
   });
 
-  it('should properly calculate includes/included by intervals', function() {
+  it('should properly calculate includes/included by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.during));
     x.closed.meets(y.closed).should.be.false();
     x.closed.meets(y.open).should.be.false();
@@ -3119,7 +3115,7 @@ describe('IntegerInterval.meets', function() {
     y.open.meets(x.open).should.be.false();
   });
 
-  it('should properly calculate ends/ended by intervals', function() {
+  it('should properly calculate ends/ended by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.ends));
     x.closed.meets(y.closed).should.be.false();
     x.closed.meets(y.open).should.be.false();
@@ -3131,8 +3127,8 @@ describe('IntegerInterval.meets', function() {
     y.open.meets(x.open).should.be.false();
   });
 
-  it('should properly handle imprecision', function() {
-    const uIvl = new Interval(new Uncertainty(5,10), new Uncertainty(15, 20));
+  it('should properly handle imprecision', function () {
+    const uIvl = new Interval(new Uncertainty(5, 10), new Uncertainty(15, 20));
 
     let ivl = new Interval(0, 3);
     ivl.meets(uIvl).should.be.false();
@@ -3162,13 +3158,12 @@ describe('IntegerInterval.meets', function() {
   });
 });
 
-
-describe('IntegerInterval.meetsAfter', function() {
-  this.beforeEach(function() {
+describe('IntegerInterval.meetsAfter', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intervals', function() {
+  it('should properly calculate sameAs intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.sameAs));
     x.closed.meetsAfter(y.closed).should.be.false();
     x.closed.meetsAfter(y.open).should.be.false();
@@ -3180,7 +3175,7 @@ describe('IntegerInterval.meetsAfter', function() {
     y.open.meetsAfter(x.open).should.be.false();
   });
 
-  it('should properly calculate before/after intervals', function() {
+  it('should properly calculate before/after intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.before));
     x.closed.meetsAfter(y.closed).should.be.false();
     x.closed.meetsAfter(y.open).should.be.false();
@@ -3192,7 +3187,7 @@ describe('IntegerInterval.meetsAfter', function() {
     y.open.meetsAfter(x.open).should.be.false();
   });
 
-  it('should properly calculate meets intervals', function() {
+  it('should properly calculate meets intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.meets));
     x.closed.meetsAfter(y.closed).should.be.false();
     x.closed.meetsAfter(y.open).should.be.false();
@@ -3204,7 +3199,7 @@ describe('IntegerInterval.meetsAfter', function() {
     y.open.meetsAfter(x.open).should.be.false();
   });
 
-  it('should properly calculate left/right overlapping intervals', function() {
+  it('should properly calculate left/right overlapping intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.overlaps));
     x.closed.meetsAfter(y.closed).should.be.false();
     x.closed.meetsAfter(y.open).should.be.false();
@@ -3216,7 +3211,7 @@ describe('IntegerInterval.meetsAfter', function() {
     y.open.meetsAfter(x.open).should.be.false();
   });
 
-  it('should properly calculate begins/begun by intervals', function() {
+  it('should properly calculate begins/begun by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.begins));
     x.closed.meetsAfter(y.closed).should.be.false();
     x.closed.meetsAfter(y.open).should.be.false();
@@ -3228,7 +3223,7 @@ describe('IntegerInterval.meetsAfter', function() {
     y.open.meetsAfter(x.open).should.be.false();
   });
 
-  it('should properly calculate includes/included by intervals', function() {
+  it('should properly calculate includes/included by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.during));
     x.closed.meetsAfter(y.closed).should.be.false();
     x.closed.meetsAfter(y.open).should.be.false();
@@ -3240,7 +3235,7 @@ describe('IntegerInterval.meetsAfter', function() {
     y.open.meetsAfter(x.open).should.be.false();
   });
 
-  it('should properly calculate ends/ended by intervals', function() {
+  it('should properly calculate ends/ended by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.ends));
     x.closed.meetsAfter(y.closed).should.be.false();
     x.closed.meetsAfter(y.open).should.be.false();
@@ -3252,8 +3247,8 @@ describe('IntegerInterval.meetsAfter', function() {
     y.open.meetsAfter(x.open).should.be.false();
   });
 
-  it('should properly handle imprecision', function() {
-    const uIvl = new Interval(new Uncertainty(5,10), new Uncertainty(15, 20));
+  it('should properly handle imprecision', function () {
+    const uIvl = new Interval(new Uncertainty(5, 10), new Uncertainty(15, 20));
 
     let ivl = new Interval(0, 3);
     ivl.meetsAfter(uIvl).should.be.false();
@@ -3283,12 +3278,12 @@ describe('IntegerInterval.meetsAfter', function() {
   });
 });
 
-describe('IntegerInterval.meetsBefore', function() {
-  this.beforeEach(function() {
+describe('IntegerInterval.meetsBefore', function () {
+  this.beforeEach(function () {
     setup(this);
   });
 
-  it('should properly calculate sameAs intervals', function() {
+  it('should properly calculate sameAs intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.sameAs));
     x.closed.meetsBefore(y.closed).should.be.false();
     x.closed.meetsBefore(y.open).should.be.false();
@@ -3300,7 +3295,7 @@ describe('IntegerInterval.meetsBefore', function() {
     y.open.meetsBefore(x.open).should.be.false();
   });
 
-  it('should properly calculate before/after intervals', function() {
+  it('should properly calculate before/after intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.before));
     x.closed.meetsBefore(y.closed).should.be.false();
     x.closed.meetsBefore(y.open).should.be.false();
@@ -3312,7 +3307,7 @@ describe('IntegerInterval.meetsBefore', function() {
     y.open.meetsBefore(x.open).should.be.false();
   });
 
-  it('should properly calculate meets intervals', function() {
+  it('should properly calculate meets intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.meets));
     x.closed.meetsBefore(y.closed).should.be.true();
     x.closed.meetsBefore(y.open).should.be.false();
@@ -3324,7 +3319,7 @@ describe('IntegerInterval.meetsBefore', function() {
     y.open.meetsBefore(x.open).should.be.false();
   });
 
-  it('should properly calculate left/right overlapping intervals', function() {
+  it('should properly calculate left/right overlapping intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.overlaps));
     x.closed.meetsBefore(y.closed).should.be.false();
     x.closed.meetsBefore(y.open).should.be.false();
@@ -3336,7 +3331,7 @@ describe('IntegerInterval.meetsBefore', function() {
     y.open.meetsBefore(x.open).should.be.false();
   });
 
-  it('should properly calculate begins/begun by intervals', function() {
+  it('should properly calculate begins/begun by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.begins));
     x.closed.meetsBefore(y.closed).should.be.false();
     x.closed.meetsBefore(y.open).should.be.false();
@@ -3348,7 +3343,7 @@ describe('IntegerInterval.meetsBefore', function() {
     y.open.meetsBefore(x.open).should.be.false();
   });
 
-  it('should properly calculate includes/included by intervals', function() {
+  it('should properly calculate includes/included by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.during));
     x.closed.meetsBefore(y.closed).should.be.false();
     x.closed.meetsBefore(y.open).should.be.false();
@@ -3360,7 +3355,7 @@ describe('IntegerInterval.meetsBefore', function() {
     y.open.meetsBefore(x.open).should.be.false();
   });
 
-  it('should properly calculate ends/ended by intervals', function() {
+  it('should properly calculate ends/ended by intervals', function () {
     const [x, y] = Array.from(xy(this.iIvl.ends));
     x.closed.meetsBefore(y.closed).should.be.false();
     x.closed.meetsBefore(y.open).should.be.false();
@@ -3372,8 +3367,8 @@ describe('IntegerInterval.meetsBefore', function() {
     y.open.meetsBefore(x.open).should.be.false();
   });
 
-  it('should properly handle imprecision', function() {
-    const uIvl = new Interval(new Uncertainty(5,10), new Uncertainty(15, 20));
+  it('should properly handle imprecision', function () {
+    const uIvl = new Interval(new Uncertainty(5, 10), new Uncertainty(15, 20));
 
     let ivl = new Interval(0, 3);
     ivl.meetsBefore(uIvl).should.be.false();
