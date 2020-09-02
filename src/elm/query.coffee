@@ -49,6 +49,11 @@ module.exports.ByDirection = class ByDirection extends Expression
   exec: (ctx,a,b) ->
     if a == b
       0
+    else if a.isQuantity && b.isQuantity
+      if a.before(b)
+        @low_order
+      else 
+        @high_order
     else if a < b
       @low_order
     else
@@ -70,6 +75,11 @@ module.exports.ByExpression = class ByExpression extends Expression
 
     if a_val == b_val
       0
+    else if a_val.isQuantity && b_val.isQuantity
+      if a_val.before(b_val)
+        @low_order
+      else 
+        @high_order
     else if a_val < b_val
       @low_order
     else

@@ -17,6 +17,12 @@ To use this project, you should perform the following steps:
 3. Install [CoffeeScript](http://coffeescript.org/)
 4. Execute the following from the root directory: `yarn install`
 
+> Note that on Windows platforms, the spawn will not recognize the coffee command with the .cmd extension, so if you see an error with something like this: <br/>
+> `Error: spawn coffee ENOENT` <br/>
+> then you may need to change [this](https://github.com/cqframework/cql-execution/blob/master/Cakefile#L11) line in the Cakefile to: <br/>
+> `coffee = spawn 'coffee.cmd', args`
+
+
 # To Execute Your CQL
 
 Please note that while the CQL Execution Framework supports many aspects of CQL, it does not support

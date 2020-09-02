@@ -1,6 +1,6 @@
 {
   "name": "cql-execution",
-  "version": "1.4.2",
+  "version": "1.4.4",
   "description": "An execution framework for the Clinical Quality Language (CQL)",
   "keywords": [
     "CQL",
@@ -61,16 +61,20 @@
     "babel-core": "^6.0.0",
     "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
     "babelify": "^8.0.0",
-    "browserify": "^14.4.0",
+    "browserify": "^16.5.1",
     "coffeescript": "^1.12.7",
-    "coveralls": "^3.0.3",
+    "coveralls": "^3.1.0",
     "mocha": "^5.2.0",
-    "nyc": "^14.1.1",
+    "nyc": "^15.0.1",
     "should": "^11.2.1"
   },
   "dependencies": {
     "moment": "^2.20.1",
     "ucum": "0.0.7"
+  },
+  "resolutions": {
+    "browserify/**/acorn": "^7.2.0",
+    "minimist": "^1.2.5"
   },
   "main": "lib/cql",
   "directories": {
