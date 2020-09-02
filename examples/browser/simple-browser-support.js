@@ -10,7 +10,15 @@
  */
 window.cql = require('../../lib/cql');
 
-window.executeSimpleELM = function(elm, patientSource, valueSets, libraryName, version, executionDateTime, parameters = {}) {
+window.executeSimpleELM = function (
+  elm,
+  patientSource,
+  valueSets,
+  libraryName,
+  version,
+  executionDateTime,
+  parameters = {}
+) {
   let lib;
   if (Array.isArray(elm)) {
     if (elm.length > 1) {

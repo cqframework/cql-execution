@@ -10,52 +10,52 @@ const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
 
-describe('Literal', function() {
-  this.beforeEach(function() {
+describe('Literal', function () {
+  this.beforeEach(function () {
     setup(this, data);
   });
 
-  it('should convert true to boolean true', function() {
+  it('should convert true to boolean true', function () {
     this.boolTrue.value.should.be.true();
   });
 
-  it('should execute true as true', function() {
+  it('should execute true as true', function () {
     this.boolTrue.exec(this.ctx).should.be.true();
   });
 
-  it('should convert false to boolean false', function() {
+  it('should convert false to boolean false', function () {
     this.boolFalse.value.should.be.false();
   });
 
-  it('should execute false as false', function() {
+  it('should execute false as false', function () {
     this.boolFalse.exec(this.ctx).should.be.false();
   });
 
-  it('should convert 1 to int 1', function() {
+  it('should convert 1 to int 1', function () {
     this.intOne.value.should.equal(1);
   });
 
-  it('should execute 1 as 1', function() {
+  it('should execute 1 as 1', function () {
     this.intOne.exec(this.ctx).should.equal(1);
   });
 
-  it('should convert .1 to decimal .1', function() {
+  it('should convert .1 to decimal .1', function () {
     this.decimalTenth.value.should.equal(0.1);
   });
 
-  it('should execute .1 as .1', function() {
+  it('should execute .1 as .1', function () {
     this.decimalTenth.exec(this.ctx).should.equal(0.1);
   });
 
-  it('should convert \'true\' to string \'true\'', function() {
+  it("should convert 'true' to string 'true'", function () {
     this.stringTrue.value.should.equal('true');
   });
 
-  it('should execute \'true\' as \'true\'', function() {
+  it("should execute 'true' as 'true'", function () {
     this.stringTrue.exec(this.ctx).should.equal('true');
   });
 
-  it('should execute \'\' as correct DateTime', function() {
+  it("should execute '' as correct DateTime", function () {
     const d = this.dateTimeX.exec(this.ctx);
     d.isTime().should.be.false();
     d.year.should.equal(2012);
@@ -68,7 +68,7 @@ describe('Literal', function() {
     d.timezoneOffset.should.equal(0);
   });
 
-  it('should execute \'\' as correct Time', function() {
+  it("should execute '' as correct Time", function () {
     const d = this.timeX.exec(this.ctx);
     d.isTime().should.be.true();
     d.year.should.equal(0);

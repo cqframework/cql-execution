@@ -16,7 +16,7 @@ browserify(path.join(__dirname, '..', 'examples', 'browser', 'simple-browser-sup
   .transform(babelify, {
     global: true,
     only: [/node_modules\/ucum\//],
-    presets: [['@babel/preset-env', { 'modules': false }]]
+    presets: [['@babel/preset-env', { modules: false }]]
   })
   .bundle()
   .pipe(outputJsFile);

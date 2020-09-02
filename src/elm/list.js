@@ -71,7 +71,7 @@ class SingletonFrom extends Expression {
   exec(ctx) {
     const arg = this.execArgs(ctx);
     if (arg != null && arg.length > 1) {
-      throw new Error('IllegalArgument: \'SingletonFrom\' requires a 0 or 1 arg array');
+      throw new Error("IllegalArgument: 'SingletonFrom' requires a 0 or 1 arg array");
     } else if (arg != null && arg.length === 1) {
       return arg[0];
     } else {

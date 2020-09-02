@@ -11,7 +11,15 @@
  */
 window.cql = require('../../lib/cql');
 
-window.executeSimpleELM = function(elm, patientSource, valueSets, libraryName, version, executionDateTime, parameters = {}) {
+window.executeSimpleELM = function (
+  elm,
+  patientSource,
+  valueSets,
+  libraryName,
+  version,
+  executionDateTime,
+  parameters = {}
+) {
   let lib;
   if (Array.isArray(elm)) {
     if (elm.length > 1) {
@@ -3469,13 +3477,13 @@ function doMultiplication(a, b) {
   }
 }
 
-var coalesceToOne = function coalesceToOne(o) {
+function coalesceToOne(o) {
   if (o == null || o.trim != null && !o.trim()) {
     return '1';
   } else {
     return o;
   }
-};
+}
 
 function compare_units(unit_a, unit_b) {
   try {
@@ -8610,7 +8618,7 @@ var SingletonFrom = /*#__PURE__*/function (_Expression3) {
       var arg = this.execArgs(ctx);
 
       if (arg != null && arg.length > 1) {
-        throw new Error('IllegalArgument: \'SingletonFrom\' requires a 0 or 1 arg array');
+        throw new Error("IllegalArgument: 'SingletonFrom' requires a 0 or 1 arg array");
       } else if (arg != null && arg.length === 1) {
         return arg[0];
       } else {
@@ -9120,7 +9128,7 @@ var StringLiteral = /*#__PURE__*/function (_Literal4) {
     key: "exec",
     value: function exec(ctx) {
       // TODO: Remove these replacements when CQL-to-ELM fixes bug: https://github.com/cqframework/clinical_quality_language/issues/82
-      return this.value.replace(/\\'/g, '\'').replace(/\\"/g, '"');
+      return this.value.replace(/\\'/g, "'").replace(/\\"/g, '"');
     }
   }, {
     key: "isStringLiteral",
@@ -14250,10 +14258,10 @@ function normalizeMillisecondsFieldInString(string, msString) {
   var timezoneField;
   msString = normalizeMillisecondsField(msString);
 
-  var _Array$from = Array.from(string.split('.')),
-      _Array$from2 = _slicedToArray(_Array$from, 2),
-      beforeMs = _Array$from2[0],
-      msAndAfter = _Array$from2[1];
+  var _string$split = string.split('.'),
+      _string$split2 = _slicedToArray(_string$split, 2),
+      beforeMs = _string$split2[0],
+      msAndAfter = _string$split2[1];
 
   var timezoneSeparator = getTimezoneSeparatorFromString(msAndAfter);
 

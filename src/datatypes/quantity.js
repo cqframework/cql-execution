@@ -223,7 +223,7 @@ function convert_value(value, from, to) {
     } else {
       return decimalAdjust('round', ucum.convert(value, ucum_unit(from), ucum_unit(to)), -8);
     }
-  // If the units could not be alignied ie: incompareable, exception will be thrown, return null
+    // If the units could not be alignied ie: incompareable, exception will be thrown, return null
   } catch (e) {
     return null;
   }
@@ -375,13 +375,13 @@ function doMultiplication(a, b) {
   }
 }
 
-var coalesceToOne = function(o) {
+function coalesceToOne(o) {
   if (o == null || (o.trim != null && !o.trim())) {
     return '1';
   } else {
     return o;
   }
-};
+}
 
 function compare_units(unit_a, unit_b) {
   try {
