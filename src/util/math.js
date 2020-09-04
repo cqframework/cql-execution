@@ -1,5 +1,5 @@
 const { Exception } = require('../datatypes/exception');
-const { DateTime, Date } = require('../datatypes/datetime');
+const { DateTime, Date, MIN_DATETIME_VALUE, MAX_DATETIME_VALUE, MIN_DATE_VALUE, MAX_DATE_VALUE, MIN_TIME_VALUE, MAX_TIME_VALUE } = require('../datatypes/datetime');
 const { Uncertainty } = require('../datatypes/uncertainty');
 
 const MAX_INT_VALUE = Math.pow(2, 31) - 1;
@@ -7,12 +7,6 @@ const MIN_INT_VALUE = Math.pow(-2, 31);
 const MAX_FLOAT_VALUE = 99999999999999999999999999999.99999999;
 const MIN_FLOAT_VALUE = -99999999999999999999999999999.99999999;
 const MIN_FLOAT_PRECISION_VALUE = Math.pow(10, -8);
-const MIN_DATETIME_VALUE = DateTime.parse('0001-01-01T00:00:00.000');
-const MAX_DATETIME_VALUE = DateTime.parse('9999-12-31T23:59:59.999');
-const MIN_DATE_VALUE = Date.parse('0001-01-01');
-const MAX_DATE_VALUE = Date.parse('9999-12-31');
-const MIN_TIME_VALUE = DateTime.parse('0000-01-01T00:00:00.000');
-const MAX_TIME_VALUE = DateTime.parse('0000-01-01T23:59:59.999');
 
 function overflowsOrUnderflows(value) {
   if (value == null) {
