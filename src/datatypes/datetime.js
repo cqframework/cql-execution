@@ -833,6 +833,13 @@ class Date {
   }
 }
 
+const MIN_DATETIME_VALUE = DateTime.parse('0001-01-01T00:00:00.000');
+const MAX_DATETIME_VALUE = DateTime.parse('9999-12-31T23:59:59.999');
+const MIN_DATE_VALUE = Date.parse('0001-01-01');
+const MAX_DATE_VALUE = Date.parse('9999-12-31');
+const MIN_TIME_VALUE = DateTime.parse('0000-01-01T00:00:00.000');
+const MAX_TIME_VALUE = DateTime.parse('0000-01-01T23:59:59.999');
+
 Date.Unit = { YEAR: 'year', MONTH: 'month', WEEK: 'week', DAY: 'day' };
 Date.FIELDS = [Date.Unit.YEAR, Date.Unit.MONTH, Date.Unit.DAY];
 
@@ -1410,8 +1417,8 @@ function cqlFormatStringToMomentFormatString(string) {
   return (momentString = momentString.replace(/f/g, 'S'));
 }
 
-module.exports = { DateTime, Date };
+module.exports = { DateTime, Date, MIN_DATETIME_VALUE, MAX_DATETIME_VALUE, MIN_DATE_VALUE, MAX_DATE_VALUE, MIN_TIME_VALUE, MAX_TIME_VALUE };
 
 // Require MIN/MAX here because math.js requires this file, and when we make this file require
 // math.js before it exports DateTime and Date, it errors due to the circular dependency...
-const { MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } = require('../util/math');
+// const { MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } = require('../util/math');

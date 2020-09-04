@@ -1515,6 +1515,15 @@ var _Date = /*#__PURE__*/function () {
   return _Date;
 }();
 
+var MIN_DATETIME_VALUE = DateTime.parse('0001-01-01T00:00:00.000');
+var MAX_DATETIME_VALUE = DateTime.parse('9999-12-31T23:59:59.999');
+
+var MIN_DATE_VALUE = _Date.parse('0001-01-01');
+
+var MAX_DATE_VALUE = _Date.parse('9999-12-31');
+
+var MIN_TIME_VALUE = DateTime.parse('0000-01-01T00:00:00.000');
+var MAX_TIME_VALUE = DateTime.parse('0000-01-01T23:59:59.999');
 _Date.Unit = {
   YEAR: 'year',
   MONTH: 'month',
@@ -2198,14 +2207,17 @@ function cqlFormatStringToMomentFormatString(string) {
 
 module.exports = {
   DateTime: DateTime,
-  Date: _Date
+  Date: _Date,
+  MIN_DATETIME_VALUE: MIN_DATETIME_VALUE,
+  MAX_DATETIME_VALUE: MAX_DATETIME_VALUE,
+  MIN_DATE_VALUE: MIN_DATE_VALUE,
+  MAX_DATE_VALUE: MAX_DATE_VALUE,
+  MIN_TIME_VALUE: MIN_TIME_VALUE,
+  MAX_TIME_VALUE: MAX_TIME_VALUE
 }; // Require MIN/MAX here because math.js requires this file, and when we make this file require
 // math.js before it exports DateTime and Date, it errors due to the circular dependency...
-
-var _require3 = require('../util/math'),
-    MAX_DATETIME_VALUE = _require3.MAX_DATETIME_VALUE,
-    MIN_DATETIME_VALUE = _require3.MIN_DATETIME_VALUE;
-},{"../util/math":46,"../util/util":47,"./uncertainty":13,"moment":48}],8:[function(require,module,exports){
+// const { MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } = require('../util/math');
+},{"../util/util":47,"./uncertainty":13,"moment":48}],8:[function(require,module,exports){
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13864,7 +13876,13 @@ var _require = require('../datatypes/exception'),
 
 var _require2 = require('../datatypes/datetime'),
     DateTime = _require2.DateTime,
-    _Date = _require2.Date;
+    _Date = _require2.Date,
+    MIN_DATETIME_VALUE = _require2.MIN_DATETIME_VALUE,
+    MAX_DATETIME_VALUE = _require2.MAX_DATETIME_VALUE,
+    MIN_DATE_VALUE = _require2.MIN_DATE_VALUE,
+    MAX_DATE_VALUE = _require2.MAX_DATE_VALUE,
+    MIN_TIME_VALUE = _require2.MIN_TIME_VALUE,
+    MAX_TIME_VALUE = _require2.MAX_TIME_VALUE;
 
 var _require3 = require('../datatypes/uncertainty'),
     Uncertainty = _require3.Uncertainty;
@@ -13874,15 +13892,6 @@ var MIN_INT_VALUE = Math.pow(-2, 31);
 var MAX_FLOAT_VALUE = 99999999999999999999999999999.99999999;
 var MIN_FLOAT_VALUE = -99999999999999999999999999999.99999999;
 var MIN_FLOAT_PRECISION_VALUE = Math.pow(10, -8);
-var MIN_DATETIME_VALUE = DateTime.parse('0001-01-01T00:00:00.000');
-var MAX_DATETIME_VALUE = DateTime.parse('9999-12-31T23:59:59.999');
-
-var MIN_DATE_VALUE = _Date.parse('0001-01-01');
-
-var MAX_DATE_VALUE = _Date.parse('9999-12-31');
-
-var MIN_TIME_VALUE = DateTime.parse('0000-01-01T00:00:00.000');
-var MAX_TIME_VALUE = DateTime.parse('0000-01-01T23:59:59.999');
 
 function overflowsOrUnderflows(value) {
   if (value == null) {
