@@ -11,6 +11,7 @@ library TestSnippet version '1'
 using QUICK
 context Patient
 define tup: {a: 1, b: 2}
+define emptyTup: {:}
 ###
 
 module.exports['Tuple'] = {
@@ -98,6 +99,25 @@ module.exports['Tuple'] = {
                      "type" : "Literal"
                   }
                } ]
+            }
+         }, {
+            "localId" : "7",
+            "name" : "emptyTup",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "r" : "6",
+                     "value" : [ "define ","emptyTup",": ","{:}" ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "6",
+               "type" : "Tuple"
             }
          } ]
       }
