@@ -404,13 +404,10 @@ var Code = /*#__PURE__*/function () {
 }();
 
 var Concept = /*#__PURE__*/function () {
-  function Concept() {
-    var codes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    var display = arguments.length > 1 ? arguments[1] : undefined;
-
+  function Concept(codes, display) {
     _classCallCheck(this, Concept);
 
-    this.codes = codes;
+    this.codes = codes || [];
     this.display = display;
   }
 
@@ -430,14 +427,12 @@ var Concept = /*#__PURE__*/function () {
 }();
 
 var ValueSet = /*#__PURE__*/function () {
-  function ValueSet(oid, version) {
-    var codes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-
+  function ValueSet(oid, version, codes) {
     _classCallCheck(this, ValueSet);
 
     this.oid = oid;
     this.version = version;
-    this.codes = codes;
+    this.codes = codes || [];
   }
 
   _createClass(ValueSet, [{
@@ -2272,16 +2267,13 @@ var _require4 = require('../util/math'),
 var cmp = require('../util/comparison');
 
 var Interval = /*#__PURE__*/function () {
-  function Interval(low, high) {
-    var lowClosed = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-    var highClosed = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-
+  function Interval(low, high, lowClosed, highClosed) {
     _classCallCheck(this, Interval);
 
     this.low = low;
     this.high = high;
-    this.lowClosed = lowClosed;
-    this.highClosed = highClosed;
+    this.lowClosed = lowClosed != null ? lowClosed : true;
+    this.highClosed = highClosed != null ? highClosed : true;
   }
 
   _createClass(Interval, [{
@@ -14222,10 +14214,9 @@ function removeNulls(things) {
   });
 }
 
-function numerical_sort(things) {
-  var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'asc';
+function numerical_sort(things, direction) {
   return things.sort(function (a, b) {
-    if (direction === 'asc') {
+    if (direction == null || direction === 'asc') {
       return a - b;
     } else {
       return b - a;

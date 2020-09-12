@@ -2,9 +2,9 @@ function removeNulls(things) {
   return things.filter(x => x != null);
 }
 
-function numerical_sort(things, direction = 'asc') {
+function numerical_sort(things, direction) {
   return things.sort((a, b) => {
-    if (direction === 'asc') {
+    if (direction == null || direction === 'asc') {
       return a - b;
     } else {
       return b - a;

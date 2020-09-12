@@ -23,8 +23,8 @@ class Code {
 }
 
 class Concept {
-  constructor(codes = [], display) {
-    this.codes = codes;
+  constructor(codes, display) {
+    this.codes = codes || [];
     this.display = display;
   }
 
@@ -38,10 +38,10 @@ class Concept {
 }
 
 class ValueSet {
-  constructor(oid, version, codes = []) {
+  constructor(oid, version, codes) {
     this.oid = oid;
     this.version = version;
-    this.codes = codes;
+    this.codes = codes || [];
   }
 
   get isValueSet() {

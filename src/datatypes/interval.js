@@ -10,11 +10,11 @@ const {
 const cmp = require('../util/comparison');
 
 class Interval {
-  constructor(low, high, lowClosed = true, highClosed = true) {
+  constructor(low, high, lowClosed, highClosed) {
     this.low = low;
     this.high = high;
-    this.lowClosed = lowClosed;
-    this.highClosed = highClosed;
+    this.lowClosed = lowClosed != null ? lowClosed : true;
+    this.highClosed = highClosed != null ? highClosed : true;
   }
 
   get isInterval() {
