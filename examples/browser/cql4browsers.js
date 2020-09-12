@@ -13402,9 +13402,10 @@ var Executor = /*#__PURE__*/function () {
       var expr = this.library.expressions[expression];
 
       if (expr != null) {
-        for (var p = patientSource.currentPatient(); p != null; p = patientSource.nextPatient()) {
-          var patient_ctx = new PatientContext(this.library, p, this.codeService, this.parameters);
+        while (patientSource.currentPatient()) {
+          var patient_ctx = new PatientContext(this.library, patientSource.currentPatient(), this.codeService, this.parameters);
           r.recordPatientResult(patient_ctx, expression, expr.execute(patient_ctx));
+          patientSource.nextPatient();
         }
       }
 
@@ -13431,8 +13432,8 @@ var Executor = /*#__PURE__*/function () {
     value: function exec_patient_context(patientSource, executionDateTime) {
       var r = new Results();
 
-      for (var p = patientSource.currentPatient(); p != null; p = patientSource.nextPatient()) {
-        var patient_ctx = new PatientContext(this.library, p, this.codeService, this.parameters, executionDateTime);
+      while (patientSource.currentPatient()) {
+        var patient_ctx = new PatientContext(this.library, patientSource.currentPatient(), this.codeService, this.parameters, executionDateTime);
 
         for (var key in this.library.expressions) {
           var expr = this.library.expressions[key];
@@ -13441,6 +13442,8 @@ var Executor = /*#__PURE__*/function () {
             r.recordPatientResult(patient_ctx, key, expr.execute(patient_ctx));
           }
         }
+
+        patientSource.nextPatient();
       }
 
       return r;
@@ -13875,8 +13878,6 @@ var _require = require('../datatypes/exception'),
     Exception = _require.Exception;
 
 var _require2 = require('../datatypes/datetime'),
-    DateTime = _require2.DateTime,
-    _Date = _require2.Date,
     MIN_DATETIME_VALUE = _require2.MIN_DATETIME_VALUE,
     MAX_DATETIME_VALUE = _require2.MAX_DATETIME_VALUE,
     MIN_DATE_VALUE = _require2.MIN_DATE_VALUE,

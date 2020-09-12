@@ -24,7 +24,7 @@ describe('Tuple', function () {
     e['b'].should.equal(2);
   });
 
-  return it('should be able to define an empty tuple', function() {
+  return it('should be able to define an empty tuple', function () {
     const e = this.emptyTup.exec(this.ctx);
     return Object.keys(e).length.should.equal(0);
   });

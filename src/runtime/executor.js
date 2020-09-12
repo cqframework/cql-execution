@@ -27,9 +27,15 @@ class Executor {
     const r = new Results();
     const expr = this.library.expressions[expression];
     if (expr != null) {
-      for (let p = patientSource.currentPatient(); p != null; p = patientSource.nextPatient()) {
-        const patient_ctx = new PatientContext(this.library, p, this.codeService, this.parameters);
+      while (patientSource.currentPatient()) {
+        const patient_ctx = new PatientContext(
+          this.library,
+          patientSource.currentPatient(),
+          this.codeService,
+          this.parameters
+        );
         r.recordPatientResult(patient_ctx, expression, expr.execute(patient_ctx));
+        patientSource.nextPatient();
       }
     }
     return r;
@@ -54,10 +60,10 @@ class Executor {
 
   exec_patient_context(patientSource, executionDateTime) {
     const r = new Results();
-    for (let p = patientSource.currentPatient(); p != null; p = patientSource.nextPatient()) {
+    while (patientSource.currentPatient()) {
       const patient_ctx = new PatientContext(
         this.library,
-        p,
+        patientSource.currentPatient(),
         this.codeService,
         this.parameters,
         executionDateTime
@@ -68,6 +74,7 @@ class Executor {
           r.recordPatientResult(patient_ctx, key, expr.execute(patient_ctx));
         }
       }
+      patientSource.nextPatient();
     }
     return r;
   }

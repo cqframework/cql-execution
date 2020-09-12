@@ -1417,7 +1417,16 @@ function cqlFormatStringToMomentFormatString(string) {
   return (momentString = momentString.replace(/f/g, 'S'));
 }
 
-module.exports = { DateTime, Date, MIN_DATETIME_VALUE, MAX_DATETIME_VALUE, MIN_DATE_VALUE, MAX_DATE_VALUE, MIN_TIME_VALUE, MAX_TIME_VALUE };
+module.exports = {
+  DateTime,
+  Date,
+  MIN_DATETIME_VALUE,
+  MAX_DATETIME_VALUE,
+  MIN_DATE_VALUE,
+  MAX_DATE_VALUE,
+  MIN_TIME_VALUE,
+  MAX_TIME_VALUE
+};
 
 // Require MIN/MAX here because math.js requires this file, and when we make this file require
 // math.js before it exports DateTime and Date, it errors due to the circular dependency...

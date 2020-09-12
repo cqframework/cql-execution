@@ -1,5 +1,12 @@
 const { Exception } = require('../datatypes/exception');
-const { DateTime, Date, MIN_DATETIME_VALUE, MAX_DATETIME_VALUE, MIN_DATE_VALUE, MAX_DATE_VALUE, MIN_TIME_VALUE, MAX_TIME_VALUE } = require('../datatypes/datetime');
+const {
+  MIN_DATETIME_VALUE,
+  MAX_DATETIME_VALUE,
+  MIN_DATE_VALUE,
+  MAX_DATE_VALUE,
+  MIN_TIME_VALUE,
+  MAX_TIME_VALUE
+} = require('../datatypes/datetime');
 const { Uncertainty } = require('../datatypes/uncertainty');
 
 const MAX_INT_VALUE = Math.pow(2, 31) - 1;
