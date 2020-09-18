@@ -53,7 +53,7 @@ class FunctionRef extends Expression {
     let functionDef, child_ctx;
     if (this.library) {
       const lib = ctx.get(this.library);
-      functionDef = lib ? lib.get(this.name) : undefined;
+      functionDef = lib ? lib.getFunction(this.name) : undefined;
       const libCtx = ctx.getLibraryContext(this.library);
       child_ctx = libCtx ? libCtx.childContext() : undefined;
     } else {

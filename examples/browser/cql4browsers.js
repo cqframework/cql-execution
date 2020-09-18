@@ -8584,6 +8584,7 @@ var Library = /*#__PURE__*/function () {
 
     var exprDefs = json.library.statements && json.library.statements.def || [];
     this.expressions = {};
+    this.functions = {};
 
     var _iterator6 = _createForOfIteratorHelper(exprDefs),
         _step6;
@@ -8591,7 +8592,16 @@ var Library = /*#__PURE__*/function () {
     try {
       for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
         var expr = _step6.value;
-        this.expressions[expr.name] = expr.type === 'FunctionDef' ? new FunctionDef(expr) : new ExpressionDef(expr);
+
+        if (expr.type === 'FunctionDef') {
+          if (!this.functions[expr.name]) {
+            this.functions[expr.name] = [];
+          }
+
+          this.functions[expr.name].push(new FunctionDef(expr));
+        } else {
+          this.expressions[expr.name] = new ExpressionDef(expr);
+        }
       } // includes
 
     } catch (err) {
@@ -8622,9 +8632,14 @@ var Library = /*#__PURE__*/function () {
   }
 
   _createClass(Library, [{
+    key: "getFunction",
+    value: function getFunction(identifier) {
+      return this.functions[identifier][0];
+    }
+  }, {
     key: "get",
     value: function get(identifier) {
-      return this.expressions[identifier] || this.includes[identifier];
+      return this.expressions[identifier] || this.includes[identifier] || this.functions[identifier][this.functions[identifier].length - 1];
     }
   }, {
     key: "getValueSet",
@@ -11287,7 +11302,7 @@ var FunctionRef = /*#__PURE__*/function (_Expression4) {
 
       if (this.library) {
         var lib = ctx.get(this.library);
-        functionDef = lib ? lib.get(this.name) : undefined;
+        functionDef = lib ? lib.getFunction(this.name) : undefined;
         var libCtx = ctx.getLibraryContext(this.library);
         child_ctx = libCtx ? libCtx.childContext() : undefined;
       } else {
@@ -14573,7 +14588,7 @@ module.exports = {
 };
 },{}],49:[function(require,module,exports){
 //! moment.js
-//! version : 2.27.0
+//! version : 2.28.0
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 //! license : MIT
 //! momentjs.com
@@ -18978,7 +18993,7 @@ module.exports = {
             eras = this.localeData().eras();
         for (i = 0, l = eras.length; i < l; ++i) {
             // truncate time
-            val = this.startOf('day').valueOf();
+            val = this.clone().startOf('day').valueOf();
 
             if (eras[i].since <= val && val <= eras[i].until) {
                 return eras[i].name;
@@ -18998,7 +19013,7 @@ module.exports = {
             eras = this.localeData().eras();
         for (i = 0, l = eras.length; i < l; ++i) {
             // truncate time
-            val = this.startOf('day').valueOf();
+            val = this.clone().startOf('day').valueOf();
 
             if (eras[i].since <= val && val <= eras[i].until) {
                 return eras[i].narrow;
@@ -19018,7 +19033,7 @@ module.exports = {
             eras = this.localeData().eras();
         for (i = 0, l = eras.length; i < l; ++i) {
             // truncate time
-            val = this.startOf('day').valueOf();
+            val = this.clone().startOf('day').valueOf();
 
             if (eras[i].since <= val && val <= eras[i].until) {
                 return eras[i].abbr;
@@ -19041,7 +19056,7 @@ module.exports = {
             dir = eras[i].since <= eras[i].until ? +1 : -1;
 
             // truncate time
-            val = this.startOf('day').valueOf();
+            val = this.clone().startOf('day').valueOf();
 
             if (
                 (eras[i].since <= val && val <= eras[i].until) ||
@@ -20192,7 +20207,7 @@ module.exports = {
 
     //! moment.js
 
-    hooks.version = '2.27.0';
+    hooks.version = '2.28.0';
 
     setHookCallback(createLocal);
 
