@@ -469,7 +469,22 @@ class CanConvertQuantity extends Expression {
   }
 }
 
-class Is extends UnimplementedExpression {}
+class Is extends Expression {
+  constructor(json) {
+    super(json);
+    this.isTypeSpecifier = json.isTypeSpecifier;
+  }
+
+  exec(ctx) {
+    const arg = this.execArgs(ctx);
+    if ('_is' in arg) {
+      return arg._is(this.isTypeSpecifier);
+    } else {
+      throw new Error(`Patient Source does not support Is operation for localId: ${this.localId}`);
+    }
+  }
+}
+
 class IntervalTypeSpecifier extends UnimplementedExpression {}
 class ListTypeSpecifier extends UnimplementedExpression {}
 class NamedTypeSpecifier extends UnimplementedExpression {}

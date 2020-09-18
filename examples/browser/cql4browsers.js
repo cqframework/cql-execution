@@ -12694,22 +12694,39 @@ var CanConvertQuantity = /*#__PURE__*/function (_Expression23) {
   return CanConvertQuantity;
 }(Expression);
 
-var Is = /*#__PURE__*/function (_UnimplementedExpress) {
-  _inherits(Is, _UnimplementedExpress);
+var Is = /*#__PURE__*/function (_Expression24) {
+  _inherits(Is, _Expression24);
 
   var _super24 = _createSuper(Is);
 
-  function Is() {
+  function Is(json) {
+    var _this12;
+
     _classCallCheck(this, Is);
 
-    return _super24.apply(this, arguments);
+    _this12 = _super24.call(this, json);
+    _this12.isTypeSpecifier = json.isTypeSpecifier;
+    return _this12;
   }
 
-  return Is;
-}(UnimplementedExpression);
+  _createClass(Is, [{
+    key: "exec",
+    value: function exec(ctx) {
+      var arg = this.execArgs(ctx);
 
-var IntervalTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress2) {
-  _inherits(IntervalTypeSpecifier, _UnimplementedExpress2);
+      if ('_is' in arg) {
+        return arg._is(this.isTypeSpecifier);
+      } else {
+        throw new Error("Patient Source does not support Is operation for localId: ".concat(this.localId));
+      }
+    }
+  }]);
+
+  return Is;
+}(Expression);
+
+var IntervalTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress) {
+  _inherits(IntervalTypeSpecifier, _UnimplementedExpress);
 
   var _super25 = _createSuper(IntervalTypeSpecifier);
 
@@ -12722,8 +12739,8 @@ var IntervalTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress2) {
   return IntervalTypeSpecifier;
 }(UnimplementedExpression);
 
-var ListTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress3) {
-  _inherits(ListTypeSpecifier, _UnimplementedExpress3);
+var ListTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress2) {
+  _inherits(ListTypeSpecifier, _UnimplementedExpress2);
 
   var _super26 = _createSuper(ListTypeSpecifier);
 
@@ -12736,8 +12753,8 @@ var ListTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress3) {
   return ListTypeSpecifier;
 }(UnimplementedExpression);
 
-var NamedTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress4) {
-  _inherits(NamedTypeSpecifier, _UnimplementedExpress4);
+var NamedTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress3) {
+  _inherits(NamedTypeSpecifier, _UnimplementedExpress3);
 
   var _super27 = _createSuper(NamedTypeSpecifier);
 
@@ -12750,8 +12767,8 @@ var NamedTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress4) {
   return NamedTypeSpecifier;
 }(UnimplementedExpression);
 
-var TupleTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress5) {
-  _inherits(TupleTypeSpecifier, _UnimplementedExpress5);
+var TupleTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress4) {
+  _inherits(TupleTypeSpecifier, _UnimplementedExpress4);
 
   var _super28 = _createSuper(TupleTypeSpecifier);
 
