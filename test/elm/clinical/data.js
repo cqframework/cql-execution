@@ -2379,8 +2379,7 @@ using Simple version '1.0.0'
 context Patient
 define Years: AgeInYears()
 define Months: AgeInMonths()
-// Commented out until cql-to-elm supports it
-// define Weeks: AgeInWeeks()
+define Weeks: AgeInWeeks()
 define Days: AgeInDays()
 define Hours: AgeInHours()
 define Minutes: AgeInMinutes()
@@ -2495,7 +2494,7 @@ module.exports['CalculateAge'] = {
             }
          }, {
             "localId" : "7",
-            "name" : "Days",
+            "name" : "Weeks",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2503,18 +2502,18 @@ module.exports['CalculateAge'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","Days",": " ]
+                     "value" : [ "define ","Weeks",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
-                        "value" : [ "AgeInDays","()" ]
+                        "value" : [ "AgeInWeeks","()" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
                "localId" : "6",
-               "precision" : "Day",
+               "precision" : "Week",
                "type" : "CalculateAge",
                "operand" : {
                   "path" : "birthDate",
@@ -2527,7 +2526,7 @@ module.exports['CalculateAge'] = {
             }
          }, {
             "localId" : "9",
-            "name" : "Hours",
+            "name" : "Days",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2535,18 +2534,18 @@ module.exports['CalculateAge'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","Hours",": " ]
+                     "value" : [ "define ","Days",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
-                        "value" : [ "AgeInHours","()" ]
+                        "value" : [ "AgeInDays","()" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
                "localId" : "8",
-               "precision" : "Hour",
+               "precision" : "Day",
                "type" : "CalculateAge",
                "operand" : {
                   "path" : "birthDate",
@@ -2559,7 +2558,7 @@ module.exports['CalculateAge'] = {
             }
          }, {
             "localId" : "11",
-            "name" : "Minutes",
+            "name" : "Hours",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2567,18 +2566,18 @@ module.exports['CalculateAge'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","Minutes",": " ]
+                     "value" : [ "define ","Hours",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
-                        "value" : [ "AgeInMinutes","()" ]
+                        "value" : [ "AgeInHours","()" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
                "localId" : "10",
-               "precision" : "Minute",
+               "precision" : "Hour",
                "type" : "CalculateAge",
                "operand" : {
                   "path" : "birthDate",
@@ -2591,7 +2590,7 @@ module.exports['CalculateAge'] = {
             }
          }, {
             "localId" : "13",
-            "name" : "Seconds",
+            "name" : "Minutes",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2599,9 +2598,41 @@ module.exports['CalculateAge'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","Seconds",": " ]
+                     "value" : [ "define ","Minutes",": " ]
                   }, {
                      "r" : "12",
+                     "s" : [ {
+                        "value" : [ "AgeInMinutes","()" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "12",
+               "precision" : "Minute",
+               "type" : "CalculateAge",
+               "operand" : {
+                  "path" : "birthDate",
+                  "type" : "Property",
+                  "source" : {
+                     "name" : "Patient",
+                     "type" : "ExpressionRef"
+                  }
+               }
+            }
+         }, {
+            "localId" : "15",
+            "name" : "Seconds",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "15",
+                  "s" : [ {
+                     "value" : [ "define ","Seconds",": " ]
+                  }, {
+                     "r" : "14",
                      "s" : [ {
                         "value" : [ "AgeInSeconds","()" ]
                      } ]
@@ -2609,7 +2640,7 @@ module.exports['CalculateAge'] = {
                }
             } ],
             "expression" : {
-               "localId" : "12",
+               "localId" : "14",
                "precision" : "Second",
                "type" : "CalculateAge",
                "operand" : {

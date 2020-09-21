@@ -1,17 +1,9 @@
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
 
-describe('List', function () {
-  this.beforeEach(function () {
+describe('List', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -32,8 +24,8 @@ describe('List', function () {
   });
 });
 
-describe('Exists', function () {
-  this.beforeEach(function () {
+describe('Exists', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -69,8 +61,8 @@ describe('Exists', function () {
   });
 });
 
-describe('Equal', function () {
-  this.beforeEach(function () {
+describe('Equal', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -102,7 +94,7 @@ describe('Equal', function () {
     this.unequalTupleList.exec(this.ctx).should.be.false();
   });
 
-  describe('should return null', function () {
+  describe('should return null', () => {
     it('when first list has a null element', function () {
       should(this.firstListHasNull.exec(this.ctx)).be.null();
     });
@@ -117,8 +109,8 @@ describe('Equal', function () {
   });
 });
 
-describe('NotEqual', function () {
-  this.beforeEach(function () {
+describe('NotEqual', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -151,8 +143,8 @@ describe('NotEqual', function () {
   });
 });
 
-describe('Union', function () {
-  this.beforeEach(function () {
+describe('Union', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -184,8 +176,8 @@ describe('Union', function () {
   });
 });
 
-describe('Except', function () {
-  this.beforeEach(function () {
+describe('Except', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -231,8 +223,8 @@ describe('Except', function () {
   });
 });
 
-describe('Intersect', function () {
-  this.beforeEach(function () {
+describe('Intersect', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -277,8 +269,8 @@ describe('Intersect', function () {
   });
 });
 
-describe('IndexOf', function () {
-  this.beforeEach(function () {
+describe('IndexOf', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -305,7 +297,7 @@ describe('IndexOf', function () {
     should(this.nullItem.exec(this.ctx)).be.null();
   });
 
-  describe('should use equality to determine presence in List', function () {
+  describe('should use equality to determine presence in List', () => {
     it('when code is in list but have undefined displays', function () {
       this.listCodeUndefined.exec(this.ctx).should.equal(0);
     });
@@ -324,8 +316,8 @@ describe('IndexOf', function () {
   });
 });
 
-describe('Indexer', function () {
-  this.beforeEach(function () {
+describe('Indexer', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -347,8 +339,8 @@ describe('Indexer', function () {
   });
 });
 
-describe('In', function () {
-  this.beforeEach(function () {
+describe('In', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -381,8 +373,8 @@ describe('In', function () {
   });
 });
 
-describe('Contains', function () {
-  this.beforeEach(function () {
+describe('Contains', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -415,8 +407,8 @@ describe('Contains', function () {
   });
 });
 
-describe('Includes', function () {
-  this.beforeEach(function () {
+describe('Includes', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -464,8 +456,8 @@ describe('Includes', function () {
   });
 });
 
-describe('IncludedIn', function () {
-  this.beforeEach(function () {
+describe('IncludedIn', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -513,8 +505,8 @@ describe('IncludedIn', function () {
   });
 });
 
-describe('ProperIncludes', function () {
-  this.beforeEach(function () {
+describe('ProperIncludes', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -549,8 +541,8 @@ describe('ProperIncludes', function () {
   });
 });
 
-describe('ProperIncludedIn', function () {
-  this.beforeEach(function () {
+describe('ProperIncludedIn', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -584,8 +576,8 @@ describe('ProperIncludedIn', function () {
   });
 });
 
-describe('Flatten', function () {
-  this.beforeEach(function () {
+describe('Flatten', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -600,8 +592,8 @@ describe('Flatten', function () {
   });
 });
 
-describe('Distinct', function () {
-  this.beforeEach(function () {
+describe('Distinct', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -629,8 +621,8 @@ describe('Distinct', function () {
   });
 });
 
-describe('First', function () {
-  this.beforeEach(function () {
+describe('First', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -663,8 +655,8 @@ describe('First', function () {
   });
 });
 
-describe('Last', function () {
-  this.beforeEach(function () {
+describe('Last', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -697,8 +689,8 @@ describe('Last', function () {
   });
 });
 
-describe('Length', function () {
-  this.beforeEach(function () {
+describe('Length', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -723,8 +715,8 @@ describe('Length', function () {
   });
 });
 
-describe('ToList', function () {
-  this.beforeEach(function () {
+describe('ToList', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 

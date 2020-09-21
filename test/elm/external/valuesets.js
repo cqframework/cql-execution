@@ -1,5 +1,3 @@
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
 module.exports = {
   '2.16.840.1.113883.3.464.1003.102.12.1011': {
     20140501: [

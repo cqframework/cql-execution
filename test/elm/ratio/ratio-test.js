@@ -1,70 +1,58 @@
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
-const setup = require('../../setup');
 const { Quantity } = require('../../../src/datatypes/quantity');
 const { Ratio } = require('../../../src/datatypes/ratio');
 
-describe('Ratio', function () {
+describe('Ratio', () => {
   it('should allow creation of Ratio with two valid quantities with units', () =>
-    should.doesNotThrow(function () {
+    should.doesNotThrow(() => {
       const numerator = new Quantity(42.424242, 'mm');
       const denominator = new Quantity(33.3333, 'mm');
       new Ratio(numerator, denominator);
     }));
 
   it('should allow creation of Ratio with two valid quantities without units', () =>
-    should.doesNotThrow(function () {
+    should.doesNotThrow(() => {
       const numerator = new Quantity(42.424242);
       const denominator = new Quantity(33.3333);
       new Ratio(numerator, denominator);
     }));
 
   it('should throw error when creating ratio of non quantity numerator', () =>
-    should.throws(function () {
+    should.throws(() => {
       const numerator = new Quantity('NOT_A_NUMBER', 'mm');
       const denominator = new Quantity(33.3333, 'mm');
       new Ratio(numerator, denominator);
     }));
 
   it('should throw error when creating ratio of non quantity denominator', () =>
-    should.throws(function () {
+    should.throws(() => {
       const numerator = new Quantity(42.424242, 'mm');
       const denominator = new Quantity('NOT_A_NUMBER', 'mm');
       new Ratio(numerator, denominator);
     }));
 
   it('should throw error when creating ratio with null denominator', () =>
-    should.throws(function () {
+    should.throws(() => {
       const numerator = null;
       const denominator = new Quantity(33.3333, 'mm');
       new Ratio(numerator, denominator);
     }));
 
   it('should throw error when creating ratio with null numerator', () =>
-    should.throws(function () {
+    should.throws(() => {
       const numerator = new Quantity(42.424242, 'mm');
       const denominator = null;
       new Ratio(numerator, denominator);
     }));
 
-  it('should return a properly formatted string representing a ratio', function () {
+  it('should return a properly formatted string representing a ratio', () => {
     const numerator = new Quantity(42.424242, 'mm');
     const denominator = new Quantity(33.3333, 'mm');
     const ratio = new Ratio(numerator, denominator);
     ratio.toString().should.equal("42.424242 'mm' : 33.3333 'mm'");
   });
 
-  it('should set numerator and denominator from Quantities', function () {
+  it('should set numerator and denominator from Quantities', () => {
     const numerator = new Quantity(42.424242, 'mm');
     const denominator = new Quantity(33.3333, 'mm');
     const ratio = new Ratio(numerator, denominator);
@@ -72,7 +60,7 @@ describe('Ratio', function () {
     ratio.denominator.toString().should.equal("33.3333 'mm'");
   });
 
-  it('should set numerator and denominator from Quantity hashes', function () {
+  it('should set numerator and denominator from Quantity hashes', () => {
     const numerator = new Quantity(42.424242, 'mm');
     const denominator = new Quantity(33.3333, 'mm');
     const ratio = new Ratio(numerator, denominator);
@@ -80,14 +68,14 @@ describe('Ratio', function () {
     ratio.denominator.toString().should.equal("33.3333 'mm'");
   });
 
-  it('should return a properly formatted string representing a ratio from Quantity hashes', function () {
+  it('should return a properly formatted string representing a ratio from Quantity hashes', () => {
     const numerator = new Quantity(42.424242, 'mm');
     const denominator = new Quantity(33.3333, 'mm');
     const ratio = new Ratio(numerator, denominator);
     ratio.toString().should.equal("42.424242 'mm' : 33.3333 'mm'");
   });
 
-  it('should return true for equal ratios', function () {
+  it('should return true for equal ratios', () => {
     const numerator = new Quantity(33.3333, 'mm');
     const denominator = new Quantity(33.3333, 'mm');
     const ratio1 = new Ratio(numerator, denominator);
@@ -95,7 +83,7 @@ describe('Ratio', function () {
     ratio1.equals(ratio2).should.equal(true);
   });
 
-  it('should return true for equal ratios with different numerators and denominators', function () {
+  it('should return true for equal ratios with different numerators and denominators', () => {
     const numerator1 = new Quantity(33.3333, 'mm');
     const denominator1 = new Quantity(66.6666, 'mm');
     const numerator2 = new Quantity(10.1, 'mm');
@@ -105,7 +93,7 @@ describe('Ratio', function () {
     ratio1.equals(ratio2).should.equal(true);
   });
 
-  it('should return true for equivalent ratios with different numerators and denominators', function () {
+  it('should return true for equivalent ratios with different numerators and denominators', () => {
     const numerator1 = new Quantity(33.3333, 'mm');
     const denominator1 = new Quantity(66.6666, 'mm');
     const numerator2 = new Quantity(10.1, 'mm');
@@ -115,7 +103,7 @@ describe('Ratio', function () {
     ratio1.equivalent(ratio2).should.equal(true);
   });
 
-  it('should return true for equal ratios with comparable units', function () {
+  it('should return true for equal ratios with comparable units', () => {
     const numerator1 = new Quantity(1, 'mm');
     const denominator1 = new Quantity(1000, 'mm');
     const numerator2 = new Quantity(0.001, 'm');
@@ -125,7 +113,7 @@ describe('Ratio', function () {
     ratio1.equals(ratio2).should.equal(true);
   });
 
-  it('should return true for equivalent ratios with comparable units', function () {
+  it('should return true for equivalent ratios with comparable units', () => {
     const numerator1 = new Quantity(1, 'mm');
     const denominator1 = new Quantity(1000, 'mm');
     const numerator2 = new Quantity(0.001, 'm');
@@ -135,7 +123,7 @@ describe('Ratio', function () {
     ratio1.equals(ratio2).should.equal(true);
   });
 
-  it('should return false for non equal ratios with incomparable units', function () {
+  it('should return false for non equal ratios with incomparable units', () => {
     const numerator1 = new Quantity(1, 'mm');
     const denominator1 = new Quantity(1000, 'mm');
     const numerator2 = new Quantity(0.001, 'm');
@@ -145,7 +133,7 @@ describe('Ratio', function () {
     ratio1.equals(ratio2).should.equal(false);
   });
 
-  it('should return false for non equivalent ratios with incomparable units', function () {
+  it('should return false for non equivalent ratios with incomparable units', () => {
     const numerator1 = new Quantity(1, 'mm');
     const denominator1 = new Quantity(1000, 'mm');
     const numerator2 = new Quantity(0.001, 'm');

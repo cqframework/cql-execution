@@ -1,17 +1,4 @@
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
-const setup = require('../../setup');
 const {
   Quantity,
   doAddition,
@@ -20,12 +7,12 @@ const {
   doDivision
 } = require('../../../src/datatypes/quantity');
 
-describe('Quantity', function () {
+describe('Quantity', () => {
   it('should allow creation of Quantity with valid ucum units', () =>
     should.doesNotThrow(() => new Quantity(42.424242, 'mm')));
 
   it('should allow creation of Quantity with valid ucum units on multiple uses of same unit', () =>
-    should.doesNotThrow(function () {
+    should.doesNotThrow(() => {
       new Quantity(42.424242, 'cm');
       new Quantity(43.434242, 'cm');
     }));
@@ -36,7 +23,7 @@ describe('Quantity', function () {
   it('should throw error when creating Quantity with invalid ucum units', () =>
     should.throws(() => new Quantity(42.424242, 'quacks')));
 
-  it('should throw error when creating Quantity with invalid ucum units on multiple uses of same unit', function () {
+  it('should throw error when creating Quantity with invalid ucum units on multiple uses of same unit', () => {
     should.throws(() => new Quantity(42.424242, 'caches'));
     should.throws(() => new Quantity(44.4242242, 'caches'));
   });
@@ -48,13 +35,13 @@ describe('Quantity', function () {
     should.doesNotThrow(() => new Quantity(9, '')));
 
   it('should allow for the value of the quantity to be null', () =>
-    should.throws(function () {
+    should.throws(() => {
       const q = new Quantity(null, 'mg');
       should.equal(q.value, null);
     }));
 
   it('should convert undefined values to null', () =>
-    should.throws(function () {
+    should.throws(() => {
       const q = new Quantity(undefined, 'mg');
       should.equal(q.value, null);
     }));
@@ -64,13 +51,13 @@ describe('Quantity', function () {
 
   it('should throw an error if value is NaN', () => should.throws(() => new Quantity(NaN, 'mg')));
 
-  it('should handle cql temporal keywords with ucum units', function () {
+  it('should handle cql temporal keywords with ucum units', () => {
     const a = new Quantity(1, 'd');
     const b = new Quantity(1, 'day');
     a.equals(b).should.equal(true);
   });
 
-  it('dividing identical units should result in default unit', function () {
+  it('dividing identical units should result in default unit', () => {
     const numerator = new Quantity(-5.5, 'mg');
     const denominator = new Quantity(2.0, 'mg');
     const result = numerator.dividedBy(denominator);
@@ -78,7 +65,7 @@ describe('Quantity', function () {
     result.value.should.equal(-2.75);
   });
 
-  it('should allow for singular time units', function () {
+  it('should allow for singular time units', () => {
     const year = new Quantity(4, 'year');
     const month = new Quantity(4, 'month');
     const day = new Quantity(4, 'day');
@@ -95,35 +82,35 @@ describe('Quantity', function () {
     millisecond.equals(new Quantity(4, 'milliseconds')).should.be.true();
   });
 
-  it('added to Quantity with invalid ucum units results in null', function () {
+  it('added to Quantity with invalid ucum units results in null', () => {
     const quantity1 = new Quantity(2, 'm');
     const quantity2 = new Quantity(2, 'm');
     quantity2.unit = 'fakeUnit';
     should(doAddition(quantity1, quantity2)).be.null();
   });
 
-  it('subtracted from Quantity with invalid ucum units results in null', function () {
+  it('subtracted from Quantity with invalid ucum units results in null', () => {
     const quantity1 = new Quantity(2, 'm');
     const quantity2 = new Quantity(2, 'm');
     quantity2.unit = 'fakeUnit';
     should(doSubtraction(quantity1, quantity2)).be.null();
   });
 
-  it('multiplied by Quantity with invalid ucum units results in null', function () {
+  it('multiplied by Quantity with invalid ucum units results in null', () => {
     const quantity1 = new Quantity(2, 'm');
     const quantity2 = new Quantity(2, 'm');
     quantity2.unit = 'fakeUnit';
     should(doMultiplication(quantity1, '.')).be.null();
   });
 
-  it('divided by Quantity with invalid ucum units results in null', function () {
+  it('divided by Quantity with invalid ucum units results in null', () => {
     const quantity1 = new Quantity(2, 'm');
     const quantity2 = new Quantity(2, 'm');
     quantity2.unit = 'fakeUnit';
     should(doDivision(quantity1, '/')).be.null();
   });
 
-  it('should convert units when possible to perform arithmetic', function () {
+  it('should convert units when possible to perform arithmetic', () => {
     const divide = new Quantity(8, 'm').dividedBy(new Quantity(50, 'cm'));
     divide.equals(new Quantity(16, '1')).should.be.true();
     const multiply = new Quantity(8, 'cm').multiplyBy(new Quantity(2, 'm'));
@@ -134,58 +121,43 @@ describe('Quantity', function () {
     subtract.equals(new Quantity(0.5, 'm')).should.be.true();
   });
 
-  it('should return null when units are mismatched and cannot be converted', function () {
+  it('should return null when units are mismatched and cannot be converted', () => {
     const add = doAddition(new Quantity(8, 'cm'), new Quantity(2, 'g'));
     should.not.exist(add);
     const subtract = doSubtraction(new Quantity(150, 'cm'), new Quantity(1, 'mg'));
     should.not.exist(subtract);
   });
 
-  (() => {
-    const result = [];
-    const object = { Undefined: undefined, Null: null, EmptyString: '' };
-    for (let unitName in object) {
-      var unitValue = object[unitName];
-      result.push(
-        it('should treat ' + unitName + ' the same as a "1" in calculations', function () {
-          const divideWithOneOnRight = new Quantity(8, 'm').dividedBy(new Quantity(2, '1'));
-          const divideWithNullOnRight = new Quantity(8, 'm').dividedBy(new Quantity(2, unitValue));
-          divideWithOneOnRight.should.deepEqual(divideWithNullOnRight);
-          const multiplyWithOneOnRight = new Quantity(8, 'm').multiplyBy(new Quantity(2, '1'));
-          const multiplyWithNullOnRight = new Quantity(8, 'm').multiplyBy(
-            new Quantity(2, unitValue)
-          );
-          multiplyWithOneOnRight.should.deepEqual(multiplyWithNullOnRight);
-          const addWithOneOnRight = doAddition(new Quantity(8, '1'), new Quantity(2, '1'));
-          const addWithNullOnRight = doAddition(new Quantity(8, '1'), new Quantity(2, unitValue));
-          addWithOneOnRight.should.deepEqual(addWithNullOnRight);
-          const subtractWithOneOnRight = doSubtraction(new Quantity(8, '1'), new Quantity(2, '1'));
-          const subtractWithNullOnRight = doSubtraction(
-            new Quantity(8, '1'),
-            new Quantity(2, unitValue)
-          );
-          subtractWithOneOnRight.should.deepEqual(subtractWithNullOnRight);
+  const types = [null, undefined, ''];
+  for (let unit of types) {
+    (unit => {
+      it('should treat ' + unit + ' the same as a "1" in calculations', () => {
+        const divideWithOneOnRight = new Quantity(8, 'm').dividedBy(new Quantity(2, '1'));
+        const divideWithNullOnRight = new Quantity(8, 'm').dividedBy(new Quantity(2, unit));
+        divideWithOneOnRight.should.deepEqual(divideWithNullOnRight);
+        const multiplyWithOneOnRight = new Quantity(8, 'm').multiplyBy(new Quantity(2, '1'));
+        const multiplyWithNullOnRight = new Quantity(8, 'm').multiplyBy(new Quantity(2, unit));
+        multiplyWithOneOnRight.should.deepEqual(multiplyWithNullOnRight);
+        const addWithOneOnRight = doAddition(new Quantity(8, '1'), new Quantity(2, '1'));
+        const addWithNullOnRight = doAddition(new Quantity(8, '1'), new Quantity(2, unit));
+        addWithOneOnRight.should.deepEqual(addWithNullOnRight);
+        const subtractWithOneOnRight = doSubtraction(new Quantity(8, '1'), new Quantity(2, '1'));
+        const subtractWithNullOnRight = doSubtraction(new Quantity(8, '1'), new Quantity(2, unit));
+        subtractWithOneOnRight.should.deepEqual(subtractWithNullOnRight);
 
-          const divideWithOneOnLeft = new Quantity(8, '1').dividedBy(new Quantity(2, 'm'));
-          const divideWithNullOnLeft = new Quantity(8, unitValue).dividedBy(new Quantity(2, 'm'));
-          divideWithOneOnLeft.should.deepEqual(divideWithNullOnLeft);
-          const multiplyWithOneOnLeft = new Quantity(8, '1').multiplyBy(new Quantity(2, 'm'));
-          const multiplyWithNullOnLeft = new Quantity(8, unitValue).multiplyBy(
-            new Quantity(2, 'm')
-          );
-          multiplyWithOneOnLeft.should.deepEqual(multiplyWithNullOnLeft);
-          const addWithOneOnLeft = doAddition(new Quantity(8, '1'), new Quantity(2, '1'));
-          const addWithNullOnLeft = doAddition(new Quantity(8, unitValue), new Quantity(2, '1'));
-          addWithOneOnLeft.should.deepEqual(addWithNullOnLeft);
-          const subtractWithOneOnLeft = doSubtraction(new Quantity(8, '1'), new Quantity(2, '1'));
-          const subtractWithNullOnLeft = doSubtraction(
-            new Quantity(8, unitValue),
-            new Quantity(2, '1')
-          );
-          subtractWithOneOnLeft.should.deepEqual(subtractWithNullOnLeft);
-        })
-      );
-    }
-    result;
-  })();
+        const divideWithOneOnLeft = new Quantity(8, '1').dividedBy(new Quantity(2, 'm'));
+        const divideWithNullOnLeft = new Quantity(8, unit).dividedBy(new Quantity(2, 'm'));
+        divideWithOneOnLeft.should.deepEqual(divideWithNullOnLeft);
+        const multiplyWithOneOnLeft = new Quantity(8, '1').multiplyBy(new Quantity(2, 'm'));
+        const multiplyWithNullOnLeft = new Quantity(8, unit).multiplyBy(new Quantity(2, 'm'));
+        multiplyWithOneOnLeft.should.deepEqual(multiplyWithNullOnLeft);
+        const addWithOneOnLeft = doAddition(new Quantity(8, '1'), new Quantity(2, '1'));
+        const addWithNullOnLeft = doAddition(new Quantity(8, unit), new Quantity(2, '1'));
+        addWithOneOnLeft.should.deepEqual(addWithNullOnLeft);
+        const subtractWithOneOnLeft = doSubtraction(new Quantity(8, '1'), new Quantity(2, '1'));
+        const subtractWithNullOnLeft = doSubtraction(new Quantity(8, unit), new Quantity(2, '1'));
+        subtractWithOneOnLeft.should.deepEqual(subtractWithNullOnLeft);
+      });
+    })(unit);
+  }
 });

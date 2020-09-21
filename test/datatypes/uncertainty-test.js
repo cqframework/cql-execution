@@ -1,19 +1,11 @@
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
 const { Uncertainty } = require('../../src/datatypes/uncertainty');
 const { Code } = require('../../src/datatypes/datatypes');
 const { Concept } = require('../../src/datatypes/clinical');
 const { ValueSet } = require('../../src/datatypes/clinical');
 
-describe('Uncertainty', function () {
-  it('should contruct uncertainties with correct properties', function () {
+describe('Uncertainty', () => {
+  it('should contruct uncertainties with correct properties', () => {
     const oneToFive = new Uncertainty(1, 5);
     oneToFive.low.should.equal(1);
     oneToFive.high.should.equal(5);
@@ -39,7 +31,7 @@ describe('Uncertainty', function () {
     differentTypes.high.should.eql('1');
   });
 
-  it('should not use nonenumerable values in uncertainties', function () {
+  it('should not use nonenumerable values in uncertainties', () => {
     const code = new Code('ABC', '5.4.3.2.1', '1');
     const codedLow = new Uncertainty(code, 1);
     should(codedLow.low).be.null();
@@ -72,25 +64,25 @@ describe('Uncertainty', function () {
     should(valueSetHigh.high).be.null();
   });
 
-  it('should set high to low when high is undefined', function () {
+  it('should set high to low when high is undefined', () => {
     const fiveToOne = new Uncertainty(5, undefined);
     fiveToOne.low.should.equal(5);
     fiveToOne.high.should.equal(5);
   });
 
-  it('should swap low and high when constructed in wrong order', function () {
+  it('should swap low and high when constructed in wrong order', () => {
     const fiveToOne = new Uncertainty(5, 1);
     fiveToOne.low.should.equal(1);
     fiveToOne.high.should.equal(5);
   });
 
-  it('should contruct uncertainties with correct properties', function () {
+  it('should contruct uncertainties with correct properties', () => {
     const oneToFive = new Uncertainty(1, 5);
     oneToFive.low.should.equal(1);
     oneToFive.high.should.equal(5);
   });
 
-  it('should detect zero-width intervals as points', function () {
+  it('should detect zero-width intervals as points', () => {
     new Uncertainty(2).isPoint().should.be.true();
     new Uncertainty(2, 2).isPoint().should.be.true();
     new Uncertainty(null, null).isPoint().should.be.false();
@@ -101,7 +93,7 @@ describe('Uncertainty', function () {
     new Uncertainty(1, '1').isPoint().should.be.false();
   });
 
-  it('should properly calculate equality', function () {
+  it('should properly calculate equality', () => {
     // Equality
     new Uncertainty(1, 1).equals(new Uncertainty(1, 1)).should.be.true();
 
@@ -168,7 +160,7 @@ describe('Uncertainty', function () {
     new Uncertainty(2, null).equals(new Uncertainty(1, 1)).should.be.false();
   });
 
-  it('should properly calculate "less than" inequality', function () {
+  it('should properly calculate "less than" inequality', () => {
     // Equality
     new Uncertainty(1, 1).lessThan(new Uncertainty(1, 1)).should.be.false();
 
@@ -235,7 +227,7 @@ describe('Uncertainty', function () {
     new Uncertainty(2, null).lessThan(new Uncertainty(1, 1)).should.be.false();
   });
 
-  it('should properly calculate "less than or equals" inequality', function () {
+  it('should properly calculate "less than or equals" inequality', () => {
     // Equality
     new Uncertainty(1, 1).lessThanOrEquals(new Uncertainty(1, 1)).should.be.true();
 
@@ -301,7 +293,7 @@ describe('Uncertainty', function () {
     new Uncertainty(2, null).lessThanOrEquals(new Uncertainty(1, 1)).should.be.false();
   });
 
-  it('should properly calculate "greater than" inequality', function () {
+  it('should properly calculate "greater than" inequality', () => {
     // Equality
     new Uncertainty(1, 1).greaterThan(new Uncertainty(1, 1)).should.be.false();
 
@@ -367,7 +359,7 @@ describe('Uncertainty', function () {
     new Uncertainty(2, null).greaterThan(new Uncertainty(1, 1)).should.be.true();
   });
 
-  it('should properly calculate "greater than or equals" inequality', function () {
+  it('should properly calculate "greater than or equals" inequality', () => {
     // Equality
     new Uncertainty(1, 1).greaterThanOrEquals(new Uncertainty(1, 1)).should.be.true();
 

@@ -1,19 +1,7 @@
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-const should = require('should');
 const { typeIsArray } = require('../../src/util/util');
 
-describe('typeIsArray', function () {
-  it('should properly identify arrays', function () {
+describe('typeIsArray', () => {
+  it('should properly identify arrays', () => {
     typeIsArray([1, 2, 3]).should.be.true();
     typeIsArray(['a', 'b', 'c']).should.be.true();
     typeIsArray([
@@ -27,7 +15,7 @@ describe('typeIsArray', function () {
     typeIsArray([]).should.be.true();
   });
 
-  it('should properly reject non-arrays', function () {
+  it('should properly reject non-arrays', () => {
     typeIsArray(1).should.be.false();
     typeIsArray('a').should.be.false();
     typeIsArray('[]').should.be.false();

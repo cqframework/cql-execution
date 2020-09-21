@@ -1,7 +1,5 @@
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
 // Acute Pharyngitis and ED/Ambulatory Visits
-module.exports.p1 = {
+const p1 = {
   recordType: 'Patient',
   id: '3',
   name: 'Bob Jones',
@@ -65,3 +63,5 @@ module.exports.p1 = {
     }
   ]
 };
+
+module.exports = { p1 };

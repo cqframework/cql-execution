@@ -1,17 +1,9 @@
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
 
-describe('Nil', function () {
-  this.beforeEach(function () {
+describe('Nil', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -20,8 +12,8 @@ describe('Nil', function () {
   });
 });
 
-describe('IsNull', function () {
-  this.beforeEach(function () {
+describe('IsNull', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -42,8 +34,8 @@ describe('IsNull', function () {
   });
 });
 
-describe('Coalesce', function () {
-  this.beforeEach(function () {
+describe('Coalesce', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 

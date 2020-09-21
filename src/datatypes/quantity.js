@@ -108,7 +108,7 @@ class Quantity {
   multiplyDivide(other, operator) {
     if (other != null && other.isQuantity) {
       const a = this.unit != null ? this : new Quantity(this.value, '1');
-      const b = other.unit != null ? other : new Quantity(other.value, { unit: '1' });
+      const b = other.unit != null ? other : new Quantity(other.value, '1');
       const can_val = a.to_ucum();
       const other_can_value = b.to_ucum();
       const ucum_value = ucum_multiply(can_val, [[operator, other_can_value]]);

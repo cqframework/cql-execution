@@ -1,14 +1,3 @@
-/* eslint-disable
-    no-empty,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
@@ -18,8 +7,8 @@ const validateQuantity = function (object, expectedValue, expectedUnit) {
   object.unit.should.equal(expectedUnit);
 };
 
-describe('Count', function () {
-  this.beforeEach(function () {
+describe('Count', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -34,8 +23,8 @@ describe('Count', function () {
   });
 });
 
-describe('Sum', function () {
-  this.beforeEach(function () {
+describe('Sum', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -48,8 +37,7 @@ describe('Sum', function () {
   });
 
   it('should be able to sum empty list', function () {
-    // TODO: CMM
-    this.empty.exec(this.ctx) === null;
+    should(this.empty.exec(this.ctx)).be.null();
   });
 
   it('should be able to sum quantity lists without nulls', function () {
@@ -62,8 +50,7 @@ describe('Sum', function () {
   });
 
   it('should return null for unmatched units in a list of quantiies', function () {
-    //TODO: CMM
-    this.unmatched_units_q.exec(this.ctx) === null;
+    should(this.unmatched_units_q.exec(this.ctx)).be.null();
   });
 
   it('should be able to sum quantity lists with related units', function () {
@@ -71,13 +58,17 @@ describe('Sum', function () {
     validateQuantity(q, 15, 'ml');
   });
 
+  it('should be null if some are numbers and some are quantities', function () {
+    should(this.numbersAndQuantities.exec(this.ctx)).be.null();
+  });
+
   it('should be null if quantity units are not compatible', function () {
     should(this.incompatibleUnitsNull.exec(this.ctx)).be.null();
   });
 });
 
-describe('Min', function () {
-  this.beforeEach(function () {
+describe('Min', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -87,9 +78,8 @@ describe('Min', function () {
   it('should be able to find min in lists with nulls', function () {
     this.has_null.exec(this.ctx).should.equal(-1);
   });
-  it('should be return null for empty list', function () {
-    // TODO: CMM
-    this.empty.exec(this.ctx) === null;
+  it('should return null for empty list', function () {
+    should(this.empty.exec(this.ctx)).be.null();
   });
   it('should be able to find min in lists of quantiies without nulls', function () {
     validateQuantity(this.not_null_q.exec(this.ctx), 0, 'ml');
@@ -137,13 +127,17 @@ describe('Min', function () {
     should(this.minIsAlsoNull.exec(this.ctx)).be.null();
   });
 
+  it('should be null if some are numbers and some are quantities', function () {
+    should(this.numbersAndQuantities.exec(this.ctx)).be.null();
+  });
+
   it('should be null if quantity units are not compatible', function () {
     should(this.incompatibleUnitsNull.exec(this.ctx)).be.null();
   });
 });
 
-describe('Max', function () {
-  this.beforeEach(function () {
+describe('Max', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -153,9 +147,8 @@ describe('Max', function () {
   it('should be able to find max in lists with nulls', function () {
     this.has_null.exec(this.ctx).should.equal(2);
   });
-  it('should be return null for empty list', function () {
-    // TODO: CMM
-    this.empty.exec(this.ctx) === null;
+  it('should return null for empty list', function () {
+    should(this.empty.exec(this.ctx)).be.null();
   });
   it('should be able to find max in lists of quantiies without nulls', function () {
     validateQuantity(this.not_null_q.exec(this.ctx), 10, 'ml');
@@ -202,13 +195,17 @@ describe('Max', function () {
     should(this.maxIsAlsoNull.exec(this.ctx)).be.null();
   });
 
+  it('should be null if some are numbers and some are quantities', function () {
+    should(this.numbersAndQuantities.exec(this.ctx)).be.null();
+  });
+
   it('should be null if quantity units are not compatible', function () {
     should(this.incompatibleUnitsNull.exec(this.ctx)).be.null();
   });
 });
 
-describe('Avg', function () {
-  this.beforeEach(function () {
+describe('Avg', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -220,9 +217,8 @@ describe('Avg', function () {
     this.has_null.exec(this.ctx).should.equal(1.5);
   });
 
-  it('should be return null for empty list', function () {
-    // TODO: CMM
-    this.empty.exec(this.ctx) === null;
+  it('should return null for empty list', function () {
+    should(this.empty.exec(this.ctx)).be.null();
   });
 
   it('should be able to find average for lists of quantiies without nulls', function () {
@@ -240,13 +236,17 @@ describe('Avg', function () {
     validateQuantity(q, 3, 'ml');
   });
 
+  it('should be null if some are numbers and some are quantities', function () {
+    should(this.numbersAndQuantities.exec(this.ctx)).be.null();
+  });
+
   it('should be null if quantity units are not compatible', function () {
     should(this.incompatibleUnitsNull.exec(this.ctx)).be.null();
   });
 });
 
-describe('Median', function () {
-  this.beforeEach(function () {
+describe('Median', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -266,9 +266,8 @@ describe('Median', function () {
     this.dup_vals_even.exec(this.ctx).should.equal(2.5);
   });
 
-  it('should be return null for empty list', function () {
-    // TODO: CMM
-    this.empty.exec(this.ctx) === null;
+  it('should return null for empty list', function () {
+    should(this.empty.exec(this.ctx)).be.null();
   });
 
   it('should be able to find median of odd numbered list', function () {
@@ -296,13 +295,17 @@ describe('Median', function () {
     validateQuantity(q, 3.5, 'ml');
   });
 
+  it('should be null if some are numbers and some are quantities', function () {
+    should(this.numbersAndQuantities.exec(this.ctx)).be.null();
+  });
+
   it('should be null if quantity units are not compatible', function () {
     should(this.incompatibleUnitsNull.exec(this.ctx)).be.null();
   });
 });
 
-describe('Mode', function () {
-  this.beforeEach(function () {
+describe('Mode', () => {
+  beforeEach(function () {
     setup(this, data);
   });
   it('should be able to find mode of lists without nulls', function () {
@@ -311,12 +314,15 @@ describe('Mode', function () {
   it('should be able to find Mode lists with nulls', function () {
     this.has_null.exec(this.ctx).should.equal(2);
   });
-  it('should be return null for empty list', function () {
-    // TODO: CMM
-    this.empty.exec(this.ctx) === null;
+  it('should return null for empty list', function () {
+    should(this.empty.exec(this.ctx)).be.null();
   });
   it('should be able to find bimodal', function () {
     this.bi_modal.exec(this.ctx).should.eql([2, 3]);
+  });
+
+  it('should be null if some are numbers and some are quantities', function () {
+    should(this.numbersAndQuantities.exec(this.ctx)).be.null();
   });
 
   it('should be null if quantity units are not compatible', function () {
@@ -324,8 +330,8 @@ describe('Mode', function () {
   });
 });
 
-describe('PopulationVariance', function () {
-  this.beforeEach(function () {
+describe('PopulationVariance', () => {
+  beforeEach(function () {
     setup(this, data);
   });
   it('should be able to find PopulationVariance of a list ', function () {
@@ -337,26 +343,16 @@ describe('PopulationVariance', function () {
   it('should be able to find PopulationVariance of a list of related quantities', function () {
     validateQuantity(this.q_diff_units.exec(this.ctx), 2.5, 'ml');
   });
-  it('should throw an exception when quantities are not compatible ', function () {
-    try {
-      this.q_throw1.exec(this.ctx);
-      false.should.be.true('Incompatible Quantities should throw an error');
-    } catch (error) {}
+  it('should be null if some are numbers and some are quantities', function () {
+    should(this.numbersAndQuantities.exec(this.ctx)).be.null();
   });
-  it('should throw an exception when quanties exist in a list but not all are quantities', function () {
-    try {
-      this.q_throw2.exec(this.ctx);
-      false.should.be.true('Incompatible Quantities should throw an error');
-    } catch (error) {}
-  });
-
   it('should be null if quantity units are not compatible', function () {
     should(this.incompatibleUnitsNull.exec(this.ctx)).be.null();
   });
 });
 
-describe('Variance', function () {
-  this.beforeEach(function () {
+describe('Variance', () => {
+  beforeEach(function () {
     setup(this, data);
   });
   it('should be able to find Variance of a list ', function () {
@@ -368,26 +364,16 @@ describe('Variance', function () {
   it('should be able to find Variance of a list of related quantities', function () {
     validateQuantity(this.q_diff_units.exec(this.ctx), 2, 'ml');
   });
-  it('should throw an exception when quantities are not compatible ', function () {
-    try {
-      this.q_throw1.exec(this.ctx);
-      false.should.be.true('Incompatible Quantities should throw an error');
-    } catch (error) {}
+  it('should be null if some are numbers and some are quantities', function () {
+    should(this.numbersAndQuantities.exec(this.ctx)).be.null();
   });
-  it('should throw an exception when quanties exist in a list but not all are quantities', function () {
-    try {
-      this.q_throw2.exec(this.ctx);
-      false.should.be.true('Incompatible Quantities should throw an error');
-    } catch (error) {}
-  });
-
   it('should be null if quantity units are not compatible', function () {
     should(this.incompatibleUnitsNull.exec(this.ctx)).be.null();
   });
 });
 
-describe('StdDev', function () {
-  this.beforeEach(function () {
+describe('StdDev', () => {
+  beforeEach(function () {
     setup(this, data);
   });
   it('should be able to find Standard Dev of a list ', function () {
@@ -399,26 +385,16 @@ describe('StdDev', function () {
   it('should be able to find Standard Dev of a list of related quantities', function () {
     validateQuantity(this.q_diff_units.exec(this.ctx), 1.4142135623730951, 'ml');
   });
-  it('should throw an exception when quantities are not compatible ', function () {
-    try {
-      this.q_throw1.exec(this.ctx);
-      false.should.be.true('Incompatible Quantities should throw an error');
-    } catch (error) {}
+  it('should be null if some are numbers and some are quantities', function () {
+    should(this.numbersAndQuantities.exec(this.ctx)).be.null();
   });
-  it('should throw an exception when quanties exist in a list but not all are quantities', function () {
-    try {
-      this.q_throw2.exec(this.ctx);
-      false.should.be.true('Incompatible Quantities should throw an error');
-    } catch (error) {}
-  });
-
   it('should be null if quantity units are not compatible', function () {
     should(this.incompatibleUnitsNull.exec(this.ctx)).be.null();
   });
 });
 
-describe('PopulationStdDev', function () {
-  this.beforeEach(function () {
+describe('PopulationStdDev', () => {
+  beforeEach(function () {
     setup(this, data);
   });
   it('should be able to find Population Standard Dev of a list ', function () {
@@ -430,26 +406,16 @@ describe('PopulationStdDev', function () {
   it('should be able to find Population Standard Dev of a list of related quantities', function () {
     validateQuantity(this.q_diff_units.exec(this.ctx), 1.5811388300841898, 'ml');
   });
-  it('should throw an exception when quantities are not compatible ', function () {
-    try {
-      this.q_throw1.exec(this.ctx);
-      false.should.be.true('Incompatible Quantities should throw an error');
-    } catch (error) {}
+  it('should be null if some are numbers and some are quantities', function () {
+    should(this.numbersAndQuantities.exec(this.ctx)).be.null();
   });
-  it('should throw an exception when quanties exist in a list but not all are quantities', function () {
-    try {
-      this.q_throw2.exec(this.ctx);
-      false.should.be.true('Incompatible Quantities should throw an error');
-    } catch (error) {}
-  });
-
   it('should be null if quantity units are not compatible', function () {
     should(this.incompatibleUnitsNull.exec(this.ctx)).be.null();
   });
 });
 
-describe('Product', function () {
-  this.beforeEach(function () {
+describe('Product', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -490,13 +456,17 @@ describe('Product', function () {
     should(this.product_of_nulls.exec(this.ctx)).be.null();
   });
 
+  it('should be null if some are numbers and some are quantities', function () {
+    should(this.numbersAndQuantities.exec(this.ctx)).be.null();
+  });
+
   it('should be null if quantity units are not compatible', function () {
     should(this.incompatibleUnitsNull.exec(this.ctx)).be.null();
   });
 });
 
-describe('GeometricMean', function () {
-  this.beforeEach(function () {
+describe('GeometricMean', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -521,8 +491,8 @@ describe('GeometricMean', function () {
   });
 });
 
-describe('AllTrue', function () {
-  this.beforeEach(function () {
+describe('AllTrue', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -534,8 +504,8 @@ describe('AllTrue', function () {
   });
 });
 
-describe('AnyTrue', function () {
-  this.beforeEach(function () {
+describe('AnyTrue', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 

@@ -1,21 +1,8 @@
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
 
-describe('If', function () {
-  this.beforeEach(function () {
+describe('If', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -28,8 +15,8 @@ describe('If', function () {
   });
 });
 
-describe('Case', function () {
-  this.beforeEach(function () {
+describe('Case', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -39,14 +26,10 @@ describe('Case', function () {
       { x: 2, y: 1, message: 'X > Y' },
       { x: 1, y: 1, message: 'X == Y' }
     ];
-    (() => {
-      const result = [];
-      for (let item of vals) {
-        this.ctx.withParameters({ X: item.x, Y: item.y });
-        result.push(this.standard.exec(this.ctx).should.equal(item.message));
-      }
-      result;
-    })();
+    for (let item of vals) {
+      this.ctx.withParameters({ X: item.x, Y: item.y });
+      this.standard.exec(this.ctx).should.equal(item.message);
+    }
   });
 
   it('should be able to execute a selected case statement', function () {
@@ -55,13 +38,9 @@ describe('Case', function () {
       { var: 2, message: 'two' },
       { var: 3, message: '?' }
     ];
-    (() => {
-      const result = [];
-      for (let item of vals) {
-        this.ctx.withParameters({ var: item.var });
-        result.push(this.selected.exec(this.ctx).should.equal(item.message));
-      }
-      result;
-    })();
+    for (let item of vals) {
+      this.ctx.withParameters({ var: item.var });
+      this.selected.exec(this.ctx).should.equal(item.message);
+    }
   });
 });

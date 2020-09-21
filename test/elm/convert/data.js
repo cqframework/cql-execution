@@ -2108,10 +2108,11 @@ module.exports['FromTime'] = {
 /* FromCode
 library TestSnippet version '1'
 using Simple version '1.0.0'
-// define hepB: Code '66071002' from "SNOMED-CT" display 'Type B viral hepatitis'
-// define codeConcept: convert hepB to Concept
-// define codeCode: convert hepB to Code
+codesystem "SNOMED-CT": '2.16.840.1.113883.6.96'
 context Patient
+define hepB: Code '66071002' from "SNOMED-CT" display 'Type B viral hepatitis'
+define codeConcept: convert hepB to Concept
+define codeCode: convert hepB to Code
 define foo: 'bar'
 */
 
@@ -2140,6 +2141,14 @@ module.exports['FromCode'] = {
             "version" : "1.0.0"
          } ]
       },
+      "codeSystems" : {
+         "def" : [ {
+            "localId" : "2",
+            "name" : "SNOMED-CT",
+            "id" : "2.16.840.1.113883.6.96",
+            "accessLevel" : "Public"
+         } ]
+      },
       "statements" : {
          "def" : [ {
             "name" : "Patient",
@@ -2152,18 +2161,130 @@ module.exports['FromCode'] = {
                }
             }
          }, {
-            "localId" : "3",
+            "localId" : "5",
+            "name" : "hepB",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "define ","hepB",": " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "Code ","'66071002'"," from " ]
+                     }, {
+                        "r" : "3",
+                        "s" : [ {
+                           "value" : [ "\"SNOMED-CT\"" ]
+                        } ]
+                     }, {
+                        "value" : [ " display ","'Type B viral hepatitis'" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "4",
+               "code" : "66071002",
+               "display" : "Type B viral hepatitis",
+               "type" : "Code",
+               "system" : {
+                  "localId" : "3",
+                  "name" : "SNOMED-CT"
+               }
+            }
+         }, {
+            "localId" : "9",
+            "name" : "codeConcept",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "define ","codeConcept",": " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "convert " ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "hepB" ]
+                        } ]
+                     }, {
+                        "value" : [ " to " ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "value" : [ "Concept" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "type" : "ToConcept",
+               "operand" : {
+                  "localId" : "7",
+                  "name" : "hepB",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "localId" : "12",
+            "name" : "codeCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "value" : [ "define ","codeCode",": " ]
+                  }, {
+                     "r" : "11",
+                     "s" : [ {
+                        "value" : [ "convert " ]
+                     }, {
+                        "r" : "11",
+                        "s" : [ {
+                           "value" : [ "hepB" ]
+                        } ]
+                     }, {
+                        "value" : [ " to " ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "value" : [ "Code" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "11",
+               "name" : "hepB",
+               "type" : "ExpressionRef"
+            }
+         }, {
+            "localId" : "14",
             "name" : "foo",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "3",
+                  "r" : "14",
                   "s" : [ {
                      "value" : [ "define ","foo",": " ]
                   }, {
-                     "r" : "2",
+                     "r" : "13",
                      "s" : [ {
                         "value" : [ "'bar'" ]
                      } ]
@@ -2171,7 +2292,7 @@ module.exports['FromCode'] = {
                }
             } ],
             "expression" : {
-               "localId" : "2",
+               "localId" : "13",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "bar",
                "type" : "Literal"

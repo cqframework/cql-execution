@@ -1,23 +1,10 @@
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
-const DT = require('../../../src/datatypes/datatypes');
-const { PatientContext } = require('../../../src/cql');
 const { Uncertainty } = require('../../../src/datatypes/uncertainty');
 
-describe('Date', function () {
-  this.beforeEach(function () {
+describe('Date', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -45,8 +32,8 @@ describe('Date', function () {
   });
 });
 
-describe('DateComponentFrom', function () {
-  this.beforeEach(function () {
+describe('DateComponentFrom', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -76,8 +63,8 @@ describe('DateComponentFrom', function () {
   });
 });
 
-describe('SameAs', function () {
-  this.beforeEach(function () {
+describe('SameAs', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -110,8 +97,8 @@ describe('SameAs', function () {
   });
 });
 
-describe('SameOrAfter', function () {
-  this.beforeEach(function () {
+describe('SameOrAfter', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -158,8 +145,8 @@ describe('SameOrAfter', function () {
   });
 });
 
-describe('SameOrBefore', function () {
-  this.beforeEach(function () {
+describe('SameOrBefore', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -206,8 +193,8 @@ describe('SameOrBefore', function () {
   });
 });
 
-describe('After', function () {
-  this.beforeEach(function () {
+describe('After', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -248,8 +235,8 @@ describe('After', function () {
   });
 });
 
-describe('Before', function () {
-  this.beforeEach(function () {
+describe('Before', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -290,8 +277,8 @@ describe('Before', function () {
   });
 });
 
-describe('DifferenceBetween', function () {
-  this.beforeEach(function () {
+describe('DifferenceBetween', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -328,8 +315,8 @@ describe('DifferenceBetween', function () {
   });
 });
 
-describe('DifferenceBetween Comparisons', function () {
-  this.beforeEach(function () {
+describe('DifferenceBetween Comparisons', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -370,8 +357,8 @@ describe('DifferenceBetween Comparisons', function () {
   });
 });
 
-describe('DurationBetween', function () {
-  this.beforeEach(function () {
+describe('DurationBetween', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -408,8 +395,8 @@ describe('DurationBetween', function () {
   });
 });
 
-describe('DateMath', function () {
-  this.beforeEach(function () {
+describe('DateMath', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -442,8 +429,8 @@ describe('DateMath', function () {
   });
 });
 
-var dateCheck = function (date, year, month, day) {
+function dateCheck(date, year, month, day) {
   date.year.should.equal(year);
   date.month.should.equal(month);
   date.day.should.equal(day);
-};
+}

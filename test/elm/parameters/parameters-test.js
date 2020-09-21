@@ -1,11 +1,3 @@
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
@@ -14,8 +6,8 @@ const { DateTime, Date } = require('../../../src/datatypes/datetime');
 const { Interval } = require('../../../src/datatypes/interval');
 const { Quantity } = require('../../../src/datatypes/quantity');
 
-describe('ParameterDef', function () {
-  this.beforeEach(function () {
+describe('ParameterDef', () => {
+  beforeEach(function () {
     setup(this, data);
     this.param = this.lib.parameters.MeasureYear;
   });
@@ -51,8 +43,8 @@ describe('ParameterDef', function () {
   });
 });
 
-describe('ParameterRef', function () {
-  this.beforeEach(function () {
+describe('ParameterRef', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -73,8 +65,8 @@ describe('ParameterRef', function () {
   });
 });
 
-describe('BooleanParameterTypes', function () {
-  this.beforeEach(function () {
+describe('BooleanParameterTypes', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -99,8 +91,8 @@ describe('BooleanParameterTypes', function () {
   });
 });
 
-describe('DecimalParameterTypes', function () {
-  this.beforeEach(function () {
+describe('DecimalParameterTypes', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -125,8 +117,8 @@ describe('DecimalParameterTypes', function () {
   });
 });
 
-describe('IntegerParameterTypes', function () {
-  this.beforeEach(function () {
+describe('IntegerParameterTypes', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -151,8 +143,8 @@ describe('IntegerParameterTypes', function () {
   });
 });
 
-describe('StringParameterTypes', function () {
-  this.beforeEach(function () {
+describe('StringParameterTypes', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -177,8 +169,8 @@ describe('StringParameterTypes', function () {
   });
 });
 
-describe('CodeParameterTypes', function () {
-  this.beforeEach(function () {
+describe('CodeParameterTypes', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -209,8 +201,8 @@ describe('CodeParameterTypes', function () {
   });
 });
 
-describe('ConceptParameterTypes', function () {
-  this.beforeEach(function () {
+describe('ConceptParameterTypes', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -241,8 +233,8 @@ describe('ConceptParameterTypes', function () {
   });
 });
 
-describe('DateTimeParameterTypes', function () {
-  this.beforeEach(function () {
+describe('DateTimeParameterTypes', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -271,8 +263,8 @@ describe('DateTimeParameterTypes', function () {
   });
 });
 
-describe('DateParameterTypes', function () {
-  this.beforeEach(function () {
+describe('DateParameterTypes', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -301,8 +293,8 @@ describe('DateParameterTypes', function () {
   });
 });
 
-describe('QuantityParameterTypes', function () {
-  this.beforeEach(function () {
+describe('QuantityParameterTypes', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -331,8 +323,8 @@ describe('QuantityParameterTypes', function () {
   });
 });
 
-describe('TimeParameterTypes', function () {
-  this.beforeEach(function () {
+describe('TimeParameterTypes', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -361,8 +353,8 @@ describe('TimeParameterTypes', function () {
   });
 });
 
-describe('ListParameterTypes', function () {
-  this.beforeEach(function () {
+describe('ListParameterTypes', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -407,8 +399,8 @@ describe('ListParameterTypes', function () {
   });
 });
 
-describe('IntervalParameterTypes', function () {
-  this.beforeEach(function () {
+describe('IntervalParameterTypes', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -449,8 +441,8 @@ describe('IntervalParameterTypes', function () {
   });
 });
 
-describe('TupleParameterTypes', function () {
-  this.beforeEach(function () {
+describe('TupleParameterTypes', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -507,8 +499,8 @@ describe('TupleParameterTypes', function () {
   });
 });
 
-describe('DefaultAndNoDefault', function () {
-  this.beforeEach(function () {
+describe('DefaultAndNoDefault', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -518,8 +510,8 @@ describe('DefaultAndNoDefault', function () {
   });
 });
 
-describe('MeasurementPeriodParameter', function () {
-  this.beforeEach(function () {
+describe('MeasurementPeriodParameter', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 

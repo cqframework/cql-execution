@@ -1,15 +1,3 @@
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
@@ -21,14 +9,12 @@ const {
   MIN_FLOAT_VALUE,
   MIN_FLOAT_PRECISION_VALUE,
   MAX_FLOAT_VALUE,
-  MIN_DATE_VALUE,
   MIN_DATETIME_VALUE,
-  MAX_DATETIME_VALUE,
-  MIN_TIME_VALUE
+  MAX_DATETIME_VALUE
 } = require('../../../src/util/math');
 
-describe('Interval', function () {
-  this.beforeEach(function () {
+describe('Interval', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -70,8 +56,8 @@ describe('Interval', function () {
   });
 });
 
-describe('Equal', function () {
-  this.beforeEach(function () {
+describe('Equal', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -111,8 +97,8 @@ describe('Equal', function () {
   });
 });
 
-describe('NotEqual', function () {
-  this.beforeEach(function () {
+describe('NotEqual', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -152,8 +138,8 @@ describe('NotEqual', function () {
   });
 });
 
-describe('Contains', function () {
-  this.beforeEach(function () {
+describe('Contains', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -230,8 +216,8 @@ describe('Contains', function () {
   });
 });
 
-describe('In', function () {
-  this.beforeEach(function () {
+describe('In', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -308,8 +294,8 @@ describe('In', function () {
   });
 });
 
-describe('Includes', function () {
-  this.beforeEach(function () {
+describe('Includes', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -383,8 +369,8 @@ describe('Includes', function () {
   });
 });
 
-describe('ProperlyIncludes', function () {
-  this.beforeEach(function () {
+describe('ProperlyIncludes', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -420,8 +406,8 @@ describe('ProperlyIncludes', function () {
   });
 });
 
-describe('IncludedIn', function () {
-  this.beforeEach(function () {
+describe('IncludedIn', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -495,8 +481,8 @@ describe('IncludedIn', function () {
   });
 });
 
-describe('ProperlyIncludedIn', function () {
-  this.beforeEach(function () {
+describe('ProperlyIncludedIn', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -532,8 +518,8 @@ describe('ProperlyIncludedIn', function () {
   });
 });
 
-describe('After', function () {
-  this.beforeEach(function () {
+describe('After', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -589,8 +575,8 @@ describe('After', function () {
   });
 });
 
-describe('Before', function () {
-  this.beforeEach(function () {
+describe('Before', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -646,8 +632,8 @@ describe('Before', function () {
   });
 });
 
-describe('BeforeOrOn', function () {
-  this.beforeEach(function () {
+describe('BeforeOrOn', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -709,8 +695,8 @@ describe('BeforeOrOn', function () {
   });
 });
 
-describe('AfterOrOn', function () {
-  this.beforeEach(function () {
+describe('AfterOrOn', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -772,8 +758,8 @@ describe('AfterOrOn', function () {
   });
 });
 
-describe('Meets', function () {
-  this.beforeEach(function () {
+describe('Meets', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -848,8 +834,8 @@ describe('Meets', function () {
   });
 });
 
-describe('MeetsAfter', function () {
-  this.beforeEach(function () {
+describe('MeetsAfter', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -924,8 +910,8 @@ describe('MeetsAfter', function () {
   });
 });
 
-describe('MeetsBefore', function () {
-  this.beforeEach(function () {
+describe('MeetsBefore', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1000,8 +986,8 @@ describe('MeetsBefore', function () {
   });
 });
 
-describe('Overlaps', function () {
-  this.beforeEach(function () {
+describe('Overlaps', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1030,8 +1016,8 @@ describe('Overlaps', function () {
   });
 });
 
-describe('OverlapsDateTime', function () {
-  this.beforeEach(function () {
+describe('OverlapsDateTime', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1063,20 +1049,19 @@ describe('OverlapsDateTime', function () {
   });
 
   it('should correctly compare using the requested precision', function () {
-    // NOTE: Some assertions commented out because cql-to-elm is WRONGLY translating 'overlaps' to 'OverlapsAfter'!
-    //@overlapsBeforeDayOfIvlEdge.exec(@ctx).should.be.true()
+    this.overlapsBeforeDayOfIvlEdge.exec(this.ctx).should.be.true();
     this.overlapsAfterDayOfIvlEdge.exec(this.ctx).should.be.true();
     this.overlapsContainsDayOfIvl.exec(this.ctx).should.be.true();
-    //@overlapsContainedByDayOfIvl.exec(@ctx).should.be.true()
+    this.overlapsContainedByDayOfIvl.exec(this.ctx).should.be.true();
     this.notOverlapsDayOfIvl.exec(this.ctx).should.be.false();
     this.overlapsAfterDayOfImpreciseInterval.exec(this.ctx).should.be.true();
-    //should(@mayOverlapBeforeDayOfImpreciseIvl.exec(@ctx)).be.null()
+    should(this.mayOverlapBeforeDayOfImpreciseIvl.exec(this.ctx)).be.null();
     should(this.mayOverlapAfterDayOfImpreciseIvl.exec(this.ctx)).be.null();
   });
 });
 
-describe('OverlapsAfter', function () {
-  this.beforeEach(function () {
+describe('OverlapsAfter', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1107,8 +1092,8 @@ describe('OverlapsAfter', function () {
   });
 });
 
-describe('OverlapsAfterDateTime', function () {
-  this.beforeEach(function () {
+describe('OverlapsAfterDateTime', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1158,8 +1143,8 @@ describe('OverlapsAfterDateTime', function () {
   });
 });
 
-describe('OverlapsBefore', function () {
-  this.beforeEach(function () {
+describe('OverlapsBefore', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1190,8 +1175,8 @@ describe('OverlapsBefore', function () {
   });
 });
 
-describe('OverlapsBeforeDateTime', function () {
-  this.beforeEach(function () {
+describe('OverlapsBeforeDateTime', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1241,8 +1226,8 @@ describe('OverlapsBeforeDateTime', function () {
   });
 });
 
-describe('Width', function () {
-  this.beforeEach(function () {
+describe('Width', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1297,8 +1282,8 @@ describe('Width', function () {
   });
 });
 
-describe('Size', function () {
-  this.beforeEach(function () {
+describe('Size', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1363,8 +1348,8 @@ describe('Size', function () {
   });
 });
 
-describe('Start', function () {
-  this.beforeEach(function () {
+describe('Start', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1403,8 +1388,8 @@ describe('Start', function () {
   });
 });
 
-describe('End', function () {
-  this.beforeEach(function () {
+describe('End', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1443,8 +1428,8 @@ describe('End', function () {
   });
 });
 
-describe('Starts', function () {
-  this.beforeEach(function () {
+describe('Starts', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1478,8 +1463,8 @@ describe('Starts', function () {
   });
 });
 
-describe('Ends', function () {
-  this.beforeEach(function () {
+describe('Ends', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1513,8 +1498,8 @@ describe('Ends', function () {
   });
 });
 
-describe('IntegerIntervalUnion', function () {
-  this.beforeEach(function () {
+describe('IntegerIntervalUnion', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1580,8 +1565,8 @@ describe('IntegerIntervalUnion', function () {
 // TODO
 // it 'should properly handle imprecision', ->
 
-describe('DateTimeIntervalUnion', function () {
-  this.beforeEach(function () {
+describe('DateTimeIntervalUnion', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1650,8 +1635,8 @@ describe('DateTimeIntervalUnion', function () {
 // TODO
 // it 'should properly handle imprecision', ->
 
-describe('IntegerIntervalExcept', function () {
-  this.beforeEach(function () {
+describe('IntegerIntervalExcept', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1691,8 +1676,8 @@ describe('IntegerIntervalExcept', function () {
 // TODO
 // it 'should properly handle imprecision', ->
 
-describe('DateTimeIntervalExcept', function () {
-  this.beforeEach(function () {
+describe('DateTimeIntervalExcept', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1736,8 +1721,8 @@ describe('DateTimeIntervalExcept', function () {
 // TODO
 // it 'should properly handle imprecision', ->
 
-describe('IntegerIntervalIntersect', function () {
-  this.beforeEach(function () {
+describe('IntegerIntervalIntersect', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1782,8 +1767,8 @@ describe('IntegerIntervalIntersect', function () {
   });
 });
 
-describe('DateTimeIntervalIntersect', function () {
-  this.beforeEach(function () {
+describe('DateTimeIntervalIntersect', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1831,8 +1816,8 @@ describe('DateTimeIntervalIntersect', function () {
 // TODO: 2 tests I don't know how to write:
 //   - If the argument is null, the result is null.
 //   - If the list of intervals contains nulls, they will be excluded from the resulting list.
-describe('IntegerIntervalCollapse', function () {
-  this.beforeEach(function () {
+describe('IntegerIntervalCollapse', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1874,8 +1859,8 @@ describe('IntegerIntervalCollapse', function () {
   });
 });
 
-describe('DateTimeIntervalCollapse', function () {
-  this.beforeEach(function () {
+describe('DateTimeIntervalCollapse', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1944,8 +1929,8 @@ describe('DateTimeIntervalCollapse', function () {
   });
 });
 
-describe('Collapse', function () {
-  this.beforeEach(function () {
+describe('Collapse', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -2100,8 +2085,8 @@ const prettyList = function (array) {
   return '{ ' + array.join(', ') + ' }';
 };
 
-describe('DateIntervalExpand', function () {
-  this.beforeEach(function () {
+describe('DateIntervalExpand', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -2266,8 +2251,8 @@ describe('DateIntervalExpand', function () {
   });
 });
 
-describe('DateTimeIntervalExpand', function () {
-  this.beforeEach(function () {
+describe('DateTimeIntervalExpand', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -2572,8 +2557,8 @@ describe('DateTimeIntervalExpand', function () {
   });
 });
 
-describe('TimeIntervalExpand', function () {
-  this.beforeEach(function () {
+describe('TimeIntervalExpand', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -2635,8 +2620,8 @@ describe('TimeIntervalExpand', function () {
   });
 });
 
-describe('QuantityIntervalExpand', function () {
-  this.beforeEach(function () {
+describe('QuantityIntervalExpand', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -2757,8 +2742,8 @@ describe('QuantityIntervalExpand', function () {
   });
 });
 
-describe('IntegerIntervalExpand', function () {
-  this.beforeEach(function () {
+describe('IntegerIntervalExpand', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -2850,8 +2835,8 @@ describe('IntegerIntervalExpand', function () {
   });
 });
 
-describe('DecimalIntervalExpand', function () {
-  this.beforeEach(function () {
+describe('DecimalIntervalExpand', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -2937,8 +2922,8 @@ describe('DecimalIntervalExpand', function () {
   });
 });
 
-describe('SameAs', function () {
-  this.beforeEach(function () {
+describe('SameAs', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 

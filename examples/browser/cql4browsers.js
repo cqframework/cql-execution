@@ -3167,9 +3167,7 @@ var Quantity = /*#__PURE__*/function () {
     value: function multiplyDivide(other, operator) {
       if (other != null && other.isQuantity) {
         var a = this.unit != null ? this : new Quantity(this.value, '1');
-        var b = other.unit != null ? other : new Quantity(other.value, {
-          unit: '1'
-        });
+        var b = other.unit != null ? other : new Quantity(other.value, '1');
         var can_val = a.to_ucum();
         var other_can_value = b.to_ucum();
         var ucum_value = ucum_multiply(can_val, [[operator, other_can_value]]);

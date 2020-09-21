@@ -1,19 +1,11 @@
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
 const vsets = require('./valuesets');
 const { p1 } = require('./patients');
 
-describe('DateRangeOptimizedQuery', function () {
-  this.beforeEach(function () {
+describe('DateRangeOptimizedQuery', () => {
+  beforeEach(function () {
     setup(this, data, [p1], vsets);
   });
 
@@ -36,8 +28,8 @@ describe('DateRangeOptimizedQuery', function () {
   });
 });
 
-describe('FunctionQuery', function () {
-  this.beforeEach(function () {
+describe('FunctionQuery', () => {
+  beforeEach(function () {
     setup(this, data, [p1], vsets);
   });
 
@@ -48,7 +40,7 @@ describe('FunctionQuery', function () {
 });
 
 describe.skip('IncludesQuery', function () {
-  this.beforeEach(function () {
+  beforeEach(function () {
     setup(this, data, [p1], vsets);
   });
 
@@ -59,8 +51,8 @@ describe.skip('IncludesQuery', function () {
   });
 });
 
-describe('MultiSourceQuery', function () {
-  this.beforeEach(function () {
+describe('MultiSourceQuery', () => {
+  beforeEach(function () {
     setup(this, data, [p1], vsets);
   });
 
@@ -81,7 +73,7 @@ describe('MultiSourceQuery', function () {
 });
 
 describe.skip('QueryRelationship', function () {
-  this.beforeEach(function () {
+  beforeEach(function () {
     setup(this, data, [p1]);
   });
 
@@ -106,8 +98,8 @@ describe.skip('QueryRelationship', function () {
   });
 });
 
-describe('QueryLet', function () {
-  this.beforeEach(function () {
+describe('QueryLet', () => {
+  beforeEach(function () {
     setup(this, data, [p1]);
   });
 
@@ -120,8 +112,8 @@ describe('QueryLet', function () {
   });
 });
 
-describe('Tuple', function () {
-  this.beforeEach(function () {
+describe('Tuple', () => {
+  beforeEach(function () {
     setup(this, data, [p1]);
   });
 
@@ -131,8 +123,8 @@ describe('Tuple', function () {
   });
 });
 
-describe('QueryFilterNulls', function () {
-  this.beforeEach(function () {
+describe('QueryFilterNulls', () => {
+  beforeEach(function () {
     setup(this, data, [p1]);
   });
 
@@ -143,8 +135,8 @@ describe('QueryFilterNulls', function () {
   });
 });
 
-describe('Sorting', function () {
-  this.beforeEach(function () {
+describe('Sorting', () => {
+  beforeEach(function () {
     setup(this, data, [p1]);
   });
 
@@ -233,8 +225,8 @@ describe('Sorting', function () {
   });
 });
 
-describe('Distinct', function () {
-  this.beforeEach(function () {
+describe('Distinct', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -267,8 +259,8 @@ describe('Distinct', function () {
   });
 });
 
-describe('SingleObjectAlias', function () {
-  this.beforeEach(function () {
+describe('SingleObjectAlias', () => {
+  beforeEach(function () {
     setup(this, data, [p1]);
   });
 

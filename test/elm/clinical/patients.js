@@ -1,7 +1,5 @@
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
 // Born in 1980
-module.exports.p1 = {
+const p1 = {
   recordType: 'Patient',
   id: '1',
   name: 'John Smith',
@@ -10,7 +8,7 @@ module.exports.p1 = {
 };
 
 // Born in 2007
-module.exports.p2 = {
+const p2 = {
   recordType: 'Patient',
   id: '2',
   name: 'Sally Smith',
@@ -19,10 +17,12 @@ module.exports.p2 = {
 };
 
 // Born in 1994
-module.exports.p3 = {
+const p3 = {
   recordType: 'Patient',
   id: '1',
   name: 'John Smith',
   gender: 'M',
   birthDate: '1994-12-01T23:59:00.000Z'
 };
+
+module.exports = { p1, p2, p3 };

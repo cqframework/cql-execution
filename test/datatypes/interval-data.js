@@ -1,11 +1,3 @@
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const { Interval } = require('../../src/datatypes/interval');
 const { DateTime } = require('../../src/datatypes/datetime');
 
@@ -50,37 +42,38 @@ class TestInterval {
   }
 }
 
-module.exports = function (test) {
-  test['all2012'] = new TestInterval(
+module.exports = () => {
+  const data = {};
+  data['all2012'] = new TestInterval(
     DateTime.parse('2012-01-01T00:00:00.0'),
     DateTime.parse('2012-12-31T23:59:59.999')
   );
-  test['janjune'] = new TestInterval(
+  data['janjune'] = new TestInterval(
     DateTime.parse('2012-01-01T00:00:00.0'),
     DateTime.parse('2012-06-01T00:00:00.0')
   );
-  test['septdec'] = new TestInterval(
+  data['septdec'] = new TestInterval(
     DateTime.parse('2012-09-01T00:00:00.0'),
     DateTime.parse('2012-12-31T23:59:59.999')
   );
-  test['julysept'] = new TestInterval(
+  data['julysept'] = new TestInterval(
     DateTime.parse('2012-06-01T00:00:00.0'),
     DateTime.parse('2012-09-01T00:00:00.0')
   );
-  test['julydec'] = new TestInterval(
+  data['julydec'] = new TestInterval(
     DateTime.parse('2012-07-01T00:00:00.0'),
     DateTime.parse('2012-12-31T23:59:59.999')
   );
-  test['janjuly'] = new TestInterval(
+  data['janjuly'] = new TestInterval(
     DateTime.parse('2012-01-01T00:00:00.0'),
     DateTime.parse('2012-07-01T00:00:00.0')
   );
-  test['bef2012'] = TestDateTime.parse('2011-06-01T00:00:00.0');
-  test['beg2012'] = TestDateTime.parse('2012-01-01T00:00:00.0');
-  test['mid2012'] = TestDateTime.parse('2012-06-01T00:00:00.0');
-  test['end2012'] = TestDateTime.parse('2012-12-31T23:59:59.999');
-  test['aft2012'] = TestDateTime.parse('2013-06-01T00:00:00.0');
-  test['dIvl'] = {
+  data['bef2012'] = TestDateTime.parse('2011-06-01T00:00:00.0');
+  data['beg2012'] = TestDateTime.parse('2012-01-01T00:00:00.0');
+  data['mid2012'] = TestDateTime.parse('2012-06-01T00:00:00.0');
+  data['end2012'] = TestDateTime.parse('2012-12-31T23:59:59.999');
+  data['aft2012'] = TestDateTime.parse('2013-06-01T00:00:00.0');
+  data['dIvl'] = {
     sameAs: {
       //    |----------X----------|
       //    |----------Y----------|
@@ -166,11 +159,11 @@ module.exports = function (test) {
       )
     }
   };
-  test['zeroToHundred'] = new TestInterval(0, 100);
-  test['zeroToForty'] = new TestInterval(0, 40);
-  test['fortyToSixty'] = new TestInterval(40, 60);
-  test['sixtyToHundred'] = new TestInterval(60, 100);
-  test['iIvl'] = {
+  data['zeroToHundred'] = new TestInterval(0, 100);
+  data['zeroToForty'] = new TestInterval(0, 40);
+  data['fortyToSixty'] = new TestInterval(40, 60);
+  data['sixtyToHundred'] = new TestInterval(60, 100);
+  data['iIvl'] = {
     sameAs: {
       //    |----------X----------|
       //    |----------Y----------|
@@ -214,4 +207,5 @@ module.exports = function (test) {
       y: new TestInterval(0, 100)
     }
   };
+  return data;
 };

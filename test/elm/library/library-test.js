@@ -1,11 +1,3 @@
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
@@ -14,8 +6,8 @@ const { Repository, Code } = require('../../../src/cql');
 
 const { p1, p2 } = require('./patients');
 
-describe('In Age Demographic', function () {
-  this.beforeEach(function () {
+describe('In Age Demographic', () => {
+  beforeEach(function () {
     setup(this, data, [p1, p2]);
     this.results = this.executor.withLibrary(this.lib).exec_patient_context(this.patientSource);
   });
@@ -30,8 +22,8 @@ describe('In Age Demographic', function () {
   });
 });
 
-describe('Using CommonLib', function () {
-  this.beforeEach(function () {
+describe('Using CommonLib', () => {
+  beforeEach(function () {
     setup(this, data, [p1, p2], {}, {}, new Repository(data));
   });
 
@@ -62,8 +54,8 @@ describe('Using CommonLib', function () {
   });
 });
 
-describe('Using CommonLib2', function () {
-  this.beforeEach(function () {
+describe('Using CommonLib2', () => {
+  beforeEach(function () {
     setup(this, data, [], {}, {}, new Repository(data));
   });
 
@@ -110,8 +102,8 @@ describe('Using CommonLib2', function () {
   });
 });
 
-describe('Using CommonLib and CommonLib2', function () {
-  this.beforeEach(function () {
+describe('Using CommonLib and CommonLib2', () => {
+  beforeEach(function () {
     setup(this, data, [p1], {}, {}, new Repository(data));
     this.results = this.executor.withLibrary(this.lib).exec_patient_context(this.patientSource);
     this.commonLocalIdObject = this.results.localIdPatientResultsMap['1'].Common;

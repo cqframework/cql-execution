@@ -1,12 +1,3 @@
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
@@ -17,8 +8,8 @@ const { Uncertainty } = require('../../../src/datatypes/uncertainty');
 const { p1, p2, p3 } = require('./patients');
 const { PatientSource } = require('../../../src/cql-patient');
 
-describe('ValueSetDef', function () {
-  this.beforeEach(function () {
+describe('ValueSetDef', () => {
+  beforeEach(function () {
     setup(this, data, [], vsets);
   });
 
@@ -42,8 +33,8 @@ describe('ValueSetDef', function () {
   });
 });
 
-describe('ValueSetRef', function () {
-  this.beforeEach(function () {
+describe('ValueSetRef', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -56,8 +47,8 @@ describe('ValueSetRef', function () {
   });
 });
 
-describe('InValueSet', function () {
-  this.beforeEach(function () {
+describe('InValueSet', () => {
+  beforeEach(function () {
     setup(this, data, [], vsets);
   });
 
@@ -142,8 +133,8 @@ describe('InValueSet', function () {
   });
 });
 
-describe('Patient Property In ValueSet', function () {
-  this.beforeEach(function () {
+describe('Patient Property In ValueSet', () => {
+  beforeEach(function () {
     setup(this, data, [], vsets);
   });
 
@@ -158,8 +149,8 @@ describe('Patient Property In ValueSet', function () {
   });
 });
 
-describe('CodeDef', function () {
-  this.beforeEach(function () {
+describe('CodeDef', () => {
+  beforeEach(function () {
     setup(this, data, []);
   });
 
@@ -179,8 +170,8 @@ describe('CodeDef', function () {
   });
 });
 
-describe('CodeRef', function () {
-  this.beforeEach(function () {
+describe('CodeRef', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -197,8 +188,8 @@ describe('CodeRef', function () {
   });
 });
 
-describe('ConceptDef', function () {
-  this.beforeEach(function () {
+describe('ConceptDef', () => {
+  beforeEach(function () {
     setup(this, data, []);
   });
 
@@ -220,8 +211,8 @@ describe('ConceptDef', function () {
   });
 });
 
-describe('ConceptRef', function () {
-  this.beforeEach(function () {
+describe('ConceptRef', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -240,8 +231,8 @@ describe('ConceptRef', function () {
   });
 });
 
-describe('CalculateAge', function () {
-  this.beforeEach(function () {
+describe('CalculateAge', () => {
+  beforeEach(function () {
     setup(this, data, [p1]);
     // Note, tests are inexact (otherwise test needs to repeat exact logic we're testing)
     // p1 birth date is 1980-06-17
@@ -278,25 +269,18 @@ describe('CalculateAge', function () {
 
     // what is returned will depend on whether the day in the current month has
     // made it to the 17th day of the month as declared in the birthday
-    const dayOfMonth = this.today;
+    const dayOfMonth = this.today.toJSDate();
     // Test executing on each day of the month (up to 28 for simplicity).
-    (() => {
-      const result = [];
-      for (let i = 1; i <= 28; i++) {
-        dayOfMonth.setDate(i);
-        const month_offset = dayOfMonth.getMonth() === 5 && dayOfMonth.getDate() < 17 ? 6 : 5;
-        const full_months =
-          (dayOfMonth.getFullYear() - 1980) * 12 + (dayOfMonth.getMonth() - month_offset);
-        result.push(
-          [full_months, full_months + 1].indexOf(this.months.exec(this.ctx)).should.not.equal(-1)
-        );
-      }
-      result;
-    })();
+    for (let i = 1; i <= 28; i++) {
+      dayOfMonth.setDate(i);
+      const month_offset = dayOfMonth.getMonth() === 5 && dayOfMonth.getDate() < 17 ? 6 : 5;
+      const full_months =
+        (dayOfMonth.getFullYear() - 1980) * 12 + (dayOfMonth.getMonth() - month_offset);
+      [full_months, full_months + 1].indexOf(this.months.exec(this.ctx)).should.not.equal(-1);
+    }
   });
 
-  // Skipping because cql-to-elm in this branch does not properly translate AgeInWeeks
-  it.skip('should execute age in weeks', function () {
+  it('should execute age in weeks', function () {
     // this is an uncertainty since birthdate is only specfied to days
     this.weeks
       .exec(this.ctx)
@@ -339,8 +323,8 @@ describe('CalculateAge', function () {
   });
 });
 
-describe('CalculateAgeAt', function () {
-  this.beforeEach(function () {
+describe('CalculateAgeAt', () => {
+  beforeEach(function () {
     setup(this, data, [p1]);
   });
 
@@ -366,14 +350,13 @@ describe('CalculateAgeAt', function () {
     this.calculateAgeInYearsDateTimeArg.exec(this.ctx).should.eql(new Uncertainty(17, 18));
   });
 
-  // TODO:unskip these tests after cql-to-elm updated to no longer implicitly convert these arguments
-  xit('should convert birthdate to date, give 18 (using AgeInYearsAt)', function () {
+  it('should convert birthdate to date, give 18 (using AgeInYearsAt)', function () {
     setup(this, data, [p3]);
     this.ageInYearsDateArg.exec(this.ctx).should.eql(18);
   });
 
-  xit('should convert birthdate to date, give 18 (using CalculateAgeInYearsAt)', function () {
+  it('should convert date to DateTime, give 17 (using CalculateAgeInYearsAt)', function () {
     setup(this, data, [p3]);
-    this.calculateAgeInYearsDateArg.exec(this.ctx).should.eql(18);
+    this.calculateAgeInYearsDateArg.exec(this.ctx).should.eql(17);
   });
 });

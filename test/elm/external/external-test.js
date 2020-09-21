@@ -1,23 +1,11 @@
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
 const vsets = require('./valuesets');
 const { p1 } = require('./patients');
 const { Repository } = require('../../../src/cql');
 
-describe('Retrieve', function () {
-  this.beforeEach(function () {
+describe('Retrieve', () => {
+  beforeEach(function () {
     setup(this, data, [p1], vsets, {}, new Repository(data));
   });
 

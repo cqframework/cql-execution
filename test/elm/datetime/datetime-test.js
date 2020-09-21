@@ -1,14 +1,3 @@
-/* eslint-disable
-    no-empty,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
@@ -16,8 +5,8 @@ const DT = require('../../../src/datatypes/datatypes');
 const { PatientContext } = require('../../../src/cql');
 const { Uncertainty } = require('../../../src/datatypes/uncertainty');
 
-describe('DateTime', function () {
-  this.beforeEach(function () {
+describe('DateTime', () => {
+  beforeEach(function () {
     setup(this, data);
     this.defaultOffset = (new Date().getTimezoneOffset() / 60) * -1;
   });
@@ -114,8 +103,8 @@ describe('DateTime', function () {
   });
 });
 
-describe('Time', function () {
-  this.beforeEach(function () {
+describe('Time', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -168,8 +157,8 @@ describe('Time', function () {
   });
 });
 
-describe('Today', function () {
-  this.beforeEach(function () {
+describe('Today', () => {
+  beforeEach(function () {
     setup(this, data);
     this.ctx = new PatientContext(
       this.ctx.library,
@@ -191,22 +180,20 @@ describe('Today', function () {
   });
 
   it('should throw an exception because no execution datetime has been set', function () {
-    try {
-      this.ctx = new PatientContext(
-        this.ctx.library,
-        this.ctx.patient,
-        this.ctx.codeService,
-        this.ctx.parameters,
-        DT.DateTime.fromJSDate(new Date(), '0')
-      );
-      this.ctx.executionDateTime = this.ctx.executionDateTime = null;
-      this.todayVar.exec(this.ctx).should.equal('No Execution DateTime has been set');
-    } catch (error) {}
+    this.ctx = new PatientContext(
+      this.ctx.library,
+      this.ctx.patient,
+      this.ctx.codeService,
+      this.ctx.parameters,
+      DT.DateTime.fromJSDate(new Date(), '0')
+    );
+    this.ctx.executionDateTime = this.ctx.executionDateTime = null;
+    should(() => this.todayVar.exec(this.ctx)).throw('No Execution DateTime has been set');
   });
 });
 
-describe('Now', function () {
-  this.beforeEach(function () {
+describe('Now', () => {
+  beforeEach(function () {
     setup(this, data);
     this.ctx = new PatientContext(
       this.ctx.library,
@@ -272,8 +259,8 @@ describe('Now', function () {
   });
 });
 
-describe('TimeOfDay', function () {
-  this.beforeEach(function () {
+describe('TimeOfDay', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -292,8 +279,8 @@ describe('TimeOfDay', function () {
   });
 });
 
-describe('DateTimeComponentFrom', function () {
-  this.beforeEach(function () {
+describe('DateTimeComponentFrom', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -343,8 +330,8 @@ describe('DateTimeComponentFrom', function () {
   });
 });
 
-describe('DateFrom', function () {
-  this.beforeEach(function () {
+describe('DateFrom', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -376,8 +363,8 @@ describe('DateFrom', function () {
   });
 });
 
-describe('TimeFrom', function () {
-  this.beforeEach(function () {
+describe('TimeFrom', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -410,8 +397,8 @@ describe('TimeFrom', function () {
   });
 });
 
-describe('TimezoneOffsetFrom', function () {
-  this.beforeEach(function () {
+describe('TimezoneOffsetFrom', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -429,8 +416,8 @@ describe('TimezoneOffsetFrom', function () {
   });
 });
 
-describe('SameAs', function () {
-  this.beforeEach(function () {
+describe('SameAs', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -497,8 +484,8 @@ describe('SameAs', function () {
   });
 });
 
-describe('SameOrAfter', function () {
-  this.beforeEach(function () {
+describe('SameOrAfter', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -593,8 +580,8 @@ describe('SameOrAfter', function () {
   });
 });
 
-describe('SameOrBefore', function () {
-  this.beforeEach(function () {
+describe('SameOrBefore', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -689,8 +676,8 @@ describe('SameOrBefore', function () {
   });
 });
 
-describe('After', function () {
-  this.beforeEach(function () {
+describe('After', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -761,8 +748,8 @@ describe('After', function () {
   });
 });
 
-describe('Before', function () {
-  this.beforeEach(function () {
+describe('Before', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -833,8 +820,8 @@ describe('Before', function () {
   });
 });
 
-describe('DifferenceBetween', function () {
-  this.beforeEach(function () {
+describe('DifferenceBetween', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -921,8 +908,8 @@ describe('DifferenceBetween', function () {
   });
 });
 
-describe('DifferenceBetween Comparisons', function () {
-  this.beforeEach(function () {
+describe('DifferenceBetween Comparisons', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -972,8 +959,8 @@ describe('DifferenceBetween Comparisons', function () {
   });
 });
 
-describe('DurationBetween', function () {
-  this.beforeEach(function () {
+describe('DurationBetween', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1064,8 +1051,8 @@ describe('DurationBetween', function () {
   });
 });
 
-describe('DateMath', function () {
-  this.beforeEach(function () {
+describe('DateMath', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -1126,7 +1113,7 @@ describe('DateMath', function () {
   });
 });
 
-var dateCheck = function (date, year, month, day, hour, minute, second, millisecond) {
+function dateCheck(date, year, month, day, hour, minute, second, millisecond) {
   date.year.should.equal(year);
   date.month.should.equal(month);
   date.day.should.equal(day);
@@ -1134,4 +1121,4 @@ var dateCheck = function (date, year, month, day, hour, minute, second, millisec
   date.minute.should.equal(minute);
   date.second.should.equal(second);
   date.millisecond.should.equal(millisecond);
-};
+}

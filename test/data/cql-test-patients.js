@@ -1,27 +1,23 @@
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
 // Born in 1980
-const p1 = {
+const P1 = {
   recordType: 'Patient',
   id: '1',
   name: 'John Smith',
   gender: 'M',
   birthDate: '1980-02-17T06:15'
 };
-module.exports.P1 = p1;
 
 // Born in 2007
-const p2 = {
+const P2 = {
   recordType: 'Patient',
   id: '2',
   name: 'Sally Smith',
   gender: 'F',
   birthDate: '2007-08-02T11:47'
 };
-module.exports.P2 = p2;
 
 // Acute Pharyngitis and ED/Ambulatory Visits
-const p3 = {
+const P3 = {
   recordType: 'Patient',
   id: '3',
   name: 'Bob Jones',
@@ -85,10 +81,9 @@ const p3 = {
     }
   ]
 };
-module.exports.P3 = p3;
 
 // ED/Ambulatory Visit
-const p4 = {
+const P4 = {
   recordType: 'Patient',
   id: '4',
   name: 'Jane Jones',
@@ -108,6 +103,5 @@ const p4 = {
     }
   ]
 };
-module.exports.P4 = p4;
 
-module.exports.P1AndP2 = [p1, p2];
+module.exports = { P1, P2, P3, P4, P1AndP2: [P1, P2] };

@@ -1,23 +1,9 @@
-/* eslint-disable
-    constructor-super,
-    no-constant-condition,
-    no-this-before-super,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS001: Remove Babel/TypeScript constructor workaround
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
 const { equals, equivalent } = require('../../src/util/comparison');
 const { Code, Concept } = require('../../src/datatypes/clinical');
 
-describe('equals', function () {
-  it('should detect equality/inequality for numbers', function () {
+describe('equals', () => {
+  it('should detect equality/inequality for numbers', () => {
     equals(1, 1).should.be.true();
     equals(1, -1).should.be.false();
     equals(5, 2 + 3).should.be.true();
@@ -25,7 +11,7 @@ describe('equals', function () {
     equals(1.2345, 1.23456).should.be.false();
   });
 
-  it('should detect equality/inequality for strings', function () {
+  it('should detect equality/inequality for strings', () => {
     equals('', '').should.be.true();
     equals('a', 'a').should.be.true();
     equals('a', 'A').should.be.false();
@@ -33,7 +19,7 @@ describe('equals', function () {
     equals('abc', 'abcd').should.be.false();
   });
 
-  it('should detect equality/inequality for dates', function () {
+  it('should detect equality/inequality for dates', () => {
     equals(
       new Date(2012, 2, 5, 10, 55, 34, 235),
       new Date(2012, 2, 5, 10, 55, 34, 235)
@@ -56,13 +42,13 @@ describe('equals', function () {
     ).should.be.true();
   });
 
-  it('should detect equality/inequality for regular expressions', function () {
+  it('should detect equality/inequality for regular expressions', () => {
     equals(/\w+\s/g, /\w+\s/g).should.be.true();
     equals(/\w+\s/g, /\w+\s/gi).should.be.false();
     equals(/\w+\s*/g, /\w+\s/g).should.be.false();
   });
 
-  it('should detect equality/inequality for objects', function () {
+  it('should detect equality/inequality for objects', () => {
     equals({}, {}).should.be.true();
     equals({ a: 1, b: 2, c: 3 }, { a: 1, b: 2, c: 3 }).should.be.true();
     equals({ a: 1, b: 2, c: 3 }, { c: 3, b: 2, a: 1 }).should.be.true();
@@ -84,7 +70,7 @@ describe('equals', function () {
     equals({ a: [1, 2, 3], b: [4, 5, 6] }, { a: [3, 2, 1], b: [6, 5, 4] }).should.be.false();
   });
 
-  it('should detect equality/inequality for classes', function () {
+  it('should detect equality/inequality for classes', () => {
     class Foo {
       constructor(prop1, prop2) {
         this.prop1 = prop1;
@@ -110,7 +96,7 @@ describe('equals', function () {
     equals(new Bar('abc', [1, 2, 3]), new Foo('abc', [1, 2, 3])).should.be.false();
   });
 
-  it('should consider an instance equal to itself even if it has null values', function () {
+  it('should consider an instance equal to itself even if it has null values', () => {
     class Foo {
       constructor(prop1, prop2) {
         this.prop1 = prop1;
@@ -122,7 +108,7 @@ describe('equals', function () {
     should(equals(containsNull, containsNull)).be.true();
   });
 
-  it('should delegate to equals method when available', function () {
+  it('should delegate to equals method when available', () => {
     class Int {
       constructor(num) {
         this.num = num;
@@ -154,7 +140,7 @@ describe('equals', function () {
     equals(new StringFriendlyInt(1), new StringFriendlyInt('1')).should.be.true();
   });
 
-  it('should detect equality/inequality for arrays', function () {
+  it('should detect equality/inequality for arrays', () => {
     equals([], []).should.be.true();
     equals([1], [1]).should.be.true();
     equals([1, 2, 3], [1, 2, 3]).should.be.true();
@@ -184,7 +170,7 @@ describe('equals', function () {
     ).should.be.false();
   });
 
-  it('should handle null values', function () {
+  it('should handle null values', () => {
     should.not.exist(equals(null, null));
     should.not.exist(equals(null, 0));
     should.not.exist(equals(0, null));
@@ -199,19 +185,19 @@ describe('equals', function () {
   });
 });
 
-describe('equivalent', function () {
+describe('equivalent', () => {
   it('should consider two null values to be equivalent', () =>
     equivalent(null, null).should.be.true());
 
   it('should consider two undefined values to be equivalent', () =>
     equivalent(undefined, undefined).should.be.true());
 
-  describe('should consider one null code to not be equivalent to a code', function () {
+  describe('should consider one null code to not be equivalent to a code', () => {
     it('if null comes first', () => equivalent(null, new Code('123')).should.be.false());
     it('if null comes second', () => equivalent(new Code('123'), null).should.be.false());
   });
 
-  it('should detect equivalent and non-equivalent codes', function () {
+  it('should detect equivalent and non-equivalent codes', () => {
     equivalent(
       new Code('12345', 'Code System', '2016', 'Display Name'),
       new Code('12345', 'Code System', undefined, undefined)
@@ -230,7 +216,7 @@ describe('equivalent', function () {
   it('should detect if second parameter is not a code and should result to true (not defined in the specification - matches "in ValueSet" and "in CodeSystem")', () =>
     equivalent(new Code('123', 'test', '2016'), '123').should.be.true());
 
-  it('should detect if parameters are not codes and return using equals', function () {
+  it('should detect if parameters are not codes and return using equals', () => {
     equivalent('123', '123').should.be.true();
     equivalent(123, 123).should.be.true();
     equivalent('123', new Code('123', 'test', '2016')).should.be.false();
@@ -242,7 +228,7 @@ describe('equivalent', function () {
       new Code('1234', 'System', '2017', undefined)
     ).should.be.true());
 
-  it('should detect equivalency between code and list of codes', function () {
+  it('should detect equivalency between code and list of codes', () => {
     equivalent(new Code('1234', 'System', 'version2017', 'Display Name'), [
       new Code('1234', 'System', 'version2017', undefined),
       new Code('1', '2', '3', undefined)
@@ -261,7 +247,7 @@ describe('equivalent', function () {
     ]).should.be.false();
   });
 
-  it('should detect equivalency between code and concept of codes', function () {
+  it('should detect equivalency between code and concept of codes', () => {
     equivalent(
       new Code('1234', 'System', 'version2016', 'Display Name'),
       new Concept([
@@ -292,7 +278,7 @@ describe('equivalent', function () {
     ).should.be.false();
   });
 
-  it('should detect equivalence/inequivalence for strings', function () {
+  it('should detect equivalence/inequivalence for strings', () => {
     equivalent('', '').should.be.true();
     equivalent('a', 'a').should.be.true();
     equivalent('réservé', 'RESERVE').should.be.true();

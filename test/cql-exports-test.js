@@ -1,16 +1,3 @@
-/* eslint-disable
-    no-console,
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-const should = require('should');
 const cql = require('../src/cql');
 
 const libNames = [];
@@ -38,8 +25,7 @@ libNames.push(
 describe('CQL Exports', () =>
   libNames.map(libName =>
     (name =>
-      it(`should export ${name}`, function () {
-        console.log('Testing', name);
+      it(`should export ${name}`, () => {
         cql[name].should.be.Function();
         cql[name].name.should.equal(name);
       }))(libName)

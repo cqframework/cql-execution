@@ -1,17 +1,9 @@
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
 
-describe('And', function () {
-  this.beforeEach(function () {
+describe('And', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -34,8 +26,8 @@ describe('And', function () {
   });
 });
 
-describe('Or', function () {
-  this.beforeEach(function () {
+describe('Or', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -58,8 +50,8 @@ describe('Or', function () {
   });
 });
 
-describe('Not', function () {
-  this.beforeEach(function () {
+describe('Not', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -76,8 +68,8 @@ describe('Not', function () {
   });
 });
 
-describe('XOr', function () {
-  this.beforeEach(function () {
+describe('XOr', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -100,8 +92,8 @@ describe('XOr', function () {
   });
 });
 
-describe('IsTrue', function () {
-  this.beforeEach(function () {
+describe('IsTrue', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -118,8 +110,8 @@ describe('IsTrue', function () {
   });
 });
 
-describe('IsFalse', function () {
-  this.beforeEach(function () {
+describe('IsFalse', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 

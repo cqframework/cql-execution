@@ -1,15 +1,3 @@
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
@@ -21,7 +9,6 @@ const {
   doSubtraction,
   parseQuantity
 } = require('../../../src/datatypes/quantity');
-const DT = require('../../../src/datatypes/datatypes');
 
 const validateQuantity = function (object, expectedValue, expectedUnit) {
   object.isQuantity.should.be.true();
@@ -30,42 +17,32 @@ const validateQuantity = function (object, expectedValue, expectedUnit) {
 };
 
 const doQuantityMathTests = function (tests, operator) {
-  const func = (() => {
-    switch (operator) {
-      case '*':
-        return doMultiplication;
-      case '/':
-        return doDivision;
-      case '+':
-        return doAddition;
-      case '-':
-        return doSubtraction;
-    }
-  })();
+  let func;
+  if (operator === '*') {
+    func = doMultiplication;
+  } else if (operator === '/') {
+    func = doDivision;
+  } else if (operator === '+') {
+    func = doAddition;
+  } else if (operator === '-') {
+    func = doSubtraction;
+  }
 
-  (() => {
-    const result = [];
-    for (let x of tests) {
-      const a = parseQuantity(x[0]);
-      const b = parseQuantity(x[1]);
-      // try to parse the expected value but if it comes back null
-      // which it will if there are no units create a new Quantity
-      // with just the exepected as the value with null units
-      const e = parseQuantity(x[2]) || new Quantity(x[2]);
+  for (let t of tests) {
+    const a = parseQuantity(t[0]);
+    const b = parseQuantity(t[1]);
+    // try to parse the expected value but if it comes back null
+    // which it will if there are no units create a new Quantity
+    // with just the exepected as the value with null units
+    const e = parseQuantity(t[2]) || new Quantity(t[2]);
 
-      const res = func(a, b);
-      result.push(
-        e
-          .equals(res)
-          .should.be.true(a + ' ' + operator + ' ' + b + ' should eq ' + e + ' but was ' + res)
-      );
-    }
-    result;
-  })();
+    const res = func(a, b);
+    e.equals(res).should.be.true(`${a} ${operator} ${b} should eq ${e} but was ${res}`);
+  }
 };
 
-describe('Add', function () {
-  this.beforeEach(function () {
+describe('Add', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -86,8 +63,8 @@ describe('Add', function () {
   });
 });
 
-describe('Subtract', function () {
-  this.beforeEach(function () {
+describe('Subtract', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -104,8 +81,8 @@ describe('Subtract', function () {
   });
 });
 
-describe('Multiply', function () {
-  this.beforeEach(function () {
+describe('Multiply', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -122,8 +99,8 @@ describe('Multiply', function () {
   });
 });
 
-describe('Divide', function () {
-  this.beforeEach(function () {
+describe('Divide', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -144,8 +121,8 @@ describe('Divide', function () {
   });
 });
 
-describe('Negate', function () {
-  this.beforeEach(function () {
+describe('Negate', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -154,8 +131,8 @@ describe('Negate', function () {
   });
 });
 
-describe('MathPrecedence', function () {
-  this.beforeEach(function () {
+describe('MathPrecedence', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -168,8 +145,8 @@ describe('MathPrecedence', function () {
   });
 });
 
-describe('Power', function () {
-  this.beforeEach(function () {
+describe('Power', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -178,8 +155,8 @@ describe('Power', function () {
   });
 });
 
-describe('MinValue', function () {
-  this.beforeEach(function () {
+describe('MinValue', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -217,8 +194,8 @@ describe('MinValue', function () {
   });
 });
 
-describe('MaxValue', function () {
-  this.beforeEach(function () {
+describe('MaxValue', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -269,8 +246,8 @@ describe('MaxValue', function () {
   });
 });
 
-describe('TruncatedDivide', function () {
-  this.beforeEach(function () {
+describe('TruncatedDivide', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -280,8 +257,8 @@ describe('TruncatedDivide', function () {
   });
 });
 
-describe('Truncate', function () {
-  this.beforeEach(function () {
+describe('Truncate', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -291,8 +268,8 @@ describe('Truncate', function () {
   });
 });
 
-describe('Floor', function () {
-  this.beforeEach(function () {
+describe('Floor', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -302,8 +279,8 @@ describe('Floor', function () {
   });
 });
 
-describe('Ceiling', function () {
-  this.beforeEach(function () {
+describe('Ceiling', () => {
+  beforeEach(function () {
     setup(this, data);
 
     it('should be able to round up to the closest integer', function () {
@@ -313,8 +290,8 @@ describe('Ceiling', function () {
   });
 });
 
-describe('Ln', function () {
-  this.beforeEach(function () {
+describe('Ln', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -323,8 +300,8 @@ describe('Ln', function () {
   });
 });
 
-describe('Log', function () {
-  this.beforeEach(function () {
+describe('Log', () => {
+  beforeEach(function () {
     setup(this, data);
 
     it('should be able to return the log of a number based on an arbitary base value', function () {
@@ -333,8 +310,8 @@ describe('Log', function () {
   });
 });
 
-describe('Modulo', function () {
-  this.beforeEach(function () {
+describe('Modulo', () => {
+  beforeEach(function () {
     setup(this, data);
 
     it('should be able to return the remainder of a division', function () {
@@ -343,8 +320,8 @@ describe('Modulo', function () {
   });
 });
 
-describe('Abs', function () {
-  this.beforeEach(function () {
+describe('Abs', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -359,8 +336,8 @@ describe('Abs', function () {
   });
 });
 
-describe('Round', function () {
-  this.beforeEach(function () {
+describe('Round', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -374,8 +351,8 @@ describe('Round', function () {
   });
 });
 
-describe('Successor', function () {
-  this.beforeEach(function () {
+describe('Successor', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -472,8 +449,8 @@ describe('Successor', function () {
   });
 });
 
-describe('Predecessor', function () {
-  this.beforeEach(function () {
+describe('Predecessor', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -567,8 +544,8 @@ describe('Predecessor', function () {
   });
 });
 
-describe('Quantity', function () {
-  this.beforeEach(function () {
+describe('Quantity', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -675,12 +652,12 @@ describe('Quantity', function () {
   });
 });
 
-describe('OutOfBounds', function () {
-  this.beforeEach(function () {
+describe('OutOfBounds', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
-  describe('Integer', function () {
+  describe('Integer', () => {
     it('should return null for Add overflow', function () {
       should(this.integerAddOverflow.exec(this.ctx)).be.null();
     });
@@ -734,7 +711,7 @@ describe('OutOfBounds', function () {
     });
   });
 
-  describe('Decimal', function () {
+  describe('Decimal', () => {
     it('should return null for Add overflow', function () {
       should(this.decimalAddOverflow.exec(this.ctx)).be.null();
     });
@@ -788,7 +765,7 @@ describe('OutOfBounds', function () {
     });
   });
 
-  describe('Quantity', function () {
+  describe('Quantity', () => {
     it('should return null for Add overflow', function () {
       should(this.quantityAddOverflow.exec(this.ctx)).be.null();
     });
@@ -834,7 +811,7 @@ describe('OutOfBounds', function () {
     });
   });
 
-  describe('DateTime', function () {
+  describe('DateTime', () => {
     it('should return null for Add overflow', function () {
       should(this.dateTimeAddOverflow.exec(this.ctx)).be.null();
     });
@@ -866,7 +843,7 @@ describe('OutOfBounds', function () {
     });
   });
 
-  describe('Date', function () {
+  describe('Date', () => {
     it('should return null for Add overflow', function () {
       should(this.dateAddOverflow.exec(this.ctx)).be.null();
     });
@@ -898,7 +875,7 @@ describe('OutOfBounds', function () {
     });
   });
 
-  describe('Time', function () {
+  describe('Time', () => {
     it('should return null for Add overflow', function () {
       should(this.timeAddOverflow.exec(this.ctx)).be.null();
     });

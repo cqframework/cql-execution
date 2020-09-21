@@ -1,19 +1,11 @@
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
 
 // TODO: Comparisons for Dates
 
-describe('Equal', function () {
-  this.beforeEach(function () {
+describe('Equal', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -148,8 +140,8 @@ describe('Equal', function () {
   });
 });
 
-describe('NotEqual', function () {
-  this.beforeEach(function () {
+describe('NotEqual', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -272,8 +264,8 @@ describe('NotEqual', function () {
   });
 });
 
-describe('Equivalent', function () {
-  this.beforeEach(function () {
+describe('Equivalent', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -387,7 +379,7 @@ describe('Equivalent', function () {
     this.dateTimeAndDateNotEqual.exec(this.ctx).should.be.false();
   });
 
-  describe('Tuples', function () {
+  describe('Tuples', () => {
     it.skip('should return true for empty tuples', function () {
       // Note: the spec doesn't explicitly define this, expecting behavior to match null ~ null
       this.emptyTuples.exec(this.ctx).should.be.true();
@@ -417,7 +409,7 @@ describe('Equivalent', function () {
     });
   });
 
-  describe('Lists', function () {
+  describe('Lists', () => {
     it('should return true for empty lists', function () {
       this.emptyLists.exec(this.ctx).should.be.true();
     });
@@ -451,7 +443,7 @@ describe('Equivalent', function () {
     });
   });
 
-  describe('Intervals', function () {
+  describe('Intervals', () => {
     it('should return true for null low/high', function () {
       this.emptyInterval.exec(this.ctx).should.be.true();
     });
@@ -473,7 +465,7 @@ describe('Equivalent', function () {
     });
   });
 
-  describe('Lists and Tuples', function () {
+  describe('Lists and Tuples', () => {
     it('should return false for List ~ Tuple', function () {
       this.listAndTuple.exec(this.ctx).should.be.false();
     });
@@ -491,7 +483,7 @@ describe('Equivalent', function () {
     });
   });
 
-  describe('Codes and Concepts', function () {
+  describe('Codes and Concepts', () => {
     it('should return true for same Codes', function () {
       this.sameCodeAndCode.exec(this.ctx).should.be.true();
     });
@@ -526,8 +518,8 @@ describe('Equivalent', function () {
   });
 });
 
-describe('Less', function () {
-  this.beforeEach(function () {
+describe('Less', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -580,8 +572,8 @@ describe('Less', function () {
   });
 });
 
-describe('LessOrEqual', function () {
-  this.beforeEach(function () {
+describe('LessOrEqual', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -634,8 +626,8 @@ describe('LessOrEqual', function () {
   });
 });
 
-describe('Greater', function () {
-  this.beforeEach(function () {
+describe('Greater', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -688,8 +680,8 @@ describe('Greater', function () {
   });
 });
 
-describe('GreaterOrEqual', function () {
-  this.beforeEach(function () {
+describe('GreaterOrEqual', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 

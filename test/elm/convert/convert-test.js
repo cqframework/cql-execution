@@ -1,14 +1,3 @@
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
@@ -16,8 +5,8 @@ const { isNull } = require('../../../src/util/util');
 const { DateTime } = require('../../../src/datatypes/datetime');
 const { Quantity } = require('../../../src/datatypes/quantity');
 
-describe('FromString', function () {
-  this.beforeEach(function () {
+describe('FromString', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -112,8 +101,8 @@ describe('FromString', function () {
   });
 });
 
-describe('FromInteger', function () {
-  this.beforeEach(function () {
+describe('FromInteger', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -134,8 +123,8 @@ describe('FromInteger', function () {
   });
 });
 
-describe('FromQuantity', function () {
-  this.beforeEach(function () {
+describe('FromQuantity', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -158,8 +147,8 @@ describe('FromQuantity', function () {
   });
 });
 
-describe('FromBoolean', function () {
-  this.beforeEach(function () {
+describe('FromBoolean', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -180,8 +169,8 @@ describe('FromBoolean', function () {
   });
 });
 
-describe('FromDateTime', function () {
-  this.beforeEach(function () {
+describe('FromDateTime', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -214,8 +203,8 @@ describe('FromDateTime', function () {
   });
 });
 
-describe('FromDate', function () {
-  this.beforeEach(function () {
+describe('FromDate', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -272,8 +261,8 @@ describe('FromDate', function () {
   });
 });
 
-describe('FromTime', function () {
-  this.beforeEach(function () {
+describe('FromTime', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -288,24 +277,24 @@ describe('FromTime', function () {
   });
 });
 
-describe('FromCode', function () {
-  this.beforeEach(function () {
+describe('FromCode', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
-  it.skip('should convert hepB to a concept', function () {
-    let concept;
-    concept = this.codeConcept.exec(this.ctx);
+  it('should convert hepB to a concept', function () {
+    const concept = this.codeConcept.exec(this.ctx);
+    concept.isConcept.should.be.true();
   });
 
-  it.skip('should convert hepB to a code', function () {
-    let code;
-    code = this.codeCode.exec(this.ctx);
+  it('should convert hepB to a code', function () {
+    const code = this.codeCode.exec(this.ctx);
+    code.isCode.should.be.true();
   });
 });
 
-describe('ToDecimal', function () {
-  this.beforeEach(function () {
+describe('ToDecimal', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -343,8 +332,8 @@ describe('ToDecimal', function () {
   });
 });
 
-describe('ToInteger', function () {
-  this.beforeEach(function () {
+describe('ToInteger', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -369,8 +358,8 @@ describe('ToInteger', function () {
   });
 });
 
-describe('ToQuantity', function () {
-  this.beforeEach(function () {
+describe('ToQuantity', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -391,8 +380,8 @@ describe('ToQuantity', function () {
   });
 });
 
-describe('ToRatio', function () {
-  this.beforeEach(function () {
+describe('ToRatio', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -429,8 +418,8 @@ describe('ToRatio', function () {
   });
 });
 
-describe('ToTime', function () {
-  this.beforeEach(function () {
+describe('ToTime', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -482,8 +471,8 @@ describe('ToTime', function () {
   });
 });
 
-describe('ToBoolean', function () {
-  this.beforeEach(function () {
+describe('ToBoolean', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -512,8 +501,8 @@ describe('ToBoolean', function () {
   });
 });
 
-describe('ToDate', function () {
-  this.beforeEach(function () {
+describe('ToDate', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -554,8 +543,8 @@ describe('ToDate', function () {
   });
 });
 
-describe('ConvertsToBoolean', function () {
-  this.beforeEach(function () {
+describe('ConvertsToBoolean', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -576,8 +565,8 @@ describe('ConvertsToBoolean', function () {
   });
 });
 
-describe('ConvertsToDate', function () {
-  this.beforeEach(function () {
+describe('ConvertsToDate', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -594,8 +583,8 @@ describe('ConvertsToDate', function () {
   });
 });
 
-describe('ConvertsToDateTime', function () {
-  this.beforeEach(function () {
+describe('ConvertsToDateTime', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -616,8 +605,8 @@ describe('ConvertsToDateTime', function () {
   });
 });
 
-describe('ConvertsToDecimal', function () {
-  this.beforeEach(function () {
+describe('ConvertsToDecimal', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -634,8 +623,8 @@ describe('ConvertsToDecimal', function () {
   });
 });
 
-describe('ConvertsToInteger', function () {
-  this.beforeEach(function () {
+describe('ConvertsToInteger', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -652,8 +641,8 @@ describe('ConvertsToInteger', function () {
   });
 });
 
-describe('ConvertsToQuantity', function () {
-  this.beforeEach(function () {
+describe('ConvertsToQuantity', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -682,8 +671,8 @@ describe('ConvertsToQuantity', function () {
   });
 });
 
-describe('ConvertsToRatio', function () {
-  this.beforeEach(function () {
+describe('ConvertsToRatio', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -704,8 +693,8 @@ describe('ConvertsToRatio', function () {
   });
 });
 
-describe('ConvertsToString', function () {
-  this.beforeEach(function () {
+describe('ConvertsToString', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -722,8 +711,8 @@ describe('ConvertsToString', function () {
   });
 });
 
-describe('ConvertsToTime', function () {
-  this.beforeEach(function () {
+describe('ConvertsToTime', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -740,8 +729,8 @@ describe('ConvertsToTime', function () {
   });
 });
 
-describe('ConvertQuantity', function () {
-  this.beforeEach(function () {
+describe('ConvertQuantity', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -766,8 +755,8 @@ describe('ConvertQuantity', function () {
   });
 });
 
-describe('CanConvertQuantity', function () {
-  this.beforeEach(function () {
+describe('CanConvertQuantity', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 

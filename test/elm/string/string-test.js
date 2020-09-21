@@ -1,18 +1,10 @@
-// TODO: This file was created by bulk-decaffeinate.
-// Sanity-check the conversion and remove this comment.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
 const str = require('../../../src/elm/string');
 
-describe('Concat', function () {
-  this.beforeEach(function () {
+describe('Concat', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -38,8 +30,8 @@ describe('Concat', function () {
   });
 });
 
-describe('Combine', function () {
-  this.beforeEach(function () {
+describe('Combine', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -72,8 +64,8 @@ describe('Combine', function () {
   });
 });
 
-describe('Split', function () {
-  this.beforeEach(function () {
+describe('Split', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -99,8 +91,8 @@ describe('Split', function () {
   });
 });
 
-describe('SplitOnMatches', function () {
-  this.beforeEach(function () {
+describe('SplitOnMatches', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -129,8 +121,8 @@ describe('SplitOnMatches', function () {
   });
 });
 
-describe('Matches', function () {
-  this.beforeEach(function () {
+describe('Matches', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -155,8 +147,8 @@ describe('Matches', function () {
   });
 });
 
-describe('Length', function () {
-  this.beforeEach(function () {
+describe('Length', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -173,8 +165,8 @@ describe('Length', function () {
   });
 });
 
-describe('Upper', function () {
-  this.beforeEach(function () {
+describe('Upper', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -199,8 +191,8 @@ describe('Upper', function () {
   });
 });
 
-describe('Lower', function () {
-  this.beforeEach(function () {
+describe('Lower', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -226,8 +218,8 @@ describe('Lower', function () {
 });
 
 // TODO: Verify behavior since its different than JS
-describe('Indexer', function () {
-  this.beforeEach(function () {
+describe('Indexer', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -252,8 +244,8 @@ describe('Indexer', function () {
   });
 });
 
-describe('PositionOf', function () {
-  this.beforeEach(function () {
+describe('PositionOf', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -278,8 +270,8 @@ describe('PositionOf', function () {
   });
 });
 
-describe('Substring', function () {
-  this.beforeEach(function () {
+describe('Substring', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -324,8 +316,8 @@ describe('Substring', function () {
   });
 });
 
-describe('StartsWith', function () {
-  this.beforeEach(function () {
+describe('StartsWith', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
@@ -353,8 +345,8 @@ describe('StartsWith', function () {
   });
 });
 
-describe('EndsWith', function () {
-  this.beforeEach(function () {
+describe('EndsWith', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 

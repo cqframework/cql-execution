@@ -11,6 +11,7 @@ It is strongly recommended to include a person from each of those projects as a 
 - [ ] Tests are included and test edge cases
 - [ ] Tests have been run locally and pass
 - [ ] Code coverage has not gone down and all code touched or added is covered.
+- [ ] Code passes lint and prettier (hint: use `yarn run test:plus` to run tests, lint, and prettier)
 - [ ] All dependent libraries are appropriately updated or have a corresponding PR related to this change
 - [ ] `cql4browsers.js` built with `yarn run build:browserify` if source changed.
 

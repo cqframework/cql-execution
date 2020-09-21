@@ -1,23 +1,10 @@
-/* eslint-disable
-    no-unused-vars,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/* eslint-env mocha */
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
-const { DateTime } = require('../../../src/datatypes/datetime');
 const { Code, Concept } = require('../../../src/datatypes/clinical');
 const { Quantity } = require('../../../src/datatypes/quantity');
 
-describe('Instance', function () {
-  this.beforeEach(function () {
+describe('Instance', () => {
+  beforeEach(function () {
     setup(this, data);
   });
 
