@@ -472,14 +472,24 @@ class CanConvertQuantity extends Expression {
 class Is extends Expression {
   constructor(json) {
     super(json);
-    this.isTypeSpecifier = json.isTypeSpecifier;
+    const typeParse = /^\{(.+)\}(.+)/.exec(json.isTypeSpecifier.name);
+    if (typeParse !== null) {
+      this.typeNamespace = typeParse[1];
+      this.typeName = typeParse[2];
+    }
   }
 
   exec(ctx) {
     const arg = this.execArgs(ctx);
-    if ('_is' in arg) {
-      return arg._is(this.isTypeSpecifier);
+    // This is a (hacky) way to tell if a variable is a JS Primitive (Number, String, etc.)
+    if (arg !== Object(arg)) {
+      // If it is a primitive, just compare its type to the requested type name
+      return typeof(arg) == this.typeName;
+    } else if ('_is' in arg) {
+      // If it's not a primitive, check to see if `_is` is implemented, and return its result
+      return arg._is(this.typeNamespace, this.typeName);
     } else {
+      // If we don't have a way to tell what type it is, fall back to the error from before
       throw new Error(`Patient Source does not support Is operation for localId: ${this.localId}`);
     }
   }

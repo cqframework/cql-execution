@@ -6,6 +6,12 @@ class Record {
     this.id = this.json.id;
   }
 
+  _is(namespace, name) {
+    // Stub out typeHierarchy, because there's no hierarchy in this simple cql-patient exmaple
+    const typeHierarchy = ['Patient', 'DomainResource', 'Resource'];
+    return namespace === 'http://hl7.org/fhir' && typeHierarchy.includes(name);
+  }
+
   _recursiveGet(field) {
     if (field != null && field.indexOf('.') >= 0) {
       const [root, rest] = field.split('.', 2);
