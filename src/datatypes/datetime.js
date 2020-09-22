@@ -1,3 +1,4 @@
+const { BaseDataType } = require('./baseDataType');
 const { Uncertainty } = require('./uncertainty');
 const {
   jsDate,
@@ -7,7 +8,7 @@ const {
 } = require('../util/util');
 const moment = require('moment');
 
-class DateTime {
+class DateTime extends BaseDataType {
   static parse(string) {
     if (string === null) {
       return null;
@@ -92,6 +93,7 @@ class DateTime {
     millisecond = null,
     timezoneOffset
   ) {
+    super();
     // from the spec: If no timezone is specified, the timezone of the evaluation request timestamp is used.
     // NOTE: timezoneOffset will be explicitly null for the Time overload, whereas
     // it will be undefined if simply unspecified
@@ -567,7 +569,7 @@ DateTime.FIELDS = [
   DateTime.Unit.MILLISECOND
 ];
 
-class Date {
+class Date extends BaseDataType {
   static parse(string) {
     if (string === null) {
       return null;
@@ -593,6 +595,7 @@ class Date {
   }
 
   constructor(year = null, month = null, day = null) {
+    super();
     this.year = year;
     this.month = month;
     this.day = day;

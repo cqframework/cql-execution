@@ -1,7 +1,9 @@
+const { BaseDataType } = require('./baseDataType');
 const { typeIsArray } = require('../util/util');
 
-class Code {
+class Code extends BaseDataType {
   constructor(code, system, version, display) {
+    super();
     this.code = code;
     this.system = system;
     this.version = version;
@@ -22,8 +24,9 @@ class Code {
   }
 }
 
-class Concept {
+class Concept extends BaseDataType {
   constructor(codes, display) {
+    super();
     this.codes = codes || [];
     this.display = display;
   }
@@ -37,8 +40,9 @@ class Concept {
   }
 }
 
-class ValueSet {
+class ValueSet extends BaseDataType {
   constructor(oid, version, codes) {
+    super();
     this.oid = oid;
     this.version = version;
     this.codes = codes || [];
@@ -111,8 +115,9 @@ function codesMatch(code1, code2) {
   return code1.code === code2.code && code1.system === code2.system;
 }
 
-class CodeSystem {
+class CodeSystem extends BaseDataType {
   constructor(id, version) {
+    super();
     this.id = id;
     this.version = version;
   }

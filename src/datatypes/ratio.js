@@ -1,5 +1,8 @@
-class Ratio {
+const { BaseDataType } = require('./baseDataType');
+
+class Ratio extends BaseDataType {
   constructor(numerator, denominator) {
+    super();
     this.numerator = numerator;
     this.denominator = denominator;
     if (this.numerator == null) {
