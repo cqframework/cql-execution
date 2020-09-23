@@ -1,4 +1,3 @@
-const { BaseDataType } = require('./baseDataType');
 const { Uncertainty } = require('./uncertainty');
 const { Quantity, doSubtraction } = require('../datatypes/quantity');
 const { ThreeValuedLogic } = require('./logic');
@@ -10,9 +9,8 @@ const {
 } = require('../util/math');
 const cmp = require('../util/comparison');
 
-class Interval extends BaseDataType {
+class Interval {
   constructor(low, high, lowClosed, highClosed) {
-    super();
     this.low = low;
     this.high = high;
     this.lowClosed = lowClosed != null ? lowClosed : true;

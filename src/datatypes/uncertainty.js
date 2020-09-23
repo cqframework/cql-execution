@@ -1,7 +1,6 @@
-const { BaseDataType } = require('./baseDataType');
 const { ThreeValuedLogic } = require('./logic');
 
-class Uncertainty extends BaseDataType {
+class Uncertainty {
   static from(obj) {
     if (obj != null && obj.isUncertainty) {
       return obj;
@@ -11,7 +10,6 @@ class Uncertainty extends BaseDataType {
   }
 
   constructor(low = null, high) {
-    super();
     this.low = low;
     this.high = high;
     const gt = (a, b) => {

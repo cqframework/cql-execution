@@ -1,10 +1,8 @@
-const { BaseDataType } = require('./baseDataType');
 const { decimalAdjust, isValidDecimal, overflowsOrUnderflows } = require('../util/math');
 const ucum = require('ucum');
 
-class Quantity extends BaseDataType {
+class Quantity {
   constructor(value, unit) {
-    super();
     this.value = value;
     this.unit = unit;
     if (this.value == null || isNaN(this.value)) {
