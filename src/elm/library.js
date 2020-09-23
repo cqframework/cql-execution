@@ -67,7 +67,11 @@ class Library {
   }
 
   get(identifier) {
-    return this.expressions[identifier] || this.includes[identifier] || this.functions[identifier][this.functions[identifier].length - 1];
+    return (
+      this.expressions[identifier] ||
+      this.includes[identifier] ||
+      this.functions[identifier][this.functions[identifier].length - 1]
+    );
   }
 
   getValueSet(identifier, libraryName) {

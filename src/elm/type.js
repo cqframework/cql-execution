@@ -484,7 +484,7 @@ class Is extends Expression {
     // This is a (hacky) way to tell if a variable is a JS Primitive (Number, String, etc.)
     if (arg !== Object(arg)) {
       // If it is a primitive, just compare its type to the requested type name
-      return typeof(arg) == this.typeName;
+      return typeof arg == this.typeName;
     } else if ('_is' in arg) {
       // If it's not a primitive, check to see if `_is` is implemented, and return its result
       return arg._is(this.typeNamespace, this.typeName);
