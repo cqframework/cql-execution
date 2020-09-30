@@ -13257,6 +13257,10 @@ var Context = /*#__PURE__*/function () {
   }, {
     key: "matchesNamedTypeSpecifier",
     value: function matchesNamedTypeSpecifier(val, spec) {
+      if (val == null) {
+        return true;
+      }
+
       switch (spec.name) {
         case '{urn:hl7-org:elm-types:r1}Boolean':
           return typeof val === 'boolean';
@@ -14475,7 +14479,7 @@ module.exports = {
 };
 },{}],48:[function(require,module,exports){
 //! moment.js
-//! version : 2.28.0
+//! version : 2.27.0
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 //! license : MIT
 //! momentjs.com
@@ -18880,7 +18884,7 @@ module.exports = {
             eras = this.localeData().eras();
         for (i = 0, l = eras.length; i < l; ++i) {
             // truncate time
-            val = this.clone().startOf('day').valueOf();
+            val = this.startOf('day').valueOf();
 
             if (eras[i].since <= val && val <= eras[i].until) {
                 return eras[i].name;
@@ -18900,7 +18904,7 @@ module.exports = {
             eras = this.localeData().eras();
         for (i = 0, l = eras.length; i < l; ++i) {
             // truncate time
-            val = this.clone().startOf('day').valueOf();
+            val = this.startOf('day').valueOf();
 
             if (eras[i].since <= val && val <= eras[i].until) {
                 return eras[i].narrow;
@@ -18920,7 +18924,7 @@ module.exports = {
             eras = this.localeData().eras();
         for (i = 0, l = eras.length; i < l; ++i) {
             // truncate time
-            val = this.clone().startOf('day').valueOf();
+            val = this.startOf('day').valueOf();
 
             if (eras[i].since <= val && val <= eras[i].until) {
                 return eras[i].abbr;
@@ -18943,7 +18947,7 @@ module.exports = {
             dir = eras[i].since <= eras[i].until ? +1 : -1;
 
             // truncate time
-            val = this.clone().startOf('day').valueOf();
+            val = this.startOf('day').valueOf();
 
             if (
                 (eras[i].since <= val && val <= eras[i].until) ||
@@ -20094,7 +20098,7 @@ module.exports = {
 
     //! moment.js
 
-    hooks.version = '2.28.0';
+    hooks.version = '2.27.0';
 
     setHookCallback(createLocal);
 
