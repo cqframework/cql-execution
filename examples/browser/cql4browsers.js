@@ -151,23 +151,23 @@ var Record = /*#__PURE__*/function () {
 
   _createClass(Record, [{
     key: "_is",
-    value: function _is(namespace, name) {
+    value: function _is(typeSpecifier) {
       return this._typeHierarchy().some(function (t) {
-        return t.namespace === namespace && t.name === name;
+        return t.type === typeSpecifier.type && t.name == typeSpecifier.name;
       });
     }
   }, {
     key: "_typeHierarchy",
     value: function _typeHierarchy() {
       return [{
-        namespace: 'https://github.com/cqframework/cql-execution/simple',
-        name: this.json.recordType
+        name: "{https://github.com/cqframework/cql-execution/simple}".concat(this.json.recordType),
+        type: 'NamedTypeSpecifier'
       }, {
-        namespace: 'https://github.com/cqframework/cql-execution/simple',
-        name: 'Record'
+        name: '{https://github.com/cqframework/cql-execution/simple}Record',
+        type: 'NamedTypeSpecifier'
       }, {
-        namespace: 'urn:hl7-org:elm-types:r1',
-        name: 'Any'
+        name: '{urn:hl7-org:elm-types:r1}Any',
+        type: 'NamedTypeSpecifier'
       }];
     }
   }, {
