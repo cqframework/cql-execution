@@ -289,10 +289,7 @@ class Context {
       default:
         // Use the data model's implementation of _is, if it is available
         if (typeof val._is === 'function') {
-          const matches = /^\{(.+)\}(.+)$/.exec(spec.name);
-          if (matches) {
-            return val._is(matches[1], matches[2]);
-          }
+          return val._is(spec);
         }
         // otherwise just default to true
         return true;
