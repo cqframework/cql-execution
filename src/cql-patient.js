@@ -6,6 +6,26 @@ class Record {
     this.id = this.json.id;
   }
 
+  _is(typeSpecifier) {
+    return this._typeHierarchy().some(
+      t => t.type === typeSpecifier.type && t.name == typeSpecifier.name
+    );
+  }
+
+  _typeHierarchy() {
+    return [
+      {
+        name: `{https://github.com/cqframework/cql-execution/simple}${this.json.recordType}`,
+        type: 'NamedTypeSpecifier'
+      },
+      {
+        name: '{https://github.com/cqframework/cql-execution/simple}Record',
+        type: 'NamedTypeSpecifier'
+      },
+      { name: '{urn:hl7-org:elm-types:r1}Any', type: 'NamedTypeSpecifier' }
+    ];
+  }
+
   _recursiveGet(field) {
     if (field != null && field.indexOf('.') >= 0) {
       const [root, rest] = field.split('.', 2);

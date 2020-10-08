@@ -150,6 +150,27 @@ var Record = /*#__PURE__*/function () {
   }
 
   _createClass(Record, [{
+    key: "_is",
+    value: function _is(typeSpecifier) {
+      return this._typeHierarchy().some(function (t) {
+        return t.type === typeSpecifier.type && t.name == typeSpecifier.name;
+      });
+    }
+  }, {
+    key: "_typeHierarchy",
+    value: function _typeHierarchy() {
+      return [{
+        name: "{https://github.com/cqframework/cql-execution/simple}".concat(this.json.recordType),
+        type: 'NamedTypeSpecifier'
+      }, {
+        name: '{https://github.com/cqframework/cql-execution/simple}Record',
+        type: 'NamedTypeSpecifier'
+      }, {
+        name: '{urn:hl7-org:elm-types:r1}Any',
+        type: 'NamedTypeSpecifier'
+      }];
+    }
+  }, {
     key: "_recursiveGet",
     value: function _recursiveGet(field) {
       if (field != null && field.indexOf('.') >= 0) {
@@ -8352,6 +8373,7 @@ var Library = /*#__PURE__*/function () {
 
     var exprDefs = json.library.statements && json.library.statements.def || [];
     this.expressions = {};
+    this.functions = {};
 
     var _iterator6 = _createForOfIteratorHelper(exprDefs),
         _step6;
@@ -8359,7 +8381,16 @@ var Library = /*#__PURE__*/function () {
     try {
       for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
         var expr = _step6.value;
-        this.expressions[expr.name] = expr.type === 'FunctionDef' ? new FunctionDef(expr) : new ExpressionDef(expr);
+
+        if (expr.type === 'FunctionDef') {
+          if (!this.functions[expr.name]) {
+            this.functions[expr.name] = [];
+          }
+
+          this.functions[expr.name].push(new FunctionDef(expr));
+        } else {
+          this.expressions[expr.name] = new ExpressionDef(expr);
+        }
       } // includes
 
     } catch (err) {
@@ -8390,9 +8421,14 @@ var Library = /*#__PURE__*/function () {
   }
 
   _createClass(Library, [{
+    key: "getFunction",
+    value: function getFunction(identifier) {
+      return this.functions[identifier];
+    }
+  }, {
     key: "get",
     value: function get(identifier) {
-      return this.expressions[identifier] || this.includes[identifier];
+      return this.expressions[identifier] || this.includes[identifier] || this.getFunction(identifier);
     }
   }, {
     key: "getValueSet",
@@ -11051,23 +11087,59 @@ var FunctionRef = /*#__PURE__*/function (_Expression4) {
   _createClass(FunctionRef, [{
     key: "exec",
     value: function exec(ctx) {
-      var functionDef, child_ctx;
+      var functionDefs, child_ctx;
 
       if (this.library) {
         var lib = ctx.get(this.library);
-        functionDef = lib ? lib.get(this.name) : undefined;
+        functionDefs = lib ? lib.getFunction(this.name) : undefined;
         var libCtx = ctx.getLibraryContext(this.library);
         child_ctx = libCtx ? libCtx.childContext() : undefined;
       } else {
-        functionDef = ctx.get(this.name);
+        functionDefs = ctx.get(this.name);
         child_ctx = ctx.childContext();
       }
 
-      var args = this.execArgs(ctx);
+      var args = this.execArgs(ctx); // Filter out functions w/ wrong number of arguments.
 
-      if (args.length !== functionDef.parameters.length) {
-        throw new Error('incorrect number of arguments supplied');
+      functionDefs = functionDefs.filter(function (f) {
+        return f.parameters.length === args.length;
+      }); // If there is still > 1 matching function, filter by argument types
+
+      if (functionDefs.length > 1) {
+        functionDefs = functionDefs.filter(function (f) {
+          var match = true;
+
+          for (var i = 0; i < args.length && match; i++) {
+            if (args[i] !== null) {
+              var operandTypeSpecifier = f.parameters[i].operandTypeSpecifier;
+
+              if (operandTypeSpecifier == null && f.parameters[i].operandType != null) {
+                // convert it to a NamedTypedSpecifier
+                operandTypeSpecifier = {
+                  name: f.parameters[i].operandType,
+                  type: 'NamedTypeSpecifier'
+                };
+              }
+
+              match = ctx.matchesTypeSpecifier(args[i], operandTypeSpecifier);
+            }
+          }
+
+          return match;
+        });
+      } // If there is still > 1 matching function, calculate a score based on quality of matches
+
+
+      if (functionDefs.length > 1) {// TODO
       }
+
+      if (functionDefs.length === 0) {
+        throw new Error('no function with matching signature could be found');
+      } // By this point, we should have only one function, but until implementation is completed,
+      // use the last one (no matter how many still remain)
+
+
+      var functionDef = functionDefs[functionDefs.length - 1];
 
       for (var i = 0; i < functionDef.parameters.length; i++) {
         child_ctx.set(functionDef.parameters[i].name, args[i]);
@@ -11874,8 +11946,17 @@ var As = /*#__PURE__*/function (_Expression) {
     _classCallCheck(this, As);
 
     _this = _super.call(this, json);
-    _this.asType = json.asType;
-    _this.asTypeSpecifier = json.asTypeSpecifier;
+
+    if (json.asTypeSpecifier) {
+      _this.asTypeSpecifier = json.asTypeSpecifier;
+    } else if (json.asType) {
+      // convert it to a NamedTypedSpecifier
+      _this.asTypeSpecifier = {
+        name: json.asType,
+        type: 'NamedTypeSpecifier'
+      };
+    }
+
     _this.strict = json.strict != null ? json.strict : false;
     return _this;
   }
@@ -11883,8 +11964,24 @@ var As = /*#__PURE__*/function (_Expression) {
   _createClass(As, [{
     key: "exec",
     value: function exec(ctx) {
-      // TODO: Currently just returns the arg (which works for null, but probably not others)
-      return this.execArgs(ctx);
+      var arg = this.execArgs(ctx); // If it is null, return null
+
+      if (arg == null) {
+        return null;
+      }
+
+      if (typeof arg._is !== 'function' && !isSystemType(this.asTypeSpecifier)) {
+        // We need an _is implementation in order to check non System types
+        // If this is not found then we should just return the arg to match old functionality.
+        return arg;
+      }
+
+      if (ctx.matchesTypeSpecifier(arg, this.asTypeSpecifier)) {
+        // TODO: request patient source to change type identification
+        return arg;
+      } else {
+        return null;
+      }
     }
   }]);
 
@@ -12694,22 +12791,80 @@ var CanConvertQuantity = /*#__PURE__*/function (_Expression23) {
   return CanConvertQuantity;
 }(Expression);
 
-var Is = /*#__PURE__*/function (_UnimplementedExpress) {
-  _inherits(Is, _UnimplementedExpress);
+var Is = /*#__PURE__*/function (_Expression24) {
+  _inherits(Is, _Expression24);
 
   var _super24 = _createSuper(Is);
 
-  function Is() {
+  function Is(json) {
+    var _this12;
+
     _classCallCheck(this, Is);
 
-    return _super24.apply(this, arguments);
+    _this12 = _super24.call(this, json);
+
+    if (json.isTypeSpecifier) {
+      _this12.isTypeSpecifier = json.isTypeSpecifier;
+    } else if (json.isType) {
+      // Convert it to a NamedTypeSpecifier
+      _this12.isTypeSpecifier = {
+        name: json.isType,
+        type: 'NamedTypeSpecifier'
+      };
+    }
+
+    return _this12;
   }
 
-  return Is;
-}(UnimplementedExpression);
+  _createClass(Is, [{
+    key: "exec",
+    value: function exec(ctx) {
+      var arg = this.execArgs(ctx);
 
-var IntervalTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress2) {
-  _inherits(IntervalTypeSpecifier, _UnimplementedExpress2);
+      if (arg === null) {
+        return false;
+      }
+
+      if (typeof arg._is !== 'function' && !isSystemType(this.isTypeSpecifier)) {
+        // We need an _is implementation in order to check non System types
+        throw new Error("Patient Source does not support Is operation for localId: ".concat(this.localId));
+      }
+
+      return ctx.matchesTypeSpecifier(arg, this.isTypeSpecifier);
+    }
+  }]);
+
+  return Is;
+}(Expression);
+
+function isSystemType(spec) {
+  switch (spec.type) {
+    case 'NamedTypeSpecifier':
+      return spec.name.startsWith('{urn:hl7-org:elm-types:r1}');
+
+    case 'ListTypeSpecifier':
+      return isSystemType(spec.elementType);
+
+    case 'TupleTypeSpecifier':
+      return spec.element.every(function (e) {
+        return isSystemType(e.elementType);
+      });
+
+    case 'IntervalTypeSpecifier':
+      return isSystemType(spec.pointType);
+
+    case 'ChoiceTypeSpecifier':
+      return spec.choice.every(function (c) {
+        return isSystemType(c);
+      });
+
+    default:
+      return false;
+  }
+}
+
+var IntervalTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress) {
+  _inherits(IntervalTypeSpecifier, _UnimplementedExpress);
 
   var _super25 = _createSuper(IntervalTypeSpecifier);
 
@@ -12722,8 +12877,8 @@ var IntervalTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress2) {
   return IntervalTypeSpecifier;
 }(UnimplementedExpression);
 
-var ListTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress3) {
-  _inherits(ListTypeSpecifier, _UnimplementedExpress3);
+var ListTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress2) {
+  _inherits(ListTypeSpecifier, _UnimplementedExpress2);
 
   var _super26 = _createSuper(ListTypeSpecifier);
 
@@ -12736,8 +12891,8 @@ var ListTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress3) {
   return ListTypeSpecifier;
 }(UnimplementedExpression);
 
-var NamedTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress4) {
-  _inherits(NamedTypeSpecifier, _UnimplementedExpress4);
+var NamedTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress3) {
+  _inherits(NamedTypeSpecifier, _UnimplementedExpress3);
 
   var _super27 = _createSuper(NamedTypeSpecifier);
 
@@ -12750,8 +12905,8 @@ var NamedTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress4) {
   return NamedTypeSpecifier;
 }(UnimplementedExpression);
 
-var TupleTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress5) {
-  _inherits(TupleTypeSpecifier, _UnimplementedExpress5);
+var TupleTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress4) {
+  _inherits(TupleTypeSpecifier, _UnimplementedExpress4);
 
   var _super28 = _createSuper(TupleTypeSpecifier);
 
@@ -13069,6 +13224,9 @@ var Context = /*#__PURE__*/function () {
         case 'IntervalTypeSpecifier':
           return this.matchesIntervalTypeSpecifier(val, spec);
 
+        case 'ChoiceTypeSpecifier':
+          return this.matchesChoiceTypeSpecifier(val, spec);
+
         default:
           return true;
         // default to true when we don't know
@@ -13098,8 +13256,21 @@ var Context = /*#__PURE__*/function () {
       return val.isInterval && (val.low == null || this.matchesTypeSpecifier(val.low, spec.pointType)) && (val.high == null || this.matchesTypeSpecifier(val.high, spec.pointType));
     }
   }, {
+    key: "matchesChoiceTypeSpecifier",
+    value: function matchesChoiceTypeSpecifier(val, spec) {
+      var _this4 = this;
+
+      return spec.choice.some(function (c) {
+        return _this4.matchesTypeSpecifier(val, c);
+      });
+    }
+  }, {
     key: "matchesNamedTypeSpecifier",
     value: function matchesNamedTypeSpecifier(val, spec) {
+      if (val == null) {
+        return true;
+      }
+
       switch (spec.name) {
         case '{urn:hl7-org:elm-types:r1}Boolean':
           return typeof val === 'boolean';
@@ -13132,8 +13303,13 @@ var Context = /*#__PURE__*/function () {
           return val && val.isDateTime && val.isTime();
 
         default:
+          // Use the data model's implementation of _is, if it is available
+          if (typeof val._is === 'function') {
+            return val._is(spec);
+          } // otherwise just default to true
+
+
           return true;
-        // TODO: Better checking of custom or complex types
       }
     }
   }, {
@@ -13184,19 +13360,19 @@ var Context = /*#__PURE__*/function () {
   }, {
     key: "matchesListInstanceType",
     value: function matchesListInstanceType(val, list) {
-      var _this4 = this;
+      var _this5 = this;
 
       return typeIsArray(val) && val.every(function (x) {
-        return _this4.matchesInstanceType(x, list.elements[0]);
+        return _this5.matchesInstanceType(x, list.elements[0]);
       });
     }
   }, {
     key: "matchesTupleInstanceType",
     value: function matchesTupleInstanceType(val, tpl) {
-      var _this5 = this;
+      var _this6 = this;
 
       return _typeof(val) === 'object' && !typeIsArray(val) && tpl.elements.every(function (x) {
-        return typeof val[x.name] === 'undefined' || _this5.matchesInstanceType(val[x.name], x.value);
+        return typeof val[x.name] === 'undefined' || _this6.matchesInstanceType(val[x.name], x.value);
       });
     }
   }, {
@@ -13233,17 +13409,17 @@ var PatientContext = /*#__PURE__*/function (_Context) {
   var _super = _createSuper(PatientContext);
 
   function PatientContext(library, patient, codeService, parameters) {
-    var _this6;
+    var _this7;
 
     var executionDateTime = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : dt.DateTime.fromJSDate(new Date());
 
     _classCallCheck(this, PatientContext);
 
-    _this6 = _super.call(this, library, codeService, parameters);
-    _this6.library = library;
-    _this6.patient = patient;
-    _this6.executionDateTime = executionDateTime;
-    return _this6;
+    _this7 = _super.call(this, library, codeService, parameters);
+    _this7.library = library;
+    _this7.patient = patient;
+    _this7.executionDateTime = executionDateTime;
+    return _this7;
   }
 
   _createClass(PatientContext, [{
@@ -13285,17 +13461,17 @@ var UnfilteredContext = /*#__PURE__*/function (_Context2) {
   var _super2 = _createSuper(UnfilteredContext);
 
   function UnfilteredContext(library, results, codeService, parameters) {
-    var _this7;
+    var _this8;
 
     var executionDateTime = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : dt.DateTime.fromJSDate(new Date());
 
     _classCallCheck(this, UnfilteredContext);
 
-    _this7 = _super2.call(this, library, codeService, parameters);
-    _this7.library = library;
-    _this7.results = results;
-    _this7.executionDateTime = executionDateTime;
-    return _this7;
+    _this8 = _super2.call(this, library, codeService, parameters);
+    _this8.library = library;
+    _this8.results = results;
+    _this8.executionDateTime = executionDateTime;
+    return _this8;
   }
 
   _createClass(UnfilteredContext, [{

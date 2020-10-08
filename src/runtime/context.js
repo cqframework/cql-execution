@@ -229,6 +229,8 @@ class Context {
         return this.matchesTupleTypeSpecifier(val, spec);
       case 'IntervalTypeSpecifier':
         return this.matchesIntervalTypeSpecifier(val, spec);
+      case 'ChoiceTypeSpecifier':
+        return this.matchesChoiceTypeSpecifier(val, spec);
       default:
         return true; // default to true when we don't know
     }
@@ -258,7 +260,14 @@ class Context {
     );
   }
 
+  matchesChoiceTypeSpecifier(val, spec) {
+    return spec.choice.some(c => this.matchesTypeSpecifier(val, c));
+  }
+
   matchesNamedTypeSpecifier(val, spec) {
+    if (val == null) {
+      return true;
+    }
     switch (spec.name) {
       case '{urn:hl7-org:elm-types:r1}Boolean':
         return typeof val === 'boolean';
@@ -281,7 +290,12 @@ class Context {
       case '{urn:hl7-org:elm-types:r1}Time':
         return val && val.isDateTime && val.isTime();
       default:
-        return true; // TODO: Better checking of custom or complex types
+        // Use the data model's implementation of _is, if it is available
+        if (typeof val._is === 'function') {
+          return val._is(spec);
+        }
+        // otherwise just default to true
+        return true;
     }
   }
 

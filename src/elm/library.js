@@ -41,9 +41,16 @@ class Library {
     // expressions
     const exprDefs = (json.library.statements && json.library.statements.def) || [];
     this.expressions = {};
+    this.functions = {};
     for (let expr of exprDefs) {
-      this.expressions[expr.name] =
-        expr.type === 'FunctionDef' ? new FunctionDef(expr) : new ExpressionDef(expr);
+      if (expr.type === 'FunctionDef') {
+        if (!this.functions[expr.name]) {
+          this.functions[expr.name] = [];
+        }
+        this.functions[expr.name].push(new FunctionDef(expr));
+      } else {
+        this.expressions[expr.name] = new ExpressionDef(expr);
+      }
     }
     // includes
     const inclDefs = (json.library.includes && json.library.includes.def) || [];
@@ -55,8 +62,14 @@ class Library {
     }
   }
 
+  getFunction(identifier) {
+    return this.functions[identifier];
+  }
+
   get(identifier) {
-    return this.expressions[identifier] || this.includes[identifier];
+    return (
+      this.expressions[identifier] || this.includes[identifier] || this.getFunction(identifier)
+    );
   }
 
   getValueSet(identifier, libraryName) {

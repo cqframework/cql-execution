@@ -1,5 +1,6 @@
 const setup = require('../../setup');
 const data = require('./data');
+const { p1 } = require('./patients');
 
 describe('ExpressionDef', () => {
   beforeEach(function () {
@@ -45,15 +46,56 @@ describe('FunctionDefinitions', () => {
   });
 });
 
-describe.skip('FunctionOverloads', function () {
+describe('FunctionOverloadsWithSingleArgument', function () {
   beforeEach(function () {
     setup(this, data);
   });
 
-  it('should be able to use the function with Integer argument', function () {
+  it('should be able to invoke the correct function based on argument type', function () {
     let e = this.testValue1.exec(this.ctx);
     e.should.equal(2);
     e = this.testValue2.exec(this.ctx);
     e.should.equal('Hello World');
+  });
+});
+
+describe('FunctionOverloadsWithMultipleArguments', function () {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should be able to invoke the correct function based on argument type', function () {
+    let e = this.testValue1.exec(this.ctx);
+    e.should.equal(0);
+    e = this.testValue2.exec(this.ctx);
+    e.should.equal('Goodbye World');
+  });
+});
+
+describe('FunctionOverloadsWithDifferentNumberOfArguments', function () {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should be able to invoke the correct function based on number of arguments', function () {
+    let e = this.testValue1.exec(this.ctx);
+    e.should.equal('Hello World');
+    e = this.testValue2.exec(this.ctx);
+    e.should.equal('Hola World from Spain');
+    e = this.testValue3.exec(this.ctx);
+    e.should.equal('Hello World from England');
+  });
+});
+
+describe('FunctionOverloadsWithArgumentsFromCustomDataModel', function () {
+  beforeEach(function () {
+    setup(this, data, [p1]);
+  });
+
+  it('should be able to invoke the correct function based on argument type', function () {
+    let e = this.testValue1.exec(this.ctx);
+    e.should.equal('Encounter http://cqframework.org/3/1');
+    e = this.testValue2.exec(this.ctx);
+    e.should.equal('Condition http://cqframework.org/3/2');
   });
 });

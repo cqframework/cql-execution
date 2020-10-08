@@ -50,20 +50,51 @@ class FunctionRef extends Expression {
     this.library = json.libraryName;
   }
   exec(ctx) {
-    let functionDef, child_ctx;
+    let functionDefs, child_ctx;
     if (this.library) {
       const lib = ctx.get(this.library);
-      functionDef = lib ? lib.get(this.name) : undefined;
+      functionDefs = lib ? lib.getFunction(this.name) : undefined;
       const libCtx = ctx.getLibraryContext(this.library);
       child_ctx = libCtx ? libCtx.childContext() : undefined;
     } else {
-      functionDef = ctx.get(this.name);
+      functionDefs = ctx.get(this.name);
       child_ctx = ctx.childContext();
     }
     const args = this.execArgs(ctx);
-    if (args.length !== functionDef.parameters.length) {
-      throw new Error('incorrect number of arguments supplied');
+
+    // Filter out functions w/ wrong number of arguments.
+    functionDefs = functionDefs.filter(f => f.parameters.length === args.length);
+    // If there is still > 1 matching function, filter by argument types
+    if (functionDefs.length > 1) {
+      functionDefs = functionDefs.filter(f => {
+        let match = true;
+        for (let i = 0; i < args.length && match; i++) {
+          if (args[i] !== null) {
+            let operandTypeSpecifier = f.parameters[i].operandTypeSpecifier;
+            if (operandTypeSpecifier == null && f.parameters[i].operandType != null) {
+              // convert it to a NamedTypedSpecifier
+              operandTypeSpecifier = {
+                name: f.parameters[i].operandType,
+                type: 'NamedTypeSpecifier'
+              };
+            }
+            match = ctx.matchesTypeSpecifier(args[i], operandTypeSpecifier);
+          }
+        }
+        return match;
+      });
     }
+    // If there is still > 1 matching function, calculate a score based on quality of matches
+    if (functionDefs.length > 1) {
+      // TODO
+    }
+
+    if (functionDefs.length === 0) {
+      throw new Error('no function with matching signature could be found');
+    }
+    // By this point, we should have only one function, but until implementation is completed,
+    // use the last one (no matter how many still remain)
+    const functionDef = functionDefs[functionDefs.length - 1];
     for (let i = 0; i < functionDef.parameters.length; i++) {
       child_ctx.set(functionDef.parameters[i].name, args[i]);
     }
