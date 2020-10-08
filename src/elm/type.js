@@ -11,14 +11,35 @@ const { Ratio } = require('../datatypes/ratio');
 class As extends Expression {
   constructor(json) {
     super(json);
-    this.asType = json.asType;
-    this.asTypeSpecifier = json.asTypeSpecifier;
+    if (json.asTypeSpecifier) {
+      this.asTypeSpecifier = json.asTypeSpecifier;
+    } else if (json.asType) {
+      // convert it to a NamedTypedSpecifier
+      this.asTypeSpecifier = {
+        name: json.asType,
+        type: 'NamedTypeSpecifier'
+      };
+    }
     this.strict = json.strict != null ? json.strict : false;
   }
 
   exec(ctx) {
-    // TODO: Currently just returns the arg (which works for null, but probably not others)
-    return this.execArgs(ctx);
+    const arg = this.execArgs(ctx);
+    // If it is null, return null
+    if (arg == null) {
+      return null;
+    }
+    if (typeof arg._is !== 'function' && !isSystemType(this.asTypeSpecifier)) {
+      // We need an _is implementation in order to check non System types
+      // If this is not found then we should just return the arg to match old functionality.
+      return arg;
+    }
+    if (ctx.matchesTypeSpecifier(arg, this.asTypeSpecifier)) {
+      // TODO: request patient source to change type identification
+      return arg;
+    } else {
+      return null;
+    }
   }
 }
 
@@ -485,6 +506,9 @@ class Is extends Expression {
 
   exec(ctx) {
     const arg = this.execArgs(ctx);
+    if (arg === null) {
+      return false;
+    }
     if (typeof arg._is !== 'function' && !isSystemType(this.isTypeSpecifier)) {
       // We need an _is implementation in order to check non System types
       throw new Error(`Patient Source does not support Is operation for localId: ${this.localId}`);
