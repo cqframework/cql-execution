@@ -6,18 +6,23 @@ class Record {
     this.id = this.json.id;
   }
 
-  _is(namespace, name) {
-    return this._typeHierarchy().some(t => t.namespace === namespace && t.name === name);
+  _is(typeSpecifier) {
+    return this._typeHierarchy().some(
+      t => t.type === typeSpecifier.type && t.name == typeSpecifier.name
+    );
   }
 
   _typeHierarchy() {
     return [
       {
-        namespace: 'https://github.com/cqframework/cql-execution/simple',
-        name: this.json.recordType
+        name: `{https://github.com/cqframework/cql-execution/simple}${this.json.recordType}`,
+        type: 'NamedTypeSpecifier'
       },
-      { namespace: 'https://github.com/cqframework/cql-execution/simple', name: 'Record' },
-      { namespace: 'urn:hl7-org:elm-types:r1', name: 'Any' }
+      {
+        name: '{https://github.com/cqframework/cql-execution/simple}Record',
+        type: 'NamedTypeSpecifier'
+      },
+      { name: '{urn:hl7-org:elm-types:r1}Any', type: 'NamedTypeSpecifier' }
     ];
   }
 
