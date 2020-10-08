@@ -63,14 +63,12 @@ class Library {
   }
 
   getFunction(identifier) {
-    return this.functions[identifier][0];
+    return this.functions[identifier];
   }
 
   get(identifier) {
     return (
-      this.expressions[identifier] ||
-      this.includes[identifier] ||
-      this.functions[identifier][this.functions[identifier].length - 1]
+      this.expressions[identifier] || this.includes[identifier] || this.getFunction(identifier)
     );
   }
 

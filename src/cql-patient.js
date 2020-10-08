@@ -7,9 +7,18 @@ class Record {
   }
 
   _is(namespace, name) {
-    // Stub out typeHierarchy, because there's no hierarchy in this simple cql-patient exmaple
-    const typeHierarchy = ['Patient', 'DomainResource', 'Resource'];
-    return namespace === 'http://hl7.org/fhir' && typeHierarchy.includes(name);
+    return this._typeHierarchy().some(t => t.namespace === namespace && t.name === name);
+  }
+
+  _typeHierarchy() {
+    return [
+      {
+        namespace: 'https://github.com/cqframework/cql-execution/simple',
+        name: this.json.recordType
+      },
+      { namespace: 'https://github.com/cqframework/cql-execution/simple', name: 'Record' },
+      { namespace: 'urn:hl7-org:elm-types:r1', name: 'Any' }
+    ];
   }
 
   _recursiveGet(field) {

@@ -472,26 +472,41 @@ class CanConvertQuantity extends Expression {
 class Is extends Expression {
   constructor(json) {
     super(json);
-    const typeParse = /^\{(.+)\}(.+)/.exec(json.isTypeSpecifier.name);
-    if (typeParse !== null) {
-      this.typeNamespace = typeParse[1];
-      this.typeName = typeParse[2];
+    if (json.isTypeSpecifier) {
+      this.isTypeSpecifier = json.isTypeSpecifier;
+    } else if (json.isType) {
+      // Convert it to a NamedTypeSpecifier
+      this.isTypeSpecifier = {
+        name: json.isType,
+        type: 'NamedTypeSpecifier'
+      };
     }
   }
 
   exec(ctx) {
     const arg = this.execArgs(ctx);
-    // This is a (hacky) way to tell if a variable is a JS Primitive (Number, String, etc.)
-    if (arg !== Object(arg)) {
-      // If it is a primitive, just compare its type to the requested type name
-      return typeof arg == this.typeName;
-    } else if ('_is' in arg) {
-      // If it's not a primitive, check to see if `_is` is implemented, and return its result
-      return arg._is(this.typeNamespace, this.typeName);
-    } else {
-      // If we don't have a way to tell what type it is, fall back to the error from before
+    if (typeof arg._is !== 'function' && !isSystemType(this.isTypeSpecifier)) {
+      // We need an _is implementation in order to check non System types
       throw new Error(`Patient Source does not support Is operation for localId: ${this.localId}`);
     }
+    return ctx.matchesTypeSpecifier(arg, this.isTypeSpecifier);
+  }
+}
+
+function isSystemType(spec) {
+  switch (spec.type) {
+    case 'NamedTypeSpecifier':
+      return spec.name.startsWith('{urn:hl7-org:elm-types:r1}');
+    case 'ListTypeSpecifier':
+      return isSystemType(spec.elementType);
+    case 'TupleTypeSpecifier':
+      return spec.element.every(e => isSystemType(e.elementType));
+    case 'IntervalTypeSpecifier':
+      return isSystemType(spec.pointType);
+    case 'ChoiceTypeSpecifier':
+      return spec.choice.every(c => isSystemType(c));
+    default:
+      return false;
   }
 }
 
