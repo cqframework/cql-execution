@@ -265,6 +265,9 @@ class Context {
   }
 
   matchesNamedTypeSpecifier(val, spec) {
+    if (val == null) {
+      return true;
+    }
     switch (spec.name) {
       case '{urn:hl7-org:elm-types:r1}Boolean':
         return typeof val === 'boolean';

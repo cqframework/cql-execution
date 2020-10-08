@@ -11110,7 +11110,9 @@ var FunctionRef = /*#__PURE__*/function (_Expression4) {
           var match = true;
 
           for (var i = 0; i < args.length && match; i++) {
-            match = ctx.matchesTypeSpecifier(args[i], f.parameters[i].operandTypeSpecifier);
+            if (args[i] !== null) {
+              match = ctx.matchesTypeSpecifier(args[i], f.parameters[i].operandTypeSpecifier);
+            }
           }
 
           return match;
@@ -11934,8 +11936,17 @@ var As = /*#__PURE__*/function (_Expression) {
     _classCallCheck(this, As);
 
     _this = _super.call(this, json);
-    _this.asType = json.asType;
-    _this.asTypeSpecifier = json.asTypeSpecifier;
+
+    if (json.asTypeSpecifier) {
+      _this.asTypeSpecifier = json.asTypeSpecifier;
+    } else if (json.asType) {
+      // convert it to a NamedTypedSpecifier
+      _this.asTypeSpecifier = {
+        name: json.asType,
+        type: 'NamedTypeSpecifier'
+      };
+    }
+
     _this.strict = json.strict != null ? json.strict : false;
     return _this;
   }
@@ -11943,8 +11954,24 @@ var As = /*#__PURE__*/function (_Expression) {
   _createClass(As, [{
     key: "exec",
     value: function exec(ctx) {
-      // TODO: Currently just returns the arg (which works for null, but probably not others)
-      return this.execArgs(ctx);
+      var arg = this.execArgs(ctx); // If it is null, return null
+
+      if (arg == null) {
+        return null;
+      }
+
+      if (typeof arg._is !== 'function' && !isSystemType(this.asTypeSpecifier)) {
+        // We need an _is implementation in order to check non System types
+        // If this is not found then we should just return the arg to match old functionality.
+        return arg;
+      }
+
+      if (ctx.matchesTypeSpecifier(arg, this.asTypeSpecifier)) {
+        // TODO: request patient source to change type identification
+        return arg;
+      } else {
+        return null;
+      }
     }
   }]);
 
@@ -12784,6 +12811,10 @@ var Is = /*#__PURE__*/function (_Expression24) {
     value: function exec(ctx) {
       var arg = this.execArgs(ctx);
 
+      if (arg === null) {
+        return false;
+      }
+
       if (typeof arg._is !== 'function' && !isSystemType(this.isTypeSpecifier)) {
         // We need an _is implementation in order to check non System types
         throw new Error("Patient Source does not support Is operation for localId: ".concat(this.localId));
@@ -13226,6 +13257,10 @@ var Context = /*#__PURE__*/function () {
   }, {
     key: "matchesNamedTypeSpecifier",
     value: function matchesNamedTypeSpecifier(val, spec) {
+      if (val == null) {
+        return true;
+      }
+
       switch (spec.name) {
         case '{urn:hl7-org:elm-types:r1}Boolean':
           return typeof val === 'boolean';

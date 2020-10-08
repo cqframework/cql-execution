@@ -69,7 +69,9 @@ class FunctionRef extends Expression {
       functionDefs = functionDefs.filter(f => {
         let match = true;
         for (let i = 0; i < args.length && match; i++) {
-          match = ctx.matchesTypeSpecifier(args[i], f.parameters[i].operandTypeSpecifier);
+          if (args[i] !== null) {
+            match = ctx.matchesTypeSpecifier(args[i], f.parameters[i].operandTypeSpecifier);
+          }
         }
         return match;
       });
