@@ -11111,7 +11111,17 @@ var FunctionRef = /*#__PURE__*/function (_Expression4) {
 
           for (var i = 0; i < args.length && match; i++) {
             if (args[i] !== null) {
-              match = ctx.matchesTypeSpecifier(args[i], f.parameters[i].operandTypeSpecifier);
+              var operandTypeSpecifier = f.parameters[i].operandTypeSpecifier;
+
+              if (operandTypeSpecifier == null && f.parameters[i].operandType != null) {
+                // convert it to a NamedTypedSpecifier
+                operandTypeSpecifier = {
+                  name: f.parameters[i].operandType,
+                  type: 'NamedTypeSpecifier'
+                };
+              }
+
+              match = ctx.matchesTypeSpecifier(args[i], operandTypeSpecifier);
             }
           }
 
