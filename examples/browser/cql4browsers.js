@@ -10256,12 +10256,15 @@ var ParameterDef = /*#__PURE__*/function (_Expression) {
       // If context parameters contains the name, return value.
       if (ctx && ctx.parameters[this.name] !== undefined) {
         return ctx.parameters[this.name]; // If the parent context contains the name, return that value
-      } else if (ctx.parent && ctx.getParentParameter(this.name) !== undefined) {
-        return ctx.getParentParameter(this.name); // If default type exists, execute the default type
+      } else if (ctx.getParentParameter(this.name) !== null) {
+        if (ctx.getParentParameter(this.name).execute !== undefined) {
+          return ctx.getParentParameter(this.name).execute(ctx);
+        } else {
+          return ctx.getParentParameter(this.name);
+        } // If default type exists, execute the default type
+
       } else if (this.default != null) {
-        return this.default != null ? this.default.execute(ctx) : undefined; // Else, if context and context's parent exist return the value of the parent's parameters with the given name.
-      } else {
-        return ctx.getParentParameter(this.name);
+        return this.default != null ? this.default.execute(ctx) : undefined;
       }
     }
   }]);
