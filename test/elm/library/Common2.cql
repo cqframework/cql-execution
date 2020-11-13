@@ -2,6 +2,7 @@
 library Common2
 using Simple version '1.0.0'
 parameter SomeNumber default 17
+parameter AnotherNumber default 20
 
 context Patient
 
@@ -10,6 +11,12 @@ define TheParameter:
 
 define function addToParameter(a Integer):
   SomeNumber + a
+
+define AnotherParameter:
+  AnotherNumber
+
+define function addToAnotherParameter(a Integer):
+  AnotherNumber + a
 
 define function multiply(a Integer, b Integer) :
   a * b
