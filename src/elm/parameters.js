@@ -13,6 +13,9 @@ class ParameterDef extends Expression {
     // If context parameters contains the name, return value.
     if (ctx && ctx.parameters[this.name] !== undefined) {
       return ctx.parameters[this.name];
+      // If the parent context contains the name, return that value
+    } else if (ctx.parent && ctx.getParentParameter(this.name) !== undefined) {
+      return ctx.getParentParameter(this.name);
       // If default type exists, execute the default type
     } else if (this.default != null) {
       return this.default != null ? this.default.execute(ctx) : undefined;
