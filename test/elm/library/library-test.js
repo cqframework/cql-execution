@@ -88,7 +88,9 @@ describe('Using CommonLib2', () => {
   });
 
   it('should execute sent-in parameter from included library', function () {
-    this.exprUsesAnotherParamDirectly.exec(this.ctx.withParameters({ AnotherNumber: 73 })).should.equal(73);
+    this.exprUsesAnotherParamDirectly
+      .exec(this.ctx.withParameters({ AnotherNumber: 73 }))
+      .should.equal(73);
   });
 
   it('should execute function from included library that uses parameter', function () {
