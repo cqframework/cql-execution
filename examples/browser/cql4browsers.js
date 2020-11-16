@@ -10260,7 +10260,7 @@ var ParameterDef = /*#__PURE__*/function (_Expression) {
         var parentParam = ctx.getParentParameter(this.name);
         return parentParam.default != null ? parentParam.default.execute(ctx) : parentParam; // If default type exists, execute the default type
       } else if (this.default != null) {
-        return this.default != null ? this.default.execute(ctx) : undefined;
+        this.default.execute(ctx);
       }
     }
   }]);
