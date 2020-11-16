@@ -56,7 +56,7 @@ describe('Using CommonLib', () => {
 
 describe('Using CommonLib2', () => {
   beforeEach(function () {
-    setup(this, data, [], {}, {}, new Repository(data));
+    setup(this, data, [], {}, { AnotherNumber: 50 }, new Repository(data));
   });
 
   it('should execute expression from included library that uses parameter', function () {
@@ -73,6 +73,24 @@ describe('Using CommonLib2', () => {
 
   it('should execute sent-in parameter from included library', function () {
     this.exprUsesParamDirectly.exec(this.ctx.withParameters({ SomeNumber: 73 })).should.equal(73);
+  });
+
+  it('should execute expression from included library that uses parameter', function () {
+    this.exprUsesAnotherParam.exec(this.ctx).should.equal(50);
+  });
+
+  it('should execute expression from included library that uses sent-in parameter', function () {
+    this.exprUsesAnotherParam.exec(this.ctx.withParameters({ AnotherNumber: 66 })).should.equal(66);
+  });
+
+  it('should execute parameter from included library', function () {
+    this.exprUsesAnotherParamDirectly.exec(this.ctx).should.equal(50);
+  });
+
+  it('should execute sent-in parameter from included library', function () {
+    this.exprUsesAnotherParamDirectly
+      .exec(this.ctx.withParameters({ AnotherNumber: 73 }))
+      .should.equal(73);
   });
 
   it('should execute function from included library that uses parameter', function () {

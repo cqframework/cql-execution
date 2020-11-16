@@ -45,6 +45,7 @@ define supportLibCode: common."directReferenceCode"
 library Common2
 using Simple version '1.0.0'
 parameter SomeNumber default 17
+parameter AnotherNumber default 20
 
 context Patient
 
@@ -53,6 +54,12 @@ define TheParameter:
 
 define function addToParameter(a Integer):
   SomeNumber + a
+
+define AnotherParameter:
+  AnotherNumber
+
+define function addToAnotherParameter(a Integer):
+  AnotherNumber + a
 
 define function multiply(a Integer, b Integer) :
   a * b
@@ -83,6 +90,9 @@ context Patient
 
 define ExprUsesParam: common2.TheParameter
 define ExprUsesParamDirectly: common2.SomeNumber
+define ExprUsesAnotherParam: common2.AnotherParameter
+define ExprUsesAnotherParamDirectly: common2.AnotherNumber
+define FuncUsesAnotherParam: common2.addToAnotherParameter(5)
 define FuncUsesParam: common2.addToParameter(5)
 define ExprCallsFunc: common2.TwoTimesThree
 define FuncCallsFunc: common2.square(5)

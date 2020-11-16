@@ -980,6 +980,7 @@ module.exports['Using CommonLib'] = {
 library Common2
 using Simple version '1.0.0'
 parameter SomeNumber default 17
+parameter AnotherNumber default 20
 
 context Patient
 
@@ -988,6 +989,12 @@ define TheParameter:
 
 define function addToParameter(a Integer):
   SomeNumber + a
+
+define AnotherParameter:
+  AnotherNumber
+
+define function addToAnotherParameter(a Integer):
+  AnotherNumber + a
 
 define function multiply(a Integer, b Integer) :
   a * b
@@ -1046,6 +1053,16 @@ module.exports['CommonLib2'] = {
                "value" : "17",
                "type" : "Literal"
             }
+         }, {
+            "localId" : "5",
+            "name" : "AnotherNumber",
+            "accessLevel" : "Public",
+            "default" : {
+               "localId" : "4",
+               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+               "value" : "20",
+               "type" : "Literal"
+            }
          } ]
       },
       "statements" : {
@@ -1060,18 +1077,18 @@ module.exports['CommonLib2'] = {
                }
             }
          }, {
-            "localId" : "5",
+            "localId" : "7",
             "name" : "TheParameter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "5",
+                  "r" : "7",
                   "s" : [ {
                      "value" : [ "define ","TheParameter",":\n  " ]
                   }, {
-                     "r" : "4",
+                     "r" : "6",
                      "s" : [ {
                         "value" : [ "SomeNumber" ]
                      } ]
@@ -1079,12 +1096,12 @@ module.exports['CommonLib2'] = {
                }
             } ],
             "expression" : {
-               "localId" : "4",
+               "localId" : "6",
                "name" : "SomeNumber",
                "type" : "ParameterRef"
             }
          }, {
-            "localId" : "10",
+            "localId" : "12",
             "name" : "addToParameter",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1092,29 +1109,29 @@ module.exports['CommonLib2'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "10",
+                  "r" : "12",
                   "s" : [ {
                      "value" : [ "define function ","addToParameter","(","a"," " ]
                   }, {
-                     "r" : "6",
+                     "r" : "8",
                      "s" : [ {
                         "value" : [ "Integer" ]
                      } ]
                   }, {
                      "value" : [ "):\n  " ]
                   }, {
-                     "r" : "9",
+                     "r" : "11",
                      "s" : [ {
-                        "r" : "9",
+                        "r" : "11",
                         "s" : [ {
-                           "r" : "7",
+                           "r" : "9",
                            "s" : [ {
                               "value" : [ "SomeNumber" ]
                            } ]
                         }, {
                            "value" : [ " + " ]
                         }, {
-                           "r" : "8",
+                           "r" : "10",
                            "s" : [ {
                               "value" : [ "a" ]
                            } ]
@@ -1124,14 +1141,14 @@ module.exports['CommonLib2'] = {
                }
             } ],
             "expression" : {
-               "localId" : "9",
+               "localId" : "11",
                "type" : "Add",
                "operand" : [ {
-                  "localId" : "7",
+                  "localId" : "9",
                   "name" : "SomeNumber",
                   "type" : "ParameterRef"
                }, {
-                  "localId" : "8",
+                  "localId" : "10",
                   "name" : "a",
                   "type" : "OperandRef"
                } ]
@@ -1139,13 +1156,98 @@ module.exports['CommonLib2'] = {
             "operand" : [ {
                "name" : "a",
                "operandTypeSpecifier" : {
-                  "localId" : "6",
+                  "localId" : "8",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "16",
+            "localId" : "14",
+            "name" : "AnotherParameter",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "14",
+                  "s" : [ {
+                     "value" : [ "define ","AnotherParameter",":\n  " ]
+                  }, {
+                     "r" : "13",
+                     "s" : [ {
+                        "value" : [ "AnotherNumber" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "13",
+               "name" : "AnotherNumber",
+               "type" : "ParameterRef"
+            }
+         }, {
+            "localId" : "19",
+            "name" : "addToAnotherParameter",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "19",
+                  "s" : [ {
+                     "value" : [ "define function ","addToAnotherParameter","(","a"," " ]
+                  }, {
+                     "r" : "15",
+                     "s" : [ {
+                        "value" : [ "Integer" ]
+                     } ]
+                  }, {
+                     "value" : [ "):\n  " ]
+                  }, {
+                     "r" : "18",
+                     "s" : [ {
+                        "r" : "18",
+                        "s" : [ {
+                           "r" : "16",
+                           "s" : [ {
+                              "value" : [ "AnotherNumber" ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "17",
+                           "s" : [ {
+                              "value" : [ "a" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "18",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "16",
+                  "name" : "AnotherNumber",
+                  "type" : "ParameterRef"
+               }, {
+                  "localId" : "17",
+                  "name" : "a",
+                  "type" : "OperandRef"
+               } ]
+            },
+            "operand" : [ {
+               "name" : "a",
+               "operandTypeSpecifier" : {
+                  "localId" : "15",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "localId" : "25",
             "name" : "multiply",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1153,36 +1255,36 @@ module.exports['CommonLib2'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "16",
+                  "r" : "25",
                   "s" : [ {
                      "value" : [ "define function ","multiply","(","a"," " ]
                   }, {
-                     "r" : "11",
+                     "r" : "20",
                      "s" : [ {
                         "value" : [ "Integer" ]
                      } ]
                   }, {
                      "value" : [ ", ","b"," " ]
                   }, {
-                     "r" : "12",
+                     "r" : "21",
                      "s" : [ {
                         "value" : [ "Integer" ]
                      } ]
                   }, {
                      "value" : [ ") :\n  " ]
                   }, {
-                     "r" : "15",
+                     "r" : "24",
                      "s" : [ {
-                        "r" : "15",
+                        "r" : "24",
                         "s" : [ {
-                           "r" : "13",
+                           "r" : "22",
                            "s" : [ {
                               "value" : [ "a" ]
                            } ]
                         }, {
                            "value" : [ " * " ]
                         }, {
-                           "r" : "14",
+                           "r" : "23",
                            "s" : [ {
                               "value" : [ "b" ]
                            } ]
@@ -1192,14 +1294,14 @@ module.exports['CommonLib2'] = {
                }
             } ],
             "expression" : {
-               "localId" : "15",
+               "localId" : "24",
                "type" : "Multiply",
                "operand" : [ {
-                  "localId" : "13",
+                  "localId" : "22",
                   "name" : "a",
                   "type" : "OperandRef"
                }, {
-                  "localId" : "14",
+                  "localId" : "23",
                   "name" : "b",
                   "type" : "OperandRef"
                } ]
@@ -1207,20 +1309,20 @@ module.exports['CommonLib2'] = {
             "operand" : [ {
                "name" : "a",
                "operandTypeSpecifier" : {
-                  "localId" : "11",
+                  "localId" : "20",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }, {
                "name" : "b",
                "operandTypeSpecifier" : {
-                  "localId" : "12",
+                  "localId" : "21",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "21",
+            "localId" : "30",
             "name" : "square",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1228,31 +1330,31 @@ module.exports['CommonLib2'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "21",
+                  "r" : "30",
                   "s" : [ {
                      "value" : [ "define function ","square","(","a"," " ]
                   }, {
-                     "r" : "17",
+                     "r" : "26",
                      "s" : [ {
                         "value" : [ "Integer" ]
                      } ]
                   }, {
                      "value" : [ "):\n  " ]
                   }, {
-                     "r" : "20",
+                     "r" : "29",
                      "s" : [ {
-                        "r" : "20",
+                        "r" : "29",
                         "s" : [ {
                            "value" : [ "multiply","(" ]
                         }, {
-                           "r" : "18",
+                           "r" : "27",
                            "s" : [ {
                               "value" : [ "a" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "19",
+                           "r" : "28",
                            "s" : [ {
                               "value" : [ "a" ]
                            } ]
@@ -1264,15 +1366,15 @@ module.exports['CommonLib2'] = {
                }
             } ],
             "expression" : {
-               "localId" : "20",
+               "localId" : "29",
                "name" : "multiply",
                "type" : "FunctionRef",
                "operand" : [ {
-                  "localId" : "18",
+                  "localId" : "27",
                   "name" : "a",
                   "type" : "OperandRef"
                }, {
-                  "localId" : "19",
+                  "localId" : "28",
                   "name" : "a",
                   "type" : "OperandRef"
                } ]
@@ -1280,70 +1382,70 @@ module.exports['CommonLib2'] = {
             "operand" : [ {
                "name" : "a",
                "operandTypeSpecifier" : {
-                  "localId" : "17",
+                  "localId" : "26",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "25",
+            "localId" : "34",
             "name" : "TwoTimesThree",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "25",
+                  "r" : "34",
                   "s" : [ {
                      "value" : [ "define ","TwoTimesThree",":\n  " ]
                   }, {
-                     "r" : "24",
+                     "r" : "33",
                      "s" : [ {
-                        "r" : "22",
+                        "r" : "31",
                         "value" : [ "multiply","(","2",", ","3",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "24",
+               "localId" : "33",
                "name" : "multiply",
                "type" : "FunctionRef",
                "operand" : [ {
-                  "localId" : "22",
+                  "localId" : "31",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2",
                   "type" : "Literal"
                }, {
-                  "localId" : "23",
+                  "localId" : "32",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "3",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "27",
+            "localId" : "36",
             "name" : "Two",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "27",
+                  "r" : "36",
                   "s" : [ {
-                     "r" : "26",
+                     "r" : "35",
                      "value" : [ "define ","Two",":\n  ","2" ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "26",
+               "localId" : "35",
                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                "value" : "2",
                "type" : "Literal"
             }
          }, {
-            "localId" : "32",
+            "localId" : "41",
             "name" : "addTwo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1351,29 +1453,29 @@ module.exports['CommonLib2'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "32",
+                  "r" : "41",
                   "s" : [ {
                      "value" : [ "define function ","addTwo","(","a"," " ]
                   }, {
-                     "r" : "28",
+                     "r" : "37",
                      "s" : [ {
                         "value" : [ "Integer" ]
                      } ]
                   }, {
                      "value" : [ "):\n  " ]
                   }, {
-                     "r" : "31",
+                     "r" : "40",
                      "s" : [ {
-                        "r" : "31",
+                        "r" : "40",
                         "s" : [ {
-                           "r" : "29",
+                           "r" : "38",
                            "s" : [ {
                               "value" : [ "a" ]
                            } ]
                         }, {
                            "value" : [ " + " ]
                         }, {
-                           "r" : "30",
+                           "r" : "39",
                            "s" : [ {
                               "value" : [ "Two" ]
                            } ]
@@ -1383,14 +1485,14 @@ module.exports['CommonLib2'] = {
                }
             } ],
             "expression" : {
-               "localId" : "31",
+               "localId" : "40",
                "type" : "Add",
                "operand" : [ {
-                  "localId" : "29",
+                  "localId" : "38",
                   "name" : "a",
                   "type" : "OperandRef"
                }, {
-                  "localId" : "30",
+                  "localId" : "39",
                   "name" : "Two",
                   "type" : "ExpressionRef"
                } ]
@@ -1398,74 +1500,74 @@ module.exports['CommonLib2'] = {
             "operand" : [ {
                "name" : "a",
                "operandTypeSpecifier" : {
-                  "localId" : "28",
+                  "localId" : "37",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "36",
+            "localId" : "45",
             "name" : "TwoPlusOne",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "36",
+                  "r" : "45",
                   "s" : [ {
                      "value" : [ "define ","TwoPlusOne",":\n  " ]
                   }, {
-                     "r" : "35",
+                     "r" : "44",
                      "s" : [ {
-                        "r" : "33",
+                        "r" : "42",
                         "s" : [ {
                            "value" : [ "Two" ]
                         } ]
                      }, {
-                        "r" : "34",
+                        "r" : "43",
                         "value" : [ " + ","1" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "35",
+               "localId" : "44",
                "type" : "Add",
                "operand" : [ {
-                  "localId" : "33",
+                  "localId" : "42",
                   "name" : "Two",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "34",
+                  "localId" : "43",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "52",
+            "localId" : "61",
             "name" : "SortUsingFunction",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "52",
+                  "r" : "61",
                   "s" : [ {
                      "value" : [ "define ","SortUsingFunction",":\n  " ]
                   }, {
-                     "r" : "51",
+                     "r" : "60",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "43",
+                           "r" : "52",
                            "s" : [ {
-                              "r" : "42",
+                              "r" : "51",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "42",
+                                 "r" : "51",
                                  "s" : [ {
-                                    "r" : "37",
+                                    "r" : "46",
                                     "value" : [ "{","1",", ","3",", ","2",", ","5",", ","4","}" ]
                                  } ]
                               }, {
@@ -1478,18 +1580,18 @@ module.exports['CommonLib2'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "46",
+                        "r" : "55",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "45",
+                           "r" : "54",
                            "s" : [ {
                               "value" : [ "Tuple{" ]
                            }, {
                               "s" : [ {
                                  "value" : [ "N",": " ]
                               }, {
-                                 "r" : "44",
+                                 "r" : "53",
                                  "s" : [ {
                                     "value" : [ "N" ]
                                  } ]
@@ -1501,17 +1603,17 @@ module.exports['CommonLib2'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "50",
+                        "r" : "59",
                         "s" : [ {
                            "value" : [ "sort by " ]
                         }, {
-                           "r" : "49",
+                           "r" : "58",
                            "s" : [ {
-                              "r" : "48",
+                              "r" : "57",
                               "s" : [ {
                                  "value" : [ "square","(" ]
                               }, {
-                                 "r" : "47",
+                                 "r" : "56",
                                  "s" : [ {
                                     "value" : [ "N" ]
                                  } ]
@@ -1525,36 +1627,36 @@ module.exports['CommonLib2'] = {
                }
             } ],
             "expression" : {
-               "localId" : "51",
+               "localId" : "60",
                "type" : "Query",
                "source" : [ {
-                  "localId" : "43",
+                  "localId" : "52",
                   "alias" : "N",
                   "expression" : {
-                     "localId" : "42",
+                     "localId" : "51",
                      "type" : "List",
                      "element" : [ {
-                        "localId" : "37",
+                        "localId" : "46",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }, {
-                        "localId" : "38",
+                        "localId" : "47",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "39",
+                        "localId" : "48",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
-                        "localId" : "40",
+                        "localId" : "49",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
                      }, {
-                        "localId" : "41",
+                        "localId" : "50",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
@@ -1563,14 +1665,14 @@ module.exports['CommonLib2'] = {
                } ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "46",
+                  "localId" : "55",
                   "expression" : {
-                     "localId" : "45",
+                     "localId" : "54",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "N",
                         "value" : {
-                           "localId" : "44",
+                           "localId" : "53",
                            "name" : "N",
                            "type" : "AliasRef"
                         }
@@ -1578,17 +1680,17 @@ module.exports['CommonLib2'] = {
                   }
                },
                "sort" : {
-                  "localId" : "50",
+                  "localId" : "59",
                   "by" : [ {
-                     "localId" : "49",
+                     "localId" : "58",
                      "direction" : "asc",
                      "type" : "ByExpression",
                      "expression" : {
-                        "localId" : "48",
+                        "localId" : "57",
                         "name" : "square",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "47",
+                           "localId" : "56",
                            "name" : "N",
                            "type" : "IdentifierRef"
                         } ]
@@ -1610,6 +1712,9 @@ context Patient
 
 define ExprUsesParam: common2.TheParameter
 define ExprUsesParamDirectly: common2.SomeNumber
+define ExprUsesAnotherParam: common2.AnotherParameter
+define ExprUsesAnotherParamDirectly: common2.AnotherNumber
+define FuncUsesAnotherParam: common2.addToAnotherParameter(5)
 define FuncUsesParam: common2.addToParameter(5)
 define ExprCallsFunc: common2.TwoTimesThree
 define FuncCallsFunc: common2.square(5)
@@ -1732,18 +1837,18 @@ module.exports['Using CommonLib2'] = {
                "type" : "ParameterRef"
             }
          }, {
-            "localId" : "12",
-            "name" : "FuncUsesParam",
+            "localId" : "11",
+            "name" : "ExprUsesAnotherParam",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "12",
+                  "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","FuncUsesParam",": " ]
+                     "value" : [ "define ","ExprUsesAnotherParam",": " ]
                   }, {
-                     "r" : "11",
+                     "r" : "10",
                      "s" : [ {
                         "r" : "9",
                         "s" : [ {
@@ -1752,99 +1857,92 @@ module.exports['Using CommonLib2'] = {
                      }, {
                         "value" : [ "." ]
                      }, {
-                        "r" : "11",
+                        "r" : "10",
                         "s" : [ {
-                           "r" : "10",
-                           "value" : [ "addToParameter","(","5",")" ]
+                           "value" : [ "AnotherParameter" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "11",
-               "name" : "addToParameter",
-               "libraryName" : "common2",
-               "type" : "FunctionRef",
-               "operand" : [ {
-                  "localId" : "10",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "5",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "15",
-            "name" : "ExprCallsFunc",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "15",
-                  "s" : [ {
-                     "value" : [ "define ","ExprCallsFunc",": " ]
-                  }, {
-                     "r" : "14",
-                     "s" : [ {
-                        "r" : "13",
-                        "s" : [ {
-                           "value" : [ "common2" ]
-                        } ]
-                     }, {
-                        "value" : [ "." ]
-                     }, {
-                        "r" : "14",
-                        "s" : [ {
-                           "value" : [ "TwoTimesThree" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "14",
-               "name" : "TwoTimesThree",
+               "localId" : "10",
+               "name" : "AnotherParameter",
                "libraryName" : "common2",
                "type" : "ExpressionRef"
             }
          }, {
-            "localId" : "19",
-            "name" : "FuncCallsFunc",
+            "localId" : "14",
+            "name" : "ExprUsesAnotherParamDirectly",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "19",
+                  "r" : "14",
                   "s" : [ {
-                     "value" : [ "define ","FuncCallsFunc",": " ]
+                     "value" : [ "define ","ExprUsesAnotherParamDirectly",": " ]
                   }, {
-                     "r" : "18",
+                     "r" : "13",
                      "s" : [ {
-                        "r" : "16",
+                        "r" : "12",
                         "s" : [ {
                            "value" : [ "common2" ]
                         } ]
                      }, {
                         "value" : [ "." ]
                      }, {
-                        "r" : "18",
+                        "r" : "13",
                         "s" : [ {
-                           "r" : "17",
-                           "value" : [ "square","(","5",")" ]
+                           "value" : [ "AnotherNumber" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "18",
-               "name" : "square",
+               "localId" : "13",
+               "name" : "AnotherNumber",
+               "libraryName" : "common2",
+               "type" : "ParameterRef"
+            }
+         }, {
+            "localId" : "18",
+            "name" : "FuncUsesAnotherParam",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "18",
+                  "s" : [ {
+                     "value" : [ "define ","FuncUsesAnotherParam",": " ]
+                  }, {
+                     "r" : "17",
+                     "s" : [ {
+                        "r" : "15",
+                        "s" : [ {
+                           "value" : [ "common2" ]
+                        } ]
+                     }, {
+                        "value" : [ "." ]
+                     }, {
+                        "r" : "17",
+                        "s" : [ {
+                           "r" : "16",
+                           "value" : [ "addToAnotherParameter","(","5",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "17",
+               "name" : "addToAnotherParameter",
                "libraryName" : "common2",
                "type" : "FunctionRef",
                "operand" : [ {
-                  "localId" : "17",
+                  "localId" : "16",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "5",
                   "type" : "Literal"
@@ -1852,7 +1950,7 @@ module.exports['Using CommonLib2'] = {
             }
          }, {
             "localId" : "22",
-            "name" : "ExprUsesExpr",
+            "name" : "FuncUsesParam",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -1860,11 +1958,11 @@ module.exports['Using CommonLib2'] = {
                "s" : {
                   "r" : "22",
                   "s" : [ {
-                     "value" : [ "define ","ExprUsesExpr",": " ]
+                     "value" : [ "define ","FuncUsesParam",": " ]
                   }, {
                      "r" : "21",
                      "s" : [ {
-                        "r" : "20",
+                        "r" : "19",
                         "s" : [ {
                            "value" : [ "common2" ]
                         } ]
@@ -1873,7 +1971,8 @@ module.exports['Using CommonLib2'] = {
                      }, {
                         "r" : "21",
                         "s" : [ {
-                           "value" : [ "TwoPlusOne" ]
+                           "r" : "20",
+                           "value" : [ "addToParameter","(","5",")" ]
                         } ]
                      } ]
                   } ]
@@ -1881,23 +1980,29 @@ module.exports['Using CommonLib2'] = {
             } ],
             "expression" : {
                "localId" : "21",
-               "name" : "TwoPlusOne",
+               "name" : "addToParameter",
                "libraryName" : "common2",
-               "type" : "ExpressionRef"
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "localId" : "20",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "5",
+                  "type" : "Literal"
+               } ]
             }
          }, {
-            "localId" : "26",
-            "name" : "FuncUsesExpr",
+            "localId" : "25",
+            "name" : "ExprCallsFunc",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "26",
+                  "r" : "25",
                   "s" : [ {
-                     "value" : [ "define ","FuncUsesExpr",": " ]
+                     "value" : [ "define ","ExprCallsFunc",": " ]
                   }, {
-                     "r" : "25",
+                     "r" : "24",
                      "s" : [ {
                         "r" : "23",
                         "s" : [ {
@@ -1906,30 +2011,23 @@ module.exports['Using CommonLib2'] = {
                      }, {
                         "value" : [ "." ]
                      }, {
-                        "r" : "25",
+                        "r" : "24",
                         "s" : [ {
-                           "r" : "24",
-                           "value" : [ "addTwo","(","5",")" ]
+                           "value" : [ "TwoTimesThree" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "25",
-               "name" : "addTwo",
+               "localId" : "24",
+               "name" : "TwoTimesThree",
                "libraryName" : "common2",
-               "type" : "FunctionRef",
-               "operand" : [ {
-                  "localId" : "24",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "5",
-                  "type" : "Literal"
-               } ]
+               "type" : "ExpressionRef"
             }
          }, {
             "localId" : "29",
-            "name" : "ExprSortsOnFunc",
+            "name" : "FuncCallsFunc",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -1937,11 +2035,11 @@ module.exports['Using CommonLib2'] = {
                "s" : {
                   "r" : "29",
                   "s" : [ {
-                     "value" : [ "define ","ExprSortsOnFunc",": " ]
+                     "value" : [ "define ","FuncCallsFunc",": " ]
                   }, {
                      "r" : "28",
                      "s" : [ {
-                        "r" : "27",
+                        "r" : "26",
                         "s" : [ {
                            "value" : [ "common2" ]
                         } ]
@@ -1950,7 +2048,8 @@ module.exports['Using CommonLib2'] = {
                      }, {
                         "r" : "28",
                         "s" : [ {
-                           "value" : [ "SortUsingFunction" ]
+                           "r" : "27",
+                           "value" : [ "square","(","5",")" ]
                         } ]
                      } ]
                   } ]
@@ -1958,6 +2057,124 @@ module.exports['Using CommonLib2'] = {
             } ],
             "expression" : {
                "localId" : "28",
+               "name" : "square",
+               "libraryName" : "common2",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "localId" : "27",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "5",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "32",
+            "name" : "ExprUsesExpr",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "32",
+                  "s" : [ {
+                     "value" : [ "define ","ExprUsesExpr",": " ]
+                  }, {
+                     "r" : "31",
+                     "s" : [ {
+                        "r" : "30",
+                        "s" : [ {
+                           "value" : [ "common2" ]
+                        } ]
+                     }, {
+                        "value" : [ "." ]
+                     }, {
+                        "r" : "31",
+                        "s" : [ {
+                           "value" : [ "TwoPlusOne" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "31",
+               "name" : "TwoPlusOne",
+               "libraryName" : "common2",
+               "type" : "ExpressionRef"
+            }
+         }, {
+            "localId" : "36",
+            "name" : "FuncUsesExpr",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "36",
+                  "s" : [ {
+                     "value" : [ "define ","FuncUsesExpr",": " ]
+                  }, {
+                     "r" : "35",
+                     "s" : [ {
+                        "r" : "33",
+                        "s" : [ {
+                           "value" : [ "common2" ]
+                        } ]
+                     }, {
+                        "value" : [ "." ]
+                     }, {
+                        "r" : "35",
+                        "s" : [ {
+                           "r" : "34",
+                           "value" : [ "addTwo","(","5",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "35",
+               "name" : "addTwo",
+               "libraryName" : "common2",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "localId" : "34",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "5",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "39",
+            "name" : "ExprSortsOnFunc",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "39",
+                  "s" : [ {
+                     "value" : [ "define ","ExprSortsOnFunc",": " ]
+                  }, {
+                     "r" : "38",
+                     "s" : [ {
+                        "r" : "37",
+                        "s" : [ {
+                           "value" : [ "common2" ]
+                        } ]
+                     }, {
+                        "value" : [ "." ]
+                     }, {
+                        "r" : "38",
+                        "s" : [ {
+                           "value" : [ "SortUsingFunction" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "38",
                "name" : "SortUsingFunction",
                "libraryName" : "common2",
                "type" : "ExpressionRef"
