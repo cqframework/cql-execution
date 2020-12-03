@@ -33,6 +33,10 @@ define TimezoneTime: convert '14:30:00.0-07:00' to Time // 2:30PM Mountain Stand
 
 module.exports['FromString'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -848,6 +852,10 @@ define intInt: convert 10 to Integer
 
 module.exports['FromInteger'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1030,6 +1038,10 @@ define quantityQuantity: convert 10 'A' to Quantity
 
 module.exports['FromQuantity'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1251,6 +1263,10 @@ define booleanFalseBool: convert false to Boolean
 
 module.exports['FromBoolean'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1429,6 +1445,10 @@ define dateTimeToDateTime: convert @2015-01-02T12:01:02.321-06:00 to DateTime
 
 module.exports['FromDateTime'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1692,6 +1712,10 @@ define dateToStr: convert @2015-01-01 to String
 
 module.exports['FromDate'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1958,6 +1982,10 @@ define timeTime: convert @T11:57 to Time
 
 module.exports['FromTime'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2087,6 +2115,10 @@ define foo: 'bar'
 
 module.exports['FromCode'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2163,6 +2195,10 @@ define WrongFormat: ToDecimal('+.1')
 
 module.exports['ToDecimal'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2520,6 +2556,10 @@ define TooSmallInt: ToInteger('-2147483649')
 
 module.exports['ToInteger'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2747,6 +2787,10 @@ define NullArg: ToQuantity((null as String))
 
 module.exports['ToQuantity'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2961,6 +3005,10 @@ define InvalidDenominator: ToRatio('1.0 \'mg\':2.0 \'cc\'')
 
 module.exports['ToRatio'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -3251,6 +3299,10 @@ define SecondTooHigh: ToTime('23:59:60')
 
 module.exports['ToTime'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -3686,6 +3738,10 @@ define IsNull: ToBoolean('falsetto')
 
 module.exports['ToBoolean'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -4127,6 +4183,10 @@ define IsNull: ToConcept(null as Code)
 
 module.exports['ToConcept'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -4298,6 +4358,10 @@ define ToDateDateTimeString: ToDate(@2014-01-01T12:30:00)
 
 module.exports['ToDate'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -4566,6 +4630,10 @@ define IsNull: ConvertsToBoolean(null as String)
 
 module.exports['ConvertsToBoolean'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -4770,6 +4838,10 @@ define IsNull: ConvertsToDate(null as Date)
 
 module.exports['ConvertsToDate'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -4939,6 +5011,10 @@ define IsNull: ConvertsToDateTime(null as DateTime)
 
 module.exports['ConvertsToDateTime'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -5150,6 +5226,10 @@ define IsNull: ConvertsToDecimal(null as Decimal)
 
 module.exports['ConvertsToDecimal'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -5318,6 +5398,10 @@ define IsNull: ConvertsToInteger(null as Integer)
 
 module.exports['ConvertsToInteger'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -5489,6 +5573,10 @@ define IsNull: ConvertsToQuantity(null as String)
 
 module.exports['ConvertsToQuantity'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -5754,6 +5842,10 @@ define IsNull: ConvertsToRatio(null as String)
 
 module.exports['ConvertsToRatio'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -5958,6 +6050,10 @@ define IsNull: ConvertsToString(null as String)
 
 module.exports['ConvertsToString'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -6158,6 +6254,10 @@ define IsNull: ConvertsToTime(null as String)
 
 module.exports['ConvertsToTime'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -6328,6 +6428,10 @@ define NullConvertQuantity: ConvertQuantity(5 'mg', 'fox')
 
 module.exports['ConvertQuantity'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -6607,6 +6711,10 @@ define CanConvertQuantityNullSecondNUll: CanConvertQuantity(5 'mg', null)
 
 module.exports['CanConvertQuantity'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"

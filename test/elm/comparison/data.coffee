@@ -51,6 +51,10 @@ define UneqRatios: 10 'mg' : 2 'dL' = 15 'mg' : 4 'dL'
 
 module.exports['Equal'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -3263,6 +3267,10 @@ define ALtB_Quantity_incompatible: 5 'Cel' != 40 'm'
 
 module.exports['NotEqual'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -6462,6 +6470,11 @@ define DateTimeAndDateUncertainFalse: DateTime(2000, 3, 13, 2, 4, 23) ~ Date(200
 module.exports['Equivalent'] = {
    "library" : {
       "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 50,
          "startChar" : 37,
          "endLine" : 50,
@@ -6471,6 +6484,8 @@ module.exports['Equivalent'] = {
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 51,
          "startChar" : 26,
          "endLine" : 51,
@@ -11604,6 +11619,10 @@ define ALtB_Quantity_incompatible: 5 'Cel' < 40 'm'
 
 module.exports['Less'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -12160,6 +12179,10 @@ define ALtB_Quantity_incompatible: 5 'Cel' <= 40 'm'
 
 module.exports['LessOrEqual'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -12716,6 +12739,10 @@ define ALtB_Quantity_incompatible: 5 'Cel' > 40 'm'
 
 module.exports['Greater'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -13274,6 +13301,10 @@ define DivideUcum: (100 'mg' / 2 '[lb_av]') > 49 'mg/[lb_av]'
 
 module.exports['GreaterOrEqual'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
