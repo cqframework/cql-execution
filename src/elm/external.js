@@ -31,6 +31,11 @@ class Retrieve extends Expression {
       records = records.filter(r => range.includes(r.getDateOrInterval(this.dateProperty)));
     }
 
+    if (Array.isArray(records)) {
+      records.forEach(rec => ctx.evaluatedRecords.push(rec));
+    } else {
+      ctx.evaluatedRecords.push(records);
+    }
     return records;
   }
 

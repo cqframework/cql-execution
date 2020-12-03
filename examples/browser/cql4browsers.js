@@ -7003,6 +7003,14 @@ var Retrieve = /*#__PURE__*/function (_Expression) {
         });
       }
 
+      if (Array.isArray(records)) {
+        records.forEach(function (rec) {
+          return ctx.evaluatedRecords.push(rec);
+        });
+      } else {
+        ctx.evaluatedRecords.push(records);
+      }
+
       return records;
     }
   }, {
@@ -12995,7 +13003,8 @@ var Context = /*#__PURE__*/function () {
     this._codeService = _codeService;
     this.context_values = {};
     this.library_context = {};
-    this.localId_context = {}; // TODO: If there is an issue with number of parameters look into cql4browsers fix: 387ea77538182833283af65e6341e7a05192304c
+    this.localId_context = {};
+    this.evaluatedRecords = []; // TODO: If there is an issue with number of parameters look into cql4browsers fix: 387ea77538182833283af65e6341e7a05192304c
 
     this.checkParameters(_parameters); // not crazy about possibly throwing an error in a constructor, but...
 
@@ -13684,6 +13693,18 @@ module.exports = {
 },{"../elm/library":27}],44:[function(require,module,exports){
 "use strict";
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -13697,6 +13718,7 @@ var Results = /*#__PURE__*/function () {
     this.patientResults = {};
     this.unfilteredResults = {};
     this.localIdPatientResultsMap = {};
+    this.evaluatedRecords = [];
   }
 
   _createClass(Results, [{
@@ -13713,7 +13735,14 @@ var Results = /*#__PURE__*/function () {
       }
 
       this.patientResults[patientId][resultName] = result;
-      this.localIdPatientResultsMap[patientId] = patient_ctx.getAllLocalIds();
+      this.localIdPatientResultsMap[patientId] = patient_ctx.getAllLocalIds(); // Merge evaluatedRecords with an aggregated array across all libraries
+
+      var evaluatedRecords = _toConsumableArray(patient_ctx.evaluatedRecords);
+
+      Object.values(patient_ctx.library_context).forEach(function (ctx) {
+        evaluatedRecords.push.apply(evaluatedRecords, _toConsumableArray(ctx.evaluatedRecords));
+      });
+      this.evaluatedRecords = evaluatedRecords;
     }
   }, {
     key: "recordUnfilteredResult",
