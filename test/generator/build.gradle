@@ -10,18 +10,18 @@ repositories {
 }
 
 dependencies {
-    compile group: 'info.cqframework', name: 'cql-to-elm', version: '1.4.6'
-    compile group: 'net.sf.jopt-simple', name: 'jopt-simple', version: '4.7'
+    implementation group: 'info.cqframework', name: 'cql-to-elm', version: '1.4.9'
+    implementation group: 'net.sf.jopt-simple', name: 'jopt-simple', version: '4.7'
 }
 
 task generateTestData (dependsOn: 'classes', type: JavaExec) {
-    main = 'CoffeeScriptTestDataGenerator'
+    main = 'JavaScriptTestDataGenerator'
     classpath = sourceSets.main.runtimeClasspath
     args = ["-r", "-i", "${projectDir}/../elm"]
 }
 
 task watchTestData (dependsOn: 'classes', type: JavaExec) {
-    main = 'CoffeeScriptTestDataGenerator'
+    main = 'JavaScriptTestDataGenerator'
     classpath = sourceSets.main.runtimeClasspath
     args = ["-r", "-w", "-i", "${projectDir}/../elm"]
 }

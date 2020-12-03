@@ -52,13 +52,13 @@ define query:  (List{null, 'One', null, 'Two', null}) I where I is not null
 // @Test: Sorting
 define QuantityListAsc: ({ ToQuantity('10 \'m\''), ToQuantity('2 \'m\'') }) S return S sort asc
 define QuantityListSort: ({ ToQuantity('10 \'m\''), ToQuantity('2 \'m\'') }) N return Tuple{N: N} sort by (N)
-define TupleAsc: [Encounter] E sort by id 
+define TupleAsc: [Encounter] E sort by id
 define TupleReturnAsc: [Encounter] E return E sort by id
 define TupleReturnTupleAsc: [Encounter] E return {E : E} sort by E.id
 define TupleDesc: [Encounter] E sort by id desc
 define TupleReturnDesc: [Encounter] E return E sort by id desc
 define TupleReturnTupleDesc:  [Encounter] E return {E : E} sort by E.id desc
-define ConditionDates: [Condition] C return C.onsetDateTime
+define ConditionDates: [Condition] C return C.period.low
 define lastDateUnsorted: Last("ConditionDates")
 define lastDateByThis: Last("ConditionDates" CD sort by $this)
 define numberAsc: ({8, 6, 7, 5, 3, 0, 9}) N sort asc

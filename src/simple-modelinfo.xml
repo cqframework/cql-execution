@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- A super simple model for demonstration and testing purposes only -->
+<ns4:modelInfo name="Simple" version="1.0.0" url="https://github.com/cqframework/cql-execution/simple"
+               targetQualifier="simple" patientClassName="Simple.Patient"
+               patientBirthDatePropertyName="birthDate" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+               xmlns:ns4="urn:hl7-org:elm-modelinfo:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="Record" baseType="System.Any" retrievable="false">
+        <ns4:element name="id" elementType="System.String"/>
+    </ns4:typeInfo>
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="Patient" baseType="Simple.Record" retrievable="true">
+        <ns4:element name="name" elementType="System.String"/>
+        <ns4:element name="gender" elementType="System.String"/>
+        <ns4:element name="birthDate" elementType="System.DateTime"/>
+    </ns4:typeInfo>
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="Encounter" baseType="Simple.Record" retrievable="true" primaryCodePath="code">
+        <ns4:element name="code" elementType="System.Code"/>
+        <ns4:element name="status" elementType="System.Code"/>
+        <ns4:element name="period">
+            <ns4:elementTypeSpecifier xsi:type="ns4:IntervalTypeSpecifier">
+                <ns4:pointTypeSpecifier xsi:type="ns4:NamedTypeSpecifier" modelName="System" name="DateTime"/>
+            </ns4:elementTypeSpecifier>
+        </ns4:element>
+    </ns4:typeInfo>
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="Condition" baseType="Simple.Record" retrievable="true" primaryCodePath="code">
+        <ns4:element name="code" elementType="System.Code"/>
+        <ns4:element name="status" elementType="System.Code"/>
+        <ns4:element name="period">
+            <ns4:elementTypeSpecifier xsi:type="ns4:IntervalTypeSpecifier">
+                <ns4:pointTypeSpecifier xsi:type="ns4:NamedTypeSpecifier" modelName="System" name="DateTime"/>
+            </ns4:elementTypeSpecifier>
+        </ns4:element>
+    </ns4:typeInfo>
+</ns4:modelInfo>

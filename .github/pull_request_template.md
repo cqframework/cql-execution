@@ -2,7 +2,7 @@ Pull requests into cql-execution require the following.
 Submitter and reviewer should ✔ when done.
 For items that are not-applicable, mark "N/A" and ✔.
 
-[CDS Connect](https://cds.ahrq.gov/cdsconnect) and [Bonnie](https://github.com/projecttacoma/bonnie) are the main users of this repository. 
+[CDS Connect](https://cds.ahrq.gov/cdsconnect) and [Bonnie](https://github.com/projecttacoma/bonnie) are the main users of this repository.
 It is strongly recommended to include a person from each of those projects as a reviewer.
 
 **Submitter:**
@@ -11,8 +11,9 @@ It is strongly recommended to include a person from each of those projects as a 
 - [ ] Tests are included and test edge cases
 - [ ] Tests have been run locally and pass
 - [ ] Code coverage has not gone down and all code touched or added is covered.
+- [ ] Code passes lint and prettier (hint: use `yarn run test:plus` to run tests, lint, and prettier)
 - [ ] All dependent libraries are appropriately updated or have a corresponding PR related to this change
-- [ ] `cql4browsers.js` built with `yarn run build-everything` if coffeescript source changed.
+- [ ] `cql4browsers.js` built with `yarn run build:browserify` if source changed.
 
 **Reviewer:**
 

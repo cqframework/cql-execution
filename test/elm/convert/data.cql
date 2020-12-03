@@ -55,9 +55,10 @@ define timeStr: convert @T11:57 to String
 define timeTime: convert @T11:57 to Time
 
 // @Test: FromCode
-// define hepB: Code '66071002' from "SNOMED-CT" display 'Type B viral hepatitis'
-// define codeConcept: convert hepB to Concept
-// define codeCode: convert hepB to Code
+codesystem "SNOMED-CT": '2.16.840.1.113883.6.96'
+define hepB: Code '66071002' from "SNOMED-CT" display 'Type B viral hepatitis'
+define codeConcept: convert hepB to Concept
+define codeCode: convert hepB to Code
 define foo: 'bar'
 
 // @Test: ToDecimal

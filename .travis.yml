@@ -1,11 +1,8 @@
 language: node_js
 node_js:
-  - "8.9.4"
+  - "12.18.2"
 sudo: false
 before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.12.3
-  - export PATH=$HOME/.yarn/bin:$PATH
-  - npm install -g coffeelint
   - npm install -g codecov
 cache:
   yarn: true
@@ -13,14 +10,18 @@ env:
   matrix:
   - TEST_SUITE=audit
   - TEST_SUITE=cql4browsers
+  - TEST_SUITE=lint
   - TEST_SUITE=units
 script:
   - 'if [ ${TEST_SUITE} = "audit" ]; then
       yarn audit;
     elif [ ${TEST_SUITE} = "cql4browsers" ]; then
       ./bin/validate_cql4browsers.sh;
+    elif [ ${TEST_SUITE} = "lint" ]; then
+      yarn lint &&
+      yarn prettier;
     else
       ./bin/check_for_nonassertive_tests.sh &&
-      NODE_ENV=test ./node_modules/.bin/nyc --reporter=text-lcov ./node_modules/.bin/mocha --compilers coffee:coffeescript/register --require coffeescript --recursive --colors > coverage.lcov &&
+      yarn test:nyc &&
       codecov;
     fi'
