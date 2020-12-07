@@ -32,7 +32,7 @@ class Retrieve extends Expression {
     }
 
     if (Array.isArray(records)) {
-      records.forEach(rec => ctx.evaluatedRecords.push(rec));
+      ctx.evaluatedRecords.push(...records);
     } else {
       ctx.evaluatedRecords.push(records);
     }
