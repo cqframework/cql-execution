@@ -6924,6 +6924,18 @@ for (var _i = 0, _libs = libs; _i < _libs.length; _i++) {
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -7004,9 +7016,9 @@ var Retrieve = /*#__PURE__*/function (_Expression) {
       }
 
       if (Array.isArray(records)) {
-        records.forEach(function (rec) {
-          return ctx.evaluatedRecords.push(rec);
-        });
+        var _ctx$evaluatedRecords;
+
+        (_ctx$evaluatedRecords = ctx.evaluatedRecords).push.apply(_ctx$evaluatedRecords, _toConsumableArray(records));
       } else {
         ctx.evaluatedRecords.push(records);
       }
@@ -13724,6 +13736,8 @@ var Results = /*#__PURE__*/function () {
   _createClass(Results, [{
     key: "recordPatientResult",
     value: function recordPatientResult(patient_ctx, resultName, result) {
+      var _this = this;
+
       var p = patient_ctx.patient; // NOTE: From now on prefer getId() over id() because some data models may have an id property
       // that is not a string (e.g., FHIR) -- so reserve getId() for the API (and expect a string
       // representation) but leave id() for data-model specific formats.
@@ -13737,12 +13751,12 @@ var Results = /*#__PURE__*/function () {
       this.patientResults[patientId][resultName] = result;
       this.localIdPatientResultsMap[patientId] = patient_ctx.getAllLocalIds(); // Merge evaluatedRecords with an aggregated array across all libraries
 
-      var evaluatedRecords = _toConsumableArray(patient_ctx.evaluatedRecords);
-
+      this.evaluatedRecords = _toConsumableArray(patient_ctx.evaluatedRecords);
       Object.values(patient_ctx.library_context).forEach(function (ctx) {
-        evaluatedRecords.push.apply(evaluatedRecords, _toConsumableArray(ctx.evaluatedRecords));
+        var _this$evaluatedRecord;
+
+        (_this$evaluatedRecord = _this.evaluatedRecords).push.apply(_this$evaluatedRecord, _toConsumableArray(ctx.evaluatedRecords));
       });
-      this.evaluatedRecords = evaluatedRecords;
     }
   }, {
     key: "recordUnfilteredResult",
