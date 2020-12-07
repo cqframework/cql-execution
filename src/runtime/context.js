@@ -9,6 +9,7 @@ class Context {
     this.context_values = {};
     this.library_context = {};
     this.localId_context = {};
+    this.evaluatedRecords = [];
     // TODO: If there is an issue with number of parameters look into cql4browsers fix: 387ea77538182833283af65e6341e7a05192304c
     this.checkParameters(_parameters); // not crazy about possibly throwing an error in a constructor, but...
     this._parameters = _parameters;
