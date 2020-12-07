@@ -19,12 +19,10 @@ class Results {
     this.localIdPatientResultsMap[patientId] = patient_ctx.getAllLocalIds();
 
     // Merge evaluatedRecords with an aggregated array across all libraries
-    const evaluatedRecords = [...patient_ctx.evaluatedRecords];
+    this.evaluatedRecords = [...patient_ctx.evaluatedRecords];
     Object.values(patient_ctx.library_context).forEach(ctx => {
-      evaluatedRecords.push(...ctx.evaluatedRecords);
+      this.evaluatedRecords.push(...ctx.evaluatedRecords);
     });
-
-    this.evaluatedRecords = evaluatedRecords;
   }
 
   recordUnfilteredResult(resultName, result) {
