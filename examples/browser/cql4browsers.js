@@ -11550,15 +11550,48 @@ var PositionOf = /*#__PURE__*/function (_Expression7) {
   return PositionOf;
 }(Expression);
 
-var Matches = /*#__PURE__*/function (_Expression8) {
-  _inherits(Matches, _Expression8);
+var LastPositionOf = /*#__PURE__*/function (_Expression8) {
+  _inherits(LastPositionOf, _Expression8);
 
-  var _super8 = _createSuper(Matches);
+  var _super8 = _createSuper(LastPositionOf);
+
+  function LastPositionOf(json) {
+    var _this5;
+
+    _classCallCheck(this, LastPositionOf);
+
+    _this5 = _super8.call(this, json);
+    _this5.pattern = build(json.pattern);
+    _this5.string = build(json.string);
+    return _this5;
+  }
+
+  _createClass(LastPositionOf, [{
+    key: "exec",
+    value: function exec(ctx) {
+      var pattern = this.pattern.execute(ctx);
+      var string = this.string.execute(ctx);
+
+      if (pattern == null || string == null) {
+        return null;
+      } else {
+        return string.lastIndexOf(pattern);
+      }
+    }
+  }]);
+
+  return LastPositionOf;
+}(Expression);
+
+var Matches = /*#__PURE__*/function (_Expression9) {
+  _inherits(Matches, _Expression9);
+
+  var _super9 = _createSuper(Matches);
 
   function Matches(json) {
     _classCallCheck(this, Matches);
 
-    return _super8.call(this, json);
+    return _super9.call(this, json);
   }
 
   _createClass(Matches, [{
@@ -11584,21 +11617,21 @@ var Matches = /*#__PURE__*/function (_Expression8) {
   return Matches;
 }(Expression);
 
-var Substring = /*#__PURE__*/function (_Expression9) {
-  _inherits(Substring, _Expression9);
+var Substring = /*#__PURE__*/function (_Expression10) {
+  _inherits(Substring, _Expression10);
 
-  var _super9 = _createSuper(Substring);
+  var _super10 = _createSuper(Substring);
 
   function Substring(json) {
-    var _this5;
+    var _this6;
 
     _classCallCheck(this, Substring);
 
-    _this5 = _super9.call(this, json);
-    _this5.stringToSub = build(json.stringToSub);
-    _this5.startIndex = build(json.startIndex);
-    _this5.length = build(json['length']);
-    return _this5;
+    _this6 = _super10.call(this, json);
+    _this6.stringToSub = build(json.stringToSub);
+    _this6.startIndex = build(json.startIndex);
+    _this6.length = build(json['length']);
+    return _this6;
   }
 
   _createClass(Substring, [{
@@ -11621,15 +11654,15 @@ var Substring = /*#__PURE__*/function (_Expression9) {
   return Substring;
 }(Expression);
 
-var StartsWith = /*#__PURE__*/function (_Expression10) {
-  _inherits(StartsWith, _Expression10);
+var StartsWith = /*#__PURE__*/function (_Expression11) {
+  _inherits(StartsWith, _Expression11);
 
-  var _super10 = _createSuper(StartsWith);
+  var _super11 = _createSuper(StartsWith);
 
   function StartsWith(json) {
     _classCallCheck(this, StartsWith);
 
-    return _super10.call(this, json);
+    return _super11.call(this, json);
   }
 
   _createClass(StartsWith, [{
@@ -11650,15 +11683,15 @@ var StartsWith = /*#__PURE__*/function (_Expression10) {
   return StartsWith;
 }(Expression);
 
-var EndsWith = /*#__PURE__*/function (_Expression11) {
-  _inherits(EndsWith, _Expression11);
+var EndsWith = /*#__PURE__*/function (_Expression12) {
+  _inherits(EndsWith, _Expression12);
 
-  var _super11 = _createSuper(EndsWith);
+  var _super12 = _createSuper(EndsWith);
 
   function EndsWith(json) {
     _classCallCheck(this, EndsWith);
 
-    return _super11.call(this, json);
+    return _super12.call(this, json);
   }
 
   _createClass(EndsWith, [{
@@ -11683,6 +11716,7 @@ module.exports = {
   Combine: Combine,
   Concatenate: Concatenate,
   EndsWith: EndsWith,
+  LastPositionOf: LastPositionOf,
   Lower: Lower,
   Matches: Matches,
   PositionOf: PositionOf,

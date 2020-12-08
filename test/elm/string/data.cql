@@ -60,10 +60,16 @@ define MatchesIsNullSecond: Matches('12three', null)
 define MatchesAllNull: Matches(null, null)
 
 // @Test: PositionOf
-define found: PositionOf('cde', 'abcdefg')
-define notFound: PositionOf('fgh', 'abcdefg')
-define nullPattern: PositionOf(null, 'abcdefg')
-define nullString: PositionOf('cde', null)
+define Found: PositionOf('cde', 'abcdefg')
+define NotFound: PositionOf('fgh', 'abcdefg')
+define NullPattern: PositionOf(null, 'abcdefg')
+define NullString: PositionOf('cde', null)
+
+// @Test: LastPositionOf
+define Found: LastPositionOf('B', 'ABCDEDCBA')    // 7
+define NotFound: LastPositionOf('XYZ', 'ABCDE')   // -1
+define NullPattern: LastPositionOf(null, 'ABCDE') // null
+define NullString: LastPositionOf('ABCDE', null)  // null
 
 // @Test: Substring
 define World: Substring('HelloWorld', 5)

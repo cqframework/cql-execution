@@ -2711,10 +2711,10 @@ module.exports['Matches'] = {
 library TestSnippet version '1'
 using Simple version '1.0.0'
 context Patient
-define found: PositionOf('cde', 'abcdefg')
-define notFound: PositionOf('fgh', 'abcdefg')
-define nullPattern: PositionOf(null, 'abcdefg')
-define nullString: PositionOf('cde', null)
+define Found: PositionOf('cde', 'abcdefg')
+define NotFound: PositionOf('fgh', 'abcdefg')
+define NullPattern: PositionOf(null, 'abcdefg')
+define NullString: PositionOf('cde', null)
 */
 
 module.exports['PositionOf'] = {
@@ -2755,7 +2755,7 @@ module.exports['PositionOf'] = {
             }
          }, {
             "localId" : "5",
-            "name" : "found",
+            "name" : "Found",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2763,7 +2763,7 @@ module.exports['PositionOf'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","found",": " ]
+                     "value" : [ "define ","Found",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -2804,7 +2804,7 @@ module.exports['PositionOf'] = {
             }
          }, {
             "localId" : "9",
-            "name" : "notFound",
+            "name" : "NotFound",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2812,7 +2812,7 @@ module.exports['PositionOf'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","notFound",": " ]
+                     "value" : [ "define ","NotFound",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -2853,7 +2853,7 @@ module.exports['PositionOf'] = {
             }
          }, {
             "localId" : "13",
-            "name" : "nullPattern",
+            "name" : "NullPattern",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2861,7 +2861,7 @@ module.exports['PositionOf'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","nullPattern",": " ]
+                     "value" : [ "define ","NullPattern",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -2898,7 +2898,7 @@ module.exports['PositionOf'] = {
             }
          }, {
             "localId" : "17",
-            "name" : "nullString",
+            "name" : "NullString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2906,7 +2906,7 @@ module.exports['PositionOf'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","nullString",": " ]
+                     "value" : [ "define ","NullString",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -2930,6 +2930,245 @@ module.exports['PositionOf'] = {
                   "localId" : "14",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "cde",
+                  "type" : "Literal"
+               },
+               "string" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "15",
+                     "type" : "Null"
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+
+/* LastPositionOf
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define Found: LastPositionOf('B', 'ABCDEDCBA')    // 7
+define NotFound: LastPositionOf('XYZ', 'ABCDE')   // -1
+define NullPattern: LastPositionOf(null, 'ABCDE') // null
+define NullString: LastPositionOf('ABCDE', null)  // null
+*/
+
+module.exports['LastPositionOf'] = {
+   "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "5",
+            "name" : "Found",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "define ","Found",": " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "LastPositionOf","(" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "'B'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "3",
+                        "s" : [ {
+                           "value" : [ "'ABCDEDCBA'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "4",
+               "type" : "LastPositionOf",
+               "pattern" : {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "B",
+                  "type" : "Literal"
+               },
+               "string" : {
+                  "localId" : "3",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "ABCDEDCBA",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "9",
+            "name" : "NotFound",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "define ","NotFound",": " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "LastPositionOf","(" ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "value" : [ "'XYZ'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "'ABCDE'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "type" : "LastPositionOf",
+               "pattern" : {
+                  "localId" : "6",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "XYZ",
+                  "type" : "Literal"
+               },
+               "string" : {
+                  "localId" : "7",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "ABCDE",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "13",
+            "name" : "NullPattern",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "define ","NullPattern",": " ]
+                  }, {
+                     "r" : "12",
+                     "s" : [ {
+                        "r" : "10",
+                        "value" : [ "LastPositionOf","(","null",", " ]
+                     }, {
+                        "r" : "11",
+                        "s" : [ {
+                           "value" : [ "'ABCDE'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "12",
+               "type" : "LastPositionOf",
+               "pattern" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "10",
+                     "type" : "Null"
+                  }
+               },
+               "string" : {
+                  "localId" : "11",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "ABCDE",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "17",
+            "name" : "NullString",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "17",
+                  "s" : [ {
+                     "value" : [ "define ","NullString",": " ]
+                  }, {
+                     "r" : "16",
+                     "s" : [ {
+                        "value" : [ "LastPositionOf","(" ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "'ABCDE'" ]
+                        } ]
+                     }, {
+                        "r" : "15",
+                        "value" : [ ", ","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "16",
+               "type" : "LastPositionOf",
+               "pattern" : {
+                  "localId" : "14",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "ABCDE",
                   "type" : "Literal"
                },
                "string" : {
