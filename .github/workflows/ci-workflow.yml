@@ -1,0 +1,58 @@
+name: CI Checks
+
+on: [push, pull_request]
+
+jobs:
+  audit:
+    name: Check yarn audit
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - run: yarn audit
+      env:
+        CI: true
+  cql4browsers:
+    name: Check cql4browsers
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - run: ./bin/validate_cql4browsers.sh
+      env:
+        CI: true
+  lint:
+    name: Check lint and prettier
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - run: yarn install
+    - run: yarn run lint
+    - run: yarn run prettier
+      env:
+        CI: true
+  test:
+    name: Test on node 12 and ubuntu-latest
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - name: Set timezone to America/New_York
+      uses: zcong1993/setup-timezone@master
+      with:
+        timezone: America/New_York
+    - run: date +"%Y-%m-%d %T"
+    - run: yarn install
+    - run: ./bin/check_for_nonassertive_tests.sh
+    - run: npx nyc --reporter=lcov npm test && npx codecov
+      env:
+        CI: true
