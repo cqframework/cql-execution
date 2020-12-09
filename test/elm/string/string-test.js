@@ -249,12 +249,38 @@ describe('PositionOf', () => {
     setup(this, data);
   });
 
-  it.skip('should be a PositionOf', function () {
-    this.found.should.be.an.instanceOf(str.Pos);
+  it('should be a PositionOf', function () {
+    this.found.should.be.an.instanceOf(str.PositionOf);
   });
 
   it('should return 0-based position', function () {
     this.found.exec(this.ctx).should.equal(2);
+  });
+
+  it('should return -1 when not found', function () {
+    this.notFound.exec(this.ctx).should.equal(-1);
+  });
+
+  it('should return null when pattern is null', function () {
+    should(this.nullPattern.exec(this.ctx)).be.null();
+  });
+
+  it('should return null when string is null', function () {
+    should(this.nullString.exec(this.ctx)).be.null();
+  });
+});
+
+describe('LastPositionOf', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should be a LastPositionOf', function () {
+    this.found.should.be.an.instanceOf(str.LastPositionOf);
+  });
+
+  it('should return 0-based position', function () {
+    this.found.exec(this.ctx).should.equal(7);
   });
 
   it('should return -1 when not found', function () {
