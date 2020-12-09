@@ -53,6 +53,6 @@ jobs:
     - run: date +"%Y-%m-%d %T"
     - run: yarn install
     - run: ./bin/check_for_nonassertive_tests.sh
-    - run: npx nyc --reporter=lcov npm test && npx codecov
+    - run: npx nyc --reporter=lcov yarn test && npx codecov
       env:
         CI: true
