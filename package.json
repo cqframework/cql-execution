@@ -72,6 +72,8 @@
     "should": "^13.2.3"
   },
   "dependencies": {
+    "cql-exec-fhir": "^1.5.0",
+    "cql-execution": "^2.0.0",
     "moment": "^2.27.0",
     "ucum": "^0.0.7"
   },
