@@ -227,112 +227,90 @@
          "def" : [ {
             "name" : "Acute Inpatient",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1810",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "Outpatient",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1202",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "ED",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1086",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "Observation",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1191",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "Nonacute Inpatient Stay",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1398",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "Telephone Visits",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1246",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "Online Assessments",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1446",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "Nonacute Inpatient",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1189",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "HbA1c Level Less Than 7.0",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1115",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "HbA1c Level Greater Than or Equal to 7.0 and Less Than 8.0",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1976",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "Hospice Encounter",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1761",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "Hospice Intervention",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1762",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "Diabetes",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1077",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "HbA1c Lab Test",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1755",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "Telehealth Modifier",
-            "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1445",
-            "version" : "1",
+            "id" : "urn:oid:2.16.840.1.113762.1.4.1138.731",
             "accessLevel" : "Public"
          }, {
             "name" : "Telehealth POS",
-            "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1460",
-            "version" : "1",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.101.11.1155",
             "accessLevel" : "Public"
          }, {
             "name" : "Frailty Device",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1530",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "Frailty Diagnosis",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1531",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "Frailty Encounter",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1532",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "Frailty Symptom",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1533",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "Advanced Illness",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1465",
-            "version" : "1",
             "accessLevel" : "Public"
          }, {
             "name" : "Inpatient Stay",
             "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1395",
-            "version" : "1",
             "accessLevel" : "Public"
          } ]
       },
