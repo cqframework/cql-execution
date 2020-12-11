@@ -8,7 +8,12 @@ const codeservice = require('./temp_code');
 const lib = new cql.Library(measure);
 const cservice = new codes.CodeService(codeservice);
 const parameters = {
-  MeasurementPeriod: new cql.Interval(cql.DateTime.parse('2018-12-31'), cql.DateTime.parse('2019-12-31'), true, false)
+  MeasurementPeriod: new cql.Interval(
+    cql.DateTime.parse('2018-12-31'),
+    cql.DateTime.parse('2019-12-31'),
+    true,
+    false
+  )
 };
 
 const executor = new cql.Executor(lib, cservice, parameters);
