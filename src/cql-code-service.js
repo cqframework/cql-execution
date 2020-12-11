@@ -1,5 +1,5 @@
 const { Code, ValueSet } = require('./datatypes/datatypes');
-  
+
 class CodeService {
   constructor(valueSetsJson = {}) {
     this.valueSets = {};
