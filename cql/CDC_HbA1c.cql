@@ -6,28 +6,30 @@ include FHIRHelpers version '4.0.0' called FHIRHelpers
 
 codesystem "SNOMED-CT": 'urn:oid:2.16.840.1.113883.6.96' version '20200301'
 
-valueset "Acute Inpatient": 'urn:oid:2.16.840.1.113883.3.464.1004.1810'
-valueset "Outpatient": 'urn:oid:2.16.840.1.113883.3.464.1004.1202'
-valueset "ED": 'urn:oid:2.16.840.1.113883.3.464.1004.1086'
-valueset "Observation": 'urn:oid:2.16.840.1.113883.3.464.1004.1191'
-valueset "Nonacute Inpatient Stay": 'urn:oid:2.16.840.1.113883.3.464.1004.1398'
-valueset "Telephone Visits": 'urn:oid:2.16.840.1.113883.3.464.1004.1246'
-valueset "Online Assessments": 'urn:oid:2.16.840.1.113883.3.464.1004.1446'
-valueset "Nonacute Inpatient": 'urn:oid:2.16.840.1.113883.3.464.1004.1189'
+valueset "Acute Inpatient": 'urn:oid:2.16.840.1.113762.1.4.1182.120'
+valueset "Outpatient": 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1008'
+valueset "ED": 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1085'
+valueset "Observation": 'urn:oid:2.16.840.1.113762.1.4.1181.72'
+valueset "Nonacute Inpatient Stay": 'urn:oid:2.16.840.1.113762.1.4.1182.289'
+valueset "Telephone Visits": 'urn:oid:2.16.840.1.113883.3.1444.5.216'
+valueset "Online Assessments": 'urn:oid:2.16.840.1.113883.3.7587.3.1013'
+valueset "Nonacute Inpatient": 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1084'
+// the HbA1c valuesets and hospice encounter don't have the OID we'll need IRL (will add later)
 valueset "HbA1c Level Less Than 7.0": 'urn:oid:2.16.840.1.113883.3.464.1004.1115'
 valueset "HbA1c Level Greater Than or Equal to 7.0 and Less Than 8.0": 'urn:oid:2.16.840.1.113883.3.464.1004.1976'
 valueset "Hospice Encounter": 'urn:oid:2.16.840.1.113883.3.464.1004.1761'
-valueset "Hospice Intervention": 'urn:oid:2.16.840.1.113883.3.464.1004.1762'
-valueset "Diabetes": 'urn:oid:2.16.840.1.113883.3.464.1004.1077'
-valueset "HbA1c Lab Test": 'urn:oid:2.16.840.1.113883.3.464.1004.1755'
+valueset "Hospice Intervention": 'urn:oid:2.16.840.1.113762.1.4.1182.2'
+valueset "Diabetes": 'urn:oid:2.16.840.1.113883.3.464.1003.103.12.1001'
+valueset "HbA1c Lab Test": 'urn:oid:2.16.840.1.113883.3.464.1003.198.11.1024'
 valueset "Telehealth Modifier": 'urn:oid:2.16.840.1.113762.1.4.1138.731'
 valueset "Telehealth POS": 'urn:oid:2.16.840.1.113883.3.464.1003.101.11.1155'
-valueset "Frailty Device": 'urn:oid:2.16.840.1.113883.3.464.1004.1530'
+valueset "Frailty Device": 'urn:oid:2.16.840.1.113883.3.464.1003.118.12.1300'
+// the frailty diagnosis doesn't have the OID we'll need IRL (will add later)
 valueset "Frailty Diagnosis": 'urn:oid:2.16.840.1.113883.3.464.1004.1531'
-valueset "Frailty Encounter": 'urn:oid:2.16.840.1.113883.3.464.1004.1532'
-valueset "Frailty Symptom": 'urn:oid:2.16.840.1.113883.3.464.1004.1533'
-valueset "Advanced Illness": 'urn:oid:2.16.840.1.113883.3.464.1004.1465'
-valueset "Inpatient Stay": 'urn:oid:2.16.840.1.113883.3.464.1004.1395'
+valueset "Frailty Encounter": 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1088'
+valueset "Frailty Symptom": 'urn:oid:2.16.840.1.113883.3.464.1003.113.12.1075'
+valueset "Advanced Illness": 'urn:oid:2.16.840.1.113883.3.464.1003.110.12.1082'
+valueset "Inpatient Stay": 'urn:oid:2.16.840.1.113762.1.4.1182.285'
 
 code "Acarbose_code": '386965004' from "SNOMED-CT"
 code "Miglitol": '109071007' from "SNOMED-CT"
@@ -43,25 +45,23 @@ parameter MeasurementPeriod default Interval[@2018-12-31T00:00:00.0, @2019-12-31
 
 context Patient
 
-define "test med codes":
-  [MedicationDispense] A
-    where A.medication in "diabetes medication"
-
 define "InitialPopulation":
   AgeInYearsAt(start of MeasurementPeriod) >= 18 and AgeInYearsAt(start of MeasurementPeriod) < 75
 
+
+
 define "telehealth modifier":
   exists ([Encounter: "Telehealth Modifier"] E
-    where E.period in MeasurementPeriod)
+    where E.period starts during MeasurementPeriod)
 
 define "telehealth POS":
   exists ([Encounter: "Telehealth POS"] E
-    where E.period in MeasurementPeriod)
+    where E.period starts during MeasurementPeriod)
 
 define "acute inpatient encounter":
   exists ([Encounter: "Acute Inpatient"] E
     with [Condition: "Diabetes"] D
-    such that E.period in MeasurementPeriod)
+    such that E.period starts during MeasurementPeriod)
 
 define "acute inpatient encounter without telehealth":
   "acute inpatient encounter"
@@ -72,7 +72,7 @@ define "acute inpatient discharge with diabetes":
   [Encounter: "Acute Inpatient"] Enc
     with [Condition: "Diabetes"] Dia
       such that Enc.status = 'finished'
-      and Enc.period in MeasurementPeriod
+      and Enc.period starts during MeasurementPeriod
 
 define "acute inpatient discharge on discharge claim":
   exists ("acute inpatient discharge with diabetes" Enc
@@ -103,9 +103,6 @@ define "observation encounter":
   exists([Encounter: "Observation"] E
     with [Condition: "Diabetes"] dia
       such that E.status = 'finished') */
-
-define "diabetes test":
-  exists ([Condition: "Diabetes"])
 
 define "nonacute outpatient encounters with diabetes":
  // Atleeast 2 of the following encounters with diabetes  on different dates of service
@@ -143,27 +140,25 @@ define "diabetes diagnosis by medication":
 
 define "Frailty":
   exists([Encounter: "Frailty Device"] D
-    where D.period in MeasurementPeriod)
+    where D.period starts during MeasurementPeriod)
     or exists([Encounter: "Frailty Diagnosis"] Dia
-      where Dia.period in MeasurementPeriod)
-      or exists([Encounter: "Frailty Encounter"] E
-        where E.period in MeasurementPeriod)
-        or exists([Encounter: "Frailty Symptom"] S
-          where S.period in MeasurementPeriod)
-            //TODO: age > 66
+      where Dia.period starts during MeasurementPeriod)
+        or exists([Encounter: "Frailty Encounter"] E
+          where E.period starts during MeasurementPeriod)
+          or exists([Encounter: "Frailty Symptom"] S
+            where S.period starts during MeasurementPeriod)
+              //TODO: age > 66
 
 define "Acute Inpatient with Advanced Illness":
-  [Encounter: "Acute Inpatient"] intersect [Condition: "Advanced Illness"]
+  exists ([Condition: "Advanced Illness"]) and  exists ([Encounter : "Acute Inpatient"])
 
-define "Acute Inpatient with Advanced Illness bool":
-  exists([Encounter: "Acute Inpatient"] intersect [Condition: "Advanced Illness"])
-
-define "acute inpatient discharge with Advanced Illness":
-  exists("Acute Inpatient with Advanced Illness" E
-    where E.status ~ 'finished' )
+define "Acute inpatient discharge with Advanced Illness":
+  exists ([Encounter: "Acute Inpatient"] E
+    with [Condition: "Advanced Illness"] AI
+      such that E.status ~ 'finished')
 
 define "diabetes exclusions":
-    "Frailty" and ("acute inpatient discharge with Advanced Illness" or "Acute Inpatient with Advanced Illness bool")
+    "Frailty" and ("Acute inpatient discharge with Advanced Illness" or "Acute Inpatient with Advanced Illness")
     // TODO: atleast 2 outpatients w/ advanced Illness
 
 define "DiabetesCondition":
@@ -172,32 +167,29 @@ define "DiabetesCondition":
     or "nonacute outpatient encounters with diabetes"
     or "diabetes diagnosis by medication"
 
-define "InDenominator":
-  "InitialPopulation" and "DiabetesCondition"
-    and not "diabetes exclusions"
-    /*
-define "hba1c lab test":
-  [Observation: "HbA1c Lab Test"] O */
-  //TODO: need to find latest lab test result during the year
+define "HbA1c < 8":
+  exists ([Observation: "HbA1c Lab Test"] O
+    where O.value < 8)
 
-define "InNumerator":
-  exists ([Observation: "HbA1c Lab Test"]
-    intersect ([Observation: "HbA1c Level Less Than 7.0"]
-      union [Observation: "HbA1c Level Greater Than or Equal to 7.0 and Less Than 8.0"]))
+define "numerator":
+  case ("HbA1c < 8" and "DiabetesCondition" and "InitialPopulation")
+    when true then 1
+    else 0
+  end
 
-define "denom test":
-  true
+define "denominator":
+  case ("InitialPopulation" and "DiabetesCondition")
+    when true then 1
+    else 0
+  end
 
 context Unfiltered
 
-define "denominator":
-  Count("InitialPopulation" IP where IP is true
-  and "denom test" dt where dt is true)//and "DiabetesCondition" DC where DC is true and "diabetes exclusions" DE where DE is false)
+define "denominator_count":
+  Sum(denominator)
 
-define "numerator":
-  Count("InNumerator" In where In is true
-  and "DiabetesCondition" DC where DC is true
-  and "InitialPopulation" IP where IP is true)
+define "numerator_count":
+  Sum(numerator)
 
 define "CDC_MeasureScore":
-  (Count(Patient P where "InNumerator" and "DiabetesCondition" and "InitialPopulation") / Count(Patient P where "InitialPopulation" and "DiabetesCondition" and not "diabetes exclusions")) *100
+  Sum(numerator) / Sum(denominator)

@@ -3,105 +3,6 @@
       "annotation" : [ {
          "translatorOptions" : "",
          "type" : "CqlToElmInfo"
-      }, {
-         "libraryId" : "CDC_HbA1c_lessthan8",
-         "libraryVersion" : "1",
-         "startLine" : 195,
-         "startChar" : 7,
-         "endLine" : 195,
-         "endChar" : 38,
-         "message" : "List-valued expression was demoted to a singleton.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "CDC_HbA1c_lessthan8",
-         "libraryVersion" : "1",
-         "startLine" : 200,
-         "startChar" : 7,
-         "endLine" : 200,
-         "endChar" : 45,
-         "message" : "List-valued expression was demoted to a singleton.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "CDC_HbA1c_lessthan8",
-         "libraryVersion" : "1",
-         "startLine" : 199,
-         "startChar" : 7,
-         "endLine" : 200,
-         "endChar" : 45,
-         "message" : "List-valued expression was demoted to a singleton.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "CDC_HbA1c_lessthan8",
-         "libraryVersion" : "1",
-         "startLine" : 203,
-         "startChar" : 26,
-         "endLine" : 203,
-         "endChar" : 38,
-         "message" : "List-valued expression was demoted to a singleton.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "CDC_HbA1c_lessthan8",
-         "libraryVersion" : "1",
-         "startLine" : 203,
-         "startChar" : 44,
-         "endLine" : 203,
-         "endChar" : 62,
-         "message" : "List-valued expression was demoted to a singleton.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "CDC_HbA1c_lessthan8",
-         "libraryVersion" : "1",
-         "startLine" : 203,
-         "startChar" : 68,
-         "endLine" : 203,
-         "endChar" : 86,
-         "message" : "List-valued expression was demoted to a singleton.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "CDC_HbA1c_lessthan8",
-         "libraryVersion" : "1",
-         "startLine" : 203,
-         "startChar" : 113,
-         "endLine" : 203,
-         "endChar" : 131,
-         "message" : "List-valued expression was demoted to a singleton.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "CDC_HbA1c_lessthan8",
-         "libraryVersion" : "1",
-         "startLine" : 203,
-         "startChar" : 137,
-         "endLine" : 203,
-         "endChar" : 155,
-         "message" : "List-valued expression was demoted to a singleton.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "CDC_HbA1c_lessthan8",
-         "libraryVersion" : "1",
-         "startLine" : 203,
-         "startChar" : 165,
-         "endLine" : 203,
-         "endChar" : 185,
-         "message" : "List-valued expression was demoted to a singleton.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
       } ],
       "identifier" : {
          "id" : "CDC_HbA1c_lessthan8",
@@ -226,35 +127,35 @@
       "valueSets" : {
          "def" : [ {
             "name" : "Acute Inpatient",
-            "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1810",
+            "id" : "urn:oid:2.16.840.1.113762.1.4.1182.120",
             "accessLevel" : "Public"
          }, {
             "name" : "Outpatient",
-            "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1202",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1008",
             "accessLevel" : "Public"
          }, {
             "name" : "ED",
-            "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1086",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1085",
             "accessLevel" : "Public"
          }, {
             "name" : "Observation",
-            "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1191",
+            "id" : "urn:oid:2.16.840.1.113762.1.4.1181.72",
             "accessLevel" : "Public"
          }, {
             "name" : "Nonacute Inpatient Stay",
-            "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1398",
+            "id" : "urn:oid:2.16.840.1.113762.1.4.1182.289",
             "accessLevel" : "Public"
          }, {
             "name" : "Telephone Visits",
-            "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1246",
+            "id" : "urn:oid:2.16.840.1.113883.3.1444.5.216",
             "accessLevel" : "Public"
          }, {
             "name" : "Online Assessments",
-            "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1446",
+            "id" : "urn:oid:2.16.840.1.113883.3.7587.3.1013",
             "accessLevel" : "Public"
          }, {
             "name" : "Nonacute Inpatient",
-            "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1189",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1084",
             "accessLevel" : "Public"
          }, {
             "name" : "HbA1c Level Less Than 7.0",
@@ -270,15 +171,15 @@
             "accessLevel" : "Public"
          }, {
             "name" : "Hospice Intervention",
-            "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1762",
+            "id" : "urn:oid:2.16.840.1.113762.1.4.1182.2",
             "accessLevel" : "Public"
          }, {
             "name" : "Diabetes",
-            "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1077",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.103.12.1001",
             "accessLevel" : "Public"
          }, {
             "name" : "HbA1c Lab Test",
-            "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1755",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.198.11.1024",
             "accessLevel" : "Public"
          }, {
             "name" : "Telehealth Modifier",
@@ -290,7 +191,7 @@
             "accessLevel" : "Public"
          }, {
             "name" : "Frailty Device",
-            "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1530",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.118.12.1300",
             "accessLevel" : "Public"
          }, {
             "name" : "Frailty Diagnosis",
@@ -298,19 +199,19 @@
             "accessLevel" : "Public"
          }, {
             "name" : "Frailty Encounter",
-            "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1532",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1088",
             "accessLevel" : "Public"
          }, {
             "name" : "Frailty Symptom",
-            "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1533",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.113.12.1075",
             "accessLevel" : "Public"
          }, {
             "name" : "Advanced Illness",
-            "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1465",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.110.12.1082",
             "accessLevel" : "Public"
          }, {
             "name" : "Inpatient Stay",
-            "id" : "urn:oid:2.16.840.1.113883.3.464.1004.1395",
+            "id" : "urn:oid:2.16.840.1.113762.1.4.1182.285",
             "accessLevel" : "Public"
          } ]
       },
@@ -368,44 +269,6 @@
                "operand" : {
                   "dataType" : "{http://hl7.org/fhir}Patient",
                   "type" : "Retrieve"
-               }
-            }
-         }, {
-            "name" : "test med codes",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Query",
-               "source" : [ {
-                  "alias" : "A",
-                  "expression" : {
-                     "dataType" : "{http://hl7.org/fhir}MedicationDispense",
-                     "type" : "Retrieve"
-                  }
-               } ],
-               "relationship" : [ ],
-               "where" : {
-                  "type" : "In",
-                  "operand" : [ {
-                     "name" : "ToConcept",
-                     "libraryName" : "FHIRHelpers",
-                     "type" : "FunctionRef",
-                     "operand" : [ {
-                        "asType" : "{http://hl7.org/fhir}CodeableConcept",
-                        "type" : "As",
-                        "operand" : {
-                           "path" : "medication",
-                           "scope" : "A",
-                           "type" : "Property"
-                        }
-                     } ]
-                  }, {
-                     "type" : "ToList",
-                     "operand" : {
-                        "name" : "diabetes medication",
-                        "type" : "ConceptRef"
-                     }
-                  } ]
                }
             }
          }, {
@@ -495,20 +358,20 @@
                   "where" : {
                      "type" : "In",
                      "operand" : [ {
-                        "name" : "ToInterval",
-                        "libraryName" : "FHIRHelpers",
-                        "type" : "FunctionRef",
-                        "operand" : [ {
-                           "path" : "period",
-                           "scope" : "E",
-                           "type" : "Property"
-                        } ]
-                     }, {
-                        "type" : "ToList",
+                        "type" : "Start",
                         "operand" : {
-                           "name" : "MeasurementPeriod",
-                           "type" : "ParameterRef"
+                           "name" : "ToInterval",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "period",
+                              "scope" : "E",
+                              "type" : "Property"
+                           } ]
                         }
+                     }, {
+                        "name" : "MeasurementPeriod",
+                        "type" : "ParameterRef"
                      } ]
                   }
                }
@@ -538,20 +401,20 @@
                   "where" : {
                      "type" : "In",
                      "operand" : [ {
-                        "name" : "ToInterval",
-                        "libraryName" : "FHIRHelpers",
-                        "type" : "FunctionRef",
-                        "operand" : [ {
-                           "path" : "period",
-                           "scope" : "E",
-                           "type" : "Property"
-                        } ]
-                     }, {
-                        "type" : "ToList",
+                        "type" : "Start",
                         "operand" : {
-                           "name" : "MeasurementPeriod",
-                           "type" : "ParameterRef"
+                           "name" : "ToInterval",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "period",
+                              "scope" : "E",
+                              "type" : "Property"
+                           } ]
                         }
+                     }, {
+                        "name" : "MeasurementPeriod",
+                        "type" : "ParameterRef"
                      } ]
                   }
                }
@@ -593,20 +456,20 @@
                      "suchThat" : {
                         "type" : "In",
                         "operand" : [ {
-                           "name" : "ToInterval",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "path" : "period",
-                              "scope" : "E",
-                              "type" : "Property"
-                           } ]
-                        }, {
-                           "type" : "ToList",
+                           "type" : "Start",
                            "operand" : {
-                              "name" : "MeasurementPeriod",
-                              "type" : "ParameterRef"
+                              "name" : "ToInterval",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "path" : "period",
+                                 "scope" : "E",
+                                 "type" : "Property"
+                              } ]
                            }
+                        }, {
+                           "name" : "MeasurementPeriod",
+                           "type" : "ParameterRef"
                         } ]
                      }
                   } ]
@@ -691,20 +554,20 @@
                      }, {
                         "type" : "In",
                         "operand" : [ {
-                           "name" : "ToInterval",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "path" : "period",
-                              "scope" : "Enc",
-                              "type" : "Property"
-                           } ]
-                        }, {
-                           "type" : "ToList",
+                           "type" : "Start",
                            "operand" : {
-                              "name" : "MeasurementPeriod",
-                              "type" : "ParameterRef"
+                              "name" : "ToInterval",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "path" : "period",
+                                 "scope" : "Enc",
+                                 "type" : "Property"
+                              } ]
                            }
+                        }, {
+                           "name" : "MeasurementPeriod",
+                           "type" : "ParameterRef"
                         } ]
                      } ]
                   }
@@ -843,23 +706,6 @@
                      } ]
                   }
                } ]
-            }
-         }, {
-            "name" : "diabetes test",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Exists",
-               "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Condition",
-                  "codeProperty" : "code",
-                  "codeComparator" : "in",
-                  "type" : "Retrieve",
-                  "codes" : {
-                     "name" : "Diabetes",
-                     "type" : "ValueSetRef"
-                  }
-               }
             }
          }, {
             "name" : "nonacute outpatient encounters with diabetes",
@@ -1331,20 +1177,20 @@
                            "where" : {
                               "type" : "In",
                               "operand" : [ {
-                                 "name" : "ToInterval",
-                                 "libraryName" : "FHIRHelpers",
-                                 "type" : "FunctionRef",
-                                 "operand" : [ {
-                                    "path" : "period",
-                                    "scope" : "D",
-                                    "type" : "Property"
-                                 } ]
-                              }, {
-                                 "type" : "ToList",
+                                 "type" : "Start",
                                  "operand" : {
-                                    "name" : "MeasurementPeriod",
-                                    "type" : "ParameterRef"
+                                    "name" : "ToInterval",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "path" : "period",
+                                       "scope" : "D",
+                                       "type" : "Property"
+                                    } ]
                                  }
+                              }, {
+                                 "name" : "MeasurementPeriod",
+                                 "type" : "ParameterRef"
                               } ]
                            }
                         }
@@ -1369,20 +1215,20 @@
                            "where" : {
                               "type" : "In",
                               "operand" : [ {
-                                 "name" : "ToInterval",
-                                 "libraryName" : "FHIRHelpers",
-                                 "type" : "FunctionRef",
-                                 "operand" : [ {
-                                    "path" : "period",
-                                    "scope" : "Dia",
-                                    "type" : "Property"
-                                 } ]
-                              }, {
-                                 "type" : "ToList",
+                                 "type" : "Start",
                                  "operand" : {
-                                    "name" : "MeasurementPeriod",
-                                    "type" : "ParameterRef"
+                                    "name" : "ToInterval",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "path" : "period",
+                                       "scope" : "Dia",
+                                       "type" : "Property"
+                                    } ]
                                  }
+                              }, {
+                                 "name" : "MeasurementPeriod",
+                                 "type" : "ParameterRef"
                               } ]
                            }
                         }
@@ -1408,20 +1254,20 @@
                         "where" : {
                            "type" : "In",
                            "operand" : [ {
-                              "name" : "ToInterval",
-                              "libraryName" : "FHIRHelpers",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "path" : "period",
-                                 "scope" : "E",
-                                 "type" : "Property"
-                              } ]
-                           }, {
-                              "type" : "ToList",
+                              "type" : "Start",
                               "operand" : {
-                                 "name" : "MeasurementPeriod",
-                                 "type" : "ParameterRef"
+                                 "name" : "ToInterval",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "operand" : [ {
+                                    "path" : "period",
+                                    "scope" : "E",
+                                    "type" : "Property"
+                                 } ]
                               }
+                           }, {
+                              "name" : "MeasurementPeriod",
+                              "type" : "ParameterRef"
                            } ]
                         }
                      }
@@ -1447,20 +1293,20 @@
                      "where" : {
                         "type" : "In",
                         "operand" : [ {
-                           "name" : "ToInterval",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "path" : "period",
-                              "scope" : "S",
-                              "type" : "Property"
-                           } ]
-                        }, {
-                           "type" : "ToList",
+                           "type" : "Start",
                            "operand" : {
-                              "name" : "MeasurementPeriod",
-                              "type" : "ParameterRef"
+                              "name" : "ToInterval",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "path" : "period",
+                                 "scope" : "S",
+                                 "type" : "Property"
+                              } ]
                            }
+                        }, {
+                           "name" : "MeasurementPeriod",
+                           "type" : "ParameterRef"
                         } ]
                      }
                   }
@@ -1471,34 +1317,9 @@
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "type" : "Intersect",
+               "type" : "And",
                "operand" : [ {
-                  "type" : "As",
-                  "operand" : {
-                     "dataType" : "{http://hl7.org/fhir}Encounter",
-                     "codeProperty" : "type",
-                     "codeComparator" : "in",
-                     "type" : "Retrieve",
-                     "codes" : {
-                        "name" : "Acute Inpatient",
-                        "type" : "ValueSetRef"
-                     }
-                  },
-                  "asTypeSpecifier" : {
-                     "type" : "ListTypeSpecifier",
-                     "elementType" : {
-                        "type" : "ChoiceTypeSpecifier",
-                        "choice" : [ {
-                           "name" : "{http://hl7.org/fhir}Encounter",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{http://hl7.org/fhir}Condition",
-                           "type" : "NamedTypeSpecifier"
-                        } ]
-                     }
-                  }
-               }, {
-                  "type" : "As",
+                  "type" : "Exists",
                   "operand" : {
                      "dataType" : "{http://hl7.org/fhir}Condition",
                      "codeProperty" : "code",
@@ -1508,85 +1329,23 @@
                         "name" : "Advanced Illness",
                         "type" : "ValueSetRef"
                      }
-                  },
-                  "asTypeSpecifier" : {
-                     "type" : "ListTypeSpecifier",
-                     "elementType" : {
-                        "type" : "ChoiceTypeSpecifier",
-                        "choice" : [ {
-                           "name" : "{http://hl7.org/fhir}Encounter",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{http://hl7.org/fhir}Condition",
-                           "type" : "NamedTypeSpecifier"
-                        } ]
+                  }
+               }, {
+                  "type" : "Exists",
+                  "operand" : {
+                     "dataType" : "{http://hl7.org/fhir}Encounter",
+                     "codeProperty" : "type",
+                     "codeComparator" : "in",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "Acute Inpatient",
+                        "type" : "ValueSetRef"
                      }
                   }
                } ]
             }
          }, {
-            "name" : "Acute Inpatient with Advanced Illness bool",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Exists",
-               "operand" : {
-                  "type" : "Intersect",
-                  "operand" : [ {
-                     "type" : "As",
-                     "operand" : {
-                        "dataType" : "{http://hl7.org/fhir}Encounter",
-                        "codeProperty" : "type",
-                        "codeComparator" : "in",
-                        "type" : "Retrieve",
-                        "codes" : {
-                           "name" : "Acute Inpatient",
-                           "type" : "ValueSetRef"
-                        }
-                     },
-                     "asTypeSpecifier" : {
-                        "type" : "ListTypeSpecifier",
-                        "elementType" : {
-                           "type" : "ChoiceTypeSpecifier",
-                           "choice" : [ {
-                              "name" : "{http://hl7.org/fhir}Encounter",
-                              "type" : "NamedTypeSpecifier"
-                           }, {
-                              "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
-                           } ]
-                        }
-                     }
-                  }, {
-                     "type" : "As",
-                     "operand" : {
-                        "dataType" : "{http://hl7.org/fhir}Condition",
-                        "codeProperty" : "code",
-                        "codeComparator" : "in",
-                        "type" : "Retrieve",
-                        "codes" : {
-                           "name" : "Advanced Illness",
-                           "type" : "ValueSetRef"
-                        }
-                     },
-                     "asTypeSpecifier" : {
-                        "type" : "ListTypeSpecifier",
-                        "elementType" : {
-                           "type" : "ChoiceTypeSpecifier",
-                           "choice" : [ {
-                              "name" : "{http://hl7.org/fhir}Encounter",
-                              "type" : "NamedTypeSpecifier"
-                           }, {
-                              "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
-                           } ]
-                        }
-                     }
-                  } ]
-               }
-            }
-         }, {
-            "name" : "acute inpatient discharge with Advanced Illness",
+            "name" : "Acute inpatient discharge with Advanced Illness",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
@@ -1596,28 +1355,47 @@
                   "source" : [ {
                      "alias" : "E",
                      "expression" : {
-                        "name" : "Acute Inpatient with Advanced Illness",
-                        "type" : "ExpressionRef"
+                        "dataType" : "{http://hl7.org/fhir}Encounter",
+                        "codeProperty" : "type",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Acute Inpatient",
+                           "type" : "ValueSetRef"
+                        }
                      }
                   } ],
-                  "relationship" : [ ],
-                  "where" : {
-                     "type" : "Equivalent",
-                     "operand" : [ {
-                        "name" : "ToString",
-                        "libraryName" : "FHIRHelpers",
-                        "type" : "FunctionRef",
+                  "relationship" : [ {
+                     "alias" : "AI",
+                     "type" : "With",
+                     "expression" : {
+                        "dataType" : "{http://hl7.org/fhir}Condition",
+                        "codeProperty" : "code",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Advanced Illness",
+                           "type" : "ValueSetRef"
+                        }
+                     },
+                     "suchThat" : {
+                        "type" : "Equivalent",
                         "operand" : [ {
-                           "path" : "status",
-                           "scope" : "E",
-                           "type" : "Property"
+                           "name" : "ToString",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "status",
+                              "scope" : "E",
+                              "type" : "Property"
+                           } ]
+                        }, {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "finished",
+                           "type" : "Literal"
                         } ]
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "finished",
-                        "type" : "Literal"
-                     } ]
-                  }
+                     }
+                  } ]
                }
             }
          }, {
@@ -1632,10 +1410,10 @@
                }, {
                   "type" : "Or",
                   "operand" : [ {
-                     "name" : "acute inpatient discharge with Advanced Illness",
+                     "name" : "Acute inpatient discharge with Advanced Illness",
                      "type" : "ExpressionRef"
                   }, {
-                     "name" : "Acute Inpatient with Advanced Illness bool",
+                     "name" : "Acute Inpatient with Advanced Illness",
                      "type" : "ExpressionRef"
                   } ]
                } ]
@@ -1667,12 +1445,97 @@
                } ]
             }
          }, {
-            "name" : "InDenominator",
+            "name" : "HbA1c < 8",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "type" : "And",
-               "operand" : [ {
+               "type" : "Exists",
+               "operand" : {
+                  "type" : "Query",
+                  "source" : [ {
+                     "alias" : "O",
+                     "expression" : {
+                        "dataType" : "{http://hl7.org/fhir}Observation",
+                        "codeProperty" : "code",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "HbA1c Lab Test",
+                           "type" : "ValueSetRef"
+                        }
+                     }
+                  } ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "type" : "Less",
+                     "operand" : [ {
+                        "name" : "ToInteger",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "asType" : "{http://hl7.org/fhir}integer",
+                           "type" : "As",
+                           "operand" : {
+                              "path" : "value",
+                              "scope" : "O",
+                              "type" : "Property"
+                           }
+                        } ]
+                     }, {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "8",
+                        "type" : "Literal"
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "name" : "numerator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Case",
+               "comparand" : {
+                  "type" : "And",
+                  "operand" : [ {
+                     "type" : "And",
+                     "operand" : [ {
+                        "name" : "HbA1c < 8",
+                        "type" : "ExpressionRef"
+                     }, {
+                        "name" : "DiabetesCondition",
+                        "type" : "ExpressionRef"
+                     } ]
+                  }, {
+                     "name" : "InitialPopulation",
+                     "type" : "ExpressionRef"
+                  } ]
+               },
+               "caseItem" : [ {
+                  "when" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "value" : "true",
+                     "type" : "Literal"
+                  },
+                  "then" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }
+               } ],
+               "else" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "name" : "denominator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Case",
+               "comparand" : {
                   "type" : "And",
                   "operand" : [ {
                      "name" : "InitialPopulation",
@@ -1681,181 +1544,45 @@
                      "name" : "DiabetesCondition",
                      "type" : "ExpressionRef"
                   } ]
-               }, {
-                  "type" : "Not",
-                  "operand" : {
-                     "name" : "diabetes exclusions",
-                     "type" : "ExpressionRef"
+               },
+               "caseItem" : [ {
+                  "when" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "value" : "true",
+                     "type" : "Literal"
+                  },
+                  "then" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
                   }
-               } ]
-            }
-         }, {
-            "name" : "InNumerator",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Exists",
-               "operand" : {
-                  "type" : "Intersect",
-                  "operand" : [ {
-                     "dataType" : "{http://hl7.org/fhir}Observation",
-                     "codeProperty" : "code",
-                     "codeComparator" : "in",
-                     "type" : "Retrieve",
-                     "codes" : {
-                        "name" : "HbA1c Lab Test",
-                        "type" : "ValueSetRef"
-                     }
-                  }, {
-                     "type" : "Union",
-                     "operand" : [ {
-                        "dataType" : "{http://hl7.org/fhir}Observation",
-                        "codeProperty" : "code",
-                        "codeComparator" : "in",
-                        "type" : "Retrieve",
-                        "codes" : {
-                           "name" : "HbA1c Level Less Than 7.0",
-                           "type" : "ValueSetRef"
-                        }
-                     }, {
-                        "dataType" : "{http://hl7.org/fhir}Observation",
-                        "codeProperty" : "code",
-                        "codeComparator" : "in",
-                        "type" : "Retrieve",
-                        "codes" : {
-                           "name" : "HbA1c Level Greater Than or Equal to 7.0 and Less Than 8.0",
-                           "type" : "ValueSetRef"
-                        }
-                     } ]
-                  } ]
+               } ],
+               "else" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "type" : "Literal"
                }
             }
          }, {
-            "name" : "denom test",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-               "value" : "true",
-               "type" : "Literal"
-            }
-         }, {
-            "name" : "denominator",
+            "name" : "denominator_count",
             "context" : "Unfiltered",
             "accessLevel" : "Public",
             "expression" : {
-               "type" : "Count",
+               "type" : "Sum",
                "source" : {
-                  "type" : "Query",
-                  "source" : [ {
-                     "alias" : "IP",
-                     "expression" : {
-                        "name" : "InitialPopulation",
-                        "type" : "ExpressionRef"
-                     }
-                  } ],
-                  "relationship" : [ ],
-                  "where" : {
-                     "type" : "And",
-                     "operand" : [ {
-                        "type" : "IsTrue",
-                        "operand" : {
-                           "name" : "IP",
-                           "type" : "AliasRef"
-                        }
-                     }, {
-                        "type" : "SingletonFrom",
-                        "operand" : {
-                           "type" : "Query",
-                           "source" : [ {
-                              "alias" : "dt",
-                              "expression" : {
-                                 "name" : "denom test",
-                                 "type" : "ExpressionRef"
-                              }
-                           } ],
-                           "relationship" : [ ],
-                           "where" : {
-                              "type" : "IsTrue",
-                              "operand" : {
-                                 "name" : "dt",
-                                 "type" : "AliasRef"
-                              }
-                           }
-                        }
-                     } ]
-                  }
+                  "name" : "denominator",
+                  "type" : "ExpressionRef"
                }
             }
          }, {
-            "name" : "numerator",
+            "name" : "numerator_count",
             "context" : "Unfiltered",
             "accessLevel" : "Public",
             "expression" : {
-               "type" : "Count",
+               "type" : "Sum",
                "source" : {
-                  "type" : "Query",
-                  "source" : [ {
-                     "alias" : "In",
-                     "expression" : {
-                        "name" : "InNumerator",
-                        "type" : "ExpressionRef"
-                     }
-                  } ],
-                  "relationship" : [ ],
-                  "where" : {
-                     "type" : "And",
-                     "operand" : [ {
-                        "type" : "IsTrue",
-                        "operand" : {
-                           "name" : "In",
-                           "type" : "AliasRef"
-                        }
-                     }, {
-                        "type" : "SingletonFrom",
-                        "operand" : {
-                           "type" : "Query",
-                           "source" : [ {
-                              "alias" : "DC",
-                              "expression" : {
-                                 "name" : "DiabetesCondition",
-                                 "type" : "ExpressionRef"
-                              }
-                           } ],
-                           "relationship" : [ ],
-                           "where" : {
-                              "type" : "And",
-                              "operand" : [ {
-                                 "type" : "IsTrue",
-                                 "operand" : {
-                                    "name" : "DC",
-                                    "type" : "AliasRef"
-                                 }
-                              }, {
-                                 "type" : "SingletonFrom",
-                                 "operand" : {
-                                    "type" : "Query",
-                                    "source" : [ {
-                                       "alias" : "IP",
-                                       "expression" : {
-                                          "name" : "InitialPopulation",
-                                          "type" : "ExpressionRef"
-                                       }
-                                    } ],
-                                    "relationship" : [ ],
-                                    "where" : {
-                                       "type" : "IsTrue",
-                                       "operand" : {
-                                          "name" : "IP",
-                                          "type" : "AliasRef"
-                                       }
-                                    }
-                                 }
-                              } ]
-                           }
-                        }
-                     } ]
-                  }
+                  "name" : "numerator",
+                  "type" : "ExpressionRef"
                }
             }
          }, {
@@ -1863,101 +1590,24 @@
             "context" : "Unfiltered",
             "accessLevel" : "Public",
             "expression" : {
-               "type" : "Multiply",
+               "type" : "Divide",
                "operand" : [ {
-                  "type" : "Divide",
-                  "operand" : [ {
-                     "type" : "ToDecimal",
-                     "operand" : {
-                        "type" : "Count",
-                        "source" : {
-                           "type" : "Query",
-                           "source" : [ {
-                              "alias" : "P",
-                              "expression" : {
-                                 "name" : "Patient",
-                                 "type" : "ExpressionRef"
-                              }
-                           } ],
-                           "relationship" : [ ],
-                           "where" : {
-                              "type" : "And",
-                              "operand" : [ {
-                                 "type" : "And",
-                                 "operand" : [ {
-                                    "type" : "SingletonFrom",
-                                    "operand" : {
-                                       "name" : "InNumerator",
-                                       "type" : "ExpressionRef"
-                                    }
-                                 }, {
-                                    "type" : "SingletonFrom",
-                                    "operand" : {
-                                       "name" : "DiabetesCondition",
-                                       "type" : "ExpressionRef"
-                                    }
-                                 } ]
-                              }, {
-                                 "type" : "SingletonFrom",
-                                 "operand" : {
-                                    "name" : "InitialPopulation",
-                                    "type" : "ExpressionRef"
-                                 }
-                              } ]
-                           }
-                        }
+                  "type" : "ToDecimal",
+                  "operand" : {
+                     "type" : "Sum",
+                     "source" : {
+                        "name" : "numerator",
+                        "type" : "ExpressionRef"
                      }
-                  }, {
-                     "type" : "ToDecimal",
-                     "operand" : {
-                        "type" : "Count",
-                        "source" : {
-                           "type" : "Query",
-                           "source" : [ {
-                              "alias" : "P",
-                              "expression" : {
-                                 "name" : "Patient",
-                                 "type" : "ExpressionRef"
-                              }
-                           } ],
-                           "relationship" : [ ],
-                           "where" : {
-                              "type" : "And",
-                              "operand" : [ {
-                                 "type" : "And",
-                                 "operand" : [ {
-                                    "type" : "SingletonFrom",
-                                    "operand" : {
-                                       "name" : "InitialPopulation",
-                                       "type" : "ExpressionRef"
-                                    }
-                                 }, {
-                                    "type" : "SingletonFrom",
-                                    "operand" : {
-                                       "name" : "DiabetesCondition",
-                                       "type" : "ExpressionRef"
-                                    }
-                                 } ]
-                              }, {
-                                 "type" : "Not",
-                                 "operand" : {
-                                    "type" : "SingletonFrom",
-                                    "operand" : {
-                                       "name" : "diabetes exclusions",
-                                       "type" : "ExpressionRef"
-                                    }
-                                 }
-                              } ]
-                           }
-                        }
-                     }
-                  } ]
+                  }
                }, {
                   "type" : "ToDecimal",
                   "operand" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "100",
-                     "type" : "Literal"
+                     "type" : "Sum",
+                     "source" : {
+                        "name" : "denominator",
+                        "type" : "ExpressionRef"
+                     }
                   }
                } ]
             }
