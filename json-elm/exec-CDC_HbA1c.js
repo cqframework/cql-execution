@@ -16,4 +16,4 @@ const patientSource = cqlfhir.PatientSource.FHIRv400();
 patientSource.loadBundles(patients);
 
 const result = executor.exec(patientSource);
-console.log(JSON.stringify(result, undefined, 2));
+console.log(JSON.stringify(result, undefined, 2)); // eslint-disable-line no-console
