@@ -1,11 +1,15 @@
 const cql = require('../src/cql');
 const measure = require('../json-elm/diabetes-bp.json');
+const fhirhelpers = require('../json-elm/FHIRHelpers.json');
 const codes = require('../src/cql-code-service');
 const cqlfhir = require('cql-exec-fhir');
 const patients = require('../data/patients/bp-patients');
 const codeservice = require('../data/codes/bp-codes');
 
-const lib = new cql.Library(measure);
+const includedLibs = {
+  FHIRHelpers: fhirhelpers
+};
+const lib = new cql.Library(measure, new cql.Repository(includedLibs));
 const cservice = new codes.CodeService(codeservice);
 const parameters = {
   MeasurementPeriod: new cql.Interval(
