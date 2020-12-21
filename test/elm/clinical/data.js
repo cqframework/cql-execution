@@ -40,7 +40,16 @@ module.exports['ValueSetDef'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "valueSets" : {
@@ -48,18 +57,50 @@ module.exports['ValueSetDef'] = {
             "localId" : "2",
             "name" : "Known",
             "id" : "2.16.840.1.113883.3.464.1003.101.12.1061",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "valueset ","\"Known\"",": ","'2.16.840.1.113883.3.464.1003.101.12.1061'" ]
+                  } ]
+               }
+            } ]
          }, {
             "localId" : "3",
             "name" : "Unknown One Arg",
             "id" : "1.2.3.4.5.6.7.8.9",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "valueset ","\"Unknown One Arg\"",": ","'1.2.3.4.5.6.7.8.9'" ]
+                  } ]
+               }
+            } ]
          }, {
             "localId" : "4",
             "name" : "Unknown Two Arg",
             "id" : "1.2.3.4.5.6.7.8.9",
             "version" : "1",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "valueset ","\"Unknown Two Arg\"",": ","'1.2.3.4.5.6.7.8.9'"," version ","'1'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -133,7 +174,16 @@ module.exports['ValueSetRef'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "valueSets" : {
@@ -141,7 +191,21 @@ module.exports['ValueSetRef'] = {
             "localId" : "2",
             "name" : "Acute Pharyngitis",
             "id" : "2.16.840.1.113883.3.464.1003.101.12.1001",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "valueset ","\"Acute Pharyngitis\"",": ","'2.16.840.1.113883.3.464.1003.101.12.1001'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -237,7 +301,16 @@ module.exports['InValueSet'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "valueSets" : {
@@ -245,23 +318,64 @@ module.exports['InValueSet'] = {
             "localId" : "2",
             "name" : "Female",
             "id" : "2.16.840.1.113883.3.560.100.2",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "valueset ","\"Female\"",": ","'2.16.840.1.113883.3.560.100.2'" ]
+                  } ]
+               }
+            } ]
          }, {
             "localId" : "3",
             "name" : "Versioned Female",
             "id" : "2.16.840.1.113883.3.560.100.2",
             "version" : "20121025",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "valueset ","\"Versioned Female\"",": ","'2.16.840.1.113883.3.560.100.2'"," version ","'20121025'" ]
+                  } ]
+               }
+            } ]
          }, {
             "localId" : "4",
             "name" : "SharedCodes",
             "id" : "2.16.840.1.113883.3.000.000.0",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "valueset ","\"SharedCodes\"",": ","'2.16.840.1.113883.3.000.000.0'" ]
+                  } ]
+               }
+            } ]
          }, {
             "localId" : "5",
             "name" : "ImproperSharedCodes",
             "id" : "2.16.840.1.113883.3.000.000.1",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "valueset ","\"ImproperSharedCodes\"",": ","'2.16.840.1.113883.3.000.000.1'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -315,7 +429,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "7",
-                  "name" : "Female"
+                  "name" : "Female",
+                  "type" : "ValueSetRef"
                }
             }
          }, {
@@ -358,7 +473,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "11",
-                  "name" : "SharedCodes"
+                  "name" : "SharedCodes",
+                  "type" : "ValueSetRef"
                }
             }
          }, {
@@ -401,7 +517,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "15",
-                  "name" : "SharedCodes"
+                  "name" : "SharedCodes",
+                  "type" : "ValueSetRef"
                }
             }
          }, {
@@ -444,7 +561,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "19",
-                  "name" : "ImproperSharedCodes"
+                  "name" : "ImproperSharedCodes",
+                  "type" : "ValueSetRef"
                }
             }
          }, {
@@ -487,7 +605,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "23",
-                  "name" : "Versioned Female"
+                  "name" : "Versioned Female",
+                  "type" : "ValueSetRef"
                }
             }
          }, {
@@ -549,7 +668,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "28",
-                  "name" : "Female"
+                  "name" : "Female",
+                  "type" : "ValueSetRef"
                }
             }
          }, {
@@ -630,7 +750,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "34",
-                  "name" : "Female"
+                  "name" : "Female",
+                  "type" : "ValueSetRef"
                }
             }
          }, {
@@ -730,7 +851,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "41",
-                  "name" : "Female"
+                  "name" : "Female",
+                  "type" : "ValueSetRef"
                }
             }
          }, {
@@ -773,7 +895,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "45",
-                  "name" : "Female"
+                  "name" : "Female",
+                  "type" : "ValueSetRef"
                }
             }
          }, {
@@ -816,7 +939,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "49",
-                  "name" : "Versioned Female"
+                  "name" : "Versioned Female",
+                  "type" : "ValueSetRef"
                }
             }
          }, {
@@ -878,7 +1002,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "54",
-                  "name" : "Female"
+                  "name" : "Female",
+                  "type" : "ValueSetRef"
                }
             }
          }, {
@@ -959,7 +1084,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "60",
-                  "name" : "Female"
+                  "name" : "Female",
+                  "type" : "ValueSetRef"
                }
             }
          }, {
@@ -1059,7 +1185,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "67",
-                  "name" : "Female"
+                  "name" : "Female",
+                  "type" : "ValueSetRef"
                }
             }
          }, {
@@ -1157,7 +1284,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "74",
-                  "name" : "Female"
+                  "name" : "Female",
+                  "type" : "ValueSetRef"
                }
             }
          }, {
@@ -1299,7 +1427,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "84",
-                  "name" : "Female"
+                  "name" : "Female",
+                  "type" : "ValueSetRef"
                }
             }
          }, {
@@ -1570,7 +1699,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "103",
-                  "name" : "Female"
+                  "name" : "Female",
+                  "type" : "ValueSetRef"
                }
             }
          }, {
@@ -1612,7 +1742,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "107",
-                  "name" : "Female"
+                  "name" : "Female",
+                  "type" : "ValueSetRef"
                }
             }
          }, {
@@ -1768,7 +1899,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "119",
-                  "name" : "Female"
+                  "name" : "Female",
+                  "type" : "ValueSetRef"
                }
             }
          }, {
@@ -1843,7 +1975,8 @@ module.exports['InValueSet'] = {
                },
                "valueset" : {
                   "localId" : "126",
-                  "name" : "Female"
+                  "name" : "Female",
+                  "type" : "ValueSetRef"
                }
             }
          } ]
@@ -1881,7 +2014,16 @@ module.exports['Patient Property In ValueSet'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "valueSets" : {
@@ -1889,7 +2031,21 @@ module.exports['Patient Property In ValueSet'] = {
             "localId" : "2",
             "name" : "Female",
             "id" : "2.16.840.1.113883.3.560.100.2",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "valueset ","\"Female\"",": ","'2.16.840.1.113883.3.560.100.2'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -1957,7 +2113,8 @@ module.exports['Patient Property In ValueSet'] = {
                },
                "valueset" : {
                   "localId" : "5",
-                  "name" : "Female"
+                  "name" : "Female",
+                  "type" : "ValueSetRef"
                }
             }
          } ]
@@ -1996,7 +2153,16 @@ module.exports['CodeDef'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "codeSystems" : {
@@ -2004,7 +2170,16 @@ module.exports['CodeDef'] = {
             "localId" : "2",
             "name" : "LOINC",
             "id" : "http://loinc.org",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "codesystem ","\"LOINC\"",": ","'http://loinc.org'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "codes" : {
@@ -2014,10 +2189,31 @@ module.exports['CodeDef'] = {
             "id" : "72166-2",
             "display" : "Tobacco smoking status",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "code ","\"Tobacco smoking status code\"",": ","'72166-2'"," from " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "\"LOINC\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'Tobacco smoking status'" ]
+                  } ]
+               }
+            } ],
             "codeSystem" : {
                "localId" : "3",
                "name" : "LOINC"
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2092,7 +2288,16 @@ module.exports['CodeRef'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "codeSystems" : {
@@ -2100,7 +2305,16 @@ module.exports['CodeRef'] = {
             "localId" : "2",
             "name" : "LOINC",
             "id" : "http://loinc.org",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "codesystem ","\"LOINC\"",": ","'http://loinc.org'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "codes" : {
@@ -2110,10 +2324,31 @@ module.exports['CodeRef'] = {
             "id" : "72166-2",
             "display" : "Tobacco smoking status",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "code ","\"Tobacco smoking status code\"",": ","'72166-2'"," from " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "\"LOINC\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'Tobacco smoking status'" ]
+                  } ]
+               }
+            } ],
             "codeSystem" : {
                "localId" : "3",
                "name" : "LOINC"
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2188,7 +2423,16 @@ module.exports['ConceptDef'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "codeSystems" : {
@@ -2196,7 +2440,16 @@ module.exports['ConceptDef'] = {
             "localId" : "2",
             "name" : "LOINC",
             "id" : "http://loinc.org",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "codesystem ","\"LOINC\"",": ","'http://loinc.org'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "codes" : {
@@ -2206,6 +2459,22 @@ module.exports['ConceptDef'] = {
             "id" : "72166-2",
             "display" : "Tobacco smoking status",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "code ","\"Tobacco smoking status code\"",": ","'72166-2'"," from " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "\"LOINC\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'Tobacco smoking status'" ]
+                  } ]
+               }
+            } ],
             "codeSystem" : {
                "localId" : "3",
                "name" : "LOINC"
@@ -2218,10 +2487,31 @@ module.exports['ConceptDef'] = {
             "name" : "Tobacco smoking status",
             "display" : "Tobacco smoking status",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "6",
+                  "s" : [ {
+                     "value" : [ "concept ","\"Tobacco smoking status\"",": { " ]
+                  }, {
+                     "r" : "5",
+                     "s" : [ {
+                        "value" : [ "\"Tobacco smoking status code\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " } display ","'Tobacco smoking status'" ]
+                  } ]
+               }
+            } ],
             "code" : [ {
                "localId" : "5",
                "name" : "Tobacco smoking status code"
             } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2297,7 +2587,16 @@ module.exports['ConceptRef'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "codeSystems" : {
@@ -2305,7 +2604,16 @@ module.exports['ConceptRef'] = {
             "localId" : "2",
             "name" : "LOINC",
             "id" : "http://loinc.org",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "codesystem ","\"LOINC\"",": ","'http://loinc.org'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "codes" : {
@@ -2315,6 +2623,22 @@ module.exports['ConceptRef'] = {
             "id" : "72166-2",
             "display" : "Tobacco smoking status",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "code ","\"Tobacco smoking status code\"",": ","'72166-2'"," from " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "\"LOINC\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'Tobacco smoking status'" ]
+                  } ]
+               }
+            } ],
             "codeSystem" : {
                "localId" : "3",
                "name" : "LOINC"
@@ -2327,10 +2651,31 @@ module.exports['ConceptRef'] = {
             "name" : "Tobacco smoking status",
             "display" : "Tobacco smoking status",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "6",
+                  "s" : [ {
+                     "value" : [ "concept ","\"Tobacco smoking status\"",": { " ]
+                  }, {
+                     "r" : "5",
+                     "s" : [ {
+                        "value" : [ "\"Tobacco smoking status code\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " } display ","'Tobacco smoking status'" ]
+                  } ]
+               }
+            } ],
             "code" : [ {
                "localId" : "5",
                "name" : "Tobacco smoking status code"
             } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2408,7 +2753,21 @@ module.exports['CalculateAge'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2692,7 +3051,21 @@ module.exports['CalculateAgeAt'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {

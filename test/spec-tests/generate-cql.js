@@ -61,7 +61,7 @@ fs.readdirSync(path.join(__dirname, 'xml')).forEach(file => {
 
   // Construct the CQL
   const suiteName = xmlJS.tests._attributes.name;
-  let cql = `library ${suiteName} version '1.4.0'\nusing Simple\ncontext Patient\n`;
+  let cql = `library ${suiteName} version '1.5.0'\nusing Simple\ncontext Patient\n`;
   xmlJS.tests.group.forEach((group, i) => {
     // Some groups have all their tests commented out.  In that case, don't generate the group at all.
     if (group.test == null || group.test.length === 0) {

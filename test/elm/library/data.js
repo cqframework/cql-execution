@@ -41,7 +41,16 @@ module.exports['In Age Demographic'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -49,6 +58,36 @@ module.exports['In Age Demographic'] = {
             "localId" : "11",
             "name" : "MeasurementPeriod",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "11",
+                  "s" : [ {
+                     "value" : [ "parameter ","MeasurementPeriod"," default " ]
+                  }, {
+                     "r" : "10",
+                     "s" : [ {
+                        "value" : [ "Interval[" ]
+                     }, {
+                        "r" : "5",
+                        "s" : [ {
+                           "r" : "2",
+                           "value" : [ "DateTime","(","2013",", ","1",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "9",
+                        "s" : [ {
+                           "r" : "6",
+                           "value" : [ "DateTime","(","2014",", ","1",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "10",
                "lowClosed" : true,
@@ -99,6 +138,11 @@ module.exports['In Age Demographic'] = {
                   }
                }
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -288,14 +332,38 @@ module.exports['CommonLib'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "includes" : {
          "def" : [ {
             "localId" : "2",
             "localIdentifier" : "common2",
-            "path" : "Common2"
+            "path" : "Common2",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Common2" ]
+                     } ]
+                  }, {
+                     "value" : [ " called ","common2" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -303,6 +371,36 @@ module.exports['CommonLib'] = {
             "localId" : "15",
             "name" : "MeasurementPeriod",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "15",
+                  "s" : [ {
+                     "value" : [ "parameter ","MeasurementPeriod"," default " ]
+                  }, {
+                     "r" : "14",
+                     "s" : [ {
+                        "value" : [ "Interval[" ]
+                     }, {
+                        "r" : "9",
+                        "s" : [ {
+                           "r" : "6",
+                           "value" : [ "DateTime","(","2013",", ","1",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "13",
+                        "s" : [ {
+                           "r" : "10",
+                           "value" : [ "DateTime","(","2014",", ","1",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "14",
                "lowClosed" : true,
@@ -360,7 +458,16 @@ module.exports['CommonLib'] = {
             "localId" : "3",
             "name" : "SNOMEDCT",
             "id" : "2.16.840.1.113883.6.96",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "codesystem ","\"SNOMEDCT\"",": ","'2.16.840.1.113883.6.96'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "codes" : {
@@ -370,10 +477,31 @@ module.exports['CommonLib'] = {
             "id" : "428371000124100",
             "display" : "directReferenceCode",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "code ","\"directReferenceCode\"",": ","'428371000124100'"," from " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "\"SNOMEDCT\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'directReferenceCode'" ]
+                  } ]
+               }
+            } ],
             "codeSystem" : {
                "localId" : "4",
                "name" : "SNOMEDCT"
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -726,14 +854,38 @@ module.exports['Using CommonLib'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "includes" : {
          "def" : [ {
             "localId" : "2",
             "localIdentifier" : "common",
-            "path" : "Common"
+            "path" : "Common",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Common" ]
+                     } ]
+                  }, {
+                     "value" : [ " called ","common" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -741,6 +893,36 @@ module.exports['Using CommonLib'] = {
             "localId" : "12",
             "name" : "MeasurementPeriod",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "value" : [ "parameter ","MeasurementPeriod"," default " ]
+                  }, {
+                     "r" : "11",
+                     "s" : [ {
+                        "value" : [ "Interval[" ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "r" : "3",
+                           "value" : [ "DateTime","(","2013",", ","1",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "r" : "7",
+                           "value" : [ "DateTime","(","2014",", ","1",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "11",
                "lowClosed" : true,
@@ -791,6 +973,11 @@ module.exports['Using CommonLib'] = {
                   }
                }
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -1039,7 +1226,16 @@ module.exports['CommonLib2'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -1047,6 +1243,16 @@ module.exports['CommonLib2'] = {
             "localId" : "3",
             "name" : "SomeNumber",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "r" : "2",
+                     "value" : [ "parameter ","SomeNumber"," default ","17" ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "2",
                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1057,12 +1263,27 @@ module.exports['CommonLib2'] = {
             "localId" : "5",
             "name" : "AnotherNumber",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "r" : "4",
+                     "value" : [ "parameter ","AnotherNumber"," default ","20" ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "4",
                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                "value" : "20",
                "type" : "Literal"
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -1745,14 +1966,43 @@ module.exports['Using CommonLib2'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "includes" : {
          "def" : [ {
             "localId" : "2",
             "localIdentifier" : "common2",
-            "path" : "Common2"
+            "path" : "Common2",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Common2" ]
+                     } ]
+                  }, {
+                     "value" : [ " called ","common2" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2218,18 +2468,62 @@ module.exports['Using CommonLib and CommonLib2'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "includes" : {
          "def" : [ {
             "localId" : "2",
             "localIdentifier" : "common2",
-            "path" : "Common2"
+            "path" : "Common2",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Common2" ]
+                     } ]
+                  }, {
+                     "value" : [ " called ","common2" ]
+                  } ]
+               }
+            } ]
          }, {
             "localId" : "3",
             "localIdentifier" : "common",
-            "path" : "Common"
+            "path" : "Common",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Common" ]
+                     } ]
+                  }, {
+                     "value" : [ " called ","common" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {

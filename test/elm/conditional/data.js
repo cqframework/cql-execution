@@ -38,7 +38,16 @@ module.exports['If'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -46,11 +55,30 @@ module.exports['If'] = {
             "localId" : "3",
             "name" : "var",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "parameter ","var"," " ]
+                  }, {
+                     "r" : "2",
+                     "s" : [ {
+                        "value" : [ "Boolean" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "2",
                "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "NamedTypeSpecifier"
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -178,7 +206,16 @@ module.exports['Case'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -186,6 +223,20 @@ module.exports['Case'] = {
             "localId" : "3",
             "name" : "var",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "parameter ","var"," " ]
+                  }, {
+                     "r" : "2",
+                     "s" : [ {
+                        "value" : [ "Integer" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "2",
                "name" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -195,6 +246,20 @@ module.exports['Case'] = {
             "localId" : "5",
             "name" : "X",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "parameter ","X"," " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "Integer" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "4",
                "name" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -204,11 +269,30 @@ module.exports['Case'] = {
             "localId" : "7",
             "name" : "Y",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "parameter ","Y"," " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "Integer" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "6",
                "name" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "NamedTypeSpecifier"
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {

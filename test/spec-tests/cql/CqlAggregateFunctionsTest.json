@@ -6,7 +6,7 @@
       } ],
       "identifier" : {
          "id" : "CqlAggregateFunctionsTest",
-         "version" : "1.4.0"
+         "version" : "1.5.0"
       },
       "schemaIdentifier" : {
          "id" : "urn:hl7-org:elm",
@@ -19,6 +19,11 @@
          }, {
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple"
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {

@@ -73,7 +73,21 @@ module.exports['Equal'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -3289,7 +3303,21 @@ module.exports['NotEqual'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -6513,7 +6541,16 @@ module.exports['Equivalent'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "codeSystems" : {
@@ -6521,7 +6558,16 @@ module.exports['Equivalent'] = {
             "localId" : "2",
             "name" : "LOINC",
             "id" : "http://loinc.org",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "codesystem ","\"LOINC\"",": ","'http://loinc.org'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "codes" : {
@@ -6531,6 +6577,22 @@ module.exports['Equivalent'] = {
             "id" : "72166-2",
             "display" : "Tobacco smoking status code",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "code ","\"Tobacco smoking status code\"",": ","'72166-2'"," from " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "\"LOINC\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'Tobacco smoking status code'" ]
+                  } ]
+               }
+            } ],
             "codeSystem" : {
                "localId" : "3",
                "name" : "LOINC"
@@ -6541,6 +6603,22 @@ module.exports['Equivalent'] = {
             "id" : "72166-2",
             "display" : "Tobacco smoking status code clone",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "6",
+                  "s" : [ {
+                     "value" : [ "code ","\"Tobacco smoking status code clone\"",": ","'72166-2'"," from " ]
+                  }, {
+                     "r" : "5",
+                     "s" : [ {
+                        "value" : [ "\"LOINC\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'Tobacco smoking status code clone'" ]
+                  } ]
+               }
+            } ],
             "codeSystem" : {
                "localId" : "5",
                "name" : "LOINC"
@@ -6551,6 +6629,22 @@ module.exports['Equivalent'] = {
             "id" : "75626-2",
             "display" : "Total Score [Audit-C] code",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "8",
+                  "s" : [ {
+                     "value" : [ "code ","\"Total Score [AUDIT-C] code\"",": ","'75626-2'"," from " ]
+                  }, {
+                     "r" : "7",
+                     "s" : [ {
+                        "value" : [ "\"LOINC\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'Total Score [Audit-C] code'" ]
+                  } ]
+               }
+            } ],
             "codeSystem" : {
                "localId" : "7",
                "name" : "LOINC"
@@ -6563,6 +6657,22 @@ module.exports['Equivalent'] = {
             "name" : "Tobacco smoking status",
             "display" : "Tobacco smoking status",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "10",
+                  "s" : [ {
+                     "value" : [ "concept ","\"Tobacco smoking status\"",": { " ]
+                  }, {
+                     "r" : "9",
+                     "s" : [ {
+                        "value" : [ "\"Tobacco smoking status code\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " } display ","'Tobacco smoking status'" ]
+                  } ]
+               }
+            } ],
             "code" : [ {
                "localId" : "9",
                "name" : "Tobacco smoking status code"
@@ -6572,6 +6682,22 @@ module.exports['Equivalent'] = {
             "name" : "Tobacco smoking status clone",
             "display" : "Tobacco smoking status",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "value" : [ "concept ","\"Tobacco smoking status clone\"",": { " ]
+                  }, {
+                     "r" : "11",
+                     "s" : [ {
+                        "value" : [ "\"Tobacco smoking status code clone\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " } display ","'Tobacco smoking status'" ]
+                  } ]
+               }
+            } ],
             "code" : [ {
                "localId" : "11",
                "name" : "Tobacco smoking status code clone"
@@ -6581,10 +6707,31 @@ module.exports['Equivalent'] = {
             "name" : "Total Score [AUDIT-C]",
             "display" : "Total Score [Audit-C]",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "14",
+                  "s" : [ {
+                     "value" : [ "concept ","\"Total Score [AUDIT-C]\"",": { " ]
+                  }, {
+                     "r" : "13",
+                     "s" : [ {
+                        "value" : [ "\"Total Score [AUDIT-C] code\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " } display ","'Total Score [Audit-C]'" ]
+                  } ]
+               }
+            } ],
             "code" : [ {
                "localId" : "13",
                "name" : "Total Score [AUDIT-C] code"
             } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -11641,7 +11788,21 @@ module.exports['Less'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -12201,7 +12362,21 @@ module.exports['LessOrEqual'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -12761,7 +12936,21 @@ module.exports['Greater'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -13323,7 +13512,21 @@ module.exports['GreaterOrEqual'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {

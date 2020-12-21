@@ -1,4 +1,4 @@
-library CqlNullologicalOperatorsTest version '1.4.0'
+library CqlNullologicalOperatorsTest version '1.5.0'
 using Simple
 context Patient
 

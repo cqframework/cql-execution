@@ -6,7 +6,7 @@
       } ],
       "identifier" : {
          "id" : "CqlArithmeticFunctionsTest",
-         "version" : "1.4.0"
+         "version" : "1.5.0"
       },
       "schemaIdentifier" : {
          "id" : "urn:hl7-org:elm",
@@ -19,6 +19,11 @@
          }, {
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple"
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -189,6 +194,19 @@
                         }
                      } ]
                   }
+               }, {
+                  "name" : "AbsLong",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Long not implemented",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
                } ]
             }
          }, {
@@ -331,6 +349,33 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "3.0",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "Add1L1L",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Add",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+                              "value" : "",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+                              "value" : "",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+                           "value" : "",
                            "type" : "Literal"
                         }
                      } ]
@@ -1805,6 +1850,19 @@
                      } ]
                   }
                }, {
+                  "name" : "LongMinValue",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Long not implemented",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
                   "name" : "DecimalMinValue",
                   "value" : {
                      "type" : "Tuple",
@@ -1937,6 +1995,19 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2147483647",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "LongMaxValue",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Long not implemented",
                            "type" : "Literal"
                         }
                      } ]
@@ -2127,6 +2198,19 @@
                      } ]
                   }
                }, {
+                  "name" : "Modulo4LBy2L",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Long not implemented",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
                   "name" : "Modulo4DBy2D",
                   "value" : {
                      "type" : "Tuple",
@@ -2267,6 +2351,19 @@
                         }
                      } ]
                   }
+               }, {
+                  "name" : "ModuloQuantity",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Modulo not implemented for Quantity",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
                } ]
             }
          }, {
@@ -2338,6 +2435,19 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "2.0",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "Multiply1By1L",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Long not implemented",
                            "type" : "Literal"
                         }
                      } ]
@@ -2517,6 +2627,19 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "NegateNeg1L",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Long not implemented",
                            "type" : "Literal"
                         }
                      } ]
@@ -2801,6 +2924,19 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "0",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "PredecessorOf1L",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Long not implemented",
                            "type" : "Literal"
                         }
                      } ]
@@ -3190,6 +3326,19 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "0.25",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "Power2LTo2L",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Long not implemented",
                            "type" : "Literal"
                         }
                      } ]
@@ -3801,6 +3950,19 @@
                      } ]
                   }
                }, {
+                  "name" : "Subtract1LAnd1L",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Long not implemented",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
                   "name" : "Subtract1DAnd2D",
                   "value" : {
                      "type" : "Tuple",
@@ -3967,6 +4129,19 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "SuccessorOf1L",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Long not implemented",
                            "type" : "Literal"
                         }
                      } ]
@@ -4601,6 +4776,19 @@
                      } ]
                   }
                }, {
+                  "name" : "TruncatedDivide10LBy3L",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Long not implemented",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
                   "name" : "TruncatedDivide10d1By3D1",
                   "value" : {
                      "type" : "Tuple",
@@ -4870,6 +5058,19 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "2.0",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TruncatedDivide10d1ByNeg3D1Quantity",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Truncated divide not implemented for Quantity",
                            "type" : "Literal"
                         }
                      } ]

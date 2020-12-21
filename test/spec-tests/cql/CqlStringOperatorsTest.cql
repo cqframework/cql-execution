@@ -1,4 +1,4 @@
-library CqlStringOperatorsTest version '1.4.0'
+library CqlStringOperatorsTest version '1.5.0'
 using Simple
 context Patient
 

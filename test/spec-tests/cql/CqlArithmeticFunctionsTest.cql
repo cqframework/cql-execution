@@ -1,4 +1,4 @@
-library CqlArithmeticFunctionsTest version '1.4.0'
+library CqlArithmeticFunctionsTest version '1.5.0'
 using Simple
 context Patient
 
@@ -26,7 +26,13 @@ define "Abs": Tuple{
   "Abs1cm": Tuple{
     expression: Abs(-1.0'cm'),
     output: 1.0'cm'
-  }
+  },
+  "AbsLong": Tuple{
+    skipped: 'Long not implemented'
+    /*
+    expression: Abs(-1L),
+    output: 1L
+    */  }
 }
 
 define "Add": Tuple{
@@ -49,6 +55,10 @@ define "Add": Tuple{
   "AddIAndD": Tuple{
     expression: 1 + 2.0,
     output: 3.0
+  },
+  "Add1L1L": Tuple{
+    expression: 1L + 1L,
+    output: 2L
   }
 }
 
@@ -323,6 +333,12 @@ define "MinValue": Tuple{
     expression: minimum Integer,
     output: -2147483648
   },
+  "LongMinValue": Tuple{
+    skipped: 'Long not implemented'
+    /*
+    expression: minimum Long,
+    output: -9223372036854775808
+    */  },
   "DecimalMinValue": Tuple{
     skipped: 'Wrong answer (-1e+29 vs -1e+28)'
     /*
@@ -350,6 +366,12 @@ define "MaxValue": Tuple{
     expression: maximum Integer,
     output: 2147483647
   },
+  "LongMaxValue": Tuple{
+    skipped: 'Long not implemented'
+    /*
+    expression: maximum Long,
+    output: 9223372036854775807
+    */  },
   "DecimalMaxValue": Tuple{
     skipped: 'Wrong answer (1e+29 vs 1e+28)'
     /*
@@ -387,6 +409,12 @@ define "Modulo": Tuple{
     expression: 4 mod 2,
     output: 0
   },
+  "Modulo4LBy2L": Tuple{
+    skipped: 'Long not implemented'
+    /*
+    expression: 4L mod 2L,
+    output: 0L
+    */  },
   "Modulo4DBy2D": Tuple{
     expression: 4.0 mod 2.0,
     output: 0.0
@@ -406,7 +434,13 @@ define "Modulo": Tuple{
   "ModuloDResult": Tuple{
     expression: 3.5 mod 3,
     output: 0.5
-  }
+  },
+  "ModuloQuantity": Tuple{
+    skipped: 'Modulo not implemented for Quantity'
+    /*
+    expression: 3.5 'cm' mod 3 'cm',
+    output: 0.5 'cm'
+    */  }
 }
 
 define "Multiply": Tuple{
@@ -424,6 +458,12 @@ define "Multiply": Tuple{
     expression: 1.0 * 2.0,
     output: 2.0
   },
+  "Multiply1By1L": Tuple{
+    skipped: 'Long not implemented'
+    /*
+    expression: 1 * 1L,
+    output: 1L
+    */  },
   "Multiply1IBy2D": Tuple{
     expression: 1 * 2.0,
     output: 2.0
@@ -457,6 +497,12 @@ define "Negate": Tuple{
     expression: -(-1),
     output: 1
   },
+  "NegateNeg1L": Tuple{
+    skipped: 'Long not implemented'
+    /*
+    expression: -(-1L),
+    output: 1L
+    */  },
   "Negate0D": Tuple{
     expression: -(0.0),
     output: 0.0
@@ -525,6 +571,12 @@ define "Predecessor": Tuple{
     expression: predecessor of 1,
     output: 0
   },
+  "PredecessorOf1L": Tuple{
+    skipped: 'Long not implemented'
+    /*
+    expression: predecessor of 1L,
+    output: 0L
+    */  },
   "PredecessorOf1D": Tuple{
     skipped: 'Wrong answer (doesn\'t recognize 1.0 as decimal)'
     /*
@@ -582,6 +634,12 @@ define "Power": Tuple{
     expression: Power(2, -2),
     output: 0.25
   },
+  "Power2LTo2L": Tuple{
+    skipped: 'Long not implemented'
+    /*
+    expression: Power(2L, 2L),
+    output: 4L
+    */  },
   "Power2DTo2D": Tuple{
     expression: Power(2.0, 2.0),
     output: 4.0
@@ -672,6 +730,12 @@ define "Subtract": Tuple{
     expression: 1 - 1,
     output: 0
   },
+  "Subtract1LAnd1L": Tuple{
+    skipped: 'Long not implemented'
+    /*
+    expression: 1L - 1L,
+    output: 0L
+    */  },
   "Subtract1DAnd2D": Tuple{
     expression: 1.0 - 2.0,
     output: -1.0
@@ -699,6 +763,12 @@ define "Successor": Tuple{
     expression: successor of 1,
     output: 2
   },
+  "SuccessorOf1L": Tuple{
+    skipped: 'Long not implemented'
+    /*
+    expression: successor of 1L,
+    output: 2L
+    */  },
   "SuccessorOf1D": Tuple{
     skipped: 'Wrong answer (doesn\'t recognize 1.0 as decimal)'
     /*
@@ -795,6 +865,12 @@ define "Truncated Divide": Tuple{
     expression: 10 div 3,
     output: 3
   },
+  "TruncatedDivide10LBy3L": Tuple{
+    skipped: 'Long not implemented'
+    /*
+    expression: 10L div 3L,
+    output: 3L
+    */  },
   "TruncatedDivide10d1By3D1": Tuple{
     expression: 10.1 div 3.1,
     output: 3.0
@@ -846,5 +922,11 @@ define "Truncated Divide": Tuple{
   "TruncatedDivide10By5D": Tuple{
     expression: 10 div 5.0,
     output: 2.0
-  }
+  },
+  "TruncatedDivide10d1ByNeg3D1Quantity": Tuple{
+    skipped: 'Truncated divide not implemented for Quantity'
+    /*
+    expression: 10.1 'cm' div -3.1 'cm',
+    output: -3.0 'cm'
+    */  }
 }

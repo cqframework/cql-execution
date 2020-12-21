@@ -52,7 +52,16 @@ module.exports['Retrieve'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "includes" : {
@@ -60,7 +69,22 @@ module.exports['Retrieve'] = {
             "localId" : "2",
             "localIdentifier" : "included",
             "path" : "Included",
-            "version" : "1"
+            "version" : "1",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Included" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1'"," called ","included" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "codeSystems" : {
@@ -68,7 +92,16 @@ module.exports['Retrieve'] = {
             "localId" : "3",
             "name" : "SNOMED",
             "id" : "2.16.840.1.113883.6.96",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "codesystem ","\"SNOMED\"",": ","'2.16.840.1.113883.6.96'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "valueSets" : {
@@ -76,12 +109,30 @@ module.exports['Retrieve'] = {
             "localId" : "4",
             "name" : "Ambulatory/ED Visit",
             "id" : "2.16.840.1.113883.3.464.1003.101.12.1061",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "valueset ","\"Ambulatory/ED Visit\"",": ","'2.16.840.1.113883.3.464.1003.101.12.1061'" ]
+                  } ]
+               }
+            } ]
          }, {
             "localId" : "5",
             "name" : "Annual Wellness Visit",
             "id" : "2.16.840.1.113883.3.526.3.1240",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "valueset ","\"Annual Wellness Visit\"",": ","'2.16.840.1.113883.3.526.3.1240'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "codes" : {
@@ -91,6 +142,22 @@ module.exports['Retrieve'] = {
             "id" : "1532007",
             "display" : "Viral pharyngitis (disorder)",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "code ","\"Viral pharyngitis code\"",": ","'1532007'"," from " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "\"SNOMED\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'Viral pharyngitis (disorder)'" ]
+                  } ]
+               }
+            } ],
             "codeSystem" : {
                "localId" : "6",
                "name" : "SNOMED"
@@ -103,10 +170,31 @@ module.exports['Retrieve'] = {
             "name" : "Viral pharyngitis",
             "display" : "Viral pharyngitis (disorder)",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "concept ","\"Viral pharyngitis\"",": { " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "\"Viral pharyngitis code\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " } display ","'Viral pharyngitis (disorder)'" ]
+                  } ]
+               }
+            } ],
             "code" : [ {
                "localId" : "8",
                "name" : "Viral pharyngitis code"
             } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -197,6 +285,7 @@ module.exports['Retrieve'] = {
                "localId" : "14",
                "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                "codeProperty" : "code",
+               "codeComparator" : "in",
                "type" : "Retrieve",
                "codes" : {
                   "name" : "Acute Pharyngitis",
@@ -233,6 +322,7 @@ module.exports['Retrieve'] = {
                "localId" : "16",
                "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                "codeProperty" : "code",
+               "codeComparator" : "in",
                "type" : "Retrieve",
                "codes" : {
                   "name" : "Ambulatory/ED Visit",
@@ -259,7 +349,7 @@ module.exports['Retrieve'] = {
                            "value" : [ "code" ]
                         } ]
                      }, {
-                        "value" : [ " in " ]
+                        "value" : [ " ","in"," " ]
                      }, {
                         "s" : [ {
                            "value" : [ "\"Ambulatory/ED Visit\"" ]
@@ -274,6 +364,7 @@ module.exports['Retrieve'] = {
                "localId" : "18",
                "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                "codeProperty" : "code",
+               "codeComparator" : "in",
                "type" : "Retrieve",
                "codes" : {
                   "name" : "Ambulatory/ED Visit",
@@ -309,6 +400,7 @@ module.exports['Retrieve'] = {
                "localId" : "20",
                "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                "codeProperty" : "code",
+               "codeComparator" : "in",
                "type" : "Retrieve",
                "codes" : {
                   "name" : "Ambulatory/ED Visit",
@@ -335,7 +427,7 @@ module.exports['Retrieve'] = {
                            "value" : [ "status" ]
                         } ]
                      }, {
-                        "value" : [ " in " ]
+                        "value" : [ " ","in"," " ]
                      }, {
                         "s" : [ {
                            "value" : [ "\"Ambulatory/ED Visit\"" ]
@@ -350,6 +442,7 @@ module.exports['Retrieve'] = {
                "localId" : "22",
                "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                "codeProperty" : "status",
+               "codeComparator" : "in",
                "type" : "Retrieve",
                "codes" : {
                   "name" : "Ambulatory/ED Visit",
@@ -385,6 +478,7 @@ module.exports['Retrieve'] = {
                "localId" : "24",
                "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                "codeProperty" : "code",
+               "codeComparator" : "~",
                "type" : "Retrieve",
                "codes" : {
                   "type" : "ToList",
@@ -423,6 +517,7 @@ module.exports['Retrieve'] = {
                "localId" : "26",
                "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                "codeProperty" : "code",
+               "codeComparator" : "~",
                "type" : "Retrieve",
                "codes" : {
                   "path" : "codes",
@@ -468,7 +563,16 @@ module.exports['Included'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "codeSystems" : {
@@ -476,7 +580,16 @@ module.exports['Included'] = {
             "localId" : "2",
             "name" : "SNOMED",
             "id" : "2.16.840.1.113883.6.96",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "codesystem ","\"SNOMED\"",": ","'2.16.840.1.113883.6.96'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "valueSets" : {
@@ -484,7 +597,16 @@ module.exports['Included'] = {
             "localId" : "3",
             "name" : "Acute Pharyngitis",
             "id" : "2.16.840.1.113883.3.464.1003.102.12.1011",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "valueset ","\"Acute Pharyngitis\"",": ","'2.16.840.1.113883.3.464.1003.102.12.1011'" ]
+                  } ]
+               }
+            } ]
          } ]
       }
    }

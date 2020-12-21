@@ -14,6 +14,7 @@ CqlLogicalOperatorsTest.Implies.FalseImpliesNull    Translation Error: Could not
 CqlLogicalOperatorsTest.Implies.NullImpliesTrue     Translation Error: Could not resolve call to operator Implies with signature (System.Any,System.Boolean).
 CqlLogicalOperatorsTest.Implies.NullImpliesFalse    Translation Error: Could not resolve call to operator Implies with signature (System.Any,System.Boolean).
 CqlLogicalOperatorsTest.Implies.NullImpliesNull     Translation Error: Could not resolve call to operator Implies with signature (System.Any,System.Any).
+CqlAggregateTest.AggregateTests.RolledOutIntervals  Translation Error: Could not resolve identifier MedicationRequestIntervals in the current library.
 CqlIntervalOperatorsTest.Expand.ExpandPer1          Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Decimal>>,System.Integer).
 CqlIntervalOperatorsTest.Expand.ExpandPer0D1        Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Integer>>,System.Decimal).
 
@@ -90,6 +91,9 @@ ValueLiteralsAndSelectors.Decimal.DecimalNeg2Pow31ToInf1    Underflows because i
 
 # Incorrect answer due to partial implementation
 
+CqlAggregateTest.AggregateTests.FactorialOfFive                                       Query aggregation not implemented
+CqlArithmeticFunctionsTest.Modulo.ModuloQuantity                                      Modulo not implemented for Quantity
+"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10d1ByNeg3D1Quantity"     Truncated divide not implemented for Quantity
 "CqlDateTimeOperatorsTest.Uncertainty tests.DateTimeDurationBetweenUncertainAdd"      Adding Uncertainties not supported
 "CqlDateTimeOperatorsTest.Uncertainty tests.DateTimeDurationBetweenUncertainSubtract" Subtracting Uncertainties not supported
 "CqlDateTimeOperatorsTest.Uncertainty tests.DateTimeDurationBetweenUncertainMultiply" Multiplying Uncertainties not supported
@@ -128,6 +132,20 @@ CqlListOperatorsTest.Skip                 Skip not implemented
 CqlListOperatorsTest.Tail                 Tail not implemented
 CqlListOperatorsTest.Take                 Take not implemented
 CqlStringOperatorsTest.ReplaceMatches     ReplaceMatches not implemented
+
+# Unimplemented (Long datatype)
+
+CqlArithmeticFunctionsTest.Abs.AbsLong                                Long not implemented
+CqlArithmeticFunctionsTest.MinValue.LongMinValue                      Long not implemented
+CqlArithmeticFunctionsTest.MaxValue.LongMaxValue                      Long not implemented
+CqlArithmeticFunctionsTest.Modulo.Modulo4LBy2L                        Long not implemented
+CqlArithmeticFunctionsTest.Multiply.Multiply1By1L                     Long not implemented
+CqlArithmeticFunctionsTest.Negate.NegateNeg1L                         Long not implemented
+CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1L                Long not implemented
+CqlArithmeticFunctionsTest.Power.Power2LTo2L                          Long not implemented
+CqlArithmeticFunctionsTest.Subtract.Subtract1LAnd1L                   Long not implemented
+CqlArithmeticFunctionsTest.Successor.SuccessorOf1L                    Long not implemented
+"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10LBy3L"  Long not implemented
 
 # Awaiting feedback from Bryn
 
