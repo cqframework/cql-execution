@@ -56,14 +56,8 @@ parameter MeasurementPeriod default Interval[@2018-12-31T00:00:00.0, @2019-12-31
 
 context Patient
 
-define "HELLO Qualifying Diastolic Blood Pressure Reading":
-	["Observation": "Blood pressure"] BloodPressure
-	  where BloodPressure.status in {'final', 'amended'} // = 'final' 
-
 define "InitialPopulation":
   AgeInYearsAt(start of MeasurementPeriod) >= 18 and AgeInYearsAt(start of MeasurementPeriod) < 75
-
-
 
 define "telehealth modifier":
   exists ([Encounter: "Telehealth Modifier"] E
@@ -94,52 +88,48 @@ define "acute inpatient discharge on discharge claim":
     with [Claim: "Acute Inpatient"] AI
       such that Enc.subject = AI.patient)
 
-define "nonacute diabetes discharges":
-  [Encounter: "Nonacute Inpatient Stay"] E
+define "nonacute diabetes discharges-list":
+  distinct ([Encounter: "Nonacute Inpatient Stay"] E
     with [Condition: "Diabetes"] Dia
-      such that E.status ~ 'finished'
+      such that E.status ~ 'finished')
+
+define "nonacute diabetes discharges":
+  Count ("nonacute diabetes discharges-list")
 
 define "nonacute diabetes discharges on claim":
-  "nonacute diabetes discharges" E
+  Count ("nonacute diabetes discharges-list" E
     with [Claim: "Nonacute Inpatient Stay"] C
-      such that E.subject = C.patient
+      such that E.subject = C.patient)
 
-/* define "outpatient encounter":
-  exists([Encounter: "Outpatient"] E
-    with [Condition: "Diabetes"] dia
-      such that E.status = 'finished')
+define "out":
+  exists ([Encounter: "Telehealth POS"] E
+    with [Condition: "Diabetes"] c
+      such that E.period starts during MeasurementPeriod)
 
-define "outpatient encounter - list":
-  [Encounter: "Outpatient"] E
-    with [Condition: "Diabetes"] dia
-      such that E.status = 'finished'
+define "tele":
+  exists ([Encounter: "Telehealth Modifier"] E
+    with [Condition: "Diabetes"] c
+      such that E.period starts during MeasurementPeriod)
 
-define "observation encounter":
-  exists([Encounter: "Observation"] E
-    with [Condition: "Diabetes"] dia
-      such that E.status = 'finished') */
+define "telephone vis":
+  exists ([Encounter: "Telephone Visits"] E
+    with [Condition: "Diabetes"] c
+      such that E.period starts during MeasurementPeriod)
 
-define "nonacute outpatient encounters with diabetes":
- // Atleeast 2 of the following encounters with diabetes  on different dates of service
- // TODO: reference discharge claim *** THIS NEEDS WORK ***
-  Count({exists([Encounter: "Outpatient"] E with [Condition: "Diabetes"] dia such that E.status = 'finished'),
-        exists([Encounter: "Observation"] F with [Condition: "Diabetes"] dia such that F.status = 'finished'),
-        exists([Encounter: "Telephone Visits"] G with [Condition: "Diabetes"] dia such that G.status = 'finished'),
-        exists([Encounter: "Online Assessments"] H with [Condition: "Diabetes"] dia such that H.status = 'finished'),
-        exists([Encounter: "ED"] I with [Condition: "Diabetes"] dia such that I.status = 'finished')})>=2
+define "online assess":
+  exists ([Encounter: "Online Assessments"] E
+    with [Condition: "Diabetes"] c
+      such that E.period starts during MeasurementPeriod)
 
-  //TODO: only one outpatient telephone visit, telephone visit or online assessment, can't be two of these
+define "out-tele-online":
+  case ("out" or "tele" or "telephone vis" or "online assess")
+    when true then 1
+    else 0
+  end
 
-// 2 encounters (1 non acute, non acute cannot be telehealth)
-// how many qualifies non acute, if atleast 2 then ur done
-// aree there non acutes that aren't telehealth
+define "atleast 2 remote or nonacute inpatient encounters with diabetes":
+   "nonacute diabetes discharges" + "nonacute diabetes discharges on claim" + "out-tele-online" >= 2
 
-// atleast 2 outpatient, observation, telephone, online assessment, ED, nonacute inpatient encounter, non acute inpatient discharges
-// diagnosis must be on discharge claim
-// on different dates of service
-// with diagnosis of diabetes
-// only include non acute without telehealth
-// only one can outpatient telehealth, telephone visit, online assessment
 
 define "diabetes diagnosis by medication":
   //TODO: figure out how to do medication dynamically to avoid version control conflict
@@ -179,60 +169,46 @@ define "diabetes exclusions":
 define "DiabetesCondition":
   "acute inpatient encounter without telehealth"
     or "acute inpatient discharge on discharge claim"
-    or "nonacute outpatient encounters with diabetes"
+    or "atleast 2 remote or nonacute inpatient encounters with diabetes"
     or "diabetes diagnosis by medication"
-/*
-define "BP < 140/90 mm Hg":
-  exists ([Observation: "Systolic Blood Pressure"] O
-    where O.value < 140/90 mm Hg)
-*/
 
-
-// TODO: link these encounters and things to subject?
-define "correct context for bp reading":
-  exists([Encounter: "Outpatient"] O
-    where O.period during MeasurementPeriod)
-    or exists([Encounter: "Nonacute Inpatient Stay"] E
-      where E.period during MeasurementPeriod)
-      // or [Encounter: "Remote Blood Pressure Monitoring"] R
-        // where R.period during MeasurementPeriod
-
-define "Qualifying Diastolic Blood Pressure Reading":
-	["Observation": "Blood pressure"] BloodPressure
-	  where BloodPressure.status in {'final', 'amended'} // = 'final' 
-      // not sure if .effective is correct?
-      // and exists(BloodPressure.effective.start)
-      // and BloodPressure.effective during MeasurementPeriod
-      /*
-      and exists (
-        BloodPressure.component DiastolicBP
-          where FHIRHelpers.ToConcept(DiastolicBP.code) ~ "Diastolic blood pressure"
-            and DiastolicBP.value.unit = 'mm[Hg]'
-            and DiastolicBP.value.value < 90
+define "correct context for bp reading":	
+  exists([Encounter: "Outpatient"] O	
+    where O.period during MeasurementPeriod)	
+    or exists([Encounter: "Nonacute Inpatient Stay"] E	
+      where E.period during MeasurementPeriod)	
+      // or [Encounter: "Remote Blood Pressure Monitoring"] R	
+        // where R.period during MeasurementPeriod	
+        
+define "Qualifying Diastolic Blood Pressure Reading":	
+	["Observation": "Blood pressure"] BloodPressure	
+	  where BloodPressure.status in {'final', 'amended'}	
+      and BloodPressure.effective.value during "MeasurementPeriod"	
+      and exists (	
+        BloodPressure.component DiastolicBP	
+          where FHIRHelpers.ToConcept(DiastolicBP.code) ~ "Diastolic blood pressure"	
+            and DiastolicBP.value.unit in {'mm[Hg]', 'mmHg'}	
+            and DiastolicBP.value.value.value < 90	
+      )	
+      	
+define "Qualifying Systolic Blood Pressure Reading":	
+	["Observation": "Blood pressure"] BloodPressure	
+	  where BloodPressure.status in {'final', 'amended'}	
+      and BloodPressure.effective.value during "MeasurementPeriod"	
+      and exists (	
+        BloodPressure.component SystolicBP	
+          where FHIRHelpers.ToConcept(SystolicBP.code) ~ "Systolic blood pressure"	
+            and SystolicBP.value.unit in {'mm[Hg]', 'mmHg'}	
+            and SystolicBP.value.value.value < 140	
       )
-      */
 
-/*
-define "Qualifying Systolic Blood Pressure Reading":
-	["Observation": "Blood pressure"] BloodPressure
-	  where BloodPressure.status in {'final', 'amended'}
-      // not sure if .effective is correct?
-      and BloodPressure.effective during MeasurementPeriod
-      and exists (
-        BloodPressure.component SystolicBP
-          where FHIRHelpers.ToConcept(SystolicBP.code) ~ "Systolic blood pressure"
-            and SystolicBP.value.unit = 'mm[Hg]'
-            and SystolicBP.value.value < 140
-      )
- */
- /*
-define "BP < 140/90 mm Hg":
-  exists("correct context for bp reading") 
-  and exists("Qualifying Diastolic Blood Pressure Reading")
+define "BP < 140/90 mm Hg":	
+  exists("correct context for bp reading") 	
+  and exists("Qualifying Diastolic Blood Pressure Reading")	
   and exists("Qualifying Systolic Blood Pressure Reading")
 
 define "numerator":
-  case ("BP < 140/90 mm Hg" and "DiabetesCondition" and "InitialPopulation")
+  case ("BP < 140/90 mm Hg" and "DiabetesCondition" and "InitialPopulation" and not "diabetes exclusions")
     when true then 1
     else 0
   end
@@ -253,4 +229,3 @@ define "numerator_count":
 
 define "CDC_MeasureScore":
   Sum(numerator) / Sum(denominator)
-  */

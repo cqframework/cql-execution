@@ -3,6 +3,17 @@
       "annotation" : [ {
          "translatorOptions" : "",
          "type" : "CqlToElmInfo"
+      }, {
+         "libraryId" : "BP_less_then_140_over_90",
+         "libraryVersion" : "1",
+         "startLine" : 206,
+         "startChar" : 10,
+         "endLine" : 206,
+         "endChar" : 41,
+         "message" : "Boolean-valued expression was promoted to a list.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
       } ],
       "identifier" : {
          "id" : "BP_less_then_140_over_90",
@@ -276,6 +287,8 @@
       "contexts" : {
          "def" : [ {
             "name" : "Patient"
+         }, {
+            "name" : "Unfiltered"
          } ]
       },
       "statements" : {
@@ -287,54 +300,6 @@
                "operand" : {
                   "dataType" : "{http://hl7.org/fhir}Patient",
                   "type" : "Retrieve"
-               }
-            }
-         }, {
-            "name" : "HELLO Qualifying Diastolic Blood Pressure Reading",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Query",
-               "source" : [ {
-                  "alias" : "BloodPressure",
-                  "expression" : {
-                     "dataType" : "{http://hl7.org/fhir}Observation",
-                     "codeProperty" : "code",
-                     "codeComparator" : "~",
-                     "type" : "Retrieve",
-                     "codes" : {
-                        "type" : "ToList",
-                        "operand" : {
-                           "name" : "Blood pressure",
-                           "type" : "CodeRef"
-                        }
-                     }
-                  }
-               } ],
-               "relationship" : [ ],
-               "where" : {
-                  "type" : "In",
-                  "operand" : [ {
-                     "name" : "ToString",
-                     "libraryName" : "FHIRHelpers",
-                     "type" : "FunctionRef",
-                     "operand" : [ {
-                        "path" : "status",
-                        "scope" : "BloodPressure",
-                        "type" : "Property"
-                     } ]
-                  }, {
-                     "type" : "List",
-                     "element" : [ {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "final",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "amended",
-                        "type" : "Literal"
-                     } ]
-                  } ]
                }
             }
          }, {
@@ -683,353 +648,404 @@
                }
             }
          }, {
+            "name" : "nonacute diabetes discharges-list",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Distinct",
+               "operand" : {
+                  "type" : "Query",
+                  "source" : [ {
+                     "alias" : "E",
+                     "expression" : {
+                        "dataType" : "{http://hl7.org/fhir}Encounter",
+                        "codeProperty" : "type",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Nonacute Inpatient Stay",
+                           "type" : "ValueSetRef"
+                        }
+                     }
+                  } ],
+                  "relationship" : [ {
+                     "alias" : "Dia",
+                     "type" : "With",
+                     "expression" : {
+                        "dataType" : "{http://hl7.org/fhir}Condition",
+                        "codeProperty" : "code",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Diabetes",
+                           "type" : "ValueSetRef"
+                        }
+                     },
+                     "suchThat" : {
+                        "type" : "Equivalent",
+                        "operand" : [ {
+                           "name" : "ToString",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "status",
+                              "scope" : "E",
+                              "type" : "Property"
+                           } ]
+                        }, {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "finished",
+                           "type" : "Literal"
+                        } ]
+                     }
+                  } ]
+               }
+            }
+         }, {
             "name" : "nonacute diabetes discharges",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "type" : "Query",
-               "source" : [ {
-                  "alias" : "E",
-                  "expression" : {
-                     "dataType" : "{http://hl7.org/fhir}Encounter",
-                     "codeProperty" : "type",
-                     "codeComparator" : "in",
-                     "type" : "Retrieve",
-                     "codes" : {
-                        "name" : "Nonacute Inpatient Stay",
-                        "type" : "ValueSetRef"
-                     }
-                  }
-               } ],
-               "relationship" : [ {
-                  "alias" : "Dia",
-                  "type" : "With",
-                  "expression" : {
-                     "dataType" : "{http://hl7.org/fhir}Condition",
-                     "codeProperty" : "code",
-                     "codeComparator" : "in",
-                     "type" : "Retrieve",
-                     "codes" : {
-                        "name" : "Diabetes",
-                        "type" : "ValueSetRef"
-                     }
-                  },
-                  "suchThat" : {
-                     "type" : "Equivalent",
-                     "operand" : [ {
-                        "name" : "ToString",
-                        "libraryName" : "FHIRHelpers",
-                        "type" : "FunctionRef",
-                        "operand" : [ {
-                           "path" : "status",
-                           "scope" : "E",
-                           "type" : "Property"
-                        } ]
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "finished",
-                        "type" : "Literal"
-                     } ]
-                  }
-               } ]
+               "type" : "Count",
+               "source" : {
+                  "name" : "nonacute diabetes discharges-list",
+                  "type" : "ExpressionRef"
+               }
             }
          }, {
             "name" : "nonacute diabetes discharges on claim",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "type" : "Query",
-               "source" : [ {
-                  "alias" : "E",
-                  "expression" : {
-                     "name" : "nonacute diabetes discharges",
-                     "type" : "ExpressionRef"
-                  }
-               } ],
-               "relationship" : [ {
-                  "alias" : "C",
-                  "type" : "With",
-                  "expression" : {
-                     "dataType" : "{http://hl7.org/fhir}Claim",
-                     "codeProperty" : "type",
-                     "codeComparator" : "in",
-                     "type" : "Retrieve",
-                     "codes" : {
-                        "name" : "Nonacute Inpatient Stay",
-                        "type" : "ValueSetRef"
+               "type" : "Count",
+               "source" : {
+                  "type" : "Query",
+                  "source" : [ {
+                     "alias" : "E",
+                     "expression" : {
+                        "name" : "nonacute diabetes discharges-list",
+                        "type" : "ExpressionRef"
                      }
-                  },
-                  "suchThat" : {
-                     "type" : "Equal",
-                     "operand" : [ {
-                        "path" : "subject",
-                        "scope" : "E",
-                        "type" : "Property"
-                     }, {
-                        "path" : "patient",
-                        "scope" : "C",
-                        "type" : "Property"
-                     } ]
-                  }
-               } ]
+                  } ],
+                  "relationship" : [ {
+                     "alias" : "C",
+                     "type" : "With",
+                     "expression" : {
+                        "dataType" : "{http://hl7.org/fhir}Claim",
+                        "codeProperty" : "type",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Nonacute Inpatient Stay",
+                           "type" : "ValueSetRef"
+                        }
+                     },
+                     "suchThat" : {
+                        "type" : "Equal",
+                        "operand" : [ {
+                           "path" : "subject",
+                           "scope" : "E",
+                           "type" : "Property"
+                        }, {
+                           "path" : "patient",
+                           "scope" : "C",
+                           "type" : "Property"
+                        } ]
+                     }
+                  } ]
+               }
             }
          }, {
-            "name" : "nonacute outpatient encounters with diabetes",
+            "name" : "out",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Exists",
+               "operand" : {
+                  "type" : "Query",
+                  "source" : [ {
+                     "alias" : "E",
+                     "expression" : {
+                        "dataType" : "{http://hl7.org/fhir}Encounter",
+                        "codeProperty" : "type",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Telehealth POS",
+                           "type" : "ValueSetRef"
+                        }
+                     }
+                  } ],
+                  "relationship" : [ {
+                     "alias" : "c",
+                     "type" : "With",
+                     "expression" : {
+                        "dataType" : "{http://hl7.org/fhir}Condition",
+                        "codeProperty" : "code",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Diabetes",
+                           "type" : "ValueSetRef"
+                        }
+                     },
+                     "suchThat" : {
+                        "type" : "In",
+                        "operand" : [ {
+                           "type" : "Start",
+                           "operand" : {
+                              "name" : "ToInterval",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "path" : "period",
+                                 "scope" : "E",
+                                 "type" : "Property"
+                              } ]
+                           }
+                        }, {
+                           "name" : "MeasurementPeriod",
+                           "type" : "ParameterRef"
+                        } ]
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "name" : "tele",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Exists",
+               "operand" : {
+                  "type" : "Query",
+                  "source" : [ {
+                     "alias" : "E",
+                     "expression" : {
+                        "dataType" : "{http://hl7.org/fhir}Encounter",
+                        "codeProperty" : "type",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Telehealth Modifier",
+                           "type" : "ValueSetRef"
+                        }
+                     }
+                  } ],
+                  "relationship" : [ {
+                     "alias" : "c",
+                     "type" : "With",
+                     "expression" : {
+                        "dataType" : "{http://hl7.org/fhir}Condition",
+                        "codeProperty" : "code",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Diabetes",
+                           "type" : "ValueSetRef"
+                        }
+                     },
+                     "suchThat" : {
+                        "type" : "In",
+                        "operand" : [ {
+                           "type" : "Start",
+                           "operand" : {
+                              "name" : "ToInterval",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "path" : "period",
+                                 "scope" : "E",
+                                 "type" : "Property"
+                              } ]
+                           }
+                        }, {
+                           "name" : "MeasurementPeriod",
+                           "type" : "ParameterRef"
+                        } ]
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "name" : "telephone vis",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Exists",
+               "operand" : {
+                  "type" : "Query",
+                  "source" : [ {
+                     "alias" : "E",
+                     "expression" : {
+                        "dataType" : "{http://hl7.org/fhir}Encounter",
+                        "codeProperty" : "type",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Telephone Visits",
+                           "type" : "ValueSetRef"
+                        }
+                     }
+                  } ],
+                  "relationship" : [ {
+                     "alias" : "c",
+                     "type" : "With",
+                     "expression" : {
+                        "dataType" : "{http://hl7.org/fhir}Condition",
+                        "codeProperty" : "code",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Diabetes",
+                           "type" : "ValueSetRef"
+                        }
+                     },
+                     "suchThat" : {
+                        "type" : "In",
+                        "operand" : [ {
+                           "type" : "Start",
+                           "operand" : {
+                              "name" : "ToInterval",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "path" : "period",
+                                 "scope" : "E",
+                                 "type" : "Property"
+                              } ]
+                           }
+                        }, {
+                           "name" : "MeasurementPeriod",
+                           "type" : "ParameterRef"
+                        } ]
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "name" : "online assess",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Exists",
+               "operand" : {
+                  "type" : "Query",
+                  "source" : [ {
+                     "alias" : "E",
+                     "expression" : {
+                        "dataType" : "{http://hl7.org/fhir}Encounter",
+                        "codeProperty" : "type",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Online Assessments",
+                           "type" : "ValueSetRef"
+                        }
+                     }
+                  } ],
+                  "relationship" : [ {
+                     "alias" : "c",
+                     "type" : "With",
+                     "expression" : {
+                        "dataType" : "{http://hl7.org/fhir}Condition",
+                        "codeProperty" : "code",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Diabetes",
+                           "type" : "ValueSetRef"
+                        }
+                     },
+                     "suchThat" : {
+                        "type" : "In",
+                        "operand" : [ {
+                           "type" : "Start",
+                           "operand" : {
+                              "name" : "ToInterval",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "path" : "period",
+                                 "scope" : "E",
+                                 "type" : "Property"
+                              } ]
+                           }
+                        }, {
+                           "name" : "MeasurementPeriod",
+                           "type" : "ParameterRef"
+                        } ]
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "name" : "out-tele-online",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Case",
+               "comparand" : {
+                  "type" : "Or",
+                  "operand" : [ {
+                     "type" : "Or",
+                     "operand" : [ {
+                        "type" : "Or",
+                        "operand" : [ {
+                           "name" : "out",
+                           "type" : "ExpressionRef"
+                        }, {
+                           "name" : "tele",
+                           "type" : "ExpressionRef"
+                        } ]
+                     }, {
+                        "name" : "telephone vis",
+                        "type" : "ExpressionRef"
+                     } ]
+                  }, {
+                     "name" : "online assess",
+                     "type" : "ExpressionRef"
+                  } ]
+               },
+               "caseItem" : [ {
+                  "when" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "value" : "true",
+                     "type" : "Literal"
+                  },
+                  "then" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }
+               } ],
+               "else" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "name" : "atleast 2 remote or nonacute inpatient encounters with diabetes",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
                "type" : "GreaterOrEqual",
                "operand" : [ {
-                  "type" : "Count",
-                  "source" : {
-                     "type" : "List",
-                     "element" : [ {
-                        "type" : "Exists",
-                        "operand" : {
-                           "type" : "Query",
-                           "source" : [ {
-                              "alias" : "E",
-                              "expression" : {
-                                 "dataType" : "{http://hl7.org/fhir}Encounter",
-                                 "codeProperty" : "type",
-                                 "codeComparator" : "in",
-                                 "type" : "Retrieve",
-                                 "codes" : {
-                                    "name" : "Outpatient",
-                                    "type" : "ValueSetRef"
-                                 }
-                              }
-                           } ],
-                           "relationship" : [ {
-                              "alias" : "dia",
-                              "type" : "With",
-                              "expression" : {
-                                 "dataType" : "{http://hl7.org/fhir}Condition",
-                                 "codeProperty" : "code",
-                                 "codeComparator" : "in",
-                                 "type" : "Retrieve",
-                                 "codes" : {
-                                    "name" : "Diabetes",
-                                    "type" : "ValueSetRef"
-                                 }
-                              },
-                              "suchThat" : {
-                                 "type" : "Equal",
-                                 "operand" : [ {
-                                    "name" : "ToString",
-                                    "libraryName" : "FHIRHelpers",
-                                    "type" : "FunctionRef",
-                                    "operand" : [ {
-                                       "path" : "status",
-                                       "scope" : "E",
-                                       "type" : "Property"
-                                    } ]
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : "finished",
-                                    "type" : "Literal"
-                                 } ]
-                              }
-                           } ]
-                        }
+                  "type" : "Add",
+                  "operand" : [ {
+                     "type" : "Add",
+                     "operand" : [ {
+                        "name" : "nonacute diabetes discharges",
+                        "type" : "ExpressionRef"
                      }, {
-                        "type" : "Exists",
-                        "operand" : {
-                           "type" : "Query",
-                           "source" : [ {
-                              "alias" : "F",
-                              "expression" : {
-                                 "dataType" : "{http://hl7.org/fhir}Encounter",
-                                 "codeProperty" : "type",
-                                 "codeComparator" : "in",
-                                 "type" : "Retrieve",
-                                 "codes" : {
-                                    "name" : "Observation",
-                                    "type" : "ValueSetRef"
-                                 }
-                              }
-                           } ],
-                           "relationship" : [ {
-                              "alias" : "dia",
-                              "type" : "With",
-                              "expression" : {
-                                 "dataType" : "{http://hl7.org/fhir}Condition",
-                                 "codeProperty" : "code",
-                                 "codeComparator" : "in",
-                                 "type" : "Retrieve",
-                                 "codes" : {
-                                    "name" : "Diabetes",
-                                    "type" : "ValueSetRef"
-                                 }
-                              },
-                              "suchThat" : {
-                                 "type" : "Equal",
-                                 "operand" : [ {
-                                    "name" : "ToString",
-                                    "libraryName" : "FHIRHelpers",
-                                    "type" : "FunctionRef",
-                                    "operand" : [ {
-                                       "path" : "status",
-                                       "scope" : "F",
-                                       "type" : "Property"
-                                    } ]
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : "finished",
-                                    "type" : "Literal"
-                                 } ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "type" : "Exists",
-                        "operand" : {
-                           "type" : "Query",
-                           "source" : [ {
-                              "alias" : "G",
-                              "expression" : {
-                                 "dataType" : "{http://hl7.org/fhir}Encounter",
-                                 "codeProperty" : "type",
-                                 "codeComparator" : "in",
-                                 "type" : "Retrieve",
-                                 "codes" : {
-                                    "name" : "Telephone Visits",
-                                    "type" : "ValueSetRef"
-                                 }
-                              }
-                           } ],
-                           "relationship" : [ {
-                              "alias" : "dia",
-                              "type" : "With",
-                              "expression" : {
-                                 "dataType" : "{http://hl7.org/fhir}Condition",
-                                 "codeProperty" : "code",
-                                 "codeComparator" : "in",
-                                 "type" : "Retrieve",
-                                 "codes" : {
-                                    "name" : "Diabetes",
-                                    "type" : "ValueSetRef"
-                                 }
-                              },
-                              "suchThat" : {
-                                 "type" : "Equal",
-                                 "operand" : [ {
-                                    "name" : "ToString",
-                                    "libraryName" : "FHIRHelpers",
-                                    "type" : "FunctionRef",
-                                    "operand" : [ {
-                                       "path" : "status",
-                                       "scope" : "G",
-                                       "type" : "Property"
-                                    } ]
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : "finished",
-                                    "type" : "Literal"
-                                 } ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "type" : "Exists",
-                        "operand" : {
-                           "type" : "Query",
-                           "source" : [ {
-                              "alias" : "H",
-                              "expression" : {
-                                 "dataType" : "{http://hl7.org/fhir}Encounter",
-                                 "codeProperty" : "type",
-                                 "codeComparator" : "in",
-                                 "type" : "Retrieve",
-                                 "codes" : {
-                                    "name" : "Online Assessments",
-                                    "type" : "ValueSetRef"
-                                 }
-                              }
-                           } ],
-                           "relationship" : [ {
-                              "alias" : "dia",
-                              "type" : "With",
-                              "expression" : {
-                                 "dataType" : "{http://hl7.org/fhir}Condition",
-                                 "codeProperty" : "code",
-                                 "codeComparator" : "in",
-                                 "type" : "Retrieve",
-                                 "codes" : {
-                                    "name" : "Diabetes",
-                                    "type" : "ValueSetRef"
-                                 }
-                              },
-                              "suchThat" : {
-                                 "type" : "Equal",
-                                 "operand" : [ {
-                                    "name" : "ToString",
-                                    "libraryName" : "FHIRHelpers",
-                                    "type" : "FunctionRef",
-                                    "operand" : [ {
-                                       "path" : "status",
-                                       "scope" : "H",
-                                       "type" : "Property"
-                                    } ]
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : "finished",
-                                    "type" : "Literal"
-                                 } ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "type" : "Exists",
-                        "operand" : {
-                           "type" : "Query",
-                           "source" : [ {
-                              "alias" : "I",
-                              "expression" : {
-                                 "dataType" : "{http://hl7.org/fhir}Encounter",
-                                 "codeProperty" : "type",
-                                 "codeComparator" : "in",
-                                 "type" : "Retrieve",
-                                 "codes" : {
-                                    "name" : "ED",
-                                    "type" : "ValueSetRef"
-                                 }
-                              }
-                           } ],
-                           "relationship" : [ {
-                              "alias" : "dia",
-                              "type" : "With",
-                              "expression" : {
-                                 "dataType" : "{http://hl7.org/fhir}Condition",
-                                 "codeProperty" : "code",
-                                 "codeComparator" : "in",
-                                 "type" : "Retrieve",
-                                 "codes" : {
-                                    "name" : "Diabetes",
-                                    "type" : "ValueSetRef"
-                                 }
-                              },
-                              "suchThat" : {
-                                 "type" : "Equal",
-                                 "operand" : [ {
-                                    "name" : "ToString",
-                                    "libraryName" : "FHIRHelpers",
-                                    "type" : "FunctionRef",
-                                    "operand" : [ {
-                                       "path" : "status",
-                                       "scope" : "I",
-                                       "type" : "Property"
-                                    } ]
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : "finished",
-                                    "type" : "Literal"
-                                 } ]
-                              }
-                           } ]
-                        }
+                        "name" : "nonacute diabetes discharges on claim",
+                        "type" : "ExpressionRef"
                      } ]
-                  }
+                  }, {
+                     "name" : "out-tele-online",
+                     "type" : "ExpressionRef"
+                  } ]
                }, {
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2",
@@ -1502,7 +1518,7 @@
                         "type" : "ExpressionRef"
                      } ]
                   }, {
-                     "name" : "nonacute outpatient encounters with diabetes",
+                     "name" : "atleast 2 remote or nonacute inpatient encounters with diabetes",
                      "type" : "ExpressionRef"
                   } ]
                }, {
@@ -1612,29 +1628,456 @@
                } ],
                "relationship" : [ ],
                "where" : {
-                  "type" : "In",
+                  "type" : "And",
                   "operand" : [ {
-                     "name" : "ToString",
-                     "libraryName" : "FHIRHelpers",
-                     "type" : "FunctionRef",
+                     "type" : "And",
                      "operand" : [ {
-                        "path" : "status",
-                        "scope" : "BloodPressure",
-                        "type" : "Property"
+                        "type" : "In",
+                        "operand" : [ {
+                           "name" : "ToString",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "status",
+                              "scope" : "BloodPressure",
+                              "type" : "Property"
+                           } ]
+                        }, {
+                           "type" : "List",
+                           "element" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "final",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "amended",
+                              "type" : "Literal"
+                           } ]
+                        } ]
+                     }, {
+                        "type" : "In",
+                        "operand" : [ {
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "effective",
+                              "scope" : "BloodPressure",
+                              "type" : "Property"
+                           }
+                        }, {
+                           "name" : "MeasurementPeriod",
+                           "type" : "ParameterRef"
+                        } ]
                      } ]
                   }, {
-                     "type" : "List",
-                     "element" : [ {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "final",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "amended",
-                        "type" : "Literal"
-                     } ]
+                     "type" : "Exists",
+                     "operand" : {
+                        "type" : "Query",
+                        "source" : [ {
+                           "alias" : "DiastolicBP",
+                           "expression" : {
+                              "path" : "component",
+                              "scope" : "BloodPressure",
+                              "type" : "Property"
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "type" : "And",
+                           "operand" : [ {
+                              "type" : "And",
+                              "operand" : [ {
+                                 "type" : "Equivalent",
+                                 "operand" : [ {
+                                    "name" : "ToConcept",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "path" : "code",
+                                       "scope" : "DiastolicBP",
+                                       "type" : "Property"
+                                    } ]
+                                 }, {
+                                    "type" : "ToConcept",
+                                    "operand" : {
+                                       "name" : "Diastolic blood pressure",
+                                       "type" : "CodeRef"
+                                    }
+                                 } ]
+                              }, {
+                                 "type" : "In",
+                                 "operand" : [ {
+                                    "name" : "ToString",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "path" : "unit",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "path" : "value",
+                                          "scope" : "DiastolicBP",
+                                          "type" : "Property"
+                                       }
+                                    } ]
+                                 }, {
+                                    "type" : "List",
+                                    "element" : [ {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "mm[Hg]",
+                                       "type" : "Literal"
+                                    }, {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "mmHg",
+                                       "type" : "Literal"
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "type" : "Less",
+                              "operand" : [ {
+                                 "path" : "value",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "path" : "value",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "value",
+                                       "scope" : "DiastolicBP",
+                                       "type" : "Property"
+                                    }
+                                 }
+                              }, {
+                                 "type" : "ToDecimal",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "90",
+                                    "type" : "Literal"
+                                 }
+                              } ]
+                           } ]
+                        }
+                     }
                   } ]
                }
+            }
+         }, {
+            "name" : "Qualifying Systolic Blood Pressure Reading",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "BloodPressure",
+                  "expression" : {
+                     "dataType" : "{http://hl7.org/fhir}Observation",
+                     "codeProperty" : "code",
+                     "codeComparator" : "~",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "type" : "ToList",
+                        "operand" : {
+                           "name" : "Blood pressure",
+                           "type" : "CodeRef"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "type" : "And",
+                  "operand" : [ {
+                     "type" : "And",
+                     "operand" : [ {
+                        "type" : "In",
+                        "operand" : [ {
+                           "name" : "ToString",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "status",
+                              "scope" : "BloodPressure",
+                              "type" : "Property"
+                           } ]
+                        }, {
+                           "type" : "List",
+                           "element" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "final",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "amended",
+                              "type" : "Literal"
+                           } ]
+                        } ]
+                     }, {
+                        "type" : "In",
+                        "operand" : [ {
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "effective",
+                              "scope" : "BloodPressure",
+                              "type" : "Property"
+                           }
+                        }, {
+                           "name" : "MeasurementPeriod",
+                           "type" : "ParameterRef"
+                        } ]
+                     } ]
+                  }, {
+                     "type" : "Exists",
+                     "operand" : {
+                        "type" : "Query",
+                        "source" : [ {
+                           "alias" : "SystolicBP",
+                           "expression" : {
+                              "path" : "component",
+                              "scope" : "BloodPressure",
+                              "type" : "Property"
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "type" : "And",
+                           "operand" : [ {
+                              "type" : "And",
+                              "operand" : [ {
+                                 "type" : "Equivalent",
+                                 "operand" : [ {
+                                    "name" : "ToConcept",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "path" : "code",
+                                       "scope" : "SystolicBP",
+                                       "type" : "Property"
+                                    } ]
+                                 }, {
+                                    "type" : "ToConcept",
+                                    "operand" : {
+                                       "name" : "Systolic blood pressure",
+                                       "type" : "CodeRef"
+                                    }
+                                 } ]
+                              }, {
+                                 "type" : "In",
+                                 "operand" : [ {
+                                    "name" : "ToString",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "path" : "unit",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "path" : "value",
+                                          "scope" : "SystolicBP",
+                                          "type" : "Property"
+                                       }
+                                    } ]
+                                 }, {
+                                    "type" : "List",
+                                    "element" : [ {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "mm[Hg]",
+                                       "type" : "Literal"
+                                    }, {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "mmHg",
+                                       "type" : "Literal"
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "type" : "Less",
+                              "operand" : [ {
+                                 "path" : "value",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "path" : "value",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "value",
+                                       "scope" : "SystolicBP",
+                                       "type" : "Property"
+                                    }
+                                 }
+                              }, {
+                                 "type" : "ToDecimal",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "140",
+                                    "type" : "Literal"
+                                 }
+                              } ]
+                           } ]
+                        }
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "name" : "BP < 140/90 mm Hg",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "And",
+               "operand" : [ {
+                  "type" : "And",
+                  "operand" : [ {
+                     "type" : "Exists",
+                     "operand" : {
+                        "type" : "ToList",
+                        "operand" : {
+                           "name" : "correct context for bp reading",
+                           "type" : "ExpressionRef"
+                        }
+                     }
+                  }, {
+                     "type" : "Exists",
+                     "operand" : {
+                        "name" : "Qualifying Diastolic Blood Pressure Reading",
+                        "type" : "ExpressionRef"
+                     }
+                  } ]
+               }, {
+                  "type" : "Exists",
+                  "operand" : {
+                     "name" : "Qualifying Systolic Blood Pressure Reading",
+                     "type" : "ExpressionRef"
+                  }
+               } ]
+            }
+         }, {
+            "name" : "numerator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Case",
+               "comparand" : {
+                  "type" : "And",
+                  "operand" : [ {
+                     "type" : "And",
+                     "operand" : [ {
+                        "type" : "And",
+                        "operand" : [ {
+                           "name" : "BP < 140/90 mm Hg",
+                           "type" : "ExpressionRef"
+                        }, {
+                           "name" : "DiabetesCondition",
+                           "type" : "ExpressionRef"
+                        } ]
+                     }, {
+                        "name" : "InitialPopulation",
+                        "type" : "ExpressionRef"
+                     } ]
+                  }, {
+                     "type" : "Not",
+                     "operand" : {
+                        "name" : "diabetes exclusions",
+                        "type" : "ExpressionRef"
+                     }
+                  } ]
+               },
+               "caseItem" : [ {
+                  "when" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "value" : "true",
+                     "type" : "Literal"
+                  },
+                  "then" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }
+               } ],
+               "else" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "name" : "denominator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Case",
+               "comparand" : {
+                  "type" : "And",
+                  "operand" : [ {
+                     "name" : "InitialPopulation",
+                     "type" : "ExpressionRef"
+                  }, {
+                     "name" : "DiabetesCondition",
+                     "type" : "ExpressionRef"
+                  } ]
+               },
+               "caseItem" : [ {
+                  "when" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "value" : "true",
+                     "type" : "Literal"
+                  },
+                  "then" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }
+               } ],
+               "else" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "name" : "denominator_count",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Sum",
+               "source" : {
+                  "name" : "denominator",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "name" : "numerator_count",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Sum",
+               "source" : {
+                  "name" : "numerator",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "name" : "CDC_MeasureScore",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Divide",
+               "operand" : [ {
+                  "type" : "ToDecimal",
+                  "operand" : {
+                     "type" : "Sum",
+                     "source" : {
+                        "name" : "numerator",
+                        "type" : "ExpressionRef"
+                     }
+                  }
+               }, {
+                  "type" : "ToDecimal",
+                  "operand" : {
+                     "type" : "Sum",
+                     "source" : {
+                        "name" : "denominator",
+                        "type" : "ExpressionRef"
+                     }
+                  }
+               } ]
             }
          } ]
       }
