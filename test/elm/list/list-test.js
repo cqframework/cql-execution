@@ -650,7 +650,7 @@ describe('First', () => {
     should(this.empty.exec(this.ctx)).be.null();
   });
 
-  it('should return null for an empty list', function () {
+  it('should return null for a null list', function () {
     should(this.nullValue.exec(this.ctx)).be.null();
   });
 });
@@ -684,7 +684,7 @@ describe('Last', () => {
     should(this.empty.exec(this.ctx)).be.null();
   });
 
-  it('should return null for an empty list', function () {
+  it('should return null for a null list', function () {
     should(this.nullValue.exec(this.ctx)).be.null();
   });
 });
@@ -710,7 +710,7 @@ describe('Length', () => {
     this.empty.exec(this.ctx).should.equal(0);
   });
 
-  it('should return null for an empty list', function () {
+  it('should return null for a null list', function () {
     should(this.nullValue.exec(this.ctx)).be.null();
   });
 });
