@@ -175,17 +175,17 @@ define "Initial Population":
 		and AgeInYearsAt(start of "Measurement Period")>= 1
 		and AgeInYearsAt(end of "Measurement Period")= 2
 
-define "IVP Immunizations or Procedures":
+define "IPV Immunizations or Procedures":
 	( ["Immunization": "Inactivated Polio Vaccine (IPV)"]
-		union ["Procedure": "Inactivated Polio Vaccine (IPV) Administered"] ) IVPVaccination
-		where AgeInDaysAt(Coalesce(IVPVaccination.performed.start, IVPVaccination.occurrence))>= 42
-			and AgeInDaysAt(Coalesce(IVPVaccination.performed.start, IVPVaccination.occurrence))<= 730
+		union ["Procedure": "Inactivated Polio Vaccine (IPV) Administered"] ) IPVVaccination
+		where AgeInDaysAt(Coalesce(IPVVaccination.performed.start, IPVVaccination.occurrence))>= 42
+			and AgeInDaysAt(Coalesce(IPVVaccination.performed.start, IPVVaccination.occurrence))<= 730
 
-define "IVP Vaccinations":
+define "IPV Vaccinations":
 	from
-		"IVP Immunizations or Procedures" Vaccination1,
-		"IVP Immunizations or Procedures" Vaccination2,
-		"IVP Immunizations or Procedures" Vaccination3
+		"IPV Immunizations or Procedures" Vaccination1,
+		"IPV Immunizations or Procedures" Vaccination2,
+		"IPV Immunizations or Procedures" Vaccination3
 		where Coalesce(Vaccination2.performed.start, Vaccination2.occurrence) 1 day or more after Coalesce(Vaccination1.performed.start, Vaccination1.occurrence)
 			and Coalesce(Vaccination3.performed.start, Vaccination3.occurrence) 1 day or more after Coalesce(Vaccination2.performed.start, Vaccination2.occurrence) 
 		return Vaccination1
@@ -228,8 +228,8 @@ define "Numerator":
 	( exists ( "DTaP Vaccinations" )
 			or exists ( "Numerator Compliant DTaP Conditions" )
 	)
-		and ( exists ( "IVP Vaccinations" )
-				or exists ( "Numerator Compliant IVP Conditions" )
+		and ( exists ( "IPV Vaccinations" )
+				or exists ( "Numerator Compliant IPV Conditions" )
 		)
 		and ( exists ( "MMR Vaccinations" )
 				or exists ( "Numerator Compliant MMR Conditions" )
@@ -307,12 +307,12 @@ define "Numerator Compliant Influenza Conditions":
 		union ["Condition": "Disorders of the Immune System"] ) InfluenzaConditions
 		where AgeInDaysAt(Coalesce(InfluenzaConditions.onset.start, InfluenzaConditions.onset))<= 730
 
-define "Numerator Compliant IVP Conditions":
+define "Numerator Compliant IPV Conditions":
 	( ["Condition": "Anaphylactic Reaction to Inactivated Polio Vaccine (IPV)"]
 		union ["Condition": "Anaphylactic Reaction to Streptomycin"]
 		union ["Condition": "Anaphylactic Reaction to Polymyxin"]
-		union ["Condition": "Anaphylactic Reaction to Neomycin"] ) IVPConditions
-		where AgeInDaysAt(Coalesce(IVPConditions.onset.start, IVPConditions.onset))<= 730
+		union ["Condition": "Anaphylactic Reaction to Neomycin"] ) IPVConditions
+		where AgeInDaysAt(Coalesce(IPVConditions.onset.start, IPVConditions.onset))<= 730
 
 define "Numerator Compliant MMR Conditions":
 	( ["Condition": "Disorders of the Immune System"]

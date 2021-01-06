@@ -2223,13 +2223,13 @@
                }
             }
          }, {
-            "name" : "IVP Immunizations or Procedures",
+            "name" : "IPV Immunizations or Procedures",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
                "type" : "Query",
                "source" : [ {
-                  "alias" : "IVPVaccination",
+                  "alias" : "IPVVaccination",
                   "expression" : {
                      "type" : "Union",
                      "operand" : [ {
@@ -2314,7 +2314,7 @@
                                  "type" : "Property",
                                  "source" : {
                                     "path" : "performed",
-                                    "scope" : "IVPVaccination",
+                                    "scope" : "IPVVaccination",
                                     "type" : "Property"
                                  }
                               }, {
@@ -2322,7 +2322,7 @@
                                  "type" : "As",
                                  "operand" : {
                                     "path" : "occurrence",
-                                    "scope" : "IVPVaccination",
+                                    "scope" : "IPVVaccination",
                                     "type" : "Property"
                                  }
                               } ]
@@ -2359,7 +2359,7 @@
                                  "type" : "Property",
                                  "source" : {
                                     "path" : "performed",
-                                    "scope" : "IVPVaccination",
+                                    "scope" : "IPVVaccination",
                                     "type" : "Property"
                                  }
                               }, {
@@ -2367,7 +2367,7 @@
                                  "type" : "As",
                                  "operand" : {
                                     "path" : "occurrence",
-                                    "scope" : "IVPVaccination",
+                                    "scope" : "IPVVaccination",
                                     "type" : "Property"
                                  }
                               } ]
@@ -2382,7 +2382,7 @@
                }
             }
          }, {
-            "name" : "IVP Vaccinations",
+            "name" : "IPV Vaccinations",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
@@ -2390,19 +2390,19 @@
                "source" : [ {
                   "alias" : "Vaccination1",
                   "expression" : {
-                     "name" : "IVP Immunizations or Procedures",
+                     "name" : "IPV Immunizations or Procedures",
                      "type" : "ExpressionRef"
                   }
                }, {
                   "alias" : "Vaccination2",
                   "expression" : {
-                     "name" : "IVP Immunizations or Procedures",
+                     "name" : "IPV Immunizations or Procedures",
                      "type" : "ExpressionRef"
                   }
                }, {
                   "alias" : "Vaccination3",
                   "expression" : {
-                     "name" : "IVP Immunizations or Procedures",
+                     "name" : "IPV Immunizations or Procedures",
                      "type" : "ExpressionRef"
                   }
                } ],
@@ -3313,13 +3313,13 @@
                }
             }
          }, {
-            "name" : "Numerator Compliant IVP Conditions",
+            "name" : "Numerator Compliant IPV Conditions",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
                "type" : "Query",
                "source" : [ {
-                  "alias" : "IVPConditions",
+                  "alias" : "IPVConditions",
                   "expression" : {
                      "type" : "Union",
                      "operand" : [ {
@@ -3394,7 +3394,7 @@
                               "type" : "Property",
                               "source" : {
                                  "path" : "onset",
-                                 "scope" : "IVPConditions",
+                                 "scope" : "IPVConditions",
                                  "type" : "Property"
                               }
                            }, {
@@ -3402,7 +3402,7 @@
                               "type" : "As",
                               "operand" : {
                                  "path" : "onset",
-                                 "scope" : "IVPConditions",
+                                 "scope" : "IPVConditions",
                                  "type" : "Property"
                               }
                            } ]
@@ -6742,13 +6742,13 @@
                                           "operand" : [ {
                                              "type" : "Exists",
                                              "operand" : {
-                                                "name" : "IVP Vaccinations",
+                                                "name" : "IPV Vaccinations",
                                                 "type" : "ExpressionRef"
                                              }
                                           }, {
                                              "type" : "Exists",
                                              "operand" : {
-                                                "name" : "Numerator Compliant IVP Conditions",
+                                                "name" : "Numerator Compliant IPV Conditions",
                                                 "type" : "ExpressionRef"
                                              }
                                           } ]
