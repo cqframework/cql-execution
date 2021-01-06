@@ -1907,7 +1907,7 @@ const patients = [
       {
         resource: {
           resourceType: 'Observation',
-          id: 'gf3a4f19-9f99-6ceb-7dde-4900ae818cbw',
+          id: 'hep-a-obs',
           meta: {
             profile: ['http://hl7.org/fhir/StructureDefinition/vitalsigns']
           },
@@ -3413,7 +3413,7 @@ const patients = [
       {
         resource: {
           resourceType: 'Observation',
-          id: 'gf3a4f19-9f99-6ceb-7dde-4900ae818cbw',
+          id: 'measles-obs',
           meta: {
             profile: ['http://hl7.org/fhir/StructureDefinition/vitalsigns']
           },
@@ -3586,7 +3586,7 @@ const patients = [
       {
         resource: {
           resourceType: 'Observation',
-          id: 'i',
+          id: 'rubella-obs',
           meta: {
             profile: ['http://hl7.org/fhir/StructureDefinition/vitalsigns']
           },
