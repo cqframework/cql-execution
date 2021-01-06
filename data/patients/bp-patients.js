@@ -4895,16 +4895,14 @@ const patients = [
       },
       {
         fullUrl: 'urn:uuid:gf3a4f19-9f99-6ceb-7dde-4900ae818cbw',
-        resource:{
+        resource: {
           resourceType: 'Observation',
           id: 'gf3a4f19-9f99-6ceb-7dde-4900ae818cbw',
           meta: {
-            'profile': [
-              'http://hl7.org/fhir/StructureDefinition/vitalsigns'
-            ]
+            profile: ['http://hl7.org/fhir/StructureDefinition/vitalsigns']
           },
           text: {
-            status: 'generated',
+            status: 'generated'
           },
           identifier: [
             {
@@ -4949,7 +4947,7 @@ const patients = [
           effectiveDateTime: '2019-10-28T19:57:22-04:00',
           performer: [
             {
-              'reference': 'Practitioner/example'
+              reference: 'Practitioner/example'
             }
           ],
           interpretation: [
@@ -4973,34 +4971,37 @@ const patients = [
               }
             ]
           },
-          component: [ {
-            code: {
-              coding: [ 
-                {
-                  system: 'http://loinc.org',
-                  code: '8480-6',
-                  display: 'Systolic blood pressure'
-                } 
-              ]
+          component: [
+            {
+              code: {
+                coding: [
+                  {
+                    system: 'http://loinc.org',
+                    code: '8480-6',
+                    display: 'Systolic blood pressure'
+                  }
+                ]
+              },
+              valueQuantity: {
+                value: 139,
+                unit: 'mm[Hg]'
+              }
             },
-            valueQuantity: {
-              value: 139,
-              unit: 'mm[Hg]'
+            {
+              code: {
+                coding: [
+                  {
+                    system: 'http://loinc.org',
+                    code: '8462-4',
+                    display: 'Diastolic blood pressure'
+                  }
+                ]
+              },
+              valueQuantity: {
+                value: 89,
+                unit: 'mmHg'
+              }
             }
-          },
-          {
-            code: {
-              coding: [ {
-                system: 'http://loinc.org',
-                code: '8462-4',
-                display: 'Diastolic blood pressure'
-              } ]
-            },
-            valueQuantity: {
-              value: 89,
-              unit: 'mmHg'
-            }
-          }  
           ]
         },
         request: {
@@ -9320,16 +9321,14 @@ const patients = [
       },
       {
         fullUrl: 'urn:uuid:hu5a4f19-9f99-6ceb-7dde-4900ae818nhu',
-        resource:{
+        resource: {
           resourceType: 'Observation',
           id: 'hu5a4f19-9f99-6ceb-7dde-4900ae818nhu',
           meta: {
-            'profile': [
-              'http://hl7.org/fhir/StructureDefinition/vitalsigns'
-            ]
+            profile: ['http://hl7.org/fhir/StructureDefinition/vitalsigns']
           },
           text: {
-            status: 'generated',
+            status: 'generated'
           },
           identifier: [
             {
@@ -9368,12 +9367,12 @@ const patients = [
             text: 'Blood pressure systolic & diastolic'
           },
           subject: {
-            'reference': 'Patient/example'
+            reference: 'Patient/example'
           },
           effectiveDateTime: '2019-09-28T19:57:22-04:00',
           performer: [
             {
-              'reference': 'Practitioner/example'
+              reference: 'Practitioner/example'
             }
           ],
           interpretation: [

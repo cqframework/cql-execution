@@ -14008,120 +14008,120 @@ const codes = {
   '2.16.840.1.113762.1.4.1182.85': {
     'Systolic Less Than 140': [
       {
-        'code': '3074F',
-        'system': 'CPT',
-        'version': '2021'
+        code: '3074F',
+        system: 'CPT',
+        version: '2021'
       },
       {
-        'code': '3074F',
-        'system': 'HCPCS Level I: CPT',
-        'version': '2020'
+        code: '3074F',
+        system: 'HCPCS Level I: CPT',
+        version: '2020'
       },
       {
-        'code': '3075F',
-        'system': 'HCPCS Level I: CPT',
-        'version': '2020'
+        code: '3075F',
+        system: 'HCPCS Level I: CPT',
+        version: '2020'
       },
       {
-        'code': '3075F',
-        'system': 'CPT',
-        'version': '2021'
+        code: '3075F',
+        system: 'CPT',
+        version: '2021'
       },
       {
-        'code': 'G8752',
-        'system': 'HCPCS Level II',
-        'version': '2020'
+        code: 'G8752',
+        system: 'HCPCS Level II',
+        version: '2020'
       }
     ]
   },
   '2.16.840.1.113762.1.4.1182.84': {
     'Systolic Greater Than Or Equal To 140': [
       {
-        'code': '3077F',
-        'system': 'CPT',
-        'version': '2021'
+        code: '3077F',
+        system: 'CPT',
+        version: '2021'
       },
       {
-        'code': '3077F',
-        'system': 'HCPCS Level I: CPT',
-        'version': '2020'
+        code: '3077F',
+        system: 'HCPCS Level I: CPT',
+        version: '2020'
       },
       {
-        'code': 'G8753',
-        'system': 'HCPCS Level II',
-        'version': '2020'
+        code: 'G8753',
+        system: 'HCPCS Level II',
+        version: '2020'
       }
     ]
   },
   '2.16.840.1.113762.1.4.1182.79': {
     'Diastolic Less Than 80': [
       {
-        'code': '3078F',
-        'system': 'HCPCS Level I: CPT',
-        'version': '2020'
+        code: '3078F',
+        system: 'HCPCS Level I: CPT',
+        version: '2020'
       },
       {
-        'code': '3078F',
-        'system': 'CPT',
-        'version': '2021'
+        code: '3078F',
+        system: 'CPT',
+        version: '2021'
       },
       {
-        'code': '3079F',
-        'system': 'HCPCS Level I: CPT',
-        'version': '2020'
+        code: '3079F',
+        system: 'HCPCS Level I: CPT',
+        version: '2020'
       },
       {
-        'code': '3079F',
-        'system': 'CPT',
-        'version': '2021'
+        code: '3079F',
+        system: 'CPT',
+        version: '2021'
       },
       {
-        'code': 'G8754',
-        'system': 'HCPCS Level II',
-        'version': '2020'
+        code: 'G8754',
+        system: 'HCPCS Level II',
+        version: '2020'
       }
     ]
   },
   '2.16.840.1.113762.1.4.1182.78': {
     'Diastolic Greater Than Or Equal To 90': [
       {
-        'code': '3080F',
-        'system': 'CPT',
-        'version': '2021'
+        code: '3080F',
+        system: 'CPT',
+        version: '2021'
       },
       {
-        'code': '3080F',
-        'system': 'HCPCS Level I: CPT',
-        'version': '2020'
+        code: '3080F',
+        system: 'HCPCS Level I: CPT',
+        version: '2020'
       },
       {
-        'code': 'G8755',
-        'system': 'HCPCS Level II',
-        'version': '2020'
+        code: 'G8755',
+        system: 'HCPCS Level II',
+        version: '2020'
       }
     ]
   },
   '2.16.840.1.113762.1.4.1116.409': {
     'Diastolic BP': [
       {
-        'code': '271650006',
-        'system': 'http://snomed.info/sct',
-        'version': '2020-09'
+        code: '271650006',
+        system: 'http://snomed.info/sct',
+        version: '2020-09'
       },
       {
-        'code': '399007006',
-        'system': 'http://snomed.info/sct',
-        'version': '2020-09'
+        code: '399007006',
+        system: 'http://snomed.info/sct',
+        version: '2020-09'
       },
       {
-        'code': '400975005',
-        'system': 'http://snomed.info/sct',
-        'version': '2020-09'
+        code: '400975005',
+        system: 'http://snomed.info/sct',
+        version: '2020-09'
       },
       {
-        'code': '407555005',
-        'system': 'http://snomed.info/sct',
-        'version': '2020-09'
+        code: '407555005',
+        system: 'http://snomed.info/sct',
+        version: '2020-09'
       }
     ]
   }

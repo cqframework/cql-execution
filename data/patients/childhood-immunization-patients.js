@@ -3,51 +3,64 @@ const patients = [
     resourceType: 'Bundle',
     id: 'tests-numer-EXM165-FHIR3-bundle',
     type: 'transaction',
-    entry: [ 
+    entry: [
       {
-        resource:  {
+        resource: {
           resourceType: 'Patient',
           id: 'numer-EXM165-FHIR3',
-          meta:  {
+          meta: {
             profile: ['http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient']
           },
-          extension: [ {
-            url: 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-race',
-            extension: [ {
-              url: 'ombCategory',
-              valueCoding:  {
-                system: 'urn:oid:2.16.840.1.113883.6.238',
-                code: '2054-5',
-                display: 'Black or African American'
-              }
-            }]
-          },  {
-            url: 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity',
-            extension: [ {
-              url: 'ombCategory',
-              valueCoding:  {
-                system: 'urn:oid:2.16.840.1.113883.6.238',
-                code: '2186-5',
-                display: 'Not Hispanic or Latino'
-              }
-            }]
-          }],
-          identifier: [ {
-            use: 'usual',
-            type:  {
-              coding: [ {
-                system: 'http://terminology.hl7.org/CodeSystem/v2-0203',
-                code: 'MR',
-                display: 'Medical Record Number'
-              }]
+          extension: [
+            {
+              url: 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-race',
+              extension: [
+                {
+                  url: 'ombCategory',
+                  valueCoding: {
+                    system: 'urn:oid:2.16.840.1.113883.6.238',
+                    code: '2054-5',
+                    display: 'Black or African American'
+                  }
+                }
+              ]
             },
-            system: 'http://hospital.smarthealthit.org',
-            value: '999999993'
-          }],
-          name: [ {
-            family: 'Doe',
-            given: ['Jill']
-          }],
+            {
+              url: 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity',
+              extension: [
+                {
+                  url: 'ombCategory',
+                  valueCoding: {
+                    system: 'urn:oid:2.16.840.1.113883.6.238',
+                    code: '2186-5',
+                    display: 'Not Hispanic or Latino'
+                  }
+                }
+              ]
+            }
+          ],
+          identifier: [
+            {
+              use: 'usual',
+              type: {
+                coding: [
+                  {
+                    system: 'http://terminology.hl7.org/CodeSystem/v2-0203',
+                    code: 'MR',
+                    display: 'Medical Record Number'
+                  }
+                ]
+              },
+              system: 'http://hospital.smarthealthit.org',
+              value: '999999993'
+            }
+          ],
+          name: [
+            {
+              family: 'Doe',
+              given: ['Jill']
+            }
+          ],
           gender: 'female',
           birthDate: '2018-01-01'
         },
@@ -118,7 +131,7 @@ const patients = [
               }
             }
           ]
-        },
+        }
       },
       // DTaP Condition
       {
@@ -193,7 +206,7 @@ const patients = [
             }
           ],
           subject: {
-            reference: 'Patient/numer-EXM165-FHIR3',
+            reference: 'Patient/numer-EXM165-FHIR3'
           },
           encounter: {
             reference: 'Encounter/example'
@@ -206,7 +219,7 @@ const patients = [
           },
           asserter: {
             reference: 'Practitioner/f201'
-          },
+          }
         }
       },
       // DTaP (note that there are immunizations and vaccinations - not required, but I assume this is what real data would look like)
@@ -226,9 +239,8 @@ const patients = [
               {
                 code: '106',
                 system: 'CVX',
-                version: '2020-12',
-              
-              }, 
+                version: '2020-12'
+              }
             ],
             id: 'DTaP Vaccine'
           },
@@ -340,12 +352,10 @@ const patients = [
               }
             ]
           }
-      
-      
         }
       },
       {
-        resource:{
+        resource: {
           resourceType: 'Procedure',
           id: 'dtap-proc-1',
           status: 'completed',
@@ -355,7 +365,7 @@ const patients = [
                 code: '310306005',
                 system: 'http://snomed.info/sct',
                 version: '2020-09'
-              },
+              }
             ],
             id: 'DTaP Vaccine Administered'
           },
@@ -366,43 +376,57 @@ const patients = [
             start: '2019-01-10T09:30:10+01:00',
             end: '2019-01-10T10:30:10+01:00'
           },
-          performer: [{
-            function: {
-              coding: [{
-                system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
-                code: '01.000',
-                display: 'Arts'
-              }],
-              text: 'Care role'
-            },
-            actor: {
-              reference: 'Practitioner/f005',
-              display: 'A. Langeveld'
+          performer: [
+            {
+              function: {
+                coding: [
+                  {
+                    system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
+                    code: '01.000',
+                    display: 'Arts'
+                  }
+                ],
+                text: 'Care role'
+              },
+              actor: {
+                reference: 'Practitioner/f005',
+                display: 'A. Langeveld'
+              }
             }
-          }],
-          reasonCode: [{
-            text: 'ensure breathing during surgery'
-          }],
-          bodySite: [{
-            coding: [{
-              system: 'http://snomed.info/sct',
-              code: '83030008',
-              display: 'Retropharyngeal area'
-            }]
-          }],
+          ],
+          reasonCode: [
+            {
+              text: 'ensure breathing during surgery'
+            }
+          ],
+          bodySite: [
+            {
+              coding: [
+                {
+                  system: 'http://snomed.info/sct',
+                  code: '83030008',
+                  display: 'Retropharyngeal area'
+                }
+              ]
+            }
+          ],
           outcome: {
             text: 'removal of the retropharyngeal abscess'
           },
-          report: [{
-            reference: 'DiagnosticReport/f001',
-          }],
-          followUp: [{
-            text: 'described in care plan'
-          }]
+          report: [
+            {
+              reference: 'DiagnosticReport/f001'
+            }
+          ],
+          followUp: [
+            {
+              text: 'described in care plan'
+            }
+          ]
         }
       },
       {
-        resource:{
+        resource: {
           resourceType: 'Immunization',
           id: 'dtap-imm-2',
           identifier: [
@@ -413,7 +437,6 @@ const patients = [
           ],
           status: 'completed',
           vaccineCode: {
-        
             //   coding: [
             //     {
             //       system: 'http://snomed.info/sct',
@@ -427,9 +450,8 @@ const patients = [
               {
                 code: '107',
                 system: 'CVX',
-                version: '2020-12',
-              
-              },
+                version: '2020-12'
+              }
             ],
             id: 'DTaP Vaccine'
           },
@@ -544,7 +566,7 @@ const patients = [
         }
       },
       {
-        resource:{
+        resource: {
           resourceType: 'Procedure',
           id: 'dtap-proc-2',
           status: 'completed',
@@ -554,7 +576,7 @@ const patients = [
                 code: '310307001',
                 system: 'http://snomed.info/sct',
                 version: '2020-09'
-              },
+              }
             ],
             id: 'DTaP Vaccine Administered'
           },
@@ -565,46 +587,60 @@ const patients = [
             start: '2019-02-10T09:30:10+01:00',
             end: '2019-02-10T10:30:10+01:00'
           },
-          performer: [{
-            function: {
-              coding: [{
-                system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
-                code: '01.000',
-                display: 'Arts'
-              }],
-              text: 'Care role'
-            },
-            actor: {
-              reference: 'Practitioner/f005',
-              display: 'A. Langeveld'
+          performer: [
+            {
+              function: {
+                coding: [
+                  {
+                    system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
+                    code: '01.000',
+                    display: 'Arts'
+                  }
+                ],
+                text: 'Care role'
+              },
+              actor: {
+                reference: 'Practitioner/f005',
+                display: 'A. Langeveld'
+              }
             }
-          }],
-          reasonCode: [{
-            text: 'ensure breathing during surgery'
-          }],
-          bodySite: [{
-            coding: [{
-              system: 'http://snomed.info/sct',
-              code: '83030008',
-              display: 'Retropharyngeal area'
-            }]
-          }],
+          ],
+          reasonCode: [
+            {
+              text: 'ensure breathing during surgery'
+            }
+          ],
+          bodySite: [
+            {
+              coding: [
+                {
+                  system: 'http://snomed.info/sct',
+                  code: '83030008',
+                  display: 'Retropharyngeal area'
+                }
+              ]
+            }
+          ],
           outcome: {
             text: 'removal of the retropharyngeal abscess'
           },
-          report: [{
-            reference: 'DiagnosticReport/f001',
-          }],
-          followUp: [{
-            text: 'described in care plan'
-          }]
+          report: [
+            {
+              reference: 'DiagnosticReport/f001'
+            }
+          ],
+          followUp: [
+            {
+              text: 'described in care plan'
+            }
+          ]
         }
       },
       {
-        resource:{
+        resource: {
           resourceType: 'Immunization',
           id: 'dtap-imm-3',
-        
+
           identifier: [
             {
               system: 'urn:ietf:rfc:3986',
@@ -617,9 +653,8 @@ const patients = [
               {
                 code: '107',
                 system: 'CVX',
-                version: '2020-12',
-              
-              }, 
+                version: '2020-12'
+              }
             ],
             id: 'DTaP Vaccine'
           },
@@ -734,7 +769,7 @@ const patients = [
         }
       },
       {
-        resource:{
+        resource: {
           resourceType: 'Procedure',
           id: 'dtap-proc-3',
           status: 'completed',
@@ -744,7 +779,7 @@ const patients = [
                 code: '310307001',
                 system: 'http://snomed.info/sct',
                 version: '2020-09'
-              },
+              }
             ],
             id: 'DTaP Vaccine Administered'
           },
@@ -755,46 +790,60 @@ const patients = [
             start: '2019-03-10T09:30:10+01:00',
             end: '2019-03-10T10:30:10+01:00'
           },
-          performer: [{
-            function: {
-              coding: [{
-                system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
-                code: '01.000',
-                display: 'Arts'
-              }],
-              text: 'Care role'
-            },
-            actor: {
-              reference: 'Practitioner/f005',
-              display: 'A. Langeveld'
+          performer: [
+            {
+              function: {
+                coding: [
+                  {
+                    system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
+                    code: '01.000',
+                    display: 'Arts'
+                  }
+                ],
+                text: 'Care role'
+              },
+              actor: {
+                reference: 'Practitioner/f005',
+                display: 'A. Langeveld'
+              }
             }
-          }],
-          reasonCode: [{
-            text: 'ensure breathing during surgery'
-          }],
-          bodySite: [{
-            coding: [{
-              system: 'http://snomed.info/sct',
-              code: '83030008',
-              display: 'Retropharyngeal area'
-            }]
-          }],
+          ],
+          reasonCode: [
+            {
+              text: 'ensure breathing during surgery'
+            }
+          ],
+          bodySite: [
+            {
+              coding: [
+                {
+                  system: 'http://snomed.info/sct',
+                  code: '83030008',
+                  display: 'Retropharyngeal area'
+                }
+              ]
+            }
+          ],
           outcome: {
             text: 'removal of the retropharyngeal abscess'
           },
-          report: [{
-            reference: 'DiagnosticReport/f001',
-          }],
-          followUp: [{
-            text: 'described in care plan'
-          }]
+          report: [
+            {
+              reference: 'DiagnosticReport/f001'
+            }
+          ],
+          followUp: [
+            {
+              text: 'described in care plan'
+            }
+          ]
         }
       },
       {
-        resource:{
+        resource: {
           resourceType: 'Immunization',
           id: 'dtap-imm-4',
-        
+
           identifier: [
             {
               system: 'urn:ietf:rfc:3986',
@@ -807,9 +856,8 @@ const patients = [
               {
                 code: '110',
                 system: 'CVX',
-                version: '2020-12',
-              
-              }, 
+                version: '2020-12'
+              }
             ],
             id: 'DTaP Vaccine'
           },
@@ -924,7 +972,7 @@ const patients = [
         }
       },
       {
-        resource:{
+        resource: {
           resourceType: 'Procedure',
           id: 'dtap-proc-4',
           status: 'completed',
@@ -934,7 +982,7 @@ const patients = [
                 code: '310308006',
                 system: 'http://snomed.info/sct',
                 version: '2020-09'
-              },
+              }
             ],
             id: 'DTaP Vaccine Administered'
           },
@@ -945,39 +993,53 @@ const patients = [
             start: '2019-04-10T09:30:10+01:00',
             end: '2019-04-10T10:30:10+01:00'
           },
-          performer: [{
-            function: {
-              coding: [{
-                system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
-                code: '01.000',
-                display: 'Arts'
-              }],
-              text: 'Care role'
-            },
-            actor: {
-              reference: 'Practitioner/f005',
-              display: 'A. Langeveld'
+          performer: [
+            {
+              function: {
+                coding: [
+                  {
+                    system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
+                    code: '01.000',
+                    display: 'Arts'
+                  }
+                ],
+                text: 'Care role'
+              },
+              actor: {
+                reference: 'Practitioner/f005',
+                display: 'A. Langeveld'
+              }
             }
-          }],
-          reasonCode: [{
-            text: 'ensure breathing during surgery'
-          }],
-          bodySite: [{
-            coding: [{
-              system: 'http://snomed.info/sct',
-              code: '83030008',
-              display: 'Retropharyngeal area'
-            }]
-          }],
+          ],
+          reasonCode: [
+            {
+              text: 'ensure breathing during surgery'
+            }
+          ],
+          bodySite: [
+            {
+              coding: [
+                {
+                  system: 'http://snomed.info/sct',
+                  code: '83030008',
+                  display: 'Retropharyngeal area'
+                }
+              ]
+            }
+          ],
           outcome: {
             text: 'removal of the retropharyngeal abscess'
           },
-          report: [{
-            reference: 'DiagnosticReport/f001',
-          }],
-          followUp: [{
-            text: 'described in care plan'
-          }]
+          report: [
+            {
+              reference: 'DiagnosticReport/f001'
+            }
+          ],
+          followUp: [
+            {
+              text: 'described in care plan'
+            }
+          ]
         }
       },
       // IPV (Polio)
@@ -985,7 +1047,7 @@ const patients = [
         resource: {
           resourceType: 'Immunization',
           id: 'ipv-imm-1',
-        
+
           identifier: [
             {
               system: 'urn:ietf:rfc:3986',
@@ -999,7 +1061,7 @@ const patients = [
                 code: '10',
                 system: 'CVX',
                 version: '2020-12'
-              }, 
+              }
             ],
             id: 'Inactivated Polio Vaccine (IPV)'
           },
@@ -1114,7 +1176,7 @@ const patients = [
         }
       },
       {
-        resource:{
+        resource: {
           resourceType: 'Procedure',
           id: 'ipv-proc-2',
           status: 'completed',
@@ -1124,7 +1186,7 @@ const patients = [
                 code: '396456003',
                 system: 'http://snomed.info/sct',
                 version: '2020-09'
-              },
+              }
             ],
             id: 'Inactivated Polio Vaccine (IPV) Administered'
           },
@@ -1135,43 +1197,57 @@ const patients = [
             start: '2019-02-10T09:30:10+01:00',
             end: '2019-02-10T10:30:10+01:00'
           },
-          performer: [{
-            function: {
-              coding: [{
-                system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
-                code: '01.000',
-                display: 'Arts'
-              }],
-              text: 'Care role'
-            },
-            actor: {
-              reference: 'Practitioner/f005',
-              display: 'A. Langeveld'
+          performer: [
+            {
+              function: {
+                coding: [
+                  {
+                    system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
+                    code: '01.000',
+                    display: 'Arts'
+                  }
+                ],
+                text: 'Care role'
+              },
+              actor: {
+                reference: 'Practitioner/f005',
+                display: 'A. Langeveld'
+              }
             }
-          }],
-          reasonCode: [{
-            text: 'ensure breathing during surgery'
-          }],
-          bodySite: [{
-            coding: [{
-              system: 'http://snomed.info/sct',
-              code: '83030008',
-              display: 'Retropharyngeal area'
-            }]
-          }],
+          ],
+          reasonCode: [
+            {
+              text: 'ensure breathing during surgery'
+            }
+          ],
+          bodySite: [
+            {
+              coding: [
+                {
+                  system: 'http://snomed.info/sct',
+                  code: '83030008',
+                  display: 'Retropharyngeal area'
+                }
+              ]
+            }
+          ],
           outcome: {
             text: 'removal of the retropharyngeal abscess'
           },
-          report: [{
-            reference: 'DiagnosticReport/f001',
-          }],
-          followUp: [{
-            text: 'described in care plan'
-          }]
+          report: [
+            {
+              reference: 'DiagnosticReport/f001'
+            }
+          ],
+          followUp: [
+            {
+              text: 'described in care plan'
+            }
+          ]
         }
       },
       {
-        resource:{
+        resource: {
           resourceType: 'Procedure',
           id: 'ipv-proc-3',
           status: 'completed',
@@ -1181,7 +1257,7 @@ const patients = [
                 code: '396456003',
                 system: 'http://snomed.info/sct',
                 version: '2020-09'
-              },
+              }
             ],
             id: 'Inactivated Polio Vaccine (IPV) Administered'
           },
@@ -1192,39 +1268,53 @@ const patients = [
             start: '2019-03-10T09:30:10+01:00',
             end: '2019-03-10T10:30:10+01:00'
           },
-          performer: [{
-            function: {
-              coding: [{
-                system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
-                code: '01.000',
-                display: 'Arts'
-              }],
-              text: 'Care role'
-            },
-            actor: {
-              reference: 'Practitioner/f005',
-              display: 'A. Langeveld'
+          performer: [
+            {
+              function: {
+                coding: [
+                  {
+                    system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
+                    code: '01.000',
+                    display: 'Arts'
+                  }
+                ],
+                text: 'Care role'
+              },
+              actor: {
+                reference: 'Practitioner/f005',
+                display: 'A. Langeveld'
+              }
             }
-          }],
-          reasonCode: [{
-            text: 'ensure breathing during surgery'
-          }],
-          bodySite: [{
-            coding: [{
-              system: 'http://snomed.info/sct',
-              code: '83030008',
-              display: 'Retropharyngeal area'
-            }]
-          }],
+          ],
+          reasonCode: [
+            {
+              text: 'ensure breathing during surgery'
+            }
+          ],
+          bodySite: [
+            {
+              coding: [
+                {
+                  system: 'http://snomed.info/sct',
+                  code: '83030008',
+                  display: 'Retropharyngeal area'
+                }
+              ]
+            }
+          ],
           outcome: {
             text: 'removal of the retropharyngeal abscess'
           },
-          report: [{
-            reference: 'DiagnosticReport/f001',
-          }],
-          followUp: [{
-            text: 'described in care plan'
-          }]
+          report: [
+            {
+              reference: 'DiagnosticReport/f001'
+            }
+          ],
+          followUp: [
+            {
+              text: 'described in care plan'
+            }
+          ]
         }
       },
       // IPV Condition
@@ -1300,7 +1390,7 @@ const patients = [
             }
           ],
           subject: {
-            reference: 'Patient/numer-EXM165-FHIR3',
+            reference: 'Patient/numer-EXM165-FHIR3'
           },
           encounter: {
             reference: 'Encounter/example'
@@ -1313,7 +1403,7 @@ const patients = [
           },
           asserter: {
             reference: 'Practitioner/f201'
-          },
+          }
         }
       },
       // Hepatitis B Condition
@@ -1389,7 +1479,7 @@ const patients = [
             }
           ],
           subject: {
-            reference: 'Patient/numer-EXM165-FHIR3',
+            reference: 'Patient/numer-EXM165-FHIR3'
           },
           encounter: {
             reference: 'Encounter/example'
@@ -1402,7 +1492,7 @@ const patients = [
           },
           asserter: {
             reference: 'Practitioner/f201'
-          },
+          }
         }
       },
       // Hepatitis B (Hep B) - other two hep b cases are ipv procedures
@@ -1410,7 +1500,7 @@ const patients = [
         resource: {
           resourceType: 'Immunization',
           id: 'hep-b-imm-1',
-        
+
           identifier: [
             {
               system: 'urn:ietf:rfc:3986',
@@ -1424,7 +1514,7 @@ const patients = [
                 code: '08',
                 system: 'CVX',
                 version: '2020-12'
-              }, 
+              }
             ],
             id: 'Hepatitis B Immunization'
           },
@@ -1543,7 +1633,7 @@ const patients = [
         resource: {
           resourceType: 'Immunization',
           id: 'flu-imm-1',
-        
+
           identifier: [
             {
               system: 'urn:ietf:rfc:3986',
@@ -1557,7 +1647,7 @@ const patients = [
                 code: '135',
                 system: 'CVX',
                 version: '2020-12'
-              }, 
+              }
             ],
             id: 'Influenza Vaccine'
           },
@@ -1672,7 +1762,7 @@ const patients = [
         }
       },
       {
-        resource:{
+        resource: {
           resourceType: 'Procedure',
           id: 'flu-proc-1',
           status: 'completed',
@@ -1682,7 +1772,7 @@ const patients = [
                 code: '90655',
                 system: 'CPT',
                 version: '2021'
-              },
+              }
             ],
             id: 'Influenza Vaccine Administered'
           },
@@ -1693,43 +1783,57 @@ const patients = [
             start: '2019-01-10T09:30:10+01:00',
             end: '2019-01-10T10:30:10+01:00'
           },
-          performer: [{
-            function: {
-              coding: [{
-                system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
-                code: '01.000',
-                display: 'Arts'
-              }],
-              text: 'Care role'
-            },
-            actor: {
-              reference: 'Practitioner/f005',
-              display: 'A. Langeveld'
+          performer: [
+            {
+              function: {
+                coding: [
+                  {
+                    system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
+                    code: '01.000',
+                    display: 'Arts'
+                  }
+                ],
+                text: 'Care role'
+              },
+              actor: {
+                reference: 'Practitioner/f005',
+                display: 'A. Langeveld'
+              }
             }
-          }],
-          reasonCode: [{
-            text: 'ensure breathing during surgery'
-          }],
-          bodySite: [{
-            coding: [{
-              system: 'http://snomed.info/sct',
-              code: '83030008',
-              display: 'Retropharyngeal area'
-            }]
-          }],
+          ],
+          reasonCode: [
+            {
+              text: 'ensure breathing during surgery'
+            }
+          ],
+          bodySite: [
+            {
+              coding: [
+                {
+                  system: 'http://snomed.info/sct',
+                  code: '83030008',
+                  display: 'Retropharyngeal area'
+                }
+              ]
+            }
+          ],
           outcome: {
             text: 'removal of the retropharyngeal abscess'
           },
-          report: [{
-            reference: 'DiagnosticReport/f001',
-          }],
-          followUp: [{
-            text: 'described in care plan'
-          }]
+          report: [
+            {
+              reference: 'DiagnosticReport/f001'
+            }
+          ],
+          followUp: [
+            {
+              text: 'described in care plan'
+            }
+          ]
         }
       },
       {
-        resource:{
+        resource: {
           resourceType: 'Procedure',
           id: 'flu-proc-2',
           status: 'completed',
@@ -1739,7 +1843,7 @@ const patients = [
                 code: '86198006',
                 system: 'http://snomed.info/sct',
                 version: '2020-09'
-              },
+              }
             ],
             id: 'Influenza Vaccine Administered'
           },
@@ -1750,53 +1854,65 @@ const patients = [
             start: '2019-02-10T09:30:10+01:00',
             end: '2019-02-10T10:30:10+01:00'
           },
-          performer: [{
-            function: {
-              coding: [{
-                system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
-                code: '01.000',
-                display: 'Arts'
-              }],
-              text: 'Care role'
-            },
-            actor: {
-              reference: 'Practitioner/f005',
-              display: 'A. Langeveld'
+          performer: [
+            {
+              function: {
+                coding: [
+                  {
+                    system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
+                    code: '01.000',
+                    display: 'Arts'
+                  }
+                ],
+                text: 'Care role'
+              },
+              actor: {
+                reference: 'Practitioner/f005',
+                display: 'A. Langeveld'
+              }
             }
-          }],
-          reasonCode: [{
-            text: 'ensure breathing during surgery'
-          }],
-          bodySite: [{
-            coding: [{
-              system: 'http://snomed.info/sct',
-              code: '83030008',
-              display: 'Retropharyngeal area'
-            }]
-          }],
+          ],
+          reasonCode: [
+            {
+              text: 'ensure breathing during surgery'
+            }
+          ],
+          bodySite: [
+            {
+              coding: [
+                {
+                  system: 'http://snomed.info/sct',
+                  code: '83030008',
+                  display: 'Retropharyngeal area'
+                }
+              ]
+            }
+          ],
           outcome: {
             text: 'removal of the retropharyngeal abscess'
           },
-          report: [{
-            reference: 'DiagnosticReport/f001',
-          }],
-          followUp: [{
-            text: 'described in care plan'
-          }]
+          report: [
+            {
+              reference: 'DiagnosticReport/f001'
+            }
+          ],
+          followUp: [
+            {
+              text: 'described in care plan'
+            }
+          ]
         }
       },
       // Hepatitis A Observation
       {
-        resource:{
+        resource: {
           resourceType: 'Observation',
           id: 'gf3a4f19-9f99-6ceb-7dde-4900ae818cbw',
           meta: {
-            'profile': [
-              'http://hl7.org/fhir/StructureDefinition/vitalsigns'
-            ]
+            profile: ['http://hl7.org/fhir/StructureDefinition/vitalsigns']
           },
           text: {
-            status: 'generated',
+            status: 'generated'
           },
           identifier: [
             {
@@ -1846,12 +1962,12 @@ const patients = [
             ]
           },
           subject: {
-            reference: 'Patient/numer-EXM165-FHIR3',
+            reference: 'Patient/numer-EXM165-FHIR3'
           },
           effectiveDateTime: '2019-10-28T19:57:22-04:00',
           performer: [
             {
-              'reference': 'Practitioner/example'
+              reference: 'Practitioner/example'
             }
           ],
           interpretation: [
@@ -1874,8 +1990,8 @@ const patients = [
                 display: 'Right arm'
               }
             ]
-          },
-        },
+          }
+        }
       },
       // Hepatitis A (hep a)
       {
@@ -1950,7 +2066,7 @@ const patients = [
             }
           ],
           subject: {
-            reference: 'Patient/numer-EXM165-FHIR3',
+            reference: 'Patient/numer-EXM165-FHIR3'
           },
           encounter: {
             reference: 'Encounter/example'
@@ -1963,7 +2079,7 @@ const patients = [
           },
           asserter: {
             reference: 'Practitioner/f201'
-          },
+          }
         }
       },
       // VZV (Chicken Pox)
@@ -2039,7 +2155,7 @@ const patients = [
             }
           ],
           subject: {
-            reference: 'Patient/numer-EXM165-FHIR3',
+            reference: 'Patient/numer-EXM165-FHIR3'
           },
           encounter: {
             reference: 'Encounter/example'
@@ -2052,7 +2168,7 @@ const patients = [
           },
           asserter: {
             reference: 'Practitioner/f201'
-          },
+          }
         }
       },
       // Pneumococcal Condition
@@ -2128,7 +2244,7 @@ const patients = [
             }
           ],
           subject: {
-            reference: 'Patient/numer-EXM165-FHIR3',
+            reference: 'Patient/numer-EXM165-FHIR3'
           },
           encounter: {
             reference: 'Encounter/example'
@@ -2141,7 +2257,7 @@ const patients = [
           },
           asserter: {
             reference: 'Practitioner/f201'
-          },
+          }
         }
       },
       // Pneumococcal Conjugate
@@ -2161,9 +2277,8 @@ const patients = [
               {
                 code: '133',
                 system: 'CVX',
-                version: '2020-12',
-              
-              }, 
+                version: '2020-12'
+              }
             ],
             id: 'Pneumococcal Conjugate Vaccine'
           },
@@ -2275,12 +2390,10 @@ const patients = [
               }
             ]
           }
-      
-      
         }
       },
       {
-        resource:{
+        resource: {
           resourceType: 'Immunization',
           id: 'pc-imm-2',
           identifier: [
@@ -2295,8 +2408,8 @@ const patients = [
               {
                 code: '133',
                 system: 'CVX',
-                version: '2020-12',
-              },
+                version: '2020-12'
+              }
             ],
             id: 'Pneumococcal Conjugate Vaccine'
           },
@@ -2411,7 +2524,7 @@ const patients = [
         }
       },
       {
-        resource:{
+        resource: {
           resourceType: 'Procedure',
           id: 'pc-proc-3',
           status: 'completed',
@@ -2421,7 +2534,7 @@ const patients = [
                 code: '90670',
                 system: 'CPT',
                 version: '2021'
-              },
+              }
             ],
             id: 'Pneumococcal Conjugate Vaccine Administered'
           },
@@ -2432,43 +2545,57 @@ const patients = [
             start: '2019-03-10T09:30:10+01:00',
             end: '2019-03-10T10:30:10+01:00'
           },
-          performer: [{
-            function: {
-              coding: [{
-                system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
-                code: '01.000',
-                display: 'Arts'
-              }],
-              text: 'Care role'
-            },
-            actor: {
-              reference: 'Practitioner/f005',
-              display: 'A. Langeveld'
+          performer: [
+            {
+              function: {
+                coding: [
+                  {
+                    system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
+                    code: '01.000',
+                    display: 'Arts'
+                  }
+                ],
+                text: 'Care role'
+              },
+              actor: {
+                reference: 'Practitioner/f005',
+                display: 'A. Langeveld'
+              }
             }
-          }],
-          reasonCode: [{
-            text: 'ensure breathing during surgery'
-          }],
-          bodySite: [{
-            coding: [{
-              system: 'http://snomed.info/sct',
-              code: '83030008',
-              display: 'Retropharyngeal area'
-            }]
-          }],
+          ],
+          reasonCode: [
+            {
+              text: 'ensure breathing during surgery'
+            }
+          ],
+          bodySite: [
+            {
+              coding: [
+                {
+                  system: 'http://snomed.info/sct',
+                  code: '83030008',
+                  display: 'Retropharyngeal area'
+                }
+              ]
+            }
+          ],
           outcome: {
             text: 'removal of the retropharyngeal abscess'
           },
-          report: [{
-            reference: 'DiagnosticReport/f001',
-          }],
-          followUp: [{
-            text: 'described in care plan'
-          }]
+          report: [
+            {
+              reference: 'DiagnosticReport/f001'
+            }
+          ],
+          followUp: [
+            {
+              text: 'described in care plan'
+            }
+          ]
         }
       },
       {
-        resource:{
+        resource: {
           resourceType: 'Procedure',
           id: 'pc-proc-4',
           status: 'completed',
@@ -2478,7 +2605,7 @@ const patients = [
                 code: '434751000124102',
                 system: 'http://snomed.info/sct',
                 version: '2020-09'
-              },
+              }
             ],
             id: 'Pneumococcal Conjugate Vaccine Administered'
           },
@@ -2489,39 +2616,53 @@ const patients = [
             start: '2019-04-10T09:30:10+01:00',
             end: '2019-04-10T10:30:10+01:00'
           },
-          performer: [{
-            function: {
-              coding: [{
-                system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
-                code: '01.000',
-                display: 'Arts'
-              }],
-              text: 'Care role'
-            },
-            actor: {
-              reference: 'Practitioner/f005',
-              display: 'A. Langeveld'
+          performer: [
+            {
+              function: {
+                coding: [
+                  {
+                    system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
+                    code: '01.000',
+                    display: 'Arts'
+                  }
+                ],
+                text: 'Care role'
+              },
+              actor: {
+                reference: 'Practitioner/f005',
+                display: 'A. Langeveld'
+              }
             }
-          }],
-          reasonCode: [{
-            text: 'ensure breathing during surgery'
-          }],
-          bodySite: [{
-            coding: [{
-              system: 'http://snomed.info/sct',
-              code: '83030008',
-              display: 'Retropharyngeal area'
-            }]
-          }],
+          ],
+          reasonCode: [
+            {
+              text: 'ensure breathing during surgery'
+            }
+          ],
+          bodySite: [
+            {
+              coding: [
+                {
+                  system: 'http://snomed.info/sct',
+                  code: '83030008',
+                  display: 'Retropharyngeal area'
+                }
+              ]
+            }
+          ],
           outcome: {
             text: 'removal of the retropharyngeal abscess'
           },
-          report: [{
-            reference: 'DiagnosticReport/f001',
-          }],
-          followUp: [{
-            text: 'described in care plan'
-          }]
+          report: [
+            {
+              reference: 'DiagnosticReport/f001'
+            }
+          ],
+          followUp: [
+            {
+              text: 'described in care plan'
+            }
+          ]
         }
       },
       // Rotavirus condition
@@ -2597,7 +2738,7 @@ const patients = [
             }
           ],
           subject: {
-            reference: 'Patient/numer-EXM165-FHIR3',
+            reference: 'Patient/numer-EXM165-FHIR3'
           },
           encounter: {
             reference: 'Encounter/example'
@@ -2610,7 +2751,7 @@ const patients = [
           },
           asserter: {
             reference: 'Practitioner/f201'
-          },
+          }
         }
       },
       // Rotavirus 2 dose Vaccinations
@@ -2631,7 +2772,7 @@ const patients = [
                 code: '119',
                 system: 'CVX',
                 version: '2020-12'
-              },
+              }
             ],
             id: 'Rotavirus 2 dose Vaccine'
           },
@@ -2743,12 +2884,10 @@ const patients = [
               }
             ]
           }
-      
-      
         }
       },
       {
-        resource:{
+        resource: {
           resourceType: 'Procedure',
           id: 'rota-2-dose-proc-1',
           status: 'completed',
@@ -2758,7 +2897,7 @@ const patients = [
                 code: '434741000124104',
                 system: 'http://snomed.info/sct',
                 version: '2020-09'
-              },
+              }
             ],
             id: 'Rotavirus 2 dose Vaccine Administered'
           },
@@ -2769,42 +2908,56 @@ const patients = [
             start: '2019-01-12T09:30:10+01:00',
             end: '2019-01-12T10:30:10+01:00'
           },
-          performer: [{
-            function: {
-              coding: [{
-                system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
-                code: '01.000',
-                display: 'Arts'
-              }],
-              text: 'Care role'
-            },
-            actor: {
-              reference: 'Practitioner/f005',
-              display: 'A. Langeveld'
+          performer: [
+            {
+              function: {
+                coding: [
+                  {
+                    system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
+                    code: '01.000',
+                    display: 'Arts'
+                  }
+                ],
+                text: 'Care role'
+              },
+              actor: {
+                reference: 'Practitioner/f005',
+                display: 'A. Langeveld'
+              }
             }
-          }],
-          reasonCode: [{
-            text: 'ensure breathing during surgery'
-          }],
-          bodySite: [{
-            coding: [{
-              system: 'http://snomed.info/sct',
-              code: '83030008',
-              display: 'Retropharyngeal area'
-            }]
-          }],
+          ],
+          reasonCode: [
+            {
+              text: 'ensure breathing during surgery'
+            }
+          ],
+          bodySite: [
+            {
+              coding: [
+                {
+                  system: 'http://snomed.info/sct',
+                  code: '83030008',
+                  display: 'Retropharyngeal area'
+                }
+              ]
+            }
+          ],
           outcome: {
             text: 'removal of the retropharyngeal abscess'
           },
-          report: [{
-            reference: 'DiagnosticReport/f001',
-          }],
-          followUp: [{
-            text: 'described in care plan'
-          }]
+          report: [
+            {
+              reference: 'DiagnosticReport/f001'
+            }
+          ],
+          followUp: [
+            {
+              text: 'described in care plan'
+            }
+          ]
         }
       },
-      // Rotavirus 3 dose Vaccinations 
+      // Rotavirus 3 dose Vaccinations
       {
         resource: {
           resourceType: 'Immunization',
@@ -2822,7 +2975,7 @@ const patients = [
                 code: '122',
                 system: 'CVX',
                 version: '2020-12'
-              },
+              }
             ],
             id: 'Rotavirus 3 dose Vaccine'
           },
@@ -2934,12 +3087,10 @@ const patients = [
               }
             ]
           }
-      
-      
         }
       },
       {
-        resource:{
+        resource: {
           resourceType: 'Procedure',
           id: 'rota-3-dose-proc-1',
           status: 'completed',
@@ -2949,7 +3100,7 @@ const patients = [
                 code: '434731000124109',
                 system: 'http://snomed.info/sct',
                 version: '2020-09'
-              },
+              }
             ],
             id: 'Rotavirus 3 dose Vaccine Administered'
           },
@@ -2960,43 +3111,57 @@ const patients = [
             start: '2019-01-16T09:30:10+01:00',
             end: '2019-01-16T10:30:10+01:00'
           },
-          performer: [{
-            function: {
-              coding: [{
-                system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
-                code: '01.000',
-                display: 'Arts'
-              }],
-              text: 'Care role'
-            },
-            actor: {
-              reference: 'Practitioner/f005',
-              display: 'A. Langeveld'
+          performer: [
+            {
+              function: {
+                coding: [
+                  {
+                    system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
+                    code: '01.000',
+                    display: 'Arts'
+                  }
+                ],
+                text: 'Care role'
+              },
+              actor: {
+                reference: 'Practitioner/f005',
+                display: 'A. Langeveld'
+              }
             }
-          }],
-          reasonCode: [{
-            text: 'ensure breathing during surgery'
-          }],
-          bodySite: [{
-            coding: [{
-              system: 'http://snomed.info/sct',
-              code: '83030008',
-              display: 'Retropharyngeal area'
-            }]
-          }],
+          ],
+          reasonCode: [
+            {
+              text: 'ensure breathing during surgery'
+            }
+          ],
+          bodySite: [
+            {
+              coding: [
+                {
+                  system: 'http://snomed.info/sct',
+                  code: '83030008',
+                  display: 'Retropharyngeal area'
+                }
+              ]
+            }
+          ],
           outcome: {
             text: 'removal of the retropharyngeal abscess'
           },
-          report: [{
-            reference: 'DiagnosticReport/f001',
-          }],
-          followUp: [{
-            text: 'described in care plan'
-          }]
+          report: [
+            {
+              reference: 'DiagnosticReport/f001'
+            }
+          ],
+          followUp: [
+            {
+              text: 'described in care plan'
+            }
+          ]
         }
       },
       {
-        resource:{
+        resource: {
           resourceType: 'Procedure',
           id: 'rota-3-dose-proc-2',
           status: 'completed',
@@ -3006,7 +3171,7 @@ const patients = [
                 code: '434731000124109',
                 system: 'http://snomed.info/sct',
                 version: '2020-09'
-              },
+              }
             ],
             id: 'Rotavirus 3 dose Vaccine Administered'
           },
@@ -3017,39 +3182,53 @@ const patients = [
             start: '2019-01-17T09:30:10+01:00',
             end: '2019-01-17T10:30:10+01:00'
           },
-          performer: [{
-            function: {
-              coding: [{
-                system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
-                code: '01.000',
-                display: 'Arts'
-              }],
-              text: 'Care role'
-            },
-            actor: {
-              reference: 'Practitioner/f005',
-              display: 'A. Langeveld'
+          performer: [
+            {
+              function: {
+                coding: [
+                  {
+                    system: 'urn:oid:2.16.840.1.113883.2.4.15.111',
+                    code: '01.000',
+                    display: 'Arts'
+                  }
+                ],
+                text: 'Care role'
+              },
+              actor: {
+                reference: 'Practitioner/f005',
+                display: 'A. Langeveld'
+              }
             }
-          }],
-          reasonCode: [{
-            text: 'ensure breathing during surgery'
-          }],
-          bodySite: [{
-            coding: [{
-              system: 'http://snomed.info/sct',
-              code: '83030008',
-              display: 'Retropharyngeal area'
-            }]
-          }],
+          ],
+          reasonCode: [
+            {
+              text: 'ensure breathing during surgery'
+            }
+          ],
+          bodySite: [
+            {
+              coding: [
+                {
+                  system: 'http://snomed.info/sct',
+                  code: '83030008',
+                  display: 'Retropharyngeal area'
+                }
+              ]
+            }
+          ],
           outcome: {
             text: 'removal of the retropharyngeal abscess'
           },
-          report: [{
-            reference: 'DiagnosticReport/f001',
-          }],
-          followUp: [{
-            text: 'described in care plan'
-          }]
+          report: [
+            {
+              reference: 'DiagnosticReport/f001'
+            }
+          ],
+          followUp: [
+            {
+              text: 'described in care plan'
+            }
+          ]
         }
       },
       // HiB Condition
@@ -3125,7 +3304,7 @@ const patients = [
             }
           ],
           subject: {
-            reference: 'Patient/numer-EXM165-FHIR3',
+            reference: 'Patient/numer-EXM165-FHIR3'
           },
           encounter: {
             reference: 'Encounter/example'
@@ -3138,7 +3317,7 @@ const patients = [
           },
           asserter: {
             reference: 'Practitioner/f201'
-          },
+          }
         }
       },
       // MMR Condition
@@ -3214,7 +3393,7 @@ const patients = [
             }
           ],
           subject: {
-            reference: 'Patient/numer-EXM165-FHIR3',
+            reference: 'Patient/numer-EXM165-FHIR3'
           },
           encounter: {
             reference: 'Encounter/example'
@@ -3227,21 +3406,19 @@ const patients = [
           },
           asserter: {
             reference: 'Practitioner/f201'
-          },
+          }
         }
       },
       // Measles Observation
       {
-        resource:{
+        resource: {
           resourceType: 'Observation',
           id: 'gf3a4f19-9f99-6ceb-7dde-4900ae818cbw',
           meta: {
-            'profile': [
-              'http://hl7.org/fhir/StructureDefinition/vitalsigns'
-            ]
+            profile: ['http://hl7.org/fhir/StructureDefinition/vitalsigns']
           },
           text: {
-            status: 'generated',
+            status: 'generated'
           },
           identifier: [
             {
@@ -3285,12 +3462,12 @@ const patients = [
             unit: 'mm[Hg]'
           },
           subject: {
-            reference: 'Patient/numer-EXM165-FHIR3',
+            reference: 'Patient/numer-EXM165-FHIR3'
           },
           effectiveDateTime: '2019-10-28T19:57:22-04:00',
           performer: [
             {
-              'reference': 'Practitioner/example'
+              reference: 'Practitioner/example'
             }
           ],
           interpretation: [
@@ -3313,8 +3490,8 @@ const patients = [
                 display: 'Right arm'
               }
             ]
-          },
-        },
+          }
+        }
       },
       // Mumps Condition
       {
@@ -3389,7 +3566,7 @@ const patients = [
             }
           ],
           subject: {
-            reference: 'Patient/numer-EXM165-FHIR3',
+            reference: 'Patient/numer-EXM165-FHIR3'
           },
           encounter: {
             reference: 'Encounter/example'
@@ -3402,21 +3579,19 @@ const patients = [
           },
           asserter: {
             reference: 'Practitioner/f201'
-          },
+          }
         }
       },
       // Rubella Observation
       {
-        resource:{
+        resource: {
           resourceType: 'Observation',
           id: 'i',
           meta: {
-            'profile': [
-              'http://hl7.org/fhir/StructureDefinition/vitalsigns'
-            ]
+            profile: ['http://hl7.org/fhir/StructureDefinition/vitalsigns']
           },
           text: {
-            status: 'generated',
+            status: 'generated'
           },
           identifier: [
             {
@@ -3452,7 +3627,7 @@ const patients = [
                 version: '2.68',
                 display: 'Rubella Antibody Test (IgG Antibody presence)'
               }
-            ],
+            ]
           },
           valueCodeableConcept: {
             coding: [
@@ -3465,12 +3640,12 @@ const patients = [
             ]
           },
           subject: {
-            reference: 'Patient/numer-EXM165-FHIR3',
+            reference: 'Patient/numer-EXM165-FHIR3'
           },
           effectiveDateTime: '2019-10-28T19:57:22-04:00',
           performer: [
             {
-              'reference': 'Practitioner/example'
+              reference: 'Practitioner/example'
             }
           ],
           interpretation: [
@@ -3493,8 +3668,8 @@ const patients = [
                 display: 'Right arm'
               }
             ]
-          },
-        },
+          }
+        }
       },
       // MMR Vaccinations
       {
@@ -3513,8 +3688,8 @@ const patients = [
               {
                 code: '03',
                 system: 'CVX',
-                version: '2020-12',
-              },
+                version: '2020-12'
+              }
             ],
             id: 'MMR Vaccine'
           },
@@ -3627,7 +3802,7 @@ const patients = [
             ]
           }
         }
-      },
+      }
     ]
   }
 ];
