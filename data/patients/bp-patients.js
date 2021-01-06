@@ -4896,38 +4896,38 @@ const patients = [
       {
         fullUrl: 'urn:uuid:gf3a4f19-9f99-6ceb-7dde-4900ae818cbw',
         resource:{
-          resourceType: "Observation",
-          id: "gf3a4f19-9f99-6ceb-7dde-4900ae818cbw",
+          resourceType: 'Observation',
+          id: 'gf3a4f19-9f99-6ceb-7dde-4900ae818cbw',
           meta: {
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/vitalsigns"
+            'profile': [
+              'http://hl7.org/fhir/StructureDefinition/vitalsigns'
             ]
           },
           text: {
-            status: "generated",
+            status: 'generated',
           },
           identifier: [
             {
-              system: "urn:ietf:rfc:3981",
-              value: "urn:uuid:187e0c12-8dd2-67e2-99b2-bf273c878282"
+              system: 'urn:ietf:rfc:3981',
+              value: 'urn:uuid:187e0c12-8dd2-67e2-99b2-bf273c878282'
             }
           ],
           basedOn: [
             {
               identifier: {
-                system: "https://acme.org/identifiers",
-                value: "1234"
+                system: 'https://acme.org/identifiers',
+                value: '1234'
               }
             }
           ],
-          status: "final",
+          status: 'final',
           category: [
             {
               coding: [
                 {
-                  system: "http://terminology.hl7.org/CodeSystem/observation-category",
-                  code: "vital-signs",
-                  display: "Vital Signs"
+                  system: 'http://terminology.hl7.org/CodeSystem/observation-category',
+                  code: 'vital-signs',
+                  display: 'Vital Signs'
                 }
               ]
             }
@@ -4935,41 +4935,41 @@ const patients = [
           code: {
             coding: [
               {
-                system: "http://loinc.org",
-                code: "85354-9",
-                display: "Blood pressure panel with all children optional"
+                system: 'http://loinc.org',
+                code: '85354-9',
+                display: 'Blood pressure panel with all children optional'
               }
             ],
-            text: "Blood pressure systolic & diastolic"
+            text: 'Blood pressure systolic & diastolic'
           },
           subject: {
             reference: 'urn:uuid:96dcbd62-e4c6-a555-a663-77d08ad3c3b5',
             display: 'Mr. Young120 Murphy561'
           },
-          effectiveDateTime: "2019-10-28T19:57:22-04:00",
+          effectiveDateTime: '2019-10-28T19:57:22-04:00',
           performer: [
             {
-              "reference": "Practitioner/example"
+              'reference': 'Practitioner/example'
             }
           ],
           interpretation: [
             {
               coding: [
                 {
-                  system: "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
-                  code: "L",
-                  display: "low"
+                  system: 'http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation',
+                  code: 'L',
+                  display: 'low'
                 }
               ],
-              text: "Below low normal"
+              text: 'Below low normal'
             }
           ],
           bodySite: {
             coding: [
               {
-                system: "http://snomed.info/sct",
-                code: "368209003",
-                display: "Right arm"
+                system: 'http://snomed.info/sct',
+                code: '368209003',
+                display: 'Right arm'
               }
             ]
           },
@@ -4977,31 +4977,31 @@ const patients = [
             code: {
               coding: [ 
                 {
-                system: "http://loinc.org",
-                code: "8480-6",
-                display: "Systolic blood pressure"
+                  system: 'http://loinc.org',
+                  code: '8480-6',
+                  display: 'Systolic blood pressure'
                 } 
-            ]
+              ]
             },
             valueQuantity: {
               value: 139,
-              unit: "mm[Hg]"
+              unit: 'mm[Hg]'
             }
           },
           {
             code: {
               coding: [ {
-                system: "http://loinc.org",
-                code: "8462-4",
-                display: "Diastolic blood pressure"
+                system: 'http://loinc.org',
+                code: '8462-4',
+                display: 'Diastolic blood pressure'
               } ]
             },
             valueQuantity: {
               value: 89,
-              unit: "mmHg"
+              unit: 'mmHg'
             }
           }  
-         ]
+          ]
         },
         request: {
           method: 'POST',
@@ -9321,38 +9321,38 @@ const patients = [
       {
         fullUrl: 'urn:uuid:hu5a4f19-9f99-6ceb-7dde-4900ae818nhu',
         resource:{
-          resourceType: "Observation",
-          id: "hu5a4f19-9f99-6ceb-7dde-4900ae818nhu",
+          resourceType: 'Observation',
+          id: 'hu5a4f19-9f99-6ceb-7dde-4900ae818nhu',
           meta: {
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/vitalsigns"
+            'profile': [
+              'http://hl7.org/fhir/StructureDefinition/vitalsigns'
             ]
           },
           text: {
-            status: "generated",
+            status: 'generated',
           },
           identifier: [
             {
-              system: "urn:ietf:rfc:3986",
-              value: "urn:uuid:187e0c12-8dd2-67e2-99b2-bf273c878281"
+              system: 'urn:ietf:rfc:3986',
+              value: 'urn:uuid:187e0c12-8dd2-67e2-99b2-bf273c878281'
             }
           ],
           basedOn: [
             {
               identifier: {
-                system: "https://acme.org/identifiers",
-                value: "1234"
+                system: 'https://acme.org/identifiers',
+                value: '1234'
               }
             }
           ],
-          status: "final",
+          status: 'final',
           category: [
             {
               coding: [
                 {
-                  system: "http://terminology.hl7.org/CodeSystem/observation-category",
-                  code: "vital-signs",
-                  display: "Vital Signs"
+                  system: 'http://terminology.hl7.org/CodeSystem/observation-category',
+                  code: 'vital-signs',
+                  display: 'Vital Signs'
                 }
               ]
             }
@@ -9360,40 +9360,40 @@ const patients = [
           code: {
             coding: [
               {
-                system: "http://loinc.org",
-                code: "85354-9",
-                display: "Blood pressure panel with all children optional"
+                system: 'http://loinc.org',
+                code: '85354-9',
+                display: 'Blood pressure panel with all children optional'
               }
             ],
-            text: "Blood pressure systolic & diastolic"
+            text: 'Blood pressure systolic & diastolic'
           },
           subject: {
-            "reference": "Patient/example"
+            'reference': 'Patient/example'
           },
-          effectiveDateTime: "2019-09-28T19:57:22-04:00",
+          effectiveDateTime: '2019-09-28T19:57:22-04:00',
           performer: [
             {
-              "reference": "Practitioner/example"
+              'reference': 'Practitioner/example'
             }
           ],
           interpretation: [
             {
               coding: [
                 {
-                  system: "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
-                  code: "L",
-                  display: "low"
+                  system: 'http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation',
+                  code: 'L',
+                  display: 'low'
                 }
               ],
-              text: "Below low normal"
+              text: 'Below low normal'
             }
           ],
           bodySite: {
             coding: [
               {
-                system: "http://snomed.info/sct",
-                code: "368209003",
-                display: "Right arm"
+                system: 'http://snomed.info/sct',
+                code: '368209003',
+                display: 'Right arm'
               }
             ]
           },
@@ -9402,38 +9402,38 @@ const patients = [
               code: {
                 coding: [
                   {
-                    system: "http://loinc.org",
-                    code: "8480-6",
-                    display: "Systolic blood pressure"
+                    system: 'http://loinc.org',
+                    code: '8480-6',
+                    display: 'Systolic blood pressure'
                   },
                   {
-                    system: "http://snomed.info/sct",
-                    code: "271649006",
-                    display: "Systolic blood pressure"
+                    system: 'http://snomed.info/sct',
+                    code: '271649006',
+                    display: 'Systolic blood pressure'
                   },
                   {
-                    system: "http://acme.org/devices/clinical-codes",
-                    code: "bp-s",
-                    display: "Systolic Blood pressure"
+                    system: 'http://acme.org/devices/clinical-codes',
+                    code: 'bp-s',
+                    display: 'Systolic Blood pressure'
                   }
                 ]
               },
               valueQuantity: {
                 value: 150,
-                unit: "mmHg",
-                system: "http://unitsofmeasure.org",
-                code: "mm[Hg]"
+                unit: 'mmHg',
+                system: 'http://unitsofmeasure.org',
+                code: 'mm[Hg]'
               },
               interpretation: [
                 {
                   coding: [
                     {
-                      system: "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
-                      code: "N",
-                      display: "normal"
+                      system: 'http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation',
+                      code: 'N',
+                      display: 'normal'
                     }
                   ],
-                  text: "Normal"
+                  text: 'Normal'
                 }
               ]
             },
@@ -9441,28 +9441,28 @@ const patients = [
               code: {
                 coding: [
                   {
-                    system: "http://loinc.org",
-                    code: "8462-4",
-                    display: "Diastolic blood pressure"
+                    system: 'http://loinc.org',
+                    code: '8462-4',
+                    display: 'Diastolic blood pressure'
                   }
                 ]
               },
               valueQuantity: {
                 value: 100,
-                unit: "mmHg",
-                system: "http://unitsofmeasure.org",
-                code: "mm[Hg]"
+                unit: 'mmHg',
+                system: 'http://unitsofmeasure.org',
+                code: 'mm[Hg]'
               },
               interpretation: [
                 {
                   coding: [
                     {
-                      system: "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
-                      code: "L",
-                      display: "low"
+                      system: 'http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation',
+                      code: 'L',
+                      display: 'low'
                     }
                   ],
-                  text: "Below low normal"
+                  text: 'Below low normal'
                 }
               ]
             }

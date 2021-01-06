@@ -30,4 +30,4 @@ const result = executor.exec(patientSource);
 //console.log(JSON.stringify(result.patientResults['numer-EXM165-FHIR3']["test thing y'all"], undefined, 2))
 //console.log(JSON.stringify(result.patientResults['numer-EXM165-FHIR3']['Hepatitis A Vaccinations'], undefined, 2))
 //console.log(JSON.stringify(result.patientResults['numer-EXM165-FHIR3']['Rotavirus 3 Dose Immunizations or Procedures'], undefined, 2))
-console.log(result.patientResults)
+console.log(result.patientResults); // eslint-disable-line no-console
