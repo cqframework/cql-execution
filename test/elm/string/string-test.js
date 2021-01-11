@@ -51,7 +51,7 @@ describe('Combine', () => {
     should(this.combineNull.exec(this.ctx)).be.null();
   });
 
-  it('should return null when an item in the list is null', function () {
+  it('should ignore nulls in the list', function () {
     this.combineNullItem.exec(this.ctx).should.equal('abc;def;jkl');
   });
 

@@ -1,0 +1,1008 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "CqlLogicalOperatorsTest",
+         "version" : "1.4.0"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "And",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Tuple",
+               "element" : [ {
+                  "name" : "TrueAndTrue",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "And",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TrueAndFalse",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "And",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TrueAndNull",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "And",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           }, {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "FalseAndTrue",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "And",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "FalseAndFalse",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "And",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "FalseAndNull",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "And",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           }, {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "NullAndTrue",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "And",
+                           "operand" : [ {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "NullAndFalse",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "And",
+                           "operand" : [ {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "NullAndNull",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "And",
+                           "operand" : [ {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           }, {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null"
+                        }
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "name" : "Implies",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Tuple",
+               "element" : [ {
+                  "name" : "TrueImpliesTrue",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Translation Error: Could not resolve call to operator Implies with signature (System.Boolean,System.Boolean).",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TrueImpliesFalse",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Translation Error: Could not resolve call to operator Implies with signature (System.Boolean,System.Boolean).",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TrueImpliesNull",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Translation Error: Could not resolve call to operator Implies with signature (System.Boolean,System.Any).",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "FalseImpliesTrue",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Translation Error: Could not resolve call to operator Implies with signature (System.Boolean,System.Boolean).",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "FalseImpliesFalse",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Translation Error: Could not resolve call to operator Implies with signature (System.Boolean,System.Boolean).",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "FalseImpliesNull",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Translation Error: Could not resolve call to operator Implies with signature (System.Boolean,System.Any).",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "NullImpliesTrue",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Translation Error: Could not resolve call to operator Implies with signature (System.Any,System.Boolean).",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "NullImpliesFalse",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Translation Error: Could not resolve call to operator Implies with signature (System.Any,System.Boolean).",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "NullImpliesNull",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Translation Error: Could not resolve call to operator Implies with signature (System.Any,System.Any).",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "name" : "Not",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Tuple",
+               "element" : [ {
+                  "name" : "NotTrue",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Not",
+                           "operand" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           }
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "NotFalse",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Not",
+                           "operand" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           }
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "NotNull",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Not",
+                           "operand" : {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           }
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null"
+                        }
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "name" : "Or",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Tuple",
+               "element" : [ {
+                  "name" : "TrueOrTrue",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Or",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TrueOrFalse",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Or",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TrueOrNull",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Or",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           }, {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "FalseOrTrue",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Or",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "FalseOrFalse",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Or",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "FalseOrNull",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Or",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           }, {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "NullOrTrue",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Or",
+                           "operand" : [ {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "NullOrFalse",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Or",
+                           "operand" : [ {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "NullOrNull",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Or",
+                           "operand" : [ {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           }, {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null"
+                        }
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "name" : "Xor",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Tuple",
+               "element" : [ {
+                  "name" : "TrueXorTrue",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Xor",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TrueXorFalse",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Xor",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TrueXorNull",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Xor",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           }, {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "FalseXorTrue",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Xor",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "FalseXorFalse",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Xor",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "FalseXorNull",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Xor",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           }, {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "NullXorTrue",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Xor",
+                           "operand" : [ {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "NullXorFalse",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Xor",
+                           "operand" : [ {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "NullXorNull",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Xor",
+                           "operand" : [ {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           }, {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null"
+                        }
+                     } ]
+                  }
+               } ]
+            }
+         } ]
+      }
+   }
+}
+

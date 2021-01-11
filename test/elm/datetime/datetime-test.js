@@ -16,7 +16,7 @@ describe('DateTime', () => {
     d.isTime().should.be.false();
     d.year.should.equal(2012);
     d.timezoneOffset.should.equal(this.defaultOffset);
-    ['month', 'day', 'hour', 'minute', 'second', 'millisecond'].map(field =>
+    ['month', 'day', 'hour', 'minute', 'second', 'millisecond'].forEach(field =>
       should.not.exist(d[field])
     );
   });
@@ -27,7 +27,7 @@ describe('DateTime', () => {
     d.year.should.equal(2012);
     d.month.should.equal(2);
     d.timezoneOffset.should.equal(this.defaultOffset);
-    ['day', 'hour', 'minute', 'second', 'millisecond'].map(field => should.not.exist(d[field]));
+    ['day', 'hour', 'minute', 'second', 'millisecond'].forEach(field => should.not.exist(d[field]));
   });
 
   it('should execute day precision correctly', function () {
@@ -37,7 +37,7 @@ describe('DateTime', () => {
     d.month.should.equal(2);
     d.day.should.equal(15);
     d.timezoneOffset.should.equal(this.defaultOffset);
-    ['hour', 'minute', 'second', 'millisecond'].map(field => should.not.exist(d[field]));
+    ['hour', 'minute', 'second', 'millisecond'].forEach(field => should.not.exist(d[field]));
   });
 
   it('should execute hour precision correctly', function () {
@@ -48,7 +48,7 @@ describe('DateTime', () => {
     d.day.should.equal(15);
     d.hour.should.equal(12);
     d.timezoneOffset.should.equal(this.defaultOffset);
-    ['minute', 'second', 'millisecond'].map(field => should.not.exist(d[field]));
+    ['minute', 'second', 'millisecond'].forEach(field => should.not.exist(d[field]));
   });
 
   it('should execute minute precision correctly', function () {
@@ -60,7 +60,7 @@ describe('DateTime', () => {
     d.hour.should.equal(12);
     d.minute.should.equal(10);
     d.timezoneOffset.should.equal(this.defaultOffset);
-    ['second', 'millisecond'].map(field => should.not.exist(d[field]));
+    ['second', 'millisecond'].forEach(field => should.not.exist(d[field]));
   });
 
   it('should execute second precision correctly', function () {
@@ -115,7 +115,9 @@ describe('Time', () => {
     d.month.should.equal(1);
     d.day.should.equal(1);
     d.hour.should.equal(12);
-    ['minute', 'second', 'millisecond', 'timezoneOffset'].map(field => should.not.exist(d[field]));
+    ['minute', 'second', 'millisecond', 'timezoneOffset'].forEach(field =>
+      should.not.exist(d[field])
+    );
   });
 
   it('should execute minute precision correctly', function () {
@@ -127,7 +129,7 @@ describe('Time', () => {
     d.hour.should.equal(12);
     d.minute.should.equal(10);
     should(d.timezoneOffset).be.null();
-    ['second', 'millisecond', 'timezoneOffset'].map(field => should.not.exist(d[field]));
+    ['second', 'millisecond', 'timezoneOffset'].forEach(field => should.not.exist(d[field]));
   });
 
   it('should execute second precision correctly', function () {
@@ -174,7 +176,7 @@ describe('Today', () => {
     today.year.should.equal(this.ctx.getExecutionDateTime().year);
     today.month.should.equal(this.ctx.getExecutionDateTime().month);
     today.day.should.equal(this.ctx.getExecutionDateTime().day);
-    ['hour', 'minute', 'second', 'millisecond', 'timezoneOffset'].map(field =>
+    ['hour', 'minute', 'second', 'millisecond', 'timezoneOffset'].forEach(field =>
       should.not.exist(today[field])
     );
   });
