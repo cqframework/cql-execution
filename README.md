@@ -46,7 +46,7 @@ the unit tests) before expecting it to work! For a working example, see `example
 There are several steps involved to execute CQL.  First, you must create a JSON representation of
 the ELM. For the easiest integration, we will generate a JSON file using cql-to-elm:
 
-1. Install the [Java 8 SDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+1. Install the [Java 11 SDK](https://adoptopenjdk.net/)
 2. Clone the [clinical_quality_language](https://github.com/cqframework/clinical_quality_language)
    repository to a location of your choice
 3. `cd ${path_to_clinical_quality_language}/Src/java` (replacing
