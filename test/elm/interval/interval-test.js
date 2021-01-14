@@ -633,6 +633,9 @@ describe('Before', () => {
 });
 
 describe('BeforeOrOn', () => {
+  // NOTE: BeforeOrOn is synonym for SameOrBefore.
+  // NOTE: SameOrBefore for numeric intervals is tests in spec tests
+
   beforeEach(function () {
     setup(this, data);
   });
@@ -696,6 +699,9 @@ describe('BeforeOrOn', () => {
 });
 
 describe('AfterOrOn', () => {
+  // NOTE: AfterOrOn is synonym for SameOrAfter.
+  // NOTE: SameOrAfter for numeric intervals is tests in spec tests
+
   beforeEach(function () {
     setup(this, data);
   });

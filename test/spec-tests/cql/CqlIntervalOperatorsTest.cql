@@ -982,17 +982,13 @@ define "OnOrAfter": Tuple{
     output: false
   },
   "TestOnOrAfterIntegerTrue": Tuple{
-    skipped: 'TypeError: this.start(...).sameOrAfter is not a function'
-    /*
     expression: Interval[6, 10] on or after 6,
     output: true
-    */  },
+  },
   "TestOnOrAfterDecimalFalse": Tuple{
-    skipped: 'TypeError: this.start(...).sameOrAfter is not a function'
-    /*
     expression: 2.5 on or after Interval[1.666, 2.50000001],
     output: false
-    */  },
+  },
   "TestOnOrAfterQuantityTrue": Tuple{
     expression: 2.5 'mg' on or after Interval[1.666 'mg', 2.50000000 'mg'],
     output: true
@@ -1021,17 +1017,13 @@ define "OnOrBefore": Tuple{
     output: false
   },
   "TestOnOrBeforeIntegerTrue": Tuple{
-    skipped: 'TypeError: this.end(...).sameOrBefore is not a function'
-    /*
     expression: Interval[4, 6] on or before 6,
     output: true
-    */  },
+  },
   "TestOnOrBeforeDecimalFalse": Tuple{
-    skipped: 'TypeError: this.end(...).sameOrBefore is not a function'
-    /*
     expression: 1.6667 on or before Interval[1.666, 2.50000001],
     output: false
-    */  },
+  },
   "TestOnOrBeforeQuantityTrue": Tuple{
     expression: 1.666 'mg' on or before Interval[1.666 'mg', 2.50000000 'mg'],
     output: true
