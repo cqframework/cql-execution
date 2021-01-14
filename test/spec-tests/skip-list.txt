@@ -64,11 +64,6 @@ ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue 
 ValueLiteralsAndSelectors.Decimal.DecimalNeg10Pow28ToZeroOneStepDecimalMinValue Wrong answer (null vs big number)
 "CqlDateTimeOperatorsTest.Uncertainty tests.DateTimeDurationBetweenUncertainInterval2"  Wrong answer (Uncertainty(3,16) vs Uncertainty(4,16))
 
-# Incorrect answer due to timezone offset on Date and/or Time datatypes
-
-CqlArithmeticFunctionsTest.MinValue.TimeMinValue  Wrong answer (timezoneOffset should be null)
-CqlArithmeticFunctionsTest.MaxValue.TimeMaxValue  Wrong answer (timezoneOffset should be null)
-
 # Incorrect answer due to inability to distinguish integer and decimal for whole numbers (e.g., 1.0)
 
 CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1D      Wrong answer (doesn't recognize 1.0 as decimal)

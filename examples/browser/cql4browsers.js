@@ -1538,8 +1538,8 @@ var MIN_DATE_VALUE = _Date.parse('0001-01-01');
 
 var MAX_DATE_VALUE = _Date.parse('9999-12-31');
 
-var MIN_TIME_VALUE = DateTime.parse('0000-01-01T00:00:00.000');
-var MAX_TIME_VALUE = DateTime.parse('0000-01-01T23:59:59.999');
+var MIN_TIME_VALUE = DateTime.parse('0000-01-01T00:00:00.000').getTime();
+var MAX_TIME_VALUE = DateTime.parse('0000-01-01T23:59:59.999').getTime();
 _Date.Unit = {
   YEAR: 'year',
   MONTH: 'month',
