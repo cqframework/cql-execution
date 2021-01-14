@@ -4714,7 +4714,7 @@ var Multiply = /*#__PURE__*/function (_Expression3) {
       if (args == null || args.some(function (x) {
         return x == null;
       })) {
-        null;
+        return null;
       }
 
       var product = args.reduce(function (x, y) {

@@ -94,10 +94,6 @@ ValueLiteralsAndSelectors.Decimal.DecimalNeg2Pow31ToInf1    Underflows because i
 "CqlDateTimeOperatorsTest.Uncertainty tests.DateTimeDurationBetweenUncertainSubtract" Subtracting Uncertainties not supported
 "CqlDateTimeOperatorsTest.Uncertainty tests.DateTimeDurationBetweenUncertainMultiply" Multiplying Uncertainties not supported
 
-# Unexpected error
-
-CqlArithmeticFunctionsTest.Multiply.MultiplyNull    TypeError: Cannot read property 'isQuantity' of null
-
 # Test Expectation not parsed correctly
 
 CqlTypeOperatorsTest.ToDateTime.ToDateTime4 @2014-01-01T12:05:05.955+01:30 Parsed with offset 1 (should be 1.5)
