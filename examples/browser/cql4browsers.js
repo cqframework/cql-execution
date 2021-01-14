@@ -1079,7 +1079,7 @@ var DateTime = /*#__PURE__*/function () {
       var str = '';
 
       if (this.hour != null) {
-        str += +this._pad(this.hour);
+        str += this._pad(this.hour);
 
         if (this.minute != null) {
           str += ':' + this._pad(this.minute);
@@ -12348,7 +12348,7 @@ var ToTime = /*#__PURE__*/function (_Expression11) {
         var timeString = arg.toString(); // Return null if string doesn't represent a valid ISO-8601 Time
         // hh:mm:ss.fff or hh:mm:ss.fff
 
-        var matches = /^((\d{2})(:(\d{2})(:(\d{2})(\.(\d+))?)?)?)?$/.exec(timeString);
+        var matches = /^T((\d{2})(:(\d{2})(:(\d{2})(\.(\d+))?)?)?)?.*$/.exec(timeString);
 
         if (matches == null) {
           return null;

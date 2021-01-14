@@ -435,7 +435,7 @@ describe('ToTime', () => {
     should(this.invalidTime.exec(this.ctx)).be.null();
   });
 
-  it('should work with for hh', function () {
+  it('should work with hh', function () {
     // NOTE: We need to pass in null timezoneOffset because DateTime assumes
     // execution context timezoneOffset while time does not have a
     // timezoneOffset
@@ -443,17 +443,17 @@ describe('ToTime', () => {
     this.timeH.exec(this.ctx).equals(expectedDateTime).should.be.true();
   });
 
-  it('should work with for hh:mm', function () {
+  it('should work with hh:mm', function () {
     const expectedDateTime = new DateTime(0, 1, 1, 2, 4, null, null, null);
     this.timeHM.exec(this.ctx).equals(expectedDateTime).should.be.true();
   });
 
-  it('should work with for hh:mm:ss', function () {
+  it('should work with hh:mm:ss', function () {
     const expectedDateTime = new DateTime(0, 1, 1, 2, 4, 59, null, null);
     this.timeHMS.exec(this.ctx).equals(expectedDateTime).should.be.true();
   });
 
-  it('should work with for hh:mm:ss.fff', function () {
+  it('should work with hh:mm:ss.fff', function () {
     const expectedDateTime = new DateTime(0, 1, 1, 2, 4, 59, 123, null);
     this.timeHMSMs.exec(this.ctx).equals(expectedDateTime).should.be.true();
   });

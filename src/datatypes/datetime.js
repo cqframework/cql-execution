@@ -460,7 +460,7 @@ class DateTime {
   toStringTime() {
     let str = '';
     if (this.hour != null) {
-      str += +this._pad(this.hour);
+      str += this._pad(this.hour);
       if (this.minute != null) {
         str += ':' + this._pad(this.minute);
         if (this.second != null) {

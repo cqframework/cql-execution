@@ -2564,33 +2564,33 @@ describe('TimeIntervalExpand', () => {
 
   it('expands a millisecond precision time', function () {
     // define MsPrecPerHour: expand { Interval[@T01:00:00.000, @T03:00:00.000] } per hour
-    let e = '{ [1, 1], [2, 2], [3, 3] }';
+    let e = '{ [01, 01], [02, 02], [03, 03] }';
     prettyList(this.msPrecPerHour.exec(this.ctx)).should.equal(e);
 
     // define MsPrecPerMinute: expand { Interval[@T01:00:00.000, @T01:02:00.000] } per minute
-    e = '{ [1:00, 1:00], [1:01, 1:01], [1:02, 1:02] }';
+    e = '{ [01:00, 01:00], [01:01, 01:01], [01:02, 01:02] }';
     prettyList(this.msPrecPerMinute.exec(this.ctx)).should.equal(e);
 
     // define MsPrecPerSecond: expand { Interval[@T01:00:00.000, @T01:00:02.000] } per second
-    e = '{ [1:00:00, 1:00:00], [1:00:01, 1:00:01], [1:00:02, 1:00:02] }';
+    e = '{ [01:00:00, 01:00:00], [01:00:01, 01:00:01], [01:00:02, 01:00:02] }';
     prettyList(this.msPrecPerSecond.exec(this.ctx)).should.equal(e);
 
     // define MsPrecPerMillisecond: expand { Interval[@T01:00:00.000, @T01:00:00.001] } per millisecond
-    e = '{ [1:00:00.000, 1:00:00.000], [1:00:00.001, 1:00:00.001] }';
+    e = '{ [01:00:00.000, 01:00:00.000], [01:00:00.001, 01:00:00.001] }';
     prettyList(this.msPrecPerMillisecond.exec(this.ctx)).should.equal(e);
   });
 
   it('expands a second precision datetime', function () {
     // define SecPrecPerHour: expand { Interval[@T01:00:00, @T03:00:00] } per hour
-    let e = '{ [1, 1], [2, 2], [3, 3] }';
+    let e = '{ [01, 01], [02, 02], [03, 03] }';
     prettyList(this.secPrecPerHour.exec(this.ctx)).should.equal(e);
 
     // define SecPrecPerMinute: expand { Interval[@T01:00:00, @T01:02:00] } per minute
-    e = '{ [1:00, 1:00], [1:01, 1:01], [1:02, 1:02] }';
+    e = '{ [01:00, 01:00], [01:01, 01:01], [01:02, 01:02] }';
     prettyList(this.secPrecPerMinute.exec(this.ctx)).should.equal(e);
 
     // define SecPrecPerSecond: expand { Interval[@T01:00:00, @T01:00:01] } per second
-    e = '{ [1:00:00, 1:00:00], [1:00:01, 1:00:01] }';
+    e = '{ [01:00:00, 01:00:00], [01:00:01, 01:00:01] }';
     prettyList(this.secPrecPerSecond.exec(this.ctx)).should.equal(e);
 
     this.secPrecPerMillisecond.exec(this.ctx).should.be.empty();
@@ -2598,11 +2598,11 @@ describe('TimeIntervalExpand', () => {
 
   it('expands a minute precision datetime', function () {
     // define MinPrecPerHour: expand { Interval[@T01:00, @T03:00] } per hour
-    let e = '{ [1, 1], [2, 2], [3, 3] }';
+    let e = '{ [01, 01], [02, 02], [03, 03] }';
     prettyList(this.minPrecPerHour.exec(this.ctx)).should.equal(e);
 
     // define MinPrecPerMinute: expand { Interval[@T01:00, @T01:01] } per minute
-    e = '{ [1:00, 1:00], [1:01, 1:01] }';
+    e = '{ [01:00, 01:00], [01:01, 01:01] }';
     prettyList(this.minPrecPerMinute.exec(this.ctx)).should.equal(e);
 
     this.minPrecPerSecond.exec(this.ctx).should.be.empty();
@@ -2611,7 +2611,7 @@ describe('TimeIntervalExpand', () => {
 
   it('expands an hour precision datetime', function () {
     // define HourPrecPerHour: expand { Interval[@T01, @T02] } per hour
-    const e = '{ [1, 1], [2, 2] }';
+    const e = '{ [01, 01], [02, 02] }';
     prettyList(this.hourPrecPerHour.exec(this.ctx)).should.equal(e);
 
     this.hourPrecPerMinute.exec(this.ctx).should.be.empty();
