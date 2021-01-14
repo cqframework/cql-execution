@@ -962,11 +962,9 @@ define "NotEqual": Tuple{
 
 define "OnOrAfter": Tuple{
   "TestOnOrAfterNull": Tuple{
-    skipped: 'TypeError: Cannot read property \'execute\' of null'
-    /*
-    expression: Interval[@2012-12-01, @2013-12-01] on or after null,
+    expression: Interval[@2012-12-01, @2013-12-01] on or after (null as Interval<Date>),
     output: null
-    */  },
+  },
   "TestOnOrAfterDateTrue": Tuple{
     expression: Interval[@2012-12-01, @2013-12-01] on or after month of @2012-11-15,
     output: true
@@ -1003,11 +1001,9 @@ define "OnOrAfter": Tuple{
 
 define "OnOrBefore": Tuple{
   "TestOnOrBeforeNull": Tuple{
-    skipped: 'TypeError: Cannot read property \'execute\' of null'
-    /*
-    expression: Interval[@2012-12-01, @2013-12-01] on or before null,
+    expression: Interval[@2012-12-01, @2013-12-01] on or before (null as Interval<Date>),
     output: null
-    */  },
+  },
   "TestOnOrBeforeDateTrue": Tuple{
     expression: Interval[@2012-10-01, @2012-11-01] on or before month of @2012-11-15,
     output: true

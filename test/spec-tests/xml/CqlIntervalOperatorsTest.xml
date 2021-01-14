@@ -926,7 +926,7 @@
 	</group>
 	<group name="OnOrAfter">
 		<test name="TestOnOrAfterNull">
-			<expression>Interval[@2012-12-01, @2013-12-01] on or after null</expression>
+			<expression>Interval[@2012-12-01, @2013-12-01] on or after (null as Interval&lt;Date&gt;)</expression>
 			<output>null</output>
 		</test>
 		<test name="TestOnOrAfterDateTrue">
@@ -960,7 +960,7 @@
 	</group>
 	<group name="OnOrBefore">
 		<test name="TestOnOrBeforeNull">
-			<expression>Interval[@2012-12-01, @2013-12-01] on or before null</expression>
+			<expression>Interval[@2012-12-01, @2013-12-01] on or before (null as Interval&lt;Date&gt;)</expression>
 			<output>null</output>
 		</test>
 		<test name="TestOnOrBeforeDateTrue">
