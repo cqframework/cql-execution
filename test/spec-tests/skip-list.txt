@@ -97,8 +97,6 @@ ValueLiteralsAndSelectors.Decimal.DecimalNeg2Pow31ToInf1    Underflows because i
 # Unexpected error
 
 CqlArithmeticFunctionsTest.Multiply.MultiplyNull    TypeError: Cannot read property 'isQuantity' of null
-CqlIntervalOperatorsTest.Expand.ExpandInterval      TypeError: intervals is not iterable
-CqlIntervalOperatorsTest.Expand.ExpandIntervalPer2  TypeError: intervals is not iterable
 CqlIntervalOperatorsTest.OnOrAfter.TestOnOrAfterNull              TypeError: Cannot read property 'execute' of null
 CqlIntervalOperatorsTest.OnOrAfter.TestOnOrAfterIntegerTrue       TypeError: this.start(...).sameOrAfter is not a function
 CqlIntervalOperatorsTest.OnOrAfter.TestOnOrAfterDecimalFalse      TypeError: this.start(...).sameOrAfter is not a function

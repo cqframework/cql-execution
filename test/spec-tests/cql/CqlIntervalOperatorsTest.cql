@@ -273,17 +273,13 @@ define "Expand": Tuple{
     output: { Interval[10.0, 10.0], Interval[10.1, 10.1], Interval[10.2, 10.2], Interval[10.3, 10.3], Interval[10.4, 10.4], Interval[10.5, 10.5], Interval[10.6, 10.6], Interval[10.7, 10.7], Interval[10.8, 10.8], Interval[10.9, 10.9] }
     */  },
   "ExpandInterval": Tuple{
-    skipped: 'TypeError: intervals is not iterable'
-    /*
     expression: expand Interval[1, 10],
-    output: { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
-    */  },
+    output: { Interval[1, 1], Interval[2, 2], Interval[3, 3], Interval[4, 4], Interval[5, 5], Interval[6, 6], Interval[7, 7], Interval[8, 8], Interval[9, 9], Interval[10, 10] }
+  },
   "ExpandIntervalPer2": Tuple{
-    skipped: 'TypeError: intervals is not iterable'
-    /*
     expression: expand Interval[1, 10] per 2,
-    output: { 1, 3, 5, 7, 9 }
-    */  }
+    output: { Interval[1, 2], Interval[3, 4], Interval[5, 6], Interval[7, 8], Interval[9, 10] }
+  }
 }
 
 define "Contains": Tuple{
