@@ -1165,6 +1165,17 @@ DateTime.prototype.after = Date.prototype.after = function (other, precision) {
   return false;
 };
 
+cql_to_moment_units = {
+  'year': 'y',
+  'month': 'M',
+  'week': 'w',
+  'day': 'd',
+  'hour': 'h',
+  'minute': 'm',
+  'second': 's',
+  'millisecond': 'ms'
+};
+
 DateTime.prototype.add = Date.prototype.add = function (offset, field) {
   const result = this.copy();
   if (offset === 0) {
@@ -1199,8 +1210,7 @@ DateTime.prototype.add = Date.prototype.add = function (offset, field) {
   }
 
   // Increment the field, then round-trip to JS date and back for calendar math
-  result[field] = result[field] + offset;
-  const normalized = this.constructor.fromJSDate(result.toJSDate(), this.timezoneOffset);
+  const normalized = this.constructor.fromJSDate(moment(result.toJSDate(true)).add(offset, cql_to_moment_units[field]).toDate())
   for (field of this.constructor.FIELDS) {
     if (result[field] != null) {
       result[field] = normalized[field];
