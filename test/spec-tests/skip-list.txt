@@ -16,6 +16,8 @@ CqlLogicalOperatorsTest.Implies.NullImpliesFalse    Translation Error: Could not
 CqlLogicalOperatorsTest.Implies.NullImpliesNull     Translation Error: Could not resolve call to operator Implies with signature (System.Any,System.Any).
 CqlIntervalOperatorsTest.Expand.ExpandPer1          Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Decimal>>,System.Integer).
 CqlIntervalOperatorsTest.Expand.ExpandPer0D1        Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Integer>>,System.Decimal).
+CqlTypeOperatorsTest.ToDateTime.ToDateTime4         @2014-01-01T12:05:05.955+01:30 Parsed with offset 1 (should be 1.5)
+CqlTypeOperatorsTest.ToDateTime.ToDateTime5         @2014-01-01T12:05:05.955-01:15 Parsed with offset -1 (should be -1.25)
 
 # Incorrect answer
 
@@ -94,11 +96,6 @@ CqlIntervalOperatorsTest.OnOrAfter.TestOnOrAfterDecimalFalse      TypeError: thi
 CqlIntervalOperatorsTest.OnOrBefore.TestOnOrBeforeNull            TypeError: Cannot read property 'execute' of null
 CqlIntervalOperatorsTest.OnOrBefore.TestOnOrBeforeIntegerTrue     TypeError: this.end(...).sameOrBefore is not a function
 CqlIntervalOperatorsTest.OnOrBefore.TestOnOrBeforeDecimalFalse    TypeError: this.end(...).sameOrBefore is not a function
-
-# Test Expectation not parsed correctly
-
-CqlTypeOperatorsTest.ToDateTime.ToDateTime4 @2014-01-01T12:05:05.955+01:30 Parsed with offset 1 (should be 1.5)
-CqlTypeOperatorsTest.ToDateTime.ToDateTime5 @2014-01-01T12:05:05.955-01:15 Parsed with offset -1 (should be -1.25)
 
 # Unimplemented
 
