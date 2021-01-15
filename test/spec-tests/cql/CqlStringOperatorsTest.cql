@@ -380,9 +380,7 @@ define "toString tests": Tuple{
     output: '2000-01-01T08:25:25.300-07:00'
   },
   "TimeToString1": Tuple{
-    skipped: 'Wrong answer (\'9:30:01.003\' should have two-digit hour \'09\')'
-    /*
     expression: ToString(@T09:30:01.003),
     output: '09:30:01.003'
-    */  }
+  }
 }

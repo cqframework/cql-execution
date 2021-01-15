@@ -16,6 +16,8 @@ CqlLogicalOperatorsTest.Implies.NullImpliesFalse    Translation Error: Could not
 CqlLogicalOperatorsTest.Implies.NullImpliesNull     Translation Error: Could not resolve call to operator Implies with signature (System.Any,System.Any).
 CqlIntervalOperatorsTest.Expand.ExpandPer1          Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Decimal>>,System.Integer).
 CqlIntervalOperatorsTest.Expand.ExpandPer0D1        Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Integer>>,System.Decimal).
+CqlTypeOperatorsTest.ToDateTime.ToDateTime4         @2014-01-01T12:05:05.955+01:30 Parsed with offset 1 (should be 1.5)
+CqlTypeOperatorsTest.ToDateTime.ToDateTime5         @2014-01-01T12:05:05.955-01:15 Parsed with offset -1 (should be -1.25)
 
 # Incorrect answer
 
@@ -59,21 +61,10 @@ CqlListOperatorsTest.In.In1Null                                 Wrong answer (nu
 CqlListOperatorsTest.Length.LengthNullList                      Wrong answer (null vs 0)
 CqlStringOperatorsTest.Matches.MatchesWordsAndSpacesFalse       Wrong answer (true vs false - engine is probably not looking for FULL match)
 CqlStringOperatorsTest.Split.SplitABNull                        Wrong answer (null vs {'a,b'})
-"CqlStringOperatorsTest.toString tests.TimeToString1"           Wrong answer ('9:30:01.003' should have two-digit hour '09')
-CqlTypeOperatorsTest.Convert.StringToTime                       Wrong answer (null vs @T14:30:00.000)
-CqlTypeOperatorsTest.ToTime.ToTime1                             Wrong answer (null vs @T14:30:00.000)
-CqlTypeOperatorsTest.ToTime.ToTime2                             Wrong answer (null vs @T14:30:00.000)
-CqlTypeOperatorsTest.ToTime.ToTime3                             Wrong answer (null vs @T14:30:00.000)
-CqlTypeOperatorsTest.ToTime.ToTime4                             Wrong answer (null vs @T14:30:00.000)
 ValueLiteralsAndSelectors.Decimal.Decimal10Pow28ToZeroOneStepDecimalMaxValue    Wrong answer (null vs big number)
 ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue Wrong answer (null vs big number)
 ValueLiteralsAndSelectors.Decimal.DecimalNeg10Pow28ToZeroOneStepDecimalMinValue Wrong answer (null vs big number)
 "CqlDateTimeOperatorsTest.Uncertainty tests.DateTimeDurationBetweenUncertainInterval2"  Wrong answer (Uncertainty(3,16) vs Uncertainty(4,16))
-
-# Incorrect answer due to timezone offset on Date and/or Time datatypes
-
-CqlArithmeticFunctionsTest.MinValue.TimeMinValue  Wrong answer (timezoneOffset should be null)
-CqlArithmeticFunctionsTest.MaxValue.TimeMaxValue  Wrong answer (timezoneOffset should be null)
 
 # Incorrect answer due to inability to distinguish integer and decimal for whole numbers (e.g., 1.0)
 
@@ -105,11 +96,6 @@ CqlIntervalOperatorsTest.OnOrAfter.TestOnOrAfterDecimalFalse      TypeError: thi
 CqlIntervalOperatorsTest.OnOrBefore.TestOnOrBeforeNull            TypeError: Cannot read property 'execute' of null
 CqlIntervalOperatorsTest.OnOrBefore.TestOnOrBeforeIntegerTrue     TypeError: this.end(...).sameOrBefore is not a function
 CqlIntervalOperatorsTest.OnOrBefore.TestOnOrBeforeDecimalFalse    TypeError: this.end(...).sameOrBefore is not a function
-
-# Test Expectation not parsed correctly
-
-CqlTypeOperatorsTest.ToDateTime.ToDateTime4 @2014-01-01T12:05:05.955+01:30 Parsed with offset 1 (should be 1.5)
-CqlTypeOperatorsTest.ToDateTime.ToDateTime5 @2014-01-01T12:05:05.955-01:15 Parsed with offset -1 (should be -1.25)
 
 # Unimplemented
 
