@@ -69,7 +69,7 @@ class Multiply extends Expression {
   exec(ctx) {
     let args = this.execArgs(ctx);
     if (args == null || args.some(x => x == null)) {
-      null;
+      return null;
     }
 
     const product = args.reduce((x, y) => {

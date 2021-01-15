@@ -273,17 +273,13 @@ define "Expand": Tuple{
     output: { Interval[10.0, 10.0], Interval[10.1, 10.1], Interval[10.2, 10.2], Interval[10.3, 10.3], Interval[10.4, 10.4], Interval[10.5, 10.5], Interval[10.6, 10.6], Interval[10.7, 10.7], Interval[10.8, 10.8], Interval[10.9, 10.9] }
     */  },
   "ExpandInterval": Tuple{
-    skipped: 'TypeError: intervals is not iterable'
-    /*
     expression: expand Interval[1, 10],
-    output: { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
-    */  },
+    output: { Interval[1, 1], Interval[2, 2], Interval[3, 3], Interval[4, 4], Interval[5, 5], Interval[6, 6], Interval[7, 7], Interval[8, 8], Interval[9, 9], Interval[10, 10] }
+  },
   "ExpandIntervalPer2": Tuple{
-    skipped: 'TypeError: intervals is not iterable'
-    /*
     expression: expand Interval[1, 10] per 2,
-    output: { 1, 3, 5, 7, 9 }
-    */  }
+    output: { Interval[1, 2], Interval[3, 4], Interval[5, 6], Interval[7, 8], Interval[9, 10] }
+  }
 }
 
 define "Contains": Tuple{
@@ -966,11 +962,9 @@ define "NotEqual": Tuple{
 
 define "OnOrAfter": Tuple{
   "TestOnOrAfterNull": Tuple{
-    skipped: 'TypeError: Cannot read property \'execute\' of null'
-    /*
-    expression: Interval[@2012-12-01, @2013-12-01] on or after null,
+    expression: Interval[@2012-12-01, @2013-12-01] on or after (null as Interval<Date>),
     output: null
-    */  },
+  },
   "TestOnOrAfterDateTrue": Tuple{
     expression: Interval[@2012-12-01, @2013-12-01] on or after month of @2012-11-15,
     output: true
@@ -988,17 +982,13 @@ define "OnOrAfter": Tuple{
     output: false
   },
   "TestOnOrAfterIntegerTrue": Tuple{
-    skipped: 'TypeError: this.start(...).sameOrAfter is not a function'
-    /*
     expression: Interval[6, 10] on or after 6,
     output: true
-    */  },
+  },
   "TestOnOrAfterDecimalFalse": Tuple{
-    skipped: 'TypeError: this.start(...).sameOrAfter is not a function'
-    /*
     expression: 2.5 on or after Interval[1.666, 2.50000001],
     output: false
-    */  },
+  },
   "TestOnOrAfterQuantityTrue": Tuple{
     expression: 2.5 'mg' on or after Interval[1.666 'mg', 2.50000000 'mg'],
     output: true
@@ -1007,11 +997,9 @@ define "OnOrAfter": Tuple{
 
 define "OnOrBefore": Tuple{
   "TestOnOrBeforeNull": Tuple{
-    skipped: 'TypeError: Cannot read property \'execute\' of null'
-    /*
-    expression: Interval[@2012-12-01, @2013-12-01] on or before null,
+    expression: Interval[@2012-12-01, @2013-12-01] on or before (null as Interval<Date>),
     output: null
-    */  },
+  },
   "TestOnOrBeforeDateTrue": Tuple{
     expression: Interval[@2012-10-01, @2012-11-01] on or before month of @2012-11-15,
     output: true
@@ -1029,17 +1017,13 @@ define "OnOrBefore": Tuple{
     output: false
   },
   "TestOnOrBeforeIntegerTrue": Tuple{
-    skipped: 'TypeError: this.end(...).sameOrBefore is not a function'
-    /*
     expression: Interval[4, 6] on or before 6,
     output: true
-    */  },
+  },
   "TestOnOrBeforeDecimalFalse": Tuple{
-    skipped: 'TypeError: this.end(...).sameOrBefore is not a function'
-    /*
     expression: 1.6667 on or before Interval[1.666, 2.50000001],
     output: false
-    */  },
+  },
   "TestOnOrBeforeQuantityTrue": Tuple{
     expression: 1.666 'mg' on or before Interval[1.666 'mg', 2.50000000 'mg'],
     output: true

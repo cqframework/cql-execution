@@ -407,11 +407,9 @@ define "Modulo": Tuple{
 
 define "Multiply": Tuple{
   "MultiplyNull": Tuple{
-    skipped: 'TypeError: Cannot read property \'isQuantity\' of null'
-    /*
     expression: 1 * null,
     output: null
-    */  },
+  },
   "Multiply1By1": Tuple{
     expression: 1 * 1,
     output: 1

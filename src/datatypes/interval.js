@@ -320,7 +320,7 @@ class Interval {
     if (this.end() == null || other == null || other.start() == null) {
       return null;
     } else {
-      return this.end().sameOrBefore(other.start(), precision);
+      return cmp.lessThanOrEquals(this.end(), other.start(), precision);
     }
   }
 
@@ -328,7 +328,7 @@ class Interval {
     if (this.start() == null || other == null || other.end() == null) {
       return null;
     } else {
-      return this.start().sameOrAfter(other.end(), precision);
+      return cmp.greaterThanOrEquals(this.start(), other.end(), precision);
     }
   }
 

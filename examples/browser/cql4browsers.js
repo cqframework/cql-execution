@@ -2637,7 +2637,7 @@ var Interval = /*#__PURE__*/function () {
       if (this.end() == null || other == null || other.start() == null) {
         return null;
       } else {
-        return this.end().sameOrBefore(other.start(), precision);
+        return cmp.lessThanOrEquals(this.end(), other.start(), precision);
       }
     }
   }, {
@@ -2646,7 +2646,7 @@ var Interval = /*#__PURE__*/function () {
       if (this.start() == null || other == null || other.end() == null) {
         return null;
       } else {
-        return this.start().sameOrAfter(other.end(), precision);
+        return cmp.greaterThanOrEquals(this.start(), other.end(), precision);
       }
     }
   }, {
@@ -4714,7 +4714,7 @@ var Multiply = /*#__PURE__*/function (_Expression3) {
       if (args == null || args.some(function (x) {
         return x == null;
       })) {
-        null;
+        return null;
       }
 
       var product = args.reduce(function (x, y) {
