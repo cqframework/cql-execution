@@ -2,10 +2,57 @@ const { Uncertainty } = require('./uncertainty');
 const {
   jsDate,
   normalizeMillisecondsField,
-  normalizeMillisecondsFieldInString,
-  getTimezoneSeparatorFromString
+  normalizeMillisecondsFieldInString
 } = require('../util/util');
-const moment = require('moment');
+const luxon = require('luxon');
+
+// It's easiest and most performant to organize formats by length of the supported strings.
+// This way we can test strings only against the formats that have a chance of working.
+// NOTE: Formats use date-fns formats, documented here: https://date-fns.org/v2.16.1/docs/parse
+const LENGTH_TO_DATE_FORMAT_MAP = (() => {
+  const ltdfMap = new Map();
+  ltdfMap.set(4, 'yyyy');
+  ltdfMap.set(7, 'yyyy-MM');
+  ltdfMap.set(10, 'yyyy-MM-dd');
+  return ltdfMap;
+})();
+
+const LENGTH_TO_DATETIME_FORMATS_MAP = (() => {
+  const formats = {
+    yyyy: '2012',
+    'yyyy-MM': '2012-01',
+    'yyyy-MM-dd': '2012-01-31',
+    "yyyy-MM-dd'T''Z'": '2012-01-31TZ',
+    "yyyy-MM-dd'T'ZZ": '2012-01-31T-04:00',
+    "yyyy-MM-dd'T'HH": '2012-01-31T12',
+    "yyyy-MM-dd'T'HH'Z'": '2012-01-31T12Z',
+    "yyyy-MM-dd'T'HHZZ": '2012-01-31T12-04:00',
+    "yyyy-MM-dd'T'HH:mm": '2012-01-31T12:30',
+    "yyyy-MM-dd'T'HH:mm'Z'": '2012-01-31T12:30Z',
+    "yyyy-MM-dd'T'HH:mmZZ": '2012-01-31T12:30-04:00',
+    "yyyy-MM-dd'T'HH:mm:ss": '2012-01-31T12:30:59',
+    "yyyy-MM-dd'T'HH:mm:ss'Z'": '2012-01-31T12:30:59Z',
+    "yyyy-MM-dd'T'HH:mm:ssZZ": '2012-01-31T12:30:59-04:00',
+    "yyyy-MM-dd'T'HH:mm:ss.SSS": '2012-01-31T12:30:59.000',
+    "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'": '2012-01-31T12:30:59.000Z',
+    "yyyy-MM-dd'T'HH:mm:ss.SSSZZ": '2012-01-31T12:30:59.000-04:00'
+  };
+  const ltdtfMap = new Map();
+  Object.keys(formats).forEach(k => {
+    const example = formats[k];
+    if (!ltdtfMap.has(example.length)) {
+      ltdtfMap.set(example.length, [k]);
+    } else {
+      ltdtfMap.get(example.length).push(k);
+    }
+  });
+  return ltdtfMap;
+})();
+
+function wholeLuxonDuration(duration, unit) {
+  const value = duration.get(unit);
+  return value >= 0 ? Math.floor(value) : Math.ceil(value);
+}
 
 class DateTime {
   static parse(string) {
@@ -167,6 +214,8 @@ class DateTime {
   }
 
   differenceBetween(other, unitField) {
+    // TODO: Revisit this logic now that we are using Luxon.  We may be able to simplify.
+
     other = this._implicitlyConvert(other);
     if (other == null || !other.isDateTime) {
       return null;
@@ -176,7 +225,7 @@ class DateTime {
     // Make copies since we'll be flooring values and mucking with timezones
     let a = this.copy();
     let b = other.copy();
-    // Use moment.js for day or finer granularity due to the daylight savings time fall back/spring forward
+    // Use Luxon for day or finer granularity due to the daylight savings time fall back/spring forward
     if (
       unitField === DateTime.Unit.MONTH ||
       unitField === DateTime.Unit.YEAR ||
@@ -236,21 +285,20 @@ class DateTime {
       b = new DateTime(b.year, b.month, b.day, b.hour, b.minute, b.second, 0, b.timezoneOffset);
     }
 
-    // Because moment.js handles years and months differently, use the existing durationBetween for those
-    // Finer granularity times can be handled by the DST-aware moment.js library.
+    // Because Luxon handles years and months differently, use the existing durationBetween for those
+    // Finer granularity times can be handled by the DST-aware Luxon library.
     if (unitField === DateTime.Unit.YEAR || unitField === DateTime.Unit.MONTH) {
       return a.durationBetween(b, unitField);
     } else {
       const aUncertainty = a.toUncertainty();
       const bUncertainty = b.toUncertainty();
-      const aLowMoment = moment(aUncertainty.low).utc();
-      const aHighMoment = moment(aUncertainty.high).utc();
-      const bLowMoment = moment(bUncertainty.low).utc();
-      const bHighMoment = moment(bUncertainty.high).utc();
-      // moment uses the plural form of the unitField
+      const aLowLuxDT = luxon.DateTime.fromJSDate(aUncertainty.low).toUTC();
+      const aHighLuxDT = luxon.DateTime.fromJSDate(aUncertainty.high).toUTC();
+      const bLowLuxDT = luxon.DateTime.fromJSDate(bUncertainty.low).toUTC();
+      const bHighLuxDT = luxon.DateTime.fromJSDate(bUncertainty.high).toUTC();
       return new Uncertainty(
-        bLowMoment.diff(aHighMoment, unitField + 's'),
-        bHighMoment.diff(aLowMoment, unitField + 's')
+        wholeLuxonDuration(bLowLuxDT.diff(aHighLuxDT, unitField), unitField),
+        wholeLuxonDuration(bHighLuxDT.diff(aLowLuxDT, unitField), unitField)
       );
     }
   }
@@ -1320,101 +1368,31 @@ function isValidDateStringFormat(string) {
   if (typeof string !== 'string') {
     return false;
   }
-  const cqlFormats = ['YYYY', 'YYYY-MM', 'YYYY-MM-DD'];
 
-  const cqlFormatStringWithLength = {};
-  for (let format of cqlFormats) {
-    cqlFormatStringWithLength[format.length] = format;
-  }
-
-  if (cqlFormatStringWithLength[string.length] == null) {
+  const format = LENGTH_TO_DATE_FORMAT_MAP.get(string.length);
+  if (format == null) {
     return false;
   }
 
-  const strict = true;
-  return moment(string, cqlFormatStringWithLength[string.length], strict).isValid();
+  return luxon.DateTime.fromFormat(string, format).isValid;
 }
 
 function isValidDateTimeStringFormat(string) {
   if (typeof string !== 'string') {
     return false;
   }
-  const cqlFormats = [
-    'YYYY',
-    'YYYY-MM',
-    'YYYY-MM-DD',
-    'YYYY-MM-DDTZ',
-    'YYYY-MM-DDT+hh',
-    'YYYY-MM-DDT+hh:mm',
-    'YYYY-MM-DDT-hh',
-    'YYYY-MM-DDT-hh:mm',
-    'YYYY-MM-DDThh',
-    'YYYY-MM-DDThhZ',
-    'YYYY-MM-DDThh+hh',
-    'YYYY-MM-DDThh+hh:mm',
-    'YYYY-MM-DDThh-hh',
-    'YYYY-MM-DDThh-hh:mm',
-    'YYYY-MM-DDThh:mm',
-    'YYYY-MM-DDThh:mmZ',
-    'YYYY-MM-DDThh:mm+hh',
-    'YYYY-MM-DDThh:mm+hh:mm',
-    'YYYY-MM-DDThh:mm-hh',
-    'YYYY-MM-DDThh:mm-hh:mm',
-    'YYYY-MM-DDThh:mm:ss',
-    'YYYY-MM-DDThh:mm:ssZ',
-    'YYYY-MM-DDThh:mm:ss+hh',
-    'YYYY-MM-DDThh:mm:ss+hh:mm',
-    'YYYY-MM-DDThh:mm:ss-hh',
-    'YYYY-MM-DDThh:mm:ss-hh:mm',
-    'YYYY-MM-DDThh:mm:ss.fff',
-    'YYYY-MM-DDThh:mm:ss.fffZ',
-    'YYYY-MM-DDThh:mm:ss.fff+hh',
-    'YYYY-MM-DDThh:mm:ss.fff+hh:mm',
-    'YYYY-MM-DDThh:mm:ss.fff-hh',
-    'YYYY-MM-DDThh:mm:ss.fff-hh:mm'
-  ];
 
-  const cqlFormatStringWithLength = {};
-  for (let format of cqlFormats) {
-    cqlFormatStringWithLength[format.length] = format;
+  // Luxon doesn't support +hh offset, so change it to +hh:00
+  if (/T[\d:.]*[+-]\d{2}$/.test(string)) {
+    string += ':00';
   }
 
-  if (cqlFormatStringWithLength[string.length] == null) {
+  const formats = LENGTH_TO_DATETIME_FORMATS_MAP.get(string.length);
+  if (formats == null) {
     return false;
   }
 
-  // Moment.js has 2 options for parsing, strict or forgiving.
-  // Strict parsing requires that the format and input match exactly, including delimeters.
-  // Due to CQL using slightly different delimiters than moment, we need to use forgiving.
-  const strict = false;
-  return moment(
-    string,
-    cqlFormatStringToMomentFormatString(cqlFormatStringWithLength[string.length]),
-    strict
-  ).isValid();
-}
-
-function cqlFormatStringToMomentFormatString(string) {
-  // CQL: 'YYYY-MM-DDThh:mm:ss.fff-hh:mm', Moment: 'YYYY-MM-DD[T]hh:mm:ss.SSS[Z]'
-  let timezoneSeparator;
-  const [yearMonthDay, timeAndTimeZoneOffset] = string.split('T');
-
-  if (timeAndTimeZoneOffset != null) {
-    timezoneSeparator = getTimezoneSeparatorFromString(timeAndTimeZoneOffset);
-  }
-
-  let momentString = yearMonthDay;
-  if (string.match(/T/) != null) {
-    momentString += '[T]';
-  }
-  if (timezoneSeparator) {
-    momentString +=
-      timeAndTimeZoneOffset.substring(0, timeAndTimeZoneOffset.search(timezoneSeparator)) + '[Z]';
-  } else {
-    momentString += timeAndTimeZoneOffset;
-  }
-
-  return (momentString = momentString.replace(/f/g, 'S'));
+  return formats.some(fmt => luxon.DateTime.fromFormat(string, fmt).isValid);
 }
 
 module.exports = {
