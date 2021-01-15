@@ -460,7 +460,7 @@ class DateTime {
   toStringTime() {
     let str = '';
     if (this.hour != null) {
-      str += +this._pad(this.hour);
+      str += this._pad(this.hour);
       if (this.minute != null) {
         str += ':' + this._pad(this.minute);
         if (this.second != null) {
@@ -837,8 +837,8 @@ const MIN_DATETIME_VALUE = DateTime.parse('0001-01-01T00:00:00.000');
 const MAX_DATETIME_VALUE = DateTime.parse('9999-12-31T23:59:59.999');
 const MIN_DATE_VALUE = Date.parse('0001-01-01');
 const MAX_DATE_VALUE = Date.parse('9999-12-31');
-const MIN_TIME_VALUE = DateTime.parse('0000-01-01T00:00:00.000');
-const MAX_TIME_VALUE = DateTime.parse('0000-01-01T23:59:59.999');
+const MIN_TIME_VALUE = DateTime.parse('0000-01-01T00:00:00.000').getTime();
+const MAX_TIME_VALUE = DateTime.parse('0000-01-01T23:59:59.999').getTime();
 
 Date.Unit = { YEAR: 'year', MONTH: 'month', WEEK: 'week', DAY: 'day' };
 Date.FIELDS = [Date.Unit.YEAR, Date.Unit.MONTH, Date.Unit.DAY];

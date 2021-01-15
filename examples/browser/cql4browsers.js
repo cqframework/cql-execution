@@ -1079,7 +1079,7 @@ var DateTime = /*#__PURE__*/function () {
       var str = '';
 
       if (this.hour != null) {
-        str += +this._pad(this.hour);
+        str += this._pad(this.hour);
 
         if (this.minute != null) {
           str += ':' + this._pad(this.minute);
@@ -1538,8 +1538,8 @@ var MIN_DATE_VALUE = _Date.parse('0001-01-01');
 
 var MAX_DATE_VALUE = _Date.parse('9999-12-31');
 
-var MIN_TIME_VALUE = DateTime.parse('0000-01-01T00:00:00.000');
-var MAX_TIME_VALUE = DateTime.parse('0000-01-01T23:59:59.999');
+var MIN_TIME_VALUE = DateTime.parse('0000-01-01T00:00:00.000').getTime();
+var MAX_TIME_VALUE = DateTime.parse('0000-01-01T23:59:59.999').getTime();
 _Date.Unit = {
   YEAR: 'year',
   MONTH: 'month',
@@ -12348,7 +12348,7 @@ var ToTime = /*#__PURE__*/function (_Expression11) {
         var timeString = arg.toString(); // Return null if string doesn't represent a valid ISO-8601 Time
         // hh:mm:ss.fff or hh:mm:ss.fff
 
-        var matches = /^((\d{2})(:(\d{2})(:(\d{2})(\.(\d+))?)?)?)?$/.exec(timeString);
+        var matches = /^T?((\d{2})(:(\d{2})(:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(:?(\d{2}))?))?$/.exec(timeString);
 
         if (matches == null) {
           return null;

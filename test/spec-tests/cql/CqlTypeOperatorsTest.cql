@@ -37,11 +37,9 @@ define "Convert": Tuple{
     output: @2014-01-01T
     */  },
   "StringToTime": Tuple{
-    skipped: 'Wrong answer (null vs @T14:30:00.000)'
-    /*
     expression: convert 'T14:30:00.0' to Time,
     output: @T14:30:00.000
-    */  },
+  },
   "StringToDateTimeMalformed": Tuple{
     expression: convert '2014/01/01' to DateTime,
     invalid: true
@@ -158,29 +156,21 @@ define "ToString": Tuple{
 
 define "ToTime": Tuple{
   "ToTime1": Tuple{
-    skipped: 'Wrong answer (null vs @T14:30:00.000)'
-    /*
     expression: ToTime('T14:30:00.0'),
     output: @T14:30:00.000
-    */  },
+  },
   "ToTime2": Tuple{
-    skipped: 'Wrong answer (null vs @T14:30:00.000)'
-    /*
     expression: ToTime('T14:30:00.0+05:30'),
     output: @T14:30:00.000
-    */  },
+  },
   "ToTime3": Tuple{
-    skipped: 'Wrong answer (null vs @T14:30:00.000)'
-    /*
     expression: ToTime('T14:30:00.0-05:45'),
     output: @T14:30:00.000
-    */  },
+  },
   "ToTime4": Tuple{
-    skipped: 'Wrong answer (null vs @T14:30:00.000)'
-    /*
     expression: ToTime('T14:30:00.0Z'),
     output: @T14:30:00.000
-    */  },
+  },
   "ToTimeMalformed": Tuple{
     expression: ToTime('T14-30-00.0'),
     invalid: true

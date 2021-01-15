@@ -338,11 +338,9 @@ define "MinValue": Tuple{
     output: @0001-01-01
   },
   "TimeMinValue": Tuple{
-    skipped: 'Wrong answer (timezoneOffset should be null)'
-    /*
     expression: minimum Time,
     output: @T00:00:00.000
-    */  }
+  }
 }
 
 define "MaxValue": Tuple{
@@ -365,11 +363,9 @@ define "MaxValue": Tuple{
     output: @9999-12-31
   },
   "TimeMaxValue": Tuple{
-    skipped: 'Wrong answer (timezoneOffset should be null)'
-    /*
     expression: maximum Time,
     output: @T23:59:59.999
-    */  }
+  }
 }
 
 define "Modulo": Tuple{
