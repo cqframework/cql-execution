@@ -4837,9 +4837,15 @@ var Modulo = /*#__PURE__*/function (_Expression6) {
         return null;
       }
 
-      return args.reduce(function (x, y) {
+      var modulo = args.reduce(function (x, y) {
         return x % y;
       });
+
+      if (!MathUtil.isValidDecimal(modulo)) {
+        return null;
+      }
+
+      return modulo;
     }
   }]);
 
@@ -5024,7 +5030,13 @@ var Ln = /*#__PURE__*/function (_Expression12) {
         return null;
       }
 
-      return Math.log(arg);
+      var ln = Math.log(arg);
+
+      if (!MathUtil.isValidDecimal(ln)) {
+        return null;
+      }
+
+      return ln;
     }
   }]);
 
@@ -5086,9 +5098,15 @@ var Log = /*#__PURE__*/function (_Expression14) {
         return null;
       }
 
-      return args.reduce(function (x, y) {
+      var log = args.reduce(function (x, y) {
         return Math.log(x) / Math.log(y);
       });
+
+      if (!MathUtil.isValidDecimal(log)) {
+        return null;
+      }
+
+      return log;
     }
   }]);
 

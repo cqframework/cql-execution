@@ -146,7 +146,12 @@ class Modulo extends Expression {
       return null;
     }
 
-    return args.reduce((x, y) => x % y);
+    const modulo = args.reduce((x, y) => x % y);
+
+    if (!MathUtil.isValidDecimal(modulo)) {
+      return null;
+    }
+    return modulo;
   }
 }
 
@@ -244,7 +249,12 @@ class Ln extends Expression {
       return null;
     }
 
-    return Math.log(arg);
+    const ln = Math.log(arg);
+
+    if (!MathUtil.isValidDecimal(ln)) {
+      return null;
+    }
+    return ln;
   }
 }
 
@@ -279,7 +289,12 @@ class Log extends Expression {
       return null;
     }
 
-    return args.reduce((x, y) => Math.log(x) / Math.log(y));
+    const log = args.reduce((x, y) => Math.log(x) / Math.log(y));
+
+    if (!MathUtil.isValidDecimal(log)) {
+      return null;
+    }
+    return log;
   }
 }
 

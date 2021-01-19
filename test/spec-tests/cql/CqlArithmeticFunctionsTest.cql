@@ -235,11 +235,9 @@ define "Log": Tuple{
     output: null
   },
   "Log1Base1": Tuple{
-    skipped: 'Wrong answer (NaN vs null)'
-    /*
     expression: Log(1, 1),
     output: null
-    */  },
+  },
   "Log1Base2": Tuple{
     expression: Log(1, 2),
     output: 0.0
@@ -303,11 +301,9 @@ define "Ln": Tuple{
     output: 0.0
   },
   "LnNeg1": Tuple{
-    skipped: 'Wrong answer (NaN vs null)'
-    /*
     expression: Ln(-1),
     output: null
-    */  },
+  },
   "Ln1000": Tuple{
     expression: Ln(1000),
     output: 6.907755278982136815102421678602695465087890625
@@ -374,11 +370,9 @@ define "Modulo": Tuple{
     output: null
   },
   "Modulo0By0": Tuple{
-    skipped: 'Wrong answer (NaN vs null)'
-    /*
     expression: 0 mod 0,
     output: null
-    */  },
+  },
   "Modulo4By2": Tuple{
     expression: 4 mod 2,
     output: 0
