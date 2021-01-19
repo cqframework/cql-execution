@@ -304,6 +304,19 @@ describe('DateTime.add', () => {
     simple.add(-1, DateTime.Unit.MILLISECOND).should.eql(DateTime.parse('2000-06-15T10:20:30.554'));
   });
 
+  it('should return the last day of the month for invalid dates', () => {
+    const jan31 = DateTime.parse('2021-01-31T10:20:30.555');
+    jan31.add(1, DateTime.Unit.MONTH).should.eql(DateTime.parse('2021-02-28T10:20:30.555'));
+    const dec31 = DateTime.parse('2020-12-31T10:20:30.555');
+    dec31.add(-1, DateTime.Unit.MONTH).should.eql(DateTime.parse('2020-11-30T10:20:30.555'));
+  });
+
+  it('should return the last day of the month for invalid dates (leap year)', () => {
+    const feb29 = DateTime.parse('2004-02-29T10:20:30.555');
+    feb29.add(1, DateTime.Unit.YEAR).should.eql(DateTime.parse('2005-02-28T10:20:30.555'));
+    feb29.add(-1, DateTime.Unit.YEAR).should.eql(DateTime.parse('2003-02-28T10:20:30.555'));
+  });
+
   it('should rollover when you add past a boundary', () => {
     const almostMidnight = DateTime.parse('2000-12-31T23:59:59.999');
     almostMidnight

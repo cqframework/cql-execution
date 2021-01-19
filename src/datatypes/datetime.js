@@ -1214,54 +1214,55 @@ DateTime.prototype.after = Date.prototype.after = function (other, precision) {
 };
 
 DateTime.prototype.add = Date.prototype.add = function (offset, field) {
-  const result = this.copy();
-  if (offset === 0) {
-    return result;
+  if (offset === 0 || this.year == null) {
+    return this.copy();
   }
 
-  // If weeks, convert to days
-  if (field === this.constructor.Unit.WEEK) {
-    offset = offset * 7;
-    field = this.constructor.Unit.DAY;
-  }
+  // Use luxon to do the date math because it honors DST and it has the leap-year/end-of-month semantics we want.
+  // NOTE: The luxonDateTime will contain default values where this[unit] is null, but we'll account for that.
+  let luxonDateTime = luxon.DateTime.fromObject({
+    year: this[DateTime.Unit.YEAR],
+    month: this[DateTime.Unit.MONTH],
+    day: this[DateTime.Unit.DAY],
+    hour: this[DateTime.Unit.HOUR],
+    minute: this[DateTime.Unit.MINUTE],
+    second: this[DateTime.Unit.SECOND],
+    millisecond: this[DateTime.Unit.MILLISECOND],
+    zone: luxon.FixedOffsetZone.instance(this.timezoneOffset || 0)
+  });
 
-  const offsetIsMorePrecise = result[field] == null; //whether the quantity we are adding is more precise than @
+  const offsetIsMorePrecise = this[field] == null; //whether the quantity we are adding is more precise than "this".
+
   // From the spec: "The operation is performed by converting the time-based quantity to the most precise value
   // specified in the date/time (truncating any resulting decimal portion) and then adding it to the date/time value."
-  // However, since you can't really convert e.g. days to months,  if @ is less precise than the field being added, we can
-  // "floor" UP to the incoming field precision, then add the offset, then reduce back down to original precision.
-  // For negative offsets, we use the cieling
-  if (offsetIsMorePrecise) {
-    if (this.year == null) {
-      result.year = new jsDate().getFullYear();
-    }
-    //in case there is no year, proceed as if in this year, year will be nullified later
-    const fieldFloorOrCiel = offset >= 0 ? this.getFieldFloor : this.getFieldCieling;
-    for (let f of this.constructor.FIELDS) {
-      // this relies on FIELDS being sorted least to most precise
-      result[f] = result[f] != null ? result[f] : fieldFloorOrCiel.call(result, f);
-      if (result[field] != null) {
-        break;
-      }
-    }
+  // However, since you can't really convert days to months,  if "this" is less precise than the field being added, we can
+  // add to the earliest possible value of "this" or subtract from the latest possible value of "this" (depending on the
+  // sign of the offset), and then null out the imprecise fields again after doing the calculation.  Due to the way
+  // luxonDateTime is constructed above, it is already at the earliest value, so only adjust if the offset is negative.
+  if (offsetIsMorePrecise && offset < 0) {
+    luxonDateTime = luxonDateTime.endOf(this.getPrecision());
   }
 
-  // Increment the field, then round-trip to JS date and back for calendar math
-  result[field] = result[field] + offset;
-  const normalized = this.constructor.fromJSDate(result.toJSDate(), this.timezoneOffset);
-  for (field of this.constructor.FIELDS) {
-    if (result[field] != null) {
-      result[field] = normalized[field];
-    }
-  }
-
-  // remove any fields we added (go back to original precision)
-  if (offsetIsMorePrecise) {
-    for (let f of this.constructor.FIELDS) {
-      if (this[f] == null) {
-        result[f] = null;
-      }
-    }
+  // Now do the actual math and convert it back to a Date/DateTime w/ originally null fields nulled out again
+  const luxonResult = luxonDateTime.plus({ [field]: offset });
+  let result;
+  if (this.isDateTime) {
+    result = new DateTime(
+      luxonResult.year,
+      this.month != null ? luxonResult.month : null,
+      this.day != null ? luxonResult.day : null,
+      this.hour != null ? luxonResult.hour : null,
+      this.minute != null ? luxonResult.minute : null,
+      this.second != null ? luxonResult.second : null,
+      this.millisecond != null ? luxonResult.millisecond : null,
+      this.timezoneOffset
+    );
+  } else {
+    result = new Date(
+      luxonResult.year,
+      this.month != null ? luxonResult.month : null,
+      this.day != null ? luxonResult.day : null
+    );
   }
 
   // Can't use overflowsOrUnderflows from math.js due to circular dependencies when we require it

@@ -597,6 +597,8 @@ for (var _i = 0, _libs = libs; _i < _libs.length; _i++) {
 },{"./clinical":5,"./datetime":7,"./interval":9,"./logic":10,"./quantity":11,"./ratio":12,"./uncertainty":13}],7:[function(require,module,exports){
 "use strict";
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _construct(Parent, args, Class) { if (_isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
@@ -1979,92 +1981,42 @@ DateTime.prototype.after = _Date.prototype.after = function (other, precision) {
 };
 
 DateTime.prototype.add = _Date.prototype.add = function (offset, field) {
-  var result = this.copy();
+  if (offset === 0 || this.year == null) {
+    return this.copy();
+  } // Use luxon to do the date math because it honors DST and it has the leap-year/end-of-month semantics we want.
+  // NOTE: The luxonDateTime will contain default values where this[unit] is null, but we'll account for that.
 
-  if (offset === 0) {
-    return result;
-  } // If weeks, convert to days
 
-
-  if (field === this.constructor.Unit.WEEK) {
-    offset = offset * 7;
-    field = this.constructor.Unit.DAY;
-  }
-
-  var offsetIsMorePrecise = result[field] == null; //whether the quantity we are adding is more precise than @
+  var luxonDateTime = luxon.DateTime.fromObject({
+    year: this[DateTime.Unit.YEAR],
+    month: this[DateTime.Unit.MONTH],
+    day: this[DateTime.Unit.DAY],
+    hour: this[DateTime.Unit.HOUR],
+    minute: this[DateTime.Unit.MINUTE],
+    second: this[DateTime.Unit.SECOND],
+    millisecond: this[DateTime.Unit.MILLISECOND],
+    zone: luxon.FixedOffsetZone.instance(this.timezoneOffset || 0)
+  });
+  var offsetIsMorePrecise = this[field] == null; //whether the quantity we are adding is more precise than "this".
   // From the spec: "The operation is performed by converting the time-based quantity to the most precise value
   // specified in the date/time (truncating any resulting decimal portion) and then adding it to the date/time value."
-  // However, since you can't really convert e.g. days to months,  if @ is less precise than the field being added, we can
-  // "floor" UP to the incoming field precision, then add the offset, then reduce back down to original precision.
-  // For negative offsets, we use the cieling
+  // However, since you can't really convert days to months,  if "this" is less precise than the field being added, we can
+  // add to the earliest possible value of "this" or subtract from the latest possible value of "this" (depending on the
+  // sign of the offset), and then null out the imprecise fields again after doing the calculation.  Due to the way
+  // luxonDateTime is constructed above, it is already at the earliest value, so only adjust if the offset is negative.
 
-  if (offsetIsMorePrecise) {
-    if (this.year == null) {
-      result.year = new jsDate().getFullYear();
-    } //in case there is no year, proceed as if in this year, year will be nullified later
-
-
-    var fieldFloorOrCiel = offset >= 0 ? this.getFieldFloor : this.getFieldCieling;
-
-    var _iterator10 = _createForOfIteratorHelper(this.constructor.FIELDS),
-        _step10;
-
-    try {
-      for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
-        var f = _step10.value;
-        // this relies on FIELDS being sorted least to most precise
-        result[f] = result[f] != null ? result[f] : fieldFloorOrCiel.call(result, f);
-
-        if (result[field] != null) {
-          break;
-        }
-      }
-    } catch (err) {
-      _iterator10.e(err);
-    } finally {
-      _iterator10.f();
-    }
-  } // Increment the field, then round-trip to JS date and back for calendar math
+  if (offsetIsMorePrecise && offset < 0) {
+    luxonDateTime = luxonDateTime.endOf(this.getPrecision());
+  } // Now do the actual math and convert it back to a Date/DateTime w/ originally null fields nulled out again
 
 
-  result[field] = result[field] + offset;
-  var normalized = this.constructor.fromJSDate(result.toJSDate(), this.timezoneOffset);
+  var luxonResult = luxonDateTime.plus(_defineProperty({}, field, offset));
+  var result;
 
-  var _iterator11 = _createForOfIteratorHelper(this.constructor.FIELDS),
-      _step11;
-
-  try {
-    for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
-      field = _step11.value;
-
-      if (result[field] != null) {
-        result[field] = normalized[field];
-      }
-    } // remove any fields we added (go back to original precision)
-
-  } catch (err) {
-    _iterator11.e(err);
-  } finally {
-    _iterator11.f();
-  }
-
-  if (offsetIsMorePrecise) {
-    var _iterator12 = _createForOfIteratorHelper(this.constructor.FIELDS),
-        _step12;
-
-    try {
-      for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
-        var _f = _step12.value;
-
-        if (this[_f] == null) {
-          result[_f] = null;
-        }
-      }
-    } catch (err) {
-      _iterator12.e(err);
-    } finally {
-      _iterator12.f();
-    }
+  if (this.isDateTime) {
+    result = new DateTime(luxonResult.year, this.month != null ? luxonResult.month : null, this.day != null ? luxonResult.day : null, this.hour != null ? luxonResult.hour : null, this.minute != null ? luxonResult.minute : null, this.second != null ? luxonResult.second : null, this.millisecond != null ? luxonResult.millisecond : null, this.timezoneOffset);
+  } else {
+    result = new _Date(luxonResult.year, this.month != null ? luxonResult.month : null, this.day != null ? luxonResult.day : null);
   } // Can't use overflowsOrUnderflows from math.js due to circular dependencies when we require it
 
 
@@ -2136,12 +2088,12 @@ function compareWithDefaultResult(a, b, defaultResult) {
     b = b.convertToTimezoneOffset(a.timezoneOffset);
   }
 
-  var _iterator13 = _createForOfIteratorHelper(a.constructor.FIELDS),
-      _step13;
+  var _iterator10 = _createForOfIteratorHelper(a.constructor.FIELDS),
+      _step10;
 
   try {
-    for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
-      var field = _step13.value;
+    for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+      var field = _step10.value;
 
       // if both have this precision defined
       if (a[field] != null && b[field] != null) {
@@ -2171,9 +2123,9 @@ function compareWithDefaultResult(a, b, defaultResult) {
     } // if we made it here, then all fields matched.
 
   } catch (err) {
-    _iterator13.e(err);
+    _iterator10.e(err);
   } finally {
-    _iterator13.f();
+    _iterator10.f();
   }
 
   return true;

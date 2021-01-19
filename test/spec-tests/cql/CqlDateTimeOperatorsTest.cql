@@ -60,11 +60,9 @@ define "Add": Tuple{
     output: @2016-06-10T05:05:06.000
   },
   "DateTimeAddLeapYear": Tuple{
-    skipped: 'Wrong answer (March 1 vs Feb 28)'
-    /*
     expression: DateTime(2012, 2, 29) + 1 year,
     output: @2013-02-28T
-    */  },
+  },
   "DateTimeAdd2YearsByMonths": Tuple{
     expression: DateTime(2014) + 24 months,
     output: @2016T

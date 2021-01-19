@@ -30,7 +30,6 @@ CqlArithmeticFunctionsTest.Multiply.Multiply1CMBy2CM            Wrong answer (.0
 CqlArithmeticFunctionsTest.Power.PowerNullToNull                Wrong answer (1 vs null)
 CqlComparisonOperatorsTest.Equal.DateTimeEqNull                 Wrong answer (true vs null - due to not evaluating DateTime(null) as null)
 CqlComparisonOperatorsTest.Equivalent.EquivEqCM1M01             Wrong answer (false vs true)
-CqlDateTimeOperatorsTest.Add.DateTimeAddLeapYear                Wrong answer (March 1 vs Feb 28)
 "CqlDateTimeOperatorsTest.Uncertainty tests.DateTimeDurationBetweenMonthUncertain"  Wrong answer (null vs true)
 CqlIntervalOperatorsTest.Collapse.TestCollapseNull              Wrong answer (Interval(null, null) vs null)
 CqlIntervalOperatorsTest.Expand.ExpandPer2Days                  Wrong answer (null vs { Interval[@2018-01-01, @2018-01-02], Interval[@2018-01-03, @2018-01-04] })
