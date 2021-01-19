@@ -757,17 +757,13 @@ define "Truncate": Tuple{
     output: -1
   },
   "TruncateNeg1D1": Tuple{
-    skipped: 'Wrong answer (-2 vs -1)'
-    /*
     expression: Truncate(-1.1),
     output: -1
-    */  },
+  },
   "TruncateNeg1D9": Tuple{
-    skipped: 'Wrong answer (-2 vs -1)'
-    /*
     expression: Truncate(-1.9),
     output: -1
-    */  }
+  }
 }
 
 define "Truncated Divide": Tuple{

@@ -185,8 +185,23 @@ class Floor extends Expression {
   }
 }
 
-class Truncate extends Floor {}
+class Truncate extends Expression {
+  constructor(json) {
+    super(json);
+  }
 
+  exec(ctx) {
+    const arg = this.execArgs(ctx);
+    if (arg == null) {
+      return null;
+    }
+
+    if (arg >= 0) {
+      return Math.floor(arg);
+    }
+    return Math.ceil(arg);
+  }
+}
 class Abs extends Expression {
   constructor(json) {
     super(json);
