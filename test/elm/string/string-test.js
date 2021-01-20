@@ -84,11 +84,6 @@ describe('Split', () => {
   it('should return null when separating null', function () {
     should(this.separateNull.exec(this.ctx)).be.null();
   });
-
-  // TODO: Verify this assumption
-  it('should return null when the separator is null', function () {
-    should(this.separateUsingNull.exec(this.ctx)).be.null();
-  });
 });
 
 describe('SplitOnMatches', () => {

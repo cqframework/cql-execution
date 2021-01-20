@@ -49,11 +49,10 @@ class Split extends Expression {
   exec(ctx) {
     const stringToSplit = this.stringToSplit.execute(ctx);
     const separator = this.separator.execute(ctx);
-    if (stringToSplit == null || separator == null) {
-      return null;
-    } else {
+    if (stringToSplit && separator) {
       return stringToSplit.split(separator);
     }
+    return stringToSplit ? [stringToSplit] : null;
   }
 }
 
@@ -155,11 +154,9 @@ class Matches extends Expression {
     if (string == null || pattern == null) {
       return null;
     }
-    if (string.match(new RegExp(pattern))) {
-      return true;
-    } else {
-      return false;
-    }
+
+    const match = string.match(new RegExp(pattern));
+    return Boolean(match && match.length > 0 && match[0] === string);
   }
 }
 

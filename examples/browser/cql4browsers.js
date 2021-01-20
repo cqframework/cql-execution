@@ -11448,11 +11448,11 @@ var Split = /*#__PURE__*/function (_Expression3) {
       var stringToSplit = this.stringToSplit.execute(ctx);
       var separator = this.separator.execute(ctx);
 
-      if (stringToSplit == null || separator == null) {
-        return null;
-      } else {
+      if (stringToSplit && separator) {
         return stringToSplit.split(separator);
       }
+
+      return stringToSplit ? [stringToSplit] : null;
     }
   }]);
 
@@ -11637,11 +11637,8 @@ var Matches = /*#__PURE__*/function (_Expression9) {
         return null;
       }
 
-      if (string.match(new RegExp(pattern))) {
-        return true;
-      } else {
-        return false;
-      }
+      var match = string.match(new RegExp(pattern));
+      return Boolean(match && match.length > 0 && match[0] === string);
     }
   }]);
 
