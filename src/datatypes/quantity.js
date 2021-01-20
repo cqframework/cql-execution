@@ -107,7 +107,7 @@ class Quantity {
 
   multiplyDivide(other, operator) {
     if (other != null && other.isQuantity) {
-      if (other.unit === '1' || other.unit === '') {
+      if (other.unit === '1' || other.unit === '' || other.unit == null) {
         const value = operator === '/' ? this.value / other.value : this.value * other.value;
         if (overflowsOrUnderflows(value)) {
           return null;

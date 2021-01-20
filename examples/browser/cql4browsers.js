@@ -3187,7 +3187,7 @@ var Quantity = /*#__PURE__*/function () {
     key: "multiplyDivide",
     value: function multiplyDivide(other, operator) {
       if (other != null && other.isQuantity) {
-        if (other.unit === '1' || other.unit === '') {
+        if (other.unit === '1' || other.unit === '' || other.unit == null) {
           var value = operator === '/' ? this.value / other.value : this.value * other.value;
 
           if (overflowsOrUnderflows(value)) {
@@ -4855,12 +4855,7 @@ var Modulo = /*#__PURE__*/function (_Expression6) {
       var modulo = args.reduce(function (x, y) {
         return x % y;
       });
-
-      if (!MathUtil.isValidDecimal(modulo)) {
-        return null;
-      }
-
-      return modulo;
+      return MathUtil.decimalOrNull(modulo);
     }
   }]);
 
@@ -5059,12 +5054,7 @@ var Ln = /*#__PURE__*/function (_Expression13) {
       }
 
       var ln = Math.log(arg);
-
-      if (!MathUtil.isValidDecimal(ln)) {
-        return null;
-      }
-
-      return ln;
+      return MathUtil.decimalOrNull(ln);
     }
   }]);
 
@@ -5129,12 +5119,7 @@ var Log = /*#__PURE__*/function (_Expression15) {
       var log = args.reduce(function (x, y) {
         return Math.log(x) / Math.log(y);
       });
-
-      if (!MathUtil.isValidDecimal(log)) {
-        return null;
-      }
-
-      return log;
+      return MathUtil.decimalOrNull(log);
     }
   }]);
 
@@ -14468,6 +14453,10 @@ function decimalAdjust(type, value, exp) {
   return +(value[0] + 'e' + v);
 }
 
+function decimalOrNull(value) {
+  return isValidDecimal(value) ? value : null;
+}
+
 module.exports = {
   MAX_INT_VALUE: MAX_INT_VALUE,
   MIN_INT_VALUE: MIN_INT_VALUE,
@@ -14489,7 +14478,8 @@ module.exports = {
   predecessor: predecessor,
   maxValueForInstance: maxValueForInstance,
   minValueForInstance: minValueForInstance,
-  decimalAdjust: decimalAdjust
+  decimalAdjust: decimalAdjust,
+  decimalOrNull: decimalOrNull
 };
 },{"../datatypes/datetime":7,"../datatypes/exception":8,"../datatypes/uncertainty":13}],47:[function(require,module,exports){
 "use strict";
