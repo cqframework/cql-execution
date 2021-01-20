@@ -99,7 +99,7 @@
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check \"**/*.js\"",
     "prettier:fix": "prettier --write \"**/*.js\"",
-    "test:plus": "npm test && npm run build && npm run lint && npm run prettier"
+    "test:plus": "npm test --scripts-prepend-node-path && npm run build --scripts-prepend-node-path && npm run lint --scripts-prepend-node-path && npm run prettier --scripts-prepend-node-path"
   },
   "license": "Apache-2.0"
 }
