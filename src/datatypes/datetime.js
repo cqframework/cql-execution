@@ -54,6 +54,18 @@ function wholeLuxonDuration(duration, unit) {
   return value >= 0 ? Math.floor(value) : Math.ceil(value);
 }
 
+function truncateLuxonDateTime(luxonDT, unit) {
+  // Truncating by week (to the previous Sunday) requires different logic than the rest
+  if (unit === DateTime.Unit.WEEK) {
+    // Sunday is ISO weekday 7
+    if (luxonDT.weekday !== 7) {
+      luxonDT = luxonDT.set({ weekday: 7 }).minus({ weeks: 1 });
+    }
+    unit = DateTime.Unit.DAY;
+  }
+  return luxonDT.startOf(unit);
+}
+
 class DateTime {
   static parse(string) {
     if (string === null) {
@@ -127,6 +139,22 @@ class DateTime {
         date.getMilliseconds()
       );
     }
+  }
+
+  static fromLuxonDateTime(luxonDT) {
+    if (luxonDT instanceof DateTime) {
+      return luxonDT;
+    }
+    return new DateTime(
+      luxonDT.year,
+      luxonDT.month,
+      luxonDT.day,
+      luxonDT.hour,
+      luxonDT.minute,
+      luxonDT.second,
+      luxonDT.millisecond,
+      luxonDT.offset / 60
+    );
   }
 
   constructor(
@@ -209,119 +237,52 @@ class DateTime {
   }
 
   convertToTimezoneOffset(timezoneOffset = 0) {
-    const d = DateTime.fromJSDate(this.toJSDate(), timezoneOffset);
-    return d.reducedPrecision(this.getPrecision());
+    const shiftedLuxonDT = this.toLuxonDateTime().setZone(
+      luxon.FixedOffsetZone.instance(timezoneOffset * 60)
+    );
+    const shiftedDT = DateTime.fromLuxonDateTime(shiftedLuxonDT);
+    return shiftedDT.reducedPrecision(this.getPrecision());
   }
 
   differenceBetween(other, unitField) {
-    // TODO: Revisit this logic now that we are using Luxon.  We may be able to simplify.
-
     other = this._implicitlyConvert(other);
     if (other == null || !other.isDateTime) {
       return null;
     }
 
-    // According to CQL spec, to calculate difference, you can just floor lesser precisions and do a duration
-    // Make copies since we'll be flooring values and mucking with timezones
-    let a = this.copy();
-    let b = other.copy();
-    // Use Luxon for day or finer granularity due to the daylight savings time fall back/spring forward
+    // According to CQL spec:
+    // * "Difference calculations are performed by truncating the datetime values at the next precision,
+    //   and then performing the corresponding duration calculation on the truncated values."
+    // * "When difference is calculated for hours or finer units, timezone offsets should be normalized
+    //   prior to truncation to correctly consider real (actual elapsed) time. When difference is calculated
+    //   for days or coarser units, however, the time components (including timezone offset) should be truncated
+    //   without normalization to correctly reflect the difference in calendar days, months, and years."
+    const a = this.toLuxonUncertainty();
+    const b = other.toLuxonUncertainty();
+
+    // If unit is days or above, reset all the DateTimes to UTC since TZ offset should not be considered;
+    // Otherwise, we don't actually have to "normalize" to a common TZ because Luxon takes TZ into account.
     if (
-      unitField === DateTime.Unit.MONTH ||
-      unitField === DateTime.Unit.YEAR ||
-      unitField === DateTime.Unit.WEEK ||
-      unitField === DateTime.Unit.DAY
+      [DateTime.Unit.YEAR, DateTime.Unit.MONTH, DateTime.Unit.WEEK, DateTime.Unit.DAY].includes(
+        unitField
+      )
     ) {
-      // The dates need to agree on where the boundaries are, so we must normalize to the same time zone
-      if (a.timezoneOffset !== b.timezoneOffset) {
-        b = b.convertToTimezoneOffset(a.timezoneOffset);
-      }
-      // JS always represents dates in the current locale, but in locales with DST, we want to account for the
-      // potential difference in offset from one date to the other.  We try to simulate them being in the same
-      // timezone, because we don't want midnight to roll back to 11:00pm since that will mess up day boundaries.
-      if (!a.isUTC() || !b.isUTC()) {
-        const aJS = a.toJSDate(true);
-        const bJS = b.toJSDate(true);
-        const tzDiff = aJS.getTimezoneOffset() - bJS.getTimezoneOffset();
-        if (tzDiff !== 0) {
-          // Since we'll be doing duration later, account for timezone offset by adding to the time (if possible)
-          if (
-            b.year != null &&
-            b.month != null &&
-            b.day != null &&
-            b.hour != null &&
-            b.minute != null
-          ) {
-            b = b.add(tzDiff, DateTime.Unit.MINUTE);
-          } else if (b.year != null && b.month != null && b.day != null && b.hour != null) {
-            b = b.add(tzDiff / 60, DateTime.Unit.HOUR);
-          } else {
-            b.timezoneOffset = b.timezoneOffset + tzDiff / 60;
-          }
-        }
-      }
-    }
-    // Now floor lesser precisions before we go on to calculate duration
-    if (unitField === DateTime.Unit.YEAR) {
-      a = new DateTime(a.year, 1, 1, 12, 0, 0, 0, a.timezoneOffset);
-      b = new DateTime(b.year, 1, 1, 12, 0, 0, 0, b.timezoneOffset);
-    } else if (unitField === DateTime.Unit.MONTH) {
-      a = new DateTime(a.year, a.month, 1, 12, 0, 0, 0, a.timezoneOffset);
-      b = new DateTime(b.year, b.month, 1, 12, 0, 0, 0, b.timezoneOffset);
-    } else if (unitField === DateTime.Unit.WEEK) {
-      a = this._floorWeek(a);
-      b = this._floorWeek(b);
-    } else if (unitField === DateTime.Unit.DAY) {
-      a = new DateTime(a.year, a.month, a.day, 12, 0, 0, 0, a.timezoneOffset);
-      b = new DateTime(b.year, b.month, b.day, 12, 0, 0, 0, b.timezoneOffset);
-    } else if (unitField === DateTime.Unit.HOUR) {
-      a = new DateTime(a.year, a.month, a.day, a.hour, 30, 0, 0, a.timezoneOffset);
-      b = new DateTime(b.year, b.month, b.day, b.hour, 30, 0, 0, b.timezoneOffset);
-    } else if (unitField === DateTime.Unit.MINUTE) {
-      a = new DateTime(a.year, a.month, a.day, a.hour, a.minute, 0, 0, a.timezoneOffset);
-      b = new DateTime(b.year, b.month, b.day, b.hour, b.minute, 0, 0, b.timezoneOffset);
-    } else if (unitField === DateTime.Unit.SECOND) {
-      a = new DateTime(a.year, a.month, a.day, a.hour, a.minute, a.second, 0, a.timezoneOffset);
-      b = new DateTime(b.year, b.month, b.day, b.hour, b.minute, b.second, 0, b.timezoneOffset);
+      a.low = a.low.toUTC(0, { keepLocalTime: true });
+      a.high = a.high.toUTC(0, { keepLocalTime: true });
+      b.low = b.low.toUTC(0, { keepLocalTime: true });
+      b.high = b.high.toUTC(0, { keepLocalTime: true });
     }
 
-    // Because Luxon handles years and months differently, use the existing durationBetween for those
-    // Finer granularity times can be handled by the DST-aware Luxon library.
-    if (unitField === DateTime.Unit.YEAR || unitField === DateTime.Unit.MONTH) {
-      return a.durationBetween(b, unitField);
-    } else {
-      const aUncertainty = a.toUncertainty();
-      const bUncertainty = b.toUncertainty();
-      const aLowLuxDT = luxon.DateTime.fromJSDate(aUncertainty.low).toUTC();
-      const aHighLuxDT = luxon.DateTime.fromJSDate(aUncertainty.high).toUTC();
-      const bLowLuxDT = luxon.DateTime.fromJSDate(bUncertainty.low).toUTC();
-      const bHighLuxDT = luxon.DateTime.fromJSDate(bUncertainty.high).toUTC();
-      return new Uncertainty(
-        wholeLuxonDuration(bLowLuxDT.diff(aHighLuxDT, unitField), unitField),
-        wholeLuxonDuration(bHighLuxDT.diff(aLowLuxDT, unitField), unitField)
-      );
-    }
-  }
+    // Truncate all dates at precision below specified unit
+    a.low = truncateLuxonDateTime(a.low, unitField);
+    a.high = truncateLuxonDateTime(a.high, unitField);
+    b.low = truncateLuxonDateTime(b.low, unitField);
+    b.high = truncateLuxonDateTime(b.high, unitField);
 
-  _floorWeek(d) {
-    // To "floor" a week, we need to go back to the last Sunday (that's when getDay() == 0 in javascript)
-    // But if we don't know the day, then just return it as-is
-    if (d.day == null) {
-      return d;
-    }
-    const floored = new jsDate(d.year, d.month - 1, d.day);
-    while (floored.getDay() > 0) {
-      floored.setDate(floored.getDate() - 1);
-    }
-    return new DateTime(
-      floored.getFullYear(),
-      floored.getMonth() + 1,
-      floored.getDate(),
-      12,
-      0,
-      0,
-      0,
-      d.timezoneOffset
+    // Return the duration based on the normalize and truncated values
+    return new Uncertainty(
+      wholeLuxonDuration(b.low.diff(a.high, unitField), unitField),
+      wholeLuxonDuration(b.high.diff(a.low, unitField), unitField)
     );
   }
 
@@ -330,72 +291,12 @@ class DateTime {
     if (other == null || !other.isDateTime) {
       return null;
     }
-    const a = this.toUncertainty();
-    const b = other.toUncertainty();
+    const a = this.toLuxonUncertainty();
+    const b = other.toLuxonUncertainty();
     return new Uncertainty(
-      this._durationBetweenDates(a.high, b.low, unitField),
-      this._durationBetweenDates(a.low, b.high, unitField)
+      wholeLuxonDuration(b.low.diff(a.high, unitField), unitField),
+      wholeLuxonDuration(b.high.diff(a.low, unitField), unitField)
     );
-  }
-
-  // NOTE: a and b are real JS dates -- not DateTimes
-  _durationBetweenDates(a, b, unitField) {
-    // DurationBetween is different than DifferenceBetween in that DurationBetween counts whole elapsed time periods, but
-    // DifferenceBetween counts boundaries.  For example:
-    // difference in days between @2012-01-01T23:59:59.999 and @2012-01-02T00:00:00.0 calculates to 1 (since it crosses day boundary)
-    // days between @2012-01-01T23:59:59.999 and @2012-01-02T00:00:00.0 calculates to 0 (since there are no full days between them)
-    const msDiff = b.getTime() - a.getTime();
-
-    if (msDiff === 0) {
-      return 0;
-    }
-    // If it's a negative delta, we need to use ceiling instead of floor when truncating
-    const truncFunc = msDiff > 0 ? Math.floor : Math.ceil;
-    // For ms, s, min, hr, day, and week this is trivial
-    if (unitField === DateTime.Unit.MILLISECOND) {
-      return msDiff;
-    } else if (unitField === DateTime.Unit.SECOND) {
-      return truncFunc(msDiff / 1000);
-    } else if (unitField === DateTime.Unit.MINUTE) {
-      return truncFunc(msDiff / (60 * 1000));
-    } else if (unitField === DateTime.Unit.HOUR) {
-      return truncFunc(msDiff / (60 * 60 * 1000));
-    } else if (unitField === DateTime.Unit.DAY) {
-      return truncFunc(msDiff / (24 * 60 * 60 * 1000));
-    } else if (unitField === DateTime.Unit.WEEK) {
-      return truncFunc(msDiff / (7 * 24 * 60 * 60 * 1000));
-      // Months and years are trickier since months are variable length
-    } else if (unitField === DateTime.Unit.MONTH || unitField === DateTime.Unit.YEAR) {
-      // First get the rough months, essentially counting month "boundaries"
-      let months = (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth());
-      // Now we need to look at the smaller units to see how they compare.  Since we only care about comparing
-      // days and below at this point, it's much easier to bring a up to b so it's in the same month, then
-      // we can compare on just the remaining units.
-      const aInMonth = new jsDate(a.getTime());
-      // Remember the original timezone offset because if it changes when we bring it up a month, we need to fix it
-      const aInMonthOriginalOffset = aInMonth.getTimezoneOffset();
-      aInMonth.setMonth(a.getMonth() + months);
-      if (aInMonthOriginalOffset !== aInMonth.getTimezoneOffset()) {
-        aInMonth.setMinutes(
-          aInMonth.getMinutes() + (aInMonthOriginalOffset - aInMonth.getTimezoneOffset())
-        );
-      }
-      // When a is before b, then if a's smaller units are greater than b's, a whole month hasn't elapsed, so adjust
-      if (msDiff > 0 && aInMonth > b) {
-        months = months - 1;
-        // When b is before a, then if a's smaller units are less than b's, a whole month hasn't elaspsed backwards, so adjust
-      } else if (msDiff < 0 && aInMonth < b) {
-        months = months + 1;
-      }
-      // If this is months, just return them, but if it's years, we need to convert
-      if (unitField === DateTime.Unit.MONTH) {
-        return months;
-      } else {
-        return truncFunc(months / 12);
-      }
-    } else {
-      return null;
-    }
   }
 
   isUTC() {
@@ -441,52 +342,37 @@ class DateTime {
     return result;
   }
 
-  toUncertainty(ignoreTimezone = false) {
-    const low = this.toJSDate(ignoreTimezone);
-    const high = new DateTime(
-      this.year,
-      this.month != null ? this.month : 12,
-      // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/setDate
-      this.day != null
-        ? this.day
-        : new jsDate(this.year, this.month != null ? this.month : 12, 0).getDate(),
-      this.hour != null ? this.hour : 23,
-      this.minute != null ? this.minute : 59,
-      this.second != null ? this.second : 59,
-      this.millisecond != null ? this.millisecond : 999,
-      this.timezoneOffset
-    ).toJSDate(ignoreTimezone);
+  toLuxonDateTime() {
+    const offsetMins =
+      this.timezoneOffset != null
+        ? this.timezoneOffset * 60
+        : new jsDate().getTimezoneOffset() * -1;
+    return luxon.DateTime.fromObject({
+      year: this.year,
+      month: this.month,
+      day: this.day,
+      hour: this.hour,
+      minute: this.minute,
+      second: this.second,
+      millisecond: this.millisecond,
+      zone: luxon.FixedOffsetZone.instance(offsetMins)
+    });
+  }
+
+  toLuxonUncertainty() {
+    const low = this.toLuxonDateTime();
+    const high = low.endOf(this.getPrecision());
     return new Uncertainty(low, high);
   }
 
   toJSDate(ignoreTimezone = false) {
-    let date;
-    const [y, mo, d, h, mi, s, ms] = [
-      this.year,
-      this.month != null ? this.month - 1 : 0,
-      this.day != null ? this.day : 1,
-      this.hour != null ? this.hour : 0,
-      this.minute != null ? this.minute : 0,
-      this.second != null ? this.second : 0,
-      this.millisecond != null ? this.millisecond : 0
-    ];
-    if (this.timezoneOffset != null && !ignoreTimezone) {
-      date = new jsDate(jsDate.UTC(y, mo, d, h, mi, s, ms) - this.timezoneOffset * 60 * 60 * 1000);
-      // TODO: This fixes any case that would not cross the year boundary due to a timezone.
-      // Mainly used to solve the issue with the MIN_DATETIME_VALUE being converted from
-      // year 0001 to year 1900 because of strange JSDate behavior between year 0 and 100
-      // Also else case below
-      if (y < 100) {
-        date.setUTCFullYear(y);
-      }
-      return date;
-    } else {
-      date = new jsDate(y, mo, d, h, mi, s, ms);
-      if (y < 100) {
-        date.setFullYear(y);
-      }
-      return date;
+    let luxonDT = this.toLuxonDateTime();
+    // I don't know if anyone is using "ignoreTimezone" anymore (we aren't), but just in case
+    if (ignoreTimezone) {
+      const offset = new jsDate().getTimezoneOffset() * -1;
+      luxonDT = luxonDT.setZone(luxon.FixedOffsetZone.instance(offset), { keepLocalTime: true });
     }
+    return luxonDT.toJSDate();
   }
 
   toJSON() {
@@ -682,34 +568,23 @@ class Date {
       return null;
     }
 
-    let a = this;
-    let b = other;
-    // According to CQL spec, to calculate difference, you can just floor lesser precisions and do a duration
-    if (unitField === Date.Unit.YEAR) {
-      a = new Date(a.year, 1, 1);
-      b = new Date(b.year, 1, 1);
-    } else if (unitField === Date.Unit.MONTH) {
-      a = new Date(a.year, a.month, 1);
-      b = new Date(b.year, b.month, 1);
-    } else if (unitField === Date.Unit.WEEK) {
-      a = this._floorWeek(a);
-      b = this._floorWeek(b);
-    }
+    // According to CQL spec:
+    // * "Difference calculations are performed by truncating the datetime values at the next precision,
+    //   and then performing the corresponding duration calculation on the truncated values."
+    const a = this.toLuxonUncertainty();
+    const b = other.toLuxonUncertainty();
 
-    return a.durationBetween(b, unitField);
-  }
+    // Truncate all dates at precision below specified unit
+    a.low = truncateLuxonDateTime(a.low, unitField);
+    a.high = truncateLuxonDateTime(a.high, unitField);
+    b.low = truncateLuxonDateTime(b.low, unitField);
+    b.high = truncateLuxonDateTime(b.high, unitField);
 
-  _floorWeek(d) {
-    // To "floor" a week, we need to go back to the last Sunday (that's when getDay() == 0 in javascript)
-    // But if we don't know the day, then just return it as-is
-    if (d.day == null) {
-      return d;
-    }
-    const floored = new jsDate(d.year, d.month - 1, d.day);
-    while (floored.getDay() > 0) {
-      floored.setDate(floored.getDate() - 1);
-    }
-    return new Date(floored.getFullYear(), floored.getMonth() + 1, floored.getDate());
+    // Return the duration based on the normalize and truncated values
+    return new Uncertainty(
+      wholeLuxonDuration(b.low.diff(a.high, unitField), unitField),
+      wholeLuxonDuration(b.high.diff(a.low, unitField), unitField)
+    );
   }
 
   durationBetween(other, unitField) {
@@ -720,71 +595,12 @@ class Date {
       return null;
     }
 
-    const a = this.toUncertainty();
-    const b = other.toUncertainty();
+    const a = this.toLuxonUncertainty();
+    const b = other.toLuxonUncertainty();
     return new Uncertainty(
-      this._durationBetweenDates(a.high, b.low, unitField),
-      this._durationBetweenDates(a.low, b.high, unitField)
+      wholeLuxonDuration(b.low.diff(a.high, unitField), unitField),
+      wholeLuxonDuration(b.high.diff(a.low, unitField), unitField)
     );
-  }
-
-  // NOTE: a and b are real JS dates -- not DateTimes. Also this expects time components to be zero!
-  _durationBetweenDates(a, b, unitField) {
-    //we need to fix offsets to match so we dont get any JS DST interference, to avoid crossing day boundaries put it in the middle of the day
-    //DST stuff should only be +/- one hour so this should work
-    a.setTime(a.getTime() + 12 * 60 * 60 * 1000);
-    b.setTime(b.getTime() + 12 * 60 * 60 * 1000);
-    const tzdiff = a.getTimezoneOffset() - b.getTimezoneOffset();
-    b.setTime(b.getTime() + tzdiff * 60 * 1000);
-
-    // DurationBetween is different than DifferenceBetween in that DurationBetween counts whole elapsed time periods, but
-    // DifferenceBetween counts boundaries.  For example:
-    // difference in days between @2012-01-01T23:59:59.999 and @2012-01-02T00:00:00.0 calculates to 1 (since it crosses day boundary)
-    // days between @2012-01-01T23:59:59.999 and @2012-01-02T00:00:00.0 calculates to 0 (since there are no full days between them)
-    const msDiff = b.getTime() - a.getTime();
-
-    if (msDiff === 0) {
-      return 0;
-    }
-    // If it's a negative delta, we need to use ceiling instead of floor when truncating
-    const truncFunc = msDiff > 0 ? Math.floor : Math.ceil;
-    // For ms, s, min, hr, day, and week this is trivial
-    if (unitField === Date.Unit.DAY) {
-      return truncFunc(msDiff / (24 * 60 * 60 * 1000));
-    } else if (unitField === Date.Unit.WEEK) {
-      return truncFunc(msDiff / (7 * 24 * 60 * 60 * 1000));
-      // Months and years are trickier since months are variable length
-    } else if (unitField === Date.Unit.MONTH || unitField === Date.Unit.YEAR) {
-      // First get the rough months, essentially counting month "boundaries"
-      let months = (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth());
-      // Now we need to look at the smaller units to see how they compare.  Since we only care about comparing
-      // days and below at this point, it's much easier to bring a up to b so it's in the same month, then
-      // we can compare on just the remaining units.
-      const aInMonth = new jsDate(a.getTime());
-      // Remember the original timezone offset because if it changes when we bring it up a month, we need to fix it
-      const aInMonthOriginalOffset = aInMonth.getTimezoneOffset();
-      aInMonth.setMonth(a.getMonth() + months);
-      if (aInMonthOriginalOffset !== aInMonth.getTimezoneOffset()) {
-        aInMonth.setMinutes(
-          aInMonth.getMinutes() + (aInMonthOriginalOffset - aInMonth.getTimezoneOffset())
-        );
-      }
-      // When a is before b, then if a's smaller units are greater than b's, a whole month hasn't elapsed, so adjust
-      if (msDiff > 0 && aInMonth > b) {
-        months = months - 1;
-        // When b is before a, then if a's smaller units are less than b's, a whole month hasn't elaspsed backwards, so adjust
-      } else if (msDiff < 0 && aInMonth < b) {
-        months = months + 1;
-      }
-      // If this is months, just return them, but if it's years, we need to convert
-      if (unitField === Date.Unit.MONTH) {
-        return months;
-      } else {
-        return truncFunc(months / 12);
-      }
-    } else {
-      return null;
-    }
   }
 
   getPrecision() {
@@ -807,17 +623,18 @@ class Date {
     return result;
   }
 
-  toUncertainty() {
-    const low = this.toJSDate();
-    const high = new Date(
-      this.year,
-      this.month != null ? this.month : 12,
-      // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/setDate
-      this.day != null
-        ? this.day
-        : new jsDate(this.year, this.month != null ? this.month : 12, 0).getDate()
-    ).toJSDate();
+  toLuxonDateTime() {
+    return luxon.DateTime.fromObject({
+      year: this.year,
+      month: this.month,
+      day: this.day,
+      zone: luxon.FixedOffsetZone.utcInstance
+    });
+  }
 
+  toLuxonUncertainty() {
+    const low = this.toLuxonDateTime();
+    const high = low.endOf(this.getPrecision()).startOf('day'); // Date type is always at T00:00:00.0
     return new Uncertainty(low, high);
   }
 
@@ -835,6 +652,13 @@ class Date {
       return date;
     }
     return new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
+  }
+
+  static fromLuxonDateTime(luxonDT) {
+    if (luxonDT instanceof Date) {
+      return luxonDT;
+    }
+    return new Date(luxonDT.year, luxonDT.month, luxonDT.day);
   }
 
   toJSON() {
@@ -1220,18 +1044,7 @@ DateTime.prototype.add = Date.prototype.add = function (offset, field) {
 
   // Use luxon to do the date math because it honors DST and it has the leap-year/end-of-month semantics we want.
   // NOTE: The luxonDateTime will contain default values where this[unit] is null, but we'll account for that.
-  let luxonDateTime = luxon.DateTime.fromObject({
-    year: this[DateTime.Unit.YEAR],
-    month: this[DateTime.Unit.MONTH],
-    day: this[DateTime.Unit.DAY],
-    hour: this[DateTime.Unit.HOUR],
-    minute: this[DateTime.Unit.MINUTE],
-    second: this[DateTime.Unit.SECOND],
-    millisecond: this[DateTime.Unit.MILLISECOND],
-    zone: luxon.FixedOffsetZone.instance(this.timezoneOffset || 0)
-  });
-
-  const offsetIsMorePrecise = this[field] == null; //whether the quantity we are adding is more precise than "this".
+  let luxonDateTime = this.toLuxonDateTime();
 
   // From the spec: "The operation is performed by converting the time-based quantity to the most precise value
   // specified in the date/time (truncating any resulting decimal portion) and then adding it to the date/time value."
@@ -1239,30 +1052,19 @@ DateTime.prototype.add = Date.prototype.add = function (offset, field) {
   // add to the earliest possible value of "this" or subtract from the latest possible value of "this" (depending on the
   // sign of the offset), and then null out the imprecise fields again after doing the calculation.  Due to the way
   // luxonDateTime is constructed above, it is already at the earliest value, so only adjust if the offset is negative.
+  const offsetIsMorePrecise = this[field] == null; //whether the quantity we are adding is more precise than "this".
   if (offsetIsMorePrecise && offset < 0) {
     luxonDateTime = luxonDateTime.endOf(this.getPrecision());
   }
 
   // Now do the actual math and convert it back to a Date/DateTime w/ originally null fields nulled out again
   const luxonResult = luxonDateTime.plus({ [field]: offset });
-  let result;
-  if (this.isDateTime) {
-    result = new DateTime(
-      luxonResult.year,
-      this.month != null ? luxonResult.month : null,
-      this.day != null ? luxonResult.day : null,
-      this.hour != null ? luxonResult.hour : null,
-      this.minute != null ? luxonResult.minute : null,
-      this.second != null ? luxonResult.second : null,
-      this.millisecond != null ? luxonResult.millisecond : null,
-      this.timezoneOffset
-    );
-  } else {
-    result = new Date(
-      luxonResult.year,
-      this.month != null ? luxonResult.month : null,
-      this.day != null ? luxonResult.day : null
-    );
+  const result = this.constructor
+    .fromLuxonDateTime(luxonResult)
+    .reducedPrecision(this.getPrecision());
+  // Luxon never has a null offset, but sometimes "this" does, so reset to null if applicable
+  if (this.isDateTime && this.timezoneOffset == null) {
+    result.timezoneOffset = null;
   }
 
   // Can't use overflowsOrUnderflows from math.js due to circular dependencies when we require it

@@ -574,11 +574,9 @@ define "Uncertainty tests": Tuple{
     output: Interval[ 16, 44 ]
   },
   "DateTimeDurationBetweenUncertainInterval2": Tuple{
-    skipped: 'Wrong answer (Uncertainty(3,16) vs Uncertainty(4,16))'
-    /*
     expression: months between DateTime(2005) and DateTime(2006, 5),
     output: Interval[ 4, 16 ]
-    */  },
+  },
   "DateTimeDurationBetweenUncertainAdd": Tuple{
     skipped: 'Adding Uncertainties not supported'
     /*
@@ -606,11 +604,9 @@ define "Uncertainty tests": Tuple{
     invalid: true
   },
   "DateTimeDurationBetweenMonthUncertain": Tuple{
-    skipped: 'Wrong answer (null vs true)'
-    /*
     expression: months between DateTime(2005) and DateTime(2006, 7) > 5,
     output: true
-    */  },
+  },
   "DateTimeDurationBetweenMonthUncertain2": Tuple{
     expression: months between DateTime(2005) and DateTime(2006, 2) > 5,
     output: null
