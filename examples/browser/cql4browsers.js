@@ -3187,30 +3187,44 @@ var Quantity = /*#__PURE__*/function () {
     key: "multiplyDivide",
     value: function multiplyDivide(other, operator) {
       if (other != null && other.isQuantity) {
-        var a = this.unit != null ? this : new Quantity(this.value, '1');
-        var b = other.unit != null ? other : new Quantity(other.value, '1');
-        var can_val = a.to_ucum();
-        var other_can_value = b.to_ucum();
-        var ucum_value = ucum_multiply(can_val, [[operator, other_can_value]]);
+        if (other.unit === '1' || other.unit === '') {
+          var value = operator === '/' ? this.value / other.value : this.value * other.value;
 
-        if (overflowsOrUnderflows(ucum_value.value)) {
-          return null;
-        }
+          if (overflowsOrUnderflows(value)) {
+            return null;
+          }
 
-        try {
-          return new Quantity(ucum_value.value, units_to_string(ucum_value.units));
-        } catch (e) {
-          return null;
+          try {
+            return new Quantity(decimalAdjust('round', value, -8), coalesceToOne(this.unit));
+          } catch (e) {
+            return null;
+          }
+        } else {
+          var a = this.unit != null ? this : new Quantity(this.value, '1');
+          var b = other.unit != null ? other : new Quantity(other.value, '1');
+          var can_val = a.to_ucum();
+          var other_can_value = b.to_ucum();
+          var ucum_value = ucum_multiply(can_val, [[operator, other_can_value]]);
+
+          if (overflowsOrUnderflows(ucum_value.value)) {
+            return null;
+          }
+
+          try {
+            return new Quantity(ucum_value.value, units_to_string(ucum_value.units));
+          } catch (e) {
+            return null;
+          }
         }
       } else {
-        var value = operator === '/' ? this.value / other : this.value * other;
+        var _value = operator === '/' ? this.value / other : this.value * other;
 
-        if (overflowsOrUnderflows(value)) {
+        if (overflowsOrUnderflows(_value)) {
           return null;
         }
 
         try {
-          return new Quantity(decimalAdjust('round', value, -8), coalesceToOne(this.unit));
+          return new Quantity(decimalAdjust('round', _value, -8), coalesceToOne(this.unit));
         } catch (e) {
           return null;
         }

@@ -109,11 +109,9 @@ define "Divide": Tuple{
     output: 3.33333333
   },
   "Divide1Q1": Tuple{
-    skipped: 'Wrong answer (by a LOT)'
-    /*
     expression: 1'g/cm3' / 1.0,
     output: 1.0'g/cm3'
-    */  },
+  },
   "Divide1Q1Q": Tuple{
     expression: 1'g/cm3' / 1'g/cm3',
     output: 1.0'1'

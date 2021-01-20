@@ -726,11 +726,28 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (by a LOT)",
-                           "type" : "Literal"
+                           "type" : "Divide",
+                           "operand" : [ {
+                              "value" : 1,
+                              "unit" : "g/cm3",
+                              "type" : "Quantity"
+                           }, {
+                              "type" : "ToQuantity",
+                              "operand" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                 "value" : "1.0",
+                                 "type" : "Literal"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "value" : 1.0,
+                           "unit" : "g/cm3",
+                           "type" : "Quantity"
                         }
                      } ]
                   }

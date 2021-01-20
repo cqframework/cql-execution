@@ -28,7 +28,6 @@ CqlAggregateFunctionsTest.PopulationStdDev.PopStdDevTest1       Wrong answer (sw
 CqlAggregateFunctionsTest.PopulationVariance.PopVarianceTest1   Wrong answer (swapped w/ Variance)
 CqlAggregateFunctionsTest.StdDev.StdDevTest1                    Wrong answer (swapped w/ PopulationStdDev)
 CqlAggregateFunctionsTest.Variance.VarianceTest1                Wrong answer (swapped w/ PopulationVariance)
-CqlArithmeticFunctionsTest.Divide.Divide1Q1                     Wrong answer (by a LOT)
 CqlArithmeticFunctionsTest.MinValue.DecimalMinValue             Wrong answer (-1e+29 vs -1e+28)
 CqlArithmeticFunctionsTest.MaxValue.DecimalMaxValue             Wrong answer (1e+29 vs 1e+28)
 CqlArithmeticFunctionsTest.Multiply.Multiply1CMBy2CM            Wrong answer (.0002 m^2 vs 2 cm^2 - answer should be in terms of smallest unit)
