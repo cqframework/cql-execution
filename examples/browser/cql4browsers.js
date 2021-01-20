@@ -635,7 +635,7 @@ var _require2 = require('../util/util'),
 
 var luxon = require('luxon'); // It's easiest and most performant to organize formats by length of the supported strings.
 // This way we can test strings only against the formats that have a chance of working.
-// NOTE: Formats use date-fns formats, documented here: https://date-fns.org/v2.16.1/docs/parse
+// NOTE: Formats use Luxon formats, documented here: https://moment.github.io/luxon/docs/manual/parsing.html#table-of-tokens
 
 
 var LENGTH_TO_DATE_FORMAT_MAP = function () {
