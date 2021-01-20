@@ -126,12 +126,13 @@ class TruncatedDivide extends Expression {
       return null;
     }
 
-    const quotient = Math.floor(args.reduce((x, y) => x / y));
+    const quotient = args.reduce((x, y) => x / y);
+    const truncatedQuotient = quotient >= 0 ? Math.floor(quotient) : Math.ceil(quotient);
 
-    if (MathUtil.overflowsOrUnderflows(quotient)) {
+    if (MathUtil.overflowsOrUnderflows(truncatedQuotient)) {
       return null;
     }
-    return quotient;
+    return truncatedQuotient;
   }
 }
 
@@ -196,10 +197,7 @@ class Truncate extends Expression {
       return null;
     }
 
-    if (arg >= 0) {
-      return Math.floor(arg);
-    }
-    return Math.ceil(arg);
+    return arg >= 0 ? Math.floor(arg) : Math.ceil(arg);
   }
 }
 class Abs extends Expression {

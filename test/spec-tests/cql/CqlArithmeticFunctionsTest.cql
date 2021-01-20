@@ -800,33 +800,25 @@ define "Truncated Divide": Tuple{
     output: -2
   },
   "TruncatedDivideNeg10By3": Tuple{
-    skipped: 'Wrong answer (-4 vs -3)'
-    /*
     expression: -10 div 3,
     output: -3
-    */  },
+  },
   "TruncatedDivideNeg10d1By3D1": Tuple{
-    skipped: 'Wrong answer (-4 vs -3)'
-    /*
     expression: -10.1 div 3.1,
     output: -3.0
-    */  },
+  },
   "TruncatedDivide2ByNeg1": Tuple{
     expression: 2 div -1,
     output: -2
   },
   "TruncatedDivide10ByNeg3": Tuple{
-    skipped: 'Wrong answer (-4 vs -3)'
-    /*
     expression: 10 div -3,
     output: -3
-    */  },
+  },
   "TruncatedDivide10d1ByNeg3D1": Tuple{
-    skipped: 'Wrong answer (-4 vs -3)'
-    /*
     expression: 10.1 div -3.1,
     output: -3.0
-    */  },
+  },
   "TruncatedDivide10By5D": Tuple{
     expression: 10 div 5.0,
     output: 2.0

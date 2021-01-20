@@ -4800,15 +4800,16 @@ var TruncatedDivide = /*#__PURE__*/function (_Expression5) {
         return null;
       }
 
-      var quotient = Math.floor(args.reduce(function (x, y) {
+      var quotient = args.reduce(function (x, y) {
         return x / y;
-      }));
+      });
+      var truncatedQuotient = quotient >= 0 ? Math.floor(quotient) : Math.ceil(quotient);
 
-      if (MathUtil.overflowsOrUnderflows(quotient)) {
+      if (MathUtil.overflowsOrUnderflows(truncatedQuotient)) {
         return null;
       }
 
-      return quotient;
+      return truncatedQuotient;
     }
   }]);
 
@@ -4926,11 +4927,7 @@ var Truncate = /*#__PURE__*/function (_Expression9) {
         return null;
       }
 
-      if (arg >= 0) {
-        return Math.floor(arg);
-      }
-
-      return Math.ceil(arg);
+      return arg >= 0 ? Math.floor(arg) : Math.ceil(arg);
     }
   }]);
 
