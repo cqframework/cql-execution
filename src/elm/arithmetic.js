@@ -126,12 +126,13 @@ class TruncatedDivide extends Expression {
       return null;
     }
 
-    const quotient = Math.floor(args.reduce((x, y) => x / y));
+    const quotient = args.reduce((x, y) => x / y);
+    const truncatedQuotient = quotient >= 0 ? Math.floor(quotient) : Math.ceil(quotient);
 
-    if (MathUtil.overflowsOrUnderflows(quotient)) {
+    if (MathUtil.overflowsOrUnderflows(truncatedQuotient)) {
       return null;
     }
-    return quotient;
+    return truncatedQuotient;
   }
 }
 
@@ -146,7 +147,9 @@ class Modulo extends Expression {
       return null;
     }
 
-    return args.reduce((x, y) => x % y);
+    const modulo = args.reduce((x, y) => x % y);
+
+    return MathUtil.decimalOrNull(modulo);
   }
 }
 
@@ -180,8 +183,20 @@ class Floor extends Expression {
   }
 }
 
-class Truncate extends Floor {}
+class Truncate extends Expression {
+  constructor(json) {
+    super(json);
+  }
 
+  exec(ctx) {
+    const arg = this.execArgs(ctx);
+    if (arg == null) {
+      return null;
+    }
+
+    return arg >= 0 ? Math.floor(arg) : Math.ceil(arg);
+  }
+}
 class Abs extends Expression {
   constructor(json) {
     super(json);
@@ -244,7 +259,9 @@ class Ln extends Expression {
       return null;
     }
 
-    return Math.log(arg);
+    const ln = Math.log(arg);
+
+    return MathUtil.decimalOrNull(ln);
   }
 }
 
@@ -279,7 +296,9 @@ class Log extends Expression {
       return null;
     }
 
-    return args.reduce((x, y) => Math.log(x) / Math.log(y));
+    const log = args.reduce((x, y) => Math.log(x) / Math.log(y));
+
+    return MathUtil.decimalOrNull(log);
   }
 }
 

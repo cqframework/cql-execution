@@ -270,6 +270,10 @@ function decimalAdjust(type, value, exp) {
   return +(value[0] + 'e' + v);
 }
 
+function decimalOrNull(value) {
+  return isValidDecimal(value) ? value : null;
+}
+
 module.exports = {
   MAX_INT_VALUE,
   MIN_INT_VALUE,
@@ -291,5 +295,6 @@ module.exports = {
   predecessor,
   maxValueForInstance,
   minValueForInstance,
-  decimalAdjust
+  decimalAdjust,
+  decimalOrNull
 };

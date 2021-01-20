@@ -109,11 +109,9 @@ define "Divide": Tuple{
     output: 3.33333333
   },
   "Divide1Q1": Tuple{
-    skipped: 'Wrong answer (by a LOT)'
-    /*
     expression: 1'g/cm3' / 1.0,
     output: 1.0'g/cm3'
-    */  },
+  },
   "Divide1Q1Q": Tuple{
     expression: 1'g/cm3' / 1'g/cm3',
     output: 1.0'1'
@@ -235,11 +233,9 @@ define "Log": Tuple{
     output: null
   },
   "Log1Base1": Tuple{
-    skipped: 'Wrong answer (NaN vs null)'
-    /*
     expression: Log(1, 1),
     output: null
-    */  },
+  },
   "Log1Base2": Tuple{
     expression: Log(1, 2),
     output: 0.0
@@ -303,11 +299,9 @@ define "Ln": Tuple{
     output: 0.0
   },
   "LnNeg1": Tuple{
-    skipped: 'Wrong answer (NaN vs null)'
-    /*
     expression: Ln(-1),
     output: null
-    */  },
+  },
   "Ln1000": Tuple{
     expression: Ln(1000),
     output: 6.907755278982136815102421678602695465087890625
@@ -374,11 +368,9 @@ define "Modulo": Tuple{
     output: null
   },
   "Modulo0By0": Tuple{
-    skipped: 'Wrong answer (NaN vs null)'
-    /*
     expression: 0 mod 0,
     output: null
-    */  },
+  },
   "Modulo4By2": Tuple{
     expression: 4 mod 2,
     output: 0
@@ -763,17 +755,13 @@ define "Truncate": Tuple{
     output: -1
   },
   "TruncateNeg1D1": Tuple{
-    skipped: 'Wrong answer (-2 vs -1)'
-    /*
     expression: Truncate(-1.1),
     output: -1
-    */  },
+  },
   "TruncateNeg1D9": Tuple{
-    skipped: 'Wrong answer (-2 vs -1)'
-    /*
     expression: Truncate(-1.9),
     output: -1
-    */  }
+  }
 }
 
 define "Truncated Divide": Tuple{
@@ -810,33 +798,25 @@ define "Truncated Divide": Tuple{
     output: -2
   },
   "TruncatedDivideNeg10By3": Tuple{
-    skipped: 'Wrong answer (-4 vs -3)'
-    /*
     expression: -10 div 3,
     output: -3
-    */  },
+  },
   "TruncatedDivideNeg10d1By3D1": Tuple{
-    skipped: 'Wrong answer (-4 vs -3)'
-    /*
     expression: -10.1 div 3.1,
     output: -3.0
-    */  },
+  },
   "TruncatedDivide2ByNeg1": Tuple{
     expression: 2 div -1,
     output: -2
   },
   "TruncatedDivide10ByNeg3": Tuple{
-    skipped: 'Wrong answer (-4 vs -3)'
-    /*
     expression: 10 div -3,
     output: -3
-    */  },
+  },
   "TruncatedDivide10d1ByNeg3D1": Tuple{
-    skipped: 'Wrong answer (-4 vs -3)'
-    /*
     expression: 10.1 div -3.1,
     output: -3.0
-    */  },
+  },
   "TruncatedDivide10By5D": Tuple{
     expression: 10 div 5.0,
     output: 2.0

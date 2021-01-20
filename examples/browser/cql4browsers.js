@@ -3187,30 +3187,44 @@ var Quantity = /*#__PURE__*/function () {
     key: "multiplyDivide",
     value: function multiplyDivide(other, operator) {
       if (other != null && other.isQuantity) {
-        var a = this.unit != null ? this : new Quantity(this.value, '1');
-        var b = other.unit != null ? other : new Quantity(other.value, '1');
-        var can_val = a.to_ucum();
-        var other_can_value = b.to_ucum();
-        var ucum_value = ucum_multiply(can_val, [[operator, other_can_value]]);
+        if (other.unit === '1' || other.unit === '' || other.unit == null) {
+          var value = operator === '/' ? this.value / other.value : this.value * other.value;
 
-        if (overflowsOrUnderflows(ucum_value.value)) {
-          return null;
-        }
+          if (overflowsOrUnderflows(value)) {
+            return null;
+          }
 
-        try {
-          return new Quantity(ucum_value.value, units_to_string(ucum_value.units));
-        } catch (e) {
-          return null;
+          try {
+            return new Quantity(decimalAdjust('round', value, -8), coalesceToOne(this.unit));
+          } catch (e) {
+            return null;
+          }
+        } else {
+          var a = this.unit != null ? this : new Quantity(this.value, '1');
+          var b = other.unit != null ? other : new Quantity(other.value, '1');
+          var can_val = a.to_ucum();
+          var other_can_value = b.to_ucum();
+          var ucum_value = ucum_multiply(can_val, [[operator, other_can_value]]);
+
+          if (overflowsOrUnderflows(ucum_value.value)) {
+            return null;
+          }
+
+          try {
+            return new Quantity(ucum_value.value, units_to_string(ucum_value.units));
+          } catch (e) {
+            return null;
+          }
         }
       } else {
-        var value = operator === '/' ? this.value / other : this.value * other;
+        var _value = operator === '/' ? this.value / other : this.value * other;
 
-        if (overflowsOrUnderflows(value)) {
+        if (overflowsOrUnderflows(_value)) {
           return null;
         }
 
         try {
-          return new Quantity(decimalAdjust('round', value, -8), coalesceToOne(this.unit));
+          return new Quantity(decimalAdjust('round', _value, -8), coalesceToOne(this.unit));
         } catch (e) {
           return null;
         }
@@ -4295,8 +4309,8 @@ var StdDev = /*#__PURE__*/function (_AggregateExpression8) {
         _iterator4.f();
       }
 
-      var std_var = 1 / list.length * sumOfSquares;
-      var pop_var = 1 / (list.length - 1) * sumOfSquares;
+      var std_var = 1 / (list.length - 1) * sumOfSquares;
+      var pop_var = 1 / list.length * sumOfSquares;
       var std_dev = Math.sqrt(std_var);
       var pop_dev = Math.sqrt(pop_var);
       return {
@@ -4800,15 +4814,16 @@ var TruncatedDivide = /*#__PURE__*/function (_Expression5) {
         return null;
       }
 
-      var quotient = Math.floor(args.reduce(function (x, y) {
+      var quotient = args.reduce(function (x, y) {
         return x / y;
-      }));
+      });
+      var truncatedQuotient = quotient >= 0 ? Math.floor(quotient) : Math.ceil(quotient);
 
-      if (MathUtil.overflowsOrUnderflows(quotient)) {
+      if (MathUtil.overflowsOrUnderflows(truncatedQuotient)) {
         return null;
       }
 
-      return quotient;
+      return truncatedQuotient;
     }
   }]);
 
@@ -4837,9 +4852,10 @@ var Modulo = /*#__PURE__*/function (_Expression6) {
         return null;
       }
 
-      return args.reduce(function (x, y) {
+      var modulo = args.reduce(function (x, y) {
         return x % y;
       });
+      return MathUtil.decimalOrNull(modulo);
     }
   }]);
 
@@ -4900,22 +4916,35 @@ var Floor = /*#__PURE__*/function (_Expression8) {
   return Floor;
 }(Expression);
 
-var Truncate = /*#__PURE__*/function (_Floor) {
-  _inherits(Truncate, _Floor);
+var Truncate = /*#__PURE__*/function (_Expression9) {
+  _inherits(Truncate, _Expression9);
 
   var _super9 = _createSuper(Truncate);
 
-  function Truncate() {
+  function Truncate(json) {
     _classCallCheck(this, Truncate);
 
-    return _super9.apply(this, arguments);
+    return _super9.call(this, json);
   }
 
-  return Truncate;
-}(Floor);
+  _createClass(Truncate, [{
+    key: "exec",
+    value: function exec(ctx) {
+      var arg = this.execArgs(ctx);
 
-var Abs = /*#__PURE__*/function (_Expression9) {
-  _inherits(Abs, _Expression9);
+      if (arg == null) {
+        return null;
+      }
+
+      return arg >= 0 ? Math.floor(arg) : Math.ceil(arg);
+    }
+  }]);
+
+  return Truncate;
+}(Expression);
+
+var Abs = /*#__PURE__*/function (_Expression10) {
+  _inherits(Abs, _Expression10);
 
   var _super10 = _createSuper(Abs);
 
@@ -4943,8 +4972,8 @@ var Abs = /*#__PURE__*/function (_Expression9) {
   return Abs;
 }(Expression);
 
-var Negate = /*#__PURE__*/function (_Expression10) {
-  _inherits(Negate, _Expression10);
+var Negate = /*#__PURE__*/function (_Expression11) {
+  _inherits(Negate, _Expression11);
 
   var _super11 = _createSuper(Negate);
 
@@ -4972,8 +5001,8 @@ var Negate = /*#__PURE__*/function (_Expression10) {
   return Negate;
 }(Expression);
 
-var Round = /*#__PURE__*/function (_Expression11) {
-  _inherits(Round, _Expression11);
+var Round = /*#__PURE__*/function (_Expression12) {
+  _inherits(Round, _Expression12);
 
   var _super12 = _createSuper(Round);
 
@@ -5004,8 +5033,8 @@ var Round = /*#__PURE__*/function (_Expression11) {
   return Round;
 }(Expression);
 
-var Ln = /*#__PURE__*/function (_Expression12) {
-  _inherits(Ln, _Expression12);
+var Ln = /*#__PURE__*/function (_Expression13) {
+  _inherits(Ln, _Expression13);
 
   var _super13 = _createSuper(Ln);
 
@@ -5024,15 +5053,16 @@ var Ln = /*#__PURE__*/function (_Expression12) {
         return null;
       }
 
-      return Math.log(arg);
+      var ln = Math.log(arg);
+      return MathUtil.decimalOrNull(ln);
     }
   }]);
 
   return Ln;
 }(Expression);
 
-var Exp = /*#__PURE__*/function (_Expression13) {
-  _inherits(Exp, _Expression13);
+var Exp = /*#__PURE__*/function (_Expression14) {
+  _inherits(Exp, _Expression14);
 
   var _super14 = _createSuper(Exp);
 
@@ -5064,8 +5094,8 @@ var Exp = /*#__PURE__*/function (_Expression13) {
   return Exp;
 }(Expression);
 
-var Log = /*#__PURE__*/function (_Expression14) {
-  _inherits(Log, _Expression14);
+var Log = /*#__PURE__*/function (_Expression15) {
+  _inherits(Log, _Expression15);
 
   var _super15 = _createSuper(Log);
 
@@ -5086,17 +5116,18 @@ var Log = /*#__PURE__*/function (_Expression14) {
         return null;
       }
 
-      return args.reduce(function (x, y) {
+      var log = args.reduce(function (x, y) {
         return Math.log(x) / Math.log(y);
       });
+      return MathUtil.decimalOrNull(log);
     }
   }]);
 
   return Log;
 }(Expression);
 
-var Power = /*#__PURE__*/function (_Expression15) {
-  _inherits(Power, _Expression15);
+var Power = /*#__PURE__*/function (_Expression16) {
+  _inherits(Power, _Expression16);
 
   var _super16 = _createSuper(Power);
 
@@ -5132,8 +5163,8 @@ var Power = /*#__PURE__*/function (_Expression15) {
   return Power;
 }(Expression);
 
-var MinValue = /*#__PURE__*/function (_Expression16) {
-  _inherits(MinValue, _Expression16);
+var MinValue = /*#__PURE__*/function (_Expression17) {
+  _inherits(MinValue, _Expression17);
 
   var _super17 = _createSuper(MinValue);
 
@@ -5174,8 +5205,8 @@ MinValue.MIN_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MIN_DATETIM
 MinValue.MIN_VALUES['{urn:hl7-org:elm-types:r1}Date'] = MathUtil.MIN_DATE_VALUE;
 MinValue.MIN_VALUES['{urn:hl7-org:elm-types:r1}Time'] = MathUtil.MIN_TIME_VALUE;
 
-var MaxValue = /*#__PURE__*/function (_Expression17) {
-  _inherits(MaxValue, _Expression17);
+var MaxValue = /*#__PURE__*/function (_Expression18) {
+  _inherits(MaxValue, _Expression18);
 
   var _super18 = _createSuper(MaxValue);
 
@@ -5216,8 +5247,8 @@ MaxValue.MAX_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MAX_DATETIM
 MaxValue.MAX_VALUES['{urn:hl7-org:elm-types:r1}Date'] = MathUtil.MAX_DATE_VALUE;
 MaxValue.MAX_VALUES['{urn:hl7-org:elm-types:r1}Time'] = MathUtil.MAX_TIME_VALUE;
 
-var Successor = /*#__PURE__*/function (_Expression18) {
-  _inherits(Successor, _Expression18);
+var Successor = /*#__PURE__*/function (_Expression19) {
+  _inherits(Successor, _Expression19);
 
   var _super19 = _createSuper(Successor);
 
@@ -5259,8 +5290,8 @@ var Successor = /*#__PURE__*/function (_Expression18) {
   return Successor;
 }(Expression);
 
-var Predecessor = /*#__PURE__*/function (_Expression19) {
-  _inherits(Predecessor, _Expression19);
+var Predecessor = /*#__PURE__*/function (_Expression20) {
+  _inherits(Predecessor, _Expression20);
 
   var _super20 = _createSuper(Predecessor);
 
@@ -14422,6 +14453,10 @@ function decimalAdjust(type, value, exp) {
   return +(value[0] + 'e' + v);
 }
 
+function decimalOrNull(value) {
+  return isValidDecimal(value) ? value : null;
+}
+
 module.exports = {
   MAX_INT_VALUE: MAX_INT_VALUE,
   MIN_INT_VALUE: MIN_INT_VALUE,
@@ -14443,7 +14478,8 @@ module.exports = {
   predecessor: predecessor,
   maxValueForInstance: maxValueForInstance,
   minValueForInstance: minValueForInstance,
-  decimalAdjust: decimalAdjust
+  decimalAdjust: decimalAdjust,
+  decimalOrNull: decimalOrNull
 };
 },{"../datatypes/datetime":7,"../datatypes/exception":8,"../datatypes/uncertainty":13}],47:[function(require,module,exports){
 "use strict";
