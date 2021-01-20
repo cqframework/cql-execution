@@ -335,13 +335,13 @@ describe('PopulationVariance', () => {
     setup(this, data);
   });
   it('should be able to find PopulationVariance of a list ', function () {
-    this.v.exec(this.ctx).should.equal(2.5);
+    this.v.exec(this.ctx).should.equal(2);
   });
   it('should be able to find PopulationVariance of a list of like quantities', function () {
-    validateQuantity(this.v_q.exec(this.ctx), 2.5, 'ml');
+    validateQuantity(this.v_q.exec(this.ctx), 2, 'ml');
   });
   it('should be able to find PopulationVariance of a list of related quantities', function () {
-    validateQuantity(this.q_diff_units.exec(this.ctx), 2.5, 'ml');
+    validateQuantity(this.q_diff_units.exec(this.ctx), 2, 'ml');
   });
   it('should be null if some are numbers and some are quantities', function () {
     should(this.numbersAndQuantities.exec(this.ctx)).be.null();
@@ -356,13 +356,13 @@ describe('Variance', () => {
     setup(this, data);
   });
   it('should be able to find Variance of a list ', function () {
-    this.v.exec(this.ctx).should.equal(2);
+    this.v.exec(this.ctx).should.equal(2.5);
   });
   it('should be able to find Variance of a list of matched quantities', function () {
-    validateQuantity(this.v_q.exec(this.ctx), 2, 'ml');
+    validateQuantity(this.v_q.exec(this.ctx), 2.5, 'ml');
   });
   it('should be able to find Variance of a list of related quantities', function () {
-    validateQuantity(this.q_diff_units.exec(this.ctx), 2, 'ml');
+    validateQuantity(this.q_diff_units.exec(this.ctx), 2.5, 'ml');
   });
   it('should be null if some are numbers and some are quantities', function () {
     should(this.numbersAndQuantities.exec(this.ctx)).be.null();
@@ -377,13 +377,13 @@ describe('StdDev', () => {
     setup(this, data);
   });
   it('should be able to find Standard Dev of a list ', function () {
-    this.std.exec(this.ctx).should.equal(1.4142135623730951);
+    this.std.exec(this.ctx).should.equal(1.5811388300841898);
   });
   it('should be able to find Standard Dev of a list of like quantities', function () {
-    validateQuantity(this.std_q.exec(this.ctx), 1.4142135623730951, 'ml');
+    validateQuantity(this.std_q.exec(this.ctx), 1.5811388300841898, 'ml');
   });
   it('should be able to find Standard Dev of a list of related quantities', function () {
-    validateQuantity(this.q_diff_units.exec(this.ctx), 1.4142135623730951, 'ml');
+    validateQuantity(this.q_diff_units.exec(this.ctx), 1.5811388300841898, 'ml');
   });
   it('should be null if some are numbers and some are quantities', function () {
     should(this.numbersAndQuantities.exec(this.ctx)).be.null();
@@ -398,13 +398,13 @@ describe('PopulationStdDev', () => {
     setup(this, data);
   });
   it('should be able to find Population Standard Dev of a list ', function () {
-    this.dev.exec(this.ctx).should.equal(1.5811388300841898);
+    this.dev.exec(this.ctx).should.equal(1.4142135623730951);
   });
   it('should be able to find Population Standard Dev of a list of quantities', function () {
-    validateQuantity(this.dev_q.exec(this.ctx), 1.5811388300841898, 'ml');
+    validateQuantity(this.dev_q.exec(this.ctx), 1.4142135623730951, 'ml');
   });
   it('should be able to find Population Standard Dev of a list of related quantities', function () {
-    validateQuantity(this.q_diff_units.exec(this.ctx), 1.5811388300841898, 'ml');
+    validateQuantity(this.q_diff_units.exec(this.ctx), 1.4142135623730951, 'ml');
   });
   it('should be null if some are numbers and some are quantities', function () {
     should(this.numbersAndQuantities.exec(this.ctx)).be.null();

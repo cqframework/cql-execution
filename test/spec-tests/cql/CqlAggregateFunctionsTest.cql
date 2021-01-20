@@ -166,29 +166,23 @@ define "Mode": Tuple{
 
 define "PopulationStdDev": Tuple{
   "PopStdDevTest1": Tuple{
-    skipped: 'Wrong answer (swapped w/ StdDev)'
-    /*
     expression: PopulationStdDev({ 1.0, 2.0, 3.0, 4.0, 5.0 }),
     output: 1.41421356
-    */  }
+  }
 }
 
 define "PopulationVariance": Tuple{
   "PopVarianceTest1": Tuple{
-    skipped: 'Wrong answer (swapped w/ Variance)'
-    /*
     expression: PopulationVariance({ 1.0, 2.0, 3.0, 4.0, 5.0 }),
     output: 2.0
-    */  }
+  }
 }
 
 define "StdDev": Tuple{
   "StdDevTest1": Tuple{
-    skipped: 'Wrong answer (swapped w/ PopulationStdDev)'
-    /*
     expression: StdDev({ 1.0, 2.0, 3.0, 4.0, 5.0 }),
     output: 1.58113883
-    */  }
+  }
 }
 
 define "Sum": Tuple{
@@ -204,9 +198,7 @@ define "Sum": Tuple{
 
 define "Variance": Tuple{
   "VarianceTest1": Tuple{
-    skipped: 'Wrong answer (swapped w/ PopulationVariance)'
-    /*
     expression: Variance({ 1.0, 2.0, 3.0, 4.0, 5.0 }),
     output: 2.5
-    */  }
+  }
 }

@@ -4309,8 +4309,8 @@ var StdDev = /*#__PURE__*/function (_AggregateExpression8) {
         _iterator4.f();
       }
 
-      var std_var = 1 / list.length * sumOfSquares;
-      var pop_var = 1 / (list.length - 1) * sumOfSquares;
+      var std_var = 1 / (list.length - 1) * sumOfSquares;
+      var pop_var = 1 / list.length * sumOfSquares;
       var std_dev = Math.sqrt(std_var);
       var pop_dev = Math.sqrt(pop_var);
       return {

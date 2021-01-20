@@ -292,8 +292,8 @@ class StdDev extends AggregateExpression {
       sumOfSquares += Math.pow(sq - mean, 2);
     }
 
-    const std_var = (1 / list.length) * sumOfSquares;
-    const pop_var = (1 / (list.length - 1)) * sumOfSquares;
+    const std_var = (1 / (list.length - 1)) * sumOfSquares;
+    const pop_var = (1 / list.length) * sumOfSquares;
     const std_dev = Math.sqrt(std_var);
     const pop_dev = Math.sqrt(pop_var);
     return {
