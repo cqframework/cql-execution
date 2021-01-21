@@ -5948,10 +5948,24 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (false vs true)",
+                           "type" : "Equivalent",
+                           "operand" : [ {
+                              "value" : 1,
+                              "unit" : "cm",
+                              "type" : "Quantity"
+                           }, {
+                              "value" : 0.01,
+                              "unit" : "m",
+                              "type" : "Quantity"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
                            "type" : "Literal"
                         }
                      } ]

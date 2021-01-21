@@ -85,6 +85,11 @@ function equivalent(a, b) {
     return codesAreEquivalent(a, b);
   }
 
+  // Quantity equivalence is the same as Quantity equality
+  if (a.isQuantity) {
+    return a.equals(b);
+  }
+
   // Use overloaded 'equivalent' function if it is available
   if (typeof a.equivalent === 'function') {
     return a.equivalent(b);

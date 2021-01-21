@@ -624,11 +624,9 @@ define "Equivalent": Tuple{
     output: true
   },
   "EquivEqCM1M01": Tuple{
-    skipped: 'Wrong answer (false vs true)'
-    /*
     expression: 1'cm' ~ 0.01'm',
     output: true
-    */  },
+  },
   "EquivTupleJohnJohn": Tuple{
     expression: Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 1, Name : 'John' },
     output: true

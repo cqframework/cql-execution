@@ -13720,6 +13720,11 @@ function equivalent(a, b) {
 
   if (isCode(a)) {
     return codesAreEquivalent(a, b);
+  } // Quantity equivalence is the same as Quantity equality
+
+
+  if (a.isQuantity) {
+    return a.equals(b);
   } // Use overloaded 'equivalent' function if it is available
 
 
