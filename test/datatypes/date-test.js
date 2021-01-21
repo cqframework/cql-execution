@@ -1,4 +1,5 @@
 const should = require('should');
+const luxon = require('luxon');
 const { jsDate } = require('../../src/util/util');
 const { Date, DateTime } = require('../../src/datatypes/datetime');
 const { Uncertainty } = require('../../src/datatypes/uncertainty');
@@ -63,6 +64,9 @@ describe('Date', () => {
   it('should construct from a javascript date', () =>
     Date.fromJSDate(new jsDate(1999, 1, 16)).should.eql(Date.parse('1999-02-16')));
 
+  it('should construct from a Luxon DateTime', () =>
+    Date.fromLuxonDateTime(luxon.DateTime.local(1999, 2, 16)).should.eql(Date.parse('1999-02-16')));
+
   it('should copy a fully define Date', () => {
     const original = Date.parse('1999-02-16');
     const copy = original.copy();
@@ -89,26 +93,26 @@ describe('Date', () => {
     Date.parse('2000').isImprecise().should.be.true();
   });
 
-  it('should correctly convert to uncertainties with JavaScript dates', () => {
-    const preciseUncertainty = Date.parse('2000-02-25').toUncertainty();
+  it('should correctly convert to Luxon DateTime uncertainties', () => {
+    const preciseUncertainty = Date.parse('2000-02-25').toLuxonUncertainty();
     preciseUncertainty.isPoint().should.be.true();
-    preciseUncertainty.low.should.eql(new jsDate(2000, 1, 25));
-    preciseUncertainty.high.should.eql(new jsDate(2000, 1, 25));
+    preciseUncertainty.low.should.eql(luxon.DateTime.utc(2000, 2, 25));
+    preciseUncertainty.high.should.eql(luxon.DateTime.utc(2000, 2, 25));
 
-    const toMonthLeapYear = Date.parse('2000-02').toUncertainty();
+    const toMonthLeapYear = Date.parse('2000-02').toLuxonUncertainty();
     toMonthLeapYear.isPoint().should.be.false();
-    toMonthLeapYear.low.should.eql(new jsDate(2000, 1, 1));
-    toMonthLeapYear.high.should.eql(new jsDate(2000, 1, 29));
+    toMonthLeapYear.low.should.eql(luxon.DateTime.utc(2000, 2, 1));
+    toMonthLeapYear.high.should.eql(luxon.DateTime.utc(2000, 2, 29));
 
-    const toMonthNonLeapYear = Date.parse('1999-02').toUncertainty();
+    const toMonthNonLeapYear = Date.parse('1999-02').toLuxonUncertainty();
     toMonthNonLeapYear.isPoint().should.be.false();
-    toMonthNonLeapYear.low.should.eql(new jsDate(1999, 1, 1));
-    toMonthNonLeapYear.high.should.eql(new jsDate(1999, 1, 28));
+    toMonthNonLeapYear.low.should.eql(luxon.DateTime.utc(1999, 2, 1));
+    toMonthNonLeapYear.high.should.eql(luxon.DateTime.utc(1999, 2, 28));
 
-    const toYear = Date.parse('2000').toUncertainty();
+    const toYear = Date.parse('2000').toLuxonUncertainty();
     toYear.isPoint().should.be.false();
-    toYear.low.should.eql(new jsDate(2000, 0, 1));
-    toYear.high.should.eql(new jsDate(2000, 11, 31));
+    toYear.low.should.eql(luxon.DateTime.utc(2000, 1, 1));
+    toYear.high.should.eql(luxon.DateTime.utc(2000, 12, 31));
   });
 
   it('should convert to javascript Date', () =>
@@ -116,6 +120,12 @@ describe('Date', () => {
 
   it('should floor unknown values when it converts to javascript Date', () =>
     Date.parse('2012').toJSDate().should.eql(new jsDate(2012, 0, 1)));
+
+  it('should convert to Luxon DateTime', () =>
+    Date.parse('2012-02-25').toLuxonDateTime().should.eql(luxon.DateTime.utc(2012, 2, 25)));
+
+  it('should floor unknown values when it converts to Luxon DateTime', () =>
+    Date.parse('2012').toLuxonDateTime().should.eql(luxon.DateTime.utc(2012, 1, 1)));
 });
 
 describe('Date.add', () => {

@@ -1,4 +1,5 @@
 const should = require('should');
+const luxon = require('luxon');
 const { DateTime } = require('../../src/datatypes/datetime');
 const { Uncertainty } = require('../../src/datatypes/uncertainty');
 
@@ -7,6 +8,22 @@ const tzDate = function (y, mo, d, h, mi, s, ms, offset) {
     offset = (new Date().getTimezoneOffset() / 60) * -1;
   }
   return new Date(Date.UTC(y, mo, d, h, mi, s, ms) - offset * 60 * 60 * 1000);
+};
+
+const luxonTzDate = function (y, mo, d, h, mi, s, ms, offset) {
+  if (offset == null) {
+    offset = new Date().getTimezoneOffset() * -1;
+  }
+  return luxon.DateTime.fromObject({
+    year: y,
+    month: mo,
+    day: d,
+    hour: h,
+    minute: mi,
+    second: s,
+    millisecond: ms,
+    zone: luxon.FixedOffsetZone.instance(offset)
+  });
 };
 
 describe('DateTime', () => {
@@ -175,6 +192,11 @@ describe('DateTime', () => {
     );
   });
 
+  it('should construct from a Luxon DateTime', () =>
+    DateTime.fromLuxonDateTime(
+      luxon.DateTime.fromISO('1999-02-16T13:56:24.123+01:00', { setZone: true })
+    ).should.eql(DateTime.parse('1999-02-16T13:56:24.123+01:00')));
+
   it('should copy a fully define DateTime', () => {
     const original = DateTime.parse('1999-02-16T13:56:24.123+04:30');
     const copy = original.copy();
@@ -219,45 +241,45 @@ describe('DateTime', () => {
   });
 
   it('should correctly convert to uncertainties with JavaScript dates', () => {
-    const preciseUncertainty = DateTime.parse('2000-02-25T12:15:43.123').toUncertainty();
+    const preciseUncertainty = DateTime.parse('2000-02-25T12:15:43.123').toLuxonUncertainty();
     preciseUncertainty.isPoint().should.be.true();
-    preciseUncertainty.low.should.eql(tzDate(2000, 1, 25, 12, 15, 43, 123));
-    preciseUncertainty.high.should.eql(tzDate(2000, 1, 25, 12, 15, 43, 123));
+    preciseUncertainty.low.should.eql(luxonTzDate(2000, 2, 25, 12, 15, 43, 123));
+    preciseUncertainty.high.should.eql(luxonTzDate(2000, 2, 25, 12, 15, 43, 123));
 
-    const toSecond = DateTime.parse('2000-02-25T12:15:43').toUncertainty();
+    const toSecond = DateTime.parse('2000-02-25T12:15:43').toLuxonUncertainty();
     toSecond.isPoint().should.be.false();
-    toSecond.low.should.eql(tzDate(2000, 1, 25, 12, 15, 43, 0));
-    toSecond.high.should.eql(tzDate(2000, 1, 25, 12, 15, 43, 999));
+    toSecond.low.should.eql(luxonTzDate(2000, 2, 25, 12, 15, 43, 0));
+    toSecond.high.should.eql(luxonTzDate(2000, 2, 25, 12, 15, 43, 999));
 
-    const toMinute = DateTime.parse('2000-02-25T12:15').toUncertainty();
+    const toMinute = DateTime.parse('2000-02-25T12:15').toLuxonUncertainty();
     toMinute.isPoint().should.be.false();
-    toMinute.low.should.eql(tzDate(2000, 1, 25, 12, 15, 0, 0));
-    toMinute.high.should.eql(tzDate(2000, 1, 25, 12, 15, 59, 999));
+    toMinute.low.should.eql(luxonTzDate(2000, 2, 25, 12, 15, 0, 0));
+    toMinute.high.should.eql(luxonTzDate(2000, 2, 25, 12, 15, 59, 999));
 
-    const toHour = DateTime.parse('2000-02-25T12').toUncertainty();
+    const toHour = DateTime.parse('2000-02-25T12').toLuxonUncertainty();
     toHour.isPoint().should.be.false();
-    toHour.low.should.eql(tzDate(2000, 1, 25, 12, 0, 0, 0));
-    toHour.high.should.eql(tzDate(2000, 1, 25, 12, 59, 59, 999));
+    toHour.low.should.eql(luxonTzDate(2000, 2, 25, 12, 0, 0, 0));
+    toHour.high.should.eql(luxonTzDate(2000, 2, 25, 12, 59, 59, 999));
 
-    const toDay = DateTime.parse('2000-02-25').toUncertainty();
+    const toDay = DateTime.parse('2000-02-25').toLuxonUncertainty();
     toDay.isPoint().should.be.false();
-    toDay.low.should.eql(tzDate(2000, 1, 25, 0, 0, 0, 0));
-    toDay.high.should.eql(tzDate(2000, 1, 25, 23, 59, 59, 999));
+    toDay.low.should.eql(luxonTzDate(2000, 2, 25, 0, 0, 0, 0));
+    toDay.high.should.eql(luxonTzDate(2000, 2, 25, 23, 59, 59, 999));
 
-    const toMonthLeapYear = DateTime.parse('2000-02').toUncertainty();
+    const toMonthLeapYear = DateTime.parse('2000-02').toLuxonUncertainty();
     toMonthLeapYear.isPoint().should.be.false();
-    toMonthLeapYear.low.should.eql(tzDate(2000, 1, 1, 0, 0, 0, 0));
-    toMonthLeapYear.high.should.eql(tzDate(2000, 1, 29, 23, 59, 59, 999));
+    toMonthLeapYear.low.should.eql(luxonTzDate(2000, 2, 1, 0, 0, 0, 0));
+    toMonthLeapYear.high.should.eql(luxonTzDate(2000, 2, 29, 23, 59, 59, 999));
 
-    const toMonthNonLeapYear = DateTime.parse('1999-02').toUncertainty();
+    const toMonthNonLeapYear = DateTime.parse('1999-02').toLuxonUncertainty();
     toMonthNonLeapYear.isPoint().should.be.false();
-    toMonthNonLeapYear.low.should.eql(tzDate(1999, 1, 1, 0, 0, 0, 0));
-    toMonthNonLeapYear.high.should.eql(tzDate(1999, 1, 28, 23, 59, 59, 999));
+    toMonthNonLeapYear.low.should.eql(luxonTzDate(1999, 2, 1, 0, 0, 0, 0));
+    toMonthNonLeapYear.high.should.eql(luxonTzDate(1999, 2, 28, 23, 59, 59, 999));
 
-    const toYear = DateTime.parse('2000').toUncertainty();
+    const toYear = DateTime.parse('2000').toLuxonUncertainty();
     toYear.isPoint().should.be.false();
-    toYear.low.should.eql(tzDate(2000, 0, 1, 0, 0, 0, 0));
-    toYear.high.should.eql(tzDate(2000, 11, 31, 23, 59, 59, 999));
+    toYear.low.should.eql(luxonTzDate(2000, 1, 1, 0, 0, 0, 0));
+    toYear.high.should.eql(luxonTzDate(2000, 12, 31, 23, 59, 59, 999));
   });
 
   it('should convert to javascript Date', () =>
@@ -277,8 +299,40 @@ describe('DateTime', () => {
       .should.eql(new Date('25 Oct 2012 12:55:14 EST'));
   });
 
+  it('should convert to javascript Date ignoring time zone offsets', () => {
+    DateTime.parse('2012-10-25T12:55:14.456+04:30')
+      .toJSDate(true)
+      .should.eql(tzDate(2012, 9, 25, 12, 55, 14, 456));
+    DateTime.parse('2012-10-25T12:55:14.456+00:00')
+      .toJSDate(true)
+      .should.eql(tzDate(2012, 9, 25, 12, 55, 14, 456));
+    DateTime.parse('2012-10-25T12:55:14.0-05')
+      .toJSDate(true)
+      .should.eql(tzDate(2012, 9, 25, 12, 55, 14, 0));
+  });
+
   it('should floor unknown values when it converts to javascript Date', () =>
     DateTime.parse('2012').toJSDate().should.eql(tzDate(2012, 0, 1, 0, 0, 0, 0)));
+
+  it('should convert to Luxon DateTime', () =>
+    DateTime.parse('2012-02-25T12:55:14.456')
+      .toLuxonDateTime()
+      .should.eql(luxonTzDate(2012, 2, 25, 12, 55, 14, 456)));
+
+  it('should convert to Luxon DateTime w/ time zone offsets', () => {
+    DateTime.parse('2012-10-25T12:55:14.456+04:30')
+      .toLuxonDateTime()
+      .should.eql(luxon.DateTime.fromISO('2012-10-25T12:55:14.456+04:30', { setZone: true }));
+    DateTime.parse('2012-10-25T12:55:14.456+00:00')
+      .toLuxonDateTime()
+      .should.eql(luxon.DateTime.fromISO('2012-10-25T12:55:14.456+00:00', { setZone: true }));
+    DateTime.parse('2012-10-25T12:55:14.0-05')
+      .toLuxonDateTime()
+      .should.eql(luxon.DateTime.fromISO('2012-10-25T12:55:14.000-05:00', { setZone: true }));
+  });
+
+  it('should floor unknown values when it converts to Luxon DateTime', () =>
+    DateTime.parse('2012').toLuxonDateTime().should.eql(luxonTzDate(2012, 1, 1, 0, 0, 0, 0)));
 });
 
 describe('DateTime.add', () => {
@@ -302,6 +356,19 @@ describe('DateTime.add', () => {
     simple.add(-1, DateTime.Unit.MINUTE).should.eql(DateTime.parse('2000-06-15T10:19:30.555'));
     simple.add(-1, DateTime.Unit.SECOND).should.eql(DateTime.parse('2000-06-15T10:20:29.555'));
     simple.add(-1, DateTime.Unit.MILLISECOND).should.eql(DateTime.parse('2000-06-15T10:20:30.554'));
+  });
+
+  it('should return the last day of the month for invalid dates', () => {
+    const jan31 = DateTime.parse('2021-01-31T10:20:30.555');
+    jan31.add(1, DateTime.Unit.MONTH).should.eql(DateTime.parse('2021-02-28T10:20:30.555'));
+    const dec31 = DateTime.parse('2020-12-31T10:20:30.555');
+    dec31.add(-1, DateTime.Unit.MONTH).should.eql(DateTime.parse('2020-11-30T10:20:30.555'));
+  });
+
+  it('should return the last day of the month for invalid dates (leap year)', () => {
+    const feb29 = DateTime.parse('2004-02-29T10:20:30.555');
+    feb29.add(1, DateTime.Unit.YEAR).should.eql(DateTime.parse('2005-02-28T10:20:30.555'));
+    feb29.add(-1, DateTime.Unit.YEAR).should.eql(DateTime.parse('2003-02-28T10:20:30.555'));
   });
 
   it('should rollover when you add past a boundary', () => {
@@ -800,9 +867,10 @@ describe('DateTime.differenceBetween', () => {
   it('should handle different timezones', () => {
     const a = DateTime.parse('2001-01-01T00:00:00.0+00:00');
     const b = DateTime.parse('2000-12-31T19:00:00.0-05:00');
-    a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
+    // YEAR, MONTH, DAY should ignore timezone
+    a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(-1));
+    a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(-1));
+    a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(-1));
     a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(0));
     a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(0));
     a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(0));
