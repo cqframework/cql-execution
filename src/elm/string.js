@@ -155,8 +155,7 @@ class Matches extends Expression {
       return null;
     }
 
-    const match = string.match(new RegExp(pattern));
-    return Boolean(match && match.length > 0 && match[0] === string);
+    return new RegExp('^' + pattern + '$').test(string);
   }
 }
 

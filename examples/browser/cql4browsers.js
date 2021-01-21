@@ -11637,8 +11637,7 @@ var Matches = /*#__PURE__*/function (_Expression9) {
         return null;
       }
 
-      var match = string.match(new RegExp(pattern));
-      return Boolean(match && match.length > 0 && match[0] === string);
+      return new RegExp('^' + pattern + '$').test(string);
     }
   }]);
 
