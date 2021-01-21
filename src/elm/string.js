@@ -66,11 +66,10 @@ class SplitOnMatches extends Expression {
   exec(ctx) {
     const stringToSplit = this.stringToSplit.execute(ctx);
     const separatorPattern = this.separatorPattern.execute(ctx);
-    if (stringToSplit == null || separatorPattern == null) {
-      return null;
-    } else {
+    if (stringToSplit && separatorPattern) {
       return stringToSplit.split(new RegExp(separatorPattern));
     }
+    return stringToSplit ? [stringToSplit] : null;
   }
 }
 
