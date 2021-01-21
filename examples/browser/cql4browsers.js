@@ -11481,11 +11481,11 @@ var SplitOnMatches = /*#__PURE__*/function (_Expression4) {
       var stringToSplit = this.stringToSplit.execute(ctx);
       var separatorPattern = this.separatorPattern.execute(ctx);
 
-      if (stringToSplit == null || separatorPattern == null) {
-        return null;
-      } else {
+      if (stringToSplit && separatorPattern) {
         return stringToSplit.split(new RegExp(separatorPattern));
       }
+
+      return stringToSplit ? [stringToSplit] : null;
     }
   }]);
 
