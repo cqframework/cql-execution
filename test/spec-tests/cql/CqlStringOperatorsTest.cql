@@ -177,11 +177,9 @@ define "Matches": Tuple{
     output: true
   },
   "MatchesWordsAndSpacesFalse": Tuple{
-    skipped: 'Wrong answer (true vs false - engine is probably not looking for FULL match)'
-    /*
     expression: Matches('Not all who wander are lost - circa 2017', '[\\w]+'),
     output: false
-    */  },
+  },
   "MatchesNotWords": Tuple{
     expression: Matches('   ', '\\W+'),
     output: true
@@ -256,11 +254,9 @@ define "Split": Tuple{
     output: null
   },
   "SplitABNull": Tuple{
-    skipped: 'Wrong answer (null vs {\'a,b\'})'
-    /*
     expression: Split('a,b', null),
     output: {'a,b'}
-    */  },
+  },
   "SplitABDash": Tuple{
     expression: Split('a,b', '-'),
     output: {'a,b'}

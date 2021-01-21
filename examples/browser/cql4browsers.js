@@ -11448,11 +11448,11 @@ var Split = /*#__PURE__*/function (_Expression3) {
       var stringToSplit = this.stringToSplit.execute(ctx);
       var separator = this.separator.execute(ctx);
 
-      if (stringToSplit == null || separator == null) {
-        return null;
-      } else {
+      if (stringToSplit && separator) {
         return stringToSplit.split(separator);
       }
+
+      return stringToSplit ? [stringToSplit] : null;
     }
   }]);
 
@@ -11481,11 +11481,11 @@ var SplitOnMatches = /*#__PURE__*/function (_Expression4) {
       var stringToSplit = this.stringToSplit.execute(ctx);
       var separatorPattern = this.separatorPattern.execute(ctx);
 
-      if (stringToSplit == null || separatorPattern == null) {
-        return null;
-      } else {
+      if (stringToSplit && separatorPattern) {
         return stringToSplit.split(new RegExp(separatorPattern));
       }
+
+      return stringToSplit ? [stringToSplit] : null;
     }
   }]);
 
@@ -11637,11 +11637,7 @@ var Matches = /*#__PURE__*/function (_Expression9) {
         return null;
       }
 
-      if (string.match(new RegExp(pattern))) {
-        return true;
-      } else {
-        return false;
-      }
+      return new RegExp('^' + pattern + '$').test(string);
     }
   }]);
 

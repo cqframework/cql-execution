@@ -85,9 +85,8 @@ describe('Split', () => {
     should(this.separateNull.exec(this.ctx)).be.null();
   });
 
-  // TODO: Verify this assumption
-  it('should return null when the separator is null', function () {
-    should(this.separateUsingNull.exec(this.ctx)).be.null();
+  it('should return list with original string when the separator is null', function () {
+    this.separateUsingNull.exec(this.ctx).should.eql(['a,b,c']);
   });
 });
 
@@ -112,8 +111,8 @@ describe('SplitOnMatches', () => {
     should(this.splitOnMatchesIsNullFirst.exec(this.ctx)).be.null();
   });
 
-  it('should return null when separatorPattern is null', function () {
-    should(this.splitOnMatchesIsNullSecond.exec(this.ctx)).be.null();
+  it('should return list with original string when separatorPattern is null', function () {
+    this.splitOnMatchesIsNullSecond.exec(this.ctx).should.eql(['12three']);
   });
 
   it('should return null when both parameters are null', function () {
