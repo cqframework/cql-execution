@@ -121,17 +121,13 @@ define "Distinct": Tuple{
     output: {}
   },
   "DistinctNullNullNull": Tuple{
-    skipped: 'Wrong answer ({null, null, null} vs {null})'
-    /*
     expression: distinct { null, null, null},
     output: { null }
-    */  },
+  },
   "DistinctANullANull": Tuple{
-    skipped: 'Wrong answer ({\'a\'\', null, null} vs {\'a\', null})'
-    /*
     expression: distinct { 'a', null, 'a', null},
     output: {'a', null}
-    */  },
+  },
   "Distinct112233": Tuple{
     expression: distinct { 1, 1, 2, 2, 3, 3},
     output: {1,2,3}

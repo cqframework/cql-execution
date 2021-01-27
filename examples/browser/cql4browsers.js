@@ -8690,7 +8690,7 @@ function doDistinct(list) {
       distinct.push(item);
     }
   });
-  return distinct;
+  return removeDuplicateNulls(distinct);
 }
 
 function removeDuplicateNulls(list) {

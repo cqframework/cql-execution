@@ -615,9 +615,9 @@ describe('Distinct', () => {
     this.noDupsTuples.exec(this.ctx).should.eql([{ hello: 'world' }, { hello: 'cleveland' }]);
   });
 
-  it('should preserve duplicate null values in original order', function () {
+  it('should remove duplicate null values', function () {
     // define DuplicateNulls: distinct {null, 1, 2, null, 3, 4, 5, null}
-    this.duplicateNulls.exec(this.ctx).should.eql([null, 1, 2, null, 3, 4, 5, null]);
+    this.duplicateNulls.exec(this.ctx).should.eql([null, 1, 2, 3, 4, 5]);
   });
 });
 
