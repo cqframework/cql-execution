@@ -4281,7 +4281,7 @@ var AllTrue = /*#__PURE__*/function (_AggregateExpression11) {
     key: "exec",
     value: function exec(ctx) {
       var items = this.source.execute(ctx);
-      return allTrue(items);
+      return allTrue(removeNulls(items));
     }
   }]);
 
