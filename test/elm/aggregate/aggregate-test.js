@@ -501,7 +501,7 @@ describe('AllTrue', () => {
 
   it('should be able to calculate all true', function () {
     this.at.exec(this.ctx).should.equal(true);
-    this.atwn.exec(this.ctx).should.equal(false);
+    this.atwn.exec(this.ctx).should.equal(true);
     this.atf.exec(this.ctx).should.equal(false);
     this.atfwn.exec(this.ctx).should.equal(false);
   });

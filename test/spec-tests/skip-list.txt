@@ -21,7 +21,6 @@ CqlTypeOperatorsTest.ToDateTime.ToDateTime5         @2014-01-01T12:05:05.955-01:
 
 # Incorrect answer
 
-CqlAggregateFunctionsTest.AllTrue.AllTrueNullFirst              Wrong answer (null should be ignored)
 CqlAggregateFunctionsTest.Max.MaxTestString                     Wrong answer (just returning first item?)
 CqlAggregateFunctionsTest.Min.MinTestString                     Wrong answer (just returning first item?)
 CqlArithmeticFunctionsTest.MinValue.DecimalMinValue             Wrong answer (-1e+29 vs -1e+28)

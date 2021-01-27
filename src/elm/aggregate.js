@@ -397,7 +397,7 @@ class AllTrue extends AggregateExpression {
 
   exec(ctx) {
     const items = this.source.execute(ctx);
-    return allTrue(items);
+    return allTrue(removeNulls(items));
   }
 }
 

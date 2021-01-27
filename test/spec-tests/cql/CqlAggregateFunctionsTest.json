@@ -201,10 +201,33 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (null should be ignored)",
+                           "type" : "AllTrue",
+                           "source" : {
+                              "type" : "List",
+                              "element" : [ {
+                                 "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "As",
+                                 "operand" : {
+                                    "type" : "Null"
+                                 }
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "value" : "true",
+                                 "type" : "Literal"
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "value" : "true",
+                                 "type" : "Literal"
+                              } ]
+                           }
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
                            "type" : "Literal"
                         }
                      } ]
