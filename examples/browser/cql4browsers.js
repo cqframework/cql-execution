@@ -2114,6 +2114,10 @@ var Interval = /*#__PURE__*/function () {
         return true;
       }
 
+      if (this.low == null && this.high == null) {
+        return false;
+      }
+
       if (item != null && item.isInterval) {
         throw new Error('Argument to contains must be a point');
       }
@@ -9635,8 +9639,12 @@ var In = /*#__PURE__*/function (_Expression8) {
           item = _this$execArgs12[0],
           container = _this$execArgs12[1];
 
-      if (container == null || item == null) {
+      if (item == null) {
         return null;
+      }
+
+      if (container == null) {
+        return false;
       }
 
       var lib = typeIsArray(container) ? LIST : IVL;
@@ -9670,7 +9678,11 @@ var Contains = /*#__PURE__*/function (_Expression9) {
           container = _this$execArgs14[0],
           item = _this$execArgs14[1];
 
-      if (container == null || item == null) {
+      if (container == null) {
+        return false;
+      }
+
+      if (item == null) {
         return null;
       }
 

@@ -360,8 +360,8 @@ describe('In', () => {
     this.tupleIsNotIn.exec(this.ctx).should.be.false();
   });
 
-  it('should return null if list is null', function () {
-    should(this.inNull.exec(this.ctx)).be.null();
+  it('should return false if list is null', function () {
+    this.inNull.exec(this.ctx).should.be.false();
   });
 
   it('should return null if null is in list', function () {
@@ -402,8 +402,8 @@ describe('Contains', () => {
     should(this.nullNotIn.exec(this.ctx)).be.null();
   });
 
-  it('should return null if list is null', function () {
-    should(this.inNull.exec(this.ctx)).be.null();
+  it('should return false if list is null', function () {
+    this.inNull.exec(this.ctx).should.be.false();
   });
 });
 

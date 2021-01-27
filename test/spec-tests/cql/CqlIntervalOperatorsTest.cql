@@ -288,11 +288,9 @@ define "Contains": Tuple{
     output: null
   },
   "TestNullElement1": Tuple{
-    skipped: 'Wrong answer (null vs false)'
-    /*
     expression: null contains 5,
     output: false
-    */  },
+  },
   "TestNullElement2": Tuple{
     expression: Interval[null, 5] contains 10,
     output: false
@@ -515,11 +513,9 @@ define "Except": Tuple{
 
 define "In": Tuple{
   "TestInNull": Tuple{
-    skipped: 'Wrong answer (true vs false)'
-    /*
     expression: 5 in Interval[null, null],
     output: false
-    */  },
+  },
   "IntegerIntervalInTrue": Tuple{
     expression: 5 in Interval[1, 10],
     output: true

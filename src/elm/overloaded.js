@@ -122,8 +122,11 @@ class In extends Expression {
 
   exec(ctx) {
     const [item, container] = this.execArgs(ctx);
-    if (container == null || item == null) {
+    if (item == null) {
       return null;
+    }
+    if (container == null) {
+      return false;
     }
     const lib = typeIsArray(container) ? LIST : IVL;
     return lib.doContains(container, item, this.precision);
@@ -138,7 +141,10 @@ class Contains extends Expression {
 
   exec(ctx) {
     const [container, item] = this.execArgs(ctx);
-    if (container == null || item == null) {
+    if (container == null) {
+      return false;
+    }
+    if (item == null) {
       return null;
     }
     const lib = typeIsArray(container) ? LIST : IVL;

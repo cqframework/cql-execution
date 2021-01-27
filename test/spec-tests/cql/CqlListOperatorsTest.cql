@@ -101,11 +101,9 @@ define "Contains": Tuple{
     output: false
   },
   "ContainsNullLeft": Tuple{
-    skipped: 'Wrong answer (null vs false)'
-    /*
     expression: null contains 'a',
     output: false
-    */  }
+  }
 }
 
 define "Descendents": Tuple{
@@ -327,11 +325,9 @@ define "In": Tuple{
     output: null
   },
   "In1Null": Tuple{
-    skipped: 'Wrong answer (null vs false)'
-    /*
     expression: 1 in null,
     output: false
-    */  },
+  },
   "In1And12": Tuple{
     expression: 1 in { 1, 2 },
     output: true

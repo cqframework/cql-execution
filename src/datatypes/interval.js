@@ -42,6 +42,9 @@ class Interval {
     if (this.highClosed && this.high != null && cmp.equals(this.high, item)) {
       return true;
     }
+    if (this.low == null && this.high == null) {
+      return false;
+    }
     if (item != null && item.isInterval) {
       throw new Error('Argument to contains must be a point');
     }
