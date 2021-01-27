@@ -3670,7 +3670,7 @@ var Count = /*#__PURE__*/function (_AggregateExpression) {
         return removeNulls(items).length;
       }
 
-      return null;
+      return 0;
     }
   }]);
 
