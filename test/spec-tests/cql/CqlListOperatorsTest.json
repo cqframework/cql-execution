@@ -28,9 +28,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 809,
+         "startLine" : 807,
          "startChar" : 17,
-         "endLine" : 809,
+         "endLine" : 807,
          "endChar" : 18,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -39,9 +39,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 813,
+         "startLine" : 811,
          "startChar" : 17,
-         "endLine" : 813,
+         "endLine" : 811,
          "endChar" : 19,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -50,9 +50,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 817,
+         "startLine" : 815,
          "startChar" : 17,
-         "endLine" : 817,
+         "endLine" : 815,
          "endChar" : 19,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -61,9 +61,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 821,
+         "startLine" : 819,
          "startChar" : 17,
-         "endLine" : 821,
+         "endLine" : 819,
          "endChar" : 63,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -72,9 +72,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 825,
+         "startLine" : 823,
          "startChar" : 17,
-         "endLine" : 825,
+         "endLine" : 823,
          "endChar" : 86,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -83,9 +83,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 829,
+         "startLine" : 827,
          "startChar" : 17,
-         "endLine" : 829,
+         "endLine" : 827,
          "endChar" : 50,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -94,9 +94,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 833,
+         "startLine" : 831,
          "startChar" : 17,
-         "endLine" : 833,
+         "endLine" : 831,
          "endChar" : 66,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -7312,10 +7312,29 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (null vs 0)",
+                           "type" : "Length",
+                           "operand" : {
+                              "strict" : false,
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              },
+                              "asTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Any",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           }
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "0",
                            "type" : "Literal"
                         }
                      } ]

@@ -598,11 +598,9 @@ define "Length": Tuple{
     output: 6
   },
   "LengthNullList": Tuple{
-    skipped: 'Wrong answer (null vs 0)'
-    /*
     expression: Length(null as List<Any>),
     output: 0
-    */  }
+  }
 }
 
 define "Equivalent": Tuple{

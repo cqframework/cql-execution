@@ -219,6 +219,8 @@ class Length extends Expression {
     const arg = this.execArgs(ctx);
     if (arg != null) {
       return arg.length;
+    } else if (this.arg.asTypeSpecifier.type === 'ListTypeSpecifier') {
+      return 0;
     } else {
       return null;
     }

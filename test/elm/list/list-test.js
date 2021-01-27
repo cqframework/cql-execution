@@ -710,8 +710,8 @@ describe('Length', () => {
     this.empty.exec(this.ctx).should.equal(0);
   });
 
-  it('should return null for a null list', function () {
-    should(this.nullValue.exec(this.ctx)).be.null();
+  it('should return zero for a null list', function () {
+    this.nullValue.exec(this.ctx).should.equal(0);
   });
 });
 

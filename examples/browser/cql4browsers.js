@@ -9840,6 +9840,8 @@ var Length = /*#__PURE__*/function (_Expression14) {
 
       if (arg != null) {
         return arg.length;
+      } else if (this.arg.asTypeSpecifier.type === 'ListTypeSpecifier') {
+        return 0;
       } else {
         return null;
       }
