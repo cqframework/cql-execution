@@ -3666,11 +3666,11 @@ var Count = /*#__PURE__*/function (_AggregateExpression) {
     value: function exec(ctx) {
       var items = this.source.execute(ctx);
 
-      if (!typeIsArray(items)) {
-        return null;
+      if (typeIsArray(items)) {
+        return removeNulls(items).length;
       }
 
-      return removeNulls(items).length;
+      return null;
     }
   }]);
 

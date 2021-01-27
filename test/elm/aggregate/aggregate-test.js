@@ -21,6 +21,9 @@ describe('Count', () => {
   it('should be able to count empty list', function () {
     this.empty.exec(this.ctx).should.equal(0);
   });
+  it('should be able to count null list', function () {
+    this.is_null.exec(this.ctx).should.equal(0);
+  });
 });
 
 describe('Sum', () => {
