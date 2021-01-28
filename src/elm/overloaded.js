@@ -74,8 +74,10 @@ class Except extends Expression {
 
   exec(ctx) {
     const [a, b] = this.execArgs(ctx);
-    if (a == null || b == null) {
+    if (a == null && b == null) {
       return null;
+    } else if (b == null) {
+      return a;
     }
     const lib = typeIsArray(a) ? LIST : IVL;
     return lib.doExcept(a, b);

@@ -217,9 +217,12 @@ describe('Except', () => {
     this.exceptTuples.exec(this.ctx).should.eql([{ a: 1 }, { a: 3 }]);
   });
 
-  it('should return null if either arg is null', function () {
-    should(this.exceptNull.exec(this.ctx)).be.null();
+  it('should return null if first arg is null', function () {
     should(this.nullExcept.exec(this.ctx)).be.null();
+  });
+
+  it('should return first arg if second arg is null', function () {
+    this.exceptNull.exec(this.ctx).should.eql([1, 2, 3, 4, 5]);
   });
 });
 

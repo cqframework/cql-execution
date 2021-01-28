@@ -34,7 +34,6 @@ CqlIntervalOperatorsTest.Expand.ExpandPer2Days                  Wrong answer (nu
 CqlIntervalOperatorsTest.Except.NullInterval                    Wrong answer (Interval(null, null) vs null)
 CqlIntervalOperatorsTest.ProperlyIncludes.TestProperlyIncludesNull      Wrong answer (null vs false)
 CqlIntervalOperatorsTest.ProperlyIncludedIn.TestProperlyIncludedInNull  Wrong answer (null vs false)
-CqlListOperatorsTest.Except.ExceptNullRight                     Wrong answer (null vs {1, 4})
 ValueLiteralsAndSelectors.Decimal.Decimal10Pow28ToZeroOneStepDecimalMaxValue    Wrong answer (null vs big number)
 ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue Wrong answer (null vs big number)
 ValueLiteralsAndSelectors.Decimal.DecimalNeg10Pow28ToZeroOneStepDecimalMinValue Wrong answer (null vs big number)

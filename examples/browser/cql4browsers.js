@@ -9539,8 +9539,10 @@ var Except = /*#__PURE__*/function (_Expression5) {
           a = _this$execArgs6[0],
           b = _this$execArgs6[1];
 
-      if (a == null || b == null) {
+      if (a == null && b == null) {
         return null;
+      } else if (b == null) {
+        return a;
       }
 
       var lib = typeIsArray(a) ? LIST : IVL;

@@ -223,11 +223,9 @@ define "Except": Tuple{
     output: {@T15:59:59.999}
   },
   "ExceptNullRight": Tuple{
-    skipped: 'Wrong answer (null vs {1, 4})'
-    /*
     expression: { 1, 4 } except null,
     output: {1, 4}
-    */  }
+  }
 }
 
 define "Exists": Tuple{
