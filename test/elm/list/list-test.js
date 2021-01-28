@@ -201,8 +201,8 @@ describe('Except', () => {
     this.exceptEverything.exec(this.ctx).should.eql([]);
   });
 
-  it('should return items in first list without 3', function () {
-    this.multipleNullExcept.exec(this.ctx).should.eql([1, 5, 7, null]);
+  it('should return items in first list without 3 and null', function () {
+    this.multipleNullExcept.exec(this.ctx).should.eql([1, 5, 7]);
   });
 
   it('should be a no-op when second list is empty', function () {
@@ -267,8 +267,8 @@ describe('Intersect', () => {
     should(this.nullIntersect.exec(this.ctx)).be.null();
   });
 
-  it('should intersect on 3', function () {
-    this.multipleNullInListIntersect.exec(this.ctx).should.eql([3]);
+  it('should intersect two lists that contain null', function () {
+    this.multipleNullInListIntersect.exec(this.ctx).should.eql([3, null]);
   });
 });
 

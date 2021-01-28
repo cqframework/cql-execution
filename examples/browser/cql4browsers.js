@@ -8440,7 +8440,7 @@ function doExcept(a, b) {
   var distinct = doDistinct(a);
   var setList = removeDuplicateNulls(distinct);
   return setList.filter(function (item) {
-    return !doContains(b, item);
+    return !doContains(b, item, true);
   });
 } // Delegated to by overloaded#Intersect
 
@@ -8449,7 +8449,7 @@ function doIntersect(a, b) {
   var distinct = doDistinct(a);
   var setList = removeDuplicateNulls(distinct);
   return setList.filter(function (item) {
-    return doContains(b, item);
+    return doContains(b, item, true);
   });
 } // ELM-only, not a product of CQL
 
@@ -8589,8 +8589,9 @@ var IndexOf = /*#__PURE__*/function (_Expression5) {
 
 
 function doContains(container, item) {
+  var nullEquivalence = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   return container.some(function (element) {
-    return equals(element, item);
+    return equals(element, item) || nullEquivalence && element == null && item == null;
   });
 } // Delegated to by overloaded#Includes and overloaded@IncludedIn
 
