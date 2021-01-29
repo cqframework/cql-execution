@@ -575,7 +575,7 @@ describe('Quantity', () => {
   });
 
   it('should be able to perform Quantity Multiplication', function () {
-    // decilmal to quantity multiplication results in decimal value only
+    // decimal to quantity multiplication results in decimal value only
     validateQuantity(this.mul_d_q.exec(this.ctx), 20, 'days');
     validateQuantity(this.mul_q_d.exec(this.ctx), 20, 'days');
     validateQuantity(this.mul_q_q.exec(this.ctx), 20, 'm2');
@@ -626,8 +626,8 @@ describe('Quantity', () => {
       ["25 'km'", "5 'm'", "5000 '1'"],
       ["25 'mg'", "5 'mg'", "5 '1'"],
       ["25 'mg'", "5 '1'", "5 'mg'"],
-      ["100 'm'", "2 'h'", "0.01388889 'm/s'"],
-      ["100 'mg'", "2 '[lb_av]'", "50 'mg/[lb_av]'"]
+      ["100 'm'", "2 'h'", "50 'm/h'"],
+      ["100 '[in_i]'", "2 '[lb_av]'", "50 '[in_i]/[lb_av]'"]
     ];
     // Note that these tests check for equality but not that the result
     // has any particular unit.  12 cm^2 / 4 cm = 0.03 m rather than 3 cm.

@@ -2500,11 +2500,25 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (.0002 m^2 vs 2 cm^2 - answer should be in terms of smallest unit)",
-                           "type" : "Literal"
+                           "type" : "Multiply",
+                           "operand" : [ {
+                              "value" : 1.0,
+                              "unit" : "cm",
+                              "type" : "Quantity"
+                           }, {
+                              "value" : 2.0,
+                              "unit" : "cm",
+                              "type" : "Quantity"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "value" : 2.0,
+                           "unit" : "cm2",
+                           "type" : "Quantity"
                         }
                      } ]
                   }

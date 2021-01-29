@@ -26,7 +26,6 @@ CqlAggregateFunctionsTest.Max.MaxTestString                     Wrong answer (ju
 CqlAggregateFunctionsTest.Min.MinTestString                     Wrong answer (just returning first item?)
 CqlArithmeticFunctionsTest.MinValue.DecimalMinValue             Wrong answer (-1e+29 vs -1e+28)
 CqlArithmeticFunctionsTest.MaxValue.DecimalMaxValue             Wrong answer (1e+29 vs 1e+28)
-CqlArithmeticFunctionsTest.Multiply.Multiply1CMBy2CM            Wrong answer (.0002 m^2 vs 2 cm^2 - answer should be in terms of smallest unit)
 CqlArithmeticFunctionsTest.Power.PowerNullToNull                Wrong answer (1 vs null)
 CqlComparisonOperatorsTest.Equal.DateTimeEqNull                 Wrong answer (true vs null - due to not evaluating DateTime(null) as null)
 CqlIntervalOperatorsTest.Collapse.TestCollapseNull              Wrong answer (Interval(null, null) vs null)

@@ -61,7 +61,6 @@
     "@babel/cli": "^7.10.4",
     "@babel/core": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
-    "babelify": "^10.0.0",
     "browserify": "^16.5.1",
     "coveralls": "^3.1.0",
     "eslint": "^7.4.0",
@@ -73,8 +72,8 @@
     "xml-js": "^1.6.11"
   },
   "dependencies": {
-    "luxon": "^1.25.0",
-    "ucum": "^0.0.7"
+    "@lhncbc/ucum-lhc": "^4.1.3",
+    "luxon": "^1.25.0"
   },
   "resolutions": {
     "minimist": "^1.2.5",

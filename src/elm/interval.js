@@ -1,7 +1,8 @@
 const { Expression } = require('./expression');
 const { build } = require('./builder');
-const { Quantity, doAddition, compare_units, convert_value } = require('../datatypes/quantity');
+const { Quantity, doAddition } = require('../datatypes/quantity');
 const { successor, predecessor, MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } = require('../util/math');
+const { convertUnit, compareUnits } = require('../util/units');
 const dtivl = require('../datatypes/interval');
 
 class Interval extends Expression {
@@ -488,15 +489,15 @@ class Expand extends Expression {
   expandQuantityInterval(interval, per) {
     // we want to convert everything to the more precise of the interval.low or per
     let result_units;
-    if (compare_units(interval.low.unit, per.unit) > 0) {
+    if (compareUnits(interval.low.unit, per.unit) > 0) {
       //interval.low.unit is 'bigger' aka les precise
       result_units = per.unit;
     } else {
       result_units = interval.low.unit;
     }
-    const low_value = convert_value(interval.low.value, interval.low.unit, result_units);
-    const high_value = convert_value(interval.high.value, interval.high.unit, result_units);
-    const per_value = convert_value(per.value, per.unit, result_units);
+    const low_value = convertUnit(interval.low.value, interval.low.unit, result_units);
+    const high_value = convertUnit(interval.high.value, interval.high.unit, result_units);
+    const per_value = convertUnit(per.value, per.unit, result_units);
 
     // return null if unit conversion failed, must have mismatched units
     if (!(low_value != null && high_value != null && per_value != null)) {
