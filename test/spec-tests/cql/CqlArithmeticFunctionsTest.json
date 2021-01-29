@@ -3209,11 +3209,35 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (1 vs null)",
-                           "type" : "Literal"
+                           "type" : "Power",
+                           "operand" : [ {
+                              "strict" : false,
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              },
+                              "asTypeSpecifier" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "strict" : false,
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              },
+                              "asTypeSpecifier" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null"
                         }
                      } ]
                   }

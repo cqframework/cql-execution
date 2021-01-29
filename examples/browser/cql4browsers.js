@@ -4752,7 +4752,7 @@ var Power = /*#__PURE__*/function (_Expression16) {
       if (args == null || args.some(function (x) {
         return x == null;
       })) {
-        null;
+        return null;
       }
 
       var power = args.reduce(function (x, y) {

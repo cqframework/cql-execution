@@ -545,11 +545,9 @@ define "Predecessor": Tuple{
 
 define "Power": Tuple{
   "PowerNullToNull": Tuple{
-    skipped: 'Wrong answer (1 vs null)'
-    /*
     expression: Power(null as Integer, null as Integer),
     output: null
-    */  },
+  },
   "Power0To0": Tuple{
     expression: Power(0, 0),
     output: 1
