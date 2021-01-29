@@ -1858,11 +1858,20 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (-1e+29 vs -1e+28)",
-                           "type" : "Literal"
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "MinValue"
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Negate",
+                           "operand" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "value" : "9999999999999999999999999999.99999999",
+                              "type" : "Literal"
+                           }
                         }
                      } ]
                   }
@@ -2019,10 +2028,16 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (1e+29 vs 1e+28)",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "MaxValue"
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "9999999999999999999999999999.99999999",
                            "type" : "Literal"
                         }
                      } ]

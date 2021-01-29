@@ -318,11 +318,9 @@ define "MinValue": Tuple{
     output: -2147483648
   },
   "DecimalMinValue": Tuple{
-    skipped: 'Wrong answer (-1e+29 vs -1e+28)'
-    /*
     expression: minimum Decimal,
     output: -9999999999999999999999999999.99999999
-    */  },
+  },
   "DateTimeMinValue": Tuple{
     expression: minimum DateTime,
     output: @0001-01-01T00:00:00.000
@@ -343,11 +341,9 @@ define "MaxValue": Tuple{
     output: 2147483647
   },
   "DecimalMaxValue": Tuple{
-    skipped: 'Wrong answer (1e+29 vs 1e+28)'
-    /*
     expression: maximum Decimal,
     output: 9999999999999999999999999999.99999999
-    */  },
+  },
   "DateTimeMaxValue": Tuple{
     expression: maximum DateTime,
     output: @9999-12-31T23:59:59.999
