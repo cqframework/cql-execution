@@ -24,11 +24,9 @@ define "AllTrue": Tuple{
     output: false
   },
   "AllTrueNullFirst": Tuple{
-    skipped: 'Wrong answer (null should be ignored)'
-    /*
     expression: AllTrue({null,true,true}),
     output: true
-    */  },
+  },
   "AllTrueEmptyList": Tuple{
     expression: AllTrue({}),
     output: true

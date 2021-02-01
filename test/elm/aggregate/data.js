@@ -15,6 +15,7 @@ context Patient
 define not_null: Count({1,2,3,4,5})
 define has_null: Count({1,null,null,null,2})
 define empty: Count({})
+define is_null: Count(null as List<Integer>)
 */
 
 module.exports['Count'] = {
@@ -207,6 +208,67 @@ module.exports['Count'] = {
                "source" : {
                   "localId" : "18",
                   "type" : "List"
+               }
+            }
+         }, {
+            "localId" : "26",
+            "name" : "is_null",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "26",
+                  "s" : [ {
+                     "value" : [ "define ","is_null",": " ]
+                  }, {
+                     "r" : "25",
+                     "s" : [ {
+                        "value" : [ "Count","(" ]
+                     }, {
+                        "r" : "24",
+                        "s" : [ {
+                           "r" : "21",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "23",
+                           "s" : [ {
+                              "value" : [ "List<" ]
+                           }, {
+                              "r" : "22",
+                              "s" : [ {
+                                 "value" : [ "Integer" ]
+                              } ]
+                           }, {
+                              "value" : [ ">" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "25",
+               "type" : "Count",
+               "source" : {
+                  "localId" : "24",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "21",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "23",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "22",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
                }
             }
          } ]

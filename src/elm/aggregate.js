@@ -19,10 +19,10 @@ class Count extends AggregateExpression {
 
   exec(ctx) {
     const items = this.source.execute(ctx);
-    if (!typeIsArray(items)) {
-      return null;
+    if (typeIsArray(items)) {
+      return removeNulls(items).length;
     }
-    return removeNulls(items).length;
+    return 0;
   }
 }
 
@@ -397,7 +397,7 @@ class AllTrue extends AggregateExpression {
 
   exec(ctx) {
     const items = this.source.execute(ctx);
-    return allTrue(items);
+    return allTrue(removeNulls(items));
   }
 }
 

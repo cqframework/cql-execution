@@ -3666,11 +3666,11 @@ var Count = /*#__PURE__*/function (_AggregateExpression) {
     value: function exec(ctx) {
       var items = this.source.execute(ctx);
 
-      if (!typeIsArray(items)) {
-        return null;
+      if (typeIsArray(items)) {
+        return removeNulls(items).length;
       }
 
-      return removeNulls(items).length;
+      return 0;
     }
   }]);
 
@@ -4281,7 +4281,7 @@ var AllTrue = /*#__PURE__*/function (_AggregateExpression11) {
     key: "exec",
     value: function exec(ctx) {
       var items = this.source.execute(ctx);
-      return allTrue(items);
+      return allTrue(removeNulls(items));
     }
   }]);
 
@@ -8436,7 +8436,7 @@ function doExcept(a, b) {
   var distinct = doDistinct(a);
   var setList = removeDuplicateNulls(distinct);
   return setList.filter(function (item) {
-    return !doContains(b, item);
+    return !doContains(b, item, true);
   });
 } // Delegated to by overloaded#Intersect
 
@@ -8445,7 +8445,7 @@ function doIntersect(a, b) {
   var distinct = doDistinct(a);
   var setList = removeDuplicateNulls(distinct);
   return setList.filter(function (item) {
-    return doContains(b, item);
+    return doContains(b, item, true);
   });
 } // ELM-only, not a product of CQL
 
@@ -8585,8 +8585,9 @@ var IndexOf = /*#__PURE__*/function (_Expression5) {
 
 
 function doContains(container, item) {
+  var nullEquivalence = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   return container.some(function (element) {
-    return equals(element, item);
+    return equals(element, item) || nullEquivalence && element == null && item == null;
   });
 } // Delegated to by overloaded#Includes and overloaded@IncludedIn
 
@@ -8686,7 +8687,7 @@ function doDistinct(list) {
       distinct.push(item);
     }
   });
-  return distinct;
+  return removeDuplicateNulls(distinct);
 }
 
 function removeDuplicateNulls(list) {
@@ -9535,8 +9536,12 @@ var Except = /*#__PURE__*/function (_Expression5) {
           a = _this$execArgs6[0],
           b = _this$execArgs6[1];
 
-      if (a == null || b == null) {
+      if (a == null) {
         return null;
+      }
+
+      if (b == null) {
+        return typeIsArray(a) ? a : null;
       }
 
       var lib = typeIsArray(a) ? LIST : IVL;
@@ -9635,8 +9640,12 @@ var In = /*#__PURE__*/function (_Expression8) {
           item = _this$execArgs12[0],
           container = _this$execArgs12[1];
 
-      if (container == null || item == null) {
+      if (item == null) {
         return null;
+      }
+
+      if (container == null) {
+        return false;
       }
 
       var lib = typeIsArray(container) ? LIST : IVL;
@@ -9670,7 +9679,11 @@ var Contains = /*#__PURE__*/function (_Expression9) {
           container = _this$execArgs14[0],
           item = _this$execArgs14[1];
 
-      if (container == null || item == null) {
+      if (container == null) {
+        return false;
+      }
+
+      if (item == null) {
         return null;
       }
 
@@ -9840,6 +9853,8 @@ var Length = /*#__PURE__*/function (_Expression14) {
 
       if (arg != null) {
         return arg.length;
+      } else if (this.arg.asTypeSpecifier.type === 'ListTypeSpecifier') {
+        return 0;
       } else {
         return null;
       }

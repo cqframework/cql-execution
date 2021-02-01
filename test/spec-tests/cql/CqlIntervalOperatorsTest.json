@@ -4972,10 +4972,32 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (null vs false)",
+                           "type" : "Contains",
+                           "operand" : [ {
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              },
+                              "asTypeSpecifier" : {
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "5",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
                            "type" : "Literal"
                         }
                      } ]
@@ -8612,14 +8634,94 @@
             "expression" : {
                "type" : "Tuple",
                "element" : [ {
-                  "name" : "TestInNull",
+                  "name" : "TestInNullBoundaries",
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (true vs false)",
+                           "type" : "In",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "5",
+                              "type" : "Literal"
+                           }, {
+                              "type" : "Interval",
+                              "low" : {
+                                 "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "As",
+                                 "operand" : {
+                                    "path" : "low",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "lowClosed" : true,
+                                       "highClosed" : true,
+                                       "type" : "Interval",
+                                       "low" : {
+                                          "type" : "Null"
+                                       },
+                                       "high" : {
+                                          "type" : "Null"
+                                       }
+                                    }
+                                 }
+                              },
+                              "lowClosedExpression" : {
+                                 "path" : "lowClosed",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "lowClosed" : true,
+                                    "highClosed" : true,
+                                    "type" : "Interval",
+                                    "low" : {
+                                       "type" : "Null"
+                                    },
+                                    "high" : {
+                                       "type" : "Null"
+                                    }
+                                 }
+                              },
+                              "high" : {
+                                 "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "As",
+                                 "operand" : {
+                                    "path" : "high",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "lowClosed" : true,
+                                       "highClosed" : true,
+                                       "type" : "Interval",
+                                       "low" : {
+                                          "type" : "Null"
+                                       },
+                                       "high" : {
+                                          "type" : "Null"
+                                       }
+                                    }
+                                 }
+                              },
+                              "highClosedExpression" : {
+                                 "path" : "highClosed",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "lowClosed" : true,
+                                    "highClosed" : true,
+                                    "type" : "Interval",
+                                    "low" : {
+                                       "type" : "Null"
+                                    },
+                                    "high" : {
+                                       "type" : "Null"
+                                    }
+                                 }
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
                            "type" : "Literal"
                         }
                      } ]

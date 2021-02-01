@@ -21,7 +21,6 @@ CqlTypeOperatorsTest.ToDateTime.ToDateTime5         @2014-01-01T12:05:05.955-01:
 
 # Incorrect answer
 
-CqlAggregateFunctionsTest.AllTrue.AllTrueNullFirst              Wrong answer (null should be ignored)
 CqlAggregateFunctionsTest.Max.MaxTestString                     Wrong answer (just returning first item?)
 CqlAggregateFunctionsTest.Min.MinTestString                     Wrong answer (just returning first item?)
 CqlArithmeticFunctionsTest.MinValue.DecimalMinValue             Wrong answer (-1e+29 vs -1e+28)
@@ -32,17 +31,9 @@ CqlComparisonOperatorsTest.Equal.DateTimeEqNull                 Wrong answer (tr
 CqlComparisonOperatorsTest.Equivalent.EquivEqCM1M01             Wrong answer (false vs true)
 CqlIntervalOperatorsTest.Collapse.TestCollapseNull              Wrong answer (Interval(null, null) vs null)
 CqlIntervalOperatorsTest.Expand.ExpandPer2Days                  Wrong answer (null vs { Interval[@2018-01-01, @2018-01-02], Interval[@2018-01-03, @2018-01-04] })
-CqlIntervalOperatorsTest.Contains.TestNullElement1              Wrong answer (null vs false)
 CqlIntervalOperatorsTest.Except.NullInterval                    Wrong answer (Interval(null, null) vs null)
-CqlIntervalOperatorsTest.In.TestInNull                          Wrong answer (true vs false)
 CqlIntervalOperatorsTest.ProperlyIncludes.TestProperlyIncludesNull      Wrong answer (null vs false)
 CqlIntervalOperatorsTest.ProperlyIncludedIn.TestProperlyIncludedInNull  Wrong answer (null vs false)
-CqlListOperatorsTest.Contains.ContainsNullLeft                  Wrong answer (null vs false)
-CqlListOperatorsTest.Distinct.DistinctNullNullNull              Wrong answer ({null, null, null} vs {null})
-CqlListOperatorsTest.Distinct.DistinctANullANull                 Wrong answer ({'a'', null, null} vs {'a', null})
-CqlListOperatorsTest.Except.ExceptNullRight                     Wrong answer (null vs {1, 4})
-CqlListOperatorsTest.In.In1Null                                 Wrong answer (null vs false)
-CqlListOperatorsTest.Length.LengthNullList                      Wrong answer (null vs 0)
 ValueLiteralsAndSelectors.Decimal.Decimal10Pow28ToZeroOneStepDecimalMaxValue    Wrong answer (null vs big number)
 ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue Wrong answer (null vs big number)
 ValueLiteralsAndSelectors.Decimal.DecimalNeg10Pow28ToZeroOneStepDecimalMinValue Wrong answer (null vs big number)
