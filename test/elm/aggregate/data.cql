@@ -2,6 +2,7 @@
 define not_null: Count({1,2,3,4,5})
 define has_null: Count({1,null,null,null,2})
 define empty: Count({})
+define is_null: Count(null as List<Integer>)
 
 // @Test: Sum
 define not_null: Sum({1,2,3,4,5})

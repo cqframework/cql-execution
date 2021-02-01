@@ -47,14 +47,14 @@ function doUnion(a, b) {
 function doExcept(a, b) {
   const distinct = doDistinct(a);
   const setList = removeDuplicateNulls(distinct);
-  return setList.filter(item => !doContains(b, item));
+  return setList.filter(item => !doContains(b, item, true));
 }
 
 // Delegated to by overloaded#Intersect
 function doIntersect(a, b) {
   const distinct = doDistinct(a);
   const setList = removeDuplicateNulls(distinct);
-  return setList.filter(item => doContains(b, item));
+  return setList.filter(item => doContains(b, item, true));
 }
 
 // ELM-only, not a product of CQL
@@ -127,8 +127,10 @@ class IndexOf extends Expression {
 // Indexer is completely handled by overloaded#Indexer
 
 // Delegated to by overloaded#Contains and overloaded#In
-function doContains(container, item) {
-  return container.some(element => equals(element, item));
+function doContains(container, item, nullEquivalence = false) {
+  return container.some(
+    element => equals(element, item) || (nullEquivalence && element == null && item == null)
+  );
 }
 
 // Delegated to by overloaded#Includes and overloaded@IncludedIn
@@ -181,7 +183,7 @@ function doDistinct(list) {
       distinct.push(item);
     }
   });
-  return distinct;
+  return removeDuplicateNulls(distinct);
 }
 
 function removeDuplicateNulls(list) {

@@ -101,11 +101,9 @@ define "Contains": Tuple{
     output: false
   },
   "ContainsNullLeft": Tuple{
-    skipped: 'Wrong answer (null vs false)'
-    /*
     expression: null contains 'a',
     output: false
-    */  }
+  }
 }
 
 define "Descendents": Tuple{
@@ -123,17 +121,13 @@ define "Distinct": Tuple{
     output: {}
   },
   "DistinctNullNullNull": Tuple{
-    skipped: 'Wrong answer ({null, null, null} vs {null})'
-    /*
     expression: distinct { null, null, null},
     output: { null }
-    */  },
+  },
   "DistinctANullANull": Tuple{
-    skipped: 'Wrong answer ({\'a\'\', null, null} vs {\'a\', null})'
-    /*
     expression: distinct { 'a', null, 'a', null},
     output: {'a', null}
-    */  },
+  },
   "Distinct112233": Tuple{
     expression: distinct { 1, 1, 2, 2, 3, 3},
     output: {1,2,3}
@@ -229,11 +223,9 @@ define "Except": Tuple{
     output: {@T15:59:59.999}
   },
   "ExceptNullRight": Tuple{
-    skipped: 'Wrong answer (null vs {1, 4})'
-    /*
     expression: { 1, 4 } except null,
     output: {1, 4}
-    */  }
+  }
 }
 
 define "Exists": Tuple{
@@ -327,11 +319,9 @@ define "In": Tuple{
     output: null
   },
   "In1Null": Tuple{
-    skipped: 'Wrong answer (null vs false)'
-    /*
     expression: 1 in null,
     output: false
-    */  },
+  },
   "In1And12": Tuple{
     expression: 1 in { 1, 2 },
     output: true
@@ -598,11 +588,9 @@ define "Length": Tuple{
     output: 6
   },
   "LengthNullList": Tuple{
-    skipped: 'Wrong answer (null vs 0)'
-    /*
     expression: Length(null as List<Any>),
     output: 0
-    */  }
+  }
 }
 
 define "Equivalent": Tuple{

@@ -201,8 +201,8 @@ describe('Except', () => {
     this.exceptEverything.exec(this.ctx).should.eql([]);
   });
 
-  it('should return items in first list without 3', function () {
-    this.multipleNullExcept.exec(this.ctx).should.eql([1, 5, 7, null]);
+  it('should return items in first list without 3 and null', function () {
+    this.multipleNullExcept.exec(this.ctx).should.eql([1, 5, 7]);
   });
 
   it('should be a no-op when second list is empty', function () {
@@ -217,9 +217,12 @@ describe('Except', () => {
     this.exceptTuples.exec(this.ctx).should.eql([{ a: 1 }, { a: 3 }]);
   });
 
-  it('should return null if either arg is null', function () {
-    should(this.exceptNull.exec(this.ctx)).be.null();
+  it('should return null if first arg is null', function () {
     should(this.nullExcept.exec(this.ctx)).be.null();
+  });
+
+  it('should return first arg if second arg is null', function () {
+    this.exceptNull.exec(this.ctx).should.eql([1, 2, 3, 4, 5]);
   });
 });
 
@@ -264,8 +267,8 @@ describe('Intersect', () => {
     should(this.nullIntersect.exec(this.ctx)).be.null();
   });
 
-  it('should intersect on 3', function () {
-    this.multipleNullInListIntersect.exec(this.ctx).should.eql([3]);
+  it('should intersect two lists that contain null', function () {
+    this.multipleNullInListIntersect.exec(this.ctx).should.eql([3, null]);
   });
 });
 
@@ -360,8 +363,8 @@ describe('In', () => {
     this.tupleIsNotIn.exec(this.ctx).should.be.false();
   });
 
-  it('should return null if list is null', function () {
-    should(this.inNull.exec(this.ctx)).be.null();
+  it('should return false if list is null', function () {
+    this.inNull.exec(this.ctx).should.be.false();
   });
 
   it('should return null if null is in list', function () {
@@ -402,8 +405,8 @@ describe('Contains', () => {
     should(this.nullNotIn.exec(this.ctx)).be.null();
   });
 
-  it('should return null if list is null', function () {
-    should(this.inNull.exec(this.ctx)).be.null();
+  it('should return false if list is null', function () {
+    this.inNull.exec(this.ctx).should.be.false();
   });
 });
 
@@ -615,9 +618,9 @@ describe('Distinct', () => {
     this.noDupsTuples.exec(this.ctx).should.eql([{ hello: 'world' }, { hello: 'cleveland' }]);
   });
 
-  it('should preserve duplicate null values in original order', function () {
+  it('should remove duplicate null values', function () {
     // define DuplicateNulls: distinct {null, 1, 2, null, 3, 4, 5, null}
-    this.duplicateNulls.exec(this.ctx).should.eql([null, 1, 2, null, 3, 4, 5, null]);
+    this.duplicateNulls.exec(this.ctx).should.eql([null, 1, 2, 3, 4, 5]);
   });
 });
 
@@ -710,8 +713,8 @@ describe('Length', () => {
     this.empty.exec(this.ctx).should.equal(0);
   });
 
-  it('should return null for a null list', function () {
-    should(this.nullValue.exec(this.ctx)).be.null();
+  it('should return zero for a null list', function () {
+    this.nullValue.exec(this.ctx).should.equal(0);
   });
 });
 
