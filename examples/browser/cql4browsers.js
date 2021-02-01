@@ -567,7 +567,7 @@ module.exports = {
   ValueSet: ValueSet,
   CodeSystem: CodeSystem
 };
-},{"../util/util":47}],6:[function(require,module,exports){
+},{"../util/util":48}],6:[function(require,module,exports){
 "use strict";
 
 var logic = require('./logic');
@@ -2022,7 +2022,7 @@ module.exports = {
 }; // Require MIN/MAX here because math.js requires this file, and when we make this file require
 // math.js before it exports DateTime and Date, it errors due to the circular dependency...
 // const { MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } = require('../util/math');
-},{"../util/util":47,"./uncertainty":13,"luxon":48}],8:[function(require,module,exports){
+},{"../util/util":48,"./uncertainty":13,"luxon":65}],8:[function(require,module,exports){
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2835,11 +2835,17 @@ module.exports = {
 },{}],11:[function(require,module,exports){
 "use strict";
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2852,7 +2858,13 @@ var _require = require('../util/math'),
     isValidDecimal = _require.isValidDecimal,
     overflowsOrUnderflows = _require.overflowsOrUnderflows;
 
-var ucum = require('ucum');
+var _require2 = require('../util/units'),
+    checkUnit = _require2.checkUnit,
+    _convertUnit = _require2.convertUnit,
+    normalizeUnitsWhenPossible = _require2.normalizeUnitsWhenPossible,
+    convertToCQLDateUnit = _require2.convertToCQLDateUnit,
+    getProductOfUnits = _require2.getProductOfUnits,
+    getQuotientOfUnits = _require2.getQuotientOfUnits;
 
 var Quantity = /*#__PURE__*/function () {
   function Quantity(value, unit) {
@@ -2868,8 +2880,12 @@ var Quantity = /*#__PURE__*/function () {
     } // Attempt to parse the unit with UCUM. If it fails, throw a friendly error.
 
 
-    if (this.unit != null && !is_valid_ucum_unit(this.unit)) {
-      throw new Error("'".concat(this.unit, "' is not a valid UCUM unit."));
+    if (this.unit != null) {
+      var validation = checkUnit(this.unit);
+
+      if (!validation.valid) {
+        throw new Error(validation.message);
+      }
     }
   }
 
@@ -2887,12 +2903,12 @@ var Quantity = /*#__PURE__*/function () {
     key: "sameOrBefore",
     value: function sameOrBefore(other) {
       if (other != null && other.isQuantity) {
-        var other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
+        var otherVal = _convertUnit(other.value, other.unit, this.unit);
 
-        if (other_v == null) {
+        if (otherVal == null) {
           return null;
         } else {
-          return this.value <= other_v;
+          return this.value <= otherVal;
         }
       }
     }
@@ -2900,12 +2916,12 @@ var Quantity = /*#__PURE__*/function () {
     key: "sameOrAfter",
     value: function sameOrAfter(other) {
       if (other != null && other.isQuantity) {
-        var other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
+        var otherVal = _convertUnit(other.value, other.unit, this.unit);
 
-        if (other_v == null) {
+        if (otherVal == null) {
           return null;
         } else {
-          return this.value >= other_v;
+          return this.value >= otherVal;
         }
       }
     }
@@ -2913,12 +2929,12 @@ var Quantity = /*#__PURE__*/function () {
     key: "after",
     value: function after(other) {
       if (other != null && other.isQuantity) {
-        var other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
+        var otherVal = _convertUnit(other.value, other.unit, this.unit);
 
-        if (other_v == null) {
+        if (otherVal == null) {
           return null;
         } else {
-          return this.value > other_v;
+          return this.value > otherVal;
         }
       }
     }
@@ -2926,12 +2942,12 @@ var Quantity = /*#__PURE__*/function () {
     key: "before",
     value: function before(other) {
       if (other != null && other.isQuantity) {
-        var other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
+        var otherVal = _convertUnit(other.value, other.unit, this.unit);
 
-        if (other_v == null) {
+        if (otherVal == null) {
           return null;
         } else {
-          return this.value < other_v;
+          return this.value < otherVal;
         }
       }
     }
@@ -2944,87 +2960,75 @@ var Quantity = /*#__PURE__*/function () {
         } else if (!this.unit && !other.unit) {
           return this.value === other.value;
         } else {
-          var other_v = convert_value(other.value, ucum_unit(other.unit), ucum_unit(this.unit));
+          var otherVal = _convertUnit(other.value, other.unit, this.unit);
 
-          if (other_v == null) {
+          if (otherVal == null) {
             return null;
           } else {
-            return decimalAdjust('round', this.value, -8) === decimalAdjust('round', other_v, -8);
+            return decimalAdjust('round', this.value, -8) === otherVal;
           }
         }
       }
     }
   }, {
     key: "convertUnit",
-    value: function convertUnit(to_unit) {
-      var value = convert_value(this.value, this.unit, to_unit);
-      var unit = to_unit; // Need to pass through constructor again to catch invalid units
+    value: function convertUnit(toUnit) {
+      var value = _convertUnit(this.value, this.unit, toUnit); // Need to pass through constructor again to catch invalid units
 
-      return new Quantity(value, unit);
+
+      return new Quantity(value, toUnit);
     }
   }, {
     key: "dividedBy",
     value: function dividedBy(other) {
-      return this.multiplyDivide(other, '/');
+      if (other == null || other === 0 || other.value === 0) {
+        return null;
+      } else if (!other.isQuantity) {
+        // convert it to a quantity w/ unit 1
+        other = new Quantity(other, '1');
+      }
+
+      var _normalizeUnitsWhenPo = normalizeUnitsWhenPossible(this.value, this.unit, other.value, other.unit),
+          _normalizeUnitsWhenPo2 = _slicedToArray(_normalizeUnitsWhenPo, 4),
+          val1 = _normalizeUnitsWhenPo2[0],
+          unit1 = _normalizeUnitsWhenPo2[1],
+          val2 = _normalizeUnitsWhenPo2[2],
+          unit2 = _normalizeUnitsWhenPo2[3];
+
+      var resultValue = val1 / val2;
+      var resultUnit = getQuotientOfUnits(unit1, unit2); // Check for invalid unit or value
+
+      if (resultUnit == null || overflowsOrUnderflows(resultValue)) {
+        return null;
+      }
+
+      return new Quantity(decimalAdjust('round', resultValue, -8), resultUnit);
     }
   }, {
     key: "multiplyBy",
     value: function multiplyBy(other) {
-      return this.multiplyDivide(other, '.'); // in ucum . represents multiplication
-    }
-  }, {
-    key: "multiplyDivide",
-    value: function multiplyDivide(other, operator) {
-      if (other != null && other.isQuantity) {
-        if (other.unit === '1' || other.unit === '' || other.unit == null) {
-          var value = operator === '/' ? this.value / other.value : this.value * other.value;
-
-          if (overflowsOrUnderflows(value)) {
-            return null;
-          }
-
-          try {
-            return new Quantity(decimalAdjust('round', value, -8), coalesceToOne(this.unit));
-          } catch (e) {
-            return null;
-          }
-        } else {
-          var a = this.unit != null ? this : new Quantity(this.value, '1');
-          var b = other.unit != null ? other : new Quantity(other.value, '1');
-          var can_val = a.to_ucum();
-          var other_can_value = b.to_ucum();
-          var ucum_value = ucum_multiply(can_val, [[operator, other_can_value]]);
-
-          if (overflowsOrUnderflows(ucum_value.value)) {
-            return null;
-          }
-
-          try {
-            return new Quantity(ucum_value.value, units_to_string(ucum_value.units));
-          } catch (e) {
-            return null;
-          }
-        }
-      } else {
-        var _value = operator === '/' ? this.value / other : this.value * other;
-
-        if (overflowsOrUnderflows(_value)) {
-          return null;
-        }
-
-        try {
-          return new Quantity(decimalAdjust('round', _value, -8), coalesceToOne(this.unit));
-        } catch (e) {
-          return null;
-        }
+      if (other == null) {
+        return null;
+      } else if (!other.isQuantity) {
+        // convert it to a quantity w/ unit 1
+        other = new Quantity(other, '1');
       }
-    }
-  }, {
-    key: "to_ucum",
-    value: function to_ucum() {
-      var u = ucum.parse(ucum_unit(this.unit));
-      u.value *= this.value;
-      return u;
+
+      var _normalizeUnitsWhenPo3 = normalizeUnitsWhenPossible(this.value, this.unit, other.value, other.unit),
+          _normalizeUnitsWhenPo4 = _slicedToArray(_normalizeUnitsWhenPo3, 4),
+          val1 = _normalizeUnitsWhenPo4[0],
+          unit1 = _normalizeUnitsWhenPo4[1],
+          val2 = _normalizeUnitsWhenPo4[2],
+          unit2 = _normalizeUnitsWhenPo4[3];
+
+      var resultValue = val1 * val2;
+      var resultUnit = getProductOfUnits(unit1, unit2); // Check for invalid unit or value
+
+      if (resultUnit == null || overflowsOrUnderflows(resultValue)) {
+        return null;
+      }
+
+      return new Quantity(decimalAdjust('round', resultValue, -8), resultUnit);
     }
   }, {
     key: "isQuantity",
@@ -3035,196 +3039,6 @@ var Quantity = /*#__PURE__*/function () {
 
   return Quantity;
 }();
-
-function clean_unit(units) {
-  if (ucum_time_units[units]) {
-    return ucum_to_cql_units[ucum_time_units[units]];
-  } else {
-    return units;
-  }
-} // Hash of time units and their UCUM equivalents, both case-sensitive and case-insensitive
-// See http://unitsofmeasure.org/ucum.html#para-31
-// The CQL specification says that dates are based on the Gregorian calendar
-// UCUM says that years should be Julian. As a result, CQL-based year and month identifiers will
-// be matched to the UCUM gregorian units. UCUM-based year and month identifiers will be matched
-// to the UCUM julian units.
-
-
-var ucum_time_units = {
-  years: 'a_g',
-  year: 'a_g',
-  YEARS: 'a_g',
-  YEAR: 'a_g',
-  a_g: 'a_g',
-  a: 'a_j',
-  ANN: 'a_j',
-  ann: 'a_j',
-  A: 'a_j',
-  a_j: 'a_j',
-  months: 'mo_g',
-  month: 'mo_g',
-  mo_g: 'mo_g',
-  mo: 'mo_j',
-  MO: 'mo_j',
-  mo_j: 'mo_j',
-  weeks: 'wk',
-  week: 'wk',
-  wk: 'wk',
-  WK: 'wk',
-  days: 'd',
-  day: 'd',
-  d: 'd',
-  D: 'd',
-  hours: 'h',
-  hour: 'h',
-  h: 'h',
-  H: 'h',
-  minutes: 'min',
-  minute: 'min',
-  min: 'min',
-  MIN: 'min',
-  seconds: 's',
-  second: 's',
-  s: 's',
-  S: 's',
-  milliseconds: 'ms',
-  millisecond: 'ms',
-  ms: 'ms',
-  MS: 'ms'
-};
-var ucum_to_cql_units = {
-  a_j: 'year',
-  a_g: 'year',
-  mo_j: 'month',
-  mo_g: 'month',
-  wk: 'week',
-  d: 'day',
-  h: 'hour',
-  min: 'minute',
-  s: 'second',
-  ms: 'millisecond'
-}; // this is used to perform any conversions of CQL date time fields to their ucum equivalents
-
-function ucum_unit(unit) {
-  return ucum_time_units[unit] || unit || '';
-} // just a wrapper function to deal with possible exceptions being thrown
-
-
-function convert_value(value, from, to) {
-  try {
-    if (from === to) {
-      return value;
-    } else {
-      return decimalAdjust('round', ucum.convert(value, ucum_unit(from), ucum_unit(to)), -8);
-    } // If the units could not be alignied ie: incompareable, exception will be thrown, return null
-
-  } catch (e) {
-    return null;
-  }
-} // Cache for unit validity results so we dont have to go to ucum.js for every check.
-// Is a map of unit string to boolean validity
-
-
-var unitValidityCache = {}; // Helper for checking if a unit is valid. Checks the cache first, checks with ucum.js otherwise.
-
-function is_valid_ucum_unit(unit) {
-  if (unitValidityCache[unit] != null) {
-    return unitValidityCache[unit];
-  } else {
-    try {
-      ucum.parse(ucum_unit(unit));
-      unitValidityCache[unit] = true;
-      return true;
-    } catch (error) {
-      unitValidityCache[unit] = false;
-      return false;
-    }
-  }
-} // This method will take a ucum.js representation of units and convert them to a string
-// ucum.js units are a has of unit => power values.  For instance m/h (meters per hour) in
-// ucum.js will be reprsented by the json object {m: 1, h:-1}  negative values are inverted and
-// are akin to denominator values in a fraction.  Positive values are somewhat a kin to numerator
-// values in that they preceed the inverted values.  It is possible in ucum to have multiple non inverted
-// or inverted values.  This method combines all of the non inverted values and appends them with
-// the ucum multiplication operator '.' and then appends the inverted values separated by the ucum
-// divisor '/' .
-
-
-function units_to_string() {
-  var units = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var numer = [];
-  var denom = [];
-
-  for (var _i = 0, _Object$keys = Object.keys(units); _i < _Object$keys.length; _i++) {
-    var key = _Object$keys[_i];
-    var v = units[key];
-    var pow = Math.abs(v);
-    var str = pow === 1 ? key : key + pow;
-
-    if (v < 0) {
-      denom.push(str);
-    } else {
-      numer.push(str);
-    }
-  }
-
-  var unit_string = '';
-  unit_string += numer.join('.');
-
-  if (denom.length > 0) {
-    unit_string += '/' + denom.join('/');
-  }
-
-  if (unit_string === '') {
-    return '1';
-  } else {
-    return unit_string;
-  }
-} // this method is taken from the ucum.js library which it does not  export
-// so we need to replicate the behavior here in order to perform multiplication
-// and division of the ucum values.
-// t:  the ucum quantity being multiplied/divided .  This method modifies the object t that is passed in
-// ms: an array of arrays whoes format is [<operator>,<ucum quantity>] an example would be [['.', {value: 1, units: {m:2}}]]
-// this would represent multiply t by the value m^2
-
-
-function ucum_multiply(t) {
-  var ms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-
-  if (ms.length === 0) {
-    return t;
-  }
-
-  var ret = t;
-
-  var _iterator = _createForOfIteratorHelper(ms),
-      _step;
-
-  try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-      var mterm = _step.value;
-      var sign = mterm[0] === '.' ? 1 : -1;
-      var b = mterm[1];
-      ret.value *= Math.pow(b.value, sign);
-
-      for (var k in b.units) {
-        var v = b.units[k];
-        ret.units[k] = ret.units[k] || 0;
-        ret.units[k] = ret.units[k] + sign * v;
-
-        if (ret.units[k] === 0) {
-          delete ret.units[k];
-        }
-      }
-    }
-  } catch (err) {
-    _iterator.e(err);
-  } finally {
-    _iterator.f();
-  }
-
-  return ret;
-}
 
 function parseQuantity(str) {
   var components = /([+|-]?\d+\.?\d*)\s*('(.+)')?/.exec(str);
@@ -3251,31 +3065,30 @@ function parseQuantity(str) {
 }
 
 function doScaledAddition(a, b, scaleForB) {
-  var b_unit;
-
   if (a != null && a.isQuantity && b != null && b.isQuantity) {
-    var a_unit;
-    var _ref = [coalesceToOne(a.unit), coalesceToOne(b.unit)];
-    a_unit = _ref[0];
-    b_unit = _ref[1];
-    // The units don't have to match (m and m^2), but must be convertable
-    // we will choose the unit of a to be the unit we return
-    var val = convert_value(b.value * scaleForB, b_unit, a_unit);
+    var _normalizeUnitsWhenPo5 = normalizeUnitsWhenPossible(a.value, a.unit, b.value * scaleForB, b.unit),
+        _normalizeUnitsWhenPo6 = _slicedToArray(_normalizeUnitsWhenPo5, 4),
+        val1 = _normalizeUnitsWhenPo6[0],
+        unit1 = _normalizeUnitsWhenPo6[1],
+        val2 = _normalizeUnitsWhenPo6[2],
+        unit2 = _normalizeUnitsWhenPo6[3];
 
-    if (val == null) {
+    if (unit1 !== unit2) {
+      // not compatible units, so we can't do addition
       return null;
     }
 
-    var sum = a.value + val;
+    var sum = val1 + val2;
 
     if (overflowsOrUnderflows(sum)) {
       return null;
-    } else {
-      return new Quantity(sum, a_unit);
     }
+
+    return new Quantity(sum, unit1);
   } else if (a.copy && a.add) {
-    b_unit = b != null && b.isQuantity ? coalesceToOne(b.unit) : b.unit;
-    return a.copy().add(b.value * scaleForB, clean_unit(b_unit));
+    // Date / DateTime require a CQL time unit
+    var cqlUnitB = convertToCQLDateUnit(b.unit) || b.unit;
+    return a.copy().add(b.value * scaleForB, cqlUnitB);
   } else {
     throw new Error('Unsupported argument types.');
   }
@@ -3303,43 +3116,15 @@ function doMultiplication(a, b) {
   }
 }
 
-function coalesceToOne(o) {
-  if (o == null || o.trim != null && !o.trim()) {
-    return '1';
-  } else {
-    return o;
-  }
-}
-
-function compare_units(unit_a, unit_b) {
-  try {
-    var c = ucum.convert(1, ucum_unit(unit_a), ucum_unit(unit_b));
-
-    if (c > 1) {
-      return 1; // unit_a is bigger (less precise)
-    }
-
-    if (c < 1) {
-      return -1; // unit_a is smaller
-    }
-
-    return 0; //units are the same
-  } catch (e) {
-    return null;
-  }
-}
-
 module.exports = {
   Quantity: Quantity,
-  convert_value: convert_value,
   parseQuantity: parseQuantity,
   doAddition: doAddition,
   doSubtraction: doSubtraction,
   doDivision: doDivision,
-  doMultiplication: doMultiplication,
-  compare_units: compare_units
+  doMultiplication: doMultiplication
 };
-},{"../util/math":46,"ucum":56}],12:[function(require,module,exports){
+},{"../util/math":46,"../util/units":47}],12:[function(require,module,exports){
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4376,7 +4161,7 @@ module.exports = {
   AllTrue: AllTrue,
   AnyTrue: AnyTrue
 };
-},{"../datatypes/exception":8,"../datatypes/quantity":11,"../util/comparison":45,"../util/util":47,"./builder":16,"./expression":22}],15:[function(require,module,exports){
+},{"../datatypes/exception":8,"../datatypes/quantity":11,"../util/comparison":45,"../util/util":48,"./builder":16,"./expression":22}],15:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -5185,7 +4970,7 @@ function constructByName(name, json) {
 module.exports = {
   build: build
 };
-},{"../util/util":47,"./expressions":23}],17:[function(require,module,exports){
+},{"../util/util":48,"./expressions":23}],17:[function(require,module,exports){
 "use strict";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -6678,7 +6463,7 @@ module.exports = {
   Expression: Expression,
   UnimplementedExpression: UnimplementedExpression
 };
-},{"../util/util":47,"./builder":16}],23:[function(require,module,exports){
+},{"../util/util":48,"./builder":16}],23:[function(require,module,exports){
 "use strict";
 
 var expression = require('./expression');
@@ -6866,7 +6651,7 @@ var Retrieve = /*#__PURE__*/function (_Expression) {
 module.exports = {
   Retrieve: Retrieve
 };
-},{"../util/util":47,"./builder":16,"./expression":22}],25:[function(require,module,exports){
+},{"../util/util":48,"./builder":16,"./expression":22}],25:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -7042,15 +6827,17 @@ var _require2 = require('./builder'),
 
 var _require3 = require('../datatypes/quantity'),
     Quantity = _require3.Quantity,
-    doAddition = _require3.doAddition,
-    compare_units = _require3.compare_units,
-    convert_value = _require3.convert_value;
+    doAddition = _require3.doAddition;
 
 var _require4 = require('../util/math'),
     successor = _require4.successor,
     predecessor = _require4.predecessor,
     MAX_DATETIME_VALUE = _require4.MAX_DATETIME_VALUE,
     MIN_DATETIME_VALUE = _require4.MIN_DATETIME_VALUE;
+
+var _require5 = require('../util/units'),
+    convertUnit = _require5.convertUnit,
+    compareUnits = _require5.compareUnits;
 
 var dtivl = require('../datatypes/interval');
 
@@ -7804,16 +7591,16 @@ var Expand = /*#__PURE__*/function (_Expression14) {
       // we want to convert everything to the more precise of the interval.low or per
       var result_units;
 
-      if (compare_units(interval.low.unit, per.unit) > 0) {
+      if (compareUnits(interval.low.unit, per.unit) > 0) {
         //interval.low.unit is 'bigger' aka les precise
         result_units = per.unit;
       } else {
         result_units = interval.low.unit;
       }
 
-      var low_value = convert_value(interval.low.value, interval.low.unit, result_units);
-      var high_value = convert_value(interval.high.value, interval.high.unit, result_units);
-      var per_value = convert_value(per.value, per.unit, result_units); // return null if unit conversion failed, must have mismatched units
+      var low_value = convertUnit(interval.low.value, interval.low.unit, result_units);
+      var high_value = convertUnit(interval.high.value, interval.high.unit, result_units);
+      var per_value = convertUnit(per.value, per.unit, result_units); // return null if unit conversion failed, must have mismatched units
 
       if (!(low_value != null && high_value != null && per_value != null)) {
         return null;
@@ -8090,7 +7877,7 @@ module.exports = {
   doExcept: doExcept,
   doIntersect: doIntersect
 };
-},{"../datatypes/interval":9,"../datatypes/quantity":11,"../util/math":46,"./builder":16,"./expression":22}],27:[function(require,module,exports){
+},{"../datatypes/interval":9,"../datatypes/quantity":11,"../util/math":46,"../util/units":47,"./builder":16,"./expression":22}],27:[function(require,module,exports){
 "use strict";
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
@@ -8817,7 +8604,7 @@ module.exports = {
   doExcept: doExcept,
   doIntersect: doIntersect
 };
-},{"../util/comparison":45,"../util/util":47,"./builder":16,"./expression":22}],29:[function(require,module,exports){
+},{"../util/comparison":45,"../util/util":48,"./builder":16,"./expression":22}],29:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -10057,7 +9844,7 @@ module.exports = {
   SameOrBefore: SameOrBefore,
   Union: Union
 };
-},{"../datatypes/datetime":7,"../datatypes/logic":10,"../util/comparison":45,"../util/util":47,"./datetime":20,"./expression":22,"./interval":26,"./list":28}],33:[function(require,module,exports){
+},{"../datatypes/datetime":7,"../datatypes/logic":10,"../util/comparison":45,"../util/util":48,"./datetime":20,"./expression":22,"./interval":26,"./list":28}],33:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -10725,7 +10512,7 @@ module.exports = {
   With: With,
   Without: Without
 };
-},{"../runtime/context":41,"../util/comparison":45,"../util/util":47,"./builder":16,"./expression":22}],36:[function(require,module,exports){
+},{"../runtime/context":41,"../util/comparison":45,"../util/util":48,"./builder":16,"./expression":22}],36:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -12835,7 +12622,7 @@ module.exports = {
   ToTime: ToTime,
   TupleTypeSpecifier: TupleTypeSpecifier
 };
-},{"../datatypes/clinical":5,"../datatypes/datetime":7,"../datatypes/quantity":11,"../datatypes/ratio":12,"../util/math":46,"../util/util":47,"./expression":22}],41:[function(require,module,exports){
+},{"../datatypes/clinical":5,"../datatypes/datetime":7,"../datatypes/quantity":11,"../datatypes/ratio":12,"../util/math":46,"../util/util":48,"./expression":22}],41:[function(require,module,exports){
 "use strict";
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
@@ -13405,7 +13192,7 @@ module.exports = {
   PatientContext: PatientContext,
   UnfilteredContext: UnfilteredContext
 };
-},{"../datatypes/datatypes":6,"../datatypes/exception":8,"../util/util":47}],42:[function(require,module,exports){
+},{"../datatypes/datatypes":6,"../datatypes/exception":8,"../util/util":48}],42:[function(require,module,exports){
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13735,6 +13522,11 @@ function equivalent(a, b) {
 
   if (isCode(a)) {
     return codesAreEquivalent(a, b);
+  } // Quantity equivalence is the same as Quantity equality
+
+
+  if (a.isQuantity) {
+    return a.equals(b);
   } // Use overloaded 'equivalent' function if it is available
 
 
@@ -14284,6 +14076,409 @@ module.exports = {
 },{"../datatypes/datetime":7,"../datatypes/exception":8,"../datatypes/uncertainty":13}],47:[function(require,module,exports){
 "use strict";
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var ucum = require('@lhncbc/ucum-lhc');
+
+var _require = require('./math'),
+    decimalAdjust = _require.decimalAdjust;
+
+var utils = ucum.UcumLhcUtils.getInstance(); // Cache Map<string, boolean> for unit validity results so we dont have to go to ucum-lhc for every check.
+
+var unitValidityCache = new Map();
+
+function checkUnit(unit) {
+  var allowEmptyUnits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  var allowCQLDateUnits = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
+  if (allowEmptyUnits) {
+    unit = fixEmptyUnit(unit);
+  }
+
+  if (allowCQLDateUnits) {
+    unit = fixCQLDateUnit(unit);
+  }
+
+  if (!unitValidityCache.has(unit)) {
+    var result = utils.validateUnitString(unit, true);
+
+    if (result.status === 'valid') {
+      unitValidityCache.set(unit, {
+        valid: true
+      });
+    } else {
+      var msg = "Invalid UCUM unit: '".concat(unit, "'.");
+
+      if (result.ucumCode != null) {
+        msg += " Did you mean '".concat(result.ucumCode, "'?");
+      }
+
+      unitValidityCache.set(unit, {
+        valid: false,
+        message: msg
+      });
+    }
+  }
+
+  return unitValidityCache.get(unit);
+}
+
+function convertUnit(fromVal, fromUnit, toUnit) {
+  var adjustPrecision = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+
+  var _map = [fromUnit, toUnit].map(fixUnit);
+
+  var _map2 = _slicedToArray(_map, 2);
+
+  fromUnit = _map2[0];
+  toUnit = _map2[1];
+  var result = utils.convertUnitTo(fixUnit(fromUnit), fromVal, fixUnit(toUnit));
+
+  if (result.status !== 'succeeded') {
+    return;
+  }
+
+  return adjustPrecision ? decimalAdjust('round', result.toVal, -8) : result.toVal;
+}
+
+function normalizeUnitsWhenPossible(val1, unit1, val2, unit2) {
+  // If both units are CQL date units, return CQL date units
+  var useCQLDateUnits = CQL_TO_UCUM_DATE_UNITS[unit1] != null && CQL_TO_UCUM_DATE_UNITS[unit2] != null;
+
+  var resultConverter = function resultConverter(unit) {
+    return useCQLDateUnits ? convertToCQLDateUnit(unit) : unit;
+  };
+
+  var _map3 = [unit1, unit2].map(fixUnit);
+
+  var _map4 = _slicedToArray(_map3, 2);
+
+  unit1 = _map4[0];
+  unit2 = _map4[1];
+
+  if (unit1 === unit2) {
+    return [val1, unit1, val2, unit2];
+  }
+
+  var baseUnit1 = getBaseUnitAndPower(unit1)[0];
+  var baseUnit2 = getBaseUnitAndPower(unit2)[0];
+
+  var _convertToBaseUnit = convertToBaseUnit(val2, unit2, baseUnit1),
+      _convertToBaseUnit2 = _slicedToArray(_convertToBaseUnit, 2),
+      newVal2 = _convertToBaseUnit2[0],
+      newUnit2 = _convertToBaseUnit2[1];
+
+  if (newVal2 == null) {
+    // it was not convertible, so just return the quantities as-is
+    return [val1, resultConverter(unit1), val2, resultConverter(unit2)];
+  } // If the new val2 > old val2, return since we prefer conversion to smaller units
+
+
+  if (newVal2 >= val2) {
+    return [val1, resultConverter(unit1), newVal2, resultConverter(newUnit2)];
+  } // else it was a conversion to a larger unit, so go the other way around
+
+
+  var _convertToBaseUnit3 = convertToBaseUnit(val1, unit1, baseUnit2),
+      _convertToBaseUnit4 = _slicedToArray(_convertToBaseUnit3, 2),
+      newVal1 = _convertToBaseUnit4[0],
+      newUnit1 = _convertToBaseUnit4[1];
+
+  if (newVal1 == null) {
+    // this should not happen since we established they are convertible, but just in case...
+    return [val1, resultConverter(unit1), newVal2, resultConverter(newUnit2)];
+  }
+
+  return [newVal1, resultConverter(newUnit1), val2, resultConverter(unit2)];
+}
+
+function convertToCQLDateUnit(unit) {
+  if (CQL_TO_UCUM_DATE_UNITS[unit]) {
+    // it's already a CQL unit, so return it as-is, removing trailing 's' if necessary (e.g., years -> year)
+    return unit.replace(/s$/, '');
+  }
+
+  return UCUM_TO_CQL_DATE_UNITS[unit];
+}
+
+function compareUnits(unit1, unit2) {
+  try {
+    var c = convertUnit(1, unit1, unit2);
+
+    if (c > 1) {
+      // unit1 is bigger (less precise)
+      return 1;
+    } else if (c < 1) {
+      // unit1 is smaller
+      return -1;
+    } //units are the same
+
+
+    return 0;
+  } catch (e) {
+    return null;
+  }
+}
+
+function getProductOfUnits(unit1, unit2) {
+  var _map5 = [unit1, unit2].map(fixEmptyUnit);
+
+  var _map6 = _slicedToArray(_map5, 2);
+
+  unit1 = _map6[0];
+  unit2 = _map6[1];
+
+  if (!checkUnit(unit1).valid || !checkUnit(unit2).valid) {
+    return null;
+  } // If either unit contains a divisor,combine the numerators and denominators, then divide
+
+
+  if (unit1.indexOf('/') >= 0 || unit2.indexOf('/') >= 0) {
+    // NOTE: We're not trying to get perfection on unit simplification, but doing what is reasonable
+    var match1 = unit1.match(/([^/]*)(\/(.*))?/);
+    var match2 = unit2.match(/([^/]*)(\/(.*))?/); // In the previous regexes, numerator is match[1], denominator is match[3]
+
+    var newNum = getProductOfUnits(match1[1], match2[1]);
+    var newDen = getProductOfUnits(match1[3], match2[3]);
+    return getQuotientOfUnits(newNum, newDen);
+  } // Get all the individual units being combined, accounting for multipliers (e.g., 'm.L'),
+  // and then group like base units to combine powers (and remove '1's since they are no-ops)
+  // e.g., 'm.L' * 'm' ==> { m: 2, L: 1}; 'm.L' * '1' ==> { m: 1, L: 1 }; '1' : '1' ==> { }
+
+
+  var factorPowerMap = new Map();
+  var factors = [].concat(_toConsumableArray(unit1.split('.')), _toConsumableArray(unit2.split('.')));
+  factors.forEach(function (factor) {
+    var _getBaseUnitAndPower = getBaseUnitAndPower(factor),
+        _getBaseUnitAndPower2 = _slicedToArray(_getBaseUnitAndPower, 2),
+        baseUnit = _getBaseUnitAndPower2[0],
+        power = _getBaseUnitAndPower2[1];
+
+    if (baseUnit === '1' || power === 0) {
+      // skip factors that are 1 since 1 * N is N.
+      return;
+    }
+
+    var accumulatedPower = (factorPowerMap.get(baseUnit) || 0) + power;
+    factorPowerMap.set(baseUnit, accumulatedPower);
+  }); // Loop through the factor map, rebuilding each factor w/ combined power and join them all
+  // back via the multiplier '.', treating a final '' (no non-1 units) as '1'
+  // e.g.,  { m: 2, L: 1 } ==> 'm2.L'
+
+  return fixUnit(Array.from(factorPowerMap.entries()).map(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        base = _ref2[0],
+        power = _ref2[1];
+
+    return "".concat(base).concat(power > 1 ? power : '');
+  }).join('.'));
+}
+
+function getQuotientOfUnits(unit1, unit2) {
+  var _map7 = [unit1, unit2].map(fixEmptyUnit);
+
+  var _map8 = _slicedToArray(_map7, 2);
+
+  unit1 = _map8[0];
+  unit2 = _map8[1];
+
+  if (!checkUnit(unit1).valid || !checkUnit(unit2).valid) {
+    return null;
+  } // Try to simplify division when neither unit contains a divisor itself
+
+
+  if (unit1.indexOf('/') === -1 && unit2.indexOf('/') === -1) {
+    // Get all the individual units in numerator and denominator accounting for multipliers
+    // (e.g., 'm.L'), and then group like base units to combine powers, inversing denominator
+    // powers since they are being divided.
+    // e.g., 'm3.L' / 'm' ==> { m: 2, L: -1}; 'm.L' / '1' ==> { m: 1, L: 1 }; '1' / '1' ==> { 1: 0 }
+    var factorPowerMap = new Map();
+    unit1.split('.').forEach(function (factor) {
+      var _getBaseUnitAndPower3 = getBaseUnitAndPower(factor),
+          _getBaseUnitAndPower4 = _slicedToArray(_getBaseUnitAndPower3, 2),
+          baseUnit = _getBaseUnitAndPower4[0],
+          power = _getBaseUnitAndPower4[1];
+
+      var accumulatedPower = (factorPowerMap.get(baseUnit) || 0) + power;
+      factorPowerMap.set(baseUnit, accumulatedPower);
+    });
+    unit2.split('.').forEach(function (factor) {
+      var _getBaseUnitAndPower5 = getBaseUnitAndPower(factor),
+          _getBaseUnitAndPower6 = _slicedToArray(_getBaseUnitAndPower5, 2),
+          baseUnit = _getBaseUnitAndPower6[0],
+          power = _getBaseUnitAndPower6[1];
+
+      var accumulatedPower = (factorPowerMap.get(baseUnit) || 0) - power;
+      factorPowerMap.set(baseUnit, accumulatedPower);
+    }); // Construct the numerator from factors with positive power, and denominator from factors
+    // with negative power, filtering out base `1` and power 0 (which is also 1).
+    // e.g. numerator:   { m: 2, L: -2 } ==> 'm2'; { 1: 1, L: -1 } => ''
+    // e.g. denominator: { m: 2, L: -2 } ==> 'L2'; { 1: 1, L: -1 } => 'L'
+
+    var numerator = Array.from(factorPowerMap.entries()).filter(function (_ref3) {
+      var _ref4 = _slicedToArray(_ref3, 2),
+          base = _ref4[0],
+          power = _ref4[1];
+
+      return base !== '1' && power > 0;
+    }).map(function (_ref5) {
+      var _ref6 = _slicedToArray(_ref5, 2),
+          base = _ref6[0],
+          power = _ref6[1];
+
+      return "".concat(base).concat(power > 1 ? power : '');
+    }).join('.');
+    var denominator = Array.from(factorPowerMap.entries()).filter(function (_ref7) {
+      var _ref8 = _slicedToArray(_ref7, 2),
+          base = _ref8[0],
+          power = _ref8[1];
+
+      return base !== '1' && power < 0;
+    }).map(function (_ref9) {
+      var _ref10 = _slicedToArray(_ref9, 2),
+          base = _ref10[0],
+          power = _ref10[1];
+
+      return "".concat(base).concat(power < -1 ? power * -1 : '');
+    }).join('.'); // wrap the denominator in parentheses if necessary
+
+    denominator = /[.]/.test(denominator) ? "(".concat(denominator, ")") : denominator;
+    return fixUnit("".concat(numerator).concat(denominator !== '' ? '/' + denominator : ''));
+  } // One of the units had a divisor, so don't try to be too smart; just construct it from the parts
+
+
+  if (unit1 === unit2) {
+    // e.g. 'm/g' / 'm/g' ==> '1'
+    return '1';
+  } else if (unit2 === '1') {
+    // e.g., 'm/g' / '1' ==> 'm/g/'
+    return unit1;
+  } else {
+    // denominator is unit2, wrapped in parentheses if necessary
+    var _denominator = /[./]/.test(unit2) ? "(".concat(unit2, ")") : unit2;
+
+    if (unit1 === '1') {
+      // e.g., '1' / 'm' ==> '/m'; '1' / 'm.g' ==> '/(m.g)'
+      return "/".concat(_denominator);
+    } // e.g., 'L' / 'm' ==> 'L/m'; 'L' / 'm.g' ==> 'L/(m.g)'
+
+
+    return "".concat(unit1, "/").concat(_denominator);
+  }
+} // UNEXPORTED FUNCTIONS
+
+
+function convertToBaseUnit(fromVal, fromUnit, toBaseUnit) {
+  var fromPower = getBaseUnitAndPower(fromUnit)[1];
+  var toUnit = fromPower === 1 ? toBaseUnit : "".concat(toBaseUnit).concat(fromPower);
+  var newVal = convertUnit(fromVal, fromUnit, toUnit);
+  return newVal != null ? [newVal, toUnit] : [];
+}
+
+function getBaseUnitAndPower(unit) {
+  // don't try to extract power from complex units (containing multipliers or divisors)
+  if (/[./]/.test(unit)) {
+    return [unit, 1];
+  }
+
+  unit = fixUnit(unit);
+
+  var _unit$match$slice = unit.match(/^(.*[^-\d])?([-]?\d*)$/).slice(1),
+      _unit$match$slice2 = _slicedToArray(_unit$match$slice, 2),
+      term = _unit$match$slice2[0],
+      power = _unit$match$slice2[1];
+
+  if (term == null || term === '') {
+    term = power;
+    power = '1';
+  } else if (power == null || power === '') {
+    power = '1';
+  }
+
+  return [term, parseInt(power)];
+} // The CQL specification says that dates are based on the Gregorian calendar, so CQL-based year and month
+// identifiers will be matched to the UCUM gregorian units. See http://unitsofmeasure.org/ucum.html#para-31
+
+
+var CQL_TO_UCUM_DATE_UNITS = {
+  years: 'a_g',
+  year: 'a_g',
+  months: 'mo_g',
+  month: 'mo_g',
+  weeks: 'wk',
+  week: 'wk',
+  days: 'd',
+  day: 'd',
+  hours: 'h',
+  hour: 'h',
+  minutes: 'min',
+  minute: 'min',
+  seconds: 's',
+  second: 's',
+  milliseconds: 'ms',
+  millisecond: 'ms'
+};
+var UCUM_TO_CQL_DATE_UNITS = {
+  a: 'year',
+  a_j: 'year',
+  a_g: 'year',
+  mo: 'month',
+  mo_j: 'month',
+  mo_g: 'month',
+  wk: 'week',
+  d: 'day',
+  h: 'hour',
+  min: 'minute',
+  s: 'second',
+  ms: 'millisecond'
+};
+
+function fixEmptyUnit(unit) {
+  if (unit == null || unit.trim && unit.trim() === '') {
+    return '1';
+  }
+
+  return unit;
+}
+
+function fixCQLDateUnit(unit) {
+  return CQL_TO_UCUM_DATE_UNITS[unit] || unit;
+}
+
+function fixUnit(unit) {
+  return fixCQLDateUnit(fixEmptyUnit(unit));
+}
+
+module.exports = {
+  checkUnit: checkUnit,
+  convertUnit: convertUnit,
+  normalizeUnitsWhenPossible: normalizeUnitsWhenPossible,
+  convertToCQLDateUnit: convertToCQLDateUnit,
+  compareUnits: compareUnits,
+  getProductOfUnits: getProductOfUnits,
+  getQuotientOfUnits: getQuotientOfUnits
+};
+},{"./math":46,"@lhncbc/ucum-lhc":59}],48:[function(require,module,exports){
+"use strict";
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -14401,7 +14596,5082 @@ module.exports = {
   normalizeMillisecondsField: normalizeMillisecondsField,
   getTimezoneSeparatorFromString: getTimezoneSeparatorFromString
 };
-},{}],48:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
+module.exports={"license":"The following data (prefixes and units) was generated by the UCUM LHC code from the UCUM data and selected LOINC combinations of UCUM units.  The license for the UCUM LHC code (demo and library code as well as the combined units) is located at https://github.com/lhncbc/ucum-lhc/blob/LICENSE.md.","prefixes":{"config":["code_","ciCode_","name_","printSymbol_","value_","exp_"],"data":[["E","EX","exa","E",1000000000000000000,"18"],["G","GA","giga","G",1000000000,"9"],["Gi","GIB","gibi","Gi",1073741824,null],["Ki","KIB","kibi","Ki",1024,null],["M","MA","mega","M",1000000,"6"],["Mi","MIB","mebi","Mi",1048576,null],["P","PT","peta","P",1000000000000000,"15"],["T","TR","tera","T",1000000000000,"12"],["Ti","TIB","tebi","Ti",1099511627776,null],["Y","YA","yotta","Y",1e+24,"24"],["Z","ZA","zetta","Z",1e+21,"21"],["a","A","atto","a",1e-18,"-18"],["c","C","centi","c",0.01,"-2"],["d","D","deci","d",0.1,"-1"],["da","DA","deka","da",10,"1"],["f","F","femto","f",1e-15,"-15"],["h","H","hecto","h",100,"2"],["k","K","kilo","k",1000,"3"],["m","M","milli","m",0.001,"-3"],["n","N","nano","n",1e-9,"-9"],["p","P","pico","p",1e-12,"-12"],["u","U","micro","μ",0.000001,"-6"],["y","YO","yocto","y",1.0000000000000001e-24,"-24"],["z","ZO","zepto","z",1e-21,"-21"]]},"units":{"config":["isBase_","name_","csCode_","ciCode_","property_","magnitude_",["dim_","dimVec_"],"printSymbol_","class_","isMetric_","variable_","cnv_","cnvPfx_","isSpecial_","isArbitrary_","moleExp_","synonyms_","source_","loincProperty_","category_","guidance_","csUnitString_","ciUnitString_","baseFactorStr_","baseFactor_","defError_"],"data":[[true,"meter","m","M","length",1,[1,0,0,0,0,0,0],"m",null,false,"L",null,1,false,false,0,"meters; metres; distance","UCUM","Len","Clinical","unit of length = 1.09361 yards",null,null,null,null,false],[true,"second - time","s","S","time",1,[0,1,0,0,0,0,0],"s",null,false,"T",null,1,false,false,0,"seconds","UCUM","Time","Clinical","",null,null,null,null,false],[true,"gram","g","G","mass",1,[0,0,1,0,0,0,0],"g",null,false,"M",null,1,false,false,0,"grams; gm","UCUM","Mass","Clinical","",null,null,null,null,false],[true,"radian","rad","RAD","plane angle",1,[0,0,0,1,0,0,0],"rad",null,false,"A",null,1,false,false,0,"radians","UCUM","Angle","Clinical","unit of angular measure where 1 radian = 1/2π turn =  57.296 degrees. ",null,null,null,null,false],[true,"degree Kelvin","K","K","temperature",1,[0,0,0,0,1,0,0],"K",null,false,"C",null,1,false,false,0,"Kelvin; degrees","UCUM","Temp","Clinical","absolute, thermodynamic temperature scale ",null,null,null,null,false],[true,"coulomb","C","C","electric charge",1,[0,0,0,0,0,1,0],"C",null,false,"Q",null,1,false,false,0,"coulombs","UCUM","","Clinical","defined as amount of 1 electron charge = 6.2415093×10^18 e, and equivalent to 1 Ampere-second",null,null,null,null,false],[true,"candela","cd","CD","luminous intensity",1,[0,0,0,0,0,0,1],"cd",null,false,"F",null,1,false,false,0,"candelas","UCUM","","Clinical","SI base unit of luminous intensity",null,null,null,null,false],[false,"the number ten for arbitrary powers","10*","10*","number",10,[0,0,0,0,0,0,0],"10","dimless",false,null,null,1,false,false,0,"10^; 10 to the arbitrary powers","UCUM","Num","Clinical","10* by itself is the same as 10, but users can add digits after the *. For example, 10*3 = 1000.","1","1","10",10,false],[false,"the number ten for arbitrary powers","10^","10^","number",10,[0,0,0,0,0,0,0],"10","dimless",false,null,null,1,false,false,0,"10*; 10 to the arbitrary power","UCUM","Num","Clinical","10* by itself is the same as 10, but users can add digits after the *. For example, 10*3 = 1000.","1","1","10",10,false],[false,"the number pi","[pi]","[PI]","number",3.141592653589793,[0,0,0,0,0,0,0],"π","dimless",false,null,null,1,false,false,0,"π","UCUM","","Constant","a mathematical constant; the ratio of a circle's circumference to its diameter ≈ 3.14159","1","1","3.1415926535897932384626433832795028841971693993751058209749445923",3.141592653589793,false],[false,"","%","%","fraction",0.01,[0,0,0,0,0,0,0],"%","dimless",false,null,null,1,false,false,0,"percents","UCUM","FR; NFR; MFR; CFR; SFR Rto; etc. ","Clinical","","10*-2","10*-2","1",1,false],[false,"parts per thousand","[ppth]","[PPTH]","fraction",0.001,[0,0,0,0,0,0,0],"ppth","dimless",false,null,null,1,false,false,0,"ppth; 10^-3","UCUM","MCnc; MCnt","Clinical","[ppth] is often used in solution concentrations as 1 g/L or 1 g/kg.\n\nCan be ambigous and would be better if the metric units was used directly. ","10*-3","10*-3","1",1,false],[false,"parts per million","[ppm]","[PPM]","fraction",0.000001,[0,0,0,0,0,0,0],"ppm","dimless",false,null,null,1,false,false,0,"ppm; 10^-6","UCUM","MCnt; MCnc; SFr","Clinical","[ppm] is often used in solution concentrations as 1 mg/L  or 1 mg/kg. Also used to express mole fractions as 1 mmol/mol.\n\n[ppm] is also used in nuclear magnetic resonance (NMR) to represent chemical shift - the difference of a measured frequency in parts per million from the reference frequency.\n\nCan be ambigous and would be better if the metric units was used directly. ","10*-6","10*-6","1",1,false],[false,"parts per billion","[ppb]","[PPB]","fraction",1e-9,[0,0,0,0,0,0,0],"ppb","dimless",false,null,null,1,false,false,0,"ppb; 10^-9","UCUM","MCnt; MCnc; SFr","Clinical","[ppb] is often used in solution concentrations as 1 ug/L  or 1 ug/kg. Also used to express mole fractions as 1 umol/mol.\n\nCan be ambigous and would be better if the metric units was used directly. ","10*-9","10*-9","1",1,false],[false,"parts per trillion","[pptr]","[PPTR]","fraction",1e-12,[0,0,0,0,0,0,0],"pptr","dimless",false,null,null,1,false,false,0,"pptr; 10^-12","UCUM","MCnt; MCnc; SFr","Clinical","[pptr] is often used in solution concentrations as 1 ng/L or 1 ng/kg. Also used to express mole fractions as 1 nmol/mol.\n\nCan be ambigous and would be better if the metric units was used directly. ","10*-12","10*-12","1",1,false],[false,"mole","mol","MOL","amount of substance",6.0221367e+23,[0,0,0,0,0,0,0],"mol","si",true,null,null,1,false,false,1,"moles","UCUM","Sub","Clinical","Measure the number of molecules ","10*23","10*23","6.0221367",6.0221367,false],[false,"steradian - solid angle","sr","SR","solid angle",1,[0,0,0,2,0,0,0],"sr","si",true,null,null,1,false,false,0,"square radian; rad2; rad^2","UCUM","Angle","Clinical","unit of solid angle in three-dimensional geometry analagous to radian; used in photometry which measures the perceived brightness of object by human eye (e.g. radiant intensity = watt/steradian)","rad2","RAD2","1",1,false],[false,"hertz","Hz","HZ","frequency",1,[0,-1,0,0,0,0,0],"Hz","si",true,null,null,1,false,false,0,"Herz; frequency; frequencies","UCUM","Freq; Num","Clinical","equal to one cycle per second","s-1","S-1","1",1,false],[false,"newton","N","N","force",1000,[1,-2,1,0,0,0,0],"N","si",true,null,null,1,false,false,0,"Newtons","UCUM","Force","Clinical","unit of force with base units kg.m/s2","kg.m/s2","KG.M/S2","1",1,false],[false,"pascal","Pa","PAL","pressure",1000,[-1,-2,1,0,0,0,0],"Pa","si",true,null,null,1,false,false,0,"pascals","UCUM","Pres","Clinical","standard unit of pressure equal to 1 newton per square meter (N/m2)","N/m2","N/M2","1",1,false],[false,"joule","J","J","energy",1000,[2,-2,1,0,0,0,0],"J","si",true,null,null,1,false,false,0,"joules","UCUM","Enrg","Clinical","unit of energy defined as the work required to move an object 1 m with a force of 1 N (N.m) or an electric charge of 1 C through 1 V (C.V), or to produce 1 W for 1 s (W.s) ","N.m","N.M","1",1,false],[false,"watt","W","W","power",1000,[2,-3,1,0,0,0,0],"W","si",true,null,null,1,false,false,0,"watts","UCUM","EngRat","Clinical","unit of power equal to 1 Joule per second (J/s) =  kg⋅m2⋅s−3","J/s","J/S","1",1,false],[false,"Ampere","A","A","electric current",1,[0,-1,0,0,0,1,0],"A","si",true,null,null,1,false,false,0,"Amperes","UCUM","ElpotRat","Clinical","unit of electric current equal to flow rate of electrons equal to 16.2415×10^18 elementary charges moving past a boundary in one second or 1 Coulomb/second","C/s","C/S","1",1,false],[false,"volt","V","V","electric potential",1000,[2,-2,1,0,0,-1,0],"V","si",true,null,null,1,false,false,0,"volts","UCUM","Elpot","Clinical","unit of electric potential (voltage) = 1 Joule per Coulomb (J/C)","J/C","J/C","1",1,false],[false,"farad","F","F","electric capacitance",0.001,[-2,2,-1,0,0,2,0],"F","si",true,null,null,1,false,false,0,"farads; electric capacitance","UCUM","","Clinical","CGS unit of electric capacitance with base units C/V (Coulomb per Volt)","C/V","C/V","1",1,false],[false,"ohm","Ohm","OHM","electric resistance",1000,[2,-1,1,0,0,-2,0],"Ω","si",true,null,null,1,false,false,0,"Ω; resistance; ohms","UCUM","","Clinical","unit of electrical resistance with units of Volt per Ampere","V/A","V/A","1",1,false],[false,"siemens","S","SIE","electric conductance",0.001,[-2,1,-1,0,0,2,0],"S","si",true,null,null,1,false,false,0,"Reciprocal ohm; mho; Ω−1; conductance","UCUM","","Clinical","unit of electric conductance (the inverse of electrical resistance) equal to ohm^-1","Ohm-1","OHM-1","1",1,false],[false,"weber","Wb","WB","magnetic flux",1000,[2,-1,1,0,0,-1,0],"Wb","si",true,null,null,1,false,false,0,"magnetic flux; webers","UCUM","","Clinical","unit of magnetic flux equal to Volt second","V.s","V.S","1",1,false],[false,"degree Celsius","Cel","CEL","temperature",1,[0,0,0,0,1,0,0],"°C","si",true,null,"Cel",1,true,false,0,"°C; degrees","UCUM","Temp","Clinical","","K",null,null,1,false],[false,"tesla","T","T","magnetic flux density",1000,[0,-1,1,0,0,-1,0],"T","si",true,null,null,1,false,false,0,"Teslas; magnetic field","UCUM","","Clinical","SI unit of magnetic field strength for magnetic field B equal to 1 Weber/square meter =  1 kg/(s2*A)","Wb/m2","WB/M2","1",1,false],[false,"henry","H","H","inductance",1000,[2,0,1,0,0,-2,0],"H","si",true,null,null,1,false,false,0,"henries; inductance","UCUM","","Clinical","unit of electrical inductance; usually expressed in millihenrys (mH) or microhenrys (uH).","Wb/A","WB/A","1",1,false],[false,"lumen","lm","LM","luminous flux",1,[0,0,0,2,0,0,1],"lm","si",true,null,null,1,false,false,0,"luminous flux; lumens","UCUM","","Clinical","unit of luminous flux defined as 1 lm = 1 cd⋅sr (candela times sphere)","cd.sr","CD.SR","1",1,false],[false,"lux","lx","LX","illuminance",1,[-2,0,0,2,0,0,1],"lx","si",true,null,null,1,false,false,0,"illuminance; luxes","UCUM","","Clinical","unit of illuminance equal to one lumen per square meter. ","lm/m2","LM/M2","1",1,false],[false,"becquerel","Bq","BQ","radioactivity",1,[0,-1,0,0,0,0,0],"Bq","si",true,null,null,1,false,false,0,"activity; radiation; becquerels","UCUM","","Clinical","measure of the atomic radiation rate with units s^-1","s-1","S-1","1",1,false],[false,"gray","Gy","GY","energy dose",1,[2,-2,0,0,0,0,0],"Gy","si",true,null,null,1,false,false,0,"absorbed doses; ionizing radiation doses; kerma; grays","UCUM","EngCnt","Clinical","unit of ionizing radiation dose with base units of 1 joule of radiation energy per kilogram of matter","J/kg","J/KG","1",1,false],[false,"sievert","Sv","SV","dose equivalent",1,[2,-2,0,0,0,0,0],"Sv","si",true,null,null,1,false,false,0,"sieverts; radiation dose quantities; equivalent doses; effective dose; operational dose; committed dose","UCUM","","Clinical","SI unit for radiation dose equivalent equal to 1 Joule/kilogram.","J/kg","J/KG","1",1,false],[false,"degree - plane angle","deg","DEG","plane angle",0.017453292519943295,[0,0,0,1,0,0,0],"°","iso1000",false,null,null,1,false,false,0,"°; degree of arc; arc degree; arcdegree; angle","UCUM","Angle","Clinical","one degree is equivalent to π/180 radians.","[pi].rad/360","[PI].RAD/360","2",2,false],[false,"gon","gon","GON","plane angle",0.015707963267948967,[0,0,0,1,0,0,0],"□<sup>g</sup>","iso1000",false,null,null,1,false,false,0,"gon (grade); gons","UCUM","Angle","Nonclinical","unit of plane angle measurement equal to 1/400 circle","deg","DEG","0.9",0.9,false],[false,"arc minute","'","'","plane angle",0.0002908882086657216,[0,0,0,1,0,0,0],"'","iso1000",false,null,null,1,false,false,0,"arcminutes; arcmin; arc minutes; arc mins","UCUM","Angle","Clinical","equal to 1/60 degree; used in optometry and opthamology (e.g. visual acuity tests)","deg/60","DEG/60","1",1,false],[false,"arc second","''","''","plane angle",0.00000484813681109536,[0,0,0,1,0,0,0],"''","iso1000",false,null,null,1,false,false,0,"arcseconds; arcsecs","UCUM","Angle","Clinical","equal to 1/60 arcminute = 1/3600 degree; used in optometry and opthamology (e.g. visual acuity tests)","'/60","'/60","1",1,false],[false,"Liters","l","L","volume",0.001,[3,0,0,0,0,0,0],"l","iso1000",true,null,null,1,false,false,0,"cubic decimeters; decimeters cubed; decimetres; dm3; dm^3; litres; liters, LT ","UCUM","Vol","Clinical","Because lower case \"l\" can be read as the number \"1\", though this is a valid UCUM units. UCUM strongly reccomends using  \"L\"","dm3","DM3","1",1,false],[false,"Liters","L","L","volume",0.001,[3,0,0,0,0,0,0],"L","iso1000",true,null,null,1,false,false,0,"cubic decimeters; decimeters cubed; decimetres; dm3; dm^3; litres; liters, LT ","UCUM","Vol","Clinical","Because lower case \"l\" can be read as the number \"1\", though this is a valid UCUM units. UCUM strongly reccomends using  \"L\"","l",null,"1",1,false],[false,"are","ar","AR","area",100,[2,0,0,0,0,0,0],"a","iso1000",true,null,null,1,false,false,0,"100 m2; 100 m^2; 100 square meter; meters squared; metres","UCUM","Area","Clinical","metric base unit for area defined as 100 m^2","m2","M2","100",100,false],[false,"minute","min","MIN","time",60,[0,1,0,0,0,0,0],"min","iso1000",false,null,null,1,false,false,0,"minutes","UCUM","Time","Clinical","","s","S","60",60,false],[false,"hour","h","HR","time",3600,[0,1,0,0,0,0,0],"h","iso1000",false,null,null,1,false,false,0,"hours; hrs; age","UCUM","Time","Clinical","","min","MIN","60",60,false],[false,"day","d","D","time",86400,[0,1,0,0,0,0,0],"d","iso1000",false,null,null,1,false,false,0,"days; age; dy; 24 hours; 24 hrs","UCUM","Time","Clinical","","h","HR","24",24,false],[false,"tropical year","a_t","ANN_T","time",31556925.216,[0,1,0,0,0,0,0],"a<sub>t</sub>","iso1000",false,null,null,1,false,false,0,"solar years; a tropical; years","UCUM","Time","Clinical","has an average of 365.242181 days but is constantly changing.","d","D","365.24219",365.24219,false],[false,"mean Julian year","a_j","ANN_J","time",31557600,[0,1,0,0,0,0,0],"a<sub>j</sub>","iso1000",false,null,null,1,false,false,0,"mean Julian yr; a julian; years","UCUM","Time","Clinical","has an average of 365.25 days, and in everyday use, has been replaced by the Gregorian year. However, this unit is used in astronomy to calculate light year. ","d","D","365.25",365.25,false],[false,"mean Gregorian year","a_g","ANN_G","time",31556952,[0,1,0,0,0,0,0],"a<sub>g</sub>","iso1000",false,null,null,1,false,false,0,"mean Gregorian yr; a gregorian; years","UCUM","Time","Clinical","has an average of 365.2425 days and is the most internationally used civil calendar.","d","D","365.2425",365.2425,false],[false,"year","a","ANN","time",31557600,[0,1,0,0,0,0,0],"a","iso1000",false,null,null,1,false,false,0,"years; a; yr, yrs; annum","UCUM","Time","Clinical","","a_j","ANN_J","1",1,false],[false,"week","wk","WK","time",604800,[0,1,0,0,0,0,0],"wk","iso1000",false,null,null,1,false,false,0,"weeks; wks","UCUM","Time","Clinical","","d","D","7",7,false],[false,"synodal month","mo_s","MO_S","time",2551442.976,[0,1,0,0,0,0,0],"mo<sub>s</sub>","iso1000",false,null,null,1,false,false,0,"Moon; synodic month; lunar month; mo-s; mo s; months; moons","UCUM","Time","Nonclinical","has an average of 29.53 days per month, unit used in astronomy","d","D","29.53059",29.53059,false],[false,"mean Julian month","mo_j","MO_J","time",2629800,[0,1,0,0,0,0,0],"mo<sub>j</sub>","iso1000",false,null,null,1,false,false,0,"mo-julian; mo Julian; months","UCUM","Time","Clinical","has an average of 30.435 days per month","a_j/12","ANN_J/12","1",1,false],[false,"mean Gregorian month","mo_g","MO_G","time",2629746,[0,1,0,0,0,0,0],"mo<sub>g</sub>","iso1000",false,null,null,1,false,false,0,"months; month-gregorian; mo-gregorian","UCUM","Time","Clinical","has an average 30.436875 days per month and is from the most internationally used civil calendar.","a_g/12","ANN_G/12","1",1,false],[false,"month","mo","MO","time",2629800,[0,1,0,0,0,0,0],"mo","iso1000",false,null,null,1,false,false,0,"months; duration","UCUM","Time","Clinical","based on Julian calendar which has an average of 30.435 days per month (this unit is used in astronomy but not in everyday life - see mo_g)","mo_j","MO_J","1",1,false],[false,"metric ton","t","TNE","mass",1000000,[0,0,1,0,0,0,0],"t","iso1000",true,null,null,1,false,false,0,"tonnes; megagrams; tons","UCUM","Mass","Nonclinical","equal to 1000 kg used in the US (recognized by NIST as metric ton), and internationally (recognized as tonne)","kg","KG","1e3",1000,false],[false,"bar","bar","BAR","pressure",100000000,[-1,-2,1,0,0,0,0],"bar","iso1000",true,null,null,1,false,false,0,"bars","UCUM","Pres","Nonclinical","unit of pressure equal to 10^5 Pascals, primarily used by meteorologists and in weather forecasting","Pa","PAL","1e5",100000,false],[false,"unified atomic mass unit","u","AMU","mass",1.6605402e-24,[0,0,1,0,0,0,0],"u","iso1000",true,null,null,1,false,false,0,"unified atomic mass units; amu; Dalton; Da","UCUM","Mass","Clinical","the mass of 1/12 of an unbound Carbon-12 atom nuclide equal to 1.6606x10^-27 kg ","g","G","1.6605402e-24",1.6605402e-24,false],[false,"astronomic unit","AU","ASU","length",149597870691,[1,0,0,0,0,0,0],"AU","iso1000",false,null,null,1,false,false,0,"AU; units","UCUM","Len","Clinical","unit of length used in astronomy for measuring distance in Solar system","Mm","MAM","149597.870691",149597.870691,false],[false,"parsec","pc","PRS","length",30856780000000000,[1,0,0,0,0,0,0],"pc","iso1000",true,null,null,1,false,false,0,"parsecs","UCUM","Len","Clinical","unit of length equal to 3.26 light years, nad used to measure large distances to objects outside our Solar System","m","M","3.085678e16",30856780000000000,false],[false,"velocity of light in a vacuum","[c]","[C]","velocity",299792458,[1,-1,0,0,0,0,0],"<i>c</i>","const",true,null,null,1,false,false,0,"speed of light","UCUM","Vel","Constant","equal to 299792458 m/s (approximately 3 x 10^8 m/s)","m/s","M/S","299792458",299792458,false],[false,"Planck constant","[h]","[H]","action",6.6260755e-31,[2,-1,1,0,0,0,0],"<i>h</i>","const",true,null,null,1,false,false,0,"Planck's constant","UCUM","","Constant","constant = 6.62607004 × 10-34 m2.kg/s; defined as quantum of action","J.s","J.S","6.6260755e-34",6.6260755e-34,false],[false,"Boltzmann constant","[k]","[K]","(unclassified)",1.380658e-20,[2,-2,1,0,-1,0,0],"<i>k</i>","const",true,null,null,1,false,false,0,"k; kB","UCUM","","Constant","physical constant relating energy at the individual particle level with temperature = 1.38064852 ×10^−23 J/K","J/K","J/K","1.380658e-23",1.380658e-23,false],[false,"permittivity of vacuum - electric","[eps_0]","[EPS_0]","electric permittivity",8.854187817000001e-15,[-3,2,-1,0,0,2,0],"<i>ε<sub><r>0</r></sub></i>","const",true,null,null,1,false,false,0,"ε0; Electric Constant; vacuum permittivity; permittivity of free space ","UCUM","","Constant","approximately equal to 8.854 × 10^−12 F/m (farads per meter)","F/m","F/M","8.854187817e-12",8.854187817e-12,false],[false,"permeability of vacuum - magnetic","[mu_0]","[MU_0]","magnetic permeability",0.0012566370614359172,[1,0,1,0,0,-2,0],"<i>μ<sub><r>0</r></sub></i>","const",true,null,null,1,false,false,0,"μ0; vacuum permeability; permeability of free space; magnetic constant","UCUM","","Constant","equal to 4π×10^−7 N/A2 (Newtons per square ampere) ≈ 1.2566×10^−6 H/m (Henry per meter)","N/A2","4.[PI].10*-7.N/A2","1",0.0000012566370614359173,false],[false,"elementary charge","[e]","[E]","electric charge",1.60217733e-19,[0,0,0,0,0,1,0],"<i>e</i>","const",true,null,null,1,false,false,0,"e; q; electric charges","UCUM","","Constant","the magnitude of the electric charge carried by a single electron or proton ≈ 1.60217×10^-19 Coulombs","C","C","1.60217733e-19",1.60217733e-19,false],[false,"electronvolt","eV","EV","energy",1.60217733e-16,[2,-2,1,0,0,0,0],"eV","iso1000",true,null,null,1,false,false,0,"Electron Volts; electronvolts","UCUM","Eng","Clinical","unit of kinetic energy = 1 V * 1.602×10^−19 C = 1.6×10−19 Joules","[e].V","[E].V","1",1,false],[false,"electron mass","[m_e]","[M_E]","mass",9.1093897e-28,[0,0,1,0,0,0,0],"<i>m<sub><r>e</r></sub></i>","const",true,null,null,1,false,false,0,"electron rest mass; me","UCUM","Mass","Constant","approximately equal to 9.10938356 × 10-31 kg; defined as the mass of a stationary electron","g","g","9.1093897e-28",9.1093897e-28,false],[false,"proton mass","[m_p]","[M_P]","mass",1.6726231e-24,[0,0,1,0,0,0,0],"<i>m<sub><r>p</r></sub></i>","const",true,null,null,1,false,false,0,"mp; masses","UCUM","Mass","Constant","approximately equal to 1.672622×10−27 kg","g","g","1.6726231e-24",1.6726231e-24,false],[false,"Newtonian constant of gravitation","[G]","[GC]","(unclassified)",6.67259e-14,[3,-2,-1,0,0,0,0],"<i>G</i>","const",true,null,null,1,false,false,0,"G; gravitational constant; Newton's constant","UCUM","","Constant","gravitational constant = 6.674×10−11 N⋅m2/kg2","m3.kg-1.s-2","M3.KG-1.S-2","6.67259e-11",6.67259e-11,false],[false,"standard acceleration of free fall","[g]","[G]","acceleration",9.80665,[1,-2,0,0,0,0,0],"<i>g<sub>n</sub></i>","const",true,null,null,1,false,false,0,"standard gravity; g; ɡ0; ɡn","UCUM","Accel","Constant","defined by standard = 9.80665 m/s2","m/s2","M/S2","980665e-5",9.80665,false],[false,"Torr","Torr","Torr","pressure",133322,[-1,-2,1,0,0,0,0],"Torr","const",false,null,null,1,false,false,0,"torrs","UCUM","Pres","Clinical","1 torr = 1 mmHg; unit used to measure blood pressure","Pa","PAL","133.322",133.322,false],[false,"standard atmosphere","atm","ATM","pressure",101325000,[-1,-2,1,0,0,0,0],"atm","const",false,null,null,1,false,false,0,"reference pressure; atmos; std atmosphere","UCUM","Pres","Clinical","defined as being precisely equal to 101,325 Pa","Pa","PAL","101325",101325,false],[false,"light-year","[ly]","[LY]","length",9460730472580800,[1,0,0,0,0,0,0],"l.y.","const",true,null,null,1,false,false,0,"light years; ly","UCUM","Len","Constant","unit of astronomal distance = 5.88×10^12 mi","[c].a_j","[C].ANN_J","1",1,false],[false,"gram-force","gf","GF","force",9.80665,[1,-2,1,0,0,0,0],"gf","const",true,null,null,1,false,false,0,"Newtons; gram forces","UCUM","Force","Clinical","May be specific to unit related to cardiac output","g.[g]","G.[G]","1",1,false],[false,"Kayser","Ky","KY","lineic number",100,[-1,0,0,0,0,0,0],"K","cgs",true,null,null,1,false,false,0,"wavenumbers; kaysers","UCUM","InvLen","Clinical","unit of wavelength equal to cm^-1","cm-1","CM-1","1",1,false],[false,"Gal","Gal","GL","acceleration",0.01,[1,-2,0,0,0,0,0],"Gal","cgs",true,null,null,1,false,false,0,"galileos; Gals","UCUM","Accel","Clinical","unit of acceleration used in gravimetry; equivalent to cm/s2 ","cm/s2","CM/S2","1",1,false],[false,"dyne","dyn","DYN","force",0.01,[1,-2,1,0,0,0,0],"dyn","cgs",true,null,null,1,false,false,0,"dynes","UCUM","Force","Clinical","unit of force equal to 10^-5 Newtons","g.cm/s2","G.CM/S2","1",1,false],[false,"erg","erg","ERG","energy",0.0001,[2,-2,1,0,0,0,0],"erg","cgs",true,null,null,1,false,false,0,"10^-7 Joules, 10-7 Joules; 100 nJ; 100 nanoJoules; 1 dyne cm; 1 g.cm2/s2","UCUM","Eng","Clinical","unit of energy = 1 dyne centimeter = 10^-7 Joules","dyn.cm","DYN.CM","1",1,false],[false,"Poise","P","P","dynamic viscosity",100,[-1,-1,1,0,0,0,0],"P","cgs",true,null,null,1,false,false,0,"dynamic viscosity; poises","UCUM","Visc","Clinical","unit of dynamic viscosity where 1 Poise = 1/10 Pascal second","dyn.s/cm2","DYN.S/CM2","1",1,false],[false,"Biot","Bi","BI","electric current",10,[0,-1,0,0,0,1,0],"Bi","cgs",true,null,null,1,false,false,0,"Bi; abamperes; abA","UCUM","ElpotRat","Clinical","equal to 10 amperes","A","A","10",10,false],[false,"Stokes","St","ST","kinematic viscosity",0.0001,[2,-1,0,0,0,0,0],"St","cgs",true,null,null,1,false,false,0,"kinematic viscosity","UCUM","Visc","Clinical","unit of kimematic viscosity with units cm2/s","cm2/s","CM2/S","1",1,false],[false,"Maxwell","Mx","MX","flux of magnetic induction",0.00001,[2,-1,1,0,0,-1,0],"Mx","cgs",true,null,null,1,false,false,0,"magnetix flux; Maxwells","UCUM","","Clinical","unit of magnetic flux","Wb","WB","1e-8",1e-8,false],[false,"Gauss","G","GS","magnetic flux density",0.1,[0,-1,1,0,0,-1,0],"Gs","cgs",true,null,null,1,false,false,0,"magnetic fields; magnetic flux density; induction; B","UCUM","magnetic","Clinical","CGS unit of magnetic flux density, known as magnetic field B; defined as one maxwell unit per square centimeter (see Oersted for CGS unit for H field)","T","T","1e-4",0.0001,false],[false,"Oersted","Oe","OE","magnetic field intensity",79.57747154594767,[-1,-1,0,0,0,1,0],"Oe","cgs",true,null,null,1,false,false,0,"H magnetic B field; Oersteds","UCUM","","Clinical","CGS unit of the auxiliary magnetic field H defined as 1 dyne per unit pole = 1000/4π amperes per meter (see Gauss for CGS unit for B field)","A/m","/[PI].A/M","250",79.57747154594767,false],[false,"Gilbert","Gb","GB","magnetic tension",0.7957747154594768,[0,-1,0,0,0,1,0],"Gb","cgs",true,null,null,1,false,false,0,"Gi; magnetomotive force; Gilberts","UCUM","","Clinical","unit of magnetomotive force (magnetic potential)","Oe.cm","OE.CM","1",1,false],[false,"stilb","sb","SB","lum. intensity density",10000,[-2,0,0,0,0,0,1],"sb","cgs",true,null,null,1,false,false,0,"stilbs","UCUM","","Obsolete","unit of luminance; equal to and replaced by unit candela per square centimeter (cd/cm2)","cd/cm2","CD/CM2","1",1,false],[false,"Lambert","Lmb","LMB","brightness",3183.098861837907,[-2,0,0,0,0,0,1],"L","cgs",true,null,null,1,false,false,0,"luminance; lamberts","UCUM","","Clinical","unit of luminance defined as 1 lambert = 1/ π candela per square meter","cd/cm2/[pi]","CD/CM2/[PI]","1",1,false],[false,"phot","ph","PHT","illuminance",0.0001,[-2,0,0,2,0,0,1],"ph","cgs",true,null,null,1,false,false,0,"phots","UCUM","","Clinical","CGS photometric unit of illuminance, or luminous flux through an area equal to 10000 lumens per square meter = 10000 lux","lx","LX","1e-4",0.0001,false],[false,"Curie","Ci","CI","radioactivity",37000000000,[0,-1,0,0,0,0,0],"Ci","cgs",true,null,null,1,false,false,0,"curies","UCUM","","Obsolete","unit for measuring atomic disintegration rate; replaced by the Bequerel (Bq) unit","Bq","BQ","37e9",37000000000,false],[false,"Roentgen","R","ROE","ion dose",2.58e-7,[0,0,-1,0,0,1,0],"R","cgs",true,null,null,1,false,false,0,"röntgen; Roentgens","UCUM","","Clinical","unit of exposure of X-rays and gamma rays in air; unit used primarily in the US but strongly discouraged by NIST","C/kg","C/KG","2.58e-4",0.000258,false],[false,"radiation absorbed dose","RAD","[RAD]","energy dose",0.01,[2,-2,0,0,0,0,0],"RAD","cgs",true,null,null,1,false,false,0,"doses","UCUM","","Clinical","unit of radiation absorbed dose used primarily in the US with base units 100 ergs per gram of material. Also see the SI unit Gray (Gy).","erg/g","ERG/G","100",100,false],[false,"radiation equivalent man","REM","[REM]","dose equivalent",0.01,[2,-2,0,0,0,0,0],"REM","cgs",true,null,null,1,false,false,0,"Roentgen Equivalent in Man; rems; dose equivalents","UCUM","","Clinical","unit of equivalent dose which measures the effect of radiation on humans equal to 0.01 sievert. Used primarily in the US. Also see SI unit Sievert (Sv)","RAD","[RAD]","1",1,false],[false,"inch","[in_i]","[IN_I]","length",0.025400000000000002,[1,0,0,0,0,0,0],"in","intcust",false,null,null,1,false,false,0,"inches; in; international inch; body height","UCUM","Len","Clinical","standard unit for inch in the US and internationally","cm","CM","254e-2",2.54,false],[false,"foot","[ft_i]","[FT_I]","length",0.3048,[1,0,0,0,0,0,0],"ft","intcust",false,null,null,1,false,false,0,"ft; fts; foot; international foot; feet; international feet; height","UCUM","Len","Clinical","unit used in the US and internationally","[in_i]","[IN_I]","12",12,false],[false,"yard","[yd_i]","[YD_I]","length",0.9144000000000001,[1,0,0,0,0,0,0],"yd","intcust",false,null,null,1,false,false,0,"international yards; yds; distance","UCUM","Len","Clinical","standard unit used in the US and internationally","[ft_i]","[FT_I]","3",3,false],[false,"mile","[mi_i]","[MI_I]","length",1609.344,[1,0,0,0,0,0,0],"mi","intcust",false,null,null,1,false,false,0,"international miles; mi I; statute mile","UCUM","Len","Clinical","standard unit used in the US and internationally","[ft_i]","[FT_I]","5280",5280,false],[false,"fathom","[fth_i]","[FTH_I]","depth of water",1.8288000000000002,[1,0,0,0,0,0,0],"fth","intcust",false,null,null,1,false,false,0,"international fathoms","UCUM","Len","Nonclinical","unit used in the US and internationally to measure depth of water; same length as the US fathom","[ft_i]","[FT_I]","6",6,false],[false,"nautical mile","[nmi_i]","[NMI_I]","length",1852,[1,0,0,0,0,0,0],"n.mi","intcust",false,null,null,1,false,false,0,"nautical mile; nautical miles; international nautical mile; international nautical miles; nm; n.m.; nmi","UCUM","Len","Nonclinical","standard unit used in the US and internationally","m","M","1852",1852,false],[false,"knot","[kn_i]","[KN_I]","velocity",0.5144444444444445,[1,-1,0,0,0,0,0],"knot","intcust",false,null,null,1,false,false,0,"kn; kt; international knots","UCUM","Vel","Nonclinical","defined as equal to one nautical mile (1.852 km) per hour","[nmi_i]/h","[NMI_I]/H","1",1,false],[false,"square inch","[sin_i]","[SIN_I]","area",0.0006451600000000001,[2,0,0,0,0,0,0],null,"intcust",false,null,null,1,false,false,0,"in2; in^2; inches squared; sq inch; inches squared; international","UCUM","Area","Clinical","standard unit used in the US and internationally","[in_i]2","[IN_I]2","1",1,false],[false,"square foot","[sft_i]","[SFT_I]","area",0.09290304,[2,0,0,0,0,0,0],null,"intcust",false,null,null,1,false,false,0,"ft2; ft^2; ft squared; sq ft; feet; international","UCUM","Area","Clinical","standard unit used in the US and internationally","[ft_i]2","[FT_I]2","1",1,false],[false,"square yard","[syd_i]","[SYD_I]","area",0.8361273600000002,[2,0,0,0,0,0,0],null,"intcust",false,null,null,1,false,false,0,"yd2; yd^2; sq. yds; yards squared; international","UCUM","Area","Clinical","standard unit used in the US and internationally","[yd_i]2","[YD_I]2","1",1,false],[false,"cubic inch","[cin_i]","[CIN_I]","volume",0.000016387064000000003,[3,0,0,0,0,0,0],null,"intcust",false,null,null,1,false,false,0,"in3; in^3; in*3; inches^3; inches*3; cu. in; cu in; cubic inches; inches cubed; cin","UCUM","Vol","Clinical","standard unit used in the US and internationally","[in_i]3","[IN_I]3","1",1,false],[false,"cubic foot","[cft_i]","[CFT_I]","volume",0.028316846592000004,[3,0,0,0,0,0,0],null,"intcust",false,null,null,1,false,false,0,"ft3; ft^3; ft*3; cu. ft; cubic feet; cubed; [ft_i]3; international","UCUM","Vol","Clinical","","[ft_i]3","[FT_I]3","1",1,false],[false,"cubic yard","[cyd_i]","[CYD_I]","volume",0.7645548579840002,[3,0,0,0,0,0,0],"cu.yd","intcust",false,null,null,1,false,false,0,"cubic yards; cubic yds; cu yards; CYs; yards^3; yd^3; yds^3; yd3; yds3","UCUM","Vol","Nonclinical","standard unit used in the US and internationally","[yd_i]3","[YD_I]3","1",1,false],[false,"board foot","[bf_i]","[BF_I]","volume",0.002359737216,[3,0,0,0,0,0,0],null,"intcust",false,null,null,1,false,false,0,"BDFT; FBM; BF; board feet; international","UCUM","Vol","Nonclinical","unit of volume used to measure lumber","[in_i]3","[IN_I]3","144",144,false],[false,"cord","[cr_i]","[CR_I]","volume",3.6245563637760005,[3,0,0,0,0,0,0],null,"intcust",false,null,null,1,false,false,0,"crd I; international cords","UCUM","Vol","Nonclinical","unit of measure of dry volume used to measure firewood equal 128 ft3","[ft_i]3","[FT_I]3","128",128,false],[false,"mil","[mil_i]","[MIL_I]","length",0.000025400000000000004,[1,0,0,0,0,0,0],"mil","intcust",false,null,null,1,false,false,0,"thou, thousandth; mils; international","UCUM","Len","Clinical","equal to 0.001 international inch","[in_i]","[IN_I]","1e-3",0.001,false],[false,"circular mil","[cml_i]","[CML_I]","area",5.067074790974979e-10,[2,0,0,0,0,0,0],"circ.mil","intcust",false,null,null,1,false,false,0,"circular mils; cml I; international","UCUM","Area","Clinical","","[pi]/4.[mil_i]2","[PI]/4.[MIL_I]2","1",1,false],[false,"hand","[hd_i]","[HD_I]","height of horses",0.10160000000000001,[1,0,0,0,0,0,0],"hd","intcust",false,null,null,1,false,false,0,"hands; international","UCUM","Len","Nonclinical","used to measure horse height","[in_i]","[IN_I]","4",4,false],[false,"foot - US","[ft_us]","[FT_US]","length",0.3048006096012192,[1,0,0,0,0,0,0],"ft<sub>us</sub>","us-lengths",false,null,null,1,false,false,0,"US foot; foot US; us ft; ft us; height; visual distance; feet","UCUM","Len","Obsolete","Better to use [ft_i] which refers to the length used worldwide, including in the US;  [ft_us] may be confused with land survey units. ","m/3937","M/3937","1200",1200,false],[false,"yard - US","[yd_us]","[YD_US]","length",0.9144018288036575,[1,0,0,0,0,0,0],null,"us-lengths",false,null,null,1,false,false,0,"US yards; us yds; distance","UCUM","Len; Nrat","Obsolete","Better to use [yd_i] which refers to the length used worldwide, including in the US; [yd_us] refers to unit used in land surveys in the US","[ft_us]","[FT_US]","3",3,false],[false,"inch - US","[in_us]","[IN_US]","length",0.0254000508001016,[1,0,0,0,0,0,0],null,"us-lengths",false,null,null,1,false,false,0,"US inches; in us; us in; inch US","UCUM","Len","Obsolete","Better to use [in_i] which refers to the length used worldwide, including in the US","[ft_us]/12","[FT_US]/12","1",1,false],[false,"rod - US","[rd_us]","[RD_US]","length",5.029210058420117,[1,0,0,0,0,0,0],null,"us-lengths",false,null,null,1,false,false,0,"US rod; US rods; rd US; US rd","UCUM","Len","Obsolete","","[ft_us]","[FT_US]","16.5",16.5,false],[false,"Gunter's chain - US","[ch_us]","[CH_US]","length",20.116840233680467,[1,0,0,0,0,0,0],null,"us-lengths",false,null,null,1,false,false,0,"surveyor's chain; Surveyor's chain USA; Gunter’s measurement; surveyor’s measurement; Gunter's Chain USA","UCUM","Len","Obsolete","historical unit used for land survey used only in the US","[rd_us]","[RD_US]","4",4,false],[false,"link for Gunter's chain - US","[lk_us]","[LK_US]","length",0.20116840233680466,[1,0,0,0,0,0,0],null,"us-lengths",false,null,null,1,false,false,0,"Links for Gunter's Chain USA","UCUM","Len","Obsolete","","[ch_us]/100","[CH_US]/100","1",1,false],[false,"Ramden's chain - US","[rch_us]","[RCH_US]","length",30.480060960121918,[1,0,0,0,0,0,0],null,"us-lengths",false,null,null,1,false,false,0,"Ramsden's chain; engineer's chains","UCUM","Len","Obsolete","distance measuring device used for land survey","[ft_us]","[FT_US]","100",100,false],[false,"link for Ramden's chain - US","[rlk_us]","[RLK_US]","length",0.3048006096012192,[1,0,0,0,0,0,0],null,"us-lengths",false,null,null,1,false,false,0,"links for Ramsden's chain","UCUM","Len","Obsolete","","[rch_us]/100","[RCH_US]/100","1",1,false],[false,"fathom - US","[fth_us]","[FTH_US]","length",1.828803657607315,[1,0,0,0,0,0,0],null,"us-lengths",false,null,null,1,false,false,0,"US fathoms; fathom USA; fth us","UCUM","Len","Obsolete","same length as the international fathom - better to use international fathom ([fth_i])","[ft_us]","[FT_US]","6",6,false],[false,"furlong - US","[fur_us]","[FUR_US]","length",201.16840233680466,[1,0,0,0,0,0,0],null,"us-lengths",false,null,null,1,false,false,0,"US furlongs; fur us","UCUM","Len","Nonclinical","distance unit in horse racing","[rd_us]","[RD_US]","40",40,false],[false,"mile - US","[mi_us]","[MI_US]","length",1609.3472186944373,[1,0,0,0,0,0,0],null,"us-lengths",false,null,null,1,false,false,0,"U.S. Survey Miles; US statute miles; survey mi; US mi; distance","UCUM","Len","Nonclinical","Better to use [mi_i] which refers to the length used worldwide, including in the US","[fur_us]","[FUR_US]","8",8,false],[false,"acre - US","[acr_us]","[ACR_US]","area",4046.872609874252,[2,0,0,0,0,0,0],null,"us-lengths",false,null,null,1,false,false,0,"Acre USA Survey; Acre USA; survey acres","UCUM","Area","Nonclinical","an older unit based on pre 1959 US statute lengths that is still sometimes used in the US only for land survey purposes. ","[rd_us]2","[RD_US]2","160",160,false],[false,"square rod - US","[srd_us]","[SRD_US]","area",25.292953811714074,[2,0,0,0,0,0,0],null,"us-lengths",false,null,null,1,false,false,0,"rod2; rod^2; sq. rod; rods squared","UCUM","Area","Nonclinical","Used only in the US to measure land area, based on US statute land survey length units","[rd_us]2","[RD_US]2","1",1,false],[false,"square mile - US","[smi_us]","[SMI_US]","area",2589998.470319521,[2,0,0,0,0,0,0],null,"us-lengths",false,null,null,1,false,false,0,"mi2; mi^2; sq mi; miles squared","UCUM","Area","Nonclinical","historical unit used only in the US for land survey purposes (based on the US survey mile), not the internationally recognized [mi_i]","[mi_us]2","[MI_US]2","1",1,false],[false,"section","[sct]","[SCT]","area",2589998.470319521,[2,0,0,0,0,0,0],null,"us-lengths",false,null,null,1,false,false,0,"sct; sections","UCUM","Area","Nonclinical","tract of land approximately equal to 1 mile square containing 640 acres","[mi_us]2","[MI_US]2","1",1,false],[false,"township","[twp]","[TWP]","area",93239944.93150276,[2,0,0,0,0,0,0],null,"us-lengths",false,null,null,1,false,false,0,"twp; townships","UCUM","Area","Nonclinical","land measurement equal to 6 mile square","[sct]","[SCT]","36",36,false],[false,"mil - US","[mil_us]","[MIL_US]","length",0.0000254000508001016,[1,0,0,0,0,0,0],null,"us-lengths",false,null,null,1,false,false,0,"thou, thousandth; mils","UCUM","Len","Obsolete","better to use [mil_i] which is based on the internationally recognized inch","[in_us]","[IN_US]","1e-3",0.001,false],[false,"inch - British","[in_br]","[IN_BR]","length",0.025399980000000003,[1,0,0,0,0,0,0],null,"brit-length",false,null,null,1,false,false,0,"imperial inches; imp in; br in; british inches","UCUM","Len","Obsolete","","cm","CM","2.539998",2.539998,false],[false,"foot - British","[ft_br]","[FT_BR]","length",0.30479976000000003,[1,0,0,0,0,0,0],null,"brit-length",false,null,null,1,false,false,0,"British Foot; Imperial Foot; feet; imp fts; br fts","UCUM","Len","Obsolete","","[in_br]","[IN_BR]","12",12,false],[false,"rod - British","[rd_br]","[RD_BR]","length",5.02919604,[1,0,0,0,0,0,0],null,"brit-length",false,null,null,1,false,false,0,"British rods; br rd","UCUM","Len","Obsolete","","[ft_br]","[FT_BR]","16.5",16.5,false],[false,"Gunter's chain - British","[ch_br]","[CH_BR]","length",20.11678416,[1,0,0,0,0,0,0],null,"brit-length",false,null,null,1,false,false,0,"Gunter's Chain British; Gunters Chain British; Surveyor's Chain British","UCUM","Len","Obsolete","historical unit used for land survey used only in Great Britain","[rd_br]","[RD_BR]","4",4,false],[false,"link for Gunter's chain - British","[lk_br]","[LK_BR]","length",0.2011678416,[1,0,0,0,0,0,0],null,"brit-length",false,null,null,1,false,false,0,"Links for Gunter's Chain British","UCUM","Len","Obsolete","","[ch_br]/100","[CH_BR]/100","1",1,false],[false,"fathom - British","[fth_br]","[FTH_BR]","length",1.82879856,[1,0,0,0,0,0,0],null,"brit-length",false,null,null,1,false,false,0,"British fathoms; imperial fathoms; br fth; imp fth","UCUM","Len","Obsolete","","[ft_br]","[FT_BR]","6",6,false],[false,"pace - British","[pc_br]","[PC_BR]","length",0.7619994000000001,[1,0,0,0,0,0,0],null,"brit-length",false,null,null,1,false,false,0,"British paces; br pc","UCUM","Len","Nonclinical","traditional unit of length equal to 152.4 centimeters, or 1.52 meter. ","[ft_br]","[FT_BR]","2.5",2.5,false],[false,"yard - British","[yd_br]","[YD_BR]","length",0.91439928,[1,0,0,0,0,0,0],null,"brit-length",false,null,null,1,false,false,0,"British yards; Br yds; distance","UCUM","Len","Obsolete","","[ft_br]","[FT_BR]","3",3,false],[false,"mile - British","[mi_br]","[MI_BR]","length",1609.3427328000002,[1,0,0,0,0,0,0],null,"brit-length",false,null,null,1,false,false,0,"imperial miles; British miles; English statute miles; imp mi, br mi","UCUM","Len","Obsolete","","[ft_br]","[FT_BR]","5280",5280,false],[false,"nautical mile - British","[nmi_br]","[NMI_BR]","length",1853.1825408000002,[1,0,0,0,0,0,0],null,"brit-length",false,null,null,1,false,false,0,"British nautical miles; Imperial nautical miles; Admiralty miles; n.m. br; imp nm","UCUM","Len","Obsolete","","[ft_br]","[FT_BR]","6080",6080,false],[false,"knot - British","[kn_br]","[KN_BR]","velocity",0.5147729280000001,[1,-1,0,0,0,0,0],null,"brit-length",false,null,null,1,false,false,0,"British knots; kn br; kt","UCUM","Vel","Obsolete","based on obsolete British nautical mile ","[nmi_br]/h","[NMI_BR]/H","1",1,false],[false,"acre","[acr_br]","[ACR_BR]","area",4046.850049400269,[2,0,0,0,0,0,0],null,"brit-length",false,null,null,1,false,false,0,"Imperial acres; British; a; ac; ar; acr","UCUM","Area","Nonclinical","the standard unit for acre used in the US and internationally","[yd_br]2","[YD_BR]2","4840",4840,false],[false,"gallon - US","[gal_us]","[GAL_US]","fluid volume",0.0037854117840000006,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"US gallons; US liquid gallon; gal us; Queen Anne's wine gallon","UCUM","Vol","Nonclinical","only gallon unit used in the US; [gal_us] is only used in some other countries in South American and Africa to measure gasoline volume","[in_i]3","[IN_I]3","231",231,false],[false,"barrel - US","[bbl_us]","[BBL_US]","fluid volume",0.158987294928,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"bbl","UCUM","Vol","Nonclinical","[bbl_us] is the standard unit for oil barrel, which is a unit only used in the US to measure the volume oil. ","[gal_us]","[GAL_US]","42",42,false],[false,"quart - US","[qt_us]","[QT_US]","fluid volume",0.0009463529460000001,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"US quarts; us qts","UCUM","Vol","Clinical","Used only in the US","[gal_us]/4","[GAL_US]/4","1",1,false],[false,"pint - US","[pt_us]","[PT_US]","fluid volume",0.00047317647300000007,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"US pints; pint US; liquid pint; pt us; us pt","UCUM","Vol","Clinical","Used only in the US","[qt_us]/2","[QT_US]/2","1",1,false],[false,"gill - US","[gil_us]","[GIL_US]","fluid volume",0.00011829411825000002,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"US gills; gil us","UCUM","Vol","Nonclinical","only used in the context of alcohol volume in the US","[pt_us]/4","[PT_US]/4","1",1,false],[false,"fluid ounce - US","[foz_us]","[FOZ_US]","fluid volume",0.000029573529562500005,[3,0,0,0,0,0,0],"oz fl","us-volumes",false,null,null,1,false,false,0,"US fluid ounces; fl ozs; FO; fl. oz.; foz us","UCUM","Vol","Clinical","unit used only in the US","[gil_us]/4","[GIL_US]/4","1",1,false],[false,"fluid dram - US","[fdr_us]","[FDR_US]","fluid volume",0.0000036966911953125006,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"US fluid drams; fdr us","UCUM","Vol","Nonclinical","equal to 1/8 US fluid ounce = 3.69 mL; used informally to mean small amount of liquor, especially Scotch whiskey","[foz_us]/8","[FOZ_US]/8","1",1,false],[false,"minim - US","[min_us]","[MIN_US]","fluid volume",6.1611519921875e-8,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"min US; US min; ♏ US","UCUM","Vol","Obsolete","","[fdr_us]/60","[FDR_US]/60","1",1,false],[false,"cord - US","[crd_us]","[CRD_US]","fluid volume",3.6245563637760005,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"US cord; US cords; crd us; us crd","UCUM","Vol","Nonclinical","unit of measure of dry volume used to measure firewood equal 128 ft3 (the same as international cord [cr_i])","[ft_i]3","[FT_I]3","128",128,false],[false,"bushel - US","[bu_us]","[BU_US]","dry volume",0.03523907016688001,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"US bushels; US bsh; US bu","UCUM","Vol","Obsolete","Historical unit of dry volume that is rarely used today","[in_i]3","[IN_I]3","2150.42",2150.42,false],[false,"gallon - historical","[gal_wi]","[GAL_WI]","dry volume",0.004404883770860001,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"Corn Gallon British; Dry Gallon US; Gallons Historical; Grain Gallon British; Winchester Corn Gallon; historical winchester gallons; wi gal","UCUM","Vol","Obsolete","historical unit of dry volume no longer used","[bu_us]/8","[BU_US]/8","1",1,false],[false,"peck - US","[pk_us]","[PK_US]","dry volume",0.008809767541720002,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"US pecks; US pk","UCUM","Vol","Nonclinical","unit of dry volume rarely used today (can be used to measure volume of apples)","[bu_us]/4","[BU_US]/4","1",1,false],[false,"dry quart - US","[dqt_us]","[DQT_US]","dry volume",0.0011012209427150002,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"dry quarts; dry quart US; US dry quart; dry qt; us dry qt; dqt; dqt us","UCUM","Vol","Nonclinical","historical unit of dry volume only in the US, but is rarely used today","[pk_us]/8","[PK_US]/8","1",1,false],[false,"dry pint - US","[dpt_us]","[DPT_US]","dry volume",0.0005506104713575001,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"dry pints; dry pint US; US dry pint; dry pt; dpt; dpt us","UCUM","Vol","Nonclinical","historical unit of dry volume only in the US, but is rarely used today","[dqt_us]/2","[DQT_US]/2","1",1,false],[false,"tablespoon - US","[tbs_us]","[TBS_US]","volume",0.000014786764781250002,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"Tbs; tbsp; tbs us; US tablespoons","UCUM","Vol","Clinical","unit defined as 0.5 US fluid ounces or 3 teaspoons - used only in the US. See [tbs_m] for the unit used internationally and in the US for nutrional labelling. ","[foz_us]/2","[FOZ_US]/2","1",1,false],[false,"teaspoon - US","[tsp_us]","[TSP_US]","volume",0.0000049289215937500005,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"tsp; t; US teaspoons","UCUM","Vol","Nonclinical","unit defined as 1/6 US fluid ounces - used only in the US. See [tsp_m] for the unit used internationally and in the US for nutrional labelling. ","[tbs_us]/3","[TBS_US]/3","1",1,false],[false,"cup - US customary","[cup_us]","[CUP_US]","volume",0.00023658823650000004,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"cup us; us cups","UCUM","Vol","Nonclinical","Unit defined as 1/2 US pint or 16 US tablespoons ≈ 236.59 mL, which is not the standard unit defined by the FDA of 240 mL - see [cup_m] (metric cup)","[tbs_us]","[TBS_US]","16",16,false],[false,"fluid ounce - metric","[foz_m]","[FOZ_M]","fluid volume",0.000029999999999999997,[3,0,0,0,0,0,0],"oz fl","us-volumes",false,null,null,1,false,false,0,"metric fluid ounces; fozs m; fl ozs m","UCUM","Vol","Clinical","unit used only in the US for nutritional labelling, as set by the FDA","mL","ML","30",30,false],[false,"cup - US legal","[cup_m]","[CUP_M]","volume",0.00023999999999999998,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"cup m; metric cups","UCUM","Vol","Clinical","standard unit equal to 240 mL used in the US for nutritional labelling, as defined by the FDA. Note that this is different from the US customary cup (236.59 mL) and the metric cup used in Commonwealth nations (250 mL).","mL","ML","240",240,false],[false,"teaspoon - metric","[tsp_m]","[TSP_M]","volume",0.0000049999999999999996,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"tsp; t; metric teaspoons","UCUM","Vol","Clinical","standard unit used in the US and internationally","mL","mL","5",5,false],[false,"tablespoon - metric","[tbs_m]","[TBS_M]","volume",0.000014999999999999999,[3,0,0,0,0,0,0],null,"us-volumes",false,null,null,1,false,false,0,"metric tablespoons; Tbs; tbsp; T; tbs m","UCUM","Vol","Clinical","standard unit used in the US and internationally","mL","mL","15",15,false],[false,"gallon- British","[gal_br]","[GAL_BR]","volume",0.004546090000000001,[3,0,0,0,0,0,0],null,"brit-volumes",false,null,null,1,false,false,0,"imperial gallons, UK gallons; British gallons; br gal; imp gal","UCUM","Vol","Nonclinical","Used only in Great Britain and other Commonwealth countries","l","L","4.54609",4.54609,false],[false,"peck - British","[pk_br]","[PK_BR]","volume",0.009092180000000002,[3,0,0,0,0,0,0],null,"brit-volumes",false,null,null,1,false,false,0,"imperial pecks; British pecks; br pk; imp pk","UCUM","Vol","Nonclinical","unit of dry volume rarely used today (can be used to measure volume of apples)","[gal_br]","[GAL_BR]","2",2,false],[false,"bushel - British","[bu_br]","[BU_BR]","volume",0.03636872000000001,[3,0,0,0,0,0,0],null,"brit-volumes",false,null,null,1,false,false,0,"British bushels; imperial; br bsh; br bu; imp","UCUM","Vol","Obsolete","Historical unit of dry volume that is rarely used today","[pk_br]","[PK_BR]","4",4,false],[false,"quart - British","[qt_br]","[QT_BR]","volume",0.0011365225000000002,[3,0,0,0,0,0,0],null,"brit-volumes",false,null,null,1,false,false,0,"British quarts; imperial quarts; br qts","UCUM","Vol","Clinical","Used only in Great Britain and other Commonwealth countries","[gal_br]/4","[GAL_BR]/4","1",1,false],[false,"pint - British","[pt_br]","[PT_BR]","volume",0.0005682612500000001,[3,0,0,0,0,0,0],null,"brit-volumes",false,null,null,1,false,false,0,"British pints; imperial pints; pt br; br pt; imp pt; pt imp","UCUM","Vol","Clinical","Used only in Great Britain and other Commonwealth countries","[qt_br]/2","[QT_BR]/2","1",1,false],[false,"gill - British","[gil_br]","[GIL_BR]","volume",0.00014206531250000003,[3,0,0,0,0,0,0],null,"brit-volumes",false,null,null,1,false,false,0,"imperial gills; British gills; imp gill, br gill","UCUM","Vol","Nonclinical","only used in the context of alcohol volume in Great Britain","[pt_br]/4","[PT_BR]/4","1",1,false],[false,"fluid ounce - British","[foz_br]","[FOZ_BR]","volume",0.000028413062500000005,[3,0,0,0,0,0,0],null,"brit-volumes",false,null,null,1,false,false,0,"British fluid ounces; Imperial fluid ounces; br fozs; imp fozs; br fl ozs","UCUM","Vol","Clinical","Used only in Great Britain and other Commonwealth countries","[gil_br]/5","[GIL_BR]/5","1",1,false],[false,"fluid dram - British","[fdr_br]","[FDR_BR]","volume",0.0000035516328125000006,[3,0,0,0,0,0,0],null,"brit-volumes",false,null,null,1,false,false,0,"British fluid drams; fdr br","UCUM","Vol","Nonclinical","equal to 1/8 Imperial fluid ounce = 3.55 mL; used informally to mean small amount of liquor, especially Scotch whiskey","[foz_br]/8","[FOZ_BR]/8","1",1,false],[false,"minim - British","[min_br]","[MIN_BR]","volume",5.919388020833334e-8,[3,0,0,0,0,0,0],null,"brit-volumes",false,null,null,1,false,false,0,"min br; br min; ♏ br","UCUM","Vol","Obsolete","","[fdr_br]/60","[FDR_BR]/60","1",1,false],[false,"grain","[gr]","[GR]","mass",0.06479891,[0,0,1,0,0,0,0],null,"avoirdupois",false,null,null,1,false,false,0,"gr; grains","UCUM","Mass","Nonclinical","an apothecary measure of mass rarely used today","mg","MG","64.79891",64.79891,false],[false,"pound","[lb_av]","[LB_AV]","mass",453.59237,[0,0,1,0,0,0,0],"lb","avoirdupois",false,null,null,1,false,false,0,"avoirdupois pounds, international pounds; av lbs; pounds","UCUM","Mass","Clinical","standard unit used in the US and internationally","[gr]","[GR]","7000",7000,false],[false,"pound force - US","[lbf_av]","[LBF_AV]","force",4448.2216152605,[1,-2,1,0,0,0,0],"lbf","const",false,null,null,1,false,false,0,"lbfs; US lbf; US pound forces","UCUM","Force","Clinical","only rarely needed in health care - see [lb_av] which is the more common unit to express weight","[lb_av].[g]","[LB_AV].[G]","1",1,false],[false,"ounce","[oz_av]","[OZ_AV]","mass",28.349523125,[0,0,1,0,0,0,0],"oz","avoirdupois",false,null,null,1,false,false,0,"ounces; international ounces; avoirdupois ounces; av ozs","UCUM","Mass","Clinical","standard unit used in the US and internationally","[lb_av]/16","[LB_AV]/16","1",1,false],[false,"Dram mass unit","[dr_av]","[DR_AV]","mass",1.7718451953125,[0,0,1,0,0,0,0],null,"avoirdupois",false,null,null,1,false,false,0,"Dram; drams avoirdupois; avoidupois dram; international dram","UCUM","Mass","Clinical","unit from the avoirdupois system, which is used in the US and internationally","[oz_av]/16","[OZ_AV]/16","1",1,false],[false,"short hundredweight","[scwt_av]","[SCWT_AV]","mass",45359.237,[0,0,1,0,0,0,0],null,"avoirdupois",false,null,null,1,false,false,0,"hundredweights; s cwt; scwt; avoirdupois","UCUM","Mass","Nonclinical","Used only in the US to equal 100 pounds","[lb_av]","[LB_AV]","100",100,false],[false,"long hundredweight","[lcwt_av]","[LCWT_AV]","mass",50802.345440000005,[0,0,1,0,0,0,0],null,"avoirdupois",false,null,null,1,false,false,0,"imperial hundredweights; imp cwt; lcwt; avoirdupois","UCUM","Mass","Obsolete","","[lb_av]","[LB_AV]","112",112,false],[false,"short ton - US","[ston_av]","[STON_AV]","mass",907184.74,[0,0,1,0,0,0,0],null,"avoirdupois",false,null,null,1,false,false,0,"ton; US tons; avoirdupois tons","UCUM","Mass","Clinical","Used only in the US","[scwt_av]","[SCWT_AV]","20",20,false],[false,"long ton - British","[lton_av]","[LTON_AV]","mass",1016046.9088000001,[0,0,1,0,0,0,0],null,"avoirdupois",false,null,null,1,false,false,0,"imperial tons; weight tons; British long tons; long ton avoirdupois","UCUM","Mass","Nonclinical","Used only in Great Britain and other Commonwealth countries","[lcwt_av]","[LCWT_AV]","20",20,false],[false,"stone - British","[stone_av]","[STONE_AV]","mass",6350.293180000001,[0,0,1,0,0,0,0],null,"avoirdupois",false,null,null,1,false,false,0,"British stones; avoirdupois","UCUM","Mass","Nonclinical","Used primarily in the UK and Ireland to measure body weight","[lb_av]","[LB_AV]","14",14,false],[false,"pennyweight - troy","[pwt_tr]","[PWT_TR]","mass",1.5551738400000001,[0,0,1,0,0,0,0],null,"troy",false,null,null,1,false,false,0,"dwt; denarius weights","UCUM","Mass","Obsolete","historical unit used to measure mass and cost of precious metals","[gr]","[GR]","24",24,false],[false,"ounce - troy","[oz_tr]","[OZ_TR]","mass",31.103476800000003,[0,0,1,0,0,0,0],null,"troy",false,null,null,1,false,false,0,"troy ounces; tr ozs","UCUM","Mass","Nonclinical","unit of mass for precious metals and gemstones only","[pwt_tr]","[PWT_TR]","20",20,false],[false,"pound - troy","[lb_tr]","[LB_TR]","mass",373.2417216,[0,0,1,0,0,0,0],null,"troy",false,null,null,1,false,false,0,"troy pounds; tr lbs","UCUM","Mass","Nonclinical","only used for weighing precious metals","[oz_tr]","[OZ_TR]","12",12,false],[false,"scruple","[sc_ap]","[SC_AP]","mass",1.2959782,[0,0,1,0,0,0,0],null,"apoth",false,null,null,1,false,false,0,"scruples; sc ap","UCUM","Mass","Obsolete","","[gr]","[GR]","20",20,false],[false,"dram - apothecary","[dr_ap]","[DR_AP]","mass",3.8879346,[0,0,1,0,0,0,0],null,"apoth",false,null,null,1,false,false,0,"ʒ; drachm; apothecaries drams; dr ap; dram ap","UCUM","Mass","Nonclinical","unit still used in the US occasionally to measure amount of drugs in pharmacies","[sc_ap]","[SC_AP]","3",3,false],[false,"ounce - apothecary","[oz_ap]","[OZ_AP]","mass",31.1034768,[0,0,1,0,0,0,0],null,"apoth",false,null,null,1,false,false,0,"apothecary ounces; oz ap; ap ozs; ozs ap","UCUM","Mass","Obsolete","","[dr_ap]","[DR_AP]","8",8,false],[false,"pound - apothecary","[lb_ap]","[LB_AP]","mass",373.2417216,[0,0,1,0,0,0,0],null,"apoth",false,null,null,1,false,false,0,"apothecary pounds; apothecaries pounds; ap lb; lb ap; ap lbs; lbs ap","UCUM","Mass","Obsolete","","[oz_ap]","[OZ_AP]","12",12,false],[false,"ounce - metric","[oz_m]","[OZ_M]","mass",28,[0,0,1,0,0,0,0],null,"apoth",false,null,null,1,false,false,0,"metric ounces; m ozs","UCUM","Mass","Clinical","see [oz_av] (the avoirdupois ounce) for the standard ounce used internationally; [oz_m] is equal to 28 grams and is based on the apothecaries' system of mass units which is used in some US pharmacies. ","g","g","28",28,false],[false,"line","[lne]","[LNE]","length",0.002116666666666667,[1,0,0,0,0,0,0],null,"typeset",false,null,null,1,false,false,0,"British lines; br L; L; l","UCUM","Len","Obsolete","","[in_i]/12","[IN_I]/12","1",1,false],[false,"point (typography)","[pnt]","[PNT]","length",0.0003527777777777778,[1,0,0,0,0,0,0],null,"typeset",false,null,null,1,false,false,0,"DTP points; desktop publishing point; pt; pnt","UCUM","Len","Nonclinical","typography unit for typesetter's length","[lne]/6","[LNE]/6","1",1,false],[false,"pica (typography)","[pca]","[PCA]","length",0.004233333333333334,[1,0,0,0,0,0,0],null,"typeset",false,null,null,1,false,false,0,"picas","UCUM","Len","Nonclinical","typography unit for typesetter's length","[pnt]","[PNT]","12",12,false],[false,"Printer's point (typography)","[pnt_pr]","[PNT_PR]","length",0.00035145980000000004,[1,0,0,0,0,0,0],null,"typeset",false,null,null,1,false,false,0,"pnt pr","UCUM","Len","Nonclinical","typography unit for typesetter's length","[in_i]","[IN_I]","0.013837",0.013837,false],[false,"Printer's pica  (typography)","[pca_pr]","[PCA_PR]","length",0.004217517600000001,[1,0,0,0,0,0,0],null,"typeset",false,null,null,1,false,false,0,"pca pr; Printer's picas","UCUM","Len","Nonclinical","typography unit for typesetter's length","[pnt_pr]","[PNT_PR]","12",12,false],[false,"pied","[pied]","[PIED]","length",0.3248,[1,0,0,0,0,0,0],null,"typeset",false,null,null,1,false,false,0,"pieds du roi; Paris foot; royal; French; feet","UCUM","Len","Obsolete","","cm","CM","32.48",32.48,false],[false,"pouce","[pouce]","[POUCE]","length",0.027066666666666666,[1,0,0,0,0,0,0],null,"typeset",false,null,null,1,false,false,0,"historical French inches; French royal inches","UCUM","Len","Obsolete","","[pied]/12","[PIED]/12","1",1,false],[false,"ligne","[ligne]","[LIGNE]","length",0.0022555555555555554,[1,0,0,0,0,0,0],null,"typeset",false,null,null,1,false,false,0,"Paris lines; lignes","UCUM","Len","Obsolete","","[pouce]/12","[POUCE]/12","1",1,false],[false,"didot","[didot]","[DIDOT]","length",0.0003759259259259259,[1,0,0,0,0,0,0],null,"typeset",false,null,null,1,false,false,0,"Didot point; dd; Didots Point; didots; points","UCUM","Len","Obsolete","typography unit for typesetter's length","[ligne]/6","[LIGNE]/6","1",1,false],[false,"cicero","[cicero]","[CICERO]","length",0.004511111111111111,[1,0,0,0,0,0,0],null,"typeset",false,null,null,1,false,false,0,"Didot's pica; ciceros; picas","UCUM","Len","Obsolete","typography unit for typesetter's length","[didot]","[DIDOT]","12",12,false],[false,"degrees Fahrenheit","[degF]","[DEGF]","temperature",0.5555555555555556,[0,0,0,0,1,0,0],"°F","heat",false,null,"degF",1,true,false,0,"°F; deg F","UCUM","Temp","Clinical","","K",null,null,0.5555555555555556,false],[false,"degrees Rankine","[degR]","[degR]","temperature",0.5555555555555556,[0,0,0,0,1,0,0],"°R","heat",false,null,null,1,false,false,0,"°R; °Ra; Rankine","UCUM","Temp","Obsolete","Replaced by Kelvin","K/9","K/9","5",5,false],[false,"degrees Réaumur","[degRe]","[degRe]","temperature",1.25,[0,0,0,0,1,0,0],"°Ré","heat",false,null,"degRe",1,true,false,0,"°Ré, °Re, °r; Réaumur; degree Reaumur; Reaumur","UCUM","Temp","Obsolete","replaced by Celsius","K",null,null,1.25,false],[false,"calorie at 15°C","cal_[15]","CAL_[15]","energy",4185.8,[2,-2,1,0,0,0,0],"cal<sub>15°C</sub>","heat",true,null,null,1,false,false,0,"calorie 15 C; cals 15 C; calories at 15 C","UCUM","Enrg","Nonclinical","equal to 4.1855 joules; calorie most often used in engineering","J","J","4.18580",4.1858,false],[false,"calorie at 20°C","cal_[20]","CAL_[20]","energy",4181.9,[2,-2,1,0,0,0,0],"cal<sub>20°C</sub>","heat",true,null,null,1,false,false,0,"calorie 20 C; cal 20 C; calories at 20 C","UCUM","Enrg","Clinical","equal to 4.18190  joules. ","J","J","4.18190",4.1819,false],[false,"mean calorie","cal_m","CAL_M","energy",4190.0199999999995,[2,-2,1,0,0,0,0],"cal<sub>m</sub>","heat",true,null,null,1,false,false,0,"mean cals; mean calories","UCUM","Enrg","Clinical","equal to 4.19002 joules. ","J","J","4.19002",4.19002,false],[false,"international table calorie","cal_IT","CAL_IT","energy",4186.8,[2,-2,1,0,0,0,0],"cal<sub>IT</sub>","heat",true,null,null,1,false,false,0,"calories IT; IT cals; international steam table calories","UCUM","Enrg","Nonclinical","used in engineering steam tables and defined as 1/860 international watt-hour; equal to 4.1868 joules","J","J","4.1868",4.1868,false],[false,"thermochemical calorie","cal_th","CAL_TH","energy",4184,[2,-2,1,0,0,0,0],"cal<sub>th</sub>","heat",true,null,null,1,false,false,0,"thermochemical calories; th cals","UCUM","Enrg","Clinical","equal to 4.184 joules; used as the unit in medicine and biochemistry (equal to cal)","J","J","4.184",4.184,false],[false,"calorie","cal","CAL","energy",4184,[2,-2,1,0,0,0,0],"cal","heat",true,null,null,1,false,false,0,"gram calories; small calories","UCUM","Enrg","Clinical","equal to 4.184 joules (the same value as the thermochemical calorie, which is the most common calorie used in medicine and biochemistry)","cal_th","CAL_TH","1",1,false],[false,"nutrition label Calories","[Cal]","[CAL]","energy",4184000,[2,-2,1,0,0,0,0],"Cal","heat",false,null,null,1,false,false,0,"food calories; Cal; kcal","UCUM","Eng","Clinical","","kcal_th","KCAL_TH","1",1,false],[false,"British thermal unit at 39°F","[Btu_39]","[BTU_39]","energy",1059670,[2,-2,1,0,0,0,0],"Btu<sub>39°F</sub>","heat",false,null,null,1,false,false,0,"BTU 39F; BTU 39 F; B.T.U. 39 F; B.Th.U. 39 F; BThU 39 F; British thermal units","UCUM","Eng","Nonclinical","equal to 1.05967 kJ; used as a measure of power in the electric power, steam generation, heating, and air conditioning industries","kJ","kJ","1.05967",1.05967,false],[false,"British thermal unit at 59°F","[Btu_59]","[BTU_59]","energy",1054800,[2,-2,1,0,0,0,0],"Btu<sub>59°F</sub>","heat",false,null,null,1,false,false,0,"BTU 59 F; BTU 59F; B.T.U. 59 F; B.Th.U. 59 F; BThU 59F; British thermal units","UCUM","Eng","Nonclinical","equal to  1.05480 kJ; used as a measure of power in the electric power, steam generation, heating, and air conditioning industries","kJ","kJ","1.05480",1.0548,false],[false,"British thermal unit at 60°F","[Btu_60]","[BTU_60]","energy",1054680,[2,-2,1,0,0,0,0],"Btu<sub>60°F</sub>","heat",false,null,null,1,false,false,0,"BTU 60 F; BTU 60F; B.T.U. 60 F; B.Th.U. 60 F; BThU 60 F; British thermal units 60 F","UCUM","Eng","Nonclinical","equal to 1.05468 kJ; used as a measure of power in the electric power, steam generation, heating, and air conditioning industries","kJ","kJ","1.05468",1.05468,false],[false,"mean British thermal unit","[Btu_m]","[BTU_M]","energy",1055870,[2,-2,1,0,0,0,0],"Btu<sub>m</sub>","heat",false,null,null,1,false,false,0,"BTU mean; B.T.U. mean; B.Th.U. mean; BThU mean; British thermal units mean; ","UCUM","Eng","Nonclinical","equal to 1.05587 kJ; used as a measure of power in the electric power, steam generation, heating, and air conditioning industries","kJ","kJ","1.05587",1.05587,false],[false,"international table British thermal unit","[Btu_IT]","[BTU_IT]","energy",1055055.85262,[2,-2,1,0,0,0,0],"Btu<sub>IT</sub>","heat",false,null,null,1,false,false,0,"BTU IT; B.T.U. IT; B.Th.U. IT; BThU IT; British thermal units IT","UCUM","Eng","Nonclinical","equal to 1.055 kJ; used as a measure of power in the electric power, steam generation, heating, and air conditioning industries","kJ","kJ","1.05505585262",1.05505585262,false],[false,"thermochemical British thermal unit","[Btu_th]","[BTU_TH]","energy",1054350,[2,-2,1,0,0,0,0],"Btu<sub>th</sub>","heat",false,null,null,1,false,false,0,"BTU Th; B.T.U. Th; B.Th.U. Th; BThU Th; thermochemical British thermal units","UCUM","Eng","Nonclinical","equal to 1.054350 kJ; used as a measure of power in the electric power, steam generation, heating, and air conditioning industries","kJ","kJ","1.054350",1.05435,false],[false,"British thermal unit","[Btu]","[BTU]","energy",1054350,[2,-2,1,0,0,0,0],"btu","heat",false,null,null,1,false,false,0,"BTU; B.T.U. ; B.Th.U.; BThU; British thermal units","UCUM","Eng","Nonclinical","equal to the thermochemical British thermal unit equal to 1.054350 kJ; used as a measure of power in the electric power, steam generation, heating, and air conditioning industries","[Btu_th]","[BTU_TH]","1",1,false],[false,"horsepower - mechanical","[HP]","[HP]","power",745699.8715822703,[2,-3,1,0,0,0,0],null,"heat",false,null,null,1,false,false,0,"imperial horsepowers","UCUM","EngRat","Nonclinical","refers to mechanical horsepower, which is unit used to measure engine power primarily in the US. ","[ft_i].[lbf_av]/s","[FT_I].[LBF_AV]/S","550",550,false],[false,"tex","tex","TEX","linear mass density (of textile thread)",0.001,[-1,0,1,0,0,0,0],"tex","heat",true,null,null,1,false,false,0,"linear mass density; texes","UCUM","","Clinical","unit of linear mass density for fibers equal to gram per 1000 meters","g/km","G/KM","1",1,false],[false,"Denier (linear mass density)","[den]","[DEN]","linear mass density (of textile thread)",0.0001111111111111111,[-1,0,1,0,0,0,0],"den","heat",false,null,null,1,false,false,0,"den; deniers","UCUM","","Nonclinical","equal to the mass in grams per 9000 meters of the fiber (1 denier = 1 strand of silk)","g/9/km","G/9/KM","1",1,false],[false,"meter of water column","m[H2O]","M[H2O]","pressure",9806650,[-1,-2,1,0,0,0,0],"m HO<sub><r>2</r></sub>","clinical",true,null,null,1,false,false,0,"mH2O; m H2O; meters of water column; metres; pressure","UCUM","Pres","Clinical","","kPa","KPAL","980665e-5",9.80665,false],[false,"meter of mercury column","m[Hg]","M[HG]","pressure",133322000,[-1,-2,1,0,0,0,0],"m Hg","clinical",true,null,null,1,false,false,0,"mHg; m Hg; meters of mercury column; metres; pressure","UCUM","Pres","Clinical","","kPa","KPAL","133.3220",133.322,false],[false,"inch of water column","[in_i'H2O]","[IN_I'H2O]","pressure",249088.91000000003,[-1,-2,1,0,0,0,0],"in HO<sub><r>2</r></sub>","clinical",false,null,null,1,false,false,0,"inches WC; inAq; in H2O; inch of water gauge; iwg; pressure","UCUM","Pres","Clinical","unit of pressure, especially in respiratory and ventilation care","m[H2O].[in_i]/m","M[H2O].[IN_I]/M","1",1,false],[false,"inch of mercury column","[in_i'Hg]","[IN_I'HG]","pressure",3386378.8000000003,[-1,-2,1,0,0,0,0],"in Hg","clinical",false,null,null,1,false,false,0,"inHg; in Hg; pressure; inches","UCUM","Pres","Clinical","unit of pressure used in US to measure barometric pressure and occasionally blood pressure (see mm[Hg] for unit used internationally)","m[Hg].[in_i]/m","M[HG].[IN_I]/M","1",1,false],[false,"peripheral vascular resistance unit","[PRU]","[PRU]","fluid resistance",133322000000,[-4,-1,1,0,0,0,0],"P.R.U.","clinical",false,null,null,1,false,false,0,"peripheral vascular resistance units; peripheral resistance unit; peripheral resistance units; PRU","UCUM","FldResist","Clinical","used to assess blood flow in the capillaries; equal to 1 mmH.min/mL = 133.3 Pa·min/mL","mm[Hg].s/ml","MM[HG].S/ML","1",1,false],[false,"Wood unit","[wood'U]","[WOOD'U]","fluid resistance",7999320000,[-4,-1,1,0,0,0,0],"Wood U.","clinical",false,null,null,1,false,false,0,"hybrid reference units; HRU; mmHg.min/L; vascular resistance","UCUM","Pres","Clinical","simplified unit of measurement for for measuring pulmonary vascular resistance that uses pressure; equal to mmHg.min/L","mm[Hg].min/L","MM[HG].MIN/L","1",1,false],[false,"diopter (lens)","[diop]","[DIOP]","refraction of a lens",1,[1,0,0,0,0,0,0],"dpt","clinical",false,null,"inv",1,false,false,0,"diopters; diop; dioptre; dpt; refractive power","UCUM","InvLen","Clinical","unit of optical power of lens represented by inverse meters (m^-1)","m","/M","1",1,false],[false,"prism diopter (magnifying power)","[p'diop]","[P'DIOP]","refraction of a prism",1,[0,0,0,1,0,0,0],"PD","clinical",false,null,"tanTimes100",1,true,false,0,"diopters; dioptres; p diops; pdiop; dpt; pdptr; Δ; cm/m; centimeter per meter; centimetre; metre","UCUM","Angle","Clinical","unit for prism correction in eyeglass prescriptions","rad",null,null,1,false],[false,"percent of slope","%[slope]","%[SLOPE]","slope",0.017453292519943295,[0,0,0,1,0,0,0],"%","clinical",false,null,"100tan",1,true,false,0,"% slope; %slope; percents slopes","UCUM","VelFr; ElpotRatFr; VelRtoFr; AccelFr","Clinical","","deg",null,null,1,false],[false,"mesh","[mesh_i]","[MESH_I]","lineic number",0.025400000000000002,[1,0,0,0,0,0,0],null,"clinical",false,null,"inv",1,false,false,0,"meshes","UCUM","NLen (lineic number)","Clinical","traditional unit of length defined as the number of strands or particles per inch","[in_i]","/[IN_I]","1",1,false],[false,"French (catheter gauge) ","[Ch]","[CH]","gauge of catheters",0.0003333333333333333,[1,0,0,0,0,0,0],"Ch","clinical",false,null,null,1,false,false,0,"Charrières, French scales; French gauges; Fr, Fg, Ga, FR, Ch","UCUM","Len; Circ; Diam","Clinical","","mm/3","MM/3","1",1,false],[false,"drop - metric (1/20 mL)","[drp]","[DRP]","volume",5e-8,[3,0,0,0,0,0,0],"drp","clinical",false,null,null,1,false,false,0,"drop dosing units; metric drops; gtt","UCUM","Vol","Clinical","standard unit used in the US and internationally for clinical medicine but note that although [drp] is defined as 1/20 milliliter, in practice, drop sizes will vary due to external factors","ml/20","ML/20","1",1,false],[false,"Hounsfield unit","[hnsf'U]","[HNSF'U]","x-ray attenuation",1,[0,0,0,0,0,0,0],"HF","clinical",false,null,null,1,false,false,0,"HU; units","UCUM","","Clinical","used to measure X-ray attenuation, especially in CT scans.","1","1","1",1,false],[false,"Metabolic Equivalent of Task ","[MET]","[MET]","metabolic cost of physical activity",5.833333333333334e-11,[3,-1,-1,0,0,0,0],"MET","clinical",false,null,null,1,false,false,0,"metabolic equivalents","UCUM","RelEngRat","Clinical","unit used to measure rate of energy expenditure per power in treadmill and other functional tests","mL/min/kg","ML/MIN/KG","3.5",3.5,false],[false,"homeopathic potency of decimal series (retired)","[hp'_X]","[HP'_X]","homeopathic potency (retired)",1,[0,0,0,0,0,0,0],"X","clinical",false,null,"hpX",1,true,false,0,null,"UCUM",null,null,null,"1",null,null,1,false],[false,"homeopathic potency of centesimal series (retired)","[hp'_C]","[HP'_C]","homeopathic potency (retired)",1,[0,0,0,0,0,0,0],"C","clinical",false,null,"hpC",1,true,false,0,null,"UCUM",null,null,null,"1",null,null,1,false],[false,"homeopathic potency of millesimal series (retired)","[hp'_M]","[HP'_M]","homeopathic potency (retired)",1,[0,0,0,0,0,0,0],"M","clinical",false,null,"hpM",1,true,false,0,null,"UCUM",null,null,null,"1",null,null,1,false],[false,"homeopathic potency of quintamillesimal series (retired)","[hp'_Q]","[HP'_Q]","homeopathic potency (retired)",1,[0,0,0,0,0,0,0],"Q","clinical",false,null,"hpQ",1,true,false,0,null,"UCUM",null,null,null,"1",null,null,1,false],[false,"homeopathic potency of decimal hahnemannian series","[hp_X]","[HP_X]","homeopathic potency (Hahnemann)",1,[0,0,0,0,0,0,0],"X","clinical",false,null,null,1,false,true,0,null,"UCUM",null,null,null,"1","1","1",1,false],[false,"homeopathic potency of centesimal hahnemannian series","[hp_C]","[HP_C]","homeopathic potency (Hahnemann)",1,[0,0,0,0,0,0,0],"C","clinical",false,null,null,1,false,true,0,null,"UCUM",null,null,null,"1","1","1",1,false],[false,"homeopathic potency of millesimal hahnemannian series","[hp_M]","[HP_M]","homeopathic potency (Hahnemann)",1,[0,0,0,0,0,0,0],"M","clinical",false,null,null,1,false,true,0,null,"UCUM",null,null,null,"1","1","1",1,false],[false,"homeopathic potency of quintamillesimal hahnemannian series","[hp_Q]","[HP_Q]","homeopathic potency (Hahnemann)",1,[0,0,0,0,0,0,0],"Q","clinical",false,null,null,1,false,true,0,null,"UCUM",null,null,null,"1","1","1",1,false],[false,"homeopathic potency of decimal korsakovian series","[kp_X]","[KP_X]","homeopathic potency (Korsakov)",1,[0,0,0,0,0,0,0],"X","clinical",false,null,null,1,false,true,0,null,"UCUM",null,null,null,"1","1","1",1,false],[false,"homeopathic potency of centesimal korsakovian series","[kp_C]","[KP_C]","homeopathic potency (Korsakov)",1,[0,0,0,0,0,0,0],"C","clinical",false,null,null,1,false,true,0,null,"UCUM",null,null,null,"1","1","1",1,false],[false,"homeopathic potency of millesimal korsakovian series","[kp_M]","[KP_M]","homeopathic potency (Korsakov)",1,[0,0,0,0,0,0,0],"M","clinical",false,null,null,1,false,true,0,null,"UCUM",null,null,null,"1","1","1",1,false],[false,"homeopathic potency of quintamillesimal korsakovian series","[kp_Q]","[KP_Q]","homeopathic potency (Korsakov)",1,[0,0,0,0,0,0,0],"Q","clinical",false,null,null,1,false,true,0,null,"UCUM",null,null,null,"1","1","1",1,false],[false,"equivalent","eq","EQ","amount of substance",6.0221367e+23,[0,0,0,0,0,0,0],"eq","chemical",true,null,null,1,false,false,1,"equivalents","UCUM","Sub","Clinical","equivalence equals moles per valence","mol","MOL","1",1,false],[false,"osmole","osm","OSM","amount of substance (dissolved particles)",6.0221367e+23,[0,0,0,0,0,0,0],"osm","chemical",true,null,null,1,false,false,1,"osmoles; osmols","UCUM","Osmol","Clinical","the number of moles of solute that contribute to the osmotic pressure of a solution","mol","MOL","1",1,false],[false,"pH","[pH]","[PH]","acidity",6.0221366999999994e+26,[-3,0,0,0,0,0,0],"pH","chemical",false,null,"pH",1,true,false,0,"pH scale","UCUM","LogCnc","Clinical","Log concentration of H+","mol/l",null,null,1,false],[false,"gram percent","g%","G%","mass concentration",10000,[-3,0,1,0,0,0,0],"g%","chemical",true,null,null,1,false,false,0,"gram %; gram%; grams per deciliter; g/dL; gm per dL; gram percents","UCUM","MCnc","Clinical","equivalent to unit gram per deciliter (g/dL), a unit often used in medical tests to represent solution concentrations","g/dl","G/DL","1",1,false],[false,"Svedberg unit","[S]","[S]","sedimentation coefficient",1e-13,[0,1,0,0,0,0,0],"S","chemical",false,null,null,1,false,false,0,"Sv; 10^-13 seconds; 100 fs; 100 femtoseconds","UCUM","Time","Clinical","unit of time used in measuring particle's sedimentation rate, usually after centrifugation. ","s","10*-13.S","1",1e-13,false],[false,"high power field (microscope)","[HPF]","[HPF]","view area in microscope",1,[0,0,0,0,0,0,0],"HPF","chemical",false,null,null,1,false,false,0,"HPF","UCUM","Area","Clinical","area visible under the maximum magnification power of the objective in microscopy (usually 400x)\n","1","1","1",1,false],[false,"low power field (microscope)","[LPF]","[LPF]","view area in microscope",1,[0,0,0,0,0,0,0],"LPF","chemical",false,null,null,1,false,false,0,"LPF; fields","UCUM","Area","Clinical","area visible under the low magnification of the objective in microscopy (usually 100 x)\n","1","1","100",100,false],[false,"katal","kat","KAT","catalytic activity",6.0221367e+23,[0,-1,0,0,0,0,0],"kat","chemical",true,null,null,1,false,false,1,"mol/secs; moles per second; mol*sec-1; mol*s-1; mol.s-1; katals; catalytic activity; enzymatic; enzyme units; activities","UCUM","CAct","Clinical","kat is a unit of catalytic activity with base units = mol/s. Rarely used because its units are too large to practically express catalytic activity. See enzyme unit [U] which is the standard unit for catalytic activity.","mol/s","MOL/S","1",1,false],[false,"enzyme unit","U","U","catalytic activity",10036894500000000,[0,-1,0,0,0,0,0],"U","chemical",true,null,null,1,false,false,1,"micromoles per minute; umol/min; umol per minute; umol min-1; enzymatic activity; enzyme activity","UCUM","CAct","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)","umol/min","UMOL/MIN","1",1,false],[false,"international unit - arbitrary","[iU]","[IU]","arbitrary",1,[0,0,0,0,0,0,0],"IU","chemical",true,null,null,1,false,true,0,"international units; IE; F2","UCUM","Arb","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","1","1","1",1,false],[false,"international unit - arbitrary","[IU]","[IU]","arbitrary",1,[0,0,0,0,0,0,0],"i.U.","chemical",true,null,null,1,false,true,0,"international units; IE; F2","UCUM","Arb","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","[iU]","[IU]","1",1,false],[false,"arbitary unit","[arb'U]","[ARB'U]","arbitrary",1,[0,0,0,0,0,0,0],"arb. U","chemical",false,null,null,1,false,true,0,"arbitary units; arb units; arbU","UCUM","Arb","Clinical","relative unit of measurement to show the ratio of test measurement to reference measurement","1","1","1",1,false],[false,"United States Pharmacopeia unit","[USP'U]","[USP'U]","arbitrary",1,[0,0,0,0,0,0,0],"U.S.P.","chemical",false,null,null,1,false,true,0,"USP U; USP'U","UCUM","Arb","Clinical","a dose unit to express potency of drugs and vitamins defined by the United States Pharmacopoeia; usually 1 USP = 1 IU","1","1","1",1,false],[false,"GPL unit","[GPL'U]","[GPL'U]","biologic activity of anticardiolipin IgG",1,[0,0,0,0,0,0,0],null,"chemical",false,null,null,1,false,true,0,"GPL Units; GPL U; IgG anticardiolipin units; IgG Phospholipid","UCUM","ACnc; AMass","Clinical","Units for an antiphospholipid test","1","1","1",1,false],[false,"MPL unit","[MPL'U]","[MPL'U]","biologic activity of anticardiolipin IgM",1,[0,0,0,0,0,0,0],null,"chemical",false,null,null,1,false,true,0,"MPL units; MPL U; MPL'U; IgM anticardiolipin units; IgM Phospholipid Units ","UCUM","ACnc","Clinical","units for antiphospholipid test","1","1","1",1,false],[false,"APL unit","[APL'U]","[APL'U]","biologic activity of anticardiolipin IgA",1,[0,0,0,0,0,0,0],null,"chemical",false,null,null,1,false,true,0,"APL units; APL U; IgA anticardiolipin; IgA Phospholipid; biologic activity of","UCUM","AMass; ACnc","Clinical","Units for an anti phospholipid syndrome test","1","1","1",1,false],[false,"Bethesda unit","[beth'U]","[BETH'U]","biologic activity of factor VIII inhibitor",1,[0,0,0,0,0,0,0],null,"chemical",false,null,null,1,false,true,0,"BU","UCUM","ACnc","Clinical","measures of blood coagulation inhibitior for many blood factors","1","1","1",1,false],[false,"anti factor Xa unit","[anti'Xa'U]","[ANTI'XA'U]","biologic activity of factor Xa inhibitor (heparin)",1,[0,0,0,0,0,0,0],null,"chemical",false,null,null,1,false,true,0,"units","UCUM","ACnc","Clinical","[anti'Xa'U] unit is equivalent to and can be converted to IU/mL. ","1","1","1",1,false],[false,"Todd unit","[todd'U]","[TODD'U]","biologic activity antistreptolysin O",1,[0,0,0,0,0,0,0],null,"chemical",false,null,null,1,false,true,0,"units","UCUM","InvThres; RtoThres","Clinical","the unit for the results of the testing for antistreptolysin O (ASO)","1","1","1",1,false],[false,"Dye unit","[dye'U]","[DYE'U]","biologic activity of amylase",1,[0,0,0,0,0,0,0],null,"chemical",false,null,null,1,false,true,0,"units","UCUM","CCnc","Obsolete","equivalent to the Somogyi unit, which is an enzyme unit for amylase but better to use U, the standard enzyme unit for measuring catalytic activity","1","1","1",1,false],[false,"Somogyi unit","[smgy'U]","[SMGY'U]","biologic activity of amylase",1,[0,0,0,0,0,0,0],null,"chemical",false,null,null,1,false,true,0,"Somogyi units; smgy U","UCUM","CAct","Clinical","measures the enzymatic activity of amylase in blood serum - better to use base units mg/mL ","1","1","1",1,false],[false,"Bodansky unit","[bdsk'U]","[BDSK'U]","biologic activity of phosphatase",1,[0,0,0,0,0,0,0],null,"chemical",false,null,null,1,false,true,0,"","UCUM","ACnc","Obsolete","Enzyme unit specific to alkaline phosphatase - better to use standard enzyme unit of U","1","1","1",1,false],[false,"King-Armstrong unit","[ka'U]","[KA'U]","biologic activity of phosphatase",1,[0,0,0,0,0,0,0],null,"chemical",false,null,null,1,false,true,0,"King-Armstrong Units; King units","UCUM","AMass","Obsolete","enzyme units for acid phosphatase - better to use enzyme unit [U]","1","1","1",1,false],[false,"Kunkel unit","[knk'U]","[KNK'U]","arbitrary biologic activity",1,[0,0,0,0,0,0,0],null,"chemical",false,null,null,1,false,true,0,null,"UCUM",null,null,null,"1","1","1",1,false],[false,"Mac Lagan unit","[mclg'U]","[MCLG'U]","arbitrary biologic activity",1,[0,0,0,0,0,0,0],null,"chemical",false,null,null,1,false,true,0,"galactose index; galactose tolerance test; thymol turbidity test unit; mclg U; units; indexes","UCUM","ACnc","Obsolete","unit for liver tests - previously used in thymol turbidity tests for liver disease diagnoses, and now is sometimes referred to in the oral galactose tolerance test","1","1","1",1,false],[false,"tuberculin unit","[tb'U]","[TB'U]","biologic activity of tuberculin",1,[0,0,0,0,0,0,0],null,"chemical",false,null,null,1,false,true,0,"TU; units","UCUM","Arb","Clinical","amount of tuberculin antigen -usually in reference to a TB skin test ","1","1","1",1,false],[false,"50% cell culture infectious dose","[CCID_50]","[CCID_50]","biologic activity (infectivity) of an infectious agent preparation",1,[0,0,0,0,0,0,0],"CCID<sub>50</sub>","chemical",false,null,null,1,false,true,0,"CCID50; 50% cell culture infective doses","UCUM","NumThres","Clinical","","1","1","1",1,false],[false,"50% tissue culture infectious dose","[TCID_50]","[TCID_50]","biologic activity (infectivity) of an infectious agent preparation",1,[0,0,0,0,0,0,0],"TCID<sub>50</sub>","chemical",false,null,null,1,false,true,0,"TCID50; 50% tissue culture infective dose","UCUM","NumThres","Clinical","","1","1","1",1,false],[false,"50% embryo infectious dose","[EID_50]","[EID_50]","biologic activity (infectivity) of an infectious agent preparation",1,[0,0,0,0,0,0,0],"EID<sub>50</sub>","chemical",false,null,null,1,false,true,0,"EID50; 50% embryo infective doses; EID50 Egg Infective Dosage","UCUM","thresNum","Clinical","","1","1","1",1,false],[false,"plaque forming units","[PFU]","[PFU]","amount of an infectious agent",1,[0,0,0,0,0,0,0],"PFU","chemical",false,null,null,1,false,true,0,"PFU","UCUM","ACnc","Clinical","tests usually report unit as number of PFU per unit volume","1","1","1",1,false],[false,"focus forming units (cells)","[FFU]","[FFU]","amount of an infectious agent",1,[0,0,0,0,0,0,0],"FFU","chemical",false,null,null,1,false,true,0,"FFU","UCUM","EntNum","Clinical","","1","1","1",1,false],[false,"colony forming units","[CFU]","[CFU]","amount of a proliferating organism",1,[0,0,0,0,0,0,0],"CFU","chemical",false,null,null,1,false,true,0,"CFU","UCUM","Num","Clinical","","1","1","1",1,false],[false,"index of reactivity (allergen)","[IR]","[IR]","amount of an allergen callibrated through in-vivo testing using the Stallergenes® method.",1,[0,0,0,0,0,0,0],"IR","chemical",false,null,null,1,false,true,0,"IR; indexes","UCUM","Acnc","Clinical","amount of an allergen callibrated through in-vivo testing using the Stallergenes method. Usually reported in tests as IR/mL","1","1","1",1,false],[false,"bioequivalent allergen unit","[BAU]","[BAU]","amount of an allergen callibrated through in-vivo testing based on the ID50EAL method of (intradermal dilution for 50mm sum of erythema diameters",1,[0,0,0,0,0,0,0],"BAU","chemical",false,null,null,1,false,true,0,"BAU; Bioequivalent Allergy Units; bioequivalent allergen units","UCUM","Arb","Clinical","","1","1","1",1,false],[false,"allergy unit","[AU]","[AU]","procedure defined amount of an allergen using some reference standard",1,[0,0,0,0,0,0,0],"AU","chemical",false,null,null,1,false,true,0,"allergy units; allergen units; AU","UCUM","Arb","Clinical","Most standard test allergy units are reported as [IU] or as %. ","1","1","1",1,false],[false,"allergen unit for Ambrosia artemisiifolia","[Amb'a'1'U]","[AMB'A'1'U]","procedure defined amount of the major allergen of ragweed.",1,[0,0,0,0,0,0,0],"Amb a 1 U","chemical",false,null,null,1,false,true,0,"Amb a 1 unit; Antigen E; AgE U; allergen units","UCUM","Arb","Clinical","Amb a 1 is the major allergen in short ragweed, and can be converted Bioequivalent allergen units (BAU) where 350 Amb a 1 U/mL = 100,000 BAU/mL","1","1","1",1,false],[false,"protein nitrogen unit (allergen testing)","[PNU]","[PNU]","procedure defined amount of a protein substance",1,[0,0,0,0,0,0,0],"PNU","chemical",false,null,null,1,false,true,0,"protein nitrogen units; PNU","UCUM","Mass","Clinical","defined as 0.01 ug of phosphotungstic acid-precipitable protein nitrogen. Being replaced by bioequivalent allergy units (BAU).","1","1","1",1,false],[false,"Limit of flocculation","[Lf]","[LF]","procedure defined amount of an antigen substance",1,[0,0,0,0,0,0,0],"Lf","chemical",false,null,null,1,false,true,0,"Lf doses","UCUM","Arb","Clinical","the antigen content  forming 1:1 ratio against 1 unit of antitoxin","1","1","1",1,false],[false,"D-antigen unit (polio)","[D'ag'U]","[D'AG'U]","procedure defined amount of a poliomyelitis d-antigen substance",1,[0,0,0,0,0,0,0],null,"chemical",false,null,null,1,false,true,0,"DAgU; units","UCUM","Acnc","Clinical","unit of potency of poliovirus vaccine used for poliomyelitis prevention reported as D antigen units/mL. The unit is poliovirus type-specific.","1","1","1",1,false],[false,"fibrinogen equivalent units","[FEU]","[FEU]","amount of fibrinogen broken down into the measured d-dimers",1,[0,0,0,0,0,0,0],null,"chemical",false,null,null,1,false,true,0,"FEU","UCUM","MCnc","Clinical","Note both the FEU and DDU units are used to report D-dimer measurements. 1 DDU = 1/2 FFU","1","1","1",1,false],[false,"ELISA unit","[ELU]","[ELU]","arbitrary ELISA unit",1,[0,0,0,0,0,0,0],null,"chemical",false,null,null,1,false,true,0,"Enzyme-Linked Immunosorbent Assay Units; ELU; EL. U","UCUM","ACnc","Clinical","","1","1","1",1,false],[false,"Ehrlich units (urobilinogen)","[EU]","[EU]","Ehrlich unit",1,[0,0,0,0,0,0,0],null,"chemical",false,null,null,1,false,true,0,"EU/dL; mg{urobilinogen}/dL","UCUM","ACnc","Clinical","","1","1","1",1,false],[false,"neper","Np","NEP","level",1,[0,0,0,0,0,0,0],"Np","levels",true,null,"ln",1,true,false,0,"nepers","UCUM","LogRto","Clinical","logarithmic unit for ratios of measurements of physical field and power quantities, such as gain and loss of electronic signals","1",null,null,1,false],[false,"bel","B","B","level",1,[0,0,0,0,0,0,0],"B","levels",true,null,"lg",1,true,false,0,"bels","UCUM","LogRto","Clinical","Logarithm of the ratio of power- or field-type quantities; usually expressed in decibels ","1",null,null,1,false],[false,"bel sound pressure","B[SPL]","B[SPL]","pressure level",0.02,[-1,-2,1,0,0,0,0],"B(SPL)","levels",true,null,"lgTimes2",1,true,false,0,"bel SPL; B SPL; sound pressure bels","UCUM","LogRto","Clinical","used to measure sound level in acoustics","Pa",null,null,0.00002,false],[false,"bel volt","B[V]","B[V]","electric potential level",1000,[2,-2,1,0,0,-1,0],"B(V)","levels",true,null,"lgTimes2",1,true,false,0,"bel V; B V; volts bels","UCUM","LogRtoElp","Clinical","used to express power gain in electrical circuits","V",null,null,1,false],[false,"bel millivolt","B[mV]","B[MV]","electric potential level",1,[2,-2,1,0,0,-1,0],"B(mV)","levels",true,null,"lgTimes2",1,true,false,0,"bel mV; B mV; millivolt bels; 10^-3V bels; 10*-3V ","UCUM","LogRtoElp","Clinical","used to express power gain in electrical circuits","mV",null,null,1,false],[false,"bel microvolt","B[uV]","B[UV]","electric potential level",0.001,[2,-2,1,0,0,-1,0],"B(μV)","levels",true,null,"lgTimes2",1,true,false,0,"bel uV; B uV; microvolts bels; 10^-6V bel; 10*-6V bel","UCUM","LogRto","Clinical","used to express power gain in electrical circuits","uV",null,null,1,false],[false,"bel 10 nanovolt","B[10.nV]","B[10.NV]","electric potential level",0.000010000000000000003,[2,-2,1,0,0,-1,0],"B(10 nV)","levels",true,null,"lgTimes2",1,true,false,0,"bel 10 nV; B 10 nV; 10 nanovolts bels","UCUM","LogRtoElp","Clinical","used to express power gain in electrical circuits","nV",null,null,10,false],[false,"bel watt","B[W]","B[W]","power level",1000,[2,-3,1,0,0,0,0],"B(W)","levels",true,null,"lg",1,true,false,0,"bel W; b W; b Watt; Watts bels","UCUM","LogRto","Clinical","used to express power","W",null,null,1,false],[false,"bel kilowatt","B[kW]","B[KW]","power level",1000000,[2,-3,1,0,0,0,0],"B(kW)","levels",true,null,"lg",1,true,false,0,"bel kW; B kW; kilowatt bel; kW bel; kW B","UCUM","LogRto","Clinical","used to express power","kW",null,null,1,false],[false,"stere","st","STR","volume",1,[3,0,0,0,0,0,0],"st","misc",true,null,null,1,false,false,0,"stère; m3; cubic meter; m^3; meters cubed; metre","UCUM","Vol","Nonclinical","equal to one cubic meter, usually used for measuring firewoord","m3","M3","1",1,false],[false,"Ångström","Ao","AO","length",1.0000000000000002e-10,[1,0,0,0,0,0,0],"Å","misc",false,null,null,1,false,false,0,"Å; Angstroms; Ao; Ångströms","UCUM","Len","Clinical","equal to 10^-10 meters; used to express wave lengths and atom scaled differences ","nm","NM","0.1",0.1,false],[false,"barn","b","BRN","action area",9.999999999999999e-29,[2,0,0,0,0,0,0],"b","misc",false,null,null,1,false,false,0,"barns","UCUM","Area","Clinical","used in high-energy physics to express cross-sectional areas","fm2","FM2","100",100,false],[false,"technical atmosphere","att","ATT","pressure",98066499.99999999,[-1,-2,1,0,0,0,0],"at","misc",false,null,null,1,false,false,0,"at; tech atm; tech atmosphere; kgf/cm2; atms; atmospheres","UCUM","Pres","Obsolete","non-SI unit of pressure equal to one kilogram-force per square centimeter","kgf/cm2","KGF/CM2","1",1,false],[false,"mho","mho","MHO","electric conductance",0.001,[-2,1,-1,0,0,2,0],"mho","misc",true,null,null,1,false,false,0,"siemens; ohm reciprocals; Ω^−1; Ω-1 ","UCUM","","Obsolete","unit of electric conductance (the inverse of electrical resistance) equal to ohm^-1","S","S","1",1,false],[false,"pound per square inch","[psi]","[PSI]","pressure",6894757.293168359,[-1,-2,1,0,0,0,0],"psi","misc",false,null,null,1,false,false,0,"psi; lb/in2; lb per in2","UCUM","Pres","Clinical","","[lbf_av]/[in_i]2","[LBF_AV]/[IN_I]2","1",1,false],[false,"circle - plane angle","circ","CIRC","plane angle",6.283185307179586,[0,0,0,1,0,0,0],"circ","misc",false,null,null,1,false,false,0,"angles; circles","UCUM","Angle","Clinical","","[pi].rad","[PI].RAD","2",2,false],[false,"spere - solid angle","sph","SPH","solid angle",12.566370614359172,[0,0,0,2,0,0,0],"sph","misc",false,null,null,1,false,false,0,"speres","UCUM","Angle","Clinical","equal to the solid angle of an entire sphere = 4πsr (sr = steradian) ","[pi].sr","[PI].SR","4",4,false],[false,"metric carat","[car_m]","[CAR_M]","mass",0.2,[0,0,1,0,0,0,0],"ct<sub>m</sub>","misc",false,null,null,1,false,false,0,"carats; ct; car m","UCUM","Mass","Nonclinical","unit of mass for gemstones","g","G","2e-1",0.2,false],[false,"carat of gold alloys","[car_Au]","[CAR_AU]","mass fraction",0.041666666666666664,[0,0,0,0,0,0,0],"ct<sub><r>Au</r></sub>","misc",false,null,null,1,false,false,0,"karats; k; kt; car au; carats","UCUM","MFr","Nonclinical","unit of purity for gold alloys","/24","/24","1",1,false],[false,"Smoot","[smoot]","[SMOOT]","length",1.7018000000000002,[1,0,0,0,0,0,0],null,"misc",false,null,null,1,false,false,0,"","UCUM","Len","Nonclinical","prank unit of length from MIT","[in_i]","[IN_I]","67",67,false],[false,"meter per square seconds per square root of hertz","[m/s2/Hz^(1/2)]","[M/S2/HZ^(1/2)]","amplitude spectral density",1,[2,-3,0,0,0,0,0],null,"misc",false,null,"sqrt",1,true,false,0,"m/s2/(Hz^.5); m/s2/(Hz^(1/2)); m per s2 per Hz^1/2","UCUM","","Constant","measures amplitude spectral density, and is equal to the square root of power spectral density\n ","m2/s4/Hz",null,null,1,false],[false,"bit - logarithmic","bit_s","BIT_S","amount of information",1,[0,0,0,0,0,0,0],"bit<sub>s</sub>","infotech",false,null,"ld",1,true,false,0,"bit-s; bit s; bit logarithmic","UCUM","LogA","Nonclinical","defined as the log base 2 of the number of distinct signals; cannot practically be used to express more than 1000 bits\n\nIn information theory, the definition of the amount of self-information and information entropy is often expressed with the binary logarithm (log base 2)","1",null,null,1,false],[false,"bit","bit","BIT","amount of information",1,[0,0,0,0,0,0,0],"bit","infotech",true,null,null,1,false,false,0,"bits","UCUM","","Nonclinical","dimensionless information unit of 1 used in computing and digital communications","1","1","1",1,false],[false,"byte","By","BY","amount of information",8,[0,0,0,0,0,0,0],"B","infotech",true,null,null,1,false,false,0,"bytes","UCUM","","Nonclinical","equal to 8 bits","bit","bit","8",8,false],[false,"baud","Bd","BD","signal transmission rate",1,[0,1,0,0,0,0,0],"Bd","infotech",true,null,"inv",1,false,false,0,"Bd; bauds","UCUM","Freq","Nonclinical","unit to express rate in symbols per second or pulses per second. ","s","/s","1",1,false],[false,"per twelve hour","/(12.h)","/HR","",0.000023148148148148147,[0,-1,0,0,0,0,0],"/h",null,false,null,null,1,false,false,0,"per 12 hours; 12hrs; 12 hrs; /12hrs","LOINC","Rat","Clinical","",null,null,null,null,false],[false,"per arbitrary unit","/[arb'U]","/[ARB'U]","",1,[0,0,0,0,0,0,0],"/arb/ U",null,false,null,null,1,false,true,0,"/arbU","LOINC","InvA ","Clinical","",null,null,null,null,false],[false,"per high power field","/[HPF]","/[HPF]","",1,[0,0,0,0,0,0,0],"/HPF",null,false,null,null,1,false,false,0,"/HPF; per HPF","LOINC","Naric","Clinical","",null,null,null,null,false],[false,"per international unit","/[IU]","/[IU]","",1,[0,0,0,0,0,0,0],"/i/U.",null,false,null,null,1,false,true,0,"international units; /IU; per IU","LOINC","InvA","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)",null,null,null,null,false],[false,"per low power field","/[LPF]","/[LPF]","",1,[0,0,0,0,0,0,0],"/LPF",null,false,null,null,1,false,false,0,"/LPF; per LPF","LOINC","Naric","Clinical","",null,null,null,null,false],[false,"per 10 billion  ","/10*10","/10*10","",1e-10,[0,0,0,0,0,0,0],"/10<sup>10<.sup>",null,false,null,null,1,false,false,0,"/10^10; per 10*10","LOINC","NFr","Clinical","used for counting entities, e.g. blood cells; usually these kinds of terms have numerators such as moles or milligrams, and counting that amount per the number in the denominator",null,null,null,null,false],[false,"per trillion ","/10*12","/10*12","",1e-12,[0,0,0,0,0,0,0],"/10<sup>12<.sup>",null,false,null,null,1,false,false,0,"/10^12; per 10*12","LOINC","NFr","Clinical","used for counting entities, e.g. blood cells; usually these kinds of terms have numerators such as moles or milligrams, and counting that amount per the number in the denominator",null,null,null,null,false],[false,"per thousand","/10*3","/10*3","",0.001,[0,0,0,0,0,0,0],"/10<sup>3<.sup>",null,false,null,null,1,false,false,0,"/10^3; per 10*3","LOINC","NFr","Clinical","used for counting entities, e.g. blood cells; usually these kinds of terms have numerators such as moles or milligrams, and counting that amount per the number in the denominator",null,null,null,null,false],[false,"per million","/10*6","/10*6","",0.000001,[0,0,0,0,0,0,0],"/10<sup>6<.sup>",null,false,null,null,1,false,false,0,"/10^6; per 10*6;","LOINC","NFr","Clinical","used for counting entities, e.g. blood cells; usually these kinds of terms have numerators such as moles or milligrams, and counting that amount per the number in the denominator",null,null,null,null,false],[false,"per billion","/10*9","/10*9","",1e-9,[0,0,0,0,0,0,0],"/10<sup>9<.sup>",null,false,null,null,1,false,false,0,"/10^9; per 10*9","LOINC","NFr","Clinical","used for counting entities, e.g. blood cells; usually these kinds of terms have numerators such as moles or milligrams, and counting that amount per the number in the denominator",null,null,null,null,false],[false,"per 100","/100","","",0.01,[0,0,0,0,0,0,0],null,null,false,null,null,1,false,false,0,"per hundred; 10^2; 10*2","LOINC","NFr","Clinical","used for counting entities, e.g. blood cells; usually these kinds of terms have numerators such as moles or milligrams, and counting that amount per the number in the denominator",null,null,null,null,false],[false,"per 100 cells","/100{cells}","","",0.01,[0,0,0,0,0,0,0],null,null,false,null,null,1,false,false,0,"/100 cells; /100cells; per hundred","LOINC","EntMass; EntNum; NFr","Clinical","",null,null,null,null,false],[false,"per 100 neutrophils","/100{neutrophils}","","",0.01,[0,0,0,0,0,0,0],null,null,false,null,null,1,false,false,0,"/100 neutrophils; /100neutrophils; per hundred","LOINC","EntMass; EntNum; NFr","Clinical","",null,null,null,null,false],[false,"per 100 spermatozoa","/100{spermatozoa}","","",0.01,[0,0,0,0,0,0,0],null,null,false,null,null,1,false,false,0,"/100 spermatozoa; /100spermatozoa; per hundred","LOINC","NFr","Clinical","",null,null,null,null,false],[false,"per 100 white blood cells","/100{WBCs}","","",0.01,[0,0,0,0,0,0,0],null,null,false,null,null,1,false,false,0,"/100 WBCs; /100WBCs; per hundred","LOINC","Ratio; NFr","Clinical","",null,null,null,null,false],[false,"per year","/a","/ANN","",3.168808781402895e-8,[0,-1,0,0,0,0,0],"/a",null,false,null,null,1,false,false,0,"/Years; /yrs; yearly","LOINC","NRat","Clinical","",null,null,null,null,false],[false,"per centimeter of water","/cm[H2O]","/CM[H2O]","",0.000010197162129779282,[1,2,-1,0,0,0,0],"/cm HO<sub><r>2<.r></sub>",null,false,null,null,1,false,false,0,"/cmH2O; /cm H2O; centimeters; centimetres","LOINC","InvPress","Clinical","",null,null,null,null,false],[false,"per day","/d","/D","",0.000011574074074074073,[0,-1,0,0,0,0,0],"/d",null,false,null,null,1,false,false,0,"/dy; per day","LOINC","NRat","Clinical","",null,null,null,null,false],[false,"per deciliter","/dL","/DL","",10000,[-3,0,0,0,0,0,0],"/dL",null,false,null,null,1,false,false,0,"per dL; /deciliter; decilitre","LOINC","NCnc","Clinical","",null,null,null,null,false],[false,"per gram","/g","/G","",1,[0,0,-1,0,0,0,0],"/g",null,false,null,null,1,false,false,0,"/gm; /gram; per g","LOINC","NCnt","Clinical","",null,null,null,null,false],[false,"per hour","/h","/HR","",0.0002777777777777778,[0,-1,0,0,0,0,0],"/h",null,false,null,null,1,false,false,0,"/hr; /hour; per hr","LOINC","NRat","Clinical","",null,null,null,null,false],[false,"per kilogram","/kg","/KG","",0.001,[0,0,-1,0,0,0,0],"/kg",null,false,null,null,1,false,false,0,"per kg; per kilogram","LOINC","NCnt","Clinical","",null,null,null,null,false],[false,"per liter","/L","/L","",1000,[-3,0,0,0,0,0,0],"/L",null,false,null,null,1,false,false,0,"/liter; litre","LOINC","NCnc","Clinical","",null,null,null,null,false],[false,"per square meter","/m2","/M2","",1,[-2,0,0,0,0,0,0],"/m<sup>2<.sup>",null,false,null,null,1,false,false,0,"/m^2; /m*2; /sq. m; per square meter; meter squared; metre","LOINC","Naric","Clinical","",null,null,null,null,false],[false,"per cubic meter","/m3","/M3","",1,[-3,0,0,0,0,0,0],"/m<sup>3<.sup>",null,false,null,null,1,false,false,0,"/m^3; /m*3; /cu. m; per cubic meter; meter cubed; per m3; metre","LOINC","NCncn","Clinical","",null,null,null,null,false],[false,"per milligram","/mg","/MG","",1000,[0,0,-1,0,0,0,0],"/mg",null,false,null,null,1,false,false,0,"/milligram; per mg","LOINC","NCnt","Clinical","",null,null,null,null,false],[false,"per minute","/min","/MIN","",0.016666666666666666,[0,-1,0,0,0,0,0],"/min",null,false,null,null,1,false,false,0,"/minute; per mins; breaths beats per minute","LOINC","NRat","Clinical","",null,null,null,null,false],[false,"per milliliter","/mL","/ML","",1000000,[-3,0,0,0,0,0,0],"/mL",null,false,null,null,1,false,false,0,"/milliliter; per mL; millilitre","LOINC","NCncn","Clinical","",null,null,null,null,false],[false,"per millimeter","/mm","/MM","",1000,[-1,0,0,0,0,0,0],"/mm",null,false,null,null,1,false,false,0,"/millimeter; per mm; millimetre","LOINC","InvLen","Clinical","",null,null,null,null,false],[false,"per month","/mo","/MO","",3.802570537683474e-7,[0,-1,0,0,0,0,0],"/mo",null,false,null,null,1,false,false,0,"/month; per mo; monthly; month","LOINC","NRat","Clinical","",null,null,null,null,false],[false,"per second","/s","/S","",1,[0,-1,0,0,0,0,0],"/s",null,false,null,null,1,false,false,0,"/second; /sec; per sec; frequency; Hertz; Herz; Hz; becquerels; Bq; s-1; s^-1","LOINC","NRat","Clinical","",null,null,null,null,false],[false,"per enzyme unit","/U","/U","",9.963241120049633e-17,[0,1,0,0,0,0,0],"/U",null,false,null,null,1,false,false,-1,"/enzyme units; per U","LOINC","InvC; NCat","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)",null,null,null,null,false],[false,"per microliter","/uL","/UL","",999999999.9999999,[-3,0,0,0,0,0,0],"/μL",null,false,null,null,1,false,false,0,"/microliter; microlitre; /mcl; per uL","LOINC","ACnc","Clinical","",null,null,null,null,false],[false,"per week","/wk","/WK","",0.0000016534391534391535,[0,-1,0,0,0,0,0],"/wk",null,false,null,null,1,false,false,0,"/week; per wk; weekly, weeks","LOINC","NRat","Clinical","",null,null,null,null,false],[false,"APL unit per milliliter","[APL'U]/mL","[APL'U]/ML","biologic activity of anticardiolipin IgA",1000000,[-3,0,0,0,0,0,0],"/mL","chemical",false,null,null,1,false,true,0,"APL/mL; APL'U/mL; APL U/mL; APL/milliliter; IgA anticardiolipin units per milliliter; IgA Phospholipid Units; millilitre; biologic activity of","LOINC","ACnc","Clinical","Units for an anti phospholipid syndrome test","1","1","1",1,false],[false,"arbitrary unit per milliliter","[arb'U]/mL","[ARB'U]/ML","arbitrary",1000000,[-3,0,0,0,0,0,0],"(arb. U)/mL","chemical",false,null,null,1,false,true,0,"arb'U/mL; arbU/mL; arb U/mL; arbitrary units per milliliter; millilitre","LOINC","ACnc","Clinical","relative unit of measurement to show the ratio of test measurement to reference measurement","1","1","1",1,false],[false,"colony forming units per liter","[CFU]/L","[CFU]/L","amount of a proliferating organism",1000,[-3,0,0,0,0,0,0],"CFU/L","chemical",false,null,null,1,false,true,0,"CFU per Liter; CFU/L","LOINC","NCnc","Clinical","","1","1","1",1,false],[false,"colony forming units per milliliter","[CFU]/mL","[CFU]/ML","amount of a proliferating organism",1000000,[-3,0,0,0,0,0,0],"CFU/mL","chemical",false,null,null,1,false,true,0,"CFU per mL; CFU/mL","LOINC","NCnc","Clinical","","1","1","1",1,false],[false,"foot per foot - US","[ft_us]/[ft_us]","[FT_US]/[FT_US]","length",1,[0,0,0,0,0,0,0],"(ft<sub>us</sub>)/(ft<sub>us</sub>)","us-lengths",false,null,null,1,false,false,0,"ft/ft; ft per ft; feet per feet; visual acuity","","LenRto","Clinical","distance ratio to measure 20:20 vision","m/3937","M/3937","1200",1200,false],[false,"GPL unit per milliliter","[GPL'U]/mL","[GPL'U]/ML","biologic activity of anticardiolipin IgG",1000000,[-3,0,0,0,0,0,0],"/mL","chemical",false,null,null,1,false,true,0,"GPL U/mL; GPL'U/mL; GPL/mL; GPL U per mL; IgG Phospholipid Units per milliliters; IgG anticardiolipin units; millilitres ","LOINC","ACnc; AMass","Clinical","Units for an antiphospholipid test","1","1","1",1,false],[false,"international unit per 2 hour","[IU]/(2.h)","[IU]/HR","arbitrary",0.0001388888888888889,[0,-1,0,0,0,0,0],"(i.U.)/h","chemical",true,null,null,1,false,true,0,"IU/2hrs; IU/2 hours; IU per 2 hrs; international units per 2 hours","LOINC","ARat","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","[iU]","[IU]","1",1,false],[false,"international unit per 24 hour","[IU]/(24.h)","[IU]/HR","arbitrary",0.000011574074074074073,[0,-1,0,0,0,0,0],"(i.U.)/h","chemical",true,null,null,1,false,true,0,"IU/24hr; IU/24 hours; IU per 24 hrs; international units per 24 hours","LOINC","ARat","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","[iU]","[IU]","1",1,false],[false,"international unit per day","[IU]/d","[IU]/D","arbitrary",0.000011574074074074073,[0,-1,0,0,0,0,0],"(i.U.)/d","chemical",true,null,null,1,false,true,0,"IU/dy; IU/days; IU per dys; international units per day","LOINC","ARat","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","[iU]","[IU]","1",1,false],[false,"international unit per deciliter","[IU]/dL","[IU]/DL","arbitrary",10000,[-3,0,0,0,0,0,0],"(i.U.)/dL","chemical",true,null,null,1,false,true,0,"IU/dL; IU per dL; international units per deciliters; decilitres","LOINC","ACnc","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","[iU]","[IU]","1",1,false],[false,"international unit per gram","[IU]/g","[IU]/G","arbitrary",1,[0,0,-1,0,0,0,0],"(i.U.)/g","chemical",true,null,null,1,false,true,0,"IU/gm; IU/gram; IU per gm; IU per g; international units per gram","LOINC","ACnt","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","[iU]","[IU]","1",1,false],[false,"international unit per hour","[IU]/h","[IU]/HR","arbitrary",0.0002777777777777778,[0,-1,0,0,0,0,0],"(i.U.)/h","chemical",true,null,null,1,false,true,0,"IU/hrs; IU per hours; international units per hour","LOINC","ARat","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","[iU]","[IU]","1",1,false],[false,"international unit per kilogram","[IU]/kg","[IU]/KG","arbitrary",0.001,[0,0,-1,0,0,0,0],"(i.U.)/kg","chemical",true,null,null,1,false,true,0,"IU/kg; IU/kilogram; IU per kg; units","LOINC","ACnt","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","[iU]","[IU]","1",1,false],[false,"international unit per kilogram per day","[IU]/kg/d","[IU]/KG/D","arbitrary",1.1574074074074074e-8,[0,-1,-1,0,0,0,0],"(i.U.)/kg/d","chemical",true,null,null,1,false,true,0,"IU/kg/dy; IU/kg/day; IU/kilogram/day; IU per kg per day; units","LOINC","ACntRat","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","[iU]","[IU]","1",1,false],[false,"international unit per liter","[IU]/L","[IU]/L","arbitrary",1000,[-3,0,0,0,0,0,0],"(i.U.)/L","chemical",true,null,null,1,false,true,0,"IU/L; IU/liter; IU per liter; units; litre","LOINC","ACnc","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","[iU]","[IU]","1",1,false],[false,"international unit per minute","[IU]/min","[IU]/MIN","arbitrary",0.016666666666666666,[0,-1,0,0,0,0,0],"(i.U.)/min","chemical",true,null,null,1,false,true,0,"IU/min; IU/minute; IU per minute; international units","LOINC","ARat","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","[iU]","[IU]","1",1,false],[false,"international unit per milliliter","[IU]/mL","[IU]/ML","arbitrary",1000000,[-3,0,0,0,0,0,0],"(i.U.)/mL","chemical",true,null,null,1,false,true,0,"IU/mL; IU per mL; international units per milliliter; millilitre","LOINC","ACnc","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","[iU]","[IU]","1",1,false],[false,"MPL unit per milliliter","[MPL'U]/mL","[MPL'U]/ML","biologic activity of anticardiolipin IgM",1000000,[-3,0,0,0,0,0,0],"/mL","chemical",false,null,null,1,false,true,0,"MPL/mL; MPL U/mL; MPL'U/mL; IgM anticardiolipin units; IgM Phospholipid Units; millilitre ","LOINC","ACnc","Clinical","units for antiphospholipid test\n","1","1","1",1,false],[false,"number per high power field","{#}/[HPF]","/[HPF]","",1,[0,0,0,0,0,0,0],"/HPF",null,false,null,null,1,false,false,0,"#/HPF; # per HPF; number/HPF; numbers per high power field","LOINC","Naric","Clinical","",null,null,null,null,false],[false,"number per low power field","{#}/[LPF]","/[LPF]","",1,[0,0,0,0,0,0,0],"/LPF",null,false,null,null,1,false,false,0,"#/LPF; # per LPF; number/LPF; numbers per low power field","LOINC","Naric","Clinical","",null,null,null,null,false],[false,"IgA antiphosphatidylserine unit ","{APS'U}","","",1,[0,0,0,0,0,0,0],null,null,false,null,null,1,false,false,0,"APS Unit; Phosphatidylserine Antibody IgA Units","LOINC","ACnc","Clinical","unit for antiphospholipid test",null,null,null,null,false],[false,"EIA index","{EIA_index}","","",1,[0,0,0,0,0,0,0],null,null,false,null,null,1,false,false,0,"enzyme immunoassay index","LOINC","ACnc","Clinical","",null,null,null,null,false],[false,"kaolin clotting time","{KCT'U}","","",1,[0,0,0,0,0,0,0],null,null,false,null,null,1,false,false,0,"KCT","LOINC","Time","Clinical","sensitive test to detect lupus anticoagulants; measured in seconds",null,null,null,null,false],[false,"IgM antiphosphatidylserine unit","{MPS'U}","","",1,[0,0,0,0,0,0,0],null,null,false,null,null,1,false,false,0,"Phosphatidylserine Antibody IgM Measurement ","LOINC","ACnc","Clinical","",null,null,null,null,false],[false,"trillion per liter","10*12/L","(10*12)/L","number",1000000000000000,[-3,0,0,0,0,0,0],"(10<sup>12</sup>)/L","dimless",false,null,null,1,false,false,0,"10^12/L; 10*12 per Liter; trillion per liter; litre","LOINC","NCncn","Clinical","","1","1","10",10,false],[false,"10^3 (used for cell count)","10*3","10*3","number",1000,[0,0,0,0,0,0,0],"10<sup>3</sup>","dimless",false,null,null,1,false,false,0,"10^3; thousand","LOINC","Num","Clinical","usually used for counting entities (e.g. blood cells) per volume","1","1","10",10,false],[false,"thousand per liter","10*3/L","(10*3)/L","number",1000000,[-3,0,0,0,0,0,0],"(10<sup>3</sup>)/L","dimless",false,null,null,1,false,false,0,"10^3/L; 10*3 per liter; litre","LOINC","NCncn","Clinical","","1","1","10",10,false],[false,"thousand per milliliter","10*3/mL","(10*3)/ML","number",1000000000,[-3,0,0,0,0,0,0],"(10<sup>3</sup>)/mL","dimless",false,null,null,1,false,false,0,"10^3/mL; 10*3 per mL; thousand per milliliter; millilitre","LOINC","NCncn","Clinical","","1","1","10",10,false],[false,"thousand per microliter","10*3/uL","(10*3)/UL","number",999999999999.9999,[-3,0,0,0,0,0,0],"(10<sup>3</sup>)/μL","dimless",false,null,null,1,false,false,0,"10^3/uL; 10*3 per uL; thousand per microliter; microlitre","LOINC","NCncn","Clinical","","1","1","10",10,false],[false,"10 thousand per microliter","10*4/uL","(10*4)/UL","number",10000000000000,[-3,0,0,0,0,0,0],"(10<sup>4</sup>)/μL","dimless",false,null,null,1,false,false,0,"10^4/uL; 10*4 per uL; microlitre","LOINC","NCncn","Clinical","","1","1","10",10,false],[false,"10^5 ","10*5","10*5","number",100000,[0,0,0,0,0,0,0],"10<sup>5</sup>","dimless",false,null,null,1,false,false,0,"one hundred thousand","LOINC","Num","Clinical","","1","1","10",10,false],[false,"10^6","10*6","10*6","number",1000000,[0,0,0,0,0,0,0],"10<sup>6</sup>","dimless",false,null,null,1,false,false,0,"","LOINC","Num","Clinical","","1","1","10",10,false],[false,"million colony forming unit per liter","10*6.[CFU]/L","(10*6).[CFU]/L","number",1000000000,[-3,0,0,0,0,0,0],"(10<sup>6</sup>).CFU/L","dimless",false,null,null,1,false,true,0,"10*6 CFU/L; 10^6 CFU/L; 10^6CFU; 10^6 CFU per liter; million colony forming units; litre","LOINC","ACnc","Clinical","","1","1","10",10,false],[false,"million international unit","10*6.[IU]","(10*6).[IU]","number",1000000,[0,0,0,0,0,0,0],"(10<sup>6</sup>).(i.U.)","dimless",false,null,null,1,false,true,0,"10*6 IU; 10^6 IU; international units","LOINC","arb","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","1","1","10",10,false],[false,"million per 24 hour","10*6/(24.h)","(10*6)/HR","number",11.574074074074074,[0,-1,0,0,0,0,0],"(10<sup>6</sup>)/h","dimless",false,null,null,1,false,false,0,"10*6/24hrs; 10^6/24 hrs; 10*6 per 24 hrs; 10^6 per 24 hours","LOINC","NRat","Clinical","","1","1","10",10,false],[false,"million per kilogram","10*6/kg","(10*6)/KG","number",1000,[0,0,-1,0,0,0,0],"(10<sup>6</sup>)/kg","dimless",false,null,null,1,false,false,0,"10^6/kg; 10*6 per kg; 10*6 per kilogram; millions","LOINC","NCnt","Clinical","","1","1","10",10,false],[false,"million per liter","10*6/L","(10*6)/L","number",1000000000,[-3,0,0,0,0,0,0],"(10<sup>6</sup>)/L","dimless",false,null,null,1,false,false,0,"10^6/L; 10*6 per Liter; 10^6 per Liter; litre","LOINC","NCncn","Clinical","","1","1","10",10,false],[false,"million per milliliter","10*6/mL","(10*6)/ML","number",1000000000000,[-3,0,0,0,0,0,0],"(10<sup>6</sup>)/mL","dimless",false,null,null,1,false,false,0,"10^6/mL; 10*6 per mL; 10*6 per milliliter; millilitre","LOINC","NCncn","Clinical","","1","1","10",10,false],[false,"million per microliter","10*6/uL","(10*6)/UL","number",1000000000000000,[-3,0,0,0,0,0,0],"(10<sup>6</sup>)/μL","dimless",false,null,null,1,false,false,0,"10^6/uL; 10^6 per uL; 10^6/mcl; 10^6 per mcl; 10^6 per microliter; microlitre","LOINC","NCncn","Clinical","","1","1","10",10,false],[false,"10^8","10*8","10*8","number",100000000,[0,0,0,0,0,0,0],"10<sup>8</sup>","dimless",false,null,null,1,false,false,0,"100 million; one hundred million; 10^8","LOINC","Num","Clinical","","1","1","10",10,false],[false,"billion per liter","10*9/L","(10*9)/L","number",1000000000000,[-3,0,0,0,0,0,0],"(10<sup>9</sup>)/L","dimless",false,null,null,1,false,false,0,"10^9/L; 10*9 per Liter; litre","LOINC","NCncn","Clinical","","1","1","10",10,false],[false,"billion per milliliter","10*9/mL","(10*9)/ML","number",1000000000000000,[-3,0,0,0,0,0,0],"(10<sup>9</sup>)/mL","dimless",false,null,null,1,false,false,0,"10^9/mL; 10*9 per mL; 10^9 per mL; 10*9 per milliliter; millilitre","LOINC","NCncn","Clinical","","1","1","10",10,false],[false,"billion per microliter","10*9/uL","(10*9)/UL","number",1000000000000000000,[-3,0,0,0,0,0,0],"(10<sup>9</sup>)/μL","dimless",false,null,null,1,false,false,0,"10^9/uL; 10^9 per uL; 10^9/mcl; 10^9 per mcl; 10*9 per uL; 10*9 per mcl; 10*9/mcl; 10^9 per microliter; microlitre","LOINC","NCncn","Clinical","","1","1","10",10,false],[false,"10 liter per minute per square meter","10.L/(min.m2)","L/(MIN.M2)","",0.00016666666666666666,[1,-1,0,0,0,0,0],"L/(min.(m<sup>2</sup>))",null,false,null,null,1,false,false,0,"10 liters per minutes per square meter; 10 L per min per m2; m^2; 10 L/(min*m2); 10L/(min*m^2); litres; sq. meter; metre; meters squared","LOINC","ArVRat","Clinical","",null,null,null,null,false],[false,"10 liter per minute","10.L/min","L/MIN","",0.00016666666666666666,[3,-1,0,0,0,0,0],"L/min",null,false,null,null,1,false,false,0,"10 liters per minute; 10 L per min; 10L; 10 L/min; litre","LOINC","VRat","Clinical","",null,null,null,null,false],[false,"10 micronewton second per centimeter to the fifth power per square meter","10.uN.s/(cm5.m2)","(UN.S)/(CM5.M2)","",100000000,[-6,-1,1,0,0,0,0],"(μN.s)/(cm<sup>5</sup>).(m<sup>2</sup>)",null,false,null,null,1,false,false,0,"dyne seconds per centimeter5 and square meter; dyn.s/(cm5.m2); dyn.s/cm5/m2; cm^5; m^2","LOINC","","Clinical","unit to measure systemic vascular resistance per body surface area",null,null,null,null,false],[false,"24 hour","24.h","HR","",86400,[0,1,0,0,0,0,0],"h",null,false,null,null,1,false,false,0,"24hrs; 24 hrs; 24 hours; days; dy","LOINC","Time","Clinical","",null,null,null,null,false],[false,"ampere per meter","A/m","A/M","electric current",1,[-1,-1,0,0,0,1,0],"A/m","si",true,null,null,1,false,false,0,"A/m; amp/meter; magnetic field strength; H; B; amperes per meter; metre","LOINC","","Clinical","unit of magnetic field strength","C/s","C/S","1",1,false],[true,"centigram","cg","CG","mass",0.01,[0,0,1,0,0,0,0],"cg",null,false,"M",null,1,false,false,0,"centigrams; cg; cgm","LOINC","Mass","Clinical","",null,null,null,null,false],[false,"centiliter","cL","CL","volume",0.00001,[3,0,0,0,0,0,0],"cL","iso1000",true,null,null,1,false,false,0,"centiliters; centilitres","LOINC","Vol","Clinical","","l",null,"1",1,false],[true,"centimeter","cm","CM","length",0.01,[1,0,0,0,0,0,0],"cm",null,false,"L",null,1,false,false,0,"centimeters; centimetres","LOINC","Len","Clinical","",null,null,null,null,false],[false,"centimeter of water","cm[H2O]","CM[H2O]","pressure",98066.5,[-1,-2,1,0,0,0,0],"cm HO<sub><r>2</r></sub>","clinical",true,null,null,1,false,false,0,"cm H2O; cmH2O; centimetres; pressure","LOINC","Pres","Clinical","unit of pressure mostly applies to blood pressure","kPa","KPAL","980665e-5",9.80665,false],[false,"centimeter of water per liter per second","cm[H2O]/L/s","(CM[H2O]/L)/S","pressure",98066500,[-4,-3,1,0,0,0,0],"(cm HO<sub><r>2</r></sub>)/L/s","clinical",true,null,null,1,false,false,0,"cm[H2O]/(L/s); cm[H2O].s/L; cm H2O/L/sec; cmH2O/L/sec; cmH2O/Liter; cmH2O per L per secs; centimeters of water per liters per second; centimetres; litres; cm[H2O]/(L/s)","LOINC","PresRat","Clinical","unit used to measure mean pulmonary resistance","kPa","KPAL","980665e-5",9.80665,false],[false,"centimeter of water per second per meter","cm[H2O]/s/m","(CM[H2O]/S)/M","pressure",98066.5,[-2,-3,1,0,0,0,0],"(cm HO<sub><r>2</r></sub>)/s/m","clinical",true,null,null,1,false,false,0,"cm[H2O]/(s.m); cm H2O/s/m; cmH2O; cmH2O/sec/m; cmH2O per secs per meters; centimeters of water per seconds per meter; centimetres; metre","LOINC","PresRat","Clinical","unit used to measure pulmonary pressure time product","kPa","KPAL","980665e-5",9.80665,false],[false,"centimeter of mercury","cm[Hg]","CM[HG]","pressure",1333220,[-1,-2,1,0,0,0,0],"cm Hg","clinical",true,null,null,1,false,false,0,"centimeters of mercury; centimetres; cmHg; cm Hg","LOINC","Pres","Clinical","unit of pressure where 1 cmHg = 10 torr","kPa","KPAL","133.3220",133.322,false],[true,"square centimeter","cm2","CM2","length",0.0001,[2,0,0,0,0,0,0],"cm<sup>2</sup>",null,false,"L",null,1,false,false,0,"cm^2; sq cm; centimeters squared; square centimeters; centimetre; area","LOINC","Area","Clinical","",null,null,null,null,false],[true,"square centimeter per second","cm2/s","CM2/S","length",0.0001,[2,-1,0,0,0,0,0],"(cm<sup>2</sup>)/s",null,false,"L",null,1,false,false,0,"cm^2/sec; square centimeters per second; sq cm per sec; cm2; centimeters squared; centimetres","LOINC","AreaRat","Clinical","",null,null,null,null,false],[false,"centipoise","cP","CP","dynamic viscosity",1,[-1,-1,1,0,0,0,0],"cP","cgs",true,null,null,1,false,false,0,"cps; centiposes","LOINC","Visc","Clinical","unit of dynamic viscosity in the CGS system with base units: 10^−3 Pa.s = 1 mPa·.s (1 millipascal second)","dyn.s/cm2","DYN.S/CM2","1",1,false],[false,"centistoke","cSt","CST","kinematic viscosity",0.0000010000000000000002,[2,-1,0,0,0,0,0],"cSt","cgs",true,null,null,1,false,false,0,"centistokes","LOINC","Visc","Clinical","unit for kinematic viscosity with base units of mm^2/s (square millimeter per second)","cm2/s","CM2/S","1",1,false],[false,"dekaliter per minute","daL/min","DAL/MIN","volume",0.00016666666666666666,[3,-1,0,0,0,0,0],"daL/min","iso1000",true,null,null,1,false,false,0,"dekalitres; dekaliters per minute; per min","LOINC","VRat","Clinical","","l",null,"1",1,false],[false,"dekaliter per minute per square meter","daL/min/m2","(DAL/MIN)/M2","volume",0.00016666666666666666,[1,-1,0,0,0,0,0],"(daL/min)/(m<sup>2</sup>)","iso1000",true,null,null,1,false,false,0,"daL/min/m^2; daL/minute/m2; sq. meter; dekaliters per minutes per square meter; meter squared; dekalitres; metre","LOINC","ArVRat","Clinical","The area usually is the body surface area used to normalize cardiovascular measures for patient's size","l",null,"1",1,false],[false,"decibel","dB","DB","level",1,[0,0,0,0,0,0,0],"dB","levels",true,null,"lg",0.1,true,false,0,"decibels","LOINC","LogRto","Clinical","unit most commonly used in acoustics as unit of sound pressure level. (also see B[SPL] or bel sound pressure level). ","1",null,null,1,false],[false,"degree per second","deg/s","DEG/S","plane angle",0.017453292519943295,[0,-1,0,1,0,0,0],"°/s","iso1000",false,null,null,1,false,false,0,"deg/sec; deg per sec; °/sec; twist rate; angular speed; rotational speed","LOINC","ARat","Clinical","unit of angular (rotational) speed used to express turning rate","[pi].rad/360","[PI].RAD/360","2",2,false],[true,"decigram","dg","DG","mass",0.1,[0,0,1,0,0,0,0],"dg",null,false,"M",null,1,false,false,0,"decigrams; dgm; 0.1 grams; 1/10 gm","LOINC","Mass","Clinical","equal to 1/10 gram",null,null,null,null,false],[false,"deciliter","dL","DL","volume",0.0001,[3,0,0,0,0,0,0],"dL","iso1000",true,null,null,1,false,false,0,"deciliters; decilitres; 0.1 liters; 1/10 L","LOINC","Vol","Clinical","equal to 1/10 liter","l",null,"1",1,false],[true,"decimeter","dm","DM","length",0.1,[1,0,0,0,0,0,0],"dm",null,false,"L",null,1,false,false,0,"decimeters; decimetres; 0.1 meters; 1/10 m; 10 cm; centimeters","LOINC","Len","Clinical","equal to 1/10 meter or 10 centimeters",null,null,null,null,false],[true,"square decimeter per square second","dm2/s2","DM2/S2","length",0.010000000000000002,[2,-2,0,0,0,0,0],"(dm<sup>2</sup>)/(s<sup>2</sup>)",null,false,"L",null,1,false,false,0,"dm2 per s2; dm^2/s^2; decimeters squared per second squared; sq dm; sq sec","LOINC","EngMass (massic energy)","Clinical","units for energy per unit mass or Joules per kilogram (J/kg = kg.m2/s2/kg = m2/s2) ",null,null,null,null,false],[false,"dyne second per centimeter per square meter","dyn.s/(cm.m2)","(DYN.S)/(CM.M2)","force",1,[-2,-1,1,0,0,0,0],"(dyn.s)/(cm.(m<sup>2</sup>))","cgs",true,null,null,1,false,false,0,"(dyn*s)/(cm*m2); (dyn*s)/(cm*m^2); dyn s per cm per m2; m^2; dyne seconds per centimeters per square meter; centimetres; sq. meter; squared","LOINC","","Clinical","","g.cm/s2","G.CM/S2","1",1,false],[false,"dyne second per centimeter","dyn.s/cm","(DYN.S)/CM","force",1,[0,-1,1,0,0,0,0],"(dyn.s)/cm","cgs",true,null,null,1,false,false,0,"(dyn*s)/cm; dyn sec per cm; seconds; centimetre; dyne seconds","LOINC","","Clinical","","g.cm/s2","G.CM/S2","1",1,false],[false,"equivalent per liter","eq/L","EQ/L","amount of substance",6.0221366999999994e+26,[-3,0,0,0,0,0,0],"eq/L","chemical",true,null,null,1,false,false,1,"eq/liter; eq/litre; eqs; equivalents per liter; litre","LOINC","SCnc","Clinical","equivalence equals moles per valence","mol","MOL","1",1,false],[false,"equivalent per milliliter","eq/mL","EQ/ML","amount of substance",6.0221367e+29,[-3,0,0,0,0,0,0],"eq/mL","chemical",true,null,null,1,false,false,1,"equivalent/milliliter; equivalents per milliliter; eq per mL; millilitre","LOINC","SCnc","Clinical","equivalence equals moles per valence","mol","MOL","1",1,false],[false,"equivalent per millimole","eq/mmol","EQ/MMOL","amount of substance",1000,[0,0,0,0,0,0,0],"eq/mmol","chemical",true,null,null,1,false,false,0,"equivalent/millimole; equivalents per millimole; eq per mmol","LOINC","SRto","Clinical","equivalence equals moles per valence","mol","MOL","1",1,false],[false,"equivalent per micromole","eq/umol","EQ/UMOL","amount of substance",1000000,[0,0,0,0,0,0,0],"eq/μmol","chemical",true,null,null,1,false,false,0,"equivalent/micromole; equivalents per micromole; eq per umol","LOINC","SRto","Clinical","equivalence equals moles per valence","mol","MOL","1",1,false],[true,"femtogram","fg","FG","mass",1e-15,[0,0,1,0,0,0,0],"fg",null,false,"M",null,1,false,false,0,"fg; fgm; femtograms; weight","LOINC","Mass","Clinical","equal to 10^-15 grams",null,null,null,null,false],[false,"femtoliter","fL","FL","volume",1e-18,[3,0,0,0,0,0,0],"fL","iso1000",true,null,null,1,false,false,0,"femtolitres; femtoliters","LOINC","Vol; EntVol","Clinical","equal to 10^-15 liters","l",null,"1",1,false],[true,"femtometer","fm","FM","length",1e-15,[1,0,0,0,0,0,0],"fm",null,false,"L",null,1,false,false,0,"femtometres; femtometers","LOINC","Len","Clinical","equal to 10^-15 meters",null,null,null,null,false],[false,"femtomole","fmol","FMOL","amount of substance",602213670,[0,0,0,0,0,0,0],"fmol","si",true,null,null,1,false,false,1,"femtomoles","LOINC","EntSub","Clinical","equal to 10^-15 moles","10*23","10*23","6.0221367",6.0221367,false],[false,"femtomole per gram","fmol/g","FMOL/G","amount of substance",602213670,[0,0,-1,0,0,0,0],"fmol/g","si",true,null,null,1,false,false,1,"femtomoles; fmol/gm; fmol per gm","LOINC","SCnt","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"femtomole per liter","fmol/L","FMOL/L","amount of substance",602213670000,[-3,0,0,0,0,0,0],"fmol/L","si",true,null,null,1,false,false,1,"femtomoles; fmol per liter; litre","LOINC","SCnc","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"femtomole per milligram","fmol/mg","FMOL/MG","amount of substance",602213670000,[0,0,-1,0,0,0,0],"fmol/mg","si",true,null,null,1,false,false,1,"fmol per mg; femtomoles","LOINC","SCnt","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"femtomole per milliliter","fmol/mL","FMOL/ML","amount of substance",602213670000000,[-3,0,0,0,0,0,0],"fmol/mL","si",true,null,null,1,false,false,1,"femtomoles; millilitre; fmol per mL; fmol per milliliter","LOINC","SCnc","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[true,"gram meter","g.m","G.M","mass",1,[1,0,1,0,0,0,0],"g.m",null,false,"M",null,1,false,false,0,"g*m; gxm; meters; metres","LOINC","Enrg","Clinical","Unit for measuring stroke work (heart work)",null,null,null,null,false],[true,"gram per 100 gram","g/(100.g)","G/G","mass",0.01,[0,0,0,0,0,0,0],"g/g",null,false,"M",null,1,false,false,0,"g/100 gm; 100gm; grams per 100 grams; gm per 100 gm","LOINC","MCnt","Clinical","",null,null,null,null,false],[true,"gram per 12 hour","g/(12.h)","G/HR","mass",0.000023148148148148147,[0,-1,1,0,0,0,0],"g/h",null,false,"M",null,1,false,false,0,"gm/12hrs; 12 hrs; gm per 12 hrs; 12hrs; grams per 12 hours","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"gram per 24 hour","g/(24.h)","G/HR","mass",0.000011574074074074073,[0,-1,1,0,0,0,0],"g/h",null,false,"M",null,1,false,false,0,"gm/24hrs; gm/24 hrs; gm per 24 hrs; 24hrs; grams per 24 hours; gm/dy; gm per dy; grams per day","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"gram per 3 days","g/(3.d)","G/D","mass",0.000003858024691358025,[0,-1,1,0,0,0,0],"g/d",null,false,"M",null,1,false,false,0,"gm/3dy; gm/3 dy; gm per 3 days; grams","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"gram per 4 hour","g/(4.h)","G/HR","mass",0.00006944444444444444,[0,-1,1,0,0,0,0],"g/h",null,false,"M",null,1,false,false,0,"gm/4hrs; gm/4 hrs; gm per 4 hrs; 4hrs; grams per 4 hours","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"gram per 48 hour","g/(48.h)","G/HR","mass",0.000005787037037037037,[0,-1,1,0,0,0,0],"g/h",null,false,"M",null,1,false,false,0,"gm/48hrs; gm/48 hrs; gm per 48 hrs; 48hrs; grams per 48 hours","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"gram per 5 hour","g/(5.h)","G/HR","mass",0.00005555555555555556,[0,-1,1,0,0,0,0],"g/h",null,false,"M",null,1,false,false,0,"gm/5hrs; gm/5 hrs; gm per 5 hrs; 5hrs; grams per 5 hours","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"gram per 6 hour","g/(6.h)","G/HR","mass",0.000046296296296296294,[0,-1,1,0,0,0,0],"g/h",null,false,"M",null,1,false,false,0,"gm/6hrs; gm/6 hrs; gm per 6 hrs; 6hrs; grams per 6 hours","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"gram per 72 hour","g/(72.h)","G/HR","mass",0.000003858024691358025,[0,-1,1,0,0,0,0],"g/h",null,false,"M",null,1,false,false,0,"gm/72hrs; gm/72 hrs; gm per 72 hrs; 72hrs; grams per 72 hours","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"gram per cubic centimeter","g/cm3","G/CM3","mass",999999.9999999999,[-3,0,1,0,0,0,0],"g/(cm<sup>3</sup>)",null,false,"M",null,1,false,false,0,"g/cm^3; gm per cm3; g per cm^3; grams per centimeter cubed; cu. cm; centimetre; g/mL; gram per milliliter; millilitre","LOINC","MCnc","Clinical","g/cm3 = g/mL",null,null,null,null,false],[true,"gram per day","g/d","G/D","mass",0.000011574074074074073,[0,-1,1,0,0,0,0],"g/d",null,false,"M",null,1,false,false,0,"gm/dy; gm per dy; grams per day; gm/24hrs; gm/24 hrs; gm per 24 hrs; 24hrs; grams per 24 hours; serving","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"gram per deciliter","g/dL","G/DL","mass",10000,[-3,0,1,0,0,0,0],"g/dL",null,false,"M",null,1,false,false,0,"gm/dL; gm per dL; grams per deciliter; decilitre","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"gram per gram","g/g","G/G","mass",1,[0,0,0,0,0,0,0],"g/g",null,false,"M",null,1,false,false,0,"gm; grams","LOINC","MRto ","Clinical","",null,null,null,null,false],[true,"gram per hour","g/h","G/HR","mass",0.0002777777777777778,[0,-1,1,0,0,0,0],"g/h",null,false,"M",null,1,false,false,0,"gm/hr; gm per hr; grams; intake; output","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"gram per hour per square meter","g/h/m2","(G/HR)/M2","mass",0.0002777777777777778,[-2,-1,1,0,0,0,0],"(g/h)/(m<sup>2</sup>)",null,false,"M",null,1,false,false,0,"gm/hr/m2; gm/h/m2; /m^2; sq. m; g per hr per m2; grams per hours per square meter; meter squared; metre","LOINC","ArMRat","Clinical","",null,null,null,null,false],[true,"gram per kilogram","g/kg ","G/KG","mass",0.001,[0,0,0,0,0,0,0],"g/kg",null,false,"M",null,1,false,false,0,"g per kg; gram per kilograms","LOINC","MCnt","Clinical","",null,null,null,null,false],[true,"gram per kilogram per 8 hour ","g/kg/(8.h)","(G/KG)/HR","mass",3.472222222222222e-8,[0,-1,0,0,0,0,0],"(g/kg)/h",null,false,"M",null,1,false,false,0,"g/(8.kg.h); gm/kg/8hrs; 8 hrs; g per kg per 8 hrs; 8hrs; grams per kilograms per 8 hours; shift","LOINC","MCntRat; RelMRat","Clinical","unit often used to describe mass in grams of protein consumed in a 8 hours, divided by the subject's body weight in kilograms. Also used to measure mass dose rate per body mass",null,null,null,null,false],[true,"gram per kilogram per day","g/kg/d","(G/KG)/D","mass",1.1574074074074074e-8,[0,-1,0,0,0,0,0],"(g/kg)/d",null,false,"M",null,1,false,false,0,"g/(kg.d); gm/kg/dy; gm per kg per dy; grams per kilograms per day","LOINC","RelMRat","Clinical","unit often used to describe mass in grams of protein consumed in a day, divided by the subject's body weight in kilograms. Also used to measure mass dose rate per body mass",null,null,null,null,false],[true,"gram per kilogram per hour","g/kg/h","(G/KG)/HR","mass",2.7777777777777776e-7,[0,-1,0,0,0,0,0],"(g/kg)/h",null,false,"M",null,1,false,false,0,"g/(kg.h); g/kg/hr; g per kg per hrs; grams per kilograms per hour","LOINC","MCntRat; RelMRat","Clinical","unit used to measure mass dose rate per body mass",null,null,null,null,false],[true,"gram per kilogram per minute","g/kg/min","(G/KG)/MIN","mass",0.000016666666666666667,[0,-1,0,0,0,0,0],"(g/kg)/min",null,false,"M",null,1,false,false,0,"g/(kg.min); g/kg/min; g per kg per min; grams per kilograms per minute","LOINC","MCntRat; RelMRat","Clinical","unit used to measure mass dose rate per body mass",null,null,null,null,false],[true,"gram per liter","g/L","G/L","mass",1000,[-3,0,1,0,0,0,0],"g/L",null,false,"M",null,1,false,false,0,"gm per liter; g/liter; grams per liter; litre","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"gram per square meter","g/m2","G/M2","mass",1,[-2,0,1,0,0,0,0],"g/(m<sup>2</sup>)",null,false,"M",null,1,false,false,0,"g/m^2; gram/square meter; g/sq m; g per m2; g per m^2; grams per square meter; meters squared; metre","LOINC","ArMass","Clinical","Tests measure myocardial mass (heart ventricle system) per body surface area; unit used to measure mass dose per body surface area",null,null,null,null,false],[true,"gram per milligram","g/mg","G/MG","mass",1000,[0,0,0,0,0,0,0],"g/mg",null,false,"M",null,1,false,false,0,"g per mg; grams per milligram","LOINC","MCnt; MRto","Clinical","",null,null,null,null,false],[true,"gram per minute","g/min","G/MIN","mass",0.016666666666666666,[0,-1,1,0,0,0,0],"g/min",null,false,"M",null,1,false,false,0,"g per min; grams per minute; gram/minute","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"gram per milliliter","g/mL","G/ML","mass",1000000,[-3,0,1,0,0,0,0],"g/mL",null,false,"M",null,1,false,false,0,"g per mL; grams per milliliter; millilitre","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"gram per millimole","g/mmol","G/MMOL","mass",1.6605401866749388e-21,[0,0,1,0,0,0,0],"g/mmol",null,false,"M",null,1,false,false,-1,"grams per millimole; g per mmol","LOINC","Ratio","Clinical","",null,null,null,null,false],[false,"joule per liter","J/L","J/L","energy",1000000,[-1,-2,1,0,0,0,0],"J/L","si",true,null,null,1,false,false,0,"joules per liter; litre; J per L","LOINC","EngCnc","Clinical","","N.m","N.M","1",1,false],[true,"degree Kelvin per Watt","K/W","K/W","temperature",0.001,[-2,3,-1,0,1,0,0],"K/W",null,false,"C",null,1,false,false,0,"degree Kelvin/Watt; K per W; thermal ohm; thermal resistance; degrees","LOINC","TempEngRat","Clinical","unit for absolute thermal resistance equal to the reciprocal of thermal conductance. Unit used for tests to measure work of breathing",null,null,null,null,false],[false,"kilo international unit per liter","k[IU]/L","K[IU]/L","arbitrary",1000000,[-3,0,0,0,0,0,0],"(ki.U.)/L","chemical",true,null,null,1,false,true,0,"kIU/L; kIU per L; kIU per liter; kilo international units; litre; allergens; allergy units","LOINC","ACnc","Clinical","IgE has an WHO reference standard so IgE allergen testing can be reported as k[IU]/L","[iU]","[IU]","1",1,false],[false,"kilo international unit per milliliter","k[IU]/mL","K[IU]/ML","arbitrary",1000000000,[-3,0,0,0,0,0,0],"(ki.U.)/mL","chemical",true,null,null,1,false,true,0,"kIU/mL; kIU per mL; kIU per milliliter; kilo international units; millilitre; allergens; allergy units","LOINC","ACnc","Clinical","IgE has an WHO reference standard so IgE allergen testing can be reported as k[IU]/mL","[iU]","[IU]","1",1,false],[false,"katal per kilogram","kat/kg","KAT/KG","catalytic activity",602213670000000000000,[0,-1,-1,0,0,0,0],"kat/kg","chemical",true,null,null,1,false,false,1,"kat per kg; katals per kilogram; mol/s/kg; moles per seconds per kilogram","LOINC","CCnt","Clinical","kat is a unit of catalytic activity with base units = mol/s. Rarely used because its units are too large to practically express catalytic activity. See enzyme unit [U] which is the standard unit for catalytic activity.","mol/s","MOL/S","1",1,false],[false,"katal per liter","kat/L","KAT/L","catalytic activity",6.0221366999999994e+26,[-3,-1,0,0,0,0,0],"kat/L","chemical",true,null,null,1,false,false,1,"kat per L; katals per liter; litre; mol/s/L; moles per seconds per liter","LOINC","CCnc","Clinical","kat is a unit of catalytic activity with base units = mol/s. Rarely used because its units are too large to practically express catalytic activity. See enzyme unit [U] which is the standard unit for catalytic activity.","mol/s","MOL/S","1",1,false],[false,"kilocalorie","kcal","KCAL","energy",4184000,[2,-2,1,0,0,0,0],"kcal","heat",true,null,null,1,false,false,0,"kilogram calories; large calories; food calories; kcals","LOINC","EngRat","Clinical","It is equal to 1000 calories (equal to 4.184 kJ). But in practical usage, kcal refers to food calories which excludes caloric content in fiber and other constitutes that is not digestible by humans. Also see nutrition label Calories ([Cal])","cal_th","CAL_TH","1",1,false],[false,"kilocalorie per 24 hour","kcal/(24.h)","KCAL/HR","energy",48.425925925925924,[2,-3,1,0,0,0,0],"kcal/h","heat",true,null,null,1,false,false,0,"kcal/24hrs; kcal/24 hrs; kcal per 24hrs; kilocalories per 24 hours; kilojoules; kJ/24hr; kJ/(24.h); kJ/dy; kilojoules per days; intake; calories burned; metabolic rate; food calories","","EngRat","Clinical","","cal_th","CAL_TH","1",1,false],[false,"kilocalorie per ounce","kcal/[oz_av]","KCAL/[OZ_AV]","energy",147586.25679704445,[2,-2,0,0,0,0,0],"kcal/oz","heat",true,null,null,1,false,false,0,"kcal/oz; kcal per ozs; large calories per ounces; food calories; servings; international","LOINC","EngCnt","Clinical","used in nutrition to represent calorie of food","cal_th","CAL_TH","1",1,false],[false,"kilocalorie per day","kcal/d","KCAL/D","energy",48.425925925925924,[2,-3,1,0,0,0,0],"kcal/d","heat",true,null,null,1,false,false,0,"kcal/dy; kcal per day; kilocalories per days; kilojoules; kJ/dy; kilojoules per days; intake; calories burned; metabolic rate; food calories","LOINC","EngRat","Clinical","unit in nutrition for food intake (measured in calories) in a day","cal_th","CAL_TH","1",1,false],[false,"kilocalorie per hour","kcal/h","KCAL/HR","energy",1162.2222222222222,[2,-3,1,0,0,0,0],"kcal/h","heat",true,null,null,1,false,false,0,"kcal/hrs; kcals per hr; intake; kilocalories per hours; kilojoules","LOINC","EngRat","Clinical","used in nutrition to represent caloric requirement or consumption","cal_th","CAL_TH","1",1,false],[false,"kilocalorie per kilogram per 24 hour","kcal/kg/(24.h)","(KCAL/KG)/HR","energy",0.04842592592592593,[2,-3,0,0,0,0,0],"(kcal/kg)/h","heat",true,null,null,1,false,false,0,"kcal/kg/24hrs; 24 hrs; kcal per kg per 24hrs; kilocalories per kilograms per 24 hours; kilojoules","LOINC","EngCntRat","Clinical","used in nutrition to represent caloric requirement per day based on subject's body weight in kilograms","cal_th","CAL_TH","1",1,false],[true,"kilogram","kg","KG","mass",1000,[0,0,1,0,0,0,0],"kg",null,false,"M",null,1,false,false,0,"kilograms; kgs","LOINC","Mass","Clinical","",null,null,null,null,false],[true,"kilogram meter per second","kg.m/s","(KG.M)/S","mass",1000,[1,-1,1,0,0,0,0],"(kg.m)/s",null,false,"M",null,1,false,false,0,"kg*m/s; kg.m per sec; kg*m per sec; p; momentum","LOINC","","Clinical","unit for momentum =  mass times velocity",null,null,null,null,false],[true,"kilogram per second per square meter","kg/(s.m2)","KG/(S.M2)","mass",1000,[-2,-1,1,0,0,0,0],"kg/(s.(m<sup>2</sup>))",null,false,"M",null,1,false,false,0,"kg/(s*m2); kg/(s*m^2); kg per s per m2; per sec; per m^2; kilograms per seconds per square meter; meter squared; metre","LOINC","ArMRat","Clinical","",null,null,null,null,false],[true,"kilogram per hour","kg/h","KG/HR","mass",0.2777777777777778,[0,-1,1,0,0,0,0],"kg/h",null,false,"M",null,1,false,false,0,"kg/hr; kg per hr; kilograms per hour","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"kilogram per liter","kg/L","KG/L","mass",1000000,[-3,0,1,0,0,0,0],"kg/L",null,false,"M",null,1,false,false,0,"kg per liter; litre; kilograms","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"kilogram per square meter","kg/m2","KG/M2","mass",1000,[-2,0,1,0,0,0,0],"kg/(m<sup>2</sup>)",null,false,"M",null,1,false,false,0,"kg/m^2; kg/sq. m; kg per m2; per m^2; per sq. m; kilograms; meter squared; metre; BMI","LOINC","Ratio","Clinical","units for body mass index (BMI)",null,null,null,null,false],[true,"kilogram per cubic meter","kg/m3","KG/M3","mass",1000,[-3,0,1,0,0,0,0],"kg/(m<sup>3</sup>)",null,false,"M",null,1,false,false,0,"kg/m^3; kg/cu. m; kg per m3; per m^3; per cu. m; kilograms; meters cubed; metre","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"kilogram per minute","kg/min","KG/MIN","mass",16.666666666666668,[0,-1,1,0,0,0,0],"kg/min",null,false,"M",null,1,false,false,0,"kilogram/minute; kg per min; kilograms per minute","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"kilogram per mole","kg/mol","KG/MOL","mass",1.6605401866749388e-21,[0,0,1,0,0,0,0],"kg/mol",null,false,"M",null,1,false,false,-1,"kilogram/mole; kg per mol; kilograms per mole","LOINC","SCnt","Clinical","",null,null,null,null,false],[true,"kilogram per second","kg/s","KG/S","mass",1000,[0,-1,1,0,0,0,0],"kg/s",null,false,"M",null,1,false,false,0,"kg/sec; kilogram/second; kg per sec; kilograms; second","LOINC","MRat","Clinical","",null,null,null,null,false],[false,"kiloliter","kL","KL","volume",1,[3,0,0,0,0,0,0],"kL","iso1000",true,null,null,1,false,false,0,"kiloliters; kilolitres; m3; m^3; meters cubed; metre","LOINC","Vol","Clinical","","l",null,"1",1,false],[true,"kilometer","km","KM","length",1000,[1,0,0,0,0,0,0],"km",null,false,"L",null,1,false,false,0,"kilometers; kilometres; distance","LOINC","Len","Clinical","",null,null,null,null,false],[false,"kilopascal","kPa","KPAL","pressure",1000000,[-1,-2,1,0,0,0,0],"kPa","si",true,null,null,1,false,false,0,"kilopascals; pressure","LOINC","Pres; PPresDiff","Clinical","","N/m2","N/M2","1",1,false],[true,"kilosecond","ks","KS","time",1000,[0,1,0,0,0,0,0],"ks",null,false,"T",null,1,false,false,0,"kiloseconds; ksec","LOINC","Time","Clinical","",null,null,null,null,false],[false,"kilo enzyme unit","kU","KU","catalytic activity",10036894500000000000,[0,-1,0,0,0,0,0],"kU","chemical",true,null,null,1,false,false,1,"units; mmol/min; millimoles per minute","LOINC","CAct","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min); 1 kU = 1 mmol/min","umol/min","UMOL/MIN","1",1,false],[false,"kilo enzyme unit per gram","kU/g","KU/G","catalytic activity",10036894500000000000,[0,-1,-1,0,0,0,0],"kU/g","chemical",true,null,null,1,false,false,1,"units per grams; kU per gm","LOINC","CCnt","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min); 1 kU = 1 mmol/min","umol/min","UMOL/MIN","1",1,false],[false,"kilo enzyme unit per liter","kU/L","KU/L","catalytic activity",1.00368945e+22,[-3,-1,0,0,0,0,0],"kU/L","chemical",true,null,null,1,false,false,1,"units per liter; litre; enzymatic activity; enzyme activity per volume; activities","LOINC","ACnc; CCnc","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min); 1 kU = 1 mmol/min","umol/min","UMOL/MIN","1",1,false],[false,"kilo enzyme unit per milliliter","kU/mL","KU/ML","catalytic activity",1.00368945e+25,[-3,-1,0,0,0,0,0],"kU/mL","chemical",true,null,null,1,false,false,1,"kU per mL; units per milliliter; millilitre; enzymatic activity per volume; enzyme activities","LOINC","CCnc","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min); 1 kU = 1 mmol/min","umol/min","UMOL/MIN","1",1,false],[false,"Liters per 24 hour","L/(24.h)","L/HR","volume",1.1574074074074074e-8,[3,-1,0,0,0,0,0],"L/h","iso1000",true,null,null,1,false,false,0,"L/24hrs; L/24 hrs; L per 24hrs; liters per 24 hours; day; dy; litres; volume flow rate","LOINC","VRat","Clinical","","l",null,"1",1,false],[false,"Liters per 8 hour","L/(8.h)","L/HR","volume",3.472222222222222e-8,[3,-1,0,0,0,0,0],"L/h","iso1000",true,null,null,1,false,false,0,"L/8hrs; L/8 hrs; L per 8hrs; liters per 8 hours; litres; volume flow rate; shift","LOINC","VRat","Clinical","","l",null,"1",1,false],[false,"Liters per minute per square meter","L/(min.m2) ","L/(MIN.M2)","volume",0.000016666666666666667,[1,-1,0,0,0,0,0],"L/(min.(m<sup>2</sup>))","iso1000",true,null,null,1,false,false,0,"L/(min.m2); L/min/m^2; L/min/sq. meter; L per min per m2; m^2; liters per minutes per square meter; meter squared; litres; metre ","LOINC","ArVRat","Clinical","unit for tests that measure cardiac output per body surface area (cardiac index)","l",null,"1",1,false],[false,"Liters per day","L/d","L/D","volume",1.1574074074074074e-8,[3,-1,0,0,0,0,0],"L/d","iso1000",true,null,null,1,false,false,0,"L/dy; L per day; 24hrs; 24 hrs; 24 hours; liters; litres","LOINC","VRat","Clinical","","l",null,"1",1,false],[false,"Liters per hour","L/h","L/HR","volume",2.7777777777777776e-7,[3,-1,0,0,0,0,0],"L/h","iso1000",true,null,null,1,false,false,0,"L/hr; L per hr; litres","LOINC","VRat","Clinical","","l",null,"1",1,false],[false,"Liters per kilogram","L/kg","L/KG","volume",0.000001,[3,0,-1,0,0,0,0],"L/kg","iso1000",true,null,null,1,false,false,0,"L per kg; litre","LOINC","VCnt","Clinical","","l",null,"1",1,false],[false,"Liters per liter","L/L","L/L","volume",1,[0,0,0,0,0,0,0],"L/L","iso1000",true,null,null,1,false,false,0,"L per L; liter/liter; litre","LOINC","VFr","Clinical","","l",null,"1",1,false],[false,"Liters per minute","L/min","L/MIN","volume",0.000016666666666666667,[3,-1,0,0,0,0,0],"L/min","iso1000",true,null,null,1,false,false,0,"liters per minute; litre","LOINC","VRat","Clinical","","l",null,"1",1,false],[false,"Liters per minute per square meter","L/min/m2","(L/MIN)/M2","volume",0.000016666666666666667,[1,-1,0,0,0,0,0],"(L/min)/(m<sup>2</sup>)","iso1000",true,null,null,1,false,false,0,"L/(min.m2); L/min/m^2; L/min/sq. meter; L per min per m2; m^2; liters per minutes per square meter; meter squared; litres; metre ","","ArVRat","Clinical","unit for tests that measure cardiac output per body surface area (cardiac index)","l",null,"1",1,false],[false,"Liters per second","L/s","L/S","volume",0.001,[3,-1,0,0,0,0,0],"L/s","iso1000",true,null,null,1,false,false,0,"L per sec; litres","LOINC","VRat","Clinical","unit used often to measure gas flow and peak expiratory flow","l",null,"1",1,false],[false,"Liters per second per square second","L/s/s2","(L/S)/S2","volume",0.001,[3,-3,0,0,0,0,0],"(L/s)/(s<sup>2</sup>)","iso1000",true,null,null,1,false,false,0,"L/s/s^2; L/sec/sec2; L/sec/sec^2; L/sec/sq. sec; L per s per s2; L per sec per sec2; s^2; sec^2; liters per seconds per square second; second squared; litres ","LOINC","ArVRat","Clinical","unit for tests that measure cardiac output/body surface area","l",null,"1",1,false],[false,"lumen square meter","lm.m2","LM.M2","luminous flux",1,[2,0,0,2,0,0,1],"lm.(m<sup>2</sup>)","si",true,null,null,1,false,false,0,"lm*m2; lm*m^2; lumen meters squared; lumen sq. meters; metres","LOINC","","Clinical","","cd.sr","CD.SR","1",1,false],[true,"meter per second","m/s","M/S","length",1,[1,-1,0,0,0,0,0],"m/s",null,false,"L",null,1,false,false,0,"meter/second; m per sec; meters per second; metres; velocity; speed","LOINC","Vel","Clinical","unit of velocity",null,null,null,null,false],[true,"meter per square second","m/s2","M/S2","length",1,[1,-2,0,0,0,0,0],"m/(s<sup>2</sup>)",null,false,"L",null,1,false,false,0,"m/s^2; m/sq. sec; m per s2; per s^2; meters per square second; second squared; sq second; metres; acceleration","LOINC","Accel","Clinical","unit of acceleration",null,null,null,null,false],[false,"milli international unit per liter","m[IU]/L","M[IU]/L","arbitrary",1,[-3,0,0,0,0,0,0],"(mi.U.)/L","chemical",true,null,null,1,false,true,0,"mIU/L; m IU/L; mIU per liter; units; litre","LOINC","ACnc","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","[iU]","[IU]","1",1,false],[false,"milli  international unit per milliliter","m[IU]/mL","M[IU]/ML","arbitrary",1000.0000000000001,[-3,0,0,0,0,0,0],"(mi.U.)/mL","chemical",true,null,null,1,false,true,0,"mIU/mL; m IU/mL; mIU per mL; milli international units per milliliter; millilitre","LOINC","ACnc","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","[iU]","[IU]","1",1,false],[true,"square meter","m2","M2","length",1,[2,0,0,0,0,0,0],"m<sup>2</sup>",null,false,"L",null,1,false,false,0,"m^2; sq m; square meters; meters squared; metres","LOINC","Area","Clinical","unit often used to represent body surface area",null,null,null,null,false],[true,"square meter per second","m2/s","M2/S","length",1,[2,-1,0,0,0,0,0],"(m<sup>2</sup>)/s",null,false,"L",null,1,false,false,0,"m^2/sec; m2 per sec; m^2 per sec; sq m/sec; meters squared/seconds; sq m per sec; meters squared; metres","LOINC","ArRat","Clinical","",null,null,null,null,false],[true,"cubic meter per second","m3/s","M3/S","length",1,[3,-1,0,0,0,0,0],"(m<sup>3</sup>)/s",null,false,"L",null,1,false,false,0,"m^3/sec; m3 per sec; m^3 per sec; cu m/sec; cubic meters per seconds; meters cubed; metres","LOINC","VRat","Clinical","",null,null,null,null,false],[false,"milliampere","mA","MA","electric current",0.001,[0,-1,0,0,0,1,0],"mA","si",true,null,null,1,false,false,0,"mamp; milliamperes","LOINC","ElpotRat","Clinical","unit of electric current","C/s","C/S","1",1,false],[false,"millibar","mbar","MBAR","pressure",100000,[-1,-2,1,0,0,0,0],"mbar","iso1000",true,null,null,1,false,false,0,"millibars","LOINC","Pres","Clinical","unit of pressure","Pa","PAL","1e5",100000,false],[false,"millibar second per liter","mbar.s/L","(MBAR.S)/L","pressure",100000000,[-4,-1,1,0,0,0,0],"(mbar.s)/L","iso1000",true,null,null,1,false,false,0,"mbar*s/L; mbar.s per L; mbar*s per L; millibar seconds per liter; millibar second per litre","LOINC","","Clinical","unit to measure expiratory resistance","Pa","PAL","1e5",100000,false],[false,"millibar per liter per second","mbar/L/s","(MBAR/L)/S","pressure",100000000,[-4,-3,1,0,0,0,0],"(mbar/L)/s","iso1000",true,null,null,1,false,false,0,"mbar/(L.s); mbar/L/sec; mbar/liter/second; mbar per L per sec; mbar per liter per second; millibars per liters per seconds; litres","LOINC","PresCncRat","Clinical","unit to measure expiratory resistance","Pa","PAL","1e5",100000,false],[false,"milliequivalent","meq","MEQ","amount of substance",602213670000000000000,[0,0,0,0,0,0,0],"meq","chemical",true,null,null,1,false,false,1,"milliequivalents; meqs","LOINC","Sub","Clinical","equivalence equals moles per valence","mol","MOL","1",1,false],[false,"milliequivalent per 2 hour","meq/(2.h)","MEQ/HR","amount of substance",83640787500000000,[0,-1,0,0,0,0,0],"meq/h","chemical",true,null,null,1,false,false,1,"meq/2hrs; meq/2 hrs; meq per 2 hrs; milliequivalents per 2 hours","LOINC","SRat","Clinical","equivalence equals moles per valence","mol","MOL","1",1,false],[false,"milliequivalent per 24 hour","meq/(24.h)","MEQ/HR","amount of substance",6970065625000000,[0,-1,0,0,0,0,0],"meq/h","chemical",true,null,null,1,false,false,1,"meq/24hrs; meq/24 hrs; meq per 24 hrs; milliequivalents per 24 hours","LOINC","SRat","Clinical","equivalence equals moles per valence","mol","MOL","1",1,false],[false,"milliequivalent per 8 hour","meq/(8.h)","MEQ/HR","amount of substance",20910196875000000,[0,-1,0,0,0,0,0],"meq/h","chemical",true,null,null,1,false,false,1,"meq/8hrs; meq/8 hrs; meq per 8 hrs; milliequivalents per 8 hours; shift","LOINC","SRat","Clinical","equivalence equals moles per valence","mol","MOL","1",1,false],[false,"milliequivalent per day","meq/d","MEQ/D","amount of substance",6970065625000000,[0,-1,0,0,0,0,0],"meq/d","chemical",true,null,null,1,false,false,1,"meq/dy; meq per day; milliquivalents per days; meq/24hrs; meq/24 hrs; meq per 24 hrs; milliequivalents per 24 hours","LOINC","SRat","Clinical","equivalence equals moles per valence","mol","MOL","1",1,false],[false,"milliequivalent per deciliter","meq/dL","MEQ/DL","amount of substance",6.022136699999999e+24,[-3,0,0,0,0,0,0],"meq/dL","chemical",true,null,null,1,false,false,1,"meq per dL; milliequivalents per deciliter; decilitre","LOINC","SCnc","Clinical","equivalence equals moles per valence","mol","MOL","1",1,false],[false,"milliequivalent per gram","meq/g","MEQ/G","amount of substance",602213670000000000000,[0,0,-1,0,0,0,0],"meq/g","chemical",true,null,null,1,false,false,1,"mgq/gm; meq per gm; milliequivalents per gram","LOINC","MCnt","Clinical","equivalence equals moles per valence","mol","MOL","1",1,false],[false,"milliequivalent per hour","meq/h","MEQ/HR","amount of substance",167281575000000000,[0,-1,0,0,0,0,0],"meq/h","chemical",true,null,null,1,false,false,1,"meq/hrs; meq per hrs; milliequivalents per hour","LOINC","SRat","Clinical","equivalence equals moles per valence","mol","MOL","1",1,false],[false,"milliequivalent per kilogram","meq/kg","MEQ/KG","amount of substance",602213670000000000,[0,0,-1,0,0,0,0],"meq/kg","chemical",true,null,null,1,false,false,1,"meq per kg; milliequivalents per kilogram","LOINC","SCnt","Clinical","equivalence equals moles per valence; used to measure dose per patient body mass","mol","MOL","1",1,false],[false,"milliequivalent per kilogram per hour","meq/kg/h","(MEQ/KG)/HR","amount of substance",167281575000000,[0,-1,-1,0,0,0,0],"(meq/kg)/h","chemical",true,null,null,1,false,false,1,"meq/(kg.h); meq/kg/hr; meq per kg per hr; milliequivalents per kilograms per hour","LOINC","SCntRat","Clinical","equivalence equals moles per valence; unit used to measure dose rate per patient body mass","mol","MOL","1",1,false],[false,"milliequivalent per liter","meq/L","MEQ/L","amount of substance",6.0221367e+23,[-3,0,0,0,0,0,0],"meq/L","chemical",true,null,null,1,false,false,1,"milliequivalents per liter; litre; meq per l; acidity","LOINC","SCnc","Clinical","equivalence equals moles per valence","mol","MOL","1",1,false],[false,"milliequivalent per square meter","meq/m2","MEQ/M2","amount of substance",602213670000000000000,[-2,0,0,0,0,0,0],"meq/(m<sup>2</sup>)","chemical",true,null,null,1,false,false,1,"meq/m^2; meq/sq. m; milliequivalents per square meter; meter squared; metre","LOINC","ArSub","Clinical","equivalence equals moles per valence; note that the use of m2 in clinical units ofter refers to body surface area","mol","MOL","1",1,false],[false,"milliequivalent per minute","meq/min","MEQ/MIN","amount of substance",10036894500000000000,[0,-1,0,0,0,0,0],"meq/min","chemical",true,null,null,1,false,false,1,"meq per min; milliequivalents per minute","LOINC","SRat","Clinical","equivalence equals moles per valence","mol","MOL","1",1,false],[false,"milliequivalent per milliliter","meq/mL","MEQ/ML","amount of substance",6.0221367e+26,[-3,0,0,0,0,0,0],"meq/mL","chemical",true,null,null,1,false,false,1,"meq per mL; milliequivalents per milliliter; millilitre","LOINC","SCnc","Clinical","equivalence equals moles per valence","mol","MOL","1",1,false],[true,"milligram","mg","MG","mass",0.001,[0,0,1,0,0,0,0],"mg",null,false,"M",null,1,false,false,0,"milligrams","LOINC","Mass","Clinical","",null,null,null,null,false],[true,"milligram per 10 hour","mg/(10.h)","MG/HR","mass",2.7777777777777777e-8,[0,-1,1,0,0,0,0],"mg/h",null,false,"M",null,1,false,false,0,"mg/10hrs; mg/10 hrs; mg per 10 hrs; milligrams per 10 hours","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"milligram per 12 hour","mg/(12.h)","MG/HR","mass",2.3148148148148148e-8,[0,-1,1,0,0,0,0],"mg/h",null,false,"M",null,1,false,false,0,"mg/12hrs; mg/12 hrs; per 12 hrs; 12hrs; milligrams per 12 hours","LOINC","MRat","Clinical","units used for tests in urine",null,null,null,null,false],[true,"milligram per 2 hour","mg/(2.h)","MG/HR","mass",1.3888888888888888e-7,[0,-1,1,0,0,0,0],"mg/h",null,false,"M",null,1,false,false,0,"mg/2hrs; mg/2 hrs; mg per 2 hrs; 2hrs; milligrams per 2 hours","LOINC","MRat","Clinical","units used for tests in urine",null,null,null,null,false],[true,"milligram per 24 hour","mg/(24.h)","MG/HR","mass",1.1574074074074074e-8,[0,-1,1,0,0,0,0],"mg/h",null,false,"M",null,1,false,false,0,"mg/24hrs; mg/24 hrs; milligrams per 24 hours; mg/kg/dy; mg per kg per day; milligrams per kilograms per days","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"milligram per 6 hour","mg/(6.h)","MG/HR","mass",4.6296296296296295e-8,[0,-1,1,0,0,0,0],"mg/h",null,false,"M",null,1,false,false,0,"mg/6hrs; mg/6 hrs; mg per 6 hrs; 6hrs; milligrams per 6 hours","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"milligram per 72 hour","mg/(72.h)","MG/HR","mass",3.858024691358025e-9,[0,-1,1,0,0,0,0],"mg/h",null,false,"M",null,1,false,false,0,"mg/72hrs; mg/72 hrs; 72 hrs; 72hrs; milligrams per 72 hours","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"milligram per 8 hour","mg/(8.h)","MG/HR","mass",3.472222222222222e-8,[0,-1,1,0,0,0,0],"mg/h",null,false,"M",null,1,false,false,0,"mg/8hrs; mg/8 hrs; milligrams per 8 hours; shift","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"milligram per day","mg/d","MG/D","mass",1.1574074074074074e-8,[0,-1,1,0,0,0,0],"mg/d",null,false,"M",null,1,false,false,0,"mg/24hrs; mg/24 hrs; milligrams per 24 hours; mg/dy; mg per day; milligrams","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"milligram per deciliter","mg/dL","MG/DL","mass",10,[-3,0,1,0,0,0,0],"mg/dL",null,false,"M",null,1,false,false,0,"mg per dL; milligrams per deciliter; decilitre","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"milligram per gram","mg/g","MG/G","mass",0.001,[0,0,0,0,0,0,0],"mg/g",null,false,"M",null,1,false,false,0,"mg per gm; milligrams per gram","LOINC","MCnt; MRto","Clinical","",null,null,null,null,false],[true,"milligram per hour","mg/h","MG/HR","mass",2.7777777777777776e-7,[0,-1,1,0,0,0,0],"mg/h",null,false,"M",null,1,false,false,0,"mg/hr; mg per hr; milligrams","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"milligram per kilogram","mg/kg","MG/KG","mass",0.000001,[0,0,0,0,0,0,0],"mg/kg",null,false,"M",null,1,false,false,0,"mg per kg; milligrams per kilograms","LOINC","MCnt","Clinical","",null,null,null,null,false],[true,"milligram per kilogram per 8 hour","mg/kg/(8.h)","(MG/KG)/HR","mass",3.472222222222222e-11,[0,-1,0,0,0,0,0],"(mg/kg)/h",null,false,"M",null,1,false,false,0,"mg/(8.h.kg); mg/kg/8hrs; mg/kg/8 hrs; mg per kg per 8hrs; 8 hrs; milligrams per kilograms per 8 hours; shift","LOINC","RelMRat; MCntRat","Clinical","unit used to measure mass dose rate per patient body mass",null,null,null,null,false],[true,"milligram per kilogram per day","mg/kg/d","(MG/KG)/D","mass",1.1574074074074074e-11,[0,-1,0,0,0,0,0],"(mg/kg)/d",null,false,"M",null,1,false,false,0,"mg/(kg.d); mg/(kg.24.h)mg/kg/dy; mg per kg per day; milligrams per kilograms per days; mg/kg/(24.h); mg/kg/24hrs; 24 hrs; 24 hours","LOINC","RelMRat ","Clinical","unit used to measure mass dose rate per patient body mass",null,null,null,null,false],[true,"milligram per kilogram per hour","mg/kg/h","(MG/KG)/HR","mass",2.7777777777777777e-10,[0,-1,0,0,0,0,0],"(mg/kg)/h",null,false,"M",null,1,false,false,0,"mg/(kg.h); mg/kg/hr; mg per kg per hr; milligrams per kilograms per hour","LOINC","RelMRat; MCntRat","Clinical","unit used to measure mass dose rate per patient body mass",null,null,null,null,false],[true,"milligram per kilogram per minute","mg/kg/min","(MG/KG)/MIN","mass",1.6666666666666667e-8,[0,-1,0,0,0,0,0],"(mg/kg)/min",null,false,"M",null,1,false,false,0,"mg/(kg.min); mg per kg per min; milligrams per kilograms per minute","LOINC","RelMRat; MCntRat","Clinical","unit used to measure mass dose rate per patient body mass",null,null,null,null,false],[true,"milligram per liter","mg/L","MG/L","mass",1,[-3,0,1,0,0,0,0],"mg/L",null,false,"M",null,1,false,false,0,"mg per l; milligrams per liter; litre","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"milligram per square meter","mg/m2","MG/M2","mass",0.001,[-2,0,1,0,0,0,0],"mg/(m<sup>2</sup>)",null,false,"M",null,1,false,false,0,"mg/m^2; mg/sq. m; mg per m2; mg per m^2; mg per sq. milligrams; meter squared; metre","LOINC","ArMass","Clinical","",null,null,null,null,false],[true,"milligram per cubic meter","mg/m3","MG/M3","mass",0.001,[-3,0,1,0,0,0,0],"mg/(m<sup>3</sup>)",null,false,"M",null,1,false,false,0,"mg/m^3; mg/cu. m; mg per m3; milligrams per cubic meter; meter cubed; metre","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"milligram per milligram","mg/mg","MG/MG","mass",1,[0,0,0,0,0,0,0],"mg/mg",null,false,"M",null,1,false,false,0,"mg per mg; milligrams; milligram/milligram","LOINC","MRto","Clinical","",null,null,null,null,false],[true,"milligram per minute","mg/min","MG/MIN","mass",0.000016666666666666667,[0,-1,1,0,0,0,0],"mg/min",null,false,"M",null,1,false,false,0,"mg per min; milligrams per minutes; milligram/minute","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"milligram per milliliter","mg/mL","MG/ML","mass",1000.0000000000001,[-3,0,1,0,0,0,0],"mg/mL",null,false,"M",null,1,false,false,0,"mg per mL; milligrams per milliliters; millilitre","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"milligram per millimole","mg/mmol","MG/MMOL","mass",1.660540186674939e-24,[0,0,1,0,0,0,0],"mg/mmol",null,false,"M",null,1,false,false,-1,"mg per mmol; milligrams per millimole; ","LOINC","Ratio","Clinical","",null,null,null,null,false],[true,"milligram per week","mg/wk","MG/WK","mass",1.6534391534391535e-9,[0,-1,1,0,0,0,0],"mg/wk",null,false,"M",null,1,false,false,0,"mg/week; mg per wk; milligrams per weeks; milligram/week","LOINC","Mrat","Clinical","",null,null,null,null,false],[false,"milliliter","mL","ML","volume",0.000001,[3,0,0,0,0,0,0],"mL","iso1000",true,null,null,1,false,false,0,"milliliters; millilitres","LOINC","Vol","Clinical","","l",null,"1",1,false],[false,"milliliter per 10 hour","mL/(10.h)","ML/HR","volume",2.7777777777777777e-11,[3,-1,0,0,0,0,0],"mL/h","iso1000",true,null,null,1,false,false,0,"ml/10hrs; ml/10 hrs; mL per 10hrs; 10 hrs; milliliters per 10 hours; millilitres","LOINC","VRat","Clinical","","l",null,"1",1,false],[false,"milliliter per 12 hour","mL/(12.h)","ML/HR","volume",2.3148148148148147e-11,[3,-1,0,0,0,0,0],"mL/h","iso1000",true,null,null,1,false,false,0,"ml/12hrs; ml/12 hrs; mL per 12hrs; 12 hrs; milliliters per 12 hours; millilitres","LOINC","VRat","Clinical","","l",null,"1",1,false],[false,"milliliter per 2 hour","mL/(2.h)","ML/HR","volume",1.3888888888888888e-10,[3,-1,0,0,0,0,0],"mL/h","iso1000",true,null,null,1,false,false,0,"ml/2hrs; ml/2 hrs; mL per 2hrs; 2 hrs; milliliters per 2 hours; millilitres ","LOINC","VRat","Clinical","","l",null,"1",1,false],[false,"milliliter per 24 hour","mL/(24.h)","ML/HR","volume",1.1574074074074074e-11,[3,-1,0,0,0,0,0],"mL/h","iso1000",true,null,null,1,false,false,0,"ml/24hrs; ml/24 hrs; mL per 24hrs; 24 hrs; milliliters per 24 hours; millilitres; ml/dy; /day; ml per dy; days; fluid outputs; fluid inputs; flow rate","LOINC","VRat","Clinical","","l",null,"1",1,false],[false,"milliliter per 4 hour","mL/(4.h)","ML/HR","volume",6.944444444444444e-11,[3,-1,0,0,0,0,0],"mL/h","iso1000",true,null,null,1,false,false,0,"ml/4hrs; ml/4 hrs; mL per 4hrs; 4 hrs; milliliters per 4 hours; millilitres","LOINC","VRat","Clinical","","l",null,"1",1,false],[false,"milliliter per 5 hour","mL/(5.h)","ML/HR","volume",5.5555555555555553e-11,[3,-1,0,0,0,0,0],"mL/h","iso1000",true,null,null,1,false,false,0,"ml/5hrs; ml/5 hrs; mL per 5hrs; 5 hrs; milliliters per 5 hours; millilitres","LOINC","VRat","Clinical","","l",null,"1",1,false],[false,"milliliter per 6 hour","mL/(6.h)","ML/HR","volume",4.6296296296296294e-11,[3,-1,0,0,0,0,0],"mL/h","iso1000",true,null,null,1,false,false,0,"ml/6hrs; ml/6 hrs; mL per 6hrs; 6 hrs; milliliters per 6 hours; millilitres","LOINC","VRat","Clinical","","l",null,"1",1,false],[false,"milliliter per 72 hour","mL/(72.h)","ML/HR","volume",3.8580246913580245e-12,[3,-1,0,0,0,0,0],"mL/h","iso1000",true,null,null,1,false,false,0,"ml/72hrs; ml/72 hrs; mL per 72hrs; 72 hrs; milliliters per 72 hours; millilitres","LOINC","VRat","Clinical","","l",null,"1",1,false],[false,"milliliter per 8 hour","mL/(8.h)","ML/HR","volume",3.472222222222222e-11,[3,-1,0,0,0,0,0],"mL/h","iso1000",true,null,null,1,false,false,0,"ml/8hrs; ml/8 hrs; mL per 8hrs; 8 hrs; milliliters per 8 hours; millilitres; shift","LOINC","VRat","Clinical","","l",null,"1",1,false],[false,"milliliter per 8 hour per kilogram","mL/(8.h)/kg","(ML/HR)/KG","volume",3.472222222222222e-14,[3,-1,-1,0,0,0,0],"(mL/h)/kg","iso1000",true,null,null,1,false,false,0,"mL/kg/(8.h); ml/8h/kg; ml/8 h/kg; ml/8hr/kg; ml/8 hr/kgr; mL per 8h per kg; 8 h; 8hr; 8 hr; milliliters per 8 hours per kilogram; millilitres; shift","LOINC","VRatCnt","Clinical","unit used to measure renal excretion volume rate per body mass","l",null,"1",1,false],[false,"milliliter per square inch (international)","mL/[sin_i]","ML/[SIN_I]","volume",0.0015500031000061998,[1,0,0,0,0,0,0],"mL","iso1000",true,null,null,1,false,false,0,"mL/sin; mL/in2; mL/in^2; mL per sin; in2; in^2; sq. in; milliliters per square inch; inch squared","LOINC","ArVol","Clinical","","l",null,"1",1,false],[false,"milliliter per centimeter of water","mL/cm[H2O]","ML/CM[H2O]","volume",1.0197162129779282e-11,[4,2,-1,0,0,0,0],"mL/(cm HO<sub><r>2</r></sub>)","iso1000",true,null,null,1,false,false,0,"milliliters per centimeter of water; millilitre per centimetre of water; millilitres per centimetre of water; mL/cmH2O; mL/cm H2O; mL per cmH2O; mL per cm H2O","LOINC","Compli","Clinical","unit used to measure dynamic lung compliance","l",null,"1",1,false],[false,"milliliter per day","mL/d","ML/D","volume",1.1574074074074074e-11,[3,-1,0,0,0,0,0],"mL/d","iso1000",true,null,null,1,false,false,0,"ml/day; ml per day; milliliters per day; 24 hours; 24hrs; millilitre;","LOINC","VRat","Clinical","usually used to measure fluid output or input; flow rate","l",null,"1",1,false],[false,"milliliter per deciliter","mL/dL","ML/DL","volume",0.009999999999999998,[0,0,0,0,0,0,0],"mL/dL","iso1000",true,null,null,1,false,false,0,"mL per dL; millilitres; decilitre; milliliters","LOINC","VFr; VFrDiff","Clinical","","l",null,"1",1,false],[false,"milliliter per hour","mL/h","ML/HR","volume",2.7777777777777777e-10,[3,-1,0,0,0,0,0],"mL/h","iso1000",true,null,null,1,false,false,0,"mL/hr; mL per hr; milliliters per hour; millilitres; fluid intake; fluid output","LOINC","VRat","Clinical","","l",null,"1",1,false],[false,"milliliter per kilogram","mL/kg","ML/KG","volume",9.999999999999999e-10,[3,0,-1,0,0,0,0],"mL/kg","iso1000",true,null,null,1,false,false,0,"mL per kg; milliliters per kilogram; millilitres","LOINC","VCnt","Clinical","","l",null,"1",1,false],[false,"milliliter per kilogram per 8 hour","mL/kg/(8.h)","(ML/KG)/HR","volume",3.472222222222222e-14,[3,-1,-1,0,0,0,0],"(mL/kg)/h","iso1000",true,null,null,1,false,false,0,"mL/(8.h.kg); mL/kg/8hrs; mL/kg/8 hrs; mL per kg per 8hrs; 8 hrs; milliliters per kilograms per 8 hours; millilitres; shift","LOINC","VCntRat; RelEngRat","Clinical","unit used to measure renal excretion volume rate per body mass","l",null,"1",1,false],[false,"milliliter per kilogram per day","mL/kg/d","(ML/KG)/D","volume",1.1574074074074072e-14,[3,-1,-1,0,0,0,0],"(mL/kg)/d","iso1000",true,null,null,1,false,false,0,"mL/(kg.d); mL/kg/dy; mL per kg per day; milliliters per kilograms per day; mg/kg/24hrs; 24 hrs; per 24 hours millilitres","LOINC","VCntRat; RelEngRat","Clinical","unit used to measure renal excretion volume rate per body mass","l",null,"1",1,false],[false,"milliliter per kilogram per hour","mL/kg/h","(ML/KG)/HR","volume",2.7777777777777774e-13,[3,-1,-1,0,0,0,0],"(mL/kg)/h","iso1000",true,null,null,1,false,false,0,"mL/(kg.h); mL/kg/hr; mL per kg per hr; milliliters per kilograms per hour; millilitres","LOINC","VCntRat; RelEngRat","Clinical","unit used to measure renal excretion volume rate per body mass","l",null,"1",1,false],[false,"milliliter per kilogram per minute","mL/kg/min","(ML/KG)/MIN","volume",1.6666666666666664e-11,[3,-1,-1,0,0,0,0],"(mL/kg)/min","iso1000",true,null,null,1,false,false,0,"mL/(kg.min); mL/kg/dy; mL per kg per day; milliliters per kilograms per day; millilitres","LOINC","RelEngRat","Clinical","used for tests that measure activity metabolic rate compared to standard resting metabolic rate ","l",null,"1",1,false],[false,"milliliter per square meter","mL/m2","ML/M2","volume",0.000001,[1,0,0,0,0,0,0],"mL/(m<sup>2</sup>)","iso1000",true,null,null,1,false,false,0,"mL/m^2; mL/sq. meter; mL per m2; m^2; sq. meter; milliliters per square meter; millilitres; meter squared","LOINC","ArVol","Clinical","used for tests that relate to heart work - e.g. ventricular stroke volume; atrial volume per body surface area","l",null,"1",1,false],[false,"milliliter per millibar","mL/mbar","ML/MBAR","volume",1e-11,[4,2,-1,0,0,0,0],"mL/mbar","iso1000",true,null,null,1,false,false,0,"mL per mbar; milliliters per millibar; millilitres","LOINC","","Clinical","unit used to measure dynamic lung compliance","l",null,"1",1,false],[false,"milliliter per minute","mL/min","ML/MIN","volume",1.6666666666666667e-8,[3,-1,0,0,0,0,0],"mL/min","iso1000",true,null,null,1,false,false,0,"mL per min; milliliters; millilitres","LOINC","VRat","Clinical","","l",null,"1",1,false],[false,"milliliter per minute per square meter","mL/min/m2","(ML/MIN)/M2","volume",1.6666666666666667e-8,[1,-1,0,0,0,0,0],"(mL/min)/(m<sup>2</sup>)","iso1000",true,null,null,1,false,false,0,"ml/min/m^2; ml/min/sq. meter; mL per min per m2; m^2; sq. meter; milliliters per minutes per square meter; millilitres; metre; meter squared","LOINC","ArVRat","Clinical","unit used to measure volume per body surface area; oxygen consumption index","l",null,"1",1,false],[false,"milliliter per millimeter","mL/mm","ML/MM","volume",0.001,[2,0,0,0,0,0,0],"mL/mm","iso1000",true,null,null,1,false,false,0,"mL per mm; milliliters per millimeter; millilitres; millimetre","LOINC","Lineic Volume","Clinical","","l",null,"1",1,false],[false,"milliliter per second","mL/s","ML/S","volume",0.000001,[3,-1,0,0,0,0,0],"mL/s","iso1000",true,null,null,1,false,false,0,"ml/sec; mL per sec; milliliters per second; millilitres","LOINC","Vel; VelRat; VRat","Clinical","","l",null,"1",1,false],[true,"millimeter","mm","MM","length",0.001,[1,0,0,0,0,0,0],"mm",null,false,"L",null,1,false,false,0,"millimeters; millimetres; height; length; diameter; thickness; axis; curvature; size","LOINC","Len","Clinical","",null,null,null,null,false],[true,"millimeter per hour","mm/h","MM/HR","length",2.7777777777777776e-7,[1,-1,0,0,0,0,0],"mm/h",null,false,"L",null,1,false,false,0,"mm/hr; mm per hr; millimeters per hour; millimetres","LOINC","Vel","Clinical","unit to measure sedimentation rate",null,null,null,null,false],[true,"millimeter per minute","mm/min","MM/MIN","length",0.000016666666666666667,[1,-1,0,0,0,0,0],"mm/min",null,false,"L",null,1,false,false,0,"mm per min; millimeters per minute; millimetres","LOINC","Vel","Clinical","",null,null,null,null,false],[false,"millimeter of water","mm[H2O]","MM[H2O]","pressure",9806.65,[-1,-2,1,0,0,0,0],"mm HO<sub><r>2</r></sub>","clinical",true,null,null,1,false,false,0,"mmH2O; mm H2O; millimeters of water; millimetres","LOINC","Pres","Clinical","","kPa","KPAL","980665e-5",9.80665,false],[false,"millimeter of mercury","mm[Hg]","MM[HG]","pressure",133322,[-1,-2,1,0,0,0,0],"mm Hg","clinical",true,null,null,1,false,false,0,"mmHg; mm Hg; millimeters of mercury; millimetres","LOINC","Pres; PPres; Ratio","Clinical","1 mm[Hg] = 1 torr; unit to measure blood pressure","kPa","KPAL","133.3220",133.322,false],[true,"square millimeter","mm2","MM2","length",0.000001,[2,0,0,0,0,0,0],"mm<sup>2</sup>",null,false,"L",null,1,false,false,0,"mm^2; sq. mm.; sq. millimeters; millimeters squared; millimetres","LOINC","Area","Clinical","",null,null,null,null,false],[false,"millimole","mmol","MMOL","amount of substance",602213670000000000000,[0,0,0,0,0,0,0],"mmol","si",true,null,null,1,false,false,1,"millimoles","LOINC","Sub","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per 12 hour","mmol/(12.h)","MMOL/HR","amount of substance",13940131250000000,[0,-1,0,0,0,0,0],"mmol/h","si",true,null,null,1,false,false,1,"mmol/12hrs; mmol/12 hrs; mmol per 12 hrs; 12hrs; millimoles per 12 hours","LOINC","SRat","Clinical","unit for tests related to urine","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per 2 hour","mmol/(2.h)","MMOL/HR","amount of substance",83640787500000000,[0,-1,0,0,0,0,0],"mmol/h","si",true,null,null,1,false,false,1,"mmol/2hrs; mmol/2 hrs; mmol per 2 hrs; 2hrs; millimoles per 2 hours","LOINC","SRat","Clinical","unit for tests related to urine","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per 24 hour","mmol/(24.h)","MMOL/HR","amount of substance",6970065625000000,[0,-1,0,0,0,0,0],"mmol/h","si",true,null,null,1,false,false,1,"mmol/24hrs; mmol/24 hrs; mmol per 24 hrs; 24hrs; millimoles per 24 hours","LOINC","SRat","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per 5 hour","mmol/(5.h)","MMOL/HR","amount of substance",33456315000000000,[0,-1,0,0,0,0,0],"mmol/h","si",true,null,null,1,false,false,1,"mmol/5hrs; mmol/5 hrs; mmol per 5 hrs; 5hrs; millimoles per 5 hours","LOINC","SRat","Clinical","unit for tests related to doses","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per 6 hour","mmol/(6.h)","MMOL/HR","amount of substance",27880262500000000,[0,-1,0,0,0,0,0],"mmol/h","si",true,null,null,1,false,false,1,"mmol/6hrs; mmol/6 hrs; mmol per 6 hrs; 6hrs; millimoles per 6 hours","LOINC","SRat","Clinical","unit for tests related to urine","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per 8 hour","mmol/(8.h)","MMOL/HR","amount of substance",20910196875000000,[0,-1,0,0,0,0,0],"mmol/h","si",true,null,null,1,false,false,1,"mmol/8hrs; mmol/8 hrs; mmol per 8 hrs; 8hrs; millimoles per 8 hours; shift","LOINC","SRat","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per day","mmol/d","MMOL/D","amount of substance",6970065625000000,[0,-1,0,0,0,0,0],"mmol/d","si",true,null,null,1,false,false,1,"mmol/24hrs; mmol/24 hrs; mmol per 24 hrs; 24hrs; millimoles per 24 hours","LOINC","SRat","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per deciliter","mmol/dL","MMOL/DL","amount of substance",6.022136699999999e+24,[-3,0,0,0,0,0,0],"mmol/dL","si",true,null,null,1,false,false,1,"mmol per dL; millimoles; decilitre","LOINC","SCnc","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per gram","mmol/g","MMOL/G","amount of substance",602213670000000000000,[0,0,-1,0,0,0,0],"mmol/g","si",true,null,null,1,false,false,1,"mmol per gram; millimoles","LOINC","SCnt","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per hour","mmol/h","MMOL/HR","amount of substance",167281575000000000,[0,-1,0,0,0,0,0],"mmol/h","si",true,null,null,1,false,false,1,"mmol/hr; mmol per hr; millimoles per hour","LOINC","SRat","Clinical","unit for tests related to urine","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per kilogram","mmol/kg","MMOL/KG","amount of substance",602213670000000000,[0,0,-1,0,0,0,0],"mmol/kg","si",true,null,null,1,false,false,1,"mmol per kg; millimoles per kilogram","LOINC","SCnt","Clinical","unit for tests related to stool","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per kilogram per 8 hour","mmol/kg/(8.h)","(MMOL/KG)/HR","amount of substance",20910196875000,[0,-1,-1,0,0,0,0],"(mmol/kg)/h","si",true,null,null,1,false,false,1,"mmol/(8.h.kg); mmol/kg/8hrs; mmol/kg/8 hrs; mmol per kg per 8hrs; 8 hrs; millimoles per kilograms per 8 hours; shift","LOINC","CCnt","Clinical","unit used to measure molar dose rate per patient body mass","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per kilogram per day","mmol/kg/d","(MMOL/KG)/D","amount of substance",6970065625000,[0,-1,-1,0,0,0,0],"(mmol/kg)/d","si",true,null,null,1,false,false,1,"mmol/kg/dy; mmol/kg/day; mmol per kg per dy; millimoles per kilograms per day","LOINC","RelSRat","Clinical","unit used to measure molar dose rate per patient body mass","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per kilogram per hour","mmol/kg/h","(MMOL/KG)/HR","amount of substance",167281575000000,[0,-1,-1,0,0,0,0],"(mmol/kg)/h","si",true,null,null,1,false,false,1,"mmol/kg/hr; mmol per kg per hr; millimoles per kilograms per hour","LOINC","CCnt","Clinical","unit used to measure molar dose rate per patient body mass","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per kilogram per minute","mmol/kg/min","(MMOL/KG)/MIN","amount of substance",10036894500000000,[0,-1,-1,0,0,0,0],"(mmol/kg)/min","si",true,null,null,1,false,false,1,"mmol/(kg.min); mmol/kg/min; mmol per kg per min; millimoles per kilograms per minute","LOINC","CCnt","Clinical","unit used to measure molar dose rate per patient body mass; note that the unit for the enzyme unit U = umol/min. mmol/kg/min = kU/kg; ","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per liter","mmol/L","MMOL/L","amount of substance",6.0221367e+23,[-3,0,0,0,0,0,0],"mmol/L","si",true,null,null,1,false,false,1,"mmol per L; millimoles per liter; litre","LOINC","SCnc","Clinical","unit for tests related to doses","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per square meter","mmol/m2","MMOL/M2","amount of substance",602213670000000000000,[-2,0,0,0,0,0,0],"mmol/(m<sup>2</sup>)","si",true,null,null,1,false,false,1,"mmol/m^2; mmol/sq. meter; mmol per m2; m^2; sq. meter; millimoles; meter squared; metre","LOINC","ArSub","Clinical","unit used to measure molar dose per patient body surface area","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per minute","mmol/min","MMOL/MIN","amount of substance",10036894500000000000,[0,-1,0,0,0,0,0],"mmol/min","si",true,null,null,1,false,false,1,"mmol per min; millimoles per minute","LOINC","Srat; CAct","Clinical","unit for the enzyme unit U = umol/min. mmol/min = kU","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per millimole","mmol/mmol","MMOL/MMOL","amount of substance",1,[0,0,0,0,0,0,0],"mmol/mmol","si",true,null,null,1,false,false,0,"mmol per mmol; millimoles per millimole","LOINC","SRto","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per mole","mmol/mol","MMOL/MOL","amount of substance",0.001,[0,0,0,0,0,0,0],"mmol/mol","si",true,null,null,1,false,false,0,"mmol per mol; millimoles per mole","LOINC","SRto","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"millimole per second per liter","mmol/s/L","(MMOL/S)/L","amount of substance",6.0221367e+23,[-3,-1,0,0,0,0,0],"(mmol/s)/L","si",true,null,null,1,false,false,1,"mmol/sec/L; mmol per s per L; per sec; millimoles per seconds per liter; litre","LOINC","CCnc ","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"mole per kilogram","mol/kg","MOL/KG","amount of substance",602213670000000000000,[0,0,-1,0,0,0,0],"mol/kg","si",true,null,null,1,false,false,1,"mol per kg; moles; mols","LOINC","SCnt","Clinical","unit for tests related to stool","10*23","10*23","6.0221367",6.0221367,false],[false,"mole per kilogram per second","mol/kg/s","(MOL/KG)/S","amount of substance",602213670000000000000,[0,-1,-1,0,0,0,0],"(mol/kg)/s","si",true,null,null,1,false,false,1,"mol/kg/sec; mol per kg per sec; moles per kilograms per second; mols","LOINC","CCnt","Clinical","unit of catalytic activity (mol/s) per mass (kg)","10*23","10*23","6.0221367",6.0221367,false],[false,"mole per liter","mol/L","MOL/L","amount of substance",6.0221366999999994e+26,[-3,0,0,0,0,0,0],"mol/L","si",true,null,null,1,false,false,1,"mol per L; moles per liter; litre; moles; mols","LOINC","SCnc","Clinical","unit often used in tests measuring oxygen content","10*23","10*23","6.0221367",6.0221367,false],[false,"mole per cubic meter","mol/m3","MOL/M3","amount of substance",6.0221367e+23,[-3,0,0,0,0,0,0],"mol/(m<sup>3</sup>)","si",true,null,null,1,false,false,1,"mol/m^3; mol/cu. m; mol per m3; m^3; cu. meter; mols; moles; meters cubed; metre; mole per kiloliter; kilolitre; mol/kL","LOINC","SCnc","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"mole per milliliter","mol/mL","MOL/ML","amount of substance",6.0221367e+29,[-3,0,0,0,0,0,0],"mol/mL","si",true,null,null,1,false,false,1,"mol per mL; moles; millilitre; mols","LOINC","SCnc","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"mole per mole","mol/mol","MOL/MOL","amount of substance",1,[0,0,0,0,0,0,0],"mol/mol","si",true,null,null,1,false,false,0,"mol per mol; moles per mol; mols","LOINC","SRto","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"mole per second","mol/s","MOL/S","amount of substance",6.0221367e+23,[0,-1,0,0,0,0,0],"mol/s","si",true,null,null,1,false,false,1,"mol per sec; moles per second; mols","LOINC","SRat","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"milliosmole","mosm","MOSM","amount of substance (dissolved particles)",602213670000000000000,[0,0,0,0,0,0,0],"mosm","chemical",true,null,null,1,false,false,1,"milliosmoles","LOINC","Osmol","Clinical","equal to 1/1000 of an osmole","mol","MOL","1",1,false],[false,"milliosmole per kilogram","mosm/kg","MOSM/KG","amount of substance (dissolved particles)",602213670000000000,[0,0,-1,0,0,0,0],"mosm/kg","chemical",true,null,null,1,false,false,1,"mosm per kg; milliosmoles per kilogram","LOINC","Osmol","Clinical","","mol","MOL","1",1,false],[false,"milliosmole per liter","mosm/L","MOSM/L","amount of substance (dissolved particles)",6.0221367e+23,[-3,0,0,0,0,0,0],"mosm/L","chemical",true,null,null,1,false,false,1,"mosm per liter; litre; milliosmoles","LOINC","Osmol","Clinical","","mol","MOL","1",1,false],[false,"millipascal","mPa","MPAL","pressure",1,[-1,-2,1,0,0,0,0],"mPa","si",true,null,null,1,false,false,0,"millipascals","LOINC","Pres","Clinical","unit of pressure","N/m2","N/M2","1",1,false],[false,"millipascal second","mPa.s","MPAL.S","pressure",1,[-1,-1,1,0,0,0,0],"mPa.s","si",true,null,null,1,false,false,0,"mPa*s; millipoise; mP; dynamic viscosity","LOINC","Visc","Clinical","base units for millipoise, a measurement of dynamic viscosity","N/m2","N/M2","1",1,false],[true,"megasecond","Ms","MAS","time",1000000,[0,1,0,0,0,0,0],"Ms",null,false,"T",null,1,false,false,0,"megaseconds","LOINC","Time","Clinical","",null,null,null,null,false],[true,"millisecond","ms","MS","time",0.001,[0,1,0,0,0,0,0],"ms",null,false,"T",null,1,false,false,0,"milliseconds; duration","LOINC","Time","Clinical","",null,null,null,null,false],[false,"milli enzyme unit per gram","mU/g","MU/G","catalytic activity",10036894500000,[0,-1,-1,0,0,0,0],"mU/g","chemical",true,null,null,1,false,false,1,"mU per gm; milli enzyme units per gram; enzyme activity; enzymatic activity per mass","LOINC","CCnt","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min); 1 mU = 1 nmol/min","umol/min","UMOL/MIN","1",1,false],[false,"milli enzyme unit per liter","mU/L","MU/L","catalytic activity",10036894500000000,[-3,-1,0,0,0,0,0],"mU/L","chemical",true,null,null,1,false,false,1,"mU per liter; litre; milli enzyme units enzymatic activity per volume; enzyme activity","LOINC","CCnc","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min); 1 mU = 1 nmol/min","umol/min","UMOL/MIN","1",1,false],[false,"milli enzyme unit per milligram","mU/mg","MU/MG","catalytic activity",10036894500000000,[0,-1,-1,0,0,0,0],"mU/mg","chemical",true,null,null,1,false,false,1,"mU per mg; milli enzyme units per milligram","LOINC","CCnt","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min); 1 mU = 1 nmol/min","umol/min","UMOL/MIN","1",1,false],[false,"milli enzyme unit per milliliter","mU/mL","MU/ML","catalytic activity",10036894500000000000,[-3,-1,0,0,0,0,0],"mU/mL","chemical",true,null,null,1,false,false,1,"mU per mL; milli enzyme units per milliliter; millilitre; enzymatic activity per volume; enzyme activity","LOINC","CCnc","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min); 1 mU = 1 nmol/min","umol/min","UMOL/MIN","1",1,false],[false,"milli enzyme unit per milliliter per minute","mU/mL/min","(MU/ML)/MIN","catalytic activity",167281575000000000,[-3,-2,0,0,0,0,0],"(mU/mL)/min","chemical",true,null,null,1,false,false,1,"mU per mL per min; mU per milliliters per minute; millilitres; milli enzyme units; enzymatic activity; enzyme activity","LOINC","CCncRat","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min); 1 mU = 1 nmol/min","umol/min","UMOL/MIN","1",1,false],[false,"millivolt","mV","MV","electric potential",1,[2,-2,1,0,0,-1,0],"mV","si",true,null,null,1,false,false,0,"millivolts","LOINC","Elpot","Clinical","unit of electric potential (voltage)","J/C","J/C","1",1,false],[false,"Newton centimeter","N.cm","N.CM","force",10,[2,-2,1,0,0,0,0],"N.cm","si",true,null,null,1,false,false,0,"N*cm; Ncm; N cm; Newton*centimeters; Newton* centimetres; torque; work","LOINC","","Clinical","as a measurement of work, N.cm = 1/100 Joules;\nnote that N.m is the standard unit of measurement for torque (although dimensionally equivalent to Joule), and N.cm can also be thought of as a torqe unit","kg.m/s2","KG.M/S2","1",1,false],[false,"Newton second","N.s","N.S","force",1000,[1,-1,1,0,0,0,0],"N.s","si",true,null,null,1,false,false,0,"Newton*seconds; N*s; N s; Ns; impulse; imp","LOINC","","Clinical","standard unit of impulse","kg.m/s2","KG.M/S2","1",1,false],[true,"nanogram","ng","NG","mass",1e-9,[0,0,1,0,0,0,0],"ng",null,false,"M",null,1,false,false,0,"nanograms","LOINC","Mass","Clinical","",null,null,null,null,false],[true,"nanogram per 24 hour","ng/(24.h)","NG/HR","mass",1.1574074074074075e-14,[0,-1,1,0,0,0,0],"ng/h",null,false,"M",null,1,false,false,0,"ng/24hrs; ng/24 hrs; nanograms per 24 hours","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"nanogram per 8 hour","ng/(8.h)","NG/HR","mass",3.4722222222222224e-14,[0,-1,1,0,0,0,0],"ng/h",null,false,"M",null,1,false,false,0,"ng/8hrs; ng/8 hrs; nanograms per 8 hours","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"nanogram per million","ng/10*6","NG/(10*6)","mass",1e-15,[0,0,1,0,0,0,0],"ng/(10<sup>6</sup>)",null,false,"M",null,1,false,false,0,"ng/10^6; ng per 10*6; 10^6; nanograms","LOINC","MNum","Clinical","",null,null,null,null,false],[true,"nanogram per day","ng/d","NG/D","mass",1.1574074074074075e-14,[0,-1,1,0,0,0,0],"ng/d",null,false,"M",null,1,false,false,0,"ng/dy; ng per day; nanograms ","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"nanogram per deciliter","ng/dL","NG/DL","mass",0.00001,[-3,0,1,0,0,0,0],"ng/dL",null,false,"M",null,1,false,false,0,"ng per dL; nanograms per deciliter; decilitre","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"nanogram per gram","ng/g","NG/G","mass",1e-9,[0,0,0,0,0,0,0],"ng/g",null,false,"M",null,1,false,false,0,"ng/gm; ng per gm; nanograms per gram","LOINC","MCnt","Clinical","",null,null,null,null,false],[true,"nanogram per hour","ng/h","NG/HR","mass",2.777777777777778e-13,[0,-1,1,0,0,0,0],"ng/h",null,false,"M",null,1,false,false,0,"ng/hr; ng per hr; nanograms per hour","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"nanogram per kilogram","ng/kg","NG/KG","mass",1e-12,[0,0,0,0,0,0,0],"ng/kg",null,false,"M",null,1,false,false,0,"ng per kg; nanograms per kilogram","LOINC","MCnt","Clinical","",null,null,null,null,false],[true,"nanogram per kilogram per 8 hour","ng/kg/(8.h)","(NG/KG)/HR","mass",3.472222222222222e-17,[0,-1,0,0,0,0,0],"(ng/kg)/h",null,false,"M",null,1,false,false,0,"ng/(8.h.kg); ng/kg/8hrs; ng/kg/8 hrs; ng per kg per 8hrs; 8 hrs; nanograms per kilograms per 8 hours; shift","LOINC","MRtoRat ","Clinical","unit used to measure mass dose rate per patient body mass",null,null,null,null,false],[true,"nanogram per kilogram per hour","ng/kg/h","(NG/KG)/HR","mass",2.7777777777777775e-16,[0,-1,0,0,0,0,0],"(ng/kg)/h",null,false,"M",null,1,false,false,0,"ng/(kg.h); ng/kg/hr; ng per kg per hr; nanograms per kilograms per hour","LOINC","MRtoRat ","Clinical","unit used to measure mass dose rate per patient body mass",null,null,null,null,false],[true,"nanogram per kilogram per minute","ng/kg/min","(NG/KG)/MIN","mass",1.6666666666666667e-14,[0,-1,0,0,0,0,0],"(ng/kg)/min",null,false,"M",null,1,false,false,0,"ng/(kg.min); ng per kg per min; nanograms per kilograms per minute","LOINC","MRtoRat ","Clinical","unit used to measure mass dose rate per patient body mass",null,null,null,null,false],[true,"nanogram per liter","ng/L","NG/L","mass",0.000001,[-3,0,1,0,0,0,0],"ng/L",null,false,"M",null,1,false,false,0,"ng per L; nanograms per liter; litre","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"nanogram per square meter","ng/m2","NG/M2","mass",1e-9,[-2,0,1,0,0,0,0],"ng/(m<sup>2</sup>)",null,false,"M",null,1,false,false,0,"ng/m^2; ng/sq. m; ng per m2; m^2; sq. meter; nanograms; meter squared; metre","LOINC","ArMass","Clinical","unit used to measure mass dose per patient body surface area",null,null,null,null,false],[true,"nanogram per milligram","ng/mg","NG/MG","mass",0.000001,[0,0,0,0,0,0,0],"ng/mg",null,false,"M",null,1,false,false,0,"ng per mg; nanograms","LOINC","MCnt","Clinical","",null,null,null,null,false],[true,"nanogram per milligram per hour","ng/mg/h","(NG/MG)/HR","mass",2.7777777777777777e-10,[0,-1,0,0,0,0,0],"(ng/mg)/h",null,false,"M",null,1,false,false,0,"ng/mg/hr; ng per mg per hr; nanograms per milligrams per hour","LOINC","MRtoRat ","Clinical","",null,null,null,null,false],[true,"nanogram per minute","ng/min","NG/MIN","mass",1.6666666666666667e-11,[0,-1,1,0,0,0,0],"ng/min",null,false,"M",null,1,false,false,0,"ng per min; nanograms","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"nanogram per millliiter","ng/mL","NG/ML","mass",0.001,[-3,0,1,0,0,0,0],"ng/mL",null,false,"M",null,1,false,false,0,"ng per mL; nanograms; millilitre","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"nanogram per milliliter per hour","ng/mL/h","(NG/ML)/HR","mass",2.7777777777777776e-7,[-3,-1,1,0,0,0,0],"(ng/mL)/h",null,false,"M",null,1,false,false,0,"ng/mL/hr; ng per mL per mL; nanograms per milliliter per hour; nanogram per millilitre per hour; nanograms per millilitre per hour; enzymatic activity per volume; enzyme activity per milliliters","LOINC","CCnc","Clinical","tests that measure enzymatic activity",null,null,null,null,false],[true,"nanogram per second","ng/s","NG/S","mass",1e-9,[0,-1,1,0,0,0,0],"ng/s",null,false,"M",null,1,false,false,0,"ng/sec; ng per sec; nanograms per second","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"nanogram per enzyme unit","ng/U","NG/U","mass",9.963241120049634e-26,[0,1,1,0,0,0,0],"ng/U",null,false,"M",null,1,false,false,-1,"ng per U; nanograms per enzyme unit","LOINC","CMass","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)",null,null,null,null,false],[false,"nanokatal","nkat","NKAT","catalytic activity",602213670000000,[0,-1,0,0,0,0,0],"nkat","chemical",true,null,null,1,false,false,1,"nanokatals","LOINC","CAct","Clinical","kat is a unit of catalytic activity with base units = mol/s. Rarely used because its units are too large to practically express catalytic activity. See enzyme unit [U] which is the standard unit for catalytic activity.","mol/s","MOL/S","1",1,false],[false,"nanoliter","nL","NL","volume",1.0000000000000002e-12,[3,0,0,0,0,0,0],"nL","iso1000",true,null,null,1,false,false,0,"nanoliters; nanolitres","LOINC","Vol","Clinical","","l",null,"1",1,false],[true,"nanometer","nm","NM","length",1e-9,[1,0,0,0,0,0,0],"nm",null,false,"L",null,1,false,false,0,"nanometers; nanometres","LOINC","Len","Clinical","",null,null,null,null,false],[true,"nanometer per second per liter","nm/s/L","(NM/S)/L","length",0.000001,[-2,-1,0,0,0,0,0],"(nm/s)/L",null,false,"L",null,1,false,false,0,"nm/sec/liter; nm/sec/litre; nm per s per l; nm per sec per l; nanometers per second per liter; nanometre per second per litre; nanometres per second per litre","LOINC","VelCnc","Clinical","",null,null,null,null,false],[false,"nanomole","nmol","NMOL","amount of substance",602213670000000,[0,0,0,0,0,0,0],"nmol","si",true,null,null,1,false,false,1,"nanomoles","LOINC","Sub","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per 24 hour","nmol/(24.h)","NMOL/HR","amount of substance",6970065625,[0,-1,0,0,0,0,0],"nmol/h","si",true,null,null,1,false,false,1,"nmol/24hr; nmol/24 hr; nanomoles per 24 hours; nmol/day; nanomoles per day; nmol per day; nanomole/day; nanomol/day","LOINC","SRat","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per day","nmol/d","NMOL/D","amount of substance",6970065625,[0,-1,0,0,0,0,0],"nmol/d","si",true,null,null,1,false,false,1,"nmol/day; nanomoles per day; nmol per day; nanomole/day; nanomol/day; nmol/24hr; nmol/24 hr; nanomoles per 24 hours; ","LOINC","SRat","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per deciliter","nmol/dL","NMOL/DL","amount of substance",6022136700000000000,[-3,0,0,0,0,0,0],"nmol/dL","si",true,null,null,1,false,false,1,"nmol per dL; nanomoles per deciliter; nanomole per decilitre; nanomoles per decilitre; nanomole/deciliter; nanomole/decilitre; nanomol/deciliter; nanomol/decilitre","LOINC","SCnc","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per gram","nmol/g","NMOL/G","amount of substance",602213670000000,[0,0,-1,0,0,0,0],"nmol/g","si",true,null,null,1,false,false,1,"nmol per gram; nanomoles per gram; nanomole/gram","LOINC","SCnt","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per hour per liter","nmol/h/L","(NMOL/HR)/L","amount of substance",167281575000000,[-3,-1,0,0,0,0,0],"(nmol/h)/L","si",true,null,null,1,false,false,1,"nmol/hrs/L; nmol per hrs per L; nanomoles per hours per liter; litre; enzymatic activity per volume; enzyme activities","LOINC","CCnc","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per liter","nmol/L","NMOL/L","amount of substance",602213670000000000,[-3,0,0,0,0,0,0],"nmol/L","si",true,null,null,1,false,false,1,"nmol per L; nanomoles per liter; litre","LOINC","SCnc","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per milligram","nmol/mg","NMOL/MG","amount of substance",602213670000000000,[0,0,-1,0,0,0,0],"nmol/mg","si",true,null,null,1,false,false,1,"nmol per mg; nanomoles per milligram","LOINC","SCnt","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per milligram per hour","nmol/mg/h","(NMOL/MG)/HR","amount of substance",167281575000000,[0,-1,-1,0,0,0,0],"(nmol/mg)/h","si",true,null,null,1,false,false,1,"nmol/mg/hr; nmol per mg per hr; nanomoles per milligrams per hour","LOINC","SCntRat","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per milligram of protein","nmol/mg{prot}","NMOL/MG","amount of substance",602213670000000000,[0,0,-1,0,0,0,0],"nmol/mg","si",true,null,null,1,false,false,1,"nanomoles; nmol/mg prot; nmol per mg prot","LOINC","Ratio; CCnt","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per minute","nmol/min","NMOL/MIN","amount of substance",10036894500000,[0,-1,0,0,0,0,0],"nmol/min","si",true,null,null,1,false,false,1,"nmol per min; nanomoles per minute; milli enzyme units; enzyme activity per volume; enzymatic activity","LOINC","CCnc","Clinical","unit for the enzyme unit U = umol/min. nmol/min = mU (milli enzyme unit)","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per minute per milliliter","nmol/min/mL","(NMOL/MIN)/ML","amount of substance",10036894500000000000,[-3,-1,0,0,0,0,0],"(nmol/min)/mL","si",true,null,null,1,false,false,1,"nmol per min per mL; nanomoles per minutes per milliliter; millilitre; milli enzyme units per volume; enzyme activity; enzymatic activity","LOINC","CCnc","Clinical","unit for the enzyme unit U = umol/min. nmol/mL/min = mU/mL","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per milliliter","nmol/mL","NMOL/ML","amount of substance",602213670000000000000,[-3,0,0,0,0,0,0],"nmol/mL","si",true,null,null,1,false,false,1,"nmol per mL; nanomoles per milliliter; millilitre","LOINC","SCnc","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per milliliter per hour","nmol/mL/h","(NMOL/ML)/HR","amount of substance",167281575000000000,[-3,-1,0,0,0,0,0],"(nmol/mL)/h","si",true,null,null,1,false,false,1,"nmol/mL/hr; nmol per mL per hr; nanomoles per milliliters per hour; millilitres; milli enzyme units per volume; enzyme activity; enzymatic activity","LOINC","CCnc","Clinical","unit for the enzyme unit U = umol/min.","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per milliliter per minute","nmol/mL/min","(NMOL/ML)/MIN","amount of substance",10036894500000000000,[-3,-1,0,0,0,0,0],"(nmol/mL)/min","si",true,null,null,1,false,false,1,"nmol per mL per min; nanomoles per milliliters per min; millilitres; milli enzyme units per volume; enzyme activity; enzymatic activity","LOINC","CCnc","Clinical","unit for the enzyme unit U = umol/min. nmol/mL/min = mU/mL","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per millimole","nmol/mmol","NMOL/MMOL","amount of substance",0.000001,[0,0,0,0,0,0,0],"nmol/mmol","si",true,null,null,1,false,false,0,"nmol per mmol; nanomoles per millimole","LOINC","SRto","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per millimole of creatinine","nmol/mmol{creat}","NMOL/MMOL","amount of substance",0.000001,[0,0,0,0,0,0,0],"nmol/mmol","si",true,null,null,1,false,false,0,"nanomoles","LOINC","SRto","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per mole","nmol/mol","NMOL/MOL","amount of substance",1e-9,[0,0,0,0,0,0,0],"nmol/mol","si",true,null,null,1,false,false,0,"nmol per mole; nanomoles","LOINC","SRto","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per nanomole","nmol/nmol","NMOL/NMOL","amount of substance",1,[0,0,0,0,0,0,0],"nmol/nmol","si",true,null,null,1,false,false,0,"nmol per nmol; nanomoles","LOINC","SRto","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per second","nmol/s","NMOL/S","amount of substance",602213670000000,[0,-1,0,0,0,0,0],"nmol/s","si",true,null,null,1,false,false,1,"nmol/sec; nmol per sec; nanomoles per sercond; milli enzyme units; enzyme activity; enzymatic activity","LOINC","CCnc","Clinical","unit for the enzyme unit U = umol/min.","10*23","10*23","6.0221367",6.0221367,false],[false,"nanomole per second per liter","nmol/s/L","(NMOL/S)/L","amount of substance",602213670000000000,[-3,-1,0,0,0,0,0],"(nmol/s)/L","si",true,null,null,1,false,false,1,"nmol/sec/L; nmol per s per L; nmol per sec per L; nanomoles per seconds per liter; litre; milli enzyme units per volume; enzyme activity; enzymatic activity","LOINC","CCnc","Clinical","unit for the enzyme unit U = umol/min.","10*23","10*23","6.0221367",6.0221367,false],[true,"nanosecond","ns","NS","time",1e-9,[0,1,0,0,0,0,0],"ns",null,false,"T",null,1,false,false,0,"nanoseconds","LOINC","Time","Clinical","",null,null,null,null,false],[false,"nanoenzyme unit per milliliter","nU/mL","NU/ML","catalytic activity",10036894500000,[-3,-1,0,0,0,0,0],"nU/mL","chemical",true,null,null,1,false,false,1,"nU per mL; nanoenzyme units per milliliter; millilitre; enzymatic activity per volume; enzyme activity","LOINC","CCnc","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min); 1 fU = pmol/min","umol/min","UMOL/MIN","1",1,false],[false,"Ohm meter","Ohm.m","OHM.M","electric resistance",1000,[3,-1,1,0,0,-2,0],"Ω.m","si",true,null,null,1,false,false,0,"electric resistivity; meters; metres","LOINC","","Clinical","unit of electric resistivity","V/A","V/A","1",1,false],[false,"osmole per kilogram","osm/kg","OSM/KG","amount of substance (dissolved particles)",602213670000000000000,[0,0,-1,0,0,0,0],"osm/kg","chemical",true,null,null,1,false,false,1,"osm per kg; osmoles per kilogram; osmols","LOINC","Osmol","Clinical","","mol","MOL","1",1,false],[false,"osmole per liter","osm/L","OSM/L","amount of substance (dissolved particles)",6.0221366999999994e+26,[-3,0,0,0,0,0,0],"osm/L","chemical",true,null,null,1,false,false,1,"osm per L; osmoles per liter; litre; osmols","LOINC","Osmol","Clinical","","mol","MOL","1",1,false],[false,"picoampere","pA","PA","electric current",1e-12,[0,-1,0,0,0,1,0],"pA","si",true,null,null,1,false,false,0,"picoamperes","LOINC","","Clinical","equal to 10^-12 amperes","C/s","C/S","1",1,false],[true,"picogram","pg","PG","mass",1e-12,[0,0,1,0,0,0,0],"pg",null,false,"M",null,1,false,false,0,"picograms","LOINC","Mass; EntMass","Clinical","",null,null,null,null,false],[true,"picogram per deciliter","pg/dL","PG/DL","mass",9.999999999999999e-9,[-3,0,1,0,0,0,0],"pg/dL",null,false,"M",null,1,false,false,0,"pg per dL; picograms; decilitre","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"picogram per liter","pg/L","PG/L","mass",1e-9,[-3,0,1,0,0,0,0],"pg/L",null,false,"M",null,1,false,false,0,"pg per L; picograms; litre","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"picogram per milligram","pg/mg","PG/MG","mass",1e-9,[0,0,0,0,0,0,0],"pg/mg",null,false,"M",null,1,false,false,0,"pg per mg; picograms","LOINC","MCnt","Clinical","",null,null,null,null,false],[true,"picogram per milliliter","pg/mL","PG/ML","mass",0.000001,[-3,0,1,0,0,0,0],"pg/mL",null,false,"M",null,1,false,false,0,"pg per mL; picograms per milliliter; millilitre","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"picogram per millimeter","pg/mm","PG/MM","mass",1e-9,[-1,0,1,0,0,0,0],"pg/mm",null,false,"M",null,1,false,false,0,"pg per mm; picogram/millimeter; picogram/millimetre; picograms per millimeter; millimetre","LOINC","Lineic Mass","Clinical","",null,null,null,null,false],[false,"picokatal","pkat","PKAT","catalytic activity",602213670000,[0,-1,0,0,0,0,0],"pkat","chemical",true,null,null,1,false,false,1,"pkats; picokatals","LOINC","CAct","Clinical","kat is a unit of catalytic activity with base units = mol/s. Rarely used because its units are too large to practically express catalytic activity. See enzyme unit [U] which is the standard unit for catalytic activity.","mol/s","MOL/S","1",1,false],[false,"picoliter","pL","PL","volume",1e-15,[3,0,0,0,0,0,0],"pL","iso1000",true,null,null,1,false,false,0,"picoliters; picolitres","LOINC","Vol","Clinical","","l",null,"1",1,false],[true,"picometer","pm","PM","length",1e-12,[1,0,0,0,0,0,0],"pm",null,false,"L",null,1,false,false,0,"picometers; picometres","LOINC","Len","Clinical","",null,null,null,null,false],[false,"picomole","pmol","PMOL","amount of substance",602213670000,[0,0,0,0,0,0,0],"pmol","si",true,null,null,1,false,false,1,"picomoles; pmols","LOINC","Sub","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"picomole per 24 hour","pmol/(24.h)","PMOL/HR","amount of substance",6970065.625,[0,-1,0,0,0,0,0],"pmol/h","si",true,null,null,1,false,false,1,"pmol/24hrs; pmol/24 hrs; pmol per 24 hrs; 24hrs; days; dy; picomoles per 24 hours","LOINC","SRat","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"picomole per day","pmol/d","PMOL/D","amount of substance",6970065.625,[0,-1,0,0,0,0,0],"pmol/d","si",true,null,null,1,false,false,1,"pmol/dy; pmol per day; 24 hours; 24hrs; 24 hrs; picomoles","LOINC","SRat","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"picomole per deciliter","pmol/dL","PMOL/DL","amount of substance",6022136700000000,[-3,0,0,0,0,0,0],"pmol/dL","si",true,null,null,1,false,false,1,"pmol per dL; picomoles per deciliter; decilitre","LOINC","SCnc","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"picomole per gram","pmol/g","PMOL/G","amount of substance",602213670000,[0,0,-1,0,0,0,0],"pmol/g","si",true,null,null,1,false,false,1,"pmol per gm; picomoles per gram; picomole/gram","LOINC","SCnt","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"picomole per hour per milliliter ","pmol/h/mL","(PMOL/HR)/ML","amount of substance",167281575000000,[-3,-1,0,0,0,0,0],"(pmol/h)/mL","si",true,null,null,1,false,false,1,"pmol/hrs/mL; pmol per hrs per mL; picomoles per hour per milliliter; millilitre; micro enzyme units per volume; enzymatic activity; enzyme activity","LOINC","CCnc","Clinical","unit for the enzyme unit U = umol/min. ","10*23","10*23","6.0221367",6.0221367,false],[false,"picomole per liter","pmol/L","PMOL/L","amount of substance",602213670000000,[-3,0,0,0,0,0,0],"pmol/L","si",true,null,null,1,false,false,1,"picomole/liter; pmol per L; picomoles; litre","LOINC","SCnc","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"picomole per minute","pmol/min","PMOL/MIN","amount of substance",10036894500,[0,-1,0,0,0,0,0],"pmol/min","si",true,null,null,1,false,false,1,"picomole/minute; pmol per min; picomoles per minute; micro enzyme units; enzymatic activity; enzyme activity","LOINC","CCnc","Clinical","unit for the enzyme unit U = umol/min. pmol/min = uU (micro enzyme unit)","10*23","10*23","6.0221367",6.0221367,false],[false,"picomole per milliliter","pmol/mL","PMOL/ML","amount of substance",602213670000000000,[-3,0,0,0,0,0,0],"pmol/mL","si",true,null,null,1,false,false,1,"picomole/milliliter; picomole/millilitre; pmol per mL; picomoles; millilitre; picomols; pmols","LOINC","SCnc","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"picomole per micromole","pmol/umol","PMOL/UMOL","amount of substance",0.000001,[0,0,0,0,0,0,0],"pmol/μmol","si",true,null,null,1,false,false,0,"pmol/mcgmol; picomole/micromole; pmol per umol; pmol per mcgmol; picomoles ","LOINC","SRto","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[true,"picosecond","ps","PS","time",1e-12,[0,1,0,0,0,0,0],"ps",null,false,"T",null,1,false,false,0,"picoseconds; psec","LOINC","Time","Clinical","",null,null,null,null,false],[false,"picotesla","pT","PT","magnetic flux density",1e-9,[0,-1,1,0,0,-1,0],"pT","si",true,null,null,1,false,false,0,"picoteslas","LOINC","","Clinical","SI unit of magnetic field strength for magnetic field B","Wb/m2","WB/M2","1",1,false],[false,"enzyme unit per 12 hour","U/(12.h)","U/HR","catalytic activity",232335520833.33334,[0,-2,0,0,0,0,0],"U/h","chemical",true,null,null,1,false,false,1,"U/12hrs; U/ 12hrs; U per 12 hrs; 12hrs; enzyme units per 12 hours; enzyme activity; enzymatic activity per time; umol per min per 12 hours; micromoles per minute per 12 hours; umol/min/12hr","LOINC","CRat","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)","umol/min","UMOL/MIN","1",1,false],[false,"enzyme unit per 2 hour","U/(2.h)","U/HR","catalytic activity",1394013125000,[0,-2,0,0,0,0,0],"U/h","chemical",true,null,null,1,false,false,1,"U/2hrs; U/ 2hrs; U per 2 hrs; 2hrs; enzyme units per 2 hours; enzyme activity; enzymatic activity per time; umol per minute per 2 hours; micromoles per minute; umol/min/2hr; umol per min per 2hr","LOINC","CRat","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)","umol/min","UMOL/MIN","1",1,false],[false,"enzyme unit per 24 hour","U/(24.h)","U/HR","catalytic activity",116167760416.66667,[0,-2,0,0,0,0,0],"U/h","chemical",true,null,null,1,false,false,1,"U/24hrs; U/ 24hrs; U per 24 hrs; 24hrs; enzyme units per 24 hours; enzyme activity; enzymatic activity per time; micromoles per minute per 24 hours; umol/min/24hr; umol per min per 24hr","LOINC","CRat","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)","umol/min","UMOL/MIN","1",1,false],[false,"enzyme unit per 10","U/10","U","catalytic activity",1003689450000000,[0,-1,0,0,0,0,0],"U","chemical",true,null,null,1,false,false,1,"enzyme unit/10; U per 10; enzyme units per 10; enzymatic activity; enzyme activity; micromoles per minute; umol/min/10","LOINC","CCnc","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)","umol/min","UMOL/MIN","1",1,false],[false,"enzyme unit per 10 billion","U/10*10","U/(10*10)","catalytic activity",1003689.45,[0,-1,0,0,0,0,0],"U/(10<sup>10</sup>)","chemical",true,null,null,1,false,false,1,"U per 10*10; enzyme units per 10*10; U per 10 billion; enzyme units; enzymatic activity; micromoles per minute per 10 billion; umol/min/10*10","LOINC","CCnc","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)","umol/min","UMOL/MIN","1",1,false],[false,"enzyme unit per trillion","U/10*12","U/(10*12)","catalytic activity",10036.8945,[0,-1,0,0,0,0,0],"U/(10<sup>12</sup>)","chemical",true,null,null,1,false,false,1,"enzyme unit/10*12; U per 10*12; enzyme units per 10*12; enzyme units per trillion; enzymatic activity; micromoles per minute per trillion; umol/min/10*12; umol per min per 10*12","LOINC","CCnc","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)","umol/min","UMOL/MIN","1",1,false],[false,"enzyme unit per million","U/10*6","U/(10*6)","catalytic activity",10036894500,[0,-1,0,0,0,0,0],"U/(10<sup>6</sup>)","chemical",true,null,null,1,false,false,1,"enzyme unit/10*6; U per 10*6; enzyme units per 10*6; enzyme units; enzymatic activity per volume; micromoles per minute per million; umol/min/10*6; umol per min per 10*6","LOINC","CCnc","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)","umol/min","UMOL/MIN","1",1,false],[false,"enzyme unit per billion","U/10*9","U/(10*9)","catalytic activity",10036894.5,[0,-1,0,0,0,0,0],"U/(10<sup>9</sup>)","chemical",true,null,null,1,false,false,1,"enzyme unit/10*9; U per 10*9; enzyme units per 10*9; enzymatic activity per volume; micromoles per minute per billion; umol/min/10*9; umol per min per 10*9","LOINC","CCnc","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)","umol/min","UMOL/MIN","1",1,false],[false,"enzyme unit per day","U/d","U/D","catalytic activity",116167760416.66667,[0,-2,0,0,0,0,0],"U/d","chemical",true,null,null,1,false,false,1,"U/dy; enzyme units per day; enzyme units; enzyme activity; enzymatic activity per time; micromoles per minute per day; umol/min/day; umol per min per day","LOINC","CRat","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)","umol/min","UMOL/MIN","1",1,false],[false,"enzyme unit per deciliter","U/dL","U/DL","catalytic activity",100368945000000000000,[-3,-1,0,0,0,0,0],"U/dL","chemical",true,null,null,1,false,false,1,"U per dL; enzyme units per deciliter; decilitre; micromoles per minute per deciliter; umol/min/dL; umol per min per dL","LOINC","CCnc","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)","umol/min","UMOL/MIN","1",1,false],[false,"enzyme unit per gram","U/g","U/G","catalytic activity",10036894500000000,[0,-1,-1,0,0,0,0],"U/g","chemical",true,null,null,1,false,false,1,"U/gm; U per gm; enzyme units per gram; micromoles per minute per gram; umol/min/g; umol per min per g","LOINC","CCnt","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)","umol/min","UMOL/MIN","1",1,false],[false,"enzyme unit per hour","U/h","U/HR","catalytic activity",2788026250000,[0,-2,0,0,0,0,0],"U/h","chemical",true,null,null,1,false,false,1,"U/hr; U per hr; enzyme units per hour; micromoles per minute per hour; umol/min/hr; umol per min per hr","LOINC","CRat","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)","umol/min","UMOL/MIN","1",1,false],[false,"enzyme unit per liter","U/L","U/L","catalytic activity",10036894500000000000,[-3,-1,0,0,0,0,0],"U/L","chemical",true,null,null,1,false,false,1,"enzyme unit/liter; enzyme unit/litre; U per L; enzyme units per liter; enzyme unit per litre; micromoles per minute per liter; umol/min/L; umol per min per L","LOINC","CCnc","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)","umol/min","UMOL/MIN","1",1,false],[false,"enzyme unit per minute","U/min","U/MIN","catalytic activity",167281575000000,[0,-2,0,0,0,0,0],"U/min","chemical",true,null,null,1,false,false,1,"enzyme unit/minute; U per min; enzyme units; umol/min/min; micromoles per minute per minute; micromoles per min per min; umol","LOINC","CRat","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)","umol/min","UMOL/MIN","1",1,false],[false,"enzyme unit per milliliter","U/mL","U/ML","catalytic activity",1.00368945e+22,[-3,-1,0,0,0,0,0],"U/mL","chemical",true,null,null,1,false,false,1,"U per mL; enzyme units per milliliter; millilitre; micromoles per minute per milliliter; umol/min/mL; umol per min per mL","LOINC","CCnc","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)","umol/min","UMOL/MIN","1",1,false],[false,"enzyme unit per second","U/s","U/S","catalytic activity",10036894500000000,[0,-2,0,0,0,0,0],"U/s","chemical",true,null,null,1,false,false,1,"U/sec; U per second; enzyme units per second; micromoles per minute per second; umol/min/sec; umol per min per sec","LOINC","CRat","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min)","umol/min","UMOL/MIN","1",1,false],[false,"micro international unit","u[IU]","U[IU]","arbitrary",0.000001,[0,0,0,0,0,0,0],"μi.U.","chemical",true,null,null,1,false,true,0,"uIU; u IU; microinternational units","LOINC","Arb","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","[iU]","[IU]","1",1,false],[false,"micro international unit per liter","u[IU]/L","U[IU]/L","arbitrary",0.001,[-3,0,0,0,0,0,0],"(μi.U.)/L","chemical",true,null,null,1,false,true,0,"uIU/L; u IU/L; uIU per L; microinternational units per liter; litre; ","LOINC","ACnc","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","[iU]","[IU]","1",1,false],[false,"micro international unit per milliliter","u[IU]/mL","U[IU]/ML","arbitrary",1,[-3,0,0,0,0,0,0],"(μi.U.)/mL","chemical",true,null,null,1,false,true,0,"uIU/mL; u IU/mL; uIU per mL; microinternational units per milliliter; millilitre","LOINC","ACnc","Clinical","International units (IU) are analyte and reference specimen  specific arbitrary units (held at WHO)","[iU]","[IU]","1",1,false],[false,"microequivalent","ueq","UEQ","amount of substance",602213670000000000,[0,0,0,0,0,0,0],"μeq","chemical",true,null,null,1,false,false,1,"microequivalents; 10^-6 equivalents; 10-6 equivalents","LOINC","Sub","Clinical","","mol","MOL","1",1,false],[false,"microequivalent per liter","ueq/L","UEQ/L","amount of substance",602213670000000000000,[-3,0,0,0,0,0,0],"μeq/L","chemical",true,null,null,1,false,false,1,"ueq per liter; litre; microequivalents","LOINC","MCnc","Clinical","","mol","MOL","1",1,false],[false,"microequivalent per milliliter","ueq/mL","UEQ/ML","amount of substance",6.0221367000000003e+23,[-3,0,0,0,0,0,0],"μeq/mL","chemical",true,null,null,1,false,false,1,"ueq per milliliter; millilitre; microequivalents","LOINC","MCnc","Clinical","","mol","MOL","1",1,false],[true,"microgram","ug","UG","mass",0.000001,[0,0,1,0,0,0,0],"μg",null,false,"M",null,1,false,false,0,"mcg; micrograms; 10^-6 grams; 10-6 grams","LOINC","Mass","Clinical","",null,null,null,null,false],[true,"microgram per 100 gram","ug/(100.g)","UG/G","mass",1e-8,[0,0,0,0,0,0,0],"μg/g",null,false,"M",null,1,false,false,0,"ug/100gm; ug/100 gm; mcg; ug per 100g; 100 gm; mcg per 100g; micrograms per 100 grams","LOINC","MCnt","Clinical","",null,null,null,null,false],[true,"microgram per 24 hour","ug/(24.h)","UG/HR","mass",1.1574074074074074e-11,[0,-1,1,0,0,0,0],"μg/h",null,false,"M",null,1,false,false,0,"ug/24hrs; ug/24 hrs; mcg/24hrs; ug per 24hrs; mcg per 24hrs; 24 hrs; micrograms per 24 hours","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"microgram per 8 hour","ug/(8.h)","UG/HR","mass",3.472222222222222e-11,[0,-1,1,0,0,0,0],"μg/h",null,false,"M",null,1,false,false,0,"ug/8hrs; ug/8 hrs; mcg/8hrs; ug per 8hrs; mcg per 8hrs; 8 hrs; micrograms per 8 hours; shift","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"microgram per square foot (international)","ug/[sft_i]","UG/[SFT_I]","mass",0.000010763910416709721,[-2,0,1,0,0,0,0],"μg",null,false,"M",null,1,false,false,0,"ug/sft; ug/ft2; ug/ft^2; ug/sq. ft; micrograms; sq. foot; foot squared","LOINC","ArMass","Clinical","",null,null,null,null,false],[true,"microgram per day","ug/d","UG/D","mass",1.1574074074074074e-11,[0,-1,1,0,0,0,0],"μg/d",null,false,"M",null,1,false,false,0,"ug/dy; mcg/dy; ug per day; mcg; micrograms per day","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"microgram per deciliter","ug/dL","UG/DL","mass",0.009999999999999998,[-3,0,1,0,0,0,0],"μg/dL",null,false,"M",null,1,false,false,0,"ug per dL; mcg/dl; mcg per dl; micrograms per deciliter; decilitre","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"microgram per gram","ug/g","UG/G","mass",0.000001,[0,0,0,0,0,0,0],"μg/g",null,false,"M",null,1,false,false,0,"ug per gm; mcg/gm; mcg per g; micrograms per gram","LOINC","MCnt","Clinical","",null,null,null,null,false],[true,"microgram per hour","ug/h","UG/HR","mass",2.7777777777777777e-10,[0,-1,1,0,0,0,0],"μg/h",null,false,"M",null,1,false,false,0,"ug/hr; mcg/hr; mcg per hr; ug per hr; ug per hour; micrograms","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"microgram per kilogram","ug/kg","UG/KG","mass",9.999999999999999e-10,[0,0,0,0,0,0,0],"μg/kg",null,false,"M",null,1,false,false,0,"ug per kg; mcg/kg; mcg per kg; micrograms per kilogram","LOINC","MCnt","Clinical","",null,null,null,null,false],[true,"microgram per kilogram per 8 hour","ug/kg/(8.h)","(UG/KG)/HR","mass",3.472222222222222e-14,[0,-1,0,0,0,0,0],"(μg/kg)/h",null,false,"M",null,1,false,false,0,"ug/kg/8hrs; mcg/kg/8hrs; ug/kg/8 hrs; mcg/kg/8 hrs; ug per kg per 8hrs; 8 hrs; mcg per kg per 8hrs; micrograms per kilograms per 8 hours; shift","LOINC","","Clinical","unit used to measure mass dose rate per patient body mass",null,null,null,null,false],[true,"microgram per kilogram per day","ug/kg/d","(UG/KG)/D","mass",1.1574074074074072e-14,[0,-1,0,0,0,0,0],"(μg/kg)/d",null,false,"M",null,1,false,false,0,"ug/(kg.d); ug/kg/dy; mcg/kg/day; ug per kg per dy; 24 hours; 24hrs; mcg; kilograms; microgram per kilogram and day","LOINC","","Clinical","unit used to measure mass dose rate per patient body mass",null,null,null,null,false],[true,"microgram per kilogram per hour","ug/kg/h","(UG/KG)/HR","mass",2.7777777777777774e-13,[0,-1,0,0,0,0,0],"(μg/kg)/h",null,false,"M",null,1,false,false,0,"ug/(kg.h); ug/kg/hr; mcg/kg/hr; ug per kg per hr; mcg per kg per hr; kilograms","LOINC","","Clinical","unit used to measure mass dose rate per patient body mass",null,null,null,null,false],[true,"microgram per kilogram per minute","ug/kg/min","(UG/KG)/MIN","mass",1.6666666666666664e-11,[0,-1,0,0,0,0,0],"(μg/kg)/min",null,false,"M",null,1,false,false,0,"ug/kg/min; ug/kg/min; mcg/kg/min; ug per kg per min; mcg; micrograms per kilograms per minute ","LOINC","","Clinical","unit used to measure mass dose rate per patient body mass",null,null,null,null,false],[true,"microgram per liter","ug/L","UG/L","mass",0.001,[-3,0,1,0,0,0,0],"μg/L",null,false,"M",null,1,false,false,0,"mcg/L; ug per L; mcg; micrograms per liter; litre ","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"microgram per liter per 24 hour","ug/L/(24.h)","(UG/L)/HR","mass",1.1574074074074074e-8,[-3,-1,1,0,0,0,0],"(μg/L)/h",null,false,"M",null,1,false,false,0,"ug/L/24hrs; ug/L/24 hrs; mcg/L/24hrs; ug per L per 24hrs; 24 hrs; day; dy mcg; micrograms per liters per 24 hours; litres","LOINC","","Clinical","unit used to measure mass dose rate per patient body mass",null,null,null,null,false],[true,"microgram per square meter","ug/m2","UG/M2","mass",0.000001,[-2,0,1,0,0,0,0],"μg/(m<sup>2</sup>)",null,false,"M",null,1,false,false,0,"ug/m^2; ug/sq. m; mcg/m2; mcg/m^2; mcg/sq. m; ug per m2; m^2; sq. meter; mcg; micrograms per square meter; meter squared; metre","LOINC","ArMass","Clinical","unit used to measure mass dose per patient body surface area",null,null,null,null,false],[true,"microgram per cubic meter","ug/m3","UG/M3","mass",0.000001,[-3,0,1,0,0,0,0],"μg/(m<sup>3</sup>)",null,false,"M",null,1,false,false,0,"ug/m^3; ug/cu. m; mcg/m3; mcg/m^3; mcg/cu. m; ug per m3; ug per m^3; ug per cu. m; mcg; micrograms per cubic meter; meter cubed; metre","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"microgram per milligram","ug/mg","UG/MG","mass",0.001,[0,0,0,0,0,0,0],"μg/mg",null,false,"M",null,1,false,false,0,"ug per mg; mcg/mg; mcg per mg; micromilligrams per milligram","LOINC","MCnt","Clinical","",null,null,null,null,false],[true,"microgram per minute","ug/min","UG/MIN","mass",1.6666666666666667e-8,[0,-1,1,0,0,0,0],"μg/min",null,false,"M",null,1,false,false,0,"ug per min; mcg/min; mcg per min; microminutes per minute","LOINC","MRat","Clinical","",null,null,null,null,false],[true,"microgram per milliliter","ug/mL","UG/ML","mass",1,[-3,0,1,0,0,0,0],"μg/mL",null,false,"M",null,1,false,false,0,"ug per mL; mcg/mL; mcg per mL; micrograms per milliliter; millilitre","LOINC","MCnc","Clinical","",null,null,null,null,false],[true,"microgram per millimole","ug/mmol","UG/MMOL","mass",1.660540186674939e-27,[0,0,1,0,0,0,0],"μg/mmol",null,false,"M",null,1,false,false,-1,"ug per mmol; mcg/mmol; mcg per mmol; micrograms per millimole","LOINC","Ratio","Clinical","",null,null,null,null,false],[true,"microgram per nanogram","ug/ng","UG/NG","mass",999.9999999999999,[0,0,0,0,0,0,0],"μg/ng",null,false,"M",null,1,false,false,0,"ug per ng; mcg/ng; mcg per ng; micrograms per nanogram","LOINC","MCnt","Clinical","",null,null,null,null,false],[false,"microkatal","ukat","UKAT","catalytic activity",602213670000000000,[0,-1,0,0,0,0,0],"μkat","chemical",true,null,null,1,false,false,1,"microkatals; ukats","LOINC","CAct","Clinical","kat is a unit of catalytic activity with base units = mol/s. Rarely used because its units are too large to practically express catalytic activity. See enzyme unit [U] which is the standard unit for catalytic activity.","mol/s","MOL/S","1",1,false],[false,"microliter","uL","UL","volume",1e-9,[3,0,0,0,0,0,0],"μL","iso1000",true,null,null,1,false,false,0,"microliters; microlitres; mcl","LOINC","Vol","Clinical","","l",null,"1",1,false],[false,"microliter per 2 hour","uL/(2.h)","UL/HR","volume",1.388888888888889e-13,[3,-1,0,0,0,0,0],"μL/h","iso1000",true,null,null,1,false,false,0,"uL/2hrs; uL/2 hrs; mcg/2hr; mcg per 2hr; uL per 2hr; uL per 2 hrs; microliters per 2 hours; microlitres ","LOINC","VRat","Clinical","","l",null,"1",1,false],[false,"microliter per hour","uL/h","UL/HR","volume",2.777777777777778e-13,[3,-1,0,0,0,0,0],"μL/h","iso1000",true,null,null,1,false,false,0,"uL/hr; mcg/hr; mcg per hr; uL per hr; microliters per hour; microlitres","LOINC","VRat","Clinical","","l",null,"1",1,false],[true,"micrometer","um","UM","length",0.000001,[1,0,0,0,0,0,0],"μm",null,false,"L",null,1,false,false,0,"micrometers; micrometres; μm; microns","LOINC","Len","Clinical","Unit of length that is usually used in tests related to the eye",null,null,null,null,false],[true,"microns per second","um/s","UM/S","length",0.000001,[1,-1,0,0,0,0,0],"μm/s",null,false,"L",null,1,false,false,0,"um/sec; micron/second; microns/second; um per sec; micrometers per second; micrometres","LOINC","Vel","Clinical","",null,null,null,null,false],[false,"micromole","umol","UMOL","amount of substance",602213670000000000,[0,0,0,0,0,0,0],"μmol","si",true,null,null,1,false,false,1,"micromoles; umols","LOINC","Sub","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per 2 hour","umol/(2.h)","UMOL/HR","amount of substance",83640787500000,[0,-1,0,0,0,0,0],"μmol/h","si",true,null,null,1,false,false,1,"umol/2hrs; umol/2 hrs; umol per 2 hrs; 2hrs; micromoles per 2 hours","LOINC","SRat","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per 24 hour","umol/(24.h)","UMOL/HR","amount of substance",6970065625000,[0,-1,0,0,0,0,0],"μmol/h","si",true,null,null,1,false,false,1,"umol/24hrs; umol/24 hrs; umol per 24 hrs; per 24hrs; micromoles per 24 hours","LOINC","SRat","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per 8 hour","umol/(8.h)","UMOL/HR","amount of substance",20910196875000,[0,-1,0,0,0,0,0],"μmol/h","si",true,null,null,1,false,false,1,"umol/8hr; umol/8 hr; umol per 8 hr; umol per 8hr; umols per 8hr; umol per 8 hours; micromoles per 8 hours; shift","LOINC","SRat","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per day","umol/d","UMOL/D","amount of substance",6970065625000,[0,-1,0,0,0,0,0],"μmol/d","si",true,null,null,1,false,false,1,"umol/day; umol per day; umols per day; umol per days; micromoles per days; umol/24hr; umol/24 hr; umol per 24 hr; umol per 24hr; umols per 24hr; umol per 24 hours; micromoles per 24 hours","LOINC","SRat","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per deciliter","umol/dL","UMOL/DL","amount of substance",6.0221367e+21,[-3,0,0,0,0,0,0],"μmol/dL","si",true,null,null,1,false,false,1,"micromole/deciliter; micromole/decilitre; umol per dL; micromoles per deciliters; micromole per decilitres","LOINC","SCnc","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per gram","umol/g","UMOL/G","amount of substance",602213670000000000,[0,0,-1,0,0,0,0],"μmol/g","si",true,null,null,1,false,false,1,"micromole/gram; umol per g; micromoles per gram","LOINC","SCnt; Ratio","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per hour","umol/h","UMOL/HR","amount of substance",167281575000000,[0,-1,0,0,0,0,0],"μmol/h","si",true,null,null,1,false,false,1,"umol/hr; umol per hr; umol per hour; micromoles per hours","LOINC","SRat","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per kilogram","umol/kg","UMOL/KG","amount of substance",602213670000000,[0,0,-1,0,0,0,0],"μmol/kg","si",true,null,null,1,false,false,1,"umol per kg; micromoles per kilogram","LOINC","SCnt","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per liter","umol/L","UMOL/L","amount of substance",602213670000000000000,[-3,0,0,0,0,0,0],"μmol/L","si",true,null,null,1,false,false,1,"micromole/liter; micromole/litre; umol per liter; micromoles per liter; litre","LOINC","SCnc","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per liter per hour","umol/L/h","(UMOL/L)/HR","amount of substance",167281575000000000,[-3,-1,0,0,0,0,0],"(μmol/L)/h","si",true,null,null,1,false,false,1,"umol/liter/hr; umol/litre/hr; umol per L per hr; umol per liter per hour; micromoles per liters per hour; litre","LOINC","CCnc","Clinical","unit for the enzyme unit U = umol/min; umol/L/h is a derived unit of enzyme units","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per milligram","umol/mg","UMOL/MG","amount of substance",602213670000000000000,[0,0,-1,0,0,0,0],"μmol/mg","si",true,null,null,1,false,false,1,"micromole/milligram; umol per mg; micromoles per milligram","LOINC","SCnt","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per minute","umol/min","UMOL/MIN","amount of substance",10036894500000000,[0,-1,0,0,0,0,0],"μmol/min","si",true,null,null,1,false,false,1,"micromole/minute; umol per min; micromoles per minute; enzyme units","LOINC","CAct","Clinical","unit for the enzyme unit U = umol/min","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per minute per gram","umol/min/g","(UMOL/MIN)/G","amount of substance",10036894500000000,[0,-1,-1,0,0,0,0],"(μmol/min)/g","si",true,null,null,1,false,false,1,"umol/min/gm; umol per min per gm; micromoles per minutes per gram; U/g; enzyme units","LOINC","CCnt","Clinical","unit for the enzyme unit U = umol/min. umol/min/g = U/g","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per minute per liter","umol/min/L","(UMOL/MIN)/L","amount of substance",10036894500000000000,[-3,-1,0,0,0,0,0],"(μmol/min)/L","si",true,null,null,1,false,false,1,"umol/min/liter; umol/minute/liter; micromoles per minutes per liter; litre; enzyme units; U/L","LOINC","CCnc","Clinical","unit for the enzyme unit U = umol/min. umol/min/L = U/L","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per milliliter","umol/mL","UMOL/ML","amount of substance",6.0221367000000003e+23,[-3,0,0,0,0,0,0],"μmol/mL","si",true,null,null,1,false,false,1,"umol per mL; micromoles per milliliter; millilitre","LOINC","SCnc","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per milliliter per minute","umol/mL/min","(UMOL/ML)/MIN","amount of substance",1.00368945e+22,[-3,-1,0,0,0,0,0],"(μmol/mL)/min","si",true,null,null,1,false,false,1,"umol per mL per min; micromoles per milliliters per minute; millilitres","LOINC","CCnc","Clinical","unit for the enzyme unit U = umol/min. umol/mL/min = U/mL","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per millimole","umol/mmol","UMOL/MMOL","amount of substance",0.001,[0,0,0,0,0,0,0],"μmol/mmol","si",true,null,null,1,false,false,0,"umol per mmol; micromoles per millimole","LOINC","SRto","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per mole","umol/mol","UMOL/MOL","amount of substance",0.000001,[0,0,0,0,0,0,0],"μmol/mol","si",true,null,null,1,false,false,0,"umol per mol; micromoles per mole","LOINC","SRto","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"micromole per micromole","umol/umol","UMOL/UMOL","amount of substance",1,[0,0,0,0,0,0,0],"μmol/μmol","si",true,null,null,1,false,false,0,"umol per umol; micromoles per micromole","LOINC","Srto; SFr; EntSRto","Clinical","","10*23","10*23","6.0221367",6.0221367,false],[false,"microOhm","uOhm","UOHM","electric resistance",0.001,[2,-1,1,0,0,-2,0],"μΩ","si",true,null,null,1,false,false,0,"microOhms; µΩ","LOINC","","Clinical","unit of electric resistance","V/A","V/A","1",1,false],[true,"microsecond","us","US","time",0.000001,[0,1,0,0,0,0,0],"μs",null,false,"T",null,1,false,false,0,"microseconds","LOINC","Time","Clinical","",null,null,null,null,false],[false,"micro enzyme unit per gram","uU/g","UU/G","catalytic activity",10036894500,[0,-1,-1,0,0,0,0],"μU/g","chemical",true,null,null,1,false,false,1,"uU per gm; micro enzyme units per gram; micro enzymatic activity per mass; enzyme activity","LOINC","CCnt","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min); 1 uU = 1pmol/min","umol/min","UMOL/MIN","1",1,false],[false,"micro enzyme unit per liter","uU/L","UU/L","catalytic activity",10036894500000,[-3,-1,0,0,0,0,0],"μU/L","chemical",true,null,null,1,false,false,1,"uU per L; micro enzyme units per liter; litre; enzymatic activity per volume; enzyme activity ","LOINC","CCnc","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min); 1 uU = 1pmol/min","umol/min","UMOL/MIN","1",1,false],[false,"micro enzyme unit per milliliter","uU/mL","UU/ML","catalytic activity",10036894500000000,[-3,-1,0,0,0,0,0],"μU/mL","chemical",true,null,null,1,false,false,1,"uU per mL; micro enzyme units per milliliter; millilitre; enzymatic activity per volume; enzyme activity","LOINC","CCnc","Clinical","1 U is the standard enzyme unit which equals 1 micromole substrate catalyzed per minute (1 umol/min); 1 uU = 1pmol/min","umol/min","UMOL/MIN","1",1,false],[false,"microvolt","uV","UV","electric potential",0.001,[2,-2,1,0,0,-1,0],"μV","si",true,null,null,1,false,false,0,"microvolts","LOINC","Elpot","Clinical","unit of electric potential (voltage)","J/C","J/C","1",1,false]]}}
+
+},{}],50:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Ucum = void 0;
+
+/*
+ * This defines the namespace for the UCUM classes and provides
+ * a place for the definition of global variables and constants.
+ *
+ * The javascript for this UCUM implementation uses syntax as
+ * defined by the ECMAScript 6 standard
+ */
+var Ucum = {
+  /**
+   *  Flag indicating whether or not we're using case sensitive labels
+   *  I don't think we need this.  I think we're just going with
+   *  case sensitive, per Clem.   Gunther's code has this flag, but I
+   *  am removing it, at least for now.  lm, 6/2016
+   */
+  //caseSensitive_: true ,
+
+  /**
+   *  The number of elements in a Dimension array.   Currently this
+   *  is set as a configuration variable, but when we get to the point
+   *  of loading the unit definitions from a file, this value will be
+   *  set from that.
+   */
+  dimLen_: 7,
+
+  /**
+   *  The characters used as valid operators in a UCUM unit expression,
+   *  where '.' is for multiplication and '/' is for division.
+   */
+  validOps_: ['.', '/'],
+
+  /**
+   * The string used to separate a unit code and unit name when they
+   * are displayed together
+   */
+  codeSep_: ': ',
+  // Message text variations for validation methods and conversion methods
+  valMsgStart_: 'Did you mean ',
+  valMsgEnd_: '?',
+  cnvMsgStart_: 'We assumed you meant ',
+  cnvMsgEnd_: '.',
+
+  /**
+     * Default opening string used to emphasize portions of error messages.
+     * Used when NOT displaying messages on a web site, i.e., for output
+     * from the library methods or to a file.
+     */
+  openEmph_: ' ->',
+
+  /**
+   * Default closing string used to emphasize portions of error messages.
+   * Used when NOT displaying messages on a web site, i.e., for output
+   * from the library methods or to a file.
+   */
+  closeEmph_: '<- ',
+
+  /**
+   * Opening HTML used to emphasize portions of error messages.  Used when
+   * displaying messages on a web site; should be blank when output is
+   * to a file.
+   */
+  openEmphHTML_: '<span class="emphSpan">',
+
+  /**
+   * Closing HTML used to emphasize portions of error messages.  Used when
+   * displaying messages on a web site; should be blank when output is
+   * to a file.
+   */
+  closeEmphHTML_: '</span>',
+
+  /**
+   * Message that is displayed when annotations are included in a unit
+   * string, to let the user know how they are interpreted.
+   */
+  bracesMsg_: 'FYI - annotations (text in curly braces {}) are ignored, ' + 'except that an annotation without a leading symbol implies ' + 'the default unit 1 (the unity).',
+
+  /**
+   * Message that is displayed or returned when a conversion is requested
+   * for two units where (only) a mass<->moles conversion is appropriate
+   * but no molecular weight was specified.
+   */
+  needMoleWeightMsg_: 'Did you wish to convert between mass and moles?  The ' + 'molecular weight of the substance represented by the ' + 'units is required to perform the conversion.',
+
+  /**
+   * Hash that matches unit column names to names used in the csv file
+   * that is submitted to the data updater.
+   */
+  csvCols_: {
+    'case-sensitive code': 'csCode_',
+    'LOINC property': 'loincProperty_',
+    'name (display)': 'name_',
+    'synonyms': 'synonyms_',
+    'source': 'source_',
+    'category': 'category_',
+    'Guidance': 'guidance_'
+  },
+
+  /**
+   * Name of the column in the csv file that serves as the key
+   */
+  inputKey_: 'case-sensitive code',
+
+  /**
+   * Special codes that contain operators within brackets.  The operator
+   * within these codes causes them to parse incorrectly if they are preceded
+   * by a prefix, because the parsing algorithm splits them up on the operator.
+   * So we use this object to identify them and substitute placeholders to
+   * avoid that.
+   */
+  specUnits_: {
+    'B[10.nV]': 'specialUnitOne',
+    '[m/s2/Hz^(1/2)]': 'specialUnitTwo'
+  }
+};
+exports.Ucum = Ucum;
+
+
+},{}],51:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Dimension = void 0;
+
+/**
+ * This class implements an object containing the vector of exponents for
+ * a unit and its operations for addition, subtraction, and multiplication
+ * with a scalar.
+ *
+ * This object should exist for each unit that can be expressed as a
+ * vector of numbers.   This excludes arbitrary units, e.g., (10*23), and
+ * units that are not numbers but are an expression based solely on numbers,
+ * e.g., mol (mole) which is based on 10*23.
+ *
+ * @author Lee Mericle, based on java version by Gunther Schadow
+ */
+var UC = require('./config.js');
+
+var isInteger = require("is-integer");
+
+class Dimension {
+  /**
+   * Constructor.
+   *
+   * @param dimSetting an optional parameter that may be:
+   *  null, which means that the dimVec_ attribute for this object will be null; or
+   *  an array, which must be the length defined by Ucum.dimLen_, and
+   *    whose contents will be copied to this new object's vector; or
+   *  an integer, which must be between 0 and 1 less than the vector length
+   *    defined by Ucum.dimLen_.  This new object's vector will be
+   *    initialized to zero for all elements except the one whose index
+   *    matches the number passed in.  That element will be set to one.
+    * @throws an error if the dimSetting parameter does not meet the types
+   *  listed above.
+   *  An error will also be thrown if Ucum.dimLen_ has not been set yet,
+   *  i.e., is still zero.   Currently that won't happen, because the
+   *  value is set in the config.js file.  But further down the road
+   *  the setting will come from a definitions input file, so we check
+   *  here anyway.
+   *
+   */
+  constructor(dimSetting) {
+    if (UC.Ucum.dimLen_ === 0) {
+      throw new Error('Dimension.setDimensionLen must be called before ' + 'Dimension constructor');
+    }
+
+    if (dimSetting === undefined || dimSetting === null) {
+      this.assignZero();
+    } else if (dimSetting instanceof Array) {
+      if (dimSetting.length !== UC.Ucum.dimLen_) {
+        throw new Error('Parameter error, incorrect length of vector passed to ' + `Dimension constructor, vector = ${JSON.stringify(dimSetting)}`);
+      }
+
+      this.dimVec_ = [];
+
+      for (let d = 0; d < UC.Ucum.dimLen_; d++) this.dimVec_.push(dimSetting[d]);
+    } // In es6 this should be Number.isInteger(dimSetting).  But Babel
+    // doesn't transpile that correctly, so we need to use the isInteger
+    // module.  :0
+    else if (isInteger(dimSetting)) {
+        if (dimSetting < 0 || dimSetting >= UC.Ucum.dimLen_) {
+          throw new Error('Parameter error, invalid element number specified for ' + 'Dimension constructor');
+        }
+
+        this.assignZero();
+        this.dimVec_[dimSetting] = 1;
+      }
+  } // end constructor
+
+  /**
+   * Sets the element at the specified position to a specified value.  The
+   * default value is 1.  If the dimension vector is null when this is called
+   * a zero-filled vector is created and then the indicated position is set.
+   *
+   * @param indexPos the index of the element to be set
+   * @param value the value to assign to the specified element; optional,
+   *  default value is 1
+   * @throws an exception if the specified position is invalid, i.e., not a
+   *   number or is less than 0 or greater than Ucum.dimLen_
+   **/
+
+
+  setElementAt(indexPos, value) {
+    if (!isInteger(indexPos) || indexPos < 0 || indexPos >= UC.Ucum.dimLen_) {
+      throw new Error(`Dimension.setElementAt called with an invalid index ` + `position (${indexPos})`);
+    }
+
+    if (!this.dimVec_) {
+      this.assignZero();
+    }
+
+    if (value === undefined || value === null) value = 1;
+    this.dimVec_[indexPos] = value;
+  }
+  /**
+   * Gets the value of the element at the specified position
+   *
+   * @param indexPos the index of the element whose value is to be returned
+   * @return the value of the element at indexPos, or null if the dimension
+   *  vector is null
+   * @throws an exception if the specified position is invalid, i.e., not a
+   *   number or is less than 0 or greater than Ucum.dimLen_
+   **/
+
+
+  getElementAt(indexPos) {
+    if (!isInteger(indexPos) || indexPos < 0 || indexPos >= UC.Ucum.dimLen_) {
+      throw new Error(`Dimension.getElementAt called with an invalid index ` + `position (${indexPos})`);
+    }
+
+    let ret = null;
+    if (this.dimVec_) ret = this.dimVec_[indexPos];
+    return ret;
+  }
+  /**
+   * This returns the value of the property named by the parameter
+   * passed in.  Although we currently only have one property, dimVec_,
+   * that this will get, it's possible that we'll have additional
+   * properties.   If we don't this could just be replaced by a
+   * getVector function.
+   *
+   * @param propertyName name of the property to be returned, with
+   *        or without the trailing underscore.
+   * @return the requested property, if found for this Dimension
+   * @throws an error if the property is not found for this Dimension
+   */
+
+
+  getProperty(propertyName) {
+    let uProp = propertyName.charAt(propertyName.length - 1) === '_' ? propertyName : propertyName + '_';
+    return this[uProp];
+  } // end getProperty
+
+  /**
+   * Return a string that represents the dimension vector.  Returns null if
+   * the dimension vector is null.
+   *
+   * @return the string that represents the dimension vector.  The
+   *         values are enclosed in square brackets, each separated
+   *         by a comma and a space
+   **/
+
+
+  toString() {
+    let ret = null;
+    if (this.dimVec_) ret = '[' + this.dimVec_.join(', ') + ']';
+    return ret;
+  }
+  /**
+   * Adds the vector of the dimension object passed in to this
+   * dimension object's vector.  This object's vector is changed.
+   * If either dimension vector is null, no changes are made to this object.
+   *
+   *
+   * @param dim2 the dimension whose vector is to be added to this one
+   * @return this object
+   * @throws an exception if dim2 is not a Dimension object
+   **/
+
+
+  add(dim2) {
+    if (!dim2 instanceof Dimension) {
+      throw new Error(`Dimension.add called with an invalid parameter - ` + `${typeof dim2} instead of a Dimension object`);
+    }
+
+    if (this.dimVec_ && dim2.dimVec_) {
+      for (let i = 0; i < UC.Ucum.dimLen_; i++) this.dimVec_[i] += dim2.dimVec_[i];
+    }
+
+    return this;
+  }
+  /**
+   * Subtracts the vector of the dimension object passed in from this
+   * dimension object's vector.  This object's vector is changed.
+   * If either dimension vector is null, no changes are made to this object.
+   *
+   * @param dim2 the dimension whose vector is to be subtracted from this one
+   * @return this object
+   * @throws an exception if dim2 is not a Dimension object
+   **/
+
+
+  sub(dim2) {
+    if (!dim2 instanceof Dimension) {
+      throw new Error(`Dimension.sub called with an invalid parameter - ` + `${typeof dim2} instead of a Dimension object`);
+    }
+
+    if (this.dimVec_ && dim2.dimVec_) {
+      for (let i = 0; i < UC.Ucum.dimLen_; i++) this.dimVec_[i] -= dim2.dimVec_[i];
+    }
+
+    return this;
+  }
+  /**
+   * Inverts this dimension object's vector (by multiplying each element
+   * by negative 1).  This object's vector is changed - unless it is null,
+   * in which case it stays that way.
+   *
+   * @return this object
+   **/
+
+
+  minus() {
+    if (this.dimVec_) {
+      for (let i = 0; i < UC.Ucum.dimLen_; i++) this.dimVec_[i] = -this.dimVec_[i];
+    }
+
+    return this;
+  }
+  /**
+   * Multiplies this dimension object's vector with a scalar.  This is used
+   * when a unit is raised to a power.  This object's vector is changed unless
+   * the vector is null, in which case it stays that way.
+   *
+   * @param s the scalar to use
+   * @return this object
+   * @throws an exception if s is not a number
+   */
+
+
+  mul(s) {
+    if (!isInteger(s)) {
+      throw new Error(`Dimension.sub called with an invalid parameter - ` + `${typeof dim2} instead of a number`);
+    }
+
+    if (this.dimVec_) {
+      for (let i = 0; i < UC.Ucum.dimLen_; i++) this.dimVec_[i] *= s;
+    }
+
+    return this;
+  }
+  /**
+   * Tests for equality of this dimension object's vector and that of
+   * the dimension object passed in.  If the dimension vector for one of
+   * the objects is null, the dimension vector for the other object must
+   * also be null for the two to be equal.  (I know - duh.  still)
+   *
+   * @param dim2 the dimension object whose vector is to be compared to this one
+   * @return true if the two vectors are equal; false otherwise.
+   * @throws an exception if dim2 is not a Dimension object
+   */
+
+
+  equals(dim2) {
+    if (!dim2 instanceof Dimension) {
+      throw new Error(`Dimension.equals called with an invalid parameter - ` + `${typeof dim2} instead of a Dimension object`);
+    }
+
+    let isEqual = true;
+    let dimVec2 = dim2.dimVec_;
+
+    if (this.dimVec_ && dimVec2) {
+      for (let i = 0; isEqual && i < UC.Ucum.dimLen_; i++) isEqual = this.dimVec_[i] === dimVec2[i];
+    } else {
+      isEqual = this.dimVec_ === null && dimVec2 === null;
+    }
+
+    return isEqual;
+  }
+  /**
+   * Assigns the contents of the vector belonging to the dimension object
+   * passed in to this dimension's vector.  If this dimension vector is null
+   * and the other is not, this one will get the contents of the other.  If
+   * this dimension vector is not null but the one passed in is null, this
+   * one will be set to null.
+   *
+   * @param dim2 the dimension object with the vector whose contents are
+   *  to be assigned to this dimension's vector
+   * @return this object (not sure why)
+   * @throws an exception if dim2 is not a Dimension object
+   */
+
+
+  assignDim(dim2) {
+    if (!dim2 instanceof Dimension) {
+      throw new Error(`Dimension.assignDim called with an invalid parameter - ` + `${typeof dim2} instead of a Dimension object`);
+    }
+
+    if (dim2.dimVec_ === null) this.dimVec_ = null;else {
+      if (this.dimVec_ === null) {
+        this.dimVec_ = [];
+      }
+
+      for (let i = 0; i < UC.Ucum.dimLen_; i++) this.dimVec_[i] = dim2.dimVec_[i];
+    }
+    return this;
+  }
+  /**
+   * Sets all elements of this dimension object's vector to zero.
+   * If this object's vector is null, it is created as a zero-filled vector.
+   *
+   * @return this object (not sure why)
+   */
+
+
+  assignZero() {
+    if (this.dimVec_ === null || this.dimVec_ === undefined) this.dimVec_ = [];
+
+    for (let i = 0; i < UC.Ucum.dimLen_; i++) {
+      this.dimVec_.push(0);
+    }
+
+    return this;
+  }
+  /**
+   * Tests for a dimension vector set to all zeroes.
+   *
+   * @return true if exponents (elements) of this dimension's vector are all
+   * zero; false otherwise (including if the current vector is null).
+   *
+   */
+
+
+  isZero() {
+    let allZero = this.dimVec_ !== null;
+
+    if (this.dimVec_) {
+      for (let i = 0; allZero && i < UC.Ucum.dimLen_; i++) allZero = this.dimVec_[i] === 0;
+    }
+
+    return allZero;
+  }
+  /**
+   * Tests for a Dimension object with no dimension vector (dimVec_ is null).
+   *
+   * @return true the dimension vector is null; false if it is not
+   *
+   */
+
+
+  isNull() {
+    return this.dimVec_ === null;
+  }
+  /**
+   * Creates and returns a clone of this Dimension object
+   *
+   * @return the clone
+   */
+
+
+  clone() {
+    let that = new Dimension();
+    that.assignDim(this);
+    return that;
+  }
+
+} // end Dimension class
+
+
+exports.Dimension = Dimension;
+
+
+},{"./config.js":50,"is-integer":64}],52:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.packArray = packArray;
+exports.unpackArray = unpackArray;
+
+/**
+ * This file provides functions to reduce the size of an array of objects of the same structure in JSON.
+ */
+const pushFn = Array.prototype.push;
+
+function isObject(value) {
+  return Object.prototype.toString.call(value) === '[object Object]';
+}
+/**
+ * Makes human readable config used to pack/unpack array of objects of the same structure to store with packed data.
+ * @param {Object} refObj - reference item of array of objects of the same structure
+ * @returns {Array}
+ */
+
+
+function createConfig(refObj) {
+  return Object.keys(refObj).reduce((config, key) => {
+    if (isObject(refObj[key])) {
+      pushFn.apply(config, createConfig(refObj[key]).map(keyTail => [key, ...[].concat(keyTail)]));
+    } else {
+      config.push(key);
+    }
+
+    return config;
+  }, []);
+}
+/**
+ * Prepares config created with createConfig function to use in packItem/unpackItem functions.
+ * @param {Array} config
+ * @returns {Array}
+ */
+
+
+function prepareConfig(config) {
+  return config.map(key => Array.isArray(key) ? key : [key]);
+}
+/**
+ * Converts an object to an array of values in the order of keys from configuration array.
+ * @param {Array} config - configuration array
+ * @param {Object} item - input object
+ * @returns {Array}
+ */
+
+
+function packItem(config, item) {
+  if (config.join() !== prepareConfig(createConfig(item)).join()) {
+    throw new Error('Object of unusual structure');
+  }
+
+  return config.map(keyArr => {
+    let place = item;
+    keyArr.forEach(key => {
+      place = place[key];
+
+      if (place === undefined) {
+        throw new Error('Object of unusual structure');
+      }
+    });
+    return place;
+  });
+}
+/**
+ * Performs the reverse of packItem function.
+ * @param {Array} config - configuration array
+ * @param {Array} item - input object
+ * @returns {Object}
+ */
+
+
+function unpackItem(config, item) {
+  let result = {};
+  config.forEach((keyArr, i) => {
+    let place = result;
+
+    for (let i = 0; i < keyArr.length - 1; i++) {
+      place = place[keyArr[i]] = place[keyArr[i]] || {};
+    }
+
+    place[keyArr[keyArr.length - 1]] = item[i];
+  });
+  return result;
+}
+/**
+ * Reduces size of an array of objects of the same structure before serialize it to JSON
+ * @param {Array} arr
+ * @returns {Object}
+ */
+
+
+function packArray(arr) {
+  if (arr && arr.length) {
+    const config = createConfig(arr[0]),
+          _config = prepareConfig(config);
+
+    if (config.length) {
+      return {
+        config: config,
+        data: arr.map(packItem.bind(null, _config))
+      };
+    }
+  }
+
+  return {
+    config: [],
+    data: arr
+  };
+}
+/**
+ * Restores an array of objects of the same structure after deserializing this object from JSON
+ * @param {Object} obj
+ * @returns {Array}
+ */
+
+
+function unpackArray(obj) {
+  const config = obj && obj.config;
+
+  if (config) {
+    if (config.length && obj.data) {
+      const _config = prepareConfig(config);
+
+      return obj.data.map(unpackItem.bind(null, _config));
+    } else {
+      return obj.data;
+    }
+  }
+
+  return obj;
+}
+
+
+},{}],53:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Prefix = void 0;
+
+/**
+ * Prefix objects are defined in this file.
+ */
+
+/**
+ * This class implements the prefix object.  Prefixes are used as multipliers
+ * for units, e.g., km for kilometers
+ *
+ * @author Lee Mericle, based on java version by Gunther Schadow
+ *
+ */
+var Ucum = require('./config.js');
+
+class Prefix {
+  /**
+   * Creates a single prefix object.
+   *
+   * @param attrs a hash of the values to use in creating the prefix object.
+   *  They should be:
+   *   code_ - which is the case-sensitive code used for the prefix,
+   *    e.g., k for kilo
+   *   ciCode_ - which is the case-insensitive code used for the prefix,
+   *    e.g., K for kilo
+   *   name_ - which is the name of the prefix, e.g., kilo
+   *   printSymbol_ - which is the print symbol for the prefix, e.g., k for kilo
+   *   value_ - which is teh value to use in multiplying the magnitude of
+   *    a unit, e.g., for a prefix of c the value will be .01.
+   *   exp_ - which is the exponent used to get the value. For decimal based
+   *    prefixes the base is 10 and the exp_ is applied to 10, e.g., for a
+   *    prefix of c, the exponent will be -2.  For prefixes that are not
+   *    decimal based, this will be null (but must not be undefined).
+   *
+   * @throws an error if the not all required parameters are provided
+   */
+  constructor(attrs) {
+    if (attrs['code_'] === undefined || attrs['code_'] === null || attrs['name_'] === undefined || attrs['name_'] === null || attrs['value_'] === undefined || attrs['value_'] === null || attrs['exp_'] === undefined) {
+      throw new Error('Prefix constructor called missing one or more parameters.  ' + 'Prefix codes (cs or ci), name, value and exponent must all be specified ' + 'and all but the exponent must not be null.');
+    }
+    /**
+     * The prefix code, e.g., k for kilo.  This should be the case-sensitive
+     * code.  Since there's no way to check to see if it's the case-sensitive
+     * one as opposed to the case-insensitive one (because although
+     * case-insensitive codes all seem to be uppercase, some case-sensitive
+     * codes are also all uppercase), we'll just have to believe that the
+     * right one was passed in.
+     */
+
+
+    this.code_ = attrs['code_'];
+    /**
+     * The case-insensitive code, e.g., K for kilo
+     */
+
+    this.ciCode_ = attrs['ciCode_'];
+    /**
+     * The prefix name, e.g., kilo
+     */
+
+    this.name_ = attrs['name_'];
+    /**
+     * The printSymbol for the prefix, e.g., k for kilo
+     */
+
+    this.printSymbol_ = attrs['printSymbol_'];
+    /**
+     * The value to use in multiplying the magnitude of a unit
+     */
+
+    if (typeof attrs['value_'] === 'string') this.value_ = parseFloat(attrs['value_']);else this.value_ = attrs['value_'];
+    /**
+     * The exponent used to create the value from 10.  For prefixes that are
+     * not based on 10, this will be null.
+     */
+
+    this.exp_ = attrs['exp_'];
+  } // end constructor
+
+  /**
+   * Returns the value for the current prefix object
+   * @return the value for the prefix object with the specified code
+   * */
+
+
+  getValue() {
+    return this.value_;
+  }
+  /**
+   * Returns the prefix code for the current prefix object
+   * @return the code for the current prefix object
+   */
+
+
+  getCode() {
+    return this.code_;
+  }
+  /**
+   * Returns the case-insensitive code for the current prefix object
+   * @return the case_insensitive code for the current prefix object
+   */
+
+
+  getCiCode() {
+    return this.ciCode_;
+  }
+  /**
+   * Returns the prefix name for the current prefix object
+   * @return the name for the current prefix object
+   */
+
+
+  getName() {
+    return this.name_;
+  }
+  /**
+   * Returns the print symbol for the current prefix object
+   * @return the print symbol for the current prefix object
+   */
+
+
+  getPrintSymbol() {
+    return this.printSymbol_;
+  }
+  /**
+   * Returns the exponent for the current prefix object
+   * @return the exponent for the current prefix object
+   */
+
+
+  getExp() {
+    return this.exp_;
+  }
+  /**
+   * Provides way to tell if one prefix equals another.  The second prefix
+   * must match all attribute values.
+   *
+   * @param prefix2 prefix object to check for a match
+   * @return true for a match; false if one or more attributes don't match
+   */
+
+
+  equals(prefix2) {
+    return this.code_ === prefix2.code_ && this.ciCode_ === prefix2.ciCode_ && this.name_ === prefix2.name_ && this.printSymbol_ === prefix2.printSymbol_ && this.value_ === prefix2.value_ && this.exp_ === prefix2.exp_;
+  }
+
+} // end Prefix class
+
+
+exports.Prefix = Prefix;
+
+
+},{"./config.js":50}],54:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.PrefixTables = exports.PrefixTablesFactory = void 0;
+
+/**
+ * The tables of defined prefixes is defined in this file.
+ */
+
+/**
+ * This class implements the table of multiplier prefixes.
+ *
+ * @author Lee Mericle, based on java version by Gunther Schadow
+ *
+ */
+class PrefixTablesFactory {
+  /**
+   * Constructor.  This creates the empty PrefixTable hashes once.
+   * There is one hash whose key is the prefix code and one whose
+   * key is the prefix value.
+   *
+   * Implementation of this as a singleton is based on the UnitTables
+   * implementation.  See that class for details.
+   */
+  constructor() {
+    this.byCode_ = {};
+    this.byValue_ = {};
+  }
+  /**
+   * Provides the number of prefix objects in each table
+   * @returns count of the number of prefix objects in each table
+   */
+
+
+  prefixCount() {
+    return Object.keys(this.byCode_).length;
+  }
+  /**
+   * This is used to get all prefix objects by value.  Currently it is used
+   * to create a csv file with all prefixes and units.
+   * @returns csv string containing all prefix objects, ordered by value.
+   */
+
+
+  allPrefixesByValue() {
+    let prefixBuff = '';
+    let pList = Object.keys(this.byValue_); //pList.sort() ;
+
+    let pLen = pList.length;
+
+    for (let p = 0; p < pLen; p++) {
+      let pfx = this.getPrefixByValue(pList[p]);
+      prefixBuff += pfx.code_ + ',' + pfx.name_ + ',,' + pfx.value_ + '\r\n';
+    }
+
+    return prefixBuff;
+  }
+  /**
+   * This is used to get all prefix objects.  Currently it is used
+   * to get the objects to write to the json ucum definitions file
+   * that is used to provide prefix and unit definition objects for
+   * conversions and validations.
+   *
+   * @returns an array containing all prefix objects, ordered by code.
+   */
+
+
+  allPrefixesByCode() {
+    let prefixList = [];
+    let pList = Object.keys(this.byCode_);
+    pList.sort();
+    let pLen = pList.length;
+
+    for (let p = 0; p < pLen; p++) {
+      prefixList.push(this.getPrefixByCode(pList[p]));
+    }
+
+    return prefixList;
+  }
+  /**
+   * Adds a prefix object to the tables
+   *
+   * @param prefixObj the object to be added to the tables
+   */
+
+
+  add(prefixObj) {
+    this.byCode_[prefixObj.getCode()] = prefixObj;
+    this.byValue_[prefixObj.getValue()] = prefixObj;
+  }
+  /**
+   * Tests whether a prefix object is found for a specified code.  This
+   * is used to determine whether or not a prefix object has been created
+   * for the code.
+   *
+   * @param code the code to be used to find the prefix object
+   * @return boolean indicating whether or not a prefix object was found
+   *  for the specified code
+   */
+
+
+  isDefined(code) {
+    return this.byCode_[code] !== null && this.byCode_[code] !== undefined;
+  }
+  /**
+   * Obtains a prefix object for a specified code.
+   *
+   * @param code the code to be used to find the prefix object
+   * @return the prefix object found, or null if nothing was found
+   */
+
+
+  getPrefixByCode(code) {
+    return this.byCode_[code];
+  }
+  /**
+   * Obtains a prefix object for a specified value.
+   *
+   * @param value the value to be used to find the prefix object
+   * @return the prefix object found, or null if nothing was found
+   */
+
+
+  getPrefixByValue(value) {
+    return this.byValue_[value];
+  }
+
+} // end PrefixTablesFactory class
+// Create a singleton instance and (to preserve the existing API) an object that
+// provides that instance via getInstance().
+
+
+exports.PrefixTablesFactory = PrefixTablesFactory;
+var prefixTablesInstance = new PrefixTablesFactory();
+const PrefixTables = {
+  getInstance: function () {
+    return prefixTablesInstance;
+  }
+};
+exports.PrefixTables = PrefixTables;
+
+
+},{}],55:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+/*
+ * This class manages the special functions used by some units.
+ *
+ * @author Lee Mericle, based on java version by Gunther Schadow
+ *
+ */
+class UcumFunctions {
+  /**
+   * Constructor
+   *
+   * Creates the singleton object that contains the list of functions used
+   * to convert special units.
+   */
+  constructor() {
+    // Create the hash containing the function pairs
+    this.funcs = {}; // Celsius - convert to Celsius from kelvin and from Celsius to kelvin
+    // where kelvin is the base unit for temperature
+
+    this.funcs['cel'] = {
+      cnvTo: function (x) {
+        return x - 273.15;
+      },
+      cnvFrom: function (x) {
+        return x + 273.15;
+      }
+    }; // Fahrenheit - convert to Fahrenheit from kelvin and from Fahrenheit to
+    // kelvin - which is the base unit for temperature
+
+    this.funcs['degf'] = {
+      cnvTo: function (x) {
+        return x - 459.67;
+      },
+      cnvFrom: function (x) {
+        return x + 459.67;
+      }
+    }; // Reaumur - convert between Reaumur and Kelvin.   Because of the way the
+    // calling code in the Units class is set up (in the convertFrom method),
+    // what is given here as the convertTo function is actually the convert
+    // from method and vice versa.
+    //this.funcs['degre'] = {cnvTo   : function(x){return x + 273.15;},
+    //                    cnvFrom : function(x){return x - 273.15;}};
+
+    this.funcs['degre'] = {
+      cnvTo: function (x) {
+        return x - 273.15;
+      },
+      cnvFrom: function (x) {
+        return x + 273.15;
+      }
+    }; // pH - convert to pH from moles per liter and from moles per liter to pH
+    // where a mole is an amount of a substance (a count of particles)
+
+    this.funcs['ph'] = {
+      cnvTo: function (x) {
+        return -Math.log(x) / Math.LN10;
+      },
+      cnvFrom: function (x) {
+        return Math.pow(10, -x);
+      }
+    }; // ln - natural logarithm (base e 2.71828) - apply (cnvTo) and invert (cnvFrom)
+    // and 2ln - two times the natural logarithm
+
+    this.funcs['ln'] = {
+      cnvTo: function (x) {
+        return Math.log(x);
+      },
+      cnvFrom: function (x) {
+        return Math.exp(x);
+      }
+    };
+    this.funcs['2ln'] = {
+      cnvTo: function (x) {
+        return 2 * Math.log(x);
+      },
+      cnvFrom: function (x) {
+        return Math.exp(x / 2);
+      }
+    }; // lg - the decadic logarithm (base 10)
+
+    this.funcs['lg'] = {
+      cnvTo: function (x) {
+        return Math.log(x) / Math.LN10;
+      },
+      cnvFrom: function (x) {
+        return Math.pow(10, x);
+      }
+    };
+    this.funcs['10lg'] = {
+      cnvTo: function (x) {
+        return 10 * Math.log(x) / Math.LN10;
+      },
+      cnvFrom: function (x) {
+        return Math.pow(10, x / 10);
+      }
+    };
+    this.funcs['20lg'] = {
+      cnvTo: function (x) {
+        return 20 * Math.log(x) / Math.LN10;
+      },
+      cnvFrom: function (x) {
+        return Math.pow(10, x / 20);
+      }
+    }; // The plain text ucum units file uses '2lg'
+
+    this.funcs['2lg'] = {
+      cnvTo: function (x) {
+        return 2 * Math.log(x) / Math.LN10;
+      },
+      cnvFrom: function (x) {
+        return Math.pow(10, x / 2);
+      }
+    }; // The xml essence ucum file uses lgTimes2
+
+    this.funcs['lgtimes2'] = this.funcs['2lg']; // ld - dual logarithm (base 2)
+
+    this.funcs['ld'] = {
+      cnvTo: function (x) {
+        return Math.log(x) / Math.LN2;
+      },
+      cnvFrom: function (x) {
+        return Math.pow(2, x);
+      }
+    }; // tan - tangent
+
+    this.funcs['100tan'] = {
+      cnvTo: function (x) {
+        return Math.tan(x) * 100;
+      },
+      cnvFrom: function (x) {
+        return Math.atan(x / 100);
+      }
+    }; // the xml essence ucum file uses both 100tan and tanTimes100
+
+    this.funcs['tanTimes100'] = this.funcs['100tan']; // sqrt - square root
+
+    this.funcs['sqrt'] = {
+      cnvTo: function (x) {
+        return Math.sqrt(x);
+      },
+      cnvFrom: function (x) {
+        return x * x;
+      }
+    }; // inv - inverse
+
+    this.funcs['inv'] = {
+      cnvTo: function (x) {
+        return 1.0 / x;
+      },
+      cnvFrom: function (x) {
+        return 1.0 / x;
+      }
+    }; // homeopathic potency functions
+
+    this.funcs['hpX'] = {
+      cnvTo: function (x) {
+        return -this.funcs['lg'](x);
+      },
+      cnvFrom: function (x) {
+        return Math.pow(10, -x);
+      }
+    };
+    this.funcs['hpC'] = {
+      cnvTo: function (x) {
+        return -this.func['ln'](x) / this.funcs['ln'](100);
+      },
+      cnvFrom: function (x) {
+        return Math.pow(100, -x);
+      }
+    };
+    this.funcs['hpM'] = {
+      cnvTo: function (x) {
+        return -this.funcs['ln'](x) / this.funcs['ln'](1000);
+      },
+      cnvFrom: function (x) {
+        return Math.pow(1000, -x);
+      }
+    };
+    this.funcs['hpQ'] = {
+      cnvTo: function (x) {
+        return -this.funcs['ln'](x) / this.funcs['ln'](50000);
+      },
+      cnvFrom: function (x) {
+        return Math.pow(50000, -x);
+      }
+    };
+  } // end of constructor
+
+  /**
+   * Returns the function with the name specified
+   *
+   * @param fname name of the function to be returned
+   * @return the function with the specified name
+   * @throws an error message if the function is not found
+   */
+
+
+  forName(fname) {
+    fname = fname.toLowerCase();
+    let f = this.funcs[fname];
+    if (f === null) throw new Error(`Requested function ${fname} is not defined`);
+    return f;
+  }
+  /**
+   * Returns a flag indicating whether or not the function has been
+   * defined.
+   *
+   * @param fname name of the function in question
+   * @return true if it has been defined; false if not
+   */
+
+
+  isDefined(fname) {
+    fname = fname.toLowerCase();
+    return this.funcs[fname] !== null;
+  }
+
+} // end of UcumFunctions class
+
+
+var _default = new UcumFunctions(); // one singleton instance
+
+
+exports.default = _default;
+
+
+},{}],56:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.isNumericString = isNumericString;
+exports.isIntegerUnit = isIntegerUnit;
+exports.getSynonyms = getSynonyms;
+
+/**
+ * Internal utilities used by multiple UCUM classes.  For example,
+ * isNumericString is used by both the UnitString and UcumLhcUtils
+ * classes.  If it's in the UnitString class the UcumLhcUtils class
+ * needs to require the UnitString class.  But the checkSynonyms
+ * class is used by the UnitString class - but was in the UcumLhcUtils
+ * class.  Requiring the UcumLhcUtils class from the UnitString class
+ * made everything break (cyclical requires).
+ *
+ * So now they're here.
+ */
+
+/**
+ * This module implements internal ucum utilities.
+ *
+ * @author Lee Mericle, based on java version by Gunther Schadow
+ *
+ */
+var UnitTables = require('./unitTables.js').UnitTables;
+/**
+ * This function tests a string to see if it contains only numbers (digits,
+ * a period, leading - or +).  This code was taken from a stackoverflow
+ * solution:
+ * https://stackoverflow.com/questions/175739/is-there-a-built-in-way-in-javascript-to-check-if-a-string-is-a-valid-number/42356340#42356340
+ *
+ * @params theString
+ * @returns true if the string contains only numbers; false otherwise
+ */
+
+
+function isNumericString(theString) {
+  let num = "" + theString; //coerce num to be a string
+
+  return !isNaN(num) && !isNaN(parseFloat(num));
+} // end isNumericString
+
+/**
+ *  Checks whether a string qualifies as an integer unit.  Section 2.2.8 ("integer
+ *  numbers", says, "A positive integer number may appear in place of a simple
+ *  unit symbol.  Only a pure string of decimal digits (‘0’–‘9’) is
+ *  interpreted as a number."
+ *  Note:  This leaves open the question of whether "0" is a valid unit, since
+ *  it is positive, but you can't measure anything in units of zero.
+ * @param str the string to check
+ */
+
+
+function isIntegerUnit(str) {
+  return /^\d+$/.test(str);
+}
+/**
+ * This method accepts a term and looks for units that include it as
+ * a synonym - or that include the term in its name.
+ *
+ * @param theSyn the term to search for.  This is assumed to be
+ *  a string and not undefined.  The calling method should do any
+ *  necessary checking before calling this.
+ * @returns a hash with up to three elements:
+ *  'status' contains the status of the request, which can be 'error',
+ *    'failed' or succeeded';
+ *  'msg' which contains a message for an error or if no units were found; and
+ *  'units' which is an array that contains one array for each unit found:
+ *    the unit's csCode_, the unit's name_, and the unit's guidance_
+ *
+ */
+
+
+function getSynonyms(theSyn) {
+  let retObj = {};
+  let utab = UnitTables.getInstance();
+  let resp = {};
+  resp = utab.getUnitBySynonym(theSyn); // If we didn't get any units, transfer the status and message
+
+  if (!resp['units']) {
+    retObj['status'] = resp['status'];
+    retObj['msg'] = resp['msg'];
+  } else {
+    retObj['status'] = 'succeeded';
+    let aLen = resp['units'].length;
+    retObj['units'] = [];
+
+    for (let a = 0; a < aLen; a++) {
+      let theUnit = resp['units'][a];
+      retObj['units'][a] = {
+        'code': theUnit.csCode_,
+        'name': theUnit.name_,
+        'guidance': theUnit.guidance_
+      };
+    } // end do for all units returned
+
+  } // end if we got a units list
+
+
+  return retObj;
+} // end getSynonyms
+
+
+},{"./unitTables.js":62}],57:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ucumJsonDefs = exports.UcumJsonDefs = void 0;
+
+/**
+ * This class handles opening, reading and loading the JSON file of ucum
+ * definitions (prefixes, base units, and unit atoms).
+ *
+ * @author Lee Mericle
+ *
+ */
+var Pfx = require("./prefix.js");
+
+var PfxT = require("./prefixTables.js");
+
+var Un = require("./unit.js");
+
+var Utab = require('./unitTables.js');
+
+var unpackArray = require('./jsonArrayPack.js').unpackArray;
+
+class UcumJsonDefs {
+  /**
+   * This method loads the JSON prefix and unit objects into the prefix and
+   * unit tables.
+   *
+   * @returns nothing
+   */
+  loadJsonDefs() {
+    // requiring the file will take care of opening it for use
+    const jsonDefs = require('../data/ucumDefs.min.json');
+
+    jsonDefs.prefixes = unpackArray(jsonDefs.prefixes);
+    jsonDefs.units = unpackArray(jsonDefs.units);
+
+    if (Utab.UnitTables.getInstance().unitsCount() === 0) {
+      let pTab = PfxT.PrefixTables.getInstance();
+      let prefixes = jsonDefs["prefixes"];
+      let plen = prefixes.length;
+
+      for (let p = 0; p < plen; p++) {
+        let newPref = new Pfx.Prefix(prefixes[p]);
+        pTab.add(newPref);
+      }
+
+      let uTab = Utab.UnitTables.getInstance();
+      let units = jsonDefs["units"];
+      let ulen = units.length;
+
+      for (let u = 0; u < ulen; u++) {
+        let newUnit = new Un.Unit(units[u]);
+        uTab.addUnit(newUnit);
+      }
+    } // end if the data has not already been loaded
+
+  } // end loadJsonDefs
+
+
+} // end UcumJsonDefs class
+
+
+exports.UcumJsonDefs = UcumJsonDefs;
+var ucumJsonDefs = new UcumJsonDefs();
+exports.ucumJsonDefs = ucumJsonDefs;
+
+
+},{"../data/ucumDefs.min.json":49,"./jsonArrayPack.js":52,"./prefix.js":53,"./prefixTables.js":54,"./unit.js":60,"./unitTables.js":62}],58:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.UcumLhcUtils = void 0;
+
+var _ucumJsonDefs = require("./ucumJsonDefs.js");
+
+var intUtils_ = _interopRequireWildcard(require("./ucumInternalUtils.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+/**
+ * This class provides a single point of access to the LHC UCUM utilities
+ *
+ * @author Lee Mericle
+ *
+ */
+var Ucum = require('./config.js').Ucum;
+
+var UnitTables = require('./unitTables.js').UnitTables;
+
+var UnitString = require('./unitString.js').UnitString;
+
+/**
+ * UCUM external utilities class
+ */
+class UcumLhcUtils {
+  /**
+   * Constructor.  This loads the json prefix and unit definitions if
+   * they haven't been loaded already and creates itself as a singleton object.
+   *
+   */
+  constructor() {
+    if (UnitTables.getInstance().unitsCount() === 0) {
+      // Load the prefix and unit objects
+      _ucumJsonDefs.ucumJsonDefs.loadJsonDefs();
+    } // Get the UnitString parser that will be used with this instance
+    // of the LHC Utilities
+
+
+    this.uStrParser_ = UnitString.getInstance();
+  } // end constructor
+
+  /**
+   * This method calls the useHTMLInMessages method on the UnitString
+   * object.  It should be called by web applications that use
+   * these utilities.
+   *
+   * @param use flag indicating whether or not to use the braces message;
+   *  defaults to true
+   */
+
+
+  useHTMLInMessages(use) {
+    if (use === undefined) use = true;
+    this.uStrParser_.useHTMLInMessages(use);
+  }
+  /**
+   * This method calls the useBraceMsgForEachString method on the UnitString
+   * object.  It should be called by web applications where unit
+   * strings are validated individually (as opposed to validating a whole
+   * file of unit strings).
+   *
+   * @param use flag indicating whether or not to use the braces message;
+   *  defaults to true
+   */
+
+
+  useBraceMsgForEachString(use) {
+    if (use === undefined) use = true;
+    this.uStrParser_.useBraceMsgForEachString(use);
+  }
+  /**
+   * This method validates a unit string.  It first checks to see if the
+   * string passed in is a unit code that is found in the unit codes table.
+   * If it is not found it parses the string to see if it resolves to a
+   * valid unit string.
+   *
+   * If a valid unit cannot be found, the string is tested for some common
+   * errors, such as missing brackets or a missing multiplication operator.
+   * If found, the error is reported in the messages array that is returned.
+   *
+   * If a valid unit cannot be found and an error cannot be discerned, this
+   * may return, if requested, a list of suggested units in the messages
+   * array that is returned.  Suggestions are based on matching the expression
+   * with unit names and synonyms.
+   *
+   * @param uStr the string to be validated
+   * @param suggest a boolean to indicate whether or not suggestions are
+   *  requested for a string that cannot be resolved to a valid unit;
+   *  true indicates suggestions are wanted; false indicates they are not,
+   *  and is the default if the parameter is not specified;
+   * @param valConv a string indicating if this validation request was initiated
+   *  by a validation task ('validate') or a conversion task ('convert'),
+   *  used only for the demo code, and the default is 'Validator' if the
+   *  parameter is not specified;
+   * @returns an object with five properties:
+   *  'status' will be 'valid' (the uStr is a valid UCUM code), 'invalid'
+   *     (the uStr is not a valid UCUM code, and substitutions or
+   *     suggestions may or may not be returned, depending on what was
+   *     requested and found); or 'error' (an input or programming error
+   *     occurred);
+   *  'ucumCode' the valid ucum code, which may differ from what was passed
+   *    in (e.g., if 'Gauss' is passed in, this will contain 'G') OR null if
+   *    the string was flagged as invalid or an error occurred;
+   *  'msg' is an array of one or more messages, if the string is invalid or
+   *        an error occurred, indicating the problem, or an explanation of a
+   *        substitution such as the substitution of 'G' for 'Gauss', or
+   *        an empty array if no messages were generated;
+   *  'unit' which is null if no unit is found, or a hash for a unit found:
+   *    'code' is the unit's ucum code (G in the above example;
+   *    'name' is the unit's name (Gauss in the above example); and
+   *    'guidance' is the unit's guidance/description data; and
+   *  'suggestions' if suggestions were requested and found, this is an array
+   *     of one or more hash objects.  Each hash contains three elements:
+   *     'msg' which is a message indicating what part of the uStr input
+   *        parameter the suggestions are for;
+   *     'invalidUnit' which is the unit expression the suggestions are
+   *        for; and
+   *     'units' which is an array of data for each suggested unit found.
+   *        Each array will contain the unit code, the unit name and the
+   *        unit guidance (if any).
+   *     If no suggestions were requested and found, this property is not
+   *     returned.
+   */
+
+
+  validateUnitString(uStr, suggest, valConv) {
+    if (suggest === undefined) suggest = false;
+    if (valConv === undefined) valConv = 'validate';
+    let resp = this.getSpecifiedUnit(uStr, valConv, suggest);
+    let theUnit = resp['unit'];
+    let retObj = {};
+
+    if (!theUnit) {
+      retObj = {
+        'status': !resp['origString'] || resp['origString'] === null ? 'error' : 'invalid',
+        'ucumCode': null
+      };
+    } else {
+      retObj = {
+        'status': resp['origString'] === uStr ? 'valid' : 'invalid',
+        'ucumCode': resp['origString'],
+        'unit': {
+          'code': theUnit.csCode_,
+          'name': theUnit.name_,
+          'guidance': theUnit.guidance_
+        }
+      };
+    }
+
+    if (resp['suggestions']) {
+      retObj['suggestions'] = resp['suggestions'];
+    }
+
+    retObj['msg'] = resp['retMsg'];
+    return retObj;
+  } // end validateUnitString
+
+  /**
+   * This method converts one unit to another
+   *
+   * @param fromUnitCode the unit code/expression/string of the unit to be converted
+   * @param fromVal the number of "from" units to be converted to "to" units
+   * @param toUnitCode the unit code/expression/string of the unit that the from
+   *  field is to be converted to
+   * @param suggest a boolean to indicate whether or not suggestions are
+   *  requested for a string that cannot be resolved to a valid unit;
+   *  true indicates suggestions are wanted; false indicates they are not,
+   *  and is the default if the parameter is not specified;
+   * @param molecularWeight the molecular weight of the substance in question
+   *  when a conversion is being requested from mass to moles and vice versa.
+   *  This is required when one of the units represents a value in moles.  It is
+   *  ignored if neither unit includes a measurement in moles.
+   * @returns a hash with six elements:
+   *  'status' that will be: 'succeeded' if the conversion was successfully
+   *     calculated; 'failed' if the conversion could not be made, e.g., if
+   *     the units are not commensurable; or 'error' if an error occurred;
+   *  'toVal' the numeric value indicating the conversion amount, or null
+   *     if the conversion failed (e.g., if the units are not commensurable);
+   *  'msg' is an array message, if the string is invalid or an error occurred,
+   *        indicating the problem, or an explanation of a substitution such as
+   *        the substitution of 'G' for 'Gauss', or an empty array if no
+   *        messages were generated;
+   *  'suggestions' if suggestions were requested and found, this is a hash
+   *     that contains at most two elements:
+   *     'from' which, if the fromUnitCode input parameter or one or more of
+   *       its components could not be found, is an array one or more hash
+   *       objects.  Each hash contains three elements:
+   *         'msg' which is a message indicating what unit expression the
+   *            suggestions are for;
+   *         'invalidUnit' which is the unit expression the suggestions
+   *            are for; and
+   *         'units' which is an array of data for each suggested unit found.
+   *            Each array will contain the unit code, the unit name and the
+   *            unit guidance (if any).
+   *       If no suggestions were found for the fromUnitCode this element
+   *       will not be included.
+   *     'to' which, if the "to" unit expression or one or more of its
+   *       components could not be found, is an array one or more hash objects.  Each hash
+   *       contains three elements:
+   *         'msg' which is a message indicating what toUnitCode input
+   *            parameter the suggestions are for;
+   *         'invalidUnit' which is the unit expression the suggestions
+   *            are for; and
+   *         'units' which is an array of data for each suggested unit found.
+   *            Each array will contain the unit code, the unit name and the
+   *            unit guidance (if any).
+   *       If no suggestions were found for the toUnitCode this element
+   *       will not be included.
+   *    No 'suggestions' element will be included in the returned hash
+   *    object if none were found, whether or not they were requested.
+   *  'fromUnit' the unit object for the fromUnitCode passed in; returned
+   *     in case it's needed for additional data from the object; and
+   *  'toUnit' the unit object for the toUnitCode passed in; returned
+   *     in case it's needed for additional data from the object.
+   */
+
+
+  convertUnitTo(fromUnitCode, fromVal, toUnitCode, suggest, molecularWeight) {
+    if (suggest === undefined) suggest = false;
+    if (molecularWeight === undefined) molecularWeight = null;
+    let returnObj = {
+      'status': 'failed',
+      'toVal': null,
+      'msg': []
+    };
+
+    if (fromUnitCode) {
+      fromUnitCode = fromUnitCode.trim();
+    }
+
+    if (!fromUnitCode || fromUnitCode == '') {
+      returnObj['status'] = 'error';
+      returnObj['msg'].push('No "from" unit expression specified.');
+    }
+
+    if (fromVal === null || isNaN(fromVal) || typeof fromVal !== 'number' && !intUtils_.isNumericString(fromVal)) {
+      returnObj['status'] = 'error';
+      returnObj['msg'].push('No "from" value, or an invalid "from" value, ' + 'was specified.');
+    }
+
+    if (toUnitCode) {
+      toUnitCode = toUnitCode.trim();
+    }
+
+    if (!toUnitCode || toUnitCode == '') {
+      returnObj['status'] = 'error';
+      returnObj['msg'].push('No "to" unit expression specified.');
+    }
+
+    if (returnObj['status'] !== 'error') {
+      try {
+        let fromUnit = null;
+        let parseResp = this.getSpecifiedUnit(fromUnitCode, 'convert', suggest);
+        fromUnit = parseResp['unit'];
+        if (parseResp['retMsg']) returnObj['msg'] = returnObj['msg'].concat(parseResp['retMsg']);
+
+        if (parseResp['suggestions']) {
+          returnObj['suggestions'] = {};
+          returnObj['suggestions']['from'] = parseResp['suggestions'];
+        }
+
+        if (!fromUnit) {
+          returnObj['msg'].push(`Unable to find a unit for ${fromUnitCode}, ` + `so no conversion could be performed.`);
+        }
+
+        let toUnit = null;
+        parseResp = this.getSpecifiedUnit(toUnitCode, 'convert', suggest);
+        toUnit = parseResp['unit'];
+        if (parseResp['retMsg']) returnObj['msg'] = returnObj['msg'].concat(parseResp['retMsg']);
+
+        if (parseResp['suggestions']) {
+          if (!returnObj['suggestions']) returnObj['suggestions'] = {};
+          returnObj['suggestions']['to'] = parseResp['suggestions'];
+        }
+
+        if (!toUnit) {
+          returnObj['msg'].push(`Unable to find a unit for ${toUnitCode}, ` + `so no conversion could be performed.`);
+        }
+
+        if (fromUnit && toUnit) {
+          try {
+            // if no molecular weight was specified perform a normal conversion
+            if (!molecularWeight) {
+              returnObj['toVal'] = toUnit.convertFrom(fromVal, fromUnit);
+            } else {
+              if (fromUnit.moleExp_ !== 0 && toUnit.moleExp_ !== 0) {
+                throw new Error('A molecular weight was specified ' + 'but a mass <-> mole conversion cannot be executed for two ' + 'mole-based units.  No conversion was attempted.');
+              }
+
+              if (fromUnit.moleExp_ === 0 && toUnit.moleExp_ === 0) {
+                throw new Error('A molecular weight was specified ' + 'but a mass <-> mole conversion cannot be executed when ' + 'neither unit is mole-based.  No conversion was attempted.');
+              }
+
+              if (!fromUnit.isMoleMassCommensurable(toUnit)) {
+                throw new Error(`Sorry.  ${fromUnitCode} cannot be ` + `converted to ${toUnitCode}.`);
+              } // if the "from" unit is a mole-based unit, assume a mole to mass
+              // request
+
+
+              if (fromUnit.moleExp_ !== 0) {
+                returnObj['toVal'] = fromUnit.convertMolToMass(fromVal, toUnit, molecularWeight);
+              } // else the "to" unit must be the mole-based unit, so assume a
+              // mass to mole request
+              else {
+                  returnObj['toVal'] = fromUnit.convertMassToMol(fromVal, toUnit, molecularWeight);
+                }
+            } // end if a molecular weight was specified
+            // if an error hasn't been thrown - either from convertFrom or here,
+            // set the return object to show success
+
+
+            returnObj['status'] = 'succeeded';
+            returnObj['fromUnit'] = fromUnit;
+            returnObj['toUnit'] = toUnit;
+          } catch (err) {
+            returnObj['status'] = 'failed';
+            returnObj['msg'].push(err.message);
+          }
+        } // end if we have the from and to units
+
+      } catch (err) {
+        if (err.message == Ucum.needMoleWeightMsg_) returnObj['status'] = 'failed';else returnObj['status'] = 'error';
+        returnObj['msg'].push(err.message);
+      }
+    }
+
+    return returnObj;
+  } // end convertUnitTo
+
+  /**
+   * This method accepts a term and looks for units that include it as
+   * a synonym - or that include the term in its name.
+   *
+   * @param theSyn the term to search for
+   * @returns a hash with up to three elements:
+   *  'status' contains the status of the request, which can be 'error',
+   *    'failed' or succeeded';
+   *  'msg' which contains a message for an error or if no units were found; and
+   *  'units' which is an array that contains one hash for each unit found:
+   *    'code' is the unit's csCode_
+   *    'name' is the unit's name_
+   *    'guidance' is the unit's guidance_
+   *
+   */
+
+
+  checkSynonyms(theSyn) {
+    let retObj = {};
+
+    if (theSyn === undefined || theSyn === null) {
+      retObj['status'] = 'error';
+      retObj['msg'] = 'No term specified for synonym search.';
+    } else {
+      retObj = intUtils_.getSynonyms(theSyn);
+    } // end if a search synonym was supplied
+
+
+    return retObj;
+  } // end checkSynonyms
+
+  /**
+   * This method parses a unit string to get (or try to get) the unit
+   * represented by the string.  It returns an error message if no string was specified
+   * or if any errors were encountered trying to get the unit.
+   *
+   * @param uName the expression/string representing the unit
+   * @param valConv indicates what type of request this is for - a request to
+   *  validate (pass in 'validate') or a request to convert (pass in 'convert')
+   * @param suggest a boolean to indicate whether or not suggestions are
+   *  requested for a string that cannot be resolved to a valid unit;
+   *  true indicates suggestions are wanted; false indicates they are not,
+   *  and is the default if the parameter is not specified;
+   * @returns a hash containing:
+   *   'unit' the unit object (or null if there were problems creating the
+   *     unit);
+   *   'origString' the possibly updated unit string passed in;
+   *   'retMsg' an array of user messages (informational, error or warning) if
+   *     any were generated (IF any were generated, otherwise will be an
+   *     empty array); and
+   *  'suggestions' is an array of 1 or more hash objects.  Each hash
+   *     contains three elements:
+   *       'msg' which is a message indicating what unit expression the
+   *          suggestions are for;
+   *       'invalidUnit' which is the unit expression the suggestions are
+   *          for; and
+   *       'units' which is an array of data for each suggested unit found.
+   *          Each array will contain the unit code, the unit name and the
+   *          unit guidance (if any).
+   *   The return hash will not contain a suggestions array if a valid unit
+   *   was found or if suggestions were not requested and found.
+   */
+
+
+  getSpecifiedUnit(uName, valConv, suggest) {
+    if (suggest === undefined) suggest = false;
+    let retObj = {};
+    retObj['retMsg'] = [];
+
+    if (!uName) {
+      retObj['retMsg'].push('No unit string specified.');
+    } else {
+      let utab = UnitTables.getInstance();
+      uName = uName.trim(); // go ahead and just try using the name as the code.  This may or may not
+      // work, but if it does, it cuts out a lot of parsing.
+
+      let theUnit = utab.getUnitByCode(uName); // If we found it, set the returned unit string to what was passed in;
+      // otherwise try parsing as a unit string
+
+      if (theUnit) {
+        retObj['unit'] = theUnit;
+        retObj['origString'] = uName;
+      } else {
+        try {
+          let resp = this.uStrParser_.parseString(uName, valConv, suggest);
+          retObj['unit'] = resp[0];
+          retObj['origString'] = resp[1];
+          if (resp[2]) retObj['retMsg'] = resp[2];
+          retObj['suggestions'] = resp[3];
+        } catch (err) {
+          console.log(`Unit requested for unit string ${uName}.` + 'request unsuccessful; error thrown = ' + err.message);
+          retObj['retMsg'].unshift(`${uName} is not a valid unit.  ` + `${err.message}`);
+        }
+      } // end if the unit was not found as a unit name
+
+    } // end if a unit expression was specified
+
+
+    return retObj;
+  } // end getSpecifiedUnit
+
+  /**
+   * This method retrieves a list of units commensurable, i.e., that can be
+   * converted from and to, a specified unit.  Returns an error if the "from"
+   * unit cannot be found.
+   *
+   * @param fromName the name/unit string of the "from" unit
+   * @returns an array containing two elements;
+   *   first element is the list of commensurable units if any were found
+   *   second element is an error message if the "from" unit is not found
+   */
+
+
+  commensurablesList(fromName) {
+    let retMsg = [];
+    let commUnits = null;
+    let parseResp = this.getSpecifiedUnit(fromName, 'validate', false);
+    let fromUnit = parseResp['unit'];
+    if (parseResp['retMsg'].length > 0) retMsg = parseResp['retMsg'];
+
+    if (!fromUnit) {
+      retMsg.push(`Could not find unit ${fromName}.`);
+    } else {
+      let dimVec = null;
+      let fromDim = fromUnit.getProperty('dim_');
+
+      if (!fromDim) {
+        retMsg.push('No commensurable units were found for ' + fromName);
+      } else {
+        try {
+          dimVec = fromDim.getProperty('dimVec_');
+        } catch (err) {
+          retMsg.push(err.message);
+          if (err.message === "Dimension does not have requested property(dimVec_)") dimVec = null;
+        }
+
+        if (dimVec) {
+          let utab = UnitTables.getInstance();
+          commUnits = utab.getUnitsByDimension(dimVec);
+        }
+      } // end if the from unit has a dimension vector
+
+    } // end if we found a "from" unit
+
+
+    return [commUnits, retMsg];
+  } // end commensurablesList
+
+
+} // end UcumLhcUtils class
+
+/**
+ *  This function exists ONLY until the original UcumLhcUtils constructor
+ *  is called for the first time.  It's defined here in case getInstance
+ *  is called before the constructor.   This calls the constructor.
+ *
+ *  The constructor redefines the getInstance function to return the
+ *  singleton UcumLhcUtils object.  This is based on the UnitTables singleton
+ *  implementation; see more detail in the UnitTables constructor description.
+ *
+ *  NO LONGER TRUE - not implemented as a singleton.  This method retained to
+ *  avoid problems with calls to it that exist throughout the code.
+ *
+ *  @return the (formerly singleton) UcumLhcUtils object.
+ */
+
+
+exports.UcumLhcUtils = UcumLhcUtils;
+
+UcumLhcUtils.getInstance = function () {
+  return new UcumLhcUtils();
+};
+
+
+},{"./config.js":50,"./ucumInternalUtils.js":56,"./ucumJsonDefs.js":57,"./unitString.js":61,"./unitTables.js":62}],59:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.UnitTables = exports.UcumLhcUtils = exports.Ucum = void 0;
+
+/**
+ * This exports definitions for ucum classes that need references to them
+ * available to the demo code.  The actual code will be in the ucumPkg
+ * library found in the dist directory.  This file provides the hooks to
+ * those classes within the library.
+ */
+var Ucum = require("./config.js").Ucum;
+
+exports.Ucum = Ucum;
+
+var UcumLhcUtils = require("./ucumLhcUtils.js").UcumLhcUtils;
+
+exports.UcumLhcUtils = UcumLhcUtils;
+
+var UnitTables = require("./unitTables.js").UnitTables;
+
+exports.UnitTables = UnitTables;
+
+
+},{"./config.js":50,"./ucumLhcUtils.js":58,"./unitTables.js":62}],60:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Unit = void 0;
+
+var _ucumFunctions = _interopRequireDefault(require("./ucumFunctions.js"));
+
+var intUtils_ = _interopRequireWildcard(require("./ucumInternalUtils.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * This class represents one unit of measure.  It includes
+ * functions to cover constructor, accessor, and assignment tasks as
+ * well as operators to calculate multiplication, division and raising
+ * to a power.
+ *
+ * @author Lee Mericle, based on java version by Gunther Schadow
+ *
+ */
+var Ucum = require('./config.js').Ucum;
+
+var Dimension = require('./dimension.js').Dimension;
+
+var UnitTables;
+
+var isInteger = require("is-integer");
+
+class Unit {
+  /**
+   * Constructor.
+   *
+   * @param attrs an optional parameter that may be:
+   *  a string, which is parsed by the unit parser, which creates
+   *  the unit from the parsed string; or
+   *  a hash containing all or some values for the attributes of
+   *  the unit, where the keys are the attribute names, without a
+   *  trailing underscore, e.g., name instead of name_; or
+   *  null, in which case an empty hash is created and used to
+   *  set the values forthe attributes.
+   *  If a hash (empty or not) is used, attributes for which no value
+   *  is specified are assigned a default value.
+   *
+   */
+  constructor(attrs = {}) {
+    // Process the attrs hash passed in, which may be empty.
+    // Create and assign values (from the attrs hash or defaults) to all
+    // attributes.  From Class Declarations in Understanding ECMAScript,
+    // https://leanpub.com/understandinges6/read/#leanpub-auto-class-declarations,
+    //   "Own properties, properties that occur on the instance rather than the
+    //    prototype, can only be created inside of a class constructor or method.
+    //    It's recommended to create all possible own properties inside of the
+    //    constructor function so there's a single place that's responsible for
+    //    all of them."
+
+    /*
+     * Flag indicating whether or not this is a base unit
+     */
+    this.isBase_ = attrs['isBase_'] || false;
+    /*
+     * The unit name, e.g., meter
+     */
+
+    this.name_ = attrs['name_'] || '';
+    /*
+     * The unit's case-sensitive code, e.g., m
+     */
+
+    this.csCode_ = attrs['csCode_'] || '';
+    /*
+     * The unit's case-insensitive code, e.g., M
+     */
+
+    this.ciCode_ = attrs['ciCode_'] || '';
+    /*
+     * The unit's property, e.g., length
+     */
+
+    this.property_ = attrs['property_'] || '';
+    /*
+     * The magnitude of the unit, e.g., 3600/3937 for a yard,
+     * where a yard - 3600/3973 * m(eter).  The Dimension
+     * property specifies the meter - which is the unit on which
+     * a yard is based, and this magnitude specifies how to figure
+     * this unit based on the base unit.
+     */
+
+    this.magnitude_ = attrs['magnitude_'] || 1;
+    /*
+     * The Dimension object of the unit
+     */
+
+    if (attrs['dim_'] === undefined || attrs['dim_'] === null) {
+      this.dim_ = new Dimension();
+    } // When the unit data stored in json format is reloaded, the dimension data
+    // is recognized as a a hash, not as a Dimension object.
+    else if (attrs['dim_']['dimVec_'] !== undefined) {
+        this.dim_ = new Dimension(attrs['dim_']['dimVec_']);
+      } else if (attrs['dim_'] instanceof Dimension) {
+        this.dim_ = attrs['dim_'];
+      } else if (attrs['dim_'] instanceof Array || isInteger(attrs['dim_'])) {
+        this.dim_ = new Dimension(attrs['dim_']);
+      } else {
+        this.dim_ = new Dimension();
+      }
+    /*
+     * The print symbol of the unit, e.g., m
+     */
+
+
+    this.printSymbol_ = attrs['printSymbol_'] || null;
+    /*
+     * The class of the unit, where given, e.g., dimless
+     */
+
+    this.class_ = attrs['class_'] || null;
+    /*
+     * A flag indicating whether or not the unit is metric
+     */
+
+    this.isMetric_ = attrs['isMetric_'] || false;
+    /*
+     * The "variable" - which I think is used only for base units
+     * The symbol for the variable as used in equations, e.g., s for distance
+     */
+
+    this.variable_ = attrs['variable_'] || null; // comes from 'dim' in XML
+
+    /*
+     * The conversion function
+     */
+
+    this.cnv_ = attrs['cnv_'] || null;
+    /*
+     * The conversion prefix
+     */
+
+    this.cnvPfx_ = attrs['cnvPfx_'] || 1;
+    /*
+     * Flag indicating whether or not this is a "special" unit, i.e., is
+     * constructed using a function specific to the measurement, e.g.,
+     * fahrenheit and celsius
+     */
+
+    this.isSpecial_ = attrs['isSpecial_'] || false;
+    /*
+     * Flag indicating whether or not this is an arbitrary unit
+     */
+
+    this.isArbitrary_ = attrs['isArbitrary_'] || false;
+    /*
+     * Integer indicating what level of exponent applies to a mole-based portion
+     * of the unit.  So, for the unit "mol", this will be 1.  For "mol2" this
+     * will be 2.  For "1/mol" this will be -1.  Any unit that does not include
+     * a mole will have a 0 in this field.  This is used to determine
+     * commensurability for mole<->mass conversions.
+     */
+
+    this.moleExp_ = attrs['moleExp_'] || 0;
+    /*
+     * Added when added LOINC list of units
+     * synonyms are used by the autocompleter to enhance lookup capabilities
+     * while source says where the unit first shows up.  Current sources are
+     * UCUM - which are units from the unitsofmeasure.org list and LOINC -
+     * which are units from the LOINC data.
+     */
+
+    this.synonyms_ = attrs['synonyms_'] || null;
+    this.source_ = attrs['source_'] || null;
+    this.loincProperty_ = attrs['loincProperty_'] || null;
+    this.category_ = attrs['category_'] || null;
+    this.guidance_ = attrs['guidance_'] || null;
+    /*
+     * Used to compute dimension; storing for now until I complete
+     * unit definition parsing
+     */
+
+    /*
+     * Case sensitive (cs) and case insensitive (ci) base unit strings,
+     * includes exponent and prefix if applicable - specified in
+     * <value Unit=x UNIT=X value="nnn">nnn</value> -- the unit part --
+     * in the ucum-essence.xml file, and may be specified by a user
+     * when requesting conversion or validation of a unit string.  The
+     * magnitude (base factor) is used with this to determine the new unit.
+     * For example, a Newton (unit code N) is created from the string
+     * kg.m/s2, and the value of 1 (base factor defined below). An hour
+     * (unit code h) is created from the unit min (minute) with a value
+     * of 60.
+     */
+
+    this.csUnitString_ = attrs['csUnitString_'] || null;
+    this.ciUnitString_ = attrs['ciUnitString_'] || null;
+    /*
+     * String and numeric versions of factor applied to unit specified in
+     * <value Unit=x UNIT=X value="nnn">nnn</value> -- the value part
+     */
+
+    this.baseFactorStr_ = attrs['baseFactorStr_'] || null;
+    this.baseFactor_ = attrs['baseFactor_'] || null;
+    /*
+     * Flag used to indicate units where the definition process failed
+     * when parsing units from the official units definitions file
+     * (currently using the ucum-essence.xml file).  We keep these
+     * so that we can use them to at least validate them as valid
+     * units, but we don't try to convert them.   This is temporary
+     * and only to account for instances where the code does not
+     * take into account various special cases in the xml file.
+     *
+     * This is NOT used when trying to validate a unit string
+     * submitted during a conversion or validation attempt.
+     */
+
+    this.defError_ = attrs['defError_'] || false;
+  } // end constructor
+
+  /**
+   * Assign the unity (= dimensionless unit 1) to this unit.
+   *
+   * @return this unit
+   */
+
+
+  assignUnity() {
+    this.name_ = "";
+    this.magnitude_ = 1;
+    if (!this.dim_) this.dim_ = new Dimension();
+    this.dim_.assignZero();
+    this.cnv_ = null;
+    this.cnvPfx_ = 1;
+    return this;
+  } // end assignUnity
+
+  /**
+   * This assigns one or more values, as provided in the hash passed in,
+   * to this unit.
+   *
+   * @param vals hash of values to be assigned to the attributes
+   *        specified by the key(s), which should be the attribute
+   *        name without the trailing underscore, e.g., name instead
+   *        of name_.
+   * @return nothing
+   */
+
+
+  assignVals(vals) {
+    for (let key in vals) {
+      let uKey = !key.charAt(key.length - 1) === '_' ? key + '_' : key;
+      if (this.hasOwnProperty(uKey)) this[uKey] = vals[key];else throw new Error(`Parameter error; ${key} is not a property of a Unit`);
+    }
+  } // end assignVals
+
+  /**
+   * This creates a clone of this unit.
+   *
+   * @return the clone
+   */
+
+
+  clone() {
+    let retUnit = new Unit();
+    Object.getOwnPropertyNames(this).forEach(val => {
+      if (val === 'dim_') {
+        if (this['dim_']) retUnit['dim_'] = this['dim_'].clone();else retUnit['dim_'] = null;
+      } else retUnit[val] = this[val];
+    });
+    return retUnit;
+  } // end clone
+
+  /**
+   * This assigns all properties of a unit passed to it to this unit.
+   *
+   * @param unit2 the unit whose properties are to be assigned to this one.
+   * @return nothing; this unit is updated
+   */
+
+
+  assign(unit2) {
+    Object.getOwnPropertyNames(unit2).forEach(val => {
+      if (val === 'dim_') {
+        if (unit2['dim_']) this['dim_'] = unit2['dim_'].clone();else this['dim_'] = null;
+      } else {
+        this[val] = unit2[val];
+      }
+    });
+  } // end assign
+
+  /**
+   * This determines whether or not object properties of the unit
+   * passed in are equal to the corresponding properties in this unit.
+   * The following properties are the only ones checked:
+   *   magnitude_, dim_, cnv_ and cnvPfx_
+   *
+   * @param unit2 the unit whose properties are to be checked.
+   * @return boolean indicating whether or not they match
+   */
+
+
+  equals(unit2) {
+    return this.magnitude_ === unit2.magnitude_ && this.cnv_ === unit2.cnv_ && this.cnvPfx_ === unit2.cnvPfx_ && (this.dim_ === null && unit2.dim_ === null || this.dim_.equals(unit2.dim_));
+  } // end equals
+
+  /**
+   * This method compares every attribute of two objects to determine
+   * if they all match.
+   *
+   * @param unit2 the unit that is to be compared to this unit
+   * @return boolean indicating whether or not every attribute matches
+   */
+
+
+  fullEquals(unit2) {
+    let thisAttr = Object.keys(this).sort();
+    let u2Attr = Object.keys(unit2).sort();
+    let keyLen = thisAttr.length;
+    let match = keyLen === u2Attr.length; // check each attribute.   Dimension objects have to checked using
+    // the equals function of the Dimension class.
+
+    for (let k = 0; k < keyLen && match; k++) {
+      if (thisAttr[k] === u2Attr[k]) {
+        if (thisAttr[k] === 'dim_') match = this.dim_.equals(unit2.dim_);else match = this[thisAttr[k]] === unit2[thisAttr[k]];
+      } else match = false;
+    } // end do for each key and attribute
+
+
+    return match;
+  } // end of fullEquals
+
+  /**
+   * This returns the value of the property named by the parameter
+   * passed in.
+   *
+   * @param propertyName name of the property to be returned, with
+   *        or without the trailing underscore.
+   * @return the requested property, if found for this unit
+   * @throws an error if the property is not found for this unit
+   */
+
+
+  getProperty(propertyName) {
+    let uProp = propertyName.charAt(propertyName.length - 1) === '_' ? propertyName : propertyName + '_';
+    return this[uProp];
+  } // end getProperty
+
+  /**
+   * Takes a measurement consisting of a number of units and a unit and returns
+   * the equivalent number of this unit.  So, 15 mL would translate
+   * to 1 tablespoon if this object is a tablespoon.
+   *
+   * Note that the number returned may not be what is normally expected.
+   * For example, converting 10 Celsius units to Fahrenheit would "normally"
+   * return a value of 50.   But in this case you'll get back something like
+   * 49.99999999999994.
+   *
+   * If either unit is an arbitrary unit an exception is raised.
+   *
+   * @param num the magnitude for the unit to be translated (e.g. 15 for 15 mL)
+   * @param fromUnit the unit to be translated to one of this type (e.g. a mL unit)
+   *
+   * @return the number of converted units (e.g. 1 for 1 tablespoon)
+   * @throws an error if the dimension of the fromUnit differs from this unit's
+   * dimension
+   */
+
+
+  convertFrom(num, fromUnit) {
+    let newNum = 0.0;
+    if (this.isArbitrary_) throw new Error(`Attempt to convert arbitrary unit ${this.name_}`);
+    if (fromUnit.isArbitrary_) throw new Error(`Attempt to convert to arbitrary unit ${fromUnit.name_}`); // reject request if both units have dimensions that are not equal
+
+    if (fromUnit.dim_ && this.dim_ && !fromUnit.dim_.equals(this.dim_)) {
+      // check first to see if a mole<->mass conversion is appropriate
+      if (this.isMoleMassCommensurable(fromUnit)) {
+        throw new Error(Ucum.needMoleWeightMsg_);
+      } else {
+        throw new Error(`Sorry.  ${fromUnit.csCode_} cannot be converted ` + `to ${this.csCode_}.`);
+      }
+    } // reject request if there is a "from" dimension but no "to" dimension
+
+
+    if (fromUnit.dim_ && (!this.dim_ || this.dim_.isNull())) {
+      throw new Error(`Sorry.  ${fromUnit.csCode_} cannot be converted ` + `to ${this.csCode_}.`);
+    } // reject request if there is a "to" dimension but no "from" dimension
+
+
+    if (this.dim_ && (!fromUnit.dim_ || fromUnit.dim_.isNull())) {
+      throw new Error(`Sorry.  ${fromUnit.csCode_} cannot be converted ` + `to ${this.csCode_}.`);
+    }
+
+    let fromCnv = fromUnit.cnv_;
+    let fromMag = fromUnit.magnitude_; // If the same conversion function is specified for both units, which
+    // includes neither unit having a conversion function, multiply the
+    // "from" unit's magnitude by the number passed in and then divide
+    // that result by this unit's magnitude.  Do this for units with
+    // and without dimension vectors.  PROBLEM with 2 non-commensurable
+    // units with no dimension vector or function, e.g., byte to mol
+
+    if (fromCnv === this.cnv_) {
+      newNum = num * fromMag / this.magnitude_;
+    } // else use a function to get the number to be returned
+    else {
+        let x = 0.0;
+
+        if (fromCnv != null) {
+          // turn num * fromUnit.magnitude into its ratio scale equivalent,
+          // e.g., convert Celsius to Kelvin
+          let fromFunc = _ucumFunctions.default.forName(fromCnv);
+
+          x = fromFunc.cnvFrom(num * fromUnit.cnvPfx_) * fromMag; //x = fromFunc.cnvFrom(num * fromMag) * fromUnit.cnvPfx_;
+        } else {
+          x = num * fromMag;
+        }
+
+        if (this.cnv_ != null) {
+          // turn mag * origUnit on ratio scale into a non-ratio unit,
+          // e.g. convert Kelvin to Fahrenheit
+          let toFunc = _ucumFunctions.default.forName(this.cnv_);
+
+          newNum = toFunc.cnvTo(x / this.magnitude_) / this.cnvPfx_;
+        } else {
+          newNum = x / this.magnitude_;
+        }
+      } // end if either unit has a conversion function
+
+
+    return newNum;
+  } // end convertFrom
+
+  /**
+   * Takes a number and a target unit and returns the number for a measurement
+   * of this unit that corresponds to the number of the target unit passed in.
+   * So, 1 tablespoon (where this unit represents a tablespoon) would translate
+   * to 15 mL.
+   *
+   * See the note on convertFrom about return values.
+   *
+   * @param mag the magnitude for this unit (e.g. 1 for 1 tablespoon)
+   * @param toUnit the unit to which this unit is to be translated
+   *  (e.g. an mL unit)
+   *
+   * @return the converted number value (e.g. 15 mL)
+   * @throws an error if the dimension of the toUnit differs from this unit's
+   *   dimension
+   */
+
+
+  convertTo(num, toUnit) {
+    return toUnit.convertFrom(num, this);
+  } // end convertTo
+
+  /**
+   * Takes a given number of this unit returns the number of this unit
+   * if it is converted into a coherent unit.  Does not change this unit.
+   *
+   * If this is a coherent unit already, just gives back the number
+   * passed in.
+   *
+   * @param num the number for the coherent version of this unit
+   * @return the number for the coherent version of this unit
+   */
+
+
+  convertCoherent(num) {
+    // convert mag' * u' into canonical number * u on ratio scale
+    if (this.cnv_ !== null) num = this.cnv_.f_from(num / this.cnvPfx_) * this.magnitude_;
+    return num;
+  } // end convertCoherent
+
+  /**
+   * Mutates this unit into a coherent unit and converts a given number of
+   * units to the appropriate value for this unit as a coherent unit
+   *
+   * @param num the number for this unit before conversion
+   * @return the number of this unit after conversion
+   * @throws an error if the dimensions differ
+   */
+
+
+  mutateCoherent(num) {
+    // convert mu' * u' into canonical mu * u on ratio scale
+    num = this.convertCoherent(num); // mutate to coherent unit
+
+    this.magnitude_ = 1;
+    this.cnv_ = null;
+    this.cnvPfx_ = 1;
+    this.name_ = ""; // build a name as a term of coherent base units
+    // This is probably ALL WRONG and a HORRIBLE MISTAKE
+    // but until we figure out what the heck the name being
+    // built here really is, it will have to stay.
+
+    for (let i = 0, max = Dimension.getMax(); i < max; i++) {
+      let elem = this.dim_.getElementAt(i);
+
+      let tabs = this._getUnitTables();
+
+      let uA = tabs.getUnitsByDimension(new Dimension(i));
+      if (uA == null) throw new Error(`Can't find base unit for dimension ${i}`);
+      this.name_ = uA.name + elem;
+    }
+
+    return num;
+  } // end mutateCoherent
+
+  /**
+   * Calculates the number of units that would result from converting a unit
+   * expressed in mass/grams to a unit expressed in moles.  The "this" unit is
+   * the unit expressed in some form of mass (g, mg, mmg, kg, whatever) and the
+   * target or "to" unit - the molUnit parameter - is a unit expressed in moles
+   * - mol, umol, mmol, etc.  The unit expressions surrounding the moles and
+   * mass must be convertible.  No validation of this requirement is performed.
+   *
+   * @param amt the quantity of this unit to be converted
+   * @param molUnit the target/to unit for which the converted # is wanted
+   * @param molecularWeight the molecular weight of the substance for which the
+   *  conversion is being made
+   * @return the equivalent amount in molUnit
+   */
+
+
+  convertMassToMol(amt, molUnit, molecularWeight) {
+    // The prefix values that have been applied to this unit, which is the mass
+    // (grams) unit, are reflected in the magnitude.  So the number of moles
+    // represented by this unit equals the number of grams -- amount * magnitude
+    // divided by the molecular Weight
+    let molAmt = this.magnitude_ * amt / molecularWeight; // The molUnit's basic magnitude, before prefixes are applied,
+    // is avogadro's number, get that and divide it out of the current magnitude.
+
+    let tabs = this._getUnitTables();
+
+    let avoNum = tabs.getUnitByCode('mol').magnitude_;
+    let molesFactor = molUnit.magnitude_ / avoNum; // return the molAmt divided by the molesFactor as the number of moles
+    // for the molUnit
+
+    return molAmt / molesFactor;
+  }
+  /**
+   * Calculates the number of units that would result from converting a unit
+   * expressed in moles to a unit expressed in mass (grams).  The "this" unit
+   * is the unit expressed in some form of moles, e.g., mol, umol, mmol, etc.,
+   * and the target or "to" unit is a unit expressed in some form of mass, e.g.,
+   * g, mg, mmg, kg, etc.  Any unit expressions surrounding the moles and mass
+   * must be convertible. No validation of this requirement is performed.
+   *
+   * @param amt the quantity of this unit to be converted
+   * @param massUnit the target/to unit for which the converted # is wanted
+   * @param molecularWeight the molecular weight of the substance for which the
+   *  conversion is being made
+   * @return the equivalent amount in massUnit
+   */
+
+
+  convertMolToMass(amt, massUnit, molecularWeight) {
+    // A simple mole unit has a magnitude of avogadro's number.  Get that
+    // number now (since not everyone agrees on what it is, and what is
+    // being used in this system might change).
+    let tabs = this._getUnitTables();
+
+    let avoNum = tabs.getUnitByCode('mol').magnitude_; // Determine what prefix values (mg or mg/dL, etc.) have been applied to
+    // this unit by dividing the simple mole unit magnitude out of the
+    // current mole unit magnitude.
+
+    let molesFactor = this.magnitude_ / avoNum; // The number of grams (mass) is equal to the number of moles (amt)
+    // times the molecular weight.  We also multiply that by the prefix values
+    // applied to the current unit (molesFactor) to get the grams for this
+    // particular unit.
+
+    let massAmt = molesFactor * amt * molecularWeight; // Finally, we return the mass amount/grams for this particular unit
+    // divided by any effects of prefixes applied to the "to" unit, which
+    // is assumed to be some form of a gram unit
+
+    return massAmt / massUnit.magnitude_;
+  }
+  /**
+   * Mutates this unit into a unit on a ratio scale and converts a specified
+   * number of units to an appropriate value for this converted unit
+   *
+   * @param num the number of this unit before it's converted
+   * @return the magnitude of this unit after it's converted
+   * @throw an error if the dimensions differ
+   */
+
+
+  mutateRatio(num) {
+    if (this.cnv_ == null) return this.mutateCoherent(num);else return num;
+  } // end mutateRatio
+
+  /**
+   * Multiplies this unit with a scalar. Special meaning for
+   * special units so that (0.1*B) is 1 dB.
+   *
+   * This function DOES NOT modify this unit.
+   *
+   * @param s the value by which this unit is to be multiplied
+   * @return a copy this unit multiplied by s
+   * */
+
+
+  multiplyThis(s) {
+    let retUnit = this.clone();
+    if (retUnit.cnv_ != null) retUnit.cnvPfx_ *= s;else retUnit.magnitude_ *= s;
+    let mulVal = s.toString();
+    retUnit.name_ = this._concatStrs(mulVal, '*', this.name_, '[', ']');
+    retUnit.csCode_ = this._concatStrs(mulVal, '.', this.csCode_, '(', ')');
+    retUnit.ciCode_ = this._concatStrs(mulVal, '.', this.ciCode_, '(', ')');
+    retUnit.printSymbol_ = this._concatStrs(mulVal, '.', this.printSymbol_, '(', ')');
+    return retUnit;
+  } // end multiplyThis
+
+  /**
+   * Multiplies this unit with another unit. If one of the
+   * units is a non-ratio unit the other must be dimensionless or
+   * else an exception is thrown.
+   *
+   * This function does NOT modify this unit
+   * @param unit2 the unit to be multiplied with this one
+   * @return this unit after it is multiplied
+   * @throws an error if one of the units is not on a ratio-scale
+   *         and the other is not dimensionless.
+   */
+
+
+  multiplyThese(unit2) {
+    var retUnit = this.clone();
+
+    if (retUnit.cnv_ != null) {
+      if (unit2.cnv_ == null && (!unit2.dim_ || unit2.dim_.isZero())) retUnit.cnvPfx_ *= unit2.magnitude_;else throw new Error(`Attempt to multiply non-ratio unit ${retUnit.name_} ` + 'failed.');
+    } // end if this unit has a conversion function
+    else if (unit2.cnv_ != null) {
+        if (!retUnit.dim_ || retUnit.dim_.isZero()) {
+          retUnit.cnvPfx_ = unit2.cnvPfx_ * retUnit.magnitude_;
+          retUnit.cnv_ = unit2.cnv_;
+        } else throw new Error(`Attempt to multiply non-ratio unit ${unit2.name_}`);
+      } // end if unit2 has a conversion function
+      // else neither unit has a conversion function
+      else {
+          retUnit.magnitude_ *= unit2.magnitude_;
+        } // end if unit2 does not have a conversion function
+    // If this.dim_ isn't there, clone the dimension in unit2 - if dimVec_
+    // is a dimension in unit2.dim_; else just transfer it to this dimension
+
+
+    if (!retUnit.dim_ || retUnit.dim_ && !retUnit.dim_.dimVec_) {
+      if (unit2.dim_) retUnit.dim_ = unit2.dim_.clone();else retUnit.dim_ = unit2.dim_;
+    } // Else this.dim_ is there.  If there is a dimension for unit2,
+    // add it to this one.
+    else if (unit2.dim_ && unit2.dim_ instanceof Dimension) {
+        retUnit.dim_.add(unit2.dim_);
+      } // Concatenate the unit info (name, code, etc) for all cases
+    // where the multiplication was performed (an error wasn't thrown)
+
+
+    retUnit.name_ = this._concatStrs(retUnit.name_, '*', unit2.name_, '[', ']');
+    retUnit.csCode_ = this._concatStrs(retUnit.csCode_, '.', unit2.csCode_, '(', ')');
+    if (retUnit.ciCode_ && unit2.ciCode_) retUnit.ciCode_ = this._concatStrs(retUnit.ciCode_, '.', unit2.ciCode_, '(', ')');else if (unit2.ciCode_) retUnit.ciCode_ = unit2.ciCode_;
+    retUnit.guidance_ = '';
+    if (retUnit.printSymbol_ && unit2.printSymbol_) retUnit.printSymbol_ = this._concatStrs(retUnit.printSymbol_, '.', unit2.printSymbol_, '(', ')');else if (unit2.printSymbol_) retUnit.printSymbol_ = unit2.printSymbol_; // Update the mole exponent count by adding the count for unit2 to the
+    // count for this unit.
+
+    retUnit.moleExp_ = retUnit.moleExp_ + unit2.moleExp_; // A unit that has the arbitrary attribute taints any unit created from it
+    // via an arithmetic operation.  Taint accordingly
+    // if (!retUnit.isMole_)
+    //   retUnit.isMole_ = unit2.isMole_ ;
+
+    if (!retUnit.isArbitrary_) retUnit.isArbitrary_ = unit2.isArbitrary_;
+    return retUnit;
+  } // end multiplyThese
+
+  /**
+   * Divides this unit by another unit. If this unit is not on a ratio
+   * scale an exception is raised. Mutating to a ratio scale unit
+   * is not possible for a unit, only for a measurement.
+   *
+   * This unit is NOT modified by this function.
+   * @param unit2 the unit by which to divide this one
+   * @return this unit after it is divided by unit2
+   * @throws an error if either of the units is not on a ratio scale.
+   * */
+
+
+  divide(unit2) {
+    var retUnit = this.clone();
+    if (retUnit.cnv_ != null) throw new Error(`Attempt to divide non-ratio unit ${retUnit.name_}`);
+    if (unit2.cnv_ != null) throw new Error(`Attempt to divide by non-ratio unit ${unit2.name_}`);
+    if (retUnit.name_ && unit2.name_) retUnit.name_ = this._concatStrs(retUnit.name_, '/', unit2.name_, '[', ']');else if (unit2.name_) retUnit.name_ = unit2.invertString(unit2.name_);
+    retUnit.csCode_ = this._concatStrs(retUnit.csCode_, '/', unit2.csCode_, '(', ')');
+    if (retUnit.ciCode_ && unit2.ciCode_) retUnit.ciCode_ = this._concatStrs(retUnit.ciCode_, '/', unit2.ciCode_, '(', ')');else if (unit2.ciCode_) retUnit.ciCode_ = unit2.invertString(unit2.ciCode_);
+    retUnit.guidance_ = '';
+    retUnit.magnitude_ /= unit2.magnitude_;
+    if (retUnit.printSymbol_ && unit2.printSymbol_) retUnit.printSymbol_ = this._concatStrs(retUnit.printSymbol_, '/', unit2.printSymbol_, '(', ')');else if (unit2.printSymbol_) retUnit.printSymbol_ = unit2.invertString(unit2.printSymbol_); // Continue if unit2 has a dimension object.
+    // If this object has a dimension object, subtract unit2's dim_ object from
+    // this one. The sub method will take care of cases where the dimVec_ arrays
+    // are missing on one or both dim_ objects.
+
+    if (unit2.dim_) {
+      if (retUnit.dim_) {
+        if (retUnit.dim_.isNull()) retUnit.dim_.assignZero();
+        retUnit.dim_ = retUnit.dim_.sub(unit2.dim_);
+      } // end if this.dim_ exists
+      // Else if this dim_ object is missing, clone unit2's dim_ object
+      // and give the inverted clone to this unit.
+      else retUnit.dim_ = unit2.dim_.clone().minus();
+    } // end if unit2 has a dimension object
+    // Update the mole exponent count by subtracting the count for unit2 from
+    // the // count for this unit.
+
+
+    retUnit.moleExp_ = retUnit.moleExp_ - unit2.moleExp_; // A unit that has the arbitrary attribute taints any unit created from
+    // it via an arithmetic operation.  Taint accordingly
+    // if (!retUnit.isMole_)
+    //   retUnit.isMole_ = unit2.isMole_ ;
+
+    if (!retUnit.isArbitrary_) retUnit.isArbitrary_ = unit2.isArbitrary_;
+    return retUnit;
+  } // end divide
+
+  /**
+   * Invert this unit with respect to multiplication. If this unit is not
+   * on a ratio scale an exception is thrown. Mutating to a ratio scale unit
+   * is not possible for a unit, only for a measurement (the magnitude and
+   * dimension).
+   *
+   *  This unit is modified by this function.
+   * @return this unit after being inverted
+   * @throws and error if this unit is not on a ratio scale
+   */
+
+
+  invert() {
+    if (this.cnv_ != null) throw new Error(`Attempt to invert a non-ratio unit - ${this.name_}`);
+    this.name_ = this.invertString(this.name_);
+    this.magnitude_ = 1 / this.magnitude_;
+    this.dim_.minus();
+    return this;
+  } // end invert
+
+  /**
+   * Inverts a string, where the string is assumed to be a code or a name
+   * of a division operation where the string is the divisor and the dividend
+   * is blank.
+   *
+   * @param the string to be inverted
+   * @return the inverted string
+   */
+
+
+  invertString(theString) {
+    if (theString.length > 0) {
+      let stringRep = theString.replace('/', "!").replace('.', '/').replace("!", '.');
+
+      switch (stringRep.charAt(0)) {
+        case '.':
+          theString = stringRep.substr(1);
+          break;
+
+        case '/':
+          theString = stringRep;
+          break;
+
+        default:
+          theString = "/" + stringRep;
+      }
+    }
+
+    return theString;
+  } // end invertString
+
+  /**
+   * This function handles concatenation of two strings and an operator.
+   * It's called to build unit data, e.g., unit name, unit code, etc., from
+   * two different units, joined by the specified operator.
+   *
+   * @param str1 the first string to appear in the result
+   * @param operator the operator ('*', '.' or '/') to appear between the strings
+   * @param str2 the second string to appear in the result
+   * @param startChar the starting character to be used, when needed, to
+   *  enclose a string
+   * @param endChar the ending character to be used, when needed, to enclose
+   *  a string
+   * @returns the built string
+   */
+
+
+  _concatStrs(str1, operator, str2, startChar, endChar) {
+    return this._buildOneString(str1, startChar, endChar) + operator + this._buildOneString(str2, startChar, endChar);
+  }
+  /**
+   * This function handles creation of one string to be included in a
+   * concatenated string.   Basically it checks to see if the string
+   * needs to be enclosed either in parentheses or square brackets.
+   *
+   * The string is enclosed if it is not a number, does not start with
+   * a parenthesis or square bracket, and includes a period, and asterisk,
+   * a slash or a blank space.
+   *
+   * @param str the string
+   * @param startChar starting enclosing character
+   * @param endChar ending enclosing character
+   * @returns the string
+   */
+
+
+  _buildOneString(str, startChar, endChar) {
+    let ret = '';
+
+    if (intUtils_.isNumericString(str)) {
+      ret = str;
+    } else {
+      if (str.charAt(0) === '(' || str.charAt(0) === '[') {
+        ret = str;
+      } else if (/[./* ]/.test(str)) {
+        ret = startChar + str + endChar;
+      } else {
+        ret = str;
+      }
+    }
+
+    return ret;
+  }
+  /**
+   * Raises the unit to a power.  For example
+   *  kg.m/s2 raised to the -2 power would be kg-2.m-2/s-4
+   *
+   * If this unit is not on a ratio scale an error is thrown. Mutating
+   * to a ratio scale unit is not possible for a unit, only for a
+   * measurement (magnitude and dimension).
+   *
+   * This is based on the pow method in Gunter Schadow's java version,
+   * although it uses javascript capabilities to simplify the processing.
+   *
+   * This unit is modified by this function
+   *
+   * @param p the power to with this unit is to be raise
+   * @return this unit after it is raised
+   * @throws an error if this unit is not on a ratio scale.
+   */
+
+
+  power(p) {
+    if (this.cnv_ != null) throw new Error(`Attempt to raise a non-ratio unit, ${this.name_}, ` + 'to a power.'); //this.name_ = UnitString.pow(this.name_, p);
+    // the above line is replaced with the code below, as the pow method
+    // never actually existing in the UnitString class.  (Tried to use
+    // Schadow java code but this way ended up being a lot easier).
+
+    let uStr = this.csCode_;
+    let uArray = uStr.match(/([./]|[^./]+)/g);
+    let arLen = uArray.length;
+
+    for (let i = 0; i < arLen; i++) {
+      let un = uArray[i];
+
+      if (un !== '/' && un !== '.') {
+        let nun = parseInt(un);
+        if (isInteger(nun)) uArray[i] = Math.pow(nun, p).toString();else {
+          let uLen = un.length;
+
+          for (let u = uLen - 1; u >= 0; u--) {
+            let uChar = parseInt(un[u]);
+
+            if (!isInteger(uChar)) {
+              if (un[u] === '-' || un[u] === '+') {
+                u--;
+              }
+
+              if (u < uLen - 1) {
+                let exp = parseInt(un.substr(u));
+                exp = Math.pow(exp, p);
+                uArray[i] = un.substr(0, u) + exp.toString();
+                u = -1;
+              } else {
+                uArray[i] += p.toString();
+                u = -1;
+              } // end if there are/aren't some numbers at the end
+
+
+              u = -1;
+            } // end if this character is not a number
+
+          } // end searching backwards for start of exponent
+
+        } // end if this element is not a number
+      } // end if the current element is not an operator
+
+    } // end do for each element of the units array
+    // reassemble the updated units array to a string
+
+
+    this.csCode_ = uArray.join('');
+    this.magnitude_ = Math.pow(this.magnitude_, p);
+
+    if (this.dim_) {
+      this.dim_.mul(p);
+    }
+
+    return this;
+  } // end power
+
+  /*
+   * This function tests this unit against the unit passed in to see if the
+   * two are mole to mass commensurable.  It assumes that one of the units
+   * is a mole-based unit and the other is a mass-based unit.  It also assumes
+   * that the mole-based unit has a single mole unit in the numerator and that
+   * the mass-based unit has a single mass unit in the numerator.  It does NOT
+   * check to validate those assumptions.
+   *
+   * The check is made by setting the dimension vector element corresponding
+   * to the base mass unit (gram) in the mole unit, and then comparing the
+   * two dimension vectors.  If they match, the units are commensurable.
+   * Otherwise they are not.
+   *
+   * @param unit2 the unit to be compared to this one
+   * @returns boolean indicating commensurability
+   */
+
+
+  isMoleMassCommensurable(unit2) {
+    let tabs = this._getUnitTables();
+
+    let d = tabs.getMassDimensionIndex();
+    let commensurable = false;
+
+    if (this.moleExp_ === 1 && unit2.moleExp_ === 0) {
+      let testDim = this.dim_.clone();
+      let curVal = testDim.getElementAt(d);
+      testDim.setElementAt(d, curVal + this.moleExp_);
+      commensurable = testDim.equals(unit2.dim_);
+    } else if (unit2.moleExp_ === 1 && this.moleExp_ === 0) {
+      let testDim = unit2.dim_.clone();
+      let curVal = testDim.getElementAt(d);
+      testDim.setElementAt(d, curVal + unit2.moleExp_);
+      commensurable = testDim.equals(this.dim_);
+    }
+
+    return commensurable;
+  }
+  /**
+   * This returns the UnitTables singleton object.  Including the require
+   * statement included here causes a circular dependency condition that
+   * resulted in the UnitTables object not being defined for the Unit object.
+   * sigh.  Thanks, Paul, for figuring this out.
+   *
+   * @private
+   */
+
+
+  _getUnitTables() {
+    if (!UnitTables) UnitTables = require('./unitTables.js').UnitTables;
+    return UnitTables.getInstance();
+  }
+
+} // end Unit class
+
+
+exports.Unit = Unit;
+
+
+},{"./config.js":50,"./dimension.js":51,"./ucumFunctions.js":55,"./ucumInternalUtils.js":56,"./unitTables.js":62,"is-integer":64}],61:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.UnitString = void 0;
+
+var intUtils_ = _interopRequireWildcard(require("./ucumInternalUtils.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+/**
+ * This class handles the parsing of a unit string into a unit object
+ */
+var Ucum = require('./config.js').Ucum;
+
+var Unit = require('./unit.js').Unit;
+
+var UnitTables = require('./unitTables.js').UnitTables;
+
+var PrefixTables = require('./prefixTables.js').PrefixTables;
+
+class UnitString {
+  /**
+   * Constructor
+   */
+  constructor() {
+    // Get instances of the unit and prefix tables and the utilities
+    this.utabs_ = UnitTables.getInstance();
+    this.pfxTabs_ = PrefixTables.getInstance(); // Set emphasis characters to defaults.  These are used to emphasize
+    // certain characters or strings in user messages.  They can be reset in
+    // the useHTMLInMessages method.
+
+    this.openEmph_ = Ucum.openEmph_;
+    this.closeEmph_ = Ucum.closeEmph_; // Set the braces message to blank.  This message is displayed for each
+    // validation request on the web page, but is included separately as
+    // a note on the validation spreadsheet.  The useBraceMsgForEachString
+    // method should be used to set the message to be displayed for each
+    // unit string.
+
+    this.bracesMsg_ = ''; // Set the flags used, with indices, as place holders in unit strings
+    // for parenthetical strings and strings within braces.
+
+    this.parensFlag_ = "parens_placeholder"; // in lieu of Jehoshaphat
+
+    this.pFlagLen_ = this.parensFlag_.length;
+    this.braceFlag_ = "braces_placeholder"; // in lieu of Nebuchadnezzar
+
+    this.bFlagLen_ = this.braceFlag_.length; // Initialize the message start/end strings, which will be set when
+    // parseString is called.
+
+    this.vcMsgStart_ = null;
+    this.vcMsgEnd_ = null; // Arrays used by multiple methods within this class to hold persistent
+    // data.  Just gets too bulky to pass these guys around.
+    // Messages to be returned to the calling function
+
+    this.retMsg_ = []; // Units for parenthetical unit strings
+
+    this.parensUnits_ = []; // annotation text for annotations found in unit strings
+
+    this.annotations_ = []; // suggestions for unit strings that for which no unit was found
+
+    this.suggestions = [];
+  } // end constructor
+
+  /**
+   * Sets the emphasis strings to the HTML used in the webpage display - or
+   * blanks them out, depending on the use parameter.
+   *
+   * @param use flag indicating whether or not to use the html message format;
+   *  defaults to true
+   */
+
+
+  useHTMLInMessages(use) {
+    if (use === undefined || use) {
+      this.openEmph_ = Ucum.openEmphHTML_;
+      this.closeEmph_ = Ucum.closeEmphHTML_;
+    } else {
+      this.openEmph_ = Ucum.openEmph_;
+      this.closeEmph_ = Ucum.closeEmph_;
+    }
+  } // end useHTMLInMessages
+
+  /**
+   * Sets the braces message to be displayed for each unit string validation
+   * requested, as appropriate.
+   *
+   * @param use flag indicating whether or not to use the braces message;
+   *  defaults to true
+   */
+
+
+  useBraceMsgForEachString(use) {
+    if (use === undefined || use) this.bracesMsg_ = Ucum.bracesMsg_;else this.bracesMsg_ = '';
+  }
+  /**
+   * Parses a unit string, returns a unit, a possibly updated version of
+   * the string passed in, and messages and suggestions where appropriate.
+   *
+   * The string returned may be updated if the input string contained unit
+   * names, e.g., "pound".  The unit code ([lb_av] for pound) is placed in
+   * the string returned, a the returned messages array includes a note
+   * explaining the substitution.
+   *
+   * @param uStr the string defining the unit
+   * @param valConv indicates what type of request this is for - a request to
+   *  validate (pass in 'validate') or a request to convert (pass in 'convert');
+   *  optional, defaults to 'validate'
+   * @param suggest a boolean to indicate whether or not suggestions are
+   *  requested for a string that cannot be resolved to a valid unit;
+   *  true indicates suggestions are wanted; false indicates they are not,
+   *  and is the default if the parameter is not specified;
+   * @returns an array containing:
+   *   the unit object or null if a unit could not be created.  In cases where
+   *     a fix was found for a problem string, .e.g., 2.mg for 2mg, a unit will
+   *     be returned but an error message will also be returned, describing
+   *     the substitution;
+   *   the possibly updated unit string passed in;
+   *   an array of any user messages (informational, error or warning)
+   *     generated (or an empty array); and
+   *   a suggestions array of hash objects (1 or more).  Each hash contains
+   *   three elements:
+   *     'msg' which is a message indicating what unit expression the
+   *       suggestions are for;
+   *     'invalidUnit' which is the unit expression the suggestions are
+   *       for; and
+   *     'units' which is an array of data for each suggested unit found.
+   *        Each array will contain the unit code, the unit name and the
+   *        unit guidance (if any).
+   *   The return array will not contain a suggestions array if a valid unit
+   *   was found or if suggestions were not requested.
+   * @throws an error if nothing was specified.
+   */
+
+
+  parseString(uStr, valConv, suggest) {
+    uStr = uStr.trim(); // Make sure we have something to work with
+
+    if (uStr === '' || uStr === null) {
+      throw new Error('Please specify a unit expression to be validated.');
+    }
+
+    if (valConv === 'validate') {
+      this.vcMsgStart_ = Ucum.valMsgStart_;
+      this.vcMsgEnd_ = Ucum.valMsgEnd_;
+    } else {
+      this.vcMsgStart_ = Ucum.cnvMsgStart_;
+      this.vcMsgEnd_ = Ucum.cnvMsgEnd_;
+    }
+
+    if (suggest === undefined || suggest === false) {
+      this.suggestions_ = null;
+    } else {
+      this.suggestions_ = [];
+    }
+
+    this.retMsg_ = [];
+    this.parensUnits_ = [];
+    this.annotations_ = [];
+    let origString = uStr;
+    let retObj = []; // Extract any annotations, i.e., text enclosed in braces ({}) from the
+    // string before further processing.  Store each one in this.annotations_
+    // array and put a placeholder in the string for the annotation.  Do
+    // this before other processing in case an annotation contains characters
+    // that will be interpreted as parenthetical markers or operators in
+    // subsequent processing.
+
+    uStr = this._getAnnotations(uStr);
+
+    if (this.retMsg_.length > 0) {
+      retObj[0] = null;
+      retObj[1] = null;
+    } else {
+      // Flag used to block further processing on an unrecoverable error
+      let endProcessing = this.retMsg_.length > 0; // First check for one of the "special" units.  If it's one of those, put
+      // in a substitution phrase for it to avoid having it separated on its
+      // embedded operator.  This will only happen, by the way, if it is
+      // preceded by a prefix or followed by an operator and another unit.
+
+      let sUnit = null;
+
+      for (sUnit in Ucum.specUnits_) {
+        while (uStr.indexOf(sUnit) !== -1) uStr = uStr.replace(sUnit, Ucum.specUnits_[sUnit]);
+      } // Check for spaces and throw an error if any are found.  The spec
+      // explicitly forbids spaces except in annotations, which is why any
+      // annotations are extracted before this check is made.
+
+
+      if (uStr.indexOf(' ') > -1) {
+        throw new Error('Blank spaces are not allowed in unit expressions.');
+      } // end if blanks were found in the string
+      // assign the array returned to retObj.  It will contain 2 elements:
+      //  the unit returned in position 0; and the origString (possibly
+      //  modified in position 1.  The origString in position 1 will not
+      //  be changed by subsequent processing.
+
+
+      retObj = this._parseTheString(uStr, origString);
+      let finalUnit = retObj[0]; // Do a final check to make sure that finalUnit is a unit and not
+      // just a number.  Something like "8/{HCP}" will return a "unit" of 8
+      // - which is not a unit.  Hm - evidently it is.  So just create a unit
+      // object for it.
+
+      if (intUtils_.isIntegerUnit(finalUnit) || typeof finalUnit === 'number') {
+        finalUnit = new Unit({
+          'csCode_': origString,
+          'magnitude_': finalUnit,
+          'name_': origString
+        });
+        retObj[0] = finalUnit;
+      } // end final check
+
+    } // end if no annotation errors were found
+
+
+    retObj[2] = this.retMsg_;
+    if (this.suggestions_ && this.suggestions_.length > 0) retObj[3] = this.suggestions_;
+    return retObj;
+  } // end parseString
+
+  /**
+   * Parses a unit string, returns a unit, a possibly updated version of
+   * the string passed in, and messages where appropriate.  This should
+   * only be called from within this class (or by test code).
+   *
+   * The string returned may be updated if the input string contained unit
+   * names, e.g., "pound".  The unit code ([lb_av] for pound) is placed in
+   * the string returned, a the returned messages array includes a note
+   * explaining the substitution.
+   *
+   * @param uStr the string defining the unit
+   * @param origString the original unit string passed in
+   *
+   * @returns
+   *  an array containing:
+   *    the unit object (or null if there were problems creating the unit); and
+   *    the possibly updated unit string passed in.
+   *
+   * the this.retMsg_ array will be updated with any user messages
+   *   (informational, error or warning) generated by this or called methods
+   * the this.parensUnits_ array is referenced and possibly populated by
+   *   methods called within this one
+   * the this.annotations_ array is referenced by methods called within
+   *   this one
+   * the this.suggestions_ array may be populated by methods called within
+   *   this one
+   */
+
+
+  _parseTheString(uStr, origString) {
+    // Unit to be returned
+    let finalUnit = null; // Flag used to block further processing on an unrecoverable error
+
+    let endProcessing = this.retMsg_.length > 0; // Call _processParens to search for and process any/all parenthetical
+    // strings in uStr.  Units created for parenthetical strings will be
+    // stored in the this.parensUnits_ array.
+
+    let parensResp = this._processParens(uStr, origString);
+
+    endProcessing = parensResp[2]; // The array used to hold the units and their operators.
+
+    let uArray = []; // Continue if we didn't hit a problem
+
+    if (!endProcessing) {
+      uStr = parensResp[0];
+      origString = parensResp[1]; // Call _makeUnitsArray to convert the string to an array of unit
+      // descriptors with operators.
+
+      let mkUArray = this._makeUnitsArray(uStr, origString);
+
+      endProcessing = mkUArray[2];
+
+      if (!endProcessing) {
+        uArray = mkUArray[0];
+        origString = mkUArray[1]; // Create a unit object out of each un element
+
+        let uLen = uArray.length;
+
+        for (let u1 = 0; u1 < uLen; u1++) {
+          //for (let u1 = 0; u1 < uLen && !endProcessing; u1++) {
+          let curCode = uArray[u1]['un']; // Determine the type of the "un" attribute of the current array element
+          // Check to see if it's a number.  If so write the number version of
+          // the number back to the "un" attribute and move on
+
+          if (intUtils_.isIntegerUnit(curCode)) {
+            uArray[u1]['un'] = Number(curCode);
+          } else {
+            // The current unit array element is a string.  Check now to see
+            // if it is or contains a parenthesized unit from this.parensUnits_.
+            // If so, call _getParens to process the string and get the unit.
+            if (curCode.indexOf(this.parensFlag_) >= 0) {
+              let parenUnit = this._getParensUnit(curCode, origString); // if we couldn't process the string, set the end flag and bypass
+              // further processing.
+
+
+              if (!endProcessing) endProcessing = parenUnit[1]; // If we're good, put the unit in the uArray and replace the
+              // curCode, which contains the parentheses placeholders, etc.,
+              // with the unit's code - including any substitutions.
+
+              if (!endProcessing) {
+                uArray[u1]['un'] = parenUnit[0];
+              }
+            } // end if the curCode contains a parenthesized unit
+            // Else it's not a parenthetical unit and not a number. Call
+            // _makeUnit to create a unit for it.
+            else {
+                let uRet = this._makeUnit(curCode, origString); // If we didn't get a unit, set the endProcessing flag.
+
+
+                if (uRet[0] === null) {
+                  endProcessing = true;
+                } else {
+                  uArray[u1]['un'] = uRet[0];
+                  origString = uRet[1];
+                }
+              } // end if the curCode is not a parenthetical expression
+
+          } // end if the "un" array is a not a number
+
+        } // end do for each element in the units array
+
+      } // end if _makeUnitsArray did not return an error
+
+    } // end if _processParens did not find an error that causes a stop
+    // If we're still good, continue
+
+
+    if (!endProcessing) {
+      // Process the units (and numbers) to create one final unit object
+      if ((uArray[0] === null || uArray[0] === ' ' || uArray[0]['un'] === undefined || uArray[0]['un'] === null) && this.retMsg_.length === 0) {
+        // not sure what this might be, but this is a safeguard
+        this.retMsg_.push(`Unit string (${origString}) did not contain ` + `anything that could be used to create a unit, or else something ` + `that is not handled yet by this package.  Sorry`);
+        endProcessing = true;
+      }
+    }
+
+    if (!endProcessing) {
+      finalUnit = this._performUnitArithmetic(uArray, origString);
+    }
+
+    return [finalUnit, origString];
+  } // end _parseTheString
+
+  /**
+   * Extracts all annotations from a unit string, replacing them with
+   * placeholders for later evaluation.  The annotations are stored in the
+   * this.annotations_ array.  This should only be called from within this
+   * class (or by test code).
+   *
+   * @param uString the unit string being parsed
+   * @returns the string after the annotations are replaced with placeholders
+   *
+   * the this.retMsg_ array will be updated with any user messages
+   *   (informational, error or warning) generated by this or called methods
+   * the this.annotations_ array is populated by this method
+   */
+
+
+  _getAnnotations(uString) {
+    let openBrace = uString.indexOf('{');
+
+    while (openBrace >= 0) {
+      let closeBrace = uString.indexOf('}');
+
+      if (closeBrace < 0) {
+        this.retMsg_.push('Missing closing brace for annotation starting at ' + this.openEmph_ + uString.substr(openBrace) + this.closeEmph_);
+        openBrace = -1;
+      } else {
+        let braceStr = uString.substring(openBrace, closeBrace + 1);
+        let aIdx = this.annotations_.length.toString();
+        uString = uString.replace(braceStr, this.braceFlag_ + aIdx + this.braceFlag_);
+        this.annotations_.push(braceStr);
+        openBrace = uString.indexOf('{');
+      }
+    } // end do while we have an opening brace
+    // check for a stray/unmatched closing brace
+
+
+    let closeBrace = uString.indexOf('}');
+    if (closeBrace >= 0) this.retMsg_.push('Missing opening brace for closing brace found at ' + this.openEmph_ + uString.substring(0, closeBrace + 1) + this.closeEmph_);
+    return uString;
+  } // end _getAnnotations
+
+  /**
+   * Finds and processes any/all parenthesized unit strings. This should only
+   * be called from within this class (or by test code).
+   *
+   * Nested parenthesized strings are processed from the inside out.  The
+   * parseString function is called from within this one for each parenthesized
+   * unit string, and the resulting unit object is stored in this.parensUnits_,
+   * to be processed after all strings are translated to units.
+   *
+   * A placeholder is placed in the unit string returned to indicate that the
+   * unit object should be obtained from the this.parensUnits_ array.  The
+   * placeholder consists of the parenthesis flag (this.parensFlag_) followed
+   * by the index of the unit in this.parensUnits_ followed by this.parensFlag_.
+   *
+   * @param uString the unit string being parsed, where this will be the full
+   *  string the first time this is called and parenthesized strings on any
+   *  subsequent calls
+   * @param origString the original string first passed in to parseString
+   * @returns
+   *  an array containing:
+   *   the string after the parentheses are replaced;
+   *   the original string; and
+   *   a boolean flag indicating whether or not an error occurred that
+   *     should stop processing.
+   *
+   * the this.retMsg_ array will be updated with any user messages
+   *   (informational, error or warning) generated by this or called methods
+   * this this.parensUnits_ array will be populated with units found for
+   *   parenthetical unit strings
+   */
+
+
+  _processParens(uString, origString) {
+    // Unit strings array and index
+    let uStrArray = [];
+    let uStrAryPos = 0;
+    let stopProcessing = false;
+    let pu = this.parensUnits_.length; // Count of characters trimmed off the beginning of the unit string (uString)
+    // as units are removed from it; used for error messages to provide
+    // context.
+
+    let trimmedCt = 0; // Break the unit string into pieces that consist of text outside of
+    // parenthetical strings and placeholders for the parenthetical units.
+    // This method is called recursively for parenthetical strings and the units
+    // returned are stored in the this.parensUnits_ array.
+
+    while (uString !== "" && !stopProcessing) {
+      let openCt = 0;
+      let closeCt = 0;
+      let openPos = uString.indexOf('('); // If an opening parenthesis was not found, check for an unmatched
+      // close parenthesis.  If one was found report the error and end
+      // processing.
+
+      if (openPos < 0) {
+        let closePos = uString.indexOf(')');
+
+        if (closePos >= 0) {
+          let theMsg = `Missing open parenthesis for close ` + `parenthesis at ${uString.substring(0, closePos + trimmedCt)}` + `${this.openEmph_}${uString.substr(closePos, 1)}${this.closeEmph_}`;
+
+          if (closePos < uString.length - 1) {
+            theMsg += `${uString.substr(closePos + 1)}`;
+          }
+
+          this.retMsg_.push(theMsg);
+          uStrArray[uStrAryPos] = uString;
+          stopProcessing = true;
+        } // end if a close parenthesis was found
+        // If no parentheses were found in the current unit string, transfer
+        // it to the units array and blank out the string, which will end
+        // the search for parenthetical units.
+        else {
+            uStrArray[uStrAryPos] = uString;
+            uString = "";
+          } // end if no close parenthesis was found
+
+      } // end if no open parenthesis was found
+      // Otherwise an open parenthesis was found. Process the string that
+      // includes the parenthetical group
+      else {
+          openCt += 1; // Write the text before the parentheses (if any) to the unit strings array
+
+          let uLen = uString.length;
+
+          if (openPos > 0) {
+            uStrArray[uStrAryPos++] = uString.substr(0, openPos);
+          } // Find the matching closePos, i.e., the one that closes the
+          // parenthetical group that this one opens.  Look also for
+          // another open parenthesis, in case this includes nested parenthetical
+          // strings.  This continues until it finds the same number of close
+          // parentheses as open parentheses, or runs out of string to check.
+          // In the case of nested parentheses this will identify the outer set
+          // of parentheses.
+
+
+          let closePos = 0;
+          let c = openPos + 1;
+
+          for (; c < uLen && openCt != closeCt; c++) {
+            if (uString[c] === '(') openCt += 1;else if (uString[c] === ')') closeCt += 1;
+          } // Put a placeholder for the group in the unit strings array and recursively
+          // call this method for the parenthetical group.  Put the unit returned
+          // in this.parensUnits_.  Set the unit string to whatever follows
+          // the position of the closing parenthesis for this group, to be
+          // processed by the next iteration of this loop.  If there's nothing
+          // left uString is set to "".
+
+
+          if (openCt === closeCt) {
+            closePos = c;
+            uStrArray[uStrAryPos++] = this.parensFlag_ + pu.toString() + this.parensFlag_;
+
+            let parseResp = this._parseTheString(uString.substring(openPos + 1, closePos - 1), origString);
+
+            if (parseResp[0] === null) stopProcessing = true;else {
+              origString = parseResp[1];
+              this.parensUnits_[pu++] = parseResp[0];
+              uString = uString.substr(closePos);
+              trimmedCt = closePos;
+            }
+          } // end if the number of open and close parentheses matched
+          // If the number of open and close parentheses doesn't match, indicate
+          // an error.
+          else {
+              uStrArray.push(origString.substr(openPos));
+              this.retMsg_.push(`Missing close parenthesis for open parenthesis at ` + `${origString.substring(0, openPos + trimmedCt)}` + `${this.openEmph_}${origString.substr(openPos, 1)}` + `${this.closeEmph_}${origString.substr(openPos + 1)}`);
+              stopProcessing = true;
+            }
+        } // end if an open parenthesis was found
+
+    } // end do while the input string is not empty
+
+
+    if (stopProcessing) this.parensUnits_ = [];
+    return [uStrArray.join(''), origString, stopProcessing];
+  } // end _processParens
+
+  /**
+   * Breaks the unit string into an array of unit descriptors and operators.
+   * If a unit descriptor consists of a number preceding a unit code, with
+   * no multiplication operator, e.g., 2mg instead of 2.mg, it is handled
+   * as if it were a parenthetical expression.
+   *
+   * This should only be called from within this class (or by test code).
+   *
+   * @param uStr the unit string being parsed
+   * @param origString the original string passed to parseString
+   * @returns
+   *  an array containing:
+   *    the array representing the unit string;
+   *    the original string passed in, possibly updated with corrections; and
+   *    and a flag indicating whether or not processing can continue.
+   *
+   * the this.retMsg_ array will be updated with any user messages
+   *   (informational, error or warning) generated by this or called methods
+   */
+
+
+  _makeUnitsArray(uStr, origString) {
+    // Separate the string into pieces based on delimiters / (division) and .
+    // (multiplication).  The idea is to get an array of units on which we
+    // can then perform any operations (prefixes, multiplication, division).
+    let uArray1 = uStr.match(/([./]|[^./]+)/g);
+    let endProcessing = false;
+    let uArray = [];
+    let startNumCheck = /(^[0-9]+)(\[?[a-zA-Z\_0-9a-zA-Z\_]+\]?$)/; // If the first element in the array is the division operator (/), the
+    // string started with '/'.  Add a first element containing 1 to the
+    // array, which will cause the correct computation to be performed (inversion).
+
+    if (uArray1[0] === "/") {
+      uArray1.unshift("1");
+    } // If the first element in the array is the multiplication operator (.)
+    // return an error.
+    else if (uArray1[0] === '.') {
+        this.retMsg_.push(`${origString} is not a valid UCUM code. ` + `The multiplication operator at the beginning of the expression is ` + `not valid. A multiplication operator must appear only between ` + `two codes.`);
+        endProcessing = true;
+      }
+
+    if (!endProcessing) {
+      // Check to see if there is a number preceding a unit code, e.g., 2mg
+      // If so, update the first element to remove the number (2mg -> mg) and
+      // add two elements to the beginning of the array - the number and the
+      // multiplication operator.
+      if (!intUtils_.isNumericString(uArray1[0])) {
+        let numRes = uArray1[0].match(startNumCheck);
+
+        if (numRes && numRes.length === 3 && numRes[1] !== '' && numRes[2] !== '' && numRes[2].indexOf(this.braceFlag_) !== 0) {
+          let dispVal = numRes[2];
+
+          if (!endProcessing && numRes[2].indexOf(this.parensFlag_) !== -1) {
+            let parensback = this._getParensUnit(numRes[2], origString);
+
+            numRes[2] = parensback[0]['csCode_'];
+            dispVal = `(${numRes[2]})`;
+            endProcessing = parensback[1];
+          }
+
+          if (!endProcessing) {
+            this.retMsg_.push(`${numRes[1]}${dispVal} is not a valid UCUM code.` + `  ${this.vcMsgStart_}${numRes[1]}.${dispVal}${this.vcMsgEnd_}`);
+            origString = origString.replace(`${numRes[1]}${dispVal}`, `${numRes[1]}.${dispVal}`);
+            uArray1[0] = numRes[2];
+            uArray1.unshift(numRes[1], '.');
+          }
+        }
+      } // end if the first element is not a number (only)
+      // Create an array of unit/operator objects.  The unit is, for now, the
+      // string containing the unit code (e.g., Hz for hertz) including
+      // a possible prefix and exponent.   The operator is the operator to be
+      // applied to that unit and the one preceding it.  So, a.b would give
+      // us two objects.  The first will have a unit of a, and a blank operator
+      // (because it's the first unit).  The second would have a unit of b
+      // and the multiplication operator (.).
+
+
+      if (!endProcessing) {
+        let u1 = uArray1.length;
+        uArray = [{
+          op: "",
+          un: uArray1[0]
+        }];
+
+        for (let n = 1; n < u1; n++) {
+          // check to make sure that we don't have two operators together, e.g.,
+          // mg./K.  If so, let the user know the problem.
+          let theOp = uArray1[n++]; // oh wait - check to make sure something is even there, that the
+          // user didn't end the expression with an operator.
+
+          if (!uArray1[n]) {
+            this.retMsg_.push(`${origString} is not a valid UCUM code. ` + `It is terminated with the operator ${this.openEmph_}` + `${theOp}${this.closeEmph_}.`);
+            n = u1;
+            endProcessing = true;
+          } else if (Ucum.validOps_.indexOf(uArray1[n]) !== -1) {
+            this.retMsg_.push(`${origString} is not a valid UCUM code. ` + `A unit code is missing between${this.openEmph_}` + `${theOp}${this.closeEmph_}and${this.openEmph_}` + `${uArray1[n]}${this.closeEmph_}in${this.openEmph_}` + `${theOp}${uArray1[n]}${this.closeEmph_}.`);
+            n = u1;
+            endProcessing = true;
+          } else {
+            // Check to see if a number precedes a unit code.
+            // If so, send the element to _processParens, inserting the multiplication
+            // operator where it belongs.  Treating it as parenthetical keeps it from
+            // being interpreted incorrectly because of operator parentheses.  For
+            // example, if the whole string is mg/2kJ we don't want to rewrite it as
+            // mg/2.kJ - because mg/2 would be performed, followed by .kJ.  Instead,
+            // handling 2kJ as a parenthesized unit will make sure mg is divided by
+            // 2.kJ.
+            if (!intUtils_.isNumericString(uArray1[n])) {
+              let numRes2 = uArray1[n].match(startNumCheck);
+
+              if (numRes2 && numRes2.length === 3 && numRes2[1] !== '' && numRes2[2] !== '' && numRes2[2].indexOf(this.braceFlag_) !== 0) {
+                let invalidString = numRes2[0];
+
+                if (!endProcessing && numRes2[2].indexOf(this.parensFlag_) !== -1) {
+                  let parensback = this._getParensUnit(numRes2[2], origString);
+
+                  numRes2[2] = parensback[0]['csCode_'];
+                  invalidString = `(${numRes2[2]})`;
+                  endProcessing = parensback[1];
+
+                  if (!endProcessing) {
+                    this.retMsg_.push(`${numRes2[1]}${invalidString} is not a ` + `valid UCUM code.  ${this.vcMsgStart_}${numRes2[1]}.${invalidString}` + `${this.vcMsgEnd_}`);
+                    let parensString = `(${numRes2[1]}.${invalidString})`;
+                    origString = origString.replace(`${numRes2[1]}${invalidString}`, parensString);
+
+                    let nextParens = this._processParens(parensString, origString);
+
+                    endProcessing = nextParens[2];
+
+                    if (!endProcessing) {
+                      uArray.push({
+                        op: theOp,
+                        un: nextParens[0]
+                      });
+                    } //uArray.push({op: '.', un: numRes2[2]});
+
+                  }
+                } // end if the string represents a parenthesized unit
+                else {
+                    let parensStr = '(' + numRes2[1] + '.' + numRes2[2] + ')';
+
+                    let parensResp = this._processParens(parensStr, origString); // if a "stop processing" flag was returned, set the n index to end
+                    // the loop and set the endProcessing flag
+
+
+                    if (parensResp[2]) {
+                      n = u1;
+                      endProcessing = true;
+                    } else {
+                      this.retMsg_.push(`${numRes2[0]} is not a ` + `valid UCUM code.  ${this.vcMsgStart_}${numRes2[1]}.${numRes2[2]}` + `${this.vcMsgEnd_}`);
+                      origString = origString.replace(numRes2[0], parensStr);
+                      uArray.push({
+                        op: theOp,
+                        un: parensResp[0]
+                      });
+                    } // end if no error on the processParens call
+
+                  } // end if the string does not represent a parenthesized unit
+
+              } // end if the string is a number followed by a string
+              else {
+                  uArray.push({
+                    op: theOp,
+                    un: uArray1[n]
+                  });
+                }
+            } else {
+              uArray.push({
+                op: theOp,
+                un: uArray1[n]
+              });
+            }
+          } // end if there isn't a missing operator or unit code
+
+        } // end do for each element in uArray1
+
+      } // end if a processing error didn't occur in getParensUnit
+
+    } // end if the string did not begin with a '.' with no following digit
+
+
+    return [uArray, origString, endProcessing];
+  } // end _makeUnitsArray
+
+  /**
+   * Takes a unit string containing parentheses flags and returns the unit they
+   * represent.  Any text found before and/or after the parenthetical
+   * expression is checked to see if we can tell what the user meant and
+   * let them know what it should have been.  For example, 2(mg), which
+   * would resolve to 2mg, should be 2.mg.
+   *
+   * This should only be called from within this class (or by test code).
+   *
+   * @param pStr the string being parsed
+   * @param origString the original unit string passed in; passed through
+   *  to _getAnnonText if annotation flags are found in any text preceding
+   *  or following the parenthetical unit
+   * @returns
+   *   an array containing
+   *     the unit object; and
+   *     a flag indicating whether or not processing should be ended.
+   *       True indicates that the string was invalid and no corrections
+   *         (substitutions or suggestions) could be found;
+   *       False indicates that it was either valid or substitutions/suggestions
+   *          were made.
+   *   the this.retMsg_ array will be updated with any user messages
+   *     (informational, error or warning) generated by this or called methods
+   *   this this.parensUnits_ array contains the units that are acquired by
+   *     this method
+   * @throws an error if an invalid parensUnit index was found.  This is
+   *    a processing error.
+   */
+
+
+  _getParensUnit(pStr, origString) {
+    let endProcessing = false;
+    let retAry = [];
+    let retUnit = null;
+    let befAnnoText = null;
+    let aftAnnoText = null; // Get the location of the flags.  We're assuming there are only two
+    // because _processParens takes care of nesting.  By the time we get
+    // here we should not be looking a nested parens.  Also get any text
+    // before and after the parentheses.  Once we get the unit we update
+    // the input string with the unit's csCode_, which will wipe out any
+    // before and after text
+
+    let psIdx = pStr.indexOf(this.parensFlag_);
+    let befText = null;
+
+    if (psIdx > 0) {
+      befText = pStr.substr(0, psIdx - 1);
+    }
+
+    let peIdx = pStr.lastIndexOf(this.parensFlag_);
+    let aftText = null;
+
+    if (peIdx + this.pFlagLen_ < pStr.length) {
+      aftText = pStr.substr(peIdx + this.pFlagLen_);
+    } // Get the text between the flags
+
+
+    let pNumText = pStr.substring(psIdx + this.pFlagLen_, peIdx); // Make sure the index is a number, and if it is, get the unit from the
+    // this.parensUnits_ array
+
+    if (intUtils_.isNumericString(pNumText)) {
+      retUnit = this.parensUnits_[Number(pNumText)];
+
+      if (!intUtils_.isIntegerUnit(retUnit)) {
+        pStr = retUnit.csCode_;
+      } else {
+        pStr = retUnit;
+      }
+    } // If it's not a number, it's a programming error.  Throw a fit.
+    else {
+        throw new Error(`Processing error - invalid parens number ${pNumText} ` + `found in ${pStr}.`);
+      } // If there's something in front of the starting parentheses flag, check to
+    // see if it's a number or an annotation.
+
+
+    if (befText) {
+      // If it's a number, assume that multiplication was assumed
+      if (intUtils_.isNumericString(befText)) {
+        let nMag = retUnit.getProperty('magnitude_');
+        nMag *= Number(befText);
+        retUnit.assignVals({
+          'magnitude_': nMag
+        });
+        pStr = `${befText}.${pStr}`;
+        this.retMsg_.push(`${befText}${pStr} is not a valid UCUM code.\n` + this.vcMsgStart_ + pStr + this.vcMsgEnd_);
+      } else {
+        if (befText.indexOf(this.braceFlag_) >= 0) {
+          let annoRet = this._getAnnoText(befText, origString); // if we found not only an annotation, but text before or after
+          // the annotation (remembering that this is all before the
+          // parentheses) throw an error - because we don't know what
+          // to do with it.  Could it be missing an operator?
+
+
+          if (annoRet[1] || annoRet[2]) {
+            throw new Error(`Text found before the parentheses (` + `${befText}) included an annotation along with other text ` + `for parenthetical unit ${retUnit.csCode_}`);
+          } // Otherwise put the annotation after the unit string and note
+          // the misplacement.
+
+
+          pStr += annoRet[0];
+          this.retMsg_.push(`The annotation ${annoRet[0]} before the unit ` + `code is invalid.\n` + this.vcMsgStart_ + pStr + this.vcMsgEnd_);
+        } // else the text before the parentheses is neither a number nor
+        // an annotation.  If suggestions were NOT requested, record an
+        // error.
+        else if (!this.suggestions_) {
+            this.retMsg_.push(`${befText} preceding the unit code ${pStr} ` + `is invalid.  Unable to make a substitution.`);
+            endProcessing = true;
+          } // otherwise try for suggestions
+          else {
+              let suggestStat = this._getSuggestions(befText);
+
+              endProcessing = suggestStat !== 'succeeded';
+            } // end if a brace was found or, if not, suggestions were not or
+        // were requested
+
+      } // end if text preceding the parentheses was not a number
+
+    } // end if there was text before the parentheses
+    // Process any text after the parentheses
+
+
+    if (aftText) {
+      // if it's an annotation, get it and add it to the pStr
+      if (aftText.indexOf(this.braceFlag_) >= 0) {
+        let annoRet = this._getAnnoText(aftText, origString); // if we found not only an annotation, but text before or after
+        // the annotation (remembering that this is all after the
+        // parentheses) throw an error - because we don't know what
+        // to do with it.  Could it be missing an operator?
+
+
+        if (annoRet[1] || annoRet[2]) {
+          throw new Error(`Text found after the parentheses (` + `${aftText}) included an annotation along with other text ` + `for parenthetical unit ${retUnit.csCode_}`);
+        } // Otherwise put the annotation after the unit string - no message
+        // needed.
+
+
+        pStr += annoRet[0];
+      } // Otherwise check to see if it's an exponent.  If so, warn the
+      // user that it's not valid - but try it anyway
+      else {
+          if (intUtils_.isNumericString(aftText)) {
+            pStr += aftText;
+            retUnit = retUnit.power(Number(aftText));
+            this.retMsg_.push(`An exponent (${aftText}) following a parenthesis ` + `is invalid as of revision 1.9 of the UCUM Specification.\n  ` + this.vcMsgStart_ + pStr + this.vcMsgEnd_);
+          } // else the text after the parentheses is neither a number nor
+          // an annotation.  If suggestions were NOT requested, record an
+          // error.
+          else if (!this.suggestions_) {
+              this.retMsg_.push(`Text ${aftText} following the unit code ${pStr} ` + `is invalid.  Unable to make a substitution.`);
+              endProcessing = true;
+            } // otherwise try for suggestions
+            else {
+                let suggestStat = this._getSuggestions(befText);
+
+                endProcessing = suggestStat !== 'succeeded';
+              } // end if text following the parentheses not an exponent
+
+        } // end if text following the parentheses is not an annotation
+
+    } // end if there is text following the parentheses
+
+
+    if (!endProcessing) {
+      if (!retUnit) {
+        retUnit = new Unit({
+          'csCode_': pStr,
+          'magnitude_': 1,
+          'name_': pStr
+        });
+      } else if (intUtils_.isIntegerUnit(retUnit)) {
+        retUnit = new Unit({
+          'csCode_': retUnit,
+          'magnitude_': retUnit,
+          'name_': retUnit
+        });
+      } else {
+        retUnit.csCode_ = pStr;
+      }
+    }
+
+    return [retUnit, endProcessing];
+  } // end _getParensUnit
+
+  /**
+   * Takes a unit string containing annotation flags and returns the
+   * annotation they represent.  This also returns any text found before
+   * the annotation and any found after the annotation.
+   *
+   * This should only be called from within this class (or by test code).
+   * NEEDS FIX in next branch to handle string with multiple annotations.
+   *
+   * @param pStr the string being parsed
+   * @param origString the original string being parsed; used in error msg
+   *  thrown for an invalid index to the annotations array
+   * @returns
+   *  an array containing
+   *    the annotation for the pStr;
+   *    any text found before the annotation; and
+   *    any text found after the annotation.
+   *
+   * the this.retMsg_ array will be updated with any user messages
+   *   (informational, error or warning) generated by this or called methods
+   * the this.annotations_ array is used as the source for the annotations text
+   * @throws an error if for a processing error - an invalid annotation index.
+   */
+
+
+  _getAnnoText(pStr, origString) {
+    // if the starting braces flag is not at index 0, get the starting
+    // text and the adjust the pStr to omit it.
+    let asIdx = pStr.indexOf(this.braceFlag_);
+    let startText = asIdx > 0 ? pStr.substring(0, asIdx) : null;
+
+    if (asIdx !== 0) {
+      pStr = pStr.substr(asIdx);
+    } // Get the location of the end flag and, if text follows it, get the text
+
+
+    let aeIdx = pStr.indexOf(this.braceFlag_, 1);
+    let endText = aeIdx + this.bFlagLen_ < pStr.length ? pStr.substr(aeIdx + this.bFlagLen_) : null; // Get the index of the annotation in this.annotations_.
+    // Check it to make sure it's valid, and if not, throw an error
+
+    let idx = pStr.substring(this.bFlagLen_, aeIdx);
+    let idxNum = Number(idx);
+
+    if (!intUtils_.isNumericString(idx) || idxNum >= this.annotations_.length) {
+      throw new Error(`Processing Error - invalid annotation index ${idx} found ` + `in ${pStr} that was created from ${origString}`);
+    } // Replace the flags and annotation index with the annotation expression
+
+
+    pStr = this.annotations_[idxNum];
+    return [pStr, startText, endText];
+  } // end _getAnnoText
+
+  /**
+   * Takes a unit string and looks for suggested units.  This should be
+   * called for unit strings that cannot be resolved to unit codes.  The
+   * string is searched for in the synonyms table found in the UnitTables
+   * class.  That table includes all synonyms and unit names for the units
+   * in the unit data table.
+   *
+   * @param pStr the string being parsed
+   * @returns an object that contains an element named 'status', whose
+   *  value indicates the status of the request:
+   *   'succeeded' indicates that synonyms were found;
+   *   'failed' indicates that no synonyms were found; or
+   *   'error' which indicates that an error occurred
+   *
+   * the this.retMsg_ array will be updated with a message indicating whether
+   *  or not synonyms/suggestions  were found
+   * the this.suggestions_ array will be updated with a hash (added to the
+   *   array if it already contains others) that contains three elements:
+   *   'msg' which is a message indicating what unit expression the
+   *      suggestions are for;
+   *   'invalidUnit' which is the unit expression the suggestions are for; and
+   *   'units' which is an array of data for each suggested unit found.
+   *       Each array will contain the unit code, the unit name and the
+   *       unit guidance (if any).
+   */
+
+
+  _getSuggestions(pStr) {
+    let retObj = intUtils_.getSynonyms(pStr);
+
+    if (retObj['status'] === 'succeeded') {
+      let suggSet = {};
+      suggSet['msg'] = `${pStr} is not a valid UCUM code.  We found possible ` + `units that might be what was meant:`;
+      suggSet['invalidUnit'] = pStr;
+      let synLen = retObj['units'].length;
+      suggSet['units'] = [];
+
+      for (let s = 0; s < synLen; s++) {
+        let unit = retObj['units'][s];
+        let unitArray = [unit['code'], unit['name'], unit['guidance']];
+        suggSet['units'].push(unitArray);
+      }
+
+      this.suggestions_.push(suggSet);
+    } else {
+      this.retMsg_.push(`${pStr} is not a valid UCUM code.  No alternatives ` + `were found.`);
+    }
+
+    return retObj['status'];
+  } // end getSuggestions
+
+  /**
+   * Creates a unit object from a string defining one unit.  The string
+   * should consist of a unit code for a unit already defined (base or
+   * otherwise).  It may include a prefix and an exponent, e.g., cm2
+   * (centimeter squared).  This should only be called from within this
+   * class (or by test code).
+   *
+   * @params uCode the string defining the unit
+   * @param origString the original string to be parsed; used to provide
+   *  context for messages
+   * @returns
+   *  an array containing:
+   *    a unit object, or null if there were problems creating the unit; and
+   *    the origString passed in, which may be updated if a unit name was
+   *    translated to a unit code.
+   *
+   *  the this.retMsg_ array will be updated with any user messages
+   *    (informational, error or warning) generated by this or called methods
+   *  the this.suggestions_ array will be populated if no unit (with or without
+   *    substitutions) could be found and suggestions were requested
+   */
+
+
+  _makeUnit(uCode, origString) {
+    // First try the code just as is, without looking for annotations,
+    // prefixes, exponents, or elephants.
+    let retUnit = this.utabs_.getUnitByCode(uCode);
+
+    if (retUnit) {
+      retUnit = retUnit.clone();
+    } // If we found it, we're done.  No need to parse for those elephants (or
+    // other stuff).
+    else if (uCode.indexOf(this.braceFlag_) >= 0) {
+        let getAnnoRet = this._getUnitWithAnnotation(uCode, origString);
+
+        retUnit = getAnnoRet[0];
+
+        if (retUnit) {
+          origString = getAnnoRet[1];
+        } // If a unit is not found, retUnit will be returned null and
+        // the this.retMsg_ array will contain a message describing the problem.
+        // If a unit is found, of course, all is good. So ... nothing left
+        // to see here, move along.
+
+      } // end if the uCode includes an annotation
+      else {
+          // So we didn't find a unit for the full uCode or for one with
+          // annotations.  Try looking for a unit that uses a carat (^)
+          // instead of an asterisk (*)
+          if (uCode.indexOf('^') > -1) {
+            let tryCode = uCode.replace('^', '*');
+            retUnit = this.utabs_.getUnitByCode(tryCode);
+
+            if (retUnit) {
+              retUnit = retUnit.clone();
+              retUnit.csCode_ = retUnit.csCode_.replace('*', '^');
+              retUnit.ciCode_ = retUnit.ciCode_.replace('*', '^');
+            }
+          } // If that didn't work, check to see if it should have brackets
+          // around it (uCode = degF when it should be [degF]
+
+
+          if (!retUnit) {
+            let addBrackets = '[' + uCode + ']';
+            retUnit = this.utabs_.getUnitByCode(addBrackets);
+
+            if (retUnit) {
+              retUnit = retUnit.clone();
+              origString = origString.replace(uCode, addBrackets);
+              this.retMsg_.push(`${uCode} is not a valid unit expression, but ` + `${addBrackets} is.\n` + this.vcMsgStart_ + `${addBrackets} (${retUnit.name_})${this.vcMsgEnd_}`);
+            } // end if we found the unit after adding brackets
+
+          } // end trying to add brackets
+          // If we didn't find it, try it as a name
+
+
+          if (!retUnit) {
+            let retUnitAry = this.utabs_.getUnitByName(uCode);
+
+            if (retUnitAry && retUnitAry.length > 0) {
+              retUnit = retUnitAry[0].clone();
+              let mString = 'The UCUM code for ' + uCode + ' is ' + retUnit.csCode_ + '.\n' + this.vcMsgStart_ + retUnit.csCode_ + this.vcMsgEnd_;
+              let dupMsg = false;
+
+              for (let r = 0; r < this.retMsg_.length && !dupMsg; r++) dupMsg = this.retMsg_[r] === mString;
+
+              if (!dupMsg) this.retMsg_.push(mString);
+              let rStr = new RegExp('(^|[.\/({])(' + uCode + ')($|[.\/)}])');
+              let res = origString.match(rStr);
+              origString = origString.replace(rStr, res[1] + retUnit.csCode_ + res[3]);
+              uCode = retUnit.csCode_;
+            }
+          } // If we still don't have a unit, try assuming a modifier (prefix and/or
+          // exponent) and look for a unit without the modifier
+
+
+          if (!retUnit) {
+            // Well, first see if it's one of the special units.  If so,
+            // replace the placeholder text with the actual unit string, keeping
+            // whatever text (probably a prefix) goes with the unit string.
+            let sUnit = null;
+
+            for (sUnit in Ucum.specUnits_) {
+              if (uCode.indexOf(Ucum.specUnits_[sUnit]) !== -1) uCode = uCode.replace(Ucum.specUnits_[sUnit], sUnit);
+            }
+
+            retUnit = this.utabs_.getUnitByCode(uCode);
+            if (retUnit) retUnit = retUnit.clone();
+          }
+
+          if (!retUnit) {
+            let origCode = uCode;
+            let origUnit = null;
+            let exp = null;
+            let pfxCode = null;
+            let pfxObj = null;
+            let pfxVal = null;
+            let pfxExp = null; // Look first for an exponent.  If we got one, separate it out and
+            // try to get the unit again
+
+            let codeAndExp = this._isCodeWithExponent(uCode);
+
+            if (codeAndExp) {
+              uCode = codeAndExp[0];
+              exp = codeAndExp[1];
+              origUnit = this.utabs_.getUnitByCode(uCode);
+            } // If we still don't have a unit, separate out the prefix, if any,
+            // and try without it.
+
+
+            if (!origUnit) {
+              // Try for a single character prefix first.
+              pfxCode = uCode.charAt(0);
+              pfxObj = this.pfxTabs_.getPrefixByCode(pfxCode); // if we got a prefix, get its info and remove it from the unit code
+
+              if (pfxObj) {
+                pfxVal = pfxObj.getValue();
+                pfxExp = pfxObj.getExp();
+                let pCodeLen = pfxCode.length;
+                uCode = uCode.substr(pCodeLen); // try again for the unit
+
+                origUnit = this.utabs_.getUnitByCode(uCode); // If we still don't have a unit, see if the prefix could be the
+                // two character "da" (deka) prefix.  That's the only prefix with
+                // two characters, and without this check it's interpreted as "d"
+                // (deci) and the "a" is considered part of the unit code.
+
+                if (!origUnit && pfxCode == 'd' && uCode.substr(0, 1) == 'a') {
+                  pfxCode = 'da';
+                  pfxObj = this.pfxTabs_.getPrefixByCode(pfxCode);
+                  pfxVal = pfxObj.getValue();
+                  uCode = uCode.substr(1); // try one more time for the unit
+
+                  origUnit = this.utabs_.getUnitByCode(uCode);
+                }
+              } // end if we found a prefix
+
+            } // end if we didn't get a unit after removing an exponent
+            // If we still haven't found anything, we're done looking.
+            // (We tried with the full unit string, with the unit string
+            // without the exponent, the unit string without a prefix,
+            // common errors, etc. That's all we can try).
+
+
+            if (!origUnit) {
+              retUnit = null; // BUT if the user asked for suggestions, at least look for them
+
+              if (this.suggestions_) {
+                let suggestStat = this._getSuggestions(origCode);
+              } else {
+                this.retMsg_.push(`${origCode} is not a valid UCUM code.`);
+              }
+            } else {
+              // Otherwise we found a unit object.  Clone it and then apply the
+              // prefix and exponent, if any, to it.  And remove the guidance.
+              retUnit = origUnit.clone();
+              retUnit.guidance_ = '';
+              let theDim = retUnit.getProperty('dim_');
+              let theMag = retUnit.getProperty('magnitude_');
+              let theName = retUnit.getProperty('name_');
+              let theCiCode = retUnit.getProperty('ciCode_');
+              let thePrintSymbol = retUnit.getProperty('printSymbol_'); // If there is an exponent for the unit, apply it to the dimension
+              // and magnitude now
+
+              if (exp) {
+                exp = parseInt(exp);
+                let expMul = exp;
+                if (theDim) theDim = theDim.mul(exp);
+                theMag = Math.pow(theMag, exp);
+                retUnit.assignVals({
+                  'magnitude_': theMag
+                }); // If there is also a prefix, apply the exponent to the prefix.
+
+                if (pfxObj) {
+                  // if the prefix base is 10 it will have an exponent.  Multiply
+                  // the current prefix exponent by the exponent for the unit
+                  // we're working with.  Then raise the prefix value to the level
+                  // defined by the exponent.
+                  if (pfxExp) {
+                    expMul *= pfxObj.getExp();
+                    pfxVal = Math.pow(10, expMul);
+                  } // If the prefix base is not 10, it won't have an exponent.
+                  // At the moment I don't see any units using the prefixes
+                  // that aren't base 10.   But if we get one the prefix value
+                  // will be applied to the magnitude (below) if the unit does
+                  // not have a conversion function, and to the conversion prefix
+                  // if it does.
+
+                } // end if there's a prefix as well as the exponent
+
+              } // end if there's an exponent
+              // Now apply the prefix, if there is one, to the conversion
+              // prefix or the magnitude
+
+
+              if (pfxObj) {
+                if (retUnit.cnv_) {
+                  retUnit.assignVals({
+                    'cnvPfx_': pfxVal
+                  });
+                } else {
+                  theMag *= pfxVal;
+                  retUnit.assignVals({
+                    'magnitude_': theMag
+                  });
+                }
+              } // if we have a prefix and/or an exponent, add them to the unit
+              // attributes - name, csCode, ciCode and print symbol
+
+
+              let theCode = retUnit.csCode_;
+
+              if (pfxObj) {
+                theName = pfxObj.getName() + theName;
+                theCode = pfxCode + theCode;
+                theCiCode = pfxObj.getCiCode() + theCiCode;
+                thePrintSymbol = pfxObj.getPrintSymbol() + thePrintSymbol;
+                retUnit.assignVals({
+                  'name_': theName,
+                  'csCode_': theCode,
+                  'ciCode_': theCiCode,
+                  'printSymbol_': thePrintSymbol
+                });
+              }
+
+              if (exp) {
+                let expStr = exp.toString();
+                retUnit.assignVals({
+                  'name_': theName + '<sup>' + expStr + '</sup>',
+                  'csCode_': theCode + expStr,
+                  'ciCode_': theCiCode + expStr,
+                  'printSymbol_': thePrintSymbol + '<sup>' + expStr + '</sup>'
+                });
+              }
+            } // end if an original unit was found (without prefix and/or exponent)
+
+          } // end if we didn't get a unit for the full unit code (w/out modifiers)
+
+        } // end if we didn't find the unit on the first try, before parsing
+
+
+    return [retUnit, origString];
+  } // end _makeUnit
+
+  /**
+   * This method handles unit creation when an annotation is included
+   * in the unit string.  This basically isolates and retrieves the
+   * annotation and then calls _makeUnit to try to get a unit from
+   * any text that precedes or follows the annotation.
+   *
+   * @param uCode the string defining the unit
+   * @param origString the original full string submitted to parseString
+   * @returns the unit object found, or null if one could not be found
+   *
+   * the this.retMsg_ array will be updated with any user messages
+   *   (informational, error or warning) generated by this or called methods
+   */
+
+
+  _getUnitWithAnnotation(uCode, origString) {
+    let retUnit = null; // Get the annotation and anything that precedes or follows it.
+
+    let annoRet = this._getAnnoText(uCode, origString);
+
+    let annoText = annoRet[0];
+    let befAnnoText = annoRet[1];
+    let aftAnnoText = annoRet[2]; // Add the warning about annotations - just once.
+
+    if (this.bracesMsg_ && this.retMsg_.indexOf(this.bracesMsg_) === -1) this.retMsg_.push(this.bracesMsg_); // If there's no text before or after the annotation, it's probably
+    // something that should be interpreted as a 1, e.g., {KCT'U}.
+    // HOWEVER, it could also be a case where someone used braces instead
+    // of brackets, e.g., {degF} instead of [degF].  Check for that before
+    // we assume it should be a 1.
+
+    let msgLen = this.retMsg_.length;
+
+    if (!befAnnoText && !aftAnnoText) {
+      let tryBrackets = '[' + annoText.substring(1, annoText.length - 1) + ']';
+
+      let mkUnitRet = this._makeUnit(tryBrackets, origString); // If we got back a unit, assign it to the returned unit, and add
+      // a message to advise the user that brackets should enclose the code
+
+
+      if (mkUnitRet[0]) {
+        retUnit = mkUnitRet[0];
+        origString = origString.replace(annoText, tryBrackets);
+        this.retMsg_.push(`${annoText} is not a valid unit expression, but ` + `${tryBrackets} is.\n` + this.vcMsgStart_ + `${tryBrackets} (${retUnit.name_})${this.vcMsgEnd_}`);
+      } // Otherwise assume that this should be interpreted as a 1
+      else {
+          // remove error message generated for trybrackets
+          if (this.retMsg_.length > msgLen) {
+            this.retMsg_.pop();
+          }
+
+          uCode = 1;
+          retUnit = 1;
+        }
+    } // end if it's only an annotation
+    else {
+        // if there's text before and no text after, assume the text before
+        // the annotation is the unit code (with an annotation following it).
+        // Call _makeUnit for the text before the annotation.
+        if (befAnnoText && !aftAnnoText) {
+          // make sure that what's before the annoText is not a number, e.g.,
+          // /100{cells}.  But f it is a number, just set the return unit to
+          // the number.
+          if (intUtils_.isIntegerUnit(befAnnoText)) {
+            retUnit = befAnnoText;
+          } // Otherwise try to find a unit
+          else {
+              let mkUnitRet = this._makeUnit(befAnnoText, origString); // if a unit was returned
+
+
+              if (mkUnitRet[0]) {
+                retUnit = mkUnitRet[0];
+                retUnit.csCode_ += annoText;
+                origString = mkUnitRet[1];
+              } // Otherwise add a not found message
+              else {
+                  this.retMsg_.push(`Unable to find a unit for ${befAnnoText} that ` + `precedes the annotation ${annoText}.`);
+                }
+            }
+        } // else if there's only text after the annotation, try for a unit
+        // from the after text and assume the user put the annotation in
+        // the wrong place (and tell them)
+        else if (!befAnnoText && aftAnnoText) {
+            // Again, test for a number and if it is a number, set the return
+            // unit to the number.
+            if (intUtils_.isIntegerUnit(aftAnnoText)) {
+              retUnit = aftAnnoText + annoText;
+              this.retMsg_.push(`The annotation ${annoText} before the ``${aftAnnoText} is invalid.\n` + this.vcMsgStart_ + retUnit + this.vcMsgEnd_);
+            } else {
+              let mkUnitRet = this._makeUnit(aftAnnoText, origString);
+
+              if (mkUnitRet[0]) {
+                retUnit = mkUnitRet[0];
+                retUnit.csCode_ += annoText;
+                origString = retUnit.csCode_;
+                this.retMsg_.push(`The annotation ${annoText} before the unit ` + `code is invalid.\n` + this.vcMsgStart_ + retUnit.csCode_ + this.vcMsgEnd_);
+              } // Otherwise add a not found message
+              else {
+                  this.retMsg_.push(`Unable to find a unit for ${befAnnoText} that ` + `follows the annotation ${annoText}.`);
+                }
+            }
+          } // else it's got text before AND after the annotation.  Now what?
+          // For now this is an error.  This may be a case of a missing
+          // operator but that is not handled yet.
+          else {
+              this.retMsg_.push(`Unable to find a unit for ${befAnnoText}${annoText}` + `${aftAnnoText}.\nWe are not sure how to interpret text both before ` + `and after the annotation.  Sorry`);
+            }
+      } // else if there's text before/and or after the annotation
+
+
+    return [retUnit, origString];
+  } // end _getUnitWithAnnotations
+
+  /**
+   * Performs unit arithmetic for the units in the units array.  That array
+   * contains units/numbers and the operators (division or multiplication) to
+   * be performed on each unit/unit or unit/number pair in the array.  This
+   * should only be called from within this class (or by test code).
+   *
+   * @params uArray the array that contains the units, numbers and operators
+   *  derived from the unit string passed in to parseString
+   * @param origString the original string to be parsed; used to provide
+   *  context for messages
+   *
+   * @returns a single unit object that is the result of the unit arithmetic
+   *
+   * the this.retMsg_ array will be updated with any user messages
+   *   (informational, error or warning) generated by this or called methods
+   */
+
+
+  _performUnitArithmetic(uArray, origString) {
+    let finalUnit = uArray[0]['un'];
+
+    if (intUtils_.isIntegerUnit(finalUnit)) {
+      finalUnit = new Unit({
+        'csCode_': finalUnit,
+        'magnitude_': Number(finalUnit),
+        'name_': finalUnit
+      });
+    }
+
+    let uLen = uArray.length;
+    let endProcessing = false; // Perform the arithmetic for the units, starting with the first 2 units.
+    // We only need to do the arithmetic if we have more than one unit.
+
+    for (let u2 = 1; u2 < uLen && !endProcessing; u2++) {
+      let nextUnit = uArray[u2]['un'];
+
+      if (intUtils_.isIntegerUnit(nextUnit)) {
+        nextUnit = new Unit({
+          'csCode_': nextUnit,
+          'magnitude_': Number(nextUnit),
+          'name_': nextUnit
+        });
+      }
+
+      if (nextUnit === null || typeof nextUnit !== 'number' && !nextUnit.getProperty) {
+        let msgString = `Unit string (${origString}) contains unrecognized ` + 'element';
+
+        if (nextUnit) {
+          msgString += ` (${this.openEmph_}${nextUnit.toString()}` + `${this.closeEmph_})`;
+        }
+
+        msgString += '; could not parse full string.  Sorry';
+        this.retMsg_.push(msgString);
+        endProcessing = true;
+      } else {
+        try {
+          // Is the operation division?
+          let thisOp = uArray[u2]['op'];
+          let isDiv = thisOp === '/'; // Perform the operation.  Both the finalUnit and nextUnit
+          // are unit objects.
+
+          isDiv ? finalUnit = finalUnit.divide(nextUnit) : finalUnit = finalUnit.multiplyThese(nextUnit);
+        } catch (err) {
+          this.retMsg_.unshift(err.message);
+          endProcessing = true;
+          finalUnit = null;
+        }
+      } // end if we have another valid unit/number to process
+
+    } // end do for each unit after the first one
+
+
+    return finalUnit;
+  } // end _performUnitArithmetic
+
+  /**
+   * This tests a string to see if it starts with characters and ends with
+   * digits.  This is used to test for an exponent on a UCUM code (or what
+   * we think might be a UCUM code).  This is broken out to a separate
+   * function so that the regular expression can be verified to provide the
+   * results we expect, in case someone changes it.  (Per Paul Lynch)
+   * See "Test _isCodeWithExponent method" in testUnitString.spec.js
+   *
+   * This particular regex has been tweaked several times.  This one
+   * works with the following test strings:
+   * "m[H2O]-21 gives ["m[H2O]-21", "m[H2O]", "-21"]
+   * "m[H2O]+21 gives ["m[H2O]+21", "m[H2O]", "+21"]
+   * "m[H2O]21 gives ["m[H2O]-21", "m[H2O]", "21"]
+   * "s2" gives ["s2", "s, "2"]
+   * "kg" gives null
+   * "m[H2O]" gives null
+   * "m[H2O]23X" gives null
+   *
+   * @params uCode the code being tested
+   * @returns an array containing: (1) the code without the exponent (or
+   *  trailing number); and (2) the exponent/trailing number.  Returns null
+   *  if there is no trailing number or something follows the trailing
+   *  number, or if the first part is not characters.
+   */
+
+
+  _isCodeWithExponent(uCode) {
+    let ret = [];
+    let res = uCode.match(/(^[^\-\+]+?)([\-\+\d]+)$/); // If we got a return with an exponent, separate the exponent from the
+    // unit and return both (as separate values)
+
+    if (res && res[2] && res[2] !== "") {
+      ret.push(res[1]);
+      ret.push(res[2]);
+    } // end if we got an exponent
+    else {
+        ret = null;
+      }
+
+    return ret;
+  } // end _isCodeWithExponent
+
+
+} // end class UnitString
+
+/**
+ *  This function exists ONLY until the original UnitString constructor
+ *  is called for the first time.  It's defined here in case getInstance
+ *  is called before the constructor.   This calls the constructor.
+ *
+ *  The constructor redefines the getInstance function to return the
+ *  singleton UnitString object.  This is based on the UnitTables singleton
+ *  implementation; see more detail in the UnitTables constructor description.
+ *
+ *  @return the singleton UnitString object.
+ */
+
+
+exports.UnitString = UnitString;
+
+UnitString.getInstance = function () {
+  return new UnitString();
+};
+/*
+// Perform the first request for the object, to set the getInstance method.
+UnitString.getInstance();
+
+*/
+
+
+},{"./config.js":50,"./prefixTables.js":54,"./ucumInternalUtils.js":56,"./unit.js":60,"./unitTables.js":62}],62:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.UnitTables = void 0;
+
+/**
+ * This class manages Hashtables that provide references to
+ * defined units.
+ *
+ * @author Lee Mericle, based on java version by Gunther Schadow
+ *
+ */
+var Ucum = require('./config.js').Ucum;
+
+class UnitTablesFactory {
+  /**
+   * Constructor.  This creates the empty unit tables (hashes) once. After the
+   * tables are created, it redefines this constructor to throw an error
+   * stating that the constructor is no longer available and that the
+   * getInstance function must be used.   Here's a description of the first
+   * and then all subsequent calls to this constructor.
+   *
+   * First call to constructor:
+   * 1. creates  OBJECT1
+   * 2. initializes attributes of OBJECT1
+   * 3. stores reference to OBJECT1.prototype in holdthis local variable
+   * 4. redefines OBJECT1 as a function that throws an error
+   * 5. defines the getInstance function (which is also defined outside of
+   *    the class definition - see below).
+   *
+   * All subsequent calls to constructor:
+   * 1. throw error message referring to getInstance
+   * 2. call getInstance, returns this - which is OBJECT1.
+   */
+  constructor() {
+    /**
+     * Tracks units by name
+     * @type hash - key is the name;
+     *              value is an array of references to the Unit objects
+     *              with the name.  More than one unit may have the same
+     *              name, e.g., "second", which is shared by the base unit
+     *              with the code = "s" and the unit with code = "'".
+     */
+    this.unitNames_ = {};
+    /**
+     * Tracks units by code using case-sensitive version.
+     *
+     * @type hash - key is the code;
+     *              value is the reference to the Unit object.  Codes must
+     *              be unique.
+     */
+
+    this.unitCodes_ = {};
+    /**
+     * Keeps track of the order in which units are defined.  The order is
+     * important because unit definitions build on previous definitions.
+     *
+     * @type {Array}
+     */
+
+    this.codeOrder_ = [];
+    /**
+     * Tracks units by unit strings, e.g., cm-1
+     *
+     * @type hash - key is the unit string
+     *              value is an array of unit objects with that ciUnitString.
+     */
+
+    this.unitStrings_ = {};
+    /**
+     * Tracks units by Dimension vector
+     *
+     * @type hash - key is the dimension vector (not the object, just the
+     *              vector);
+     *              value is an array of references to the Unit objects
+     *              with that vector.  More than one unit may have the same
+     *              unit vector, and this can be used to provide a list
+     *              of commensurable units.
+     */
+
+    this.unitDimensions_ = {};
+    /**
+     * Maps synonyms to units.   Not built until first requested.
+     *
+     * @type hash - key is the synonym
+     *              value is an array of references to Unit objects that
+     *              include that synonym.
+     */
+
+    this.unitSynonyms_ = {};
+    /*
+     * Holds onto the index of the index of the dimension vector flag for
+     * the base mass unit (gram).  This is set when the base unit (gram) is
+     * created, and is stored here so that it doesn't have to be found
+     * over and over again to try to determine whether or not a unit is
+     * mass-based (for mole<->mass conversions)
+     *
+     * @type integer
+     */
+
+    this.massDimIndex_ = 0;
+  }
+  /**
+   * Provides the number of unit objects written to the tables, using the
+   * codes table since codes must be unique.
+   *
+   * @returns count of the number of unit objects in the unitCodes_ table.
+   */
+
+
+  unitsCount() {
+    return Object.keys(this.unitCodes_).length;
+  }
+  /**
+   * Adds a Unit object to the tables.
+   *
+   * @param theUnit the unit to be added
+   * @returns nothing
+   * @throws passes on an error if one is thrown by the called functions for
+   *  a problem with the unit code or unit name
+   */
+
+
+  addUnit(theUnit) {
+    let uName = theUnit['name_'];
+
+    if (uName) {
+      this.addUnitName(theUnit);
+    }
+
+    this.addUnitCode(theUnit);
+    this.addUnitString(theUnit);
+
+    try {
+      if (theUnit['dim_'].getProperty('dimVec_')) this.addUnitDimension(theUnit);
+    } catch (err) {// do nothing - throws error if the property is null
+      // and that's OK here.
+    }
+  } // end addUnit
+
+  /**
+   * Adds a Unit object to the unitNames_ table.  More than one unit
+   * can have the same name, e.g., the two units with the name "second",
+   * where the code for one of them is 's' and the code for the other is
+   * "'".  Because of this, an array of unit objects is stored for the
+   * name.  In most cases it will be an array of one object, but this
+   * clarifies that there may be more than one.
+   *
+   * @param theUnit the unit to be added
+   * @returns nothing
+   * @throws an error if the unit has no name
+   */
+
+
+  addUnitName(theUnit) {
+    let uName = theUnit['name_'];
+
+    if (uName) {
+      if (this.unitNames_[uName]) this.unitNames_[uName].push(theUnit);else this.unitNames_[uName] = [theUnit];
+    } else throw new Error('UnitTables.addUnitName called for a unit with no name.  ' + `Unit code = ${theUnit['csCode_']}.`);
+  } // end addUnitName
+
+  /**
+   * Adds a Unit object to the unitCodes_, unitUcCodes_, unitLcCodes_ and
+   * codeOrder_ tables.  This also sets the mass dimension index when the
+   * base mass unit (gram) is read.
+   *
+   * @param theUnit the unit to be added
+   * @returns nothing
+   * @throws an error if the unitCodes_ table already contains a unit with
+   *  the code
+   */
+
+
+  addUnitCode(theUnit) {
+    let uCode = theUnit['csCode_'];
+
+    if (uCode) {
+      if (this.unitCodes_[uCode]) throw new Error(`UnitTables.addUnitCode called, already contains entry for ` + `unit with code = ${uCode}`);else {
+        this.unitCodes_[uCode] = theUnit;
+        this.codeOrder_.push(uCode);
+
+        if (uCode == 'g') {
+          let dimVec = theUnit.dim_.dimVec_;
+          let d = 0;
+
+          for (; d < dimVec.length && dimVec[d] < 1; d++);
+
+          this.massDimIndex_ = d;
+        }
+      }
+    } else throw new Error('UnitTables.addUnitCode called for unit that has ' + 'no code.');
+  } // end addUnitCode
+
+  /**
+   * Adds a unit object to the unitStrings_ table.  More than one unit
+   * can have the same string, so an array of unit objects is stored
+   * for the string.  The unit string is the string that creates a non-base
+   * unit, e.g., a Newton has a unit code of N, a name of Newton, and a
+   * unitString of kg.m/s2.
+   *
+   * If the unit has no string, nothing is stored and no error is reported.
+   *
+   * @param theUnit the unit to be added
+   * @returns nothing
+   */
+
+
+  addUnitString(theUnit) {
+    let uString = null;
+    if (Ucum.caseSensitive_ == true) uString = theUnit['csUnitString_'];else uString = theUnit['ciUnitString_'];
+
+    if (uString) {
+      let uEntry = {
+        mag: theUnit['baseFactorStr_'],
+        unit: theUnit
+      };
+      if (this.unitStrings_[uString]) this.unitStrings_[uString].push(uEntry);else this.unitStrings_[uString] = [uEntry];
+    }
+  } // end addUnitString
+
+  /**
+   * Adds a Unit object to the unitDimensions_ table.  More than one unit
+   * can have the same dimension (commensurable units have the same dimension).
+   * Because of this, an array of unit objects is stored for the
+   * dimension.
+   *
+   * @param theUnit the unit to be added
+   * @returns nothing
+   * @throws an error if the unit has no dimension
+   */
+
+
+  addUnitDimension(theUnit) {
+    let uDim = theUnit['dim_'].getProperty('dimVec_');
+
+    if (uDim) {
+      if (this.unitDimensions_[uDim]) this.unitDimensions_[uDim].push(theUnit);else this.unitDimensions_[uDim] = [theUnit];
+    } else throw new Error('UnitTables.addUnitDimension called for a unit with no dimension.  ' + `Unit code = ${theUnit['csCode_']}.`);
+  } // end addUnitDimension
+
+  /**
+   * Builds the unitSynonyms_ table. This is called the first time the
+   * getUnitsBySynonym method is called.  The table/hash contains each word
+   * (once) from each synonym as well as each word from each unit name.
+   *
+   * Hash keys are the words.  Hash values are an array of unit codes for
+   * each unit that has that word in its synonyms or name.
+   *
+   * @returns nothing
+   */
+
+
+  buildUnitSynonyms() {
+    for (let code in this.unitCodes_) {
+      let theUnit = this.unitCodes_[code];
+      let uSyns = theUnit.synonyms_; // If the current unit has synonyms, process each synonym (often multiples)
+
+      if (uSyns) {
+        let synsAry = uSyns.split(';');
+
+        if (synsAry[0] !== '') {
+          let aLen = synsAry.length;
+
+          for (let a = 0; a < aLen; a++) {
+            let theSyn = synsAry[a].trim(); // call addSynonymCodes to process each word in the
+            // synonym, e.g., "British fluid ounces"
+
+            this.addSynonymCodes(code, theSyn);
+          } // end do for each synonym
+
+        } // end if the current unit has a non-null synonym attribute
+
+      } // end if the unit has any synonyms
+      // Now call addSynonymCodes to process each word in the unit's name
+
+
+      this.addSynonymCodes(code, theUnit.name_);
+    } // end do for each unit
+
+  } // end buildUnitSynonyms
+
+  /**
+   * Adds unit code entries to the synonyms table for a string containing
+   * one or more words to be considered as synonyms.
+   *
+   * @param theCode the unit code to be connected to the synonyms
+   * @param theSynonyms a string containing one or more words to be
+   *  considered synonyms (and thus to be added to the unitSynonyms hash).
+   */
+
+
+  addSynonymCodes(theCode, theSynonyms) {
+    let words = theSynonyms.split(' ');
+    let wLen = words.length;
+
+    for (let w = 0; w < wLen; w++) {
+      let word = words[w]; // if there is already a synonyms entry for the word,
+      // get the array of unit codes currently assigned to
+      // the word and add the code for the current word to
+      // the synonyms array if it's not already there.
+
+      if (this.unitSynonyms_[word]) {
+        let synCodes = this.unitSynonyms_[word];
+
+        if (synCodes.indexOf(theCode) === -1) {
+          this.unitSynonyms_[word].push(theCode);
+        }
+      } // else there are no synonyms entry for the word.  Create a
+      // synonyms array for the word, setting it to contain the unit code.
+      else {
+          this.unitSynonyms_[word] = [theCode];
+        }
+    } // end do for each word in the synonyms being processed
+
+  } // end addSynonymCodes
+
+  /**
+   *  Returns a unit object with a case-sensitive code matching the
+   *  uCode parameter, or null if no unit is found with that code.
+   *
+   *  @param uCode the code of the unit to be returned
+   *  @returns the unit object or null if it is not found
+   */
+
+
+  getUnitByCode(uCode) {
+    let retUnit = null;
+
+    if (uCode) {
+      retUnit = this.unitCodes_[uCode];
+    }
+
+    return retUnit;
+  }
+  /**
+   *  Returns a array of unit objects based on the unit's name.  Usually this
+   *  will be an array of one, but there may be more, since unit names are
+   *  not necessarily unique.
+   *
+   *  @param uName the name of the unit to be returned.  If more than one
+   *  unit has the same name and you only want one specific unit, append the
+   *  csCode of the unit you want to the end of the name, separated by the
+   *  Ucum.codeSep_ value, e.g., inch - [in_i] vs. inch - [in_us].
+   *  @returns null if no unit was found for the specified name OR an array of
+   *  unit objects with the specified name.  Normally this will be an array
+   *  of one object.
+   *  @throws an error if no name is provided to search on
+   */
+
+
+  getUnitByName(uName) {
+    if (uName === null || uName === undefined) {
+      throw new Error('Unable to find unit by name because no name was provided.');
+    }
+
+    let sepPos = uName.indexOf(Ucum.codeSep_);
+    let uCode = null;
+
+    if (sepPos >= 1) {
+      uCode = uName.substr(sepPos + Ucum.codeSep_.length);
+      uName = uName.substr(0, sepPos);
+    }
+
+    let retUnits = this.unitNames_[uName];
+
+    if (retUnits) {
+      let uLen = retUnits.length;
+
+      if (uCode && uLen > 1) {
+        let i = 0;
+
+        for (; retUnits[i].csCode_ !== uCode && i < uLen; i++);
+
+        if (i < uLen) retUnits = [retUnits[i]];else {
+          retUnits = null;
+        }
+      } // end if we need to find both a name and a code
+
+    } // end if we got an array of units
+
+
+    return retUnits;
+  } // end getUnitByName
+
+  /**
+   *  Returns an array of unit objects with the specified unit string.
+   *  The array may contain one or more unit reference objects.
+   *  Or none, if no units have a matching unit string (which is not
+   *  considered an error)
+   *
+   *  @param name the name of the unit to be returned
+   *  @returns the array of unit references or null if none were found
+   */
+
+
+  getUnitByString(uString) {
+    let retAry = null;
+
+    if (uString) {
+      retAry = this.unitStrings_[uString];
+      if (retAry === undefined) retAry = null;
+    }
+
+    return retAry;
+  }
+  /**
+   *  Returns a array of unit objects based on the unit's dimension vector.
+   *
+   *  @param uName the dimension vector of the units to be returned.
+   *
+   *  @returns null if no unit was found for the specified vector OR an array of
+   *  one or more unit objects with the specified vector.
+   *  @throws an error if no vector is provided to search on
+   *  logs an error to the console if no unit is found
+   */
+
+
+  getUnitsByDimension(uDim) {
+    let unitsArray = null;
+
+    if (uDim === null || uDim === undefined) {
+      throw new Error('Unable to find unit by because no dimension ' + 'vector was provided.');
+    }
+
+    unitsArray = this.unitDimensions_[uDim];
+
+    if (unitsArray === undefined || unitsArray === null) {
+      console.log(`Unable to find unit with dimension = ${uDim}`);
+    }
+
+    return unitsArray;
+  } // end getUnitsByDimension
+
+  /**
+   *  Returns a array of unit objects that include the specified synonym.
+   *
+   *  @param uSyn the synonym of the units to be returned.
+   *
+   *  @returns an object with two of the following three elements:
+   *   'status' will be error, failed or succeeded
+   *   'msg' will be included for returns with status = error or failed and
+   *     will explain why the request did not return any units
+   *   'units' any array of unit objects with the specified synonym will be
+   *     returned for requests with status = succeeded
+   */
+
+
+  getUnitBySynonym(uSyn) {
+    let retObj = {};
+    let unitsArray = [];
+
+    try {
+      if (uSyn === null || uSyn === undefined) {
+        retObj['status'] = 'error';
+        throw new Error('Unable to find unit by synonym because no synonym ' + 'was provided.');
+      } // If this is the first request for a unit by synonym, build the hash map
+
+
+      if (Object.keys(this.unitSynonyms_).length === 0) {
+        this.buildUnitSynonyms();
+      }
+
+      let foundCodes = [];
+      foundCodes = this.unitSynonyms_[uSyn];
+
+      if (foundCodes) {
+        retObj['status'] = 'succeeded';
+        let fLen = foundCodes.length;
+
+        for (let f = 0; f < fLen; f++) {
+          unitsArray.push(this.unitCodes_[foundCodes[f]]);
+        }
+
+        retObj['units'] = unitsArray;
+      }
+
+      if (unitsArray.length === 0) {
+        retObj['status'] = 'failed';
+        retObj['msg'] = `Unable to find any units with synonym = ${uSyn}`;
+      }
+    } catch (err) {
+      retObj['msg'] = err.message;
+    }
+
+    return retObj;
+  } // end getUnitBySynonym
+
+  /**
+   * Gets a list of all unit names in the Unit tables
+   *
+   * @returns an array of the unit names
+   */
+
+
+  getAllUnitNames() {
+    return Object.keys(this.unitNames_);
+  } // end getAllUnitNames
+
+  /**
+   * Gets a list of all unit names in the tables.  Where more than one
+   * unit has the same name, the unit code, in parentheses, is appended
+   * to the end of the name.
+   *
+   * @returns {Array}
+   */
+
+
+  getUnitNamesList() {
+    let nameList = [];
+    let codes = Object.keys(this.unitCodes_);
+    codes.sort(this.compareCodes);
+    let uLen = codes.length;
+
+    for (let i = 0; i < uLen; i++) {
+      nameList[i] = codes[i] + Ucum.codeSep_ + this.unitCodes_[codes[i]].name_;
+    } // end do for each code
+
+
+    return nameList;
+  }
+  /*
+   * Returns the mass dimension index
+   * @returns this.massDimIndex_
+   */
+
+
+  getMassDimensionIndex() {
+    return this.massDimIndex_;
+  }
+  /**
+   * This provides a sort function for unit codes so that sorting ignores
+   * square brackets and case.
+   *
+   * @param a first value
+   * @param b second value
+   * @returns -1 if a is should fall before b; otherwise 1.
+   */
+
+
+  compareCodes(a, b) {
+    a = a.replace(/[\[\]]/g, '');
+    a = a.toLowerCase();
+    b = b.replace(/[\[\]]/g, '');
+    b = b.toLowerCase();
+    return a < b ? -1 : 1;
+  }
+  /**
+   * Gets a list of all unit codes in the Unit tables
+   *
+   * @returns an array of the unit names
+   */
+
+
+  getAllUnitCodes() {
+    return Object.keys(this.unitCodes_);
+  } // end getAllUnitNames
+
+  /**
+   * This is used to get all unit objects.  Currently it is used
+   * to get the objects to write to the json ucum definitions file
+   * that is used to provide prefix and unit definition objects for
+   * conversions and validations.
+   *
+   * @returns an array containing all unit objects, ordered by definition
+   * order
+   */
+
+
+  allUnitsByDef() {
+    let unitsList = [];
+    let uLen = this.codeOrder_.length;
+
+    for (let u = 0; u < uLen; u++) {
+      unitsList.push(this.getUnitByCode(this.codeOrder_[u]));
+    }
+
+    return unitsList;
+  } // end allUnitsByDef
+
+  /**
+   * This is used to get all unit objects, ordered by unit name.  Currently it
+   * is used to create a csv list of all units.
+   * @param sep separator character (or string) to be used to separate each
+   *  column in the output.  Optional, defaults to '|' if not specified.
+   *  (Used to use ; but the synonyms use that extensively).  Don't use a
+   *  comma or any other punctuation found in the output data.
+   * @returns a buffer containing all unit objects, ordered by name
+   * order
+   */
+
+
+  allUnitsByName(cols, sep) {
+    if (sep === undefined || sep === null) sep = '|';
+    let unitBuff = '';
+    let unitsList = this.getAllUnitNames();
+    let uLen = unitsList.length;
+    let cLen = cols.length;
+
+    for (let i = 0; i < uLen; i++) {
+      let nameRecs = this.getUnitByName(unitsList[i]);
+
+      for (let u = 0; u < nameRecs.length; u++) {
+        let rec = nameRecs[u];
+
+        for (let c = 0; c < cLen; c++) {
+          if (c > 0) unitBuff += sep;
+
+          if (cols[c] === 'dim_') {
+            if (rec.dim_ !== null && rec.dim_ !== undefined && rec.dim_.dimVec_ instanceof Array) unitBuff += '[' + rec.dim_.dimVec_.join(',') + ']';else unitBuff += '';
+          } else {
+            let cbuf = rec[cols[c]];
+            if (typeof cbuf === 'string') unitBuff += cbuf.replace(/[\n\r]/g, ' ');else unitBuff += cbuf;
+          }
+        } // end do for each column requested
+
+
+        unitBuff += '\r\n';
+      } // end do for each unit in the unit names array
+
+    }
+
+    return unitBuff;
+  } // end allUnitsByName
+
+  /**
+   * This creates a list of all units in the tables.  It uses the byCode
+   * table, and uses the codeOrder_ array to determine the order in which
+   * the units are listed.
+   *
+   * @param doLong boolean indicating how much to output.  If true, all data
+   *  from the unit objects is included.   If false, only a few major values
+   *  are included.
+   * @param sep separator character (or string) to be used to separate each
+   *  column in the output.  Optional, defaults to '|' if not specified.
+   *  (Used to use ; but the synonyms use that extensively).
+   * @returns {string} buffer containing all the listings
+   */
+
+
+  printUnits(doLong, sep) {
+    if (doLong === undefined) doLong = false;
+    if (sep === undefined) sep = '|';
+    let codeList = '';
+    let uLen = this.codeOrder_.length;
+    let unitString = 'csCode' + sep;
+
+    if (doLong) {
+      unitString += 'ciCode' + sep;
+    }
+
+    unitString += 'name' + sep;
+    if (doLong) unitString += 'isBase' + sep;
+    unitString += 'magnitude' + sep + 'dimension' + sep + 'from unit(s)' + sep + 'value' + sep + 'function' + sep;
+    if (doLong) unitString += 'property' + sep + 'printSymbol' + sep + 'synonyms' + sep + 'source' + sep + 'class' + sep + 'isMetric' + sep + 'variable' + sep + 'isSpecial' + sep + 'isAbitrary' + sep;
+    unitString += 'comment';
+    codeList = unitString + '\n';
+
+    for (let u = 0; u < uLen; u++) {
+      let curUnit = this.getUnitByCode(this.codeOrder_[u]);
+      unitString = this.codeOrder_[u] + sep;
+
+      if (doLong) {
+        unitString += curUnit.getProperty('ciCode_') + sep;
+      }
+
+      unitString += curUnit.getProperty('name_') + sep;
+
+      if (doLong) {
+        if (curUnit.getProperty('isBase_')) unitString += 'true' + sep;else unitString += 'false' + sep;
+      }
+
+      unitString += curUnit.getProperty('magnitude_') + sep;
+      let curDim = curUnit.getProperty('dim_');
+
+      if (curDim) {
+        unitString += curDim.dimVec_ + sep;
+      } else {
+        unitString += 'null' + sep;
+      }
+
+      if (curUnit.csUnitString_) unitString += curUnit.csUnitString_ + sep + curUnit.baseFactor_ + sep;else unitString += 'null' + sep + 'null' + sep;
+      if (curUnit.cnv_) unitString += curUnit.cnv_ + sep;else unitString += 'null' + sep;
+
+      if (doLong) {
+        unitString += curUnit.getProperty('property_') + sep + curUnit.getProperty('printSymbol_') + sep + curUnit.getProperty('synonyms_') + sep + curUnit.getProperty('source_') + sep + curUnit.getProperty('class_') + sep + curUnit.getProperty('isMetric_') + sep + curUnit.getProperty('variable_') + sep + curUnit.getProperty('isSpecial_') + sep + curUnit.getProperty('isArbitrary_') + sep;
+      }
+
+      if (curUnit.defError_) unitString += 'problem parsing this one, deferred to later.';
+      codeList += unitString + '\n';
+    }
+
+    return codeList;
+  }
+
+} // end UnitTablesFactory
+// Create a singleton instance and (to preserve the existing API) an object that
+// provides that instance via getInstance().
+
+
+var unitTablesInstance = new UnitTablesFactory();
+const UnitTables = {
+  getInstance: function () {
+    return unitTablesInstance;
+  }
+};
+exports.UnitTables = UnitTables;
+
+
+},{"./config.js":50}],63:[function(require,module,exports){
+'use strict';
+
+module.exports = Number.isFinite || function (value) {
+	return !(typeof value !== 'number' || value !== value || value === Infinity || value === -Infinity);
+};
+
+},{}],64:[function(require,module,exports){
+// https://github.com/paulmillr/es6-shim
+// http://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.isinteger
+var isFinite = require("is-finite");
+module.exports = Number.isInteger || function(val) {
+  return typeof val === "number" &&
+    isFinite(val) &&
+    Math.floor(val) === val;
+};
+
+},{"is-finite":63}],65:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -22696,16654 +27966,4 @@ exports.Settings = Settings;
 exports.Zone = Zone;
 
 
-},{}],49:[function(require,module,exports){
-module.exports={
-  "10*": {
-    "value": 10,
-    "ucum": "1"
-  },
-  "10^": {
-    "value": 10,
-    "ucum": "1"
-  },
-  "[pi]": {
-    "value": 3.141592653589793,
-    "ucum": "1"
-  },
-  "%": {
-    "value": 1,
-    "ucum": "10*-2"
-  },
-  "[ppth]": {
-    "value": 1,
-    "ucum": "10*-3"
-  },
-  "[ppm]": {
-    "value": 1,
-    "ucum": "10*-6"
-  },
-  "[ppb]": {
-    "value": 1,
-    "ucum": "10*-9"
-  },
-  "[pptr]": {
-    "value": 1,
-    "ucum": "10*-12"
-  },
-  "mol": {
-    "value": 6.0221367,
-    "ucum": "10*23"
-  },
-  "sr": {
-    "value": 1,
-    "ucum": "rad2"
-  },
-  "Hz": {
-    "value": 1,
-    "ucum": "s-1"
-  },
-  "N": {
-    "value": 1,
-    "ucum": "kg.m/s2"
-  },
-  "Pa": {
-    "value": 1,
-    "ucum": "N/m2"
-  },
-  "J": {
-    "value": 1,
-    "ucum": "N.m"
-  },
-  "W": {
-    "value": 1,
-    "ucum": "J/s"
-  },
-  "A": {
-    "value": 1,
-    "ucum": "C/s"
-  },
-  "V": {
-    "value": 1,
-    "ucum": "J/C"
-  },
-  "F": {
-    "value": 1,
-    "ucum": "C/V"
-  },
-  "Ohm": {
-    "value": 1,
-    "ucum": "V/A"
-  },
-  "S": {
-    "value": 1,
-    "ucum": "Ohm-1"
-  },
-  "Wb": {
-    "value": 1,
-    "ucum": "V.s"
-  },
-  "Cel": {
-    "value": null,
-    "ucum": "cel(1 K)"
-  },
-  "T": {
-    "value": 1,
-    "ucum": "Wb/m2"
-  },
-  "H": {
-    "value": 1,
-    "ucum": "Wb/A"
-  },
-  "lm": {
-    "value": 1,
-    "ucum": "cd.sr"
-  },
-  "lx": {
-    "value": 1,
-    "ucum": "lm/m2"
-  },
-  "Bq": {
-    "value": 1,
-    "ucum": "s-1"
-  },
-  "Gy": {
-    "value": 1,
-    "ucum": "J/kg"
-  },
-  "Sv": {
-    "value": 1,
-    "ucum": "J/kg"
-  },
-  "gon": {
-    "value": 0.9,
-    "ucum": "deg"
-  },
-  "deg": {
-    "value": 2,
-    "ucum": "[pi].rad/360"
-  },
-  "'": {
-    "value": 1,
-    "ucum": "deg/60"
-  },
-  "''": {
-    "value": 1,
-    "ucum": "'/60"
-  },
-  "l": {
-    "value": 1,
-    "ucum": "dm3"
-  },
-  "L": {
-    "value": 1,
-    "ucum": "l"
-  },
-  "ar": {
-    "value": 100,
-    "ucum": "m2"
-  },
-  "min": {
-    "value": 60,
-    "ucum": "s"
-  },
-  "h": {
-    "value": 60,
-    "ucum": "min"
-  },
-  "d": {
-    "value": 24,
-    "ucum": "h"
-  },
-  "a_t": {
-    "value": 365.24219,
-    "ucum": "d"
-  },
-  "a_j": {
-    "value": 365.25,
-    "ucum": "d"
-  },
-  "a_g": {
-    "value": 365.2425,
-    "ucum": "d"
-  },
-  "a": {
-    "value": 1,
-    "ucum": "a_j"
-  },
-  "wk": {
-    "value": 7,
-    "ucum": "d"
-  },
-  "mo_s": {
-    "value": 29.53059,
-    "ucum": "d"
-  },
-  "mo_j": {
-    "value": 1,
-    "ucum": "a_j/12"
-  },
-  "mo_g": {
-    "value": 1,
-    "ucum": "a_g/12"
-  },
-  "mo": {
-    "value": 1,
-    "ucum": "mo_j"
-  },
-  "t": {
-    "value": 1000,
-    "ucum": "kg"
-  },
-  "bar": {
-    "value": 100000,
-    "ucum": "Pa"
-  },
-  "u": {
-    "value": 1.6605402e-24,
-    "ucum": "g"
-  },
-  "eV": {
-    "value": 1,
-    "ucum": "[e].V"
-  },
-  "AU": {
-    "value": 149597.870691,
-    "ucum": "Mm"
-  },
-  "pc": {
-    "value": 30856780000000000,
-    "ucum": "m"
-  },
-  "[c]": {
-    "value": 299792458,
-    "ucum": "m/s"
-  },
-  "[h]": {
-    "value": 6.6260755e-24,
-    "ucum": "J.s"
-  },
-  "[k]": {
-    "value": 1.380658e-23,
-    "ucum": "J/K"
-  },
-  "[eps_0]": {
-    "value": 8.854187817e-12,
-    "ucum": "F/m"
-  },
-  "[mu_0]": {
-    "value": 1,
-    "ucum": "4.[pi].10*-7.N/A2"
-  },
-  "[e]": {
-    "value": 1.60217733e-19,
-    "ucum": "C"
-  },
-  "[m_e]": {
-    "value": 9.1093897e-28,
-    "ucum": "g"
-  },
-  "[m_p]": {
-    "value": 1.6726231e-24,
-    "ucum": "g"
-  },
-  "[G]": {
-    "value": 6.67259e-11,
-    "ucum": "m3.kg-1.s-2"
-  },
-  "[g]": {
-    "value": 9.80665,
-    "ucum": "m/s2"
-  },
-  "atm": {
-    "value": 101325,
-    "ucum": "Pa"
-  },
-  "[ly]": {
-    "value": 1,
-    "ucum": "[c].a_j"
-  },
-  "gf": {
-    "value": 1,
-    "ucum": "g.[g]"
-  },
-  "[lbf_av]": {
-    "value": 1,
-    "ucum": "[lb_av].[g]"
-  },
-  "Ky": {
-    "value": 1,
-    "ucum": "cm-1"
-  },
-  "Gal": {
-    "value": 1,
-    "ucum": "cm/s2"
-  },
-  "dyn": {
-    "value": 1,
-    "ucum": "g.cm/s2"
-  },
-  "erg": {
-    "value": 1,
-    "ucum": "dyn.cm"
-  },
-  "P": {
-    "value": 1,
-    "ucum": "dyn.s/cm2"
-  },
-  "Bi": {
-    "value": 10,
-    "ucum": "A"
-  },
-  "St": {
-    "value": 1,
-    "ucum": "cm2/s"
-  },
-  "Mx": {
-    "value": 1e-8,
-    "ucum": "Wb"
-  },
-  "G": {
-    "value": 0.0001,
-    "ucum": "T"
-  },
-  "Oe": {
-    "value": 250,
-    "ucum": "/[pi].A/m"
-  },
-  "Gb": {
-    "value": 1,
-    "ucum": "Oe.cm"
-  },
-  "sb": {
-    "value": 1,
-    "ucum": "cd/cm2"
-  },
-  "Lmb": {
-    "value": 1,
-    "ucum": "cd/cm2/[pi]"
-  },
-  "ph": {
-    "value": 0.0001,
-    "ucum": "lx"
-  },
-  "Ci": {
-    "value": 37000000000,
-    "ucum": "Bq"
-  },
-  "R": {
-    "value": 0.000258,
-    "ucum": "C/kg"
-  },
-  "RAD": {
-    "value": 100,
-    "ucum": "erg/g"
-  },
-  "REM": {
-    "value": 1,
-    "ucum": "RAD"
-  },
-  "[in_i]": {
-    "value": 2.54,
-    "ucum": "cm"
-  },
-  "[ft_i]": {
-    "value": 12,
-    "ucum": "[in_i]"
-  },
-  "[yd_i]": {
-    "value": 3,
-    "ucum": "[ft_i]"
-  },
-  "[mi_i]": {
-    "value": 5280,
-    "ucum": "[ft_i]"
-  },
-  "[fth_i]": {
-    "value": 6,
-    "ucum": "[ft_i]"
-  },
-  "[nmi_i]": {
-    "value": 1852,
-    "ucum": "m"
-  },
-  "[kn_i]": {
-    "value": 1,
-    "ucum": "[nmi_i]/h"
-  },
-  "[sin_i]": {
-    "value": 1,
-    "ucum": "[in_i]2"
-  },
-  "[sft_i]": {
-    "value": 1,
-    "ucum": "[ft_i]2"
-  },
-  "[syd_i]": {
-    "value": 1,
-    "ucum": "[yd_i]2"
-  },
-  "[cin_i]": {
-    "value": 1,
-    "ucum": "[in_i]3"
-  },
-  "[cft_i]": {
-    "value": 1,
-    "ucum": "[ft_i]3"
-  },
-  "[cyd_i]": {
-    "value": 1,
-    "ucum": "[yd_i]3"
-  },
-  "[bf_i]": {
-    "value": 144,
-    "ucum": "[in_i]3"
-  },
-  "[cr_i]": {
-    "value": 128,
-    "ucum": "[ft_i]3"
-  },
-  "[mil_i]": {
-    "value": 0.001,
-    "ucum": "[in_i]"
-  },
-  "[cml_i]": {
-    "value": 1,
-    "ucum": "[pi]/4.[mil_i]2"
-  },
-  "[hd_i]": {
-    "value": 4,
-    "ucum": "[in_i]"
-  },
-  "[ft_us]": {
-    "value": 1200,
-    "ucum": "m/3937"
-  },
-  "[yd_us]": {
-    "value": 3,
-    "ucum": "[ft_us]"
-  },
-  "[in_us]": {
-    "value": 1,
-    "ucum": "[ft_us]/12"
-  },
-  "[rd_us]": {
-    "value": 16.5,
-    "ucum": "[ft_us]"
-  },
-  "[ch_us]": {
-    "value": 4,
-    "ucum": "[rd_us]"
-  },
-  "[lk_us]": {
-    "value": 1,
-    "ucum": "[ch_us]/100"
-  },
-  "[rch_us]": {
-    "value": 100,
-    "ucum": "[ft_us]"
-  },
-  "[rlk_us]": {
-    "value": 1,
-    "ucum": "[rch_us]/100"
-  },
-  "[fth_us]": {
-    "value": 6,
-    "ucum": "[ft_us]"
-  },
-  "[fur_us]": {
-    "value": 40,
-    "ucum": "[rd_us]"
-  },
-  "[mi_us]": {
-    "value": 8,
-    "ucum": "[fur_us]"
-  },
-  "[acr_us]": {
-    "value": 160,
-    "ucum": "[rd_us]2"
-  },
-  "[srd_us]": {
-    "value": 1,
-    "ucum": "[rd_us]2"
-  },
-  "[smi_us]": {
-    "value": 1,
-    "ucum": "[mi_us]2"
-  },
-  "[sct]": {
-    "value": 1,
-    "ucum": "[mi_us]2"
-  },
-  "[twp]": {
-    "value": 36,
-    "ucum": "[sct]"
-  },
-  "[mil_us]": {
-    "value": 0.001,
-    "ucum": "[in_us]"
-  },
-  "[in_br]": {
-    "value": 2.539998,
-    "ucum": "cm"
-  },
-  "[ft_br]": {
-    "value": 12,
-    "ucum": "[in_br]"
-  },
-  "[rd_br]": {
-    "value": 16.5,
-    "ucum": "[ft_br]"
-  },
-  "[ch_br]": {
-    "value": 4,
-    "ucum": "[rd_br]"
-  },
-  "[lk_br]": {
-    "value": 1,
-    "ucum": "[ch_br]/100"
-  },
-  "[fth_br]": {
-    "value": 6,
-    "ucum": "[ft_br]"
-  },
-  "[pc_br]": {
-    "value": 2.5,
-    "ucum": "[ft_br]"
-  },
-  "[yd_br]": {
-    "value": 3,
-    "ucum": "[ft_br]"
-  },
-  "[mi_br]": {
-    "value": 5280,
-    "ucum": "[ft_br]"
-  },
-  "[nmi_br]": {
-    "value": 6080,
-    "ucum": "[ft_br]"
-  },
-  "[kn_br]": {
-    "value": 1,
-    "ucum": "[nmi_br]/h"
-  },
-  "[acr_br]": {
-    "value": 4840,
-    "ucum": "[yd_br]2"
-  },
-  "[gal_us]": {
-    "value": 231,
-    "ucum": "[in_i]3"
-  },
-  "[bbl_us]": {
-    "value": 42,
-    "ucum": "[gal_us]"
-  },
-  "[qt_us]": {
-    "value": 1,
-    "ucum": "[gal_us]/4"
-  },
-  "[pt_us]": {
-    "value": 1,
-    "ucum": "[qt_us]/2"
-  },
-  "[gil_us]": {
-    "value": 1,
-    "ucum": "[pt_us]/4"
-  },
-  "[foz_us]": {
-    "value": 1,
-    "ucum": "[gil_us]/4"
-  },
-  "[fdr_us]": {
-    "value": 1,
-    "ucum": "[foz_us]/8"
-  },
-  "[min_us]": {
-    "value": 1,
-    "ucum": "[fdr_us]/60"
-  },
-  "[crd_us]": {
-    "value": 128,
-    "ucum": "[ft_i]3"
-  },
-  "[bu_us]": {
-    "value": 2150.42,
-    "ucum": "[in_i]3"
-  },
-  "[gal_wi]": {
-    "value": 1,
-    "ucum": "[bu_us]/8"
-  },
-  "[pk_us]": {
-    "value": 1,
-    "ucum": "[bu_us]/4"
-  },
-  "[dqt_us]": {
-    "value": 1,
-    "ucum": "[pk_us]/8"
-  },
-  "[dpt_us]": {
-    "value": 1,
-    "ucum": "[dqt_us]/2"
-  },
-  "[tbs_us]": {
-    "value": 1,
-    "ucum": "[foz_us]/2"
-  },
-  "[tsp_us]": {
-    "value": 1,
-    "ucum": "[tbs_us]/3"
-  },
-  "[cup_us]": {
-    "value": 16,
-    "ucum": "[tbs_us]"
-  },
-  "[foz_m]": {
-    "value": 30,
-    "ucum": "mL"
-  },
-  "[cup_m]": {
-    "value": 240,
-    "ucum": "mL"
-  },
-  "[tsp_m]": {
-    "value": 5,
-    "ucum": "mL"
-  },
-  "[tbs_m]": {
-    "value": 15,
-    "ucum": "mL"
-  },
-  "[gal_br]": {
-    "value": 4.54609,
-    "ucum": "l"
-  },
-  "[pk_br]": {
-    "value": 2,
-    "ucum": "[gal_br]"
-  },
-  "[bu_br]": {
-    "value": 4,
-    "ucum": "[pk_br]"
-  },
-  "[qt_br]": {
-    "value": 1,
-    "ucum": "[gal_br]/4"
-  },
-  "[pt_br]": {
-    "value": 1,
-    "ucum": "[qt_br]/2"
-  },
-  "[gil_br]": {
-    "value": 1,
-    "ucum": "[pt_br]/4"
-  },
-  "[foz_br]": {
-    "value": 1,
-    "ucum": "[gil_br]/5"
-  },
-  "[fdr_br]": {
-    "value": 1,
-    "ucum": "[foz_br]/8"
-  },
-  "[min_br]": {
-    "value": 1,
-    "ucum": "[fdr_br]/60"
-  },
-  "[gr]": {
-    "value": 64.79891,
-    "ucum": "mg"
-  },
-  "[lb_av]": {
-    "value": 7000,
-    "ucum": "[gr]"
-  },
-  "[oz_av]": {
-    "value": 1,
-    "ucum": "[lb_av]/16"
-  },
-  "[dr_av]": {
-    "value": 1,
-    "ucum": "[oz_av]/16"
-  },
-  "[scwt_av]": {
-    "value": 100,
-    "ucum": "[lb_av]"
-  },
-  "[lcwt_av]": {
-    "value": 112,
-    "ucum": "[lb_av]"
-  },
-  "[ston_av]": {
-    "value": 20,
-    "ucum": "[scwt_av]"
-  },
-  "[lton_av]": {
-    "value": 20,
-    "ucum": "[lcwt_av]"
-  },
-  "[stone_av]": {
-    "value": 14,
-    "ucum": "[lb_av]"
-  },
-  "[pwt_tr]": {
-    "value": 24,
-    "ucum": "[gr]"
-  },
-  "[oz_tr]": {
-    "value": 20,
-    "ucum": "[pwt_tr]"
-  },
-  "[lb_tr]": {
-    "value": 12,
-    "ucum": "[oz_tr]"
-  },
-  "[sc_ap]": {
-    "value": 20,
-    "ucum": "[gr]"
-  },
-  "[dr_ap]": {
-    "value": 3,
-    "ucum": "[sc_ap]"
-  },
-  "[oz_ap]": {
-    "value": 8,
-    "ucum": "[dr_ap]"
-  },
-  "[lb_ap]": {
-    "value": 12,
-    "ucum": "[oz_ap]"
-  },
-  "[oz_m]": {
-    "value": 28,
-    "ucum": "g"
-  },
-  "[lne]": {
-    "value": 1,
-    "ucum": "[in_i]/12"
-  },
-  "[pnt]": {
-    "value": 1,
-    "ucum": "[lne]/6"
-  },
-  "[pca]": {
-    "value": 12,
-    "ucum": "[pnt]"
-  },
-  "[pnt_pr]": {
-    "value": 0.013837,
-    "ucum": "[in_i]"
-  },
-  "[pca_pr]": {
-    "value": 12,
-    "ucum": "[pnt_pr]"
-  },
-  "[pied]": {
-    "value": 32.48,
-    "ucum": "cm"
-  },
-  "[pouce]": {
-    "value": 1,
-    "ucum": "[pied]/12"
-  },
-  "[ligne]": {
-    "value": 1,
-    "ucum": "[pouce]/12"
-  },
-  "[didot]": {
-    "value": 1,
-    "ucum": "[ligne]/6"
-  },
-  "[cicero]": {
-    "value": 12,
-    "ucum": "[didot]"
-  },
-  "[degF]": {
-    "value": null,
-    "ucum": "degf(5 K/9)"
-  },
-  "[degR]": {
-    "value": 5,
-    "ucum": "K/9"
-  },
-  "cal_[15]": {
-    "value": 4.1858,
-    "ucum": "J"
-  },
-  "cal_[20]": {
-    "value": 4.1819,
-    "ucum": "J"
-  },
-  "cal_m": {
-    "value": 4.19002,
-    "ucum": "J"
-  },
-  "cal_IT": {
-    "value": 4.1868,
-    "ucum": "J"
-  },
-  "cal_th": {
-    "value": 4.184,
-    "ucum": "J"
-  },
-  "cal": {
-    "value": 1,
-    "ucum": "cal_th"
-  },
-  "[Cal]": {
-    "value": 1,
-    "ucum": "kcal_th"
-  },
-  "[Btu_39]": {
-    "value": 1.05967,
-    "ucum": "kJ"
-  },
-  "[Btu_59]": {
-    "value": 1.0548,
-    "ucum": "kJ"
-  },
-  "[Btu_60]": {
-    "value": 1.05468,
-    "ucum": "kJ"
-  },
-  "[Btu_m]": {
-    "value": 1.05587,
-    "ucum": "kJ"
-  },
-  "[Btu_IT]": {
-    "value": 1.05505585262,
-    "ucum": "kJ"
-  },
-  "[Btu_th]": {
-    "value": 1.05435,
-    "ucum": "kJ"
-  },
-  "[Btu]": {
-    "value": 1,
-    "ucum": "[Btu_th]"
-  },
-  "[HP]": {
-    "value": 550,
-    "ucum": "[ft_i].[lbf_av]/s"
-  },
-  "tex": {
-    "value": 1,
-    "ucum": "g/km"
-  },
-  "[den]": {
-    "value": 1,
-    "ucum": "g/9/km"
-  },
-  "m[H2O]": {
-    "value": 9.80665,
-    "ucum": "kPa"
-  },
-  "m[Hg]": {
-    "value": 133.322,
-    "ucum": "kPa"
-  },
-  "[in_i'H2O]": {
-    "value": 1,
-    "ucum": "m[H2O].[in_i]/m"
-  },
-  "[in_i'Hg]": {
-    "value": 1,
-    "ucum": "m[Hg].[in_i]/m"
-  },
-  "[PRU]": {
-    "value": 1,
-    "ucum": "mm[Hg].s/ml"
-  },
-  "[wood'U]": {
-    "value": 1,
-    "ucum": "mm[Hg].min/L"
-  },
-  "[diop]": {
-    "value": 1,
-    "ucum": "/m"
-  },
-  "[p'diop]": {
-    "value": null,
-    "ucum": "100tan(1 rad)"
-  },
-  "%[slope]": {
-    "value": null,
-    "ucum": "100tan(1 rad)"
-  },
-  "[mesh_i]": {
-    "value": 1,
-    "ucum": "/[in_i]"
-  },
-  "[Ch]": {
-    "value": 1,
-    "ucum": "mm/3"
-  },
-  "[drp]": {
-    "value": 1,
-    "ucum": "ml/20"
-  },
-  "[hnsf'U]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[MET]": {
-    "value": 3.5,
-    "ucum": "mL/min/kg"
-  },
-  "[hp'_X]": {
-    "value": null,
-    "ucum": "hpX(1 1)"
-  },
-  "[hp'_C]": {
-    "value": null,
-    "ucum": "hpC(1 1)"
-  },
-  "[hp'_M]": {
-    "value": null,
-    "ucum": "hpM(1 1)"
-  },
-  "[hp'_Q]": {
-    "value": null,
-    "ucum": "hpQ(1 1)"
-  },
-  "[hp_X]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[hp_C]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[hp_M]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[hp_Q]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[kp_X]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[kp_C]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[kp_M]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[kp_Q]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "eq": {
-    "value": 1,
-    "ucum": "mol"
-  },
-  "osm": {
-    "value": 1,
-    "ucum": "mol"
-  },
-  "[pH]": {
-    "value": null,
-    "ucum": "pH(1 mol/l)"
-  },
-  "g%": {
-    "value": 1,
-    "ucum": "g/dl"
-  },
-  "[S]": {
-    "value": 1,
-    "ucum": "10*-13.s"
-  },
-  "[HPF]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[LPF]": {
-    "value": 100,
-    "ucum": "1"
-  },
-  "kat": {
-    "value": 1,
-    "ucum": "mol/s"
-  },
-  "U": {
-    "value": 1,
-    "ucum": "umol/min"
-  },
-  "[iU]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[IU]": {
-    "value": 1,
-    "ucum": "[iU]"
-  },
-  "[arb'U]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[USP'U]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[GPL'U]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[MPL'U]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[APL'U]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[beth'U]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[anti'Xa'U]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[todd'U]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[dye'U]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[smgy'U]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[bdsk'U]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[ka'U]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[knk'U]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[mclg'U]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[tb'U]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[CCID_50]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[TCID_50]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[EID_50]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[PFU]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[FFU]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[CFU]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[BAU]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[AU]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[Amb'a'1'U]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[PNU]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[Lf]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[D'ag'U]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[FEU]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[ELU]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "[EU]": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "Np": {
-    "value": null,
-    "ucum": "ln(1 1)"
-  },
-  "B": {
-    "value": null,
-    "ucum": "lg(1 1)"
-  },
-  "B[SPL]": {
-    "value": null,
-    "ucum": "2lg(2 10*-5.Pa)"
-  },
-  "B[V]": {
-    "value": null,
-    "ucum": "2lg(1 V)"
-  },
-  "B[mV]": {
-    "value": null,
-    "ucum": "2lg(1 mV)"
-  },
-  "B[uV]": {
-    "value": null,
-    "ucum": "2lg(1 uV)"
-  },
-  "B[10.nV]": {
-    "value": null,
-    "ucum": "2lg(10 nV)"
-  },
-  "B[W]": {
-    "value": null,
-    "ucum": "lg(1 W)"
-  },
-  "B[kW]": {
-    "value": null,
-    "ucum": "lg(1 kW)"
-  },
-  "st": {
-    "value": 1,
-    "ucum": "m3"
-  },
-  "Ao": {
-    "value": 0.1,
-    "ucum": "nm"
-  },
-  "b": {
-    "value": 100,
-    "ucum": "fm2"
-  },
-  "att": {
-    "value": 1,
-    "ucum": "kgf/cm2"
-  },
-  "mho": {
-    "value": 1,
-    "ucum": "S"
-  },
-  "[psi]": {
-    "value": 1,
-    "ucum": "[lbf_av]/[in_i]2"
-  },
-  "circ": {
-    "value": 2,
-    "ucum": "[pi].rad"
-  },
-  "sph": {
-    "value": 4,
-    "ucum": "[pi].sr"
-  },
-  "[car_m]": {
-    "value": 0.2,
-    "ucum": "g"
-  },
-  "[car_Au]": {
-    "value": 1,
-    "ucum": "/24"
-  },
-  "[smoot]": {
-    "value": 67,
-    "ucum": "[in_i]"
-  },
-  "bit_s": {
-    "value": null,
-    "ucum": "ld(1 1)"
-  },
-  "bit": {
-    "value": 1,
-    "ucum": "1"
-  },
-  "By": {
-    "value": 8,
-    "ucum": "bit"
-  },
-  "Bd": {
-    "value": 1,
-    "ucum": "/s"
-  }
-}
-
-},{}],50:[function(require,module,exports){
-module.exports={"mol":true,"sr":true,"Hz":true,"N":true,"Pa":true,"J":true,"W":true,"A":true,"V":true,"F":true,"Ohm":true,"S":true,"Wb":true,"Cel":true,"T":true,"H":true,"lm":true,"lx":true,"Bq":true,"Gy":true,"Sv":true,"l":true,"L":true,"ar":true,"t":true,"bar":true,"u":true,"eV":true,"pc":true,"[c]":true,"[h]":true,"[k]":true,"[eps_0]":true,"[mu_0]":true,"[e]":true,"[m_e]":true,"[m_p]":true,"[G]":true,"[g]":true,"[ly]":true,"gf":true,"Ky":true,"Gal":true,"dyn":true,"erg":true,"P":true,"Bi":true,"St":true,"Mx":true,"G":true,"Oe":true,"Gb":true,"sb":true,"Lmb":true,"ph":true,"Ci":true,"R":true,"RAD":true,"REM":true,"cal_[15]":true,"cal_[20]":true,"cal_m":true,"cal_IT":true,"cal_th":true,"cal":true,"tex":true,"m[H2O]":true,"m[Hg]":true,"eq":true,"osm":true,"g%":true,"kat":true,"U":true,"[iU]":true,"[IU]":true,"Np":true,"B":true,"B[SPL]":true,"B[V]":true,"B[mV]":true,"B[uV]":true,"B[10.nV]":true,"B[W]":true,"B[kW]":true,"st":true,"mho":true,"bit":true,"By":true,"Bd":true,"m":true,"s":true,"g":true,"rad":true,"K":true,"C":true,"cd":true}
-
-},{}],51:[function(require,module,exports){
-module.exports={
-  "Y": {
-    "CODE": "YA",
-    "names": [
-      "yotta"
-    ],
-    "printSymbols": [
-      "Y"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>24</sup>",
-        "numeric": 1e+24
-      }
-    ]
-  },
-  "Z": {
-    "CODE": "ZA",
-    "names": [
-      "zetta"
-    ],
-    "printSymbols": [
-      "Z"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>21</sup>",
-        "numeric": 1e+21
-      }
-    ]
-  },
-  "E": {
-    "CODE": "EX",
-    "names": [
-      "exa"
-    ],
-    "printSymbols": [
-      "E"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>18</sup>",
-        "numeric": 1000000000000000000
-      }
-    ]
-  },
-  "P": {
-    "CODE": "PT",
-    "names": [
-      "peta"
-    ],
-    "printSymbols": [
-      "P"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>15</sup>",
-        "numeric": 1000000000000000
-      }
-    ]
-  },
-  "T": {
-    "CODE": "TR",
-    "names": [
-      "tera"
-    ],
-    "printSymbols": [
-      "T"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>12</sup>",
-        "numeric": 1000000000000
-      }
-    ]
-  },
-  "G": {
-    "CODE": "GA",
-    "names": [
-      "giga"
-    ],
-    "printSymbols": [
-      "G"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>9</sup>",
-        "numeric": 1000000000
-      }
-    ]
-  },
-  "M": {
-    "CODE": "MA",
-    "names": [
-      "mega"
-    ],
-    "printSymbols": [
-      "M"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>6</sup>",
-        "numeric": 1000000
-      }
-    ]
-  },
-  "k": {
-    "CODE": "K",
-    "names": [
-      "kilo"
-    ],
-    "printSymbols": [
-      "k"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>3</sup>",
-        "numeric": 1000
-      }
-    ]
-  },
-  "h": {
-    "CODE": "H",
-    "names": [
-      "hecto"
-    ],
-    "printSymbols": [
-      "h"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>2</sup>",
-        "numeric": 100
-      }
-    ]
-  },
-  "da": {
-    "CODE": "DA",
-    "names": [
-      "deka"
-    ],
-    "printSymbols": [
-      "da"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>1</sup>",
-        "numeric": 10
-      }
-    ]
-  },
-  "d": {
-    "CODE": "D",
-    "names": [
-      "deci"
-    ],
-    "printSymbols": [
-      "d"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>-1</sup>",
-        "numeric": 0.1
-      }
-    ]
-  },
-  "c": {
-    "CODE": "C",
-    "names": [
-      "centi"
-    ],
-    "printSymbols": [
-      "c"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>-2</sup>",
-        "numeric": 0.01
-      }
-    ]
-  },
-  "m": {
-    "CODE": "M",
-    "names": [
-      "milli"
-    ],
-    "printSymbols": [
-      "m"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>-3</sup>",
-        "numeric": 0.001
-      }
-    ]
-  },
-  "u": {
-    "CODE": "U",
-    "names": [
-      "micro"
-    ],
-    "printSymbols": [
-      "&#956;"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>-6</sup>",
-        "numeric": 0.000001
-      }
-    ]
-  },
-  "n": {
-    "CODE": "N",
-    "names": [
-      "nano"
-    ],
-    "printSymbols": [
-      "n"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>-9</sup>",
-        "numeric": 1e-9
-      }
-    ]
-  },
-  "p": {
-    "CODE": "P",
-    "names": [
-      "pico"
-    ],
-    "printSymbols": [
-      "p"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>-12</sup>",
-        "numeric": 1e-12
-      }
-    ]
-  },
-  "f": {
-    "CODE": "F",
-    "names": [
-      "femto"
-    ],
-    "printSymbols": [
-      "f"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>-15</sup>",
-        "numeric": 1e-15
-      }
-    ]
-  },
-  "a": {
-    "CODE": "A",
-    "names": [
-      "atto"
-    ],
-    "printSymbols": [
-      "a"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>-18</sup>",
-        "numeric": 1e-18
-      }
-    ]
-  },
-  "z": {
-    "CODE": "ZO",
-    "names": [
-      "zepto"
-    ],
-    "printSymbols": [
-      "z"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>-21</sup>",
-        "numeric": 1e-21
-      }
-    ]
-  },
-  "y": {
-    "CODE": "YO",
-    "names": [
-      "yocto"
-    ],
-    "printSymbols": [
-      "y"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>-24</sup>",
-        "numeric": 1e-24
-      }
-    ]
-  },
-  "Ki": {
-    "CODE": "KIB",
-    "names": [
-      "kibi"
-    ],
-    "printSymbols": [
-      "Ki"
-    ],
-    "values": [
-      {
-        "printable": "1024",
-        "numeric": 1024
-      }
-    ]
-  },
-  "Mi": {
-    "CODE": "MIB",
-    "names": [
-      "mebi"
-    ],
-    "printSymbols": [
-      "Mi"
-    ],
-    "values": [
-      {
-        "printable": "1048576",
-        "numeric": 1048576
-      }
-    ]
-  },
-  "Gi": {
-    "CODE": "GIB",
-    "names": [
-      "gibi"
-    ],
-    "printSymbols": [
-      "Gi"
-    ],
-    "values": [
-      {
-        "printable": "1073741824",
-        "numeric": 1073741824
-      }
-    ]
-  },
-  "Ti": {
-    "CODE": "TIB",
-    "names": [
-      "tebi"
-    ],
-    "printSymbols": [
-      "Ti"
-    ],
-    "values": [
-      {
-        "printable": "1099511627776",
-        "numeric": 1099511627776
-      }
-    ]
-  }
-}
-
-},{}],52:[function(require,module,exports){
-module.exports={
-  "Y": 1e+24,
-  "Z": 1e+21,
-  "E": 1000000000000000000,
-  "P": 1000000000000000,
-  "T": 1000000000000,
-  "G": 1000000000,
-  "M": 1000000,
-  "k": 1000,
-  "h": 100,
-  "da": 10,
-  "d": 0.1,
-  "c": 0.01,
-  "m": 0.001,
-  "u": 0.000001,
-  "n": 1e-9,
-  "p": 1e-12,
-  "f": 1e-15,
-  "a": 1e-18,
-  "z": 1e-21,
-  "y": 1e-24,
-  "Ki": 1024,
-  "Mi": 1048576,
-  "Gi": 1073741824,
-  "Ti": 1099511627776
-}
-
-},{}],53:[function(require,module,exports){
-module.exports = function () {
-  /*
-   * Generated by PEG.js 0.8.0.
-   *
-   * http://pegjs.majda.cz/
-   */
-  function peg$subclass(child, parent) {
-    function ctor() {
-      this.constructor = child;
-    }
-
-    ctor.prototype = parent.prototype;
-    child.prototype = new ctor();
-  }
-
-  function SyntaxError(message, expected, found, offset, line, column) {
-    this.message = message;
-    this.expected = expected;
-    this.found = found;
-    this.offset = offset;
-    this.line = line;
-    this.column = column;
-    this.name = "SyntaxError";
-  }
-
-  peg$subclass(SyntaxError, Error);
-
-  function parse(input) {
-    var options = arguments.length > 1 ? arguments[1] : {},
-        peg$FAILED = {},
-        peg$startRuleIndices = {
-      start: 0
-    },
-        peg$startRuleIndex = 0,
-        peg$consts = [function (e) {
-      return e; // cleanup(e);
-    }, peg$FAILED, "/", {
-      type: "literal",
-      value: "/",
-      description: "\"/\""
-    }, function (e) {
-      return multiply({
-        value: 1,
-        units: {}
-      }, [["/", e]]);
-    }, ".", {
-      type: "literal",
-      value: ".",
-      description: "\".\""
-    }, [], function (t, ms) {
-      return multiply(t, ms);
-    }, null, function (e, exp) {
-      return e.ann && exp;
-    }, void 0, function (e, exp) {
-      return topower(e, exp);
-    }, function (d) {
-      var ret = {
-        value: d,
-        units: {}
-      };
-      return ret;
-    }, function (u) {
-      return u;
-    }, "(", {
-      type: "literal",
-      value: "(",
-      description: "\"(\""
-    }, ")", {
-      type: "literal",
-      value: ")",
-      description: "\")\""
-    }, function (e) {
-      return e;
-    }, /^[+\-]/, {
-      type: "class",
-      value: "[+\\-]",
-      description: "[+\\-]"
-    }, function (s, d) {
-      return s == "-" ? -1 * d : d;
-    }, function (p, a) {
-      return p && !ismetric(a);
-    }, function (p, a) {
-      var ret = a;
-      var u = Object.keys(ret.units)[0]; // console.log("simpleUnit: p:", JSON.stringify(p, null, 2), "a: ", JSON.stringify(a, null, 2));
-
-      if (p) {
-        ret.value = ret.value * prefixes[p];
-        ret.metadata = {};
-
-        if (prefixMetadata[p]) {
-          // if this prefix has metadata, augment the return with it
-          Object.keys(prefixMetadata[p]).forEach(function (key) {
-            if (!ret.metadata[u]) {
-              ret.metadata[u] = {
-                prefix: {}
-              };
-            }
-
-            ret.metadata[u].prefix[key] = prefixMetadata[p][key];
-          });
-        } // merge in the unit metadata
-
-
-        if (unitMetadata[u]) {
-          //console.log("simpleUnit: ", JSON.stringify(unitMetadata[u], null ,2));
-          Object.keys(unitMetadata[u]).forEach(function (key) {
-            if (!ret.metadata[u]) {
-              ret.metadata[u] = {};
-            }
-
-            ret.metadata[u][key] = unitMetadata[u][key];
-          });
-        }
-      } //console.log("simpleUnit: ret: ", JSON.stringify(ret, null ,2));
-
-
-      return ret;
-    }, /^[0-9]/, {
-      type: "class",
-      value: "[0-9]",
-      description: "[0-9]"
-    }, "e", {
-      type: "literal",
-      value: "e",
-      description: "\"e\""
-    }, function (v, epresent, e) {
-      return !epresent && !!e;
-    }, function (v, epresent, e) {
-      return parseInt(v.join("")) * Math.pow(10, e || 0);
-    }, "{", {
-      type: "literal",
-      value: "{",
-      description: "\"{\""
-    }, /^[^}]/, {
-      type: "class",
-      value: "[^}]",
-      description: "[^}]"
-    }, "}", {
-      type: "literal",
-      value: "}",
-      description: "\"}\""
-    }, function (m) {
-      return /[^\x00-\x7F]/.test(m);
-    }, function (m) {
-      return {
-        value: 1,
-        units: {},
-        ann: m
-      };
-    }, "[anti'Xa'U]", {
-      type: "literal",
-      value: "[anti'Xa'U]",
-      description: "\"[anti'Xa'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[anti'Xa'U]": 1
-        },
-        "metadata": {
-          "[anti'Xa'U]": {
-            "isBase": false,
-            "CODE": "[ANTI'XA'U]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["anti factor Xa unit"],
-            "properties": ["biologic activity of factor Xa inhibitor (heparin)"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[Amb'a'1'U]", {
-      type: "literal",
-      value: "[Amb'a'1'U]",
-      description: "\"[Amb'a'1'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[Amb'a'1'U]": 1
-        },
-        "metadata": {
-          "[Amb'a'1'U]": {
-            "isBase": false,
-            "CODE": "[AMB'A'1'U]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["allergen unit for Ambrosia artemisiifolia"],
-            "printSymbols": ["Amb a 1 U"],
-            "properties": ["procedure defined amount of the major allergen of ragweed."],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[stone_av]", {
-      type: "literal",
-      value: "[stone_av]",
-      description: "\"[stone_av]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[stone_av]": 1
-        },
-        "metadata": {
-          "[stone_av]": {
-            "isBase": false,
-            "CODE": "[STONE_AV]",
-            "isMetric": "no",
-            "class": "avoirdupois",
-            "names": ["stone", "British stone"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "14",
-              "numeric": 14
-            }]
-          }
-        }
-      };
-    }, "[in_i'H2O]", {
-      type: "literal",
-      value: "[in_i'H2O]",
-      description: "\"[in_i'H2O]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[in_i'H2O]": 1
-        },
-        "metadata": {
-          "[in_i'H2O]": {
-            "isBase": false,
-            "CODE": "[IN_I'H2O]",
-            "isMetric": "no",
-            "class": "clinical",
-            "names": ["inch of water column"],
-            "printSymbols": ["in&#160;H<sub>\n            <r>2</r>\n         </sub>O"],
-            "properties": ["pressure"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[ston_av]", {
-      type: "literal",
-      value: "[ston_av]",
-      description: "\"[ston_av]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[ston_av]": 1
-        },
-        "metadata": {
-          "[ston_av]": {
-            "isBase": false,
-            "CODE": "[STON_AV]",
-            "isMetric": "no",
-            "class": "avoirdupois",
-            "names": ["short ton", "U.S. ton"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "20",
-              "numeric": 20
-            }]
-          }
-        }
-      };
-    }, "[TCID_50]", {
-      type: "literal",
-      value: "[TCID_50]",
-      description: "\"[TCID_50]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[TCID_50]": 1
-        },
-        "metadata": {
-          "[TCID_50]": {
-            "isBase": false,
-            "CODE": "[TCID_50]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["50% tissue culture infectious dose"],
-            "printSymbols": ["TCID<sub>50</sub>"],
-            "properties": ["biologic activity (infectivity) of an infectious agent preparation"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[CCID_50]", {
-      type: "literal",
-      value: "[CCID_50]",
-      description: "\"[CCID_50]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[CCID_50]": 1
-        },
-        "metadata": {
-          "[CCID_50]": {
-            "isBase": false,
-            "CODE": "[CCID_50]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["50% cell culture infectious dose"],
-            "printSymbols": ["CCID<sub>50</sub>"],
-            "properties": ["biologic activity (infectivity) of an infectious agent preparation"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[scwt_av]", {
-      type: "literal",
-      value: "[scwt_av]",
-      description: "\"[scwt_av]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[scwt_av]": 1
-        },
-        "metadata": {
-          "[scwt_av]": {
-            "isBase": false,
-            "CODE": "[SCWT_AV]",
-            "isMetric": "no",
-            "class": "avoirdupois",
-            "names": ["short hundredweight", "U.S. hundredweight"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "100",
-              "numeric": 100
-            }]
-          }
-        }
-      };
-    }, "[lcwt_av]", {
-      type: "literal",
-      value: "[lcwt_av]",
-      description: "\"[lcwt_av]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[lcwt_av]": 1
-        },
-        "metadata": {
-          "[lcwt_av]": {
-            "isBase": false,
-            "CODE": "[LCWT_AV]",
-            "isMetric": "no",
-            "class": "avoirdupois",
-            "names": ["long hunderdweight", "British hundredweight"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "112",
-              "numeric": 112
-            }]
-          }
-        }
-      };
-    }, "[lton_av]", {
-      type: "literal",
-      value: "[lton_av]",
-      description: "\"[lton_av]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[lton_av]": 1
-        },
-        "metadata": {
-          "[lton_av]": {
-            "isBase": false,
-            "CODE": "[LTON_AV]",
-            "isMetric": "no",
-            "class": "avoirdupois",
-            "names": ["long ton", "British ton"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "20",
-              "numeric": 20
-            }]
-          }
-        }
-      };
-    }, "[in_i'Hg]", {
-      type: "literal",
-      value: "[in_i'Hg]",
-      description: "\"[in_i'Hg]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[in_i'Hg]": 1
-        },
-        "metadata": {
-          "[in_i'Hg]": {
-            "isBase": false,
-            "CODE": "[IN_I'HG]",
-            "isMetric": "no",
-            "class": "clinical",
-            "names": ["inch of mercury column"],
-            "printSymbols": ["in&#160;Hg"],
-            "properties": ["pressure"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[tbs_us]", {
-      type: "literal",
-      value: "[tbs_us]",
-      description: "\"[tbs_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[tbs_us]": 1
-        },
-        "metadata": {
-          "[tbs_us]": {
-            "isBase": false,
-            "CODE": "[TBS_US]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["tablespoon"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[dpt_us]", {
-      type: "literal",
-      value: "[dpt_us]",
-      description: "\"[dpt_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[dpt_us]": 1
-        },
-        "metadata": {
-          "[dpt_us]": {
-            "isBase": false,
-            "CODE": "[DPT_US]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["dry pint"],
-            "properties": ["dry volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[bdsk'U]", {
-      type: "literal",
-      value: "[bdsk'U]",
-      description: "\"[bdsk'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[bdsk'U]": 1
-        },
-        "metadata": {
-          "[bdsk'U]": {
-            "isBase": false,
-            "CODE": "[BDSK'U]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["Bodansky unit"],
-            "properties": ["biologic activity of phosphatase"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[smgy'U]", {
-      type: "literal",
-      value: "[smgy'U]",
-      description: "\"[smgy'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[smgy'U]": 1
-        },
-        "metadata": {
-          "[smgy'U]": {
-            "isBase": false,
-            "CODE": "[SMGY'U]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["Somogyi unit"],
-            "properties": ["biologic activity of amylase"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[dqt_us]", {
-      type: "literal",
-      value: "[dqt_us]",
-      description: "\"[dqt_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[dqt_us]": 1
-        },
-        "metadata": {
-          "[dqt_us]": {
-            "isBase": false,
-            "CODE": "[DQT_US]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["dry quart"],
-            "properties": ["dry volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[todd'U]", {
-      type: "literal",
-      value: "[todd'U]",
-      description: "\"[todd'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[todd'U]": 1
-        },
-        "metadata": {
-          "[todd'U]": {
-            "isBase": false,
-            "CODE": "[TODD'U]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["Todd unit"],
-            "properties": ["biologic activity antistreptolysin O"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[D'ag'U]", {
-      type: "literal",
-      value: "[D'ag'U]",
-      description: "\"[D'ag'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[D'ag'U]": 1
-        },
-        "metadata": {
-          "[D'ag'U]": {
-            "isBase": false,
-            "CODE": "[D'AG'U]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["D-antigen unit"],
-            "printSymbols": [""],
-            "properties": ["procedure defined amount of a poliomyelitis d-antigen substance"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[beth'U]", {
-      type: "literal",
-      value: "[beth'U]",
-      description: "\"[beth'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[beth'U]": 1
-        },
-        "metadata": {
-          "[beth'U]": {
-            "isBase": false,
-            "CODE": "[BETH'U]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["Bethesda unit"],
-            "properties": ["biologic activity of factor VIII inhibitor"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[gal_wi]", {
-      type: "literal",
-      value: "[gal_wi]",
-      description: "\"[gal_wi]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[gal_wi]": 1
-        },
-        "metadata": {
-          "[gal_wi]": {
-            "isBase": false,
-            "CODE": "[GAL_WI]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["historical winchester gallon"],
-            "properties": ["dry volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[crd_us]", {
-      type: "literal",
-      value: "[crd_us]",
-      description: "\"[crd_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[crd_us]": 1
-        },
-        "metadata": {
-          "[crd_us]": {
-            "isBase": false,
-            "CODE": "[CRD_US]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["cord"],
-            "properties": ["fluid volume"],
-            "values": [{
-              "printable": "128",
-              "numeric": 128
-            }]
-          }
-        }
-      };
-    }, "[min_us]", {
-      type: "literal",
-      value: "[min_us]",
-      description: "\"[min_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[min_us]": 1
-        },
-        "metadata": {
-          "[min_us]": {
-            "isBase": false,
-            "CODE": "[MIN_US]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["minim"],
-            "properties": ["fluid volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[fdr_us]", {
-      type: "literal",
-      value: "[fdr_us]",
-      description: "\"[fdr_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[fdr_us]": 1
-        },
-        "metadata": {
-          "[fdr_us]": {
-            "isBase": false,
-            "CODE": "[FDR_US]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["fluid dram"],
-            "properties": ["fluid volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[foz_us]", {
-      type: "literal",
-      value: "[foz_us]",
-      description: "\"[foz_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[foz_us]": 1
-        },
-        "metadata": {
-          "[foz_us]": {
-            "isBase": false,
-            "CODE": "[FOZ_US]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["fluid ounce"],
-            "printSymbols": ["oz fl"],
-            "properties": ["fluid volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[gil_us]", {
-      type: "literal",
-      value: "[gil_us]",
-      description: "\"[gil_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[gil_us]": 1
-        },
-        "metadata": {
-          "[gil_us]": {
-            "isBase": false,
-            "CODE": "[GIL_US]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["gill"],
-            "properties": ["fluid volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[bbl_us]", {
-      type: "literal",
-      value: "[bbl_us]",
-      description: "\"[bbl_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[bbl_us]": 1
-        },
-        "metadata": {
-          "[bbl_us]": {
-            "isBase": false,
-            "CODE": "[BBL_US]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["barrel"],
-            "properties": ["fluid volume"],
-            "values": [{
-              "printable": "42",
-              "numeric": 42
-            }]
-          }
-        }
-      };
-    }, "[gal_us]", {
-      type: "literal",
-      value: "[gal_us]",
-      description: "\"[gal_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[gal_us]": 1
-        },
-        "metadata": {
-          "[gal_us]": {
-            "isBase": false,
-            "CODE": "[GAL_US]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["Queen Anne's wine gallon"],
-            "properties": ["fluid volume"],
-            "values": [{
-              "printable": "231",
-              "numeric": 231
-            }]
-          }
-        }
-      };
-    }, "[acr_br]", {
-      type: "literal",
-      value: "[acr_br]",
-      description: "\"[acr_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[acr_br]": 1
-        },
-        "metadata": {
-          "[acr_br]": {
-            "isBase": false,
-            "CODE": "[ACR_BR]",
-            "isMetric": "no",
-            "class": "brit-length",
-            "names": ["acre"],
-            "properties": ["area"],
-            "values": [{
-              "printable": "4840",
-              "numeric": 4840
-            }]
-          }
-        }
-      };
-    }, "[nmi_br]", {
-      type: "literal",
-      value: "[nmi_br]",
-      description: "\"[nmi_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[nmi_br]": 1
-        },
-        "metadata": {
-          "[nmi_br]": {
-            "isBase": false,
-            "CODE": "[NMI_BR]",
-            "isMetric": "no",
-            "class": "brit-length",
-            "names": ["nautical mile"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "6080",
-              "numeric": 6080
-            }]
-          }
-        }
-      };
-    }, "[fth_br]", {
-      type: "literal",
-      value: "[fth_br]",
-      description: "\"[fth_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[fth_br]": 1
-        },
-        "metadata": {
-          "[fth_br]": {
-            "isBase": false,
-            "CODE": "[FTH_BR]",
-            "isMetric": "no",
-            "class": "brit-length",
-            "names": ["fathom"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "6",
-              "numeric": 6
-            }]
-          }
-        }
-      };
-    }, "[mil_us]", {
-      type: "literal",
-      value: "[mil_us]",
-      description: "\"[mil_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[mil_us]": 1
-        },
-        "metadata": {
-          "[mil_us]": {
-            "isBase": false,
-            "CODE": "[MIL_US]",
-            "isMetric": "no",
-            "class": "us-lengths",
-            "names": ["mil"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "1 &#215; 10<sup>-3</sup>",
-              "numeric": 0.001
-            }]
-          }
-        }
-      };
-    }, "[smi_us]", {
-      type: "literal",
-      value: "[smi_us]",
-      description: "\"[smi_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[smi_us]": 1
-        },
-        "metadata": {
-          "[smi_us]": {
-            "isBase": false,
-            "CODE": "[SMI_US]",
-            "isMetric": "no",
-            "class": "us-lengths",
-            "names": ["square mile"],
-            "properties": ["area"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[acr_us]", {
-      type: "literal",
-      value: "[acr_us]",
-      description: "\"[acr_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[acr_us]": 1
-        },
-        "metadata": {
-          "[acr_us]": {
-            "isBase": false,
-            "CODE": "[ACR_US]",
-            "isMetric": "no",
-            "class": "us-lengths",
-            "names": ["acre"],
-            "properties": ["area"],
-            "values": [{
-              "printable": "160",
-              "numeric": 160
-            }]
-          }
-        }
-      };
-    }, "[fur_us]", {
-      type: "literal",
-      value: "[fur_us]",
-      description: "\"[fur_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[fur_us]": 1
-        },
-        "metadata": {
-          "[fur_us]": {
-            "isBase": false,
-            "CODE": "[FUR_US]",
-            "isMetric": "no",
-            "class": "us-lengths",
-            "names": ["furlong"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "40",
-              "numeric": 40
-            }]
-          }
-        }
-      };
-    }, "[fth_us]", {
-      type: "literal",
-      value: "[fth_us]",
-      description: "\"[fth_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[fth_us]": 1
-        },
-        "metadata": {
-          "[fth_us]": {
-            "isBase": false,
-            "CODE": "[FTH_US]",
-            "isMetric": "no",
-            "class": "us-lengths",
-            "names": ["fathom"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "6",
-              "numeric": 6
-            }]
-          }
-        }
-      };
-    }, "[rlk_us]", {
-      type: "literal",
-      value: "[rlk_us]",
-      description: "\"[rlk_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[rlk_us]": 1
-        },
-        "metadata": {
-          "[rlk_us]": {
-            "isBase": false,
-            "CODE": "[RLK_US]",
-            "isMetric": "no",
-            "class": "us-lengths",
-            "names": ["link for Ramden's chain"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[rch_us]", {
-      type: "literal",
-      value: "[rch_us]",
-      description: "\"[rch_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[rch_us]": 1
-        },
-        "metadata": {
-          "[rch_us]": {
-            "isBase": false,
-            "CODE": "[RCH_US]",
-            "isMetric": "no",
-            "class": "us-lengths",
-            "names": ["Ramden's chain", "Engineer's chain"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "100",
-              "numeric": 100
-            }]
-          }
-        }
-      };
-    }, "[lbf_av]", {
-      type: "literal",
-      value: "[lbf_av]",
-      description: "\"[lbf_av]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[lbf_av]": 1
-        },
-        "metadata": {
-          "[lbf_av]": {
-            "isBase": false,
-            "CODE": "[LBF_AV]",
-            "isMetric": "no",
-            "class": "const",
-            "names": ["pound force"],
-            "printSymbols": ["lbf"],
-            "properties": ["force"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[hnsf'U]", {
-      type: "literal",
-      value: "[hnsf'U]",
-      description: "\"[hnsf'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[hnsf'U]": 1
-        },
-        "metadata": {
-          "[hnsf'U]": {
-            "isBase": false,
-            "CODE": "[HNSF'U]",
-            "isMetric": "no",
-            "class": "clinical",
-            "names": ["Hounsfield unit"],
-            "printSymbols": ["HF"],
-            "properties": ["x-ray attenuation"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[mesh_i]", {
-      type: "literal",
-      value: "[mesh_i]",
-      description: "\"[mesh_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[mesh_i]": 1
-        },
-        "metadata": {
-          "[mesh_i]": {
-            "isBase": false,
-            "CODE": "[MESH_I]",
-            "isMetric": "no",
-            "class": "clinical",
-            "names": ["mesh"],
-            "properties": ["lineic number"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "%[slope]", {
-      type: "literal",
-      value: "%[slope]",
-      description: "\"%[slope]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "%[slope]": 1
-        },
-        "metadata": {
-          "%[slope]": {
-            "isBase": false,
-            "CODE": "%[SLOPE]",
-            "isMetric": "no",
-            "isSpecial": "yes",
-            "class": "clinical",
-            "names": ["percent of slope"],
-            "printSymbols": ["%"],
-            "properties": ["slope"],
-            "values": [{
-              "printable": "<function name=\"100tan\" value=\"1\" Unit=\"deg\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "[p'diop]", {
-      type: "literal",
-      value: "[p'diop]",
-      description: "\"[p'diop]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[p'diop]": 1
-        },
-        "metadata": {
-          "[p'diop]": {
-            "isBase": false,
-            "CODE": "[P'DIOP]",
-            "isMetric": "no",
-            "isSpecial": "yes",
-            "class": "clinical",
-            "names": ["prism diopter"],
-            "printSymbols": ["PD"],
-            "properties": ["refraction of a prism"],
-            "values": [{
-              "printable": "<function name=\"tanTimes100\" value=\"1\" Unit=\"deg\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "[gil_br]", {
-      type: "literal",
-      value: "[gil_br]",
-      description: "\"[gil_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[gil_br]": 1
-        },
-        "metadata": {
-          "[gil_br]": {
-            "isBase": false,
-            "CODE": "[GIL_BR]",
-            "isMetric": "no",
-            "class": "brit-volumes",
-            "names": ["gill"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[wood'U]", {
-      type: "literal",
-      value: "[wood'U]",
-      description: "\"[wood'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[wood'U]": 1
-        },
-        "metadata": {
-          "[wood'U]": {
-            "isBase": false,
-            "CODE": "[WOOD'U]",
-            "isMetric": "no",
-            "class": "clinical",
-            "names": ["Wood unit"],
-            "printSymbols": ["Wood U."],
-            "properties": ["fluid resistance"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "cal_[15]", {
-      type: "literal",
-      value: "cal_[15]",
-      description: "\"cal_[15]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "cal_[15]": 1
-        },
-        "metadata": {
-          "cal_[15]": {
-            "isBase": false,
-            "CODE": "CAL_[15]",
-            "isMetric": "yes",
-            "class": "heat",
-            "names": ["calorie at 15 °C"],
-            "printSymbols": ["cal<sub>15&#176;C</sub>"],
-            "properties": ["energy"],
-            "values": [{
-              "printable": "4.18580",
-              "numeric": 4.1858
-            }]
-          }
-        }
-      };
-    }, "cal_[20]", {
-      type: "literal",
-      value: "cal_[20]",
-      description: "\"cal_[20]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "cal_[20]": 1
-        },
-        "metadata": {
-          "cal_[20]": {
-            "isBase": false,
-            "CODE": "CAL_[20]",
-            "isMetric": "yes",
-            "class": "heat",
-            "names": ["calorie at 20 °C"],
-            "printSymbols": ["cal<sub>20&#176;C</sub>"],
-            "properties": ["energy"],
-            "values": [{
-              "printable": "4.18190",
-              "numeric": 4.1819
-            }]
-          }
-        }
-      };
-    }, "[foz_br]", {
-      type: "literal",
-      value: "[foz_br]",
-      description: "\"[foz_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[foz_br]": 1
-        },
-        "metadata": {
-          "[foz_br]": {
-            "isBase": false,
-            "CODE": "[FOZ_BR]",
-            "isMetric": "no",
-            "class": "brit-volumes",
-            "names": ["fluid ounce"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[fdr_br]", {
-      type: "literal",
-      value: "[fdr_br]",
-      description: "\"[fdr_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[fdr_br]": 1
-        },
-        "metadata": {
-          "[fdr_br]": {
-            "isBase": false,
-            "CODE": "[FDR_BR]",
-            "isMetric": "no",
-            "class": "brit-volumes",
-            "names": ["fluid dram"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[srd_us]", {
-      type: "literal",
-      value: "[srd_us]",
-      description: "\"[srd_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[srd_us]": 1
-        },
-        "metadata": {
-          "[srd_us]": {
-            "isBase": false,
-            "CODE": "[SRD_US]",
-            "isMetric": "no",
-            "class": "us-lengths",
-            "names": ["square rod"],
-            "properties": ["area"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[min_br]", {
-      type: "literal",
-      value: "[min_br]",
-      description: "\"[min_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[min_br]": 1
-        },
-        "metadata": {
-          "[min_br]": {
-            "isBase": false,
-            "CODE": "[MIN_BR]",
-            "isMetric": "no",
-            "class": "brit-volumes",
-            "names": ["minim"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[EID_50]", {
-      type: "literal",
-      value: "[EID_50]",
-      description: "\"[EID_50]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[EID_50]": 1
-        },
-        "metadata": {
-          "[EID_50]": {
-            "isBase": false,
-            "CODE": "[EID_50]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["50% embryo infectious dose"],
-            "printSymbols": ["EID<sub>50</sub>"],
-            "properties": ["biologic activity (infectivity) of an infectious agent preparation"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[Btu_th]", {
-      type: "literal",
-      value: "[Btu_th]",
-      description: "\"[Btu_th]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[Btu_th]": 1
-        },
-        "metadata": {
-          "[Btu_th]": {
-            "isBase": false,
-            "CODE": "[BTU_TH]",
-            "isMetric": "no",
-            "class": "heat",
-            "names": ["thermochemical British thermal unit"],
-            "printSymbols": ["Btu<sub>th</sub>"],
-            "properties": ["energy"],
-            "values": [{
-              "printable": "1.054350",
-              "numeric": 1.05435
-            }]
-          }
-        }
-      };
-    }, "[Btu_IT]", {
-      type: "literal",
-      value: "[Btu_IT]",
-      description: "\"[Btu_IT]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[Btu_IT]": 1
-        },
-        "metadata": {
-          "[Btu_IT]": {
-            "isBase": false,
-            "CODE": "[BTU_IT]",
-            "isMetric": "no",
-            "class": "heat",
-            "names": ["international table British thermal unit"],
-            "printSymbols": ["Btu<sub>IT</sub>"],
-            "properties": ["energy"],
-            "values": [{
-              "printable": "1.05505585262",
-              "numeric": 1.05505585262
-            }]
-          }
-        }
-      };
-    }, "[car_Au]", {
-      type: "literal",
-      value: "[car_Au]",
-      description: "\"[car_Au]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[car_Au]": 1
-        },
-        "metadata": {
-          "[car_Au]": {
-            "isBase": false,
-            "CODE": "[CAR_AU]",
-            "isMetric": "no",
-            "class": "misc",
-            "names": ["carat of gold alloys"],
-            "printSymbols": ["ct<sub>\n            <r>Au</r>\n         </sub>"],
-            "properties": ["mass fraction"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[Btu_60]", {
-      type: "literal",
-      value: "[Btu_60]",
-      description: "\"[Btu_60]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[Btu_60]": 1
-        },
-        "metadata": {
-          "[Btu_60]": {
-            "isBase": false,
-            "CODE": "[BTU_60]",
-            "isMetric": "no",
-            "class": "heat",
-            "names": ["British thermal unit at 60 °F"],
-            "printSymbols": ["Btu<sub>60&#176;F</sub>"],
-            "properties": ["energy"],
-            "values": [{
-              "printable": "1.05468",
-              "numeric": 1.05468
-            }]
-          }
-        }
-      };
-    }, "[Btu_59]", {
-      type: "literal",
-      value: "[Btu_59]",
-      description: "\"[Btu_59]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[Btu_59]": 1
-        },
-        "metadata": {
-          "[Btu_59]": {
-            "isBase": false,
-            "CODE": "[BTU_59]",
-            "isMetric": "no",
-            "class": "heat",
-            "names": ["British thermal unit at 59 °F"],
-            "printSymbols": ["Btu<sub>59&#176;F</sub>"],
-            "properties": ["energy"],
-            "values": [{
-              "printable": "1.05480",
-              "numeric": 1.0548
-            }]
-          }
-        }
-      };
-    }, "[Btu_39]", {
-      type: "literal",
-      value: "[Btu_39]",
-      description: "\"[Btu_39]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[Btu_39]": 1
-        },
-        "metadata": {
-          "[Btu_39]": {
-            "isBase": false,
-            "CODE": "[BTU_39]",
-            "isMetric": "no",
-            "class": "heat",
-            "names": ["British thermal unit at 39 °F"],
-            "printSymbols": ["Btu<sub>39&#176;F</sub>"],
-            "properties": ["energy"],
-            "values": [{
-              "printable": "1.05967",
-              "numeric": 1.05967
-            }]
-          }
-        }
-      };
-    }, "[cup_us]", {
-      type: "literal",
-      value: "[cup_us]",
-      description: "\"[cup_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[cup_us]": 1
-        },
-        "metadata": {
-          "[cup_us]": {
-            "isBase": false,
-            "CODE": "[CUP_US]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["cup"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "16",
-              "numeric": 16
-            }]
-          }
-        }
-      };
-    }, "B[10.nV]", {
-      type: "literal",
-      value: "B[10.nV]",
-      description: "\"B[10.nV]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "B[10.nV]": 1
-        },
-        "metadata": {
-          "B[10.nV]": {
-            "isBase": false,
-            "CODE": "B[10.NV]",
-            "isMetric": "yes",
-            "isSpecial": "yes",
-            "class": "levels",
-            "names": ["bel 10 nanovolt"],
-            "printSymbols": ["B(10 nV)"],
-            "properties": ["electric potential level"],
-            "values": [{
-              "printable": "<function name=\"lgTimes2\" value=\"10\" Unit=\"nV\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "[tsp_us]", {
-      type: "literal",
-      value: "[tsp_us]",
-      description: "\"[tsp_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[tsp_us]": 1
-        },
-        "metadata": {
-          "[tsp_us]": {
-            "isBase": false,
-            "CODE": "[TSP_US]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["teaspoon"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[mclg'U]", {
-      type: "literal",
-      value: "[mclg'U]",
-      description: "\"[mclg'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[mclg'U]": 1
-        },
-        "metadata": {
-          "[mclg'U]": {
-            "isBase": false,
-            "CODE": "[MCLG'U]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["Mac Lagan unit"],
-            "properties": ["arbitrary biologic activity"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[cicero]", {
-      type: "literal",
-      value: "[cicero]",
-      description: "\"[cicero]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[cicero]": 1
-        },
-        "metadata": {
-          "[cicero]": {
-            "isBase": false,
-            "CODE": "[CICERO]",
-            "isMetric": "no",
-            "class": "typeset",
-            "names": ["cicero", "Didot's pica"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "12",
-              "numeric": 12
-            }]
-          }
-        }
-      };
-    }, "[pwt_tr]", {
-      type: "literal",
-      value: "[pwt_tr]",
-      description: "\"[pwt_tr]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[pwt_tr]": 1
-        },
-        "metadata": {
-          "[pwt_tr]": {
-            "isBase": false,
-            "CODE": "[PWT_TR]",
-            "isMetric": "no",
-            "class": "troy",
-            "names": ["pennyweight"],
-            "printSymbols": ["dwt"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "24",
-              "numeric": 24
-            }]
-          }
-        }
-      };
-    }, "[pnt_pr]", {
-      type: "literal",
-      value: "[pnt_pr]",
-      description: "\"[pnt_pr]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[pnt_pr]": 1
-        },
-        "metadata": {
-          "[pnt_pr]": {
-            "isBase": false,
-            "CODE": "[PNT_PR]",
-            "isMetric": "no",
-            "class": "typeset",
-            "names": ["Printer's point"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "0.013837",
-              "numeric": 0.013837
-            }]
-          }
-        }
-      };
-    }, "[pca_pr]", {
-      type: "literal",
-      value: "[pca_pr]",
-      description: "\"[pca_pr]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[pca_pr]": 1
-        },
-        "metadata": {
-          "[pca_pr]": {
-            "isBase": false,
-            "CODE": "[PCA_PR]",
-            "isMetric": "no",
-            "class": "typeset",
-            "names": ["Printer's pica"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "12",
-              "numeric": 12
-            }]
-          }
-        }
-      };
-    }, "[gal_br]", {
-      type: "literal",
-      value: "[gal_br]",
-      description: "\"[gal_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[gal_br]": 1
-        },
-        "metadata": {
-          "[gal_br]": {
-            "isBase": false,
-            "CODE": "[GAL_BR]",
-            "isMetric": "no",
-            "class": "brit-volumes",
-            "names": ["gallon"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "4.54609",
-              "numeric": 4.54609
-            }]
-          }
-        }
-      };
-    }, "[yd_us]", {
-      type: "literal",
-      value: "[yd_us]",
-      description: "\"[yd_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[yd_us]": 1
-        },
-        "metadata": {
-          "[yd_us]": {
-            "isBase": false,
-            "CODE": "[YD_US]",
-            "isMetric": "no",
-            "class": "us-lengths",
-            "names": ["yard"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "3",
-              "numeric": 3
-            }]
-          }
-        }
-      };
-    }, "[ligne]", {
-      type: "literal",
-      value: "[ligne]",
-      description: "\"[ligne]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[ligne]": 1
-        },
-        "metadata": {
-          "[ligne]": {
-            "isBase": false,
-            "CODE": "[LIGNE]",
-            "isMetric": "no",
-            "class": "typeset",
-            "names": ["ligne", "French line"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[tbs_m]", {
-      type: "literal",
-      value: "[tbs_m]",
-      description: "\"[tbs_m]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[tbs_m]": 1
-        },
-        "metadata": {
-          "[tbs_m]": {
-            "isBase": false,
-            "CODE": "[TBS_M]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["metric tablespoon"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "15",
-              "numeric": 15
-            }]
-          }
-        }
-      };
-    }, "[lb_ap]", {
-      type: "literal",
-      value: "[lb_ap]",
-      description: "\"[lb_ap]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[lb_ap]": 1
-        },
-        "metadata": {
-          "[lb_ap]": {
-            "isBase": false,
-            "CODE": "[LB_AP]",
-            "isMetric": "no",
-            "class": "apoth",
-            "names": ["pound"],
-            "printSymbols": ["<strike>lb</strike>"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "12",
-              "numeric": 12
-            }]
-          }
-        }
-      };
-    }, "[oz_ap]", {
-      type: "literal",
-      value: "[oz_ap]",
-      description: "\"[oz_ap]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[oz_ap]": 1
-        },
-        "metadata": {
-          "[oz_ap]": {
-            "isBase": false,
-            "CODE": "[OZ_AP]",
-            "isMetric": "no",
-            "class": "apoth",
-            "names": ["ounce"],
-            "printSymbols": ["&#8485;"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "8",
-              "numeric": 8
-            }]
-          }
-        }
-      };
-    }, "[dr_ap]", {
-      type: "literal",
-      value: "[dr_ap]",
-      description: "\"[dr_ap]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[dr_ap]": 1
-        },
-        "metadata": {
-          "[dr_ap]": {
-            "isBase": false,
-            "CODE": "[DR_AP]",
-            "isMetric": "no",
-            "class": "apoth",
-            "names": ["dram", "drachm"],
-            "printSymbols": ["&#658;"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "3",
-              "numeric": 3
-            }]
-          }
-        }
-      };
-    }, "[sc_ap]", {
-      type: "literal",
-      value: "[sc_ap]",
-      description: "\"[sc_ap]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[sc_ap]": 1
-        },
-        "metadata": {
-          "[sc_ap]": {
-            "isBase": false,
-            "CODE": "[SC_AP]",
-            "isMetric": "no",
-            "class": "apoth",
-            "names": ["scruple"],
-            "printSymbols": ["&#8456;"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "20",
-              "numeric": 20
-            }]
-          }
-        }
-      };
-    }, "[tsp_m]", {
-      type: "literal",
-      value: "[tsp_m]",
-      description: "\"[tsp_m]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[tsp_m]": 1
-        },
-        "metadata": {
-          "[tsp_m]": {
-            "isBase": false,
-            "CODE": "[TSP_M]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["metric teaspoon"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "5",
-              "numeric": 5
-            }]
-          }
-        }
-      };
-    }, "[cup_m]", {
-      type: "literal",
-      value: "[cup_m]",
-      description: "\"[cup_m]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[cup_m]": 1
-        },
-        "metadata": {
-          "[cup_m]": {
-            "isBase": false,
-            "CODE": "[CUP_M]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["metric cup"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "240",
-              "numeric": 240
-            }]
-          }
-        }
-      };
-    }, "[lb_tr]", {
-      type: "literal",
-      value: "[lb_tr]",
-      description: "\"[lb_tr]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[lb_tr]": 1
-        },
-        "metadata": {
-          "[lb_tr]": {
-            "isBase": false,
-            "CODE": "[LB_TR]",
-            "isMetric": "no",
-            "class": "troy",
-            "names": ["troy pound"],
-            "printSymbols": ["lb t"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "12",
-              "numeric": 12
-            }]
-          }
-        }
-      };
-    }, "[oz_tr]", {
-      type: "literal",
-      value: "[oz_tr]",
-      description: "\"[oz_tr]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[oz_tr]": 1
-        },
-        "metadata": {
-          "[oz_tr]": {
-            "isBase": false,
-            "CODE": "[OZ_TR]",
-            "isMetric": "no",
-            "class": "troy",
-            "names": ["troy ounce"],
-            "printSymbols": ["oz t"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "20",
-              "numeric": 20
-            }]
-          }
-        }
-      };
-    }, "[didot]", {
-      type: "literal",
-      value: "[didot]",
-      description: "\"[didot]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[didot]": 1
-        },
-        "metadata": {
-          "[didot]": {
-            "isBase": false,
-            "CODE": "[DIDOT]",
-            "isMetric": "no",
-            "class": "typeset",
-            "names": ["didot", "Didot's point"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[foz_m]", {
-      type: "literal",
-      value: "[foz_m]",
-      description: "\"[foz_m]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[foz_m]": 1
-        },
-        "metadata": {
-          "[foz_m]": {
-            "isBase": false,
-            "CODE": "[FOZ_M]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["metric fluid ounce"],
-            "printSymbols": ["oz fl"],
-            "properties": ["fluid volume"],
-            "values": [{
-              "printable": "30",
-              "numeric": 30
-            }]
-          }
-        }
-      };
-    }, "[car_m]", {
-      type: "literal",
-      value: "[car_m]",
-      description: "\"[car_m]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[car_m]": 1
-        },
-        "metadata": {
-          "[car_m]": {
-            "isBase": false,
-            "CODE": "[CAR_M]",
-            "isMetric": "no",
-            "class": "misc",
-            "names": ["metric carat"],
-            "printSymbols": ["ct<sub>m</sub>"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "0.2",
-              "numeric": 0.2
-            }]
-          }
-        }
-      };
-    }, "[smoot]", {
-      type: "literal",
-      value: "[smoot]",
-      description: "\"[smoot]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[smoot]": 1
-        },
-        "metadata": {
-          "[smoot]": {
-            "isBase": false,
-            "CODE": "[SMOOT]",
-            "isMetric": "no",
-            "class": "misc",
-            "names": ["Smoot"],
-            "printSymbols": [""],
-            "properties": ["length"],
-            "values": [{
-              "printable": "67",
-              "numeric": 67
-            }]
-          }
-        }
-      };
-    }, "[knk'U]", {
-      type: "literal",
-      value: "[knk'U]",
-      description: "\"[knk'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[knk'U]": 1
-        },
-        "metadata": {
-          "[knk'U]": {
-            "isBase": false,
-            "CODE": "[KNK'U]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["Kunkel unit"],
-            "properties": ["arbitrary biologic activity"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[Btu_m]", {
-      type: "literal",
-      value: "[Btu_m]",
-      description: "\"[Btu_m]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[Btu_m]": 1
-        },
-        "metadata": {
-          "[Btu_m]": {
-            "isBase": false,
-            "CODE": "[BTU_M]",
-            "isMetric": "no",
-            "class": "heat",
-            "names": ["mean British thermal unit"],
-            "printSymbols": ["Btu<sub>m</sub>"],
-            "properties": ["energy"],
-            "values": [{
-              "printable": "1.05587",
-              "numeric": 1.05587
-            }]
-          }
-        }
-      };
-    }, "[dr_av]", {
-      type: "literal",
-      value: "[dr_av]",
-      description: "\"[dr_av]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[dr_av]": 1
-        },
-        "metadata": {
-          "[dr_av]": {
-            "isBase": false,
-            "CODE": "[DR_AV]",
-            "isMetric": "no",
-            "class": "avoirdupois",
-            "names": ["dram"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[oz_av]", {
-      type: "literal",
-      value: "[oz_av]",
-      description: "\"[oz_av]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[oz_av]": 1
-        },
-        "metadata": {
-          "[oz_av]": {
-            "isBase": false,
-            "CODE": "[OZ_AV]",
-            "isMetric": "no",
-            "class": "avoirdupois",
-            "names": ["ounce"],
-            "printSymbols": ["oz"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[lb_av]", {
-      type: "literal",
-      value: "[lb_av]",
-      description: "\"[lb_av]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[lb_av]": 1
-        },
-        "metadata": {
-          "[lb_av]": {
-            "isBase": false,
-            "CODE": "[LB_AV]",
-            "isMetric": "no",
-            "class": "avoirdupois",
-            "names": ["pound"],
-            "printSymbols": ["lb"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "7000",
-              "numeric": 7000
-            }]
-          }
-        }
-      };
-    }, "[dye'U]", {
-      type: "literal",
-      value: "[dye'U]",
-      description: "\"[dye'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[dye'U]": 1
-        },
-        "metadata": {
-          "[dye'U]": {
-            "isBase": false,
-            "CODE": "[DYE'U]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["Dye unit"],
-            "properties": ["biologic activity of amylase"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[pk_us]", {
-      type: "literal",
-      value: "[pk_us]",
-      description: "\"[pk_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[pk_us]": 1
-        },
-        "metadata": {
-          "[pk_us]": {
-            "isBase": false,
-            "CODE": "[PK_US]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["peck"],
-            "properties": ["dry volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[APL'U]", {
-      type: "literal",
-      value: "[APL'U]",
-      description: "\"[APL'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[APL'U]": 1
-        },
-        "metadata": {
-          "[APL'U]": {
-            "isBase": false,
-            "CODE": "[APL'U]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["APL unit"],
-            "properties": ["biologic activity of anticardiolipin IgA"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[bu_us]", {
-      type: "literal",
-      value: "[bu_us]",
-      description: "\"[bu_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[bu_us]": 1
-        },
-        "metadata": {
-          "[bu_us]": {
-            "isBase": false,
-            "CODE": "[BU_US]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["bushel"],
-            "properties": ["dry volume"],
-            "values": [{
-              "printable": "2150.42",
-              "numeric": 2150.42
-            }]
-          }
-        }
-      };
-    }, "[pt_br]", {
-      type: "literal",
-      value: "[pt_br]",
-      description: "\"[pt_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[pt_br]": 1
-        },
-        "metadata": {
-          "[pt_br]": {
-            "isBase": false,
-            "CODE": "[PT_BR]",
-            "isMetric": "no",
-            "class": "brit-volumes",
-            "names": ["pint"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[qt_br]", {
-      type: "literal",
-      value: "[qt_br]",
-      description: "\"[qt_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[qt_br]": 1
-        },
-        "metadata": {
-          "[qt_br]": {
-            "isBase": false,
-            "CODE": "[QT_BR]",
-            "isMetric": "no",
-            "class": "brit-volumes",
-            "names": ["quart"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[bu_br]", {
-      type: "literal",
-      value: "[bu_br]",
-      description: "\"[bu_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[bu_br]": 1
-        },
-        "metadata": {
-          "[bu_br]": {
-            "isBase": false,
-            "CODE": "[BU_BR]",
-            "isMetric": "no",
-            "class": "brit-volumes",
-            "names": ["bushel"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "4",
-              "numeric": 4
-            }]
-          }
-        }
-      };
-    }, "[hp'_X]", {
-      type: "literal",
-      value: "[hp'_X]",
-      description: "\"[hp'_X]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[hp'_X]": 1
-        },
-        "metadata": {
-          "[hp'_X]": {
-            "isBase": false,
-            "CODE": "[HP'_X]",
-            "isMetric": "no",
-            "isSpecial": "yes",
-            "class": "clinical",
-            "names": ["homeopathic potency of decimal series (retired)"],
-            "printSymbols": ["X"],
-            "properties": ["homeopathic potency (retired)"],
-            "values": [{
-              "printable": "<function name=\"hpX\" value=\"1\" Unit=\"1\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "[MPL'U]", {
-      type: "literal",
-      value: "[MPL'U]",
-      description: "\"[MPL'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[MPL'U]": 1
-        },
-        "metadata": {
-          "[MPL'U]": {
-            "isBase": false,
-            "CODE": "[MPL'U]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["MPL unit"],
-            "properties": ["biologic activity of anticardiolipin IgM"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[GPL'U]", {
-      type: "literal",
-      value: "[GPL'U]",
-      description: "\"[GPL'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[GPL'U]": 1
-        },
-        "metadata": {
-          "[GPL'U]": {
-            "isBase": false,
-            "CODE": "[GPL'U]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["GPL unit"],
-            "properties": ["biologic activity of anticardiolipin IgG"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[USP'U]", {
-      type: "literal",
-      value: "[USP'U]",
-      description: "\"[USP'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[USP'U]": 1
-        },
-        "metadata": {
-          "[USP'U]": {
-            "isBase": false,
-            "CODE": "[USP'U]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["United States Pharmacopeia unit"],
-            "printSymbols": ["U.S.P."],
-            "properties": ["arbitrary"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[eps_0]", {
-      type: "literal",
-      value: "[eps_0]",
-      description: "\"[eps_0]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[eps_0]": 1
-        },
-        "metadata": {
-          "[eps_0]": {
-            "isBase": false,
-            "CODE": "[EPS_0]",
-            "isMetric": "yes",
-            "class": "const",
-            "names": ["permittivity of vacuum"],
-            "printSymbols": ["<i>&#949;<sub>\n               <r>0</r>\n            </sub>\n         </i>"],
-            "properties": ["electric permittivity"],
-            "values": [{
-              "printable": "8.854187817 &#215; 10<sup>-12</sup>",
-              "numeric": 8.854187817e-12
-            }]
-          }
-        }
-      };
-    }, "[fth_i]", {
-      type: "literal",
-      value: "[fth_i]",
-      description: "\"[fth_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[fth_i]": 1
-        },
-        "metadata": {
-          "[fth_i]": {
-            "isBase": false,
-            "CODE": "[FTH_I]",
-            "isMetric": "no",
-            "class": "intcust",
-            "names": ["fathom"],
-            "printSymbols": ["fth"],
-            "properties": ["depth of water"],
-            "values": [{
-              "printable": "6",
-              "numeric": 6
-            }]
-          }
-        }
-      };
-    }, "[nmi_i]", {
-      type: "literal",
-      value: "[nmi_i]",
-      description: "\"[nmi_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[nmi_i]": 1
-        },
-        "metadata": {
-          "[nmi_i]": {
-            "isBase": false,
-            "CODE": "[NMI_I]",
-            "isMetric": "no",
-            "class": "intcust",
-            "names": ["nautical mile"],
-            "printSymbols": ["n.mi"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "1852",
-              "numeric": 1852
-            }]
-          }
-        }
-      };
-    }, "[pt_us]", {
-      type: "literal",
-      value: "[pt_us]",
-      description: "\"[pt_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[pt_us]": 1
-        },
-        "metadata": {
-          "[pt_us]": {
-            "isBase": false,
-            "CODE": "[PT_US]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["pint"],
-            "properties": ["fluid volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[sin_i]", {
-      type: "literal",
-      value: "[sin_i]",
-      description: "\"[sin_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[sin_i]": 1
-        },
-        "metadata": {
-          "[sin_i]": {
-            "isBase": false,
-            "CODE": "[SIN_I]",
-            "isMetric": "no",
-            "class": "intcust",
-            "names": ["square inch"],
-            "properties": ["area"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[sft_i]", {
-      type: "literal",
-      value: "[sft_i]",
-      description: "\"[sft_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[sft_i]": 1
-        },
-        "metadata": {
-          "[sft_i]": {
-            "isBase": false,
-            "CODE": "[SFT_I]",
-            "isMetric": "no",
-            "class": "intcust",
-            "names": ["square foot"],
-            "properties": ["area"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[syd_i]", {
-      type: "literal",
-      value: "[syd_i]",
-      description: "\"[syd_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[syd_i]": 1
-        },
-        "metadata": {
-          "[syd_i]": {
-            "isBase": false,
-            "CODE": "[SYD_I]",
-            "isMetric": "no",
-            "class": "intcust",
-            "names": ["square yard"],
-            "properties": ["area"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[cin_i]", {
-      type: "literal",
-      value: "[cin_i]",
-      description: "\"[cin_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[cin_i]": 1
-        },
-        "metadata": {
-          "[cin_i]": {
-            "isBase": false,
-            "CODE": "[CIN_I]",
-            "isMetric": "no",
-            "class": "intcust",
-            "names": ["cubic inch"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[cft_i]", {
-      type: "literal",
-      value: "[cft_i]",
-      description: "\"[cft_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[cft_i]": 1
-        },
-        "metadata": {
-          "[cft_i]": {
-            "isBase": false,
-            "CODE": "[CFT_I]",
-            "isMetric": "no",
-            "class": "intcust",
-            "names": ["cubic foot"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[cyd_i]", {
-      type: "literal",
-      value: "[cyd_i]",
-      description: "\"[cyd_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[cyd_i]": 1
-        },
-        "metadata": {
-          "[cyd_i]": {
-            "isBase": false,
-            "CODE": "[CYD_I]",
-            "isMetric": "no",
-            "class": "intcust",
-            "names": ["cubic yard"],
-            "printSymbols": ["cu.yd"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[qt_us]", {
-      type: "literal",
-      value: "[qt_us]",
-      description: "\"[qt_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[qt_us]": 1
-        },
-        "metadata": {
-          "[qt_us]": {
-            "isBase": false,
-            "CODE": "[QT_US]",
-            "isMetric": "no",
-            "class": "us-volumes",
-            "names": ["quart"],
-            "properties": ["fluid volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[arb'U]", {
-      type: "literal",
-      value: "[arb'U]",
-      description: "\"[arb'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[arb'U]": 1
-        },
-        "metadata": {
-          "[arb'U]": {
-            "isBase": false,
-            "CODE": "[ARB'U]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["arbitary unit"],
-            "printSymbols": ["arb. U"],
-            "properties": ["arbitrary"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[mil_i]", {
-      type: "literal",
-      value: "[mil_i]",
-      description: "\"[mil_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[mil_i]": 1
-        },
-        "metadata": {
-          "[mil_i]": {
-            "isBase": false,
-            "CODE": "[MIL_I]",
-            "isMetric": "no",
-            "class": "intcust",
-            "names": ["mil"],
-            "printSymbols": ["mil"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "1 &#215; 10<sup>-3</sup>",
-              "numeric": 0.001
-            }]
-          }
-        }
-      };
-    }, "[cml_i]", {
-      type: "literal",
-      value: "[cml_i]",
-      description: "\"[cml_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[cml_i]": 1
-        },
-        "metadata": {
-          "[cml_i]": {
-            "isBase": false,
-            "CODE": "[CML_I]",
-            "isMetric": "no",
-            "class": "intcust",
-            "names": ["circular mil"],
-            "printSymbols": ["circ.mil"],
-            "properties": ["area"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[kn_br]", {
-      type: "literal",
-      value: "[kn_br]",
-      description: "\"[kn_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[kn_br]": 1
-        },
-        "metadata": {
-          "[kn_br]": {
-            "isBase": false,
-            "CODE": "[KN_BR]",
-            "isMetric": "no",
-            "class": "brit-length",
-            "names": ["knot"],
-            "properties": ["velocity"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[ft_us]", {
-      type: "literal",
-      value: "[ft_us]",
-      description: "\"[ft_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[ft_us]": 1
-        },
-        "metadata": {
-          "[ft_us]": {
-            "isBase": false,
-            "CODE": "[FT_US]",
-            "isMetric": "no",
-            "class": "us-lengths",
-            "names": ["foot"],
-            "printSymbols": ["ft<sub>us</sub>"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "1200",
-              "numeric": 1200
-            }]
-          }
-        }
-      };
-    }, "[pouce]", {
-      type: "literal",
-      value: "[pouce]",
-      description: "\"[pouce]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[pouce]": 1
-        },
-        "metadata": {
-          "[pouce]": {
-            "isBase": false,
-            "CODE": "[POUCE]",
-            "isMetric": "no",
-            "class": "typeset",
-            "names": ["pouce", "French inch"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[in_us]", {
-      type: "literal",
-      value: "[in_us]",
-      description: "\"[in_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[in_us]": 1
-        },
-        "metadata": {
-          "[in_us]": {
-            "isBase": false,
-            "CODE": "[IN_US]",
-            "isMetric": "no",
-            "class": "us-lengths",
-            "names": ["inch"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[rd_us]", {
-      type: "literal",
-      value: "[rd_us]",
-      description: "\"[rd_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[rd_us]": 1
-        },
-        "metadata": {
-          "[rd_us]": {
-            "isBase": false,
-            "CODE": "[RD_US]",
-            "isMetric": "no",
-            "class": "us-lengths",
-            "names": ["rod"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "16.5",
-              "numeric": 16.5
-            }]
-          }
-        }
-      };
-    }, "[ch_us]", {
-      type: "literal",
-      value: "[ch_us]",
-      description: "\"[ch_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[ch_us]": 1
-        },
-        "metadata": {
-          "[ch_us]": {
-            "isBase": false,
-            "CODE": "[CH_US]",
-            "isMetric": "no",
-            "class": "us-lengths",
-            "names": ["Gunter's chain", "Surveyor's chain"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "4",
-              "numeric": 4
-            }]
-          }
-        }
-      };
-    }, "[lk_us]", {
-      type: "literal",
-      value: "[lk_us]",
-      description: "\"[lk_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[lk_us]": 1
-        },
-        "metadata": {
-          "[lk_us]": {
-            "isBase": false,
-            "CODE": "[LK_US]",
-            "isMetric": "no",
-            "class": "us-lengths",
-            "names": ["link for Gunter's chain"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[hp'_C]", {
-      type: "literal",
-      value: "[hp'_C]",
-      description: "\"[hp'_C]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[hp'_C]": 1
-        },
-        "metadata": {
-          "[hp'_C]": {
-            "isBase": false,
-            "CODE": "[HP'_C]",
-            "isMetric": "no",
-            "isSpecial": "yes",
-            "class": "clinical",
-            "names": ["homeopathic potency of centesimal series (retired)"],
-            "printSymbols": ["C"],
-            "properties": ["homeopathic potency (retired)"],
-            "values": [{
-              "printable": "<function name=\"hpC\" value=\"1\" Unit=\"1\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "[hp'_M]", {
-      type: "literal",
-      value: "[hp'_M]",
-      description: "\"[hp'_M]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[hp'_M]": 1
-        },
-        "metadata": {
-          "[hp'_M]": {
-            "isBase": false,
-            "CODE": "[HP'_M]",
-            "isMetric": "no",
-            "isSpecial": "yes",
-            "class": "clinical",
-            "names": ["homeopathic potency of millesimal series (retired)"],
-            "printSymbols": ["M"],
-            "properties": ["homeopathic potency (retired)"],
-            "values": [{
-              "printable": "<function name=\"hpM\" value=\"1\" Unit=\"1\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "[hp'_Q]", {
-      type: "literal",
-      value: "[hp'_Q]",
-      description: "\"[hp'_Q]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[hp'_Q]": 1
-        },
-        "metadata": {
-          "[hp'_Q]": {
-            "isBase": false,
-            "CODE": "[HP'_Q]",
-            "isMetric": "no",
-            "isSpecial": "yes",
-            "class": "clinical",
-            "names": ["homeopathic potency of quintamillesimal series (retired)"],
-            "printSymbols": ["Q"],
-            "properties": ["homeopathic potency (retired)"],
-            "values": [{
-              "printable": "<function name=\"hpQ\" value=\"1\" Unit=\"1\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "[mi_br]", {
-      type: "literal",
-      value: "[mi_br]",
-      description: "\"[mi_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[mi_br]": 1
-        },
-        "metadata": {
-          "[mi_br]": {
-            "isBase": false,
-            "CODE": "[MI_BR]",
-            "isMetric": "no",
-            "class": "brit-length",
-            "names": ["mile"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "5280",
-              "numeric": 5280
-            }]
-          }
-        }
-      };
-    }, "[mi_us]", {
-      type: "literal",
-      value: "[mi_us]",
-      description: "\"[mi_us]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[mi_us]": 1
-        },
-        "metadata": {
-          "[mi_us]": {
-            "isBase": false,
-            "CODE": "[MI_US]",
-            "isMetric": "no",
-            "class": "us-lengths",
-            "names": ["mile"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "8",
-              "numeric": 8
-            }]
-          }
-        }
-      };
-    }, "[yd_br]", {
-      type: "literal",
-      value: "[yd_br]",
-      description: "\"[yd_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[yd_br]": 1
-        },
-        "metadata": {
-          "[yd_br]": {
-            "isBase": false,
-            "CODE": "[YD_BR]",
-            "isMetric": "no",
-            "class": "brit-length",
-            "names": ["yard"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "3",
-              "numeric": 3
-            }]
-          }
-        }
-      };
-    }, "[pk_br]", {
-      type: "literal",
-      value: "[pk_br]",
-      description: "\"[pk_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[pk_br]": 1
-        },
-        "metadata": {
-          "[pk_br]": {
-            "isBase": false,
-            "CODE": "[PK_BR]",
-            "isMetric": "no",
-            "class": "brit-volumes",
-            "names": ["peck"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "2",
-              "numeric": 2
-            }]
-          }
-        }
-      };
-    }, "[pc_br]", {
-      type: "literal",
-      value: "[pc_br]",
-      description: "\"[pc_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[pc_br]": 1
-        },
-        "metadata": {
-          "[pc_br]": {
-            "isBase": false,
-            "CODE": "[PC_BR]",
-            "isMetric": "no",
-            "class": "brit-length",
-            "names": ["pace"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "2.5",
-              "numeric": 2.5
-            }]
-          }
-        }
-      };
-    }, "[lk_br]", {
-      type: "literal",
-      value: "[lk_br]",
-      description: "\"[lk_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[lk_br]": 1
-        },
-        "metadata": {
-          "[lk_br]": {
-            "isBase": false,
-            "CODE": "[LK_BR]",
-            "isMetric": "no",
-            "class": "brit-length",
-            "names": ["link for Gunter's chain"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[in_br]", {
-      type: "literal",
-      value: "[in_br]",
-      description: "\"[in_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[in_br]": 1
-        },
-        "metadata": {
-          "[in_br]": {
-            "isBase": false,
-            "CODE": "[IN_BR]",
-            "isMetric": "no",
-            "class": "brit-length",
-            "names": ["inch"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "2.539998",
-              "numeric": 2.539998
-            }]
-          }
-        }
-      };
-    }, "[ft_br]", {
-      type: "literal",
-      value: "[ft_br]",
-      description: "\"[ft_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[ft_br]": 1
-        },
-        "metadata": {
-          "[ft_br]": {
-            "isBase": false,
-            "CODE": "[FT_BR]",
-            "isMetric": "no",
-            "class": "brit-length",
-            "names": ["foot"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "12",
-              "numeric": 12
-            }]
-          }
-        }
-      };
-    }, "[rd_br]", {
-      type: "literal",
-      value: "[rd_br]",
-      description: "\"[rd_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[rd_br]": 1
-        },
-        "metadata": {
-          "[rd_br]": {
-            "isBase": false,
-            "CODE": "[RD_BR]",
-            "isMetric": "no",
-            "class": "brit-length",
-            "names": ["rod"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "16.5",
-              "numeric": 16.5
-            }]
-          }
-        }
-      };
-    }, "[ch_br]", {
-      type: "literal",
-      value: "[ch_br]",
-      description: "\"[ch_br]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[ch_br]": 1
-        },
-        "metadata": {
-          "[ch_br]": {
-            "isBase": false,
-            "CODE": "[CH_BR]",
-            "isMetric": "no",
-            "class": "brit-length",
-            "names": ["Gunter's chain"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "4",
-              "numeric": 4
-            }]
-          }
-        }
-      };
-    }, "[ft_i]", {
-      type: "literal",
-      value: "[ft_i]",
-      description: "\"[ft_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[ft_i]": 1
-        },
-        "metadata": {
-          "[ft_i]": {
-            "isBase": false,
-            "CODE": "[FT_I]",
-            "isMetric": "no",
-            "class": "intcust",
-            "names": ["foot"],
-            "printSymbols": ["ft"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "12",
-              "numeric": 12
-            }]
-          }
-        }
-      };
-    }, "[hp_Q]", {
-      type: "literal",
-      value: "[hp_Q]",
-      description: "\"[hp_Q]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[hp_Q]": 1
-        },
-        "metadata": {
-          "[hp_Q]": {
-            "isBase": false,
-            "CODE": "[HP_Q]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "clinical",
-            "names": ["homeopathic potency of quintamillesimal hahnemannian series"],
-            "printSymbols": ["Q"],
-            "properties": ["homeopathic potency (Hahnemann)"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[hp_M]", {
-      type: "literal",
-      value: "[hp_M]",
-      description: "\"[hp_M]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[hp_M]": 1
-        },
-        "metadata": {
-          "[hp_M]": {
-            "isBase": false,
-            "CODE": "[HP_M]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "clinical",
-            "names": ["homeopathic potency of millesimal hahnemannian series"],
-            "printSymbols": ["M"],
-            "properties": ["homeopathic potency (Hahnemann)"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[hp_C]", {
-      type: "literal",
-      value: "[hp_C]",
-      description: "\"[hp_C]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[hp_C]": 1
-        },
-        "metadata": {
-          "[hp_C]": {
-            "isBase": false,
-            "CODE": "[HP_C]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "clinical",
-            "names": ["homeopathic potency of centesimal hahnemannian series"],
-            "printSymbols": ["C"],
-            "properties": ["homeopathic potency (Hahnemann)"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[hp_X]", {
-      type: "literal",
-      value: "[hp_X]",
-      description: "\"[hp_X]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[hp_X]": 1
-        },
-        "metadata": {
-          "[hp_X]": {
-            "isBase": false,
-            "CODE": "[HP_X]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "clinical",
-            "names": ["homeopathic potency of decimal hahnemannian series"],
-            "printSymbols": ["X"],
-            "properties": ["homeopathic potency (Hahnemann)"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[kp_C]", {
-      type: "literal",
-      value: "[kp_C]",
-      description: "\"[kp_C]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[kp_C]": 1
-        },
-        "metadata": {
-          "[kp_C]": {
-            "isBase": false,
-            "CODE": "[KP_C]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "clinical",
-            "names": ["homeopathic potency of centesimal korsakovian series"],
-            "printSymbols": ["C"],
-            "properties": ["homeopathic potency (Korsakov)"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[hd_i]", {
-      type: "literal",
-      value: "[hd_i]",
-      description: "\"[hd_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[hd_i]": 1
-        },
-        "metadata": {
-          "[hd_i]": {
-            "isBase": false,
-            "CODE": "[HD_I]",
-            "isMetric": "no",
-            "class": "intcust",
-            "names": ["hand"],
-            "printSymbols": ["hd"],
-            "properties": ["height of horses"],
-            "values": [{
-              "printable": "4",
-              "numeric": 4
-            }]
-          }
-        }
-      };
-    }, "[kp_M]", {
-      type: "literal",
-      value: "[kp_M]",
-      description: "\"[kp_M]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[kp_M]": 1
-        },
-        "metadata": {
-          "[kp_M]": {
-            "isBase": false,
-            "CODE": "[KP_M]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "clinical",
-            "names": ["homeopathic potency of millesimal korsakovian series"],
-            "printSymbols": ["M"],
-            "properties": ["homeopathic potency (Korsakov)"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[kp_Q]", {
-      type: "literal",
-      value: "[kp_Q]",
-      description: "\"[kp_Q]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[kp_Q]": 1
-        },
-        "metadata": {
-          "[kp_Q]": {
-            "isBase": false,
-            "CODE": "[KP_Q]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "clinical",
-            "names": ["homeopathic potency of quintamillesimal korsakovian series"],
-            "printSymbols": ["Q"],
-            "properties": ["homeopathic potency (Korsakov)"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[cr_i]", {
-      type: "literal",
-      value: "[cr_i]",
-      description: "\"[cr_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[cr_i]": 1
-        },
-        "metadata": {
-          "[cr_i]": {
-            "isBase": false,
-            "CODE": "[CR_I]",
-            "isMetric": "no",
-            "class": "intcust",
-            "names": ["cord"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "128",
-              "numeric": 128
-            }]
-          }
-        }
-      };
-    }, "[bf_i]", {
-      type: "literal",
-      value: "[bf_i]",
-      description: "\"[bf_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[bf_i]": 1
-        },
-        "metadata": {
-          "[bf_i]": {
-            "isBase": false,
-            "CODE": "[BF_I]",
-            "isMetric": "no",
-            "class": "intcust",
-            "names": ["board foot"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "144",
-              "numeric": 144
-            }]
-          }
-        }
-      };
-    }, "[kn_i]", {
-      type: "literal",
-      value: "[kn_i]",
-      description: "\"[kn_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[kn_i]": 1
-        },
-        "metadata": {
-          "[kn_i]": {
-            "isBase": false,
-            "CODE": "[KN_I]",
-            "isMetric": "no",
-            "class": "intcust",
-            "names": ["knot"],
-            "printSymbols": ["knot"],
-            "properties": ["velocity"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[mu_0]", {
-      type: "literal",
-      value: "[mu_0]",
-      description: "\"[mu_0]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[mu_0]": 1
-        },
-        "metadata": {
-          "[mu_0]": {
-            "isBase": false,
-            "CODE": "[MU_0]",
-            "isMetric": "yes",
-            "class": "const",
-            "names": ["permeability of vacuum"],
-            "printSymbols": ["<i>&#956;<sub>\n               <r>0</r>\n            </sub>\n         </i>"],
-            "properties": ["magnetic permeability"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[mi_i]", {
-      type: "literal",
-      value: "[mi_i]",
-      description: "\"[mi_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[mi_i]": 1
-        },
-        "metadata": {
-          "[mi_i]": {
-            "isBase": false,
-            "CODE": "[MI_I]",
-            "isMetric": "no",
-            "class": "intcust",
-            "names": ["statute mile"],
-            "printSymbols": ["mi"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "5280",
-              "numeric": 5280
-            }]
-          }
-        }
-      };
-    }, "[yd_i]", {
-      type: "literal",
-      value: "[yd_i]",
-      description: "\"[yd_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[yd_i]": 1
-        },
-        "metadata": {
-          "[yd_i]": {
-            "isBase": false,
-            "CODE": "[YD_I]",
-            "isMetric": "no",
-            "class": "intcust",
-            "names": ["yard"],
-            "printSymbols": ["yd"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "3",
-              "numeric": 3
-            }]
-          }
-        }
-      };
-    }, "[kp_X]", {
-      type: "literal",
-      value: "[kp_X]",
-      description: "\"[kp_X]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[kp_X]": 1
-        },
-        "metadata": {
-          "[kp_X]": {
-            "isBase": false,
-            "CODE": "[KP_X]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "clinical",
-            "names": ["homeopathic potency of decimal korsakovian series"],
-            "printSymbols": ["X"],
-            "properties": ["homeopathic potency (Korsakov)"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[in_i]", {
-      type: "literal",
-      value: "[in_i]",
-      description: "\"[in_i]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[in_i]": 1
-        },
-        "metadata": {
-          "[in_i]": {
-            "isBase": false,
-            "CODE": "[IN_I]",
-            "isMetric": "no",
-            "class": "intcust",
-            "names": ["inch"],
-            "printSymbols": ["in"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "2.54",
-              "numeric": 2.54
-            }]
-          }
-        }
-      };
-    }, "[diop]", {
-      type: "literal",
-      value: "[diop]",
-      description: "\"[diop]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[diop]": 1
-        },
-        "metadata": {
-          "[diop]": {
-            "isBase": false,
-            "CODE": "[DIOP]",
-            "isMetric": "no",
-            "class": "clinical",
-            "names": ["diopter"],
-            "printSymbols": ["dpt"],
-            "properties": ["refraction of a lens"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "cal_IT", {
-      type: "literal",
-      value: "cal_IT",
-      description: "\"cal_IT\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "cal_IT": 1
-        },
-        "metadata": {
-          "cal_IT": {
-            "isBase": false,
-            "CODE": "CAL_IT",
-            "isMetric": "yes",
-            "class": "heat",
-            "names": ["international table calorie"],
-            "printSymbols": ["cal<sub>IT</sub>"],
-            "properties": ["energy"],
-            "values": [{
-              "printable": "4.1868",
-              "numeric": 4.1868
-            }]
-          }
-        }
-      };
-    }, "cal_th", {
-      type: "literal",
-      value: "cal_th",
-      description: "\"cal_th\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "cal_th": 1
-        },
-        "metadata": {
-          "cal_th": {
-            "isBase": false,
-            "CODE": "CAL_TH",
-            "isMetric": "yes",
-            "class": "heat",
-            "names": ["thermochemical calorie"],
-            "printSymbols": ["cal<sub>th</sub>"],
-            "properties": ["energy"],
-            "values": [{
-              "printable": "4.184",
-              "numeric": 4.184
-            }]
-          }
-        }
-      };
-    }, "m[H2O]", {
-      type: "literal",
-      value: "m[H2O]",
-      description: "\"m[H2O]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "m[H2O]": 1
-        },
-        "metadata": {
-          "m[H2O]": {
-            "isBase": false,
-            "CODE": "M[H2O]",
-            "isMetric": "yes",
-            "class": "clinical",
-            "names": ["meter of water column"],
-            "printSymbols": ["m&#160;H<sub>\n            <r>2</r>\n         </sub>O"],
-            "properties": ["pressure"],
-            "values": [{
-              "printable": "9.80665",
-              "numeric": 9.80665
-            }]
-          }
-        }
-      };
-    }, "[ka'U]", {
-      type: "literal",
-      value: "[ka'U]",
-      description: "\"[ka'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[ka'U]": 1
-        },
-        "metadata": {
-          "[ka'U]": {
-            "isBase": false,
-            "CODE": "[KA'U]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["King-Armstrong unit"],
-            "properties": ["biologic activity of phosphatase"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "B[SPL]", {
-      type: "literal",
-      value: "B[SPL]",
-      description: "\"B[SPL]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "B[SPL]": 1
-        },
-        "metadata": {
-          "B[SPL]": {
-            "isBase": false,
-            "CODE": "B[SPL]",
-            "isMetric": "yes",
-            "isSpecial": "yes",
-            "class": "levels",
-            "names": ["bel sound pressure"],
-            "printSymbols": ["B(SPL)"],
-            "properties": ["pressure level"],
-            "values": [{
-              "printable": "<function name=\"lgTimes2\" value=\"2\" Unit=\"10*-5.Pa\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "[tb'U]", {
-      type: "literal",
-      value: "[tb'U]",
-      description: "\"[tb'U]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[tb'U]": 1
-        },
-        "metadata": {
-          "[tb'U]": {
-            "isBase": false,
-            "CODE": "[TB'U]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["tuberculin unit"],
-            "properties": ["biologic activity of tuberculin"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[degR]", {
-      type: "literal",
-      value: "[degR]",
-      description: "\"[degR]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[degR]": 1
-        },
-        "metadata": {
-          "[degR]": {
-            "isBase": false,
-            "CODE": "[degR]",
-            "isMetric": "no",
-            "class": "heat",
-            "names": ["degree Rankine"],
-            "printSymbols": ["&#176;R"],
-            "properties": ["temperature"],
-            "values": [{
-              "printable": "5",
-              "numeric": 5
-            }]
-          }
-        }
-      };
-    }, "[degF]", {
-      type: "literal",
-      value: "[degF]",
-      description: "\"[degF]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[degF]": 1
-        },
-        "metadata": {
-          "[degF]": {
-            "isBase": false,
-            "CODE": "[DEGF]",
-            "isMetric": "no",
-            "isSpecial": "yes",
-            "class": "heat",
-            "names": ["degree Fahrenheit"],
-            "printSymbols": ["&#176;F"],
-            "properties": ["temperature"],
-            "values": [{
-              "printable": "<function name=\"degF\" value=\"5\" Unit=\"K/9\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "[pptr]", {
-      type: "literal",
-      value: "[pptr]",
-      description: "\"[pptr]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[pptr]": 1
-        },
-        "metadata": {
-          "[pptr]": {
-            "isBase": false,
-            "CODE": "[PPTR]",
-            "isMetric": "no",
-            "class": "dimless",
-            "names": ["parts per trillion"],
-            "printSymbols": ["pptr"],
-            "properties": ["fraction"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[ppth]", {
-      type: "literal",
-      value: "[ppth]",
-      description: "\"[ppth]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[ppth]": 1
-        },
-        "metadata": {
-          "[ppth]": {
-            "isBase": false,
-            "CODE": "[PPTH]",
-            "isMetric": "no",
-            "class": "dimless",
-            "names": ["parts per thousand"],
-            "printSymbols": ["ppth"],
-            "properties": ["fraction"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[oz_m]", {
-      type: "literal",
-      value: "[oz_m]",
-      description: "\"[oz_m]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[oz_m]": 1
-        },
-        "metadata": {
-          "[oz_m]": {
-            "isBase": false,
-            "CODE": "[OZ_M]",
-            "isMetric": "no",
-            "class": "apoth",
-            "names": ["metric ounce"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "28",
-              "numeric": 28
-            }]
-          }
-        }
-      };
-    }, "[pied]", {
-      type: "literal",
-      value: "[pied]",
-      description: "\"[pied]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[pied]": 1
-        },
-        "metadata": {
-          "[pied]": {
-            "isBase": false,
-            "CODE": "[PIED]",
-            "isMetric": "no",
-            "class": "typeset",
-            "names": ["pied", "French foot"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "32.48",
-              "numeric": 32.48
-            }]
-          }
-        }
-      };
-    }, "[ppm]", {
-      type: "literal",
-      value: "[ppm]",
-      description: "\"[ppm]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[ppm]": 1
-        },
-        "metadata": {
-          "[ppm]": {
-            "isBase": false,
-            "CODE": "[PPM]",
-            "isMetric": "no",
-            "class": "dimless",
-            "names": ["parts per million"],
-            "printSymbols": ["ppm"],
-            "properties": ["fraction"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[ppb]", {
-      type: "literal",
-      value: "[ppb]",
-      description: "\"[ppb]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[ppb]": 1
-        },
-        "metadata": {
-          "[ppb]": {
-            "isBase": false,
-            "CODE": "[PPB]",
-            "isMetric": "no",
-            "class": "dimless",
-            "names": ["parts per billion"],
-            "printSymbols": ["ppb"],
-            "properties": ["fraction"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "bit_s", {
-      type: "literal",
-      value: "bit_s",
-      description: "\"bit_s\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "bit_s": 1
-        },
-        "metadata": {
-          "bit_s": {
-            "isBase": false,
-            "CODE": "BIT_S",
-            "isMetric": "no",
-            "isSpecial": "yes",
-            "class": "infotech",
-            "names": ["bit"],
-            "printSymbols": ["bit<sub>s</sub>"],
-            "properties": ["amount of information"],
-            "values": [{
-              "printable": "<function name=\"ld\" value=\"1\" Unit=\"1\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "[PNU]", {
-      type: "literal",
-      value: "[PNU]",
-      description: "\"[PNU]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[PNU]": 1
-        },
-        "metadata": {
-          "[PNU]": {
-            "isBase": false,
-            "CODE": "[PNU]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["protein nitrogen unit"],
-            "printSymbols": ["PNU"],
-            "properties": ["procedure defined amount of a protein substance"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[psi]", {
-      type: "literal",
-      value: "[psi]",
-      description: "\"[psi]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[psi]": 1
-        },
-        "metadata": {
-          "[psi]": {
-            "isBase": false,
-            "CODE": "[PSI]",
-            "isMetric": "no",
-            "class": "misc",
-            "names": ["pound per sqare inch"],
-            "printSymbols": ["psi"],
-            "properties": ["pressure"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[BAU]", {
-      type: "literal",
-      value: "[BAU]",
-      description: "\"[BAU]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[BAU]": 1
-        },
-        "metadata": {
-          "[BAU]": {
-            "isBase": false,
-            "CODE": "[BAU]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["bioequivalent allergen unit"],
-            "printSymbols": ["BAU"],
-            "properties": ["amount of an allergen callibrated through in-vivo testing based on the ID50EAL method of (intradermal dilution for 50mm sum of erythema diameters"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[Cal]", {
-      type: "literal",
-      value: "[Cal]",
-      description: "\"[Cal]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[Cal]": 1
-        },
-        "metadata": {
-          "[Cal]": {
-            "isBase": false,
-            "CODE": "[CAL]",
-            "isMetric": "no",
-            "class": "heat",
-            "names": ["nutrition label Calories"],
-            "printSymbols": ["Cal"],
-            "properties": ["energy"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "B[mV]", {
-      type: "literal",
-      value: "B[mV]",
-      description: "\"B[mV]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "B[mV]": 1
-        },
-        "metadata": {
-          "B[mV]": {
-            "isBase": false,
-            "CODE": "B[MV]",
-            "isMetric": "yes",
-            "isSpecial": "yes",
-            "class": "levels",
-            "names": ["bel millivolt"],
-            "printSymbols": ["B(mV)"],
-            "properties": ["electric potential level"],
-            "values": [{
-              "printable": "<function name=\"lgTimes2\" value=\"1\" Unit=\"mV\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "B[uV]", {
-      type: "literal",
-      value: "B[uV]",
-      description: "\"B[uV]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "B[uV]": 1
-        },
-        "metadata": {
-          "B[uV]": {
-            "isBase": false,
-            "CODE": "B[UV]",
-            "isMetric": "yes",
-            "isSpecial": "yes",
-            "class": "levels",
-            "names": ["bel microvolt"],
-            "printSymbols": ["B(&#956;V)"],
-            "properties": ["electric potential level"],
-            "values": [{
-              "printable": "<function name=\"lgTimes2\" value=\"1\" Unit=\"uV\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "[CFU]", {
-      type: "literal",
-      value: "[CFU]",
-      description: "\"[CFU]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[CFU]": 1
-        },
-        "metadata": {
-          "[CFU]": {
-            "isBase": false,
-            "CODE": "[CFU]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["colony forming units"],
-            "printSymbols": ["CFU"],
-            "properties": ["amount of a proliferating organism"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[FFU]", {
-      type: "literal",
-      value: "[FFU]",
-      description: "\"[FFU]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[FFU]": 1
-        },
-        "metadata": {
-          "[FFU]": {
-            "isBase": false,
-            "CODE": "[FFU]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["focus forming units"],
-            "printSymbols": ["FFU"],
-            "properties": ["amount of an infectious agent"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "B[kW]", {
-      type: "literal",
-      value: "B[kW]",
-      description: "\"B[kW]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "B[kW]": 1
-        },
-        "metadata": {
-          "B[kW]": {
-            "isBase": false,
-            "CODE": "B[KW]",
-            "isMetric": "yes",
-            "isSpecial": "yes",
-            "class": "levels",
-            "names": ["bel kilowatt"],
-            "printSymbols": ["B(kW)"],
-            "properties": ["power level"],
-            "values": [{
-              "printable": "<function name=\"lg\" value=\"1\" Unit=\"kW\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "[PFU]", {
-      type: "literal",
-      value: "[PFU]",
-      description: "\"[PFU]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[PFU]": 1
-        },
-        "metadata": {
-          "[PFU]": {
-            "isBase": false,
-            "CODE": "[PFU]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["plaque forming units"],
-            "printSymbols": ["PFU"],
-            "properties": ["amount of an infectious agent"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "cal_m", {
-      type: "literal",
-      value: "cal_m",
-      description: "\"cal_m\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "cal_m": 1
-        },
-        "metadata": {
-          "cal_m": {
-            "isBase": false,
-            "CODE": "CAL_M",
-            "isMetric": "yes",
-            "class": "heat",
-            "names": ["mean calorie"],
-            "printSymbols": ["cal<sub>m</sub>"],
-            "properties": ["energy"],
-            "values": [{
-              "printable": "4.19002",
-              "numeric": 4.19002
-            }]
-          }
-        }
-      };
-    }, "[ELU]", {
-      type: "literal",
-      value: "[ELU]",
-      description: "\"[ELU]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[ELU]": 1
-        },
-        "metadata": {
-          "[ELU]": {
-            "isBase": false,
-            "CODE": "[ELU]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["ELISA unit"],
-            "printSymbols": [""],
-            "properties": ["arbitrary ELISA unit"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[FEU]", {
-      type: "literal",
-      value: "[FEU]",
-      description: "\"[FEU]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[FEU]": 1
-        },
-        "metadata": {
-          "[FEU]": {
-            "isBase": false,
-            "CODE": "[FEU]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["fibrinogen equivalent unit"],
-            "printSymbols": [""],
-            "properties": ["amount of fibrinogen broken down into the measured d-dimers"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[PRU]", {
-      type: "literal",
-      value: "[PRU]",
-      description: "\"[PRU]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[PRU]": 1
-        },
-        "metadata": {
-          "[PRU]": {
-            "isBase": false,
-            "CODE": "[PRU]",
-            "isMetric": "no",
-            "class": "clinical",
-            "names": ["peripheral vascular resistance unit"],
-            "printSymbols": ["P.R.U."],
-            "properties": ["fluid resistance"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[m_e]", {
-      type: "literal",
-      value: "[m_e]",
-      description: "\"[m_e]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[m_e]": 1
-        },
-        "metadata": {
-          "[m_e]": {
-            "isBase": false,
-            "CODE": "[M_E]",
-            "isMetric": "yes",
-            "class": "const",
-            "names": ["electron mass"],
-            "printSymbols": ["<i>m<sub>\n               <r>e</r>\n            </sub>\n         </i>"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "9.1093897 &#215; 10<sup>-28</sup>",
-              "numeric": 9.1093897e-28
-            }]
-          }
-        }
-      };
-    }, "[m_p]", {
-      type: "literal",
-      value: "[m_p]",
-      description: "\"[m_p]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[m_p]": 1
-        },
-        "metadata": {
-          "[m_p]": {
-            "isBase": false,
-            "CODE": "[M_P]",
-            "isMetric": "yes",
-            "class": "const",
-            "names": ["proton mass"],
-            "printSymbols": ["<i>m<sub>\n               <r>p</r>\n            </sub>\n         </i>"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "1.6726231 &#215; 10<sup>-24</sup>",
-              "numeric": 1.6726231e-24
-            }]
-          }
-        }
-      };
-    }, "m[Hg]", {
-      type: "literal",
-      value: "m[Hg]",
-      description: "\"m[Hg]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "m[Hg]": 1
-        },
-        "metadata": {
-          "m[Hg]": {
-            "isBase": false,
-            "CODE": "M[HG]",
-            "isMetric": "yes",
-            "class": "clinical",
-            "names": ["meter of mercury column"],
-            "printSymbols": ["m&#160;Hg"],
-            "properties": ["pressure"],
-            "values": [{
-              "printable": "133.3220",
-              "numeric": 133.322
-            }]
-          }
-        }
-      };
-    }, "[pca]", {
-      type: "literal",
-      value: "[pca]",
-      description: "\"[pca]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[pca]": 1
-        },
-        "metadata": {
-          "[pca]": {
-            "isBase": false,
-            "CODE": "[PCA]",
-            "isMetric": "no",
-            "class": "typeset",
-            "names": ["pica"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "12",
-              "numeric": 12
-            }]
-          }
-        }
-      };
-    }, "[pnt]", {
-      type: "literal",
-      value: "[pnt]",
-      description: "\"[pnt]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[pnt]": 1
-        },
-        "metadata": {
-          "[pnt]": {
-            "isBase": false,
-            "CODE": "[PNT]",
-            "isMetric": "no",
-            "class": "typeset",
-            "names": ["point"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[lne]", {
-      type: "literal",
-      value: "[lne]",
-      description: "\"[lne]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[lne]": 1
-        },
-        "metadata": {
-          "[lne]": {
-            "isBase": false,
-            "CODE": "[LNE]",
-            "isMetric": "no",
-            "class": "typeset",
-            "names": ["line"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[LPF]", {
-      type: "literal",
-      value: "[LPF]",
-      description: "\"[LPF]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[LPF]": 1
-        },
-        "metadata": {
-          "[LPF]": {
-            "isBase": false,
-            "CODE": "[LPF]",
-            "isMetric": "no",
-            "class": "chemical",
-            "names": ["low power field"],
-            "printSymbols": ["LPF"],
-            "properties": ["view area in microscope"],
-            "values": [{
-              "printable": "100",
-              "numeric": 100
-            }]
-          }
-        }
-      };
-    }, "[den]", {
-      type: "literal",
-      value: "[den]",
-      description: "\"[den]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[den]": 1
-        },
-        "metadata": {
-          "[den]": {
-            "isBase": false,
-            "CODE": "[DEN]",
-            "isMetric": "no",
-            "class": "heat",
-            "names": ["Denier"],
-            "printSymbols": ["den"],
-            "properties": ["linear mass density (of textile thread)"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[sct]", {
-      type: "literal",
-      value: "[sct]",
-      description: "\"[sct]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[sct]": 1
-        },
-        "metadata": {
-          "[sct]": {
-            "isBase": false,
-            "CODE": "[SCT]",
-            "isMetric": "no",
-            "class": "us-lengths",
-            "names": ["section"],
-            "properties": ["area"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[twp]", {
-      type: "literal",
-      value: "[twp]",
-      description: "\"[twp]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[twp]": 1
-        },
-        "metadata": {
-          "[twp]": {
-            "isBase": false,
-            "CODE": "[TWP]",
-            "isMetric": "no",
-            "class": "us-lengths",
-            "names": ["township"],
-            "properties": ["area"],
-            "values": [{
-              "printable": "36",
-              "numeric": 36
-            }]
-          }
-        }
-      };
-    }, "[Btu]", {
-      type: "literal",
-      value: "[Btu]",
-      description: "\"[Btu]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[Btu]": 1
-        },
-        "metadata": {
-          "[Btu]": {
-            "isBase": false,
-            "CODE": "[BTU]",
-            "isMetric": "no",
-            "class": "heat",
-            "names": ["British thermal unit"],
-            "printSymbols": ["btu"],
-            "properties": ["energy"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[MET]", {
-      type: "literal",
-      value: "[MET]",
-      description: "\"[MET]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[MET]": 1
-        },
-        "metadata": {
-          "[MET]": {
-            "isBase": false,
-            "CODE": "[MET]",
-            "isMetric": "no",
-            "class": "clinical",
-            "names": ["metabolic equivalent"],
-            "printSymbols": ["MET"],
-            "properties": ["metabolic cost of physical activity"],
-            "values": [{
-              "printable": "3.5",
-              "numeric": 3.5
-            }]
-          }
-        }
-      };
-    }, "[HPF]", {
-      type: "literal",
-      value: "[HPF]",
-      description: "\"[HPF]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[HPF]": 1
-        },
-        "metadata": {
-          "[HPF]": {
-            "isBase": false,
-            "CODE": "[HPF]",
-            "isMetric": "no",
-            "class": "chemical",
-            "names": ["high power field"],
-            "printSymbols": ["HPF"],
-            "properties": ["view area in microscope"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[drp]", {
-      type: "literal",
-      value: "[drp]",
-      description: "\"[drp]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[drp]": 1
-        },
-        "metadata": {
-          "[drp]": {
-            "isBase": false,
-            "CODE": "[DRP]",
-            "isMetric": "no",
-            "class": "clinical",
-            "names": ["drop"],
-            "printSymbols": ["drp"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[AU]", {
-      type: "literal",
-      value: "[AU]",
-      description: "\"[AU]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[AU]": 1
-        },
-        "metadata": {
-          "[AU]": {
-            "isBase": false,
-            "CODE": "[AU]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["allergen unit"],
-            "printSymbols": ["AU"],
-            "properties": ["procedure defined amount of an allergen using some reference standard"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[IU]", {
-      type: "literal",
-      value: "[IU]",
-      description: "\"[IU]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[IU]": 1
-        },
-        "metadata": {
-          "[IU]": {
-            "isBase": false,
-            "CODE": "[IU]",
-            "isMetric": "yes",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["international unit"],
-            "printSymbols": ["i.U."],
-            "properties": ["arbitrary"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "mo_s", {
-      type: "literal",
-      value: "mo_s",
-      description: "\"mo_s\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "mo_s": 1
-        },
-        "metadata": {
-          "mo_s": {
-            "isBase": false,
-            "CODE": "MO_S",
-            "isMetric": "no",
-            "class": "iso1000",
-            "names": ["synodal month"],
-            "printSymbols": ["mo<sub>s</sub>"],
-            "properties": ["time"],
-            "values": [{
-              "printable": "29.53059",
-              "numeric": 29.53059
-            }]
-          }
-        }
-      };
-    }, "[gr]", {
-      type: "literal",
-      value: "[gr]",
-      description: "\"[gr]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[gr]": 1
-        },
-        "metadata": {
-          "[gr]": {
-            "isBase": false,
-            "CODE": "[GR]",
-            "isMetric": "no",
-            "class": "avoirdupois",
-            "names": ["grain"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "64.79891",
-              "numeric": 64.79891
-            }]
-          }
-        }
-      };
-    }, "circ", {
-      type: "literal",
-      value: "circ",
-      description: "\"circ\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "circ": 1
-        },
-        "metadata": {
-          "circ": {
-            "isBase": false,
-            "CODE": "CIRC",
-            "isMetric": "no",
-            "class": "misc",
-            "names": ["circle"],
-            "printSymbols": ["circ"],
-            "properties": ["plane angle"],
-            "values": [{
-              "printable": "2",
-              "numeric": 2
-            }]
-          }
-        }
-      };
-    }, "[pi]", {
-      type: "literal",
-      value: "[pi]",
-      description: "\"[pi]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[pi]": 1
-        },
-        "metadata": {
-          "[pi]": {
-            "isBase": false,
-            "CODE": "[PI]",
-            "isMetric": "no",
-            "class": "dimless",
-            "names": ["the number pi"],
-            "printSymbols": ["&#960;"],
-            "properties": ["number"],
-            "values": [{
-              "printable": "&#960;",
-              "numeric": 3.141592653589793
-            }]
-          }
-        }
-      };
-    }, "[EU]", {
-      type: "literal",
-      value: "[EU]",
-      description: "\"[EU]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[EU]": 1
-        },
-        "metadata": {
-          "[EU]": {
-            "isBase": false,
-            "CODE": "[EU]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["Ehrlich unit"],
-            "printSymbols": [""],
-            "properties": ["Ehrlich unit"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[Lf]", {
-      type: "literal",
-      value: "[Lf]",
-      description: "\"[Lf]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[Lf]": 1
-        },
-        "metadata": {
-          "[Lf]": {
-            "isBase": false,
-            "CODE": "[LF]",
-            "isMetric": "no",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["Limit of flocculation"],
-            "printSymbols": ["Lf"],
-            "properties": ["procedure defined amount of an antigen substance"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "mo_j", {
-      type: "literal",
-      value: "mo_j",
-      description: "\"mo_j\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "mo_j": 1
-        },
-        "metadata": {
-          "mo_j": {
-            "isBase": false,
-            "CODE": "MO_J",
-            "isMetric": "no",
-            "class": "iso1000",
-            "names": ["mean Julian month"],
-            "printSymbols": ["mo<sub>j</sub>"],
-            "properties": ["time"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "B[W]", {
-      type: "literal",
-      value: "B[W]",
-      description: "\"B[W]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "B[W]": 1
-        },
-        "metadata": {
-          "B[W]": {
-            "isBase": false,
-            "CODE": "B[W]",
-            "isMetric": "yes",
-            "isSpecial": "yes",
-            "class": "levels",
-            "names": ["bel watt"],
-            "printSymbols": ["B(W)"],
-            "properties": ["power level"],
-            "values": [{
-              "printable": "<function name=\"lg\" value=\"1\" Unit=\"W\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "B[V]", {
-      type: "literal",
-      value: "B[V]",
-      description: "\"B[V]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "B[V]": 1
-        },
-        "metadata": {
-          "B[V]": {
-            "isBase": false,
-            "CODE": "B[V]",
-            "isMetric": "yes",
-            "isSpecial": "yes",
-            "class": "levels",
-            "names": ["bel volt"],
-            "printSymbols": ["B(V)"],
-            "properties": ["electric potential level"],
-            "values": [{
-              "printable": "<function name=\"lgTimes2\" value=\"1\" Unit=\"V\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "mo_g", {
-      type: "literal",
-      value: "mo_g",
-      description: "\"mo_g\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "mo_g": 1
-        },
-        "metadata": {
-          "mo_g": {
-            "isBase": false,
-            "CODE": "MO_G",
-            "isMetric": "no",
-            "class": "iso1000",
-            "names": ["mean Gregorian month"],
-            "printSymbols": ["mo<sub>g</sub>"],
-            "properties": ["time"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[iU]", {
-      type: "literal",
-      value: "[iU]",
-      description: "\"[iU]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[iU]": 1
-        },
-        "metadata": {
-          "[iU]": {
-            "isBase": false,
-            "CODE": "[IU]",
-            "isMetric": "yes",
-            "isArbitrary": "yes",
-            "class": "chemical",
-            "names": ["international unit"],
-            "printSymbols": ["IU"],
-            "properties": ["arbitrary"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[HP]", {
-      type: "literal",
-      value: "[HP]",
-      description: "\"[HP]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[HP]": 1
-        },
-        "metadata": {
-          "[HP]": {
-            "isBase": false,
-            "CODE": "[HP]",
-            "isMetric": "no",
-            "class": "heat",
-            "names": ["horsepower"],
-            "properties": ["power"],
-            "values": [{
-              "printable": "550",
-              "numeric": 550
-            }]
-          }
-        }
-      };
-    }, "[Ch]", {
-      type: "literal",
-      value: "[Ch]",
-      description: "\"[Ch]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[Ch]": 1
-        },
-        "metadata": {
-          "[Ch]": {
-            "isBase": false,
-            "CODE": "[CH]",
-            "isMetric": "no",
-            "class": "clinical",
-            "names": ["Charrière", "french"],
-            "printSymbols": ["Ch"],
-            "properties": ["gauge of catheters"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[ly]", {
-      type: "literal",
-      value: "[ly]",
-      description: "\"[ly]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[ly]": 1
-        },
-        "metadata": {
-          "[ly]": {
-            "isBase": false,
-            "CODE": "[LY]",
-            "isMetric": "yes",
-            "class": "const",
-            "names": ["light-year"],
-            "printSymbols": ["l.y."],
-            "properties": ["length"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[pH]", {
-      type: "literal",
-      value: "[pH]",
-      description: "\"[pH]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[pH]": 1
-        },
-        "metadata": {
-          "[pH]": {
-            "isBase": false,
-            "CODE": "[PH]",
-            "isMetric": "no",
-            "isSpecial": "yes",
-            "class": "chemical",
-            "names": ["pH"],
-            "printSymbols": ["pH"],
-            "properties": ["acidity"],
-            "values": [{
-              "printable": "<function name=\"pH\" value=\"1\" Unit=\"mol/l\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "a_j", {
-      type: "literal",
-      value: "a_j",
-      description: "\"a_j\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "a_j": 1
-        },
-        "metadata": {
-          "a_j": {
-            "isBase": false,
-            "CODE": "ANN_J",
-            "isMetric": "no",
-            "class": "iso1000",
-            "names": ["mean Julian year"],
-            "printSymbols": ["a<sub>j</sub>"],
-            "properties": ["time"],
-            "values": [{
-              "printable": "365.25",
-              "numeric": 365.25
-            }]
-          }
-        }
-      };
-    }, "rad", {
-      type: "literal",
-      value: "rad",
-      description: "\"rad\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "rad": 1
-        },
-        "metadata": {
-          "rad": {
-            "isBase": true,
-            "CODE": "RAD",
-            "dim": "A",
-            "names": ["radian"],
-            "printSymbols": ["rad"],
-            "properties": ["plane angle"]
-          }
-        }
-      };
-    }, "a_t", {
-      type: "literal",
-      value: "a_t",
-      description: "\"a_t\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "a_t": 1
-        },
-        "metadata": {
-          "a_t": {
-            "isBase": false,
-            "CODE": "ANN_T",
-            "isMetric": "no",
-            "class": "iso1000",
-            "names": ["tropical year"],
-            "printSymbols": ["a<sub>t</sub>"],
-            "properties": ["time"],
-            "values": [{
-              "printable": "365.24219",
-              "numeric": 365.24219
-            }]
-          }
-        }
-      };
-    }, "Ohm", {
-      type: "literal",
-      value: "Ohm",
-      description: "\"Ohm\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Ohm": 1
-        },
-        "metadata": {
-          "Ohm": {
-            "isBase": false,
-            "CODE": "OHM",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["Ohm"],
-            "printSymbols": ["&#937;"],
-            "properties": ["electric resistance"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "sph", {
-      type: "literal",
-      value: "sph",
-      description: "\"sph\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "sph": 1
-        },
-        "metadata": {
-          "sph": {
-            "isBase": false,
-            "CODE": "SPH",
-            "isMetric": "no",
-            "class": "misc",
-            "names": ["spere"],
-            "printSymbols": ["sph"],
-            "properties": ["solid angle"],
-            "values": [{
-              "printable": "4",
-              "numeric": 4
-            }]
-          }
-        }
-      };
-    }, "bit", {
-      type: "literal",
-      value: "bit",
-      description: "\"bit\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "bit": 1
-        },
-        "metadata": {
-          "bit": {
-            "isBase": false,
-            "CODE": "BIT",
-            "isMetric": "yes",
-            "class": "infotech",
-            "names": ["bit"],
-            "printSymbols": ["bit"],
-            "properties": ["amount of information"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "mho", {
-      type: "literal",
-      value: "mho",
-      description: "\"mho\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "mho": 1
-        },
-        "metadata": {
-          "mho": {
-            "isBase": false,
-            "CODE": "MHO",
-            "isMetric": "yes",
-            "class": "misc",
-            "names": ["mho"],
-            "printSymbols": ["mho"],
-            "properties": ["electric conductance"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "min", {
-      type: "literal",
-      value: "min",
-      description: "\"min\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "min": 1
-        },
-        "metadata": {
-          "min": {
-            "isBase": false,
-            "CODE": "MIN",
-            "isMetric": "no",
-            "class": "iso1000",
-            "names": ["minute"],
-            "printSymbols": ["min"],
-            "properties": ["time"],
-            "values": [{
-              "printable": "60",
-              "numeric": 60
-            }]
-          }
-        }
-      };
-    }, "mol", {
-      type: "literal",
-      value: "mol",
-      description: "\"mol\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "mol": 1
-        },
-        "metadata": {
-          "mol": {
-            "isBase": false,
-            "CODE": "MOL",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["mole"],
-            "printSymbols": ["mol"],
-            "properties": ["amount of substance"],
-            "values": [{
-              "printable": "6.0221367",
-              "numeric": 6.0221367
-            }]
-          }
-        }
-      };
-    }, "deg", {
-      type: "literal",
-      value: "deg",
-      description: "\"deg\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "deg": 1
-        },
-        "metadata": {
-          "deg": {
-            "isBase": false,
-            "CODE": "DEG",
-            "isMetric": "no",
-            "class": "iso1000",
-            "names": ["degree"],
-            "printSymbols": ["&#176;"],
-            "properties": ["plane angle"],
-            "values": [{
-              "printable": "2",
-              "numeric": 2
-            }]
-          }
-        }
-      };
-    }, "gon", {
-      type: "literal",
-      value: "gon",
-      description: "\"gon\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "gon": 1
-        },
-        "metadata": {
-          "gon": {
-            "isBase": false,
-            "CODE": "GON",
-            "isMetric": "no",
-            "class": "iso1000",
-            "names": ["gon", "grade"],
-            "printSymbols": ["&#9633;<sup>g</sup>"],
-            "properties": ["plane angle"],
-            "values": [{
-              "printable": "0.9",
-              "numeric": 0.9
-            }]
-          }
-        }
-      };
-    }, "Cel", {
-      type: "literal",
-      value: "Cel",
-      description: "\"Cel\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Cel": 1
-        },
-        "metadata": {
-          "Cel": {
-            "isBase": false,
-            "CODE": "CEL",
-            "isMetric": "yes",
-            "isSpecial": "yes",
-            "class": "si",
-            "names": ["degree Celsius"],
-            "printSymbols": ["&#176;C"],
-            "properties": ["temperature"],
-            "values": [{
-              "printable": "<function name=\"Cel\" value=\"1\" Unit=\"K\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "kat", {
-      type: "literal",
-      value: "kat",
-      description: "\"kat\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "kat": 1
-        },
-        "metadata": {
-          "kat": {
-            "isBase": false,
-            "CODE": "KAT",
-            "isMetric": "yes",
-            "class": "chemical",
-            "names": ["katal"],
-            "printSymbols": ["kat"],
-            "properties": ["catalytic activity"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "att", {
-      type: "literal",
-      value: "att",
-      description: "\"att\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "att": 1
-        },
-        "metadata": {
-          "att": {
-            "isBase": false,
-            "CODE": "ATT",
-            "isMetric": "no",
-            "class": "misc",
-            "names": ["technical atmosphere"],
-            "printSymbols": ["at"],
-            "properties": ["pressure"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "osm", {
-      type: "literal",
-      value: "osm",
-      description: "\"osm\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "osm": 1
-        },
-        "metadata": {
-          "osm": {
-            "isBase": false,
-            "CODE": "OSM",
-            "isMetric": "yes",
-            "class": "chemical",
-            "names": ["osmole"],
-            "printSymbols": ["osm"],
-            "properties": ["amount of substance (dissolved particles)"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "tex", {
-      type: "literal",
-      value: "tex",
-      description: "\"tex\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "tex": 1
-        },
-        "metadata": {
-          "tex": {
-            "isBase": false,
-            "CODE": "TEX",
-            "isMetric": "yes",
-            "class": "heat",
-            "names": ["tex"],
-            "printSymbols": ["tex"],
-            "properties": ["linear mass density (of textile thread)"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "cal", {
-      type: "literal",
-      value: "cal",
-      description: "\"cal\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "cal": 1
-        },
-        "metadata": {
-          "cal": {
-            "isBase": false,
-            "CODE": "CAL",
-            "isMetric": "yes",
-            "class": "heat",
-            "names": ["calorie"],
-            "printSymbols": ["cal"],
-            "properties": ["energy"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "REM", {
-      type: "literal",
-      value: "REM",
-      description: "\"REM\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "REM": 1
-        },
-        "metadata": {
-          "REM": {
-            "isBase": false,
-            "CODE": "[REM]",
-            "isMetric": "yes",
-            "class": "cgs",
-            "names": ["radiation equivalent man"],
-            "printSymbols": ["REM"],
-            "properties": ["dose equivalent"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "RAD", {
-      type: "literal",
-      value: "RAD",
-      description: "\"RAD\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "RAD": 1
-        },
-        "metadata": {
-          "RAD": {
-            "isBase": false,
-            "CODE": "[RAD]",
-            "isMetric": "yes",
-            "class": "cgs",
-            "names": ["radiation absorbed dose"],
-            "printSymbols": ["RAD"],
-            "properties": ["energy dose"],
-            "values": [{
-              "printable": "100",
-              "numeric": 100
-            }]
-          }
-        }
-      };
-    }, "a_g", {
-      type: "literal",
-      value: "a_g",
-      description: "\"a_g\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "a_g": 1
-        },
-        "metadata": {
-          "a_g": {
-            "isBase": false,
-            "CODE": "ANN_G",
-            "isMetric": "no",
-            "class": "iso1000",
-            "names": ["mean Gregorian year"],
-            "printSymbols": ["a<sub>g</sub>"],
-            "properties": ["time"],
-            "values": [{
-              "printable": "365.2425",
-              "numeric": 365.2425
-            }]
-          }
-        }
-      };
-    }, "Lmb", {
-      type: "literal",
-      value: "Lmb",
-      description: "\"Lmb\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Lmb": 1
-        },
-        "metadata": {
-          "Lmb": {
-            "isBase": false,
-            "CODE": "LMB",
-            "isMetric": "yes",
-            "class": "cgs",
-            "names": ["Lambert"],
-            "printSymbols": ["L"],
-            "properties": ["brightness"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "atm", {
-      type: "literal",
-      value: "atm",
-      description: "\"atm\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "atm": 1
-        },
-        "metadata": {
-          "atm": {
-            "isBase": false,
-            "CODE": "ATM",
-            "isMetric": "no",
-            "class": "const",
-            "names": ["standard atmosphere"],
-            "printSymbols": ["atm"],
-            "properties": ["pressure"],
-            "values": [{
-              "printable": "101325",
-              "numeric": 101325
-            }]
-          }
-        }
-      };
-    }, "erg", {
-      type: "literal",
-      value: "erg",
-      description: "\"erg\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "erg": 1
-        },
-        "metadata": {
-          "erg": {
-            "isBase": false,
-            "CODE": "ERG",
-            "isMetric": "yes",
-            "class": "cgs",
-            "names": ["erg"],
-            "printSymbols": ["erg"],
-            "properties": ["energy"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "dyn", {
-      type: "literal",
-      value: "dyn",
-      description: "\"dyn\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "dyn": 1
-        },
-        "metadata": {
-          "dyn": {
-            "isBase": false,
-            "CODE": "DYN",
-            "isMetric": "yes",
-            "class": "cgs",
-            "names": ["dyne"],
-            "printSymbols": ["dyn"],
-            "properties": ["force"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "Gal", {
-      type: "literal",
-      value: "Gal",
-      description: "\"Gal\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Gal": 1
-        },
-        "metadata": {
-          "Gal": {
-            "isBase": false,
-            "CODE": "GL",
-            "isMetric": "yes",
-            "class": "cgs",
-            "names": ["Gal"],
-            "printSymbols": ["Gal"],
-            "properties": ["acceleration"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "10^", {
-      type: "literal",
-      value: "10^",
-      description: "\"10^\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "10^": 1
-        },
-        "metadata": {
-          "10^": {
-            "isBase": false,
-            "CODE": "10^",
-            "isMetric": "no",
-            "class": "dimless",
-            "names": ["the number ten for arbitrary powers"],
-            "printSymbols": ["10"],
-            "properties": ["number"],
-            "values": [{
-              "printable": "10",
-              "numeric": 10
-            }]
-          }
-        }
-      };
-    }, "10*", {
-      type: "literal",
-      value: "10*",
-      description: "\"10*\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "10*": 1
-        },
-        "metadata": {
-          "10*": {
-            "isBase": false,
-            "CODE": "10*",
-            "isMetric": "no",
-            "class": "dimless",
-            "names": ["the number ten for arbitrary powers"],
-            "printSymbols": ["10"],
-            "properties": ["number"],
-            "values": [{
-              "printable": "10",
-              "numeric": 10
-            }]
-          }
-        }
-      };
-    }, "[S]", {
-      type: "literal",
-      value: "[S]",
-      description: "\"[S]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[S]": 1
-        },
-        "metadata": {
-          "[S]": {
-            "isBase": false,
-            "CODE": "[S]",
-            "isMetric": "no",
-            "class": "chemical",
-            "names": ["Svedberg unit"],
-            "printSymbols": ["S"],
-            "properties": ["sedimentation coefficient"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "[g]", {
-      type: "literal",
-      value: "[g]",
-      description: "\"[g]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[g]": 1
-        },
-        "metadata": {
-          "[g]": {
-            "isBase": false,
-            "CODE": "[G]",
-            "isMetric": "yes",
-            "class": "const",
-            "names": ["standard acceleration of free fall"],
-            "printSymbols": ["<i>g<sub>n</sub>\n         </i>"],
-            "properties": ["acceleration"],
-            "values": [{
-              "printable": "9.80665",
-              "numeric": 9.80665
-            }]
-          }
-        }
-      };
-    }, "[G]", {
-      type: "literal",
-      value: "[G]",
-      description: "\"[G]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[G]": 1
-        },
-        "metadata": {
-          "[G]": {
-            "isBase": false,
-            "CODE": "[GC]",
-            "isMetric": "yes",
-            "class": "const",
-            "names": ["Newtonian constant of gravitation"],
-            "printSymbols": ["<i>G</i>"],
-            "properties": ["(unclassified)"],
-            "values": [{
-              "printable": "6.67259 &#215; 10<sup>-11</sup>",
-              "numeric": 6.67259e-11
-            }]
-          }
-        }
-      };
-    }, "[e]", {
-      type: "literal",
-      value: "[e]",
-      description: "\"[e]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[e]": 1
-        },
-        "metadata": {
-          "[e]": {
-            "isBase": false,
-            "CODE": "[E]",
-            "isMetric": "yes",
-            "class": "const",
-            "names": ["elementary charge"],
-            "printSymbols": ["<i>e</i>"],
-            "properties": ["electric charge"],
-            "values": [{
-              "printable": "1.60217733 &#215; 10<sup>-19</sup>",
-              "numeric": 1.60217733e-19
-            }]
-          }
-        }
-      };
-    }, "[k]", {
-      type: "literal",
-      value: "[k]",
-      description: "\"[k]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[k]": 1
-        },
-        "metadata": {
-          "[k]": {
-            "isBase": false,
-            "CODE": "[K]",
-            "isMetric": "yes",
-            "class": "const",
-            "names": ["Boltzmann constant"],
-            "printSymbols": ["<i>k</i>"],
-            "properties": ["(unclassified)"],
-            "values": [{
-              "printable": "1.380658 &#215; 10<sup>-23</sup>",
-              "numeric": 1.380658e-23
-            }]
-          }
-        }
-      };
-    }, "[h]", {
-      type: "literal",
-      value: "[h]",
-      description: "\"[h]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[h]": 1
-        },
-        "metadata": {
-          "[h]": {
-            "isBase": false,
-            "CODE": "[H]",
-            "isMetric": "yes",
-            "class": "const",
-            "names": ["Planck constant"],
-            "printSymbols": ["<i>h</i>"],
-            "properties": ["action"],
-            "values": [{
-              "printable": "6.6260755 &#215; 10<sup>-24</sup>",
-              "numeric": 6.6260755e-24
-            }]
-          }
-        }
-      };
-    }, "[c]", {
-      type: "literal",
-      value: "[c]",
-      description: "\"[c]\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "[c]": 1
-        },
-        "metadata": {
-          "[c]": {
-            "isBase": false,
-            "CODE": "[C]",
-            "isMetric": "yes",
-            "class": "const",
-            "names": ["velocity of light"],
-            "printSymbols": ["<i>c</i>"],
-            "properties": ["velocity"],
-            "values": [{
-              "printable": "299792458",
-              "numeric": 299792458
-            }]
-          }
-        }
-      };
-    }, "bar", {
-      type: "literal",
-      value: "bar",
-      description: "\"bar\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "bar": 1
-        },
-        "metadata": {
-          "bar": {
-            "isBase": false,
-            "CODE": "BAR",
-            "isMetric": "yes",
-            "class": "iso1000",
-            "names": ["bar"],
-            "printSymbols": ["bar"],
-            "properties": ["pressure"],
-            "values": [{
-              "printable": "1 &#215; 10<sup>5</sup>",
-              "numeric": 100000
-            }]
-          }
-        }
-      };
-    }, "lm", {
-      type: "literal",
-      value: "lm",
-      description: "\"lm\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "lm": 1
-        },
-        "metadata": {
-          "lm": {
-            "isBase": false,
-            "CODE": "LM",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["lumen"],
-            "printSymbols": ["lm"],
-            "properties": ["luminous flux"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "Ci", {
-      type: "literal",
-      value: "Ci",
-      description: "\"Ci\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Ci": 1
-        },
-        "metadata": {
-          "Ci": {
-            "isBase": false,
-            "CODE": "CI",
-            "isMetric": "yes",
-            "class": "cgs",
-            "names": ["Curie"],
-            "printSymbols": ["Ci"],
-            "properties": ["radioactivity"],
-            "values": [{
-              "printable": "3.7 &#215; 10<sup>10</sup>",
-              "numeric": 37000000000
-            }]
-          }
-        }
-      };
-    }, "ph", {
-      type: "literal",
-      value: "ph",
-      description: "\"ph\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "ph": 1
-        },
-        "metadata": {
-          "ph": {
-            "isBase": false,
-            "CODE": "PHT",
-            "isMetric": "yes",
-            "class": "cgs",
-            "names": ["phot"],
-            "printSymbols": ["ph"],
-            "properties": ["illuminance"],
-            "values": [{
-              "printable": "1 &#215; 10<sup>-4</sup>",
-              "numeric": 0.0001
-            }]
-          }
-        }
-      };
-    }, "cd", {
-      type: "literal",
-      value: "cd",
-      description: "\"cd\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "cd": 1
-        },
-        "metadata": {
-          "cd": {
-            "isBase": true,
-            "CODE": "CD",
-            "dim": "F",
-            "names": ["candela"],
-            "printSymbols": ["cd"],
-            "properties": ["luminous intensity"]
-          }
-        }
-      };
-    }, "Ao", {
-      type: "literal",
-      value: "Ao",
-      description: "\"Ao\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Ao": 1
-        },
-        "metadata": {
-          "Ao": {
-            "isBase": false,
-            "CODE": "AO",
-            "isMetric": "no",
-            "class": "misc",
-            "names": ["Ångström"],
-            "printSymbols": ["&#197;"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "0.1",
-              "numeric": 0.1
-            }]
-          }
-        }
-      };
-    }, "Wb", {
-      type: "literal",
-      value: "Wb",
-      description: "\"Wb\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Wb": 1
-        },
-        "metadata": {
-          "Wb": {
-            "isBase": false,
-            "CODE": "WB",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["Weber"],
-            "printSymbols": ["Wb"],
-            "properties": ["magentic flux"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "Gb", {
-      type: "literal",
-      value: "Gb",
-      description: "\"Gb\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Gb": 1
-        },
-        "metadata": {
-          "Gb": {
-            "isBase": false,
-            "CODE": "GB",
-            "isMetric": "yes",
-            "class": "cgs",
-            "names": ["Gilbert"],
-            "printSymbols": ["Gb"],
-            "properties": ["magnetic tension"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "Oe", {
-      type: "literal",
-      value: "Oe",
-      description: "\"Oe\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Oe": 1
-        },
-        "metadata": {
-          "Oe": {
-            "isBase": false,
-            "CODE": "OE",
-            "isMetric": "yes",
-            "class": "cgs",
-            "names": ["Oersted"],
-            "printSymbols": ["Oe"],
-            "properties": ["magnetic field intensity"],
-            "values": [{
-              "printable": "250",
-              "numeric": 250
-            }]
-          }
-        }
-      };
-    }, "lx", {
-      type: "literal",
-      value: "lx",
-      description: "\"lx\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "lx": 1
-        },
-        "metadata": {
-          "lx": {
-            "isBase": false,
-            "CODE": "LX",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["lux"],
-            "printSymbols": ["lx"],
-            "properties": ["illuminance"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "Mx", {
-      type: "literal",
-      value: "Mx",
-      description: "\"Mx\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Mx": 1
-        },
-        "metadata": {
-          "Mx": {
-            "isBase": false,
-            "CODE": "MX",
-            "isMetric": "yes",
-            "class": "cgs",
-            "names": ["Maxwell"],
-            "printSymbols": ["Mx"],
-            "properties": ["flux of magnetic induction"],
-            "values": [{
-              "printable": "1 &#215; 10<sup>-8</sup>",
-              "numeric": 1e-8
-            }]
-          }
-        }
-      };
-    }, "St", {
-      type: "literal",
-      value: "St",
-      description: "\"St\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "St": 1
-        },
-        "metadata": {
-          "St": {
-            "isBase": false,
-            "CODE": "ST",
-            "isMetric": "yes",
-            "class": "cgs",
-            "names": ["Stokes"],
-            "printSymbols": ["St"],
-            "properties": ["kinematic viscosity"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "Bi", {
-      type: "literal",
-      value: "Bi",
-      description: "\"Bi\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Bi": 1
-        },
-        "metadata": {
-          "Bi": {
-            "isBase": false,
-            "CODE": "BI",
-            "isMetric": "yes",
-            "class": "cgs",
-            "names": ["Biot"],
-            "printSymbols": ["Bi"],
-            "properties": ["electric current"],
-            "values": [{
-              "printable": "10",
-              "numeric": 10
-            }]
-          }
-        }
-      };
-    }, "Bq", {
-      type: "literal",
-      value: "Bq",
-      description: "\"Bq\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Bq": 1
-        },
-        "metadata": {
-          "Bq": {
-            "isBase": false,
-            "CODE": "BQ",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["Becquerel"],
-            "printSymbols": ["Bq"],
-            "properties": ["radioactivity"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "Np", {
-      type: "literal",
-      value: "Np",
-      description: "\"Np\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Np": 1
-        },
-        "metadata": {
-          "Np": {
-            "isBase": false,
-            "CODE": "NEP",
-            "isMetric": "yes",
-            "isSpecial": "yes",
-            "class": "levels",
-            "names": ["neper"],
-            "printSymbols": ["Np"],
-            "properties": ["level"],
-            "values": [{
-              "printable": "<function name=\"ln\" value=\"1\" Unit=\"1\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "AU", {
-      type: "literal",
-      value: "AU",
-      description: "\"AU\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "AU": 1
-        },
-        "metadata": {
-          "AU": {
-            "isBase": false,
-            "CODE": "ASU",
-            "isMetric": "no",
-            "class": "iso1000",
-            "names": ["astronomic unit"],
-            "printSymbols": ["AU"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "149597.870691",
-              "numeric": 149597.870691
-            }]
-          }
-        }
-      };
-    }, "mo", {
-      type: "literal",
-      value: "mo",
-      description: "\"mo\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "mo": 1
-        },
-        "metadata": {
-          "mo": {
-            "isBase": false,
-            "CODE": "MO",
-            "isMetric": "no",
-            "class": "iso1000",
-            "names": ["month"],
-            "printSymbols": ["mo"],
-            "properties": ["time"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "Ky", {
-      type: "literal",
-      value: "Ky",
-      description: "\"Ky\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Ky": 1
-        },
-        "metadata": {
-          "Ky": {
-            "isBase": false,
-            "CODE": "KY",
-            "isMetric": "yes",
-            "class": "cgs",
-            "names": ["Kayser"],
-            "printSymbols": ["K"],
-            "properties": ["lineic number"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "gf", {
-      type: "literal",
-      value: "gf",
-      description: "\"gf\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "gf": 1
-        },
-        "metadata": {
-          "gf": {
-            "isBase": false,
-            "CODE": "GF",
-            "isMetric": "yes",
-            "class": "const",
-            "names": ["gram-force"],
-            "printSymbols": ["gf"],
-            "properties": ["force"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "wk", {
-      type: "literal",
-      value: "wk",
-      description: "\"wk\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "wk": 1
-        },
-        "metadata": {
-          "wk": {
-            "isBase": false,
-            "CODE": "WK",
-            "isMetric": "no",
-            "class": "iso1000",
-            "names": ["week"],
-            "printSymbols": ["wk"],
-            "properties": ["time"],
-            "values": [{
-              "printable": "7",
-              "numeric": 7
-            }]
-          }
-        }
-      };
-    }, "Pa", {
-      type: "literal",
-      value: "Pa",
-      description: "\"Pa\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Pa": 1
-        },
-        "metadata": {
-          "Pa": {
-            "isBase": false,
-            "CODE": "PAL",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["Pascal"],
-            "printSymbols": ["Pa"],
-            "properties": ["pressure"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "g%", {
-      type: "literal",
-      value: "g%",
-      description: "\"g%\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "g%": 1
-        },
-        "metadata": {
-          "g%": {
-            "isBase": false,
-            "CODE": "G%",
-            "isMetric": "yes",
-            "class": "chemical",
-            "names": ["gram percent"],
-            "printSymbols": ["g%"],
-            "properties": ["mass concentration"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "sr", {
-      type: "literal",
-      value: "sr",
-      description: "\"sr\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "sr": 1
-        },
-        "metadata": {
-          "sr": {
-            "isBase": false,
-            "CODE": "SR",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["steradian"],
-            "printSymbols": ["sr"],
-            "properties": ["solid angle"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "Bd", {
-      type: "literal",
-      value: "Bd",
-      description: "\"Bd\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Bd": 1
-        },
-        "metadata": {
-          "Bd": {
-            "isBase": false,
-            "CODE": "BD",
-            "isMetric": "yes",
-            "class": "infotech",
-            "names": ["baud"],
-            "printSymbols": ["Bd"],
-            "properties": ["signal transmission rate"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "eq", {
-      type: "literal",
-      value: "eq",
-      description: "\"eq\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "eq": 1
-        },
-        "metadata": {
-          "eq": {
-            "isBase": false,
-            "CODE": "EQ",
-            "isMetric": "yes",
-            "class": "chemical",
-            "names": ["equivalents"],
-            "printSymbols": ["eq"],
-            "properties": ["amount of substance"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "By", {
-      type: "literal",
-      value: "By",
-      description: "\"By\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "By": 1
-        },
-        "metadata": {
-          "By": {
-            "isBase": false,
-            "CODE": "BY",
-            "isMetric": "yes",
-            "class": "infotech",
-            "names": ["byte"],
-            "printSymbols": ["B"],
-            "properties": ["amount of information"],
-            "values": [{
-              "printable": "8",
-              "numeric": 8
-            }]
-          }
-        }
-      };
-    }, "Hz", {
-      type: "literal",
-      value: "Hz",
-      description: "\"Hz\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Hz": 1
-        },
-        "metadata": {
-          "Hz": {
-            "isBase": false,
-            "CODE": "HZ",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["Hertz"],
-            "printSymbols": ["Hz"],
-            "properties": ["frequency"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "''", {
-      type: "literal",
-      value: "''",
-      description: "\"''\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "''": 1
-        },
-        "metadata": {
-          "''": {
-            "isBase": false,
-            "CODE": "''",
-            "isMetric": "no",
-            "class": "iso1000",
-            "names": ["second"],
-            "printSymbols": ["''"],
-            "properties": ["plane angle"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "pc", {
-      type: "literal",
-      value: "pc",
-      description: "\"pc\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "pc": 1
-        },
-        "metadata": {
-          "pc": {
-            "isBase": false,
-            "CODE": "PRS",
-            "isMetric": "yes",
-            "class": "iso1000",
-            "names": ["parsec"],
-            "printSymbols": ["pc"],
-            "properties": ["length"],
-            "values": [{
-              "printable": "3.085678 &#215; 10<sup>16</sup>",
-              "numeric": 30856780000000000
-            }]
-          }
-        }
-      };
-    }, "eV", {
-      type: "literal",
-      value: "eV",
-      description: "\"eV\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "eV": 1
-        },
-        "metadata": {
-          "eV": {
-            "isBase": false,
-            "CODE": "EV",
-            "isMetric": "yes",
-            "class": "iso1000",
-            "names": ["electronvolt"],
-            "printSymbols": ["eV"],
-            "properties": ["energy"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "Gy", {
-      type: "literal",
-      value: "Gy",
-      description: "\"Gy\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Gy": 1
-        },
-        "metadata": {
-          "Gy": {
-            "isBase": false,
-            "CODE": "GY",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["Gray"],
-            "printSymbols": ["Gy"],
-            "properties": ["energy dose"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "st", {
-      type: "literal",
-      value: "st",
-      description: "\"st\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "st": 1
-        },
-        "metadata": {
-          "st": {
-            "isBase": false,
-            "CODE": "STR",
-            "isMetric": "yes",
-            "class": "misc",
-            "names": ["stere"],
-            "printSymbols": ["st"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "Sv", {
-      type: "literal",
-      value: "Sv",
-      description: "\"Sv\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "Sv": 1
-        },
-        "metadata": {
-          "Sv": {
-            "isBase": false,
-            "CODE": "SV",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["Sievert"],
-            "printSymbols": ["Sv"],
-            "properties": ["dose equivalent"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "ar", {
-      type: "literal",
-      value: "ar",
-      description: "\"ar\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "ar": 1
-        },
-        "metadata": {
-          "ar": {
-            "isBase": false,
-            "CODE": "AR",
-            "isMetric": "yes",
-            "class": "iso1000",
-            "names": ["are"],
-            "printSymbols": ["a"],
-            "properties": ["area"],
-            "values": [{
-              "printable": "100",
-              "numeric": 100
-            }]
-          }
-        }
-      };
-    }, "sb", {
-      type: "literal",
-      value: "sb",
-      description: "\"sb\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "sb": 1
-        },
-        "metadata": {
-          "sb": {
-            "isBase": false,
-            "CODE": "SB",
-            "isMetric": "yes",
-            "class": "cgs",
-            "names": ["stilb"],
-            "printSymbols": ["sb"],
-            "properties": ["lum. intensity density"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "L", {
-      type: "literal",
-      value: "L",
-      description: "\"L\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "L": 1
-        },
-        "metadata": {
-          "L": {
-            "isBase": false,
-            "isMetric": "yes",
-            "class": "iso1000",
-            "names": ["liter"],
-            "printSymbols": ["L"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "t", {
-      type: "literal",
-      value: "t",
-      description: "\"t\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "t": 1
-        },
-        "metadata": {
-          "t": {
-            "isBase": false,
-            "CODE": "TNE",
-            "isMetric": "yes",
-            "class": "iso1000",
-            "names": ["tonne"],
-            "printSymbols": ["t"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "1 &#215; 10<sup>3</sup>",
-              "numeric": 1000
-            }]
-          }
-        }
-      };
-    }, "u", {
-      type: "literal",
-      value: "u",
-      description: "\"u\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "u": 1
-        },
-        "metadata": {
-          "u": {
-            "isBase": false,
-            "CODE": "AMU",
-            "isMetric": "yes",
-            "class": "iso1000",
-            "names": ["unified atomic mass unit"],
-            "printSymbols": ["u"],
-            "properties": ["mass"],
-            "values": [{
-              "printable": "1.6605402 &#215; 10<sup>-24</sup>",
-              "numeric": 1.6605402e-24
-            }]
-          }
-        }
-      };
-    }, "P", {
-      type: "literal",
-      value: "P",
-      description: "\"P\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "P": 1
-        },
-        "metadata": {
-          "P": {
-            "isBase": false,
-            "CODE": "P",
-            "isMetric": "yes",
-            "class": "cgs",
-            "names": ["Poise"],
-            "printSymbols": ["P"],
-            "properties": ["dynamic viscosity"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "G", {
-      type: "literal",
-      value: "G",
-      description: "\"G\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "G": 1
-        },
-        "metadata": {
-          "G": {
-            "isBase": false,
-            "CODE": "GS",
-            "isMetric": "yes",
-            "class": "cgs",
-            "names": ["Gauss"],
-            "printSymbols": ["Gs"],
-            "properties": ["magnetic flux density"],
-            "values": [{
-              "printable": "1 &#215; 10<sup>-4</sup>",
-              "numeric": 0.0001
-            }]
-          }
-        }
-      };
-    }, "R", {
-      type: "literal",
-      value: "R",
-      description: "\"R\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "R": 1
-        },
-        "metadata": {
-          "R": {
-            "isBase": false,
-            "CODE": "ROE",
-            "isMetric": "yes",
-            "class": "cgs",
-            "names": ["Roentgen"],
-            "printSymbols": ["R"],
-            "properties": ["ion dose"],
-            "values": [{
-              "printable": "2.58 &#215; 10<sup>-4</sup>",
-              "numeric": 0.000258
-            }]
-          }
-        }
-      };
-    }, "H", {
-      type: "literal",
-      value: "H",
-      description: "\"H\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "H": 1
-        },
-        "metadata": {
-          "H": {
-            "isBase": false,
-            "CODE": "H",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["Henry"],
-            "printSymbols": ["H"],
-            "properties": ["inductance"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "T", {
-      type: "literal",
-      value: "T",
-      description: "\"T\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "T": 1
-        },
-        "metadata": {
-          "T": {
-            "isBase": false,
-            "CODE": "T",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["Tesla"],
-            "printSymbols": ["T"],
-            "properties": ["magnetic flux density"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "U", {
-      type: "literal",
-      value: "U",
-      description: "\"U\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "U": 1
-        },
-        "metadata": {
-          "U": {
-            "isBase": false,
-            "CODE": "U",
-            "isMetric": "yes",
-            "class": "chemical",
-            "names": ["Unit"],
-            "printSymbols": ["U"],
-            "properties": ["catalytic activity"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "B", {
-      type: "literal",
-      value: "B",
-      description: "\"B\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "B": 1
-        },
-        "metadata": {
-          "B": {
-            "isBase": false,
-            "CODE": "B",
-            "isMetric": "yes",
-            "isSpecial": "yes",
-            "class": "levels",
-            "names": ["bel"],
-            "printSymbols": ["B"],
-            "properties": ["level"],
-            "values": [{
-              "printable": "<function name=\"lg\" value=\"1\" Unit=\"1\"/>",
-              "numeric": null
-            }]
-          }
-        }
-      };
-    }, "S", {
-      type: "literal",
-      value: "S",
-      description: "\"S\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "S": 1
-        },
-        "metadata": {
-          "S": {
-            "isBase": false,
-            "CODE": "SIE",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["Siemens"],
-            "printSymbols": ["S"],
-            "properties": ["electric conductance"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "m", {
-      type: "literal",
-      value: "m",
-      description: "\"m\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "m": 1
-        },
-        "metadata": {
-          "m": {
-            "isBase": true,
-            "CODE": "M",
-            "dim": "L",
-            "names": ["meter"],
-            "printSymbols": ["m"],
-            "properties": ["length"]
-          }
-        }
-      };
-    }, "s", {
-      type: "literal",
-      value: "s",
-      description: "\"s\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "s": 1
-        },
-        "metadata": {
-          "s": {
-            "isBase": true,
-            "CODE": "S",
-            "dim": "T",
-            "names": ["second"],
-            "printSymbols": ["s"],
-            "properties": ["time"]
-          }
-        }
-      };
-    }, "F", {
-      type: "literal",
-      value: "F",
-      description: "\"F\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "F": 1
-        },
-        "metadata": {
-          "F": {
-            "isBase": false,
-            "CODE": "F",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["Farad"],
-            "printSymbols": ["F"],
-            "properties": ["electric capacitance"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "l", {
-      type: "literal",
-      value: "l",
-      description: "\"l\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "l": 1
-        },
-        "metadata": {
-          "l": {
-            "isBase": false,
-            "CODE": "L",
-            "isMetric": "yes",
-            "class": "iso1000",
-            "names": ["liter"],
-            "printSymbols": ["l"],
-            "properties": ["volume"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "V", {
-      type: "literal",
-      value: "V",
-      description: "\"V\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "V": 1
-        },
-        "metadata": {
-          "V": {
-            "isBase": false,
-            "CODE": "V",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["Volt"],
-            "printSymbols": ["V"],
-            "properties": ["electric potential"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "A", {
-      type: "literal",
-      value: "A",
-      description: "\"A\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "A": 1
-        },
-        "metadata": {
-          "A": {
-            "isBase": false,
-            "CODE": "A",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["Ampère"],
-            "printSymbols": ["A"],
-            "properties": ["electric current"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "W", {
-      type: "literal",
-      value: "W",
-      description: "\"W\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "W": 1
-        },
-        "metadata": {
-          "W": {
-            "isBase": false,
-            "CODE": "W",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["Watt"],
-            "printSymbols": ["W"],
-            "properties": ["power"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "K", {
-      type: "literal",
-      value: "K",
-      description: "\"K\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "K": 1
-        },
-        "metadata": {
-          "K": {
-            "isBase": true,
-            "CODE": "K",
-            "dim": "C",
-            "names": ["Kelvin"],
-            "printSymbols": ["K"],
-            "properties": ["temperature"]
-          }
-        }
-      };
-    }, "C", {
-      type: "literal",
-      value: "C",
-      description: "\"C\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "C": 1
-        },
-        "metadata": {
-          "C": {
-            "isBase": true,
-            "CODE": "C",
-            "dim": "Q",
-            "names": ["Coulomb"],
-            "printSymbols": ["C"],
-            "properties": ["electric charge"]
-          }
-        }
-      };
-    }, "b", {
-      type: "literal",
-      value: "b",
-      description: "\"b\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "b": 1
-        },
-        "metadata": {
-          "b": {
-            "isBase": false,
-            "CODE": "BRN",
-            "isMetric": "no",
-            "class": "misc",
-            "names": ["barn"],
-            "printSymbols": ["b"],
-            "properties": ["action area"],
-            "values": [{
-              "printable": "100",
-              "numeric": 100
-            }]
-          }
-        }
-      };
-    }, "%", {
-      type: "literal",
-      value: "%",
-      description: "\"%\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "%": 1
-        },
-        "metadata": {
-          "%": {
-            "isBase": false,
-            "CODE": "%",
-            "isMetric": "no",
-            "class": "dimless",
-            "names": ["percent"],
-            "printSymbols": ["%"],
-            "properties": ["fraction"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "J", {
-      type: "literal",
-      value: "J",
-      description: "\"J\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "J": 1
-        },
-        "metadata": {
-          "J": {
-            "isBase": false,
-            "CODE": "J",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["Joule"],
-            "printSymbols": ["J"],
-            "properties": ["energy"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "'", {
-      type: "literal",
-      value: "'",
-      description: "\"'\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "'": 1
-        },
-        "metadata": {
-          "'": {
-            "isBase": false,
-            "CODE": "'",
-            "isMetric": "no",
-            "class": "iso1000",
-            "names": ["minute"],
-            "printSymbols": ["'"],
-            "properties": ["plane angle"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "h", {
-      type: "literal",
-      value: "h",
-      description: "\"h\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "h": 1
-        },
-        "metadata": {
-          "h": {
-            "isBase": false,
-            "CODE": "HR",
-            "isMetric": "no",
-            "class": "iso1000",
-            "names": ["hour"],
-            "printSymbols": ["h"],
-            "properties": ["time"],
-            "values": [{
-              "printable": "60",
-              "numeric": 60
-            }]
-          }
-        }
-      };
-    }, "d", {
-      type: "literal",
-      value: "d",
-      description: "\"d\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "d": 1
-        },
-        "metadata": {
-          "d": {
-            "isBase": false,
-            "CODE": "D",
-            "isMetric": "no",
-            "class": "iso1000",
-            "names": ["day"],
-            "printSymbols": ["d"],
-            "properties": ["time"],
-            "values": [{
-              "printable": "24",
-              "numeric": 24
-            }]
-          }
-        }
-      };
-    }, "N", {
-      type: "literal",
-      value: "N",
-      description: "\"N\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "N": 1
-        },
-        "metadata": {
-          "N": {
-            "isBase": false,
-            "CODE": "N",
-            "isMetric": "yes",
-            "class": "si",
-            "names": ["Newton"],
-            "printSymbols": ["N"],
-            "properties": ["force"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "a", {
-      type: "literal",
-      value: "a",
-      description: "\"a\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "a": 1
-        },
-        "metadata": {
-          "a": {
-            "isBase": false,
-            "CODE": "ANN",
-            "isMetric": "no",
-            "class": "iso1000",
-            "names": ["year"],
-            "printSymbols": ["a"],
-            "properties": ["time"],
-            "values": [{
-              "printable": "1",
-              "numeric": 1
-            }]
-          }
-        }
-      };
-    }, "g", {
-      type: "literal",
-      value: "g",
-      description: "\"g\""
-    }, function (u) {
-      return {
-        "value": 1,
-        "units": {
-          "g": 1
-        },
-        "metadata": {
-          "g": {
-            "isBase": true,
-            "CODE": "G",
-            "dim": "M",
-            "names": ["gram"],
-            "printSymbols": ["g"],
-            "properties": ["mass"]
-          }
-        }
-      };
-    }, "Y", {
-      type: "literal",
-      value: "Y",
-      description: "\"Y\""
-    }, "Z", {
-      type: "literal",
-      value: "Z",
-      description: "\"Z\""
-    }, "E", {
-      type: "literal",
-      value: "E",
-      description: "\"E\""
-    }, "M", {
-      type: "literal",
-      value: "M",
-      description: "\"M\""
-    }, "k", {
-      type: "literal",
-      value: "k",
-      description: "\"k\""
-    }, "da", {
-      type: "literal",
-      value: "da",
-      description: "\"da\""
-    }, "c", {
-      type: "literal",
-      value: "c",
-      description: "\"c\""
-    }, "n", {
-      type: "literal",
-      value: "n",
-      description: "\"n\""
-    }, "p", {
-      type: "literal",
-      value: "p",
-      description: "\"p\""
-    }, "f", {
-      type: "literal",
-      value: "f",
-      description: "\"f\""
-    }, "z", {
-      type: "literal",
-      value: "z",
-      description: "\"z\""
-    }, "y", {
-      type: "literal",
-      value: "y",
-      description: "\"y\""
-    }, "Ki", {
-      type: "literal",
-      value: "Ki",
-      description: "\"Ki\""
-    }, "Mi", {
-      type: "literal",
-      value: "Mi",
-      description: "\"Mi\""
-    }, "Gi", {
-      type: "literal",
-      value: "Gi",
-      description: "\"Gi\""
-    }, "Ti", {
-      type: "literal",
-      value: "Ti",
-      description: "\"Ti\""
-    }],
-        peg$bytecode = [peg$decode("!7!+' 4!6 !! %"), peg$decode("!.\"\"\"2\"3#+2$7#+(%4\"6$\"! %$\"# !\"# !*# \"7#"), peg$decode("!.%\"\"2%3&+-$7$+#%'\"%$\"# !\"# !*> \"!.\"\"\"2\"3#+-$7$+#%'\"%$\"# !\"# !"), peg$decode("!7$+;$ '7\",#&7\"\"+)%4\"6(\"\"! %$\"# !\"# !"), peg$decode("!7%+c$7&*# \" )+S% '7),#&7)\"+A%56* \"\"!)##\" !\" ++)%4$6,$\"#\"%$$# !$## !$\"# !\"# !*E \"!7(+:$ '7),#&7)\"+(%4\"6-\"!!%$\"# !\"# !"), peg$decode("!7'+' 4!6.!! %*Y \"!./\"\"2/30+B$7#+8%.1\"\"2132+(%4#63#!!%$## !$\"# !\"# !*# \"7)"), peg$decode("!04\"\"1!35*# \" )+3$7(+)%4\"66\"\"! %$\"# !\"# !"), peg$decode("!7+*# \" )+K$7*+A%567 \"! )##\" !\" ++)%4#68#\"\"!%$## !$\"# !\"# !*# \"7*"), peg$decode("! '09\"\"1!3:+,$,)&09\"\"1!3:\"\"\" !+i$.;\"\"2;3<*# \" )+S%7&*# \" )+C%56= #\"! )##\" !\" ++*%4$6>$##\"!%$$# !$## !$\"# !\"# !"), peg$decode("!.?\"\"2?3@+t$ '0A\"\"1!3B+,$,)&0A\"\"1!3B\"\"\" !+O%.C\"\"2C3D+?%56E !!)##\" !\" ++(%4$6F$!\"%$$# !$## !$\"# !\"# !"), peg$decode("!.G\"\"2G3H+' 4!6I!! %*\u1CCD \"!.J\"\"2J3K+' 4!6L!! %*\u1CB5 \"!.M\"\"2M3N+' 4!6O!! %*\u1C9D \"!.P\"\"2P3Q+' 4!6R!! %*\u1C85 \"!.S\"\"2S3T+' 4!6U!! %*\u1C6D \"!.V\"\"2V3W+' 4!6X!! %*\u1C55 \"!.Y\"\"2Y3Z+' 4!6[!! %*\u1C3D \"!.\\\"\"2\\3]+' 4!6^!! %*\u1C25 \"!._\"\"2_3`+' 4!6a!! %*\u1C0D \"!.b\"\"2b3c+' 4!6d!! %*\u1BF5 \"!.e\"\"2e3f+' 4!6g!! %*\u1BDD \"!.h\"\"2h3i+' 4!6j!! %*\u1BC5 \"!.k\"\"2k3l+' 4!6m!! %*\u1BAD \"!.n\"\"2n3o+' 4!6p!! %*\u1B95 \"!.q\"\"2q3r+' 4!6s!! %*\u1B7D \"!.t\"\"2t3u+' 4!6v!! %*\u1B65 \"!.w\"\"2w3x+' 4!6y!! %*\u1B4D \"!.z\"\"2z3{+' 4!6|!! %*\u1B35 \"!.}\"\"2}3~+' 4!6\x7F!! %*\u1B1D \"!.\x80\"\"2\x803\x81+' 4!6\x82!! %*\u1B05 \"!.\x83\"\"2\x833\x84+' 4!6\x85!! %*\u1AED \"!.\x86\"\"2\x863\x87+' 4!6\x88!! %*\u1AD5 \"!.\x89\"\"2\x893\x8A+' 4!6\x8B!! %*\u1ABD \"!.\x8C\"\"2\x8C3\x8D+' 4!6\x8E!! %*\u1AA5 \"!.\x8F\"\"2\x8F3\x90+' 4!6\x91!! %*\u1A8D \"!.\x92\"\"2\x923\x93+' 4!6\x94!! %*\u1A75 \"!.\x95\"\"2\x953\x96+' 4!6\x97!! %*\u1A5D \"!.\x98\"\"2\x983\x99+' 4!6\x9A!! %*\u1A45 \"!.\x9B\"\"2\x9B3\x9C+' 4!6\x9D!! %*\u1A2D \"!.\x9E\"\"2\x9E3\x9F+' 4!6\xA0!! %*\u1A15 \"!.\xA1\"\"2\xA13\xA2+' 4!6\xA3!! %*\u19FD \"!.\xA4\"\"2\xA43\xA5+' 4!6\xA6!! %*\u19E5 \"!.\xA7\"\"2\xA73\xA8+' 4!6\xA9!! %*\u19CD \"!.\xAA\"\"2\xAA3\xAB+' 4!6\xAC!! %*\u19B5 \"!.\xAD\"\"2\xAD3\xAE+' 4!6\xAF!! %*\u199D \"!.\xB0\"\"2\xB03\xB1+' 4!6\xB2!! %*\u1985 \"!.\xB3\"\"2\xB33\xB4+' 4!6\xB5!! %*\u196D \"!.\xB6\"\"2\xB63\xB7+' 4!6\xB8!! %*\u1955 \"!.\xB9\"\"2\xB93\xBA+' 4!6\xBB!! %*\u193D \"!.\xBC\"\"2\xBC3\xBD+' 4!6\xBE!! %*\u1925 \"!.\xBF\"\"2\xBF3\xC0+' 4!6\xC1!! %*\u190D \"!.\xC2\"\"2\xC23\xC3+' 4!6\xC4!! %*\u18F5 \"!.\xC5\"\"2\xC53\xC6+' 4!6\xC7!! %*\u18DD \"!.\xC8\"\"2\xC83\xC9+' 4!6\xCA!! %*\u18C5 \"!.\xCB\"\"2\xCB3\xCC+' 4!6\xCD!! %*\u18AD \"!.\xCE\"\"2\xCE3\xCF+' 4!6\xD0!! %*\u1895 \"!.\xD1\"\"2\xD13\xD2+' 4!6\xD3!! %*\u187D \"!.\xD4\"\"2\xD43\xD5+' 4!6\xD6!! %*\u1865 \"!.\xD7\"\"2\xD73\xD8+' 4!6\xD9!! %*\u184D \"!.\xDA\"\"2\xDA3\xDB+' 4!6\xDC!! %*\u1835 \"!.\xDD\"\"2\xDD3\xDE+' 4!6\xDF!! %*\u181D \"!.\xE0\"\"2\xE03\xE1+' 4!6\xE2!! %*\u1805 \"!.\xE3\"\"2\xE33\xE4+' 4!6\xE5!! %*\u17ED \"!.\xE6\"\"2\xE63\xE7+' 4!6\xE8!! %*\u17D5 \"!.\xE9\"\"2\xE93\xEA+' 4!6\xEB!! %*\u17BD \"!.\xEC\"\"2\xEC3\xED+' 4!6\xEE!! %*\u17A5 \"!.\xEF\"\"2\xEF3\xF0+' 4!6\xF1!! %*\u178D \"!.\xF2\"\"2\xF23\xF3+' 4!6\xF4!! %*\u1775 \"!.\xF5\"\"2\xF53\xF6+' 4!6\xF7!! %*\u175D \"!.\xF8\"\"2\xF83\xF9+' 4!6\xFA!! %*\u1745 \"!.\xFB\"\"2\xFB3\xFC+' 4!6\xFD!! %*\u172D \"!.\xFE\"\"2\xFE3\xFF+' 4!6\u0100!! %*\u1715 \"!.\u0101\"\"2\u01013\u0102+' 4!6\u0103!! %*\u16FD \"!.\u0104\"\"2\u01043\u0105+' 4!6\u0106!! %*\u16E5 \"!.\u0107\"\"2\u01073\u0108+' 4!6\u0109!! %*\u16CD \"!.\u010A\"\"2\u010A3\u010B+' 4!6\u010C!! %*\u16B5 \"!.\u010D\"\"2\u010D3\u010E+' 4!6\u010F!! %*\u169D \"!.\u0110\"\"2\u01103\u0111+' 4!6\u0112!! %*\u1685 \"!.\u0113\"\"2\u01133\u0114+' 4!6\u0115!! %*\u166D \"!.\u0116\"\"2\u01163\u0117+' 4!6\u0118!! %*\u1655 \"!.\u0119\"\"2\u01193\u011A+' 4!6\u011B!! %*\u163D \"!.\u011C\"\"2\u011C3\u011D+' 4!6\u011E!! %*\u1625 \"!.\u011F\"\"2\u011F3\u0120+' 4!6\u0121!! %*\u160D \"!.\u0122\"\"2\u01223\u0123+' 4!6\u0124!! %*\u15F5 \"!.\u0125\"\"2\u01253\u0126+' 4!6\u0127!! %*\u15DD \"!.\u0128\"\"2\u01283\u0129+' 4!6\u012A!! %*\u15C5 \"!.\u012B\"\"2\u012B3\u012C+' 4!6\u012D!! %*\u15AD \"!.\u012E\"\"2\u012E3\u012F+' 4!6\u0130!! %*\u1595 \"!.\u0131\"\"2\u01313\u0132+' 4!6\u0133!! %*\u157D \"!.\u0134\"\"2\u01343\u0135+' 4!6\u0136!! %*\u1565 \"!.\u0137\"\"2\u01373\u0138+' 4!6\u0139!! %*\u154D \"!.\u013A\"\"2\u013A3\u013B+' 4!6\u013C!! %*\u1535 \"!.\u013D\"\"2\u013D3\u013E+' 4!6\u013F!! %*\u151D \"!.\u0140\"\"2\u01403\u0141+' 4!6\u0142!! %*\u1505 \"!.\u0143\"\"2\u01433\u0144+' 4!6\u0145!! %*\u14ED \"!.\u0146\"\"2\u01463\u0147+' 4!6\u0148!! %*\u14D5 \"!.\u0149\"\"2\u01493\u014A+' 4!6\u014B!! %*\u14BD \"!.\u014C\"\"2\u014C3\u014D+' 4!6\u014E!! %*\u14A5 \"!.\u014F\"\"2\u014F3\u0150+' 4!6\u0151!! %*\u148D \"!.\u0152\"\"2\u01523\u0153+' 4!6\u0154!! %*\u1475 \"!.\u0155\"\"2\u01553\u0156+' 4!6\u0157!! %*\u145D \"!.\u0158\"\"2\u01583\u0159+' 4!6\u015A!! %*\u1445 \"!.\u015B\"\"2\u015B3\u015C+' 4!6\u015D!! %*\u142D \"!.\u015E\"\"2\u015E3\u015F+' 4!6\u0160!! %*\u1415 \"!.\u0161\"\"2\u01613\u0162+' 4!6\u0163!! %*\u13FD \"!.\u0164\"\"2\u01643\u0165+' 4!6\u0166!! %*\u13E5 \"!.\u0167\"\"2\u01673\u0168+' 4!6\u0169!! %*\u13CD \"!.\u016A\"\"2\u016A3\u016B+' 4!6\u016C!! %*\u13B5 \"!.\u016D\"\"2\u016D3\u016E+' 4!6\u016F!! %*\u139D \"!.\u0170\"\"2\u01703\u0171+' 4!6\u0172!! %*\u1385 \"!.\u0173\"\"2\u01733\u0174+' 4!6\u0175!! %*\u136D \"!.\u0176\"\"2\u01763\u0177+' 4!6\u0178!! %*\u1355 \"!.\u0179\"\"2\u01793\u017A+' 4!6\u017B!! %*\u133D \"!.\u017C\"\"2\u017C3\u017D+' 4!6\u017E!! %*\u1325 \"!.\u017F\"\"2\u017F3\u0180+' 4!6\u0181!! %*\u130D \"!.\u0182\"\"2\u01823\u0183+' 4!6\u0184!! %*\u12F5 \"!.\u0185\"\"2\u01853\u0186+' 4!6\u0187!! %*\u12DD \"!.\u0188\"\"2\u01883\u0189+' 4!6\u018A!! %*\u12C5 \"!.\u018B\"\"2\u018B3\u018C+' 4!6\u018D!! %*\u12AD \"!.\u018E\"\"2\u018E3\u018F+' 4!6\u0190!! %*\u1295 \"!.\u0191\"\"2\u01913\u0192+' 4!6\u0193!! %*\u127D \"!.\u0194\"\"2\u01943\u0195+' 4!6\u0196!! %*\u1265 \"!.\u0197\"\"2\u01973\u0198+' 4!6\u0199!! %*\u124D \"!.\u019A\"\"2\u019A3\u019B+' 4!6\u019C!! %*\u1235 \"!.\u019D\"\"2\u019D3\u019E+' 4!6\u019F!! %*\u121D \"!.\u01A0\"\"2\u01A03\u01A1+' 4!6\u01A2!! %*\u1205 \"!.\u01A3\"\"2\u01A33\u01A4+' 4!6\u01A5!! %*\u11ED \"!.\u01A6\"\"2\u01A63\u01A7+' 4!6\u01A8!! %*\u11D5 \"!.\u01A9\"\"2\u01A93\u01AA+' 4!6\u01AB!! %*\u11BD \"!.\u01AC\"\"2\u01AC3\u01AD+' 4!6\u01AE!! %*\u11A5 \"!.\u01AF\"\"2\u01AF3\u01B0+' 4!6\u01B1!! %*\u118D \"!.\u01B2\"\"2\u01B23\u01B3+' 4!6\u01B4!! %*\u1175 \"!.\u01B5\"\"2\u01B53\u01B6+' 4!6\u01B7!! %*\u115D \"!.\u01B8\"\"2\u01B83\u01B9+' 4!6\u01BA!! %*\u1145 \"!.\u01BB\"\"2\u01BB3\u01BC+' 4!6\u01BD!! %*\u112D \"!.\u01BE\"\"2\u01BE3\u01BF+' 4!6\u01C0!! %*\u1115 \"!.\u01C1\"\"2\u01C13\u01C2+' 4!6\u01C3!! %*\u10FD \"!.\u01C4\"\"2\u01C43\u01C5+' 4!6\u01C6!! %*\u10E5 \"!.\u01C7\"\"2\u01C73\u01C8+' 4!6\u01C9!! %*\u10CD \"!.\u01CA\"\"2\u01CA3\u01CB+' 4!6\u01CC!! %*\u10B5 \"!.\u01CD\"\"2\u01CD3\u01CE+' 4!6\u01CF!! %*\u109D \"!.\u01D0\"\"2\u01D03\u01D1+' 4!6\u01D2!! %*\u1085 \"!.\u01D3\"\"2\u01D33\u01D4+' 4!6\u01D5!! %*\u106D \"!.\u01D6\"\"2\u01D63\u01D7+' 4!6\u01D8!! %*\u1055 \"!.\u01D9\"\"2\u01D93\u01DA+' 4!6\u01DB!! %*\u103D \"!.\u01DC\"\"2\u01DC3\u01DD+' 4!6\u01DE!! %*\u1025 \"!.\u01DF\"\"2\u01DF3\u01E0+' 4!6\u01E1!! %*\u100D \"!.\u01E2\"\"2\u01E23\u01E3+' 4!6\u01E4!! %*\u0FF5 \"!.\u01E5\"\"2\u01E53\u01E6+' 4!6\u01E7!! %*\u0FDD \"!.\u01E8\"\"2\u01E83\u01E9+' 4!6\u01EA!! %*\u0FC5 \"!.\u01EB\"\"2\u01EB3\u01EC+' 4!6\u01ED!! %*\u0FAD \"!.\u01EE\"\"2\u01EE3\u01EF+' 4!6\u01F0!! %*\u0F95 \"!.\u01F1\"\"2\u01F13\u01F2+' 4!6\u01F3!! %*\u0F7D \"!.\u01F4\"\"2\u01F43\u01F5+' 4!6\u01F6!! %*\u0F65 \"!.\u01F7\"\"2\u01F73\u01F8+' 4!6\u01F9!! %*\u0F4D \"!.\u01FA\"\"2\u01FA3\u01FB+' 4!6\u01FC!! %*\u0F35 \"!.\u01FD\"\"2\u01FD3\u01FE+' 4!6\u01FF!! %*\u0F1D \"!.\u0200\"\"2\u02003\u0201+' 4!6\u0202!! %*\u0F05 \"!.\u0203\"\"2\u02033\u0204+' 4!6\u0205!! %*\u0EED \"!.\u0206\"\"2\u02063\u0207+' 4!6\u0208!! %*\u0ED5 \"!.\u0209\"\"2\u02093\u020A+' 4!6\u020B!! %*\u0EBD \"!.\u020C\"\"2\u020C3\u020D+' 4!6\u020E!! %*\u0EA5 \"!.\u020F\"\"2\u020F3\u0210+' 4!6\u0211!! %*\u0E8D \"!.\u0212\"\"2\u02123\u0213+' 4!6\u0214!! %*\u0E75 \"!.\u0215\"\"2\u02153\u0216+' 4!6\u0217!! %*\u0E5D \"!.\u0218\"\"2\u02183\u0219+' 4!6\u021A!! %*\u0E45 \"!.\u021B\"\"2\u021B3\u021C+' 4!6\u021D!! %*\u0E2D \"!.\u021E\"\"2\u021E3\u021F+' 4!6\u0220!! %*\u0E15 \"!.\u0221\"\"2\u02213\u0222+' 4!6\u0223!! %*\u0DFD \"!.\u0224\"\"2\u02243\u0225+' 4!6\u0226!! %*\u0DE5 \"!.\u0227\"\"2\u02273\u0228+' 4!6\u0229!! %*\u0DCD \"!.\u022A\"\"2\u022A3\u022B+' 4!6\u022C!! %*\u0DB5 \"!.\u022D\"\"2\u022D3\u022E+' 4!6\u022F!! %*\u0D9D \"!.\u0230\"\"2\u02303\u0231+' 4!6\u0232!! %*\u0D85 \"!.\u0233\"\"2\u02333\u0234+' 4!6\u0235!! %*\u0D6D \"!.\u0236\"\"2\u02363\u0237+' 4!6\u0238!! %*\u0D55 \"!.\u0239\"\"2\u02393\u023A+' 4!6\u023B!! %*\u0D3D \"!.\u023C\"\"2\u023C3\u023D+' 4!6\u023E!! %*\u0D25 \"!.\u023F\"\"2\u023F3\u0240+' 4!6\u0241!! %*\u0D0D \"!.\u0242\"\"2\u02423\u0243+' 4!6\u0244!! %*\u0CF5 \"!.\u0245\"\"2\u02453\u0246+' 4!6\u0247!! %*\u0CDD \"!.\u0248\"\"2\u02483\u0249+' 4!6\u024A!! %*\u0CC5 \"!.\u024B\"\"2\u024B3\u024C+' 4!6\u024D!! %*\u0CAD \"!.\u024E\"\"2\u024E3\u024F+' 4!6\u0250!! %*\u0C95 \"!.\u0251\"\"2\u02513\u0252+' 4!6\u0253!! %*\u0C7D \"!.\u0254\"\"2\u02543\u0255+' 4!6\u0256!! %*\u0C65 \"!.\u0257\"\"2\u02573\u0258+' 4!6\u0259!! %*\u0C4D \"!.\u025A\"\"2\u025A3\u025B+' 4!6\u025C!! %*\u0C35 \"!.\u025D\"\"2\u025D3\u025E+' 4!6\u025F!! %*\u0C1D \"!.\u0260\"\"2\u02603\u0261+' 4!6\u0262!! %*\u0C05 \"!.\u0263\"\"2\u02633\u0264+' 4!6\u0265!! %*\u0BED \"!.\u0266\"\"2\u02663\u0267+' 4!6\u0268!! %*\u0BD5 \"!.\u0269\"\"2\u02693\u026A+' 4!6\u026B!! %*\u0BBD \"!.\u026C\"\"2\u026C3\u026D+' 4!6\u026E!! %*\u0BA5 \"!.\u026F\"\"2\u026F3\u0270+' 4!6\u0271!! %*\u0B8D \"!.\u0272\"\"2\u02723\u0273+' 4!6\u0274!! %*\u0B75 \"!.\u0275\"\"2\u02753\u0276+' 4!6\u0277!! %*\u0B5D \"!.\u0278\"\"2\u02783\u0279+' 4!6\u027A!! %*\u0B45 \"!.\u027B\"\"2\u027B3\u027C+' 4!6\u027D!! %*\u0B2D \"!.\u027E\"\"2\u027E3\u027F+' 4!6\u0280!! %*\u0B15 \"!.\u0281\"\"2\u02813\u0282+' 4!6\u0283!! %*\u0AFD \"!.\u0284\"\"2\u02843\u0285+' 4!6\u0286!! %*\u0AE5 \"!.\u0287\"\"2\u02873\u0288+' 4!6\u0289!! %*\u0ACD \"!.\u028A\"\"2\u028A3\u028B+' 4!6\u028C!! %*\u0AB5 \"!.\u028D\"\"2\u028D3\u028E+' 4!6\u028F!! %*\u0A9D \"!.\u0290\"\"2\u02903\u0291+' 4!6\u0292!! %*\u0A85 \"!.\u0293\"\"2\u02933\u0294+' 4!6\u0295!! %*\u0A6D \"!.\u0296\"\"2\u02963\u0297+' 4!6\u0298!! %*\u0A55 \"!.\u0299\"\"2\u02993\u029A+' 4!6\u029B!! %*\u0A3D \"!.\u029C\"\"2\u029C3\u029D+' 4!6\u029E!! %*\u0A25 \"!.\u029F\"\"2\u029F3\u02A0+' 4!6\u02A1!! %*\u0A0D \"!.\u02A2\"\"2\u02A23\u02A3+' 4!6\u02A4!! %*\u09F5 \"!.\u02A5\"\"2\u02A53\u02A6+' 4!6\u02A7!! %*\u09DD \"!.\u02A8\"\"2\u02A83\u02A9+' 4!6\u02AA!! %*\u09C5 \"!.\u02AB\"\"2\u02AB3\u02AC+' 4!6\u02AD!! %*\u09AD \"!.\u02AE\"\"2\u02AE3\u02AF+' 4!6\u02B0!! %*\u0995 \"!.\u02B1\"\"2\u02B13\u02B2+' 4!6\u02B3!! %*\u097D \"!.\u02B4\"\"2\u02B43\u02B5+' 4!6\u02B6!! %*\u0965 \"!.\u02B7\"\"2\u02B73\u02B8+' 4!6\u02B9!! %*\u094D \"!.\u02BA\"\"2\u02BA3\u02BB+' 4!6\u02BC!! %*\u0935 \"!.\u02BD\"\"2\u02BD3\u02BE+' 4!6\u02BF!! %*\u091D \"!.\u02C0\"\"2\u02C03\u02C1+' 4!6\u02C2!! %*\u0905 \"!.\u02C3\"\"2\u02C33\u02C4+' 4!6\u02C5!! %*\u08ED \"!.\u02C6\"\"2\u02C63\u02C7+' 4!6\u02C8!! %*\u08D5 \"!.\u02C9\"\"2\u02C93\u02CA+' 4!6\u02CB!! %*\u08BD \"!.\u02CC\"\"2\u02CC3\u02CD+' 4!6\u02CE!! %*\u08A5 \"!.\u02CF\"\"2\u02CF3\u02D0+' 4!6\u02D1!! %*\u088D \"!.\u02D2\"\"2\u02D23\u02D3+' 4!6\u02D4!! %*\u0875 \"!.\u02D5\"\"2\u02D53\u02D6+' 4!6\u02D7!! %*\u085D \"!.\u02D8\"\"2\u02D83\u02D9+' 4!6\u02DA!! %*\u0845 \"!.\u02DB\"\"2\u02DB3\u02DC+' 4!6\u02DD!! %*\u082D \"!.\u02DE\"\"2\u02DE3\u02DF+' 4!6\u02E0!! %*\u0815 \"!.\u02E1\"\"2\u02E13\u02E2+' 4!6\u02E3!! %*\u07FD \"!.\u02E4\"\"2\u02E43\u02E5+' 4!6\u02E6!! %*\u07E5 \"!.\u02E7\"\"2\u02E73\u02E8+' 4!6\u02E9!! %*\u07CD \"!.\u02EA\"\"2\u02EA3\u02EB+' 4!6\u02EC!! %*\u07B5 \"!.\u02ED\"\"2\u02ED3\u02EE+' 4!6\u02EF!! %*\u079D \"!.\u02F0\"\"2\u02F03\u02F1+' 4!6\u02F2!! %*\u0785 \"!.\u02F3\"\"2\u02F33\u02F4+' 4!6\u02F5!! %*\u076D \"!.\u02F6\"\"2\u02F63\u02F7+' 4!6\u02F8!! %*\u0755 \"!.\u02F9\"\"2\u02F93\u02FA+' 4!6\u02FB!! %*\u073D \"!.\u02FC\"\"2\u02FC3\u02FD+' 4!6\u02FE!! %*\u0725 \"!.\u02FF\"\"2\u02FF3\u0300+' 4!6\u0301!! %*\u070D \"!.\u0302\"\"2\u03023\u0303+' 4!6\u0304!! %*\u06F5 \"!.\u0305\"\"2\u03053\u0306+' 4!6\u0307!! %*\u06DD \"!.\u0308\"\"2\u03083\u0309+' 4!6\u030A!! %*\u06C5 \"!.\u030B\"\"2\u030B3\u030C+' 4!6\u030D!! %*\u06AD \"!.\u030E\"\"2\u030E3\u030F+' 4!6\u0310!! %*\u0695 \"!.\u0311\"\"2\u03113\u0312+' 4!6\u0313!! %*\u067D \"!.\u0314\"\"2\u03143\u0315+' 4!6\u0316!! %*\u0665 \"!.\u0317\"\"2\u03173\u0318+' 4!6\u0319!! %*\u064D \"!.\u031A\"\"2\u031A3\u031B+' 4!6\u031C!! %*\u0635 \"!.\u031D\"\"2\u031D3\u031E+' 4!6\u031F!! %*\u061D \"!.\u0320\"\"2\u03203\u0321+' 4!6\u0322!! %*\u0605 \"!.\u0323\"\"2\u03233\u0324+' 4!6\u0325!! %*\u05ED \"!.\u0326\"\"2\u03263\u0327+' 4!6\u0328!! %*\u05D5 \"!.\u0329\"\"2\u03293\u032A+' 4!6\u032B!! %*\u05BD \"!.\u032C\"\"2\u032C3\u032D+' 4!6\u032E!! %*\u05A5 \"!.\u032F\"\"2\u032F3\u0330+' 4!6\u0331!! %*\u058D \"!.\u0332\"\"2\u03323\u0333+' 4!6\u0334!! %*\u0575 \"!.\u0335\"\"2\u03353\u0336+' 4!6\u0337!! %*\u055D \"!.\u0338\"\"2\u03383\u0339+' 4!6\u033A!! %*\u0545 \"!.\u033B\"\"2\u033B3\u033C+' 4!6\u033D!! %*\u052D \"!.\u033E\"\"2\u033E3\u033F+' 4!6\u0340!! %*\u0515 \"!.\u0341\"\"2\u03413\u0342+' 4!6\u0343!! %*\u04FD \"!.\u0344\"\"2\u03443\u0345+' 4!6\u0346!! %*\u04E5 \"!.\u0347\"\"2\u03473\u0348+' 4!6\u0349!! %*\u04CD \"!.\u034A\"\"2\u034A3\u034B+' 4!6\u034C!! %*\u04B5 \"!.\u034D\"\"2\u034D3\u034E+' 4!6\u034F!! %*\u049D \"!.\u0350\"\"2\u03503\u0351+' 4!6\u0352!! %*\u0485 \"!.\u0353\"\"2\u03533\u0354+' 4!6\u0355!! %*\u046D \"!.\u0356\"\"2\u03563\u0357+' 4!6\u0358!! %*\u0455 \"!.\u0359\"\"2\u03593\u035A+' 4!6\u035B!! %*\u043D \"!.\u035C\"\"2\u035C3\u035D+' 4!6\u035E!! %*\u0425 \"!.\u035F\"\"2\u035F3\u0360+' 4!6\u0361!! %*\u040D \"!.\u0362\"\"2\u03623\u0363+' 4!6\u0364!! %*\u03F5 \"!.\u0365\"\"2\u03653\u0366+' 4!6\u0367!! %*\u03DD \"!.\u0368\"\"2\u03683\u0369+' 4!6\u036A!! %*\u03C5 \"!.\u036B\"\"2\u036B3\u036C+' 4!6\u036D!! %*\u03AD \"!.\u036E\"\"2\u036E3\u036F+' 4!6\u0370!! %*\u0395 \"!.\u0371\"\"2\u03713\u0372+' 4!6\u0373!! %*\u037D \"!.\u0374\"\"2\u03743\u0375+' 4!6\u0376!! %*\u0365 \"!.\u0377\"\"2\u03773\u0378+' 4!6\u0379!! %*\u034D \"!.\u037A\"\"2\u037A3\u037B+' 4!6\u037C!! %*\u0335 \"!.\u037D\"\"2\u037D3\u037E+' 4!6\u037F!! %*\u031D \"!.\u0380\"\"2\u03803\u0381+' 4!6\u0382!! %*\u0305 \"!.\u0383\"\"2\u03833\u0384+' 4!6\u0385!! %*\u02ED \"!.\u0386\"\"2\u03863\u0387+' 4!6\u0388!! %*\u02D5 \"!.\u0389\"\"2\u03893\u038A+' 4!6\u038B!! %*\u02BD \"!.\u038C\"\"2\u038C3\u038D+' 4!6\u038E!! %*\u02A5 \"!.\u038F\"\"2\u038F3\u0390+' 4!6\u0391!! %*\u028D \"!.\u0392\"\"2\u03923\u0393+' 4!6\u0394!! %*\u0275 \"!.\u0395\"\"2\u03953\u0396+' 4!6\u0397!! %*\u025D \"!.\u0398\"\"2\u03983\u0399+' 4!6\u039A!! %*\u0245 \"!.\u039B\"\"2\u039B3\u039C+' 4!6\u039D!! %*\u022D \"!.\u039E\"\"2\u039E3\u039F+' 4!6\u03A0!! %*\u0215 \"!.\u03A1\"\"2\u03A13\u03A2+' 4!6\u03A3!! %*\u01FD \"!.\u03A4\"\"2\u03A43\u03A5+' 4!6\u03A6!! %*\u01E5 \"!.\u03A7\"\"2\u03A73\u03A8+' 4!6\u03A9!! %*\u01CD \"!.\u03AA\"\"2\u03AA3\u03AB+' 4!6\u03AC!! %*\u01B5 \"!.\u03AD\"\"2\u03AD3\u03AE+' 4!6\u03AF!! %*\u019D \"!.\u03B0\"\"2\u03B03\u03B1+' 4!6\u03B2!! %*\u0185 \"!.\u03B3\"\"2\u03B33\u03B4+' 4!6\u03B5!! %*\u016D \"!.\u03B6\"\"2\u03B63\u03B7+' 4!6\u03B8!! %*\u0155 \"!.\u03B9\"\"2\u03B93\u03BA+' 4!6\u03BB!! %*\u013D \"!.\u03BC\"\"2\u03BC3\u03BD+' 4!6\u03BE!! %*\u0125 \"!.\u03BF\"\"2\u03BF3\u03C0+' 4!6\u03C1!! %*\u010D \"!.\u03C2\"\"2\u03C23\u03C3+' 4!6\u03C4!! %*\xF5 \"!.\u03C5\"\"2\u03C53\u03C6+' 4!6\u03C7!! %*\xDD \"!.\u03C8\"\"2\u03C83\u03C9+' 4!6\u03CA!! %*\xC5 \"!.\u03CB\"\"2\u03CB3\u03CC+' 4!6\u03CD!! %*\xAD \"!.\u03CE\"\"2\u03CE3\u03CF+' 4!6\u03D0!! %*\x95 \"!.\u03D1\"\"2\u03D13\u03D2+' 4!6\u03D3!! %*} \"!.\u03D4\"\"2\u03D43\u03D5+' 4!6\u03D6!! %*e \"!.\u03D7\"\"2\u03D73\u03D8+' 4!6\u03D9!! %*M \"!.\u03DA\"\"2\u03DA3\u03DB+' 4!6\u03DC!! %*5 \"!.\u03DD\"\"2\u03DD3\u03DE+' 4!6\u03DF!! %"), peg$decode(".\u03E0\"\"2\u03E03\u03E1*\u0131 \".\u03E2\"\"2\u03E23\u03E3*\u0125 \".\u03E4\"\"2\u03E43\u03E5*\u0119 \".\u0392\"\"2\u03923\u0393*\u010D \".\u039E\"\"2\u039E3\u039F*\u0101 \".\u0395\"\"2\u03953\u0396*\xF5 \".\u03E6\"\"2\u03E63\u03E7*\xE9 \".\u03E8\"\"2\u03E83\u03E9*\xDD \".\u03D1\"\"2\u03D13\u03D2*\xD1 \".\u03EA\"\"2\u03EA3\u03EB*\xC5 \".\u03D4\"\"2\u03D43\u03D5*\xB9 \".\u03EC\"\"2\u03EC3\u03ED*\xAD \".\u03AA\"\"2\u03AA3\u03AB*\xA1 \".\u038F\"\"2\u038F3\u0390*\x95 \".\u03EE\"\"2\u03EE3\u03EF*\x89 \".\u03F0\"\"2\u03F03\u03F1*} \".\u03F2\"\"2\u03F23\u03F3*q \".\u03DA\"\"2\u03DA3\u03DB*e \".\u03F4\"\"2\u03F43\u03F5*Y \".\u03F6\"\"2\u03F63\u03F7*M \".\u03F8\"\"2\u03F83\u03F9*A \".\u03FA\"\"2\u03FA3\u03FB*5 \".\u03FC\"\"2\u03FC3\u03FD*) \".\u03FE\"\"2\u03FE3\u03FF")],
-        peg$currPos = 0,
-        peg$reportedPos = 0,
-        peg$cachedPos = 0,
-        peg$cachedPosDetails = {
-      line: 1,
-      column: 1,
-      seenCR: false
-    },
-        peg$maxFailPos = 0,
-        peg$maxFailExpected = [],
-        peg$silentFails = 0,
-        peg$result;
-
-    if ("startRule" in options) {
-      if (!(options.startRule in peg$startRuleIndices)) {
-        throw new Error("Can't start parsing from rule \"" + options.startRule + "\".");
-      }
-
-      peg$startRuleIndex = peg$startRuleIndices[options.startRule];
-    }
-
-    function text() {
-      return input.substring(peg$reportedPos, peg$currPos);
-    }
-
-    function offset() {
-      return peg$reportedPos;
-    }
-
-    function line() {
-      return peg$computePosDetails(peg$reportedPos).line;
-    }
-
-    function column() {
-      return peg$computePosDetails(peg$reportedPos).column;
-    }
-
-    function expected(description) {
-      throw peg$buildException(null, [{
-        type: "other",
-        description: description
-      }], peg$reportedPos);
-    }
-
-    function error(message) {
-      throw peg$buildException(message, null, peg$reportedPos);
-    }
-
-    function peg$computePosDetails(pos) {
-      function advance(details, startPos, endPos) {
-        var p, ch;
-
-        for (p = startPos; p < endPos; p++) {
-          ch = input.charAt(p);
-
-          if (ch === "\n") {
-            if (!details.seenCR) {
-              details.line++;
-            }
-
-            details.column = 1;
-            details.seenCR = false;
-          } else if (ch === "\r" || ch === "\u2028" || ch === "\u2029") {
-            details.line++;
-            details.column = 1;
-            details.seenCR = true;
-          } else {
-            details.column++;
-            details.seenCR = false;
-          }
-        }
-      }
-
-      if (peg$cachedPos !== pos) {
-        if (peg$cachedPos > pos) {
-          peg$cachedPos = 0;
-          peg$cachedPosDetails = {
-            line: 1,
-            column: 1,
-            seenCR: false
-          };
-        }
-
-        advance(peg$cachedPosDetails, peg$cachedPos, pos);
-        peg$cachedPos = pos;
-      }
-
-      return peg$cachedPosDetails;
-    }
-
-    function peg$fail(expected) {
-      if (peg$currPos < peg$maxFailPos) {
-        return;
-      }
-
-      if (peg$currPos > peg$maxFailPos) {
-        peg$maxFailPos = peg$currPos;
-        peg$maxFailExpected = [];
-      }
-
-      peg$maxFailExpected.push(expected);
-    }
-
-    function peg$buildException(message, expected, pos) {
-      function cleanupExpected(expected) {
-        var i = 1;
-        expected.sort(function (a, b) {
-          if (a.description < b.description) {
-            return -1;
-          } else if (a.description > b.description) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
-
-        while (i < expected.length) {
-          if (expected[i - 1] === expected[i]) {
-            expected.splice(i, 1);
-          } else {
-            i++;
-          }
-        }
-      }
-
-      function buildMessage(expected, found) {
-        function stringEscape(s) {
-          function hex(ch) {
-            return ch.charCodeAt(0).toString(16).toUpperCase();
-          }
-
-          return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\x08/g, '\\b').replace(/\t/g, '\\t').replace(/\n/g, '\\n').replace(/\f/g, '\\f').replace(/\r/g, '\\r').replace(/[\x00-\x07\x0B\x0E\x0F]/g, function (ch) {
-            return '\\x0' + hex(ch);
-          }).replace(/[\x10-\x1F\x80-\xFF]/g, function (ch) {
-            return '\\x' + hex(ch);
-          }).replace(/[\u0180-\u0FFF]/g, function (ch) {
-            return "\\u0" + hex(ch);
-          }).replace(/[\u1080-\uFFFF]/g, function (ch) {
-            return "\\u" + hex(ch);
-          });
-        }
-
-        var expectedDescs = new Array(expected.length),
-            expectedDesc,
-            foundDesc,
-            i;
-
-        for (i = 0; i < expected.length; i++) {
-          expectedDescs[i] = expected[i].description;
-        }
-
-        expectedDesc = expected.length > 1 ? expectedDescs.slice(0, -1).join(", ") + " or " + expectedDescs[expected.length - 1] : expectedDescs[0];
-        foundDesc = found ? "\"" + stringEscape(found) + "\"" : "end of input";
-        return "Expected " + expectedDesc + " but " + foundDesc + " found.";
-      }
-
-      var posDetails = peg$computePosDetails(pos),
-          found = pos < input.length ? input.charAt(pos) : null;
-
-      if (expected !== null) {
-        cleanupExpected(expected);
-      }
-
-      return new SyntaxError(message !== null ? message : buildMessage(expected, found), expected, found, pos, posDetails.line, posDetails.column);
-    }
-
-    function peg$decode(s) {
-      var bc = new Array(s.length),
-          i;
-
-      for (i = 0; i < s.length; i++) {
-        bc[i] = s.charCodeAt(i) - 32;
-      }
-
-      return bc;
-    }
-
-    function peg$parseRule(index) {
-      var bc = peg$bytecode[index],
-          ip = 0,
-          ips = [],
-          end = bc.length,
-          ends = [],
-          stack = [],
-          params,
-          i;
-
-      function protect(object) {
-        return Object.prototype.toString.apply(object) === "[object Array]" ? [] : object;
-      }
-
-      while (true) {
-        while (ip < end) {
-          switch (bc[ip]) {
-            case 0:
-              stack.push(protect(peg$consts[bc[ip + 1]]));
-              ip += 2;
-              break;
-
-            case 1:
-              stack.push(peg$currPos);
-              ip++;
-              break;
-
-            case 2:
-              stack.pop();
-              ip++;
-              break;
-
-            case 3:
-              peg$currPos = stack.pop();
-              ip++;
-              break;
-
-            case 4:
-              stack.length -= bc[ip + 1];
-              ip += 2;
-              break;
-
-            case 5:
-              stack.splice(-2, 1);
-              ip++;
-              break;
-
-            case 6:
-              stack[stack.length - 2].push(stack.pop());
-              ip++;
-              break;
-
-            case 7:
-              stack.push(stack.splice(stack.length - bc[ip + 1], bc[ip + 1]));
-              ip += 2;
-              break;
-
-            case 8:
-              stack.pop();
-              stack.push(input.substring(stack[stack.length - 1], peg$currPos));
-              ip++;
-              break;
-
-            case 9:
-              ends.push(end);
-              ips.push(ip + 3 + bc[ip + 1] + bc[ip + 2]);
-
-              if (stack[stack.length - 1]) {
-                end = ip + 3 + bc[ip + 1];
-                ip += 3;
-              } else {
-                end = ip + 3 + bc[ip + 1] + bc[ip + 2];
-                ip += 3 + bc[ip + 1];
-              }
-
-              break;
-
-            case 10:
-              ends.push(end);
-              ips.push(ip + 3 + bc[ip + 1] + bc[ip + 2]);
-
-              if (stack[stack.length - 1] === peg$FAILED) {
-                end = ip + 3 + bc[ip + 1];
-                ip += 3;
-              } else {
-                end = ip + 3 + bc[ip + 1] + bc[ip + 2];
-                ip += 3 + bc[ip + 1];
-              }
-
-              break;
-
-            case 11:
-              ends.push(end);
-              ips.push(ip + 3 + bc[ip + 1] + bc[ip + 2]);
-
-              if (stack[stack.length - 1] !== peg$FAILED) {
-                end = ip + 3 + bc[ip + 1];
-                ip += 3;
-              } else {
-                end = ip + 3 + bc[ip + 1] + bc[ip + 2];
-                ip += 3 + bc[ip + 1];
-              }
-
-              break;
-
-            case 12:
-              if (stack[stack.length - 1] !== peg$FAILED) {
-                ends.push(end);
-                ips.push(ip);
-                end = ip + 2 + bc[ip + 1];
-                ip += 2;
-              } else {
-                ip += 2 + bc[ip + 1];
-              }
-
-              break;
-
-            case 13:
-              ends.push(end);
-              ips.push(ip + 3 + bc[ip + 1] + bc[ip + 2]);
-
-              if (input.length > peg$currPos) {
-                end = ip + 3 + bc[ip + 1];
-                ip += 3;
-              } else {
-                end = ip + 3 + bc[ip + 1] + bc[ip + 2];
-                ip += 3 + bc[ip + 1];
-              }
-
-              break;
-
-            case 14:
-              ends.push(end);
-              ips.push(ip + 4 + bc[ip + 2] + bc[ip + 3]);
-
-              if (input.substr(peg$currPos, peg$consts[bc[ip + 1]].length) === peg$consts[bc[ip + 1]]) {
-                end = ip + 4 + bc[ip + 2];
-                ip += 4;
-              } else {
-                end = ip + 4 + bc[ip + 2] + bc[ip + 3];
-                ip += 4 + bc[ip + 2];
-              }
-
-              break;
-
-            case 15:
-              ends.push(end);
-              ips.push(ip + 4 + bc[ip + 2] + bc[ip + 3]);
-
-              if (input.substr(peg$currPos, peg$consts[bc[ip + 1]].length).toLowerCase() === peg$consts[bc[ip + 1]]) {
-                end = ip + 4 + bc[ip + 2];
-                ip += 4;
-              } else {
-                end = ip + 4 + bc[ip + 2] + bc[ip + 3];
-                ip += 4 + bc[ip + 2];
-              }
-
-              break;
-
-            case 16:
-              ends.push(end);
-              ips.push(ip + 4 + bc[ip + 2] + bc[ip + 3]);
-
-              if (peg$consts[bc[ip + 1]].test(input.charAt(peg$currPos))) {
-                end = ip + 4 + bc[ip + 2];
-                ip += 4;
-              } else {
-                end = ip + 4 + bc[ip + 2] + bc[ip + 3];
-                ip += 4 + bc[ip + 2];
-              }
-
-              break;
-
-            case 17:
-              stack.push(input.substr(peg$currPos, bc[ip + 1]));
-              peg$currPos += bc[ip + 1];
-              ip += 2;
-              break;
-
-            case 18:
-              stack.push(peg$consts[bc[ip + 1]]);
-              peg$currPos += peg$consts[bc[ip + 1]].length;
-              ip += 2;
-              break;
-
-            case 19:
-              stack.push(peg$FAILED);
-
-              if (peg$silentFails === 0) {
-                peg$fail(peg$consts[bc[ip + 1]]);
-              }
-
-              ip += 2;
-              break;
-
-            case 20:
-              peg$reportedPos = stack[stack.length - 1 - bc[ip + 1]];
-              ip += 2;
-              break;
-
-            case 21:
-              peg$reportedPos = peg$currPos;
-              ip++;
-              break;
-
-            case 22:
-              params = bc.slice(ip + 4, ip + 4 + bc[ip + 3]);
-
-              for (i = 0; i < bc[ip + 3]; i++) {
-                params[i] = stack[stack.length - 1 - params[i]];
-              }
-
-              stack.splice(stack.length - bc[ip + 2], bc[ip + 2], peg$consts[bc[ip + 1]].apply(null, params));
-              ip += 4 + bc[ip + 3];
-              break;
-
-            case 23:
-              stack.push(peg$parseRule(bc[ip + 1]));
-              ip += 2;
-              break;
-
-            case 24:
-              peg$silentFails++;
-              ip++;
-              break;
-
-            case 25:
-              peg$silentFails--;
-              ip++;
-              break;
-
-            default:
-              throw new Error("Invalid opcode: " + bc[ip] + ".");
-          }
-        }
-
-        if (ends.length > 0) {
-          end = ends.pop();
-          ip = ips.pop();
-        } else {
-          break;
-        }
-      }
-
-      return stack[0];
-    }
-
-    helpers = require('../lib/helpers');
-    prefixes = require('./prefixes.json');
-    prefixMetadata = require('./prefixMetadata.json');
-    unitMetadata = require('./unitMetadata.json');
-    metrics = require('./metrics.json');
-    multiply = helpers.multiply;
-    topower = helpers.topower;
-    cleanup = helpers.cleanup;
-    ismetric = helpers.ismetric(metrics);
-    peg$result = peg$parseRule(peg$startRuleIndex);
-
-    if (peg$result !== peg$FAILED && peg$currPos === input.length) {
-      return peg$result;
-    } else {
-      if (peg$result !== peg$FAILED && peg$currPos < input.length) {
-        peg$fail({
-          type: "end",
-          description: "end of input"
-        });
-      }
-
-      throw peg$buildException(null, peg$maxFailExpected, peg$maxFailPos);
-    }
-  }
-
-  return {
-    SyntaxError: SyntaxError,
-    parse: parse
-  };
-}();
-
-},{"../lib/helpers":55,"./metrics.json":50,"./prefixMetadata.json":51,"./prefixes.json":52,"./unitMetadata.json":54}],54:[function(require,module,exports){
-module.exports={
-  "10*": {
-    "isBase": false,
-    "CODE": "10*",
-    "isMetric": "no",
-    "class": "dimless",
-    "names": [
-      "the number ten for arbitrary powers"
-    ],
-    "printSymbols": [
-      "10"
-    ],
-    "properties": [
-      "number"
-    ],
-    "values": [
-      {
-        "printable": "10",
-        "numeric": 10
-      }
-    ]
-  },
-  "10^": {
-    "isBase": false,
-    "CODE": "10^",
-    "isMetric": "no",
-    "class": "dimless",
-    "names": [
-      "the number ten for arbitrary powers"
-    ],
-    "printSymbols": [
-      "10"
-    ],
-    "properties": [
-      "number"
-    ],
-    "values": [
-      {
-        "printable": "10",
-        "numeric": 10
-      }
-    ]
-  },
-  "[pi]": {
-    "isBase": false,
-    "CODE": "[PI]",
-    "isMetric": "no",
-    "class": "dimless",
-    "names": [
-      "the number pi"
-    ],
-    "printSymbols": [
-      "&#960;"
-    ],
-    "properties": [
-      "number"
-    ],
-    "values": [
-      {
-        "printable": "&#960;",
-        "numeric": 3.141592653589793
-      }
-    ]
-  },
-  "%": {
-    "isBase": false,
-    "CODE": "%",
-    "isMetric": "no",
-    "class": "dimless",
-    "names": [
-      "percent"
-    ],
-    "printSymbols": [
-      "%"
-    ],
-    "properties": [
-      "fraction"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[ppth]": {
-    "isBase": false,
-    "CODE": "[PPTH]",
-    "isMetric": "no",
-    "class": "dimless",
-    "names": [
-      "parts per thousand"
-    ],
-    "printSymbols": [
-      "ppth"
-    ],
-    "properties": [
-      "fraction"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[ppm]": {
-    "isBase": false,
-    "CODE": "[PPM]",
-    "isMetric": "no",
-    "class": "dimless",
-    "names": [
-      "parts per million"
-    ],
-    "printSymbols": [
-      "ppm"
-    ],
-    "properties": [
-      "fraction"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[ppb]": {
-    "isBase": false,
-    "CODE": "[PPB]",
-    "isMetric": "no",
-    "class": "dimless",
-    "names": [
-      "parts per billion"
-    ],
-    "printSymbols": [
-      "ppb"
-    ],
-    "properties": [
-      "fraction"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[pptr]": {
-    "isBase": false,
-    "CODE": "[PPTR]",
-    "isMetric": "no",
-    "class": "dimless",
-    "names": [
-      "parts per trillion"
-    ],
-    "printSymbols": [
-      "pptr"
-    ],
-    "properties": [
-      "fraction"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "mol": {
-    "isBase": false,
-    "CODE": "MOL",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "mole"
-    ],
-    "printSymbols": [
-      "mol"
-    ],
-    "properties": [
-      "amount of substance"
-    ],
-    "values": [
-      {
-        "printable": "6.0221367",
-        "numeric": 6.0221367
-      }
-    ]
-  },
-  "sr": {
-    "isBase": false,
-    "CODE": "SR",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "steradian"
-    ],
-    "printSymbols": [
-      "sr"
-    ],
-    "properties": [
-      "solid angle"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "Hz": {
-    "isBase": false,
-    "CODE": "HZ",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "Hertz"
-    ],
-    "printSymbols": [
-      "Hz"
-    ],
-    "properties": [
-      "frequency"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "N": {
-    "isBase": false,
-    "CODE": "N",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "Newton"
-    ],
-    "printSymbols": [
-      "N"
-    ],
-    "properties": [
-      "force"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "Pa": {
-    "isBase": false,
-    "CODE": "PAL",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "Pascal"
-    ],
-    "printSymbols": [
-      "Pa"
-    ],
-    "properties": [
-      "pressure"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "J": {
-    "isBase": false,
-    "CODE": "J",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "Joule"
-    ],
-    "printSymbols": [
-      "J"
-    ],
-    "properties": [
-      "energy"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "W": {
-    "isBase": false,
-    "CODE": "W",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "Watt"
-    ],
-    "printSymbols": [
-      "W"
-    ],
-    "properties": [
-      "power"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "A": {
-    "isBase": false,
-    "CODE": "A",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "Ampère"
-    ],
-    "printSymbols": [
-      "A"
-    ],
-    "properties": [
-      "electric current"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "V": {
-    "isBase": false,
-    "CODE": "V",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "Volt"
-    ],
-    "printSymbols": [
-      "V"
-    ],
-    "properties": [
-      "electric potential"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "F": {
-    "isBase": false,
-    "CODE": "F",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "Farad"
-    ],
-    "printSymbols": [
-      "F"
-    ],
-    "properties": [
-      "electric capacitance"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "Ohm": {
-    "isBase": false,
-    "CODE": "OHM",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "Ohm"
-    ],
-    "printSymbols": [
-      "&#937;"
-    ],
-    "properties": [
-      "electric resistance"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "S": {
-    "isBase": false,
-    "CODE": "SIE",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "Siemens"
-    ],
-    "printSymbols": [
-      "S"
-    ],
-    "properties": [
-      "electric conductance"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "Wb": {
-    "isBase": false,
-    "CODE": "WB",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "Weber"
-    ],
-    "printSymbols": [
-      "Wb"
-    ],
-    "properties": [
-      "magentic flux"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "Cel": {
-    "isBase": false,
-    "CODE": "CEL",
-    "isMetric": "yes",
-    "isSpecial": "yes",
-    "class": "si",
-    "names": [
-      "degree Celsius"
-    ],
-    "printSymbols": [
-      "&#176;C"
-    ],
-    "properties": [
-      "temperature"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"Cel\" value=\"1\" Unit=\"K\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "T": {
-    "isBase": false,
-    "CODE": "T",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "Tesla"
-    ],
-    "printSymbols": [
-      "T"
-    ],
-    "properties": [
-      "magnetic flux density"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "H": {
-    "isBase": false,
-    "CODE": "H",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "Henry"
-    ],
-    "printSymbols": [
-      "H"
-    ],
-    "properties": [
-      "inductance"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "lm": {
-    "isBase": false,
-    "CODE": "LM",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "lumen"
-    ],
-    "printSymbols": [
-      "lm"
-    ],
-    "properties": [
-      "luminous flux"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "lx": {
-    "isBase": false,
-    "CODE": "LX",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "lux"
-    ],
-    "printSymbols": [
-      "lx"
-    ],
-    "properties": [
-      "illuminance"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "Bq": {
-    "isBase": false,
-    "CODE": "BQ",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "Becquerel"
-    ],
-    "printSymbols": [
-      "Bq"
-    ],
-    "properties": [
-      "radioactivity"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "Gy": {
-    "isBase": false,
-    "CODE": "GY",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "Gray"
-    ],
-    "printSymbols": [
-      "Gy"
-    ],
-    "properties": [
-      "energy dose"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "Sv": {
-    "isBase": false,
-    "CODE": "SV",
-    "isMetric": "yes",
-    "class": "si",
-    "names": [
-      "Sievert"
-    ],
-    "printSymbols": [
-      "Sv"
-    ],
-    "properties": [
-      "dose equivalent"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "gon": {
-    "isBase": false,
-    "CODE": "GON",
-    "isMetric": "no",
-    "class": "iso1000",
-    "names": [
-      "gon",
-      "grade"
-    ],
-    "printSymbols": [
-      "&#9633;<sup>g</sup>"
-    ],
-    "properties": [
-      "plane angle"
-    ],
-    "values": [
-      {
-        "printable": "0.9",
-        "numeric": 0.9
-      }
-    ]
-  },
-  "deg": {
-    "isBase": false,
-    "CODE": "DEG",
-    "isMetric": "no",
-    "class": "iso1000",
-    "names": [
-      "degree"
-    ],
-    "printSymbols": [
-      "&#176;"
-    ],
-    "properties": [
-      "plane angle"
-    ],
-    "values": [
-      {
-        "printable": "2",
-        "numeric": 2
-      }
-    ]
-  },
-  "'": {
-    "isBase": false,
-    "CODE": "'",
-    "isMetric": "no",
-    "class": "iso1000",
-    "names": [
-      "minute"
-    ],
-    "printSymbols": [
-      "'"
-    ],
-    "properties": [
-      "plane angle"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "''": {
-    "isBase": false,
-    "CODE": "''",
-    "isMetric": "no",
-    "class": "iso1000",
-    "names": [
-      "second"
-    ],
-    "printSymbols": [
-      "''"
-    ],
-    "properties": [
-      "plane angle"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "l": {
-    "isBase": false,
-    "CODE": "L",
-    "isMetric": "yes",
-    "class": "iso1000",
-    "names": [
-      "liter"
-    ],
-    "printSymbols": [
-      "l"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "L": {
-    "isBase": false,
-    "isMetric": "yes",
-    "class": "iso1000",
-    "names": [
-      "liter"
-    ],
-    "printSymbols": [
-      "L"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "ar": {
-    "isBase": false,
-    "CODE": "AR",
-    "isMetric": "yes",
-    "class": "iso1000",
-    "names": [
-      "are"
-    ],
-    "printSymbols": [
-      "a"
-    ],
-    "properties": [
-      "area"
-    ],
-    "values": [
-      {
-        "printable": "100",
-        "numeric": 100
-      }
-    ]
-  },
-  "min": {
-    "isBase": false,
-    "CODE": "MIN",
-    "isMetric": "no",
-    "class": "iso1000",
-    "names": [
-      "minute"
-    ],
-    "printSymbols": [
-      "min"
-    ],
-    "properties": [
-      "time"
-    ],
-    "values": [
-      {
-        "printable": "60",
-        "numeric": 60
-      }
-    ]
-  },
-  "h": {
-    "isBase": false,
-    "CODE": "HR",
-    "isMetric": "no",
-    "class": "iso1000",
-    "names": [
-      "hour"
-    ],
-    "printSymbols": [
-      "h"
-    ],
-    "properties": [
-      "time"
-    ],
-    "values": [
-      {
-        "printable": "60",
-        "numeric": 60
-      }
-    ]
-  },
-  "d": {
-    "isBase": false,
-    "CODE": "D",
-    "isMetric": "no",
-    "class": "iso1000",
-    "names": [
-      "day"
-    ],
-    "printSymbols": [
-      "d"
-    ],
-    "properties": [
-      "time"
-    ],
-    "values": [
-      {
-        "printable": "24",
-        "numeric": 24
-      }
-    ]
-  },
-  "a_t": {
-    "isBase": false,
-    "CODE": "ANN_T",
-    "isMetric": "no",
-    "class": "iso1000",
-    "names": [
-      "tropical year"
-    ],
-    "printSymbols": [
-      "a<sub>t</sub>"
-    ],
-    "properties": [
-      "time"
-    ],
-    "values": [
-      {
-        "printable": "365.24219",
-        "numeric": 365.24219
-      }
-    ]
-  },
-  "a_j": {
-    "isBase": false,
-    "CODE": "ANN_J",
-    "isMetric": "no",
-    "class": "iso1000",
-    "names": [
-      "mean Julian year"
-    ],
-    "printSymbols": [
-      "a<sub>j</sub>"
-    ],
-    "properties": [
-      "time"
-    ],
-    "values": [
-      {
-        "printable": "365.25",
-        "numeric": 365.25
-      }
-    ]
-  },
-  "a_g": {
-    "isBase": false,
-    "CODE": "ANN_G",
-    "isMetric": "no",
-    "class": "iso1000",
-    "names": [
-      "mean Gregorian year"
-    ],
-    "printSymbols": [
-      "a<sub>g</sub>"
-    ],
-    "properties": [
-      "time"
-    ],
-    "values": [
-      {
-        "printable": "365.2425",
-        "numeric": 365.2425
-      }
-    ]
-  },
-  "a": {
-    "isBase": false,
-    "CODE": "ANN",
-    "isMetric": "no",
-    "class": "iso1000",
-    "names": [
-      "year"
-    ],
-    "printSymbols": [
-      "a"
-    ],
-    "properties": [
-      "time"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "wk": {
-    "isBase": false,
-    "CODE": "WK",
-    "isMetric": "no",
-    "class": "iso1000",
-    "names": [
-      "week"
-    ],
-    "printSymbols": [
-      "wk"
-    ],
-    "properties": [
-      "time"
-    ],
-    "values": [
-      {
-        "printable": "7",
-        "numeric": 7
-      }
-    ]
-  },
-  "mo_s": {
-    "isBase": false,
-    "CODE": "MO_S",
-    "isMetric": "no",
-    "class": "iso1000",
-    "names": [
-      "synodal month"
-    ],
-    "printSymbols": [
-      "mo<sub>s</sub>"
-    ],
-    "properties": [
-      "time"
-    ],
-    "values": [
-      {
-        "printable": "29.53059",
-        "numeric": 29.53059
-      }
-    ]
-  },
-  "mo_j": {
-    "isBase": false,
-    "CODE": "MO_J",
-    "isMetric": "no",
-    "class": "iso1000",
-    "names": [
-      "mean Julian month"
-    ],
-    "printSymbols": [
-      "mo<sub>j</sub>"
-    ],
-    "properties": [
-      "time"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "mo_g": {
-    "isBase": false,
-    "CODE": "MO_G",
-    "isMetric": "no",
-    "class": "iso1000",
-    "names": [
-      "mean Gregorian month"
-    ],
-    "printSymbols": [
-      "mo<sub>g</sub>"
-    ],
-    "properties": [
-      "time"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "mo": {
-    "isBase": false,
-    "CODE": "MO",
-    "isMetric": "no",
-    "class": "iso1000",
-    "names": [
-      "month"
-    ],
-    "printSymbols": [
-      "mo"
-    ],
-    "properties": [
-      "time"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "t": {
-    "isBase": false,
-    "CODE": "TNE",
-    "isMetric": "yes",
-    "class": "iso1000",
-    "names": [
-      "tonne"
-    ],
-    "printSymbols": [
-      "t"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>3</sup>",
-        "numeric": 1000
-      }
-    ]
-  },
-  "bar": {
-    "isBase": false,
-    "CODE": "BAR",
-    "isMetric": "yes",
-    "class": "iso1000",
-    "names": [
-      "bar"
-    ],
-    "printSymbols": [
-      "bar"
-    ],
-    "properties": [
-      "pressure"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>5</sup>",
-        "numeric": 100000
-      }
-    ]
-  },
-  "u": {
-    "isBase": false,
-    "CODE": "AMU",
-    "isMetric": "yes",
-    "class": "iso1000",
-    "names": [
-      "unified atomic mass unit"
-    ],
-    "printSymbols": [
-      "u"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "1.6605402 &#215; 10<sup>-24</sup>",
-        "numeric": 1.6605402e-24
-      }
-    ]
-  },
-  "eV": {
-    "isBase": false,
-    "CODE": "EV",
-    "isMetric": "yes",
-    "class": "iso1000",
-    "names": [
-      "electronvolt"
-    ],
-    "printSymbols": [
-      "eV"
-    ],
-    "properties": [
-      "energy"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "AU": {
-    "isBase": false,
-    "CODE": "ASU",
-    "isMetric": "no",
-    "class": "iso1000",
-    "names": [
-      "astronomic unit"
-    ],
-    "printSymbols": [
-      "AU"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "149597.870691",
-        "numeric": 149597.870691
-      }
-    ]
-  },
-  "pc": {
-    "isBase": false,
-    "CODE": "PRS",
-    "isMetric": "yes",
-    "class": "iso1000",
-    "names": [
-      "parsec"
-    ],
-    "printSymbols": [
-      "pc"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "3.085678 &#215; 10<sup>16</sup>",
-        "numeric": 30856780000000000
-      }
-    ]
-  },
-  "[c]": {
-    "isBase": false,
-    "CODE": "[C]",
-    "isMetric": "yes",
-    "class": "const",
-    "names": [
-      "velocity of light"
-    ],
-    "printSymbols": [
-      "<i>c</i>"
-    ],
-    "properties": [
-      "velocity"
-    ],
-    "values": [
-      {
-        "printable": "299792458",
-        "numeric": 299792458
-      }
-    ]
-  },
-  "[h]": {
-    "isBase": false,
-    "CODE": "[H]",
-    "isMetric": "yes",
-    "class": "const",
-    "names": [
-      "Planck constant"
-    ],
-    "printSymbols": [
-      "<i>h</i>"
-    ],
-    "properties": [
-      "action"
-    ],
-    "values": [
-      {
-        "printable": "6.6260755 &#215; 10<sup>-24</sup>",
-        "numeric": 6.6260755e-24
-      }
-    ]
-  },
-  "[k]": {
-    "isBase": false,
-    "CODE": "[K]",
-    "isMetric": "yes",
-    "class": "const",
-    "names": [
-      "Boltzmann constant"
-    ],
-    "printSymbols": [
-      "<i>k</i>"
-    ],
-    "properties": [
-      "(unclassified)"
-    ],
-    "values": [
-      {
-        "printable": "1.380658 &#215; 10<sup>-23</sup>",
-        "numeric": 1.380658e-23
-      }
-    ]
-  },
-  "[eps_0]": {
-    "isBase": false,
-    "CODE": "[EPS_0]",
-    "isMetric": "yes",
-    "class": "const",
-    "names": [
-      "permittivity of vacuum"
-    ],
-    "printSymbols": [
-      "<i>&#949;<sub>\n               <r>0</r>\n            </sub>\n         </i>"
-    ],
-    "properties": [
-      "electric permittivity"
-    ],
-    "values": [
-      {
-        "printable": "8.854187817 &#215; 10<sup>-12</sup>",
-        "numeric": 8.854187817e-12
-      }
-    ]
-  },
-  "[mu_0]": {
-    "isBase": false,
-    "CODE": "[MU_0]",
-    "isMetric": "yes",
-    "class": "const",
-    "names": [
-      "permeability of vacuum"
-    ],
-    "printSymbols": [
-      "<i>&#956;<sub>\n               <r>0</r>\n            </sub>\n         </i>"
-    ],
-    "properties": [
-      "magnetic permeability"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[e]": {
-    "isBase": false,
-    "CODE": "[E]",
-    "isMetric": "yes",
-    "class": "const",
-    "names": [
-      "elementary charge"
-    ],
-    "printSymbols": [
-      "<i>e</i>"
-    ],
-    "properties": [
-      "electric charge"
-    ],
-    "values": [
-      {
-        "printable": "1.60217733 &#215; 10<sup>-19</sup>",
-        "numeric": 1.60217733e-19
-      }
-    ]
-  },
-  "[m_e]": {
-    "isBase": false,
-    "CODE": "[M_E]",
-    "isMetric": "yes",
-    "class": "const",
-    "names": [
-      "electron mass"
-    ],
-    "printSymbols": [
-      "<i>m<sub>\n               <r>e</r>\n            </sub>\n         </i>"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "9.1093897 &#215; 10<sup>-28</sup>",
-        "numeric": 9.1093897e-28
-      }
-    ]
-  },
-  "[m_p]": {
-    "isBase": false,
-    "CODE": "[M_P]",
-    "isMetric": "yes",
-    "class": "const",
-    "names": [
-      "proton mass"
-    ],
-    "printSymbols": [
-      "<i>m<sub>\n               <r>p</r>\n            </sub>\n         </i>"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "1.6726231 &#215; 10<sup>-24</sup>",
-        "numeric": 1.6726231e-24
-      }
-    ]
-  },
-  "[G]": {
-    "isBase": false,
-    "CODE": "[GC]",
-    "isMetric": "yes",
-    "class": "const",
-    "names": [
-      "Newtonian constant of gravitation"
-    ],
-    "printSymbols": [
-      "<i>G</i>"
-    ],
-    "properties": [
-      "(unclassified)"
-    ],
-    "values": [
-      {
-        "printable": "6.67259 &#215; 10<sup>-11</sup>",
-        "numeric": 6.67259e-11
-      }
-    ]
-  },
-  "[g]": {
-    "isBase": false,
-    "CODE": "[G]",
-    "isMetric": "yes",
-    "class": "const",
-    "names": [
-      "standard acceleration of free fall"
-    ],
-    "printSymbols": [
-      "<i>g<sub>n</sub>\n         </i>"
-    ],
-    "properties": [
-      "acceleration"
-    ],
-    "values": [
-      {
-        "printable": "9.80665",
-        "numeric": 9.80665
-      }
-    ]
-  },
-  "atm": {
-    "isBase": false,
-    "CODE": "ATM",
-    "isMetric": "no",
-    "class": "const",
-    "names": [
-      "standard atmosphere"
-    ],
-    "printSymbols": [
-      "atm"
-    ],
-    "properties": [
-      "pressure"
-    ],
-    "values": [
-      {
-        "printable": "101325",
-        "numeric": 101325
-      }
-    ]
-  },
-  "[ly]": {
-    "isBase": false,
-    "CODE": "[LY]",
-    "isMetric": "yes",
-    "class": "const",
-    "names": [
-      "light-year"
-    ],
-    "printSymbols": [
-      "l.y."
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "gf": {
-    "isBase": false,
-    "CODE": "GF",
-    "isMetric": "yes",
-    "class": "const",
-    "names": [
-      "gram-force"
-    ],
-    "printSymbols": [
-      "gf"
-    ],
-    "properties": [
-      "force"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[lbf_av]": {
-    "isBase": false,
-    "CODE": "[LBF_AV]",
-    "isMetric": "no",
-    "class": "const",
-    "names": [
-      "pound force"
-    ],
-    "printSymbols": [
-      "lbf"
-    ],
-    "properties": [
-      "force"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "Ky": {
-    "isBase": false,
-    "CODE": "KY",
-    "isMetric": "yes",
-    "class": "cgs",
-    "names": [
-      "Kayser"
-    ],
-    "printSymbols": [
-      "K"
-    ],
-    "properties": [
-      "lineic number"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "Gal": {
-    "isBase": false,
-    "CODE": "GL",
-    "isMetric": "yes",
-    "class": "cgs",
-    "names": [
-      "Gal"
-    ],
-    "printSymbols": [
-      "Gal"
-    ],
-    "properties": [
-      "acceleration"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "dyn": {
-    "isBase": false,
-    "CODE": "DYN",
-    "isMetric": "yes",
-    "class": "cgs",
-    "names": [
-      "dyne"
-    ],
-    "printSymbols": [
-      "dyn"
-    ],
-    "properties": [
-      "force"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "erg": {
-    "isBase": false,
-    "CODE": "ERG",
-    "isMetric": "yes",
-    "class": "cgs",
-    "names": [
-      "erg"
-    ],
-    "printSymbols": [
-      "erg"
-    ],
-    "properties": [
-      "energy"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "P": {
-    "isBase": false,
-    "CODE": "P",
-    "isMetric": "yes",
-    "class": "cgs",
-    "names": [
-      "Poise"
-    ],
-    "printSymbols": [
-      "P"
-    ],
-    "properties": [
-      "dynamic viscosity"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "Bi": {
-    "isBase": false,
-    "CODE": "BI",
-    "isMetric": "yes",
-    "class": "cgs",
-    "names": [
-      "Biot"
-    ],
-    "printSymbols": [
-      "Bi"
-    ],
-    "properties": [
-      "electric current"
-    ],
-    "values": [
-      {
-        "printable": "10",
-        "numeric": 10
-      }
-    ]
-  },
-  "St": {
-    "isBase": false,
-    "CODE": "ST",
-    "isMetric": "yes",
-    "class": "cgs",
-    "names": [
-      "Stokes"
-    ],
-    "printSymbols": [
-      "St"
-    ],
-    "properties": [
-      "kinematic viscosity"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "Mx": {
-    "isBase": false,
-    "CODE": "MX",
-    "isMetric": "yes",
-    "class": "cgs",
-    "names": [
-      "Maxwell"
-    ],
-    "printSymbols": [
-      "Mx"
-    ],
-    "properties": [
-      "flux of magnetic induction"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>-8</sup>",
-        "numeric": 1e-8
-      }
-    ]
-  },
-  "G": {
-    "isBase": false,
-    "CODE": "GS",
-    "isMetric": "yes",
-    "class": "cgs",
-    "names": [
-      "Gauss"
-    ],
-    "printSymbols": [
-      "Gs"
-    ],
-    "properties": [
-      "magnetic flux density"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>-4</sup>",
-        "numeric": 0.0001
-      }
-    ]
-  },
-  "Oe": {
-    "isBase": false,
-    "CODE": "OE",
-    "isMetric": "yes",
-    "class": "cgs",
-    "names": [
-      "Oersted"
-    ],
-    "printSymbols": [
-      "Oe"
-    ],
-    "properties": [
-      "magnetic field intensity"
-    ],
-    "values": [
-      {
-        "printable": "250",
-        "numeric": 250
-      }
-    ]
-  },
-  "Gb": {
-    "isBase": false,
-    "CODE": "GB",
-    "isMetric": "yes",
-    "class": "cgs",
-    "names": [
-      "Gilbert"
-    ],
-    "printSymbols": [
-      "Gb"
-    ],
-    "properties": [
-      "magnetic tension"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "sb": {
-    "isBase": false,
-    "CODE": "SB",
-    "isMetric": "yes",
-    "class": "cgs",
-    "names": [
-      "stilb"
-    ],
-    "printSymbols": [
-      "sb"
-    ],
-    "properties": [
-      "lum. intensity density"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "Lmb": {
-    "isBase": false,
-    "CODE": "LMB",
-    "isMetric": "yes",
-    "class": "cgs",
-    "names": [
-      "Lambert"
-    ],
-    "printSymbols": [
-      "L"
-    ],
-    "properties": [
-      "brightness"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "ph": {
-    "isBase": false,
-    "CODE": "PHT",
-    "isMetric": "yes",
-    "class": "cgs",
-    "names": [
-      "phot"
-    ],
-    "printSymbols": [
-      "ph"
-    ],
-    "properties": [
-      "illuminance"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>-4</sup>",
-        "numeric": 0.0001
-      }
-    ]
-  },
-  "Ci": {
-    "isBase": false,
-    "CODE": "CI",
-    "isMetric": "yes",
-    "class": "cgs",
-    "names": [
-      "Curie"
-    ],
-    "printSymbols": [
-      "Ci"
-    ],
-    "properties": [
-      "radioactivity"
-    ],
-    "values": [
-      {
-        "printable": "3.7 &#215; 10<sup>10</sup>",
-        "numeric": 37000000000
-      }
-    ]
-  },
-  "R": {
-    "isBase": false,
-    "CODE": "ROE",
-    "isMetric": "yes",
-    "class": "cgs",
-    "names": [
-      "Roentgen"
-    ],
-    "printSymbols": [
-      "R"
-    ],
-    "properties": [
-      "ion dose"
-    ],
-    "values": [
-      {
-        "printable": "2.58 &#215; 10<sup>-4</sup>",
-        "numeric": 0.000258
-      }
-    ]
-  },
-  "RAD": {
-    "isBase": false,
-    "CODE": "[RAD]",
-    "isMetric": "yes",
-    "class": "cgs",
-    "names": [
-      "radiation absorbed dose"
-    ],
-    "printSymbols": [
-      "RAD"
-    ],
-    "properties": [
-      "energy dose"
-    ],
-    "values": [
-      {
-        "printable": "100",
-        "numeric": 100
-      }
-    ]
-  },
-  "REM": {
-    "isBase": false,
-    "CODE": "[REM]",
-    "isMetric": "yes",
-    "class": "cgs",
-    "names": [
-      "radiation equivalent man"
-    ],
-    "printSymbols": [
-      "REM"
-    ],
-    "properties": [
-      "dose equivalent"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[in_i]": {
-    "isBase": false,
-    "CODE": "[IN_I]",
-    "isMetric": "no",
-    "class": "intcust",
-    "names": [
-      "inch"
-    ],
-    "printSymbols": [
-      "in"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "2.54",
-        "numeric": 2.54
-      }
-    ]
-  },
-  "[ft_i]": {
-    "isBase": false,
-    "CODE": "[FT_I]",
-    "isMetric": "no",
-    "class": "intcust",
-    "names": [
-      "foot"
-    ],
-    "printSymbols": [
-      "ft"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "12",
-        "numeric": 12
-      }
-    ]
-  },
-  "[yd_i]": {
-    "isBase": false,
-    "CODE": "[YD_I]",
-    "isMetric": "no",
-    "class": "intcust",
-    "names": [
-      "yard"
-    ],
-    "printSymbols": [
-      "yd"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "3",
-        "numeric": 3
-      }
-    ]
-  },
-  "[mi_i]": {
-    "isBase": false,
-    "CODE": "[MI_I]",
-    "isMetric": "no",
-    "class": "intcust",
-    "names": [
-      "statute mile"
-    ],
-    "printSymbols": [
-      "mi"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "5280",
-        "numeric": 5280
-      }
-    ]
-  },
-  "[fth_i]": {
-    "isBase": false,
-    "CODE": "[FTH_I]",
-    "isMetric": "no",
-    "class": "intcust",
-    "names": [
-      "fathom"
-    ],
-    "printSymbols": [
-      "fth"
-    ],
-    "properties": [
-      "depth of water"
-    ],
-    "values": [
-      {
-        "printable": "6",
-        "numeric": 6
-      }
-    ]
-  },
-  "[nmi_i]": {
-    "isBase": false,
-    "CODE": "[NMI_I]",
-    "isMetric": "no",
-    "class": "intcust",
-    "names": [
-      "nautical mile"
-    ],
-    "printSymbols": [
-      "n.mi"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "1852",
-        "numeric": 1852
-      }
-    ]
-  },
-  "[kn_i]": {
-    "isBase": false,
-    "CODE": "[KN_I]",
-    "isMetric": "no",
-    "class": "intcust",
-    "names": [
-      "knot"
-    ],
-    "printSymbols": [
-      "knot"
-    ],
-    "properties": [
-      "velocity"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[sin_i]": {
-    "isBase": false,
-    "CODE": "[SIN_I]",
-    "isMetric": "no",
-    "class": "intcust",
-    "names": [
-      "square inch"
-    ],
-    "properties": [
-      "area"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[sft_i]": {
-    "isBase": false,
-    "CODE": "[SFT_I]",
-    "isMetric": "no",
-    "class": "intcust",
-    "names": [
-      "square foot"
-    ],
-    "properties": [
-      "area"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[syd_i]": {
-    "isBase": false,
-    "CODE": "[SYD_I]",
-    "isMetric": "no",
-    "class": "intcust",
-    "names": [
-      "square yard"
-    ],
-    "properties": [
-      "area"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[cin_i]": {
-    "isBase": false,
-    "CODE": "[CIN_I]",
-    "isMetric": "no",
-    "class": "intcust",
-    "names": [
-      "cubic inch"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[cft_i]": {
-    "isBase": false,
-    "CODE": "[CFT_I]",
-    "isMetric": "no",
-    "class": "intcust",
-    "names": [
-      "cubic foot"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[cyd_i]": {
-    "isBase": false,
-    "CODE": "[CYD_I]",
-    "isMetric": "no",
-    "class": "intcust",
-    "names": [
-      "cubic yard"
-    ],
-    "printSymbols": [
-      "cu.yd"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[bf_i]": {
-    "isBase": false,
-    "CODE": "[BF_I]",
-    "isMetric": "no",
-    "class": "intcust",
-    "names": [
-      "board foot"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "144",
-        "numeric": 144
-      }
-    ]
-  },
-  "[cr_i]": {
-    "isBase": false,
-    "CODE": "[CR_I]",
-    "isMetric": "no",
-    "class": "intcust",
-    "names": [
-      "cord"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "128",
-        "numeric": 128
-      }
-    ]
-  },
-  "[mil_i]": {
-    "isBase": false,
-    "CODE": "[MIL_I]",
-    "isMetric": "no",
-    "class": "intcust",
-    "names": [
-      "mil"
-    ],
-    "printSymbols": [
-      "mil"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>-3</sup>",
-        "numeric": 0.001
-      }
-    ]
-  },
-  "[cml_i]": {
-    "isBase": false,
-    "CODE": "[CML_I]",
-    "isMetric": "no",
-    "class": "intcust",
-    "names": [
-      "circular mil"
-    ],
-    "printSymbols": [
-      "circ.mil"
-    ],
-    "properties": [
-      "area"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[hd_i]": {
-    "isBase": false,
-    "CODE": "[HD_I]",
-    "isMetric": "no",
-    "class": "intcust",
-    "names": [
-      "hand"
-    ],
-    "printSymbols": [
-      "hd"
-    ],
-    "properties": [
-      "height of horses"
-    ],
-    "values": [
-      {
-        "printable": "4",
-        "numeric": 4
-      }
-    ]
-  },
-  "[ft_us]": {
-    "isBase": false,
-    "CODE": "[FT_US]",
-    "isMetric": "no",
-    "class": "us-lengths",
-    "names": [
-      "foot"
-    ],
-    "printSymbols": [
-      "ft<sub>us</sub>"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "1200",
-        "numeric": 1200
-      }
-    ]
-  },
-  "[yd_us]": {
-    "isBase": false,
-    "CODE": "[YD_US]",
-    "isMetric": "no",
-    "class": "us-lengths",
-    "names": [
-      "yard"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "3",
-        "numeric": 3
-      }
-    ]
-  },
-  "[in_us]": {
-    "isBase": false,
-    "CODE": "[IN_US]",
-    "isMetric": "no",
-    "class": "us-lengths",
-    "names": [
-      "inch"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[rd_us]": {
-    "isBase": false,
-    "CODE": "[RD_US]",
-    "isMetric": "no",
-    "class": "us-lengths",
-    "names": [
-      "rod"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "16.5",
-        "numeric": 16.5
-      }
-    ]
-  },
-  "[ch_us]": {
-    "isBase": false,
-    "CODE": "[CH_US]",
-    "isMetric": "no",
-    "class": "us-lengths",
-    "names": [
-      "Gunter's chain",
-      "Surveyor's chain"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "4",
-        "numeric": 4
-      }
-    ]
-  },
-  "[lk_us]": {
-    "isBase": false,
-    "CODE": "[LK_US]",
-    "isMetric": "no",
-    "class": "us-lengths",
-    "names": [
-      "link for Gunter's chain"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[rch_us]": {
-    "isBase": false,
-    "CODE": "[RCH_US]",
-    "isMetric": "no",
-    "class": "us-lengths",
-    "names": [
-      "Ramden's chain",
-      "Engineer's chain"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "100",
-        "numeric": 100
-      }
-    ]
-  },
-  "[rlk_us]": {
-    "isBase": false,
-    "CODE": "[RLK_US]",
-    "isMetric": "no",
-    "class": "us-lengths",
-    "names": [
-      "link for Ramden's chain"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[fth_us]": {
-    "isBase": false,
-    "CODE": "[FTH_US]",
-    "isMetric": "no",
-    "class": "us-lengths",
-    "names": [
-      "fathom"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "6",
-        "numeric": 6
-      }
-    ]
-  },
-  "[fur_us]": {
-    "isBase": false,
-    "CODE": "[FUR_US]",
-    "isMetric": "no",
-    "class": "us-lengths",
-    "names": [
-      "furlong"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "40",
-        "numeric": 40
-      }
-    ]
-  },
-  "[mi_us]": {
-    "isBase": false,
-    "CODE": "[MI_US]",
-    "isMetric": "no",
-    "class": "us-lengths",
-    "names": [
-      "mile"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "8",
-        "numeric": 8
-      }
-    ]
-  },
-  "[acr_us]": {
-    "isBase": false,
-    "CODE": "[ACR_US]",
-    "isMetric": "no",
-    "class": "us-lengths",
-    "names": [
-      "acre"
-    ],
-    "properties": [
-      "area"
-    ],
-    "values": [
-      {
-        "printable": "160",
-        "numeric": 160
-      }
-    ]
-  },
-  "[srd_us]": {
-    "isBase": false,
-    "CODE": "[SRD_US]",
-    "isMetric": "no",
-    "class": "us-lengths",
-    "names": [
-      "square rod"
-    ],
-    "properties": [
-      "area"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[smi_us]": {
-    "isBase": false,
-    "CODE": "[SMI_US]",
-    "isMetric": "no",
-    "class": "us-lengths",
-    "names": [
-      "square mile"
-    ],
-    "properties": [
-      "area"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[sct]": {
-    "isBase": false,
-    "CODE": "[SCT]",
-    "isMetric": "no",
-    "class": "us-lengths",
-    "names": [
-      "section"
-    ],
-    "properties": [
-      "area"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[twp]": {
-    "isBase": false,
-    "CODE": "[TWP]",
-    "isMetric": "no",
-    "class": "us-lengths",
-    "names": [
-      "township"
-    ],
-    "properties": [
-      "area"
-    ],
-    "values": [
-      {
-        "printable": "36",
-        "numeric": 36
-      }
-    ]
-  },
-  "[mil_us]": {
-    "isBase": false,
-    "CODE": "[MIL_US]",
-    "isMetric": "no",
-    "class": "us-lengths",
-    "names": [
-      "mil"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "1 &#215; 10<sup>-3</sup>",
-        "numeric": 0.001
-      }
-    ]
-  },
-  "[in_br]": {
-    "isBase": false,
-    "CODE": "[IN_BR]",
-    "isMetric": "no",
-    "class": "brit-length",
-    "names": [
-      "inch"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "2.539998",
-        "numeric": 2.539998
-      }
-    ]
-  },
-  "[ft_br]": {
-    "isBase": false,
-    "CODE": "[FT_BR]",
-    "isMetric": "no",
-    "class": "brit-length",
-    "names": [
-      "foot"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "12",
-        "numeric": 12
-      }
-    ]
-  },
-  "[rd_br]": {
-    "isBase": false,
-    "CODE": "[RD_BR]",
-    "isMetric": "no",
-    "class": "brit-length",
-    "names": [
-      "rod"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "16.5",
-        "numeric": 16.5
-      }
-    ]
-  },
-  "[ch_br]": {
-    "isBase": false,
-    "CODE": "[CH_BR]",
-    "isMetric": "no",
-    "class": "brit-length",
-    "names": [
-      "Gunter's chain"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "4",
-        "numeric": 4
-      }
-    ]
-  },
-  "[lk_br]": {
-    "isBase": false,
-    "CODE": "[LK_BR]",
-    "isMetric": "no",
-    "class": "brit-length",
-    "names": [
-      "link for Gunter's chain"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[fth_br]": {
-    "isBase": false,
-    "CODE": "[FTH_BR]",
-    "isMetric": "no",
-    "class": "brit-length",
-    "names": [
-      "fathom"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "6",
-        "numeric": 6
-      }
-    ]
-  },
-  "[pc_br]": {
-    "isBase": false,
-    "CODE": "[PC_BR]",
-    "isMetric": "no",
-    "class": "brit-length",
-    "names": [
-      "pace"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "2.5",
-        "numeric": 2.5
-      }
-    ]
-  },
-  "[yd_br]": {
-    "isBase": false,
-    "CODE": "[YD_BR]",
-    "isMetric": "no",
-    "class": "brit-length",
-    "names": [
-      "yard"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "3",
-        "numeric": 3
-      }
-    ]
-  },
-  "[mi_br]": {
-    "isBase": false,
-    "CODE": "[MI_BR]",
-    "isMetric": "no",
-    "class": "brit-length",
-    "names": [
-      "mile"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "5280",
-        "numeric": 5280
-      }
-    ]
-  },
-  "[nmi_br]": {
-    "isBase": false,
-    "CODE": "[NMI_BR]",
-    "isMetric": "no",
-    "class": "brit-length",
-    "names": [
-      "nautical mile"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "6080",
-        "numeric": 6080
-      }
-    ]
-  },
-  "[kn_br]": {
-    "isBase": false,
-    "CODE": "[KN_BR]",
-    "isMetric": "no",
-    "class": "brit-length",
-    "names": [
-      "knot"
-    ],
-    "properties": [
-      "velocity"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[acr_br]": {
-    "isBase": false,
-    "CODE": "[ACR_BR]",
-    "isMetric": "no",
-    "class": "brit-length",
-    "names": [
-      "acre"
-    ],
-    "properties": [
-      "area"
-    ],
-    "values": [
-      {
-        "printable": "4840",
-        "numeric": 4840
-      }
-    ]
-  },
-  "[gal_us]": {
-    "isBase": false,
-    "CODE": "[GAL_US]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "Queen Anne's wine gallon"
-    ],
-    "properties": [
-      "fluid volume"
-    ],
-    "values": [
-      {
-        "printable": "231",
-        "numeric": 231
-      }
-    ]
-  },
-  "[bbl_us]": {
-    "isBase": false,
-    "CODE": "[BBL_US]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "barrel"
-    ],
-    "properties": [
-      "fluid volume"
-    ],
-    "values": [
-      {
-        "printable": "42",
-        "numeric": 42
-      }
-    ]
-  },
-  "[qt_us]": {
-    "isBase": false,
-    "CODE": "[QT_US]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "quart"
-    ],
-    "properties": [
-      "fluid volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[pt_us]": {
-    "isBase": false,
-    "CODE": "[PT_US]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "pint"
-    ],
-    "properties": [
-      "fluid volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[gil_us]": {
-    "isBase": false,
-    "CODE": "[GIL_US]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "gill"
-    ],
-    "properties": [
-      "fluid volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[foz_us]": {
-    "isBase": false,
-    "CODE": "[FOZ_US]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "fluid ounce"
-    ],
-    "printSymbols": [
-      "oz fl"
-    ],
-    "properties": [
-      "fluid volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[fdr_us]": {
-    "isBase": false,
-    "CODE": "[FDR_US]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "fluid dram"
-    ],
-    "properties": [
-      "fluid volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[min_us]": {
-    "isBase": false,
-    "CODE": "[MIN_US]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "minim"
-    ],
-    "properties": [
-      "fluid volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[crd_us]": {
-    "isBase": false,
-    "CODE": "[CRD_US]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "cord"
-    ],
-    "properties": [
-      "fluid volume"
-    ],
-    "values": [
-      {
-        "printable": "128",
-        "numeric": 128
-      }
-    ]
-  },
-  "[bu_us]": {
-    "isBase": false,
-    "CODE": "[BU_US]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "bushel"
-    ],
-    "properties": [
-      "dry volume"
-    ],
-    "values": [
-      {
-        "printable": "2150.42",
-        "numeric": 2150.42
-      }
-    ]
-  },
-  "[gal_wi]": {
-    "isBase": false,
-    "CODE": "[GAL_WI]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "historical winchester gallon"
-    ],
-    "properties": [
-      "dry volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[pk_us]": {
-    "isBase": false,
-    "CODE": "[PK_US]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "peck"
-    ],
-    "properties": [
-      "dry volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[dqt_us]": {
-    "isBase": false,
-    "CODE": "[DQT_US]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "dry quart"
-    ],
-    "properties": [
-      "dry volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[dpt_us]": {
-    "isBase": false,
-    "CODE": "[DPT_US]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "dry pint"
-    ],
-    "properties": [
-      "dry volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[tbs_us]": {
-    "isBase": false,
-    "CODE": "[TBS_US]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "tablespoon"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[tsp_us]": {
-    "isBase": false,
-    "CODE": "[TSP_US]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "teaspoon"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[cup_us]": {
-    "isBase": false,
-    "CODE": "[CUP_US]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "cup"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "16",
-        "numeric": 16
-      }
-    ]
-  },
-  "[foz_m]": {
-    "isBase": false,
-    "CODE": "[FOZ_M]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "metric fluid ounce"
-    ],
-    "printSymbols": [
-      "oz fl"
-    ],
-    "properties": [
-      "fluid volume"
-    ],
-    "values": [
-      {
-        "printable": "30",
-        "numeric": 30
-      }
-    ]
-  },
-  "[cup_m]": {
-    "isBase": false,
-    "CODE": "[CUP_M]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "metric cup"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "240",
-        "numeric": 240
-      }
-    ]
-  },
-  "[tsp_m]": {
-    "isBase": false,
-    "CODE": "[TSP_M]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "metric teaspoon"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "5",
-        "numeric": 5
-      }
-    ]
-  },
-  "[tbs_m]": {
-    "isBase": false,
-    "CODE": "[TBS_M]",
-    "isMetric": "no",
-    "class": "us-volumes",
-    "names": [
-      "metric tablespoon"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "15",
-        "numeric": 15
-      }
-    ]
-  },
-  "[gal_br]": {
-    "isBase": false,
-    "CODE": "[GAL_BR]",
-    "isMetric": "no",
-    "class": "brit-volumes",
-    "names": [
-      "gallon"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "4.54609",
-        "numeric": 4.54609
-      }
-    ]
-  },
-  "[pk_br]": {
-    "isBase": false,
-    "CODE": "[PK_BR]",
-    "isMetric": "no",
-    "class": "brit-volumes",
-    "names": [
-      "peck"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "2",
-        "numeric": 2
-      }
-    ]
-  },
-  "[bu_br]": {
-    "isBase": false,
-    "CODE": "[BU_BR]",
-    "isMetric": "no",
-    "class": "brit-volumes",
-    "names": [
-      "bushel"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "4",
-        "numeric": 4
-      }
-    ]
-  },
-  "[qt_br]": {
-    "isBase": false,
-    "CODE": "[QT_BR]",
-    "isMetric": "no",
-    "class": "brit-volumes",
-    "names": [
-      "quart"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[pt_br]": {
-    "isBase": false,
-    "CODE": "[PT_BR]",
-    "isMetric": "no",
-    "class": "brit-volumes",
-    "names": [
-      "pint"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[gil_br]": {
-    "isBase": false,
-    "CODE": "[GIL_BR]",
-    "isMetric": "no",
-    "class": "brit-volumes",
-    "names": [
-      "gill"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[foz_br]": {
-    "isBase": false,
-    "CODE": "[FOZ_BR]",
-    "isMetric": "no",
-    "class": "brit-volumes",
-    "names": [
-      "fluid ounce"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[fdr_br]": {
-    "isBase": false,
-    "CODE": "[FDR_BR]",
-    "isMetric": "no",
-    "class": "brit-volumes",
-    "names": [
-      "fluid dram"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[min_br]": {
-    "isBase": false,
-    "CODE": "[MIN_BR]",
-    "isMetric": "no",
-    "class": "brit-volumes",
-    "names": [
-      "minim"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[gr]": {
-    "isBase": false,
-    "CODE": "[GR]",
-    "isMetric": "no",
-    "class": "avoirdupois",
-    "names": [
-      "grain"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "64.79891",
-        "numeric": 64.79891
-      }
-    ]
-  },
-  "[lb_av]": {
-    "isBase": false,
-    "CODE": "[LB_AV]",
-    "isMetric": "no",
-    "class": "avoirdupois",
-    "names": [
-      "pound"
-    ],
-    "printSymbols": [
-      "lb"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "7000",
-        "numeric": 7000
-      }
-    ]
-  },
-  "[oz_av]": {
-    "isBase": false,
-    "CODE": "[OZ_AV]",
-    "isMetric": "no",
-    "class": "avoirdupois",
-    "names": [
-      "ounce"
-    ],
-    "printSymbols": [
-      "oz"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[dr_av]": {
-    "isBase": false,
-    "CODE": "[DR_AV]",
-    "isMetric": "no",
-    "class": "avoirdupois",
-    "names": [
-      "dram"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[scwt_av]": {
-    "isBase": false,
-    "CODE": "[SCWT_AV]",
-    "isMetric": "no",
-    "class": "avoirdupois",
-    "names": [
-      "short hundredweight",
-      "U.S. hundredweight"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "100",
-        "numeric": 100
-      }
-    ]
-  },
-  "[lcwt_av]": {
-    "isBase": false,
-    "CODE": "[LCWT_AV]",
-    "isMetric": "no",
-    "class": "avoirdupois",
-    "names": [
-      "long hundredweight",
-      "British hundredweight"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "112",
-        "numeric": 112
-      }
-    ]
-  },
-  "[ston_av]": {
-    "isBase": false,
-    "CODE": "[STON_AV]",
-    "isMetric": "no",
-    "class": "avoirdupois",
-    "names": [
-      "short ton",
-      "U.S. ton"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "20",
-        "numeric": 20
-      }
-    ]
-  },
-  "[lton_av]": {
-    "isBase": false,
-    "CODE": "[LTON_AV]",
-    "isMetric": "no",
-    "class": "avoirdupois",
-    "names": [
-      "long ton",
-      "British ton"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "20",
-        "numeric": 20
-      }
-    ]
-  },
-  "[stone_av]": {
-    "isBase": false,
-    "CODE": "[STONE_AV]",
-    "isMetric": "no",
-    "class": "avoirdupois",
-    "names": [
-      "stone",
-      "British stone"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "14",
-        "numeric": 14
-      }
-    ]
-  },
-  "[pwt_tr]": {
-    "isBase": false,
-    "CODE": "[PWT_TR]",
-    "isMetric": "no",
-    "class": "troy",
-    "names": [
-      "pennyweight"
-    ],
-    "printSymbols": [
-      "dwt"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "24",
-        "numeric": 24
-      }
-    ]
-  },
-  "[oz_tr]": {
-    "isBase": false,
-    "CODE": "[OZ_TR]",
-    "isMetric": "no",
-    "class": "troy",
-    "names": [
-      "troy ounce"
-    ],
-    "printSymbols": [
-      "oz t"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "20",
-        "numeric": 20
-      }
-    ]
-  },
-  "[lb_tr]": {
-    "isBase": false,
-    "CODE": "[LB_TR]",
-    "isMetric": "no",
-    "class": "troy",
-    "names": [
-      "troy pound"
-    ],
-    "printSymbols": [
-      "lb t"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "12",
-        "numeric": 12
-      }
-    ]
-  },
-  "[sc_ap]": {
-    "isBase": false,
-    "CODE": "[SC_AP]",
-    "isMetric": "no",
-    "class": "apoth",
-    "names": [
-      "scruple"
-    ],
-    "printSymbols": [
-      "&#8456;"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "20",
-        "numeric": 20
-      }
-    ]
-  },
-  "[dr_ap]": {
-    "isBase": false,
-    "CODE": "[DR_AP]",
-    "isMetric": "no",
-    "class": "apoth",
-    "names": [
-      "dram",
-      "drachm"
-    ],
-    "printSymbols": [
-      "&#658;"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "3",
-        "numeric": 3
-      }
-    ]
-  },
-  "[oz_ap]": {
-    "isBase": false,
-    "CODE": "[OZ_AP]",
-    "isMetric": "no",
-    "class": "apoth",
-    "names": [
-      "ounce"
-    ],
-    "printSymbols": [
-      "&#8485;"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "8",
-        "numeric": 8
-      }
-    ]
-  },
-  "[lb_ap]": {
-    "isBase": false,
-    "CODE": "[LB_AP]",
-    "isMetric": "no",
-    "class": "apoth",
-    "names": [
-      "pound"
-    ],
-    "printSymbols": [
-      "<strike>lb</strike>"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "12",
-        "numeric": 12
-      }
-    ]
-  },
-  "[oz_m]": {
-    "isBase": false,
-    "CODE": "[OZ_M]",
-    "isMetric": "no",
-    "class": "apoth",
-    "names": [
-      "metric ounce"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "28",
-        "numeric": 28
-      }
-    ]
-  },
-  "[lne]": {
-    "isBase": false,
-    "CODE": "[LNE]",
-    "isMetric": "no",
-    "class": "typeset",
-    "names": [
-      "line"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[pnt]": {
-    "isBase": false,
-    "CODE": "[PNT]",
-    "isMetric": "no",
-    "class": "typeset",
-    "names": [
-      "point"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[pca]": {
-    "isBase": false,
-    "CODE": "[PCA]",
-    "isMetric": "no",
-    "class": "typeset",
-    "names": [
-      "pica"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "12",
-        "numeric": 12
-      }
-    ]
-  },
-  "[pnt_pr]": {
-    "isBase": false,
-    "CODE": "[PNT_PR]",
-    "isMetric": "no",
-    "class": "typeset",
-    "names": [
-      "Printer's point"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "0.013837",
-        "numeric": 0.013837
-      }
-    ]
-  },
-  "[pca_pr]": {
-    "isBase": false,
-    "CODE": "[PCA_PR]",
-    "isMetric": "no",
-    "class": "typeset",
-    "names": [
-      "Printer's pica"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "12",
-        "numeric": 12
-      }
-    ]
-  },
-  "[pied]": {
-    "isBase": false,
-    "CODE": "[PIED]",
-    "isMetric": "no",
-    "class": "typeset",
-    "names": [
-      "pied",
-      "French foot"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "32.48",
-        "numeric": 32.48
-      }
-    ]
-  },
-  "[pouce]": {
-    "isBase": false,
-    "CODE": "[POUCE]",
-    "isMetric": "no",
-    "class": "typeset",
-    "names": [
-      "pouce",
-      "French inch"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[ligne]": {
-    "isBase": false,
-    "CODE": "[LIGNE]",
-    "isMetric": "no",
-    "class": "typeset",
-    "names": [
-      "ligne",
-      "French line"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[didot]": {
-    "isBase": false,
-    "CODE": "[DIDOT]",
-    "isMetric": "no",
-    "class": "typeset",
-    "names": [
-      "didot",
-      "Didot's point"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[cicero]": {
-    "isBase": false,
-    "CODE": "[CICERO]",
-    "isMetric": "no",
-    "class": "typeset",
-    "names": [
-      "cicero",
-      "Didot's pica"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "12",
-        "numeric": 12
-      }
-    ]
-  },
-  "[degF]": {
-    "isBase": false,
-    "CODE": "[DEGF]",
-    "isMetric": "no",
-    "isSpecial": "yes",
-    "class": "heat",
-    "names": [
-      "degree Fahrenheit"
-    ],
-    "printSymbols": [
-      "&#176;F"
-    ],
-    "properties": [
-      "temperature"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"degF\" value=\"5\" Unit=\"K/9\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "[degR]": {
-    "isBase": false,
-    "CODE": "[degR]",
-    "isMetric": "no",
-    "class": "heat",
-    "names": [
-      "degree Rankine"
-    ],
-    "printSymbols": [
-      "&#176;R"
-    ],
-    "properties": [
-      "temperature"
-    ],
-    "values": [
-      {
-        "printable": "5",
-        "numeric": 5
-      }
-    ]
-  },
-  "cal_[15]": {
-    "isBase": false,
-    "CODE": "CAL_[15]",
-    "isMetric": "yes",
-    "class": "heat",
-    "names": [
-      "calorie at 15 °C"
-    ],
-    "printSymbols": [
-      "cal<sub>15&#176;C</sub>"
-    ],
-    "properties": [
-      "energy"
-    ],
-    "values": [
-      {
-        "printable": "4.18580",
-        "numeric": 4.1858
-      }
-    ]
-  },
-  "cal_[20]": {
-    "isBase": false,
-    "CODE": "CAL_[20]",
-    "isMetric": "yes",
-    "class": "heat",
-    "names": [
-      "calorie at 20 °C"
-    ],
-    "printSymbols": [
-      "cal<sub>20&#176;C</sub>"
-    ],
-    "properties": [
-      "energy"
-    ],
-    "values": [
-      {
-        "printable": "4.18190",
-        "numeric": 4.1819
-      }
-    ]
-  },
-  "cal_m": {
-    "isBase": false,
-    "CODE": "CAL_M",
-    "isMetric": "yes",
-    "class": "heat",
-    "names": [
-      "mean calorie"
-    ],
-    "printSymbols": [
-      "cal<sub>m</sub>"
-    ],
-    "properties": [
-      "energy"
-    ],
-    "values": [
-      {
-        "printable": "4.19002",
-        "numeric": 4.19002
-      }
-    ]
-  },
-  "cal_IT": {
-    "isBase": false,
-    "CODE": "CAL_IT",
-    "isMetric": "yes",
-    "class": "heat",
-    "names": [
-      "international table calorie"
-    ],
-    "printSymbols": [
-      "cal<sub>IT</sub>"
-    ],
-    "properties": [
-      "energy"
-    ],
-    "values": [
-      {
-        "printable": "4.1868",
-        "numeric": 4.1868
-      }
-    ]
-  },
-  "cal_th": {
-    "isBase": false,
-    "CODE": "CAL_TH",
-    "isMetric": "yes",
-    "class": "heat",
-    "names": [
-      "thermochemical calorie"
-    ],
-    "printSymbols": [
-      "cal<sub>th</sub>"
-    ],
-    "properties": [
-      "energy"
-    ],
-    "values": [
-      {
-        "printable": "4.184",
-        "numeric": 4.184
-      }
-    ]
-  },
-  "cal": {
-    "isBase": false,
-    "CODE": "CAL",
-    "isMetric": "yes",
-    "class": "heat",
-    "names": [
-      "calorie"
-    ],
-    "printSymbols": [
-      "cal"
-    ],
-    "properties": [
-      "energy"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[Cal]": {
-    "isBase": false,
-    "CODE": "[CAL]",
-    "isMetric": "no",
-    "class": "heat",
-    "names": [
-      "nutrition label Calories"
-    ],
-    "printSymbols": [
-      "Cal"
-    ],
-    "properties": [
-      "energy"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[Btu_39]": {
-    "isBase": false,
-    "CODE": "[BTU_39]",
-    "isMetric": "no",
-    "class": "heat",
-    "names": [
-      "British thermal unit at 39 °F"
-    ],
-    "printSymbols": [
-      "Btu<sub>39&#176;F</sub>"
-    ],
-    "properties": [
-      "energy"
-    ],
-    "values": [
-      {
-        "printable": "1.05967",
-        "numeric": 1.05967
-      }
-    ]
-  },
-  "[Btu_59]": {
-    "isBase": false,
-    "CODE": "[BTU_59]",
-    "isMetric": "no",
-    "class": "heat",
-    "names": [
-      "British thermal unit at 59 °F"
-    ],
-    "printSymbols": [
-      "Btu<sub>59&#176;F</sub>"
-    ],
-    "properties": [
-      "energy"
-    ],
-    "values": [
-      {
-        "printable": "1.05480",
-        "numeric": 1.0548
-      }
-    ]
-  },
-  "[Btu_60]": {
-    "isBase": false,
-    "CODE": "[BTU_60]",
-    "isMetric": "no",
-    "class": "heat",
-    "names": [
-      "British thermal unit at 60 °F"
-    ],
-    "printSymbols": [
-      "Btu<sub>60&#176;F</sub>"
-    ],
-    "properties": [
-      "energy"
-    ],
-    "values": [
-      {
-        "printable": "1.05468",
-        "numeric": 1.05468
-      }
-    ]
-  },
-  "[Btu_m]": {
-    "isBase": false,
-    "CODE": "[BTU_M]",
-    "isMetric": "no",
-    "class": "heat",
-    "names": [
-      "mean British thermal unit"
-    ],
-    "printSymbols": [
-      "Btu<sub>m</sub>"
-    ],
-    "properties": [
-      "energy"
-    ],
-    "values": [
-      {
-        "printable": "1.05587",
-        "numeric": 1.05587
-      }
-    ]
-  },
-  "[Btu_IT]": {
-    "isBase": false,
-    "CODE": "[BTU_IT]",
-    "isMetric": "no",
-    "class": "heat",
-    "names": [
-      "international table British thermal unit"
-    ],
-    "printSymbols": [
-      "Btu<sub>IT</sub>"
-    ],
-    "properties": [
-      "energy"
-    ],
-    "values": [
-      {
-        "printable": "1.05505585262",
-        "numeric": 1.05505585262
-      }
-    ]
-  },
-  "[Btu_th]": {
-    "isBase": false,
-    "CODE": "[BTU_TH]",
-    "isMetric": "no",
-    "class": "heat",
-    "names": [
-      "thermochemical British thermal unit"
-    ],
-    "printSymbols": [
-      "Btu<sub>th</sub>"
-    ],
-    "properties": [
-      "energy"
-    ],
-    "values": [
-      {
-        "printable": "1.054350",
-        "numeric": 1.05435
-      }
-    ]
-  },
-  "[Btu]": {
-    "isBase": false,
-    "CODE": "[BTU]",
-    "isMetric": "no",
-    "class": "heat",
-    "names": [
-      "British thermal unit"
-    ],
-    "printSymbols": [
-      "btu"
-    ],
-    "properties": [
-      "energy"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[HP]": {
-    "isBase": false,
-    "CODE": "[HP]",
-    "isMetric": "no",
-    "class": "heat",
-    "names": [
-      "horsepower"
-    ],
-    "properties": [
-      "power"
-    ],
-    "values": [
-      {
-        "printable": "550",
-        "numeric": 550
-      }
-    ]
-  },
-  "tex": {
-    "isBase": false,
-    "CODE": "TEX",
-    "isMetric": "yes",
-    "class": "heat",
-    "names": [
-      "tex"
-    ],
-    "printSymbols": [
-      "tex"
-    ],
-    "properties": [
-      "linear mass density (of textile thread)"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[den]": {
-    "isBase": false,
-    "CODE": "[DEN]",
-    "isMetric": "no",
-    "class": "heat",
-    "names": [
-      "Denier"
-    ],
-    "printSymbols": [
-      "den"
-    ],
-    "properties": [
-      "linear mass density (of textile thread)"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "m[H2O]": {
-    "isBase": false,
-    "CODE": "M[H2O]",
-    "isMetric": "yes",
-    "class": "clinical",
-    "names": [
-      "meter of water column"
-    ],
-    "printSymbols": [
-      "m&#160;H<sub>\n            <r>2</r>\n         </sub>O"
-    ],
-    "properties": [
-      "pressure"
-    ],
-    "values": [
-      {
-        "printable": "9.80665",
-        "numeric": 9.80665
-      }
-    ]
-  },
-  "m[Hg]": {
-    "isBase": false,
-    "CODE": "M[HG]",
-    "isMetric": "yes",
-    "class": "clinical",
-    "names": [
-      "meter of mercury column"
-    ],
-    "printSymbols": [
-      "m&#160;Hg"
-    ],
-    "properties": [
-      "pressure"
-    ],
-    "values": [
-      {
-        "printable": "133.3220",
-        "numeric": 133.322
-      }
-    ]
-  },
-  "[in_i'H2O]": {
-    "isBase": false,
-    "CODE": "[IN_I'H2O]",
-    "isMetric": "no",
-    "class": "clinical",
-    "names": [
-      "inch of water column"
-    ],
-    "printSymbols": [
-      "in&#160;H<sub>\n            <r>2</r>\n         </sub>O"
-    ],
-    "properties": [
-      "pressure"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[in_i'Hg]": {
-    "isBase": false,
-    "CODE": "[IN_I'HG]",
-    "isMetric": "no",
-    "class": "clinical",
-    "names": [
-      "inch of mercury column"
-    ],
-    "printSymbols": [
-      "in&#160;Hg"
-    ],
-    "properties": [
-      "pressure"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[PRU]": {
-    "isBase": false,
-    "CODE": "[PRU]",
-    "isMetric": "no",
-    "class": "clinical",
-    "names": [
-      "peripheral vascular resistance unit"
-    ],
-    "printSymbols": [
-      "P.R.U."
-    ],
-    "properties": [
-      "fluid resistance"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[wood'U]": {
-    "isBase": false,
-    "CODE": "[WOOD'U]",
-    "isMetric": "no",
-    "class": "clinical",
-    "names": [
-      "Wood unit"
-    ],
-    "printSymbols": [
-      "Wood U."
-    ],
-    "properties": [
-      "fluid resistance"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[diop]": {
-    "isBase": false,
-    "CODE": "[DIOP]",
-    "isMetric": "no",
-    "class": "clinical",
-    "names": [
-      "diopter"
-    ],
-    "printSymbols": [
-      "dpt"
-    ],
-    "properties": [
-      "refraction of a lens"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[p'diop]": {
-    "isBase": false,
-    "CODE": "[P'DIOP]",
-    "isMetric": "no",
-    "isSpecial": "yes",
-    "class": "clinical",
-    "names": [
-      "prism diopter"
-    ],
-    "printSymbols": [
-      "PD"
-    ],
-    "properties": [
-      "refraction of a prism"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"tanTimes100\" value=\"1\" Unit=\"deg\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "%[slope]": {
-    "isBase": false,
-    "CODE": "%[SLOPE]",
-    "isMetric": "no",
-    "isSpecial": "yes",
-    "class": "clinical",
-    "names": [
-      "percent of slope"
-    ],
-    "printSymbols": [
-      "%"
-    ],
-    "properties": [
-      "slope"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"100tan\" value=\"1\" Unit=\"deg\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "[mesh_i]": {
-    "isBase": false,
-    "CODE": "[MESH_I]",
-    "isMetric": "no",
-    "class": "clinical",
-    "names": [
-      "mesh"
-    ],
-    "properties": [
-      "lineic number"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[Ch]": {
-    "isBase": false,
-    "CODE": "[CH]",
-    "isMetric": "no",
-    "class": "clinical",
-    "names": [
-      "Charrière",
-      "french"
-    ],
-    "printSymbols": [
-      "Ch"
-    ],
-    "properties": [
-      "gauge of catheters"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[drp]": {
-    "isBase": false,
-    "CODE": "[DRP]",
-    "isMetric": "no",
-    "class": "clinical",
-    "names": [
-      "drop"
-    ],
-    "printSymbols": [
-      "drp"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[hnsf'U]": {
-    "isBase": false,
-    "CODE": "[HNSF'U]",
-    "isMetric": "no",
-    "class": "clinical",
-    "names": [
-      "Hounsfield unit"
-    ],
-    "printSymbols": [
-      "HF"
-    ],
-    "properties": [
-      "x-ray attenuation"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[MET]": {
-    "isBase": false,
-    "CODE": "[MET]",
-    "isMetric": "no",
-    "class": "clinical",
-    "names": [
-      "metabolic equivalent"
-    ],
-    "printSymbols": [
-      "MET"
-    ],
-    "properties": [
-      "metabolic cost of physical activity"
-    ],
-    "values": [
-      {
-        "printable": "3.5",
-        "numeric": 3.5
-      }
-    ]
-  },
-  "[hp'_X]": {
-    "isBase": false,
-    "CODE": "[HP'_X]",
-    "isMetric": "no",
-    "isSpecial": "yes",
-    "class": "clinical",
-    "names": [
-      "homeopathic potency of decimal series (retired)"
-    ],
-    "printSymbols": [
-      "X"
-    ],
-    "properties": [
-      "homeopathic potency (retired)"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"hpX\" value=\"1\" Unit=\"1\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "[hp'_C]": {
-    "isBase": false,
-    "CODE": "[HP'_C]",
-    "isMetric": "no",
-    "isSpecial": "yes",
-    "class": "clinical",
-    "names": [
-      "homeopathic potency of centesimal series (retired)"
-    ],
-    "printSymbols": [
-      "C"
-    ],
-    "properties": [
-      "homeopathic potency (retired)"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"hpC\" value=\"1\" Unit=\"1\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "[hp'_M]": {
-    "isBase": false,
-    "CODE": "[HP'_M]",
-    "isMetric": "no",
-    "isSpecial": "yes",
-    "class": "clinical",
-    "names": [
-      "homeopathic potency of millesimal series (retired)"
-    ],
-    "printSymbols": [
-      "M"
-    ],
-    "properties": [
-      "homeopathic potency (retired)"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"hpM\" value=\"1\" Unit=\"1\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "[hp'_Q]": {
-    "isBase": false,
-    "CODE": "[HP'_Q]",
-    "isMetric": "no",
-    "isSpecial": "yes",
-    "class": "clinical",
-    "names": [
-      "homeopathic potency of quintamillesimal series (retired)"
-    ],
-    "printSymbols": [
-      "Q"
-    ],
-    "properties": [
-      "homeopathic potency (retired)"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"hpQ\" value=\"1\" Unit=\"1\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "[hp_X]": {
-    "isBase": false,
-    "CODE": "[HP_X]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "clinical",
-    "names": [
-      "homeopathic potency of decimal hahnemannian series"
-    ],
-    "printSymbols": [
-      "X"
-    ],
-    "properties": [
-      "homeopathic potency (Hahnemann)"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[hp_C]": {
-    "isBase": false,
-    "CODE": "[HP_C]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "clinical",
-    "names": [
-      "homeopathic potency of centesimal hahnemannian series"
-    ],
-    "printSymbols": [
-      "C"
-    ],
-    "properties": [
-      "homeopathic potency (Hahnemann)"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[hp_M]": {
-    "isBase": false,
-    "CODE": "[HP_M]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "clinical",
-    "names": [
-      "homeopathic potency of millesimal hahnemannian series"
-    ],
-    "printSymbols": [
-      "M"
-    ],
-    "properties": [
-      "homeopathic potency (Hahnemann)"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[hp_Q]": {
-    "isBase": false,
-    "CODE": "[HP_Q]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "clinical",
-    "names": [
-      "homeopathic potency of quintamillesimal hahnemannian series"
-    ],
-    "printSymbols": [
-      "Q"
-    ],
-    "properties": [
-      "homeopathic potency (Hahnemann)"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[kp_X]": {
-    "isBase": false,
-    "CODE": "[KP_X]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "clinical",
-    "names": [
-      "homeopathic potency of decimal korsakovian series"
-    ],
-    "printSymbols": [
-      "X"
-    ],
-    "properties": [
-      "homeopathic potency (Korsakov)"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[kp_C]": {
-    "isBase": false,
-    "CODE": "[KP_C]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "clinical",
-    "names": [
-      "homeopathic potency of centesimal korsakovian series"
-    ],
-    "printSymbols": [
-      "C"
-    ],
-    "properties": [
-      "homeopathic potency (Korsakov)"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[kp_M]": {
-    "isBase": false,
-    "CODE": "[KP_M]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "clinical",
-    "names": [
-      "homeopathic potency of millesimal korsakovian series"
-    ],
-    "printSymbols": [
-      "M"
-    ],
-    "properties": [
-      "homeopathic potency (Korsakov)"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[kp_Q]": {
-    "isBase": false,
-    "CODE": "[KP_Q]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "clinical",
-    "names": [
-      "homeopathic potency of quintamillesimal korsakovian series"
-    ],
-    "printSymbols": [
-      "Q"
-    ],
-    "properties": [
-      "homeopathic potency (Korsakov)"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "eq": {
-    "isBase": false,
-    "CODE": "EQ",
-    "isMetric": "yes",
-    "class": "chemical",
-    "names": [
-      "equivalents"
-    ],
-    "printSymbols": [
-      "eq"
-    ],
-    "properties": [
-      "amount of substance"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "osm": {
-    "isBase": false,
-    "CODE": "OSM",
-    "isMetric": "yes",
-    "class": "chemical",
-    "names": [
-      "osmole"
-    ],
-    "printSymbols": [
-      "osm"
-    ],
-    "properties": [
-      "amount of substance (dissolved particles)"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[pH]": {
-    "isBase": false,
-    "CODE": "[PH]",
-    "isMetric": "no",
-    "isSpecial": "yes",
-    "class": "chemical",
-    "names": [
-      "pH"
-    ],
-    "printSymbols": [
-      "pH"
-    ],
-    "properties": [
-      "acidity"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"pH\" value=\"1\" Unit=\"mol/l\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "g%": {
-    "isBase": false,
-    "CODE": "G%",
-    "isMetric": "yes",
-    "class": "chemical",
-    "names": [
-      "gram percent"
-    ],
-    "printSymbols": [
-      "g%"
-    ],
-    "properties": [
-      "mass concentration"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[S]": {
-    "isBase": false,
-    "CODE": "[S]",
-    "isMetric": "no",
-    "class": "chemical",
-    "names": [
-      "Svedberg unit"
-    ],
-    "printSymbols": [
-      "S"
-    ],
-    "properties": [
-      "sedimentation coefficient"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[HPF]": {
-    "isBase": false,
-    "CODE": "[HPF]",
-    "isMetric": "no",
-    "class": "chemical",
-    "names": [
-      "high power field"
-    ],
-    "printSymbols": [
-      "HPF"
-    ],
-    "properties": [
-      "view area in microscope"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[LPF]": {
-    "isBase": false,
-    "CODE": "[LPF]",
-    "isMetric": "no",
-    "class": "chemical",
-    "names": [
-      "low power field"
-    ],
-    "printSymbols": [
-      "LPF"
-    ],
-    "properties": [
-      "view area in microscope"
-    ],
-    "values": [
-      {
-        "printable": "100",
-        "numeric": 100
-      }
-    ]
-  },
-  "kat": {
-    "isBase": false,
-    "CODE": "KAT",
-    "isMetric": "yes",
-    "class": "chemical",
-    "names": [
-      "katal"
-    ],
-    "printSymbols": [
-      "kat"
-    ],
-    "properties": [
-      "catalytic activity"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "U": {
-    "isBase": false,
-    "CODE": "U",
-    "isMetric": "yes",
-    "class": "chemical",
-    "names": [
-      "Unit"
-    ],
-    "printSymbols": [
-      "U"
-    ],
-    "properties": [
-      "catalytic activity"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[iU]": {
-    "isBase": false,
-    "CODE": "[IU]",
-    "isMetric": "yes",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "international unit"
-    ],
-    "printSymbols": [
-      "IU"
-    ],
-    "properties": [
-      "arbitrary"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[IU]": {
-    "isBase": false,
-    "CODE": "[IU]",
-    "isMetric": "yes",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "international unit"
-    ],
-    "printSymbols": [
-      "i.U."
-    ],
-    "properties": [
-      "arbitrary"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[arb'U]": {
-    "isBase": false,
-    "CODE": "[ARB'U]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "arbitary unit"
-    ],
-    "printSymbols": [
-      "arb. U"
-    ],
-    "properties": [
-      "arbitrary"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[USP'U]": {
-    "isBase": false,
-    "CODE": "[USP'U]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "United States Pharmacopeia unit"
-    ],
-    "printSymbols": [
-      "U.S.P."
-    ],
-    "properties": [
-      "arbitrary"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[GPL'U]": {
-    "isBase": false,
-    "CODE": "[GPL'U]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "GPL unit"
-    ],
-    "properties": [
-      "biologic activity of anticardiolipin IgG"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[MPL'U]": {
-    "isBase": false,
-    "CODE": "[MPL'U]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "MPL unit"
-    ],
-    "properties": [
-      "biologic activity of anticardiolipin IgM"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[APL'U]": {
-    "isBase": false,
-    "CODE": "[APL'U]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "APL unit"
-    ],
-    "properties": [
-      "biologic activity of anticardiolipin IgA"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[beth'U]": {
-    "isBase": false,
-    "CODE": "[BETH'U]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "Bethesda unit"
-    ],
-    "properties": [
-      "biologic activity of factor VIII inhibitor"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[anti'Xa'U]": {
-    "isBase": false,
-    "CODE": "[ANTI'XA'U]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "anti factor Xa unit"
-    ],
-    "properties": [
-      "biologic activity of factor Xa inhibitor (heparin)"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[todd'U]": {
-    "isBase": false,
-    "CODE": "[TODD'U]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "Todd unit"
-    ],
-    "properties": [
-      "biologic activity antistreptolysin O"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[dye'U]": {
-    "isBase": false,
-    "CODE": "[DYE'U]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "Dye unit"
-    ],
-    "properties": [
-      "biologic activity of amylase"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[smgy'U]": {
-    "isBase": false,
-    "CODE": "[SMGY'U]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "Somogyi unit"
-    ],
-    "properties": [
-      "biologic activity of amylase"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[bdsk'U]": {
-    "isBase": false,
-    "CODE": "[BDSK'U]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "Bodansky unit"
-    ],
-    "properties": [
-      "biologic activity of phosphatase"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[ka'U]": {
-    "isBase": false,
-    "CODE": "[KA'U]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "King-Armstrong unit"
-    ],
-    "properties": [
-      "biologic activity of phosphatase"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[knk'U]": {
-    "isBase": false,
-    "CODE": "[KNK'U]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "Kunkel unit"
-    ],
-    "properties": [
-      "arbitrary biologic activity"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[mclg'U]": {
-    "isBase": false,
-    "CODE": "[MCLG'U]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "Mac Lagan unit"
-    ],
-    "properties": [
-      "arbitrary biologic activity"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[tb'U]": {
-    "isBase": false,
-    "CODE": "[TB'U]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "tuberculin unit"
-    ],
-    "properties": [
-      "biologic activity of tuberculin"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[CCID_50]": {
-    "isBase": false,
-    "CODE": "[CCID_50]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "50% cell culture infectious dose"
-    ],
-    "printSymbols": [
-      "CCID<sub>50</sub>"
-    ],
-    "properties": [
-      "biologic activity (infectivity) of an infectious agent preparation"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[TCID_50]": {
-    "isBase": false,
-    "CODE": "[TCID_50]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "50% tissue culture infectious dose"
-    ],
-    "printSymbols": [
-      "TCID<sub>50</sub>"
-    ],
-    "properties": [
-      "biologic activity (infectivity) of an infectious agent preparation"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[EID_50]": {
-    "isBase": false,
-    "CODE": "[EID_50]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "50% embryo infectious dose"
-    ],
-    "printSymbols": [
-      "EID<sub>50</sub>"
-    ],
-    "properties": [
-      "biologic activity (infectivity) of an infectious agent preparation"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[PFU]": {
-    "isBase": false,
-    "CODE": "[PFU]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "plaque forming units"
-    ],
-    "printSymbols": [
-      "PFU"
-    ],
-    "properties": [
-      "amount of an infectious agent"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[FFU]": {
-    "isBase": false,
-    "CODE": "[FFU]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "focus forming units"
-    ],
-    "printSymbols": [
-      "FFU"
-    ],
-    "properties": [
-      "amount of an infectious agent"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[CFU]": {
-    "isBase": false,
-    "CODE": "[CFU]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "colony forming units"
-    ],
-    "printSymbols": [
-      "CFU"
-    ],
-    "properties": [
-      "amount of a proliferating organism"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[BAU]": {
-    "isBase": false,
-    "CODE": "[BAU]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "bioequivalent allergen unit"
-    ],
-    "printSymbols": [
-      "BAU"
-    ],
-    "properties": [
-      "amount of an allergen callibrated through in-vivo testing based on the ID50EAL method of (intradermal dilution for 50mm sum of erythema diameters"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[AU]": {
-    "isBase": false,
-    "CODE": "[AU]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "allergen unit"
-    ],
-    "printSymbols": [
-      "AU"
-    ],
-    "properties": [
-      "procedure defined amount of an allergen using some reference standard"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[Amb'a'1'U]": {
-    "isBase": false,
-    "CODE": "[AMB'A'1'U]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "allergen unit for Ambrosia artemisiifolia"
-    ],
-    "printSymbols": [
-      "Amb a 1 U"
-    ],
-    "properties": [
-      "procedure defined amount of the major allergen of ragweed."
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[PNU]": {
-    "isBase": false,
-    "CODE": "[PNU]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "protein nitrogen unit"
-    ],
-    "printSymbols": [
-      "PNU"
-    ],
-    "properties": [
-      "procedure defined amount of a protein substance"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[Lf]": {
-    "isBase": false,
-    "CODE": "[LF]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "Limit of flocculation"
-    ],
-    "printSymbols": [
-      "Lf"
-    ],
-    "properties": [
-      "procedure defined amount of an antigen substance"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[D'ag'U]": {
-    "isBase": false,
-    "CODE": "[D'AG'U]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "D-antigen unit"
-    ],
-    "printSymbols": [
-      ""
-    ],
-    "properties": [
-      "procedure defined amount of a poliomyelitis d-antigen substance"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[FEU]": {
-    "isBase": false,
-    "CODE": "[FEU]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "fibrinogen equivalent unit"
-    ],
-    "printSymbols": [
-      ""
-    ],
-    "properties": [
-      "amount of fibrinogen broken down into the measured d-dimers"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[ELU]": {
-    "isBase": false,
-    "CODE": "[ELU]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "ELISA unit"
-    ],
-    "printSymbols": [
-      ""
-    ],
-    "properties": [
-      "arbitrary ELISA unit"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[EU]": {
-    "isBase": false,
-    "CODE": "[EU]",
-    "isMetric": "no",
-    "isArbitrary": "yes",
-    "class": "chemical",
-    "names": [
-      "Ehrlich unit"
-    ],
-    "printSymbols": [
-      ""
-    ],
-    "properties": [
-      "Ehrlich unit"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "Np": {
-    "isBase": false,
-    "CODE": "NEP",
-    "isMetric": "yes",
-    "isSpecial": "yes",
-    "class": "levels",
-    "names": [
-      "neper"
-    ],
-    "printSymbols": [
-      "Np"
-    ],
-    "properties": [
-      "level"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"ln\" value=\"1\" Unit=\"1\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "B": {
-    "isBase": false,
-    "CODE": "B",
-    "isMetric": "yes",
-    "isSpecial": "yes",
-    "class": "levels",
-    "names": [
-      "bel"
-    ],
-    "printSymbols": [
-      "B"
-    ],
-    "properties": [
-      "level"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"lg\" value=\"1\" Unit=\"1\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "B[SPL]": {
-    "isBase": false,
-    "CODE": "B[SPL]",
-    "isMetric": "yes",
-    "isSpecial": "yes",
-    "class": "levels",
-    "names": [
-      "bel sound pressure"
-    ],
-    "printSymbols": [
-      "B(SPL)"
-    ],
-    "properties": [
-      "pressure level"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"lgTimes2\" value=\"2\" Unit=\"10*-5.Pa\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "B[V]": {
-    "isBase": false,
-    "CODE": "B[V]",
-    "isMetric": "yes",
-    "isSpecial": "yes",
-    "class": "levels",
-    "names": [
-      "bel volt"
-    ],
-    "printSymbols": [
-      "B(V)"
-    ],
-    "properties": [
-      "electric potential level"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"lgTimes2\" value=\"1\" Unit=\"V\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "B[mV]": {
-    "isBase": false,
-    "CODE": "B[MV]",
-    "isMetric": "yes",
-    "isSpecial": "yes",
-    "class": "levels",
-    "names": [
-      "bel millivolt"
-    ],
-    "printSymbols": [
-      "B(mV)"
-    ],
-    "properties": [
-      "electric potential level"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"lgTimes2\" value=\"1\" Unit=\"mV\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "B[uV]": {
-    "isBase": false,
-    "CODE": "B[UV]",
-    "isMetric": "yes",
-    "isSpecial": "yes",
-    "class": "levels",
-    "names": [
-      "bel microvolt"
-    ],
-    "printSymbols": [
-      "B(&#956;V)"
-    ],
-    "properties": [
-      "electric potential level"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"lgTimes2\" value=\"1\" Unit=\"uV\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "B[10.nV]": {
-    "isBase": false,
-    "CODE": "B[10.NV]",
-    "isMetric": "yes",
-    "isSpecial": "yes",
-    "class": "levels",
-    "names": [
-      "bel 10 nanovolt"
-    ],
-    "printSymbols": [
-      "B(10 nV)"
-    ],
-    "properties": [
-      "electric potential level"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"lgTimes2\" value=\"10\" Unit=\"nV\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "B[W]": {
-    "isBase": false,
-    "CODE": "B[W]",
-    "isMetric": "yes",
-    "isSpecial": "yes",
-    "class": "levels",
-    "names": [
-      "bel watt"
-    ],
-    "printSymbols": [
-      "B(W)"
-    ],
-    "properties": [
-      "power level"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"lg\" value=\"1\" Unit=\"W\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "B[kW]": {
-    "isBase": false,
-    "CODE": "B[KW]",
-    "isMetric": "yes",
-    "isSpecial": "yes",
-    "class": "levels",
-    "names": [
-      "bel kilowatt"
-    ],
-    "printSymbols": [
-      "B(kW)"
-    ],
-    "properties": [
-      "power level"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"lg\" value=\"1\" Unit=\"kW\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "st": {
-    "isBase": false,
-    "CODE": "STR",
-    "isMetric": "yes",
-    "class": "misc",
-    "names": [
-      "stere"
-    ],
-    "printSymbols": [
-      "st"
-    ],
-    "properties": [
-      "volume"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "Ao": {
-    "isBase": false,
-    "CODE": "AO",
-    "isMetric": "no",
-    "class": "misc",
-    "names": [
-      "Ångström"
-    ],
-    "printSymbols": [
-      "&#197;"
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "0.1",
-        "numeric": 0.1
-      }
-    ]
-  },
-  "b": {
-    "isBase": false,
-    "CODE": "BRN",
-    "isMetric": "no",
-    "class": "misc",
-    "names": [
-      "barn"
-    ],
-    "printSymbols": [
-      "b"
-    ],
-    "properties": [
-      "action area"
-    ],
-    "values": [
-      {
-        "printable": "100",
-        "numeric": 100
-      }
-    ]
-  },
-  "att": {
-    "isBase": false,
-    "CODE": "ATT",
-    "isMetric": "no",
-    "class": "misc",
-    "names": [
-      "technical atmosphere"
-    ],
-    "printSymbols": [
-      "at"
-    ],
-    "properties": [
-      "pressure"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "mho": {
-    "isBase": false,
-    "CODE": "MHO",
-    "isMetric": "yes",
-    "class": "misc",
-    "names": [
-      "mho"
-    ],
-    "printSymbols": [
-      "mho"
-    ],
-    "properties": [
-      "electric conductance"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[psi]": {
-    "isBase": false,
-    "CODE": "[PSI]",
-    "isMetric": "no",
-    "class": "misc",
-    "names": [
-      "pound per sqare inch"
-    ],
-    "printSymbols": [
-      "psi"
-    ],
-    "properties": [
-      "pressure"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "circ": {
-    "isBase": false,
-    "CODE": "CIRC",
-    "isMetric": "no",
-    "class": "misc",
-    "names": [
-      "circle"
-    ],
-    "printSymbols": [
-      "circ"
-    ],
-    "properties": [
-      "plane angle"
-    ],
-    "values": [
-      {
-        "printable": "2",
-        "numeric": 2
-      }
-    ]
-  },
-  "sph": {
-    "isBase": false,
-    "CODE": "SPH",
-    "isMetric": "no",
-    "class": "misc",
-    "names": [
-      "spere"
-    ],
-    "printSymbols": [
-      "sph"
-    ],
-    "properties": [
-      "solid angle"
-    ],
-    "values": [
-      {
-        "printable": "4",
-        "numeric": 4
-      }
-    ]
-  },
-  "[car_m]": {
-    "isBase": false,
-    "CODE": "[CAR_M]",
-    "isMetric": "no",
-    "class": "misc",
-    "names": [
-      "metric carat"
-    ],
-    "printSymbols": [
-      "ct<sub>m</sub>"
-    ],
-    "properties": [
-      "mass"
-    ],
-    "values": [
-      {
-        "printable": "0.2",
-        "numeric": 0.2
-      }
-    ]
-  },
-  "[car_Au]": {
-    "isBase": false,
-    "CODE": "[CAR_AU]",
-    "isMetric": "no",
-    "class": "misc",
-    "names": [
-      "carat of gold alloys"
-    ],
-    "printSymbols": [
-      "ct<sub>\n            <r>Au</r>\n         </sub>"
-    ],
-    "properties": [
-      "mass fraction"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "[smoot]": {
-    "isBase": false,
-    "CODE": "[SMOOT]",
-    "isMetric": "no",
-    "class": "misc",
-    "names": [
-      "Smoot"
-    ],
-    "printSymbols": [
-      ""
-    ],
-    "properties": [
-      "length"
-    ],
-    "values": [
-      {
-        "printable": "67",
-        "numeric": 67
-      }
-    ]
-  },
-  "bit_s": {
-    "isBase": false,
-    "CODE": "BIT_S",
-    "isMetric": "no",
-    "isSpecial": "yes",
-    "class": "infotech",
-    "names": [
-      "bit"
-    ],
-    "printSymbols": [
-      "bit<sub>s</sub>"
-    ],
-    "properties": [
-      "amount of information"
-    ],
-    "values": [
-      {
-        "printable": "<function name=\"ld\" value=\"1\" Unit=\"1\"/>",
-        "numeric": null
-      }
-    ]
-  },
-  "bit": {
-    "isBase": false,
-    "CODE": "BIT",
-    "isMetric": "yes",
-    "class": "infotech",
-    "names": [
-      "bit"
-    ],
-    "printSymbols": [
-      "bit"
-    ],
-    "properties": [
-      "amount of information"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "By": {
-    "isBase": false,
-    "CODE": "BY",
-    "isMetric": "yes",
-    "class": "infotech",
-    "names": [
-      "byte"
-    ],
-    "printSymbols": [
-      "B"
-    ],
-    "properties": [
-      "amount of information"
-    ],
-    "values": [
-      {
-        "printable": "8",
-        "numeric": 8
-      }
-    ]
-  },
-  "Bd": {
-    "isBase": false,
-    "CODE": "BD",
-    "isMetric": "yes",
-    "class": "infotech",
-    "names": [
-      "baud"
-    ],
-    "printSymbols": [
-      "Bd"
-    ],
-    "properties": [
-      "signal transmission rate"
-    ],
-    "values": [
-      {
-        "printable": "1",
-        "numeric": 1
-      }
-    ]
-  },
-  "m": {
-    "isBase": true,
-    "CODE": "M",
-    "dim": "L",
-    "names": [
-      "meter"
-    ],
-    "printSymbols": [
-      "m"
-    ],
-    "properties": [
-      "length"
-    ]
-  },
-  "s": {
-    "isBase": true,
-    "CODE": "S",
-    "dim": "T",
-    "names": [
-      "second"
-    ],
-    "printSymbols": [
-      "s"
-    ],
-    "properties": [
-      "time"
-    ]
-  },
-  "g": {
-    "isBase": true,
-    "CODE": "G",
-    "dim": "M",
-    "names": [
-      "gram"
-    ],
-    "printSymbols": [
-      "g"
-    ],
-    "properties": [
-      "mass"
-    ]
-  },
-  "rad": {
-    "isBase": true,
-    "CODE": "RAD",
-    "dim": "A",
-    "names": [
-      "radian"
-    ],
-    "printSymbols": [
-      "rad"
-    ],
-    "properties": [
-      "plane angle"
-    ]
-  },
-  "K": {
-    "isBase": true,
-    "CODE": "K",
-    "dim": "C",
-    "names": [
-      "Kelvin"
-    ],
-    "printSymbols": [
-      "K"
-    ],
-    "properties": [
-      "temperature"
-    ]
-  },
-  "C": {
-    "isBase": true,
-    "CODE": "C",
-    "dim": "Q",
-    "names": [
-      "Coulomb"
-    ],
-    "printSymbols": [
-      "C"
-    ],
-    "properties": [
-      "electric charge"
-    ]
-  },
-  "cd": {
-    "isBase": true,
-    "CODE": "CD",
-    "dim": "F",
-    "names": [
-      "candela"
-    ],
-    "printSymbols": [
-      "cd"
-    ],
-    "properties": [
-      "luminous intensity"
-    ]
-  }
-}
-
-},{}],55:[function(require,module,exports){
-module.exports = {
-  multiply: function multiply(t, ms) {
-    //console.log("Multiply: ", JSON.stringify(t), JSON.stringify(ms));
-    if (ms.length == 0) return t;
-    var ret = t;
-    ms.forEach(function (mterm) {
-      var sign = mterm[0] == "." ? 1 : -1;
-      var b = mterm[1];
-      ret.value *= Math.pow(b.value, sign); //console.log("b = ", JSON.stringify(b));
-      //console.log("ret = ", JSON.stringify(ret));
-
-      Object.keys(b.units).forEach(function (u) {
-        ret.units[u] = ret.units[u] || 0;
-        ret.units[u] = ret.units[u] + sign * b.units[u];
-
-        if (!ret.metadata && b.metadata) {
-          ret.metadata = {};
-          ret.metadata[u] = b.metadata[u];
-        } else if (ret.metadata && b.metadata) {
-          ret.metadata[u] = b.metadata[u];
-        }
-
-        if (ret.units[u] == 0) {
-          delete ret.units[u];
-
-          if (ret.metadata) {
-            delete ret.metadata[u];
-          }
-        }
-      });
-    }); //console.log("Multiply ret: ", ret);
-
-    return ret;
-  },
-  topower: function topower(e, exp) {
-    if (!exp) {
-      exp = 1;
-    }
-
-    var ret = e;
-    ret.value = Math.pow(ret.value, exp);
-    Object.keys(e.units).forEach(function (u) {
-      ret.units[u] = e.units[u] * exp;
-    });
-    return ret;
-  },
-  cleanup: function cleanup(e) {
-    ["10^", "10*"].forEach(function (k) {
-      if (e.units[k]) {
-        e.value *= Math.pow(10, e.units[k]);
-        delete e.units[k];
-      }
-    });
-    return e;
-  },
-  ismetric: function ismetric(metrics) {
-    return function (u) {
-      return metrics[Object.keys(u.units)[0]] !== undefined;
-    };
-  }
-};
-
-},{}],56:[function(require,module,exports){
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-parser = require('./generated/ucum-parser.js');
-equivalents = require('./generated/equivalents.json');
-helpers = require('./lib/helpers.js');
-unitMetadata = require('./generated/unitMetadata.json');
-module.exports = {
-  parse: parse,
-  canonicalize: canonicalize,
-  convert: convert,
-  format: format,
-  unitQuery: unitQuery
-};
-
-function parse(value, units) {
-  if (arguments.length === 1 || units === undefined) {
-    units = value;
-    value = 1;
-  }
-
-  if (units.match(/^\//)) {
-    units = '1' + units;
-  }
-
-  if (units === '') units = '1';
-  var ret = parser.parse(units);
-  ret.value *= value;
-  return ret;
-}
-
-function nonBaseUnit(u) {
-  return equivalents[u] !== undefined;
-}
-
-function remainingNonBaseUnits(value) {
-  return Object.keys(value.units).filter(nonBaseUnit);
-}
-
-function canonicalize(value, units) {
-  value = parse(value, units);
-  var remaining = remainingNonBaseUnits(value);
-
-  while (remaining.length) {
-    if (remaining.length === 0) {
-      return false;
-    }
-
-    remaining.forEach(function (u) {
-      var sub = parse(equivalents[u].ucum);
-      sub.value *= equivalents[u].value;
-      sub = helpers.topower(sub, value.units[u]);
-      value = helpers.multiply(value, [['.', sub]]);
-      delete value.units[u];
-    });
-    remaining = remainingNonBaseUnits(value);
-  } // we should remove any prefix metadata that exists at this point
-  // because it represents residual artifacts of the above process
-
-
-  if (value.metadata) {
-    Object.keys(value.metadata).forEach(function (u) {
-      if (value.metadata[u]) {
-        if (value.metadata[u].prefix) {
-          delete value.metadata[u].prefix;
-        } // if it's not in the final array of units we should delete this metadata as well
-
-
-        if (Object.keys(value.units).indexOf(u) == -1) {
-          delete value.metadata[u];
-        }
-      }
-    });
-  }
-
-  return value;
-}
-
-function conformant(a, b) {
-  var ret = true;
-  Object.keys(a.units).concat(Object.keys(b.units)).forEach(function (k) {
-    if (a.units[k] !== b.units[k]) {
-      ret = false;
-    }
-  });
-  return ret;
-}
-
-function convert(fromValue, fromUnits, toUnits) {
-  fromc = canonicalize(fromValue, fromUnits);
-  toc = canonicalize(toUnits);
-
-  if (!conformant(fromc, toc)) {
-    throw "Non-conformant units; can't convert from " + fromUnits + " to " + toUnits;
-  }
-
-  return fromc.value / toc.value;
-} // format returns a printable representation of the value
-// the resulting units are a single-line html rendering of the resultant units
-// can be invoked in the following supported ways, by example:
-// 1. ucum.format('[in_i]') -> 'in'
-// 2. ucum.format('[in_i]', true) -> '1 in'
-// 3. ucum.format(3, '[in_i]', true) -> '3 in'
-// 4. var x = ucum.parse(3, '[in_i]'); ucum.format(x) -> 'in'
-// 5. var x = ucum.parse(3, '[in_i]'); ucum.format(x, true) -> '3 in'
-
-
-function format(value, units, includeValue) {
-  var obj;
-
-  if (typeof value === 'string') {
-    includeValue = units;
-    units = value;
-    value = 1;
-  }
-
-  if (_typeof(value) === 'object') {
-    // treat it like a UCUM parse output
-    obj = value;
-    includeValue = units; // you would never provide units in this case, but you might provide includeValue
-  } else {
-    // parse it first
-    obj = parse(value, units);
-  }
-
-  var units = Object.keys(obj.units);
-  var metadata = obj.metadata;
-  var numUnits = units.length;
-  var numeratorUnits = [];
-  var denominatorUnits = [];
-  var printableUnits = "";
-  units.forEach(function (unit, index) {
-    var exponent = obj.units[unit];
-    var absExponent = Math.abs(exponent);
-    var printable = metadata[unit].printSymbols ? metadata[unit].printSymbols[0] : metadata[unit].names[0];
-    var prefix = metadata[unit].prefix ? metadata[unit].prefix.printSymbols[0] : "";
-    pUnit = prefix + printable;
-
-    if (absExponent !== 1) {
-      pUnit += "<sup>";
-      pUnit += Math.abs(exponent);
-      pUnit += "</sup>";
-    }
-
-    if (exponent > 0) {
-      numeratorUnits.push(pUnit);
-    } else {
-      denominatorUnits.push(pUnit);
-    }
-  });
-
-  if (numeratorUnits.length == 0) {
-    printableUnits = "1";
-  } else if (numeratorUnits.length > 0) {
-    printableUnits = numeratorUnits.join("*");
-  }
-
-  if (denominatorUnits.length > 0) {
-    printableUnits += "/";
-  }
-
-  printableUnits += denominatorUnits.join("/");
-
-  if (includeValue) {
-    printableUnits = obj.value + " " + printableUnits;
-  }
-
-  return printableUnits;
-} // searches the unit metadata for all unit metadata
-// criteria is an object like
-//   { properties: 'area', isMetric: 'yes' }
-// where the key/value pairs form a logical intersection, i.e. all criteria must be met
-// resultFields is an array to pre-reduce the result set fields
-
-
-function unitQuery(criteria, resultFields) {
-  return Object.keys(unitMetadata).filter(function (unit) {
-    var keys = Object.keys(criteria);
-
-    for (var ii = 0; ii < keys.length; ii++) {
-      var key = keys[ii];
-      var val = unitMetadata[unit][key];
-      var value = criteria[key];
-
-      if (val && _typeof(val) === 'object') {
-        // it's a list of values, it's a match if the target value occurs in the list
-        if (val.indexOf(value) === -1) {
-          return false;
-        }
-      } else {
-        // it's a non-object, make a direct comparison
-        if (unitMetadata[unit][key] !== value) {
-          return false;
-        }
-      }
-    }
-
-    return true;
-  }).map(function (key) {
-    var obj = {};
-
-    if (resultFields) {
-      if (resultFields.length) {
-        obj[key] = {};
-        resultFields.forEach(function (field) {
-          if (unitMetadata[key][field] !== undefined) {
-            obj[key][field] = JSON.parse(JSON.stringify(unitMetadata[key][field]));
-          }
-        });
-      } else {
-        // just return the keys if an empty array gets passed for resultSet
-        obj = key;
-      }
-    } else {
-      obj[key] = JSON.parse(JSON.stringify(unitMetadata[key]));
-    }
-
-    return obj;
-  });
-}
-
-},{"./generated/equivalents.json":49,"./generated/ucum-parser.js":53,"./generated/unitMetadata.json":54,"./lib/helpers.js":55}]},{},[1]);
+},{}]},{},[1]);

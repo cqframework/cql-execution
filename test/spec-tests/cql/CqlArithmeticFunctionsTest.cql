@@ -415,11 +415,9 @@ define "Multiply": Tuple{
     output: 2.0
   },
   "Multiply1CMBy2CM": Tuple{
-    skipped: 'Wrong answer (.0002 m^2 vs 2 cm^2 - answer should be in terms of smallest unit)'
-    /*
     expression: 1.0 'cm' * 2.0 'cm',
     output: 2.0'cm2'
-    */  }
+  }
 }
 
 define "Negate": Tuple{

@@ -100,14 +100,14 @@ describe('Quantity', () => {
     const quantity1 = new Quantity(2, 'm');
     const quantity2 = new Quantity(2, 'm');
     quantity2.unit = 'fakeUnit';
-    should(doMultiplication(quantity1, '.')).be.null();
+    should(doMultiplication(quantity1, quantity2)).be.null();
   });
 
   it('divided by Quantity with invalid ucum units results in null', () => {
     const quantity1 = new Quantity(2, 'm');
     const quantity2 = new Quantity(2, 'm');
     quantity2.unit = 'fakeUnit';
-    should(doDivision(quantity1, '/')).be.null();
+    should(doDivision(quantity1, quantity2)).be.null();
   });
 
   it('should convert units when possible to perform arithmetic', () => {
