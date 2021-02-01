@@ -512,9 +512,9 @@ define "Except": Tuple{
 }
 
 define "In": Tuple{
-  "TestInNull": Tuple{
+  "TestInNullBoundaries": Tuple{
     expression: 5 in Interval[null, null],
-    output: false
+    output: true
   },
   "IntegerIntervalInTrue": Tuple{
     expression: 5 in Interval[1, 10],

@@ -490,9 +490,9 @@
 		</test>
 	</group>
 	<group name="In">
-		<test name="TestInNull">
+		<test name="TestInNullBoundaries">
 			<expression>5 in Interval[null, null]</expression>
-			<output>false</output>
+			<output>true</output>
 		</test>
 		<test name="IntegerIntervalInTrue">
 			<expression>5 in Interval[1, 10]</expression>

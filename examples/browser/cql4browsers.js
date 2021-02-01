@@ -2114,10 +2114,6 @@ var Interval = /*#__PURE__*/function () {
         return true;
       }
 
-      if (this.low == null && this.high == null) {
-        return false;
-      }
-
       if (item != null && item.isInterval) {
         throw new Error('Argument to contains must be a point');
       }
@@ -9540,10 +9536,12 @@ var Except = /*#__PURE__*/function (_Expression5) {
           a = _this$execArgs6[0],
           b = _this$execArgs6[1];
 
-      if (a == null && b == null) {
+      if (a == null) {
         return null;
-      } else if (b == null) {
-        return a;
+      }
+
+      if (b == null) {
+        return typeIsArray(a) ? a : null;
       }
 
       var lib = typeIsArray(a) ? LIST : IVL;
