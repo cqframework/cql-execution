@@ -11,8 +11,8 @@ const { Uncertainty } = require('../datatypes/uncertainty');
 
 const MAX_INT_VALUE = Math.pow(2, 31) - 1;
 const MIN_INT_VALUE = Math.pow(-2, 31);
-const MAX_FLOAT_VALUE = 99999999999999999999999999999.99999999;
-const MIN_FLOAT_VALUE = -99999999999999999999999999999.99999999;
+const MAX_FLOAT_VALUE = 99999999999999999999.99999999;
+const MIN_FLOAT_VALUE = -99999999999999999999.99999999;
 const MIN_FLOAT_PRECISION_VALUE = Math.pow(10, -8);
 
 function overflowsOrUnderflows(value) {
@@ -104,13 +104,13 @@ class OverFlowException extends Exception {}
 function successor(val) {
   if (typeof val === 'number') {
     if (parseInt(val) === val) {
-      if (val === MAX_INT_VALUE) {
+      if (val >= MAX_INT_VALUE) {
         throw new OverFlowException();
       } else {
         return val + 1;
       }
     } else {
-      if (val === MAX_FLOAT_VALUE) {
+      if (val >= MAX_FLOAT_VALUE) {
         throw new OverFlowException();
       } else {
         return val + MIN_FLOAT_PRECISION_VALUE;
@@ -156,13 +156,13 @@ function successor(val) {
 function predecessor(val) {
   if (typeof val === 'number') {
     if (parseInt(val) === val) {
-      if (val === MIN_INT_VALUE) {
+      if (val <= MIN_INT_VALUE) {
         throw new OverFlowException();
       } else {
         return val - 1;
       }
     } else {
-      if (val === MIN_FLOAT_VALUE) {
+      if (val <= MIN_FLOAT_VALUE) {
         throw new OverFlowException();
       } else {
         return val - MIN_FLOAT_PRECISION_VALUE;

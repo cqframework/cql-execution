@@ -310,7 +310,7 @@ class Power extends Expression {
   exec(ctx) {
     const args = this.execArgs(ctx);
     if (args == null || args.some(x => x == null)) {
-      null;
+      return null;
     }
 
     const power = args.reduce((x, y) => Math.pow(x, y));

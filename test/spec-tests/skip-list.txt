@@ -27,9 +27,6 @@ CqlIntervalOperatorsTest.Before.TestBeforeNull      Converts null to Interval[nu
 
 CqlAggregateFunctionsTest.Max.MaxTestString                     Wrong answer (just returning first item?)
 CqlAggregateFunctionsTest.Min.MinTestString                     Wrong answer (just returning first item?)
-CqlArithmeticFunctionsTest.MinValue.DecimalMinValue             Wrong answer (-1e+29 vs -1e+28)
-CqlArithmeticFunctionsTest.MaxValue.DecimalMaxValue             Wrong answer (1e+29 vs 1e+28)
-CqlArithmeticFunctionsTest.Power.PowerNullToNull                Wrong answer (1 vs null)
 CqlComparisonOperatorsTest.Equal.DateTimeEqNull                 Wrong answer (true vs null - due to not evaluating DateTime(null) as null)
 CqlIntervalOperatorsTest.Collapse.TestCollapseNull              Wrong answer (Interval(null, null) vs null)
 CqlIntervalOperatorsTest.Expand.ExpandPer2Days                  Wrong answer (null vs { Interval[@2018-01-01, @2018-01-02], Interval[@2018-01-03, @2018-01-04] })

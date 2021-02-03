@@ -1858,11 +1858,20 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (-1e+29 vs -1e+28)",
-                           "type" : "Literal"
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "MinValue"
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Negate",
+                           "operand" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "value" : "99999999999999999999.99999999",
+                              "type" : "Literal"
+                           }
                         }
                      } ]
                   }
@@ -2019,10 +2028,16 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (1e+29 vs 1e+28)",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "MaxValue"
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "99999999999999999999.99999999",
                            "type" : "Literal"
                         }
                      } ]
@@ -3209,11 +3224,35 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (1 vs null)",
-                           "type" : "Literal"
+                           "type" : "Power",
+                           "operand" : [ {
+                              "strict" : false,
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              },
+                              "asTypeSpecifier" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "strict" : false,
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              },
+                              "asTypeSpecifier" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null"
                         }
                      } ]
                   }
