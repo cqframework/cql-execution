@@ -2072,18 +2072,22 @@ var _require4 = require('../util/math'),
     successor = _require4.successor,
     predecessor = _require4.predecessor,
     maxValueForInstance = _require4.maxValueForInstance,
-    minValueForInstance = _require4.minValueForInstance;
+    minValueForInstance = _require4.minValueForInstance,
+    maxValueForType = _require4.maxValueForType,
+    minValueForType = _require4.minValueForType;
 
 var cmp = require('../util/comparison');
 
 var Interval = /*#__PURE__*/function () {
-  function Interval(low, high, lowClosed, highClosed) {
+  function Interval(low, high, lowClosed, highClosed, defaultPointType) {
     _classCallCheck(this, Interval);
 
     this.low = low;
     this.high = high;
     this.lowClosed = lowClosed != null ? lowClosed : true;
-    this.highClosed = highClosed != null ? highClosed : true;
+    this.highClosed = highClosed != null ? highClosed : true; // defaultPointType is used in the case that both endpoints are null
+
+    this.defaultPointType = defaultPointType;
   }
 
   _createClass(Interval, [{
@@ -2562,7 +2566,7 @@ var Interval = /*#__PURE__*/function () {
   }, {
     key: "width",
     value: function width() {
-      if (this.low != null && (this.low.isDateTime || this.low.isDate || this.low.isTime) || this.high != null && (this.high.isDateTime || this.high.isDate || this.high.isTime)) {
+      if (this.low != null && (this.low.isDateTime || this.low.isDate) || this.high != null && (this.high.isDateTime || this.high.isDate)) {
         throw new Error('Width of Date, DateTime, and Time intervals is not supported');
       }
 
@@ -2592,7 +2596,7 @@ var Interval = /*#__PURE__*/function () {
     value: function size() {
       var pointSize = this.getPointSize();
 
-      if (this.low != null && (this.low.isDateTime || this.low.isDate || this.low.isTime) || this.high != null && (this.high.isDateTime || this.high.isDate || this.high.isTime)) {
+      if (this.low != null && (this.low.isDateTime || this.low.isDate) || this.high != null && (this.high.isDateTime || this.high.isDate)) {
         throw new Error('Size of Date, DateTime, and Time intervals is not supported');
       }
 
@@ -2650,13 +2654,16 @@ var Interval = /*#__PURE__*/function () {
   }, {
     key: "toClosed",
     value: function toClosed() {
-      var point = this.low != null ? this.low : this.high;
+      // Calculate the closed flags. Despite the name of this function, if a boundary is null open,
+      // we cannot close the boundary because that changes its meaning from "unknown" to "max/min value"
+      var lowClosed = this.lowClosed || this.low != null;
+      var highClosed = this.highClosed || this.high != null;
 
-      if (typeof point === 'number' || point != null && (point.isDateTime || point.isQuantity || point.isDate)) {
+      if (this.pointType != null) {
         var low;
 
         if (this.lowClosed && this.low == null) {
-          low = minValueForInstance(point);
+          low = minValueForType(this.pointType);
         } else if (!this.lowClosed && this.low != null) {
           low = successor(this.low);
         } else {
@@ -2666,7 +2673,7 @@ var Interval = /*#__PURE__*/function () {
         var high;
 
         if (this.highClosed && this.high == null) {
-          high = maxValueForInstance(point);
+          high = maxValueForType(this.pointType);
         } else if (!this.highClosed && this.high != null) {
           high = predecessor(this.high);
         } else {
@@ -2674,16 +2681,16 @@ var Interval = /*#__PURE__*/function () {
         }
 
         if (low == null) {
-          low = new Uncertainty(minValueForInstance(point), high);
+          low = new Uncertainty(minValueForType(this.pointType), high);
         }
 
         if (high == null) {
-          high = new Uncertainty(low, maxValueForInstance(point));
+          high = new Uncertainty(low, maxValueForType(this.pointType));
         }
 
-        return new Interval(low, high, true, true);
+        return new Interval(low, high, lowClosed, highClosed);
       } else {
-        return new Interval(this.low, this.high, true, true);
+        return new Interval(this.low, this.high, lowClosed, highClosed);
       }
     }
   }, {
@@ -2697,6 +2704,32 @@ var Interval = /*#__PURE__*/function () {
     key: "isInterval",
     get: function get() {
       return true;
+    }
+  }, {
+    key: "pointType",
+    get: function get() {
+      var pointType = null;
+      var point = this.low != null ? this.low : this.high;
+
+      if (point != null) {
+        if (typeof point === 'number') {
+          pointType = parseInt(point) === point ? '{urn:hl7-org:elm-types:r1}Integer' : '{urn:hl7-org:elm-types:r1}Decimal';
+        } else if (point.isTime && point.isTime()) {
+          pointType = '{urn:hl7-org:elm-types:r1}Time';
+        } else if (point.isDate) {
+          pointType = '{urn:hl7-org:elm-types:r1}Date';
+        } else if (point.isDateTime) {
+          pointType = '{urn:hl7-org:elm-types:r1}DateTime';
+        } else if (point.isQuantity) {
+          pointType = '{urn:hl7-org:elm-types:r1}Quantity';
+        }
+      }
+
+      if (pointType == null && this.defaultPointType != null) {
+        pointType = this.defaultPointType;
+      }
+
+      return pointType;
     }
   }]);
 
@@ -4224,7 +4257,7 @@ var Add = /*#__PURE__*/function (_Expression) {
       }
 
       var sum = args.reduce(function (x, y) {
-        if (x.isQuantity || x.isDateTime || x.isDate || x.isTime) {
+        if (x.isQuantity || x.isDateTime || x.isDate || x.isTime && x.isTime()) {
           return doAddition(x, y);
         } else {
           return x + y;
@@ -6853,7 +6886,9 @@ var Interval = /*#__PURE__*/function (_Expression) {
 
     _this = _super.call(this, json);
     _this.lowClosed = json.lowClosed;
+    _this.lowClosedExpression = build(json.lowClosedExpression);
     _this.highClosed = json.highClosed;
+    _this.highClosedExpression = build(json.highClosedExpression);
     _this.low = build(json.low);
     _this.high = build(json.high);
     return _this;
@@ -6864,7 +6899,22 @@ var Interval = /*#__PURE__*/function (_Expression) {
   _createClass(Interval, [{
     key: "exec",
     value: function exec(ctx) {
-      return new dtivl.Interval(this.low.execute(ctx), this.high.execute(ctx), this.lowClosed, this.highClosed);
+      var lowValue = this.low.execute(ctx);
+      var highValue = this.high.execute(ctx);
+      var lowClosed = this.lowClosed != null ? this.lowClosed : this.lowClosedExpression && this.lowClosedExpression.execute(ctx);
+      var highClosed = this.highClosed != null ? this.highClosed : this.highClosedExpression && this.highClosedExpression.execute(ctx);
+      var defaultPointType;
+
+      if (lowValue == null && highValue == null) {
+        // try to get the default point type from a cast
+        if (this.low.asTypeSpecifier && this.low.asTypeSpecifier.type === 'NamedTypeSpecifier') {
+          defaultPointType = this.low.asTypeSpecifier.name;
+        } else if (this.high.asTypeSpecifier && this.high.asTypeSpecifier.type === 'NamedTypeSpecifier') {
+          defaultPointType = this.high.asTypeSpecifier.name;
+        }
+      }
+
+      return new dtivl.Interval(lowValue, highValue, lowClosed, highClosed, defaultPointType);
     }
   }, {
     key: "isInterval",
@@ -7342,7 +7392,7 @@ function intervalListType(intervals) {
       var low = itvl.low != null ? itvl.low : itvl.high;
       var high = itvl.high != null ? itvl.high : itvl.low;
 
-      if (typeof low.isTime === 'function' && low.isTime() && typeof high.isTime === 'function' && high.isTime()) {
+      if (low.isTime && low.isTime() && high.isTime && high.isTime()) {
         if (type == null) {
           type = 'time';
         } else if (type === 'time') {
@@ -9207,7 +9257,7 @@ var Equal = /*#__PURE__*/function (_Expression) {
         return null;
       }
 
-      return equals.apply(void 0, _toConsumableArray(this.execArgs(ctx)));
+      return equals.apply(void 0, _toConsumableArray(args));
     }
   }]);
 
@@ -12974,7 +13024,7 @@ var Context = /*#__PURE__*/function () {
           return val && val.isQuantity;
 
         case '{urn:hl7-org:elm-types:r1}Time':
-          return val && val.isDateTime && val.isTime();
+          return val && val.isTime && val.isTime();
 
         default:
           // Use the data model's implementation of _is, if it is available
@@ -12989,47 +13039,35 @@ var Context = /*#__PURE__*/function () {
   }, {
     key: "matchesInstanceType",
     value: function matchesInstanceType(val, inst) {
-      switch (false) {
-        case !inst.isBooleanLiteral:
-          return typeof val === 'boolean';
-
-        case !inst.isDecimalLiteral:
-          return typeof val === 'number';
-
-        case !inst.isIntegerLiteral:
-          return typeof val === 'number' && Math.floor(val) === val;
-
-        case !inst.isStringLiteral:
-          return typeof val === 'string';
-
-        case !inst.isCode:
-          return val && val.isCode;
-
-        case !inst.isConcept:
-          return val && val.isConcept;
-
-        case !inst.isDateTime:
-          return val && val.isDateTime;
-
-        case !inst.isQuantity:
-          return val && val.isQuantity;
-
-        case !inst.isTime:
-          return val && val.isDateTime && val.isTime();
-
-        case !inst.isList:
-          return this.matchesListInstanceType(val, inst);
-
-        case !inst.isTuple:
-          return this.matchesTupleInstanceType(val, inst);
-
-        case !inst.isInterval:
-          return this.matchesIntervalInstanceType(val, inst);
-
-        default:
-          return true;
-        // default to true when we don't know for sure
+      if (inst.isBooleanLiteral) {
+        return typeof val === 'boolean';
+      } else if (inst.isDecimalLiteral) {
+        return typeof val === 'number';
+      } else if (inst.isIntegerLiteral) {
+        return typeof val === 'number' && Math.floor(val) === val;
+      } else if (inst.isStringLiteral) {
+        return typeof val === 'string';
+      } else if (inst.isCode) {
+        return val && val.isCode;
+      } else if (inst.isConcept) {
+        return val && val.isConcept;
+      } else if (inst.isTime && inst.isTime()) {
+        return val && val.isTime && val.isTime();
+      } else if (inst.isDate) {
+        return val && val.isDate;
+      } else if (inst.isDateTime) {
+        return val && val.isDateTime;
+      } else if (inst.isQuantity) {
+        return val && val.isQuantity;
+      } else if (inst.isList) {
+        return this.matchesListInstanceType(val, inst);
+      } else if (inst.isTuple) {
+        return this.matchesTupleInstanceType(val, inst);
+      } else if (inst.isInterval) {
+        return this.matchesIntervalInstanceType(val, inst);
       }
+
+      return true; // default to true when we don't know for sure
     }
   }, {
     key: "matchesListInstanceType",
@@ -13448,7 +13486,7 @@ function areNumbers(a, b) {
 }
 
 function areDateTimesOrQuantities(a, b) {
-  return a && a.isDateTime && b && b.isDateTime || a && a.isDate && b && b.isDate || a && a.isTime && b && b.isTime || a && a.isQuantity && b && b.isQuantity;
+  return a && a.isDateTime && b && b.isDateTime || a && a.isDate && b && b.isDate || a && a.isQuantity && b && b.isQuantity;
 }
 
 function isUncertainty(x) {
@@ -13770,7 +13808,7 @@ function overflowsOrUnderflows(value) {
     if (!isValidDecimal(value.value)) {
       return true;
     }
-  } else if (value.isTime != null && value.isTime()) {
+  } else if (value.isTime && value.isTime()) {
     if (value.after(MAX_TIME_VALUE)) {
       return true;
     }
@@ -13887,6 +13925,12 @@ function successor(val) {
         return val + MIN_FLOAT_PRECISION_VALUE;
       }
     }
+  } else if (val && val.isTime && val.isTime()) {
+    if (val.sameAs(MAX_TIME_VALUE)) {
+      throw new OverFlowException();
+    } else {
+      return val.successor();
+    }
   } else if (val && val.isDateTime) {
     if (val.sameAs(MAX_DATETIME_VALUE)) {
       throw new OverFlowException();
@@ -13895,12 +13939,6 @@ function successor(val) {
     }
   } else if (val && val.isDate) {
     if (val.sameAs(MAX_DATE_VALUE)) {
-      throw new OverFlowException();
-    } else {
-      return val.successor();
-    }
-  } else if (val && val.isTime) {
-    if (val.sameAs(MAX_TIME_VALUE)) {
       throw new OverFlowException();
     } else {
       return val.successor();
@@ -13940,6 +13978,12 @@ function predecessor(val) {
         return val - MIN_FLOAT_PRECISION_VALUE;
       }
     }
+  } else if (val && val.isTime && val.isTime()) {
+    if (val.sameAs(MIN_TIME_VALUE)) {
+      throw new OverFlowException();
+    } else {
+      return val.predecessor();
+    }
   } else if (val && val.isDateTime) {
     if (val.sameAs(MIN_DATETIME_VALUE)) {
       throw new OverFlowException();
@@ -13948,12 +13992,6 @@ function predecessor(val) {
     }
   } else if (val && val.isDate) {
     if (val.sameAs(MIN_DATE_VALUE)) {
-      throw new OverFlowException();
-    } else {
-      return val.predecessor();
-    }
-  } else if (val && val.isTime) {
-    if (val.sameAs(MIN_TIME_VALUE)) {
       throw new OverFlowException();
     } else {
       return val.predecessor();
@@ -13985,12 +14023,12 @@ function maxValueForInstance(val) {
     } else {
       return MAX_FLOAT_VALUE;
     }
+  } else if (val && val.isTime && val.isTime()) {
+    return MAX_TIME_VALUE.copy();
   } else if (val && val.isDateTime) {
     return MAX_DATETIME_VALUE.copy();
   } else if (val && val.isDate) {
     return MAX_DATE_VALUE.copy();
-  } else if (val && val.isTime) {
-    return MAX_TIME_VALUE.copy();
   } else if (val && val.isQuantity) {
     var val2 = val.clone();
     val2.value = maxValueForInstance(val2.value);
@@ -14000,6 +14038,39 @@ function maxValueForInstance(val) {
   }
 }
 
+function maxValueForType(type, quantityInstance) {
+  switch (type) {
+    case '{urn:hl7-org:elm-types:r1}Integer':
+      return MAX_INT_VALUE;
+
+    case '{urn:hl7-org:elm-types:r1}Decimal':
+      return MAX_FLOAT_VALUE;
+
+    case '{urn:hl7-org:elm-types:r1}DateTime':
+      return MAX_DATETIME_VALUE.copy();
+
+    case '{urn:hl7-org:elm-types:r1}Date':
+      return MAX_DATE_VALUE.copy();
+
+    case '{urn:hl7-org:elm-types:r1}Time':
+      return MAX_TIME_VALUE.copy();
+
+    case '{urn:hl7-org:elm-types:r1}Quantity':
+      {
+        if (quantityInstance == null) {
+          // can't infer a quantity unit type from nothing]
+          return null;
+        }
+
+        var maxQty = quantityInstance.clone();
+        maxQty.value = maxValueForInstance(maxQty.value);
+        return maxQty;
+      }
+  }
+
+  return null;
+}
+
 function minValueForInstance(val) {
   if (typeof val === 'number') {
     if (parseInt(val) === val) {
@@ -14007,12 +14078,12 @@ function minValueForInstance(val) {
     } else {
       return MIN_FLOAT_VALUE;
     }
+  } else if (val && val.isTime && val.isTime()) {
+    return MIN_TIME_VALUE.copy();
   } else if (val && val.isDateTime) {
     return MIN_DATETIME_VALUE.copy();
   } else if (val && val.isDate) {
     return MIN_DATE_VALUE.copy();
-  } else if (val && val.isTime) {
-    return MIN_TIME_VALUE.copy();
   } else if (val && val.isQuantity) {
     var val2 = val.clone();
     val2.value = minValueForInstance(val2.value);
@@ -14020,6 +14091,39 @@ function minValueForInstance(val) {
   } else {
     return null;
   }
+}
+
+function minValueForType(type, quantityInstance) {
+  switch (type) {
+    case '{urn:hl7-org:elm-types:r1}Integer':
+      return MIN_INT_VALUE;
+
+    case '{urn:hl7-org:elm-types:r1}Decimal':
+      return MIN_FLOAT_VALUE;
+
+    case '{urn:hl7-org:elm-types:r1}DateTime':
+      return MIN_DATETIME_VALUE.copy();
+
+    case '{urn:hl7-org:elm-types:r1}Date':
+      return MIN_DATE_VALUE.copy();
+
+    case '{urn:hl7-org:elm-types:r1}Time':
+      return MIN_TIME_VALUE.copy();
+
+    case '{urn:hl7-org:elm-types:r1}Quantity':
+      {
+        if (quantityInstance == null) {
+          // can't infer a quantity unit type from nothing]
+          return null;
+        }
+
+        var minQty = quantityInstance.clone();
+        minQty.value = minValueForInstance(minQty.value);
+        return minQty;
+      }
+  }
+
+  return null;
 }
 
 function decimalAdjust(type, value, exp) {
@@ -14070,6 +14174,8 @@ module.exports = {
   predecessor: predecessor,
   maxValueForInstance: maxValueForInstance,
   minValueForInstance: minValueForInstance,
+  maxValueForType: maxValueForType,
+  minValueForType: minValueForType,
   decimalAdjust: decimalAdjust,
   decimalOrNull: decimalOrNull
 };

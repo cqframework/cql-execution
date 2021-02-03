@@ -43,55 +43,11 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "expression",
+                        "name" : "skipped",
                         "value" : {
-                           "type" : "After",
-                           "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "strict" : false,
-                                 "type" : "As",
-                                 "operand" : {
-                                    "type" : "Null"
-                                 },
-                                 "asTypeSpecifier" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              },
-                              "high" : {
-                                 "strict" : false,
-                                 "type" : "As",
-                                 "operand" : {
-                                    "type" : "Null"
-                                 },
-                                 "asTypeSpecifier" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              }
-                           }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "1",
-                                 "type" : "Literal"
-                              },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "10",
-                                 "type" : "Literal"
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null"
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Converts null to Interval[null,null] instead of Interval(null,null)",
+                           "type" : "Literal"
                         }
                      } ]
                   }
@@ -1390,55 +1346,11 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "expression",
+                        "name" : "skipped",
                         "value" : {
-                           "type" : "Before",
-                           "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "strict" : false,
-                                 "type" : "As",
-                                 "operand" : {
-                                    "type" : "Null"
-                                 },
-                                 "asTypeSpecifier" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              },
-                              "high" : {
-                                 "strict" : false,
-                                 "type" : "As",
-                                 "operand" : {
-                                    "type" : "Null"
-                                 },
-                                 "asTypeSpecifier" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              }
-                           }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "1",
-                                 "type" : "Literal"
-                              },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "10",
-                                 "type" : "Literal"
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null"
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Converts null to Interval[null,null] instead of Interval(null,null)",
+                           "type" : "Literal"
                         }
                      } ]
                   }
@@ -20510,14 +20422,60 @@
             "expression" : {
                "type" : "Tuple",
                "element" : [ {
-                  "name" : "TestProperlyIncludesNull",
+                  "name" : "NullBoundariesProperlyIncludesIntegerInterval",
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (null vs false)",
+                           "type" : "ProperIncludes",
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "low" : {
+                                 "strict" : false,
+                                 "type" : "As",
+                                 "operand" : {
+                                    "type" : "Null"
+                                 },
+                                 "asTypeSpecifier" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "high" : {
+                                 "strict" : false,
+                                 "type" : "As",
+                                 "operand" : {
+                                    "type" : "Null"
+                                 },
+                                 "asTypeSpecifier" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "1",
+                                 "type" : "Literal"
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
                            "type" : "Literal"
                         }
                      } ]
@@ -21249,14 +21207,104 @@
             "expression" : {
                "type" : "Tuple",
                "element" : [ {
-                  "name" : "TestProperlyIncludedInNull",
+                  "name" : "IntegerIntervalProperlyIncludedInNullBoundaries",
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (null vs false)",
+                           "type" : "ProperIncludedIn",
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "1",
+                                 "type" : "Literal"
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal"
+                              }
+                           }, {
+                              "type" : "Interval",
+                              "low" : {
+                                 "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "As",
+                                 "operand" : {
+                                    "path" : "low",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "lowClosed" : true,
+                                       "highClosed" : true,
+                                       "type" : "Interval",
+                                       "low" : {
+                                          "type" : "Null"
+                                       },
+                                       "high" : {
+                                          "type" : "Null"
+                                       }
+                                    }
+                                 }
+                              },
+                              "lowClosedExpression" : {
+                                 "path" : "lowClosed",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "lowClosed" : true,
+                                    "highClosed" : true,
+                                    "type" : "Interval",
+                                    "low" : {
+                                       "type" : "Null"
+                                    },
+                                    "high" : {
+                                       "type" : "Null"
+                                    }
+                                 }
+                              },
+                              "high" : {
+                                 "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "As",
+                                 "operand" : {
+                                    "path" : "high",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "lowClosed" : true,
+                                       "highClosed" : true,
+                                       "type" : "Interval",
+                                       "low" : {
+                                          "type" : "Null"
+                                       },
+                                       "high" : {
+                                          "type" : "Null"
+                                       }
+                                    }
+                                 }
+                              },
+                              "highClosedExpression" : {
+                                 "path" : "highClosed",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "lowClosed" : true,
+                                    "highClosed" : true,
+                                    "type" : "Interval",
+                                    "low" : {
+                                       "type" : "Null"
+                                    },
+                                    "high" : {
+                                       "type" : "Null"
+                                    }
+                                 }
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
                            "type" : "Literal"
                         }
                      } ]

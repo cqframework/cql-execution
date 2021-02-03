@@ -5,20 +5,49 @@ const {
   successor,
   predecessor,
   maxValueForInstance,
-  minValueForInstance
+  minValueForInstance,
+  maxValueForType,
+  minValueForType
 } = require('../util/math');
 const cmp = require('../util/comparison');
 
 class Interval {
-  constructor(low, high, lowClosed, highClosed) {
+  constructor(low, high, lowClosed, highClosed, defaultPointType) {
     this.low = low;
     this.high = high;
     this.lowClosed = lowClosed != null ? lowClosed : true;
     this.highClosed = highClosed != null ? highClosed : true;
+    // defaultPointType is used in the case that both endpoints are null
+    this.defaultPointType = defaultPointType;
   }
 
   get isInterval() {
     return true;
+  }
+
+  get pointType() {
+    let pointType = null;
+    const point = this.low != null ? this.low : this.high;
+    if (point != null) {
+      if (typeof point === 'number') {
+        pointType =
+          parseInt(point) === point
+            ? '{urn:hl7-org:elm-types:r1}Integer'
+            : '{urn:hl7-org:elm-types:r1}Decimal';
+      } else if (point.isTime && point.isTime()) {
+        pointType = '{urn:hl7-org:elm-types:r1}Time';
+      } else if (point.isDate) {
+        pointType = '{urn:hl7-org:elm-types:r1}Date';
+      } else if (point.isDateTime) {
+        pointType = '{urn:hl7-org:elm-types:r1}DateTime';
+      } else if (point.isQuantity) {
+        pointType = '{urn:hl7-org:elm-types:r1}Quantity';
+      }
+    }
+    if (pointType == null && this.defaultPointType != null) {
+      pointType = this.defaultPointType;
+    }
+    return pointType;
   }
 
   copy() {
@@ -446,8 +475,8 @@ class Interval {
 
   width() {
     if (
-      (this.low != null && (this.low.isDateTime || this.low.isDate || this.low.isTime)) ||
-      (this.high != null && (this.high.isDateTime || this.high.isDate || this.high.isTime))
+      (this.low != null && (this.low.isDateTime || this.low.isDate)) ||
+      (this.high != null && (this.high.isDateTime || this.high.isDate))
     ) {
       throw new Error('Width of Date, DateTime, and Time intervals is not supported');
     }
@@ -477,8 +506,8 @@ class Interval {
   size() {
     const pointSize = this.getPointSize();
     if (
-      (this.low != null && (this.low.isDateTime || this.low.isDate || this.low.isTime)) ||
-      (this.high != null && (this.high.isDateTime || this.high.isDate || this.high.isTime))
+      (this.low != null && (this.low.isDateTime || this.low.isDate)) ||
+      (this.high != null && (this.high.isDateTime || this.high.isDate))
     ) {
       throw new Error('Size of Date, DateTime, and Time intervals is not supported');
     }
@@ -534,14 +563,14 @@ class Interval {
   }
 
   toClosed() {
-    const point = this.low != null ? this.low : this.high;
-    if (
-      typeof point === 'number' ||
-      (point != null && (point.isDateTime || point.isQuantity || point.isDate))
-    ) {
+    // Calculate the closed flags. Despite the name of this function, if a boundary is null open,
+    // we cannot close the boundary because that changes its meaning from "unknown" to "max/min value"
+    const lowClosed = this.lowClosed || this.low != null;
+    const highClosed = this.highClosed || this.high != null;
+    if (this.pointType != null) {
       let low;
       if (this.lowClosed && this.low == null) {
-        low = minValueForInstance(point);
+        low = minValueForType(this.pointType);
       } else if (!this.lowClosed && this.low != null) {
         low = successor(this.low);
       } else {
@@ -549,21 +578,21 @@ class Interval {
       }
       let high;
       if (this.highClosed && this.high == null) {
-        high = maxValueForInstance(point);
+        high = maxValueForType(this.pointType);
       } else if (!this.highClosed && this.high != null) {
         high = predecessor(this.high);
       } else {
         high = this.high;
       }
       if (low == null) {
-        low = new Uncertainty(minValueForInstance(point), high);
+        low = new Uncertainty(minValueForType(this.pointType), high);
       }
       if (high == null) {
-        high = new Uncertainty(low, maxValueForInstance(point));
+        high = new Uncertainty(low, maxValueForType(this.pointType));
       }
-      return new Interval(low, high, true, true);
+      return new Interval(low, high, lowClosed, highClosed);
     } else {
-      return new Interval(this.low, this.high, true, true);
+      return new Interval(this.low, this.high, lowClosed, highClosed);
     }
   }
 

@@ -8,7 +8,6 @@ function areDateTimesOrQuantities(a, b) {
   return (
     (a && a.isDateTime && b && b.isDateTime) ||
     (a && a.isDate && b && b.isDate) ||
-    (a && a.isTime && b && b.isTime) ||
     (a && a.isQuantity && b && b.isQuantity)
   );
 }

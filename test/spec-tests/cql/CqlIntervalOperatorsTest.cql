@@ -4,9 +4,11 @@ context Patient
 
 define "After": Tuple{
   "TestAfterNull": Tuple{
+    skipped: 'Converts null to Interval[null,null] instead of Interval(null,null)'
+    /*
     expression: (null as Integer) after Interval[1, 10],
     output: null
-  },
+    */  },
   "IntegerIntervalAfterTrue": Tuple{
     expression: Interval[11, 20] after Interval[1, 10],
     output: true
@@ -99,9 +101,11 @@ define "After": Tuple{
 
 define "Before": Tuple{
   "TestBeforeNull": Tuple{
+    skipped: 'Converts null to Interval[null,null] instead of Interval(null,null)'
+    /*
     expression: (null as Integer) before Interval[1, 10],
     output: null
-  },
+    */  },
   "IntegerIntervalBeforeFalse": Tuple{
     expression: Interval[11, 20] before Interval[1, 10],
     output: false
@@ -1273,12 +1277,10 @@ define "ProperIn": Tuple{
 }
 
 define "ProperlyIncludes": Tuple{
-  "TestProperlyIncludesNull": Tuple{
-    skipped: 'Wrong answer (null vs false)'
-    /*
-    expression: Interval[null, null] properly includes Interval[1, 10],
-    output: false
-    */  },
+  "NullBoundariesProperlyIncludesIntegerInterval": Tuple{
+    expression: Interval[null as Integer, null as Integer] properly includes Interval[1, 10],
+    output: true
+  },
   "IntegerIntervalProperlyIncludesTrue": Tuple{
     expression: Interval[1, 10] properly includes Interval[4, 10],
     output: true
@@ -1322,12 +1324,10 @@ define "ProperlyIncludes": Tuple{
 }
 
 define "ProperlyIncludedIn": Tuple{
-  "TestProperlyIncludedInNull": Tuple{
-    skipped: 'Wrong answer (null vs false)'
-    /*
+  "IntegerIntervalProperlyIncludedInNullBoundaries": Tuple{
     expression: Interval[1, 10] properly included in Interval[null, null],
-    output: false
-    */  },
+    output: true
+  },
   "IntegerIntervalProperlyIncludedInTrue": Tuple{
     expression: Interval[4, 10] properly included in Interval[1, 10],
     output: true

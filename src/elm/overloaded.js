@@ -17,7 +17,7 @@ class Equal extends Expression {
     if (args[0] == null || args[1] == null) {
       return null;
     }
-    return equals(...this.execArgs(ctx));
+    return equals(...args);
   }
 }
 
