@@ -33,6 +33,7 @@ public class CoffeeScriptTestDataGenerator {
     private static final Pattern SNIPPET_START = Pattern.compile("^\\s*\\/\\/\\s+\\@Test\\:\\s+(.*\\S)\\s*$");
     private static final Pattern LIBRARY_CHECK = Pattern.compile("^\\s*library\\s*\\S.*$", Pattern.MULTILINE);
     private static final Pattern USING_CHECK = Pattern.compile("^\\s*using\\s*\\S.*$", Pattern.MULTILINE);
+    private static final Pattern INCLUDE_CHECK = Pattern.compile("^\\s*include\\s*\\S.*$", Pattern.MULTILINE);
     private static final Pattern CONTEXT_CHECK = Pattern.compile("^\\s*context\\s*\\S.*$", Pattern.MULTILINE);
     private static final Pattern DEFINE_CHECK = Pattern.compile("^\\s*define\\s*\\S.*$", Pattern.MULTILINE);
 
@@ -121,17 +122,24 @@ public class CoffeeScriptTestDataGenerator {
     }
 
     private static void updateSnippet(StringBuilder snippet) {
+        // Insert "library" first
+        if (! LIBRARY_CHECK.matcher(snippet).find()) {
+            snippet.insert(0, "library TestSnippet version '1'\n");
+        }
+        // Then insert "using" after "library"
+        if (! USING_CHECK.matcher(snippet).find()) {
+            Matcher libMatcher = LIBRARY_CHECK.matcher(snippet);
+            // We know it will be found, but we need to call find() before we can call end()
+            if (libMatcher.find()) {
+                snippet.insert(libMatcher.end() + 1, "using Simple version '1.0.0'\n");
+            }
+        }
+        // Then insert "context" before the first "define"
         if (! CONTEXT_CHECK.matcher(snippet).find()) {
             Matcher defineMatcher = DEFINE_CHECK.matcher(snippet);
             if (defineMatcher.find()) {
                 snippet.insert(defineMatcher.start(), "context Patient\n");
             }
-        }
-        if (! USING_CHECK.matcher(snippet).find()) {
-            snippet.insert(0, "using QUICK\n");
-        }
-        if (! LIBRARY_CHECK.matcher(snippet).find()) {
-            snippet.insert(0, "library TestSnippet version '1'\n");
         }
         while (snippet.charAt(snippet.length()-1) == '\n') {
             snippet.deleteCharAt(snippet.length()-1);
@@ -154,6 +162,7 @@ public class CoffeeScriptTestDataGenerator {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
+        CqlTranslator.loadModelInfo(new File("../../src/simple-modelinfo.xml"));
         OptionParser parser = new OptionParser();
         OptionSpec<File> input = parser.accepts("input").withRequiredArg().ofType(File.class).required();
         OptionSpec recursive = parser.accepts("recursive");

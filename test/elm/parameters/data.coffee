@@ -8,7 +8,7 @@
 
 ### ParameterDef
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 parameter MeasureYear default 2012
 parameter IntParameter Integer
 parameter ListParameter List<String>
@@ -19,6 +19,10 @@ define foo: 'bar'
 
 module.exports['ParameterDef'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -33,8 +37,9 @@ module.exports['ParameterDef'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -148,8 +153,7 @@ module.exports['ParameterDef'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -185,7 +189,7 @@ module.exports['ParameterDef'] = {
 
 ### ParameterRef
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 parameter FooP default 'Bar'
 context Patient
 define Foo: FooP
@@ -193,6 +197,10 @@ define Foo: FooP
 
 module.exports['ParameterRef'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -207,8 +215,9 @@ module.exports['ParameterRef'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -231,8 +240,7 @@ module.exports['ParameterRef'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -267,7 +275,7 @@ module.exports['ParameterRef'] = {
 
 ### BooleanParameterTypes
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 parameter FooP Boolean
 parameter FooDP default true
 context Patient
@@ -277,6 +285,10 @@ define Foo2: FooDP
 
 module.exports['BooleanParameterTypes'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -291,8 +303,9 @@ module.exports['BooleanParameterTypes'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -324,8 +337,7 @@ module.exports['BooleanParameterTypes'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -384,7 +396,7 @@ module.exports['BooleanParameterTypes'] = {
 
 ### DecimalParameterTypes
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 parameter FooP Decimal
 parameter FooDP default 1.5
 context Patient
@@ -394,6 +406,10 @@ define Foo2: FooDP
 
 module.exports['DecimalParameterTypes'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -408,8 +424,9 @@ module.exports['DecimalParameterTypes'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -441,8 +458,7 @@ module.exports['DecimalParameterTypes'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -501,7 +517,7 @@ module.exports['DecimalParameterTypes'] = {
 
 ### IntegerParameterTypes
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 parameter FooP Integer
 parameter FooDP default 2
 context Patient
@@ -511,6 +527,10 @@ define Foo2: FooDP
 
 module.exports['IntegerParameterTypes'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -525,8 +545,9 @@ module.exports['IntegerParameterTypes'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -558,8 +579,7 @@ module.exports['IntegerParameterTypes'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -618,7 +638,7 @@ module.exports['IntegerParameterTypes'] = {
 
 ### StringParameterTypes
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 parameter FooP String
 parameter FooDP default 'Hello'
 context Patient
@@ -628,6 +648,10 @@ define Foo2: FooDP
 
 module.exports['StringParameterTypes'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -642,8 +666,9 @@ module.exports['StringParameterTypes'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -675,8 +700,7 @@ module.exports['StringParameterTypes'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -735,7 +759,7 @@ module.exports['StringParameterTypes'] = {
 
 ### CodeParameterTypes
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 codesystem "FOOTESTCS": 'http://footest.org'
 parameter FooP Code
 parameter FooDP default Code 'FooTest' from "FOOTESTCS" display 'Foo Test'
@@ -746,6 +770,10 @@ define Foo2: FooDP
 
 module.exports['CodeParameterTypes'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -760,8 +788,9 @@ module.exports['CodeParameterTypes'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -805,8 +834,7 @@ module.exports['CodeParameterTypes'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -865,7 +893,7 @@ module.exports['CodeParameterTypes'] = {
 
 ### ConceptParameterTypes
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 codesystem "FOOTESTCS": 'http://footest.org'
 parameter FooP Concept
 parameter FooDP default Concept { Code 'FooTest' from "FOOTESTCS" } display 'Foo Test'
@@ -876,6 +904,10 @@ define Foo2: FooDP
 
 module.exports['ConceptParameterTypes'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -890,8 +922,9 @@ module.exports['ConceptParameterTypes'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -938,8 +971,7 @@ module.exports['ConceptParameterTypes'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -998,7 +1030,7 @@ module.exports['ConceptParameterTypes'] = {
 
 ### DateTimeParameterTypes
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 parameter FooP DateTime
 parameter FooDP default @2012-04-01T12:11:10
 context Patient
@@ -1008,6 +1040,10 @@ define Foo2: FooDP
 
 module.exports['DateTimeParameterTypes'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1022,8 +1058,9 @@ module.exports['DateTimeParameterTypes'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -1083,8 +1120,7 @@ module.exports['DateTimeParameterTypes'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1143,7 +1179,7 @@ module.exports['DateTimeParameterTypes'] = {
 
 ### DateParameterTypes
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 parameter FooP Date
 parameter FooDP default @2012-04-01
 context Patient
@@ -1153,6 +1189,10 @@ define Foo2: FooDP
 
 module.exports['DateParameterTypes'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1167,8 +1207,9 @@ module.exports['DateParameterTypes'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -1213,8 +1254,7 @@ module.exports['DateParameterTypes'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1273,7 +1313,7 @@ module.exports['DateParameterTypes'] = {
 
 ### QuantityParameterTypes
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 parameter FooP Quantity
 parameter FooDP default 10 'dL'
 context Patient
@@ -1283,6 +1323,10 @@ define Foo2: FooDP
 
 module.exports['QuantityParameterTypes'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1297,8 +1341,9 @@ module.exports['QuantityParameterTypes'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -1330,8 +1375,7 @@ module.exports['QuantityParameterTypes'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1390,7 +1434,7 @@ module.exports['QuantityParameterTypes'] = {
 
 ### TimeParameterTypes
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 parameter FooP Time
 parameter FooDP default @T12:00:00
 context Patient
@@ -1400,6 +1444,10 @@ define Foo2: FooDP
 
 module.exports['TimeParameterTypes'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1414,8 +1462,9 @@ module.exports['TimeParameterTypes'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -1460,8 +1509,7 @@ module.exports['TimeParameterTypes'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1520,7 +1568,7 @@ module.exports['TimeParameterTypes'] = {
 
 ### ListParameterTypes
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 parameter FooP List<String>
 parameter FooDP default { 'a', 'b', 'c' }
 context Patient
@@ -1530,6 +1578,10 @@ define Foo2: FooDP
 
 module.exports['ListParameterTypes'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1544,8 +1596,9 @@ module.exports['ListParameterTypes'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -1595,8 +1648,7 @@ module.exports['ListParameterTypes'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1655,7 +1707,7 @@ module.exports['ListParameterTypes'] = {
 
 ### IntervalParameterTypes
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 parameter FooP Interval<Integer>
 parameter FooDP default Interval[2,6]
 context Patient
@@ -1665,6 +1717,10 @@ define Foo2: FooDP
 
 module.exports['IntervalParameterTypes'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1679,8 +1735,9 @@ module.exports['IntervalParameterTypes'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -1728,8 +1785,7 @@ module.exports['IntervalParameterTypes'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1788,7 +1844,7 @@ module.exports['IntervalParameterTypes'] = {
 
 ### TupleParameterTypes
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 parameter FooP Tuple { Hello String, MeaningOfLife Integer }
 parameter FooDP default Tuple { Hello: 'Universe', MeaningOfLife: 24 }
 context Patient
@@ -1798,6 +1854,10 @@ define Foo2: FooDP
 
 module.exports['TupleParameterTypes'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1812,8 +1872,9 @@ module.exports['TupleParameterTypes'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -1876,8 +1937,7 @@ module.exports['TupleParameterTypes'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1936,7 +1996,7 @@ module.exports['TupleParameterTypes'] = {
 
 ### DefaultAndNoDefault
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 parameter FooWithNoDefault Integer
 parameter FooWithDefault default 5
 context Patient
@@ -1946,6 +2006,10 @@ define Foo2: FooWithDefault
 
 module.exports['DefaultAndNoDefault'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1960,8 +2024,9 @@ module.exports['DefaultAndNoDefault'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -1993,8 +2058,7 @@ module.exports['DefaultAndNoDefault'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2053,7 +2117,7 @@ module.exports['DefaultAndNoDefault'] = {
 
 ### MeasurementPeriodParameter
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 parameter "Measurement Period" Interval<DateTime>
 context Patient
 define MeasurementPeriod: Interval[DateTime(2011, 1, 1), DateTime(2013, 1, 1)] overlaps "Measurement Period"
@@ -2061,6 +2125,10 @@ define MeasurementPeriod: Interval[DateTime(2011, 1, 1), DateTime(2013, 1, 1)] o
 
 module.exports['MeasurementPeriodParameter'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2075,8 +2143,9 @@ module.exports['MeasurementPeriodParameter'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "parameters" : {
@@ -2102,8 +2171,7 @@ module.exports['MeasurementPeriodParameter'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }

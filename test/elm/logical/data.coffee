@@ -8,7 +8,7 @@
 
 ### And
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define TT: true and true
 define TF: true and false
@@ -23,6 +23,10 @@ define NF: null and false
 
 module.exports['And'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -37,8 +41,9 @@ module.exports['And'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -48,8 +53,7 @@ module.exports['And'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -387,7 +391,7 @@ module.exports['And'] = {
 
 ### Or
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define TT: true or true
 define TF: true or false
@@ -402,6 +406,10 @@ define NF: null or false
 
 module.exports['Or'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -416,8 +424,9 @@ module.exports['Or'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -427,8 +436,7 @@ module.exports['Or'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -766,7 +774,7 @@ module.exports['Or'] = {
 
 ### XOr
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define TT: true xor true
 define TF: true xor false
@@ -781,6 +789,10 @@ define NF: null xor false
 
 module.exports['XOr'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -795,8 +807,9 @@ module.exports['XOr'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -806,8 +819,7 @@ module.exports['XOr'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1145,7 +1157,7 @@ module.exports['XOr'] = {
 
 ### Not
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define NotTrue: not true
 define NotFalse: not false
@@ -1154,6 +1166,10 @@ define NotNull: not null
 
 module.exports['Not'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1168,8 +1184,9 @@ module.exports['Not'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -1179,8 +1196,7 @@ module.exports['Not'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1283,7 +1299,7 @@ module.exports['Not'] = {
 
 ### IsTrue
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define TrueIsTrue: true is true
 define FalseIsTrue: false is true
@@ -1292,6 +1308,10 @@ define NullIsTrue: null is true
 
 module.exports['IsTrue'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1306,8 +1326,9 @@ module.exports['IsTrue'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -1317,8 +1338,7 @@ module.exports['IsTrue'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1421,7 +1441,7 @@ module.exports['IsTrue'] = {
 
 ### IsFalse
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define TrueIsFalse: true is false
 define FalseIsFalse: false is false
@@ -1430,6 +1450,10 @@ define NullIsFalse: null is false
 
 module.exports['IsFalse'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1444,8 +1468,9 @@ module.exports['IsFalse'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -1455,8 +1480,7 @@ module.exports['IsFalse'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }

@@ -8,13 +8,17 @@
 
 ### Nil
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Nil: null
 ###
 
 module.exports['Nil'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -29,8 +33,9 @@ module.exports['Nil'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -40,8 +45,7 @@ module.exports['Nil'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -71,7 +75,7 @@ module.exports['Nil'] = {
 
 ### IsNull
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Nil: null
 define One: 1
@@ -83,6 +87,10 @@ define NonNullVarIsNull: One is null
 
 module.exports['IsNull'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -97,8 +105,9 @@ module.exports['IsNull'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -108,8 +117,7 @@ module.exports['IsNull'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -288,7 +296,7 @@ module.exports['IsNull'] = {
 
 ### Coalesce
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define NullNullHelloNullWorld: Coalesce(null, null, 'Hello', null, 'World')
 define FooNullNullBar: Coalesce('Foo', null, null, 'Bar')
@@ -304,6 +312,10 @@ define UnionAsList: Coalesce(ListA union ListWithNull)
 
 module.exports['Coalesce'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -318,8 +330,9 @@ module.exports['Coalesce'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -329,8 +342,7 @@ module.exports['Coalesce'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -757,8 +769,7 @@ module.exports['Coalesce'] = {
                "type" : "Coalesce",
                "operand" : [ {
                   "localId" : "45",
-                  "dataType" : "{http://hl7.org/fhir}Encounter",
-                  "templateId" : "encounter-qicore-qicore-encounter",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "Retrieve"
                } ]
             }

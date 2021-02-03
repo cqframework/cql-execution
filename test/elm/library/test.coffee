@@ -25,7 +25,7 @@ describe 'Using CommonLib', ->
   it "should have using models defined", ->
     @lib.usings.should.not.be.empty()
     @lib.usings.length.should.equal 1
-    @lib.usings[0].name.should.equal "QUICK"
+    @lib.usings[0].name.should.equal "Simple"
 
   it 'Should have included a library', ->
     @lib.includes.should.not.be.empty()

@@ -66,9 +66,7 @@ module.exports.successor = successor = (val) ->
     if parseInt(val) is val
       if val is MAX_INT_VALUE then throw  new OverFlowException() else val + 1
     else
-      #not bothering with the max float test because javascript does not handle floats at the level
-      #very well
-      val + MIN_FLOAT_PRECISION_VALUE
+      if val is MAX_FLOAT_VALUE then throw new OverFlowException() else val + MIN_FLOAT_PRECISION_VALUE
   else if val?.isDateTime
     if val.sameAs(MAX_DATETIME_VALUE) then throw new OverFlowException() else val.successor()
   else if val?.isDate
@@ -91,9 +89,7 @@ module.exports.predecessor = predecessor = (val) ->
     if parseInt(val) is val
       if val is MIN_INT_VALUE then throw  new OverFlowException() else val - 1
     else
-      #not bothering with the min float test because javascript does not handle floats at the level
-      #very well
-      val - MIN_FLOAT_PRECISION_VALUE
+      if val is MIN_FLOAT_VALUE then throw new OverFlowException() else val - MIN_FLOAT_PRECISION_VALUE
   else if val?.isDateTime
     if val.sameAs(MIN_DATETIME_VALUE) then throw new OverFlowException() else val.predecessor()
   else if val?.isDate

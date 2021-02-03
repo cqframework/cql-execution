@@ -8,7 +8,7 @@
 
 ### ValueSetDef
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 valueset "Known": '2.16.840.1.113883.3.464.1003.101.12.1061'
 valueset "Unknown One Arg": '1.2.3.4.5.6.7.8.9'
 valueset "Unknown Two Arg": '1.2.3.4.5.6.7.8.9' version '1'
@@ -18,6 +18,10 @@ define Foo: 'Bar'
 
 module.exports['ValueSetDef'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -32,8 +36,9 @@ module.exports['ValueSetDef'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "valueSets" : {
@@ -62,8 +67,7 @@ module.exports['ValueSetDef'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -99,7 +103,7 @@ module.exports['ValueSetDef'] = {
 
 ### ValueSetRef
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 valueset "Acute Pharyngitis": '2.16.840.1.113883.3.464.1003.101.12.1001'
 context Patient
 define Foo: "Acute Pharyngitis"
@@ -107,6 +111,10 @@ define Foo: "Acute Pharyngitis"
 
 module.exports['ValueSetRef'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -121,8 +129,9 @@ module.exports['ValueSetRef'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "valueSets" : {
@@ -140,8 +149,7 @@ module.exports['ValueSetRef'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -176,7 +184,7 @@ module.exports['ValueSetRef'] = {
 
 ### InValueSet
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 valueset "Female": '2.16.840.1.113883.3.560.100.2'
 valueset "Versioned Female": '2.16.840.1.113883.3.560.100.2' version '20121025'
 valueset "SharedCodes": '2.16.840.1.113883.3.000.000.0'
@@ -207,6 +215,10 @@ define ListOfCodesNull: (null as List<Code>) in "Female"
 
 module.exports['InValueSet'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -221,8 +233,9 @@ module.exports['InValueSet'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "valueSets" : {
@@ -256,8 +269,7 @@ module.exports['InValueSet'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1839,7 +1851,7 @@ module.exports['InValueSet'] = {
 
 ### Patient Property In ValueSet
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 valueset "Female": '2.16.840.1.113883.3.560.100.2'
 context Patient
 define IsFemale: Patient.gender in "Female"
@@ -1847,6 +1859,10 @@ define IsFemale: Patient.gender in "Female"
 
 module.exports['Patient Property In ValueSet'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1861,8 +1877,9 @@ module.exports['Patient Property In ValueSet'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "valueSets" : {
@@ -1880,8 +1897,7 @@ module.exports['Patient Property In ValueSet'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1949,7 +1965,7 @@ module.exports['Patient Property In ValueSet'] = {
 
 ### CodeDef
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 codesystem "LOINC": 'http://loinc.org'
 code "Tobacco smoking status code": '72166-2' from "LOINC" display 'Tobacco smoking status'
 context Patient
@@ -1958,6 +1974,10 @@ define Foo: 'Bar'
 
 module.exports['CodeDef'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1972,8 +1992,9 @@ module.exports['CodeDef'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "codeSystems" : {
@@ -2004,8 +2025,7 @@ module.exports['CodeDef'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2041,7 +2061,7 @@ module.exports['CodeDef'] = {
 
 ### CodeRef
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 codesystem "LOINC": 'http://loinc.org'
 code "Tobacco smoking status code": '72166-2' from "LOINC" display 'Tobacco smoking status'
 context Patient
@@ -2050,6 +2070,10 @@ define Foo: "Tobacco smoking status code"
 
 module.exports['CodeRef'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2064,8 +2088,9 @@ module.exports['CodeRef'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "codeSystems" : {
@@ -2096,8 +2121,7 @@ module.exports['CodeRef'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2132,7 +2156,7 @@ module.exports['CodeRef'] = {
 
 ### ConceptDef
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 codesystem "LOINC": 'http://loinc.org'
 code "Tobacco smoking status code": '72166-2' from "LOINC" display 'Tobacco smoking status'
 concept "Tobacco smoking status": { "Tobacco smoking status code" } display 'Tobacco smoking status'
@@ -2142,6 +2166,10 @@ define Foo: 'Bar'
 
 module.exports['ConceptDef'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2156,8 +2184,9 @@ module.exports['ConceptDef'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "codeSystems" : {
@@ -2200,8 +2229,7 @@ module.exports['ConceptDef'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2237,7 +2265,7 @@ module.exports['ConceptDef'] = {
 
 ### ConceptRef
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 codesystem "LOINC": 'http://loinc.org'
 code "Tobacco smoking status code": '72166-2' from "LOINC" display 'Tobacco smoking status'
 concept "Tobacco smoking status": { "Tobacco smoking status code" } display 'Tobacco smoking status'
@@ -2247,6 +2275,10 @@ define Foo: "Tobacco smoking status"
 
 module.exports['ConceptRef'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2261,8 +2293,9 @@ module.exports['ConceptRef'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "codeSystems" : {
@@ -2305,8 +2338,7 @@ module.exports['ConceptRef'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2341,7 +2373,7 @@ module.exports['ConceptRef'] = {
 
 ### CalculateAge
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Years: AgeInYears()
 define Months: AgeInMonths()
@@ -2355,6 +2387,10 @@ define Seconds: AgeInSeconds()
 
 module.exports['CalculateAge'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2369,8 +2405,9 @@ module.exports['CalculateAge'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -2380,8 +2417,7 @@ module.exports['CalculateAge'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2590,7 +2626,7 @@ module.exports['CalculateAge'] = {
 
 ### CalculateAgeAt
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define AgeAt2012: AgeInYearsAt(DateTime(2012))
 define AgeAt19810216: AgeInYearsAt(DateTime(1981, 2, 16))
@@ -2603,6 +2639,10 @@ define CalculateAgeInYearsDateArg: CalculateAgeInYearsAt(@1994-12-01T23:59:00.00
 
 module.exports['CalculateAgeAt'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2617,8 +2657,9 @@ module.exports['CalculateAgeAt'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -2628,8 +2669,7 @@ module.exports['CalculateAgeAt'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }

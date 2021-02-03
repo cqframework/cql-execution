@@ -8,7 +8,7 @@
 
 ### Add
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Ten: 10
 define Eleven: 11
@@ -20,6 +20,10 @@ define AddTime: Time(12) + 1 'hour'
 
 module.exports['Add'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -34,8 +38,9 @@ module.exports['Add'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -45,8 +50,7 @@ module.exports['Add'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -380,7 +384,7 @@ module.exports['Add'] = {
 
 ### Subtract
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Ten: 10
 define Eleven: 11
@@ -391,6 +395,10 @@ define SubtractVariables: Eleven - Ten
 
 module.exports['Subtract'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -405,8 +413,9 @@ module.exports['Subtract'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -416,8 +425,7 @@ module.exports['Subtract'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -612,7 +620,7 @@ module.exports['Subtract'] = {
 
 ### Multiply
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Ten: 10
 define Eleven: 11
@@ -623,6 +631,10 @@ define MultiplyVariables: Eleven * Ten
 
 module.exports['Multiply'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -637,8 +649,9 @@ module.exports['Multiply'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -648,8 +661,7 @@ module.exports['Multiply'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -859,7 +871,7 @@ module.exports['Multiply'] = {
 
 ### Divide
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Hundred: 100
 define Four: 4
@@ -871,6 +883,10 @@ define DivideVariables: Hundred / Four
 
 module.exports['Divide'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -885,8 +901,9 @@ module.exports['Divide'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -896,8 +913,7 @@ module.exports['Divide'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1157,13 +1173,17 @@ module.exports['Divide'] = {
 
 ### Negate
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define NegativeOne: -1
 ###
 
 module.exports['Negate'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1178,8 +1198,9 @@ module.exports['Negate'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -1189,8 +1210,7 @@ module.exports['Negate'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1231,7 +1251,7 @@ module.exports['Negate'] = {
 
 ### MathPrecedence
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Mixed: 1 + 5 * 10 - 15 / 3
 define Parenthetical: (1 + 5) * (10 - 15) / 3
@@ -1239,6 +1259,10 @@ define Parenthetical: (1 + 5) * (10 - 15) / 3
 
 module.exports['MathPrecedence'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1253,8 +1277,9 @@ module.exports['MathPrecedence'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -1264,8 +1289,7 @@ module.exports['MathPrecedence'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1463,13 +1487,17 @@ module.exports['MathPrecedence'] = {
 
 ### Power
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Pow: 3 ^ 4
 ###
 
 module.exports['Power'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1484,8 +1512,9 @@ module.exports['Power'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -1495,8 +1524,7 @@ module.exports['Power'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1542,7 +1570,7 @@ module.exports['Power'] = {
 
 ### MinValue
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define MinInteger: minimum Integer
 define MinDecimal: minimum Decimal
@@ -1553,6 +1581,10 @@ define MinWrongType: minimum Quantity
 
 module.exports['MinValue'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1567,8 +1599,9 @@ module.exports['MinValue'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -1578,8 +1611,7 @@ module.exports['MinValue'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1735,7 +1767,7 @@ module.exports['MinValue'] = {
 
 ### MaxValue
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define MaxInteger: maximum Integer
 define MaxDecimal: maximum Decimal
@@ -1746,6 +1778,10 @@ define MaxWrongType: maximum Quantity
 
 module.exports['MaxValue'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1760,8 +1796,9 @@ module.exports['MaxValue'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -1771,8 +1808,7 @@ module.exports['MaxValue'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -1928,7 +1964,7 @@ module.exports['MaxValue'] = {
 
 ### TruncatedDivide
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Trunc: 10 div 3
 define Even: 9 div 3
@@ -1936,6 +1972,10 @@ define Even: 9 div 3
 
 module.exports['TruncatedDivide'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -1950,8 +1990,9 @@ module.exports['TruncatedDivide'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -1961,8 +2002,7 @@ module.exports['TruncatedDivide'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2043,13 +2083,17 @@ module.exports['TruncatedDivide'] = {
 
 ### Modulo
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Mod: 3 mod 2
 ###
 
 module.exports['Modulo'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2064,8 +2108,9 @@ module.exports['Modulo'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -2075,8 +2120,7 @@ module.exports['Modulo'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2122,7 +2166,7 @@ module.exports['Modulo'] = {
 
 ### Ceiling
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Ceil: Ceiling(10.1)
 define Even: Ceiling(10)
@@ -2130,6 +2174,10 @@ define Even: Ceiling(10)
 
 module.exports['Ceiling'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2144,8 +2192,9 @@ module.exports['Ceiling'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -2155,8 +2204,7 @@ module.exports['Ceiling'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2230,7 +2278,7 @@ module.exports['Ceiling'] = {
 
 ### Floor
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define flr: Floor(10.1)
 define Even: Floor(10)
@@ -2238,6 +2286,10 @@ define Even: Floor(10)
 
 module.exports['Floor'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2252,8 +2304,9 @@ module.exports['Floor'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -2263,8 +2316,7 @@ module.exports['Floor'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2338,7 +2390,7 @@ module.exports['Floor'] = {
 
 ### Truncate
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Trunc: Truncate(10.1)
 define Even: Truncate(10)
@@ -2346,6 +2398,10 @@ define Even: Truncate(10)
 
 module.exports['Truncate'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2360,8 +2416,9 @@ module.exports['Truncate'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -2371,8 +2428,7 @@ module.exports['Truncate'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2446,7 +2502,7 @@ module.exports['Truncate'] = {
 
 ### Abs
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Pos: Abs(10)
 define Neg: Abs(-10)
@@ -2455,6 +2511,10 @@ define Zero: Abs(0)
 
 module.exports['Abs'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2469,8 +2529,9 @@ module.exports['Abs'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -2480,8 +2541,7 @@ module.exports['Abs'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2593,7 +2653,7 @@ module.exports['Abs'] = {
 
 ### Round
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Up: Round(4.56)
 define Up_percent: Round(4.56,1)
@@ -2603,6 +2663,10 @@ define Down_percent: Round(4.43,1)
 
 module.exports['Round'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2617,8 +2681,9 @@ module.exports['Round'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -2628,8 +2693,7 @@ module.exports['Round'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2772,13 +2836,17 @@ module.exports['Round'] = {
 
 ### Ln
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define ln: Ln(4)
 ###
 
 module.exports['Ln'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2793,8 +2861,9 @@ module.exports['Ln'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -2804,8 +2873,7 @@ module.exports['Ln'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2849,13 +2917,17 @@ module.exports['Ln'] = {
 
 ### Log
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define log: Log(10,10000)
 ###
 
 module.exports['Log'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2870,8 +2942,9 @@ module.exports['Log'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -2881,8 +2954,7 @@ module.exports['Log'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -2934,7 +3006,7 @@ module.exports['Log'] = {
 
 ### Successor
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Is: successor of 2
 define Rs: successor of 2.2
@@ -2951,6 +3023,10 @@ define max_date: successor of DateTime(9999,12,31,23,59,59,999)
 
 module.exports['Successor'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -2965,8 +3041,9 @@ module.exports['Successor'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -2976,8 +3053,7 @@ module.exports['Successor'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -3552,7 +3628,7 @@ module.exports['Successor'] = {
 
 ### Predecessor
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Is: predecessor of 2
 define Rs: predecessor of 2.2
@@ -3569,6 +3645,10 @@ define min_date: predecessor of DateTime(0001,01,01,0,0,0,0)
 
 module.exports['Predecessor'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -3583,8 +3663,9 @@ module.exports['Predecessor'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -3594,8 +3675,7 @@ module.exports['Predecessor'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -4179,7 +4259,7 @@ module.exports['Predecessor'] = {
 
 ### Quantity
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 
 define days_10: 10 days
@@ -4208,6 +4288,10 @@ define SubtractUcum: (25 'km' - 5 'm') = 24995 'm'
 
 module.exports['Quantity'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -4222,8 +4306,9 @@ module.exports['Quantity'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -4233,8 +4318,7 @@ module.exports['Quantity'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -5292,7 +5376,7 @@ module.exports['Quantity'] = {
 
 ### OutOfBounds
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define IntegerAddOverflow: maximum Integer + 1
 define IntegerAddUnderflow: minimum Integer + -1
@@ -5322,321 +5406,49 @@ define DecimalPowerUnderflow: (minimum Decimal)^3
 define DecimalSuccessorOverflow: successor of maximum Decimal
 define DecimalPredecessorUnderflow: predecessor of minimum Decimal
 
-define MaxQuantity: Quantity(maximum Decimal, 'mm')
-define MinQuantity: Quantity(minimum Decimal, 'mm')
-define QuantityAddOverflow: MaxQuantity + '1.0 mm'
-define QuantityAddUnderflow: MinQuantity + '-1.0 mm'
-define QuantitySubtractOverflow: MaxQuantity - Quantity(-1, 'mm')
-define QuantitySubtractUnderflow: MinQuantity - Quantity(1, 'mm')
-define QuantityMultiplyOverflow: MaxQuantity * Quantity(2, 'mm')
-define QuantityMultiplyUnderflow: MinQuantity * Quantity(2, 'mm')
-define QuantityDivideOverflow: MaxQuantity / Quantity(0.5, 'mm')
-define QuantityDivideUnderflow: MinQuantity / Quantity(-0.5, 'mm')
-define QuantityDivideByZero: '1.0 mm' / '0 mm'
-define QuantityPowerOverflow: MaxQuantity^3
-define QuantityPowerUnderflow: MinQuantity^3
+define MaxQuantity: Quantity { value: maximum Decimal, unit: 'mm' }
+define MinQuantity: Quantity { value: minimum Decimal, unit: 'mm' }
+define QuantityAddOverflow: MaxQuantity + 1.0 'mm'
+define QuantityAddUnderflow: MinQuantity + (-1.0 'mm')
+define QuantitySubtractOverflow: MaxQuantity - (-1 'mm')
+define QuantitySubtractUnderflow: MinQuantity - 1 'mm'
+define QuantityMultiplyOverflow: MaxQuantity * 2 'mm'
+define QuantityMultiplyUnderflow: MinQuantity * 2 'mm'
+define QuantityDivideOverflow: MaxQuantity / 0.5 'mm'
+define QuantityDivideUnderflow: MinQuantity / (-0.5 'mm')
+define QuantityDivideByZero: 1.0 'mm' / 0 'mm'
 define QuantitySuccessorOverflow: successor of MaxQuantity
 define QuantityPredecessorUnderflow: predecessor of MinQuantity
 
-define DateTimeAddOverflow: maximum DateTime + '1 day'
-define DateTimeAddUnderflow: minimum DateTime + '-1 day'
-define DateTimeSubtractOverflow: maximum DateTime - '-1 day'
-define DateTimeSubtractUnderflow: minimum DateTime - '1 day'
+define DateTimeAddOverflow: maximum DateTime + 1 day
+define DateTimeAddUnderflow: minimum DateTime + (-1 day)
+define DateTimeSubtractOverflow: maximum DateTime - (-1 day)
+define DateTimeSubtractUnderflow: minimum DateTime - 1 day
 define DateTimeSuccessorOverflow: successor of maximum DateTime
 define DateTimePredecessorUnderflow: predecessor of minimum DateTime
 
-define DateAddOverflow: maximum Date + '1 day'
-define DateAddUnderflow: minimum Date + '-1 day'
-define DateSubtractOverflow: maximum Date - '-1 day'
-define DateSubtractUnderflow: minimum Date - '1 day'
+define DateAddOverflow: maximum Date + 1 day
+define DateAddUnderflow: minimum Date + (-1 day)
+define DateSubtractOverflow: maximum Date - (-1 day)
+define DateSubtractUnderflow: minimum Date - 1 day
 define DateSuccessorOverflow: successor of maximum Date
 define DatePredecessorUnderflow: predecessor of minimum Date
 
-define TimeAddOverflow: maximum Time + '1 second'
-define TimeAddUnderflow: minimum Time + '-1 second'
-define TimeSubtractOverflow: maximum Time - '-1 second'
-define TimeSubtractUnderflow: minimum Time - '1 second'
+define TimeAddOverflow: maximum Time + 1 second
+define TimeAddUnderflow: minimum Time + (-1 second)
+define TimeSubtractOverflow: maximum Time - (-1 second)
+define TimeSubtractUnderflow: minimum Time - 1 second
 define TimeSuccessorOverflow: successor of maximum Time
 define TimePredecessorUnderflow: predecessor of minimum Time
 
 define ExpOverflow: Exp(maximum Decimal)
 ###
 
-###
-Translation Error(s):
-[32:21, 32:51] Could not resolve call to operator Quantity with signature (System.Decimal,System.String).
-[33:21, 33:51] Could not resolve call to operator Quantity with signature (System.Decimal,System.String).
-[34:29, 34:39] Could not validate reference to expression MaxQuantity because its definition contains errors.
-[35:30, 35:40] Could not validate reference to expression MinQuantity because its definition contains errors.
-[36:34, 36:44] Could not validate reference to expression MaxQuantity because its definition contains errors.
-[37:35, 37:45] Could not validate reference to expression MinQuantity because its definition contains errors.
-[38:34, 38:44] Could not validate reference to expression MaxQuantity because its definition contains errors.
-[39:35, 39:45] Could not validate reference to expression MinQuantity because its definition contains errors.
-[40:32, 40:42] Could not validate reference to expression MaxQuantity because its definition contains errors.
-[41:33, 41:43] Could not validate reference to expression MinQuantity because its definition contains errors.
-[42:30, 42:46] Could not resolve call to operator Divide with signature (System.String,System.String).
-[43:31, 43:41] Could not validate reference to expression MaxQuantity because its definition contains errors.
-[44:32, 44:42] Could not validate reference to expression MinQuantity because its definition contains errors.
-[45:48, 45:58] Could not validate reference to expression MaxQuantity because its definition contains errors.
-[46:53, 46:63] Could not validate reference to expression MinQuantity because its definition contains errors.
-[48:29, 48:54] Could not resolve call to operator Add with signature (System.DateTime,System.String).
-[49:30, 49:56] Could not resolve call to operator Add with signature (System.DateTime,System.String).
-[50:34, 50:60] Could not resolve call to operator Subtract with signature (System.DateTime,System.String).
-[51:35, 51:60] Could not resolve call to operator Subtract with signature (System.DateTime,System.String).
-[55:25, 55:46] Could not resolve call to operator Add with signature (System.Date,System.String).
-[56:26, 56:48] Could not resolve call to operator Add with signature (System.Date,System.String).
-[57:30, 57:52] Could not resolve call to operator Subtract with signature (System.Date,System.String).
-[58:31, 58:52] Could not resolve call to operator Subtract with signature (System.Date,System.String).
-[62:25, 62:49] Could not resolve call to operator Add with signature (System.Time,System.String).
-[63:26, 63:51] Could not resolve call to operator Add with signature (System.Time,System.String).
-[64:30, 64:55] Could not resolve call to operator Subtract with signature (System.Time,System.String).
-[65:31, 65:55] Could not resolve call to operator Subtract with signature (System.Time,System.String).
-###
 module.exports['OutOfBounds'] = {
    "library" : {
       "annotation" : [ {
-         "startLine" : 32,
-         "startChar" : 21,
-         "endLine" : 32,
-         "endChar" : 51,
-         "message" : "Could not resolve call to operator Quantity with signature (System.Decimal,System.String).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 33,
-         "startChar" : 21,
-         "endLine" : 33,
-         "endChar" : 51,
-         "message" : "Could not resolve call to operator Quantity with signature (System.Decimal,System.String).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 34,
-         "startChar" : 29,
-         "endLine" : 34,
-         "endChar" : 39,
-         "message" : "Could not validate reference to expression MaxQuantity because its definition contains errors.",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 35,
-         "startChar" : 30,
-         "endLine" : 35,
-         "endChar" : 40,
-         "message" : "Could not validate reference to expression MinQuantity because its definition contains errors.",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 36,
-         "startChar" : 34,
-         "endLine" : 36,
-         "endChar" : 44,
-         "message" : "Could not validate reference to expression MaxQuantity because its definition contains errors.",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 37,
-         "startChar" : 35,
-         "endLine" : 37,
-         "endChar" : 45,
-         "message" : "Could not validate reference to expression MinQuantity because its definition contains errors.",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 38,
-         "startChar" : 34,
-         "endLine" : 38,
-         "endChar" : 44,
-         "message" : "Could not validate reference to expression MaxQuantity because its definition contains errors.",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 39,
-         "startChar" : 35,
-         "endLine" : 39,
-         "endChar" : 45,
-         "message" : "Could not validate reference to expression MinQuantity because its definition contains errors.",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 40,
-         "startChar" : 32,
-         "endLine" : 40,
-         "endChar" : 42,
-         "message" : "Could not validate reference to expression MaxQuantity because its definition contains errors.",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 41,
-         "startChar" : 33,
-         "endLine" : 41,
-         "endChar" : 43,
-         "message" : "Could not validate reference to expression MinQuantity because its definition contains errors.",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 42,
-         "startChar" : 30,
-         "endLine" : 42,
-         "endChar" : 46,
-         "message" : "Could not resolve call to operator Divide with signature (System.String,System.String).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 43,
-         "startChar" : 31,
-         "endLine" : 43,
-         "endChar" : 41,
-         "message" : "Could not validate reference to expression MaxQuantity because its definition contains errors.",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 44,
-         "startChar" : 32,
-         "endLine" : 44,
-         "endChar" : 42,
-         "message" : "Could not validate reference to expression MinQuantity because its definition contains errors.",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 45,
-         "startChar" : 48,
-         "endLine" : 45,
-         "endChar" : 58,
-         "message" : "Could not validate reference to expression MaxQuantity because its definition contains errors.",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 46,
-         "startChar" : 53,
-         "endLine" : 46,
-         "endChar" : 63,
-         "message" : "Could not validate reference to expression MinQuantity because its definition contains errors.",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 48,
-         "startChar" : 29,
-         "endLine" : 48,
-         "endChar" : 54,
-         "message" : "Could not resolve call to operator Add with signature (System.DateTime,System.String).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 49,
-         "startChar" : 30,
-         "endLine" : 49,
-         "endChar" : 56,
-         "message" : "Could not resolve call to operator Add with signature (System.DateTime,System.String).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 50,
-         "startChar" : 34,
-         "endLine" : 50,
-         "endChar" : 60,
-         "message" : "Could not resolve call to operator Subtract with signature (System.DateTime,System.String).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 51,
-         "startChar" : 35,
-         "endLine" : 51,
-         "endChar" : 60,
-         "message" : "Could not resolve call to operator Subtract with signature (System.DateTime,System.String).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 55,
-         "startChar" : 25,
-         "endLine" : 55,
-         "endChar" : 46,
-         "message" : "Could not resolve call to operator Add with signature (System.Date,System.String).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 56,
-         "startChar" : 26,
-         "endLine" : 56,
-         "endChar" : 48,
-         "message" : "Could not resolve call to operator Add with signature (System.Date,System.String).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 57,
-         "startChar" : 30,
-         "endLine" : 57,
-         "endChar" : 52,
-         "message" : "Could not resolve call to operator Subtract with signature (System.Date,System.String).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 58,
-         "startChar" : 31,
-         "endLine" : 58,
-         "endChar" : 52,
-         "message" : "Could not resolve call to operator Subtract with signature (System.Date,System.String).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 62,
-         "startChar" : 25,
-         "endLine" : 62,
-         "endChar" : 49,
-         "message" : "Could not resolve call to operator Add with signature (System.Time,System.String).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 63,
-         "startChar" : 26,
-         "endLine" : 63,
-         "endChar" : 51,
-         "message" : "Could not resolve call to operator Add with signature (System.Time,System.String).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 64,
-         "startChar" : 30,
-         "endLine" : 64,
-         "endChar" : 55,
-         "message" : "Could not resolve call to operator Subtract with signature (System.Time,System.String).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "startLine" : 65,
-         "startChar" : 31,
-         "endLine" : 65,
-         "endChar" : 55,
-         "message" : "Could not resolve call to operator Subtract with signature (System.Time,System.String).",
-         "errorType" : "semantic",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -5652,8 +5464,9 @@ module.exports['OutOfBounds'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -5663,8 +5476,7 @@ module.exports['OutOfBounds'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -6935,33 +6747,58 @@ module.exports['OutOfBounds'] = {
                   }, {
                      "r" : "137",
                      "s" : [ {
-                        "value" : [ "Quantity","(" ]
+                        "value" : [ "Quantity"," { " ]
                      }, {
-                        "r" : "135",
                         "s" : [ {
-                           "value" : [ "maximum"," " ]
+                           "value" : [ "value",": " ]
                         }, {
-                           "r" : "134",
+                           "r" : "135",
                            "s" : [ {
-                              "value" : [ "Decimal" ]
+                              "value" : [ "maximum"," " ]
+                           }, {
+                              "r" : "134",
+                              "s" : [ {
+                                 "value" : [ "Decimal" ]
+                              } ]
                            } ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "136",
                         "s" : [ {
-                           "value" : [ "'mm'" ]
+                           "value" : [ "unit",": " ]
+                        }, {
+                           "r" : "136",
+                           "s" : [ {
+                              "value" : [ "'mm'" ]
+                           } ]
                         } ]
                      }, {
-                        "value" : [ ")" ]
+                        "value" : [ " }" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
                "localId" : "137",
-               "type" : "Null"
+               "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
+               "type" : "Instance",
+               "element" : [ {
+                  "name" : "value",
+                  "value" : {
+                     "localId" : "135",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "MaxValue"
+                  }
+               }, {
+                  "name" : "unit",
+                  "value" : {
+                     "localId" : "136",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "mm",
+                     "type" : "Literal"
+                  }
+               } ]
             }
          }, {
             "localId" : "143",
@@ -6977,33 +6814,58 @@ module.exports['OutOfBounds'] = {
                   }, {
                      "r" : "142",
                      "s" : [ {
-                        "value" : [ "Quantity","(" ]
+                        "value" : [ "Quantity"," { " ]
                      }, {
-                        "r" : "140",
                         "s" : [ {
-                           "value" : [ "minimum"," " ]
+                           "value" : [ "value",": " ]
                         }, {
-                           "r" : "139",
+                           "r" : "140",
                            "s" : [ {
-                              "value" : [ "Decimal" ]
+                              "value" : [ "minimum"," " ]
+                           }, {
+                              "r" : "139",
+                              "s" : [ {
+                                 "value" : [ "Decimal" ]
+                              } ]
                            } ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "141",
                         "s" : [ {
-                           "value" : [ "'mm'" ]
+                           "value" : [ "unit",": " ]
+                        }, {
+                           "r" : "141",
+                           "s" : [ {
+                              "value" : [ "'mm'" ]
+                           } ]
                         } ]
                      }, {
-                        "value" : [ ")" ]
+                        "value" : [ " }" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
                "localId" : "142",
-               "type" : "Null"
+               "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
+               "type" : "Instance",
+               "element" : [ {
+                  "name" : "value",
+                  "value" : {
+                     "localId" : "140",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "MinValue"
+                  }
+               }, {
+                  "name" : "unit",
+                  "value" : {
+                     "localId" : "141",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "mm",
+                     "type" : "Literal"
+                  }
+               } ]
             }
          }, {
             "localId" : "147",
@@ -7028,7 +6890,7 @@ module.exports['OutOfBounds'] = {
                      }, {
                         "r" : "145",
                         "s" : [ {
-                           "value" : [ "'1.0 mm'" ]
+                           "value" : [ "1.0 ","'mm'" ]
                         } ]
                      } ]
                   } ]
@@ -7036,21 +6898,31 @@ module.exports['OutOfBounds'] = {
             } ],
             "expression" : {
                "localId" : "146",
-               "type" : "Null"
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "144",
+                  "name" : "MaxQuantity",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "145",
+                  "value" : 1.0,
+                  "unit" : "mm",
+                  "type" : "Quantity"
+               } ]
             }
          }, {
-            "localId" : "151",
+            "localId" : "152",
             "name" : "QuantityAddUnderflow",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "151",
+                  "r" : "152",
                   "s" : [ {
                      "value" : [ "define ","QuantityAddUnderflow",": " ]
                   }, {
-                     "r" : "150",
+                     "r" : "151",
                      "s" : [ {
                         "r" : "148",
                         "s" : [ {
@@ -7059,54 +6931,77 @@ module.exports['OutOfBounds'] = {
                      }, {
                         "value" : [ " + " ]
                      }, {
-                        "r" : "149",
+                        "r" : "150",
                         "s" : [ {
-                           "value" : [ "'-1.0 mm'" ]
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "150",
+                           "s" : [ {
+                              "value" : [ "-" ]
+                           }, {
+                              "r" : "149",
+                              "s" : [ {
+                                 "value" : [ "1.0 ","'mm'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "150",
-               "type" : "Null"
+               "localId" : "151",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "148",
+                  "name" : "MinQuantity",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "150",
+                  "type" : "Negate",
+                  "operand" : {
+                     "localId" : "149",
+                     "value" : 1.0,
+                     "unit" : "mm",
+                     "type" : "Quantity"
+                  }
+               } ]
             }
          }, {
-            "localId" : "158",
+            "localId" : "157",
             "name" : "QuantitySubtractOverflow",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "158",
+                  "r" : "157",
                   "s" : [ {
                      "value" : [ "define ","QuantitySubtractOverflow",": " ]
                   }, {
-                     "r" : "157",
+                     "r" : "156",
                      "s" : [ {
-                        "r" : "152",
+                        "r" : "153",
                         "s" : [ {
                            "value" : [ "MaxQuantity" ]
                         } ]
                      }, {
                         "value" : [ " - " ]
                      }, {
-                        "r" : "156",
+                        "r" : "155",
                         "s" : [ {
-                           "value" : [ "Quantity","(" ]
-                        }, {
-                           "r" : "154",
-                           "s" : [ {
-                              "r" : "153",
-                              "value" : [ "-","1" ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
+                           "value" : [ "(" ]
                         }, {
                            "r" : "155",
                            "s" : [ {
-                              "value" : [ "'mm'" ]
+                              "value" : [ "-" ]
+                           }, {
+                              "r" : "154",
+                              "s" : [ {
+                                 "value" : [ "1 ","'mm'" ]
+                              } ]
                            } ]
                         }, {
                            "value" : [ ")" ]
@@ -7116,120 +7011,228 @@ module.exports['OutOfBounds'] = {
                }
             } ],
             "expression" : {
-               "localId" : "157",
-               "type" : "Null"
+               "localId" : "156",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "153",
+                  "name" : "MaxQuantity",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "155",
+                  "type" : "Negate",
+                  "operand" : {
+                     "localId" : "154",
+                     "value" : 1,
+                     "unit" : "mm",
+                     "type" : "Quantity"
+                  }
+               } ]
             }
          }, {
-            "localId" : "164",
+            "localId" : "161",
             "name" : "QuantitySubtractUnderflow",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "164",
+                  "r" : "161",
                   "s" : [ {
                      "value" : [ "define ","QuantitySubtractUnderflow",": " ]
                   }, {
-                     "r" : "163",
+                     "r" : "160",
                      "s" : [ {
-                        "r" : "159",
+                        "r" : "158",
                         "s" : [ {
                            "value" : [ "MinQuantity" ]
                         } ]
                      }, {
                         "value" : [ " - " ]
                      }, {
-                        "r" : "162",
+                        "r" : "159",
                         "s" : [ {
-                           "r" : "160",
-                           "value" : [ "Quantity","(","1",", " ]
-                        }, {
-                           "r" : "161",
-                           "s" : [ {
-                              "value" : [ "'mm'" ]
-                           } ]
-                        }, {
-                           "value" : [ ")" ]
+                           "value" : [ "1 ","'mm'" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "163",
-               "type" : "Null"
+               "localId" : "160",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "158",
+                  "name" : "MinQuantity",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "159",
+                  "value" : 1,
+                  "unit" : "mm",
+                  "type" : "Quantity"
+               } ]
             }
          }, {
-            "localId" : "170",
+            "localId" : "165",
             "name" : "QuantityMultiplyOverflow",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "170",
+                  "r" : "165",
                   "s" : [ {
                      "value" : [ "define ","QuantityMultiplyOverflow",": " ]
                   }, {
-                     "r" : "169",
+                     "r" : "164",
                      "s" : [ {
-                        "r" : "165",
+                        "r" : "162",
                         "s" : [ {
                            "value" : [ "MaxQuantity" ]
                         } ]
                      }, {
                         "value" : [ " * " ]
                      }, {
-                        "r" : "168",
+                        "r" : "163",
                         "s" : [ {
-                           "r" : "166",
-                           "value" : [ "Quantity","(","2",", " ]
-                        }, {
-                           "r" : "167",
-                           "s" : [ {
-                              "value" : [ "'mm'" ]
-                           } ]
-                        }, {
-                           "value" : [ ")" ]
+                           "value" : [ "2 ","'mm'" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "169",
-               "type" : "Null"
+               "localId" : "164",
+               "type" : "Multiply",
+               "operand" : [ {
+                  "localId" : "162",
+                  "name" : "MaxQuantity",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "163",
+                  "value" : 2,
+                  "unit" : "mm",
+                  "type" : "Quantity"
+               } ]
             }
          }, {
-            "localId" : "176",
+            "localId" : "169",
             "name" : "QuantityMultiplyUnderflow",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "176",
+                  "r" : "169",
                   "s" : [ {
                      "value" : [ "define ","QuantityMultiplyUnderflow",": " ]
                   }, {
-                     "r" : "175",
+                     "r" : "168",
                      "s" : [ {
-                        "r" : "171",
+                        "r" : "166",
                         "s" : [ {
                            "value" : [ "MinQuantity" ]
                         } ]
                      }, {
                         "value" : [ " * " ]
                      }, {
+                        "r" : "167",
+                        "s" : [ {
+                           "value" : [ "2 ","'mm'" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "168",
+               "type" : "Multiply",
+               "operand" : [ {
+                  "localId" : "166",
+                  "name" : "MinQuantity",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "167",
+                  "value" : 2,
+                  "unit" : "mm",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "173",
+            "name" : "QuantityDivideOverflow",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "173",
+                  "s" : [ {
+                     "value" : [ "define ","QuantityDivideOverflow",": " ]
+                  }, {
+                     "r" : "172",
+                     "s" : [ {
+                        "r" : "170",
+                        "s" : [ {
+                           "value" : [ "MaxQuantity" ]
+                        } ]
+                     }, {
+                        "value" : [ " / " ]
+                     }, {
+                        "r" : "171",
+                        "s" : [ {
+                           "value" : [ "0.5 ","'mm'" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "172",
+               "type" : "Divide",
+               "operand" : [ {
+                  "localId" : "170",
+                  "name" : "MaxQuantity",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "171",
+                  "value" : 0.5,
+                  "unit" : "mm",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "178",
+            "name" : "QuantityDivideUnderflow",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "178",
+                  "s" : [ {
+                     "value" : [ "define ","QuantityDivideUnderflow",": " ]
+                  }, {
+                     "r" : "177",
+                     "s" : [ {
                         "r" : "174",
                         "s" : [ {
-                           "r" : "172",
-                           "value" : [ "Quantity","(","2",", " ]
+                           "value" : [ "MinQuantity" ]
+                        } ]
+                     }, {
+                        "value" : [ " / " ]
+                     }, {
+                        "r" : "176",
+                        "s" : [ {
+                           "value" : [ "(" ]
                         }, {
-                           "r" : "173",
+                           "r" : "176",
                            "s" : [ {
-                              "value" : [ "'mm'" ]
+                              "value" : [ "-" ]
+                           }, {
+                              "r" : "175",
+                              "s" : [ {
+                                 "value" : [ "0.5 ","'mm'" ]
+                              } ]
                            } ]
                         }, {
                            "value" : [ ")" ]
@@ -7239,12 +7242,26 @@ module.exports['OutOfBounds'] = {
                }
             } ],
             "expression" : {
-               "localId" : "175",
-               "type" : "Null"
+               "localId" : "177",
+               "type" : "Divide",
+               "operand" : [ {
+                  "localId" : "174",
+                  "name" : "MinQuantity",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "176",
+                  "type" : "Negate",
+                  "operand" : {
+                     "localId" : "175",
+                     "value" : 0.5,
+                     "unit" : "mm",
+                     "type" : "Quantity"
+                  }
+               } ]
             }
          }, {
             "localId" : "182",
-            "name" : "QuantityDivideOverflow",
+            "name" : "QuantityDivideByZero",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -7252,28 +7269,20 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "182",
                   "s" : [ {
-                     "value" : [ "define ","QuantityDivideOverflow",": " ]
+                     "value" : [ "define ","QuantityDivideByZero",": " ]
                   }, {
                      "r" : "181",
                      "s" : [ {
-                        "r" : "177",
+                        "r" : "179",
                         "s" : [ {
-                           "value" : [ "MaxQuantity" ]
+                           "value" : [ "1.0 ","'mm'" ]
                         } ]
                      }, {
                         "value" : [ " / " ]
                      }, {
                         "r" : "180",
                         "s" : [ {
-                           "r" : "178",
-                           "value" : [ "Quantity","(","0.5",", " ]
-                        }, {
-                           "r" : "179",
-                           "s" : [ {
-                              "value" : [ "'mm'" ]
-                           } ]
-                        }, {
-                           "value" : [ ")" ]
+                           "value" : [ "0 ","'mm'" ]
                         } ]
                      } ]
                   } ]
@@ -7281,44 +7290,171 @@ module.exports['OutOfBounds'] = {
             } ],
             "expression" : {
                "localId" : "181",
-               "type" : "Null"
+               "type" : "Divide",
+               "operand" : [ {
+                  "localId" : "179",
+                  "value" : 1.0,
+                  "unit" : "mm",
+                  "type" : "Quantity"
+               }, {
+                  "localId" : "180",
+                  "value" : 0,
+                  "unit" : "mm",
+                  "type" : "Quantity"
+               } ]
             }
          }, {
-            "localId" : "189",
-            "name" : "QuantityDivideUnderflow",
+            "localId" : "185",
+            "name" : "QuantitySuccessorOverflow",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "189",
+                  "r" : "185",
                   "s" : [ {
-                     "value" : [ "define ","QuantityDivideUnderflow",": " ]
+                     "value" : [ "define ","QuantitySuccessorOverflow",": " ]
                   }, {
-                     "r" : "188",
+                     "r" : "184",
                      "s" : [ {
+                        "value" : [ "successor of " ]
+                     }, {
                         "r" : "183",
+                        "s" : [ {
+                           "value" : [ "MaxQuantity" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "184",
+               "type" : "Successor",
+               "operand" : {
+                  "localId" : "183",
+                  "name" : "MaxQuantity",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "localId" : "188",
+            "name" : "QuantityPredecessorUnderflow",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "188",
+                  "s" : [ {
+                     "value" : [ "define ","QuantityPredecessorUnderflow",": " ]
+                  }, {
+                     "r" : "187",
+                     "s" : [ {
+                        "value" : [ "predecessor of " ]
+                     }, {
+                        "r" : "186",
                         "s" : [ {
                            "value" : [ "MinQuantity" ]
                         } ]
-                     }, {
-                        "value" : [ " / " ]
-                     }, {
-                        "r" : "187",
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "187",
+               "type" : "Predecessor",
+               "operand" : {
+                  "localId" : "186",
+                  "name" : "MinQuantity",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "localId" : "193",
+            "name" : "DateTimeAddOverflow",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "193",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimeAddOverflow",": " ]
+                  }, {
+                     "r" : "192",
+                     "s" : [ {
+                        "r" : "190",
                         "s" : [ {
-                           "value" : [ "Quantity","(" ]
+                           "value" : [ "maximum"," " ]
                         }, {
-                           "r" : "185",
+                           "r" : "189",
                            "s" : [ {
-                              "r" : "184",
-                              "value" : [ "-","0.5" ]
+                              "value" : [ "DateTime" ]
                            } ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "191",
+                        "s" : [ {
+                           "value" : [ "1 ","day" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "192",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "190",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "MaxValue"
+               }, {
+                  "localId" : "191",
+                  "value" : 1,
+                  "unit" : "day",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "199",
+            "name" : "DateTimeAddUnderflow",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "199",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimeAddUnderflow",": " ]
+                  }, {
+                     "r" : "198",
+                     "s" : [ {
+                        "r" : "195",
+                        "s" : [ {
+                           "value" : [ "minimum"," " ]
                         }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "186",
+                           "r" : "194",
                            "s" : [ {
-                              "value" : [ "'mm'" ]
+                              "value" : [ "DateTime" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "197",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "197",
+                           "s" : [ {
+                              "value" : [ "-" ]
+                           }, {
+                              "r" : "196",
+                              "s" : [ {
+                                 "value" : [ "1 ","day" ]
+                              } ]
                            } ]
                         }, {
                            "value" : [ ")" ]
@@ -7328,251 +7464,42 @@ module.exports['OutOfBounds'] = {
                }
             } ],
             "expression" : {
-               "localId" : "188",
-               "type" : "Null"
+               "localId" : "198",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "195",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "MinValue"
+               }, {
+                  "localId" : "197",
+                  "type" : "Negate",
+                  "operand" : {
+                     "localId" : "196",
+                     "value" : 1,
+                     "unit" : "day",
+                     "type" : "Quantity"
+                  }
+               } ]
             }
          }, {
-            "localId" : "193",
-            "name" : "QuantityDivideByZero",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "193",
-                  "s" : [ {
-                     "value" : [ "define ","QuantityDivideByZero",": " ]
-                  }, {
-                     "r" : "192",
-                     "s" : [ {
-                        "r" : "190",
-                        "s" : [ {
-                           "value" : [ "'1.0 mm'" ]
-                        } ]
-                     }, {
-                        "value" : [ " / " ]
-                     }, {
-                        "r" : "191",
-                        "s" : [ {
-                           "value" : [ "'0 mm'" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "192",
-               "type" : "Null"
-            }
-         }, {
-            "localId" : "197",
-            "name" : "QuantityPowerOverflow",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "197",
-                  "s" : [ {
-                     "value" : [ "define ","QuantityPowerOverflow",": " ]
-                  }, {
-                     "r" : "196",
-                     "s" : [ {
-                        "r" : "194",
-                        "s" : [ {
-                           "value" : [ "MaxQuantity" ]
-                        } ]
-                     }, {
-                        "r" : "195",
-                        "value" : [ "^","3" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "196",
-               "type" : "Null"
-            }
-         }, {
-            "localId" : "201",
-            "name" : "QuantityPowerUnderflow",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "201",
-                  "s" : [ {
-                     "value" : [ "define ","QuantityPowerUnderflow",": " ]
-                  }, {
-                     "r" : "200",
-                     "s" : [ {
-                        "r" : "198",
-                        "s" : [ {
-                           "value" : [ "MinQuantity" ]
-                        } ]
-                     }, {
-                        "r" : "199",
-                        "value" : [ "^","3" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "200",
-               "type" : "Null"
-            }
-         }, {
-            "localId" : "204",
-            "name" : "QuantitySuccessorOverflow",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "204",
-                  "s" : [ {
-                     "value" : [ "define ","QuantitySuccessorOverflow",": " ]
-                  }, {
-                     "r" : "203",
-                     "s" : [ {
-                        "value" : [ "successor of " ]
-                     }, {
-                        "r" : "202",
-                        "s" : [ {
-                           "value" : [ "MaxQuantity" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "203",
-               "type" : "Null"
-            }
-         }, {
-            "localId" : "207",
-            "name" : "QuantityPredecessorUnderflow",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "207",
-                  "s" : [ {
-                     "value" : [ "define ","QuantityPredecessorUnderflow",": " ]
-                  }, {
-                     "r" : "206",
-                     "s" : [ {
-                        "value" : [ "predecessor of " ]
-                     }, {
-                        "r" : "205",
-                        "s" : [ {
-                           "value" : [ "MinQuantity" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "206",
-               "type" : "Null"
-            }
-         }, {
-            "localId" : "212",
-            "name" : "DateTimeAddOverflow",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "212",
-                  "s" : [ {
-                     "value" : [ "define ","DateTimeAddOverflow",": " ]
-                  }, {
-                     "r" : "211",
-                     "s" : [ {
-                        "r" : "209",
-                        "s" : [ {
-                           "value" : [ "maximum"," " ]
-                        }, {
-                           "r" : "208",
-                           "s" : [ {
-                              "value" : [ "DateTime" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ " + " ]
-                     }, {
-                        "r" : "210",
-                        "s" : [ {
-                           "value" : [ "'1 day'" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "211",
-               "type" : "Null"
-            }
-         }, {
-            "localId" : "217",
-            "name" : "DateTimeAddUnderflow",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "217",
-                  "s" : [ {
-                     "value" : [ "define ","DateTimeAddUnderflow",": " ]
-                  }, {
-                     "r" : "216",
-                     "s" : [ {
-                        "r" : "214",
-                        "s" : [ {
-                           "value" : [ "minimum"," " ]
-                        }, {
-                           "r" : "213",
-                           "s" : [ {
-                              "value" : [ "DateTime" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ " + " ]
-                     }, {
-                        "r" : "215",
-                        "s" : [ {
-                           "value" : [ "'-1 day'" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "216",
-               "type" : "Null"
-            }
-         }, {
-            "localId" : "222",
+            "localId" : "205",
             "name" : "DateTimeSubtractOverflow",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "222",
+                  "r" : "205",
                   "s" : [ {
                      "value" : [ "define ","DateTimeSubtractOverflow",": " ]
                   }, {
-                     "r" : "221",
+                     "r" : "204",
                      "s" : [ {
-                        "r" : "219",
+                        "r" : "201",
                         "s" : [ {
                            "value" : [ "maximum"," " ]
                         }, {
-                           "r" : "218",
+                           "r" : "200",
                            "s" : [ {
                               "value" : [ "DateTime" ]
                            } ]
@@ -7580,37 +7507,63 @@ module.exports['OutOfBounds'] = {
                      }, {
                         "value" : [ " - " ]
                      }, {
-                        "r" : "220",
+                        "r" : "203",
                         "s" : [ {
-                           "value" : [ "'-1 day'" ]
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "203",
+                           "s" : [ {
+                              "value" : [ "-" ]
+                           }, {
+                              "r" : "202",
+                              "s" : [ {
+                                 "value" : [ "1 ","day" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "221",
-               "type" : "Null"
+               "localId" : "204",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "201",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "MaxValue"
+               }, {
+                  "localId" : "203",
+                  "type" : "Negate",
+                  "operand" : {
+                     "localId" : "202",
+                     "value" : 1,
+                     "unit" : "day",
+                     "type" : "Quantity"
+                  }
+               } ]
             }
          }, {
-            "localId" : "227",
+            "localId" : "210",
             "name" : "DateTimeSubtractUnderflow",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "227",
+                  "r" : "210",
                   "s" : [ {
                      "value" : [ "define ","DateTimeSubtractUnderflow",": " ]
                   }, {
-                     "r" : "226",
+                     "r" : "209",
                      "s" : [ {
-                        "r" : "224",
+                        "r" : "207",
                         "s" : [ {
                            "value" : [ "minimum"," " ]
                         }, {
-                           "r" : "223",
+                           "r" : "206",
                            "s" : [ {
                               "value" : [ "DateTime" ]
                            } ]
@@ -7618,39 +7571,49 @@ module.exports['OutOfBounds'] = {
                      }, {
                         "value" : [ " - " ]
                      }, {
-                        "r" : "225",
+                        "r" : "208",
                         "s" : [ {
-                           "value" : [ "'1 day'" ]
+                           "value" : [ "1 ","day" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "226",
-               "type" : "Null"
+               "localId" : "209",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "207",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "MinValue"
+               }, {
+                  "localId" : "208",
+                  "value" : 1,
+                  "unit" : "day",
+                  "type" : "Quantity"
+               } ]
             }
          }, {
-            "localId" : "231",
+            "localId" : "214",
             "name" : "DateTimeSuccessorOverflow",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "231",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "define ","DateTimeSuccessorOverflow",": " ]
                   }, {
-                     "r" : "230",
+                     "r" : "213",
                      "s" : [ {
                         "value" : [ "successor of " ]
                      }, {
-                        "r" : "229",
+                        "r" : "212",
                         "s" : [ {
                            "value" : [ "maximum"," " ]
                         }, {
-                           "r" : "228",
+                           "r" : "211",
                            "s" : [ {
                               "value" : [ "DateTime" ]
                            } ]
@@ -7660,17 +7623,167 @@ module.exports['OutOfBounds'] = {
                }
             } ],
             "expression" : {
-               "localId" : "230",
+               "localId" : "213",
                "type" : "Successor",
                "operand" : {
-                  "localId" : "229",
+                  "localId" : "212",
                   "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "MaxValue"
                }
             }
          }, {
-            "localId" : "235",
+            "localId" : "218",
             "name" : "DateTimePredecessorUnderflow",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "218",
+                  "s" : [ {
+                     "value" : [ "define ","DateTimePredecessorUnderflow",": " ]
+                  }, {
+                     "r" : "217",
+                     "s" : [ {
+                        "value" : [ "predecessor of " ]
+                     }, {
+                        "r" : "216",
+                        "s" : [ {
+                           "value" : [ "minimum"," " ]
+                        }, {
+                           "r" : "215",
+                           "s" : [ {
+                              "value" : [ "DateTime" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "217",
+               "type" : "Predecessor",
+               "operand" : {
+                  "localId" : "216",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "MinValue"
+               }
+            }
+         }, {
+            "localId" : "223",
+            "name" : "DateAddOverflow",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "223",
+                  "s" : [ {
+                     "value" : [ "define ","DateAddOverflow",": " ]
+                  }, {
+                     "r" : "222",
+                     "s" : [ {
+                        "r" : "220",
+                        "s" : [ {
+                           "value" : [ "maximum"," " ]
+                        }, {
+                           "r" : "219",
+                           "s" : [ {
+                              "value" : [ "Date" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "221",
+                        "s" : [ {
+                           "value" : [ "1 ","day" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "222",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "220",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "MaxValue"
+               }, {
+                  "localId" : "221",
+                  "value" : 1,
+                  "unit" : "day",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "229",
+            "name" : "DateAddUnderflow",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "229",
+                  "s" : [ {
+                     "value" : [ "define ","DateAddUnderflow",": " ]
+                  }, {
+                     "r" : "228",
+                     "s" : [ {
+                        "r" : "225",
+                        "s" : [ {
+                           "value" : [ "minimum"," " ]
+                        }, {
+                           "r" : "224",
+                           "s" : [ {
+                              "value" : [ "Date" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "227",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "227",
+                           "s" : [ {
+                              "value" : [ "-" ]
+                           }, {
+                              "r" : "226",
+                              "s" : [ {
+                                 "value" : [ "1 ","day" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "228",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "225",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "MinValue"
+               }, {
+                  "localId" : "227",
+                  "type" : "Negate",
+                  "operand" : {
+                     "localId" : "226",
+                     "value" : 1,
+                     "unit" : "day",
+                     "type" : "Quantity"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "235",
+            "name" : "DateSubtractOverflow",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -7678,20 +7791,37 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "235",
                   "s" : [ {
-                     "value" : [ "define ","DateTimePredecessorUnderflow",": " ]
+                     "value" : [ "define ","DateSubtractOverflow",": " ]
                   }, {
                      "r" : "234",
                      "s" : [ {
-                        "value" : [ "predecessor of " ]
+                        "r" : "231",
+                        "s" : [ {
+                           "value" : [ "maximum"," " ]
+                        }, {
+                           "r" : "230",
+                           "s" : [ {
+                              "value" : [ "Date" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
                      }, {
                         "r" : "233",
                         "s" : [ {
-                           "value" : [ "minimum"," " ]
+                           "value" : [ "(" ]
                         }, {
-                           "r" : "232",
+                           "r" : "233",
                            "s" : [ {
-                              "value" : [ "DateTime" ]
+                              "value" : [ "-" ]
+                           }, {
+                              "r" : "232",
+                              "s" : [ {
+                                 "value" : [ "1 ","day" ]
+                              } ]
                            } ]
+                        }, {
+                           "value" : [ ")" ]
                         } ]
                      } ]
                   } ]
@@ -7699,16 +7829,25 @@ module.exports['OutOfBounds'] = {
             } ],
             "expression" : {
                "localId" : "234",
-               "type" : "Predecessor",
-               "operand" : {
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "231",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "MaxValue"
+               }, {
                   "localId" : "233",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
-                  "type" : "MinValue"
-               }
+                  "type" : "Negate",
+                  "operand" : {
+                     "localId" : "232",
+                     "value" : 1,
+                     "unit" : "day",
+                     "type" : "Quantity"
+                  }
+               } ]
             }
          }, {
             "localId" : "240",
-            "name" : "DateAddOverflow",
+            "name" : "DateSubtractUnderflow",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -7716,13 +7855,13 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "240",
                   "s" : [ {
-                     "value" : [ "define ","DateAddOverflow",": " ]
+                     "value" : [ "define ","DateSubtractUnderflow",": " ]
                   }, {
                      "r" : "239",
                      "s" : [ {
                         "r" : "237",
                         "s" : [ {
-                           "value" : [ "maximum"," " ]
+                           "value" : [ "minimum"," " ]
                         }, {
                            "r" : "236",
                            "s" : [ {
@@ -7730,11 +7869,11 @@ module.exports['OutOfBounds'] = {
                            } ]
                         } ]
                      }, {
-                        "value" : [ " + " ]
+                        "value" : [ " - " ]
                      }, {
                         "r" : "238",
                         "s" : [ {
-                           "value" : [ "'1 day'" ]
+                           "value" : [ "1 ","day" ]
                         } ]
                      } ]
                   } ]
@@ -7742,125 +7881,145 @@ module.exports['OutOfBounds'] = {
             } ],
             "expression" : {
                "localId" : "239",
-               "type" : "Null"
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "237",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "MinValue"
+               }, {
+                  "localId" : "238",
+                  "value" : 1,
+                  "unit" : "day",
+                  "type" : "Quantity"
+               } ]
             }
          }, {
-            "localId" : "245",
-            "name" : "DateAddUnderflow",
+            "localId" : "244",
+            "name" : "DateSuccessorOverflow",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "245",
+                  "r" : "244",
                   "s" : [ {
-                     "value" : [ "define ","DateAddUnderflow",": " ]
+                     "value" : [ "define ","DateSuccessorOverflow",": " ]
                   }, {
-                     "r" : "244",
+                     "r" : "243",
                      "s" : [ {
+                        "value" : [ "successor of " ]
+                     }, {
                         "r" : "242",
                         "s" : [ {
-                           "value" : [ "minimum"," " ]
+                           "value" : [ "maximum"," " ]
                         }, {
                            "r" : "241",
                            "s" : [ {
                               "value" : [ "Date" ]
                            } ]
                         } ]
-                     }, {
-                        "value" : [ " + " ]
-                     }, {
-                        "r" : "243",
-                        "s" : [ {
-                           "value" : [ "'-1 day'" ]
-                        } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "244",
-               "type" : "Null"
-            }
-         }, {
-            "localId" : "250",
-            "name" : "DateSubtractOverflow",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "250",
-                  "s" : [ {
-                     "value" : [ "define ","DateSubtractOverflow",": " ]
-                  }, {
-                     "r" : "249",
-                     "s" : [ {
-                        "r" : "247",
-                        "s" : [ {
-                           "value" : [ "maximum"," " ]
-                        }, {
-                           "r" : "246",
-                           "s" : [ {
-                              "value" : [ "Date" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ " - " ]
-                     }, {
-                        "r" : "248",
-                        "s" : [ {
-                           "value" : [ "'-1 day'" ]
-                        } ]
-                     } ]
-                  } ]
+               "localId" : "243",
+               "type" : "Successor",
+               "operand" : {
+                  "localId" : "242",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "MaxValue"
                }
-            } ],
-            "expression" : {
-               "localId" : "249",
-               "type" : "Null"
             }
          }, {
-            "localId" : "255",
-            "name" : "DateSubtractUnderflow",
+            "localId" : "248",
+            "name" : "DatePredecessorUnderflow",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "255",
+                  "r" : "248",
                   "s" : [ {
-                     "value" : [ "define ","DateSubtractUnderflow",": " ]
+                     "value" : [ "define ","DatePredecessorUnderflow",": " ]
                   }, {
-                     "r" : "254",
+                     "r" : "247",
                      "s" : [ {
-                        "r" : "252",
+                        "value" : [ "predecessor of " ]
+                     }, {
+                        "r" : "246",
                         "s" : [ {
                            "value" : [ "minimum"," " ]
                         }, {
-                           "r" : "251",
+                           "r" : "245",
                            "s" : [ {
                               "value" : [ "Date" ]
                            } ]
-                        } ]
-                     }, {
-                        "value" : [ " - " ]
-                     }, {
-                        "r" : "253",
-                        "s" : [ {
-                           "value" : [ "'1 day'" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "254",
-               "type" : "Null"
+               "localId" : "247",
+               "type" : "Predecessor",
+               "operand" : {
+                  "localId" : "246",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "MinValue"
+               }
+            }
+         }, {
+            "localId" : "253",
+            "name" : "TimeAddOverflow",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "253",
+                  "s" : [ {
+                     "value" : [ "define ","TimeAddOverflow",": " ]
+                  }, {
+                     "r" : "252",
+                     "s" : [ {
+                        "r" : "250",
+                        "s" : [ {
+                           "value" : [ "maximum"," " ]
+                        }, {
+                           "r" : "249",
+                           "s" : [ {
+                              "value" : [ "Time" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "251",
+                        "s" : [ {
+                           "value" : [ "1 ","second" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "252",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "250",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Time",
+                  "type" : "MaxValue"
+               }, {
+                  "localId" : "251",
+                  "value" : 1,
+                  "unit" : "second",
+                  "type" : "Quantity"
+               } ]
             }
          }, {
             "localId" : "259",
-            "name" : "DateSuccessorOverflow",
+            "name" : "TimeAddUnderflow",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -7868,20 +8027,37 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "259",
                   "s" : [ {
-                     "value" : [ "define ","DateSuccessorOverflow",": " ]
+                     "value" : [ "define ","TimeAddUnderflow",": " ]
                   }, {
                      "r" : "258",
                      "s" : [ {
-                        "value" : [ "successor of " ]
+                        "r" : "255",
+                        "s" : [ {
+                           "value" : [ "minimum"," " ]
+                        }, {
+                           "r" : "254",
+                           "s" : [ {
+                              "value" : [ "Time" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
                      }, {
                         "r" : "257",
                         "s" : [ {
-                           "value" : [ "maximum"," " ]
+                           "value" : [ "(" ]
                         }, {
-                           "r" : "256",
+                           "r" : "257",
                            "s" : [ {
-                              "value" : [ "Date" ]
+                              "value" : [ "-" ]
+                           }, {
+                              "r" : "256",
+                              "s" : [ {
+                                 "value" : [ "1 ","second" ]
+                              } ]
                            } ]
+                        }, {
+                           "value" : [ ")" ]
                         } ]
                      } ]
                   } ]
@@ -7889,130 +8065,175 @@ module.exports['OutOfBounds'] = {
             } ],
             "expression" : {
                "localId" : "258",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "255",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Time",
+                  "type" : "MinValue"
+               }, {
+                  "localId" : "257",
+                  "type" : "Negate",
+                  "operand" : {
+                     "localId" : "256",
+                     "value" : 1,
+                     "unit" : "second",
+                     "type" : "Quantity"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "265",
+            "name" : "TimeSubtractOverflow",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "265",
+                  "s" : [ {
+                     "value" : [ "define ","TimeSubtractOverflow",": " ]
+                  }, {
+                     "r" : "264",
+                     "s" : [ {
+                        "r" : "261",
+                        "s" : [ {
+                           "value" : [ "maximum"," " ]
+                        }, {
+                           "r" : "260",
+                           "s" : [ {
+                              "value" : [ "Time" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
+                     }, {
+                        "r" : "263",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "263",
+                           "s" : [ {
+                              "value" : [ "-" ]
+                           }, {
+                              "r" : "262",
+                              "s" : [ {
+                                 "value" : [ "1 ","second" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "264",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "261",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Time",
+                  "type" : "MaxValue"
+               }, {
+                  "localId" : "263",
+                  "type" : "Negate",
+                  "operand" : {
+                     "localId" : "262",
+                     "value" : 1,
+                     "unit" : "second",
+                     "type" : "Quantity"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "270",
+            "name" : "TimeSubtractUnderflow",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "270",
+                  "s" : [ {
+                     "value" : [ "define ","TimeSubtractUnderflow",": " ]
+                  }, {
+                     "r" : "269",
+                     "s" : [ {
+                        "r" : "267",
+                        "s" : [ {
+                           "value" : [ "minimum"," " ]
+                        }, {
+                           "r" : "266",
+                           "s" : [ {
+                              "value" : [ "Time" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
+                     }, {
+                        "r" : "268",
+                        "s" : [ {
+                           "value" : [ "1 ","second" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "269",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "267",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Time",
+                  "type" : "MinValue"
+               }, {
+                  "localId" : "268",
+                  "value" : 1,
+                  "unit" : "second",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "localId" : "274",
+            "name" : "TimeSuccessorOverflow",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "274",
+                  "s" : [ {
+                     "value" : [ "define ","TimeSuccessorOverflow",": " ]
+                  }, {
+                     "r" : "273",
+                     "s" : [ {
+                        "value" : [ "successor of " ]
+                     }, {
+                        "r" : "272",
+                        "s" : [ {
+                           "value" : [ "maximum"," " ]
+                        }, {
+                           "r" : "271",
+                           "s" : [ {
+                              "value" : [ "Time" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "273",
                "type" : "Successor",
                "operand" : {
-                  "localId" : "257",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Date",
+                  "localId" : "272",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Time",
                   "type" : "MaxValue"
                }
             }
          }, {
-            "localId" : "263",
-            "name" : "DatePredecessorUnderflow",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "263",
-                  "s" : [ {
-                     "value" : [ "define ","DatePredecessorUnderflow",": " ]
-                  }, {
-                     "r" : "262",
-                     "s" : [ {
-                        "value" : [ "predecessor of " ]
-                     }, {
-                        "r" : "261",
-                        "s" : [ {
-                           "value" : [ "minimum"," " ]
-                        }, {
-                           "r" : "260",
-                           "s" : [ {
-                              "value" : [ "Date" ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "262",
-               "type" : "Predecessor",
-               "operand" : {
-                  "localId" : "261",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Date",
-                  "type" : "MinValue"
-               }
-            }
-         }, {
-            "localId" : "268",
-            "name" : "TimeAddOverflow",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "268",
-                  "s" : [ {
-                     "value" : [ "define ","TimeAddOverflow",": " ]
-                  }, {
-                     "r" : "267",
-                     "s" : [ {
-                        "r" : "265",
-                        "s" : [ {
-                           "value" : [ "maximum"," " ]
-                        }, {
-                           "r" : "264",
-                           "s" : [ {
-                              "value" : [ "Time" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ " + " ]
-                     }, {
-                        "r" : "266",
-                        "s" : [ {
-                           "value" : [ "'1 second'" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "267",
-               "type" : "Null"
-            }
-         }, {
-            "localId" : "273",
-            "name" : "TimeAddUnderflow",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "273",
-                  "s" : [ {
-                     "value" : [ "define ","TimeAddUnderflow",": " ]
-                  }, {
-                     "r" : "272",
-                     "s" : [ {
-                        "r" : "270",
-                        "s" : [ {
-                           "value" : [ "minimum"," " ]
-                        }, {
-                           "r" : "269",
-                           "s" : [ {
-                              "value" : [ "Time" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ " + " ]
-                     }, {
-                        "r" : "271",
-                        "s" : [ {
-                           "value" : [ "'-1 second'" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "272",
-               "type" : "Null"
-            }
-         }, {
             "localId" : "278",
-            "name" : "TimeSubtractOverflow",
+            "name" : "TimePredecessorUnderflow",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -8020,25 +8241,20 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "278",
                   "s" : [ {
-                     "value" : [ "define ","TimeSubtractOverflow",": " ]
+                     "value" : [ "define ","TimePredecessorUnderflow",": " ]
                   }, {
                      "r" : "277",
                      "s" : [ {
-                        "r" : "275",
-                        "s" : [ {
-                           "value" : [ "maximum"," " ]
-                        }, {
-                           "r" : "274",
-                           "s" : [ {
-                              "value" : [ "Time" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ " - " ]
+                        "value" : [ "predecessor of " ]
                      }, {
                         "r" : "276",
                         "s" : [ {
-                           "value" : [ "'-1 second'" ]
+                           "value" : [ "minimum"," " ]
+                        }, {
+                           "r" : "275",
+                           "s" : [ {
+                              "value" : [ "Time" ]
+                           } ]
                         } ]
                      } ]
                   } ]
@@ -8046,143 +8262,34 @@ module.exports['OutOfBounds'] = {
             } ],
             "expression" : {
                "localId" : "277",
-               "type" : "Null"
-            }
-         }, {
-            "localId" : "283",
-            "name" : "TimeSubtractUnderflow",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "283",
-                  "s" : [ {
-                     "value" : [ "define ","TimeSubtractUnderflow",": " ]
-                  }, {
-                     "r" : "282",
-                     "s" : [ {
-                        "r" : "280",
-                        "s" : [ {
-                           "value" : [ "minimum"," " ]
-                        }, {
-                           "r" : "279",
-                           "s" : [ {
-                              "value" : [ "Time" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ " - " ]
-                     }, {
-                        "r" : "281",
-                        "s" : [ {
-                           "value" : [ "'1 second'" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "282",
-               "type" : "Null"
-            }
-         }, {
-            "localId" : "287",
-            "name" : "TimeSuccessorOverflow",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "287",
-                  "s" : [ {
-                     "value" : [ "define ","TimeSuccessorOverflow",": " ]
-                  }, {
-                     "r" : "286",
-                     "s" : [ {
-                        "value" : [ "successor of " ]
-                     }, {
-                        "r" : "285",
-                        "s" : [ {
-                           "value" : [ "maximum"," " ]
-                        }, {
-                           "r" : "284",
-                           "s" : [ {
-                              "value" : [ "Time" ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "286",
-               "type" : "Successor",
-               "operand" : {
-                  "localId" : "285",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Time",
-                  "type" : "MaxValue"
-               }
-            }
-         }, {
-            "localId" : "291",
-            "name" : "TimePredecessorUnderflow",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "291",
-                  "s" : [ {
-                     "value" : [ "define ","TimePredecessorUnderflow",": " ]
-                  }, {
-                     "r" : "290",
-                     "s" : [ {
-                        "value" : [ "predecessor of " ]
-                     }, {
-                        "r" : "289",
-                        "s" : [ {
-                           "value" : [ "minimum"," " ]
-                        }, {
-                           "r" : "288",
-                           "s" : [ {
-                              "value" : [ "Time" ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "290",
                "type" : "Predecessor",
                "operand" : {
-                  "localId" : "289",
+                  "localId" : "276",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Time",
                   "type" : "MinValue"
                }
             }
          }, {
-            "localId" : "295",
+            "localId" : "282",
             "name" : "ExpOverflow",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "295",
+                  "r" : "282",
                   "s" : [ {
                      "value" : [ "define ","ExpOverflow",": " ]
                   }, {
-                     "r" : "294",
+                     "r" : "281",
                      "s" : [ {
                         "value" : [ "Exp","(" ]
                      }, {
-                        "r" : "293",
+                        "r" : "280",
                         "s" : [ {
                            "value" : [ "maximum"," " ]
                         }, {
-                           "r" : "292",
+                           "r" : "279",
                            "s" : [ {
                               "value" : [ "Decimal" ]
                            } ]
@@ -8194,10 +8301,10 @@ module.exports['OutOfBounds'] = {
                }
             } ],
             "expression" : {
-               "localId" : "294",
+               "localId" : "281",
                "type" : "Exp",
                "operand" : {
-                  "localId" : "293",
+                  "localId" : "280",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "type" : "MaxValue"
                }

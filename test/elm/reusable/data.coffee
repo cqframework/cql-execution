@@ -8,13 +8,17 @@
 
 ### ExpressionDef
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Foo: 'Bar'
 ###
 
 module.exports['ExpressionDef'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -29,8 +33,9 @@ module.exports['ExpressionDef'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -40,8 +45,7 @@ module.exports['ExpressionDef'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -77,7 +81,7 @@ module.exports['ExpressionDef'] = {
 
 ### ExpressionRef
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define Life: 42
 define Foo: Life
@@ -85,6 +89,10 @@ define Foo: Life
 
 module.exports['ExpressionRef'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -99,8 +107,9 @@ module.exports['ExpressionRef'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -110,8 +119,7 @@ module.exports['ExpressionRef'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -167,7 +175,7 @@ module.exports['ExpressionRef'] = {
 
 ### FunctionDefinitions
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define function "foo bar"(a Integer, b Integer) :
   a + b
@@ -177,6 +185,10 @@ define testValue: "foo bar" (1,2)
 
 module.exports['FunctionDefinitions'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -191,8 +203,9 @@ module.exports['FunctionDefinitions'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -202,8 +215,7 @@ module.exports['FunctionDefinitions'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
@@ -325,7 +337,7 @@ module.exports['FunctionDefinitions'] = {
 
 ### FunctionOverloads
 library TestSnippet version '1'
-using QUICK
+using Simple version '1.0.0'
 context Patient
 define function "foo bar" (a System.Integer) :
   a + 1
@@ -339,6 +351,10 @@ define testValue2: "foo bar"('World')
 
 module.exports['FunctionOverloads'] = {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "TestSnippet",
          "version" : "1"
@@ -353,8 +369,9 @@ module.exports['FunctionOverloads'] = {
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
             "localId" : "1",
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir"
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
          } ]
       },
       "statements" : {
@@ -364,8 +381,7 @@ module.exports['FunctionOverloads'] = {
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{http://hl7.org/fhir}Patient",
-                  "templateId" : "patient-qicore-qicore-patient",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve"
                }
             }
