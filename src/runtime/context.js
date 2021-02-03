@@ -289,7 +289,7 @@ class Context {
       case '{urn:hl7-org:elm-types:r1}Quantity':
         return val && val.isQuantity;
       case '{urn:hl7-org:elm-types:r1}Time':
-        return val && val.isDateTime && val.isTime();
+        return val && val.isTime && val.isTime();
       default:
         // Use the data model's implementation of _is, if it is available
         if (typeof val._is === 'function') {
@@ -301,34 +301,34 @@ class Context {
   }
 
   matchesInstanceType(val, inst) {
-    switch (false) {
-      case !inst.isBooleanLiteral:
-        return typeof val === 'boolean';
-      case !inst.isDecimalLiteral:
-        return typeof val === 'number';
-      case !inst.isIntegerLiteral:
-        return typeof val === 'number' && Math.floor(val) === val;
-      case !inst.isStringLiteral:
-        return typeof val === 'string';
-      case !inst.isCode:
-        return val && val.isCode;
-      case !inst.isConcept:
-        return val && val.isConcept;
-      case !inst.isDateTime:
-        return val && val.isDateTime;
-      case !inst.isQuantity:
-        return val && val.isQuantity;
-      case !inst.isTime:
-        return val && val.isDateTime && val.isTime();
-      case !inst.isList:
-        return this.matchesListInstanceType(val, inst);
-      case !inst.isTuple:
-        return this.matchesTupleInstanceType(val, inst);
-      case !inst.isInterval:
-        return this.matchesIntervalInstanceType(val, inst);
-      default:
-        return true; // default to true when we don't know for sure
+    if (inst.isBooleanLiteral) {
+      return typeof val === 'boolean';
+    } else if (inst.isDecimalLiteral) {
+      return typeof val === 'number';
+    } else if (inst.isIntegerLiteral) {
+      return typeof val === 'number' && Math.floor(val) === val;
+    } else if (inst.isStringLiteral) {
+      return typeof val === 'string';
+    } else if (inst.isCode) {
+      return val && val.isCode;
+    } else if (inst.isConcept) {
+      return val && val.isConcept;
+    } else if (inst.isTime && inst.isTime()) {
+      return val && val.isTime && val.isTime();
+    } else if (inst.isDate) {
+      return val && val.isDate;
+    } else if (inst.isDateTime) {
+      return val && val.isDateTime;
+    } else if (inst.isQuantity) {
+      return val && val.isQuantity;
+    } else if (inst.isList) {
+      return this.matchesListInstanceType(val, inst);
+    } else if (inst.isTuple) {
+      return this.matchesTupleInstanceType(val, inst);
+    } else if (inst.isInterval) {
+      return this.matchesIntervalInstanceType(val, inst);
     }
+    return true; // default to true when we don't know for sure
   }
 
   matchesListInstanceType(val, list) {

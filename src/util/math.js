@@ -23,7 +23,7 @@ function overflowsOrUnderflows(value) {
     if (!isValidDecimal(value.value)) {
       return true;
     }
-  } else if (value.isTime != null && value.isTime()) {
+  } else if (value.isTime && value.isTime()) {
     if (value.after(MAX_TIME_VALUE)) {
       return true;
     }
@@ -116,6 +116,12 @@ function successor(val) {
         return val + MIN_FLOAT_PRECISION_VALUE;
       }
     }
+  } else if (val && val.isTime && val.isTime()) {
+    if (val.sameAs(MAX_TIME_VALUE)) {
+      throw new OverFlowException();
+    } else {
+      return val.successor();
+    }
   } else if (val && val.isDateTime) {
     if (val.sameAs(MAX_DATETIME_VALUE)) {
       throw new OverFlowException();
@@ -124,12 +130,6 @@ function successor(val) {
     }
   } else if (val && val.isDate) {
     if (val.sameAs(MAX_DATE_VALUE)) {
-      throw new OverFlowException();
-    } else {
-      return val.successor();
-    }
-  } else if (val && val.isTime) {
-    if (val.sameAs(MAX_TIME_VALUE)) {
       throw new OverFlowException();
     } else {
       return val.successor();
@@ -168,6 +168,12 @@ function predecessor(val) {
         return val - MIN_FLOAT_PRECISION_VALUE;
       }
     }
+  } else if (val && val.isTime && val.isTime()) {
+    if (val.sameAs(MIN_TIME_VALUE)) {
+      throw new OverFlowException();
+    } else {
+      return val.predecessor();
+    }
   } else if (val && val.isDateTime) {
     if (val.sameAs(MIN_DATETIME_VALUE)) {
       throw new OverFlowException();
@@ -176,12 +182,6 @@ function predecessor(val) {
     }
   } else if (val && val.isDate) {
     if (val.sameAs(MIN_DATE_VALUE)) {
-      throw new OverFlowException();
-    } else {
-      return val.predecessor();
-    }
-  } else if (val && val.isTime) {
-    if (val.sameAs(MIN_TIME_VALUE)) {
       throw new OverFlowException();
     } else {
       return val.predecessor();
@@ -212,12 +212,12 @@ function maxValueForInstance(val) {
     } else {
       return MAX_FLOAT_VALUE;
     }
+  } else if (val && val.isTime && val.isTime()) {
+    return MAX_TIME_VALUE.copy();
   } else if (val && val.isDateTime) {
     return MAX_DATETIME_VALUE.copy();
   } else if (val && val.isDate) {
     return MAX_DATE_VALUE.copy();
-  } else if (val && val.isTime) {
-    return MAX_TIME_VALUE.copy();
   } else if (val && val.isQuantity) {
     const val2 = val.clone();
     val2.value = maxValueForInstance(val2.value);
@@ -227,6 +227,31 @@ function maxValueForInstance(val) {
   }
 }
 
+function maxValueForType(type, quantityInstance) {
+  switch (type) {
+    case '{urn:hl7-org:elm-types:r1}Integer':
+      return MAX_INT_VALUE;
+    case '{urn:hl7-org:elm-types:r1}Decimal':
+      return MAX_FLOAT_VALUE;
+    case '{urn:hl7-org:elm-types:r1}DateTime':
+      return MAX_DATETIME_VALUE.copy();
+    case '{urn:hl7-org:elm-types:r1}Date':
+      return MAX_DATE_VALUE.copy();
+    case '{urn:hl7-org:elm-types:r1}Time':
+      return MAX_TIME_VALUE.copy();
+    case '{urn:hl7-org:elm-types:r1}Quantity': {
+      if (quantityInstance == null) {
+        // can't infer a quantity unit type from nothing]
+        return null;
+      }
+      const maxQty = quantityInstance.clone();
+      maxQty.value = maxValueForInstance(maxQty.value);
+      return maxQty;
+    }
+  }
+  return null;
+}
+
 function minValueForInstance(val) {
   if (typeof val === 'number') {
     if (parseInt(val) === val) {
@@ -234,12 +259,12 @@ function minValueForInstance(val) {
     } else {
       return MIN_FLOAT_VALUE;
     }
+  } else if (val && val.isTime && val.isTime()) {
+    return MIN_TIME_VALUE.copy();
   } else if (val && val.isDateTime) {
     return MIN_DATETIME_VALUE.copy();
   } else if (val && val.isDate) {
     return MIN_DATE_VALUE.copy();
-  } else if (val && val.isTime) {
-    return MIN_TIME_VALUE.copy();
   } else if (val && val.isQuantity) {
     const val2 = val.clone();
     val2.value = minValueForInstance(val2.value);
@@ -247,6 +272,31 @@ function minValueForInstance(val) {
   } else {
     return null;
   }
+}
+
+function minValueForType(type, quantityInstance) {
+  switch (type) {
+    case '{urn:hl7-org:elm-types:r1}Integer':
+      return MIN_INT_VALUE;
+    case '{urn:hl7-org:elm-types:r1}Decimal':
+      return MIN_FLOAT_VALUE;
+    case '{urn:hl7-org:elm-types:r1}DateTime':
+      return MIN_DATETIME_VALUE.copy();
+    case '{urn:hl7-org:elm-types:r1}Date':
+      return MIN_DATE_VALUE.copy();
+    case '{urn:hl7-org:elm-types:r1}Time':
+      return MIN_TIME_VALUE.copy();
+    case '{urn:hl7-org:elm-types:r1}Quantity': {
+      if (quantityInstance == null) {
+        // can't infer a quantity unit type from nothing]
+        return null;
+      }
+      const minQty = quantityInstance.clone();
+      minQty.value = minValueForInstance(minQty.value);
+      return minQty;
+    }
+  }
+  return null;
 }
 
 function decimalAdjust(type, value, exp) {
@@ -295,6 +345,8 @@ module.exports = {
   predecessor,
   maxValueForInstance,
   minValueForInstance,
+  maxValueForType,
+  minValueForType,
   decimalAdjust,
   decimalOrNull
 };

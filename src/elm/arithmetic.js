@@ -21,7 +21,7 @@ class Add extends Expression {
     }
 
     const sum = args.reduce((x, y) => {
-      if (x.isQuantity || x.isDateTime || x.isDate || x.isTime) {
+      if (x.isQuantity || x.isDateTime || x.isDate || (x.isTime && x.isTime())) {
         return doAddition(x, y);
       } else {
         return x + y;

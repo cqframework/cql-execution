@@ -9,7 +9,9 @@ class Interval extends Expression {
   constructor(json) {
     super(json);
     this.lowClosed = json.lowClosed;
+    this.lowClosedExpression = build(json.lowClosedExpression);
     this.highClosed = json.highClosed;
+    this.highClosedExpression = build(json.highClosedExpression);
     this.low = build(json.low);
     this.high = build(json.high);
   }
@@ -21,12 +23,29 @@ class Interval extends Expression {
   }
 
   exec(ctx) {
-    return new dtivl.Interval(
-      this.low.execute(ctx),
-      this.high.execute(ctx),
-      this.lowClosed,
-      this.highClosed
-    );
+    const lowValue = this.low.execute(ctx);
+    const highValue = this.high.execute(ctx);
+    const lowClosed =
+      this.lowClosed != null
+        ? this.lowClosed
+        : this.lowClosedExpression && this.lowClosedExpression.execute(ctx);
+    const highClosed =
+      this.highClosed != null
+        ? this.highClosed
+        : this.highClosedExpression && this.highClosedExpression.execute(ctx);
+    let defaultPointType;
+    if (lowValue == null && highValue == null) {
+      // try to get the default point type from a cast
+      if (this.low.asTypeSpecifier && this.low.asTypeSpecifier.type === 'NamedTypeSpecifier') {
+        defaultPointType = this.low.asTypeSpecifier.name;
+      } else if (
+        this.high.asTypeSpecifier &&
+        this.high.asTypeSpecifier.type === 'NamedTypeSpecifier'
+      ) {
+        defaultPointType = this.high.asTypeSpecifier.name;
+      }
+    }
+    return new dtivl.Interval(lowValue, highValue, lowClosed, highClosed, defaultPointType);
   }
 }
 
@@ -294,12 +313,7 @@ function intervalListType(intervals) {
     const low = itvl.low != null ? itvl.low : itvl.high;
     const high = itvl.high != null ? itvl.high : itvl.low;
 
-    if (
-      typeof low.isTime === 'function' &&
-      low.isTime() &&
-      typeof high.isTime === 'function' &&
-      high.isTime()
-    ) {
+    if (low.isTime && low.isTime() && high.isTime && high.isTime()) {
       if (type == null) {
         type = 'time';
       } else if (type === 'time') {
