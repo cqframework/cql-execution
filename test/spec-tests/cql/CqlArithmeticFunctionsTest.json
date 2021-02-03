@@ -1869,7 +1869,7 @@
                            "type" : "Negate",
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "9999999999999999999999999999.99999999",
+                              "value" : "99999999999999999999.99999999",
                               "type" : "Literal"
                            }
                         }
@@ -2037,7 +2037,7 @@
                         "name" : "output",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                           "value" : "9999999999999999999999999999.99999999",
+                           "value" : "99999999999999999999.99999999",
                            "type" : "Literal"
                         }
                      } ]

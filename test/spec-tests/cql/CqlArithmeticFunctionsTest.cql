@@ -319,7 +319,7 @@ define "MinValue": Tuple{
   },
   "DecimalMinValue": Tuple{
     expression: minimum Decimal,
-    output: -9999999999999999999999999999.99999999
+    output: -99999999999999999999.99999999
   },
   "DateTimeMinValue": Tuple{
     expression: minimum DateTime,
@@ -342,7 +342,7 @@ define "MaxValue": Tuple{
   },
   "DecimalMaxValue": Tuple{
     expression: maximum Decimal,
-    output: 9999999999999999999999999999.99999999
+    output: 99999999999999999999.99999999
   },
   "DateTimeMaxValue": Tuple{
     expression: maximum DateTime,

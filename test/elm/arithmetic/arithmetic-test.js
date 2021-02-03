@@ -166,7 +166,7 @@ describe('MinValue', () => {
   });
 
   it('of Decimal should return minimum representable Decimal value', function () {
-    const minDecimalValue = -9999999999999999999999999999.99999999;
+    const minDecimalValue = -99999999999999999999.99999999;
     this.minDecimal.exec(this.ctx).should.be.approximately(minDecimalValue, 0.000000001);
   });
 
@@ -205,7 +205,7 @@ describe('MaxValue', () => {
   });
 
   it('of Decimal should return maximum representable Decimal value', function () {
-    const maxDecimalValue = 9999999999999999999999999999.99999999;
+    const maxDecimalValue = 99999999999999999999.99999999;
     this.maxDecimal.exec(this.ctx).should.be.approximately(maxDecimalValue, 0.000000001);
   });
 

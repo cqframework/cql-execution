@@ -13795,8 +13795,8 @@ var _require3 = require('../datatypes/uncertainty'),
 
 var MAX_INT_VALUE = Math.pow(2, 31) - 1;
 var MIN_INT_VALUE = Math.pow(-2, 31);
-var MAX_FLOAT_VALUE = 9999999999999999999999999999.99999999;
-var MIN_FLOAT_VALUE = -9999999999999999999999999999.99999999;
+var MAX_FLOAT_VALUE = 99999999999999999999.99999999;
+var MIN_FLOAT_VALUE = -99999999999999999999.99999999;
 var MIN_FLOAT_PRECISION_VALUE = Math.pow(10, -8);
 
 function overflowsOrUnderflows(value) {
@@ -13913,13 +13913,13 @@ var OverFlowException = /*#__PURE__*/function (_Exception) {
 function successor(val) {
   if (typeof val === 'number') {
     if (parseInt(val) === val) {
-      if (val === MAX_INT_VALUE) {
+      if (val >= MAX_INT_VALUE) {
         throw new OverFlowException();
       } else {
         return val + 1;
       }
     } else {
-      if (val === MAX_FLOAT_VALUE) {
+      if (val >= MAX_FLOAT_VALUE) {
         throw new OverFlowException();
       } else {
         return val + MIN_FLOAT_PRECISION_VALUE;
@@ -13966,13 +13966,13 @@ function successor(val) {
 function predecessor(val) {
   if (typeof val === 'number') {
     if (parseInt(val) === val) {
-      if (val === MIN_INT_VALUE) {
+      if (val <= MIN_INT_VALUE) {
         throw new OverFlowException();
       } else {
         return val - 1;
       }
     } else {
-      if (val === MIN_FLOAT_VALUE) {
+      if (val <= MIN_FLOAT_VALUE) {
         throw new OverFlowException();
       } else {
         return val - MIN_FLOAT_PRECISION_VALUE;
