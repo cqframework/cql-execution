@@ -104,11 +104,9 @@ define "Max": Tuple{
     output: 90
   },
   "MaxTestString": Tuple{
-    skipped: 'Wrong answer (just returning first item?)'
-    /*
     expression: Max({ 'hi', 'bye', 'zebra' }),
     output: 'zebra'
-    */  },
+  },
   "MaxTestDateTime": Tuple{
     expression: Max({ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 6) }),
     output: DateTime(2012, 10, 6)
@@ -132,11 +130,9 @@ define "Min": Tuple{
     output: 0
   },
   "MinTestString": Tuple{
-    skipped: 'Wrong answer (just returning first item?)'
-    /*
     expression: Min({'hi', 'bye', 'zebra'}),
     output: 'bye'
-    */  },
+  },
   "MinTestDateTime": Tuple{
     expression: Min({ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 6) }),
     output: DateTime(2012, 9, 5)
