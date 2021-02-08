@@ -65,9 +65,6 @@ CqlListOperatorsTest.Sort                 Sort not implemented
 CqlListOperatorsTest.Descendents          Descendents not implemented
 CqlListOperatorsTest.ProperContains       ProperContains not implemented
 CqlListOperatorsTest.ProperIn             ProperIn not implemented
-CqlListOperatorsTest.Skip                 Skip not implemented
-CqlListOperatorsTest.Tail                 Tail not implemented
-CqlListOperatorsTest.Take                 Take not implemented
 CqlStringOperatorsTest.ReplaceMatches     ReplaceMatches not implemented
 
 # Awaiting feedback from Bryn

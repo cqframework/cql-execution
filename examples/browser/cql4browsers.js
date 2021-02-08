@@ -8630,6 +8630,47 @@ var Last = /*#__PURE__*/function (_Expression9) {
   }]);
 
   return Last;
+}(Expression);
+
+var Slice = /*#__PURE__*/function (_Expression10) {
+  _inherits(Slice, _Expression10);
+
+  var _super14 = _createSuper(Slice);
+
+  function Slice(json) {
+    var _this5;
+
+    _classCallCheck(this, Slice);
+
+    _this5 = _super14.call(this, json);
+    _this5.source = build(json.source);
+    _this5.startIndex = build(json.startIndex);
+    _this5.endIndex = build(json.endIndex);
+    return _this5;
+  }
+
+  _createClass(Slice, [{
+    key: "exec",
+    value: function exec(ctx) {
+      var src = this.source.exec(ctx);
+      var start = this.startIndex.exec(ctx);
+      var end = this.endIndex.exec(ctx);
+
+      if (src != null && typeIsArray(src)) {
+        if (src.length > 0) {
+          var effectiveStart = start != null ? start : 0;
+          var effectiveEnd = end != null ? end : src.length;
+          return src.slice(effectiveStart, effectiveEnd);
+        }
+
+        return [];
+      }
+
+      return null;
+    }
+  }]);
+
+  return Slice;
 }(Expression); // Length is completely handled by overloaded#Length
 
 
@@ -8645,6 +8686,7 @@ module.exports = {
   Last: Last,
   List: List,
   SingletonFrom: SingletonFrom,
+  Slice: Slice,
   Times: Times,
   ToList: ToList,
   doContains: doContains,

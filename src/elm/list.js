@@ -236,6 +236,30 @@ class Last extends Expression {
   }
 }
 
+class Slice extends Expression {
+  constructor(json) {
+    super(json);
+    this.source = build(json.source);
+    this.startIndex = build(json.startIndex);
+    this.endIndex = build(json.endIndex);
+  }
+
+  exec(ctx) {
+    const src = this.source.exec(ctx);
+    const start = this.startIndex.exec(ctx);
+    const end = this.endIndex.exec(ctx);
+    if (src != null && typeIsArray(src)) {
+      if (src.length > 0) {
+        const effectiveStart = start != null ? start : 0;
+        const effectiveEnd = end != null ? end : src.length;
+        return src.slice(effectiveStart, effectiveEnd);
+      }
+      return [];
+    }
+    return null;
+  }
+}
+
 // Length is completely handled by overloaded#Length
 
 module.exports = {
@@ -250,6 +274,7 @@ module.exports = {
   Last,
   List,
   SingletonFrom,
+  Slice,
   Times,
   ToList,
   doContains,

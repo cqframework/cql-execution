@@ -856,107 +856,75 @@ define "SingletonFrom": Tuple{
 
 define "Skip": Tuple{
   "SkipNull": Tuple{
-    skipped: 'Skip not implemented'
-    /*
     expression: Skip(null, 3),
     output: null
-    */  },
+  },
   "SkipEven": Tuple{
-    skipped: 'Skip not implemented'
-    /*
     expression: Skip({1,2,3,4,5}, 2),
     output: {3, 4, 5}
-    */  },
+  },
   "SkipOdd": Tuple{
-    skipped: 'Skip not implemented'
-    /*
     expression: Skip({1,2,3,4,5}, 3),
     output: {4, 5}
-    */  },
+  },
   "SkipNone": Tuple{
-    skipped: 'Skip not implemented'
-    /*
     expression: Skip({1,2,3,4,5}, 0),
     output: {1,2,3,4,5}
-    */  },
+  },
   "SkipAll": Tuple{
-    skipped: 'Skip not implemented'
-    /*
     expression: Skip({1,2,3,4,5}, 5),
     output: {}
-    */  }
+  }
 }
 
 define "Tail": Tuple{
   "TailNull": Tuple{
-    skipped: 'Tail not implemented'
-    /*
     expression: Tail(null),
     output: null
-    */  },
+  },
   "TailEven": Tuple{
-    skipped: 'Tail not implemented'
-    /*
     expression: Tail({1,2,3,4}),
     output: {2,3,4}
-    */  },
+  },
   "TailOdd": Tuple{
-    skipped: 'Tail not implemented'
-    /*
     expression: Tail({1,2,3,4,5}),
     output: {2,3,4,5}
-    */  },
+  },
   "TailEmpty": Tuple{
-    skipped: 'Tail not implemented'
-    /*
     expression: Tail({}),
     output: {}
-    */  },
+  },
   "TailOneElement": Tuple{
-    skipped: 'Tail not implemented'
-    /*
     expression: Tail({1}),
     output: {}
-    */  }
+  }
 }
 
 define "Take": Tuple{
   "TakeNull": Tuple{
-    skipped: 'Take not implemented'
-    /*
     expression: Take(null, 3),
     output: null
-    */  },
+  },
   "TakeNullEmpty": Tuple{
-    skipped: 'Take not implemented'
-    /*
     expression: Take({1,2,3}, null as Integer),
     output: {}
-    */  },
+  },
   "TakeEmpty": Tuple{
-    skipped: 'Take not implemented'
-    /*
     expression: Take({1,2,3}, 0),
     output: {}
-    */  },
+  },
   "TakeEven": Tuple{
-    skipped: 'Take not implemented'
-    /*
     expression: Take({1,2,3,4}, 2),
     output: {1, 2}
-    */  },
+  },
   "TakeOdd": Tuple{
-    skipped: 'Take not implemented'
-    /*
     expression: Take({1,2,3,4}, 3),
     output: {1, 2, 3}
-    */  },
+  },
   "TakeAll": Tuple{
-    skipped: 'Take not implemented'
-    /*
     expression: Take({1,2,3,4}, 4),
     output: {1, 2, 3, 4}
-    */  }
+  }
 }
 
 define "Union": Tuple{
