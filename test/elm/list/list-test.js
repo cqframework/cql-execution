@@ -735,3 +735,65 @@ describe('ToList', () => {
     this.lengthOfNull.exec(this.ctx).should.equal(0);
   });
 });
+
+describe('Skip', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should skip two elements', function () {
+    this.skip2.exec(this.ctx).should.eql([3, 4, 5]);
+  });
+
+  it('should not skip when using null', function () {
+    this.skipNull.exec(this.ctx).should.eql([1, 3, 5]);
+  });
+
+  it('should return empty list when using negative number', function () {
+    this.skipEmpty.exec(this.ctx).should.eql([]);
+  });
+
+  it('should return null when given null', function () {
+    should(this.skipIsNull.exec(this.ctx)).be.null();
+  });
+});
+
+describe('Tail', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should get tail of list', function () {
+    this.tail234.exec(this.ctx).should.eql([2, 3, 4]);
+  });
+
+  it('should return empty list when given empty list', function () {
+    this.tailEmpty.exec(this.ctx).should.eql([]);
+  });
+
+  it('should return null when given null', function () {
+    should(this.tailIsNull.exec(this.ctx)).be.null();
+  });
+});
+
+describe('Take', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should take two elements', function () {
+    this.take2.exec(this.ctx).should.eql([1, 2]);
+  });
+
+  it('should return full list when asked for too many elements', function () {
+    this.takeTooMany.exec(this.ctx).should.eql([1, 2]);
+  });
+
+  it('should return empty list when using null', function () {
+    this.takeEmpty.exec(this.ctx).should.eql([]);
+  });
+
+  it('should return null when given null', function () {
+    should(this.takeIsNull.exec(this.ctx)).be.null();
+  });
+});

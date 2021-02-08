@@ -18325,3 +18325,834 @@ module.exports['ToList'] = {
    }
 }
 
+/* Skip
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define Skip2: Skip({ 1, 2, 3, 4, 5 }, 2)
+define SkipNull: Skip({ 1, 3, 5 }, null)
+define SkipEmpty: Skip({ 1, 3, 5 }, -1)
+define SkipIsNull: Skip(null, 2)
+*/
+
+module.exports['Skip'] = {
+   "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "10",
+            "name" : "Skip2",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "10",
+                  "s" : [ {
+                     "value" : [ "define ","Skip2",": " ]
+                  }, {
+                     "r" : "9",
+                     "s" : [ {
+                        "value" : [ "Skip","(" ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "r" : "2",
+                           "value" : [ "{ ","1",", ","2",", ","3",", ","4",", ","5"," }" ]
+                        } ]
+                     }, {
+                        "r" : "8",
+                        "value" : [ ", ","2",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "9",
+               "type" : "Slice",
+               "source" : {
+                  "localId" : "7",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "2",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "3",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "4",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "5",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "6",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  } ]
+               },
+               "startIndex" : {
+                  "localId" : "8",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
+                  "type" : "Literal"
+               },
+               "endIndex" : {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "Null"
+               }
+            }
+         }, {
+            "localId" : "17",
+            "name" : "SkipNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "17",
+                  "s" : [ {
+                     "value" : [ "define ","SkipNull",": " ]
+                  }, {
+                     "r" : "16",
+                     "s" : [ {
+                        "value" : [ "Skip","(" ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "r" : "11",
+                           "value" : [ "{ ","1",", ","3",", ","5"," }" ]
+                        } ]
+                     }, {
+                        "r" : "15",
+                        "value" : [ ", ","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "16",
+               "type" : "Slice",
+               "source" : {
+                  "localId" : "14",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "11",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "12",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "13",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  } ]
+               },
+               "startIndex" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "15",
+                     "type" : "Null"
+                  }
+               },
+               "endIndex" : {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                  "type" : "Null"
+               }
+            }
+         }, {
+            "localId" : "25",
+            "name" : "SkipEmpty",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "25",
+                  "s" : [ {
+                     "value" : [ "define ","SkipEmpty",": " ]
+                  }, {
+                     "r" : "24",
+                     "s" : [ {
+                        "value" : [ "Skip","(" ]
+                     }, {
+                        "r" : "21",
+                        "s" : [ {
+                           "r" : "18",
+                           "value" : [ "{ ","1",", ","3",", ","5"," }" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "23",
+                        "s" : [ {
+                           "r" : "22",
+                           "value" : [ "-","1" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "24",
+               "type" : "Slice",
+               "source" : {
+                  "localId" : "21",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "18",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "19",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "20",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "5",
+                     "type" : "Literal"
+                  } ]
+               },
+               "startIndex" : {
+                  "localId" : "23",
+                  "type" : "Negate",
+                  "operand" : {
+                     "localId" : "22",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }
+               },
+               "endIndex" : {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "Null"
+               }
+            }
+         }, {
+            "localId" : "29",
+            "name" : "SkipIsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "29",
+                  "s" : [ {
+                     "value" : [ "define ","SkipIsNull",": " ]
+                  }, {
+                     "r" : "28",
+                     "s" : [ {
+                        "r" : "26",
+                        "value" : [ "Skip","(","null",", ","2",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "28",
+               "type" : "Slice",
+               "source" : {
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "26",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               },
+               "startIndex" : {
+                  "localId" : "27",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
+                  "type" : "Literal"
+               },
+               "endIndex" : {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "Null"
+               }
+            }
+         } ]
+      }
+   }
+}
+
+/* Tail
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define Tail234: Tail({ 1, 2, 3, 4 })
+define TailEmpty: Tail({ })
+define TailIsNull: Tail(null)
+*/
+
+module.exports['Tail'] = {
+   "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "8",
+            "name" : "Tail234",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "8",
+                  "s" : [ {
+                     "value" : [ "define ","Tail234",": " ]
+                  }, {
+                     "r" : "7",
+                     "s" : [ {
+                        "value" : [ "Tail","(" ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "r" : "2",
+                           "value" : [ "{ ","1",", ","2",", ","3",", ","4"," }" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "7",
+               "type" : "Slice",
+               "source" : {
+                  "localId" : "6",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "2",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "3",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "4",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "5",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  } ]
+               },
+               "startIndex" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "type" : "Literal"
+               },
+               "endIndex" : {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "Null"
+               }
+            }
+         }, {
+            "localId" : "11",
+            "name" : "TailEmpty",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "11",
+                  "s" : [ {
+                     "value" : [ "define ","TailEmpty",": " ]
+                  }, {
+                     "r" : "10",
+                     "s" : [ {
+                        "r" : "9",
+                        "value" : [ "Tail","(","{ }",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "10",
+               "type" : "Slice",
+               "source" : {
+                  "localId" : "9",
+                  "type" : "List"
+               },
+               "startIndex" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "type" : "Literal"
+               },
+               "endIndex" : {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "Null"
+               }
+            }
+         }, {
+            "localId" : "14",
+            "name" : "TailIsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "14",
+                  "s" : [ {
+                     "value" : [ "define ","TailIsNull",": " ]
+                  }, {
+                     "r" : "13",
+                     "s" : [ {
+                        "r" : "12",
+                        "value" : [ "Tail","(","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "13",
+               "type" : "Slice",
+               "source" : {
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "12",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               },
+               "startIndex" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "type" : "Literal"
+               },
+               "endIndex" : {
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "Null"
+               }
+            }
+         } ]
+      }
+   }
+}
+
+/* Take
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define Take2: Take({ 1, 2, 3, 4 }, 2)
+define TakeTooMany: Take({ 1, 2 }, 3)
+define TakeEmpty: Take({ 1, 2, 3, 4 }, null)
+define TakeIsNull: Take(null, 2)
+*/
+
+module.exports['Take'] = {
+   "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "9",
+            "name" : "Take2",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "define ","Take2",": " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "Take","(" ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "r" : "2",
+                           "value" : [ "{ ","1",", ","2",", ","3",", ","4"," }" ]
+                        } ]
+                     }, {
+                        "r" : "7",
+                        "value" : [ ", ","2",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "type" : "Slice",
+               "source" : {
+                  "localId" : "6",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "2",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "3",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "4",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "5",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  } ]
+               },
+               "startIndex" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "type" : "Literal"
+               },
+               "endIndex" : {
+                  "type" : "Coalesce",
+                  "operand" : [ {
+                     "localId" : "7",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "15",
+            "name" : "TakeTooMany",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "15",
+                  "s" : [ {
+                     "value" : [ "define ","TakeTooMany",": " ]
+                  }, {
+                     "r" : "14",
+                     "s" : [ {
+                        "value" : [ "Take","(" ]
+                     }, {
+                        "r" : "12",
+                        "s" : [ {
+                           "r" : "10",
+                           "value" : [ "{ ","1",", ","2"," }" ]
+                        } ]
+                     }, {
+                        "r" : "13",
+                        "value" : [ ", ","3",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "14",
+               "type" : "Slice",
+               "source" : {
+                  "localId" : "12",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "10",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "11",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  } ]
+               },
+               "startIndex" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "type" : "Literal"
+               },
+               "endIndex" : {
+                  "type" : "Coalesce",
+                  "operand" : [ {
+                     "localId" : "13",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "23",
+            "name" : "TakeEmpty",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "23",
+                  "s" : [ {
+                     "value" : [ "define ","TakeEmpty",": " ]
+                  }, {
+                     "r" : "22",
+                     "s" : [ {
+                        "value" : [ "Take","(" ]
+                     }, {
+                        "r" : "20",
+                        "s" : [ {
+                           "r" : "16",
+                           "value" : [ "{ ","1",", ","2",", ","3",", ","4"," }" ]
+                        } ]
+                     }, {
+                        "r" : "21",
+                        "value" : [ ", ","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "22",
+               "type" : "Slice",
+               "source" : {
+                  "localId" : "20",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "16",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "17",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "18",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "19",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  } ]
+               },
+               "startIndex" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "type" : "Literal"
+               },
+               "endIndex" : {
+                  "type" : "Coalesce",
+                  "operand" : [ {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "21",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "27",
+            "name" : "TakeIsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "27",
+                  "s" : [ {
+                     "value" : [ "define ","TakeIsNull",": " ]
+                  }, {
+                     "r" : "26",
+                     "s" : [ {
+                        "r" : "24",
+                        "value" : [ "Take","(","null",", ","2",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "26",
+               "type" : "Slice",
+               "source" : {
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "24",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               },
+               "startIndex" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "type" : "Literal"
+               },
+               "endIndex" : {
+                  "type" : "Coalesce",
+                  "operand" : [ {
+                     "localId" : "25",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  } ]
+               }
+            }
+         } ]
+      }
+   }
+}
+

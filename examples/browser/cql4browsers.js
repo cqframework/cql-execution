@@ -8653,17 +8653,18 @@ var Slice = /*#__PURE__*/function (_Expression10) {
     key: "exec",
     value: function exec(ctx) {
       var src = this.source.exec(ctx);
-      var start = this.startIndex.exec(ctx);
-      var end = this.endIndex.exec(ctx);
 
       if (src != null && typeIsArray(src)) {
-        if (src.length > 0) {
-          var effectiveStart = start != null ? start : 0;
-          var effectiveEnd = end != null ? end : src.length;
-          return src.slice(effectiveStart, effectiveEnd);
+        var startIndex = this.startIndex.exec(ctx);
+        var endIndex = this.endIndex.exec(ctx);
+        var start = startIndex != null ? startIndex : 0;
+        var end = endIndex != null ? endIndex : src.length;
+
+        if (src.length === 0 || start < 0 || end < 0 || end < start) {
+          return [];
         }
 
-        return [];
+        return src.slice(start, end);
       }
 
       return null;

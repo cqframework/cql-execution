@@ -246,15 +246,15 @@ class Slice extends Expression {
 
   exec(ctx) {
     const src = this.source.exec(ctx);
-    const start = this.startIndex.exec(ctx);
-    const end = this.endIndex.exec(ctx);
     if (src != null && typeIsArray(src)) {
-      if (src.length > 0) {
-        const effectiveStart = start != null ? start : 0;
-        const effectiveEnd = end != null ? end : src.length;
-        return src.slice(effectiveStart, effectiveEnd);
+      const startIndex = this.startIndex.exec(ctx);
+      const endIndex = this.endIndex.exec(ctx);
+      const start = startIndex != null ? startIndex : 0;
+      const end = endIndex != null ? endIndex : src.length;
+      if (src.length === 0 || start < 0 || end < 0 || end < start) {
+        return [];
       }
-      return [];
+      return src.slice(start, end);
     }
     return null;
   }
