@@ -8,25 +8,50 @@ describe('Concat', () => {
     setup(this, data);
   });
 
-  it.skip('should be a Concat', function () {
-    this.helloWorld.should.be.an.instanceOf(str.Concat);
-    this.helloWorldVariables.should.be.an.instanceOf(str.Concat);
+  describe('+', () => {
+    it.skip('should be a Concat', function () {
+      this.helloWorld.should.be.an.instanceOf(str.Concat);
+      this.helloWorldVariables.should.be.an.instanceOf(str.Concat);
+    });
+
+    it('should concat two strings', function () {
+      this.helloWorld.exec(this.ctx).should.equal('HelloWorld');
+    });
+
+    it('should concat multiple strings', function () {
+      this.sentence.exec(this.ctx).should.equal('The quick brown fox jumps over the lazy dog.');
+    });
+
+    it('should return null when an arg is null', function () {
+      should(this.concatNull.exec(this.ctx)).be.null();
+    });
+
+    it('should concat variables', function () {
+      this.helloWorldVariables.exec(this.ctx).should.equal('HelloWorld');
+    });
   });
 
-  it('should concat two strings', function () {
-    this.helloWorld.exec(this.ctx).should.equal('HelloWorld');
-  });
+  describe('&', () => {
+    it.skip('should be a Concat', function () {
+      this.andHelloWorld.should.be.an.instanceOf(str.Concat);
+      this.andHelloWorldVariables.should.be.an.instanceOf(str.Concat);
+    });
 
-  it('should concat multiple strings', function () {
-    this.sentence.exec(this.ctx).should.equal('The quick brown fox jumps over the lazy dog.');
-  });
+    it('should concat two strings', function () {
+      this.andHelloWorld.exec(this.ctx).should.equal('HelloWorld');
+    });
 
-  it('should return null when an arg is null', function () {
-    should(this.concatNull.exec(this.ctx)).be.null();
-  });
+    it('should concat multiple strings', function () {
+      this.andSentence.exec(this.ctx).should.equal('The quick brown fox jumps over the lazy dog.');
+    });
 
-  it('should concat variables', function () {
-    this.helloWorldVariables.exec(this.ctx).should.equal('HelloWorld');
+    it('should treat null arg as empty string', function () {
+      this.andConcatNull.exec(this.ctx).should.equal('Hello');
+    });
+
+    it('should concat variables', function () {
+      this.andHelloWorldVariables.exec(this.ctx).should.equal('HelloWorld');
+    });
   });
 });
 

@@ -6,6 +6,11 @@ define ConcatNull: 'Hello' + null
 define Hello: 'Hello'
 define World: 'World'
 define HelloWorldVariables: Hello + World
+define AndHelloWorld: 'Hello' & 'World'
+define AndSentence: 'The' & ' ' & 'quick' & ' ' & 'brown' & ' ' & 'fox' & ' ' & 'jumps' & ' '
+                  & 'over' & ' ' & 'the' & ' ' & 'lazy' & ' ' & 'dog.'
+define AndConcatNull: 'Hello' & null
+define AndHelloWorldVariables: Hello & World
 
 // @Test: Combine
 define NoSeparator: Combine({ 'abc', 'def', 'ghi', 'jkl' })
