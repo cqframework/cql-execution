@@ -5347,6 +5347,7 @@ define ReplaceDiacritical: ReplaceMatches('Cafè', 'è', 'é')
 define ReplaceUnicode: ReplaceMatches('Turn that frown 🙁 upside down! 😃', '🙁', '😃')
 define ReplaceSpace: ReplaceMatches('(123) 456 7890', '\\s', '-')
 define ReplaceEmpty: ReplaceMatches('FooBar', '', '.')
+define ReplaceMatchGroups: ReplaceMatches('Foo[123]', 'Foo\\[(\\d+)]', 'Bar[$1]')
 define ReplaceNone: ReplaceMatches('Foo', 'Bar', 'Baz')
 define ReplaceArgumentIsNull: ReplaceMatches(null, 'Bar', 'Baz')
 define ReplacePatternIsNull: ReplaceMatches('Foo', null, 'Baz')
@@ -5811,7 +5812,7 @@ module.exports['ReplaceMatches'] = {
             }
          }, {
             "localId" : "41",
-            "name" : "ReplaceNone",
+            "name" : "ReplaceMatchGroups",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -5819,7 +5820,7 @@ module.exports['ReplaceMatches'] = {
                "s" : {
                   "r" : "41",
                   "s" : [ {
-                     "value" : [ "define ","ReplaceNone",": " ]
+                     "value" : [ "define ","ReplaceMatchGroups",": " ]
                   }, {
                      "r" : "40",
                      "s" : [ {
@@ -5827,21 +5828,21 @@ module.exports['ReplaceMatches'] = {
                      }, {
                         "r" : "37",
                         "s" : [ {
-                           "value" : [ "'Foo'" ]
+                           "value" : [ "'Foo[123]'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
                         "r" : "38",
                         "s" : [ {
-                           "value" : [ "'Bar'" ]
+                           "value" : [ "'Foo\\\\[(\\\\d+)]'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
                         "r" : "39",
                         "s" : [ {
-                           "value" : [ "'Baz'" ]
+                           "value" : [ "'Bar[$1]'" ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -5855,23 +5856,23 @@ module.exports['ReplaceMatches'] = {
                "operand" : [ {
                   "localId" : "37",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Foo",
+                  "value" : "Foo[123]",
                   "type" : "Literal"
                }, {
                   "localId" : "38",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Bar",
+                  "value" : "Foo\\[(\\d+)]",
                   "type" : "Literal"
                }, {
                   "localId" : "39",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Baz",
+                  "value" : "Bar[$1]",
                   "type" : "Literal"
                } ]
             }
          }, {
             "localId" : "46",
-            "name" : "ReplaceArgumentIsNull",
+            "name" : "ReplaceNone",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -5879,12 +5880,18 @@ module.exports['ReplaceMatches'] = {
                "s" : {
                   "r" : "46",
                   "s" : [ {
-                     "value" : [ "define ","ReplaceArgumentIsNull",": " ]
+                     "value" : [ "define ","ReplaceNone",": " ]
                   }, {
                      "r" : "45",
                      "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
                         "r" : "42",
-                        "value" : [ "ReplaceMatches","(","null",", " ]
+                        "s" : [ {
+                           "value" : [ "'Foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
                      }, {
                         "r" : "43",
                         "s" : [ {
@@ -5907,12 +5914,10 @@ module.exports['ReplaceMatches'] = {
                "localId" : "45",
                "type" : "ReplaceMatches",
                "operand" : [ {
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "operand" : {
-                     "localId" : "42",
-                     "type" : "Null"
-                  }
+                  "localId" : "42",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo",
+                  "type" : "Literal"
                }, {
                   "localId" : "43",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -5927,7 +5932,7 @@ module.exports['ReplaceMatches'] = {
             }
          }, {
             "localId" : "51",
-            "name" : "ReplacePatternIsNull",
+            "name" : "ReplaceArgumentIsNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -5935,19 +5940,19 @@ module.exports['ReplaceMatches'] = {
                "s" : {
                   "r" : "51",
                   "s" : [ {
-                     "value" : [ "define ","ReplacePatternIsNull",": " ]
+                     "value" : [ "define ","ReplaceArgumentIsNull",": " ]
                   }, {
                      "r" : "50",
                      "s" : [ {
-                        "value" : [ "ReplaceMatches","(" ]
-                     }, {
                         "r" : "47",
-                        "s" : [ {
-                           "value" : [ "'Foo'" ]
-                        } ]
+                        "value" : [ "ReplaceMatches","(","null",", " ]
                      }, {
                         "r" : "48",
-                        "value" : [ ", ","null",", " ]
+                        "s" : [ {
+                           "value" : [ "'Bar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
                      }, {
                         "r" : "49",
                         "s" : [ {
@@ -5963,17 +5968,17 @@ module.exports['ReplaceMatches'] = {
                "localId" : "50",
                "type" : "ReplaceMatches",
                "operand" : [ {
-                  "localId" : "47",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Foo",
-                  "type" : "Literal"
-               }, {
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "operand" : {
-                     "localId" : "48",
+                     "localId" : "47",
                      "type" : "Null"
                   }
+               }, {
+                  "localId" : "48",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Bar",
+                  "type" : "Literal"
                }, {
                   "localId" : "49",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -5983,7 +5988,7 @@ module.exports['ReplaceMatches'] = {
             }
          }, {
             "localId" : "56",
-            "name" : "ReplaceSubstitutionIsNull",
+            "name" : "ReplacePatternIsNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -5991,7 +5996,7 @@ module.exports['ReplaceMatches'] = {
                "s" : {
                   "r" : "56",
                   "s" : [ {
-                     "value" : [ "define ","ReplaceSubstitutionIsNull",": " ]
+                     "value" : [ "define ","ReplacePatternIsNull",": " ]
                   }, {
                      "r" : "55",
                      "s" : [ {
@@ -6002,15 +6007,15 @@ module.exports['ReplaceMatches'] = {
                            "value" : [ "'Foo'" ]
                         } ]
                      }, {
-                        "value" : [ ", " ]
-                     }, {
                         "r" : "53",
-                        "s" : [ {
-                           "value" : [ "'Bar'" ]
-                        } ]
+                        "value" : [ ", ","null",", " ]
                      }, {
                         "r" : "54",
-                        "value" : [ ", ","null",")" ]
+                        "s" : [ {
+                           "value" : [ "'Baz'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
                      } ]
                   } ]
                }
@@ -6024,7 +6029,63 @@ module.exports['ReplaceMatches'] = {
                   "value" : "Foo",
                   "type" : "Literal"
                }, {
-                  "localId" : "53",
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "53",
+                     "type" : "Null"
+                  }
+               }, {
+                  "localId" : "54",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Baz",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "61",
+            "name" : "ReplaceSubstitutionIsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "61",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceSubstitutionIsNull",": " ]
+                  }, {
+                     "r" : "60",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "57",
+                        "s" : [ {
+                           "value" : [ "'Foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "58",
+                        "s" : [ {
+                           "value" : [ "'Bar'" ]
+                        } ]
+                     }, {
+                        "r" : "59",
+                        "value" : [ ", ","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "60",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "57",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "58",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Bar",
                   "type" : "Literal"
@@ -6032,7 +6093,7 @@ module.exports['ReplaceMatches'] = {
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "operand" : {
-                     "localId" : "54",
+                     "localId" : "59",
                      "type" : "Null"
                   }
                } ]

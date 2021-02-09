@@ -457,6 +457,10 @@ describe('ReplaceMatches', () => {
     this.replaceEmpty.exec(this.ctx).should.equal('.F.o.o.B.a.r.');
   });
 
+  it('should replace match groups', function () {
+    this.replaceMatchGroups.exec(this.ctx).should.equal('Bar[123]');
+  });
+
   it('should return original string if no matches', function () {
     this.replaceNone.exec(this.ctx).should.equal('Foo');
   });
