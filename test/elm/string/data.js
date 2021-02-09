@@ -5336,3 +5336,709 @@ module.exports['EndsWith'] = {
    }
 }
 
+/* ReplaceMatches
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define ReplaceOne: ReplaceMatches('FooBar', 'Bar', 'Baz')
+define ReplaceMany: ReplaceMatches('FooBarFooBarFooBar', 'Bar', 'Baz')
+define ReplaceCapital: ReplaceMatches('Tattle', 'T', 'R')
+define ReplaceDiacritical: ReplaceMatches('Cafè', 'è', 'é')
+define ReplaceUnicode: ReplaceMatches('Turn that frown 🙁 upside down! 😃', '🙁', '😃')
+define ReplaceSpace: ReplaceMatches('(123) 456 7890', '\\s', '-')
+define ReplaceEmpty: ReplaceMatches('FooBar', '', '.')
+define ReplaceNone: ReplaceMatches('Foo', 'Bar', 'Baz')
+define ReplaceArgumentIsNull: ReplaceMatches(null, 'Bar', 'Baz')
+define ReplacePatternIsNull: ReplaceMatches('Foo', null, 'Baz')
+define ReplaceSubstitutionIsNull: ReplaceMatches('Foo', 'Bar', null)
+*/
+
+module.exports['ReplaceMatches'] = {
+   "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "6",
+            "name" : "ReplaceOne",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "6",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceOne",": " ]
+                  }, {
+                     "r" : "5",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "'FooBar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "3",
+                        "s" : [ {
+                           "value" : [ "'Bar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "4",
+                        "s" : [ {
+                           "value" : [ "'Baz'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "5",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "FooBar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "3",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Bar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "4",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Baz",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "11",
+            "name" : "ReplaceMany",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "11",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceMany",": " ]
+                  }, {
+                     "r" : "10",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "'FooBarFooBarFooBar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "8",
+                        "s" : [ {
+                           "value" : [ "'Bar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "9",
+                        "s" : [ {
+                           "value" : [ "'Baz'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "10",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "7",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "FooBarFooBarFooBar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "8",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Bar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "9",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Baz",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "16",
+            "name" : "ReplaceCapital",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "16",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceCapital",": " ]
+                  }, {
+                     "r" : "15",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "12",
+                        "s" : [ {
+                           "value" : [ "'Tattle'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "13",
+                        "s" : [ {
+                           "value" : [ "'T'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "'R'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "15",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "12",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Tattle",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "13",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "T",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "14",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "R",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "21",
+            "name" : "ReplaceDiacritical",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "21",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceDiacritical",": " ]
+                  }, {
+                     "r" : "20",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "17",
+                        "s" : [ {
+                           "value" : [ "'Cafè'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "18",
+                        "s" : [ {
+                           "value" : [ "'è'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "19",
+                        "s" : [ {
+                           "value" : [ "'é'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "20",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "17",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Cafè",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "18",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "è",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "19",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "é",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "26",
+            "name" : "ReplaceUnicode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "26",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceUnicode",": " ]
+                  }, {
+                     "r" : "25",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "22",
+                        "s" : [ {
+                           "value" : [ "'Turn that frown \uD83D\uDE41 upside down! \uD83D\uDE03'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "23",
+                        "s" : [ {
+                           "value" : [ "'\uD83D\uDE41'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "24",
+                        "s" : [ {
+                           "value" : [ "'\uD83D\uDE03'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "25",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "22",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Turn that frown \uD83D\uDE41 upside down! \uD83D\uDE03",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "23",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\uD83D\uDE41",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "24",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\uD83D\uDE03",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "31",
+            "name" : "ReplaceSpace",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "31",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceSpace",": " ]
+                  }, {
+                     "r" : "30",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "27",
+                        "s" : [ {
+                           "value" : [ "'(123) 456 7890'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "28",
+                        "s" : [ {
+                           "value" : [ "'\\\\s'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "29",
+                        "s" : [ {
+                           "value" : [ "'-'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "30",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "27",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "(123) 456 7890",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "28",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\\s",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "29",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "-",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "36",
+            "name" : "ReplaceEmpty",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "36",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceEmpty",": " ]
+                  }, {
+                     "r" : "35",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "32",
+                        "s" : [ {
+                           "value" : [ "'FooBar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "33",
+                        "s" : [ {
+                           "value" : [ "''" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "34",
+                        "s" : [ {
+                           "value" : [ "'.'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "35",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "32",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "FooBar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "33",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "34",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : ".",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "41",
+            "name" : "ReplaceNone",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "41",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceNone",": " ]
+                  }, {
+                     "r" : "40",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "37",
+                        "s" : [ {
+                           "value" : [ "'Foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "38",
+                        "s" : [ {
+                           "value" : [ "'Bar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "39",
+                        "s" : [ {
+                           "value" : [ "'Baz'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "40",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "37",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "38",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Bar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "39",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Baz",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "46",
+            "name" : "ReplaceArgumentIsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "46",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceArgumentIsNull",": " ]
+                  }, {
+                     "r" : "45",
+                     "s" : [ {
+                        "r" : "42",
+                        "value" : [ "ReplaceMatches","(","null",", " ]
+                     }, {
+                        "r" : "43",
+                        "s" : [ {
+                           "value" : [ "'Bar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "44",
+                        "s" : [ {
+                           "value" : [ "'Baz'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "45",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "42",
+                     "type" : "Null"
+                  }
+               }, {
+                  "localId" : "43",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Bar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "44",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Baz",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "51",
+            "name" : "ReplacePatternIsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "51",
+                  "s" : [ {
+                     "value" : [ "define ","ReplacePatternIsNull",": " ]
+                  }, {
+                     "r" : "50",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "47",
+                        "s" : [ {
+                           "value" : [ "'Foo'" ]
+                        } ]
+                     }, {
+                        "r" : "48",
+                        "value" : [ ", ","null",", " ]
+                     }, {
+                        "r" : "49",
+                        "s" : [ {
+                           "value" : [ "'Baz'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "50",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "47",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo",
+                  "type" : "Literal"
+               }, {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "48",
+                     "type" : "Null"
+                  }
+               }, {
+                  "localId" : "49",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Baz",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "56",
+            "name" : "ReplaceSubstitutionIsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "56",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceSubstitutionIsNull",": " ]
+                  }, {
+                     "r" : "55",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "52",
+                        "s" : [ {
+                           "value" : [ "'Foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "53",
+                        "s" : [ {
+                           "value" : [ "'Bar'" ]
+                        } ]
+                     }, {
+                        "r" : "54",
+                        "value" : [ ", ","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "55",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "52",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "53",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Bar",
+                  "type" : "Literal"
+               }, {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "54",
+                     "type" : "Null"
+                  }
+               } ]
+            }
+         } ]
+      }
+   }
+}
+

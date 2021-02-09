@@ -423,3 +423,53 @@ describe('EndsWith', () => {
     should(this.nullAsStringEndsWith.exec(this.ctx)).be.null();
   });
 });
+
+describe('ReplaceMatches', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should make replacement with only one match', function () {
+    this.replaceOne.exec(this.ctx).should.equal('FooBaz');
+  });
+
+  it('should make replacement with multiple matches', function () {
+    this.replaceMany.exec(this.ctx).should.equal('FooBazFooBazFooBaz');
+  });
+
+  it('should replace only matching case', function () {
+    this.replaceCapital.exec(this.ctx).should.equal('Rattle');
+  });
+
+  it('should replace diacritical', function () {
+    this.replaceDiacritical.exec(this.ctx).should.equal('Café');
+  });
+
+  it('should replace unicode', function () {
+    this.replaceUnicode.exec(this.ctx).should.equal('Turn that frown 😃 upside down! 😃');
+  });
+
+  it('should replace space', function () {
+    this.replaceSpace.exec(this.ctx).should.equal('(123)-456-7890');
+  });
+
+  it('should replace empty string', function () {
+    this.replaceEmpty.exec(this.ctx).should.equal('.F.o.o.B.a.r.');
+  });
+
+  it('should return original string if no matches', function () {
+    this.replaceNone.exec(this.ctx).should.equal('Foo');
+  });
+
+  it('should return null if argument is null', function () {
+    should(this.replaceArgumentIsNull.exec(this.ctx)).be.null();
+  });
+
+  it('should return null if pattern is null', function () {
+    should(this.replacePatternIsNull.exec(this.ctx)).be.null();
+  });
+
+  it('should return null if substitution is null', function () {
+    should(this.replaceSubstitutionIsNull.exec(this.ctx)).be.null();
+  });
+});

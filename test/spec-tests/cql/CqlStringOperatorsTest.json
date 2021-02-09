@@ -1413,11 +1413,29 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "ReplaceMatches not implemented",
-                           "type" : "Literal"
+                           "type" : "ReplaceMatches",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "Not all who wander are lost",
+                              "type" : "Literal"
+                           }, {
+                              "asType" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "But I am...",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null"
                         }
                      } ]
                   }
@@ -1426,10 +1444,28 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "ReplaceMatches",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "Not all who wander are lost",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "Not all who wander are lost",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "But still waters run deep",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "ReplaceMatches not implemented",
+                           "value" : "But still waters run deep",
                            "type" : "Literal"
                         }
                      } ]
@@ -1439,10 +1475,28 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "ReplaceMatches",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "Who put the bop in the bop she bop she bop?",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "bop",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "bang",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "ReplaceMatches not implemented",
+                           "value" : "Who put the bang in the bang she bang she bang?",
                            "type" : "Literal"
                         }
                      } ]
@@ -1452,10 +1506,28 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "ReplaceMatches",
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "All that glitters is not gold",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "\\s",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "$$",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "ReplaceMatches not implemented",
+                           "value" : "All$that$glitters$is$not$gold",
                            "type" : "Literal"
                         }
                      } ]

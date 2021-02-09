@@ -11423,6 +11423,35 @@ var EndsWith = /*#__PURE__*/function (_Expression12) {
   return EndsWith;
 }(Expression);
 
+var ReplaceMatches = /*#__PURE__*/function (_Expression13) {
+  _inherits(ReplaceMatches, _Expression13);
+
+  var _super13 = _createSuper(ReplaceMatches);
+
+  function ReplaceMatches(json) {
+    _classCallCheck(this, ReplaceMatches);
+
+    return _super13.call(this, json);
+  }
+
+  _createClass(ReplaceMatches, [{
+    key: "exec",
+    value: function exec(ctx) {
+      var args = this.execArgs(ctx);
+
+      if (args.some(function (x) {
+        return x == null;
+      })) {
+        return null;
+      } else {
+        return args[0].replace(new RegExp(args[1], 'g'), args[2]);
+      }
+    }
+  }]);
+
+  return ReplaceMatches;
+}(Expression);
+
 module.exports = {
   Combine: Combine,
   Concatenate: Concatenate,
@@ -11431,6 +11460,7 @@ module.exports = {
   Lower: Lower,
   Matches: Matches,
   PositionOf: PositionOf,
+  ReplaceMatches: ReplaceMatches,
   Split: Split,
   SplitOnMatches: SplitOnMatches,
   StartsWith: StartsWith,
