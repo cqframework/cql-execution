@@ -6,3 +6,14 @@ define DecimalTenth: 0.1
 define StringTrue: 'true'
 define DateTimeX: @2012-02-15T12:10:59.456Z
 define TimeX: @T12:10:59.456
+
+// @Test: Escape
+define SingleQuote: '\''
+define DoubleQuote: '\"'
+define Backtick: '\`'
+define CarriageReturn: '\r'
+define LineFeed: '\n'
+define Tab: '\t'
+define FormFeed: '\f'
+define Backslash: '\\'
+define Unicode: '\u0048'

@@ -269,3 +269,284 @@ module.exports['Literal'] = {
    }
 }
 
+/* Escape
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define SingleQuote: '\''
+define DoubleQuote: '\"'
+define Backtick: '\`'
+define CarriageReturn: '\r'
+define LineFeed: '\n'
+define Tab: '\t'
+define FormFeed: '\f'
+define Backslash: '\\'
+define Unicode: '\u0048'
+*/
+
+module.exports['Escape'] = {
+   "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "3",
+            "name" : "SingleQuote",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "define ","SingleQuote",": " ]
+                  }, {
+                     "r" : "2",
+                     "s" : [ {
+                        "value" : [ "'\\''" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "2",
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "'",
+               "type" : "Literal"
+            }
+         }, {
+            "localId" : "5",
+            "name" : "DoubleQuote",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "define ","DoubleQuote",": " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "'\\\"'" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "4",
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "\"",
+               "type" : "Literal"
+            }
+         }, {
+            "localId" : "7",
+            "name" : "Backtick",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "define ","Backtick",": " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "'\\`'" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "6",
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "`",
+               "type" : "Literal"
+            }
+         }, {
+            "localId" : "9",
+            "name" : "CarriageReturn",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "define ","CarriageReturn",": " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "'\\r'" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "8",
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "\r",
+               "type" : "Literal"
+            }
+         }, {
+            "localId" : "11",
+            "name" : "LineFeed",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "11",
+                  "s" : [ {
+                     "value" : [ "define ","LineFeed",": " ]
+                  }, {
+                     "r" : "10",
+                     "s" : [ {
+                        "value" : [ "'\\n'" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "10",
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "\n",
+               "type" : "Literal"
+            }
+         }, {
+            "localId" : "13",
+            "name" : "Tab",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "define ","Tab",": " ]
+                  }, {
+                     "r" : "12",
+                     "s" : [ {
+                        "value" : [ "'\\t'" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "12",
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "\t",
+               "type" : "Literal"
+            }
+         }, {
+            "localId" : "15",
+            "name" : "FormFeed",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "15",
+                  "s" : [ {
+                     "value" : [ "define ","FormFeed",": " ]
+                  }, {
+                     "r" : "14",
+                     "s" : [ {
+                        "value" : [ "'\\f'" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "14",
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "\f",
+               "type" : "Literal"
+            }
+         }, {
+            "localId" : "17",
+            "name" : "Backslash",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "17",
+                  "s" : [ {
+                     "value" : [ "define ","Backslash",": " ]
+                  }, {
+                     "r" : "16",
+                     "s" : [ {
+                        "value" : [ "'\\\\'" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "16",
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "\\",
+               "type" : "Literal"
+            }
+         }, {
+            "localId" : "19",
+            "name" : "Unicode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "19",
+                  "s" : [ {
+                     "value" : [ "define ","Unicode",": " ]
+                  }, {
+                     "r" : "18",
+                     "s" : [ {
+                        "value" : [ "'\\u0048'" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "18",
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "H",
+               "type" : "Literal"
+            }
+         } ]
+      }
+   }
+}
+

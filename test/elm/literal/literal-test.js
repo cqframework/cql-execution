@@ -73,3 +73,45 @@ describe('Literal', () => {
     should(d.timezoneOffset).be.null();
   });
 });
+
+describe('Escape', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should escape single quote', function () {
+    this.singleQuote.value.should.equal("'");
+  });
+
+  it('should escape double quote', function () {
+    this.doubleQuote.value.should.equal('"');
+  });
+
+  it('should escape backtick', function () {
+    this.backtick.value.should.equal('`');
+  });
+
+  it('should escape carriage return', function () {
+    this.carriageReturn.value.should.equal('\r');
+  });
+
+  it('should escape line feed', function () {
+    this.lineFeed.value.should.equal('\n');
+  });
+
+  it('should escape tab', function () {
+    this.tab.value.should.equal('\t');
+  });
+
+  it('should escape form feed', function () {
+    this.formFeed.value.should.equal('\f');
+  });
+
+  it('should escape backslash', function () {
+    this.backslash.value.should.equal('\\');
+  });
+
+  it('should escape unicode', function () {
+    this.unicode.value.should.equal('H');
+  });
+});
