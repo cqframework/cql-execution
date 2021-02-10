@@ -8,6 +8,7 @@ const {
   doMultiplication,
   doDivision
 } = require('../datatypes/quantity');
+const { Uncertainty } = require('../datatypes/uncertainty');
 
 class Add extends Expression {
   constructor(json) {
@@ -23,6 +24,8 @@ class Add extends Expression {
     const sum = args.reduce((x, y) => {
       if (x.isQuantity || x.isDateTime || x.isDate || (x.isTime && x.isTime())) {
         return doAddition(x, y);
+      } else if (x.isUncertainty && y.isUncertainty) {
+        return new Uncertainty(x.low + y.low, x.high + y.high);
       } else {
         return x + y;
       }
@@ -49,6 +52,8 @@ class Subtract extends Expression {
     const difference = args.reduce((x, y) => {
       if (x.isQuantity || x.isDateTime || x.isDate) {
         return doSubtraction(x, y);
+      } else if (x.isUncertainty && y.isUncertainty) {
+        return new Uncertainty(x.low - y.low, x.high - y.high);
       } else {
         return x - y;
       }
@@ -75,6 +80,8 @@ class Multiply extends Expression {
     const product = args.reduce((x, y) => {
       if (x.isQuantity || y.isQuantity) {
         return doMultiplication(x, y);
+      } else if (x.isUncertainty && y.isUncertainty) {
+        return new Uncertainty(x.low * y.low, x.high * y.high);
       } else {
         return x * y;
       }

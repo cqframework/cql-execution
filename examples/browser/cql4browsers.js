@@ -4234,6 +4234,9 @@ var _require3 = require('../datatypes/quantity'),
     doMultiplication = _require3.doMultiplication,
     doDivision = _require3.doDivision;
 
+var _require4 = require('../datatypes/uncertainty'),
+    Uncertainty = _require4.Uncertainty;
+
 var Add = /*#__PURE__*/function (_Expression) {
   _inherits(Add, _Expression);
 
@@ -4259,6 +4262,8 @@ var Add = /*#__PURE__*/function (_Expression) {
       var sum = args.reduce(function (x, y) {
         if (x.isQuantity || x.isDateTime || x.isDate || x.isTime && x.isTime()) {
           return doAddition(x, y);
+        } else if (x.isUncertainty && y.isUncertainty) {
+          return new Uncertainty(x.low + y.low, x.high + y.high);
         } else {
           return x + y;
         }
@@ -4300,6 +4305,8 @@ var Subtract = /*#__PURE__*/function (_Expression2) {
       var difference = args.reduce(function (x, y) {
         if (x.isQuantity || x.isDateTime || x.isDate) {
           return doSubtraction(x, y);
+        } else if (x.isUncertainty && y.isUncertainty) {
+          return new Uncertainty(x.low - y.low, x.high - y.high);
         } else {
           return x - y;
         }
@@ -4341,6 +4348,8 @@ var Multiply = /*#__PURE__*/function (_Expression3) {
       var product = args.reduce(function (x, y) {
         if (x.isQuantity || y.isQuantity) {
           return doMultiplication(x, y);
+        } else if (x.isUncertainty && y.isUncertainty) {
+          return new Uncertainty(x.low * y.low, x.high * y.high);
         } else {
           return x * y;
         }
@@ -4962,7 +4971,7 @@ module.exports = {
   Truncate: Truncate,
   TruncatedDivide: TruncatedDivide
 };
-},{"../datatypes/quantity":11,"../util/math":46,"./builder":16,"./expression":22}],16:[function(require,module,exports){
+},{"../datatypes/quantity":11,"../datatypes/uncertainty":13,"../util/math":46,"./builder":16,"./expression":22}],16:[function(require,module,exports){
 "use strict";
 
 var E = require('./expressions');
@@ -14054,6 +14063,8 @@ function overflowsOrUnderflows(value) {
     if (!isValidInteger(value)) {
       return true;
     }
+  } else if (value.isUncertainty) {
+    return overflowsOrUnderflows(value.low) || overflowsOrUnderflows(value.high);
   } else {
     if (!isValidDecimal(value)) {
       return true;

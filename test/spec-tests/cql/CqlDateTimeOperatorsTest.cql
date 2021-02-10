@@ -578,26 +578,20 @@ define "Uncertainty tests": Tuple{
     output: Interval[ 4, 16 ]
   },
   "DateTimeDurationBetweenUncertainAdd": Tuple{
-    skipped: 'Adding Uncertainties not supported'
-    /*
     expression: (days between DateTime(2014, 1, 15) and DateTime(2014, 2))
 				+ (days between DateTime(2014, 1, 15) and DateTime(2014, 2)),
     output: Interval[ 32, 88 ]
-    */  },
+  },
   "DateTimeDurationBetweenUncertainSubtract": Tuple{
-    skipped: 'Subtracting Uncertainties not supported'
-    /*
     expression: (days between DateTime(2014, 1, 15) and DateTime(2014, 2))
 				- (months between DateTime(2005) and DateTime(2006, 5)),
     output: Interval[ 12, 28 ]
-    */  },
+  },
   "DateTimeDurationBetweenUncertainMultiply": Tuple{
-    skipped: 'Multiplying Uncertainties not supported'
-    /*
     expression: (days between DateTime(2014, 1, 15) and DateTime(2014, 2))
 				* (days between DateTime(2014, 1, 15) and DateTime(2014, 2)),
     output: Interval[ 256, 1936 ]
-    */  },
+  },
   "DateTimeDurationBetweenUncertainDiv": Tuple{
     expression: (days between DateTime(2014, 1, 15) and DateTime(2014, 2))
 				div (months between DateTime(2005) and DateTime(2006, 5)),
