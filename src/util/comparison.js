@@ -4,6 +4,10 @@ function areNumbers(a, b) {
   return typeof a === 'number' && typeof b === 'number';
 }
 
+function areStrings(a, b) {
+  return typeof a === 'string' && typeof b === 'string';
+}
+
 function areDateTimesOrQuantities(a, b) {
   return (
     (a && a.isDateTime && b && b.isDateTime) ||
@@ -17,7 +21,7 @@ function isUncertainty(x) {
 }
 
 function lessThan(a, b, precision) {
-  if (areNumbers(a, b)) {
+  if (areNumbers(a, b) || areStrings(a, b)) {
     return a < b;
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.before(b, precision);
@@ -31,7 +35,7 @@ function lessThan(a, b, precision) {
 }
 
 function lessThanOrEquals(a, b, precision) {
-  if (areNumbers(a, b)) {
+  if (areNumbers(a, b) || areStrings(a, b)) {
     return a <= b;
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.sameOrBefore(b, precision);
@@ -45,7 +49,7 @@ function lessThanOrEquals(a, b, precision) {
 }
 
 function greaterThan(a, b, precision) {
-  if (areNumbers(a, b)) {
+  if (areNumbers(a, b) || areStrings(a, b)) {
     return a > b;
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.after(b, precision);
@@ -59,7 +63,7 @@ function greaterThan(a, b, precision) {
 }
 
 function greaterThanOrEquals(a, b, precision) {
-  if (areNumbers(a, b)) {
+  if (areNumbers(a, b) || areStrings(a, b)) {
     return a >= b;
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.sameOrAfter(b, precision);

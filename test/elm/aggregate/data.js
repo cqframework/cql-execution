@@ -1058,6 +1058,7 @@ define DecimalMin: Min({ 5.0, 4.9, 5.1, -5.0 })
 define DateMin: Min({ @2012-12-31, @2013-01-01, @2012-01-01 })
 define DateTimeMin: Min({ DateTime(2012, 9, 9), DateTime(2012, 9, 5) })
 define TimeMin: Min({ Time(12, 30, 4), Time(12, 30, 3), Time(12, 30, 5)})
+define StringMin: Min({'def', 'abc', 'jkl', 'ghi'})
 define MinIsNull: Min({ null as Quantity, null as Quantity, null as Quantity })
 define MinIsAlsoNull: Min(null as List<Decimal>)
 define IncompatibleUnitsNull: Min({1 'mg/d', 0.002 '/d'})
@@ -2128,57 +2129,140 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "118",
+            "localId" : "113",
+            "name" : "StringMin",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "113",
+                  "s" : [ {
+                     "value" : [ "define ","StringMin",": " ]
+                  }, {
+                     "r" : "112",
+                     "s" : [ {
+                        "value" : [ "Min","(" ]
+                     }, {
+                        "r" : "111",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "107",
+                           "s" : [ {
+                              "value" : [ "'def'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "108",
+                           "s" : [ {
+                              "value" : [ "'abc'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "109",
+                           "s" : [ {
+                              "value" : [ "'jkl'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "110",
+                           "s" : [ {
+                              "value" : [ "'ghi'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "112",
+               "type" : "Min",
+               "source" : {
+                  "localId" : "111",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "107",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "def",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "108",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "abc",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "109",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "jkl",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "110",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "ghi",
+                     "type" : "Literal"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "125",
             "name" : "MinIsNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "118",
+                  "r" : "125",
                   "s" : [ {
                      "value" : [ "define ","MinIsNull",": " ]
                   }, {
-                     "r" : "117",
+                     "r" : "124",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "116",
+                        "r" : "123",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "109",
+                           "r" : "116",
                            "s" : [ {
-                              "r" : "107",
-                              "value" : [ "null"," as " ]
-                           }, {
-                              "r" : "108",
-                              "s" : [ {
-                                 "value" : [ "Quantity" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "112",
-                           "s" : [ {
-                              "r" : "110",
-                              "value" : [ "null"," as " ]
-                           }, {
-                              "r" : "111",
-                              "s" : [ {
-                                 "value" : [ "Quantity" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "115",
-                           "s" : [ {
-                              "r" : "113",
-                              "value" : [ "null"," as " ]
-                           }, {
                               "r" : "114",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "115",
+                              "s" : [ {
+                                 "value" : [ "Quantity" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "119",
+                           "s" : [ {
+                              "r" : "117",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "118",
+                              "s" : [ {
+                                 "value" : [ "Quantity" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "122",
+                           "s" : [ {
+                              "r" : "120",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "121",
                               "s" : [ {
                                  "value" : [ "Quantity" ]
                               } ]
@@ -2193,47 +2277,47 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "117",
+               "localId" : "124",
                "type" : "Min",
                "source" : {
-                  "localId" : "116",
+                  "localId" : "123",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "109",
+                     "localId" : "116",
                      "strict" : false,
                      "type" : "As",
                      "operand" : {
-                        "localId" : "107",
-                        "type" : "Null"
-                     },
-                     "asTypeSpecifier" : {
-                        "localId" : "108",
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  }, {
-                     "localId" : "112",
-                     "strict" : false,
-                     "type" : "As",
-                     "operand" : {
-                        "localId" : "110",
-                        "type" : "Null"
-                     },
-                     "asTypeSpecifier" : {
-                        "localId" : "111",
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  }, {
-                     "localId" : "115",
-                     "strict" : false,
-                     "type" : "As",
-                     "operand" : {
-                        "localId" : "113",
-                        "type" : "Null"
-                     },
-                     "asTypeSpecifier" : {
                         "localId" : "114",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "115",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "119",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "117",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "118",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "122",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "120",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "121",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -2241,31 +2325,31 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "124",
+            "localId" : "131",
             "name" : "MinIsAlsoNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "124",
+                  "r" : "131",
                   "s" : [ {
                      "value" : [ "define ","MinIsAlsoNull",": " ]
                   }, {
-                     "r" : "123",
+                     "r" : "130",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "122",
+                        "r" : "129",
                         "s" : [ {
-                           "r" : "119",
+                           "r" : "126",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "121",
+                           "r" : "128",
                            "s" : [ {
                               "value" : [ "List<" ]
                            }, {
-                              "r" : "120",
+                              "r" : "127",
                               "s" : [ {
                                  "value" : [ "Decimal" ]
                               } ]
@@ -2280,21 +2364,21 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "123",
+               "localId" : "130",
                "type" : "Min",
                "source" : {
-                  "localId" : "122",
+                  "localId" : "129",
                   "strict" : false,
                   "type" : "As",
                   "operand" : {
-                     "localId" : "119",
+                     "localId" : "126",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "121",
+                     "localId" : "128",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "120",
+                        "localId" : "127",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -2302,33 +2386,33 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "129",
+            "localId" : "136",
             "name" : "IncompatibleUnitsNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "129",
+                  "r" : "136",
                   "s" : [ {
                      "value" : [ "define ","IncompatibleUnitsNull",": " ]
                   }, {
-                     "r" : "128",
+                     "r" : "135",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "127",
+                        "r" : "134",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "125",
+                           "r" : "132",
                            "s" : [ {
                               "value" : [ "1 ","'mg/d'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "126",
+                           "r" : "133",
                            "s" : [ {
                               "value" : [ "0.002 ","'/d'" ]
                            } ]
@@ -2342,18 +2426,18 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "128",
+               "localId" : "135",
                "type" : "Min",
                "source" : {
-                  "localId" : "127",
+                  "localId" : "134",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "125",
+                     "localId" : "132",
                      "value" : 1,
                      "unit" : "mg/d",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "126",
+                     "localId" : "133",
                      "value" : 0.002,
                      "unit" : "/d",
                      "type" : "Quantity"
@@ -2384,6 +2468,7 @@ define DecimalMax: Max({ 5.0, 4.9, 5.1, -5.0 })
 define DateMax: Max({ @2012-12-31, @2013-01-01, @2012-01-01 })
 define DateTimeMax: Max({ DateTime(2012, 2, 3), DateTime(2012, 9, 5) })
 define TimeMax: Max({ Time(12, 30, 1), Time(12, 30, 3), Time(12, 30, 2)})
+define StringMax: Max({'def', 'abc', 'jkl', 'ghi'})
 define MaxIsNull: Max({ null as Quantity, null as Quantity, null as Quantity })
 define MaxIsAlsoNull: Max(null as List<Decimal>)
 */
@@ -3472,57 +3557,140 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "119",
+            "localId" : "114",
+            "name" : "StringMax",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "114",
+                  "s" : [ {
+                     "value" : [ "define ","StringMax",": " ]
+                  }, {
+                     "r" : "113",
+                     "s" : [ {
+                        "value" : [ "Max","(" ]
+                     }, {
+                        "r" : "112",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "108",
+                           "s" : [ {
+                              "value" : [ "'def'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "109",
+                           "s" : [ {
+                              "value" : [ "'abc'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "110",
+                           "s" : [ {
+                              "value" : [ "'jkl'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "111",
+                           "s" : [ {
+                              "value" : [ "'ghi'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "113",
+               "type" : "Max",
+               "source" : {
+                  "localId" : "112",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "108",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "def",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "109",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "abc",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "110",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "jkl",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "111",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "ghi",
+                     "type" : "Literal"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "126",
             "name" : "MaxIsNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "119",
+                  "r" : "126",
                   "s" : [ {
                      "value" : [ "define ","MaxIsNull",": " ]
                   }, {
-                     "r" : "118",
+                     "r" : "125",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "117",
+                        "r" : "124",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "110",
+                           "r" : "117",
                            "s" : [ {
-                              "r" : "108",
-                              "value" : [ "null"," as " ]
-                           }, {
-                              "r" : "109",
-                              "s" : [ {
-                                 "value" : [ "Quantity" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "113",
-                           "s" : [ {
-                              "r" : "111",
-                              "value" : [ "null"," as " ]
-                           }, {
-                              "r" : "112",
-                              "s" : [ {
-                                 "value" : [ "Quantity" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "116",
-                           "s" : [ {
-                              "r" : "114",
-                              "value" : [ "null"," as " ]
-                           }, {
                               "r" : "115",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "116",
+                              "s" : [ {
+                                 "value" : [ "Quantity" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "120",
+                           "s" : [ {
+                              "r" : "118",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "119",
+                              "s" : [ {
+                                 "value" : [ "Quantity" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "123",
+                           "s" : [ {
+                              "r" : "121",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "122",
                               "s" : [ {
                                  "value" : [ "Quantity" ]
                               } ]
@@ -3537,47 +3705,47 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "118",
+               "localId" : "125",
                "type" : "Max",
                "source" : {
-                  "localId" : "117",
+                  "localId" : "124",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "110",
+                     "localId" : "117",
                      "strict" : false,
                      "type" : "As",
                      "operand" : {
-                        "localId" : "108",
-                        "type" : "Null"
-                     },
-                     "asTypeSpecifier" : {
-                        "localId" : "109",
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  }, {
-                     "localId" : "113",
-                     "strict" : false,
-                     "type" : "As",
-                     "operand" : {
-                        "localId" : "111",
-                        "type" : "Null"
-                     },
-                     "asTypeSpecifier" : {
-                        "localId" : "112",
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  }, {
-                     "localId" : "116",
-                     "strict" : false,
-                     "type" : "As",
-                     "operand" : {
-                        "localId" : "114",
-                        "type" : "Null"
-                     },
-                     "asTypeSpecifier" : {
                         "localId" : "115",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "116",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "120",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "118",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "119",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "123",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "121",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "122",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -3585,31 +3753,31 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "125",
+            "localId" : "132",
             "name" : "MaxIsAlsoNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "125",
+                  "r" : "132",
                   "s" : [ {
                      "value" : [ "define ","MaxIsAlsoNull",": " ]
                   }, {
-                     "r" : "124",
+                     "r" : "131",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "123",
+                        "r" : "130",
                         "s" : [ {
-                           "r" : "120",
+                           "r" : "127",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "122",
+                           "r" : "129",
                            "s" : [ {
                               "value" : [ "List<" ]
                            }, {
-                              "r" : "121",
+                              "r" : "128",
                               "s" : [ {
                                  "value" : [ "Decimal" ]
                               } ]
@@ -3624,21 +3792,21 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "124",
+               "localId" : "131",
                "type" : "Max",
                "source" : {
-                  "localId" : "123",
+                  "localId" : "130",
                   "strict" : false,
                   "type" : "As",
                   "operand" : {
-                     "localId" : "120",
+                     "localId" : "127",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "122",
+                     "localId" : "129",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "121",
+                        "localId" : "128",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      }

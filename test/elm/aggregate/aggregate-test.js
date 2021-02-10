@@ -122,6 +122,10 @@ describe('Min', () => {
     timeMin.second.should.equal(3);
   });
 
+  it('list of Strings', function () {
+    this.stringMin.exec(this.ctx).should.equal('abc');
+  });
+
   it('list of Nulls', function () {
     should(this.minIsNull.exec(this.ctx)).be.null();
   });
@@ -188,6 +192,10 @@ describe('Max', () => {
     timeMax.hour.should.equal(12);
     timeMax.minute.should.equal(30);
     timeMax.second.should.equal(3);
+  });
+
+  it('list of Strings', function () {
+    this.stringMax.exec(this.ctx).should.equal('jkl');
   });
 
   it('list of Nulls', function () {

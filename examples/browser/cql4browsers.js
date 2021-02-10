@@ -8630,6 +8630,48 @@ var Last = /*#__PURE__*/function (_Expression9) {
   }]);
 
   return Last;
+}(Expression);
+
+var Slice = /*#__PURE__*/function (_Expression10) {
+  _inherits(Slice, _Expression10);
+
+  var _super14 = _createSuper(Slice);
+
+  function Slice(json) {
+    var _this5;
+
+    _classCallCheck(this, Slice);
+
+    _this5 = _super14.call(this, json);
+    _this5.source = build(json.source);
+    _this5.startIndex = build(json.startIndex);
+    _this5.endIndex = build(json.endIndex);
+    return _this5;
+  }
+
+  _createClass(Slice, [{
+    key: "exec",
+    value: function exec(ctx) {
+      var src = this.source.exec(ctx);
+
+      if (src != null && typeIsArray(src)) {
+        var startIndex = this.startIndex.exec(ctx);
+        var endIndex = this.endIndex.exec(ctx);
+        var start = startIndex != null ? startIndex : 0;
+        var end = endIndex != null ? endIndex : src.length;
+
+        if (src.length === 0 || start < 0 || end < 0 || end < start) {
+          return [];
+        }
+
+        return src.slice(start, end);
+      }
+
+      return null;
+    }
+  }]);
+
+  return Slice;
 }(Expression); // Length is completely handled by overloaded#Length
 
 
@@ -8645,6 +8687,7 @@ module.exports = {
   Last: Last,
   List: List,
   SingletonFrom: SingletonFrom,
+  Slice: Slice,
   Times: Times,
   ToList: ToList,
   doContains: doContains,
@@ -13485,6 +13528,10 @@ function areNumbers(a, b) {
   return typeof a === 'number' && typeof b === 'number';
 }
 
+function areStrings(a, b) {
+  return typeof a === 'string' && typeof b === 'string';
+}
+
 function areDateTimesOrQuantities(a, b) {
   return a && a.isDateTime && b && b.isDateTime || a && a.isDate && b && b.isDate || a && a.isQuantity && b && b.isQuantity;
 }
@@ -13494,7 +13541,7 @@ function isUncertainty(x) {
 }
 
 function lessThan(a, b, precision) {
-  if (areNumbers(a, b)) {
+  if (areNumbers(a, b) || areStrings(a, b)) {
     return a < b;
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.before(b, precision);
@@ -13508,7 +13555,7 @@ function lessThan(a, b, precision) {
 }
 
 function lessThanOrEquals(a, b, precision) {
-  if (areNumbers(a, b)) {
+  if (areNumbers(a, b) || areStrings(a, b)) {
     return a <= b;
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.sameOrBefore(b, precision);
@@ -13522,7 +13569,7 @@ function lessThanOrEquals(a, b, precision) {
 }
 
 function greaterThan(a, b, precision) {
-  if (areNumbers(a, b)) {
+  if (areNumbers(a, b) || areStrings(a, b)) {
     return a > b;
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.after(b, precision);
@@ -13536,7 +13583,7 @@ function greaterThan(a, b, precision) {
 }
 
 function greaterThanOrEquals(a, b, precision) {
-  if (areNumbers(a, b)) {
+  if (areNumbers(a, b) || areStrings(a, b)) {
     return a >= b;
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.sameOrAfter(b, precision);
