@@ -9,9 +9,9 @@ describe('Concat', () => {
   });
 
   describe('+', () => {
-    it.skip('should be a Concat', function () {
-      this.helloWorld.should.be.an.instanceOf(str.Concat);
-      this.helloWorldVariables.should.be.an.instanceOf(str.Concat);
+    it('should be a Concat', function () {
+      this.helloWorld.should.be.an.instanceOf(str.Concatenate);
+      this.helloWorldVariables.should.be.an.instanceOf(str.Concatenate);
     });
 
     it('should concat two strings', function () {
@@ -32,9 +32,9 @@ describe('Concat', () => {
   });
 
   describe('&', () => {
-    it.skip('should be a Concat', function () {
-      this.andHelloWorld.should.be.an.instanceOf(str.Concat);
-      this.andHelloWorldVariables.should.be.an.instanceOf(str.Concat);
+    it('should be a Concat', function () {
+      this.andHelloWorld.should.be.an.instanceOf(str.Concatenate);
+      this.andHelloWorldVariables.should.be.an.instanceOf(str.Concatenate);
     });
 
     it('should concat two strings', function () {
