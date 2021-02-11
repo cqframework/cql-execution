@@ -224,7 +224,7 @@
 			<output>'Who put the bang in the bang she bang she bang?'</output>
 		</test>
 		<test name="ReplaceMatchesSpaces">
-			<expression>ReplaceMatches('All that glitters is not gold', '\\s', '\\$')</expression>
+			<expression>ReplaceMatches('All that glitters is not gold', '\\s', '$$')</expression>
 			<output>'All$that$glitters$is$not$gold'</output>
 		</test>
 	</group>

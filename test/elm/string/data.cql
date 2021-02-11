@@ -6,6 +6,11 @@ define ConcatNull: 'Hello' + null
 define Hello: 'Hello'
 define World: 'World'
 define HelloWorldVariables: Hello + World
+define AndHelloWorld: 'Hello' & 'World'
+define AndSentence: 'The' & ' ' & 'quick' & ' ' & 'brown' & ' ' & 'fox' & ' ' & 'jumps' & ' '
+                  & 'over' & ' ' & 'the' & ' ' & 'lazy' & ' ' & 'dog.'
+define AndConcatNull: 'Hello' & null
+define AndHelloWorldVariables: Hello & World
 
 // @Test: Combine
 define NoSeparator: Combine({ 'abc', 'def', 'ghi', 'jkl' })
@@ -101,3 +106,17 @@ define EndsWithNull: EndsWith('FooBar', null)
 define EndsWithNullAsString: EndsWith('FooBar', null as String)
 define NullEndsWith: EndsWith(null as String, 'Foo')
 define NullAsStringEndsWith: EndsWith(null as String, 'Foo')
+
+// @Test: ReplaceMatches
+define ReplaceOne: ReplaceMatches('FooBar', 'Bar', 'Baz')
+define ReplaceMany: ReplaceMatches('FooBarFooBarFooBar', 'Bar', 'Baz')
+define ReplaceCapital: ReplaceMatches('Tattle', 'T', 'R')
+define ReplaceDiacritical: ReplaceMatches('Cafè', 'è', 'é')
+define ReplaceUnicode: ReplaceMatches('Turn that frown 🙁 upside down! 😃', '🙁', '😃')
+define ReplaceSpace: ReplaceMatches('(123) 456 7890', '\\s', '-')
+define ReplaceEmpty: ReplaceMatches('FooBar', '', '.')
+define ReplaceMatchGroups: ReplaceMatches('Foo[123]', 'Foo\\[(\\d+)]', 'Bar[$1]')
+define ReplaceNone: ReplaceMatches('Foo', 'Bar', 'Baz')
+define ReplaceArgumentIsNull: ReplaceMatches(null, 'Bar', 'Baz')
+define ReplacePatternIsNull: ReplaceMatches('Foo', null, 'Baz')
+define ReplaceSubstitutionIsNull: ReplaceMatches('Foo', 'Bar', null)

@@ -216,6 +216,21 @@ class EndsWith extends Expression {
   }
 }
 
+class ReplaceMatches extends Expression {
+  constructor(json) {
+    super(json);
+  }
+
+  exec(ctx) {
+    const args = this.execArgs(ctx);
+    if (args.some(x => x == null)) {
+      return null;
+    } else {
+      return args[0].replace(new RegExp(args[1], 'g'), args[2]);
+    }
+  }
+}
+
 module.exports = {
   Combine,
   Concatenate,
@@ -224,6 +239,7 @@ module.exports = {
   Lower,
   Matches,
   PositionOf,
+  ReplaceMatches,
   Split,
   SplitOnMatches,
   StartsWith,

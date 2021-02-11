@@ -19,6 +19,11 @@ define ConcatNull: 'Hello' + null
 define Hello: 'Hello'
 define World: 'World'
 define HelloWorldVariables: Hello + World
+define AndHelloWorld: 'Hello' & 'World'
+define AndSentence: 'The' & ' ' & 'quick' & ' ' & 'brown' & ' ' & 'fox' & ' ' & 'jumps' & ' '
+                  & 'over' & ' ' & 'the' & ' ' & 'lazy' & ' ' & 'dog.'
+define AndConcatNull: 'Hello' & null
+define AndHelloWorldVariables: Hello & World
 */
 
 module.exports['Concat'] = {
@@ -562,6 +567,729 @@ module.exports['Concat'] = {
                   "localId" : "49",
                   "name" : "World",
                   "type" : "ExpressionRef"
+               } ]
+            }
+         }, {
+            "localId" : "55",
+            "name" : "AndHelloWorld",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "55",
+                  "s" : [ {
+                     "value" : [ "define ","AndHelloWorld",": " ]
+                  }, {
+                     "r" : "54",
+                     "s" : [ {
+                        "r" : "52",
+                        "s" : [ {
+                           "value" : [ "'Hello'" ]
+                        } ]
+                     }, {
+                        "value" : [ " & " ]
+                     }, {
+                        "r" : "53",
+                        "s" : [ {
+                           "value" : [ "'World'" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "54",
+               "type" : "Concatenate",
+               "operand" : [ {
+                  "type" : "Coalesce",
+                  "operand" : [ {
+                     "localId" : "52",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Hello",
+                     "type" : "Literal"
+                  }, {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "",
+                     "type" : "Literal"
+                  } ]
+               }, {
+                  "type" : "Coalesce",
+                  "operand" : [ {
+                     "localId" : "53",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "World",
+                     "type" : "Literal"
+                  }, {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "",
+                     "type" : "Literal"
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "89",
+            "name" : "AndSentence",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "89",
+                  "s" : [ {
+                     "value" : [ "define ","AndSentence",": " ]
+                  }, {
+                     "r" : "88",
+                     "s" : [ {
+                        "r" : "86",
+                        "s" : [ {
+                           "r" : "84",
+                           "s" : [ {
+                              "r" : "82",
+                              "s" : [ {
+                                 "r" : "80",
+                                 "s" : [ {
+                                    "r" : "78",
+                                    "s" : [ {
+                                       "r" : "76",
+                                       "s" : [ {
+                                          "r" : "74",
+                                          "s" : [ {
+                                             "r" : "72",
+                                             "s" : [ {
+                                                "r" : "70",
+                                                "s" : [ {
+                                                   "r" : "68",
+                                                   "s" : [ {
+                                                      "r" : "66",
+                                                      "s" : [ {
+                                                         "r" : "64",
+                                                         "s" : [ {
+                                                            "r" : "62",
+                                                            "s" : [ {
+                                                               "r" : "60",
+                                                               "s" : [ {
+                                                                  "r" : "58",
+                                                                  "s" : [ {
+                                                                     "r" : "56",
+                                                                     "s" : [ {
+                                                                        "value" : [ "'The'" ]
+                                                                     } ]
+                                                                  }, {
+                                                                     "value" : [ " & " ]
+                                                                  }, {
+                                                                     "r" : "57",
+                                                                     "s" : [ {
+                                                                        "value" : [ "' '" ]
+                                                                     } ]
+                                                                  } ]
+                                                               }, {
+                                                                  "value" : [ " & " ]
+                                                               }, {
+                                                                  "r" : "59",
+                                                                  "s" : [ {
+                                                                     "value" : [ "'quick'" ]
+                                                                  } ]
+                                                               } ]
+                                                            }, {
+                                                               "value" : [ " & " ]
+                                                            }, {
+                                                               "r" : "61",
+                                                               "s" : [ {
+                                                                  "value" : [ "' '" ]
+                                                               } ]
+                                                            } ]
+                                                         }, {
+                                                            "value" : [ " & " ]
+                                                         }, {
+                                                            "r" : "63",
+                                                            "s" : [ {
+                                                               "value" : [ "'brown'" ]
+                                                            } ]
+                                                         } ]
+                                                      }, {
+                                                         "value" : [ " & " ]
+                                                      }, {
+                                                         "r" : "65",
+                                                         "s" : [ {
+                                                            "value" : [ "' '" ]
+                                                         } ]
+                                                      } ]
+                                                   }, {
+                                                      "value" : [ " & " ]
+                                                   }, {
+                                                      "r" : "67",
+                                                      "s" : [ {
+                                                         "value" : [ "'fox'" ]
+                                                      } ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ " & " ]
+                                                }, {
+                                                   "r" : "69",
+                                                   "s" : [ {
+                                                      "value" : [ "' '" ]
+                                                   } ]
+                                                } ]
+                                             }, {
+                                                "value" : [ " & " ]
+                                             }, {
+                                                "r" : "71",
+                                                "s" : [ {
+                                                   "value" : [ "'jumps'" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ " & " ]
+                                          }, {
+                                             "r" : "73",
+                                             "s" : [ {
+                                                "value" : [ "' '" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "\n                  & " ]
+                                       }, {
+                                          "r" : "75",
+                                          "s" : [ {
+                                             "value" : [ "'over'" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " & " ]
+                                    }, {
+                                       "r" : "77",
+                                       "s" : [ {
+                                          "value" : [ "' '" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " & " ]
+                                 }, {
+                                    "r" : "79",
+                                    "s" : [ {
+                                       "value" : [ "'the'" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " & " ]
+                              }, {
+                                 "r" : "81",
+                                 "s" : [ {
+                                    "value" : [ "' '" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " & " ]
+                           }, {
+                              "r" : "83",
+                              "s" : [ {
+                                 "value" : [ "'lazy'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " & " ]
+                        }, {
+                           "r" : "85",
+                           "s" : [ {
+                              "value" : [ "' '" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " & " ]
+                     }, {
+                        "r" : "87",
+                        "s" : [ {
+                           "value" : [ "'dog.'" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "88",
+               "type" : "Concatenate",
+               "operand" : [ {
+                  "type" : "Coalesce",
+                  "operand" : [ {
+                     "localId" : "86",
+                     "type" : "Concatenate",
+                     "operand" : [ {
+                        "type" : "Coalesce",
+                        "operand" : [ {
+                           "localId" : "84",
+                           "type" : "Concatenate",
+                           "operand" : [ {
+                              "type" : "Coalesce",
+                              "operand" : [ {
+                                 "localId" : "82",
+                                 "type" : "Concatenate",
+                                 "operand" : [ {
+                                    "type" : "Coalesce",
+                                    "operand" : [ {
+                                       "localId" : "80",
+                                       "type" : "Concatenate",
+                                       "operand" : [ {
+                                          "type" : "Coalesce",
+                                          "operand" : [ {
+                                             "localId" : "78",
+                                             "type" : "Concatenate",
+                                             "operand" : [ {
+                                                "type" : "Coalesce",
+                                                "operand" : [ {
+                                                   "localId" : "76",
+                                                   "type" : "Concatenate",
+                                                   "operand" : [ {
+                                                      "type" : "Coalesce",
+                                                      "operand" : [ {
+                                                         "localId" : "74",
+                                                         "type" : "Concatenate",
+                                                         "operand" : [ {
+                                                            "type" : "Coalesce",
+                                                            "operand" : [ {
+                                                               "localId" : "72",
+                                                               "type" : "Concatenate",
+                                                               "operand" : [ {
+                                                                  "type" : "Coalesce",
+                                                                  "operand" : [ {
+                                                                     "localId" : "70",
+                                                                     "type" : "Concatenate",
+                                                                     "operand" : [ {
+                                                                        "type" : "Coalesce",
+                                                                        "operand" : [ {
+                                                                           "localId" : "68",
+                                                                           "type" : "Concatenate",
+                                                                           "operand" : [ {
+                                                                              "type" : "Coalesce",
+                                                                              "operand" : [ {
+                                                                                 "localId" : "66",
+                                                                                 "type" : "Concatenate",
+                                                                                 "operand" : [ {
+                                                                                    "type" : "Coalesce",
+                                                                                    "operand" : [ {
+                                                                                       "localId" : "64",
+                                                                                       "type" : "Concatenate",
+                                                                                       "operand" : [ {
+                                                                                          "type" : "Coalesce",
+                                                                                          "operand" : [ {
+                                                                                             "localId" : "62",
+                                                                                             "type" : "Concatenate",
+                                                                                             "operand" : [ {
+                                                                                                "type" : "Coalesce",
+                                                                                                "operand" : [ {
+                                                                                                   "localId" : "60",
+                                                                                                   "type" : "Concatenate",
+                                                                                                   "operand" : [ {
+                                                                                                      "type" : "Coalesce",
+                                                                                                      "operand" : [ {
+                                                                                                         "localId" : "58",
+                                                                                                         "type" : "Concatenate",
+                                                                                                         "operand" : [ {
+                                                                                                            "type" : "Coalesce",
+                                                                                                            "operand" : [ {
+                                                                                                               "localId" : "56",
+                                                                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                               "value" : "The",
+                                                                                                               "type" : "Literal"
+                                                                                                            }, {
+                                                                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                               "value" : "",
+                                                                                                               "type" : "Literal"
+                                                                                                            } ]
+                                                                                                         }, {
+                                                                                                            "type" : "Coalesce",
+                                                                                                            "operand" : [ {
+                                                                                                               "localId" : "57",
+                                                                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                               "value" : " ",
+                                                                                                               "type" : "Literal"
+                                                                                                            }, {
+                                                                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                               "value" : "",
+                                                                                                               "type" : "Literal"
+                                                                                                            } ]
+                                                                                                         } ]
+                                                                                                      }, {
+                                                                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                         "value" : "",
+                                                                                                         "type" : "Literal"
+                                                                                                      } ]
+                                                                                                   }, {
+                                                                                                      "type" : "Coalesce",
+                                                                                                      "operand" : [ {
+                                                                                                         "localId" : "59",
+                                                                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                         "value" : "quick",
+                                                                                                         "type" : "Literal"
+                                                                                                      }, {
+                                                                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                         "value" : "",
+                                                                                                         "type" : "Literal"
+                                                                                                      } ]
+                                                                                                   } ]
+                                                                                                }, {
+                                                                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                   "value" : "",
+                                                                                                   "type" : "Literal"
+                                                                                                } ]
+                                                                                             }, {
+                                                                                                "type" : "Coalesce",
+                                                                                                "operand" : [ {
+                                                                                                   "localId" : "61",
+                                                                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                   "value" : " ",
+                                                                                                   "type" : "Literal"
+                                                                                                }, {
+                                                                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                   "value" : "",
+                                                                                                   "type" : "Literal"
+                                                                                                } ]
+                                                                                             } ]
+                                                                                          }, {
+                                                                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                             "value" : "",
+                                                                                             "type" : "Literal"
+                                                                                          } ]
+                                                                                       }, {
+                                                                                          "type" : "Coalesce",
+                                                                                          "operand" : [ {
+                                                                                             "localId" : "63",
+                                                                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                             "value" : "brown",
+                                                                                             "type" : "Literal"
+                                                                                          }, {
+                                                                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                             "value" : "",
+                                                                                             "type" : "Literal"
+                                                                                          } ]
+                                                                                       } ]
+                                                                                    }, {
+                                                                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                       "value" : "",
+                                                                                       "type" : "Literal"
+                                                                                    } ]
+                                                                                 }, {
+                                                                                    "type" : "Coalesce",
+                                                                                    "operand" : [ {
+                                                                                       "localId" : "65",
+                                                                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                       "value" : " ",
+                                                                                       "type" : "Literal"
+                                                                                    }, {
+                                                                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                       "value" : "",
+                                                                                       "type" : "Literal"
+                                                                                    } ]
+                                                                                 } ]
+                                                                              }, {
+                                                                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                 "value" : "",
+                                                                                 "type" : "Literal"
+                                                                              } ]
+                                                                           }, {
+                                                                              "type" : "Coalesce",
+                                                                              "operand" : [ {
+                                                                                 "localId" : "67",
+                                                                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                 "value" : "fox",
+                                                                                 "type" : "Literal"
+                                                                              }, {
+                                                                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                 "value" : "",
+                                                                                 "type" : "Literal"
+                                                                              } ]
+                                                                           } ]
+                                                                        }, {
+                                                                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                           "value" : "",
+                                                                           "type" : "Literal"
+                                                                        } ]
+                                                                     }, {
+                                                                        "type" : "Coalesce",
+                                                                        "operand" : [ {
+                                                                           "localId" : "69",
+                                                                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                           "value" : " ",
+                                                                           "type" : "Literal"
+                                                                        }, {
+                                                                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                           "value" : "",
+                                                                           "type" : "Literal"
+                                                                        } ]
+                                                                     } ]
+                                                                  }, {
+                                                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                     "value" : "",
+                                                                     "type" : "Literal"
+                                                                  } ]
+                                                               }, {
+                                                                  "type" : "Coalesce",
+                                                                  "operand" : [ {
+                                                                     "localId" : "71",
+                                                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                     "value" : "jumps",
+                                                                     "type" : "Literal"
+                                                                  }, {
+                                                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                     "value" : "",
+                                                                     "type" : "Literal"
+                                                                  } ]
+                                                               } ]
+                                                            }, {
+                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "value" : "",
+                                                               "type" : "Literal"
+                                                            } ]
+                                                         }, {
+                                                            "type" : "Coalesce",
+                                                            "operand" : [ {
+                                                               "localId" : "73",
+                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "value" : " ",
+                                                               "type" : "Literal"
+                                                            }, {
+                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "value" : "",
+                                                               "type" : "Literal"
+                                                            } ]
+                                                         } ]
+                                                      }, {
+                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "value" : "",
+                                                         "type" : "Literal"
+                                                      } ]
+                                                   }, {
+                                                      "type" : "Coalesce",
+                                                      "operand" : [ {
+                                                         "localId" : "75",
+                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "value" : "over",
+                                                         "type" : "Literal"
+                                                      }, {
+                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "value" : "",
+                                                         "type" : "Literal"
+                                                      } ]
+                                                   } ]
+                                                }, {
+                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                   "value" : "",
+                                                   "type" : "Literal"
+                                                } ]
+                                             }, {
+                                                "type" : "Coalesce",
+                                                "operand" : [ {
+                                                   "localId" : "77",
+                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                   "value" : " ",
+                                                   "type" : "Literal"
+                                                }, {
+                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                   "value" : "",
+                                                   "type" : "Literal"
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                             "value" : "",
+                                             "type" : "Literal"
+                                          } ]
+                                       }, {
+                                          "type" : "Coalesce",
+                                          "operand" : [ {
+                                             "localId" : "79",
+                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                             "value" : "the",
+                                             "type" : "Literal"
+                                          }, {
+                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                             "value" : "",
+                                             "type" : "Literal"
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "",
+                                       "type" : "Literal"
+                                    } ]
+                                 }, {
+                                    "type" : "Coalesce",
+                                    "operand" : [ {
+                                       "localId" : "81",
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : " ",
+                                       "type" : "Literal"
+                                    }, {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "",
+                                       "type" : "Literal"
+                                    } ]
+                                 } ]
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "",
+                                 "type" : "Literal"
+                              } ]
+                           }, {
+                              "type" : "Coalesce",
+                              "operand" : [ {
+                                 "localId" : "83",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "lazy",
+                                 "type" : "Literal"
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "",
+                                 "type" : "Literal"
+                              } ]
+                           } ]
+                        }, {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "",
+                           "type" : "Literal"
+                        } ]
+                     }, {
+                        "type" : "Coalesce",
+                        "operand" : [ {
+                           "localId" : "85",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : " ",
+                           "type" : "Literal"
+                        }, {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "",
+                           "type" : "Literal"
+                        } ]
+                     } ]
+                  }, {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "",
+                     "type" : "Literal"
+                  } ]
+               }, {
+                  "type" : "Coalesce",
+                  "operand" : [ {
+                     "localId" : "87",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "dog.",
+                     "type" : "Literal"
+                  }, {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "",
+                     "type" : "Literal"
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "93",
+            "name" : "AndConcatNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "93",
+                  "s" : [ {
+                     "value" : [ "define ","AndConcatNull",": " ]
+                  }, {
+                     "r" : "92",
+                     "s" : [ {
+                        "r" : "90",
+                        "s" : [ {
+                           "value" : [ "'Hello'" ]
+                        } ]
+                     }, {
+                        "r" : "91",
+                        "value" : [ " & ","null" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "92",
+               "type" : "Concatenate",
+               "operand" : [ {
+                  "type" : "Coalesce",
+                  "operand" : [ {
+                     "localId" : "90",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Hello",
+                     "type" : "Literal"
+                  }, {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "",
+                     "type" : "Literal"
+                  } ]
+               }, {
+                  "type" : "Coalesce",
+                  "operand" : [ {
+                     "asType" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "91",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "",
+                     "type" : "Literal"
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "97",
+            "name" : "AndHelloWorldVariables",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "97",
+                  "s" : [ {
+                     "value" : [ "define ","AndHelloWorldVariables",": " ]
+                  }, {
+                     "r" : "96",
+                     "s" : [ {
+                        "r" : "94",
+                        "s" : [ {
+                           "value" : [ "Hello" ]
+                        } ]
+                     }, {
+                        "value" : [ " & " ]
+                     }, {
+                        "r" : "95",
+                        "s" : [ {
+                           "value" : [ "World" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "96",
+               "type" : "Concatenate",
+               "operand" : [ {
+                  "type" : "Coalesce",
+                  "operand" : [ {
+                     "localId" : "94",
+                     "name" : "Hello",
+                     "type" : "ExpressionRef"
+                  }, {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "",
+                     "type" : "Literal"
+                  } ]
+               }, {
+                  "type" : "Coalesce",
+                  "operand" : [ {
+                     "localId" : "95",
+                     "name" : "World",
+                     "type" : "ExpressionRef"
+                  }, {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "",
+                     "type" : "Literal"
+                  } ]
                } ]
             }
          } ]
@@ -4601,6 +5329,773 @@ module.exports['EndsWith'] = {
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Foo",
                   "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
+/* ReplaceMatches
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define ReplaceOne: ReplaceMatches('FooBar', 'Bar', 'Baz')
+define ReplaceMany: ReplaceMatches('FooBarFooBarFooBar', 'Bar', 'Baz')
+define ReplaceCapital: ReplaceMatches('Tattle', 'T', 'R')
+define ReplaceDiacritical: ReplaceMatches('Cafè', 'è', 'é')
+define ReplaceUnicode: ReplaceMatches('Turn that frown 🙁 upside down! 😃', '🙁', '😃')
+define ReplaceSpace: ReplaceMatches('(123) 456 7890', '\\s', '-')
+define ReplaceEmpty: ReplaceMatches('FooBar', '', '.')
+define ReplaceMatchGroups: ReplaceMatches('Foo[123]', 'Foo\\[(\\d+)]', 'Bar[$1]')
+define ReplaceNone: ReplaceMatches('Foo', 'Bar', 'Baz')
+define ReplaceArgumentIsNull: ReplaceMatches(null, 'Bar', 'Baz')
+define ReplacePatternIsNull: ReplaceMatches('Foo', null, 'Baz')
+define ReplaceSubstitutionIsNull: ReplaceMatches('Foo', 'Bar', null)
+*/
+
+module.exports['ReplaceMatches'] = {
+   "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "6",
+            "name" : "ReplaceOne",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "6",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceOne",": " ]
+                  }, {
+                     "r" : "5",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "'FooBar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "3",
+                        "s" : [ {
+                           "value" : [ "'Bar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "4",
+                        "s" : [ {
+                           "value" : [ "'Baz'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "5",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "FooBar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "3",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Bar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "4",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Baz",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "11",
+            "name" : "ReplaceMany",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "11",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceMany",": " ]
+                  }, {
+                     "r" : "10",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "'FooBarFooBarFooBar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "8",
+                        "s" : [ {
+                           "value" : [ "'Bar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "9",
+                        "s" : [ {
+                           "value" : [ "'Baz'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "10",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "7",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "FooBarFooBarFooBar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "8",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Bar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "9",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Baz",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "16",
+            "name" : "ReplaceCapital",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "16",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceCapital",": " ]
+                  }, {
+                     "r" : "15",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "12",
+                        "s" : [ {
+                           "value" : [ "'Tattle'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "13",
+                        "s" : [ {
+                           "value" : [ "'T'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "'R'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "15",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "12",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Tattle",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "13",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "T",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "14",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "R",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "21",
+            "name" : "ReplaceDiacritical",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "21",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceDiacritical",": " ]
+                  }, {
+                     "r" : "20",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "17",
+                        "s" : [ {
+                           "value" : [ "'Cafè'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "18",
+                        "s" : [ {
+                           "value" : [ "'è'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "19",
+                        "s" : [ {
+                           "value" : [ "'é'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "20",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "17",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Cafè",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "18",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "è",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "19",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "é",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "26",
+            "name" : "ReplaceUnicode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "26",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceUnicode",": " ]
+                  }, {
+                     "r" : "25",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "22",
+                        "s" : [ {
+                           "value" : [ "'Turn that frown \uD83D\uDE41 upside down! \uD83D\uDE03'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "23",
+                        "s" : [ {
+                           "value" : [ "'\uD83D\uDE41'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "24",
+                        "s" : [ {
+                           "value" : [ "'\uD83D\uDE03'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "25",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "22",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Turn that frown \uD83D\uDE41 upside down! \uD83D\uDE03",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "23",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\uD83D\uDE41",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "24",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\uD83D\uDE03",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "31",
+            "name" : "ReplaceSpace",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "31",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceSpace",": " ]
+                  }, {
+                     "r" : "30",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "27",
+                        "s" : [ {
+                           "value" : [ "'(123) 456 7890'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "28",
+                        "s" : [ {
+                           "value" : [ "'\\\\s'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "29",
+                        "s" : [ {
+                           "value" : [ "'-'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "30",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "27",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "(123) 456 7890",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "28",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "\\s",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "29",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "-",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "36",
+            "name" : "ReplaceEmpty",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "36",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceEmpty",": " ]
+                  }, {
+                     "r" : "35",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "32",
+                        "s" : [ {
+                           "value" : [ "'FooBar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "33",
+                        "s" : [ {
+                           "value" : [ "''" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "34",
+                        "s" : [ {
+                           "value" : [ "'.'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "35",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "32",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "FooBar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "33",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "34",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : ".",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "41",
+            "name" : "ReplaceMatchGroups",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "41",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceMatchGroups",": " ]
+                  }, {
+                     "r" : "40",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "37",
+                        "s" : [ {
+                           "value" : [ "'Foo[123]'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "38",
+                        "s" : [ {
+                           "value" : [ "'Foo\\\\[(\\\\d+)]'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "39",
+                        "s" : [ {
+                           "value" : [ "'Bar[$1]'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "40",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "37",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo[123]",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "38",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo\\[(\\d+)]",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "39",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Bar[$1]",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "46",
+            "name" : "ReplaceNone",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "46",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceNone",": " ]
+                  }, {
+                     "r" : "45",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "42",
+                        "s" : [ {
+                           "value" : [ "'Foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "43",
+                        "s" : [ {
+                           "value" : [ "'Bar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "44",
+                        "s" : [ {
+                           "value" : [ "'Baz'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "45",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "42",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "43",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Bar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "44",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Baz",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "51",
+            "name" : "ReplaceArgumentIsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "51",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceArgumentIsNull",": " ]
+                  }, {
+                     "r" : "50",
+                     "s" : [ {
+                        "r" : "47",
+                        "value" : [ "ReplaceMatches","(","null",", " ]
+                     }, {
+                        "r" : "48",
+                        "s" : [ {
+                           "value" : [ "'Bar'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "49",
+                        "s" : [ {
+                           "value" : [ "'Baz'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "50",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "47",
+                     "type" : "Null"
+                  }
+               }, {
+                  "localId" : "48",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Bar",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "49",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Baz",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "56",
+            "name" : "ReplacePatternIsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "56",
+                  "s" : [ {
+                     "value" : [ "define ","ReplacePatternIsNull",": " ]
+                  }, {
+                     "r" : "55",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "52",
+                        "s" : [ {
+                           "value" : [ "'Foo'" ]
+                        } ]
+                     }, {
+                        "r" : "53",
+                        "value" : [ ", ","null",", " ]
+                     }, {
+                        "r" : "54",
+                        "s" : [ {
+                           "value" : [ "'Baz'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "55",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "52",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo",
+                  "type" : "Literal"
+               }, {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "53",
+                     "type" : "Null"
+                  }
+               }, {
+                  "localId" : "54",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Baz",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "61",
+            "name" : "ReplaceSubstitutionIsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "61",
+                  "s" : [ {
+                     "value" : [ "define ","ReplaceSubstitutionIsNull",": " ]
+                  }, {
+                     "r" : "60",
+                     "s" : [ {
+                        "value" : [ "ReplaceMatches","(" ]
+                     }, {
+                        "r" : "57",
+                        "s" : [ {
+                           "value" : [ "'Foo'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "58",
+                        "s" : [ {
+                           "value" : [ "'Bar'" ]
+                        } ]
+                     }, {
+                        "r" : "59",
+                        "value" : [ ", ","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "60",
+               "type" : "ReplaceMatches",
+               "operand" : [ {
+                  "localId" : "57",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Foo",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "58",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Bar",
+                  "type" : "Literal"
+               }, {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "59",
+                     "type" : "Null"
+                  }
                } ]
             }
          } ]

@@ -219,29 +219,21 @@ define "PositionOf": Tuple{
 
 define "ReplaceMatches": Tuple{
   "ReplaceMatchesNull": Tuple{
-    skipped: 'ReplaceMatches not implemented'
-    /*
     expression: ReplaceMatches('Not all who wander are lost', null, 'But I am...'),
     output: null
-    */  },
+  },
   "ReplaceMatchesAll": Tuple{
-    skipped: 'ReplaceMatches not implemented'
-    /*
     expression: ReplaceMatches('Not all who wander are lost', 'Not all who wander are lost', 'But still waters run deep'),
     output: 'But still waters run deep'
-    */  },
+  },
   "ReplaceMatchesMany": Tuple{
-    skipped: 'ReplaceMatches not implemented'
-    /*
     expression: ReplaceMatches('Who put the bop in the bop she bop she bop?', 'bop', 'bang'),
     output: 'Who put the bang in the bang she bang she bang?'
-    */  },
+  },
   "ReplaceMatchesSpaces": Tuple{
-    skipped: 'ReplaceMatches not implemented'
-    /*
-    expression: ReplaceMatches('All that glitters is not gold', '\\s', '\\$'),
+    expression: ReplaceMatches('All that glitters is not gold', '\\s', '$$'),
     output: 'All$that$glitters$is$not$gold'
-    */  }
+  }
 }
 
 define "Split": Tuple{

@@ -8,25 +8,50 @@ describe('Concat', () => {
     setup(this, data);
   });
 
-  it.skip('should be a Concat', function () {
-    this.helloWorld.should.be.an.instanceOf(str.Concat);
-    this.helloWorldVariables.should.be.an.instanceOf(str.Concat);
+  describe('+', () => {
+    it('should be a Concat', function () {
+      this.helloWorld.should.be.an.instanceOf(str.Concatenate);
+      this.helloWorldVariables.should.be.an.instanceOf(str.Concatenate);
+    });
+
+    it('should concat two strings', function () {
+      this.helloWorld.exec(this.ctx).should.equal('HelloWorld');
+    });
+
+    it('should concat multiple strings', function () {
+      this.sentence.exec(this.ctx).should.equal('The quick brown fox jumps over the lazy dog.');
+    });
+
+    it('should return null when an arg is null', function () {
+      should(this.concatNull.exec(this.ctx)).be.null();
+    });
+
+    it('should concat variables', function () {
+      this.helloWorldVariables.exec(this.ctx).should.equal('HelloWorld');
+    });
   });
 
-  it('should concat two strings', function () {
-    this.helloWorld.exec(this.ctx).should.equal('HelloWorld');
-  });
+  describe('&', () => {
+    it('should be a Concat', function () {
+      this.andHelloWorld.should.be.an.instanceOf(str.Concatenate);
+      this.andHelloWorldVariables.should.be.an.instanceOf(str.Concatenate);
+    });
 
-  it('should concat multiple strings', function () {
-    this.sentence.exec(this.ctx).should.equal('The quick brown fox jumps over the lazy dog.');
-  });
+    it('should concat two strings', function () {
+      this.andHelloWorld.exec(this.ctx).should.equal('HelloWorld');
+    });
 
-  it('should return null when an arg is null', function () {
-    should(this.concatNull.exec(this.ctx)).be.null();
-  });
+    it('should concat multiple strings', function () {
+      this.andSentence.exec(this.ctx).should.equal('The quick brown fox jumps over the lazy dog.');
+    });
 
-  it('should concat variables', function () {
-    this.helloWorldVariables.exec(this.ctx).should.equal('HelloWorld');
+    it('should treat null arg as empty string', function () {
+      this.andConcatNull.exec(this.ctx).should.equal('Hello');
+    });
+
+    it('should concat variables', function () {
+      this.andHelloWorldVariables.exec(this.ctx).should.equal('HelloWorld');
+    });
   });
 });
 
@@ -396,5 +421,59 @@ describe('EndsWith', () => {
     should(this.endsWithNullAsString.exec(this.ctx)).be.null();
     should(this.nullEndsWith.exec(this.ctx)).be.null();
     should(this.nullAsStringEndsWith.exec(this.ctx)).be.null();
+  });
+});
+
+describe('ReplaceMatches', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should make replacement with only one match', function () {
+    this.replaceOne.exec(this.ctx).should.equal('FooBaz');
+  });
+
+  it('should make replacement with multiple matches', function () {
+    this.replaceMany.exec(this.ctx).should.equal('FooBazFooBazFooBaz');
+  });
+
+  it('should replace only matching case', function () {
+    this.replaceCapital.exec(this.ctx).should.equal('Rattle');
+  });
+
+  it('should replace diacritical', function () {
+    this.replaceDiacritical.exec(this.ctx).should.equal('Café');
+  });
+
+  it('should replace unicode', function () {
+    this.replaceUnicode.exec(this.ctx).should.equal('Turn that frown 😃 upside down! 😃');
+  });
+
+  it('should replace space', function () {
+    this.replaceSpace.exec(this.ctx).should.equal('(123)-456-7890');
+  });
+
+  it('should replace empty string', function () {
+    this.replaceEmpty.exec(this.ctx).should.equal('.F.o.o.B.a.r.');
+  });
+
+  it('should replace match groups', function () {
+    this.replaceMatchGroups.exec(this.ctx).should.equal('Bar[123]');
+  });
+
+  it('should return original string if no matches', function () {
+    this.replaceNone.exec(this.ctx).should.equal('Foo');
+  });
+
+  it('should return null if argument is null', function () {
+    should(this.replaceArgumentIsNull.exec(this.ctx)).be.null();
+  });
+
+  it('should return null if pattern is null', function () {
+    should(this.replacePatternIsNull.exec(this.ctx)).be.null();
+  });
+
+  it('should return null if substitution is null', function () {
+    should(this.replaceSubstitutionIsNull.exec(this.ctx)).be.null();
   });
 });
