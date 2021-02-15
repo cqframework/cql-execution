@@ -242,9 +242,17 @@ class Context {
   }
 
   matchesTupleTypeSpecifier(val, spec) {
+    // TODO: Spec is not clear about exactly how tuples should be matched
     return (
+      val != null &&
       typeof val === 'object' &&
       !typeIsArray(val) &&
+      !val.isInterval &&
+      !val.isConcept &&
+      !val.isCode &&
+      !val.isDateTime &&
+      !val.isDate &&
+      !val.isQuantity &&
       spec.element.every(
         x =>
           typeof val[x.name] === 'undefined' ||
@@ -295,7 +303,21 @@ class Context {
         if (typeof val._is === 'function') {
           return val._is(spec);
         }
-        // otherwise just default to true
+        // If the value is an array or interval, then we assume it cannot be cast to a
+        // named type. Technically, this is not 100% true because a modelinfo can define
+        // a named type whose base type is a list or interval.  But none of our models
+        // (FHIR, QDM, QICore) do that, so for those models, this approach will always be
+        // correct.
+        if (Array.isArray(val) || val.isInterval) {
+          return false;
+        }
+        // Otherwise just default to true to match legacy behavior.
+        //
+        // NOTE: This is also where arbitrary tuples land because they will not have
+        // an "is" function and we don't encode the type information into the runtime
+        // objects so we can't easily determine their type. We can't reject them,
+        // else things like `Encounter{ id: "1" } is Encounter` would return false.
+        // So for now we allow false positives in order to avoid false negatives.
         return true;
     }
   }

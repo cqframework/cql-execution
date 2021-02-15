@@ -11766,15 +11766,13 @@ var As = /*#__PURE__*/function (_Expression) {
         return null;
       }
 
-      if (typeof arg._is !== 'function' && !isSystemType(this.asTypeSpecifier)) {
-        // We need an _is implementation in order to check non System types
-        // If this is not found then we should just return the arg to match old functionality.
-        return arg;
-      }
-
       if (ctx.matchesTypeSpecifier(arg, this.asTypeSpecifier)) {
         // TODO: request patient source to change type identification
         return arg;
+      } else if (this.strict) {
+        var argTypeString = specifierToString(guessSpecifierType(arg));
+        var asTypeString = specifierToString(this.asTypeSpecifier);
+        throw new Error("Cannot cast ".concat(argTypeString, " as ").concat(asTypeString));
       } else {
         return null;
       }
@@ -12659,6 +12657,133 @@ function isSystemType(spec) {
   }
 }
 
+function specifierToString(spec) {
+  if (typeof spec === 'string') {
+    return spec;
+  } else if (spec == null || spec.type == null) {
+    return '';
+  }
+
+  switch (spec.type) {
+    case 'NamedTypeSpecifier':
+      return spec.name;
+
+    case 'ListTypeSpecifier':
+      return "List<".concat(specifierToString(spec.elementType), ">");
+
+    case 'TupleTypeSpecifier':
+      return "Tuple<".concat(spec.element.map(function (e) {
+        return "".concat(e.name, " ").concat(specifierToString(e.elementType));
+      }).join(', '), ">");
+
+    case 'IntervalTypeSpecifier':
+      return "Interval<".concat(specifierToString(spec.pointType), ">");
+
+    case 'ChoiceTypeSpecifier':
+      return "Choice<".concat(spec.choice.map(function (c) {
+        return specifierToString(c);
+      }).join(', '), ">");
+
+    default:
+      return JSON.stringify(spec);
+  }
+}
+
+function guessSpecifierType(val) {
+  if (val == null) {
+    return 'Null';
+  }
+
+  var typeHierarchy = typeof val._typeHierarchy === 'function' && val._typeHierarchy();
+
+  if (typeHierarchy && typeHierarchy.length > 0) {
+    return typeHierarchy[0];
+  } else if (typeof val === 'boolean') {
+    return {
+      type: 'NamedTypeSpecifier',
+      name: '{urn:hl7-org:elm-types:r1}Boolean'
+    };
+  } else if (typeof val === 'number' && Math.floor(val) === val) {
+    // it could still be a decimal, but we have to just take our best guess!
+    return {
+      type: 'NamedTypeSpecifier',
+      name: '{urn:hl7-org:elm-types:r1}Integer'
+    };
+  } else if (typeof val === 'number') {
+    return {
+      type: 'NamedTypeSpecifier',
+      name: '{urn:hl7-org:elm-types:r1}Decimal'
+    };
+  } else if (typeof val === 'string') {
+    return {
+      type: 'NamedTypeSpecifier',
+      name: '{urn:hl7-org:elm-types:r1}String'
+    };
+  } else if (val.isConcept) {
+    return {
+      type: 'NamedTypeSpecifier',
+      name: '{urn:hl7-org:elm-types:r1}Concept'
+    };
+  } else if (val.isCode) {
+    return {
+      type: 'NamedTypeSpecifier',
+      name: '{urn:hl7-org:elm-types:r1}Code'
+    };
+  } else if (val.isDate) {
+    return {
+      type: 'NamedTypeSpecifier',
+      name: '{urn:hl7-org:elm-types:r1}Date'
+    };
+  } else if (val.isTime && val.isTime()) {
+    return {
+      type: 'NamedTypeSpecifier',
+      name: '{urn:hl7-org:elm-types:r1}Time'
+    };
+  } else if (val.isDateTime) {
+    return {
+      type: 'NamedTypeSpecifier',
+      name: '{urn:hl7-org:elm-types:r1}DateTime'
+    };
+  } else if (val.isQuantity) {
+    return {
+      type: 'NamedTypeSpecifier',
+      name: '{urn:hl7-org:elm-types:r1}DateTime'
+    };
+  } else if (Array.isArray(val)) {
+    // Get unique types from the array (by converting to string and putting in a Set)
+    var typesAsStrings = Array.from(new Set(val.map(function (v) {
+      return JSON.stringify(guessSpecifierType(v));
+    })));
+    var types = typesAsStrings.map(function (ts) {
+      return /^{/.test(ts) ? JSON.parse(ts) : ts;
+    });
+    return {
+      type: 'ListTypeSpecifier',
+      elementType: types.length == 1 ? types[0] : {
+        type: 'ChoiceTypeSpecifier',
+        choice: types
+      }
+    };
+  } else if (val.isInterval) {
+    return {
+      type: 'IntervalTypeSpecifier',
+      pointType: val.pointType
+    };
+  } else if (_typeof(val) === 'object' && Object.keys(val).length > 0) {
+    return {
+      type: 'TupleTypeSpecifier',
+      element: Object.keys(val).map(function (k) {
+        return {
+          name: k,
+          elementType: guessSpecifierType(val[k])
+        };
+      })
+    };
+  }
+
+  return 'Unknown';
+}
+
 var IntervalTypeSpecifier = /*#__PURE__*/function (_UnimplementedExpress) {
   _inherits(IntervalTypeSpecifier, _UnimplementedExpress);
 
@@ -13043,7 +13168,8 @@ var Context = /*#__PURE__*/function () {
     value: function matchesTupleTypeSpecifier(val, spec) {
       var _this3 = this;
 
-      return _typeof(val) === 'object' && !typeIsArray(val) && spec.element.every(function (x) {
+      // TODO: Spec is not clear about exactly how tuples should be matched
+      return val != null && _typeof(val) === 'object' && !typeIsArray(val) && !val.isInterval && !val.isConcept && !val.isCode && !val.isDateTime && !val.isDate && !val.isQuantity && spec.element.every(function (x) {
         return typeof val[x.name] === 'undefined' || _this3.matchesTypeSpecifier(val[x.name], x.elementType);
       });
     }
@@ -13103,7 +13229,22 @@ var Context = /*#__PURE__*/function () {
           // Use the data model's implementation of _is, if it is available
           if (typeof val._is === 'function') {
             return val._is(spec);
-          } // otherwise just default to true
+          } // If the value is an array or interval, then we assume it cannot be cast to a
+          // named type. Technically, this is not 100% true because a modelinfo can define
+          // a named type whose base type is a list or interval.  But none of our models
+          // (FHIR, QDM, QICore) do that, so for those models, this approach will always be
+          // correct.
+
+
+          if (Array.isArray(val) || val.isInterval) {
+            return false;
+          } // Otherwise just default to true to match legacy behavior.
+          //
+          // NOTE: This is also where arbitrary tuples land because they will not have
+          // an "is" function and we don't encode the type information into the runtime
+          // objects so we can't easily determine their type. We can't reject them,
+          // else things like `Encounter{ id: "1" } is Encounter` would return false.
+          // So for now we allow false positives in order to avoid false negatives.
 
 
           return true;
