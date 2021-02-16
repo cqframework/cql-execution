@@ -9443,12 +9443,12 @@
                            "type" : "Interval",
                            "low" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "12",
+                              "value" : "0",
                               "type" : "Literal"
                            },
                            "high" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "28",
+                              "value" : "40",
                               "type" : "Literal"
                            }
                         }

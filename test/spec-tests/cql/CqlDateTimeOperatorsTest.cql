@@ -585,7 +585,7 @@ define "Uncertainty tests": Tuple{
   "DateTimeDurationBetweenUncertainSubtract": Tuple{
     expression: (days between DateTime(2014, 1, 15) and DateTime(2014, 2))
 				- (months between DateTime(2005) and DateTime(2006, 5)),
-    output: Interval[ 12, 28 ]
+    output: Interval[ 0, 40 ]
   },
   "DateTimeDurationBetweenUncertainMultiply": Tuple{
     expression: (days between DateTime(2014, 1, 15) and DateTime(2014, 2))

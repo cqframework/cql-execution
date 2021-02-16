@@ -4260,10 +4260,20 @@ var Add = /*#__PURE__*/function (_Expression) {
       }
 
       var sum = args.reduce(function (x, y) {
+        if (x.isUncertainty && !y.isUncertainty) {
+          y = new Uncertainty(y, y);
+        } else if (y.isUncertainty && !x.isUncertainty) {
+          x = new Uncertainty(x, x);
+        }
+
         if (x.isQuantity || x.isDateTime || x.isDate || x.isTime && x.isTime()) {
           return doAddition(x, y);
         } else if (x.isUncertainty && y.isUncertainty) {
-          return new Uncertainty(x.low + y.low, x.high + y.high);
+          if (x.low.isQuantity || x.low.isDateTime || x.low.isDate || x.low.isTime && x.low.isTime()) {
+            return new Uncertainty(doAddition(x.low, y.low), doAddition(x.high, y.high));
+          } else {
+            return new Uncertainty(x.low + y.low, x.high + y.high);
+          }
         } else {
           return x + y;
         }
@@ -4303,10 +4313,20 @@ var Subtract = /*#__PURE__*/function (_Expression2) {
       }
 
       var difference = args.reduce(function (x, y) {
+        if (x.isUncertainty && !y.isUncertainty) {
+          y = new Uncertainty(y, y);
+        } else if (y.isUncertainty && !x.isUncertainty) {
+          x = new Uncertainty(x, x);
+        }
+
         if (x.isQuantity || x.isDateTime || x.isDate) {
           return doSubtraction(x, y);
         } else if (x.isUncertainty && y.isUncertainty) {
-          return new Uncertainty(x.low - y.low, x.high - y.high);
+          if (x.low.isQuantity || x.low.isDateTime || x.low.isDate) {
+            return new Uncertainty(doSubtraction(x.low, y.high), doSubtraction(x.high, y.low));
+          } else {
+            return new Uncertainty(x.low - y.high, x.high - y.low);
+          }
         } else {
           return x - y;
         }
@@ -4346,10 +4366,20 @@ var Multiply = /*#__PURE__*/function (_Expression3) {
       }
 
       var product = args.reduce(function (x, y) {
+        if (x.isUncertainty && !y.isUncertainty) {
+          y = new Uncertainty(y, y);
+        } else if (y.isUncertainty && !x.isUncertainty) {
+          x = new Uncertainty(x, x);
+        }
+
         if (x.isQuantity || y.isQuantity) {
           return doMultiplication(x, y);
         } else if (x.isUncertainty && y.isUncertainty) {
-          return new Uncertainty(x.low * y.low, x.high * y.high);
+          if (x.low.isQuantity) {
+            return new Uncertainty(doMultiplication(x.low, y.low), doMultiplication(x.high, y.high));
+          } else {
+            return new Uncertainty(x.low * y.low, x.high * y.high);
+          }
         } else {
           return x * y;
         }
@@ -4389,8 +4419,20 @@ var Divide = /*#__PURE__*/function (_Expression4) {
       }
 
       var quotient = args.reduce(function (x, y) {
+        if (x.isUncertainty && !y.isUncertainty) {
+          y = new Uncertainty(y, y);
+        } else if (y.isUncertainty && !x.isUncertainty) {
+          x = new Uncertainty(x, x);
+        }
+
         if (x.isQuantity) {
           return doDivision(x, y);
+        } else if (x.isUncertainty && y.isUncertainty) {
+          if (x.low.isQuantity) {
+            return new Uncertainty(doDivision(x.low, y.high), doDivision(x.high, y.low));
+          } else {
+            return new Uncertainty(x.low / y.high, x.high / y.low);
+          }
         } else {
           return x / y;
         }
@@ -11737,7 +11779,10 @@ var _require6 = require('../util/util'),
     normalizeMillisecondsField = _require6.normalizeMillisecondsField;
 
 var _require7 = require('../datatypes/ratio'),
-    Ratio = _require7.Ratio; // TODO: Casting and Conversion needs unit tests!
+    Ratio = _require7.Ratio;
+
+var _require8 = require('../datatypes/uncertainty'),
+    Uncertainty = _require8.Uncertainty; // TODO: Casting and Conversion needs unit tests!
 
 
 var As = /*#__PURE__*/function (_Expression) {
@@ -11926,10 +11971,16 @@ var ToDecimal = /*#__PURE__*/function (_Expression6) {
       var arg = this.execArgs(ctx);
 
       if (arg != null) {
-        var decimal = limitDecimalPrecision(parseFloat(arg.toString()));
+        if (arg.isUncertainty) {
+          var low = limitDecimalPrecision(parseFloat(arg.low.toString()));
+          var high = limitDecimalPrecision(parseFloat(arg.high.toString()));
+          return new Uncertainty(low, high);
+        } else {
+          var decimal = limitDecimalPrecision(parseFloat(arg.toString()));
 
-        if (isValidDecimal(decimal)) {
-          return decimal;
+          if (isValidDecimal(decimal)) {
+            return decimal;
+          }
         }
       }
 
@@ -12879,7 +12930,7 @@ module.exports = {
   ToTime: ToTime,
   TupleTypeSpecifier: TupleTypeSpecifier
 };
-},{"../datatypes/clinical":5,"../datatypes/datetime":7,"../datatypes/quantity":11,"../datatypes/ratio":12,"../util/math":46,"../util/util":48,"./expression":22}],41:[function(require,module,exports){
+},{"../datatypes/clinical":5,"../datatypes/datetime":7,"../datatypes/quantity":11,"../datatypes/ratio":12,"../datatypes/uncertainty":13,"../util/math":46,"../util/util":48,"./expression":22}],41:[function(require,module,exports){
 "use strict";
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }

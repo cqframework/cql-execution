@@ -61,6 +61,24 @@ describe('Add', () => {
   it('should add Time/Quantity', function () {
     this.addTime.exec(this.ctx).isTime().should.be.true();
   });
+
+  it('should add uncertainty and uncertainty', function () {
+    const result = this.addUncertainties.exec(this.ctx);
+    result.low.should.equal(6);
+    result.high.should.equal(30);
+  });
+
+  it('should add uncertainty and number', function () {
+    const result = this.addUncertaintyAndNumber.exec(this.ctx);
+    result.low.should.equal(5);
+    result.high.should.equal(17);
+  });
+
+  it('should add number and uncertainty', function () {
+    const result = this.addNumberAndUncertainty.exec(this.ctx);
+    result.low.should.equal(10);
+    result.high.should.equal(22);
+  });
 });
 
 describe('Subtract', () => {
@@ -79,6 +97,24 @@ describe('Subtract', () => {
   it('should subtract variables', function () {
     this.subtractVariables.exec(this.ctx).should.equal(1);
   });
+
+  it('should subtract uncertainty from uncertainty', function () {
+    const result = this.subtractUncertainties.exec(this.ctx);
+    result.low.should.equal(-6);
+    result.high.should.equal(18);
+  });
+
+  it('should subtract number from uncertainty', function () {
+    const result = this.subtractNumberFromUncertainty.exec(this.ctx);
+    result.low.should.equal(1);
+    result.high.should.equal(13);
+  });
+
+  it('should subtract uncertainty from number', function () {
+    const result = this.subtractUncertaintyFromNumber.exec(this.ctx);
+    result.low.should.equal(-8);
+    result.high.should.equal(4);
+  });
 });
 
 describe('Multiply', () => {
@@ -96,6 +132,24 @@ describe('Multiply', () => {
 
   it('should multiply variables', function () {
     this.multiplyVariables.exec(this.ctx).should.equal(110);
+  });
+
+  it('should multiply uncertainty and uncertainty', function () {
+    const result = this.multiplyUncertainties.exec(this.ctx);
+    result.low.should.equal(12);
+    result.high.should.equal(252);
+  });
+
+  it('should multiply uncertainty and number', function () {
+    const result = this.multiplyUncertaintyAndNumber.exec(this.ctx);
+    result.low.should.equal(10);
+    result.high.should.equal(70);
+  });
+
+  it('should multiply number and uncertainty', function () {
+    const result = this.multiplyNumberAndUncertainty.exec(this.ctx);
+    result.low.should.equal(20);
+    result.high.should.equal(140);
   });
 });
 
@@ -118,6 +172,24 @@ describe('Divide', () => {
 
   it('should divide variables', function () {
     this.divideVariables.exec(this.ctx).should.equal(25);
+  });
+
+  it('should divide uncertainty by uncertainty', function () {
+    const result = this.divideUncertainties.exec(this.ctx);
+    result.low.should.equal(6 / 14);
+    result.high.should.equal(9);
+  });
+
+  it('should divide uncertainty by number', function () {
+    const result = this.divideUncertaintyByNumber.exec(this.ctx);
+    result.low.should.equal(3);
+    result.high.should.equal(9);
+  });
+
+  it('should divide number by uncertainty', function () {
+    const result = this.divideNumberByUncertainty.exec(this.ctx);
+    result.low.should.equal(2);
+    result.high.should.equal(6);
   });
 });
 

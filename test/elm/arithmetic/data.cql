@@ -5,6 +5,11 @@ define OnePlusTwo: 1 + 2
 define AddMultiple: 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10
 define AddVariables: Ten + Eleven
 define AddTime: Time(12) + 1 'hour'
+define UncertaintyZeroToTwelve: months between DateTime(2005, 12) and DateTime(2006)
+define UncertaintySixToEighteen: months between DateTime(2005) and DateTime(2006, 7)
+define AddUncertainties: UncertaintyZeroToTwelve + UncertaintySixToEighteen
+define AddUncertaintyAndNumber: UncertaintyZeroToTwelve + 5
+define AddNumberAndUncertainty: 10 + UncertaintyZeroToTwelve
 
 // @Test: Subtract
 define Ten: 10
@@ -12,6 +17,11 @@ define Eleven: 11
 define FiveMinusTwo: 5 - 2
 define SubtractMultiple: 100 - 50 - 25 - 10
 define SubtractVariables: Eleven - Ten
+define UncertaintyZeroToTwelve: months between DateTime(2005, 12) and DateTime(2006)
+define UncertaintySixToEighteen: months between DateTime(2005) and DateTime(2006, 7)
+define SubtractUncertainties: UncertaintySixToEighteen - UncertaintyZeroToTwelve
+define SubtractNumberFromUncertainty: UncertaintySixToEighteen - 5
+define SubtractUncertaintyFromNumber: 10 - UncertaintySixToEighteen
 
 // @Test: Multiply
 define Ten: 10
@@ -19,6 +29,11 @@ define Eleven: 11
 define FiveTimesTwo: 5 * 2
 define MultiplyMultiple: 1 * 2 * 3 * 4 * 5
 define MultiplyVariables: Eleven * Ten
+define UncertaintyTwoToFourteen: months between DateTime(2005, 10) and DateTime(2006)
+define UncertaintySixToEighteen: months between DateTime(2005) and DateTime(2006, 7)
+define MultiplyUncertainties: UncertaintyTwoToFourteen * UncertaintySixToEighteen
+define MultiplyUncertaintyAndNumber: UncertaintyTwoToFourteen * 5
+define MultiplyNumberAndUncertainty: 10 * UncertaintyTwoToFourteen
 
 // @Test: Divide
 define Hundred: 100
@@ -27,6 +42,11 @@ define TenDividedByTwo: 10 / 2
 define TenDividedByFour: 10 / 4
 define DivideMultiple: 1000 / 4 / 10 / 5
 define DivideVariables: Hundred / Four
+define UncertaintyTwoToFourteen: months between DateTime(2005, 10) and DateTime(2006)
+define UncertaintySixToEighteen: months between DateTime(2005) and DateTime(2006, 7)
+define DivideUncertainties: UncertaintySixToEighteen / UncertaintyTwoToFourteen
+define DivideUncertaintyByNumber: UncertaintySixToEighteen / 2
+define DivideNumberByUncertainty: 36 / UncertaintySixToEighteen
 
 // @Test: Negate
 define NegativeOne: -1

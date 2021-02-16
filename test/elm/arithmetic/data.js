@@ -18,6 +18,11 @@ define OnePlusTwo: 1 + 2
 define AddMultiple: 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10
 define AddVariables: Ten + Eleven
 define AddTime: Time(12) + 1 'hour'
+define UncertaintyZeroToTwelve: months between DateTime(2005, 12) and DateTime(2006)
+define UncertaintySixToEighteen: months between DateTime(2005) and DateTime(2006, 7)
+define AddUncertainties: UncertaintyZeroToTwelve + UncertaintySixToEighteen
+define AddUncertaintyAndNumber: UncertaintyZeroToTwelve + 5
+define AddNumberAndUncertainty: 10 + UncertaintyZeroToTwelve
 */
 
 module.exports['Add'] = {
@@ -379,6 +384,252 @@ module.exports['Add'] = {
                   "type" : "Quantity"
                } ]
             }
+         }, {
+            "localId" : "45",
+            "name" : "UncertaintyZeroToTwelve",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "45",
+                  "s" : [ {
+                     "value" : [ "define ","UncertaintyZeroToTwelve",": " ]
+                  }, {
+                     "r" : "44",
+                     "s" : [ {
+                        "value" : [ "months between " ]
+                     }, {
+                        "r" : "41",
+                        "s" : [ {
+                           "r" : "39",
+                           "value" : [ "DateTime","(","2005",", ","12",")" ]
+                        } ]
+                     }, {
+                        "value" : [ " and " ]
+                     }, {
+                        "r" : "43",
+                        "s" : [ {
+                           "r" : "42",
+                           "value" : [ "DateTime","(","2006",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "44",
+               "precision" : "Month",
+               "type" : "DurationBetween",
+               "operand" : [ {
+                  "localId" : "41",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "39",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2005",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "40",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "12",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "43",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "42",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2006",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "52",
+            "name" : "UncertaintySixToEighteen",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "52",
+                  "s" : [ {
+                     "value" : [ "define ","UncertaintySixToEighteen",": " ]
+                  }, {
+                     "r" : "51",
+                     "s" : [ {
+                        "value" : [ "months between " ]
+                     }, {
+                        "r" : "47",
+                        "s" : [ {
+                           "r" : "46",
+                           "value" : [ "DateTime","(","2005",")" ]
+                        } ]
+                     }, {
+                        "value" : [ " and " ]
+                     }, {
+                        "r" : "50",
+                        "s" : [ {
+                           "r" : "48",
+                           "value" : [ "DateTime","(","2006",", ","7",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "51",
+               "precision" : "Month",
+               "type" : "DurationBetween",
+               "operand" : [ {
+                  "localId" : "47",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "46",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2005",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "50",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "48",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2006",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "49",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "7",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "56",
+            "name" : "AddUncertainties",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "56",
+                  "s" : [ {
+                     "value" : [ "define ","AddUncertainties",": " ]
+                  }, {
+                     "r" : "55",
+                     "s" : [ {
+                        "r" : "53",
+                        "s" : [ {
+                           "value" : [ "UncertaintyZeroToTwelve" ]
+                        } ]
+                     }, {
+                        "value" : [ " + " ]
+                     }, {
+                        "r" : "54",
+                        "s" : [ {
+                           "value" : [ "UncertaintySixToEighteen" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "55",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "53",
+                  "name" : "UncertaintyZeroToTwelve",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "54",
+                  "name" : "UncertaintySixToEighteen",
+                  "type" : "ExpressionRef"
+               } ]
+            }
+         }, {
+            "localId" : "60",
+            "name" : "AddUncertaintyAndNumber",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "60",
+                  "s" : [ {
+                     "value" : [ "define ","AddUncertaintyAndNumber",": " ]
+                  }, {
+                     "r" : "59",
+                     "s" : [ {
+                        "r" : "57",
+                        "s" : [ {
+                           "value" : [ "UncertaintyZeroToTwelve" ]
+                        } ]
+                     }, {
+                        "r" : "58",
+                        "value" : [ " + ","5" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "59",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "57",
+                  "name" : "UncertaintyZeroToTwelve",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "58",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "5",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "64",
+            "name" : "AddNumberAndUncertainty",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "64",
+                  "s" : [ {
+                     "value" : [ "define ","AddNumberAndUncertainty",": " ]
+                  }, {
+                     "r" : "63",
+                     "s" : [ {
+                        "r" : "61",
+                        "value" : [ "10"," + " ]
+                     }, {
+                        "r" : "62",
+                        "s" : [ {
+                           "value" : [ "UncertaintyZeroToTwelve" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "63",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "61",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "10",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "62",
+                  "name" : "UncertaintyZeroToTwelve",
+                  "type" : "ExpressionRef"
+               } ]
+            }
          } ]
       }
    }
@@ -393,6 +644,11 @@ define Eleven: 11
 define FiveMinusTwo: 5 - 2
 define SubtractMultiple: 100 - 50 - 25 - 10
 define SubtractVariables: Eleven - Ten
+define UncertaintyZeroToTwelve: months between DateTime(2005, 12) and DateTime(2006)
+define UncertaintySixToEighteen: months between DateTime(2005) and DateTime(2006, 7)
+define SubtractUncertainties: UncertaintySixToEighteen - UncertaintyZeroToTwelve
+define SubtractNumberFromUncertainty: UncertaintySixToEighteen - 5
+define SubtractUncertaintyFromNumber: 10 - UncertaintySixToEighteen
 */
 
 module.exports['Subtract'] = {
@@ -615,6 +871,252 @@ module.exports['Subtract'] = {
                   "type" : "ExpressionRef"
                } ]
             }
+         }, {
+            "localId" : "28",
+            "name" : "UncertaintyZeroToTwelve",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "28",
+                  "s" : [ {
+                     "value" : [ "define ","UncertaintyZeroToTwelve",": " ]
+                  }, {
+                     "r" : "27",
+                     "s" : [ {
+                        "value" : [ "months between " ]
+                     }, {
+                        "r" : "24",
+                        "s" : [ {
+                           "r" : "22",
+                           "value" : [ "DateTime","(","2005",", ","12",")" ]
+                        } ]
+                     }, {
+                        "value" : [ " and " ]
+                     }, {
+                        "r" : "26",
+                        "s" : [ {
+                           "r" : "25",
+                           "value" : [ "DateTime","(","2006",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "27",
+               "precision" : "Month",
+               "type" : "DurationBetween",
+               "operand" : [ {
+                  "localId" : "24",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "22",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2005",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "23",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "12",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "26",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "25",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2006",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "35",
+            "name" : "UncertaintySixToEighteen",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "35",
+                  "s" : [ {
+                     "value" : [ "define ","UncertaintySixToEighteen",": " ]
+                  }, {
+                     "r" : "34",
+                     "s" : [ {
+                        "value" : [ "months between " ]
+                     }, {
+                        "r" : "30",
+                        "s" : [ {
+                           "r" : "29",
+                           "value" : [ "DateTime","(","2005",")" ]
+                        } ]
+                     }, {
+                        "value" : [ " and " ]
+                     }, {
+                        "r" : "33",
+                        "s" : [ {
+                           "r" : "31",
+                           "value" : [ "DateTime","(","2006",", ","7",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "34",
+               "precision" : "Month",
+               "type" : "DurationBetween",
+               "operand" : [ {
+                  "localId" : "30",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "29",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2005",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "33",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "31",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2006",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "32",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "7",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "39",
+            "name" : "SubtractUncertainties",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "39",
+                  "s" : [ {
+                     "value" : [ "define ","SubtractUncertainties",": " ]
+                  }, {
+                     "r" : "38",
+                     "s" : [ {
+                        "r" : "36",
+                        "s" : [ {
+                           "value" : [ "UncertaintySixToEighteen" ]
+                        } ]
+                     }, {
+                        "value" : [ " - " ]
+                     }, {
+                        "r" : "37",
+                        "s" : [ {
+                           "value" : [ "UncertaintyZeroToTwelve" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "38",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "36",
+                  "name" : "UncertaintySixToEighteen",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "37",
+                  "name" : "UncertaintyZeroToTwelve",
+                  "type" : "ExpressionRef"
+               } ]
+            }
+         }, {
+            "localId" : "43",
+            "name" : "SubtractNumberFromUncertainty",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "43",
+                  "s" : [ {
+                     "value" : [ "define ","SubtractNumberFromUncertainty",": " ]
+                  }, {
+                     "r" : "42",
+                     "s" : [ {
+                        "r" : "40",
+                        "s" : [ {
+                           "value" : [ "UncertaintySixToEighteen" ]
+                        } ]
+                     }, {
+                        "r" : "41",
+                        "value" : [ " - ","5" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "42",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "40",
+                  "name" : "UncertaintySixToEighteen",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "41",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "5",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "47",
+            "name" : "SubtractUncertaintyFromNumber",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "47",
+                  "s" : [ {
+                     "value" : [ "define ","SubtractUncertaintyFromNumber",": " ]
+                  }, {
+                     "r" : "46",
+                     "s" : [ {
+                        "r" : "44",
+                        "value" : [ "10"," - " ]
+                     }, {
+                        "r" : "45",
+                        "s" : [ {
+                           "value" : [ "UncertaintySixToEighteen" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "46",
+               "type" : "Subtract",
+               "operand" : [ {
+                  "localId" : "44",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "10",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "45",
+                  "name" : "UncertaintySixToEighteen",
+                  "type" : "ExpressionRef"
+               } ]
+            }
          } ]
       }
    }
@@ -629,6 +1131,11 @@ define Eleven: 11
 define FiveTimesTwo: 5 * 2
 define MultiplyMultiple: 1 * 2 * 3 * 4 * 5
 define MultiplyVariables: Eleven * Ten
+define UncertaintyTwoToFourteen: months between DateTime(2005, 10) and DateTime(2006)
+define UncertaintySixToEighteen: months between DateTime(2005) and DateTime(2006, 7)
+define MultiplyUncertainties: UncertaintyTwoToFourteen * UncertaintySixToEighteen
+define MultiplyUncertaintyAndNumber: UncertaintyTwoToFourteen * 5
+define MultiplyNumberAndUncertainty: 10 * UncertaintyTwoToFourteen
 */
 
 module.exports['Multiply'] = {
@@ -866,6 +1373,252 @@ module.exports['Multiply'] = {
                   "type" : "ExpressionRef"
                } ]
             }
+         }, {
+            "localId" : "30",
+            "name" : "UncertaintyTwoToFourteen",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "30",
+                  "s" : [ {
+                     "value" : [ "define ","UncertaintyTwoToFourteen",": " ]
+                  }, {
+                     "r" : "29",
+                     "s" : [ {
+                        "value" : [ "months between " ]
+                     }, {
+                        "r" : "26",
+                        "s" : [ {
+                           "r" : "24",
+                           "value" : [ "DateTime","(","2005",", ","10",")" ]
+                        } ]
+                     }, {
+                        "value" : [ " and " ]
+                     }, {
+                        "r" : "28",
+                        "s" : [ {
+                           "r" : "27",
+                           "value" : [ "DateTime","(","2006",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "29",
+               "precision" : "Month",
+               "type" : "DurationBetween",
+               "operand" : [ {
+                  "localId" : "26",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "24",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2005",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "25",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "10",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "28",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "27",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2006",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "37",
+            "name" : "UncertaintySixToEighteen",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "37",
+                  "s" : [ {
+                     "value" : [ "define ","UncertaintySixToEighteen",": " ]
+                  }, {
+                     "r" : "36",
+                     "s" : [ {
+                        "value" : [ "months between " ]
+                     }, {
+                        "r" : "32",
+                        "s" : [ {
+                           "r" : "31",
+                           "value" : [ "DateTime","(","2005",")" ]
+                        } ]
+                     }, {
+                        "value" : [ " and " ]
+                     }, {
+                        "r" : "35",
+                        "s" : [ {
+                           "r" : "33",
+                           "value" : [ "DateTime","(","2006",", ","7",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "36",
+               "precision" : "Month",
+               "type" : "DurationBetween",
+               "operand" : [ {
+                  "localId" : "32",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "31",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2005",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "35",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "33",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2006",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "34",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "7",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "41",
+            "name" : "MultiplyUncertainties",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "41",
+                  "s" : [ {
+                     "value" : [ "define ","MultiplyUncertainties",": " ]
+                  }, {
+                     "r" : "40",
+                     "s" : [ {
+                        "r" : "38",
+                        "s" : [ {
+                           "value" : [ "UncertaintyTwoToFourteen" ]
+                        } ]
+                     }, {
+                        "value" : [ " * " ]
+                     }, {
+                        "r" : "39",
+                        "s" : [ {
+                           "value" : [ "UncertaintySixToEighteen" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "40",
+               "type" : "Multiply",
+               "operand" : [ {
+                  "localId" : "38",
+                  "name" : "UncertaintyTwoToFourteen",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "39",
+                  "name" : "UncertaintySixToEighteen",
+                  "type" : "ExpressionRef"
+               } ]
+            }
+         }, {
+            "localId" : "45",
+            "name" : "MultiplyUncertaintyAndNumber",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "45",
+                  "s" : [ {
+                     "value" : [ "define ","MultiplyUncertaintyAndNumber",": " ]
+                  }, {
+                     "r" : "44",
+                     "s" : [ {
+                        "r" : "42",
+                        "s" : [ {
+                           "value" : [ "UncertaintyTwoToFourteen" ]
+                        } ]
+                     }, {
+                        "r" : "43",
+                        "value" : [ " * ","5" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "44",
+               "type" : "Multiply",
+               "operand" : [ {
+                  "localId" : "42",
+                  "name" : "UncertaintyTwoToFourteen",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "43",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "5",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "49",
+            "name" : "MultiplyNumberAndUncertainty",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "49",
+                  "s" : [ {
+                     "value" : [ "define ","MultiplyNumberAndUncertainty",": " ]
+                  }, {
+                     "r" : "48",
+                     "s" : [ {
+                        "r" : "46",
+                        "value" : [ "10"," * " ]
+                     }, {
+                        "r" : "47",
+                        "s" : [ {
+                           "value" : [ "UncertaintyTwoToFourteen" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "48",
+               "type" : "Multiply",
+               "operand" : [ {
+                  "localId" : "46",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "10",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "47",
+                  "name" : "UncertaintyTwoToFourteen",
+                  "type" : "ExpressionRef"
+               } ]
+            }
          } ]
       }
    }
@@ -881,6 +1634,11 @@ define TenDividedByTwo: 10 / 2
 define TenDividedByFour: 10 / 4
 define DivideMultiple: 1000 / 4 / 10 / 5
 define DivideVariables: Hundred / Four
+define UncertaintyTwoToFourteen: months between DateTime(2005, 10) and DateTime(2006)
+define UncertaintySixToEighteen: months between DateTime(2005) and DateTime(2006, 7)
+define DivideUncertainties: UncertaintySixToEighteen / UncertaintyTwoToFourteen
+define DivideUncertaintyByNumber: UncertaintySixToEighteen / 2
+define DivideNumberByUncertainty: 36 / UncertaintySixToEighteen
 */
 
 module.exports['Divide'] = {
@@ -1164,6 +1922,270 @@ module.exports['Divide'] = {
                   "operand" : {
                      "localId" : "23",
                      "name" : "Four",
+                     "type" : "ExpressionRef"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "32",
+            "name" : "UncertaintyTwoToFourteen",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "32",
+                  "s" : [ {
+                     "value" : [ "define ","UncertaintyTwoToFourteen",": " ]
+                  }, {
+                     "r" : "31",
+                     "s" : [ {
+                        "value" : [ "months between " ]
+                     }, {
+                        "r" : "28",
+                        "s" : [ {
+                           "r" : "26",
+                           "value" : [ "DateTime","(","2005",", ","10",")" ]
+                        } ]
+                     }, {
+                        "value" : [ " and " ]
+                     }, {
+                        "r" : "30",
+                        "s" : [ {
+                           "r" : "29",
+                           "value" : [ "DateTime","(","2006",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "31",
+               "precision" : "Month",
+               "type" : "DurationBetween",
+               "operand" : [ {
+                  "localId" : "28",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "26",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2005",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "27",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "10",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "30",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "29",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2006",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "39",
+            "name" : "UncertaintySixToEighteen",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "39",
+                  "s" : [ {
+                     "value" : [ "define ","UncertaintySixToEighteen",": " ]
+                  }, {
+                     "r" : "38",
+                     "s" : [ {
+                        "value" : [ "months between " ]
+                     }, {
+                        "r" : "34",
+                        "s" : [ {
+                           "r" : "33",
+                           "value" : [ "DateTime","(","2005",")" ]
+                        } ]
+                     }, {
+                        "value" : [ " and " ]
+                     }, {
+                        "r" : "37",
+                        "s" : [ {
+                           "r" : "35",
+                           "value" : [ "DateTime","(","2006",", ","7",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "38",
+               "precision" : "Month",
+               "type" : "DurationBetween",
+               "operand" : [ {
+                  "localId" : "34",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "33",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2005",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "37",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "35",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2006",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "36",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "7",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "43",
+            "name" : "DivideUncertainties",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "43",
+                  "s" : [ {
+                     "value" : [ "define ","DivideUncertainties",": " ]
+                  }, {
+                     "r" : "42",
+                     "s" : [ {
+                        "r" : "40",
+                        "s" : [ {
+                           "value" : [ "UncertaintySixToEighteen" ]
+                        } ]
+                     }, {
+                        "value" : [ " / " ]
+                     }, {
+                        "r" : "41",
+                        "s" : [ {
+                           "value" : [ "UncertaintyTwoToFourteen" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "42",
+               "type" : "Divide",
+               "operand" : [ {
+                  "type" : "ToDecimal",
+                  "operand" : {
+                     "localId" : "40",
+                     "name" : "UncertaintySixToEighteen",
+                     "type" : "ExpressionRef"
+                  }
+               }, {
+                  "type" : "ToDecimal",
+                  "operand" : {
+                     "localId" : "41",
+                     "name" : "UncertaintyTwoToFourteen",
+                     "type" : "ExpressionRef"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "47",
+            "name" : "DivideUncertaintyByNumber",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "47",
+                  "s" : [ {
+                     "value" : [ "define ","DivideUncertaintyByNumber",": " ]
+                  }, {
+                     "r" : "46",
+                     "s" : [ {
+                        "r" : "44",
+                        "s" : [ {
+                           "value" : [ "UncertaintySixToEighteen" ]
+                        } ]
+                     }, {
+                        "r" : "45",
+                        "value" : [ " / ","2" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "46",
+               "type" : "Divide",
+               "operand" : [ {
+                  "type" : "ToDecimal",
+                  "operand" : {
+                     "localId" : "44",
+                     "name" : "UncertaintySixToEighteen",
+                     "type" : "ExpressionRef"
+                  }
+               }, {
+                  "type" : "ToDecimal",
+                  "operand" : {
+                     "localId" : "45",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "51",
+            "name" : "DivideNumberByUncertainty",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "51",
+                  "s" : [ {
+                     "value" : [ "define ","DivideNumberByUncertainty",": " ]
+                  }, {
+                     "r" : "50",
+                     "s" : [ {
+                        "r" : "48",
+                        "value" : [ "36"," / " ]
+                     }, {
+                        "r" : "49",
+                        "s" : [ {
+                           "value" : [ "UncertaintySixToEighteen" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "50",
+               "type" : "Divide",
+               "operand" : [ {
+                  "type" : "ToDecimal",
+                  "operand" : {
+                     "localId" : "48",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "36",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "type" : "ToDecimal",
+                  "operand" : {
+                     "localId" : "49",
+                     "name" : "UncertaintySixToEighteen",
                      "type" : "ExpressionRef"
                   }
                } ]
