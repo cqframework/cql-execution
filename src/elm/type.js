@@ -5,6 +5,7 @@ const { parseQuantity } = require('../datatypes/quantity');
 const { isValidDecimal, isValidInteger, limitDecimalPrecision } = require('../util/math');
 const { normalizeMillisecondsField } = require('../util/util');
 const { Ratio } = require('../datatypes/ratio');
+const { Uncertainty } = require('../datatypes/uncertainty');
 
 // TODO: Casting and Conversion needs unit tests!
 
@@ -118,9 +119,15 @@ class ToDecimal extends Expression {
   exec(ctx) {
     const arg = this.execArgs(ctx);
     if (arg != null) {
-      const decimal = limitDecimalPrecision(parseFloat(arg.toString()));
-      if (isValidDecimal(decimal)) {
-        return decimal;
+      if (arg.isUncertainty) {
+        const low = limitDecimalPrecision(parseFloat(arg.low.toString()));
+        const high = limitDecimalPrecision(parseFloat(arg.high.toString()));
+        return new Uncertainty(low, high);
+      } else {
+        const decimal = limitDecimalPrecision(parseFloat(arg.toString()));
+        if (isValidDecimal(decimal)) {
+          return decimal;
+        }
       }
     }
     return null;

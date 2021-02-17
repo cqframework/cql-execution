@@ -46,12 +46,6 @@ ValueLiteralsAndSelectors.Decimal.Decimal2Pow31ToInf1       Overflows because it
 ValueLiteralsAndSelectors.Decimal.DecimalPos2Pow31ToInf1    Overflows because it thinks it is an integer
 ValueLiteralsAndSelectors.Decimal.DecimalNeg2Pow31ToInf1    Underflows because it thinks it is an integer
 
-# Incorrect answer due to partial implementation
-
-"CqlDateTimeOperatorsTest.Uncertainty tests.DateTimeDurationBetweenUncertainAdd"      Adding Uncertainties not supported
-"CqlDateTimeOperatorsTest.Uncertainty tests.DateTimeDurationBetweenUncertainSubtract" Subtracting Uncertainties not supported
-"CqlDateTimeOperatorsTest.Uncertainty tests.DateTimeDurationBetweenUncertainMultiply" Multiplying Uncertainties not supported
-
 # Unimplemented
 
 CqlArithmeticFunctionsTest.HighBoundary   HighBoundary not implemented

@@ -9279,11 +9279,93 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Adding Uncertainties not supported",
-                           "type" : "Literal"
+                           "type" : "Add",
+                           "operand" : [ {
+                              "precision" : "Day",
+                              "type" : "DurationBetween",
+                              "operand" : [ {
+                                 "type" : "DateTime",
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2014",
+                                    "type" : "Literal"
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal"
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "15",
+                                    "type" : "Literal"
+                                 }
+                              }, {
+                                 "type" : "DateTime",
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2014",
+                                    "type" : "Literal"
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal"
+                                 }
+                              } ]
+                           }, {
+                              "precision" : "Day",
+                              "type" : "DurationBetween",
+                              "operand" : [ {
+                                 "type" : "DateTime",
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2014",
+                                    "type" : "Literal"
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal"
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "15",
+                                    "type" : "Literal"
+                                 }
+                              }, {
+                                 "type" : "DateTime",
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2014",
+                                    "type" : "Literal"
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal"
+                                 }
+                              } ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "lowClosed" : true,
+                           "highClosed" : true,
+                           "type" : "Interval",
+                           "low" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "32",
+                              "type" : "Literal"
+                           },
+                           "high" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "88",
+                              "type" : "Literal"
+                           }
                         }
                      } ]
                   }
@@ -9292,11 +9374,83 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Subtracting Uncertainties not supported",
-                           "type" : "Literal"
+                           "type" : "Subtract",
+                           "operand" : [ {
+                              "precision" : "Day",
+                              "type" : "DurationBetween",
+                              "operand" : [ {
+                                 "type" : "DateTime",
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2014",
+                                    "type" : "Literal"
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal"
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "15",
+                                    "type" : "Literal"
+                                 }
+                              }, {
+                                 "type" : "DateTime",
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2014",
+                                    "type" : "Literal"
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal"
+                                 }
+                              } ]
+                           }, {
+                              "precision" : "Month",
+                              "type" : "DurationBetween",
+                              "operand" : [ {
+                                 "type" : "DateTime",
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2005",
+                                    "type" : "Literal"
+                                 }
+                              }, {
+                                 "type" : "DateTime",
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2006",
+                                    "type" : "Literal"
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "5",
+                                    "type" : "Literal"
+                                 }
+                              } ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "lowClosed" : true,
+                           "highClosed" : true,
+                           "type" : "Interval",
+                           "low" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "0",
+                              "type" : "Literal"
+                           },
+                           "high" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "40",
+                              "type" : "Literal"
+                           }
                         }
                      } ]
                   }
@@ -9305,11 +9459,93 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Multiplying Uncertainties not supported",
-                           "type" : "Literal"
+                           "type" : "Multiply",
+                           "operand" : [ {
+                              "precision" : "Day",
+                              "type" : "DurationBetween",
+                              "operand" : [ {
+                                 "type" : "DateTime",
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2014",
+                                    "type" : "Literal"
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal"
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "15",
+                                    "type" : "Literal"
+                                 }
+                              }, {
+                                 "type" : "DateTime",
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2014",
+                                    "type" : "Literal"
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal"
+                                 }
+                              } ]
+                           }, {
+                              "precision" : "Day",
+                              "type" : "DurationBetween",
+                              "operand" : [ {
+                                 "type" : "DateTime",
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2014",
+                                    "type" : "Literal"
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal"
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "15",
+                                    "type" : "Literal"
+                                 }
+                              }, {
+                                 "type" : "DateTime",
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2014",
+                                    "type" : "Literal"
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal"
+                                 }
+                              } ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "lowClosed" : true,
+                           "highClosed" : true,
+                           "type" : "Interval",
+                           "low" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "256",
+                              "type" : "Literal"
+                           },
+                           "high" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "1936",
+                              "type" : "Literal"
+                           }
                         }
                      } ]
                   }

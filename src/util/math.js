@@ -48,6 +48,8 @@ function overflowsOrUnderflows(value) {
     if (!isValidInteger(value)) {
       return true;
     }
+  } else if (value.isUncertainty) {
+    return overflowsOrUnderflows(value.low) || overflowsOrUnderflows(value.high);
   } else {
     if (!isValidDecimal(value)) {
       return true;
