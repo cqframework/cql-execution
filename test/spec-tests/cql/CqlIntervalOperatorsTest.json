@@ -4351,11 +4351,143 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (null vs { Interval[@2018-01-01, @2018-01-02], Interval[@2018-01-03, @2018-01-04] })",
-                           "type" : "Literal"
+                           "type" : "Expand",
+                           "operand" : [ {
+                              "type" : "List",
+                              "element" : [ {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "type" : "Date",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2018",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "1",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "1",
+                                       "type" : "Literal"
+                                    }
+                                 },
+                                 "high" : {
+                                    "type" : "Date",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2018",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "1",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "4",
+                                       "type" : "Literal"
+                                    }
+                                 }
+                              } ]
+                           }, {
+                              "value" : 2,
+                              "unit" : "days",
+                              "type" : "Quantity"
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "List",
+                           "element" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "low" : {
+                                 "type" : "Date",
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2018",
+                                    "type" : "Literal"
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal"
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal"
+                                 }
+                              },
+                              "high" : {
+                                 "type" : "Date",
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2018",
+                                    "type" : "Literal"
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal"
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal"
+                                 }
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "low" : {
+                                 "type" : "Date",
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2018",
+                                    "type" : "Literal"
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal"
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "3",
+                                    "type" : "Literal"
+                                 }
+                              },
+                              "high" : {
+                                 "type" : "Date",
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2018",
+                                    "type" : "Literal"
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal"
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "4",
+                                    "type" : "Literal"
+                                 }
+                              }
+                           } ]
                         }
                      } ]
                   }

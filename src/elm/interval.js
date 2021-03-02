@@ -2,7 +2,7 @@ const { Expression } = require('./expression');
 const { build } = require('./builder');
 const { Quantity, doAddition } = require('../datatypes/quantity');
 const { successor, predecessor, MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } = require('../util/math');
-const { convertUnit, compareUnits } = require('../util/units');
+const { convertUnit, compareUnits, convertToCQLDateUnit } = require('../util/units');
 const dtivl = require('../datatypes/interval');
 
 class Interval extends Expression {
@@ -440,7 +440,9 @@ class Expand extends Expression {
   }
 
   expandDTishInterval(interval, per) {
-    if (['week', 'weeks'].includes(per.unit)) {
+    per.unit = convertToCQLDateUnit(per.unit);
+
+    if (per.unit === 'week') {
       per.value *= 7;
       per.unit = 'day';
     }

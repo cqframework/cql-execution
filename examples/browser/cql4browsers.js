@@ -6921,7 +6921,8 @@ var _require4 = require('../util/math'),
 
 var _require5 = require('../util/units'),
     convertUnit = _require5.convertUnit,
-    compareUnits = _require5.compareUnits;
+    compareUnits = _require5.compareUnits,
+    convertToCQLDateUnit = _require5.convertToCQLDateUnit;
 
 var dtivl = require('../datatypes/interval');
 
@@ -7611,7 +7612,9 @@ var Expand = /*#__PURE__*/function (_Expression14) {
   }, {
     key: "expandDTishInterval",
     value: function expandDTishInterval(interval, per) {
-      if (['week', 'weeks'].includes(per.unit)) {
+      per.unit = convertToCQLDateUnit(per.unit);
+
+      if (per.unit === 'week') {
         per.value *= 7;
         per.unit = 'day';
       } // Precision Checks

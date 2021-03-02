@@ -251,11 +251,9 @@ define "Expand": Tuple{
     output: { Interval[@2018-01-01, @2018-01-01], Interval[@2018-01-02, @2018-01-02], Interval[@2018-01-03, @2018-01-03], Interval[@2018-01-04, @2018-01-04] }
   },
   "ExpandPer2Days": Tuple{
-    skipped: 'Wrong answer (null vs { Interval[@2018-01-01, @2018-01-02], Interval[@2018-01-03, @2018-01-04] })'
-    /*
     expression: expand { Interval[@2018-01-01, @2018-01-04] } per 2 days,
     output: { Interval[@2018-01-01, @2018-01-02], Interval[@2018-01-03, @2018-01-04] }
-    */  },
+  },
   "ExpandPerHour": Tuple{
     expression: expand { Interval[@T10:00, @T12:30] } per hour,
     output: { Interval[@T10, @T10], Interval[@T11, @T11], Interval[@T12, @T12] }
