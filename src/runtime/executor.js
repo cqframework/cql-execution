@@ -34,7 +34,7 @@ class Executor {
           this.codeService,
           this.parameters
         );
-        r.recordPatientResult(patient_ctx, expression, expr.execute(patient_ctx));
+        r.recordPatientResults(patient_ctx, { [expression]: expr.execute(patient_ctx) });
         patientSource.nextPatient();
       }
     }
@@ -49,12 +49,14 @@ class Executor {
       this.codeService,
       this.parameters
     );
+    const resultMap = {};
     for (let key in this.library.expressions) {
       const expr = this.library.expressions[key];
       if (expr.context === 'Unfiltered') {
-        r.recordUnfilteredResult(key, expr.exec(unfilteredContext));
+        resultMap[key] = expr.exec(unfilteredContext);
       }
     }
+    r.recordUnfilteredResults(resultMap);
     return r;
   }
 
@@ -68,12 +70,14 @@ class Executor {
         this.parameters,
         executionDateTime
       );
+      const resultMap = {};
       for (let key in this.library.expressions) {
         const expr = this.library.expressions[key];
         if (expr.context === 'Patient') {
-          r.recordPatientResult(patient_ctx, key, expr.execute(patient_ctx));
+          resultMap[key] = expr.execute(patient_ctx);
         }
       }
+      r.recordPatientResults(patient_ctx, resultMap);
       patientSource.nextPatient();
     }
     return r;

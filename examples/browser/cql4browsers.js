@@ -13510,6 +13510,8 @@ module.exports = {
 },{"../datatypes/datatypes":6,"../datatypes/exception":8,"../util/util":48}],42:[function(require,module,exports){
 "use strict";
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -13559,7 +13561,7 @@ var Executor = /*#__PURE__*/function () {
       if (expr != null) {
         while (patientSource.currentPatient()) {
           var patient_ctx = new PatientContext(this.library, patientSource.currentPatient(), this.codeService, this.parameters);
-          r.recordPatientResult(patient_ctx, expression, expr.execute(patient_ctx));
+          r.recordPatientResults(patient_ctx, _defineProperty({}, expression, expr.execute(patient_ctx)));
           patientSource.nextPatient();
         }
       }
@@ -13571,15 +13573,17 @@ var Executor = /*#__PURE__*/function () {
     value: function exec(patientSource, executionDateTime) {
       var r = this.exec_patient_context(patientSource, executionDateTime);
       var unfilteredContext = new UnfilteredContext(this.library, r, this.codeService, this.parameters);
+      var resultMap = {};
 
       for (var key in this.library.expressions) {
         var expr = this.library.expressions[key];
 
         if (expr.context === 'Unfiltered') {
-          r.recordUnfilteredResult(key, expr.exec(unfilteredContext));
+          resultMap[key] = expr.exec(unfilteredContext);
         }
       }
 
+      r.recordUnfilteredResults(resultMap);
       return r;
     }
   }, {
@@ -13589,15 +13593,17 @@ var Executor = /*#__PURE__*/function () {
 
       while (patientSource.currentPatient()) {
         var patient_ctx = new PatientContext(this.library, patientSource.currentPatient(), this.codeService, this.parameters, executionDateTime);
+        var resultMap = {};
 
         for (var key in this.library.expressions) {
           var expr = this.library.expressions[key];
 
           if (expr.context === 'Patient') {
-            r.recordPatientResult(patient_ctx, key, expr.execute(patient_ctx));
+            resultMap[key] = expr.execute(patient_ctx);
           }
         }
 
+        r.recordPatientResults(patient_ctx, resultMap);
         patientSource.nextPatient();
       }
 
@@ -13697,38 +13703,43 @@ var Results = /*#__PURE__*/function () {
     this.patientResults = {};
     this.unfilteredResults = {};
     this.localIdPatientResultsMap = {};
-    this.evaluatedRecords = [];
-  }
+    this.patientEvaluatedRecords = {};
+  } // Expose an evaluatedRecords array for backwards compatibility
+
 
   _createClass(Results, [{
-    key: "recordPatientResult",
-    value: function recordPatientResult(patient_ctx, resultName, result) {
+    key: "recordPatientResults",
+    value: function recordPatientResults(patient_ctx, resultMap) {
       var _this = this;
 
       var p = patient_ctx.patient; // NOTE: From now on prefer getId() over id() because some data models may have an id property
       // that is not a string (e.g., FHIR) -- so reserve getId() for the API (and expect a string
       // representation) but leave id() for data-model specific formats.
 
-      var patientId = typeof p.getId === 'function' ? p.getId() : p.id();
+      var patientId = typeof p.getId === 'function' ? p.getId() : p.id(); // Record the results
 
-      if (this.patientResults[patientId] == null) {
-        this.patientResults[patientId] = {};
-      }
+      this.patientResults[patientId] = resultMap; // Record the local IDs
 
-      this.patientResults[patientId][resultName] = result;
-      this.localIdPatientResultsMap[patientId] = patient_ctx.getAllLocalIds(); // Merge evaluatedRecords with an aggregated array across all libraries
+      this.localIdPatientResultsMap[patientId] = patient_ctx.getAllLocalIds(); // Record the evaluatedRecords, merging with an aggregated array across all libraries
 
-      this.evaluatedRecords = _toConsumableArray(patient_ctx.evaluatedRecords);
+      this.patientEvaluatedRecords[patientId] = _toConsumableArray(patient_ctx.evaluatedRecords);
       Object.values(patient_ctx.library_context).forEach(function (ctx) {
-        var _this$evaluatedRecord;
+        var _this$patientEvaluate;
 
-        (_this$evaluatedRecord = _this.evaluatedRecords).push.apply(_this$evaluatedRecord, _toConsumableArray(ctx.evaluatedRecords));
+        (_this$patientEvaluate = _this.patientEvaluatedRecords[patientId]).push.apply(_this$patientEvaluate, _toConsumableArray(ctx.evaluatedRecords));
       });
     }
   }, {
-    key: "recordUnfilteredResult",
-    value: function recordUnfilteredResult(resultName, result) {
-      this.unfilteredResults[resultName] = result;
+    key: "recordUnfilteredResults",
+    value: function recordUnfilteredResults(resultMap) {
+      this.unfilteredResults = resultMap;
+    }
+  }, {
+    key: "evaluatedRecords",
+    get: function get() {
+      var _ref;
+
+      return (_ref = []).concat.apply(_ref, _toConsumableArray(Object.values(this.patientEvaluatedRecords)));
     }
   }]);
 

@@ -3,30 +3,36 @@ class Results {
     this.patientResults = {};
     this.unfilteredResults = {};
     this.localIdPatientResultsMap = {};
-    this.evaluatedRecords = [];
+    this.patientEvaluatedRecords = {};
   }
 
-  recordPatientResult(patient_ctx, resultName, result) {
+  // Expose an evaluatedRecords array for backwards compatibility
+  get evaluatedRecords() {
+    return [].concat(...Object.values(this.patientEvaluatedRecords));
+  }
+
+  recordPatientResults(patient_ctx, resultMap) {
     const p = patient_ctx.patient;
     // NOTE: From now on prefer getId() over id() because some data models may have an id property
     // that is not a string (e.g., FHIR) -- so reserve getId() for the API (and expect a string
     // representation) but leave id() for data-model specific formats.
     const patientId = typeof p.getId === 'function' ? p.getId() : p.id();
-    if (this.patientResults[patientId] == null) {
-      this.patientResults[patientId] = {};
-    }
-    this.patientResults[patientId][resultName] = result;
+
+    // Record the results
+    this.patientResults[patientId] = resultMap;
+
+    // Record the local IDs
     this.localIdPatientResultsMap[patientId] = patient_ctx.getAllLocalIds();
 
-    // Merge evaluatedRecords with an aggregated array across all libraries
-    this.evaluatedRecords = [...patient_ctx.evaluatedRecords];
+    // Record the evaluatedRecords, merging with an aggregated array across all libraries
+    this.patientEvaluatedRecords[patientId] = [...patient_ctx.evaluatedRecords];
     Object.values(patient_ctx.library_context).forEach(ctx => {
-      this.evaluatedRecords.push(...ctx.evaluatedRecords);
+      this.patientEvaluatedRecords[patientId].push(...ctx.evaluatedRecords);
     });
   }
 
-  recordUnfilteredResult(resultName, result) {
-    this.unfilteredResults[resultName] = result;
+  recordUnfilteredResults(resultMap) {
+    this.unfilteredResults = resultMap;
   }
 }
 
