@@ -2,6 +2,7 @@ const setup = require('../../setup');
 const data = require('./data');
 
 const { p1, p2 } = require('./patients');
+const { Patient } = require('../../../src/cql-patient');
 
 describe('Age', () => {
   beforeEach(function () {
@@ -12,6 +13,15 @@ describe('Age', () => {
   it('should have correct patient results', function () {
     this.results.patientResults['1'].Age.should.equal(32);
     this.results.patientResults['2'].Age.should.equal(5);
+  });
+
+  it('should have correct patientEvaluatedRecords for each patient', function () {
+    this.results.patientEvaluatedRecords['1'].should.eql([new Patient(p1)]);
+    this.results.patientEvaluatedRecords['2'].should.eql([new Patient(p2)]);
+  });
+
+  it('should support older evaluatedRecords array field', function () {
+    this.results.evaluatedRecords.should.eql([new Patient(p1), new Patient(p2)]);
   });
 
   it('should have the correct unfiltered results', function () {
