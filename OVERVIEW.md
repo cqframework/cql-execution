@@ -130,4 +130,5 @@ Besides the `exec(patient_source)` method, the Executor class contains a couple 
 Current Status
 --------------
 
-The CQL execution framework is still evolving and is not yet complete. The patient API, code service API, and format of results may change as implementation matures. In addition, there may be CQL/ELM operators not yet implemented in the execution framework.
+The CQL execution framework is still evolving and is not yet complete. See the [README](README.md) for
+additional information regarding current limitations.

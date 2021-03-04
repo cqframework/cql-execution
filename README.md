@@ -29,6 +29,34 @@ Implementors interested in using the National Library of Medicine's Value Set Au
 The [cql-exec-examples](https://github.com/cqframework/cql-exec-examples) project provides examples
 of how `cql-execution`, `cql-exec-fhir`, and `cql-exec-vsac` can be used together.
 
+# Current Limitations
+
+This library supports operations defined in CQL 1.4 and 1.5, but is not yet a complete implementation.
+Implementors should be aware of the following limitations and gaps in `cql-execution`:
+
+* Direct support for specific data models is not provided by this library (see above for details).
+* `PatientSource`, `CodeService`, and `Results` APIs are still evolving and subject to change.
+* Since this library uses the JavaScript `Number` class for both CQL `Integer` and CQL `Decimal`,
+  it may display the following limitations related to numbers and math:
+  * Reduced precision compared to that which is specified by the CQL specification
+  * Issues typically associated with floating point arithmetic
+  * Decimals without a decimal portion (e.g., `2.0`) may be treated as CQL `Integer`s
+* The following STU (non-normative) features introduced in CQL 1.5 are not yet supported:
+  * `Long` datatype
+  * Aggregate queries
+  * Fluent functions
+  * Retrieve search paths
+  * Retrieve includes
+* In addition the following features defined prior to CQL 1.5 are also not yet supported:
+  * Related context retrieves
+  * Unfiltered context retrieves
+  * Unfiltered context references to other libraries
+  * External functions
+  * `Message` operator
+
+The above is a partial list covering the most significant limitations. For more details, see the
+[CQL_Execution_Features.xlsx](CQL_Execution_Features.xlsx) spreadsheet.
+
 # Project Configuration
 
 To use this project, you should perform the following steps:
