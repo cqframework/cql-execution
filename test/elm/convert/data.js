@@ -2902,6 +2902,12 @@ module.exports['ToInteger'] = {
 library TestSnippet version '1'
 using Simple version '1.0.0'
 context Patient
+define DecimalOverload: ToQuantity(0.1)
+define IntegerOverload: ToQuantity(13)
+define UncertaintySixToEighteen: months between DateTime(2005) and DateTime(2006, 7)
+define UncertaintyOverload: ToQuantity(UncertaintySixToEighteen)
+define StringOverload: ToQuantity('-0.1 \'mg\'')
+define RatioOverload: ToQuantity(5 'mg':10 'mL')
 define WrongFormatQuantity: ToQuantity('abc')
 define TooLargeQuantity: ToQuantity('444444444444444444444444444444 \'\'')
 define TooSmallQuantity: ToQuantity('-444444444444444444444444444444 \'\'')
@@ -2946,7 +2952,7 @@ module.exports['ToQuantity'] = {
             }
          }, {
             "localId" : "4",
-            "name" : "WrongFormatQuantity",
+            "name" : "DecimalOverload",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2954,13 +2960,261 @@ module.exports['ToQuantity'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define ","WrongFormatQuantity",": " ]
+                     "value" : [ "define ","DecimalOverload",": " ]
                   }, {
                      "r" : "3",
                      "s" : [ {
+                        "r" : "2",
+                        "value" : [ "ToQuantity","(","0.1",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "3",
+               "type" : "ToQuantity",
+               "operand" : {
+                  "localId" : "2",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "value" : "0.1",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "7",
+            "name" : "IntegerOverload",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "define ","IntegerOverload",": " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "r" : "5",
+                        "value" : [ "ToQuantity","(","13",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "6",
+               "type" : "ToQuantity",
+               "operand" : {
+                  "localId" : "5",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "13",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "14",
+            "name" : "UncertaintySixToEighteen",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "14",
+                  "s" : [ {
+                     "value" : [ "define ","UncertaintySixToEighteen",": " ]
+                  }, {
+                     "r" : "13",
+                     "s" : [ {
+                        "value" : [ "months between " ]
+                     }, {
+                        "r" : "9",
+                        "s" : [ {
+                           "r" : "8",
+                           "value" : [ "DateTime","(","2005",")" ]
+                        } ]
+                     }, {
+                        "value" : [ " and " ]
+                     }, {
+                        "r" : "12",
+                        "s" : [ {
+                           "r" : "10",
+                           "value" : [ "DateTime","(","2006",", ","7",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "13",
+               "precision" : "Month",
+               "type" : "DurationBetween",
+               "operand" : [ {
+                  "localId" : "9",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "8",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2005",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "localId" : "12",
+                  "type" : "DateTime",
+                  "year" : {
+                     "localId" : "10",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2006",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "11",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "7",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "17",
+            "name" : "UncertaintyOverload",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "17",
+                  "s" : [ {
+                     "value" : [ "define ","UncertaintyOverload",": " ]
+                  }, {
+                     "r" : "16",
+                     "s" : [ {
                         "value" : [ "ToQuantity","(" ]
                      }, {
-                        "r" : "2",
+                        "r" : "15",
+                        "s" : [ {
+                           "value" : [ "UncertaintySixToEighteen" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "16",
+               "type" : "ToQuantity",
+               "operand" : {
+                  "localId" : "15",
+                  "name" : "UncertaintySixToEighteen",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "localId" : "20",
+            "name" : "StringOverload",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "20",
+                  "s" : [ {
+                     "value" : [ "define ","StringOverload",": " ]
+                  }, {
+                     "r" : "19",
+                     "s" : [ {
+                        "value" : [ "ToQuantity","(" ]
+                     }, {
+                        "r" : "18",
+                        "s" : [ {
+                           "value" : [ "'-0.1 \\'mg\\''" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "19",
+               "type" : "ToQuantity",
+               "operand" : {
+                  "localId" : "18",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "-0.1 'mg'",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "25",
+            "name" : "RatioOverload",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "25",
+                  "s" : [ {
+                     "value" : [ "define ","RatioOverload",": " ]
+                  }, {
+                     "r" : "24",
+                     "s" : [ {
+                        "value" : [ "ToQuantity","(" ]
+                     }, {
+                        "r" : "23",
+                        "s" : [ {
+                           "r" : "21",
+                           "s" : [ {
+                              "value" : [ "5 ","'mg'" ]
+                           } ]
+                        }, {
+                           "value" : [ ":" ]
+                        }, {
+                           "r" : "22",
+                           "s" : [ {
+                              "value" : [ "10 ","'mL'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "24",
+               "type" : "ToQuantity",
+               "operand" : {
+                  "localId" : "23",
+                  "type" : "Ratio",
+                  "numerator" : {
+                     "localId" : "21",
+                     "value" : 5,
+                     "unit" : "mg"
+                  },
+                  "denominator" : {
+                     "localId" : "22",
+                     "value" : 10,
+                     "unit" : "mL"
+                  }
+               }
+            }
+         }, {
+            "localId" : "28",
+            "name" : "WrongFormatQuantity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "28",
+                  "s" : [ {
+                     "value" : [ "define ","WrongFormatQuantity",": " ]
+                  }, {
+                     "r" : "27",
+                     "s" : [ {
+                        "value" : [ "ToQuantity","(" ]
+                     }, {
+                        "r" : "26",
                         "s" : [ {
                            "value" : [ "'abc'" ]
                         } ]
@@ -2971,32 +3225,32 @@ module.exports['ToQuantity'] = {
                }
             } ],
             "expression" : {
-               "localId" : "3",
+               "localId" : "27",
                "type" : "ToQuantity",
                "operand" : {
-                  "localId" : "2",
+                  "localId" : "26",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "abc",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "7",
+            "localId" : "31",
             "name" : "TooLargeQuantity",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "7",
+                  "r" : "31",
                   "s" : [ {
                      "value" : [ "define ","TooLargeQuantity",": " ]
                   }, {
-                     "r" : "6",
+                     "r" : "30",
                      "s" : [ {
                         "value" : [ "ToQuantity","(" ]
                      }, {
-                        "r" : "5",
+                        "r" : "29",
                         "s" : [ {
                            "value" : [ "'444444444444444444444444444444 \\'\\''" ]
                         } ]
@@ -3007,32 +3261,32 @@ module.exports['ToQuantity'] = {
                }
             } ],
             "expression" : {
-               "localId" : "6",
+               "localId" : "30",
                "type" : "ToQuantity",
                "operand" : {
-                  "localId" : "5",
+                  "localId" : "29",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "444444444444444444444444444444 ''",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "10",
+            "localId" : "34",
             "name" : "TooSmallQuantity",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "10",
+                  "r" : "34",
                   "s" : [ {
                      "value" : [ "define ","TooSmallQuantity",": " ]
                   }, {
-                     "r" : "9",
+                     "r" : "33",
                      "s" : [ {
                         "value" : [ "ToQuantity","(" ]
                      }, {
-                        "r" : "8",
+                        "r" : "32",
                         "s" : [ {
                            "value" : [ "'-444444444444444444444444444444 \\'\\''" ]
                         } ]
@@ -3043,41 +3297,41 @@ module.exports['ToQuantity'] = {
                }
             } ],
             "expression" : {
-               "localId" : "9",
+               "localId" : "33",
                "type" : "ToQuantity",
                "operand" : {
-                  "localId" : "8",
+                  "localId" : "32",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "-444444444444444444444444444444 ''",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "15",
+            "localId" : "39",
             "name" : "NullArg",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "15",
+                  "r" : "39",
                   "s" : [ {
                      "value" : [ "define ","NullArg",": " ]
                   }, {
-                     "r" : "14",
+                     "r" : "38",
                      "s" : [ {
                         "value" : [ "ToQuantity","(" ]
                      }, {
-                        "r" : "13",
+                        "r" : "37",
                         "s" : [ {
                            "value" : [ "(" ]
                         }, {
-                           "r" : "13",
+                           "r" : "37",
                            "s" : [ {
-                              "r" : "11",
+                              "r" : "35",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "12",
+                              "r" : "36",
                               "s" : [ {
                                  "value" : [ "String" ]
                               } ]
@@ -3092,18 +3346,18 @@ module.exports['ToQuantity'] = {
                }
             } ],
             "expression" : {
-               "localId" : "14",
+               "localId" : "38",
                "type" : "ToQuantity",
                "operand" : {
-                  "localId" : "13",
+                  "localId" : "37",
                   "strict" : false,
                   "type" : "As",
                   "operand" : {
-                     "localId" : "11",
+                     "localId" : "35",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "12",
+                     "localId" : "36",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }

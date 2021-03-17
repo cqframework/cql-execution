@@ -1,7 +1,7 @@
 const { Expression, UnimplementedExpression } = require('./expression');
 const { DateTime, Date } = require('../datatypes/datetime');
 const { Concept } = require('../datatypes/clinical');
-const { parseQuantity } = require('../datatypes/quantity');
+const { Quantity, parseQuantity } = require('../datatypes/quantity');
 const { isValidDecimal, isValidInteger, limitDecimalPrecision } = require('../util/math');
 const { normalizeMillisecondsField } = require('../util/util');
 const { Ratio } = require('../datatypes/ratio');
@@ -157,11 +157,22 @@ class ToQuantity extends Expression {
   }
 
   exec(ctx) {
-    const arg = this.execArgs(ctx);
-    if (arg != null) {
-      return parseQuantity(arg.toString());
-    } else {
+    return this.convertValue(this.execArgs(ctx));
+  }
+
+  convertValue(val) {
+    if (val == null) {
       return null;
+    } else if (typeof val === 'number') {
+      return new Quantity(val, '1');
+    } else if (val.isRatio) {
+      // numerator and denominator are guaranteed non-null
+      return val.numerator.dividedBy(val.denominator);
+    } else if (val.isUncertainty) {
+      return new Uncertainty(this.convertValue(val.low), this.convertValue(val.high));
+    } else {
+      // it's a string or something else we'll try to parse as a string
+      return parseQuantity(val.toString());
     }
   }
 }
