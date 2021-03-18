@@ -79,6 +79,12 @@ define TooLargeInt: ToInteger('2147483648')
 define TooSmallInt: ToInteger('-2147483649')
 
 // @Test: ToQuantity
+define DecimalOverload: ToQuantity(0.1)
+define IntegerOverload: ToQuantity(13)
+define UncertaintySixToEighteen: months between DateTime(2005) and DateTime(2006, 7)
+define UncertaintyOverload: ToQuantity(UncertaintySixToEighteen)
+define StringOverload: ToQuantity('-0.1 \'mg\'')
+define RatioOverload: ToQuantity(5 'mg':10 'mL')
 define WrongFormatQuantity: ToQuantity('abc')
 define TooLargeQuantity: ToQuantity('444444444444444444444444444444 \'\'')
 define TooSmallQuantity: ToQuantity('-444444444444444444444444444444 \'\'')

@@ -11771,6 +11771,7 @@ var _require3 = require('../datatypes/clinical'),
     Concept = _require3.Concept;
 
 var _require4 = require('../datatypes/quantity'),
+    Quantity = _require4.Quantity,
     parseQuantity = _require4.parseQuantity;
 
 var _require5 = require('../util/math'),
@@ -12039,12 +12040,23 @@ var ToQuantity = /*#__PURE__*/function (_Expression8) {
   _createClass(ToQuantity, [{
     key: "exec",
     value: function exec(ctx) {
-      var arg = this.execArgs(ctx);
-
-      if (arg != null) {
-        return parseQuantity(arg.toString());
-      } else {
+      return this.convertValue(this.execArgs(ctx));
+    }
+  }, {
+    key: "convertValue",
+    value: function convertValue(val) {
+      if (val == null) {
         return null;
+      } else if (typeof val === 'number') {
+        return new Quantity(val, '1');
+      } else if (val.isRatio) {
+        // numerator and denominator are guaranteed non-null
+        return val.numerator.dividedBy(val.denominator);
+      } else if (val.isUncertainty) {
+        return new Uncertainty(this.convertValue(val.low), this.convertValue(val.high));
+      } else {
+        // it's a string or something else we'll try to parse as a string
+        return parseQuantity(val.toString());
       }
     }
   }]);

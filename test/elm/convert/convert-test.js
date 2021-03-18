@@ -4,6 +4,7 @@ const data = require('./data');
 const { isNull } = require('../../../src/util/util');
 const { DateTime } = require('../../../src/datatypes/datetime');
 const { Quantity } = require('../../../src/datatypes/quantity');
+const { Uncertainty } = require('../../../src/datatypes/uncertainty');
 
 describe('FromString', () => {
   beforeEach(function () {
@@ -361,6 +362,28 @@ describe('ToInteger', () => {
 describe('ToQuantity', () => {
   beforeEach(function () {
     setup(this, data);
+  });
+
+  it('should convert a decimal to a quantity with unit 1', function () {
+    this.decimalOverload.exec(this.ctx).should.eql(new Quantity(0.1, '1'));
+  });
+
+  it('should convert an integer to a quantity with unit 1', function () {
+    this.integerOverload.exec(this.ctx).should.eql(new Quantity(13, '1'));
+  });
+
+  it('should convert an integer uncertainty to a quantity uncertainty', function () {
+    this.uncertaintyOverload
+      .exec(this.ctx)
+      .should.eql(new Uncertainty(new Quantity(6, '1'), new Quantity(18, '1')));
+  });
+
+  it('should convert a string to a quantity with the specified unit', function () {
+    this.stringOverload.exec(this.ctx).should.eql(new Quantity(-0.1, 'mg'));
+  });
+
+  it('should convert a ratio to a quantity by dividing numerator by denominator', function () {
+    this.ratioOverload.exec(this.ctx).should.eql(new Quantity(0.5, 'mg/mL'));
   });
 
   it('should be null if string is not formatted properly', function () {
