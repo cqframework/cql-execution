@@ -106,3 +106,10 @@ define nullQuery: asNull N
 //                        such that C.id is null
 define singleAliasReturnTuple: firstEncounter E return Tuple{a:1}
 define singleAliasReturnList: firstEncounter E return {'foo', 'bar', 'baz', 'bar'}
+
+// @Test: AggregateQuery
+
+define Fact5:
+ ({1,2,3,4,5}) R
+    aggregate T : Coalesce(T, 1) * R 
+

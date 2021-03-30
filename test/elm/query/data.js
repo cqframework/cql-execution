@@ -55,6 +55,7 @@ module.exports['DateRangeOptimizedQuery'] = {
                "s" : {
                   "r" : "1",
                   "s" : [ {
+<<<<<<< HEAD
                      "value" : [ "","using " ]
                   }, {
                      "s" : [ {
@@ -62,6 +63,9 @@ module.exports['DateRangeOptimizedQuery'] = {
                      } ]
                   }, {
                      "value" : [ " version ","'1.0.0'" ]
+=======
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+>>>>>>> WIP: initial cut at aggregate queries
                   } ]
                }
             } ]
@@ -77,7 +81,11 @@ module.exports['DateRangeOptimizedQuery'] = {
                "s" : {
                   "r" : "12",
                   "s" : [ {
+<<<<<<< HEAD
                      "value" : [ "","parameter ","MeasurementPeriod"," default " ]
+=======
+                     "value" : [ "parameter ","MeasurementPeriod"," default " ]
+>>>>>>> WIP: initial cut at aggregate queries
                   }, {
                      "r" : "11",
                      "s" : [ {
@@ -165,7 +173,11 @@ module.exports['DateRangeOptimizedQuery'] = {
                "s" : {
                   "r" : "2",
                   "s" : [ {
+<<<<<<< HEAD
                      "value" : [ "","valueset ","\"Ambulatory/ED Visit\"",": ","'2.16.840.1.113883.3.464.1003.101.12.1061'" ]
+=======
+                     "value" : [ "valueset ","\"Ambulatory/ED Visit\"",": ","'2.16.840.1.113883.3.464.1003.101.12.1061'" ]
+>>>>>>> WIP: initial cut at aggregate queries
                   } ]
                }
             } ]
@@ -515,6 +527,7 @@ module.exports['FunctionQuery'] = {
                "s" : {
                   "r" : "1",
                   "s" : [ {
+<<<<<<< HEAD
                      "value" : [ "","using " ]
                   }, {
                      "s" : [ {
@@ -522,6 +535,9 @@ module.exports['FunctionQuery'] = {
                      } ]
                   }, {
                      "value" : [ " version ","'1.0.0'" ]
+=======
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+>>>>>>> WIP: initial cut at aggregate queries
                   } ]
                }
             } ]
@@ -803,6 +819,7 @@ module.exports['IncludesQuery'] = {
                "s" : {
                   "r" : "1",
                   "s" : [ {
+<<<<<<< HEAD
                      "value" : [ "","using " ]
                   }, {
                      "s" : [ {
@@ -810,6 +827,9 @@ module.exports['IncludesQuery'] = {
                      } ]
                   }, {
                      "value" : [ " version ","'1.0.0'" ]
+=======
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+>>>>>>> WIP: initial cut at aggregate queries
                   } ]
                }
             } ]
@@ -825,7 +845,11 @@ module.exports['IncludesQuery'] = {
                "s" : {
                   "r" : "12",
                   "s" : [ {
+<<<<<<< HEAD
                      "value" : [ "","parameter ","MeasurementPeriod"," default " ]
+=======
+                     "value" : [ "parameter ","MeasurementPeriod"," default " ]
+>>>>>>> WIP: initial cut at aggregate queries
                   }, {
                      "r" : "11",
                      "s" : [ {
@@ -913,7 +937,11 @@ module.exports['IncludesQuery'] = {
                "s" : {
                   "r" : "2",
                   "s" : [ {
+<<<<<<< HEAD
                      "value" : [ "","valueset ","\"Ambulatory/ED Visit\"",": ","'2.16.840.1.113883.3.464.1003.101.12.1061'" ]
+=======
+                     "value" : [ "valueset ","\"Ambulatory/ED Visit\"",": ","'2.16.840.1.113883.3.464.1003.101.12.1061'" ]
+>>>>>>> WIP: initial cut at aggregate queries
                   } ]
                }
             } ]
@@ -1096,6 +1124,7 @@ module.exports['MultiSourceQuery'] = {
                "s" : {
                   "r" : "1",
                   "s" : [ {
+<<<<<<< HEAD
                      "value" : [ "","using " ]
                   }, {
                      "s" : [ {
@@ -1103,6 +1132,9 @@ module.exports['MultiSourceQuery'] = {
                      } ]
                   }, {
                      "value" : [ " version ","'1.0.0'" ]
+=======
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+>>>>>>> WIP: initial cut at aggregate queries
                   } ]
                }
             } ]
@@ -1118,7 +1150,11 @@ module.exports['MultiSourceQuery'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
+<<<<<<< HEAD
                      "value" : [ "","parameter ","MeasurementPeriod"," default " ]
+=======
+                     "value" : [ "parameter ","MeasurementPeriod"," default " ]
+>>>>>>> WIP: initial cut at aggregate queries
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -1699,6 +1735,7 @@ module.exports['QueryRelationship'] = {
                "s" : {
                   "r" : "1",
                   "s" : [ {
+<<<<<<< HEAD
                      "value" : [ "","using " ]
                   }, {
                      "s" : [ {
@@ -1706,6 +1743,9 @@ module.exports['QueryRelationship'] = {
                      } ]
                   }, {
                      "value" : [ " version ","'1.0.0'" ]
+=======
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+>>>>>>> WIP: initial cut at aggregate queries
                   } ]
                }
             } ]
@@ -2245,6 +2285,7 @@ module.exports['QueryLet'] = {
                "s" : {
                   "r" : "1",
                   "s" : [ {
+<<<<<<< HEAD
                      "value" : [ "","using " ]
                   }, {
                      "s" : [ {
@@ -2252,6 +2293,9 @@ module.exports['QueryLet'] = {
                      } ]
                   }, {
                      "value" : [ " version ","'1.0.0'" ]
+=======
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+>>>>>>> WIP: initial cut at aggregate queries
                   } ]
                }
             } ]
@@ -2448,6 +2492,7 @@ module.exports['Tuple'] = {
                "s" : {
                   "r" : "1",
                   "s" : [ {
+<<<<<<< HEAD
                      "value" : [ "","using " ]
                   }, {
                      "s" : [ {
@@ -2455,6 +2500,9 @@ module.exports['Tuple'] = {
                      } ]
                   }, {
                      "value" : [ " version ","'1.0.0'" ]
+=======
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+>>>>>>> WIP: initial cut at aggregate queries
                   } ]
                }
             } ]
@@ -2648,6 +2696,7 @@ module.exports['QueryFilterNulls'] = {
                "s" : {
                   "r" : "1",
                   "s" : [ {
+<<<<<<< HEAD
                      "value" : [ "","using " ]
                   }, {
                      "s" : [ {
@@ -2655,6 +2704,9 @@ module.exports['QueryFilterNulls'] = {
                      } ]
                   }, {
                      "value" : [ " version ","'1.0.0'" ]
+=======
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+>>>>>>> WIP: initial cut at aggregate queries
                   } ]
                }
             } ]
@@ -2871,6 +2923,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "1",
                   "s" : [ {
+<<<<<<< HEAD
                      "value" : [ "","using " ]
                   }, {
                      "s" : [ {
@@ -2878,6 +2931,9 @@ module.exports['Sorting'] = {
                      } ]
                   }, {
                      "value" : [ " version ","'1.0.0'" ]
+=======
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+>>>>>>> WIP: initial cut at aggregate queries
                   } ]
                }
             } ]
@@ -5173,6 +5229,7 @@ module.exports['Distinct'] = {
                "s" : {
                   "r" : "1",
                   "s" : [ {
+<<<<<<< HEAD
                      "value" : [ "","using " ]
                   }, {
                      "s" : [ {
@@ -5180,6 +5237,9 @@ module.exports['Distinct'] = {
                      } ]
                   }, {
                      "value" : [ " version ","'1.0.0'" ]
+=======
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+>>>>>>> WIP: initial cut at aggregate queries
                   } ]
                }
             } ]
@@ -6662,6 +6722,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "1",
                   "s" : [ {
+<<<<<<< HEAD
                      "value" : [ "","using " ]
                   }, {
                      "s" : [ {
@@ -6669,6 +6730,9 @@ module.exports['SingleObjectAlias'] = {
                      } ]
                   }, {
                      "value" : [ " version ","'1.0.0'" ]
+=======
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+>>>>>>> WIP: initial cut at aggregate queries
                   } ]
                }
             } ]
@@ -8066,6 +8130,211 @@ module.exports['SingleObjectAlias'] = {
                         "value" : "bar",
                         "type" : "Literal"
                      } ]
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+
+/* AggregateQuery
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+
+define Fact5:
+ ({1,2,3,4,5}) R
+    aggregate T : Coalesce(T, 1) * R 
+*/
+
+module.exports['AggregateQuery'] = {
+   "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "using ","Simple"," version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "16",
+            "name" : "Fact5",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "16",
+                  "s" : [ {
+                     "value" : [ "define ","Fact5",":\n " ]
+                  }, {
+                     "r" : "15",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "8",
+                           "s" : [ {
+                              "r" : "7",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "7",
+                                 "s" : [ {
+                                    "r" : "2",
+                                    "value" : [ "{","1",",","2",",","3",",","4",",","5","}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","R" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n    " ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "aggregate ","T"," : " ]
+                        }, {
+                           "r" : "13",
+                           "s" : [ {
+                              "r" : "11",
+                              "s" : [ {
+                                 "value" : [ "Coalesce","(" ]
+                              }, {
+                                 "r" : "9",
+                                 "s" : [ {
+                                    "value" : [ "T" ]
+                                 } ]
+                              }, {
+                                 "r" : "10",
+                                 "value" : [ ", ","1",")" ]
+                              } ]
+                           }, {
+                              "value" : [ " * " ]
+                           }, {
+                              "r" : "12",
+                              "s" : [ {
+                                 "value" : [ "R" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "15",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "8",
+                  "alias" : "R",
+                  "expression" : {
+                     "localId" : "7",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "2",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "3",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "4",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "5",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "6",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "aggregate" : {
+                  "localId" : "14",
+                  "identifier" : "T",
+                  "expression" : {
+                     "localId" : "13",
+                     "type" : "Multiply",
+                     "operand" : [ {
+                        "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "As",
+                        "operand" : {
+                           "localId" : "11",
+                           "type" : "Coalesce",
+                           "operand" : [ {
+                              "localId" : "9",
+                              "name" : "T",
+                              "type" : "QueryLetRef"
+                           }, {
+                              "localId" : "10",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "1",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "localId" : "12",
+                        "name" : "R",
+                        "type" : "AliasRef"
+                     } ]
+                  },
+                  "starting" : {
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                     "type" : "Null"
                   }
                }
             }

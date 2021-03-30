@@ -320,3 +320,13 @@ describe('SingleObjectAlias', () => {
     should.not.exist(this.nullQuery.exec(this.ctx));
   });
 });
+
+describe('AggregateQuery', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should aggregate factorial from a function', function () {
+    this.fact5.exec(this.ctx).should.eql(120);
+  });
+});
