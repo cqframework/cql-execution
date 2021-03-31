@@ -8133,6 +8133,451 @@ module.exports['SingleObjectAlias'] = {
                   }
                }
             }
+         }, {
+            "localId" : "23",
+            "name" : "EncounterPeriods",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "23",
+                  "s" : [ {
+                     "value" : [ "define ","EncounterPeriods",": \n  " ]
+                  }, {
+                     "r" : "22",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "18",
+                           "s" : [ {
+                              "r" : "17",
+                              "s" : [ {
+                                 "r" : "17",
+                                 "s" : [ {
+                                    "value" : [ "[","Encounter","]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","e" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " \n    " ]
+                     }, {
+                        "r" : "21",
+                        "s" : [ {
+                           "value" : [ "return " ]
+                        }, {
+                           "r" : "20",
+                           "s" : [ {
+                              "r" : "19",
+                              "s" : [ {
+                                 "value" : [ "e" ]
+                              } ]
+                           }, {
+                              "value" : [ "." ]
+                           }, {
+                              "r" : "20",
+                              "s" : [ {
+                                 "value" : [ "period" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "22",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "18",
+                  "alias" : "e",
+                  "expression" : {
+                     "localId" : "17",
+                     "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "Retrieve"
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "localId" : "21",
+                  "expression" : {
+                     "localId" : "20",
+                     "path" : "period",
+                     "scope" : "e",
+                     "type" : "Property"
+                  }
+               }
+            }
+         }, {
+            "localId" : "58",
+            "name" : "RolledOutIntervals",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "58",
+                  "s" : [ {
+                     "value" : [ "define ","RolledOutIntervals",":\n  " ]
+                  }, {
+                     "r" : "57",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "25",
+                           "s" : [ {
+                              "r" : "24",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "value" : [ "EncounterPeriods" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","M" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n    " ]
+                     }, {
+                        "r" : "56",
+                        "s" : [ {
+                           "value" : [ "aggregate ","R"," " ]
+                        }, {
+                           "r" : "30",
+                           "s" : [ {
+                              "value" : [ "starting (" ]
+                           }, {
+                              "r" : "30",
+                              "s" : [ {
+                                 "r" : "26",
+                                 "value" : [ "List{}"," as " ]
+                              }, {
+                                 "r" : "29",
+                                 "s" : [ {
+                                    "value" : [ "List<" ]
+                                 }, {
+                                    "r" : "28",
+                                    "s" : [ {
+                                       "value" : [ "Interval<" ]
+                                    }, {
+                                       "r" : "27",
+                                       "s" : [ {
+                                          "value" : [ "DateTime" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ">" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ">" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ ": " ]
+                        }, {
+                           "r" : "55",
+                           "s" : [ {
+                              "r" : "31",
+                              "s" : [ {
+                                 "value" : [ "R" ]
+                              } ]
+                           }, {
+                              "value" : [ " union " ]
+                           }, {
+                              "r" : "54",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "54",
+                                 "s" : [ {
+                                    "value" : [ "{\n      " ]
+                                 }, {
+                                    "r" : "53",
+                                    "s" : [ {
+                                       "s" : [ {
+                                          "r" : "33",
+                                          "s" : [ {
+                                             "r" : "32",
+                                             "s" : [ {
+                                                "s" : [ {
+                                                   "value" : [ "M" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ " ","X" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "\n          " ]
+                                    }, {
+                                       "s" : [ {
+                                          "value" : [ "let " ]
+                                       }, {
+                                          "r" : "45",
+                                          "s" : [ {
+                                             "value" : [ "S",": " ]
+                                          }, {
+                                             "r" : "44",
+                                             "s" : [ {
+                                                "value" : [ "Max","(" ]
+                                             }, {
+                                                "r" : "43",
+                                                "s" : [ {
+                                                   "value" : [ "{ " ]
+                                                }, {
+                                                   "r" : "38",
+                                                   "s" : [ {
+                                                      "r" : "36",
+                                                      "s" : [ {
+                                                         "value" : [ "end of " ]
+                                                      }, {
+                                                         "r" : "35",
+                                                         "s" : [ {
+                                                            "value" : [ "Last","(" ]
+                                                         }, {
+                                                            "r" : "34",
+                                                            "s" : [ {
+                                                               "value" : [ "R" ]
+                                                            } ]
+                                                         }, {
+                                                            "value" : [ ")" ]
+                                                         } ]
+                                                      } ]
+                                                   }, {
+                                                      "value" : [ "+" ]
+                                                   }, {
+                                                      "r" : "37",
+                                                      "s" : [ {
+                                                         "value" : [ "1 ","day" ]
+                                                      } ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ ", " ]
+                                                }, {
+                                                   "r" : "42",
+                                                   "s" : [ {
+                                                      "r" : "39",
+                                                      "value" : [ "DateTime","(","1970",",","01",",","01",")" ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ "}" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ ")" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ ",\n          " ]
+                                       }, {
+                                          "r" : "48",
+                                          "s" : [ {
+                                             "value" : [ "E",": " ]
+                                          }, {
+                                             "r" : "47",
+                                             "s" : [ {
+                                                "value" : [ "start of " ]
+                                             }, {
+                                                "r" : "46",
+                                                "s" : [ {
+                                                   "value" : [ "X" ]
+                                                } ]
+                                             } ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "\n        " ]
+                                    }, {
+                                       "r" : "52",
+                                       "s" : [ {
+                                          "value" : [ "return " ]
+                                       }, {
+                                          "r" : "51",
+                                          "s" : [ {
+                                             "value" : [ "Interval[" ]
+                                          }, {
+                                             "r" : "49",
+                                             "s" : [ {
+                                                "value" : [ "S" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ ", " ]
+                                          }, {
+                                             "r" : "50",
+                                             "s" : [ {
+                                                "value" : [ "E" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "]" ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n    }" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "57",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "25",
+                  "alias" : "M",
+                  "expression" : {
+                     "localId" : "24",
+                     "name" : "EncounterPeriods",
+                     "type" : "ExpressionRef"
+                  }
+               } ],
+               "relationship" : [ ],
+               "aggregate" : {
+                  "localId" : "56",
+                  "identifier" : "R",
+                  "expression" : {
+                     "localId" : "55",
+                     "type" : "Union",
+                     "operand" : [ {
+                        "localId" : "31",
+                        "name" : "R",
+                        "type" : "QueryLetRef"
+                     }, {
+                        "localId" : "54",
+                        "type" : "List",
+                        "element" : [ {
+                           "localId" : "53",
+                           "type" : "Query",
+                           "source" : [ {
+                              "localId" : "33",
+                              "alias" : "X",
+                              "expression" : {
+                                 "localId" : "32",
+                                 "name" : "M",
+                                 "type" : "AliasRef"
+                              }
+                           } ],
+                           "let" : [ {
+                              "localId" : "45",
+                              "identifier" : "S",
+                              "expression" : {
+                                 "localId" : "44",
+                                 "type" : "Max",
+                                 "source" : {
+                                    "localId" : "43",
+                                    "type" : "List",
+                                    "element" : [ {
+                                       "localId" : "38",
+                                       "type" : "Add",
+                                       "operand" : [ {
+                                          "localId" : "36",
+                                          "type" : "End",
+                                          "operand" : {
+                                             "localId" : "35",
+                                             "type" : "Last",
+                                             "source" : {
+                                                "localId" : "34",
+                                                "name" : "R",
+                                                "type" : "QueryLetRef"
+                                             }
+                                          }
+                                       }, {
+                                          "localId" : "37",
+                                          "value" : 1,
+                                          "unit" : "day",
+                                          "type" : "Quantity"
+                                       } ]
+                                    }, {
+                                       "localId" : "42",
+                                       "type" : "DateTime",
+                                       "year" : {
+                                          "localId" : "39",
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                          "value" : "1970",
+                                          "type" : "Literal"
+                                       },
+                                       "month" : {
+                                          "localId" : "40",
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                          "value" : "01",
+                                          "type" : "Literal"
+                                       },
+                                       "day" : {
+                                          "localId" : "41",
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                          "value" : "01",
+                                          "type" : "Literal"
+                                       }
+                                    } ]
+                                 }
+                              }
+                           }, {
+                              "localId" : "48",
+                              "identifier" : "E",
+                              "expression" : {
+                                 "localId" : "47",
+                                 "type" : "Start",
+                                 "operand" : {
+                                    "localId" : "46",
+                                    "name" : "X",
+                                    "type" : "AliasRef"
+                                 }
+                              }
+                           } ],
+                           "relationship" : [ ],
+                           "return" : {
+                              "localId" : "52",
+                              "expression" : {
+                                 "localId" : "51",
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "localId" : "49",
+                                    "name" : "S",
+                                    "type" : "QueryLetRef"
+                                 },
+                                 "high" : {
+                                    "localId" : "50",
+                                    "name" : "E",
+                                    "type" : "QueryLetRef"
+                                 }
+                              }
+                           }
+                        } ]
+                     } ]
+                  },
+                  "starting" : {
+                     "localId" : "30",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "26",
+                        "type" : "List"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "29",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "28",
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "localId" : "27",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     }
+                  }
+               }
+            }
          } ]
       }
    }
@@ -8143,9 +8588,22 @@ library TestSnippet version '1'
 using Simple version '1.0.0'
 context Patient
 
-define Fact5:
+define factorial:
  ({1,2,3,4,5}) R
     aggregate T : Coalesce(T, 1) * R 
+
+define EncounterPeriods: 
+  [Encounter] e 
+    return e.period 
+
+define RolledOutIntervals:
+  EncounterPeriods M
+    aggregate R starting (List{} as List<Interval<DateTime>>): R union ({
+      M X
+          let S: Max({ end of Last(R)+1 day, DateTime(1970,01,01)}),
+          E: start of X
+        return Interval[S, E]
+    })
 */
 
 module.exports['AggregateQuery'] = {
@@ -8200,7 +8658,7 @@ module.exports['AggregateQuery'] = {
             }
          }, {
             "localId" : "16",
-            "name" : "Fact5",
+            "name" : "factorial",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -8208,7 +8666,7 @@ module.exports['AggregateQuery'] = {
                "s" : {
                   "r" : "16",
                   "s" : [ {
-                     "value" : [ "define ","Fact5",":\n " ]
+                     "value" : [ "define ","factorial",":\n " ]
                   }, {
                      "r" : "15",
                      "s" : [ {

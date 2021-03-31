@@ -162,7 +162,7 @@ class AggregateClause extends Expression {
     super(json);
     this.identifier = json.identifier;
     this.expression = build(json.expression);
-    this.starting = this.starting? build(json.starting): null;
+    this.starting = json.starting? build(json.starting): null;
     this.distinct = json.distinct != null ? json.distinct : true;
   }
 

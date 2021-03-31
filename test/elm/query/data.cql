@@ -109,7 +109,19 @@ define singleAliasReturnList: firstEncounter E return {'foo', 'bar', 'baz', 'bar
 
 // @Test: AggregateQuery
 
-define Fact5:
+define factorial:
  ({1,2,3,4,5}) R
     aggregate T : Coalesce(T, 1) * R 
 
+define EncounterPeriods: 
+  [Encounter] e 
+    return e.period 
+
+define RolledOutIntervals:
+  EncounterPeriods M
+    aggregate R starting (List{} as List<Interval<DateTime>>): R union ({
+      M X
+          let S: Max({ end of Last(R)+1 day, DateTime(1970,01,01)}),
+          E: start of X
+        return Interval[S, E]
+    })
