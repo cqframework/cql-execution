@@ -26,6 +26,14 @@ module.exports['Literal'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "15",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -43,7 +51,27 @@ module.exports['Literal'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -68,7 +96,7 @@ module.exports['Literal'] = {
                   "r" : "3",
                   "s" : [ {
                      "r" : "2",
-                     "value" : [ "define ","BoolTrue",": ","true" ]
+                     "value" : [ "","define ","BoolTrue",": ","true" ]
                   } ]
                }
             } ],
@@ -89,7 +117,7 @@ module.exports['Literal'] = {
                   "r" : "5",
                   "s" : [ {
                      "r" : "4",
-                     "value" : [ "define ","BoolFalse",": ","false" ]
+                     "value" : [ "","define ","BoolFalse",": ","false" ]
                   } ]
                }
             } ],
@@ -110,7 +138,7 @@ module.exports['Literal'] = {
                   "r" : "7",
                   "s" : [ {
                      "r" : "6",
-                     "value" : [ "define ","IntOne",": ","1" ]
+                     "value" : [ "","define ","IntOne",": ","1" ]
                   } ]
                }
             } ],
@@ -131,7 +159,7 @@ module.exports['Literal'] = {
                   "r" : "9",
                   "s" : [ {
                      "r" : "8",
-                     "value" : [ "define ","DecimalTenth",": ","0.1" ]
+                     "value" : [ "","define ","DecimalTenth",": ","0.1" ]
                   } ]
                }
             } ],
@@ -151,7 +179,7 @@ module.exports['Literal'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","StringTrue",": " ]
+                     "value" : [ "","define ","StringTrue",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -177,7 +205,7 @@ module.exports['Literal'] = {
                   "r" : "13",
                   "s" : [ {
                      "r" : "12",
-                     "value" : [ "define ","DateTimeX",": ","@2012-02-15T12:10:59.456Z" ]
+                     "value" : [ "","define ","DateTimeX",": ","@2012-02-15T12:10:59.456Z" ]
                   } ]
                }
             } ],
@@ -236,7 +264,7 @@ module.exports['Literal'] = {
                   "r" : "15",
                   "s" : [ {
                      "r" : "14",
-                     "value" : [ "define ","TimeX",": ","@T12:10:59.456" ]
+                     "value" : [ "","define ","TimeX",": ","@T12:10:59.456" ]
                   } ]
                }
             } ],
@@ -289,6 +317,14 @@ module.exports['Escape'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "19",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -306,7 +342,27 @@ module.exports['Escape'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -330,7 +386,7 @@ module.exports['Escape'] = {
                "s" : {
                   "r" : "3",
                   "s" : [ {
-                     "value" : [ "define ","SingleQuote",": " ]
+                     "value" : [ "","define ","SingleQuote",": " ]
                   }, {
                      "r" : "2",
                      "s" : [ {
@@ -355,7 +411,7 @@ module.exports['Escape'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","DoubleQuote",": " ]
+                     "value" : [ "","define ","DoubleQuote",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -380,7 +436,7 @@ module.exports['Escape'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","Backtick",": " ]
+                     "value" : [ "","define ","Backtick",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -405,7 +461,7 @@ module.exports['Escape'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","CarriageReturn",": " ]
+                     "value" : [ "","define ","CarriageReturn",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -430,7 +486,7 @@ module.exports['Escape'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","LineFeed",": " ]
+                     "value" : [ "","define ","LineFeed",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -455,7 +511,7 @@ module.exports['Escape'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","Tab",": " ]
+                     "value" : [ "","define ","Tab",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -480,7 +536,7 @@ module.exports['Escape'] = {
                "s" : {
                   "r" : "15",
                   "s" : [ {
-                     "value" : [ "define ","FormFeed",": " ]
+                     "value" : [ "","define ","FormFeed",": " ]
                   }, {
                      "r" : "14",
                      "s" : [ {
@@ -505,7 +561,7 @@ module.exports['Escape'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","Backslash",": " ]
+                     "value" : [ "","define ","Backslash",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -530,7 +586,7 @@ module.exports['Escape'] = {
                "s" : {
                   "r" : "19",
                   "s" : [ {
-                     "value" : [ "define ","Unicode",": " ]
+                     "value" : [ "","define ","Unicode",": " ]
                   }, {
                      "r" : "18",
                      "s" : [ {

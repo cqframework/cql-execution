@@ -30,6 +30,14 @@ module.exports['Add'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "64",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -47,7 +55,27 @@ module.exports['Add'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -72,7 +100,7 @@ module.exports['Add'] = {
                   "r" : "3",
                   "s" : [ {
                      "r" : "2",
-                     "value" : [ "define ","Ten",": ","10" ]
+                     "value" : [ "","define ","Ten",": ","10" ]
                   } ]
                }
             } ],
@@ -93,7 +121,7 @@ module.exports['Add'] = {
                   "r" : "5",
                   "s" : [ {
                      "r" : "4",
-                     "value" : [ "define ","Eleven",": ","11" ]
+                     "value" : [ "","define ","Eleven",": ","11" ]
                   } ]
                }
             } ],
@@ -113,7 +141,7 @@ module.exports['Add'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","OnePlusTwo",": " ]
+                     "value" : [ "","define ","OnePlusTwo",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -148,7 +176,7 @@ module.exports['Add'] = {
                "s" : {
                   "r" : "29",
                   "s" : [ {
-                     "value" : [ "define ","AddMultiple",": " ]
+                     "value" : [ "","define ","AddMultiple",": " ]
                   }, {
                      "r" : "28",
                      "s" : [ {
@@ -303,7 +331,7 @@ module.exports['Add'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","AddVariables",": " ]
+                     "value" : [ "","define ","AddVariables",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -345,7 +373,7 @@ module.exports['Add'] = {
                "s" : {
                   "r" : "38",
                   "s" : [ {
-                     "value" : [ "define ","AddTime",": " ]
+                     "value" : [ "","define ","AddTime",": " ]
                   }, {
                      "r" : "37",
                      "s" : [ {
@@ -394,7 +422,7 @@ module.exports['Add'] = {
                "s" : {
                   "r" : "45",
                   "s" : [ {
-                     "value" : [ "define ","UncertaintyZeroToTwelve",": " ]
+                     "value" : [ "","define ","UncertaintyZeroToTwelve",": " ]
                   }, {
                      "r" : "44",
                      "s" : [ {
@@ -457,7 +485,7 @@ module.exports['Add'] = {
                "s" : {
                   "r" : "52",
                   "s" : [ {
-                     "value" : [ "define ","UncertaintySixToEighteen",": " ]
+                     "value" : [ "","define ","UncertaintySixToEighteen",": " ]
                   }, {
                      "r" : "51",
                      "s" : [ {
@@ -520,7 +548,7 @@ module.exports['Add'] = {
                "s" : {
                   "r" : "56",
                   "s" : [ {
-                     "value" : [ "define ","AddUncertainties",": " ]
+                     "value" : [ "","define ","AddUncertainties",": " ]
                   }, {
                      "r" : "55",
                      "s" : [ {
@@ -562,7 +590,7 @@ module.exports['Add'] = {
                "s" : {
                   "r" : "60",
                   "s" : [ {
-                     "value" : [ "define ","AddUncertaintyAndNumber",": " ]
+                     "value" : [ "","define ","AddUncertaintyAndNumber",": " ]
                   }, {
                      "r" : "59",
                      "s" : [ {
@@ -601,7 +629,7 @@ module.exports['Add'] = {
                "s" : {
                   "r" : "64",
                   "s" : [ {
-                     "value" : [ "define ","AddNumberAndUncertainty",": " ]
+                     "value" : [ "","define ","AddNumberAndUncertainty",": " ]
                   }, {
                      "r" : "63",
                      "s" : [ {
@@ -656,6 +684,14 @@ module.exports['Subtract'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "47",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -673,7 +709,27 @@ module.exports['Subtract'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -698,7 +754,7 @@ module.exports['Subtract'] = {
                   "r" : "3",
                   "s" : [ {
                      "r" : "2",
-                     "value" : [ "define ","Ten",": ","10" ]
+                     "value" : [ "","define ","Ten",": ","10" ]
                   } ]
                }
             } ],
@@ -719,7 +775,7 @@ module.exports['Subtract'] = {
                   "r" : "5",
                   "s" : [ {
                      "r" : "4",
-                     "value" : [ "define ","Eleven",": ","11" ]
+                     "value" : [ "","define ","Eleven",": ","11" ]
                   } ]
                }
             } ],
@@ -739,7 +795,7 @@ module.exports['Subtract'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","FiveMinusTwo",": " ]
+                     "value" : [ "","define ","FiveMinusTwo",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -774,7 +830,7 @@ module.exports['Subtract'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","SubtractMultiple",": " ]
+                     "value" : [ "","define ","SubtractMultiple",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -839,7 +895,7 @@ module.exports['Subtract'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","SubtractVariables",": " ]
+                     "value" : [ "","define ","SubtractVariables",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {
@@ -881,7 +937,7 @@ module.exports['Subtract'] = {
                "s" : {
                   "r" : "28",
                   "s" : [ {
-                     "value" : [ "define ","UncertaintyZeroToTwelve",": " ]
+                     "value" : [ "","define ","UncertaintyZeroToTwelve",": " ]
                   }, {
                      "r" : "27",
                      "s" : [ {
@@ -944,7 +1000,7 @@ module.exports['Subtract'] = {
                "s" : {
                   "r" : "35",
                   "s" : [ {
-                     "value" : [ "define ","UncertaintySixToEighteen",": " ]
+                     "value" : [ "","define ","UncertaintySixToEighteen",": " ]
                   }, {
                      "r" : "34",
                      "s" : [ {
@@ -1007,7 +1063,7 @@ module.exports['Subtract'] = {
                "s" : {
                   "r" : "39",
                   "s" : [ {
-                     "value" : [ "define ","SubtractUncertainties",": " ]
+                     "value" : [ "","define ","SubtractUncertainties",": " ]
                   }, {
                      "r" : "38",
                      "s" : [ {
@@ -1049,7 +1105,7 @@ module.exports['Subtract'] = {
                "s" : {
                   "r" : "43",
                   "s" : [ {
-                     "value" : [ "define ","SubtractNumberFromUncertainty",": " ]
+                     "value" : [ "","define ","SubtractNumberFromUncertainty",": " ]
                   }, {
                      "r" : "42",
                      "s" : [ {
@@ -1088,7 +1144,7 @@ module.exports['Subtract'] = {
                "s" : {
                   "r" : "47",
                   "s" : [ {
-                     "value" : [ "define ","SubtractUncertaintyFromNumber",": " ]
+                     "value" : [ "","define ","SubtractUncertaintyFromNumber",": " ]
                   }, {
                      "r" : "46",
                      "s" : [ {
@@ -1143,6 +1199,14 @@ module.exports['Multiply'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "49",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -1160,7 +1224,27 @@ module.exports['Multiply'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -1185,7 +1269,7 @@ module.exports['Multiply'] = {
                   "r" : "3",
                   "s" : [ {
                      "r" : "2",
-                     "value" : [ "define ","Ten",": ","10" ]
+                     "value" : [ "","define ","Ten",": ","10" ]
                   } ]
                }
             } ],
@@ -1206,7 +1290,7 @@ module.exports['Multiply'] = {
                   "r" : "5",
                   "s" : [ {
                      "r" : "4",
-                     "value" : [ "define ","Eleven",": ","11" ]
+                     "value" : [ "","define ","Eleven",": ","11" ]
                   } ]
                }
             } ],
@@ -1226,7 +1310,7 @@ module.exports['Multiply'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","FiveTimesTwo",": " ]
+                     "value" : [ "","define ","FiveTimesTwo",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -1261,7 +1345,7 @@ module.exports['Multiply'] = {
                "s" : {
                   "r" : "19",
                   "s" : [ {
-                     "value" : [ "define ","MultiplyMultiple",": " ]
+                     "value" : [ "","define ","MultiplyMultiple",": " ]
                   }, {
                      "r" : "18",
                      "s" : [ {
@@ -1341,7 +1425,7 @@ module.exports['Multiply'] = {
                "s" : {
                   "r" : "23",
                   "s" : [ {
-                     "value" : [ "define ","MultiplyVariables",": " ]
+                     "value" : [ "","define ","MultiplyVariables",": " ]
                   }, {
                      "r" : "22",
                      "s" : [ {
@@ -1383,7 +1467,7 @@ module.exports['Multiply'] = {
                "s" : {
                   "r" : "30",
                   "s" : [ {
-                     "value" : [ "define ","UncertaintyTwoToFourteen",": " ]
+                     "value" : [ "","define ","UncertaintyTwoToFourteen",": " ]
                   }, {
                      "r" : "29",
                      "s" : [ {
@@ -1446,7 +1530,7 @@ module.exports['Multiply'] = {
                "s" : {
                   "r" : "37",
                   "s" : [ {
-                     "value" : [ "define ","UncertaintySixToEighteen",": " ]
+                     "value" : [ "","define ","UncertaintySixToEighteen",": " ]
                   }, {
                      "r" : "36",
                      "s" : [ {
@@ -1509,7 +1593,7 @@ module.exports['Multiply'] = {
                "s" : {
                   "r" : "41",
                   "s" : [ {
-                     "value" : [ "define ","MultiplyUncertainties",": " ]
+                     "value" : [ "","define ","MultiplyUncertainties",": " ]
                   }, {
                      "r" : "40",
                      "s" : [ {
@@ -1551,7 +1635,7 @@ module.exports['Multiply'] = {
                "s" : {
                   "r" : "45",
                   "s" : [ {
-                     "value" : [ "define ","MultiplyUncertaintyAndNumber",": " ]
+                     "value" : [ "","define ","MultiplyUncertaintyAndNumber",": " ]
                   }, {
                      "r" : "44",
                      "s" : [ {
@@ -1590,7 +1674,7 @@ module.exports['Multiply'] = {
                "s" : {
                   "r" : "49",
                   "s" : [ {
-                     "value" : [ "define ","MultiplyNumberAndUncertainty",": " ]
+                     "value" : [ "","define ","MultiplyNumberAndUncertainty",": " ]
                   }, {
                      "r" : "48",
                      "s" : [ {
@@ -1646,6 +1730,14 @@ module.exports['Divide'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "51",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -1663,7 +1755,27 @@ module.exports['Divide'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -1688,7 +1800,7 @@ module.exports['Divide'] = {
                   "r" : "3",
                   "s" : [ {
                      "r" : "2",
-                     "value" : [ "define ","Hundred",": ","100" ]
+                     "value" : [ "","define ","Hundred",": ","100" ]
                   } ]
                }
             } ],
@@ -1709,7 +1821,7 @@ module.exports['Divide'] = {
                   "r" : "5",
                   "s" : [ {
                      "r" : "4",
-                     "value" : [ "define ","Four",": ","4" ]
+                     "value" : [ "","define ","Four",": ","4" ]
                   } ]
                }
             } ],
@@ -1729,7 +1841,7 @@ module.exports['Divide'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","TenDividedByTwo",": " ]
+                     "value" : [ "","define ","TenDividedByTwo",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -1770,7 +1882,7 @@ module.exports['Divide'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","TenDividedByFour",": " ]
+                     "value" : [ "","define ","TenDividedByFour",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -1811,7 +1923,7 @@ module.exports['Divide'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","DivideMultiple",": " ]
+                     "value" : [ "","define ","DivideMultiple",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {
@@ -1888,7 +2000,7 @@ module.exports['Divide'] = {
                "s" : {
                   "r" : "25",
                   "s" : [ {
-                     "value" : [ "define ","DivideVariables",": " ]
+                     "value" : [ "","define ","DivideVariables",": " ]
                   }, {
                      "r" : "24",
                      "s" : [ {
@@ -1936,7 +2048,7 @@ module.exports['Divide'] = {
                "s" : {
                   "r" : "32",
                   "s" : [ {
-                     "value" : [ "define ","UncertaintyTwoToFourteen",": " ]
+                     "value" : [ "","define ","UncertaintyTwoToFourteen",": " ]
                   }, {
                      "r" : "31",
                      "s" : [ {
@@ -1999,7 +2111,7 @@ module.exports['Divide'] = {
                "s" : {
                   "r" : "39",
                   "s" : [ {
-                     "value" : [ "define ","UncertaintySixToEighteen",": " ]
+                     "value" : [ "","define ","UncertaintySixToEighteen",": " ]
                   }, {
                      "r" : "38",
                      "s" : [ {
@@ -2062,7 +2174,7 @@ module.exports['Divide'] = {
                "s" : {
                   "r" : "43",
                   "s" : [ {
-                     "value" : [ "define ","DivideUncertainties",": " ]
+                     "value" : [ "","define ","DivideUncertainties",": " ]
                   }, {
                      "r" : "42",
                      "s" : [ {
@@ -2110,7 +2222,7 @@ module.exports['Divide'] = {
                "s" : {
                   "r" : "47",
                   "s" : [ {
-                     "value" : [ "define ","DivideUncertaintyByNumber",": " ]
+                     "value" : [ "","define ","DivideUncertaintyByNumber",": " ]
                   }, {
                      "r" : "46",
                      "s" : [ {
@@ -2155,7 +2267,7 @@ module.exports['Divide'] = {
                "s" : {
                   "r" : "51",
                   "s" : [ {
-                     "value" : [ "define ","DivideNumberByUncertainty",": " ]
+                     "value" : [ "","define ","DivideNumberByUncertainty",": " ]
                   }, {
                      "r" : "50",
                      "s" : [ {
@@ -2207,6 +2319,14 @@ module.exports['Negate'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "4",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -2224,7 +2344,27 @@ module.exports['Negate'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2248,7 +2388,7 @@ module.exports['Negate'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define ","NegativeOne",": " ]
+                     "value" : [ "","define ","NegativeOne",": " ]
                   }, {
                      "r" : "3",
                      "s" : [ {
@@ -2286,6 +2426,14 @@ module.exports['MathPrecedence'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "21",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -2303,7 +2451,27 @@ module.exports['MathPrecedence'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2327,7 +2495,7 @@ module.exports['MathPrecedence'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","Mixed",": " ]
+                     "value" : [ "","define ","Mixed",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -2415,7 +2583,7 @@ module.exports['MathPrecedence'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","Parenthetical",": " ]
+                     "value" : [ "","define ","Parenthetical",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {
@@ -2521,6 +2689,14 @@ module.exports['Power'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "5",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -2538,7 +2714,27 @@ module.exports['Power'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2562,7 +2758,7 @@ module.exports['Power'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","Pow",": " ]
+                     "value" : [ "","define ","Pow",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -2608,6 +2804,14 @@ module.exports['MinValue'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "16",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -2625,7 +2829,27 @@ module.exports['MinValue'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2649,7 +2873,7 @@ module.exports['MinValue'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define ","MinInteger",": " ]
+                     "value" : [ "","define ","MinInteger",": " ]
                   }, {
                      "r" : "3",
                      "s" : [ {
@@ -2678,7 +2902,7 @@ module.exports['MinValue'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","MinDecimal",": " ]
+                     "value" : [ "","define ","MinDecimal",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -2707,7 +2931,7 @@ module.exports['MinValue'] = {
                "s" : {
                   "r" : "10",
                   "s" : [ {
-                     "value" : [ "define ","MinDateTime",": " ]
+                     "value" : [ "","define ","MinDateTime",": " ]
                   }, {
                      "r" : "9",
                      "s" : [ {
@@ -2736,7 +2960,7 @@ module.exports['MinValue'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","MinTime",": " ]
+                     "value" : [ "","define ","MinTime",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -2765,7 +2989,7 @@ module.exports['MinValue'] = {
                "s" : {
                   "r" : "16",
                   "s" : [ {
-                     "value" : [ "define ","MinWrongType",": " ]
+                     "value" : [ "","define ","MinWrongType",": " ]
                   }, {
                      "r" : "15",
                      "s" : [ {
@@ -2805,6 +3029,14 @@ module.exports['MaxValue'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "16",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -2822,7 +3054,27 @@ module.exports['MaxValue'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2846,7 +3098,7 @@ module.exports['MaxValue'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define ","MaxInteger",": " ]
+                     "value" : [ "","define ","MaxInteger",": " ]
                   }, {
                      "r" : "3",
                      "s" : [ {
@@ -2875,7 +3127,7 @@ module.exports['MaxValue'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","MaxDecimal",": " ]
+                     "value" : [ "","define ","MaxDecimal",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -2904,7 +3156,7 @@ module.exports['MaxValue'] = {
                "s" : {
                   "r" : "10",
                   "s" : [ {
-                     "value" : [ "define ","MaxDateTime",": " ]
+                     "value" : [ "","define ","MaxDateTime",": " ]
                   }, {
                      "r" : "9",
                      "s" : [ {
@@ -2933,7 +3185,7 @@ module.exports['MaxValue'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","MaxTime",": " ]
+                     "value" : [ "","define ","MaxTime",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -2962,7 +3214,7 @@ module.exports['MaxValue'] = {
                "s" : {
                   "r" : "16",
                   "s" : [ {
-                     "value" : [ "define ","MaxWrongType",": " ]
+                     "value" : [ "","define ","MaxWrongType",": " ]
                   }, {
                      "r" : "15",
                      "s" : [ {
@@ -2999,6 +3251,14 @@ module.exports['TruncatedDivide'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "9",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -3016,7 +3276,27 @@ module.exports['TruncatedDivide'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -3040,7 +3320,7 @@ module.exports['TruncatedDivide'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","Trunc",": " ]
+                     "value" : [ "","define ","Trunc",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -3075,7 +3355,7 @@ module.exports['TruncatedDivide'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","Even",": " ]
+                     "value" : [ "","define ","Even",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -3117,6 +3397,14 @@ module.exports['Modulo'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "5",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -3134,7 +3422,27 @@ module.exports['Modulo'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -3158,7 +3466,7 @@ module.exports['Modulo'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","Mod",": " ]
+                     "value" : [ "","define ","Mod",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -3201,6 +3509,14 @@ module.exports['Ceiling'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "7",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -3218,7 +3534,27 @@ module.exports['Ceiling'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -3242,7 +3578,7 @@ module.exports['Ceiling'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define ","Ceil",": " ]
+                     "value" : [ "","define ","Ceil",": " ]
                   }, {
                      "r" : "3",
                      "s" : [ {
@@ -3272,7 +3608,7 @@ module.exports['Ceiling'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","Even",": " ]
+                     "value" : [ "","define ","Even",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -3313,6 +3649,14 @@ module.exports['Floor'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "7",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -3330,7 +3674,27 @@ module.exports['Floor'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -3354,7 +3718,7 @@ module.exports['Floor'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define ","flr",": " ]
+                     "value" : [ "","define ","flr",": " ]
                   }, {
                      "r" : "3",
                      "s" : [ {
@@ -3384,7 +3748,7 @@ module.exports['Floor'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","Even",": " ]
+                     "value" : [ "","define ","Even",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -3425,6 +3789,14 @@ module.exports['Truncate'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "7",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -3442,7 +3814,27 @@ module.exports['Truncate'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -3466,7 +3858,7 @@ module.exports['Truncate'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define ","Trunc",": " ]
+                     "value" : [ "","define ","Trunc",": " ]
                   }, {
                      "r" : "3",
                      "s" : [ {
@@ -3496,7 +3888,7 @@ module.exports['Truncate'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","Even",": " ]
+                     "value" : [ "","define ","Even",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -3538,6 +3930,14 @@ module.exports['Abs'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "11",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -3555,7 +3955,27 @@ module.exports['Abs'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -3579,7 +3999,7 @@ module.exports['Abs'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define ","Pos",": " ]
+                     "value" : [ "","define ","Pos",": " ]
                   }, {
                      "r" : "3",
                      "s" : [ {
@@ -3609,7 +4029,7 @@ module.exports['Abs'] = {
                "s" : {
                   "r" : "8",
                   "s" : [ {
-                     "value" : [ "define ","Neg",": " ]
+                     "value" : [ "","define ","Neg",": " ]
                   }, {
                      "r" : "7",
                      "s" : [ {
@@ -3650,7 +4070,7 @@ module.exports['Abs'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","Zero",": " ]
+                     "value" : [ "","define ","Zero",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -3690,6 +4110,14 @@ module.exports['Round'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "15",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -3707,7 +4135,27 @@ module.exports['Round'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -3731,7 +4179,7 @@ module.exports['Round'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define ","Up",": " ]
+                     "value" : [ "","define ","Up",": " ]
                   }, {
                      "r" : "3",
                      "s" : [ {
@@ -3761,7 +4209,7 @@ module.exports['Round'] = {
                "s" : {
                   "r" : "8",
                   "s" : [ {
-                     "value" : [ "define ","Up_percent",": " ]
+                     "value" : [ "","define ","Up_percent",": " ]
                   }, {
                      "r" : "7",
                      "s" : [ {
@@ -3797,7 +4245,7 @@ module.exports['Round'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","Down",": " ]
+                     "value" : [ "","define ","Down",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -3827,7 +4275,7 @@ module.exports['Round'] = {
                "s" : {
                   "r" : "15",
                   "s" : [ {
-                     "value" : [ "define ","Down_percent",": " ]
+                     "value" : [ "","define ","Down_percent",": " ]
                   }, {
                      "r" : "14",
                      "s" : [ {
@@ -3870,6 +4318,14 @@ module.exports['Ln'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "4",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -3887,7 +4343,27 @@ module.exports['Ln'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -3911,7 +4387,7 @@ module.exports['Ln'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define ","ln",": " ]
+                     "value" : [ "","define ","ln",": " ]
                   }, {
                      "r" : "3",
                      "s" : [ {
@@ -3951,6 +4427,14 @@ module.exports['Log'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "5",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -3968,7 +4452,27 @@ module.exports['Log'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -3992,7 +4496,7 @@ module.exports['Log'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","log",": " ]
+                     "value" : [ "","define ","log",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -4050,6 +4554,14 @@ module.exports['Successor'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "69",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -4067,7 +4579,27 @@ module.exports['Successor'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -4091,7 +4623,7 @@ module.exports['Successor'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define ","Is",": " ]
+                     "value" : [ "","define ","Is",": " ]
                   }, {
                      "r" : "3",
                      "s" : [ {
@@ -4121,7 +4653,7 @@ module.exports['Successor'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","Rs",": " ]
+                     "value" : [ "","define ","Rs",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -4151,7 +4683,7 @@ module.exports['Successor'] = {
                "s" : {
                   "r" : "10",
                   "s" : [ {
-                     "value" : [ "define ","ofr",": " ]
+                     "value" : [ "","define ","ofr",": " ]
                   }, {
                      "r" : "9",
                      "s" : [ {
@@ -4181,7 +4713,7 @@ module.exports['Successor'] = {
                "s" : {
                   "r" : "14",
                   "s" : [ {
-                     "value" : [ "define ","y_date",": " ]
+                     "value" : [ "","define ","y_date",": " ]
                   }, {
                      "r" : "13",
                      "s" : [ {
@@ -4220,7 +4752,7 @@ module.exports['Successor'] = {
                "s" : {
                   "r" : "19",
                   "s" : [ {
-                     "value" : [ "define ","ym_date",": " ]
+                     "value" : [ "","define ","ym_date",": " ]
                   }, {
                      "r" : "18",
                      "s" : [ {
@@ -4265,7 +4797,7 @@ module.exports['Successor'] = {
                "s" : {
                   "r" : "25",
                   "s" : [ {
-                     "value" : [ "define ","ymd_date",": " ]
+                     "value" : [ "","define ","ymd_date",": " ]
                   }, {
                      "r" : "24",
                      "s" : [ {
@@ -4316,7 +4848,7 @@ module.exports['Successor'] = {
                "s" : {
                   "r" : "32",
                   "s" : [ {
-                     "value" : [ "define ","ymdh_date",": " ]
+                     "value" : [ "","define ","ymdh_date",": " ]
                   }, {
                      "r" : "31",
                      "s" : [ {
@@ -4373,7 +4905,7 @@ module.exports['Successor'] = {
                "s" : {
                   "r" : "40",
                   "s" : [ {
-                     "value" : [ "define ","ymdhm_date",": " ]
+                     "value" : [ "","define ","ymdhm_date",": " ]
                   }, {
                      "r" : "39",
                      "s" : [ {
@@ -4436,7 +4968,7 @@ module.exports['Successor'] = {
                "s" : {
                   "r" : "49",
                   "s" : [ {
-                     "value" : [ "define ","ymdhms_date",": " ]
+                     "value" : [ "","define ","ymdhms_date",": " ]
                   }, {
                      "r" : "48",
                      "s" : [ {
@@ -4505,7 +5037,7 @@ module.exports['Successor'] = {
                "s" : {
                   "r" : "59",
                   "s" : [ {
-                     "value" : [ "define ","ymdhmsm_date",": " ]
+                     "value" : [ "","define ","ymdhmsm_date",": " ]
                   }, {
                      "r" : "58",
                      "s" : [ {
@@ -4580,7 +5112,7 @@ module.exports['Successor'] = {
                "s" : {
                   "r" : "69",
                   "s" : [ {
-                     "value" : [ "define ","max_date",": " ]
+                     "value" : [ "","define ","max_date",": " ]
                   }, {
                      "r" : "68",
                      "s" : [ {
@@ -4672,6 +5204,14 @@ module.exports['Predecessor'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "70",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -4689,7 +5229,27 @@ module.exports['Predecessor'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -4713,7 +5273,7 @@ module.exports['Predecessor'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define ","Is",": " ]
+                     "value" : [ "","define ","Is",": " ]
                   }, {
                      "r" : "3",
                      "s" : [ {
@@ -4743,7 +5303,7 @@ module.exports['Predecessor'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","Rs",": " ]
+                     "value" : [ "","define ","Rs",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -4773,7 +5333,7 @@ module.exports['Predecessor'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","ufr",": " ]
+                     "value" : [ "","define ","ufr",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -4812,7 +5372,7 @@ module.exports['Predecessor'] = {
                "s" : {
                   "r" : "15",
                   "s" : [ {
-                     "value" : [ "define ","y_date",": " ]
+                     "value" : [ "","define ","y_date",": " ]
                   }, {
                      "r" : "14",
                      "s" : [ {
@@ -4851,7 +5411,7 @@ module.exports['Predecessor'] = {
                "s" : {
                   "r" : "20",
                   "s" : [ {
-                     "value" : [ "define ","ym_date",": " ]
+                     "value" : [ "","define ","ym_date",": " ]
                   }, {
                      "r" : "19",
                      "s" : [ {
@@ -4896,7 +5456,7 @@ module.exports['Predecessor'] = {
                "s" : {
                   "r" : "26",
                   "s" : [ {
-                     "value" : [ "define ","ymd_date",": " ]
+                     "value" : [ "","define ","ymd_date",": " ]
                   }, {
                      "r" : "25",
                      "s" : [ {
@@ -4947,7 +5507,7 @@ module.exports['Predecessor'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","ymdh_date",": " ]
+                     "value" : [ "","define ","ymdh_date",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -5004,7 +5564,7 @@ module.exports['Predecessor'] = {
                "s" : {
                   "r" : "41",
                   "s" : [ {
-                     "value" : [ "define ","ymdhm_date",": " ]
+                     "value" : [ "","define ","ymdhm_date",": " ]
                   }, {
                      "r" : "40",
                      "s" : [ {
@@ -5067,7 +5627,7 @@ module.exports['Predecessor'] = {
                "s" : {
                   "r" : "50",
                   "s" : [ {
-                     "value" : [ "define ","ymdhms_date",": " ]
+                     "value" : [ "","define ","ymdhms_date",": " ]
                   }, {
                      "r" : "49",
                      "s" : [ {
@@ -5136,7 +5696,7 @@ module.exports['Predecessor'] = {
                "s" : {
                   "r" : "60",
                   "s" : [ {
-                     "value" : [ "define ","ymdhmsm_date",": " ]
+                     "value" : [ "","define ","ymdhmsm_date",": " ]
                   }, {
                      "r" : "59",
                      "s" : [ {
@@ -5211,7 +5771,7 @@ module.exports['Predecessor'] = {
                "s" : {
                   "r" : "70",
                   "s" : [ {
-                     "value" : [ "define ","min_date",": " ]
+                     "value" : [ "","define ","min_date",": " ]
                   }, {
                      "r" : "69",
                      "s" : [ {
@@ -5315,6 +5875,14 @@ module.exports['Quantity'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "94",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -5332,7 +5900,27 @@ module.exports['Quantity'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -5356,7 +5944,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "3",
                   "s" : [ {
-                     "value" : [ "define ","days_10",": " ]
+                     "value" : [ "","define ","days_10",": " ]
                   }, {
                      "r" : "2",
                      "s" : [ {
@@ -5381,7 +5969,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","QL10Days",": " ]
+                     "value" : [ "","define ","QL10Days",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -5443,7 +6031,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","QL10Min"," : " ]
+                     "value" : [ "","define ","QL10Min"," : " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -5505,7 +6093,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "16",
                   "s" : [ {
-                     "value" : [ "define ","Jan1_2000",": " ]
+                     "value" : [ "","define ","Jan1_2000",": " ]
                   }, {
                      "r" : "15",
                      "s" : [ {
@@ -5547,7 +6135,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "20",
                   "s" : [ {
-                     "value" : [ "define ","add_q_q"," : " ]
+                     "value" : [ "","define ","add_q_q"," : " ]
                   }, {
                      "r" : "19",
                      "s" : [ {
@@ -5589,7 +6177,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "24",
                   "s" : [ {
-                     "value" : [ "define ","add_d_q"," : " ]
+                     "value" : [ "","define ","add_d_q"," : " ]
                   }, {
                      "r" : "23",
                      "s" : [ {
@@ -5631,7 +6219,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "28",
                   "s" : [ {
-                     "value" : [ "define ","sub_q_q"," : " ]
+                     "value" : [ "","define ","sub_q_q"," : " ]
                   }, {
                      "r" : "27",
                      "s" : [ {
@@ -5673,7 +6261,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "32",
                   "s" : [ {
-                     "value" : [ "define ","sub_d_q"," : " ]
+                     "value" : [ "","define ","sub_d_q"," : " ]
                   }, {
                      "r" : "31",
                      "s" : [ {
@@ -5715,7 +6303,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "36",
                   "s" : [ {
-                     "value" : [ "define ","add_q_q_diff"," : " ]
+                     "value" : [ "","define ","add_q_q_diff"," : " ]
                   }, {
                      "r" : "35",
                      "s" : [ {
@@ -5757,7 +6345,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "40",
                   "s" : [ {
-                     "value" : [ "define ","sub_q_q_diff"," : " ]
+                     "value" : [ "","define ","sub_q_q_diff"," : " ]
                   }, {
                      "r" : "39",
                      "s" : [ {
@@ -5799,7 +6387,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "44",
                   "s" : [ {
-                     "value" : [ "define ","div_q_d"," : " ]
+                     "value" : [ "","define ","div_q_d"," : " ]
                   }, {
                      "r" : "43",
                      "s" : [ {
@@ -5841,7 +6429,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "48",
                   "s" : [ {
-                     "value" : [ "define ","div_q_q"," : " ]
+                     "value" : [ "","define ","div_q_q"," : " ]
                   }, {
                      "r" : "47",
                      "s" : [ {
@@ -5883,7 +6471,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "52",
                   "s" : [ {
-                     "value" : [ "define ","mul_q_d"," : " ]
+                     "value" : [ "","define ","mul_q_d"," : " ]
                   }, {
                      "r" : "51",
                      "s" : [ {
@@ -5925,7 +6513,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "56",
                   "s" : [ {
-                     "value" : [ "define ","mul_d_q"," : " ]
+                     "value" : [ "","define ","mul_d_q"," : " ]
                   }, {
                      "r" : "55",
                      "s" : [ {
@@ -5967,7 +6555,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "60",
                   "s" : [ {
-                     "value" : [ "define ","mul_q_q"," : " ]
+                     "value" : [ "","define ","mul_q_q"," : " ]
                   }, {
                      "r" : "59",
                      "s" : [ {
@@ -6011,7 +6599,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "64",
                   "s" : [ {
-                     "value" : [ "define ","mul_q_q_diff"," : " ]
+                     "value" : [ "","define ","mul_q_q_diff"," : " ]
                   }, {
                      "r" : "63",
                      "s" : [ {
@@ -6055,7 +6643,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "67",
                   "s" : [ {
-                     "value" : [ "define ","neg"," : " ]
+                     "value" : [ "","define ","neg"," : " ]
                   }, {
                      "r" : "66",
                      "s" : [ {
@@ -6088,7 +6676,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "70",
                   "s" : [ {
-                     "value" : [ "define ","abs"," : " ]
+                     "value" : [ "","define ","abs"," : " ]
                   }, {
                      "r" : "69",
                      "s" : [ {
@@ -6123,7 +6711,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "76",
                   "s" : [ {
-                     "value" : [ "define ","MultiplyUcum",": " ]
+                     "value" : [ "","define ","MultiplyUcum",": " ]
                   }, {
                      "r" : "75",
                      "s" : [ {
@@ -6193,7 +6781,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "82",
                   "s" : [ {
-                     "value" : [ "define ","DivideUcum",": " ]
+                     "value" : [ "","define ","DivideUcum",": " ]
                   }, {
                      "r" : "81",
                      "s" : [ {
@@ -6263,7 +6851,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "88",
                   "s" : [ {
-                     "value" : [ "define ","AddUcum",": " ]
+                     "value" : [ "","define ","AddUcum",": " ]
                   }, {
                      "r" : "87",
                      "s" : [ {
@@ -6333,7 +6921,7 @@ module.exports['Quantity'] = {
                "s" : {
                   "r" : "94",
                   "s" : [ {
-                     "value" : [ "define ","SubtractUcum",": " ]
+                     "value" : [ "","define ","SubtractUcum",": " ]
                   }, {
                      "r" : "93",
                      "s" : [ {
@@ -6473,6 +7061,14 @@ module.exports['OutOfBounds'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "282",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -6490,7 +7086,27 @@ module.exports['OutOfBounds'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -6514,7 +7130,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "6",
                   "s" : [ {
-                     "value" : [ "define ","IntegerAddOverflow",": " ]
+                     "value" : [ "","define ","IntegerAddOverflow",": " ]
                   }, {
                      "r" : "5",
                      "s" : [ {
@@ -6558,7 +7174,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "12",
                   "s" : [ {
-                     "value" : [ "define ","IntegerAddUnderflow",": " ]
+                     "value" : [ "","define ","IntegerAddUnderflow",": " ]
                   }, {
                      "r" : "11",
                      "s" : [ {
@@ -6611,7 +7227,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "18",
                   "s" : [ {
-                     "value" : [ "define ","IntegerSubtractOverflow",": " ]
+                     "value" : [ "","define ","IntegerSubtractOverflow",": " ]
                   }, {
                      "r" : "17",
                      "s" : [ {
@@ -6664,7 +7280,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "23",
                   "s" : [ {
-                     "value" : [ "define ","IntegerSubtractUnderflow",": " ]
+                     "value" : [ "","define ","IntegerSubtractUnderflow",": " ]
                   }, {
                      "r" : "22",
                      "s" : [ {
@@ -6708,7 +7324,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "28",
                   "s" : [ {
-                     "value" : [ "define ","IntegerMultiplyOverflow",": " ]
+                     "value" : [ "","define ","IntegerMultiplyOverflow",": " ]
                   }, {
                      "r" : "27",
                      "s" : [ {
@@ -6752,7 +7368,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "34",
                   "s" : [ {
-                     "value" : [ "define ","IntegerMultiplyUnderflow",": " ]
+                     "value" : [ "","define ","IntegerMultiplyUnderflow",": " ]
                   }, {
                      "r" : "33",
                      "s" : [ {
@@ -6805,7 +7421,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "39",
                   "s" : [ {
-                     "value" : [ "define ","IntegerDivideOverflow",": " ]
+                     "value" : [ "","define ","IntegerDivideOverflow",": " ]
                   }, {
                      "r" : "38",
                      "s" : [ {
@@ -6857,7 +7473,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "45",
                   "s" : [ {
-                     "value" : [ "define ","IntegerDivideUnderflow",": " ]
+                     "value" : [ "","define ","IntegerDivideUnderflow",": " ]
                   }, {
                      "r" : "44",
                      "s" : [ {
@@ -6920,7 +7536,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "49",
                   "s" : [ {
-                     "value" : [ "define ","IntegerDivideByZero",": " ]
+                     "value" : [ "","define ","IntegerDivideByZero",": " ]
                   }, {
                      "r" : "48",
                      "s" : [ {
@@ -6961,7 +7577,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "54",
                   "s" : [ {
-                     "value" : [ "define ","IntegerPowerOverflow",": " ]
+                     "value" : [ "","define ","IntegerPowerOverflow",": " ]
                   }, {
                      "r" : "53",
                      "s" : [ {
@@ -7012,7 +7628,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "59",
                   "s" : [ {
-                     "value" : [ "define ","IntegerPowerUnderflow",": " ]
+                     "value" : [ "","define ","IntegerPowerUnderflow",": " ]
                   }, {
                      "r" : "58",
                      "s" : [ {
@@ -7063,7 +7679,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "63",
                   "s" : [ {
-                     "value" : [ "define ","IntegerSuccessorOverflow",": " ]
+                     "value" : [ "","define ","IntegerSuccessorOverflow",": " ]
                   }, {
                      "r" : "62",
                      "s" : [ {
@@ -7101,7 +7717,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "67",
                   "s" : [ {
-                     "value" : [ "define ","IntegerPredecessorUnderflow",": " ]
+                     "value" : [ "","define ","IntegerPredecessorUnderflow",": " ]
                   }, {
                      "r" : "66",
                      "s" : [ {
@@ -7139,7 +7755,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "72",
                   "s" : [ {
-                     "value" : [ "define ","DecimalAddOverflow",": " ]
+                     "value" : [ "","define ","DecimalAddOverflow",": " ]
                   }, {
                      "r" : "71",
                      "s" : [ {
@@ -7183,7 +7799,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "78",
                   "s" : [ {
-                     "value" : [ "define ","DecimalAddUnderflow",": " ]
+                     "value" : [ "","define ","DecimalAddUnderflow",": " ]
                   }, {
                      "r" : "77",
                      "s" : [ {
@@ -7236,7 +7852,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "84",
                   "s" : [ {
-                     "value" : [ "define ","DecimalSubtractOverflow",": " ]
+                     "value" : [ "","define ","DecimalSubtractOverflow",": " ]
                   }, {
                      "r" : "83",
                      "s" : [ {
@@ -7289,7 +7905,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "89",
                   "s" : [ {
-                     "value" : [ "define ","DecimalSubtractUnderflow",": " ]
+                     "value" : [ "","define ","DecimalSubtractUnderflow",": " ]
                   }, {
                      "r" : "88",
                      "s" : [ {
@@ -7333,7 +7949,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "94",
                   "s" : [ {
-                     "value" : [ "define ","DecimalMultiplyOverflow",": " ]
+                     "value" : [ "","define ","DecimalMultiplyOverflow",": " ]
                   }, {
                      "r" : "93",
                      "s" : [ {
@@ -7380,7 +7996,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "100",
                   "s" : [ {
-                     "value" : [ "define ","DecimalMultiplyUnderflow",": " ]
+                     "value" : [ "","define ","DecimalMultiplyUnderflow",": " ]
                   }, {
                      "r" : "99",
                      "s" : [ {
@@ -7436,7 +8052,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "105",
                   "s" : [ {
-                     "value" : [ "define ","DecimalDivideOverflow",": " ]
+                     "value" : [ "","define ","DecimalDivideOverflow",": " ]
                   }, {
                      "r" : "104",
                      "s" : [ {
@@ -7485,7 +8101,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "111",
                   "s" : [ {
-                     "value" : [ "define ","DecimalDivideUnderflow",": " ]
+                     "value" : [ "","define ","DecimalDivideUnderflow",": " ]
                   }, {
                      "r" : "110",
                      "s" : [ {
@@ -7545,7 +8161,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "115",
                   "s" : [ {
-                     "value" : [ "define ","DecimalDivideByZero",": " ]
+                     "value" : [ "","define ","DecimalDivideByZero",": " ]
                   }, {
                      "r" : "114",
                      "s" : [ {
@@ -7583,7 +8199,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "120",
                   "s" : [ {
-                     "value" : [ "define ","DecimalPowerOverflow",": " ]
+                     "value" : [ "","define ","DecimalPowerOverflow",": " ]
                   }, {
                      "r" : "119",
                      "s" : [ {
@@ -7637,7 +8253,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "125",
                   "s" : [ {
-                     "value" : [ "define ","DecimalPowerUnderflow",": " ]
+                     "value" : [ "","define ","DecimalPowerUnderflow",": " ]
                   }, {
                      "r" : "124",
                      "s" : [ {
@@ -7691,7 +8307,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "129",
                   "s" : [ {
-                     "value" : [ "define ","DecimalSuccessorOverflow",": " ]
+                     "value" : [ "","define ","DecimalSuccessorOverflow",": " ]
                   }, {
                      "r" : "128",
                      "s" : [ {
@@ -7729,7 +8345,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "133",
                   "s" : [ {
-                     "value" : [ "define ","DecimalPredecessorUnderflow",": " ]
+                     "value" : [ "","define ","DecimalPredecessorUnderflow",": " ]
                   }, {
                      "r" : "132",
                      "s" : [ {
@@ -7767,7 +8383,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "138",
                   "s" : [ {
-                     "value" : [ "define ","MaxQuantity",": " ]
+                     "value" : [ "","define ","MaxQuantity",": " ]
                   }, {
                      "r" : "137",
                      "s" : [ {
@@ -7834,7 +8450,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "143",
                   "s" : [ {
-                     "value" : [ "define ","MinQuantity",": " ]
+                     "value" : [ "","define ","MinQuantity",": " ]
                   }, {
                      "r" : "142",
                      "s" : [ {
@@ -7901,7 +8517,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "147",
                   "s" : [ {
-                     "value" : [ "define ","QuantityAddOverflow",": " ]
+                     "value" : [ "","define ","QuantityAddOverflow",": " ]
                   }, {
                      "r" : "146",
                      "s" : [ {
@@ -7944,7 +8560,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "152",
                   "s" : [ {
-                     "value" : [ "define ","QuantityAddUnderflow",": " ]
+                     "value" : [ "","define ","QuantityAddUnderflow",": " ]
                   }, {
                      "r" : "151",
                      "s" : [ {
@@ -8003,7 +8619,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "157",
                   "s" : [ {
-                     "value" : [ "define ","QuantitySubtractOverflow",": " ]
+                     "value" : [ "","define ","QuantitySubtractOverflow",": " ]
                   }, {
                      "r" : "156",
                      "s" : [ {
@@ -8062,7 +8678,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "161",
                   "s" : [ {
-                     "value" : [ "define ","QuantitySubtractUnderflow",": " ]
+                     "value" : [ "","define ","QuantitySubtractUnderflow",": " ]
                   }, {
                      "r" : "160",
                      "s" : [ {
@@ -8105,7 +8721,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "165",
                   "s" : [ {
-                     "value" : [ "define ","QuantityMultiplyOverflow",": " ]
+                     "value" : [ "","define ","QuantityMultiplyOverflow",": " ]
                   }, {
                      "r" : "164",
                      "s" : [ {
@@ -8148,7 +8764,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "169",
                   "s" : [ {
-                     "value" : [ "define ","QuantityMultiplyUnderflow",": " ]
+                     "value" : [ "","define ","QuantityMultiplyUnderflow",": " ]
                   }, {
                      "r" : "168",
                      "s" : [ {
@@ -8191,7 +8807,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "173",
                   "s" : [ {
-                     "value" : [ "define ","QuantityDivideOverflow",": " ]
+                     "value" : [ "","define ","QuantityDivideOverflow",": " ]
                   }, {
                      "r" : "172",
                      "s" : [ {
@@ -8234,7 +8850,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "178",
                   "s" : [ {
-                     "value" : [ "define ","QuantityDivideUnderflow",": " ]
+                     "value" : [ "","define ","QuantityDivideUnderflow",": " ]
                   }, {
                      "r" : "177",
                      "s" : [ {
@@ -8293,7 +8909,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "182",
                   "s" : [ {
-                     "value" : [ "define ","QuantityDivideByZero",": " ]
+                     "value" : [ "","define ","QuantityDivideByZero",": " ]
                   }, {
                      "r" : "181",
                      "s" : [ {
@@ -8337,7 +8953,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "185",
                   "s" : [ {
-                     "value" : [ "define ","QuantitySuccessorOverflow",": " ]
+                     "value" : [ "","define ","QuantitySuccessorOverflow",": " ]
                   }, {
                      "r" : "184",
                      "s" : [ {
@@ -8370,7 +8986,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "188",
                   "s" : [ {
-                     "value" : [ "define ","QuantityPredecessorUnderflow",": " ]
+                     "value" : [ "","define ","QuantityPredecessorUnderflow",": " ]
                   }, {
                      "r" : "187",
                      "s" : [ {
@@ -8403,7 +9019,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "193",
                   "s" : [ {
-                     "value" : [ "define ","DateTimeAddOverflow",": " ]
+                     "value" : [ "","define ","DateTimeAddOverflow",": " ]
                   }, {
                      "r" : "192",
                      "s" : [ {
@@ -8451,7 +9067,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "199",
                   "s" : [ {
-                     "value" : [ "define ","DateTimeAddUnderflow",": " ]
+                     "value" : [ "","define ","DateTimeAddUnderflow",": " ]
                   }, {
                      "r" : "198",
                      "s" : [ {
@@ -8515,7 +9131,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "205",
                   "s" : [ {
-                     "value" : [ "define ","DateTimeSubtractOverflow",": " ]
+                     "value" : [ "","define ","DateTimeSubtractOverflow",": " ]
                   }, {
                      "r" : "204",
                      "s" : [ {
@@ -8579,7 +9195,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "210",
                   "s" : [ {
-                     "value" : [ "define ","DateTimeSubtractUnderflow",": " ]
+                     "value" : [ "","define ","DateTimeSubtractUnderflow",": " ]
                   }, {
                      "r" : "209",
                      "s" : [ {
@@ -8627,7 +9243,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "214",
                   "s" : [ {
-                     "value" : [ "define ","DateTimeSuccessorOverflow",": " ]
+                     "value" : [ "","define ","DateTimeSuccessorOverflow",": " ]
                   }, {
                      "r" : "213",
                      "s" : [ {
@@ -8665,7 +9281,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "218",
                   "s" : [ {
-                     "value" : [ "define ","DateTimePredecessorUnderflow",": " ]
+                     "value" : [ "","define ","DateTimePredecessorUnderflow",": " ]
                   }, {
                      "r" : "217",
                      "s" : [ {
@@ -8703,7 +9319,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "223",
                   "s" : [ {
-                     "value" : [ "define ","DateAddOverflow",": " ]
+                     "value" : [ "","define ","DateAddOverflow",": " ]
                   }, {
                      "r" : "222",
                      "s" : [ {
@@ -8751,7 +9367,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "229",
                   "s" : [ {
-                     "value" : [ "define ","DateAddUnderflow",": " ]
+                     "value" : [ "","define ","DateAddUnderflow",": " ]
                   }, {
                      "r" : "228",
                      "s" : [ {
@@ -8815,7 +9431,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "235",
                   "s" : [ {
-                     "value" : [ "define ","DateSubtractOverflow",": " ]
+                     "value" : [ "","define ","DateSubtractOverflow",": " ]
                   }, {
                      "r" : "234",
                      "s" : [ {
@@ -8879,7 +9495,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "240",
                   "s" : [ {
-                     "value" : [ "define ","DateSubtractUnderflow",": " ]
+                     "value" : [ "","define ","DateSubtractUnderflow",": " ]
                   }, {
                      "r" : "239",
                      "s" : [ {
@@ -8927,7 +9543,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "244",
                   "s" : [ {
-                     "value" : [ "define ","DateSuccessorOverflow",": " ]
+                     "value" : [ "","define ","DateSuccessorOverflow",": " ]
                   }, {
                      "r" : "243",
                      "s" : [ {
@@ -8965,7 +9581,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "248",
                   "s" : [ {
-                     "value" : [ "define ","DatePredecessorUnderflow",": " ]
+                     "value" : [ "","define ","DatePredecessorUnderflow",": " ]
                   }, {
                      "r" : "247",
                      "s" : [ {
@@ -9003,7 +9619,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "253",
                   "s" : [ {
-                     "value" : [ "define ","TimeAddOverflow",": " ]
+                     "value" : [ "","define ","TimeAddOverflow",": " ]
                   }, {
                      "r" : "252",
                      "s" : [ {
@@ -9051,7 +9667,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "259",
                   "s" : [ {
-                     "value" : [ "define ","TimeAddUnderflow",": " ]
+                     "value" : [ "","define ","TimeAddUnderflow",": " ]
                   }, {
                      "r" : "258",
                      "s" : [ {
@@ -9115,7 +9731,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "265",
                   "s" : [ {
-                     "value" : [ "define ","TimeSubtractOverflow",": " ]
+                     "value" : [ "","define ","TimeSubtractOverflow",": " ]
                   }, {
                      "r" : "264",
                      "s" : [ {
@@ -9179,7 +9795,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "270",
                   "s" : [ {
-                     "value" : [ "define ","TimeSubtractUnderflow",": " ]
+                     "value" : [ "","define ","TimeSubtractUnderflow",": " ]
                   }, {
                      "r" : "269",
                      "s" : [ {
@@ -9227,7 +9843,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "274",
                   "s" : [ {
-                     "value" : [ "define ","TimeSuccessorOverflow",": " ]
+                     "value" : [ "","define ","TimeSuccessorOverflow",": " ]
                   }, {
                      "r" : "273",
                      "s" : [ {
@@ -9265,7 +9881,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "278",
                   "s" : [ {
-                     "value" : [ "define ","TimePredecessorUnderflow",": " ]
+                     "value" : [ "","define ","TimePredecessorUnderflow",": " ]
                   }, {
                      "r" : "277",
                      "s" : [ {
@@ -9303,7 +9919,7 @@ module.exports['OutOfBounds'] = {
                "s" : {
                   "r" : "282",
                   "s" : [ {
-                     "value" : [ "define ","ExpOverflow",": " ]
+                     "value" : [ "","define ","ExpOverflow",": " ]
                   }, {
                      "r" : "281",
                      "s" : [ {

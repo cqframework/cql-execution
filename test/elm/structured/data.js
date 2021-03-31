@@ -21,6 +21,14 @@ module.exports['Tuple'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "7",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -38,7 +46,27 @@ module.exports['Tuple'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -62,7 +90,7 @@ module.exports['Tuple'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","tup",": " ]
+                     "value" : [ "","define ","tup",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -117,7 +145,7 @@ module.exports['Tuple'] = {
                   "r" : "7",
                   "s" : [ {
                      "r" : "6",
-                     "value" : [ "define ","emptyTup",": ","{:}" ]
+                     "value" : [ "","define ","emptyTup",": ","{:}" ]
                   } ]
                }
             } ],

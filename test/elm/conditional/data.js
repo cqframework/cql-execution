@@ -21,6 +21,14 @@ module.exports['If'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "8",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -38,7 +46,22 @@ module.exports['If'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -46,11 +69,30 @@ module.exports['If'] = {
             "localId" : "3",
             "name" : "var",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","parameter ","var"," " ]
+                  }, {
+                     "r" : "2",
+                     "s" : [ {
+                        "value" : [ "Boolean" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "2",
                "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "NamedTypeSpecifier"
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -74,7 +116,7 @@ module.exports['If'] = {
                "s" : {
                   "r" : "8",
                   "s" : [ {
-                     "value" : [ "define ","exp",": " ]
+                     "value" : [ "","define ","exp",": " ]
                   }, {
                      "r" : "7",
                      "s" : [ {
@@ -106,13 +148,9 @@ module.exports['If'] = {
                "localId" : "7",
                "type" : "If",
                "condition" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "As",
-                  "operand" : {
-                     "localId" : "4",
-                     "name" : "var",
-                     "type" : "ParameterRef"
-                  }
+                  "localId" : "4",
+                  "name" : "var",
+                  "type" : "ParameterRef"
                },
                "then" : {
                   "localId" : "5",
@@ -161,6 +199,14 @@ module.exports['Case'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "30",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -178,7 +224,22 @@ module.exports['Case'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -186,6 +247,20 @@ module.exports['Case'] = {
             "localId" : "3",
             "name" : "var",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","parameter ","var"," " ]
+                  }, {
+                     "r" : "2",
+                     "s" : [ {
+                        "value" : [ "Integer" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "2",
                "name" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -195,6 +270,20 @@ module.exports['Case'] = {
             "localId" : "5",
             "name" : "X",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "","parameter ","X"," " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "Integer" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "4",
                "name" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -204,11 +293,30 @@ module.exports['Case'] = {
             "localId" : "7",
             "name" : "Y",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "","parameter ","Y"," " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "Integer" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "6",
                "name" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "NamedTypeSpecifier"
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -232,7 +340,7 @@ module.exports['Case'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","selected",":\n  " ]
+                     "value" : [ "","define ","selected",":\n  " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -335,7 +443,7 @@ module.exports['Case'] = {
                "s" : {
                   "r" : "30",
                   "s" : [ {
-                     "value" : [ "define ","standard",":\n  " ]
+                     "value" : [ "","define ","standard",":\n  " ]
                   }, {
                      "r" : "29",
                      "s" : [ {

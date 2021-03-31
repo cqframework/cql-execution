@@ -23,6 +23,14 @@ module.exports['IsSystemType'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "17",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -40,7 +48,27 @@ module.exports['IsSystemType'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -64,7 +92,7 @@ module.exports['IsSystemType'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","FiveIsInteger",": " ]
+                     "value" : [ "","define ","FiveIsInteger",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -104,7 +132,7 @@ module.exports['IsSystemType'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","FiveIsString",": " ]
+                     "value" : [ "","define ","FiveIsString",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -144,7 +172,7 @@ module.exports['IsSystemType'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","StringFiveIsInteger",": " ]
+                     "value" : [ "","define ","StringFiveIsInteger",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -188,7 +216,7 @@ module.exports['IsSystemType'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","StringFiveIsString",": " ]
+                     "value" : [ "","define ","StringFiveIsString",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -240,6 +268,14 @@ module.exports['IsListType'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "21",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -257,7 +293,27 @@ module.exports['IsListType'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -281,7 +337,7 @@ module.exports['IsListType'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","ListOfIntegersIsListOfIntegers",": " ]
+                     "value" : [ "","define ","ListOfIntegersIsListOfIntegers",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -361,7 +417,7 @@ module.exports['IsListType'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","ListOfDecimalsIsListOfIntegers",": " ]
+                     "value" : [ "","define ","ListOfDecimalsIsListOfIntegers",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {
@@ -449,6 +505,14 @@ module.exports['IsIntervalType'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "15",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -466,7 +530,27 @@ module.exports['IsIntervalType'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -490,7 +574,7 @@ module.exports['IsIntervalType'] = {
                "s" : {
                   "r" : "8",
                   "s" : [ {
-                     "value" : [ "define ","IntervalOfIntegersIsIntervalOfIntegers",": " ]
+                     "value" : [ "","define ","IntervalOfIntegersIsIntervalOfIntegers",": " ]
                   }, {
                      "r" : "7",
                      "s" : [ {
@@ -558,7 +642,7 @@ module.exports['IsIntervalType'] = {
                "s" : {
                   "r" : "15",
                   "s" : [ {
-                     "value" : [ "define ","IntervalOfDecimalsIsIntervalOfIntegers",": " ]
+                     "value" : [ "","define ","IntervalOfDecimalsIsIntervalOfIntegers",": " ]
                   }, {
                      "r" : "14",
                      "s" : [ {
@@ -634,6 +718,14 @@ module.exports['IsTupleType'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "21",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -651,7 +743,27 @@ module.exports['IsTupleType'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -675,7 +787,7 @@ module.exports['IsTupleType'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","TupleOfIntegersIsTupleOfIntegers",": " ]
+                     "value" : [ "","define ","TupleOfIntegersIsTupleOfIntegers",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -788,7 +900,7 @@ module.exports['IsTupleType'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","TupleOfDecimalsIsTupleOfIntegers",": " ]
+                     "value" : [ "","define ","TupleOfDecimalsIsTupleOfIntegers",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {
@@ -910,6 +1022,14 @@ module.exports['IsChoiceType'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "19",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -927,7 +1047,27 @@ module.exports['IsChoiceType'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -951,7 +1091,7 @@ module.exports['IsChoiceType'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","IntegerIsChoiceOfIntegersAndDecimals",": " ]
+                     "value" : [ "","define ","IntegerIsChoiceOfIntegersAndDecimals",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -1013,7 +1153,7 @@ module.exports['IsChoiceType'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","DecimalIsChoiceOfIntegersAndDecimals",": " ]
+                     "value" : [ "","define ","DecimalIsChoiceOfIntegersAndDecimals",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -1075,7 +1215,7 @@ module.exports['IsChoiceType'] = {
                "s" : {
                   "r" : "19",
                   "s" : [ {
-                     "value" : [ "define ","StringIsChoiceOfIntegersAndDecimals",": " ]
+                     "value" : [ "","define ","StringIsChoiceOfIntegersAndDecimals",": " ]
                   }, {
                      "r" : "18",
                      "s" : [ {
@@ -1152,6 +1292,14 @@ module.exports['IsCustomDataModelType'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "26",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -1169,7 +1317,27 @@ module.exports['IsCustomDataModelType'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -1193,7 +1361,7 @@ module.exports['IsCustomDataModelType'] = {
                "s" : {
                   "r" : "6",
                   "s" : [ {
-                     "value" : [ "define ","EncounterIsEncounter",": " ]
+                     "value" : [ "","define ","EncounterIsEncounter",": " ]
                   }, {
                      "r" : "5",
                      "s" : [ {
@@ -1247,7 +1415,7 @@ module.exports['IsCustomDataModelType'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","EncounterIsRecord",": " ]
+                     "value" : [ "","define ","EncounterIsRecord",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -1301,7 +1469,7 @@ module.exports['IsCustomDataModelType'] = {
                "s" : {
                   "r" : "16",
                   "s" : [ {
-                     "value" : [ "define ","EncounterIsAny",": " ]
+                     "value" : [ "","define ","EncounterIsAny",": " ]
                   }, {
                      "r" : "15",
                      "s" : [ {
@@ -1355,7 +1523,7 @@ module.exports['IsCustomDataModelType'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","EncounterIsCondition",": " ]
+                     "value" : [ "","define ","EncounterIsCondition",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {
@@ -1409,7 +1577,7 @@ module.exports['IsCustomDataModelType'] = {
                "s" : {
                   "r" : "26",
                   "s" : [ {
-                     "value" : [ "define ","EncounterIsString",": " ]
+                     "value" : [ "","define ","EncounterIsString",": " ]
                   }, {
                      "r" : "25",
                      "s" : [ {
@@ -1484,6 +1652,14 @@ module.exports['AsSystemType'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "82",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -1501,7 +1677,27 @@ module.exports['AsSystemType'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -1526,7 +1722,7 @@ module.exports['AsSystemType'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define function ","Echo","(","Val"," " ]
+                     "value" : [ "","define function ","Echo","(","Val"," " ]
                   }, {
                      "r" : "2",
                      "s" : [ {
@@ -1568,7 +1764,7 @@ module.exports['AsSystemType'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","FiveAsInteger",": " ]
+                     "value" : [ "// fool CQL-to-ELM into letting the casts compile","define ","FiveAsInteger",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -1619,7 +1815,7 @@ module.exports['AsSystemType'] = {
                "s" : {
                   "r" : "14",
                   "s" : [ {
-                     "value" : [ "define ","FiveAsString",": " ]
+                     "value" : [ "","define ","FiveAsString",": " ]
                   }, {
                      "r" : "13",
                      "s" : [ {
@@ -1670,7 +1866,7 @@ module.exports['AsSystemType'] = {
                "s" : {
                   "r" : "19",
                   "s" : [ {
-                     "value" : [ "define ","StringFiveAsInteger",": " ]
+                     "value" : [ "","define ","StringFiveAsInteger",": " ]
                   }, {
                      "r" : "18",
                      "s" : [ {
@@ -1727,7 +1923,7 @@ module.exports['AsSystemType'] = {
                "s" : {
                   "r" : "24",
                   "s" : [ {
-                     "value" : [ "define ","StringFiveAsString",": " ]
+                     "value" : [ "","define ","StringFiveAsString",": " ]
                   }, {
                      "r" : "23",
                      "s" : [ {
@@ -1784,7 +1980,7 @@ module.exports['AsSystemType'] = {
                "s" : {
                   "r" : "30",
                   "s" : [ {
-                     "value" : [ "define ","ListAsInteger",": " ]
+                     "value" : [ "","define ","ListAsInteger",": " ]
                   }, {
                      "r" : "29",
                      "s" : [ {
@@ -1846,7 +2042,7 @@ module.exports['AsSystemType'] = {
                "s" : {
                   "r" : "37",
                   "s" : [ {
-                     "value" : [ "define ","IntervalAsInteger",": " ]
+                     "value" : [ "","define ","IntervalAsInteger",": " ]
                   }, {
                      "r" : "36",
                      "s" : [ {
@@ -1916,7 +2112,7 @@ module.exports['AsSystemType'] = {
                "s" : {
                   "r" : "43",
                   "s" : [ {
-                     "value" : [ "define ","TupleAsInteger",": " ]
+                     "value" : [ "","define ","TupleAsInteger",": " ]
                   }, {
                      "r" : "42",
                      "s" : [ {
@@ -1987,7 +2183,7 @@ module.exports['AsSystemType'] = {
                "s" : {
                   "r" : "48",
                   "s" : [ {
-                     "value" : [ "define ","CastFiveAsInteger",": " ]
+                     "value" : [ "","define ","CastFiveAsInteger",": " ]
                   }, {
                      "r" : "47",
                      "s" : [ {
@@ -2040,7 +2236,7 @@ module.exports['AsSystemType'] = {
                "s" : {
                   "r" : "53",
                   "s" : [ {
-                     "value" : [ "define ","CastFiveAsString",": " ]
+                     "value" : [ "","define ","CastFiveAsString",": " ]
                   }, {
                      "r" : "52",
                      "s" : [ {
@@ -2093,7 +2289,7 @@ module.exports['AsSystemType'] = {
                "s" : {
                   "r" : "58",
                   "s" : [ {
-                     "value" : [ "define ","CastStringFiveAsInteger",": " ]
+                     "value" : [ "","define ","CastStringFiveAsInteger",": " ]
                   }, {
                      "r" : "57",
                      "s" : [ {
@@ -2152,7 +2348,7 @@ module.exports['AsSystemType'] = {
                "s" : {
                   "r" : "63",
                   "s" : [ {
-                     "value" : [ "define ","CastStringFiveAsString",": " ]
+                     "value" : [ "","define ","CastStringFiveAsString",": " ]
                   }, {
                      "r" : "62",
                      "s" : [ {
@@ -2211,7 +2407,7 @@ module.exports['AsSystemType'] = {
                "s" : {
                   "r" : "69",
                   "s" : [ {
-                     "value" : [ "define ","CastListAsInteger",": " ]
+                     "value" : [ "","define ","CastListAsInteger",": " ]
                   }, {
                      "r" : "68",
                      "s" : [ {
@@ -2275,7 +2471,7 @@ module.exports['AsSystemType'] = {
                "s" : {
                   "r" : "76",
                   "s" : [ {
-                     "value" : [ "define ","CastIntervalAsInteger",": " ]
+                     "value" : [ "","define ","CastIntervalAsInteger",": " ]
                   }, {
                      "r" : "75",
                      "s" : [ {
@@ -2347,7 +2543,7 @@ module.exports['AsSystemType'] = {
                "s" : {
                   "r" : "82",
                   "s" : [ {
-                     "value" : [ "define ","CastTupleAsInteger",": " ]
+                     "value" : [ "","define ","CastTupleAsInteger",": " ]
                   }, {
                      "r" : "81",
                      "s" : [ {
@@ -2437,6 +2633,14 @@ module.exports['AsListType'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "88",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -2454,7 +2658,27 @@ module.exports['AsListType'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2479,7 +2703,7 @@ module.exports['AsListType'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define function ","Echo","(","Val"," " ]
+                     "value" : [ "","define function ","Echo","(","Val"," " ]
                   }, {
                      "r" : "2",
                      "s" : [ {
@@ -2521,7 +2745,7 @@ module.exports['AsListType'] = {
                "s" : {
                   "r" : "15",
                   "s" : [ {
-                     "value" : [ "define ","ListOfIntegersAsListOfIntegers",": " ]
+                     "value" : [ "// fool CQL-to-ELM into letting the casts compile","define ","ListOfIntegersAsListOfIntegers",": " ]
                   }, {
                      "r" : "14",
                      "s" : [ {
@@ -2614,7 +2838,7 @@ module.exports['AsListType'] = {
                "s" : {
                   "r" : "25",
                   "s" : [ {
-                     "value" : [ "define ","ListOfStringsAsListOfIntegers",": " ]
+                     "value" : [ "","define ","ListOfStringsAsListOfIntegers",": " ]
                   }, {
                      "r" : "24",
                      "s" : [ {
@@ -2729,7 +2953,7 @@ module.exports['AsListType'] = {
                "s" : {
                   "r" : "31",
                   "s" : [ {
-                     "value" : [ "define ","IntegerAsListOfIntegers",": " ]
+                     "value" : [ "","define ","IntegerAsListOfIntegers",": " ]
                   }, {
                      "r" : "30",
                      "s" : [ {
@@ -2791,7 +3015,7 @@ module.exports['AsListType'] = {
                "s" : {
                   "r" : "39",
                   "s" : [ {
-                     "value" : [ "define ","IntervalAsListOfIntegers",": " ]
+                     "value" : [ "","define ","IntervalAsListOfIntegers",": " ]
                   }, {
                      "r" : "38",
                      "s" : [ {
@@ -2872,7 +3096,7 @@ module.exports['AsListType'] = {
                "s" : {
                   "r" : "46",
                   "s" : [ {
-                     "value" : [ "define ","TupleAsListOfIntegers",": " ]
+                     "value" : [ "","define ","TupleAsListOfIntegers",": " ]
                   }, {
                      "r" : "45",
                      "s" : [ {
@@ -2954,7 +3178,7 @@ module.exports['AsListType'] = {
                "s" : {
                   "r" : "57",
                   "s" : [ {
-                     "value" : [ "define ","CastListOfIntegersAsListOfIntegers",": " ]
+                     "value" : [ "","define ","CastListOfIntegersAsListOfIntegers",": " ]
                   }, {
                      "r" : "56",
                      "s" : [ {
@@ -3049,7 +3273,7 @@ module.exports['AsListType'] = {
                "s" : {
                   "r" : "67",
                   "s" : [ {
-                     "value" : [ "define ","CastListOfStringsAsListOfIntegers",": " ]
+                     "value" : [ "","define ","CastListOfStringsAsListOfIntegers",": " ]
                   }, {
                      "r" : "66",
                      "s" : [ {
@@ -3166,7 +3390,7 @@ module.exports['AsListType'] = {
                "s" : {
                   "r" : "73",
                   "s" : [ {
-                     "value" : [ "define ","CastIntegerAsListOfIntegers",": " ]
+                     "value" : [ "","define ","CastIntegerAsListOfIntegers",": " ]
                   }, {
                      "r" : "72",
                      "s" : [ {
@@ -3230,7 +3454,7 @@ module.exports['AsListType'] = {
                "s" : {
                   "r" : "81",
                   "s" : [ {
-                     "value" : [ "define ","CastIntervalAsListOfIntegers",": " ]
+                     "value" : [ "","define ","CastIntervalAsListOfIntegers",": " ]
                   }, {
                      "r" : "80",
                      "s" : [ {
@@ -3313,7 +3537,7 @@ module.exports['AsListType'] = {
                "s" : {
                   "r" : "88",
                   "s" : [ {
-                     "value" : [ "define ","CastTupleAsListOfIntegers",": " ]
+                     "value" : [ "","define ","CastTupleAsListOfIntegers",": " ]
                   }, {
                      "r" : "87",
                      "s" : [ {
@@ -3414,6 +3638,14 @@ module.exports['AsIntervalType'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "84",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -3431,7 +3663,27 @@ module.exports['AsIntervalType'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -3456,7 +3708,7 @@ module.exports['AsIntervalType'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define function ","Echo","(","Val"," " ]
+                     "value" : [ "","define function ","Echo","(","Val"," " ]
                   }, {
                      "r" : "2",
                      "s" : [ {
@@ -3498,7 +3750,7 @@ module.exports['AsIntervalType'] = {
                "s" : {
                   "r" : "12",
                   "s" : [ {
-                     "value" : [ "define ","IntervalOfIntegersAsIntervalOfIntegers",": " ]
+                     "value" : [ "// fool CQL-to-ELM into letting the casts compile","define ","IntervalOfIntegersAsIntervalOfIntegers",": " ]
                   }, {
                      "r" : "11",
                      "s" : [ {
@@ -3579,7 +3831,7 @@ module.exports['AsIntervalType'] = {
                "s" : {
                   "r" : "20",
                   "s" : [ {
-                     "value" : [ "define ","IntervalOfDatesAsIntervalOfIntegers",": " ]
+                     "value" : [ "","define ","IntervalOfDatesAsIntervalOfIntegers",": " ]
                   }, {
                      "r" : "19",
                      "s" : [ {
@@ -3686,7 +3938,7 @@ module.exports['AsIntervalType'] = {
                "s" : {
                   "r" : "26",
                   "s" : [ {
-                     "value" : [ "define ","IntegerAsIntervalOfIntegers",": " ]
+                     "value" : [ "","define ","IntegerAsIntervalOfIntegers",": " ]
                   }, {
                      "r" : "25",
                      "s" : [ {
@@ -3748,7 +4000,7 @@ module.exports['AsIntervalType'] = {
                "s" : {
                   "r" : "37",
                   "s" : [ {
-                     "value" : [ "define ","ListAsIntervalOfIntegers",": " ]
+                     "value" : [ "","define ","ListAsIntervalOfIntegers",": " ]
                   }, {
                      "r" : "36",
                      "s" : [ {
@@ -3841,7 +4093,7 @@ module.exports['AsIntervalType'] = {
                "s" : {
                   "r" : "44",
                   "s" : [ {
-                     "value" : [ "define ","TupleAsIntervalOfIntegers",": " ]
+                     "value" : [ "","define ","TupleAsIntervalOfIntegers",": " ]
                   }, {
                      "r" : "43",
                      "s" : [ {
@@ -3923,7 +4175,7 @@ module.exports['AsIntervalType'] = {
                "s" : {
                   "r" : "52",
                   "s" : [ {
-                     "value" : [ "define ","CastIntervalOfIntegersAsIntervalOfIntegers",": " ]
+                     "value" : [ "","define ","CastIntervalOfIntegersAsIntervalOfIntegers",": " ]
                   }, {
                      "r" : "51",
                      "s" : [ {
@@ -4006,7 +4258,7 @@ module.exports['AsIntervalType'] = {
                "s" : {
                   "r" : "60",
                   "s" : [ {
-                     "value" : [ "define ","CastIntervalOfDatesAsIntervalOfIntegers",": " ]
+                     "value" : [ "","define ","CastIntervalOfDatesAsIntervalOfIntegers",": " ]
                   }, {
                      "r" : "59",
                      "s" : [ {
@@ -4115,7 +4367,7 @@ module.exports['AsIntervalType'] = {
                "s" : {
                   "r" : "66",
                   "s" : [ {
-                     "value" : [ "define ","CastIntegerAsIntervalOfIntegers",": " ]
+                     "value" : [ "","define ","CastIntegerAsIntervalOfIntegers",": " ]
                   }, {
                      "r" : "65",
                      "s" : [ {
@@ -4179,7 +4431,7 @@ module.exports['AsIntervalType'] = {
                "s" : {
                   "r" : "77",
                   "s" : [ {
-                     "value" : [ "define ","CastListAsIntervalOfIntegers",": " ]
+                     "value" : [ "","define ","CastListAsIntervalOfIntegers",": " ]
                   }, {
                      "r" : "76",
                      "s" : [ {
@@ -4274,7 +4526,7 @@ module.exports['AsIntervalType'] = {
                "s" : {
                   "r" : "84",
                   "s" : [ {
-                     "value" : [ "define ","CastTupleAsIntervalOfIntegers",": " ]
+                     "value" : [ "","define ","CastTupleAsIntervalOfIntegers",": " ]
                   }, {
                      "r" : "83",
                      "s" : [ {
@@ -4375,6 +4627,14 @@ module.exports['AsTupleType'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "96",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -4392,7 +4652,27 @@ module.exports['AsTupleType'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -4417,7 +4697,7 @@ module.exports['AsTupleType'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define function ","Echo","(","Val"," " ]
+                     "value" : [ "","define function ","Echo","(","Val"," " ]
                   }, {
                      "r" : "2",
                      "s" : [ {
@@ -4459,7 +4739,7 @@ module.exports['AsTupleType'] = {
                "s" : {
                   "r" : "15",
                   "s" : [ {
-                     "value" : [ "define ","TupleOfAIntegerBStringAsTupleOfAIntegerBString",": " ]
+                     "value" : [ "// fool CQL-to-ELM into letting the casts compile","define ","TupleOfAIntegerBStringAsTupleOfAIntegerBString",": " ]
                   }, {
                      "r" : "14",
                      "s" : [ {
@@ -4589,7 +4869,7 @@ module.exports['AsTupleType'] = {
                "s" : {
                   "r" : "26",
                   "s" : [ {
-                     "value" : [ "define ","TupleOfAStringBIntegerAsTupleOfAIntegerBString",": " ]
+                     "value" : [ "","define ","TupleOfAStringBIntegerAsTupleOfAIntegerBString",": " ]
                   }, {
                      "r" : "25",
                      "s" : [ {
@@ -4719,7 +4999,7 @@ module.exports['AsTupleType'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","IntegerAsTupleOfInteger",": " ]
+                     "value" : [ "","define ","IntegerAsTupleOfInteger",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -4790,7 +5070,7 @@ module.exports['AsTupleType'] = {
                "s" : {
                   "r" : "41",
                   "s" : [ {
-                     "value" : [ "define ","ListAsTupleOfInteger",": " ]
+                     "value" : [ "","define ","ListAsTupleOfInteger",": " ]
                   }, {
                      "r" : "40",
                      "s" : [ {
@@ -4872,7 +5152,7 @@ module.exports['AsTupleType'] = {
                "s" : {
                   "r" : "50",
                   "s" : [ {
-                     "value" : [ "define ","IntervalAsTupleOfInteger",": " ]
+                     "value" : [ "","define ","IntervalAsTupleOfInteger",": " ]
                   }, {
                      "r" : "49",
                      "s" : [ {
@@ -4962,7 +5242,7 @@ module.exports['AsTupleType'] = {
                "s" : {
                   "r" : "61",
                   "s" : [ {
-                     "value" : [ "define ","CastTupleOfAIntegerBStringAsTupleOfAIntegerBString",": " ]
+                     "value" : [ "","define ","CastTupleOfAIntegerBStringAsTupleOfAIntegerBString",": " ]
                   }, {
                      "r" : "60",
                      "s" : [ {
@@ -5094,7 +5374,7 @@ module.exports['AsTupleType'] = {
                "s" : {
                   "r" : "72",
                   "s" : [ {
-                     "value" : [ "define ","CastTupleOfAStringBIntegerAsTupleOfAIntegerBString",": " ]
+                     "value" : [ "","define ","CastTupleOfAStringBIntegerAsTupleOfAIntegerBString",": " ]
                   }, {
                      "r" : "71",
                      "s" : [ {
@@ -5226,7 +5506,7 @@ module.exports['AsTupleType'] = {
                "s" : {
                   "r" : "79",
                   "s" : [ {
-                     "value" : [ "define ","CastIntegerAsTupleOfInteger",": " ]
+                     "value" : [ "","define ","CastIntegerAsTupleOfInteger",": " ]
                   }, {
                      "r" : "78",
                      "s" : [ {
@@ -5299,7 +5579,7 @@ module.exports['AsTupleType'] = {
                "s" : {
                   "r" : "87",
                   "s" : [ {
-                     "value" : [ "define ","CastListAsTupleOfInteger",": " ]
+                     "value" : [ "","define ","CastListAsTupleOfInteger",": " ]
                   }, {
                      "r" : "86",
                      "s" : [ {
@@ -5383,7 +5663,7 @@ module.exports['AsTupleType'] = {
                "s" : {
                   "r" : "96",
                   "s" : [ {
-                     "value" : [ "define ","CastIntervalAsTupleOfInteger",": " ]
+                     "value" : [ "","define ","CastIntervalAsTupleOfInteger",": " ]
                   }, {
                      "r" : "95",
                      "s" : [ {
@@ -5494,6 +5774,14 @@ module.exports['AsChoiceType'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "100",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -5511,7 +5799,27 @@ module.exports['AsChoiceType'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -5536,7 +5844,7 @@ module.exports['AsChoiceType'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define function ","Echo","(","Val"," " ]
+                     "value" : [ "","define function ","Echo","(","Val"," " ]
                   }, {
                      "r" : "2",
                      "s" : [ {
@@ -5578,7 +5886,7 @@ module.exports['AsChoiceType'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","IntegerAsChoiceOfIntegersAndStrings",": " ]
+                     "value" : [ "// fool CQL-to-ELM into letting the casts compile","define ","IntegerAsChoiceOfIntegersAndStrings",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -5651,7 +5959,7 @@ module.exports['AsChoiceType'] = {
                "s" : {
                   "r" : "18",
                   "s" : [ {
-                     "value" : [ "define ","StringAsChoiceOfIntegersAndStrings",": " ]
+                     "value" : [ "","define ","StringAsChoiceOfIntegersAndStrings",": " ]
                   }, {
                      "r" : "17",
                      "s" : [ {
@@ -5730,7 +6038,7 @@ module.exports['AsChoiceType'] = {
                "s" : {
                   "r" : "25",
                   "s" : [ {
-                     "value" : [ "define ","DecimalAsChoiceOfIntegersAndStrings",": " ]
+                     "value" : [ "","define ","DecimalAsChoiceOfIntegersAndStrings",": " ]
                   }, {
                      "r" : "24",
                      "s" : [ {
@@ -5803,7 +6111,7 @@ module.exports['AsChoiceType'] = {
                "s" : {
                   "r" : "34",
                   "s" : [ {
-                     "value" : [ "define ","ListAsChoiceOfIntegersAndStrings",": " ]
+                     "value" : [ "","define ","ListAsChoiceOfIntegersAndStrings",": " ]
                   }, {
                      "r" : "33",
                      "s" : [ {
@@ -5899,7 +6207,7 @@ module.exports['AsChoiceType'] = {
                "s" : {
                   "r" : "43",
                   "s" : [ {
-                     "value" : [ "define ","IntervalAsChoiceOfIntegersAndStrings",": " ]
+                     "value" : [ "","define ","IntervalAsChoiceOfIntegersAndStrings",": " ]
                   }, {
                      "r" : "42",
                      "s" : [ {
@@ -5991,7 +6299,7 @@ module.exports['AsChoiceType'] = {
                "s" : {
                   "r" : "52",
                   "s" : [ {
-                     "value" : [ "define ","TupleAsChoiceOfIntegersAndStrings",": " ]
+                     "value" : [ "","define ","TupleAsChoiceOfIntegersAndStrings",": " ]
                   }, {
                      "r" : "51",
                      "s" : [ {
@@ -6103,7 +6411,7 @@ module.exports['AsChoiceType'] = {
                "s" : {
                   "r" : "59",
                   "s" : [ {
-                     "value" : [ "define ","CastIntegerAsChoiceOfIntegersAndStrings",": " ]
+                     "value" : [ "","define ","CastIntegerAsChoiceOfIntegersAndStrings",": " ]
                   }, {
                      "r" : "58",
                      "s" : [ {
@@ -6178,7 +6486,7 @@ module.exports['AsChoiceType'] = {
                "s" : {
                   "r" : "66",
                   "s" : [ {
-                     "value" : [ "define ","CastStringAsChoiceOfIntegersAndStrings",": " ]
+                     "value" : [ "","define ","CastStringAsChoiceOfIntegersAndStrings",": " ]
                   }, {
                      "r" : "65",
                      "s" : [ {
@@ -6259,7 +6567,7 @@ module.exports['AsChoiceType'] = {
                "s" : {
                   "r" : "73",
                   "s" : [ {
-                     "value" : [ "define ","CastDecimalAsChoiceOfIntegersAndStrings",": " ]
+                     "value" : [ "","define ","CastDecimalAsChoiceOfIntegersAndStrings",": " ]
                   }, {
                      "r" : "72",
                      "s" : [ {
@@ -6334,7 +6642,7 @@ module.exports['AsChoiceType'] = {
                "s" : {
                   "r" : "82",
                   "s" : [ {
-                     "value" : [ "define ","CastListAsChoiceOfIntegersAndStrings",": " ]
+                     "value" : [ "","define ","CastListAsChoiceOfIntegersAndStrings",": " ]
                   }, {
                      "r" : "81",
                      "s" : [ {
@@ -6432,7 +6740,7 @@ module.exports['AsChoiceType'] = {
                "s" : {
                   "r" : "91",
                   "s" : [ {
-                     "value" : [ "define ","CastIntervalAsChoiceOfIntegersAndStrings",": " ]
+                     "value" : [ "","define ","CastIntervalAsChoiceOfIntegersAndStrings",": " ]
                   }, {
                      "r" : "90",
                      "s" : [ {
@@ -6526,7 +6834,7 @@ module.exports['AsChoiceType'] = {
                "s" : {
                   "r" : "100",
                   "s" : [ {
-                     "value" : [ "define ","CastTupleAsChoiceOfIntegersAndStrings",": " ]
+                     "value" : [ "","define ","CastTupleAsChoiceOfIntegersAndStrings",": " ]
                   }, {
                      "r" : "99",
                      "s" : [ {
@@ -6665,6 +6973,14 @@ module.exports['AsCustomDataModelType'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "112",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -6682,7 +6998,27 @@ module.exports['AsCustomDataModelType'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -6707,7 +7043,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define function ","Echo","(","Val"," " ]
+                     "value" : [ "","define function ","Echo","(","Val"," " ]
                   }, {
                      "r" : "2",
                      "s" : [ {
@@ -6749,7 +7085,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "10",
                   "s" : [ {
-                     "value" : [ "define ","EncounterAsEncounter",": " ]
+                     "value" : [ "// fool CQL-to-ELM into letting the casts compile","define ","EncounterAsEncounter",": " ]
                   }, {
                      "r" : "9",
                      "s" : [ {
@@ -6816,7 +7152,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "16",
                   "s" : [ {
-                     "value" : [ "define ","EncounterAsRecord",": " ]
+                     "value" : [ "","define ","EncounterAsRecord",": " ]
                   }, {
                      "r" : "15",
                      "s" : [ {
@@ -6883,7 +7219,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "22",
                   "s" : [ {
-                     "value" : [ "define ","EncounterAsAny",": " ]
+                     "value" : [ "","define ","EncounterAsAny",": " ]
                   }, {
                      "r" : "21",
                      "s" : [ {
@@ -6950,7 +7286,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "28",
                   "s" : [ {
-                     "value" : [ "define ","EncounterAsCondition",": " ]
+                     "value" : [ "","define ","EncounterAsCondition",": " ]
                   }, {
                      "r" : "27",
                      "s" : [ {
@@ -7017,7 +7353,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "34",
                   "s" : [ {
-                     "value" : [ "define ","EncounterAsString",": " ]
+                     "value" : [ "","define ","EncounterAsString",": " ]
                   }, {
                      "r" : "33",
                      "s" : [ {
@@ -7084,7 +7420,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "39",
                   "s" : [ {
-                     "value" : [ "define ","ListAsEncounter",": " ]
+                     "value" : [ "","define ","ListAsEncounter",": " ]
                   }, {
                      "r" : "38",
                      "s" : [ {
@@ -7140,7 +7476,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "46",
                   "s" : [ {
-                     "value" : [ "define ","IntervalAsEncounter",": " ]
+                     "value" : [ "","define ","IntervalAsEncounter",": " ]
                   }, {
                      "r" : "45",
                      "s" : [ {
@@ -7210,7 +7546,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "52",
                   "s" : [ {
-                     "value" : [ "define ","TupleAsEncounter",": " ]
+                     "value" : [ "","define ","TupleAsEncounter",": " ]
                   }, {
                      "r" : "51",
                      "s" : [ {
@@ -7285,7 +7621,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "58",
                   "s" : [ {
-                     "value" : [ "define ","NamedTupleAsEncounter",": " ]
+                     "value" : [ "","define ","NamedTupleAsEncounter",": " ]
                   }, {
                      "r" : "57",
                      "s" : [ {
@@ -7361,7 +7697,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "64",
                   "s" : [ {
-                     "value" : [ "define ","CastEncounterAsEncounter",": " ]
+                     "value" : [ "","define ","CastEncounterAsEncounter",": " ]
                   }, {
                      "r" : "63",
                      "s" : [ {
@@ -7430,7 +7766,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "70",
                   "s" : [ {
-                     "value" : [ "define ","CastEncounterAsRecord",": " ]
+                     "value" : [ "","define ","CastEncounterAsRecord",": " ]
                   }, {
                      "r" : "69",
                      "s" : [ {
@@ -7499,7 +7835,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "76",
                   "s" : [ {
-                     "value" : [ "define ","CastEncounterAsAny",": " ]
+                     "value" : [ "","define ","CastEncounterAsAny",": " ]
                   }, {
                      "r" : "75",
                      "s" : [ {
@@ -7568,7 +7904,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "82",
                   "s" : [ {
-                     "value" : [ "define ","CastEncounterAsCondition",": " ]
+                     "value" : [ "","define ","CastEncounterAsCondition",": " ]
                   }, {
                      "r" : "81",
                      "s" : [ {
@@ -7637,7 +7973,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "88",
                   "s" : [ {
-                     "value" : [ "define ","CastEncounterAsString",": " ]
+                     "value" : [ "","define ","CastEncounterAsString",": " ]
                   }, {
                      "r" : "87",
                      "s" : [ {
@@ -7706,7 +8042,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "93",
                   "s" : [ {
-                     "value" : [ "define ","CastListAsEncounter",": " ]
+                     "value" : [ "","define ","CastListAsEncounter",": " ]
                   }, {
                      "r" : "92",
                      "s" : [ {
@@ -7764,7 +8100,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "100",
                   "s" : [ {
-                     "value" : [ "define ","CastIntervalAsEncounter",": " ]
+                     "value" : [ "","define ","CastIntervalAsEncounter",": " ]
                   }, {
                      "r" : "99",
                      "s" : [ {
@@ -7836,7 +8172,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "106",
                   "s" : [ {
-                     "value" : [ "define ","CastTupleAsEncounter",": " ]
+                     "value" : [ "","define ","CastTupleAsEncounter",": " ]
                   }, {
                      "r" : "105",
                      "s" : [ {
@@ -7913,7 +8249,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "112",
                   "s" : [ {
-                     "value" : [ "define ","CastNamedTupleAsEncounter",": " ]
+                     "value" : [ "","define ","CastNamedTupleAsEncounter",": " ]
                   }, {
                      "r" : "111",
                      "s" : [ {

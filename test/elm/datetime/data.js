@@ -27,6 +27,14 @@ module.exports['DateTime'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "54",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -44,7 +52,27 @@ module.exports['DateTime'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -68,7 +96,7 @@ module.exports['DateTime'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define ","Year",": " ]
+                     "value" : [ "","define ","Year",": " ]
                   }, {
                      "r" : "3",
                      "s" : [ {
@@ -98,7 +126,7 @@ module.exports['DateTime'] = {
                "s" : {
                   "r" : "8",
                   "s" : [ {
-                     "value" : [ "define ","Month",": " ]
+                     "value" : [ "","define ","Month",": " ]
                   }, {
                      "r" : "7",
                      "s" : [ {
@@ -134,7 +162,7 @@ module.exports['DateTime'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","Day",": " ]
+                     "value" : [ "","define ","Day",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -176,7 +204,7 @@ module.exports['DateTime'] = {
                "s" : {
                   "r" : "19",
                   "s" : [ {
-                     "value" : [ "define ","Hour",": " ]
+                     "value" : [ "","define ","Hour",": " ]
                   }, {
                      "r" : "18",
                      "s" : [ {
@@ -224,7 +252,7 @@ module.exports['DateTime'] = {
                "s" : {
                   "r" : "26",
                   "s" : [ {
-                     "value" : [ "define ","Minute",": " ]
+                     "value" : [ "","define ","Minute",": " ]
                   }, {
                      "r" : "25",
                      "s" : [ {
@@ -278,7 +306,7 @@ module.exports['DateTime'] = {
                "s" : {
                   "r" : "34",
                   "s" : [ {
-                     "value" : [ "define ","Second",": " ]
+                     "value" : [ "","define ","Second",": " ]
                   }, {
                      "r" : "33",
                      "s" : [ {
@@ -338,7 +366,7 @@ module.exports['DateTime'] = {
                "s" : {
                   "r" : "43",
                   "s" : [ {
-                     "value" : [ "define ","Millisecond",": " ]
+                     "value" : [ "","define ","Millisecond",": " ]
                   }, {
                      "r" : "42",
                      "s" : [ {
@@ -404,7 +432,7 @@ module.exports['DateTime'] = {
                "s" : {
                   "r" : "54",
                   "s" : [ {
-                     "value" : [ "define ","TimezoneOffset",": " ]
+                     "value" : [ "","define ","TimezoneOffset",": " ]
                   }, {
                      "r" : "53",
                      "s" : [ {
@@ -498,6 +526,14 @@ module.exports['Time'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "19",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -515,7 +551,27 @@ module.exports['Time'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -539,7 +595,7 @@ module.exports['Time'] = {
                "s" : {
                   "r" : "4",
                   "s" : [ {
-                     "value" : [ "define ","Hour",": " ]
+                     "value" : [ "","define ","Hour",": " ]
                   }, {
                      "r" : "3",
                      "s" : [ {
@@ -569,7 +625,7 @@ module.exports['Time'] = {
                "s" : {
                   "r" : "8",
                   "s" : [ {
-                     "value" : [ "define ","Minute",": " ]
+                     "value" : [ "","define ","Minute",": " ]
                   }, {
                      "r" : "7",
                      "s" : [ {
@@ -605,7 +661,7 @@ module.exports['Time'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","Second",": " ]
+                     "value" : [ "","define ","Second",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -647,7 +703,7 @@ module.exports['Time'] = {
                "s" : {
                   "r" : "19",
                   "s" : [ {
-                     "value" : [ "define ","Millisecond",": " ]
+                     "value" : [ "","define ","Millisecond",": " ]
                   }, {
                      "r" : "18",
                      "s" : [ {
@@ -702,6 +758,14 @@ module.exports['Today'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "3",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -719,7 +783,27 @@ module.exports['Today'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -743,7 +827,7 @@ module.exports['Today'] = {
                "s" : {
                   "r" : "3",
                   "s" : [ {
-                     "value" : [ "define ","TodayVar",": " ]
+                     "value" : [ "","define ","TodayVar",": " ]
                   }, {
                      "r" : "2",
                      "s" : [ {
@@ -773,6 +857,14 @@ module.exports['Now'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "3",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -790,7 +882,27 @@ module.exports['Now'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -814,7 +926,7 @@ module.exports['Now'] = {
                "s" : {
                   "r" : "3",
                   "s" : [ {
-                     "value" : [ "define ","NowVar",": " ]
+                     "value" : [ "","define ","NowVar",": " ]
                   }, {
                      "r" : "2",
                      "s" : [ {
@@ -844,6 +956,14 @@ module.exports['TimeOfDay'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "3",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -861,7 +981,27 @@ module.exports['TimeOfDay'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -885,7 +1025,7 @@ module.exports['TimeOfDay'] = {
                "s" : {
                   "r" : "3",
                   "s" : [ {
-                     "value" : [ "define ","TimeOfDayVar",": " ]
+                     "value" : [ "","define ","TimeOfDayVar",": " ]
                   }, {
                      "r" : "2",
                      "s" : [ {
@@ -933,6 +1073,14 @@ module.exports['DateTimeComponentFrom'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "58",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -950,7 +1098,27 @@ module.exports['DateTimeComponentFrom'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -974,7 +1142,7 @@ module.exports['DateTimeComponentFrom'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","IdesOfMarch",": " ]
+                     "value" : [ "","define ","IdesOfMarch",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -1054,7 +1222,7 @@ module.exports['DateTimeComponentFrom'] = {
                "s" : {
                   "r" : "14",
                   "s" : [ {
-                     "value" : [ "define ","Year",": " ]
+                     "value" : [ "","define ","Year",": " ]
                   }, {
                      "r" : "13",
                      "s" : [ {
@@ -1088,7 +1256,7 @@ module.exports['DateTimeComponentFrom'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","Month",": " ]
+                     "value" : [ "","define ","Month",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -1122,7 +1290,7 @@ module.exports['DateTimeComponentFrom'] = {
                "s" : {
                   "r" : "20",
                   "s" : [ {
-                     "value" : [ "define ","Day",": " ]
+                     "value" : [ "","define ","Day",": " ]
                   }, {
                      "r" : "19",
                      "s" : [ {
@@ -1156,7 +1324,7 @@ module.exports['DateTimeComponentFrom'] = {
                "s" : {
                   "r" : "23",
                   "s" : [ {
-                     "value" : [ "define ","Hour",": " ]
+                     "value" : [ "","define ","Hour",": " ]
                   }, {
                      "r" : "22",
                      "s" : [ {
@@ -1190,7 +1358,7 @@ module.exports['DateTimeComponentFrom'] = {
                "s" : {
                   "r" : "26",
                   "s" : [ {
-                     "value" : [ "define ","Minute",": " ]
+                     "value" : [ "","define ","Minute",": " ]
                   }, {
                      "r" : "25",
                      "s" : [ {
@@ -1224,7 +1392,7 @@ module.exports['DateTimeComponentFrom'] = {
                "s" : {
                   "r" : "29",
                   "s" : [ {
-                     "value" : [ "define ","Second",": " ]
+                     "value" : [ "","define ","Second",": " ]
                   }, {
                      "r" : "28",
                      "s" : [ {
@@ -1258,7 +1426,7 @@ module.exports['DateTimeComponentFrom'] = {
                "s" : {
                   "r" : "32",
                   "s" : [ {
-                     "value" : [ "define ","Millisecond",": " ]
+                     "value" : [ "","define ","Millisecond",": " ]
                   }, {
                      "r" : "31",
                      "s" : [ {
@@ -1292,7 +1460,7 @@ module.exports['DateTimeComponentFrom'] = {
                "s" : {
                   "r" : "37",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseIdesOfMarch",": " ]
+                     "value" : [ "","define ","ImpreciseIdesOfMarch",": " ]
                   }, {
                      "r" : "36",
                      "s" : [ {
@@ -1334,7 +1502,7 @@ module.exports['DateTimeComponentFrom'] = {
                "s" : {
                   "r" : "53",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseComponentTuple",": " ]
+                     "value" : [ "","define ","ImpreciseComponentTuple",": " ]
                   }, {
                      "r" : "52",
                      "s" : [ {
@@ -1554,7 +1722,7 @@ module.exports['DateTimeComponentFrom'] = {
                "s" : {
                   "r" : "58",
                   "s" : [ {
-                     "value" : [ "define ","NullDate",": " ]
+                     "value" : [ "","define ","NullDate",": " ]
                   }, {
                      "r" : "57",
                      "s" : [ {
@@ -1619,6 +1787,14 @@ module.exports['DateFrom'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "21",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -1636,7 +1812,27 @@ module.exports['DateFrom'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -1660,7 +1856,7 @@ module.exports['DateFrom'] = {
                "s" : {
                   "r" : "12",
                   "s" : [ {
-                     "value" : [ "define ","Date",": " ]
+                     "value" : [ "","define ","Date",": " ]
                   }, {
                      "r" : "11",
                      "s" : [ {
@@ -1749,7 +1945,7 @@ module.exports['DateFrom'] = {
                "s" : {
                   "r" : "16",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseDate",": " ]
+                     "value" : [ "","define ","ImpreciseDate",": " ]
                   }, {
                      "r" : "15",
                      "s" : [ {
@@ -1788,7 +1984,7 @@ module.exports['DateFrom'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","NullDate",": " ]
+                     "value" : [ "","define ","NullDate",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {
@@ -1852,6 +2048,14 @@ module.exports['TimeFrom'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "21",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -1869,7 +2073,27 @@ module.exports['TimeFrom'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -1893,7 +2117,7 @@ module.exports['TimeFrom'] = {
                "s" : {
                   "r" : "12",
                   "s" : [ {
-                     "value" : [ "define ","Time",": " ]
+                     "value" : [ "","define ","Time",": " ]
                   }, {
                      "r" : "11",
                      "s" : [ {
@@ -1982,7 +2206,7 @@ module.exports['TimeFrom'] = {
                "s" : {
                   "r" : "18",
                   "s" : [ {
-                     "value" : [ "define ","NoTime",": " ]
+                     "value" : [ "","define ","NoTime",": " ]
                   }, {
                      "r" : "17",
                      "s" : [ {
@@ -2033,7 +2257,7 @@ module.exports['TimeFrom'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","NullDate",": " ]
+                     "value" : [ "","define ","NullDate",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {
@@ -2075,6 +2299,14 @@ module.exports['TimezoneOffsetFrom'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "39",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -2092,7 +2324,27 @@ module.exports['TimezoneOffsetFrom'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2116,7 +2368,7 @@ module.exports['TimezoneOffsetFrom'] = {
                "s" : {
                   "r" : "12",
                   "s" : [ {
-                     "value" : [ "define ","CentralEuropean",": " ]
+                     "value" : [ "","define ","CentralEuropean",": " ]
                   }, {
                      "r" : "11",
                      "s" : [ {
@@ -2205,7 +2457,7 @@ module.exports['TimezoneOffsetFrom'] = {
                "s" : {
                   "r" : "24",
                   "s" : [ {
-                     "value" : [ "define ","EasternStandard",": " ]
+                     "value" : [ "","define ","EasternStandard",": " ]
                   }, {
                      "r" : "23",
                      "s" : [ {
@@ -2298,7 +2550,7 @@ module.exports['TimezoneOffsetFrom'] = {
                "s" : {
                   "r" : "34",
                   "s" : [ {
-                     "value" : [ "define ","DefaultTimezone",": " ]
+                     "value" : [ "","define ","DefaultTimezone",": " ]
                   }, {
                      "r" : "33",
                      "s" : [ {
@@ -2373,7 +2625,7 @@ module.exports['TimezoneOffsetFrom'] = {
                "s" : {
                   "r" : "39",
                   "s" : [ {
-                     "value" : [ "define ","NullDate",": " ]
+                     "value" : [ "","define ","NullDate",": " ]
                   }, {
                      "r" : "38",
                      "s" : [ {
@@ -2463,6 +2715,14 @@ module.exports['SameAs'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "543",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -2480,7 +2740,27 @@ module.exports['SameAs'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2504,7 +2784,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","SameYear",": " ]
+                     "value" : [ "","define ","SameYear",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {
@@ -2660,7 +2940,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "41",
                   "s" : [ {
-                     "value" : [ "define ","NotSameYear",": " ]
+                     "value" : [ "","define ","NotSameYear",": " ]
                   }, {
                      "r" : "40",
                      "s" : [ {
@@ -2816,7 +3096,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "61",
                   "s" : [ {
-                     "value" : [ "define ","SameMonth",": " ]
+                     "value" : [ "","define ","SameMonth",": " ]
                   }, {
                      "r" : "60",
                      "s" : [ {
@@ -2972,7 +3252,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "81",
                   "s" : [ {
-                     "value" : [ "define ","NotSameMonth",": " ]
+                     "value" : [ "","define ","NotSameMonth",": " ]
                   }, {
                      "r" : "80",
                      "s" : [ {
@@ -3128,7 +3408,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "101",
                   "s" : [ {
-                     "value" : [ "define ","SameMonthWrongYear",": " ]
+                     "value" : [ "","define ","SameMonthWrongYear",": " ]
                   }, {
                      "r" : "100",
                      "s" : [ {
@@ -3284,7 +3564,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "121",
                   "s" : [ {
-                     "value" : [ "define ","SameDay",": " ]
+                     "value" : [ "","define ","SameDay",": " ]
                   }, {
                      "r" : "120",
                      "s" : [ {
@@ -3440,7 +3720,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "141",
                   "s" : [ {
-                     "value" : [ "define ","NotSameDay",": " ]
+                     "value" : [ "","define ","NotSameDay",": " ]
                   }, {
                      "r" : "140",
                      "s" : [ {
@@ -3596,7 +3876,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "161",
                   "s" : [ {
-                     "value" : [ "define ","SameDayWrongMonth",": " ]
+                     "value" : [ "","define ","SameDayWrongMonth",": " ]
                   }, {
                      "r" : "160",
                      "s" : [ {
@@ -3752,7 +4032,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "181",
                   "s" : [ {
-                     "value" : [ "define ","SameHour",": " ]
+                     "value" : [ "","define ","SameHour",": " ]
                   }, {
                      "r" : "180",
                      "s" : [ {
@@ -3908,7 +4188,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "201",
                   "s" : [ {
-                     "value" : [ "define ","NotSameHour",": " ]
+                     "value" : [ "","define ","NotSameHour",": " ]
                   }, {
                      "r" : "200",
                      "s" : [ {
@@ -4064,7 +4344,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "221",
                   "s" : [ {
-                     "value" : [ "define ","SameHourWrongDay",": " ]
+                     "value" : [ "","define ","SameHourWrongDay",": " ]
                   }, {
                      "r" : "220",
                      "s" : [ {
@@ -4220,7 +4500,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "241",
                   "s" : [ {
-                     "value" : [ "define ","SameMinute",": " ]
+                     "value" : [ "","define ","SameMinute",": " ]
                   }, {
                      "r" : "240",
                      "s" : [ {
@@ -4376,7 +4656,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "261",
                   "s" : [ {
-                     "value" : [ "define ","NotSameMinute",": " ]
+                     "value" : [ "","define ","NotSameMinute",": " ]
                   }, {
                      "r" : "260",
                      "s" : [ {
@@ -4532,7 +4812,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "281",
                   "s" : [ {
-                     "value" : [ "define ","SameMinuteWrongHour",": " ]
+                     "value" : [ "","define ","SameMinuteWrongHour",": " ]
                   }, {
                      "r" : "280",
                      "s" : [ {
@@ -4688,7 +4968,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "301",
                   "s" : [ {
-                     "value" : [ "define ","SameSecond",": " ]
+                     "value" : [ "","define ","SameSecond",": " ]
                   }, {
                      "r" : "300",
                      "s" : [ {
@@ -4844,7 +5124,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "321",
                   "s" : [ {
-                     "value" : [ "define ","NotSameSecond",": " ]
+                     "value" : [ "","define ","NotSameSecond",": " ]
                   }, {
                      "r" : "320",
                      "s" : [ {
@@ -5000,7 +5280,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "341",
                   "s" : [ {
-                     "value" : [ "define ","SameSecondWrongMinute",": " ]
+                     "value" : [ "","define ","SameSecondWrongMinute",": " ]
                   }, {
                      "r" : "340",
                      "s" : [ {
@@ -5156,7 +5436,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "361",
                   "s" : [ {
-                     "value" : [ "define ","SameMillisecond",": " ]
+                     "value" : [ "","define ","SameMillisecond",": " ]
                   }, {
                      "r" : "360",
                      "s" : [ {
@@ -5312,7 +5592,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "381",
                   "s" : [ {
-                     "value" : [ "define ","NotSameMillisecond",": " ]
+                     "value" : [ "","define ","NotSameMillisecond",": " ]
                   }, {
                      "r" : "380",
                      "s" : [ {
@@ -5468,7 +5748,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "401",
                   "s" : [ {
-                     "value" : [ "define ","SameMillisecondWrongSecond",": " ]
+                     "value" : [ "","define ","SameMillisecondWrongSecond",": " ]
                   }, {
                      "r" : "400",
                      "s" : [ {
@@ -5624,7 +5904,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "421",
                   "s" : [ {
-                     "value" : [ "define ","Same",": " ]
+                     "value" : [ "","define ","Same",": " ]
                   }, {
                      "r" : "420",
                      "s" : [ {
@@ -5779,7 +6059,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "441",
                   "s" : [ {
-                     "value" : [ "define ","NotSame",": " ]
+                     "value" : [ "","define ","NotSame",": " ]
                   }, {
                      "r" : "440",
                      "s" : [ {
@@ -5934,7 +6214,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "462",
                   "s" : [ {
-                     "value" : [ "define ","SameNormalized",": " ]
+                     "value" : [ "","define ","SameNormalized",": " ]
                   }, {
                      "r" : "461",
                      "s" : [ {
@@ -6093,7 +6373,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "483",
                   "s" : [ {
-                     "value" : [ "define ","SameHourWrongTimezone",": " ]
+                     "value" : [ "","define ","SameHourWrongTimezone",": " ]
                   }, {
                      "r" : "482",
                      "s" : [ {
@@ -6253,7 +6533,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "497",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseHour",": " ]
+                     "value" : [ "","define ","ImpreciseHour",": " ]
                   }, {
                      "r" : "496",
                      "s" : [ {
@@ -6357,7 +6637,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "511",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseHourWrongDay",": " ]
+                     "value" : [ "","define ","ImpreciseHourWrongDay",": " ]
                   }, {
                      "r" : "510",
                      "s" : [ {
@@ -6461,7 +6741,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "523",
                   "s" : [ {
-                     "value" : [ "define ","NullLeft",": " ]
+                     "value" : [ "","define ","NullLeft",": " ]
                   }, {
                      "r" : "522",
                      "s" : [ {
@@ -6558,7 +6838,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "537",
                   "s" : [ {
-                     "value" : [ "define ","NullRight",": " ]
+                     "value" : [ "","define ","NullRight",": " ]
                   }, {
                      "r" : "536",
                      "s" : [ {
@@ -6679,7 +6959,7 @@ module.exports['SameAs'] = {
                "s" : {
                   "r" : "543",
                   "s" : [ {
-                     "value" : [ "define ","NullBoth",": " ]
+                     "value" : [ "","define ","NullBoth",": " ]
                   }, {
                      "r" : "542",
                      "s" : [ {
@@ -6798,6 +7078,14 @@ module.exports['SameOrAfter'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "853",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -6815,7 +7103,27 @@ module.exports['SameOrAfter'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -6839,7 +7147,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","SameYear",": " ]
+                     "value" : [ "","define ","SameYear",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {
@@ -6995,7 +7303,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "41",
                   "s" : [ {
-                     "value" : [ "define ","YearAfter",": " ]
+                     "value" : [ "","define ","YearAfter",": " ]
                   }, {
                      "r" : "40",
                      "s" : [ {
@@ -7151,7 +7459,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "61",
                   "s" : [ {
-                     "value" : [ "define ","YearBefore",": " ]
+                     "value" : [ "","define ","YearBefore",": " ]
                   }, {
                      "r" : "60",
                      "s" : [ {
@@ -7307,7 +7615,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "81",
                   "s" : [ {
-                     "value" : [ "define ","SameMonth",": " ]
+                     "value" : [ "","define ","SameMonth",": " ]
                   }, {
                      "r" : "80",
                      "s" : [ {
@@ -7463,7 +7771,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "101",
                   "s" : [ {
-                     "value" : [ "define ","MonthAfter",": " ]
+                     "value" : [ "","define ","MonthAfter",": " ]
                   }, {
                      "r" : "100",
                      "s" : [ {
@@ -7619,7 +7927,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "121",
                   "s" : [ {
-                     "value" : [ "define ","MonthBefore",": " ]
+                     "value" : [ "","define ","MonthBefore",": " ]
                   }, {
                      "r" : "120",
                      "s" : [ {
@@ -7775,7 +8083,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "141",
                   "s" : [ {
-                     "value" : [ "define ","SameDay",": " ]
+                     "value" : [ "","define ","SameDay",": " ]
                   }, {
                      "r" : "140",
                      "s" : [ {
@@ -7931,7 +8239,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "161",
                   "s" : [ {
-                     "value" : [ "define ","DayAfter",": " ]
+                     "value" : [ "","define ","DayAfter",": " ]
                   }, {
                      "r" : "160",
                      "s" : [ {
@@ -8087,7 +8395,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "181",
                   "s" : [ {
-                     "value" : [ "define ","DayBefore",": " ]
+                     "value" : [ "","define ","DayBefore",": " ]
                   }, {
                      "r" : "180",
                      "s" : [ {
@@ -8243,7 +8551,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "201",
                   "s" : [ {
-                     "value" : [ "define ","SameHour",": " ]
+                     "value" : [ "","define ","SameHour",": " ]
                   }, {
                      "r" : "200",
                      "s" : [ {
@@ -8399,7 +8707,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "221",
                   "s" : [ {
-                     "value" : [ "define ","HourAfter",": " ]
+                     "value" : [ "","define ","HourAfter",": " ]
                   }, {
                      "r" : "220",
                      "s" : [ {
@@ -8555,7 +8863,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "241",
                   "s" : [ {
-                     "value" : [ "define ","HourBefore",": " ]
+                     "value" : [ "","define ","HourBefore",": " ]
                   }, {
                      "r" : "240",
                      "s" : [ {
@@ -8711,7 +9019,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "261",
                   "s" : [ {
-                     "value" : [ "define ","SameMinute",": " ]
+                     "value" : [ "","define ","SameMinute",": " ]
                   }, {
                      "r" : "260",
                      "s" : [ {
@@ -8867,7 +9175,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "281",
                   "s" : [ {
-                     "value" : [ "define ","MinuteAfter",": " ]
+                     "value" : [ "","define ","MinuteAfter",": " ]
                   }, {
                      "r" : "280",
                      "s" : [ {
@@ -9023,7 +9331,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "301",
                   "s" : [ {
-                     "value" : [ "define ","MinuteBefore",": " ]
+                     "value" : [ "","define ","MinuteBefore",": " ]
                   }, {
                      "r" : "300",
                      "s" : [ {
@@ -9179,7 +9487,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "321",
                   "s" : [ {
-                     "value" : [ "define ","SameSecond",": " ]
+                     "value" : [ "","define ","SameSecond",": " ]
                   }, {
                      "r" : "320",
                      "s" : [ {
@@ -9335,7 +9643,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "341",
                   "s" : [ {
-                     "value" : [ "define ","SecondAfter",": " ]
+                     "value" : [ "","define ","SecondAfter",": " ]
                   }, {
                      "r" : "340",
                      "s" : [ {
@@ -9491,7 +9799,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "361",
                   "s" : [ {
-                     "value" : [ "define ","SecondBefore",": " ]
+                     "value" : [ "","define ","SecondBefore",": " ]
                   }, {
                      "r" : "360",
                      "s" : [ {
@@ -9647,7 +9955,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "381",
                   "s" : [ {
-                     "value" : [ "define ","SameMillisecond",": " ]
+                     "value" : [ "","define ","SameMillisecond",": " ]
                   }, {
                      "r" : "380",
                      "s" : [ {
@@ -9803,7 +10111,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "401",
                   "s" : [ {
-                     "value" : [ "define ","MillisecondAfter",": " ]
+                     "value" : [ "","define ","MillisecondAfter",": " ]
                   }, {
                      "r" : "400",
                      "s" : [ {
@@ -9959,7 +10267,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "421",
                   "s" : [ {
-                     "value" : [ "define ","MillisecondBefore",": " ]
+                     "value" : [ "","define ","MillisecondBefore",": " ]
                   }, {
                      "r" : "420",
                      "s" : [ {
@@ -10115,7 +10423,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "441",
                   "s" : [ {
-                     "value" : [ "define ","Same",": " ]
+                     "value" : [ "","define ","Same",": " ]
                   }, {
                      "r" : "440",
                      "s" : [ {
@@ -10270,7 +10578,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "461",
                   "s" : [ {
-                     "value" : [ "define ","After",": " ]
+                     "value" : [ "","define ","After",": " ]
                   }, {
                      "r" : "460",
                      "s" : [ {
@@ -10425,7 +10733,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "481",
                   "s" : [ {
-                     "value" : [ "define ","Before",": " ]
+                     "value" : [ "","define ","Before",": " ]
                   }, {
                      "r" : "480",
                      "s" : [ {
@@ -10580,7 +10888,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "501",
                   "s" : [ {
-                     "value" : [ "define ","SameDayMonthBefore",": " ]
+                     "value" : [ "","define ","SameDayMonthBefore",": " ]
                   }, {
                      "r" : "500",
                      "s" : [ {
@@ -10736,7 +11044,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "521",
                   "s" : [ {
-                     "value" : [ "define ","DayAfterMonthBefore",": " ]
+                     "value" : [ "","define ","DayAfterMonthBefore",": " ]
                   }, {
                      "r" : "520",
                      "s" : [ {
@@ -10892,7 +11200,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "541",
                   "s" : [ {
-                     "value" : [ "define ","DayBeforeMonthAfter",": " ]
+                     "value" : [ "","define ","DayBeforeMonthAfter",": " ]
                   }, {
                      "r" : "540",
                      "s" : [ {
@@ -11048,7 +11356,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "554",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseDay",": " ]
+                     "value" : [ "","define ","ImpreciseDay",": " ]
                   }, {
                      "r" : "553",
                      "s" : [ {
@@ -11146,7 +11454,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "567",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseDayMonthAfter",": " ]
+                     "value" : [ "","define ","ImpreciseDayMonthAfter",": " ]
                   }, {
                      "r" : "566",
                      "s" : [ {
@@ -11244,7 +11552,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "580",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseDayMonthBefore",": " ]
+                     "value" : [ "","define ","ImpreciseDayMonthBefore",": " ]
                   }, {
                      "r" : "579",
                      "s" : [ {
@@ -11342,7 +11650,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "601",
                   "s" : [ {
-                     "value" : [ "define ","SameHourNormalizeZones",": " ]
+                     "value" : [ "","define ","SameHourNormalizeZones",": " ]
                   }, {
                      "r" : "600",
                      "s" : [ {
@@ -11502,7 +11810,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "622",
                   "s" : [ {
-                     "value" : [ "define ","HourAfterNormalizeZones",": " ]
+                     "value" : [ "","define ","HourAfterNormalizeZones",": " ]
                   }, {
                      "r" : "621",
                      "s" : [ {
@@ -11662,7 +11970,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "643",
                   "s" : [ {
-                     "value" : [ "define ","HourBeforeNormalizeZones",": " ]
+                     "value" : [ "","define ","HourBeforeNormalizeZones",": " ]
                   }, {
                      "r" : "642",
                      "s" : [ {
@@ -11822,7 +12130,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "655",
                   "s" : [ {
-                     "value" : [ "define ","NullLeft",": " ]
+                     "value" : [ "","define ","NullLeft",": " ]
                   }, {
                      "r" : "654",
                      "s" : [ {
@@ -11919,7 +12227,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "667",
                   "s" : [ {
-                     "value" : [ "define ","NullRight",": " ]
+                     "value" : [ "","define ","NullRight",": " ]
                   }, {
                      "r" : "666",
                      "s" : [ {
@@ -12016,7 +12324,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "673",
                   "s" : [ {
-                     "value" : [ "define ","NullBoth",": " ]
+                     "value" : [ "","define ","NullBoth",": " ]
                   }, {
                      "r" : "672",
                      "s" : [ {
@@ -12079,7 +12387,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "693",
                   "s" : [ {
-                     "value" : [ "define ","SameOOA",": " ]
+                     "value" : [ "// On Or After:","define ","SameOOA",": " ]
                   }, {
                      "r" : "692",
                      "s" : [ {
@@ -12234,7 +12542,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "713",
                   "s" : [ {
-                     "value" : [ "define ","AfterOOA",": " ]
+                     "value" : [ "","define ","AfterOOA",": " ]
                   }, {
                      "r" : "712",
                      "s" : [ {
@@ -12389,7 +12697,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "733",
                   "s" : [ {
-                     "value" : [ "define ","BeforeOOA",": " ]
+                     "value" : [ "","define ","BeforeOOA",": " ]
                   }, {
                      "r" : "732",
                      "s" : [ {
@@ -12544,7 +12852,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "745",
                   "s" : [ {
-                     "value" : [ "define ","NullLeftOOA",": " ]
+                     "value" : [ "","define ","NullLeftOOA",": " ]
                   }, {
                      "r" : "744",
                      "s" : [ {
@@ -12641,7 +12949,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "757",
                   "s" : [ {
-                     "value" : [ "define ","NullRightOOA",": " ]
+                     "value" : [ "","define ","NullRightOOA",": " ]
                   }, {
                      "r" : "756",
                      "s" : [ {
@@ -12738,7 +13046,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "763",
                   "s" : [ {
-                     "value" : [ "define ","NullBothOOA",": " ]
+                     "value" : [ "","define ","NullBothOOA",": " ]
                   }, {
                      "r" : "762",
                      "s" : [ {
@@ -12801,7 +13109,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "783",
                   "s" : [ {
-                     "value" : [ "define ","SameAOO",": " ]
+                     "value" : [ "// After Or On:","define ","SameAOO",": " ]
                   }, {
                      "r" : "782",
                      "s" : [ {
@@ -12956,7 +13264,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "803",
                   "s" : [ {
-                     "value" : [ "define ","AfterAOO",": " ]
+                     "value" : [ "","define ","AfterAOO",": " ]
                   }, {
                      "r" : "802",
                      "s" : [ {
@@ -13111,7 +13419,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "823",
                   "s" : [ {
-                     "value" : [ "define ","BeforeAOO",": " ]
+                     "value" : [ "","define ","BeforeAOO",": " ]
                   }, {
                      "r" : "822",
                      "s" : [ {
@@ -13266,7 +13574,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "835",
                   "s" : [ {
-                     "value" : [ "define ","NullLeftAOO",": " ]
+                     "value" : [ "","define ","NullLeftAOO",": " ]
                   }, {
                      "r" : "834",
                      "s" : [ {
@@ -13363,7 +13671,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "847",
                   "s" : [ {
-                     "value" : [ "define ","NullRightAOO",": " ]
+                     "value" : [ "","define ","NullRightAOO",": " ]
                   }, {
                      "r" : "846",
                      "s" : [ {
@@ -13460,7 +13768,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "853",
                   "s" : [ {
-                     "value" : [ "define ","NullBothAOO",": " ]
+                     "value" : [ "","define ","NullBothAOO",": " ]
                   }, {
                      "r" : "852",
                      "s" : [ {
@@ -13579,6 +13887,14 @@ module.exports['SameOrBefore'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "853",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -13596,7 +13912,27 @@ module.exports['SameOrBefore'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -13620,7 +13956,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","SameYear",": " ]
+                     "value" : [ "","define ","SameYear",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {
@@ -13776,7 +14112,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "41",
                   "s" : [ {
-                     "value" : [ "define ","YearAfter",": " ]
+                     "value" : [ "","define ","YearAfter",": " ]
                   }, {
                      "r" : "40",
                      "s" : [ {
@@ -13932,7 +14268,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "61",
                   "s" : [ {
-                     "value" : [ "define ","YearBefore",": " ]
+                     "value" : [ "","define ","YearBefore",": " ]
                   }, {
                      "r" : "60",
                      "s" : [ {
@@ -14088,7 +14424,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "81",
                   "s" : [ {
-                     "value" : [ "define ","SameMonth",": " ]
+                     "value" : [ "","define ","SameMonth",": " ]
                   }, {
                      "r" : "80",
                      "s" : [ {
@@ -14244,7 +14580,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "101",
                   "s" : [ {
-                     "value" : [ "define ","MonthAfter",": " ]
+                     "value" : [ "","define ","MonthAfter",": " ]
                   }, {
                      "r" : "100",
                      "s" : [ {
@@ -14400,7 +14736,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "121",
                   "s" : [ {
-                     "value" : [ "define ","MonthBefore",": " ]
+                     "value" : [ "","define ","MonthBefore",": " ]
                   }, {
                      "r" : "120",
                      "s" : [ {
@@ -14556,7 +14892,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "141",
                   "s" : [ {
-                     "value" : [ "define ","SameDay",": " ]
+                     "value" : [ "","define ","SameDay",": " ]
                   }, {
                      "r" : "140",
                      "s" : [ {
@@ -14712,7 +15048,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "161",
                   "s" : [ {
-                     "value" : [ "define ","DayAfter",": " ]
+                     "value" : [ "","define ","DayAfter",": " ]
                   }, {
                      "r" : "160",
                      "s" : [ {
@@ -14868,7 +15204,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "181",
                   "s" : [ {
-                     "value" : [ "define ","DayBefore",": " ]
+                     "value" : [ "","define ","DayBefore",": " ]
                   }, {
                      "r" : "180",
                      "s" : [ {
@@ -15024,7 +15360,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "201",
                   "s" : [ {
-                     "value" : [ "define ","SameHour",": " ]
+                     "value" : [ "","define ","SameHour",": " ]
                   }, {
                      "r" : "200",
                      "s" : [ {
@@ -15180,7 +15516,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "221",
                   "s" : [ {
-                     "value" : [ "define ","HourAfter",": " ]
+                     "value" : [ "","define ","HourAfter",": " ]
                   }, {
                      "r" : "220",
                      "s" : [ {
@@ -15336,7 +15672,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "241",
                   "s" : [ {
-                     "value" : [ "define ","HourBefore",": " ]
+                     "value" : [ "","define ","HourBefore",": " ]
                   }, {
                      "r" : "240",
                      "s" : [ {
@@ -15492,7 +15828,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "261",
                   "s" : [ {
-                     "value" : [ "define ","SameMinute",": " ]
+                     "value" : [ "","define ","SameMinute",": " ]
                   }, {
                      "r" : "260",
                      "s" : [ {
@@ -15648,7 +15984,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "281",
                   "s" : [ {
-                     "value" : [ "define ","MinuteAfter",": " ]
+                     "value" : [ "","define ","MinuteAfter",": " ]
                   }, {
                      "r" : "280",
                      "s" : [ {
@@ -15804,7 +16140,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "301",
                   "s" : [ {
-                     "value" : [ "define ","MinuteBefore",": " ]
+                     "value" : [ "","define ","MinuteBefore",": " ]
                   }, {
                      "r" : "300",
                      "s" : [ {
@@ -15960,7 +16296,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "321",
                   "s" : [ {
-                     "value" : [ "define ","SameSecond",": " ]
+                     "value" : [ "","define ","SameSecond",": " ]
                   }, {
                      "r" : "320",
                      "s" : [ {
@@ -16116,7 +16452,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "341",
                   "s" : [ {
-                     "value" : [ "define ","SecondAfter",": " ]
+                     "value" : [ "","define ","SecondAfter",": " ]
                   }, {
                      "r" : "340",
                      "s" : [ {
@@ -16272,7 +16608,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "361",
                   "s" : [ {
-                     "value" : [ "define ","SecondBefore",": " ]
+                     "value" : [ "","define ","SecondBefore",": " ]
                   }, {
                      "r" : "360",
                      "s" : [ {
@@ -16428,7 +16764,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "381",
                   "s" : [ {
-                     "value" : [ "define ","SameMillisecond",": " ]
+                     "value" : [ "","define ","SameMillisecond",": " ]
                   }, {
                      "r" : "380",
                      "s" : [ {
@@ -16584,7 +16920,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "401",
                   "s" : [ {
-                     "value" : [ "define ","MillisecondAfter",": " ]
+                     "value" : [ "","define ","MillisecondAfter",": " ]
                   }, {
                      "r" : "400",
                      "s" : [ {
@@ -16740,7 +17076,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "421",
                   "s" : [ {
-                     "value" : [ "define ","MillisecondBefore",": " ]
+                     "value" : [ "","define ","MillisecondBefore",": " ]
                   }, {
                      "r" : "420",
                      "s" : [ {
@@ -16896,7 +17232,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "441",
                   "s" : [ {
-                     "value" : [ "define ","Same",": " ]
+                     "value" : [ "","define ","Same",": " ]
                   }, {
                      "r" : "440",
                      "s" : [ {
@@ -17051,7 +17387,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "461",
                   "s" : [ {
-                     "value" : [ "define ","After",": " ]
+                     "value" : [ "","define ","After",": " ]
                   }, {
                      "r" : "460",
                      "s" : [ {
@@ -17206,7 +17542,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "481",
                   "s" : [ {
-                     "value" : [ "define ","Before",": " ]
+                     "value" : [ "","define ","Before",": " ]
                   }, {
                      "r" : "480",
                      "s" : [ {
@@ -17361,7 +17697,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "501",
                   "s" : [ {
-                     "value" : [ "define ","SameDayMonthBefore",": " ]
+                     "value" : [ "","define ","SameDayMonthBefore",": " ]
                   }, {
                      "r" : "500",
                      "s" : [ {
@@ -17517,7 +17853,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "521",
                   "s" : [ {
-                     "value" : [ "define ","DayAfterMonthBefore",": " ]
+                     "value" : [ "","define ","DayAfterMonthBefore",": " ]
                   }, {
                      "r" : "520",
                      "s" : [ {
@@ -17673,7 +18009,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "541",
                   "s" : [ {
-                     "value" : [ "define ","DayBeforeMonthAfter",": " ]
+                     "value" : [ "","define ","DayBeforeMonthAfter",": " ]
                   }, {
                      "r" : "540",
                      "s" : [ {
@@ -17829,7 +18165,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "554",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseDay",": " ]
+                     "value" : [ "","define ","ImpreciseDay",": " ]
                   }, {
                      "r" : "553",
                      "s" : [ {
@@ -17927,7 +18263,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "567",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseDayMonthAfter",": " ]
+                     "value" : [ "","define ","ImpreciseDayMonthAfter",": " ]
                   }, {
                      "r" : "566",
                      "s" : [ {
@@ -18025,7 +18361,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "580",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseDayMonthBefore",": " ]
+                     "value" : [ "","define ","ImpreciseDayMonthBefore",": " ]
                   }, {
                      "r" : "579",
                      "s" : [ {
@@ -18123,7 +18459,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "601",
                   "s" : [ {
-                     "value" : [ "define ","SameHourNormalizeZones",": " ]
+                     "value" : [ "","define ","SameHourNormalizeZones",": " ]
                   }, {
                      "r" : "600",
                      "s" : [ {
@@ -18283,7 +18619,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "622",
                   "s" : [ {
-                     "value" : [ "define ","HourAfterNormalizeZones",": " ]
+                     "value" : [ "","define ","HourAfterNormalizeZones",": " ]
                   }, {
                      "r" : "621",
                      "s" : [ {
@@ -18443,7 +18779,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "643",
                   "s" : [ {
-                     "value" : [ "define ","HourBeforeNormalizeZones",": " ]
+                     "value" : [ "","define ","HourBeforeNormalizeZones",": " ]
                   }, {
                      "r" : "642",
                      "s" : [ {
@@ -18603,7 +18939,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "655",
                   "s" : [ {
-                     "value" : [ "define ","NullLeft",": " ]
+                     "value" : [ "","define ","NullLeft",": " ]
                   }, {
                      "r" : "654",
                      "s" : [ {
@@ -18700,7 +19036,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "667",
                   "s" : [ {
-                     "value" : [ "define ","NullRight",": " ]
+                     "value" : [ "","define ","NullRight",": " ]
                   }, {
                      "r" : "666",
                      "s" : [ {
@@ -18797,7 +19133,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "673",
                   "s" : [ {
-                     "value" : [ "define ","NullBoth",": " ]
+                     "value" : [ "","define ","NullBoth",": " ]
                   }, {
                      "r" : "672",
                      "s" : [ {
@@ -18860,7 +19196,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "693",
                   "s" : [ {
-                     "value" : [ "define ","SameOOB",": " ]
+                     "value" : [ "// On Or Before:","define ","SameOOB",": " ]
                   }, {
                      "r" : "692",
                      "s" : [ {
@@ -19015,7 +19351,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "713",
                   "s" : [ {
-                     "value" : [ "define ","AfterOOB",": " ]
+                     "value" : [ "","define ","AfterOOB",": " ]
                   }, {
                      "r" : "712",
                      "s" : [ {
@@ -19170,7 +19506,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "733",
                   "s" : [ {
-                     "value" : [ "define ","BeforeOOB",": " ]
+                     "value" : [ "","define ","BeforeOOB",": " ]
                   }, {
                      "r" : "732",
                      "s" : [ {
@@ -19325,7 +19661,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "745",
                   "s" : [ {
-                     "value" : [ "define ","NullLeftOOB",": " ]
+                     "value" : [ "","define ","NullLeftOOB",": " ]
                   }, {
                      "r" : "744",
                      "s" : [ {
@@ -19422,7 +19758,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "757",
                   "s" : [ {
-                     "value" : [ "define ","NullRightOOB",": " ]
+                     "value" : [ "","define ","NullRightOOB",": " ]
                   }, {
                      "r" : "756",
                      "s" : [ {
@@ -19519,7 +19855,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "763",
                   "s" : [ {
-                     "value" : [ "define ","NullBothOOB",": " ]
+                     "value" : [ "","define ","NullBothOOB",": " ]
                   }, {
                      "r" : "762",
                      "s" : [ {
@@ -19582,7 +19918,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "783",
                   "s" : [ {
-                     "value" : [ "define ","SameBOO",": " ]
+                     "value" : [ "// Before Or On:","define ","SameBOO",": " ]
                   }, {
                      "r" : "782",
                      "s" : [ {
@@ -19737,7 +20073,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "803",
                   "s" : [ {
-                     "value" : [ "define ","AfterBOO",": " ]
+                     "value" : [ "","define ","AfterBOO",": " ]
                   }, {
                      "r" : "802",
                      "s" : [ {
@@ -19892,7 +20228,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "823",
                   "s" : [ {
-                     "value" : [ "define ","BeforeBOO",": " ]
+                     "value" : [ "","define ","BeforeBOO",": " ]
                   }, {
                      "r" : "822",
                      "s" : [ {
@@ -20047,7 +20383,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "835",
                   "s" : [ {
-                     "value" : [ "define ","NullLeftBOO",": " ]
+                     "value" : [ "","define ","NullLeftBOO",": " ]
                   }, {
                      "r" : "834",
                      "s" : [ {
@@ -20144,7 +20480,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "847",
                   "s" : [ {
-                     "value" : [ "define ","NullRightBOO",": " ]
+                     "value" : [ "","define ","NullRightBOO",": " ]
                   }, {
                      "r" : "846",
                      "s" : [ {
@@ -20241,7 +20577,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "853",
                   "s" : [ {
-                     "value" : [ "define ","NullBothBOO",": " ]
+                     "value" : [ "","define ","NullBothBOO",": " ]
                   }, {
                      "r" : "852",
                      "s" : [ {
@@ -20343,6 +20679,14 @@ module.exports['After'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "613",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -20360,7 +20704,27 @@ module.exports['After'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -20384,7 +20748,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","SameYear",": " ]
+                     "value" : [ "","define ","SameYear",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {
@@ -20540,7 +20904,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "41",
                   "s" : [ {
-                     "value" : [ "define ","YearAfter",": " ]
+                     "value" : [ "","define ","YearAfter",": " ]
                   }, {
                      "r" : "40",
                      "s" : [ {
@@ -20696,7 +21060,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "61",
                   "s" : [ {
-                     "value" : [ "define ","YearBefore",": " ]
+                     "value" : [ "","define ","YearBefore",": " ]
                   }, {
                      "r" : "60",
                      "s" : [ {
@@ -20852,7 +21216,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "81",
                   "s" : [ {
-                     "value" : [ "define ","SameMonth",": " ]
+                     "value" : [ "","define ","SameMonth",": " ]
                   }, {
                      "r" : "80",
                      "s" : [ {
@@ -21008,7 +21372,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "101",
                   "s" : [ {
-                     "value" : [ "define ","MonthAfter",": " ]
+                     "value" : [ "","define ","MonthAfter",": " ]
                   }, {
                      "r" : "100",
                      "s" : [ {
@@ -21164,7 +21528,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "121",
                   "s" : [ {
-                     "value" : [ "define ","MonthBefore",": " ]
+                     "value" : [ "","define ","MonthBefore",": " ]
                   }, {
                      "r" : "120",
                      "s" : [ {
@@ -21320,7 +21684,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "141",
                   "s" : [ {
-                     "value" : [ "define ","SameDay",": " ]
+                     "value" : [ "","define ","SameDay",": " ]
                   }, {
                      "r" : "140",
                      "s" : [ {
@@ -21476,7 +21840,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "161",
                   "s" : [ {
-                     "value" : [ "define ","DayAfter",": " ]
+                     "value" : [ "","define ","DayAfter",": " ]
                   }, {
                      "r" : "160",
                      "s" : [ {
@@ -21632,7 +21996,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "181",
                   "s" : [ {
-                     "value" : [ "define ","DayBefore",": " ]
+                     "value" : [ "","define ","DayBefore",": " ]
                   }, {
                      "r" : "180",
                      "s" : [ {
@@ -21788,7 +22152,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "201",
                   "s" : [ {
-                     "value" : [ "define ","SameHour",": " ]
+                     "value" : [ "","define ","SameHour",": " ]
                   }, {
                      "r" : "200",
                      "s" : [ {
@@ -21944,7 +22308,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "221",
                   "s" : [ {
-                     "value" : [ "define ","HourAfter",": " ]
+                     "value" : [ "","define ","HourAfter",": " ]
                   }, {
                      "r" : "220",
                      "s" : [ {
@@ -22100,7 +22464,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "241",
                   "s" : [ {
-                     "value" : [ "define ","HourBefore",": " ]
+                     "value" : [ "","define ","HourBefore",": " ]
                   }, {
                      "r" : "240",
                      "s" : [ {
@@ -22256,7 +22620,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "261",
                   "s" : [ {
-                     "value" : [ "define ","SameMinute",": " ]
+                     "value" : [ "","define ","SameMinute",": " ]
                   }, {
                      "r" : "260",
                      "s" : [ {
@@ -22412,7 +22776,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "281",
                   "s" : [ {
-                     "value" : [ "define ","MinuteAfter",": " ]
+                     "value" : [ "","define ","MinuteAfter",": " ]
                   }, {
                      "r" : "280",
                      "s" : [ {
@@ -22568,7 +22932,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "301",
                   "s" : [ {
-                     "value" : [ "define ","MinuteBefore",": " ]
+                     "value" : [ "","define ","MinuteBefore",": " ]
                   }, {
                      "r" : "300",
                      "s" : [ {
@@ -22724,7 +23088,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "321",
                   "s" : [ {
-                     "value" : [ "define ","SameSecond",": " ]
+                     "value" : [ "","define ","SameSecond",": " ]
                   }, {
                      "r" : "320",
                      "s" : [ {
@@ -22880,7 +23244,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "341",
                   "s" : [ {
-                     "value" : [ "define ","SecondAfter",": " ]
+                     "value" : [ "","define ","SecondAfter",": " ]
                   }, {
                      "r" : "340",
                      "s" : [ {
@@ -23036,7 +23400,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "361",
                   "s" : [ {
-                     "value" : [ "define ","SecondBefore",": " ]
+                     "value" : [ "","define ","SecondBefore",": " ]
                   }, {
                      "r" : "360",
                      "s" : [ {
@@ -23192,7 +23556,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "381",
                   "s" : [ {
-                     "value" : [ "define ","SameMillisecond",": " ]
+                     "value" : [ "","define ","SameMillisecond",": " ]
                   }, {
                      "r" : "380",
                      "s" : [ {
@@ -23348,7 +23712,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "401",
                   "s" : [ {
-                     "value" : [ "define ","MillisecondAfter",": " ]
+                     "value" : [ "","define ","MillisecondAfter",": " ]
                   }, {
                      "r" : "400",
                      "s" : [ {
@@ -23504,7 +23868,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "421",
                   "s" : [ {
-                     "value" : [ "define ","MillisecondBefore",": " ]
+                     "value" : [ "","define ","MillisecondBefore",": " ]
                   }, {
                      "r" : "420",
                      "s" : [ {
@@ -23660,7 +24024,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "441",
                   "s" : [ {
-                     "value" : [ "define ","Same",": " ]
+                     "value" : [ "","define ","Same",": " ]
                   }, {
                      "r" : "440",
                      "s" : [ {
@@ -23815,7 +24179,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "461",
                   "s" : [ {
-                     "value" : [ "define ","After",": " ]
+                     "value" : [ "","define ","After",": " ]
                   }, {
                      "r" : "460",
                      "s" : [ {
@@ -23970,7 +24334,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "481",
                   "s" : [ {
-                     "value" : [ "define ","Before",": " ]
+                     "value" : [ "","define ","Before",": " ]
                   }, {
                      "r" : "480",
                      "s" : [ {
@@ -24125,7 +24489,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "494",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseDay",": " ]
+                     "value" : [ "","define ","ImpreciseDay",": " ]
                   }, {
                      "r" : "493",
                      "s" : [ {
@@ -24223,7 +24587,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "507",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseDayMonthAfter",": " ]
+                     "value" : [ "","define ","ImpreciseDayMonthAfter",": " ]
                   }, {
                      "r" : "506",
                      "s" : [ {
@@ -24321,7 +24685,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "520",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseDayMonthBefore",": " ]
+                     "value" : [ "","define ","ImpreciseDayMonthBefore",": " ]
                   }, {
                      "r" : "519",
                      "s" : [ {
@@ -24419,7 +24783,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "541",
                   "s" : [ {
-                     "value" : [ "define ","SameHourNormalizeZones",": " ]
+                     "value" : [ "","define ","SameHourNormalizeZones",": " ]
                   }, {
                      "r" : "540",
                      "s" : [ {
@@ -24579,7 +24943,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "562",
                   "s" : [ {
-                     "value" : [ "define ","HourAfterNormalizeZones",": " ]
+                     "value" : [ "","define ","HourAfterNormalizeZones",": " ]
                   }, {
                      "r" : "561",
                      "s" : [ {
@@ -24739,7 +25103,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "583",
                   "s" : [ {
-                     "value" : [ "define ","HourBeforeNormalizeZones",": " ]
+                     "value" : [ "","define ","HourBeforeNormalizeZones",": " ]
                   }, {
                      "r" : "582",
                      "s" : [ {
@@ -24899,7 +25263,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "595",
                   "s" : [ {
-                     "value" : [ "define ","NullLeft",": " ]
+                     "value" : [ "","define ","NullLeft",": " ]
                   }, {
                      "r" : "594",
                      "s" : [ {
@@ -24996,7 +25360,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "607",
                   "s" : [ {
-                     "value" : [ "define ","NullRight",": " ]
+                     "value" : [ "","define ","NullRight",": " ]
                   }, {
                      "r" : "606",
                      "s" : [ {
@@ -25093,7 +25457,7 @@ module.exports['After'] = {
                "s" : {
                   "r" : "613",
                   "s" : [ {
-                     "value" : [ "define ","NullBoth",": " ]
+                     "value" : [ "","define ","NullBoth",": " ]
                   }, {
                      "r" : "612",
                      "s" : [ {
@@ -25195,6 +25559,14 @@ module.exports['Before'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "613",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -25212,7 +25584,27 @@ module.exports['Before'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -25236,7 +25628,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","SameYear",": " ]
+                     "value" : [ "","define ","SameYear",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {
@@ -25392,7 +25784,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "41",
                   "s" : [ {
-                     "value" : [ "define ","YearAfter",": " ]
+                     "value" : [ "","define ","YearAfter",": " ]
                   }, {
                      "r" : "40",
                      "s" : [ {
@@ -25548,7 +25940,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "61",
                   "s" : [ {
-                     "value" : [ "define ","YearBefore",": " ]
+                     "value" : [ "","define ","YearBefore",": " ]
                   }, {
                      "r" : "60",
                      "s" : [ {
@@ -25704,7 +26096,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "81",
                   "s" : [ {
-                     "value" : [ "define ","SameMonth",": " ]
+                     "value" : [ "","define ","SameMonth",": " ]
                   }, {
                      "r" : "80",
                      "s" : [ {
@@ -25860,7 +26252,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "101",
                   "s" : [ {
-                     "value" : [ "define ","MonthAfter",": " ]
+                     "value" : [ "","define ","MonthAfter",": " ]
                   }, {
                      "r" : "100",
                      "s" : [ {
@@ -26016,7 +26408,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "121",
                   "s" : [ {
-                     "value" : [ "define ","MonthBefore",": " ]
+                     "value" : [ "","define ","MonthBefore",": " ]
                   }, {
                      "r" : "120",
                      "s" : [ {
@@ -26172,7 +26564,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "141",
                   "s" : [ {
-                     "value" : [ "define ","SameDay",": " ]
+                     "value" : [ "","define ","SameDay",": " ]
                   }, {
                      "r" : "140",
                      "s" : [ {
@@ -26328,7 +26720,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "161",
                   "s" : [ {
-                     "value" : [ "define ","DayAfter",": " ]
+                     "value" : [ "","define ","DayAfter",": " ]
                   }, {
                      "r" : "160",
                      "s" : [ {
@@ -26484,7 +26876,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "181",
                   "s" : [ {
-                     "value" : [ "define ","DayBefore",": " ]
+                     "value" : [ "","define ","DayBefore",": " ]
                   }, {
                      "r" : "180",
                      "s" : [ {
@@ -26640,7 +27032,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "201",
                   "s" : [ {
-                     "value" : [ "define ","SameHour",": " ]
+                     "value" : [ "","define ","SameHour",": " ]
                   }, {
                      "r" : "200",
                      "s" : [ {
@@ -26796,7 +27188,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "221",
                   "s" : [ {
-                     "value" : [ "define ","HourAfter",": " ]
+                     "value" : [ "","define ","HourAfter",": " ]
                   }, {
                      "r" : "220",
                      "s" : [ {
@@ -26952,7 +27344,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "241",
                   "s" : [ {
-                     "value" : [ "define ","HourBefore",": " ]
+                     "value" : [ "","define ","HourBefore",": " ]
                   }, {
                      "r" : "240",
                      "s" : [ {
@@ -27108,7 +27500,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "261",
                   "s" : [ {
-                     "value" : [ "define ","SameMinute",": " ]
+                     "value" : [ "","define ","SameMinute",": " ]
                   }, {
                      "r" : "260",
                      "s" : [ {
@@ -27264,7 +27656,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "281",
                   "s" : [ {
-                     "value" : [ "define ","MinuteAfter",": " ]
+                     "value" : [ "","define ","MinuteAfter",": " ]
                   }, {
                      "r" : "280",
                      "s" : [ {
@@ -27420,7 +27812,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "301",
                   "s" : [ {
-                     "value" : [ "define ","MinuteBefore",": " ]
+                     "value" : [ "","define ","MinuteBefore",": " ]
                   }, {
                      "r" : "300",
                      "s" : [ {
@@ -27576,7 +27968,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "321",
                   "s" : [ {
-                     "value" : [ "define ","SameSecond",": " ]
+                     "value" : [ "","define ","SameSecond",": " ]
                   }, {
                      "r" : "320",
                      "s" : [ {
@@ -27732,7 +28124,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "341",
                   "s" : [ {
-                     "value" : [ "define ","SecondAfter",": " ]
+                     "value" : [ "","define ","SecondAfter",": " ]
                   }, {
                      "r" : "340",
                      "s" : [ {
@@ -27888,7 +28280,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "361",
                   "s" : [ {
-                     "value" : [ "define ","SecondBefore",": " ]
+                     "value" : [ "","define ","SecondBefore",": " ]
                   }, {
                      "r" : "360",
                      "s" : [ {
@@ -28044,7 +28436,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "381",
                   "s" : [ {
-                     "value" : [ "define ","SameMillisecond",": " ]
+                     "value" : [ "","define ","SameMillisecond",": " ]
                   }, {
                      "r" : "380",
                      "s" : [ {
@@ -28200,7 +28592,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "401",
                   "s" : [ {
-                     "value" : [ "define ","MillisecondAfter",": " ]
+                     "value" : [ "","define ","MillisecondAfter",": " ]
                   }, {
                      "r" : "400",
                      "s" : [ {
@@ -28356,7 +28748,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "421",
                   "s" : [ {
-                     "value" : [ "define ","MillisecondBefore",": " ]
+                     "value" : [ "","define ","MillisecondBefore",": " ]
                   }, {
                      "r" : "420",
                      "s" : [ {
@@ -28512,7 +28904,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "441",
                   "s" : [ {
-                     "value" : [ "define ","Same",": " ]
+                     "value" : [ "","define ","Same",": " ]
                   }, {
                      "r" : "440",
                      "s" : [ {
@@ -28667,7 +29059,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "461",
                   "s" : [ {
-                     "value" : [ "define ","After",": " ]
+                     "value" : [ "","define ","After",": " ]
                   }, {
                      "r" : "460",
                      "s" : [ {
@@ -28822,7 +29214,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "481",
                   "s" : [ {
-                     "value" : [ "define ","Before",": " ]
+                     "value" : [ "","define ","Before",": " ]
                   }, {
                      "r" : "480",
                      "s" : [ {
@@ -28977,7 +29369,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "494",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseDay",": " ]
+                     "value" : [ "","define ","ImpreciseDay",": " ]
                   }, {
                      "r" : "493",
                      "s" : [ {
@@ -29075,7 +29467,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "507",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseDayMonthAfter",": " ]
+                     "value" : [ "","define ","ImpreciseDayMonthAfter",": " ]
                   }, {
                      "r" : "506",
                      "s" : [ {
@@ -29173,7 +29565,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "520",
                   "s" : [ {
-                     "value" : [ "define ","ImpreciseDayMonthBefore",": " ]
+                     "value" : [ "","define ","ImpreciseDayMonthBefore",": " ]
                   }, {
                      "r" : "519",
                      "s" : [ {
@@ -29271,7 +29663,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "541",
                   "s" : [ {
-                     "value" : [ "define ","SameHourNormalizeZones",": " ]
+                     "value" : [ "","define ","SameHourNormalizeZones",": " ]
                   }, {
                      "r" : "540",
                      "s" : [ {
@@ -29431,7 +29823,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "562",
                   "s" : [ {
-                     "value" : [ "define ","HourAfterNormalizeZones",": " ]
+                     "value" : [ "","define ","HourAfterNormalizeZones",": " ]
                   }, {
                      "r" : "561",
                      "s" : [ {
@@ -29591,7 +29983,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "583",
                   "s" : [ {
-                     "value" : [ "define ","HourBeforeNormalizeZones",": " ]
+                     "value" : [ "","define ","HourBeforeNormalizeZones",": " ]
                   }, {
                      "r" : "582",
                      "s" : [ {
@@ -29751,7 +30143,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "595",
                   "s" : [ {
-                     "value" : [ "define ","NullLeft",": " ]
+                     "value" : [ "","define ","NullLeft",": " ]
                   }, {
                      "r" : "594",
                      "s" : [ {
@@ -29848,7 +30240,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "607",
                   "s" : [ {
-                     "value" : [ "define ","NullRight",": " ]
+                     "value" : [ "","define ","NullRight",": " ]
                   }, {
                      "r" : "606",
                      "s" : [ {
@@ -29945,7 +30337,7 @@ module.exports['Before'] = {
                "s" : {
                   "r" : "613",
                   "s" : [ {
-                     "value" : [ "define ","NullBoth",": " ]
+                     "value" : [ "","define ","NullBoth",": " ]
                   }, {
                      "r" : "612",
                      "s" : [ {
@@ -30037,6 +30429,14 @@ module.exports['DifferenceBetween'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "139",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -30054,7 +30454,27 @@ module.exports['DifferenceBetween'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -30078,7 +30498,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "10",
                   "s" : [ {
-                     "value" : [ "define ","NewYear2013",": " ]
+                     "value" : [ "","define ","NewYear2013",": " ]
                   }, {
                      "r" : "9",
                      "s" : [ {
@@ -30144,7 +30564,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "19",
                   "s" : [ {
-                     "value" : [ "define ","NewYear2014",": " ]
+                     "value" : [ "","define ","NewYear2014",": " ]
                   }, {
                      "r" : "18",
                      "s" : [ {
@@ -30210,7 +30630,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "23",
                   "s" : [ {
-                     "value" : [ "define ","January2014",": " ]
+                     "value" : [ "","define ","January2014",": " ]
                   }, {
                      "r" : "22",
                      "s" : [ {
@@ -30246,7 +30666,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "27",
                   "s" : [ {
-                     "value" : [ "define ","YearsBetween",": " ]
+                     "value" : [ "","define ","YearsBetween",": " ]
                   }, {
                      "r" : "26",
                      "s" : [ {
@@ -30291,7 +30711,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "31",
                   "s" : [ {
-                     "value" : [ "define ","MonthsBetween",": " ]
+                     "value" : [ "","define ","MonthsBetween",": " ]
                   }, {
                      "r" : "30",
                      "s" : [ {
@@ -30336,7 +30756,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "35",
                   "s" : [ {
-                     "value" : [ "define ","WeeksBetween",": " ]
+                     "value" : [ "","define ","WeeksBetween",": " ]
                   }, {
                      "r" : "34",
                      "s" : [ {
@@ -30381,7 +30801,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "39",
                   "s" : [ {
-                     "value" : [ "define ","DaysBetween",": " ]
+                     "value" : [ "","define ","DaysBetween",": " ]
                   }, {
                      "r" : "38",
                      "s" : [ {
@@ -30426,7 +30846,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "43",
                   "s" : [ {
-                     "value" : [ "define ","HoursBetween",": " ]
+                     "value" : [ "","define ","HoursBetween",": " ]
                   }, {
                      "r" : "42",
                      "s" : [ {
@@ -30471,7 +30891,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "47",
                   "s" : [ {
-                     "value" : [ "define ","MinutesBetween",": " ]
+                     "value" : [ "","define ","MinutesBetween",": " ]
                   }, {
                      "r" : "46",
                      "s" : [ {
@@ -30516,7 +30936,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "51",
                   "s" : [ {
-                     "value" : [ "define ","SecondsBetween",": " ]
+                     "value" : [ "","define ","SecondsBetween",": " ]
                   }, {
                      "r" : "50",
                      "s" : [ {
@@ -30561,7 +30981,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "55",
                   "s" : [ {
-                     "value" : [ "define ","MillisecondsBetween",": " ]
+                     "value" : [ "","define ","MillisecondsBetween",": " ]
                   }, {
                      "r" : "54",
                      "s" : [ {
@@ -30606,7 +31026,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "59",
                   "s" : [ {
-                     "value" : [ "define ","MillisecondsBetweenReversed",": " ]
+                     "value" : [ "","define ","MillisecondsBetweenReversed",": " ]
                   }, {
                      "r" : "58",
                      "s" : [ {
@@ -30651,7 +31071,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "63",
                   "s" : [ {
-                     "value" : [ "define ","YearsBetweenUncertainty",": " ]
+                     "value" : [ "","define ","YearsBetweenUncertainty",": " ]
                   }, {
                      "r" : "62",
                      "s" : [ {
@@ -30696,7 +31116,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "67",
                   "s" : [ {
-                     "value" : [ "define ","MonthsBetweenUncertainty",": " ]
+                     "value" : [ "","define ","MonthsBetweenUncertainty",": " ]
                   }, {
                      "r" : "66",
                      "s" : [ {
@@ -30741,7 +31161,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "71",
                   "s" : [ {
-                     "value" : [ "define ","WeeksBetweenUncertainty",": " ]
+                     "value" : [ "","define ","WeeksBetweenUncertainty",": " ]
                   }, {
                      "r" : "70",
                      "s" : [ {
@@ -30786,7 +31206,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "75",
                   "s" : [ {
-                     "value" : [ "define ","DaysBetweenUncertainty",": " ]
+                     "value" : [ "","define ","DaysBetweenUncertainty",": " ]
                   }, {
                      "r" : "74",
                      "s" : [ {
@@ -30831,7 +31251,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "79",
                   "s" : [ {
-                     "value" : [ "define ","HoursBetweenUncertainty",": " ]
+                     "value" : [ "","define ","HoursBetweenUncertainty",": " ]
                   }, {
                      "r" : "78",
                      "s" : [ {
@@ -30876,7 +31296,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "83",
                   "s" : [ {
-                     "value" : [ "define ","MinutesBetweenUncertainty",": " ]
+                     "value" : [ "","define ","MinutesBetweenUncertainty",": " ]
                   }, {
                      "r" : "82",
                      "s" : [ {
@@ -30921,7 +31341,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "87",
                   "s" : [ {
-                     "value" : [ "define ","SecondsBetweenUncertainty",": " ]
+                     "value" : [ "","define ","SecondsBetweenUncertainty",": " ]
                   }, {
                      "r" : "86",
                      "s" : [ {
@@ -30966,7 +31386,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "91",
                   "s" : [ {
-                     "value" : [ "define ","MillisecondsBetweenUncertainty",": " ]
+                     "value" : [ "","define ","MillisecondsBetweenUncertainty",": " ]
                   }, {
                      "r" : "90",
                      "s" : [ {
@@ -31011,7 +31431,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "95",
                   "s" : [ {
-                     "value" : [ "define ","MillisecondsBetweenReversedUncertainty",": " ]
+                     "value" : [ "","define ","MillisecondsBetweenReversedUncertainty",": " ]
                   }, {
                      "r" : "94",
                      "s" : [ {
@@ -31056,7 +31476,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "117",
                   "s" : [ {
-                     "value" : [ "define ","HoursBetween1and3CrossingSpringDST",": " ]
+                     "value" : [ "","define ","HoursBetween1and3CrossingSpringDST",": " ]
                   }, {
                      "r" : "116",
                      "s" : [ {
@@ -31221,7 +31641,7 @@ module.exports['DifferenceBetween'] = {
                "s" : {
                   "r" : "139",
                   "s" : [ {
-                     "value" : [ "define ","HoursBetween1and3CrossingFallDST",": " ]
+                     "value" : [ "","define ","HoursBetween1and3CrossingFallDST",": " ]
                   }, {
                      "r" : "138",
                      "s" : [ {
@@ -31414,6 +31834,14 @@ module.exports['DifferenceBetween Comparisons'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "168",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -31431,7 +31859,27 @@ module.exports['DifferenceBetween Comparisons'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -31455,7 +31903,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "10",
                   "s" : [ {
-                     "value" : [ "define ","NewYear2014",": " ]
+                     "value" : [ "","define ","NewYear2014",": " ]
                   }, {
                      "r" : "9",
                      "s" : [ {
@@ -31521,7 +31969,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "14",
                   "s" : [ {
-                     "value" : [ "define ","February2014",": " ]
+                     "value" : [ "","define ","February2014",": " ]
                   }, {
                      "r" : "13",
                      "s" : [ {
@@ -31557,7 +32005,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "20",
                   "s" : [ {
-                     "value" : [ "define ","GreaterThan25DaysAfter",": " ]
+                     "value" : [ "","define ","GreaterThan25DaysAfter",": " ]
                   }, {
                      "r" : "19",
                      "s" : [ {
@@ -31617,7 +32065,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "26",
                   "s" : [ {
-                     "value" : [ "define ","GreaterThan40DaysAfter",": " ]
+                     "value" : [ "","define ","GreaterThan40DaysAfter",": " ]
                   }, {
                      "r" : "25",
                      "s" : [ {
@@ -31677,7 +32125,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "32",
                   "s" : [ {
-                     "value" : [ "define ","GreaterThan80DaysAfter",": " ]
+                     "value" : [ "","define ","GreaterThan80DaysAfter",": " ]
                   }, {
                      "r" : "31",
                      "s" : [ {
@@ -31737,7 +32185,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "38",
                   "s" : [ {
-                     "value" : [ "define ","GreaterOrEqualTo25DaysAfter",": " ]
+                     "value" : [ "","define ","GreaterOrEqualTo25DaysAfter",": " ]
                   }, {
                      "r" : "37",
                      "s" : [ {
@@ -31797,7 +32245,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "44",
                   "s" : [ {
-                     "value" : [ "define ","GreaterOrEqualTo40DaysAfter",": " ]
+                     "value" : [ "","define ","GreaterOrEqualTo40DaysAfter",": " ]
                   }, {
                      "r" : "43",
                      "s" : [ {
@@ -31857,7 +32305,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "50",
                   "s" : [ {
-                     "value" : [ "define ","GreaterOrEqualTo80DaysAfter",": " ]
+                     "value" : [ "","define ","GreaterOrEqualTo80DaysAfter",": " ]
                   }, {
                      "r" : "49",
                      "s" : [ {
@@ -31917,7 +32365,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "56",
                   "s" : [ {
-                     "value" : [ "define ","EqualTo25DaysAfter",": " ]
+                     "value" : [ "","define ","EqualTo25DaysAfter",": " ]
                   }, {
                      "r" : "55",
                      "s" : [ {
@@ -31977,7 +32425,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "62",
                   "s" : [ {
-                     "value" : [ "define ","EqualTo40DaysAfter",": " ]
+                     "value" : [ "","define ","EqualTo40DaysAfter",": " ]
                   }, {
                      "r" : "61",
                      "s" : [ {
@@ -32037,7 +32485,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "68",
                   "s" : [ {
-                     "value" : [ "define ","EqualTo80DaysAfter",": " ]
+                     "value" : [ "","define ","EqualTo80DaysAfter",": " ]
                   }, {
                      "r" : "67",
                      "s" : [ {
@@ -32097,7 +32545,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "74",
                   "s" : [ {
-                     "value" : [ "define ","LessOrEqualTo25DaysAfter",": " ]
+                     "value" : [ "","define ","LessOrEqualTo25DaysAfter",": " ]
                   }, {
                      "r" : "73",
                      "s" : [ {
@@ -32157,7 +32605,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "80",
                   "s" : [ {
-                     "value" : [ "define ","LessOrEqualTo40DaysAfter",": " ]
+                     "value" : [ "","define ","LessOrEqualTo40DaysAfter",": " ]
                   }, {
                      "r" : "79",
                      "s" : [ {
@@ -32217,7 +32665,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "86",
                   "s" : [ {
-                     "value" : [ "define ","LessOrEqualTo80DaysAfter",": " ]
+                     "value" : [ "","define ","LessOrEqualTo80DaysAfter",": " ]
                   }, {
                      "r" : "85",
                      "s" : [ {
@@ -32277,7 +32725,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "92",
                   "s" : [ {
-                     "value" : [ "define ","LessThan25DaysAfter",": " ]
+                     "value" : [ "","define ","LessThan25DaysAfter",": " ]
                   }, {
                      "r" : "91",
                      "s" : [ {
@@ -32337,7 +32785,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "98",
                   "s" : [ {
-                     "value" : [ "define ","LessThan40DaysAfter",": " ]
+                     "value" : [ "","define ","LessThan40DaysAfter",": " ]
                   }, {
                      "r" : "97",
                      "s" : [ {
@@ -32397,7 +32845,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "104",
                   "s" : [ {
-                     "value" : [ "define ","LessThan80DaysAfter",": " ]
+                     "value" : [ "","define ","LessThan80DaysAfter",": " ]
                   }, {
                      "r" : "103",
                      "s" : [ {
@@ -32457,7 +32905,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "110",
                   "s" : [ {
-                     "value" : [ "define ","TwentyFiveDaysLessThanDaysBetween",": " ]
+                     "value" : [ "","define ","TwentyFiveDaysLessThanDaysBetween",": " ]
                   }, {
                      "r" : "109",
                      "s" : [ {
@@ -32517,7 +32965,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "116",
                   "s" : [ {
-                     "value" : [ "define ","FortyDaysEqualToDaysBetween",": " ]
+                     "value" : [ "","define ","FortyDaysEqualToDaysBetween",": " ]
                   }, {
                      "r" : "115",
                      "s" : [ {
@@ -32577,7 +33025,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "122",
                   "s" : [ {
-                     "value" : [ "define ","TwentyFiveDaysGreaterThanDaysBetween",": " ]
+                     "value" : [ "","define ","TwentyFiveDaysGreaterThanDaysBetween",": " ]
                   }, {
                      "r" : "121",
                      "s" : [ {
@@ -32637,7 +33085,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "146",
                   "s" : [ {
-                     "value" : [ "define ","BonnieTestCase",": " ]
+                     "value" : [ "","define ","BonnieTestCase",": " ]
                   }, {
                      "r" : "145",
                      "s" : [ {
@@ -32817,7 +33265,7 @@ module.exports['DifferenceBetween Comparisons'] = {
                "s" : {
                   "r" : "168",
                   "s" : [ {
-                     "value" : [ "define ","BonnieTestCaseZulu",": " ]
+                     "value" : [ "","define ","BonnieTestCaseZulu",": " ]
                   }, {
                      "r" : "167",
                      "s" : [ {
@@ -33002,6 +33450,14 @@ module.exports['DurationBetween'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "139",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -33019,7 +33475,27 @@ module.exports['DurationBetween'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -33043,7 +33519,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "10",
                   "s" : [ {
-                     "value" : [ "define ","DecTen2013",": " ]
+                     "value" : [ "","define ","DecTen2013",": " ]
                   }, {
                      "r" : "9",
                      "s" : [ {
@@ -33109,7 +33585,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "19",
                   "s" : [ {
-                     "value" : [ "define ","JanOne2015",": " ]
+                     "value" : [ "","define ","JanOne2015",": " ]
                   }, {
                      "r" : "18",
                      "s" : [ {
@@ -33175,7 +33651,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "23",
                   "s" : [ {
-                     "value" : [ "define ","January2015",": " ]
+                     "value" : [ "","define ","January2015",": " ]
                   }, {
                      "r" : "22",
                      "s" : [ {
@@ -33211,7 +33687,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "27",
                   "s" : [ {
-                     "value" : [ "define ","YearsBetween",": " ]
+                     "value" : [ "","define ","YearsBetween",": " ]
                   }, {
                      "r" : "26",
                      "s" : [ {
@@ -33256,7 +33732,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "31",
                   "s" : [ {
-                     "value" : [ "define ","MonthsBetween",": " ]
+                     "value" : [ "","define ","MonthsBetween",": " ]
                   }, {
                      "r" : "30",
                      "s" : [ {
@@ -33301,7 +33777,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "35",
                   "s" : [ {
-                     "value" : [ "define ","WeeksBetween",": " ]
+                     "value" : [ "","define ","WeeksBetween",": " ]
                   }, {
                      "r" : "34",
                      "s" : [ {
@@ -33346,7 +33822,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "39",
                   "s" : [ {
-                     "value" : [ "define ","DaysBetween",": " ]
+                     "value" : [ "","define ","DaysBetween",": " ]
                   }, {
                      "r" : "38",
                      "s" : [ {
@@ -33391,7 +33867,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "43",
                   "s" : [ {
-                     "value" : [ "define ","HoursBetween",": " ]
+                     "value" : [ "","define ","HoursBetween",": " ]
                   }, {
                      "r" : "42",
                      "s" : [ {
@@ -33436,7 +33912,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "47",
                   "s" : [ {
-                     "value" : [ "define ","MinutesBetween",": " ]
+                     "value" : [ "","define ","MinutesBetween",": " ]
                   }, {
                      "r" : "46",
                      "s" : [ {
@@ -33481,7 +33957,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "51",
                   "s" : [ {
-                     "value" : [ "define ","SecondsBetween",": " ]
+                     "value" : [ "","define ","SecondsBetween",": " ]
                   }, {
                      "r" : "50",
                      "s" : [ {
@@ -33526,7 +34002,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "55",
                   "s" : [ {
-                     "value" : [ "define ","MillisecondsBetween",": " ]
+                     "value" : [ "","define ","MillisecondsBetween",": " ]
                   }, {
                      "r" : "54",
                      "s" : [ {
@@ -33571,7 +34047,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "59",
                   "s" : [ {
-                     "value" : [ "define ","MillisecondsBetweenReversed",": " ]
+                     "value" : [ "","define ","MillisecondsBetweenReversed",": " ]
                   }, {
                      "r" : "58",
                      "s" : [ {
@@ -33616,7 +34092,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "63",
                   "s" : [ {
-                     "value" : [ "define ","YearsBetweenUncertainty",": " ]
+                     "value" : [ "","define ","YearsBetweenUncertainty",": " ]
                   }, {
                      "r" : "62",
                      "s" : [ {
@@ -33661,7 +34137,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "67",
                   "s" : [ {
-                     "value" : [ "define ","MonthsBetweenUncertainty",": " ]
+                     "value" : [ "","define ","MonthsBetweenUncertainty",": " ]
                   }, {
                      "r" : "66",
                      "s" : [ {
@@ -33706,7 +34182,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "71",
                   "s" : [ {
-                     "value" : [ "define ","WeeksBetweenUncertainty",": " ]
+                     "value" : [ "","define ","WeeksBetweenUncertainty",": " ]
                   }, {
                      "r" : "70",
                      "s" : [ {
@@ -33751,7 +34227,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "75",
                   "s" : [ {
-                     "value" : [ "define ","DaysBetweenUncertainty",": " ]
+                     "value" : [ "","define ","DaysBetweenUncertainty",": " ]
                   }, {
                      "r" : "74",
                      "s" : [ {
@@ -33796,7 +34272,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "79",
                   "s" : [ {
-                     "value" : [ "define ","HoursBetweenUncertainty",": " ]
+                     "value" : [ "","define ","HoursBetweenUncertainty",": " ]
                   }, {
                      "r" : "78",
                      "s" : [ {
@@ -33841,7 +34317,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "83",
                   "s" : [ {
-                     "value" : [ "define ","MinutesBetweenUncertainty",": " ]
+                     "value" : [ "","define ","MinutesBetweenUncertainty",": " ]
                   }, {
                      "r" : "82",
                      "s" : [ {
@@ -33886,7 +34362,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "87",
                   "s" : [ {
-                     "value" : [ "define ","SecondsBetweenUncertainty",": " ]
+                     "value" : [ "","define ","SecondsBetweenUncertainty",": " ]
                   }, {
                      "r" : "86",
                      "s" : [ {
@@ -33931,7 +34407,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "91",
                   "s" : [ {
-                     "value" : [ "define ","MillisecondsBetweenUncertainty",": " ]
+                     "value" : [ "","define ","MillisecondsBetweenUncertainty",": " ]
                   }, {
                      "r" : "90",
                      "s" : [ {
@@ -33976,7 +34452,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "95",
                   "s" : [ {
-                     "value" : [ "define ","MillisecondsBetweenReversedUncertainty",": " ]
+                     "value" : [ "","define ","MillisecondsBetweenReversedUncertainty",": " ]
                   }, {
                      "r" : "94",
                      "s" : [ {
@@ -34021,7 +34497,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "117",
                   "s" : [ {
-                     "value" : [ "define ","HoursBetween1and3CrossingSpringDST",": " ]
+                     "value" : [ "","define ","HoursBetween1and3CrossingSpringDST",": " ]
                   }, {
                      "r" : "116",
                      "s" : [ {
@@ -34186,7 +34662,7 @@ module.exports['DurationBetween'] = {
                "s" : {
                   "r" : "139",
                   "s" : [ {
-                     "value" : [ "define ","HoursBetween1and3CrossingFallDST",": " ]
+                     "value" : [ "","define ","HoursBetween1and3CrossingFallDST",": " ]
                   }, {
                      "r" : "138",
                      "s" : [ {
@@ -34374,6 +34850,14 @@ module.exports['DateMath'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "74",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -34391,7 +34875,27 @@ module.exports['DateMath'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -34415,7 +34919,7 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "10",
                   "s" : [ {
-                     "value" : [ "define ","June15th2013",": " ]
+                     "value" : [ "","define ","June15th2013",": " ]
                   }, {
                      "r" : "9",
                      "s" : [ {
@@ -34481,7 +34985,7 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "14",
                   "s" : [ {
-                     "value" : [ "define ","PlusThreeYears",": " ]
+                     "value" : [ "","define ","PlusThreeYears",": " ]
                   }, {
                      "r" : "13",
                      "s" : [ {
@@ -34524,7 +35028,7 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "18",
                   "s" : [ {
-                     "value" : [ "define ","MinusThreeYears",": " ]
+                     "value" : [ "","define ","MinusThreeYears",": " ]
                   }, {
                      "r" : "17",
                      "s" : [ {
@@ -34567,7 +35071,7 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "22",
                   "s" : [ {
-                     "value" : [ "define ","PlusEightMonths",": " ]
+                     "value" : [ "","define ","PlusEightMonths",": " ]
                   }, {
                      "r" : "21",
                      "s" : [ {
@@ -34610,7 +35114,7 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "26",
                   "s" : [ {
-                     "value" : [ "define ","MinusEightMonths",": " ]
+                     "value" : [ "","define ","MinusEightMonths",": " ]
                   }, {
                      "r" : "25",
                      "s" : [ {
@@ -34653,7 +35157,7 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "30",
                   "s" : [ {
-                     "value" : [ "define ","PlusThreeWeeks",": " ]
+                     "value" : [ "","define ","PlusThreeWeeks",": " ]
                   }, {
                      "r" : "29",
                      "s" : [ {
@@ -34696,7 +35200,7 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "34",
                   "s" : [ {
-                     "value" : [ "define ","MinusThreeWeeks",": " ]
+                     "value" : [ "","define ","MinusThreeWeeks",": " ]
                   }, {
                      "r" : "33",
                      "s" : [ {
@@ -34739,7 +35243,7 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "38",
                   "s" : [ {
-                     "value" : [ "define ","PlusTwentyDays",": " ]
+                     "value" : [ "","define ","PlusTwentyDays",": " ]
                   }, {
                      "r" : "37",
                      "s" : [ {
@@ -34782,7 +35286,7 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "42",
                   "s" : [ {
-                     "value" : [ "define ","MinusTwentyDays",": " ]
+                     "value" : [ "","define ","MinusTwentyDays",": " ]
                   }, {
                      "r" : "41",
                      "s" : [ {
@@ -34825,7 +35329,7 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "46",
                   "s" : [ {
-                     "value" : [ "define ","PlusThreeHours",": " ]
+                     "value" : [ "","define ","PlusThreeHours",": " ]
                   }, {
                      "r" : "45",
                      "s" : [ {
@@ -34868,7 +35372,7 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "50",
                   "s" : [ {
-                     "value" : [ "define ","MinusThreeHours",": " ]
+                     "value" : [ "","define ","MinusThreeHours",": " ]
                   }, {
                      "r" : "49",
                      "s" : [ {
@@ -34911,7 +35415,7 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "54",
                   "s" : [ {
-                     "value" : [ "define ","PlusThreeMinutes",": " ]
+                     "value" : [ "","define ","PlusThreeMinutes",": " ]
                   }, {
                      "r" : "53",
                      "s" : [ {
@@ -34954,7 +35458,7 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "58",
                   "s" : [ {
-                     "value" : [ "define ","MinusThreeMinutes",": " ]
+                     "value" : [ "","define ","MinusThreeMinutes",": " ]
                   }, {
                      "r" : "57",
                      "s" : [ {
@@ -34997,7 +35501,7 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "62",
                   "s" : [ {
-                     "value" : [ "define ","PlusThreeSeconds",": " ]
+                     "value" : [ "","define ","PlusThreeSeconds",": " ]
                   }, {
                      "r" : "61",
                      "s" : [ {
@@ -35040,7 +35544,7 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "66",
                   "s" : [ {
-                     "value" : [ "define ","MinusThreeSeconds",": " ]
+                     "value" : [ "","define ","MinusThreeSeconds",": " ]
                   }, {
                      "r" : "65",
                      "s" : [ {
@@ -35083,7 +35587,7 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "70",
                   "s" : [ {
-                     "value" : [ "define ","PlusThreeMilliseconds",": " ]
+                     "value" : [ "","define ","PlusThreeMilliseconds",": " ]
                   }, {
                      "r" : "69",
                      "s" : [ {
@@ -35126,7 +35630,7 @@ module.exports['DateMath'] = {
                "s" : {
                   "r" : "74",
                   "s" : [ {
-                     "value" : [ "define ","MinusThreeMilliseconds",": " ]
+                     "value" : [ "","define ","MinusThreeMilliseconds",": " ]
                   }, {
                      "r" : "73",
                      "s" : [ {

@@ -24,6 +24,14 @@ module.exports['DateRangeOptimizedQuery'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "36",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -41,7 +49,22 @@ module.exports['DateRangeOptimizedQuery'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -49,6 +72,36 @@ module.exports['DateRangeOptimizedQuery'] = {
             "localId" : "12",
             "name" : "MeasurementPeriod",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "value" : [ "","parameter ","MeasurementPeriod"," default " ]
+                  }, {
+                     "r" : "11",
+                     "s" : [ {
+                        "value" : [ "Interval[" ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "r" : "3",
+                           "value" : [ "DateTime","(","2013",", ","1",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "r" : "7",
+                           "value" : [ "DateTime","(","2014",", ","1",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "11",
                "lowClosed" : true,
@@ -106,7 +159,21 @@ module.exports['DateRangeOptimizedQuery'] = {
             "localId" : "2",
             "name" : "Ambulatory/ED Visit",
             "id" : "2.16.840.1.113883.3.464.1003.101.12.1061",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Ambulatory/ED Visit\"",": ","'2.16.840.1.113883.3.464.1003.101.12.1061'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -130,7 +197,7 @@ module.exports['DateRangeOptimizedQuery'] = {
                "s" : {
                   "r" : "20",
                   "s" : [ {
-                     "value" : [ "define ","EncountersDuringMP",": " ]
+                     "value" : [ "","define ","EncountersDuringMP",": " ]
                   }, {
                      "r" : "19",
                      "s" : [ {
@@ -215,7 +282,7 @@ module.exports['DateRangeOptimizedQuery'] = {
                "s" : {
                   "r" : "28",
                   "s" : [ {
-                     "value" : [ "define ","AmbulatoryEncountersDuringMP",": " ]
+                     "value" : [ "","define ","AmbulatoryEncountersDuringMP",": " ]
                   }, {
                      "r" : "27",
                      "s" : [ {
@@ -286,6 +353,7 @@ module.exports['DateRangeOptimizedQuery'] = {
                      "localId" : "21",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "codeProperty" : "code",
+                     "codeComparator" : "in",
                      "dateProperty" : "period",
                      "type" : "Retrieve",
                      "codes" : {
@@ -311,7 +379,7 @@ module.exports['DateRangeOptimizedQuery'] = {
                "s" : {
                   "r" : "36",
                   "s" : [ {
-                     "value" : [ "define ","AmbulatoryEncountersIncludedInMP",": " ]
+                     "value" : [ "","define ","AmbulatoryEncountersIncludedInMP",": " ]
                   }, {
                      "r" : "35",
                      "s" : [ {
@@ -382,6 +450,7 @@ module.exports['DateRangeOptimizedQuery'] = {
                      "localId" : "29",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "codeProperty" : "code",
+                     "codeComparator" : "in",
                      "dateProperty" : "period",
                      "type" : "Retrieve",
                      "codes" : {
@@ -415,6 +484,14 @@ module.exports['FunctionQuery'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "17",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -432,7 +509,27 @@ module.exports['FunctionQuery'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -457,7 +554,7 @@ module.exports['FunctionQuery'] = {
                "s" : {
                   "r" : "10",
                   "s" : [ {
-                     "value" : [ "define function ","\"FunctionWithThis\"","(","Encounter"," " ]
+                     "value" : [ "","define function ","\"FunctionWithThis\"","(","Encounter"," " ]
                   }, {
                      "r" : "3",
                      "s" : [ {
@@ -548,6 +645,7 @@ module.exports['FunctionQuery'] = {
                            }
                         },
                         "return" : {
+                           "distinct" : false,
                            "expression" : {
                               "path" : "period",
                               "type" : "Property",
@@ -592,7 +690,7 @@ module.exports['FunctionQuery'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","queryWithThis",": " ]
+                     "value" : [ "","define ","queryWithThis",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -674,6 +772,14 @@ module.exports['IncludesQuery'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "20",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -691,7 +797,22 @@ module.exports['IncludesQuery'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -699,6 +820,36 @@ module.exports['IncludesQuery'] = {
             "localId" : "12",
             "name" : "MeasurementPeriod",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "value" : [ "","parameter ","MeasurementPeriod"," default " ]
+                  }, {
+                     "r" : "11",
+                     "s" : [ {
+                        "value" : [ "Interval[" ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "r" : "3",
+                           "value" : [ "DateTime","(","2013",", ","1",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "r" : "7",
+                           "value" : [ "DateTime","(","2014",", ","1",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "11",
                "lowClosed" : true,
@@ -756,7 +907,21 @@ module.exports['IncludesQuery'] = {
             "localId" : "2",
             "name" : "Ambulatory/ED Visit",
             "id" : "2.16.840.1.113883.3.464.1003.101.12.1061",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Ambulatory/ED Visit\"",": ","'2.16.840.1.113883.3.464.1003.101.12.1061'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -780,7 +945,7 @@ module.exports['IncludesQuery'] = {
                "s" : {
                   "r" : "20",
                   "s" : [ {
-                     "value" : [ "define ","MPIncludedAmbulatoryEncounters",": " ]
+                     "value" : [ "","define ","MPIncludedAmbulatoryEncounters",": " ]
                   }, {
                      "r" : "19",
                      "s" : [ {
@@ -851,6 +1016,7 @@ module.exports['IncludesQuery'] = {
                      "localId" : "13",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "codeProperty" : "code",
+                     "codeComparator" : "in",
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Ambulatory/ED Visit",
@@ -899,6 +1065,14 @@ module.exports['MultiSourceQuery'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "46",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -916,7 +1090,22 @@ module.exports['MultiSourceQuery'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -924,6 +1113,36 @@ module.exports['MultiSourceQuery'] = {
             "localId" : "11",
             "name" : "MeasurementPeriod",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "11",
+                  "s" : [ {
+                     "value" : [ "","parameter ","MeasurementPeriod"," default " ]
+                  }, {
+                     "r" : "10",
+                     "s" : [ {
+                        "value" : [ "Interval[" ]
+                     }, {
+                        "r" : "5",
+                        "s" : [ {
+                           "r" : "2",
+                           "value" : [ "DateTime","(","2013",", ","1",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "9",
+                        "s" : [ {
+                           "r" : "6",
+                           "value" : [ "DateTime","(","2014",", ","1",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "10",
                "lowClosed" : true,
@@ -976,6 +1195,11 @@ module.exports['MultiSourceQuery'] = {
             }
          } ]
       },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
+         } ]
+      },
       "statements" : {
          "def" : [ {
             "name" : "Patient",
@@ -997,7 +1221,7 @@ module.exports['MultiSourceQuery'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","msQueryWhere",": " ]
+                     "value" : [ "","define ","msQueryWhere",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {
@@ -1126,7 +1350,7 @@ module.exports['MultiSourceQuery'] = {
                "s" : {
                   "r" : "36",
                   "s" : [ {
-                     "value" : [ "define ","msQueryWhere2",": " ]
+                     "value" : [ "","define ","msQueryWhere2",": " ]
                   }, {
                      "r" : "35",
                      "s" : [ {
@@ -1300,7 +1524,7 @@ module.exports['MultiSourceQuery'] = {
                "s" : {
                   "r" : "46",
                   "s" : [ {
-                     "value" : [ "define ","msQuery",": " ]
+                     "value" : [ "","define ","msQuery",": " ]
                   }, {
                      "r" : "45",
                      "s" : [ {
@@ -1444,6 +1668,14 @@ module.exports['QueryRelationship'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "45",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -1461,7 +1693,27 @@ module.exports['QueryRelationship'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -1485,7 +1737,7 @@ module.exports['QueryRelationship'] = {
                "s" : {
                   "r" : "12",
                   "s" : [ {
-                     "value" : [ "define ","withQuery",":  " ]
+                     "value" : [ "","define ","withQuery",":  " ]
                   }, {
                      "r" : "11",
                      "s" : [ {
@@ -1602,7 +1854,7 @@ module.exports['QueryRelationship'] = {
                "s" : {
                   "r" : "23",
                   "s" : [ {
-                     "value" : [ "define ","withQuery2",":  " ]
+                     "value" : [ "","define ","withQuery2",":  " ]
                   }, {
                      "r" : "22",
                      "s" : [ {
@@ -1719,7 +1971,7 @@ module.exports['QueryRelationship'] = {
                "s" : {
                   "r" : "34",
                   "s" : [ {
-                     "value" : [ "define ","withOutQuery",":  " ]
+                     "value" : [ "","define ","withOutQuery",":  " ]
                   }, {
                      "r" : "33",
                      "s" : [ {
@@ -1836,7 +2088,7 @@ module.exports['QueryRelationship'] = {
                "s" : {
                   "r" : "45",
                   "s" : [ {
-                     "value" : [ "define ","withOutQuery2",":  " ]
+                     "value" : [ "","define ","withOutQuery2",":  " ]
                   }, {
                      "r" : "44",
                      "s" : [ {
@@ -1962,6 +2214,14 @@ module.exports['QueryLet'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "11",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -1979,7 +2239,27 @@ module.exports['QueryLet'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2003,7 +2283,7 @@ module.exports['QueryLet'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","query",":  " ]
+                     "value" : [ "","define ","query",":  " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -2137,6 +2417,14 @@ module.exports['Tuple'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "11",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -2154,7 +2442,27 @@ module.exports['Tuple'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2178,7 +2486,7 @@ module.exports['Tuple'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","query",":  " ]
+                     "value" : [ "","define ","query",":  " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -2309,6 +2617,14 @@ module.exports['QueryFilterNulls'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "12",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -2326,7 +2642,27 @@ module.exports['QueryFilterNulls'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2350,7 +2686,7 @@ module.exports['QueryFilterNulls'] = {
                "s" : {
                   "r" : "12",
                   "s" : [ {
-                     "value" : [ "define ","query",":  " ]
+                     "value" : [ "","define ","query",":  " ]
                   }, {
                      "r" : "11",
                      "s" : [ {
@@ -2504,6 +2840,14 @@ module.exports['Sorting'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "216",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -2521,7 +2865,27 @@ module.exports['Sorting'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2545,7 +2909,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "12",
                   "s" : [ {
-                     "value" : [ "define ","QuantityListAsc",": " ]
+                     "value" : [ "","define ","QuantityListAsc",": " ]
                   }, {
                      "r" : "11",
                      "s" : [ {
@@ -2671,7 +3035,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "26",
                   "s" : [ {
-                     "value" : [ "define ","QuantityListSort",": " ]
+                     "value" : [ "","define ","QuantityListSort",": " ]
                   }, {
                      "r" : "25",
                      "s" : [ {
@@ -2836,7 +3200,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","TupleAsc",": " ]
+                     "value" : [ "","define ","TupleAsc",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -2906,7 +3270,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "42",
                   "s" : [ {
-                     "value" : [ "define ","TupleReturnAsc",": " ]
+                     "value" : [ "","define ","TupleReturnAsc",": " ]
                   }, {
                      "r" : "41",
                      "s" : [ {
@@ -2996,7 +3360,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "53",
                   "s" : [ {
-                     "value" : [ "define ","TupleReturnTupleAsc",": " ]
+                     "value" : [ "","define ","TupleReturnTupleAsc",": " ]
                   }, {
                      "r" : "52",
                      "s" : [ {
@@ -3123,7 +3487,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "60",
                   "s" : [ {
-                     "value" : [ "define ","TupleDesc",": " ]
+                     "value" : [ "","define ","TupleDesc",": " ]
                   }, {
                      "r" : "59",
                      "s" : [ {
@@ -3195,7 +3559,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "69",
                   "s" : [ {
-                     "value" : [ "define ","TupleReturnDesc",": " ]
+                     "value" : [ "","define ","TupleReturnDesc",": " ]
                   }, {
                      "r" : "68",
                      "s" : [ {
@@ -3287,7 +3651,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "80",
                   "s" : [ {
-                     "value" : [ "define ","TupleReturnTupleDesc",":  " ]
+                     "value" : [ "","define ","TupleReturnTupleDesc",":  " ]
                   }, {
                      "r" : "79",
                      "s" : [ {
@@ -3416,7 +3780,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "88",
                   "s" : [ {
-                     "value" : [ "define ","ConditionDates",": " ]
+                     "value" : [ "","define ","ConditionDates",": " ]
                   }, {
                      "r" : "87",
                      "s" : [ {
@@ -3508,7 +3872,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "91",
                   "s" : [ {
-                     "value" : [ "define ","lastDateUnsorted",": " ]
+                     "value" : [ "","define ","lastDateUnsorted",": " ]
                   }, {
                      "r" : "90",
                      "s" : [ {
@@ -3543,7 +3907,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "99",
                   "s" : [ {
-                     "value" : [ "define ","lastDateByThis",": " ]
+                     "value" : [ "","define ","lastDateByThis",": " ]
                   }, {
                      "r" : "98",
                      "s" : [ {
@@ -3621,7 +3985,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "111",
                   "s" : [ {
-                     "value" : [ "define ","numberAsc",": " ]
+                     "value" : [ "","define ","numberAsc",": " ]
                   }, {
                      "r" : "110",
                      "s" : [ {
@@ -3717,7 +4081,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "125",
                   "s" : [ {
-                     "value" : [ "define ","numberReturnAsc",": " ]
+                     "value" : [ "","define ","numberReturnAsc",": " ]
                   }, {
                      "r" : "124",
                      "s" : [ {
@@ -3833,7 +4197,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "137",
                   "s" : [ {
-                     "value" : [ "define ","numberDesc",": " ]
+                     "value" : [ "","define ","numberDesc",": " ]
                   }, {
                      "r" : "136",
                      "s" : [ {
@@ -3929,7 +4293,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "151",
                   "s" : [ {
-                     "value" : [ "define ","numberReturnDesc",": " ]
+                     "value" : [ "","define ","numberReturnDesc",": " ]
                   }, {
                      "r" : "150",
                      "s" : [ {
@@ -4045,7 +4409,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "161",
                   "s" : [ {
-                     "value" : [ "define ","stringAsc",": " ]
+                     "value" : [ "","define ","stringAsc",": " ]
                   }, {
                      "r" : "160",
                      "s" : [ {
@@ -4165,7 +4529,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "173",
                   "s" : [ {
-                     "value" : [ "define ","stringReturnAsc",": " ]
+                     "value" : [ "","define ","stringReturnAsc",": " ]
                   }, {
                      "r" : "172",
                      "s" : [ {
@@ -4305,7 +4669,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "183",
                   "s" : [ {
-                     "value" : [ "define ","stringDesc",": " ]
+                     "value" : [ "","define ","stringDesc",": " ]
                   }, {
                      "r" : "182",
                      "s" : [ {
@@ -4425,7 +4789,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "195",
                   "s" : [ {
-                     "value" : [ "define ","stringReturnDesc",": " ]
+                     "value" : [ "","define ","stringReturnDesc",": " ]
                   }, {
                      "r" : "194",
                      "s" : [ {
@@ -4566,7 +4930,7 @@ module.exports['Sorting'] = {
                   "r" : "197",
                   "s" : [ {
                      "r" : "196",
-                     "value" : [ "define ","five",": ","5" ]
+                     "value" : [ "","define ","five",": ","5" ]
                   } ]
                }
             } ],
@@ -4586,7 +4950,7 @@ module.exports['Sorting'] = {
                "s" : {
                   "r" : "216",
                   "s" : [ {
-                     "value" : [ "define ","sortByExpression",": " ]
+                     "value" : [ "","define ","sortByExpression",": " ]
                   }, {
                      "r" : "215",
                      "s" : [ {
@@ -4778,6 +5142,14 @@ module.exports['Distinct'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "142",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -4795,7 +5167,27 @@ module.exports['Distinct'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -4819,7 +5211,7 @@ module.exports['Distinct'] = {
                "s" : {
                   "r" : "23",
                   "s" : [ {
-                     "value" : [ "define ","defaultNumbers",": " ]
+                     "value" : [ "","define ","defaultNumbers",": " ]
                   }, {
                      "r" : "22",
                      "s" : [ {
@@ -4970,7 +5362,7 @@ module.exports['Distinct'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","defaultStrings",": " ]
+                     "value" : [ "","define ","defaultStrings",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -5088,7 +5480,7 @@ module.exports['Distinct'] = {
                "s" : {
                   "r" : "48",
                   "s" : [ {
-                     "value" : [ "define ","defaultTuples",": " ]
+                     "value" : [ "","define ","defaultTuples",": " ]
                   }, {
                      "r" : "47",
                      "s" : [ {
@@ -5281,7 +5673,7 @@ module.exports['Distinct'] = {
                "s" : {
                   "r" : "70",
                   "s" : [ {
-                     "value" : [ "define ","distinctNumbers",": " ]
+                     "value" : [ "","define ","distinctNumbers",": " ]
                   }, {
                      "r" : "69",
                      "s" : [ {
@@ -5433,7 +5825,7 @@ module.exports['Distinct'] = {
                "s" : {
                   "r" : "80",
                   "s" : [ {
-                     "value" : [ "define ","distinctStrings",": " ]
+                     "value" : [ "","define ","distinctStrings",": " ]
                   }, {
                      "r" : "79",
                      "s" : [ {
@@ -5552,7 +5944,7 @@ module.exports['Distinct'] = {
                "s" : {
                   "r" : "95",
                   "s" : [ {
-                     "value" : [ "define ","distinctTuples",": " ]
+                     "value" : [ "","define ","distinctTuples",": " ]
                   }, {
                      "r" : "94",
                      "s" : [ {
@@ -5746,7 +6138,7 @@ module.exports['Distinct'] = {
                "s" : {
                   "r" : "117",
                   "s" : [ {
-                     "value" : [ "define ","allNumbers",": " ]
+                     "value" : [ "","define ","allNumbers",": " ]
                   }, {
                      "r" : "116",
                      "s" : [ {
@@ -5898,7 +6290,7 @@ module.exports['Distinct'] = {
                "s" : {
                   "r" : "127",
                   "s" : [ {
-                     "value" : [ "define ","allStrings",": " ]
+                     "value" : [ "","define ","allStrings",": " ]
                   }, {
                      "r" : "126",
                      "s" : [ {
@@ -6017,7 +6409,7 @@ module.exports['Distinct'] = {
                "s" : {
                   "r" : "142",
                   "s" : [ {
-                     "value" : [ "define ","allTuples",": " ]
+                     "value" : [ "","define ","allTuples",": " ]
                   }, {
                      "r" : "141",
                      "s" : [ {
@@ -6239,6 +6631,14 @@ module.exports['SingleObjectAlias'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "121",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -6256,7 +6656,27 @@ module.exports['SingleObjectAlias'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -6280,7 +6700,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","encounters",": " ]
+                     "value" : [ "","define ","encounters",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -6326,7 +6746,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","conditions",": " ]
+                     "value" : [ "","define ","conditions",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -6372,7 +6792,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "14",
                   "s" : [ {
-                     "value" : [ "define ","firstEncounter",": " ]
+                     "value" : [ "","define ","firstEncounter",": " ]
                   }, {
                      "r" : "13",
                      "s" : [ {
@@ -6429,7 +6849,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "23",
                   "s" : [ {
-                     "value" : [ "define ","firstCondition",": " ]
+                     "value" : [ "","define ","firstCondition",": " ]
                   }, {
                      "r" : "22",
                      "s" : [ {
@@ -6533,7 +6953,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "27",
                   "s" : [ {
-                     "value" : [ "define ","singleAlias",": " ]
+                     "value" : [ "","define ","singleAlias",": " ]
                   }, {
                      "r" : "26",
                      "s" : [ {
@@ -6578,7 +6998,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","singleAliasWhere",": " ]
+                     "value" : [ "","define ","singleAliasWhere",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -6652,7 +7072,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "40",
                   "s" : [ {
-                     "value" : [ "define ","singleAliasWhereToNull",": " ]
+                     "value" : [ "","define ","singleAliasWhereToNull",": " ]
                   }, {
                      "r" : "39",
                      "s" : [ {
@@ -6734,7 +7154,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "46",
                   "s" : [ {
-                     "value" : [ "define ","singleAliases",": " ]
+                     "value" : [ "","define ","singleAliases",": " ]
                   }, {
                      "r" : "45",
                      "s" : [ {
@@ -6822,7 +7242,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "54",
                   "s" : [ {
-                     "value" : [ "define ","singleAliasesAndList",": " ]
+                     "value" : [ "","define ","singleAliasesAndList",": " ]
                   }, {
                      "r" : "53",
                      "s" : [ {
@@ -6938,7 +7358,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "65",
                   "s" : [ {
-                     "value" : [ "define ","singleAliasWith",":  " ]
+                     "value" : [ "","define ","singleAliasWith",":  " ]
                   }, {
                      "r" : "64",
                      "s" : [ {
@@ -7054,7 +7474,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "76",
                   "s" : [ {
-                     "value" : [ "define ","singleAliasWithOut",":  " ]
+                     "value" : [ "","define ","singleAliasWithOut",":  " ]
                   }, {
                      "r" : "75",
                      "s" : [ {
@@ -7170,7 +7590,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "87",
                   "s" : [ {
-                     "value" : [ "define ","singleAliasWithEmpty",":  " ]
+                     "value" : [ "","define ","singleAliasWithEmpty",":  " ]
                   }, {
                      "r" : "86",
                      "s" : [ {
@@ -7286,7 +7706,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "98",
                   "s" : [ {
-                     "value" : [ "define ","singleAliasWithOutEmpty",":  " ]
+                     "value" : [ "","define ","singleAliasWithOutEmpty",":  " ]
                   }, {
                      "r" : "97",
                      "s" : [ {
@@ -7403,7 +7823,7 @@ module.exports['SingleObjectAlias'] = {
                   "r" : "100",
                   "s" : [ {
                      "r" : "99",
-                     "value" : [ "define ","asNull",": ","null" ]
+                     "value" : [ "","define ","asNull",": ","null" ]
                   } ]
                }
             } ],
@@ -7421,7 +7841,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "104",
                   "s" : [ {
-                     "value" : [ "define ","nullQuery",": " ]
+                     "value" : [ "","define ","nullQuery",": " ]
                   }, {
                      "r" : "103",
                      "s" : [ {
@@ -7466,7 +7886,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "111",
                   "s" : [ {
-                     "value" : [ "define ","singleAliasReturnTuple",": " ]
+                     "value" : [ "//define singleAliasWith: firstEncounter E with [Condition] C\n//                         such that C.id = 'http://cqframework.org/3/2'\n//define singleAliasWithNull: firstEncounter E with conditions C\n//                        such that C.id is null","define ","singleAliasReturnTuple",": " ]
                   }, {
                      "r" : "110",
                      "s" : [ {
@@ -7546,7 +7966,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "121",
                   "s" : [ {
-                     "value" : [ "define ","singleAliasReturnList",": " ]
+                     "value" : [ "","define ","singleAliasReturnList",": " ]
                   }, {
                      "r" : "120",
                      "s" : [ {

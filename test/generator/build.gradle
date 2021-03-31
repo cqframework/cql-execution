@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'info.cqframework', name: 'cql-to-elm', version: '1.4.9'
+    implementation group: 'info.cqframework', name: 'cql-to-elm', version: '1.5.2'
     implementation group: 'net.sf.jopt-simple', name: 'jopt-simple', version: '4.7'
 }
 

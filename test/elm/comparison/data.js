@@ -56,6 +56,14 @@ module.exports['Equal'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "353",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -73,7 +81,27 @@ module.exports['Equal'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -97,7 +125,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Int",": " ]
+                     "value" : [ "","define ","AGtB_Int",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -132,7 +160,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Int",": " ]
+                     "value" : [ "","define ","AEqB_Int",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -167,7 +195,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Int",": " ]
+                     "value" : [ "","define ","ALtB_Int",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -202,7 +230,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "23",
                   "s" : [ {
-                     "value" : [ "define ","EqTuples",": " ]
+                     "value" : [ "","define ","EqTuples",": " ]
                   }, {
                      "r" : "22",
                      "s" : [ {
@@ -340,7 +368,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "34",
                   "s" : [ {
-                     "value" : [ "define ","UneqTuples",": " ]
+                     "value" : [ "","define ","UneqTuples",": " ]
                   }, {
                      "r" : "33",
                      "s" : [ {
@@ -487,7 +515,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "42",
                   "s" : [ {
-                     "value" : [ "define ","EqTuplesWithNullFields",": " ]
+                     "value" : [ "","define ","EqTuplesWithNullFields",": " ]
                   }, {
                      "r" : "41",
                      "s" : [ {
@@ -593,7 +621,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "50",
                   "s" : [ {
-                     "value" : [ "define ","UneqTuplesWithNullFields",": " ]
+                     "value" : [ "","define ","UneqTuplesWithNullFields",": " ]
                   }, {
                      "r" : "49",
                      "s" : [ {
@@ -699,7 +727,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "58",
                   "s" : [ {
-                     "value" : [ "define ","UncertTuplesWithNullFieldOnOne",": " ]
+                     "value" : [ "","define ","UncertTuplesWithNullFieldOnOne",": " ]
                   }, {
                      "r" : "57",
                      "s" : [ {
@@ -811,7 +839,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "78",
                   "s" : [ {
-                     "value" : [ "define ","EqDateTimes",": " ]
+                     "value" : [ "","define ","EqDateTimes",": " ]
                   }, {
                      "r" : "77",
                      "s" : [ {
@@ -965,7 +993,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "98",
                   "s" : [ {
-                     "value" : [ "define ","UneqDateTimes",": " ]
+                     "value" : [ "","define ","UneqDateTimes",": " ]
                   }, {
                      "r" : "97",
                      "s" : [ {
@@ -1119,7 +1147,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "118",
                   "s" : [ {
-                     "value" : [ "define ","EqDateTimesTZ",": " ]
+                     "value" : [ "","define ","EqDateTimesTZ",": " ]
                   }, {
                      "r" : "117",
                      "s" : [ {
@@ -1273,7 +1301,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "138",
                   "s" : [ {
-                     "value" : [ "define ","UneqDateTimesTZ",": " ]
+                     "value" : [ "","define ","UneqDateTimesTZ",": " ]
                   }, {
                      "r" : "137",
                      "s" : [ {
@@ -1427,7 +1455,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "155",
                   "s" : [ {
-                     "value" : [ "define ","EqDateTimesNullMs",": " ]
+                     "value" : [ "","define ","EqDateTimesNullMs",": " ]
                   }, {
                      "r" : "154",
                      "s" : [ {
@@ -1547,7 +1575,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "172",
                   "s" : [ {
-                     "value" : [ "define ","EqDateTimesNullOtherMs",": " ]
+                     "value" : [ "","define ","EqDateTimesNullOtherMs",": " ]
                   }, {
                      "r" : "171",
                      "s" : [ {
@@ -1667,7 +1695,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "182",
                   "s" : [ {
-                     "value" : [ "define ","EqDateTimesOnlyDate",": " ]
+                     "value" : [ "","define ","EqDateTimesOnlyDate",": " ]
                   }, {
                      "r" : "181",
                      "s" : [ {
@@ -1745,7 +1773,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "192",
                   "s" : [ {
-                     "value" : [ "define ","UneqDateTimesOnlyDate",": " ]
+                     "value" : [ "","define ","UneqDateTimesOnlyDate",": " ]
                   }, {
                      "r" : "191",
                      "s" : [ {
@@ -1823,7 +1851,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "205",
                   "s" : [ {
-                     "value" : [ "define ","PossiblyEqDateTimesOnlyDateOnOne",": " ]
+                     "value" : [ "","define ","PossiblyEqDateTimesOnlyDateOnOne",": " ]
                   }, {
                      "r" : "204",
                      "s" : [ {
@@ -1919,7 +1947,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "218",
                   "s" : [ {
-                     "value" : [ "define ","UneqDateTimesOnlyDateOnOne",": " ]
+                     "value" : [ "","define ","UneqDateTimesOnlyDateOnOne",": " ]
                   }, {
                      "r" : "217",
                      "s" : [ {
@@ -2015,7 +2043,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "226",
                   "s" : [ {
-                     "value" : [ "define ","PossiblyEqualDateTimes",": " ]
+                     "value" : [ "","define ","PossiblyEqualDateTimes",": " ]
                   }, {
                      "r" : "225",
                      "s" : [ {
@@ -2081,7 +2109,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "235",
                   "s" : [ {
-                     "value" : [ "define ","ImpossiblyEqualDateTimes",": " ]
+                     "value" : [ "","define ","ImpossiblyEqualDateTimes",": " ]
                   }, {
                      "r" : "234",
                      "s" : [ {
@@ -2153,7 +2181,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "245",
                   "s" : [ {
-                     "value" : [ "define ","DateAndDateTimeNull",": " ]
+                     "value" : [ "","define ","DateAndDateTimeNull",": " ]
                   }, {
                      "r" : "244",
                      "s" : [ {
@@ -2234,7 +2262,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "255",
                   "s" : [ {
-                     "value" : [ "define ","DateAndDateTimeNotEqual",": " ]
+                     "value" : [ "","define ","DateAndDateTimeNotEqual",": " ]
                   }, {
                      "r" : "254",
                      "s" : [ {
@@ -2315,7 +2343,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "268",
                   "s" : [ {
-                     "value" : [ "define ","DateAndDateTimeUncertainFalse",": " ]
+                     "value" : [ "","define ","DateAndDateTimeUncertainFalse",": " ]
                   }, {
                      "r" : "267",
                      "s" : [ {
@@ -2414,7 +2442,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "278",
                   "s" : [ {
-                     "value" : [ "define ","DateTimeAndDateNull",": " ]
+                     "value" : [ "","define ","DateTimeAndDateNull",": " ]
                   }, {
                      "r" : "277",
                      "s" : [ {
@@ -2495,7 +2523,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "288",
                   "s" : [ {
-                     "value" : [ "define ","DateTimeAndDateNotEqual",": " ]
+                     "value" : [ "","define ","DateTimeAndDateNotEqual",": " ]
                   }, {
                      "r" : "287",
                      "s" : [ {
@@ -2576,7 +2604,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "301",
                   "s" : [ {
-                     "value" : [ "define ","DateTimeAndDateUncertainFalse",": " ]
+                     "value" : [ "","define ","DateTimeAndDateUncertainFalse",": " ]
                   }, {
                      "r" : "300",
                      "s" : [ {
@@ -2675,7 +2703,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "305",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Quantity",": " ]
+                     "value" : [ "","define ","AGtB_Quantity",": " ]
                   }, {
                      "r" : "304",
                      "s" : [ {
@@ -2719,7 +2747,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "309",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Quantity",": " ]
+                     "value" : [ "","define ","AEqB_Quantity",": " ]
                   }, {
                      "r" : "308",
                      "s" : [ {
@@ -2763,7 +2791,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "313",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Quantity",": " ]
+                     "value" : [ "","define ","ALtB_Quantity",": " ]
                   }, {
                      "r" : "312",
                      "s" : [ {
@@ -2807,7 +2835,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "317",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Quantity_diff",": " ]
+                     "value" : [ "","define ","AGtB_Quantity_diff",": " ]
                   }, {
                      "r" : "316",
                      "s" : [ {
@@ -2851,7 +2879,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "321",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Quantity_diff",": " ]
+                     "value" : [ "","define ","AEqB_Quantity_diff",": " ]
                   }, {
                      "r" : "320",
                      "s" : [ {
@@ -2895,7 +2923,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "325",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Quantity_diff",": " ]
+                     "value" : [ "","define ","ALtB_Quantity_diff",": " ]
                   }, {
                      "r" : "324",
                      "s" : [ {
@@ -2939,7 +2967,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "329",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Quantity_incompatible",": " ]
+                     "value" : [ "","define ","AGtB_Quantity_incompatible",": " ]
                   }, {
                      "r" : "328",
                      "s" : [ {
@@ -2983,7 +3011,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "333",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Quantity_incompatible",": " ]
+                     "value" : [ "","define ","AEqB_Quantity_incompatible",": " ]
                   }, {
                      "r" : "332",
                      "s" : [ {
@@ -3027,7 +3055,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "337",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Quantity_incompatible",": " ]
+                     "value" : [ "","define ","ALtB_Quantity_incompatible",": " ]
                   }, {
                      "r" : "336",
                      "s" : [ {
@@ -3071,7 +3099,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "345",
                   "s" : [ {
-                     "value" : [ "define ","EqRatios",": " ]
+                     "value" : [ "","define ","EqRatios",": " ]
                   }, {
                      "r" : "344",
                      "s" : [ {
@@ -3151,7 +3179,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "353",
                   "s" : [ {
-                     "value" : [ "define ","UneqRatios",": " ]
+                     "value" : [ "","define ","UneqRatios",": " ]
                   }, {
                      "r" : "352",
                      "s" : [ {
@@ -3272,6 +3300,14 @@ module.exports['NotEqual'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "337",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -3289,7 +3325,27 @@ module.exports['NotEqual'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -3313,7 +3369,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Int",": " ]
+                     "value" : [ "","define ","AGtB_Int",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -3351,7 +3407,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Int",": " ]
+                     "value" : [ "","define ","AEqB_Int",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -3389,7 +3445,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Int",": " ]
+                     "value" : [ "","define ","ALtB_Int",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -3427,7 +3483,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "23",
                   "s" : [ {
-                     "value" : [ "define ","EqTuples",": " ]
+                     "value" : [ "","define ","EqTuples",": " ]
                   }, {
                      "r" : "22",
                      "s" : [ {
@@ -3568,7 +3624,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "34",
                   "s" : [ {
-                     "value" : [ "define ","UneqTuples",": " ]
+                     "value" : [ "","define ","UneqTuples",": " ]
                   }, {
                      "r" : "33",
                      "s" : [ {
@@ -3718,7 +3774,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "42",
                   "s" : [ {
-                     "value" : [ "define ","EqTuplesWithNullFields",": " ]
+                     "value" : [ "","define ","EqTuplesWithNullFields",": " ]
                   }, {
                      "r" : "41",
                      "s" : [ {
@@ -3827,7 +3883,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "50",
                   "s" : [ {
-                     "value" : [ "define ","UneqTuplesWithNullFields",": " ]
+                     "value" : [ "","define ","UneqTuplesWithNullFields",": " ]
                   }, {
                      "r" : "49",
                      "s" : [ {
@@ -3936,7 +3992,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "58",
                   "s" : [ {
-                     "value" : [ "define ","UncertTuplesWithNullFieldOnOne",": " ]
+                     "value" : [ "","define ","UncertTuplesWithNullFieldOnOne",": " ]
                   }, {
                      "r" : "57",
                      "s" : [ {
@@ -4051,7 +4107,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "78",
                   "s" : [ {
-                     "value" : [ "define ","EqDateTimes",": " ]
+                     "value" : [ "","define ","EqDateTimes",": " ]
                   }, {
                      "r" : "77",
                      "s" : [ {
@@ -4208,7 +4264,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "98",
                   "s" : [ {
-                     "value" : [ "define ","UneqDateTimes",": " ]
+                     "value" : [ "","define ","UneqDateTimes",": " ]
                   }, {
                      "r" : "97",
                      "s" : [ {
@@ -4365,7 +4421,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "118",
                   "s" : [ {
-                     "value" : [ "define ","EqDateTimesTZ",": " ]
+                     "value" : [ "","define ","EqDateTimesTZ",": " ]
                   }, {
                      "r" : "117",
                      "s" : [ {
@@ -4522,7 +4578,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "138",
                   "s" : [ {
-                     "value" : [ "define ","UneqDateTimesTZ",": " ]
+                     "value" : [ "","define ","UneqDateTimesTZ",": " ]
                   }, {
                      "r" : "137",
                      "s" : [ {
@@ -4679,7 +4735,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "155",
                   "s" : [ {
-                     "value" : [ "define ","EqDateTimesNullMs",": " ]
+                     "value" : [ "","define ","EqDateTimesNullMs",": " ]
                   }, {
                      "r" : "154",
                      "s" : [ {
@@ -4802,7 +4858,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "172",
                   "s" : [ {
-                     "value" : [ "define ","EqDateTimesNullOtherMs",": " ]
+                     "value" : [ "","define ","EqDateTimesNullOtherMs",": " ]
                   }, {
                      "r" : "171",
                      "s" : [ {
@@ -4925,7 +4981,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "182",
                   "s" : [ {
-                     "value" : [ "define ","EqDateTimesOnlyDate",": " ]
+                     "value" : [ "","define ","EqDateTimesOnlyDate",": " ]
                   }, {
                      "r" : "181",
                      "s" : [ {
@@ -5006,7 +5062,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "192",
                   "s" : [ {
-                     "value" : [ "define ","UneqDateTimesOnlyDate",": " ]
+                     "value" : [ "","define ","UneqDateTimesOnlyDate",": " ]
                   }, {
                      "r" : "191",
                      "s" : [ {
@@ -5087,7 +5143,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "205",
                   "s" : [ {
-                     "value" : [ "define ","PossiblyEqDateTimesOnlyDateOnOne",": " ]
+                     "value" : [ "","define ","PossiblyEqDateTimesOnlyDateOnOne",": " ]
                   }, {
                      "r" : "204",
                      "s" : [ {
@@ -5186,7 +5242,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "218",
                   "s" : [ {
-                     "value" : [ "define ","UneqDateTimesOnlyDateOnOne",": " ]
+                     "value" : [ "","define ","UneqDateTimesOnlyDateOnOne",": " ]
                   }, {
                      "r" : "217",
                      "s" : [ {
@@ -5285,7 +5341,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "226",
                   "s" : [ {
-                     "value" : [ "define ","PossiblyEqualDateTimes",": " ]
+                     "value" : [ "","define ","PossiblyEqualDateTimes",": " ]
                   }, {
                      "r" : "225",
                      "s" : [ {
@@ -5354,7 +5410,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "235",
                   "s" : [ {
-                     "value" : [ "define ","ImpossiblyEqualDateTimes",": " ]
+                     "value" : [ "","define ","ImpossiblyEqualDateTimes",": " ]
                   }, {
                      "r" : "234",
                      "s" : [ {
@@ -5429,7 +5485,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "245",
                   "s" : [ {
-                     "value" : [ "define ","DateAndDateTimeNull",": " ]
+                     "value" : [ "","define ","DateAndDateTimeNull",": " ]
                   }, {
                      "r" : "244",
                      "s" : [ {
@@ -5513,7 +5569,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "255",
                   "s" : [ {
-                     "value" : [ "define ","DateAndDateTimeNotEqual",": " ]
+                     "value" : [ "","define ","DateAndDateTimeNotEqual",": " ]
                   }, {
                      "r" : "254",
                      "s" : [ {
@@ -5597,7 +5653,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "268",
                   "s" : [ {
-                     "value" : [ "define ","DateAndDateTimeUncertainTrue",": " ]
+                     "value" : [ "","define ","DateAndDateTimeUncertainTrue",": " ]
                   }, {
                      "r" : "267",
                      "s" : [ {
@@ -5699,7 +5755,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "278",
                   "s" : [ {
-                     "value" : [ "define ","DateTimeAndDateNull",": " ]
+                     "value" : [ "","define ","DateTimeAndDateNull",": " ]
                   }, {
                      "r" : "277",
                      "s" : [ {
@@ -5783,7 +5839,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "288",
                   "s" : [ {
-                     "value" : [ "define ","DateTimeAndDateNotEqual",": " ]
+                     "value" : [ "","define ","DateTimeAndDateNotEqual",": " ]
                   }, {
                      "r" : "287",
                      "s" : [ {
@@ -5867,7 +5923,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "301",
                   "s" : [ {
-                     "value" : [ "define ","DateTimeAndDateUncertainTrue",": " ]
+                     "value" : [ "","define ","DateTimeAndDateUncertainTrue",": " ]
                   }, {
                      "r" : "300",
                      "s" : [ {
@@ -5969,7 +6025,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "305",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Quantity",": " ]
+                     "value" : [ "","define ","AGtB_Quantity",": " ]
                   }, {
                      "r" : "304",
                      "s" : [ {
@@ -6016,7 +6072,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "309",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Quantity",": " ]
+                     "value" : [ "","define ","AEqB_Quantity",": " ]
                   }, {
                      "r" : "308",
                      "s" : [ {
@@ -6063,7 +6119,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "313",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Quantity",": " ]
+                     "value" : [ "","define ","ALtB_Quantity",": " ]
                   }, {
                      "r" : "312",
                      "s" : [ {
@@ -6110,7 +6166,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "317",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Quantity_diff",": " ]
+                     "value" : [ "","define ","AGtB_Quantity_diff",": " ]
                   }, {
                      "r" : "316",
                      "s" : [ {
@@ -6157,7 +6213,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "321",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Quantity_diff",": " ]
+                     "value" : [ "","define ","AEqB_Quantity_diff",": " ]
                   }, {
                      "r" : "320",
                      "s" : [ {
@@ -6204,7 +6260,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "325",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Quantity_diff",": " ]
+                     "value" : [ "","define ","ALtB_Quantity_diff",": " ]
                   }, {
                      "r" : "324",
                      "s" : [ {
@@ -6251,7 +6307,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "329",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Quantity_incompatible",": " ]
+                     "value" : [ "","define ","AGtB_Quantity_incompatible",": " ]
                   }, {
                      "r" : "328",
                      "s" : [ {
@@ -6298,7 +6354,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "333",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Quantity_incompatible",": " ]
+                     "value" : [ "","define ","AEqB_Quantity_incompatible",": " ]
                   }, {
                      "r" : "332",
                      "s" : [ {
@@ -6345,7 +6401,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "337",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Quantity_incompatible",": " ]
+                     "value" : [ "","define ","ALtB_Quantity_incompatible",": " ]
                   }, {
                      "r" : "336",
                      "s" : [ {
@@ -6496,6 +6552,14 @@ module.exports['Equivalent'] = {
          "errorType" : "semantic",
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "544",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -6513,7 +6577,22 @@ module.exports['Equivalent'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "codeSystems" : {
@@ -6521,7 +6600,16 @@ module.exports['Equivalent'] = {
             "localId" : "2",
             "name" : "LOINC",
             "id" : "http://loinc.org",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "","codesystem ","\"LOINC\"",": ","'http://loinc.org'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "codes" : {
@@ -6531,6 +6619,22 @@ module.exports['Equivalent'] = {
             "id" : "72166-2",
             "display" : "Tobacco smoking status code",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "","code ","\"Tobacco smoking status code\"",": ","'72166-2'"," from " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "\"LOINC\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'Tobacco smoking status code'" ]
+                  } ]
+               }
+            } ],
             "codeSystem" : {
                "localId" : "3",
                "name" : "LOINC"
@@ -6541,6 +6645,22 @@ module.exports['Equivalent'] = {
             "id" : "72166-2",
             "display" : "Tobacco smoking status code clone",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "6",
+                  "s" : [ {
+                     "value" : [ "","code ","\"Tobacco smoking status code clone\"",": ","'72166-2'"," from " ]
+                  }, {
+                     "r" : "5",
+                     "s" : [ {
+                        "value" : [ "\"LOINC\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'Tobacco smoking status code clone'" ]
+                  } ]
+               }
+            } ],
             "codeSystem" : {
                "localId" : "5",
                "name" : "LOINC"
@@ -6551,6 +6671,22 @@ module.exports['Equivalent'] = {
             "id" : "75626-2",
             "display" : "Total Score [Audit-C] code",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "8",
+                  "s" : [ {
+                     "value" : [ "","code ","\"Total Score [AUDIT-C] code\"",": ","'75626-2'"," from " ]
+                  }, {
+                     "r" : "7",
+                     "s" : [ {
+                        "value" : [ "\"LOINC\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'Total Score [Audit-C] code'" ]
+                  } ]
+               }
+            } ],
             "codeSystem" : {
                "localId" : "7",
                "name" : "LOINC"
@@ -6563,6 +6699,22 @@ module.exports['Equivalent'] = {
             "name" : "Tobacco smoking status",
             "display" : "Tobacco smoking status",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "10",
+                  "s" : [ {
+                     "value" : [ "","concept ","\"Tobacco smoking status\"",": { " ]
+                  }, {
+                     "r" : "9",
+                     "s" : [ {
+                        "value" : [ "\"Tobacco smoking status code\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " } display ","'Tobacco smoking status'" ]
+                  } ]
+               }
+            } ],
             "code" : [ {
                "localId" : "9",
                "name" : "Tobacco smoking status code"
@@ -6572,6 +6724,22 @@ module.exports['Equivalent'] = {
             "name" : "Tobacco smoking status clone",
             "display" : "Tobacco smoking status",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "value" : [ "","concept ","\"Tobacco smoking status clone\"",": { " ]
+                  }, {
+                     "r" : "11",
+                     "s" : [ {
+                        "value" : [ "\"Tobacco smoking status code clone\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " } display ","'Tobacco smoking status'" ]
+                  } ]
+               }
+            } ],
             "code" : [ {
                "localId" : "11",
                "name" : "Tobacco smoking status code clone"
@@ -6581,10 +6749,31 @@ module.exports['Equivalent'] = {
             "name" : "Total Score [AUDIT-C]",
             "display" : "Total Score [Audit-C]",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "14",
+                  "s" : [ {
+                     "value" : [ "","concept ","\"Total Score [AUDIT-C]\"",": { " ]
+                  }, {
+                     "r" : "13",
+                     "s" : [ {
+                        "value" : [ "\"Total Score [AUDIT-C] code\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " } display ","'Total Score [Audit-C]'" ]
+                  } ]
+               }
+            } ],
             "code" : [ {
                "localId" : "13",
                "name" : "Total Score [AUDIT-C] code"
             } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -6608,7 +6797,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "18",
                   "s" : [ {
-                     "value" : [ "define ","ANull_BDefined",": " ]
+                     "value" : [ "","define ","ANull_BDefined",": " ]
                   }, {
                      "r" : "17",
                      "s" : [ {
@@ -6645,7 +6834,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "22",
                   "s" : [ {
-                     "value" : [ "define ","ADefined_BNull",": " ]
+                     "value" : [ "","define ","ADefined_BNull",": " ]
                   }, {
                      "r" : "21",
                      "s" : [ {
@@ -6682,7 +6871,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "30",
                   "s" : [ {
-                     "value" : [ "define ","ANull_BNull",": " ]
+                     "value" : [ "","define ","ANull_BNull",": " ]
                   }, {
                      "r" : "29",
                      "s" : [ {
@@ -6768,7 +6957,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "34",
                   "s" : [ {
-                     "value" : [ "define ","ADefined_BDefined",": " ]
+                     "value" : [ "","define ","ADefined_BDefined",": " ]
                   }, {
                      "r" : "33",
                      "s" : [ {
@@ -6803,7 +6992,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "38",
                   "s" : [ {
-                     "value" : [ "define ","CaseInsensitiveStrings",": " ]
+                     "value" : [ "","define ","CaseInsensitiveStrings",": " ]
                   }, {
                      "r" : "37",
                      "s" : [ {
@@ -6847,7 +7036,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "42",
                   "s" : [ {
-                     "value" : [ "define ","WhiteSpaceTabTrue",": " ]
+                     "value" : [ "","define ","WhiteSpaceTabTrue",": " ]
                   }, {
                      "r" : "41",
                      "s" : [ {
@@ -6891,7 +7080,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "46",
                   "s" : [ {
-                     "value" : [ "define ","WhiteSpaceTabReturnTrue",": " ]
+                     "value" : [ "","define ","WhiteSpaceTabReturnTrue",": " ]
                   }, {
                      "r" : "45",
                      "s" : [ {
@@ -6935,7 +7124,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "50",
                   "s" : [ {
-                     "value" : [ "define ","WhiteSpaceIncorrectSpaceFalse",": " ]
+                     "value" : [ "","define ","WhiteSpaceIncorrectSpaceFalse",": " ]
                   }, {
                      "r" : "49",
                      "s" : [ {
@@ -6979,7 +7168,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "54",
                   "s" : [ {
-                     "value" : [ "define ","WhiteSpaceIncorrectNumberTabsFalse",": " ]
+                     "value" : [ "","define ","WhiteSpaceIncorrectNumberTabsFalse",": " ]
                   }, {
                      "r" : "53",
                      "s" : [ {
@@ -7023,7 +7212,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "58",
                   "s" : [ {
-                     "value" : [ "define ","WhiteSpaceNoSpaceFalse",": " ]
+                     "value" : [ "","define ","WhiteSpaceNoSpaceFalse",": " ]
                   }, {
                      "r" : "57",
                      "s" : [ {
@@ -7067,7 +7256,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "66",
                   "s" : [ {
-                     "value" : [ "define ","EqRatios",": " ]
+                     "value" : [ "","define ","EqRatios",": " ]
                   }, {
                      "r" : "65",
                      "s" : [ {
@@ -7147,7 +7336,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "74",
                   "s" : [ {
-                     "value" : [ "define ","UneqRatios",": " ]
+                     "value" : [ "","define ","UneqRatios",": " ]
                   }, {
                      "r" : "73",
                      "s" : [ {
@@ -7227,7 +7416,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "86",
                   "s" : [ {
-                     "value" : [ "define ","UneqRatioTypes",": " ]
+                     "value" : [ "","define ","UneqRatioTypes",": " ]
                   }, {
                      "r" : "85",
                      "s" : [ {
@@ -7330,7 +7519,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "94",
                   "s" : [ {
-                     "value" : [ "define ","SameTuples",": " ]
+                     "value" : [ "// define EmptyTuples: { : } ~ { : } // TODO: We don't seem to support this format","define ","SameTuples",": " ]
                   }, {
                      "r" : "93",
                      "s" : [ {
@@ -7448,7 +7637,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "100",
                   "s" : [ {
-                     "value" : [ "define ","SameTuplesNull",": " ]
+                     "value" : [ "","define ","SameTuplesNull",": " ]
                   }, {
                      "r" : "99",
                      "s" : [ {
@@ -7516,7 +7705,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "108",
                   "s" : [ {
-                     "value" : [ "define ","DifferentTuples",": " ]
+                     "value" : [ "","define ","DifferentTuples",": " ]
                   }, {
                      "r" : "107",
                      "s" : [ {
@@ -7634,7 +7823,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "118",
                   "s" : [ {
-                     "value" : [ "define ","SameNestedTuples",": " ]
+                     "value" : [ "","define ","SameNestedTuples",": " ]
                   }, {
                      "r" : "117",
                      "s" : [ {
@@ -7788,7 +7977,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "128",
                   "s" : [ {
-                     "value" : [ "define ","SameNestedTuplesNull",": " ]
+                     "value" : [ "","define ","SameNestedTuplesNull",": " ]
                   }, {
                      "r" : "127",
                      "s" : [ {
@@ -7930,7 +8119,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "132",
                   "s" : [ {
-                     "value" : [ "define ","EmptyLists",": " ]
+                     "value" : [ "","define ","EmptyLists",": " ]
                   }, {
                      "r" : "131",
                      "s" : [ {
@@ -7961,7 +8150,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "142",
                   "s" : [ {
-                     "value" : [ "define ","DifferentTypesLists",": " ]
+                     "value" : [ "","define ","DifferentTypesLists",": " ]
                   }, {
                      "r" : "141",
                      "s" : [ {
@@ -8055,7 +8244,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "149",
                   "s" : [ {
-                     "value" : [ "define ","DifferentLengthLists",": " ]
+                     "value" : [ "","define ","DifferentLengthLists",": " ]
                   }, {
                      "r" : "148",
                      "s" : [ {
@@ -8133,7 +8322,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "157",
                   "s" : [ {
-                     "value" : [ "define ","DifferentOrderLists",": " ]
+                     "value" : [ "","define ","DifferentOrderLists",": " ]
                   }, {
                      "r" : "156",
                      "s" : [ {
@@ -8223,7 +8412,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "167",
                   "s" : [ {
-                     "value" : [ "define ","SameLists",": " ]
+                     "value" : [ "","define ","SameLists",": " ]
                   }, {
                      "r" : "166",
                      "s" : [ {
@@ -8337,7 +8526,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "177",
                   "s" : [ {
-                     "value" : [ "define ","SameListsNull",": " ]
+                     "value" : [ "","define ","SameListsNull",": " ]
                   }, {
                      "r" : "176",
                      "s" : [ {
@@ -8399,7 +8588,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "193",
                   "s" : [ {
-                     "value" : [ "define ","SameNestedLists",": " ]
+                     "value" : [ "","define ","SameNestedLists",": " ]
                   }, {
                      "r" : "192",
                      "s" : [ {
@@ -8581,7 +8770,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "205",
                   "s" : [ {
-                     "value" : [ "define ","SameNestedListsNull",": " ]
+                     "value" : [ "","define ","SameNestedListsNull",": " ]
                   }, {
                      "r" : "204",
                      "s" : [ {
@@ -8687,7 +8876,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "213",
                   "s" : [ {
-                     "value" : [ "define ","EmptyInterval",": " ]
+                     "value" : [ "","define ","EmptyInterval",": " ]
                   }, {
                      "r" : "212",
                      "s" : [ {
@@ -8749,7 +8938,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "221",
                   "s" : [ {
-                     "value" : [ "define ","IntervalDifferentPointTypes",":  " ]
+                     "value" : [ "","define ","IntervalDifferentPointTypes",":  " ]
                   }, {
                      "r" : "220",
                      "s" : [ {
@@ -8832,7 +9021,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "229",
                   "s" : [ {
-                     "value" : [ "define ","IntervalDifferentStarts",": " ]
+                     "value" : [ "","define ","IntervalDifferentStarts",": " ]
                   }, {
                      "r" : "228",
                      "s" : [ {
@@ -8902,7 +9091,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "237",
                   "s" : [ {
-                     "value" : [ "define ","IntervalDifferentEndings",": " ]
+                     "value" : [ "","define ","IntervalDifferentEndings",": " ]
                   }, {
                      "r" : "236",
                      "s" : [ {
@@ -8972,7 +9161,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "245",
                   "s" : [ {
-                     "value" : [ "define ","SameIntervals",": " ]
+                     "value" : [ "","define ","SameIntervals",": " ]
                   }, {
                      "r" : "244",
                      "s" : [ {
@@ -9042,7 +9231,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "251",
                   "s" : [ {
-                     "value" : [ "define ","TupleAndList",": " ]
+                     "value" : [ "","define ","TupleAndList",": " ]
                   }, {
                      "r" : "250",
                      "s" : [ {
@@ -9137,7 +9326,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "257",
                   "s" : [ {
-                     "value" : [ "define ","ListAndTuple",": " ]
+                     "value" : [ "","define ","ListAndTuple",": " ]
                   }, {
                      "r" : "256",
                      "s" : [ {
@@ -9232,7 +9421,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "263",
                   "s" : [ {
-                     "value" : [ "define ","TupleAndNullList",": " ]
+                     "value" : [ "","define ","TupleAndNullList",": " ]
                   }, {
                      "r" : "262",
                      "s" : [ {
@@ -9295,7 +9484,7 @@ module.exports['Equivalent'] = {
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
                         "name" : "a",
-                        "type" : {
+                        "elementType" : {
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -9313,7 +9502,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "269",
                   "s" : [ {
-                     "value" : [ "define ","NullListAndTuple",": " ]
+                     "value" : [ "","define ","NullListAndTuple",": " ]
                   }, {
                      "r" : "268",
                      "s" : [ {
@@ -9364,7 +9553,7 @@ module.exports['Equivalent'] = {
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
                         "name" : "a",
-                        "type" : {
+                        "elementType" : {
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -9394,7 +9583,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "273",
                   "s" : [ {
-                     "value" : [ "define ","SameCodeAndCode",": " ]
+                     "value" : [ "","define ","SameCodeAndCode",": " ]
                   }, {
                      "r" : "272",
                      "s" : [ {
@@ -9436,7 +9625,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "277",
                   "s" : [ {
-                     "value" : [ "define ","SameCodeAndConcept",": " ]
+                     "value" : [ "","define ","SameCodeAndConcept",": " ]
                   }, {
                      "r" : "276",
                      "s" : [ {
@@ -9481,7 +9670,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "281",
                   "s" : [ {
-                     "value" : [ "define ","SameConceptAndCode",": " ]
+                     "value" : [ "","define ","SameConceptAndCode",": " ]
                   }, {
                      "r" : "280",
                      "s" : [ {
@@ -9526,7 +9715,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "285",
                   "s" : [ {
-                     "value" : [ "define ","SameConceptAndConcept",": " ]
+                     "value" : [ "","define ","SameConceptAndConcept",": " ]
                   }, {
                      "r" : "284",
                      "s" : [ {
@@ -9568,7 +9757,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "289",
                   "s" : [ {
-                     "value" : [ "define ","DiffCodeAndCode",": " ]
+                     "value" : [ "","define ","DiffCodeAndCode",": " ]
                   }, {
                      "r" : "288",
                      "s" : [ {
@@ -9610,7 +9799,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "293",
                   "s" : [ {
-                     "value" : [ "define ","DiffCodeAndConcept",": " ]
+                     "value" : [ "","define ","DiffCodeAndConcept",": " ]
                   }, {
                      "r" : "292",
                      "s" : [ {
@@ -9655,7 +9844,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "297",
                   "s" : [ {
-                     "value" : [ "define ","DiffConceptAndCode",": " ]
+                     "value" : [ "","define ","DiffConceptAndCode",": " ]
                   }, {
                      "r" : "296",
                      "s" : [ {
@@ -9700,7 +9889,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "301",
                   "s" : [ {
-                     "value" : [ "define ","DiffConceptAndConcept",": " ]
+                     "value" : [ "","define ","DiffConceptAndConcept",": " ]
                   }, {
                      "r" : "300",
                      "s" : [ {
@@ -9742,7 +9931,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "321",
                   "s" : [ {
-                     "value" : [ "define ","EqDateTimes",": " ]
+                     "value" : [ "","define ","EqDateTimes",": " ]
                   }, {
                      "r" : "320",
                      "s" : [ {
@@ -9896,7 +10085,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "341",
                   "s" : [ {
-                     "value" : [ "define ","UneqDateTimes",": " ]
+                     "value" : [ "","define ","UneqDateTimes",": " ]
                   }, {
                      "r" : "340",
                      "s" : [ {
@@ -10050,7 +10239,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "361",
                   "s" : [ {
-                     "value" : [ "define ","EqDateTimesTZ",": " ]
+                     "value" : [ "","define ","EqDateTimesTZ",": " ]
                   }, {
                      "r" : "360",
                      "s" : [ {
@@ -10204,7 +10393,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "381",
                   "s" : [ {
-                     "value" : [ "define ","UneqDateTimesTZ",": " ]
+                     "value" : [ "","define ","UneqDateTimesTZ",": " ]
                   }, {
                      "r" : "380",
                      "s" : [ {
@@ -10358,7 +10547,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "398",
                   "s" : [ {
-                     "value" : [ "define ","EqDateTimesNullMs",": " ]
+                     "value" : [ "","define ","EqDateTimesNullMs",": " ]
                   }, {
                      "r" : "397",
                      "s" : [ {
@@ -10478,7 +10667,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "415",
                   "s" : [ {
-                     "value" : [ "define ","EqDateTimesNullOtherMs",": " ]
+                     "value" : [ "","define ","EqDateTimesNullOtherMs",": " ]
                   }, {
                      "r" : "414",
                      "s" : [ {
@@ -10598,7 +10787,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "425",
                   "s" : [ {
-                     "value" : [ "define ","EqDateTimesOnlyDate",": " ]
+                     "value" : [ "","define ","EqDateTimesOnlyDate",": " ]
                   }, {
                      "r" : "424",
                      "s" : [ {
@@ -10676,7 +10865,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "435",
                   "s" : [ {
-                     "value" : [ "define ","UneqDateTimesOnlyDate",": " ]
+                     "value" : [ "","define ","UneqDateTimesOnlyDate",": " ]
                   }, {
                      "r" : "434",
                      "s" : [ {
@@ -10754,7 +10943,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "448",
                   "s" : [ {
-                     "value" : [ "define ","PossiblyEqDateTimesOnlyDateOnOne",": " ]
+                     "value" : [ "","define ","PossiblyEqDateTimesOnlyDateOnOne",": " ]
                   }, {
                      "r" : "447",
                      "s" : [ {
@@ -10850,7 +11039,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "461",
                   "s" : [ {
-                     "value" : [ "define ","UneqDateTimesOnlyDateOnOne",": " ]
+                     "value" : [ "","define ","UneqDateTimesOnlyDateOnOne",": " ]
                   }, {
                      "r" : "460",
                      "s" : [ {
@@ -10946,7 +11135,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "469",
                   "s" : [ {
-                     "value" : [ "define ","PossiblyEqualDateTimes",": " ]
+                     "value" : [ "","define ","PossiblyEqualDateTimes",": " ]
                   }, {
                      "r" : "468",
                      "s" : [ {
@@ -11012,7 +11201,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "478",
                   "s" : [ {
-                     "value" : [ "define ","ImpossiblyEqualDateTimes",": " ]
+                     "value" : [ "","define ","ImpossiblyEqualDateTimes",": " ]
                   }, {
                      "r" : "477",
                      "s" : [ {
@@ -11084,7 +11273,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "488",
                   "s" : [ {
-                     "value" : [ "define ","DateAndDateTimeNull",": " ]
+                     "value" : [ "","define ","DateAndDateTimeNull",": " ]
                   }, {
                      "r" : "487",
                      "s" : [ {
@@ -11165,7 +11354,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "498",
                   "s" : [ {
-                     "value" : [ "define ","DateAndDateTimeNotEqual",": " ]
+                     "value" : [ "","define ","DateAndDateTimeNotEqual",": " ]
                   }, {
                      "r" : "497",
                      "s" : [ {
@@ -11246,7 +11435,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "511",
                   "s" : [ {
-                     "value" : [ "define ","DateAndDateTimeUncertainFalse",": " ]
+                     "value" : [ "","define ","DateAndDateTimeUncertainFalse",": " ]
                   }, {
                      "r" : "510",
                      "s" : [ {
@@ -11345,7 +11534,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "521",
                   "s" : [ {
-                     "value" : [ "define ","DateTimeAndDateNull",": " ]
+                     "value" : [ "","define ","DateTimeAndDateNull",": " ]
                   }, {
                      "r" : "520",
                      "s" : [ {
@@ -11426,7 +11615,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "531",
                   "s" : [ {
-                     "value" : [ "define ","DateTimeAndDateNotEqual",": " ]
+                     "value" : [ "","define ","DateTimeAndDateNotEqual",": " ]
                   }, {
                      "r" : "530",
                      "s" : [ {
@@ -11507,7 +11696,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "544",
                   "s" : [ {
-                     "value" : [ "define ","DateTimeAndDateUncertainFalse",": " ]
+                     "value" : [ "","define ","DateTimeAndDateUncertainFalse",": " ]
                   }, {
                      "r" : "543",
                      "s" : [ {
@@ -11624,6 +11813,14 @@ module.exports['Less'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "49",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -11641,7 +11838,27 @@ module.exports['Less'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -11665,7 +11882,7 @@ module.exports['Less'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Int",": " ]
+                     "value" : [ "","define ","AGtB_Int",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -11700,7 +11917,7 @@ module.exports['Less'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Int",": " ]
+                     "value" : [ "","define ","AEqB_Int",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -11735,7 +11952,7 @@ module.exports['Less'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Int",": " ]
+                     "value" : [ "","define ","ALtB_Int",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -11770,7 +11987,7 @@ module.exports['Less'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Quantity",": " ]
+                     "value" : [ "","define ","AGtB_Quantity",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -11814,7 +12031,7 @@ module.exports['Less'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Quantity",": " ]
+                     "value" : [ "","define ","AEqB_Quantity",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {
@@ -11858,7 +12075,7 @@ module.exports['Less'] = {
                "s" : {
                   "r" : "25",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Quantity",": " ]
+                     "value" : [ "","define ","ALtB_Quantity",": " ]
                   }, {
                      "r" : "24",
                      "s" : [ {
@@ -11902,7 +12119,7 @@ module.exports['Less'] = {
                "s" : {
                   "r" : "29",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Quantity_diff",": " ]
+                     "value" : [ "","define ","AGtB_Quantity_diff",": " ]
                   }, {
                      "r" : "28",
                      "s" : [ {
@@ -11946,7 +12163,7 @@ module.exports['Less'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Quantity_diff",": " ]
+                     "value" : [ "","define ","AEqB_Quantity_diff",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -11990,7 +12207,7 @@ module.exports['Less'] = {
                "s" : {
                   "r" : "37",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Quantity_diff",": " ]
+                     "value" : [ "","define ","ALtB_Quantity_diff",": " ]
                   }, {
                      "r" : "36",
                      "s" : [ {
@@ -12034,7 +12251,7 @@ module.exports['Less'] = {
                "s" : {
                   "r" : "41",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Quantity_incompatible",": " ]
+                     "value" : [ "","define ","AGtB_Quantity_incompatible",": " ]
                   }, {
                      "r" : "40",
                      "s" : [ {
@@ -12078,7 +12295,7 @@ module.exports['Less'] = {
                "s" : {
                   "r" : "45",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Quantity_incompatible",": " ]
+                     "value" : [ "","define ","AEqB_Quantity_incompatible",": " ]
                   }, {
                      "r" : "44",
                      "s" : [ {
@@ -12122,7 +12339,7 @@ module.exports['Less'] = {
                "s" : {
                   "r" : "49",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Quantity_incompatible",": " ]
+                     "value" : [ "","define ","ALtB_Quantity_incompatible",": " ]
                   }, {
                      "r" : "48",
                      "s" : [ {
@@ -12184,6 +12401,14 @@ module.exports['LessOrEqual'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "49",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -12201,7 +12426,27 @@ module.exports['LessOrEqual'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -12225,7 +12470,7 @@ module.exports['LessOrEqual'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Int",": " ]
+                     "value" : [ "","define ","AGtB_Int",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -12260,7 +12505,7 @@ module.exports['LessOrEqual'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Int",": " ]
+                     "value" : [ "","define ","AEqB_Int",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -12295,7 +12540,7 @@ module.exports['LessOrEqual'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Int",": " ]
+                     "value" : [ "","define ","ALtB_Int",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -12330,7 +12575,7 @@ module.exports['LessOrEqual'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Quantity",": " ]
+                     "value" : [ "","define ","AGtB_Quantity",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -12374,7 +12619,7 @@ module.exports['LessOrEqual'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Quantity",": " ]
+                     "value" : [ "","define ","AEqB_Quantity",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {
@@ -12418,7 +12663,7 @@ module.exports['LessOrEqual'] = {
                "s" : {
                   "r" : "25",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Quantity",": " ]
+                     "value" : [ "","define ","ALtB_Quantity",": " ]
                   }, {
                      "r" : "24",
                      "s" : [ {
@@ -12462,7 +12707,7 @@ module.exports['LessOrEqual'] = {
                "s" : {
                   "r" : "29",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Quantity_diff",": " ]
+                     "value" : [ "","define ","AGtB_Quantity_diff",": " ]
                   }, {
                      "r" : "28",
                      "s" : [ {
@@ -12506,7 +12751,7 @@ module.exports['LessOrEqual'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Quantity_diff",": " ]
+                     "value" : [ "","define ","AEqB_Quantity_diff",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -12550,7 +12795,7 @@ module.exports['LessOrEqual'] = {
                "s" : {
                   "r" : "37",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Quantity_diff",": " ]
+                     "value" : [ "","define ","ALtB_Quantity_diff",": " ]
                   }, {
                      "r" : "36",
                      "s" : [ {
@@ -12594,7 +12839,7 @@ module.exports['LessOrEqual'] = {
                "s" : {
                   "r" : "41",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Quantity_incompatible",": " ]
+                     "value" : [ "","define ","AGtB_Quantity_incompatible",": " ]
                   }, {
                      "r" : "40",
                      "s" : [ {
@@ -12638,7 +12883,7 @@ module.exports['LessOrEqual'] = {
                "s" : {
                   "r" : "45",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Quantity_incompatible",": " ]
+                     "value" : [ "","define ","AEqB_Quantity_incompatible",": " ]
                   }, {
                      "r" : "44",
                      "s" : [ {
@@ -12682,7 +12927,7 @@ module.exports['LessOrEqual'] = {
                "s" : {
                   "r" : "49",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Quantity_incompatible",": " ]
+                     "value" : [ "","define ","ALtB_Quantity_incompatible",": " ]
                   }, {
                      "r" : "48",
                      "s" : [ {
@@ -12744,6 +12989,14 @@ module.exports['Greater'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "49",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -12761,7 +13014,27 @@ module.exports['Greater'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -12785,7 +13058,7 @@ module.exports['Greater'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Int",": " ]
+                     "value" : [ "","define ","AGtB_Int",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -12820,7 +13093,7 @@ module.exports['Greater'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Int",": " ]
+                     "value" : [ "","define ","AEqB_Int",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -12855,7 +13128,7 @@ module.exports['Greater'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Int",": " ]
+                     "value" : [ "","define ","ALtB_Int",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -12890,7 +13163,7 @@ module.exports['Greater'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Quantity",": " ]
+                     "value" : [ "","define ","AGtB_Quantity",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -12934,7 +13207,7 @@ module.exports['Greater'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Quantity",": " ]
+                     "value" : [ "","define ","AEqB_Quantity",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {
@@ -12978,7 +13251,7 @@ module.exports['Greater'] = {
                "s" : {
                   "r" : "25",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Quantity",": " ]
+                     "value" : [ "","define ","ALtB_Quantity",": " ]
                   }, {
                      "r" : "24",
                      "s" : [ {
@@ -13022,7 +13295,7 @@ module.exports['Greater'] = {
                "s" : {
                   "r" : "29",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Quantity_diff",": " ]
+                     "value" : [ "","define ","AGtB_Quantity_diff",": " ]
                   }, {
                      "r" : "28",
                      "s" : [ {
@@ -13066,7 +13339,7 @@ module.exports['Greater'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Quantity_diff",": " ]
+                     "value" : [ "","define ","AEqB_Quantity_diff",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -13110,7 +13383,7 @@ module.exports['Greater'] = {
                "s" : {
                   "r" : "37",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Quantity_diff",": " ]
+                     "value" : [ "","define ","ALtB_Quantity_diff",": " ]
                   }, {
                      "r" : "36",
                      "s" : [ {
@@ -13154,7 +13427,7 @@ module.exports['Greater'] = {
                "s" : {
                   "r" : "41",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Quantity_incompatible",": " ]
+                     "value" : [ "","define ","AGtB_Quantity_incompatible",": " ]
                   }, {
                      "r" : "40",
                      "s" : [ {
@@ -13198,7 +13471,7 @@ module.exports['Greater'] = {
                "s" : {
                   "r" : "45",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Quantity_incompatible",": " ]
+                     "value" : [ "","define ","AEqB_Quantity_incompatible",": " ]
                   }, {
                      "r" : "44",
                      "s" : [ {
@@ -13242,7 +13515,7 @@ module.exports['Greater'] = {
                "s" : {
                   "r" : "49",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Quantity_incompatible",": " ]
+                     "value" : [ "","define ","ALtB_Quantity_incompatible",": " ]
                   }, {
                      "r" : "48",
                      "s" : [ {
@@ -13306,6 +13579,14 @@ module.exports['GreaterOrEqual'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "61",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -13323,7 +13604,27 @@ module.exports['GreaterOrEqual'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -13347,7 +13648,7 @@ module.exports['GreaterOrEqual'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Int",": " ]
+                     "value" : [ "","define ","AGtB_Int",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -13382,7 +13683,7 @@ module.exports['GreaterOrEqual'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Int",": " ]
+                     "value" : [ "","define ","AEqB_Int",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -13417,7 +13718,7 @@ module.exports['GreaterOrEqual'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Int",": " ]
+                     "value" : [ "","define ","ALtB_Int",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -13452,7 +13753,7 @@ module.exports['GreaterOrEqual'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Quantity",": " ]
+                     "value" : [ "","define ","AGtB_Quantity",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -13496,7 +13797,7 @@ module.exports['GreaterOrEqual'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Quantity",": " ]
+                     "value" : [ "","define ","AEqB_Quantity",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {
@@ -13540,7 +13841,7 @@ module.exports['GreaterOrEqual'] = {
                "s" : {
                   "r" : "25",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Quantity",": " ]
+                     "value" : [ "","define ","ALtB_Quantity",": " ]
                   }, {
                      "r" : "24",
                      "s" : [ {
@@ -13584,7 +13885,7 @@ module.exports['GreaterOrEqual'] = {
                "s" : {
                   "r" : "29",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Quantity_diff",": " ]
+                     "value" : [ "","define ","AGtB_Quantity_diff",": " ]
                   }, {
                      "r" : "28",
                      "s" : [ {
@@ -13628,7 +13929,7 @@ module.exports['GreaterOrEqual'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Quantity_diff",": " ]
+                     "value" : [ "","define ","AEqB_Quantity_diff",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -13672,7 +13973,7 @@ module.exports['GreaterOrEqual'] = {
                "s" : {
                   "r" : "37",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Quantity_diff",": " ]
+                     "value" : [ "","define ","ALtB_Quantity_diff",": " ]
                   }, {
                      "r" : "36",
                      "s" : [ {
@@ -13716,7 +14017,7 @@ module.exports['GreaterOrEqual'] = {
                "s" : {
                   "r" : "41",
                   "s" : [ {
-                     "value" : [ "define ","AGtB_Quantity_incompatible",": " ]
+                     "value" : [ "","define ","AGtB_Quantity_incompatible",": " ]
                   }, {
                      "r" : "40",
                      "s" : [ {
@@ -13760,7 +14061,7 @@ module.exports['GreaterOrEqual'] = {
                "s" : {
                   "r" : "45",
                   "s" : [ {
-                     "value" : [ "define ","AEqB_Quantity_incompatible",": " ]
+                     "value" : [ "","define ","AEqB_Quantity_incompatible",": " ]
                   }, {
                      "r" : "44",
                      "s" : [ {
@@ -13804,7 +14105,7 @@ module.exports['GreaterOrEqual'] = {
                "s" : {
                   "r" : "49",
                   "s" : [ {
-                     "value" : [ "define ","ALtB_Quantity_incompatible",": " ]
+                     "value" : [ "","define ","ALtB_Quantity_incompatible",": " ]
                   }, {
                      "r" : "48",
                      "s" : [ {
@@ -13848,7 +14149,7 @@ module.exports['GreaterOrEqual'] = {
                "s" : {
                   "r" : "55",
                   "s" : [ {
-                     "value" : [ "define ","DivideUcum_incompatible",": " ]
+                     "value" : [ "","define ","DivideUcum_incompatible",": " ]
                   }, {
                      "r" : "54",
                      "s" : [ {
@@ -13918,7 +14219,7 @@ module.exports['GreaterOrEqual'] = {
                "s" : {
                   "r" : "61",
                   "s" : [ {
-                     "value" : [ "define ","DivideUcum",": " ]
+                     "value" : [ "","define ","DivideUcum",": " ]
                   }, {
                      "r" : "60",
                      "s" : [ {
