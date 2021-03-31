@@ -188,7 +188,6 @@ class Query extends Expression {
     this.aggregateClause = json.aggregate != null ? new AggregateClause(json.aggregate) : null;
     this.aliases = this.sources.aliases();
     this.sortClause = json.sort != null ? new SortClause(json.sort) : null;
-    
   }
 
   isDistinct() {
