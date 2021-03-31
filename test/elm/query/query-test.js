@@ -332,9 +332,11 @@ describe('AggregateQuery', () => {
   });
 
   it('should aggregate over a list?', function () {
-    const ret = [new Interval(new DateTime(1970, 1, 1), new DateTime(1978, 7, 15, 10, 0)),
+    const ret = [
+      new Interval(new DateTime(1970, 1, 1), new DateTime(1978, 7, 15, 10, 0)),
       new Interval(new DateTime(1978, 7, 16, 10, 0), new DateTime(1982, 3, 15, 15, 0)),
-      new Interval(new DateTime(1982, 3, 16, 15, 0), new DateTime(2013, 5, 23, 10, 0))];
+      new Interval(new DateTime(1982, 3, 16, 15, 0), new DateTime(2013, 5, 23, 10, 0))
+    ];
     this.rolledOutIntervals.exec(this.ctx).should.eql(ret);
   });
 });

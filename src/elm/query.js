@@ -157,18 +157,17 @@ const toDistinctList = function (xList) {
 };
 
 class AggregateClause extends Expression {
-  
   constructor(json) {
     super(json);
     this.identifier = json.identifier;
     this.expression = build(json.expression);
-    this.starting = json.starting? build(json.starting): null;
+    this.starting = json.starting ? build(json.starting) : null;
     this.distinct = json.distinct != null ? json.distinct : true;
   }
 
-  aggregate(returnedValues, ctx){
+  aggregate(returnedValues, ctx) {
     let aggregateValue = this.starting != null ? this.starting.exec(ctx) : null;
-    returnedValues.forEach( contextValues => {
+    returnedValues.forEach(contextValues => {
       let childContext = ctx.childContext(contextValues);
       childContext.set(this.identifier, aggregateValue);
       aggregateValue = this.expression.exec(childContext);
@@ -191,9 +190,9 @@ class Query extends Expression {
   }
 
   isDistinct() {
-    if(this.aggregateClause != null && this.aggregateClause.distinct != null){
+    if (this.aggregateClause != null && this.aggregateClause.distinct != null) {
       return this.aggregateClause.distinct;
-    } else if(this.returnClause != null && this.returnClause.distinct != null) {
+    } else if (this.returnClause != null && this.returnClause.distinct != null) {
       return this.returnClause.distinct;
     }
     return true;
@@ -229,7 +228,7 @@ class Query extends Expression {
       returnedValues = toDistinctList(returnedValues);
     }
 
-    if(this.aggregateClause != null){
+    if (this.aggregateClause != null) {
       returnedValues = this.aggregateClause.aggregate(returnedValues, ctx);
     }
 
