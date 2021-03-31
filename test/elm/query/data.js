@@ -8212,7 +8212,7 @@ module.exports['SingleObjectAlias'] = {
             }
          }, {
             "localId" : "58",
-            "name" : "RolledOutIntervals",
+            "name" : "TimeBetweenEncounters",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -8220,7 +8220,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "58",
                   "s" : [ {
-                     "value" : [ "define ","RolledOutIntervals",":\n  " ]
+                     "value" : [ "define ","TimeBetweenEncounters",":\n  " ]
                   }, {
                      "r" : "57",
                      "s" : [ {
@@ -8596,7 +8596,7 @@ define EncounterPeriods:
   [Encounter] e 
     return e.period 
 
-define RolledOutIntervals:
+define TimeBetweenEncounters:
   EncounterPeriods M
     aggregate R starting (List{} as List<Interval<DateTime>>): R union ({
       M X

@@ -117,7 +117,7 @@ define EncounterPeriods:
   [Encounter] e 
     return e.period 
 
-define RolledOutIntervals:
+define TimeBetweenEncounters:
   EncounterPeriods M
     aggregate R starting (List{} as List<Interval<DateTime>>): R union ({
       M X
