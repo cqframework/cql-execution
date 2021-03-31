@@ -7516,7 +7516,12 @@ var Expand = /*#__PURE__*/function (_Expression14) {
       var _this$execArgs17 = this.execArgs(ctx),
           _this$execArgs18 = _slicedToArray(_this$execArgs17, 2),
           intervals = _this$execArgs18[0],
-          per = _this$execArgs18[1];
+          per = _this$execArgs18[1]; // CQL 1.5 introduced an overload to allow singular intervals; make it a list so we can use the same logic for either overload
+
+
+      if (!Array.isArray(intervals)) {
+        intervals = [intervals];
+      }
 
       var type = intervalListType(intervals);
 
