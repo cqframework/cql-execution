@@ -1,5 +1,5 @@
 library CqlComparisonOperatorsTest version '1.4.0'
-using Simple
+using QUICK version '3.3.0'
 context Patient
 
 define "Between": Tuple{

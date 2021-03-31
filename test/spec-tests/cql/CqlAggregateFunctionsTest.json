@@ -17,8 +17,14 @@
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple"
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir/us/qicore",
+            "version" : "3.3.0"
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -28,7 +34,8 @@
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "dataType" : "{http://hl7.org/fhir/us/qicore}Patient",
+                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
                   "type" : "Retrieve"
                }
             }
