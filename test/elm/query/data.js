@@ -8079,22 +8079,38 @@ library TestSnippet version '1'
 using Simple version '1.0.0'
 context Patient
 
-define factorial:
+define noStartingAggregation:
  ({1,2,3,4,5}) R
     aggregate T : Coalesce(T, 1) * R 
 
-define EncounterPeriods: 
+define encounterPeriods: 
   [Encounter] e 
     return e.period 
 
-define TimeBetweenEncounters:
-  EncounterPeriods M
+define expressionStartingAggregation:
+  encounterPeriods M
     aggregate R starting (List{} as List<Interval<DateTime>>): R union ({
       M X
           let S: Max({ end of Last(R)+1 day, DateTime(1970,01,01)}),
           E: start of X
         return Interval[S, E]
     })
+
+define literalStartingAggregation: 
+  ({1,2,3,4,5,1,2,3,4,5}) Num 
+    aggregate distinct str starting 'Start' : str + ToString(Num)
+
+define quantityStartingAggregation:
+ ({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'}) Num 
+  aggregate distinct Sum starting 0 'ml': Sum + Num 
+
+define allAggregation: 
+ ({1,2,3,4,5,1,2,3,4,5}) Num 
+  aggregate all Sum starting 0: Sum + Num 
+
+define distinctAggregation: 
+ ({1,2,3,4,5,1,2,3,4,5}) Num 
+  aggregate distinct Sum starting 0: Sum + Num 
 */
 
 module.exports['AggregateQuery'] = {
@@ -8105,7 +8121,7 @@ module.exports['AggregateQuery'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "58",
+            "r" : "130",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -8163,7 +8179,7 @@ module.exports['AggregateQuery'] = {
             }
          }, {
             "localId" : "16",
-            "name" : "factorial",
+            "name" : "noStartingAggregation",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -8171,7 +8187,7 @@ module.exports['AggregateQuery'] = {
                "s" : {
                   "r" : "16",
                   "s" : [ {
-                     "value" : [ "","define ","factorial",":\n " ]
+                     "value" : [ "","define ","noStartingAggregation",":\n " ]
                   }, {
                      "r" : "15",
                      "s" : [ {
@@ -8303,7 +8319,7 @@ module.exports['AggregateQuery'] = {
             }
          }, {
             "localId" : "23",
-            "name" : "EncounterPeriods",
+            "name" : "encounterPeriods",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -8311,7 +8327,7 @@ module.exports['AggregateQuery'] = {
                "s" : {
                   "r" : "23",
                   "s" : [ {
-                     "value" : [ "","define ","EncounterPeriods",": \n  " ]
+                     "value" : [ "","define ","encounterPeriods",": \n  " ]
                   }, {
                      "r" : "22",
                      "s" : [ {
@@ -8380,7 +8396,7 @@ module.exports['AggregateQuery'] = {
             }
          }, {
             "localId" : "58",
-            "name" : "TimeBetweenEncounters",
+            "name" : "expressionStartingAggregation",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -8388,7 +8404,7 @@ module.exports['AggregateQuery'] = {
                "s" : {
                   "r" : "58",
                   "s" : [ {
-                     "value" : [ "","define ","TimeBetweenEncounters",":\n  " ]
+                     "value" : [ "","define ","expressionStartingAggregation",":\n  " ]
                   }, {
                      "r" : "57",
                      "s" : [ {
@@ -8398,7 +8414,7 @@ module.exports['AggregateQuery'] = {
                               "r" : "24",
                               "s" : [ {
                                  "s" : [ {
-                                    "value" : [ "EncounterPeriods" ]
+                                    "value" : [ "encounterPeriods" ]
                                  } ]
                               } ]
                            }, {
@@ -8602,7 +8618,7 @@ module.exports['AggregateQuery'] = {
                   "alias" : "M",
                   "expression" : {
                      "localId" : "24",
-                     "name" : "EncounterPeriods",
+                     "name" : "encounterPeriods",
                      "type" : "ExpressionRef"
                   }
                } ],
@@ -8743,6 +8759,654 @@ module.exports['AggregateQuery'] = {
                            }
                         }
                      }
+                  }
+               }
+            }
+         }, {
+            "localId" : "78",
+            "name" : "literalStartingAggregation",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "78",
+                  "s" : [ {
+                     "value" : [ "","define ","literalStartingAggregation",": \n  " ]
+                  }, {
+                     "r" : "77",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "70",
+                           "s" : [ {
+                              "r" : "69",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "69",
+                                 "s" : [ {
+                                    "r" : "59",
+                                    "value" : [ "{","1",",","2",",","3",",","4",",","5",",","1",",","2",",","3",",","4",",","5","}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","Num" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " \n    " ]
+                     }, {
+                        "r" : "76",
+                        "s" : [ {
+                           "value" : [ "aggregate distinct ","str"," " ]
+                        }, {
+                           "r" : "71",
+                           "s" : [ {
+                              "value" : [ "starting " ]
+                           }, {
+                              "r" : "71",
+                              "s" : [ {
+                                 "value" : [ "'Start'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " : " ]
+                        }, {
+                           "r" : "75",
+                           "s" : [ {
+                              "r" : "72",
+                              "s" : [ {
+                                 "value" : [ "str" ]
+                              } ]
+                           }, {
+                              "value" : [ " + " ]
+                           }, {
+                              "r" : "74",
+                              "s" : [ {
+                                 "value" : [ "ToString","(" ]
+                              }, {
+                                 "r" : "73",
+                                 "s" : [ {
+                                    "value" : [ "Num" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "77",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "70",
+                  "alias" : "Num",
+                  "expression" : {
+                     "localId" : "69",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "59",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "60",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "61",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "62",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "63",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "64",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "65",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "66",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "67",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "68",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "aggregate" : {
+                  "localId" : "76",
+                  "identifier" : "str",
+                  "distinct" : true,
+                  "expression" : {
+                     "localId" : "75",
+                     "type" : "Concatenate",
+                     "operand" : [ {
+                        "localId" : "72",
+                        "name" : "str",
+                        "type" : "QueryLetRef"
+                     }, {
+                        "localId" : "74",
+                        "type" : "ToString",
+                        "operand" : {
+                           "localId" : "73",
+                           "name" : "Num",
+                           "type" : "AliasRef"
+                        }
+                     } ]
+                  },
+                  "starting" : {
+                     "localId" : "71",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Start",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         }, {
+            "localId" : "92",
+            "name" : "quantityStartingAggregation",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "92",
+                  "s" : [ {
+                     "value" : [ "","define ","quantityStartingAggregation",":\n " ]
+                  }, {
+                     "r" : "91",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "85",
+                           "s" : [ {
+                              "r" : "84",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "84",
+                                 "s" : [ {
+                                    "value" : [ "{" ]
+                                 }, {
+                                    "r" : "79",
+                                    "s" : [ {
+                                       "value" : [ "1 ","'ml'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "," ]
+                                 }, {
+                                    "r" : "80",
+                                    "s" : [ {
+                                       "value" : [ "2 ","'ml'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "," ]
+                                 }, {
+                                    "r" : "81",
+                                    "s" : [ {
+                                       "value" : [ "3 ","'ml'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "," ]
+                                 }, {
+                                    "r" : "82",
+                                    "s" : [ {
+                                       "value" : [ "4 ","'ml'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "," ]
+                                 }, {
+                                    "r" : "83",
+                                    "s" : [ {
+                                       "value" : [ "5 ","'ml'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","Num" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " \n  " ]
+                     }, {
+                        "r" : "90",
+                        "s" : [ {
+                           "value" : [ "aggregate distinct ","Sum"," " ]
+                        }, {
+                           "r" : "86",
+                           "s" : [ {
+                              "value" : [ "starting " ]
+                           }, {
+                              "r" : "86",
+                              "s" : [ {
+                                 "value" : [ "0 ","'ml'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ": " ]
+                        }, {
+                           "r" : "89",
+                           "s" : [ {
+                              "r" : "87",
+                              "s" : [ {
+                                 "value" : [ "Sum" ]
+                              } ]
+                           }, {
+                              "value" : [ " + " ]
+                           }, {
+                              "r" : "88",
+                              "s" : [ {
+                                 "value" : [ "Num" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "91",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "85",
+                  "alias" : "Num",
+                  "expression" : {
+                     "localId" : "84",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "79",
+                        "value" : 1,
+                        "unit" : "ml",
+                        "type" : "Quantity"
+                     }, {
+                        "localId" : "80",
+                        "value" : 2,
+                        "unit" : "ml",
+                        "type" : "Quantity"
+                     }, {
+                        "localId" : "81",
+                        "value" : 3,
+                        "unit" : "ml",
+                        "type" : "Quantity"
+                     }, {
+                        "localId" : "82",
+                        "value" : 4,
+                        "unit" : "ml",
+                        "type" : "Quantity"
+                     }, {
+                        "localId" : "83",
+                        "value" : 5,
+                        "unit" : "ml",
+                        "type" : "Quantity"
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "aggregate" : {
+                  "localId" : "90",
+                  "identifier" : "Sum",
+                  "distinct" : true,
+                  "expression" : {
+                     "localId" : "89",
+                     "type" : "Add",
+                     "operand" : [ {
+                        "localId" : "87",
+                        "name" : "Sum",
+                        "type" : "QueryLetRef"
+                     }, {
+                        "localId" : "88",
+                        "name" : "Num",
+                        "type" : "AliasRef"
+                     } ]
+                  },
+                  "starting" : {
+                     "localId" : "86",
+                     "value" : 0,
+                     "unit" : "ml",
+                     "type" : "Quantity"
+                  }
+               }
+            }
+         }, {
+            "localId" : "111",
+            "name" : "allAggregation",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "111",
+                  "s" : [ {
+                     "value" : [ "","define ","allAggregation",": \n " ]
+                  }, {
+                     "r" : "110",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "104",
+                           "s" : [ {
+                              "r" : "103",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "103",
+                                 "s" : [ {
+                                    "r" : "93",
+                                    "value" : [ "{","1",",","2",",","3",",","4",",","5",",","1",",","2",",","3",",","4",",","5","}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","Num" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " \n  " ]
+                     }, {
+                        "r" : "109",
+                        "s" : [ {
+                           "value" : [ "aggregate all ","Sum"," " ]
+                        }, {
+                           "r" : "105",
+                           "s" : [ {
+                              "r" : "105",
+                              "value" : [ "starting ","0" ]
+                           } ]
+                        }, {
+                           "value" : [ ": " ]
+                        }, {
+                           "r" : "108",
+                           "s" : [ {
+                              "r" : "106",
+                              "s" : [ {
+                                 "value" : [ "Sum" ]
+                              } ]
+                           }, {
+                              "value" : [ " + " ]
+                           }, {
+                              "r" : "107",
+                              "s" : [ {
+                                 "value" : [ "Num" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "110",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "104",
+                  "alias" : "Num",
+                  "expression" : {
+                     "localId" : "103",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "93",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "94",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "95",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "96",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "97",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "98",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "99",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "100",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "101",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "102",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "aggregate" : {
+                  "localId" : "109",
+                  "identifier" : "Sum",
+                  "distinct" : false,
+                  "expression" : {
+                     "localId" : "108",
+                     "type" : "Add",
+                     "operand" : [ {
+                        "localId" : "106",
+                        "name" : "Sum",
+                        "type" : "QueryLetRef"
+                     }, {
+                        "localId" : "107",
+                        "name" : "Num",
+                        "type" : "AliasRef"
+                     } ]
+                  },
+                  "starting" : {
+                     "localId" : "105",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         }, {
+            "localId" : "130",
+            "name" : "distinctAggregation",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "130",
+                  "s" : [ {
+                     "value" : [ "","define ","distinctAggregation",": \n " ]
+                  }, {
+                     "r" : "129",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "123",
+                           "s" : [ {
+                              "r" : "122",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "122",
+                                 "s" : [ {
+                                    "r" : "112",
+                                    "value" : [ "{","1",",","2",",","3",",","4",",","5",",","1",",","2",",","3",",","4",",","5","}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","Num" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " \n  " ]
+                     }, {
+                        "r" : "128",
+                        "s" : [ {
+                           "value" : [ "aggregate distinct ","Sum"," " ]
+                        }, {
+                           "r" : "124",
+                           "s" : [ {
+                              "r" : "124",
+                              "value" : [ "starting ","0" ]
+                           } ]
+                        }, {
+                           "value" : [ ": " ]
+                        }, {
+                           "r" : "127",
+                           "s" : [ {
+                              "r" : "125",
+                              "s" : [ {
+                                 "value" : [ "Sum" ]
+                              } ]
+                           }, {
+                              "value" : [ " + " ]
+                           }, {
+                              "r" : "126",
+                              "s" : [ {
+                                 "value" : [ "Num" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "129",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "123",
+                  "alias" : "Num",
+                  "expression" : {
+                     "localId" : "122",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "112",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "113",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "114",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "115",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "116",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "117",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "118",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "119",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "120",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "121",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "aggregate" : {
+                  "localId" : "128",
+                  "identifier" : "Sum",
+                  "distinct" : true,
+                  "expression" : {
+                     "localId" : "127",
+                     "type" : "Add",
+                     "operand" : [ {
+                        "localId" : "125",
+                        "name" : "Sum",
+                        "type" : "QueryLetRef"
+                     }, {
+                        "localId" : "126",
+                        "name" : "Num",
+                        "type" : "AliasRef"
+                     } ]
+                  },
+                  "starting" : {
+                     "localId" : "124",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
                   }
                }
             }
