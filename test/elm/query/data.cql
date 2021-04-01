@@ -141,6 +141,3 @@ define allAggregation:
 define distinctAggregation: 
  ({1,2,3,4,5,1,2,3,4,5}) Num 
   aggregate distinct Sum starting 0: Sum + Num 
-
-
-
