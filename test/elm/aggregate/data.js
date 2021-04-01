@@ -23,6 +23,14 @@ module.exports['Count'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "26",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -40,7 +48,27 @@ module.exports['Count'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -64,7 +92,7 @@ module.exports['Count'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","not_null",": " ]
+                     "value" : [ "","define ","not_null",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -125,7 +153,7 @@ module.exports['Count'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","has_null",": " ]
+                     "value" : [ "","define ","has_null",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -192,7 +220,7 @@ module.exports['Count'] = {
                "s" : {
                   "r" : "20",
                   "s" : [ {
-                     "value" : [ "define ","empty",": " ]
+                     "value" : [ "","define ","empty",": " ]
                   }, {
                      "r" : "19",
                      "s" : [ {
@@ -220,7 +248,7 @@ module.exports['Count'] = {
                "s" : {
                   "r" : "26",
                   "s" : [ {
-                     "value" : [ "define ","is_null",": " ]
+                     "value" : [ "","define ","is_null",": " ]
                   }, {
                      "r" : "25",
                      "s" : [ {
@@ -296,6 +324,14 @@ module.exports['Sum'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "68",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -313,7 +349,27 @@ module.exports['Sum'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -337,7 +393,7 @@ module.exports['Sum'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","not_null",": " ]
+                     "value" : [ "","define ","not_null",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -398,7 +454,7 @@ module.exports['Sum'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","has_null",": " ]
+                     "value" : [ "","define ","has_null",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -465,7 +521,7 @@ module.exports['Sum'] = {
                "s" : {
                   "r" : "25",
                   "s" : [ {
-                     "value" : [ "define ","not_null_q",": " ]
+                     "value" : [ "","define ","not_null_q",": " ]
                   }, {
                      "r" : "24",
                      "s" : [ {
@@ -560,7 +616,7 @@ module.exports['Sum'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","has_null_q",": " ]
+                     "value" : [ "","define ","has_null_q",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -641,7 +697,7 @@ module.exports['Sum'] = {
                "s" : {
                   "r" : "42",
                   "s" : [ {
-                     "value" : [ "define ","unmatched_units_q",": " ]
+                     "value" : [ "","define ","unmatched_units_q",": " ]
                   }, {
                      "r" : "41",
                      "s" : [ {
@@ -748,7 +804,7 @@ module.exports['Sum'] = {
                "s" : {
                   "r" : "46",
                   "s" : [ {
-                     "value" : [ "define ","empty",": " ]
+                     "value" : [ "","define ","empty",": " ]
                   }, {
                      "r" : "45",
                      "s" : [ {
@@ -789,7 +845,7 @@ module.exports['Sum'] = {
                "s" : {
                   "r" : "54",
                   "s" : [ {
-                     "value" : [ "define ","q_diff_units",": " ]
+                     "value" : [ "","define ","q_diff_units",": " ]
                   }, {
                      "r" : "53",
                      "s" : [ {
@@ -884,7 +940,7 @@ module.exports['Sum'] = {
                "s" : {
                   "r" : "63",
                   "s" : [ {
-                     "value" : [ "define ","NumbersAndQuantities",": " ]
+                     "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
                      "r" : "62",
                      "s" : [ {
@@ -988,7 +1044,7 @@ module.exports['Sum'] = {
                "s" : {
                   "r" : "68",
                   "s" : [ {
-                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                     "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
                      "r" : "67",
                      "s" : [ {
@@ -1069,6 +1125,14 @@ module.exports['Min'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "136",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -1086,7 +1150,27 @@ module.exports['Min'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -1110,7 +1194,7 @@ module.exports['Min'] = {
                "s" : {
                   "r" : "10",
                   "s" : [ {
-                     "value" : [ "define ","not_null",": " ]
+                     "value" : [ "","define ","not_null",": " ]
                   }, {
                      "r" : "9",
                      "s" : [ {
@@ -1176,7 +1260,7 @@ module.exports['Min'] = {
                "s" : {
                   "r" : "19",
                   "s" : [ {
-                     "value" : [ "define ","has_null",": " ]
+                     "value" : [ "","define ","has_null",": " ]
                   }, {
                      "r" : "18",
                      "s" : [ {
@@ -1254,7 +1338,7 @@ module.exports['Min'] = {
                "s" : {
                   "r" : "23",
                   "s" : [ {
-                     "value" : [ "define ","empty",": " ]
+                     "value" : [ "","define ","empty",": " ]
                   }, {
                      "r" : "22",
                      "s" : [ {
@@ -1295,7 +1379,7 @@ module.exports['Min'] = {
                "s" : {
                   "r" : "32",
                   "s" : [ {
-                     "value" : [ "define ","not_null_q",": " ]
+                     "value" : [ "","define ","not_null_q",": " ]
                   }, {
                      "r" : "31",
                      "s" : [ {
@@ -1402,7 +1486,7 @@ module.exports['Min'] = {
                "s" : {
                   "r" : "41",
                   "s" : [ {
-                     "value" : [ "define ","has_null_q",": " ]
+                     "value" : [ "","define ","has_null_q",": " ]
                   }, {
                      "r" : "40",
                      "s" : [ {
@@ -1498,7 +1582,7 @@ module.exports['Min'] = {
                "s" : {
                   "r" : "50",
                   "s" : [ {
-                     "value" : [ "define ","q_diff_units",": " ]
+                     "value" : [ "","define ","q_diff_units",": " ]
                   }, {
                      "r" : "49",
                      "s" : [ {
@@ -1605,7 +1689,7 @@ module.exports['Min'] = {
                "s" : {
                   "r" : "59",
                   "s" : [ {
-                     "value" : [ "define ","NumbersAndQuantities",": " ]
+                     "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
                      "r" : "58",
                      "s" : [ {
@@ -1709,7 +1793,7 @@ module.exports['Min'] = {
                "s" : {
                   "r" : "66",
                   "s" : [ {
-                     "value" : [ "define ","IntegerMin",": " ]
+                     "value" : [ "","define ","IntegerMin",": " ]
                   }, {
                      "r" : "65",
                      "s" : [ {
@@ -1765,7 +1849,7 @@ module.exports['Min'] = {
                "s" : {
                   "r" : "74",
                   "s" : [ {
-                     "value" : [ "define ","DecimalMin",": " ]
+                     "value" : [ "","define ","DecimalMin",": " ]
                   }, {
                      "r" : "73",
                      "s" : [ {
@@ -1833,7 +1917,7 @@ module.exports['Min'] = {
                "s" : {
                   "r" : "80",
                   "s" : [ {
-                     "value" : [ "define ","DateMin",": " ]
+                     "value" : [ "","define ","DateMin",": " ]
                   }, {
                      "r" : "79",
                      "s" : [ {
@@ -1923,7 +2007,7 @@ module.exports['Min'] = {
                "s" : {
                   "r" : "91",
                   "s" : [ {
-                     "value" : [ "define ","DateTimeMin",": " ]
+                     "value" : [ "","define ","DateTimeMin",": " ]
                   }, {
                      "r" : "90",
                      "s" : [ {
@@ -2016,7 +2100,7 @@ module.exports['Min'] = {
                "s" : {
                   "r" : "106",
                   "s" : [ {
-                     "value" : [ "define ","TimeMin",": " ]
+                     "value" : [ "","define ","TimeMin",": " ]
                   }, {
                      "r" : "105",
                      "s" : [ {
@@ -2138,7 +2222,7 @@ module.exports['Min'] = {
                "s" : {
                   "r" : "113",
                   "s" : [ {
-                     "value" : [ "define ","StringMin",": " ]
+                     "value" : [ "","define ","StringMin",": " ]
                   }, {
                      "r" : "112",
                      "s" : [ {
@@ -2221,7 +2305,7 @@ module.exports['Min'] = {
                "s" : {
                   "r" : "125",
                   "s" : [ {
-                     "value" : [ "define ","MinIsNull",": " ]
+                     "value" : [ "","define ","MinIsNull",": " ]
                   }, {
                      "r" : "124",
                      "s" : [ {
@@ -2334,7 +2418,7 @@ module.exports['Min'] = {
                "s" : {
                   "r" : "131",
                   "s" : [ {
-                     "value" : [ "define ","MinIsAlsoNull",": " ]
+                     "value" : [ "","define ","MinIsAlsoNull",": " ]
                   }, {
                      "r" : "130",
                      "s" : [ {
@@ -2395,7 +2479,7 @@ module.exports['Min'] = {
                "s" : {
                   "r" : "136",
                   "s" : [ {
-                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                     "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
                      "r" : "135",
                      "s" : [ {
@@ -2478,6 +2562,14 @@ module.exports['Max'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "132",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -2495,7 +2587,27 @@ module.exports['Max'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2519,7 +2631,7 @@ module.exports['Max'] = {
                "s" : {
                   "r" : "10",
                   "s" : [ {
-                     "value" : [ "define ","not_null",": " ]
+                     "value" : [ "","define ","not_null",": " ]
                   }, {
                      "r" : "9",
                      "s" : [ {
@@ -2585,7 +2697,7 @@ module.exports['Max'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","has_null",": " ]
+                     "value" : [ "","define ","has_null",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -2645,7 +2757,7 @@ module.exports['Max'] = {
                "s" : {
                   "r" : "26",
                   "s" : [ {
-                     "value" : [ "define ","not_null_q",": " ]
+                     "value" : [ "","define ","not_null_q",": " ]
                   }, {
                      "r" : "25",
                      "s" : [ {
@@ -2752,7 +2864,7 @@ module.exports['Max'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","has_null_q",": " ]
+                     "value" : [ "","define ","has_null_q",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -2826,7 +2938,7 @@ module.exports['Max'] = {
                "s" : {
                   "r" : "42",
                   "s" : [ {
-                     "value" : [ "define ","q_diff_units",": " ]
+                     "value" : [ "","define ","q_diff_units",": " ]
                   }, {
                      "r" : "41",
                      "s" : [ {
@@ -2933,7 +3045,7 @@ module.exports['Max'] = {
                "s" : {
                   "r" : "51",
                   "s" : [ {
-                     "value" : [ "define ","NumbersAndQuantities",": " ]
+                     "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
                      "r" : "50",
                      "s" : [ {
@@ -3037,7 +3149,7 @@ module.exports['Max'] = {
                "s" : {
                   "r" : "56",
                   "s" : [ {
-                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                     "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
                      "r" : "55",
                      "s" : [ {
@@ -3096,7 +3208,7 @@ module.exports['Max'] = {
                "s" : {
                   "r" : "60",
                   "s" : [ {
-                     "value" : [ "define ","empty",": " ]
+                     "value" : [ "","define ","empty",": " ]
                   }, {
                      "r" : "59",
                      "s" : [ {
@@ -3137,7 +3249,7 @@ module.exports['Max'] = {
                "s" : {
                   "r" : "67",
                   "s" : [ {
-                     "value" : [ "define ","IntegerMax",": " ]
+                     "value" : [ "","define ","IntegerMax",": " ]
                   }, {
                      "r" : "66",
                      "s" : [ {
@@ -3193,7 +3305,7 @@ module.exports['Max'] = {
                "s" : {
                   "r" : "75",
                   "s" : [ {
-                     "value" : [ "define ","DecimalMax",": " ]
+                     "value" : [ "","define ","DecimalMax",": " ]
                   }, {
                      "r" : "74",
                      "s" : [ {
@@ -3261,7 +3373,7 @@ module.exports['Max'] = {
                "s" : {
                   "r" : "81",
                   "s" : [ {
-                     "value" : [ "define ","DateMax",": " ]
+                     "value" : [ "","define ","DateMax",": " ]
                   }, {
                      "r" : "80",
                      "s" : [ {
@@ -3351,7 +3463,7 @@ module.exports['Max'] = {
                "s" : {
                   "r" : "92",
                   "s" : [ {
-                     "value" : [ "define ","DateTimeMax",": " ]
+                     "value" : [ "","define ","DateTimeMax",": " ]
                   }, {
                      "r" : "91",
                      "s" : [ {
@@ -3444,7 +3556,7 @@ module.exports['Max'] = {
                "s" : {
                   "r" : "107",
                   "s" : [ {
-                     "value" : [ "define ","TimeMax",": " ]
+                     "value" : [ "","define ","TimeMax",": " ]
                   }, {
                      "r" : "106",
                      "s" : [ {
@@ -3566,7 +3678,7 @@ module.exports['Max'] = {
                "s" : {
                   "r" : "114",
                   "s" : [ {
-                     "value" : [ "define ","StringMax",": " ]
+                     "value" : [ "","define ","StringMax",": " ]
                   }, {
                      "r" : "113",
                      "s" : [ {
@@ -3649,7 +3761,7 @@ module.exports['Max'] = {
                "s" : {
                   "r" : "126",
                   "s" : [ {
-                     "value" : [ "define ","MaxIsNull",": " ]
+                     "value" : [ "","define ","MaxIsNull",": " ]
                   }, {
                      "r" : "125",
                      "s" : [ {
@@ -3762,7 +3874,7 @@ module.exports['Max'] = {
                "s" : {
                   "r" : "132",
                   "s" : [ {
-                     "value" : [ "define ","MaxIsAlsoNull",": " ]
+                     "value" : [ "","define ","MaxIsAlsoNull",": " ]
                   }, {
                      "r" : "131",
                      "s" : [ {
@@ -3837,6 +3949,14 @@ module.exports['Avg'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "57",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -3854,7 +3974,27 @@ module.exports['Avg'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -3878,7 +4018,7 @@ module.exports['Avg'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","not_null",": " ]
+                     "value" : [ "","define ","not_null",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -3955,7 +4095,7 @@ module.exports['Avg'] = {
                "s" : {
                   "r" : "16",
                   "s" : [ {
-                     "value" : [ "define ","has_null",": " ]
+                     "value" : [ "","define ","has_null",": " ]
                   }, {
                      "r" : "15",
                      "s" : [ {
@@ -4031,7 +4171,7 @@ module.exports['Avg'] = {
                "s" : {
                   "r" : "24",
                   "s" : [ {
-                     "value" : [ "define ","not_null_q",": " ]
+                     "value" : [ "","define ","not_null_q",": " ]
                   }, {
                      "r" : "23",
                      "s" : [ {
@@ -4126,7 +4266,7 @@ module.exports['Avg'] = {
                "s" : {
                   "r" : "31",
                   "s" : [ {
-                     "value" : [ "define ","has_null_q",": " ]
+                     "value" : [ "","define ","has_null_q",": " ]
                   }, {
                      "r" : "30",
                      "s" : [ {
@@ -4200,7 +4340,7 @@ module.exports['Avg'] = {
                "s" : {
                   "r" : "35",
                   "s" : [ {
-                     "value" : [ "define ","empty",": " ]
+                     "value" : [ "","define ","empty",": " ]
                   }, {
                      "r" : "34",
                      "s" : [ {
@@ -4257,7 +4397,7 @@ module.exports['Avg'] = {
                "s" : {
                   "r" : "43",
                   "s" : [ {
-                     "value" : [ "define ","q_diff_units",": " ]
+                     "value" : [ "","define ","q_diff_units",": " ]
                   }, {
                      "r" : "42",
                      "s" : [ {
@@ -4352,7 +4492,7 @@ module.exports['Avg'] = {
                "s" : {
                   "r" : "52",
                   "s" : [ {
-                     "value" : [ "define ","NumbersAndQuantities",": " ]
+                     "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
                      "r" : "51",
                      "s" : [ {
@@ -4456,7 +4596,7 @@ module.exports['Avg'] = {
                "s" : {
                   "r" : "57",
                   "s" : [ {
-                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                     "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
                      "r" : "56",
                      "s" : [ {
@@ -4536,6 +4676,14 @@ module.exports['Median'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "122",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -4553,7 +4701,27 @@ module.exports['Median'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -4577,7 +4745,7 @@ module.exports['Median'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","odd",": " ]
+                     "value" : [ "","define ","odd",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -4654,7 +4822,7 @@ module.exports['Median'] = {
                "s" : {
                   "r" : "18",
                   "s" : [ {
-                     "value" : [ "define ","even",": " ]
+                     "value" : [ "","define ","even",": " ]
                   }, {
                      "r" : "17",
                      "s" : [ {
@@ -4736,7 +4904,7 @@ module.exports['Median'] = {
                "s" : {
                   "r" : "26",
                   "s" : [ {
-                     "value" : [ "define ","odd_q",": " ]
+                     "value" : [ "","define ","odd_q",": " ]
                   }, {
                      "r" : "25",
                      "s" : [ {
@@ -4831,7 +4999,7 @@ module.exports['Median'] = {
                "s" : {
                   "r" : "35",
                   "s" : [ {
-                     "value" : [ "define ","even_q",": " ]
+                     "value" : [ "","define ","even_q",": " ]
                   }, {
                      "r" : "34",
                      "s" : [ {
@@ -4938,7 +5106,7 @@ module.exports['Median'] = {
                "s" : {
                   "r" : "44",
                   "s" : [ {
-                     "value" : [ "define ","q_diff_units",": " ]
+                     "value" : [ "","define ","q_diff_units",": " ]
                   }, {
                      "r" : "43",
                      "s" : [ {
@@ -5045,7 +5213,7 @@ module.exports['Median'] = {
                "s" : {
                   "r" : "53",
                   "s" : [ {
-                     "value" : [ "define ","NumbersAndQuantities",": " ]
+                     "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
                      "r" : "52",
                      "s" : [ {
@@ -5137,7 +5305,7 @@ module.exports['Median'] = {
                "s" : {
                   "r" : "57",
                   "s" : [ {
-                     "value" : [ "define ","empty",": " ]
+                     "value" : [ "","define ","empty",": " ]
                   }, {
                      "r" : "56",
                      "s" : [ {
@@ -5194,7 +5362,7 @@ module.exports['Median'] = {
                "s" : {
                   "r" : "64",
                   "s" : [ {
-                     "value" : [ "define ","has_null",": " ]
+                     "value" : [ "","define ","has_null",": " ]
                   }, {
                      "r" : "63",
                      "s" : [ {
@@ -5270,7 +5438,7 @@ module.exports['Median'] = {
                "s" : {
                   "r" : "75",
                   "s" : [ {
-                     "value" : [ "define ","dup_vals_even",": " ]
+                     "value" : [ "","define ","dup_vals_even",": " ]
                   }, {
                      "r" : "74",
                      "s" : [ {
@@ -5362,7 +5530,7 @@ module.exports['Median'] = {
                "s" : {
                   "r" : "87",
                   "s" : [ {
-                     "value" : [ "define ","dup_vals_odd",":  " ]
+                     "value" : [ "","define ","dup_vals_odd",":  " ]
                   }, {
                      "r" : "86",
                      "s" : [ {
@@ -5459,7 +5627,7 @@ module.exports['Median'] = {
                "s" : {
                   "r" : "94",
                   "s" : [ {
-                     "value" : [ "define ","has_null_q",": " ]
+                     "value" : [ "","define ","has_null_q",": " ]
                   }, {
                      "r" : "93",
                      "s" : [ {
@@ -5533,7 +5701,7 @@ module.exports['Median'] = {
                "s" : {
                   "r" : "105",
                   "s" : [ {
-                     "value" : [ "define ","dup_vals_even_q",": " ]
+                     "value" : [ "","define ","dup_vals_even_q",": " ]
                   }, {
                      "r" : "104",
                      "s" : [ {
@@ -5664,7 +5832,7 @@ module.exports['Median'] = {
                "s" : {
                   "r" : "117",
                   "s" : [ {
-                     "value" : [ "define ","dup_vals_odd_q",":  " ]
+                     "value" : [ "","define ","dup_vals_odd_q",":  " ]
                   }, {
                      "r" : "116",
                      "s" : [ {
@@ -5807,7 +5975,7 @@ module.exports['Median'] = {
                "s" : {
                   "r" : "122",
                   "s" : [ {
-                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                     "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
                      "r" : "121",
                      "s" : [ {
@@ -5879,6 +6047,14 @@ module.exports['Mode'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "48",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -5896,7 +6072,27 @@ module.exports['Mode'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -5920,7 +6116,7 @@ module.exports['Mode'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","not_null",": " ]
+                     "value" : [ "","define ","not_null",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -5991,7 +6187,7 @@ module.exports['Mode'] = {
                "s" : {
                   "r" : "19",
                   "s" : [ {
-                     "value" : [ "define ","has_null",": " ]
+                     "value" : [ "","define ","has_null",": " ]
                   }, {
                      "r" : "18",
                      "s" : [ {
@@ -6056,7 +6252,7 @@ module.exports['Mode'] = {
                "s" : {
                   "r" : "22",
                   "s" : [ {
-                     "value" : [ "define ","empty",": " ]
+                     "value" : [ "","define ","empty",": " ]
                   }, {
                      "r" : "21",
                      "s" : [ {
@@ -6084,7 +6280,7 @@ module.exports['Mode'] = {
                "s" : {
                   "r" : "34",
                   "s" : [ {
-                     "value" : [ "define ","bi_modal",": " ]
+                     "value" : [ "","define ","bi_modal",": " ]
                   }, {
                      "r" : "33",
                      "s" : [ {
@@ -6165,7 +6361,7 @@ module.exports['Mode'] = {
                "s" : {
                   "r" : "43",
                   "s" : [ {
-                     "value" : [ "define ","NumbersAndQuantities",": " ]
+                     "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
                      "r" : "42",
                      "s" : [ {
@@ -6269,7 +6465,7 @@ module.exports['Mode'] = {
                "s" : {
                   "r" : "48",
                   "s" : [ {
-                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                     "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
                      "r" : "47",
                      "s" : [ {
@@ -6339,6 +6535,14 @@ module.exports['Variance'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "38",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -6356,7 +6560,27 @@ module.exports['Variance'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -6380,7 +6604,7 @@ module.exports['Variance'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","v",": " ]
+                     "value" : [ "","define ","v",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -6457,7 +6681,7 @@ module.exports['Variance'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","v_q",": " ]
+                     "value" : [ "","define ","v_q",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -6552,7 +6776,7 @@ module.exports['Variance'] = {
                "s" : {
                   "r" : "25",
                   "s" : [ {
-                     "value" : [ "define ","q_diff_units",": " ]
+                     "value" : [ "","define ","q_diff_units",": " ]
                   }, {
                      "r" : "24",
                      "s" : [ {
@@ -6647,7 +6871,7 @@ module.exports['Variance'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","NumbersAndQuantities",": " ]
+                     "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -6731,7 +6955,7 @@ module.exports['Variance'] = {
                "s" : {
                   "r" : "38",
                   "s" : [ {
-                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                     "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
                      "r" : "37",
                      "s" : [ {
@@ -6801,6 +7025,14 @@ module.exports['PopulationVariance'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "38",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -6818,7 +7050,27 @@ module.exports['PopulationVariance'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -6842,7 +7094,7 @@ module.exports['PopulationVariance'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","v",": " ]
+                     "value" : [ "","define ","v",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -6903,7 +7155,7 @@ module.exports['PopulationVariance'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","v_q",": " ]
+                     "value" : [ "","define ","v_q",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -6998,7 +7250,7 @@ module.exports['PopulationVariance'] = {
                "s" : {
                   "r" : "25",
                   "s" : [ {
-                     "value" : [ "define ","q_diff_units",": " ]
+                     "value" : [ "","define ","q_diff_units",": " ]
                   }, {
                      "r" : "24",
                      "s" : [ {
@@ -7093,7 +7345,7 @@ module.exports['PopulationVariance'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","NumbersAndQuantities",": " ]
+                     "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -7177,7 +7429,7 @@ module.exports['PopulationVariance'] = {
                "s" : {
                   "r" : "38",
                   "s" : [ {
-                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                     "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
                      "r" : "37",
                      "s" : [ {
@@ -7248,6 +7500,14 @@ module.exports['StdDev'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "46",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -7265,7 +7525,27 @@ module.exports['StdDev'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -7289,7 +7569,7 @@ module.exports['StdDev'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","std",": " ]
+                     "value" : [ "","define ","std",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -7366,7 +7646,7 @@ module.exports['StdDev'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","std_q",": " ]
+                     "value" : [ "","define ","std_q",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -7461,7 +7741,7 @@ module.exports['StdDev'] = {
                "s" : {
                   "r" : "25",
                   "s" : [ {
-                     "value" : [ "define ","q_diff_units",": " ]
+                     "value" : [ "","define ","q_diff_units",": " ]
                   }, {
                      "r" : "24",
                      "s" : [ {
@@ -7556,7 +7836,7 @@ module.exports['StdDev'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","sq_throw1",": " ]
+                     "value" : [ "","define ","sq_throw1",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -7651,7 +7931,7 @@ module.exports['StdDev'] = {
                "s" : {
                   "r" : "41",
                   "s" : [ {
-                     "value" : [ "define ","NumbersAndQuantities",": " ]
+                     "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
                      "r" : "40",
                      "s" : [ {
@@ -7732,7 +8012,7 @@ module.exports['StdDev'] = {
                "s" : {
                   "r" : "46",
                   "s" : [ {
-                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                     "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
                      "r" : "45",
                      "s" : [ {
@@ -7802,6 +8082,14 @@ module.exports['PopulationStdDev'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "38",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -7819,7 +8107,27 @@ module.exports['PopulationStdDev'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -7843,7 +8151,7 @@ module.exports['PopulationStdDev'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","dev",": " ]
+                     "value" : [ "","define ","dev",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -7920,7 +8228,7 @@ module.exports['PopulationStdDev'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","dev_q",": " ]
+                     "value" : [ "","define ","dev_q",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -8015,7 +8323,7 @@ module.exports['PopulationStdDev'] = {
                "s" : {
                   "r" : "25",
                   "s" : [ {
-                     "value" : [ "define ","q_diff_units",": " ]
+                     "value" : [ "","define ","q_diff_units",": " ]
                   }, {
                      "r" : "24",
                      "s" : [ {
@@ -8110,7 +8418,7 @@ module.exports['PopulationStdDev'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","NumbersAndQuantities",": " ]
+                     "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -8191,7 +8499,7 @@ module.exports['PopulationStdDev'] = {
                "s" : {
                   "r" : "38",
                   "s" : [ {
-                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                     "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
                      "r" : "37",
                      "s" : [ {
@@ -8267,6 +8575,14 @@ module.exports['Product'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "79",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -8284,7 +8600,27 @@ module.exports['Product'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -8308,7 +8644,7 @@ module.exports['Product'] = {
                "s" : {
                   "r" : "8",
                   "s" : [ {
-                     "value" : [ "define ","decimal_product",": " ]
+                     "value" : [ "","define ","decimal_product",": " ]
                   }, {
                      "r" : "7",
                      "s" : [ {
@@ -8364,7 +8700,7 @@ module.exports['Product'] = {
                "s" : {
                   "r" : "14",
                   "s" : [ {
-                     "value" : [ "define ","integer_product",": " ]
+                     "value" : [ "","define ","integer_product",": " ]
                   }, {
                      "r" : "13",
                      "s" : [ {
@@ -8415,7 +8751,7 @@ module.exports['Product'] = {
                "s" : {
                   "r" : "20",
                   "s" : [ {
-                     "value" : [ "define ","zero_product",": " ]
+                     "value" : [ "","define ","zero_product",": " ]
                   }, {
                      "r" : "19",
                      "s" : [ {
@@ -8466,7 +8802,7 @@ module.exports['Product'] = {
                "s" : {
                   "r" : "27",
                   "s" : [ {
-                     "value" : [ "define ","quantity_product",": " ]
+                     "value" : [ "","define ","quantity_product",": " ]
                   }, {
                      "r" : "26",
                      "s" : [ {
@@ -8549,7 +8885,7 @@ module.exports['Product'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","quantity_zero_product",": " ]
+                     "value" : [ "","define ","quantity_zero_product",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -8620,7 +8956,7 @@ module.exports['Product'] = {
                "s" : {
                   "r" : "39",
                   "s" : [ {
-                     "value" : [ "define ","product_with_null",": " ]
+                     "value" : [ "","define ","product_with_null",": " ]
                   }, {
                      "r" : "38",
                      "s" : [ {
@@ -8673,7 +9009,7 @@ module.exports['Product'] = {
                "s" : {
                   "r" : "47",
                   "s" : [ {
-                     "value" : [ "define ","product_of_nulls",": " ]
+                     "value" : [ "","define ","product_of_nulls",": " ]
                   }, {
                      "r" : "46",
                      "s" : [ {
@@ -8749,7 +9085,7 @@ module.exports['Product'] = {
                "s" : {
                   "r" : "53",
                   "s" : [ {
-                     "value" : [ "define ","product_null",": " ]
+                     "value" : [ "","define ","product_null",": " ]
                   }, {
                      "r" : "52",
                      "s" : [ {
@@ -8810,7 +9146,7 @@ module.exports['Product'] = {
                "s" : {
                   "r" : "65",
                   "s" : [ {
-                     "value" : [ "define ","product_quantity_null",": " ]
+                     "value" : [ "","define ","product_quantity_null",": " ]
                   }, {
                      "r" : "64",
                      "s" : [ {
@@ -8923,7 +9259,7 @@ module.exports['Product'] = {
                "s" : {
                   "r" : "74",
                   "s" : [ {
-                     "value" : [ "define ","NumbersAndQuantities",": " ]
+                     "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
                      "r" : "73",
                      "s" : [ {
@@ -9027,7 +9363,7 @@ module.exports['Product'] = {
                "s" : {
                   "r" : "79",
                   "s" : [ {
-                     "value" : [ "define ","IncompatibleUnitsNull",": " ]
+                     "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
                      "r" : "78",
                      "s" : [ {
@@ -9097,6 +9433,14 @@ module.exports['GeometricMean'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "31",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -9114,7 +9458,27 @@ module.exports['GeometricMean'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -9138,7 +9502,7 @@ module.exports['GeometricMean'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","decimal_geometric_mean",": " ]
+                     "value" : [ "","define ","decimal_geometric_mean",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -9191,7 +9555,7 @@ module.exports['GeometricMean'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","zero_geometric_mean",": " ]
+                     "value" : [ "","define ","zero_geometric_mean",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -9245,7 +9609,7 @@ module.exports['GeometricMean'] = {
                "s" : {
                   "r" : "19",
                   "s" : [ {
-                     "value" : [ "define ","null_geometric_mean",": " ]
+                     "value" : [ "","define ","null_geometric_mean",": " ]
                   }, {
                      "r" : "18",
                      "s" : [ {
@@ -9314,7 +9678,7 @@ module.exports['GeometricMean'] = {
                "s" : {
                   "r" : "25",
                   "s" : [ {
-                     "value" : [ "define ","all_nulls",": " ]
+                     "value" : [ "","define ","all_nulls",": " ]
                   }, {
                      "r" : "24",
                      "s" : [ {
@@ -9376,7 +9740,7 @@ module.exports['GeometricMean'] = {
                "s" : {
                   "r" : "31",
                   "s" : [ {
-                     "value" : [ "define ","also_null_geometric_mean",": " ]
+                     "value" : [ "","define ","also_null_geometric_mean",": " ]
                   }, {
                      "r" : "30",
                      "s" : [ {
@@ -9448,6 +9812,14 @@ module.exports['AllTrue'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "33",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -9465,7 +9837,27 @@ module.exports['AllTrue'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -9489,7 +9881,7 @@ module.exports['AllTrue'] = {
                "s" : {
                   "r" : "8",
                   "s" : [ {
-                     "value" : [ "define ","at",": " ]
+                     "value" : [ "","define ","at",": " ]
                   }, {
                      "r" : "7",
                      "s" : [ {
@@ -9545,7 +9937,7 @@ module.exports['AllTrue'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","atwn",": " ]
+                     "value" : [ "","define ","atwn",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -9615,7 +10007,7 @@ module.exports['AllTrue'] = {
                "s" : {
                   "r" : "24",
                   "s" : [ {
-                     "value" : [ "define ","atf",": " ]
+                     "value" : [ "","define ","atf",": " ]
                   }, {
                      "r" : "23",
                      "s" : [ {
@@ -9671,7 +10063,7 @@ module.exports['AllTrue'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","atfwn",": " ]
+                     "value" : [ "","define ","atfwn",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {
@@ -9752,6 +10144,14 @@ module.exports['AnyTrue'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "33",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -9769,7 +10169,27 @@ module.exports['AnyTrue'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -9793,7 +10213,7 @@ module.exports['AnyTrue'] = {
                "s" : {
                   "r" : "8",
                   "s" : [ {
-                     "value" : [ "define ","at",": " ]
+                     "value" : [ "","define ","at",": " ]
                   }, {
                      "r" : "7",
                      "s" : [ {
@@ -9849,7 +10269,7 @@ module.exports['AnyTrue'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","atwn",": " ]
+                     "value" : [ "","define ","atwn",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -9919,7 +10339,7 @@ module.exports['AnyTrue'] = {
                "s" : {
                   "r" : "24",
                   "s" : [ {
-                     "value" : [ "define ","atf",": " ]
+                     "value" : [ "","define ","atf",": " ]
                   }, {
                      "r" : "23",
                      "s" : [ {
@@ -9975,7 +10395,7 @@ module.exports['AnyTrue'] = {
                "s" : {
                   "r" : "33",
                   "s" : [ {
-                     "value" : [ "define ","atfwn",": " ]
+                     "value" : [ "","define ","atfwn",": " ]
                   }, {
                      "r" : "32",
                      "s" : [ {

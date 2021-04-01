@@ -27,7 +27,14 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.hl7.elm.r1.VersionedIdentifier;
+import org.hl7.elm_modelinfo.r1.ModelInfo;
+
+import javax.xml.bind.*;
+
 import static java.nio.file.FileVisitResult.CONTINUE;
+
+
 
 public class JavaScriptTestDataGenerator {
     private static final Pattern SNIPPET_START = Pattern.compile("^\\s*\\/\\/\\s+\\@Test\\:\\s+(.*\\S)\\s*$");
@@ -66,6 +73,13 @@ public class JavaScriptTestDataGenerator {
         return snippets;
     }
 
+    public static void loadModelInfo(File modelInfoXML, ModelManager modelManager) {
+        final ModelInfo modelInfo = JAXB.unmarshal(modelInfoXML, ModelInfo.class);
+        final VersionedIdentifier modelId = new VersionedIdentifier().withId(modelInfo.getName()).withVersion(modelInfo.getVersion());
+        final ModelInfoProvider modelProvider = (VersionedIdentifier modelIdentifier) -> modelInfo;
+        modelManager.getModelInfoLoader().registerModelInfoProvider(modelProvider);
+    }
+
     private static void writeSnippetsToJavaScriptFile(Map<String,StringBuilder> snippets, Path file) throws IOException {
         PrintWriter pw = new PrintWriter(file.toFile(), "UTF-8");
         pw.println("/*");
@@ -89,6 +103,7 @@ public class JavaScriptTestDataGenerator {
             pw.println();
             try {
                 ModelManager modelManager = new ModelManager();
+                JavaScriptTestDataGenerator.loadModelInfo(new File("../../src/simple-modelinfo.xml"), modelManager);
                 LibraryManager libraryManager = new LibraryManager(modelManager);
                 libraryManager.getLibrarySourceLoader().registerProvider(new DefaultLibrarySourceProvider(file.getParent()));
                 CqlTranslator.Options[] options = {CqlTranslator.Options.EnableDateRangeOptimization, CqlTranslator.Options.EnableAnnotations};
@@ -160,7 +175,7 @@ public class JavaScriptTestDataGenerator {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        CqlTranslator.loadModelInfo(new File("../../src/simple-modelinfo.xml"));
+        
         OptionParser parser = new OptionParser();
         OptionSpec<File> input = parser.accepts("input").withRequiredArg().ofType(File.class).required();
         OptionSpec recursive = parser.accepts("recursive");

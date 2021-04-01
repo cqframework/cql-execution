@@ -36,6 +36,14 @@ module.exports['Age'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "39",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -53,7 +61,22 @@ module.exports['Age'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -61,6 +84,36 @@ module.exports['Age'] = {
             "localId" : "11",
             "name" : "MeasurementPeriod",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "11",
+                  "s" : [ {
+                     "value" : [ "","parameter ","MeasurementPeriod"," default " ]
+                  }, {
+                     "r" : "10",
+                     "s" : [ {
+                        "value" : [ "Interval[" ]
+                     }, {
+                        "r" : "5",
+                        "s" : [ {
+                           "r" : "2",
+                           "value" : [ "DateTime","(","2013",", ","1",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "9",
+                        "s" : [ {
+                           "r" : "6",
+                           "value" : [ "DateTime","(","2014",", ","1",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "10",
                "lowClosed" : true,
@@ -113,6 +166,13 @@ module.exports['Age'] = {
             }
          } ]
       },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
+         }, {
+            "name" : "Unfiltered"
+         } ]
+      },
       "statements" : {
          "def" : [ {
             "name" : "Patient",
@@ -134,7 +194,7 @@ module.exports['Age'] = {
                "s" : {
                   "r" : "15",
                   "s" : [ {
-                     "value" : [ "define ","Age",":\n  " ]
+                     "value" : [ "","define ","Age",":\n  " ]
                   }, {
                      "r" : "14",
                      "s" : [ {
@@ -186,7 +246,7 @@ module.exports['Age'] = {
                "s" : {
                   "r" : "27",
                   "s" : [ {
-                     "value" : [ "define ","InDemographic",":\n  " ]
+                     "value" : [ "","define ","InDemographic",":\n  " ]
                   }, {
                      "r" : "26",
                      "s" : [ {
@@ -314,7 +374,7 @@ module.exports['Age'] = {
                "s" : {
                   "r" : "30",
                   "s" : [ {
-                     "value" : [ "define ","AgeSum",": " ]
+                     "value" : [ "","define ","AgeSum",": " ]
                   }, {
                      "r" : "29",
                      "s" : [ {
@@ -349,7 +409,7 @@ module.exports['Age'] = {
                "s" : {
                   "r" : "37",
                   "s" : [ {
-                     "value" : [ "define ","DEMO",": " ]
+                     "value" : [ "","define ","DEMO",": " ]
                   }, {
                      "r" : "36",
                      "s" : [ {
@@ -431,7 +491,7 @@ module.exports['Age'] = {
                "s" : {
                   "r" : "39",
                   "s" : [ {
-                     "value" : [ "define ","AgeSumRef"," : " ]
+                     "value" : [ "","define ","AgeSumRef"," : " ]
                   }, {
                      "r" : "38",
                      "s" : [ {

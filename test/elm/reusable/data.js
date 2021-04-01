@@ -20,6 +20,14 @@ module.exports['ExpressionDef'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "3",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -37,7 +45,27 @@ module.exports['ExpressionDef'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -61,7 +89,7 @@ module.exports['ExpressionDef'] = {
                "s" : {
                   "r" : "3",
                   "s" : [ {
-                     "value" : [ "define ","Foo",": " ]
+                     "value" : [ "","define ","Foo",": " ]
                   }, {
                      "r" : "2",
                      "s" : [ {
@@ -94,6 +122,14 @@ module.exports['ExpressionRef'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "5",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -111,7 +147,27 @@ module.exports['ExpressionRef'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -136,7 +192,7 @@ module.exports['ExpressionRef'] = {
                   "r" : "3",
                   "s" : [ {
                      "r" : "2",
-                     "value" : [ "define ","Life",": ","42" ]
+                     "value" : [ "","define ","Life",": ","42" ]
                   } ]
                }
             } ],
@@ -156,7 +212,7 @@ module.exports['ExpressionRef'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","Foo",": " ]
+                     "value" : [ "","define ","Foo",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -190,6 +246,14 @@ module.exports['FunctionDefinitions'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "11",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -207,7 +271,27 @@ module.exports['FunctionDefinitions'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -232,7 +316,7 @@ module.exports['FunctionDefinitions'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define function ","\"foo bar\"","(","a"," " ]
+                     "value" : [ "","define function ","\"foo bar\"","(","a"," " ]
                   }, {
                      "r" : "2",
                      "s" : [ {
@@ -306,7 +390,7 @@ module.exports['FunctionDefinitions'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","testValue",": " ]
+                     "value" : [ "","define ","testValue",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -356,6 +440,14 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "17",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -373,7 +465,27 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -398,7 +510,7 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
                "s" : {
                   "r" : "6",
                   "s" : [ {
-                     "value" : [ "define function ","process","(","a"," " ]
+                     "value" : [ "","define function ","process","(","a"," " ]
                   }, {
                      "r" : "2",
                      "s" : [ {
@@ -456,7 +568,7 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define function ","process","(","a"," " ]
+                     "value" : [ "","define function ","process","(","a"," " ]
                   }, {
                      "r" : "7",
                      "s" : [ {
@@ -517,7 +629,7 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
                "s" : {
                   "r" : "14",
                   "s" : [ {
-                     "value" : [ "define ","testValue1",": " ]
+                     "value" : [ "","define ","testValue1",": " ]
                   }, {
                      "r" : "13",
                      "s" : [ {
@@ -548,7 +660,7 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","testValue2",": " ]
+                     "value" : [ "","define ","testValue2",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -599,6 +711,14 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "31",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -616,7 +736,27 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -641,7 +781,7 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
                "s" : {
                   "r" : "12",
                   "s" : [ {
-                     "value" : [ "define function ","process","(","inverse"," " ]
+                     "value" : [ "","define function ","process","(","inverse"," " ]
                   }, {
                      "r" : "2",
                      "s" : [ {
@@ -702,13 +842,9 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
                "localId" : "11",
                "type" : "If",
                "condition" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "As",
-                  "operand" : {
-                     "localId" : "4",
-                     "name" : "inverse",
-                     "type" : "OperandRef"
-                  }
+                  "localId" : "4",
+                  "name" : "inverse",
+                  "type" : "OperandRef"
                },
                "then" : {
                   "localId" : "7",
@@ -765,7 +901,7 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
                "s" : {
                   "r" : "23",
                   "s" : [ {
-                     "value" : [ "define function ","process","(","inverse"," " ]
+                     "value" : [ "","define function ","process","(","inverse"," " ]
                   }, {
                      "r" : "13",
                      "s" : [ {
@@ -834,13 +970,9 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
                "localId" : "22",
                "type" : "If",
                "condition" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "As",
-                  "operand" : {
-                     "localId" : "15",
-                     "name" : "inverse",
-                     "type" : "OperandRef"
-                  }
+                  "localId" : "15",
+                  "name" : "inverse",
+                  "type" : "OperandRef"
                },
                "then" : {
                   "localId" : "18",
@@ -896,7 +1028,7 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
                "s" : {
                   "r" : "27",
                   "s" : [ {
-                     "value" : [ "define ","testValue1",": " ]
+                     "value" : [ "","define ","testValue1",": " ]
                   }, {
                      "r" : "26",
                      "s" : [ {
@@ -932,7 +1064,7 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
                "s" : {
                   "r" : "31",
                   "s" : [ {
-                     "value" : [ "define ","testValue2",": " ]
+                     "value" : [ "","define ","testValue2",": " ]
                   }, {
                      "r" : "30",
                      "s" : [ {
@@ -990,6 +1122,14 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "32",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -1007,7 +1147,27 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -1032,7 +1192,7 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
                "s" : {
                   "r" : "6",
                   "s" : [ {
-                     "value" : [ "define function ","process","(","a"," " ]
+                     "value" : [ "","define function ","process","(","a"," " ]
                   }, {
                      "r" : "2",
                      "s" : [ {
@@ -1094,7 +1254,7 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define function ","process","(","a"," " ]
+                     "value" : [ "","define function ","process","(","a"," " ]
                   }, {
                      "r" : "7",
                      "s" : [ {
@@ -1183,13 +1343,9 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
                "localId" : "20",
                "type" : "If",
                "condition" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "As",
-                  "operand" : {
-                     "localId" : "9",
-                     "name" : "isSpanish",
-                     "type" : "OperandRef"
-                  }
+                  "localId" : "9",
+                  "name" : "isSpanish",
+                  "type" : "OperandRef"
                },
                "then" : {
                   "localId" : "14",
@@ -1263,7 +1419,7 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
                "s" : {
                   "r" : "24",
                   "s" : [ {
-                     "value" : [ "define ","testValue1",": " ]
+                     "value" : [ "","define ","testValue1",": " ]
                   }, {
                      "r" : "23",
                      "s" : [ {
@@ -1300,7 +1456,7 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
                "s" : {
                   "r" : "28",
                   "s" : [ {
-                     "value" : [ "define ","testValue2",": " ]
+                     "value" : [ "","define ","testValue2",": " ]
                   }, {
                      "r" : "27",
                      "s" : [ {
@@ -1343,7 +1499,7 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
                "s" : {
                   "r" : "32",
                   "s" : [ {
-                     "value" : [ "define ","testValue3",": " ]
+                     "value" : [ "","define ","testValue3",": " ]
                   }, {
                      "r" : "31",
                      "s" : [ {
@@ -1400,6 +1556,14 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "21",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -1417,7 +1581,27 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -1442,7 +1626,7 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define function ","process","(","e"," " ]
+                     "value" : [ "","define function ","process","(","e"," " ]
                   }, {
                      "r" : "2",
                      "s" : [ {
@@ -1519,7 +1703,7 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define function ","process","(","c"," " ]
+                     "value" : [ "","define function ","process","(","c"," " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -1595,7 +1779,7 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","testValue1",": " ]
+                     "value" : [ "","define ","testValue1",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -1642,7 +1826,7 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
                "s" : {
                   "r" : "21",
                   "s" : [ {
-                     "value" : [ "define ","testValue2",": " ]
+                     "value" : [ "","define ","testValue2",": " ]
                   }, {
                      "r" : "20",
                      "s" : [ {

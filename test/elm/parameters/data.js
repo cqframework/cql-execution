@@ -24,6 +24,14 @@ module.exports['ParameterDef'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "27",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -41,7 +49,22 @@ module.exports['ParameterDef'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -49,6 +72,16 @@ module.exports['ParameterDef'] = {
             "localId" : "3",
             "name" : "MeasureYear",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "r" : "2",
+                     "value" : [ "","parameter ","MeasureYear"," default ","2012" ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "2",
                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -59,6 +92,20 @@ module.exports['ParameterDef'] = {
             "localId" : "5",
             "name" : "IntParameter",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "","parameter ","IntParameter"," " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "Integer" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "4",
                "name" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -68,6 +115,27 @@ module.exports['ParameterDef'] = {
             "localId" : "8",
             "name" : "ListParameter",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "8",
+                  "s" : [ {
+                     "value" : [ "","parameter ","ListParameter"," " ]
+                  }, {
+                     "r" : "7",
+                     "s" : [ {
+                        "value" : [ "List<" ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "value" : [ "String" ]
+                        } ]
+                     }, {
+                        "value" : [ ">" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "7",
                "type" : "ListTypeSpecifier",
@@ -81,6 +149,111 @@ module.exports['ParameterDef'] = {
             "localId" : "25",
             "name" : "TupleParameter",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "25",
+                  "s" : [ {
+                     "value" : [ "","parameter ","TupleParameter"," " ]
+                  }, {
+                     "r" : "24",
+                     "s" : [ {
+                        "value" : [ "Tuple{" ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "value" : [ "a"," " ]
+                        }, {
+                           "r" : "9",
+                           "s" : [ {
+                              "value" : [ "Integer" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "12",
+                        "s" : [ {
+                           "value" : [ "b"," " ]
+                        }, {
+                           "r" : "11",
+                           "s" : [ {
+                              "value" : [ "String" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "c"," " ]
+                        }, {
+                           "r" : "13",
+                           "s" : [ {
+                              "value" : [ "Boolean" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "17",
+                        "s" : [ {
+                           "value" : [ "d"," " ]
+                        }, {
+                           "r" : "16",
+                           "s" : [ {
+                              "value" : [ "List<" ]
+                           }, {
+                              "r" : "15",
+                              "s" : [ {
+                                 "value" : [ "Integer" ]
+                              } ]
+                           }, {
+                              "value" : [ ">" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "23",
+                        "s" : [ {
+                           "value" : [ "e"," " ]
+                        }, {
+                           "r" : "22",
+                           "s" : [ {
+                              "value" : [ "Tuple{ " ]
+                           }, {
+                              "r" : "19",
+                              "s" : [ {
+                                 "value" : [ "f"," " ]
+                              }, {
+                                 "r" : "18",
+                                 "s" : [ {
+                                    "value" : [ "String" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "r" : "21",
+                              "s" : [ {
+                                 "value" : [ "g"," " ]
+                              }, {
+                                 "r" : "20",
+                                 "s" : [ {
+                                    "value" : [ "Boolean" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "}" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "}" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "24",
                "type" : "TupleTypeSpecifier",
@@ -148,6 +321,11 @@ module.exports['ParameterDef'] = {
             }
          } ]
       },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
+         } ]
+      },
       "statements" : {
          "def" : [ {
             "name" : "Patient",
@@ -169,7 +347,7 @@ module.exports['ParameterDef'] = {
                "s" : {
                   "r" : "27",
                   "s" : [ {
-                     "value" : [ "define ","foo",": " ]
+                     "value" : [ "","define ","foo",": " ]
                   }, {
                      "r" : "26",
                      "s" : [ {
@@ -202,6 +380,14 @@ module.exports['ParameterRef'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "5",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -219,7 +405,22 @@ module.exports['ParameterRef'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -227,12 +428,31 @@ module.exports['ParameterRef'] = {
             "localId" : "3",
             "name" : "FooP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooP"," default " ]
+                  }, {
+                     "r" : "2",
+                     "s" : [ {
+                        "value" : [ "'Bar'" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "2",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "Bar",
                "type" : "Literal"
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -256,7 +476,7 @@ module.exports['ParameterRef'] = {
                "s" : {
                   "r" : "5",
                   "s" : [ {
-                     "value" : [ "define ","Foo",": " ]
+                     "value" : [ "","define ","Foo",": " ]
                   }, {
                      "r" : "4",
                      "s" : [ {
@@ -290,6 +510,14 @@ module.exports['BooleanParameterTypes'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "9",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -307,7 +535,22 @@ module.exports['BooleanParameterTypes'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -315,6 +558,20 @@ module.exports['BooleanParameterTypes'] = {
             "localId" : "3",
             "name" : "FooP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooP"," " ]
+                  }, {
+                     "r" : "2",
+                     "s" : [ {
+                        "value" : [ "Boolean" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "2",
                "name" : "{urn:hl7-org:elm-types:r1}Boolean",
@@ -324,12 +581,27 @@ module.exports['BooleanParameterTypes'] = {
             "localId" : "5",
             "name" : "FooDP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "r" : "4",
+                     "value" : [ "","parameter ","FooDP"," default ","true" ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "4",
                "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                "value" : "true",
                "type" : "Literal"
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -353,7 +625,7 @@ module.exports['BooleanParameterTypes'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","Foo",": " ]
+                     "value" : [ "","define ","Foo",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -377,7 +649,7 @@ module.exports['BooleanParameterTypes'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","Foo2",": " ]
+                     "value" : [ "","define ","Foo2",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -411,6 +683,14 @@ module.exports['DecimalParameterTypes'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "9",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -428,7 +708,22 @@ module.exports['DecimalParameterTypes'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -436,6 +731,20 @@ module.exports['DecimalParameterTypes'] = {
             "localId" : "3",
             "name" : "FooP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooP"," " ]
+                  }, {
+                     "r" : "2",
+                     "s" : [ {
+                        "value" : [ "Decimal" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "2",
                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -445,12 +754,27 @@ module.exports['DecimalParameterTypes'] = {
             "localId" : "5",
             "name" : "FooDP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "r" : "4",
+                     "value" : [ "","parameter ","FooDP"," default ","1.5" ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "4",
                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                "value" : "1.5",
                "type" : "Literal"
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -474,7 +798,7 @@ module.exports['DecimalParameterTypes'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","Foo",": " ]
+                     "value" : [ "","define ","Foo",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -498,7 +822,7 @@ module.exports['DecimalParameterTypes'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","Foo2",": " ]
+                     "value" : [ "","define ","Foo2",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -532,6 +856,14 @@ module.exports['IntegerParameterTypes'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "9",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -549,7 +881,22 @@ module.exports['IntegerParameterTypes'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -557,6 +904,20 @@ module.exports['IntegerParameterTypes'] = {
             "localId" : "3",
             "name" : "FooP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooP"," " ]
+                  }, {
+                     "r" : "2",
+                     "s" : [ {
+                        "value" : [ "Integer" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "2",
                "name" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -566,12 +927,27 @@ module.exports['IntegerParameterTypes'] = {
             "localId" : "5",
             "name" : "FooDP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "r" : "4",
+                     "value" : [ "","parameter ","FooDP"," default ","2" ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "4",
                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                "value" : "2",
                "type" : "Literal"
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -595,7 +971,7 @@ module.exports['IntegerParameterTypes'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","Foo",": " ]
+                     "value" : [ "","define ","Foo",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -619,7 +995,7 @@ module.exports['IntegerParameterTypes'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","Foo2",": " ]
+                     "value" : [ "","define ","Foo2",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -653,6 +1029,14 @@ module.exports['StringParameterTypes'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "9",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -670,7 +1054,22 @@ module.exports['StringParameterTypes'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -678,6 +1077,20 @@ module.exports['StringParameterTypes'] = {
             "localId" : "3",
             "name" : "FooP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooP"," " ]
+                  }, {
+                     "r" : "2",
+                     "s" : [ {
+                        "value" : [ "String" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "2",
                "name" : "{urn:hl7-org:elm-types:r1}String",
@@ -687,12 +1100,31 @@ module.exports['StringParameterTypes'] = {
             "localId" : "5",
             "name" : "FooDP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooDP"," default " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "'Hello'" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "4",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "Hello",
                "type" : "Literal"
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -716,7 +1148,7 @@ module.exports['StringParameterTypes'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","Foo",": " ]
+                     "value" : [ "","define ","Foo",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -740,7 +1172,7 @@ module.exports['StringParameterTypes'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","Foo2",": " ]
+                     "value" : [ "","define ","Foo2",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -775,6 +1207,14 @@ module.exports['CodeParameterTypes'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "11",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -792,7 +1232,22 @@ module.exports['CodeParameterTypes'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -800,6 +1255,20 @@ module.exports['CodeParameterTypes'] = {
             "localId" : "4",
             "name" : "FooP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooP"," " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "Code" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "3",
                "name" : "{urn:hl7-org:elm-types:r1}Code",
@@ -809,6 +1278,27 @@ module.exports['CodeParameterTypes'] = {
             "localId" : "7",
             "name" : "FooDP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooDP"," default " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "Code ","'FooTest'"," from " ]
+                     }, {
+                        "r" : "5",
+                        "s" : [ {
+                           "value" : [ "\"FOOTESTCS\"" ]
+                        } ]
+                     }, {
+                        "value" : [ " display ","'Foo Test'" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "6",
                "code" : "FooTest",
@@ -826,7 +1316,21 @@ module.exports['CodeParameterTypes'] = {
             "localId" : "2",
             "name" : "FOOTESTCS",
             "id" : "http://footest.org",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "","codesystem ","\"FOOTESTCS\"",": ","'http://footest.org'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -850,7 +1354,7 @@ module.exports['CodeParameterTypes'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","Foo",": " ]
+                     "value" : [ "","define ","Foo",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -874,7 +1378,7 @@ module.exports['CodeParameterTypes'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","Foo2",": " ]
+                     "value" : [ "","define ","Foo2",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -909,6 +1413,14 @@ module.exports['ConceptParameterTypes'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "12",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -926,7 +1438,22 @@ module.exports['ConceptParameterTypes'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -934,6 +1461,20 @@ module.exports['ConceptParameterTypes'] = {
             "localId" : "4",
             "name" : "FooP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooP"," " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "Concept" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "3",
                "name" : "{urn:hl7-org:elm-types:r1}Concept",
@@ -943,6 +1484,32 @@ module.exports['ConceptParameterTypes'] = {
             "localId" : "8",
             "name" : "FooDP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "8",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooDP"," default " ]
+                  }, {
+                     "r" : "7",
+                     "s" : [ {
+                        "value" : [ "Concept { " ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "value" : [ "Code ","'FooTest'"," from " ]
+                        }, {
+                           "r" : "5",
+                           "s" : [ {
+                              "value" : [ "\"FOOTESTCS\"" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " } display ","'Foo Test'" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "7",
                "display" : "Foo Test",
@@ -963,7 +1530,21 @@ module.exports['ConceptParameterTypes'] = {
             "localId" : "2",
             "name" : "FOOTESTCS",
             "id" : "http://footest.org",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "","codesystem ","\"FOOTESTCS\"",": ","'http://footest.org'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -987,7 +1568,7 @@ module.exports['ConceptParameterTypes'] = {
                "s" : {
                   "r" : "10",
                   "s" : [ {
-                     "value" : [ "define ","Foo",": " ]
+                     "value" : [ "","define ","Foo",": " ]
                   }, {
                      "r" : "9",
                      "s" : [ {
@@ -1011,7 +1592,7 @@ module.exports['ConceptParameterTypes'] = {
                "s" : {
                   "r" : "12",
                   "s" : [ {
-                     "value" : [ "define ","Foo2",": " ]
+                     "value" : [ "","define ","Foo2",": " ]
                   }, {
                      "r" : "11",
                      "s" : [ {
@@ -1045,6 +1626,14 @@ module.exports['DateTimeParameterTypes'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "9",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -1062,7 +1651,22 @@ module.exports['DateTimeParameterTypes'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -1070,6 +1674,20 @@ module.exports['DateTimeParameterTypes'] = {
             "localId" : "3",
             "name" : "FooP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooP"," " ]
+                  }, {
+                     "r" : "2",
+                     "s" : [ {
+                        "value" : [ "DateTime" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "2",
                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -1079,6 +1697,16 @@ module.exports['DateTimeParameterTypes'] = {
             "localId" : "5",
             "name" : "FooDP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "r" : "4",
+                     "value" : [ "","parameter ","FooDP"," default ","@2012-04-01T12:11:10" ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "4",
                "type" : "DateTime",
@@ -1115,6 +1743,11 @@ module.exports['DateTimeParameterTypes'] = {
             }
          } ]
       },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
+         } ]
+      },
       "statements" : {
          "def" : [ {
             "name" : "Patient",
@@ -1136,7 +1769,7 @@ module.exports['DateTimeParameterTypes'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","Foo",": " ]
+                     "value" : [ "","define ","Foo",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -1160,7 +1793,7 @@ module.exports['DateTimeParameterTypes'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","Foo2",": " ]
+                     "value" : [ "","define ","Foo2",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -1194,6 +1827,14 @@ module.exports['DateParameterTypes'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "9",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -1211,7 +1852,22 @@ module.exports['DateParameterTypes'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -1219,6 +1875,20 @@ module.exports['DateParameterTypes'] = {
             "localId" : "3",
             "name" : "FooP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooP"," " ]
+                  }, {
+                     "r" : "2",
+                     "s" : [ {
+                        "value" : [ "Date" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "2",
                "name" : "{urn:hl7-org:elm-types:r1}Date",
@@ -1228,6 +1898,16 @@ module.exports['DateParameterTypes'] = {
             "localId" : "5",
             "name" : "FooDP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "r" : "4",
+                     "value" : [ "","parameter ","FooDP"," default ","@2012-04-01" ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "4",
                "type" : "Date",
@@ -1247,6 +1927,11 @@ module.exports['DateParameterTypes'] = {
                   "type" : "Literal"
                }
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -1270,7 +1955,7 @@ module.exports['DateParameterTypes'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","Foo",": " ]
+                     "value" : [ "","define ","Foo",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -1294,7 +1979,7 @@ module.exports['DateParameterTypes'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","Foo2",": " ]
+                     "value" : [ "","define ","Foo2",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -1328,6 +2013,14 @@ module.exports['QuantityParameterTypes'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "9",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -1345,7 +2038,22 @@ module.exports['QuantityParameterTypes'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -1353,6 +2061,20 @@ module.exports['QuantityParameterTypes'] = {
             "localId" : "3",
             "name" : "FooP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooP"," " ]
+                  }, {
+                     "r" : "2",
+                     "s" : [ {
+                        "value" : [ "Quantity" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "2",
                "name" : "{urn:hl7-org:elm-types:r1}Quantity",
@@ -1362,12 +2084,31 @@ module.exports['QuantityParameterTypes'] = {
             "localId" : "5",
             "name" : "FooDP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooDP"," default " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "10 ","'dL'" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "4",
                "value" : 10,
                "unit" : "dL",
                "type" : "Quantity"
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -1391,7 +2132,7 @@ module.exports['QuantityParameterTypes'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","Foo",": " ]
+                     "value" : [ "","define ","Foo",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -1415,7 +2156,7 @@ module.exports['QuantityParameterTypes'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","Foo2",": " ]
+                     "value" : [ "","define ","Foo2",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -1449,6 +2190,14 @@ module.exports['TimeParameterTypes'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "9",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -1466,7 +2215,22 @@ module.exports['TimeParameterTypes'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -1474,6 +2238,20 @@ module.exports['TimeParameterTypes'] = {
             "localId" : "3",
             "name" : "FooP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooP"," " ]
+                  }, {
+                     "r" : "2",
+                     "s" : [ {
+                        "value" : [ "Time" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "2",
                "name" : "{urn:hl7-org:elm-types:r1}Time",
@@ -1483,6 +2261,16 @@ module.exports['TimeParameterTypes'] = {
             "localId" : "5",
             "name" : "FooDP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "r" : "4",
+                     "value" : [ "","parameter ","FooDP"," default ","@T12:00:00" ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "4",
                "type" : "Time",
@@ -1502,6 +2290,11 @@ module.exports['TimeParameterTypes'] = {
                   "type" : "Literal"
                }
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -1525,7 +2318,7 @@ module.exports['TimeParameterTypes'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","Foo",": " ]
+                     "value" : [ "","define ","Foo",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -1549,7 +2342,7 @@ module.exports['TimeParameterTypes'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","Foo2",": " ]
+                     "value" : [ "","define ","Foo2",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -1583,6 +2376,14 @@ module.exports['ListParameterTypes'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "13",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -1600,7 +2401,22 @@ module.exports['ListParameterTypes'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -1608,6 +2424,27 @@ module.exports['ListParameterTypes'] = {
             "localId" : "4",
             "name" : "FooP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooP"," " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "List<" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "String" ]
+                        } ]
+                     }, {
+                        "value" : [ ">" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "3",
                "type" : "ListTypeSpecifier",
@@ -1621,6 +2458,41 @@ module.exports['ListParameterTypes'] = {
             "localId" : "9",
             "name" : "FooDP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooDP"," default " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "5",
+                        "s" : [ {
+                           "value" : [ "'a'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "6",
+                        "s" : [ {
+                           "value" : [ "'b'" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "7",
+                        "s" : [ {
+                           "value" : [ "'c'" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "8",
                "type" : "List",
@@ -1641,6 +2513,11 @@ module.exports['ListParameterTypes'] = {
                   "type" : "Literal"
                } ]
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -1664,7 +2541,7 @@ module.exports['ListParameterTypes'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","Foo",": " ]
+                     "value" : [ "","define ","Foo",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -1688,7 +2565,7 @@ module.exports['ListParameterTypes'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","Foo2",": " ]
+                     "value" : [ "","define ","Foo2",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -1722,6 +2599,14 @@ module.exports['IntervalParameterTypes'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "12",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -1739,7 +2624,22 @@ module.exports['IntervalParameterTypes'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -1747,6 +2647,27 @@ module.exports['IntervalParameterTypes'] = {
             "localId" : "4",
             "name" : "FooP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooP"," " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "Interval<" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "Integer" ]
+                        } ]
+                     }, {
+                        "value" : [ ">" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "3",
                "type" : "IntervalTypeSpecifier",
@@ -1760,6 +2681,21 @@ module.exports['IntervalParameterTypes'] = {
             "localId" : "8",
             "name" : "FooDP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "8",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooDP"," default " ]
+                  }, {
+                     "r" : "7",
+                     "s" : [ {
+                        "r" : "5",
+                        "value" : [ "Interval[","2",",","6","]" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "7",
                "lowClosed" : true,
@@ -1778,6 +2714,11 @@ module.exports['IntervalParameterTypes'] = {
                   "type" : "Literal"
                }
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -1801,7 +2742,7 @@ module.exports['IntervalParameterTypes'] = {
                "s" : {
                   "r" : "10",
                   "s" : [ {
-                     "value" : [ "define ","Foo",": " ]
+                     "value" : [ "","define ","Foo",": " ]
                   }, {
                      "r" : "9",
                      "s" : [ {
@@ -1825,7 +2766,7 @@ module.exports['IntervalParameterTypes'] = {
                "s" : {
                   "r" : "12",
                   "s" : [ {
-                     "value" : [ "define ","Foo2",": " ]
+                     "value" : [ "","define ","Foo2",": " ]
                   }, {
                      "r" : "11",
                      "s" : [ {
@@ -1859,6 +2800,14 @@ module.exports['TupleParameterTypes'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "15",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -1876,7 +2825,22 @@ module.exports['TupleParameterTypes'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -1884,6 +2848,44 @@ module.exports['TupleParameterTypes'] = {
             "localId" : "7",
             "name" : "FooP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooP"," " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "Tuple { " ]
+                     }, {
+                        "r" : "3",
+                        "s" : [ {
+                           "value" : [ "Hello"," " ]
+                        }, {
+                           "r" : "2",
+                           "s" : [ {
+                              "value" : [ "String" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "5",
+                        "s" : [ {
+                           "value" : [ "MeaningOfLife"," " ]
+                        }, {
+                           "r" : "4",
+                           "s" : [ {
+                              "value" : [ "Integer" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "6",
                "type" : "TupleTypeSpecifier",
@@ -1909,6 +2911,38 @@ module.exports['TupleParameterTypes'] = {
             "localId" : "11",
             "name" : "FooDP",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "11",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooDP"," default " ]
+                  }, {
+                     "r" : "10",
+                     "s" : [ {
+                        "value" : [ "Tuple { " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "Hello",": " ]
+                        }, {
+                           "r" : "8",
+                           "s" : [ {
+                              "value" : [ "'Universe'" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "s" : [ {
+                           "r" : "9",
+                           "value" : [ "MeaningOfLife",": ","24" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "10",
                "type" : "Tuple",
@@ -1932,6 +2966,11 @@ module.exports['TupleParameterTypes'] = {
             }
          } ]
       },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
+         } ]
+      },
       "statements" : {
          "def" : [ {
             "name" : "Patient",
@@ -1953,7 +2992,7 @@ module.exports['TupleParameterTypes'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "define ","Foo",": " ]
+                     "value" : [ "","define ","Foo",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -1977,7 +3016,7 @@ module.exports['TupleParameterTypes'] = {
                "s" : {
                   "r" : "15",
                   "s" : [ {
-                     "value" : [ "define ","Foo2",": " ]
+                     "value" : [ "","define ","Foo2",": " ]
                   }, {
                      "r" : "14",
                      "s" : [ {
@@ -2011,6 +3050,14 @@ module.exports['DefaultAndNoDefault'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "9",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -2028,7 +3075,22 @@ module.exports['DefaultAndNoDefault'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -2036,6 +3098,20 @@ module.exports['DefaultAndNoDefault'] = {
             "localId" : "3",
             "name" : "FooWithNoDefault",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","parameter ","FooWithNoDefault"," " ]
+                  }, {
+                     "r" : "2",
+                     "s" : [ {
+                        "value" : [ "Integer" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "2",
                "name" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2045,12 +3121,27 @@ module.exports['DefaultAndNoDefault'] = {
             "localId" : "5",
             "name" : "FooWithDefault",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "r" : "4",
+                     "value" : [ "","parameter ","FooWithDefault"," default ","5" ]
+                  } ]
+               }
+            } ],
             "default" : {
                "localId" : "4",
                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                "value" : "5",
                "type" : "Literal"
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2074,7 +3165,7 @@ module.exports['DefaultAndNoDefault'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "define ","Foo",": " ]
+                     "value" : [ "","define ","Foo",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
@@ -2098,7 +3189,7 @@ module.exports['DefaultAndNoDefault'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "define ","Foo2",": " ]
+                     "value" : [ "","define ","Foo2",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -2130,6 +3221,14 @@ module.exports['MeasurementPeriodParameter'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "16",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -2147,7 +3246,22 @@ module.exports['MeasurementPeriodParameter'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "parameters" : {
@@ -2155,6 +3269,27 @@ module.exports['MeasurementPeriodParameter'] = {
             "localId" : "4",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "","parameter ","\"Measurement Period\""," " ]
+                  }, {
+                     "r" : "3",
+                     "s" : [ {
+                        "value" : [ "Interval<" ]
+                     }, {
+                        "r" : "2",
+                        "s" : [ {
+                           "value" : [ "DateTime" ]
+                        } ]
+                     }, {
+                        "value" : [ ">" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "parameterTypeSpecifier" : {
                "localId" : "3",
                "type" : "IntervalTypeSpecifier",
@@ -2164,6 +3299,11 @@ module.exports['MeasurementPeriodParameter'] = {
                   "type" : "NamedTypeSpecifier"
                }
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -2187,7 +3327,7 @@ module.exports['MeasurementPeriodParameter'] = {
                "s" : {
                   "r" : "16",
                   "s" : [ {
-                     "value" : [ "define ","MeasurementPeriod",": " ]
+                     "value" : [ "","define ","MeasurementPeriod",": " ]
                   }, {
                      "r" : "15",
                      "s" : [ {

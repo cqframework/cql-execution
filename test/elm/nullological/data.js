@@ -20,6 +20,14 @@ module.exports['Nil'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "3",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -37,7 +45,27 @@ module.exports['Nil'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -62,7 +90,7 @@ module.exports['Nil'] = {
                   "r" : "3",
                   "s" : [ {
                      "r" : "2",
-                     "value" : [ "define ","Nil",": ","null" ]
+                     "value" : [ "","define ","Nil",": ","null" ]
                   } ]
                }
             } ],
@@ -92,6 +120,14 @@ module.exports['IsNull'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "17",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -109,7 +145,27 @@ module.exports['IsNull'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -134,7 +190,7 @@ module.exports['IsNull'] = {
                   "r" : "3",
                   "s" : [ {
                      "r" : "2",
-                     "value" : [ "define ","Nil",": ","null" ]
+                     "value" : [ "","define ","Nil",": ","null" ]
                   } ]
                }
             } ],
@@ -153,7 +209,7 @@ module.exports['IsNull'] = {
                   "r" : "5",
                   "s" : [ {
                      "r" : "4",
-                     "value" : [ "define ","One",": ","1" ]
+                     "value" : [ "","define ","One",": ","1" ]
                   } ]
                }
             } ],
@@ -173,7 +229,7 @@ module.exports['IsNull'] = {
                "s" : {
                   "r" : "8",
                   "s" : [ {
-                     "value" : [ "define ","NullIsNull",": " ]
+                     "value" : [ "","define ","NullIsNull",": " ]
                   }, {
                      "r" : "7",
                      "s" : [ {
@@ -201,7 +257,7 @@ module.exports['IsNull'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","NullVarIsNull",": " ]
+                     "value" : [ "","define ","NullVarIsNull",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -234,7 +290,7 @@ module.exports['IsNull'] = {
                "s" : {
                   "r" : "14",
                   "s" : [ {
-                     "value" : [ "define ","StringIsNull",": " ]
+                     "value" : [ "","define ","StringIsNull",": " ]
                   }, {
                      "r" : "13",
                      "s" : [ {
@@ -268,7 +324,7 @@ module.exports['IsNull'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","NonNullVarIsNull",": " ]
+                     "value" : [ "","define ","NonNullVarIsNull",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -317,6 +373,14 @@ module.exports['Coalesce'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "57",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -334,7 +398,27 @@ module.exports['Coalesce'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -358,7 +442,7 @@ module.exports['Coalesce'] = {
                "s" : {
                   "r" : "8",
                   "s" : [ {
-                     "value" : [ "define ","NullNullHelloNullWorld",": " ]
+                     "value" : [ "","define ","NullNullHelloNullWorld",": " ]
                   }, {
                      "r" : "7",
                      "s" : [ {
@@ -417,7 +501,7 @@ module.exports['Coalesce'] = {
                "s" : {
                   "r" : "14",
                   "s" : [ {
-                     "value" : [ "define ","FooNullNullBar",": " ]
+                     "value" : [ "","define ","FooNullNullBar",": " ]
                   }, {
                      "r" : "13",
                      "s" : [ {
@@ -480,7 +564,7 @@ module.exports['Coalesce'] = {
                "s" : {
                   "r" : "19",
                   "s" : [ {
-                     "value" : [ "define ","AllNull",": " ]
+                     "value" : [ "","define ","AllNull",": " ]
                   }, {
                      "r" : "18",
                      "s" : [ {
@@ -514,7 +598,7 @@ module.exports['Coalesce'] = {
                "s" : {
                   "r" : "27",
                   "s" : [ {
-                     "value" : [ "define ","ListArgStartsWithNull",": " ]
+                     "value" : [ "","define ","ListArgStartsWithNull",": " ]
                   }, {
                      "r" : "26",
                      "s" : [ {
@@ -596,7 +680,7 @@ module.exports['Coalesce'] = {
                "s" : {
                   "r" : "34",
                   "s" : [ {
-                     "value" : [ "define ","ListArgAllNull",": " ]
+                     "value" : [ "","define ","ListArgAllNull",": " ]
                   }, {
                      "r" : "33",
                      "s" : [ {
@@ -644,7 +728,7 @@ module.exports['Coalesce'] = {
                "s" : {
                   "r" : "41",
                   "s" : [ {
-                     "value" : [ "define ","ListWithNull",": " ]
+                     "value" : [ "","define ","ListWithNull",": " ]
                   }, {
                      "r" : "40",
                      "s" : [ {
@@ -715,7 +799,7 @@ module.exports['Coalesce'] = {
                "s" : {
                   "r" : "44",
                   "s" : [ {
-                     "value" : [ "define ","ListExpressionRef",": " ]
+                     "value" : [ "","define ","ListExpressionRef",": " ]
                   }, {
                      "r" : "43",
                      "s" : [ {
@@ -750,7 +834,7 @@ module.exports['Coalesce'] = {
                "s" : {
                   "r" : "47",
                   "s" : [ {
-                     "value" : [ "define ","RetrieveAsList",": " ]
+                     "value" : [ "","define ","RetrieveAsList",": " ]
                   }, {
                      "r" : "46",
                      "s" : [ {
@@ -785,7 +869,7 @@ module.exports['Coalesce'] = {
                "s" : {
                   "r" : "52",
                   "s" : [ {
-                     "value" : [ "define ","ListA",": " ]
+                     "value" : [ "","define ","ListA",": " ]
                   }, {
                      "r" : "51",
                      "s" : [ {
@@ -829,7 +913,7 @@ module.exports['Coalesce'] = {
                "s" : {
                   "r" : "57",
                   "s" : [ {
-                     "value" : [ "define ","UnionAsList",": " ]
+                     "value" : [ "","define ","UnionAsList",": " ]
                   }, {
                      "r" : "56",
                      "s" : [ {

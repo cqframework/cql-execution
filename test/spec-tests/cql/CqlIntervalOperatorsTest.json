@@ -17,8 +17,14 @@
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple"
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir/us/qicore",
+            "version" : "3.3.0"
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -28,7 +34,8 @@
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "dataType" : "{http://hl7.org/fhir/us/qicore}Patient",
+                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
                   "type" : "Retrieve"
                }
             }
@@ -154,18 +161,39 @@
                         "value" : {
                            "type" : "After",
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "12",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "12",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "12",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "12",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "12",
+                                    "type" : "Literal"
+                                 }
                               }
                            }, {
                               "lowClosed" : true,
@@ -201,18 +229,39 @@
                         "value" : {
                            "type" : "After",
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "9",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "9",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "9",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "9",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "9",
+                                    "type" : "Literal"
+                                 }
                               }
                            }, {
                               "lowClosed" : true,
@@ -262,18 +311,39 @@
                                  "type" : "Literal"
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "5",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "5",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "5",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "5",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "5",
+                                    "type" : "Literal"
+                                 }
                               }
                            } ]
                         }
@@ -309,18 +379,39 @@
                                  "type" : "Literal"
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "12",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "12",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "12",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "12",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "12",
+                                    "type" : "Literal"
+                                 }
                               }
                            } ]
                         }
@@ -436,18 +527,39 @@
                         "value" : {
                            "type" : "After",
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "12.0",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "12.0",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "12.0",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "12.0",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "12.0",
+                                    "type" : "Literal"
+                                 }
                               }
                            }, {
                               "lowClosed" : true,
@@ -483,18 +595,39 @@
                         "value" : {
                            "type" : "After",
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "9.0",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "9.0",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "9.0",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "9.0",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "9.0",
+                                    "type" : "Literal"
+                                 }
                               }
                            }, {
                               "lowClosed" : true,
@@ -544,18 +677,39 @@
                                  "type" : "Literal"
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "5.0",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "5.0",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "5.0",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "5.0",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "5.0",
+                                    "type" : "Literal"
+                                 }
                               }
                            } ]
                         }
@@ -591,18 +745,39 @@
                                  "type" : "Literal"
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "12.0",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "12.0",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "12.0",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "12.0",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "12.0",
+                                    "type" : "Literal"
+                                 }
                               }
                            } ]
                         }
@@ -718,18 +893,39 @@
                         "value" : {
                            "type" : "After",
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "value" : 12.0,
-                                 "unit" : "g",
-                                 "type" : "Quantity"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "value" : 12.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 }
                               },
-                              "high" : {
-                                 "value" : 12.0,
-                                 "unit" : "g",
-                                 "type" : "Quantity"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "value" : 12.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 },
+                                 "high" : {
+                                    "value" : 12.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 }
                               }
                            }, {
                               "lowClosed" : true,
@@ -765,18 +961,39 @@
                         "value" : {
                            "type" : "After",
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "value" : 9.0,
-                                 "unit" : "g",
-                                 "type" : "Quantity"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "value" : 9.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 }
                               },
-                              "high" : {
-                                 "value" : 9.0,
-                                 "unit" : "g",
-                                 "type" : "Quantity"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "value" : 9.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 },
+                                 "high" : {
+                                    "value" : 9.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 }
                               }
                            }, {
                               "lowClosed" : true,
@@ -826,18 +1043,39 @@
                                  "type" : "Quantity"
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "value" : 5.0,
-                                 "unit" : "g",
-                                 "type" : "Quantity"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "value" : 5.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 }
                               },
-                              "high" : {
-                                 "value" : 5.0,
-                                 "unit" : "g",
-                                 "type" : "Quantity"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "value" : 5.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 },
+                                 "high" : {
+                                    "value" : 5.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 }
                               }
                            } ]
                         }
@@ -873,18 +1111,39 @@
                                  "type" : "Quantity"
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "value" : 12.0,
-                                 "unit" : "g",
-                                 "type" : "Quantity"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "value" : 12.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 }
                               },
-                              "high" : {
-                                 "value" : 12.0,
-                                 "unit" : "g",
-                                 "type" : "Quantity"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "value" : 12.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 },
+                                 "high" : {
+                                    "value" : 12.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 }
                               }
                            } ]
                         }
@@ -946,43 +1205,77 @@
                                  }
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "type" : "DateTime",
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2011",
-                                    "type" : "Literal"
-                                 },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "12",
-                                    "type" : "Literal"
-                                 },
-                                 "day" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "31",
-                                    "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "type" : "DateTime",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2011",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "12",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "31",
+                                       "type" : "Literal"
+                                    }
                                  }
                               },
-                              "high" : {
-                                 "type" : "DateTime",
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2011",
-                                    "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "type" : "DateTime",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2011",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "12",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "31",
+                                       "type" : "Literal"
+                                    }
                                  },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "12",
-                                    "type" : "Literal"
-                                 },
-                                 "day" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "31",
-                                    "type" : "Literal"
+                                 "high" : {
+                                    "type" : "DateTime",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2011",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "12",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "31",
+                                       "type" : "Literal"
+                                    }
                                  }
                               }
                            } ]
@@ -1045,43 +1338,77 @@
                                  }
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "type" : "DateTime",
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2012",
-                                    "type" : "Literal"
-                                 },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "12",
-                                    "type" : "Literal"
-                                 },
-                                 "day" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "31",
-                                    "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "type" : "DateTime",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2012",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "12",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "31",
+                                       "type" : "Literal"
+                                    }
                                  }
                               },
-                              "high" : {
-                                 "type" : "DateTime",
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2012",
-                                    "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "type" : "DateTime",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2012",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "12",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "31",
+                                       "type" : "Literal"
+                                    }
                                  },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "12",
-                                    "type" : "Literal"
-                                 },
-                                 "day" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "31",
-                                    "type" : "Literal"
+                                 "high" : {
+                                    "type" : "DateTime",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2012",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "12",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "31",
+                                       "type" : "Literal"
+                                    }
                                  }
                               }
                            } ]
@@ -1154,53 +1481,92 @@
                                  }
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "type" : "Time",
-                                 "hour" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "12",
-                                    "type" : "Literal"
-                                 },
-                                 "minute" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "59",
-                                    "type" : "Literal"
-                                 },
-                                 "second" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "59",
-                                    "type" : "Literal"
-                                 },
-                                 "millisecond" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "999",
-                                    "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "type" : "Time",
+                                    "hour" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "12",
+                                       "type" : "Literal"
+                                    },
+                                    "minute" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "second" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "millisecond" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "999",
+                                       "type" : "Literal"
+                                    }
                                  }
                               },
-                              "high" : {
-                                 "type" : "Time",
-                                 "hour" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "12",
-                                    "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Time",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "type" : "Time",
+                                    "hour" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "12",
+                                       "type" : "Literal"
+                                    },
+                                    "minute" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "second" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "millisecond" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "999",
+                                       "type" : "Literal"
+                                    }
                                  },
-                                 "minute" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "59",
-                                    "type" : "Literal"
-                                 },
-                                 "second" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "59",
-                                    "type" : "Literal"
-                                 },
-                                 "millisecond" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "999",
-                                    "type" : "Literal"
+                                 "high" : {
+                                    "type" : "Time",
+                                    "hour" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "12",
+                                       "type" : "Literal"
+                                    },
+                                    "minute" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "second" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "millisecond" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "999",
+                                       "type" : "Literal"
+                                    }
                                  }
                               }
                            } ]
@@ -1273,53 +1639,92 @@
                                  }
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "type" : "Time",
-                                 "hour" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "17",
-                                    "type" : "Literal"
-                                 },
-                                 "minute" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "59",
-                                    "type" : "Literal"
-                                 },
-                                 "second" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "59",
-                                    "type" : "Literal"
-                                 },
-                                 "millisecond" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "999",
-                                    "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "type" : "Time",
+                                    "hour" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "17",
+                                       "type" : "Literal"
+                                    },
+                                    "minute" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "second" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "millisecond" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "999",
+                                       "type" : "Literal"
+                                    }
                                  }
                               },
-                              "high" : {
-                                 "type" : "Time",
-                                 "hour" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "17",
-                                    "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Time",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "type" : "Time",
+                                    "hour" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "17",
+                                       "type" : "Literal"
+                                    },
+                                    "minute" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "second" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "millisecond" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "999",
+                                       "type" : "Literal"
+                                    }
                                  },
-                                 "minute" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "59",
-                                    "type" : "Literal"
-                                 },
-                                 "second" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "59",
-                                    "type" : "Literal"
-                                 },
-                                 "millisecond" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "999",
-                                    "type" : "Literal"
+                                 "high" : {
+                                    "type" : "Time",
+                                    "hour" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "17",
+                                       "type" : "Literal"
+                                    },
+                                    "minute" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "second" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "millisecond" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "999",
+                                       "type" : "Literal"
+                                    }
                                  }
                               }
                            } ]
@@ -1457,18 +1862,39 @@
                         "value" : {
                            "type" : "Before",
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "9",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "9",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "9",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "9",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "9",
+                                    "type" : "Literal"
+                                 }
                               }
                            }, {
                               "lowClosed" : true,
@@ -1504,18 +1930,39 @@
                         "value" : {
                            "type" : "Before",
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "9",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "9",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "9",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "9",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "9",
+                                    "type" : "Literal"
+                                 }
                               }
                            }, {
                               "lowClosed" : true,
@@ -1565,18 +2012,39 @@
                                  "type" : "Literal"
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "11",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "11",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "11",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "11",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "11",
+                                    "type" : "Literal"
+                                 }
                               }
                            } ]
                         }
@@ -1612,18 +2080,39 @@
                                  "type" : "Literal"
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "8",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "8",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "8",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "8",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "8",
+                                    "type" : "Literal"
+                                 }
                               }
                            } ]
                         }
@@ -1739,18 +2228,39 @@
                         "value" : {
                            "type" : "Before",
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "9.0",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "9.0",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "9.0",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "9.0",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "9.0",
+                                    "type" : "Literal"
+                                 }
                               }
                            }, {
                               "lowClosed" : true,
@@ -1786,18 +2296,39 @@
                         "value" : {
                            "type" : "Before",
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "9.0",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "9.0",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "9.0",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "9.0",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "9.0",
+                                    "type" : "Literal"
+                                 }
                               }
                            }, {
                               "lowClosed" : true,
@@ -1847,18 +2378,39 @@
                                  "type" : "Literal"
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "11.0",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "11.0",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "11.0",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "11.0",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "11.0",
+                                    "type" : "Literal"
+                                 }
                               }
                            } ]
                         }
@@ -1894,18 +2446,39 @@
                                  "type" : "Literal"
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "8.0",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "8.0",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "8.0",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "8.0",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "8.0",
+                                    "type" : "Literal"
+                                 }
                               }
                            } ]
                         }
@@ -2035,18 +2608,39 @@
                                  "type" : "Quantity"
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "value" : 12.0,
-                                 "unit" : "g",
-                                 "type" : "Quantity"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "value" : 12.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 }
                               },
-                              "high" : {
-                                 "value" : 12.0,
-                                 "unit" : "g",
-                                 "type" : "Quantity"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "value" : 12.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 },
+                                 "high" : {
+                                    "value" : 12.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 }
                               }
                            } ]
                         }
@@ -2082,18 +2676,39 @@
                                  "type" : "Quantity"
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "value" : 9.0,
-                                 "unit" : "g",
-                                 "type" : "Quantity"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "value" : 9.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 }
                               },
-                              "high" : {
-                                 "value" : 9.0,
-                                 "unit" : "g",
-                                 "type" : "Quantity"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "value" : 9.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 },
+                                 "high" : {
+                                    "value" : 9.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 }
                               }
                            } ]
                         }
@@ -2115,18 +2730,39 @@
                         "value" : {
                            "type" : "Before",
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "value" : 5.0,
-                                 "unit" : "g",
-                                 "type" : "Quantity"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "value" : 5.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 }
                               },
-                              "high" : {
-                                 "value" : 5.0,
-                                 "unit" : "g",
-                                 "type" : "Quantity"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "value" : 5.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 },
+                                 "high" : {
+                                    "value" : 5.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 }
                               }
                            }, {
                               "lowClosed" : true,
@@ -2162,18 +2798,39 @@
                         "value" : {
                            "type" : "Before",
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "value" : 12.0,
-                                 "unit" : "g",
-                                 "type" : "Quantity"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "value" : 12.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 }
                               },
-                              "high" : {
-                                 "value" : 12.0,
-                                 "unit" : "g",
-                                 "type" : "Quantity"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "value" : 12.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 },
+                                 "high" : {
+                                    "value" : 12.0,
+                                    "unit" : "g",
+                                    "type" : "Quantity"
+                                 }
                               }
                            }, {
                               "lowClosed" : true,
@@ -2249,43 +2906,77 @@
                                  }
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "type" : "DateTime",
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2012",
-                                    "type" : "Literal"
-                                 },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2",
-                                    "type" : "Literal"
-                                 },
-                                 "day" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "27",
-                                    "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "type" : "DateTime",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2012",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "27",
+                                       "type" : "Literal"
+                                    }
                                  }
                               },
-                              "high" : {
-                                 "type" : "DateTime",
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2012",
-                                    "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "type" : "DateTime",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2012",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "27",
+                                       "type" : "Literal"
+                                    }
                                  },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2",
-                                    "type" : "Literal"
-                                 },
-                                 "day" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "27",
-                                    "type" : "Literal"
+                                 "high" : {
+                                    "type" : "DateTime",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2012",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "27",
+                                       "type" : "Literal"
+                                    }
                                  }
                               }
                            } ]
@@ -2348,43 +3039,77 @@
                                  }
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "type" : "DateTime",
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2011",
-                                    "type" : "Literal"
-                                 },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "12",
-                                    "type" : "Literal"
-                                 },
-                                 "day" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "31",
-                                    "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "type" : "DateTime",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2011",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "12",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "31",
+                                       "type" : "Literal"
+                                    }
                                  }
                               },
-                              "high" : {
-                                 "type" : "DateTime",
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2011",
-                                    "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "type" : "DateTime",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2011",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "12",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "31",
+                                       "type" : "Literal"
+                                    }
                                  },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "12",
-                                    "type" : "Literal"
-                                 },
-                                 "day" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "31",
-                                    "type" : "Literal"
+                                 "high" : {
+                                    "type" : "DateTime",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2011",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "12",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "31",
+                                       "type" : "Literal"
+                                    }
                                  }
                               }
                            } ]
@@ -2457,53 +3182,92 @@
                                  }
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "type" : "Time",
-                                 "hour" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "22",
-                                    "type" : "Literal"
-                                 },
-                                 "minute" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "59",
-                                    "type" : "Literal"
-                                 },
-                                 "second" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "59",
-                                    "type" : "Literal"
-                                 },
-                                 "millisecond" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "999",
-                                    "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "type" : "Time",
+                                    "hour" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "22",
+                                       "type" : "Literal"
+                                    },
+                                    "minute" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "second" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "millisecond" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "999",
+                                       "type" : "Literal"
+                                    }
                                  }
                               },
-                              "high" : {
-                                 "type" : "Time",
-                                 "hour" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "22",
-                                    "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Time",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "type" : "Time",
+                                    "hour" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "22",
+                                       "type" : "Literal"
+                                    },
+                                    "minute" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "second" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "millisecond" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "999",
+                                       "type" : "Literal"
+                                    }
                                  },
-                                 "minute" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "59",
-                                    "type" : "Literal"
-                                 },
-                                 "second" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "59",
-                                    "type" : "Literal"
-                                 },
-                                 "millisecond" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "999",
-                                    "type" : "Literal"
+                                 "high" : {
+                                    "type" : "Time",
+                                    "hour" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "22",
+                                       "type" : "Literal"
+                                    },
+                                    "minute" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "second" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "millisecond" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "999",
+                                       "type" : "Literal"
+                                    }
                                  }
                               }
                            } ]
@@ -2576,53 +3340,92 @@
                                  }
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "type" : "Time",
-                                 "hour" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "10",
-                                    "type" : "Literal"
-                                 },
-                                 "minute" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "59",
-                                    "type" : "Literal"
-                                 },
-                                 "second" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "59",
-                                    "type" : "Literal"
-                                 },
-                                 "millisecond" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "999",
-                                    "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "type" : "Time",
+                                    "hour" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "10",
+                                       "type" : "Literal"
+                                    },
+                                    "minute" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "second" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "millisecond" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "999",
+                                       "type" : "Literal"
+                                    }
                                  }
                               },
-                              "high" : {
-                                 "type" : "Time",
-                                 "hour" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "10",
-                                    "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Time",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "type" : "Time",
+                                    "hour" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "10",
+                                       "type" : "Literal"
+                                    },
+                                    "minute" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "second" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "millisecond" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "999",
+                                       "type" : "Literal"
+                                    }
                                  },
-                                 "minute" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "59",
-                                    "type" : "Literal"
-                                 },
-                                 "second" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "59",
-                                    "type" : "Literal"
-                                 },
-                                 "millisecond" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "999",
-                                    "type" : "Literal"
+                                 "high" : {
+                                    "type" : "Time",
+                                    "hour" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "10",
+                                       "type" : "Literal"
+                                    },
+                                    "minute" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "second" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "59",
+                                       "type" : "Literal"
+                                    },
+                                    "millisecond" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "999",
+                                       "type" : "Literal"
+                                    }
                                  }
                               }
                            } ]
@@ -4685,21 +5488,18 @@
                         "value" : {
                            "type" : "Expand",
                            "operand" : [ {
-                              "type" : "ToList",
-                              "operand" : {
-                                 "lowClosed" : true,
-                                 "highClosed" : true,
-                                 "type" : "Interval",
-                                 "low" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "1",
-                                    "type" : "Literal"
-                                 },
-                                 "high" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "10",
-                                    "type" : "Literal"
-                                 }
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "1",
+                                 "type" : "Literal"
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal"
                               }
                            }, {
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
@@ -4863,21 +5663,18 @@
                         "value" : {
                            "type" : "Expand",
                            "operand" : [ {
-                              "type" : "ToList",
-                              "operand" : {
-                                 "lowClosed" : true,
-                                 "highClosed" : true,
-                                 "type" : "Interval",
-                                 "low" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "1",
-                                    "type" : "Literal"
-                                 },
-                                 "high" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "10",
-                                    "type" : "Literal"
-                                 }
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "1",
+                                 "type" : "Literal"
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal"
                               }
                            }, {
                               "type" : "ToQuantity",
@@ -16822,43 +17619,77 @@
                                  }
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "type" : "Date",
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2012",
-                                    "type" : "Literal"
-                                 },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "11",
-                                    "type" : "Literal"
-                                 },
-                                 "day" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "15",
-                                    "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "type" : "Date",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2012",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "11",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "15",
+                                       "type" : "Literal"
+                                    }
                                  }
                               },
-                              "high" : {
-                                 "type" : "Date",
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2012",
-                                    "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Date",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "type" : "Date",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2012",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "11",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "15",
+                                       "type" : "Literal"
+                                    }
                                  },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "11",
-                                    "type" : "Literal"
-                                 },
-                                 "day" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "15",
-                                    "type" : "Literal"
+                                 "high" : {
+                                    "type" : "Date",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2012",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "11",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "15",
+                                       "type" : "Literal"
+                                    }
                                  }
                               }
                            } ]
@@ -16882,43 +17713,77 @@
                            "precision" : "Month",
                            "type" : "SameOrAfter",
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "type" : "Date",
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2012",
-                                    "type" : "Literal"
-                                 },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "11",
-                                    "type" : "Literal"
-                                 },
-                                 "day" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "15",
-                                    "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "type" : "Date",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2012",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "11",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "15",
+                                       "type" : "Literal"
+                                    }
                                  }
                               },
-                              "high" : {
-                                 "type" : "Date",
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2012",
-                                    "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Date",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "type" : "Date",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2012",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "11",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "15",
+                                       "type" : "Literal"
+                                    }
                                  },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "11",
-                                    "type" : "Literal"
-                                 },
-                                 "day" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "15",
-                                    "type" : "Literal"
+                                 "high" : {
+                                    "type" : "Date",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2012",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "11",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "15",
+                                       "type" : "Literal"
+                                    }
                                  }
                               }
                            }, {
@@ -17235,18 +18100,39 @@
                                  "type" : "Literal"
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "6",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "6",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "6",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "6",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "6",
+                                    "type" : "Literal"
+                                 }
                               }
                            } ]
                         }
@@ -17268,18 +18154,39 @@
                         "value" : {
                            "type" : "SameOrAfter",
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "2.5",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "2.5",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "2.5",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "2.5",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "2.5",
+                                    "type" : "Literal"
+                                 }
                               }
                            }, {
                               "lowClosed" : true,
@@ -17315,18 +18222,39 @@
                         "value" : {
                            "type" : "SameOrAfter",
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "value" : 2.5,
-                                 "unit" : "mg",
-                                 "type" : "Quantity"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "value" : 2.5,
+                                    "unit" : "mg",
+                                    "type" : "Quantity"
+                                 }
                               },
-                              "high" : {
-                                 "value" : 2.5,
-                                 "unit" : "mg",
-                                 "type" : "Quantity"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "value" : 2.5,
+                                    "unit" : "mg",
+                                    "type" : "Quantity"
+                                 },
+                                 "high" : {
+                                    "value" : 2.5,
+                                    "unit" : "mg",
+                                    "type" : "Quantity"
+                                 }
                               }
                            }, {
                               "lowClosed" : true,
@@ -17481,43 +18409,77 @@
                                  }
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "type" : "Date",
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2012",
-                                    "type" : "Literal"
-                                 },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "11",
-                                    "type" : "Literal"
-                                 },
-                                 "day" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "15",
-                                    "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "type" : "Date",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2012",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "11",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "15",
+                                       "type" : "Literal"
+                                    }
                                  }
                               },
-                              "high" : {
-                                 "type" : "Date",
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2012",
-                                    "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Date",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "type" : "Date",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2012",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "11",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "15",
+                                       "type" : "Literal"
+                                    }
                                  },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "11",
-                                    "type" : "Literal"
-                                 },
-                                 "day" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "15",
-                                    "type" : "Literal"
+                                 "high" : {
+                                    "type" : "Date",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2012",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "11",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "15",
+                                       "type" : "Literal"
+                                    }
                                  }
                               }
                            } ]
@@ -17541,43 +18503,77 @@
                            "precision" : "Month",
                            "type" : "SameOrBefore",
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "type" : "Date",
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2012",
-                                    "type" : "Literal"
-                                 },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "11",
-                                    "type" : "Literal"
-                                 },
-                                 "day" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "15",
-                                    "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "type" : "Date",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2012",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "11",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "15",
+                                       "type" : "Literal"
+                                    }
                                  }
                               },
-                              "high" : {
-                                 "type" : "Date",
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2012",
-                                    "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Date",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "type" : "Date",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2012",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "11",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "15",
+                                       "type" : "Literal"
+                                    }
                                  },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "11",
-                                    "type" : "Literal"
-                                 },
-                                 "day" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "15",
-                                    "type" : "Literal"
+                                 "high" : {
+                                    "type" : "Date",
+                                    "year" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2012",
+                                       "type" : "Literal"
+                                    },
+                                    "month" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "11",
+                                       "type" : "Literal"
+                                    },
+                                    "day" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "15",
+                                       "type" : "Literal"
+                                    }
                                  }
                               }
                            }, {
@@ -17894,18 +18890,39 @@
                                  "type" : "Literal"
                               }
                            }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "6",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "6",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "6",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "6",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "6",
+                                    "type" : "Literal"
+                                 }
                               }
                            } ]
                         }
@@ -17927,18 +18944,39 @@
                         "value" : {
                            "type" : "SameOrBefore",
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "1.6667",
-                                 "type" : "Literal"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "1.6667",
+                                    "type" : "Literal"
+                                 }
                               },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                                 "value" : "1.6667",
-                                 "type" : "Literal"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "1.6667",
+                                    "type" : "Literal"
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "1.6667",
+                                    "type" : "Literal"
+                                 }
                               }
                            }, {
                               "lowClosed" : true,
@@ -17974,18 +19012,39 @@
                         "value" : {
                            "type" : "SameOrBefore",
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "low" : {
-                                 "value" : 1.666,
-                                 "unit" : "mg",
-                                 "type" : "Quantity"
+                              "type" : "If",
+                              "condition" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "value" : 1.666,
+                                    "unit" : "mg",
+                                    "type" : "Quantity"
+                                 }
                               },
-                              "high" : {
-                                 "value" : 1.666,
-                                 "unit" : "mg",
-                                 "type" : "Quantity"
+                              "then" : {
+                                 "type" : "Null",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              },
+                              "else" : {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "value" : 1.666,
+                                    "unit" : "mg",
+                                    "type" : "Quantity"
+                                 },
+                                 "high" : {
+                                    "value" : 1.666,
+                                    "unit" : "mg",
+                                    "type" : "Quantity"
+                                 }
                               }
                            }, {
                               "lowClosed" : true,

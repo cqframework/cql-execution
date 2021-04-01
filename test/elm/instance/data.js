@@ -47,6 +47,14 @@ module.exports['Instance'] = {
       "annotation" : [ {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "29",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
       } ],
       "identifier" : {
          "id" : "TestSnippet",
@@ -64,7 +72,22 @@ module.exports['Instance'] = {
             "localId" : "1",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0"
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "codeSystems" : {
@@ -72,12 +95,30 @@ module.exports['Instance'] = {
             "localId" : "2",
             "name" : "SNOMED",
             "id" : "2.16.840.1.113883.6.96",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "","codesystem ","\"SNOMED\"",": ","'2.16.840.1.113883.6.96'" ]
+                  } ]
+               }
+            } ]
          }, {
             "localId" : "3",
             "name" : "SIMPLE",
             "id" : "1.2.3.4.5",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","codesystem ","\"SIMPLE\"",": ","'1.2.3.4.5'" ]
+                  } ]
+               }
+            } ]
          } ]
       },
       "codes" : {
@@ -87,6 +128,22 @@ module.exports['Instance'] = {
             "id" : "1532007",
             "display" : "Viral pharyngitis (disorder)",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "","code ","\"Viral pharyngitis code\"",": ","'1532007'"," from " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "\"SNOMED\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'Viral pharyngitis (disorder)'" ]
+                  } ]
+               }
+            } ],
             "codeSystem" : {
                "localId" : "4",
                "name" : "SNOMED"
@@ -97,10 +154,31 @@ module.exports['Instance'] = {
             "id" : "active",
             "display" : "Active",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "","code ","\"Active code\"",": ","'active'"," from " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "\"SNOMED\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'Active'" ]
+                  } ]
+               }
+            } ],
             "codeSystem" : {
                "localId" : "6",
                "name" : "SNOMED"
             }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
          } ]
       },
       "statements" : {
@@ -124,7 +202,7 @@ module.exports['Instance'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "define ","QuantityA",": " ]
+                     "value" : [ "","define ","QuantityA",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -186,7 +264,7 @@ module.exports['Instance'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "define ","CodeA",": " ]
+                     "value" : [ "","define ","CodeA",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -287,7 +365,7 @@ module.exports['Instance'] = {
                "s" : {
                   "r" : "22",
                   "s" : [ {
-                     "value" : [ "define ","ConceptA",": " ]
+                     "value" : [ "","define ","ConceptA",": " ]
                   }, {
                      "r" : "21",
                      "s" : [ {
@@ -360,7 +438,7 @@ module.exports['Instance'] = {
                "s" : {
                   "r" : "26",
                   "s" : [ {
-                     "value" : [ "define ","Pharyngitis"," : " ]
+                     "value" : [ "","define ","Pharyngitis"," : " ]
                   }, {
                      "r" : "25",
                      "s" : [ {
@@ -421,7 +499,7 @@ module.exports['Instance'] = {
                "s" : {
                   "r" : "29",
                   "s" : [ {
-                     "value" : [ "define ","val",": " ]
+                     "value" : [ "","define ","val",": " ]
                   }, {
                      "r" : "28",
                      "s" : [ {
