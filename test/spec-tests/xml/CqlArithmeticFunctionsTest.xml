@@ -26,6 +26,10 @@
 			<expression>Abs(-1.0'cm')</expression>
 			<output>1.0'cm'</output>
 		</test>
+		<test name="AbsLong">
+			<expression>Abs(-1L)</expression>
+			<output>1L</output>
+		</test>
 	</group>
 	<group name="Add">
 		<test name="AddNull">
@@ -47,6 +51,10 @@
 		<test name="AddIAndD">
 			<expression>1 + 2.0</expression>
 			<output>3.0</output>
+		</test>
+		<test name="Add1L1L">
+			<expression>1L + 1L</expression>
+			<output>2L</output>
 		</test>
 	</group>
 	<group name="Ceiling">
@@ -302,6 +310,10 @@
 			<output>-2147483648</output>
 			<!-- TODO: make Engine parse -2147483648 holistically not as a negated positive -->
 		</test>
+		<test name="LongMinValue">
+			<expression>minimum Long</expression>
+			<output>-9223372036854775808</output>
+		</test>
 		<test name="DecimalMinValue">
 			<expression>minimum Decimal</expression>
 			<output>-99999999999999999999.99999999</output>
@@ -324,6 +336,10 @@
 		<test name="IntegerMaxValue">
 			<expression>maximum Integer</expression>
 			<output>2147483647</output>
+		</test>
+		<test name="LongMaxValue">
+			<expression>maximum Long</expression>
+			<output>9223372036854775807</output>
 		</test>
 		<test name="DecimalMaxValue">
 			<expression>maximum Decimal</expression>
@@ -356,6 +372,10 @@
 			<expression>4 mod 2</expression>
 			<output>0</output>
 		</test>
+		<test name="Modulo4LBy2L">
+			<expression>4L mod 2L</expression>
+			<output>0L</output>
+		</test>
 		<test name="Modulo4DBy2D">
 			<expression>4.0 mod 2.0</expression>
 			<output>0.0</output>
@@ -376,6 +396,10 @@
 			<expression>3.5 mod 3</expression>
 			<output>0.5</output>
 		</test>
+		<test name="ModuloQuantity">
+			<expression>3.5 'cm' mod 3 'cm'</expression>
+			<output>0.5 'cm'</output>
+		</test>
 	</group>
 	<group name="Multiply">
 		<test name="MultiplyNull">
@@ -389,6 +413,10 @@
 		<test name="Multiply1DBy2D">
 			<expression>1.0 * 2.0</expression>
 			<output>2.0</output>
+		</test>
+		<test name="Multiply1By1L">
+			<expression>1 * 1L</expression>
+			<output>1L</output>
 		</test>
 		<test name="Multiply1IBy2D">
 			<expression>1 * 2.0</expression>
@@ -420,6 +448,10 @@
 		<test name="NegateNeg1">
 			<expression>-(-1)</expression>
 			<output>1</output>
+		</test>
+		<test name="NegateNeg1L">
+			<expression>-(-1L)</expression>
+			<output>1L</output>
 		</test>
 		<test name="Negate0D">
 			<expression>-(0.0)</expression>
@@ -477,6 +509,10 @@
 			<expression>predecessor of 1</expression>
 			<output>0</output>
 		</test>
+		<test name="PredecessorOf1L">
+			<expression>predecessor of 1L</expression>
+			<output>0L</output>
+		</test>
 		<test name="PredecessorOf1D">
 			<expression>predecessor of 1.0</expression>
 			<output>0.99999999</output>
@@ -526,6 +562,10 @@
 		<test name="Power2ToNeg2">
 			<expression>Power(2, -2)</expression>
 			<output>0.25</output>
+		</test>
+		<test name="Power2LTo2L">
+			<expression>Power(2L, 2L)</expression>
+			<output>4L</output>
 		</test>
 		<test name="Power2DTo2D">
 			<expression>Power(2.0, 2.0)</expression>
@@ -615,6 +655,10 @@
 			<expression>1 - 1</expression>
 			<output>0</output>
 		</test>
+		<test name="Subtract1LAnd1L">
+			<expression>1L - 1L</expression>
+			<output>0L</output>
+		</test>
 		<test name="Subtract1DAnd2D">
 			<expression>1.0 - 2.0</expression>
 			<output>-1.0</output>
@@ -640,6 +684,10 @@
 		<test name="SuccessorOf1">
 			<expression>successor of 1</expression>
 			<output>2</output>
+		</test>
+		<test name="SuccessorOf1L">
+			<expression>successor of 1L</expression>
+			<output>2L</output>
 		</test>
 		<test name="SuccessorOf1D">
 			<expression>successor of 1.0</expression>
@@ -729,6 +777,10 @@
 			<expression>10 div 3</expression>
 			<output>3</output>
 		</test>
+		<test name="TruncatedDivide10LBy3L">
+			<expression>10L div 3L</expression>
+			<output>3L</output>
+		</test>
 		<test name="TruncatedDivide10d1By3D1">
 			<expression>10.1 div 3.1</expression>
 			<output>3.0</output>
@@ -772,6 +824,10 @@
 		<test name="TruncatedDivide10By5D">
 			<expression>10 div 5.0</expression>
 			<output>2.0</output>
+		</test>
+		<test name="TruncatedDivide10d1ByNeg3D1Quantity">
+			<expression>10.1 'cm' div -3.1 'cm'</expression>
+			<output>-3.0 'cm'</output>
 		</test>
 	</group>
 </tests>
