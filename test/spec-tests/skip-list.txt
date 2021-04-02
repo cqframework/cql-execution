@@ -72,7 +72,6 @@ CqlArithmeticFunctionsTest.Power.Power2LTo2L                          Long not i
 CqlArithmeticFunctionsTest.Subtract.Subtract1LAnd1L                   Long not implemented
 CqlArithmeticFunctionsTest.Successor.SuccessorOf1L                    Long not implemented
 "CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10LBy3L"  Long not implemented
-CqlAggregateTest.AggregateTests.FactorialOfFive                       Query aggregation not implemented
 CqlArithmeticFunctionsTest.Modulo.ModuloQuantity                      Modulo not implemented for Quantity
 "CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10d1ByNeg3D1Quantity"     Truncated divide not implemented for Quantity
 

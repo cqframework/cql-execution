@@ -50,10 +50,61 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Query aggregation not implemented",
+                           "type" : "Query",
+                           "source" : [ {
+                              "alias" : "Num",
+                              "expression" : {
+                                 "type" : "List",
+                                 "element" : [ {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal"
+                                 }, {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal"
+                                 }, {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "3",
+                                    "type" : "Literal"
+                                 }, {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "4",
+                                    "type" : "Literal"
+                                 }, {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "5",
+                                    "type" : "Literal"
+                                 } ]
+                              }
+                           } ],
+                           "relationship" : [ ],
+                           "aggregate" : {
+                              "identifier" : "Result",
+                              "expression" : {
+                                 "type" : "Multiply",
+                                 "operand" : [ {
+                                    "name" : "Result",
+                                    "type" : "QueryLetRef"
+                                 }, {
+                                    "name" : "Num",
+                                    "type" : "AliasRef"
+                                 } ]
+                              },
+                              "starting" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "1",
+                                 "type" : "Literal"
+                              }
+                           }
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "120",
                            "type" : "Literal"
                         }
                      } ]

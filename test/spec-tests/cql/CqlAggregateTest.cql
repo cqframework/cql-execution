@@ -4,11 +4,9 @@ context Patient
 
 define "AggregateTests": Tuple{
   "FactorialOfFive": Tuple{
-    skipped: 'Query aggregation not implemented'
-    /*
     expression: ({ 1, 2, 3, 4, 5 }) Num aggregate Result starting 1: Result * Num,
     output: 120
-    */  },
+  },
   "RolledOutIntervals": Tuple{
     skipped: 'Translation Error: Could not resolve identifier MedicationRequestIntervals in the current library.'
     /*
