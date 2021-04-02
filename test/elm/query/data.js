@@ -8074,3 +8074,1344 @@ module.exports['SingleObjectAlias'] = {
    }
 }
 
+/* AggregateQuery
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+
+define noStartingAggregation:
+ ({1,2,3,4,5}) R
+    aggregate T : Coalesce(T, 1) * R 
+
+define encounterPeriods: 
+  [Encounter] e 
+    return e.period 
+
+define expressionStartingAggregation:
+  encounterPeriods M
+    aggregate R starting (List{} as List<Interval<DateTime>>): R union ({
+      M X
+          let S: Max({ end of Last(R)+1 day, DateTime(1970,01,01)}),
+          E: start of X
+        return Interval[S, E]
+    })
+
+define literalStartingAggregation: 
+  ({1,2,3,4,5,1,2,3,4,5}) Num 
+    aggregate distinct str starting 'Start' : str + ToString(Num)
+
+define quantityStartingAggregation:
+ ({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'}) Num 
+  aggregate distinct Sum starting 0 'ml': Sum + Num 
+
+define allAggregation: 
+ ({1,2,3,4,5,1,2,3,4,5}) Num 
+  aggregate all Sum starting 0: Sum + Num 
+
+define distinctAggregation: 
+ ({1,2,3,4,5,1,2,3,4,5}) Num 
+  aggregate distinct Sum starting 0: Sum + Num 
+*/
+
+module.exports['AggregateQuery'] = {
+   "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "130",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "16",
+            "name" : "noStartingAggregation",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "16",
+                  "s" : [ {
+                     "value" : [ "","define ","noStartingAggregation",":\n " ]
+                  }, {
+                     "r" : "15",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "8",
+                           "s" : [ {
+                              "r" : "7",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "7",
+                                 "s" : [ {
+                                    "r" : "2",
+                                    "value" : [ "{","1",",","2",",","3",",","4",",","5","}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","R" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n    " ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "aggregate ","T"," : " ]
+                        }, {
+                           "r" : "13",
+                           "s" : [ {
+                              "r" : "11",
+                              "s" : [ {
+                                 "value" : [ "Coalesce","(" ]
+                              }, {
+                                 "r" : "9",
+                                 "s" : [ {
+                                    "value" : [ "T" ]
+                                 } ]
+                              }, {
+                                 "r" : "10",
+                                 "value" : [ ", ","1",")" ]
+                              } ]
+                           }, {
+                              "value" : [ " * " ]
+                           }, {
+                              "r" : "12",
+                              "s" : [ {
+                                 "value" : [ "R" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "15",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "8",
+                  "alias" : "R",
+                  "expression" : {
+                     "localId" : "7",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "2",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "3",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "4",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "5",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "6",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "aggregate" : {
+                  "localId" : "14",
+                  "identifier" : "T",
+                  "expression" : {
+                     "localId" : "13",
+                     "type" : "Multiply",
+                     "operand" : [ {
+                        "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "As",
+                        "operand" : {
+                           "localId" : "11",
+                           "type" : "Coalesce",
+                           "operand" : [ {
+                              "localId" : "9",
+                              "name" : "T",
+                              "type" : "QueryLetRef"
+                           }, {
+                              "localId" : "10",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "1",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "localId" : "12",
+                        "name" : "R",
+                        "type" : "AliasRef"
+                     } ]
+                  },
+                  "starting" : {
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                     "type" : "Null"
+                  }
+               }
+            }
+         }, {
+            "localId" : "23",
+            "name" : "encounterPeriods",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "23",
+                  "s" : [ {
+                     "value" : [ "","define ","encounterPeriods",": \n  " ]
+                  }, {
+                     "r" : "22",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "18",
+                           "s" : [ {
+                              "r" : "17",
+                              "s" : [ {
+                                 "r" : "17",
+                                 "s" : [ {
+                                    "value" : [ "[","Encounter","]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","e" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " \n    " ]
+                     }, {
+                        "r" : "21",
+                        "s" : [ {
+                           "value" : [ "return " ]
+                        }, {
+                           "r" : "20",
+                           "s" : [ {
+                              "r" : "19",
+                              "s" : [ {
+                                 "value" : [ "e" ]
+                              } ]
+                           }, {
+                              "value" : [ "." ]
+                           }, {
+                              "r" : "20",
+                              "s" : [ {
+                                 "value" : [ "period" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "22",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "18",
+                  "alias" : "e",
+                  "expression" : {
+                     "localId" : "17",
+                     "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "Retrieve"
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "localId" : "21",
+                  "expression" : {
+                     "localId" : "20",
+                     "path" : "period",
+                     "scope" : "e",
+                     "type" : "Property"
+                  }
+               }
+            }
+         }, {
+            "localId" : "58",
+            "name" : "expressionStartingAggregation",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "58",
+                  "s" : [ {
+                     "value" : [ "","define ","expressionStartingAggregation",":\n  " ]
+                  }, {
+                     "r" : "57",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "25",
+                           "s" : [ {
+                              "r" : "24",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "value" : [ "encounterPeriods" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","M" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n    " ]
+                     }, {
+                        "r" : "56",
+                        "s" : [ {
+                           "value" : [ "aggregate ","R"," " ]
+                        }, {
+                           "r" : "30",
+                           "s" : [ {
+                              "value" : [ "starting (" ]
+                           }, {
+                              "r" : "30",
+                              "s" : [ {
+                                 "r" : "26",
+                                 "value" : [ "List{}"," as " ]
+                              }, {
+                                 "r" : "29",
+                                 "s" : [ {
+                                    "value" : [ "List<" ]
+                                 }, {
+                                    "r" : "28",
+                                    "s" : [ {
+                                       "value" : [ "Interval<" ]
+                                    }, {
+                                       "r" : "27",
+                                       "s" : [ {
+                                          "value" : [ "DateTime" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ">" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ">" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        }, {
+                           "value" : [ ": " ]
+                        }, {
+                           "r" : "55",
+                           "s" : [ {
+                              "r" : "31",
+                              "s" : [ {
+                                 "value" : [ "R" ]
+                              } ]
+                           }, {
+                              "value" : [ " union " ]
+                           }, {
+                              "r" : "54",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "54",
+                                 "s" : [ {
+                                    "value" : [ "{\n      " ]
+                                 }, {
+                                    "r" : "53",
+                                    "s" : [ {
+                                       "s" : [ {
+                                          "r" : "33",
+                                          "s" : [ {
+                                             "r" : "32",
+                                             "s" : [ {
+                                                "s" : [ {
+                                                   "value" : [ "M" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ " ","X" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "\n          " ]
+                                    }, {
+                                       "s" : [ {
+                                          "value" : [ "let " ]
+                                       }, {
+                                          "r" : "45",
+                                          "s" : [ {
+                                             "value" : [ "S",": " ]
+                                          }, {
+                                             "r" : "44",
+                                             "s" : [ {
+                                                "value" : [ "Max","(" ]
+                                             }, {
+                                                "r" : "43",
+                                                "s" : [ {
+                                                   "value" : [ "{ " ]
+                                                }, {
+                                                   "r" : "38",
+                                                   "s" : [ {
+                                                      "r" : "36",
+                                                      "s" : [ {
+                                                         "value" : [ "end of " ]
+                                                      }, {
+                                                         "r" : "35",
+                                                         "s" : [ {
+                                                            "value" : [ "Last","(" ]
+                                                         }, {
+                                                            "r" : "34",
+                                                            "s" : [ {
+                                                               "value" : [ "R" ]
+                                                            } ]
+                                                         }, {
+                                                            "value" : [ ")" ]
+                                                         } ]
+                                                      } ]
+                                                   }, {
+                                                      "value" : [ "+" ]
+                                                   }, {
+                                                      "r" : "37",
+                                                      "s" : [ {
+                                                         "value" : [ "1 ","day" ]
+                                                      } ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ ", " ]
+                                                }, {
+                                                   "r" : "42",
+                                                   "s" : [ {
+                                                      "r" : "39",
+                                                      "value" : [ "DateTime","(","1970",",","01",",","01",")" ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ "}" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ ")" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ ",\n          " ]
+                                       }, {
+                                          "r" : "48",
+                                          "s" : [ {
+                                             "value" : [ "E",": " ]
+                                          }, {
+                                             "r" : "47",
+                                             "s" : [ {
+                                                "value" : [ "start of " ]
+                                             }, {
+                                                "r" : "46",
+                                                "s" : [ {
+                                                   "value" : [ "X" ]
+                                                } ]
+                                             } ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "\n        " ]
+                                    }, {
+                                       "r" : "52",
+                                       "s" : [ {
+                                          "value" : [ "return " ]
+                                       }, {
+                                          "r" : "51",
+                                          "s" : [ {
+                                             "value" : [ "Interval[" ]
+                                          }, {
+                                             "r" : "49",
+                                             "s" : [ {
+                                                "value" : [ "S" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ ", " ]
+                                          }, {
+                                             "r" : "50",
+                                             "s" : [ {
+                                                "value" : [ "E" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "]" ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n    }" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "57",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "25",
+                  "alias" : "M",
+                  "expression" : {
+                     "localId" : "24",
+                     "name" : "encounterPeriods",
+                     "type" : "ExpressionRef"
+                  }
+               } ],
+               "relationship" : [ ],
+               "aggregate" : {
+                  "localId" : "56",
+                  "identifier" : "R",
+                  "expression" : {
+                     "localId" : "55",
+                     "type" : "Union",
+                     "operand" : [ {
+                        "localId" : "31",
+                        "name" : "R",
+                        "type" : "QueryLetRef"
+                     }, {
+                        "localId" : "54",
+                        "type" : "List",
+                        "element" : [ {
+                           "localId" : "53",
+                           "type" : "Query",
+                           "source" : [ {
+                              "localId" : "33",
+                              "alias" : "X",
+                              "expression" : {
+                                 "localId" : "32",
+                                 "name" : "M",
+                                 "type" : "AliasRef"
+                              }
+                           } ],
+                           "let" : [ {
+                              "localId" : "45",
+                              "identifier" : "S",
+                              "expression" : {
+                                 "localId" : "44",
+                                 "type" : "Max",
+                                 "source" : {
+                                    "localId" : "43",
+                                    "type" : "List",
+                                    "element" : [ {
+                                       "localId" : "38",
+                                       "type" : "Add",
+                                       "operand" : [ {
+                                          "localId" : "36",
+                                          "type" : "End",
+                                          "operand" : {
+                                             "localId" : "35",
+                                             "type" : "Last",
+                                             "source" : {
+                                                "localId" : "34",
+                                                "name" : "R",
+                                                "type" : "QueryLetRef"
+                                             }
+                                          }
+                                       }, {
+                                          "localId" : "37",
+                                          "value" : 1,
+                                          "unit" : "day",
+                                          "type" : "Quantity"
+                                       } ]
+                                    }, {
+                                       "localId" : "42",
+                                       "type" : "DateTime",
+                                       "year" : {
+                                          "localId" : "39",
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                          "value" : "1970",
+                                          "type" : "Literal"
+                                       },
+                                       "month" : {
+                                          "localId" : "40",
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                          "value" : "01",
+                                          "type" : "Literal"
+                                       },
+                                       "day" : {
+                                          "localId" : "41",
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                          "value" : "01",
+                                          "type" : "Literal"
+                                       }
+                                    } ]
+                                 }
+                              }
+                           }, {
+                              "localId" : "48",
+                              "identifier" : "E",
+                              "expression" : {
+                                 "localId" : "47",
+                                 "type" : "Start",
+                                 "operand" : {
+                                    "localId" : "46",
+                                    "name" : "X",
+                                    "type" : "AliasRef"
+                                 }
+                              }
+                           } ],
+                           "relationship" : [ ],
+                           "return" : {
+                              "localId" : "52",
+                              "expression" : {
+                                 "localId" : "51",
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "low" : {
+                                    "localId" : "49",
+                                    "name" : "S",
+                                    "type" : "QueryLetRef"
+                                 },
+                                 "high" : {
+                                    "localId" : "50",
+                                    "name" : "E",
+                                    "type" : "QueryLetRef"
+                                 }
+                              }
+                           }
+                        } ]
+                     } ]
+                  },
+                  "starting" : {
+                     "localId" : "30",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "26",
+                        "type" : "List"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "29",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "28",
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "localId" : "27",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }, {
+            "localId" : "78",
+            "name" : "literalStartingAggregation",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "78",
+                  "s" : [ {
+                     "value" : [ "","define ","literalStartingAggregation",": \n  " ]
+                  }, {
+                     "r" : "77",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "70",
+                           "s" : [ {
+                              "r" : "69",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "69",
+                                 "s" : [ {
+                                    "r" : "59",
+                                    "value" : [ "{","1",",","2",",","3",",","4",",","5",",","1",",","2",",","3",",","4",",","5","}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","Num" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " \n    " ]
+                     }, {
+                        "r" : "76",
+                        "s" : [ {
+                           "value" : [ "aggregate distinct ","str"," " ]
+                        }, {
+                           "r" : "71",
+                           "s" : [ {
+                              "value" : [ "starting " ]
+                           }, {
+                              "r" : "71",
+                              "s" : [ {
+                                 "value" : [ "'Start'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " : " ]
+                        }, {
+                           "r" : "75",
+                           "s" : [ {
+                              "r" : "72",
+                              "s" : [ {
+                                 "value" : [ "str" ]
+                              } ]
+                           }, {
+                              "value" : [ " + " ]
+                           }, {
+                              "r" : "74",
+                              "s" : [ {
+                                 "value" : [ "ToString","(" ]
+                              }, {
+                                 "r" : "73",
+                                 "s" : [ {
+                                    "value" : [ "Num" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "77",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "70",
+                  "alias" : "Num",
+                  "expression" : {
+                     "localId" : "69",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "59",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "60",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "61",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "62",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "63",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "64",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "65",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "66",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "67",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "68",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "aggregate" : {
+                  "localId" : "76",
+                  "identifier" : "str",
+                  "distinct" : true,
+                  "expression" : {
+                     "localId" : "75",
+                     "type" : "Concatenate",
+                     "operand" : [ {
+                        "localId" : "72",
+                        "name" : "str",
+                        "type" : "QueryLetRef"
+                     }, {
+                        "localId" : "74",
+                        "type" : "ToString",
+                        "operand" : {
+                           "localId" : "73",
+                           "name" : "Num",
+                           "type" : "AliasRef"
+                        }
+                     } ]
+                  },
+                  "starting" : {
+                     "localId" : "71",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Start",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         }, {
+            "localId" : "92",
+            "name" : "quantityStartingAggregation",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "92",
+                  "s" : [ {
+                     "value" : [ "","define ","quantityStartingAggregation",":\n " ]
+                  }, {
+                     "r" : "91",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "85",
+                           "s" : [ {
+                              "r" : "84",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "84",
+                                 "s" : [ {
+                                    "value" : [ "{" ]
+                                 }, {
+                                    "r" : "79",
+                                    "s" : [ {
+                                       "value" : [ "1 ","'ml'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "," ]
+                                 }, {
+                                    "r" : "80",
+                                    "s" : [ {
+                                       "value" : [ "2 ","'ml'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "," ]
+                                 }, {
+                                    "r" : "81",
+                                    "s" : [ {
+                                       "value" : [ "3 ","'ml'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "," ]
+                                 }, {
+                                    "r" : "82",
+                                    "s" : [ {
+                                       "value" : [ "4 ","'ml'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "," ]
+                                 }, {
+                                    "r" : "83",
+                                    "s" : [ {
+                                       "value" : [ "5 ","'ml'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","Num" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " \n  " ]
+                     }, {
+                        "r" : "90",
+                        "s" : [ {
+                           "value" : [ "aggregate distinct ","Sum"," " ]
+                        }, {
+                           "r" : "86",
+                           "s" : [ {
+                              "value" : [ "starting " ]
+                           }, {
+                              "r" : "86",
+                              "s" : [ {
+                                 "value" : [ "0 ","'ml'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ": " ]
+                        }, {
+                           "r" : "89",
+                           "s" : [ {
+                              "r" : "87",
+                              "s" : [ {
+                                 "value" : [ "Sum" ]
+                              } ]
+                           }, {
+                              "value" : [ " + " ]
+                           }, {
+                              "r" : "88",
+                              "s" : [ {
+                                 "value" : [ "Num" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "91",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "85",
+                  "alias" : "Num",
+                  "expression" : {
+                     "localId" : "84",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "79",
+                        "value" : 1,
+                        "unit" : "ml",
+                        "type" : "Quantity"
+                     }, {
+                        "localId" : "80",
+                        "value" : 2,
+                        "unit" : "ml",
+                        "type" : "Quantity"
+                     }, {
+                        "localId" : "81",
+                        "value" : 3,
+                        "unit" : "ml",
+                        "type" : "Quantity"
+                     }, {
+                        "localId" : "82",
+                        "value" : 4,
+                        "unit" : "ml",
+                        "type" : "Quantity"
+                     }, {
+                        "localId" : "83",
+                        "value" : 5,
+                        "unit" : "ml",
+                        "type" : "Quantity"
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "aggregate" : {
+                  "localId" : "90",
+                  "identifier" : "Sum",
+                  "distinct" : true,
+                  "expression" : {
+                     "localId" : "89",
+                     "type" : "Add",
+                     "operand" : [ {
+                        "localId" : "87",
+                        "name" : "Sum",
+                        "type" : "QueryLetRef"
+                     }, {
+                        "localId" : "88",
+                        "name" : "Num",
+                        "type" : "AliasRef"
+                     } ]
+                  },
+                  "starting" : {
+                     "localId" : "86",
+                     "value" : 0,
+                     "unit" : "ml",
+                     "type" : "Quantity"
+                  }
+               }
+            }
+         }, {
+            "localId" : "111",
+            "name" : "allAggregation",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "111",
+                  "s" : [ {
+                     "value" : [ "","define ","allAggregation",": \n " ]
+                  }, {
+                     "r" : "110",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "104",
+                           "s" : [ {
+                              "r" : "103",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "103",
+                                 "s" : [ {
+                                    "r" : "93",
+                                    "value" : [ "{","1",",","2",",","3",",","4",",","5",",","1",",","2",",","3",",","4",",","5","}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","Num" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " \n  " ]
+                     }, {
+                        "r" : "109",
+                        "s" : [ {
+                           "value" : [ "aggregate all ","Sum"," " ]
+                        }, {
+                           "r" : "105",
+                           "s" : [ {
+                              "r" : "105",
+                              "value" : [ "starting ","0" ]
+                           } ]
+                        }, {
+                           "value" : [ ": " ]
+                        }, {
+                           "r" : "108",
+                           "s" : [ {
+                              "r" : "106",
+                              "s" : [ {
+                                 "value" : [ "Sum" ]
+                              } ]
+                           }, {
+                              "value" : [ " + " ]
+                           }, {
+                              "r" : "107",
+                              "s" : [ {
+                                 "value" : [ "Num" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "110",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "104",
+                  "alias" : "Num",
+                  "expression" : {
+                     "localId" : "103",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "93",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "94",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "95",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "96",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "97",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "98",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "99",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "100",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "101",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "102",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "aggregate" : {
+                  "localId" : "109",
+                  "identifier" : "Sum",
+                  "distinct" : false,
+                  "expression" : {
+                     "localId" : "108",
+                     "type" : "Add",
+                     "operand" : [ {
+                        "localId" : "106",
+                        "name" : "Sum",
+                        "type" : "QueryLetRef"
+                     }, {
+                        "localId" : "107",
+                        "name" : "Num",
+                        "type" : "AliasRef"
+                     } ]
+                  },
+                  "starting" : {
+                     "localId" : "105",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         }, {
+            "localId" : "130",
+            "name" : "distinctAggregation",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "130",
+                  "s" : [ {
+                     "value" : [ "","define ","distinctAggregation",": \n " ]
+                  }, {
+                     "r" : "129",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "123",
+                           "s" : [ {
+                              "r" : "122",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "122",
+                                 "s" : [ {
+                                    "r" : "112",
+                                    "value" : [ "{","1",",","2",",","3",",","4",",","5",",","1",",","2",",","3",",","4",",","5","}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","Num" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " \n  " ]
+                     }, {
+                        "r" : "128",
+                        "s" : [ {
+                           "value" : [ "aggregate distinct ","Sum"," " ]
+                        }, {
+                           "r" : "124",
+                           "s" : [ {
+                              "r" : "124",
+                              "value" : [ "starting ","0" ]
+                           } ]
+                        }, {
+                           "value" : [ ": " ]
+                        }, {
+                           "r" : "127",
+                           "s" : [ {
+                              "r" : "125",
+                              "s" : [ {
+                                 "value" : [ "Sum" ]
+                              } ]
+                           }, {
+                              "value" : [ " + " ]
+                           }, {
+                              "r" : "126",
+                              "s" : [ {
+                                 "value" : [ "Num" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "129",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "123",
+                  "alias" : "Num",
+                  "expression" : {
+                     "localId" : "122",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "112",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "113",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "114",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "115",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "116",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "117",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "118",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "119",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "120",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "121",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "aggregate" : {
+                  "localId" : "128",
+                  "identifier" : "Sum",
+                  "distinct" : true,
+                  "expression" : {
+                     "localId" : "127",
+                     "type" : "Add",
+                     "operand" : [ {
+                        "localId" : "125",
+                        "name" : "Sum",
+                        "type" : "QueryLetRef"
+                     }, {
+                        "localId" : "126",
+                        "name" : "Num",
+                        "type" : "AliasRef"
+                     } ]
+                  },
+                  "starting" : {
+                     "localId" : "124",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+
