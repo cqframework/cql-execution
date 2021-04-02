@@ -844,6 +844,8 @@ define IntOverlapsUnion: Interval[0,7] union Interval[3,10]
 define IntBeginsUnion: Interval[0,5] union Interval[0,10]
 define IntDuringUnion: Interval[3,5] union Interval[0,10]
 define IntEndsUnion: Interval[5,10] union Interval[0,10]
+define NullUnion: null union Interval[0,10]
+define UnionNull: Interval[5,10] union null
 
 // @Test: DateTimeIntervalUnion
 define DateTimeFullInterval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 1, 0, 0, 0, 0)]

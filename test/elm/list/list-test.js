@@ -170,9 +170,9 @@ describe('Union', () => {
       .should.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
   });
 
-  it('should return null if either arg is null', function () {
-    should(this.unionNull.exec(this.ctx)).be.null();
-    should(this.nullUnion.exec(this.ctx)).be.null();
+  it('should return other list if either arg is null', function () {
+    should(this.unionNull.exec(this.ctx)).be.eql([1, 2, 3]);
+    should(this.nullUnion.exec(this.ctx)).be.eql([1, 2, 3]);
   });
 });
 
