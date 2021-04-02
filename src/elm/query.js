@@ -156,6 +156,26 @@ const toDistinctList = function (xList) {
   return yList;
 };
 
+class AggregateClause extends Expression {
+  constructor(json) {
+    super(json);
+    this.identifier = json.identifier;
+    this.expression = build(json.expression);
+    this.starting = json.starting ? build(json.starting) : null;
+    this.distinct = json.distinct != null ? json.distinct : true;
+  }
+
+  aggregate(returnedValues, ctx) {
+    let aggregateValue = this.starting != null ? this.starting.exec(ctx) : null;
+    returnedValues.forEach(contextValues => {
+      let childContext = ctx.childContext(contextValues);
+      childContext.set(this.identifier, aggregateValue);
+      aggregateValue = this.expression.exec(childContext);
+    });
+    return aggregateValue;
+  }
+}
+
 class Query extends Expression {
   constructor(json) {
     super(json);
@@ -164,8 +184,18 @@ class Query extends Expression {
     this.relationship = json.relationship != null ? build(json.relationship) : [];
     this.where = build(json.where);
     this.returnClause = json.return != null ? new ReturnClause(json.return) : null;
+    this.aggregateClause = json.aggregate != null ? new AggregateClause(json.aggregate) : null;
     this.aliases = this.sources.aliases();
     this.sortClause = json.sort != null ? new SortClause(json.sort) : null;
+  }
+
+  isDistinct() {
+    if (this.aggregateClause != null && this.aggregateClause.distinct != null) {
+      return this.aggregateClause.distinct;
+    } else if (this.returnClause != null && this.returnClause.distinct != null) {
+      return this.returnClause.distinct;
+    }
+    return true;
   }
 
   exec(ctx) {
@@ -185,7 +215,7 @@ class Query extends Expression {
           const val = this.returnClause.expression.execute(rctx);
           returnedValues.push(val);
         } else {
-          if (this.aliases.length === 1) {
+          if (this.aliases.length === 1 && this.aggregateClause == null) {
             returnedValues.push(rctx.get(this.aliases[0]));
           } else {
             returnedValues.push(rctx.context_values);
@@ -194,15 +224,18 @@ class Query extends Expression {
       }
     });
 
-    const distinct = this.returnClause != null ? this.returnClause.distinct : true;
-    if (distinct) {
+    if (this.isDistinct()) {
       returnedValues = toDistinctList(returnedValues);
+    }
+
+    if (this.aggregateClause != null) {
+      returnedValues = this.aggregateClause.aggregate(returnedValues, ctx);
     }
 
     if (this.sortClause != null) {
       this.sortClause.sort(ctx, returnedValues);
     }
-    if (this.sources.returnsList()) {
+    if (this.sources.returnsList() || this.aggregateClause != null) {
       return returnedValues;
     } else {
       return returnedValues[0];

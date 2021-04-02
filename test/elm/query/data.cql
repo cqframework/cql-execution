@@ -106,3 +106,38 @@ define nullQuery: asNull N
 //                        such that C.id is null
 define singleAliasReturnTuple: firstEncounter E return Tuple{a:1}
 define singleAliasReturnList: firstEncounter E return {'foo', 'bar', 'baz', 'bar'}
+
+// @Test: AggregateQuery
+
+define noStartingAggregation:
+ ({1,2,3,4,5}) R
+    aggregate T : Coalesce(T, 1) * R 
+
+define encounterPeriods: 
+  [Encounter] e 
+    return e.period 
+
+define expressionStartingAggregation:
+  encounterPeriods M
+    aggregate R starting (List{} as List<Interval<DateTime>>): R union ({
+      M X
+          let S: Max({ end of Last(R)+1 day, DateTime(1970,01,01)}),
+          E: start of X
+        return Interval[S, E]
+    })
+
+define literalStartingAggregation: 
+  ({1,2,3,4,5,1,2,3,4,5}) Num 
+    aggregate distinct str starting 'Start' : str + ToString(Num)
+
+define quantityStartingAggregation:
+ ({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'}) Num 
+  aggregate distinct Sum starting 0 'ml': Sum + Num 
+
+define allAggregation: 
+ ({1,2,3,4,5,1,2,3,4,5}) Num 
+  aggregate all Sum starting 0: Sum + Num 
+
+define distinctAggregation: 
+ ({1,2,3,4,5,1,2,3,4,5}) Num 
+  aggregate distinct Sum starting 0: Sum + Num 

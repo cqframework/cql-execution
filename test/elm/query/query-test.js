@@ -3,6 +3,9 @@ const setup = require('../../setup');
 const data = require('./data');
 const vsets = require('./valuesets');
 const { p1 } = require('./patients');
+const { Interval } = require('../../../src/datatypes/interval');
+const { DateTime } = require('../../../src/datatypes/datetime');
+const { Quantity } = require('../../../src/datatypes/quantity');
 
 describe('DateRangeOptimizedQuery', () => {
   beforeEach(function () {
@@ -318,5 +321,40 @@ describe('SingleObjectAlias', () => {
 
   it('should allow single source queries to be null and return null', function () {
     should.not.exist(this.nullQuery.exec(this.ctx));
+  });
+});
+
+describe('AggregateQuery', () => {
+  beforeEach(function () {
+    setup(this, data, [p1]);
+  });
+
+  it('should aggregate without a starting value', function () {
+    this.noStartingAggregation.exec(this.ctx).should.eql(120);
+  });
+
+  it('should be able to aggregate with an expression as the starting value', function () {
+    const ret = [
+      new Interval(new DateTime(1970, 1, 1), new DateTime(1978, 7, 15, 10, 0)),
+      new Interval(new DateTime(1978, 7, 16, 10, 0), new DateTime(1982, 3, 15, 15, 0)),
+      new Interval(new DateTime(1982, 3, 16, 15, 0), new DateTime(2013, 5, 23, 10, 0))
+    ];
+    this.expressionStartingAggregation.exec(this.ctx).should.eql(ret);
+  });
+
+  it('should be able to aggregate over distinct values', function () {
+    this.distinctAggregation.exec(this.ctx).should.eql(15);
+  });
+
+  it('should be able to aggregate over non-distinct values', function () {
+    this.allAggregation.exec(this.ctx).should.eql(30);
+  });
+
+  it('should be able to aggregate with a String as the starting value', function () {
+    this.literalStartingAggregation.exec(this.ctx).should.eql('Start12345');
+  });
+
+  it('should be able to aggregate with a Quantity as the starting value', function () {
+    this.quantityStartingAggregation.exec(this.ctx).should.eql(new Quantity(15, 'ml'));
   });
 });

@@ -10454,39 +10454,87 @@ var toDistinctList = function toDistinctList(xList) {
   return yList;
 };
 
-var Query = /*#__PURE__*/function (_Expression4) {
-  _inherits(Query, _Expression4);
+var AggregateClause = /*#__PURE__*/function (_Expression4) {
+  _inherits(AggregateClause, _Expression4);
 
-  var _super7 = _createSuper(Query);
+  var _super7 = _createSuper(AggregateClause);
 
-  function Query(json) {
+  function AggregateClause(json) {
     var _this7;
 
-    _classCallCheck(this, Query);
+    _classCallCheck(this, AggregateClause);
 
     _this7 = _super7.call(this, json);
-    _this7.sources = new MultiSource(json.source.map(function (s) {
-      return new AliasedQuerySource(s);
-    }));
-    _this7.letClauses = json.let != null ? json.let.map(function (d) {
-      return new LetClause(d);
-    }) : [];
-    _this7.relationship = json.relationship != null ? build(json.relationship) : [];
-    _this7.where = build(json.where);
-    _this7.returnClause = json.return != null ? new ReturnClause(json.return) : null;
-    _this7.aliases = _this7.sources.aliases();
-    _this7.sortClause = json.sort != null ? new SortClause(json.sort) : null;
+    _this7.identifier = json.identifier;
+    _this7.expression = build(json.expression);
+    _this7.starting = json.starting ? build(json.starting) : null;
+    _this7.distinct = json.distinct != null ? json.distinct : true;
     return _this7;
   }
 
+  _createClass(AggregateClause, [{
+    key: "aggregate",
+    value: function aggregate(returnedValues, ctx) {
+      var _this8 = this;
+
+      var aggregateValue = this.starting != null ? this.starting.exec(ctx) : null;
+      returnedValues.forEach(function (contextValues) {
+        var childContext = ctx.childContext(contextValues);
+        childContext.set(_this8.identifier, aggregateValue);
+        aggregateValue = _this8.expression.exec(childContext);
+      });
+      return aggregateValue;
+    }
+  }]);
+
+  return AggregateClause;
+}(Expression);
+
+var Query = /*#__PURE__*/function (_Expression5) {
+  _inherits(Query, _Expression5);
+
+  var _super8 = _createSuper(Query);
+
+  function Query(json) {
+    var _this9;
+
+    _classCallCheck(this, Query);
+
+    _this9 = _super8.call(this, json);
+    _this9.sources = new MultiSource(json.source.map(function (s) {
+      return new AliasedQuerySource(s);
+    }));
+    _this9.letClauses = json.let != null ? json.let.map(function (d) {
+      return new LetClause(d);
+    }) : [];
+    _this9.relationship = json.relationship != null ? build(json.relationship) : [];
+    _this9.where = build(json.where);
+    _this9.returnClause = json.return != null ? new ReturnClause(json.return) : null;
+    _this9.aggregateClause = json.aggregate != null ? new AggregateClause(json.aggregate) : null;
+    _this9.aliases = _this9.sources.aliases();
+    _this9.sortClause = json.sort != null ? new SortClause(json.sort) : null;
+    return _this9;
+  }
+
   _createClass(Query, [{
+    key: "isDistinct",
+    value: function isDistinct() {
+      if (this.aggregateClause != null && this.aggregateClause.distinct != null) {
+        return this.aggregateClause.distinct;
+      } else if (this.returnClause != null && this.returnClause.distinct != null) {
+        return this.returnClause.distinct;
+      }
+
+      return true;
+    }
+  }, {
     key: "exec",
     value: function exec(ctx) {
-      var _this8 = this;
+      var _this10 = this;
 
       var returnedValues = [];
       this.sources.forEach(ctx, function (rctx) {
-        var _iterator2 = _createForOfIteratorHelper(_this8.letClauses),
+        var _iterator2 = _createForOfIteratorHelper(_this10.letClauses),
             _step2;
 
         try {
@@ -10500,38 +10548,41 @@ var Query = /*#__PURE__*/function (_Expression4) {
           _iterator2.f();
         }
 
-        var relations = _this8.relationship.map(function (rel) {
+        var relations = _this10.relationship.map(function (rel) {
           var child_ctx = rctx.childContext();
           return rel.execute(child_ctx);
         });
 
-        var passed = allTrue(relations) && (_this8.where ? _this8.where.execute(rctx) : true);
+        var passed = allTrue(relations) && (_this10.where ? _this10.where.execute(rctx) : true);
 
         if (passed) {
-          if (_this8.returnClause != null) {
-            var val = _this8.returnClause.expression.execute(rctx);
+          if (_this10.returnClause != null) {
+            var val = _this10.returnClause.expression.execute(rctx);
 
             returnedValues.push(val);
           } else {
-            if (_this8.aliases.length === 1) {
-              returnedValues.push(rctx.get(_this8.aliases[0]));
+            if (_this10.aliases.length === 1 && _this10.aggregateClause == null) {
+              returnedValues.push(rctx.get(_this10.aliases[0]));
             } else {
               returnedValues.push(rctx.context_values);
             }
           }
         }
       });
-      var distinct = this.returnClause != null ? this.returnClause.distinct : true;
 
-      if (distinct) {
+      if (this.isDistinct()) {
         returnedValues = toDistinctList(returnedValues);
+      }
+
+      if (this.aggregateClause != null) {
+        returnedValues = this.aggregateClause.aggregate(returnedValues, ctx);
       }
 
       if (this.sortClause != null) {
         this.sortClause.sort(ctx, returnedValues);
       }
 
-      if (this.sources.returnsList()) {
+      if (this.sources.returnsList() || this.aggregateClause != null) {
         return returnedValues;
       } else {
         return returnedValues[0];
@@ -10542,19 +10593,19 @@ var Query = /*#__PURE__*/function (_Expression4) {
   return Query;
 }(Expression);
 
-var AliasRef = /*#__PURE__*/function (_Expression5) {
-  _inherits(AliasRef, _Expression5);
+var AliasRef = /*#__PURE__*/function (_Expression6) {
+  _inherits(AliasRef, _Expression6);
 
-  var _super8 = _createSuper(AliasRef);
+  var _super9 = _createSuper(AliasRef);
 
   function AliasRef(json) {
-    var _this9;
+    var _this11;
 
     _classCallCheck(this, AliasRef);
 
-    _this9 = _super8.call(this, json);
-    _this9.name = json.name;
-    return _this9;
+    _this11 = _super9.call(this, json);
+    _this11.name = json.name;
+    return _this11;
   }
 
   _createClass(AliasRef, [{
@@ -10570,12 +10621,12 @@ var AliasRef = /*#__PURE__*/function (_Expression5) {
 var QueryLetRef = /*#__PURE__*/function (_AliasRef) {
   _inherits(QueryLetRef, _AliasRef);
 
-  var _super9 = _createSuper(QueryLetRef);
+  var _super10 = _createSuper(QueryLetRef);
 
   function QueryLetRef(json) {
     _classCallCheck(this, QueryLetRef);
 
-    return _super9.call(this, json);
+    return _super10.call(this, json);
   }
 
   return QueryLetRef;
@@ -10615,17 +10666,17 @@ var MultiSource = /*#__PURE__*/function () {
   }, {
     key: "forEach",
     value: function forEach(ctx, func) {
-      var _this10 = this;
+      var _this12 = this;
 
       var records = this.expression.execute(ctx);
       this.isList = typeIsArray(records);
       records = this.isList ? records : [records];
       return records.map(function (rec) {
         var rctx = new Context(ctx);
-        rctx.set(_this10.alias, rec);
+        rctx.set(_this12.alias, rec);
 
-        if (_this10.rest) {
-          return _this10.rest.forEach(rctx, func);
+        if (_this12.rest) {
+          return _this12.rest.forEach(rctx, func);
         } else {
           return func(rctx);
         }
