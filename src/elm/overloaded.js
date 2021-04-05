@@ -67,7 +67,7 @@ class Union extends Expression {
       if (typeIsArray(notNull)) {
         return notNull;
       } else {
-        return null;
+        return [];
       }
     }
     const lib = typeIsArray(a) ? LIST : IVL;

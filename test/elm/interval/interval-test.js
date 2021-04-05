@@ -1568,8 +1568,8 @@ describe('IntegerIntervalUnion', () => {
   });
 
   it('should properly handle null unions', function () {
-    should(this.nullUnion.exec(this.ctx)).be.null();
-    should(this.unionNull.exec(this.ctx)).be.null();
+    this.nullUnion.exec(this.ctx).should.eql([]);
+    this.unionNull.exec(this.ctx).should.eql([]);
   });
 });
 

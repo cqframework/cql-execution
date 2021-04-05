@@ -9441,7 +9441,7 @@ var Union = /*#__PURE__*/function (_Expression4) {
         if (typeIsArray(notNull)) {
           return notNull;
         } else {
-          return null;
+          return [];
         }
       }
 
