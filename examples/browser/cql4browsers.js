@@ -9432,7 +9432,7 @@ var Union = /*#__PURE__*/function (_Expression4) {
           b = _this$execArgs4[1];
 
       if (a == null && b == null) {
-        return null;
+        return this.listTypeArgs() ? [] : null;
       }
 
       if (a == null || b == null) {
@@ -9441,12 +9441,19 @@ var Union = /*#__PURE__*/function (_Expression4) {
         if (typeIsArray(notNull)) {
           return notNull;
         } else {
-          return [];
+          return null;
         }
       }
 
       var lib = typeIsArray(a) ? LIST : IVL;
       return lib.doUnion(a, b);
+    }
+  }, {
+    key: "listTypeArgs",
+    value: function listTypeArgs() {
+      return this.args.every(function (arg) {
+        return arg.asTypeSpecifier != null && arg.asTypeSpecifier.type === 'ListTypeSpecifier';
+      });
     }
   }]);
 

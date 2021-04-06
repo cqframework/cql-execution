@@ -174,6 +174,10 @@ describe('Union', () => {
     should(this.unionNull.exec(this.ctx)).be.eql([1, 2, 3]);
     should(this.nullUnion.exec(this.ctx)).be.eql([1, 2, 3]);
   });
+
+  it('should return an empty list if both args are null but expected to be lists', function () {
+    this.nullUnionNull.exec(this.ctx).should.be.eql([]);
+  });
 });
 
 describe('Except', () => {
