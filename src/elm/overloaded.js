@@ -75,7 +75,7 @@ class Union extends Expression {
   }
 
   listTypeArgs() {
-    return this.args.every(arg => {
+    return this.args.some(arg => {
       return arg.asTypeSpecifier != null && arg.asTypeSpecifier.type === 'ListTypeSpecifier';
     });
   }

@@ -9451,7 +9451,7 @@ var Union = /*#__PURE__*/function (_Expression4) {
   }, {
     key: "listTypeArgs",
     value: function listTypeArgs() {
-      return this.args.every(function (arg) {
+      return this.args.some(function (arg) {
         return arg.asTypeSpecifier != null && arg.asTypeSpecifier.type === 'ListTypeSpecifier';
       });
     }
