@@ -3182,6 +3182,7 @@ define Disjoint: {1, 2} union {4, 5}
 define NestedToFifteen: {1, 2, 3} union {4, 5, 6} union {7 ,8 , 9} union {10, 11, 12} union {13, 14, 15}
 define NullUnion: null union {1, 2, 3}
 define UnionNull: {1, 2, 3} union null
+define nullUnionNull: (null as List<String>) union (null as List<String>)
 */
 
 module.exports['Union'] = {
@@ -3192,7 +3193,7 @@ module.exports['Union'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "86",
+            "r" : "96",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -3874,6 +3875,114 @@ module.exports['Union'] = {
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "96",
+            "name" : "nullUnionNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "96",
+                  "s" : [ {
+                     "value" : [ "","define ","nullUnionNull",": " ]
+                  }, {
+                     "r" : "95",
+                     "s" : [ {
+                        "r" : "90",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "90",
+                           "s" : [ {
+                              "r" : "87",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "89",
+                              "s" : [ {
+                                 "value" : [ "List<" ]
+                              }, {
+                                 "r" : "88",
+                                 "s" : [ {
+                                    "value" : [ "String" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ">" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ " union " ]
+                     }, {
+                        "r" : "94",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "94",
+                           "s" : [ {
+                              "r" : "91",
+                              "value" : [ "null"," as " ]
+                           }, {
+                              "r" : "93",
+                              "s" : [ {
+                                 "value" : [ "List<" ]
+                              }, {
+                                 "r" : "92",
+                                 "s" : [ {
+                                    "value" : [ "String" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ">" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "95",
+               "type" : "Union",
+               "operand" : [ {
+                  "localId" : "90",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "87",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "89",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "88",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }, {
+                  "localId" : "94",
+                  "strict" : false,
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "91",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "93",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "92",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   }

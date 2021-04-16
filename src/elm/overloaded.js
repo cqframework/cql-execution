@@ -59,11 +59,25 @@ class Union extends Expression {
 
   exec(ctx) {
     const [a, b] = this.execArgs(ctx);
+    if (a == null && b == null) {
+      return this.listTypeArgs() ? [] : null;
+    }
     if (a == null || b == null) {
-      return null;
+      const notNull = a || b;
+      if (typeIsArray(notNull)) {
+        return notNull;
+      } else {
+        return null;
+      }
     }
     const lib = typeIsArray(a) ? LIST : IVL;
     return lib.doUnion(a, b);
+  }
+
+  listTypeArgs() {
+    return this.args.some(arg => {
+      return arg.asTypeSpecifier != null && arg.asTypeSpecifier.type === 'ListTypeSpecifier';
+    });
   }
 }
 

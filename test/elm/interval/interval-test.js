@@ -1566,6 +1566,11 @@ describe('IntegerIntervalUnion', () => {
     const y = this.intEndsUnion.exec(this.ctx);
     y.equals(x).should.be.true();
   });
+
+  it('should properly handle null unions', function () {
+    should(this.nullUnion.exec(this.ctx)).be.null();
+    should(this.unionNull.exec(this.ctx)).be.null();
+  });
 });
 
 // TODO

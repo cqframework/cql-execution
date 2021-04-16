@@ -9431,12 +9431,29 @@ var Union = /*#__PURE__*/function (_Expression4) {
           a = _this$execArgs4[0],
           b = _this$execArgs4[1];
 
+      if (a == null && b == null) {
+        return this.listTypeArgs() ? [] : null;
+      }
+
       if (a == null || b == null) {
-        return null;
+        var notNull = a || b;
+
+        if (typeIsArray(notNull)) {
+          return notNull;
+        } else {
+          return null;
+        }
       }
 
       var lib = typeIsArray(a) ? LIST : IVL;
       return lib.doUnion(a, b);
+    }
+  }, {
+    key: "listTypeArgs",
+    value: function listTypeArgs() {
+      return this.args.some(function (arg) {
+        return arg.asTypeSpecifier != null && arg.asTypeSpecifier.type === 'ListTypeSpecifier';
+      });
     }
   }]);
 

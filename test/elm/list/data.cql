@@ -44,6 +44,8 @@ define Disjoint: {1, 2} union {4, 5}
 define NestedToFifteen: {1, 2, 3} union {4, 5, 6} union {7 ,8 , 9} union {10, 11, 12} union {13, 14, 15}
 define NullUnion: null union {1, 2, 3}
 define UnionNull: {1, 2, 3} union null
+define nullUnionNull: (null as List<String>) union (null as List<String>)
+
 
 // @Test: Except
 define ExceptThreeFour: {1, 2, 3, 4, 5} except {3, 4}
