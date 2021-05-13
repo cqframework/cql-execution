@@ -239,9 +239,10 @@ class ToTime extends Expression {
       const timeString = arg.toString();
       // Return null if string doesn't represent a valid ISO-8601 Time
       // hh:mm:ss.fff or hh:mm:ss.fff
-      const matches = /^T?((\d{2})(:(\d{2})(:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(:?(\d{2}))?))?$/.exec(
-        timeString
-      );
+      const matches =
+        /^T?((\d{2})(:(\d{2})(:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(:?(\d{2}))?))?$/.exec(
+          timeString
+        );
       if (matches == null) {
         return null;
       }
