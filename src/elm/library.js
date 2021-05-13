@@ -60,6 +60,15 @@ class Library {
         this.includes[incl.localIdentifier] = libraryManager.resolve(incl.path, incl.version);
       }
     }
+
+    // Include codesystems from includes
+    for (const iProperty in this.includes){
+      if (this.includes[iProperty].codesystems){
+        for (const csProperty in this.includes[iProperty].codesystems) {
+          this.codesystems[csProperty] = this.includes[iProperty].codesystems[csProperty];
+        }
+      }
+    }
   }
 
   getFunction(identifier) {
