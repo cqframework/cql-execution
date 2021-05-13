@@ -27,7 +27,7 @@ describe('Using CommonLib', () => {
     setup(this, data, [p1, p2], {}, {}, new Repository(data));
   });
 
-  it ('should include codesystems from CommonLib', function () {
+  it('should include codesystems from CommonLib', function () {
     let codesystems = this.lib.codesystems;
     codesystems.should.not.be.empty();
   });
@@ -154,8 +154,8 @@ describe('Using CommonLib and CommonLib2', () => {
   });
 
   it('should contain SortUsingFunction localId in the localIdMap', function () {
-    const sortUsingFunctionLocalId = this.lib.includes.common2.expressions.SortUsingFunction
-      .localId;
+    const sortUsingFunctionLocalId =
+      this.lib.includes.common2.expressions.SortUsingFunction.localId;
     should.exist(this.common2LocalIdObject[sortUsingFunctionLocalId]);
   });
 });
