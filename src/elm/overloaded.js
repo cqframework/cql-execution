@@ -347,7 +347,7 @@ class Precision extends Expression {
     if (!arg.getPrecisionValue) {
       throw new Error(`Unimplemented Expression: Precision`);
     }
-    
+
     return arg.getPrecisionValue();
   }
 }
