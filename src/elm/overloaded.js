@@ -330,6 +330,28 @@ class SameOrBefore extends Expression {
   }
 }
 
+// Implemented for DateTime, Date, and Time but not for Decimal yet
+class Precision extends Expression {
+  constructor(json) {
+    super(json);
+  }
+
+  exec(ctx) {
+    const arg = this.execArgs(ctx);
+    if (arg == null) {
+      return null;
+    }
+
+    // Since we can't extend UnimplementedExpression directly for this overloaded function,
+    // we have to copy the error to throw here if we are not using the correct type
+    if (!arg.getPrecisionValue) {
+      throw new Error(`Unimplemented Expression: Precision`);
+    }
+    
+    return arg.getPrecisionValue();
+  }
+}
+
 module.exports = {
   After,
   Before,
@@ -344,6 +366,7 @@ module.exports = {
   Intersect,
   Length,
   NotEqual,
+  Precision,
   ProperIncludedIn,
   ProperIncludes,
   SameAs,

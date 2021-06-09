@@ -342,6 +342,25 @@ class DateTime {
     return result;
   }
 
+  getPrecisionValue() {
+    const precisionValueMap = new Map();
+    if (this.isTime()) {
+      precisionValueMap.set(DateTime.Unit.HOUR, 2);
+      precisionValueMap.set(DateTime.Unit.MINUTE, 4);
+      precisionValueMap.set(DateTime.Unit.SECOND, 6);
+      precisionValueMap.set(DateTime.Unit.MILLISECOND, 9);
+    } else {
+      precisionValueMap.set(DateTime.Unit.YEAR, 4);
+      precisionValueMap.set(DateTime.Unit.MONTH, 6);
+      precisionValueMap.set(DateTime.Unit.DAY, 8);
+      precisionValueMap.set(DateTime.Unit.HOUR, 10);
+      precisionValueMap.set(DateTime.Unit.MINUTE, 12);
+      precisionValueMap.set(DateTime.Unit.SECOND, 14);
+      precisionValueMap.set(DateTime.Unit.MILLISECOND, 17);
+    }
+    return precisionValueMap.get(this.getPrecision());
+  }
+
   toLuxonDateTime() {
     const offsetMins =
       this.timezoneOffset != null
@@ -621,6 +640,14 @@ class Date {
       return result;
     }
     return result;
+  }
+
+  getPrecisionValue() {
+    const precisionValueMap = new Map();
+    precisionValueMap.set(DateTime.Unit.YEAR, 4);
+    precisionValueMap.set(DateTime.Unit.MONTH, 6);
+    precisionValueMap.set(DateTime.Unit.DAY, 8);
+    return precisionValueMap.get(this.getPrecision());
   }
 
   toLuxonDateTime() {
