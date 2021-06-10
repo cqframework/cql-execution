@@ -343,22 +343,9 @@ class DateTime {
   }
 
   getPrecisionValue() {
-    const precisionValueMap = new Map();
-    if (this.isTime()) {
-      precisionValueMap.set(DateTime.Unit.HOUR, 2);
-      precisionValueMap.set(DateTime.Unit.MINUTE, 4);
-      precisionValueMap.set(DateTime.Unit.SECOND, 6);
-      precisionValueMap.set(DateTime.Unit.MILLISECOND, 9);
-    } else {
-      precisionValueMap.set(DateTime.Unit.YEAR, 4);
-      precisionValueMap.set(DateTime.Unit.MONTH, 6);
-      precisionValueMap.set(DateTime.Unit.DAY, 8);
-      precisionValueMap.set(DateTime.Unit.HOUR, 10);
-      precisionValueMap.set(DateTime.Unit.MINUTE, 12);
-      precisionValueMap.set(DateTime.Unit.SECOND, 14);
-      precisionValueMap.set(DateTime.Unit.MILLISECOND, 17);
-    }
-    return precisionValueMap.get(this.getPrecision());
+    return this.isTime()
+      ? TIME_PRECISION_VALUE_MAP.get(this.getPrecision())
+      : DATETIME_PRECISION_VALUE_MAP.get(this.getPrecision());
   }
 
   toLuxonDateTime() {
@@ -643,11 +630,7 @@ class Date {
   }
 
   getPrecisionValue() {
-    const precisionValueMap = new Map();
-    precisionValueMap.set(DateTime.Unit.YEAR, 4);
-    precisionValueMap.set(DateTime.Unit.MONTH, 6);
-    precisionValueMap.set(DateTime.Unit.DAY, 8);
-    return precisionValueMap.get(this.getPrecision());
+    return DATETIME_PRECISION_VALUE_MAP.get(this.getPrecision());
   }
 
   toLuxonDateTime() {
@@ -741,6 +724,27 @@ const MAX_TIME_VALUE = DateTime.parse('0000-01-01T23:59:59.999').getTime();
 
 Date.Unit = { YEAR: 'year', MONTH: 'month', WEEK: 'week', DAY: 'day' };
 Date.FIELDS = [Date.Unit.YEAR, Date.Unit.MONTH, Date.Unit.DAY];
+
+const DATETIME_PRECISION_VALUE_MAP = (() => {
+  const dtpvMap = new Map();
+  dtpvMap.set(DateTime.Unit.YEAR, 4);
+  dtpvMap.set(DateTime.Unit.MONTH, 6);
+  dtpvMap.set(DateTime.Unit.DAY, 8);
+  dtpvMap.set(DateTime.Unit.HOUR, 10);
+  dtpvMap.set(DateTime.Unit.MINUTE, 12);
+  dtpvMap.set(DateTime.Unit.SECOND, 14);
+  dtpvMap.set(DateTime.Unit.MILLISECOND, 17);
+  return dtpvMap;
+})();
+
+const TIME_PRECISION_VALUE_MAP = (() => {
+  const tpvMap = new Map();
+  tpvMap.set(DateTime.Unit.HOUR, 2);
+  tpvMap.set(DateTime.Unit.MINUTE, 4);
+  tpvMap.set(DateTime.Unit.SECOND, 6);
+  tpvMap.set(DateTime.Unit.MILLISECOND, 9);
+  return tpvMap;
+})();
 
 // Shared Funtions For Date and DateTime
 DateTime.prototype.isPrecise = Date.prototype.isPrecise = function () {
