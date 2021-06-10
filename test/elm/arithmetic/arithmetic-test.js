@@ -913,6 +913,8 @@ describe('OutOfBounds', () => {
     it('should return null for predecessor underflow', function () {
       should(this.dateTimePredecessorUnderflow.exec(this.ctx)).be.null();
     });
+
+    // Tests for Precision are include in the spec tests
   });
 
   describe('Date', () => {
@@ -945,6 +947,8 @@ describe('OutOfBounds', () => {
     it('should return null for predecessor underflow', function () {
       should(this.datePredecessorUnderflow.exec(this.ctx)).be.null();
     });
+
+    // Tests for Precision are include in the spec tests
   });
 
   describe('Time', () => {
@@ -971,6 +975,8 @@ describe('OutOfBounds', () => {
     it('should return null for predecessor underflow', function () {
       should(this.timePredecessorUnderflow.exec(this.ctx)).be.null();
     });
+
+    // Tests for Precision are include in the spec tests
   });
 
   it('Exp should return null for overflow', function () {

@@ -507,35 +507,27 @@ define "Negate": Tuple{
 
 define "Precision": Tuple{
   "PrecisionDecimal": Tuple{
-    skipped: 'Precision not implemented'
+    skipped: 'Precision for Decimal not implemented'
     /*
     expression: Precision(1.58700),
     output: 5
     */  },
   "PrecisionYear": Tuple{
-    skipped: 'Precision not implemented'
-    /*
     expression: Precision(@2014),
     output: 4
-    */  },
+  },
   "PrecisionDateTimeMilliseconds": Tuple{
-    skipped: 'Precision not implemented'
-    /*
     expression: Precision(@2014-01-05T10:30:00.000),
     output: 17
-    */  },
+  },
   "PrecisionTimeMinutes": Tuple{
-    skipped: 'Precision not implemented'
-    /*
     expression: Precision(@T10:30),
     output: 4
-    */  },
+  },
   "PrecisionTimeMilliseconds": Tuple{
-    skipped: 'Precision not implemented'
-    /*
     expression: Precision(@T10:30:00.000),
     output: 9
-    */  }
+  }
 }
 
 define "Predecessor": Tuple{

@@ -48,17 +48,17 @@ ValueLiteralsAndSelectors.Decimal.DecimalNeg2Pow31ToInf1    Underflows because i
 
 # Unimplemented
 
-CqlArithmeticFunctionsTest.HighBoundary   HighBoundary not implemented
-CqlArithmeticFunctionsTest.LowBoundary    LowBoundary not implemented
-CqlArithmeticFunctionsTest.Precision      Precision not implemented
-CqlErrorsAndMessagingOperatorsTest        Message not implemented
-CqlIntervalOperatorsTest.PointFrom        PointFrom not implemented
-CqlIntervalOperatorsTest.ProperContains   ProperContains not implemented
-CqlIntervalOperatorsTest.ProperIn         ProperIn not implemented
-CqlListOperatorsTest.Sort                 Sort not implemented
-CqlListOperatorsTest.Descendents          Descendents not implemented
-CqlListOperatorsTest.ProperContains       ProperContains not implemented
-CqlListOperatorsTest.ProperIn             ProperIn not implemented
+CqlArithmeticFunctionsTest.HighBoundary                 HighBoundary not implemented
+CqlArithmeticFunctionsTest.LowBoundary                  LowBoundary not implemented
+CqlArithmeticFunctionsTest.Precision.PrecisionDecimal   Precision for Decimal not implemented
+CqlErrorsAndMessagingOperatorsTest                      Message not implemented
+CqlIntervalOperatorsTest.PointFrom                      PointFrom not implemented
+CqlIntervalOperatorsTest.ProperContains                 ProperContains not implemented
+CqlIntervalOperatorsTest.ProperIn                       ProperIn not implemented
+CqlListOperatorsTest.Sort                               Sort not implemented
+CqlListOperatorsTest.Descendents                        Descendents not implemented
+CqlListOperatorsTest.ProperContains                     ProperContains not implemented
+CqlListOperatorsTest.ProperIn                           ProperIn not implemented
 
 # Unimplemented (New in CQL 1.5)
 CqlArithmeticFunctionsTest.Abs.AbsLong                                Long not implemented

@@ -440,7 +440,7 @@ class Successor extends Expression {
   exec(ctx) {
     const arg = this.execArgs(ctx);
     if (arg == null) {
-      null;
+      return null;
     }
 
     let successor = null;
@@ -469,7 +469,7 @@ class Predecessor extends Expression {
   exec(ctx) {
     const arg = this.execArgs(ctx);
     if (arg == null) {
-      null;
+      return null;
     }
 
     let predecessor = null;

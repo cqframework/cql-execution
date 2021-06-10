@@ -3923,3 +3923,49 @@ describe('DateTime.reducedPrecision', () => {
     reduced.millisecond.should.equal(456);
   });
 });
+
+describe('DateTime.getPrecisionValue', () => {
+  it('should properly get precision value for years', () => {
+    DateTime.parse('2012').getPrecisionValue().should.equal(4);
+  });
+
+  it('should properly get precision value for months', () => {
+    DateTime.parse('2012-10').getPrecisionValue().should.equal(6);
+  });
+
+  it('should properly get precision value for days', () => {
+    DateTime.parse('2012-10-25').getPrecisionValue().should.equal(8);
+  });
+
+  it('should properly get precision value for hours', () => {
+    DateTime.parse('2012-10-25T12').getPrecisionValue().should.equal(10);
+  });
+
+  it('should properly get precision value for minutes', () => {
+    DateTime.parse('2012-10-25T12:55').getPrecisionValue().should.equal(12);
+  });
+
+  it('should properly get precision value for seconds', () => {
+    DateTime.parse('2012-10-25T12:55:14').getPrecisionValue().should.equal(14);
+  });
+
+  it('should properly get precision value for milliseconds', () => {
+    DateTime.parse('2012-10-25T12:55:14.456').getPrecisionValue().should.equal(17);
+  });
+
+  it('should properly get time precision value for hours', () => {
+    DateTime.parse('0000-01-01T12').getPrecisionValue().should.equal(2);
+  });
+
+  it('should properly get time precision value for minutes', () => {
+    DateTime.parse('0000-01-01T12:55').getPrecisionValue().should.equal(4);
+  });
+
+  it('should properly get time precision value for seconds', () => {
+    DateTime.parse('0000-01-01T12:55:14').getPrecisionValue().should.equal(6);
+  });
+
+  it('should properly get time precision value for milliseconds', () => {
+    DateTime.parse('0000-01-01T12:55:14.456').getPrecisionValue().should.equal(9);
+  });
+});
