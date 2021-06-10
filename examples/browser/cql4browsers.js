@@ -898,6 +898,11 @@ var DateTime = /*#__PURE__*/function () {
       return result;
     }
   }, {
+    key: "getPrecisionValue",
+    value: function getPrecisionValue() {
+      return this.isTime() ? TIME_PRECISION_VALUE_MAP.get(this.getPrecision()) : DATETIME_PRECISION_VALUE_MAP.get(this.getPrecision());
+    }
+  }, {
     key: "toLuxonDateTime",
     value: function toLuxonDateTime() {
       var offsetMins = this.timezoneOffset != null ? this.timezoneOffset * 60 : new jsDate().getTimezoneOffset() * -1;
@@ -1274,6 +1279,11 @@ var Date = /*#__PURE__*/function () {
       return result;
     }
   }, {
+    key: "getPrecisionValue",
+    value: function getPrecisionValue() {
+      return DATETIME_PRECISION_VALUE_MAP.get(this.getPrecision());
+    }
+  }, {
     key: "toLuxonDateTime",
     value: function toLuxonDateTime() {
       return luxon.DateTime.fromObject({
@@ -1426,7 +1436,29 @@ Date.Unit = {
   WEEK: 'week',
   DAY: 'day'
 };
-Date.FIELDS = [Date.Unit.YEAR, Date.Unit.MONTH, Date.Unit.DAY]; // Shared Funtions For Date and DateTime
+Date.FIELDS = [Date.Unit.YEAR, Date.Unit.MONTH, Date.Unit.DAY];
+
+var DATETIME_PRECISION_VALUE_MAP = function () {
+  var dtpvMap = new Map();
+  dtpvMap.set(DateTime.Unit.YEAR, 4);
+  dtpvMap.set(DateTime.Unit.MONTH, 6);
+  dtpvMap.set(DateTime.Unit.DAY, 8);
+  dtpvMap.set(DateTime.Unit.HOUR, 10);
+  dtpvMap.set(DateTime.Unit.MINUTE, 12);
+  dtpvMap.set(DateTime.Unit.SECOND, 14);
+  dtpvMap.set(DateTime.Unit.MILLISECOND, 17);
+  return dtpvMap;
+}();
+
+var TIME_PRECISION_VALUE_MAP = function () {
+  var tpvMap = new Map();
+  tpvMap.set(DateTime.Unit.HOUR, 2);
+  tpvMap.set(DateTime.Unit.MINUTE, 4);
+  tpvMap.set(DateTime.Unit.SECOND, 6);
+  tpvMap.set(DateTime.Unit.MILLISECOND, 9);
+  return tpvMap;
+}(); // Shared Funtions For Date and DateTime
+
 
 DateTime.prototype.isPrecise = Date.prototype.isPrecise = function () {
   var _this = this;
@@ -4912,7 +4944,7 @@ var Successor = /*#__PURE__*/function (_Expression19) {
       var arg = this.execArgs(ctx);
 
       if (arg == null) {
-        null;
+        return null;
       }
 
       var successor = null;
@@ -4955,7 +4987,7 @@ var Predecessor = /*#__PURE__*/function (_Expression20) {
       var arg = this.execArgs(ctx);
 
       if (arg == null) {
-        null;
+        return null;
       }
 
       var predecessor = null;
@@ -9986,6 +10018,40 @@ var SameOrBefore = /*#__PURE__*/function (_Expression19) {
   }]);
 
   return SameOrBefore;
+}(Expression); // Implemented for DateTime, Date, and Time but not for Decimal yet
+
+
+var Precision = /*#__PURE__*/function (_Expression20) {
+  _inherits(Precision, _Expression20);
+
+  var _super20 = _createSuper(Precision);
+
+  function Precision(json) {
+    _classCallCheck(this, Precision);
+
+    return _super20.call(this, json);
+  }
+
+  _createClass(Precision, [{
+    key: "exec",
+    value: function exec(ctx) {
+      var arg = this.execArgs(ctx);
+
+      if (arg == null) {
+        return null;
+      } // Since we can't extend UnimplementedExpression directly for this overloaded function,
+      // we have to copy the error to throw here if we are not using the correct type
+
+
+      if (!arg.getPrecisionValue) {
+        throw new Error("Unimplemented Expression: Precision");
+      }
+
+      return arg.getPrecisionValue();
+    }
+  }]);
+
+  return Precision;
 }(Expression);
 
 module.exports = {
@@ -10002,6 +10068,7 @@ module.exports = {
   Intersect: Intersect,
   Length: Length,
   NotEqual: NotEqual,
+  Precision: Precision,
   ProperIncludedIn: ProperIncludedIn,
   ProperIncludes: ProperIncludes,
   SameAs: SameAs,

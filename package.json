@@ -80,8 +80,7 @@
     "luxon": "^1.25.0"
   },
   "resolutions": {
-    "minimist": "^1.2.5",
-    "lodash": "^4.17.19"
+    "glob-parent": "^5.1.2"
   },
   "main": "lib/cql",
   "directories": {

@@ -822,3 +822,17 @@ describe('Date.reducedPrecision', () => {
     reduced.day.should.equal(25);
   });
 });
+
+describe('Date.getPrecisionValue', () => {
+  it('should properly get precision value for years', () => {
+    Date.parse('2012').getPrecisionValue().should.equal(4);
+  });
+
+  it('should properly get precision value for months', () => {
+    Date.parse('2012-10').getPrecisionValue().should.equal(6);
+  });
+
+  it('should properly get precision value for days', () => {
+    Date.parse('2012-10-25').getPrecisionValue().should.equal(8);
+  });
+});
