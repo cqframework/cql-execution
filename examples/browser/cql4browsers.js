@@ -8137,11 +8137,20 @@ var Library = /*#__PURE__*/function () {
         if (libraryManager) {
           this.includes[incl.localIdentifier] = libraryManager.resolve(incl.path, incl.version);
         }
-      }
+      } // Include codesystems from includes
+
     } catch (err) {
       _iterator7.e(err);
     } finally {
       _iterator7.f();
+    }
+
+    for (var iProperty in this.includes) {
+      if (this.includes[iProperty].codesystems) {
+        for (var csProperty in this.includes[iProperty].codesystems) {
+          this.codesystems[csProperty] = this.includes[iProperty].codesystems[csProperty];
+        }
+      }
     }
   }
 
