@@ -27,6 +27,11 @@ describe('Using CommonLib', () => {
     setup(this, data, [p1, p2], {}, {}, new Repository(data));
   });
 
+  it('should include codesystems from CommonLib', function () {
+    let codesystems = this.lib.codesystems;
+    codesystems.should.not.be.empty();
+  });
+
   it('should have using models defined', function () {
     this.lib.usings.should.not.be.empty();
     this.lib.usings.length.should.equal(1);
