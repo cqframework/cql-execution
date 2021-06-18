@@ -12,6 +12,7 @@ const interval = require('./interval');
 const list = require('./list');
 const literal = require('./literal');
 const logical = require('./logical');
+const message = require('./message');
 const nullological = require('./nullological');
 const parameters = require('./parameters');
 const quantity = require('./quantity');
@@ -38,6 +39,7 @@ const libs = [
   list,
   literal,
   logical,
+  message,
   nullological,
   parameters,
   query,
