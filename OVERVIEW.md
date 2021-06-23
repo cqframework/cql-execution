@@ -97,7 +97,7 @@ onMessage(source, code, severity, message) {
   // do something with the message
 }
 ```
-The `source` argument may be of any type (depending on where the `Message` operator is used in the CQL), but the `code`, `severity`, and `message` arguments are all strings. According the the specification, the `source` argument is supplied for messages w/ Trace severity and implementers should take care to ensure that no PII or PHI is logged as part of the trace message. The CQL execution framework does not redact any PII/PHI, so it is up to the implementer of the MessageListener to ensure appropriate precautions are taken.
+The `source` argument may be of any type (depending on where the `Message` operator is used in the CQL), but the `code`, `severity`, and `message` arguments are all strings. According to the specification, the `source` argument is supplied for messages w/ Trace severity and implementers should take care to ensure that no PII or PHI is logged as part of the trace message. The CQL execution framework does not redact any PII/PHI, so it is up to the implementer of the MessageListener to ensure appropriate precautions are taken.
 
 Implementers are encouraged to supply their own MessageListener, but the CQL execution framework exports two basic MessageListener classes: `NullMessageListener`, and `ConsoleMessageListener`. The `NullMessageListener` does nothing and is mainly used internally when no other MessageListener is supplied.  The `ConsoleMessageListener` logs Trace, Message, and Warning messages to stdout, and logs Error messages to stderr. It also take a boolean argument to indicate if Trace messages should log the source (as JSON); this defaults to `false` and should only be set to `true` in test environments using synthetic data.
 
