@@ -73,6 +73,7 @@
     "nyc": "^15.1.0",
     "prettier": "^2.1.1",
     "should": "^13.2.3",
+    "test-console": "^2.0.0",
     "xml-js": "^1.6.11"
   },
   "dependencies": {

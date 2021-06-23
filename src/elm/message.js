@@ -18,7 +18,10 @@ class Message extends Expression {
       const code = this.code.execute(ctx);
       const severity = this.severity.execute(ctx);
       const message = this.message.execute(ctx);
-      console.log(`${severity}: [${code}] ${message}`);
+      const listener = ctx.getMessageListener();
+      if (listener && typeof listener.onMessage === 'function') {
+        listener.onMessage(source, code, severity, message);
+      }
     }
     return source;
   }

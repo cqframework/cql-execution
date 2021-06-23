@@ -1,9 +1,10 @@
 const { Exception } = require('../datatypes/exception');
 const { typeIsArray } = require('../util/util');
+const { NullMessageListener } = require('./messageListeners');
 const dt = require('../datatypes/datatypes');
 
 class Context {
-  constructor(parent, _codeService = null, _parameters = {}) {
+  constructor(parent, _codeService, _parameters, executionDateTime, messageListener) {
     this.parent = parent;
     this._codeService = _codeService;
     this.context_values = {};
@@ -12,7 +13,9 @@ class Context {
     this.evaluatedRecords = [];
     // TODO: If there is an issue with number of parameters look into cql4browsers fix: 387ea77538182833283af65e6341e7a05192304c
     this.checkParameters(_parameters); // not crazy about possibly throwing an error in a constructor, but...
-    this._parameters = _parameters;
+    this._parameters = _parameters || {};
+    this.executionDateTime = executionDateTime;
+    this.messageListener = messageListener;
   }
 
   get parameters() {
@@ -99,6 +102,16 @@ class Context {
       return this.parent.getExecutionDateTime();
     } else {
       throw new Exception('No Execution DateTime has been set');
+    }
+  }
+
+  getMessageListener() {
+    if (this.messageListener != null) {
+      return this.messageListener;
+    } else if (this.parent && this.parent.getMessageListener != null) {
+      return this.parent.getMessageListener();
+    } else {
+      return new NullMessageListener();
     }
   }
 
@@ -383,12 +396,12 @@ class PatientContext extends Context {
     patient,
     codeService,
     parameters,
-    executionDateTime = dt.DateTime.fromJSDate(new Date())
+    executionDateTime = dt.DateTime.fromJSDate(new Date()),
+    messageListener = new NullMessageListener()
   ) {
-    super(library, codeService, parameters);
+    super(library, codeService, parameters, executionDateTime, messageListener);
     this.library = library;
     this.patient = patient;
-    this.executionDateTime = executionDateTime;
   }
 
   rootContext() {
@@ -432,12 +445,12 @@ class UnfilteredContext extends Context {
     results,
     codeService,
     parameters,
-    executionDateTime = dt.DateTime.fromJSDate(new Date())
+    executionDateTime = dt.DateTime.fromJSDate(new Date()),
+    messageListener = new NullMessageListener()
   ) {
-    super(library, codeService, parameters);
+    super(library, codeService, parameters, executionDateTime, messageListener);
     this.library = library;
     this.results = results;
-    this.executionDateTime = executionDateTime;
   }
 
   rootContext() {

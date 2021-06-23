@@ -3,6 +3,7 @@ const expression = require('./elm/expression');
 const repository = require('./runtime/repository');
 const context = require('./runtime/context');
 const exec = require('./runtime/executor');
+const listeners = require('./runtime/messageListeners');
 const results = require('./runtime/results');
 const datatypes = require('./datatypes/datatypes');
 const patient = require('./cql-patient');
@@ -19,6 +20,8 @@ module.exports.Executor = exec.Executor;
 module.exports.PatientContext = context.PatientContext;
 module.exports.UnfilteredContext = context.UnfilteredContext;
 module.exports.Results = results.Results;
+module.exports.ConsoleMessageListener = listeners.ConsoleMessageListener;
+module.exports.NullMessageListener = listeners.NullMessageListener;
 
 // PatientSource-related classes
 module.exports.Patient = patient.Patient;

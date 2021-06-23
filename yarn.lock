@@ -4347,6 +4347,11 @@ table@^6.0.4:
     slice-ansi "^4.0.0"
     string-width "^4.2.0"
 
+test-console@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/test-console/-/test-console-2.0.0.tgz#a279f7e2e148815224d8446ffa5208f0077d68fb"
+  integrity sha512-ciILzfCQCny8zy1+HEw2yBLKus7LNMsAHymsp2fhvGTVh5pWE5v2EB7V+5ag3WM9aO2ULtgsXVQePWYE+fb7pA==
+
 test-exclude@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/test-exclude/-/test-exclude-6.0.0.tgz#04a8698661d805ea6fa293b6cb9e63ac044ef15e"

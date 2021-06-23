@@ -89,6 +89,18 @@ Ideally, a `PatientSource` should provide the pre-filtered set of patients, base
 
 In order for the CQL execution framework to determine if a code is in a valueset, it must be able to resolve the valueset to a list of codes. Valueset resolution always occurs through a `CodeService` class, allowing the actual backend implementation to be replaced with another implementation. In the current reference implementation, the CodeService is loaded with a static JSON map of valuesets and codes, usually from a flat file. In an ideal implementation, the CodeService should access a local database of valuesets or an API to a valueset service.
 
+### MessageListener
+
+The CQL specification defines a [Message](https://cql.hl7.org/09-b-cqlreference.html#message) operator that "provides a run-time mechanism for returning messages, warnings, traces, and errors to the calling environment." To support this, the CQL execution framework supports a "MessageListener" API. A MessageListener class must contain an `onMessage` function which will be called by the CQL execution framework if the `condition` passed to the `Message` operator is `true`:
+```js
+onMessage(source, code, severity, message) {
+  // do something with the message
+}
+```
+The `source` argument may be of any type (depending on where the `Message` operator is used in the CQL), but the `code`, `severity`, and `message` arguments are all strings. According the the specification, the `source` argument is supplied for messages w/ Trace severity and implementers should take care to ensure that no PII or PHI is logged as part of the trace message. The CQL execution framework does not redact any PII/PHI, so it is up to the implementer of the MessageListener to ensure appropriate precautions are taken.
+
+Implementers are encouraged to supply their own MessageListener, but the CQL execution framework exports two basic MessageListener classes: `NullMessageListener`, and `ConsoleMessageListener`. The `NullMessageListener` does nothing and is mainly used internally when no other MessageListener is supplied.  The `ConsoleMessageListener` logs Trace, Message, and Warning messages to stdout, and logs Error messages to stderr. It also take a boolean argument to indicate if Trace messages should log the source (as JSON); this defaults to `false` and should only be set to `true` in test environments using synthetic data.
+
 ### Executor
 
 The CQL execution framework provides a basic Executor class for executing a cql document over a PatientSource. An instance of the Executor class provides a wrapping element around a Library instance, a CodeService instance (if required) and a set of CQL input parameters. Once configured, an Executor class can be used multiple times to execute over an arbitary number of PatientSource instances.
@@ -107,6 +119,7 @@ const measure = require('./example-measure');
 const lib = new cql.Library(measure);
 const patientSource = new cql.PatientSource(patients);
 const codeService = new cql.CodeService(valuesets);
+const messageListener = new cql.ConsoleMessageListener();
 
 const parameters = {
   MeasurementPeriod : new cql.Interval(
@@ -117,11 +130,11 @@ const parameters = {
   );
 };
 
-const executor = new cql.Executor(lib, codeService, parameters);
+const executor = new cql.Executor(lib, codeService, parameters, messageListener);
 const result = executor.exec(patientSource);
 ```
 
-The first line imports the CQL execution framework library, while the next three lines import the measure JSON ELM, patient data, and valueset data. The next three lines then construct the CQL `Library`, `PatientSource`, and `CodeService` using the imported data. The `parameters` definition overrides the `"MeasurementPeriod"` parameter with an interval representing the entire year of 2013. Finally, the last two lines construct an Executor object that will execute the cql document against the supplied PatientSource.
+The first line imports the CQL execution framework library, while the next three lines import the measure JSON ELM, patient data, and valueset data. The next three lines then construct the CQL `Library`, `PatientSource`, and `CodeService` using the imported data. The `messageListener` definition sets up console logging for CQL `Message` operators. The `parameters` definition overrides the `"MeasurementPeriod"` parameter with an interval representing the entire year of 2013. Finally, the last two lines construct an Executor object that will execute the cql document against the supplied PatientSource.
 
 The result of the execution is a CQL `Results` object containing a list of patients and their calculated values for each named expression in the `Patient` context. If the library contained a `Unfiltered` context, the calculated value of the named expressions for the `Unfiltered` will be included in the `Results` as well.
 
