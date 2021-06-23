@@ -1,4 +1,11 @@
-const { Library, PatientSource, CodeService, PatientContext, Executor } = require('../src/cql');
+const {
+  Library,
+  PatientSource,
+  CodeService,
+  PatientContext,
+  Executor,
+  NullMessageListener
+} = require('../src/cql');
 
 module.exports = function (
   test,
@@ -13,7 +20,7 @@ module.exports = function (
     const cservice = new CodeService(valuesets);
     const psource = new PatientSource(patients);
     test.ctx = new PatientContext(test.lib, psource.currentPatient(), cservice, parameters);
-    test.executor = new Executor(test.lib, cservice, parameters);
+    test.executor = new Executor(test.lib, cservice, parameters, new NullMessageListener());
     test.patientSource = psource;
     for (let k in test.lib.valuesets) {
       const v = test.lib.valuesets[k];

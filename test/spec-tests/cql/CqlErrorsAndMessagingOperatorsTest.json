@@ -50,10 +50,40 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Message not implemented",
+                           "type" : "Message",
+                           "source" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "1",
+                              "type" : "Literal"
+                           },
+                           "condition" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           },
+                           "code" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "100",
+                              "type" : "Literal"
+                           },
+                           "severity" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "Message",
+                              "type" : "Literal"
+                           },
+                           "message" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "Test Message",
+                              "type" : "Literal"
+                           }
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
                            "type" : "Literal"
                         }
                      } ]
@@ -63,10 +93,40 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Message not implemented",
+                           "type" : "Message",
+                           "source" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2",
+                              "type" : "Literal"
+                           },
+                           "condition" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           },
+                           "code" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "200",
+                              "type" : "Literal"
+                           },
+                           "severity" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "Warning",
+                              "type" : "Literal"
+                           },
+                           "message" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "You have been warned!",
+                              "type" : "Literal"
+                           }
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2",
                            "type" : "Literal"
                         }
                      } ]
@@ -76,11 +136,63 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Message not implemented",
-                           "type" : "Literal"
+                           "type" : "Message",
+                           "source" : {
+                              "type" : "List",
+                              "element" : [ {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "3",
+                                 "type" : "Literal"
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal"
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "5",
+                                 "type" : "Literal"
+                              } ]
+                           },
+                           "condition" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           },
+                           "code" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "300",
+                              "type" : "Literal"
+                           },
+                           "severity" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "Trace",
+                              "type" : "Literal"
+                           },
+                           "message" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "This is a trace",
+                              "type" : "Literal"
+                           }
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "List",
+                           "element" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "3",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "4",
+                              "type" : "Literal"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "5",
+                              "type" : "Literal"
+                           } ]
                         }
                      } ]
                   }
@@ -89,10 +201,47 @@
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Message not implemented",
+                           "type" : "Message",
+                           "source" : {
+                              "type" : "Add",
+                              "operand" : [ {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "3",
+                                 "type" : "Literal"
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "1",
+                                 "type" : "Literal"
+                              } ]
+                           },
+                           "condition" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           },
+                           "code" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "400",
+                              "type" : "Literal"
+                           },
+                           "severity" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "Error",
+                              "type" : "Literal"
+                           },
+                           "message" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "This is an error!",
+                              "type" : "Literal"
+                           }
+                        }
+                     }, {
+                        "name" : "invalid",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
                            "type" : "Literal"
                         }
                      } ]
