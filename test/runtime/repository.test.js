@@ -38,4 +38,13 @@ describe('Repository', () => {
     const mainLib = repository.resolve(simpleELMIdentifier.id, simpleELMIdentifier.version);
     should(mainLib).be.undefined();
   });
+
+  it('should fail when id is incorrect', () => {
+    simpleELMJson.library.identifier.id = 'fake-id';
+
+    const repository = new Repository([simpleELMJson]);
+
+    const mainLib = repository.resolve(simpleELMIdentifier.id);
+    should(mainLib).be.undefined();
+  })
 });
