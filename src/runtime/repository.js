@@ -10,7 +10,13 @@ class Repository {
     for (const lib of this.libraries) {
       if (lib.library && lib.library.identifier) {
         const id = lib.library.identifier;
-        if (id.id === library && id.version === version) {
+
+        // Check version immediately if specified, fallback to ID otherwise
+        if (version) {
+          if (id.id === library && id.version === version) {
+            return new Library(lib, this);
+          }
+        } else if (id.id === library) {
           return new Library(lib, this);
         }
       }
