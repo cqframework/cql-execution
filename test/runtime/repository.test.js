@@ -1,6 +1,6 @@
 const should = require('should');
 const { Repository } = require('../../src/runtime/repository');
-const simpleELMWithVersion = require('./fixtures/SimpleLibraryWithInclude.json');
+const simpleELMWithVersion = require('./fixtures/SimpleLibraryWithVersion.json');
 
 const simpleELMIdentifier = simpleELMWithVersion.library.identifier;
 
