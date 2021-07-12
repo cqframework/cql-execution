@@ -2,26 +2,12 @@
   "library": {
     "annotation": [
       {
-        "translatorOptions": "EnableAnnotations,EnableLocators",
+        "translatorOptions": "",
         "type": "CqlToElmInfo"
-      },
-      {
-        "type": "Annotation",
-        "s": {
-          "r": "3",
-          "s": [
-            {
-              "value": [
-                "",
-                "library SimpleLibraryWithInclude version '0.0.1'"
-              ]
-            }
-          ]
-        }
       }
     ],
     "identifier": {
-      "id": "SimpleLibraryWithInclude",
+      "id": "SimpleLibraryWithVersion",
       "version": "0.0.1"
     },
     "schemaIdentifier": {
@@ -36,79 +22,13 @@
         }
       ]
     },
-    "includes": {
-      "def": [
-        {
-          "localId": "1",
-          "locator": "3:1-3:46",
-          "localIdentifier": "SimpleDependentLibrary",
-          "path": "SimpleDependentLibrary",
-          "version": "0.0.1",
-          "annotation": [
-            {
-              "type": "Annotation",
-              "s": {
-                "r": "1",
-                "s": [
-                  {
-                    "value": [
-                      "",
-                      "include "
-                    ]
-                  },
-                  {
-                    "s": [
-                      {
-                        "value": [
-                          "SimpleDependentLibrary"
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "value": [
-                      " version ",
-                      "'0.0.1'"
-                    ]
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
     "statements": {
       "def": [
         {
-          "localId": "3",
-          "locator": "5:1-5:22",
           "name": "Clause1",
           "context": "Patient",
           "accessLevel": "Public",
-          "annotation": [
-            {
-              "type": "Annotation",
-              "s": {
-                "r": "3",
-                "s": [
-                  {
-                    "r": "2",
-                    "value": [
-                      "",
-                      "define ",
-                      "\"Clause1\"",
-                      ": ",
-                      "true"
-                    ]
-                  }
-                ]
-              }
-            }
-          ],
           "expression": {
-            "localId": "2",
-            "locator": "5:19-5:22",
             "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
             "value": "true",
             "type": "Literal"

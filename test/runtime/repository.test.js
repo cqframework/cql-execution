@@ -1,42 +1,41 @@
 const should = require('should');
 const { Repository } = require('../../src/runtime/repository');
-const simpleELMInclude = require('./fixtures/SimpleLibraryWithInclude.json');
-const simpleELMDependency = require('./fixtures/SimpleDependentLibrary.json');
+const simpleELMWithVersion = require('./fixtures/SimpleLibraryWithInclude.json');
 
-const simpleIncludeIdentifier = simpleELMInclude.library.identifier;
-const simpleDependencyIdentifier = simpleELMDependency.library.identifier;
+const simpleELMIdentifier = simpleELMWithVersion.library.identifier;
 
 describe('Repository', () => {
   let simpleELMJson;
   beforeEach(() => {
     // Deep clone ELM JSON to modify properties
-    simpleELMJson = JSON.parse(JSON.stringify(simpleELMInclude));
+    simpleELMJson = JSON.parse(JSON.stringify(simpleELMWithVersion));
   });
 
   it('should resolve with proper id and version', () => {
-    const repository = new Repository([simpleELMJson, simpleELMDependency]);
-    const mainLib = repository.resolve(simpleIncludeIdentifier.id, simpleIncludeIdentifier.version);
+    const repository = new Repository([simpleELMJson]);
+    const mainLib = repository.resolve(simpleELMIdentifier.id, simpleELMIdentifier.version);
 
-    mainLib.includes[simpleDependencyIdentifier.id].should.not.be.undefined();
+    mainLib.should.not.be.undefined();
+    mainLib.source.library.identifier.id.should.equal(simpleELMIdentifier.id);
+    mainLib.source.library.identifier.version.should.equal(simpleELMIdentifier.version);
   });
 
   it('should fallback to id when version is missing', () => {
-    delete simpleELMJson.library.includes.def[0].version;
+    delete simpleELMJson.library.identifier.version;
 
-    const repository = new Repository([simpleELMJson, simpleELMDependency]);
-    const mainLib = repository.resolve(simpleIncludeIdentifier.id, simpleIncludeIdentifier.version);
+    const repository = new Repository([simpleELMJson]);
+    const mainLib = repository.resolve(simpleELMIdentifier.id);
 
-    mainLib.includes[simpleDependencyIdentifier.id].should.not.be.undefined();
+    mainLib.should.not.be.undefined();
+    mainLib.source.library.identifier.id.should.equal(simpleELMIdentifier.id);
   });
 
   it('should fail when version is incorrect', () => {
-    simpleELMJson.library.includes.def[0].version = 'fake-version';
+    simpleELMJson.library.identifier.version = 'fake-version';
 
-    const repository = new Repository([simpleELMJson, simpleELMDependency]);
+    const repository = new Repository([simpleELMJson]);
 
-    // When resolution can't happen, an error is thrown
-    should(() =>
-      repository.resolve(simpleIncludeIdentifier.id, simpleIncludeIdentifier.version)
-    ).throw();
+    const mainLib = repository.resolve(simpleELMIdentifier.id, simpleELMIdentifier.version);
+    should(mainLib).be.undefined();
   });
 });
