@@ -46,5 +46,5 @@ describe('Repository', () => {
 
     const mainLib = repository.resolve(simpleELMIdentifier.id);
     should(mainLib).be.undefined();
-  })
+  });
 });
