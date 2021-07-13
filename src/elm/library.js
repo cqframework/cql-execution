@@ -63,7 +63,7 @@ class Library {
 
     // Include codesystems from includes
     for (const iProperty in this.includes) {
-      if (this.includes[iProperty].codesystems) {
+      if (this.includes[iProperty] && this.includes[iProperty].codesystems) {
         for (const csProperty in this.includes[iProperty].codesystems) {
           this.codesystems[csProperty] = this.includes[iProperty].codesystems[csProperty];
         }
