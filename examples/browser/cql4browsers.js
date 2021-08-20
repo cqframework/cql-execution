@@ -13963,13 +13963,14 @@ var Repository = /*#__PURE__*/function () {
           var lib = _step.value;
 
           if (lib.library && lib.library.identifier) {
-            var id = lib.library.identifier; // Check version immediately if specified, fallback to ID otherwise
+            var id = lib.library.identifier;
+            var path = (id.system ? id.system + '/' : '') + id.id; // Check version immediately if specified, fallback to ID otherwise
 
             if (version) {
-              if (id.id === library && id.version === version) {
+              if (path === library && id.version === version) {
                 return new Library(lib, this);
               }
-            } else if (id.id === library) {
+            } else if (path === library) {
               return new Library(lib, this);
             }
           }
