@@ -1,6 +1,7 @@
 const should = require('should');
 const setup = require('../../setup');
 const data = require('./data');
+const dataFullPaths = require('./data-full-paths');
 const { equivalent } = require('../../../src/util/comparison');
 const { Repository, Code } = require('../../../src/cql');
 
@@ -149,6 +150,41 @@ describe('Using CommonLib and CommonLib2', () => {
   });
 
   it('should contain SupportLibDef localId in the localIdMap', function () {
+    const supportLibDefLocalId = this.lib.includes.common.expressions.SupportLibDef.localId;
+    should.exist(this.commonLocalIdObject[supportLibDefLocalId]);
+  });
+
+  it('should contain SortUsingFunction localId in the localIdMap', function () {
+    const sortUsingFunctionLocalId = this.lib.includes.common2.expressions.SortUsingFunction
+      .localId;
+    should.exist(this.common2LocalIdObject[sortUsingFunctionLocalId]);
+  });
+});
+
+describe('Using CommonLib and CommonLib2 (with system and full path)', () => {
+  beforeEach(function () {
+    setup(this, dataFullPaths, [p1], {}, {}, new Repository(dataFullPaths));
+    this.results = this.executor.withLibrary(this.lib).exec_patient_context(this.patientSource);
+    this.commonLocalIdObject = this.results.localIdPatientResultsMap['1'].Common;
+    this.common2LocalIdObject = this.results.localIdPatientResultsMap['1'].Common2;
+  });
+
+  it('should contain TheParameter localId in the localIdMap (with system and full path)', function () {
+    const theParameterLocalId = this.lib.includes.common2.expressions.TheParameter.localId;
+    should.exist(this.common2LocalIdObject[theParameterLocalId]);
+  });
+
+  it('should contain TwoPlusOne localId in the localIdMap (with system and full path)', function () {
+    const twoPlusOneLocalId = this.lib.includes.common2.expressions.TwoPlusOne.localId;
+    should.exist(this.common2LocalIdObject[twoPlusOneLocalId]);
+  });
+
+  it('should contian TwoTimesThree localId in the localIdMap (with system and full path)', function () {
+    const twoTimesThreeLocalId = this.lib.includes.common2.expressions.TwoTimesThree.localId;
+    should.exist(this.common2LocalIdObject[twoTimesThreeLocalId]);
+  });
+
+  it('should contain SupportLibDef localId in the localIdMap (with system and full path)', function () {
     const supportLibDefLocalId = this.lib.includes.common.expressions.SupportLibDef.localId;
     should.exist(this.commonLocalIdObject[supportLibDefLocalId]);
   });
