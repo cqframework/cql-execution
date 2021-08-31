@@ -6,18 +6,21 @@ class Repository {
     this.libraries = Array.from(Object.values(data));
   }
 
-  resolve(library, version) {
+  resolve(path, version) {
     for (const lib of this.libraries) {
       if (lib.library && lib.library.identifier) {
-        const id = lib.library.identifier;
-        const path = (id.system ? id.system + '/' : '') + id.id;
+        const { id, system, version: libraryVersion } = lib.library.identifier;
+        let libraryUri = `${system}/${id}`;
 
-        // Check version immediately if specified, fallback to ID otherwise
+        if (!path.includes('/')) {
+          libraryUri = id;
+        }
+
         if (version) {
-          if (path === library && id.version === version) {
+          if (path === libraryUri && libraryVersion === version) {
             return new Library(lib, this);
           }
-        } else if (path === library) {
+        } else if (path === libraryUri) {
           return new Library(lib, this);
         }
       }

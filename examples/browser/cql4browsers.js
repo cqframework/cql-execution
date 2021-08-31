@@ -13954,7 +13954,7 @@ var Repository = /*#__PURE__*/function () {
 
   _createClass(Repository, [{
     key: "resolve",
-    value: function resolve(library, version) {
+    value: function resolve(path, version) {
       var _iterator = _createForOfIteratorHelper(this.libraries),
           _step;
 
@@ -13963,14 +13963,21 @@ var Repository = /*#__PURE__*/function () {
           var lib = _step.value;
 
           if (lib.library && lib.library.identifier) {
-            var id = lib.library.identifier;
-            var path = (id.system ? id.system + '/' : '') + id.id; // Check version immediately if specified, fallback to ID otherwise
+            var _lib$library$identifi = lib.library.identifier,
+                id = _lib$library$identifi.id,
+                system = _lib$library$identifi.system,
+                libraryVersion = _lib$library$identifi.version;
+            var libraryUri = "".concat(system, "/").concat(id);
+
+            if (!path.includes('/')) {
+              libraryUri = id;
+            }
 
             if (version) {
-              if (path === library && id.version === version) {
+              if (path === libraryUri && libraryVersion === version) {
                 return new Library(lib, this);
               }
-            } else if (path === library) {
+            } else if (path === libraryUri) {
               return new Library(lib, this);
             }
           }

@@ -2294,7 +2294,7 @@ module.exports['Using CommonLib and CommonLib2 with namespace support'] = {
          }, {
             "localId" : "3",
             "localIdentifier" : "common",
-            "path" : "http://canonical.base/Common",
+            "path" : "Common",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
