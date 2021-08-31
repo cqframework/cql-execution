@@ -13969,16 +13969,14 @@ var Repository = /*#__PURE__*/function () {
                 libraryVersion = _lib$library$identifi.version;
             var libraryUri = "".concat(system, "/").concat(id);
 
-            if (!path.includes('/')) {
-              libraryUri = id;
-            }
-
-            if (version) {
-              if (path === libraryUri && libraryVersion === version) {
+            if (path === libraryUri || path === id) {
+              if (version) {
+                if (libraryVersion === version) {
+                  return new Library(lib, this);
+                }
+              } else {
                 return new Library(lib, this);
               }
-            } else if (path === libraryUri) {
-              return new Library(lib, this);
             }
           }
         }

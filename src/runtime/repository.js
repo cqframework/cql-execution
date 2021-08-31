@@ -10,18 +10,16 @@ class Repository {
     for (const lib of this.libraries) {
       if (lib.library && lib.library.identifier) {
         const { id, system, version: libraryVersion } = lib.library.identifier;
-        let libraryUri = `${system}/${id}`;
+        const libraryUri = `${system}/${id}`;
 
-        if (!path.includes('/')) {
-          libraryUri = id;
-        }
-
-        if (version) {
-          if (path === libraryUri && libraryVersion === version) {
+        if (path === libraryUri || path === id) {
+          if (version) {
+            if (libraryVersion === version) {
+              return new Library(lib, this);
+            }
+          } else {
             return new Library(lib, this);
           }
-        } else if (path === libraryUri) {
-          return new Library(lib, this);
         }
       }
     }
