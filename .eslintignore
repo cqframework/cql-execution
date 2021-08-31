@@ -3,3 +3,4 @@
 lib
 lib-test
 examples/browser/cql4browsers.js
+test/elm/library/data-with-namespace.js
