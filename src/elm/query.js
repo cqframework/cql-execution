@@ -55,7 +55,7 @@ class ByDirection extends Expression {
   constructor(json) {
     super(json);
     this.direction = json.direction;
-    this.low_order = this.direction === 'asc' ? -1 : 1;
+    this.low_order = this.direction === 'asc'|| this.direction === 'ascending' ? -1 : 1;
     this.high_order = this.low_order * -1;
   }
 
@@ -81,7 +81,7 @@ class ByExpression extends Expression {
     super(json);
     this.expression = build(json.expression);
     this.direction = json.direction;
-    this.low_order = this.direction === 'asc' ? -1 : 1;
+    this.low_order = this.direction === 'asc'|| this.direction === 'ascending' ? -1 : 1;
     this.high_order = this.low_order * -1;
   }
 

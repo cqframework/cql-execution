@@ -232,6 +232,16 @@ describe('Sorting', () => {
       .exec(this.ctx)
       .should.eql([{ N: null }, { N: 7 }, { N: 8 }]);
   });
+
+  it('should be able to sort using the ascending keyword', function () {
+    const e = this.sortWithAscendingKeyword.exec(this.ctx);
+    e.should.eql([0, 3, 5, 6, 7, 8, 9]);
+  });
+
+  it('should be able to sort using the descending keyword', function () {
+    const e = this.sortWithDescendingKeyword.exec(this.ctx);
+    e.should.eql([9, 8, 7, 6, 5, 3, 0]);
+  });
 });
 
 describe('Distinct', () => {

@@ -4,7 +4,7 @@ function removeNulls(things) {
 
 function numerical_sort(things, direction) {
   return things.sort((a, b) => {
-    if (direction == null || direction === 'asc') {
+    if (direction == null || direction === 'asc' || direction === 'ascending') {
       return a - b;
     } else {
       return b - a;

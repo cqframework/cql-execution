@@ -2834,6 +2834,8 @@ define stringReturnDesc: ({'jenny', 'dont', 'change', 'your', 'number'}) S retur
 define five: 5
 define sortByExpression: ({8, 6, 7, 5, 3, 0, 9}) N return Tuple{N: N} sort by (five + N)
 define sortByExpressionWithNullResults: ({8, null, 7}) N return Tuple{N: N} sort by (five + N)
+define sortWithAscendingKeyword: ({8, 6, 7, 5, 3, 0, 9}) N sort ascending
+define sortWithDescendingKeyword: ({8, 6, 7, 5, 3, 0, 9}) N return N sort descending
 */
 
 module.exports['Sorting'] = {
@@ -2844,7 +2846,7 @@ module.exports['Sorting'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "231",
+            "r" : "257",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -5274,6 +5276,218 @@ module.exports['Sorting'] = {
                            "type" : "IdentifierRef"
                         } ]
                      }
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "243",
+            "name" : "sortWithAscendingKeyword",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "243",
+                  "s" : [ {
+                     "value" : [ "","define ","sortWithAscendingKeyword",": " ]
+                  }, {
+                     "r" : "242",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "240",
+                           "s" : [ {
+                              "r" : "239",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "239",
+                                 "s" : [ {
+                                    "r" : "232",
+                                    "value" : [ "{","8",", ","6",", ","7",", ","5",", ","3",", ","0",", ","9","}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","N" ]
+                           } ]
+                        } ]
+                     }, {
+                        "r" : "241",
+                        "value" : [ " ","sort ascending" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "242",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "240",
+                  "alias" : "N",
+                  "expression" : {
+                     "localId" : "239",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "232",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "8",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "233",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "6",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "234",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "7",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "235",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "236",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "237",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "238",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "9",
+                        "type" : "Literal"
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "sort" : {
+                  "localId" : "241",
+                  "by" : [ {
+                     "direction" : "ascending",
+                     "type" : "ByDirection"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "257",
+            "name" : "sortWithDescendingKeyword",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "257",
+                  "s" : [ {
+                     "value" : [ "","define ","sortWithDescendingKeyword",": " ]
+                  }, {
+                     "r" : "256",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "252",
+                           "s" : [ {
+                              "r" : "251",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "251",
+                                 "s" : [ {
+                                    "r" : "244",
+                                    "value" : [ "{","8",", ","6",", ","7",", ","5",", ","3",", ","0",", ","9","}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","N" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " " ]
+                     }, {
+                        "r" : "254",
+                        "s" : [ {
+                           "value" : [ "return " ]
+                        }, {
+                           "r" : "253",
+                           "s" : [ {
+                              "value" : [ "N" ]
+                           } ]
+                        } ]
+                     }, {
+                        "r" : "255",
+                        "value" : [ " ","sort descending" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "256",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "252",
+                  "alias" : "N",
+                  "expression" : {
+                     "localId" : "251",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "244",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "8",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "245",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "6",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "246",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "7",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "247",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "248",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "249",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "250",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "9",
+                        "type" : "Literal"
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "localId" : "254",
+                  "expression" : {
+                     "localId" : "253",
+                     "name" : "N",
+                     "type" : "AliasRef"
+                  }
+               },
+               "sort" : {
+                  "localId" : "255",
+                  "by" : [ {
+                     "direction" : "descending",
+                     "type" : "ByDirection"
                   } ]
                }
             }
