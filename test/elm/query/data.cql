@@ -71,6 +71,7 @@ define stringDesc: ({'jenny', 'dont', 'change', 'your', 'number'}) S sort desc
 define stringReturnDesc: ({'jenny', 'dont', 'change', 'your', 'number'}) S return S sort desc
 define five: 5
 define sortByExpression: ({8, 6, 7, 5, 3, 0, 9}) N return Tuple{N: N} sort by (five + N)
+define sortByExpressionWithNullResults: ({8, null, 7}) N return Tuple{N: N} sort by (five + N)
 
 // @Test: Distinct
 define defaultNumbers: ({1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 2, 2, 1}) N return N
@@ -111,11 +112,11 @@ define singleAliasReturnList: firstEncounter E return {'foo', 'bar', 'baz', 'bar
 
 define noStartingAggregation:
  ({1,2,3,4,5}) R
-    aggregate T : Coalesce(T, 1) * R 
+    aggregate T : Coalesce(T, 1) * R
 
-define encounterPeriods: 
-  [Encounter] e 
-    return e.period 
+define encounterPeriods:
+  [Encounter] e
+    return e.period
 
 define expressionStartingAggregation:
   encounterPeriods M
@@ -126,18 +127,18 @@ define expressionStartingAggregation:
         return Interval[S, E]
     })
 
-define literalStartingAggregation: 
-  ({1,2,3,4,5,1,2,3,4,5}) Num 
+define literalStartingAggregation:
+  ({1,2,3,4,5,1,2,3,4,5}) Num
     aggregate distinct str starting 'Start' : str + ToString(Num)
 
 define quantityStartingAggregation:
- ({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'}) Num 
-  aggregate distinct Sum starting 0 'ml': Sum + Num 
+ ({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'}) Num
+  aggregate distinct Sum starting 0 'ml': Sum + Num
 
-define allAggregation: 
- ({1,2,3,4,5,1,2,3,4,5}) Num 
-  aggregate all Sum starting 0: Sum + Num 
+define allAggregation:
+ ({1,2,3,4,5,1,2,3,4,5}) Num
+  aggregate all Sum starting 0: Sum + Num
 
-define distinctAggregation: 
- ({1,2,3,4,5,1,2,3,4,5}) Num 
-  aggregate distinct Sum starting 0: Sum + Num 
+define distinctAggregation:
+ ({1,2,3,4,5,1,2,3,4,5}) Num
+  aggregate distinct Sum starting 0: Sum + Num

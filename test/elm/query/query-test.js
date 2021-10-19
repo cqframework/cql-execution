@@ -226,6 +226,12 @@ describe('Sorting', () => {
       .exec(this.ctx)
       .should.eql([{ N: 0 }, { N: 3 }, { N: 5 }, { N: 6 }, { N: 7 }, { N: 8 }, { N: 9 }]);
   });
+
+  it('should be able to sort by an expression when some results are null', function () {
+    this.sortByExpressionWithNullResults
+      .exec(this.ctx)
+      .should.eql([{ N: null }, { N: 7 }, { N: 8 }]);
+  });
 });
 
 describe('Distinct', () => {

@@ -91,18 +91,14 @@ class ByExpression extends Expression {
     sctx = ctx.childContext(b);
     const b_val = this.expression.execute(sctx);
 
-    if (a_val === b_val) {
+    if (a_val === b_val || (a_val == null && b_val == null)) {
       return 0;
+    } else if (a_val == null || b_val == null) {
+      return a_val == null ? this.low_order : this.high_order;
     } else if (a_val.isQuantity && b_val.isQuantity) {
-      if (a_val.before(b_val)) {
-        return this.low_order;
-      } else {
-        return this.high_order;
-      }
-    } else if (a_val < b_val) {
-      return this.low_order;
+      return a_val.before(b_val) ? this.low_order : this.high_order;
     } else {
-      return this.high_order;
+      return a_val < b_val ? this.low_order :this.high_order;
     }
   }
 }
