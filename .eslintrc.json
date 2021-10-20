@@ -10,6 +10,7 @@
       "indent": ["error", 2, { "SwitchCase": 1 }],
       "linebreak-style": ["error", "unix"],
       "no-console": ["warn", { "allow": ["warn", "error"] }],
+      "no-loss-of-precision": "off",
       "no-unused-vars": ["error", { "vars": "all", "args": "none" }],
       "quotes": ["error", "single", { "allowTemplateLiterals": true, "avoidEscape": true }],
       "semi": ["error", "always"]

@@ -357,6 +357,14 @@ describe('ToInteger', () => {
   it('should return null if integer smaller than min', function () {
     should(this.tooSmallInt.exec(this.ctx)).be.null();
   });
+
+  it('should return 1 for boolean true', function () {
+    this.booleanTrue.exec(this.ctx).should.equal(1);
+  });
+
+  it('should return 0 for boolean false', function () {
+    this.booleanFalse.exec(this.ctx).should.equal(0);
+  });
 });
 
 describe('ToQuantity', () => {
@@ -653,6 +661,14 @@ describe('ConvertsToInteger', () => {
 
   it('should return true for valid integer', function () {
     this.isTrue.exec(this.ctx).should.equal(true);
+  });
+
+  it('should return true for boolean true', function () {
+    this.isTrueWithBooleanTrue.exec(this.ctx).should.equal(true);
+  });
+
+  it('should return true for boolean false', function () {
+    this.isTrueWithBooleanFalse.exec(this.ctx).should.equal(true);
   });
 
   it('should return false for invalid integer', function () {

@@ -536,7 +536,7 @@ class Interval {
   getPointSize() {
     let pointSize;
     if (this.low != null) {
-      if (this.low.isDateTime) {
+      if (this.low.isDateTime || this.low.isDate || this.low.isTime) {
         pointSize = new Quantity(1, this.low.getPrecision());
       } else if (this.low.isQuantity) {
         pointSize = doSubtraction(successor(this.low), this.low);
@@ -544,7 +544,7 @@ class Interval {
         pointSize = successor(this.low) - this.low;
       }
     } else if (this.high != null) {
-      if (this.high.isDateTime) {
+      if (this.high.isDateTime || this.high.isDate || this.high.isTime) {
         pointSize = new Quantity(1, this.high.getPrecision());
       } else if (this.high.isQuantity) {
         pointSize = doSubtraction(successor(this.high), this.high);

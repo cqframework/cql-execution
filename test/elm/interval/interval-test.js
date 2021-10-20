@@ -1979,6 +1979,62 @@ describe('Collapse', () => {
       .should.eql(this.dateTime1_15IntervalList.exec(this.ctx));
   });
 
+  it('Date collapse overlapping intervals with no per', function () {
+    this.overlappingDateCollapseNoPer
+      .exec(this.ctx)
+      .should.eql([this.date1_15Interval.exec(this.ctx)]);
+  });
+
+  it('Date collapse adjacent intervals with no per', function () {
+    this.adjacentDateCollapseNoPer
+      .exec(this.ctx)
+      .should.eql([this.date1_15Interval.exec(this.ctx)]);
+  });
+
+  it('Date collapse disjoint intervals with no per', function () {
+    this.disjointDateCollapseNoPer
+      .exec(this.ctx)
+      .should.eql([this.date1_2Interval.exec(this.ctx), this.date4_15Interval.exec(this.ctx)]);
+  });
+
+  it('Date collapse per day', function () {
+    this.dateCollapsePerDay
+      .exec(this.ctx)
+      .should.eql([this.date1_2Interval.exec(this.ctx), this.date4_15Interval.exec(this.ctx)]);
+  });
+
+  it('Date collapse per month', function () {
+    this.dateCollapsePerMonth.exec(this.ctx).should.eql([this.date1_15Interval.exec(this.ctx)]);
+  });
+
+  it('Time collapse overlapping intervals with no per', function () {
+    this.overlappingTimeCollapseNoPer
+      .exec(this.ctx)
+      .should.eql([this.time1_15Interval.exec(this.ctx)]);
+  });
+
+  it('Time collapse adjacent intervals with no per', function () {
+    this.adjacentTimeCollapseNoPer
+      .exec(this.ctx)
+      .should.eql([this.time1_15Interval.exec(this.ctx)]);
+  });
+
+  it('Time collapse disjoint intervals with no per', function () {
+    this.disjointTimeCollapseNoPer
+      .exec(this.ctx)
+      .should.eql([this.time1_2Interval.exec(this.ctx), this.time4_15Interval.exec(this.ctx)]);
+  });
+
+  it('Time collapse per second', function () {
+    this.timeCollapsePerSecond
+      .exec(this.ctx)
+      .should.eql([this.time1_2Interval.exec(this.ctx), this.time4_15Interval.exec(this.ctx)]);
+  });
+
+  it('Time collapse per minute', function () {
+    this.timeCollapsePerMinute.exec(this.ctx).should.eql([this.time1_15Interval.exec(this.ctx)]);
+  });
+
   it('Quantity uses default per unit', function () {
     const quantity_collapse = this.quantityIntervalCollapseNoPer.exec(this.ctx);
     quantity_collapse.should.eql(this.expectedQuantityList.exec(this.ctx));

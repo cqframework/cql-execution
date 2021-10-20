@@ -77,6 +77,8 @@ define PositiveSign: ToInteger('+12345')
 define NegativeSign: ToInteger('-12345')
 define TooLargeInt: ToInteger('2147483648')
 define TooSmallInt: ToInteger('-2147483649')
+define BooleanTrue: ToInteger(true)
+define BooleanFalse: ToInteger(false)
 
 // @Test: ToQuantity
 define DecimalOverload: ToQuantity(0.1)
@@ -157,6 +159,8 @@ define IsNull: ConvertsToDecimal(null as Decimal)
 
 // @Test: ConvertsToInteger
 define IsTrue: ConvertsToInteger('101')
+define IsTrueWithBooleanTrue: ConvertsToInteger(true)
+define IsTrueWithBooleanFalse: ConvertsToInteger(false)
 define IsFalse: ConvertsToInteger('foo')
 define IsNull: ConvertsToInteger(null as Integer)
 

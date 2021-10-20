@@ -2833,6 +2833,9 @@ define stringDesc: ({'jenny', 'dont', 'change', 'your', 'number'}) S sort desc
 define stringReturnDesc: ({'jenny', 'dont', 'change', 'your', 'number'}) S return S sort desc
 define five: 5
 define sortByExpression: ({8, 6, 7, 5, 3, 0, 9}) N return Tuple{N: N} sort by (five + N)
+define sortByExpressionWithNullResults: ({8, null, 7}) N return Tuple{N: N} sort by (five + N)
+define sortWithAscendingKeyword: ({8, 6, 7, 5, 3, 0, 9}) N sort ascending
+define sortWithDescendingKeyword: ({8, 6, 7, 5, 3, 0, 9}) N return N sort descending
 */
 
 module.exports['Sorting'] = {
@@ -2843,7 +2846,7 @@ module.exports['Sorting'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "216",
+            "r" : "257",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -5114,6 +5117,377 @@ module.exports['Sorting'] = {
                            "type" : "IdentifierRef"
                         } ]
                      }
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "231",
+            "name" : "sortByExpressionWithNullResults",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "231",
+                  "s" : [ {
+                     "value" : [ "","define ","sortByExpressionWithNullResults",": " ]
+                  }, {
+                     "r" : "230",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "221",
+                           "s" : [ {
+                              "r" : "220",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "220",
+                                 "s" : [ {
+                                    "r" : "217",
+                                    "value" : [ "{","8",", ","null",", ","7","}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","N" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " " ]
+                     }, {
+                        "r" : "224",
+                        "s" : [ {
+                           "value" : [ "return " ]
+                        }, {
+                           "r" : "223",
+                           "s" : [ {
+                              "value" : [ "Tuple{" ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "N",": " ]
+                              }, {
+                                 "r" : "222",
+                                 "s" : [ {
+                                    "value" : [ "N" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "}" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " " ]
+                     }, {
+                        "r" : "229",
+                        "s" : [ {
+                           "value" : [ "sort by " ]
+                        }, {
+                           "r" : "228",
+                           "s" : [ {
+                              "r" : "227",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "227",
+                                 "s" : [ {
+                                    "r" : "225",
+                                    "s" : [ {
+                                       "value" : [ "five" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " + " ]
+                                 }, {
+                                    "r" : "226",
+                                    "s" : [ {
+                                       "value" : [ "N" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "230",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "221",
+                  "alias" : "N",
+                  "expression" : {
+                     "localId" : "220",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "217",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "8",
+                        "type" : "Literal"
+                     }, {
+                        "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "As",
+                        "operand" : {
+                           "localId" : "218",
+                           "type" : "Null"
+                        }
+                     }, {
+                        "localId" : "219",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "7",
+                        "type" : "Literal"
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "localId" : "224",
+                  "expression" : {
+                     "localId" : "223",
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "N",
+                        "value" : {
+                           "localId" : "222",
+                           "name" : "N",
+                           "type" : "AliasRef"
+                        }
+                     } ]
+                  }
+               },
+               "sort" : {
+                  "localId" : "229",
+                  "by" : [ {
+                     "localId" : "228",
+                     "direction" : "asc",
+                     "type" : "ByExpression",
+                     "expression" : {
+                        "localId" : "227",
+                        "type" : "Add",
+                        "operand" : [ {
+                           "localId" : "225",
+                           "name" : "five",
+                           "type" : "ExpressionRef"
+                        }, {
+                           "localId" : "226",
+                           "name" : "N",
+                           "type" : "IdentifierRef"
+                        } ]
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "243",
+            "name" : "sortWithAscendingKeyword",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "243",
+                  "s" : [ {
+                     "value" : [ "","define ","sortWithAscendingKeyword",": " ]
+                  }, {
+                     "r" : "242",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "240",
+                           "s" : [ {
+                              "r" : "239",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "239",
+                                 "s" : [ {
+                                    "r" : "232",
+                                    "value" : [ "{","8",", ","6",", ","7",", ","5",", ","3",", ","0",", ","9","}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","N" ]
+                           } ]
+                        } ]
+                     }, {
+                        "r" : "241",
+                        "value" : [ " ","sort ascending" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "242",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "240",
+                  "alias" : "N",
+                  "expression" : {
+                     "localId" : "239",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "232",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "8",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "233",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "6",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "234",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "7",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "235",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "236",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "237",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "238",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "9",
+                        "type" : "Literal"
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "sort" : {
+                  "localId" : "241",
+                  "by" : [ {
+                     "direction" : "ascending",
+                     "type" : "ByDirection"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "257",
+            "name" : "sortWithDescendingKeyword",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "257",
+                  "s" : [ {
+                     "value" : [ "","define ","sortWithDescendingKeyword",": " ]
+                  }, {
+                     "r" : "256",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "252",
+                           "s" : [ {
+                              "r" : "251",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "251",
+                                 "s" : [ {
+                                    "r" : "244",
+                                    "value" : [ "{","8",", ","6",", ","7",", ","5",", ","3",", ","0",", ","9","}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","N" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " " ]
+                     }, {
+                        "r" : "254",
+                        "s" : [ {
+                           "value" : [ "return " ]
+                        }, {
+                           "r" : "253",
+                           "s" : [ {
+                              "value" : [ "N" ]
+                           } ]
+                        } ]
+                     }, {
+                        "r" : "255",
+                        "value" : [ " ","sort descending" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "256",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "252",
+                  "alias" : "N",
+                  "expression" : {
+                     "localId" : "251",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "244",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "8",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "245",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "6",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "246",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "7",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "247",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "248",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "249",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "250",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "9",
+                        "type" : "Literal"
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "localId" : "254",
+                  "expression" : {
+                     "localId" : "253",
+                     "name" : "N",
+                     "type" : "AliasRef"
+                  }
+               },
+               "sort" : {
+                  "localId" : "255",
+                  "by" : [ {
+                     "direction" : "descending",
+                     "type" : "ByDirection"
                   } ]
                }
             }
@@ -8081,11 +8455,11 @@ context Patient
 
 define noStartingAggregation:
  ({1,2,3,4,5}) R
-    aggregate T : Coalesce(T, 1) * R 
+    aggregate T : Coalesce(T, 1) * R
 
-define encounterPeriods: 
-  [Encounter] e 
-    return e.period 
+define encounterPeriods:
+  [Encounter] e
+    return e.period
 
 define expressionStartingAggregation:
   encounterPeriods M
@@ -8096,21 +8470,21 @@ define expressionStartingAggregation:
         return Interval[S, E]
     })
 
-define literalStartingAggregation: 
-  ({1,2,3,4,5,1,2,3,4,5}) Num 
+define literalStartingAggregation:
+  ({1,2,3,4,5,1,2,3,4,5}) Num
     aggregate distinct str starting 'Start' : str + ToString(Num)
 
 define quantityStartingAggregation:
- ({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'}) Num 
-  aggregate distinct Sum starting 0 'ml': Sum + Num 
+ ({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'}) Num
+  aggregate distinct Sum starting 0 'ml': Sum + Num
 
-define allAggregation: 
- ({1,2,3,4,5,1,2,3,4,5}) Num 
-  aggregate all Sum starting 0: Sum + Num 
+define allAggregation:
+ ({1,2,3,4,5,1,2,3,4,5}) Num
+  aggregate all Sum starting 0: Sum + Num
 
-define distinctAggregation: 
- ({1,2,3,4,5,1,2,3,4,5}) Num 
-  aggregate distinct Sum starting 0: Sum + Num 
+define distinctAggregation:
+ ({1,2,3,4,5,1,2,3,4,5}) Num
+  aggregate distinct Sum starting 0: Sum + Num
 */
 
 module.exports['AggregateQuery'] = {
@@ -8327,7 +8701,7 @@ module.exports['AggregateQuery'] = {
                "s" : {
                   "r" : "23",
                   "s" : [ {
-                     "value" : [ "","define ","encounterPeriods",": \n  " ]
+                     "value" : [ "","define ","encounterPeriods",":\n  " ]
                   }, {
                      "r" : "22",
                      "s" : [ {
@@ -8346,7 +8720,7 @@ module.exports['AggregateQuery'] = {
                            } ]
                         } ]
                      }, {
-                        "value" : [ " \n    " ]
+                        "value" : [ "\n    " ]
                      }, {
                         "r" : "21",
                         "s" : [ {
@@ -8772,7 +9146,7 @@ module.exports['AggregateQuery'] = {
                "s" : {
                   "r" : "78",
                   "s" : [ {
-                     "value" : [ "","define ","literalStartingAggregation",": \n  " ]
+                     "value" : [ "","define ","literalStartingAggregation",":\n  " ]
                   }, {
                      "r" : "77",
                      "s" : [ {
@@ -8796,7 +9170,7 @@ module.exports['AggregateQuery'] = {
                            } ]
                         } ]
                      }, {
-                        "value" : [ " \n    " ]
+                        "value" : [ "\n    " ]
                      }, {
                         "r" : "76",
                         "s" : [ {
@@ -9000,7 +9374,7 @@ module.exports['AggregateQuery'] = {
                            } ]
                         } ]
                      }, {
-                        "value" : [ " \n  " ]
+                        "value" : [ "\n  " ]
                      }, {
                         "r" : "90",
                         "s" : [ {
@@ -9110,7 +9484,7 @@ module.exports['AggregateQuery'] = {
                "s" : {
                   "r" : "111",
                   "s" : [ {
-                     "value" : [ "","define ","allAggregation",": \n " ]
+                     "value" : [ "","define ","allAggregation",":\n " ]
                   }, {
                      "r" : "110",
                      "s" : [ {
@@ -9134,7 +9508,7 @@ module.exports['AggregateQuery'] = {
                            } ]
                         } ]
                      }, {
-                        "value" : [ " \n  " ]
+                        "value" : [ "\n  " ]
                      }, {
                         "r" : "109",
                         "s" : [ {
@@ -9265,7 +9639,7 @@ module.exports['AggregateQuery'] = {
                "s" : {
                   "r" : "130",
                   "s" : [ {
-                     "value" : [ "","define ","distinctAggregation",": \n " ]
+                     "value" : [ "","define ","distinctAggregation",":\n " ]
                   }, {
                      "r" : "129",
                      "s" : [ {
@@ -9289,7 +9663,7 @@ module.exports['AggregateQuery'] = {
                            } ]
                         } ]
                      }, {
-                        "value" : [ " \n  " ]
+                        "value" : [ "\n  " ]
                      }, {
                         "r" : "128",
                         "s" : [ {
