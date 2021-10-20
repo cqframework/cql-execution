@@ -141,11 +141,13 @@ class ToInteger extends Expression {
 
   exec(ctx) {
     const arg = this.execArgs(ctx);
-    if (arg != null) {
+    if (typeof arg === 'string') {
       const integer = parseInt(arg.toString());
       if (isValidInteger(integer)) {
         return integer;
       }
+    } else if (typeof arg === 'boolean') {
+      return arg ? 1 : 0;
     }
     return null;
   }

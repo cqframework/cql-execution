@@ -2936,6 +2936,8 @@ define PositiveSign: ToInteger('+12345')
 define NegativeSign: ToInteger('-12345')
 define TooLargeInt: ToInteger('2147483648')
 define TooSmallInt: ToInteger('-2147483649')
+define BooleanTrue: ToInteger(true)
+define BooleanFalse: ToInteger(false)
 */
 
 module.exports['ToInteger'] = {
@@ -2946,7 +2948,7 @@ module.exports['ToInteger'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "16",
+            "r" : "22",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -3179,6 +3181,66 @@ module.exports['ToInteger'] = {
                   "localId" : "14",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "-2147483649",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "19",
+            "name" : "BooleanTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "19",
+                  "s" : [ {
+                     "value" : [ "","define ","BooleanTrue",": " ]
+                  }, {
+                     "r" : "18",
+                     "s" : [ {
+                        "r" : "17",
+                        "value" : [ "ToInteger","(","true",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "18",
+               "type" : "ToInteger",
+               "operand" : {
+                  "localId" : "17",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "value" : "true",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "22",
+            "name" : "BooleanFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "22",
+                  "s" : [ {
+                     "value" : [ "","define ","BooleanFalse",": " ]
+                  }, {
+                     "r" : "21",
+                     "s" : [ {
+                        "r" : "20",
+                        "value" : [ "ToInteger","(","false",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "21",
+               "type" : "ToInteger",
+               "operand" : {
+                  "localId" : "20",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "value" : "false",
                   "type" : "Literal"
                }
             }
@@ -6338,6 +6400,8 @@ library TestSnippet version '1'
 using Simple version '1.0.0'
 context Patient
 define IsTrue: ConvertsToInteger('101')
+define IsTrueWithBooleanTrue: ConvertsToInteger(true)
+define IsTrueWithBooleanFalse: ConvertsToInteger(false)
 define IsFalse: ConvertsToInteger('foo')
 define IsNull: ConvertsToInteger(null as Integer)
 */
@@ -6350,7 +6414,7 @@ module.exports['ConvertsToInteger'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "12",
+            "r" : "18",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -6444,7 +6508,7 @@ module.exports['ConvertsToInteger'] = {
             }
          }, {
             "localId" : "7",
-            "name" : "IsFalse",
+            "name" : "IsTrueWithBooleanTrue",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -6452,13 +6516,73 @@ module.exports['ConvertsToInteger'] = {
                "s" : {
                   "r" : "7",
                   "s" : [ {
-                     "value" : [ "","define ","IsFalse",": " ]
+                     "value" : [ "","define ","IsTrueWithBooleanTrue",": " ]
                   }, {
                      "r" : "6",
                      "s" : [ {
+                        "r" : "5",
+                        "value" : [ "ConvertsToInteger","(","true",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "6",
+               "type" : "ConvertsToInteger",
+               "operand" : {
+                  "localId" : "5",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "value" : "true",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "10",
+            "name" : "IsTrueWithBooleanFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "10",
+                  "s" : [ {
+                     "value" : [ "","define ","IsTrueWithBooleanFalse",": " ]
+                  }, {
+                     "r" : "9",
+                     "s" : [ {
+                        "r" : "8",
+                        "value" : [ "ConvertsToInteger","(","false",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "9",
+               "type" : "ConvertsToInteger",
+               "operand" : {
+                  "localId" : "8",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "value" : "false",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "localId" : "13",
+            "name" : "IsFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "","define ","IsFalse",": " ]
+                  }, {
+                     "r" : "12",
+                     "s" : [ {
                         "value" : [ "ConvertsToInteger","(" ]
                      }, {
-                        "r" : "5",
+                        "r" : "11",
                         "s" : [ {
                            "value" : [ "'foo'" ]
                         } ]
@@ -6469,37 +6593,37 @@ module.exports['ConvertsToInteger'] = {
                }
             } ],
             "expression" : {
-               "localId" : "6",
+               "localId" : "12",
                "type" : "ConvertsToInteger",
                "operand" : {
-                  "localId" : "5",
+                  "localId" : "11",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "foo",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "12",
+            "localId" : "18",
             "name" : "IsNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "12",
+                  "r" : "18",
                   "s" : [ {
                      "value" : [ "","define ","IsNull",": " ]
                   }, {
-                     "r" : "11",
+                     "r" : "17",
                      "s" : [ {
                         "value" : [ "ConvertsToInteger","(" ]
                      }, {
-                        "r" : "10",
+                        "r" : "16",
                         "s" : [ {
-                           "r" : "8",
+                           "r" : "14",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "9",
+                           "r" : "15",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -6511,18 +6635,18 @@ module.exports['ConvertsToInteger'] = {
                }
             } ],
             "expression" : {
-               "localId" : "11",
+               "localId" : "17",
                "type" : "ConvertsToInteger",
                "operand" : {
-                  "localId" : "10",
+                  "localId" : "16",
                   "strict" : false,
                   "type" : "As",
                   "operand" : {
-                     "localId" : "8",
+                     "localId" : "14",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "9",
+                     "localId" : "15",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
