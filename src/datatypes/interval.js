@@ -544,7 +544,7 @@ class Interval {
         pointSize = successor(this.low) - this.low;
       }
     } else if (this.high != null) {
-      if (this.high.isDateTime || this.high.isDate || this.high.isTime ) {
+      if (this.high.isDateTime || this.high.isDate || this.high.isTime) {
         pointSize = new Quantity(1, this.high.getPrecision());
       } else if (this.high.isQuantity) {
         pointSize = doSubtraction(successor(this.high), this.high);

@@ -2685,7 +2685,7 @@ var Interval = /*#__PURE__*/function () {
       var pointSize;
 
       if (this.low != null) {
-        if (this.low.isDateTime) {
+        if (this.low.isDateTime || this.low.isDate || this.low.isTime) {
           pointSize = new Quantity(1, this.low.getPrecision());
         } else if (this.low.isQuantity) {
           pointSize = doSubtraction(successor(this.low), this.low);
@@ -2693,7 +2693,7 @@ var Interval = /*#__PURE__*/function () {
           pointSize = successor(this.low) - this.low;
         }
       } else if (this.high != null) {
-        if (this.high.isDateTime) {
+        if (this.high.isDateTime || this.high.isDate || this.high.isTime) {
           pointSize = new Quantity(1, this.high.getPrecision());
         } else if (this.high.isQuantity) {
           pointSize = doSubtraction(successor(this.high), this.high);
@@ -10474,7 +10474,7 @@ var ByDirection = /*#__PURE__*/function (_Expression2) {
 
     _this3 = _super4.call(this, json);
     _this3.direction = json.direction;
-    _this3.low_order = _this3.direction === 'asc' ? -1 : 1;
+    _this3.low_order = _this3.direction === 'asc' || _this3.direction === 'ascending' ? -1 : 1;
     _this3.high_order = _this3.low_order * -1;
     return _this3;
   }
@@ -10514,7 +10514,7 @@ var ByExpression = /*#__PURE__*/function (_Expression3) {
     _this4 = _super5.call(this, json);
     _this4.expression = build(json.expression);
     _this4.direction = json.direction;
-    _this4.low_order = _this4.direction === 'asc' ? -1 : 1;
+    _this4.low_order = _this4.direction === 'asc' || _this4.direction === 'ascending' ? -1 : 1;
     _this4.high_order = _this4.low_order * -1;
     return _this4;
   }
@@ -10527,18 +10527,14 @@ var ByExpression = /*#__PURE__*/function (_Expression3) {
       sctx = ctx.childContext(b);
       var b_val = this.expression.execute(sctx);
 
-      if (a_val === b_val) {
+      if (a_val === b_val || a_val == null && b_val == null) {
         return 0;
+      } else if (a_val == null || b_val == null) {
+        return a_val == null ? this.low_order : this.high_order;
       } else if (a_val.isQuantity && b_val.isQuantity) {
-        if (a_val.before(b_val)) {
-          return this.low_order;
-        } else {
-          return this.high_order;
-        }
-      } else if (a_val < b_val) {
-        return this.low_order;
+        return a_val.before(b_val) ? this.low_order : this.high_order;
       } else {
-        return this.high_order;
+        return a_val < b_val ? this.low_order : this.high_order;
       }
     }
   }]);
@@ -12230,12 +12226,14 @@ var ToInteger = /*#__PURE__*/function (_Expression7) {
     value: function exec(ctx) {
       var arg = this.execArgs(ctx);
 
-      if (arg != null) {
+      if (typeof arg === 'string') {
         var integer = parseInt(arg.toString());
 
         if (isValidInteger(integer)) {
           return integer;
         }
+      } else if (typeof arg === 'boolean') {
+        return arg ? 1 : 0;
       }
 
       return null;
@@ -15218,7 +15216,7 @@ function removeNulls(things) {
 
 function numerical_sort(things, direction) {
   return things.sort(function (a, b) {
-    if (direction == null || direction === 'asc') {
+    if (direction == null || direction === 'asc' || direction === 'ascending') {
       return a - b;
     } else {
       return b - a;
