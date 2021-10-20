@@ -984,6 +984,30 @@ define DateTimeCollapseNoPer: collapse { DateTime1_12Interval, DateTime3_15Inter
 define DateTimeCollapsePerMs: collapse { DateTime1_12Interval, DateTime3_15Interval} per millisecond
 define DateTimeCollapsePerDay: collapse { DateTime1_12Interval, DateTime3_15Interval} per day
 
+// Date Intervals
+define Date1_12Interval: Interval[Date(2012, 1, 1), Date(2012, 1, 12)]
+define Date1_2Interval: Interval[Date(2012, 1, 1), Date(2012, 1, 2)]
+define Date3_15Interval: Interval[Date(2012, 1, 3), Date(2012, 1, 15)]
+define Date4_15Interval: Interval[Date(2012, 1, 4), Date(2012, 1, 15)]
+define Date1_15Interval: Interval[Date(2012, 1, 1), Date(2012, 1, 15)]
+define OverlappingDateCollapseNoPer: collapse { Date1_12Interval, Date3_15Interval }
+define AdjacentDateCollapseNoPer: collapse { Date1_2Interval, Date3_15Interval }
+define DisjointDateCollapseNoPer: collapse { Date1_2Interval, Date4_15Interval }
+define DateCollapsePerDay: collapse { Date1_2Interval, Date4_15Interval } per day
+define DateCollapsePerMonth: collapse { Date1_2Interval, Date4_15Interval } per month
+
+// Time Intervals
+define Time1_12Interval: Interval[Time(0, 0, 1), Time(0, 0, 12)]
+define Time1_2Interval: Interval[Time(0, 0, 1), Time(0, 0, 2)]
+define Time3_15Interval: Interval[Time(0, 0, 3), Time(0, 0, 15)]
+define Time4_15Interval: Interval[Time(0, 0, 4), Time(0, 0, 15)]
+define Time1_15Interval: Interval[Time(0, 0, 1), Time(0, 0, 15)]
+define OverlappingTimeCollapseNoPer: collapse { Time1_12Interval, Time3_15Interval }
+define AdjacentTimeCollapseNoPer: collapse { Time1_2Interval, Time3_15Interval }
+define DisjointTimeCollapseNoPer: collapse { Time1_2Interval, Time4_15Interval }
+define TimeCollapsePerSecond: collapse { Time1_2Interval, Time4_15Interval } per second
+define TimeCollapsePerMinute: collapse { Time1_2Interval, Time4_15Interval } per minute
+
 // Quantity Intervals with default units
 define QuantityIntervalList: { Interval[ToQuantity(1), ToQuantity(4)], Interval[ToQuantity(4), ToQuantity(8)] }
 define ExpectedQuantityList: { Interval[ToQuantity(1), ToQuantity(8)] }
