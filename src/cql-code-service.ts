@@ -1,24 +1,26 @@
-const { Code, ValueSet } = require('./datatypes/datatypes');
+import { Code, ValueSet } from './datatypes/datatypes';
 
-class CodeService {
-  constructor(valueSetsJson = {}) {
+export class CodeService {
+  valueSets: any;
+
+  constructor(valueSetsJson: any = {}) {
     this.valueSets = {};
-    for (let oid in valueSetsJson) {
+    for (const oid in valueSetsJson) {
       this.valueSets[oid] = {};
-      for (let version in valueSetsJson[oid]) {
+      for (const version in valueSetsJson[oid]) {
         const codes = valueSetsJson[oid][version].map(
-          code => new Code(code.code, code.system, code.version)
+          (code: any) => new Code(code.code, code.system, code.version)
         );
         this.valueSets[oid][version] = new ValueSet(oid, version, codes);
       }
     }
   }
 
-  findValueSetsByOid(oid) {
+  findValueSetsByOid(oid: string) {
     return this.valueSets[oid] ? Object.values(this.valueSets[oid]) : [];
   }
 
-  findValueSet(oid, version) {
+  findValueSet(oid: string, version?: string) {
     if (version != null) {
       return this.valueSets[oid] != null ? this.valueSets[oid][version] : undefined;
     } else {
@@ -26,7 +28,7 @@ class CodeService {
       if (results.length === 0) {
         return null;
       } else {
-        return results.reduce((a, b) => {
+        return results.reduce((a: any, b: any) => {
           if (a.version > b.version) {
             return a;
           } else {
@@ -37,5 +39,3 @@ class CodeService {
     }
   }
 }
-
-module.exports.CodeService = CodeService;

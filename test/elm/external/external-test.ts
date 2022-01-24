@@ -1,8 +1,8 @@
-const setup = require('../../setup');
+import setup from '../../setup';
 const data = require('./data');
 const vsets = require('./valuesets');
 const { p1 } = require('./patients');
-const { Repository } = require('../../../src/cql');
+import { Repository } from '../../../src/cql';
 
 describe('Retrieve', () => {
   beforeEach(function () {

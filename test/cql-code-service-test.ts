@@ -1,9 +1,9 @@
-const should = require('should');
-const { CodeService } = require('../src/cql-code-service');
-const { Code, ValueSet } = require('../src/datatypes/datatypes');
+import { CodeService } from '../src/cql-code-service';
+import { Code, ValueSet } from '../src/datatypes/datatypes';
+import should from 'should';
 
 describe('CodeService', () => {
-  let svc, vsOne, vsTwo, vsThree;
+  let svc: CodeService, vsOne: ValueSet, vsTwo: ValueSet, vsThree: ValueSet;
   beforeEach(() => {
     svc = new CodeService({
       '1.2.3.4.5': {

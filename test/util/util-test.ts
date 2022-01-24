@@ -1,4 +1,4 @@
-const { typeIsArray } = require('../../src/util/util');
+import { typeIsArray } from '../../src/util/util';
 
 describe('typeIsArray', () => {
   it('should properly identify arrays', () => {

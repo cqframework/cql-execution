@@ -1,8 +1,14 @@
-const { build } = require('./builder');
-const { typeIsArray } = require('../util/util');
+import { Context } from '../runtime/context';
+import { typeIsArray } from '../util/util';
 
-class Expression {
-  constructor(json) {
+import { build } from './builder';
+
+export class Expression {
+  localId?: string;
+  arg?: any;
+  args?: any[];
+
+  constructor(json: any) {
     if (json.operand != null) {
       const op = build(json.operand);
       if (typeIsArray(json.operand)) {
@@ -16,7 +22,7 @@ class Expression {
     }
   }
 
-  execute(ctx) {
+  execute(ctx: Context) {
     if (this.localId != null) {
       // Store the localId and result on the root context of this library
       const execValue = this.exec(ctx);
@@ -27,31 +33,30 @@ class Expression {
     }
   }
 
-  exec(ctx) {
+  exec(_ctx: Context): any {
     return this;
   }
 
-  execArgs(ctx) {
-    switch (false) {
-      case this.args == null:
-        return this.args.map(arg => arg.execute(ctx));
-      case this.arg == null:
-        return this.arg.execute(ctx);
-      default:
-        return null;
+  execArgs(ctx: Context) {
+    if (this.args != null) {
+      return this.args.map(arg => arg.execute(ctx));
+    } else if (this.arg != null) {
+      return this.arg.execute(ctx);
+    } else {
+      return null;
     }
   }
 }
 
-class UnimplementedExpression extends Expression {
-  constructor(json) {
+export class UnimplementedExpression extends Expression {
+  json: any;
+
+  constructor(json: any) {
     super(json);
     this.json = json;
   }
 
-  exec(ctx) {
+  exec(_ctx: Context) {
     throw new Error(`Unimplemented Expression: ${this.json.type}`);
   }
 }
-
-module.exports = { Expression, UnimplementedExpression };

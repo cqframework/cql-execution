@@ -1,6 +1,6 @@
-const should = require('should');
-const { Interval } = require('../../../src/datatypes/interval');
-const setup = require('../../setup');
+import should from 'should';
+import { Interval } from '../../../src/datatypes/interval';
+import setup from '../../setup';
 const data = require('./data');
 const { p1 } = require('./patients');
 

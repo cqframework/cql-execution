@@ -1,10 +1,10 @@
-const should = require('should');
-const setup = require('../../setup');
+import should from 'should';
+import setup from '../../setup';
 const data = require('./data');
-const { Code, Concept } = require('../../../src/datatypes/clinical');
-const { DateTime, Date } = require('../../../src/datatypes/datetime');
-const { Interval } = require('../../../src/datatypes/interval');
-const { Quantity } = require('../../../src/datatypes/quantity');
+import { Code, Concept } from '../../../src/datatypes/clinical';
+import { DateTime, Date } from '../../../src/datatypes/datetime';
+import { Interval } from '../../../src/datatypes/interval';
+import { Quantity } from '../../../src/datatypes/quantity';
 
 describe('ParameterDef', () => {
   beforeEach(function () {

@@ -1,11 +1,51 @@
-const ucum = require('@lhncbc/ucum-lhc');
-const { decimalAdjust } = require('./math');
+import * as ucum from '@lhncbc/ucum-lhc';
+import { decimalAdjust } from './math';
 const utils = ucum.UcumLhcUtils.getInstance();
+
+// The CQL specification says that dates are based on the Gregorian calendar, so CQL-based year and month
+// identifiers will be matched to the UCUM gregorian units. See http://unitsofmeasure.org/ucum.html#para-31
+const CQL_TO_UCUM_DATE_UNITS = {
+  years: 'a_g',
+  year: 'a_g',
+  months: 'mo_g',
+  month: 'mo_g',
+  weeks: 'wk',
+  week: 'wk',
+  days: 'd',
+  day: 'd',
+  hours: 'h',
+  hour: 'h',
+  minutes: 'min',
+  minute: 'min',
+  seconds: 's',
+  second: 's',
+  milliseconds: 'ms',
+  millisecond: 'ms'
+};
+
+type CQLUnitKey = keyof typeof CQL_TO_UCUM_DATE_UNITS;
+
+const UCUM_TO_CQL_DATE_UNITS = {
+  a: 'year',
+  a_j: 'year',
+  a_g: 'year',
+  mo: 'month',
+  mo_j: 'month',
+  mo_g: 'month',
+  wk: 'week',
+  d: 'day',
+  h: 'hour',
+  min: 'minute',
+  s: 'second',
+  ms: 'millisecond'
+};
+
+type UCUMUnitKey = keyof typeof UCUM_TO_CQL_DATE_UNITS;
 
 // Cache Map<string, boolean> for unit validity results so we dont have to go to ucum-lhc for every check.
 const unitValidityCache = new Map();
 
-function checkUnit(unit, allowEmptyUnits = true, allowCQLDateUnits = true) {
+export function checkUnit(unit: any, allowEmptyUnits = true, allowCQLDateUnits = true) {
   if (allowEmptyUnits) {
     unit = fixEmptyUnit(unit);
   }
@@ -27,7 +67,7 @@ function checkUnit(unit, allowEmptyUnits = true, allowCQLDateUnits = true) {
   return unitValidityCache.get(unit);
 }
 
-function convertUnit(fromVal, fromUnit, toUnit, adjustPrecision = true) {
+export function convertUnit(fromVal: any, fromUnit: any, toUnit: any, adjustPrecision = true) {
   [fromUnit, toUnit] = [fromUnit, toUnit].map(fixUnit);
   const result = utils.convertUnitTo(fixUnit(fromUnit), fromVal, fixUnit(toUnit));
   if (result.status !== 'succeeded') {
@@ -36,15 +76,16 @@ function convertUnit(fromVal, fromUnit, toUnit, adjustPrecision = true) {
   return adjustPrecision ? decimalAdjust('round', result.toVal, -8) : result.toVal;
 }
 
-function normalizeUnitsWhenPossible(val1, unit1, val2, unit2) {
+export function normalizeUnitsWhenPossible(val1: any, unit1: any, val2: any, unit2: any) {
   // If both units are CQL date units, return CQL date units
   const useCQLDateUnits =
-    CQL_TO_UCUM_DATE_UNITS[unit1] != null && CQL_TO_UCUM_DATE_UNITS[unit2] != null;
-  const resultConverter = unit => {
+    CQL_TO_UCUM_DATE_UNITS[unit1 as CQLUnitKey] != null &&
+    CQL_TO_UCUM_DATE_UNITS[unit2 as CQLUnitKey] != null;
+  const resultConverter = (unit: any) => {
     return useCQLDateUnits ? convertToCQLDateUnit(unit) : unit;
   };
 
-  [unit1, unit2] = [unit1, unit2].map(fixUnit);
+  [unit1, unit2] = [unit1, unit2].map(u => fixUnit(u) as CQLUnitKey);
   if (unit1 === unit2) {
     return [val1, unit1, val2, unit2];
   }
@@ -68,21 +109,21 @@ function normalizeUnitsWhenPossible(val1, unit1, val2, unit2) {
   return [newVal1, resultConverter(newUnit1), val2, resultConverter(unit2)];
 }
 
-function convertToCQLDateUnit(unit) {
-  if (CQL_TO_UCUM_DATE_UNITS[unit]) {
+export function convertToCQLDateUnit(unit: any) {
+  if (CQL_TO_UCUM_DATE_UNITS[unit as CQLUnitKey]) {
     // it's already a CQL unit, so return it as-is, removing trailing 's' if necessary (e.g., years -> year)
     return unit.replace(/s$/, '');
   }
-  return UCUM_TO_CQL_DATE_UNITS[unit];
+  return UCUM_TO_CQL_DATE_UNITS[unit as UCUMUnitKey];
 }
 
-function compareUnits(unit1, unit2) {
+export function compareUnits(unit1: any, unit2: any) {
   try {
     const c = convertUnit(1, unit1, unit2);
-    if (c > 1) {
+    if (c && c > 1) {
       // unit1 is bigger (less precise)
       return 1;
-    } else if (c < 1) {
+    } else if (c && c < 1) {
       // unit1 is smaller
       return -1;
     }
@@ -93,7 +134,7 @@ function compareUnits(unit1, unit2) {
   }
 }
 
-function getProductOfUnits(unit1, unit2) {
+export function getProductOfUnits(unit1: any, unit2: any): any {
   [unit1, unit2] = [unit1, unit2].map(fixEmptyUnit);
   if (!checkUnit(unit1).valid || !checkUnit(unit2).valid) {
     return null;
@@ -105,8 +146,8 @@ function getProductOfUnits(unit1, unit2) {
     const match1 = unit1.match(/([^/]*)(\/(.*))?/);
     const match2 = unit2.match(/([^/]*)(\/(.*))?/);
     // In the previous regexes, numerator is match[1], denominator is match[3]
-    let newNum = getProductOfUnits(match1[1], match2[1]);
-    let newDen = getProductOfUnits(match1[3], match2[3]);
+    const newNum = getProductOfUnits(match1[1], match2[1]);
+    const newDen = getProductOfUnits(match1[3], match2[3]);
     return getQuotientOfUnits(newNum, newDen);
   }
 
@@ -135,7 +176,7 @@ function getProductOfUnits(unit1, unit2) {
   );
 }
 
-function getQuotientOfUnits(unit1, unit2) {
+export function getQuotientOfUnits(unit1: any, unit2: any) {
   [unit1, unit2] = [unit1, unit2].map(fixEmptyUnit);
   if (!checkUnit(unit1).valid || !checkUnit(unit2).valid) {
     return null;
@@ -148,12 +189,12 @@ function getQuotientOfUnits(unit1, unit2) {
     // powers since they are being divided.
     // e.g., 'm3.L' / 'm' ==> { m: 2, L: -1}; 'm.L' / '1' ==> { m: 1, L: 1 }; '1' / '1' ==> { 1: 0 }
     const factorPowerMap = new Map();
-    unit1.split('.').forEach(factor => {
+    unit1.split('.').forEach((factor: any) => {
       const [baseUnit, power] = getBaseUnitAndPower(factor);
       const accumulatedPower = (factorPowerMap.get(baseUnit) || 0) + power;
       factorPowerMap.set(baseUnit, accumulatedPower);
     });
-    unit2.split('.').forEach(factor => {
+    unit2.split('.').forEach((factor: any) => {
       const [baseUnit, power] = getBaseUnitAndPower(factor);
       const accumulatedPower = (factorPowerMap.get(baseUnit) || 0) - power;
       factorPowerMap.set(baseUnit, accumulatedPower);
@@ -197,14 +238,14 @@ function getQuotientOfUnits(unit1, unit2) {
 
 // UNEXPORTED FUNCTIONS
 
-function convertToBaseUnit(fromVal, fromUnit, toBaseUnit) {
+function convertToBaseUnit(fromVal: any, fromUnit: any, toBaseUnit: any) {
   const fromPower = getBaseUnitAndPower(fromUnit)[1];
   const toUnit = fromPower === 1 ? toBaseUnit : `${toBaseUnit}${fromPower}`;
   const newVal = convertUnit(fromVal, fromUnit, toUnit);
   return newVal != null ? [newVal, toUnit] : [];
 }
 
-function getBaseUnitAndPower(unit) {
+function getBaseUnitAndPower(unit: any) {
   // don't try to extract power from complex units (containing multipliers or divisors)
   if (/[./]/.test(unit)) {
     return [unit, 1];
@@ -220,63 +261,17 @@ function getBaseUnitAndPower(unit) {
   return [term, parseInt(power)];
 }
 
-// The CQL specification says that dates are based on the Gregorian calendar, so CQL-based year and month
-// identifiers will be matched to the UCUM gregorian units. See http://unitsofmeasure.org/ucum.html#para-31
-const CQL_TO_UCUM_DATE_UNITS = {
-  years: 'a_g',
-  year: 'a_g',
-  months: 'mo_g',
-  month: 'mo_g',
-  weeks: 'wk',
-  week: 'wk',
-  days: 'd',
-  day: 'd',
-  hours: 'h',
-  hour: 'h',
-  minutes: 'min',
-  minute: 'min',
-  seconds: 's',
-  second: 's',
-  milliseconds: 'ms',
-  millisecond: 'ms'
-};
-
-const UCUM_TO_CQL_DATE_UNITS = {
-  a: 'year',
-  a_j: 'year',
-  a_g: 'year',
-  mo: 'month',
-  mo_j: 'month',
-  mo_g: 'month',
-  wk: 'week',
-  d: 'day',
-  h: 'hour',
-  min: 'minute',
-  s: 'second',
-  ms: 'millisecond'
-};
-
-function fixEmptyUnit(unit) {
+function fixEmptyUnit(unit: any) {
   if (unit == null || (unit.trim && unit.trim() === '')) {
     return '1';
   }
   return unit;
 }
 
-function fixCQLDateUnit(unit) {
+function fixCQLDateUnit(unit: CQLUnitKey) {
   return CQL_TO_UCUM_DATE_UNITS[unit] || unit;
 }
 
-function fixUnit(unit) {
+function fixUnit(unit: any) {
   return fixCQLDateUnit(fixEmptyUnit(unit));
 }
-
-module.exports = {
-  checkUnit,
-  convertUnit,
-  normalizeUnitsWhenPossible,
-  convertToCQLDateUnit,
-  compareUnits,
-  getProductOfUnits,
-  getQuotientOfUnits
-};

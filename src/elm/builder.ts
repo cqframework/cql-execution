@@ -1,13 +1,14 @@
-const E = require('./expressions');
-const { typeIsArray } = require('../util/util');
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import * as E from './expressions';
+import { typeIsArray } from '../util/util';
 
-function build(json) {
+function build(json: any): any {
   if (json == null) {
     return json;
   }
 
   if (typeIsArray(json)) {
-    return json.map(child => build(child));
+    return (json as any[]).map(child => build(child));
   }
 
   if (json.type === 'FunctionRef') {
@@ -21,12 +22,14 @@ function build(json) {
   }
 }
 
-function functionExists(name) {
+function functionExists(name: string) {
+  // @ts-ignore
   return typeof E[name] === 'function';
 }
 
-function constructByName(name, json) {
+function constructByName(name: string, json: any) {
+  // @ts-ignore
   return new E[name](json);
 }
 
-module.exports = { build };
+export { build };

@@ -1,15 +1,18 @@
-const { decimalAdjust, isValidDecimal, overflowsOrUnderflows } = require('../util/math');
-const {
+import { decimalAdjust, isValidDecimal, overflowsOrUnderflows } from '../util/math';
+import {
   checkUnit,
   convertUnit,
   normalizeUnitsWhenPossible,
   convertToCQLDateUnit,
   getProductOfUnits,
   getQuotientOfUnits
-} = require('../util/units');
+} from '../util/units';
 
-class Quantity {
-  constructor(value, unit) {
+export class Quantity {
+  value: any;
+  unit?: any;
+
+  constructor(value: any, unit?: any) {
     this.value = value;
     this.unit = unit;
     if (this.value == null || isNaN(this.value)) {
@@ -39,7 +42,7 @@ class Quantity {
     return `${this.value} '${this.unit}'`;
   }
 
-  sameOrBefore(other) {
+  sameOrBefore(other: any) {
     if (other != null && other.isQuantity) {
       const otherVal = convertUnit(other.value, other.unit, this.unit);
       if (otherVal == null) {
@@ -50,7 +53,7 @@ class Quantity {
     }
   }
 
-  sameOrAfter(other) {
+  sameOrAfter(other: any) {
     if (other != null && other.isQuantity) {
       const otherVal = convertUnit(other.value, other.unit, this.unit);
       if (otherVal == null) {
@@ -61,7 +64,7 @@ class Quantity {
     }
   }
 
-  after(other) {
+  after(other: any) {
     if (other != null && other.isQuantity) {
       const otherVal = convertUnit(other.value, other.unit, this.unit);
       if (otherVal == null) {
@@ -72,7 +75,7 @@ class Quantity {
     }
   }
 
-  before(other) {
+  before(other: any) {
     if (other != null && other.isQuantity) {
       const otherVal = convertUnit(other.value, other.unit, this.unit);
       if (otherVal == null) {
@@ -83,7 +86,7 @@ class Quantity {
     }
   }
 
-  equals(other) {
+  equals(other: any) {
     if (other != null && other.isQuantity) {
       if ((!this.unit && other.unit) || (this.unit && !other.unit)) {
         return false;
@@ -100,13 +103,13 @@ class Quantity {
     }
   }
 
-  convertUnit(toUnit) {
+  convertUnit(toUnit: any) {
     const value = convertUnit(this.value, this.unit, toUnit);
     // Need to pass through constructor again to catch invalid units
     return new Quantity(value, toUnit);
   }
 
-  dividedBy(other) {
+  dividedBy(other: any) {
     if (other == null || other === 0 || other.value === 0) {
       return null;
     } else if (!other.isQuantity) {
@@ -114,7 +117,7 @@ class Quantity {
       other = new Quantity(other, '1');
     }
 
-    let [val1, unit1, val2, unit2] = normalizeUnitsWhenPossible(
+    const [val1, unit1, val2, unit2] = normalizeUnitsWhenPossible(
       this.value,
       this.unit,
       other.value,
@@ -130,7 +133,7 @@ class Quantity {
     return new Quantity(decimalAdjust('round', resultValue, -8), resultUnit);
   }
 
-  multiplyBy(other) {
+  multiplyBy(other: any) {
     if (other == null) {
       return null;
     } else if (!other.isQuantity) {
@@ -138,7 +141,7 @@ class Quantity {
       other = new Quantity(other, '1');
     }
 
-    let [val1, unit1, val2, unit2] = normalizeUnitsWhenPossible(
+    const [val1, unit1, val2, unit2] = normalizeUnitsWhenPossible(
       this.value,
       this.unit,
       other.value,
@@ -155,7 +158,7 @@ class Quantity {
   }
 }
 
-function parseQuantity(str) {
+export function parseQuantity(str: string) {
   const components = /([+|-]?\d+\.?\d*)\s*('(.+)')?/.exec(str);
   if (components != null && components[1] != null) {
     const value = parseFloat(components[1]);
@@ -174,7 +177,7 @@ function parseQuantity(str) {
   }
 }
 
-function doScaledAddition(a, b, scaleForB) {
+function doScaledAddition(a: any, b: any, scaleForB: any) {
   if (a != null && a.isQuantity && b != null && b.isQuantity) {
     const [val1, unit1, val2, unit2] = normalizeUnitsWhenPossible(
       a.value,
@@ -200,33 +203,24 @@ function doScaledAddition(a, b, scaleForB) {
   }
 }
 
-function doAddition(a, b) {
+export function doAddition(a: any, b: any) {
   return doScaledAddition(a, b, 1);
 }
 
-function doSubtraction(a, b) {
+export function doSubtraction(a: any, b: any) {
   return doScaledAddition(a, b, -1);
 }
 
-function doDivision(a, b) {
+export function doDivision(a: any, b: any) {
   if (a != null && a.isQuantity) {
     return a.dividedBy(b);
   }
 }
 
-function doMultiplication(a, b) {
+export function doMultiplication(a: any, b: any) {
   if (a != null && a.isQuantity) {
     return a.multiplyBy(b);
   } else {
     return b.multiplyBy(a);
   }
 }
-
-module.exports = {
-  Quantity,
-  parseQuantity,
-  doAddition,
-  doSubtraction,
-  doDivision,
-  doMultiplication
-};

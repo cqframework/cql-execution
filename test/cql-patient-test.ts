@@ -1,8 +1,9 @@
-const { Patient } = require('../src/cql-patient');
-const DT = require('../src/datatypes/datatypes');
+import { Patient } from '../src/cql-patient';
+import * as DT from '../src/datatypes/datatypes';
+import 'should';
 
 describe('Record', () => {
-  let encRecord, cndRecord;
+  let encRecord: any, cndRecord: any;
   beforeEach(() => {
     const patient = new Patient({
       records: [
@@ -30,7 +31,7 @@ describe('Record', () => {
         }
       ]
     });
-    [encRecord, cndRecord] = Object.values(patient.records).map(r => r[0]);
+    [encRecord, cndRecord] = Object.values(patient.records).map((r: any) => r[0]);
   });
 
   it('should get simple record entries', () => {
@@ -76,7 +77,7 @@ describe('Record', () => {
 });
 
 describe('Patient', () => {
-  let patient;
+  let patient: Patient;
   beforeEach(() => {
     patient = new Patient({
       id: '1',
@@ -114,7 +115,7 @@ describe('Patient', () => {
     patient.id.should.equal('1');
     patient.name.should.equal('Bob Jones');
     patient.gender.should.equal('M');
-    patient.birthDate.should.eql(DT.DateTime.parse('1974-07-12T11:15'));
+    patient.birthDate?.should.eql(DT.DateTime.parse('1974-07-12T11:15'));
   });
 
   it('should find records by profile', () => {

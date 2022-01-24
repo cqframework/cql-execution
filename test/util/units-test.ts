@@ -1,5 +1,5 @@
-const should = require('should');
-const {
+import should from 'should';
+import {
   checkUnit,
   convertUnit,
   normalizeUnitsWhenPossible,
@@ -7,7 +7,7 @@ const {
   compareUnits,
   getProductOfUnits,
   getQuotientOfUnits
-} = require('../../src/util/units');
+} from '../../src/util/units';
 
 describe('checkUnit', () => {
   it('should validate proper simple units', () => {

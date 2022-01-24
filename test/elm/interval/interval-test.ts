@@ -1,9 +1,9 @@
-const should = require('should');
-const setup = require('../../setup');
+import should from 'should';
+import setup from '../../setup';
 const data = require('./data');
-const { Interval } = require('../../../src/datatypes/interval');
-const { DateTime } = require('../../../src/datatypes/datetime');
-const {
+import { Interval } from '../../../src/datatypes/interval';
+import { DateTime } from '../../../src/datatypes/datetime';
+import {
   MIN_INT_VALUE,
   MAX_INT_VALUE,
   MIN_FLOAT_VALUE,
@@ -11,7 +11,7 @@ const {
   MAX_FLOAT_VALUE,
   MIN_DATETIME_VALUE,
   MAX_DATETIME_VALUE
-} = require('../../../src/util/math');
+} from '../../../src/util/math';
 
 describe('Interval', () => {
   beforeEach(function () {
@@ -2145,7 +2145,7 @@ describe('Collapse', () => {
   });
 });
 
-const prettyList = function (array) {
+const prettyList = function (array: any) {
   if (array == null) {
     return array;
   }

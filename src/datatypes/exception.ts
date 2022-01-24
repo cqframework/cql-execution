@@ -1,8 +1,9 @@
-class Exception {
-  constructor(message, wrapped) {
+export class Exception {
+  message?: string;
+  wrapped?: any;
+
+  constructor(message?: string, wrapped?: any) {
     this.message = message;
     this.wrapped = wrapped;
   }
 }
-
-module.exports = { Exception };

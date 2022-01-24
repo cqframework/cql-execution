@@ -1,10 +1,10 @@
-const should = require('should');
-const data = require('./interval-data');
-const { Interval } = require('../../src/datatypes/interval');
-const { DateTime } = require('../../src/datatypes/datetime');
-const { Uncertainty } = require('../../src/datatypes/uncertainty');
+import should from 'should';
+import data from './interval-data';
+import { Interval } from '../../src/datatypes/interval';
+import { DateTime } from '../../src/datatypes/datetime';
+import { Uncertainty } from '../../src/datatypes/uncertainty';
 
-const xy = obj => [obj.x, obj.y];
+const xy = (obj: any) => [obj.x, obj.y];
 
 describe('Interval', () => {
   it('should properly set all properties when constructed as DateTime interval', () => {
@@ -33,7 +33,7 @@ describe('Interval', () => {
 });
 
 describe('DateTimeInterval.contains', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -109,7 +109,7 @@ describe('DateTimeInterval.contains', () => {
 });
 
 describe('DateTimeInterval.includes', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -235,7 +235,7 @@ describe('DateTimeInterval.includes', () => {
 });
 
 describe('DateTimeInterval.includedIn', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -362,7 +362,7 @@ describe('DateTimeInterval.includedIn', () => {
 });
 
 describe('DateTimeInterval.overlaps(DateTimeInterval)', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -484,7 +484,7 @@ describe('DateTimeInterval.overlaps(DateTimeInterval)', () => {
 });
 
 describe('DateTimeInterval.overlaps(DateTime)', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -535,7 +535,7 @@ describe('DateTimeInterval.overlaps(DateTime)', () => {
 });
 
 describe('DateTimeInterval.equals', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -691,7 +691,7 @@ describe('DateTimeInterval.equals', () => {
 });
 
 describe('DateTimeInterval.union', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -873,7 +873,7 @@ describe('DateTimeInterval.union', () => {
 });
 
 describe('DateTimeInterval.intersect', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -999,7 +999,7 @@ describe('DateTimeInterval.intersect', () => {
 });
 
 describe('DateTimeInterval.except', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -1131,7 +1131,7 @@ describe('DateTimeInterval.except', () => {
 });
 
 describe('DateTimeInterval.after', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -1264,7 +1264,7 @@ describe('DateTimeInterval.after', () => {
 });
 
 describe('DateTimeInterval.before', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -1397,7 +1397,7 @@ describe('DateTimeInterval.before', () => {
 
 // TODO Add tests that pass in precision parameters
 describe('DateTimeInterval.meets', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -1520,7 +1520,7 @@ describe('DateTimeInterval.meets', () => {
 
 // TODO Add tests that pass in precision parameter
 describe('DateTimeInterval.meetsAfter', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -1648,7 +1648,7 @@ describe('DateTimeInterval.meetsAfter', () => {
 
 // TODO Add tests that pass in precision parameter
 describe('DateTimeInterval.meetsBefore', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -1771,7 +1771,7 @@ describe('DateTimeInterval.meetsBefore', () => {
 });
 
 describe('IntegerInterval.contains', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -1846,7 +1846,7 @@ describe('IntegerInterval.contains', () => {
 });
 
 describe('IntegerInterval.includes', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -1963,7 +1963,7 @@ describe('IntegerInterval.includes', () => {
 });
 
 describe('IntegerInterval.includedIn', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -2082,7 +2082,7 @@ describe('IntegerInterval.includedIn', () => {
 });
 
 describe('IntegerInterval.overlaps(IntegerInterval)', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -2195,7 +2195,7 @@ describe('IntegerInterval.overlaps(IntegerInterval)', () => {
 });
 
 describe('IntegerInterval.overlaps(Integer)', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -2253,7 +2253,7 @@ describe('IntegerInterval.overlaps(Integer)', () => {
 });
 
 describe('IntegerInterval.equals', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -2395,7 +2395,7 @@ describe('IntegerInterval.equals', () => {
 });
 
 describe('IntegerInterval.union', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -2539,7 +2539,7 @@ describe('IntegerInterval.union', () => {
 });
 
 describe('IntegerInterval.intersect', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -2675,7 +2675,7 @@ describe('IntegerInterval.intersect', () => {
 });
 
 describe('IntegerInterval.except', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -2809,7 +2809,7 @@ describe('IntegerInterval.except', () => {
 });
 
 describe('IntegerInterval.after', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -2930,7 +2930,7 @@ describe('IntegerInterval.after', () => {
 });
 
 describe('IntegerInterval.before', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -3051,7 +3051,7 @@ describe('IntegerInterval.before', () => {
 });
 
 describe('IntegerInterval.meets', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -3172,7 +3172,7 @@ describe('IntegerInterval.meets', () => {
 });
 
 describe('IntegerInterval.meetsAfter', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });
@@ -3293,7 +3293,7 @@ describe('IntegerInterval.meetsAfter', () => {
 });
 
 describe('IntegerInterval.meetsBefore', () => {
-  let d;
+  let d: any;
   beforeEach(() => {
     d = data();
   });

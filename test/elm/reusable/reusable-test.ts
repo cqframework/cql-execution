@@ -1,4 +1,4 @@
-const setup = require('../../setup');
+import setup from '../../setup';
 const data = require('./data');
 const { p1 } = require('./patients');
 

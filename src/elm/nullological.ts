@@ -1,42 +1,45 @@
-const { Expression } = require('./expression');
+import { Context } from '../runtime/context';
+import { Expression } from './expression';
 
 class Null extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(_ctx: Context): any {
     return null;
   }
 }
 
 class IsNull extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     return this.execArgs(ctx) == null;
   }
 }
 
 class Coalesce extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
-    for (let arg of this.args) {
-      const result = arg.execute(ctx);
-      // if a single arg that's a list, coalesce over the list
-      if (this.args.length === 1 && Array.isArray(result)) {
-        const item = result.find(item => item != null);
-        if (item != null) {
-          return item;
-        }
-      } else {
-        if (result != null) {
-          return result;
+  exec(ctx: Context) {
+    if (this.args) {
+      for (const arg of this.args) {
+        const result = arg.execute(ctx);
+        // if a single arg that's a list, coalesce over the list
+        if (this.args.length === 1 && Array.isArray(result)) {
+          const item = result.find(item => item != null);
+          if (item != null) {
+            return item;
+          }
+        } else {
+          if (result != null) {
+            return result;
+          }
         }
       }
     }
@@ -44,4 +47,4 @@ class Coalesce extends Expression {
   }
 }
 
-module.exports = { Coalesce, IsNull, Null };
+export { Coalesce, IsNull, Null };

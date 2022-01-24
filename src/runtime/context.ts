@@ -1,10 +1,31 @@
-const { Exception } = require('../datatypes/exception');
-const { typeIsArray } = require('../util/util');
-const { NullMessageListener } = require('./messageListeners');
-const dt = require('../datatypes/datatypes');
+import { Exception } from '../datatypes/exception';
+import { typeIsArray } from '../util/util';
+import * as dt from '../datatypes/datatypes';
+import { CodeService } from '../cql-code-service';
+import { MessageListener, NullMessageListener } from './messageListeners';
+import { Patient } from '../cql-patient';
 
-class Context {
-  constructor(parent, _codeService, _parameters, executionDateTime, messageListener) {
+export class Context {
+  // Construcor args
+  parent: any;
+  _codeService?: CodeService | null;
+  _parameters?: any;
+  executionDateTime?: dt.DateTime;
+  messageListener?: MessageListener;
+
+  // Auto-initialized properties
+  context_values: any;
+  library_context: any;
+  localId_context: any;
+  evaluatedRecords: any[];
+
+  constructor(
+    parent: Context,
+    _codeService?: CodeService | null,
+    _parameters?: any,
+    executionDateTime?: dt.DateTime,
+    messageListener?: MessageListener
+  ) {
     this.parent = parent;
     this._codeService = _codeService;
     this.context_values = {};
@@ -18,7 +39,7 @@ class Context {
     this.messageListener = messageListener;
   }
 
-  get parameters() {
+  get parameters(): any {
     return this._parameters || (this.parent && this.parent.parameters);
   }
 
@@ -27,7 +48,7 @@ class Context {
     this._parameters = params;
   }
 
-  get codeService() {
+  get codeService(): CodeService {
     return this._codeService || (this.parent && this.parent.codeService);
   }
 
@@ -35,12 +56,12 @@ class Context {
     this._codeService = cs;
   }
 
-  withParameters(params) {
+  withParameters(params: any) {
     this.parameters = params || {};
     return this;
   }
 
-  withCodeService(cs) {
+  withCodeService(cs: CodeService) {
     this.codeService = cs;
     return this;
   }
@@ -53,7 +74,7 @@ class Context {
     }
   }
 
-  findRecords(profile) {
+  findRecords(profile: any): any {
     return this.parent && this.parent.findRecords(profile);
   }
 
@@ -63,19 +84,19 @@ class Context {
     return ctx;
   }
 
-  getLibraryContext(library) {
+  getLibraryContext(library: any) {
     return this.parent && this.parent.getLibraryContext(library);
   }
 
-  getLocalIdContext(localId) {
+  getLocalIdContext(localId: any): Context {
     return this.parent && this.parent.getLocalIdContext(localId);
   }
 
-  getParameter(name) {
+  getParameter(name: string): any {
     return this.parent && this.parent.getParameter(name);
   }
 
-  getParentParameter(name) {
+  getParentParameter(name: string): any {
     if (this.parent) {
       if (this.parent.parameters[name] != null) {
         return this.parent.parameters[name];
@@ -85,7 +106,7 @@ class Context {
     }
   }
 
-  getTimezoneOffset() {
+  getTimezoneOffset(): number | null {
     if (this.executionDateTime != null) {
       return this.executionDateTime.timezoneOffset;
     } else if (this.parent && this.parent.getTimezoneOffset != null) {
@@ -95,7 +116,7 @@ class Context {
     }
   }
 
-  getExecutionDateTime() {
+  getExecutionDateTime(): dt.DateTime {
     if (this.executionDateTime != null) {
       return this.executionDateTime;
     } else if (this.parent && this.parent.getExecutionDateTime != null) {
@@ -105,7 +126,7 @@ class Context {
     }
   }
 
-  getMessageListener() {
+  getMessageListener(): MessageListener {
     if (this.messageListener != null) {
       return this.messageListener;
     } else if (this.parent && this.parent.getMessageListener != null) {
@@ -115,23 +136,23 @@ class Context {
     }
   }
 
-  getValueSet(name, library) {
+  getValueSet(name: string, library: any) {
     return this.parent && this.parent.getValueSet(name, library);
   }
 
-  getCodeSystem(name) {
+  getCodeSystem(name: string) {
     return this.parent && this.parent.getCodeSystem(name);
   }
 
-  getCode(name) {
+  getCode(name: string) {
     return this.parent && this.parent.getCode(name);
   }
 
-  getConcept(name) {
+  getConcept(name: string) {
     return this.parent && this.parent.getConcept(name);
   }
 
-  get(identifier) {
+  get(identifier: string): any {
     // Check for undefined because if its null, we actually *do* want to return null (rather than
     // looking at parent), but if it's really undefined, *then* look at the parent
     if (typeof this.context_values[identifier] !== 'undefined') {
@@ -143,11 +164,11 @@ class Context {
     }
   }
 
-  set(identifier, value) {
+  set(identifier: string, value: any) {
     this.context_values[identifier] = value;
   }
 
-  setLocalIdWithResult(localId, value) {
+  setLocalIdWithResult(localId: string, value: any) {
     // Temporary fix. Real fix will be to return a list of all result values for a given localId.
     const ctx = this.localId_context[localId];
     if (ctx === false || ctx === null || ctx === undefined || ctx.length === 0) {
@@ -155,20 +176,20 @@ class Context {
     }
   }
 
-  getLocalIdResult(localId) {
+  getLocalIdResult(localId: string) {
     return this.localId_context[localId];
   }
 
   // Returns an object of objects containing each library name
   // with the localIds and result values
   getAllLocalIds() {
-    const localIdResults = {};
+    const localIdResults: any = {};
     // Add the localIds and result values from the main library
     localIdResults[this.parent.source.library.identifier.id] = {};
     localIdResults[this.parent.source.library.identifier.id] = this.localId_context;
 
     // Iterate over support libraries and store localIds
-    for (let libName in this.library_context) {
+    for (const libName in this.library_context) {
       const lib = this.library_context[libName];
       this.supportLibraryLocalIds(lib, localIdResults);
     }
@@ -176,7 +197,7 @@ class Context {
   }
 
   // Recursive function that will grab nested support library localId results
-  supportLibraryLocalIds(lib, localIdResults) {
+  supportLibraryLocalIds(lib: any, localIdResults: any) {
     // Set library identifier name as the key and the object of localIds with their results as the value
     // if it already exists then we need to merge the results instead of overwriting
     if (localIdResults[lib.library.source.library.identifier.id] != null) {
@@ -196,8 +217,8 @@ class Context {
 
   // Merges the localId results for a library into the already collected results. The logic used for which result
   // to keep is the same as the logic used above in setLocalIdWithResult, "falsey" results are always replaced.
-  mergeLibraryLocalIdResults(localIdResults, libraryId, libraryResults) {
-    for (let localId in libraryResults) {
+  mergeLibraryLocalIdResults(localIdResults: any, libraryId: string, libraryResults: any) {
+    for (const localId in libraryResults) {
       const localIdResult = libraryResults[localId];
       const existingResult = localIdResults[libraryId][localId];
       // overwite this localid result if the existing result is "falsey". future work could track all results for each localid
@@ -212,8 +233,8 @@ class Context {
     }
   }
 
-  checkParameters(params) {
-    for (let pName in params) {
+  checkParameters(params: any) {
+    for (const pName in params) {
       const pVal = params[pName];
       const pDef = this.getParameter(pName);
       if (pVal == null) {
@@ -233,7 +254,7 @@ class Context {
     return true;
   }
 
-  matchesTypeSpecifier(val, spec) {
+  matchesTypeSpecifier(val: any, spec: any) {
     switch (spec.type) {
       case 'NamedTypeSpecifier':
         return this.matchesNamedTypeSpecifier(val, spec);
@@ -250,11 +271,13 @@ class Context {
     }
   }
 
-  matchesListTypeSpecifier(val, spec) {
-    return typeIsArray(val) && val.every(x => this.matchesTypeSpecifier(x, spec.elementType));
+  matchesListTypeSpecifier(val: any, spec: any): boolean {
+    return (
+      typeIsArray(val) && (val as any[]).every(x => this.matchesTypeSpecifier(x, spec.elementType))
+    );
   }
 
-  matchesTupleTypeSpecifier(val, spec) {
+  matchesTupleTypeSpecifier(val: any, spec: any): boolean {
     // TODO: Spec is not clear about exactly how tuples should be matched
     return (
       val != null &&
@@ -267,14 +290,14 @@ class Context {
       !val.isDate &&
       !val.isQuantity &&
       spec.element.every(
-        x =>
+        (x: any) =>
           typeof val[x.name] === 'undefined' ||
           this.matchesTypeSpecifier(val[x.name], x.elementType)
       )
     );
   }
 
-  matchesIntervalTypeSpecifier(val, spec) {
+  matchesIntervalTypeSpecifier(val: any, spec: any): boolean {
     return (
       val.isInterval &&
       (val.low == null || this.matchesTypeSpecifier(val.low, spec.pointType)) &&
@@ -282,11 +305,11 @@ class Context {
     );
   }
 
-  matchesChoiceTypeSpecifier(val, spec) {
-    return spec.choice.some(c => this.matchesTypeSpecifier(val, c));
+  matchesChoiceTypeSpecifier(val: any, spec: any): boolean {
+    return spec.choice.some((c: any) => this.matchesTypeSpecifier(val, c));
   }
 
-  matchesNamedTypeSpecifier(val, spec) {
+  matchesNamedTypeSpecifier(val: any, spec: any): boolean {
     if (val == null) {
       return true;
     }
@@ -335,7 +358,7 @@ class Context {
     }
   }
 
-  matchesInstanceType(val, inst) {
+  matchesInstanceType(val: any, inst: any): boolean {
     if (inst.isBooleanLiteral) {
       return typeof val === 'boolean';
     } else if (inst.isDecimalLiteral) {
@@ -366,21 +389,24 @@ class Context {
     return true; // default to true when we don't know for sure
   }
 
-  matchesListInstanceType(val, list) {
-    return typeIsArray(val) && val.every(x => this.matchesInstanceType(x, list.elements[0]));
+  matchesListInstanceType(val: any, list: any) {
+    return (
+      typeIsArray(val) && (val as any[]).every(x => this.matchesInstanceType(x, list.elements[0]))
+    );
   }
 
-  matchesTupleInstanceType(val, tpl) {
+  matchesTupleInstanceType(val: any, tpl: any) {
     return (
       typeof val === 'object' &&
       !typeIsArray(val) &&
       tpl.elements.every(
-        x => typeof val[x.name] === 'undefined' || this.matchesInstanceType(val[x.name], x.value)
+        (x: any) =>
+          typeof val[x.name] === 'undefined' || this.matchesInstanceType(val[x.name], x.value)
       )
     );
   }
 
-  matchesIntervalInstanceType(val, ivl) {
+  matchesIntervalInstanceType(val: any, ivl: any) {
     const pointType = ivl.low != null ? ivl.low : ivl.high;
     return (
       val.isInterval &&
@@ -390,14 +416,17 @@ class Context {
   }
 }
 
-class PatientContext extends Context {
+export class PatientContext extends Context {
+  library: any;
+  patient?: Patient | null;
+
   constructor(
-    library,
-    patient,
-    codeService,
-    parameters,
-    executionDateTime = dt.DateTime.fromJSDate(new Date()),
-    messageListener = new NullMessageListener()
+    library: any,
+    patient?: Patient | null,
+    codeService?: CodeService | null,
+    parameters?: any,
+    executionDateTime: dt.DateTime = dt.DateTime.fromJSDate(new Date()),
+    messageListener: MessageListener = new NullMessageListener()
   ) {
     super(library, codeService, parameters, executionDateTime, messageListener);
     this.library = library;
@@ -408,7 +437,7 @@ class PatientContext extends Context {
     return this;
   }
 
-  getLibraryContext(library) {
+  getLibraryContext(library: any) {
     if (this.library_context[library] == null) {
       this.library_context[library] = new PatientContext(
         this.get(library),
@@ -421,7 +450,7 @@ class PatientContext extends Context {
     return this.library_context[library];
   }
 
-  getLocalIdContext(localId) {
+  getLocalIdContext(localId: string) {
     if (this.localId_context[localId] == null) {
       this.localId_context[localId] = new PatientContext(
         this.get(localId),
@@ -434,19 +463,22 @@ class PatientContext extends Context {
     return this.localId_context[localId];
   }
 
-  findRecords(profile) {
+  findRecords(profile: any) {
     return this.patient && this.patient.findRecords(profile);
   }
 }
 
-class UnfilteredContext extends Context {
+export class UnfilteredContext extends Context {
+  library: any;
+  results: any;
+
   constructor(
-    library,
-    results,
-    codeService,
-    parameters,
-    executionDateTime = dt.DateTime.fromJSDate(new Date()),
-    messageListener = new NullMessageListener()
+    library: any,
+    results: any,
+    codeService?: CodeService | null,
+    parameters?: any,
+    executionDateTime: dt.DateTime = dt.DateTime.fromJSDate(new Date()),
+    messageListener: MessageListener = new NullMessageListener()
   ) {
     super(library, codeService, parameters, executionDateTime, messageListener);
     this.library = library;
@@ -457,15 +489,15 @@ class UnfilteredContext extends Context {
     return this;
   }
 
-  findRecords(template) {
+  findRecords(_template: any) {
     throw new Exception('Retreives are not currently supported in Unfiltered Context');
   }
 
-  getLibraryContext(library) {
+  getLibraryContext(_library: any) {
     throw new Exception('Library expressions are not currently supported in Unfiltered Context');
   }
 
-  get(identifier) {
+  get(identifier: string) {
     //First check to see if the identifier is a unfiltered context expression that has already been cached
     if (this.context_values[identifier]) {
       return this.context_values[identifier];
@@ -476,8 +508,6 @@ class UnfilteredContext extends Context {
     }
     //lastley attempt to gather all patient level results that have that identifier
     // should this compact null values before return ?
-    return Object.values(this.results.patientResults).map(pr => pr[identifier]);
+    return Object.values(this.results.patientResults).map((pr: any) => pr[identifier]);
   }
 }
-
-module.exports = { Context, PatientContext, UnfilteredContext };

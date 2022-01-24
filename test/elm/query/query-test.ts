@@ -1,11 +1,11 @@
-const should = require('should');
-const setup = require('../../setup');
+import should from 'should';
+import setup from '../../setup';
 const data = require('./data');
 const vsets = require('./valuesets');
 const { p1 } = require('./patients');
-const { Interval } = require('../../../src/datatypes/interval');
-const { DateTime } = require('../../../src/datatypes/datetime');
-const { Quantity } = require('../../../src/datatypes/quantity');
+import { Interval } from '../../../src/datatypes/interval';
+import { DateTime } from '../../../src/datatypes/datetime';
+import { Quantity } from '../../../src/datatypes/quantity';
 
 describe('DateRangeOptimizedQuery', () => {
   beforeEach(function () {
@@ -303,7 +303,7 @@ describe('SingleObjectAlias', () => {
     const conditions = this.conditions.exec(this.ctx);
     const firstEncounter = this.firstEncounter.exec(this.ctx);
     const firstCondition = this.firstCondition.exec(this.ctx);
-    const expt = conditions.map(con => ({ Con: con, E: firstEncounter, C: firstCondition }));
+    const expt = conditions.map((con: any) => ({ Con: con, E: firstEncounter, C: firstCondition }));
     const q = this.singleAliasesAndList.exec(this.ctx);
     q.should.have.length(conditions.length);
     q.should.eql(expt);

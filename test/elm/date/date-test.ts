@@ -1,7 +1,7 @@
-const should = require('should');
-const setup = require('../../setup');
+import should from 'should';
+import setup from '../../setup';
 const data = require('./data');
-const { Uncertainty } = require('../../../src/datatypes/uncertainty');
+import { Uncertainty } from '../../../src/datatypes/uncertainty';
 
 describe('Date', () => {
   beforeEach(function () {
@@ -429,7 +429,7 @@ describe('DateMath', () => {
   });
 });
 
-function dateCheck(date, year, month, day) {
+function dateCheck(date: any, year: number, month: number, day: number) {
   date.year.should.equal(year);
   date.month.should.equal(month);
   date.day.should.equal(day);

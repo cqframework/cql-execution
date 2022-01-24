@@ -1,8 +1,8 @@
-const should = require('should');
-const { Uncertainty } = require('../../src/datatypes/uncertainty');
-const { Code } = require('../../src/datatypes/datatypes');
-const { Concept } = require('../../src/datatypes/clinical');
-const { ValueSet } = require('../../src/datatypes/clinical');
+import should from 'should';
+import { Uncertainty } from '../../src/datatypes/uncertainty';
+import { Code } from '../../src/datatypes/datatypes';
+import { Concept } from '../../src/datatypes/clinical';
+import { ValueSet } from '../../src/datatypes/clinical';
 
 describe('Uncertainty', () => {
   it('should contruct uncertainties with correct properties', () => {

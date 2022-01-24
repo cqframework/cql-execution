@@ -1,9 +1,7 @@
-const { UnimplementedExpression } = require('./expression');
+import { UnimplementedExpression } from './expression';
 
-class UsingDef extends UnimplementedExpression {}
+export class UsingDef extends UnimplementedExpression {}
 
-class IncludeDef extends UnimplementedExpression {}
+export class IncludeDef extends UnimplementedExpression {}
 
-class VersionedIdentifier extends UnimplementedExpression {}
-
-module.exports = { UsingDef, IncludeDef, VersionedIdentifier };
+export class VersionedIdentifier extends UnimplementedExpression {}

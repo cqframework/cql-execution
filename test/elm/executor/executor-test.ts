@@ -1,8 +1,8 @@
-const setup = require('../../setup');
+import setup from '../../setup';
 const data = require('./data');
 
 const { p1, p2 } = require('./patients');
-const { Patient } = require('../../../src/cql-patient');
+import { Patient } from '../../../src/cql-patient';
 
 describe('Age', () => {
   beforeEach(function () {

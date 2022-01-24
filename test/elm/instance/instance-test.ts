@@ -1,7 +1,7 @@
-const setup = require('../../setup');
+import setup from '../../setup';
 const data = require('./data');
-const { Code, Concept } = require('../../../src/datatypes/clinical');
-const { Quantity } = require('../../../src/datatypes/quantity');
+import { Code, Concept } from '../../../src/datatypes/clinical';
+import { Quantity } from '../../../src/datatypes/quantity';
 
 describe('Instance', () => {
   beforeEach(function () {

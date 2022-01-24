@@ -1,5 +1,5 @@
-const should = require('should');
-const setup = require('../../setup');
+import should from 'should';
+import setup from '../../setup';
 const data = require('./data');
 
 // TODO: Comparisons for Dates
@@ -385,6 +385,7 @@ describe('Equivalent', () => {
       this.emptyTuples.exec(this.ctx).should.be.true();
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     it.skip('should return false if Tuples are not of the same type', function () {});
     // Note: There is currently no way to tell the type of Tuples as they are all treated as Objects
 

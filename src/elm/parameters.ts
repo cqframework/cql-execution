@@ -1,15 +1,20 @@
-const { Expression } = require('./expression');
-const { build } = require('./builder');
+import { Context } from '../runtime/context';
+import { Expression } from './expression';
+import { build } from './builder';
 
 class ParameterDef extends Expression {
-  constructor(json) {
+  name: string;
+  default: any;
+  parameterTypeSpecifier: any;
+
+  constructor(json: any) {
     super(json);
     this.name = json.name;
     this.default = build(json.default);
     this.parameterTypeSpecifier = json.parameterTypeSpecifier;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     // If context parameters contains the name, return value.
     if (ctx && ctx.parameters[this.name] !== undefined) {
       return ctx.parameters[this.name];
@@ -25,17 +30,20 @@ class ParameterDef extends Expression {
 }
 
 class ParameterRef extends Expression {
-  constructor(json) {
+  name: string;
+  library: any;
+
+  constructor(json: any) {
     super(json);
     this.name = json.name;
     this.library = json.libraryName;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     ctx = this.library ? ctx.getLibraryContext(this.library) : ctx;
     const param = ctx.getParameter(this.name);
     return param != null ? param.execute(ctx) : undefined;
   }
 }
 
-module.exports = { ParameterDef, ParameterRef };
+export { ParameterDef, ParameterRef };

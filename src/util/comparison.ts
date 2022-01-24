@@ -1,14 +1,14 @@
-const { Uncertainty } = require('../datatypes/uncertainty');
+import { Uncertainty } from '../datatypes/datatypes';
 
-function areNumbers(a, b) {
+function areNumbers(a: any, b: any) {
   return typeof a === 'number' && typeof b === 'number';
 }
 
-function areStrings(a, b) {
+function areStrings(a: any, b: any) {
   return typeof a === 'string' && typeof b === 'string';
 }
 
-function areDateTimesOrQuantities(a, b) {
+function areDateTimesOrQuantities(a: any, b: any) {
   return (
     (a && a.isDateTime && b && b.isDateTime) ||
     (a && a.isDate && b && b.isDate) ||
@@ -16,11 +16,11 @@ function areDateTimesOrQuantities(a, b) {
   );
 }
 
-function isUncertainty(x) {
+function isUncertainty(x: any) {
   return x instanceof Uncertainty;
 }
 
-function lessThan(a, b, precision) {
+export function lessThan(a: any, b: any, precision?: any) {
   if (areNumbers(a, b) || areStrings(a, b)) {
     return a < b;
   } else if (areDateTimesOrQuantities(a, b)) {
@@ -34,7 +34,7 @@ function lessThan(a, b, precision) {
   }
 }
 
-function lessThanOrEquals(a, b, precision) {
+export function lessThanOrEquals(a: any, b: any, precision?: any) {
   if (areNumbers(a, b) || areStrings(a, b)) {
     return a <= b;
   } else if (areDateTimesOrQuantities(a, b)) {
@@ -48,7 +48,7 @@ function lessThanOrEquals(a, b, precision) {
   }
 }
 
-function greaterThan(a, b, precision) {
+export function greaterThan(a: any, b: any, precision?: any) {
   if (areNumbers(a, b) || areStrings(a, b)) {
     return a > b;
   } else if (areDateTimesOrQuantities(a, b)) {
@@ -62,7 +62,7 @@ function greaterThan(a, b, precision) {
   }
 }
 
-function greaterThanOrEquals(a, b, precision) {
+export function greaterThanOrEquals(a: any, b: any, precision?: any) {
   if (areNumbers(a, b) || areStrings(a, b)) {
     return a >= b;
   } else if (areDateTimesOrQuantities(a, b)) {
@@ -76,7 +76,7 @@ function greaterThanOrEquals(a, b, precision) {
   }
 }
 
-function equivalent(a, b) {
+export function equivalent(a: any, b: any) {
   if (a == null && b == null) {
     return true;
   }
@@ -119,37 +119,37 @@ function equivalent(a, b) {
   return equals(a, b);
 }
 
-function isCode(object) {
+function isCode(object: any) {
   return object.hasMatch && typeof object.hasMatch === 'function';
 }
 
-function codesAreEquivalent(code1, code2) {
+function codesAreEquivalent(code1: any, code2: any) {
   return code1.hasMatch(code2);
 }
 
-function getClassOfObjects(object1, object2) {
+function getClassOfObjects(object1: any, object2: any) {
   return [object1, object2].map(obj => ({}.toString.call(obj)));
 }
 
-function compareEveryItemInArrays(array1, array2, comparisonFunction) {
+function compareEveryItemInArrays(array1: any[], array2: any[], comparisonFunction: any) {
   return (
     array1.length === array2.length &&
     array1.every((item, i) => comparisonFunction(item, array2[i]))
   );
 }
 
-function compareObjects(a, b, comparisonFunction) {
+function compareObjects(a: any, b: any, comparisonFunction: any) {
   if (!classesEqual(a, b)) {
     return false;
   }
   return deepCompareKeysAndValues(a, b, comparisonFunction);
 }
 
-function classesEqual(object1, object2) {
+function classesEqual(object1: any, object2: any) {
   return object2 instanceof object1.constructor && object1 instanceof object2.constructor;
 }
 
-function deepCompareKeysAndValues(a, b, comparisonFunction) {
+function deepCompareKeysAndValues(a: any, b: any, comparisonFunction: any) {
   let finalComparisonResult;
   const aKeys = getKeysFromObject(a).sort();
   const bKeys = getKeysFromObject(b).sort();
@@ -178,15 +178,15 @@ function deepCompareKeysAndValues(a, b, comparisonFunction) {
   return finalComparisonResult;
 }
 
-function getKeysFromObject(object) {
+function getKeysFromObject(object: any) {
   return Object.keys(object).filter(k => !isFunction(object[k]));
 }
 
-function isFunction(input) {
+function isFunction(input: any) {
   return input instanceof Function || {}.toString.call(input) === '[object Function]';
 }
 
-function equals(a, b) {
+export function equals(a: any, b: any) {
   // Handle null cases first: spec says if either is null, return null
   if (a == null || b == null) {
     return null;
@@ -255,12 +255,3 @@ function equals(a, b) {
   // If we made it this far, we can't handle it
   return false;
 }
-
-module.exports = {
-  lessThan,
-  lessThanOrEquals,
-  greaterThan,
-  greaterThanOrEquals,
-  equivalent,
-  equals
-};

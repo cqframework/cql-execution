@@ -1,15 +1,20 @@
-const { Expression, UnimplementedExpression } = require('./expression');
-const { build } = require('./builder');
+import { Context } from '../runtime/context';
+import { Expression, UnimplementedExpression } from './expression';
+import { build } from './builder';
 
 class Property extends Expression {
-  constructor(json) {
+  scope: any;
+  source: any;
+  path: any;
+
+  constructor(json: any) {
     super(json);
     this.scope = json.scope;
     this.source = build(json.source);
     this.path = json.path;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     let obj = this.scope != null ? ctx.get(this.scope) : this.source;
     if (obj instanceof Expression) {
       obj = obj.execute(ctx);
@@ -18,7 +23,7 @@ class Property extends Expression {
     if (val == null) {
       const parts = this.path.split('.');
       let curr_obj = obj;
-      for (let part of parts) {
+      for (const part of parts) {
         const _obj = getPropertyFromObject(curr_obj, part);
         curr_obj = _obj instanceof Function ? _obj.call(curr_obj) : _obj;
       }
@@ -32,7 +37,7 @@ class Property extends Expression {
   }
 }
 
-function getPropertyFromObject(obj, path) {
+function getPropertyFromObject(obj: any, path: any) {
   let val;
   if (obj != null) {
     val = obj[path];
@@ -44,10 +49,12 @@ function getPropertyFromObject(obj, path) {
 }
 
 class Tuple extends Expression {
-  constructor(json) {
+  elements: any[];
+
+  constructor(json: any) {
     super(json);
     const elements = json.element != null ? json.element : [];
-    this.elements = elements.map(el => {
+    this.elements = elements.map((el: any) => {
       return {
         name: el.name,
         value: build(el.value)
@@ -59,9 +66,9 @@ class Tuple extends Expression {
     return true;
   }
 
-  exec(ctx) {
-    const val = {};
-    for (let el of this.elements) {
+  exec(ctx: Context) {
+    const val: any = {};
+    for (const el of this.elements) {
       val[el.name] = el.value != null ? el.value.execute(ctx) : undefined;
     }
     return val;
@@ -72,4 +79,4 @@ class TupleElement extends UnimplementedExpression {}
 
 class TupleElementDefinition extends UnimplementedExpression {}
 
-module.exports = { Property, Tuple, TupleElement, TupleElementDefinition };
+export { Property, Tuple, TupleElement, TupleElementDefinition };

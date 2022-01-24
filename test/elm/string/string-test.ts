@@ -1,7 +1,7 @@
-const should = require('should');
-const setup = require('../../setup');
+import should from 'should';
+import setup from '../../setup';
 const data = require('./data');
-const str = require('../../../src/elm/string');
+import * as str from '../../../src/elm/string';
 
 describe('Concat', () => {
   beforeEach(function () {
@@ -177,6 +177,8 @@ describe('Length', () => {
   });
 
   it.skip('should be a Length', function () {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     this.elevenLetters.should.be.an.instanceOf(str.Length);
   });
 

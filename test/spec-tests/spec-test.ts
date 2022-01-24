@@ -1,18 +1,20 @@
-const fs = require('fs');
-const path = require('path');
-const should = require('should');
-const { PatientContext } = require('../../src/runtime/context');
-require('../../src/elm/expressions'); // Needed for side-effect
-const { build } = require('../../src/elm/builder');
-const { Library } = require('../../src/elm/library');
-const { Uncertainty } = require('../../src/datatypes/uncertainty');
+import fs from 'fs';
+import path from 'path';
+import should from 'should';
+import { PatientContext } from '../../src/runtime/context';
+import '../../src/elm/expressions'; // Needed for side-effect
+import { build } from '../../src/elm/builder';
+import { Library } from '../../src/elm/library';
+import { Uncertainty } from '../../src/datatypes/uncertainty';
 
 describe('CQL Spec Tests (from XML)', () => {
   fs.readdirSync(path.join(__dirname, 'cql')).forEach(f => {
     if (!f.endsWith('.json')) {
       return;
     }
-    const elm = require(path.join(__dirname, 'cql', f));
+    const p = path.join(__dirname, 'cql', f);
+    const elm = JSON.parse(fs.readFileSync(p, 'utf8'));
+
     if (
       elm.library == null ||
       elm.library.identifier == null ||
@@ -26,7 +28,7 @@ describe('CQL Spec Tests (from XML)', () => {
     const library = new Library(elm);
     // describe the high-level module being tested
     describe(elm.library.identifier.id, () => {
-      elm.library.statements.def.forEach(suite => {
+      elm.library.statements.def.forEach((suite: any) => {
         // Skip the Patient definition that is automatically inserted by CQL to ELM
         if (
           suite.name === 'Patient' &&
@@ -40,7 +42,7 @@ describe('CQL Spec Tests (from XML)', () => {
           if (suite.expression.type !== 'Tuple') {
             should.fail(suite.expression.type, 'Tuple', `Invalid test suite: ${suite.name}`);
           }
-          suite.expression.element.forEach(t => {
+          suite.expression.element.forEach((t: any) => {
             it(`should properly evaluate ${t.name}`, function () {
               const testCaseMap = convertTupleToMap(t.value);
               if (testCaseMap.has('skipped')) {
@@ -92,13 +94,13 @@ describe('CQL Spec Tests (from XML)', () => {
     });
   });
 
-  function convertTupleToMap(t) {
+  function convertTupleToMap(t: any) {
     const map = new Map();
-    t.element.forEach(e => map.set(e.name, e.value));
+    t.element.forEach((e: any) => map.set(e.name, e.value));
     return map;
   }
 
-  function roundDecimalsWhenApplicable(item) {
+  function roundDecimalsWhenApplicable(item: any) {
     if (typeof item === 'number') {
       // Round to 8 places since that's the number of places used by expected outputs
       item = Math.round(item * 100000000) / 100000000;

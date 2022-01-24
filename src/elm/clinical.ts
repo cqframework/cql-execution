@@ -1,9 +1,14 @@
-const { Expression } = require('./expression');
-const dt = require('../datatypes/datatypes');
-const { build } = require('./builder');
+import { Expression } from './expression';
+import * as dt from '../datatypes/datatypes';
+import { Context } from '../runtime/context';
+import { build } from './builder';
 
-class ValueSetDef extends Expression {
-  constructor(json) {
+export class ValueSetDef extends Expression {
+  name: string;
+  id: string;
+  version: string;
+
+  constructor(json: any) {
     super(json);
     this.name = json.name;
     this.id = json.id;
@@ -11,7 +16,7 @@ class ValueSetDef extends Expression {
   }
   //todo: code systems and versions
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const valueset =
       ctx.codeService.findValueSet(this.id, this.version) || new dt.ValueSet(this.id, this.version);
     ctx.rootContext().set(this.name, valueset);
@@ -19,14 +24,17 @@ class ValueSetDef extends Expression {
   }
 }
 
-class ValueSetRef extends Expression {
-  constructor(json) {
+export class ValueSetRef extends Expression {
+  name: string;
+  libraryName: string;
+
+  constructor(json: any) {
     super(json);
     this.name = json.name;
     this.libraryName = json.libraryName;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     // TODO: This calls the code service every time-- should be optimized
     let valueset = ctx.getValueSet(this.name, this.libraryName);
     if (valueset instanceof Expression) {
@@ -36,14 +44,17 @@ class ValueSetRef extends Expression {
   }
 }
 
-class AnyInValueSet extends Expression {
-  constructor(json) {
+export class AnyInValueSet extends Expression {
+  codes: any;
+  valueset: ValueSetRef;
+
+  constructor(json: any) {
     super(json);
     this.codes = build(json.codes);
     this.valueset = new ValueSetRef(json.valueset);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const valueset = this.valueset.execute(ctx);
     // If the value set reference cannot be resolved, a run-time error is thrown.
     if (valueset == null || !valueset.isValueSet) {
@@ -51,18 +62,21 @@ class AnyInValueSet extends Expression {
     }
 
     const codes = this.codes.exec(ctx);
-    return codes != null && codes.some(code => valueset.hasMatch(code));
+    return codes != null && codes.some((code: any) => valueset.hasMatch(code));
   }
 }
 
-class InValueSet extends Expression {
-  constructor(json) {
+export class InValueSet extends Expression {
+  code: any;
+  valueset: ValueSetRef;
+
+  constructor(json: any) {
     super(json);
     this.code = build(json.code);
     this.valueset = new ValueSetRef(json.valueset);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     // If the code argument is null, the result is false
     if (this.code == null) {
       return false;
@@ -84,21 +98,30 @@ class InValueSet extends Expression {
   }
 }
 
-class CodeSystemDef extends Expression {
-  constructor(json) {
+export class CodeSystemDef extends Expression {
+  name: string;
+  id: string;
+  version: string;
+
+  constructor(json: any) {
     super(json);
     this.name = json.name;
     this.id = json.id;
     this.version = json.version;
   }
 
-  exec(ctx) {
+  exec(_ctx: Context) {
     return new dt.CodeSystem(this.id, this.version);
   }
 }
 
-class CodeDef extends Expression {
-  constructor(json) {
+export class CodeDef extends Expression {
+  name: string;
+  id: string;
+  systemName: string;
+  display?: string;
+
+  constructor(json: any) {
     super(json);
     this.name = json.name;
     this.id = json.id;
@@ -106,28 +129,36 @@ class CodeDef extends Expression {
     this.display = json.display;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const system = ctx.getCodeSystem(this.systemName).execute(ctx);
     return new dt.Code(this.id, system.id, system.version, this.display);
   }
 }
 
-class CodeRef extends Expression {
-  constructor(json) {
+export class CodeRef extends Expression {
+  name: string;
+  library: string;
+
+  constructor(json: any) {
     super(json);
     this.name = json.name;
     this.library = json.libraryName;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     ctx = this.library ? ctx.getLibraryContext(this.library) : ctx;
     const codeDef = ctx.getCode(this.name);
     return codeDef ? codeDef.execute(ctx) : undefined;
   }
 }
 
-class Code extends Expression {
-  constructor(json) {
+export class Code extends Expression {
+  code: any;
+  systemName: string;
+  version: string;
+  display?: string;
+
+  constructor(json: any) {
     super(json);
     this.code = json.code;
     this.systemName = json.system.name;
@@ -141,22 +172,26 @@ class Code extends Expression {
     return true;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const system = ctx.getCodeSystem(this.systemName) || {};
     return new dt.Code(this.code, system.id, this.version, this.display);
   }
 }
 
-class ConceptDef extends Expression {
-  constructor(json) {
+export class ConceptDef extends Expression {
+  name: string;
+  codes: any;
+  display?: string;
+
+  constructor(json: any) {
     super(json);
     this.name = json.name;
     this.display = json.display;
     this.codes = json.code;
   }
 
-  exec(ctx) {
-    const codes = this.codes.map(code => {
+  exec(ctx: Context) {
+    const codes = this.codes.map((code: any) => {
       const codeDef = ctx.getCode(code.name);
       return codeDef ? codeDef.execute(ctx) : undefined;
     });
@@ -164,20 +199,25 @@ class ConceptDef extends Expression {
   }
 }
 
-class ConceptRef extends Expression {
-  constructor(json) {
+export class ConceptRef extends Expression {
+  name: string;
+
+  constructor(json: any) {
     super(json);
     this.name = json.name;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const conceptDef = ctx.getConcept(this.name);
     return conceptDef ? conceptDef.execute(ctx) : undefined;
   }
 }
 
-class Concept extends Expression {
-  constructor(json) {
+export class Concept extends Expression {
+  codes: any;
+  display?: string;
+
+  constructor(json: any) {
     super(json);
     this.codes = json.code;
     this.display = json.display;
@@ -189,24 +229,26 @@ class Concept extends Expression {
     return true;
   }
 
-  toCode(ctx, code) {
+  toCode(ctx: Context, code: any) {
     const system = ctx.getCodeSystem(code.system.name) || {};
     return new dt.Code(code.code, system.id, code.version, code.display);
   }
 
-  exec(ctx) {
-    const codes = this.codes.map(code => this.toCode(ctx, code));
+  exec(ctx: Context) {
+    const codes = this.codes.map((code: any) => this.toCode(ctx, code));
     return new dt.Concept(codes, this.display);
   }
 }
 
-class CalculateAge extends Expression {
-  constructor(json) {
+export class CalculateAge extends Expression {
+  precision: string;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const date1 = this.execArgs(ctx);
     const date2 = dt.DateTime.fromJSDate(ctx.getExecutionDateTime());
     const result =
@@ -219,13 +261,15 @@ class CalculateAge extends Expression {
   }
 }
 
-class CalculateAgeAt extends Expression {
-  constructor(json) {
+export class CalculateAgeAt extends Expression {
+  precision: string;
+  constructor(json: any) {
     super(json);
     this.precision = json.precision;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
+    // eslint-disable-next-line prefer-const
     let [date1, date2] = this.execArgs(ctx);
     if (date1 != null && date2 != null) {
       // date1 is the birthdate, convert it to date if date2 is a date (to support ignoring time)
@@ -243,19 +287,3 @@ class CalculateAgeAt extends Expression {
     return null;
   }
 }
-
-module.exports = {
-  AnyInValueSet,
-  CalculateAge,
-  CalculateAgeAt,
-  Code,
-  CodeDef,
-  CodeRef,
-  CodeSystemDef,
-  Concept,
-  ConceptDef,
-  ConceptRef,
-  InValueSet,
-  ValueSetDef,
-  ValueSetRef
-};

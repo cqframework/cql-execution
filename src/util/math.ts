@@ -1,21 +1,29 @@
-const { Exception } = require('../datatypes/exception');
-const {
-  MIN_DATETIME_VALUE,
-  MAX_DATETIME_VALUE,
-  MIN_DATE_VALUE,
-  MAX_DATE_VALUE,
-  MIN_TIME_VALUE,
-  MAX_TIME_VALUE
-} = require('../datatypes/datetime');
-const { Uncertainty } = require('../datatypes/uncertainty');
+/* eslint-disable @typescript-eslint/no-loss-of-precision */
+import { Exception } from '../datatypes/exception';
+import { Quantity } from '../datatypes/quantity';
+import {
+  MIN_DATETIME_VALUE as dtMinDateTimeValue,
+  MAX_DATETIME_VALUE as dtMaxDateTimeValue,
+  MIN_DATE_VALUE as dtMinDateValue,
+  MAX_DATE_VALUE as dtMaxDateValue,
+  MIN_TIME_VALUE as dtMinTimeValue,
+  MAX_TIME_VALUE as dtMaxTimeValue
+} from '../datatypes/datetime';
+import { Uncertainty } from '../datatypes/uncertainty';
 
-const MAX_INT_VALUE = Math.pow(2, 31) - 1;
-const MIN_INT_VALUE = Math.pow(-2, 31);
-const MAX_FLOAT_VALUE = 99999999999999999999.99999999;
-const MIN_FLOAT_VALUE = -99999999999999999999.99999999;
-const MIN_FLOAT_PRECISION_VALUE = Math.pow(10, -8);
+export const MAX_INT_VALUE = Math.pow(2, 31) - 1;
+export const MIN_INT_VALUE = Math.pow(-2, 31);
+export const MAX_FLOAT_VALUE = 99999999999999999999.99999999;
+export const MIN_FLOAT_VALUE = -99999999999999999999.99999999;
+export const MIN_FLOAT_PRECISION_VALUE = Math.pow(10, -8);
+export const MIN_DATETIME_VALUE = dtMinDateTimeValue;
+export const MAX_DATETIME_VALUE = dtMaxDateTimeValue;
+export const MIN_DATE_VALUE = dtMinDateValue;
+export const MAX_DATE_VALUE = dtMaxDateValue;
+export const MIN_TIME_VALUE = dtMinTimeValue;
+export const MAX_TIME_VALUE = dtMaxTimeValue;
 
-function overflowsOrUnderflows(value) {
+export function overflowsOrUnderflows(value: any): boolean {
   if (value == null) {
     return false;
   }
@@ -58,7 +66,7 @@ function overflowsOrUnderflows(value) {
   return false;
 }
 
-function isValidInteger(integer) {
+export function isValidInteger(integer: any) {
   if (isNaN(integer)) {
     return false;
   }
@@ -71,7 +79,7 @@ function isValidInteger(integer) {
   return true;
 }
 
-function isValidDecimal(decimal) {
+export function isValidDecimal(decimal: any) {
   if (isNaN(decimal)) {
     return false;
   }
@@ -84,7 +92,7 @@ function isValidDecimal(decimal) {
   return true;
 }
 
-function limitDecimalPrecision(decimal) {
+export function limitDecimalPrecision(decimal: any) {
   let decimalString = decimal.toString();
   // For decimals so large that they are represented in scientific notation, javascript has already limited
   // the decimal to its own constraints, so we can't determine the original precision.  Leave as-is unless
@@ -101,11 +109,11 @@ function limitDecimalPrecision(decimal) {
   return parseFloat(decimalString);
 }
 
-class OverFlowException extends Exception {}
+export class OverFlowException extends Exception {}
 
-function successor(val) {
+export function successor(val: any): any {
   if (typeof val === 'number') {
-    if (parseInt(val) === val) {
+    if (parseInt(val.toString()) === val) {
       if (val >= MAX_INT_VALUE) {
         throw new OverFlowException();
       } else {
@@ -155,9 +163,9 @@ function successor(val) {
   }
 }
 
-function predecessor(val) {
+export function predecessor(val: any): any {
   if (typeof val === 'number') {
-    if (parseInt(val) === val) {
+    if (parseInt(val.toString()) === val) {
       if (val <= MIN_INT_VALUE) {
         throw new OverFlowException();
       } else {
@@ -190,7 +198,7 @@ function predecessor(val) {
     }
   } else if (val && val.isUncertainty) {
     // For uncertainties, if the low is the min val, don't decrement it
-    const low = (() => {
+    const low = ((): any => {
       try {
         return predecessor(val.low);
       } catch (e) {
@@ -207,19 +215,19 @@ function predecessor(val) {
   }
 }
 
-function maxValueForInstance(val) {
+export function maxValueForInstance(val: any) {
   if (typeof val === 'number') {
-    if (parseInt(val) === val) {
+    if (parseInt(val.toString()) === val) {
       return MAX_INT_VALUE;
     } else {
       return MAX_FLOAT_VALUE;
     }
   } else if (val && val.isTime && val.isTime()) {
-    return MAX_TIME_VALUE.copy();
+    return MAX_TIME_VALUE?.copy();
   } else if (val && val.isDateTime) {
-    return MAX_DATETIME_VALUE.copy();
+    return MAX_DATETIME_VALUE?.copy();
   } else if (val && val.isDate) {
-    return MAX_DATE_VALUE.copy();
+    return MAX_DATE_VALUE?.copy();
   } else if (val && val.isQuantity) {
     const val2 = val.clone();
     val2.value = maxValueForInstance(val2.value);
@@ -229,18 +237,18 @@ function maxValueForInstance(val) {
   }
 }
 
-function maxValueForType(type, quantityInstance) {
+export function maxValueForType(type: string, quantityInstance?: Quantity) {
   switch (type) {
     case '{urn:hl7-org:elm-types:r1}Integer':
       return MAX_INT_VALUE;
     case '{urn:hl7-org:elm-types:r1}Decimal':
       return MAX_FLOAT_VALUE;
     case '{urn:hl7-org:elm-types:r1}DateTime':
-      return MAX_DATETIME_VALUE.copy();
+      return MAX_DATETIME_VALUE?.copy();
     case '{urn:hl7-org:elm-types:r1}Date':
-      return MAX_DATE_VALUE.copy();
+      return MAX_DATE_VALUE?.copy();
     case '{urn:hl7-org:elm-types:r1}Time':
-      return MAX_TIME_VALUE.copy();
+      return MAX_TIME_VALUE?.copy();
     case '{urn:hl7-org:elm-types:r1}Quantity': {
       if (quantityInstance == null) {
         // can't infer a quantity unit type from nothing]
@@ -254,19 +262,19 @@ function maxValueForType(type, quantityInstance) {
   return null;
 }
 
-function minValueForInstance(val) {
+export function minValueForInstance(val: any) {
   if (typeof val === 'number') {
-    if (parseInt(val) === val) {
+    if (parseInt(val.toString()) === val) {
       return MIN_INT_VALUE;
     } else {
       return MIN_FLOAT_VALUE;
     }
   } else if (val && val.isTime && val.isTime()) {
-    return MIN_TIME_VALUE.copy();
+    return MIN_TIME_VALUE?.copy();
   } else if (val && val.isDateTime) {
-    return MIN_DATETIME_VALUE.copy();
+    return MIN_DATETIME_VALUE?.copy();
   } else if (val && val.isDate) {
-    return MIN_DATE_VALUE.copy();
+    return MIN_DATE_VALUE?.copy();
   } else if (val && val.isQuantity) {
     const val2 = val.clone();
     val2.value = minValueForInstance(val2.value);
@@ -276,18 +284,18 @@ function minValueForInstance(val) {
   }
 }
 
-function minValueForType(type, quantityInstance) {
+export function minValueForType(type: string, quantityInstance?: Quantity) {
   switch (type) {
     case '{urn:hl7-org:elm-types:r1}Integer':
       return MIN_INT_VALUE;
     case '{urn:hl7-org:elm-types:r1}Decimal':
       return MIN_FLOAT_VALUE;
     case '{urn:hl7-org:elm-types:r1}DateTime':
-      return MIN_DATETIME_VALUE.copy();
+      return MIN_DATETIME_VALUE?.copy();
     case '{urn:hl7-org:elm-types:r1}Date':
-      return MIN_DATE_VALUE.copy();
+      return MIN_DATE_VALUE?.copy();
     case '{urn:hl7-org:elm-types:r1}Time':
-      return MIN_TIME_VALUE.copy();
+      return MIN_TIME_VALUE?.copy();
     case '{urn:hl7-org:elm-types:r1}Quantity': {
       if (quantityInstance == null) {
         // can't infer a quantity unit type from nothing]
@@ -301,10 +309,30 @@ function minValueForType(type, quantityInstance) {
   return null;
 }
 
-function decimalAdjust(type, value, exp) {
+type MathFn =
+  | 'abs'
+  | 'acos'
+  | 'asin'
+  | 'atan'
+  | 'atan2'
+  | 'ceil'
+  | 'cos'
+  | 'exp'
+  | 'floor'
+  | 'log'
+  | 'max'
+  | 'min'
+  | 'pow'
+  | 'random'
+  | 'round'
+  | 'sin'
+  | 'sqrt'
+  | 'tan';
+
+export function decimalAdjust(type: MathFn, value: any, exp: any) {
   //If the exp is undefined or zero...
   if (typeof exp === 'undefined' || +exp === 0) {
-    return Math[type](value);
+    return (Math[type] as (x: number) => number)(value);
   }
   value = +value;
   exp = +exp;
@@ -315,40 +343,13 @@ function decimalAdjust(type, value, exp) {
   //Shift
   value = value.toString().split('e');
   let v = value[1] ? +value[1] - exp : -exp;
-  value = Math[type](+(value[0] + 'e' + v));
+  value = (Math[type] as (x: number) => number)(+(value[0] + 'e' + v));
   //Shift back
   value = value.toString().split('e');
   v = value[1] ? +value[1] + exp : exp;
   return +(value[0] + 'e' + v);
 }
 
-function decimalOrNull(value) {
+export function decimalOrNull(value: any) {
   return isValidDecimal(value) ? value : null;
 }
-
-module.exports = {
-  MAX_INT_VALUE,
-  MIN_INT_VALUE,
-  MAX_FLOAT_VALUE,
-  MIN_FLOAT_VALUE,
-  MIN_FLOAT_PRECISION_VALUE,
-  MIN_DATETIME_VALUE,
-  MAX_DATETIME_VALUE,
-  MIN_DATE_VALUE,
-  MAX_DATE_VALUE,
-  MIN_TIME_VALUE,
-  MAX_TIME_VALUE,
-  overflowsOrUnderflows,
-  isValidInteger,
-  isValidDecimal,
-  limitDecimalPrecision,
-  OverFlowException,
-  successor,
-  predecessor,
-  maxValueForInstance,
-  minValueForInstance,
-  maxValueForType,
-  minValueForType,
-  decimalAdjust,
-  decimalOrNull
-};

@@ -1,12 +1,20 @@
-const { Expression } = require('./expression');
-const { build } = require('./builder');
-const { Quantity, doAddition } = require('../datatypes/quantity');
-const { successor, predecessor, MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } = require('../util/math');
-const { convertUnit, compareUnits, convertToCQLDateUnit } = require('../util/units');
-const dtivl = require('../datatypes/interval');
+import { Expression } from './expression';
+import { Quantity, doAddition } from '../datatypes/quantity';
+import { successor, predecessor, MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } from '../util/math';
+import { convertUnit, compareUnits, convertToCQLDateUnit } from '../util/units';
+import * as dtivl from '../datatypes/interval';
+import { Context } from '../runtime/context';
+import { build } from './builder';
 
 class Interval extends Expression {
-  constructor(json) {
+  lowClosed: boolean;
+  lowClosedExpression: any;
+  highClosed: boolean;
+  highClosedExpression: any;
+  low: any;
+  high: any;
+
+  constructor(json: any) {
     super(json);
     this.lowClosed = json.lowClosed;
     this.lowClosedExpression = build(json.lowClosedExpression);
@@ -22,7 +30,7 @@ class Interval extends Expression {
     return true;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const lowValue = this.low.execute(ctx);
     const highValue = this.high.execute(ctx);
     const lowClosed =
@@ -54,37 +62,39 @@ class Interval extends Expression {
 // NotEqual is completely handled by overloaded#Equal
 
 // Delegated to by overloaded#Contains and overloaded#In
-function doContains(interval, item, precision) {
+function doContains(interval: any, item: any, precision?: any) {
   return interval.contains(item, precision);
 }
 
 // Delegated to by overloaded#Includes and overloaded#IncludedIn
-function doIncludes(interval, subinterval, precision) {
+function doIncludes(interval: any, subinterval: any, precision?: any) {
   return interval.includes(subinterval, precision);
 }
 
 // Delegated to by overloaded#ProperIncludes and overloaded@ProperIncludedIn
-function doProperIncludes(interval, subinterval, precision) {
+function doProperIncludes(interval: any, subinterval: any, precision?: any) {
   return interval.properlyIncludes(subinterval, precision);
 }
 
 // Delegated to by overloaded#After
-function doAfter(a, b, precision) {
+function doAfter(a: any, b: any, precision?: any) {
   return a.after(b, precision);
 }
 
 // Delegated to by overloaded#Before
-function doBefore(a, b, precision) {
+function doBefore(a: any, b: any, precision?: any) {
   return a.before(b, precision);
 }
 
 class Meets extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [a, b] = this.execArgs(ctx);
     if (a != null && b != null) {
       return a.meets(b, this.precision);
@@ -95,12 +105,14 @@ class Meets extends Expression {
 }
 
 class MeetsAfter extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [a, b] = this.execArgs(ctx);
     if (a != null && b != null) {
       return a.meetsAfter(b, this.precision);
@@ -111,12 +123,14 @@ class MeetsAfter extends Expression {
 }
 
 class MeetsBefore extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [a, b] = this.execArgs(ctx);
     if (a != null && b != null) {
       return a.meetsBefore(b, this.precision);
@@ -127,12 +141,14 @@ class MeetsBefore extends Expression {
 }
 
 class Overlaps extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [a, b] = this.execArgs(ctx);
     if (a != null && b != null) {
       return a.overlaps(b, this.precision);
@@ -143,12 +159,14 @@ class Overlaps extends Expression {
 }
 
 class OverlapsAfter extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [a, b] = this.execArgs(ctx);
     if (a != null && b != null) {
       return a.overlapsAfter(b, this.precision);
@@ -159,12 +177,14 @@ class OverlapsAfter extends Expression {
 }
 
 class OverlapsBefore extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [a, b] = this.execArgs(ctx);
     if (a != null && b != null) {
       return a.overlapsBefore(b, this.precision);
@@ -175,12 +195,12 @@ class OverlapsBefore extends Expression {
 }
 
 // Delegated to by overloaded#Union
-function doUnion(a, b) {
+function doUnion(a: any, b: any) {
   return a.union(b);
 }
 
 // Delegated to by overloaded#Except
-function doExcept(a, b) {
+function doExcept(a: any, b: any) {
   if (a != null && b != null) {
     return a.except(b);
   } else {
@@ -189,7 +209,7 @@ function doExcept(a, b) {
 }
 
 // Delegated to by overloaded#Intersect
-function doIntersect(a, b) {
+function doIntersect(a: any, b: any) {
   if (a != null && b != null) {
     return a.intersect(b);
   } else {
@@ -198,11 +218,11 @@ function doIntersect(a, b) {
 }
 
 class Width extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const interval = this.arg.execute(ctx);
     if (interval == null) {
       return null;
@@ -212,11 +232,11 @@ class Width extends Expression {
 }
 
 class Size extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const interval = this.arg.execute(ctx);
     if (interval == null) {
       return null;
@@ -226,11 +246,11 @@ class Size extends Expression {
 }
 
 class Start extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const interval = this.arg.execute(ctx);
     if (interval == null) {
       return null;
@@ -245,11 +265,11 @@ class Start extends Expression {
 }
 
 class End extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const interval = this.arg.execute(ctx);
     if (interval == null) {
       return null;
@@ -264,12 +284,14 @@ class End extends Expression {
 }
 
 class Starts extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [a, b] = this.execArgs(ctx);
     if (a != null && b != null) {
       return a.starts(b, this.precision);
@@ -280,12 +302,14 @@ class Starts extends Expression {
 }
 
 class Ends extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [a, b] = this.execArgs(ctx);
     if (a != null && b != null) {
       return a.ends(b, this.precision);
@@ -295,11 +319,11 @@ class Ends extends Expression {
   }
 }
 
-function intervalListType(intervals) {
+function intervalListType(intervals: any) {
   // Returns one of null, 'time', 'date', 'datetime', 'quantity', 'integer', 'decimal' or 'mismatch'
   let type = null;
 
-  for (let itvl of intervals) {
+  for (const itvl of intervals) {
     if (itvl == null) {
       continue;
     }
@@ -377,11 +401,11 @@ function intervalListType(intervals) {
 }
 
 class Expand extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     // expand(argument List<Interval<T>>, per Quantity) List<Interval<T>>
     let defaultPer, expandFunction;
     let [intervals, per] = this.execArgs(ctx);
@@ -405,19 +429,19 @@ class Expand extends Expression {
 
     if (['time', 'date', 'datetime'].includes(type)) {
       expandFunction = this.expandDTishInterval;
-      defaultPer = interval => new Quantity(1, interval.low.getPrecision());
+      defaultPer = (interval: any) => new Quantity(1, interval.low.getPrecision());
     } else if (['quantity'].includes(type)) {
       expandFunction = this.expandQuantityInterval;
-      defaultPer = interval => new Quantity(1, interval.low.unit);
+      defaultPer = (interval: any) => new Quantity(1, interval.low.unit);
     } else if (['integer', 'decimal'].includes(type)) {
       expandFunction = this.expandNumericInterval;
-      defaultPer = interval => new Quantity(1, '1');
+      defaultPer = (_interval: any) => new Quantity(1, '1');
     } else {
       throw new Error('Interval list type not yet supported.');
     }
 
     const results = [];
-    for (let interval of intervals) {
+    for (const interval of intervals) {
       if (interval == null) {
         continue;
       }
@@ -443,7 +467,7 @@ class Expand extends Expression {
     return results;
   }
 
-  expandDTishInterval(interval, per) {
+  expandDTishInterval(interval: any, per: any) {
     per.unit = convertToCQLDateUnit(per.unit);
 
     if (per.unit === 'week') {
@@ -490,11 +514,11 @@ class Expand extends Expression {
     return results;
   }
 
-  truncateToPrecision(value, unit) {
+  truncateToPrecision(value: any, unit: any) {
     // If interval boundaries are more precise than per quantity, truncate to
     // the precision specified by the per
     let shouldTruncate = false;
-    for (let field of value.constructor.FIELDS) {
+    for (const field of value.constructor.FIELDS) {
       if (shouldTruncate) {
         value[field] = null;
       }
@@ -506,10 +530,11 @@ class Expand extends Expression {
     return value;
   }
 
-  expandQuantityInterval(interval, per) {
+  expandQuantityInterval(interval: any, per: any) {
     // we want to convert everything to the more precise of the interval.low or per
     let result_units;
-    if (compareUnits(interval.low.unit, per.unit) > 0) {
+    const res = compareUnits(interval.low.unit, per.unit);
+    if (res != null && res > 0) {
       //interval.low.unit is 'bigger' aka les precise
       result_units = per.unit;
     } else {
@@ -532,14 +557,14 @@ class Expand extends Expression {
       per_value
     );
 
-    for (let itvl of results) {
+    for (const itvl of results) {
       itvl.low = new Quantity(itvl.low, result_units);
       itvl.high = new Quantity(itvl.high, result_units);
     }
     return results;
   }
 
-  expandNumericInterval(interval, per) {
+  expandNumericInterval(interval: any, per: any) {
     if (per.unit !== '1' && per.unit !== '') {
       return null;
     }
@@ -552,7 +577,13 @@ class Expand extends Expression {
     );
   }
 
-  makeNumericIntervalList(low, high, lowClosed, highClosed, perValue) {
+  makeNumericIntervalList(
+    low: any,
+    high: any,
+    lowClosed: boolean,
+    highClosed: boolean,
+    perValue: any
+  ) {
     // If the per value is a Decimal (has a .), 8 decimal places are appropriate
     // Integers should have 0 Decimal places
     const perIsDecimal = perValue.toString().includes('.');
@@ -605,21 +636,21 @@ class Expand extends Expression {
 }
 
 class Collapse extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     // collapse(argument List<Interval<T>>, per Quantity) List<Interval<T>>
     const [intervals, perWidth] = this.execArgs(ctx);
     return collapseIntervals(intervals, perWidth);
   }
 }
 
-function collapseIntervals(intervals, perWidth) {
+function collapseIntervals(intervals: any, perWidth: any) {
   // Clone intervals so this function remains idempotent
   const intervalsClone = [];
-  for (let interval of intervals) {
+  for (const interval of intervals) {
     // The spec says to ignore null intervals
     if (interval != null) {
       intervalsClone.push(interval.copy());
@@ -731,14 +762,14 @@ function collapseIntervals(intervals, perWidth) {
   }
 }
 
-function truncateDecimal(decimal, decimalPlaces) {
+function truncateDecimal(decimal: any, decimalPlaces: number) {
   // like parseFloat().toFixed() but floor rather than round
   // Needed for when per precision is less than the interval input precision
   const re = new RegExp('^-?\\d+(?:.\\d{0,' + (decimalPlaces || -1) + '})?');
   return parseFloat(decimal.toString().match(re)[0]);
 }
 
-module.exports = {
+export {
   Collapse,
   End,
   Ends,

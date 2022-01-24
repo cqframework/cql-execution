@@ -1,9 +1,9 @@
-const should = require('should');
-const setup = require('../../setup');
+import should from 'should';
+import setup from '../../setup';
 const data = require('./data');
 const dataWithNamespace = require('./data-with-namespace');
-const { equivalent } = require('../../../src/util/comparison');
-const { Repository, Code } = require('../../../src/cql');
+import { equivalent } from '../../../src/util/comparison';
+import { Repository, Code } from '../../../src/cql';
 
 const { p1, p2 } = require('./patients');
 
@@ -29,7 +29,7 @@ describe('Using CommonLib', () => {
   });
 
   it('should include codesystems from CommonLib', function () {
-    let codesystems = this.lib.codesystems;
+    const codesystems = this.lib.codesystems;
     codesystems.should.not.be.empty();
   });
 

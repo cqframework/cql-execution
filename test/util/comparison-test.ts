@@ -1,6 +1,6 @@
-const should = require('should');
-const { equals, equivalent } = require('../../src/util/comparison');
-const { Code, Concept } = require('../../src/datatypes/clinical');
+import should from 'should';
+import { equals, equivalent } from '../../src/util/comparison';
+import { Code, Concept } from '../../src/datatypes/clinical';
 
 describe('equals', () => {
   it('should detect equality/inequality for numbers', () => {
@@ -72,14 +72,17 @@ describe('equals', () => {
 
   it('should detect equality/inequality for classes', () => {
     class Foo {
-      constructor(prop1, prop2) {
+      prop1: any;
+      prop2: any;
+
+      constructor(prop1: any, prop2: any) {
         this.prop1 = prop1;
         this.prop2 = prop2;
       }
     }
 
     class Bar extends Foo {
-      constructor(prop1, prop2) {
+      constructor(prop1: any, prop2?: any) {
         super(prop1, prop2);
       }
     }
@@ -98,7 +101,10 @@ describe('equals', () => {
 
   it('should consider an instance equal to itself even if it has null values', () => {
     class Foo {
-      constructor(prop1, prop2) {
+      prop1: any;
+      prop2: any;
+
+      constructor(prop1: any, prop2: any) {
         this.prop1 = prop1;
         this.prop2 = prop2;
       }
@@ -110,13 +116,15 @@ describe('equals', () => {
 
   it('should delegate to equals method when available', () => {
     class Int {
-      constructor(num) {
+      num: any;
+
+      constructor(num: any) {
         this.num = num;
       }
     }
 
     class StringFriendlyInt extends Int {
-      constructor(num) {
+      constructor(num: any) {
         super(num);
       }
 
@@ -131,7 +139,7 @@ describe('equals', () => {
         }
       }
 
-      equals(other) {
+      equals(other: any) {
         return other instanceof StringFriendlyInt && this.asInt() === other.asInt();
       }
     }
@@ -180,8 +188,8 @@ describe('equals', () => {
     should.not.exist(equals({}, null));
     should.not.exist(equals(null, [null]));
     should.not.exist(equals([null], null));
-    should.not.exist(equals(null, {}.undef));
-    should.not.exist(equals({}.undef, null));
+    should.not.exist(equals(null, ({} as any).undef));
+    should.not.exist(equals(({} as any).undef, null));
   });
 });
 

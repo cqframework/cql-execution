@@ -1,7 +1,7 @@
-const should = require('should');
-const setup = require('../../setup');
+import should from 'should';
+import setup from '../../setup';
 const data = require('./data');
-const validateQuantity = function (object, expectedValue, expectedUnit) {
+const validateQuantity = function (object: any, expectedValue: any, expectedUnit: any) {
   object.isQuantity.should.be.true();
   object.value.should.equal(expectedValue);
   object.unit.should.equal(expectedUnit);

@@ -1,7 +1,11 @@
-const { Expression } = require('./expression');
+import { Context } from '../runtime/context';
+import { Expression } from './expression';
 
 class Literal extends Expression {
-  static from(json) {
+  valueType: string;
+  value: any;
+
+  static from(json: any) {
     switch (json.valueType) {
       case '{urn:hl7-org:elm-types:r1}Boolean':
         return new BooleanLiteral(json);
@@ -16,13 +20,13 @@ class Literal extends Expression {
     }
   }
 
-  constructor(json) {
+  constructor(json: any) {
     super(json);
     this.valueType = json.valueType;
     this.value = json.value;
   }
 
-  exec(ctx) {
+  exec(_ctx: Context) {
     return this.value;
   }
 }
@@ -30,7 +34,7 @@ class Literal extends Expression {
 // The following are not defined in ELM, but helpful for execution
 
 class BooleanLiteral extends Literal {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
     this.value = this.value === 'true';
   }
@@ -41,13 +45,13 @@ class BooleanLiteral extends Literal {
     return true;
   }
 
-  exec(ctx) {
+  exec(_ctx: Context) {
     return this.value;
   }
 }
 
 class IntegerLiteral extends Literal {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
     this.value = parseInt(this.value, 10);
   }
@@ -58,13 +62,13 @@ class IntegerLiteral extends Literal {
     return true;
   }
 
-  exec(ctx) {
+  exec(_ctx: Context) {
     return this.value;
   }
 }
 
 class DecimalLiteral extends Literal {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
     this.value = parseFloat(this.value);
   }
@@ -75,13 +79,13 @@ class DecimalLiteral extends Literal {
     return true;
   }
 
-  exec(ctx) {
+  exec(_ctx: Context) {
     return this.value;
   }
 }
 
 class StringLiteral extends Literal {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
@@ -91,10 +95,10 @@ class StringLiteral extends Literal {
     return true;
   }
 
-  exec(ctx) {
+  exec(_ctx: Context) {
     // TODO: Remove these replacements when CQL-to-ELM fixes bug: https://github.com/cqframework/clinical_quality_language/issues/82
     return this.value.replace(/\\'/g, "'").replace(/\\"/g, '"');
   }
 }
 
-module.exports = { BooleanLiteral, DecimalLiteral, IntegerLiteral, Literal, StringLiteral };
+export { BooleanLiteral, DecimalLiteral, IntegerLiteral, Literal, StringLiteral };

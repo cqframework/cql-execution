@@ -1,27 +1,29 @@
-const { Expression } = require('./expression');
-const { build } = require('./builder');
-const MathUtil = require('../util/math');
-const {
+import { Expression } from './expression';
+import * as MathUtil from '../util/math';
+import {
   Quantity,
   doAddition,
   doSubtraction,
   doMultiplication,
   doDivision
-} = require('../datatypes/quantity');
-const { Uncertainty } = require('../datatypes/uncertainty');
+} from '../datatypes/quantity';
+import { Uncertainty } from '../datatypes/uncertainty';
+import { Context } from '../runtime/context';
+import { build } from './builder';
+import { DateTime } from '../datatypes/datetime';
 
-class Add extends Expression {
-  constructor(json) {
+export class Add extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const args = this.execArgs(ctx);
-    if (args == null || args.some(x => x == null)) {
+    if (args == null || args.some((x: any) => x == null)) {
       return null;
     }
 
-    const sum = args.reduce((x, y) => {
+    const sum = args.reduce((x: any, y: any) => {
       if (x.isUncertainty && !y.isUncertainty) {
         y = new Uncertainty(y, y);
       } else if (y.isUncertainty && !x.isUncertainty) {
@@ -53,18 +55,18 @@ class Add extends Expression {
   }
 }
 
-class Subtract extends Expression {
-  constructor(json) {
+export class Subtract extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
-    let args = this.execArgs(ctx);
-    if (args == null || args.some(x => x == null)) {
+  exec(ctx: Context) {
+    const args = this.execArgs(ctx);
+    if (args == null || args.some((x: any) => x == null)) {
       return null;
     }
 
-    const difference = args.reduce((x, y) => {
+    const difference = args.reduce((x: any, y: any) => {
       if (x.isUncertainty && !y.isUncertainty) {
         y = new Uncertainty(y, y);
       } else if (y.isUncertainty && !x.isUncertainty) {
@@ -91,18 +93,18 @@ class Subtract extends Expression {
   }
 }
 
-class Multiply extends Expression {
-  constructor(json) {
+export class Multiply extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
-    let args = this.execArgs(ctx);
-    if (args == null || args.some(x => x == null)) {
+  exec(ctx: Context) {
+    const args = this.execArgs(ctx);
+    if (args == null || args.some((x: any) => x == null)) {
       return null;
     }
 
-    const product = args.reduce((x, y) => {
+    const product = args.reduce((x: any, y: any) => {
       if (x.isUncertainty && !y.isUncertainty) {
         y = new Uncertainty(y, y);
       } else if (y.isUncertainty && !x.isUncertainty) {
@@ -129,18 +131,18 @@ class Multiply extends Expression {
   }
 }
 
-class Divide extends Expression {
-  constructor(json) {
+export class Divide extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const args = this.execArgs(ctx);
-    if (args == null || args.some(x => x == null)) {
+    if (args == null || args.some((x: any) => x == null)) {
       return null;
     }
 
-    const quotient = args.reduce(function (x, y) {
+    const quotient = args.reduce((x: any, y: any) => {
       if (x.isUncertainty && !y.isUncertainty) {
         y = new Uncertainty(y, y);
       } else if (y.isUncertainty && !x.isUncertainty) {
@@ -169,18 +171,18 @@ class Divide extends Expression {
   }
 }
 
-class TruncatedDivide extends Expression {
-  constructor(json) {
+export class TruncatedDivide extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const args = this.execArgs(ctx);
-    if (args == null || args.some(x => x == null)) {
+    if (args == null || args.some((x: any) => x == null)) {
       return null;
     }
 
-    const quotient = args.reduce((x, y) => x / y);
+    const quotient = args.reduce((x: number, y: number) => x / y);
     const truncatedQuotient = quotient >= 0 ? Math.floor(quotient) : Math.ceil(quotient);
 
     if (MathUtil.overflowsOrUnderflows(truncatedQuotient)) {
@@ -190,29 +192,29 @@ class TruncatedDivide extends Expression {
   }
 }
 
-class Modulo extends Expression {
-  constructor(json) {
+export class Modulo extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const args = this.execArgs(ctx);
-    if (args == null || args.some(x => x == null)) {
+    if (args == null || args.some((x: any) => x == null)) {
       return null;
     }
 
-    const modulo = args.reduce((x, y) => x % y);
+    const modulo = args.reduce((x: number, y: number) => x % y);
 
     return MathUtil.decimalOrNull(modulo);
   }
 }
 
-class Ceiling extends Expression {
-  constructor(json) {
+export class Ceiling extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg == null) {
       return null;
@@ -222,12 +224,12 @@ class Ceiling extends Expression {
   }
 }
 
-class Floor extends Expression {
-  constructor(json) {
+export class Floor extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg == null) {
       return null;
@@ -237,12 +239,12 @@ class Floor extends Expression {
   }
 }
 
-class Truncate extends Expression {
-  constructor(json) {
+export class Truncate extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg == null) {
       return null;
@@ -251,12 +253,12 @@ class Truncate extends Expression {
     return arg >= 0 ? Math.floor(arg) : Math.ceil(arg);
   }
 }
-class Abs extends Expression {
-  constructor(json) {
+export class Abs extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg == null) {
       return null;
@@ -268,12 +270,12 @@ class Abs extends Expression {
   }
 }
 
-class Negate extends Expression {
-  constructor(json) {
+export class Negate extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg == null) {
       return null;
@@ -285,13 +287,15 @@ class Negate extends Expression {
   }
 }
 
-class Round extends Expression {
-  constructor(json) {
+export class Round extends Expression {
+  precision: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = build(json.precision);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg == null) {
       return null;
@@ -302,12 +306,12 @@ class Round extends Expression {
   }
 }
 
-class Ln extends Expression {
-  constructor(json) {
+export class Ln extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg == null) {
       return null;
@@ -319,12 +323,12 @@ class Ln extends Expression {
   }
 }
 
-class Exp extends Expression {
-  constructor(json) {
+export class Exp extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg == null) {
       return null;
@@ -339,35 +343,35 @@ class Exp extends Expression {
   }
 }
 
-class Log extends Expression {
-  constructor(json) {
+export class Log extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const args = this.execArgs(ctx);
-    if (args == null || args.some(x => x == null)) {
+    if (args == null || args.some((x: any) => x == null)) {
       return null;
     }
 
-    const log = args.reduce((x, y) => Math.log(x) / Math.log(y));
+    const log = args.reduce((x: number, y: number) => Math.log(x) / Math.log(y));
 
     return MathUtil.decimalOrNull(log);
   }
 }
 
-class Power extends Expression {
-  constructor(json) {
+export class Power extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const args = this.execArgs(ctx);
-    if (args == null || args.some(x => x == null)) {
+    if (args == null || args.some((x: any) => x == null)) {
       return null;
     }
 
-    const power = args.reduce((x, y) => Math.pow(x, y));
+    const power = args.reduce((x: number, y: number) => Math.pow(x, y));
 
     if (MathUtil.overflowsOrUnderflows(power)) {
       return null;
@@ -376,16 +380,26 @@ class Power extends Expression {
   }
 }
 
-class MinValue extends Expression {
-  constructor(json) {
+export class MinValue extends Expression {
+  static readonly MIN_VALUES = {
+    '{urn:hl7-org:elm-types:r1}Integer': MathUtil.MIN_INT_VALUE,
+    '{urn:hl7-org:elm-types:r1}Decimal': MathUtil.MIN_FLOAT_VALUE,
+    '{urn:hl7-org:elm-types:r1}DateTime': MathUtil.MIN_DATETIME_VALUE,
+    '{urn:hl7-org:elm-types:r1}Date': MathUtil.MIN_DATE_VALUE,
+    '{urn:hl7-org:elm-types:r1}Time': MathUtil.MIN_TIME_VALUE
+  };
+
+  valueType: keyof typeof MinValue.MIN_VALUES;
+
+  constructor(json: any) {
     super(json);
     this.valueType = json.valueType;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     if (MinValue.MIN_VALUES[this.valueType]) {
       if (this.valueType === '{urn:hl7-org:elm-types:r1}DateTime') {
-        const minDateTime = MinValue.MIN_VALUES[this.valueType].copy();
+        const minDateTime = (MinValue.MIN_VALUES[this.valueType] as DateTime).copy();
         minDateTime.timezoneOffset = ctx.getTimezoneOffset();
         return minDateTime;
       } else {
@@ -397,23 +411,26 @@ class MinValue extends Expression {
   }
 }
 
-MinValue.MIN_VALUES = {};
-MinValue.MIN_VALUES['{urn:hl7-org:elm-types:r1}Integer'] = MathUtil.MIN_INT_VALUE;
-MinValue.MIN_VALUES['{urn:hl7-org:elm-types:r1}Decimal'] = MathUtil.MIN_FLOAT_VALUE;
-MinValue.MIN_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MIN_DATETIME_VALUE;
-MinValue.MIN_VALUES['{urn:hl7-org:elm-types:r1}Date'] = MathUtil.MIN_DATE_VALUE;
-MinValue.MIN_VALUES['{urn:hl7-org:elm-types:r1}Time'] = MathUtil.MIN_TIME_VALUE;
+export class MaxValue extends Expression {
+  static readonly MAX_VALUES = {
+    '{urn:hl7-org:elm-types:r1}Integer': MathUtil.MAX_INT_VALUE,
+    '{urn:hl7-org:elm-types:r1}Decimal': MathUtil.MAX_FLOAT_VALUE,
+    '{urn:hl7-org:elm-types:r1}DateTime': MathUtil.MAX_DATETIME_VALUE,
+    '{urn:hl7-org:elm-types:r1}Date': MathUtil.MAX_DATE_VALUE,
+    '{urn:hl7-org:elm-types:r1}Time': MathUtil.MAX_TIME_VALUE
+  };
 
-class MaxValue extends Expression {
-  constructor(json) {
+  valueType: keyof typeof MaxValue.MAX_VALUES;
+
+  constructor(json: any) {
     super(json);
     this.valueType = json.valueType;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     if (MaxValue.MAX_VALUES[this.valueType] != null) {
       if (this.valueType === '{urn:hl7-org:elm-types:r1}DateTime') {
-        const maxDateTime = MaxValue.MAX_VALUES[this.valueType].copy();
+        const maxDateTime = (MaxValue.MAX_VALUES[this.valueType] as DateTime).copy();
         maxDateTime.timezoneOffset = ctx.getTimezoneOffset();
         return maxDateTime;
       } else {
@@ -425,19 +442,12 @@ class MaxValue extends Expression {
   }
 }
 
-MaxValue.MAX_VALUES = {};
-MaxValue.MAX_VALUES['{urn:hl7-org:elm-types:r1}Integer'] = MathUtil.MAX_INT_VALUE;
-MaxValue.MAX_VALUES['{urn:hl7-org:elm-types:r1}Decimal'] = MathUtil.MAX_FLOAT_VALUE;
-MaxValue.MAX_VALUES['{urn:hl7-org:elm-types:r1}DateTime'] = MathUtil.MAX_DATETIME_VALUE;
-MaxValue.MAX_VALUES['{urn:hl7-org:elm-types:r1}Date'] = MathUtil.MAX_DATE_VALUE;
-MaxValue.MAX_VALUES['{urn:hl7-org:elm-types:r1}Time'] = MathUtil.MAX_TIME_VALUE;
-
-class Successor extends Expression {
-  constructor(json) {
+export class Successor extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg == null) {
       return null;
@@ -461,12 +471,12 @@ class Successor extends Expression {
   }
 }
 
-class Predecessor extends Expression {
-  constructor(json) {
+export class Predecessor extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg == null) {
       return null;
@@ -489,26 +499,3 @@ class Predecessor extends Expression {
     return predecessor;
   }
 }
-
-module.exports = {
-  Abs,
-  Add,
-  Ceiling,
-  Divide,
-  Exp,
-  Floor,
-  Ln,
-  Log,
-  MaxValue,
-  MinValue,
-  Modulo,
-  Multiply,
-  Negate,
-  Power,
-  Predecessor,
-  Round,
-  Subtract,
-  Successor,
-  Truncate,
-  TruncatedDivide
-};

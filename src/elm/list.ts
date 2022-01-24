@@ -1,10 +1,13 @@
-const { Expression, UnimplementedExpression } = require('./expression');
-const { build } = require('./builder');
-const { typeIsArray } = require('../util/util');
-const { equals } = require('../util/comparison');
+import { Expression, UnimplementedExpression } from './expression';
+import { build } from './builder';
+import { typeIsArray } from '../util/util';
+import { equals } from '../util/comparison';
+import { Context } from '../runtime/context';
 
 class List extends Expression {
-  constructor(json) {
+  elements: any[];
+
+  constructor(json: any) {
     super(json);
     this.elements = build(json.element) || [];
   }
@@ -13,21 +16,21 @@ class List extends Expression {
     return true;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     return this.elements.map(item => item.execute(ctx));
   }
 }
 
 class Exists extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const list = this.execArgs(ctx);
     // if list exists and has non empty length we need to make sure it isnt just full of nulls
     if (list) {
-      return list.some(item => item != null);
+      return list.some((item: any) => item != null);
     }
     return false;
   }
@@ -38,20 +41,20 @@ class Exists extends Expression {
 // NotEqual is completely handled by overloaded#Equal
 
 // Delegated to by overloaded#Union
-function doUnion(a, b) {
+function doUnion(a: any, b: any) {
   const distinct = doDistinct(a.concat(b));
   return removeDuplicateNulls(distinct);
 }
 
 // Delegated to by overloaded#Except
-function doExcept(a, b) {
+function doExcept(a: any, b: any) {
   const distinct = doDistinct(a);
   const setList = removeDuplicateNulls(distinct);
   return setList.filter(item => !doContains(b, item, true));
 }
 
 // Delegated to by overloaded#Intersect
-function doIntersect(a, b) {
+function doIntersect(a: any, b: any) {
   const distinct = doDistinct(a);
   const setList = removeDuplicateNulls(distinct);
   return setList.filter(item => doContains(b, item, true));
@@ -64,11 +67,11 @@ class Times extends UnimplementedExpression {}
 class Filter extends UnimplementedExpression {}
 
 class SingletonFrom extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg != null && arg.length > 1) {
       throw new Error("IllegalArgument: 'SingletonFrom' requires a 0 or 1 arg array");
@@ -81,11 +84,11 @@ class SingletonFrom extends Expression {
 }
 
 class ToList extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg != null) {
       return [arg];
@@ -96,13 +99,16 @@ class ToList extends Expression {
 }
 
 class IndexOf extends Expression {
-  constructor(json) {
+  source: any;
+  element: any;
+
+  constructor(json: any) {
     super(json);
     this.source = build(json.source);
     this.element = build(json.element);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     let index;
     const src = this.source.execute(ctx);
     const el = this.element.execute(ctx);
@@ -127,19 +133,19 @@ class IndexOf extends Expression {
 // Indexer is completely handled by overloaded#Indexer
 
 // Delegated to by overloaded#Contains and overloaded#In
-function doContains(container, item, nullEquivalence = false) {
+function doContains(container: any[], item: any, nullEquivalence = false) {
   return container.some(
-    element => equals(element, item) || (nullEquivalence && element == null && item == null)
+    (element: any) => equals(element, item) || (nullEquivalence && element == null && item == null)
   );
 }
 
 // Delegated to by overloaded#Includes and overloaded@IncludedIn
-function doIncludes(list, sublist) {
-  return sublist.every(x => doContains(list, x));
+function doIncludes(list: any, sublist: any) {
+  return sublist.every((x: any) => doContains(list, x));
 }
 
 // Delegated to by overloaded#ProperIncludes and overloaded@ProperIncludedIn
-function doProperIncludes(list, sublist) {
+function doProperIncludes(list: any, sublist: any) {
   return list.length > sublist.length && doIncludes(list, sublist);
 }
 
@@ -147,14 +153,14 @@ function doProperIncludes(list, sublist) {
 class ForEach extends UnimplementedExpression {}
 
 class Flatten extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
-    if (typeIsArray(arg) && arg.every(x => typeIsArray(x))) {
-      return arg.reduce((x, y) => x.concat(y), []);
+    if (typeIsArray(arg) && (arg as any[]).every(x => typeIsArray(x))) {
+      return (arg as any[]).reduce((x, y) => x.concat(y), []);
     } else {
       return arg;
     }
@@ -162,11 +168,11 @@ class Flatten extends Expression {
 }
 
 class Distinct extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const result = this.execArgs(ctx);
     if (result == null) {
       return null;
@@ -175,8 +181,8 @@ class Distinct extends Expression {
   }
 }
 
-function doDistinct(list) {
-  const distinct = [];
+function doDistinct(list: any[]) {
+  const distinct: any[] = [];
   list.forEach(item => {
     const isNew = distinct.every(seenItem => !equals(item, seenItem));
     if (isNew) {
@@ -186,11 +192,11 @@ function doDistinct(list) {
   return removeDuplicateNulls(distinct);
 }
 
-function removeDuplicateNulls(list) {
+function removeDuplicateNulls(list: any[]) {
   // Remove duplicate null elements
   let firstNullFound = false;
   const setList = [];
-  for (let item of list) {
+  for (const item of list) {
     if (item !== null) {
       setList.push(item);
     } else if (item === null && !firstNullFound) {
@@ -205,12 +211,14 @@ function removeDuplicateNulls(list) {
 class Current extends UnimplementedExpression {}
 
 class First extends Expression {
-  constructor(json) {
+  source: any;
+
+  constructor(json: any) {
     super(json);
     this.source = build(json.source);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const src = this.source.exec(ctx);
     if (src != null && typeIsArray(src) && src.length > 0) {
       return src[0];
@@ -221,12 +229,14 @@ class First extends Expression {
 }
 
 class Last extends Expression {
-  constructor(json) {
+  source: any;
+
+  constructor(json: any) {
     super(json);
     this.source = build(json.source);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const src = this.source.exec(ctx);
     if (src != null && typeIsArray(src) && src.length > 0) {
       return src[src.length - 1];
@@ -237,14 +247,18 @@ class Last extends Expression {
 }
 
 class Slice extends Expression {
-  constructor(json) {
+  source: any;
+  startIndex: any;
+  endIndex: any;
+
+  constructor(json: any) {
     super(json);
     this.source = build(json.source);
     this.startIndex = build(json.startIndex);
     this.endIndex = build(json.endIndex);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const src = this.source.exec(ctx);
     if (src != null && typeIsArray(src)) {
       const startIndex = this.startIndex.exec(ctx);
@@ -262,7 +276,7 @@ class Slice extends Expression {
 
 // Length is completely handled by overloaded#Length
 
-module.exports = {
+export {
   Current,
   Distinct,
   Exists,

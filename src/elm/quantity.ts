@@ -1,18 +1,22 @@
-const { Expression } = require('./expression');
-const DT = require('../datatypes/datatypes');
+import { Expression } from './expression';
+import * as DT from '../datatypes/datatypes';
+import { Context } from '../runtime/context';
 
 // Unit conversation is currently implemented on for time duration comparison operations
 // TODO: Implement unit conversation for time duration mathematical operations
 class Quantity extends Expression {
-  constructor(json) {
+  value: number;
+  unit: any;
+
+  constructor(json: any) {
     super(json);
     this.value = parseFloat(json.value);
     this.unit = json.unit;
   }
 
-  exec(ctx) {
+  exec(_ctx: Context) {
     return new DT.Quantity(this.value, this.unit);
   }
 }
 
-module.exports = { Quantity };
+export { Quantity };

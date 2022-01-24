@@ -1,6 +1,6 @@
-const should = require('should');
-const { DateTime, Date } = require('../../src/datatypes/datetime');
-const { Uncertainty } = require('../../src/datatypes/uncertainty');
+import should from 'should';
+import { DateTime, Date } from '../../src/datatypes/datetime';
+import { Uncertainty } from '../../src/datatypes/uncertainty';
 
 describe('Overlapping DateTime and Date units', () =>
   it('should match', () => {

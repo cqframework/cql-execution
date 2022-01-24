@@ -1,7 +1,10 @@
-const { ThreeValuedLogic } = require('./logic');
+import { ThreeValuedLogic } from './logic';
 
-class Uncertainty {
-  static from(obj) {
+export class Uncertainty {
+  low: any;
+  high?: any;
+
+  static from(obj: any) {
     if (obj != null && obj.isUncertainty) {
       return obj;
     } else {
@@ -9,10 +12,10 @@ class Uncertainty {
     }
   }
 
-  constructor(low = null, high) {
+  constructor(low: any = null, high?: any) {
     this.low = low;
     this.high = high;
-    const gt = (a, b) => {
+    const gt = (a: any, b: any) => {
       if (typeof a !== typeof b) {
         // TODO: This should probably throw rather than return false.
         // Uncertainties with different types probably shouldn't be supported.
@@ -24,7 +27,8 @@ class Uncertainty {
         return a > b;
       }
     };
-    const isNonEnumerable = val => val != null && (val.isCode || val.isConcept || val.isValueSet);
+    const isNonEnumerable = (val: any) =>
+      val != null && (val.isCode || val.isConcept || val.isValueSet);
     if (typeof this.high === 'undefined') {
       this.high = this.low;
     }
@@ -56,7 +60,7 @@ class Uncertainty {
   isPoint() {
     // Note: Can't use normal equality, as that fails for Javascript dates
     // TODO: Fix after we don't need to support Javascript date uncertainties anymore
-    const lte = (a, b) => {
+    const lte = (a: any, b: any) => {
       if (typeof a !== typeof b) {
         return false;
       }
@@ -66,7 +70,7 @@ class Uncertainty {
         return a <= b;
       }
     };
-    const gte = (a, b) => {
+    const gte = (a: any, b: any) => {
       if (typeof a !== typeof b) {
         return false;
       }
@@ -81,13 +85,13 @@ class Uncertainty {
     );
   }
 
-  equals(other) {
+  equals(other: any) {
     other = Uncertainty.from(other);
     return ThreeValuedLogic.not(ThreeValuedLogic.or(this.lessThan(other), this.greaterThan(other)));
   }
 
-  lessThan(other) {
-    const lt = (a, b) => {
+  lessThan(other: any) {
+    const lt = (a: any, b: any) => {
       if (typeof a !== typeof b) {
         return false;
       }
@@ -107,17 +111,15 @@ class Uncertainty {
     }
   }
 
-  greaterThan(other) {
+  greaterThan(other: any) {
     return Uncertainty.from(other).lessThan(this);
   }
 
-  lessThanOrEquals(other) {
+  lessThanOrEquals(other: any) {
     return ThreeValuedLogic.not(this.greaterThan(Uncertainty.from(other)));
   }
 
-  greaterThanOrEquals(other) {
+  greaterThanOrEquals(other: any) {
     return ThreeValuedLogic.not(this.lessThan(Uncertainty.from(other)));
   }
 }
-
-module.exports = { Uncertainty };

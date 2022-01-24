@@ -1,23 +1,24 @@
-const should = require('should');
-const setup = require('../../setup');
-const data = require('./data');
-const {
+import should from 'should';
+import setup from '../../setup';
+import {
   Quantity,
   doMultiplication,
   doDivision,
   doAddition,
   doSubtraction,
   parseQuantity
-} = require('../../../src/datatypes/quantity');
+} from '../../../src/datatypes/quantity';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const data = require('./data');
 
-const validateQuantity = function (object, expectedValue, expectedUnit) {
+const validateQuantity = function (object: any, expectedValue: number, expectedUnit: string) {
   object.isQuantity.should.be.true();
   const q = new Quantity(expectedValue, expectedUnit);
   q.equals(object).should.be.true('Expected ' + object + ' to equal ' + q);
 };
 
-const doQuantityMathTests = function (tests, operator) {
-  let func;
+const doQuantityMathTests = function (tests: string[][], operator: string) {
+  let func: any;
   if (operator === '*') {
     func = doMultiplication;
   } else if (operator === '/') {
@@ -28,7 +29,7 @@ const doQuantityMathTests = function (tests, operator) {
     func = doSubtraction;
   }
 
-  for (let t of tests) {
+  for (const t of tests) {
     const a = parseQuantity(t[0]);
     const b = parseQuantity(t[1]);
     // try to parse the expected value but if it comes back null
@@ -238,6 +239,7 @@ describe('MinValue', () => {
   });
 
   it('of Decimal should return minimum representable Decimal value', function () {
+    // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
     const minDecimalValue = -99999999999999999999.99999999;
     this.minDecimal.exec(this.ctx).should.be.approximately(minDecimalValue, 0.000000001);
   });
@@ -277,6 +279,7 @@ describe('MaxValue', () => {
   });
 
   it('of Decimal should return maximum representable Decimal value', function () {
+    // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
     const maxDecimalValue = 99999999999999999999.99999999;
     this.maxDecimal.exec(this.ctx).should.be.approximately(maxDecimalValue, 0.000000001);
   });

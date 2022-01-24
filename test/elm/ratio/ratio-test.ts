@@ -1,6 +1,6 @@
-const should = require('should');
-const { Quantity } = require('../../../src/datatypes/quantity');
-const { Ratio } = require('../../../src/datatypes/ratio');
+import should from 'should';
+import { Quantity } from '../../../src/datatypes/quantity';
+import { Ratio } from '../../../src/datatypes/ratio';
 
 describe('Ratio', () => {
   it('should allow creation of Ratio with two valid quantities with units', () =>
@@ -33,7 +33,7 @@ describe('Ratio', () => {
 
   it('should throw error when creating ratio with null denominator', () =>
     should.throws(() => {
-      const numerator = null;
+      const numerator: any = null;
       const denominator = new Quantity(33.3333, 'mm');
       new Ratio(numerator, denominator);
     }));
@@ -41,7 +41,7 @@ describe('Ratio', () => {
   it('should throw error when creating ratio with null numerator', () =>
     should.throws(() => {
       const numerator = new Quantity(42.424242, 'mm');
-      const denominator = null;
+      const denominator: any = null;
       new Ratio(numerator, denominator);
     }));
 

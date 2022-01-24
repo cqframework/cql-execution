@@ -62,9 +62,12 @@
     "url": "https://github.com/cqframework/cql-execution.git"
   },
   "devDependencies": {
-    "@babel/cli": "^7.15.7",
-    "@babel/core": "^7.15.8",
-    "@babel/preset-env": "^7.15.8",
+    "@types/luxon": "^2.0.9",
+    "@types/mocha": "^9.1.0",
+    "@types/node": "^17.0.10",
+    "@types/test-console": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
     "browserify": "^16.5.1",
     "coveralls": "^3.1.0",
     "eslint": "^8.0.1",
@@ -74,6 +77,8 @@
     "prettier": "^2.1.1",
     "should": "^13.2.3",
     "test-console": "^2.0.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4",
     "xml-js": "^1.6.11"
   },
   "dependencies": {
@@ -85,24 +90,25 @@
     "ansi-regex": "^5.0.1"
   },
   "main": "lib/cql",
+  "types": "lib/cql.d.ts",
   "directories": {
     "lib": "lib"
   },
   "scripts": {
     "prepublish": "npm run build --scripts-prepend-node-path && npm run build:browserify --scripts-prepend-node-path",
-    "build": "babel src --out-dir lib",
+    "build": "tsc",
     "build:browserify": "node ./bin/browserify.js",
     "build:test-data": "cd ./test/generator && ./gradlew generateTestData && cd ..",
     "build:spec-test-data": "node test/spec-tests/generate-cql.js && cd ./test/generator && ./gradlew generateSpecTestData && cd ..",
     "build:all": "npm run build --scripts-prepend-node-path && npm run build:browserify --scripts-prepend-node-path && npm run build:test-data --scripts-prepend-node-path && npm run build:spec-test-data --scripts-prepend-node-path",
     "watch:test-data": "cd ./test/generator && ./gradlew watchTestData && cd ..",
-    "test": "mocha --reporter spec --recursive",
-    "test:nyc": "nyc --reporter=html npx mocha --reporter spec --recursive",
-    "test:watch": "mocha --reporter spec --recursive --watch",
+    "test": "TS_NODE_PROJECT=\"./tsconfig.test.json\" TS_NODE_FILES=true mocha --reporter spec --recursive",
+    "test:nyc": "TS_NODE_PROJECT=\"./tsconfig.test.json\" TS_NODE_FILES=true nyc --reporter=html npx mocha --reporter spec --recursive",
+    "test:watch": "TS_NODE_PROJECT=\"./tsconfig.test.json\" TS_NODE_FILES=true mocha --reporter spec --recursive --watch",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prettier": "prettier --check \"**/*.js\"",
-    "prettier:fix": "prettier --write \"**/*.js\"",
+    "prettier": "prettier --check \"**/*.{js,ts}\"",
+    "prettier:fix": "prettier --write \"**/*.{js,ts}\"",
     "test:plus": "npm test --scripts-prepend-node-path && npm run build --scripts-prepend-node-path && npm run lint --scripts-prepend-node-path && npm run prettier --scripts-prepend-node-path"
   },
   "license": "Apache-2.0"

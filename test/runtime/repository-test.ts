@@ -1,11 +1,12 @@
-const should = require('should');
-const { Repository } = require('../../src/runtime/repository');
+import should from 'should';
+import { Library } from '../../src/elm/library';
+import { Repository } from '../../src/runtime/repository';
 const simpleELMWithVersion = require('./fixtures/SimpleLibraryWithVersion.json');
 
 const simpleELMIdentifier = simpleELMWithVersion.library.identifier;
 
 describe('Repository', () => {
-  let simpleELMJson;
+  let simpleELMJson: any;
   beforeEach(() => {
     // Deep clone ELM JSON to modify properties
     simpleELMJson = JSON.parse(JSON.stringify(simpleELMWithVersion));
@@ -13,7 +14,10 @@ describe('Repository', () => {
 
   it('should resolve with proper id and version', () => {
     const repository = new Repository([simpleELMJson]);
-    const mainLib = repository.resolve(simpleELMIdentifier.id, simpleELMIdentifier.version);
+    const mainLib = repository.resolve(
+      simpleELMIdentifier.id,
+      simpleELMIdentifier.version
+    ) as Library;
 
     mainLib.should.not.be.undefined();
     mainLib.source.library.identifier.id.should.equal(simpleELMIdentifier.id);
@@ -24,7 +28,7 @@ describe('Repository', () => {
     delete simpleELMJson.library.identifier.version;
 
     const repository = new Repository([simpleELMJson]);
-    const mainLib = repository.resolve(simpleELMIdentifier.id);
+    const mainLib = repository.resolve(simpleELMIdentifier.id) as Library;
 
     mainLib.should.not.be.undefined();
     mainLib.source.library.identifier.id.should.equal(simpleELMIdentifier.id);

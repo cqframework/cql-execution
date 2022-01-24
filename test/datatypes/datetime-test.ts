@@ -1,16 +1,35 @@
-const should = require('should');
-const luxon = require('luxon');
-const { DateTime } = require('../../src/datatypes/datetime');
-const { Uncertainty } = require('../../src/datatypes/uncertainty');
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import should from 'should';
+import * as luxon from 'luxon';
+import { DateTime } from '../../src/datatypes/datetime';
+import { Uncertainty } from '../../src/datatypes/uncertainty';
 
-const tzDate = function (y, mo, d, h, mi, s, ms, offset) {
+const tzDate = function (
+  y: number,
+  mo: number,
+  d: number,
+  h: number,
+  mi: number,
+  s: number,
+  ms: number,
+  offset?: number
+) {
   if (offset == null) {
     offset = (new Date().getTimezoneOffset() / 60) * -1;
   }
   return new Date(Date.UTC(y, mo, d, h, mi, s, ms) - offset * 60 * 60 * 1000);
 };
 
-const luxonTzDate = function (y, mo, d, h, mi, s, ms, offset) {
+const luxonTzDate = function (
+  y: number,
+  mo: number,
+  d: number,
+  h: number,
+  mi: number,
+  s: number,
+  ms: number,
+  offset?: number
+) {
   if (offset == null) {
     offset = new Date().getTimezoneOffset() * -1;
   }
@@ -22,6 +41,7 @@ const luxonTzDate = function (y, mo, d, h, mi, s, ms, offset) {
     minute: mi,
     second: s,
     millisecond: ms,
+    // @ts-ignore
     zone: luxon.FixedOffsetZone.instance(offset)
   });
 };
@@ -3736,11 +3756,6 @@ describe('DateTime.getDate', () => {
     d.year.should.equal(2012);
     d.month.should.equal(10);
     d.day.should.equal(25);
-    should.not.exist(d.hour);
-    should.not.exist(d.minute);
-    should.not.exist(d.second);
-    should.not.exist(d.millisecond);
-    should.not.exist(d.timezoneOffset);
   });
 
   it('should properly extract the date from datetime without time', () => {
@@ -3748,10 +3763,6 @@ describe('DateTime.getDate', () => {
     d.year.should.equal(2012);
     d.month.should.equal(10);
     d.day.should.equal(25);
-    should.not.exist(d.hour);
-    should.not.exist(d.minute);
-    should.not.exist(d.second);
-    should.not.exist(d.millisecond);
   });
 
   it('should properly extract the date from datetime without days', () => {
@@ -3759,10 +3770,6 @@ describe('DateTime.getDate', () => {
     d.year.should.equal(2012);
     d.month.should.equal(10);
     should.not.exist(d.day);
-    should.not.exist(d.hour);
-    should.not.exist(d.minute);
-    should.not.exist(d.second);
-    should.not.exist(d.millisecond);
   });
 
   it('should properly extract the date from datetime without months', () => {
@@ -3770,10 +3777,6 @@ describe('DateTime.getDate', () => {
     d.year.should.equal(2012);
     should.not.exist(d.month);
     should.not.exist(d.day);
-    should.not.exist(d.hour);
-    should.not.exist(d.minute);
-    should.not.exist(d.second);
-    should.not.exist(d.millisecond);
   });
 });
 

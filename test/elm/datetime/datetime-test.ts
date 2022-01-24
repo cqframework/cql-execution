@@ -1,9 +1,9 @@
-const should = require('should');
-const setup = require('../../setup');
+import should from 'should';
+import setup from '../../setup';
 const data = require('./data');
-const DT = require('../../../src/datatypes/datatypes');
-const { PatientContext } = require('../../../src/cql');
-const { Uncertainty } = require('../../../src/datatypes/uncertainty');
+import * as DT from '../../../src/datatypes/datatypes';
+import { PatientContext } from '../../../src/cql';
+import { Uncertainty } from '../../../src/datatypes/uncertainty';
 
 describe('DateTime', () => {
   beforeEach(function () {
@@ -1115,7 +1115,16 @@ describe('DateMath', () => {
   });
 });
 
-function dateCheck(date, year, month, day, hour, minute, second, millisecond) {
+function dateCheck(
+  date: any,
+  year: number,
+  month: number,
+  day: number,
+  hour: number,
+  minute: number,
+  second: number,
+  millisecond: number
+) {
   date.year.should.equal(year);
   date.month.should.equal(month);
   date.day.should.equal(day);

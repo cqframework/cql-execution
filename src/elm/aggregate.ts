@@ -1,23 +1,26 @@
-const { Expression } = require('./expression');
-const { typeIsArray, allTrue, anyTrue, removeNulls, numerical_sort } = require('../util/util');
-const { build } = require('./builder');
-const { Exception } = require('../datatypes/exception');
-const { greaterThan, lessThan } = require('../util/comparison');
-const { Quantity } = require('../datatypes/quantity');
+import { Expression } from './expression';
+import { typeIsArray, allTrue, anyTrue, removeNulls, numerical_sort } from '../util/util';
+import { Quantity } from '../datatypes/datatypes';
+import { Context } from '../runtime/context';
+import { Exception } from '../datatypes/exception';
+import { greaterThan, lessThan } from '../util/comparison';
+import { build } from './builder';
 
 class AggregateExpression extends Expression {
-  constructor(json) {
+  source: any;
+
+  constructor(json: any) {
     super(json);
     this.source = build(json.source);
   }
 }
 
-class Count extends AggregateExpression {
-  constructor(json) {
+export class Count extends AggregateExpression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const items = this.source.execute(ctx);
     if (typeIsArray(items)) {
       return removeNulls(items).length;
@@ -26,12 +29,12 @@ class Count extends AggregateExpression {
   }
 }
 
-class Sum extends AggregateExpression {
-  constructor(json) {
+export class Sum extends AggregateExpression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     let items = this.source.execute(ctx);
     if (!typeIsArray(items)) {
       return null;
@@ -52,17 +55,17 @@ class Sum extends AggregateExpression {
       const sum = values.reduce((x, y) => x + y);
       return new Quantity(sum, items[0].unit);
     } else {
-      return items.reduce((x, y) => x + y);
+      return items.reduce((x: number, y: number) => x + y);
     }
   }
 }
 
-class Min extends AggregateExpression {
-  constructor(json) {
+export class Min extends AggregateExpression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const list = this.source.execute(ctx);
     if (list == null) {
       return null;
@@ -82,7 +85,7 @@ class Min extends AggregateExpression {
     }
     // We assume the list is an array of all the same type.
     let minimum = listWithoutNulls[0];
-    for (let element of listWithoutNulls) {
+    for (const element of listWithoutNulls) {
       if (lessThan(element, minimum)) {
         minimum = element;
       }
@@ -91,12 +94,12 @@ class Min extends AggregateExpression {
   }
 }
 
-class Max extends AggregateExpression {
-  constructor(json) {
+export class Max extends AggregateExpression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const items = this.source.execute(ctx);
     if (items == null) {
       return null;
@@ -116,7 +119,7 @@ class Max extends AggregateExpression {
     }
     // We assume the list is an array of all the same type.
     let maximum = listWithoutNulls[0];
-    for (let element of listWithoutNulls) {
+    for (const element of listWithoutNulls) {
       if (greaterThan(element, maximum)) {
         maximum = element;
       }
@@ -125,12 +128,12 @@ class Max extends AggregateExpression {
   }
 }
 
-class Avg extends AggregateExpression {
-  constructor(json) {
+export class Avg extends AggregateExpression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     let items = this.source.execute(ctx);
     if (!typeIsArray(items)) {
       return null;
@@ -151,18 +154,18 @@ class Avg extends AggregateExpression {
       const sum = values.reduce((x, y) => x + y);
       return new Quantity(sum / values.length, items[0].unit);
     } else {
-      const sum = items.reduce((x, y) => x + y);
+      const sum = items.reduce((x: number, y: number) => x + y);
       return sum / items.length;
     }
   }
 }
 
-class Median extends AggregateExpression {
-  constructor(json) {
+export class Median extends AggregateExpression {
+  constructor(json: number) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     let items = this.source.execute(ctx);
     if (!typeIsArray(items)) {
       return null;
@@ -187,12 +190,12 @@ class Median extends AggregateExpression {
   }
 }
 
-class Mode extends AggregateExpression {
-  constructor(json) {
+export class Mode extends AggregateExpression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const items = this.source.execute(ctx);
     if (!typeIsArray(items)) {
       return null;
@@ -216,7 +219,7 @@ class Mode extends AggregateExpression {
       }
       return new Quantity(mode, items[0].unit);
     } else {
-      let mode = this.mode(filtered);
+      const mode = this.mode(filtered);
       if (mode.length === 1) {
         return mode[0];
       } else {
@@ -225,11 +228,11 @@ class Mode extends AggregateExpression {
     }
   }
 
-  mode(arr) {
+  mode(arr: any[]) {
     let max = 0;
-    const counts = {};
-    let results = [];
-    for (let elem of arr) {
+    const counts: any = {};
+    let results: any[] = [];
+    for (const elem of arr) {
       const cnt = (counts[elem] = (counts[elem] != null ? counts[elem] : 0) + 1);
       if (cnt === max && !results.includes(elem)) {
         results.push(elem);
@@ -242,16 +245,23 @@ class Mode extends AggregateExpression {
   }
 }
 
-class StdDev extends AggregateExpression {
+type StatisticType =
+  | 'standard_deviation'
+  | 'population_deviation'
+  | 'standard_variance'
+  | 'population_variance';
+
+export class StdDev extends AggregateExpression {
   // TODO: This should be a derived class of an abstract base class 'Statistic'
   // rather than the base class
+  type: StatisticType;
 
-  constructor(json) {
+  constructor(json: any) {
     super(json);
     this.type = 'standard_deviation';
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     let items = this.source.execute(ctx);
     if (!typeIsArray(items)) {
       return null;
@@ -276,19 +286,19 @@ class StdDev extends AggregateExpression {
     }
   }
 
-  standardDeviation(list) {
+  standardDeviation(list: any[]) {
     const val = this.stats(list);
     if (val) {
       return val[this.type];
     }
   }
 
-  stats(list) {
+  stats(list: any[]) {
     const sum = list.reduce((x, y) => x + y);
     const mean = sum / list.length;
     let sumOfSquares = 0;
 
-    for (let sq of list) {
+    for (const sq of list) {
       sumOfSquares += Math.pow(sq - mean, 2);
     }
 
@@ -305,12 +315,12 @@ class StdDev extends AggregateExpression {
   }
 }
 
-class Product extends AggregateExpression {
-  constructor(json) {
+export class Product extends AggregateExpression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     let items = this.source.execute(ctx);
     if (!typeIsArray(items)) {
       return null;
@@ -331,17 +341,17 @@ class Product extends AggregateExpression {
       // Units are not multiplied for the geometric product
       return new Quantity(product, items[0].unit);
     } else {
-      return items.reduce((x, y) => x * y);
+      return items.reduce((x: number, y: number) => x * y);
     }
   }
 }
 
-class GeometricMean extends AggregateExpression {
-  constructor(json) {
+export class GeometricMean extends AggregateExpression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     let items = this.source.execute(ctx);
     if (!typeIsArray(items)) {
       return null;
@@ -363,56 +373,56 @@ class GeometricMean extends AggregateExpression {
       const geoMean = Math.pow(product, 1.0 / items.length);
       return new Quantity(geoMean, items[0].unit);
     } else {
-      const product = items.reduce((x, y) => x * y);
+      const product = items.reduce((x: number, y: number) => x * y);
       return Math.pow(product, 1.0 / items.length);
     }
   }
 }
 
-class PopulationStdDev extends StdDev {
-  constructor(json) {
+export class PopulationStdDev extends StdDev {
+  constructor(json: any) {
     super(json);
     this.type = 'population_deviation';
   }
 }
 
-class Variance extends StdDev {
-  constructor(json) {
+export class Variance extends StdDev {
+  constructor(json: any) {
     super(json);
     this.type = 'standard_variance';
   }
 }
 
-class PopulationVariance extends StdDev {
-  constructor(json) {
+export class PopulationVariance extends StdDev {
+  constructor(json: any) {
     super(json);
     this.type = 'population_variance';
   }
 }
 
-class AllTrue extends AggregateExpression {
-  constructor(json) {
+export class AllTrue extends AggregateExpression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const items = this.source.execute(ctx);
     return allTrue(removeNulls(items));
   }
 }
 
-class AnyTrue extends AggregateExpression {
-  constructor(json) {
+export class AnyTrue extends AggregateExpression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const items = this.source.execute(ctx);
     return anyTrue(items);
   }
 }
 
-function processQuantities(values) {
+function processQuantities(values: any[]) {
   const items = removeNulls(values);
   if (hasOnlyQuantities(items)) {
     return convertAllUnits(items);
@@ -425,24 +435,24 @@ function processQuantities(values) {
   }
 }
 
-function getValuesFromQuantities(quantities) {
+function getValuesFromQuantities(quantities: Quantity[]): number[] {
   return quantities.map(quantity => quantity.value);
 }
 
-function hasOnlyQuantities(arr) {
+function hasOnlyQuantities(arr: any[]) {
   return arr.every(x => x.isQuantity);
 }
 
-function hasSomeQuantities(arr) {
+function hasSomeQuantities(arr: any[]) {
   return arr.some(x => x.isQuantity);
 }
 
-function convertAllUnits(arr) {
+function convertAllUnits(arr: any[]) {
   // convert all quantities in array to match the unit of the first item
   return arr.map(q => q.convertUnit(arr[0].unit));
 }
 
-function medianOfNumbers(numbers) {
+function medianOfNumbers(numbers: number[]) {
   const items = numerical_sort(numbers, 'asc');
   if (items.length % 2 === 1) {
     // Odd number of items
@@ -452,21 +462,3 @@ function medianOfNumbers(numbers) {
     return (items[items.length / 2 - 1] + items[items.length / 2]) / 2;
   }
 }
-
-module.exports = {
-  Count,
-  Sum,
-  Min,
-  Max,
-  Avg,
-  Median,
-  Mode,
-  StdDev,
-  Product,
-  GeometricMean,
-  PopulationStdDev,
-  Variance,
-  PopulationVariance,
-  AllTrue,
-  AnyTrue
-};

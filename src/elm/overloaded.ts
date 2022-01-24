@@ -1,32 +1,35 @@
-const { Expression } = require('./expression');
-const { ThreeValuedLogic } = require('../datatypes/logic');
-const { DateTime } = require('../datatypes/datetime');
-const { typeIsArray } = require('../util/util');
-const { equals, equivalent } = require('../util/comparison');
-const DT = require('./datetime');
-const LIST = require('./list');
-const IVL = require('./interval');
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { Expression } from './expression';
+import { ThreeValuedLogic } from '../datatypes/logic';
+import { DateTime } from '../datatypes/datetime';
+import { typeIsArray } from '../util/util';
+import { equals, equivalent } from '../util/comparison';
+import * as DT from './datetime';
+import * as LIST from './list';
+import * as IVL from './interval';
+import { Context } from '../runtime/context';
 
 class Equal extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const args = this.execArgs(ctx);
     if (args[0] == null || args[1] == null) {
       return null;
     }
+    // @ts-ignore
     return equals(...args);
   }
 }
 
 class Equivalent extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [a, b] = this.execArgs(ctx);
     if (a == null && b == null) {
       return true;
@@ -39,25 +42,26 @@ class Equivalent extends Expression {
 }
 
 class NotEqual extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const args = this.execArgs(ctx);
     if (args[0] == null || args[1] == null) {
       return null;
     }
+    // @ts-ignore
     return ThreeValuedLogic.not(equals(...this.execArgs(ctx)));
   }
 }
 
 class Union extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [a, b] = this.execArgs(ctx);
     if (a == null && b == null) {
       return this.listTypeArgs() ? [] : null;
@@ -75,18 +79,18 @@ class Union extends Expression {
   }
 
   listTypeArgs() {
-    return this.args.some(arg => {
+    return this.args?.some(arg => {
       return arg.asTypeSpecifier != null && arg.asTypeSpecifier.type === 'ListTypeSpecifier';
     });
   }
 }
 
 class Except extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [a, b] = this.execArgs(ctx);
     if (a == null) {
       return null;
@@ -100,11 +104,11 @@ class Except extends Expression {
 }
 
 class Intersect extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [a, b] = this.execArgs(ctx);
     if (a == null || b == null) {
       return null;
@@ -115,11 +119,11 @@ class Intersect extends Expression {
 }
 
 class Indexer extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [operand, index] = this.execArgs(ctx);
     if (operand == null || index == null) {
       return null;
@@ -132,12 +136,14 @@ class Indexer extends Expression {
 }
 
 class In extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [item, container] = this.execArgs(ctx);
     if (item == null) {
       return null;
@@ -151,12 +157,14 @@ class In extends Expression {
 }
 
 class Contains extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [container, item] = this.execArgs(ctx);
     if (container == null) {
       return false;
@@ -170,12 +178,14 @@ class Contains extends Expression {
 }
 
 class Includes extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [container, contained] = this.execArgs(ctx);
     if (container == null || contained == null) {
       return null;
@@ -186,12 +196,14 @@ class Includes extends Expression {
 }
 
 class IncludedIn extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [contained, container] = this.execArgs(ctx);
     if (container == null || contained == null) {
       return null;
@@ -202,12 +214,14 @@ class IncludedIn extends Expression {
 }
 
 class ProperIncludes extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [container, contained] = this.execArgs(ctx);
     if (container == null || contained == null) {
       return null;
@@ -218,12 +232,14 @@ class ProperIncludes extends Expression {
 }
 
 class ProperIncludedIn extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [contained, container] = this.execArgs(ctx);
     if (container == null || contained == null) {
       return null;
@@ -234,11 +250,11 @@ class ProperIncludedIn extends Expression {
 }
 
 class Length extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg != null) {
       return arg.length;
@@ -251,12 +267,14 @@ class Length extends Expression {
 }
 
 class After extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [a, b] = this.execArgs(ctx);
     if (a == null || b == null) {
       return null;
@@ -267,12 +285,14 @@ class After extends Expression {
 }
 
 class Before extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [a, b] = this.execArgs(ctx);
     if (a == null || b == null) {
       return null;
@@ -283,12 +303,14 @@ class Before extends Expression {
 }
 
 class SameAs extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [a, b] = this.execArgs(ctx);
     if (a != null && b != null) {
       return a.sameAs(b, this.precision != null ? this.precision.toLowerCase() : undefined);
@@ -299,12 +321,14 @@ class SameAs extends Expression {
 }
 
 class SameOrAfter extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [d1, d2] = this.execArgs(ctx);
     if (d1 != null && d2 != null) {
       return d1.sameOrAfter(d2, this.precision != null ? this.precision.toLowerCase() : undefined);
@@ -315,12 +339,14 @@ class SameOrAfter extends Expression {
 }
 
 class SameOrBefore extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [d1, d2] = this.execArgs(ctx);
     if (d1 != null && d2 != null) {
       return d1.sameOrBefore(d2, this.precision != null ? this.precision.toLowerCase() : undefined);
@@ -332,11 +358,11 @@ class SameOrBefore extends Expression {
 
 // Implemented for DateTime, Date, and Time but not for Decimal yet
 class Precision extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg == null) {
       return null;
@@ -352,7 +378,7 @@ class Precision extends Expression {
   }
 }
 
-module.exports = {
+export {
   After,
   Before,
   Contains,

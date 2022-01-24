@@ -1,9 +1,17 @@
-const { Expression } = require('./expression');
-const { build } = require('./builder');
-const { typeIsArray } = require('../util/util');
+import { Expression } from './expression';
+import { typeIsArray } from '../util/util';
+import { Context } from '../runtime/context';
+import { build } from './builder';
 
-class Retrieve extends Expression {
-  constructor(json) {
+export class Retrieve extends Expression {
+  datatype: string;
+  templateId: string;
+  codeProperty: string;
+  codes: any;
+  dateProperty: string;
+  dateRange: any;
+
+  constructor(json: any) {
     super(json);
     this.datatype = json.dataType;
     this.templateId = json.templateId;
@@ -13,7 +21,7 @@ class Retrieve extends Expression {
     this.dateRange = build(json.dateRange);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     let records = ctx.findRecords(this.templateId != null ? this.templateId : this.datatype);
     let codes = this.codes;
     if (this.codes && typeof this.codes.exec === 'function') {
@@ -23,12 +31,12 @@ class Retrieve extends Expression {
       }
     }
     if (codes) {
-      records = records.filter(r => this.recordMatchesCodesOrVS(r, codes));
+      records = records.filter((r: any) => this.recordMatchesCodesOrVS(r, codes));
     }
     // TODO: Added @dateProperty check due to previous fix in cql4browsers in cql_qdm_patient_api hash: ddbc57
     if (this.dateRange && this.dateProperty) {
       const range = this.dateRange.execute(ctx);
-      records = records.filter(r => range.includes(r.getDateOrInterval(this.dateProperty)));
+      records = records.filter((r: any) => range.includes(r.getDateOrInterval(this.dateProperty)));
     }
 
     if (Array.isArray(records)) {
@@ -39,13 +47,11 @@ class Retrieve extends Expression {
     return records;
   }
 
-  recordMatchesCodesOrVS(record, codes) {
+  recordMatchesCodesOrVS(record: any, codes: any) {
     if (typeIsArray(codes)) {
-      return codes.some(c => c.hasMatch(record.getCode(this.codeProperty)));
+      return (codes as any[]).some(c => c.hasMatch(record.getCode(this.codeProperty)));
     } else {
       return codes.hasMatch(record.getCode(this.codeProperty));
     }
   }
 }
-
-module.exports = { Retrieve };

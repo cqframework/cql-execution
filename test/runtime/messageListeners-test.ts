@@ -1,13 +1,9 @@
-const {
-  NullMessageListener,
-  ConsoleMessageListener
-} = require('../../src/runtime/messageListeners');
-const stdout = require('test-console').stdout;
-const stderr = require('test-console').stderr;
-const EOL = require('os').EOL;
+import { NullMessageListener, ConsoleMessageListener } from '../../src/runtime/messageListeners';
+import { stdout, stderr, Inspector } from 'test-console';
+import { EOL } from 'os';
 
 describe('ConsoleMessageListener', () => {
-  let stdoutInspect, stderrInspect;
+  let stdoutInspect: Inspector, stderrInspect: Inspector;
 
   beforeEach(() => {
     stdoutInspect = stdout.inspect();
@@ -58,7 +54,7 @@ describe('ConsoleMessageListener', () => {
 });
 
 describe('NullMessageListener', () => {
-  let stdoutInspect, stderrInspect;
+  let stdoutInspect: Inspector, stderrInspect: Inspector;
 
   beforeEach(() => {
     stdoutInspect = stdout.inspect();

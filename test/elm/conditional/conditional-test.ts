@@ -1,4 +1,4 @@
-const setup = require('../../setup');
+import setup from '../../setup';
 const data = require('./data');
 
 describe('If', () => {
@@ -26,7 +26,7 @@ describe('Case', () => {
       { x: 2, y: 1, message: 'X > Y' },
       { x: 1, y: 1, message: 'X == Y' }
     ];
-    for (let item of vals) {
+    for (const item of vals) {
       this.ctx.withParameters({ X: item.x, Y: item.y });
       this.standard.exec(this.ctx).should.equal(item.message);
     }
@@ -38,7 +38,7 @@ describe('Case', () => {
       { var: 2, message: 'two' },
       { var: 3, message: '?' }
     ];
-    for (let item of vals) {
+    for (const item of vals) {
       this.ctx.withParameters({ var: item.var });
       this.selected.exec(this.ctx).should.equal(item.message);
     }

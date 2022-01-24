@@ -1,8 +1,15 @@
-const { Expression } = require('./expression');
-const { build } = require('./builder');
+import { Context } from '../runtime/context';
+import { Expression } from './expression';
+import { build } from './builder';
 
 class Message extends Expression {
-  constructor(json) {
+  source: any;
+  condition: any;
+  code: any;
+  severity: any;
+  message: any;
+
+  constructor(json: any) {
     super(json);
     this.source = build(json.source);
     this.condition = build(json.condition);
@@ -11,7 +18,7 @@ class Message extends Expression {
     this.message = build(json.message);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const source = this.source.execute(ctx);
     const condition = this.condition.execute(ctx);
     if (condition) {
@@ -27,4 +34,4 @@ class Message extends Expression {
   }
 }
 
-module.exports = { Message };
+export { Message };

@@ -1,7 +1,12 @@
-const { typeIsArray } = require('../util/util');
+import { typeIsArray } from '../util/util';
 
-class Code {
-  constructor(code, system, version, display) {
+export class Code {
+  code: string;
+  system?: string;
+  version?: string;
+  display?: string;
+
+  constructor(code: string, system?: string, version?: string, display?: string) {
     this.code = code;
     this.system = system;
     this.version = version;
@@ -12,7 +17,7 @@ class Code {
     return true;
   }
 
-  hasMatch(code) {
+  hasMatch(code: any) {
     if (typeof code === 'string') {
       // the specific behavior for this is not in the specification. Matching codesystem behavior.
       return code === this.code;
@@ -22,8 +27,11 @@ class Code {
   }
 }
 
-class Concept {
-  constructor(codes, display) {
+export class Concept {
+  codes: any;
+  display?: string;
+
+  constructor(codes: any, display?: string) {
     this.codes = codes || [];
     this.display = display;
   }
@@ -32,13 +40,17 @@ class Concept {
     return true;
   }
 
-  hasMatch(code) {
+  hasMatch(code: any) {
     return codesInList(toCodeList(code), this.codes);
   }
 }
 
-class ValueSet {
-  constructor(oid, version, codes) {
+export class ValueSet {
+  oid: string;
+  version: string;
+  codes: any;
+
+  constructor(oid: string, version: string, codes?: any) {
     this.oid = oid;
     this.version = version;
     this.codes = codes || [];
@@ -48,13 +60,13 @@ class ValueSet {
     return true;
   }
 
-  hasMatch(code) {
+  hasMatch(code: any) {
     const codesList = toCodeList(code);
     // InValueSet String Overload
     if (codesList.length === 1 && typeof codesList[0] === 'string') {
       let matchFound = false;
       let multipleCodeSystemsExist = false;
-      for (let codeItem of this.codes) {
+      for (const codeItem of this.codes) {
         // Confirm all code systems match
         if (codeItem.system !== this.codes[0].system) {
           multipleCodeSystemsExist = true;
@@ -75,12 +87,12 @@ class ValueSet {
   }
 }
 
-function toCodeList(c) {
+function toCodeList(c: any): any {
   if (c == null) {
     return [];
   } else if (typeIsArray(c)) {
-    let list = [];
-    for (let c2 of c) {
+    let list: any = [];
+    for (const c2 of c) {
       list = list.concat(toCodeList(c2));
     }
     return list;
@@ -91,10 +103,10 @@ function toCodeList(c) {
   }
 }
 
-function codesInList(cl1, cl2) {
+function codesInList(cl1: any, cl2: any) {
   // test each code in c1 against each code in c2 looking for a match
-  return cl1.some(c1 =>
-    cl2.some(c2 => {
+  return cl1.some((c1: any) =>
+    cl2.some((c2: any) => {
       // only the left argument (cl1) can contain strings. cl2 will only contain codes.
       if (typeof c1 === 'string') {
         // for "string in codesystem" this should compare the string to
@@ -107,15 +119,16 @@ function codesInList(cl1, cl2) {
   );
 }
 
-function codesMatch(code1, code2) {
+function codesMatch(code1: Code, code2: Code) {
   return code1.code === code2.code && code1.system === code2.system;
 }
 
-class CodeSystem {
-  constructor(id, version) {
+export class CodeSystem {
+  id: string;
+  version: string;
+
+  constructor(id: string, version: string) {
     this.id = id;
     this.version = version;
   }
 }
-
-module.exports = { Code, Concept, ValueSet, CodeSystem };

@@ -1,20 +1,37 @@
-const { Expression } = require('./expression');
-const { build } = require('./builder');
-const { Literal } = require('./literal');
-const DT = require('../datatypes/datatypes');
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { Expression } from './expression';
+import { build } from './builder';
+import { Literal } from './literal';
+import * as DT from '../datatypes/datatypes';
+import { Context } from '../runtime/context';
 
 class DateTime extends Expression {
-  constructor(json) {
+  json: any;
+
+  static readonly PROPERTIES = [
+    'year',
+    'month',
+    'day',
+    'hour',
+    'minute',
+    'second',
+    'millisecond',
+    'timezoneOffset'
+  ];
+
+  constructor(json: any) {
     super(json);
     this.json = json;
   }
 
-  exec(ctx) {
-    for (let property of DateTime.PROPERTIES) {
+  exec(ctx: Context) {
+    for (const property of DateTime.PROPERTIES) {
       // if json does not contain 'timezoneOffset' set it to the executionDateTime from the context
       if (this.json[property] != null) {
+        // @ts-ignore
         this[property] = build(this.json[property]);
       } else if (property === 'timezoneOffset' && ctx.getTimezoneOffset() != null) {
+        // @ts-ignore
         this[property] = Literal.from({
           type: 'Literal',
           value: ctx.getTimezoneOffset(),
@@ -22,96 +39,93 @@ class DateTime extends Expression {
         });
       }
     }
+    // @ts-ignore
     const args = DateTime.PROPERTIES.map(p => (this[p] != null ? this[p].execute(ctx) : undefined));
     return new DT.DateTime(...args);
   }
 }
 
-DateTime.PROPERTIES = [
-  'year',
-  'month',
-  'day',
-  'hour',
-  'minute',
-  'second',
-  'millisecond',
-  'timezoneOffset'
-];
-
 class Date extends Expression {
-  constructor(json) {
+  json: any;
+
+  static readonly PROPERTIES = ['year', 'month', 'day'];
+
+  constructor(json: any) {
     super(json);
     this.json = json;
   }
 
-  exec(ctx) {
-    for (let property of Date.PROPERTIES) {
+  exec(ctx: Context) {
+    for (const property of Date.PROPERTIES) {
       if (this.json[property] != null) {
+        // @ts-ignore
         this[property] = build(this.json[property]);
       }
     }
+    // @ts-ignore
     const args = Date.PROPERTIES.map(p => (this[p] != null ? this[p].execute(ctx) : undefined));
     return new DT.Date(...args);
   }
 }
 
-Date.PROPERTIES = ['year', 'month', 'day'];
-
 class Time extends Expression {
-  constructor(json) {
+  static readonly PROPERTIES = ['hour', 'minute', 'second', 'millisecond'];
+  constructor(json: any) {
     super(json);
-    for (let property of Time.PROPERTIES) {
+    for (const property of Time.PROPERTIES) {
       if (json[property] != null) {
+        // @ts-ignore
         this[property] = build(json[property]);
       }
     }
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
+    // @ts-ignore
     const args = Time.PROPERTIES.map(p => (this[p] != null ? this[p].execute(ctx) : undefined));
     return new DT.DateTime(0, 1, 1, ...args).getTime();
   }
 }
 
-Time.PROPERTIES = ['hour', 'minute', 'second', 'millisecond'];
-
 class Today extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     return ctx.getExecutionDateTime().getDate();
   }
 }
 
 class Now extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     return ctx.getExecutionDateTime();
   }
 }
 
 class TimeOfDay extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     return ctx.getExecutionDateTime().getTime();
   }
 }
 
 class DateTimeComponentFrom extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg != null) {
       return arg[this.precision.toLowerCase()];
@@ -122,11 +136,11 @@ class DateTimeComponentFrom extends Expression {
 }
 
 class DateFrom extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const date = this.execArgs(ctx);
     if (date != null) {
       return date.getDate();
@@ -137,11 +151,11 @@ class DateFrom extends Expression {
 }
 
 class TimeFrom extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const date = this.execArgs(ctx);
     if (date != null) {
       return date.getTime();
@@ -152,11 +166,11 @@ class TimeFrom extends Expression {
 }
 
 class TimezoneOffsetFrom extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const date = this.execArgs(ctx);
     if (date != null) {
       return date.timezoneOffset;
@@ -167,22 +181,24 @@ class TimezoneOffsetFrom extends Expression {
 }
 
 // Delegated to by overloaded#After
-function doAfter(a, b, precision) {
+function doAfter(a: any, b: any, precision: any) {
   return a.after(b, precision);
 }
 
 // Delegated to by overloaded#Before
-function doBefore(a, b, precision) {
+function doBefore(a: any, b: any, precision: any) {
   return a.before(b, precision);
 }
 
 class DifferenceBetween extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const args = this.execArgs(ctx);
     // Check to make sure args exist and that they have differenceBetween functions so that they can be compared to one another
     if (
@@ -206,12 +222,14 @@ class DifferenceBetween extends Expression {
 }
 
 class DurationBetween extends Expression {
-  constructor(json) {
+  precision?: any;
+
+  constructor(json: any) {
     super(json);
     this.precision = json.precision;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const args = this.execArgs(ctx);
     // Check to make sure args exist and that they have durationBetween functions so that they can be compared to one another
     if (
@@ -234,7 +252,7 @@ class DurationBetween extends Expression {
   }
 }
 
-module.exports = {
+export {
   Date,
   DateFrom,
   DateTime,

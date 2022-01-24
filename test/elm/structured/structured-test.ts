@@ -1,5 +1,6 @@
-const setup = require('../../setup');
+import setup from '../../setup';
 const data = require('./data');
+import 'should';
 
 describe('Tuple', () => {
   beforeEach(function () {

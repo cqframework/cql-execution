@@ -1,12 +1,15 @@
-const DT = require('./datatypes/datatypes');
+import * as DT from './datatypes/datatypes';
 
 class Record {
-  constructor(json) {
+  json: any;
+  id: string;
+
+  constructor(json: any) {
     this.json = json;
     this.id = this.json.id;
   }
 
-  _is(typeSpecifier) {
+  _is(typeSpecifier: any) {
     return this._typeHierarchy().some(
       t => t.type === typeSpecifier.type && t.name == typeSpecifier.name
     );
@@ -26,7 +29,7 @@ class Record {
     ];
   }
 
-  _recursiveGet(field) {
+  _recursiveGet(field: any): any {
     if (field != null && field.indexOf('.') >= 0) {
       const [root, rest] = field.split('.', 2);
       return new Record(this._recursiveGet(root))._recursiveGet(rest);
@@ -34,7 +37,7 @@ class Record {
     return this.json[field];
   }
 
-  get(field) {
+  get(field: any) {
     // the model should return the correct type for the field. For this simple model example,
     // we just cheat and use the shape of the value to determine it. Real implementations should
     // have a more sophisticated approach
@@ -55,7 +58,7 @@ class Record {
     return this.id;
   }
 
-  getDate(field) {
+  getDate(field: any) {
     const val = this._recursiveGet(field);
     if (val != null) {
       return DT.DateTime.parse(val);
@@ -64,7 +67,7 @@ class Record {
     }
   }
 
-  getInterval(field) {
+  getInterval(field: any) {
     const val = this._recursiveGet(field);
     if (val != null && typeof val === 'object') {
       const low = val.low != null ? DT.DateTime.parse(val.low) : null;
@@ -73,7 +76,7 @@ class Record {
     }
   }
 
-  getDateOrInterval(field) {
+  getDateOrInterval(field: any) {
     const val = this._recursiveGet(field);
     if (val != null && typeof val === 'object') {
       return this.getInterval(field);
@@ -82,7 +85,7 @@ class Record {
     }
   }
 
-  getCode(field) {
+  getCode(field: any) {
     const val = this._recursiveGet(field);
     if (val != null && typeof val === 'object') {
       return new DT.Code(val.code, val.system, val.version);
@@ -90,14 +93,19 @@ class Record {
   }
 }
 
-class Patient extends Record {
-  constructor(json) {
+export class Patient extends Record {
+  name: string;
+  gender: string;
+  birthDate?: DT.DateTime | null;
+  records: any;
+
+  constructor(json: any) {
     super(json);
     this.name = json.name;
     this.gender = json.gender;
     this.birthDate = json.birthDate != null ? DT.DateTime.parse(json.birthDate) : undefined;
     this.records = {};
-    (json.records || []).forEach(r => {
+    (json.records || []).forEach((r: any) => {
       if (this.records[r.recordType] == null) {
         this.records[r.recordType] = [];
       }
@@ -105,7 +113,7 @@ class Patient extends Record {
     });
   }
 
-  findRecords(profile) {
+  findRecords(profile: any) {
     if (profile == null) {
       return [];
     }
@@ -120,8 +128,11 @@ class Patient extends Record {
   }
 }
 
-class PatientSource {
-  constructor(patients) {
+export class PatientSource {
+  patients: any;
+  current: Patient | undefined;
+
+  constructor(patients: any) {
     this.patients = patients;
     this.nextPatient();
   }
@@ -136,6 +147,3 @@ class PatientSource {
     return this.current;
   }
 }
-
-module.exports.Patient = Patient;
-module.exports.PatientSource = PatientSource;

@@ -1,49 +1,59 @@
-const { Expression, UnimplementedExpression } = require('./expression');
-const { Context } = require('../runtime/context');
-const { build } = require('./builder');
-const { typeIsArray, allTrue } = require('../util/util');
-const { equals } = require('../util/comparison');
+import { Expression, UnimplementedExpression } from './expression';
+import { Context } from '../runtime/context';
+import { typeIsArray, allTrue, Direction } from '../util/util';
+import { equals } from '../util/comparison';
+import { build } from './builder';
 
 class AliasedQuerySource {
-  constructor(json) {
+  alias: any;
+  expression: any;
+
+  constructor(json: any) {
     this.alias = json.alias;
     this.expression = build(json.expression);
   }
 }
 
 class LetClause {
-  constructor(json) {
+  identifier: string;
+  expression: any;
+
+  constructor(json: any) {
     this.identifier = json.identifier;
     this.expression = build(json.expression);
   }
 }
 
 class With extends Expression {
-  constructor(json) {
+  alias: any;
+  expression: any;
+  suchThat: any;
+
+  constructor(json: any) {
     super(json);
     this.alias = json.alias;
     this.expression = build(json.expression);
     this.suchThat = build(json.suchThat);
   }
-  exec(ctx) {
+  exec(ctx: Context) {
     let records = this.expression.execute(ctx);
     if (!typeIsArray(records)) {
       records = [records];
     }
-    const returns = records.map(rec => {
+    const returns = records.map((rec: any) => {
       const childCtx = ctx.childContext();
       childCtx.set(this.alias, rec);
       return this.suchThat.execute(childCtx);
     });
-    return returns.some(x => x);
+    return returns.some((x: any) => x);
   }
 }
 
 class Without extends With {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
-  exec(ctx) {
+  exec(ctx: Context) {
     return !super.exec(ctx);
   }
 }
@@ -52,14 +62,20 @@ class Without extends With {
 class Sort extends UnimplementedExpression {}
 
 class ByDirection extends Expression {
-  constructor(json) {
+  direction: Direction;
+  low_order: number;
+  high_order: number;
+
+  constructor(json: any) {
     super(json);
     this.direction = json.direction;
     this.low_order = this.direction === 'asc' || this.direction === 'ascending' ? -1 : 1;
     this.high_order = this.low_order * -1;
   }
 
-  exec(ctx, a, b) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  exec(ctx: Context, a: any, b: any) {
     if (a === b) {
       return 0;
     } else if (a.isQuantity && b.isQuantity) {
@@ -77,7 +93,12 @@ class ByDirection extends Expression {
 }
 
 class ByExpression extends Expression {
-  constructor(json) {
+  expression: any;
+  direction: Direction;
+  low_order: number;
+  high_order: number;
+
+  constructor(json: any) {
     super(json);
     this.expression = build(json.expression);
     this.direction = json.direction;
@@ -85,7 +106,9 @@ class ByExpression extends Expression {
     this.high_order = this.low_order * -1;
   }
 
-  exec(ctx, a, b) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  exec(ctx: Context, a: any, b: any) {
     let sctx = ctx.childContext(a);
     const a_val = this.expression.execute(sctx);
     sctx = ctx.childContext(b);
@@ -104,7 +127,7 @@ class ByExpression extends Expression {
 }
 
 class ByColumn extends ByExpression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
     this.expression = build({
       name: json.path,
@@ -114,22 +137,27 @@ class ByColumn extends ByExpression {
 }
 
 class ReturnClause {
-  constructor(json) {
+  expression: any;
+  distinct: boolean;
+
+  constructor(json: any) {
     this.expression = build(json.expression);
     this.distinct = json.distinct != null ? json.distinct : true;
   }
 }
 
 class SortClause {
-  constructor(json) {
+  by: any;
+
+  constructor(json: any) {
     this.by = build(json != null ? json.by : undefined);
   }
 
-  sort(ctx, values) {
+  sort(ctx: Context, values: any) {
     if (this.by) {
-      return values.sort((a, b) => {
+      return values.sort((a: any, b: any) => {
         let order = 0;
-        for (let item of this.by) {
+        for (const item of this.by) {
           // Do not use execute here because the value of the sort order is not important.
           order = item.exec(ctx, a, b);
           if (order !== 0) {
@@ -142,8 +170,8 @@ class SortClause {
   }
 }
 
-const toDistinctList = function (xList) {
-  const yList = [];
+const toDistinctList = function (xList: any[]) {
+  const yList: any[] = [];
   xList.forEach(x => {
     if (!yList.some(y => equals(x, y))) {
       yList.push(x);
@@ -153,7 +181,12 @@ const toDistinctList = function (xList) {
 };
 
 class AggregateClause extends Expression {
-  constructor(json) {
+  identifier: string;
+  expression: any;
+  starting: any;
+  distinct: boolean;
+
+  constructor(json: any) {
     super(json);
     this.identifier = json.identifier;
     this.expression = build(json.expression);
@@ -161,10 +194,10 @@ class AggregateClause extends Expression {
     this.distinct = json.distinct != null ? json.distinct : true;
   }
 
-  aggregate(returnedValues, ctx) {
+  aggregate(returnedValues: any, ctx: Context) {
     let aggregateValue = this.starting != null ? this.starting.exec(ctx) : null;
-    returnedValues.forEach(contextValues => {
-      let childContext = ctx.childContext(contextValues);
+    returnedValues.forEach((contextValues: any) => {
+      const childContext = ctx.childContext(contextValues);
       childContext.set(this.identifier, aggregateValue);
       aggregateValue = this.expression.exec(childContext);
     });
@@ -173,10 +206,19 @@ class AggregateClause extends Expression {
 }
 
 class Query extends Expression {
-  constructor(json) {
+  sources: MultiSource;
+  letClauses: LetClause[];
+  relationship: any[];
+  where: any;
+  returnClause: ReturnClause | null;
+  aggregateClause: AggregateClause | null;
+  aliases: any;
+  sortClause: SortClause | null;
+
+  constructor(json: any) {
     super(json);
-    this.sources = new MultiSource(json.source.map(s => new AliasedQuerySource(s)));
-    this.letClauses = json.let != null ? json.let.map(d => new LetClause(d)) : [];
+    this.sources = new MultiSource(json.source.map((s: any) => new AliasedQuerySource(s)));
+    this.letClauses = json.let != null ? json.let.map((d: any) => new LetClause(d)) : [];
     this.relationship = json.relationship != null ? build(json.relationship) : [];
     this.where = build(json.where);
     this.returnClause = json.return != null ? new ReturnClause(json.return) : null;
@@ -194,10 +236,10 @@ class Query extends Expression {
     return true;
   }
 
-  exec(ctx) {
-    let returnedValues = [];
-    this.sources.forEach(ctx, rctx => {
-      for (let def of this.letClauses) {
+  exec(ctx: Context) {
+    let returnedValues: any[] = [];
+    this.sources.forEach(ctx, (rctx: any) => {
+      for (const def of this.letClauses) {
         rctx.set(def.identifier, def.expression.execute(rctx));
       }
 
@@ -240,18 +282,20 @@ class Query extends Expression {
 }
 
 class AliasRef extends Expression {
-  constructor(json) {
+  name: string;
+
+  constructor(json: any) {
     super(json);
     this.name = json.name;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     return ctx != null ? ctx.get(this.name) : undefined;
   }
 }
 
 class QueryLetRef extends AliasRef {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 }
@@ -259,7 +303,13 @@ class QueryLetRef extends AliasRef {
 // The following is not defined by ELM but is helpful for execution
 
 class MultiSource {
-  constructor(sources) {
+  sources: any[];
+  alias: any;
+  expression: any;
+  isList: boolean;
+  rest?: MultiSource;
+
+  constructor(sources: any) {
     this.sources = sources;
     this.alias = this.sources[0].alias;
     this.expression = this.sources[0].expression;
@@ -277,15 +327,15 @@ class MultiSource {
     return a;
   }
 
-  returnsList() {
+  returnsList(): boolean | undefined {
     return this.isList || (this.rest && this.rest.returnsList());
   }
 
-  forEach(ctx, func) {
+  forEach(ctx: Context, func: any) {
     let records = this.expression.execute(ctx);
     this.isList = typeIsArray(records);
     records = this.isList ? records : [records];
-    return records.map(rec => {
+    return records.map((rec: any) => {
       const rctx = new Context(ctx);
       rctx.set(this.alias, rec);
       if (this.rest) {
@@ -297,7 +347,7 @@ class MultiSource {
   }
 }
 
-module.exports = {
+export {
   AliasedQuerySource,
   AliasRef,
   ByColumn,

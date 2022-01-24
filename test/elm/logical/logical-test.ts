@@ -1,5 +1,5 @@
-const should = require('should');
-const setup = require('../../setup');
+import should from 'should';
+import setup from '../../setup';
 const data = require('./data');
 
 describe('And', () => {

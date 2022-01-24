@@ -1,12 +1,15 @@
-const { Library } = require('../elm/library');
+import { Library } from '../elm/library';
 
-class Repository {
-  constructor(data) {
+export class Repository {
+  data: any;
+  libraries: any[];
+
+  constructor(data: any) {
     this.data = data;
     this.libraries = Array.from(Object.values(data));
   }
 
-  resolve(path, version) {
+  resolve(path: string, version?: string) {
     for (const lib of this.libraries) {
       if (lib.library && lib.library.identifier) {
         const { id, system, version: libraryVersion } = lib.library.identifier;
@@ -25,5 +28,3 @@ class Repository {
     }
   }
 }
-
-module.exports = { Repository };

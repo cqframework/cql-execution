@@ -1,8 +1,10 @@
-function removeNulls(things) {
+export type Direction = 'asc' | 'ascending' | 'desc' | 'descending';
+
+export function removeNulls(things: any[]) {
   return things.filter(x => x != null);
 }
 
-function numerical_sort(things, direction) {
+export function numerical_sort(things: any[], direction: Direction | null) {
   return things.sort((a, b) => {
     if (direction == null || direction === 'asc' || direction === 'ascending') {
       return a - b;
@@ -12,32 +14,33 @@ function numerical_sort(things, direction) {
   });
 }
 
-function isNull(value) {
+export function isNull(value: any) {
   return value === null;
 }
 
-const typeIsArray = Array.isArray || (value => ({}.toString.call(value) === '[object Array]'));
+export const typeIsArray =
+  Array.isArray || (value => ({}.toString.call(value) === '[object Array]'));
 
-function allTrue(things) {
+export function allTrue(things: any) {
   if (typeIsArray(things)) {
-    return things.every(x => x);
+    return (things as any[]).every(x => x);
   } else {
     return things;
   }
 }
 
-function anyTrue(things) {
+export function anyTrue(things: any) {
   if (typeIsArray(things)) {
-    return things.some(x => x);
+    return (things as any[]).some(x => x);
   } else {
     return things;
   }
 }
 
 //The export below is to make it easier if js Date is overwritten with CQL Date
-const jsDate = Date;
+export const jsDate = Date;
 
-function normalizeMillisecondsFieldInString(string, msString) {
+export function normalizeMillisecondsFieldInString(string: string, msString: string) {
   // TODO: verify we are only removing numeral digits
   let timezoneField;
   msString = normalizeMillisecondsField(msString);
@@ -53,12 +56,12 @@ function normalizeMillisecondsFieldInString(string, msString) {
   return (string = beforeMs + '.' + msString + timezoneSeparator + timezoneField);
 }
 
-function normalizeMillisecondsField(msString) {
+export function normalizeMillisecondsField(msString: string) {
   // fix up milliseconds by padding zeros and/or truncating (5 --> 500, 50 --> 500, 54321 --> 543, etc.)
   return (msString = (msString + '00').substring(0, 3));
 }
 
-function getTimezoneSeparatorFromString(string) {
+export function getTimezoneSeparatorFromString(string: string) {
   if (string != null) {
     let matches = string.match(/-/);
     if (matches && matches.length === 1) {
@@ -71,16 +74,3 @@ function getTimezoneSeparatorFromString(string) {
   }
   return '';
 }
-
-module.exports = {
-  removeNulls,
-  numerical_sort,
-  isNull,
-  typeIsArray,
-  allTrue,
-  anyTrue,
-  jsDate,
-  normalizeMillisecondsFieldInString,
-  normalizeMillisecondsField,
-  getTimezoneSeparatorFromString
-};

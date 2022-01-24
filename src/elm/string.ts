@@ -1,35 +1,39 @@
-const { Expression } = require('./expression');
-const { build } = require('./builder');
+import { Expression } from './expression';
+import { Context } from '../runtime/context';
+import { build } from './builder';
 
 class Concatenate extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const args = this.execArgs(ctx);
-    if (args.some(x => x == null)) {
+    if (args.some((x: any) => x == null)) {
       return null;
     } else {
-      return args.reduce((x, y) => x + y);
+      return args.reduce((x: any, y: any) => x + y);
     }
   }
 }
 
 class Combine extends Expression {
-  constructor(json) {
+  source: any;
+  separator: any;
+
+  constructor(json: any) {
     super(json);
     this.source = build(json.source);
     this.separator = build(json.separator);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const source = this.source.execute(ctx);
     const separator = this.separator != null ? this.separator.execute(ctx) : '';
     if (source == null) {
       return null;
     } else {
-      const filteredArray = source.filter(x => x != null);
+      const filteredArray = source.filter((x: any) => x != null);
       if (filteredArray.length === 0) {
         return null;
       } else {
@@ -40,13 +44,16 @@ class Combine extends Expression {
 }
 
 class Split extends Expression {
-  constructor(json) {
+  stringToSplit: any;
+  separator: any;
+
+  constructor(json: any) {
     super(json);
     this.stringToSplit = build(json.stringToSplit);
     this.separator = build(json.separator);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const stringToSplit = this.stringToSplit.execute(ctx);
     const separator = this.separator.execute(ctx);
     if (stringToSplit && separator) {
@@ -57,13 +64,16 @@ class Split extends Expression {
 }
 
 class SplitOnMatches extends Expression {
-  constructor(json) {
+  stringToSplit: any;
+  separatorPattern: any;
+
+  constructor(json: any) {
     super(json);
     this.stringToSplit = build(json.stringToSplit);
     this.separatorPattern = build(json.separatorPattern);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const stringToSplit = this.stringToSplit.execute(ctx);
     const separatorPattern = this.separatorPattern.execute(ctx);
     if (stringToSplit && separatorPattern) {
@@ -76,11 +86,11 @@ class SplitOnMatches extends Expression {
 // Length is completely handled by overloaded#Length
 
 class Upper extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg != null) {
       return arg.toUpperCase();
@@ -91,11 +101,11 @@ class Upper extends Expression {
 }
 
 class Lower extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg != null) {
       return arg.toLowerCase();
@@ -108,13 +118,16 @@ class Lower extends Expression {
 // Indexer is completely handled by overloaded#Indexer
 
 class PositionOf extends Expression {
-  constructor(json) {
+  pattern: any;
+  string: any;
+
+  constructor(json: any) {
     super(json);
     this.pattern = build(json.pattern);
     this.string = build(json.string);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const pattern = this.pattern.execute(ctx);
     const string = this.string.execute(ctx);
     if (pattern == null || string == null) {
@@ -126,13 +139,16 @@ class PositionOf extends Expression {
 }
 
 class LastPositionOf extends Expression {
-  constructor(json) {
+  pattern: any;
+  string: any;
+
+  constructor(json: any) {
     super(json);
     this.pattern = build(json.pattern);
     this.string = build(json.string);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const pattern = this.pattern.execute(ctx);
     const string = this.string.execute(ctx);
     if (pattern == null || string == null) {
@@ -144,11 +160,11 @@ class LastPositionOf extends Expression {
 }
 
 class Matches extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [string, pattern] = this.execArgs(ctx);
     if (string == null || pattern == null) {
       return null;
@@ -159,14 +175,18 @@ class Matches extends Expression {
 }
 
 class Substring extends Expression {
-  constructor(json) {
+  stringToSub: any;
+  startIndex: any;
+  length: any;
+
+  constructor(json: any) {
     super(json);
     this.stringToSub = build(json.stringToSub);
     this.startIndex = build(json.startIndex);
     this.length = build(json['length']);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const stringToSub = this.stringToSub.execute(ctx);
     const startIndex = this.startIndex.execute(ctx);
     const length = this.length != null ? this.length.execute(ctx) : null;
@@ -187,13 +207,13 @@ class Substring extends Expression {
 }
 
 class StartsWith extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const args = this.execArgs(ctx);
-    if (args.some(x => x == null)) {
+    if (args.some((x: any) => x == null)) {
       return null;
     } else {
       return args[0].slice(0, args[1].length) === args[1];
@@ -202,13 +222,13 @@ class StartsWith extends Expression {
 }
 
 class EndsWith extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const args = this.execArgs(ctx);
-    if (args.some(x => x == null)) {
+    if (args.some((x: any) => x == null)) {
       return null;
     } else {
       return args[1] === '' || args[0].slice(-args[1].length) === args[1];
@@ -217,13 +237,13 @@ class EndsWith extends Expression {
 }
 
 class ReplaceMatches extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const args = this.execArgs(ctx);
-    if (args.some(x => x == null)) {
+    if (args.some((x: any) => x == null)) {
       return null;
     } else {
       return args[0].replace(new RegExp(args[1], 'g'), args[2]);
@@ -231,7 +251,7 @@ class ReplaceMatches extends Expression {
   }
 }
 
-module.exports = {
+export {
   Combine,
   Concatenate,
   EndsWith,

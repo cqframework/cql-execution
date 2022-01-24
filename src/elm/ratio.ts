@@ -1,9 +1,13 @@
-const { Expression } = require('./expression');
-const { Quantity } = require('../datatypes/quantity');
-const DT = require('../datatypes/datatypes');
+import { Expression } from './expression';
+import { Quantity } from '../datatypes/quantity';
+import * as DT from '../datatypes/datatypes';
+import { Context } from '../runtime/context';
 
 class Ratio extends Expression {
-  constructor(json) {
+  numerator: Quantity;
+  denominator: Quantity;
+
+  constructor(json: any) {
     super(json);
     if (json.numerator == null) {
       throw new Error('Cannot create a ratio with an undefined numerator value');
@@ -18,9 +22,9 @@ class Ratio extends Expression {
     }
   }
 
-  exec(ctx) {
+  exec(_ctx: Context) {
     return new DT.Ratio(this.numerator, this.denominator);
   }
 }
 
-module.exports = { Ratio };
+export { Ratio };

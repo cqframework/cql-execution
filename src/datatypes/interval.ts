@@ -1,18 +1,30 @@
-const { Uncertainty } = require('./uncertainty');
-const { Quantity, doSubtraction } = require('../datatypes/quantity');
-const { ThreeValuedLogic } = require('./logic');
-const {
+import { Uncertainty } from './uncertainty';
+import { Quantity, doSubtraction } from './quantity';
+import { ThreeValuedLogic } from './logic';
+import {
   successor,
   predecessor,
   maxValueForInstance,
   minValueForInstance,
   maxValueForType,
   minValueForType
-} = require('../util/math');
-const cmp = require('../util/comparison');
+} from '../util/math';
+import * as cmp from '../util/comparison';
 
-class Interval {
-  constructor(low, high, lowClosed, highClosed, defaultPointType) {
+export class Interval {
+  low: any;
+  high: any;
+  lowClosed: boolean;
+  highClosed: boolean;
+  defaultPointType?: any;
+
+  constructor(
+    low: any,
+    high: any,
+    lowClosed?: boolean | null,
+    highClosed?: boolean | null,
+    defaultPointType?: any
+  ) {
     this.low = low;
     this.high = high;
     this.lowClosed = lowClosed != null ? lowClosed : true;
@@ -31,7 +43,7 @@ class Interval {
     if (point != null) {
       if (typeof point === 'number') {
         pointType =
-          parseInt(point) === point
+          parseInt(point.toString()) === point
             ? '{urn:hl7-org:elm-types:r1}Integer'
             : '{urn:hl7-org:elm-types:r1}Decimal';
       } else if (point.isTime && point.isTime()) {
@@ -63,7 +75,7 @@ class Interval {
     return new Interval(newLow, newHigh, this.lowClosed, this.highClosed);
   }
 
-  contains(item, precision) {
+  contains(item: any, precision?: any) {
     // These first two checks ensure correct handling of edge case where an item equals the closed boundary
     if (this.lowClosed && this.low != null && cmp.equals(this.low, item)) {
       return true;
@@ -96,7 +108,7 @@ class Interval {
     );
   }
 
-  properlyIncludes(other, precision) {
+  properlyIncludes(other: any, precision?: any) {
     if (other == null || !other.isInterval) {
       throw new Error('Argument to properlyIncludes must be an interval');
     }
@@ -106,7 +118,7 @@ class Interval {
     );
   }
 
-  includes(other, precision) {
+  includes(other: any, precision?: any) {
     if (other == null || !other.isInterval) {
       return this.contains(other, precision);
     }
@@ -118,7 +130,7 @@ class Interval {
     );
   }
 
-  includedIn(other, precision) {
+  includedIn(other: any, precision?: any) {
     // For the point overload, this operator is a synonym for the in operator
     if (other == null || !other.isInterval) {
       return this.contains(other, precision);
@@ -127,7 +139,7 @@ class Interval {
     }
   }
 
-  overlaps(item, precision) {
+  overlaps(item: any, precision?: any) {
     const closed = this.toClosed();
     const [low, high] = (() => {
       if (item != null && item.isInterval) {
@@ -143,7 +155,7 @@ class Interval {
     );
   }
 
-  overlapsAfter(item, precision) {
+  overlapsAfter(item: any, precision?: any) {
     const closed = this.toClosed();
     const high = item != null && item.isInterval ? item.toClosed().high : item;
     return ThreeValuedLogic.and(
@@ -152,7 +164,7 @@ class Interval {
     );
   }
 
-  overlapsBefore(item, precision) {
+  overlapsBefore(item: any, precision?: any) {
     const closed = this.toClosed();
     const low = item != null && item.isInterval ? item.toClosed().low : item;
     return ThreeValuedLogic.and(
@@ -161,7 +173,7 @@ class Interval {
     );
   }
 
-  union(other) {
+  union(other: any) {
     if (other == null || !other.isInterval) {
       throw new Error('Argument to union must be an interval');
     }
@@ -200,7 +212,7 @@ class Interval {
     }
   }
 
-  intersect(other) {
+  intersect(other: any) {
     if (other == null || !other.isInterval) {
       throw new Error('Argument to union must be an interval');
     }
@@ -239,7 +251,7 @@ class Interval {
     }
   }
 
-  except(other) {
+  except(other: any) {
     if (other === null) {
       return null;
     }
@@ -266,7 +278,7 @@ class Interval {
     }
   }
 
-  sameAs(other, precision) {
+  sameAs(other: any, precision?: any) {
     // This large if and else if block handles the scenarios where there is an open ended null
     // If both lows or highs exists, it can be determined that intervals are not Same As
     if (
@@ -345,7 +357,7 @@ class Interval {
     }
   }
 
-  sameOrBefore(other, precision) {
+  sameOrBefore(other: any, precision?: any) {
     if (this.end() == null || other == null || other.start() == null) {
       return null;
     } else {
@@ -353,7 +365,7 @@ class Interval {
     }
   }
 
-  sameOrAfter(other, precision) {
+  sameOrAfter(other: any, precision?: any) {
     if (this.start() == null || other == null || other.end() == null) {
       return null;
     } else {
@@ -361,7 +373,7 @@ class Interval {
     }
   }
 
-  equals(other) {
+  equals(other: any) {
     if (other != null && other.isInterval) {
       const [a, b] = [this.toClosed(), other.toClosed()];
       return ThreeValuedLogic.and(cmp.equals(a.low, b.low), cmp.equals(a.high, b.high));
@@ -370,7 +382,7 @@ class Interval {
     }
   }
 
-  after(other, precision) {
+  after(other: any, precision?: any) {
     const closed = this.toClosed();
     // Meets spec, but not 100% correct (e.g., (null, 5] after [6, 10] --> null)
     // Simple way to fix it: and w/ not overlaps
@@ -381,7 +393,7 @@ class Interval {
     }
   }
 
-  before(other, precision) {
+  before(other: any, precision?: any) {
     const closed = this.toClosed();
     // Meets spec, but not 100% correct (e.g., (null, 5] after [6, 10] --> null)
     // Simple way to fix it: and w/ not overlaps
@@ -392,14 +404,14 @@ class Interval {
     }
   }
 
-  meets(other, precision) {
+  meets(other: any, precision?: any) {
     return ThreeValuedLogic.or(
       this.meetsBefore(other, precision),
       this.meetsAfter(other, precision)
     );
   }
 
-  meetsAfter(other, precision) {
+  meetsAfter(other: any, precision?: any) {
     try {
       if (precision != null && this.low != null && this.low.isDateTime) {
         return this.toClosed().low.sameAs(
@@ -414,7 +426,7 @@ class Interval {
     }
   }
 
-  meetsBefore(other, precision) {
+  meetsBefore(other: any, precision?: any) {
     try {
       if (precision != null && this.high != null && this.high.isDateTime) {
         return this.toClosed().high.sameAs(
@@ -451,7 +463,7 @@ class Interval {
     return this.toClosed().high;
   }
 
-  starts(other, precision) {
+  starts(other: any, precision?: any) {
     let startEqual;
     if (precision != null && this.low != null && this.low.isDateTime) {
       startEqual = this.low.sameAs(other.low, precision);
@@ -462,7 +474,7 @@ class Interval {
     return startEqual && endLessThanOrEqual;
   }
 
-  ends(other, precision) {
+  ends(other: any, precision?: any) {
     let endEqual;
     const startGreaterThanOrEqual = cmp.greaterThanOrEquals(this.low, other.low, precision);
     if (precision != null && (this.low != null ? this.low.isDateTime : undefined)) {
@@ -603,17 +615,17 @@ class Interval {
   }
 }
 
-function areDateTimes(x, y) {
+function areDateTimes(x: any, y: any) {
   return [x, y].every(z => z != null && z.isDateTime);
 }
 
-function areNumeric(x, y) {
+function areNumeric(x: any, y: any) {
   return [x, y].every(z => {
     return typeof z === 'number' || (z != null && z.isUncertainty && typeof z.low === 'number');
   });
 }
 
-function lowestNumericUncertainty(x, y) {
+function lowestNumericUncertainty(x: any, y: any) {
   if (x == null || !x.isUncertainty) {
     x = new Uncertainty(x);
   }
@@ -629,7 +641,7 @@ function lowestNumericUncertainty(x, y) {
   }
 }
 
-function highestNumericUncertainty(x, y) {
+function highestNumericUncertainty(x: any, y: any) {
   if (x == null || !x.isUncertainty) {
     x = new Uncertainty(x);
   }
@@ -644,5 +656,3 @@ function highestNumericUncertainty(x, y) {
     return low;
   }
 }
-
-module.exports = { Interval };

@@ -1,9 +1,9 @@
-const should = require('should');
-const setup = require('../../setup');
+import should from 'should';
+import setup from '../../setup';
 const data = require('./data');
 
 describe('Message', () => {
-  let messageCollector;
+  let messageCollector: any;
   beforeEach(function () {
     setup(this, data);
     messageCollector = new TestMessageCollector();
@@ -29,11 +29,13 @@ describe('Message', () => {
 });
 
 class TestMessageCollector {
+  messages: any[];
+
   constructor() {
     this.messages = [];
   }
 
-  onMessage(source, code, severity, message) {
+  onMessage(source: any, code: string, severity: string, message: string) {
     this.messages.push(`${severity}: [${code}] ${message} (${JSON.stringify(source)})`);
   }
 }

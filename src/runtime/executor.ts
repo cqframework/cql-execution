@@ -1,36 +1,48 @@
-const { NullMessageListener } = require('./messageListeners');
-const { Results } = require('./results');
-const { UnfilteredContext, PatientContext } = require('./context');
+import { MessageListener, NullMessageListener } from './messageListeners';
+import { Results } from './results';
+import { UnfilteredContext, PatientContext } from './context';
+import { CodeService } from '../cql-code-service';
+import { DateTime } from '../datatypes/datetime';
 
-class Executor {
-  constructor(library, codeService, parameters, messageListener = new NullMessageListener()) {
+export class Executor {
+  library: any;
+  codeService?: CodeService | null;
+  parameters?: any;
+  messageListener: MessageListener;
+
+  constructor(
+    library: any,
+    codeService?: CodeService,
+    parameters?: any,
+    messageListener: MessageListener = new NullMessageListener()
+  ) {
     this.library = library;
     this.codeService = codeService;
     this.parameters = parameters;
     this.messageListener = messageListener;
   }
 
-  withLibrary(lib) {
+  withLibrary(lib: any) {
     this.library = lib;
     return this;
   }
 
-  withParameters(params) {
+  withParameters(params: any) {
     this.parameters = params != null ? params : {};
     return this;
   }
 
-  withCodeService(cs) {
+  withCodeService(cs: CodeService) {
     this.codeService = cs;
     return this;
   }
 
-  withMessageListener(ml) {
+  withMessageListener(ml: MessageListener) {
     this.messageListener = ml;
     return this;
   }
 
-  exec_expression(expression, patientSource, executionDateTime) {
+  exec_expression(expression: any, patientSource: any, executionDateTime: DateTime) {
     const r = new Results();
     const expr = this.library.expressions[expression];
     if (expr != null) {
@@ -50,7 +62,7 @@ class Executor {
     return r;
   }
 
-  exec(patientSource, executionDateTime) {
+  exec(patientSource: any, executionDateTime: DateTime) {
     const r = this.exec_patient_context(patientSource, executionDateTime);
     const unfilteredContext = new UnfilteredContext(
       this.library,
@@ -60,8 +72,8 @@ class Executor {
       executionDateTime,
       this.messageListener
     );
-    const resultMap = {};
-    for (let key in this.library.expressions) {
+    const resultMap: any = {};
+    for (const key in this.library.expressions) {
       const expr = this.library.expressions[key];
       if (expr.context === 'Unfiltered') {
         resultMap[key] = expr.exec(unfilteredContext);
@@ -71,7 +83,7 @@ class Executor {
     return r;
   }
 
-  exec_patient_context(patientSource, executionDateTime) {
+  exec_patient_context(patientSource: any, executionDateTime: DateTime) {
     const r = new Results();
     while (patientSource.currentPatient()) {
       const patient_ctx = new PatientContext(
@@ -82,8 +94,8 @@ class Executor {
         executionDateTime,
         this.messageListener
       );
-      const resultMap = {};
-      for (let key in this.library.expressions) {
+      const resultMap: any = {};
+      for (const key in this.library.expressions) {
         const expr = this.library.expressions[key];
         if (expr.context === 'Patient') {
           resultMap[key] = expr.execute(patient_ctx);
@@ -95,5 +107,3 @@ class Executor {
     return r;
   }
 }
-
-module.exports = { Executor };

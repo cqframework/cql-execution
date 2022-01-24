@@ -1,4 +1,9 @@
-class Results {
+export class Results {
+  patientResults: any;
+  unfilteredResults: any;
+  localIdPatientResultsMap: any;
+  patientEvaluatedRecords: any;
+
   constructor() {
     this.patientResults = {};
     this.unfilteredResults = {};
@@ -8,10 +13,10 @@ class Results {
 
   // Expose an evaluatedRecords array for backwards compatibility
   get evaluatedRecords() {
-    return [].concat(...Object.values(this.patientEvaluatedRecords));
+    return [].concat(...(Object.values(this.patientEvaluatedRecords) as any[]));
   }
 
-  recordPatientResults(patient_ctx, resultMap) {
+  recordPatientResults(patient_ctx: any, resultMap: any) {
     const p = patient_ctx.patient;
     // NOTE: From now on prefer getId() over id() because some data models may have an id property
     // that is not a string (e.g., FHIR) -- so reserve getId() for the API (and expect a string
@@ -26,14 +31,12 @@ class Results {
 
     // Record the evaluatedRecords, merging with an aggregated array across all libraries
     this.patientEvaluatedRecords[patientId] = [...patient_ctx.evaluatedRecords];
-    Object.values(patient_ctx.library_context).forEach(ctx => {
+    Object.values(patient_ctx.library_context).forEach((ctx: any) => {
       this.patientEvaluatedRecords[patientId].push(...ctx.evaluatedRecords);
     });
   }
 
-  recordUnfilteredResults(resultMap) {
+  recordUnfilteredResults(resultMap: any) {
     this.unfilteredResults = resultMap;
   }
 }
-
-module.exports = { Results };

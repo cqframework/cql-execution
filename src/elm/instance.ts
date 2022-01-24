@@ -1,27 +1,35 @@
-const { Expression } = require('./expression');
-const { build } = require('./builder');
-const { Quantity } = require('../datatypes/quantity');
-const { Code, Concept } = require('../datatypes/datatypes');
+import { Expression } from './expression';
+import { Quantity } from '../datatypes/quantity';
+import { Code, Concept } from '../datatypes/datatypes';
+import { Context } from '../runtime/context';
+import { build } from './builder';
+
 class Element {
-  constructor(json) {
+  name: string;
+  value: any;
+
+  constructor(json: any) {
     this.name = json.name;
     this.value = build(json.value);
   }
-  exec(ctx) {
+  exec(ctx: Context) {
     return this.value != null ? this.value.execute(ctx) : undefined;
   }
 }
 
-class Instance extends Expression {
-  constructor(json) {
+export class Instance extends Expression {
+  classType: string;
+  element: Element[];
+
+  constructor(json: any) {
     super(json);
     this.classType = json.classType;
-    this.element = json.element.map(child => new Element(child));
+    this.element = json.element.map((child: any) => new Element(child));
   }
 
-  exec(ctx) {
-    const obj = {};
-    for (let el of this.element) {
+  exec(ctx: Context) {
+    const obj: any = {};
+    for (const el of this.element) {
       obj[el.name] = el.exec(ctx);
     }
     switch (this.classType) {
@@ -36,5 +44,3 @@ class Instance extends Expression {
     }
   }
 }
-
-module.exports = { Instance };

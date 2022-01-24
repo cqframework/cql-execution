@@ -1,17 +1,22 @@
-const { Expression } = require('./expression');
-const { build } = require('./builder');
-const { equals } = require('../util/comparison');
+import { Expression } from './expression';
+import { build } from './builder';
+import { equals } from '../util/comparison';
+import { Context } from '../runtime/context';
 
 // TODO: Spec lists "Conditional", but it's "If" in the XSD
-class If extends Expression {
-  constructor(json) {
+export class If extends Expression {
+  condition: any;
+  th: any;
+  els: any;
+
+  constructor(json: any) {
     super(json);
     this.condition = build(json.condition);
     this.th = build(json.then);
     this.els = build(json.else);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     if (this.condition.execute(ctx)) {
       return this.th.execute(ctx);
     } else {
@@ -20,22 +25,29 @@ class If extends Expression {
   }
 }
 
-class CaseItem {
-  constructor(json) {
+export class CaseItem {
+  when: any;
+  then: any;
+
+  constructor(json: any) {
     this.when = build(json.when);
     this.then = build(json.then);
   }
 }
 
-class Case extends Expression {
-  constructor(json) {
+export class Case extends Expression {
+  comparand: any;
+  caseItems: CaseItem[];
+  els: any;
+
+  constructor(json: any) {
     super(json);
     this.comparand = build(json.comparand);
-    this.caseItems = json.caseItem.map(ci => new CaseItem(ci));
+    this.caseItems = json.caseItem.map((ci: any) => new CaseItem(ci));
     this.els = build(json.else);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     if (this.comparand) {
       return this.exec_selected(ctx);
     } else {
@@ -43,9 +55,9 @@ class Case extends Expression {
     }
   }
 
-  exec_selected(ctx) {
+  exec_selected(ctx: Context) {
     const val = this.comparand.execute(ctx);
-    for (let ci of this.caseItems) {
+    for (const ci of this.caseItems) {
       if (equals(ci.when.execute(ctx), val)) {
         return ci.then.execute(ctx);
       }
@@ -53,8 +65,8 @@ class Case extends Expression {
     return this.els.execute(ctx);
   }
 
-  exec_standard(ctx) {
-    for (let ci of this.caseItems) {
+  exec_standard(ctx: Context) {
+    for (const ci of this.caseItems) {
       if (ci.when.execute(ctx)) {
         return ci.then.execute(ctx);
       }
@@ -62,5 +74,3 @@ class Case extends Expression {
     return this.els.execute(ctx);
   }
 }
-
-module.exports = { Case, CaseItem, If };

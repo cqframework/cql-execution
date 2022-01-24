@@ -1,16 +1,21 @@
-const { Expression, UnimplementedExpression } = require('./expression');
-const { DateTime, Date } = require('../datatypes/datetime');
-const { Concept } = require('../datatypes/clinical');
-const { Quantity, parseQuantity } = require('../datatypes/quantity');
-const { isValidDecimal, isValidInteger, limitDecimalPrecision } = require('../util/math');
-const { normalizeMillisecondsField } = require('../util/util');
-const { Ratio } = require('../datatypes/ratio');
-const { Uncertainty } = require('../datatypes/uncertainty');
+import { Context } from '../runtime/context';
+
+import { Expression, UnimplementedExpression } from './expression';
+import { DateTime, Date } from '../datatypes/datetime';
+import { Concept } from '../datatypes/clinical';
+import { Quantity, parseQuantity } from '../datatypes/quantity';
+import { isValidDecimal, isValidInteger, limitDecimalPrecision } from '../util/math';
+import { normalizeMillisecondsField } from '../util/util';
+import { Ratio } from '../datatypes/ratio';
+import { Uncertainty } from '../datatypes/uncertainty';
 
 // TODO: Casting and Conversion needs unit tests!
 
 class As extends Expression {
-  constructor(json) {
+  asTypeSpecifier: any;
+  strict: boolean;
+
+  constructor(json: any) {
     super(json);
     if (json.asTypeSpecifier) {
       this.asTypeSpecifier = json.asTypeSpecifier;
@@ -24,7 +29,7 @@ class As extends Expression {
     this.strict = json.strict != null ? json.strict : false;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     // If it is null, return null
     if (arg == null) {
@@ -44,11 +49,11 @@ class As extends Expression {
 }
 
 class ToBoolean extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg != null) {
       const strArg = arg.toString().toLowerCase();
@@ -63,11 +68,11 @@ class ToBoolean extends Expression {
 }
 
 class ToConcept extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg != null) {
       return new Concept([arg], arg.display);
@@ -78,11 +83,11 @@ class ToConcept extends Expression {
 }
 
 class ToDate extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg == null) {
       return null;
@@ -95,11 +100,11 @@ class ToDate extends Expression {
 }
 
 class ToDateTime extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg == null) {
       return null;
@@ -112,11 +117,11 @@ class ToDateTime extends Expression {
 }
 
 class ToDecimal extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg != null) {
       if (arg.isUncertainty) {
@@ -135,11 +140,11 @@ class ToDecimal extends Expression {
 }
 
 class ToInteger extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (typeof arg === 'string') {
       const integer = parseInt(arg.toString());
@@ -154,15 +159,15 @@ class ToInteger extends Expression {
 }
 
 class ToQuantity extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     return this.convertValue(this.execArgs(ctx));
   }
 
-  convertValue(val) {
+  convertValue(val: any): any {
     if (val == null) {
       return null;
     } else if (typeof val === 'number') {
@@ -180,11 +185,11 @@ class ToQuantity extends Expression {
 }
 
 class ToRatio extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg != null) {
       // Argument will be of form '<quantity>:<quantity>'
@@ -216,11 +221,11 @@ class ToRatio extends Expression {
 }
 
 class ToString extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg != null) {
       return arg.toString();
@@ -231,11 +236,11 @@ class ToString extends Expression {
 }
 
 class ToTime extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg != null) {
       const timeString = arg.toString();
@@ -247,9 +252,9 @@ class ToTime extends Expression {
       if (matches == null) {
         return null;
       }
-      let hours = matches[2];
-      let minutes = matches[4];
-      let seconds = matches[6];
+      let hours: any = matches[2];
+      let minutes: any = matches[4];
+      let seconds: any = matches[6];
       // Validate h/m/s if they exist, but allow null
       if (hours != null) {
         if (hours < 0 || hours > 23) {
@@ -269,7 +274,7 @@ class ToTime extends Expression {
         }
         seconds = parseInt(seconds, 10);
       }
-      let milliseconds = matches[8];
+      let milliseconds: any = matches[8];
       if (milliseconds != null) {
         milliseconds = parseInt(normalizeMillisecondsField(milliseconds));
       }
@@ -283,13 +288,16 @@ class ToTime extends Expression {
 }
 
 class Convert extends Expression {
-  constructor(json) {
+  operand: any;
+  toType: any;
+
+  constructor(json: any) {
     super(json);
     this.operand = json.operand;
     this.toType = json.toType;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     switch (this.toType) {
       case '{urn:hl7-org:elm-types:r1}Boolean':
         return new ToBoolean({ type: 'ToBoolean', operand: this.operand }).execute(ctx);
@@ -316,12 +324,14 @@ class Convert extends Expression {
 }
 
 class ConvertsToBoolean extends Expression {
-  constructor(json) {
+  operand: any;
+
+  constructor(json: any) {
     super(json);
     this.operand = json.operand;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const operatorValue = this.execArgs(ctx);
     if (operatorValue === null) {
       return null;
@@ -332,12 +342,14 @@ class ConvertsToBoolean extends Expression {
 }
 
 class ConvertsToDate extends Expression {
-  constructor(json) {
+  operand: any;
+
+  constructor(json: any) {
     super(json);
     this.operand = json.operand;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const operatorValue = this.execArgs(ctx);
     if (operatorValue === null) {
       return null;
@@ -348,12 +360,14 @@ class ConvertsToDate extends Expression {
 }
 
 class ConvertsToDateTime extends Expression {
-  constructor(json) {
+  operand: any;
+
+  constructor(json: any) {
     super(json);
     this.operand = json.operand;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const operatorValue = this.execArgs(ctx);
     if (operatorValue === null) {
       return null;
@@ -364,12 +378,14 @@ class ConvertsToDateTime extends Expression {
 }
 
 class ConvertsToDecimal extends Expression {
-  constructor(json) {
+  operand: any;
+
+  constructor(json: any) {
     super(json);
     this.operand = json.operand;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const operatorValue = this.execArgs(ctx);
     if (operatorValue === null) {
       return null;
@@ -380,12 +396,14 @@ class ConvertsToDecimal extends Expression {
 }
 
 class ConvertsToInteger extends Expression {
-  constructor(json) {
+  operand: any;
+
+  constructor(json: any) {
     super(json);
     this.operand = json.operand;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const operatorValue = this.execArgs(ctx);
     if (operatorValue === null) {
       return null;
@@ -396,12 +414,14 @@ class ConvertsToInteger extends Expression {
 }
 
 class ConvertsToQuantity extends Expression {
-  constructor(json) {
+  operand: any;
+
+  constructor(json: any) {
     super(json);
     this.operand = json.operand;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const operatorValue = this.execArgs(ctx);
     if (operatorValue === null) {
       return null;
@@ -412,12 +432,14 @@ class ConvertsToQuantity extends Expression {
 }
 
 class ConvertsToRatio extends Expression {
-  constructor(json) {
+  operand: any;
+
+  constructor(json: any) {
     super(json);
     this.operand = json.operand;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const operatorValue = this.execArgs(ctx);
     if (operatorValue === null) {
       return null;
@@ -428,12 +450,14 @@ class ConvertsToRatio extends Expression {
 }
 
 class ConvertsToString extends Expression {
-  constructor(json) {
+  operand: any;
+
+  constructor(json: any) {
     super(json);
     this.operand = json.operand;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const operatorValue = this.execArgs(ctx);
     if (operatorValue === null) {
       return null;
@@ -444,12 +468,14 @@ class ConvertsToString extends Expression {
 }
 
 class ConvertsToTime extends Expression {
-  constructor(json) {
+  operand: any;
+
+  constructor(json: any) {
     super(json);
     this.operand = json.operand;
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const operatorValue = this.execArgs(ctx);
     if (operatorValue === null) {
       return null;
@@ -459,7 +485,7 @@ class ConvertsToTime extends Expression {
   }
 }
 
-function canConvertToType(toFunction, operand, ctx) {
+function canConvertToType(toFunction: any, operand: any, ctx: Context) {
   try {
     const value = new toFunction({ type: toFunction.name, operand: operand }).execute(ctx);
     if (value != null) {
@@ -473,11 +499,11 @@ function canConvertToType(toFunction, operand, ctx) {
 }
 
 class ConvertQuantity extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [quantity, newUnit] = this.execArgs(ctx);
 
     if (quantity != null && newUnit != null) {
@@ -492,11 +518,11 @@ class ConvertQuantity extends Expression {
 }
 
 class CanConvertQuantity extends Expression {
-  constructor(json) {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const [quantity, newUnit] = this.execArgs(ctx);
 
     if (quantity != null && newUnit != null) {
@@ -512,7 +538,9 @@ class CanConvertQuantity extends Expression {
 }
 
 class Is extends Expression {
-  constructor(json) {
+  isTypeSpecifier: any;
+
+  constructor(json: any) {
     super(json);
     if (json.isTypeSpecifier) {
       this.isTypeSpecifier = json.isTypeSpecifier;
@@ -525,7 +553,7 @@ class Is extends Expression {
     }
   }
 
-  exec(ctx) {
+  exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (arg === null) {
       return false;
@@ -538,24 +566,24 @@ class Is extends Expression {
   }
 }
 
-function isSystemType(spec) {
+function isSystemType(spec: any): any {
   switch (spec.type) {
     case 'NamedTypeSpecifier':
       return spec.name.startsWith('{urn:hl7-org:elm-types:r1}');
     case 'ListTypeSpecifier':
       return isSystemType(spec.elementType);
     case 'TupleTypeSpecifier':
-      return spec.element.every(e => isSystemType(e.elementType));
+      return spec.element.every((e: any) => isSystemType(e.elementType));
     case 'IntervalTypeSpecifier':
       return isSystemType(spec.pointType);
     case 'ChoiceTypeSpecifier':
-      return spec.choice.every(c => isSystemType(c));
+      return spec.choice.every((c: any) => isSystemType(c));
     default:
       return false;
   }
 }
 
-function specifierToString(spec) {
+function specifierToString(spec: any): any {
   if (typeof spec === 'string') {
     return spec;
   } else if (spec == null || spec.type == null) {
@@ -568,18 +596,18 @@ function specifierToString(spec) {
       return `List<${specifierToString(spec.elementType)}>`;
     case 'TupleTypeSpecifier':
       return `Tuple<${spec.element
-        .map(e => `${e.name} ${specifierToString(e.elementType)}`)
+        .map((e: any) => `${e.name} ${specifierToString(e.elementType)}`)
         .join(', ')}>`;
     case 'IntervalTypeSpecifier':
       return `Interval<${specifierToString(spec.pointType)}>`;
     case 'ChoiceTypeSpecifier':
-      return `Choice<${spec.choice.map(c => specifierToString(c)).join(', ')}>`;
+      return `Choice<${spec.choice.map((c: any) => specifierToString(c)).join(', ')}>`;
     default:
       return JSON.stringify(spec);
   }
 }
 
-function guessSpecifierType(val) {
+function guessSpecifierType(val: any): any {
   if (val == null) {
     return 'Null';
   }
@@ -634,7 +662,7 @@ class ListTypeSpecifier extends UnimplementedExpression {}
 class NamedTypeSpecifier extends UnimplementedExpression {}
 class TupleTypeSpecifier extends UnimplementedExpression {}
 
-module.exports = {
+export {
   As,
   CanConvertQuantity,
   Convert,

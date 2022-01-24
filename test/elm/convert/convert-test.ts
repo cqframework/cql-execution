@@ -1,10 +1,10 @@
-const should = require('should');
-const setup = require('../../setup');
+import should from 'should';
+import setup from '../../setup';
 const data = require('./data');
-const { isNull } = require('../../../src/util/util');
-const { DateTime } = require('../../../src/datatypes/datetime');
-const { Quantity } = require('../../../src/datatypes/quantity');
-const { Uncertainty } = require('../../../src/datatypes/uncertainty');
+import { isNull } from '../../../src/util/util';
+import { DateTime } from '../../../src/datatypes/datetime';
+import { Quantity } from '../../../src/datatypes/quantity';
+import { Uncertainty } from '../../../src/datatypes/uncertainty';
 
 describe('FromString', () => {
   beforeEach(function () {
@@ -223,8 +223,8 @@ describe('FromDate', () => {
   });
 
   it('should convert @2015-01 to DateTime with null for day and time components', function () {
-    let field;
-    let dateTime = this.dateYMToDateTime.exec(this.ctx);
+    let field: string;
+    const dateTime = this.dateYMToDateTime.exec(this.ctx);
     dateTime.year.should.equal(2015);
     dateTime.month.should.equal(1);
     should.not.exist(dateTime.day);
@@ -233,9 +233,11 @@ describe('FromDate', () => {
     }
     dateTime.timezoneOffset.should.equal(this.ctx.getTimezoneOffset());
     dateTime.isDateTime.should.equal.true;
+  });
 
-    it('should convert @2015-01 to DateTime with null for day, month, and time components', function () {});
-    dateTime = this.dateYToDateTime.exec(this.ctx);
+  it('should convert @2015-01 to DateTime with null for day, month, and time components', function () {
+    let field: string;
+    const dateTime = this.dateYToDateTime.exec(this.ctx);
     dateTime.year.should.equal(2015);
     should.not.exist(dateTime.month);
     should.not.exist(dateTime.day);
@@ -251,7 +253,7 @@ describe('FromDate', () => {
     date.year.should.equal(2015);
     date.month.should.equal(1);
     date.day.should.equal(1);
-    for (let field of ['hour', 'minute', 'second', 'millisecond', 'timezoneOffset']) {
+    for (const field of ['hour', 'minute', 'second', 'millisecond', 'timezoneOffset']) {
       should.not.exist(date[field]);
     }
     date.isDate.should.equal.true;
@@ -542,7 +544,7 @@ describe('ToDate', () => {
     date.year.should.equal(2015);
     date.month.should.equal(1);
     date.day.should.equal(2);
-    for (let field of ['hour', 'minute', 'second', 'millisecond', 'timezoneOffset']) {
+    for (const field of ['hour', 'minute', 'second', 'millisecond', 'timezoneOffset']) {
       should.not.exist(date[field]);
     }
     date.isDate.should.equal.true;
@@ -553,7 +555,7 @@ describe('ToDate', () => {
     date.year.should.equal(2000);
     date.month.should.equal(3);
     date.day.should.equal(15);
-    for (let field of ['hour', 'minute', 'second', 'millisecond', 'timezoneOffset']) {
+    for (const field of ['hour', 'minute', 'second', 'millisecond', 'timezoneOffset']) {
       should.not.exist(date[field]);
     }
     date.isDate.should.equal.true;

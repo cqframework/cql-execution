@@ -1,11 +1,11 @@
-const should = require('should');
-const {
+import should from 'should';
+import {
   Quantity,
   doAddition,
   doSubtraction,
   doMultiplication,
   doDivision
-} = require('../../../src/datatypes/quantity');
+} from '../../../src/datatypes/quantity';
 
 describe('Quantity', () => {
   it('should allow creation of Quantity with valid ucum units', () =>
@@ -129,7 +129,7 @@ describe('Quantity', () => {
   });
 
   const types = [null, undefined, ''];
-  for (let unit of types) {
+  for (const unit of types) {
     (unit => {
       it('should treat ' + unit + ' the same as a "1" in calculations', () => {
         const divideWithOneOnRight = new Quantity(8, 'm').dividedBy(new Quantity(2, '1'));

@@ -1,17 +1,18 @@
-const { Expression } = require('./expression');
-const { Uncertainty } = require('../datatypes/datatypes');
+import { Expression } from './expression';
+import { Uncertainty } from '../datatypes/datatypes';
+import { Context } from '../runtime/context';
 
 // Equal is completely handled by overloaded#Equal
 
 // NotEqual is completely handled by overloaded#Equal
 
-class Less extends Expression {
-  constructor(json) {
+export class Less extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
-    const args = this.execArgs(ctx).map(x => Uncertainty.from(x));
+  exec(ctx: Context) {
+    const args = this.execArgs(ctx).map((x: any) => Uncertainty.from(x));
     if (args[0] == null || args[1] == null) {
       return null;
     }
@@ -19,13 +20,13 @@ class Less extends Expression {
   }
 }
 
-class LessOrEqual extends Expression {
-  constructor(json) {
+export class LessOrEqual extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
-    const args = this.execArgs(ctx).map(x => Uncertainty.from(x));
+  exec(ctx: Context) {
+    const args = this.execArgs(ctx).map((x: any) => Uncertainty.from(x));
     if (args[0] == null || args[1] == null) {
       return null;
     }
@@ -33,13 +34,13 @@ class LessOrEqual extends Expression {
   }
 }
 
-class Greater extends Expression {
-  constructor(json) {
+export class Greater extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
-    const args = this.execArgs(ctx).map(x => Uncertainty.from(x));
+  exec(ctx: Context) {
+    const args = this.execArgs(ctx).map((x: any) => Uncertainty.from(x));
     if (args[0] == null || args[1] == null) {
       return null;
     }
@@ -47,18 +48,16 @@ class Greater extends Expression {
   }
 }
 
-class GreaterOrEqual extends Expression {
-  constructor(json) {
+export class GreaterOrEqual extends Expression {
+  constructor(json: any) {
     super(json);
   }
 
-  exec(ctx) {
-    const args = this.execArgs(ctx).map(x => Uncertainty.from(x));
+  exec(ctx: Context) {
+    const args = this.execArgs(ctx).map((x: any) => Uncertainty.from(x));
     if (args[0] == null || args[1] == null) {
       return null;
     }
     return args[0].greaterThanOrEquals(args[1]);
   }
 }
-
-module.exports = { Greater, GreaterOrEqual, Less, LessOrEqual };

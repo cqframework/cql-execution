@@ -1,6 +1,7 @@
-const cql = require('../src/cql');
+import * as cql from '../src/cql';
+import 'should';
 
-const libNames = [];
+const libNames: string[] = [];
 // Library-related classes
 libNames.push('Library', 'Repository', 'Expression');
 // Execution-related classes
@@ -28,5 +29,5 @@ describe('CQL Exports', () =>
       it(`should export ${name}`, () => {
         cql[name].should.be.Function();
         cql[name].name.should.equal(name);
-      }))(libName)
+      }))(libName as keyof typeof cql)
   ));

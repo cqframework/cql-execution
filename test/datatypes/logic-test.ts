@@ -1,5 +1,5 @@
-const should = require('should');
-const { ThreeValuedLogic } = require('../../src/datatypes/logic');
+import should from 'should';
+import { ThreeValuedLogic } from '../../src/datatypes/logic';
 
 describe('ThreeValuedLogic.and', () => {
   it('should return true when all is true', () =>

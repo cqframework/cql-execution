@@ -1,12 +1,12 @@
-const should = require('should');
-const setup = require('../../setup');
-const data = require('./data');
+import should from 'should';
+import setup from '../../setup';
 const vsets = require('./valuesets');
-const DT = require('../../../src/datatypes/datatypes');
-const { PatientContext } = require('../../../src/cql');
-const { Uncertainty } = require('../../../src/datatypes/uncertainty');
+import * as DT from '../../../src/datatypes/datatypes';
+import { PatientContext } from '../../../src/cql';
+import { Uncertainty } from '../../../src/datatypes/uncertainty';
 const { p1, p2, p3 } = require('./patients');
-const { PatientSource } = require('../../../src/cql-patient');
+import { PatientSource } from '../../../src/cql-patient';
+const data = require('./data');
 
 describe('ValueSetDef', () => {
   beforeEach(function () {

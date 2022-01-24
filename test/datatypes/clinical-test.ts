@@ -1,7 +1,7 @@
-const { Code, Concept, ValueSet } = require('../../src/datatypes/clinical');
+import { Code, Concept, ValueSet } from '../../src/datatypes/clinical';
 
 describe('Code', () => {
-  let code, code_no_version, code_no_codesystem;
+  let code: Code, code_no_version: Code, code_no_codesystem: Code;
   beforeEach(() => {
     code = new Code('ABC', '5.4.3.2.1', '1');
     code_no_version = new Code('ABC', '5.4.3.2.1');
@@ -80,7 +80,7 @@ describe('Code', () => {
 });
 
 describe('Concept', () => {
-  let concept;
+  let concept: Concept;
   beforeEach(() => {
     concept = new Concept([new Code('ABC', '5.4.3.2.1', '1'), new Code('ABC', '5.4.3.2.1', '2')]);
   });
@@ -119,7 +119,7 @@ describe('Concept', () => {
 });
 
 describe('ValueSet', () => {
-  let valueSet;
+  let valueSet: ValueSet;
   beforeEach(() => {
     valueSet = new ValueSet('1.2.3.4.5', '1', [
       new Code('ABC', '5.4.3.2.1', '1'),
