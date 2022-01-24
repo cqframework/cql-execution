@@ -62,7 +62,7 @@ export class Executor {
     return r;
   }
 
-  exec(patientSource: any, executionDateTime: DateTime) {
+  exec(patientSource: any, executionDateTime?: DateTime) {
     const r = this.exec_patient_context(patientSource, executionDateTime);
     const unfilteredContext = new UnfilteredContext(
       this.library,
@@ -83,7 +83,7 @@ export class Executor {
     return r;
   }
 
-  exec_patient_context(patientSource: any, executionDateTime: DateTime) {
+  exec_patient_context(patientSource: any, executionDateTime?: DateTime) {
     const r = new Results();
     while (patientSource.currentPatient()) {
       const patient_ctx = new PatientContext(

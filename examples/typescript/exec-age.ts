@@ -1,7 +1,6 @@
-/* eslint-disable
-    no-console,
-*/
-const cql = require('../../lib/cql');
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-var-requires */
+import * as cql from '../../src/cql';
 const measure = require('./age.json');
 
 const lib = new cql.Library(measure);
