@@ -795,7 +795,6 @@ var DateTime = /** @class */ (function () {
             minute: (_e = this.minute) !== null && _e !== void 0 ? _e : undefined,
             second: (_f = this.second) !== null && _f !== void 0 ? _f : undefined,
             millisecond: (_g = this.millisecond) !== null && _g !== void 0 ? _g : undefined,
-            // @ts-ignore
             zone: luxon.FixedOffsetZone.instance(offsetMins)
         });
     };
@@ -1053,7 +1052,6 @@ var Date = /** @class */ (function () {
             year: (_a = this.year) !== null && _a !== void 0 ? _a : undefined,
             month: (_b = this.month) !== null && _b !== void 0 ? _b : undefined,
             day: (_c = this.day) !== null && _c !== void 0 ? _c : undefined,
-            // @ts-ignore
             zone: luxon.FixedOffsetZone.utcInstance
         });
     };
