@@ -1,3 +1,6 @@
+// Types are incomplete; just utilized functions are included
+// No existing type defs were found in the DefinitelyTyped repo
+// Structures created based on JSDoc comments here: https://github.com/lhncbc/ucum-lhc/blob/master/source-cjs/ucumLhcUtils.js
 declare module '@lhncbc/ucum-lhc' {
   export interface Unit {
     code: string;

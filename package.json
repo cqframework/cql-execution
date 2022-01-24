@@ -55,6 +55,10 @@
     {
       "name": "Dylan Mahalingam",
       "email": "kmahalingam@mitre.org"
+    },
+    {
+      "name": "Matthew Gramigna",
+      "email": "mgramigna@mitre.org"
     }
   ],
   "repository": {
@@ -62,7 +66,7 @@
     "url": "https://github.com/cqframework/cql-execution.git"
   },
   "devDependencies": {
-    "@types/luxon": "^2.0.9",
+    "@types/luxon": "1",
     "@types/mocha": "^9.1.0",
     "@types/node": "^17.0.10",
     "@types/test-console": "^2.0.0",

@@ -5,8 +5,10 @@ import {
   normalizeMillisecondsField,
   normalizeMillisecondsFieldInString
 } from '../util/util';
-import { Duration, DurationUnit, DateTime as LuxonDateTime, DateTimeUnit } from 'luxon';
+import { Duration, DurationUnit, DateTime as LuxonDateTime, DurationObjectUnits } from 'luxon';
 import * as luxon from 'luxon';
+
+type DateTimeUnit = keyof DurationObjectUnits;
 
 // It's easiest and most performant to organize formats by length of the supported strings.
 // This way we can test strings only against the formats that have a chance of working.
@@ -413,7 +415,6 @@ class DateTime {
       minute: this.minute ?? undefined,
       second: this.second ?? undefined,
       millisecond: this.millisecond ?? undefined,
-      // @ts-ignore
       zone: luxon.FixedOffsetZone.instance(offsetMins)
     });
   }
@@ -697,7 +698,6 @@ class Date {
       year: this.year ?? undefined,
       month: this.month ?? undefined,
       day: this.day ?? undefined,
-      // @ts-ignore
       zone: luxon.FixedOffsetZone.utcInstance
     });
   }
