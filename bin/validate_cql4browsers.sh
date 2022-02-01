@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mkdir -p tmp/dist/
-git status --porcelain | grep cql4browsers
+git status --porcelain | grep cql4browsers.js
 if [ $? == 0 ]; then
   echo "cql4browsers.js has uncommitted changes. Reset or commit them before continuing."
   exit 1
