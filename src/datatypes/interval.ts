@@ -42,10 +42,9 @@ export class Interval {
     const point = this.low != null ? this.low : this.high;
     if (point != null) {
       if (typeof point === 'number') {
-        pointType =
-          parseInt(point.toString()) === point
-            ? '{urn:hl7-org:elm-types:r1}Integer'
-            : '{urn:hl7-org:elm-types:r1}Decimal';
+        pointType = Number.isInteger(point)
+          ? '{urn:hl7-org:elm-types:r1}Integer'
+          : '{urn:hl7-org:elm-types:r1}Decimal';
       } else if (point.isTime && point.isTime()) {
         pointType = '{urn:hl7-org:elm-types:r1}Time';
       } else if (point.isDate) {

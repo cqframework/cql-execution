@@ -147,7 +147,7 @@ class ToInteger extends Expression {
   exec(ctx: Context) {
     const arg = this.execArgs(ctx);
     if (typeof arg === 'string') {
-      const integer = parseInt(arg.toString());
+      const integer = parseInt(arg);
       if (isValidInteger(integer)) {
         return integer;
       }

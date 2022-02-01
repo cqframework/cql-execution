@@ -1720,10 +1720,9 @@ var Interval = /** @class */ (function () {
             var point = this.low != null ? this.low : this.high;
             if (point != null) {
                 if (typeof point === 'number') {
-                    pointType =
-                        parseInt(point.toString()) === point
-                            ? '{urn:hl7-org:elm-types:r1}Integer'
-                            : '{urn:hl7-org:elm-types:r1}Decimal';
+                    pointType = Number.isInteger(point)
+                        ? '{urn:hl7-org:elm-types:r1}Integer'
+                        : '{urn:hl7-org:elm-types:r1}Decimal';
                 }
                 else if (point.isTime && point.isTime()) {
                     pointType = '{urn:hl7-org:elm-types:r1}Time';
@@ -8276,7 +8275,7 @@ var ToInteger = /** @class */ (function (_super) {
     ToInteger.prototype.exec = function (ctx) {
         var arg = this.execArgs(ctx);
         if (typeof arg === 'string') {
-            var integer = parseInt(arg.toString());
+            var integer = parseInt(arg);
             if ((0, math_1.isValidInteger)(integer)) {
                 return integer;
             }
@@ -9906,7 +9905,7 @@ var OverFlowException = /** @class */ (function (_super) {
 exports.OverFlowException = OverFlowException;
 function successor(val) {
     if (typeof val === 'number') {
-        if (parseInt(val.toString()) === val) {
+        if (Number.isInteger(val)) {
             if (val >= exports.MAX_INT_VALUE) {
                 throw new OverFlowException();
             }
@@ -9971,7 +9970,7 @@ function successor(val) {
 exports.successor = successor;
 function predecessor(val) {
     if (typeof val === 'number') {
-        if (parseInt(val.toString()) === val) {
+        if (Number.isInteger(val)) {
             if (val <= exports.MIN_INT_VALUE) {
                 throw new OverFlowException();
             }
@@ -10036,7 +10035,7 @@ function predecessor(val) {
 exports.predecessor = predecessor;
 function maxValueForInstance(val) {
     if (typeof val === 'number') {
-        if (parseInt(val.toString()) === val) {
+        if (Number.isInteger(val)) {
             return exports.MAX_INT_VALUE;
         }
         else {
@@ -10089,7 +10088,7 @@ function maxValueForType(type, quantityInstance) {
 exports.maxValueForType = maxValueForType;
 function minValueForInstance(val) {
     if (typeof val === 'number') {
-        if (parseInt(val.toString()) === val) {
+        if (Number.isInteger(val)) {
             return exports.MIN_INT_VALUE;
         }
         else {

@@ -113,7 +113,7 @@ export class OverFlowException extends Exception {}
 
 export function successor(val: any): any {
   if (typeof val === 'number') {
-    if (parseInt(val.toString()) === val) {
+    if (Number.isInteger(val)) {
       if (val >= MAX_INT_VALUE) {
         throw new OverFlowException();
       } else {
@@ -165,7 +165,7 @@ export function successor(val: any): any {
 
 export function predecessor(val: any): any {
   if (typeof val === 'number') {
-    if (parseInt(val.toString()) === val) {
+    if (Number.isInteger(val)) {
       if (val <= MIN_INT_VALUE) {
         throw new OverFlowException();
       } else {
@@ -217,7 +217,7 @@ export function predecessor(val: any): any {
 
 export function maxValueForInstance(val: any) {
   if (typeof val === 'number') {
-    if (parseInt(val.toString()) === val) {
+    if (Number.isInteger(val)) {
       return MAX_INT_VALUE;
     } else {
       return MAX_FLOAT_VALUE;
@@ -264,7 +264,7 @@ export function maxValueForType(type: string, quantityInstance?: Quantity) {
 
 export function minValueForInstance(val: any) {
   if (typeof val === 'number') {
-    if (parseInt(val.toString()) === val) {
+    if (Number.isInteger(val)) {
       return MIN_INT_VALUE;
     } else {
       return MIN_FLOAT_VALUE;
