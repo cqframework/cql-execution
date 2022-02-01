@@ -59,9 +59,8 @@ The above is a partial list covering the most significant limitations. For more 
 
 To use this project, you should perform the following steps:
 
-1. Install [Node.js](http://nodejs.org/)
-2. Install [Yarn](https://yarnpkg.com)
-3. Execute the following from the root directory: `yarn install`
+1. Install [Node.js](http://nodejs.org/) (Note: `npm` version `6.x.x` recommended)
+2. Execute the following from the root directory: `npm install`
 
 # To Execute Your CQL
 
@@ -149,7 +148,7 @@ If all is well, it should print the result object to standard out.
 
 # To Run the CQL Execution Unit Tests
 
-Execute `yarn test`.
+Execute `npm test`.
 
 # To Develop Tests
 
@@ -167,7 +166,7 @@ statements that follows the `# And` represents the CQL Library that will be supp
 to the "And" test suite.
 
 To convert the CQL to JavaScript containing the JSON ELM representation, execute
-`yarn build:test-data`. This will use the java _cql-to-elm_ project to generate the
+`npm run build:test-data`. This will use the java _cql-to-elm_ project to generate the
 _test/elm/*/data.js_ file containing the following exported variable declaration
 (NOTE: It's been slimmed down a bit here to make it easier to read, but nothing substantial
 has been removed):
@@ -275,10 +274,10 @@ use lowercase first letters even though the CQL expression name starts with an u
 
 # Watching For Changes
 
-Rather than continually having to run `yarn build:test-data` and `yarn:test` after every
+Rather than continually having to run `npm run build:test-data` and `npm test` after every
 modification to the test data text file, you can setup a process to _watch_ for changes and
 regenerate the `data.js` files every time it detects changes in the source text file.  Simply
-execute `yarn watch:test-data`.
+execute `npm run watch:test-data`.
 
 # Pull Requests
 
@@ -286,5 +285,5 @@ If JavaScript source code is modified, `cql4browsers.js` needs to be included in
 otherwise Travis CI will fail. To generate this file, run:
 
 ```
-yarn build:all
+npm run build:all
 ```
