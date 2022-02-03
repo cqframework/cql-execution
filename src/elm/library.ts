@@ -1,3 +1,4 @@
+import { Parameter } from '../types/runtime-types';
 import {
   ExpressionDef,
   FunctionDef,
@@ -11,7 +12,7 @@ import {
 class Library {
   source: any;
   usings: any;
-  parameters: any;
+  parameters: Parameter;
   codesystems: any;
   valuesets: any;
   codes: any;

@@ -47,10 +47,10 @@ export class Concept {
 
 export class ValueSet {
   oid: string;
-  version: string;
+  version?: string;
   codes: any;
 
-  constructor(oid: string, version: string, codes?: any) {
+  constructor(oid: string, version?: string, codes?: any) {
     this.oid = oid;
     this.version = version;
     this.codes = codes || [];

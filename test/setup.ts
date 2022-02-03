@@ -4,7 +4,8 @@ import {
   CodeService,
   PatientContext,
   Executor,
-  NullMessageListener
+  NullMessageListener,
+  Parameter
 } from '../src/cql';
 
 export default function (
@@ -12,7 +13,7 @@ export default function (
   data: any,
   patients: any[] = [],
   valuesets: any = {},
-  parameters: any = {},
+  parameters: Parameter = {},
   repository: any = null
 ) {
   try {

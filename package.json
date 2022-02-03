@@ -99,7 +99,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "prepublish": "npm run build --scripts-prepend-node-path && npm run build:browserify --scripts-prepend-node-path",
+    "prepare": "npm run build --scripts-prepend-node-path && npm run build:browserify --scripts-prepend-node-path",
     "build": "tsc",
     "build:browserify": "node ./bin/browserify.js",
     "build:test-data": "cd ./test/generator && ./gradlew generateTestData && cd ..",

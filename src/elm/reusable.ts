@@ -1,6 +1,7 @@
 import { Context } from '../runtime/context';
 import { Expression } from './expression';
 import { build } from './builder';
+import { Parameter } from '../types/runtime-types';
 
 class ExpressionDef extends Expression {
   name: string;
@@ -42,7 +43,7 @@ class ExpressionRef extends Expression {
 class FunctionDef extends Expression {
   name: string;
   expression: any;
-  parameters?: any;
+  parameters?: Parameter;
 
   constructor(json: any) {
     super(json);

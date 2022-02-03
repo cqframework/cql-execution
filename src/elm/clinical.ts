@@ -6,7 +6,7 @@ import { build } from './builder';
 export class ValueSetDef extends Expression {
   name: string;
   id: string;
-  version: string;
+  version?: string;
 
   constructor(json: any) {
     super(json);

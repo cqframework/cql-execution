@@ -4,12 +4,13 @@ import * as dt from '../datatypes/datatypes';
 import { CodeService } from '../cql-code-service';
 import { MessageListener, NullMessageListener } from './messageListeners';
 import { Patient } from '../cql-patient';
+import { Parameter } from '../types/runtime-types';
 
 export class Context {
   // Construcor args
   parent: any;
   _codeService?: CodeService | null;
-  _parameters?: any;
+  _parameters?: Parameter;
   executionDateTime?: dt.DateTime;
   messageListener?: MessageListener;
 
@@ -22,7 +23,7 @@ export class Context {
   constructor(
     parent: Context,
     _codeService?: CodeService | null,
-    _parameters?: any,
+    _parameters?: Parameter,
     executionDateTime?: dt.DateTime,
     messageListener?: MessageListener
   ) {
@@ -33,7 +34,7 @@ export class Context {
     this.localId_context = {};
     this.evaluatedRecords = [];
     // TODO: If there is an issue with number of parameters look into cql4browsers fix: 387ea77538182833283af65e6341e7a05192304c
-    this.checkParameters(_parameters); // not crazy about possibly throwing an error in a constructor, but...
+    this.checkParameters(_parameters ?? {}); // not crazy about possibly throwing an error in a constructor, but...
     this._parameters = _parameters || {};
     this.executionDateTime = executionDateTime;
     this.messageListener = messageListener;
@@ -56,7 +57,7 @@ export class Context {
     this._codeService = cs;
   }
 
-  withParameters(params: any) {
+  withParameters(params: Parameter) {
     this.parameters = params || {};
     return this;
   }
@@ -233,7 +234,7 @@ export class Context {
     }
   }
 
-  checkParameters(params: any) {
+  checkParameters(params: Parameter) {
     for (const pName in params) {
       const pVal = params[pName];
       const pDef = this.getParameter(pName);
@@ -424,7 +425,7 @@ export class PatientContext extends Context {
     library: any,
     patient?: Patient | null,
     codeService?: CodeService | null,
-    parameters?: any,
+    parameters?: Parameter,
     executionDateTime: dt.DateTime = dt.DateTime.fromJSDate(new Date()),
     messageListener: MessageListener = new NullMessageListener()
   ) {
@@ -476,7 +477,7 @@ export class UnfilteredContext extends Context {
     library: any,
     results: any,
     codeService?: CodeService | null,
-    parameters?: any,
+    parameters?: Parameter,
     executionDateTime: dt.DateTime = dt.DateTime.fromJSDate(new Date()),
     messageListener: MessageListener = new NullMessageListener()
   ) {

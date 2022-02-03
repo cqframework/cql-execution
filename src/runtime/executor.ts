@@ -3,17 +3,18 @@ import { Results } from './results';
 import { UnfilteredContext, PatientContext } from './context';
 import { CodeService } from '../cql-code-service';
 import { DateTime } from '../datatypes/datetime';
+import { Parameter } from '../types/runtime-types';
 
 export class Executor {
   library: any;
   codeService?: CodeService | null;
-  parameters?: any;
+  parameters?: Parameter;
   messageListener: MessageListener;
 
   constructor(
     library: any,
     codeService?: CodeService,
-    parameters?: any,
+    parameters?: Parameter,
     messageListener: MessageListener = new NullMessageListener()
   ) {
     this.library = library;
@@ -27,7 +28,7 @@ export class Executor {
     return this;
   }
 
-  withParameters(params: any) {
+  withParameters(params: Parameter) {
     this.parameters = params != null ? params : {};
     return this;
   }
