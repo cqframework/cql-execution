@@ -303,6 +303,30 @@ Object.defineProperty(exports, "Ratio", { enumerable: true, get: function () { r
 Object.defineProperty(exports, "ValueSet", { enumerable: true, get: function () { return datatypes_1.ValueSet; } });
 // Custom Types
 __exportStar(require("./types"), exports);
+exports.default = {
+    Library: library_1.Library,
+    Repository: repository_1.Repository,
+    Expression: expression_1.Expression,
+    Context: context_1.Context,
+    PatientContext: context_1.PatientContext,
+    UnfilteredContext: context_1.UnfilteredContext,
+    Executor: executor_1.Executor,
+    Results: results_1.Results,
+    ConsoleMessageListener: messageListeners_1.ConsoleMessageListener,
+    NullMessageListener: messageListeners_1.NullMessageListener,
+    Patient: cql_patient_1.Patient,
+    PatientSource: cql_patient_1.PatientSource,
+    CodeService: cql_code_service_1.CodeService,
+    Code: datatypes_1.Code,
+    CodeSystem: datatypes_1.CodeSystem,
+    Concept: datatypes_1.Concept,
+    Date: datatypes_1.Date,
+    DateTime: datatypes_1.DateTime,
+    Interval: datatypes_1.Interval,
+    Quantity: datatypes_1.Quantity,
+    Ratio: datatypes_1.Ratio,
+    ValueSet: datatypes_1.ValueSet
+};
 
 },{"./cql-code-service":2,"./cql-patient":3,"./datatypes/datatypes":6,"./elm/expression":22,"./elm/library":27,"./runtime/context":42,"./runtime/executor":43,"./runtime/messageListeners":44,"./runtime/repository":45,"./runtime/results":46,"./types":47}],5:[function(require,module,exports){
 "use strict";

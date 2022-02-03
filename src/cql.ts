@@ -1,22 +1,22 @@
 // Library-related classes
-export { Library } from './elm/library';
-export { Repository } from './runtime/repository';
-export { Expression } from './elm/expression';
+import { Library } from './elm/library';
+import { Repository } from './runtime/repository';
+import { Expression } from './elm/expression';
 
 // Execution-related classes
-export { Context, PatientContext, UnfilteredContext } from './runtime/context';
-export { Executor } from './runtime/executor';
-export { Results } from './runtime/results';
-export { ConsoleMessageListener, NullMessageListener } from './runtime/messageListeners';
+import { Context, PatientContext, UnfilteredContext } from './runtime/context';
+import { Executor } from './runtime/executor';
+import { Results } from './runtime/results';
+import { ConsoleMessageListener, NullMessageListener } from './runtime/messageListeners';
 
 // PatientSource-related classes
-export { Patient, PatientSource } from './cql-patient';
+import { Patient, PatientSource } from './cql-patient';
 
 // TerminologyService-related classes
-export { CodeService } from './cql-code-service';
+import { CodeService } from './cql-code-service';
 
 // DataType classes
-export {
+import {
   Code,
   CodeSystem,
   Concept,
@@ -30,3 +30,53 @@ export {
 
 // Custom Types
 export * from './types';
+
+export {
+  Library,
+  Repository,
+  Expression,
+  Context,
+  PatientContext,
+  UnfilteredContext,
+  Executor,
+  Results,
+  ConsoleMessageListener,
+  NullMessageListener,
+  Patient,
+  PatientSource,
+  CodeService,
+  Code,
+  CodeSystem,
+  Concept,
+  Date,
+  DateTime,
+  Interval,
+  Quantity,
+  Ratio,
+  ValueSet
+};
+
+export default {
+  Library,
+  Repository,
+  Expression,
+  Context,
+  PatientContext,
+  UnfilteredContext,
+  Executor,
+  Results,
+  ConsoleMessageListener,
+  NullMessageListener,
+  Patient,
+  PatientSource,
+  CodeService,
+  Code,
+  CodeSystem,
+  Concept,
+  Date,
+  DateTime,
+  Interval,
+  Quantity,
+  Ratio,
+  ValueSet
+};

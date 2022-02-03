@@ -1,4 +1,4 @@
-import * as cql from '../src/cql';
+import cql from '../src/cql';
 import 'should';
 
 const libNames: string[] = [];
