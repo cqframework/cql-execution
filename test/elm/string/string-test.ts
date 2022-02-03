@@ -2,6 +2,7 @@ import should from 'should';
 import setup from '../../setup';
 const data = require('./data');
 import * as str from '../../../src/elm/string';
+import * as overloaded from '../../../src/elm/overloaded';
 
 describe('Concat', () => {
   beforeEach(function () {
@@ -177,9 +178,7 @@ describe('Length', () => {
   });
 
   it.skip('should be a Length', function () {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    this.elevenLetters.should.be.an.instanceOf(str.Length);
+    this.elevenLetters.should.be.an.instanceOf(overloaded.Length);
   });
 
   it('should count letters in string', function () {
