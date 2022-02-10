@@ -22,7 +22,9 @@ describe('DateTime.differenceBetween with implicit conversion of first variable'
     a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(-11, 12));
     a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(-682, 757));
     a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-40934, 45465));
-    a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-40934999, 45465000));
+    a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(
+      new Uncertainty(-40934999, 45465000)
+    );
   }));
 
 describe('DateTime.durationBetween with implicit conversion of first variable', () =>
@@ -36,7 +38,9 @@ describe('DateTime.durationBetween with implicit conversion of first variable', 
     a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(-11, 12));
     a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(-682, 757));
     a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-40934, 45465));
-    a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-40934999, 45465000));
+    a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(
+      new Uncertainty(-40934999, 45465000)
+    );
   }));
 
 describe('DateTime.sameAs with implicit conversion of first variable', () => {
@@ -708,7 +712,9 @@ describe('DateTime.differenceBetween with implicit conversion of second variable
     a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(-12, 11));
     a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(-757, 682));
     a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-45465, 40934));
-    a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-45465000, 40934999));
+    a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(
+      new Uncertainty(-45465000, 40934999)
+    );
   }));
 
 describe('DateTime.durationBetween with implicit conversion of second variable', () =>
@@ -722,7 +728,9 @@ describe('DateTime.durationBetween with implicit conversion of second variable',
     a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(-12, 11));
     a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(-757, 682));
     a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-45465, 40934));
-    a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-45465000, 40934999));
+    a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(
+      new Uncertainty(-45465000, 40934999)
+    );
   }));
 
 describe('DateTime.sameAs with implicit conversion of second variable', () => {
@@ -1237,7 +1245,9 @@ describe('DateTime.sameOrAfter with implicit conversion of second variable', () 
   });
 
   it('should return null in cases where b has unknown values that prevent deterministic result', () => {
-    should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrAfter(Date.parse('2000-01-01')));
+    should.not.exist(
+      DateTime.parse('2000-01-01T00:00:00.001').sameOrAfter(Date.parse('2000-01-01'))
+    );
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrAfter(Date.parse('2000-01')));
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrAfter(Date.parse('2000')));
   });
