@@ -309,25 +309,7 @@ export function minValueForType(type: string, quantityInstance?: Quantity) {
   return null;
 }
 
-type MathFn =
-  | 'abs'
-  | 'acos'
-  | 'asin'
-  | 'atan'
-  | 'atan2'
-  | 'ceil'
-  | 'cos'
-  | 'exp'
-  | 'floor'
-  | 'log'
-  | 'max'
-  | 'min'
-  | 'pow'
-  | 'random'
-  | 'round'
-  | 'sin'
-  | 'sqrt'
-  | 'tan';
+type MathFn = keyof typeof Math;
 
 export function decimalAdjust(type: MathFn, value: any, exp: any) {
   //If the exp is undefined or zero...
