@@ -6,16 +6,11 @@ import { DateTime } from '../datatypes/datetime';
 import { Parameter } from '../types/runtime-types';
 
 export class Executor {
-  library: any;
-  codeService?: CodeService | null;
-  parameters?: Parameter;
-  messageListener: MessageListener;
-
   constructor(
-    library: any,
-    codeService?: CodeService,
-    parameters?: Parameter,
-    messageListener: MessageListener = new NullMessageListener()
+    public library: any,
+    public codeService?: CodeService,
+    public parameters?: Parameter,
+    public messageListener: MessageListener = new NullMessageListener()
   ) {
     this.library = library;
     this.codeService = codeService;

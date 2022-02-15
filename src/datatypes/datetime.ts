@@ -548,10 +548,6 @@ class DateTime {
 }
 
 class Date {
-  year: number | null;
-  month: number | null;
-  day: number | null;
-
   // prototype functions defined later
   isPrecise: any;
   isImprecise: any;
@@ -597,7 +593,11 @@ class Date {
     return new Date(...args);
   }
 
-  constructor(year: number | null = null, month: number | null = null, day: number | null = null) {
+  constructor(
+    public year: number | null = null,
+    public month: number | null = null,
+    public day: number | null = null
+  ) {
     this.year = year;
     this.month = month;
     this.day = day;

@@ -5,9 +5,7 @@ export class NullMessageListener {
 }
 
 export class ConsoleMessageListener {
-  logSourceOnTrace: boolean;
-
-  constructor(logSourceOnTrace = false) {
+  constructor(public logSourceOnTrace = false) {
     this.logSourceOnTrace = logSourceOnTrace;
   }
 

@@ -1,9 +1,6 @@
 import { ThreeValuedLogic } from './logic';
 
 export class Uncertainty {
-  low: any;
-  high?: any;
-
   static from(obj: any) {
     if (obj != null && obj.isUncertainty) {
       return obj;
@@ -12,7 +9,7 @@ export class Uncertainty {
     }
   }
 
-  constructor(low: any = null, high?: any) {
+  constructor(public low: any = null, public high?: any) {
     this.low = low;
     this.high = high;
     const gt = (a: any, b: any) => {

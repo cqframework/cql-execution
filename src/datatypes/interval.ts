@@ -12,18 +12,12 @@ import {
 import * as cmp from '../util/comparison';
 
 export class Interval {
-  low: any;
-  high: any;
-  lowClosed: boolean;
-  highClosed: boolean;
-  defaultPointType?: any;
-
   constructor(
-    low: any,
-    high: any,
-    lowClosed?: boolean | null,
-    highClosed?: boolean | null,
-    defaultPointType?: any
+    public low: any,
+    public high: any,
+    public lowClosed?: boolean | null,
+    public highClosed?: boolean | null,
+    public defaultPointType?: any
   ) {
     this.low = low;
     this.high = high;

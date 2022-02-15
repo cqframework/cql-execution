@@ -9,10 +9,7 @@ import {
 } from '../util/units';
 
 export class Quantity {
-  value: any;
-  unit?: any;
-
-  constructor(value: any, unit?: any) {
+  constructor(public value: any, public unit?: any) {
     this.value = value;
     this.unit = unit;
     if (this.value == null || isNaN(this.value)) {

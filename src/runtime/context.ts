@@ -7,12 +7,14 @@ import { Patient } from '../cql-patient';
 import { Parameter } from '../types/runtime-types';
 
 export class Context {
-  // Construcor args
-  parent: any;
-  _codeService?: CodeService | null;
-  _parameters?: Parameter;
-  executionDateTime?: dt.DateTime;
-  messageListener?: MessageListener;
+  // Public Construcor args
+  public parent: any;
+  public executionDateTime?: dt.DateTime;
+  public messageListener?: MessageListener;
+
+  // Private Construcor args
+  private _codeService?: CodeService | null;
+  private _parameters?: Parameter;
 
   // Auto-initialized properties
   context_values: any;
@@ -418,12 +420,9 @@ export class Context {
 }
 
 export class PatientContext extends Context {
-  library: any;
-  patient?: Patient | null;
-
   constructor(
-    library: any,
-    patient?: Patient | null,
+    public library: any,
+    public patient?: Patient | null,
     codeService?: CodeService | null,
     parameters?: Parameter,
     executionDateTime: dt.DateTime = dt.DateTime.fromJSDate(new Date()),
@@ -470,12 +469,9 @@ export class PatientContext extends Context {
 }
 
 export class UnfilteredContext extends Context {
-  library: any;
-  results: any;
-
   constructor(
-    library: any,
-    results: any,
+    public library: any,
+    public results: any,
     codeService?: CodeService | null,
     parameters?: Parameter,
     executionDateTime: dt.DateTime = dt.DateTime.fromJSDate(new Date()),

@@ -1,10 +1,7 @@
 import { Quantity } from './datatypes';
 
 export class Ratio {
-  numerator: Quantity;
-  denominator: Quantity;
-
-  constructor(numerator: Quantity | null, denominator: Quantity | null) {
+  constructor(public numerator: Quantity, public denominator: Quantity) {
     if (numerator == null) {
       throw new Error('Cannot create a ratio with an undefined numerator');
     }
