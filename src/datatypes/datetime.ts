@@ -5,8 +5,13 @@ import {
   normalizeMillisecondsField,
   normalizeMillisecondsFieldInString
 } from '../util/util';
-import { Duration, DurationUnit, DateTime as LuxonDateTime, DurationObjectUnits } from 'luxon';
-import * as luxon from 'luxon';
+import {
+  Duration,
+  DurationUnit,
+  DateTime as LuxonDateTime,
+  DurationObjectUnits,
+  FixedOffsetZone
+} from 'luxon';
 
 type DateTimeUnit = keyof DurationObjectUnits;
 
@@ -292,7 +297,7 @@ class DateTime {
 
   convertToTimezoneOffset(timezoneOffset = 0) {
     const shiftedLuxonDT = this.toLuxonDateTime().setZone(
-      luxon.FixedOffsetZone.instance(timezoneOffset * 60)
+      FixedOffsetZone.instance(timezoneOffset * 60)
     );
     const shiftedDT = DateTime.fromLuxonDateTime(shiftedLuxonDT);
     return shiftedDT.reducedPrecision(this.getPrecision());
@@ -407,7 +412,7 @@ class DateTime {
       this.timezoneOffset != null
         ? this.timezoneOffset * 60
         : new jsDate().getTimezoneOffset() * -1;
-    return luxon.DateTime.fromObject({
+    return LuxonDateTime.fromObject({
       year: this.year ?? undefined,
       month: this.month ?? undefined,
       day: this.day ?? undefined,
@@ -415,7 +420,7 @@ class DateTime {
       minute: this.minute ?? undefined,
       second: this.second ?? undefined,
       millisecond: this.millisecond ?? undefined,
-      zone: luxon.FixedOffsetZone.instance(offsetMins)
+      zone: FixedOffsetZone.instance(offsetMins)
     });
   }
 
@@ -430,7 +435,7 @@ class DateTime {
     // I don't know if anyone is using "ignoreTimezone" anymore (we aren't), but just in case
     if (ignoreTimezone) {
       const offset = new jsDate().getTimezoneOffset() * -1;
-      luxonDT = luxonDT.setZone(luxon.FixedOffsetZone.instance(offset), { keepLocalTime: true });
+      luxonDT = luxonDT.setZone(FixedOffsetZone.instance(offset), { keepLocalTime: true });
     }
     return luxonDT.toJSDate();
   }
@@ -694,11 +699,11 @@ class Date {
   }
 
   toLuxonDateTime() {
-    return luxon.DateTime.fromObject({
+    return LuxonDateTime.fromObject({
       year: this.year ?? undefined,
       month: this.month ?? undefined,
       day: this.day ?? undefined,
-      zone: luxon.FixedOffsetZone.utcInstance
+      zone: FixedOffsetZone.utcInstance
     });
   }
 
@@ -1311,7 +1316,7 @@ function isValidDateStringFormat(string: any) {
     return false;
   }
 
-  return luxon.DateTime.fromFormat(string, format).isValid;
+  return LuxonDateTime.fromFormat(string, format).isValid;
 }
 
 function isValidDateTimeStringFormat(string: any) {
@@ -1329,7 +1334,7 @@ function isValidDateTimeStringFormat(string: any) {
     return false;
   }
 
-  return formats.some((fmt: any) => luxon.DateTime.fromFormat(string, fmt).isValid);
+  return formats.some((fmt: any) => LuxonDateTime.fromFormat(string, fmt).isValid);
 }
 
 export {
