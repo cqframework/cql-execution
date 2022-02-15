@@ -99,12 +99,12 @@
     "lib": "lib"
   },
   "scripts": {
-    "prepare": "npm run build --scripts-prepend-node-path && npm run build:browserify --scripts-prepend-node-path",
+    "prepare": "npm run build && npm run build:browserify",
     "build": "tsc",
     "build:browserify": "node ./bin/browserify.js",
     "build:test-data": "cd ./test/generator && ./gradlew generateTestData && cd ..",
     "build:spec-test-data": "node test/spec-tests/generate-cql.js && cd ./test/generator && ./gradlew generateSpecTestData && cd ..",
-    "build:all": "npm run build --scripts-prepend-node-path && npm run build:browserify --scripts-prepend-node-path && npm run build:test-data --scripts-prepend-node-path && npm run build:spec-test-data --scripts-prepend-node-path",
+    "build:all": "npm run build && npm run build:browserify && npm run build:test-data && npm run build:spec-test-data",
     "watch:test-data": "cd ./test/generator && ./gradlew watchTestData && cd ..",
     "test": "TS_NODE_PROJECT=\"./tsconfig.test.json\" TS_NODE_FILES=true mocha --reporter spec --recursive",
     "test:nyc": "TS_NODE_PROJECT=\"./tsconfig.test.json\" TS_NODE_FILES=true nyc --reporter=html npx mocha --reporter spec --recursive",
@@ -113,7 +113,7 @@
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check \"**/*.{js,ts}\"",
     "prettier:fix": "prettier --write \"**/*.{js,ts}\"",
-    "test:plus": "npm test --scripts-prepend-node-path && npm run build --scripts-prepend-node-path && npm run lint --scripts-prepend-node-path && npm run prettier --scripts-prepend-node-path"
+    "test:plus": "npm test && npm run build && npm run lint && npm run prettier"
   },
   "license": "Apache-2.0"
 }

@@ -8,4 +8,4 @@ you can follow these steps:
 1. Install [Node.js](http://nodejs.org/) (Note: `npm` version `6.x.x` recommended)
 2. Execute the following from the _cql-execution_ directory:
    1. `npm install`
-   2. `cake build:all`
+   2. `npm run build:all`

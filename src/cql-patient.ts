@@ -130,7 +130,7 @@ export class Patient extends Record {
 
 export class PatientSource {
   patients: any[];
-  current: Patient | undefined;
+  current?: Patient;
 
   constructor(patients: any) {
     this.patients = patients;
