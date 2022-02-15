@@ -101,7 +101,7 @@
   "scripts": {
     "prepare": "npm run build && npm run build:browserify",
     "build": "tsc",
-    "build:browserify": "node ./bin/browserify.js",
+    "build:browserify": "npm run build && node ./bin/browserify.js",
     "build:test-data": "cd ./test/generator && ./gradlew generateTestData && cd ..",
     "build:spec-test-data": "node test/spec-tests/generate-cql.js && cd ./test/generator && ./gradlew generateSpecTestData && cd ..",
     "build:all": "npm run build && npm run build:browserify && npm run build:test-data && npm run build:spec-test-data",
