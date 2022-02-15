@@ -125,9 +125,9 @@ function codesMatch(code1: Code, code2: Code) {
 
 export class CodeSystem {
   id: string;
-  version: string;
+  version?: string;
 
-  constructor(id: string, version: string) {
+  constructor(id: string, version?: string) {
     this.id = id;
     this.version = version;
   }
