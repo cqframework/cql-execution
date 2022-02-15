@@ -1,12 +1,12 @@
 import { typeIsArray } from '../util/util';
 
 export class Code {
-  code: string;
-  system?: string;
-  version?: string;
-  display?: string;
-
-  constructor(code: string, system?: string, version?: string, display?: string) {
+  constructor(
+    public code: string,
+    public system?: string,
+    public version?: string,
+    public display?: string
+  ) {
     this.code = code;
     this.system = system;
     this.version = version;
@@ -28,11 +28,8 @@ export class Code {
 }
 
 export class Concept {
-  codes: any;
-  display?: string;
-
-  constructor(codes: any, display?: string) {
-    this.codes = codes || [];
+  constructor(public codes: any[] = [], public display?: string) {
+    this.codes = codes;
     this.display = display;
   }
 
@@ -46,14 +43,10 @@ export class Concept {
 }
 
 export class ValueSet {
-  oid: string;
-  version?: string;
-  codes: any;
-
-  constructor(oid: string, version?: string, codes?: any) {
+  constructor(public oid: string, public version?: string, public codes: any[] = []) {
     this.oid = oid;
     this.version = version;
-    this.codes = codes || [];
+    this.codes = codes;
   }
 
   get isValueSet() {
@@ -124,10 +117,7 @@ function codesMatch(code1: Code, code2: Code) {
 }
 
 export class CodeSystem {
-  id: string;
-  version?: string;
-
-  constructor(id: string, version?: string) {
+  constructor(public id: string, public version?: string) {
     this.id = id;
     this.version = version;
   }

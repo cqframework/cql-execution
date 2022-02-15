@@ -1,9 +1,10 @@
 import { Code, ValueSet } from './datatypes/datatypes';
+import { TerminologyProvider, ValueSetDictionary, ValueSetObject } from './types';
 
-export class CodeService {
-  valueSets: any;
+export class CodeService implements TerminologyProvider {
+  valueSets: ValueSetObject;
 
-  constructor(valueSetsJson: any = {}) {
+  constructor(valueSetsJson: ValueSetDictionary = {}) {
     this.valueSets = {};
     for (const oid in valueSetsJson) {
       this.valueSets[oid] = {};
@@ -16,11 +17,11 @@ export class CodeService {
     }
   }
 
-  findValueSetsByOid(oid: string) {
+  findValueSetsByOid(oid: string): ValueSet[] {
     return this.valueSets[oid] ? Object.values(this.valueSets[oid]) : [];
   }
 
-  findValueSet(oid: string, version?: string) {
+  findValueSet(oid: string, version?: string): ValueSet | null | undefined {
     if (version != null) {
       return this.valueSets[oid] != null ? this.valueSets[oid][version] : undefined;
     } else {

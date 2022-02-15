@@ -1,6 +1,7 @@
 import * as DT from './datatypes/datatypes';
+import { RecordObject, DataProvider } from './types';
 
-class Record {
+export class Record {
   json: any;
   id: string;
 
@@ -97,7 +98,7 @@ export class Patient extends Record {
   name?: string;
   gender?: string;
   birthDate?: DT.DateTime | null;
-  records: any;
+  records: RecordObject;
 
   constructor(json: any) {
     super(json);
@@ -113,13 +114,18 @@ export class Patient extends Record {
     });
   }
 
-  findRecords(profile: any) {
+  findRecords(profile: string | null): Record[] {
     if (profile == null) {
       return [];
     }
-    const recordType = profile.match(
+
+    const match = profile.match(
       /(\{https:\/\/github\.com\/cqframework\/cql-execution\/simple\})?(.*)/
-    )[2];
+    );
+
+    if (match == null) return [];
+
+    const recordType = match[2];
     if (recordType === 'Patient') {
       return [this];
     } else {
@@ -128,7 +134,7 @@ export class Patient extends Record {
   }
 }
 
-export class PatientSource {
+export class PatientSource implements DataProvider {
   patients: any[];
   current?: Patient;
 
