@@ -933,7 +933,7 @@ var DateTime = /** @class */ (function () {
     DateTime.prototype.reducedPrecision = function (unitField) {
         if (unitField === void 0) { unitField = DateTime.Unit.MILLISECOND; }
         var reduced = this.copy();
-        if (unitField !== DateTime.Unit.MILLISECOND) {
+        if (unitField != null && unitField !== DateTime.Unit.MILLISECOND) {
             var fieldIndex = DateTime.FIELDS.indexOf(unitField);
             var fieldsToRemove = DateTime.FIELDS.slice(fieldIndex + 1);
             for (var _i = 0, fieldsToRemove_1 = fieldsToRemove; _i < fieldsToRemove_1.length; _i++) {

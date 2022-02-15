@@ -194,7 +194,7 @@ class DateTime {
     }
   }
 
-  static fromLuxonDateTime(luxonDT: LuxonDateTime): any {
+  static fromLuxonDateTime(luxonDT: LuxonDateTime): DateTime {
     if (luxonDT instanceof DateTime) {
       return luxonDT;
     }
@@ -528,9 +528,9 @@ class DateTime {
     return other;
   }
 
-  reducedPrecision(unitField = DateTime.Unit.MILLISECOND) {
+  reducedPrecision(unitField: string | null = DateTime.Unit.MILLISECOND) {
     const reduced = this.copy();
-    if (unitField !== DateTime.Unit.MILLISECOND) {
+    if (unitField != null && unitField !== DateTime.Unit.MILLISECOND) {
       const fieldIndex = DateTime.FIELDS.indexOf(unitField);
       const fieldsToRemove = DateTime.FIELDS.slice(fieldIndex + 1);
       for (const field of fieldsToRemove) {
