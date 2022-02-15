@@ -94,8 +94,8 @@ class Record {
 }
 
 export class Patient extends Record {
-  name: string;
-  gender: string;
+  name?: string;
+  gender?: string;
   birthDate?: DT.DateTime | null;
   records: any;
 
@@ -129,7 +129,7 @@ export class Patient extends Record {
 }
 
 export class PatientSource {
-  patients: any;
+  patients: any[];
   current: Patient | undefined;
 
   constructor(patients: any) {

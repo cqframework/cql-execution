@@ -65,7 +65,7 @@ function truncateLuxonDateTime(luxonDT: LuxonDateTime, unit: DateTimeUnit) {
     if (luxonDT.weekday !== 7) {
       luxonDT = luxonDT.set({ weekday: 7 }).minus({ weeks: 1 });
     }
-    unit = DateTime.Unit.DAY as any;
+    unit = DateTime.Unit.DAY as DateTimeUnit;
   }
   return luxonDT.startOf(unit);
 }
