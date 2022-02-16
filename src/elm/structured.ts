@@ -2,7 +2,7 @@ import { Context } from '../runtime/context';
 import { Expression, UnimplementedExpression } from './expression';
 import { build } from './builder';
 
-class Property extends Expression {
+export class Property extends Expression {
   scope: any;
   source: any;
   path: any;
@@ -48,7 +48,7 @@ function getPropertyFromObject(obj: any, path: any) {
   return val;
 }
 
-class Tuple extends Expression {
+export class Tuple extends Expression {
   elements: any[];
 
   constructor(json: any) {
@@ -75,8 +75,6 @@ class Tuple extends Expression {
   }
 }
 
-class TupleElement extends UnimplementedExpression {}
+export class TupleElement extends UnimplementedExpression {}
 
-class TupleElementDefinition extends UnimplementedExpression {}
-
-export { Property, Tuple, TupleElement, TupleElementDefinition };
+export class TupleElementDefinition extends UnimplementedExpression {}

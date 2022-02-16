@@ -1,7 +1,7 @@
 import { Context } from '../runtime/context';
 import { Expression } from './expression';
 
-class Literal extends Expression {
+export class Literal extends Expression {
   valueType: string;
   value: any;
 
@@ -33,7 +33,7 @@ class Literal extends Expression {
 
 // The following are not defined in ELM, but helpful for execution
 
-class BooleanLiteral extends Literal {
+export class BooleanLiteral extends Literal {
   constructor(json: any) {
     super(json);
     this.value = this.value === 'true';
@@ -50,7 +50,7 @@ class BooleanLiteral extends Literal {
   }
 }
 
-class IntegerLiteral extends Literal {
+export class IntegerLiteral extends Literal {
   constructor(json: any) {
     super(json);
     this.value = parseInt(this.value, 10);
@@ -67,7 +67,7 @@ class IntegerLiteral extends Literal {
   }
 }
 
-class DecimalLiteral extends Literal {
+export class DecimalLiteral extends Literal {
   constructor(json: any) {
     super(json);
     this.value = parseFloat(this.value);
@@ -84,7 +84,7 @@ class DecimalLiteral extends Literal {
   }
 }
 
-class StringLiteral extends Literal {
+export class StringLiteral extends Literal {
   constructor(json: any) {
     super(json);
   }
@@ -100,5 +100,3 @@ class StringLiteral extends Literal {
     return this.value.replace(/\\'/g, "'").replace(/\\"/g, '"');
   }
 }
-
-export { BooleanLiteral, DecimalLiteral, IntegerLiteral, Literal, StringLiteral };

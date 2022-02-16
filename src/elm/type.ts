@@ -11,7 +11,7 @@ import { Uncertainty } from '../datatypes/uncertainty';
 
 // TODO: Casting and Conversion needs unit tests!
 
-class As extends Expression {
+export class As extends Expression {
   asTypeSpecifier: any;
   strict: boolean;
 
@@ -48,7 +48,7 @@ class As extends Expression {
   }
 }
 
-class ToBoolean extends Expression {
+export class ToBoolean extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -67,7 +67,7 @@ class ToBoolean extends Expression {
   }
 }
 
-class ToConcept extends Expression {
+export class ToConcept extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -82,7 +82,7 @@ class ToConcept extends Expression {
   }
 }
 
-class ToDate extends Expression {
+export class ToDate extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -99,7 +99,7 @@ class ToDate extends Expression {
   }
 }
 
-class ToDateTime extends Expression {
+export class ToDateTime extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -116,7 +116,7 @@ class ToDateTime extends Expression {
   }
 }
 
-class ToDecimal extends Expression {
+export class ToDecimal extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -139,7 +139,7 @@ class ToDecimal extends Expression {
   }
 }
 
-class ToInteger extends Expression {
+export class ToInteger extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -158,7 +158,7 @@ class ToInteger extends Expression {
   }
 }
 
-class ToQuantity extends Expression {
+export class ToQuantity extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -184,7 +184,7 @@ class ToQuantity extends Expression {
   }
 }
 
-class ToRatio extends Expression {
+export class ToRatio extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -220,7 +220,7 @@ class ToRatio extends Expression {
   }
 }
 
-class ToString extends Expression {
+export class ToString extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -235,7 +235,7 @@ class ToString extends Expression {
   }
 }
 
-class ToTime extends Expression {
+export class ToTime extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -287,7 +287,7 @@ class ToTime extends Expression {
   }
 }
 
-class Convert extends Expression {
+export class Convert extends Expression {
   operand: any;
   toType: any;
 
@@ -323,7 +323,7 @@ class Convert extends Expression {
   }
 }
 
-class ConvertsToBoolean extends Expression {
+export class ConvertsToBoolean extends Expression {
   operand: any;
 
   constructor(json: any) {
@@ -341,7 +341,7 @@ class ConvertsToBoolean extends Expression {
   }
 }
 
-class ConvertsToDate extends Expression {
+export class ConvertsToDate extends Expression {
   operand: any;
 
   constructor(json: any) {
@@ -359,7 +359,7 @@ class ConvertsToDate extends Expression {
   }
 }
 
-class ConvertsToDateTime extends Expression {
+export class ConvertsToDateTime extends Expression {
   operand: any;
 
   constructor(json: any) {
@@ -377,7 +377,7 @@ class ConvertsToDateTime extends Expression {
   }
 }
 
-class ConvertsToDecimal extends Expression {
+export class ConvertsToDecimal extends Expression {
   operand: any;
 
   constructor(json: any) {
@@ -395,7 +395,7 @@ class ConvertsToDecimal extends Expression {
   }
 }
 
-class ConvertsToInteger extends Expression {
+export class ConvertsToInteger extends Expression {
   operand: any;
 
   constructor(json: any) {
@@ -413,7 +413,7 @@ class ConvertsToInteger extends Expression {
   }
 }
 
-class ConvertsToQuantity extends Expression {
+export class ConvertsToQuantity extends Expression {
   operand: any;
 
   constructor(json: any) {
@@ -431,7 +431,7 @@ class ConvertsToQuantity extends Expression {
   }
 }
 
-class ConvertsToRatio extends Expression {
+export class ConvertsToRatio extends Expression {
   operand: any;
 
   constructor(json: any) {
@@ -449,7 +449,7 @@ class ConvertsToRatio extends Expression {
   }
 }
 
-class ConvertsToString extends Expression {
+export class ConvertsToString extends Expression {
   operand: any;
 
   constructor(json: any) {
@@ -467,7 +467,7 @@ class ConvertsToString extends Expression {
   }
 }
 
-class ConvertsToTime extends Expression {
+export class ConvertsToTime extends Expression {
   operand: any;
 
   constructor(json: any) {
@@ -498,7 +498,7 @@ function canConvertToType(toFunction: any, operand: any, ctx: Context) {
   }
 }
 
-class ConvertQuantity extends Expression {
+export class ConvertQuantity extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -517,7 +517,7 @@ class ConvertQuantity extends Expression {
   }
 }
 
-class CanConvertQuantity extends Expression {
+export class CanConvertQuantity extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -537,7 +537,7 @@ class CanConvertQuantity extends Expression {
   }
 }
 
-class Is extends Expression {
+export class Is extends Expression {
   isTypeSpecifier: any;
 
   constructor(json: any) {
@@ -657,38 +657,7 @@ function guessSpecifierType(val: any): any {
   return 'Unknown';
 }
 
-class IntervalTypeSpecifier extends UnimplementedExpression {}
-class ListTypeSpecifier extends UnimplementedExpression {}
-class NamedTypeSpecifier extends UnimplementedExpression {}
-class TupleTypeSpecifier extends UnimplementedExpression {}
-
-export {
-  As,
-  CanConvertQuantity,
-  Convert,
-  ConvertQuantity,
-  ConvertsToBoolean,
-  ConvertsToDate,
-  ConvertsToDateTime,
-  ConvertsToDecimal,
-  ConvertsToInteger,
-  ConvertsToQuantity,
-  ConvertsToRatio,
-  ConvertsToString,
-  ConvertsToTime,
-  IntervalTypeSpecifier,
-  Is,
-  ListTypeSpecifier,
-  NamedTypeSpecifier,
-  ToBoolean,
-  ToConcept,
-  ToDate,
-  ToDateTime,
-  ToDecimal,
-  ToInteger,
-  ToQuantity,
-  ToRatio,
-  ToString,
-  ToTime,
-  TupleTypeSpecifier
-};
+export class IntervalTypeSpecifier extends UnimplementedExpression {}
+export class ListTypeSpecifier extends UnimplementedExpression {}
+export class NamedTypeSpecifier extends UnimplementedExpression {}
+export class TupleTypeSpecifier extends UnimplementedExpression {}

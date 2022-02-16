@@ -4,7 +4,7 @@ import { Context } from '../runtime/context';
 
 // Unit conversation is currently implemented on for time duration comparison operations
 // TODO: Implement unit conversation for time duration mathematical operations
-class Quantity extends Expression {
+export class Quantity extends Expression {
   value: number;
   unit: any;
 
@@ -18,5 +18,3 @@ class Quantity extends Expression {
     return new DT.Quantity(this.value, this.unit);
   }
 }
-
-export { Quantity };

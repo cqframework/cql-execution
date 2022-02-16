@@ -6,7 +6,7 @@ import * as dtivl from '../datatypes/interval';
 import { Context } from '../runtime/context';
 import { build } from './builder';
 
-class Interval extends Expression {
+export class Interval extends Expression {
   lowClosed: boolean;
   lowClosedExpression: any;
   highClosed: boolean;
@@ -62,31 +62,31 @@ class Interval extends Expression {
 // NotEqual is completely handled by overloaded#Equal
 
 // Delegated to by overloaded#Contains and overloaded#In
-function doContains(interval: any, item: any, precision?: any) {
+export function doContains(interval: any, item: any, precision?: any) {
   return interval.contains(item, precision);
 }
 
 // Delegated to by overloaded#Includes and overloaded#IncludedIn
-function doIncludes(interval: any, subinterval: any, precision?: any) {
+export function doIncludes(interval: any, subinterval: any, precision?: any) {
   return interval.includes(subinterval, precision);
 }
 
 // Delegated to by overloaded#ProperIncludes and overloaded@ProperIncludedIn
-function doProperIncludes(interval: any, subinterval: any, precision?: any) {
+export function doProperIncludes(interval: any, subinterval: any, precision?: any) {
   return interval.properlyIncludes(subinterval, precision);
 }
 
 // Delegated to by overloaded#After
-function doAfter(a: any, b: any, precision?: any) {
+export function doAfter(a: any, b: any, precision?: any) {
   return a.after(b, precision);
 }
 
 // Delegated to by overloaded#Before
-function doBefore(a: any, b: any, precision?: any) {
+export function doBefore(a: any, b: any, precision?: any) {
   return a.before(b, precision);
 }
 
-class Meets extends Expression {
+export class Meets extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -104,7 +104,7 @@ class Meets extends Expression {
   }
 }
 
-class MeetsAfter extends Expression {
+export class MeetsAfter extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -122,7 +122,7 @@ class MeetsAfter extends Expression {
   }
 }
 
-class MeetsBefore extends Expression {
+export class MeetsBefore extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -140,7 +140,7 @@ class MeetsBefore extends Expression {
   }
 }
 
-class Overlaps extends Expression {
+export class Overlaps extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -158,7 +158,7 @@ class Overlaps extends Expression {
   }
 }
 
-class OverlapsAfter extends Expression {
+export class OverlapsAfter extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -176,7 +176,7 @@ class OverlapsAfter extends Expression {
   }
 }
 
-class OverlapsBefore extends Expression {
+export class OverlapsBefore extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -195,12 +195,12 @@ class OverlapsBefore extends Expression {
 }
 
 // Delegated to by overloaded#Union
-function doUnion(a: any, b: any) {
+export function doUnion(a: any, b: any) {
   return a.union(b);
 }
 
 // Delegated to by overloaded#Except
-function doExcept(a: any, b: any) {
+export function doExcept(a: any, b: any) {
   if (a != null && b != null) {
     return a.except(b);
   } else {
@@ -209,7 +209,7 @@ function doExcept(a: any, b: any) {
 }
 
 // Delegated to by overloaded#Intersect
-function doIntersect(a: any, b: any) {
+export function doIntersect(a: any, b: any) {
   if (a != null && b != null) {
     return a.intersect(b);
   } else {
@@ -217,7 +217,7 @@ function doIntersect(a: any, b: any) {
   }
 }
 
-class Width extends Expression {
+export class Width extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -231,7 +231,7 @@ class Width extends Expression {
   }
 }
 
-class Size extends Expression {
+export class Size extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -245,7 +245,7 @@ class Size extends Expression {
   }
 }
 
-class Start extends Expression {
+export class Start extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -264,7 +264,7 @@ class Start extends Expression {
   }
 }
 
-class End extends Expression {
+export class End extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -283,7 +283,7 @@ class End extends Expression {
   }
 }
 
-class Starts extends Expression {
+export class Starts extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -301,7 +301,7 @@ class Starts extends Expression {
   }
 }
 
-class Ends extends Expression {
+export class Ends extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -400,7 +400,7 @@ function intervalListType(intervals: any) {
   return type;
 }
 
-class Expand extends Expression {
+export class Expand extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -635,7 +635,7 @@ class Expand extends Expression {
   }
 }
 
-class Collapse extends Expression {
+export class Collapse extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -768,29 +768,3 @@ function truncateDecimal(decimal: any, decimalPlaces: number) {
   const re = new RegExp('^-?\\d+(?:.\\d{0,' + (decimalPlaces || -1) + '})?');
   return parseFloat(decimal.toString().match(re)[0]);
 }
-
-export {
-  Collapse,
-  End,
-  Ends,
-  Expand,
-  Interval,
-  Meets,
-  MeetsAfter,
-  MeetsBefore,
-  Overlaps,
-  OverlapsAfter,
-  OverlapsBefore,
-  Size,
-  Start,
-  Starts,
-  Width,
-  doContains,
-  doIncludes,
-  doProperIncludes,
-  doAfter,
-  doBefore,
-  doUnion,
-  doExcept,
-  doIntersect
-};

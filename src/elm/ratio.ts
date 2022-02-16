@@ -3,7 +3,7 @@ import { Quantity } from '../datatypes/quantity';
 import * as DT from '../datatypes/datatypes';
 import { Context } from '../runtime/context';
 
-class Ratio extends Expression {
+export class Ratio extends Expression {
   numerator: Quantity;
   denominator: Quantity;
 
@@ -26,5 +26,3 @@ class Ratio extends Expression {
     return new DT.Ratio(this.numerator, this.denominator);
   }
 }
-
-export { Ratio };

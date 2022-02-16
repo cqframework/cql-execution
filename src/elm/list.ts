@@ -4,7 +4,7 @@ import { typeIsArray } from '../util/util';
 import { equals } from '../util/comparison';
 import { Context } from '../runtime/context';
 
-class List extends Expression {
+export class List extends Expression {
   elements: any[];
 
   constructor(json: any) {
@@ -21,7 +21,7 @@ class List extends Expression {
   }
 }
 
-class Exists extends Expression {
+export class Exists extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -41,32 +41,32 @@ class Exists extends Expression {
 // NotEqual is completely handled by overloaded#Equal
 
 // Delegated to by overloaded#Union
-function doUnion(a: any, b: any) {
+export function doUnion(a: any, b: any) {
   const distinct = doDistinct(a.concat(b));
   return removeDuplicateNulls(distinct);
 }
 
 // Delegated to by overloaded#Except
-function doExcept(a: any, b: any) {
+export function doExcept(a: any, b: any) {
   const distinct = doDistinct(a);
   const setList = removeDuplicateNulls(distinct);
   return setList.filter(item => !doContains(b, item, true));
 }
 
 // Delegated to by overloaded#Intersect
-function doIntersect(a: any, b: any) {
+export function doIntersect(a: any, b: any) {
   const distinct = doDistinct(a);
   const setList = removeDuplicateNulls(distinct);
   return setList.filter(item => doContains(b, item, true));
 }
 
 // ELM-only, not a product of CQL
-class Times extends UnimplementedExpression {}
+export class Times extends UnimplementedExpression {}
 
 // ELM-only, not a product of CQL
-class Filter extends UnimplementedExpression {}
+export class Filter extends UnimplementedExpression {}
 
-class SingletonFrom extends Expression {
+export class SingletonFrom extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -83,7 +83,7 @@ class SingletonFrom extends Expression {
   }
 }
 
-class ToList extends Expression {
+export class ToList extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -98,7 +98,7 @@ class ToList extends Expression {
   }
 }
 
-class IndexOf extends Expression {
+export class IndexOf extends Expression {
   source: any;
   element: any;
 
@@ -133,26 +133,26 @@ class IndexOf extends Expression {
 // Indexer is completely handled by overloaded#Indexer
 
 // Delegated to by overloaded#Contains and overloaded#In
-function doContains(container: any[], item: any, nullEquivalence = false) {
+export function doContains(container: any[], item: any, nullEquivalence = false) {
   return container.some(
     (element: any) => equals(element, item) || (nullEquivalence && element == null && item == null)
   );
 }
 
 // Delegated to by overloaded#Includes and overloaded@IncludedIn
-function doIncludes(list: any, sublist: any) {
+export function doIncludes(list: any, sublist: any) {
   return sublist.every((x: any) => doContains(list, x));
 }
 
 // Delegated to by overloaded#ProperIncludes and overloaded@ProperIncludedIn
-function doProperIncludes(list: any, sublist: any) {
+export function doProperIncludes(list: any, sublist: any) {
   return list.length > sublist.length && doIncludes(list, sublist);
 }
 
 // ELM-only, not a product of CQL
-class ForEach extends UnimplementedExpression {}
+export class ForEach extends UnimplementedExpression {}
 
-class Flatten extends Expression {
+export class Flatten extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -167,7 +167,7 @@ class Flatten extends Expression {
   }
 }
 
-class Distinct extends Expression {
+export class Distinct extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -208,9 +208,9 @@ function removeDuplicateNulls(list: any[]) {
 }
 
 // ELM-only, not a product of CQL
-class Current extends UnimplementedExpression {}
+export class Current extends UnimplementedExpression {}
 
-class First extends Expression {
+export class First extends Expression {
   source: any;
 
   constructor(json: any) {
@@ -228,7 +228,7 @@ class First extends Expression {
   }
 }
 
-class Last extends Expression {
+export class Last extends Expression {
   source: any;
 
   constructor(json: any) {
@@ -246,7 +246,7 @@ class Last extends Expression {
   }
 }
 
-class Slice extends Expression {
+export class Slice extends Expression {
   source: any;
   startIndex: any;
   endIndex: any;
@@ -275,26 +275,3 @@ class Slice extends Expression {
 }
 
 // Length is completely handled by overloaded#Length
-
-export {
-  Current,
-  Distinct,
-  Exists,
-  Filter,
-  First,
-  Flatten,
-  ForEach,
-  IndexOf,
-  Last,
-  List,
-  SingletonFrom,
-  Slice,
-  Times,
-  ToList,
-  doContains,
-  doIncludes,
-  doProperIncludes,
-  doUnion,
-  doExcept,
-  doIntersect
-};

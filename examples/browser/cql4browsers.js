@@ -1151,18 +1151,15 @@ var Date = /** @class */ (function () {
     return Date;
 }());
 exports.Date = Date;
-var MIN_DATETIME_VALUE = DateTime.parse('0001-01-01T00:00:00.000');
-exports.MIN_DATETIME_VALUE = MIN_DATETIME_VALUE;
-var MAX_DATETIME_VALUE = DateTime.parse('9999-12-31T23:59:59.999');
-exports.MAX_DATETIME_VALUE = MAX_DATETIME_VALUE;
-var MIN_DATE_VALUE = Date.parse('0001-01-01');
-exports.MIN_DATE_VALUE = MIN_DATE_VALUE;
-var MAX_DATE_VALUE = Date.parse('9999-12-31');
-exports.MAX_DATE_VALUE = MAX_DATE_VALUE;
-var MIN_TIME_VALUE = (_a = DateTime.parse('0000-01-01T00:00:00.000')) === null || _a === void 0 ? void 0 : _a.getTime();
-exports.MIN_TIME_VALUE = MIN_TIME_VALUE;
-var MAX_TIME_VALUE = (_b = DateTime.parse('0000-01-01T23:59:59.999')) === null || _b === void 0 ? void 0 : _b.getTime();
-exports.MAX_TIME_VALUE = MAX_TIME_VALUE;
+// Require MIN/MAX here because math.js requires this file, and when we make this file require
+// math.js before it exports DateTime and Date, it errors due to the circular dependency...
+// const { MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } = require('../util/math');
+exports.MIN_DATETIME_VALUE = DateTime.parse('0001-01-01T00:00:00.000');
+exports.MAX_DATETIME_VALUE = DateTime.parse('9999-12-31T23:59:59.999');
+exports.MIN_DATE_VALUE = Date.parse('0001-01-01');
+exports.MAX_DATE_VALUE = Date.parse('9999-12-31');
+exports.MIN_TIME_VALUE = (_a = DateTime.parse('0000-01-01T00:00:00.000')) === null || _a === void 0 ? void 0 : _a.getTime();
+exports.MAX_TIME_VALUE = (_b = DateTime.parse('0000-01-01T23:59:59.999')) === null || _b === void 0 ? void 0 : _b.getTime();
 var DATETIME_PRECISION_VALUE_MAP = (function () {
     var dtpvMap = new Map();
     dtpvMap.set(DateTime.Unit.YEAR, 4);
@@ -1560,7 +1557,7 @@ DateTime.prototype.add = Date.prototype.add = function (offset, field) {
         result.timezoneOffset = null;
     }
     // Can't use overflowsOrUnderflows from math.js due to circular dependencies when we require it
-    if (result.after(MAX_DATETIME_VALUE || result.before(MIN_DATETIME_VALUE))) {
+    if (result.after(exports.MAX_DATETIME_VALUE || result.before(exports.MIN_DATETIME_VALUE))) {
         return null;
     }
     else {
@@ -1676,9 +1673,6 @@ function isValidDateTimeStringFormat(string) {
     }
     return formats.some(function (fmt) { return luxon_1.DateTime.fromFormat(string, fmt).isValid; });
 }
-// Require MIN/MAX here because math.js requires this file, and when we make this file require
-// math.js before it exports DateTime and Date, it errors due to the circular dependency...
-// const { MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } = require('../util/math');
 
 },{"../util/util":54,"./uncertainty":13,"luxon":71}],8:[function(require,module,exports){
 "use strict";
@@ -4408,7 +4402,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.doBefore = exports.doAfter = exports.Today = exports.TimezoneOffsetFrom = exports.TimeOfDay = exports.TimeFrom = exports.Time = exports.Now = exports.DurationBetween = exports.DifferenceBetween = exports.DateTimeComponentFrom = exports.DateTime = exports.DateFrom = exports.Date = void 0;
+exports.DurationBetween = exports.DifferenceBetween = exports.doBefore = exports.doAfter = exports.TimezoneOffsetFrom = exports.TimeFrom = exports.DateFrom = exports.DateTimeComponentFrom = exports.TimeOfDay = exports.Now = exports.Today = exports.Time = exports.Date = exports.DateTime = void 0;
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 var expression_1 = require("./expression");
 var builder_1 = require("./builder");
@@ -5019,7 +5013,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.doIntersect = exports.doExcept = exports.doUnion = exports.doBefore = exports.doAfter = exports.doProperIncludes = exports.doIncludes = exports.doContains = exports.Width = exports.Starts = exports.Start = exports.Size = exports.OverlapsBefore = exports.OverlapsAfter = exports.Overlaps = exports.MeetsBefore = exports.MeetsAfter = exports.Meets = exports.Interval = exports.Expand = exports.Ends = exports.End = exports.Collapse = void 0;
+exports.Collapse = exports.Expand = exports.Ends = exports.Starts = exports.End = exports.Start = exports.Size = exports.Width = exports.doIntersect = exports.doExcept = exports.doUnion = exports.OverlapsBefore = exports.OverlapsAfter = exports.Overlaps = exports.MeetsBefore = exports.MeetsAfter = exports.Meets = exports.doBefore = exports.doAfter = exports.doProperIncludes = exports.doIncludes = exports.doContains = exports.Interval = void 0;
 var expression_1 = require("./expression");
 var quantity_1 = require("../datatypes/quantity");
 var math_1 = require("../util/math");
@@ -5905,7 +5899,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.doIntersect = exports.doExcept = exports.doUnion = exports.doProperIncludes = exports.doIncludes = exports.doContains = exports.ToList = exports.Times = exports.Slice = exports.SingletonFrom = exports.List = exports.Last = exports.IndexOf = exports.ForEach = exports.Flatten = exports.First = exports.Filter = exports.Exists = exports.Distinct = exports.Current = void 0;
+exports.Slice = exports.Last = exports.First = exports.Current = exports.Distinct = exports.Flatten = exports.ForEach = exports.doProperIncludes = exports.doIncludes = exports.doContains = exports.IndexOf = exports.ToList = exports.SingletonFrom = exports.Filter = exports.Times = exports.doIntersect = exports.doExcept = exports.doUnion = exports.Exists = exports.List = void 0;
 var expression_1 = require("./expression");
 var builder_1 = require("./builder");
 var util_1 = require("../util/util");
@@ -6212,6 +6206,7 @@ var Slice = /** @class */ (function (_super) {
     return Slice;
 }(expression_1.Expression));
 exports.Slice = Slice;
+// Length is completely handled by overloaded#Length
 
 },{"../util/comparison":51,"../util/util":54,"./builder":16,"./expression":22}],29:[function(require,module,exports){
 "use strict";
@@ -6231,7 +6226,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StringLiteral = exports.Literal = exports.IntegerLiteral = exports.DecimalLiteral = exports.BooleanLiteral = void 0;
+exports.StringLiteral = exports.DecimalLiteral = exports.IntegerLiteral = exports.BooleanLiteral = exports.Literal = void 0;
 var expression_1 = require("./expression");
 var Literal = /** @class */ (function (_super) {
     __extends(Literal, _super);
@@ -6368,7 +6363,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Xor = exports.Or = exports.Not = exports.IsTrue = exports.IsFalse = exports.And = void 0;
+exports.IsFalse = exports.IsTrue = exports.Xor = exports.Not = exports.Or = exports.And = void 0;
 var expression_1 = require("./expression");
 var datatypes_1 = require("../datatypes/datatypes");
 var And = /** @class */ (function (_super) {
@@ -6506,7 +6501,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Null = exports.IsNull = exports.Coalesce = void 0;
+exports.Coalesce = exports.IsNull = exports.Null = void 0;
 var expression_1 = require("./expression");
 var Null = /** @class */ (function (_super) {
     __extends(Null, _super);
@@ -6597,7 +6592,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Union = exports.SameOrBefore = exports.SameOrAfter = exports.SameAs = exports.ProperIncludes = exports.ProperIncludedIn = exports.Precision = exports.NotEqual = exports.Length = exports.Intersect = exports.Indexer = exports.Includes = exports.IncludedIn = exports.In = exports.Except = exports.Equivalent = exports.Equal = exports.Contains = exports.Before = exports.After = void 0;
+exports.Precision = exports.SameOrBefore = exports.SameOrAfter = exports.SameAs = exports.Before = exports.After = exports.Length = exports.ProperIncludedIn = exports.ProperIncludes = exports.IncludedIn = exports.Includes = exports.Contains = exports.In = exports.Indexer = exports.Intersect = exports.Except = exports.Union = exports.NotEqual = exports.Equivalent = exports.Equal = void 0;
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 var expression_1 = require("./expression");
 var logic_1 = require("../datatypes/logic");
@@ -7132,7 +7127,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Without = exports.With = exports.SortClause = exports.Sort = exports.ReturnClause = exports.QueryLetRef = exports.Query = exports.LetClause = exports.ByExpression = exports.ByDirection = exports.ByColumn = exports.AliasRef = exports.AliasedQuerySource = void 0;
+exports.QueryLetRef = exports.AliasRef = exports.Query = exports.SortClause = exports.ReturnClause = exports.ByColumn = exports.ByExpression = exports.ByDirection = exports.Sort = exports.Without = exports.With = exports.LetClause = exports.AliasedQuerySource = void 0;
 var expression_1 = require("./expression");
 var context_1 = require("../runtime/context");
 var util_1 = require("../util/util");
@@ -7556,7 +7551,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OperandRef = exports.IdentifierRef = exports.FunctionRef = exports.FunctionDef = exports.ExpressionRef = exports.ExpressionDef = void 0;
+exports.IdentifierRef = exports.OperandRef = exports.FunctionRef = exports.FunctionDef = exports.ExpressionRef = exports.ExpressionDef = void 0;
 var expression_1 = require("./expression");
 var builder_1 = require("./builder");
 var ExpressionDef = /** @class */ (function (_super) {
@@ -7748,7 +7743,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Upper = exports.Substring = exports.StartsWith = exports.SplitOnMatches = exports.Split = exports.ReplaceMatches = exports.PositionOf = exports.Matches = exports.Lower = exports.LastPositionOf = exports.EndsWith = exports.Concatenate = exports.Combine = void 0;
+exports.ReplaceMatches = exports.EndsWith = exports.StartsWith = exports.Substring = exports.Matches = exports.LastPositionOf = exports.PositionOf = exports.Lower = exports.Upper = exports.SplitOnMatches = exports.Split = exports.Combine = exports.Concatenate = void 0;
 var expression_1 = require("./expression");
 var builder_1 = require("./builder");
 var Concatenate = /** @class */ (function (_super) {
@@ -8140,7 +8135,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TupleTypeSpecifier = exports.ToTime = exports.ToString = exports.ToRatio = exports.ToQuantity = exports.ToInteger = exports.ToDecimal = exports.ToDateTime = exports.ToDate = exports.ToConcept = exports.ToBoolean = exports.NamedTypeSpecifier = exports.ListTypeSpecifier = exports.Is = exports.IntervalTypeSpecifier = exports.ConvertsToTime = exports.ConvertsToString = exports.ConvertsToRatio = exports.ConvertsToQuantity = exports.ConvertsToInteger = exports.ConvertsToDecimal = exports.ConvertsToDateTime = exports.ConvertsToDate = exports.ConvertsToBoolean = exports.ConvertQuantity = exports.Convert = exports.CanConvertQuantity = exports.As = void 0;
+exports.TupleTypeSpecifier = exports.NamedTypeSpecifier = exports.ListTypeSpecifier = exports.IntervalTypeSpecifier = exports.Is = exports.CanConvertQuantity = exports.ConvertQuantity = exports.ConvertsToTime = exports.ConvertsToString = exports.ConvertsToRatio = exports.ConvertsToQuantity = exports.ConvertsToInteger = exports.ConvertsToDecimal = exports.ConvertsToDateTime = exports.ConvertsToDate = exports.ConvertsToBoolean = exports.Convert = exports.ToTime = exports.ToString = exports.ToRatio = exports.ToQuantity = exports.ToInteger = exports.ToDecimal = exports.ToDateTime = exports.ToDate = exports.ToConcept = exports.ToBoolean = exports.As = void 0;
 var expression_1 = require("./expression");
 var datetime_1 = require("../datatypes/datetime");
 var clinical_1 = require("../datatypes/clinical");

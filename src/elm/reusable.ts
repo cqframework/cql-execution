@@ -3,7 +3,7 @@ import { Expression } from './expression';
 import { build } from './builder';
 import { Parameter } from '../types/runtime-types';
 
-class ExpressionDef extends Expression {
+export class ExpressionDef extends Expression {
   name: string;
   context: any;
   expression: any;
@@ -21,7 +21,7 @@ class ExpressionDef extends Expression {
   }
 }
 
-class ExpressionRef extends Expression {
+export class ExpressionRef extends Expression {
   name: string;
   library: string;
 
@@ -40,7 +40,7 @@ class ExpressionRef extends Expression {
   }
 }
 
-class FunctionDef extends Expression {
+export class FunctionDef extends Expression {
   name: string;
   expression: any;
   parameters?: Parameter;
@@ -56,7 +56,7 @@ class FunctionDef extends Expression {
   }
 }
 
-class FunctionRef extends Expression {
+export class FunctionRef extends Expression {
   name: string;
   library: string;
 
@@ -119,7 +119,7 @@ class FunctionRef extends Expression {
   }
 }
 
-class OperandRef extends Expression {
+export class OperandRef extends Expression {
   name: string;
 
   constructor(json: any) {
@@ -132,7 +132,7 @@ class OperandRef extends Expression {
   }
 }
 
-class IdentifierRef extends Expression {
+export class IdentifierRef extends Expression {
   name: string;
   library: string;
 
@@ -174,5 +174,3 @@ class IdentifierRef extends Expression {
     }
   }
 }
-
-export { ExpressionDef, ExpressionRef, FunctionDef, FunctionRef, IdentifierRef, OperandRef };

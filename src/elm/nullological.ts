@@ -1,7 +1,7 @@
 import { Context } from '../runtime/context';
 import { Expression } from './expression';
 
-class Null extends Expression {
+export class Null extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -11,7 +11,7 @@ class Null extends Expression {
   }
 }
 
-class IsNull extends Expression {
+export class IsNull extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -21,7 +21,7 @@ class IsNull extends Expression {
   }
 }
 
-class Coalesce extends Expression {
+export class Coalesce extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -46,5 +46,3 @@ class Coalesce extends Expression {
     return null;
   }
 }
-
-export { Coalesce, IsNull, Null };

@@ -5,7 +5,7 @@ import { Literal } from './literal';
 import * as DT from '../datatypes/datatypes';
 import { Context } from '../runtime/context';
 
-class DateTime extends Expression {
+export class DateTime extends Expression {
   json: any;
 
   static readonly PROPERTIES = [
@@ -45,7 +45,7 @@ class DateTime extends Expression {
   }
 }
 
-class Date extends Expression {
+export class Date extends Expression {
   json: any;
 
   static readonly PROPERTIES = ['year', 'month', 'day'];
@@ -68,7 +68,7 @@ class Date extends Expression {
   }
 }
 
-class Time extends Expression {
+export class Time extends Expression {
   static readonly PROPERTIES = ['hour', 'minute', 'second', 'millisecond'];
   constructor(json: any) {
     super(json);
@@ -87,7 +87,7 @@ class Time extends Expression {
   }
 }
 
-class Today extends Expression {
+export class Today extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -97,7 +97,7 @@ class Today extends Expression {
   }
 }
 
-class Now extends Expression {
+export class Now extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -107,7 +107,7 @@ class Now extends Expression {
   }
 }
 
-class TimeOfDay extends Expression {
+export class TimeOfDay extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -117,7 +117,7 @@ class TimeOfDay extends Expression {
   }
 }
 
-class DateTimeComponentFrom extends Expression {
+export class DateTimeComponentFrom extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -135,7 +135,7 @@ class DateTimeComponentFrom extends Expression {
   }
 }
 
-class DateFrom extends Expression {
+export class DateFrom extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -150,7 +150,7 @@ class DateFrom extends Expression {
   }
 }
 
-class TimeFrom extends Expression {
+export class TimeFrom extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -165,7 +165,7 @@ class TimeFrom extends Expression {
   }
 }
 
-class TimezoneOffsetFrom extends Expression {
+export class TimezoneOffsetFrom extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -181,16 +181,16 @@ class TimezoneOffsetFrom extends Expression {
 }
 
 // Delegated to by overloaded#After
-function doAfter(a: any, b: any, precision: any) {
+export function doAfter(a: any, b: any, precision: any) {
   return a.after(b, precision);
 }
 
 // Delegated to by overloaded#Before
-function doBefore(a: any, b: any, precision: any) {
+export function doBefore(a: any, b: any, precision: any) {
   return a.before(b, precision);
 }
 
-class DifferenceBetween extends Expression {
+export class DifferenceBetween extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -221,7 +221,7 @@ class DifferenceBetween extends Expression {
   }
 }
 
-class DurationBetween extends Expression {
+export class DurationBetween extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -251,20 +251,3 @@ class DurationBetween extends Expression {
     }
   }
 }
-
-export {
-  Date,
-  DateFrom,
-  DateTime,
-  DateTimeComponentFrom,
-  DifferenceBetween,
-  DurationBetween,
-  Now,
-  Time,
-  TimeFrom,
-  TimeOfDay,
-  TimezoneOffsetFrom,
-  Today,
-  doAfter,
-  doBefore
-};

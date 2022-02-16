@@ -4,7 +4,7 @@ import { typeIsArray, allTrue, Direction } from '../util/util';
 import { equals } from '../util/comparison';
 import { build } from './builder';
 
-class AliasedQuerySource {
+export class AliasedQuerySource {
   alias: any;
   expression: any;
 
@@ -14,7 +14,7 @@ class AliasedQuerySource {
   }
 }
 
-class LetClause {
+export class LetClause {
   identifier: string;
   expression: any;
 
@@ -24,7 +24,7 @@ class LetClause {
   }
 }
 
-class With extends Expression {
+export class With extends Expression {
   alias: any;
   expression: any;
   suchThat: any;
@@ -49,7 +49,7 @@ class With extends Expression {
   }
 }
 
-class Without extends With {
+export class Without extends With {
   constructor(json: any) {
     super(json);
   }
@@ -59,9 +59,9 @@ class Without extends With {
 }
 
 // ELM-only, not a product of CQL
-class Sort extends UnimplementedExpression {}
+export class Sort extends UnimplementedExpression {}
 
-class ByDirection extends Expression {
+export class ByDirection extends Expression {
   direction: Direction;
   low_order: number;
   high_order: number;
@@ -92,7 +92,7 @@ class ByDirection extends Expression {
   }
 }
 
-class ByExpression extends Expression {
+export class ByExpression extends Expression {
   expression: any;
   direction: Direction;
   low_order: number;
@@ -126,7 +126,7 @@ class ByExpression extends Expression {
   }
 }
 
-class ByColumn extends ByExpression {
+export class ByColumn extends ByExpression {
   constructor(json: any) {
     super(json);
     this.expression = build({
@@ -136,7 +136,7 @@ class ByColumn extends ByExpression {
   }
 }
 
-class ReturnClause {
+export class ReturnClause {
   expression: any;
   distinct: boolean;
 
@@ -146,7 +146,7 @@ class ReturnClause {
   }
 }
 
-class SortClause {
+export class SortClause {
   by: any;
 
   constructor(json: any) {
@@ -205,7 +205,7 @@ class AggregateClause extends Expression {
   }
 }
 
-class Query extends Expression {
+export class Query extends Expression {
   sources: MultiSource;
   letClauses: LetClause[];
   relationship: any[];
@@ -281,7 +281,7 @@ class Query extends Expression {
   }
 }
 
-class AliasRef extends Expression {
+export class AliasRef extends Expression {
   name: string;
 
   constructor(json: any) {
@@ -294,7 +294,7 @@ class AliasRef extends Expression {
   }
 }
 
-class QueryLetRef extends AliasRef {
+export class QueryLetRef extends AliasRef {
   constructor(json: any) {
     super(json);
   }
@@ -346,19 +346,3 @@ class MultiSource {
     });
   }
 }
-
-export {
-  AliasedQuerySource,
-  AliasRef,
-  ByColumn,
-  ByDirection,
-  ByExpression,
-  LetClause,
-  Query,
-  QueryLetRef,
-  ReturnClause,
-  Sort,
-  SortClause,
-  With,
-  Without
-};

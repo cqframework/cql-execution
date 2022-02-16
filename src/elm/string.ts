@@ -2,7 +2,7 @@ import { Expression } from './expression';
 import { Context } from '../runtime/context';
 import { build } from './builder';
 
-class Concatenate extends Expression {
+export class Concatenate extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -17,7 +17,7 @@ class Concatenate extends Expression {
   }
 }
 
-class Combine extends Expression {
+export class Combine extends Expression {
   source: any;
   separator: any;
 
@@ -43,7 +43,7 @@ class Combine extends Expression {
   }
 }
 
-class Split extends Expression {
+export class Split extends Expression {
   stringToSplit: any;
   separator: any;
 
@@ -63,7 +63,7 @@ class Split extends Expression {
   }
 }
 
-class SplitOnMatches extends Expression {
+export class SplitOnMatches extends Expression {
   stringToSplit: any;
   separatorPattern: any;
 
@@ -85,7 +85,7 @@ class SplitOnMatches extends Expression {
 
 // Length is completely handled by overloaded#Length
 
-class Upper extends Expression {
+export class Upper extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -100,7 +100,7 @@ class Upper extends Expression {
   }
 }
 
-class Lower extends Expression {
+export class Lower extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -117,7 +117,7 @@ class Lower extends Expression {
 
 // Indexer is completely handled by overloaded#Indexer
 
-class PositionOf extends Expression {
+export class PositionOf extends Expression {
   pattern: any;
   string: any;
 
@@ -138,7 +138,7 @@ class PositionOf extends Expression {
   }
 }
 
-class LastPositionOf extends Expression {
+export class LastPositionOf extends Expression {
   pattern: any;
   string: any;
 
@@ -159,7 +159,7 @@ class LastPositionOf extends Expression {
   }
 }
 
-class Matches extends Expression {
+export class Matches extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -174,7 +174,7 @@ class Matches extends Expression {
   }
 }
 
-class Substring extends Expression {
+export class Substring extends Expression {
   stringToSub: any;
   startIndex: any;
   length: any;
@@ -206,7 +206,7 @@ class Substring extends Expression {
   }
 }
 
-class StartsWith extends Expression {
+export class StartsWith extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -221,7 +221,7 @@ class StartsWith extends Expression {
   }
 }
 
-class EndsWith extends Expression {
+export class EndsWith extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -236,7 +236,7 @@ class EndsWith extends Expression {
   }
 }
 
-class ReplaceMatches extends Expression {
+export class ReplaceMatches extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -250,19 +250,3 @@ class ReplaceMatches extends Expression {
     }
   }
 }
-
-export {
-  Combine,
-  Concatenate,
-  EndsWith,
-  LastPositionOf,
-  Lower,
-  Matches,
-  PositionOf,
-  ReplaceMatches,
-  Split,
-  SplitOnMatches,
-  StartsWith,
-  Substring,
-  Upper
-};

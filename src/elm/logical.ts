@@ -2,7 +2,7 @@ import { Expression } from './expression';
 import { ThreeValuedLogic } from '../datatypes/datatypes';
 import { Context } from '../runtime/context';
 
-class And extends Expression {
+export class And extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -12,7 +12,7 @@ class And extends Expression {
   }
 }
 
-class Or extends Expression {
+export class Or extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -22,7 +22,7 @@ class Or extends Expression {
   }
 }
 
-class Not extends Expression {
+export class Not extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -32,7 +32,7 @@ class Not extends Expression {
   }
 }
 
-class Xor extends Expression {
+export class Xor extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -42,7 +42,7 @@ class Xor extends Expression {
   }
 }
 
-class IsTrue extends Expression {
+export class IsTrue extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -52,7 +52,7 @@ class IsTrue extends Expression {
   }
 }
 
-class IsFalse extends Expression {
+export class IsFalse extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -61,5 +61,3 @@ class IsFalse extends Expression {
     return false === this.execArgs(ctx);
   }
 }
-
-export { And, IsFalse, IsTrue, Not, Or, Xor };

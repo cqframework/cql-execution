@@ -2,7 +2,7 @@ import { Context } from '../runtime/context';
 import { Expression } from './expression';
 import { build } from './builder';
 
-class Message extends Expression {
+export class Message extends Expression {
   source: any;
   condition: any;
   code: any;
@@ -33,5 +33,3 @@ class Message extends Expression {
     return source;
   }
 }
-
-export { Message };

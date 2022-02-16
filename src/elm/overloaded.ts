@@ -9,7 +9,7 @@ import * as LIST from './list';
 import * as IVL from './interval';
 import { Context } from '../runtime/context';
 
-class Equal extends Expression {
+export class Equal extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -24,7 +24,7 @@ class Equal extends Expression {
   }
 }
 
-class Equivalent extends Expression {
+export class Equivalent extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -41,7 +41,7 @@ class Equivalent extends Expression {
   }
 }
 
-class NotEqual extends Expression {
+export class NotEqual extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -56,7 +56,7 @@ class NotEqual extends Expression {
   }
 }
 
-class Union extends Expression {
+export class Union extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -85,7 +85,7 @@ class Union extends Expression {
   }
 }
 
-class Except extends Expression {
+export class Except extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -103,7 +103,7 @@ class Except extends Expression {
   }
 }
 
-class Intersect extends Expression {
+export class Intersect extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -118,7 +118,7 @@ class Intersect extends Expression {
   }
 }
 
-class Indexer extends Expression {
+export class Indexer extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -135,7 +135,7 @@ class Indexer extends Expression {
   }
 }
 
-class In extends Expression {
+export class In extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -156,7 +156,7 @@ class In extends Expression {
   }
 }
 
-class Contains extends Expression {
+export class Contains extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -177,7 +177,7 @@ class Contains extends Expression {
   }
 }
 
-class Includes extends Expression {
+export class Includes extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -195,7 +195,7 @@ class Includes extends Expression {
   }
 }
 
-class IncludedIn extends Expression {
+export class IncludedIn extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -213,7 +213,7 @@ class IncludedIn extends Expression {
   }
 }
 
-class ProperIncludes extends Expression {
+export class ProperIncludes extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -231,7 +231,7 @@ class ProperIncludes extends Expression {
   }
 }
 
-class ProperIncludedIn extends Expression {
+export class ProperIncludedIn extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -249,7 +249,7 @@ class ProperIncludedIn extends Expression {
   }
 }
 
-class Length extends Expression {
+export class Length extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -266,7 +266,7 @@ class Length extends Expression {
   }
 }
 
-class After extends Expression {
+export class After extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -284,7 +284,7 @@ class After extends Expression {
   }
 }
 
-class Before extends Expression {
+export class Before extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -302,7 +302,7 @@ class Before extends Expression {
   }
 }
 
-class SameAs extends Expression {
+export class SameAs extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -320,7 +320,7 @@ class SameAs extends Expression {
   }
 }
 
-class SameOrAfter extends Expression {
+export class SameOrAfter extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -338,7 +338,7 @@ class SameOrAfter extends Expression {
   }
 }
 
-class SameOrBefore extends Expression {
+export class SameOrBefore extends Expression {
   precision?: any;
 
   constructor(json: any) {
@@ -357,7 +357,7 @@ class SameOrBefore extends Expression {
 }
 
 // Implemented for DateTime, Date, and Time but not for Decimal yet
-class Precision extends Expression {
+export class Precision extends Expression {
   constructor(json: any) {
     super(json);
   }
@@ -377,26 +377,3 @@ class Precision extends Expression {
     return arg.getPrecisionValue();
   }
 }
-
-export {
-  After,
-  Before,
-  Contains,
-  Equal,
-  Equivalent,
-  Except,
-  In,
-  IncludedIn,
-  Includes,
-  Indexer,
-  Intersect,
-  Length,
-  NotEqual,
-  Precision,
-  ProperIncludedIn,
-  ProperIncludes,
-  SameAs,
-  SameOrAfter,
-  SameOrBefore,
-  Union
-};

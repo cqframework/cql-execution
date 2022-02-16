@@ -2,7 +2,7 @@ import { Context } from '../runtime/context';
 import { Expression } from './expression';
 import { build } from './builder';
 
-class ParameterDef extends Expression {
+export class ParameterDef extends Expression {
   name: string;
   default: any;
   parameterTypeSpecifier: any;
@@ -29,7 +29,7 @@ class ParameterDef extends Expression {
   }
 }
 
-class ParameterRef extends Expression {
+export class ParameterRef extends Expression {
   name: string;
   library: any;
 
@@ -45,5 +45,3 @@ class ParameterRef extends Expression {
     return param != null ? param.execute(ctx) : undefined;
   }
 }
-
-export { ParameterDef, ParameterRef };

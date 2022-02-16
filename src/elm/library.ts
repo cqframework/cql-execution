@@ -9,7 +9,7 @@ import {
   ConceptDef
 } from './expressions';
 
-class Library {
+export class Library {
   source: any;
   usings: any;
   parameters: Parameter;
@@ -128,5 +128,3 @@ class Library {
     return this.parameters[name];
   }
 }
-
-export { Library };

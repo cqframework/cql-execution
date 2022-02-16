@@ -2,7 +2,7 @@
 import * as E from './expressions';
 import { typeIsArray } from '../util/util';
 
-function build(json: any): any {
+export function build(json: any): any {
   if (json == null) {
     return json;
   }
@@ -31,5 +31,3 @@ function constructByName(name: string, json: any) {
   // @ts-ignore
   return new E[name](json);
 }
-
-export { build };
