@@ -86,6 +86,7 @@ export class DateTime {
   timezoneOffset: number | null;
 
   // prototype functions defined later
+  // TODO: we should think about re-working this prototype structure to use proper inheritance
   isPrecise: any;
   isImprecise: any;
   isMorePrecise: any;
@@ -549,6 +550,7 @@ export class DateTime {
 
 export class Date {
   // prototype functions defined later
+  // TODO: we should think about re-working this prototype structure to use proper inheritance
   isPrecise: any;
   isImprecise: any;
   isMorePrecise: any;
@@ -809,6 +811,7 @@ const TIME_PRECISION_VALUE_MAP = (() => {
 })();
 
 // Shared Funtions For Date and DateTime
+// TODO: we should think about re-working this prototype structure to use proper inheritance
 DateTime.prototype.isPrecise = Date.prototype.isPrecise = function () {
   // @ts-ignore
   return this.constructor.FIELDS.every(field => this[field] != null);

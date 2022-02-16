@@ -1180,6 +1180,7 @@ var TIME_PRECISION_VALUE_MAP = (function () {
     return tpvMap;
 })();
 // Shared Funtions For Date and DateTime
+// TODO: we should think about re-working this prototype structure to use proper inheritance
 DateTime.prototype.isPrecise = Date.prototype.isPrecise = function () {
     var _this = this;
     // @ts-ignore
