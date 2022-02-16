@@ -21,9 +21,9 @@ export class CodeService implements TerminologyProvider {
     return this.valueSets[oid] ? Object.values(this.valueSets[oid]) : [];
   }
 
-  findValueSet(oid: string, version?: string): ValueSet | null | undefined {
+  findValueSet(oid: string, version?: string): ValueSet | null {
     if (version != null) {
-      return this.valueSets[oid] != null ? this.valueSets[oid][version] : undefined;
+      return this.valueSets[oid] != null ? this.valueSets[oid][version] : null;
     } else {
       const results = this.findValueSetsByOid(oid);
       if (results.length === 0) {
