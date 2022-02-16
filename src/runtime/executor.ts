@@ -2,7 +2,7 @@ import { MessageListener, NullMessageListener } from './messageListeners';
 import { Results } from './results';
 import { UnfilteredContext, PatientContext } from './context';
 import { DateTime } from '../datatypes/datetime';
-import { Parameter } from '../types/runtime-types';
+import { Parameter } from '../types/runtime.types';
 import { DataProvider, TerminologyProvider } from '../types';
 
 export class Executor {

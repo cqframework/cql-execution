@@ -1,4 +1,4 @@
-import { Parameter } from '../types/runtime-types';
+import { Parameter } from '../types/runtime.types';
 import {
   ExpressionDef,
   FunctionDef,

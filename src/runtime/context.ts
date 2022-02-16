@@ -3,7 +3,7 @@ import { typeIsArray } from '../util/util';
 import * as dt from '../datatypes/datatypes';
 import { MessageListener, NullMessageListener } from './messageListeners';
 import { Patient } from '../cql-patient';
-import { Parameter } from '../types/runtime-types';
+import { Parameter } from '../types/runtime.types';
 import { TerminologyProvider } from '../types';
 
 export class Context {

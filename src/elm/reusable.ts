@@ -1,7 +1,7 @@
 import { Context } from '../runtime/context';
 import { Expression } from './expression';
 import { build } from './builder';
-import { Parameter } from '../types/runtime-types';
+import { Parameter } from '../types/runtime.types';
 
 export class ExpressionDef extends Expression {
   name: string;
