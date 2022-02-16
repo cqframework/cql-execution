@@ -59,7 +59,7 @@ var CodeService = /** @class */ (function () {
     };
     CodeService.prototype.findValueSet = function (oid, version) {
         if (version != null) {
-            return this.valueSets[oid] != null ? this.valueSets[oid][version] : undefined;
+            return this.valueSets[oid] != null ? this.valueSets[oid][version] : null;
         }
         else {
             var results = this.findValueSetsByOid(oid);
@@ -9567,11 +9567,11 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./runtime-types"), exports);
+__exportStar(require("./runtime.types"), exports);
 __exportStar(require("./cql-code-service.interfaces"), exports);
 __exportStar(require("./cql-patient.interfaces"), exports);
 
-},{"./cql-code-service.interfaces":47,"./cql-patient.interfaces":48,"./runtime-types":50}],50:[function(require,module,exports){
+},{"./cql-code-service.interfaces":47,"./cql-patient.interfaces":48,"./runtime.types":50}],50:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 
