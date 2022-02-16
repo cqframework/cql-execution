@@ -9,9 +9,6 @@ export class Ratio {
     if (denominator == null) {
       throw new Error('Cannot create a ratio with an undefined denominator');
     }
-
-    this.numerator = numerator;
-    this.denominator = denominator;
   }
 
   get isRatio() {

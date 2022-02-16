@@ -17,14 +17,10 @@ export class Interval {
     public high: any,
     public lowClosed?: boolean | null,
     public highClosed?: boolean | null,
-    public defaultPointType?: any
+    public defaultPointType?: any // defaultPointType is used in the case that both endpoints are null
   ) {
-    this.low = low;
-    this.high = high;
     this.lowClosed = lowClosed != null ? lowClosed : true;
     this.highClosed = highClosed != null ? highClosed : true;
-    // defaultPointType is used in the case that both endpoints are null
-    this.defaultPointType = defaultPointType;
   }
 
   get isInterval() {

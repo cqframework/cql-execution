@@ -10,8 +10,6 @@ import {
 
 export class Quantity {
   constructor(public value: any, public unit?: any) {
-    this.value = value;
-    this.unit = unit;
     if (this.value == null || isNaN(this.value)) {
       throw new Error('Cannot create a quantity with an undefined value');
     } else if (!isValidDecimal(this.value)) {

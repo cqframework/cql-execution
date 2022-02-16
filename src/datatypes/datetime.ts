@@ -597,11 +597,7 @@ class Date {
     public year: number | null = null,
     public month: number | null = null,
     public day: number | null = null
-  ) {
-    this.year = year;
-    this.month = month;
-    this.day = day;
-  }
+  ) {}
 
   get isDate() {
     return true;

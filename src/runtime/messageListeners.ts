@@ -5,9 +5,7 @@ export class NullMessageListener {
 }
 
 export class ConsoleMessageListener {
-  constructor(public logSourceOnTrace = false) {
-    this.logSourceOnTrace = logSourceOnTrace;
-  }
+  constructor(public logSourceOnTrace = false) {}
 
   onMessage(source: any, code: any, severity: string, message: string) {
     // eslint-disable-next-line no-console

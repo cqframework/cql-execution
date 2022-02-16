@@ -343,10 +343,6 @@ var Code = /** @class */ (function () {
         this.system = system;
         this.version = version;
         this.display = display;
-        this.code = code;
-        this.system = system;
-        this.version = version;
-        this.display = display;
     }
     Object.defineProperty(Code.prototype, "isCode", {
         get: function () {
@@ -372,8 +368,6 @@ var Concept = /** @class */ (function () {
         if (codes === void 0) { codes = []; }
         this.codes = codes;
         this.display = display;
-        this.codes = codes;
-        this.display = display;
     }
     Object.defineProperty(Concept.prototype, "isConcept", {
         get: function () {
@@ -391,9 +385,6 @@ exports.Concept = Concept;
 var ValueSet = /** @class */ (function () {
     function ValueSet(oid, version, codes) {
         if (codes === void 0) { codes = []; }
-        this.oid = oid;
-        this.version = version;
-        this.codes = codes;
         this.oid = oid;
         this.version = version;
         this.codes = codes;
@@ -473,8 +464,6 @@ function codesMatch(code1, code2) {
 }
 var CodeSystem = /** @class */ (function () {
     function CodeSystem(id, version) {
-        this.id = id;
-        this.version = version;
         this.id = id;
         this.version = version;
     }
@@ -969,9 +958,6 @@ var Date = /** @class */ (function () {
         if (year === void 0) { year = null; }
         if (month === void 0) { month = null; }
         if (day === void 0) { day = null; }
-        this.year = year;
-        this.month = month;
-        this.day = day;
         this.year = year;
         this.month = month;
         this.day = day;
@@ -1702,8 +1688,6 @@ var Exception = /** @class */ (function () {
     function Exception(message, wrapped) {
         this.message = message;
         this.wrapped = wrapped;
-        this.message = message;
-        this.wrapped = wrapped;
     }
     return Exception;
 }());
@@ -1738,18 +1722,15 @@ var logic_1 = require("./logic");
 var math_1 = require("../util/math");
 var cmp = __importStar(require("../util/comparison"));
 var Interval = /** @class */ (function () {
-    function Interval(low, high, lowClosed, highClosed, defaultPointType) {
+    function Interval(low, high, lowClosed, highClosed, defaultPointType // defaultPointType is used in the case that both endpoints are null
+    ) {
         this.low = low;
         this.high = high;
         this.lowClosed = lowClosed;
         this.highClosed = highClosed;
         this.defaultPointType = defaultPointType;
-        this.low = low;
-        this.high = high;
         this.lowClosed = lowClosed != null ? lowClosed : true;
         this.highClosed = highClosed != null ? highClosed : true;
-        // defaultPointType is used in the case that both endpoints are null
-        this.defaultPointType = defaultPointType;
     }
     Object.defineProperty(Interval.prototype, "isInterval", {
         get: function () {
@@ -2438,8 +2419,6 @@ var Quantity = /** @class */ (function () {
     function Quantity(value, unit) {
         this.value = value;
         this.unit = unit;
-        this.value = value;
-        this.unit = unit;
         if (this.value == null || isNaN(this.value)) {
             throw new Error('Cannot create a quantity with an undefined value');
         }
@@ -2653,8 +2632,6 @@ var Ratio = /** @class */ (function () {
         if (denominator == null) {
             throw new Error('Cannot create a ratio with an undefined denominator');
         }
-        this.numerator = numerator;
-        this.denominator = denominator;
     }
     Object.defineProperty(Ratio.prototype, "isRatio", {
         get: function () {
@@ -2696,8 +2673,6 @@ var Uncertainty = /** @class */ (function () {
     function Uncertainty(low, high) {
         var _a;
         if (low === void 0) { low = null; }
-        this.low = low;
-        this.high = high;
         this.low = low;
         this.high = high;
         var gt = function (a, b) {
@@ -9323,8 +9298,6 @@ var PatientContext = /** @class */ (function (_super) {
         var _this = _super.call(this, library, codeService, parameters, executionDateTime, messageListener) || this;
         _this.library = library;
         _this.patient = patient;
-        _this.library = library;
-        _this.patient = patient;
         return _this;
     }
     PatientContext.prototype.rootContext = function () {
@@ -9354,8 +9327,6 @@ var UnfilteredContext = /** @class */ (function (_super) {
         if (executionDateTime === void 0) { executionDateTime = dt.DateTime.fromJSDate(new Date()); }
         if (messageListener === void 0) { messageListener = new messageListeners_1.NullMessageListener(); }
         var _this = _super.call(this, library, codeService, parameters, executionDateTime, messageListener) || this;
-        _this.library = library;
-        _this.results = results;
         _this.library = library;
         _this.results = results;
         return _this;
@@ -9396,10 +9367,6 @@ var context_1 = require("./context");
 var Executor = /** @class */ (function () {
     function Executor(library, codeService, parameters, messageListener) {
         if (messageListener === void 0) { messageListener = new messageListeners_1.NullMessageListener(); }
-        this.library = library;
-        this.codeService = codeService;
-        this.parameters = parameters;
-        this.messageListener = messageListener;
         this.library = library;
         this.codeService = codeService;
         this.parameters = parameters;
@@ -9483,7 +9450,6 @@ exports.NullMessageListener = NullMessageListener;
 var ConsoleMessageListener = /** @class */ (function () {
     function ConsoleMessageListener(logSourceOnTrace) {
         if (logSourceOnTrace === void 0) { logSourceOnTrace = false; }
-        this.logSourceOnTrace = logSourceOnTrace;
         this.logSourceOnTrace = logSourceOnTrace;
     }
     ConsoleMessageListener.prototype.onMessage = function (source, code, severity, message) {

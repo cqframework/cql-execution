@@ -6,12 +6,7 @@ export class Code {
     public system?: string,
     public version?: string,
     public display?: string
-  ) {
-    this.code = code;
-    this.system = system;
-    this.version = version;
-    this.display = display;
-  }
+  ) {}
 
   get isCode() {
     return true;
@@ -28,10 +23,7 @@ export class Code {
 }
 
 export class Concept {
-  constructor(public codes: any[] = [], public display?: string) {
-    this.codes = codes;
-    this.display = display;
-  }
+  constructor(public codes: any[] = [], public display?: string) {}
 
   get isConcept() {
     return true;
@@ -43,11 +35,7 @@ export class Concept {
 }
 
 export class ValueSet {
-  constructor(public oid: string, public version?: string, public codes: any[] = []) {
-    this.oid = oid;
-    this.version = version;
-    this.codes = codes;
-  }
+  constructor(public oid: string, public version?: string, public codes: any[] = []) {}
 
   get isValueSet() {
     return true;
@@ -117,8 +105,5 @@ function codesMatch(code1: Code, code2: Code) {
 }
 
 export class CodeSystem {
-  constructor(public id: string, public version?: string) {
-    this.id = id;
-    this.version = version;
-  }
+  constructor(public id: string, public version?: string) {}
 }

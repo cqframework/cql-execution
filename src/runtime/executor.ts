@@ -11,12 +11,7 @@ export class Executor {
     public codeService?: TerminologyProvider,
     public parameters?: Parameter,
     public messageListener: MessageListener = new NullMessageListener()
-  ) {
-    this.library = library;
-    this.codeService = codeService;
-    this.parameters = parameters;
-    this.messageListener = messageListener;
-  }
+  ) {}
 
   withLibrary(lib: any) {
     this.library = lib;

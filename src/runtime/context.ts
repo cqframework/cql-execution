@@ -429,8 +429,6 @@ export class PatientContext extends Context {
     messageListener: MessageListener = new NullMessageListener()
   ) {
     super(library, codeService, parameters, executionDateTime, messageListener);
-    this.library = library;
-    this.patient = patient;
   }
 
   rootContext() {
@@ -478,8 +476,6 @@ export class UnfilteredContext extends Context {
     messageListener: MessageListener = new NullMessageListener()
   ) {
     super(library, codeService, parameters, executionDateTime, messageListener);
-    this.library = library;
-    this.results = results;
   }
 
   rootContext() {
