@@ -1,7 +1,7 @@
 import * as DT from './datatypes/datatypes';
-import { RecordObject, DataProvider } from './types';
+import { DataProvider, PatientObject, RecordObject } from './types';
 
-export class Record {
+export class Record implements RecordObject {
   json: any;
   id: string;
 
@@ -94,11 +94,11 @@ export class Record {
   }
 }
 
-export class Patient extends Record {
+export class Patient extends Record implements PatientObject {
   name?: string;
   gender?: string;
   birthDate?: DT.DateTime | null;
-  records: RecordObject;
+  records: { [recordType: string]: Record[] };
 
   constructor(json: any) {
     super(json);

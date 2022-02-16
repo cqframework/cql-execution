@@ -8,9 +8,9 @@ import { TerminologyProvider } from '../types';
 
 export class Context {
   // Public Construcor args
-  public parent: any;
-  public executionDateTime?: dt.DateTime;
-  public messageListener?: MessageListener;
+  parent: any;
+  executionDateTime?: dt.DateTime;
+  messageListener?: MessageListener;
 
   // Private Construcor args
   private _codeService?: TerminologyProvider | null;
