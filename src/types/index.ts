@@ -1,3 +1,3 @@
 export * from './runtime-types';
-export * from './cql-code-service-types';
-export * from './cql-patient-types';
+export * from './cql-code-service.interfaces';
+export * from './cql-patient.interfaces';

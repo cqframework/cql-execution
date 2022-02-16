@@ -1,10 +1,10 @@
 import { Exception } from '../datatypes/exception';
 import { typeIsArray } from '../util/util';
 import * as dt from '../datatypes/datatypes';
-import { CodeService } from '../cql-code-service';
 import { MessageListener, NullMessageListener } from './messageListeners';
 import { Patient } from '../cql-patient';
 import { Parameter } from '../types/runtime-types';
+import { TerminologyProvider } from '../types';
 
 export class Context {
   // Public Construcor args
@@ -13,7 +13,7 @@ export class Context {
   public messageListener?: MessageListener;
 
   // Private Construcor args
-  private _codeService?: CodeService | null;
+  private _codeService?: TerminologyProvider | null;
   private _parameters?: Parameter;
 
   // Auto-initialized properties
@@ -24,7 +24,7 @@ export class Context {
 
   constructor(
     parent: Context,
-    _codeService?: CodeService | null,
+    _codeService?: TerminologyProvider | null,
     _parameters?: Parameter,
     executionDateTime?: dt.DateTime,
     messageListener?: MessageListener
@@ -51,7 +51,7 @@ export class Context {
     this._parameters = params;
   }
 
-  get codeService(): CodeService {
+  get codeService(): TerminologyProvider {
     return this._codeService || (this.parent && this.parent.codeService);
   }
 
@@ -64,7 +64,7 @@ export class Context {
     return this;
   }
 
-  withCodeService(cs: CodeService) {
+  withCodeService(cs: TerminologyProvider) {
     this.codeService = cs;
     return this;
   }
@@ -423,7 +423,7 @@ export class PatientContext extends Context {
   constructor(
     public library: any,
     public patient?: Patient | null,
-    codeService?: CodeService | null,
+    codeService?: TerminologyProvider | null,
     parameters?: Parameter,
     executionDateTime: dt.DateTime = dt.DateTime.fromJSDate(new Date()),
     messageListener: MessageListener = new NullMessageListener()
@@ -472,7 +472,7 @@ export class UnfilteredContext extends Context {
   constructor(
     public library: any,
     public results: any,
-    codeService?: CodeService | null,
+    codeService?: TerminologyProvider | null,
     parameters?: Parameter,
     executionDateTime: dt.DateTime = dt.DateTime.fromJSDate(new Date()),
     messageListener: MessageListener = new NullMessageListener()

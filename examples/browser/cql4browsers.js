@@ -9607,10 +9607,10 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./runtime-types"), exports);
-__exportStar(require("./cql-code-service-types"), exports);
-__exportStar(require("./cql-patient-types"), exports);
+__exportStar(require("./cql-code-service.interfaces"), exports);
+__exportStar(require("./cql-patient.interfaces"), exports);
 
-},{"./cql-code-service-types":47,"./cql-patient-types":48,"./runtime-types":50}],50:[function(require,module,exports){
+},{"./cql-code-service.interfaces":47,"./cql-patient.interfaces":48,"./runtime-types":50}],50:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 

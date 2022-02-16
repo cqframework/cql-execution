@@ -1,14 +1,14 @@
 import { MessageListener, NullMessageListener } from './messageListeners';
 import { Results } from './results';
 import { UnfilteredContext, PatientContext } from './context';
-import { CodeService } from '../cql-code-service';
 import { DateTime } from '../datatypes/datetime';
 import { Parameter } from '../types/runtime-types';
+import { DataProvider, TerminologyProvider } from '../types';
 
 export class Executor {
   constructor(
     public library: any,
-    public codeService?: CodeService,
+    public codeService?: TerminologyProvider,
     public parameters?: Parameter,
     public messageListener: MessageListener = new NullMessageListener()
   ) {
@@ -28,7 +28,7 @@ export class Executor {
     return this;
   }
 
-  withCodeService(cs: CodeService) {
+  withCodeService(cs: TerminologyProvider) {
     this.codeService = cs;
     return this;
   }
@@ -38,7 +38,7 @@ export class Executor {
     return this;
   }
 
-  exec_expression(expression: any, patientSource: any, executionDateTime: DateTime) {
+  exec_expression(expression: any, patientSource: DataProvider, executionDateTime: DateTime) {
     const r = new Results();
     const expr = this.library.expressions[expression];
     if (expr != null) {
@@ -58,7 +58,7 @@ export class Executor {
     return r;
   }
 
-  exec(patientSource: any, executionDateTime?: DateTime) {
+  exec(patientSource: DataProvider, executionDateTime?: DateTime) {
     const r = this.exec_patient_context(patientSource, executionDateTime);
     const unfilteredContext = new UnfilteredContext(
       this.library,
@@ -79,7 +79,7 @@ export class Executor {
     return r;
   }
 
-  exec_patient_context(patientSource: any, executionDateTime?: DateTime) {
+  exec_patient_context(patientSource: DataProvider, executionDateTime?: DateTime) {
     const r = new Results();
     while (patientSource.currentPatient()) {
       const patient_ctx = new PatientContext(
