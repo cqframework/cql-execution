@@ -78,9 +78,7 @@ export function convertUnit(fromVal: any, fromUnit: any, toUnit: any, adjustPrec
 
 export function normalizeUnitsWhenPossible(val1: any, unit1: any, val2: any, unit2: any) {
   // If both units are CQL date units, return CQL date units
-  const useCQLDateUnits =
-    CQL_TO_UCUM_DATE_UNITS[unit1 as CQLUnitKey] != null &&
-    CQL_TO_UCUM_DATE_UNITS[unit2 as CQLUnitKey] != null;
+  const useCQLDateUnits = unit1 in CQL_TO_UCUM_DATE_UNITS && unit2 in CQL_TO_UCUM_DATE_UNITS;
   const resultConverter = (unit: any) => {
     return useCQLDateUnits ? convertToCQLDateUnit(unit) : unit;
   };
@@ -110,11 +108,14 @@ export function normalizeUnitsWhenPossible(val1: any, unit1: any, val2: any, uni
 }
 
 export function convertToCQLDateUnit(unit: any) {
-  if (CQL_TO_UCUM_DATE_UNITS[unit as CQLUnitKey]) {
+  let dateUnit;
+  if (unit in CQL_TO_UCUM_DATE_UNITS) {
     // it's already a CQL unit, so return it as-is, removing trailing 's' if necessary (e.g., years -> year)
-    return unit.replace(/s$/, '');
+    dateUnit = unit.replace(/s$/, '');
+  } else if (unit in UCUM_TO_CQL_DATE_UNITS) {
+    dateUnit = UCUM_TO_CQL_DATE_UNITS[unit as UCUMUnitKey];
   }
-  return UCUM_TO_CQL_DATE_UNITS[unit as UCUMUnitKey];
+  return dateUnit;
 }
 
 export function compareUnits(unit1: any, unit2: any) {

@@ -10329,8 +10329,7 @@ exports.convertUnit = convertUnit;
 function normalizeUnitsWhenPossible(val1, unit1, val2, unit2) {
     var _a;
     // If both units are CQL date units, return CQL date units
-    var useCQLDateUnits = CQL_TO_UCUM_DATE_UNITS[unit1] != null &&
-        CQL_TO_UCUM_DATE_UNITS[unit2] != null;
+    var useCQLDateUnits = unit1 in CQL_TO_UCUM_DATE_UNITS && unit2 in CQL_TO_UCUM_DATE_UNITS;
     var resultConverter = function (unit) {
         return useCQLDateUnits ? convertToCQLDateUnit(unit) : unit;
     };
@@ -10359,11 +10358,15 @@ function normalizeUnitsWhenPossible(val1, unit1, val2, unit2) {
 }
 exports.normalizeUnitsWhenPossible = normalizeUnitsWhenPossible;
 function convertToCQLDateUnit(unit) {
-    if (CQL_TO_UCUM_DATE_UNITS[unit]) {
+    var dateUnit;
+    if (unit in CQL_TO_UCUM_DATE_UNITS) {
         // it's already a CQL unit, so return it as-is, removing trailing 's' if necessary (e.g., years -> year)
-        return unit.replace(/s$/, '');
+        dateUnit = unit.replace(/s$/, '');
     }
-    return UCUM_TO_CQL_DATE_UNITS[unit];
+    else if (unit in UCUM_TO_CQL_DATE_UNITS) {
+        dateUnit = UCUM_TO_CQL_DATE_UNITS[unit];
+    }
+    return dateUnit;
 }
 exports.convertToCQLDateUnit = convertToCQLDateUnit;
 function compareUnits(unit1, unit2) {
