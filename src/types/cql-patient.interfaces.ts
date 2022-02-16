@@ -2,7 +2,6 @@
  * Iterator for the patients provided to the execution engine
  */
 export interface DataProvider {
-  patients: any[];
   currentPatient(): any;
   nextPatient(): any;
 }
