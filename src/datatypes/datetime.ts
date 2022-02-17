@@ -75,33 +75,469 @@ function truncateLuxonDateTime(luxonDT: LuxonDateTime, unit: DateTimeUnit) {
   return luxonDT.startOf(unit);
 }
 
-export class DateTime {
-  year: number | null;
-  month: number | null;
-  day: number | null;
+/*
+ * Base class for Date and DateTime to extend from
+ * Implements shared functions by both classes
+ * TODO: we can probably iterate on this more to improve the accessing of "FIELDS" and the overall structure
+ * TODO: we can also investigate if it's reasonable for DateTime to extend Date directly instead
+ */
+abstract class AbstractDate {
+  constructor(
+    public year: number | null = null,
+    public month: number | null = null,
+    public day: number | null = null
+  ) {}
+
+  // Implemented by subclasses
+  abstract getPrecision(): string | null;
+  abstract getDateTime(): DateTime;
+  abstract copy(): AbstractDate;
+  abstract toLuxonDateTime(): LuxonDateTime;
+  abstract isDate: boolean;
+  abstract isDateTime: boolean;
+
+  // Shared functions
+  isPrecise() {
+    // @ts-ignore
+    return this.constructor.FIELDS.every(field => this[field] != null);
+  }
+
+  isImprecise() {
+    return !this.isPrecise();
+  }
+
+  isMorePrecise(other: any) {
+    // @ts-ignore
+    if (typeof other === 'string' && this.constructor.FIELDS.includes(other)) {
+      // @ts-ignore
+      if (this[other] == null) {
+        return false;
+      }
+    } else {
+      // @ts-ignore
+      for (const field of this.constructor.FIELDS) {
+        // @ts-ignore
+        if (other[field] != null && this[field] == null) {
+          return false;
+        }
+      }
+    }
+
+    return !this.isSamePrecision(other);
+  }
+  // This function can take another Date-ish object, or a precision string (e.g. 'month')
+  isLessPrecise(other: any) {
+    return !this.isSamePrecision(other) && !this.isMorePrecise(other);
+  }
+
+  // This function can take another Date-ish object, or a precision string (e.g. 'month')
+  isSamePrecision(other: any) {
+    // @ts-ignore
+    if (typeof other === 'string' && this.constructor.FIELDS.includes(other)) {
+      return other === this.getPrecision();
+    }
+
+    // @ts-ignore
+    for (const field of this.constructor.FIELDS) {
+      // @ts-ignore
+      if (this[field] != null && other[field] == null) {
+        return false;
+      }
+      // @ts-ignore
+      if (this[field] == null && other[field] != null) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  equals(other: any) {
+    return compareWithDefaultResult(this, other, null);
+  }
+
+  equivalent(other: any) {
+    return compareWithDefaultResult(this, other, false);
+  }
+
+  sameAs(other: any, precision?: any): boolean | null {
+    if (!(other.isDate || other.isDateTime)) {
+      return null;
+    } else if (this.isDate && other.isDateTime) {
+      return this.getDateTime().sameAs(other, precision);
+    } else if ((this as any).isDateTime && other.isDate) {
+      other = other.getDateTime();
+    }
+
+    // @ts-ignore
+    if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
+      throw new Error(`Invalid precision: ${precision}`);
+    }
+
+    // make a copy of other in the correct timezone offset if they don't match.
+    if ((this as any).timezoneOffset !== other.timezoneOffset) {
+      other = other.convertToTimezoneOffset((this as any).timezoneOffset);
+    }
+
+    // @ts-ignore
+    for (const field of this.constructor.FIELDS) {
+      // if both have this precision defined
+      // @ts-ignore
+      if (this[field] != null && other[field] != null) {
+        // if they are different then return with false
+        // @ts-ignore
+        if (this[field] !== other[field]) {
+          return false;
+        }
+
+        // if both dont have this precision, return true of precision is not defined
+        // @ts-ignore
+      } else if (this[field] == null && other[field] == null) {
+        if (precision == null) {
+          return true;
+        } else {
+          // we havent met precision yet
+          return null;
+        }
+
+        // otherwise they have inconclusive precision, return null
+      } else {
+        return null;
+      }
+
+      // if precision is defined and we have reached expected precision, we can leave the loop
+      if (precision != null && precision === field) {
+        break;
+      }
+    }
+
+    // if we made it here, then all fields matched.
+    return true;
+  }
+
+  sameOrBefore(other: any, precision?: any): boolean | null {
+    if (!(other.isDate || other.isDateTime)) {
+      return null;
+    } else if (this.isDate && other.isDateTime) {
+      return this.getDateTime().sameOrBefore(other, precision);
+    } else if ((this as any).isDateTime && other.isDate) {
+      other = other.getDateTime();
+    }
+
+    // @ts-ignore
+    if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
+      throw new Error(`Invalid precision: ${precision}`);
+    }
+
+    // make a copy of other in the correct timezone offset if they don't match.
+    if ((this as any).timezoneOffset !== other.timezoneOffset) {
+      other = other.convertToTimezoneOffset((this as any).timezoneOffset);
+    }
+
+    // @ts-ignore
+    for (const field of this.constructor.FIELDS) {
+      // if both have this precision defined
+      // @ts-ignore
+      if (this[field] != null && other[field] != null) {
+        // if this value is less than the other return with true. this is before other
+        // @ts-ignore
+        if (this[field] < other[field]) {
+          return true;
+          // if this value is greater than the other return with false. this is after
+          // @ts-ignore
+        } else if (this[field] > other[field]) {
+          return false;
+        }
+        // execution continues if the values are the same
+
+        // if both dont have this precision, return true if precision is not defined
+        // @ts-ignore
+      } else if (this[field] == null && other[field] == null) {
+        if (precision == null) {
+          return true;
+        } else {
+          // we havent met precision yet
+          return null;
+        }
+
+        // otherwise they have inconclusive precision, return null
+      } else {
+        return null;
+      }
+
+      // if precision is defined and we have reached expected precision, we can leave the loop
+      if (precision != null && precision === field) {
+        break;
+      }
+    }
+
+    // if we made it here, then all fields matched and they are same
+    return true;
+  }
+
+  sameOrAfter(other: any, precision?: any): boolean | null {
+    if (!(other.isDate || other.isDateTime)) {
+      return null;
+    } else if (this.isDate && other.isDateTime) {
+      return this.getDateTime().sameOrAfter(other, precision);
+    } else if ((this as any).isDateTime && other.isDate) {
+      other = other.getDateTime();
+    }
+
+    // @ts-ignore
+    if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
+      throw new Error(`Invalid precision: ${precision}`);
+    }
+
+    // make a copy of other in the correct timezone offset if they don't match.
+    if ((this as any).timezoneOffset !== other.timezoneOffset) {
+      other = other.convertToTimezoneOffset((this as any).timezoneOffset);
+    }
+
+    // @ts-ignore
+    for (const field of this.constructor.FIELDS) {
+      // if both have this precision defined
+      // @ts-ignore
+      if (this[field] != null && other[field] != null) {
+        // if this value is greater than the other return with true. this is after other
+        // @ts-ignore
+        if (this[field] > other[field]) {
+          return true;
+          // if this value is greater than the other return with false. this is before
+          // @ts-ignore
+        } else if (this[field] < other[field]) {
+          return false;
+        }
+        // execution continues if the values are the same
+
+        // if both dont have this precision, return true if precision is not defined
+        // @ts-ignore
+      } else if (this[field] == null && other[field] == null) {
+        if (precision == null) {
+          return true;
+        } else {
+          // we havent met precision yet
+          return null;
+        }
+
+        // otherwise they have inconclusive precision, return null
+      } else {
+        return null;
+      }
+
+      // if precision is defined and we have reached expected precision, we can leave the loop
+      if (precision != null && precision === field) {
+        break;
+      }
+    }
+
+    // if we made it here, then all fields matched and they are same
+    return true;
+  }
+
+  before(other: any, precision?: any): boolean | null {
+    if (!(other.isDate || other.isDateTime)) {
+      return null;
+    } else if (this.isDate && other.isDateTime) {
+      return this.getDateTime().before(other, precision);
+    } else if ((this as any).isDateTime && other.isDate) {
+      other = other.getDateTime();
+    }
+
+    // @ts-ignore
+    if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
+      throw new Error(`Invalid precision: ${precision}`);
+    }
+
+    // make a copy of other in the correct timezone offset if they don't match.
+    if ((this as any).timezoneOffset !== other.timezoneOffset) {
+      other = other.convertToTimezoneOffset((this as any).timezoneOffset);
+    }
+
+    // @ts-ignore
+    for (const field of this.constructor.FIELDS) {
+      // if both have this precision defined
+      // @ts-ignore
+      if (this[field] != null && other[field] != null) {
+        // if this value is less than the other return with true. this is before other
+        // @ts-ignore
+        if (this[field] < other[field]) {
+          return true;
+          // if this value is greater than the other return with false. this is after
+          // @ts-ignore
+        } else if (this[field] > other[field]) {
+          return false;
+        }
+        // execution continues if the values are the same
+
+        // if both dont have this precision, return false if precision is not defined
+        // @ts-ignore
+      } else if (this[field] == null && other[field] == null) {
+        if (precision == null) {
+          return false;
+        } else {
+          // we havent met precision yet
+          return null;
+        }
+
+        // otherwise they have inconclusive precision, return null
+      } else {
+        return null;
+      }
+
+      // if precision is defined and we have reached expected precision, we can leave the loop
+      if (precision != null && precision === field) {
+        break;
+      }
+    }
+
+    // if we made it here, then all fields matched and they are same
+    return false;
+  }
+
+  after(other: any, precision?: any): boolean | null {
+    if (!(other.isDate || other.isDateTime)) {
+      return null;
+    } else if (this.isDate && other.isDateTime) {
+      return this.getDateTime().after(other, precision);
+    } else if ((this as any).isDateTime && other.isDate) {
+      other = other.getDateTime();
+    }
+
+    // @ts-ignore
+    if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
+      throw new Error(`Invalid precision: ${precision}`);
+    }
+
+    // make a copy of other in the correct timezone offset if they don't match.
+    if ((this as any).timezoneOffset !== other.timezoneOffset) {
+      other = other.convertToTimezoneOffset((this as any).timezoneOffset);
+    }
+
+    // @ts-ignore
+    for (const field of this.constructor.FIELDS) {
+      // if both have this precision defined
+      // @ts-ignore
+      if (this[field] != null && other[field] != null) {
+        // if this value is greater than the other return with true. this is after other
+        // @ts-ignore
+        if (this[field] > other[field]) {
+          return true;
+          // if this value is greater than the other return with false. this is before
+          // @ts-ignore
+        } else if (this[field] < other[field]) {
+          return false;
+        }
+        // execution continues if the values are the same
+
+        // if both dont have this precision, return false if precision is not defined
+        // @ts-ignore
+      } else if (this[field] == null && other[field] == null) {
+        if (precision == null) {
+          return false;
+        } else {
+          // we havent met precision yet
+          return null;
+        }
+
+        // otherwise they have inconclusive precision, return null
+      } else {
+        return null;
+      }
+
+      // if precision is defined and we have reached expected precision, we can leave the loop
+      if (precision != null && precision === field) {
+        break;
+      }
+    }
+
+    // if we made it here, then all fields matched and they are same
+    return false;
+  }
+
+  add(offset: any, field: any) {
+    if (offset === 0 || this.year == null) {
+      return this.copy();
+    }
+
+    // Use luxon to do the date math because it honors DST and it has the leap-year/end-of-month semantics we want.
+    // NOTE: The luxonDateTime will contain default values where this[unit] is null, but we'll account for that.
+    let luxonDateTime = this.toLuxonDateTime();
+
+    // From the spec: "The operation is performed by converting the time-based quantity to the most precise value
+    // specified in the date/time (truncating any resulting decimal portion) and then adding it to the date/time value."
+    // However, since you can't really convert days to months,  if "this" is less precise than the field being added, we can
+    // add to the earliest possible value of "this" or subtract from the latest possible value of "this" (depending on the
+    // sign of the offset), and then null out the imprecise fields again after doing the calculation.  Due to the way
+    // luxonDateTime is constructed above, it is already at the earliest value, so only adjust if the offset is negative.
+    // @ts-ignore
+    const offsetIsMorePrecise = this[field] == null; //whether the quantity we are adding is more precise than "this".
+    if (offsetIsMorePrecise && offset < 0) {
+      luxonDateTime = luxonDateTime.endOf(this.getPrecision() as DateTimeUnit);
+    }
+
+    // Now do the actual math and convert it back to a Date/DateTime w/ originally null fields nulled out again
+    const luxonResult = luxonDateTime.plus({ [field]: offset });
+    const result = (this.constructor as any)
+      .fromLuxonDateTime(luxonResult)
+      .reducedPrecision(this.getPrecision());
+    // Luxon never has a null offset, but sometimes "this" does, so reset to null if applicable
+    if ((this as any).isDateTime && (this as any).timezoneOffset == null) {
+      result.timezoneOffset = null;
+    }
+
+    // Can't use overflowsOrUnderflows from math.js due to circular dependencies when we require it
+    if (result.after(MAX_DATETIME_VALUE || result.before(MIN_DATETIME_VALUE))) {
+      return null;
+    } else {
+      return result;
+    }
+  }
+
+  getFieldFloor(field: any) {
+    switch (field) {
+      case 'month':
+        return 1;
+      case 'day':
+        return 1;
+      case 'hour':
+        return 0;
+      case 'minute':
+        return 0;
+      case 'second':
+        return 0;
+      case 'millisecond':
+        return 0;
+      default:
+        throw new Error('Tried to floor a field that has no floor value: ' + field);
+    }
+  }
+
+  getFieldCieling(field: any) {
+    switch (field) {
+      case 'month':
+        return 12;
+      case 'day':
+        return daysInMonth(this.year, this.month);
+      case 'hour':
+        return 23;
+      case 'minute':
+        return 59;
+      case 'second':
+        return 59;
+      case 'millisecond':
+        return 999;
+      default:
+        throw new Error('Tried to clieling a field that has no cieling value: ' + field);
+    }
+  }
+}
+
+export class DateTime extends AbstractDate {
   hour: number | null;
   minute: number | null;
   second: number | null;
   millisecond: number | null;
   timezoneOffset: number | null;
-
-  // prototype functions defined later
-  // TODO: we should think about re-working this prototype structure to use proper inheritance
-  isPrecise: any;
-  isImprecise: any;
-  isMorePrecise: any;
-  isLessPrecise: any;
-  isSamePrecision: any;
-  equals: any;
-  equivalent: any;
-  sameAs: any;
-  sameOrBefore: any;
-  sameOrAfter: any;
-  before: any;
-  after: any;
-  add: any;
-  getFieldFloor: any;
-  getFieldCieling: any;
 
   static readonly Unit = {
     YEAR: 'year',
@@ -229,9 +665,7 @@ export class DateTime {
     // from the spec: If no timezone is specified, the timezone of the evaluation request timestamp is used.
     // NOTE: timezoneOffset will be explicitly null for the Time overload, whereas
     // it will be undefined if simply unspecified
-    this.year = year;
-    this.month = month;
-    this.day = day;
+    super(year, month, day);
     this.hour = hour;
     this.minute = minute;
     this.second = second;
@@ -245,6 +679,10 @@ export class DateTime {
 
   get isDateTime() {
     return true;
+  }
+
+  get isDate() {
+    return false;
   }
 
   copy() {
@@ -548,25 +986,7 @@ export class DateTime {
   }
 }
 
-export class Date {
-  // prototype functions defined later
-  // TODO: we should think about re-working this prototype structure to use proper inheritance
-  isPrecise: any;
-  isImprecise: any;
-  isMorePrecise: any;
-  isLessPrecise: any;
-  isSamePrecision: any;
-  equals: any;
-  equivalent: any;
-  sameAs: any;
-  sameOrBefore: any;
-  sameOrAfter: any;
-  before: any;
-  after: any;
-  add: any;
-  getFieldFloor: any;
-  getFieldCieling: any;
-
+export class Date extends AbstractDate {
   static readonly Unit = { YEAR: 'year', MONTH: 'month', WEEK: 'week', DAY: 'day' };
   static readonly FIELDS = [Date.Unit.YEAR, Date.Unit.MONTH, Date.Unit.DAY];
 
@@ -595,14 +1015,16 @@ export class Date {
     return new Date(...args);
   }
 
-  constructor(
-    public year: number | null = null,
-    public month: number | null = null,
-    public day: number | null = null
-  ) {}
+  constructor(year: number | null = null, month: number | null = null, day: number | null = null) {
+    super(year, month, day);
+  }
 
   get isDate() {
     return true;
+  }
+
+  get isDateTime() {
+    return false;
   }
 
   copy() {
@@ -809,450 +1231,6 @@ const TIME_PRECISION_VALUE_MAP = (() => {
   tpvMap.set(DateTime.Unit.MILLISECOND, 9);
   return tpvMap;
 })();
-
-// Shared Funtions For Date and DateTime
-// TODO: we should think about re-working this prototype structure to use proper inheritance
-DateTime.prototype.isPrecise = Date.prototype.isPrecise = function () {
-  // @ts-ignore
-  return this.constructor.FIELDS.every(field => this[field] != null);
-};
-
-DateTime.prototype.isImprecise = Date.prototype.isImprecise = function () {
-  return !this.isPrecise();
-};
-
-// This function can take another Date-ish object, or a precision string (e.g. 'month')
-DateTime.prototype.isMorePrecise = Date.prototype.isMorePrecise = function (other: any) {
-  // @ts-ignore
-  if (typeof other === 'string' && this.constructor.FIELDS.includes(other)) {
-    // @ts-ignore
-    if (this[other] == null) {
-      return false;
-    }
-  } else {
-    // @ts-ignore
-    for (const field of this.constructor.FIELDS) {
-      // @ts-ignore
-      if (other[field] != null && this[field] == null) {
-        return false;
-      }
-    }
-  }
-
-  return !this.isSamePrecision(other);
-};
-
-// This function can take another Date-ish object, or a precision string (e.g. 'month')
-DateTime.prototype.isLessPrecise = Date.prototype.isLessPrecise = function (other: any) {
-  return !this.isSamePrecision(other) && !this.isMorePrecise(other);
-};
-
-// This function can take another Date-ish object, or a precision string (e.g. 'month')
-DateTime.prototype.isSamePrecision = Date.prototype.isSamePrecision = function (other: any) {
-  // @ts-ignore
-  if (typeof other === 'string' && this.constructor.FIELDS.includes(other)) {
-    return other === this.getPrecision();
-  }
-
-  // @ts-ignore
-  for (const field of this.constructor.FIELDS) {
-    // @ts-ignore
-    if (this[field] != null && other[field] == null) {
-      return false;
-    }
-    // @ts-ignore
-    if (this[field] == null && other[field] != null) {
-      return false;
-    }
-  }
-  return true;
-};
-
-DateTime.prototype.equals = Date.prototype.equals = function (other: any) {
-  return compareWithDefaultResult(this, other, null);
-};
-
-DateTime.prototype.equivalent = Date.prototype.equivalent = function (other: any) {
-  return compareWithDefaultResult(this, other, false);
-};
-
-DateTime.prototype.sameAs = Date.prototype.sameAs = function (other: any, precision: any) {
-  if (!(other.isDate || other.isDateTime)) {
-    return null;
-  } else if (this.isDate && other.isDateTime) {
-    return this.getDateTime().sameAs(other, precision);
-  } else if ((this as any).isDateTime && other.isDate) {
-    other = other.getDateTime();
-  }
-
-  // @ts-ignore
-  if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
-    throw new Error(`Invalid precision: ${precision}`);
-  }
-
-  // make a copy of other in the correct timezone offset if they don't match.
-  if ((this as any).timezoneOffset !== other.timezoneOffset) {
-    other = other.convertToTimezoneOffset((this as any).timezoneOffset);
-  }
-
-  // @ts-ignore
-  for (const field of this.constructor.FIELDS) {
-    // if both have this precision defined
-    // @ts-ignore
-    if (this[field] != null && other[field] != null) {
-      // if they are different then return with false
-      // @ts-ignore
-      if (this[field] !== other[field]) {
-        return false;
-      }
-
-      // if both dont have this precision, return true of precision is not defined
-      // @ts-ignore
-    } else if (this[field] == null && other[field] == null) {
-      if (precision == null) {
-        return true;
-      } else {
-        // we havent met precision yet
-        return null;
-      }
-
-      // otherwise they have inconclusive precision, return null
-    } else {
-      return null;
-    }
-
-    // if precision is defined and we have reached expected precision, we can leave the loop
-    if (precision != null && precision === field) {
-      break;
-    }
-  }
-
-  // if we made it here, then all fields matched.
-  return true;
-};
-
-DateTime.prototype.sameOrBefore = Date.prototype.sameOrBefore = function (
-  other: any,
-  precision: any
-) {
-  if (!(other.isDate || other.isDateTime)) {
-    return null;
-  } else if (this.isDate && other.isDateTime) {
-    return this.getDateTime().sameOrBefore(other, precision);
-  } else if ((this as any).isDateTime && other.isDate) {
-    other = other.getDateTime();
-  }
-
-  // @ts-ignore
-  if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
-    throw new Error(`Invalid precision: ${precision}`);
-  }
-
-  // make a copy of other in the correct timezone offset if they don't match.
-  if ((this as any).timezoneOffset !== other.timezoneOffset) {
-    other = other.convertToTimezoneOffset((this as any).timezoneOffset);
-  }
-
-  // @ts-ignore
-  for (const field of this.constructor.FIELDS) {
-    // if both have this precision defined
-    // @ts-ignore
-    if (this[field] != null && other[field] != null) {
-      // if this value is less than the other return with true. this is before other
-      // @ts-ignore
-      if (this[field] < other[field]) {
-        return true;
-        // if this value is greater than the other return with false. this is after
-        // @ts-ignore
-      } else if (this[field] > other[field]) {
-        return false;
-      }
-      // execution continues if the values are the same
-
-      // if both dont have this precision, return true if precision is not defined
-      // @ts-ignore
-    } else if (this[field] == null && other[field] == null) {
-      if (precision == null) {
-        return true;
-      } else {
-        // we havent met precision yet
-        return null;
-      }
-
-      // otherwise they have inconclusive precision, return null
-    } else {
-      return null;
-    }
-
-    // if precision is defined and we have reached expected precision, we can leave the loop
-    if (precision != null && precision === field) {
-      break;
-    }
-  }
-
-  // if we made it here, then all fields matched and they are same
-  return true;
-};
-
-DateTime.prototype.sameOrAfter = Date.prototype.sameOrAfter = function (
-  other: any,
-  precision: any
-) {
-  if (!(other.isDate || other.isDateTime)) {
-    return null;
-  } else if (this.isDate && other.isDateTime) {
-    return this.getDateTime().sameOrAfter(other, precision);
-  } else if ((this as any).isDateTime && other.isDate) {
-    other = other.getDateTime();
-  }
-
-  // @ts-ignore
-  if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
-    throw new Error(`Invalid precision: ${precision}`);
-  }
-
-  // make a copy of other in the correct timezone offset if they don't match.
-  if ((this as any).timezoneOffset !== other.timezoneOffset) {
-    other = other.convertToTimezoneOffset((this as any).timezoneOffset);
-  }
-
-  // @ts-ignore
-  for (const field of this.constructor.FIELDS) {
-    // if both have this precision defined
-    // @ts-ignore
-    if (this[field] != null && other[field] != null) {
-      // if this value is greater than the other return with true. this is after other
-      // @ts-ignore
-      if (this[field] > other[field]) {
-        return true;
-        // if this value is greater than the other return with false. this is before
-        // @ts-ignore
-      } else if (this[field] < other[field]) {
-        return false;
-      }
-      // execution continues if the values are the same
-
-      // if both dont have this precision, return true if precision is not defined
-      // @ts-ignore
-    } else if (this[field] == null && other[field] == null) {
-      if (precision == null) {
-        return true;
-      } else {
-        // we havent met precision yet
-        return null;
-      }
-
-      // otherwise they have inconclusive precision, return null
-    } else {
-      return null;
-    }
-
-    // if precision is defined and we have reached expected precision, we can leave the loop
-    if (precision != null && precision === field) {
-      break;
-    }
-  }
-
-  // if we made it here, then all fields matched and they are same
-  return true;
-};
-
-DateTime.prototype.before = Date.prototype.before = function (other: any, precision: any) {
-  if (!(other.isDate || other.isDateTime)) {
-    return null;
-  } else if (this.isDate && other.isDateTime) {
-    return this.getDateTime().before(other, precision);
-  } else if ((this as any).isDateTime && other.isDate) {
-    other = other.getDateTime();
-  }
-
-  // @ts-ignore
-  if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
-    throw new Error(`Invalid precision: ${precision}`);
-  }
-
-  // make a copy of other in the correct timezone offset if they don't match.
-  if ((this as any).timezoneOffset !== other.timezoneOffset) {
-    other = other.convertToTimezoneOffset((this as any).timezoneOffset);
-  }
-
-  // @ts-ignore
-  for (const field of this.constructor.FIELDS) {
-    // if both have this precision defined
-    // @ts-ignore
-    if (this[field] != null && other[field] != null) {
-      // if this value is less than the other return with true. this is before other
-      // @ts-ignore
-      if (this[field] < other[field]) {
-        return true;
-        // if this value is greater than the other return with false. this is after
-        // @ts-ignore
-      } else if (this[field] > other[field]) {
-        return false;
-      }
-      // execution continues if the values are the same
-
-      // if both dont have this precision, return false if precision is not defined
-      // @ts-ignore
-    } else if (this[field] == null && other[field] == null) {
-      if (precision == null) {
-        return false;
-      } else {
-        // we havent met precision yet
-        return null;
-      }
-
-      // otherwise they have inconclusive precision, return null
-    } else {
-      return null;
-    }
-
-    // if precision is defined and we have reached expected precision, we can leave the loop
-    if (precision != null && precision === field) {
-      break;
-    }
-  }
-
-  // if we made it here, then all fields matched and they are same
-  return false;
-};
-
-DateTime.prototype.after = Date.prototype.after = function (other: any, precision: any) {
-  if (!(other.isDate || other.isDateTime)) {
-    return null;
-  } else if (this.isDate && other.isDateTime) {
-    return this.getDateTime().after(other, precision);
-  } else if ((this as any).isDateTime && other.isDate) {
-    other = other.getDateTime();
-  }
-
-  // @ts-ignore
-  if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
-    throw new Error(`Invalid precision: ${precision}`);
-  }
-
-  // make a copy of other in the correct timezone offset if they don't match.
-  if ((this as any).timezoneOffset !== other.timezoneOffset) {
-    other = other.convertToTimezoneOffset((this as any).timezoneOffset);
-  }
-
-  // @ts-ignore
-  for (const field of this.constructor.FIELDS) {
-    // if both have this precision defined
-    // @ts-ignore
-    if (this[field] != null && other[field] != null) {
-      // if this value is greater than the other return with true. this is after other
-      // @ts-ignore
-      if (this[field] > other[field]) {
-        return true;
-        // if this value is greater than the other return with false. this is before
-        // @ts-ignore
-      } else if (this[field] < other[field]) {
-        return false;
-      }
-      // execution continues if the values are the same
-
-      // if both dont have this precision, return false if precision is not defined
-      // @ts-ignore
-    } else if (this[field] == null && other[field] == null) {
-      if (precision == null) {
-        return false;
-      } else {
-        // we havent met precision yet
-        return null;
-      }
-
-      // otherwise they have inconclusive precision, return null
-    } else {
-      return null;
-    }
-
-    // if precision is defined and we have reached expected precision, we can leave the loop
-    if (precision != null && precision === field) {
-      break;
-    }
-  }
-
-  // if we made it here, then all fields matched and they are same
-  return false;
-};
-
-DateTime.prototype.add = Date.prototype.add = function (offset: any, field: any) {
-  if (offset === 0 || this.year == null) {
-    return this.copy();
-  }
-
-  // Use luxon to do the date math because it honors DST and it has the leap-year/end-of-month semantics we want.
-  // NOTE: The luxonDateTime will contain default values where this[unit] is null, but we'll account for that.
-  let luxonDateTime = this.toLuxonDateTime();
-
-  // From the spec: "The operation is performed by converting the time-based quantity to the most precise value
-  // specified in the date/time (truncating any resulting decimal portion) and then adding it to the date/time value."
-  // However, since you can't really convert days to months,  if "this" is less precise than the field being added, we can
-  // add to the earliest possible value of "this" or subtract from the latest possible value of "this" (depending on the
-  // sign of the offset), and then null out the imprecise fields again after doing the calculation.  Due to the way
-  // luxonDateTime is constructed above, it is already at the earliest value, so only adjust if the offset is negative.
-  // @ts-ignore
-  const offsetIsMorePrecise = this[field] == null; //whether the quantity we are adding is more precise than "this".
-  if (offsetIsMorePrecise && offset < 0) {
-    luxonDateTime = luxonDateTime.endOf(this.getPrecision() as DateTimeUnit);
-  }
-
-  // Now do the actual math and convert it back to a Date/DateTime w/ originally null fields nulled out again
-  const luxonResult = luxonDateTime.plus({ [field]: offset });
-  const result = (this.constructor as any)
-    .fromLuxonDateTime(luxonResult)
-    .reducedPrecision(this.getPrecision());
-  // Luxon never has a null offset, but sometimes "this" does, so reset to null if applicable
-  if ((this as any).isDateTime && (this as any).timezoneOffset == null) {
-    result.timezoneOffset = null;
-  }
-
-  // Can't use overflowsOrUnderflows from math.js due to circular dependencies when we require it
-  if (result.after(MAX_DATETIME_VALUE || result.before(MIN_DATETIME_VALUE))) {
-    return null;
-  } else {
-    return result;
-  }
-};
-
-DateTime.prototype.getFieldFloor = Date.prototype.getFieldFloor = function (field: any) {
-  switch (field) {
-    case 'month':
-      return 1;
-    case 'day':
-      return 1;
-    case 'hour':
-      return 0;
-    case 'minute':
-      return 0;
-    case 'second':
-      return 0;
-    case 'millisecond':
-      return 0;
-    default:
-      throw new Error('Tried to floor a field that has no floor value: ' + field);
-  }
-};
-
-DateTime.prototype.getFieldCieling = Date.prototype.getFieldCieling = function (field: any) {
-  switch (field) {
-    case 'month':
-      return 12;
-    case 'day':
-      return daysInMonth(this.year, this.month);
-    case 'hour':
-      return 23;
-    case 'minute':
-      return 59;
-    case 'second':
-      return 59;
-    case 'millisecond':
-      return 999;
-    default:
-      throw new Error('Tried to clieling a field that has no cieling value: ' + field);
-  }
-};
 
 function compareWithDefaultResult(a: any, b: any, defaultResult: any) {
   // return false there is a type mismatch
