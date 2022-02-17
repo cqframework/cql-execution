@@ -1,5 +1,5 @@
 import * as DT from './datatypes/datatypes';
-import { DataProvider, PatientObject, RecordObject } from './types';
+import { DataProvider, NamedTypeSpecifier, PatientObject, RecordObject } from './types';
 
 export class Record implements RecordObject {
   json: any;
@@ -10,13 +10,13 @@ export class Record implements RecordObject {
     this.id = this.json.id;
   }
 
-  _is(typeSpecifier: any) {
+  _is(typeSpecifier: NamedTypeSpecifier) {
     return this._typeHierarchy().some(
       t => t.type === typeSpecifier.type && t.name == typeSpecifier.name
     );
   }
 
-  _typeHierarchy() {
+  _typeHierarchy(): NamedTypeSpecifier[] {
     return [
       {
         name: `{https://github.com/cqframework/cql-execution/simple}${this.json.recordType}`,
