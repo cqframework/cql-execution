@@ -23,7 +23,9 @@ export class Code {
 }
 
 export class Concept {
-  constructor(public codes: any[] = [], public display?: string) {}
+  constructor(public codes: any[], public display?: string) {
+    this.codes ||= [];
+  }
 
   get isConcept() {
     return true;

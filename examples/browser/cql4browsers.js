@@ -365,9 +365,9 @@ var Code = /** @class */ (function () {
 exports.Code = Code;
 var Concept = /** @class */ (function () {
     function Concept(codes, display) {
-        if (codes === void 0) { codes = []; }
         this.codes = codes;
         this.display = display;
+        this.codes || (this.codes = []);
     }
     Object.defineProperty(Concept.prototype, "isConcept", {
         get: function () {
