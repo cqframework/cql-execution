@@ -1,7 +1,7 @@
 /* eslint-disable
     no-console,
 */
-const cql = require('../../src/cql');
+const cql = require('../../lib/cql');
 const measure = require('./age.json');
 
 const lib = new cql.Library(measure);

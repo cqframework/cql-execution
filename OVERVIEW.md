@@ -9,6 +9,7 @@ Technologies
 ------------
 
 The CQL execution framework was originally written in [CoffeeScript](http://coffeescript.org/). CoffeeScript is a scripting language that compiles down to JavaScript. In 2020, the CQL Execution framework source code was migrated from CoffeeScript to ES6 JavaScript. JavaScript execution code allows the reference implementation to be integrated into a variety of environments, including servers, other languages’ runtime environments, and standard web browsers.
+In 2022, the CQL execution framework was converted to [TypeScript](https://www.typescriptlang.org/) to make use of static typing and support both TypeScript and JavaScript users of the framework.
 
 The CQL execution framework tests and examples are configured to run using [Node.js](http://nodejs.org/), but can be easily integrated into other JavaScript runtime environments.
 
@@ -46,7 +47,7 @@ The expression 1 + 2 is represented in JSON ELM as follows:
 
 ### ELM Expression Classes
 
-Each ELM expression has a corresponding class defined in the JavaScript CQL execution framework. These classes all extend a common `Expression` class and define, at a minimum, these components:
+Each ELM expression has a corresponding class defined in the TypeScript CQL execution framework. These classes all extend a common `Expression` class and define, at a minimum, these components:
 
 1.	A `constructor` that takes a JSON ELM object as its argument
 2.	An `exec` function that takes a `Context` object as its argument
@@ -55,16 +56,19 @@ The `constructor` is responsible for setting class properties from the JSON ELM 
 
 The following is an example of the `Add` class that corresponds to the JSON ELM example in the previous section:
 
-```js
+```typescript
 class Add extends Expression {
-  constructor(json) {
+  arg1: IntegerLiteral;
+  arg2: IntegerLiteral;
+
+  constructor(json: any) {
     super(json);
-    this.arg1 = new IntegerLiteral(json.operand[0])
-    this.arg2 = new IntegerLiteral(json.operand[1])
+    this.arg1 = new IntegerLiteral(json.operand[0]);
+    this.arg2 = new IntegerLiteral(json.operand[1]);
   }
 
-  exec(ctx) {
-    return this.arg1.exec(ctx) + this.arg2.exec(ctx)
+  exec(ctx: Context) {
+    return this.arg1.exec(ctx) + this.arg2.exec(ctx);
   }
 }
 ```
@@ -92,8 +96,8 @@ In order for the CQL execution framework to determine if a code is in a valueset
 ### MessageListener
 
 The CQL specification defines a [Message](https://cql.hl7.org/09-b-cqlreference.html#message) operator that "provides a run-time mechanism for returning messages, warnings, traces, and errors to the calling environment." To support this, the CQL execution framework supports a "MessageListener" API. A MessageListener class must contain an `onMessage` function which will be called by the CQL execution framework if the `condition` passed to the `Message` operator is `true`:
-```js
-onMessage(source, code, severity, message) {
+```typescript
+onMessage(source: any, code: string, severity: string, message: string) {
   // do something with the message
 }
 ```
@@ -127,7 +131,7 @@ const parameters = {
     new cql.DateTime(2014, 1, 1, 0, 0, 0, 0),
     true,
     false
-  );
+  )
 };
 
 const executor = new cql.Executor(lib, codeService, parameters, messageListener);

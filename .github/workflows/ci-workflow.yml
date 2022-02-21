@@ -4,14 +4,14 @@ on: [push, pull_request]
 
 jobs:
   audit:
-    name: Check yarn audit
+    name: Check npm audit
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    - run: yarn audit
+    - run: npm audit
       env:
         CI: true
   cql4browsers:
@@ -33,9 +33,9 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    - run: yarn install
-    - run: yarn run lint
-    - run: yarn run prettier
+    - run: npm install
+    - run: npm run lint
+    - run: npm run prettier
       env:
         CI: true
   test:
@@ -51,8 +51,8 @@ jobs:
       with:
         timezone: America/New_York
     - run: date +"%Y-%m-%d %T"
-    - run: yarn install
+    - run: npm install
     - run: ./bin/check_for_nonassertive_tests.sh
-    - run: npx nyc --reporter=lcov yarn test && npx codecov
+    - run: npx nyc --reporter=lcov npm test && npx codecov
       env:
         CI: true

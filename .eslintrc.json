@@ -1,4 +1,5 @@
 {
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
       "ecmaVersion": 6,
       "sourceType": "module",
@@ -7,6 +8,8 @@
       }
   },
   "rules": {
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
       "indent": ["error", 2, { "SwitchCase": 1 }],
       "linebreak-style": ["error", "unix"],
       "no-console": ["warn", { "allow": ["warn", "error"] }],
@@ -15,10 +18,16 @@
       "quotes": ["error", "single", { "allowTemplateLiterals": true, "avoidEscape": true }],
       "semi": ["error", "always"]
   },
+  "overrides": [{
+    "files": ["test/**/*.{js,ts}", "examples/**/*.js", "bin/**/*.js"],
+    "rules": {
+      "@typescript-eslint/no-var-requires": "off"
+    }
+  }],
   "env": {
       "es6": true,
       "node": true,
       "mocha": true
   },
-  "extends": ["eslint:recommended", "prettier"]
+  "extends": ["plugin:@typescript-eslint/recommended", "prettier"]
 }
