@@ -37,7 +37,9 @@ export class Concept {
 }
 
 export class ValueSet {
-  constructor(public oid: string, public version?: string, public codes: any[] = []) {}
+  constructor(public oid: string, public version?: string, public codes: any[] = []) {
+    this.codes ||= [];
+  }
 
   get isValueSet() {
     return true;

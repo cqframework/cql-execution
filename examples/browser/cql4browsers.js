@@ -388,6 +388,7 @@ var ValueSet = /** @class */ (function () {
         this.oid = oid;
         this.version = version;
         this.codes = codes;
+        this.codes || (this.codes = []);
     }
     Object.defineProperty(ValueSet.prototype, "isValueSet", {
         get: function () {
