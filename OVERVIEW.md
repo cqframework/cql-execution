@@ -59,7 +59,7 @@ The following is an example of the `Add` class that corresponds to the JSON ELM 
 ```typescript
 class Add extends Expression {
   arg1: IntegerLiteral;
-  arg1: IntegerLiteral;
+  arg2: IntegerLiteral;
 
   constructor(json: any) {
     super(json);
