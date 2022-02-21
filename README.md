@@ -1,9 +1,9 @@
-[![Build Status](https://travis-ci.org/cqframework/cql-execution.svg?branch=master)](https://travis-ci.org/cqframework/cql-execution)
+[![CI Checks](https://github.com/cqframework/cql-execution/actions/workflows/ci-workflow.yml/badge.svg)](https://github.com/cqframework/cql-execution/actions/workflows/ci-workflow.yml)
 [![codecov](https://codecov.io/gh/cqframework/cql-execution/branch/master/graph/badge.svg)](https://codecov.io/gh/cqframework/cql-execution)
 
 # CQL Execution Framework
 
-The CQL Execution Framework provides a JavaScript library for executing CQL artifacts expressed as
+The CQL Execution Framework provides a TypeScript/JavaScript library for executing CQL artifacts expressed as
 JSON ELM.
 
 For more information, see the [CQL Execution Framework Overview](OVERVIEW.md).
@@ -51,6 +51,9 @@ Implementors should be aware of the following limitations and gaps in `cql-execu
   * Unfiltered context retrieves
   * Unfiltered context references to other libraries
   * External functions
+* While the source code of `cql-execution` is in TypeScript, full-fledged typing of the library is not yet implemented
+  * Conversion from JavaScript to TypeScript was done in [this pull request](https://github.com/cqframework/cql-execution/pull/260),
+  with the intent on making incremental type improvements in subsequent pull requests.
 
 The above is a partial list covering the most significant limitations. For more details, see the
 [CQL_Execution_Features.xlsx](CQL_Execution_Features.xlsx) spreadsheet.
@@ -102,6 +105,62 @@ define InDemographic:
     AgeInYearsAt(start of MeasurementPeriod) >= 2 and AgeInYearsAt(start of MeasurementPeriod) < 18
 ```
 
+## TypeScript Example
+
+Next, we can create a TypeScript file to execute the above CQL. This file will need to contain (or
+`import`) JSON patient representations for testing as well. Our example CQL uses a "Simple"
+data model developed only for demonstration and testing purposes.  In this model, each patient is
+represented using a simple JSON object.  For ease of use, let's put the file in the `customCQL`
+directory:
+
+``` typescript
+import cql from '../../src/cql';
+import * as measure from './age.json'; // Requires the "resolveJsonModule" compiler option to be "true"
+
+const lib = new cql.Library(measure);
+const executor = new cql.Executor(lib);
+const psource = new cql.PatientSource([
+  {
+    id: '1',
+    recordType: 'Patient',
+    name: 'John Smith',
+    gender: 'M',
+    birthDate: '1980-02-17T06:15'
+  },
+  {
+    id: '2',
+    recordType: 'Patient',
+    name: 'Sally Smith',
+    gender: 'F',
+    birthDate: '2007-08-02T11:47'
+  }
+]);
+
+const result = executor.exec(psource);
+console.log(JSON.stringify(result, undefined, 2));
+```
+
+In the above file, we've assumed the JSON ELM JSON file for the measure is called
+`age.json` and is in the same directory as the file that requires is.  We've
+also assumed a couple of very simple patients.  Let's call the file we just created
+`exec-age.ts`.
+
+Now we can execute the measure using [ts-node](https://www.npmjs.com/package/ts-node):
+
+``` bash
+npx ts-node -O '{ "resolveJsonModule": true }' --files ${path_to_cql-execution}/customCQL/exec-age.ts
+```
+
+If all is well, it should print the result object to standard out.
+
+## JavaScript Example
+
+For usage in regular JavaScript, we can refer to the compiled JavaScript in the `lib` directory.
+Ensure that this JavaScript is present by running `npm run build` before continuing on to the example.
+We will follow the same steps as the above TypeScript example, but our JavaScript code must use `require`
+instead of `import`, and will load the `cql-execution` library from the `lib` directory. As before,
+let's put the file in the `customCQL` directory:
+
 Next, create a JavaScript file to execute the CQL above.  This file will need to contain (or
 `require`) JSON patient representations for testing as well.  Our example CQL uses a "Simple"
 data model developed only for demonstration and testing purposes.  In this model, each patient is
@@ -109,7 +168,7 @@ represented using a simple JSON object.  For ease of use, let's put the file in 
 directory:
 
 ```js
-const cql = require('../src/cql');
+const cql = require('../lib/cql');
 const measure = require('./age.json');
 
 const lib = new cql.Library(measure);
@@ -133,9 +192,7 @@ console.log(JSON.stringify(result, undefined, 2));
 
 ```
 
-In the above file, we've assumed the JSON ELM JSON file for the measure is called
-`age.json` and is in the same directory as the file that requires is.  We've
-also assumed a couple of very simple patients.  Let's call the file we just created
+The above file has the same assumptions as the TypeScript example above. Let's call the file we just created
 `exec-age.js`.
 
 Now we can execute the measure using Node.js:
@@ -144,7 +201,7 @@ Now we can execute the measure using Node.js:
 node ${path_to_cql-execution}/customCQL/exec-age.js
 ```
 
-If all is well, it should print the result object to standard out.
+If all is well, it should print the result object to standard out, and the output should be identical to that of the TypeScript example.
 
 # To Run the CQL Execution Unit Tests
 
@@ -243,23 +300,23 @@ module.exports['And'] = {
 
 Notice that since the CQL didn't declare a library name/version, a data model, or a context,
 default values were inserted into the CQL at generation time.  Now this CQL can be used in a test
-defined in _test/elm/*/logical-test.js_.  For example:
+defined in _test/elm/*/logical-test.ts_.  For example:
 
 ```js
 describe('And', () => {
-  this.beforeEach(() => {
+  this.beforeEach(function () {
     setup(this, data);
   });
 
-  it('should execute allTrue as true', () => {
+  it('should execute allTrue as true', function () {
     this.allTrue.exec(this.ctx).should.be.true();
   });
 
-  it('should execute someTrue as false', () => {
+  it('should execute someTrue as false', function () {
     this.someTrue.exec(this.ctx).should.be.false();
   });
 
-  it('should execute allFalse as false', () => {
+  it('should execute allFalse as false', function () {
     this.allFalse.exec(this.ctx).should.be.false();
   });
 });
@@ -281,9 +338,9 @@ execute `npm run watch:test-data`.
 
 # Pull Requests
 
-If JavaScript source code is modified, `cql4browsers.js` needs to be included in the pull request,
-otherwise Travis CI will fail. To generate this file, run:
+If TypeScript source code is modified, `cql4browsers.js` needs to be included in the pull request,
+otherwise GitHub Actions CI will fail. To generate this file, run:
 
 ```
-npm run build:all
+npm run build:browserify
 ```
