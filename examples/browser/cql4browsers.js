@@ -672,8 +672,14 @@ var AbstractDate = /** @class */ (function () {
             throw new Error("Invalid precision: ".concat(precision));
         }
         // make a copy of other in the correct timezone offset if they don't match.
-        if (this.timezoneOffset !== other.timezoneOffset) {
-            other = other.convertToTimezoneOffset(this.timezoneOffset);
+        // When comparing DateTime values with different timezone offsets, implementations
+        // should normalize to the timezone offset of the evaluation request timestamp,
+        // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
+        // @ts-ignore
+        if (precision == null || this.constructor.FIELDS.indexOf(precision) > 2) {
+            if (this.timezoneOffset !== other.timezoneOffset) {
+                other = other.convertToTimezoneOffset(this.timezoneOffset);
+            }
         }
         // @ts-ignore
         for (var _i = 0, _a = this.constructor.FIELDS; _i < _a.length; _i++) {
@@ -725,8 +731,14 @@ var AbstractDate = /** @class */ (function () {
             throw new Error("Invalid precision: ".concat(precision));
         }
         // make a copy of other in the correct timezone offset if they don't match.
-        if (this.timezoneOffset !== other.timezoneOffset) {
-            other = other.convertToTimezoneOffset(this.timezoneOffset);
+        // When comparing DateTime values with different timezone offsets, implementations
+        // should normalize to the timezone offset of the evaluation request timestamp,
+        // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
+        // @ts-ignore
+        if (precision == null || this.constructor.FIELDS.indexOf(precision) > 2) {
+            if (this.timezoneOffset !== other.timezoneOffset) {
+                other = other.convertToTimezoneOffset(this.timezoneOffset);
+            }
         }
         // @ts-ignore
         for (var _i = 0, _a = this.constructor.FIELDS; _i < _a.length; _i++) {
@@ -784,8 +796,14 @@ var AbstractDate = /** @class */ (function () {
             throw new Error("Invalid precision: ".concat(precision));
         }
         // make a copy of other in the correct timezone offset if they don't match.
-        if (this.timezoneOffset !== other.timezoneOffset) {
-            other = other.convertToTimezoneOffset(this.timezoneOffset);
+        // When comparing DateTime values with different timezone offsets, implementations
+        // should normalize to the timezone offset of the evaluation request timestamp,
+        // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
+        // @ts-ignore
+        if (precision == null || this.constructor.FIELDS.indexOf(precision) > 2) {
+            if (this.timezoneOffset !== other.timezoneOffset) {
+                other = other.convertToTimezoneOffset(this.timezoneOffset);
+            }
         }
         // @ts-ignore
         for (var _i = 0, _a = this.constructor.FIELDS; _i < _a.length; _i++) {
@@ -843,8 +861,14 @@ var AbstractDate = /** @class */ (function () {
             throw new Error("Invalid precision: ".concat(precision));
         }
         // make a copy of other in the correct timezone offset if they don't match.
-        if (this.timezoneOffset !== other.timezoneOffset) {
-            other = other.convertToTimezoneOffset(this.timezoneOffset);
+        // When comparing DateTime values with different timezone offsets, implementations
+        // should normalize to the timezone offset of the evaluation request timestamp,
+        // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
+        // @ts-ignore
+        if (precision == null || this.constructor.FIELDS.indexOf(precision) > 2) {
+            if (this.timezoneOffset !== other.timezoneOffset) {
+                other = other.convertToTimezoneOffset(this.timezoneOffset);
+            }
         }
         // @ts-ignore
         for (var _i = 0, _a = this.constructor.FIELDS; _i < _a.length; _i++) {
@@ -902,8 +926,14 @@ var AbstractDate = /** @class */ (function () {
             throw new Error("Invalid precision: ".concat(precision));
         }
         // make a copy of other in the correct timezone offset if they don't match.
-        if (this.timezoneOffset !== other.timezoneOffset) {
-            other = other.convertToTimezoneOffset(this.timezoneOffset);
+        // When comparing DateTime values with different timezone offsets, implementations
+        // should normalize to the timezone offset of the evaluation request timestamp,
+        // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
+        // @ts-ignore
+        if (precision == null || this.constructor.FIELDS.indexOf(precision) > 2) {
+            if (this.timezoneOffset !== other.timezoneOffset) {
+                other = other.convertToTimezoneOffset(this.timezoneOffset);
+            }
         }
         // @ts-ignore
         for (var _i = 0, _a = this.constructor.FIELDS; _i < _a.length; _i++) {

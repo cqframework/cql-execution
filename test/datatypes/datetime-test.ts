@@ -1615,13 +1615,13 @@ describe('DateTime.sameAs', () => {
       .should.be.true();
     DateTime.parse('2000-12-31T19:35:45.123+00:00')
       .sameAs(DateTime.parse('2001-01-01T00:05:45.123+04:30'), DateTime.Unit.DAY)
-      .should.be.true();
+      .should.be.false();
     DateTime.parse('2000-12-31T19:35:45.123+00:00')
       .sameAs(DateTime.parse('2001-01-01T00:05:45.123+04:30'), DateTime.Unit.MONTH)
-      .should.be.true();
+      .should.be.false();
     DateTime.parse('2000-12-31T19:35:45.123+00:00')
       .sameAs(DateTime.parse('2001-01-01T00:05:45.123+04:30'), DateTime.Unit.YEAR)
-      .should.be.true();
+      .should.be.false();
   });
 
   it('should handle imprecision correctly with missing milliseconds', () => {
