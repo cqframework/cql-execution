@@ -14,8 +14,8 @@ export class ExpressionDef extends Expression {
     this.context = json.context;
     this.expression = build(json.expression);
   }
-  exec(ctx: Context) {
-    const value = this.expression != null ? this.expression.execute(ctx) : undefined;
+  async exec(ctx: Context) {
+    const value = this.expression != null ? await this.expression.execute(ctx) : undefined;
     ctx.rootContext().set(this.name, value);
     return value;
   }
@@ -30,11 +30,11 @@ export class ExpressionRef extends Expression {
     this.name = json.name;
     this.library = json.libraryName;
   }
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     ctx = this.library ? ctx.getLibraryContext(this.library) : ctx;
     let value = ctx.get(this.name);
     if (value instanceof Expression) {
-      value = value.execute(ctx);
+      value = await value.execute(ctx);
     }
     return value;
   }
@@ -51,7 +51,7 @@ export class FunctionDef extends Expression {
     this.expression = build(json.expression);
     this.parameters = json.operand;
   }
-  exec(_ctx: Context) {
+  async exec(_ctx: Context) {
     return this;
   }
 }
@@ -66,7 +66,7 @@ export class FunctionRef extends Expression {
     this.library = json.libraryName;
   }
 
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     let functionDefs, child_ctx;
     if (this.library) {
       const lib = ctx.get(this.library);
@@ -77,7 +77,7 @@ export class FunctionRef extends Expression {
       functionDefs = ctx.get(this.name);
       child_ctx = ctx.childContext();
     }
-    const args = this.execArgs(ctx);
+    const args = await this.execArgs(ctx);
 
     // Filter out functions w/ wrong number of arguments.
     functionDefs = functionDefs.filter((f: any) => f.parameters.length === args.length);
@@ -127,7 +127,7 @@ export class OperandRef extends Expression {
     this.name = json.name;
   }
 
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     return ctx.get(this.name);
   }
 }
@@ -141,7 +141,7 @@ export class IdentifierRef extends Expression {
     this.name = json.name;
     this.library = json.libraryName;
   }
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     // TODO: Technically, the ELM Translator should never output one of these
     // but this code is needed since it does, as a work-around to get queries
     // to work properly when sorting by a field in a tuple

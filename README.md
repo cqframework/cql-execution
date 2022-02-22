@@ -187,8 +187,14 @@ const psource = new cql.PatientSource([ {
   'birthDate' : '2007-08-02T11:47'
 } ]);
 
-const result = executor.exec(psource);
-console.log(JSON.stringify(result, undefined, 2));
+executor
+  .exec(psource)
+  .then(result => {
+    console.log(JSON.stringify(result, undefined, 2));
+  })
+  .catch(err => {
+    console.error(err);
+  });
 
 ```
 
@@ -308,16 +314,16 @@ describe('And', () => {
     setup(this, data);
   });
 
-  it('should execute allTrue as true', function () {
-    this.allTrue.exec(this.ctx).should.be.true();
+  it('should execute allTrue as true', async function () {
+    should(await this.allTrue.exec(this.ctx)).be.true();
   });
 
-  it('should execute someTrue as false', function () {
-    this.someTrue.exec(this.ctx).should.be.false();
+  it('should execute someTrue as false', async function () {
+    should(await this.someTrue.exec(this.ctx)).be.false();
   });
 
-  it('should execute allFalse as false', function () {
-    this.allFalse.exec(this.ctx).should.be.false();
+  it('should execute allFalse as false', async function () {
+    should(await this.allFalse.exec(this.ctx)).be.false();
   });
 });
 ```

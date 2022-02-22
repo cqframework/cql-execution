@@ -9,21 +9,21 @@ export class Retrieve extends Expression {
   datatype: string;
   templateId?: string;
   codeProperty?: string;
-  codes?: Expression;
+  codes?: Expression | null;
   dateProperty?: string;
-  dateRange?: Expression;
+  dateRange?: Expression | null;
 
   constructor(json: any) {
     super(json);
     this.datatype = json.dataType;
     this.templateId = json.templateId;
     this.codeProperty = json.codeProperty;
-    this.codes = build(json.codes);
+    this.codes = build(json.codes) as Expression;
     this.dateProperty = json.dateProperty;
-    this.dateRange = build(json.dateRange);
+    this.dateRange = build(json.dateRange) as Expression;
   }
 
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     // Object with retrieve information to pass back to patient source
     // Always assign datatype. Assign codeProperty and dateProperty if present
     const retrieveDetails: RetrieveDetails = {
@@ -33,7 +33,7 @@ export class Retrieve extends Expression {
     };
 
     if (this.codes) {
-      const resolvedCodes: Code[] | ValueSet | undefined = this.codes.execute(ctx);
+      const resolvedCodes: Code[] | ValueSet | undefined = await this.codes.execute(ctx);
 
       if (resolvedCodes == null) {
         return [];
@@ -43,14 +43,14 @@ export class Retrieve extends Expression {
     }
 
     if (this.dateRange) {
-      retrieveDetails.dateRange = this.dateRange.execute(ctx);
+      retrieveDetails.dateRange = await this.dateRange.execute(ctx);
     }
 
     if (this.templateId) {
       retrieveDetails.templateId = this.templateId;
     }
 
-    let records = ctx.findRecords(
+    let records = await ctx.findRecords(
       this.templateId != null ? this.templateId : this.datatype,
       retrieveDetails
     );

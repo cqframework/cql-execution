@@ -1,6 +1,6 @@
 import { Expression, UnimplementedExpression } from './expression';
 import { Context } from '../runtime/context';
-import { typeIsArray, allTrue, Direction } from '../util/util';
+import { typeIsArray, allTrue, Direction, asyncMergeSort } from '../util/util';
 import { equals } from '../util/comparison';
 import { build } from './builder';
 
@@ -27,24 +27,26 @@ export class LetClause {
 export class With extends Expression {
   alias: any;
   expression: any;
-  suchThat: any;
+  suchThat: Expression;
 
   constructor(json: any) {
     super(json);
     this.alias = json.alias;
     this.expression = build(json.expression);
-    this.suchThat = build(json.suchThat);
+    this.suchThat = build(json.suchThat) as Expression;
   }
-  exec(ctx: Context) {
-    let records = this.expression.execute(ctx);
+  async exec(ctx: Context) {
+    let records: any[] = await this.expression.execute(ctx);
     if (!typeIsArray(records)) {
       records = [records];
     }
-    const returns = records.map((rec: any) => {
-      const childCtx = ctx.childContext();
-      childCtx.set(this.alias, rec);
-      return this.suchThat.execute(childCtx);
-    });
+    const returns = await Promise.all(
+      records.map((rec: any) => {
+        const childCtx = ctx.childContext();
+        childCtx.set(this.alias, rec);
+        return this.suchThat.execute(childCtx);
+      })
+    );
     return returns.some((x: any) => x);
   }
 }
@@ -53,8 +55,8 @@ export class Without extends With {
   constructor(json: any) {
     super(json);
   }
-  exec(ctx: Context) {
-    return !super.exec(ctx);
+  async exec(ctx: Context) {
+    return !(await super.exec(ctx));
   }
 }
 
@@ -75,7 +77,7 @@ export class ByDirection extends Expression {
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  exec(ctx: Context, a: any, b: any) {
+  async exec(ctx: Context, a: any, b: any) {
     if (a === b) {
       return 0;
     } else if (a.isQuantity && b.isQuantity) {
@@ -108,11 +110,11 @@ export class ByExpression extends Expression {
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  exec(ctx: Context, a: any, b: any) {
+  async exec(ctx: Context, a: any, b: any) {
     let sctx = ctx.childContext(a);
-    const a_val = this.expression.execute(sctx);
+    const a_val = await this.expression.execute(sctx);
     sctx = ctx.childContext(b);
-    const b_val = this.expression.execute(sctx);
+    const b_val = await this.expression.execute(sctx);
 
     if (a_val === b_val || (a_val == null && b_val == null)) {
       return 0;
@@ -153,13 +155,13 @@ export class SortClause {
     this.by = build(json != null ? json.by : undefined);
   }
 
-  sort(ctx: Context, values: any) {
+  async sort(ctx: Context, values: any[]) {
     if (this.by) {
-      return values.sort((a: any, b: any) => {
+      return asyncMergeSort(values, async (a: any, b: any) => {
         let order = 0;
         for (const item of this.by) {
           // Do not use execute here because the value of the sort order is not important.
-          order = item.exec(ctx, a, b);
+          order = await item.exec(ctx, a, b);
           if (order !== 0) {
             break;
           }
@@ -167,6 +169,7 @@ export class SortClause {
         return order;
       });
     }
+    return values;
   }
 }
 
@@ -194,13 +197,13 @@ class AggregateClause extends Expression {
     this.distinct = json.distinct != null ? json.distinct : true;
   }
 
-  aggregate(returnedValues: any, ctx: Context) {
-    let aggregateValue = this.starting != null ? this.starting.exec(ctx) : null;
-    returnedValues.forEach((contextValues: any) => {
+  async aggregate(returnedValues: any, ctx: Context) {
+    let aggregateValue = this.starting != null ? await this.starting.exec(ctx) : null;
+    for (const contextValues of returnedValues) {
       const childContext = ctx.childContext(contextValues);
       childContext.set(this.identifier, aggregateValue);
-      aggregateValue = this.expression.exec(childContext);
-    });
+      aggregateValue = await this.expression.exec(childContext);
+    }
     return aggregateValue;
   }
 }
@@ -208,7 +211,7 @@ class AggregateClause extends Expression {
 export class Query extends Expression {
   sources: MultiSource;
   letClauses: LetClause[];
-  relationship: any[];
+  relationship: Expression[];
   where: any;
   returnClause: ReturnClause | null;
   aggregateClause: AggregateClause | null;
@@ -219,7 +222,7 @@ export class Query extends Expression {
     super(json);
     this.sources = new MultiSource(json.source.map((s: any) => new AliasedQuerySource(s)));
     this.letClauses = json.let != null ? json.let.map((d: any) => new LetClause(d)) : [];
-    this.relationship = json.relationship != null ? build(json.relationship) : [];
+    this.relationship = json.relationship != null ? (build(json.relationship) as Expression[]) : [];
     this.where = build(json.where);
     this.returnClause = json.return != null ? new ReturnClause(json.return) : null;
     this.aggregateClause = json.aggregate != null ? new AggregateClause(json.aggregate) : null;
@@ -236,21 +239,23 @@ export class Query extends Expression {
     return true;
   }
 
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     let returnedValues: any[] = [];
-    this.sources.forEach(ctx, (rctx: any) => {
+    await this.sources.forEach(ctx, async (rctx: any) => {
       for (const def of this.letClauses) {
-        rctx.set(def.identifier, def.expression.execute(rctx));
+        rctx.set(def.identifier, await def.expression.execute(rctx));
       }
 
-      const relations = this.relationship.map(rel => {
-        const child_ctx = rctx.childContext();
-        return rel.execute(child_ctx);
-      });
-      const passed = allTrue(relations) && (this.where ? this.where.execute(rctx) : true);
+      const relations = await Promise.all(
+        this.relationship.map(rel => {
+          const child_ctx = rctx.childContext();
+          return rel.execute(child_ctx);
+        })
+      );
+      const passed = allTrue(relations) && (this.where ? await this.where.execute(rctx) : true);
       if (passed) {
         if (this.returnClause != null) {
-          const val = this.returnClause.expression.execute(rctx);
+          const val = await this.returnClause.expression.execute(rctx);
           returnedValues.push(val);
         } else {
           if (this.aliases.length === 1 && this.aggregateClause == null) {
@@ -267,11 +272,11 @@ export class Query extends Expression {
     }
 
     if (this.aggregateClause != null) {
-      returnedValues = this.aggregateClause.aggregate(returnedValues, ctx);
+      returnedValues = await this.aggregateClause.aggregate(returnedValues, ctx);
     }
 
     if (this.sortClause != null) {
-      this.sortClause.sort(ctx, returnedValues);
+      returnedValues = await this.sortClause.sort(ctx, returnedValues);
     }
     if (this.sources.returnsList() || this.aggregateClause != null) {
       return returnedValues;
@@ -289,7 +294,7 @@ export class AliasRef extends Expression {
     this.name = json.name;
   }
 
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     return ctx != null ? ctx.get(this.name) : undefined;
   }
 }
@@ -331,18 +336,20 @@ class MultiSource {
     return this.isList || (this.rest && this.rest.returnsList());
   }
 
-  forEach(ctx: Context, func: any) {
-    let records = this.expression.execute(ctx);
+  async forEach(ctx: Context, func: any) {
+    let records = await this.expression.execute(ctx);
     this.isList = typeIsArray(records);
     records = this.isList ? records : [records];
-    return records.map((rec: any) => {
-      const rctx = new Context(ctx);
-      rctx.set(this.alias, rec);
-      if (this.rest) {
-        return this.rest.forEach(rctx, func);
-      } else {
-        return func(rctx);
-      }
-    });
+    return Promise.all(
+      records.map(async (rec: any) => {
+        const rctx = new Context(ctx);
+        rctx.set(this.alias, rec);
+        if (this.rest) {
+          return this.rest.forEach(rctx, func);
+        } else {
+          return func(rctx);
+        }
+      })
+    );
   }
 }
