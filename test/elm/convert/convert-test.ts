@@ -214,10 +214,10 @@ describe('FromDate', () => {
     dateTime.year.should.equal(2015);
     dateTime.month.should.equal(1);
     dateTime.day.should.equal(1);
-    dateTime.hour.should.equal(0);
-    dateTime.minute.should.equal(0);
-    dateTime.second.should.equal(0);
-    dateTime.millisecond.should.equal(0);
+    should.not.exist(dateTime.hour);
+    should.not.exist(dateTime.minute);
+    should.not.exist(dateTime.second);
+    should.not.exist(dateTime.millisecond);
     dateTime.timezoneOffset.should.equal(this.ctx.getTimezoneOffset());
     dateTime.isDateTime.should.equal.true;
   });

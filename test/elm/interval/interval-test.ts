@@ -694,7 +694,10 @@ describe('BeforeOrOn', () => {
   it('should handle Interval<Date> and Interval<DateTime> on either side', function () {
     this.dateOnlyIvlBeforeDateIvl.exec(this.ctx).should.be.true();
     this.dateIvlAfterDateOnlyIvl.exec(this.ctx).should.be.false();
-    this.dateOnlyMeetsBeforeDateIvl.exec(this.ctx).should.be.true();
+  });
+
+  it('should handle null Interval<Date> on boundary of Interval<DateTime>', function () {
+    should(this.dateOnlyMeetsBeforeDateIvl.exec(this.ctx)).be.null();
   });
 });
 
@@ -760,7 +763,9 @@ describe('AfterOrOn', () => {
   it('should handle Interval<Date> and Interval<DateTime> on either side', function () {
     this.dateOnlyIvlBeforeDateIvl.exec(this.ctx).should.be.false();
     this.dateIvlAfterDateOnlyIvl.exec(this.ctx).should.be.true();
-    this.dateOnlyMeetsAfterDateIvl.exec(this.ctx).should.be.true();
+  });
+  it('should handle null Interval<Date> on boundary of Interval<DateTime>', function () {
+    should(this.dateOnlyMeetsAfterDateIvl.exec(this.ctx)).be.null();
   });
 });
 
@@ -3014,10 +3019,10 @@ describe('SameAs', () => {
     this.notEqual.exec(this.ctx).should.be.false();
   });
 
-  it('returns null when comparing date and datetime because precision is changed when converting date to datetime', function () {
+  it('returns true when comparing date and datetime because precision is preserved when converting date to datetime', function () {
     // define DateTimeAndDateComparisonEqual: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[Date(2018,01,01), Date(2018,01,01)]
     const a = this.dateTimeAndDateComparisonEqual.exec(this.ctx);
-    should(a).be.null();
+    a.should.be.true();
   });
 
   it('returns null when both intervals are null', function () {

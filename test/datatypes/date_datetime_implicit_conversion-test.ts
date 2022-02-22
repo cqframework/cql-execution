@@ -19,10 +19,10 @@ describe('DateTime.differenceBetween with implicit conversion of first variable'
     a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
     a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
     a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(12));
-    a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(757));
-    a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(45465));
-    a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(45465000));
+    a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(-11, 12));
+    a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(-682, 757));
+    a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-40934, 45465));
+    a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-40934999, 45465000));
   }));
 
 describe('DateTime.durationBetween with implicit conversion of first variable', () =>
@@ -33,10 +33,10 @@ describe('DateTime.durationBetween with implicit conversion of first variable', 
     a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
     a.durationBetween(b, DateTime.Unit.WEEK).should.eql(new Uncertainty(0));
     a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
-    a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(12));
-    a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(757));
-    a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(45465));
-    a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(45465000));
+    a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(-11, 12));
+    a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(-682, 757));
+    a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-40934, 45465));
+    a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-40934999, 45465000));
   }));
 
 describe('DateTime.sameAs with implicit conversion of first variable', () => {
@@ -257,7 +257,7 @@ describe('DateTime.sameAs with implicit conversion of first variable', () => {
   });
 
   it('should handle potentially non-obvious cases of date to datetime conversion', () => {
-    should.not.exist(Date.parse('2000-01-01').sameAs(DateTime.parse('2000-01-01')));
+    Date.parse('2000-01-01').sameAs(DateTime.parse('2000-01-01')).should.be.true();
     Date.parse('2000-01').sameAs(DateTime.parse('2000-01')).should.be.true();
   });
 });
@@ -358,7 +358,7 @@ describe('DateTime.after with implicit conversion of first variable', () => {
   });
 
   it('should handle potentially non-obvious cases of date to datetime conversion', () => {
-    should.not.exist(Date.parse('2000-01-01').after(DateTime.parse('2000-01-01')));
+    Date.parse('2000-01-01').after(DateTime.parse('2000-01-01')).should.be.false();
     Date.parse('2000-01').after(DateTime.parse('2000-01')).should.be.false();
   });
 });
@@ -475,7 +475,7 @@ describe('DateTime.sameOrAfter with implicit conversion of first variable', () =
   });
 
   it('should handle potentially non-obvious cases of date to datetime conversion', () => {
-    should.not.exist(Date.parse('2000-01-01').sameOrAfter(DateTime.parse('2000-01-01')));
+    Date.parse('2000-01-01').sameOrAfter(DateTime.parse('2000-01-01')).should.be.true();
     Date.parse('2000-01').sameOrAfter(DateTime.parse('2000-01')).should.be.true();
   });
 });
@@ -517,7 +517,7 @@ describe('DateTime.before with implicit conversion of first variable', () => {
     should.not.exist(Date.parse('2000-01-01').before(DateTime.parse('2000-01-01T00:00:00')));
     should.not.exist(Date.parse('2000-01-01').before(DateTime.parse('2000-01-01T00:00')));
     should.not.exist(Date.parse('2000-01-01').before(DateTime.parse('2000-01-01T00')));
-    should.not.exist(Date.parse('2000-01-01').before(DateTime.parse('2000-01-01')));
+    Date.parse('2000-01-01').before(DateTime.parse('2000-01-01')).should.be.false();
     should.not.exist(Date.parse('2000-01-01').before(DateTime.parse('2000-01')));
     should.not.exist(Date.parse('2000-01-01').before(DateTime.parse('2000')));
   });
@@ -691,7 +691,7 @@ describe('DateTime.sameOrBefore with implicit conversion of first variable', () 
   });
 
   it('should handle potentially non-obvious cases of date to datetime conversion', () => {
-    should.not.exist(Date.parse('2000-01-01').sameOrBefore(DateTime.parse('2000-01-01')));
+    Date.parse('2000-01-01').sameOrBefore(DateTime.parse('2000-01-01')).should.be.true();
     Date.parse('2000-01').sameOrBefore(DateTime.parse('2000-01')).should.be.true();
   });
 });
@@ -705,10 +705,10 @@ describe('DateTime.differenceBetween with implicit conversion of second variable
     a.differenceBetween(b, DateTime.Unit.YEAR).should.eql(new Uncertainty(0));
     a.differenceBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
     a.differenceBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
-    a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(-12));
-    a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(-757));
-    a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-45465));
-    a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-45465000));
+    a.differenceBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(-12, 11));
+    a.differenceBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(-757, 682));
+    a.differenceBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-45465, 40934));
+    a.differenceBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-45465000, 40934999));
   }));
 
 describe('DateTime.durationBetween with implicit conversion of second variable', () =>
@@ -719,10 +719,10 @@ describe('DateTime.durationBetween with implicit conversion of second variable',
     a.durationBetween(b, DateTime.Unit.MONTH).should.eql(new Uncertainty(0));
     a.durationBetween(b, DateTime.Unit.WEEK).should.eql(new Uncertainty(0));
     a.durationBetween(b, DateTime.Unit.DAY).should.eql(new Uncertainty(0));
-    a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(-12));
-    a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(-757));
-    a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-45465));
-    a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-45465000));
+    a.durationBetween(b, DateTime.Unit.HOUR).should.eql(new Uncertainty(-12, 11));
+    a.durationBetween(b, DateTime.Unit.MINUTE).should.eql(new Uncertainty(-757, 682));
+    a.durationBetween(b, DateTime.Unit.SECOND).should.eql(new Uncertainty(-45465, 40934));
+    a.durationBetween(b, DateTime.Unit.MILLISECOND).should.eql(new Uncertainty(-45465000, 40934999));
   }));
 
 describe('DateTime.sameAs with implicit conversion of second variable', () => {
@@ -919,7 +919,7 @@ describe('DateTime.sameAs with implicit conversion of second variable', () => {
   });
 
   it('should handle potentially non-obvious cases of date to datetime conversion', () => {
-    should.not.exist(DateTime.parse('2000-01-01').sameAs(Date.parse('2000-01-01')));
+    DateTime.parse('2000-01-01').sameAs(Date.parse('2000-01-01')).should.be.true();
     DateTime.parse('2000-01').sameAs(Date.parse('2000-01')).should.be.true();
   });
 });
@@ -1044,7 +1044,7 @@ describe('DateTime.sameOrBefore with implicit conversion of second variable', ()
   });
 
   it('should return null in cases where b has unknown values that prevent deterministic result', () => {
-    should.not.exist(DateTime.parse('2000-01-01').sameOrBefore(Date.parse('2000-01-01')));
+    DateTime.parse('2000-01-01').sameOrBefore(Date.parse('2000-01-01')).should.be.true();
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrBefore(Date.parse('2000-01')));
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrBefore(Date.parse('2000')));
   });
@@ -1081,7 +1081,7 @@ describe('DateTime.sameOrBefore with implicit conversion of second variable', ()
   });
 
   it('should reject cases where a has unknown values but is still deterministicly after b', () => {
-    DateTime.parse('2000-01-01T00:00:01').sameOrBefore(Date.parse('2000-01-01')).should.be.false();
+    should.not.exist(DateTime.parse('2000-01-01T00:00:01').sameOrBefore(Date.parse('2000-01-01')));
     DateTime.parse('2000-01-02T00:01').sameOrBefore(Date.parse('2000-01-01')).should.be.false();
     DateTime.parse('2000-01-02T01').sameOrBefore(Date.parse('2000-01-01')).should.be.false();
     DateTime.parse('2000-01-02').sameOrBefore(Date.parse('2000-01-01')).should.be.false();
@@ -1096,7 +1096,7 @@ describe('DateTime.sameOrBefore with implicit conversion of second variable', ()
   });
 
   it('should handle potentially non-obvious cases of date to datetime conversion', () => {
-    should.not.exist(DateTime.parse('2000-01-01').sameOrBefore(Date.parse('2000-01-01')));
+    DateTime.parse('2000-01-01').sameOrBefore(Date.parse('2000-01-01')).should.be.true();
     DateTime.parse('2000-01').sameOrBefore(Date.parse('2000-01')).should.be.true();
   });
 });
@@ -1135,7 +1135,7 @@ describe('DateTime.after with implicit conversion of second variable', () => {
   });
 
   it('should handle cases where a has unknown values that prevent deterministic result', () => {
-    should.not.exist(DateTime.parse('2000-01-01').after(Date.parse('2000-01-01')));
+    DateTime.parse('2000-01-01').after(Date.parse('2000-01-01')).should.be.false();
     should.not.exist(DateTime.parse('2000-01-01T00:00:00').after(Date.parse('2000-01-01')));
     should.not.exist(DateTime.parse('2000-01-01T00:00').after(Date.parse('2000-01-01')));
     should.not.exist(DateTime.parse('2000-01-01T00').after(Date.parse('2000-01-01')));
@@ -1145,13 +1145,12 @@ describe('DateTime.after with implicit conversion of second variable', () => {
   });
 
   it('should return null in cases where b has unknown values that prevent deterministic result', () => {
-    should.not.exist(DateTime.parse('2000-01-01').after(Date.parse('2000-01-01')));
+    should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').after(Date.parse('2000-01-01')));
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').after(Date.parse('2000-01')));
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').after(Date.parse('2000')));
   });
 
   it('should accept cases where a has unknown values but is still deterministicly after b', () => {
-    DateTime.parse('2000-01-01T00:00:01').after(Date.parse('2000-01-01')).should.be.true();
     DateTime.parse('2000-01-02T00:01').after(Date.parse('2000-01-01')).should.be.true();
     DateTime.parse('2000-01-02T01').after(Date.parse('2000-01-01')).should.be.true();
     DateTime.parse('2000-01-02').after(Date.parse('2000-01-01')).should.be.true();
@@ -1223,12 +1222,12 @@ describe('DateTime.sameOrAfter with implicit conversion of second variable', () 
     should.not.exist(DateTime.parse('2000-01-01T00:00').sameOrAfter(Date.parse('2000-01-01')));
     should.not.exist(DateTime.parse('2000-01-01T00').sameOrAfter(Date.parse('2000-01-01')));
     // matching precision, therefore true
+    DateTime.parse('2000-01-01').sameOrAfter(Date.parse('2000-01-01')).should.be.true();
     DateTime.parse('2000-01').sameOrAfter(Date.parse('2000-01')).should.be.true();
     DateTime.parse('2000').sameOrAfter(Date.parse('2000')).should.be.true();
   });
 
   it('should return null in cases where a has unknown values that prevent deterministic result', () => {
-    should.not.exist(DateTime.parse('2000-01-01').sameOrAfter(Date.parse('2000-01-01')));
     should.not.exist(DateTime.parse('2000-01-01T00:00:00').sameOrAfter(Date.parse('2000-01-01')));
     should.not.exist(DateTime.parse('2000-01-01T00:00').sameOrAfter(Date.parse('2000-01-01')));
     should.not.exist(DateTime.parse('2000-01-01T00').sameOrAfter(Date.parse('2000-01-01')));
@@ -1238,13 +1237,12 @@ describe('DateTime.sameOrAfter with implicit conversion of second variable', () 
   });
 
   it('should return null in cases where b has unknown values that prevent deterministic result', () => {
-    should.not.exist(DateTime.parse('2000-01-01').sameOrAfter(Date.parse('2000-01-01')));
+    should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrAfter(Date.parse('2000-01-01')));
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrAfter(Date.parse('2000-01')));
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrAfter(Date.parse('2000')));
   });
 
   it('should accept cases where a has unknown values but is still deterministicly after b', () => {
-    DateTime.parse('2000-01-01T00:00:01').sameOrAfter(Date.parse('2000-01-01')).should.be.true();
     DateTime.parse('2000-01-02T00:01').sameOrAfter(Date.parse('2000-01-01')).should.be.true();
     DateTime.parse('2000-01-02T01').sameOrAfter(Date.parse('2000-01-01')).should.be.true();
     DateTime.parse('2000-01-02').sameOrAfter(Date.parse('2000-01-01')).should.be.true();
@@ -1262,12 +1260,12 @@ describe('DateTime.sameOrAfter with implicit conversion of second variable', () 
   });
 
   it('should accept cases where b has unknown values but a is still deterministicly after or same as b', () => {
-    DateTime.parse('2000-01-01T00:00:00.1').sameOrAfter(Date.parse('2000-01-01')).should.be.true();
     DateTime.parse('2000-02-01T00:00:00.0').sameOrAfter(Date.parse('2000-01')).should.be.true();
     DateTime.parse('2001-01-01T00:00:00.0').sameOrAfter(Date.parse('2000')).should.be.true();
   });
 
   it('should reject cases where b has unknown values but a is not deterministicly same as or after b', () => {
+    should.not.exist(DateTime.parse('2000-01-01T00:00:00.1').sameOrAfter(Date.parse('2000-01-01')));
     should.not.exist(DateTime.parse('2000-01-31T23:59:59.999').sameOrAfter(Date.parse('2000-01')));
     should.not.exist(DateTime.parse('2000-12-31T23:59:59.999').sameOrAfter(Date.parse('2000')));
   });
@@ -1290,7 +1288,7 @@ describe('DateTime.sameOrAfter with implicit conversion of second variable', () 
   });
 
   it('should handle potentially non-obvious cases of date to datetime conversion', () => {
-    should.not.exist(DateTime.parse('2000-01-01').sameOrAfter(Date.parse('2000-01-01')));
+    DateTime.parse('2000-01-01').sameOrAfter(Date.parse('2000-01-01')).should.be.true();
     DateTime.parse('2000-01').sameOrAfter(Date.parse('2000-01')).should.be.true();
   });
 });
