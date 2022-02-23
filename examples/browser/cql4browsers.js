@@ -4927,7 +4927,7 @@ var Retrieve = /** @class */ (function (_super) {
     Retrieve.prototype.exec = function (ctx) {
         var _a;
         var _this = this;
-        var records = ctx.findRecords(this.templateId != null ? this.templateId : this.datatype);
+        var records = ctx.findRecords(this.templateId != null ? this.templateId : this.datatype, this);
         var codes = this.codes;
         if (this.codes && typeof this.codes.exec === 'function') {
             codes = this.codes.execute(ctx);
@@ -9014,8 +9014,8 @@ var Context = /** @class */ (function () {
             return this;
         }
     };
-    Context.prototype.findRecords = function (profile) {
-        return this.parent && this.parent.findRecords(profile);
+    Context.prototype.findRecords = function (profile, retrieve) {
+        return this.parent && this.parent.findRecords(profile, retrieve);
     };
     Context.prototype.childContext = function (context_values) {
         if (context_values === void 0) { context_values = {}; }

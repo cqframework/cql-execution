@@ -5,6 +5,7 @@ import { MessageListener, NullMessageListener } from './messageListeners';
 import { Patient } from '../cql-patient';
 import { Parameter } from '../types/runtime.types';
 import { TerminologyProvider } from '../types';
+import { Retrieve } from '../elm/external';
 
 export class Context {
   // Public Construcor args
@@ -77,8 +78,8 @@ export class Context {
     }
   }
 
-  findRecords(profile: any): any {
-    return this.parent && this.parent.findRecords(profile);
+  findRecords(profile: string | null, retrieve?: Retrieve): any {
+    return this.parent && this.parent.findRecords(profile, retrieve);
   }
 
   childContext(context_values = {}) {

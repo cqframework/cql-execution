@@ -1,4 +1,6 @@
 import setup from '../../setup';
+import sinon from 'sinon';
+import 'should-sinon';
 const data = require('./data');
 const vsets = require('./valuesets');
 const { p1 } = require('./patients');
@@ -7,6 +9,13 @@ import { Repository } from '../../../src/cql';
 describe('Retrieve', () => {
   beforeEach(function () {
     setup(this, data, [p1], vsets, {}, new Repository(data));
+  });
+
+  it('should pass Retrieve to findRecords call', function () {
+    const findRecordsSpy = sinon.spy(this.ctx, 'findRecords');
+    this.conditions.exec(this.ctx);
+
+    findRecordsSpy.should.be.calledWithExactly(this.conditions.datatype, this.conditions);
   });
 
   it('should find conditions', function () {

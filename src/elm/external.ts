@@ -22,7 +22,7 @@ export class Retrieve extends Expression {
   }
 
   exec(ctx: Context) {
-    let records = ctx.findRecords(this.templateId != null ? this.templateId : this.datatype);
+    let records = ctx.findRecords(this.templateId != null ? this.templateId : this.datatype, this);
     let codes = this.codes;
     if (this.codes && typeof this.codes.exec === 'function') {
       codes = this.codes.execute(ctx);

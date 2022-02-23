@@ -1,3 +1,4 @@
+import { Retrieve } from '../elm/external';
 import { AnyTypeSpecifier } from './type-specifiers.interfaces';
 
 /*
@@ -25,5 +26,5 @@ export interface RecordObject {
  * Patient data object that implements logic for searching for records based on the Patient
  */
 export interface PatientObject extends RecordObject {
-  findRecords(profile: string | null): RecordObject[];
+  findRecords(profile: string | null, retrieve?: Retrieve): RecordObject[];
 }
