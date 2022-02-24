@@ -4,6 +4,7 @@ import { UnfilteredContext, PatientContext } from './context';
 import { DateTime } from '../datatypes/datetime';
 import { Parameter } from '../types/runtime.types';
 import { DataProvider, TerminologyProvider } from '../types';
+import { isPromise } from '../util/util';
 
 export class Executor {
   constructor(
@@ -37,17 +38,25 @@ export class Executor {
     const r = new Results();
     const expr = this.library.expressions[expression];
     if (expr != null) {
-      while (patientSource.currentPatient()) {
+      // Needed to support both synchronous and asynchronous patient sources
+      let p = patientSource.currentPatient();
+      if (isPromise(p)) {
+        p = await p;
+      }
+      while (p) {
         const patient_ctx = new PatientContext(
           this.library,
-          patientSource.currentPatient(),
+          p,
           this.codeService,
           this.parameters,
           executionDateTime,
           this.messageListener
         );
         r.recordPatientResults(patient_ctx, { [expression]: expr.execute(patient_ctx) });
-        patientSource.nextPatient();
+        p = patientSource.nextPatient();
+        if (isPromise(p)) {
+          p = await p;
+        }
       }
     }
     return r;
@@ -76,10 +85,17 @@ export class Executor {
 
   async exec_patient_context(patientSource: DataProvider, executionDateTime?: DateTime) {
     const r = new Results();
-    while (patientSource.currentPatient()) {
+
+    // Needed to support both synchronous and asynchronous patient sources
+    let p = patientSource.currentPatient();
+    if (isPromise(p)) {
+      p = await p;
+    }
+
+    while (p) {
       const patient_ctx = new PatientContext(
         this.library,
-        patientSource.currentPatient(),
+        p,
         this.codeService,
         this.parameters,
         executionDateTime,
@@ -93,7 +109,10 @@ export class Executor {
         }
       }
       r.recordPatientResults(patient_ctx, resultMap);
-      patientSource.nextPatient();
+      p = patientSource.nextPatient();
+      if (isPromise(p)) {
+        p = await p;
+      }
     }
     return r;
   }

@@ -1,4 +1,4 @@
-import { asyncMergeSort, typeIsArray } from '../../src/util/util';
+import { asyncMergeSort, isPromise, typeIsArray } from '../../src/util/util';
 import 'should';
 
 describe('typeIsArray', () => {
@@ -92,5 +92,20 @@ describe('asyncMergeSort', () => {
 
     const sorted = await asyncMergeSort(arr, async (a, b) => a.val - b.val);
     sorted.should.eql([{ val: 1 }, { val: 2 }, { val: 3 }]);
+  });
+});
+
+describe('isPromise', () => {
+  it('should return false for nullish value', () => {
+    isPromise(undefined).should.be.false();
+    isPromise(null).should.be.false();
+  });
+
+  it('should return false for non-promise', () => {
+    isPromise('not a promise').should.be.false();
+  });
+
+  it('should return true for promise', () => {
+    isPromise(Promise.resolve('definitely a promise')).should.be.true();
   });
 });

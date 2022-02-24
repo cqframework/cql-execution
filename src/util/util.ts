@@ -105,3 +105,8 @@ async function merge<T>(left: T[], right: T[], compareFn: SortCompareFn<T>) {
   }
   return [...sorted, ...left, ...right];
 }
+
+export function isPromise<T>(res: T | Promise<T>): res is Promise<T> {
+  if (res == null) return false;
+  return typeof (res as Promise<T>).then === 'function';
+}
