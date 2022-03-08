@@ -4,7 +4,7 @@ import 'should-sinon';
 const data = require('./data');
 const vsets = require('./valuesets');
 const { p1 } = require('./patients');
-import { Repository } from '../../../src/cql';
+import { Repository, RetrieveDetails } from '../../../src/cql';
 
 describe('Retrieve', () => {
   beforeEach(function () {
@@ -15,7 +15,11 @@ describe('Retrieve', () => {
     const findRecordsSpy = sinon.spy(this.ctx, 'findRecords');
     this.conditions.exec(this.ctx);
 
-    findRecordsSpy.should.be.calledWithExactly(this.conditions.datatype, this.conditions);
+    const expectedRetrieveDetail: RetrieveDetails = {
+      datatype: '{https://github.com/cqframework/cql-execution/simple}Condition'
+    };
+
+    findRecordsSpy.should.be.calledWithExactly(this.conditions.datatype, expectedRetrieveDetail);
   });
 
   it('should find conditions', function () {

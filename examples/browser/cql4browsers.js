@@ -4927,21 +4927,37 @@ var Retrieve = /** @class */ (function (_super) {
     Retrieve.prototype.exec = function (ctx) {
         var _a;
         var _this = this;
-        var records = ctx.findRecords(this.templateId != null ? this.templateId : this.datatype, this);
-        var codes = this.codes;
-        if (this.codes && typeof this.codes.exec === 'function') {
-            codes = this.codes.execute(ctx);
-            if (codes == null) {
+        // Object with retrieve information to pass back to patient source
+        var retrieveDetails = {
+            datatype: this.datatype
+        };
+        var resolvedCodes;
+        if (this.codes) {
+            resolvedCodes = this.codes.execute(ctx);
+            if (resolvedCodes == null) {
                 return [];
             }
-        }
-        if (codes) {
-            records = records.filter(function (r) { return _this.recordMatchesCodesOrVS(r, codes); });
+            retrieveDetails.codes = resolvedCodes;
         }
         // TODO: Added @dateProperty check due to previous fix in cql4browsers in cql_qdm_patient_api hash: ddbc57
+        var range;
         if (this.dateRange && this.dateProperty) {
-            var range_1 = this.dateRange.execute(ctx);
-            records = records.filter(function (r) { return range_1.includes(r.getDateOrInterval(_this.dateProperty)); });
+            range = this.dateRange.execute(ctx);
+            retrieveDetails.dateRange = range;
+            retrieveDetails.dateProperty = this.dateProperty;
+        }
+        if (this.templateId) {
+            retrieveDetails.templateId = this.templateId;
+        }
+        if (resolvedCodes && this.codeProperty) {
+            retrieveDetails.codeProperty = this.codeProperty;
+        }
+        var records = ctx.findRecords(this.templateId != null ? this.templateId : this.datatype, retrieveDetails);
+        if (resolvedCodes) {
+            records = records.filter(function (r) { return _this.recordMatchesCodesOrVS(r, resolvedCodes); });
+        }
+        if (range && this.dateProperty) {
+            records = records.filter(function (r) { return range === null || range === void 0 ? void 0 : range.includes(r.getDateOrInterval(_this.dateProperty)); });
         }
         if (Array.isArray(records)) {
             (_a = ctx.evaluatedRecords).push.apply(_a, records);
@@ -9014,8 +9030,8 @@ var Context = /** @class */ (function () {
             return this;
         }
     };
-    Context.prototype.findRecords = function (profile, retrieve) {
-        return this.parent && this.parent.findRecords(profile, retrieve);
+    Context.prototype.findRecords = function (profile, retrieveDetails) {
+        return this.parent && this.parent.findRecords(profile, retrieveDetails);
     };
     Context.prototype.childContext = function (context_values) {
         if (context_values === void 0) { context_values = {}; }
@@ -9360,8 +9376,8 @@ var PatientContext = /** @class */ (function (_super) {
         }
         return this.localId_context[localId];
     };
-    PatientContext.prototype.findRecords = function (profile) {
-        return this.patient && this.patient.findRecords(profile);
+    PatientContext.prototype.findRecords = function (profile, retrieveDetails) {
+        return this.patient && this.patient.findRecords(profile, retrieveDetails);
     };
     return PatientContext;
 }(Context));
