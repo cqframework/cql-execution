@@ -355,8 +355,8 @@ describe('CalculateAgeAt', () => {
     this.ageInYearsDateArg.exec(this.ctx).should.eql(18);
   });
 
-  it('should convert date to DateTime, give 17 (using CalculateAgeInYearsAt)', function () {
+  it('should convert date to DateTime, give uncertainty (using CalculateAgeInYearsAt)', function () {
     setup(this, data, [p3]);
-    this.calculateAgeInYearsDateArg.exec(this.ctx).should.eql(17);
+    this.calculateAgeInYearsDateArg.exec(this.ctx).should.eql(new Uncertainty(17, 18));
   });
 });
