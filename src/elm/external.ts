@@ -43,11 +43,8 @@ export class Retrieve extends Expression {
       retrieveDetails.codes = resolvedCodes;
     }
 
-    // TODO: Added @dateProperty check due to previous fix in cql4browsers in cql_qdm_patient_api hash: ddbc57
     if (this.dateRange) {
-      const range: Interval = this.dateRange.execute(ctx);
-
-      retrieveDetails.dateRange = range;
+      retrieveDetails.dateRange = this.dateRange.execute(ctx);
     }
 
     if (this.templateId) {
