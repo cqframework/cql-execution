@@ -2,9 +2,8 @@ import { Exception } from '../datatypes/exception';
 import { typeIsArray } from '../util/util';
 import * as dt from '../datatypes/datatypes';
 import { MessageListener, NullMessageListener } from './messageListeners';
-import { Patient } from '../cql-patient';
 import { Parameter } from '../types/runtime.types';
-import { TerminologyProvider } from '../types';
+import { PatientObject, RetrieveDetails, TerminologyProvider } from '../types';
 
 export class Context {
   // Public Construcor args
@@ -77,8 +76,8 @@ export class Context {
     }
   }
 
-  findRecords(profile: any): any {
-    return this.parent && this.parent.findRecords(profile);
+  findRecords(profile: string | null, retrieveDetails?: RetrieveDetails): any {
+    return this.parent && this.parent.findRecords(profile, retrieveDetails);
   }
 
   childContext(context_values = {}) {
@@ -422,7 +421,7 @@ export class Context {
 export class PatientContext extends Context {
   constructor(
     public library: any,
-    public patient?: Patient | null,
+    public patient?: PatientObject | null,
     codeService?: TerminologyProvider | null,
     parameters?: Parameter,
     executionDateTime: dt.DateTime = dt.DateTime.fromJSDate(new Date()),
@@ -461,8 +460,8 @@ export class PatientContext extends Context {
     return this.localId_context[localId];
   }
 
-  findRecords(profile: any) {
-    return this.patient && this.patient.findRecords(profile);
+  findRecords(profile: any, retrieveDetails?: RetrieveDetails) {
+    return this.patient && this.patient.findRecords(profile, retrieveDetails);
   }
 }
 
