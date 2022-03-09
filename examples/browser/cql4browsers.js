@@ -4907,6 +4907,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Retrieve = void 0;
 var expression_1 = require("./expression");
@@ -4928,36 +4939,29 @@ var Retrieve = /** @class */ (function (_super) {
         var _a;
         var _this = this;
         // Object with retrieve information to pass back to patient source
-        var retrieveDetails = {
-            datatype: this.datatype
-        };
-        var resolvedCodes;
+        // Always assign datatype. Assign codeProperty and dateProperty if present
+        var retrieveDetails = __assign(__assign({ datatype: this.datatype }, (this.codeProperty ? { codeProperty: this.codeProperty } : {})), (this.dateProperty ? { dateProperty: this.dateProperty } : {}));
         if (this.codes) {
-            resolvedCodes = this.codes.execute(ctx);
+            var resolvedCodes = this.codes.execute(ctx);
             if (resolvedCodes == null) {
                 return [];
             }
             retrieveDetails.codes = resolvedCodes;
         }
         // TODO: Added @dateProperty check due to previous fix in cql4browsers in cql_qdm_patient_api hash: ddbc57
-        var range;
-        if (this.dateRange && this.dateProperty) {
-            range = this.dateRange.execute(ctx);
+        if (this.dateRange) {
+            var range = this.dateRange.execute(ctx);
             retrieveDetails.dateRange = range;
-            retrieveDetails.dateProperty = this.dateProperty;
         }
         if (this.templateId) {
             retrieveDetails.templateId = this.templateId;
         }
-        if (resolvedCodes && this.codeProperty) {
-            retrieveDetails.codeProperty = this.codeProperty;
-        }
         var records = ctx.findRecords(this.templateId != null ? this.templateId : this.datatype, retrieveDetails);
-        if (resolvedCodes) {
-            records = records.filter(function (r) { return _this.recordMatchesCodesOrVS(r, resolvedCodes); });
+        if (retrieveDetails.codes) {
+            records = records.filter(function (r) { return _this.recordMatchesCodesOrVS(r, retrieveDetails.codes); });
         }
-        if (range && this.dateProperty) {
-            records = records.filter(function (r) { return range === null || range === void 0 ? void 0 : range.includes(r.getDateOrInterval(_this.dateProperty)); });
+        if (retrieveDetails.dateRange && this.dateProperty) {
+            records = records.filter(function (r) { var _a; return (_a = retrieveDetails.dateRange) === null || _a === void 0 ? void 0 : _a.includes(r.getDateOrInterval(_this.dateProperty)); });
         }
         if (Array.isArray(records)) {
             (_a = ctx.evaluatedRecords).push.apply(_a, records);

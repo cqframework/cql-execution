@@ -26,13 +26,15 @@ export class Retrieve extends Expression {
 
   exec(ctx: Context) {
     // Object with retrieve information to pass back to patient source
+    // Always assign datatype. Assign codeProperty and dateProperty if present
     const retrieveDetails: RetrieveDetails = {
-      datatype: this.datatype
+      datatype: this.datatype,
+      ...(this.codeProperty ? { codeProperty: this.codeProperty } : {}),
+      ...(this.dateProperty ? { dateProperty: this.dateProperty } : {})
     };
 
-    let resolvedCodes: Code[] | ValueSet | undefined;
     if (this.codes) {
-      resolvedCodes = this.codes.execute(ctx);
+      const resolvedCodes: Code[] | ValueSet | undefined = this.codes.execute(ctx);
 
       if (resolvedCodes == null) {
         return [];
@@ -40,21 +42,16 @@ export class Retrieve extends Expression {
 
       retrieveDetails.codes = resolvedCodes;
     }
+
     // TODO: Added @dateProperty check due to previous fix in cql4browsers in cql_qdm_patient_api hash: ddbc57
-    let range: Interval | undefined;
-    if (this.dateRange && this.dateProperty) {
-      range = this.dateRange.execute(ctx);
+    if (this.dateRange) {
+      const range: Interval = this.dateRange.execute(ctx);
 
       retrieveDetails.dateRange = range;
-      retrieveDetails.dateProperty = this.dateProperty;
     }
 
     if (this.templateId) {
       retrieveDetails.templateId = this.templateId;
-    }
-
-    if (resolvedCodes && this.codeProperty) {
-      retrieveDetails.codeProperty = this.codeProperty;
     }
 
     let records = ctx.findRecords(
@@ -62,12 +59,14 @@ export class Retrieve extends Expression {
       retrieveDetails
     );
 
-    if (resolvedCodes) {
-      records = records.filter((r: any) => this.recordMatchesCodesOrVS(r, resolvedCodes));
+    if (retrieveDetails.codes) {
+      records = records.filter((r: any) => this.recordMatchesCodesOrVS(r, retrieveDetails.codes));
     }
 
-    if (range && this.dateProperty) {
-      records = records.filter((r: any) => range?.includes(r.getDateOrInterval(this.dateProperty)));
+    if (retrieveDetails.dateRange && this.dateProperty) {
+      records = records.filter((r: any) =>
+        retrieveDetails.dateRange?.includes(r.getDateOrInterval(this.dateProperty))
+      );
     }
 
     if (Array.isArray(records)) {

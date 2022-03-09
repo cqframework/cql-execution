@@ -1,25 +1,17 @@
 import setup from '../../setup';
+import should from 'should';
 import sinon from 'sinon';
 import 'should-sinon';
 const data = require('./data');
 const vsets = require('./valuesets');
 const { p1 } = require('./patients');
-import { Repository, RetrieveDetails } from '../../../src/cql';
+import { Code, Interval, Repository, RetrieveDetails, ValueSet } from '../../../src/cql';
 
 describe('Retrieve', () => {
+  let findRecordsSpy: sinon.SinonSpy<any[], any>;
   beforeEach(function () {
     setup(this, data, [p1], vsets, {}, new Repository(data));
-  });
-
-  it('should pass Retrieve to findRecords call', function () {
-    const findRecordsSpy = sinon.spy(this.ctx, 'findRecords');
-    this.conditions.exec(this.ctx);
-
-    const expectedRetrieveDetail: RetrieveDetails = {
-      datatype: '{https://github.com/cqframework/cql-execution/simple}Condition'
-    };
-
-    findRecordsSpy.should.be.calledWithExactly(this.conditions.datatype, expectedRetrieveDetail);
+    findRecordsSpy = sinon.spy(this.ctx, 'findRecords');
   });
 
   it('should find conditions', function () {
@@ -95,5 +87,75 @@ describe('Retrieve', () => {
     e[0].id.should.equal('http://cqframework.org/3/2');
     this.ctx.evaluatedRecords.should.have.length(1);
     this.ctx.evaluatedRecords.should.containDeep(e);
+  });
+
+  it('should pass datatype to findRecords call for simple retrieve', function () {
+    this.conditions.exec(this.ctx);
+
+    const expectedRetrieveDetail: RetrieveDetails = {
+      datatype: '{https://github.com/cqframework/cql-execution/simple}Condition'
+    };
+
+    findRecordsSpy.should.be.calledWithExactly(this.conditions.datatype, expectedRetrieveDetail);
+  });
+
+  it('should pass codeProperty to findRecords when defined', function () {
+    this.pharyngitisConditions.exec(this.ctx);
+
+    const expectedRetrieveDetail: RetrieveDetails = {
+      datatype: '{https://github.com/cqframework/cql-execution/simple}Condition',
+      codeProperty: 'code'
+    };
+
+    findRecordsSpy.should.be.calledOnce();
+
+    const retrieveDetails = findRecordsSpy.getCall(0).lastArg;
+
+    retrieveDetails.should.containDeep(expectedRetrieveDetail);
+  });
+
+  it('should pass resolved codes to findRecords from valueSet', function () {
+    this.pharyngitisConditions.exec(this.ctx);
+
+    findRecordsSpy.should.be.calledOnce();
+
+    const retrieveDetails = findRecordsSpy.getCall(0).lastArg;
+
+    should(retrieveDetails.codes).not.be.undefined();
+
+    retrieveDetails.codes.should.be.instanceOf(ValueSet);
+
+    const vs = retrieveDetails.codes;
+    should(vs.codes).not.be.undefined();
+    vs.codes.should.be.an.Array();
+    vs.codes.forEach((c: unknown) => {
+      c.should.be.instanceOf(Code);
+    });
+  });
+
+  it('should pass resolved codes to findRecords from direct reference code', function () {
+    this.conditionsByCode.exec(this.ctx);
+
+    findRecordsSpy.should.be.calledOnce();
+
+    const retrieveDetails = findRecordsSpy.getCall(0).lastArg;
+
+    should(retrieveDetails.codes).not.be.undefined();
+    retrieveDetails.codes.should.be.an.Array();
+    retrieveDetails.codes.forEach((c: unknown) => {
+      c.should.be.instanceOf(Code);
+    });
+  });
+
+  it('should pass dateProperty and resolved dateRange to findRecords', function () {
+    this.conditionsByDate.exec(this.ctx);
+
+    findRecordsSpy.should.be.calledOnce();
+
+    const retrieveDetails = findRecordsSpy.getCall(0).lastArg;
+
+    should(retrieveDetails.dateProperty).equal('period');
+    should(retrieveDetails.dateRange).not.be.undefined();
+    retrieveDetails.dateRange.should.be.instanceOf(Interval);
   });
 });
