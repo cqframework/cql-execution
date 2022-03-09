@@ -178,7 +178,7 @@ abstract class AbstractDate {
     // should normalize to the timezone offset of the evaluation request timestamp,
     // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
     // @ts-ignore
-    if (precision == null || this.constructor.FIELDS.indexOf(precision) > 2) {
+    if (isPrecisionUnspecifiedOrGreaterThanDay(precision)) {
       if ((this as any).timezoneOffset !== other.timezoneOffset) {
         other = other.convertToTimezoneOffset((this as any).timezoneOffset);
       }
@@ -239,7 +239,7 @@ abstract class AbstractDate {
     // should normalize to the timezone offset of the evaluation request timestamp,
     // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
     // @ts-ignore
-    if (precision == null || this.constructor.FIELDS.indexOf(precision) > 2) {
+    if (isPrecisionUnspecifiedOrGreaterThanDay(precision)) {
       if ((this as any).timezoneOffset !== other.timezoneOffset) {
         other = other.convertToTimezoneOffset((this as any).timezoneOffset);
       }
@@ -305,7 +305,7 @@ abstract class AbstractDate {
     // should normalize to the timezone offset of the evaluation request timestamp,
     // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
     // @ts-ignore
-    if (precision == null || this.constructor.FIELDS.indexOf(precision) > 2) {
+    if (isPrecisionUnspecifiedOrGreaterThanDay(precision)) {
       if ((this as any).timezoneOffset !== other.timezoneOffset) {
         other = other.convertToTimezoneOffset((this as any).timezoneOffset);
       }
@@ -371,7 +371,7 @@ abstract class AbstractDate {
     // should normalize to the timezone offset of the evaluation request timestamp,
     // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
     // @ts-ignore
-    if (precision == null || this.constructor.FIELDS.indexOf(precision) > 2) {
+    if (isPrecisionUnspecifiedOrGreaterThanDay(precision)) {
       if ((this as any).timezoneOffset !== other.timezoneOffset) {
         other = other.convertToTimezoneOffset((this as any).timezoneOffset);
       }
@@ -437,7 +437,7 @@ abstract class AbstractDate {
     // should normalize to the timezone offset of the evaluation request timestamp,
     // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
     // @ts-ignore
-    if (precision == null || this.constructor.FIELDS.indexOf(precision) > 2) {
+    if (isPrecisionUnspecifiedOrGreaterThanDay(precision)) {
       if ((this as any).timezoneOffset !== other.timezoneOffset) {
         other = other.convertToTimezoneOffset((this as any).timezoneOffset);
       }
@@ -1345,4 +1345,10 @@ function isValidDateTimeStringFormat(string: any) {
   }
 
   return formats.some((fmt: any) => LuxonDateTime.fromFormat(string, fmt).isValid);
+}
+
+// Will return true if provided precision is unspecified or if
+// precision is hours, minutes, seconds, or milliseconds
+function isPrecisionUnspecifiedOrGreaterThanDay(precision: any) {
+  return precision == null || /^h|mi|s/.test(precision);
 }
