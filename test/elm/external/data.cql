@@ -15,6 +15,7 @@ define WrongValueSet: [Condition: "Ambulatory/ED Visit"]
 define WrongCodeProperty: [Encounter: status in "Ambulatory/ED Visit"]
 define ConditionsByCode: [Condition: "Viral pharyngitis code"]
 define ConditionsByConcept: [Condition: "Viral pharyngitis"]
+define ConditionsByDate: [Condition] C where C.period during Interval[@2013-03-01T00:00:00.0, @2013-03-31T00:00:00.0)
 
 // @Test: Included
 library Included version '1'

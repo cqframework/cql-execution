@@ -28,6 +28,7 @@ define WrongValueSet: [Condition: "Ambulatory/ED Visit"]
 define WrongCodeProperty: [Encounter: status in "Ambulatory/ED Visit"]
 define ConditionsByCode: [Condition: "Viral pharyngitis code"]
 define ConditionsByConcept: [Condition: "Viral pharyngitis"]
+define ConditionsByDate: [Condition] C where C.period during Interval[@2013-03-01T00:00:00.0, @2013-03-31T00:00:00.0)
 */
 
 module.exports['Retrieve'] = {
@@ -38,7 +39,7 @@ module.exports['Retrieve'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "27",
+            "r" : "37",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -541,6 +542,171 @@ module.exports['Retrieve'] = {
                      "type" : "ConceptRef"
                   }
                }
+            }
+         }, {
+            "localId" : "37",
+            "name" : "ConditionsByDate",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "37",
+                  "s" : [ {
+                     "value" : [ "","define ","ConditionsByDate",": " ]
+                  }, {
+                     "r" : "36",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "29",
+                           "s" : [ {
+                              "r" : "28",
+                              "s" : [ {
+                                 "r" : "28",
+                                 "s" : [ {
+                                    "value" : [ "[","Condition","]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","C" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " " ]
+                     }, {
+                        "r" : "35",
+                        "s" : [ {
+                           "value" : [ "where " ]
+                        }, {
+                           "r" : "35",
+                           "s" : [ {
+                              "r" : "31",
+                              "s" : [ {
+                                 "r" : "30",
+                                 "s" : [ {
+                                    "value" : [ "C" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "31",
+                                 "s" : [ {
+                                    "value" : [ "period" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "r" : "35",
+                              "value" : [ " ","during"," " ]
+                           }, {
+                              "r" : "34",
+                              "s" : [ {
+                                 "r" : "32",
+                                 "value" : [ "Interval[","@2013-03-01T00:00:00.0",", ","@2013-03-31T00:00:00.0",")" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "36",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "29",
+                  "alias" : "C",
+                  "expression" : {
+                     "localId" : "28",
+                     "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                     "dateProperty" : "period",
+                     "type" : "Retrieve",
+                     "dateRange" : {
+                        "localId" : "34",
+                        "lowClosed" : true,
+                        "highClosed" : false,
+                        "type" : "Interval",
+                        "low" : {
+                           "localId" : "32",
+                           "type" : "DateTime",
+                           "year" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2013",
+                              "type" : "Literal"
+                           },
+                           "month" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "3",
+                              "type" : "Literal"
+                           },
+                           "day" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "1",
+                              "type" : "Literal"
+                           },
+                           "hour" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "0",
+                              "type" : "Literal"
+                           },
+                           "minute" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "0",
+                              "type" : "Literal"
+                           },
+                           "second" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "0",
+                              "type" : "Literal"
+                           },
+                           "millisecond" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "0",
+                              "type" : "Literal"
+                           }
+                        },
+                        "high" : {
+                           "localId" : "33",
+                           "type" : "DateTime",
+                           "year" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2013",
+                              "type" : "Literal"
+                           },
+                           "month" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "3",
+                              "type" : "Literal"
+                           },
+                           "day" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "31",
+                              "type" : "Literal"
+                           },
+                           "hour" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "0",
+                              "type" : "Literal"
+                           },
+                           "minute" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "0",
+                              "type" : "Literal"
+                           },
+                           "second" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "0",
+                              "type" : "Literal"
+                           },
+                           "millisecond" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "0",
+                              "type" : "Literal"
+                           }
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ ]
             }
          } ]
       }

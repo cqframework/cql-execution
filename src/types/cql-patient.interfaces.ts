@@ -1,3 +1,5 @@
+import { Code, ValueSet } from '../datatypes/clinical';
+import { Interval } from '../datatypes/interval';
 import { AnyTypeSpecifier } from './type-specifiers.interfaces';
 
 /*
@@ -22,8 +24,21 @@ export interface RecordObject {
 }
 
 /*
+ * Structure of the information about an ELM retrieve
+ * Passed back to DataProviders to allow for more advanced record filtering
+ */
+export interface RetrieveDetails {
+  datatype: string;
+  templateId?: string;
+  codeProperty?: string;
+  codes?: Code[] | ValueSet;
+  dateProperty?: string;
+  dateRange?: Interval;
+}
+
+/*
  * Patient data object that implements logic for searching for records based on the Patient
  */
 export interface PatientObject extends RecordObject {
-  findRecords(profile: string | null): RecordObject[];
+  findRecords(profile: string | null, retrieveDetails?: RetrieveDetails): RecordObject[];
 }
