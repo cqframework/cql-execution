@@ -3,7 +3,6 @@ import { typeIsArray } from '../util/util';
 import { Context } from '../runtime/context';
 import { build } from './builder';
 import { RetrieveDetails } from '../types/cql-patient.interfaces';
-import { Interval } from '../datatypes/interval';
 import { Code, ValueSet } from '../datatypes/clinical';
 
 export class Retrieve extends Expression {
