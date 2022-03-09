@@ -675,7 +675,6 @@ var AbstractDate = /** @class */ (function () {
         // When comparing DateTime values with different timezone offsets, implementations
         // should normalize to the timezone offset of the evaluation request timestamp,
         // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
-        // @ts-ignore
         if (isPrecisionUnspecifiedOrGreaterThanDay(precision)) {
             if (this.timezoneOffset !== other.timezoneOffset) {
                 other = other.convertToTimezoneOffset(this.timezoneOffset);
@@ -734,7 +733,6 @@ var AbstractDate = /** @class */ (function () {
         // When comparing DateTime values with different timezone offsets, implementations
         // should normalize to the timezone offset of the evaluation request timestamp,
         // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
-        // @ts-ignore
         if (isPrecisionUnspecifiedOrGreaterThanDay(precision)) {
             if (this.timezoneOffset !== other.timezoneOffset) {
                 other = other.convertToTimezoneOffset(this.timezoneOffset);
@@ -799,7 +797,6 @@ var AbstractDate = /** @class */ (function () {
         // When comparing DateTime values with different timezone offsets, implementations
         // should normalize to the timezone offset of the evaluation request timestamp,
         // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
-        // @ts-ignore
         if (isPrecisionUnspecifiedOrGreaterThanDay(precision)) {
             if (this.timezoneOffset !== other.timezoneOffset) {
                 other = other.convertToTimezoneOffset(this.timezoneOffset);
@@ -864,7 +861,6 @@ var AbstractDate = /** @class */ (function () {
         // When comparing DateTime values with different timezone offsets, implementations
         // should normalize to the timezone offset of the evaluation request timestamp,
         // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
-        // @ts-ignore
         if (isPrecisionUnspecifiedOrGreaterThanDay(precision)) {
             if (this.timezoneOffset !== other.timezoneOffset) {
                 other = other.convertToTimezoneOffset(this.timezoneOffset);
@@ -929,7 +925,6 @@ var AbstractDate = /** @class */ (function () {
         // When comparing DateTime values with different timezone offsets, implementations
         // should normalize to the timezone offset of the evaluation request timestamp,
         // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
-        // @ts-ignore
         if (isPrecisionUnspecifiedOrGreaterThanDay(precision)) {
             if (this.timezoneOffset !== other.timezoneOffset) {
                 other = other.convertToTimezoneOffset(this.timezoneOffset);
@@ -1749,7 +1744,7 @@ function isValidDateTimeStringFormat(string) {
     }
     return formats.some(function (fmt) { return luxon_1.DateTime.fromFormat(string, fmt).isValid; });
 }
-// Will return true if provided precision is unspecified or if 
+// Will return true if provided precision is unspecified or if
 // precision is hours, minutes, seconds, or milliseconds
 function isPrecisionUnspecifiedOrGreaterThanDay(precision) {
     return precision == null || /^h|mi|s/.test(precision);

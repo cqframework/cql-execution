@@ -177,7 +177,6 @@ abstract class AbstractDate {
     // When comparing DateTime values with different timezone offsets, implementations
     // should normalize to the timezone offset of the evaluation request timestamp,
     // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
-    // @ts-ignore
     if (isPrecisionUnspecifiedOrGreaterThanDay(precision)) {
       if ((this as any).timezoneOffset !== other.timezoneOffset) {
         other = other.convertToTimezoneOffset((this as any).timezoneOffset);
@@ -238,7 +237,6 @@ abstract class AbstractDate {
     // When comparing DateTime values with different timezone offsets, implementations
     // should normalize to the timezone offset of the evaluation request timestamp,
     // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
-    // @ts-ignore
     if (isPrecisionUnspecifiedOrGreaterThanDay(precision)) {
       if ((this as any).timezoneOffset !== other.timezoneOffset) {
         other = other.convertToTimezoneOffset((this as any).timezoneOffset);
@@ -304,7 +302,6 @@ abstract class AbstractDate {
     // When comparing DateTime values with different timezone offsets, implementations
     // should normalize to the timezone offset of the evaluation request timestamp,
     // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
-    // @ts-ignore
     if (isPrecisionUnspecifiedOrGreaterThanDay(precision)) {
       if ((this as any).timezoneOffset !== other.timezoneOffset) {
         other = other.convertToTimezoneOffset((this as any).timezoneOffset);
@@ -370,7 +367,6 @@ abstract class AbstractDate {
     // When comparing DateTime values with different timezone offsets, implementations
     // should normalize to the timezone offset of the evaluation request timestamp,
     // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
-    // @ts-ignore
     if (isPrecisionUnspecifiedOrGreaterThanDay(precision)) {
       if ((this as any).timezoneOffset !== other.timezoneOffset) {
         other = other.convertToTimezoneOffset((this as any).timezoneOffset);
@@ -436,7 +432,6 @@ abstract class AbstractDate {
     // When comparing DateTime values with different timezone offsets, implementations
     // should normalize to the timezone offset of the evaluation request timestamp,
     // but only when the comparison precision is hours, minutes, seconds, or milliseconds.
-    // @ts-ignore
     if (isPrecisionUnspecifiedOrGreaterThanDay(precision)) {
       if ((this as any).timezoneOffset !== other.timezoneOffset) {
         other = other.convertToTimezoneOffset((this as any).timezoneOffset);
