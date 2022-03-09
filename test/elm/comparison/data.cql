@@ -19,12 +19,12 @@ define PossiblyEqDateTimesOnlyDateOnOne: DateTime(2000, 3, 13) = DateTime(2000, 
 define UneqDateTimesOnlyDateOnOne: DateTime(2000, 4, 13, 12, 43, 32) = DateTime(2000, 3, 13)
 define PossiblyEqualDateTimes: DateTime(2000, 3, 15) = DateTime(2000)
 define ImpossiblyEqualDateTimes: DateTime(2000, 3, 15) = DateTime(2000, 4)
-define DateAndDateTimeNull: Date(2000, 3, 13) = DateTime(2000, 3, 13)
+define DateAndDateTimeTrue: Date(2000, 3, 13) = DateTime(2000, 3, 13)
 define DateAndDateTimeNotEqual: Date(2000, 3, 13) = DateTime(2000, 3, 12)
-define DateAndDateTimeUncertainFalse: Date(2000, 3, 13) = DateTime(2000, 3, 13, 2, 4, 23)
-define DateTimeAndDateNull: DateTime(2000, 3, 13) = Date(2000, 3, 13)
+define DateAndDateTimeUncertainNull: Date(2000, 3, 13) = DateTime(2000, 3, 13, 2, 4, 23)
+define DateTimeAndDateTrue: DateTime(2000, 3, 13) = Date(2000, 3, 13)
 define DateTimeAndDateNotEqual: DateTime(2000, 3, 12) = Date(2000, 3, 13)
-define DateTimeAndDateUncertainFalse: DateTime(2000, 3, 13, 2, 4, 23) = Date(2000, 3, 13)
+define DateTimeAndDateUncertainNull: DateTime(2000, 3, 13, 2, 4, 23) = Date(2000, 3, 13)
 define AGtB_Quantity: 5 'm' = 4 'm'
 define AEqB_Quantity: 5 'm' = 5 'm'
 define ALtB_Quantity: 5 'm' = 6 'm'
@@ -58,12 +58,12 @@ define PossiblyEqDateTimesOnlyDateOnOne: DateTime(2000, 3, 13) != DateTime(2000,
 define UneqDateTimesOnlyDateOnOne: DateTime(2000, 4, 13, 12, 43, 32) != DateTime(2000, 3, 13)
 define PossiblyEqualDateTimes: DateTime(2000, 3, 15) != DateTime(2000)
 define ImpossiblyEqualDateTimes: DateTime(2000, 3, 15) != DateTime(2000, 4)
-define DateAndDateTimeNull: Date(2000, 3, 13) != DateTime(2000, 3, 13)
+define DateAndDateTimeFalse: Date(2000, 3, 13) != DateTime(2000, 3, 13)
 define DateAndDateTimeNotEqual: Date(2000, 3, 13) != DateTime(2000, 3, 12)
 define DateAndDateTimeUncertainTrue: Date(2000, 3, 13) != DateTime(2000, 3, 13, 2, 4, 23)
-define DateTimeAndDateNull: DateTime(2000, 3, 13) != Date(2000, 3, 13)
+define DateTimeAndDateFalse: DateTime(2000, 3, 13) != Date(2000, 3, 13)
 define DateTimeAndDateNotEqual: DateTime(2000, 3, 12) != Date(2000, 3, 13)
-define DateTimeAndDateUncertainTrue: DateTime(2000, 3, 13, 2, 4, 23) != Date(2000, 3, 13)
+define DateTimeAndDateUncertainNull: DateTime(2000, 3, 13, 2, 4, 23) != Date(2000, 3, 13)
 define AGtB_Quantity: 5 'm' != 4 'm'
 define AEqB_Quantity: 5 'm' != 5 'm'
 define ALtB_Quantity: 5 'm' != 6 'm'
@@ -145,10 +145,10 @@ define PossiblyEqDateTimesOnlyDateOnOne: DateTime(2000, 3, 13) ~ DateTime(2000, 
 define UneqDateTimesOnlyDateOnOne: DateTime(2000, 4, 13, 12, 43, 32) ~ DateTime(2000, 3, 13)
 define PossiblyEqualDateTimes: DateTime(2000, 3, 15) ~ DateTime(2000)
 define ImpossiblyEqualDateTimes: DateTime(2000, 3, 15) ~ DateTime(2000, 4)
-define DateAndDateTimeNull: Date(2000, 3, 13) ~ DateTime(2000, 3, 13)
+define DateAndDateTimeTrue: Date(2000, 3, 13) ~ DateTime(2000, 3, 13)
 define DateAndDateTimeNotEqual: Date(2000, 3, 13) ~ DateTime(2000, 3, 12)
 define DateAndDateTimeUncertainFalse: Date(2000, 3, 13) ~ DateTime(2000, 3, 13, 2, 4, 23)
-define DateTimeAndDateNull: DateTime(2000, 3, 13) ~ Date(2000, 3, 13)
+define DateTimeAndDateTrue: DateTime(2000, 3, 13) ~ Date(2000, 3, 13)
 define DateTimeAndDateNotEqual: DateTime(2000, 3, 12) ~ Date(2000, 3, 13)
 define DateTimeAndDateUncertainFalse: DateTime(2000, 3, 13, 2, 4, 23) ~ Date(2000, 3, 13)
 

@@ -1587,9 +1587,9 @@ var Date = /** @class */ (function (_super) {
         return str;
     };
     Date.prototype.getDateTime = function () {
-        // from the spec: the result will be a DateTime with the time components set to zero,
+        // from the spec: the result will be a DateTime with the time components unspecified,
         // except for the timezone offset, which will be set to the timezone offset of the evaluation
-        // request timestamp. (this last part is acheived by just not passing in timezone offset)
+        // request timestamp. (this last part is achieved by just not passing in timezone offset)
         if (this.year != null && this.month != null && this.day != null) {
             return new DateTime(this.year, this.month, this.day, null, null, null, null);
             // from spec: no component may be specified at a precision below an unspecified precision.

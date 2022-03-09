@@ -32,12 +32,12 @@ define PossiblyEqDateTimesOnlyDateOnOne: DateTime(2000, 3, 13) = DateTime(2000, 
 define UneqDateTimesOnlyDateOnOne: DateTime(2000, 4, 13, 12, 43, 32) = DateTime(2000, 3, 13)
 define PossiblyEqualDateTimes: DateTime(2000, 3, 15) = DateTime(2000)
 define ImpossiblyEqualDateTimes: DateTime(2000, 3, 15) = DateTime(2000, 4)
-define DateAndDateTimeNull: Date(2000, 3, 13) = DateTime(2000, 3, 13)
+define DateAndDateTimeTrue: Date(2000, 3, 13) = DateTime(2000, 3, 13)
 define DateAndDateTimeNotEqual: Date(2000, 3, 13) = DateTime(2000, 3, 12)
-define DateAndDateTimeUncertainFalse: Date(2000, 3, 13) = DateTime(2000, 3, 13, 2, 4, 23)
-define DateTimeAndDateNull: DateTime(2000, 3, 13) = Date(2000, 3, 13)
+define DateAndDateTimeUncertainNull: Date(2000, 3, 13) = DateTime(2000, 3, 13, 2, 4, 23)
+define DateTimeAndDateTrue: DateTime(2000, 3, 13) = Date(2000, 3, 13)
 define DateTimeAndDateNotEqual: DateTime(2000, 3, 12) = Date(2000, 3, 13)
-define DateTimeAndDateUncertainFalse: DateTime(2000, 3, 13, 2, 4, 23) = Date(2000, 3, 13)
+define DateTimeAndDateUncertainNull: DateTime(2000, 3, 13, 2, 4, 23) = Date(2000, 3, 13)
 define AGtB_Quantity: 5 'm' = 4 'm'
 define AEqB_Quantity: 5 'm' = 5 'm'
 define ALtB_Quantity: 5 'm' = 6 'm'
@@ -2173,7 +2173,7 @@ module.exports['Equal'] = {
             }
          }, {
             "localId" : "245",
-            "name" : "DateAndDateTimeNull",
+            "name" : "DateAndDateTimeTrue",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2181,7 +2181,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "245",
                   "s" : [ {
-                     "value" : [ "","define ","DateAndDateTimeNull",": " ]
+                     "value" : [ "","define ","DateAndDateTimeTrue",": " ]
                   }, {
                      "r" : "244",
                      "s" : [ {
@@ -2335,7 +2335,7 @@ module.exports['Equal'] = {
             }
          }, {
             "localId" : "268",
-            "name" : "DateAndDateTimeUncertainFalse",
+            "name" : "DateAndDateTimeUncertainNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2343,7 +2343,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "268",
                   "s" : [ {
-                     "value" : [ "","define ","DateAndDateTimeUncertainFalse",": " ]
+                     "value" : [ "","define ","DateAndDateTimeUncertainNull",": " ]
                   }, {
                      "r" : "267",
                      "s" : [ {
@@ -2434,7 +2434,7 @@ module.exports['Equal'] = {
             }
          }, {
             "localId" : "278",
-            "name" : "DateTimeAndDateNull",
+            "name" : "DateTimeAndDateTrue",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2442,7 +2442,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "278",
                   "s" : [ {
-                     "value" : [ "","define ","DateTimeAndDateNull",": " ]
+                     "value" : [ "","define ","DateTimeAndDateTrue",": " ]
                   }, {
                      "r" : "277",
                      "s" : [ {
@@ -2596,7 +2596,7 @@ module.exports['Equal'] = {
             }
          }, {
             "localId" : "301",
-            "name" : "DateTimeAndDateUncertainFalse",
+            "name" : "DateTimeAndDateUncertainNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2604,7 +2604,7 @@ module.exports['Equal'] = {
                "s" : {
                   "r" : "301",
                   "s" : [ {
-                     "value" : [ "","define ","DateTimeAndDateUncertainFalse",": " ]
+                     "value" : [ "","define ","DateTimeAndDateUncertainNull",": " ]
                   }, {
                      "r" : "300",
                      "s" : [ {
@@ -3278,12 +3278,12 @@ define PossiblyEqDateTimesOnlyDateOnOne: DateTime(2000, 3, 13) != DateTime(2000,
 define UneqDateTimesOnlyDateOnOne: DateTime(2000, 4, 13, 12, 43, 32) != DateTime(2000, 3, 13)
 define PossiblyEqualDateTimes: DateTime(2000, 3, 15) != DateTime(2000)
 define ImpossiblyEqualDateTimes: DateTime(2000, 3, 15) != DateTime(2000, 4)
-define DateAndDateTimeNull: Date(2000, 3, 13) != DateTime(2000, 3, 13)
+define DateAndDateTimeFalse: Date(2000, 3, 13) != DateTime(2000, 3, 13)
 define DateAndDateTimeNotEqual: Date(2000, 3, 13) != DateTime(2000, 3, 12)
 define DateAndDateTimeUncertainTrue: Date(2000, 3, 13) != DateTime(2000, 3, 13, 2, 4, 23)
-define DateTimeAndDateNull: DateTime(2000, 3, 13) != Date(2000, 3, 13)
+define DateTimeAndDateFalse: DateTime(2000, 3, 13) != Date(2000, 3, 13)
 define DateTimeAndDateNotEqual: DateTime(2000, 3, 12) != Date(2000, 3, 13)
-define DateTimeAndDateUncertainTrue: DateTime(2000, 3, 13, 2, 4, 23) != Date(2000, 3, 13)
+define DateTimeAndDateUncertainNull: DateTime(2000, 3, 13, 2, 4, 23) != Date(2000, 3, 13)
 define AGtB_Quantity: 5 'm' != 4 'm'
 define AEqB_Quantity: 5 'm' != 5 'm'
 define ALtB_Quantity: 5 'm' != 6 'm'
@@ -5477,7 +5477,7 @@ module.exports['NotEqual'] = {
             }
          }, {
             "localId" : "245",
-            "name" : "DateAndDateTimeNull",
+            "name" : "DateAndDateTimeFalse",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -5485,7 +5485,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "245",
                   "s" : [ {
-                     "value" : [ "","define ","DateAndDateTimeNull",": " ]
+                     "value" : [ "","define ","DateAndDateTimeFalse",": " ]
                   }, {
                      "r" : "244",
                      "s" : [ {
@@ -5747,7 +5747,7 @@ module.exports['NotEqual'] = {
             }
          }, {
             "localId" : "278",
-            "name" : "DateTimeAndDateNull",
+            "name" : "DateTimeAndDateFalse",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -5755,7 +5755,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "278",
                   "s" : [ {
-                     "value" : [ "","define ","DateTimeAndDateNull",": " ]
+                     "value" : [ "","define ","DateTimeAndDateFalse",": " ]
                   }, {
                      "r" : "277",
                      "s" : [ {
@@ -5915,7 +5915,7 @@ module.exports['NotEqual'] = {
             }
          }, {
             "localId" : "301",
-            "name" : "DateTimeAndDateUncertainTrue",
+            "name" : "DateTimeAndDateUncertainNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -5923,7 +5923,7 @@ module.exports['NotEqual'] = {
                "s" : {
                   "r" : "301",
                   "s" : [ {
-                     "value" : [ "","define ","DateTimeAndDateUncertainTrue",": " ]
+                     "value" : [ "","define ","DateTimeAndDateUncertainNull",": " ]
                   }, {
                      "r" : "300",
                      "s" : [ {
@@ -6517,10 +6517,10 @@ define PossiblyEqDateTimesOnlyDateOnOne: DateTime(2000, 3, 13) ~ DateTime(2000, 
 define UneqDateTimesOnlyDateOnOne: DateTime(2000, 4, 13, 12, 43, 32) ~ DateTime(2000, 3, 13)
 define PossiblyEqualDateTimes: DateTime(2000, 3, 15) ~ DateTime(2000)
 define ImpossiblyEqualDateTimes: DateTime(2000, 3, 15) ~ DateTime(2000, 4)
-define DateAndDateTimeNull: Date(2000, 3, 13) ~ DateTime(2000, 3, 13)
+define DateAndDateTimeTrue: Date(2000, 3, 13) ~ DateTime(2000, 3, 13)
 define DateAndDateTimeNotEqual: Date(2000, 3, 13) ~ DateTime(2000, 3, 12)
 define DateAndDateTimeUncertainFalse: Date(2000, 3, 13) ~ DateTime(2000, 3, 13, 2, 4, 23)
-define DateTimeAndDateNull: DateTime(2000, 3, 13) ~ Date(2000, 3, 13)
+define DateTimeAndDateTrue: DateTime(2000, 3, 13) ~ Date(2000, 3, 13)
 define DateTimeAndDateNotEqual: DateTime(2000, 3, 12) ~ Date(2000, 3, 13)
 define DateTimeAndDateUncertainFalse: DateTime(2000, 3, 13, 2, 4, 23) ~ Date(2000, 3, 13)
 */
@@ -11265,7 +11265,7 @@ module.exports['Equivalent'] = {
             }
          }, {
             "localId" : "488",
-            "name" : "DateAndDateTimeNull",
+            "name" : "DateAndDateTimeTrue",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -11273,7 +11273,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "488",
                   "s" : [ {
-                     "value" : [ "","define ","DateAndDateTimeNull",": " ]
+                     "value" : [ "","define ","DateAndDateTimeTrue",": " ]
                   }, {
                      "r" : "487",
                      "s" : [ {
@@ -11526,7 +11526,7 @@ module.exports['Equivalent'] = {
             }
          }, {
             "localId" : "521",
-            "name" : "DateTimeAndDateNull",
+            "name" : "DateTimeAndDateTrue",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -11534,7 +11534,7 @@ module.exports['Equivalent'] = {
                "s" : {
                   "r" : "521",
                   "s" : [ {
-                     "value" : [ "","define ","DateTimeAndDateNull",": " ]
+                     "value" : [ "","define ","DateTimeAndDateTrue",": " ]
                   }, {
                      "r" : "520",
                      "s" : [ {

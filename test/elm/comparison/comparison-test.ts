@@ -72,19 +72,19 @@ describe('Equal', () => {
   });
 
   it('should be true for Date and DateTime equality with same year, month, hour', function () {
-    this.dateAndDateTimeNull.exec(this.ctx).should.be.true();
+    this.dateAndDateTimeTrue.exec(this.ctx).should.be.true();
   });
 
   it('should be null for Date and DateTime equality with same year, month, hour and additional fields', function () {
-    should(this.dateAndDateTimeUncertainFalse.exec(this.ctx)).be.null();
+    should(this.dateAndDateTimeUncertainNull.exec(this.ctx)).be.null();
   });
 
   it('should be true for DateTime and Date equality with same year, month, hour', function () {
-    this.dateTimeAndDateNull.exec(this.ctx).should.be.true();
+    this.dateTimeAndDateTrue.exec(this.ctx).should.be.true();
   });
 
   it('should be null for DateTime and Date equality with same year, month, hour and additional fields', function () {
-    should(this.dateTimeAndDateUncertainFalse.exec(this.ctx)).be.null();
+    should(this.dateTimeAndDateUncertainNull.exec(this.ctx)).be.null();
   });
 
   it('should be false for Date and DateTime equality with different hour', function () {
@@ -208,7 +208,7 @@ describe('NotEqual', () => {
   });
 
   it('should be false for Date and DateTime equality with same year, month, hour', function () {
-    this.dateAndDateTimeNull.exec(this.ctx).should.be.false();
+    this.dateAndDateTimeFalse.exec(this.ctx).should.be.false();
   });
 
   it('should be true for date and DateTime with additional fields', function () {
@@ -220,11 +220,11 @@ describe('NotEqual', () => {
   });
 
   it('should be false for all DateTime and Date equality with same year, month, hour', function () {
-    this.dateTimeAndDateNull.exec(this.ctx).should.be.false();
+    this.dateTimeAndDateFalse.exec(this.ctx).should.be.false();
   });
 
   it('should be null for DateTime and Date equality with same year, month, hour and additional fields', function () {
-    should(this.dateTimeAndDateUncertainTrue.exec(this.ctx)).be.null();
+    should(this.dateTimeAndDateUncertainNull.exec(this.ctx)).be.null();
   });
 
   it('should be true for 5 m != 4 m', function () {
@@ -356,7 +356,7 @@ describe('Equivalent', () => {
   });
 
   it('should be true for Date and DateTime equality with same year, month, hour', function () {
-    this.dateAndDateTimeNull.exec(this.ctx).should.be.true();
+    this.dateAndDateTimeTrue.exec(this.ctx).should.be.true();
   });
 
   it('should be false for Date and DateTime equality with same year, month, hour and additional fields', function () {
@@ -364,7 +364,7 @@ describe('Equivalent', () => {
   });
 
   it('should be true for DateTime and Date equality with same year, month, hour', function () {
-    this.dateTimeAndDateNull.exec(this.ctx).should.be.true();
+    this.dateTimeAndDateTrue.exec(this.ctx).should.be.true();
   });
 
   it('should be null for DateTime and Date equality with same year, month, hour and additional fields', function () {
