@@ -71,20 +71,20 @@ describe('Equal', () => {
     this.impossiblyEqualDateTimes.exec(this.ctx).should.be.false();
   });
 
-  it('should be null for Date and DateTime equality with same year, month, hour', function () {
-    should(this.dateAndDateTimeNull.exec(this.ctx)).be.null();
+  it('should be true for Date and DateTime equality with same year, month, hour', function () {
+    this.dateAndDateTimeTrue.exec(this.ctx).should.be.true();
   });
 
-  it('should be false for Date and DateTime equality with same year, month, hour and additional fields', function () {
-    this.dateAndDateTimeUncertainFalse.exec(this.ctx).should.be.false();
+  it('should be null for Date and DateTime equality with same year, month, hour and additional fields', function () {
+    should(this.dateAndDateTimeUncertainNull.exec(this.ctx)).be.null();
   });
 
-  it('should be null for DateTime and Date equality with same year, month, hour', function () {
-    should(this.dateTimeAndDateNull.exec(this.ctx)).be.null();
+  it('should be true for DateTime and Date equality with same year, month, hour', function () {
+    this.dateTimeAndDateTrue.exec(this.ctx).should.be.true();
   });
 
   it('should be null for DateTime and Date equality with same year, month, hour and additional fields', function () {
-    this.dateTimeAndDateUncertainFalse.exec(this.ctx).should.be.false();
+    should(this.dateTimeAndDateUncertainNull.exec(this.ctx)).be.null();
   });
 
   it('should be false for Date and DateTime equality with different hour', function () {
@@ -207,8 +207,8 @@ describe('NotEqual', () => {
     this.impossiblyEqualDateTimes.exec(this.ctx).should.be.true();
   });
 
-  it('should be null for Date and DateTime equality with same year, month, hour', function () {
-    should(this.dateAndDateTimeNull.exec(this.ctx)).be.null();
+  it('should be false for Date and DateTime equality with same year, month, hour', function () {
+    this.dateAndDateTimeFalse.exec(this.ctx).should.be.false();
   });
 
   it('should be true for date and DateTime with additional fields', function () {
@@ -219,12 +219,12 @@ describe('NotEqual', () => {
     this.dateTimeAndDateNotEqual.exec(this.ctx).should.be.true();
   });
 
-  it('should be null for all DateTime and Date equality with same year, month, hour', function () {
-    should(this.dateTimeAndDateNull.exec(this.ctx)).be.null();
+  it('should be false for all DateTime and Date equality with same year, month, hour', function () {
+    this.dateTimeAndDateFalse.exec(this.ctx).should.be.false();
   });
 
-  it('should be true for DateTime and Date equality with same year, month, hour and additional fields', function () {
-    this.dateTimeAndDateUncertainTrue.exec(this.ctx).should.be.true();
+  it('should be null for DateTime and Date equality with same year, month, hour and additional fields', function () {
+    should(this.dateTimeAndDateUncertainNull.exec(this.ctx)).be.null();
   });
 
   it('should be true for 5 m != 4 m', function () {
@@ -355,16 +355,16 @@ describe('Equivalent', () => {
     this.impossiblyEqualDateTimes.exec(this.ctx).should.be.false();
   });
 
-  it('should be false for Date and DateTime equality with same year, month, hour', function () {
-    this.dateAndDateTimeNull.exec(this.ctx).should.be.false();
+  it('should be true for Date and DateTime equality with same year, month, hour', function () {
+    this.dateAndDateTimeTrue.exec(this.ctx).should.be.true();
   });
 
   it('should be false for Date and DateTime equality with same year, month, hour and additional fields', function () {
     this.dateAndDateTimeUncertainFalse.exec(this.ctx).should.be.false();
   });
 
-  it('should be false for DateTime and Date equality with same year, month, hour', function () {
-    this.dateTimeAndDateNull.exec(this.ctx).should.be.false();
+  it('should be true for DateTime and Date equality with same year, month, hour', function () {
+    this.dateTimeAndDateTrue.exec(this.ctx).should.be.true();
   });
 
   it('should be null for DateTime and Date equality with same year, month, hour and additional fields', function () {
