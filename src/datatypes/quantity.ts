@@ -29,15 +29,15 @@ export class Quantity {
     return true;
   }
 
-  clone() {
+  clone(): Quantity {
     return new Quantity(this.value, this.unit);
   }
 
-  toString() {
+  toString(): string {
     return `${this.value} '${this.unit}'`;
   }
 
-  sameOrBefore(other: any) {
+  sameOrBefore(other: any): null | boolean {
     if (other != null && other.isQuantity) {
       const otherVal = convertUnit(other.value, other.unit, this.unit);
       if (otherVal == null) {
@@ -46,9 +46,10 @@ export class Quantity {
         return this.value <= otherVal;
       }
     }
+    return null
   }
 
-  sameOrAfter(other: any) {
+  sameOrAfter(other: any): null | boolean  {
     if (other != null && other.isQuantity) {
       const otherVal = convertUnit(other.value, other.unit, this.unit);
       if (otherVal == null) {
@@ -57,9 +58,10 @@ export class Quantity {
         return this.value >= otherVal;
       }
     }
+    return null
   }
 
-  after(other: any) {
+  after(other: any): null | boolean  {
     if (other != null && other.isQuantity) {
       const otherVal = convertUnit(other.value, other.unit, this.unit);
       if (otherVal == null) {
@@ -68,9 +70,10 @@ export class Quantity {
         return this.value > otherVal;
       }
     }
+    return null
   }
 
-  before(other: any) {
+  before(other: any): null | boolean  {
     if (other != null && other.isQuantity) {
       const otherVal = convertUnit(other.value, other.unit, this.unit);
       if (otherVal == null) {
@@ -79,9 +82,10 @@ export class Quantity {
         return this.value < otherVal;
       }
     }
+    return null
   }
 
-  equals(other: any) {
+  equals(other: any): null | boolean  {
     if (other != null && other.isQuantity) {
       if ((!this.unit && other.unit) || (this.unit && !other.unit)) {
         return false;
@@ -96,15 +100,16 @@ export class Quantity {
         }
       }
     }
+    return null
   }
 
-  convertUnit(toUnit: any) {
+  convertUnit(toUnit: any): Quantity {
     const value = convertUnit(this.value, this.unit, toUnit);
     // Need to pass through constructor again to catch invalid units
     return new Quantity(value, toUnit);
   }
 
-  dividedBy(other: any) {
+  dividedBy(other: any): Quantity | null {
     if (other == null || other === 0 || other.value === 0) {
       return null;
     } else if (!other.isQuantity) {
@@ -128,7 +133,7 @@ export class Quantity {
     return new Quantity(decimalAdjust('round', resultValue, -8), resultUnit);
   }
 
-  multiplyBy(other: any) {
+  multiplyBy(other: any): Quantity | null {
     if (other == null) {
       return null;
     } else if (!other.isQuantity) {
@@ -153,7 +158,7 @@ export class Quantity {
   }
 }
 
-export function parseQuantity(str: string) {
+export function parseQuantity(str: string): Quantity | null {
   const components = /([+|-]?\d+\.?\d*)\s*('(.+)')?/.exec(str);
   if (components != null && components[1] != null) {
     const value = parseFloat(components[1]);
@@ -206,16 +211,18 @@ export function doSubtraction(a: any, b: any) {
   return doScaledAddition(a, b, -1);
 }
 
-export function doDivision(a: any, b: any) {
+export function doDivision(a: Quantity | null, b: Quantity | null): Quantity | null {
   if (a != null && a.isQuantity) {
     return a.dividedBy(b);
   }
+  return null
 }
 
-export function doMultiplication(a: any, b: any) {
+export function doMultiplication(a: Quantity | null, b: Quantity | null): Quantity | null {
   if (a != null && a.isQuantity) {
     return a.multiplyBy(b);
-  } else {
+  } else if (b!= null && b.isQuantity) {
     return b.multiplyBy(a);
   }
+  return null
 }
