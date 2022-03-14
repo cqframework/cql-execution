@@ -11,9 +11,10 @@ import { Uncertainty } from '../datatypes/uncertainty';
 import { Context } from '../runtime/context';
 import { build } from './builder';
 import { DateTime } from '../datatypes/datetime';
+import ELM from '../types/elm'
 
 export class Add extends Expression {
-  constructor(json: any) {
+  constructor(json: ELM.Add) {
     super(json);
   }
 
@@ -56,7 +57,7 @@ export class Add extends Expression {
 }
 
 export class Subtract extends Expression {
-  constructor(json: any) {
+  constructor(json: ELM.Subtract) {
     super(json);
   }
 
@@ -94,7 +95,7 @@ export class Subtract extends Expression {
 }
 
 export class Multiply extends Expression {
-  constructor(json: any) {
+  constructor(json: ELM.Multiply) {
     super(json);
   }
 
@@ -132,7 +133,7 @@ export class Multiply extends Expression {
 }
 
 export class Divide extends Expression {
-  constructor(json: any) {
+  constructor(json: ELM.Divide) {
     super(json);
   }
 
@@ -172,7 +173,7 @@ export class Divide extends Expression {
 }
 
 export class TruncatedDivide extends Expression {
-  constructor(json: any) {
+  constructor(json: ELM.TruncatedDivide) {
     super(json);
   }
 
@@ -193,7 +194,7 @@ export class TruncatedDivide extends Expression {
 }
 
 export class Modulo extends Expression {
-  constructor(json: any) {
+  constructor(json: ELM.Modulo) {
     super(json);
   }
 
@@ -210,7 +211,7 @@ export class Modulo extends Expression {
 }
 
 export class Ceiling extends Expression {
-  constructor(json: any) {
+  constructor(json: ELM.Ceiling) {
     super(json);
   }
 
@@ -225,7 +226,7 @@ export class Ceiling extends Expression {
 }
 
 export class Floor extends Expression {
-  constructor(json: any) {
+  constructor(json: ELM.Floor) {
     super(json);
   }
 
@@ -240,7 +241,7 @@ export class Floor extends Expression {
 }
 
 export class Truncate extends Expression {
-  constructor(json: any) {
+  constructor(json: ELM.Truncate) {
     super(json);
   }
 
@@ -254,7 +255,7 @@ export class Truncate extends Expression {
   }
 }
 export class Abs extends Expression {
-  constructor(json: any) {
+  constructor(json: ELM.Abs) {
     super(json);
   }
 
@@ -271,7 +272,7 @@ export class Abs extends Expression {
 }
 
 export class Negate extends Expression {
-  constructor(json: any) {
+  constructor(json: ELM.Negate) {
     super(json);
   }
 
@@ -290,7 +291,7 @@ export class Negate extends Expression {
 export class Round extends Expression {
   precision: any;
 
-  constructor(json: any) {
+  constructor(json: ELM.Round) {
     super(json);
     this.precision = build(json.precision);
   }
@@ -307,7 +308,7 @@ export class Round extends Expression {
 }
 
 export class Ln extends Expression {
-  constructor(json: any) {
+  constructor(json: ELM.Ln) {
     super(json);
   }
 
@@ -324,7 +325,7 @@ export class Ln extends Expression {
 }
 
 export class Exp extends Expression {
-  constructor(json: any) {
+  constructor(json: ELM.Exp) {
     super(json);
   }
 
@@ -344,7 +345,7 @@ export class Exp extends Expression {
 }
 
 export class Log extends Expression {
-  constructor(json: any) {
+  constructor(json: ELM.Log) {
     super(json);
   }
 
@@ -361,7 +362,7 @@ export class Log extends Expression {
 }
 
 export class Power extends Expression {
-  constructor(json: any) {
+  constructor(json: ELM.Power) {
     super(json);
   }
 
@@ -381,7 +382,7 @@ export class Power extends Expression {
 }
 
 export class MinValue extends Expression {
-  static readonly MIN_VALUES = {
+  static MIN_VALUES = {
     '{urn:hl7-org:elm-types:r1}Integer': MathUtil.MIN_INT_VALUE,
     '{urn:hl7-org:elm-types:r1}Decimal': MathUtil.MIN_FLOAT_VALUE,
     '{urn:hl7-org:elm-types:r1}DateTime': MathUtil.MIN_DATETIME_VALUE,
@@ -389,11 +390,15 @@ export class MinValue extends Expression {
     '{urn:hl7-org:elm-types:r1}Time': MathUtil.MIN_TIME_VALUE
   };
 
-  valueType: keyof typeof MinValue.MIN_VALUES;
+  valueType: keyof typeof MinValue.MIN_VALUES
 
-  constructor(json: any) {
+  constructor(json: ELM.MinValue) {
     super(json);
-    this.valueType = json.valueType;
+    if (json.valueType in MinValue.MIN_VALUES) {
+      this.valueType = json.valueType as keyof typeof MinValue.MIN_VALUES
+    } else {
+      throw new Error(`Not expecting MIN_VALUE: ${json.valueType})`)
+    }
   }
 
   exec(ctx: Context) {
@@ -422,9 +427,13 @@ export class MaxValue extends Expression {
 
   valueType: keyof typeof MaxValue.MAX_VALUES;
 
-  constructor(json: any) {
+  constructor(json: ELM.MaxValue) {
     super(json);
-    this.valueType = json.valueType;
+    if (json.valueType in MaxValue.MAX_VALUES) {
+      this.valueType = json.valueType as keyof typeof MaxValue.MAX_VALUES
+    } else {
+      throw new Error(`Not expecting Max_VALUE: ${json.valueType})`)
+    }
   }
 
   exec(ctx: Context) {
@@ -443,7 +452,7 @@ export class MaxValue extends Expression {
 }
 
 export class Successor extends Expression {
-  constructor(json: any) {
+  constructor(json: ELM.Successor) {
     super(json);
   }
 
@@ -472,7 +481,7 @@ export class Successor extends Expression {
 }
 
 export class Predecessor extends Expression {
-  constructor(json: any) {
+  constructor(json: ELM.Predecessor) {
     super(json);
   }
 

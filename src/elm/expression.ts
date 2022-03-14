@@ -2,21 +2,25 @@ import { Context } from '../runtime/context';
 import { typeIsArray } from '../util/util';
 
 import { build } from './builder';
+import ELM from '../types/elm'
 
 export class Expression {
   localId?: string;
   arg?: any;
   args?: any[];
 
-  constructor(json: any) {
-    if (json.operand != null) {
-      const op = build(json.operand);
-      if (typeIsArray(json.operand)) {
-        this.args = op;
-      } else {
-        this.arg = op;
+  constructor(json: ELM.Expression) {
+    if ('operand' in json){
+      if (json.operand != null) {
+        const op = build(json.operand);
+        if (typeIsArray(json.operand)) {
+          this.args = op;
+        } else {
+          this.arg = op;
+        }
       }
     }
+
     if (json.localId != null) {
       this.localId = json.localId;
     }
@@ -37,7 +41,7 @@ export class Expression {
     return this;
   }
 
-  execArgs(ctx: Context) {
+  execArgs(ctx: Context): any {
     if (this.args != null) {
       return this.args.map(arg => arg.execute(ctx));
     } else if (this.arg != null) {

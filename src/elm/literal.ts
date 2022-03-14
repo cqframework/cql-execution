@@ -1,11 +1,12 @@
 import { Context } from '../runtime/context';
 import { Expression } from './expression';
+import ELM from '../types/elm'
 
 export class Literal extends Expression {
   valueType: string;
   value: any;
 
-  static from(json: any) {
+  static from(json: ELM.Literal) {
     switch (json.valueType) {
       case '{urn:hl7-org:elm-types:r1}Boolean':
         return new BooleanLiteral(json);
@@ -20,7 +21,7 @@ export class Literal extends Expression {
     }
   }
 
-  constructor(json: any) {
+  constructor(json: ELM.Literal) {
     super(json);
     this.valueType = json.valueType;
     this.value = json.value;

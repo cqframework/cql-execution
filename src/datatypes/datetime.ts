@@ -631,7 +631,7 @@ export class DateTime extends AbstractDate {
   }
 
   // TODO: Note: using the jsDate type causes issues, fix later
-  static fromJSDate(date: any, timezoneOffset?: any) {
+  static fromJSDate(date: any, timezoneOffset?: any): DateTime {
     //This is from a JS Date, not a CQL Date
     if (date instanceof DateTime) {
       return date;

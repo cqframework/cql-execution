@@ -2,15 +2,17 @@ import { Expression } from './expression';
 import * as dt from '../datatypes/datatypes';
 import { Context } from '../runtime/context';
 import { build } from './builder';
+import ELM from '../types/elm'
 
 export class ValueSetDef extends Expression {
   name: string;
   id: string;
   version?: string;
 
-  constructor(json: any) {
+  constructor(json: ELM.ValueSetDef) {
+    // @ts-ignore
     super(json);
-    this.name = json.name;
+    this.name = json.name || '';
     this.id = json.id;
     this.version = json.version;
   }
@@ -28,10 +30,10 @@ export class ValueSetRef extends Expression {
   name: string;
   libraryName: string;
 
-  constructor(json: any) {
+  constructor(json: ELM.ValueSetRef) {
     super(json);
-    this.name = json.name;
-    this.libraryName = json.libraryName;
+    this.name = json.name || '';
+    this.libraryName = json.libraryName || '';
   }
 
   exec(ctx: Context) {
@@ -48,9 +50,12 @@ export class AnyInValueSet extends Expression {
   codes: any;
   valueset: ValueSetRef;
 
-  constructor(json: any) {
+  constructor(json: ELM.AnyInValueSet) {
     super(json);
     this.codes = build(json.codes);
+    if (json.valueset?.type !== 'ValueSetRef') {
+      throw new Error('Expecting ValueSetRef Expression')
+    }
     this.valueset = new ValueSetRef(json.valueset);
   }
 
@@ -70,9 +75,12 @@ export class InValueSet extends Expression {
   code: any;
   valueset: ValueSetRef;
 
-  constructor(json: any) {
+  constructor(json: ELM.InValueSet) {
     super(json);
     this.code = build(json.code);
+    if (json.valueset?.type !== 'ValueSetRef') {
+      throw new Error('Expecting ValueSetRef Expression')
+    }
     this.valueset = new ValueSetRef(json.valueset);
   }
 
@@ -81,9 +89,9 @@ export class InValueSet extends Expression {
     if (this.code == null) {
       return false;
     }
-    if (this.valueset == null) {
-      throw new Error('ValueSet must be provided to InValueSet function');
-    }
+    // if (this.valueset == null) {
+    //   throw new Error('ValueSet must be provided to InValueSet function');
+    // }
     const code = this.code.execute(ctx);
     // spec indicates to return false if code is null, throw error if value set cannot be resolved
     if (code == null) {
@@ -103,11 +111,12 @@ export class CodeSystemDef extends Expression {
   id: string;
   version: string;
 
-  constructor(json: any) {
+  constructor(json: ELM.CodeSystemDef) {
+    // @ts-ignore
     super(json);
     this.name = json.name;
     this.id = json.id;
-    this.version = json.version;
+    this.version = json.version || '';
   }
 
   exec(_ctx: Context) {
@@ -121,11 +130,12 @@ export class CodeDef extends Expression {
   systemName: string;
   display?: string;
 
-  constructor(json: any) {
+  constructor(json: ELM.CodeDef) {
+    // @ts-ignore
     super(json);
     this.name = json.name;
     this.id = json.id;
-    this.systemName = json.codeSystem.name;
+    this.systemName = json.codeSystem?.name || '';
     this.display = json.display;
   }
 
@@ -139,10 +149,10 @@ export class CodeRef extends Expression {
   name: string;
   library: string;
 
-  constructor(json: any) {
+  constructor(json: ELM.CodeRef) {
     super(json);
-    this.name = json.name;
-    this.library = json.libraryName;
+    this.name = json.name || '';
+    this.library = json.libraryName || '';
   }
 
   exec(ctx: Context) {
@@ -158,11 +168,13 @@ export class Code extends Expression {
   version: string;
   display?: string;
 
-  constructor(json: any) {
+  constructor(json: ELM.Code) {
     super(json);
     this.code = json.code;
-    this.systemName = json.system.name;
-    this.version = json.version;
+    this.systemName = json.system?.name || '';
+    // @ts-ignore
+    // TODO: Spec says version does not exist on code?
+    this.version = json.version || '';
     this.display = json.display;
   }
 
@@ -183,14 +195,15 @@ export class ConceptDef extends Expression {
   codes: any;
   display?: string;
 
-  constructor(json: any) {
+  constructor(json: ELM.ConceptDef) {
+     // @ts-ignore
     super(json);
     this.name = json.name;
     this.display = json.display;
     this.codes = json.code;
   }
 
-  exec(ctx: Context) {
+  exec(ctx: Context): dt.Concept {
     const codes = this.codes.map((code: any) => {
       const codeDef = ctx.getCode(code.name);
       return codeDef ? codeDef.execute(ctx) : undefined;
@@ -202,12 +215,12 @@ export class ConceptDef extends Expression {
 export class ConceptRef extends Expression {
   name: string;
 
-  constructor(json: any) {
+  constructor(json:  ELM.ConceptRef) {
     super(json);
-    this.name = json.name;
+    this.name = json.name || '';
   }
 
-  exec(ctx: Context) {
+  exec(ctx: Context): dt.Concept | undefined {
     const conceptDef = ctx.getConcept(this.name);
     return conceptDef ? conceptDef.execute(ctx) : undefined;
   }
@@ -217,7 +230,7 @@ export class Concept extends Expression {
   codes: any;
   display?: string;
 
-  constructor(json: any) {
+  constructor(json: ELM.Concept) {
     super(json);
     this.codes = json.code;
     this.display = json.display;
@@ -225,26 +238,29 @@ export class Concept extends Expression {
 
   // Define a simple getter to allow type-checking of this class without instanceof
   // and in a way that survives minification (as opposed to checking constructor.name)
-  get isConcept() {
+  get isConcept(): boolean {
     return true;
   }
 
-  toCode(ctx: Context, code: any) {
+  toCode(ctx: Context, code: any): dt.Code {
     const system = ctx.getCodeSystem(code.system.name) || {};
     return new dt.Code(code.code, system.id, code.version, code.display);
   }
 
-  exec(ctx: Context) {
+  exec(ctx: Context): dt.Concept {
     const codes = this.codes.map((code: any) => this.toCode(ctx, code));
     return new dt.Concept(codes, this.display);
   }
 }
 
 export class CalculateAge extends Expression {
-  precision: string;
+  precision: ELM.DateTimePrecision;
 
-  constructor(json: any) {
+  constructor(json: ELM.CalculateAge) {
     super(json);
+    if (!json.precision) {
+      throw new Error('Precision is required')
+    }
     this.precision = json.precision;
   }
 
@@ -262,9 +278,13 @@ export class CalculateAge extends Expression {
 }
 
 export class CalculateAgeAt extends Expression {
-  precision: string;
-  constructor(json: any) {
+  precision:  ELM.DateTimePrecision;
+  
+  constructor(json: ELM.CalculateAgeAt) {
     super(json);
+    if (!json.precision) {
+      throw new Error('Precision is required')
+    }
     this.precision = json.precision;
   }
 
