@@ -2,7 +2,7 @@ import { Context } from '../runtime/context';
 import { typeIsArray } from '../util/util';
 
 import { build } from './builder';
-import ELM from '../types/elm'
+import ELM from '../types/elm';
 
 export class Expression {
   localId?: string;
@@ -10,7 +10,7 @@ export class Expression {
   args?: any[];
 
   constructor(json: ELM.Expression) {
-    if ('operand' in json){
+    if ('operand' in json) {
       if (json.operand != null) {
         const op = build(json.operand);
         if (typeIsArray(json.operand)) {

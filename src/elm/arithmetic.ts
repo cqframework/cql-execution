@@ -11,7 +11,7 @@ import { Uncertainty } from '../datatypes/uncertainty';
 import { Context } from '../runtime/context';
 import { build } from './builder';
 import { DateTime } from '../datatypes/datetime';
-import ELM from '../types/elm'
+import ELM from '../types/elm';
 
 export class Add extends Expression {
   constructor(json: ELM.Add) {
@@ -390,14 +390,14 @@ export class MinValue extends Expression {
     '{urn:hl7-org:elm-types:r1}Time': MathUtil.MIN_TIME_VALUE
   };
 
-  valueType: keyof typeof MinValue.MIN_VALUES
+  valueType: keyof typeof MinValue.MIN_VALUES;
 
   constructor(json: ELM.MinValue) {
     super(json);
     if (json.valueType in MinValue.MIN_VALUES) {
-      this.valueType = json.valueType as keyof typeof MinValue.MIN_VALUES
+      this.valueType = json.valueType as keyof typeof MinValue.MIN_VALUES;
     } else {
-      throw new Error(`Not expecting MIN_VALUE: ${json.valueType})`)
+      throw new Error(`Not expecting MIN_VALUE: ${json.valueType})`);
     }
   }
 
@@ -430,9 +430,9 @@ export class MaxValue extends Expression {
   constructor(json: ELM.MaxValue) {
     super(json);
     if (json.valueType in MaxValue.MAX_VALUES) {
-      this.valueType = json.valueType as keyof typeof MaxValue.MAX_VALUES
+      this.valueType = json.valueType as keyof typeof MaxValue.MAX_VALUES;
     } else {
-      throw new Error(`Not expecting Max_VALUE: ${json.valueType})`)
+      throw new Error(`Not expecting Max_VALUE: ${json.valueType})`);
     }
   }
 

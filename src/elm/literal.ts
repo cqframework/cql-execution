@@ -1,6 +1,6 @@
 import { Context } from '../runtime/context';
 import { Expression } from './expression';
-import ELM from '../types/elm'
+import ELM from '../types/elm';
 
 export class Literal extends Expression {
   valueType: string;

@@ -46,10 +46,10 @@ export class Quantity {
         return this.value <= otherVal;
       }
     }
-    return null
+    return null;
   }
 
-  sameOrAfter(other: any): null | boolean  {
+  sameOrAfter(other: any): null | boolean {
     if (other != null && other.isQuantity) {
       const otherVal = convertUnit(other.value, other.unit, this.unit);
       if (otherVal == null) {
@@ -58,10 +58,10 @@ export class Quantity {
         return this.value >= otherVal;
       }
     }
-    return null
+    return null;
   }
 
-  after(other: any): null | boolean  {
+  after(other: any): null | boolean {
     if (other != null && other.isQuantity) {
       const otherVal = convertUnit(other.value, other.unit, this.unit);
       if (otherVal == null) {
@@ -70,10 +70,10 @@ export class Quantity {
         return this.value > otherVal;
       }
     }
-    return null
+    return null;
   }
 
-  before(other: any): null | boolean  {
+  before(other: any): null | boolean {
     if (other != null && other.isQuantity) {
       const otherVal = convertUnit(other.value, other.unit, this.unit);
       if (otherVal == null) {
@@ -82,10 +82,10 @@ export class Quantity {
         return this.value < otherVal;
       }
     }
-    return null
+    return null;
   }
 
-  equals(other: any): null | boolean  {
+  equals(other: any): null | boolean {
     if (other != null && other.isQuantity) {
       if ((!this.unit && other.unit) || (this.unit && !other.unit)) {
         return false;
@@ -100,7 +100,7 @@ export class Quantity {
         }
       }
     }
-    return null
+    return null;
   }
 
   convertUnit(toUnit: any): Quantity {
@@ -215,14 +215,14 @@ export function doDivision(a: Quantity | null, b: Quantity | null): Quantity | n
   if (a != null && a.isQuantity) {
     return a.dividedBy(b);
   }
-  return null
+  return null;
 }
 
 export function doMultiplication(a: Quantity | null, b: Quantity | null): Quantity | null {
   if (a != null && a.isQuantity) {
     return a.multiplyBy(b);
-  } else if (b!= null && b.isQuantity) {
+  } else if (b != null && b.isQuantity) {
     return b.multiplyBy(a);
   }
-  return null
+  return null;
 }

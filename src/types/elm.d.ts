@@ -22,7 +22,7 @@ TypeSpecifier is the abstract base type for all type specifiers.
 NamedTypeSpecifier defines a type identified by a name, such as Integer, String, Patient, or Encounter.
 */
   interface NamedTypeSpecifier extends AbstractTypeSpecifier {
-    type: "NamedTypeSpecifier";
+    type: 'NamedTypeSpecifier';
     name: string;
   }
 
@@ -30,7 +30,7 @@ NamedTypeSpecifier defines a type identified by a name, such as Integer, String,
 IntervalTypeSpecifier defines an interval type by specifying the point type. Any type can serve as the point type for an interval, so long as it supports comparison operators, minimum and maximum value determination, as well as predecessor and successor functions.
 */
   interface IntervalTypeSpecifier extends AbstractTypeSpecifier {
-    type: "IntervalTypeSpecifier";
+    type: 'IntervalTypeSpecifier';
     pointType: TypeSpecifier;
   }
 
@@ -38,7 +38,7 @@ IntervalTypeSpecifier defines an interval type by specifying the point type. Any
 ListTypeSpecifier defines a list type by specifying the type of elements the list may contain.
 */
   interface ListTypeSpecifier extends AbstractTypeSpecifier {
-    type: "ListTypeSpecifier";
+    type: 'ListTypeSpecifier';
     elementType: TypeSpecifier;
   }
 
@@ -55,7 +55,7 @@ TupleElementDefinition defines the name and type of a single element within a Tu
 TupleTypeSpecifier defines the possible elements of a tuple.
 */
   interface TupleTypeSpecifier extends AbstractTypeSpecifier {
-    type: "TupleTypeSpecifier";
+    type: 'TupleTypeSpecifier';
     element?: TupleElementDefinition[];
   }
 
@@ -63,7 +63,7 @@ TupleTypeSpecifier defines the possible elements of a tuple.
 ChoiceTypeSpecifier defines the possible types of a choice type.
 */
   interface ChoiceTypeSpecifier extends AbstractTypeSpecifier {
-    type: "ChoiceTypeSpecifier";
+    type: 'ChoiceTypeSpecifier';
     choice?: TypeSpecifier[];
   }
 
@@ -122,7 +122,7 @@ The ExpressionDef type defines an expression and an associated name that can be 
 The FunctionDef type defines a named function that can be invoked by any expression in the artifact. Function names must be unique within the artifact. Functions may take any number of operands.
 */
   interface FunctionDef extends AbstractElement {
-    type: "FunctionDef";
+    type: 'FunctionDef';
     external?: boolean;
     fluent?: boolean;
     operand?: OperandDef[];
@@ -136,7 +136,7 @@ The FunctionDef type defines a named function that can be invoked by any express
 The ExpressionRef type defines an expression that references a previously defined NamedExpression. The result of evaluating an ExpressionReference is the result of evaluating the referenced NamedExpression.
 */
   interface ExpressionRef extends AbstractExpression {
-    type: "ExpressionRef";
+    type: 'ExpressionRef';
     name?: string;
     libraryName?: string;
   }
@@ -145,7 +145,7 @@ The ExpressionRef type defines an expression that references a previously define
 The FunctionRef type defines an expression that invokes a previously defined function. The result of evaluating each operand is passed to the function.
 */
   interface FunctionRef extends AbstractExpression {
-    type: "FunctionRef";
+    type: 'FunctionRef';
     signature?: TypeSpecifier[];
     operand?: Expression[];
     name?: string;
@@ -171,7 +171,7 @@ Note that the expression specified in the default element must be able to be eva
 The ParameterRef expression allows the value of a parameter to be referenced as part of an expression.
 */
   interface ParameterRef extends AbstractExpression {
-    type: "ParameterRef";
+    type: 'ParameterRef';
     name?: string;
     libraryName?: string;
   }
@@ -189,7 +189,7 @@ The OperandDef type defines an operand to a function that can be referenced by n
 The OperandRef expression allows the value of an operand to be referenced as part of an expression within the body of a function definition.
 */
   interface OperandRef extends AbstractExpression {
-    type: "OperandRef";
+    type: 'OperandRef';
     name?: string;
   }
 
@@ -197,7 +197,7 @@ The OperandRef expression allows the value of an operand to be referenced as par
 The IdentifierRef type defines an expression that references an identifier that is either unresolved, or has been resolved to an attribute in an unambiguous iteration scope such as a sort. Implementations should attempt to resolve the identifier, only throwing an error at compile-time (or run-time for an interpretive system) if the identifier reference cannot be resolved.
 */
   interface IdentifierRef extends AbstractExpression {
-    type: "IdentifierRef";
+    type: 'IdentifierRef';
     name?: string;
     libraryName?: string;
   }
@@ -206,7 +206,7 @@ The IdentifierRef type defines an expression that references an identifier that 
 The Literal type defines a single scalar value. For example, the literal 5, the boolean value true or the string "antithrombotic".
 */
   interface Literal extends AbstractExpression {
-    type: "Literal";
+    type: 'Literal';
     valueType: string;
     value?: any;
   }
@@ -223,7 +223,7 @@ The TupleElement is used within a Tuple expression to provide the value of a spe
 The Tuple expression allows tuples of any type to be built up as an expression. The tupleType attribute specifies the type of the tuple being built, if any, and the list of tuple elements specify the values for the elements of the tuple. Note that the value of an element may be any expression, including another Tuple.
 */
   interface Tuple extends AbstractExpression {
-    type: "Tuple";
+    type: 'Tuple';
     element?: TupleElement[];
   }
 
@@ -239,7 +239,7 @@ The InstanceElement is used within an Instance expression to provide the value o
 The Instance expression allows class instances of any type to be built up as an expression. The classType attribute specifies the type of the class instance being built, and the list of instance elements specify the values for the elements of the class instance. Note that the value of an element may be any expression, including another Instance.
 */
   interface Instance extends AbstractExpression {
-    type: "Instance";
+    type: 'Instance';
     classType: string;
     element?: InstanceElement[];
   }
@@ -255,7 +255,7 @@ If the high bound of the interval is null and open, the high bound of the interv
 If the high bound of the interval is null and closed, the interval is interpreted to end at the maximum value of the point type, and computations involving the high boundary will be performed with that interpretation.
 */
   interface Interval extends AbstractExpression {
-    type: "Interval";
+    type: 'Interval';
     lowClosed?: boolean;
     highClosed?: boolean;
     low?: Expression;
@@ -270,7 +270,7 @@ If a typeSpecifier element is provided, the list is of that type. Otherwise, the
 If any argument is null, the resulting list will have null for that element.
 */
   interface List extends AbstractExpression {
-    type: "List";
+    type: 'List';
     typeSpecifier?: TypeSpecifier;
     element?: Expression[];
   }
@@ -279,21 +279,21 @@ If any argument is null, the resulting list will have null for that element.
 The And operator returns the logical conjunction of its arguments. Note that this operator is defined using 3-valued logic semantics. This means that if either argument is false, the result is false; if both arguments are true, the result is true; otherwise, the result is null. Note also that ELM does not prescribe short-circuit evaluation.
 */
   interface And extends AbstractBinaryExpression {
-    type: "And";
+    type: 'And';
   }
 
   /*
 The Or operator returns the logical disjunction of its arguments. Note that this operator is defined using 3-valued logic semantics. This means that if either argument is true, the result is true; if both arguments are false, the result is false; otherwise, the result is null. Note also that ELM does not prescribe short-circuit evaluation.
 */
   interface Or extends AbstractBinaryExpression {
-    type: "Or";
+    type: 'Or';
   }
 
   /*
 The Xor operator returns the exclusive or of its arguments. Note that this operator is defined using 3-valued logic semantics. This means that the result is true if and only if one argument is true and the other is false, and that the result is false if and only if both arguments are true or both arguments are false. If either or both arguments are null, the result is null.
 */
   interface Xor extends AbstractBinaryExpression {
-    type: "Xor";
+    type: 'Xor';
   }
 
   /*
@@ -301,21 +301,21 @@ The Implies operator returns the logical implication of its arguments. Note that
 Note that implies may use short-circuit evaluation in the case that the first operand evaluates to false.
 */
   interface Implies extends AbstractBinaryExpression {
-    type: "Implies";
+    type: 'Implies';
   }
 
   /*
 The Not operator returns the logical negation of its argument. If the argument is true, the result is false; if the argument is false, the result is true; otherwise, the result is null.
 */
   interface Not extends AbstractUnaryExpression {
-    type: "Not";
+    type: 'Not';
   }
 
   /*
 The If operator evaluates a condition, and returns the then argument if the condition evaluates to true; if the condition evaluates to false or null, the result of the else argument is returned. The static type of the then argument determines the result type of the conditional, and the else argument must be of that same type.
 */
   interface If extends AbstractExpression {
-    type: "If";
+    type: 'If';
     condition: Expression;
     then: Expression;
     else: Expression;
@@ -331,7 +331,7 @@ If a comparand is not provided, the type of each when element of the caseItems w
 The static type of the then argument within the first caseItem determines the type of the result, and the then argument of each subsequent caseItem and the else argument must be of that same type.
 */
   interface Case extends AbstractExpression {
-    type: "Case";
+    type: 'Case';
     comparand?: Expression;
     caseItem: CaseItem[];
     else: Expression;
@@ -341,7 +341,7 @@ The static type of the then argument within the first caseItem determines the ty
 The Null operator returns a null, or missing information marker. To avoid the need to cast this result, the operator is allowed to return a typed null.
 */
   interface Null extends AbstractExpression {
-    type: "Null";
+    type: 'Null';
     valueType?: string;
   }
 
@@ -349,35 +349,35 @@ The Null operator returns a null, or missing information marker. To avoid the ne
 The IsNull operator determines whether or not its argument evaluates to null. If the argument evaluates to null, the result is true; otherwise, the result is false.
 */
   interface IsNull extends AbstractUnaryExpression {
-    type: "IsNull";
+    type: 'IsNull';
   }
 
   /*
 The IsTrue operator determines whether or not its argument evaluates to true. If the argument evaluates to true, the result is true; if the argument evaluates to false or null, the result is false.
 */
   interface IsTrue extends AbstractUnaryExpression {
-    type: "IsTrue";
+    type: 'IsTrue';
   }
 
   /*
 The IsFalse operator determines whether or not its argument evaluates to false. If the argument evaluates to false, the result is true; if the argument evaluates to true or null, the result is false.
 */
   interface IsFalse extends AbstractUnaryExpression {
-    type: "IsFalse";
+    type: 'IsFalse';
   }
 
   /*
 The Coalesce operator returns the first non-null result in a list of arguments. If all arguments evaluate to null, the result is null. The static type of the first argument determines the type of the result, and all subsequent arguments must be of that same type.
 */
   interface Coalesce extends AbstractNaryExpression {
-    type: "Coalesce";
+    type: 'Coalesce';
   }
 
   /*
 The Is operator allows the type of a result to be tested. The language must support the ability to test against any type. If the run-time type of the argument is of the type being tested, the result of the operator is true; otherwise, the result is false.
 */
   interface Is extends AbstractUnaryExpression {
-    type: "Is";
+    type: 'Is';
     isType?: string;
     isTypeSpecifier?: TypeSpecifier;
   }
@@ -386,7 +386,7 @@ The Is operator allows the type of a result to be tested. The language must supp
 The As operator allows the result of an expression to be cast as a given target type. This allows expressions to be written that are statically typed against the expected run-time type of the argument. If the argument is not of the specified type, and the strict attribute is false (the default), the result is null. If the argument is not of the specified type and the strict attribute is true, an exception is thrown.
 */
   interface As extends AbstractUnaryExpression {
-    type: "As";
+    type: 'As';
     asType?: string;
     strict?: boolean;
     asTypeSpecifier?: TypeSpecifier;
@@ -406,7 +406,7 @@ Between Concept and List<Code>
 Conversion between String and Date/DateTime/Time is performed using the ISO-8601 standard format: YYYY-MM-DDThh:mm:ss(+|-)hh:mm.
 */
   interface Convert extends AbstractUnaryExpression {
-    type: "Convert";
+    type: 'Convert';
     toType?: string;
     toTypeSpecifier?: TypeSpecifier;
   }
@@ -424,7 +424,7 @@ Between Concept and List<Code>
 Conversion between String and Date/DateTime/Time is checked using the ISO-8601 standard format: YYYY-MM-DDThh:mm:ss(+|-)hh:mm.
 */
   interface CanConvert extends AbstractUnaryExpression {
-    type: "CanConvert";
+    type: 'CanConvert';
     toType?: string;
     toTypeSpecifier?: TypeSpecifier;
   }
@@ -438,7 +438,7 @@ If the input cannot be interpreted as a valid Boolean value, the result is null.
 If the argument is null the result is null.
 */
   interface ToBoolean extends AbstractUnaryExpression {
-    type: "ToBoolean";
+    type: 'ToBoolean';
   }
 
   /*
@@ -450,7 +450,7 @@ If the input cannot be interpreted as a valid Boolean value, the result is false
 If the argument is null the result is null.
 */
   interface ConvertsToBoolean extends AbstractUnaryExpression {
-    type: "ConvertsToBoolean";
+    type: 'ConvertsToBoolean';
   }
 
   /*
@@ -459,7 +459,7 @@ If the input is a list of Codes, the resulting Concept will have all the input C
 If the argument is null, the result is null.
 */
   interface ToConcept extends AbstractUnaryExpression {
-    type: "ToConcept";
+    type: 'ToConcept';
   }
 
   /*
@@ -473,7 +473,7 @@ As with date literals, date values may be specified to any precision.
 If the argument is null, the result is null.
 */
   interface ConvertsToDate extends AbstractUnaryExpression {
-    type: "ConvertsToDate";
+    type: 'ConvertsToDate';
   }
 
   /*
@@ -489,7 +489,7 @@ For DateTime values, the result is equivalent to extracting the Date component o
 If the argument is null, the result is null.
 */
   interface ToDate extends AbstractUnaryExpression {
-    type: "ToDate";
+    type: 'ToDate';
   }
 
   /*
@@ -503,7 +503,7 @@ As with Date and Time literals, DateTime values may be specified to any precisio
 If the argument is null, the result is null.
 */
   interface ConvertsToDateTime extends AbstractUnaryExpression {
-    type: "ConvertsToDateTime";
+    type: 'ConvertsToDateTime';
   }
 
   /*
@@ -518,7 +518,7 @@ For Date values, the result is a DateTime with the time components unspecified, 
 If the argument is null, the result is null.
 */
   interface ToDateTime extends AbstractUnaryExpression {
-    type: "ToDateTime";
+    type: 'ToDateTime';
   }
 
   /*
@@ -532,7 +532,7 @@ If the input is a Boolean, the result is true.
 If the argument is null, the result is null.
 */
   interface ConvertsToDecimal extends AbstractUnaryExpression {
-    type: "ConvertsToDecimal";
+    type: 'ConvertsToDecimal';
   }
 
   /*
@@ -546,7 +546,7 @@ If the input is Boolean, true will result in 1.0, false will result in 0.0.
 If the argument is null, the result is null.
 */
   interface ToDecimal extends AbstractUnaryExpression {
-    type: "ToDecimal";
+    type: 'ToDecimal';
   }
 
   /*
@@ -560,7 +560,7 @@ If the input is a Boolean, the result is true.
 If the argument is null, the result is null.
 */
   interface ConvertsToInteger extends AbstractUnaryExpression {
-    type: "ConvertsToInteger";
+    type: 'ConvertsToInteger';
   }
 
   /*
@@ -574,7 +574,7 @@ If the input is Boolean, true will result in 1, false will result in 0.
 If the argument is null, the result is null.
 */
   interface ToInteger extends AbstractUnaryExpression {
-    type: "ToInteger";
+    type: 'ToInteger';
   }
 
   /*
@@ -588,7 +588,7 @@ If the input is a Boolean, the result is true.
 If the argument is null, the result is null.
 */
   interface ConvertsToLong extends AbstractUnaryExpression {
-    type: "ConvertsToLong";
+    type: 'ConvertsToLong';
   }
 
   /*
@@ -601,7 +601,7 @@ If the input string is not formatted correctly, or cannot be interpreted as a va
 If the argument is null, the result is null.
 */
   interface ToLong extends AbstractUnaryExpression {
-    type: "ToLong";
+    type: 'ToLong';
   }
 
   /*
@@ -616,7 +616,7 @@ For Integer, Decimal, and Ratio values, the operator simply returns true.
 If the argument is null, the result is null.
 */
   interface ConvertsToQuantity extends AbstractUnaryExpression {
-    type: "ConvertsToQuantity";
+    type: 'ConvertsToQuantity';
   }
 
   /*
@@ -632,7 +632,7 @@ For Ratio values, the operation is equivalent to the result of dividing the nume
 If the argument is null, the result is null.
 */
   interface ToQuantity extends AbstractUnaryExpression {
-    type: "ToQuantity";
+    type: 'ToQuantity';
   }
 
   /*
@@ -643,7 +643,7 @@ If the input string is not formatted correctly, or cannot be interpreted as a va
 If the argument is null, the result is null.
 */
   interface ConvertsToRatio extends AbstractUnaryExpression {
-    type: "ConvertsToRatio";
+    type: 'ConvertsToRatio';
   }
 
   /*
@@ -654,7 +654,7 @@ If the input string is not formatted correctly, or cannot be interpreted as a va
 If the argument is null, the result is null.
 */
   interface ToRatio extends AbstractUnaryExpression {
-    type: "ToRatio";
+    type: 'ToRatio';
   }
 
   /*
@@ -664,7 +664,7 @@ The operator is effectively shorthand for "if operand is null then { } else { op
 The operator is used to implement list promotion efficiently.
 */
   interface ToList extends AbstractUnaryExpression {
-    type: "ToList";
+    type: 'ToList';
   }
 
   /*
@@ -672,7 +672,7 @@ The ToChars operator takes a string and returns a list with one string for each 
 If the argument is null, the result is null.
 */
   interface ToChars extends AbstractUnaryExpression {
-    type: "ToChars";
+    type: 'ToChars';
   }
 
   /*
@@ -691,7 +691,7 @@ String
 If the argument is null, the result is null.
 */
   interface ConvertsToString extends AbstractUnaryExpression {
-    type: "ConvertsToString";
+    type: 'ConvertsToString';
   }
 
   /*
@@ -709,7 +709,7 @@ See the Formatting Strings topic in the CQL Reference (Appendix B) of the CQL Sp
 If the argument is null, the result is null.
 */
   interface ToString extends AbstractUnaryExpression {
-    type: "ToString";
+    type: 'ToString';
   }
 
   /*
@@ -723,7 +723,7 @@ As with time-of-day literals, time-of-day values may be specified to any precisi
 If the argument is null, the result is null.
 */
   interface ConvertsToTime extends AbstractUnaryExpression {
-    type: "ConvertsToTime";
+    type: 'ConvertsToTime';
   }
 
   /*
@@ -738,7 +738,7 @@ For DateTime values, the result is the same as extracting the Time component fro
 If the argument is null, the result is null.
 */
   interface ToTime extends AbstractUnaryExpression {
-    type: "ToTime";
+    type: 'ToTime';
   }
 
   /*
@@ -747,7 +747,7 @@ Note that implementations are not required to support quantity conversion, and s
 If either argument is null, the result is null.
 */
   interface CanConvertQuantity extends AbstractBinaryExpression {
-    type: "CanConvertQuantity";
+    type: 'CanConvertQuantity';
   }
 
   /*
@@ -756,7 +756,7 @@ Note that implementations are not required to support quantity conversion. Imple
 If either argument is null, the result is null.
 */
   interface ConvertQuantity extends AbstractBinaryExpression {
-    type: "ConvertQuantity";
+    type: 'ConvertQuantity';
   }
 
   /*
@@ -774,7 +774,7 @@ For Date, Time, and DateTime values, the comparison is performed by considering 
 If either argument is null, the result is null.
 */
   interface Equal extends AbstractBinaryExpression {
-    type: "Equal";
+    type: 'Equal';
   }
 
   /*
@@ -794,7 +794,7 @@ For Concept values, equivalence is defined as a non-empty intersection of the co
 Note that this operator will always return true or false, even if either or both of its arguments are null or contain null components.
 */
   interface Equivalent extends AbstractBinaryExpression {
-    type: "Equivalent";
+    type: 'Equivalent';
   }
 
   /*
@@ -802,7 +802,7 @@ The NotEqual operator returns true if its arguments are not the same value.
 The NotEqual operator is a shorthand for invocation of logical negation of the Equal operator.
 */
   interface NotEqual extends AbstractBinaryExpression {
-    type: "NotEqual";
+    type: 'NotEqual';
   }
 
   /*
@@ -815,7 +815,7 @@ The Less operator is defined for the Integer, Long, Decimal, String, Date, DateT
 Note that relative ratio comparisons are not directly supported due to the variance of uses within healthcare. See the discussion in Ratio Operators in the Author's Guide for more information.
 */
   interface Less extends AbstractBinaryExpression {
-    type: "Less";
+    type: 'Less';
   }
 
   /*
@@ -829,7 +829,7 @@ If either argument is null, the result is null.
 Note that relative ratio comparisons are not directly supported due to the variance of uses within healthcare. See the discussion in Ratio Operators in the Author's Guide for more information.
 */
   interface Greater extends AbstractBinaryExpression {
-    type: "Greater";
+    type: 'Greater';
   }
 
   /*
@@ -843,7 +843,7 @@ If either argument is null, the result is null.
 Note that relative ratio comparisons are not directly supported due to the variance of uses within healthcare. See the discussion in Ratio Operators in the Author's Guide for more information.
 */
   interface LessOrEqual extends AbstractBinaryExpression {
-    type: "LessOrEqual";
+    type: 'LessOrEqual';
   }
 
   /*
@@ -857,7 +857,7 @@ If either argument is null, the result is null.
 Note that relative ratio comparisons are not directly supported due to the variance of uses within healthcare. See the discussion in Ratio Operators in the Author's Guide for more information.
 */
   interface GreaterOrEqual extends AbstractBinaryExpression {
-    type: "GreaterOrEqual";
+    type: 'GreaterOrEqual';
   }
 
   /*
@@ -875,7 +875,7 @@ If either argument is null, the result is null.
 If the result of the addition cannot be represented (i.e. arithmetic overflow), the result is null.
 */
   interface Add extends AbstractBinaryExpression {
-    type: "Add";
+    type: 'Add';
   }
 
   /*
@@ -893,7 +893,7 @@ If either argument is null, the result is null.
 If the result of the operation cannot be represented, the result is null.
 */
   interface Subtract extends AbstractBinaryExpression {
-    type: "Subtract";
+    type: 'Subtract';
   }
 
   /*
@@ -904,7 +904,7 @@ If the result of the operation cannot be represented, the result is null.
 The Multiply operator is defined for the Integer, Long, Decimal and Quantity types.
 */
   interface Multiply extends AbstractBinaryExpression {
-    type: "Multiply";
+    type: 'Multiply';
   }
 
   /*
@@ -915,7 +915,7 @@ If the result of the division cannot be represented, or the right argument is 0,
 The Divide operator is defined for the Decimal and Quantity types.
 */
   interface Divide extends AbstractBinaryExpression {
-    type: "Divide";
+    type: 'Divide';
   }
 
   /*
@@ -926,7 +926,7 @@ The TruncatedDivide operator is defined for the Integer, Long, Decimal, and Quan
 For TruncatedDivide operations involving quantities, the resulting quantity will have the appropriate unit.
 */
   interface TruncatedDivide extends AbstractBinaryExpression {
-    type: "TruncatedDivide";
+    type: 'TruncatedDivide';
   }
 
   /*
@@ -937,7 +937,7 @@ The Modulo operator is defined for the Integer, Long, Decimal, and Quantity type
 For Modulo operations involving quantities, the resulting quantity will have the appropriate unit.
 */
   interface Modulo extends AbstractBinaryExpression {
-    type: "Modulo";
+    type: 'Modulo';
   }
 
   /*
@@ -945,7 +945,7 @@ The Ceiling operator returns the first integer greater than or equal to the argu
 If the argument is null, the result is null.
 */
   interface Ceiling extends AbstractUnaryExpression {
-    type: "Ceiling";
+    type: 'Ceiling';
   }
 
   /*
@@ -953,7 +953,7 @@ The Floor operator returns the first integer less than or equal to the argument.
 If the argument is null, the result is null.
 */
   interface Floor extends AbstractUnaryExpression {
-    type: "Floor";
+    type: 'Floor';
   }
 
   /*
@@ -961,7 +961,7 @@ The Truncate operator returns the integer component of its argument.
 If the argument is null, the result is null.
 */
   interface Truncate extends AbstractUnaryExpression {
-    type: "Truncate";
+    type: 'Truncate';
   }
 
   /*
@@ -972,7 +972,7 @@ If the result of taking the absolute value of the argument cannot be represented
 The Abs operator is defined for the Integer, Long, Decimal, and Quantity types.
 */
   interface Abs extends AbstractUnaryExpression {
-    type: "Abs";
+    type: 'Abs';
   }
 
   /*
@@ -983,7 +983,7 @@ If the result of negating the argument cannot be represented (e.g. -(minimum Int
 The Negate operator is defined for the Integer, Long, Decimal, and Quantity types.
 */
   interface Negate extends AbstractUnaryExpression {
-    type: "Negate";
+    type: 'Negate';
   }
 
   /*
@@ -992,7 +992,7 @@ If the argument is null, the result is null.
 Precision determines the decimal place at which the rounding will occur. If precision is not specified or null, 0 is assumed.
 */
   interface Round extends AbstractOperatorExpression {
-    type: "Round";
+    type: 'Round';
     operand: Expression;
     precision?: Expression;
   }
@@ -1003,7 +1003,7 @@ If the argument is null, the result is null.
 If the result of the operation cannot be represented, the result is null.
 */
   interface Ln extends AbstractUnaryExpression {
-    type: "Ln";
+    type: 'Ln';
   }
 
   /*
@@ -1012,7 +1012,7 @@ If the argument is null, the result is null.
 If the result of the operation cannot be represented, the result is null.
 */
   interface Exp extends AbstractUnaryExpression {
-    type: "Exp";
+    type: 'Exp';
   }
 
   /*
@@ -1021,7 +1021,7 @@ If either argument is null, the result is null.
 If the result of the operation cannot be represented, the result is null.
 */
   interface Log extends AbstractBinaryExpression {
-    type: "Log";
+    type: 'Log';
   }
 
   /*
@@ -1030,7 +1030,7 @@ If either argument is null, the result is null.
 If the result of the operation cannot be represented, the result is null.
 */
   interface Power extends AbstractBinaryExpression {
-    type: "Power";
+    type: 'Power';
   }
 
   /*
@@ -1044,7 +1044,7 @@ If the argument is null, the result is null.
 If the result of the operation cannot be represented, the result is null.
 */
   interface Successor extends AbstractUnaryExpression {
-    type: "Successor";
+    type: 'Successor';
   }
 
   /*
@@ -1058,7 +1058,7 @@ If the argument is null, the result is null.
 If the result of the operation cannot be represented, the result is null.
 */
   interface Predecessor extends AbstractUnaryExpression {
-    type: "Predecessor";
+    type: 'Predecessor';
   }
 
   /*
@@ -1074,7 +1074,7 @@ For any other type, attempting to invoke MinValue results in an error.
 Note that implementations may choose to represent the minimum DateTime value using a constant offset such as UTC.
 */
   interface MinValue extends AbstractExpression {
-    type: "MinValue";
+    type: 'MinValue';
     valueType: string;
   }
 
@@ -1091,7 +1091,7 @@ For any other type, attempting to invoke MaxValue results in an error.
 Note that implementations may choose to represent the maximum DateTime value using a constant offset such as UTC.
 */
   interface MaxValue extends AbstractExpression {
-    type: "MaxValue";
+    type: 'MaxValue';
     valueType: string;
   }
 
@@ -1108,7 +1108,7 @@ Precision(@T10:30:00.000) // 9
 If the argument is null, the result is null.
 */
   interface Precision extends AbstractUnaryExpression {
-    type: "Precision";
+    type: 'Precision';
   }
 
   /*
@@ -1123,7 +1123,7 @@ LowBoundary(@T10:30, 9) // @T10:30:00.000
 If the input value is null, the result is null.
 */
   interface LowBoundary extends AbstractBinaryExpression {
-    type: "LowBoundary";
+    type: 'LowBoundary';
   }
 
   /*
@@ -1138,7 +1138,7 @@ HighBoundary(@T10:30, 9) // @T10:30:59.999
 If the input value is null, the result is null.
 */
   interface HighBoundary extends AbstractBinaryExpression {
-    type: "HighBoundary";
+    type: 'HighBoundary';
   }
 
   /*
@@ -1146,7 +1146,7 @@ The Concatenate operator performs string concatenation of its arguments.
 If any argument is null, the result is null.
 */
   interface Concatenate extends AbstractNaryExpression {
-    type: "Concatenate";
+    type: 'Concatenate';
   }
 
   /*
@@ -1155,7 +1155,7 @@ If either argument is null the result is null.  If the source list is empty, the
 For consistency with aggregate operator behavior, null elements in the input list are ignored.
 */
   interface Combine extends AbstractOperatorExpression {
-    type: "Combine";
+    type: 'Combine';
     source: Expression;
     separator?: Expression;
   }
@@ -1166,7 +1166,7 @@ If the stringToSplit argument is null, the result is null.
 If the stringToSplit argument does not contain any appearances of the separator, the result is a list of strings containing one element that is the value of the stringToSplit argument.
 */
   interface Split extends AbstractOperatorExpression {
-    type: "Split";
+    type: 'Split';
     stringToSplit: Expression;
     separator?: Expression;
   }
@@ -1178,7 +1178,7 @@ If the stringToSplit argument is null, the result is null.
 If the stringToSplit argument does not contain any appearances of the separator pattern, the result is a list of strings containing one element that is the input value of the stringToSplit argument.
 */
   interface SplitOnMatches extends AbstractOperatorExpression {
-    type: "SplitOnMatches";
+    type: 'SplitOnMatches';
     stringToSplit: Expression;
     separatorPattern: Expression;
   }
@@ -1190,7 +1190,7 @@ For lists, the length is the number of elements in the list.
 If the argument is null, the result is 0.
 */
   interface Length extends AbstractUnaryExpression {
-    type: "Length";
+    type: 'Length';
   }
 
   /*
@@ -1199,7 +1199,7 @@ Note that the definition of uppercase for a given character is a locale-dependen
 If the argument is null, the result is null.
 */
   interface Upper extends AbstractUnaryExpression {
-    type: "Upper";
+    type: 'Upper';
   }
 
   /*
@@ -1208,7 +1208,7 @@ Note that the definition of lowercase for a given character is a locale-dependen
 If the argument is null, the result is null.
 */
   interface Lower extends AbstractUnaryExpression {
-    type: "Lower";
+    type: 'Lower';
   }
 
   /*
@@ -1218,7 +1218,7 @@ If the index is less than 0 or greater than the length of the string or list bei
 If either argument is null, the result is null.
 */
   interface Indexer extends AbstractBinaryExpression {
-    type: "Indexer";
+    type: 'Indexer';
   }
 
   /*
@@ -1227,7 +1227,7 @@ If the pattern is not found, the result is -1.
 If either argument is null, the result is null.
 */
   interface PositionOf extends AbstractOperatorExpression {
-    type: "PositionOf";
+    type: 'PositionOf';
     pattern: Expression;
     string: Expression;
   }
@@ -1238,7 +1238,7 @@ If the pattern is not found, the result is -1.
 If either argument is null, the result is null.
 */
   interface LastPositionOf extends AbstractOperatorExpression {
-    type: "LastPositionOf";
+    type: 'LastPositionOf';
     pattern: Expression;
     string: Expression;
   }
@@ -1249,7 +1249,7 @@ If length is ommitted, the substring returned starts at startIndex and continues
 If stringToSub or startIndex is null, or startIndex is out of range, the result is null.
 */
   interface Substring extends AbstractOperatorExpression {
-    type: "Substring";
+    type: 'Substring';
     stringToSub: Expression;
     startIndex: Expression;
     length?: Expression;
@@ -1261,7 +1261,7 @@ If the prefix is the empty string, the result is true.
 If either argument is null, the result is null.
 */
   interface StartsWith extends AbstractBinaryExpression {
-    type: "StartsWith";
+    type: 'StartsWith';
   }
 
   /*
@@ -1270,7 +1270,7 @@ If the suffix is the empty string, the result is true.
 If either argument is null, the result is null.
 */
   interface EndsWith extends AbstractBinaryExpression {
-    type: "EndsWith";
+    type: 'EndsWith';
   }
 
   /*
@@ -1279,7 +1279,7 @@ If either argument is null, the result is null.
 Platforms will typically use native regular expression implementations. These are typically fairly similar, but there will always be small differences. As such, CQL does not prescribe a particular dialect, but recommends the use of the [PCRE](http://www.pcre.org) dialect.
 */
   interface Matches extends AbstractBinaryExpression {
-    type: "Matches";
+    type: 'Matches';
   }
 
   /*
@@ -1288,7 +1288,7 @@ If any argument is null, the result is null.
 Platforms will typically use native regular expression implementations. These are typically fairly similar, but there will always be small differences. As such, CQL does not prescribe a particular dialect, but recommends the use of the [PCRE](http://www.pcre.org) dialect.
 */
   interface ReplaceMatches extends AbstractTernaryExpression {
-    type: "ReplaceMatches";
+    type: 'ReplaceMatches';
   }
 
   /*
@@ -1301,7 +1301,7 @@ If either argument is null, the result is null.
 Note that this operator can be implemented using Uncertainty as described in the CQL specification, Chapter 5, Precision-Based Timing.
 */
   interface DurationBetween extends AbstractBinaryExpression {
-    type: "DurationBetween";
+    type: 'DurationBetween';
     precision?: DateTimePrecision;
   }
 
@@ -1315,7 +1315,7 @@ If either argument is null, the result is null.
 Note that this operator can be implemented using Uncertainty as described in the CQL specification, Chapter 5, Precision-Based Timing.
 */
   interface DifferenceBetween extends AbstractBinaryExpression {
-    type: "DifferenceBetween";
+    type: 'DifferenceBetween';
     precision?: DateTimePrecision;
   }
 
@@ -1324,7 +1324,7 @@ The DateFrom operator returns the date (with no time components specified) of th
 If the argument is null, the result is null.
 */
   interface DateFrom extends AbstractUnaryExpression {
-    type: "DateFrom";
+    type: 'DateFrom';
   }
 
   /*
@@ -1333,7 +1333,7 @@ When extracting the time from a DateTime value, implementations should normalize
 If the argument is null, the result is null.
 */
   interface TimeFrom extends AbstractUnaryExpression {
-    type: "TimeFrom";
+    type: 'TimeFrom';
   }
 
   /*
@@ -1341,7 +1341,7 @@ DEPRECATED (as of 1.4): The TimezoneFrom operator returns the timezone offset of
 If the argument is null, the result is null.
 */
   interface TimezoneFrom extends AbstractUnaryExpression {
-    type: "TimezoneFrom";
+    type: 'TimezoneFrom';
   }
 
   /*
@@ -1349,7 +1349,7 @@ The TimezoneOffsetFrom operator returns the timezone offset of the argument.
 If the argument is null, the result is null.
 */
   interface TimezoneOffsetFrom extends AbstractUnaryExpression {
-    type: "TimezoneOffsetFrom";
+    type: 'TimezoneOffsetFrom';
   }
 
   /*
@@ -1358,7 +1358,7 @@ If the argument is null, the result is null.
 The precision must be one of Year, Month, Day, Hour, Minute, Second, or Millisecond. Note specifically that since there is variability how weeks are counted, Week precision is not supported, and will result in an error.
 */
   interface DateTimeComponentFrom extends AbstractUnaryExpression {
-    type: "DateTimeComponentFrom";
+    type: 'DateTimeComponentFrom';
     precision?: DateTimePrecision;
   }
 
@@ -1366,14 +1366,14 @@ The precision must be one of Year, Month, Day, Hour, Minute, Second, or Millisec
 The TimeOfDay operator returns the time-of-day of the start timestamp associated with the evaluation request. See the Now operator for more information on the rationale for defining the TimeOfDay operator in this way.
 */
   interface TimeOfDay extends AbstractOperatorExpression {
-    type: "TimeOfDay";
+    type: 'TimeOfDay';
   }
 
   /*
 The Today operator returns the date (with no time component) of the start timestamp associated with the evaluation request. See the Now operator for more information on the rationale for defining the Today operator in this way.
 */
   interface Today extends AbstractOperatorExpression {
-    type: "Today";
+    type: 'Today';
   }
 
   /*
@@ -1382,7 +1382,7 @@ The Now operator returns the date and time of the start timestamp associated wit
 2) The operation will return the timestamp associated with the evaluation request, allowing the evaluation to be performed with the same timezone offset information as the data delivered with the evaluation request.
 */
   interface Now extends AbstractOperatorExpression {
-    type: "Now";
+    type: 'Now';
   }
 
   /*
@@ -1390,7 +1390,7 @@ The Date operator constructs a date value from the given components.
 At least one component must be specified, and no component may be specified at a precision below an unspecified precision. For example, month may be null, but if it is, day must be null as well.
 */
   interface Date extends AbstractOperatorExpression {
-    type: "Date";
+    type: 'Date';
     year: Expression;
     month?: Expression;
     day?: Expression;
@@ -1403,7 +1403,7 @@ Although the milliseconds are specified with a separate component, seconds and m
 If timezoneOffset is not specified, it is defaulted to the timezone offset of the evaluation request.
 */
   interface DateTime extends AbstractOperatorExpression {
-    type: "DateTime";
+    type: 'DateTime';
     year: Expression;
     month?: Expression;
     day?: Expression;
@@ -1420,7 +1420,7 @@ At least one component must be specified, and no component may be specified at a
 Although the milliseconds are specified with a separate component, seconds and milliseconds are combined and represented as a [.id]#Decimal# for the purposes of comparison.
 */
   interface Time extends AbstractOperatorExpression {
-    type: "Time";
+    type: 'Time';
     hour: Expression;
     minute?: Expression;
     second?: Expression;
@@ -1440,7 +1440,7 @@ When comparing DateTime values with different timezone offsets, implementations 
 If either argument is null, the result is null.
 */
   interface SameAs extends AbstractBinaryExpression {
-    type: "SameAs";
+    type: 'SameAs';
     precision?: DateTimePrecision;
   }
 
@@ -1457,7 +1457,7 @@ When comparing DateTime values with different timezone offsets, implementations 
 If either argument is null, the result is null.
 */
   interface SameOrBefore extends AbstractBinaryExpression {
-    type: "SameOrBefore";
+    type: 'SameOrBefore';
     precision?: DateTimePrecision;
   }
 
@@ -1474,7 +1474,7 @@ When comparing DateTime values with different timezone offsets, implementations 
 If either argument is null, the result is null.
 */
   interface SameOrAfter extends AbstractBinaryExpression {
-    type: "SameOrAfter";
+    type: 'SameOrAfter';
     precision?: DateTimePrecision;
   }
 
@@ -1482,7 +1482,7 @@ If either argument is null, the result is null.
 The PointFrom expression extracts the single point from the source interval. The source interval must be a unit interval (meaning an interval with the same starting and ending boundary), otherwise, a run-time error is thrown. If the source interval is null, the result is null.
 */
   interface PointFrom extends AbstractUnaryExpression {
-    type: "PointFrom";
+    type: 'PointFrom';
   }
 
   /*
@@ -1491,7 +1491,7 @@ Note that this operator is not defined for intervals of type Date, DateTime, and
 If the argument is null, the result is null.
 */
   interface Width extends AbstractUnaryExpression {
-    type: "Width";
+    type: 'Width';
   }
 
   /*
@@ -1501,7 +1501,7 @@ Note that this operator is not defined for intervals of type Date, DateTime, and
 If the argument is null, the result is null.
 */
   interface Size extends AbstractUnaryExpression {
-    type: "Size";
+    type: 'Size';
   }
 
   /*
@@ -1511,7 +1511,7 @@ If the low boundary of the interval is closed and the low value of the interval 
 If the argument is null, the result is null.
 */
   interface Start extends AbstractUnaryExpression {
-    type: "Start";
+    type: 'Start';
   }
 
   /*
@@ -1521,7 +1521,7 @@ If the high boundary of the interval is closed and the high value of the interva
 If the argument is null, the result is null.
 */
   interface End extends AbstractUnaryExpression {
-    type: "End";
+    type: 'End';
   }
 
   /*
@@ -1534,7 +1534,7 @@ For the Interval, T overload, this operator returns true if the given point is e
 If the first argument is null, the result is false. If the second argument is null, the result is null.
 */
   interface Contains extends AbstractBinaryExpression {
-    type: "Contains";
+    type: 'Contains';
     precision?: DateTimePrecision;
   }
 
@@ -1548,7 +1548,7 @@ For the Interval, T overload, this operator returns true if the given point is g
 If the first argument is null, the result is false. If the second argument is null, the result is null.
 */
   interface ProperContains extends AbstractBinaryExpression {
-    type: "ProperContains";
+    type: 'ProperContains';
     precision?: DateTimePrecision;
   }
 
@@ -1562,7 +1562,7 @@ For the T, Interval overload, this operator returns true if the given point is e
 If the first argument is null, the result is null. If the second argument is null the result is false.
 */
   interface In extends AbstractBinaryExpression {
-    type: "In";
+    type: 'In';
     precision?: DateTimePrecision;
   }
 
@@ -1576,7 +1576,7 @@ For the T, Interval overload, this operator returns true if the given point is g
 If the first argument is null, the result is null. If the second argument is null the result is false.
 */
   interface ProperIn extends AbstractBinaryExpression {
-    type: "ProperIn";
+    type: 'ProperIn';
     precision?: DateTimePrecision;
   }
 
@@ -1591,7 +1591,7 @@ This operator uses the semantics described in the Start and End operators to det
 If either argument is null, the result is null.
 */
   interface Includes extends AbstractBinaryExpression {
-    type: "Includes";
+    type: 'Includes';
     precision?: DateTimePrecision;
   }
 
@@ -1606,7 +1606,7 @@ This operator uses the semantics described in the Start and End operators to det
 If either argument is null, the result is null.
 */
   interface IncludedIn extends AbstractBinaryExpression {
-    type: "IncludedIn";
+    type: 'IncludedIn';
     precision?: DateTimePrecision;
   }
 
@@ -1621,7 +1621,7 @@ This operator uses the semantics described in the Start and End operators to det
 If either argument is null, the result is null.
 */
   interface ProperIncludes extends AbstractBinaryExpression {
-    type: "ProperIncludes";
+    type: 'ProperIncludes';
     precision?: DateTimePrecision;
   }
 
@@ -1636,7 +1636,7 @@ This operator uses the semantics described in the Start and End operators to det
 If either argument is null, the result is null.
 */
   interface ProperIncludedIn extends AbstractBinaryExpression {
-    type: "ProperIncludedIn";
+    type: 'ProperIncludedIn';
     precision?: DateTimePrecision;
   }
 
@@ -1653,7 +1653,7 @@ When comparing DateTime values with different timezone offsets, implementations 
 If either argument is null, the result is null.
 */
   interface Before extends AbstractBinaryExpression {
-    type: "Before";
+    type: 'Before';
     precision?: DateTimePrecision;
   }
 
@@ -1670,7 +1670,7 @@ When comparing DateTime values with different timezone offsets, implementations 
 If either argument is null, the result is null.
 */
   interface After extends AbstractBinaryExpression {
-    type: "After";
+    type: 'After';
     precision?: DateTimePrecision;
   }
 
@@ -1681,7 +1681,7 @@ If precision is specified and the point type is a Date, DateTime, or Time type, 
 If either argument is null, the result is null.
 */
   interface Meets extends AbstractBinaryExpression {
-    type: "Meets";
+    type: 'Meets';
     precision?: DateTimePrecision;
   }
 
@@ -1692,7 +1692,7 @@ If precision is specified and the point type is a Date, DateTime, or Time type, 
 If either argument is null, the result is null.
 */
   interface MeetsBefore extends AbstractBinaryExpression {
-    type: "MeetsBefore";
+    type: 'MeetsBefore';
     precision?: DateTimePrecision;
   }
 
@@ -1703,7 +1703,7 @@ If precision is specified and the point type is a Date, DateTime, or Time type, 
 If either argument is null, the result is null.
 */
   interface MeetsAfter extends AbstractBinaryExpression {
-    type: "MeetsAfter";
+    type: 'MeetsAfter';
     precision?: DateTimePrecision;
   }
 
@@ -1714,7 +1714,7 @@ If precision is specified and the point type is a Date, DateTime, or Time type, 
 If either argument is null, the result is null.
 */
   interface Overlaps extends AbstractBinaryExpression {
-    type: "Overlaps";
+    type: 'Overlaps';
     precision?: DateTimePrecision;
   }
 
@@ -1725,7 +1725,7 @@ If precision is specified and the point type is a Date, DateTime, or Time type, 
 If either argument is null, the result is null.
 */
   interface OverlapsBefore extends AbstractBinaryExpression {
-    type: "OverlapsBefore";
+    type: 'OverlapsBefore';
     precision?: DateTimePrecision;
   }
 
@@ -1736,7 +1736,7 @@ If precision is specified and the point type is a Date, DateTime, or Time type, 
 If either argument is null, the result is null.
 */
   interface OverlapsAfter extends AbstractBinaryExpression {
-    type: "OverlapsAfter";
+    type: 'OverlapsAfter';
     precision?: DateTimePrecision;
   }
 
@@ -1747,7 +1747,7 @@ If precision is specified and the point type is a Date, DateTime, or Time type, 
 If either argument is null, the result is null.
 */
   interface Starts extends AbstractBinaryExpression {
-    type: "Starts";
+    type: 'Starts';
     precision?: DateTimePrecision;
   }
 
@@ -1758,7 +1758,7 @@ If precision is specified and the point type is a Date, DateTime, or Time type, 
 If either argument is null, the result is null.
 */
   interface Ends extends AbstractBinaryExpression {
-    type: "Ends";
+    type: 'Ends';
     precision?: DateTimePrecision;
   }
 
@@ -1772,7 +1772,7 @@ If the list of intervals is empty, the result is empty. If the list of intervals
 If the source argument is null, the result is null.
 */
   interface Collapse extends AbstractBinaryExpression {
-    type: "Collapse";
+    type: 'Collapse';
   }
 
   /*
@@ -1786,7 +1786,7 @@ If the list of intervals is empty, the result is empty. If the list of intervals
 If the source argument is null, the result is null.
 */
   interface Expand extends AbstractBinaryExpression {
-    type: "Expand";
+    type: 'Expand';
   }
 
   /*
@@ -1799,7 +1799,7 @@ For the interval overload, this operator returns the interval that starts at the
 If either argument is null, the operation is performed as though the argument was an empty list.
 */
   interface Union extends AbstractNaryExpression {
-    type: "Union";
+    type: 'Union';
   }
 
   /*
@@ -1812,7 +1812,7 @@ For the interval overload, this operator returns the interval that defines the o
 If either argument is null, the result is null.
 */
   interface Intersect extends AbstractNaryExpression {
-    type: "Intersect";
+    type: 'Intersect';
   }
 
   /*
@@ -1825,7 +1825,7 @@ For the interval overload, this operator returns the portion of the first interv
 If the first argument is null, the result is null. If the second argument is null, the operation is performed as though the second argument was an empty list.
 */
   interface Except extends AbstractNaryExpression {
-    type: "Except";
+    type: 'Except';
   }
 
   /*
@@ -1833,7 +1833,7 @@ The Exists operator returns true if the list contains any elements.
 If the argument is null, the result is false.
 */
   interface Exists extends AbstractUnaryExpression {
-    type: "Exists";
+    type: 'Exists';
   }
 
   /*
@@ -1841,7 +1841,7 @@ The Times operator performs the cartesian product of two lists of tuples. The re
 If either argument is null, the result is null.
 */
   interface Times extends AbstractBinaryExpression {
-    type: "Times";
+    type: 'Times';
   }
 
   /*
@@ -1849,7 +1849,7 @@ The Filter operator returns a list with only those elements in the source list f
 If the source argument is null, the result is null.
 */
   interface Filter extends AbstractExpression {
-    type: "Filter";
+    type: 'Filter';
     scope?: string;
     source: Expression;
     condition: Expression;
@@ -1860,7 +1860,7 @@ The First operator returns the first element in a list. If the order by attribut
 If the argument is null, the result is null.
 */
   interface First extends AbstractOperatorExpression {
-    type: "First";
+    type: 'First';
     orderBy?: string;
     source?: Expression;
   }
@@ -1870,7 +1870,7 @@ The Last operator returns the last element in a list. If the order by attribute 
 If the argument is null, the result is null.
 */
   interface Last extends AbstractOperatorExpression {
-    type: "Last";
+    type: 'Last';
     orderBy?: string;
     source?: Expression;
   }
@@ -1883,7 +1883,7 @@ If the endIndex is null, the slice continues to the last element of the list.
 If the startIndex or endIndex is less than 0, or if the endIndex is less than the startIndex, the result is an empty list.
 */
   interface Slice extends AbstractOperatorExpression {
-    type: "Slice";
+    type: 'Slice';
     source?: Expression;
     startIndex?: Expression;
     endIndex?: Expression;
@@ -1896,7 +1896,7 @@ If the list is empty, or no element is found, the result is -1.
 If either argument is null, the result is null.
 */
   interface IndexOf extends AbstractOperatorExpression {
-    type: "IndexOf";
+    type: 'IndexOf';
     source: Expression;
     element: Expression;
   }
@@ -1906,7 +1906,7 @@ The Flatten operator flattens a list of lists into a single list.
 If the argument is null, the result is null.
 */
   interface Flatten extends AbstractUnaryExpression {
-    type: "Flatten";
+    type: 'Flatten';
   }
 
   /*
@@ -1915,7 +1915,7 @@ When the sort elements do not provide a unique ordering (i.e. there is a possibi
 If the argument is null, the result is null.
 */
   interface Sort extends AbstractExpression {
-    type: "Sort";
+    type: 'Sort';
     source?: Expression;
     by: SortByItem[];
   }
@@ -1926,7 +1926,7 @@ If the source argument is null, the result is null.
 If the element argument evaluates to null for some item in the source list, the resulting list will contain a null for that element.
 */
   interface ForEach extends AbstractExpression {
-    type: "ForEach";
+    type: 'ForEach';
     scope?: string;
     source: Expression;
     element: Expression;
@@ -1939,7 +1939,7 @@ If the source argument is null, the result is null.
 If the element argument evaluates to null for some item in the source list, the resulting list will contain a null for that element.
 */
   interface Repeat extends AbstractExpression {
-    type: "Repeat";
+    type: 'Repeat';
     scope?: string;
     source: Expression;
     element: Expression;
@@ -1951,7 +1951,7 @@ The operator uses equality comparison semantics as defined in the Equal operator
 If the source argument is null, the result is null.
 */
   interface Distinct extends AbstractUnaryExpression {
-    type: "Distinct";
+    type: 'Distinct';
   }
 
   /*
@@ -1959,7 +1959,7 @@ The Current expression returns the value of the object currently in scope. For e
 It is an error to invoke the Current operator outside of a scoped operation.
 */
   interface Current extends AbstractExpression {
-    type: "Current";
+    type: 'Current';
     scope?: string;
   }
 
@@ -1967,7 +1967,7 @@ It is an error to invoke the Current operator outside of a scoped operation.
 The Iteration expression returns the current iteration number of a scoped operation.
 */
   interface Iteration extends AbstractExpression {
-    type: "Iteration";
+    type: 'Iteration';
     scope?: string;
   }
 
@@ -1975,7 +1975,7 @@ The Iteration expression returns the current iteration number of a scoped operat
 The Total expression returns the current value of the total aggregation accumulator in an aggregate operation.
 */
   interface Total extends AbstractExpression {
-    type: "Total";
+    type: 'Total';
     scope?: string;
   }
 
@@ -1983,7 +1983,7 @@ The Total expression returns the current value of the total aggregation accumula
 The SingletonFrom expression extracts a single element from the source list. If the source list is empty, the result is null. If the source list contains one element, that element is returned. If the list contains more than one element, a run-time error is thrown. If the source list is null, the result is null.
 */
   interface SingletonFrom extends AbstractUnaryExpression {
-    type: "SingletonFrom";
+    type: 'SingletonFrom';
   }
 
   /*
@@ -2004,7 +2004,7 @@ The iteration expression has access to the $this, $index, and $total variables. 
 If the list is null, the result is null.
 */
   interface Aggregate extends AbstractAggregateExpression {
-    type: "Aggregate";
+    type: 'Aggregate';
     iteration: Expression;
     initialValue?: Expression;
   }
@@ -2016,7 +2016,7 @@ If the list is empty, the result is 0.
 If the list is null, the result is 0.
 */
   interface Count extends AbstractAggregateExpression {
-    type: "Count";
+    type: 'Count';
   }
 
   /*
@@ -2026,7 +2026,7 @@ If the source contains no non-null elements, null is returned.
 If the list is null, the result is null.
 */
   interface Sum extends AbstractAggregateExpression {
-    type: "Sum";
+    type: 'Sum';
   }
 
   /*
@@ -2036,7 +2036,7 @@ If the source contains no non-null elements, null is returned.
 If the list is null, the result is null.
 */
   interface Product extends AbstractAggregateExpression {
-    type: "Product";
+    type: 'Product';
   }
 
   /*
@@ -2046,7 +2046,7 @@ If the source contains no non-null elements, null is returned.
 If the source is null, the result is null.
 */
   interface Min extends AbstractAggregateExpression {
-    type: "Min";
+    type: 'Min';
   }
 
   /*
@@ -2056,7 +2056,7 @@ If the source contains no non-null elements, null is returned.
 If the source is null, the result is null.
 */
   interface Max extends AbstractAggregateExpression {
-    type: "Max";
+    type: 'Max';
   }
 
   /*
@@ -2066,7 +2066,7 @@ If the source contains no non-null elements, null is returned.
 If the source is null, the result is null.
 */
   interface Avg extends AbstractAggregateExpression {
-    type: "Avg";
+    type: 'Avg';
   }
 
   /*
@@ -2076,7 +2076,7 @@ If the source contains no non-null elements, null is returned.
 If the source is null, the result is null.
 */
   interface GeometricMean extends AbstractAggregateExpression {
-    type: "GeometricMean";
+    type: 'GeometricMean';
   }
 
   /*
@@ -2086,7 +2086,7 @@ If the source contains no non-null elements, null is returned.
 If the source is null, the result is null.
 */
   interface Median extends AbstractAggregateExpression {
-    type: "Median";
+    type: 'Median';
   }
 
   /*
@@ -2096,7 +2096,7 @@ If the source contains no non-null elements, null is returned.
 If the source is null, the result is null.
 */
   interface Mode extends AbstractAggregateExpression {
-    type: "Mode";
+    type: 'Mode';
   }
 
   /*
@@ -2106,7 +2106,7 @@ If the source contains no non-null elements, null is returned.
 If the source is null, the result is null.
 */
   interface Variance extends AbstractAggregateExpression {
-    type: "Variance";
+    type: 'Variance';
   }
 
   /*
@@ -2116,7 +2116,7 @@ If the source contains no non-null elements, null is returned.
 If the source is null, the result is null.
 */
   interface PopulationVariance extends AbstractAggregateExpression {
-    type: "PopulationVariance";
+    type: 'PopulationVariance';
   }
 
   /*
@@ -2126,7 +2126,7 @@ If the source contains no non-null elements, null is returned.
 If the list is null, the result is null.
 */
   interface StdDev extends AbstractAggregateExpression {
-    type: "StdDev";
+    type: 'StdDev';
   }
 
   /*
@@ -2136,7 +2136,7 @@ If the source contains no non-null elements, null is returned.
 If the source is null, the result is null.
 */
   interface PopulationStdDev extends AbstractAggregateExpression {
-    type: "PopulationStdDev";
+    type: 'PopulationStdDev';
   }
 
   /*
@@ -2146,7 +2146,7 @@ If the source contains no non-null elements, true is returned.
 If the source is null, the result is true.
 */
   interface AllTrue extends AbstractAggregateExpression {
-    type: "AllTrue";
+    type: 'AllTrue';
   }
 
   /*
@@ -2156,7 +2156,7 @@ If the source contains no non-null elements, false is returned.
 If the source is null, the result is false.
 */
   interface AnyTrue extends AbstractAggregateExpression {
-    type: "AnyTrue";
+    type: 'AnyTrue';
   }
 
   /*
@@ -2168,7 +2168,7 @@ If a scope is specified, the name is used to resolve the scope in which the path
 Property expressions can also be used to access the individual points and closed indicators for interval types using the property names low, high, lowClosed, and highClosed.
 */
   interface Property extends AbstractExpression {
-    type: "Property";
+    type: 'Property';
     path: string;
     scope?: string;
     source?: Expression;
@@ -2203,7 +2203,7 @@ The RelationshipClause element allows related sources to be used to restrict the
 The With clause restricts the elements of a given source to only those elements that have elements in the related source that satisfy the suchThat condition. This operation is known as a semi-join in database languages.
 */
   interface With extends AbstractRelationshipClause {
-    type: "With";
+    type: 'With';
     alias: string;
     expression?: Expression;
   }
@@ -2212,7 +2212,7 @@ The With clause restricts the elements of a given source to only those elements 
 The Without clause restricts the elements of a given source to only those elements that do not have elements in the related source that satisfy the suchThat condition. This operation is known as a semi-difference in database languages.
 */
   interface Without extends AbstractRelationshipClause {
-    type: "Without";
+    type: 'Without';
     alias: string;
     expression?: Expression;
   }
@@ -2224,14 +2224,14 @@ The Without clause restricts the elements of a given source to only those elemen
 The ByDirection element specifies that the sort should be performed using the given direction. This approach is used when the result of the query is a list of non-tuple elements and only the sort direction needs to be specified.
 */
   interface ByDirection extends AbstractSortByItem {
-    type: "ByDirection";
+    type: 'ByDirection';
   }
 
   /*
 The ByColumn element specifies that the sort should be performed using the given column and direction. This approach is used to specify the sort order for a query when the result is a list of tuples.
 */
   interface ByColumn extends AbstractSortByItem {
-    type: "ByColumn";
+    type: 'ByColumn';
     path?: string;
   }
 
@@ -2239,7 +2239,7 @@ The ByColumn element specifies that the sort should be performed using the given
 The ByExpression element specifies that the sort should be performed using the given expression and direction. This approach is used to specify the sort order as a calculated expression.
 */
   interface ByExpression extends AbstractSortByItem {
-    type: "ByExpression";
+    type: 'ByExpression';
     expression: Expression;
   }
 
@@ -2272,7 +2272,7 @@ The AggregateClause element defines the result of the query in terms of an aggre
 The Query operator represents a clause-based query. The result of the query is determined by the type of sources included, as well as the clauses used in the query.
 */
   interface Query extends AbstractExpression {
-    type: "Query";
+    type: 'Query';
     source: (AliasedQuerySource | RelationshipClause | With | Without)[];
     let?: LetClause[];
     relationship?: RelationshipClause[];
@@ -2286,7 +2286,7 @@ The Query operator represents a clause-based query. The result of the query is d
 The AliasRef expression allows for the reference of a specific source within the scope of a query.
 */
   interface AliasRef extends AbstractExpression {
-    type: "AliasRef";
+    type: 'AliasRef';
     name?: string;
   }
 
@@ -2294,7 +2294,7 @@ The AliasRef expression allows for the reference of a specific source within the
 The QueryLetRef expression allows for the reference of a specific let definition within the scope of a query.
 */
   interface QueryLetRef extends AbstractExpression {
-    type: "QueryLetRef";
+    type: 'QueryLetRef';
     name?: string;
   }
 
@@ -2304,7 +2304,7 @@ For list types, the result is the same as invoking Children on each element in t
 If the source is null, the result is null.
 */
   interface Children extends AbstractOperatorExpression {
-    type: "Children";
+    type: 'Children';
     source: Expression;
   }
 
@@ -2314,7 +2314,7 @@ For list types, the result is the same as invoking Descendents on each element i
 If the source is null, the result is null.
 */
   interface Descendents extends AbstractOperatorExpression {
-    type: "Descendents";
+    type: 'Descendents';
     source: Expression;
   }
 
@@ -2327,7 +2327,7 @@ If the severity is Warning, the operator is expected to provide the message as a
 If the severity is Message, the operator is expected to provide the message as information to the calling environment.
 */
   interface Message extends AbstractOperatorExpression {
-    type: "Message";
+    type: 'Message';
     source: Expression;
     condition?: Expression;
     code?: Expression;
@@ -2349,7 +2349,7 @@ The IncludeElement type specifies include information for an include within a re
 The retrieve expression defines clinical data that will be used by the artifact. This expression allows clinically relevant filtering criteria to be provided in a well-defined and computable way. This operation defines the integration boundary for artifacts. The result of a retrieve is defined to return the same data for subsequent invocations within the same evaluation request. This means in particular that patient data updates made during the evaluation request are not visible to the artifact. In effect, the patient data is a snapshot of the data as of the start of the evaluation. This ensures strict deterministic and functional behavior of the artifact, and allows the implementation engine freedom to cache intermediate results in order to improve performance.
 */
   interface Retrieve extends AbstractExpression {
-    type: "Retrieve";
+    type: 'Retrieve';
     dataType: string;
     templateId?: string;
     idProperty?: string;
@@ -2421,7 +2421,7 @@ The ConceptDef type defines a concept identifier that can then be used to refere
 The CodeSystemRef expression allows a previously defined named code system to be referenced within an expression. Conceptually, referencing a code system returns the set of codes in the code system. Note that this operation should almost never be performed in practice. Code system references are allowed in order to allow for testing of code membership in a particular code system.
 */
   interface CodeSystemRef extends AbstractExpression {
-    type: "CodeSystemRef";
+    type: 'CodeSystemRef';
     name?: string;
     libraryName?: string;
   }
@@ -2430,7 +2430,7 @@ The CodeSystemRef expression allows a previously defined named code system to be
 The ValueSetRef expression allows a previously defined named value set to be referenced within an expression. Conceptually, referencing a value set returns the expansion set for the value set as a list of codes.
 */
   interface ValueSetRef extends AbstractExpression {
-    type: "ValueSetRef";
+    type: 'ValueSetRef';
     name?: string;
     libraryName?: string;
   }
@@ -2439,7 +2439,7 @@ The ValueSetRef expression allows a previously defined named value set to be ref
 The CodeRef expression allows a previously defined code to be referenced within an expression.
 */
   interface CodeRef extends AbstractExpression {
-    type: "CodeRef";
+    type: 'CodeRef';
     name?: string;
     libraryName?: string;
   }
@@ -2448,7 +2448,7 @@ The CodeRef expression allows a previously defined code to be referenced within 
 The ConceptRef expression allows a previously defined concept to be referenced within an expression.
 */
   interface ConceptRef extends AbstractExpression {
-    type: "ConceptRef";
+    type: 'ConceptRef';
     name?: string;
     libraryName?: string;
   }
@@ -2457,7 +2457,7 @@ The ConceptRef expression allows a previously defined concept to be referenced w
 The Code type represents a literal code selector.
 */
   interface Code extends AbstractExpression {
-    type: "Code";
+    type: 'Code';
     code: string;
     display?: string;
     system?: CodeSystemRef;
@@ -2467,7 +2467,7 @@ The Code type represents a literal code selector.
 The Concept type represents a literal concept selector.
 */
   interface Concept extends AbstractExpression {
-    type: "Concept";
+    type: 'Concept';
     display?: string;
     code: Code[];
   }
@@ -2478,7 +2478,7 @@ The first argument is expected to be a String, Code, or Concept.
 The second argument is expected to be of type CodeSystem. When this argument is statically a CodeSystemRef, this allows for both static analysis of the code system references within an artifact, as well as the implementation of code system membership by the target environment as a service call to a terminology server, if desired.
 */
   interface InCodeSystem extends AbstractOperatorExpression {
-    type: "InCodeSystem";
+    type: 'InCodeSystem';
     code?: Expression;
     codesystem?: Expression;
   }
@@ -2489,7 +2489,7 @@ The first argument is expected to be a list of String, Code, or Concept.
 The second argument is expected to be of type CodeSystem. When this argument is statically a CodeSystemRef, this allows for both static analysis of the code system references within an artifact, as well as the implementation of code system membership by the target environment as a service call to a terminology server, if desired.
 */
   interface AnyInCodeSystem extends AbstractOperatorExpression {
-    type: "AnyInCodeSystem";
+    type: 'AnyInCodeSystem';
     codes?: Expression;
     codesystem?: Expression;
   }
@@ -2500,7 +2500,7 @@ The first argument is expected to be a String, Code, or Concept.
 The second argument is expected to be of type ValueSet. When this argument is statically a ValueSetRef, this allows for both static analysis of the value set references within an artifact, as well as the implementation of valueset membership by the target environment as a service call to a terminology server, if desired.
 */
   interface InValueSet extends AbstractOperatorExpression {
-    type: "InValueSet";
+    type: 'InValueSet';
     code?: Expression;
     valueset?: Expression;
   }
@@ -2511,7 +2511,7 @@ The first argument is expected to be a list of String, Code, or Concept.
 The second argument is expected to be of type ValueSet. When this argument is statically a ValueSetRef, this allows for both static analysis of the value set references within an artifact, as well as the implementation of valueset membership by the target environment as a service call to a terminology server, if desired.
 */
   interface AnyInValueSet extends AbstractOperatorExpression {
-    type: "AnyInValueSet";
+    type: 'AnyInValueSet';
     codes?: Expression;
     valueset?: Expression;
   }
@@ -2522,7 +2522,7 @@ For the Concept overload, this operator returns true if any code in the first co
 If either or both arguments are null, the result is null.
 */
   interface Subsumes extends AbstractBinaryExpression {
-    type: "Subsumes";
+    type: 'Subsumes';
   }
 
   /*
@@ -2531,14 +2531,14 @@ For the Concept overload, this operator returns true if any code in the first co
 If either or both arguments are null, the result is null.
 */
   interface SubsumedBy extends AbstractBinaryExpression {
-    type: "SubsumedBy";
+    type: 'SubsumedBy';
   }
 
   /*
 The Quantity type defines a clinical quantity. For example, the quantity 10 days or 30 mmHg. The value is a decimal, while the unit is expected to be a valid UCUM unit or calendar duration keyword, singular or plural.
 */
   interface Quantity extends AbstractExpression {
-    type: "Quantity";
+    type: 'Quantity';
     value?: number;
     unit?: string;
   }
@@ -2547,7 +2547,7 @@ The Quantity type defines a clinical quantity. For example, the quantity 10 days
 The Ratio type defines a ratio between two quantities. For example, the titre 1:128, or the concentration ratio 5 mg/10 mL. The numerator and denominator are both quantities.
 */
   interface Ratio extends AbstractExpression {
-    type: "Ratio";
+    type: 'Ratio';
     numerator?: Quantity;
     denominator?: Quantity;
   }
@@ -2559,7 +2559,7 @@ For the Date overload, the calculation is performed using Today(), the precision
 For the DateTime overload, the calculation is performed using Now(), and the result is the number of whole calendar periods that have elapsed between the given datetime and now.
 */
   interface CalculateAge extends AbstractUnaryExpression {
-    type: "CalculateAge";
+    type: 'CalculateAge';
     precision?: DateTimePrecision;
   }
 
@@ -2572,7 +2572,7 @@ For the Date overload, precision must be one of year, month, week, or day, and t
 For the DateTime overload, the result is the number of whole calendar periods that have elapsed between the first datetime and the second datetime.
 */
   interface CalculateAgeAt extends AbstractBinaryExpression {
-    type: "CalculateAgeAt";
+    type: 'CalculateAgeAt';
     precision?: DateTimePrecision;
   }
 
@@ -2654,21 +2654,21 @@ A Library is an instance of a CQL-ELM library.
   /*
 The AccessModifier type is used to specify the access level for the various definitions within a library such as parameters, expressions, and functions. If no access modifier is specified, public is assumed. Private definitions can only be accessed within the library in which they are defined.
 */
-  type AccessModifier = "Public" | "Private";
+  type AccessModifier = 'Public' | 'Private';
 
   /*
 The DateTimePrecision type specifies the units of precision available for temporal operations such as DurationBetween, SameAs, SameOrBefore, SameOrAfter, and DateTimeComponentFrom.
 */
   type DateTimePrecision =
-    | "Year"
-    | "Month"
-    | "Week"
-    | "Day"
-    | "Hour"
-    | "Minute"
-    | "Second"
-    | "Millisecond";
-  type SortDirection = "asc" | "ascending" | "desc" | "descending";
+    | 'Year'
+    | 'Month'
+    | 'Week'
+    | 'Day'
+    | 'Hour'
+    | 'Minute'
+    | 'Second'
+    | 'Millisecond';
+  type SortDirection = 'asc' | 'ascending' | 'desc' | 'descending';
 
   type Element =
     | TypeSpecifier

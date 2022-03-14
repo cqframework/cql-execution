@@ -2,7 +2,7 @@ import { Expression } from './expression';
 import * as dt from '../datatypes/datatypes';
 import { Context } from '../runtime/context';
 import { build } from './builder';
-import ELM from '../types/elm'
+import ELM from '../types/elm';
 
 export class ValueSetDef extends Expression {
   name: string;
@@ -54,7 +54,7 @@ export class AnyInValueSet extends Expression {
     super(json);
     this.codes = build(json.codes);
     if (json.valueset?.type !== 'ValueSetRef') {
-      throw new Error('Expecting ValueSetRef Expression')
+      throw new Error('Expecting ValueSetRef Expression');
     }
     this.valueset = new ValueSetRef(json.valueset);
   }
@@ -79,7 +79,7 @@ export class InValueSet extends Expression {
     super(json);
     this.code = build(json.code);
     if (json.valueset?.type !== 'ValueSetRef') {
-      throw new Error('Expecting ValueSetRef Expression')
+      throw new Error('Expecting ValueSetRef Expression');
     }
     this.valueset = new ValueSetRef(json.valueset);
   }
@@ -196,7 +196,7 @@ export class ConceptDef extends Expression {
   display?: string;
 
   constructor(json: ELM.ConceptDef) {
-     // @ts-ignore
+    // @ts-ignore
     super(json);
     this.name = json.name;
     this.display = json.display;
@@ -215,7 +215,7 @@ export class ConceptDef extends Expression {
 export class ConceptRef extends Expression {
   name: string;
 
-  constructor(json:  ELM.ConceptRef) {
+  constructor(json: ELM.ConceptRef) {
     super(json);
     this.name = json.name || '';
   }
@@ -259,7 +259,7 @@ export class CalculateAge extends Expression {
   constructor(json: ELM.CalculateAge) {
     super(json);
     if (!json.precision) {
-      throw new Error('Precision is required')
+      throw new Error('Precision is required');
     }
     this.precision = json.precision;
   }
@@ -278,12 +278,12 @@ export class CalculateAge extends Expression {
 }
 
 export class CalculateAgeAt extends Expression {
-  precision:  ELM.DateTimePrecision;
-  
+  precision: ELM.DateTimePrecision;
+
   constructor(json: ELM.CalculateAgeAt) {
     super(json);
     if (!json.precision) {
-      throw new Error('Precision is required')
+      throw new Error('Precision is required');
     }
     this.precision = json.precision;
   }
