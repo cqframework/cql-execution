@@ -41,33 +41,32 @@ window.executeSimpleELM = function (
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CodeService = void 0;
-var datatypes_1 = require("./datatypes/datatypes");
-var CodeService = /** @class */ (function () {
-    function CodeService(valueSetsJson) {
-        if (valueSetsJson === void 0) { valueSetsJson = {}; }
+const datatypes_1 = require("./datatypes/datatypes");
+class CodeService {
+    constructor(valueSetsJson = {}) {
         this.valueSets = {};
-        for (var oid in valueSetsJson) {
+        for (const oid in valueSetsJson) {
             this.valueSets[oid] = {};
-            for (var version in valueSetsJson[oid]) {
-                var codes = valueSetsJson[oid][version].map(function (code) { return new datatypes_1.Code(code.code, code.system, code.version); });
+            for (const version in valueSetsJson[oid]) {
+                const codes = valueSetsJson[oid][version].map((code) => new datatypes_1.Code(code.code, code.system, code.version));
                 this.valueSets[oid][version] = new datatypes_1.ValueSet(oid, version, codes);
             }
         }
     }
-    CodeService.prototype.findValueSetsByOid = function (oid) {
+    findValueSetsByOid(oid) {
         return this.valueSets[oid] ? Object.values(this.valueSets[oid]) : [];
-    };
-    CodeService.prototype.findValueSet = function (oid, version) {
+    }
+    findValueSet(oid, version) {
         if (version != null) {
             return this.valueSets[oid] != null ? this.valueSets[oid][version] : null;
         }
         else {
-            var results = this.findValueSetsByOid(oid);
+            const results = this.findValueSetsByOid(oid);
             if (results.length === 0) {
                 return null;
             }
             else {
-                return results.reduce(function (a, b) {
+                return results.reduce((a, b) => {
                     if (a.version > b.version) {
                         return a;
                     }
@@ -77,28 +76,12 @@ var CodeService = /** @class */ (function () {
                 });
             }
         }
-    };
-    return CodeService;
-}());
+    }
+}
 exports.CodeService = CodeService;
 
 },{"./datatypes/datatypes":6}],3:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -120,19 +103,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PatientSource = exports.Patient = exports.Record = void 0;
-var DT = __importStar(require("./datatypes/datatypes"));
-var Record = /** @class */ (function () {
-    function Record(json) {
+const DT = __importStar(require("./datatypes/datatypes"));
+class Record {
+    constructor(json) {
         this.json = json;
         this.id = this.json.id;
     }
-    Record.prototype._is = function (typeSpecifier) {
-        return this._typeHierarchy().some(function (t) { return t.type === typeSpecifier.type && t.name == typeSpecifier.name; });
-    };
-    Record.prototype._typeHierarchy = function () {
+    _is(typeSpecifier) {
+        return this._typeHierarchy().some(t => t.type === typeSpecifier.type && t.name == typeSpecifier.name);
+    }
+    _typeHierarchy() {
         return [
             {
-                name: "{https://github.com/cqframework/cql-execution/simple}".concat(this.json.recordType),
+                name: `{https://github.com/cqframework/cql-execution/simple}${this.json.recordType}`,
                 type: 'NamedTypeSpecifier'
             },
             {
@@ -141,19 +124,19 @@ var Record = /** @class */ (function () {
             },
             { name: '{urn:hl7-org:elm-types:r1}Any', type: 'NamedTypeSpecifier' }
         ];
-    };
-    Record.prototype._recursiveGet = function (field) {
+    }
+    _recursiveGet(field) {
         if (field != null && field.indexOf('.') >= 0) {
-            var _a = field.split('.', 2), root = _a[0], rest = _a[1];
+            const [root, rest] = field.split('.', 2);
             return new Record(this._recursiveGet(root))._recursiveGet(rest);
         }
         return this.json[field];
-    };
-    Record.prototype.get = function (field) {
+    }
+    get(field) {
         // the model should return the correct type for the field. For this simple model example,
         // we just cheat and use the shape of the value to determine it. Real implementations should
         // have a more sophisticated approach
-        var value = this._recursiveGet(field);
+        const value = this._recursiveGet(field);
         if (typeof value === 'string' && /\d{4}-\d{2}-\d{2}(T[\d\-.]+)?/.test(value)) {
             return this.getDate(field);
         }
@@ -164,94 +147,89 @@ var Record = /** @class */ (function () {
             return this.getInterval(field);
         }
         return value;
-    };
-    Record.prototype.getId = function () {
+    }
+    getId() {
         return this.id;
-    };
-    Record.prototype.getDate = function (field) {
-        var val = this._recursiveGet(field);
+    }
+    getDate(field) {
+        const val = this._recursiveGet(field);
         if (val != null) {
             return DT.DateTime.parse(val);
         }
         else {
             return null;
         }
-    };
-    Record.prototype.getInterval = function (field) {
-        var val = this._recursiveGet(field);
+    }
+    getInterval(field) {
+        const val = this._recursiveGet(field);
         if (val != null && typeof val === 'object') {
-            var low = val.low != null ? DT.DateTime.parse(val.low) : null;
-            var high = val.high != null ? DT.DateTime.parse(val.high) : null;
+            const low = val.low != null ? DT.DateTime.parse(val.low) : null;
+            const high = val.high != null ? DT.DateTime.parse(val.high) : null;
             return new DT.Interval(low, high);
         }
-    };
-    Record.prototype.getDateOrInterval = function (field) {
-        var val = this._recursiveGet(field);
+    }
+    getDateOrInterval(field) {
+        const val = this._recursiveGet(field);
         if (val != null && typeof val === 'object') {
             return this.getInterval(field);
         }
         else {
             return this.getDate(field);
         }
-    };
-    Record.prototype.getCode = function (field) {
-        var val = this._recursiveGet(field);
+    }
+    getCode(field) {
+        const val = this._recursiveGet(field);
         if (val != null && typeof val === 'object') {
             return new DT.Code(val.code, val.system, val.version);
         }
-    };
-    return Record;
-}());
-exports.Record = Record;
-var Patient = /** @class */ (function (_super) {
-    __extends(Patient, _super);
-    function Patient(json) {
-        var _this = _super.call(this, json) || this;
-        _this.name = json.name;
-        _this.gender = json.gender;
-        _this.birthDate = json.birthDate != null ? DT.DateTime.parse(json.birthDate) : undefined;
-        _this.records = {};
-        (json.records || []).forEach(function (r) {
-            if (_this.records[r.recordType] == null) {
-                _this.records[r.recordType] = [];
-            }
-            _this.records[r.recordType].push(new Record(r));
-        });
-        return _this;
     }
-    Patient.prototype.findRecords = function (profile) {
+}
+exports.Record = Record;
+class Patient extends Record {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
+        this.gender = json.gender;
+        this.birthDate = json.birthDate != null ? DT.DateTime.parse(json.birthDate) : undefined;
+        this.records = {};
+        (json.records || []).forEach((r) => {
+            if (this.records[r.recordType] == null) {
+                this.records[r.recordType] = [];
+            }
+            this.records[r.recordType].push(new Record(r));
+        });
+    }
+    findRecords(profile) {
         if (profile == null) {
             return [];
         }
-        var match = profile.match(/(\{https:\/\/github\.com\/cqframework\/cql-execution\/simple\})?(.*)/);
+        const match = profile.match(/(\{https:\/\/github\.com\/cqframework\/cql-execution\/simple\})?(.*)/);
         if (match == null)
             return [];
-        var recordType = match[2];
+        const recordType = match[2];
         if (recordType === 'Patient') {
             return [this];
         }
         else {
             return this.records[recordType] || [];
         }
-    };
-    return Patient;
-}(Record));
+    }
+}
 exports.Patient = Patient;
-var PatientSource = /** @class */ (function () {
-    function PatientSource(patients) {
+class PatientSource {
+    constructor(patients) {
         this.patients = patients;
         this.nextPatient();
     }
-    PatientSource.prototype.currentPatient = function () {
+    currentPatient() {
         return this.current;
-    };
-    PatientSource.prototype.nextPatient = function () {
-        var currentJSON = this.patients.shift();
+    }
+    nextPatient() {
+        const currentJSON = this.patients.shift();
         this.current = currentJSON ? new Patient(currentJSON) : undefined;
         return this.current;
-    };
-    return PatientSource;
-}());
+    }
+}
 exports.PatientSource = PatientSource;
 
 },{"./datatypes/datatypes":6}],4:[function(require,module,exports){
@@ -269,33 +247,33 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ValueSet = exports.Ratio = exports.Quantity = exports.Interval = exports.DateTime = exports.Date = exports.Concept = exports.CodeSystem = exports.Code = exports.CodeService = exports.PatientSource = exports.Patient = exports.NullMessageListener = exports.ConsoleMessageListener = exports.Results = exports.Executor = exports.UnfilteredContext = exports.PatientContext = exports.Context = exports.Expression = exports.Repository = exports.Library = void 0;
 // Library-related classes
-var library_1 = require("./elm/library");
+const library_1 = require("./elm/library");
 Object.defineProperty(exports, "Library", { enumerable: true, get: function () { return library_1.Library; } });
-var repository_1 = require("./runtime/repository");
+const repository_1 = require("./runtime/repository");
 Object.defineProperty(exports, "Repository", { enumerable: true, get: function () { return repository_1.Repository; } });
-var expression_1 = require("./elm/expression");
+const expression_1 = require("./elm/expression");
 Object.defineProperty(exports, "Expression", { enumerable: true, get: function () { return expression_1.Expression; } });
 // Execution-related classes
-var context_1 = require("./runtime/context");
+const context_1 = require("./runtime/context");
 Object.defineProperty(exports, "Context", { enumerable: true, get: function () { return context_1.Context; } });
 Object.defineProperty(exports, "PatientContext", { enumerable: true, get: function () { return context_1.PatientContext; } });
 Object.defineProperty(exports, "UnfilteredContext", { enumerable: true, get: function () { return context_1.UnfilteredContext; } });
-var executor_1 = require("./runtime/executor");
+const executor_1 = require("./runtime/executor");
 Object.defineProperty(exports, "Executor", { enumerable: true, get: function () { return executor_1.Executor; } });
-var results_1 = require("./runtime/results");
+const results_1 = require("./runtime/results");
 Object.defineProperty(exports, "Results", { enumerable: true, get: function () { return results_1.Results; } });
-var messageListeners_1 = require("./runtime/messageListeners");
+const messageListeners_1 = require("./runtime/messageListeners");
 Object.defineProperty(exports, "ConsoleMessageListener", { enumerable: true, get: function () { return messageListeners_1.ConsoleMessageListener; } });
 Object.defineProperty(exports, "NullMessageListener", { enumerable: true, get: function () { return messageListeners_1.NullMessageListener; } });
 // PatientSource-related classes
-var cql_patient_1 = require("./cql-patient");
+const cql_patient_1 = require("./cql-patient");
 Object.defineProperty(exports, "Patient", { enumerable: true, get: function () { return cql_patient_1.Patient; } });
 Object.defineProperty(exports, "PatientSource", { enumerable: true, get: function () { return cql_patient_1.PatientSource; } });
 // TerminologyService-related classes
-var cql_code_service_1 = require("./cql-code-service");
+const cql_code_service_1 = require("./cql-code-service");
 Object.defineProperty(exports, "CodeService", { enumerable: true, get: function () { return cql_code_service_1.CodeService; } });
 // DataType classes
-var datatypes_1 = require("./datatypes/datatypes");
+const datatypes_1 = require("./datatypes/datatypes");
 Object.defineProperty(exports, "Code", { enumerable: true, get: function () { return datatypes_1.Code; } });
 Object.defineProperty(exports, "CodeSystem", { enumerable: true, get: function () { return datatypes_1.CodeSystem; } });
 Object.defineProperty(exports, "Concept", { enumerable: true, get: function () { return datatypes_1.Concept; } });
@@ -336,22 +314,18 @@ exports.default = {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CodeSystem = exports.ValueSet = exports.Concept = exports.Code = void 0;
-var util_1 = require("../util/util");
-var Code = /** @class */ (function () {
-    function Code(code, system, version, display) {
+const util_1 = require("../util/util");
+class Code {
+    constructor(code, system, version, display) {
         this.code = code;
         this.system = system;
         this.version = version;
         this.display = display;
     }
-    Object.defineProperty(Code.prototype, "isCode", {
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Code.prototype.hasMatch = function (code) {
+    get isCode() {
+        return true;
+    }
+    hasMatch(code) {
         if (typeof code === 'string') {
             // the specific behavior for this is not in the specification. Matching codesystem behavior.
             return code === this.code;
@@ -359,52 +333,40 @@ var Code = /** @class */ (function () {
         else {
             return codesInList(toCodeList(code), [this]);
         }
-    };
-    return Code;
-}());
+    }
+}
 exports.Code = Code;
-var Concept = /** @class */ (function () {
-    function Concept(codes, display) {
+class Concept {
+    constructor(codes, display) {
         this.codes = codes;
         this.display = display;
         this.codes || (this.codes = []);
     }
-    Object.defineProperty(Concept.prototype, "isConcept", {
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Concept.prototype.hasMatch = function (code) {
+    get isConcept() {
+        return true;
+    }
+    hasMatch(code) {
         return codesInList(toCodeList(code), this.codes);
-    };
-    return Concept;
-}());
+    }
+}
 exports.Concept = Concept;
-var ValueSet = /** @class */ (function () {
-    function ValueSet(oid, version, codes) {
-        if (codes === void 0) { codes = []; }
+class ValueSet {
+    constructor(oid, version, codes = []) {
         this.oid = oid;
         this.version = version;
         this.codes = codes;
         this.codes || (this.codes = []);
     }
-    Object.defineProperty(ValueSet.prototype, "isValueSet", {
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    ValueSet.prototype.hasMatch = function (code) {
-        var codesList = toCodeList(code);
+    get isValueSet() {
+        return true;
+    }
+    hasMatch(code) {
+        const codesList = toCodeList(code);
         // InValueSet String Overload
         if (codesList.length === 1 && typeof codesList[0] === 'string') {
-            var matchFound = false;
-            var multipleCodeSystemsExist = false;
-            for (var _i = 0, _a = this.codes; _i < _a.length; _i++) {
-                var codeItem = _a[_i];
+            let matchFound = false;
+            let multipleCodeSystemsExist = false;
+            for (const codeItem of this.codes) {
                 // Confirm all code systems match
                 if (codeItem.system !== this.codes[0].system) {
                     multipleCodeSystemsExist = true;
@@ -421,18 +383,16 @@ var ValueSet = /** @class */ (function () {
         else {
             return codesInList(codesList, this.codes);
         }
-    };
-    return ValueSet;
-}());
+    }
+}
 exports.ValueSet = ValueSet;
 function toCodeList(c) {
     if (c == null) {
         return [];
     }
     else if ((0, util_1.typeIsArray)(c)) {
-        var list = [];
-        for (var _i = 0, c_1 = c; _i < c_1.length; _i++) {
-            var c2 = c_1[_i];
+        let list = [];
+        for (const c2 of c) {
             list = list.concat(toCodeList(c2));
         }
         return list;
@@ -446,30 +406,27 @@ function toCodeList(c) {
 }
 function codesInList(cl1, cl2) {
     // test each code in c1 against each code in c2 looking for a match
-    return cl1.some(function (c1) {
-        return cl2.some(function (c2) {
-            // only the left argument (cl1) can contain strings. cl2 will only contain codes.
-            if (typeof c1 === 'string') {
-                // for "string in codesystem" this should compare the string to
-                // the code's "code" field according to the specification.
-                return c1 === c2.code;
-            }
-            else {
-                return codesMatch(c1, c2);
-            }
-        });
-    });
+    return cl1.some((c1) => cl2.some((c2) => {
+        // only the left argument (cl1) can contain strings. cl2 will only contain codes.
+        if (typeof c1 === 'string') {
+            // for "string in codesystem" this should compare the string to
+            // the code's "code" field according to the specification.
+            return c1 === c2.code;
+        }
+        else {
+            return codesMatch(c1, c2);
+        }
+    }));
 }
 function codesMatch(code1, code2) {
     return code1.code === code2.code && code1.system === code2.system;
 }
-var CodeSystem = /** @class */ (function () {
-    function CodeSystem(id, version) {
+class CodeSystem {
+    constructor(id, version) {
         this.id = id;
         this.version = version;
     }
-    return CodeSystem;
-}());
+}
 exports.CodeSystem = CodeSystem;
 
 },{"../util/util":55}],6:[function(require,module,exports){
@@ -495,49 +452,25 @@ __exportStar(require("./ratio"), exports);
 
 },{"./clinical":5,"./datetime":7,"./interval":9,"./logic":10,"./quantity":11,"./ratio":12,"./uncertainty":13}],7:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MAX_TIME_VALUE = exports.MIN_TIME_VALUE = exports.MAX_DATE_VALUE = exports.MIN_DATE_VALUE = exports.MAX_DATETIME_VALUE = exports.MIN_DATETIME_VALUE = exports.Date = exports.DateTime = void 0;
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-var uncertainty_1 = require("./uncertainty");
-var util_1 = require("../util/util");
-var luxon_1 = require("luxon");
+const uncertainty_1 = require("./uncertainty");
+const util_1 = require("../util/util");
+const luxon_1 = require("luxon");
 // It's easiest and most performant to organize formats by length of the supported strings.
 // This way we can test strings only against the formats that have a chance of working.
 // NOTE: Formats use Luxon formats, documented here: https://moment.github.io/luxon/docs/manual/parsing.html#table-of-tokens
-var LENGTH_TO_DATE_FORMAT_MAP = (function () {
-    var ltdfMap = new Map();
+const LENGTH_TO_DATE_FORMAT_MAP = (() => {
+    const ltdfMap = new Map();
     ltdfMap.set(4, 'yyyy');
     ltdfMap.set(7, 'yyyy-MM');
     ltdfMap.set(10, 'yyyy-MM-dd');
     return ltdfMap;
 })();
-var LENGTH_TO_DATETIME_FORMATS_MAP = (function () {
-    var formats = {
+const LENGTH_TO_DATETIME_FORMATS_MAP = (() => {
+    const formats = {
         yyyy: '2012',
         'yyyy-MM': '2012-01',
         'yyyy-MM-dd': '2012-01-31',
@@ -556,9 +489,9 @@ var LENGTH_TO_DATETIME_FORMATS_MAP = (function () {
         "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'": '2012-01-31T12:30:59.000Z',
         "yyyy-MM-dd'T'HH:mm:ss.SSSZZ": '2012-01-31T12:30:59.000-04:00'
     };
-    var ltdtfMap = new Map();
-    Object.keys(formats).forEach(function (k) {
-        var example = formats[k];
+    const ltdtfMap = new Map();
+    Object.keys(formats).forEach(k => {
+        const example = formats[k];
         if (!ltdtfMap.has(example.length)) {
             ltdtfMap.set(example.length, [k]);
         }
@@ -569,7 +502,7 @@ var LENGTH_TO_DATETIME_FORMATS_MAP = (function () {
     return ltdtfMap;
 })();
 function wholeLuxonDuration(duration, unit) {
-    var value = duration.get(unit);
+    const value = duration.get(unit);
     return value >= 0 ? Math.floor(value) : Math.ceil(value);
 }
 function truncateLuxonDateTime(luxonDT, unit) {
@@ -589,25 +522,21 @@ function truncateLuxonDateTime(luxonDT, unit) {
  * TODO: we can probably iterate on this more to improve the accessing of "FIELDS" and the overall structure
  * TODO: we can also investigate if it's reasonable for DateTime to extend Date directly instead
  */
-var AbstractDate = /** @class */ (function () {
-    function AbstractDate(year, month, day) {
-        if (year === void 0) { year = null; }
-        if (month === void 0) { month = null; }
-        if (day === void 0) { day = null; }
+class AbstractDate {
+    constructor(year = null, month = null, day = null) {
         this.year = year;
         this.month = month;
         this.day = day;
     }
     // Shared functions
-    AbstractDate.prototype.isPrecise = function () {
-        var _this = this;
+    isPrecise() {
         // @ts-ignore
-        return this.constructor.FIELDS.every(function (field) { return _this[field] != null; });
-    };
-    AbstractDate.prototype.isImprecise = function () {
+        return this.constructor.FIELDS.every(field => this[field] != null);
+    }
+    isImprecise() {
         return !this.isPrecise();
-    };
-    AbstractDate.prototype.isMorePrecise = function (other) {
+    }
+    isMorePrecise(other) {
         // @ts-ignore
         if (typeof other === 'string' && this.constructor.FIELDS.includes(other)) {
             // @ts-ignore
@@ -617,8 +546,7 @@ var AbstractDate = /** @class */ (function () {
         }
         else {
             // @ts-ignore
-            for (var _i = 0, _a = this.constructor.FIELDS; _i < _a.length; _i++) {
-                var field = _a[_i];
+            for (const field of this.constructor.FIELDS) {
                 // @ts-ignore
                 if (other[field] != null && this[field] == null) {
                     return false;
@@ -626,20 +554,19 @@ var AbstractDate = /** @class */ (function () {
             }
         }
         return !this.isSamePrecision(other);
-    };
+    }
     // This function can take another Date-ish object, or a precision string (e.g. 'month')
-    AbstractDate.prototype.isLessPrecise = function (other) {
+    isLessPrecise(other) {
         return !this.isSamePrecision(other) && !this.isMorePrecise(other);
-    };
+    }
     // This function can take another Date-ish object, or a precision string (e.g. 'month')
-    AbstractDate.prototype.isSamePrecision = function (other) {
+    isSamePrecision(other) {
         // @ts-ignore
         if (typeof other === 'string' && this.constructor.FIELDS.includes(other)) {
             return other === this.getPrecision();
         }
         // @ts-ignore
-        for (var _i = 0, _a = this.constructor.FIELDS; _i < _a.length; _i++) {
-            var field = _a[_i];
+        for (const field of this.constructor.FIELDS) {
             // @ts-ignore
             if (this[field] != null && other[field] == null) {
                 return false;
@@ -650,14 +577,14 @@ var AbstractDate = /** @class */ (function () {
             }
         }
         return true;
-    };
-    AbstractDate.prototype.equals = function (other) {
+    }
+    equals(other) {
         return compareWithDefaultResult(this, other, null);
-    };
-    AbstractDate.prototype.equivalent = function (other) {
+    }
+    equivalent(other) {
         return compareWithDefaultResult(this, other, false);
-    };
-    AbstractDate.prototype.sameAs = function (other, precision) {
+    }
+    sameAs(other, precision) {
         if (!(other.isDate || other.isDateTime)) {
             return null;
         }
@@ -669,7 +596,7 @@ var AbstractDate = /** @class */ (function () {
         }
         // @ts-ignore
         if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
-            throw new Error("Invalid precision: ".concat(precision));
+            throw new Error(`Invalid precision: ${precision}`);
         }
         // make a copy of other in the correct timezone offset if they don't match.
         // When comparing DateTime values with different timezone offsets, implementations
@@ -681,8 +608,7 @@ var AbstractDate = /** @class */ (function () {
             }
         }
         // @ts-ignore
-        for (var _i = 0, _a = this.constructor.FIELDS; _i < _a.length; _i++) {
-            var field = _a[_i];
+        for (const field of this.constructor.FIELDS) {
             // if both have this precision defined
             // @ts-ignore
             if (this[field] != null && other[field] != null) {
@@ -714,8 +640,8 @@ var AbstractDate = /** @class */ (function () {
         }
         // if we made it here, then all fields matched.
         return true;
-    };
-    AbstractDate.prototype.sameOrBefore = function (other, precision) {
+    }
+    sameOrBefore(other, precision) {
         if (!(other.isDate || other.isDateTime)) {
             return null;
         }
@@ -727,7 +653,7 @@ var AbstractDate = /** @class */ (function () {
         }
         // @ts-ignore
         if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
-            throw new Error("Invalid precision: ".concat(precision));
+            throw new Error(`Invalid precision: ${precision}`);
         }
         // make a copy of other in the correct timezone offset if they don't match.
         // When comparing DateTime values with different timezone offsets, implementations
@@ -739,8 +665,7 @@ var AbstractDate = /** @class */ (function () {
             }
         }
         // @ts-ignore
-        for (var _i = 0, _a = this.constructor.FIELDS; _i < _a.length; _i++) {
-            var field = _a[_i];
+        for (const field of this.constructor.FIELDS) {
             // if both have this precision defined
             // @ts-ignore
             if (this[field] != null && other[field] != null) {
@@ -778,8 +703,8 @@ var AbstractDate = /** @class */ (function () {
         }
         // if we made it here, then all fields matched and they are same
         return true;
-    };
-    AbstractDate.prototype.sameOrAfter = function (other, precision) {
+    }
+    sameOrAfter(other, precision) {
         if (!(other.isDate || other.isDateTime)) {
             return null;
         }
@@ -791,7 +716,7 @@ var AbstractDate = /** @class */ (function () {
         }
         // @ts-ignore
         if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
-            throw new Error("Invalid precision: ".concat(precision));
+            throw new Error(`Invalid precision: ${precision}`);
         }
         // make a copy of other in the correct timezone offset if they don't match.
         // When comparing DateTime values with different timezone offsets, implementations
@@ -803,8 +728,7 @@ var AbstractDate = /** @class */ (function () {
             }
         }
         // @ts-ignore
-        for (var _i = 0, _a = this.constructor.FIELDS; _i < _a.length; _i++) {
-            var field = _a[_i];
+        for (const field of this.constructor.FIELDS) {
             // if both have this precision defined
             // @ts-ignore
             if (this[field] != null && other[field] != null) {
@@ -842,8 +766,8 @@ var AbstractDate = /** @class */ (function () {
         }
         // if we made it here, then all fields matched and they are same
         return true;
-    };
-    AbstractDate.prototype.before = function (other, precision) {
+    }
+    before(other, precision) {
         if (!(other.isDate || other.isDateTime)) {
             return null;
         }
@@ -855,7 +779,7 @@ var AbstractDate = /** @class */ (function () {
         }
         // @ts-ignore
         if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
-            throw new Error("Invalid precision: ".concat(precision));
+            throw new Error(`Invalid precision: ${precision}`);
         }
         // make a copy of other in the correct timezone offset if they don't match.
         // When comparing DateTime values with different timezone offsets, implementations
@@ -867,8 +791,7 @@ var AbstractDate = /** @class */ (function () {
             }
         }
         // @ts-ignore
-        for (var _i = 0, _a = this.constructor.FIELDS; _i < _a.length; _i++) {
-            var field = _a[_i];
+        for (const field of this.constructor.FIELDS) {
             // if both have this precision defined
             // @ts-ignore
             if (this[field] != null && other[field] != null) {
@@ -906,8 +829,8 @@ var AbstractDate = /** @class */ (function () {
         }
         // if we made it here, then all fields matched and they are same
         return false;
-    };
-    AbstractDate.prototype.after = function (other, precision) {
+    }
+    after(other, precision) {
         if (!(other.isDate || other.isDateTime)) {
             return null;
         }
@@ -919,7 +842,7 @@ var AbstractDate = /** @class */ (function () {
         }
         // @ts-ignore
         if (precision != null && this.constructor.FIELDS.indexOf(precision) < 0) {
-            throw new Error("Invalid precision: ".concat(precision));
+            throw new Error(`Invalid precision: ${precision}`);
         }
         // make a copy of other in the correct timezone offset if they don't match.
         // When comparing DateTime values with different timezone offsets, implementations
@@ -931,8 +854,7 @@ var AbstractDate = /** @class */ (function () {
             }
         }
         // @ts-ignore
-        for (var _i = 0, _a = this.constructor.FIELDS; _i < _a.length; _i++) {
-            var field = _a[_i];
+        for (const field of this.constructor.FIELDS) {
             // if both have this precision defined
             // @ts-ignore
             if (this[field] != null && other[field] != null) {
@@ -970,15 +892,14 @@ var AbstractDate = /** @class */ (function () {
         }
         // if we made it here, then all fields matched and they are same
         return false;
-    };
-    AbstractDate.prototype.add = function (offset, field) {
-        var _a;
+    }
+    add(offset, field) {
         if (offset === 0 || this.year == null) {
             return this.copy();
         }
         // Use luxon to do the date math because it honors DST and it has the leap-year/end-of-month semantics we want.
         // NOTE: The luxonDateTime will contain default values where this[unit] is null, but we'll account for that.
-        var luxonDateTime = this.toLuxonDateTime();
+        let luxonDateTime = this.toLuxonDateTime();
         // From the spec: "The operation is performed by converting the time-based quantity to the most precise value
         // specified in the date/time (truncating any resulting decimal portion) and then adding it to the date/time value."
         // However, since you can't really convert days to months,  if "this" is less precise than the field being added, we can
@@ -986,13 +907,13 @@ var AbstractDate = /** @class */ (function () {
         // sign of the offset), and then null out the imprecise fields again after doing the calculation.  Due to the way
         // luxonDateTime is constructed above, it is already at the earliest value, so only adjust if the offset is negative.
         // @ts-ignore
-        var offsetIsMorePrecise = this[field] == null; //whether the quantity we are adding is more precise than "this".
+        const offsetIsMorePrecise = this[field] == null; //whether the quantity we are adding is more precise than "this".
         if (offsetIsMorePrecise && offset < 0) {
             luxonDateTime = luxonDateTime.endOf(this.getPrecision());
         }
         // Now do the actual math and convert it back to a Date/DateTime w/ originally null fields nulled out again
-        var luxonResult = luxonDateTime.plus((_a = {}, _a[field] = offset, _a));
-        var result = this.constructor
+        const luxonResult = luxonDateTime.plus({ [field]: offset });
+        const result = this.constructor
             .fromLuxonDateTime(luxonResult)
             .reducedPrecision(this.getPrecision());
         // Luxon never has a null offset, but sometimes "this" does, so reset to null if applicable
@@ -1006,8 +927,8 @@ var AbstractDate = /** @class */ (function () {
         else {
             return result;
         }
-    };
-    AbstractDate.prototype.getFieldFloor = function (field) {
+    }
+    getFieldFloor(field) {
         switch (field) {
             case 'month':
                 return 1;
@@ -1024,8 +945,8 @@ var AbstractDate = /** @class */ (function () {
             default:
                 throw new Error('Tried to floor a field that has no floor value: ' + field);
         }
-    };
-    AbstractDate.prototype.getFieldCieling = function (field) {
+    }
+    getFieldCieling(field) {
         switch (field) {
             case 'month':
                 return 12;
@@ -1042,51 +963,40 @@ var AbstractDate = /** @class */ (function () {
             default:
                 throw new Error('Tried to clieling a field that has no cieling value: ' + field);
         }
-    };
-    return AbstractDate;
-}());
-var DateTime = /** @class */ (function (_super) {
-    __extends(DateTime, _super);
-    function DateTime(year, month, day, hour, minute, second, millisecond, timezoneOffset) {
-        if (year === void 0) { year = null; }
-        if (month === void 0) { month = null; }
-        if (day === void 0) { day = null; }
-        if (hour === void 0) { hour = null; }
-        if (minute === void 0) { minute = null; }
-        if (second === void 0) { second = null; }
-        if (millisecond === void 0) { millisecond = null; }
-        var _this = 
+    }
+}
+class DateTime extends AbstractDate {
+    constructor(year = null, month = null, day = null, hour = null, minute = null, second = null, millisecond = null, timezoneOffset) {
         // from the spec: If no timezone is specified, the timezone of the evaluation request timestamp is used.
         // NOTE: timezoneOffset will be explicitly null for the Time overload, whereas
         // it will be undefined if simply unspecified
-        _super.call(this, year, month, day) || this;
-        _this.hour = hour;
-        _this.minute = minute;
-        _this.second = second;
-        _this.millisecond = millisecond;
+        super(year, month, day);
+        this.hour = hour;
+        this.minute = minute;
+        this.second = second;
+        this.millisecond = millisecond;
         if (timezoneOffset === undefined) {
-            _this.timezoneOffset = (new util_1.jsDate().getTimezoneOffset() / 60) * -1;
+            this.timezoneOffset = (new util_1.jsDate().getTimezoneOffset() / 60) * -1;
         }
         else {
-            _this.timezoneOffset = timezoneOffset;
+            this.timezoneOffset = timezoneOffset;
         }
-        return _this;
     }
-    DateTime.parse = function (string) {
+    static parse(string) {
         if (string === null) {
             return null;
         }
-        var matches = /(\d{4})(-(\d{2}))?(-(\d{2}))?(T((\d{2})(:(\d{2})(:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(:?(\d{2}))?))?)?/.exec(string);
+        const matches = /(\d{4})(-(\d{2}))?(-(\d{2}))?(T((\d{2})(:(\d{2})(:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(:?(\d{2}))?))?)?/.exec(string);
         if (matches == null) {
             return null;
         }
-        var years = matches[1];
-        var months = matches[3];
-        var days = matches[5];
-        var hours = matches[8];
-        var minutes = matches[10];
-        var seconds = matches[12];
-        var milliseconds = matches[14];
+        const years = matches[1];
+        const months = matches[3];
+        const days = matches[5];
+        const hours = matches[8];
+        const minutes = matches[10];
+        const seconds = matches[12];
+        let milliseconds = matches[14];
         if (milliseconds != null) {
             milliseconds = (0, util_1.normalizeMillisecondsField)(milliseconds);
         }
@@ -1097,22 +1007,22 @@ var DateTime = /** @class */ (function (_super) {
             return null;
         }
         // convert the args to integers
-        var args = [years, months, days, hours, minutes, seconds, milliseconds].map(function (arg) {
+        const args = [years, months, days, hours, minutes, seconds, milliseconds].map(arg => {
             return arg != null ? parseInt(arg) : arg;
         });
         // convert timezone offset to decimal and add it to arguments
         if (matches[18] != null) {
-            var num = parseInt(matches[18]) + (matches[20] != null ? parseInt(matches[20]) / 60 : 0);
+            const num = parseInt(matches[18]) + (matches[20] != null ? parseInt(matches[20]) / 60 : 0);
             args.push(matches[17] === '+' ? num : num * -1);
         }
         else if (matches[15] === 'Z') {
             args.push(0);
         }
         // @ts-ignore
-        return new (DateTime.bind.apply(DateTime, __spreadArray([void 0], args, false)))();
-    };
+        return new DateTime(...args);
+    }
     // TODO: Note: using the jsDate type causes issues, fix later
-    DateTime.fromJSDate = function (date, timezoneOffset) {
+    static fromJSDate(date, timezoneOffset) {
         //This is from a JS Date, not a CQL Date
         if (date instanceof DateTime) {
             return date;
@@ -1124,31 +1034,23 @@ var DateTime = /** @class */ (function (_super) {
         else {
             return new DateTime(date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
         }
-    };
-    DateTime.fromLuxonDateTime = function (luxonDT) {
+    }
+    static fromLuxonDateTime(luxonDT) {
         if (luxonDT instanceof DateTime) {
             return luxonDT;
         }
         return new DateTime(luxonDT.year, luxonDT.month, luxonDT.day, luxonDT.hour, luxonDT.minute, luxonDT.second, luxonDT.millisecond, luxonDT.offset / 60);
-    };
-    Object.defineProperty(DateTime.prototype, "isDateTime", {
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DateTime.prototype, "isDate", {
-        get: function () {
-            return false;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    DateTime.prototype.copy = function () {
+    }
+    get isDateTime() {
+        return true;
+    }
+    get isDate() {
+        return false;
+    }
+    copy() {
         return new DateTime(this.year, this.month, this.day, this.hour, this.minute, this.second, this.millisecond, this.timezoneOffset);
-    };
-    DateTime.prototype.successor = function () {
+    }
+    successor() {
         if (this.millisecond != null) {
             return this.add(1, DateTime.Unit.MILLISECOND);
         }
@@ -1170,8 +1072,8 @@ var DateTime = /** @class */ (function (_super) {
         else if (this.year != null) {
             return this.add(1, DateTime.Unit.YEAR);
         }
-    };
-    DateTime.prototype.predecessor = function () {
+    }
+    predecessor() {
         if (this.millisecond != null) {
             return this.add(-1, DateTime.Unit.MILLISECOND);
         }
@@ -1193,14 +1095,13 @@ var DateTime = /** @class */ (function (_super) {
         else if (this.year != null) {
             return this.add(-1, DateTime.Unit.YEAR);
         }
-    };
-    DateTime.prototype.convertToTimezoneOffset = function (timezoneOffset) {
-        if (timezoneOffset === void 0) { timezoneOffset = 0; }
-        var shiftedLuxonDT = this.toLuxonDateTime().setZone(luxon_1.FixedOffsetZone.instance(timezoneOffset * 60));
-        var shiftedDT = DateTime.fromLuxonDateTime(shiftedLuxonDT);
+    }
+    convertToTimezoneOffset(timezoneOffset = 0) {
+        const shiftedLuxonDT = this.toLuxonDateTime().setZone(luxon_1.FixedOffsetZone.instance(timezoneOffset * 60));
+        const shiftedDT = DateTime.fromLuxonDateTime(shiftedLuxonDT);
         return shiftedDT.reducedPrecision(this.getPrecision());
-    };
-    DateTime.prototype.differenceBetween = function (other, unitField) {
+    }
+    differenceBetween(other, unitField) {
         other = this._implicitlyConvert(other);
         if (other == null || !other.isDateTime) {
             return null;
@@ -1212,8 +1113,8 @@ var DateTime = /** @class */ (function (_super) {
         //   prior to truncation to correctly consider real (actual elapsed) time. When difference is calculated
         //   for days or coarser units, however, the time components (including timezone offset) should be truncated
         //   without normalization to correctly reflect the difference in calendar days, months, and years."
-        var a = this.toLuxonUncertainty();
-        var b = other.toLuxonUncertainty();
+        const a = this.toLuxonUncertainty();
+        const b = other.toLuxonUncertainty();
         // If unit is days or above, reset all the DateTimes to UTC since TZ offset should not be considered;
         // Otherwise, we don't actually have to "normalize" to a common TZ because Luxon takes TZ into account.
         if ([DateTime.Unit.YEAR, DateTime.Unit.MONTH, DateTime.Unit.WEEK, DateTime.Unit.DAY].includes(unitField)) {
@@ -1229,22 +1130,22 @@ var DateTime = /** @class */ (function (_super) {
         b.high = truncateLuxonDateTime(b.high, unitField);
         // Return the duration based on the normalize and truncated values
         return new uncertainty_1.Uncertainty(wholeLuxonDuration(b.low.diff(a.high, unitField), unitField), wholeLuxonDuration(b.high.diff(a.low, unitField), unitField));
-    };
-    DateTime.prototype.durationBetween = function (other, unitField) {
+    }
+    durationBetween(other, unitField) {
         other = this._implicitlyConvert(other);
         if (other == null || !other.isDateTime) {
             return null;
         }
-        var a = this.toLuxonUncertainty();
-        var b = other.toLuxonUncertainty();
+        const a = this.toLuxonUncertainty();
+        const b = other.toLuxonUncertainty();
         return new uncertainty_1.Uncertainty(wholeLuxonDuration(b.low.diff(a.high, unitField), unitField), wholeLuxonDuration(b.high.diff(a.low, unitField), unitField));
-    };
-    DateTime.prototype.isUTC = function () {
+    }
+    isUTC() {
         // A timezoneOffset of 0 indicates UTC time.
         return !this.timezoneOffset;
-    };
-    DateTime.prototype.getPrecision = function () {
-        var result = null;
+    }
+    getPrecision() {
+        let result = null;
         if (this.year != null) {
             result = DateTime.Unit.YEAR;
         }
@@ -1285,15 +1186,15 @@ var DateTime = /** @class */ (function (_super) {
             result = DateTime.Unit.MILLISECOND;
         }
         return result;
-    };
-    DateTime.prototype.getPrecisionValue = function () {
+    }
+    getPrecisionValue() {
         return this.isTime()
             ? TIME_PRECISION_VALUE_MAP.get(this.getPrecision())
             : DATETIME_PRECISION_VALUE_MAP.get(this.getPrecision());
-    };
-    DateTime.prototype.toLuxonDateTime = function () {
+    }
+    toLuxonDateTime() {
         var _a, _b, _c, _d, _e, _f, _g;
-        var offsetMins = this.timezoneOffset != null
+        const offsetMins = this.timezoneOffset != null
             ? this.timezoneOffset * 60
             : new util_1.jsDate().getTimezoneOffset() * -1;
         return luxon_1.DateTime.fromObject({
@@ -1306,38 +1207,37 @@ var DateTime = /** @class */ (function (_super) {
             millisecond: (_g = this.millisecond) !== null && _g !== void 0 ? _g : undefined,
             zone: luxon_1.FixedOffsetZone.instance(offsetMins)
         });
-    };
-    DateTime.prototype.toLuxonUncertainty = function () {
-        var low = this.toLuxonDateTime();
-        var high = low.endOf(this.getPrecision());
+    }
+    toLuxonUncertainty() {
+        const low = this.toLuxonDateTime();
+        const high = low.endOf(this.getPrecision());
         return new uncertainty_1.Uncertainty(low, high);
-    };
-    DateTime.prototype.toJSDate = function (ignoreTimezone) {
-        if (ignoreTimezone === void 0) { ignoreTimezone = false; }
-        var luxonDT = this.toLuxonDateTime();
+    }
+    toJSDate(ignoreTimezone = false) {
+        let luxonDT = this.toLuxonDateTime();
         // I don't know if anyone is using "ignoreTimezone" anymore (we aren't), but just in case
         if (ignoreTimezone) {
-            var offset = new util_1.jsDate().getTimezoneOffset() * -1;
+            const offset = new util_1.jsDate().getTimezoneOffset() * -1;
             luxonDT = luxonDT.setZone(luxon_1.FixedOffsetZone.instance(offset), { keepLocalTime: true });
         }
         return luxonDT.toJSDate();
-    };
-    DateTime.prototype.toJSON = function () {
+    }
+    toJSON() {
         return this.toString();
-    };
-    DateTime.prototype._pad = function (num) {
+    }
+    _pad(num) {
         return String('0' + num).slice(-2);
-    };
-    DateTime.prototype.toString = function () {
+    }
+    toString() {
         if (this.isTime()) {
             return this.toStringTime();
         }
         else {
             return this.toStringDateTime();
         }
-    };
-    DateTime.prototype.toStringTime = function () {
-        var str = '';
+    }
+    toStringTime() {
+        let str = '';
         if (this.hour != null) {
             str += this._pad(this.hour);
             if (this.minute != null) {
@@ -1351,9 +1251,9 @@ var DateTime = /** @class */ (function (_super) {
             }
         }
         return str;
-    };
-    DateTime.prototype.toStringDateTime = function () {
-        var str = '';
+    }
+    toStringDateTime() {
+        let str = '';
         if (this.year != null) {
             str += this.year;
             if (this.month != null) {
@@ -1377,113 +1277,98 @@ var DateTime = /** @class */ (function (_super) {
         }
         if (str.indexOf('T') !== -1 && this.timezoneOffset != null) {
             str += this.timezoneOffset < 0 ? '-' : '+';
-            var offsetHours = Math.floor(Math.abs(this.timezoneOffset));
+            const offsetHours = Math.floor(Math.abs(this.timezoneOffset));
             str += this._pad(offsetHours);
-            var offsetMin = (Math.abs(this.timezoneOffset) - offsetHours) * 60;
+            const offsetMin = (Math.abs(this.timezoneOffset) - offsetHours) * 60;
             str += ':' + this._pad(offsetMin);
         }
         return str;
-    };
-    DateTime.prototype.getDateTime = function () {
+    }
+    getDateTime() {
         return this;
-    };
-    DateTime.prototype.getDate = function () {
+    }
+    getDate() {
         return new Date(this.year, this.month, this.day);
-    };
-    DateTime.prototype.getTime = function () {
+    }
+    getTime() {
         // Times no longer have timezoneOffets, so we must explicitly set it to null
         return new DateTime(0, 1, 1, this.hour, this.minute, this.second, this.millisecond, null);
-    };
-    DateTime.prototype.isTime = function () {
+    }
+    isTime() {
         return this.year === 0 && this.month === 1 && this.day === 1;
-    };
-    DateTime.prototype._implicitlyConvert = function (other) {
+    }
+    _implicitlyConvert(other) {
         if (other != null && other.isDate) {
             return other.getDateTime();
         }
         return other;
-    };
-    DateTime.prototype.reducedPrecision = function (unitField) {
-        if (unitField === void 0) { unitField = DateTime.Unit.MILLISECOND; }
-        var reduced = this.copy();
+    }
+    reducedPrecision(unitField = DateTime.Unit.MILLISECOND) {
+        const reduced = this.copy();
         if (unitField != null && unitField !== DateTime.Unit.MILLISECOND) {
-            var fieldIndex = DateTime.FIELDS.indexOf(unitField);
-            var fieldsToRemove = DateTime.FIELDS.slice(fieldIndex + 1);
-            for (var _i = 0, fieldsToRemove_1 = fieldsToRemove; _i < fieldsToRemove_1.length; _i++) {
-                var field = fieldsToRemove_1[_i];
+            const fieldIndex = DateTime.FIELDS.indexOf(unitField);
+            const fieldsToRemove = DateTime.FIELDS.slice(fieldIndex + 1);
+            for (const field of fieldsToRemove) {
                 // @ts-ignore
                 reduced[field] = null;
             }
         }
         return reduced;
-    };
-    DateTime.Unit = {
-        YEAR: 'year',
-        MONTH: 'month',
-        WEEK: 'week',
-        DAY: 'day',
-        HOUR: 'hour',
-        MINUTE: 'minute',
-        SECOND: 'second',
-        MILLISECOND: 'millisecond'
-    };
-    DateTime.FIELDS = [
-        DateTime.Unit.YEAR,
-        DateTime.Unit.MONTH,
-        DateTime.Unit.DAY,
-        DateTime.Unit.HOUR,
-        DateTime.Unit.MINUTE,
-        DateTime.Unit.SECOND,
-        DateTime.Unit.MILLISECOND
-    ];
-    return DateTime;
-}(AbstractDate));
-exports.DateTime = DateTime;
-var Date = /** @class */ (function (_super) {
-    __extends(Date, _super);
-    function Date(year, month, day) {
-        if (year === void 0) { year = null; }
-        if (month === void 0) { month = null; }
-        if (day === void 0) { day = null; }
-        return _super.call(this, year, month, day) || this;
     }
-    Date.parse = function (string) {
+}
+exports.DateTime = DateTime;
+DateTime.Unit = {
+    YEAR: 'year',
+    MONTH: 'month',
+    WEEK: 'week',
+    DAY: 'day',
+    HOUR: 'hour',
+    MINUTE: 'minute',
+    SECOND: 'second',
+    MILLISECOND: 'millisecond'
+};
+DateTime.FIELDS = [
+    DateTime.Unit.YEAR,
+    DateTime.Unit.MONTH,
+    DateTime.Unit.DAY,
+    DateTime.Unit.HOUR,
+    DateTime.Unit.MINUTE,
+    DateTime.Unit.SECOND,
+    DateTime.Unit.MILLISECOND
+];
+class Date extends AbstractDate {
+    constructor(year = null, month = null, day = null) {
+        super(year, month, day);
+    }
+    static parse(string) {
         if (string === null) {
             return null;
         }
-        var matches = /(\d{4})(-(\d{2}))?(-(\d{2}))?/.exec(string);
+        const matches = /(\d{4})(-(\d{2}))?(-(\d{2}))?/.exec(string);
         if (matches == null) {
             return null;
         }
-        var years = matches[1];
-        var months = matches[3];
-        var days = matches[5];
+        const years = matches[1];
+        const months = matches[3];
+        const days = matches[5];
         if (!isValidDateStringFormat(string)) {
             return null;
         }
         // convert args to integers
-        var args = [years, months, days].map(function (arg) { return (arg != null ? parseInt(arg) : arg); });
+        const args = [years, months, days].map(arg => (arg != null ? parseInt(arg) : arg));
         // @ts-ignore
-        return new (Date.bind.apply(Date, __spreadArray([void 0], args, false)))();
-    };
-    Object.defineProperty(Date.prototype, "isDate", {
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Date.prototype, "isDateTime", {
-        get: function () {
-            return false;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Date.prototype.copy = function () {
+        return new Date(...args);
+    }
+    get isDate() {
+        return true;
+    }
+    get isDateTime() {
+        return false;
+    }
+    copy() {
         return new Date(this.year, this.month, this.day);
-    };
-    Date.prototype.successor = function () {
+    }
+    successor() {
         if (this.day != null) {
             return this.add(1, Date.Unit.DAY);
         }
@@ -1493,8 +1378,8 @@ var Date = /** @class */ (function (_super) {
         else if (this.year != null) {
             return this.add(1, Date.Unit.YEAR);
         }
-    };
-    Date.prototype.predecessor = function () {
+    }
+    predecessor() {
         if (this.day != null) {
             return this.add(-1, Date.Unit.DAY);
         }
@@ -1504,8 +1389,8 @@ var Date = /** @class */ (function (_super) {
         else if (this.year != null) {
             return this.add(-1, Date.Unit.YEAR);
         }
-    };
-    Date.prototype.differenceBetween = function (other, unitField) {
+    }
+    differenceBetween(other, unitField) {
         if (other != null && other.isDateTime) {
             return this.getDateTime().differenceBetween(other, unitField);
         }
@@ -1515,8 +1400,8 @@ var Date = /** @class */ (function (_super) {
         // According to CQL spec:
         // * "Difference calculations are performed by truncating the datetime values at the next precision,
         //   and then performing the corresponding duration calculation on the truncated values."
-        var a = this.toLuxonUncertainty();
-        var b = other.toLuxonUncertainty();
+        const a = this.toLuxonUncertainty();
+        const b = other.toLuxonUncertainty();
         // Truncate all dates at precision below specified unit
         a.low = truncateLuxonDateTime(a.low, unitField);
         a.high = truncateLuxonDateTime(a.high, unitField);
@@ -1524,20 +1409,20 @@ var Date = /** @class */ (function (_super) {
         b.high = truncateLuxonDateTime(b.high, unitField);
         // Return the duration based on the normalize and truncated values
         return new uncertainty_1.Uncertainty(wholeLuxonDuration(b.low.diff(a.high, unitField), unitField), wholeLuxonDuration(b.high.diff(a.low, unitField), unitField));
-    };
-    Date.prototype.durationBetween = function (other, unitField) {
+    }
+    durationBetween(other, unitField) {
         if (other != null && other.isDateTime) {
             return this.getDateTime().durationBetween(other, unitField);
         }
         if (other == null || !other.isDate) {
             return null;
         }
-        var a = this.toLuxonUncertainty();
-        var b = other.toLuxonUncertainty();
+        const a = this.toLuxonUncertainty();
+        const b = other.toLuxonUncertainty();
         return new uncertainty_1.Uncertainty(wholeLuxonDuration(b.low.diff(a.high, unitField), unitField), wholeLuxonDuration(b.high.diff(a.low, unitField), unitField));
-    };
-    Date.prototype.getPrecision = function () {
-        var result = null;
+    }
+    getPrecision() {
+        let result = null;
         if (this.year != null) {
             result = Date.Unit.YEAR;
         }
@@ -1557,11 +1442,11 @@ var Date = /** @class */ (function (_super) {
             return result;
         }
         return result;
-    };
-    Date.prototype.getPrecisionValue = function () {
+    }
+    getPrecisionValue() {
         return DATETIME_PRECISION_VALUE_MAP.get(this.getPrecision());
-    };
-    Date.prototype.toLuxonDateTime = function () {
+    }
+    toLuxonDateTime() {
         var _a, _b, _c;
         return luxon_1.DateTime.fromObject({
             year: (_a = this.year) !== null && _a !== void 0 ? _a : undefined,
@@ -1569,37 +1454,37 @@ var Date = /** @class */ (function (_super) {
             day: (_c = this.day) !== null && _c !== void 0 ? _c : undefined,
             zone: luxon_1.FixedOffsetZone.utcInstance
         });
-    };
-    Date.prototype.toLuxonUncertainty = function () {
-        var low = this.toLuxonDateTime();
-        var high = low.endOf(this.getPrecision()).startOf('day'); // Date type is always at T00:00:00.0
+    }
+    toLuxonUncertainty() {
+        const low = this.toLuxonDateTime();
+        const high = low.endOf(this.getPrecision()).startOf('day'); // Date type is always at T00:00:00.0
         return new uncertainty_1.Uncertainty(low, high);
-    };
-    Date.prototype.toJSDate = function () {
-        var _a = [
+    }
+    toJSDate() {
+        const [y, mo, d] = [
             this.year,
             this.month != null ? this.month - 1 : 0,
             this.day != null ? this.day : 1
-        ], y = _a[0], mo = _a[1], d = _a[2];
+        ];
         return new util_1.jsDate(y, mo, d);
-    };
-    Date.fromJSDate = function (date) {
+    }
+    static fromJSDate(date) {
         if (date instanceof Date) {
             return date;
         }
         return new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
-    };
-    Date.fromLuxonDateTime = function (luxonDT) {
+    }
+    static fromLuxonDateTime(luxonDT) {
         if (luxonDT instanceof Date) {
             return luxonDT;
         }
         return new Date(luxonDT.year, luxonDT.month, luxonDT.day);
-    };
-    Date.prototype.toJSON = function () {
+    }
+    toJSON() {
         return this.toString();
-    };
-    Date.prototype.toString = function () {
-        var str = '';
+    }
+    toString() {
+        let str = '';
         if (this.year != null) {
             str += this.year.toString();
             if (this.month != null) {
@@ -1610,8 +1495,8 @@ var Date = /** @class */ (function (_super) {
             }
         }
         return str;
-    };
-    Date.prototype.getDateTime = function () {
+    }
+    getDateTime() {
         // from the spec: the result will be a DateTime with the time components unspecified,
         // except for the timezone offset, which will be set to the timezone offset of the evaluation
         // request timestamp. (this last part is achieved by just not passing in timezone offset)
@@ -1623,26 +1508,23 @@ var Date = /** @class */ (function (_super) {
         else {
             return new DateTime(this.year, this.month, this.day);
         }
-    };
-    Date.prototype.reducedPrecision = function (unitField) {
-        if (unitField === void 0) { unitField = Date.Unit.DAY; }
-        var reduced = this.copy();
+    }
+    reducedPrecision(unitField = Date.Unit.DAY) {
+        const reduced = this.copy();
         if (unitField !== Date.Unit.DAY) {
-            var fieldIndex = Date.FIELDS.indexOf(unitField);
-            var fieldsToRemove = Date.FIELDS.slice(fieldIndex + 1);
-            for (var _i = 0, fieldsToRemove_2 = fieldsToRemove; _i < fieldsToRemove_2.length; _i++) {
-                var field = fieldsToRemove_2[_i];
+            const fieldIndex = Date.FIELDS.indexOf(unitField);
+            const fieldsToRemove = Date.FIELDS.slice(fieldIndex + 1);
+            for (const field of fieldsToRemove) {
                 // @ts-ignore
                 reduced[field] = null;
             }
         }
         return reduced;
-    };
-    Date.Unit = { YEAR: 'year', MONTH: 'month', WEEK: 'week', DAY: 'day' };
-    Date.FIELDS = [Date.Unit.YEAR, Date.Unit.MONTH, Date.Unit.DAY];
-    return Date;
-}(AbstractDate));
+    }
+}
 exports.Date = Date;
+Date.Unit = { YEAR: 'year', MONTH: 'month', WEEK: 'week', DAY: 'day' };
+Date.FIELDS = [Date.Unit.YEAR, Date.Unit.MONTH, Date.Unit.DAY];
 // Require MIN/MAX here because math.js requires this file, and when we make this file require
 // math.js before it exports DateTime and Date, it errors due to the circular dependency...
 // const { MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } = require('../util/math');
@@ -1652,8 +1534,8 @@ exports.MIN_DATE_VALUE = Date.parse('0001-01-01');
 exports.MAX_DATE_VALUE = Date.parse('9999-12-31');
 exports.MIN_TIME_VALUE = (_a = DateTime.parse('0000-01-01T00:00:00.000')) === null || _a === void 0 ? void 0 : _a.getTime();
 exports.MAX_TIME_VALUE = (_b = DateTime.parse('0000-01-01T23:59:59.999')) === null || _b === void 0 ? void 0 : _b.getTime();
-var DATETIME_PRECISION_VALUE_MAP = (function () {
-    var dtpvMap = new Map();
+const DATETIME_PRECISION_VALUE_MAP = (() => {
+    const dtpvMap = new Map();
     dtpvMap.set(DateTime.Unit.YEAR, 4);
     dtpvMap.set(DateTime.Unit.MONTH, 6);
     dtpvMap.set(DateTime.Unit.DAY, 8);
@@ -1663,8 +1545,8 @@ var DATETIME_PRECISION_VALUE_MAP = (function () {
     dtpvMap.set(DateTime.Unit.MILLISECOND, 17);
     return dtpvMap;
 })();
-var TIME_PRECISION_VALUE_MAP = (function () {
-    var tpvMap = new Map();
+const TIME_PRECISION_VALUE_MAP = (() => {
+    const tpvMap = new Map();
     tpvMap.set(DateTime.Unit.HOUR, 2);
     tpvMap.set(DateTime.Unit.MINUTE, 4);
     tpvMap.set(DateTime.Unit.SECOND, 6);
@@ -1680,8 +1562,7 @@ function compareWithDefaultResult(a, b, defaultResult) {
     if (a.timezoneOffset !== b.timezoneOffset) {
         b = b.convertToTimezoneOffset(a.timezoneOffset);
     }
-    for (var _i = 0, _a = a.constructor.FIELDS; _i < _a.length; _i++) {
-        var field = _a[_i];
+    for (const field of a.constructor.FIELDS) {
         // if both have this precision defined
         if (a[field] != null && b[field] != null) {
             // For the purposes of comparison, seconds and milliseconds are combined
@@ -1689,10 +1570,10 @@ function compareWithDefaultResult(a, b, defaultResult) {
             if (field === 'second') {
                 // NOTE: if millisecond is null it will calcualte like this anyway, but
                 // if millisecond is undefined, using it will result in NaN calculations
-                var aMillisecond = a['millisecond'] != null ? a['millisecond'] : 0;
-                var aSecondAndMillisecond = a[field] + aMillisecond / 1000;
-                var bMillisecond = b['millisecond'] != null ? b['millisecond'] : 0;
-                var bSecondAndMillisecond = b[field] + bMillisecond / 1000;
+                const aMillisecond = a['millisecond'] != null ? a['millisecond'] : 0;
+                const aSecondAndMillisecond = a[field] + aMillisecond / 1000;
+                const bMillisecond = b['millisecond'] != null ? b['millisecond'] : 0;
+                const bSecondAndMillisecond = b[field] + bMillisecond / 1000;
                 // second/millisecond is the most precise comparison, so we can directly return
                 return aSecondAndMillisecond === bSecondAndMillisecond;
             }
@@ -1724,7 +1605,7 @@ function isValidDateStringFormat(string) {
     if (typeof string !== 'string') {
         return false;
     }
-    var format = LENGTH_TO_DATE_FORMAT_MAP.get(string.length);
+    const format = LENGTH_TO_DATE_FORMAT_MAP.get(string.length);
     if (format == null) {
         return false;
     }
@@ -1738,11 +1619,11 @@ function isValidDateTimeStringFormat(string) {
     if (/T[\d:.]*[+-]\d{2}$/.test(string)) {
         string += ':00';
     }
-    var formats = LENGTH_TO_DATETIME_FORMATS_MAP.get(string.length);
+    const formats = LENGTH_TO_DATETIME_FORMATS_MAP.get(string.length);
     if (formats == null) {
         return false;
     }
-    return formats.some(function (fmt) { return luxon_1.DateTime.fromFormat(string, fmt).isValid; });
+    return formats.some((fmt) => luxon_1.DateTime.fromFormat(string, fmt).isValid);
 }
 // Will return true if provided precision is unspecified or if
 // precision is hours, minutes, seconds, or milliseconds
@@ -1754,13 +1635,12 @@ function isPrecisionUnspecifiedOrGreaterThanDay(precision) {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Exception = void 0;
-var Exception = /** @class */ (function () {
-    function Exception(message, wrapped) {
+class Exception {
+    constructor(message, wrapped) {
         this.message = message;
         this.wrapped = wrapped;
     }
-    return Exception;
-}());
+}
 exports.Exception = Exception;
 
 },{}],9:[function(require,module,exports){
@@ -1786,13 +1666,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Interval = void 0;
-var uncertainty_1 = require("./uncertainty");
-var quantity_1 = require("./quantity");
-var logic_1 = require("./logic");
-var math_1 = require("../util/math");
-var cmp = __importStar(require("../util/comparison"));
-var Interval = /** @class */ (function () {
-    function Interval(low, high, lowClosed, highClosed, defaultPointType // defaultPointType is used in the case that both endpoints are null
+const uncertainty_1 = require("./uncertainty");
+const quantity_1 = require("./quantity");
+const logic_1 = require("./logic");
+const math_1 = require("../util/math");
+const cmp = __importStar(require("../util/comparison"));
+class Interval {
+    constructor(low, high, lowClosed, highClosed, defaultPointType // defaultPointType is used in the case that both endpoints are null
     ) {
         this.low = low;
         this.high = high;
@@ -1802,47 +1682,39 @@ var Interval = /** @class */ (function () {
         this.lowClosed = lowClosed != null ? lowClosed : true;
         this.highClosed = highClosed != null ? highClosed : true;
     }
-    Object.defineProperty(Interval.prototype, "isInterval", {
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Interval.prototype, "pointType", {
-        get: function () {
-            var pointType = null;
-            var point = this.low != null ? this.low : this.high;
-            if (point != null) {
-                if (typeof point === 'number') {
-                    pointType = Number.isInteger(point)
-                        ? '{urn:hl7-org:elm-types:r1}Integer'
-                        : '{urn:hl7-org:elm-types:r1}Decimal';
-                }
-                else if (point.isTime && point.isTime()) {
-                    pointType = '{urn:hl7-org:elm-types:r1}Time';
-                }
-                else if (point.isDate) {
-                    pointType = '{urn:hl7-org:elm-types:r1}Date';
-                }
-                else if (point.isDateTime) {
-                    pointType = '{urn:hl7-org:elm-types:r1}DateTime';
-                }
-                else if (point.isQuantity) {
-                    pointType = '{urn:hl7-org:elm-types:r1}Quantity';
-                }
+    get isInterval() {
+        return true;
+    }
+    get pointType() {
+        let pointType = null;
+        const point = this.low != null ? this.low : this.high;
+        if (point != null) {
+            if (typeof point === 'number') {
+                pointType = Number.isInteger(point)
+                    ? '{urn:hl7-org:elm-types:r1}Integer'
+                    : '{urn:hl7-org:elm-types:r1}Decimal';
             }
-            if (pointType == null && this.defaultPointType != null) {
-                pointType = this.defaultPointType;
+            else if (point.isTime && point.isTime()) {
+                pointType = '{urn:hl7-org:elm-types:r1}Time';
             }
-            return pointType;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Interval.prototype.copy = function () {
-        var newLow = this.low;
-        var newHigh = this.high;
+            else if (point.isDate) {
+                pointType = '{urn:hl7-org:elm-types:r1}Date';
+            }
+            else if (point.isDateTime) {
+                pointType = '{urn:hl7-org:elm-types:r1}DateTime';
+            }
+            else if (point.isQuantity) {
+                pointType = '{urn:hl7-org:elm-types:r1}Quantity';
+            }
+        }
+        if (pointType == null && this.defaultPointType != null) {
+            pointType = this.defaultPointType;
+        }
+        return pointType;
+    }
+    copy() {
+        let newLow = this.low;
+        let newHigh = this.high;
         if (this.low != null && typeof this.low.copy === 'function') {
             newLow = this.low.copy();
         }
@@ -1850,8 +1722,8 @@ var Interval = /** @class */ (function () {
             newHigh = this.high.copy();
         }
         return new Interval(newLow, newHigh, this.lowClosed, this.highClosed);
-    };
-    Interval.prototype.contains = function (item, precision) {
+    }
+    contains(item, precision) {
         // These first two checks ensure correct handling of edge case where an item equals the closed boundary
         if (this.lowClosed && this.low != null && cmp.equals(this.low, item)) {
             return true;
@@ -1862,9 +1734,9 @@ var Interval = /** @class */ (function () {
         if (item != null && item.isInterval) {
             throw new Error('Argument to contains must be a point');
         }
-        var lowFn;
+        let lowFn;
         if (this.lowClosed && this.low == null) {
-            lowFn = function () { return true; };
+            lowFn = () => true;
         }
         else if (this.lowClosed) {
             lowFn = cmp.lessThanOrEquals;
@@ -1872,9 +1744,9 @@ var Interval = /** @class */ (function () {
         else {
             lowFn = cmp.lessThan;
         }
-        var highFn;
+        let highFn;
         if (this.highClosed && this.high == null) {
-            highFn = function () { return true; };
+            highFn = () => true;
         }
         else if (this.highClosed) {
             highFn = cmp.greaterThanOrEquals;
@@ -1883,22 +1755,22 @@ var Interval = /** @class */ (function () {
             highFn = cmp.greaterThan;
         }
         return logic_1.ThreeValuedLogic.and(lowFn(this.low, item, precision), highFn(this.high, item, precision));
-    };
-    Interval.prototype.properlyIncludes = function (other, precision) {
+    }
+    properlyIncludes(other, precision) {
         if (other == null || !other.isInterval) {
             throw new Error('Argument to properlyIncludes must be an interval');
         }
         return logic_1.ThreeValuedLogic.and(this.includes(other, precision), logic_1.ThreeValuedLogic.not(other.includes(this, precision)));
-    };
-    Interval.prototype.includes = function (other, precision) {
+    }
+    includes(other, precision) {
         if (other == null || !other.isInterval) {
             return this.contains(other, precision);
         }
-        var a = this.toClosed();
-        var b = other.toClosed();
+        const a = this.toClosed();
+        const b = other.toClosed();
         return logic_1.ThreeValuedLogic.and(cmp.lessThanOrEquals(a.low, b.low, precision), cmp.greaterThanOrEquals(a.high, b.high, precision));
-    };
-    Interval.prototype.includedIn = function (other, precision) {
+    }
+    includedIn(other, precision) {
         // For the point overload, this operator is a synonym for the in operator
         if (other == null || !other.isInterval) {
             return this.contains(other, precision);
@@ -1906,137 +1778,135 @@ var Interval = /** @class */ (function () {
         else {
             return other.includes(this);
         }
-    };
-    Interval.prototype.overlaps = function (item, precision) {
-        var closed = this.toClosed();
-        var _a = (function () {
+    }
+    overlaps(item, precision) {
+        const closed = this.toClosed();
+        const [low, high] = (() => {
             if (item != null && item.isInterval) {
-                var itemClosed = item.toClosed();
+                const itemClosed = item.toClosed();
                 return [itemClosed.low, itemClosed.high];
             }
             else {
                 return [item, item];
             }
-        })(), low = _a[0], high = _a[1];
+        })();
         return logic_1.ThreeValuedLogic.and(cmp.lessThanOrEquals(closed.low, high, precision), cmp.greaterThanOrEquals(closed.high, low, precision));
-    };
-    Interval.prototype.overlapsAfter = function (item, precision) {
-        var closed = this.toClosed();
-        var high = item != null && item.isInterval ? item.toClosed().high : item;
+    }
+    overlapsAfter(item, precision) {
+        const closed = this.toClosed();
+        const high = item != null && item.isInterval ? item.toClosed().high : item;
         return logic_1.ThreeValuedLogic.and(cmp.lessThanOrEquals(closed.low, high, precision), cmp.greaterThan(closed.high, high, precision));
-    };
-    Interval.prototype.overlapsBefore = function (item, precision) {
-        var closed = this.toClosed();
-        var low = item != null && item.isInterval ? item.toClosed().low : item;
+    }
+    overlapsBefore(item, precision) {
+        const closed = this.toClosed();
+        const low = item != null && item.isInterval ? item.toClosed().low : item;
         return logic_1.ThreeValuedLogic.and(cmp.lessThan(closed.low, low, precision), cmp.greaterThanOrEquals(closed.high, low, precision));
-    };
-    Interval.prototype.union = function (other) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+    }
+    union(other) {
         if (other == null || !other.isInterval) {
             throw new Error('Argument to union must be an interval');
         }
         // Note that interval union is only defined if the arguments overlap or meet.
         if (this.overlaps(other) || this.meets(other)) {
-            var _l = [this.toClosed(), other.toClosed()], a = _l[0], b = _l[1];
-            var l = void 0, lc = void 0;
+            const [a, b] = [this.toClosed(), other.toClosed()];
+            let l, lc;
             if (cmp.lessThanOrEquals(a.low, b.low)) {
-                _a = [this.low, this.lowClosed], l = _a[0], lc = _a[1];
+                [l, lc] = [this.low, this.lowClosed];
             }
             else if (cmp.greaterThanOrEquals(a.low, b.low)) {
-                _b = [other.low, other.lowClosed], l = _b[0], lc = _b[1];
+                [l, lc] = [other.low, other.lowClosed];
             }
             else if (areNumeric(a.low, b.low)) {
-                _c = [lowestNumericUncertainty(a.low, b.low), true], l = _c[0], lc = _c[1];
+                [l, lc] = [lowestNumericUncertainty(a.low, b.low), true];
                 // TODO: Do we need to support quantities here?
             }
             else if (areDateTimes(a.low, b.low) && a.low.isMorePrecise(b.low)) {
-                _d = [other.low, other.lowClosed], l = _d[0], lc = _d[1];
+                [l, lc] = [other.low, other.lowClosed];
             }
             else {
-                _e = [this.low, this.lowClosed], l = _e[0], lc = _e[1];
+                [l, lc] = [this.low, this.lowClosed];
             }
-            var h = void 0, hc = void 0;
+            let h, hc;
             if (cmp.greaterThanOrEquals(a.high, b.high)) {
-                _f = [this.high, this.highClosed], h = _f[0], hc = _f[1];
+                [h, hc] = [this.high, this.highClosed];
             }
             else if (cmp.lessThanOrEquals(a.high, b.high)) {
-                _g = [other.high, other.highClosed], h = _g[0], hc = _g[1];
+                [h, hc] = [other.high, other.highClosed];
             }
             else if (areNumeric(a.high, b.high)) {
-                _h = [highestNumericUncertainty(a.high, b.high), true], h = _h[0], hc = _h[1];
+                [h, hc] = [highestNumericUncertainty(a.high, b.high), true];
                 // TODO: Do we need to support quantities here?
             }
             else if (areDateTimes(a.high, b.high) && a.high.isMorePrecise(b.high)) {
-                _j = [other.high, other.highClosed], h = _j[0], hc = _j[1];
+                [h, hc] = [other.high, other.highClosed];
             }
             else {
-                _k = [this.high, this.highClosed], h = _k[0], hc = _k[1];
+                [h, hc] = [this.high, this.highClosed];
             }
             return new Interval(l, h, lc, hc);
         }
         else {
             return null;
         }
-    };
-    Interval.prototype.intersect = function (other) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+    }
+    intersect(other) {
         if (other == null || !other.isInterval) {
             throw new Error('Argument to union must be an interval');
         }
         // Note that interval union is only defined if the arguments overlap.
         if (this.overlaps(other)) {
-            var _l = [this.toClosed(), other.toClosed()], a = _l[0], b = _l[1];
-            var l = void 0, lc = void 0;
+            const [a, b] = [this.toClosed(), other.toClosed()];
+            let l, lc;
             if (cmp.greaterThanOrEquals(a.low, b.low)) {
-                _a = [this.low, this.lowClosed], l = _a[0], lc = _a[1];
+                [l, lc] = [this.low, this.lowClosed];
             }
             else if (cmp.lessThanOrEquals(a.low, b.low)) {
-                _b = [other.low, other.lowClosed], l = _b[0], lc = _b[1];
+                [l, lc] = [other.low, other.lowClosed];
             }
             else if (areNumeric(a.low, b.low)) {
-                _c = [highestNumericUncertainty(a.low, b.low), true], l = _c[0], lc = _c[1];
+                [l, lc] = [highestNumericUncertainty(a.low, b.low), true];
                 // TODO: Do we need to support quantities here?
             }
             else if (areDateTimes(a.low, b.low) && b.low.isMorePrecise(a.low)) {
-                _d = [other.low, other.lowClosed], l = _d[0], lc = _d[1];
+                [l, lc] = [other.low, other.lowClosed];
             }
             else {
-                _e = [this.low, this.lowClosed], l = _e[0], lc = _e[1];
+                [l, lc] = [this.low, this.lowClosed];
             }
-            var h = void 0, hc = void 0;
+            let h, hc;
             if (cmp.lessThanOrEquals(a.high, b.high)) {
-                _f = [this.high, this.highClosed], h = _f[0], hc = _f[1];
+                [h, hc] = [this.high, this.highClosed];
             }
             else if (cmp.greaterThanOrEquals(a.high, b.high)) {
-                _g = [other.high, other.highClosed], h = _g[0], hc = _g[1];
+                [h, hc] = [other.high, other.highClosed];
             }
             else if (areNumeric(a.high, b.high)) {
-                _h = [lowestNumericUncertainty(a.high, b.high), true], h = _h[0], hc = _h[1];
+                [h, hc] = [lowestNumericUncertainty(a.high, b.high), true];
                 // TODO: Do we need to support quantities here?
             }
             else if (areDateTimes(a.high, b.high) && b.high.isMorePrecise(a.high)) {
-                _j = [other.high, other.highClosed], h = _j[0], hc = _j[1];
+                [h, hc] = [other.high, other.highClosed];
             }
             else {
-                _k = [this.high, this.highClosed], h = _k[0], hc = _k[1];
+                [h, hc] = [this.high, this.highClosed];
             }
             return new Interval(l, h, lc, hc);
         }
         else {
             return null;
         }
-    };
-    Interval.prototype.except = function (other) {
+    }
+    except(other) {
         if (other === null) {
             return null;
         }
         if (other == null || !other.isInterval) {
             throw new Error('Argument to except must be an interval');
         }
-        var ol = this.overlaps(other);
+        const ol = this.overlaps(other);
         if (ol === true) {
-            var olb = this.overlapsBefore(other);
-            var ola = this.overlapsAfter(other);
+            const olb = this.overlapsBefore(other);
+            const ola = this.overlapsAfter(other);
             if (olb === true && ola === false) {
                 return new Interval(this.low, other.low, this.lowClosed, !other.lowClosed);
             }
@@ -2054,8 +1924,8 @@ var Interval = /** @class */ (function () {
             // ol is null
             return null;
         }
-    };
-    Interval.prototype.sameAs = function (other, precision) {
+    }
+    sameAs(other, precision) {
         // This large if and else if block handles the scenarios where there is an open ended null
         // If both lows or highs exists, it can be determined that intervals are not Same As
         if ((this.low != null &&
@@ -2124,34 +1994,34 @@ var Interval = /** @class */ (function () {
         else {
             return (this.start().sameAs(other.start(), precision) && this.end().sameAs(other.end(), precision));
         }
-    };
-    Interval.prototype.sameOrBefore = function (other, precision) {
+    }
+    sameOrBefore(other, precision) {
         if (this.end() == null || other == null || other.start() == null) {
             return null;
         }
         else {
             return cmp.lessThanOrEquals(this.end(), other.start(), precision);
         }
-    };
-    Interval.prototype.sameOrAfter = function (other, precision) {
+    }
+    sameOrAfter(other, precision) {
         if (this.start() == null || other == null || other.end() == null) {
             return null;
         }
         else {
             return cmp.greaterThanOrEquals(this.start(), other.end(), precision);
         }
-    };
-    Interval.prototype.equals = function (other) {
+    }
+    equals(other) {
         if (other != null && other.isInterval) {
-            var _a = [this.toClosed(), other.toClosed()], a = _a[0], b = _a[1];
+            const [a, b] = [this.toClosed(), other.toClosed()];
             return logic_1.ThreeValuedLogic.and(cmp.equals(a.low, b.low), cmp.equals(a.high, b.high));
         }
         else {
             return false;
         }
-    };
-    Interval.prototype.after = function (other, precision) {
-        var closed = this.toClosed();
+    }
+    after(other, precision) {
+        const closed = this.toClosed();
         // Meets spec, but not 100% correct (e.g., (null, 5] after [6, 10] --> null)
         // Simple way to fix it: and w/ not overlaps
         if (other.toClosed) {
@@ -2160,9 +2030,9 @@ var Interval = /** @class */ (function () {
         else {
             return cmp.greaterThan(closed.low, other, precision);
         }
-    };
-    Interval.prototype.before = function (other, precision) {
-        var closed = this.toClosed();
+    }
+    before(other, precision) {
+        const closed = this.toClosed();
         // Meets spec, but not 100% correct (e.g., (null, 5] after [6, 10] --> null)
         // Simple way to fix it: and w/ not overlaps
         if (other.toClosed) {
@@ -2171,11 +2041,11 @@ var Interval = /** @class */ (function () {
         else {
             return cmp.lessThan(closed.high, other, precision);
         }
-    };
-    Interval.prototype.meets = function (other, precision) {
+    }
+    meets(other, precision) {
         return logic_1.ThreeValuedLogic.or(this.meetsBefore(other, precision), this.meetsAfter(other, precision));
-    };
-    Interval.prototype.meetsAfter = function (other, precision) {
+    }
+    meetsAfter(other, precision) {
         try {
             if (precision != null && this.low != null && this.low.isDateTime) {
                 return this.toClosed().low.sameAs(other.toClosed().high != null ? other.toClosed().high.add(1, precision) : null, precision);
@@ -2187,8 +2057,8 @@ var Interval = /** @class */ (function () {
         catch (error) {
             return false;
         }
-    };
-    Interval.prototype.meetsBefore = function (other, precision) {
+    }
+    meetsBefore(other, precision) {
         try {
             if (precision != null && this.high != null && this.high.isDateTime) {
                 return this.toClosed().high.sameAs(other.toClosed().low != null ? other.toClosed().low.add(-1, precision) : null, precision);
@@ -2200,8 +2070,8 @@ var Interval = /** @class */ (function () {
         catch (error) {
             return false;
         }
-    };
-    Interval.prototype.start = function () {
+    }
+    start() {
         if (this.low == null) {
             if (this.lowClosed) {
                 return (0, math_1.minValueForInstance)(this.high);
@@ -2211,8 +2081,8 @@ var Interval = /** @class */ (function () {
             }
         }
         return this.toClosed().low;
-    };
-    Interval.prototype.end = function () {
+    }
+    end() {
         if (this.high == null) {
             if (this.highClosed) {
                 return (0, math_1.maxValueForInstance)(this.low);
@@ -2222,21 +2092,21 @@ var Interval = /** @class */ (function () {
             }
         }
         return this.toClosed().high;
-    };
-    Interval.prototype.starts = function (other, precision) {
-        var startEqual;
+    }
+    starts(other, precision) {
+        let startEqual;
         if (precision != null && this.low != null && this.low.isDateTime) {
             startEqual = this.low.sameAs(other.low, precision);
         }
         else {
             startEqual = cmp.equals(this.low, other.low);
         }
-        var endLessThanOrEqual = cmp.lessThanOrEquals(this.high, other.high, precision);
+        const endLessThanOrEqual = cmp.lessThanOrEquals(this.high, other.high, precision);
         return startEqual && endLessThanOrEqual;
-    };
-    Interval.prototype.ends = function (other, precision) {
-        var endEqual;
-        var startGreaterThanOrEqual = cmp.greaterThanOrEquals(this.low, other.low, precision);
+    }
+    ends(other, precision) {
+        let endEqual;
+        const startGreaterThanOrEqual = cmp.greaterThanOrEquals(this.low, other.low, precision);
         if (precision != null && (this.low != null ? this.low.isDateTime : undefined)) {
             endEqual = this.high.sameAs(other.high, precision);
         }
@@ -2244,13 +2114,13 @@ var Interval = /** @class */ (function () {
             endEqual = cmp.equals(this.high, other.high);
         }
         return startGreaterThanOrEqual && endEqual;
-    };
-    Interval.prototype.width = function () {
+    }
+    width() {
         if ((this.low != null && (this.low.isDateTime || this.low.isDate)) ||
             (this.high != null && (this.high.isDateTime || this.high.isDate))) {
             throw new Error('Width of Date, DateTime, and Time intervals is not supported');
         }
-        var closed = this.toClosed();
+        const closed = this.toClosed();
         if ((closed.low != null && closed.low.isUncertainty) ||
             (closed.high != null && closed.high.isUncertainty)) {
             return null;
@@ -2259,25 +2129,25 @@ var Interval = /** @class */ (function () {
             if (closed.low.unit !== closed.high.unit) {
                 throw new Error('Cannot calculate width of Quantity Interval with different units');
             }
-            var lowValue = closed.low.value;
-            var highValue = closed.high.value;
-            var diff = Math.abs(highValue - lowValue);
+            const lowValue = closed.low.value;
+            const highValue = closed.high.value;
+            let diff = Math.abs(highValue - lowValue);
             diff = Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
             return new quantity_1.Quantity(diff, closed.low.unit);
         }
         else {
             // TODO: Fix precision to 8 decimals in other places that return numbers
-            var diff = Math.abs(closed.high - closed.low);
+            const diff = Math.abs(closed.high - closed.low);
             return Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
         }
-    };
-    Interval.prototype.size = function () {
-        var pointSize = this.getPointSize();
+    }
+    size() {
+        const pointSize = this.getPointSize();
         if ((this.low != null && (this.low.isDateTime || this.low.isDate)) ||
             (this.high != null && (this.high.isDateTime || this.high.isDate))) {
             throw new Error('Size of Date, DateTime, and Time intervals is not supported');
         }
-        var closed = this.toClosed();
+        const closed = this.toClosed();
         if ((closed.low != null && closed.low.isUncertainty) ||
             (closed.high != null && closed.high.isUncertainty)) {
             return null;
@@ -2286,19 +2156,19 @@ var Interval = /** @class */ (function () {
             if (closed.low.unit !== closed.high.unit) {
                 throw new Error('Cannot calculate size of Quantity Interval with different units');
             }
-            var lowValue = closed.low.value;
-            var highValue = closed.high.value;
-            var diff = Math.abs(highValue - lowValue) + pointSize.value;
+            const lowValue = closed.low.value;
+            const highValue = closed.high.value;
+            const diff = Math.abs(highValue - lowValue) + pointSize.value;
             Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
             return new quantity_1.Quantity(diff, closed.low.unit);
         }
         else {
-            var diff = Math.abs(closed.high - closed.low) + pointSize.value;
+            const diff = Math.abs(closed.high - closed.low) + pointSize.value;
             return Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
         }
-    };
-    Interval.prototype.getPointSize = function () {
-        var pointSize;
+    }
+    getPointSize() {
+        let pointSize;
         if (this.low != null) {
             if (this.low.isDateTime || this.low.isDate || this.low.isTime) {
                 pointSize = new quantity_1.Quantity(1, this.low.getPrecision());
@@ -2328,14 +2198,14 @@ var Interval = /** @class */ (function () {
             pointSize = new quantity_1.Quantity(pointSize, '1');
         }
         return pointSize;
-    };
-    Interval.prototype.toClosed = function () {
+    }
+    toClosed() {
         // Calculate the closed flags. Despite the name of this function, if a boundary is null open,
         // we cannot close the boundary because that changes its meaning from "unknown" to "max/min value"
-        var lowClosed = this.lowClosed || this.low != null;
-        var highClosed = this.highClosed || this.high != null;
+        const lowClosed = this.lowClosed || this.low != null;
+        const highClosed = this.highClosed || this.high != null;
         if (this.pointType != null) {
-            var low = void 0;
+            let low;
             if (this.lowClosed && this.low == null) {
                 low = (0, math_1.minValueForType)(this.pointType);
             }
@@ -2345,7 +2215,7 @@ var Interval = /** @class */ (function () {
             else {
                 low = this.low;
             }
-            var high = void 0;
+            let high;
             if (this.highClosed && this.high == null) {
                 high = (0, math_1.maxValueForType)(this.pointType);
             }
@@ -2366,20 +2236,19 @@ var Interval = /** @class */ (function () {
         else {
             return new Interval(this.low, this.high, lowClosed, highClosed);
         }
-    };
-    Interval.prototype.toString = function () {
-        var start = this.lowClosed ? '[' : '(';
-        var end = this.highClosed ? ']' : ')';
+    }
+    toString() {
+        const start = this.lowClosed ? '[' : '(';
+        const end = this.highClosed ? ']' : ')';
         return start + this.low.toString() + ', ' + this.high.toString() + end;
-    };
-    return Interval;
-}());
+    }
+}
 exports.Interval = Interval;
 function areDateTimes(x, y) {
-    return [x, y].every(function (z) { return z != null && z.isDateTime; });
+    return [x, y].every(z => z != null && z.isDateTime);
 }
 function areNumeric(x, y) {
-    return [x, y].every(function (z) {
+    return [x, y].every(z => {
         return typeof z === 'number' || (z != null && z.isUncertainty && typeof z.low === 'number');
     });
 }
@@ -2390,8 +2259,8 @@ function lowestNumericUncertainty(x, y) {
     if (y == null || !y.isUncertainty) {
         y = new uncertainty_1.Uncertainty(y);
     }
-    var low = x.low < y.low ? x.low : y.low;
-    var high = x.high < y.high ? x.high : y.high;
+    const low = x.low < y.low ? x.low : y.low;
+    const high = x.high < y.high ? x.high : y.high;
     if (low !== high) {
         return new uncertainty_1.Uncertainty(low, high);
     }
@@ -2406,8 +2275,8 @@ function highestNumericUncertainty(x, y) {
     if (y == null || !y.isUncertainty) {
         y = new uncertainty_1.Uncertainty(y);
     }
-    var low = x.low > y.low ? x.low : y.low;
-    var high = x.high > y.high ? x.high : y.high;
+    const low = x.low > y.low ? x.low : y.low;
+    const high = x.high > y.high ? x.high : y.high;
     if (low !== high) {
         return new uncertainty_1.Uncertainty(low, high);
     }
@@ -2420,14 +2289,8 @@ function highestNumericUncertainty(x, y) {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ThreeValuedLogic = void 0;
-var ThreeValuedLogic = /** @class */ (function () {
-    function ThreeValuedLogic() {
-    }
-    ThreeValuedLogic.and = function () {
-        var val = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            val[_i] = arguments[_i];
-        }
+class ThreeValuedLogic {
+    static and(...val) {
         if (val.includes(false)) {
             return false;
         }
@@ -2437,12 +2300,8 @@ var ThreeValuedLogic = /** @class */ (function () {
         else {
             return true;
         }
-    };
-    ThreeValuedLogic.or = function () {
-        var val = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            val[_i] = arguments[_i];
-        }
+    }
+    static or(...val) {
         if (val.includes(true)) {
             return true;
         }
@@ -2452,41 +2311,36 @@ var ThreeValuedLogic = /** @class */ (function () {
         else {
             return false;
         }
-    };
-    ThreeValuedLogic.xor = function () {
-        var val = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            val[_i] = arguments[_i];
-        }
+    }
+    static xor(...val) {
         if (val.includes(null)) {
             return null;
         }
         else {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            return val.reduce(function (a, b) { return (!a ^ !b) === 1; });
+            return val.reduce((a, b) => (!a ^ !b) === 1);
         }
-    };
-    ThreeValuedLogic.not = function (val) {
+    }
+    static not(val) {
         if (val != null) {
             return !val;
         }
         else {
             return null;
         }
-    };
-    return ThreeValuedLogic;
-}());
+    }
+}
 exports.ThreeValuedLogic = ThreeValuedLogic;
 
 },{}],11:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.doMultiplication = exports.doDivision = exports.doSubtraction = exports.doAddition = exports.parseQuantity = exports.Quantity = void 0;
-var math_1 = require("../util/math");
-var units_1 = require("../util/units");
-var Quantity = /** @class */ (function () {
-    function Quantity(value, unit) {
+const math_1 = require("../util/math");
+const units_1 = require("../util/units");
+class Quantity {
+    constructor(value, unit) {
         this.value = value;
         this.unit = unit;
         if (this.value == null || isNaN(this.value)) {
@@ -2497,28 +2351,24 @@ var Quantity = /** @class */ (function () {
         }
         // Attempt to parse the unit with UCUM. If it fails, throw a friendly error.
         if (this.unit != null) {
-            var validation = (0, units_1.checkUnit)(this.unit);
+            const validation = (0, units_1.checkUnit)(this.unit);
             if (!validation.valid) {
                 throw new Error(validation.message);
             }
         }
     }
-    Object.defineProperty(Quantity.prototype, "isQuantity", {
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Quantity.prototype.clone = function () {
+    get isQuantity() {
+        return true;
+    }
+    clone() {
         return new Quantity(this.value, this.unit);
-    };
-    Quantity.prototype.toString = function () {
-        return "".concat(this.value, " '").concat(this.unit, "'");
-    };
-    Quantity.prototype.sameOrBefore = function (other) {
+    }
+    toString() {
+        return `${this.value} '${this.unit}'`;
+    }
+    sameOrBefore(other) {
         if (other != null && other.isQuantity) {
-            var otherVal = (0, units_1.convertUnit)(other.value, other.unit, this.unit);
+            const otherVal = (0, units_1.convertUnit)(other.value, other.unit, this.unit);
             if (otherVal == null) {
                 return null;
             }
@@ -2526,10 +2376,10 @@ var Quantity = /** @class */ (function () {
                 return this.value <= otherVal;
             }
         }
-    };
-    Quantity.prototype.sameOrAfter = function (other) {
+    }
+    sameOrAfter(other) {
         if (other != null && other.isQuantity) {
-            var otherVal = (0, units_1.convertUnit)(other.value, other.unit, this.unit);
+            const otherVal = (0, units_1.convertUnit)(other.value, other.unit, this.unit);
             if (otherVal == null) {
                 return null;
             }
@@ -2537,10 +2387,10 @@ var Quantity = /** @class */ (function () {
                 return this.value >= otherVal;
             }
         }
-    };
-    Quantity.prototype.after = function (other) {
+    }
+    after(other) {
         if (other != null && other.isQuantity) {
-            var otherVal = (0, units_1.convertUnit)(other.value, other.unit, this.unit);
+            const otherVal = (0, units_1.convertUnit)(other.value, other.unit, this.unit);
             if (otherVal == null) {
                 return null;
             }
@@ -2548,10 +2398,10 @@ var Quantity = /** @class */ (function () {
                 return this.value > otherVal;
             }
         }
-    };
-    Quantity.prototype.before = function (other) {
+    }
+    before(other) {
         if (other != null && other.isQuantity) {
-            var otherVal = (0, units_1.convertUnit)(other.value, other.unit, this.unit);
+            const otherVal = (0, units_1.convertUnit)(other.value, other.unit, this.unit);
             if (otherVal == null) {
                 return null;
             }
@@ -2559,8 +2409,8 @@ var Quantity = /** @class */ (function () {
                 return this.value < otherVal;
             }
         }
-    };
-    Quantity.prototype.equals = function (other) {
+    }
+    equals(other) {
         if (other != null && other.isQuantity) {
             if ((!this.unit && other.unit) || (this.unit && !other.unit)) {
                 return false;
@@ -2569,7 +2419,7 @@ var Quantity = /** @class */ (function () {
                 return this.value === other.value;
             }
             else {
-                var otherVal = (0, units_1.convertUnit)(other.value, other.unit, this.unit);
+                const otherVal = (0, units_1.convertUnit)(other.value, other.unit, this.unit);
                 if (otherVal == null) {
                     return null;
                 }
@@ -2578,13 +2428,13 @@ var Quantity = /** @class */ (function () {
                 }
             }
         }
-    };
-    Quantity.prototype.convertUnit = function (toUnit) {
-        var value = (0, units_1.convertUnit)(this.value, this.unit, toUnit);
+    }
+    convertUnit(toUnit) {
+        const value = (0, units_1.convertUnit)(this.value, this.unit, toUnit);
         // Need to pass through constructor again to catch invalid units
         return new Quantity(value, toUnit);
-    };
-    Quantity.prototype.dividedBy = function (other) {
+    }
+    dividedBy(other) {
         if (other == null || other === 0 || other.value === 0) {
             return null;
         }
@@ -2592,16 +2442,16 @@ var Quantity = /** @class */ (function () {
             // convert it to a quantity w/ unit 1
             other = new Quantity(other, '1');
         }
-        var _a = (0, units_1.normalizeUnitsWhenPossible)(this.value, this.unit, other.value, other.unit), val1 = _a[0], unit1 = _a[1], val2 = _a[2], unit2 = _a[3];
-        var resultValue = val1 / val2;
-        var resultUnit = (0, units_1.getQuotientOfUnits)(unit1, unit2);
+        const [val1, unit1, val2, unit2] = (0, units_1.normalizeUnitsWhenPossible)(this.value, this.unit, other.value, other.unit);
+        const resultValue = val1 / val2;
+        const resultUnit = (0, units_1.getQuotientOfUnits)(unit1, unit2);
         // Check for invalid unit or value
         if (resultUnit == null || (0, math_1.overflowsOrUnderflows)(resultValue)) {
             return null;
         }
         return new Quantity((0, math_1.decimalAdjust)('round', resultValue, -8), resultUnit);
-    };
-    Quantity.prototype.multiplyBy = function (other) {
+    }
+    multiplyBy(other) {
         if (other == null) {
             return null;
         }
@@ -2609,26 +2459,25 @@ var Quantity = /** @class */ (function () {
             // convert it to a quantity w/ unit 1
             other = new Quantity(other, '1');
         }
-        var _a = (0, units_1.normalizeUnitsWhenPossible)(this.value, this.unit, other.value, other.unit), val1 = _a[0], unit1 = _a[1], val2 = _a[2], unit2 = _a[3];
-        var resultValue = val1 * val2;
-        var resultUnit = (0, units_1.getProductOfUnits)(unit1, unit2);
+        const [val1, unit1, val2, unit2] = (0, units_1.normalizeUnitsWhenPossible)(this.value, this.unit, other.value, other.unit);
+        const resultValue = val1 * val2;
+        const resultUnit = (0, units_1.getProductOfUnits)(unit1, unit2);
         // Check for invalid unit or value
         if (resultUnit == null || (0, math_1.overflowsOrUnderflows)(resultValue)) {
             return null;
         }
         return new Quantity((0, math_1.decimalAdjust)('round', resultValue, -8), resultUnit);
-    };
-    return Quantity;
-}());
+    }
+}
 exports.Quantity = Quantity;
 function parseQuantity(str) {
-    var components = /([+|-]?\d+\.?\d*)\s*('(.+)')?/.exec(str);
+    const components = /([+|-]?\d+\.?\d*)\s*('(.+)')?/.exec(str);
     if (components != null && components[1] != null) {
-        var value = parseFloat(components[1]);
+        const value = parseFloat(components[1]);
         if (!(0, math_1.isValidDecimal)(value)) {
             return null;
         }
-        var unit = void 0;
+        let unit;
         if (components[3] != null) {
             unit = components[3].trim();
         }
@@ -2644,12 +2493,12 @@ function parseQuantity(str) {
 exports.parseQuantity = parseQuantity;
 function doScaledAddition(a, b, scaleForB) {
     if (a != null && a.isQuantity && b != null && b.isQuantity) {
-        var _a = (0, units_1.normalizeUnitsWhenPossible)(a.value, a.unit, b.value * scaleForB, b.unit), val1 = _a[0], unit1 = _a[1], val2 = _a[2], unit2 = _a[3];
+        const [val1, unit1, val2, unit2] = (0, units_1.normalizeUnitsWhenPossible)(a.value, a.unit, b.value * scaleForB, b.unit);
         if (unit1 !== unit2) {
             // not compatible units, so we can't do addition
             return null;
         }
-        var sum = val1 + val2;
+        const sum = val1 + val2;
         if ((0, math_1.overflowsOrUnderflows)(sum)) {
             return null;
         }
@@ -2657,7 +2506,7 @@ function doScaledAddition(a, b, scaleForB) {
     }
     else if (a.copy && a.add) {
         // Date / DateTime require a CQL time unit
-        var cqlUnitB = (0, units_1.convertToCQLDateUnit)(b.unit) || b.unit;
+        const cqlUnitB = (0, units_1.convertToCQLDateUnit)(b.unit) || b.unit;
         return a.copy().add(b.value * scaleForB, cqlUnitB);
     }
     else {
@@ -2692,8 +2541,8 @@ exports.doMultiplication = doMultiplication;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Ratio = void 0;
-var Ratio = /** @class */ (function () {
-    function Ratio(numerator, denominator) {
+class Ratio {
+    constructor(numerator, denominator) {
         this.numerator = numerator;
         this.denominator = denominator;
         if (numerator == null) {
@@ -2703,49 +2552,42 @@ var Ratio = /** @class */ (function () {
             throw new Error('Cannot create a ratio with an undefined denominator');
         }
     }
-    Object.defineProperty(Ratio.prototype, "isRatio", {
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Ratio.prototype.clone = function () {
+    get isRatio() {
+        return true;
+    }
+    clone() {
         return new Ratio(this.numerator.clone(), this.denominator.clone());
-    };
-    Ratio.prototype.toString = function () {
-        return "".concat(this.numerator.toString(), " : ").concat(this.denominator.toString());
-    };
-    Ratio.prototype.equals = function (other) {
+    }
+    toString() {
+        return `${this.numerator.toString()} : ${this.denominator.toString()}`;
+    }
+    equals(other) {
         if (other != null && other.isRatio) {
-            var divided_this = this.numerator.dividedBy(this.denominator);
-            var divided_other = other.numerator.dividedBy(other.denominator);
+            const divided_this = this.numerator.dividedBy(this.denominator);
+            const divided_other = other.numerator.dividedBy(other.denominator);
             return divided_this === null || divided_this === void 0 ? void 0 : divided_this.equals(divided_other);
         }
         else {
             return false;
         }
-    };
-    Ratio.prototype.equivalent = function (other) {
-        var equal = this.equals(other);
+    }
+    equivalent(other) {
+        const equal = this.equals(other);
         return equal != null ? equal : false;
-    };
-    return Ratio;
-}());
+    }
+}
 exports.Ratio = Ratio;
 
 },{}],13:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Uncertainty = void 0;
-var logic_1 = require("./logic");
-var Uncertainty = /** @class */ (function () {
-    function Uncertainty(low, high) {
-        var _a;
-        if (low === void 0) { low = null; }
+const logic_1 = require("./logic");
+class Uncertainty {
+    constructor(low = null, high) {
         this.low = low;
         this.high = high;
-        var gt = function (a, b) {
+        const gt = (a, b) => {
             if (typeof a !== typeof b) {
                 // TODO: This should probably throw rather than return false.
                 // Uncertainties with different types probably shouldn't be supported.
@@ -2758,9 +2600,7 @@ var Uncertainty = /** @class */ (function () {
                 return a > b;
             }
         };
-        var isNonEnumerable = function (val) {
-            return val != null && (val.isCode || val.isConcept || val.isValueSet);
-        };
+        const isNonEnumerable = (val) => val != null && (val.isCode || val.isConcept || val.isValueSet);
         if (typeof this.high === 'undefined') {
             this.high = this.low;
         }
@@ -2768,27 +2608,23 @@ var Uncertainty = /** @class */ (function () {
             this.low = this.high = null;
         }
         if (this.low != null && this.high != null && gt(this.low, this.high)) {
-            _a = [this.high, this.low], this.low = _a[0], this.high = _a[1];
+            [this.low, this.high] = [this.high, this.low];
         }
     }
-    Uncertainty.from = function (obj) {
+    static from(obj) {
         if (obj != null && obj.isUncertainty) {
             return obj;
         }
         else {
             return new Uncertainty(obj);
         }
-    };
-    Object.defineProperty(Uncertainty.prototype, "isUncertainty", {
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Uncertainty.prototype.copy = function () {
-        var newLow = this.low;
-        var newHigh = this.high;
+    }
+    get isUncertainty() {
+        return true;
+    }
+    copy() {
+        let newLow = this.low;
+        let newHigh = this.high;
         if (typeof this.low.copy === 'function') {
             newLow = this.low.copy();
         }
@@ -2796,11 +2632,11 @@ var Uncertainty = /** @class */ (function () {
             newHigh = this.high.copy();
         }
         return new Uncertainty(newLow, newHigh);
-    };
-    Uncertainty.prototype.isPoint = function () {
+    }
+    isPoint() {
         // Note: Can't use normal equality, as that fails for Javascript dates
         // TODO: Fix after we don't need to support Javascript date uncertainties anymore
-        var lte = function (a, b) {
+        const lte = (a, b) => {
             if (typeof a !== typeof b) {
                 return false;
             }
@@ -2811,7 +2647,7 @@ var Uncertainty = /** @class */ (function () {
                 return a <= b;
             }
         };
-        var gte = function (a, b) {
+        const gte = (a, b) => {
             if (typeof a !== typeof b) {
                 return false;
             }
@@ -2823,13 +2659,13 @@ var Uncertainty = /** @class */ (function () {
             }
         };
         return (this.low != null && this.high != null && lte(this.low, this.high) && gte(this.low, this.high));
-    };
-    Uncertainty.prototype.equals = function (other) {
+    }
+    equals(other) {
         other = Uncertainty.from(other);
         return logic_1.ThreeValuedLogic.not(logic_1.ThreeValuedLogic.or(this.lessThan(other), this.greaterThan(other)));
-    };
-    Uncertainty.prototype.lessThan = function (other) {
-        var lt = function (a, b) {
+    }
+    lessThan(other) {
+        const lt = (a, b) => {
             if (typeof a !== typeof b) {
                 return false;
             }
@@ -2841,84 +2677,62 @@ var Uncertainty = /** @class */ (function () {
             }
         };
         other = Uncertainty.from(other);
-        var bestCase = this.low == null || other.high == null || lt(this.low, other.high);
-        var worstCase = this.high != null && other.low != null && lt(this.high, other.low);
+        const bestCase = this.low == null || other.high == null || lt(this.low, other.high);
+        const worstCase = this.high != null && other.low != null && lt(this.high, other.low);
         if (bestCase === worstCase) {
             return bestCase;
         }
         else {
             return null;
         }
-    };
-    Uncertainty.prototype.greaterThan = function (other) {
+    }
+    greaterThan(other) {
         return Uncertainty.from(other).lessThan(this);
-    };
-    Uncertainty.prototype.lessThanOrEquals = function (other) {
+    }
+    lessThanOrEquals(other) {
         return logic_1.ThreeValuedLogic.not(this.greaterThan(Uncertainty.from(other)));
-    };
-    Uncertainty.prototype.greaterThanOrEquals = function (other) {
+    }
+    greaterThanOrEquals(other) {
         return logic_1.ThreeValuedLogic.not(this.lessThan(Uncertainty.from(other)));
-    };
-    return Uncertainty;
-}());
+    }
+}
 exports.Uncertainty = Uncertainty;
 
 },{"./logic":10}],14:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AnyTrue = exports.AllTrue = exports.PopulationVariance = exports.Variance = exports.PopulationStdDev = exports.GeometricMean = exports.Product = exports.StdDev = exports.Mode = exports.Median = exports.Avg = exports.Max = exports.Min = exports.Sum = exports.Count = void 0;
-var expression_1 = require("./expression");
-var util_1 = require("../util/util");
-var datatypes_1 = require("../datatypes/datatypes");
-var exception_1 = require("../datatypes/exception");
-var comparison_1 = require("../util/comparison");
-var builder_1 = require("./builder");
-var AggregateExpression = /** @class */ (function (_super) {
-    __extends(AggregateExpression, _super);
-    function AggregateExpression(json) {
-        var _this = _super.call(this, json) || this;
-        _this.source = (0, builder_1.build)(json.source);
-        return _this;
+const expression_1 = require("./expression");
+const util_1 = require("../util/util");
+const datatypes_1 = require("../datatypes/datatypes");
+const exception_1 = require("../datatypes/exception");
+const comparison_1 = require("../util/comparison");
+const builder_1 = require("./builder");
+class AggregateExpression extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.source = (0, builder_1.build)(json.source);
     }
-    return AggregateExpression;
-}(expression_1.Expression));
-var Count = /** @class */ (function (_super) {
-    __extends(Count, _super);
-    function Count(json) {
-        return _super.call(this, json) || this;
+}
+class Count extends AggregateExpression {
+    constructor(json) {
+        super(json);
     }
-    Count.prototype.exec = function (ctx) {
-        var items = this.source.execute(ctx);
+    exec(ctx) {
+        const items = this.source.execute(ctx);
         if ((0, util_1.typeIsArray)(items)) {
             return (0, util_1.removeNulls)(items).length;
         }
         return 0;
-    };
-    return Count;
-}(AggregateExpression));
-exports.Count = Count;
-var Sum = /** @class */ (function (_super) {
-    __extends(Sum, _super);
-    function Sum(json) {
-        return _super.call(this, json) || this;
     }
-    Sum.prototype.exec = function (ctx) {
-        var items = this.source.execute(ctx);
+}
+exports.Count = Count;
+class Sum extends AggregateExpression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        let items = this.source.execute(ctx);
         if (!(0, util_1.typeIsArray)(items)) {
             return null;
         }
@@ -2932,28 +2746,26 @@ var Sum = /** @class */ (function (_super) {
             return null;
         }
         if (hasOnlyQuantities(items)) {
-            var values = getValuesFromQuantities(items);
-            var sum = values.reduce(function (x, y) { return x + y; });
+            const values = getValuesFromQuantities(items);
+            const sum = values.reduce((x, y) => x + y);
             return new datatypes_1.Quantity(sum, items[0].unit);
         }
         else {
-            return items.reduce(function (x, y) { return x + y; });
+            return items.reduce((x, y) => x + y);
         }
-    };
-    return Sum;
-}(AggregateExpression));
-exports.Sum = Sum;
-var Min = /** @class */ (function (_super) {
-    __extends(Min, _super);
-    function Min(json) {
-        return _super.call(this, json) || this;
     }
-    Min.prototype.exec = function (ctx) {
-        var list = this.source.execute(ctx);
+}
+exports.Sum = Sum;
+class Min extends AggregateExpression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const list = this.source.execute(ctx);
         if (list == null) {
             return null;
         }
-        var listWithoutNulls = (0, util_1.removeNulls)(list);
+        const listWithoutNulls = (0, util_1.removeNulls)(list);
         // Check for incompatible units and return null. We don't want to convert
         // the units for Min/Max, so we throw away the converted array if it succeeds
         try {
@@ -2966,29 +2778,26 @@ var Min = /** @class */ (function (_super) {
             return null;
         }
         // We assume the list is an array of all the same type.
-        var minimum = listWithoutNulls[0];
-        for (var _i = 0, listWithoutNulls_1 = listWithoutNulls; _i < listWithoutNulls_1.length; _i++) {
-            var element = listWithoutNulls_1[_i];
+        let minimum = listWithoutNulls[0];
+        for (const element of listWithoutNulls) {
             if ((0, comparison_1.lessThan)(element, minimum)) {
                 minimum = element;
             }
         }
         return minimum;
-    };
-    return Min;
-}(AggregateExpression));
-exports.Min = Min;
-var Max = /** @class */ (function (_super) {
-    __extends(Max, _super);
-    function Max(json) {
-        return _super.call(this, json) || this;
     }
-    Max.prototype.exec = function (ctx) {
-        var items = this.source.execute(ctx);
+}
+exports.Min = Min;
+class Max extends AggregateExpression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const items = this.source.execute(ctx);
         if (items == null) {
             return null;
         }
-        var listWithoutNulls = (0, util_1.removeNulls)(items);
+        const listWithoutNulls = (0, util_1.removeNulls)(items);
         // Check for incompatible units and return null. We don't want to convert
         // the units for Min/Max, so we throw away the converted array if it succeeds
         try {
@@ -3001,25 +2810,22 @@ var Max = /** @class */ (function (_super) {
             return null;
         }
         // We assume the list is an array of all the same type.
-        var maximum = listWithoutNulls[0];
-        for (var _i = 0, listWithoutNulls_2 = listWithoutNulls; _i < listWithoutNulls_2.length; _i++) {
-            var element = listWithoutNulls_2[_i];
+        let maximum = listWithoutNulls[0];
+        for (const element of listWithoutNulls) {
             if ((0, comparison_1.greaterThan)(element, maximum)) {
                 maximum = element;
             }
         }
         return maximum;
-    };
-    return Max;
-}(AggregateExpression));
-exports.Max = Max;
-var Avg = /** @class */ (function (_super) {
-    __extends(Avg, _super);
-    function Avg(json) {
-        return _super.call(this, json) || this;
     }
-    Avg.prototype.exec = function (ctx) {
-        var items = this.source.execute(ctx);
+}
+exports.Max = Max;
+class Avg extends AggregateExpression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        let items = this.source.execute(ctx);
         if (!(0, util_1.typeIsArray)(items)) {
             return null;
         }
@@ -3033,25 +2839,23 @@ var Avg = /** @class */ (function (_super) {
             return null;
         }
         if (hasOnlyQuantities(items)) {
-            var values = getValuesFromQuantities(items);
-            var sum = values.reduce(function (x, y) { return x + y; });
+            const values = getValuesFromQuantities(items);
+            const sum = values.reduce((x, y) => x + y);
             return new datatypes_1.Quantity(sum / values.length, items[0].unit);
         }
         else {
-            var sum = items.reduce(function (x, y) { return x + y; });
+            const sum = items.reduce((x, y) => x + y);
             return sum / items.length;
         }
-    };
-    return Avg;
-}(AggregateExpression));
-exports.Avg = Avg;
-var Median = /** @class */ (function (_super) {
-    __extends(Median, _super);
-    function Median(json) {
-        return _super.call(this, json) || this;
     }
-    Median.prototype.exec = function (ctx) {
-        var items = this.source.execute(ctx);
+}
+exports.Avg = Avg;
+class Median extends AggregateExpression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        let items = this.source.execute(ctx);
         if (!(0, util_1.typeIsArray)(items)) {
             return null;
         }
@@ -3067,27 +2871,25 @@ var Median = /** @class */ (function (_super) {
         if (!hasOnlyQuantities(items)) {
             return medianOfNumbers(items);
         }
-        var values = getValuesFromQuantities(items);
-        var median = medianOfNumbers(values);
+        const values = getValuesFromQuantities(items);
+        const median = medianOfNumbers(values);
         return new datatypes_1.Quantity(median, items[0].unit);
-    };
-    return Median;
-}(AggregateExpression));
-exports.Median = Median;
-var Mode = /** @class */ (function (_super) {
-    __extends(Mode, _super);
-    function Mode(json) {
-        return _super.call(this, json) || this;
     }
-    Mode.prototype.exec = function (ctx) {
-        var items = this.source.execute(ctx);
+}
+exports.Median = Median;
+class Mode extends AggregateExpression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const items = this.source.execute(ctx);
         if (!(0, util_1.typeIsArray)(items)) {
             return null;
         }
         if (items.length === 0) {
             return null;
         }
-        var filtered;
+        let filtered;
         try {
             filtered = processQuantities(items);
         }
@@ -3095,15 +2897,15 @@ var Mode = /** @class */ (function (_super) {
             return null;
         }
         if (hasOnlyQuantities(filtered)) {
-            var values = getValuesFromQuantities(filtered);
-            var mode = this.mode(values);
+            const values = getValuesFromQuantities(filtered);
+            let mode = this.mode(values);
             if (mode.length === 1) {
                 mode = mode[0];
             }
             return new datatypes_1.Quantity(mode, items[0].unit);
         }
         else {
-            var mode = this.mode(filtered);
+            const mode = this.mode(filtered);
             if (mode.length === 1) {
                 return mode[0];
             }
@@ -3111,14 +2913,13 @@ var Mode = /** @class */ (function (_super) {
                 return mode;
             }
         }
-    };
-    Mode.prototype.mode = function (arr) {
-        var max = 0;
-        var counts = {};
-        var results = [];
-        for (var _i = 0, arr_1 = arr; _i < arr_1.length; _i++) {
-            var elem = arr_1[_i];
-            var cnt = (counts[elem] = (counts[elem] != null ? counts[elem] : 0) + 1);
+    }
+    mode(arr) {
+        let max = 0;
+        const counts = {};
+        let results = [];
+        for (const elem of arr) {
+            const cnt = (counts[elem] = (counts[elem] != null ? counts[elem] : 0) + 1);
             if (cnt === max && !results.includes(elem)) {
                 results.push(elem);
             }
@@ -3128,19 +2929,16 @@ var Mode = /** @class */ (function (_super) {
             }
         }
         return results;
-    };
-    return Mode;
-}(AggregateExpression));
-exports.Mode = Mode;
-var StdDev = /** @class */ (function (_super) {
-    __extends(StdDev, _super);
-    function StdDev(json) {
-        var _this = _super.call(this, json) || this;
-        _this.type = 'standard_deviation';
-        return _this;
     }
-    StdDev.prototype.exec = function (ctx) {
-        var items = this.source.execute(ctx);
+}
+exports.Mode = Mode;
+class StdDev extends AggregateExpression {
+    constructor(json) {
+        super(json);
+        this.type = 'standard_deviation';
+    }
+    exec(ctx) {
+        let items = this.source.execute(ctx);
         if (!(0, util_1.typeIsArray)(items)) {
             return null;
         }
@@ -3154,49 +2952,46 @@ var StdDev = /** @class */ (function (_super) {
             return null;
         }
         if (hasOnlyQuantities(items)) {
-            var values = getValuesFromQuantities(items);
-            var stdDev = this.standardDeviation(values);
+            const values = getValuesFromQuantities(items);
+            const stdDev = this.standardDeviation(values);
             return new datatypes_1.Quantity(stdDev, items[0].unit);
         }
         else {
             return this.standardDeviation(items);
         }
-    };
-    StdDev.prototype.standardDeviation = function (list) {
-        var val = this.stats(list);
+    }
+    standardDeviation(list) {
+        const val = this.stats(list);
         if (val) {
             return val[this.type];
         }
-    };
-    StdDev.prototype.stats = function (list) {
-        var sum = list.reduce(function (x, y) { return x + y; });
-        var mean = sum / list.length;
-        var sumOfSquares = 0;
-        for (var _i = 0, list_1 = list; _i < list_1.length; _i++) {
-            var sq = list_1[_i];
+    }
+    stats(list) {
+        const sum = list.reduce((x, y) => x + y);
+        const mean = sum / list.length;
+        let sumOfSquares = 0;
+        for (const sq of list) {
             sumOfSquares += Math.pow(sq - mean, 2);
         }
-        var std_var = (1 / (list.length - 1)) * sumOfSquares;
-        var pop_var = (1 / list.length) * sumOfSquares;
-        var std_dev = Math.sqrt(std_var);
-        var pop_dev = Math.sqrt(pop_var);
+        const std_var = (1 / (list.length - 1)) * sumOfSquares;
+        const pop_var = (1 / list.length) * sumOfSquares;
+        const std_dev = Math.sqrt(std_var);
+        const pop_dev = Math.sqrt(pop_var);
         return {
             standard_variance: std_var,
             population_variance: pop_var,
             standard_deviation: std_dev,
             population_deviation: pop_dev
         };
-    };
-    return StdDev;
-}(AggregateExpression));
-exports.StdDev = StdDev;
-var Product = /** @class */ (function (_super) {
-    __extends(Product, _super);
-    function Product(json) {
-        return _super.call(this, json) || this;
     }
-    Product.prototype.exec = function (ctx) {
-        var items = this.source.execute(ctx);
+}
+exports.StdDev = StdDev;
+class Product extends AggregateExpression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        let items = this.source.execute(ctx);
         if (!(0, util_1.typeIsArray)(items)) {
             return null;
         }
@@ -3210,25 +3005,23 @@ var Product = /** @class */ (function (_super) {
             return null;
         }
         if (hasOnlyQuantities(items)) {
-            var values = getValuesFromQuantities(items);
-            var product = values.reduce(function (x, y) { return x * y; });
+            const values = getValuesFromQuantities(items);
+            const product = values.reduce((x, y) => x * y);
             // Units are not multiplied for the geometric product
             return new datatypes_1.Quantity(product, items[0].unit);
         }
         else {
-            return items.reduce(function (x, y) { return x * y; });
+            return items.reduce((x, y) => x * y);
         }
-    };
-    return Product;
-}(AggregateExpression));
-exports.Product = Product;
-var GeometricMean = /** @class */ (function (_super) {
-    __extends(GeometricMean, _super);
-    function GeometricMean(json) {
-        return _super.call(this, json) || this;
     }
-    GeometricMean.prototype.exec = function (ctx) {
-        var items = this.source.execute(ctx);
+}
+exports.Product = Product;
+class GeometricMean extends AggregateExpression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        let items = this.source.execute(ctx);
         if (!(0, util_1.typeIsArray)(items)) {
             return null;
         }
@@ -3242,75 +3035,61 @@ var GeometricMean = /** @class */ (function (_super) {
             return null;
         }
         if (hasOnlyQuantities(items)) {
-            var values = getValuesFromQuantities(items);
-            var product = values.reduce(function (x, y) { return x * y; });
-            var geoMean = Math.pow(product, 1.0 / items.length);
+            const values = getValuesFromQuantities(items);
+            const product = values.reduce((x, y) => x * y);
+            const geoMean = Math.pow(product, 1.0 / items.length);
             return new datatypes_1.Quantity(geoMean, items[0].unit);
         }
         else {
-            var product = items.reduce(function (x, y) { return x * y; });
+            const product = items.reduce((x, y) => x * y);
             return Math.pow(product, 1.0 / items.length);
         }
-    };
-    return GeometricMean;
-}(AggregateExpression));
+    }
+}
 exports.GeometricMean = GeometricMean;
-var PopulationStdDev = /** @class */ (function (_super) {
-    __extends(PopulationStdDev, _super);
-    function PopulationStdDev(json) {
-        var _this = _super.call(this, json) || this;
-        _this.type = 'population_deviation';
-        return _this;
+class PopulationStdDev extends StdDev {
+    constructor(json) {
+        super(json);
+        this.type = 'population_deviation';
     }
-    return PopulationStdDev;
-}(StdDev));
+}
 exports.PopulationStdDev = PopulationStdDev;
-var Variance = /** @class */ (function (_super) {
-    __extends(Variance, _super);
-    function Variance(json) {
-        var _this = _super.call(this, json) || this;
-        _this.type = 'standard_variance';
-        return _this;
+class Variance extends StdDev {
+    constructor(json) {
+        super(json);
+        this.type = 'standard_variance';
     }
-    return Variance;
-}(StdDev));
+}
 exports.Variance = Variance;
-var PopulationVariance = /** @class */ (function (_super) {
-    __extends(PopulationVariance, _super);
-    function PopulationVariance(json) {
-        var _this = _super.call(this, json) || this;
-        _this.type = 'population_variance';
-        return _this;
+class PopulationVariance extends StdDev {
+    constructor(json) {
+        super(json);
+        this.type = 'population_variance';
     }
-    return PopulationVariance;
-}(StdDev));
+}
 exports.PopulationVariance = PopulationVariance;
-var AllTrue = /** @class */ (function (_super) {
-    __extends(AllTrue, _super);
-    function AllTrue(json) {
-        return _super.call(this, json) || this;
+class AllTrue extends AggregateExpression {
+    constructor(json) {
+        super(json);
     }
-    AllTrue.prototype.exec = function (ctx) {
-        var items = this.source.execute(ctx);
+    exec(ctx) {
+        const items = this.source.execute(ctx);
         return (0, util_1.allTrue)((0, util_1.removeNulls)(items));
-    };
-    return AllTrue;
-}(AggregateExpression));
-exports.AllTrue = AllTrue;
-var AnyTrue = /** @class */ (function (_super) {
-    __extends(AnyTrue, _super);
-    function AnyTrue(json) {
-        return _super.call(this, json) || this;
     }
-    AnyTrue.prototype.exec = function (ctx) {
-        var items = this.source.execute(ctx);
+}
+exports.AllTrue = AllTrue;
+class AnyTrue extends AggregateExpression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const items = this.source.execute(ctx);
         return (0, util_1.anyTrue)(items);
-    };
-    return AnyTrue;
-}(AggregateExpression));
+    }
+}
 exports.AnyTrue = AnyTrue;
 function processQuantities(values) {
-    var items = (0, util_1.removeNulls)(values);
+    const items = (0, util_1.removeNulls)(values);
     if (hasOnlyQuantities(items)) {
         return convertAllUnits(items);
     }
@@ -3322,20 +3101,20 @@ function processQuantities(values) {
     }
 }
 function getValuesFromQuantities(quantities) {
-    return quantities.map(function (quantity) { return quantity.value; });
+    return quantities.map(quantity => quantity.value);
 }
 function hasOnlyQuantities(arr) {
-    return arr.every(function (x) { return x.isQuantity; });
+    return arr.every(x => x.isQuantity);
 }
 function hasSomeQuantities(arr) {
-    return arr.some(function (x) { return x.isQuantity; });
+    return arr.some(x => x.isQuantity);
 }
 function convertAllUnits(arr) {
     // convert all quantities in array to match the unit of the first item
-    return arr.map(function (q) { return q.convertUnit(arr[0].unit); });
+    return arr.map(q => q.convertUnit(arr[0].unit));
 }
 function medianOfNumbers(numbers) {
-    var items = (0, util_1.numerical_sort)(numbers, 'asc');
+    const items = (0, util_1.numerical_sort)(numbers, 'asc');
     if (items.length % 2 === 1) {
         // Odd number of items
         return items[(items.length - 1) / 2];
@@ -3348,21 +3127,6 @@ function medianOfNumbers(numbers) {
 
 },{"../datatypes/datatypes":6,"../datatypes/exception":8,"../util/comparison":52,"../util/util":55,"./builder":16,"./expression":22}],15:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -3384,22 +3148,21 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Predecessor = exports.Successor = exports.MaxValue = exports.MinValue = exports.Power = exports.Log = exports.Exp = exports.Ln = exports.Round = exports.Negate = exports.Abs = exports.Truncate = exports.Floor = exports.Ceiling = exports.Modulo = exports.TruncatedDivide = exports.Divide = exports.Multiply = exports.Subtract = exports.Add = void 0;
-var expression_1 = require("./expression");
-var MathUtil = __importStar(require("../util/math"));
-var quantity_1 = require("../datatypes/quantity");
-var uncertainty_1 = require("../datatypes/uncertainty");
-var builder_1 = require("./builder");
-var Add = /** @class */ (function (_super) {
-    __extends(Add, _super);
-    function Add(json) {
-        return _super.call(this, json) || this;
+const expression_1 = require("./expression");
+const MathUtil = __importStar(require("../util/math"));
+const quantity_1 = require("../datatypes/quantity");
+const uncertainty_1 = require("../datatypes/uncertainty");
+const builder_1 = require("./builder");
+class Add extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    Add.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx);
-        if (args == null || args.some(function (x) { return x == null; })) {
+    exec(ctx) {
+        const args = this.execArgs(ctx);
+        if (args == null || args.some((x) => x == null)) {
             return null;
         }
-        var sum = args.reduce(function (x, y) {
+        const sum = args.reduce((x, y) => {
             if (x.isUncertainty && !y.isUncertainty) {
                 y = new uncertainty_1.Uncertainty(y, y);
             }
@@ -3428,21 +3191,19 @@ var Add = /** @class */ (function (_super) {
             return null;
         }
         return sum;
-    };
-    return Add;
-}(expression_1.Expression));
-exports.Add = Add;
-var Subtract = /** @class */ (function (_super) {
-    __extends(Subtract, _super);
-    function Subtract(json) {
-        return _super.call(this, json) || this;
     }
-    Subtract.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx);
-        if (args == null || args.some(function (x) { return x == null; })) {
+}
+exports.Add = Add;
+class Subtract extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const args = this.execArgs(ctx);
+        if (args == null || args.some((x) => x == null)) {
             return null;
         }
-        var difference = args.reduce(function (x, y) {
+        const difference = args.reduce((x, y) => {
             if (x.isUncertainty && !y.isUncertainty) {
                 y = new uncertainty_1.Uncertainty(y, y);
             }
@@ -3468,21 +3229,19 @@ var Subtract = /** @class */ (function (_super) {
             return null;
         }
         return difference;
-    };
-    return Subtract;
-}(expression_1.Expression));
-exports.Subtract = Subtract;
-var Multiply = /** @class */ (function (_super) {
-    __extends(Multiply, _super);
-    function Multiply(json) {
-        return _super.call(this, json) || this;
     }
-    Multiply.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx);
-        if (args == null || args.some(function (x) { return x == null; })) {
+}
+exports.Subtract = Subtract;
+class Multiply extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const args = this.execArgs(ctx);
+        if (args == null || args.some((x) => x == null)) {
             return null;
         }
-        var product = args.reduce(function (x, y) {
+        const product = args.reduce((x, y) => {
             if (x.isUncertainty && !y.isUncertainty) {
                 y = new uncertainty_1.Uncertainty(y, y);
             }
@@ -3508,21 +3267,19 @@ var Multiply = /** @class */ (function (_super) {
             return null;
         }
         return product;
-    };
-    return Multiply;
-}(expression_1.Expression));
-exports.Multiply = Multiply;
-var Divide = /** @class */ (function (_super) {
-    __extends(Divide, _super);
-    function Divide(json) {
-        return _super.call(this, json) || this;
     }
-    Divide.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx);
-        if (args == null || args.some(function (x) { return x == null; })) {
+}
+exports.Multiply = Multiply;
+class Divide extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const args = this.execArgs(ctx);
+        if (args == null || args.some((x) => x == null)) {
             return null;
         }
-        var quotient = args.reduce(function (x, y) {
+        const quotient = args.reduce((x, y) => {
             if (x.isUncertainty && !y.isUncertainty) {
                 y = new uncertainty_1.Uncertainty(y, y);
             }
@@ -3550,98 +3307,86 @@ var Divide = /** @class */ (function (_super) {
             return null;
         }
         return quotient;
-    };
-    return Divide;
-}(expression_1.Expression));
-exports.Divide = Divide;
-var TruncatedDivide = /** @class */ (function (_super) {
-    __extends(TruncatedDivide, _super);
-    function TruncatedDivide(json) {
-        return _super.call(this, json) || this;
     }
-    TruncatedDivide.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx);
-        if (args == null || args.some(function (x) { return x == null; })) {
+}
+exports.Divide = Divide;
+class TruncatedDivide extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const args = this.execArgs(ctx);
+        if (args == null || args.some((x) => x == null)) {
             return null;
         }
-        var quotient = args.reduce(function (x, y) { return x / y; });
-        var truncatedQuotient = quotient >= 0 ? Math.floor(quotient) : Math.ceil(quotient);
+        const quotient = args.reduce((x, y) => x / y);
+        const truncatedQuotient = quotient >= 0 ? Math.floor(quotient) : Math.ceil(quotient);
         if (MathUtil.overflowsOrUnderflows(truncatedQuotient)) {
             return null;
         }
         return truncatedQuotient;
-    };
-    return TruncatedDivide;
-}(expression_1.Expression));
-exports.TruncatedDivide = TruncatedDivide;
-var Modulo = /** @class */ (function (_super) {
-    __extends(Modulo, _super);
-    function Modulo(json) {
-        return _super.call(this, json) || this;
     }
-    Modulo.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx);
-        if (args == null || args.some(function (x) { return x == null; })) {
+}
+exports.TruncatedDivide = TruncatedDivide;
+class Modulo extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const args = this.execArgs(ctx);
+        if (args == null || args.some((x) => x == null)) {
             return null;
         }
-        var modulo = args.reduce(function (x, y) { return x % y; });
+        const modulo = args.reduce((x, y) => x % y);
         return MathUtil.decimalOrNull(modulo);
-    };
-    return Modulo;
-}(expression_1.Expression));
-exports.Modulo = Modulo;
-var Ceiling = /** @class */ (function (_super) {
-    __extends(Ceiling, _super);
-    function Ceiling(json) {
-        return _super.call(this, json) || this;
     }
-    Ceiling.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.Modulo = Modulo;
+class Ceiling extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg == null) {
             return null;
         }
         return Math.ceil(arg);
-    };
-    return Ceiling;
-}(expression_1.Expression));
-exports.Ceiling = Ceiling;
-var Floor = /** @class */ (function (_super) {
-    __extends(Floor, _super);
-    function Floor(json) {
-        return _super.call(this, json) || this;
     }
-    Floor.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.Ceiling = Ceiling;
+class Floor extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg == null) {
             return null;
         }
         return Math.floor(arg);
-    };
-    return Floor;
-}(expression_1.Expression));
-exports.Floor = Floor;
-var Truncate = /** @class */ (function (_super) {
-    __extends(Truncate, _super);
-    function Truncate(json) {
-        return _super.call(this, json) || this;
     }
-    Truncate.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.Floor = Floor;
+class Truncate extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg == null) {
             return null;
         }
         return arg >= 0 ? Math.floor(arg) : Math.ceil(arg);
-    };
-    return Truncate;
-}(expression_1.Expression));
-exports.Truncate = Truncate;
-var Abs = /** @class */ (function (_super) {
-    __extends(Abs, _super);
-    function Abs(json) {
-        return _super.call(this, json) || this;
     }
-    Abs.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.Truncate = Truncate;
+class Abs extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg == null) {
             return null;
         }
@@ -3651,17 +3396,15 @@ var Abs = /** @class */ (function (_super) {
         else {
             return Math.abs(arg);
         }
-    };
-    return Abs;
-}(expression_1.Expression));
-exports.Abs = Abs;
-var Negate = /** @class */ (function (_super) {
-    __extends(Negate, _super);
-    function Negate(json) {
-        return _super.call(this, json) || this;
     }
-    Negate.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.Abs = Abs;
+class Negate extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg == null) {
             return null;
         }
@@ -3671,109 +3414,95 @@ var Negate = /** @class */ (function (_super) {
         else {
             return arg * -1;
         }
-    };
-    return Negate;
-}(expression_1.Expression));
+    }
+}
 exports.Negate = Negate;
-var Round = /** @class */ (function (_super) {
-    __extends(Round, _super);
-    function Round(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = (0, builder_1.build)(json.precision);
-        return _this;
+class Round extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = (0, builder_1.build)(json.precision);
     }
-    Round.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg == null) {
             return null;
         }
-        var dec = this.precision != null ? this.precision.execute(ctx) : 0;
+        const dec = this.precision != null ? this.precision.execute(ctx) : 0;
         return Math.round(arg * Math.pow(10, dec)) / Math.pow(10, dec);
-    };
-    return Round;
-}(expression_1.Expression));
+    }
+}
 exports.Round = Round;
-var Ln = /** @class */ (function (_super) {
-    __extends(Ln, _super);
-    function Ln(json) {
-        return _super.call(this, json) || this;
+class Ln extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    Ln.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg == null) {
             return null;
         }
-        var ln = Math.log(arg);
+        const ln = Math.log(arg);
         return MathUtil.decimalOrNull(ln);
-    };
-    return Ln;
-}(expression_1.Expression));
-exports.Ln = Ln;
-var Exp = /** @class */ (function (_super) {
-    __extends(Exp, _super);
-    function Exp(json) {
-        return _super.call(this, json) || this;
     }
-    Exp.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.Ln = Ln;
+class Exp extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg == null) {
             return null;
         }
-        var power = Math.exp(arg);
+        const power = Math.exp(arg);
         if (MathUtil.overflowsOrUnderflows(power)) {
             return null;
         }
         return power;
-    };
-    return Exp;
-}(expression_1.Expression));
+    }
+}
 exports.Exp = Exp;
-var Log = /** @class */ (function (_super) {
-    __extends(Log, _super);
-    function Log(json) {
-        return _super.call(this, json) || this;
+class Log extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    Log.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx);
-        if (args == null || args.some(function (x) { return x == null; })) {
+    exec(ctx) {
+        const args = this.execArgs(ctx);
+        if (args == null || args.some((x) => x == null)) {
             return null;
         }
-        var log = args.reduce(function (x, y) { return Math.log(x) / Math.log(y); });
+        const log = args.reduce((x, y) => Math.log(x) / Math.log(y));
         return MathUtil.decimalOrNull(log);
-    };
-    return Log;
-}(expression_1.Expression));
-exports.Log = Log;
-var Power = /** @class */ (function (_super) {
-    __extends(Power, _super);
-    function Power(json) {
-        return _super.call(this, json) || this;
     }
-    Power.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx);
-        if (args == null || args.some(function (x) { return x == null; })) {
+}
+exports.Log = Log;
+class Power extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const args = this.execArgs(ctx);
+        if (args == null || args.some((x) => x == null)) {
             return null;
         }
-        var power = args.reduce(function (x, y) { return Math.pow(x, y); });
+        const power = args.reduce((x, y) => Math.pow(x, y));
         if (MathUtil.overflowsOrUnderflows(power)) {
             return null;
         }
         return power;
-    };
-    return Power;
-}(expression_1.Expression));
-exports.Power = Power;
-var MinValue = /** @class */ (function (_super) {
-    __extends(MinValue, _super);
-    function MinValue(json) {
-        var _this = _super.call(this, json) || this;
-        _this.valueType = json.valueType;
-        return _this;
     }
-    MinValue.prototype.exec = function (ctx) {
+}
+exports.Power = Power;
+class MinValue extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.valueType = json.valueType;
+    }
+    exec(ctx) {
         if (MinValue.MIN_VALUES[this.valueType]) {
             if (this.valueType === '{urn:hl7-org:elm-types:r1}DateTime') {
-                var minDateTime = MinValue.MIN_VALUES[this.valueType].copy();
+                const minDateTime = MinValue.MIN_VALUES[this.valueType].copy();
                 minDateTime.timezoneOffset = ctx.getTimezoneOffset();
                 return minDateTime;
             }
@@ -3782,30 +3511,27 @@ var MinValue = /** @class */ (function (_super) {
             }
         }
         else {
-            throw new Error("Minimum not supported for ".concat(this.valueType));
+            throw new Error(`Minimum not supported for ${this.valueType}`);
         }
-    };
-    MinValue.MIN_VALUES = {
-        '{urn:hl7-org:elm-types:r1}Integer': MathUtil.MIN_INT_VALUE,
-        '{urn:hl7-org:elm-types:r1}Decimal': MathUtil.MIN_FLOAT_VALUE,
-        '{urn:hl7-org:elm-types:r1}DateTime': MathUtil.MIN_DATETIME_VALUE,
-        '{urn:hl7-org:elm-types:r1}Date': MathUtil.MIN_DATE_VALUE,
-        '{urn:hl7-org:elm-types:r1}Time': MathUtil.MIN_TIME_VALUE
-    };
-    return MinValue;
-}(expression_1.Expression));
-exports.MinValue = MinValue;
-var MaxValue = /** @class */ (function (_super) {
-    __extends(MaxValue, _super);
-    function MaxValue(json) {
-        var _this = _super.call(this, json) || this;
-        _this.valueType = json.valueType;
-        return _this;
     }
-    MaxValue.prototype.exec = function (ctx) {
+}
+exports.MinValue = MinValue;
+MinValue.MIN_VALUES = {
+    '{urn:hl7-org:elm-types:r1}Integer': MathUtil.MIN_INT_VALUE,
+    '{urn:hl7-org:elm-types:r1}Decimal': MathUtil.MIN_FLOAT_VALUE,
+    '{urn:hl7-org:elm-types:r1}DateTime': MathUtil.MIN_DATETIME_VALUE,
+    '{urn:hl7-org:elm-types:r1}Date': MathUtil.MIN_DATE_VALUE,
+    '{urn:hl7-org:elm-types:r1}Time': MathUtil.MIN_TIME_VALUE
+};
+class MaxValue extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.valueType = json.valueType;
+    }
+    exec(ctx) {
         if (MaxValue.MAX_VALUES[this.valueType] != null) {
             if (this.valueType === '{urn:hl7-org:elm-types:r1}DateTime') {
-                var maxDateTime = MaxValue.MAX_VALUES[this.valueType].copy();
+                const maxDateTime = MaxValue.MAX_VALUES[this.valueType].copy();
                 maxDateTime.timezoneOffset = ctx.getTimezoneOffset();
                 return maxDateTime;
             }
@@ -3814,30 +3540,28 @@ var MaxValue = /** @class */ (function (_super) {
             }
         }
         else {
-            throw new Error("Maximum not supported for ".concat(this.valueType));
+            throw new Error(`Maximum not supported for ${this.valueType}`);
         }
-    };
-    MaxValue.MAX_VALUES = {
-        '{urn:hl7-org:elm-types:r1}Integer': MathUtil.MAX_INT_VALUE,
-        '{urn:hl7-org:elm-types:r1}Decimal': MathUtil.MAX_FLOAT_VALUE,
-        '{urn:hl7-org:elm-types:r1}DateTime': MathUtil.MAX_DATETIME_VALUE,
-        '{urn:hl7-org:elm-types:r1}Date': MathUtil.MAX_DATE_VALUE,
-        '{urn:hl7-org:elm-types:r1}Time': MathUtil.MAX_TIME_VALUE
-    };
-    return MaxValue;
-}(expression_1.Expression));
-exports.MaxValue = MaxValue;
-var Successor = /** @class */ (function (_super) {
-    __extends(Successor, _super);
-    function Successor(json) {
-        return _super.call(this, json) || this;
     }
-    Successor.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.MaxValue = MaxValue;
+MaxValue.MAX_VALUES = {
+    '{urn:hl7-org:elm-types:r1}Integer': MathUtil.MAX_INT_VALUE,
+    '{urn:hl7-org:elm-types:r1}Decimal': MathUtil.MAX_FLOAT_VALUE,
+    '{urn:hl7-org:elm-types:r1}DateTime': MathUtil.MAX_DATETIME_VALUE,
+    '{urn:hl7-org:elm-types:r1}Date': MathUtil.MAX_DATE_VALUE,
+    '{urn:hl7-org:elm-types:r1}Time': MathUtil.MAX_TIME_VALUE
+};
+class Successor extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg == null) {
             return null;
         }
-        var successor = null;
+        let successor = null;
         try {
             // MathUtil.successor throws on overflow, and the exception is used in
             // the logic for evaluating `meets`, so it can't be changed to just return null
@@ -3852,21 +3576,19 @@ var Successor = /** @class */ (function (_super) {
             return null;
         }
         return successor;
-    };
-    return Successor;
-}(expression_1.Expression));
-exports.Successor = Successor;
-var Predecessor = /** @class */ (function (_super) {
-    __extends(Predecessor, _super);
-    function Predecessor(json) {
-        return _super.call(this, json) || this;
     }
-    Predecessor.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.Successor = Successor;
+class Predecessor extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg == null) {
             return null;
         }
-        var predecessor = null;
+        let predecessor = null;
         try {
             // MathUtil.predecessor throws on underflow, and the exception is used in
             // the logic for evaluating `meets`, so it can't be changed to just return null
@@ -3881,9 +3603,8 @@ var Predecessor = /** @class */ (function (_super) {
             return null;
         }
         return predecessor;
-    };
-    return Predecessor;
-}(expression_1.Expression));
+    }
+}
 exports.Predecessor = Predecessor;
 
 },{"../datatypes/quantity":11,"../datatypes/uncertainty":13,"../util/math":53,"./builder":16,"./expression":22}],16:[function(require,module,exports){
@@ -3910,14 +3631,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.build = void 0;
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-var E = __importStar(require("./expressions"));
-var util_1 = require("../util/util");
+const E = __importStar(require("./expressions"));
+const util_1 = require("../util/util");
 function build(json) {
     if (json == null) {
         return json;
     }
     if ((0, util_1.typeIsArray)(json)) {
-        return json.map(function (child) { return build(child); });
+        return json.map(child => build(child));
     }
     if (json.type === 'FunctionRef') {
         return new E.FunctionRef(json);
@@ -3944,21 +3665,6 @@ function constructByName(name, json) {
 
 },{"../util/util":55,"./expressions":23}],17:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -3980,75 +3686,64 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CalculateAgeAt = exports.CalculateAge = exports.Concept = exports.ConceptRef = exports.ConceptDef = exports.Code = exports.CodeRef = exports.CodeDef = exports.CodeSystemDef = exports.InValueSet = exports.AnyInValueSet = exports.ValueSetRef = exports.ValueSetDef = void 0;
-var expression_1 = require("./expression");
-var dt = __importStar(require("../datatypes/datatypes"));
-var builder_1 = require("./builder");
-var ValueSetDef = /** @class */ (function (_super) {
-    __extends(ValueSetDef, _super);
-    function ValueSetDef(json) {
-        var _this = _super.call(this, json) || this;
-        _this.name = json.name;
-        _this.id = json.id;
-        _this.version = json.version;
-        return _this;
+const expression_1 = require("./expression");
+const dt = __importStar(require("../datatypes/datatypes"));
+const builder_1 = require("./builder");
+class ValueSetDef extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
+        this.id = json.id;
+        this.version = json.version;
     }
     //todo: code systems and versions
-    ValueSetDef.prototype.exec = function (ctx) {
-        var valueset = ctx.codeService.findValueSet(this.id, this.version) || new dt.ValueSet(this.id, this.version);
+    exec(ctx) {
+        const valueset = ctx.codeService.findValueSet(this.id, this.version) || new dt.ValueSet(this.id, this.version);
         ctx.rootContext().set(this.name, valueset);
         return valueset;
-    };
-    return ValueSetDef;
-}(expression_1.Expression));
-exports.ValueSetDef = ValueSetDef;
-var ValueSetRef = /** @class */ (function (_super) {
-    __extends(ValueSetRef, _super);
-    function ValueSetRef(json) {
-        var _this = _super.call(this, json) || this;
-        _this.name = json.name;
-        _this.libraryName = json.libraryName;
-        return _this;
     }
-    ValueSetRef.prototype.exec = function (ctx) {
+}
+exports.ValueSetDef = ValueSetDef;
+class ValueSetRef extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
+        this.libraryName = json.libraryName;
+    }
+    exec(ctx) {
         // TODO: This calls the code service every time-- should be optimized
-        var valueset = ctx.getValueSet(this.name, this.libraryName);
+        let valueset = ctx.getValueSet(this.name, this.libraryName);
         if (valueset instanceof expression_1.Expression) {
             valueset = valueset.execute(ctx);
         }
         return valueset;
-    };
-    return ValueSetRef;
-}(expression_1.Expression));
-exports.ValueSetRef = ValueSetRef;
-var AnyInValueSet = /** @class */ (function (_super) {
-    __extends(AnyInValueSet, _super);
-    function AnyInValueSet(json) {
-        var _this = _super.call(this, json) || this;
-        _this.codes = (0, builder_1.build)(json.codes);
-        _this.valueset = new ValueSetRef(json.valueset);
-        return _this;
     }
-    AnyInValueSet.prototype.exec = function (ctx) {
-        var valueset = this.valueset.execute(ctx);
+}
+exports.ValueSetRef = ValueSetRef;
+class AnyInValueSet extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.codes = (0, builder_1.build)(json.codes);
+        this.valueset = new ValueSetRef(json.valueset);
+    }
+    exec(ctx) {
+        const valueset = this.valueset.execute(ctx);
         // If the value set reference cannot be resolved, a run-time error is thrown.
         if (valueset == null || !valueset.isValueSet) {
             throw new Error('ValueSet must be provided to InValueSet function');
         }
-        var codes = this.codes.exec(ctx);
-        return codes != null && codes.some(function (code) { return valueset.hasMatch(code); });
-    };
-    return AnyInValueSet;
-}(expression_1.Expression));
-exports.AnyInValueSet = AnyInValueSet;
-var InValueSet = /** @class */ (function (_super) {
-    __extends(InValueSet, _super);
-    function InValueSet(json) {
-        var _this = _super.call(this, json) || this;
-        _this.code = (0, builder_1.build)(json.code);
-        _this.valueset = new ValueSetRef(json.valueset);
-        return _this;
+        const codes = this.codes.exec(ctx);
+        return codes != null && codes.some((code) => valueset.hasMatch(code));
     }
-    InValueSet.prototype.exec = function (ctx) {
+}
+exports.AnyInValueSet = AnyInValueSet;
+class InValueSet extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.code = (0, builder_1.build)(json.code);
+        this.valueset = new ValueSetRef(json.valueset);
+    }
+    exec(ctx) {
         // If the code argument is null, the result is false
         if (this.code == null) {
             return false;
@@ -4056,194 +3751,158 @@ var InValueSet = /** @class */ (function (_super) {
         if (this.valueset == null) {
             throw new Error('ValueSet must be provided to InValueSet function');
         }
-        var code = this.code.execute(ctx);
+        const code = this.code.execute(ctx);
         // spec indicates to return false if code is null, throw error if value set cannot be resolved
         if (code == null) {
             return false;
         }
-        var valueset = this.valueset.execute(ctx);
+        const valueset = this.valueset.execute(ctx);
         if (valueset == null || !valueset.isValueSet) {
             throw new Error('ValueSet must be provided to InValueSet function');
         }
         // If there is a code and valueset return whether or not the valueset has the code
         return valueset.hasMatch(code);
-    };
-    return InValueSet;
-}(expression_1.Expression));
+    }
+}
 exports.InValueSet = InValueSet;
-var CodeSystemDef = /** @class */ (function (_super) {
-    __extends(CodeSystemDef, _super);
-    function CodeSystemDef(json) {
-        var _this = _super.call(this, json) || this;
-        _this.name = json.name;
-        _this.id = json.id;
-        _this.version = json.version;
-        return _this;
+class CodeSystemDef extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
+        this.id = json.id;
+        this.version = json.version;
     }
-    CodeSystemDef.prototype.exec = function (_ctx) {
+    exec(_ctx) {
         return new dt.CodeSystem(this.id, this.version);
-    };
-    return CodeSystemDef;
-}(expression_1.Expression));
+    }
+}
 exports.CodeSystemDef = CodeSystemDef;
-var CodeDef = /** @class */ (function (_super) {
-    __extends(CodeDef, _super);
-    function CodeDef(json) {
-        var _this = _super.call(this, json) || this;
-        _this.name = json.name;
-        _this.id = json.id;
-        _this.systemName = json.codeSystem.name;
-        _this.display = json.display;
-        return _this;
+class CodeDef extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
+        this.id = json.id;
+        this.systemName = json.codeSystem.name;
+        this.display = json.display;
     }
-    CodeDef.prototype.exec = function (ctx) {
-        var system = ctx.getCodeSystem(this.systemName).execute(ctx);
+    exec(ctx) {
+        const system = ctx.getCodeSystem(this.systemName).execute(ctx);
         return new dt.Code(this.id, system.id, system.version, this.display);
-    };
-    return CodeDef;
-}(expression_1.Expression));
+    }
+}
 exports.CodeDef = CodeDef;
-var CodeRef = /** @class */ (function (_super) {
-    __extends(CodeRef, _super);
-    function CodeRef(json) {
-        var _this = _super.call(this, json) || this;
-        _this.name = json.name;
-        _this.library = json.libraryName;
-        return _this;
+class CodeRef extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
+        this.library = json.libraryName;
     }
-    CodeRef.prototype.exec = function (ctx) {
+    exec(ctx) {
         ctx = this.library ? ctx.getLibraryContext(this.library) : ctx;
-        var codeDef = ctx.getCode(this.name);
+        const codeDef = ctx.getCode(this.name);
         return codeDef ? codeDef.execute(ctx) : undefined;
-    };
-    return CodeRef;
-}(expression_1.Expression));
+    }
+}
 exports.CodeRef = CodeRef;
-var Code = /** @class */ (function (_super) {
-    __extends(Code, _super);
-    function Code(json) {
-        var _this = _super.call(this, json) || this;
-        _this.code = json.code;
-        _this.systemName = json.system.name;
-        _this.version = json.version;
-        _this.display = json.display;
-        return _this;
+class Code extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.code = json.code;
+        this.systemName = json.system.name;
+        this.version = json.version;
+        this.display = json.display;
     }
-    Object.defineProperty(Code.prototype, "isCode", {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Code.prototype.exec = function (ctx) {
-        var system = ctx.getCodeSystem(this.systemName) || {};
+    // Define a simple getter to allow type-checking of this class without instanceof
+    // and in a way that survives minification (as opposed to checking constructor.name)
+    get isCode() {
+        return true;
+    }
+    exec(ctx) {
+        const system = ctx.getCodeSystem(this.systemName) || {};
         return new dt.Code(this.code, system.id, this.version, this.display);
-    };
-    return Code;
-}(expression_1.Expression));
-exports.Code = Code;
-var ConceptDef = /** @class */ (function (_super) {
-    __extends(ConceptDef, _super);
-    function ConceptDef(json) {
-        var _this = _super.call(this, json) || this;
-        _this.name = json.name;
-        _this.display = json.display;
-        _this.codes = json.code;
-        return _this;
     }
-    ConceptDef.prototype.exec = function (ctx) {
-        var codes = this.codes.map(function (code) {
-            var codeDef = ctx.getCode(code.name);
+}
+exports.Code = Code;
+class ConceptDef extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
+        this.display = json.display;
+        this.codes = json.code;
+    }
+    exec(ctx) {
+        const codes = this.codes.map((code) => {
+            const codeDef = ctx.getCode(code.name);
             return codeDef ? codeDef.execute(ctx) : undefined;
         });
         return new dt.Concept(codes, this.display);
-    };
-    return ConceptDef;
-}(expression_1.Expression));
+    }
+}
 exports.ConceptDef = ConceptDef;
-var ConceptRef = /** @class */ (function (_super) {
-    __extends(ConceptRef, _super);
-    function ConceptRef(json) {
-        var _this = _super.call(this, json) || this;
-        _this.name = json.name;
-        return _this;
+class ConceptRef extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
     }
-    ConceptRef.prototype.exec = function (ctx) {
-        var conceptDef = ctx.getConcept(this.name);
+    exec(ctx) {
+        const conceptDef = ctx.getConcept(this.name);
         return conceptDef ? conceptDef.execute(ctx) : undefined;
-    };
-    return ConceptRef;
-}(expression_1.Expression));
+    }
+}
 exports.ConceptRef = ConceptRef;
-var Concept = /** @class */ (function (_super) {
-    __extends(Concept, _super);
-    function Concept(json) {
-        var _this = _super.call(this, json) || this;
-        _this.codes = json.code;
-        _this.display = json.display;
-        return _this;
+class Concept extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.codes = json.code;
+        this.display = json.display;
     }
-    Object.defineProperty(Concept.prototype, "isConcept", {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Concept.prototype.toCode = function (ctx, code) {
-        var system = ctx.getCodeSystem(code.system.name) || {};
+    // Define a simple getter to allow type-checking of this class without instanceof
+    // and in a way that survives minification (as opposed to checking constructor.name)
+    get isConcept() {
+        return true;
+    }
+    toCode(ctx, code) {
+        const system = ctx.getCodeSystem(code.system.name) || {};
         return new dt.Code(code.code, system.id, code.version, code.display);
-    };
-    Concept.prototype.exec = function (ctx) {
-        var _this = this;
-        var codes = this.codes.map(function (code) { return _this.toCode(ctx, code); });
-        return new dt.Concept(codes, this.display);
-    };
-    return Concept;
-}(expression_1.Expression));
-exports.Concept = Concept;
-var CalculateAge = /** @class */ (function (_super) {
-    __extends(CalculateAge, _super);
-    function CalculateAge(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision;
-        return _this;
     }
-    CalculateAge.prototype.exec = function (ctx) {
-        var date1 = this.execArgs(ctx);
-        var date2 = dt.DateTime.fromJSDate(ctx.getExecutionDateTime());
-        var result = date1 != null ? date1.durationBetween(date2, this.precision.toLowerCase()) : undefined;
+    exec(ctx) {
+        const codes = this.codes.map((code) => this.toCode(ctx, code));
+        return new dt.Concept(codes, this.display);
+    }
+}
+exports.Concept = Concept;
+class CalculateAge extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision;
+    }
+    exec(ctx) {
+        const date1 = this.execArgs(ctx);
+        const date2 = dt.DateTime.fromJSDate(ctx.getExecutionDateTime());
+        const result = date1 != null ? date1.durationBetween(date2, this.precision.toLowerCase()) : undefined;
         if (result != null && result.isPoint()) {
             return result.low;
         }
         else {
             return result;
         }
-    };
-    return CalculateAge;
-}(expression_1.Expression));
-exports.CalculateAge = CalculateAge;
-var CalculateAgeAt = /** @class */ (function (_super) {
-    __extends(CalculateAgeAt, _super);
-    function CalculateAgeAt(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision;
-        return _this;
     }
-    CalculateAgeAt.prototype.exec = function (ctx) {
+}
+exports.CalculateAge = CalculateAge;
+class CalculateAgeAt extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision;
+    }
+    exec(ctx) {
         // eslint-disable-next-line prefer-const
-        var _a = this.execArgs(ctx), date1 = _a[0], date2 = _a[1];
+        let [date1, date2] = this.execArgs(ctx);
         if (date1 != null && date2 != null) {
             // date1 is the birthdate, convert it to date if date2 is a date (to support ignoring time)
             if (date2.isDate && date1.isDateTime) {
                 date1 = date1.getDate();
             }
-            var result = date1.durationBetween(date2, this.precision.toLowerCase());
+            const result = date1.durationBetween(date2, this.precision.toLowerCase());
             if (result != null && result.isPoint()) {
                 return result.low;
             }
@@ -4252,203 +3911,140 @@ var CalculateAgeAt = /** @class */ (function (_super) {
             }
         }
         return null;
-    };
-    return CalculateAgeAt;
-}(expression_1.Expression));
+    }
+}
 exports.CalculateAgeAt = CalculateAgeAt;
 
 },{"../datatypes/datatypes":6,"./builder":16,"./expression":22}],18:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GreaterOrEqual = exports.Greater = exports.LessOrEqual = exports.Less = void 0;
-var expression_1 = require("./expression");
-var datatypes_1 = require("../datatypes/datatypes");
+const expression_1 = require("./expression");
+const datatypes_1 = require("../datatypes/datatypes");
 // Equal is completely handled by overloaded#Equal
 // NotEqual is completely handled by overloaded#Equal
-var Less = /** @class */ (function (_super) {
-    __extends(Less, _super);
-    function Less(json) {
-        return _super.call(this, json) || this;
+class Less extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    Less.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx).map(function (x) { return datatypes_1.Uncertainty.from(x); });
+    exec(ctx) {
+        const args = this.execArgs(ctx).map((x) => datatypes_1.Uncertainty.from(x));
         if (args[0] == null || args[1] == null) {
             return null;
         }
         return args[0].lessThan(args[1]);
-    };
-    return Less;
-}(expression_1.Expression));
-exports.Less = Less;
-var LessOrEqual = /** @class */ (function (_super) {
-    __extends(LessOrEqual, _super);
-    function LessOrEqual(json) {
-        return _super.call(this, json) || this;
     }
-    LessOrEqual.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx).map(function (x) { return datatypes_1.Uncertainty.from(x); });
+}
+exports.Less = Less;
+class LessOrEqual extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const args = this.execArgs(ctx).map((x) => datatypes_1.Uncertainty.from(x));
         if (args[0] == null || args[1] == null) {
             return null;
         }
         return args[0].lessThanOrEquals(args[1]);
-    };
-    return LessOrEqual;
-}(expression_1.Expression));
-exports.LessOrEqual = LessOrEqual;
-var Greater = /** @class */ (function (_super) {
-    __extends(Greater, _super);
-    function Greater(json) {
-        return _super.call(this, json) || this;
     }
-    Greater.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx).map(function (x) { return datatypes_1.Uncertainty.from(x); });
+}
+exports.LessOrEqual = LessOrEqual;
+class Greater extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const args = this.execArgs(ctx).map((x) => datatypes_1.Uncertainty.from(x));
         if (args[0] == null || args[1] == null) {
             return null;
         }
         return args[0].greaterThan(args[1]);
-    };
-    return Greater;
-}(expression_1.Expression));
-exports.Greater = Greater;
-var GreaterOrEqual = /** @class */ (function (_super) {
-    __extends(GreaterOrEqual, _super);
-    function GreaterOrEqual(json) {
-        return _super.call(this, json) || this;
     }
-    GreaterOrEqual.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx).map(function (x) { return datatypes_1.Uncertainty.from(x); });
+}
+exports.Greater = Greater;
+class GreaterOrEqual extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const args = this.execArgs(ctx).map((x) => datatypes_1.Uncertainty.from(x));
         if (args[0] == null || args[1] == null) {
             return null;
         }
         return args[0].greaterThanOrEquals(args[1]);
-    };
-    return GreaterOrEqual;
-}(expression_1.Expression));
+    }
+}
 exports.GreaterOrEqual = GreaterOrEqual;
 
 },{"../datatypes/datatypes":6,"./expression":22}],19:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Case = exports.CaseItem = exports.If = void 0;
-var expression_1 = require("./expression");
-var builder_1 = require("./builder");
-var comparison_1 = require("../util/comparison");
+const expression_1 = require("./expression");
+const builder_1 = require("./builder");
+const comparison_1 = require("../util/comparison");
 // TODO: Spec lists "Conditional", but it's "If" in the XSD
-var If = /** @class */ (function (_super) {
-    __extends(If, _super);
-    function If(json) {
-        var _this = _super.call(this, json) || this;
-        _this.condition = (0, builder_1.build)(json.condition);
-        _this.th = (0, builder_1.build)(json.then);
-        _this.els = (0, builder_1.build)(json.else);
-        return _this;
+class If extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.condition = (0, builder_1.build)(json.condition);
+        this.th = (0, builder_1.build)(json.then);
+        this.els = (0, builder_1.build)(json.else);
     }
-    If.prototype.exec = function (ctx) {
+    exec(ctx) {
         if (this.condition.execute(ctx)) {
             return this.th.execute(ctx);
         }
         else {
             return this.els.execute(ctx);
         }
-    };
-    return If;
-}(expression_1.Expression));
+    }
+}
 exports.If = If;
-var CaseItem = /** @class */ (function () {
-    function CaseItem(json) {
+class CaseItem {
+    constructor(json) {
         this.when = (0, builder_1.build)(json.when);
         this.then = (0, builder_1.build)(json.then);
     }
-    return CaseItem;
-}());
+}
 exports.CaseItem = CaseItem;
-var Case = /** @class */ (function (_super) {
-    __extends(Case, _super);
-    function Case(json) {
-        var _this = _super.call(this, json) || this;
-        _this.comparand = (0, builder_1.build)(json.comparand);
-        _this.caseItems = json.caseItem.map(function (ci) { return new CaseItem(ci); });
-        _this.els = (0, builder_1.build)(json.else);
-        return _this;
+class Case extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.comparand = (0, builder_1.build)(json.comparand);
+        this.caseItems = json.caseItem.map((ci) => new CaseItem(ci));
+        this.els = (0, builder_1.build)(json.else);
     }
-    Case.prototype.exec = function (ctx) {
+    exec(ctx) {
         if (this.comparand) {
             return this.exec_selected(ctx);
         }
         else {
             return this.exec_standard(ctx);
         }
-    };
-    Case.prototype.exec_selected = function (ctx) {
-        var val = this.comparand.execute(ctx);
-        for (var _i = 0, _a = this.caseItems; _i < _a.length; _i++) {
-            var ci = _a[_i];
+    }
+    exec_selected(ctx) {
+        const val = this.comparand.execute(ctx);
+        for (const ci of this.caseItems) {
             if ((0, comparison_1.equals)(ci.when.execute(ctx), val)) {
                 return ci.then.execute(ctx);
             }
         }
         return this.els.execute(ctx);
-    };
-    Case.prototype.exec_standard = function (ctx) {
-        for (var _i = 0, _a = this.caseItems; _i < _a.length; _i++) {
-            var ci = _a[_i];
+    }
+    exec_standard(ctx) {
+        for (const ci of this.caseItems) {
             if (ci.when.execute(ctx)) {
                 return ci.then.execute(ctx);
             }
         }
         return this.els.execute(ctx);
-    };
-    return Case;
-}(expression_1.Expression));
+    }
+}
 exports.Case = Case;
 
 },{"../util/comparison":52,"./builder":16,"./expression":22}],20:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -4468,34 +4064,20 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DurationBetween = exports.DifferenceBetween = exports.doBefore = exports.doAfter = exports.TimezoneOffsetFrom = exports.TimeFrom = exports.DateFrom = exports.DateTimeComponentFrom = exports.TimeOfDay = exports.Now = exports.Today = exports.Time = exports.Date = exports.DateTime = void 0;
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-var expression_1 = require("./expression");
-var builder_1 = require("./builder");
-var literal_1 = require("./literal");
-var DT = __importStar(require("../datatypes/datatypes"));
-var DateTime = /** @class */ (function (_super) {
-    __extends(DateTime, _super);
-    function DateTime(json) {
-        var _this = _super.call(this, json) || this;
-        _this.json = json;
-        return _this;
+const expression_1 = require("./expression");
+const builder_1 = require("./builder");
+const literal_1 = require("./literal");
+const DT = __importStar(require("../datatypes/datatypes"));
+class DateTime extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.json = json;
     }
-    DateTime.prototype.exec = function (ctx) {
-        var _a;
-        var _this = this;
-        for (var _i = 0, _b = DateTime.PROPERTIES; _i < _b.length; _i++) {
-            var property = _b[_i];
+    exec(ctx) {
+        for (const property of DateTime.PROPERTIES) {
             // if json does not contain 'timezoneOffset' set it to the executionDateTime from the context
             if (this.json[property] != null) {
                 // @ts-ignore
@@ -4511,173 +4093,145 @@ var DateTime = /** @class */ (function (_super) {
             }
         }
         // @ts-ignore
-        var args = DateTime.PROPERTIES.map(function (p) { return (_this[p] != null ? _this[p].execute(ctx) : undefined); });
-        return new ((_a = DT.DateTime).bind.apply(_a, __spreadArray([void 0], args, false)))();
-    };
-    DateTime.PROPERTIES = [
-        'year',
-        'month',
-        'day',
-        'hour',
-        'minute',
-        'second',
-        'millisecond',
-        'timezoneOffset'
-    ];
-    return DateTime;
-}(expression_1.Expression));
-exports.DateTime = DateTime;
-var Date = /** @class */ (function (_super) {
-    __extends(Date, _super);
-    function Date(json) {
-        var _this = _super.call(this, json) || this;
-        _this.json = json;
-        return _this;
+        const args = DateTime.PROPERTIES.map(p => (this[p] != null ? this[p].execute(ctx) : undefined));
+        return new DT.DateTime(...args);
     }
-    Date.prototype.exec = function (ctx) {
-        var _a;
-        var _this = this;
-        for (var _i = 0, _b = Date.PROPERTIES; _i < _b.length; _i++) {
-            var property = _b[_i];
+}
+exports.DateTime = DateTime;
+DateTime.PROPERTIES = [
+    'year',
+    'month',
+    'day',
+    'hour',
+    'minute',
+    'second',
+    'millisecond',
+    'timezoneOffset'
+];
+class Date extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.json = json;
+    }
+    exec(ctx) {
+        for (const property of Date.PROPERTIES) {
             if (this.json[property] != null) {
                 // @ts-ignore
                 this[property] = (0, builder_1.build)(this.json[property]);
             }
         }
         // @ts-ignore
-        var args = Date.PROPERTIES.map(function (p) { return (_this[p] != null ? _this[p].execute(ctx) : undefined); });
-        return new ((_a = DT.Date).bind.apply(_a, __spreadArray([void 0], args, false)))();
-    };
-    Date.PROPERTIES = ['year', 'month', 'day'];
-    return Date;
-}(expression_1.Expression));
+        const args = Date.PROPERTIES.map(p => (this[p] != null ? this[p].execute(ctx) : undefined));
+        return new DT.Date(...args);
+    }
+}
 exports.Date = Date;
-var Time = /** @class */ (function (_super) {
-    __extends(Time, _super);
-    function Time(json) {
-        var _this = _super.call(this, json) || this;
-        for (var _i = 0, _a = Time.PROPERTIES; _i < _a.length; _i++) {
-            var property = _a[_i];
+Date.PROPERTIES = ['year', 'month', 'day'];
+class Time extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        for (const property of Time.PROPERTIES) {
             if (json[property] != null) {
                 // @ts-ignore
-                _this[property] = (0, builder_1.build)(json[property]);
+                this[property] = (0, builder_1.build)(json[property]);
             }
         }
-        return _this;
     }
-    Time.prototype.exec = function (ctx) {
-        var _a;
-        var _this = this;
+    exec(ctx) {
         // @ts-ignore
-        var args = Time.PROPERTIES.map(function (p) { return (_this[p] != null ? _this[p].execute(ctx) : undefined); });
-        return new ((_a = DT.DateTime).bind.apply(_a, __spreadArray([void 0, 0, 1, 1], args, false)))().getTime();
-    };
-    Time.PROPERTIES = ['hour', 'minute', 'second', 'millisecond'];
-    return Time;
-}(expression_1.Expression));
+        const args = Time.PROPERTIES.map(p => (this[p] != null ? this[p].execute(ctx) : undefined));
+        return new DT.DateTime(0, 1, 1, ...args).getTime();
+    }
+}
 exports.Time = Time;
-var Today = /** @class */ (function (_super) {
-    __extends(Today, _super);
-    function Today(json) {
-        return _super.call(this, json) || this;
+Time.PROPERTIES = ['hour', 'minute', 'second', 'millisecond'];
+class Today extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    Today.prototype.exec = function (ctx) {
+    exec(ctx) {
         return ctx.getExecutionDateTime().getDate();
-    };
-    return Today;
-}(expression_1.Expression));
+    }
+}
 exports.Today = Today;
-var Now = /** @class */ (function (_super) {
-    __extends(Now, _super);
-    function Now(json) {
-        return _super.call(this, json) || this;
+class Now extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    Now.prototype.exec = function (ctx) {
+    exec(ctx) {
         return ctx.getExecutionDateTime();
-    };
-    return Now;
-}(expression_1.Expression));
+    }
+}
 exports.Now = Now;
-var TimeOfDay = /** @class */ (function (_super) {
-    __extends(TimeOfDay, _super);
-    function TimeOfDay(json) {
-        return _super.call(this, json) || this;
+class TimeOfDay extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    TimeOfDay.prototype.exec = function (ctx) {
+    exec(ctx) {
         return ctx.getExecutionDateTime().getTime();
-    };
-    return TimeOfDay;
-}(expression_1.Expression));
-exports.TimeOfDay = TimeOfDay;
-var DateTimeComponentFrom = /** @class */ (function (_super) {
-    __extends(DateTimeComponentFrom, _super);
-    function DateTimeComponentFrom(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision;
-        return _this;
     }
-    DateTimeComponentFrom.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.TimeOfDay = TimeOfDay;
+class DateTimeComponentFrom extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision;
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg != null) {
             return arg[this.precision.toLowerCase()];
         }
         else {
             return null;
         }
-    };
-    return DateTimeComponentFrom;
-}(expression_1.Expression));
-exports.DateTimeComponentFrom = DateTimeComponentFrom;
-var DateFrom = /** @class */ (function (_super) {
-    __extends(DateFrom, _super);
-    function DateFrom(json) {
-        return _super.call(this, json) || this;
     }
-    DateFrom.prototype.exec = function (ctx) {
-        var date = this.execArgs(ctx);
+}
+exports.DateTimeComponentFrom = DateTimeComponentFrom;
+class DateFrom extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const date = this.execArgs(ctx);
         if (date != null) {
             return date.getDate();
         }
         else {
             return null;
         }
-    };
-    return DateFrom;
-}(expression_1.Expression));
-exports.DateFrom = DateFrom;
-var TimeFrom = /** @class */ (function (_super) {
-    __extends(TimeFrom, _super);
-    function TimeFrom(json) {
-        return _super.call(this, json) || this;
     }
-    TimeFrom.prototype.exec = function (ctx) {
-        var date = this.execArgs(ctx);
+}
+exports.DateFrom = DateFrom;
+class TimeFrom extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const date = this.execArgs(ctx);
         if (date != null) {
             return date.getTime();
         }
         else {
             return null;
         }
-    };
-    return TimeFrom;
-}(expression_1.Expression));
-exports.TimeFrom = TimeFrom;
-var TimezoneOffsetFrom = /** @class */ (function (_super) {
-    __extends(TimezoneOffsetFrom, _super);
-    function TimezoneOffsetFrom(json) {
-        return _super.call(this, json) || this;
     }
-    TimezoneOffsetFrom.prototype.exec = function (ctx) {
-        var date = this.execArgs(ctx);
+}
+exports.TimeFrom = TimeFrom;
+class TimezoneOffsetFrom extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const date = this.execArgs(ctx);
         if (date != null) {
             return date.timezoneOffset;
         }
         else {
             return null;
         }
-    };
-    return TimezoneOffsetFrom;
-}(expression_1.Expression));
+    }
+}
 exports.TimezoneOffsetFrom = TimezoneOffsetFrom;
 // Delegated to by overloaded#After
 function doAfter(a, b, precision) {
@@ -4689,15 +4243,13 @@ function doBefore(a, b, precision) {
     return a.before(b, precision);
 }
 exports.doBefore = doBefore;
-var DifferenceBetween = /** @class */ (function (_super) {
-    __extends(DifferenceBetween, _super);
-    function DifferenceBetween(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision;
-        return _this;
+class DifferenceBetween extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision;
     }
-    DifferenceBetween.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx);
+    exec(ctx) {
+        const args = this.execArgs(ctx);
         // Check to make sure args exist and that they have differenceBetween functions so that they can be compared to one another
         if (args[0] == null ||
             args[1] == null ||
@@ -4705,26 +4257,23 @@ var DifferenceBetween = /** @class */ (function (_super) {
             typeof args[1].differenceBetween !== 'function') {
             return null;
         }
-        var result = args[0].differenceBetween(args[1], this.precision != null ? this.precision.toLowerCase() : undefined);
+        const result = args[0].differenceBetween(args[1], this.precision != null ? this.precision.toLowerCase() : undefined);
         if (result != null && result.isPoint()) {
             return result.low;
         }
         else {
             return result;
         }
-    };
-    return DifferenceBetween;
-}(expression_1.Expression));
-exports.DifferenceBetween = DifferenceBetween;
-var DurationBetween = /** @class */ (function (_super) {
-    __extends(DurationBetween, _super);
-    function DurationBetween(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision;
-        return _this;
     }
-    DurationBetween.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx);
+}
+exports.DifferenceBetween = DifferenceBetween;
+class DurationBetween extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision;
+    }
+    exec(ctx) {
+        const args = this.execArgs(ctx);
         // Check to make sure args exist and that they have durationBetween functions so that they can be compared to one another
         if (args[0] == null ||
             args[1] == null ||
@@ -4732,88 +4281,42 @@ var DurationBetween = /** @class */ (function (_super) {
             typeof args[1].durationBetween !== 'function') {
             return null;
         }
-        var result = args[0].durationBetween(args[1], this.precision != null ? this.precision.toLowerCase() : undefined);
+        const result = args[0].durationBetween(args[1], this.precision != null ? this.precision.toLowerCase() : undefined);
         if (result != null && result.isPoint()) {
             return result.low;
         }
         else {
             return result;
         }
-    };
-    return DurationBetween;
-}(expression_1.Expression));
+    }
+}
 exports.DurationBetween = DurationBetween;
 
 },{"../datatypes/datatypes":6,"./builder":16,"./expression":22,"./literal":29}],21:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VersionedIdentifier = exports.IncludeDef = exports.UsingDef = void 0;
-var expression_1 = require("./expression");
-var UsingDef = /** @class */ (function (_super) {
-    __extends(UsingDef, _super);
-    function UsingDef() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return UsingDef;
-}(expression_1.UnimplementedExpression));
+const expression_1 = require("./expression");
+class UsingDef extends expression_1.UnimplementedExpression {
+}
 exports.UsingDef = UsingDef;
-var IncludeDef = /** @class */ (function (_super) {
-    __extends(IncludeDef, _super);
-    function IncludeDef() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return IncludeDef;
-}(expression_1.UnimplementedExpression));
+class IncludeDef extends expression_1.UnimplementedExpression {
+}
 exports.IncludeDef = IncludeDef;
-var VersionedIdentifier = /** @class */ (function (_super) {
-    __extends(VersionedIdentifier, _super);
-    function VersionedIdentifier() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return VersionedIdentifier;
-}(expression_1.UnimplementedExpression));
+class VersionedIdentifier extends expression_1.UnimplementedExpression {
+}
 exports.VersionedIdentifier = VersionedIdentifier;
 
 },{"./expression":22}],22:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UnimplementedExpression = exports.Expression = void 0;
-var util_1 = require("../util/util");
-var builder_1 = require("./builder");
-var Expression = /** @class */ (function () {
-    function Expression(json) {
+const util_1 = require("../util/util");
+const builder_1 = require("./builder");
+class Expression {
+    constructor(json) {
         if (json.operand != null) {
-            var op = (0, builder_1.build)(json.operand);
+            const op = (0, builder_1.build)(json.operand);
             if ((0, util_1.typeIsArray)(json.operand)) {
                 this.args = op;
             }
@@ -4825,23 +4328,23 @@ var Expression = /** @class */ (function () {
             this.localId = json.localId;
         }
     }
-    Expression.prototype.execute = function (ctx) {
+    execute(ctx) {
         if (this.localId != null) {
             // Store the localId and result on the root context of this library
-            var execValue = this.exec(ctx);
+            const execValue = this.exec(ctx);
             ctx.rootContext().setLocalIdWithResult(this.localId, execValue);
             return execValue;
         }
         else {
             return this.exec(ctx);
         }
-    };
-    Expression.prototype.exec = function (_ctx) {
+    }
+    exec(_ctx) {
         return this;
-    };
-    Expression.prototype.execArgs = function (ctx) {
+    }
+    execArgs(ctx) {
         if (this.args != null) {
-            return this.args.map(function (arg) { return arg.execute(ctx); });
+            return this.args.map(arg => arg.execute(ctx));
         }
         else if (this.arg != null) {
             return this.arg.execute(ctx);
@@ -4849,22 +4352,18 @@ var Expression = /** @class */ (function () {
         else {
             return null;
         }
-    };
-    return Expression;
-}());
-exports.Expression = Expression;
-var UnimplementedExpression = /** @class */ (function (_super) {
-    __extends(UnimplementedExpression, _super);
-    function UnimplementedExpression(json) {
-        var _this = _super.call(this, json) || this;
-        _this.json = json;
-        return _this;
     }
-    UnimplementedExpression.prototype.exec = function (_ctx) {
-        throw new Error("Unimplemented Expression: ".concat(this.json.type));
-    };
-    return UnimplementedExpression;
-}(Expression));
+}
+exports.Expression = Expression;
+class UnimplementedExpression extends Expression {
+    constructor(json) {
+        super(json);
+        this.json = json;
+    }
+    exec(_ctx) {
+        throw new Error(`Unimplemented Expression: ${this.json.type}`);
+    }
+}
 exports.UnimplementedExpression = UnimplementedExpression;
 
 },{"../util/util":55,"./builder":16}],23:[function(require,module,exports){
@@ -4910,7 +4409,7 @@ __exportStar(require("./overloaded"), exports);
 // https://stackoverflow.com/questions/41293108/how-to-do-re-export-with-overrides
 // TODO: we should improve this by perhaps renaming and reworking these functions
 // it's a bit confusing right now giving the interval exports precedence over the others
-var interval_1 = require("./interval");
+const interval_1 = require("./interval");
 Object.defineProperty(exports, "doBefore", { enumerable: true, get: function () { return interval_1.doBefore; } });
 Object.defineProperty(exports, "doUnion", { enumerable: true, get: function () { return interval_1.doUnion; } });
 Object.defineProperty(exports, "doAfter", { enumerable: true, get: function () { return interval_1.doAfter; } });
@@ -4922,57 +4421,27 @@ Object.defineProperty(exports, "doContains", { enumerable: true, get: function (
 
 },{"./aggregate":14,"./arithmetic":15,"./clinical":17,"./comparison":18,"./conditional":19,"./datetime":20,"./declaration":21,"./expression":22,"./external":24,"./instance":25,"./interval":26,"./list":28,"./literal":29,"./logical":30,"./message":31,"./nullological":32,"./overloaded":33,"./parameters":34,"./quantity":35,"./query":36,"./ratio":37,"./reusable":38,"./string":39,"./structured":40,"./type":41}],24:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Retrieve = void 0;
-var expression_1 = require("./expression");
-var util_1 = require("../util/util");
-var builder_1 = require("./builder");
-var Retrieve = /** @class */ (function (_super) {
-    __extends(Retrieve, _super);
-    function Retrieve(json) {
-        var _this = _super.call(this, json) || this;
-        _this.datatype = json.dataType;
-        _this.templateId = json.templateId;
-        _this.codeProperty = json.codeProperty;
-        _this.codes = (0, builder_1.build)(json.codes);
-        _this.dateProperty = json.dateProperty;
-        _this.dateRange = (0, builder_1.build)(json.dateRange);
-        return _this;
+const expression_1 = require("./expression");
+const util_1 = require("../util/util");
+const builder_1 = require("./builder");
+class Retrieve extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.datatype = json.dataType;
+        this.templateId = json.templateId;
+        this.codeProperty = json.codeProperty;
+        this.codes = (0, builder_1.build)(json.codes);
+        this.dateProperty = json.dateProperty;
+        this.dateRange = (0, builder_1.build)(json.dateRange);
     }
-    Retrieve.prototype.exec = function (ctx) {
-        var _a;
-        var _this = this;
+    exec(ctx) {
         // Object with retrieve information to pass back to patient source
         // Always assign datatype. Assign codeProperty and dateProperty if present
-        var retrieveDetails = __assign(__assign({ datatype: this.datatype }, (this.codeProperty ? { codeProperty: this.codeProperty } : {})), (this.dateProperty ? { dateProperty: this.dateProperty } : {}));
+        const retrieveDetails = Object.assign(Object.assign({ datatype: this.datatype }, (this.codeProperty ? { codeProperty: this.codeProperty } : {})), (this.dateProperty ? { dateProperty: this.dateProperty } : {}));
         if (this.codes) {
-            var resolvedCodes = this.codes.execute(ctx);
+            const resolvedCodes = this.codes.execute(ctx);
             if (resolvedCodes == null) {
                 return [];
             }
@@ -4984,79 +4453,58 @@ var Retrieve = /** @class */ (function (_super) {
         if (this.templateId) {
             retrieveDetails.templateId = this.templateId;
         }
-        var records = ctx.findRecords(this.templateId != null ? this.templateId : this.datatype, retrieveDetails);
+        let records = ctx.findRecords(this.templateId != null ? this.templateId : this.datatype, retrieveDetails);
         if (retrieveDetails.codes) {
-            records = records.filter(function (r) { return _this.recordMatchesCodesOrVS(r, retrieveDetails.codes); });
+            records = records.filter((r) => this.recordMatchesCodesOrVS(r, retrieveDetails.codes));
         }
         if (retrieveDetails.dateRange && this.dateProperty) {
-            records = records.filter(function (r) { var _a; return (_a = retrieveDetails.dateRange) === null || _a === void 0 ? void 0 : _a.includes(r.getDateOrInterval(_this.dateProperty)); });
+            records = records.filter((r) => { var _a; return (_a = retrieveDetails.dateRange) === null || _a === void 0 ? void 0 : _a.includes(r.getDateOrInterval(this.dateProperty)); });
         }
         if (Array.isArray(records)) {
-            (_a = ctx.evaluatedRecords).push.apply(_a, records);
+            ctx.evaluatedRecords.push(...records);
         }
         else {
             ctx.evaluatedRecords.push(records);
         }
         return records;
-    };
-    Retrieve.prototype.recordMatchesCodesOrVS = function (record, codes) {
-        var _this = this;
+    }
+    recordMatchesCodesOrVS(record, codes) {
         if ((0, util_1.typeIsArray)(codes)) {
-            return codes.some(function (c) { return c.hasMatch(record.getCode(_this.codeProperty)); });
+            return codes.some(c => c.hasMatch(record.getCode(this.codeProperty)));
         }
         else {
             return codes.hasMatch(record.getCode(this.codeProperty));
         }
-    };
-    return Retrieve;
-}(expression_1.Expression));
+    }
+}
 exports.Retrieve = Retrieve;
 
 },{"../util/util":55,"./builder":16,"./expression":22}],25:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Instance = void 0;
-var expression_1 = require("./expression");
-var quantity_1 = require("../datatypes/quantity");
-var datatypes_1 = require("../datatypes/datatypes");
-var builder_1 = require("./builder");
-var Element = /** @class */ (function () {
-    function Element(json) {
+const expression_1 = require("./expression");
+const quantity_1 = require("../datatypes/quantity");
+const datatypes_1 = require("../datatypes/datatypes");
+const builder_1 = require("./builder");
+class Element {
+    constructor(json) {
         this.name = json.name;
         this.value = (0, builder_1.build)(json.value);
     }
-    Element.prototype.exec = function (ctx) {
+    exec(ctx) {
         return this.value != null ? this.value.execute(ctx) : undefined;
-    };
-    return Element;
-}());
-var Instance = /** @class */ (function (_super) {
-    __extends(Instance, _super);
-    function Instance(json) {
-        var _this = _super.call(this, json) || this;
-        _this.classType = json.classType;
-        _this.element = json.element.map(function (child) { return new Element(child); });
-        return _this;
     }
-    Instance.prototype.exec = function (ctx) {
-        var obj = {};
-        for (var _i = 0, _a = this.element; _i < _a.length; _i++) {
-            var el = _a[_i];
+}
+class Instance extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.classType = json.classType;
+        this.element = json.element.map((child) => new Element(child));
+    }
+    exec(ctx) {
+        const obj = {};
+        for (const el of this.element) {
             obj[el.name] = el.exec(ctx);
         }
         switch (this.classType) {
@@ -5069,28 +4517,12 @@ var Instance = /** @class */ (function (_super) {
             default:
                 return obj;
         }
-    };
-    return Instance;
-}(expression_1.Expression));
+    }
+}
 exports.Instance = Instance;
 
 },{"../datatypes/datatypes":6,"../datatypes/quantity":11,"./builder":16,"./expression":22}],26:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -5112,43 +4544,37 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Collapse = exports.Expand = exports.Ends = exports.Starts = exports.End = exports.Start = exports.Size = exports.Width = exports.doIntersect = exports.doExcept = exports.doUnion = exports.OverlapsBefore = exports.OverlapsAfter = exports.Overlaps = exports.MeetsBefore = exports.MeetsAfter = exports.Meets = exports.doBefore = exports.doAfter = exports.doProperIncludes = exports.doIncludes = exports.doContains = exports.Interval = void 0;
-var expression_1 = require("./expression");
-var quantity_1 = require("../datatypes/quantity");
-var math_1 = require("../util/math");
-var units_1 = require("../util/units");
-var dtivl = __importStar(require("../datatypes/interval"));
-var builder_1 = require("./builder");
-var Interval = /** @class */ (function (_super) {
-    __extends(Interval, _super);
-    function Interval(json) {
-        var _this = _super.call(this, json) || this;
-        _this.lowClosed = json.lowClosed;
-        _this.lowClosedExpression = (0, builder_1.build)(json.lowClosedExpression);
-        _this.highClosed = json.highClosed;
-        _this.highClosedExpression = (0, builder_1.build)(json.highClosedExpression);
-        _this.low = (0, builder_1.build)(json.low);
-        _this.high = (0, builder_1.build)(json.high);
-        return _this;
+const expression_1 = require("./expression");
+const quantity_1 = require("../datatypes/quantity");
+const math_1 = require("../util/math");
+const units_1 = require("../util/units");
+const dtivl = __importStar(require("../datatypes/interval"));
+const builder_1 = require("./builder");
+class Interval extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.lowClosed = json.lowClosed;
+        this.lowClosedExpression = (0, builder_1.build)(json.lowClosedExpression);
+        this.highClosed = json.highClosed;
+        this.highClosedExpression = (0, builder_1.build)(json.highClosedExpression);
+        this.low = (0, builder_1.build)(json.low);
+        this.high = (0, builder_1.build)(json.high);
     }
-    Object.defineProperty(Interval.prototype, "isInterval", {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Interval.prototype.exec = function (ctx) {
-        var lowValue = this.low.execute(ctx);
-        var highValue = this.high.execute(ctx);
-        var lowClosed = this.lowClosed != null
+    // Define a simple getter to allow type-checking of this class without instanceof
+    // and in a way that survives minification (as opposed to checking constructor.name)
+    get isInterval() {
+        return true;
+    }
+    exec(ctx) {
+        const lowValue = this.low.execute(ctx);
+        const highValue = this.high.execute(ctx);
+        const lowClosed = this.lowClosed != null
             ? this.lowClosed
             : this.lowClosedExpression && this.lowClosedExpression.execute(ctx);
-        var highClosed = this.highClosed != null
+        const highClosed = this.highClosed != null
             ? this.highClosed
             : this.highClosedExpression && this.highClosedExpression.execute(ctx);
-        var defaultPointType;
+        let defaultPointType;
         if (lowValue == null && highValue == null) {
             // try to get the default point type from a cast
             if (this.low.asTypeSpecifier && this.low.asTypeSpecifier.type === 'NamedTypeSpecifier') {
@@ -5160,9 +4586,8 @@ var Interval = /** @class */ (function (_super) {
             }
         }
         return new dtivl.Interval(lowValue, highValue, lowClosed, highClosed, defaultPointType);
-    };
-    return Interval;
-}(expression_1.Expression));
+    }
+}
 exports.Interval = Interval;
 // Equal is completely handled by overloaded#Equal
 // NotEqual is completely handled by overloaded#Equal
@@ -5191,119 +4616,101 @@ function doBefore(a, b, precision) {
     return a.before(b, precision);
 }
 exports.doBefore = doBefore;
-var Meets = /** @class */ (function (_super) {
-    __extends(Meets, _super);
-    function Meets(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
-        return _this;
+class Meets extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     }
-    Meets.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), a = _a[0], b = _a[1];
+    exec(ctx) {
+        const [a, b] = this.execArgs(ctx);
         if (a != null && b != null) {
             return a.meets(b, this.precision);
         }
         else {
             return null;
         }
-    };
-    return Meets;
-}(expression_1.Expression));
-exports.Meets = Meets;
-var MeetsAfter = /** @class */ (function (_super) {
-    __extends(MeetsAfter, _super);
-    function MeetsAfter(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
-        return _this;
     }
-    MeetsAfter.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), a = _a[0], b = _a[1];
+}
+exports.Meets = Meets;
+class MeetsAfter extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
+    }
+    exec(ctx) {
+        const [a, b] = this.execArgs(ctx);
         if (a != null && b != null) {
             return a.meetsAfter(b, this.precision);
         }
         else {
             return null;
         }
-    };
-    return MeetsAfter;
-}(expression_1.Expression));
-exports.MeetsAfter = MeetsAfter;
-var MeetsBefore = /** @class */ (function (_super) {
-    __extends(MeetsBefore, _super);
-    function MeetsBefore(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
-        return _this;
     }
-    MeetsBefore.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), a = _a[0], b = _a[1];
+}
+exports.MeetsAfter = MeetsAfter;
+class MeetsBefore extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
+    }
+    exec(ctx) {
+        const [a, b] = this.execArgs(ctx);
         if (a != null && b != null) {
             return a.meetsBefore(b, this.precision);
         }
         else {
             return null;
         }
-    };
-    return MeetsBefore;
-}(expression_1.Expression));
-exports.MeetsBefore = MeetsBefore;
-var Overlaps = /** @class */ (function (_super) {
-    __extends(Overlaps, _super);
-    function Overlaps(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
-        return _this;
     }
-    Overlaps.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), a = _a[0], b = _a[1];
+}
+exports.MeetsBefore = MeetsBefore;
+class Overlaps extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
+    }
+    exec(ctx) {
+        const [a, b] = this.execArgs(ctx);
         if (a != null && b != null) {
             return a.overlaps(b, this.precision);
         }
         else {
             return null;
         }
-    };
-    return Overlaps;
-}(expression_1.Expression));
-exports.Overlaps = Overlaps;
-var OverlapsAfter = /** @class */ (function (_super) {
-    __extends(OverlapsAfter, _super);
-    function OverlapsAfter(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
-        return _this;
     }
-    OverlapsAfter.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), a = _a[0], b = _a[1];
+}
+exports.Overlaps = Overlaps;
+class OverlapsAfter extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
+    }
+    exec(ctx) {
+        const [a, b] = this.execArgs(ctx);
         if (a != null && b != null) {
             return a.overlapsAfter(b, this.precision);
         }
         else {
             return null;
         }
-    };
-    return OverlapsAfter;
-}(expression_1.Expression));
-exports.OverlapsAfter = OverlapsAfter;
-var OverlapsBefore = /** @class */ (function (_super) {
-    __extends(OverlapsBefore, _super);
-    function OverlapsBefore(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
-        return _this;
     }
-    OverlapsBefore.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), a = _a[0], b = _a[1];
+}
+exports.OverlapsAfter = OverlapsAfter;
+class OverlapsBefore extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
+    }
+    exec(ctx) {
+        const [a, b] = this.execArgs(ctx);
         if (a != null && b != null) {
             return a.overlapsBefore(b, this.precision);
         }
         else {
             return null;
         }
-    };
-    return OverlapsBefore;
-}(expression_1.Expression));
+    }
+}
 exports.OverlapsBefore = OverlapsBefore;
 // Delegated to by overloaded#Union
 function doUnion(a, b) {
@@ -5330,119 +4737,104 @@ function doIntersect(a, b) {
     }
 }
 exports.doIntersect = doIntersect;
-var Width = /** @class */ (function (_super) {
-    __extends(Width, _super);
-    function Width(json) {
-        return _super.call(this, json) || this;
+class Width extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    Width.prototype.exec = function (ctx) {
-        var interval = this.arg.execute(ctx);
+    exec(ctx) {
+        const interval = this.arg.execute(ctx);
         if (interval == null) {
             return null;
         }
         return interval.width();
-    };
-    return Width;
-}(expression_1.Expression));
-exports.Width = Width;
-var Size = /** @class */ (function (_super) {
-    __extends(Size, _super);
-    function Size(json) {
-        return _super.call(this, json) || this;
     }
-    Size.prototype.exec = function (ctx) {
-        var interval = this.arg.execute(ctx);
+}
+exports.Width = Width;
+class Size extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const interval = this.arg.execute(ctx);
         if (interval == null) {
             return null;
         }
         return interval.size();
-    };
-    return Size;
-}(expression_1.Expression));
-exports.Size = Size;
-var Start = /** @class */ (function (_super) {
-    __extends(Start, _super);
-    function Start(json) {
-        return _super.call(this, json) || this;
     }
-    Start.prototype.exec = function (ctx) {
-        var interval = this.arg.execute(ctx);
+}
+exports.Size = Size;
+class Start extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const interval = this.arg.execute(ctx);
         if (interval == null) {
             return null;
         }
-        var start = interval.start();
+        const start = interval.start();
         // fix the timezoneOffset of minimum Datetime to match context offset
         if (start && start.isDateTime && start.equals(math_1.MIN_DATETIME_VALUE)) {
             start.timezoneOffset = ctx.getTimezoneOffset();
         }
         return start;
-    };
-    return Start;
-}(expression_1.Expression));
-exports.Start = Start;
-var End = /** @class */ (function (_super) {
-    __extends(End, _super);
-    function End(json) {
-        return _super.call(this, json) || this;
     }
-    End.prototype.exec = function (ctx) {
-        var interval = this.arg.execute(ctx);
+}
+exports.Start = Start;
+class End extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const interval = this.arg.execute(ctx);
         if (interval == null) {
             return null;
         }
-        var end = interval.end();
+        const end = interval.end();
         // fix the timezoneOffset of maximum Datetime to match context offset
         if (end && end.isDateTime && end.equals(math_1.MAX_DATETIME_VALUE)) {
             end.timezoneOffset = ctx.getTimezoneOffset();
         }
         return end;
-    };
-    return End;
-}(expression_1.Expression));
-exports.End = End;
-var Starts = /** @class */ (function (_super) {
-    __extends(Starts, _super);
-    function Starts(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
-        return _this;
     }
-    Starts.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), a = _a[0], b = _a[1];
+}
+exports.End = End;
+class Starts extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
+    }
+    exec(ctx) {
+        const [a, b] = this.execArgs(ctx);
         if (a != null && b != null) {
             return a.starts(b, this.precision);
         }
         else {
             return null;
         }
-    };
-    return Starts;
-}(expression_1.Expression));
-exports.Starts = Starts;
-var Ends = /** @class */ (function (_super) {
-    __extends(Ends, _super);
-    function Ends(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
-        return _this;
     }
-    Ends.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), a = _a[0], b = _a[1];
+}
+exports.Starts = Starts;
+class Ends extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
+    }
+    exec(ctx) {
+        const [a, b] = this.execArgs(ctx);
         if (a != null && b != null) {
             return a.ends(b, this.precision);
         }
         else {
             return null;
         }
-    };
-    return Ends;
-}(expression_1.Expression));
+    }
+}
 exports.Ends = Ends;
 function intervalListType(intervals) {
     // Returns one of null, 'time', 'date', 'datetime', 'quantity', 'integer', 'decimal' or 'mismatch'
-    var type = null;
-    for (var _i = 0, intervals_1 = intervals; _i < intervals_1.length; _i++) {
-        var itvl = intervals_1[_i];
+    let type = null;
+    for (const itvl of intervals) {
         if (itvl == null) {
             continue;
         }
@@ -5451,8 +4843,8 @@ function intervalListType(intervals) {
             continue;
         }
         // if one end is null (but not both), the type can be determined from the other end
-        var low = itvl.low != null ? itvl.low : itvl.high;
-        var high = itvl.high != null ? itvl.high : itvl.low;
+        const low = itvl.low != null ? itvl.low : itvl.high;
+        const high = itvl.high != null ? itvl.high : itvl.low;
         if (low.isTime && low.isTime() && high.isTime && high.isTime()) {
             if (type == null) {
                 type = 'time';
@@ -5529,20 +4921,19 @@ function intervalListType(intervals) {
     }
     return type;
 }
-var Expand = /** @class */ (function (_super) {
-    __extends(Expand, _super);
-    function Expand(json) {
-        return _super.call(this, json) || this;
+class Expand extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    Expand.prototype.exec = function (ctx) {
+    exec(ctx) {
         // expand(argument List<Interval<T>>, per Quantity) List<Interval<T>>
-        var defaultPer, expandFunction;
-        var _a = this.execArgs(ctx), intervals = _a[0], per = _a[1];
+        let defaultPer, expandFunction;
+        let [intervals, per] = this.execArgs(ctx);
         // CQL 1.5 introduced an overload to allow singular intervals; make it a list so we can use the same logic for either overload
         if (!Array.isArray(intervals)) {
             intervals = [intervals];
         }
-        var type = intervalListType(intervals);
+        const type = intervalListType(intervals);
         if (type === 'mismatch') {
             throw new Error('List of intervals contains mismatched types.');
         }
@@ -5556,22 +4947,21 @@ var Expand = /** @class */ (function (_super) {
         }
         if (['time', 'date', 'datetime'].includes(type)) {
             expandFunction = this.expandDTishInterval;
-            defaultPer = function (interval) { return new quantity_1.Quantity(1, interval.low.getPrecision()); };
+            defaultPer = (interval) => new quantity_1.Quantity(1, interval.low.getPrecision());
         }
         else if (['quantity'].includes(type)) {
             expandFunction = this.expandQuantityInterval;
-            defaultPer = function (interval) { return new quantity_1.Quantity(1, interval.low.unit); };
+            defaultPer = (interval) => new quantity_1.Quantity(1, interval.low.unit);
         }
         else if (['integer', 'decimal'].includes(type)) {
             expandFunction = this.expandNumericInterval;
-            defaultPer = function (_interval) { return new quantity_1.Quantity(1, '1'); };
+            defaultPer = (_interval) => new quantity_1.Quantity(1, '1');
         }
         else {
             throw new Error('Interval list type not yet supported.');
         }
-        var results = [];
-        for (var _i = 0, intervals_2 = intervals; _i < intervals_2.length; _i++) {
-            var interval = intervals_2[_i];
+        const results = [];
+        for (const interval of intervals) {
             if (interval == null) {
                 continue;
             }
@@ -5585,15 +4975,15 @@ var Expand = /** @class */ (function (_super) {
                 interval.high = interval.high.getDateTime();
             }
             per = per != null ? per : defaultPer(interval);
-            var items = expandFunction.call(this, interval, per);
+            const items = expandFunction.call(this, interval, per);
             if (items === null) {
                 return null;
             }
-            results.push.apply(results, (items || []));
+            results.push(...(items || []));
         }
         return results;
-    };
-    Expand.prototype.expandDTishInterval = function (interval, per) {
+    }
+    expandDTishInterval(interval, per) {
         per.unit = (0, units_1.convertToCQLDateUnit)(per.unit);
         if (per.unit === 'week') {
             per.value *= 7;
@@ -5609,20 +4999,20 @@ var Expand = /** @class */ (function (_super) {
         if (interval.low == null || interval.high == null) {
             return null;
         }
-        var low = interval.lowClosed ? interval.low : interval.low.successor();
-        var high = interval.highClosed ? interval.high : interval.high.predecessor();
+        let low = interval.lowClosed ? interval.low : interval.low.successor();
+        let high = interval.highClosed ? interval.high : interval.high.predecessor();
         if (low.after(high)) {
             return [];
         }
         if (interval.low.isLessPrecise(per.unit) || interval.high.isLessPrecise(per.unit)) {
             return [];
         }
-        var current_low = low;
-        var results = [];
+        let current_low = low;
+        const results = [];
         low = this.truncateToPrecision(low, per.unit);
         high = this.truncateToPrecision(high, per.unit);
-        var current_high = current_low.add(per.value, per.unit).predecessor();
-        var intervalToAdd = new dtivl.Interval(current_low, current_high, true, true);
+        let current_high = current_low.add(per.value, per.unit).predecessor();
+        let intervalToAdd = new dtivl.Interval(current_low, current_high, true, true);
         while (intervalToAdd.high.sameOrBefore(high)) {
             results.push(intervalToAdd);
             current_low = current_low.add(per.value, per.unit);
@@ -5630,13 +5020,12 @@ var Expand = /** @class */ (function (_super) {
             intervalToAdd = new dtivl.Interval(current_low, current_high, true, true);
         }
         return results;
-    };
-    Expand.prototype.truncateToPrecision = function (value, unit) {
+    }
+    truncateToPrecision(value, unit) {
         // If interval boundaries are more precise than per quantity, truncate to
         // the precision specified by the per
-        var shouldTruncate = false;
-        for (var _i = 0, _a = value.constructor.FIELDS; _i < _a.length; _i++) {
-            var field = _a[_i];
+        let shouldTruncate = false;
+        for (const field of value.constructor.FIELDS) {
             if (shouldTruncate) {
                 value[field] = null;
             }
@@ -5646,11 +5035,11 @@ var Expand = /** @class */ (function (_super) {
             }
         }
         return value;
-    };
-    Expand.prototype.expandQuantityInterval = function (interval, per) {
+    }
+    expandQuantityInterval(interval, per) {
         // we want to convert everything to the more precise of the interval.low or per
-        var result_units;
-        var res = (0, units_1.compareUnits)(interval.low.unit, per.unit);
+        let result_units;
+        const res = (0, units_1.compareUnits)(interval.low.unit, per.unit);
         if (res != null && res > 0) {
             //interval.low.unit is 'bigger' aka les precise
             result_units = per.unit;
@@ -5658,32 +5047,31 @@ var Expand = /** @class */ (function (_super) {
         else {
             result_units = interval.low.unit;
         }
-        var low_value = (0, units_1.convertUnit)(interval.low.value, interval.low.unit, result_units);
-        var high_value = (0, units_1.convertUnit)(interval.high.value, interval.high.unit, result_units);
-        var per_value = (0, units_1.convertUnit)(per.value, per.unit, result_units);
+        const low_value = (0, units_1.convertUnit)(interval.low.value, interval.low.unit, result_units);
+        const high_value = (0, units_1.convertUnit)(interval.high.value, interval.high.unit, result_units);
+        const per_value = (0, units_1.convertUnit)(per.value, per.unit, result_units);
         // return null if unit conversion failed, must have mismatched units
         if (!(low_value != null && high_value != null && per_value != null)) {
             return null;
         }
-        var results = this.makeNumericIntervalList(low_value, high_value, interval.lowClosed, interval.highClosed, per_value);
-        for (var _i = 0, results_1 = results; _i < results_1.length; _i++) {
-            var itvl = results_1[_i];
+        const results = this.makeNumericIntervalList(low_value, high_value, interval.lowClosed, interval.highClosed, per_value);
+        for (const itvl of results) {
             itvl.low = new quantity_1.Quantity(itvl.low, result_units);
             itvl.high = new quantity_1.Quantity(itvl.high, result_units);
         }
         return results;
-    };
-    Expand.prototype.expandNumericInterval = function (interval, per) {
+    }
+    expandNumericInterval(interval, per) {
         if (per.unit !== '1' && per.unit !== '') {
             return null;
         }
         return this.makeNumericIntervalList(interval.low, interval.high, interval.lowClosed, interval.highClosed, per.value);
-    };
-    Expand.prototype.makeNumericIntervalList = function (low, high, lowClosed, highClosed, perValue) {
+    }
+    makeNumericIntervalList(low, high, lowClosed, highClosed, perValue) {
         // If the per value is a Decimal (has a .), 8 decimal places are appropriate
         // Integers should have 0 Decimal places
-        var perIsDecimal = perValue.toString().includes('.');
-        var decimalPrecision = perIsDecimal ? 8 : 0;
+        const perIsDecimal = perValue.toString().includes('.');
+        const decimalPrecision = perIsDecimal ? 8 : 0;
         low = lowClosed ? low : (0, math_1.successor)(low);
         high = highClosed ? high : (0, math_1.predecessor)(high);
         // If the interval boundaries are more precise than the per quantity, the
@@ -5697,20 +5085,20 @@ var Expand = /** @class */ (function (_super) {
         if (low == null || high == null) {
             return [];
         }
-        var perUnitSize = perIsDecimal ? 0.00000001 : 1;
+        const perUnitSize = perIsDecimal ? 0.00000001 : 1;
         if (low === high &&
             Number.isInteger(low) &&
             Number.isInteger(high) &&
             !Number.isInteger(perValue)) {
             high = parseFloat((high + 1).toFixed(decimalPrecision));
         }
-        var current_low = low;
-        var results = [];
+        let current_low = low;
+        const results = [];
         if (perValue > high - low + perUnitSize) {
             return [];
         }
-        var current_high = parseFloat((current_low + perValue - perUnitSize).toFixed(decimalPrecision));
-        var intervalToAdd = new dtivl.Interval(current_low, current_high, true, true);
+        let current_high = parseFloat((current_low + perValue - perUnitSize).toFixed(decimalPrecision));
+        let intervalToAdd = new dtivl.Interval(current_low, current_high, true, true);
         while (intervalToAdd.high <= high) {
             results.push(intervalToAdd);
             current_low = parseFloat((current_low + perValue).toFixed(decimalPrecision));
@@ -5718,28 +5106,24 @@ var Expand = /** @class */ (function (_super) {
             intervalToAdd = new dtivl.Interval(current_low, current_high, true, true);
         }
         return results;
-    };
-    return Expand;
-}(expression_1.Expression));
-exports.Expand = Expand;
-var Collapse = /** @class */ (function (_super) {
-    __extends(Collapse, _super);
-    function Collapse(json) {
-        return _super.call(this, json) || this;
     }
-    Collapse.prototype.exec = function (ctx) {
+}
+exports.Expand = Expand;
+class Collapse extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
         // collapse(argument List<Interval<T>>, per Quantity) List<Interval<T>>
-        var _a = this.execArgs(ctx), intervals = _a[0], perWidth = _a[1];
+        const [intervals, perWidth] = this.execArgs(ctx);
         return collapseIntervals(intervals, perWidth);
-    };
-    return Collapse;
-}(expression_1.Expression));
+    }
+}
 exports.Collapse = Collapse;
 function collapseIntervals(intervals, perWidth) {
     // Clone intervals so this function remains idempotent
-    var intervalsClone = [];
-    for (var _i = 0, intervals_3 = intervals; _i < intervals_3.length; _i++) {
-        var interval = intervals_3[_i];
+    const intervalsClone = [];
+    for (const interval of intervals) {
         // The spec says to ignore null intervals
         if (interval != null) {
             intervalsClone.push(interval.copy());
@@ -5809,9 +5193,9 @@ function collapseIntervals(intervals, perWidth) {
             return 0;
         });
         // collapse intervals as necessary
-        var collapsedIntervals = [];
-        var a = intervalsClone.shift();
-        var b = intervalsClone.shift();
+        const collapsedIntervals = [];
+        let a = intervalsClone.shift();
+        let b = intervalsClone.shift();
         while (b) {
             if (b.low && typeof b.low.durationBetween === 'function') {
                 // handle DateTimes using durationBetween
@@ -5861,7 +5245,7 @@ function collapseIntervals(intervals, perWidth) {
 function truncateDecimal(decimal, decimalPlaces) {
     // like parseFloat().toFixed() but floor rather than round
     // Needed for when per precision is less than the interval input precision
-    var re = new RegExp('^-?\\d+(?:.\\d{0,' + (decimalPlaces || -1) + '})?');
+    const re = new RegExp('^-?\\d+(?:.\\d{0,' + (decimalPlaces || -1) + '})?');
     return parseFloat(decimal.toString().match(re)[0]);
 }
 
@@ -5869,58 +5253,52 @@ function truncateDecimal(decimal, decimalPlaces) {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Library = void 0;
-var expressions_1 = require("./expressions");
-var Library = /** @class */ (function () {
-    function Library(json, libraryManager) {
+const expressions_1 = require("./expressions");
+class Library {
+    constructor(json, libraryManager) {
         this.source = json;
         // usings
-        var usingDefs = (json.library.usings && json.library.usings.def) || [];
+        const usingDefs = (json.library.usings && json.library.usings.def) || [];
         this.usings = usingDefs
-            .filter(function (u) { return u.localIdentifier !== 'System'; })
-            .map(function (u) {
+            .filter((u) => u.localIdentifier !== 'System')
+            .map((u) => {
             return { name: u.localIdentifier, version: u.version };
         });
         // parameters
-        var paramDefs = (json.library.parameters && json.library.parameters.def) || [];
+        const paramDefs = (json.library.parameters && json.library.parameters.def) || [];
         this.parameters = {};
-        for (var _i = 0, paramDefs_1 = paramDefs; _i < paramDefs_1.length; _i++) {
-            var param = paramDefs_1[_i];
+        for (const param of paramDefs) {
             this.parameters[param.name] = new expressions_1.ParameterDef(param);
         }
         // code systems
-        var csDefs = (json.library.codeSystems && json.library.codeSystems.def) || [];
+        const csDefs = (json.library.codeSystems && json.library.codeSystems.def) || [];
         this.codesystems = {};
-        for (var _a = 0, csDefs_1 = csDefs; _a < csDefs_1.length; _a++) {
-            var codesystem = csDefs_1[_a];
+        for (const codesystem of csDefs) {
             this.codesystems[codesystem.name] = new expressions_1.CodeSystemDef(codesystem);
         }
         // value sets
-        var vsDefs = (json.library.valueSets && json.library.valueSets.def) || [];
+        const vsDefs = (json.library.valueSets && json.library.valueSets.def) || [];
         this.valuesets = {};
-        for (var _b = 0, vsDefs_1 = vsDefs; _b < vsDefs_1.length; _b++) {
-            var valueset = vsDefs_1[_b];
+        for (const valueset of vsDefs) {
             this.valuesets[valueset.name] = new expressions_1.ValueSetDef(valueset);
         }
         // codes
-        var codeDefs = (json.library.codes && json.library.codes.def) || [];
+        const codeDefs = (json.library.codes && json.library.codes.def) || [];
         this.codes = {};
-        for (var _c = 0, codeDefs_1 = codeDefs; _c < codeDefs_1.length; _c++) {
-            var code = codeDefs_1[_c];
+        for (const code of codeDefs) {
             this.codes[code.name] = new expressions_1.CodeDef(code);
         }
         // concepts
-        var conceptDefs = (json.library.concepts && json.library.concepts.def) || [];
+        const conceptDefs = (json.library.concepts && json.library.concepts.def) || [];
         this.concepts = {};
-        for (var _d = 0, conceptDefs_1 = conceptDefs; _d < conceptDefs_1.length; _d++) {
-            var concept = conceptDefs_1[_d];
+        for (const concept of conceptDefs) {
             this.concepts[concept.name] = new expressions_1.ConceptDef(concept);
         }
         // expressions
-        var exprDefs = (json.library.statements && json.library.statements.def) || [];
+        const exprDefs = (json.library.statements && json.library.statements.def) || [];
         this.expressions = {};
         this.functions = {};
-        for (var _e = 0, exprDefs_1 = exprDefs; _e < exprDefs_1.length; _e++) {
-            var expr = exprDefs_1[_e];
+        for (const expr of exprDefs) {
             if (expr.type === 'FunctionDef') {
                 if (!this.functions[expr.name]) {
                     this.functions[expr.name] = [];
@@ -5932,159 +5310,122 @@ var Library = /** @class */ (function () {
             }
         }
         // includes
-        var inclDefs = (json.library.includes && json.library.includes.def) || [];
+        const inclDefs = (json.library.includes && json.library.includes.def) || [];
         this.includes = {};
-        for (var _f = 0, inclDefs_1 = inclDefs; _f < inclDefs_1.length; _f++) {
-            var incl = inclDefs_1[_f];
+        for (const incl of inclDefs) {
             if (libraryManager) {
                 this.includes[incl.localIdentifier] = libraryManager.resolve(incl.path, incl.version);
             }
         }
         // Include codesystems from includes
-        for (var iProperty in this.includes) {
+        for (const iProperty in this.includes) {
             if (this.includes[iProperty] && this.includes[iProperty].codesystems) {
-                for (var csProperty in this.includes[iProperty].codesystems) {
+                for (const csProperty in this.includes[iProperty].codesystems) {
                     this.codesystems[csProperty] = this.includes[iProperty].codesystems[csProperty];
                 }
             }
         }
     }
-    Library.prototype.getFunction = function (identifier) {
+    getFunction(identifier) {
         return this.functions[identifier];
-    };
-    Library.prototype.get = function (identifier) {
+    }
+    get(identifier) {
         return (this.expressions[identifier] || this.includes[identifier] || this.getFunction(identifier));
-    };
-    Library.prototype.getValueSet = function (identifier, libraryName) {
+    }
+    getValueSet(identifier, libraryName) {
         if (this.valuesets[identifier] != null) {
             return this.valuesets[identifier];
         }
         return this.includes[libraryName] != null
             ? this.includes[libraryName].valuesets[identifier]
             : undefined;
-    };
-    Library.prototype.getCodeSystem = function (identifier) {
+    }
+    getCodeSystem(identifier) {
         return this.codesystems[identifier];
-    };
-    Library.prototype.getCode = function (identifier) {
+    }
+    getCode(identifier) {
         return this.codes[identifier];
-    };
-    Library.prototype.getConcept = function (identifier) {
+    }
+    getConcept(identifier) {
         return this.concepts[identifier];
-    };
-    Library.prototype.getParameter = function (name) {
+    }
+    getParameter(name) {
         return this.parameters[name];
-    };
-    return Library;
-}());
+    }
+}
 exports.Library = Library;
 
 },{"./expressions":23}],28:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Slice = exports.Last = exports.First = exports.Current = exports.Distinct = exports.Flatten = exports.ForEach = exports.doProperIncludes = exports.doIncludes = exports.doContains = exports.IndexOf = exports.ToList = exports.SingletonFrom = exports.Filter = exports.Times = exports.doIntersect = exports.doExcept = exports.doUnion = exports.Exists = exports.List = void 0;
-var expression_1 = require("./expression");
-var builder_1 = require("./builder");
-var util_1 = require("../util/util");
-var comparison_1 = require("../util/comparison");
-var List = /** @class */ (function (_super) {
-    __extends(List, _super);
-    function List(json) {
-        var _this = _super.call(this, json) || this;
-        _this.elements = (0, builder_1.build)(json.element) || [];
-        return _this;
+const expression_1 = require("./expression");
+const builder_1 = require("./builder");
+const util_1 = require("../util/util");
+const comparison_1 = require("../util/comparison");
+class List extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.elements = (0, builder_1.build)(json.element) || [];
     }
-    Object.defineProperty(List.prototype, "isList", {
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    List.prototype.exec = function (ctx) {
-        return this.elements.map(function (item) { return item.execute(ctx); });
-    };
-    return List;
-}(expression_1.Expression));
+    get isList() {
+        return true;
+    }
+    exec(ctx) {
+        return this.elements.map(item => item.execute(ctx));
+    }
+}
 exports.List = List;
-var Exists = /** @class */ (function (_super) {
-    __extends(Exists, _super);
-    function Exists(json) {
-        return _super.call(this, json) || this;
+class Exists extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    Exists.prototype.exec = function (ctx) {
-        var list = this.execArgs(ctx);
+    exec(ctx) {
+        const list = this.execArgs(ctx);
         // if list exists and has non empty length we need to make sure it isnt just full of nulls
         if (list) {
-            return list.some(function (item) { return item != null; });
+            return list.some((item) => item != null);
         }
         return false;
-    };
-    return Exists;
-}(expression_1.Expression));
+    }
+}
 exports.Exists = Exists;
 // Equal is completely handled by overloaded#Equal
 // NotEqual is completely handled by overloaded#Equal
 // Delegated to by overloaded#Union
 function doUnion(a, b) {
-    var distinct = doDistinct(a.concat(b));
+    const distinct = doDistinct(a.concat(b));
     return removeDuplicateNulls(distinct);
 }
 exports.doUnion = doUnion;
 // Delegated to by overloaded#Except
 function doExcept(a, b) {
-    var distinct = doDistinct(a);
-    var setList = removeDuplicateNulls(distinct);
-    return setList.filter(function (item) { return !doContains(b, item, true); });
+    const distinct = doDistinct(a);
+    const setList = removeDuplicateNulls(distinct);
+    return setList.filter(item => !doContains(b, item, true));
 }
 exports.doExcept = doExcept;
 // Delegated to by overloaded#Intersect
 function doIntersect(a, b) {
-    var distinct = doDistinct(a);
-    var setList = removeDuplicateNulls(distinct);
-    return setList.filter(function (item) { return doContains(b, item, true); });
+    const distinct = doDistinct(a);
+    const setList = removeDuplicateNulls(distinct);
+    return setList.filter(item => doContains(b, item, true));
 }
 exports.doIntersect = doIntersect;
 // ELM-only, not a product of CQL
-var Times = /** @class */ (function (_super) {
-    __extends(Times, _super);
-    function Times() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return Times;
-}(expression_1.UnimplementedExpression));
+class Times extends expression_1.UnimplementedExpression {
+}
 exports.Times = Times;
 // ELM-only, not a product of CQL
-var Filter = /** @class */ (function (_super) {
-    __extends(Filter, _super);
-    function Filter() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return Filter;
-}(expression_1.UnimplementedExpression));
+class Filter extends expression_1.UnimplementedExpression {
+}
 exports.Filter = Filter;
-var SingletonFrom = /** @class */ (function (_super) {
-    __extends(SingletonFrom, _super);
-    function SingletonFrom(json) {
-        return _super.call(this, json) || this;
+class SingletonFrom extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    SingletonFrom.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg != null && arg.length > 1) {
             throw new Error("IllegalArgument: 'SingletonFrom' requires a 0 or 1 arg array");
         }
@@ -6094,44 +5435,39 @@ var SingletonFrom = /** @class */ (function (_super) {
         else {
             return null;
         }
-    };
-    return SingletonFrom;
-}(expression_1.Expression));
-exports.SingletonFrom = SingletonFrom;
-var ToList = /** @class */ (function (_super) {
-    __extends(ToList, _super);
-    function ToList(json) {
-        return _super.call(this, json) || this;
     }
-    ToList.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.SingletonFrom = SingletonFrom;
+class ToList extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg != null) {
             return [arg];
         }
         else {
             return [];
         }
-    };
-    return ToList;
-}(expression_1.Expression));
-exports.ToList = ToList;
-var IndexOf = /** @class */ (function (_super) {
-    __extends(IndexOf, _super);
-    function IndexOf(json) {
-        var _this = _super.call(this, json) || this;
-        _this.source = (0, builder_1.build)(json.source);
-        _this.element = (0, builder_1.build)(json.element);
-        return _this;
     }
-    IndexOf.prototype.exec = function (ctx) {
-        var index;
-        var src = this.source.execute(ctx);
-        var el = this.element.execute(ctx);
+}
+exports.ToList = ToList;
+class IndexOf extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.source = (0, builder_1.build)(json.source);
+        this.element = (0, builder_1.build)(json.element);
+    }
+    exec(ctx) {
+        let index;
+        const src = this.source.execute(ctx);
+        const el = this.element.execute(ctx);
         if (src == null || el == null) {
             return null;
         }
-        for (var i = 0; i < src.length; i++) {
-            var itm = src[i];
+        for (let i = 0; i < src.length; i++) {
+            const itm = src[i];
             if ((0, comparison_1.equals)(itm, el)) {
                 index = i;
                 break;
@@ -6143,20 +5479,18 @@ var IndexOf = /** @class */ (function (_super) {
         else {
             return -1;
         }
-    };
-    return IndexOf;
-}(expression_1.Expression));
+    }
+}
 exports.IndexOf = IndexOf;
 // Indexer is completely handled by overloaded#Indexer
 // Delegated to by overloaded#Contains and overloaded#In
-function doContains(container, item, nullEquivalence) {
-    if (nullEquivalence === void 0) { nullEquivalence = false; }
-    return container.some(function (element) { return (0, comparison_1.equals)(element, item) || (nullEquivalence && element == null && item == null); });
+function doContains(container, item, nullEquivalence = false) {
+    return container.some((element) => (0, comparison_1.equals)(element, item) || (nullEquivalence && element == null && item == null));
 }
 exports.doContains = doContains;
 // Delegated to by overloaded#Includes and overloaded@IncludedIn
 function doIncludes(list, sublist) {
-    return sublist.every(function (x) { return doContains(list, x); });
+    return sublist.every((x) => doContains(list, x));
 }
 exports.doIncludes = doIncludes;
 // Delegated to by overloaded#ProperIncludes and overloaded@ProperIncludedIn
@@ -6165,50 +5499,41 @@ function doProperIncludes(list, sublist) {
 }
 exports.doProperIncludes = doProperIncludes;
 // ELM-only, not a product of CQL
-var ForEach = /** @class */ (function (_super) {
-    __extends(ForEach, _super);
-    function ForEach() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return ForEach;
-}(expression_1.UnimplementedExpression));
+class ForEach extends expression_1.UnimplementedExpression {
+}
 exports.ForEach = ForEach;
-var Flatten = /** @class */ (function (_super) {
-    __extends(Flatten, _super);
-    function Flatten(json) {
-        return _super.call(this, json) || this;
+class Flatten extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    Flatten.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
-        if ((0, util_1.typeIsArray)(arg) && arg.every(function (x) { return (0, util_1.typeIsArray)(x); })) {
-            return arg.reduce(function (x, y) { return x.concat(y); }, []);
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
+        if ((0, util_1.typeIsArray)(arg) && arg.every(x => (0, util_1.typeIsArray)(x))) {
+            return arg.reduce((x, y) => x.concat(y), []);
         }
         else {
             return arg;
         }
-    };
-    return Flatten;
-}(expression_1.Expression));
-exports.Flatten = Flatten;
-var Distinct = /** @class */ (function (_super) {
-    __extends(Distinct, _super);
-    function Distinct(json) {
-        return _super.call(this, json) || this;
     }
-    Distinct.prototype.exec = function (ctx) {
-        var result = this.execArgs(ctx);
+}
+exports.Flatten = Flatten;
+class Distinct extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const result = this.execArgs(ctx);
         if (result == null) {
             return null;
         }
         return doDistinct(result);
-    };
-    return Distinct;
-}(expression_1.Expression));
+    }
+}
 exports.Distinct = Distinct;
 function doDistinct(list) {
-    var distinct = [];
-    list.forEach(function (item) {
-        var isNew = distinct.every(function (seenItem) { return !(0, comparison_1.equals)(item, seenItem); });
+    const distinct = [];
+    list.forEach(item => {
+        const isNew = distinct.every(seenItem => !(0, comparison_1.equals)(item, seenItem));
         if (isNew) {
             distinct.push(item);
         }
@@ -6217,10 +5542,9 @@ function doDistinct(list) {
 }
 function removeDuplicateNulls(list) {
     // Remove duplicate null elements
-    var firstNullFound = false;
-    var setList = [];
-    for (var _i = 0, list_1 = list; _i < list_1.length; _i++) {
-        var item = list_1[_i];
+    let firstNullFound = false;
+    const setList = [];
+    for (const item of list) {
         if (item !== null) {
             setList.push(item);
         }
@@ -6232,109 +5556,78 @@ function removeDuplicateNulls(list) {
     return setList;
 }
 // ELM-only, not a product of CQL
-var Current = /** @class */ (function (_super) {
-    __extends(Current, _super);
-    function Current() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return Current;
-}(expression_1.UnimplementedExpression));
+class Current extends expression_1.UnimplementedExpression {
+}
 exports.Current = Current;
-var First = /** @class */ (function (_super) {
-    __extends(First, _super);
-    function First(json) {
-        var _this = _super.call(this, json) || this;
-        _this.source = (0, builder_1.build)(json.source);
-        return _this;
+class First extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.source = (0, builder_1.build)(json.source);
     }
-    First.prototype.exec = function (ctx) {
-        var src = this.source.exec(ctx);
+    exec(ctx) {
+        const src = this.source.exec(ctx);
         if (src != null && (0, util_1.typeIsArray)(src) && src.length > 0) {
             return src[0];
         }
         else {
             return null;
         }
-    };
-    return First;
-}(expression_1.Expression));
-exports.First = First;
-var Last = /** @class */ (function (_super) {
-    __extends(Last, _super);
-    function Last(json) {
-        var _this = _super.call(this, json) || this;
-        _this.source = (0, builder_1.build)(json.source);
-        return _this;
     }
-    Last.prototype.exec = function (ctx) {
-        var src = this.source.exec(ctx);
+}
+exports.First = First;
+class Last extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.source = (0, builder_1.build)(json.source);
+    }
+    exec(ctx) {
+        const src = this.source.exec(ctx);
         if (src != null && (0, util_1.typeIsArray)(src) && src.length > 0) {
             return src[src.length - 1];
         }
         else {
             return null;
         }
-    };
-    return Last;
-}(expression_1.Expression));
-exports.Last = Last;
-var Slice = /** @class */ (function (_super) {
-    __extends(Slice, _super);
-    function Slice(json) {
-        var _this = _super.call(this, json) || this;
-        _this.source = (0, builder_1.build)(json.source);
-        _this.startIndex = (0, builder_1.build)(json.startIndex);
-        _this.endIndex = (0, builder_1.build)(json.endIndex);
-        return _this;
     }
-    Slice.prototype.exec = function (ctx) {
-        var src = this.source.exec(ctx);
+}
+exports.Last = Last;
+class Slice extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.source = (0, builder_1.build)(json.source);
+        this.startIndex = (0, builder_1.build)(json.startIndex);
+        this.endIndex = (0, builder_1.build)(json.endIndex);
+    }
+    exec(ctx) {
+        const src = this.source.exec(ctx);
         if (src != null && (0, util_1.typeIsArray)(src)) {
-            var startIndex = this.startIndex.exec(ctx);
-            var endIndex = this.endIndex.exec(ctx);
-            var start = startIndex != null ? startIndex : 0;
-            var end = endIndex != null ? endIndex : src.length;
+            const startIndex = this.startIndex.exec(ctx);
+            const endIndex = this.endIndex.exec(ctx);
+            const start = startIndex != null ? startIndex : 0;
+            const end = endIndex != null ? endIndex : src.length;
             if (src.length === 0 || start < 0 || end < 0 || end < start) {
                 return [];
             }
             return src.slice(start, end);
         }
         return null;
-    };
-    return Slice;
-}(expression_1.Expression));
+    }
+}
 exports.Slice = Slice;
 // Length is completely handled by overloaded#Length
 
 },{"../util/comparison":52,"../util/util":55,"./builder":16,"./expression":22}],29:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StringLiteral = exports.DecimalLiteral = exports.IntegerLiteral = exports.BooleanLiteral = exports.Literal = void 0;
-var expression_1 = require("./expression");
-var Literal = /** @class */ (function (_super) {
-    __extends(Literal, _super);
-    function Literal(json) {
-        var _this = _super.call(this, json) || this;
-        _this.valueType = json.valueType;
-        _this.value = json.value;
-        return _this;
+const expression_1 = require("./expression");
+class Literal extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.valueType = json.valueType;
+        this.value = json.value;
     }
-    Literal.from = function (json) {
+    static from(json) {
         switch (json.valueType) {
             case '{urn:hl7-org:elm-types:r1}Boolean':
                 return new BooleanLiteral(json);
@@ -6347,295 +5640,201 @@ var Literal = /** @class */ (function (_super) {
             default:
                 return new Literal(json);
         }
-    };
-    Literal.prototype.exec = function (_ctx) {
+    }
+    exec(_ctx) {
         return this.value;
-    };
-    return Literal;
-}(expression_1.Expression));
+    }
+}
 exports.Literal = Literal;
 // The following are not defined in ELM, but helpful for execution
-var BooleanLiteral = /** @class */ (function (_super) {
-    __extends(BooleanLiteral, _super);
-    function BooleanLiteral(json) {
-        var _this = _super.call(this, json) || this;
-        _this.value = _this.value === 'true';
-        return _this;
+class BooleanLiteral extends Literal {
+    constructor(json) {
+        super(json);
+        this.value = this.value === 'true';
     }
-    Object.defineProperty(BooleanLiteral.prototype, "isBooleanLiteral", {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    BooleanLiteral.prototype.exec = function (_ctx) {
+    // Define a simple getter to allow type-checking of this class without instanceof
+    // and in a way that survives minification (as opposed to checking constructor.name)
+    get isBooleanLiteral() {
+        return true;
+    }
+    exec(_ctx) {
         return this.value;
-    };
-    return BooleanLiteral;
-}(Literal));
+    }
+}
 exports.BooleanLiteral = BooleanLiteral;
-var IntegerLiteral = /** @class */ (function (_super) {
-    __extends(IntegerLiteral, _super);
-    function IntegerLiteral(json) {
-        var _this = _super.call(this, json) || this;
-        _this.value = parseInt(_this.value, 10);
-        return _this;
+class IntegerLiteral extends Literal {
+    constructor(json) {
+        super(json);
+        this.value = parseInt(this.value, 10);
     }
-    Object.defineProperty(IntegerLiteral.prototype, "isIntegerLiteral", {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    IntegerLiteral.prototype.exec = function (_ctx) {
+    // Define a simple getter to allow type-checking of this class without instanceof
+    // and in a way that survives minification (as opposed to checking constructor.name)
+    get isIntegerLiteral() {
+        return true;
+    }
+    exec(_ctx) {
         return this.value;
-    };
-    return IntegerLiteral;
-}(Literal));
+    }
+}
 exports.IntegerLiteral = IntegerLiteral;
-var DecimalLiteral = /** @class */ (function (_super) {
-    __extends(DecimalLiteral, _super);
-    function DecimalLiteral(json) {
-        var _this = _super.call(this, json) || this;
-        _this.value = parseFloat(_this.value);
-        return _this;
+class DecimalLiteral extends Literal {
+    constructor(json) {
+        super(json);
+        this.value = parseFloat(this.value);
     }
-    Object.defineProperty(DecimalLiteral.prototype, "isDecimalLiteral", {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    DecimalLiteral.prototype.exec = function (_ctx) {
+    // Define a simple getter to allow type-checking of this class without instanceof
+    // and in a way that survives minification (as opposed to checking constructor.name)
+    get isDecimalLiteral() {
+        return true;
+    }
+    exec(_ctx) {
         return this.value;
-    };
-    return DecimalLiteral;
-}(Literal));
-exports.DecimalLiteral = DecimalLiteral;
-var StringLiteral = /** @class */ (function (_super) {
-    __extends(StringLiteral, _super);
-    function StringLiteral(json) {
-        return _super.call(this, json) || this;
     }
-    Object.defineProperty(StringLiteral.prototype, "isStringLiteral", {
-        // Define a simple getter to allow type-checking of this class without instanceof
-        // and in a way that survives minification (as opposed to checking constructor.name)
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    StringLiteral.prototype.exec = function (_ctx) {
+}
+exports.DecimalLiteral = DecimalLiteral;
+class StringLiteral extends Literal {
+    constructor(json) {
+        super(json);
+    }
+    // Define a simple getter to allow type-checking of this class without instanceof
+    // and in a way that survives minification (as opposed to checking constructor.name)
+    get isStringLiteral() {
+        return true;
+    }
+    exec(_ctx) {
         // TODO: Remove these replacements when CQL-to-ELM fixes bug: https://github.com/cqframework/clinical_quality_language/issues/82
         return this.value.replace(/\\'/g, "'").replace(/\\"/g, '"');
-    };
-    return StringLiteral;
-}(Literal));
+    }
+}
 exports.StringLiteral = StringLiteral;
 
 },{"./expression":22}],30:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IsFalse = exports.IsTrue = exports.Xor = exports.Not = exports.Or = exports.And = void 0;
-var expression_1 = require("./expression");
-var datatypes_1 = require("../datatypes/datatypes");
-var And = /** @class */ (function (_super) {
-    __extends(And, _super);
-    function And(json) {
-        return _super.call(this, json) || this;
+const expression_1 = require("./expression");
+const datatypes_1 = require("../datatypes/datatypes");
+class And extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    And.prototype.exec = function (ctx) {
-        return datatypes_1.ThreeValuedLogic.and.apply(datatypes_1.ThreeValuedLogic, this.execArgs(ctx));
-    };
-    return And;
-}(expression_1.Expression));
+    exec(ctx) {
+        return datatypes_1.ThreeValuedLogic.and(...this.execArgs(ctx));
+    }
+}
 exports.And = And;
-var Or = /** @class */ (function (_super) {
-    __extends(Or, _super);
-    function Or(json) {
-        return _super.call(this, json) || this;
+class Or extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    Or.prototype.exec = function (ctx) {
-        return datatypes_1.ThreeValuedLogic.or.apply(datatypes_1.ThreeValuedLogic, this.execArgs(ctx));
-    };
-    return Or;
-}(expression_1.Expression));
+    exec(ctx) {
+        return datatypes_1.ThreeValuedLogic.or(...this.execArgs(ctx));
+    }
+}
 exports.Or = Or;
-var Not = /** @class */ (function (_super) {
-    __extends(Not, _super);
-    function Not(json) {
-        return _super.call(this, json) || this;
+class Not extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    Not.prototype.exec = function (ctx) {
+    exec(ctx) {
         return datatypes_1.ThreeValuedLogic.not(this.execArgs(ctx));
-    };
-    return Not;
-}(expression_1.Expression));
+    }
+}
 exports.Not = Not;
-var Xor = /** @class */ (function (_super) {
-    __extends(Xor, _super);
-    function Xor(json) {
-        return _super.call(this, json) || this;
+class Xor extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    Xor.prototype.exec = function (ctx) {
-        return datatypes_1.ThreeValuedLogic.xor.apply(datatypes_1.ThreeValuedLogic, this.execArgs(ctx));
-    };
-    return Xor;
-}(expression_1.Expression));
+    exec(ctx) {
+        return datatypes_1.ThreeValuedLogic.xor(...this.execArgs(ctx));
+    }
+}
 exports.Xor = Xor;
-var IsTrue = /** @class */ (function (_super) {
-    __extends(IsTrue, _super);
-    function IsTrue(json) {
-        return _super.call(this, json) || this;
+class IsTrue extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    IsTrue.prototype.exec = function (ctx) {
+    exec(ctx) {
         return true === this.execArgs(ctx);
-    };
-    return IsTrue;
-}(expression_1.Expression));
-exports.IsTrue = IsTrue;
-var IsFalse = /** @class */ (function (_super) {
-    __extends(IsFalse, _super);
-    function IsFalse(json) {
-        return _super.call(this, json) || this;
     }
-    IsFalse.prototype.exec = function (ctx) {
+}
+exports.IsTrue = IsTrue;
+class IsFalse extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
         return false === this.execArgs(ctx);
-    };
-    return IsFalse;
-}(expression_1.Expression));
+    }
+}
 exports.IsFalse = IsFalse;
 
 },{"../datatypes/datatypes":6,"./expression":22}],31:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Message = void 0;
-var expression_1 = require("./expression");
-var builder_1 = require("./builder");
-var Message = /** @class */ (function (_super) {
-    __extends(Message, _super);
-    function Message(json) {
-        var _this = _super.call(this, json) || this;
-        _this.source = (0, builder_1.build)(json.source);
-        _this.condition = (0, builder_1.build)(json.condition);
-        _this.code = (0, builder_1.build)(json.code);
-        _this.severity = (0, builder_1.build)(json.severity);
-        _this.message = (0, builder_1.build)(json.message);
-        return _this;
+const expression_1 = require("./expression");
+const builder_1 = require("./builder");
+class Message extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.source = (0, builder_1.build)(json.source);
+        this.condition = (0, builder_1.build)(json.condition);
+        this.code = (0, builder_1.build)(json.code);
+        this.severity = (0, builder_1.build)(json.severity);
+        this.message = (0, builder_1.build)(json.message);
     }
-    Message.prototype.exec = function (ctx) {
-        var source = this.source.execute(ctx);
-        var condition = this.condition.execute(ctx);
+    exec(ctx) {
+        const source = this.source.execute(ctx);
+        const condition = this.condition.execute(ctx);
         if (condition) {
-            var code = this.code.execute(ctx);
-            var severity = this.severity.execute(ctx);
-            var message = this.message.execute(ctx);
-            var listener = ctx.getMessageListener();
+            const code = this.code.execute(ctx);
+            const severity = this.severity.execute(ctx);
+            const message = this.message.execute(ctx);
+            const listener = ctx.getMessageListener();
             if (listener && typeof listener.onMessage === 'function') {
                 listener.onMessage(source, code, severity, message);
             }
         }
         return source;
-    };
-    return Message;
-}(expression_1.Expression));
+    }
+}
 exports.Message = Message;
 
 },{"./builder":16,"./expression":22}],32:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Coalesce = exports.IsNull = exports.Null = void 0;
-var expression_1 = require("./expression");
-var Null = /** @class */ (function (_super) {
-    __extends(Null, _super);
-    function Null(json) {
-        return _super.call(this, json) || this;
+const expression_1 = require("./expression");
+class Null extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    Null.prototype.exec = function (_ctx) {
+    exec(_ctx) {
         return null;
-    };
-    return Null;
-}(expression_1.Expression));
+    }
+}
 exports.Null = Null;
-var IsNull = /** @class */ (function (_super) {
-    __extends(IsNull, _super);
-    function IsNull(json) {
-        return _super.call(this, json) || this;
+class IsNull extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    IsNull.prototype.exec = function (ctx) {
+    exec(ctx) {
         return this.execArgs(ctx) == null;
-    };
-    return IsNull;
-}(expression_1.Expression));
-exports.IsNull = IsNull;
-var Coalesce = /** @class */ (function (_super) {
-    __extends(Coalesce, _super);
-    function Coalesce(json) {
-        return _super.call(this, json) || this;
     }
-    Coalesce.prototype.exec = function (ctx) {
+}
+exports.IsNull = IsNull;
+class Coalesce extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
         if (this.args) {
-            for (var _i = 0, _a = this.args; _i < _a.length; _i++) {
-                var arg = _a[_i];
-                var result = arg.execute(ctx);
+            for (const arg of this.args) {
+                const result = arg.execute(ctx);
                 // if a single arg that's a list, coalesce over the list
                 if (this.args.length === 1 && Array.isArray(result)) {
-                    var item = result.find(function (item) { return item != null; });
+                    const item = result.find(item => item != null);
                     if (item != null) {
                         return item;
                     }
@@ -6648,28 +5847,12 @@ var Coalesce = /** @class */ (function (_super) {
             }
         }
         return null;
-    };
-    return Coalesce;
-}(expression_1.Expression));
+    }
+}
 exports.Coalesce = Coalesce;
 
 },{"./expression":22}],33:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -6692,37 +5875,34 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Precision = exports.SameOrBefore = exports.SameOrAfter = exports.SameAs = exports.Before = exports.After = exports.Length = exports.ProperIncludedIn = exports.ProperIncludes = exports.IncludedIn = exports.Includes = exports.Contains = exports.In = exports.Indexer = exports.Intersect = exports.Except = exports.Union = exports.NotEqual = exports.Equivalent = exports.Equal = void 0;
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-var expression_1 = require("./expression");
-var logic_1 = require("../datatypes/logic");
-var datetime_1 = require("../datatypes/datetime");
-var util_1 = require("../util/util");
-var comparison_1 = require("../util/comparison");
-var DT = __importStar(require("./datetime"));
-var LIST = __importStar(require("./list"));
-var IVL = __importStar(require("./interval"));
-var Equal = /** @class */ (function (_super) {
-    __extends(Equal, _super);
-    function Equal(json) {
-        return _super.call(this, json) || this;
+const expression_1 = require("./expression");
+const logic_1 = require("../datatypes/logic");
+const datetime_1 = require("../datatypes/datetime");
+const util_1 = require("../util/util");
+const comparison_1 = require("../util/comparison");
+const DT = __importStar(require("./datetime"));
+const LIST = __importStar(require("./list"));
+const IVL = __importStar(require("./interval"));
+class Equal extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    Equal.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx);
+    exec(ctx) {
+        const args = this.execArgs(ctx);
         if (args[0] == null || args[1] == null) {
             return null;
         }
         // @ts-ignore
-        return comparison_1.equals.apply(void 0, args);
-    };
-    return Equal;
-}(expression_1.Expression));
-exports.Equal = Equal;
-var Equivalent = /** @class */ (function (_super) {
-    __extends(Equivalent, _super);
-    function Equivalent(json) {
-        return _super.call(this, json) || this;
+        return (0, comparison_1.equals)(...args);
     }
-    Equivalent.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), a = _a[0], b = _a[1];
+}
+exports.Equal = Equal;
+class Equivalent extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const [a, b] = this.execArgs(ctx);
         if (a == null && b == null) {
             return true;
         }
@@ -6732,38 +5912,34 @@ var Equivalent = /** @class */ (function (_super) {
         else {
             return (0, comparison_1.equivalent)(a, b);
         }
-    };
-    return Equivalent;
-}(expression_1.Expression));
-exports.Equivalent = Equivalent;
-var NotEqual = /** @class */ (function (_super) {
-    __extends(NotEqual, _super);
-    function NotEqual(json) {
-        return _super.call(this, json) || this;
     }
-    NotEqual.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx);
+}
+exports.Equivalent = Equivalent;
+class NotEqual extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const args = this.execArgs(ctx);
         if (args[0] == null || args[1] == null) {
             return null;
         }
         // @ts-ignore
-        return logic_1.ThreeValuedLogic.not(comparison_1.equals.apply(void 0, this.execArgs(ctx)));
-    };
-    return NotEqual;
-}(expression_1.Expression));
-exports.NotEqual = NotEqual;
-var Union = /** @class */ (function (_super) {
-    __extends(Union, _super);
-    function Union(json) {
-        return _super.call(this, json) || this;
+        return logic_1.ThreeValuedLogic.not((0, comparison_1.equals)(...this.execArgs(ctx)));
     }
-    Union.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), a = _a[0], b = _a[1];
+}
+exports.NotEqual = NotEqual;
+class Union extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const [a, b] = this.execArgs(ctx);
         if (a == null && b == null) {
             return this.listTypeArgs() ? [] : null;
         }
         if (a == null || b == null) {
-            var notNull = a || b;
+            const notNull = a || b;
             if ((0, util_1.typeIsArray)(notNull)) {
                 return notNull;
             }
@@ -6771,60 +5947,54 @@ var Union = /** @class */ (function (_super) {
                 return null;
             }
         }
-        var lib = (0, util_1.typeIsArray)(a) ? LIST : IVL;
+        const lib = (0, util_1.typeIsArray)(a) ? LIST : IVL;
         return lib.doUnion(a, b);
-    };
-    Union.prototype.listTypeArgs = function () {
+    }
+    listTypeArgs() {
         var _a;
-        return (_a = this.args) === null || _a === void 0 ? void 0 : _a.some(function (arg) {
+        return (_a = this.args) === null || _a === void 0 ? void 0 : _a.some(arg => {
             return arg.asTypeSpecifier != null && arg.asTypeSpecifier.type === 'ListTypeSpecifier';
         });
-    };
-    return Union;
-}(expression_1.Expression));
-exports.Union = Union;
-var Except = /** @class */ (function (_super) {
-    __extends(Except, _super);
-    function Except(json) {
-        return _super.call(this, json) || this;
     }
-    Except.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), a = _a[0], b = _a[1];
+}
+exports.Union = Union;
+class Except extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const [a, b] = this.execArgs(ctx);
         if (a == null) {
             return null;
         }
         if (b == null) {
             return (0, util_1.typeIsArray)(a) ? a : null;
         }
-        var lib = (0, util_1.typeIsArray)(a) ? LIST : IVL;
+        const lib = (0, util_1.typeIsArray)(a) ? LIST : IVL;
         return lib.doExcept(a, b);
-    };
-    return Except;
-}(expression_1.Expression));
-exports.Except = Except;
-var Intersect = /** @class */ (function (_super) {
-    __extends(Intersect, _super);
-    function Intersect(json) {
-        return _super.call(this, json) || this;
     }
-    Intersect.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), a = _a[0], b = _a[1];
+}
+exports.Except = Except;
+class Intersect extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const [a, b] = this.execArgs(ctx);
         if (a == null || b == null) {
             return null;
         }
-        var lib = (0, util_1.typeIsArray)(a) ? LIST : IVL;
+        const lib = (0, util_1.typeIsArray)(a) ? LIST : IVL;
         return lib.doIntersect(a, b);
-    };
-    return Intersect;
-}(expression_1.Expression));
-exports.Intersect = Intersect;
-var Indexer = /** @class */ (function (_super) {
-    __extends(Indexer, _super);
-    function Indexer(json) {
-        return _super.call(this, json) || this;
     }
-    Indexer.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), operand = _a[0], index = _a[1];
+}
+exports.Intersect = Intersect;
+class Indexer extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const [operand, index] = this.execArgs(ctx);
         if (operand == null || index == null) {
             return null;
         }
@@ -6832,131 +6002,111 @@ var Indexer = /** @class */ (function (_super) {
             return null;
         }
         return operand[index];
-    };
-    return Indexer;
-}(expression_1.Expression));
+    }
+}
 exports.Indexer = Indexer;
-var In = /** @class */ (function (_super) {
-    __extends(In, _super);
-    function In(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
-        return _this;
+class In extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     }
-    In.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), item = _a[0], container = _a[1];
+    exec(ctx) {
+        const [item, container] = this.execArgs(ctx);
         if (item == null) {
             return null;
         }
         if (container == null) {
             return false;
         }
-        var lib = (0, util_1.typeIsArray)(container) ? LIST : IVL;
+        const lib = (0, util_1.typeIsArray)(container) ? LIST : IVL;
         return lib.doContains(container, item, this.precision);
-    };
-    return In;
-}(expression_1.Expression));
+    }
+}
 exports.In = In;
-var Contains = /** @class */ (function (_super) {
-    __extends(Contains, _super);
-    function Contains(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
-        return _this;
+class Contains extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     }
-    Contains.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), container = _a[0], item = _a[1];
+    exec(ctx) {
+        const [container, item] = this.execArgs(ctx);
         if (container == null) {
             return false;
         }
         if (item == null) {
             return null;
         }
-        var lib = (0, util_1.typeIsArray)(container) ? LIST : IVL;
+        const lib = (0, util_1.typeIsArray)(container) ? LIST : IVL;
         return lib.doContains(container, item, this.precision);
-    };
-    return Contains;
-}(expression_1.Expression));
+    }
+}
 exports.Contains = Contains;
-var Includes = /** @class */ (function (_super) {
-    __extends(Includes, _super);
-    function Includes(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
-        return _this;
+class Includes extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     }
-    Includes.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), container = _a[0], contained = _a[1];
+    exec(ctx) {
+        const [container, contained] = this.execArgs(ctx);
         if (container == null || contained == null) {
             return null;
         }
-        var lib = (0, util_1.typeIsArray)(container) ? LIST : IVL;
+        const lib = (0, util_1.typeIsArray)(container) ? LIST : IVL;
         return lib.doIncludes(container, contained, this.precision);
-    };
-    return Includes;
-}(expression_1.Expression));
+    }
+}
 exports.Includes = Includes;
-var IncludedIn = /** @class */ (function (_super) {
-    __extends(IncludedIn, _super);
-    function IncludedIn(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
-        return _this;
+class IncludedIn extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     }
-    IncludedIn.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), contained = _a[0], container = _a[1];
+    exec(ctx) {
+        const [contained, container] = this.execArgs(ctx);
         if (container == null || contained == null) {
             return null;
         }
-        var lib = (0, util_1.typeIsArray)(container) ? LIST : IVL;
+        const lib = (0, util_1.typeIsArray)(container) ? LIST : IVL;
         return lib.doIncludes(container, contained, this.precision);
-    };
-    return IncludedIn;
-}(expression_1.Expression));
+    }
+}
 exports.IncludedIn = IncludedIn;
-var ProperIncludes = /** @class */ (function (_super) {
-    __extends(ProperIncludes, _super);
-    function ProperIncludes(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
-        return _this;
+class ProperIncludes extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     }
-    ProperIncludes.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), container = _a[0], contained = _a[1];
+    exec(ctx) {
+        const [container, contained] = this.execArgs(ctx);
         if (container == null || contained == null) {
             return null;
         }
-        var lib = (0, util_1.typeIsArray)(container) ? LIST : IVL;
+        const lib = (0, util_1.typeIsArray)(container) ? LIST : IVL;
         return lib.doProperIncludes(container, contained, this.precision);
-    };
-    return ProperIncludes;
-}(expression_1.Expression));
+    }
+}
 exports.ProperIncludes = ProperIncludes;
-var ProperIncludedIn = /** @class */ (function (_super) {
-    __extends(ProperIncludedIn, _super);
-    function ProperIncludedIn(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
-        return _this;
+class ProperIncludedIn extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     }
-    ProperIncludedIn.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), contained = _a[0], container = _a[1];
+    exec(ctx) {
+        const [contained, container] = this.execArgs(ctx);
         if (container == null || contained == null) {
             return null;
         }
-        var lib = (0, util_1.typeIsArray)(container) ? LIST : IVL;
+        const lib = (0, util_1.typeIsArray)(container) ? LIST : IVL;
         return lib.doProperIncludes(container, contained, this.precision);
-    };
-    return ProperIncludedIn;
-}(expression_1.Expression));
-exports.ProperIncludedIn = ProperIncludedIn;
-var Length = /** @class */ (function (_super) {
-    __extends(Length, _super);
-    function Length(json) {
-        return _super.call(this, json) || this;
     }
-    Length.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.ProperIncludedIn = ProperIncludedIn;
+class Length extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg != null) {
             return arg.length;
         }
@@ -6966,207 +6116,153 @@ var Length = /** @class */ (function (_super) {
         else {
             return null;
         }
-    };
-    return Length;
-}(expression_1.Expression));
+    }
+}
 exports.Length = Length;
-var After = /** @class */ (function (_super) {
-    __extends(After, _super);
-    function After(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
-        return _this;
+class After extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
     }
-    After.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), a = _a[0], b = _a[1];
+    exec(ctx) {
+        const [a, b] = this.execArgs(ctx);
         if (a == null || b == null) {
             return null;
         }
-        var lib = a instanceof datetime_1.DateTime ? DT : IVL;
+        const lib = a instanceof datetime_1.DateTime ? DT : IVL;
         return lib.doAfter(a, b, this.precision);
-    };
-    return After;
-}(expression_1.Expression));
-exports.After = After;
-var Before = /** @class */ (function (_super) {
-    __extends(Before, _super);
-    function Before(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
-        return _this;
     }
-    Before.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), a = _a[0], b = _a[1];
+}
+exports.After = After;
+class Before extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
+    }
+    exec(ctx) {
+        const [a, b] = this.execArgs(ctx);
         if (a == null || b == null) {
             return null;
         }
-        var lib = a instanceof datetime_1.DateTime ? DT : IVL;
+        const lib = a instanceof datetime_1.DateTime ? DT : IVL;
         return lib.doBefore(a, b, this.precision);
-    };
-    return Before;
-}(expression_1.Expression));
-exports.Before = Before;
-var SameAs = /** @class */ (function (_super) {
-    __extends(SameAs, _super);
-    function SameAs(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision;
-        return _this;
     }
-    SameAs.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), a = _a[0], b = _a[1];
+}
+exports.Before = Before;
+class SameAs extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision;
+    }
+    exec(ctx) {
+        const [a, b] = this.execArgs(ctx);
         if (a != null && b != null) {
             return a.sameAs(b, this.precision != null ? this.precision.toLowerCase() : undefined);
         }
         else {
             return null;
         }
-    };
-    return SameAs;
-}(expression_1.Expression));
-exports.SameAs = SameAs;
-var SameOrAfter = /** @class */ (function (_super) {
-    __extends(SameOrAfter, _super);
-    function SameOrAfter(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision;
-        return _this;
     }
-    SameOrAfter.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), d1 = _a[0], d2 = _a[1];
+}
+exports.SameAs = SameAs;
+class SameOrAfter extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision;
+    }
+    exec(ctx) {
+        const [d1, d2] = this.execArgs(ctx);
         if (d1 != null && d2 != null) {
             return d1.sameOrAfter(d2, this.precision != null ? this.precision.toLowerCase() : undefined);
         }
         else {
             return null;
         }
-    };
-    return SameOrAfter;
-}(expression_1.Expression));
-exports.SameOrAfter = SameOrAfter;
-var SameOrBefore = /** @class */ (function (_super) {
-    __extends(SameOrBefore, _super);
-    function SameOrBefore(json) {
-        var _this = _super.call(this, json) || this;
-        _this.precision = json.precision;
-        return _this;
     }
-    SameOrBefore.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), d1 = _a[0], d2 = _a[1];
+}
+exports.SameOrAfter = SameOrAfter;
+class SameOrBefore extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision;
+    }
+    exec(ctx) {
+        const [d1, d2] = this.execArgs(ctx);
         if (d1 != null && d2 != null) {
             return d1.sameOrBefore(d2, this.precision != null ? this.precision.toLowerCase() : undefined);
         }
         else {
             return null;
         }
-    };
-    return SameOrBefore;
-}(expression_1.Expression));
+    }
+}
 exports.SameOrBefore = SameOrBefore;
 // Implemented for DateTime, Date, and Time but not for Decimal yet
-var Precision = /** @class */ (function (_super) {
-    __extends(Precision, _super);
-    function Precision(json) {
-        return _super.call(this, json) || this;
+class Precision extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    Precision.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg == null) {
             return null;
         }
         // Since we can't extend UnimplementedExpression directly for this overloaded function,
         // we have to copy the error to throw here if we are not using the correct type
         if (!arg.getPrecisionValue) {
-            throw new Error("Unimplemented Expression: Precision");
+            throw new Error(`Unimplemented Expression: Precision`);
         }
         return arg.getPrecisionValue();
-    };
-    return Precision;
-}(expression_1.Expression));
+    }
+}
 exports.Precision = Precision;
 
 },{"../datatypes/datetime":7,"../datatypes/logic":10,"../util/comparison":52,"../util/util":55,"./datetime":20,"./expression":22,"./interval":26,"./list":28}],34:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ParameterRef = exports.ParameterDef = void 0;
-var expression_1 = require("./expression");
-var builder_1 = require("./builder");
-var ParameterDef = /** @class */ (function (_super) {
-    __extends(ParameterDef, _super);
-    function ParameterDef(json) {
-        var _this = _super.call(this, json) || this;
-        _this.name = json.name;
-        _this.default = (0, builder_1.build)(json.default);
-        _this.parameterTypeSpecifier = json.parameterTypeSpecifier;
-        return _this;
+const expression_1 = require("./expression");
+const builder_1 = require("./builder");
+class ParameterDef extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
+        this.default = (0, builder_1.build)(json.default);
+        this.parameterTypeSpecifier = json.parameterTypeSpecifier;
     }
-    ParameterDef.prototype.exec = function (ctx) {
+    exec(ctx) {
         // If context parameters contains the name, return value.
         if (ctx && ctx.parameters[this.name] !== undefined) {
             return ctx.parameters[this.name];
             // If the parent context contains the name, return that
         }
         else if (ctx.getParentParameter(this.name) !== undefined) {
-            var parentParam = ctx.getParentParameter(this.name);
+            const parentParam = ctx.getParentParameter(this.name);
             return parentParam.default != null ? parentParam.default.execute(ctx) : parentParam;
             // If default type exists, execute the default type
         }
         else if (this.default != null) {
             this.default.execute(ctx);
         }
-    };
-    return ParameterDef;
-}(expression_1.Expression));
-exports.ParameterDef = ParameterDef;
-var ParameterRef = /** @class */ (function (_super) {
-    __extends(ParameterRef, _super);
-    function ParameterRef(json) {
-        var _this = _super.call(this, json) || this;
-        _this.name = json.name;
-        _this.library = json.libraryName;
-        return _this;
     }
-    ParameterRef.prototype.exec = function (ctx) {
+}
+exports.ParameterDef = ParameterDef;
+class ParameterRef extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
+        this.library = json.libraryName;
+    }
+    exec(ctx) {
         ctx = this.library ? ctx.getLibraryContext(this.library) : ctx;
-        var param = ctx.getParameter(this.name);
+        const param = ctx.getParameter(this.name);
         return param != null ? param.execute(ctx) : undefined;
-    };
-    return ParameterRef;
-}(expression_1.Expression));
+    }
+}
 exports.ParameterRef = ParameterRef;
 
 },{"./builder":16,"./expression":22}],35:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -7188,122 +6284,89 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Quantity = void 0;
-var expression_1 = require("./expression");
-var DT = __importStar(require("../datatypes/datatypes"));
+const expression_1 = require("./expression");
+const DT = __importStar(require("../datatypes/datatypes"));
 // Unit conversation is currently implemented on for time duration comparison operations
 // TODO: Implement unit conversation for time duration mathematical operations
-var Quantity = /** @class */ (function (_super) {
-    __extends(Quantity, _super);
-    function Quantity(json) {
-        var _this = _super.call(this, json) || this;
-        _this.value = parseFloat(json.value);
-        _this.unit = json.unit;
-        return _this;
+class Quantity extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.value = parseFloat(json.value);
+        this.unit = json.unit;
     }
-    Quantity.prototype.exec = function (_ctx) {
+    exec(_ctx) {
         return new DT.Quantity(this.value, this.unit);
-    };
-    return Quantity;
-}(expression_1.Expression));
+    }
+}
 exports.Quantity = Quantity;
 
 },{"../datatypes/datatypes":6,"./expression":22}],36:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.QueryLetRef = exports.AliasRef = exports.Query = exports.SortClause = exports.ReturnClause = exports.ByColumn = exports.ByExpression = exports.ByDirection = exports.Sort = exports.Without = exports.With = exports.LetClause = exports.AliasedQuerySource = void 0;
-var expression_1 = require("./expression");
-var context_1 = require("../runtime/context");
-var util_1 = require("../util/util");
-var comparison_1 = require("../util/comparison");
-var builder_1 = require("./builder");
-var AliasedQuerySource = /** @class */ (function () {
-    function AliasedQuerySource(json) {
+const expression_1 = require("./expression");
+const context_1 = require("../runtime/context");
+const util_1 = require("../util/util");
+const comparison_1 = require("../util/comparison");
+const builder_1 = require("./builder");
+class AliasedQuerySource {
+    constructor(json) {
         this.alias = json.alias;
         this.expression = (0, builder_1.build)(json.expression);
     }
-    return AliasedQuerySource;
-}());
+}
 exports.AliasedQuerySource = AliasedQuerySource;
-var LetClause = /** @class */ (function () {
-    function LetClause(json) {
+class LetClause {
+    constructor(json) {
         this.identifier = json.identifier;
         this.expression = (0, builder_1.build)(json.expression);
     }
-    return LetClause;
-}());
+}
 exports.LetClause = LetClause;
-var With = /** @class */ (function (_super) {
-    __extends(With, _super);
-    function With(json) {
-        var _this = _super.call(this, json) || this;
-        _this.alias = json.alias;
-        _this.expression = (0, builder_1.build)(json.expression);
-        _this.suchThat = (0, builder_1.build)(json.suchThat);
-        return _this;
+class With extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.alias = json.alias;
+        this.expression = (0, builder_1.build)(json.expression);
+        this.suchThat = (0, builder_1.build)(json.suchThat);
     }
-    With.prototype.exec = function (ctx) {
-        var _this = this;
-        var records = this.expression.execute(ctx);
+    exec(ctx) {
+        let records = this.expression.execute(ctx);
         if (!(0, util_1.typeIsArray)(records)) {
             records = [records];
         }
-        var returns = records.map(function (rec) {
-            var childCtx = ctx.childContext();
-            childCtx.set(_this.alias, rec);
-            return _this.suchThat.execute(childCtx);
+        const returns = records.map((rec) => {
+            const childCtx = ctx.childContext();
+            childCtx.set(this.alias, rec);
+            return this.suchThat.execute(childCtx);
         });
-        return returns.some(function (x) { return x; });
-    };
-    return With;
-}(expression_1.Expression));
-exports.With = With;
-var Without = /** @class */ (function (_super) {
-    __extends(Without, _super);
-    function Without(json) {
-        return _super.call(this, json) || this;
+        return returns.some((x) => x);
     }
-    Without.prototype.exec = function (ctx) {
-        return !_super.prototype.exec.call(this, ctx);
-    };
-    return Without;
-}(With));
+}
+exports.With = With;
+class Without extends With {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        return !super.exec(ctx);
+    }
+}
 exports.Without = Without;
 // ELM-only, not a product of CQL
-var Sort = /** @class */ (function (_super) {
-    __extends(Sort, _super);
-    function Sort() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return Sort;
-}(expression_1.UnimplementedExpression));
+class Sort extends expression_1.UnimplementedExpression {
+}
 exports.Sort = Sort;
-var ByDirection = /** @class */ (function (_super) {
-    __extends(ByDirection, _super);
-    function ByDirection(json) {
-        var _this = _super.call(this, json) || this;
-        _this.direction = json.direction;
-        _this.low_order = _this.direction === 'asc' || _this.direction === 'ascending' ? -1 : 1;
-        _this.high_order = _this.low_order * -1;
-        return _this;
+class ByDirection extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.direction = json.direction;
+        this.low_order = this.direction === 'asc' || this.direction === 'ascending' ? -1 : 1;
+        this.high_order = this.low_order * -1;
     }
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    ByDirection.prototype.exec = function (ctx, a, b) {
+    exec(ctx, a, b) {
         if (a === b) {
             return 0;
         }
@@ -7321,27 +6384,24 @@ var ByDirection = /** @class */ (function (_super) {
         else {
             return this.high_order;
         }
-    };
-    return ByDirection;
-}(expression_1.Expression));
+    }
+}
 exports.ByDirection = ByDirection;
-var ByExpression = /** @class */ (function (_super) {
-    __extends(ByExpression, _super);
-    function ByExpression(json) {
-        var _this = _super.call(this, json) || this;
-        _this.expression = (0, builder_1.build)(json.expression);
-        _this.direction = json.direction;
-        _this.low_order = _this.direction === 'asc' || _this.direction === 'ascending' ? -1 : 1;
-        _this.high_order = _this.low_order * -1;
-        return _this;
+class ByExpression extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.expression = (0, builder_1.build)(json.expression);
+        this.direction = json.direction;
+        this.low_order = this.direction === 'asc' || this.direction === 'ascending' ? -1 : 1;
+        this.high_order = this.low_order * -1;
     }
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    ByExpression.prototype.exec = function (ctx, a, b) {
-        var sctx = ctx.childContext(a);
-        var a_val = this.expression.execute(sctx);
+    exec(ctx, a, b) {
+        let sctx = ctx.childContext(a);
+        const a_val = this.expression.execute(sctx);
         sctx = ctx.childContext(b);
-        var b_val = this.expression.execute(sctx);
+        const b_val = this.expression.execute(sctx);
         if (a_val === b_val || (a_val == null && b_val == null)) {
             return 0;
         }
@@ -7354,42 +6414,35 @@ var ByExpression = /** @class */ (function (_super) {
         else {
             return a_val < b_val ? this.low_order : this.high_order;
         }
-    };
-    return ByExpression;
-}(expression_1.Expression));
+    }
+}
 exports.ByExpression = ByExpression;
-var ByColumn = /** @class */ (function (_super) {
-    __extends(ByColumn, _super);
-    function ByColumn(json) {
-        var _this = _super.call(this, json) || this;
-        _this.expression = (0, builder_1.build)({
+class ByColumn extends ByExpression {
+    constructor(json) {
+        super(json);
+        this.expression = (0, builder_1.build)({
             name: json.path,
             type: 'IdentifierRef'
         });
-        return _this;
     }
-    return ByColumn;
-}(ByExpression));
+}
 exports.ByColumn = ByColumn;
-var ReturnClause = /** @class */ (function () {
-    function ReturnClause(json) {
+class ReturnClause {
+    constructor(json) {
         this.expression = (0, builder_1.build)(json.expression);
         this.distinct = json.distinct != null ? json.distinct : true;
     }
-    return ReturnClause;
-}());
+}
 exports.ReturnClause = ReturnClause;
-var SortClause = /** @class */ (function () {
-    function SortClause(json) {
+class SortClause {
+    constructor(json) {
         this.by = (0, builder_1.build)(json != null ? json.by : undefined);
     }
-    SortClause.prototype.sort = function (ctx, values) {
-        var _this = this;
+    sort(ctx, values) {
         if (this.by) {
-            return values.sort(function (a, b) {
-                var order = 0;
-                for (var _i = 0, _a = _this.by; _i < _a.length; _i++) {
-                    var item = _a[_i];
+            return values.sort((a, b) => {
+                let order = 0;
+                for (const item of this.by) {
                     // Do not use execute here because the value of the sort order is not important.
                     order = item.exec(ctx, a, b);
                     if (order !== 0) {
@@ -7399,56 +6452,49 @@ var SortClause = /** @class */ (function () {
                 return order;
             });
         }
-    };
-    return SortClause;
-}());
+    }
+}
 exports.SortClause = SortClause;
-var toDistinctList = function (xList) {
-    var yList = [];
-    xList.forEach(function (x) {
-        if (!yList.some(function (y) { return (0, comparison_1.equals)(x, y); })) {
+const toDistinctList = function (xList) {
+    const yList = [];
+    xList.forEach(x => {
+        if (!yList.some(y => (0, comparison_1.equals)(x, y))) {
             yList.push(x);
         }
     });
     return yList;
 };
-var AggregateClause = /** @class */ (function (_super) {
-    __extends(AggregateClause, _super);
-    function AggregateClause(json) {
-        var _this = _super.call(this, json) || this;
-        _this.identifier = json.identifier;
-        _this.expression = (0, builder_1.build)(json.expression);
-        _this.starting = json.starting ? (0, builder_1.build)(json.starting) : null;
-        _this.distinct = json.distinct != null ? json.distinct : true;
-        return _this;
+class AggregateClause extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.identifier = json.identifier;
+        this.expression = (0, builder_1.build)(json.expression);
+        this.starting = json.starting ? (0, builder_1.build)(json.starting) : null;
+        this.distinct = json.distinct != null ? json.distinct : true;
     }
-    AggregateClause.prototype.aggregate = function (returnedValues, ctx) {
-        var _this = this;
-        var aggregateValue = this.starting != null ? this.starting.exec(ctx) : null;
-        returnedValues.forEach(function (contextValues) {
-            var childContext = ctx.childContext(contextValues);
-            childContext.set(_this.identifier, aggregateValue);
-            aggregateValue = _this.expression.exec(childContext);
+    aggregate(returnedValues, ctx) {
+        let aggregateValue = this.starting != null ? this.starting.exec(ctx) : null;
+        returnedValues.forEach((contextValues) => {
+            const childContext = ctx.childContext(contextValues);
+            childContext.set(this.identifier, aggregateValue);
+            aggregateValue = this.expression.exec(childContext);
         });
         return aggregateValue;
-    };
-    return AggregateClause;
-}(expression_1.Expression));
-var Query = /** @class */ (function (_super) {
-    __extends(Query, _super);
-    function Query(json) {
-        var _this = _super.call(this, json) || this;
-        _this.sources = new MultiSource(json.source.map(function (s) { return new AliasedQuerySource(s); }));
-        _this.letClauses = json.let != null ? json.let.map(function (d) { return new LetClause(d); }) : [];
-        _this.relationship = json.relationship != null ? (0, builder_1.build)(json.relationship) : [];
-        _this.where = (0, builder_1.build)(json.where);
-        _this.returnClause = json.return != null ? new ReturnClause(json.return) : null;
-        _this.aggregateClause = json.aggregate != null ? new AggregateClause(json.aggregate) : null;
-        _this.aliases = _this.sources.aliases();
-        _this.sortClause = json.sort != null ? new SortClause(json.sort) : null;
-        return _this;
     }
-    Query.prototype.isDistinct = function () {
+}
+class Query extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.sources = new MultiSource(json.source.map((s) => new AliasedQuerySource(s)));
+        this.letClauses = json.let != null ? json.let.map((d) => new LetClause(d)) : [];
+        this.relationship = json.relationship != null ? (0, builder_1.build)(json.relationship) : [];
+        this.where = (0, builder_1.build)(json.where);
+        this.returnClause = json.return != null ? new ReturnClause(json.return) : null;
+        this.aggregateClause = json.aggregate != null ? new AggregateClause(json.aggregate) : null;
+        this.aliases = this.sources.aliases();
+        this.sortClause = json.sort != null ? new SortClause(json.sort) : null;
+    }
+    isDistinct() {
         if (this.aggregateClause != null && this.aggregateClause.distinct != null) {
             return this.aggregateClause.distinct;
         }
@@ -7456,28 +6502,26 @@ var Query = /** @class */ (function (_super) {
             return this.returnClause.distinct;
         }
         return true;
-    };
-    Query.prototype.exec = function (ctx) {
-        var _this = this;
-        var returnedValues = [];
-        this.sources.forEach(ctx, function (rctx) {
-            for (var _i = 0, _a = _this.letClauses; _i < _a.length; _i++) {
-                var def = _a[_i];
+    }
+    exec(ctx) {
+        let returnedValues = [];
+        this.sources.forEach(ctx, (rctx) => {
+            for (const def of this.letClauses) {
                 rctx.set(def.identifier, def.expression.execute(rctx));
             }
-            var relations = _this.relationship.map(function (rel) {
-                var child_ctx = rctx.childContext();
+            const relations = this.relationship.map(rel => {
+                const child_ctx = rctx.childContext();
                 return rel.execute(child_ctx);
             });
-            var passed = (0, util_1.allTrue)(relations) && (_this.where ? _this.where.execute(rctx) : true);
+            const passed = (0, util_1.allTrue)(relations) && (this.where ? this.where.execute(rctx) : true);
             if (passed) {
-                if (_this.returnClause != null) {
-                    var val = _this.returnClause.expression.execute(rctx);
+                if (this.returnClause != null) {
+                    const val = this.returnClause.expression.execute(rctx);
                     returnedValues.push(val);
                 }
                 else {
-                    if (_this.aliases.length === 1 && _this.aggregateClause == null) {
-                        returnedValues.push(rctx.get(_this.aliases[0]));
+                    if (this.aliases.length === 1 && this.aggregateClause == null) {
+                        returnedValues.push(rctx.get(this.aliases[0]));
                     }
                     else {
                         returnedValues.push(rctx.context_values);
@@ -7500,34 +6544,28 @@ var Query = /** @class */ (function (_super) {
         else {
             return returnedValues[0];
         }
-    };
-    return Query;
-}(expression_1.Expression));
+    }
+}
 exports.Query = Query;
-var AliasRef = /** @class */ (function (_super) {
-    __extends(AliasRef, _super);
-    function AliasRef(json) {
-        var _this = _super.call(this, json) || this;
-        _this.name = json.name;
-        return _this;
+class AliasRef extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
     }
-    AliasRef.prototype.exec = function (ctx) {
+    exec(ctx) {
         return ctx != null ? ctx.get(this.name) : undefined;
-    };
-    return AliasRef;
-}(expression_1.Expression));
-exports.AliasRef = AliasRef;
-var QueryLetRef = /** @class */ (function (_super) {
-    __extends(QueryLetRef, _super);
-    function QueryLetRef(json) {
-        return _super.call(this, json) || this;
     }
-    return QueryLetRef;
-}(AliasRef));
+}
+exports.AliasRef = AliasRef;
+class QueryLetRef extends AliasRef {
+    constructor(json) {
+        super(json);
+    }
+}
 exports.QueryLetRef = QueryLetRef;
 // The following is not defined by ELM but is helpful for execution
-var MultiSource = /** @class */ (function () {
-    function MultiSource(sources) {
+class MultiSource {
+    constructor(sources) {
         this.sources = sources;
         this.alias = this.sources[0].alias;
         this.expression = this.sources[0].expression;
@@ -7536,52 +6574,35 @@ var MultiSource = /** @class */ (function () {
             this.rest = new MultiSource(this.sources.slice(1));
         }
     }
-    MultiSource.prototype.aliases = function () {
-        var a = [this.alias];
+    aliases() {
+        let a = [this.alias];
         if (this.rest) {
             a = a.concat(this.rest.aliases());
         }
         return a;
-    };
-    MultiSource.prototype.returnsList = function () {
+    }
+    returnsList() {
         return this.isList || (this.rest && this.rest.returnsList());
-    };
-    MultiSource.prototype.forEach = function (ctx, func) {
-        var _this = this;
-        var records = this.expression.execute(ctx);
+    }
+    forEach(ctx, func) {
+        let records = this.expression.execute(ctx);
         this.isList = (0, util_1.typeIsArray)(records);
         records = this.isList ? records : [records];
-        return records.map(function (rec) {
-            var rctx = new context_1.Context(ctx);
-            rctx.set(_this.alias, rec);
-            if (_this.rest) {
-                return _this.rest.forEach(rctx, func);
+        return records.map((rec) => {
+            const rctx = new context_1.Context(ctx);
+            rctx.set(this.alias, rec);
+            if (this.rest) {
+                return this.rest.forEach(rctx, func);
             }
             else {
                 return func(rctx);
             }
         });
-    };
-    return MultiSource;
-}());
+    }
+}
 
 },{"../runtime/context":42,"../util/comparison":52,"../util/util":55,"./builder":16,"./expression":22}],37:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -7603,136 +6624,107 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Ratio = void 0;
-var expression_1 = require("./expression");
-var quantity_1 = require("../datatypes/quantity");
-var DT = __importStar(require("../datatypes/datatypes"));
-var Ratio = /** @class */ (function (_super) {
-    __extends(Ratio, _super);
-    function Ratio(json) {
-        var _this = _super.call(this, json) || this;
+const expression_1 = require("./expression");
+const quantity_1 = require("../datatypes/quantity");
+const DT = __importStar(require("../datatypes/datatypes"));
+class Ratio extends expression_1.Expression {
+    constructor(json) {
+        super(json);
         if (json.numerator == null) {
             throw new Error('Cannot create a ratio with an undefined numerator value');
         }
         else {
-            _this.numerator = new quantity_1.Quantity(json.numerator.value, json.numerator.unit);
+            this.numerator = new quantity_1.Quantity(json.numerator.value, json.numerator.unit);
         }
         if (json.denominator == null) {
             throw new Error('Cannot create a ratio with an undefined denominator value');
         }
         else {
-            _this.denominator = new quantity_1.Quantity(json.denominator.value, json.denominator.unit);
+            this.denominator = new quantity_1.Quantity(json.denominator.value, json.denominator.unit);
         }
-        return _this;
     }
-    Ratio.prototype.exec = function (_ctx) {
+    exec(_ctx) {
         return new DT.Ratio(this.numerator, this.denominator);
-    };
-    return Ratio;
-}(expression_1.Expression));
+    }
+}
 exports.Ratio = Ratio;
 
 },{"../datatypes/datatypes":6,"../datatypes/quantity":11,"./expression":22}],38:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IdentifierRef = exports.OperandRef = exports.FunctionRef = exports.FunctionDef = exports.ExpressionRef = exports.ExpressionDef = void 0;
-var expression_1 = require("./expression");
-var builder_1 = require("./builder");
-var ExpressionDef = /** @class */ (function (_super) {
-    __extends(ExpressionDef, _super);
-    function ExpressionDef(json) {
-        var _this = _super.call(this, json) || this;
-        _this.name = json.name;
-        _this.context = json.context;
-        _this.expression = (0, builder_1.build)(json.expression);
-        return _this;
+const expression_1 = require("./expression");
+const builder_1 = require("./builder");
+class ExpressionDef extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
+        this.context = json.context;
+        this.expression = (0, builder_1.build)(json.expression);
     }
-    ExpressionDef.prototype.exec = function (ctx) {
-        var value = this.expression != null ? this.expression.execute(ctx) : undefined;
+    exec(ctx) {
+        const value = this.expression != null ? this.expression.execute(ctx) : undefined;
         ctx.rootContext().set(this.name, value);
         return value;
-    };
-    return ExpressionDef;
-}(expression_1.Expression));
-exports.ExpressionDef = ExpressionDef;
-var ExpressionRef = /** @class */ (function (_super) {
-    __extends(ExpressionRef, _super);
-    function ExpressionRef(json) {
-        var _this = _super.call(this, json) || this;
-        _this.name = json.name;
-        _this.library = json.libraryName;
-        return _this;
     }
-    ExpressionRef.prototype.exec = function (ctx) {
+}
+exports.ExpressionDef = ExpressionDef;
+class ExpressionRef extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
+        this.library = json.libraryName;
+    }
+    exec(ctx) {
         ctx = this.library ? ctx.getLibraryContext(this.library) : ctx;
-        var value = ctx.get(this.name);
+        let value = ctx.get(this.name);
         if (value instanceof expression_1.Expression) {
             value = value.execute(ctx);
         }
         return value;
-    };
-    return ExpressionRef;
-}(expression_1.Expression));
+    }
+}
 exports.ExpressionRef = ExpressionRef;
-var FunctionDef = /** @class */ (function (_super) {
-    __extends(FunctionDef, _super);
-    function FunctionDef(json) {
-        var _this = _super.call(this, json) || this;
-        _this.name = json.name;
-        _this.expression = (0, builder_1.build)(json.expression);
-        _this.parameters = json.operand;
-        return _this;
+class FunctionDef extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
+        this.expression = (0, builder_1.build)(json.expression);
+        this.parameters = json.operand;
     }
-    FunctionDef.prototype.exec = function (_ctx) {
+    exec(_ctx) {
         return this;
-    };
-    return FunctionDef;
-}(expression_1.Expression));
-exports.FunctionDef = FunctionDef;
-var FunctionRef = /** @class */ (function (_super) {
-    __extends(FunctionRef, _super);
-    function FunctionRef(json) {
-        var _this = _super.call(this, json) || this;
-        _this.name = json.name;
-        _this.library = json.libraryName;
-        return _this;
     }
-    FunctionRef.prototype.exec = function (ctx) {
-        var functionDefs, child_ctx;
+}
+exports.FunctionDef = FunctionDef;
+class FunctionRef extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
+        this.library = json.libraryName;
+    }
+    exec(ctx) {
+        let functionDefs, child_ctx;
         if (this.library) {
-            var lib = ctx.get(this.library);
+            const lib = ctx.get(this.library);
             functionDefs = lib ? lib.getFunction(this.name) : undefined;
-            var libCtx = ctx.getLibraryContext(this.library);
+            const libCtx = ctx.getLibraryContext(this.library);
             child_ctx = libCtx ? libCtx.childContext() : undefined;
         }
         else {
             functionDefs = ctx.get(this.name);
             child_ctx = ctx.childContext();
         }
-        var args = this.execArgs(ctx);
+        const args = this.execArgs(ctx);
         // Filter out functions w/ wrong number of arguments.
-        functionDefs = functionDefs.filter(function (f) { return f.parameters.length === args.length; });
+        functionDefs = functionDefs.filter((f) => f.parameters.length === args.length);
         // If there is still > 1 matching function, filter by argument types
         if (functionDefs.length > 1) {
-            functionDefs = functionDefs.filter(function (f) {
-                var match = true;
-                for (var i = 0; i < args.length && match; i++) {
+            functionDefs = functionDefs.filter((f) => {
+                let match = true;
+                for (let i = 0; i < args.length && match; i++) {
                     if (args[i] !== null) {
-                        var operandTypeSpecifier = f.parameters[i].operandTypeSpecifier;
+                        let operandTypeSpecifier = f.parameters[i].operandTypeSpecifier;
                         if (operandTypeSpecifier == null && f.parameters[i].operandType != null) {
                             // convert it to a NamedTypedSpecifier
                             operandTypeSpecifier = {
@@ -7755,52 +6747,45 @@ var FunctionRef = /** @class */ (function (_super) {
         }
         // By this point, we should have only one function, but until implementation is completed,
         // use the last one (no matter how many still remain)
-        var functionDef = functionDefs[functionDefs.length - 1];
-        for (var i = 0; i < functionDef.parameters.length; i++) {
+        const functionDef = functionDefs[functionDefs.length - 1];
+        for (let i = 0; i < functionDef.parameters.length; i++) {
             child_ctx.set(functionDef.parameters[i].name, args[i]);
         }
         return functionDef.expression.execute(child_ctx);
-    };
-    return FunctionRef;
-}(expression_1.Expression));
+    }
+}
 exports.FunctionRef = FunctionRef;
-var OperandRef = /** @class */ (function (_super) {
-    __extends(OperandRef, _super);
-    function OperandRef(json) {
-        var _this = _super.call(this, json) || this;
-        _this.name = json.name;
-        return _this;
+class OperandRef extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
     }
-    OperandRef.prototype.exec = function (ctx) {
+    exec(ctx) {
         return ctx.get(this.name);
-    };
-    return OperandRef;
-}(expression_1.Expression));
-exports.OperandRef = OperandRef;
-var IdentifierRef = /** @class */ (function (_super) {
-    __extends(IdentifierRef, _super);
-    function IdentifierRef(json) {
-        var _this = _super.call(this, json) || this;
-        _this.name = json.name;
-        _this.library = json.libraryName;
-        return _this;
     }
-    IdentifierRef.prototype.exec = function (ctx) {
+}
+exports.OperandRef = OperandRef;
+class IdentifierRef extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
+        this.library = json.libraryName;
+    }
+    exec(ctx) {
         // TODO: Technically, the ELM Translator should never output one of these
         // but this code is needed since it does, as a work-around to get queries
         // to work properly when sorting by a field in a tuple
-        var lib = this.library ? ctx.get(this.library) : undefined;
-        var val = lib ? lib.get(this.name) : ctx.get(this.name);
+        const lib = this.library ? ctx.get(this.library) : undefined;
+        let val = lib ? lib.get(this.name) : ctx.get(this.name);
         if (val == null) {
-            var parts = this.name.split('.');
+            const parts = this.name.split('.');
             val = ctx.get(parts[0]);
             if (val != null && parts.length > 1) {
-                var curr_obj = val;
-                for (var _i = 0, _a = parts.slice(1); _i < _a.length; _i++) {
-                    var part = _a[_i];
+                let curr_obj = val;
+                for (const part of parts.slice(1)) {
                     // _obj = curr_obj?[part] ? curr_obj?.get?(part)
                     // curr_obj = if _obj instanceof Function then _obj.call(curr_obj) else _obj
-                    var _obj = void 0;
+                    let _obj;
                     if (curr_obj != null) {
                         _obj = curr_obj[part];
                         if (_obj === undefined && typeof curr_obj.get === 'function') {
@@ -7818,65 +6803,45 @@ var IdentifierRef = /** @class */ (function (_super) {
         else {
             return val;
         }
-    };
-    return IdentifierRef;
-}(expression_1.Expression));
+    }
+}
 exports.IdentifierRef = IdentifierRef;
 
 },{"./builder":16,"./expression":22}],39:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReplaceMatches = exports.EndsWith = exports.StartsWith = exports.Substring = exports.Matches = exports.LastPositionOf = exports.PositionOf = exports.Lower = exports.Upper = exports.SplitOnMatches = exports.Split = exports.Combine = exports.Concatenate = void 0;
-var expression_1 = require("./expression");
-var builder_1 = require("./builder");
-var Concatenate = /** @class */ (function (_super) {
-    __extends(Concatenate, _super);
-    function Concatenate(json) {
-        return _super.call(this, json) || this;
+const expression_1 = require("./expression");
+const builder_1 = require("./builder");
+class Concatenate extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    Concatenate.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx);
-        if (args.some(function (x) { return x == null; })) {
+    exec(ctx) {
+        const args = this.execArgs(ctx);
+        if (args.some((x) => x == null)) {
             return null;
         }
         else {
-            return args.reduce(function (x, y) { return x + y; });
+            return args.reduce((x, y) => x + y);
         }
-    };
-    return Concatenate;
-}(expression_1.Expression));
-exports.Concatenate = Concatenate;
-var Combine = /** @class */ (function (_super) {
-    __extends(Combine, _super);
-    function Combine(json) {
-        var _this = _super.call(this, json) || this;
-        _this.source = (0, builder_1.build)(json.source);
-        _this.separator = (0, builder_1.build)(json.separator);
-        return _this;
     }
-    Combine.prototype.exec = function (ctx) {
-        var source = this.source.execute(ctx);
-        var separator = this.separator != null ? this.separator.execute(ctx) : '';
+}
+exports.Concatenate = Concatenate;
+class Combine extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.source = (0, builder_1.build)(json.source);
+        this.separator = (0, builder_1.build)(json.separator);
+    }
+    exec(ctx) {
+        const source = this.source.execute(ctx);
+        const separator = this.separator != null ? this.separator.execute(ctx) : '';
         if (source == null) {
             return null;
         }
         else {
-            var filteredArray = source.filter(function (x) { return x != null; });
+            const filteredArray = source.filter((x) => x != null);
             if (filteredArray.length === 0) {
                 return null;
             }
@@ -7884,154 +6849,133 @@ var Combine = /** @class */ (function (_super) {
                 return filteredArray.join(separator);
             }
         }
-    };
-    return Combine;
-}(expression_1.Expression));
-exports.Combine = Combine;
-var Split = /** @class */ (function (_super) {
-    __extends(Split, _super);
-    function Split(json) {
-        var _this = _super.call(this, json) || this;
-        _this.stringToSplit = (0, builder_1.build)(json.stringToSplit);
-        _this.separator = (0, builder_1.build)(json.separator);
-        return _this;
     }
-    Split.prototype.exec = function (ctx) {
-        var stringToSplit = this.stringToSplit.execute(ctx);
-        var separator = this.separator.execute(ctx);
+}
+exports.Combine = Combine;
+class Split extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.stringToSplit = (0, builder_1.build)(json.stringToSplit);
+        this.separator = (0, builder_1.build)(json.separator);
+    }
+    exec(ctx) {
+        const stringToSplit = this.stringToSplit.execute(ctx);
+        const separator = this.separator.execute(ctx);
         if (stringToSplit && separator) {
             return stringToSplit.split(separator);
         }
         return stringToSplit ? [stringToSplit] : null;
-    };
-    return Split;
-}(expression_1.Expression));
-exports.Split = Split;
-var SplitOnMatches = /** @class */ (function (_super) {
-    __extends(SplitOnMatches, _super);
-    function SplitOnMatches(json) {
-        var _this = _super.call(this, json) || this;
-        _this.stringToSplit = (0, builder_1.build)(json.stringToSplit);
-        _this.separatorPattern = (0, builder_1.build)(json.separatorPattern);
-        return _this;
     }
-    SplitOnMatches.prototype.exec = function (ctx) {
-        var stringToSplit = this.stringToSplit.execute(ctx);
-        var separatorPattern = this.separatorPattern.execute(ctx);
+}
+exports.Split = Split;
+class SplitOnMatches extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.stringToSplit = (0, builder_1.build)(json.stringToSplit);
+        this.separatorPattern = (0, builder_1.build)(json.separatorPattern);
+    }
+    exec(ctx) {
+        const stringToSplit = this.stringToSplit.execute(ctx);
+        const separatorPattern = this.separatorPattern.execute(ctx);
         if (stringToSplit && separatorPattern) {
             return stringToSplit.split(new RegExp(separatorPattern));
         }
         return stringToSplit ? [stringToSplit] : null;
-    };
-    return SplitOnMatches;
-}(expression_1.Expression));
+    }
+}
 exports.SplitOnMatches = SplitOnMatches;
 // Length is completely handled by overloaded#Length
-var Upper = /** @class */ (function (_super) {
-    __extends(Upper, _super);
-    function Upper(json) {
-        return _super.call(this, json) || this;
+class Upper extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    Upper.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg != null) {
             return arg.toUpperCase();
         }
         else {
             return null;
         }
-    };
-    return Upper;
-}(expression_1.Expression));
-exports.Upper = Upper;
-var Lower = /** @class */ (function (_super) {
-    __extends(Lower, _super);
-    function Lower(json) {
-        return _super.call(this, json) || this;
     }
-    Lower.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.Upper = Upper;
+class Lower extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg != null) {
             return arg.toLowerCase();
         }
         else {
             return null;
         }
-    };
-    return Lower;
-}(expression_1.Expression));
+    }
+}
 exports.Lower = Lower;
 // Indexer is completely handled by overloaded#Indexer
-var PositionOf = /** @class */ (function (_super) {
-    __extends(PositionOf, _super);
-    function PositionOf(json) {
-        var _this = _super.call(this, json) || this;
-        _this.pattern = (0, builder_1.build)(json.pattern);
-        _this.string = (0, builder_1.build)(json.string);
-        return _this;
+class PositionOf extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.pattern = (0, builder_1.build)(json.pattern);
+        this.string = (0, builder_1.build)(json.string);
     }
-    PositionOf.prototype.exec = function (ctx) {
-        var pattern = this.pattern.execute(ctx);
-        var string = this.string.execute(ctx);
+    exec(ctx) {
+        const pattern = this.pattern.execute(ctx);
+        const string = this.string.execute(ctx);
         if (pattern == null || string == null) {
             return null;
         }
         else {
             return string.indexOf(pattern);
         }
-    };
-    return PositionOf;
-}(expression_1.Expression));
-exports.PositionOf = PositionOf;
-var LastPositionOf = /** @class */ (function (_super) {
-    __extends(LastPositionOf, _super);
-    function LastPositionOf(json) {
-        var _this = _super.call(this, json) || this;
-        _this.pattern = (0, builder_1.build)(json.pattern);
-        _this.string = (0, builder_1.build)(json.string);
-        return _this;
     }
-    LastPositionOf.prototype.exec = function (ctx) {
-        var pattern = this.pattern.execute(ctx);
-        var string = this.string.execute(ctx);
+}
+exports.PositionOf = PositionOf;
+class LastPositionOf extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.pattern = (0, builder_1.build)(json.pattern);
+        this.string = (0, builder_1.build)(json.string);
+    }
+    exec(ctx) {
+        const pattern = this.pattern.execute(ctx);
+        const string = this.string.execute(ctx);
         if (pattern == null || string == null) {
             return null;
         }
         else {
             return string.lastIndexOf(pattern);
         }
-    };
-    return LastPositionOf;
-}(expression_1.Expression));
-exports.LastPositionOf = LastPositionOf;
-var Matches = /** @class */ (function (_super) {
-    __extends(Matches, _super);
-    function Matches(json) {
-        return _super.call(this, json) || this;
     }
-    Matches.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), string = _a[0], pattern = _a[1];
+}
+exports.LastPositionOf = LastPositionOf;
+class Matches extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const [string, pattern] = this.execArgs(ctx);
         if (string == null || pattern == null) {
             return null;
         }
         return new RegExp('^' + pattern + '$').test(string);
-    };
-    return Matches;
-}(expression_1.Expression));
-exports.Matches = Matches;
-var Substring = /** @class */ (function (_super) {
-    __extends(Substring, _super);
-    function Substring(json) {
-        var _this = _super.call(this, json) || this;
-        _this.stringToSub = (0, builder_1.build)(json.stringToSub);
-        _this.startIndex = (0, builder_1.build)(json.startIndex);
-        _this.length = (0, builder_1.build)(json['length']);
-        return _this;
     }
-    Substring.prototype.exec = function (ctx) {
-        var stringToSub = this.stringToSub.execute(ctx);
-        var startIndex = this.startIndex.execute(ctx);
-        var length = this.length != null ? this.length.execute(ctx) : null;
+}
+exports.Matches = Matches;
+class Substring extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.stringToSub = (0, builder_1.build)(json.stringToSub);
+        this.startIndex = (0, builder_1.build)(json.startIndex);
+        this.length = (0, builder_1.build)(json['length']);
+    }
+    exec(ctx) {
+        const stringToSub = this.stringToSub.execute(ctx);
+        const startIndex = this.startIndex.execute(ctx);
+        const length = this.length != null ? this.length.execute(ctx) : null;
         // According to spec: If stringToSub or startIndex is null, or startIndex is out of range, the result is null.
         if (stringToSub == null ||
             startIndex == null ||
@@ -8045,104 +6989,79 @@ var Substring = /** @class */ (function (_super) {
         else {
             return stringToSub.substr(startIndex);
         }
-    };
-    return Substring;
-}(expression_1.Expression));
-exports.Substring = Substring;
-var StartsWith = /** @class */ (function (_super) {
-    __extends(StartsWith, _super);
-    function StartsWith(json) {
-        return _super.call(this, json) || this;
     }
-    StartsWith.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx);
-        if (args.some(function (x) { return x == null; })) {
+}
+exports.Substring = Substring;
+class StartsWith extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const args = this.execArgs(ctx);
+        if (args.some((x) => x == null)) {
             return null;
         }
         else {
             return args[0].slice(0, args[1].length) === args[1];
         }
-    };
-    return StartsWith;
-}(expression_1.Expression));
-exports.StartsWith = StartsWith;
-var EndsWith = /** @class */ (function (_super) {
-    __extends(EndsWith, _super);
-    function EndsWith(json) {
-        return _super.call(this, json) || this;
     }
-    EndsWith.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx);
-        if (args.some(function (x) { return x == null; })) {
+}
+exports.StartsWith = StartsWith;
+class EndsWith extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const args = this.execArgs(ctx);
+        if (args.some((x) => x == null)) {
             return null;
         }
         else {
             return args[1] === '' || args[0].slice(-args[1].length) === args[1];
         }
-    };
-    return EndsWith;
-}(expression_1.Expression));
-exports.EndsWith = EndsWith;
-var ReplaceMatches = /** @class */ (function (_super) {
-    __extends(ReplaceMatches, _super);
-    function ReplaceMatches(json) {
-        return _super.call(this, json) || this;
     }
-    ReplaceMatches.prototype.exec = function (ctx) {
-        var args = this.execArgs(ctx);
-        if (args.some(function (x) { return x == null; })) {
+}
+exports.EndsWith = EndsWith;
+class ReplaceMatches extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const args = this.execArgs(ctx);
+        if (args.some((x) => x == null)) {
             return null;
         }
         else {
             return args[0].replace(new RegExp(args[1], 'g'), args[2]);
         }
-    };
-    return ReplaceMatches;
-}(expression_1.Expression));
+    }
+}
 exports.ReplaceMatches = ReplaceMatches;
 
 },{"./builder":16,"./expression":22}],40:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TupleElementDefinition = exports.TupleElement = exports.Tuple = exports.Property = void 0;
-var expression_1 = require("./expression");
-var builder_1 = require("./builder");
-var Property = /** @class */ (function (_super) {
-    __extends(Property, _super);
-    function Property(json) {
-        var _this = _super.call(this, json) || this;
-        _this.scope = json.scope;
-        _this.source = (0, builder_1.build)(json.source);
-        _this.path = json.path;
-        return _this;
+const expression_1 = require("./expression");
+const builder_1 = require("./builder");
+class Property extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.scope = json.scope;
+        this.source = (0, builder_1.build)(json.source);
+        this.path = json.path;
     }
-    Property.prototype.exec = function (ctx) {
-        var obj = this.scope != null ? ctx.get(this.scope) : this.source;
+    exec(ctx) {
+        let obj = this.scope != null ? ctx.get(this.scope) : this.source;
         if (obj instanceof expression_1.Expression) {
             obj = obj.execute(ctx);
         }
-        var val = getPropertyFromObject(obj, this.path);
+        let val = getPropertyFromObject(obj, this.path);
         if (val == null) {
-            var parts = this.path.split('.');
-            var curr_obj = obj;
-            for (var _i = 0, parts_1 = parts; _i < parts_1.length; _i++) {
-                var part = parts_1[_i];
-                var _obj = getPropertyFromObject(curr_obj, part);
+            const parts = this.path.split('.');
+            let curr_obj = obj;
+            for (const part of parts) {
+                const _obj = getPropertyFromObject(curr_obj, part);
                 curr_obj = _obj instanceof Function ? _obj.call(curr_obj) : _obj;
             }
             val = curr_obj != null ? curr_obj : null; // convert undefined to null
@@ -8153,12 +7072,11 @@ var Property = /** @class */ (function (_super) {
         else {
             return val;
         }
-    };
-    return Property;
-}(expression_1.Expression));
+    }
+}
 exports.Property = Property;
 function getPropertyFromObject(obj, path) {
-    var val;
+    let val;
     if (obj != null) {
         val = obj[path];
         if (val === undefined && typeof obj.get === 'function') {
@@ -8167,101 +7085,66 @@ function getPropertyFromObject(obj, path) {
     }
     return val;
 }
-var Tuple = /** @class */ (function (_super) {
-    __extends(Tuple, _super);
-    function Tuple(json) {
-        var _this = _super.call(this, json) || this;
-        var elements = json.element != null ? json.element : [];
-        _this.elements = elements.map(function (el) {
+class Tuple extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        const elements = json.element != null ? json.element : [];
+        this.elements = elements.map((el) => {
             return {
                 name: el.name,
                 value: (0, builder_1.build)(el.value)
             };
         });
-        return _this;
     }
-    Object.defineProperty(Tuple.prototype, "isTuple", {
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Tuple.prototype.exec = function (ctx) {
-        var val = {};
-        for (var _i = 0, _a = this.elements; _i < _a.length; _i++) {
-            var el = _a[_i];
+    get isTuple() {
+        return true;
+    }
+    exec(ctx) {
+        const val = {};
+        for (const el of this.elements) {
             val[el.name] = el.value != null ? el.value.execute(ctx) : undefined;
         }
         return val;
-    };
-    return Tuple;
-}(expression_1.Expression));
+    }
+}
 exports.Tuple = Tuple;
-var TupleElement = /** @class */ (function (_super) {
-    __extends(TupleElement, _super);
-    function TupleElement() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return TupleElement;
-}(expression_1.UnimplementedExpression));
+class TupleElement extends expression_1.UnimplementedExpression {
+}
 exports.TupleElement = TupleElement;
-var TupleElementDefinition = /** @class */ (function (_super) {
-    __extends(TupleElementDefinition, _super);
-    function TupleElementDefinition() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return TupleElementDefinition;
-}(expression_1.UnimplementedExpression));
+class TupleElementDefinition extends expression_1.UnimplementedExpression {
+}
 exports.TupleElementDefinition = TupleElementDefinition;
 
 },{"./builder":16,"./expression":22}],41:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TupleTypeSpecifier = exports.NamedTypeSpecifier = exports.ListTypeSpecifier = exports.IntervalTypeSpecifier = exports.Is = exports.CanConvertQuantity = exports.ConvertQuantity = exports.ConvertsToTime = exports.ConvertsToString = exports.ConvertsToRatio = exports.ConvertsToQuantity = exports.ConvertsToInteger = exports.ConvertsToDecimal = exports.ConvertsToDateTime = exports.ConvertsToDate = exports.ConvertsToBoolean = exports.Convert = exports.ToTime = exports.ToString = exports.ToRatio = exports.ToQuantity = exports.ToInteger = exports.ToDecimal = exports.ToDateTime = exports.ToDate = exports.ToConcept = exports.ToBoolean = exports.As = void 0;
-var expression_1 = require("./expression");
-var datetime_1 = require("../datatypes/datetime");
-var clinical_1 = require("../datatypes/clinical");
-var quantity_1 = require("../datatypes/quantity");
-var math_1 = require("../util/math");
-var util_1 = require("../util/util");
-var ratio_1 = require("../datatypes/ratio");
-var uncertainty_1 = require("../datatypes/uncertainty");
+const expression_1 = require("./expression");
+const datetime_1 = require("../datatypes/datetime");
+const clinical_1 = require("../datatypes/clinical");
+const quantity_1 = require("../datatypes/quantity");
+const math_1 = require("../util/math");
+const util_1 = require("../util/util");
+const ratio_1 = require("../datatypes/ratio");
+const uncertainty_1 = require("../datatypes/uncertainty");
 // TODO: Casting and Conversion needs unit tests!
-var As = /** @class */ (function (_super) {
-    __extends(As, _super);
-    function As(json) {
-        var _this = _super.call(this, json) || this;
+class As extends expression_1.Expression {
+    constructor(json) {
+        super(json);
         if (json.asTypeSpecifier) {
-            _this.asTypeSpecifier = json.asTypeSpecifier;
+            this.asTypeSpecifier = json.asTypeSpecifier;
         }
         else if (json.asType) {
             // convert it to a NamedTypedSpecifier
-            _this.asTypeSpecifier = {
+            this.asTypeSpecifier = {
                 name: json.asType,
                 type: 'NamedTypeSpecifier'
             };
         }
-        _this.strict = json.strict != null ? json.strict : false;
-        return _this;
+        this.strict = json.strict != null ? json.strict : false;
     }
-    As.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         // If it is null, return null
         if (arg == null) {
             return null;
@@ -8271,26 +7154,24 @@ var As = /** @class */ (function (_super) {
             return arg;
         }
         else if (this.strict) {
-            var argTypeString = specifierToString(guessSpecifierType(arg));
-            var asTypeString = specifierToString(this.asTypeSpecifier);
-            throw new Error("Cannot cast ".concat(argTypeString, " as ").concat(asTypeString));
+            const argTypeString = specifierToString(guessSpecifierType(arg));
+            const asTypeString = specifierToString(this.asTypeSpecifier);
+            throw new Error(`Cannot cast ${argTypeString} as ${asTypeString}`);
         }
         else {
             return null;
         }
-    };
-    return As;
-}(expression_1.Expression));
-exports.As = As;
-var ToBoolean = /** @class */ (function (_super) {
-    __extends(ToBoolean, _super);
-    function ToBoolean(json) {
-        return _super.call(this, json) || this;
     }
-    ToBoolean.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.As = As;
+class ToBoolean extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg != null) {
-            var strArg = arg.toString().toLowerCase();
+            const strArg = arg.toString().toLowerCase();
             if (['true', 't', 'yes', 'y', '1'].includes(strArg)) {
                 return true;
             }
@@ -8299,34 +7180,30 @@ var ToBoolean = /** @class */ (function (_super) {
             }
         }
         return null;
-    };
-    return ToBoolean;
-}(expression_1.Expression));
-exports.ToBoolean = ToBoolean;
-var ToConcept = /** @class */ (function (_super) {
-    __extends(ToConcept, _super);
-    function ToConcept(json) {
-        return _super.call(this, json) || this;
     }
-    ToConcept.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.ToBoolean = ToBoolean;
+class ToConcept extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg != null) {
             return new clinical_1.Concept([arg], arg.display);
         }
         else {
             return null;
         }
-    };
-    return ToConcept;
-}(expression_1.Expression));
-exports.ToConcept = ToConcept;
-var ToDate = /** @class */ (function (_super) {
-    __extends(ToDate, _super);
-    function ToDate(json) {
-        return _super.call(this, json) || this;
     }
-    ToDate.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.ToConcept = ToConcept;
+class ToDate extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg == null) {
             return null;
         }
@@ -8336,17 +7213,15 @@ var ToDate = /** @class */ (function (_super) {
         else {
             return datetime_1.Date.parse(arg.toString());
         }
-    };
-    return ToDate;
-}(expression_1.Expression));
-exports.ToDate = ToDate;
-var ToDateTime = /** @class */ (function (_super) {
-    __extends(ToDateTime, _super);
-    function ToDateTime(json) {
-        return _super.call(this, json) || this;
     }
-    ToDateTime.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.ToDate = ToDate;
+class ToDateTime extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg == null) {
             return null;
         }
@@ -8356,44 +7231,40 @@ var ToDateTime = /** @class */ (function (_super) {
         else {
             return datetime_1.DateTime.parse(arg.toString());
         }
-    };
-    return ToDateTime;
-}(expression_1.Expression));
-exports.ToDateTime = ToDateTime;
-var ToDecimal = /** @class */ (function (_super) {
-    __extends(ToDecimal, _super);
-    function ToDecimal(json) {
-        return _super.call(this, json) || this;
     }
-    ToDecimal.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.ToDateTime = ToDateTime;
+class ToDecimal extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg != null) {
             if (arg.isUncertainty) {
-                var low = (0, math_1.limitDecimalPrecision)(parseFloat(arg.low.toString()));
-                var high = (0, math_1.limitDecimalPrecision)(parseFloat(arg.high.toString()));
+                const low = (0, math_1.limitDecimalPrecision)(parseFloat(arg.low.toString()));
+                const high = (0, math_1.limitDecimalPrecision)(parseFloat(arg.high.toString()));
                 return new uncertainty_1.Uncertainty(low, high);
             }
             else {
-                var decimal = (0, math_1.limitDecimalPrecision)(parseFloat(arg.toString()));
+                const decimal = (0, math_1.limitDecimalPrecision)(parseFloat(arg.toString()));
                 if ((0, math_1.isValidDecimal)(decimal)) {
                     return decimal;
                 }
             }
         }
         return null;
-    };
-    return ToDecimal;
-}(expression_1.Expression));
-exports.ToDecimal = ToDecimal;
-var ToInteger = /** @class */ (function (_super) {
-    __extends(ToInteger, _super);
-    function ToInteger(json) {
-        return _super.call(this, json) || this;
     }
-    ToInteger.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.ToDecimal = ToDecimal;
+class ToInteger extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (typeof arg === 'string') {
-            var integer = parseInt(arg);
+            const integer = parseInt(arg);
             if ((0, math_1.isValidInteger)(integer)) {
                 return integer;
             }
@@ -8402,19 +7273,17 @@ var ToInteger = /** @class */ (function (_super) {
             return arg ? 1 : 0;
         }
         return null;
-    };
-    return ToInteger;
-}(expression_1.Expression));
-exports.ToInteger = ToInteger;
-var ToQuantity = /** @class */ (function (_super) {
-    __extends(ToQuantity, _super);
-    function ToQuantity(json) {
-        return _super.call(this, json) || this;
     }
-    ToQuantity.prototype.exec = function (ctx) {
+}
+exports.ToInteger = ToInteger;
+class ToQuantity extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
         return this.convertValue(this.execArgs(ctx));
-    };
-    ToQuantity.prototype.convertValue = function (val) {
+    }
+    convertValue(val) {
         if (val == null) {
             return null;
         }
@@ -8432,23 +7301,21 @@ var ToQuantity = /** @class */ (function (_super) {
             // it's a string or something else we'll try to parse as a string
             return (0, quantity_1.parseQuantity)(val.toString());
         }
-    };
-    return ToQuantity;
-}(expression_1.Expression));
-exports.ToQuantity = ToQuantity;
-var ToRatio = /** @class */ (function (_super) {
-    __extends(ToRatio, _super);
-    function ToRatio(json) {
-        return _super.call(this, json) || this;
     }
-    ToRatio.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.ToQuantity = ToQuantity;
+class ToRatio extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg != null) {
             // Argument will be of form '<quantity>:<quantity>'
-            var denominator = void 0, numerator = void 0;
+            let denominator, numerator;
             try {
                 // String will be split into an array. Numerator will be at index 1, Denominator will be at index 4
-                var splitRatioString = arg
+                const splitRatioString = arg
                     .toString()
                     .match(/^(\d+(\.\d+)?\s*('.+')?)\s*:\s*(\d+(\.\d+)?\s*('.+')?)$/);
                 if (splitRatioString == null) {
@@ -8471,45 +7338,41 @@ var ToRatio = /** @class */ (function (_super) {
         else {
             return null;
         }
-    };
-    return ToRatio;
-}(expression_1.Expression));
-exports.ToRatio = ToRatio;
-var ToString = /** @class */ (function (_super) {
-    __extends(ToString, _super);
-    function ToString(json) {
-        return _super.call(this, json) || this;
     }
-    ToString.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.ToRatio = ToRatio;
+class ToString extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg != null) {
             return arg.toString();
         }
         else {
             return null;
         }
-    };
-    return ToString;
-}(expression_1.Expression));
-exports.ToString = ToString;
-var ToTime = /** @class */ (function (_super) {
-    __extends(ToTime, _super);
-    function ToTime(json) {
-        return _super.call(this, json) || this;
     }
-    ToTime.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+}
+exports.ToString = ToString;
+class ToTime extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg != null) {
-            var timeString = arg.toString();
+            const timeString = arg.toString();
             // Return null if string doesn't represent a valid ISO-8601 Time
             // hh:mm:ss.fff or hh:mm:ss.fff
-            var matches = /^T?((\d{2})(:(\d{2})(:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(:?(\d{2}))?))?$/.exec(timeString);
+            const matches = /^T?((\d{2})(:(\d{2})(:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(:?(\d{2}))?))?$/.exec(timeString);
             if (matches == null) {
                 return null;
             }
-            var hours = matches[2];
-            var minutes = matches[4];
-            var seconds = matches[6];
+            let hours = matches[2];
+            let minutes = matches[4];
+            let seconds = matches[6];
             // Validate h/m/s if they exist, but allow null
             if (hours != null) {
                 if (hours < 0 || hours > 23) {
@@ -8529,7 +7392,7 @@ var ToTime = /** @class */ (function (_super) {
                 }
                 seconds = parseInt(seconds, 10);
             }
-            var milliseconds = matches[8];
+            let milliseconds = matches[8];
             if (milliseconds != null) {
                 milliseconds = parseInt((0, util_1.normalizeMillisecondsField)(milliseconds));
             }
@@ -8539,19 +7402,16 @@ var ToTime = /** @class */ (function (_super) {
         else {
             return null;
         }
-    };
-    return ToTime;
-}(expression_1.Expression));
-exports.ToTime = ToTime;
-var Convert = /** @class */ (function (_super) {
-    __extends(Convert, _super);
-    function Convert(json) {
-        var _this = _super.call(this, json) || this;
-        _this.operand = json.operand;
-        _this.toType = json.toType;
-        return _this;
     }
-    Convert.prototype.exec = function (ctx) {
+}
+exports.ToTime = ToTime;
+class Convert extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.operand = json.operand;
+        this.toType = json.toType;
+    }
+    exec(ctx) {
         switch (this.toType) {
             case '{urn:hl7-org:elm-types:r1}Boolean':
                 return new ToBoolean({ type: 'ToBoolean', operand: this.operand }).execute(ctx);
@@ -8574,184 +7434,156 @@ var Convert = /** @class */ (function (_super) {
             default:
                 return this.execArgs(ctx);
         }
-    };
-    return Convert;
-}(expression_1.Expression));
-exports.Convert = Convert;
-var ConvertsToBoolean = /** @class */ (function (_super) {
-    __extends(ConvertsToBoolean, _super);
-    function ConvertsToBoolean(json) {
-        var _this = _super.call(this, json) || this;
-        _this.operand = json.operand;
-        return _this;
     }
-    ConvertsToBoolean.prototype.exec = function (ctx) {
-        var operatorValue = this.execArgs(ctx);
+}
+exports.Convert = Convert;
+class ConvertsToBoolean extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.operand = json.operand;
+    }
+    exec(ctx) {
+        const operatorValue = this.execArgs(ctx);
         if (operatorValue === null) {
             return null;
         }
         else {
             return canConvertToType(ToBoolean, this.operand, ctx);
         }
-    };
-    return ConvertsToBoolean;
-}(expression_1.Expression));
-exports.ConvertsToBoolean = ConvertsToBoolean;
-var ConvertsToDate = /** @class */ (function (_super) {
-    __extends(ConvertsToDate, _super);
-    function ConvertsToDate(json) {
-        var _this = _super.call(this, json) || this;
-        _this.operand = json.operand;
-        return _this;
     }
-    ConvertsToDate.prototype.exec = function (ctx) {
-        var operatorValue = this.execArgs(ctx);
+}
+exports.ConvertsToBoolean = ConvertsToBoolean;
+class ConvertsToDate extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.operand = json.operand;
+    }
+    exec(ctx) {
+        const operatorValue = this.execArgs(ctx);
         if (operatorValue === null) {
             return null;
         }
         else {
             return canConvertToType(ToDate, this.operand, ctx);
         }
-    };
-    return ConvertsToDate;
-}(expression_1.Expression));
-exports.ConvertsToDate = ConvertsToDate;
-var ConvertsToDateTime = /** @class */ (function (_super) {
-    __extends(ConvertsToDateTime, _super);
-    function ConvertsToDateTime(json) {
-        var _this = _super.call(this, json) || this;
-        _this.operand = json.operand;
-        return _this;
     }
-    ConvertsToDateTime.prototype.exec = function (ctx) {
-        var operatorValue = this.execArgs(ctx);
+}
+exports.ConvertsToDate = ConvertsToDate;
+class ConvertsToDateTime extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.operand = json.operand;
+    }
+    exec(ctx) {
+        const operatorValue = this.execArgs(ctx);
         if (operatorValue === null) {
             return null;
         }
         else {
             return canConvertToType(ToDateTime, this.operand, ctx);
         }
-    };
-    return ConvertsToDateTime;
-}(expression_1.Expression));
-exports.ConvertsToDateTime = ConvertsToDateTime;
-var ConvertsToDecimal = /** @class */ (function (_super) {
-    __extends(ConvertsToDecimal, _super);
-    function ConvertsToDecimal(json) {
-        var _this = _super.call(this, json) || this;
-        _this.operand = json.operand;
-        return _this;
     }
-    ConvertsToDecimal.prototype.exec = function (ctx) {
-        var operatorValue = this.execArgs(ctx);
+}
+exports.ConvertsToDateTime = ConvertsToDateTime;
+class ConvertsToDecimal extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.operand = json.operand;
+    }
+    exec(ctx) {
+        const operatorValue = this.execArgs(ctx);
         if (operatorValue === null) {
             return null;
         }
         else {
             return canConvertToType(ToDecimal, this.operand, ctx);
         }
-    };
-    return ConvertsToDecimal;
-}(expression_1.Expression));
-exports.ConvertsToDecimal = ConvertsToDecimal;
-var ConvertsToInteger = /** @class */ (function (_super) {
-    __extends(ConvertsToInteger, _super);
-    function ConvertsToInteger(json) {
-        var _this = _super.call(this, json) || this;
-        _this.operand = json.operand;
-        return _this;
     }
-    ConvertsToInteger.prototype.exec = function (ctx) {
-        var operatorValue = this.execArgs(ctx);
+}
+exports.ConvertsToDecimal = ConvertsToDecimal;
+class ConvertsToInteger extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.operand = json.operand;
+    }
+    exec(ctx) {
+        const operatorValue = this.execArgs(ctx);
         if (operatorValue === null) {
             return null;
         }
         else {
             return canConvertToType(ToInteger, this.operand, ctx);
         }
-    };
-    return ConvertsToInteger;
-}(expression_1.Expression));
-exports.ConvertsToInteger = ConvertsToInteger;
-var ConvertsToQuantity = /** @class */ (function (_super) {
-    __extends(ConvertsToQuantity, _super);
-    function ConvertsToQuantity(json) {
-        var _this = _super.call(this, json) || this;
-        _this.operand = json.operand;
-        return _this;
     }
-    ConvertsToQuantity.prototype.exec = function (ctx) {
-        var operatorValue = this.execArgs(ctx);
+}
+exports.ConvertsToInteger = ConvertsToInteger;
+class ConvertsToQuantity extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.operand = json.operand;
+    }
+    exec(ctx) {
+        const operatorValue = this.execArgs(ctx);
         if (operatorValue === null) {
             return null;
         }
         else {
             return canConvertToType(ToQuantity, this.operand, ctx);
         }
-    };
-    return ConvertsToQuantity;
-}(expression_1.Expression));
-exports.ConvertsToQuantity = ConvertsToQuantity;
-var ConvertsToRatio = /** @class */ (function (_super) {
-    __extends(ConvertsToRatio, _super);
-    function ConvertsToRatio(json) {
-        var _this = _super.call(this, json) || this;
-        _this.operand = json.operand;
-        return _this;
     }
-    ConvertsToRatio.prototype.exec = function (ctx) {
-        var operatorValue = this.execArgs(ctx);
+}
+exports.ConvertsToQuantity = ConvertsToQuantity;
+class ConvertsToRatio extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.operand = json.operand;
+    }
+    exec(ctx) {
+        const operatorValue = this.execArgs(ctx);
         if (operatorValue === null) {
             return null;
         }
         else {
             return canConvertToType(ToRatio, this.operand, ctx);
         }
-    };
-    return ConvertsToRatio;
-}(expression_1.Expression));
-exports.ConvertsToRatio = ConvertsToRatio;
-var ConvertsToString = /** @class */ (function (_super) {
-    __extends(ConvertsToString, _super);
-    function ConvertsToString(json) {
-        var _this = _super.call(this, json) || this;
-        _this.operand = json.operand;
-        return _this;
     }
-    ConvertsToString.prototype.exec = function (ctx) {
-        var operatorValue = this.execArgs(ctx);
+}
+exports.ConvertsToRatio = ConvertsToRatio;
+class ConvertsToString extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.operand = json.operand;
+    }
+    exec(ctx) {
+        const operatorValue = this.execArgs(ctx);
         if (operatorValue === null) {
             return null;
         }
         else {
             return canConvertToType(ToString, this.operand, ctx);
         }
-    };
-    return ConvertsToString;
-}(expression_1.Expression));
-exports.ConvertsToString = ConvertsToString;
-var ConvertsToTime = /** @class */ (function (_super) {
-    __extends(ConvertsToTime, _super);
-    function ConvertsToTime(json) {
-        var _this = _super.call(this, json) || this;
-        _this.operand = json.operand;
-        return _this;
     }
-    ConvertsToTime.prototype.exec = function (ctx) {
-        var operatorValue = this.execArgs(ctx);
+}
+exports.ConvertsToString = ConvertsToString;
+class ConvertsToTime extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.operand = json.operand;
+    }
+    exec(ctx) {
+        const operatorValue = this.execArgs(ctx);
         if (operatorValue === null) {
             return null;
         }
         else {
             return canConvertToType(ToTime, this.operand, ctx);
         }
-    };
-    return ConvertsToTime;
-}(expression_1.Expression));
+    }
+}
 exports.ConvertsToTime = ConvertsToTime;
 function canConvertToType(toFunction, operand, ctx) {
     try {
-        var value = new toFunction({ type: toFunction.name, operand: operand }).execute(ctx);
+        const value = new toFunction({ type: toFunction.name, operand: operand }).execute(ctx);
         if (value != null) {
             return true;
         }
@@ -8763,13 +7595,12 @@ function canConvertToType(toFunction, operand, ctx) {
         return false;
     }
 }
-var ConvertQuantity = /** @class */ (function (_super) {
-    __extends(ConvertQuantity, _super);
-    function ConvertQuantity(json) {
-        return _super.call(this, json) || this;
+class ConvertQuantity extends expression_1.Expression {
+    constructor(json) {
+        super(json);
     }
-    ConvertQuantity.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), quantity = _a[0], newUnit = _a[1];
+    exec(ctx) {
+        const [quantity, newUnit] = this.execArgs(ctx);
         if (quantity != null && newUnit != null) {
             try {
                 return quantity.convertUnit(newUnit);
@@ -8779,17 +7610,15 @@ var ConvertQuantity = /** @class */ (function (_super) {
                 return null;
             }
         }
-    };
-    return ConvertQuantity;
-}(expression_1.Expression));
-exports.ConvertQuantity = ConvertQuantity;
-var CanConvertQuantity = /** @class */ (function (_super) {
-    __extends(CanConvertQuantity, _super);
-    function CanConvertQuantity(json) {
-        return _super.call(this, json) || this;
     }
-    CanConvertQuantity.prototype.exec = function (ctx) {
-        var _a = this.execArgs(ctx), quantity = _a[0], newUnit = _a[1];
+}
+exports.ConvertQuantity = ConvertQuantity;
+class CanConvertQuantity extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    exec(ctx) {
+        const [quantity, newUnit] = this.execArgs(ctx);
         if (quantity != null && newUnit != null) {
             try {
                 quantity.convertUnit(newUnit);
@@ -8800,39 +7629,35 @@ var CanConvertQuantity = /** @class */ (function (_super) {
             }
         }
         return null;
-    };
-    return CanConvertQuantity;
-}(expression_1.Expression));
+    }
+}
 exports.CanConvertQuantity = CanConvertQuantity;
-var Is = /** @class */ (function (_super) {
-    __extends(Is, _super);
-    function Is(json) {
-        var _this = _super.call(this, json) || this;
+class Is extends expression_1.Expression {
+    constructor(json) {
+        super(json);
         if (json.isTypeSpecifier) {
-            _this.isTypeSpecifier = json.isTypeSpecifier;
+            this.isTypeSpecifier = json.isTypeSpecifier;
         }
         else if (json.isType) {
             // Convert it to a NamedTypeSpecifier
-            _this.isTypeSpecifier = {
+            this.isTypeSpecifier = {
                 name: json.isType,
                 type: 'NamedTypeSpecifier'
             };
         }
-        return _this;
     }
-    Is.prototype.exec = function (ctx) {
-        var arg = this.execArgs(ctx);
+    exec(ctx) {
+        const arg = this.execArgs(ctx);
         if (arg === null) {
             return false;
         }
         if (typeof arg._is !== 'function' && !isSystemType(this.isTypeSpecifier)) {
             // We need an _is implementation in order to check non System types
-            throw new Error("Patient Source does not support Is operation for localId: ".concat(this.localId));
+            throw new Error(`Patient Source does not support Is operation for localId: ${this.localId}`);
         }
         return ctx.matchesTypeSpecifier(arg, this.isTypeSpecifier);
-    };
-    return Is;
-}(expression_1.Expression));
+    }
+}
 exports.Is = Is;
 function isSystemType(spec) {
     switch (spec.type) {
@@ -8841,11 +7666,11 @@ function isSystemType(spec) {
         case 'ListTypeSpecifier':
             return isSystemType(spec.elementType);
         case 'TupleTypeSpecifier':
-            return spec.element.every(function (e) { return isSystemType(e.elementType); });
+            return spec.element.every((e) => isSystemType(e.elementType));
         case 'IntervalTypeSpecifier':
             return isSystemType(spec.pointType);
         case 'ChoiceTypeSpecifier':
-            return spec.choice.every(function (c) { return isSystemType(c); });
+            return spec.choice.every((c) => isSystemType(c));
         default:
             return false;
     }
@@ -8861,15 +7686,15 @@ function specifierToString(spec) {
         case 'NamedTypeSpecifier':
             return spec.name;
         case 'ListTypeSpecifier':
-            return "List<".concat(specifierToString(spec.elementType), ">");
+            return `List<${specifierToString(spec.elementType)}>`;
         case 'TupleTypeSpecifier':
-            return "Tuple<".concat(spec.element
-                .map(function (e) { return "".concat(e.name, " ").concat(specifierToString(e.elementType)); })
-                .join(', '), ">");
+            return `Tuple<${spec.element
+                .map((e) => `${e.name} ${specifierToString(e.elementType)}`)
+                .join(', ')}>`;
         case 'IntervalTypeSpecifier':
-            return "Interval<".concat(specifierToString(spec.pointType), ">");
+            return `Interval<${specifierToString(spec.pointType)}>`;
         case 'ChoiceTypeSpecifier':
-            return "Choice<".concat(spec.choice.map(function (c) { return specifierToString(c); }).join(', '), ">");
+            return `Choice<${spec.choice.map((c) => specifierToString(c)).join(', ')}>`;
         default:
             return JSON.stringify(spec);
     }
@@ -8878,7 +7703,7 @@ function guessSpecifierType(val) {
     if (val == null) {
         return 'Null';
     }
-    var typeHierarchy = typeof val._typeHierarchy === 'function' && val._typeHierarchy();
+    const typeHierarchy = typeof val._typeHierarchy === 'function' && val._typeHierarchy();
     if (typeHierarchy && typeHierarchy.length > 0) {
         return typeHierarchy[0];
     }
@@ -8915,8 +7740,8 @@ function guessSpecifierType(val) {
     }
     else if (Array.isArray(val)) {
         // Get unique types from the array (by converting to string and putting in a Set)
-        var typesAsStrings = Array.from(new Set(val.map(function (v) { return JSON.stringify(guessSpecifierType(v)); })));
-        var types = typesAsStrings.map(function (ts) { return (/^{/.test(ts) ? JSON.parse(ts) : ts); });
+        const typesAsStrings = Array.from(new Set(val.map(v => JSON.stringify(guessSpecifierType(v)))));
+        const types = typesAsStrings.map(ts => (/^{/.test(ts) ? JSON.parse(ts) : ts));
         return {
             type: 'ListTypeSpecifier',
             elementType: types.length == 1 ? types[0] : { type: 'ChoiceTypeSpecifier', choice: types }
@@ -8931,61 +7756,26 @@ function guessSpecifierType(val) {
     else if (typeof val === 'object' && Object.keys(val).length > 0) {
         return {
             type: 'TupleTypeSpecifier',
-            element: Object.keys(val).map(function (k) { return ({ name: k, elementType: guessSpecifierType(val[k]) }); })
+            element: Object.keys(val).map(k => ({ name: k, elementType: guessSpecifierType(val[k]) }))
         };
     }
     return 'Unknown';
 }
-var IntervalTypeSpecifier = /** @class */ (function (_super) {
-    __extends(IntervalTypeSpecifier, _super);
-    function IntervalTypeSpecifier() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return IntervalTypeSpecifier;
-}(expression_1.UnimplementedExpression));
+class IntervalTypeSpecifier extends expression_1.UnimplementedExpression {
+}
 exports.IntervalTypeSpecifier = IntervalTypeSpecifier;
-var ListTypeSpecifier = /** @class */ (function (_super) {
-    __extends(ListTypeSpecifier, _super);
-    function ListTypeSpecifier() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return ListTypeSpecifier;
-}(expression_1.UnimplementedExpression));
+class ListTypeSpecifier extends expression_1.UnimplementedExpression {
+}
 exports.ListTypeSpecifier = ListTypeSpecifier;
-var NamedTypeSpecifier = /** @class */ (function (_super) {
-    __extends(NamedTypeSpecifier, _super);
-    function NamedTypeSpecifier() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return NamedTypeSpecifier;
-}(expression_1.UnimplementedExpression));
+class NamedTypeSpecifier extends expression_1.UnimplementedExpression {
+}
 exports.NamedTypeSpecifier = NamedTypeSpecifier;
-var TupleTypeSpecifier = /** @class */ (function (_super) {
-    __extends(TupleTypeSpecifier, _super);
-    function TupleTypeSpecifier() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return TupleTypeSpecifier;
-}(expression_1.UnimplementedExpression));
+class TupleTypeSpecifier extends expression_1.UnimplementedExpression {
+}
 exports.TupleTypeSpecifier = TupleTypeSpecifier;
 
 },{"../datatypes/clinical":5,"../datatypes/datetime":7,"../datatypes/quantity":11,"../datatypes/ratio":12,"../datatypes/uncertainty":13,"../util/math":53,"../util/util":55,"./expression":22}],42:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -9007,12 +7797,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UnfilteredContext = exports.PatientContext = exports.Context = void 0;
-var exception_1 = require("../datatypes/exception");
-var util_1 = require("../util/util");
-var dt = __importStar(require("../datatypes/datatypes"));
-var messageListeners_1 = require("./messageListeners");
-var Context = /** @class */ (function () {
-    function Context(parent, _codeService, _parameters, executionDateTime, messageListener) {
+const exception_1 = require("../datatypes/exception");
+const util_1 = require("../util/util");
+const dt = __importStar(require("../datatypes/datatypes"));
+const messageListeners_1 = require("./messageListeners");
+class Context {
+    constructor(parent, _codeService, _parameters, executionDateTime, messageListener) {
         this.parent = parent;
         this._codeService = _codeService;
         this.context_values = {};
@@ -9025,62 +7815,53 @@ var Context = /** @class */ (function () {
         this.executionDateTime = executionDateTime;
         this.messageListener = messageListener;
     }
-    Object.defineProperty(Context.prototype, "parameters", {
-        get: function () {
-            return this._parameters || (this.parent && this.parent.parameters);
-        },
-        set: function (params) {
-            this.checkParameters(params);
-            this._parameters = params;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Context.prototype, "codeService", {
-        get: function () {
-            return this._codeService || (this.parent && this.parent.codeService);
-        },
-        set: function (cs) {
-            this._codeService = cs;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Context.prototype.withParameters = function (params) {
+    get parameters() {
+        return this._parameters || (this.parent && this.parent.parameters);
+    }
+    set parameters(params) {
+        this.checkParameters(params);
+        this._parameters = params;
+    }
+    get codeService() {
+        return this._codeService || (this.parent && this.parent.codeService);
+    }
+    set codeService(cs) {
+        this._codeService = cs;
+    }
+    withParameters(params) {
         this.parameters = params || {};
         return this;
-    };
-    Context.prototype.withCodeService = function (cs) {
+    }
+    withCodeService(cs) {
         this.codeService = cs;
         return this;
-    };
-    Context.prototype.rootContext = function () {
+    }
+    rootContext() {
         if (this.parent) {
             return this.parent.rootContext();
         }
         else {
             return this;
         }
-    };
-    Context.prototype.findRecords = function (profile, retrieveDetails) {
+    }
+    findRecords(profile, retrieveDetails) {
         return this.parent && this.parent.findRecords(profile, retrieveDetails);
-    };
-    Context.prototype.childContext = function (context_values) {
-        if (context_values === void 0) { context_values = {}; }
-        var ctx = new Context(this);
+    }
+    childContext(context_values = {}) {
+        const ctx = new Context(this);
         ctx.context_values = context_values;
         return ctx;
-    };
-    Context.prototype.getLibraryContext = function (library) {
+    }
+    getLibraryContext(library) {
         return this.parent && this.parent.getLibraryContext(library);
-    };
-    Context.prototype.getLocalIdContext = function (localId) {
+    }
+    getLocalIdContext(localId) {
         return this.parent && this.parent.getLocalIdContext(localId);
-    };
-    Context.prototype.getParameter = function (name) {
+    }
+    getParameter(name) {
         return this.parent && this.parent.getParameter(name);
-    };
-    Context.prototype.getParentParameter = function (name) {
+    }
+    getParentParameter(name) {
         if (this.parent) {
             if (this.parent.parameters[name] != null) {
                 return this.parent.parameters[name];
@@ -9089,8 +7870,8 @@ var Context = /** @class */ (function () {
                 return this.parent.getParentParameter(name);
             }
         }
-    };
-    Context.prototype.getTimezoneOffset = function () {
+    }
+    getTimezoneOffset() {
         if (this.executionDateTime != null) {
             return this.executionDateTime.timezoneOffset;
         }
@@ -9100,8 +7881,8 @@ var Context = /** @class */ (function () {
         else {
             throw new exception_1.Exception('No Timezone Offset has been set');
         }
-    };
-    Context.prototype.getExecutionDateTime = function () {
+    }
+    getExecutionDateTime() {
         if (this.executionDateTime != null) {
             return this.executionDateTime;
         }
@@ -9111,8 +7892,8 @@ var Context = /** @class */ (function () {
         else {
             throw new exception_1.Exception('No Execution DateTime has been set');
         }
-    };
-    Context.prototype.getMessageListener = function () {
+    }
+    getMessageListener() {
         if (this.messageListener != null) {
             return this.messageListener;
         }
@@ -9122,20 +7903,20 @@ var Context = /** @class */ (function () {
         else {
             return new messageListeners_1.NullMessageListener();
         }
-    };
-    Context.prototype.getValueSet = function (name, library) {
+    }
+    getValueSet(name, library) {
         return this.parent && this.parent.getValueSet(name, library);
-    };
-    Context.prototype.getCodeSystem = function (name) {
+    }
+    getCodeSystem(name) {
         return this.parent && this.parent.getCodeSystem(name);
-    };
-    Context.prototype.getCode = function (name) {
+    }
+    getCode(name) {
         return this.parent && this.parent.getCode(name);
-    };
-    Context.prototype.getConcept = function (name) {
+    }
+    getConcept(name) {
         return this.parent && this.parent.getConcept(name);
-    };
-    Context.prototype.get = function (identifier) {
+    }
+    get(identifier) {
         // Check for undefined because if its null, we actually *do* want to return null (rather than
         // looking at parent), but if it's really undefined, *then* look at the parent
         if (typeof this.context_values[identifier] !== 'undefined') {
@@ -9147,37 +7928,36 @@ var Context = /** @class */ (function () {
         else {
             return this.parent != null && this.parent.get(identifier);
         }
-    };
-    Context.prototype.set = function (identifier, value) {
+    }
+    set(identifier, value) {
         this.context_values[identifier] = value;
-    };
-    Context.prototype.setLocalIdWithResult = function (localId, value) {
+    }
+    setLocalIdWithResult(localId, value) {
         // Temporary fix. Real fix will be to return a list of all result values for a given localId.
-        var ctx = this.localId_context[localId];
+        const ctx = this.localId_context[localId];
         if (ctx === false || ctx === null || ctx === undefined || ctx.length === 0) {
             this.localId_context[localId] = value;
         }
-    };
-    Context.prototype.getLocalIdResult = function (localId) {
+    }
+    getLocalIdResult(localId) {
         return this.localId_context[localId];
-    };
+    }
     // Returns an object of objects containing each library name
     // with the localIds and result values
-    Context.prototype.getAllLocalIds = function () {
-        var localIdResults = {};
+    getAllLocalIds() {
+        const localIdResults = {};
         // Add the localIds and result values from the main library
         localIdResults[this.parent.source.library.identifier.id] = {};
         localIdResults[this.parent.source.library.identifier.id] = this.localId_context;
         // Iterate over support libraries and store localIds
-        for (var libName in this.library_context) {
-            var lib = this.library_context[libName];
+        for (const libName in this.library_context) {
+            const lib = this.library_context[libName];
             this.supportLibraryLocalIds(lib, localIdResults);
         }
         return localIdResults;
-    };
+    }
     // Recursive function that will grab nested support library localId results
-    Context.prototype.supportLibraryLocalIds = function (lib, localIdResults) {
-        var _this = this;
+    supportLibraryLocalIds(lib, localIdResults) {
         // Set library identifier name as the key and the object of localIds with their results as the value
         // if it already exists then we need to merge the results instead of overwriting
         if (localIdResults[lib.library.source.library.identifier.id] != null) {
@@ -9187,16 +7967,16 @@ var Context = /** @class */ (function () {
             localIdResults[lib.library.source.library.identifier.id] = lib.localId_context;
         }
         // Iterate over any support libraries in the current support library
-        Object.values(lib.library_context).forEach(function (supportLib) {
-            _this.supportLibraryLocalIds(supportLib, localIdResults);
+        Object.values(lib.library_context).forEach(supportLib => {
+            this.supportLibraryLocalIds(supportLib, localIdResults);
         });
-    };
+    }
     // Merges the localId results for a library into the already collected results. The logic used for which result
     // to keep is the same as the logic used above in setLocalIdWithResult, "falsey" results are always replaced.
-    Context.prototype.mergeLibraryLocalIdResults = function (localIdResults, libraryId, libraryResults) {
-        for (var localId in libraryResults) {
-            var localIdResult = libraryResults[localId];
-            var existingResult = localIdResults[libraryId][localId];
+    mergeLibraryLocalIdResults(localIdResults, libraryId, libraryResults) {
+        for (const localId in libraryResults) {
+            const localIdResult = libraryResults[localId];
+            const existingResult = localIdResults[libraryId][localId];
             // overwite this localid result if the existing result is "falsey". future work could track all results for each localid
             if (existingResult === false ||
                 existingResult === null ||
@@ -9205,11 +7985,11 @@ var Context = /** @class */ (function () {
                 localIdResults[libraryId][localId] = localIdResult;
             }
         }
-    };
-    Context.prototype.checkParameters = function (params) {
-        for (var pName in params) {
-            var pVal = params[pName];
-            var pDef = this.getParameter(pName);
+    }
+    checkParameters(params) {
+        for (const pName in params) {
+            const pVal = params[pName];
+            const pDef = this.getParameter(pName);
             if (pVal == null) {
                 return; // Null can theoretically be any type
             }
@@ -9218,15 +7998,15 @@ var Context = /** @class */ (function () {
             }
             else if (pDef.parameterTypeSpecifier != null &&
                 !this.matchesTypeSpecifier(pVal, pDef.parameterTypeSpecifier)) {
-                throw new Error("Passed in parameter '".concat(pName, "' is wrong type"));
+                throw new Error(`Passed in parameter '${pName}' is wrong type`);
             }
             else if (pDef['default'] != null && !this.matchesInstanceType(pVal, pDef['default'])) {
-                throw new Error("Passed in parameter '".concat(pName, "' is wrong type"));
+                throw new Error(`Passed in parameter '${pName}' is wrong type`);
             }
         }
         return true;
-    };
-    Context.prototype.matchesTypeSpecifier = function (val, spec) {
+    }
+    matchesTypeSpecifier(val, spec) {
         switch (spec.type) {
             case 'NamedTypeSpecifier':
                 return this.matchesNamedTypeSpecifier(val, spec);
@@ -9241,13 +8021,11 @@ var Context = /** @class */ (function () {
             default:
                 return true; // default to true when we don't know
         }
-    };
-    Context.prototype.matchesListTypeSpecifier = function (val, spec) {
-        var _this = this;
-        return ((0, util_1.typeIsArray)(val) && val.every(function (x) { return _this.matchesTypeSpecifier(x, spec.elementType); }));
-    };
-    Context.prototype.matchesTupleTypeSpecifier = function (val, spec) {
-        var _this = this;
+    }
+    matchesListTypeSpecifier(val, spec) {
+        return ((0, util_1.typeIsArray)(val) && val.every(x => this.matchesTypeSpecifier(x, spec.elementType)));
+    }
+    matchesTupleTypeSpecifier(val, spec) {
         // TODO: Spec is not clear about exactly how tuples should be matched
         return (val != null &&
             typeof val === 'object' &&
@@ -9258,21 +8036,18 @@ var Context = /** @class */ (function () {
             !val.isDateTime &&
             !val.isDate &&
             !val.isQuantity &&
-            spec.element.every(function (x) {
-                return typeof val[x.name] === 'undefined' ||
-                    _this.matchesTypeSpecifier(val[x.name], x.elementType);
-            }));
-    };
-    Context.prototype.matchesIntervalTypeSpecifier = function (val, spec) {
+            spec.element.every((x) => typeof val[x.name] === 'undefined' ||
+                this.matchesTypeSpecifier(val[x.name], x.elementType)));
+    }
+    matchesIntervalTypeSpecifier(val, spec) {
         return (val.isInterval &&
             (val.low == null || this.matchesTypeSpecifier(val.low, spec.pointType)) &&
             (val.high == null || this.matchesTypeSpecifier(val.high, spec.pointType)));
-    };
-    Context.prototype.matchesChoiceTypeSpecifier = function (val, spec) {
-        var _this = this;
-        return spec.choice.some(function (c) { return _this.matchesTypeSpecifier(val, c); });
-    };
-    Context.prototype.matchesNamedTypeSpecifier = function (val, spec) {
+    }
+    matchesChoiceTypeSpecifier(val, spec) {
+        return spec.choice.some((c) => this.matchesTypeSpecifier(val, c));
+    }
+    matchesNamedTypeSpecifier(val, spec) {
         if (val == null) {
             return true;
         }
@@ -9319,8 +8094,8 @@ var Context = /** @class */ (function () {
                 // So for now we allow false positives in order to avoid false negatives.
                 return true;
         }
-    };
-    Context.prototype.matchesInstanceType = function (val, inst) {
+    }
+    matchesInstanceType(val, inst) {
         if (inst.isBooleanLiteral) {
             return typeof val === 'boolean';
         }
@@ -9361,79 +8136,65 @@ var Context = /** @class */ (function () {
             return this.matchesIntervalInstanceType(val, inst);
         }
         return true; // default to true when we don't know for sure
-    };
-    Context.prototype.matchesListInstanceType = function (val, list) {
-        var _this = this;
-        return ((0, util_1.typeIsArray)(val) && val.every(function (x) { return _this.matchesInstanceType(x, list.elements[0]); }));
-    };
-    Context.prototype.matchesTupleInstanceType = function (val, tpl) {
-        var _this = this;
+    }
+    matchesListInstanceType(val, list) {
+        return ((0, util_1.typeIsArray)(val) && val.every(x => this.matchesInstanceType(x, list.elements[0])));
+    }
+    matchesTupleInstanceType(val, tpl) {
         return (typeof val === 'object' &&
             !(0, util_1.typeIsArray)(val) &&
-            tpl.elements.every(function (x) {
-                return typeof val[x.name] === 'undefined' || _this.matchesInstanceType(val[x.name], x.value);
-            }));
-    };
-    Context.prototype.matchesIntervalInstanceType = function (val, ivl) {
-        var pointType = ivl.low != null ? ivl.low : ivl.high;
+            tpl.elements.every((x) => typeof val[x.name] === 'undefined' || this.matchesInstanceType(val[x.name], x.value)));
+    }
+    matchesIntervalInstanceType(val, ivl) {
+        const pointType = ivl.low != null ? ivl.low : ivl.high;
         return (val.isInterval &&
             (val.low == null || this.matchesInstanceType(val.low, pointType)) &&
             (val.high == null || this.matchesInstanceType(val.high, pointType)));
-    };
-    return Context;
-}());
-exports.Context = Context;
-var PatientContext = /** @class */ (function (_super) {
-    __extends(PatientContext, _super);
-    function PatientContext(library, patient, codeService, parameters, executionDateTime, messageListener) {
-        if (executionDateTime === void 0) { executionDateTime = dt.DateTime.fromJSDate(new Date()); }
-        if (messageListener === void 0) { messageListener = new messageListeners_1.NullMessageListener(); }
-        var _this = _super.call(this, library, codeService, parameters, executionDateTime, messageListener) || this;
-        _this.library = library;
-        _this.patient = patient;
-        return _this;
     }
-    PatientContext.prototype.rootContext = function () {
+}
+exports.Context = Context;
+class PatientContext extends Context {
+    constructor(library, patient, codeService, parameters, executionDateTime = dt.DateTime.fromJSDate(new Date()), messageListener = new messageListeners_1.NullMessageListener()) {
+        super(library, codeService, parameters, executionDateTime, messageListener);
+        this.library = library;
+        this.patient = patient;
+    }
+    rootContext() {
         return this;
-    };
-    PatientContext.prototype.getLibraryContext = function (library) {
+    }
+    getLibraryContext(library) {
         if (this.library_context[library] == null) {
             this.library_context[library] = new PatientContext(this.get(library), this.patient, this.codeService, this.parameters, this.executionDateTime);
         }
         return this.library_context[library];
-    };
-    PatientContext.prototype.getLocalIdContext = function (localId) {
+    }
+    getLocalIdContext(localId) {
         if (this.localId_context[localId] == null) {
             this.localId_context[localId] = new PatientContext(this.get(localId), this.patient, this.codeService, this.parameters, this.executionDateTime);
         }
         return this.localId_context[localId];
-    };
-    PatientContext.prototype.findRecords = function (profile, retrieveDetails) {
-        return this.patient && this.patient.findRecords(profile, retrieveDetails);
-    };
-    return PatientContext;
-}(Context));
-exports.PatientContext = PatientContext;
-var UnfilteredContext = /** @class */ (function (_super) {
-    __extends(UnfilteredContext, _super);
-    function UnfilteredContext(library, results, codeService, parameters, executionDateTime, messageListener) {
-        if (executionDateTime === void 0) { executionDateTime = dt.DateTime.fromJSDate(new Date()); }
-        if (messageListener === void 0) { messageListener = new messageListeners_1.NullMessageListener(); }
-        var _this = _super.call(this, library, codeService, parameters, executionDateTime, messageListener) || this;
-        _this.library = library;
-        _this.results = results;
-        return _this;
     }
-    UnfilteredContext.prototype.rootContext = function () {
+    findRecords(profile, retrieveDetails) {
+        return this.patient && this.patient.findRecords(profile, retrieveDetails);
+    }
+}
+exports.PatientContext = PatientContext;
+class UnfilteredContext extends Context {
+    constructor(library, results, codeService, parameters, executionDateTime = dt.DateTime.fromJSDate(new Date()), messageListener = new messageListeners_1.NullMessageListener()) {
+        super(library, codeService, parameters, executionDateTime, messageListener);
+        this.library = library;
+        this.results = results;
+    }
+    rootContext() {
         return this;
-    };
-    UnfilteredContext.prototype.findRecords = function (_template) {
+    }
+    findRecords(_template) {
         throw new exception_1.Exception('Retreives are not currently supported in Unfiltered Context');
-    };
-    UnfilteredContext.prototype.getLibraryContext = function (_library) {
+    }
+    getLibraryContext(_library) {
         throw new exception_1.Exception('Library expressions are not currently supported in Unfiltered Context');
-    };
-    UnfilteredContext.prototype.get = function (identifier) {
+    }
+    get(identifier) {
         //First check to see if the identifier is a unfiltered context expression that has already been cached
         if (this.context_values[identifier]) {
             return this.context_values[identifier];
@@ -9444,76 +8205,73 @@ var UnfilteredContext = /** @class */ (function (_super) {
         }
         //lastley attempt to gather all patient level results that have that identifier
         // should this compact null values before return ?
-        return Object.values(this.results.patientResults).map(function (pr) { return pr[identifier]; });
-    };
-    return UnfilteredContext;
-}(Context));
+        return Object.values(this.results.patientResults).map((pr) => pr[identifier]);
+    }
+}
 exports.UnfilteredContext = UnfilteredContext;
 
 },{"../datatypes/datatypes":6,"../datatypes/exception":8,"../util/util":55,"./messageListeners":44}],43:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Executor = void 0;
-var messageListeners_1 = require("./messageListeners");
-var results_1 = require("./results");
-var context_1 = require("./context");
-var Executor = /** @class */ (function () {
-    function Executor(library, codeService, parameters, messageListener) {
-        if (messageListener === void 0) { messageListener = new messageListeners_1.NullMessageListener(); }
+const messageListeners_1 = require("./messageListeners");
+const results_1 = require("./results");
+const context_1 = require("./context");
+class Executor {
+    constructor(library, codeService, parameters, messageListener = new messageListeners_1.NullMessageListener()) {
         this.library = library;
         this.codeService = codeService;
         this.parameters = parameters;
         this.messageListener = messageListener;
     }
-    Executor.prototype.withLibrary = function (lib) {
+    withLibrary(lib) {
         this.library = lib;
         return this;
-    };
-    Executor.prototype.withParameters = function (params) {
+    }
+    withParameters(params) {
         this.parameters = params != null ? params : {};
         return this;
-    };
-    Executor.prototype.withCodeService = function (cs) {
+    }
+    withCodeService(cs) {
         this.codeService = cs;
         return this;
-    };
-    Executor.prototype.withMessageListener = function (ml) {
+    }
+    withMessageListener(ml) {
         this.messageListener = ml;
         return this;
-    };
-    Executor.prototype.exec_expression = function (expression, patientSource, executionDateTime) {
-        var _a;
-        var r = new results_1.Results();
-        var expr = this.library.expressions[expression];
+    }
+    exec_expression(expression, patientSource, executionDateTime) {
+        const r = new results_1.Results();
+        const expr = this.library.expressions[expression];
         if (expr != null) {
             while (patientSource.currentPatient()) {
-                var patient_ctx = new context_1.PatientContext(this.library, patientSource.currentPatient(), this.codeService, this.parameters, executionDateTime, this.messageListener);
-                r.recordPatientResults(patient_ctx, (_a = {}, _a[expression] = expr.execute(patient_ctx), _a));
+                const patient_ctx = new context_1.PatientContext(this.library, patientSource.currentPatient(), this.codeService, this.parameters, executionDateTime, this.messageListener);
+                r.recordPatientResults(patient_ctx, { [expression]: expr.execute(patient_ctx) });
                 patientSource.nextPatient();
             }
         }
         return r;
-    };
-    Executor.prototype.exec = function (patientSource, executionDateTime) {
-        var r = this.exec_patient_context(patientSource, executionDateTime);
-        var unfilteredContext = new context_1.UnfilteredContext(this.library, r, this.codeService, this.parameters, executionDateTime, this.messageListener);
-        var resultMap = {};
-        for (var key in this.library.expressions) {
-            var expr = this.library.expressions[key];
+    }
+    exec(patientSource, executionDateTime) {
+        const r = this.exec_patient_context(patientSource, executionDateTime);
+        const unfilteredContext = new context_1.UnfilteredContext(this.library, r, this.codeService, this.parameters, executionDateTime, this.messageListener);
+        const resultMap = {};
+        for (const key in this.library.expressions) {
+            const expr = this.library.expressions[key];
             if (expr.context === 'Unfiltered') {
                 resultMap[key] = expr.exec(unfilteredContext);
             }
         }
         r.recordUnfilteredResults(resultMap);
         return r;
-    };
-    Executor.prototype.exec_patient_context = function (patientSource, executionDateTime) {
-        var r = new results_1.Results();
+    }
+    exec_patient_context(patientSource, executionDateTime) {
+        const r = new results_1.Results();
         while (patientSource.currentPatient()) {
-            var patient_ctx = new context_1.PatientContext(this.library, patientSource.currentPatient(), this.codeService, this.parameters, executionDateTime, this.messageListener);
-            var resultMap = {};
-            for (var key in this.library.expressions) {
-                var expr = this.library.expressions[key];
+            const patient_ctx = new context_1.PatientContext(this.library, patientSource.currentPatient(), this.codeService, this.parameters, executionDateTime, this.messageListener);
+            const resultMap = {};
+            for (const key in this.library.expressions) {
+                const expr = this.library.expressions[key];
                 if (expr.context === 'Patient') {
                     resultMap[key] = expr.execute(patient_ctx);
                 }
@@ -9522,58 +8280,51 @@ var Executor = /** @class */ (function () {
             patientSource.nextPatient();
         }
         return r;
-    };
-    return Executor;
-}());
+    }
+}
 exports.Executor = Executor;
 
 },{"./context":42,"./messageListeners":44,"./results":46}],44:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConsoleMessageListener = exports.NullMessageListener = void 0;
-var NullMessageListener = /** @class */ (function () {
-    function NullMessageListener() {
-    }
-    NullMessageListener.prototype.onMessage = function (_source, _code, _severity, _message) {
+class NullMessageListener {
+    onMessage(_source, _code, _severity, _message) {
         // do nothing
-    };
-    return NullMessageListener;
-}());
+    }
+}
 exports.NullMessageListener = NullMessageListener;
-var ConsoleMessageListener = /** @class */ (function () {
-    function ConsoleMessageListener(logSourceOnTrace) {
-        if (logSourceOnTrace === void 0) { logSourceOnTrace = false; }
+class ConsoleMessageListener {
+    constructor(logSourceOnTrace = false) {
         this.logSourceOnTrace = logSourceOnTrace;
     }
-    ConsoleMessageListener.prototype.onMessage = function (source, code, severity, message) {
+    onMessage(source, code, severity, message) {
         // eslint-disable-next-line no-console
-        var print = severity === 'Error' ? console.error : console.log;
-        var content = "".concat(severity, ": [").concat(code, "] ").concat(message);
+        const print = severity === 'Error' ? console.error : console.log;
+        let content = `${severity}: [${code}] ${message}`;
         if (severity === 'Trace' && this.logSourceOnTrace) {
-            content += "\n<<<<< SOURCE:\n".concat(JSON.stringify(source), "\n>>>>>");
+            content += `\n<<<<< SOURCE:\n${JSON.stringify(source)}\n>>>>>`;
         }
         print(content);
-    };
-    return ConsoleMessageListener;
-}());
+    }
+}
 exports.ConsoleMessageListener = ConsoleMessageListener;
 
 },{}],45:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Repository = void 0;
-var library_1 = require("../elm/library");
-var Repository = /** @class */ (function () {
-    function Repository(data) {
+const library_1 = require("../elm/library");
+class Repository {
+    constructor(data) {
         this.data = data;
         this.libraries = Array.from(Object.values(data));
     }
-    Repository.prototype.resolve = function (path, version) {
-        for (var _i = 0, _a = this.libraries; _i < _a.length; _i++) {
-            var lib = _a[_i];
+    resolve(path, version) {
+        for (const lib of this.libraries) {
             if (lib.library && lib.library.identifier) {
-                var _b = lib.library.identifier, id = _b.id, system = _b.system, libraryVersion = _b.version;
-                var libraryUri = "".concat(system, "/").concat(id);
+                const { id, system, version: libraryVersion } = lib.library.identifier;
+                const libraryUri = `${system}/${id}`;
                 if (path === libraryUri || path === id) {
                     if (version) {
                         if (libraryVersion === version) {
@@ -9586,62 +8337,45 @@ var Repository = /** @class */ (function () {
                 }
             }
         }
-    };
-    return Repository;
-}());
+    }
+}
 exports.Repository = Repository;
 
 },{"../elm/library":27}],46:[function(require,module,exports){
 "use strict";
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Results = void 0;
-var Results = /** @class */ (function () {
-    function Results() {
+class Results {
+    constructor() {
         this.patientResults = {};
         this.unfilteredResults = {};
         this.localIdPatientResultsMap = {};
         this.patientEvaluatedRecords = {};
     }
-    Object.defineProperty(Results.prototype, "evaluatedRecords", {
-        // Expose an evaluatedRecords array for backwards compatibility
-        get: function () {
-            return [].concat.apply([], Object.values(this.patientEvaluatedRecords));
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Results.prototype.recordPatientResults = function (patient_ctx, resultMap) {
-        var _this = this;
-        var p = patient_ctx.patient;
+    // Expose an evaluatedRecords array for backwards compatibility
+    get evaluatedRecords() {
+        return [].concat(...Object.values(this.patientEvaluatedRecords));
+    }
+    recordPatientResults(patient_ctx, resultMap) {
+        const p = patient_ctx.patient;
         // NOTE: From now on prefer getId() over id() because some data models may have an id property
         // that is not a string (e.g., FHIR) -- so reserve getId() for the API (and expect a string
         // representation) but leave id() for data-model specific formats.
-        var patientId = typeof p.getId === 'function' ? p.getId() : p.id();
+        const patientId = typeof p.getId === 'function' ? p.getId() : p.id();
         // Record the results
         this.patientResults[patientId] = resultMap;
         // Record the local IDs
         this.localIdPatientResultsMap[patientId] = patient_ctx.getAllLocalIds();
         // Record the evaluatedRecords, merging with an aggregated array across all libraries
-        this.patientEvaluatedRecords[patientId] = __spreadArray([], patient_ctx.evaluatedRecords, true);
-        Object.values(patient_ctx.library_context).forEach(function (ctx) {
-            var _a;
-            (_a = _this.patientEvaluatedRecords[patientId]).push.apply(_a, ctx.evaluatedRecords);
+        this.patientEvaluatedRecords[patientId] = [...patient_ctx.evaluatedRecords];
+        Object.values(patient_ctx.library_context).forEach((ctx) => {
+            this.patientEvaluatedRecords[patientId].push(...ctx.evaluatedRecords);
         });
-    };
-    Results.prototype.recordUnfilteredResults = function (resultMap) {
+    }
+    recordUnfilteredResults(resultMap) {
         this.unfilteredResults = resultMap;
-    };
-    return Results;
-}());
+    }
+}
 exports.Results = Results;
 
 },{}],47:[function(require,module,exports){
@@ -9683,7 +8417,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.equals = exports.equivalent = exports.greaterThanOrEquals = exports.greaterThan = exports.lessThanOrEquals = exports.lessThan = void 0;
-var datatypes_1 = require("../datatypes/datatypes");
+const datatypes_1 = require("../datatypes/datatypes");
 function areNumbers(a, b) {
     return typeof a === 'number' && typeof b === 'number';
 }
@@ -9788,7 +8522,7 @@ function equivalent(a, b) {
     if (typeof a.equivalent === 'function') {
         return a.equivalent(b);
     }
-    var _a = getClassOfObjects(a, b), aClass = _a[0], bClass = _a[1];
+    const [aClass, bClass] = getClassOfObjects(a, b);
     switch (aClass) {
         case '[object Array]':
             return compareEveryItemInArrays(a, b, equivalent);
@@ -9814,11 +8548,11 @@ function codesAreEquivalent(code1, code2) {
     return code1.hasMatch(code2);
 }
 function getClassOfObjects(object1, object2) {
-    return [object1, object2].map(function (obj) { return ({}.toString.call(obj)); });
+    return [object1, object2].map(obj => ({}.toString.call(obj)));
 }
 function compareEveryItemInArrays(array1, array2, comparisonFunction) {
     return (array1.length === array2.length &&
-        array1.every(function (item, i) { return comparisonFunction(item, array2[i]); }));
+        array1.every((item, i) => comparisonFunction(item, array2[i])));
 }
 function compareObjects(a, b, comparisonFunction) {
     if (!classesEqual(a, b)) {
@@ -9830,19 +8564,19 @@ function classesEqual(object1, object2) {
     return object2 instanceof object1.constructor && object1 instanceof object2.constructor;
 }
 function deepCompareKeysAndValues(a, b, comparisonFunction) {
-    var finalComparisonResult;
-    var aKeys = getKeysFromObject(a).sort();
-    var bKeys = getKeysFromObject(b).sort();
+    let finalComparisonResult;
+    const aKeys = getKeysFromObject(a).sort();
+    const bKeys = getKeysFromObject(b).sort();
     // Array.every() will only return true or false, so set a flag for if we should return null
-    var shouldReturnNull = false;
+    let shouldReturnNull = false;
     // Check if both arrays of keys are the same length and key names match
-    if (aKeys.length === bKeys.length && aKeys.every(function (value, index) { return value === bKeys[index]; })) {
-        finalComparisonResult = aKeys.every(function (key) {
+    if (aKeys.length === bKeys.length && aKeys.every((value, index) => value === bKeys[index])) {
+        finalComparisonResult = aKeys.every(key => {
             // if both are null we should return true to satisfy ignoring empty values in tuples
             if (a[key] == null && b[key] == null) {
                 return true;
             }
-            var comparisonResult = comparisonFunction(a[key], b[key]);
+            const comparisonResult = comparisonFunction(a[key], b[key]);
             if (comparisonResult === null) {
                 shouldReturnNull = true;
             }
@@ -9858,7 +8592,7 @@ function deepCompareKeysAndValues(a, b, comparisonFunction) {
     return finalComparisonResult;
 }
 function getKeysFromObject(object) {
-    return Object.keys(object).filter(function (k) { return !isFunction(object[k]); });
+    return Object.keys(object).filter(k => !isFunction(object[k]));
 }
 function isFunction(input) {
     return input instanceof Function || {}.toString.call(input) === '[object Function]';
@@ -9894,7 +8628,7 @@ function equals(a, b) {
         return a === b;
     }
     // Return false if they are instances of different classes
-    var _a = getClassOfObjects(a, b), aClass = _a[0], bClass = _a[1];
+    const [aClass, bClass] = getClassOfObjects(a, b);
     if (aClass !== bClass) {
         return false;
     }
@@ -9904,7 +8638,7 @@ function equals(a, b) {
             return a.getTime() === b.getTime();
         case '[object RegExp]':
             // Compare the components of the regular expression
-            return ['source', 'global', 'ignoreCase', 'multiline'].every(function (p) { return a[p] === b[p]; });
+            return ['source', 'global', 'ignoreCase', 'multiline'].every(p => a[p] === b[p]);
         case '[object Array]':
             if (a.indexOf(null) >= 0 ||
                 a.indexOf(undefined) >= 0 ||
@@ -9925,27 +8659,12 @@ exports.equals = equals;
 
 },{"../datatypes/datatypes":6}],53:[function(require,module,exports){
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.decimalOrNull = exports.decimalAdjust = exports.minValueForType = exports.minValueForInstance = exports.maxValueForType = exports.maxValueForInstance = exports.predecessor = exports.successor = exports.OverFlowException = exports.limitDecimalPrecision = exports.isValidDecimal = exports.isValidInteger = exports.overflowsOrUnderflows = exports.MAX_TIME_VALUE = exports.MIN_TIME_VALUE = exports.MAX_DATE_VALUE = exports.MIN_DATE_VALUE = exports.MAX_DATETIME_VALUE = exports.MIN_DATETIME_VALUE = exports.MIN_FLOAT_PRECISION_VALUE = exports.MIN_FLOAT_VALUE = exports.MAX_FLOAT_VALUE = exports.MIN_INT_VALUE = exports.MAX_INT_VALUE = void 0;
 /* eslint-disable @typescript-eslint/no-loss-of-precision */
-var exception_1 = require("../datatypes/exception");
-var datetime_1 = require("../datatypes/datetime");
-var uncertainty_1 = require("../datatypes/uncertainty");
+const exception_1 = require("../datatypes/exception");
+const datetime_1 = require("../datatypes/datetime");
+const uncertainty_1 = require("../datatypes/uncertainty");
 exports.MAX_INT_VALUE = Math.pow(2, 31) - 1;
 exports.MIN_INT_VALUE = Math.pow(-2, 31);
 exports.MAX_FLOAT_VALUE = 99999999999999999999.99999999;
@@ -10033,28 +8752,23 @@ function isValidDecimal(decimal) {
 }
 exports.isValidDecimal = isValidDecimal;
 function limitDecimalPrecision(decimal) {
-    var decimalString = decimal.toString();
+    let decimalString = decimal.toString();
     // For decimals so large that they are represented in scientific notation, javascript has already limited
     // the decimal to its own constraints, so we can't determine the original precision.  Leave as-is unless
     // this becomes problematic, in which case we would need our own parseFloat.
     if (decimalString.indexOf('e') !== -1) {
         return decimal;
     }
-    var splitDecimalString = decimalString.split('.');
-    var decimalPoints = splitDecimalString[1];
+    const splitDecimalString = decimalString.split('.');
+    const decimalPoints = splitDecimalString[1];
     if (decimalPoints != null && decimalPoints.length > 8) {
         decimalString = splitDecimalString[0] + '.' + splitDecimalString[1].substring(0, 8);
     }
     return parseFloat(decimalString);
 }
 exports.limitDecimalPrecision = limitDecimalPrecision;
-var OverFlowException = /** @class */ (function (_super) {
-    __extends(OverFlowException, _super);
-    function OverFlowException() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return OverFlowException;
-}(exception_1.Exception));
+class OverFlowException extends exception_1.Exception {
+}
 exports.OverFlowException = OverFlowException;
 function successor(val) {
     if (typeof val === 'number') {
@@ -10101,7 +8815,7 @@ function successor(val) {
     }
     else if (val && val.isUncertainty) {
         // For uncertainties, if the high is the max val, don't increment it
-        var high = (function () {
+        const high = (() => {
             try {
                 return successor(val.high);
             }
@@ -10112,7 +8826,7 @@ function successor(val) {
         return new uncertainty_1.Uncertainty(successor(val.low), high);
     }
     else if (val && val.isQuantity) {
-        var succ = val.clone();
+        const succ = val.clone();
         succ.value = successor(val.value);
         return succ;
     }
@@ -10166,7 +8880,7 @@ function predecessor(val) {
     }
     else if (val && val.isUncertainty) {
         // For uncertainties, if the low is the min val, don't decrement it
-        var low = (function () {
+        const low = (() => {
             try {
                 return predecessor(val.low);
             }
@@ -10177,7 +8891,7 @@ function predecessor(val) {
         return new uncertainty_1.Uncertainty(low, predecessor(val.high));
     }
     else if (val && val.isQuantity) {
-        var pred = val.clone();
+        const pred = val.clone();
         pred.value = predecessor(val.value);
         return pred;
     }
@@ -10205,7 +8919,7 @@ function maxValueForInstance(val) {
         return exports.MAX_DATE_VALUE === null || exports.MAX_DATE_VALUE === void 0 ? void 0 : exports.MAX_DATE_VALUE.copy();
     }
     else if (val && val.isQuantity) {
-        var val2 = val.clone();
+        const val2 = val.clone();
         val2.value = maxValueForInstance(val2.value);
         return val2;
     }
@@ -10231,7 +8945,7 @@ function maxValueForType(type, quantityInstance) {
                 // can't infer a quantity unit type from nothing]
                 return null;
             }
-            var maxQty = quantityInstance.clone();
+            const maxQty = quantityInstance.clone();
             maxQty.value = maxValueForInstance(maxQty.value);
             return maxQty;
         }
@@ -10258,7 +8972,7 @@ function minValueForInstance(val) {
         return exports.MIN_DATE_VALUE === null || exports.MIN_DATE_VALUE === void 0 ? void 0 : exports.MIN_DATE_VALUE.copy();
     }
     else if (val && val.isQuantity) {
-        var val2 = val.clone();
+        const val2 = val.clone();
         val2.value = minValueForInstance(val2.value);
         return val2;
     }
@@ -10284,7 +8998,7 @@ function minValueForType(type, quantityInstance) {
                 // can't infer a quantity unit type from nothing]
                 return null;
             }
-            var minQty = quantityInstance.clone();
+            const minQty = quantityInstance.clone();
             minQty.value = minValueForInstance(minQty.value);
             return minQty;
         }
@@ -10305,7 +9019,7 @@ function decimalAdjust(type, value, exp) {
     }
     //Shift
     value = value.toString().split('e');
-    var v = value[1] ? +value[1] - exp : -exp;
+    let v = value[1] ? +value[1] - exp : -exp;
     value = Math[type](+(value[0] + 'e' + v));
     //Shift back
     value = value.toString().split('e');
@@ -10339,23 +9053,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getQuotientOfUnits = exports.getProductOfUnits = exports.compareUnits = exports.convertToCQLDateUnit = exports.normalizeUnitsWhenPossible = exports.convertUnit = exports.checkUnit = void 0;
-var ucum = __importStar(require("@lhncbc/ucum-lhc"));
-var math_1 = require("./math");
-var utils = ucum.UcumLhcUtils.getInstance();
+const ucum = __importStar(require("@lhncbc/ucum-lhc"));
+const math_1 = require("./math");
+const utils = ucum.UcumLhcUtils.getInstance();
 // The CQL specification says that dates are based on the Gregorian calendar, so CQL-based year and month
 // identifiers will be matched to the UCUM gregorian units. See http://unitsofmeasure.org/ucum.html#para-31
-var CQL_TO_UCUM_DATE_UNITS = {
+const CQL_TO_UCUM_DATE_UNITS = {
     years: 'a_g',
     year: 'a_g',
     months: 'mo_g',
@@ -10373,7 +9078,7 @@ var CQL_TO_UCUM_DATE_UNITS = {
     milliseconds: 'ms',
     millisecond: 'ms'
 };
-var UCUM_TO_CQL_DATE_UNITS = {
+const UCUM_TO_CQL_DATE_UNITS = {
     a: 'year',
     a_j: 'year',
     a_g: 'year',
@@ -10388,10 +9093,8 @@ var UCUM_TO_CQL_DATE_UNITS = {
     ms: 'millisecond'
 };
 // Cache Map<string, boolean> for unit validity results so we dont have to go to ucum-lhc for every check.
-var unitValidityCache = new Map();
-function checkUnit(unit, allowEmptyUnits, allowCQLDateUnits) {
-    if (allowEmptyUnits === void 0) { allowEmptyUnits = true; }
-    if (allowCQLDateUnits === void 0) { allowCQLDateUnits = true; }
+const unitValidityCache = new Map();
+function checkUnit(unit, allowEmptyUnits = true, allowCQLDateUnits = true) {
     if (allowEmptyUnits) {
         unit = fixEmptyUnit(unit);
     }
@@ -10399,14 +9102,14 @@ function checkUnit(unit, allowEmptyUnits, allowCQLDateUnits) {
         unit = fixCQLDateUnit(unit);
     }
     if (!unitValidityCache.has(unit)) {
-        var result = utils.validateUnitString(unit, true);
+        const result = utils.validateUnitString(unit, true);
         if (result.status === 'valid') {
             unitValidityCache.set(unit, { valid: true });
         }
         else {
-            var msg = "Invalid UCUM unit: '".concat(unit, "'.");
+            let msg = `Invalid UCUM unit: '${unit}'.`;
             if (result.ucumCode != null) {
-                msg += " Did you mean '".concat(result.ucumCode, "'?");
+                msg += ` Did you mean '${result.ucumCode}'?`;
             }
             unitValidityCache.set(unit, { valid: false, message: msg });
         }
@@ -10414,11 +9117,9 @@ function checkUnit(unit, allowEmptyUnits, allowCQLDateUnits) {
     return unitValidityCache.get(unit);
 }
 exports.checkUnit = checkUnit;
-function convertUnit(fromVal, fromUnit, toUnit, adjustPrecision) {
-    var _a;
-    if (adjustPrecision === void 0) { adjustPrecision = true; }
-    _a = [fromUnit, toUnit].map(fixUnit), fromUnit = _a[0], toUnit = _a[1];
-    var result = utils.convertUnitTo(fixUnit(fromUnit), fromVal, fixUnit(toUnit));
+function convertUnit(fromVal, fromUnit, toUnit, adjustPrecision = true) {
+    [fromUnit, toUnit] = [fromUnit, toUnit].map(fixUnit);
+    const result = utils.convertUnitTo(fixUnit(fromUnit), fromVal, fixUnit(toUnit));
     if (result.status !== 'succeeded') {
         return;
     }
@@ -10426,19 +9127,18 @@ function convertUnit(fromVal, fromUnit, toUnit, adjustPrecision) {
 }
 exports.convertUnit = convertUnit;
 function normalizeUnitsWhenPossible(val1, unit1, val2, unit2) {
-    var _a;
     // If both units are CQL date units, return CQL date units
-    var useCQLDateUnits = unit1 in CQL_TO_UCUM_DATE_UNITS && unit2 in CQL_TO_UCUM_DATE_UNITS;
-    var resultConverter = function (unit) {
+    const useCQLDateUnits = unit1 in CQL_TO_UCUM_DATE_UNITS && unit2 in CQL_TO_UCUM_DATE_UNITS;
+    const resultConverter = (unit) => {
         return useCQLDateUnits ? convertToCQLDateUnit(unit) : unit;
     };
-    _a = [unit1, unit2].map(function (u) { return fixUnit(u); }), unit1 = _a[0], unit2 = _a[1];
+    [unit1, unit2] = [unit1, unit2].map(u => fixUnit(u));
     if (unit1 === unit2) {
         return [val1, unit1, val2, unit2];
     }
-    var baseUnit1 = getBaseUnitAndPower(unit1)[0];
-    var baseUnit2 = getBaseUnitAndPower(unit2)[0];
-    var _b = convertToBaseUnit(val2, unit2, baseUnit1), newVal2 = _b[0], newUnit2 = _b[1];
+    const baseUnit1 = getBaseUnitAndPower(unit1)[0];
+    const baseUnit2 = getBaseUnitAndPower(unit2)[0];
+    const [newVal2, newUnit2] = convertToBaseUnit(val2, unit2, baseUnit1);
     if (newVal2 == null) {
         // it was not convertible, so just return the quantities as-is
         return [val1, resultConverter(unit1), val2, resultConverter(unit2)];
@@ -10448,7 +9148,7 @@ function normalizeUnitsWhenPossible(val1, unit1, val2, unit2) {
         return [val1, resultConverter(unit1), newVal2, resultConverter(newUnit2)];
     }
     // else it was a conversion to a larger unit, so go the other way around
-    var _c = convertToBaseUnit(val1, unit1, baseUnit2), newVal1 = _c[0], newUnit1 = _c[1];
+    const [newVal1, newUnit1] = convertToBaseUnit(val1, unit1, baseUnit2);
     if (newVal1 == null) {
         // this should not happen since we established they are convertible, but just in case...
         return [val1, resultConverter(unit1), newVal2, resultConverter(newUnit2)];
@@ -10457,7 +9157,7 @@ function normalizeUnitsWhenPossible(val1, unit1, val2, unit2) {
 }
 exports.normalizeUnitsWhenPossible = normalizeUnitsWhenPossible;
 function convertToCQLDateUnit(unit) {
-    var dateUnit;
+    let dateUnit;
     if (unit in CQL_TO_UCUM_DATE_UNITS) {
         // it's already a CQL unit, so return it as-is, removing trailing 's' if necessary (e.g., years -> year)
         dateUnit = unit.replace(/s$/, '');
@@ -10470,7 +9170,7 @@ function convertToCQLDateUnit(unit) {
 exports.convertToCQLDateUnit = convertToCQLDateUnit;
 function compareUnits(unit1, unit2) {
     try {
-        var c = convertUnit(1, unit1, unit2);
+        const c = convertUnit(1, unit1, unit2);
         if (c && c > 1) {
             // unit1 is bigger (less precise)
             return 1;
@@ -10488,49 +9188,44 @@ function compareUnits(unit1, unit2) {
 }
 exports.compareUnits = compareUnits;
 function getProductOfUnits(unit1, unit2) {
-    var _a;
-    _a = [unit1, unit2].map(fixEmptyUnit), unit1 = _a[0], unit2 = _a[1];
+    [unit1, unit2] = [unit1, unit2].map(fixEmptyUnit);
     if (!checkUnit(unit1).valid || !checkUnit(unit2).valid) {
         return null;
     }
     // If either unit contains a divisor,combine the numerators and denominators, then divide
     if (unit1.indexOf('/') >= 0 || unit2.indexOf('/') >= 0) {
         // NOTE: We're not trying to get perfection on unit simplification, but doing what is reasonable
-        var match1 = unit1.match(/([^/]*)(\/(.*))?/);
-        var match2 = unit2.match(/([^/]*)(\/(.*))?/);
+        const match1 = unit1.match(/([^/]*)(\/(.*))?/);
+        const match2 = unit2.match(/([^/]*)(\/(.*))?/);
         // In the previous regexes, numerator is match[1], denominator is match[3]
-        var newNum = getProductOfUnits(match1[1], match2[1]);
-        var newDen = getProductOfUnits(match1[3], match2[3]);
+        const newNum = getProductOfUnits(match1[1], match2[1]);
+        const newDen = getProductOfUnits(match1[3], match2[3]);
         return getQuotientOfUnits(newNum, newDen);
     }
     // Get all the individual units being combined, accounting for multipliers (e.g., 'm.L'),
     // and then group like base units to combine powers (and remove '1's since they are no-ops)
     // e.g., 'm.L' * 'm' ==> { m: 2, L: 1}; 'm.L' * '1' ==> { m: 1, L: 1 }; '1' : '1' ==> { }
-    var factorPowerMap = new Map();
-    var factors = __spreadArray(__spreadArray([], unit1.split('.'), true), unit2.split('.'), true);
-    factors.forEach(function (factor) {
-        var _a = getBaseUnitAndPower(factor), baseUnit = _a[0], power = _a[1];
+    const factorPowerMap = new Map();
+    const factors = [...unit1.split('.'), ...unit2.split('.')];
+    factors.forEach(factor => {
+        const [baseUnit, power] = getBaseUnitAndPower(factor);
         if (baseUnit === '1' || power === 0) {
             // skip factors that are 1 since 1 * N is N.
             return;
         }
-        var accumulatedPower = (factorPowerMap.get(baseUnit) || 0) + power;
+        const accumulatedPower = (factorPowerMap.get(baseUnit) || 0) + power;
         factorPowerMap.set(baseUnit, accumulatedPower);
     });
     // Loop through the factor map, rebuilding each factor w/ combined power and join them all
     // back via the multiplier '.', treating a final '' (no non-1 units) as '1'
     // e.g.,  { m: 2, L: 1 } ==> 'm2.L'
     return fixUnit(Array.from(factorPowerMap.entries())
-        .map(function (_a) {
-        var base = _a[0], power = _a[1];
-        return "".concat(base).concat(power > 1 ? power : '');
-    })
+        .map(([base, power]) => `${base}${power > 1 ? power : ''}`)
         .join('.'));
 }
 exports.getProductOfUnits = getProductOfUnits;
 function getQuotientOfUnits(unit1, unit2) {
-    var _a;
-    _a = [unit1, unit2].map(fixEmptyUnit), unit1 = _a[0], unit2 = _a[1];
+    [unit1, unit2] = [unit1, unit2].map(fixEmptyUnit);
     if (!checkUnit(unit1).valid || !checkUnit(unit2).valid) {
         return null;
     }
@@ -10540,44 +9235,32 @@ function getQuotientOfUnits(unit1, unit2) {
         // (e.g., 'm.L'), and then group like base units to combine powers, inversing denominator
         // powers since they are being divided.
         // e.g., 'm3.L' / 'm' ==> { m: 2, L: -1}; 'm.L' / '1' ==> { m: 1, L: 1 }; '1' / '1' ==> { 1: 0 }
-        var factorPowerMap_1 = new Map();
-        unit1.split('.').forEach(function (factor) {
-            var _a = getBaseUnitAndPower(factor), baseUnit = _a[0], power = _a[1];
-            var accumulatedPower = (factorPowerMap_1.get(baseUnit) || 0) + power;
-            factorPowerMap_1.set(baseUnit, accumulatedPower);
+        const factorPowerMap = new Map();
+        unit1.split('.').forEach((factor) => {
+            const [baseUnit, power] = getBaseUnitAndPower(factor);
+            const accumulatedPower = (factorPowerMap.get(baseUnit) || 0) + power;
+            factorPowerMap.set(baseUnit, accumulatedPower);
         });
-        unit2.split('.').forEach(function (factor) {
-            var _a = getBaseUnitAndPower(factor), baseUnit = _a[0], power = _a[1];
-            var accumulatedPower = (factorPowerMap_1.get(baseUnit) || 0) - power;
-            factorPowerMap_1.set(baseUnit, accumulatedPower);
+        unit2.split('.').forEach((factor) => {
+            const [baseUnit, power] = getBaseUnitAndPower(factor);
+            const accumulatedPower = (factorPowerMap.get(baseUnit) || 0) - power;
+            factorPowerMap.set(baseUnit, accumulatedPower);
         });
         // Construct the numerator from factors with positive power, and denominator from factors
         // with negative power, filtering out base `1` and power 0 (which is also 1).
         // e.g. numerator:   { m: 2, L: -2 } ==> 'm2'; { 1: 1, L: -1 } => ''
         // e.g. denominator: { m: 2, L: -2 } ==> 'L2'; { 1: 1, L: -1 } => 'L'
-        var numerator = Array.from(factorPowerMap_1.entries())
-            .filter(function (_a) {
-            var base = _a[0], power = _a[1];
-            return base !== '1' && power > 0;
-        })
-            .map(function (_a) {
-            var base = _a[0], power = _a[1];
-            return "".concat(base).concat(power > 1 ? power : '');
-        })
+        const numerator = Array.from(factorPowerMap.entries())
+            .filter(([base, power]) => base !== '1' && power > 0)
+            .map(([base, power]) => `${base}${power > 1 ? power : ''}`)
             .join('.');
-        var denominator = Array.from(factorPowerMap_1.entries())
-            .filter(function (_a) {
-            var base = _a[0], power = _a[1];
-            return base !== '1' && power < 0;
-        })
-            .map(function (_a) {
-            var base = _a[0], power = _a[1];
-            return "".concat(base).concat(power < -1 ? power * -1 : '');
-        })
+        let denominator = Array.from(factorPowerMap.entries())
+            .filter(([base, power]) => base !== '1' && power < 0)
+            .map(([base, power]) => `${base}${power < -1 ? power * -1 : ''}`)
             .join('.');
         // wrap the denominator in parentheses if necessary
-        denominator = /[.]/.test(denominator) ? "(".concat(denominator, ")") : denominator;
-        return fixUnit("".concat(numerator).concat(denominator !== '' ? '/' + denominator : ''));
+        denominator = /[.]/.test(denominator) ? `(${denominator})` : denominator;
+        return fixUnit(`${numerator}${denominator !== '' ? '/' + denominator : ''}`);
     }
     // One of the units had a divisor, so don't try to be too smart; just construct it from the parts
     if (unit1 === unit2) {
@@ -10590,21 +9273,21 @@ function getQuotientOfUnits(unit1, unit2) {
     }
     else {
         // denominator is unit2, wrapped in parentheses if necessary
-        var denominator = /[./]/.test(unit2) ? "(".concat(unit2, ")") : unit2;
+        const denominator = /[./]/.test(unit2) ? `(${unit2})` : unit2;
         if (unit1 === '1') {
             // e.g., '1' / 'm' ==> '/m'; '1' / 'm.g' ==> '/(m.g)'
-            return "/".concat(denominator);
+            return `/${denominator}`;
         }
         // e.g., 'L' / 'm' ==> 'L/m'; 'L' / 'm.g' ==> 'L/(m.g)'
-        return "".concat(unit1, "/").concat(denominator);
+        return `${unit1}/${denominator}`;
     }
 }
 exports.getQuotientOfUnits = getQuotientOfUnits;
 // UNEXPORTED FUNCTIONS
 function convertToBaseUnit(fromVal, fromUnit, toBaseUnit) {
-    var fromPower = getBaseUnitAndPower(fromUnit)[1];
-    var toUnit = fromPower === 1 ? toBaseUnit : "".concat(toBaseUnit).concat(fromPower);
-    var newVal = convertUnit(fromVal, fromUnit, toUnit);
+    const fromPower = getBaseUnitAndPower(fromUnit)[1];
+    const toUnit = fromPower === 1 ? toBaseUnit : `${toBaseUnit}${fromPower}`;
+    const newVal = convertUnit(fromVal, fromUnit, toUnit);
     return newVal != null ? [newVal, toUnit] : [];
 }
 function getBaseUnitAndPower(unit) {
@@ -10613,7 +9296,7 @@ function getBaseUnitAndPower(unit) {
         return [unit, 1];
     }
     unit = fixUnit(unit);
-    var _a = unit.match(/^(.*[^-\d])?([-]?\d*)$/).slice(1), term = _a[0], power = _a[1];
+    let [term, power] = unit.match(/^(.*[^-\d])?([-]?\d*)$/).slice(1);
     if (term == null || term === '') {
         term = power;
         power = '1';
@@ -10641,11 +9324,11 @@ function fixUnit(unit) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getTimezoneSeparatorFromString = exports.normalizeMillisecondsField = exports.normalizeMillisecondsFieldInString = exports.jsDate = exports.anyTrue = exports.allTrue = exports.typeIsArray = exports.isNull = exports.numerical_sort = exports.removeNulls = void 0;
 function removeNulls(things) {
-    return things.filter(function (x) { return x != null; });
+    return things.filter(x => x != null);
 }
 exports.removeNulls = removeNulls;
 function numerical_sort(things, direction) {
-    return things.sort(function (a, b) {
+    return things.sort((a, b) => {
         if (direction == null || direction === 'asc' || direction === 'ascending') {
             return a - b;
         }
@@ -10659,10 +9342,10 @@ function isNull(value) {
     return value === null;
 }
 exports.isNull = isNull;
-exports.typeIsArray = Array.isArray || (function (value) { return ({}.toString.call(value) === '[object Array]'); });
+exports.typeIsArray = Array.isArray || (value => ({}.toString.call(value) === '[object Array]'));
 function allTrue(things) {
     if ((0, exports.typeIsArray)(things)) {
-        return things.every(function (x) { return x; });
+        return things.every(x => x);
     }
     else {
         return things;
@@ -10671,7 +9354,7 @@ function allTrue(things) {
 exports.allTrue = allTrue;
 function anyTrue(things) {
     if ((0, exports.typeIsArray)(things)) {
-        return things.some(function (x) { return x; });
+        return things.some(x => x);
     }
     else {
         return things;
@@ -10682,10 +9365,10 @@ exports.anyTrue = anyTrue;
 exports.jsDate = Date;
 function normalizeMillisecondsFieldInString(string, msString) {
     // TODO: verify we are only removing numeral digits
-    var timezoneField;
+    let timezoneField;
     msString = normalizeMillisecondsField(msString);
-    var _a = string.split('.'), beforeMs = _a[0], msAndAfter = _a[1];
-    var timezoneSeparator = getTimezoneSeparatorFromString(msAndAfter);
+    const [beforeMs, msAndAfter] = string.split('.');
+    const timezoneSeparator = getTimezoneSeparatorFromString(msAndAfter);
     if (timezoneSeparator) {
         timezoneField = msAndAfter != null ? msAndAfter.split(timezoneSeparator)[1] : undefined;
     }
@@ -10702,7 +9385,7 @@ function normalizeMillisecondsField(msString) {
 exports.normalizeMillisecondsField = normalizeMillisecondsField;
 function getTimezoneSeparatorFromString(string) {
     if (string != null) {
-        var matches = string.match(/-/);
+        let matches = string.match(/-/);
         if (matches && matches.length === 1) {
             return '-';
         }

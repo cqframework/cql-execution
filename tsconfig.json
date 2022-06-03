@@ -1,7 +1,7 @@
 {
   "include": ["src"],
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2017",
     "lib": ["es2015.core", "ESNext"],
     "outDir": "./lib",
     "rootDir": "./src",
@@ -11,5 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "sourceMap": true,
+    "moduleResolution": "node",
+    "module": "CommonJS"
   }
 }
