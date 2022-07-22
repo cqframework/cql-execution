@@ -1,8 +1,10 @@
-import { Expression, UnimplementedExpression } from './expression';
-import { build } from './builder';
-import { typeIsArray } from '../util/util';
-import { equals } from '../util/comparison';
+import Immutable from 'immutable';
 import { Context } from '../runtime/context';
+import { equals } from '../util/comparison';
+import Memoizer from '../util/memoizer';
+import { typeIsArray } from '../util/util';
+import { build } from './builder';
+import { Expression, UnimplementedExpression } from './expression';
 
 export class List extends Expression {
   elements: Expression[];
@@ -42,29 +44,39 @@ export class Exists extends Expression {
 
 // Delegated to by overloaded#Union
 export function doUnion(a: any, b: any) {
-  const distinct = doDistinct(a.concat(b));
-  return removeDuplicateNulls(distinct);
+  return doDistinct(a.concat(b));
 }
 
 // Delegated to by overloaded#Except
-export function doExcept(a: any, b: any) {
-  const distinct = doDistinct(a);
-  const setList = removeDuplicateNulls(distinct);
-  return setList.filter(item => !doContains(b, item, true));
+const doExceptMemoizer = new Memoizer.ImmutableMemoizer();
+const immutableDoExcept = <S>(a: Memoizer.ImmutableKeyValuePair<S>[], b: Memoizer.ImmutableKeyValuePair<S>[]): Memoizer.ImmutableKeyValuePair<S>[] => {
+  let keys_b = Immutable.Set(b.map(x => x.key))
+
+  let distinct_a = immutableDoDistinct(a);
+  let a_except_b = distinct_a.filter(x => !keys_b.includes(x.key))
+
+  return a_except_b
 }
+export const doExcept = (a: unknown[], b: unknown[]) => doExceptMemoizer.memoize(immutableDoExcept)(a, b)
 
 // Delegated to by overloaded#Intersect
-export function doIntersect(a: any, b: any) {
-  const distinct = doDistinct(a);
-  const setList = removeDuplicateNulls(distinct);
-  return setList.filter(item => doContains(b, item, true));
+const doIntersectMemoizer = new Memoizer.ImmutableMemoizer();
+const immutableDoIntersect = <S>(a: Memoizer.ImmutableKeyValuePair<S>[], b: Memoizer.ImmutableKeyValuePair<S>[]): Memoizer.ImmutableKeyValuePair<S>[] => {
+  let keys_b = Immutable.Set(b.map(x => x.key))
+
+  let distinct_a = immutableDoDistinct(a);
+  let a_intersect_b = distinct_a.filter(z => keys_b.includes(z.key))
+
+  return a_intersect_b
 }
+export const doIntersect = (a: unknown[], b: unknown[]) => doIntersectMemoizer.memoize(immutableDoIntersect)(a, b)
+
 
 // ELM-only, not a product of CQL
-export class Times extends UnimplementedExpression {}
+export class Times extends UnimplementedExpression { }
 
 // ELM-only, not a product of CQL
-export class Filter extends UnimplementedExpression {}
+export class Filter extends UnimplementedExpression { }
 
 export class SingletonFrom extends Expression {
   constructor(json: any) {
@@ -150,7 +162,7 @@ export function doProperIncludes(list: any, sublist: any) {
 }
 
 // ELM-only, not a product of CQL
-export class ForEach extends UnimplementedExpression {}
+export class ForEach extends UnimplementedExpression { }
 
 export class Flatten extends Expression {
   constructor(json: any) {
@@ -181,34 +193,32 @@ export class Distinct extends Expression {
   }
 }
 
-function doDistinct(list: any[]) {
-  const distinct: any[] = [];
-  list.forEach(item => {
-    const isNew = distinct.every(seenItem => !equals(item, seenItem));
-    if (isNew) {
-      distinct.push(item);
-    }
-  });
-  return removeDuplicateNulls(distinct);
-}
+// Cacheable and optimized doDistinct
+const doDistinctMemoizer = new Memoizer.ImmutableMemoizer();
+const immutableDoDistinct = <S>(list: Memoizer.ImmutableKeyValuePair<S>[]): Memoizer.ImmutableKeyValuePair<S>[] => {
+  let set = Immutable.Set<Memoizer.ImmutableObjectKey>().asMutable();
+  let distinct: Memoizer.ImmutableKeyValuePair<S>[] = [];
 
-function removeDuplicateNulls(list: any[]) {
-  // Remove duplicate null elements
-  let firstNullFound = false;
-  const setList = [];
-  for (const item of list) {
-    if (item !== null) {
-      setList.push(item);
-    } else if (item === null && !firstNullFound) {
-      setList.push(item);
-      firstNullFound = true;
-    }
-  }
-  return setList;
+  set.withMutations(y => {
+    list.forEach(x => {
+      // Check set size
+      const setSize = y.count();
+
+      // Attempt to insert
+      y.add(x.key)
+
+      // If inserted, then size will increase; push to distinct
+      if (y.count() > setSize)
+        distinct.push(x)
+    })
+  })
+
+  return distinct;
 }
+export const doDistinct = (list: unknown[]): unknown[] => doDistinctMemoizer.memoize(immutableDoDistinct)(list)
 
 // ELM-only, not a product of CQL
-export class Current extends UnimplementedExpression {}
+export class Current extends UnimplementedExpression { }
 
 export class First extends Expression {
   source: Expression;

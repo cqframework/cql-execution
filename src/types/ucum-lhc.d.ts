@@ -6,6 +6,7 @@ declare module '@lhncbc/ucum-lhc' {
     code: string;
     name: string;
     guidance: string;
+    csCode_: string;
   }
 
   export interface ValidationSuggestion {
@@ -40,5 +41,6 @@ declare module '@lhncbc/ucum-lhc' {
     static getInstance(): UcumLhcUtils;
     validateUnitString(uStr: string, suggest?: boolean, valConv?: string): ValidationResponse;
     convertUnitTo(fromUnitCode: string, fromVal: number, toUnitCode: string): ConversionResponse;
+    commensurablesList(fromName: string): [Unit[] | null, string[]];
   }
 }
