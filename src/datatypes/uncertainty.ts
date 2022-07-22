@@ -1,3 +1,4 @@
+import { equals } from '../util/comparison';
 import { ThreeValuedLogic } from './logic';
 
 export class Uncertainty {
@@ -11,7 +12,7 @@ export class Uncertainty {
 
   constructor(public low: any = null, public high?: any) {
     const gt = (a: any, b: any) => {
-      if (typeof a !== typeof b) {
+      if (typeof a !== typeof b || a?.constructor?.name !== b?.constructor?.name) {
         // TODO: This should probably throw rather than return false.
         // Uncertainties with different types probably shouldn't be supported.
         return false;
@@ -55,20 +56,20 @@ export class Uncertainty {
   isPoint() {
     // Note: Can't use normal equality, as that fails for Javascript dates
     // TODO: Fix after we don't need to support Javascript date uncertainties anymore
-    const lte = (a: any, b: any) => {
-      if (typeof a !== typeof b) {
-        return false;
-      }
+    const lte = (a: any, b: any): boolean | null => {
+      if (typeof a !== typeof b || a?.constructor?.name !== b?.constructor?.name)
+        return null;
+
       if (typeof a.sameOrBefore === 'function') {
         return a.sameOrBefore(b);
       } else {
         return a <= b;
       }
     };
-    const gte = (a: any, b: any) => {
-      if (typeof a !== typeof b) {
-        return false;
-      }
+    const gte = (a: any, b: any): boolean | null => {
+      if (typeof a !== typeof b || a?.constructor?.name !== b?.constructor?.name)
+        return null;
+
       if (typeof a.sameOrBefore === 'function') {
         return a.sameOrAfter(b);
       } else {
@@ -76,20 +77,29 @@ export class Uncertainty {
       }
     };
     return (
-      this.low != null && this.high != null && lte(this.low, this.high) && gte(this.low, this.high)
+      this.low != null && this.high != null && (lte(this.low, this.high) ?? false) && (gte(this.low, this.high) ?? false)
     );
   }
 
   equals(other: any) {
+    // if this is a point, and other is not an uncertainty or a point, then we can compare directly
+    if (this.isPoint()) {
+      if (!(other instanceof Uncertainty))
+        return equals(this.low, other)
+
+      if (other instanceof Uncertainty && other.isPoint())
+        return equals(this.low, other.low)
+    }
+
     other = Uncertainty.from(other);
     return ThreeValuedLogic.not(ThreeValuedLogic.or(this.lessThan(other), this.greaterThan(other)));
   }
 
   lessThan(other: any) {
     const lt = (a: any, b: any) => {
-      if (typeof a !== typeof b) {
-        return false;
-      }
+      if (typeof a !== typeof b || a?.constructor?.name !== b?.constructor?.name)
+        return null;
+
       if (typeof a.before === 'function') {
         return a.before(b);
       } else {
