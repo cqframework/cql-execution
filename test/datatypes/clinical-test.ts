@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Code, Concept, ValueSet } from '../../src/datatypes/clinical';
 
 describe('Code', () => {

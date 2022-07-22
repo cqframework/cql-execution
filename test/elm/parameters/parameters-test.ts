@@ -1,10 +1,11 @@
+// @ts-nocheck
 import should from 'should';
-import setup from '../../setup';
-const data = require('./data');
 import { Code, Concept } from '../../../src/datatypes/clinical';
-import { DateTime, Date } from '../../../src/datatypes/datetime';
+import { Date, DateTime } from '../../../src/datatypes/datetime';
 import { Interval } from '../../../src/datatypes/interval';
 import { Quantity } from '../../../src/datatypes/quantity';
+import setup from '../../setup';
+const data = require('./data');
 
 describe('ParameterDef', () => {
   beforeEach(function () {
@@ -534,7 +535,7 @@ describe('MeasurementPeriodParameter', () => {
     (await this.measurementPeriod.exec(rctx)).should.equal(true);
   });
 
-  it('should execute expression with a passed in measurement period in a child context', async function () {
+  it('should execute expression with a passed in measurement period in a child context 2', function () {
     this.ctx = this.ctx.withParameters({
       'Measurement Period': new Interval(
         new DateTime(2012, 1, 1, 0, 0, 0, 0),

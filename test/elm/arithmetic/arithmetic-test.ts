@@ -1,13 +1,10 @@
+// @ts-nocheck
 import should from 'should';
-import setup from '../../setup';
 import {
-  Quantity,
-  doMultiplication,
-  doDivision,
-  doAddition,
-  doSubtraction,
-  parseQuantity
+  doAddition, doDivision, doMultiplication, doSubtraction,
+  parseQuantity, Quantity
 } from '../../../src/datatypes/quantity';
+import setup from '../../setup';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const data = require('./data');
 
@@ -357,11 +354,11 @@ describe('Floor', () => {
 describe('Ceiling', () => {
   beforeEach(function () {
     setup(this, data);
+  });
 
-    it('should be able to round up to the closest integer', async function () {
-      (await this.ceil.exec(this.ctx)).should.equal(11);
-      (await this.even.exec(this.ctx)).should.equal(10);
-    });
+  it('should be able to round up to the closest integer', function () {
+    this.ceil.exec(this.ctx).should.equal(11);
+    this.even.exec(this.ctx).should.equal(10);
   });
 });
 
@@ -378,20 +375,20 @@ describe('Ln', () => {
 describe('Log', () => {
   beforeEach(function () {
     setup(this, data);
+  });
 
-    it('should be able to return the log of a number based on an arbitary base value', async function () {
-      (await this.log.exec)(this.ctx).should.equal(0.25);
-    });
+  it('should be able to return the log of a number based on an arbitary base value', function () {
+    this.log.exec(this.ctx).should.equal(0.25);
   });
 });
 
 describe('Modulo', () => {
   beforeEach(function () {
     setup(this, data);
+  });
 
-    it('should be able to return the remainder of a division', async function () {
-      (await this.mod.exec(this.ctx)).should.equal(1);
-    });
+  it('should be able to return the remainder of a division', function () {
+    this.mod.exec(this.ctx).should.equal(1);
   });
 });
 

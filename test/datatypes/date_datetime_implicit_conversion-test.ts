@@ -1,5 +1,6 @@
+// @ts-nocheck
 import should from 'should';
-import { DateTime, Date } from '../../src/datatypes/datetime';
+import { Date, DateTime } from '../../src/datatypes/datetime';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
 
 describe('Overlapping DateTime and Date units', () =>
