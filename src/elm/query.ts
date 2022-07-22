@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import { Context } from '../runtime/context';
-import * as Memoizer from '../util/memoizer';
+import Memoizer from '../util/memoizer';
 import { allTrue, Direction, typeIsArray } from '../util/util';
 import { build } from './builder';
 import { Expression, UnimplementedExpression } from './expression';
@@ -61,7 +61,7 @@ export class Without extends With {
 }
 
 // ELM-only, not a product of CQL
-export class Sort extends UnimplementedExpression {}
+export class Sort extends UnimplementedExpression { }
 
 export class ByDirection extends Expression {
   direction: Direction;
@@ -174,11 +174,9 @@ export class SortClause {
 }
 
 const toDistinctListMemoizer = new Memoizer.ImmutableMemoizer();
-const immutableToDistinctList = <S>(
-  list: Memoizer.ImmutableKeyValuePair<S>[]
-): Memoizer.ImmutableKeyValuePair<S>[] => {
-  const set = Immutable.Set<Memoizer.ImmutableObjectKey>().asMutable();
-  const distinct: Memoizer.ImmutableKeyValuePair<S>[] = [];
+const immutableToDistinctList = <S>(list: Memoizer.ImmutableKeyValuePair<S>[]): Memoizer.ImmutableKeyValuePair<S>[] => {
+  let set = Immutable.Set<Memoizer.ImmutableObjectKey>().asMutable();
+  let distinct: Memoizer.ImmutableKeyValuePair<S>[] = [];
 
   set.withMutations(y => {
     list.forEach(x => {
@@ -186,17 +184,17 @@ const immutableToDistinctList = <S>(
       const setSize = y.count();
 
       // Attempt to insert
-      y.add(x.key);
+      y.add(x.key)
 
       // If inserted, then size will increase; push to distinct
-      if (y.count() > setSize) distinct.push(x);
-    });
-  });
+      if (y.count() > setSize)
+        distinct.push(x)
+    })
+  })
 
   return distinct;
-};
-export const toDistinctList = (list: unknown[]): unknown[] =>
-  toDistinctListMemoizer.memoize(immutableToDistinctList)(list);
+}
+export const toDistinctList = (list: unknown[]): unknown[] => toDistinctListMemoizer.memoize(immutableToDistinctList)(list)
 
 class AggregateClause extends Expression {
   identifier: string;
