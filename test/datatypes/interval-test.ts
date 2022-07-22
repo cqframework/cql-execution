@@ -1,3 +1,4 @@
+// @ts-nocheck
 import should from 'should';
 import { DateTime } from '../../src/datatypes/datetime';
 import { Interval } from '../../src/datatypes/interval';

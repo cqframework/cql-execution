@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import * as luxon from 'luxon';
 import should from 'should';
