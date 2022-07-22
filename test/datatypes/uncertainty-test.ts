@@ -160,12 +160,8 @@ describe('Uncertainty', () => {
     new Uncertainty(2, null).equals(new Uncertainty(1, 1)).should.be.false();
 
     // date/datetime
-    new Uncertainty(new Date(2022, 1, 1))
-      .equals(new Uncertainty(new DateTime(2022, 1, 1)))
-      .should.be.false();
-    new Uncertainty(new DateTime(2022, 1, 1))
-      .equals(new Uncertainty(new Date(2022, 1, 1)))
-      .should.be.false();
+    (new Uncertainty(new Date(2022, 1, 1))).equals(new Uncertainty(new DateTime(2022, 1, 1))).should.be.false();
+    (new Uncertainty(new DateTime(2022, 1, 1))).equals(new Uncertainty(new Date(2022, 1, 1))).should.be.false();
   });
 
   it('should properly calculate "less than" inequality', () => {
