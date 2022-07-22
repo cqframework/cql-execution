@@ -1,10 +1,7 @@
+// @ts-nocheck
 import should from 'should';
 import {
-  Quantity,
-  doAddition,
-  doSubtraction,
-  doMultiplication,
-  doDivision
+  doAddition, doDivision, doMultiplication, doSubtraction, Quantity
 } from '../../../src/datatypes/quantity';
 
 describe('Quantity', () => {

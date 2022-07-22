@@ -1,3 +1,4 @@
+/// <reference path="../types/ucum-lhc.d.ts" />
 import * as ucum from '@lhncbc/ucum-lhc';
 import { decimalAdjust } from './math';
 const utils = ucum.UcumLhcUtils.getInstance();
