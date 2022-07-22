@@ -1,8 +1,8 @@
+// @ts-nocheck
 import should from 'should';
-import { Uncertainty } from '../../src/datatypes/uncertainty';
+import { Concept, ValueSet } from '../../src/datatypes/clinical';
 import { Code } from '../../src/datatypes/datatypes';
-import { Concept } from '../../src/datatypes/clinical';
-import { ValueSet } from '../../src/datatypes/clinical';
+import { Uncertainty } from '../../src/datatypes/uncertainty';
 
 describe('Uncertainty', () => {
   it('should contruct uncertainties with correct properties', () => {

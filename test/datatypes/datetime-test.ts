@@ -1,6 +1,7 @@
+// @ts-nocheck
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import should from 'should';
 import * as luxon from 'luxon';
+import should from 'should';
 import { DateTime } from '../../src/datatypes/datetime';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
 
@@ -1133,7 +1134,7 @@ describe('DateTime.durationBetween', () => {
   });
 });
 
-it('should handle crossing DST in the fall', () => {
+it('should handle crossing DST in the fall 2', () => {
   // NOTE: Since we "fall back" the 1st Sunday of November at 2:00am,
   // the duration between 1:00am EDT and 3:00am EST is actually 3 hours!
   const a = DateTime.parse('2017-11-05T01:00:00.0-04:00');

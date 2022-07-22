@@ -1,3 +1,4 @@
+// @ts-nocheck
 import should from 'should';
 import { ThreeValuedLogic } from '../../src/datatypes/logic';
 
