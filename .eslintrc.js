@@ -3,7 +3,7 @@ const os = require('os');
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: 6,
+    ecmaVersion: 8,
     sourceType: 'module',
     ecmaFeatures: {
       experimentalObjectRestSpread: true
