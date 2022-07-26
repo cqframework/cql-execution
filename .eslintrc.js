@@ -1,6 +1,6 @@
-import { EOL } from 'os';
+const os = require('os');
 
-export default {
+module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 6,
@@ -13,7 +13,7 @@ export default {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     indent: ['error', 2, { SwitchCase: 1 }],
-    'linebreak-style': ['error', EOL === '\r\n' ? 'windows' : 'unix'],
+    'linebreak-style': ['error', os.EOL === '\r\n' ? 'windows' : 'unix'],
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'no-loss-of-precision': 'off',
     'no-unused-vars': ['error', { vars: 'all', args: 'none' }],
