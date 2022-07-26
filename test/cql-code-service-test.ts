@@ -1,4 +1,3 @@
-// @ts-nocheck
 import should from 'should';
 import { CodeService } from '../src/cql-code-service';
 import { Code, ValueSet } from '../src/datatypes/datatypes';

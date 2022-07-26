@@ -1,4 +1,3 @@
-// @ts-nocheck
 import should from 'should';
 import 'should-sinon';
 import sinon from 'sinon';
