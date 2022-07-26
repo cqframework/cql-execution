@@ -1,4 +1,3 @@
-// @ts-nocheck
 import 'should';
 import { Patient } from '../src/cql-patient';
 import * as DT from '../src/datatypes/datatypes';

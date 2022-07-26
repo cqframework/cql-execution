@@ -1,4 +1,3 @@
-// @ts-nocheck
 import should from 'should';
 import { Code, Concept } from '../../../src/datatypes/clinical';
 import { Date, DateTime } from '../../../src/datatypes/datetime';

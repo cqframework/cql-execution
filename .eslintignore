@@ -1,5 +1,6 @@
 # /node_modules/* and /bower_components/* ignored by default
 
+.eslintrc.js
 lib
 lib-test
 examples/browser/cql4browsers.js

@@ -1,8 +1,12 @@
-// @ts-nocheck
 import should from 'should';
 import {
-  checkUnit, compareUnits, convertToCQLDateUnit, convertUnit, getProductOfUnits,
-  getQuotientOfUnits, normalizeUnitsWhenPossible
+  checkUnit,
+  compareUnits,
+  convertToCQLDateUnit,
+  convertUnit,
+  getProductOfUnits,
+  getQuotientOfUnits,
+  normalizeUnitsWhenPossible
 } from '../../src/util/units';
 
 describe('checkUnit', () => {

@@ -1,8 +1,11 @@
-// @ts-nocheck
 import should from 'should';
 import {
-  doAddition, doDivision, doMultiplication, doSubtraction,
-  parseQuantity, Quantity
+  doAddition,
+  doDivision,
+  doMultiplication,
+  doSubtraction,
+  parseQuantity,
+  Quantity
 } from '../../../src/datatypes/quantity';
 import setup from '../../setup';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
