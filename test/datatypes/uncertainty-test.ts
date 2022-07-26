@@ -1,4 +1,3 @@
-// @ts-nocheck
 import should from 'should';
 import { Concept, ValueSet } from '../../src/datatypes/clinical';
 import { Code, Date, DateTime } from '../../src/datatypes/datatypes';
@@ -161,8 +160,12 @@ describe('Uncertainty', () => {
     new Uncertainty(2, null).equals(new Uncertainty(1, 1)).should.be.false();
 
     // date/datetime
-    (new Uncertainty(new Date(2022, 1, 1))).equals(new Uncertainty(new DateTime(2022, 1, 1))).should.be.false();
-    (new Uncertainty(new DateTime(2022, 1, 1))).equals(new Uncertainty(new Date(2022, 1, 1))).should.be.false();
+    new Uncertainty(new Date(2022, 1, 1))
+      .equals(new Uncertainty(new DateTime(2022, 1, 1)))
+      .should.be.false();
+    new Uncertainty(new DateTime(2022, 1, 1))
+      .equals(new Uncertainty(new Date(2022, 1, 1)))
+      .should.be.false();
   });
 
   it('should properly calculate "less than" inequality', () => {
@@ -431,10 +434,10 @@ describe('Uncertainty', () => {
   });
 
   it('should maintain consistency with date/datetime equality', () => {
-    let d1 = new Date(2022, 1, 1)
-    let d2 = new DateTime(2022, 1, 1)
-    let u1 = new Uncertainty(new Date(2022, 1, 1))
-    let u2 = new Uncertainty(new DateTime(2022, 1, 1))
+    const d1 = new Date(2022, 1, 1);
+    const d2 = new DateTime(2022, 1, 1);
+    const u1 = new Uncertainty(new Date(2022, 1, 1));
+    const u2 = new Uncertainty(new DateTime(2022, 1, 1));
 
     // Dates do not equal datetimes
     d1.equals(d2).should.be.false();
@@ -461,5 +464,5 @@ describe('Uncertainty', () => {
     // This inconsistency is resolved in the comparison equals method
     equals(d2, u2).should.be.true();
     equals(u2, d2).should.be.true();
-  })
+  });
 });

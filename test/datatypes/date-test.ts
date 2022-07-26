@@ -1,4 +1,3 @@
-// @ts-nocheck
 import * as luxon from 'luxon';
 import should from 'should';
 import { Date, DateTime } from '../../src/datatypes/datetime';

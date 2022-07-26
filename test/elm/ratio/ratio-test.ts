@@ -1,4 +1,3 @@
-// @ts-nocheck
 import should from 'should';
 import { Quantity } from '../../../src/datatypes/quantity';
 import { Ratio } from '../../../src/datatypes/ratio';

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import should from 'should';
 import { Date, DateTime } from '../../src/datatypes/datetime';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
