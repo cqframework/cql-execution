@@ -2,9 +2,8 @@ import should from 'should';
 import setup from '../../setup';
 const vsets = require('./valuesets');
 import * as DT from '../../../src/datatypes/datatypes';
-import { PatientContext } from '../../../src/cql';
 import { Uncertainty } from '../../../src/datatypes/uncertainty';
-const { p1, p2, p3 } = require('./patients');
+const { p1, p2, p3, p4, p5 } = require('./patients');
 import { PatientSource } from '../../../src/cql-patient';
 const data = require('./data');
 
@@ -231,96 +230,234 @@ describe('ConceptRef', () => {
   });
 });
 
-describe('CalculateAge', () => {
+describe('CalculateAge: Fully Specified Birth Date', () => {
+  // Patient birth date: 1980-06-17 at 9:00am GMT
   beforeEach(function () {
     setup(this, data, [p1]);
-    // Note, tests are inexact (otherwise test needs to repeat exact logic we're testing)
-    // p1 birth date is 1980-06-17
-    this.bday = new Date(1980, 5, 17);
-    this.bdayPlus20 = new Date(2000, 5, 18);
-    this.ctx = new PatientContext(
-      this.ctx.library,
-      this.ctx.patient,
-      this.ctx.codeService,
-      this.ctx.parameters,
-      DT.DateTime.fromJSDate(this.bdayPlus20)
-    );
-
-    this.today = this.ctx.getExecutionDateTime();
-    // according to spec, dates without timezones are in *current* time offset, so need to adjust
-    const offsetDiff = this.today.toJSDate().getTimezoneOffset() - this.bday.getTimezoneOffset();
-    this.bday.setMinutes(this.bday.getMinutes() + offsetDiff);
-
-    // this is getting the possible number of months in years with the addtion of an offset
-    // to get the correct number of months
-    const month_offset = this.today.month === 5 && this.today.getDate() < 17 ? 6 : 5;
-    this.full_months = (this.today.year - 1980) * 12 + (this.today.month - month_offset);
-
-    this.timediff = this.today.toJSDate() - this.bday;
-  }); // diff in milliseconds
-
-  it('should execute age in years', function () {
-    this.years.exec(this.ctx).should.equal(Math.floor(this.full_months / 12));
+    // Execute these tests as if it is 2020-10-01 at 12:01:02.003 GMT
+    this.ctx.executionDateTime = new DT.DateTime(2020, 10, 1, 12, 1, 2, 3, 0);
   });
 
-  it.skip('should execute age in months', function () {
-    // This test is failing if you run it in the first half of any
-    // given month and passing for the second half.
+  it('should execute age in years', function () {
+    this.years.exec(this.ctx).should.equal(40);
+  });
 
-    // what is returned will depend on whether the day in the current month has
-    // made it to the 17th day of the month as declared in the birthday
-    const dayOfMonth = this.today.toJSDate();
-    // Test executing on each day of the month (up to 28 for simplicity).
-    for (let i = 1; i <= 28; i++) {
-      dayOfMonth.setDate(i);
-      const month_offset = dayOfMonth.getMonth() === 5 && dayOfMonth.getDate() < 17 ? 6 : 5;
-      const full_months =
-        (dayOfMonth.getFullYear() - 1980) * 12 + (dayOfMonth.getMonth() - month_offset);
-      [full_months, full_months + 1].indexOf(this.months.exec(this.ctx)).should.not.equal(-1);
-    }
+  it('should execute age in months', function () {
+    this.months.exec(this.ctx).should.equal(483);
   });
 
   it('should execute age in weeks', function () {
-    // this is an uncertainty since birthdate is only specfied to days
-    this.weeks
-      .exec(this.ctx)
-      .should.eql(
-        Math.floor(
-          Math.floor(
-            Math.floor(Math.floor(Math.floor(Math.floor(this.timediff / 1000) / 60) / 60) / 24) / 7
-          )
-        )
-      );
+    this.weeks.exec(this.ctx).should.equal(2102);
   });
 
   it('should execute age in days', function () {
-    // this is an uncertainty since birthdate is only specfied to days
-    const days = Math.floor(
-      Math.floor(Math.floor(Math.floor(this.timediff / 1000) / 60) / 60) / 24
-    );
-    this.days.exec(this.ctx).should.eql(new Uncertainty(days - 1, days));
+    this.days.exec(this.ctx).should.equal(14716);
   });
 
-  // temporarily skip since this test only works when DST is in effect
-  it.skip('should execute age in hours', function () {
-    // this is an uncertainty since birthdate is only specfied to days
-    const hours = Math.floor(Math.floor(Math.floor(this.timediff / 1000) / 60) / 60);
-    this.hours.exec(this.ctx).should.eql(new Uncertainty(hours - 24, hours));
+  it('should execute age in hours', function () {
+    // 14716 days * 24 hours + 3 hours
+    this.hours.exec(this.ctx).should.equal(353187);
   });
 
-  // temporarily skip since this test only works when DST is in effect
-  it.skip('should execute age in minutes', function () {
-    // this is an uncertainty since birthdate is only specfied to days
-    const minutes = Math.floor(Math.floor(this.timediff / 1000) / 60);
-    this.minutes.exec(this.ctx).should.eql(new Uncertainty(minutes - 24 * 60, minutes));
+  it('should execute age in minutes', function () {
+    // 353187 hours * 60 minutes + 1 minute
+    this.minutes.exec(this.ctx).should.equal(21191221);
   });
 
-  // temporarily skip since this test only works when DST is in effect
-  it.skip('should execute age in seconds', function () {
-    // this is an uncertainty since birthdate is only specfied to days
-    const seconds = Math.floor(this.timediff / 1000);
-    this.seconds.exec(this.ctx).should.eql(new Uncertainty(seconds - 24 * 60 * 60, seconds));
+  it('should execute age in seconds', function () {
+    // 21191221 minutes * 60 seconds + 2 seconds
+    this.seconds.exec(this.ctx).should.equal(1271473262);
   });
+});
+
+describe('CalculateAge: Fully Specified Birth Date on Today', () => {
+  // Patient birth date: 1980-10-01 at 2:00pm GMT
+  beforeEach(function () {
+    setup(this, data, [p4]);
+    // Execute these tests as if it is 2020-10-01 at 12:01:02.003 GMT
+    this.ctx.executionDateTime = new DT.DateTime(2020, 10, 1, 12, 1, 2, 3, 0);
+  });
+
+  it('should execute age in years', function () {
+    this.years.exec(this.ctx).should.eql(new Uncertainty(39, 40)); // TODO: Fix
+  });
+
+  it('should execute age in months', function () {
+    this.months.exec(this.ctx).should.eql(new Uncertainty(479, 480)); // TODO: Fix
+  });
+
+  it('should execute age in weeks', function () {
+    this.weeks.exec(this.ctx).should.equal(2087);
+  });
+
+  it('should execute age in days', function () {
+    this.days.exec(this.ctx).should.equal(14609);
+  });
+
+  it('should execute age in hours', function () {
+    // 14609 days * 24 hours + 22 hours
+    this.hours.exec(this.ctx).should.equal(350638);
+  });
+
+  it('should execute age in minutes', function () {
+    // 350638 hours * 60 minutes + 1 minute
+    this.minutes.exec(this.ctx).should.equal(21038281);
+  });
+
+  it('should execute age in seconds', function () {
+    // 21038281 minutes * 60 seconds + 2 seconds
+    this.seconds.exec(this.ctx).should.equal(1262296862);
+  });
+});
+
+describe('CalculateAge: Date-Only Birth Date as DateTime', () => {
+  // Patient birth date: 1980-06-17 w/ no time component
+  beforeEach(function () {
+    setup(this, data, [p2]);
+    // Execute these tests as if it is 2020-10-01 at 12:01:02.003 GMT
+    this.ctx.executionDateTime = new DT.DateTime(2020, 10, 1, 12, 1, 2, 3, 0);
+    // Fix the timezone offset to 0 to make things more predictable
+    this.ctx.patient.birthDate.timezoneOffset = 0;
+  });
+
+  it('should execute age in years', function () {
+    this.years.exec(this.ctx).should.equal(40);
+  });
+
+  it('should execute age in months', function () {
+    this.months.exec(this.ctx).should.equal(483);
+  });
+
+  it('should execute age in weeks', function () {
+    this.weeks.exec(this.ctx).should.equal(2102);
+  });
+
+  it('should execute age in days', function () {
+    this.days.exec(this.ctx).should.eql(new Uncertainty(14715, 14716));
+  });
+
+  it('should execute age in hours', function () {
+    // Uncertain low (from 1980-06-17TZ23:23:59.999Z):  14716 days * 24 hours - 12
+    // Uncertain high (from 1980-06-17T00:00:00.000Z): 14716 days * 24 hour + 12 hours
+    this.hours.exec(this.ctx).should.eql(new Uncertainty(353172, 353196));
+  });
+
+  it('should execute age in minutes', function () {
+    // Uncertain low (from 1980-06-17TZ23:23:59.999Z):  353172 hours * 60 minutes + 1 minute
+    // Uncertain high (from 1980-06-17T00:00:00.000Z): 353196 hours * 60 minutes + 1 minute
+    this.minutes.exec(this.ctx).should.eql(new Uncertainty(21190321, 21191761));
+  });
+
+  it('should execute age in seconds', function () {
+    // Uncertain low (from 1980-06-17TZ23:23:59.999Z):  21190321 minutes * 60 seconds + 2 seconds
+    // Uncertain high (from 1980-06-17T00:00:00.000Z): 21191761 minutes * 60 seconds + 2 seconds
+    this.seconds.exec(this.ctx).should.eql(new Uncertainty(1271419262, 1271505662));
+  });
+});
+
+describe('CalculateAge: Date-Only Birth Date as DateTime on Today', () => {
+  // Patient birth date: 1980-10-01
+  beforeEach(function () {
+    setup(this, data, [p5]);
+    // Execute these tests as if it is 2020-10-01 at 12:01:02.003 GMT
+    this.ctx.executionDateTime = new DT.DateTime(2020, 10, 1, 12, 1, 2, 3, 0);
+    // Fix the timezone offset to 0 to make things more predictable
+    this.ctx.patient.birthDate.timezoneOffset = 0;
+  });
+
+  it('should execute age in years', function () {
+    this.years.exec(this.ctx).should.eql(new Uncertainty(39, 40)); // TODO: Fix
+  });
+
+  it('should execute age in months', function () {
+    this.months.exec(this.ctx).should.eql(new Uncertainty(479, 480)); // TODO: Fix
+  });
+
+  it('should execute age in weeks', function () {
+    this.weeks.exec(this.ctx).should.equal(2087);
+  });
+
+  it('should execute age in days', function () {
+    this.days.exec(this.ctx).should.eql(new Uncertainty(14609, 14610));
+  });
+
+  it('should execute age in hours', function () {
+    // Uncertain low (from 1980-10-01TZ23:23:59.999Z):  14610 days * 24 hours - 12
+    // Uncertain high (from 1980-10-01T00:00:00.000Z): 14610 days * 24 hour + 12 hours
+    this.hours.exec(this.ctx).should.eql(new Uncertainty(350628, 350652));
+  });
+
+  it('should execute age in minutes', function () {
+    // Uncertain low (from 1980-10-01TZ23:23:59.999Z):  350628 hours * 60 minutes + 1 minute
+    // Uncertain high (from 1980-10-01T00:00:00.000Z): 350652 hours * 60 minutes + 1 minute
+    this.minutes.exec(this.ctx).should.eql(new Uncertainty(21037681, 21039121));
+  });
+
+  it('should execute age in seconds', function () {
+    // Uncertain low (from 1980-10-01TZ23:23:59.999Z):  21037681 minutes * 60 seconds + 2 seconds
+    // Uncertain high (from 1980-10-01T00:00:00.000Z): 21039121 minutes * 60 seconds + 2 seconds
+    this.seconds.exec(this.ctx).should.eql(new Uncertainty(1262260862, 1262347262));
+  });
+});
+
+describe('CalculateAge: Date-Only Birth Date as Date', () => {
+  // Patient birth date: 1980-06-17 w/ no time component
+  beforeEach(function () {
+    setup(this, data, [p2]);
+    // Execute these tests as if it is 2020-10-01 at 12:01:02.003 GMT
+    this.ctx.executionDateTime = new DT.DateTime(2020, 10, 1, 12, 1, 2, 3, 0);
+    // Change it to the Date class
+    this.ctx.patient.birthDate = new DT.Date(1980, 6, 17);
+  });
+
+  it('should execute age in years', function () {
+    this.years.exec(this.ctx).should.equal(40);
+  });
+
+  it('should execute age in months', function () {
+    this.months.exec(this.ctx).should.equal(483);
+  });
+
+  it('should execute age in weeks', function () {
+    this.weeks.exec(this.ctx).should.equal(2102);
+  });
+
+  it('should execute age in days', function () {
+    this.days.exec(this.ctx).should.eql(new Uncertainty(14715, 14716));
+  });
+
+  // Don't test below days, as engine converts Date to DateTime, adding the local timezone.
+  // This is a problem for tests since DST affects the values.
+});
+
+describe('CalculateAge: Date-Only Birth Date as Date on Today', () => {
+  // Patient birth date: 1980-10-01
+  beforeEach(function () {
+    setup(this, data, [p5]);
+    // Execute these tests as if it is 2020-10-01 at 12:01:02.003 GMT
+    this.ctx.executionDateTime = new DT.DateTime(2020, 10, 1, 12, 1, 2, 3, 0);
+    // Change it to the Date class
+    this.ctx.patient.birthDate = new DT.Date(1980, 10, 1);
+  });
+
+  it('should execute age in years', function () {
+    this.years.exec(this.ctx).should.eql(new Uncertainty(39, 40)); // TODO: Fix
+  });
+
+  it('should execute age in months', function () {
+    this.months.exec(this.ctx).should.eql(new Uncertainty(479, 480)); // TODO: Fix
+  });
+
+  it('should execute age in weeks', function () {
+    this.weeks.exec(this.ctx).should.equal(2087);
+  });
+
+  it('should execute age in days', function () {
+    this.days.exec(this.ctx).should.eql(new Uncertainty(14609, 14610));
+  });
+
+  // Don't test below days, as engine converts Date to DateTime, adding the local timezone.
+  // This is a problem for tests since DST affects the values.
 });
 
 describe('CalculateAgeAt', () => {
