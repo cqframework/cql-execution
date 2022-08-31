@@ -249,29 +249,21 @@ export class CalculateAge extends Expression {
   }
 
   exec(ctx: Context) {
-    const lowerPrecision = this.precision.toLowerCase();
-    let date1 = this.execArgs(ctx);
-    let date2: dt.Date | dt.DateTime = dt.DateTime.fromJSDate(ctx.getExecutionDateTime());
-    // Note that for AgeInYears and AgeInMonths, the birthDate is specified as a Date and Today()
-    // is used to obtain the current date; whereas with the other precisions, birthDate is
-    // specified as a DateTime, and Now() is used to obtain the current DateTime.
+    const birthDate = this.execArgs(ctx);
+    // From the spec: "Note that for AgeInYears and AgeInMonths, the birthDate is specified as a
+    // Date and Today() is used to obtain the current date; whereas with the other precisions,
+    // birthDate is specified as a DateTime, and Now() is used to obtain the current DateTime."
     // See: https://cql.hl7.org/09-b-cqlreference.html#age
-    if (lowerPrecision === dt.DateTime.Unit.YEAR || lowerPrecision === dt.DateTime.Unit.MONTH) {
-      if (date1?.isDateTime) {
-        date1 = date1.getDate();
-      }
-      date2 = (date2 as dt.DateTime).getDate();
+    let asOf: dt.Date | dt.DateTime;
+    if (
+      this.precision.toLowerCase() === dt.DateTime.Unit.YEAR ||
+      this.precision.toLowerCase() === dt.DateTime.Unit.MONTH
+    ) {
+      asOf = dt.DateTime.fromJSDate(ctx.getExecutionDateTime()).getDate();
     } else {
-      if (date1?.isDate) {
-        date1 = date1.getDateTime();
-      }
+      asOf = dt.DateTime.fromJSDate(ctx.getExecutionDateTime());
     }
-    const result = date1?.durationBetween(date2, lowerPrecision);
-    if (result?.isPoint()) {
-      return result.low;
-    } else {
-      return result;
-    }
+    return calculateAge(this.precision, birthDate, asOf);
   }
 }
 
@@ -283,21 +275,40 @@ export class CalculateAgeAt extends Expression {
   }
 
   exec(ctx: Context) {
-    // eslint-disable-next-line prefer-const
-    let [date1, date2] = this.execArgs(ctx);
-    if (date1 != null && date2 != null) {
-      // date1 is the birthdate, convert it to date if date2 is a date (to support ignoring time)
-      if (date2.isDate && date1.isDateTime) {
-        date1 = date1.getDate();
-      }
-      const result = date1.durationBetween(date2, this.precision.toLowerCase());
-      if (result != null && result.isPoint()) {
-        return result.low;
-      } else {
-        return result;
-      }
-    }
-
-    return null;
+    const [birthDate, asOf] = this.execArgs(ctx);
+    return calculateAge(this.precision, birthDate, asOf);
   }
+}
+
+/**
+ * Calculates the age as of a certain date based on the passed in birth date. If the asOf date is
+ * a Date, then birth date will be converted to a Date (if necessary) before calculation is
+ * performed. If the asOf is a DateTime, then the birth date will be convertedto a DateTime (if
+ * necessary) before calculation is performed. The result is an integer or uncertainty specifying
+ * the age in the requested precision units.
+ * @param precision - the precision as specified in the ELM (e.g., Year, Month, Week, etc.)
+ * @param birthDate - the birth date to use for age calculations (may be Date or DateTime)
+ * @param asOf - the date on which the age should be calculated (may be Date or DateTime)
+ * @returns the age as an integer or uncertainty in the requested precision units
+ */
+function calculateAge(
+  precision: string,
+  birthDate?: dt.Date | dt.DateTime,
+  asOf?: dt.Date | dt.DateTime
+) {
+  if (birthDate != null && asOf != null) {
+    // Ensure we use like types (Date or DateTime) based on asOf type
+    if (asOf.isDate && birthDate.isDateTime) {
+      birthDate = (birthDate as dt.DateTime).getDate();
+    } else if (asOf.isDateTime && birthDate.isDate) {
+      birthDate = birthDate.getDateTime();
+    }
+    const result = birthDate.durationBetween(asOf, precision.toLowerCase());
+    if (result?.isPoint()) {
+      return result.low;
+    } else {
+      return result;
+    }
+  }
+  return null;
 }
