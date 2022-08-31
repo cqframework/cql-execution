@@ -249,11 +249,25 @@ export class CalculateAge extends Expression {
   }
 
   exec(ctx: Context) {
-    const date1 = this.execArgs(ctx);
-    const date2 = dt.DateTime.fromJSDate(ctx.getExecutionDateTime());
-    const result =
-      date1 != null ? date1.durationBetween(date2, this.precision.toLowerCase()) : undefined;
-    if (result != null && result.isPoint()) {
+    const lowerPrecision = this.precision.toLowerCase();
+    let date1 = this.execArgs(ctx);
+    let date2: dt.Date | dt.DateTime = dt.DateTime.fromJSDate(ctx.getExecutionDateTime());
+    // Note that for AgeInYears and AgeInMonths, the birthDate is specified as a Date and Today()
+    // is used to obtain the current date; whereas with the other precisions, birthDate is
+    // specified as a DateTime, and Now() is used to obtain the current DateTime.
+    // See: https://cql.hl7.org/09-b-cqlreference.html#age
+    if (lowerPrecision === dt.DateTime.Unit.YEAR || lowerPrecision === dt.DateTime.Unit.MONTH) {
+      if (date1?.isDateTime) {
+        date1 = date1.getDate();
+      }
+      date2 = (date2 as dt.DateTime).getDate();
+    } else {
+      if (date1?.isDate) {
+        date1 = date1.getDateTime();
+      }
+    }
+    const result = date1?.durationBetween(date2, lowerPrecision);
+    if (result?.isPoint()) {
       return result.low;
     } else {
       return result;

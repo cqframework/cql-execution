@@ -279,11 +279,11 @@ describe('CalculateAge: Fully Specified Birth Date on Today', () => {
   });
 
   it('should execute age in years', function () {
-    this.years.exec(this.ctx).should.eql(new Uncertainty(39, 40)); // TODO: Fix
+    this.years.exec(this.ctx).should.equal(40);
   });
 
   it('should execute age in months', function () {
-    this.months.exec(this.ctx).should.eql(new Uncertainty(479, 480)); // TODO: Fix
+    this.months.exec(this.ctx).should.equal(480);
   });
 
   it('should execute age in weeks', function () {
@@ -366,11 +366,11 @@ describe('CalculateAge: Date-Only Birth Date as DateTime on Today', () => {
   });
 
   it('should execute age in years', function () {
-    this.years.exec(this.ctx).should.eql(new Uncertainty(39, 40)); // TODO: Fix
+    this.years.exec(this.ctx).should.equal(40);
   });
 
   it('should execute age in months', function () {
-    this.months.exec(this.ctx).should.eql(new Uncertainty(479, 480)); // TODO: Fix
+    this.months.exec(this.ctx).should.equal(480);
   });
 
   it('should execute age in weeks', function () {
@@ -441,11 +441,11 @@ describe('CalculateAge: Date-Only Birth Date as Date on Today', () => {
   });
 
   it('should execute age in years', function () {
-    this.years.exec(this.ctx).should.eql(new Uncertainty(39, 40)); // TODO: Fix
+    this.years.exec(this.ctx).should.equal(40);
   });
 
   it('should execute age in months', function () {
-    this.months.exec(this.ctx).should.eql(new Uncertainty(479, 480)); // TODO: Fix
+    this.months.exec(this.ctx).should.equal(480);
   });
 
   it('should execute age in weeks', function () {
