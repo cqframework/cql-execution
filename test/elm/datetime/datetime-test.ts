@@ -189,7 +189,7 @@ describe('Today', () => {
       this.ctx.parameters,
       DT.DateTime.fromJSDate(new Date(), '0')
     );
-    this.ctx.executionDateTime = this.ctx.executionDateTime = null;
+    this.ctx.executionDateTime = null;
     should(() => this.todayVar.exec(this.ctx)).throw('No Execution DateTime has been set');
   });
 });

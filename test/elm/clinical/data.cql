@@ -62,7 +62,52 @@ code "Tobacco smoking status code": '72166-2' from "LOINC" display 'Tobacco smok
 concept "Tobacco smoking status": { "Tobacco smoking status code" } display 'Tobacco smoking status'
 define Foo: "Tobacco smoking status"
 
-// @Test: CalculateAge
+// @Test: CalculateAge: Fully Specified Birth Date
+define Years: AgeInYears()
+define Months: AgeInMonths()
+define Weeks: AgeInWeeks()
+define Days: AgeInDays()
+define Hours: AgeInHours()
+define Minutes: AgeInMinutes()
+define Seconds: AgeInSeconds()
+
+// @Test: CalculateAge: Fully Specified Birth Date on Today
+define Years: AgeInYears()
+define Months: AgeInMonths()
+define Weeks: AgeInWeeks()
+define Days: AgeInDays()
+define Hours: AgeInHours()
+define Minutes: AgeInMinutes()
+define Seconds: AgeInSeconds()
+
+// @Test: CalculateAge: Date-Only Birth Date as DateTime
+define Years: AgeInYears()
+define Months: AgeInMonths()
+define Weeks: AgeInWeeks()
+define Days: AgeInDays()
+define Hours: AgeInHours()
+define Minutes: AgeInMinutes()
+define Seconds: AgeInSeconds()
+
+// @Test: CalculateAge: Date-Only Birth Date as DateTime on Today
+define Years: AgeInYears()
+define Months: AgeInMonths()
+define Weeks: AgeInWeeks()
+define Days: AgeInDays()
+define Hours: AgeInHours()
+define Minutes: AgeInMinutes()
+define Seconds: AgeInSeconds()
+
+// @Test: CalculateAge: Date-Only Birth Date as Date
+define Years: AgeInYears()
+define Months: AgeInMonths()
+define Weeks: AgeInWeeks()
+define Days: AgeInDays()
+define Hours: AgeInHours()
+define Minutes: AgeInMinutes()
+define Seconds: AgeInSeconds()
+
+// @Test: CalculateAge: Date-Only Birth Date as Date on Today
 define Years: AgeInYears()
 define Months: AgeInMonths()
 define Weeks: AgeInWeeks()
