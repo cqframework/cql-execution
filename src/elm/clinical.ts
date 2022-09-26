@@ -18,7 +18,8 @@ export class ValueSetDef extends Expression {
 
   async exec(ctx: Context) {
     const valueset =
-      ctx.codeService.findValueSet(this.id, this.version) || new dt.ValueSet(this.id, this.version);
+      (await ctx.codeService.findValueSet(this.id, this.version)) ||
+      new dt.ValueSet(this.id, this.version);
     ctx.rootContext().set(this.name, valueset);
     return valueset;
   }

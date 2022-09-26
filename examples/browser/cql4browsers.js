@@ -3698,7 +3698,8 @@ class ValueSetDef extends expression_1.Expression {
     }
     //todo: code systems and versions
     async exec(ctx) {
-        const valueset = ctx.codeService.findValueSet(this.id, this.version) || new dt.ValueSet(this.id, this.version);
+        const valueset = (await ctx.codeService.findValueSet(this.id, this.version)) ||
+            new dt.ValueSet(this.id, this.version);
         ctx.rootContext().set(this.name, valueset);
         return valueset;
     }

@@ -27,6 +27,6 @@ export interface ValueSetObject {
  * Structure of an implementation to look up ValueSets based on oid and version
  */
 export interface TerminologyProvider {
-  findValueSetsByOid: (oid: string) => any;
-  findValueSet: (oid: string, version?: string) => any;
+  findValueSetsByOid: (oid: string) => ValueSet[] | Promise<ValueSet[]>;
+  findValueSet: (oid: string, version?: string) => ValueSet | Promise<ValueSet> | null;
 }
