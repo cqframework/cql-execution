@@ -4,7 +4,6 @@ import { UnfilteredContext, PatientContext } from './context';
 import { DateTime } from '../datatypes/datetime';
 import { Parameter } from '../types/runtime.types';
 import { DataProvider, TerminologyProvider } from '../types';
-import { isPromise } from '../util/util';
 
 export class Executor {
   constructor(
@@ -38,25 +37,20 @@ export class Executor {
     const r = new Results();
     const expr = this.library.expressions[expression];
     if (expr != null) {
-      // Needed to support both synchronous and asynchronous patient sources
-      let p = patientSource.currentPatient();
-      if (isPromise(p)) {
-        p = await p;
-      }
-      while (p) {
+      // NOTE: Using await to support async data providers whose implementations return promise
+      // await has no effect on functions that don't return promises, so it is safe to use in all cases
+      let currentPatient = await patientSource.currentPatient();
+      while (currentPatient) {
         const patient_ctx = new PatientContext(
           this.library,
-          p,
+          currentPatient,
           this.codeService,
           this.parameters,
           executionDateTime,
           this.messageListener
         );
         r.recordPatientResults(patient_ctx, { [expression]: expr.execute(patient_ctx) });
-        p = patientSource.nextPatient();
-        if (isPromise(p)) {
-          p = await p;
-        }
+        currentPatient = await patientSource.nextPatient();
       }
     }
     return r;
@@ -86,16 +80,13 @@ export class Executor {
   async exec_patient_context(patientSource: DataProvider, executionDateTime?: DateTime) {
     const r = new Results();
 
-    // Needed to support both synchronous and asynchronous patient sources
-    let p = patientSource.currentPatient();
-    if (isPromise(p)) {
-      p = await p;
-    }
-
-    while (p) {
+    // NOTE: Using await to support async data providers whose implementations return promise
+    // await has no effect on functions that don't return promises, so it is safe to use in all cases
+    let currentPatient = await patientSource.currentPatient();
+    while (currentPatient) {
       const patient_ctx = new PatientContext(
         this.library,
-        p,
+        currentPatient,
         this.codeService,
         this.parameters,
         executionDateTime,
@@ -109,10 +100,7 @@ export class Executor {
         }
       }
       r.recordPatientResults(patient_ctx, resultMap);
-      p = patientSource.nextPatient();
-      if (isPromise(p)) {
-        p = await p;
-      }
+      currentPatient = await patientSource.nextPatient();
     }
     return r;
   }
