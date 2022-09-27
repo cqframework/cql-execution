@@ -22,4 +22,7 @@ const result = await executor.exec(patientSource);
 
 The above pattern applies to the `exec_expression` and `exec_patient_context` methods of the `Executor` class as well.
 
+In addition, the above pull request also adds support for a [TerminologyProvider](https://github.com/cqframework/cql-execution/blob/9fd81cb6eec615048513fdc8927725f853e2c085/src/types/cql-code-service.interfaces.ts#L29) to use asynchronous implementations of the `findValueSet*` functions
+No changes are needed to how one configures an `Executor` to enable this, as the underlying code will now safely handle functions that return a `Promise` or not.
+
 **NOTE:** This asynchronous approach is designed to be backwards-compatible with existing synchronous patient sources (e.g. [cql-exec-fhir](https://github.com/cqframework/cql-exec-fhir)), the only difference being that `exec` needs to be called using the above pattern instead of synchronously.
