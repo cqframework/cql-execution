@@ -336,7 +336,7 @@ class MultiSource {
     return this.isList || (this.rest && this.rest.returnsList());
   }
 
-  async forEach(ctx: Context, func: any) {
+  async forEach(ctx: Context, func: (rctx: Context) => Promise<void>) {
     let records = await this.expression.execute(ctx);
     this.isList = typeIsArray(records);
     records = this.isList ? records : [records];
