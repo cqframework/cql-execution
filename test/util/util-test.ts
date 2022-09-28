@@ -93,4 +93,21 @@ describe('asyncMergeSort', () => {
     const sorted = await asyncMergeSort(arr, async (a, b) => a.val - b.val);
     sorted.should.eql([{ val: 1 }, { val: 2 }, { val: 3 }]);
   });
+
+  it('should preserve original order for items that are compared as equal', async () => {
+    const arr = [
+      { name: 'z', val: 3 },
+      { name: 'y', val: 1 },
+      { name: 'x', val: 2 },
+      { name: 'w', val: 1 }
+    ];
+
+    const sorted = await asyncMergeSort(arr, async (a, b) => a.val - b.val);
+    sorted.should.eql([
+      { name: 'y', val: 1 },
+      { name: 'w', val: 1 },
+      { name: 'x', val: 2 },
+      { name: 'z', val: 3 }
+    ]);
+  });
 });

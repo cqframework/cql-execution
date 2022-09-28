@@ -9449,7 +9449,7 @@ exports.asyncMergeSort = asyncMergeSort;
 async function merge(left, right, compareFn) {
     const sorted = [];
     while (left.length > 0 && right.length > 0) {
-        if ((await compareFn(left[0], right[0])) < 0) {
+        if ((await compareFn(left[0], right[0])) <= 0) {
             const sortedElem = left.shift();
             if (sortedElem !== undefined) {
                 sorted.push(sortedElem);
