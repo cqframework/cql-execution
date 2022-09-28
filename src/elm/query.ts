@@ -40,13 +40,12 @@ export class With extends Expression {
     if (!typeIsArray(records)) {
       records = [records];
     }
-    const returns = await Promise.all(
-      records.map((rec: any) => {
-        const childCtx = ctx.childContext();
-        childCtx.set(this.alias, rec);
-        return this.suchThat.execute(childCtx);
-      })
-    );
+    const returns: any[] = [];
+    for (const rec of records) {
+      const childCtx = ctx.childContext();
+      childCtx.set(this.alias, rec);
+      returns.push(await this.suchThat.execute(childCtx));
+    }
     return returns.some((x: any) => x);
   }
 }
@@ -246,12 +245,11 @@ export class Query extends Expression {
         rctx.set(def.identifier, await def.expression.execute(rctx));
       }
 
-      const relations = await Promise.all(
-        this.relationship.map(rel => {
-          const child_ctx = rctx.childContext();
-          return rel.execute(child_ctx);
-        })
-      );
+      const relations: any[] = [];
+      for (const rel of this.relationship) {
+        const child_ctx = rctx.childContext();
+        relations.push(await rel.execute(child_ctx));
+      }
       const passed = allTrue(relations) && (this.where ? await this.where.execute(rctx) : true);
       if (passed) {
         if (this.returnClause != null) {
@@ -340,16 +338,16 @@ class MultiSource {
     let records = await this.expression.execute(ctx);
     this.isList = typeIsArray(records);
     records = this.isList ? records : [records];
-    return Promise.all(
-      records.map(async (rec: any) => {
-        const rctx = new Context(ctx);
-        rctx.set(this.alias, rec);
-        if (this.rest) {
-          return this.rest.forEach(rctx, func);
-        } else {
-          return func(rctx);
-        }
-      })
-    );
+    const results: any[] = [];
+    for (const rec of records) {
+      const rctx = new Context(ctx);
+      rctx.set(this.alias, rec);
+      if (this.rest) {
+        results.push(await this.rest.forEach(rctx, func));
+      } else {
+        results.push(await func(rctx));
+      }
+    }
+    return results;
   }
 }

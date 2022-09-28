@@ -6364,11 +6364,12 @@ class With extends expression_1.Expression {
         if (!(0, util_1.typeIsArray)(records)) {
             records = [records];
         }
-        const returns = await Promise.all(records.map((rec) => {
+        const returns = [];
+        for (const rec of records) {
             const childCtx = ctx.childContext();
             childCtx.set(this.alias, rec);
-            return this.suchThat.execute(childCtx);
-        }));
+            returns.push(await this.suchThat.execute(childCtx));
+        }
         return returns.some((x) => x);
     }
 }
@@ -6539,10 +6540,11 @@ class Query extends expression_1.Expression {
             for (const def of this.letClauses) {
                 rctx.set(def.identifier, await def.expression.execute(rctx));
             }
-            const relations = await Promise.all(this.relationship.map(rel => {
+            const relations = [];
+            for (const rel of this.relationship) {
                 const child_ctx = rctx.childContext();
-                return rel.execute(child_ctx);
-            }));
+                relations.push(await rel.execute(child_ctx));
+            }
             const passed = (0, util_1.allTrue)(relations) && (this.where ? await this.where.execute(rctx) : true);
             if (passed) {
                 if (this.returnClause != null) {
@@ -6618,16 +6620,18 @@ class MultiSource {
         let records = await this.expression.execute(ctx);
         this.isList = (0, util_1.typeIsArray)(records);
         records = this.isList ? records : [records];
-        return Promise.all(records.map(async (rec) => {
+        const results = [];
+        for (const rec of records) {
             const rctx = new context_1.Context(ctx);
             rctx.set(this.alias, rec);
             if (this.rest) {
-                return this.rest.forEach(rctx, func);
+                results.push(await this.rest.forEach(rctx, func));
             }
             else {
-                return func(rctx);
+                results.push(await func(rctx));
             }
-        }));
+        }
+        return results;
     }
 }
 
