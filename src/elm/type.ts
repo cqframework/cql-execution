@@ -485,9 +485,10 @@ export class ConvertsToTime extends Expression {
   }
 }
 
-async function canConvertToType(toFunction: any, operand: any, ctx: Context) {
+async function canConvertToType(ConversionClass: typeof Expression, operand: any, ctx: Context) {
   try {
-    const value = await new toFunction({ type: toFunction.name, operand: operand }).execute(ctx);
+    const expression = new ConversionClass({ type: ConversionClass.name, operand: operand });
+    const value = await expression.execute(ctx);
     if (value != null) {
       return true;
     } else {
